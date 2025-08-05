@@ -1,0 +1,168 @@
+@startuml adk-agent-architecture
+!include ../../config/_standard-style.puml
+
+title ADK Agent Architecture
+
+!define RECTANGLE class
+
+package "ADK Agent System" {
+    
+    package "Agent Core" {
+        RECTANGLE BaseADKAgent {
+            + agent_id: string
+            + agent_name: string  
+            + capabilities: List[string]
+            --
+            + initialize()
+            + process_message()
+            + cleanup()
+        }
+        
+        RECTANGLE ConversationMemory {
+            + max_turns: int
+            + turns: List[ConversationTurn]
+            --
+            + add_turn()
+            + get_context()
+            + get_summary()
+        }
+        
+        RECTANGLE ConversationTurn {
+            + timestamp: string
+            + role: string
+            + content: string
+            + metadata: Dict
+        }
+    }
+    
+    package "Model Integration" {
+        RECTANGLE "Vertex AI" as VertexAI {
+            + project_id: string
+            + location: string
+            --
+            + initialize_credentials()
+        }
+        
+        RECTANGLE "Gemini Model" as Gemini {
+            + model_name: string
+            + temperature: float
+            + max_tokens: int
+            --
+            + generate_response()
+            + start_chat()
+        }
+    }
+    
+    package "MCP Integration" {
+        RECTANGLE MCPClient {
+            + server_name: string
+            + base_url: string
+            + session: ClientSession
+            --
+            + call_tool()
+            + list_tools()
+        }
+        
+        RECTANGLE "Tool Manager" as ToolManager {
+            + available_tools: Dict
+            + mcp_connections: Dict
+            --
+            + analyze_message_for_tools()
+            + execute_tool_calls()
+        }
+    }
+    
+    package "Specialized Agents" {
+        RECTANGLE WeatherAgent {
+            + weather_tools: List
+            --
+            + handle_weather_request()
+            + get_detailed_forecast()
+            + analyze_weather_trends()
+        }
+        
+        RECTANGLE PlanningAgent {
+            + plan_templates: Dict
+            + active_plans: Dict
+            --
+            + create_plan()
+            + estimate_timeline()
+            + assess_risks()
+        }
+        
+        RECTANGLE DataAgent {
+            + data_sources: List
+            --
+            + process_dataset()
+            + generate_insights()
+            + create_visualizations()
+        }
+    }
+}
+
+package "External Services" {
+    RECTANGLE "MCP Weather Server" as WeatherMCP {
+        + get_current_weather()
+        + get_weather_forecast()
+        + compare_weather()
+        + set_weather_alert()
+    }
+    
+    RECTANGLE "MCP Data Server" as DataMCP {
+        + process_data()
+        + analyze_dataset()
+        + generate_chart()
+        + export_results()
+    }
+    
+    RECTANGLE "Google Cloud Platform" as GCP {
+        + Vertex AI
+        + Cloud Run
+        + Cloud Storage
+        + Cloud Firestore
+    }
+}
+
+package "API Layer" {
+    RECTANGLE FastAPI {
+        + /chat
+        + /agent/memory
+        + /agent/reset
+        + /agent/info
+        --
+        + handle_requests()
+        + manage_sessions()
+    }
+}
+
+' Relationships
+BaseADKAgent ||--|| ConversationMemory : uses
+ConversationMemory ||--o{ ConversationTurn : contains
+
+BaseADKAgent ||--|| VertexAI : integrates
+VertexAI ||--|| Gemini : provides
+
+BaseADKAgent ||--o{ MCPClient : manages
+MCPClient ||--|| ToolManager : coordinates
+
+WeatherAgent --|> BaseADKAgent : extends
+PlanningAgent --|> BaseADKAgent : extends  
+DataAgent --|> BaseADKAgent : extends
+
+MCPClient --> WeatherMCP : communicates
+MCPClient --> DataMCP : communicates
+VertexAI --> GCP : deployed_on
+
+FastAPI --> BaseADKAgent : routes_to
+FastAPI --> WeatherAgent : exposes
+FastAPI --> PlanningAgent : exposes
+
+note top of BaseADKAgent : Core agent functionality with\nGemini integration and\nMCP tool coordination
+
+note right of ConversationMemory : Maintains conversation\ncontext across multiple\ninteraction turns
+
+note bottom of MCPClient : Async communication\nwith MCP servers using\nJSON-RPC protocol
+
+note left of WeatherMCP : External weather data\nservice providing real-time\nweather information
+
+@enduml

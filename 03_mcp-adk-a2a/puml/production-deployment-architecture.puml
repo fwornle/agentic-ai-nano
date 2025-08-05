@@ -1,0 +1,115 @@
+@startuml production-deployment-architecture
+!include ../../config/_standard-style.puml
+
+title Production MCP Deployment Architecture
+
+package "Development Environment" {
+  [Docker Compose] <<local>> as compose
+  [MCP Server Container] <<container>> as dev_container
+  [Redis] <<storage>> as dev_redis
+  [Prometheus] <<monitoring>> as dev_prometheus
+  [Grafana] <<visualization>> as dev_grafana
+}
+
+package "CI/CD Pipeline" {
+  [GitHub Actions] <<automation>> as github
+  [Cloud Build] <<automation>> as cloudbuild
+  [AWS CodePipeline] <<automation>> as codepipeline
+  [Docker Registry] <<storage>> as registry
+}
+
+package "Google Cloud Platform" {
+  [Cloud Run] <<serverless>> as cloudrun
+  [Load Balancer] <<network>> as gcp_lb
+  [Cloud SQL] <<storage>> as cloudsql
+  [Secret Manager] <<security>> as gcp_secrets
+  [Cloud Monitoring] <<monitoring>> as gcp_monitoring
+}
+
+package "AWS Platform" {
+  [Lambda] <<serverless>> as lambda
+  [API Gateway] <<api>> as apigateway
+  [ElastiCache] <<storage>> as elasticache
+  [Secrets Manager] <<security>> as aws_secrets
+  [CloudWatch] <<monitoring>> as cloudwatch
+}
+
+package "Monitoring Stack" {
+  [Prometheus Server] <<monitoring>> as prom_server
+  [Grafana Dashboard] <<visualization>> as grafana_prod
+  [AlertManager] <<notification>> as alertmanager
+  [PagerDuty] <<external>> as pagerduty
+}
+
+package "External Services" {
+  [DNS Provider] <<network>> as dns
+  [CDN] <<network>> as cdn
+  [Certificate Authority] <<security>> as ca
+}
+
+' Development flow
+compose CONTROL_LINE dev_container : Manages
+dev_container DATA_LINE dev_redis : Caches
+dev_container SYNC_LINE dev_prometheus : Metrics
+dev_prometheus SYNC_LINE dev_grafana : Visualizes
+
+' CI/CD flow
+github ASYNC_LINE cloudbuild : Triggers Build
+github ASYNC_LINE codepipeline : Triggers Build
+cloudbuild SYNC_LINE registry : Pushes Images
+codepipeline SYNC_LINE registry : Pushes Images
+
+' GCP deployment
+registry SYNC_LINE cloudrun : Deploys
+gcp_lb SYNC_LINE cloudrun : Routes Traffic
+cloudrun DATA_LINE cloudsql : Queries
+cloudrun SYNC_LINE gcp_secrets : Fetches Config
+cloudrun ASYNC_LINE gcp_monitoring : Reports Metrics
+
+' AWS deployment
+registry SYNC_LINE lambda : Deploys
+apigateway SYNC_LINE lambda : Routes Requests
+lambda DATA_LINE elasticache : Caches Data
+lambda SYNC_LINE aws_secrets : Fetches Config
+lambda ASYNC_LINE cloudwatch : Reports Metrics
+
+' Monitoring integration
+cloudrun ASYNC_LINE prom_server : Exports Metrics
+lambda ASYNC_LINE prom_server : Exports Metrics
+prom_server SYNC_LINE grafana_prod : Data Source
+prom_server SYNC_LINE alertmanager : Triggers Alerts
+alertmanager SYNC_LINE pagerduty : Notifications
+
+' External services
+dns SYNC_LINE gcp_lb : Resolves
+dns SYNC_LINE apigateway : Resolves
+cdn OPTIONAL_LINE gcp_lb : Caches
+cdn OPTIONAL_LINE apigateway : Caches
+ca SYNC_LINE gcp_lb : SSL Certificates
+ca SYNC_LINE apigateway : SSL Certificates
+
+note right of cloudrun
+  Google Cloud Run:
+  - Auto-scaling 0-50 instances
+  - Pay-per-use pricing
+  - Managed TLS termination
+  - Global load balancing
+end note
+
+note right of lambda
+  AWS Lambda:
+  - Event-driven execution
+  - 15-minute timeout limit
+  - Automatic scaling
+  - Pay-per-invocation
+end note
+
+note bottom of prom_server
+  Production Monitoring:
+  - Multi-cloud metrics collection
+  - Custom alerting rules
+  - Historical data retention
+  - High availability setup
+end note
+
+@enduml
