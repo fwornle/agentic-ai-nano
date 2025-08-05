@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(plantuml:*)",
+      "Bash(mv:*)",
+      "Bash(ls:*)"
+    ],
+    "deny": []
+  }
+}
