@@ -1,0 +1,50 @@
+@startuml mcp-architecture
+!include ../../config/_standard-style.puml
+
+title Model Context Protocol (MCP) Architecture
+
+package "Host Application" {
+  [Claude/ChatGPT/LLM] <<agent>> as llm
+  [MCP Client] <<core>> as client
+}
+
+package "MCP Server" {
+  [Server Core] <<core>> as server
+  [Tools Handler] <<api>> as tools
+  [Resources Handler] <<storage>> as resources
+  [Prompts Handler] <<util>> as prompts
+}
+
+package "External Systems" {
+  [File System] <<external>> as fs
+  [Database] <<storage>> as db
+  [Web APIs] <<external>> as api
+  [Other Services] <<infra>> as services
+}
+
+llm SYNC_LINE client : Requests
+client SYNC_LINE server : JSON-RPC\nover stdio/HTTP
+server SYNC_LINE tools : execute()
+server SYNC_LINE resources : read()
+server SYNC_LINE prompts : get()
+
+tools DATA_LINE fs : File Operations
+tools DATA_LINE api : API Calls
+resources DATA_LINE db : Data Access
+prompts OPTIONAL_LINE services : Context
+
+note right of server
+  MCP Server provides:
+  - Tools (functions)
+  - Resources (data)
+  - Prompts (templates)
+end note
+
+note left of client
+  Solves the M×N problem:
+  - M applications
+  - N data sources
+  - 1 protocol
+end note
+
+@enduml

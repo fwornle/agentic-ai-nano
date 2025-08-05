@@ -1,0 +1,88 @@
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+' Component styling with professional colors
+skinparam component {
+  BackgroundColor<<api>> #E8F4FD
+  BackgroundColor<<core>> #E8F5E8
+  BackgroundColor<<storage>> #FFF9E6
+  BackgroundColor<<cli>> #FFE8F4
+  BackgroundColor<<util>> #F0F0F0
+  BackgroundColor<<agent>> #E6F3FF
+  BackgroundColor<<infra>> #FFF2E6
+  BackgroundColor<<external>> #F5F5F5
+  FontSize 12
+  FontColor #000000
+}
+
+' Package styling
+skinparam package {
+  BackgroundColor #FAFAFA
+  BorderColor #CCCCCC
+  FontSize 14
+  FontColor #333333
+  FontStyle bold
+}
+
+' Note styling
+skinparam note {
+  BackgroundColor #FFFACD
+  BorderColor #DDD
+  FontSize 10
+  FontColor #333333
+}
+
+' Arrow styling with distinct colors
+skinparam arrow {
+  FontSize 10
+  FontColor #666666
+  Color #4A90E2
+}
+
+' Database styling
+skinparam database {
+  BackgroundColor #E1F5FE
+  BorderColor #0277BD
+}
+
+' Cloud styling
+skinparam cloud {
+  BackgroundColor #F3E5F5
+  BorderColor #7B1FA2
+}
+
+' Actor styling
+skinparam actor {
+  BackgroundColor #C8E6C9
+  BorderColor #388E3C
+}
+
+' Interface styling
+skinparam interface {
+  BackgroundColor #FFF3E0
+  BorderColor #F57C00
+}
+
+' Rectangle styling for grouping
+skinparam rectangle {
+  BackgroundColor #F9F9F9
+  BorderColor #BDBDBD
+}
+
+' Sequence diagram styling
+skinparam sequence {
+  ArrowColor #4A90E2
+  ActorBorderColor #333333
+  LifeLineBorderColor #666666
+  ParticipantBorderColor #333333
+  ParticipantBackgroundColor #F5F5F5
+}
+
+' Line styles for different connection types
+!define SYNC_LINE -[#E53935,thickness=2]->
+!define ASYNC_LINE -[#43A047,thickness=2,dashed]->
+!define DATA_LINE -[#FF9800,thickness=2]->
+!define CONTROL_LINE -[#9C27B0,thickness=2]->
+!define OPTIONAL_LINE -[#757575,thickness=1,dotted]->
