@@ -917,7 +917,7 @@ In Session 3, we'll integrate MCP servers with **LangChain** to build intelligen
 3. **Create a file diff tool** that compares two files and shows differences
 4. **Add rate limiting** to prevent abuse of search operations
 
-**💡 Hint:** Check the `Session2_FileSystem_MCP_Server-solution.md` file for answers and detailed explanations.
+**💡 Hint:** Check the [`Session2_FileSystem_MCP_Server-solution.md`](Session2_FileSystem_MCP_Server-solution.md) file for answers and detailed explanations.
 
 ---
 

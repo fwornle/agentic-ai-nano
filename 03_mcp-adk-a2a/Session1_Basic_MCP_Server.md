@@ -112,7 +112,11 @@ user_preferences = {}
 
 ### Step 2.2: Implement Your First Tool
 
-Tools are the heart of MCP - they're functions that AI agents can call. Let's create a weather lookup tool:
+Tools are the heart of MCP - they're functions that AI agents can call. Let's create a weather lookup tool step by step.
+
+**Step 2.2.1: Define the Tool Function**
+
+First, let's set up the function signature and documentation:
 
 ```python
 @mcp.tool()
@@ -127,9 +131,18 @@ def get_current_weather(city: str, units: str = "celsius") -> Dict:
     Returns:
         Dictionary with weather information
     """
-    # In a real implementation, you'd call a weather API like OpenWeatherMap
-    # For this tutorial, we'll use simulated data to avoid API key requirements
-    
+```
+
+**Key concepts:**
+- The `@mcp.tool()` decorator registers this function as an MCP tool
+- Type hints are crucial - they tell AI agents how to use your tool
+- Docstrings become tool descriptions visible to AI agents
+
+**Step 2.2.2: Create Sample Data**
+
+For this tutorial, we'll use simulated data to avoid API key requirements:
+
+```python
     # Simulated weather database
     weather_data = {
         "London": {"temp": 15, "condition": "Cloudy", "humidity": 75},
@@ -137,14 +150,26 @@ def get_current_weather(city: str, units: str = "celsius") -> Dict:
         "Tokyo": {"temp": 18, "condition": "Rainy", "humidity": 85},
         "Sydney": {"temp": 25, "condition": "Clear", "humidity": 55},
     }
-    
+```
+
+**Step 2.2.3: Add Input Validation**
+
+Always validate inputs and provide helpful error messages:
+
+```python
     # Check if we have data for this city
     if city not in weather_data:
         return {
             "error": f"Weather data not available for {city}",
             "available_cities": list(weather_data.keys())
         }
-    
+```
+
+**Step 2.2.4: Process and Return Data**
+
+Finally, process the data and return a structured response:
+
+```python
     # Get the weather data and make a copy to avoid modifying the original
     data = weather_data[city].copy()
     
@@ -170,7 +195,9 @@ def get_current_weather(city: str, units: str = "celsius") -> Dict:
 
 ### Step 2.3: Add a More Complex Tool - Weather Forecasting
 
-Let's add a forecasting tool that demonstrates working with more complex parameters:
+Let's add a forecasting tool that demonstrates working with more complex parameters.
+
+**Step 2.3.1: Define the Forecast Function**
 
 ```python
 @mcp.tool()
@@ -185,10 +212,19 @@ def get_weather_forecast(city: str, days: int = 3) -> List[Dict]:
     Returns:
         List of daily forecasts
     """
+```
+
+**Step 2.3.2: Validate Input Parameters**
+
+```python
     # Validate input parameters
     if days < 1 or days > 7:
         return [{"error": "Days must be between 1 and 7"}]
-    
+```
+
+**Step 2.3.3: Generate Forecast Data**
+
+```python
     # Simulated forecast generation
     conditions = ["Sunny", "Cloudy", "Rainy", "Partly Cloudy"]
     forecast = []
@@ -616,7 +652,7 @@ Before the next session, try these challenges:
 3. **Create a prompt** for severe weather alerts
 4. **Implement proper error handling** for all tools using try-except blocks
 
-**💡 Hint:** Check the `Session1_Basic_MCP_Server-solution.md` file for answers and detailed explanations.
+**💡 Hint:** Check the [`Session1_Basic_MCP_Server-solution.md`](Session1_Basic_MCP_Server-solution.md) file for answers and detailed explanations.
 
 ---
 

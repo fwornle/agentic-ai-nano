@@ -3,7 +3,9 @@
     "allow": [
       "Bash(plantuml:*)",
       "Bash(mv:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(awk:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }
