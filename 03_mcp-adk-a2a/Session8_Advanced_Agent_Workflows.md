@@ -35,9 +35,9 @@ Modern agent workflows support multiple execution patterns:
 4. **Loop Workflows**: Iterative processing with termination conditions
 5. **Hybrid Workflows**: Combinations of the above patterns
 
-### Step 1.1: Advanced Workflow Engine
+### Step 1.1: Workflow Foundation Classes
 
-Let's build a sophisticated workflow engine that supports all these patterns:
+Let's start by defining the core workflow data structures:
 
 ```python
 # workflows/advanced_engine.py
@@ -55,7 +55,11 @@ from workflows.step_executor import StepExecutor
 from workflows.monitors import WorkflowMonitor
 
 logger = logging.getLogger(__name__)
+```
 
+Next, we define the workflow step types and statuses:
+
+```python
 class StepType(Enum):
     """Types of workflow steps."""
     ACTION = "action"           # Execute an action
@@ -75,7 +79,11 @@ class StepStatus(Enum):
     SKIPPED = "skipped"
     WAITING = "waiting"
     RETRYING = "retrying"
+```
 
+Now let's define the enhanced workflow step structure:
+
+```python
 @dataclass
 class WorkflowStep:
     """Enhanced workflow step with advanced capabilities."""
@@ -85,15 +93,19 @@ class WorkflowStep:
     step_type: StepType
     
     # Execution configuration
-    action: Optional[str] = None                    # Action to execute
-    agent_capability: Optional[str] = None          # Required agent capability
-    timeout: int = 300                             # Timeout in seconds
+    action: Optional[str] = None
+    agent_capability: Optional[str] = None
+    timeout: int = 300
     
     # Input/Output configuration
     input_mapping: Dict[str, str] = field(default_factory=dict)
     output_mapping: Dict[str, str] = field(default_factory=dict)
     input_validation: Dict[str, Any] = field(default_factory=dict)
-    
+```
+
+Continue with control flow and error handling configuration:
+
+```python
     # Control flow
     dependencies: List[str] = field(default_factory=list)
     conditions: List[Dict[str, Any]] = field(default_factory=list)
@@ -108,7 +120,11 @@ class WorkflowStep:
     parallel_steps: List['WorkflowStep'] = field(default_factory=list)
     loop_condition: Optional[str] = None
     loop_max_iterations: int = 100
-    
+```
+
+Add monitoring and runtime state tracking:
+
+```python
     # Monitoring and observability
     metrics_enabled: bool = True
     custom_metrics: List[str] = field(default_factory=list)
@@ -120,7 +136,13 @@ class WorkflowStep:
     execution_data: Dict[str, Any] = field(default_factory=dict)
     error_info: Optional[Dict[str, Any]] = None
     retry_count: int = 0
+```
 
+### Step 1.2: Advanced Workflow Definition
+
+Define the complete workflow structure:
+
+```python
 @dataclass
 class AdvancedWorkflow:
     """Advanced workflow definition with complex patterns."""
@@ -133,10 +155,14 @@ class AdvancedWorkflow:
     # Workflow structure
     steps: List[WorkflowStep] = field(default_factory=list)
     global_variables: Dict[str, Any] = field(default_factory=dict)
-    
+```
+
+Add configuration and optimization settings:
+
+```python
     # Configuration
-    timeout: int = 3600                            # Global timeout
-    max_parallel_steps: int = 10                   # Max parallel execution
+    timeout: int = 3600
+    max_parallel_steps: int = 10
     retry_policy: Dict[str, Any] = field(default_factory=dict)
     
     # Monitoring and optimization
@@ -148,7 +174,13 @@ class AdvancedWorkflow:
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
     created_by: Optional[str] = None
     tags: List[str] = field(default_factory=list)
+```
 
+### Step 1.3: Workflow Engine Core
+
+Create the advanced workflow engine with initialization:
+
+```python
 class AdvancedWorkflowEngine:
     """Advanced workflow engine with sophisticated execution patterns."""
     
@@ -162,7 +194,11 @@ class AdvancedWorkflowEngine:
         self.max_concurrent_workflows = 100
         self.resource_manager = ResourceManager()
         self.optimizer = WorkflowOptimizer()
-        
+```
+
+Implement the main workflow execution method:
+
+```python
     async def execute_workflow(self, workflow: AdvancedWorkflow, 
                              input_data: Dict[str, Any] = None,
                              execution_options: Dict[str, Any] = None) -> Dict[str, Any]:
@@ -181,7 +217,11 @@ class AdvancedWorkflowEngine:
         )
         
         self.active_workflows[execution_id] = context
-        
+```
+
+Handle workflow execution with proper error handling:
+
+```python
         try:
             # Start monitoring
             await self.monitor.start_workflow_monitoring(context)
@@ -201,25 +241,17 @@ class AdvancedWorkflowEngine:
             context.end_time = datetime.now()
             context.result = result
             
-            return {
-                "execution_id": execution_id,
-                "status": "completed",
-                "result": result,
-                "execution_time": (context.end_time - context.start_time).total_seconds(),
-                "steps_executed": len([s for s in workflow.steps if s.status == StepStatus.COMPLETED]),
-                "metrics": await self.monitor.get_execution_metrics(execution_id)
-            }
-            
+            return self._create_execution_result(context, "completed", result)
+```
+
+Add timeout and error handling:
+
+```python
         except asyncio.TimeoutError:
             context.state = WorkflowState.TIMEOUT
-            logger.error(f"Workflow {execution_id} timed out after {workflow.timeout} seconds")
+            logger.error(f"Workflow {execution_id} timed out")
             
-            return {
-                "execution_id": execution_id,
-                "status": "timeout",
-                "error": "Workflow execution timed out",
-                "partial_result": context.data
-            }
+            return self._create_execution_result(context, "timeout", None)
             
         except Exception as e:
             context.state = WorkflowState.FAILED
@@ -229,18 +261,19 @@ class AdvancedWorkflowEngine:
             # Attempt rollback
             await self._execute_rollback(context)
             
-            return {
-                "execution_id": execution_id,
-                "status": "failed",
-                "error": str(e),
-                "partial_result": context.data
-            }
+            return self._create_execution_result(context, "failed", None)
             
         finally:
             # Cleanup
             await self.monitor.stop_workflow_monitoring(execution_id)
             self.active_workflows.pop(execution_id, None)
-    
+```
+
+### Step 1.4: Internal Workflow Execution
+
+Implement the core workflow execution logic:
+
+```python
     async def _execute_workflow_internal(self, context: ExecutionContext) -> Dict[str, Any]:
         """Internal workflow execution logic."""
         
@@ -260,39 +293,43 @@ class AdvancedWorkflowEngine:
             )
             
             if not ready_steps:
-                # Check for deadlock or all remaining steps failed
+                # Check for deadlock or completion
                 remaining_steps = set(s.step_id for s in workflow.steps) - completed_steps - failed_steps
                 if remaining_steps:
                     logger.warning(f"Potential deadlock detected. Remaining steps: {remaining_steps}")
                 break
-            
+```
+
+Execute steps with different patterns:
+
+```python
             # Execute ready steps with appropriate pattern
             execution_tasks = []
             
             for step in ready_steps:
                 if step.step_type == StepType.PARALLEL:
-                    # Execute parallel container
                     task = asyncio.create_task(
                         self._execute_parallel_step(step, context)
                     )
                 elif step.step_type == StepType.LOOP:
-                    # Execute loop container
                     task = asyncio.create_task(
                         self._execute_loop_step(step, context)
                     )
                 elif step.step_type == StepType.CONDITION:
-                    # Execute conditional step
                     task = asyncio.create_task(
                         self._execute_conditional_step(step, context)
                     )
                 else:
-                    # Execute regular step
                     task = asyncio.create_task(
                         self._execute_single_step(step, context)
                     )
                 
                 execution_tasks.append((step, task))
-            
+```
+
+Process execution results:
+
+```python
             # Wait for tasks to complete
             for step, task in execution_tasks:
                 try:
@@ -323,7 +360,13 @@ class AdvancedWorkflowEngine:
                         raise
         
         return context.data
-    
+```
+
+### Step 1.5: Parallel Step Execution
+
+Implement parallel step execution with concurrency control:
+
+```python
     async def _execute_parallel_step(self, step: WorkflowStep, 
                                    context: ExecutionContext) -> Dict[str, Any]:
         """Execute a parallel step container."""
@@ -345,7 +388,11 @@ class AdvancedWorkflowEngine:
         ]
         
         results = await asyncio.gather(*tasks, return_exceptions=True)
-        
+```
+
+Analyze parallel execution results:
+
+```python
         # Analyze results
         successful_results = []
         failed_results = []
@@ -382,353 +429,15 @@ class AdvancedWorkflowEngine:
                 "failures": failed_results
             }
         }
-    
-    async def _execute_loop_step(self, step: WorkflowStep, 
-                               context: ExecutionContext) -> Dict[str, Any]:
-        """Execute a loop step container."""
-        
-        if not step.loop_condition:
-            return {"success": False, "error": "No loop condition specified"}
-        
-        iteration_count = 0
-        loop_results = []
-        
-        while iteration_count < step.loop_max_iterations:
-            # Evaluate loop condition
-            should_continue = self._evaluate_condition(step.loop_condition, context.data)
-            
-            if not should_continue:
-                break
-            
-            # Execute loop body (parallel steps)
-            if step.parallel_steps:
-                loop_result = await self._execute_parallel_step(step, context)
-                loop_results.append({
-                    "iteration": iteration_count + 1,
-                    "result": loop_result
-                })
-                
-                # Check if loop should continue after failure
-                if not loop_result.get("success", False):
-                    continue_on_failure = step.retry_policy.get("continue_on_failure", False)
-                    if not continue_on_failure:
-                        break
-            
-            iteration_count += 1
-            
-            # Add small delay to prevent tight loops
-            await asyncio.sleep(0.1)
-        
-        return {
-            "success": True,
-            "loop_results": {
-                "iterations_completed": iteration_count,
-                "max_iterations_reached": iteration_count >= step.loop_max_iterations,
-                "results": loop_results
-            }
-        }
-    
-    async def _execute_conditional_step(self, step: WorkflowStep, 
-                                      context: ExecutionContext) -> Dict[str, Any]:
-        """Execute a conditional step with branching logic."""
-        
-        if not step.conditions:
-            return {"success": False, "error": "No conditions specified"}
-        
-        # Evaluate conditions in order
-        for condition in step.conditions:
-            condition_expr = condition.get("expression")
-            branch_steps = condition.get("steps", [])
-            
-            if not condition_expr:
-                continue
-            
-            # Evaluate condition
-            if self._evaluate_condition(condition_expr, context.data):
-                # Execute branch steps
-                branch_results = []
-                
-                for branch_step_id in branch_steps:
-                    # Find the step definition
-                    branch_step = next(
-                        (s for s in context.workflow.steps if s.step_id == branch_step_id),
-                        None
-                    )
-                    
-                    if branch_step:
-                        result = await self._execute_single_step(branch_step, context)
-                        branch_results.append(result)
-                
-                return {
-                    "success": True,
-                    "condition_matched": condition_expr,
-                    "branch_results": branch_results
-                }
-        
-        # No conditions matched - execute else branch if available
-        else_steps = step.conditions[-1].get("else_steps", []) if step.conditions else []
-        
-        if else_steps:
-            else_results = []
-            for else_step_id in else_steps:
-                else_step = next(
-                    (s for s in context.workflow.steps if s.step_id == else_step_id),
-                    None
-                )
-                
-                if else_step:
-                    result = await self._execute_single_step(else_step, context)
-                    else_results.append(result)
-            
-            return {
-                "success": True,
-                "condition_matched": "else",
-                "branch_results": else_results
-            }
-        
-        return {
-            "success": True,
-            "condition_matched": "none",
-            "message": "No conditions matched and no else branch"
-        }
-    
-    async def _execute_single_step(self, step: WorkflowStep, 
-                                 context: ExecutionContext) -> Dict[str, Any]:
-        """Execute a single workflow step."""
-        
-        step.status = StepStatus.RUNNING
-        step.start_time = datetime.now().isoformat()
-        
-        try:
-            # Prepare step input
-            step_input = self._prepare_step_input(step, context.data)
-            
-            # Validate input if schema provided
-            if step.input_validation:
-                validation_result = self._validate_step_input(step_input, step.input_validation)
-                if not validation_result.get("valid", True):
-                    raise ValueError(f"Input validation failed: {validation_result.get('errors')}")
-            
-            # Execute step with timeout and retry
-            result = await self._execute_step_with_retry(step, step_input, context)
-            
-            step.status = StepStatus.COMPLETED
-            step.end_time = datetime.now().isoformat()
-            
-            return result
-            
-        except Exception as e:
-            step.status = StepStatus.FAILED
-            step.end_time = datetime.now().isoformat()
-            step.error_info = {
-                "error": str(e),
-                "timestamp": datetime.now().isoformat(),
-                "retry_count": step.retry_count
-            }
-            
-            return {"success": False, "error": str(e)}
-    
-    async def _execute_step_with_retry(self, step: WorkflowStep, 
-                                     step_input: Dict[str, Any],
-                                     context: ExecutionContext) -> Dict[str, Any]:
-        """Execute step with retry logic."""
-        
-        retry_policy = step.retry_policy or {}
-        max_retries = retry_policy.get("max_retries", 3)
-        retry_delay = retry_policy.get("retry_delay", 1.0)
-        backoff_multiplier = retry_policy.get("backoff_multiplier", 2.0)
-        
-        last_error = None
-        
-        for attempt in range(max_retries + 1):
-            try:
-                if attempt > 0:
-                    step.status = StepStatus.RETRYING
-                    step.retry_count = attempt
-                    
-                    # Calculate delay with exponential backoff
-                    delay = retry_delay * (backoff_multiplier ** (attempt - 1))
-                    await asyncio.sleep(delay)
-                
-                # Execute the actual step
-                result = await self.step_executor.execute_step(
-                    step, step_input, context
-                )
-                
-                return result
-                
-            except Exception as e:
-                last_error = e
-                logger.warning(f"Step {step.step_id} attempt {attempt + 1} failed: {e}")
-                
-                # Check if error is retryable
-                if not self._is_retryable_error(e, retry_policy):
-                    break
-        
-        # All retries exhausted
-        raise last_error
-    
-    def _build_execution_graph(self, workflow: AdvancedWorkflow) -> Dict[str, List[str]]:
-        """Build dependency graph for execution planning."""
-        
-        graph = {}
-        
-        for step in workflow.steps:
-            graph[step.step_id] = step.dependencies.copy()
-        
-        return graph
-    
-    def _find_ready_steps(self, workflow: AdvancedWorkflow, graph: Dict[str, List[str]],
-                         completed: set, failed: set) -> List[WorkflowStep]:
-        """Find steps ready for execution."""
-        
-        ready_steps = []
-        
-        for step in workflow.steps:
-            if step.step_id in completed or step.step_id in failed:
-                continue
-            
-            # Check if all dependencies are satisfied
-            dependencies = graph.get(step.step_id, [])
-            if all(dep in completed for dep in dependencies):
-                ready_steps.append(step)
-        
-        return ready_steps
-    
-    def _evaluate_condition(self, condition: str, data: Dict[str, Any]) -> bool:
-        """Evaluate a condition expression."""
-        
-        try:
-            # Create safe evaluation context
-            context = {
-                "data": data,
-                "len": len,
-                "str": str,
-                "int": int,
-                "float": float,
-                "bool": bool,
-                "abs": abs,
-                "min": min,
-                "max": max
-            }
-            
-            return bool(eval(condition, {"__builtins__": {}}, context))
-            
-        except Exception as e:
-            logger.warning(f"Failed to evaluate condition '{condition}': {e}")
-            return False
-    
-    def _prepare_step_input(self, step: WorkflowStep, workflow_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Prepare input data for step execution."""
-        
-        step_input = {}
-        
-        for step_param, workflow_key in step.input_mapping.items():
-            if workflow_key in workflow_data:
-                step_input[step_param] = workflow_data[workflow_key]
-        
-        return step_input
-    
-    def _apply_output_mapping(self, step: WorkflowStep, step_output: Dict[str, Any],
-                            workflow_data: Dict[str, Any]):
-        """Apply step output to workflow data."""
-        
-        for workflow_key, step_param in step.output_mapping.items():
-            if step_param in step_output:
-                workflow_data[workflow_key] = step_output[step_param]
-    
-    def _validate_step_input(self, step_input: Dict[str, Any], 
-                           validation_schema: Dict[str, Any]) -> Dict[str, Any]:
-        """Validate step input against schema."""
-        
-        # Simplified validation - in production, use jsonschema
-        errors = []
-        
-        required_fields = validation_schema.get("required", [])
-        for field in required_fields:
-            if field not in step_input:
-                errors.append(f"Required field '{field}' is missing")
-        
-        return {
-            "valid": len(errors) == 0,
-            "errors": errors
-        }
-    
-    def _is_retryable_error(self, error: Exception, retry_policy: Dict[str, Any]) -> bool:
-        """Check if error is retryable based on policy."""
-        
-        non_retryable_errors = retry_policy.get("non_retryable_errors", [
-            "ValueError", "TypeError", "AuthenticationError"
-        ])
-        
-        error_type = type(error).__name__
-        return error_type not in non_retryable_errors
-    
-    async def _handle_step_error(self, step: WorkflowStep, context: ExecutionContext,
-                               error: Exception) -> Dict[str, Any]:
-        """Handle step execution error with recovery mechanisms."""
-        
-        recovery_result = {"recovered": False}
-        
-        # Execute error handlers if defined
-        for handler_id in step.error_handlers:
-            try:
-                handler_step = next(
-                    (s for s in context.workflow.steps if s.step_id == handler_id),
-                    None
-                )
-                
-                if handler_step:
-                    handler_input = {
-                        "original_error": str(error),
-                        "failed_step_id": step.step_id,
-                        "context_data": context.data
-                    }
-                    
-                    handler_result = await self._execute_single_step(handler_step, context)
-                    
-                    if handler_result.get("success") and handler_result.get("recovery_action"):
-                        recovery_result["recovered"] = True
-                        recovery_result["action"] = handler_result.get("recovery_action")
-                        break
-                        
-            except Exception as handler_error:
-                logger.error(f"Error handler {handler_id} failed: {handler_error}")
-        
-        return recovery_result
-    
-    async def _execute_rollback(self, context: ExecutionContext):
-        """Execute rollback actions for failed workflow."""
-        
-        logger.info(f"Executing rollback for workflow {context.execution_id}")
-        
-        # Execute rollback actions for completed steps in reverse order
-        completed_steps = [
-            step for step in context.workflow.steps 
-            if step.status == StepStatus.COMPLETED and step.rollback_actions
-        ]
-        
-        for step in reversed(completed_steps):
-            for rollback_action in step.rollback_actions:
-                try:
-                    # Execute rollback action
-                    rollback_result = await self.step_executor.execute_rollback_action(
-                        rollback_action, step, context
-                    )
-                    
-                    logger.info(f"Rollback action {rollback_action} completed for step {step.step_id}")
-                    
-                except Exception as e:
-                    logger.error(f"Rollback action {rollback_action} failed for step {step.step_id}: {e}")
 ```
 
 ---
 
 ## Part 2: Workflow Optimization and Monitoring (20 minutes)
 
-### Step 2.1: Performance Optimization
+### Step 2.1: Performance Metrics Collection
 
-Implement intelligent workflow optimization:
+Create a performance metrics system for workflow analysis:
 
 ```python
 # workflows/optimizer.py
@@ -755,7 +464,11 @@ class PerformanceMetrics:
     step_performance: Dict[str, Dict[str, float]]
     bottlenecks: List[str]
     optimization_score: float
+```
 
+Define optimization recommendations:
+
+```python
 @dataclass
 class OptimizationRecommendation:
     """Optimization recommendation for workflows."""
@@ -767,7 +480,13 @@ class OptimizationRecommendation:
     implementation_effort: str   # low, medium, high
     risk_level: str             # low, medium, high
     specific_changes: List[Dict[str, Any]]
+```
 
+### Step 2.2: Workflow Optimizer Core
+
+Create the workflow optimizer with initialization:
+
+```python
 class WorkflowOptimizer:
     """Intelligent workflow optimizer using performance data."""
     
@@ -799,35 +518,19 @@ class WorkflowOptimizer:
                 "condition": lambda metrics: self._detect_resource_waste(metrics),
                 "recommendation": self._create_resource_optimization_recommendation,
                 "priority": 7
-            },
-            {
-                "name": "retry_optimization",
-                "condition": lambda metrics: self._detect_retry_issues(metrics),
-                "recommendation": self._create_retry_optimization_recommendation,
-                "priority": 6
-            },
-            {
-                "name": "routing_optimization",
-                "condition": lambda metrics: self._detect_routing_inefficiency(metrics),
-                "recommendation": self._create_routing_optimization_recommendation,
-                "priority": 5
             }
         ]
-    
+```
+
+Implement performance analysis:
+
+```python
     async def analyze_workflow_performance(self, workflow: AdvancedWorkflow,
                                          execution_history: List[ExecutionContext]) -> PerformanceMetrics:
         """Analyze workflow performance and identify optimization opportunities."""
         
         if not execution_history:
-            return PerformanceMetrics(
-                execution_time=0,
-                resource_usage={},
-                success_rate=0,
-                error_rate=1,
-                step_performance={},
-                bottlenecks=[],
-                optimization_score=0
-            )
+            return self._create_empty_metrics()
         
         # Calculate execution time statistics
         execution_times = [
@@ -843,7 +546,11 @@ class WorkflowOptimizer:
         total_executions = len(execution_history)
         success_rate = successful_executions / total_executions if total_executions > 0 else 0
         error_rate = 1 - success_rate
-        
+```
+
+Continue with step performance analysis:
+
+```python
         # Analyze step performance
         step_performance = self._analyze_step_performance(workflow, execution_history)
         
@@ -869,18 +576,16 @@ class WorkflowOptimizer:
         )
         
         # Store metrics for learning
-        workflow_id = workflow.workflow_id
-        if workflow_id not in self.performance_history:
-            self.performance_history[workflow_id] = []
-        
-        self.performance_history[workflow_id].append(metrics)
-        
-        # Keep only recent history
-        if len(self.performance_history[workflow_id]) > 100:
-            self.performance_history[workflow_id] = self.performance_history[workflow_id][-100:]
+        self._store_performance_metrics(workflow.workflow_id, metrics)
         
         return metrics
-    
+```
+
+### Step 2.3: Optimization Recommendations
+
+Generate optimization recommendations based on analysis:
+
+```python
     async def generate_optimization_recommendations(self, 
                                                   workflow: AdvancedWorkflow,
                                                   metrics: PerformanceMetrics) -> List[OptimizationRecommendation]:
@@ -903,164 +608,11 @@ class WorkflowOptimizer:
         recommendations.sort(key=lambda r: r.expected_improvement, reverse=True)
         
         return recommendations[:5]  # Return top 5 recommendations
-    
-    def _analyze_step_performance(self, workflow: AdvancedWorkflow,
-                                execution_history: List[ExecutionContext]) -> Dict[str, Dict[str, float]]:
-        """Analyze individual step performance."""
-        
-        step_performance = {}
-        
-        for step in workflow.steps:
-            step_times = []
-            step_success_count = 0
-            step_total_count = 0
-            
-            for ctx in execution_history:
-                # Find step execution data in context
-                step_data = ctx.step_execution_data.get(step.step_id)
-                if step_data:
-                    step_total_count += 1
-                    
-                    if step_data.get("success", False):
-                        step_success_count += 1
-                        
-                        # Calculate execution time
-                        start_time = step_data.get("start_time")
-                        end_time = step_data.get("end_time")
-                        
-                        if start_time and end_time:
-                            start_dt = datetime.fromisoformat(start_time)
-                            end_dt = datetime.fromisoformat(end_time)
-                            execution_time = (end_dt - start_dt).total_seconds()
-                            step_times.append(execution_time)
-            
-            # Calculate step metrics
-            if step_total_count > 0:
-                step_performance[step.step_id] = {
-                    "avg_execution_time": statistics.mean(step_times) if step_times else 0,
-                    "max_execution_time": max(step_times) if step_times else 0,
-                    "min_execution_time": min(step_times) if step_times else 0,
-                    "success_rate": step_success_count / step_total_count,
-                    "execution_count": step_total_count,
-                    "variance": statistics.variance(step_times) if len(step_times) > 1 else 0
-                }
-        
-        return step_performance
-    
-    def _identify_bottlenecks(self, step_performance: Dict[str, Dict[str, float]]) -> List[str]:
-        """Identify performance bottlenecks in the workflow."""
-        
-        bottlenecks = []
-        
-        if not step_performance:
-            return bottlenecks
-        
-        # Find steps with high execution times
-        avg_times = [metrics["avg_execution_time"] for metrics in step_performance.values()]
-        if avg_times:
-            time_threshold = statistics.mean(avg_times) + statistics.stdev(avg_times)
-            
-            for step_id, metrics in step_performance.items():
-                if metrics["avg_execution_time"] > time_threshold:
-                    bottlenecks.append(step_id)
-        
-        # Find steps with high variance (inconsistent performance)
-        for step_id, metrics in step_performance.items():
-            if metrics["variance"] > metrics["avg_execution_time"] * 0.5:  # High variance
-                if step_id not in bottlenecks:
-                    bottlenecks.append(step_id)
-        
-        # Find steps with low success rates
-        for step_id, metrics in step_performance.items():
-            if metrics["success_rate"] < 0.95:  # Less than 95% success rate
-                if step_id not in bottlenecks:
-                    bottlenecks.append(step_id)
-        
-        return bottlenecks
-    
-    def _calculate_resource_usage(self, execution_history: List[ExecutionContext]) -> Dict[str, float]:
-        """Calculate average resource usage."""
-        
-        resource_usage = {
-            "cpu_utilization": 0.75,      # Mock data - in production, get from monitoring
-            "memory_utilization": 0.60,
-            "network_utilization": 0.30,
-            "agent_utilization": 0.80
-        }
-        
-        return resource_usage
-    
-    def _calculate_optimization_score(self, execution_time: float, success_rate: float,
-                                    step_performance: Dict[str, Dict[str, float]],
-                                    resource_usage: Dict[str, float]) -> float:
-        """Calculate overall optimization score (0-100)."""
-        
-        score = 100
-        
-        # Penalize long execution times
-        if execution_time > 300:  # More than 5 minutes
-            score -= min(30, (execution_time - 300) / 10)
-        
-        # Penalize low success rates
-        score -= (1 - success_rate) * 40
-        
-        # Penalize inefficient resource usage
-        avg_resource_usage = statistics.mean(resource_usage.values()) if resource_usage else 0
-        if avg_resource_usage > 0.8:  # High resource usage
-            score -= (avg_resource_usage - 0.8) * 50
-        
-        # Penalize performance variance
-        if step_performance:
-            variances = [metrics["variance"] for metrics in step_performance.values()]
-            avg_variance = statistics.mean(variances) if variances else 0
-            score -= min(20, avg_variance * 10)
-        
-        return max(0, score)
-    
-    def _detect_parallelization_opportunity(self, metrics: PerformanceMetrics) -> bool:
-        """Detect if workflow can benefit from parallelization."""
-        
-        # Check if there are sequential steps that could run in parallel
-        long_running_steps = [
-            step_id for step_id, perf in metrics.step_performance.items()
-            if perf["avg_execution_time"] > 30  # More than 30 seconds
-        ]
-        
-        return len(long_running_steps) >= 2
-    
-    def _detect_caching_opportunity(self, metrics: PerformanceMetrics) -> bool:
-        """Detect if workflow can benefit from caching."""
-        
-        # Check for repeated operations or high execution times
-        for step_id, perf in metrics.step_performance.items():
-            if (perf["execution_count"] > 10 and  # Frequently executed
-                perf["avg_execution_time"] > 5 and  # Takes significant time
-                perf["variance"] < perf["avg_execution_time"] * 0.2):  # Consistent results
-                return True
-        
-        return False
-    
-    def _detect_resource_waste(self, metrics: PerformanceMetrics) -> bool:
-        """Detect if workflow is wasting resources."""
-        
-        avg_utilization = statistics.mean(metrics.resource_usage.values())
-        return avg_utilization > 0.85  # Very high resource usage
-    
-    def _detect_retry_issues(self, metrics: PerformanceMetrics) -> bool:
-        """Detect if retry policies need optimization."""
-        
-        return metrics.success_rate < 0.9  # Low success rate indicates retry issues
-    
-    def _detect_routing_inefficiency(self, metrics: PerformanceMetrics) -> bool:
-        """Detect if agent routing can be optimized."""
-        
-        # Check for high variance in execution times (indicates inconsistent agent performance)
-        for step_id, perf in metrics.step_performance.items():
-            if perf["variance"] > perf["avg_execution_time"] * 0.3:
-                return True
-        
-        return False
-    
+```
+
+Create specific optimization recommendations:
+
+```python
     def _create_parallelization_recommendation(self, workflow: AdvancedWorkflow,
                                              metrics: PerformanceMetrics) -> OptimizationRecommendation:
         """Create recommendation for parallelization."""
@@ -1080,94 +632,35 @@ class WorkflowOptimizer:
                 }
             ]
         )
-    
-    def _create_caching_recommendation(self, workflow: AdvancedWorkflow,
-                                     metrics: PerformanceMetrics) -> OptimizationRecommendation:
-        """Create recommendation for caching."""
+```
+
+Add bottleneck detection logic:
+
+```python
+    def _identify_bottlenecks(self, step_performance: Dict[str, Dict[str, float]]) -> List[str]:
+        """Identify performance bottlenecks in the workflow."""
         
-        return OptimizationRecommendation(
-            recommendation_id=f"cache_{workflow.workflow_id}_{int(datetime.now().timestamp())}",
-            type="caching",
-            description="Implement result caching for frequently executed steps with consistent outputs",
-            expected_improvement=25.0,
-            implementation_effort="low",
-            risk_level="low",
-            specific_changes=[
-                {
-                    "action": "add_result_caching",
-                    "steps": [step_id for step_id, perf in metrics.step_performance.items()
-                             if perf["execution_count"] > 10],
-                    "cache_ttl": 3600  # 1 hour
-                }
-            ]
-        )
-    
-    def _create_resource_optimization_recommendation(self, workflow: AdvancedWorkflow,
-                                                   metrics: PerformanceMetrics) -> OptimizationRecommendation:
-        """Create recommendation for resource optimization."""
+        bottlenecks = []
         
-        return OptimizationRecommendation(
-            recommendation_id=f"resource_{workflow.workflow_id}_{int(datetime.now().timestamp())}",
-            type="resource_optimization",
-            description="Optimize resource allocation and utilization to reduce costs and improve efficiency",
-            expected_improvement=20.0,
-            implementation_effort="medium",
-            risk_level="medium",
-            specific_changes=[
-                {
-                    "action": "adjust_resource_limits",
-                    "target_utilization": 0.75,
-                    "enable_autoscaling": True
-                },
-                {
-                    "action": "implement_resource_pooling",
-                    "pool_size": 5
-                }
-            ]
-        )
-    
-    def _create_retry_optimization_recommendation(self, workflow: AdvancedWorkflow,
-                                                metrics: PerformanceMetrics) -> OptimizationRecommendation:
-        """Create recommendation for retry optimization."""
+        if not step_performance:
+            return bottlenecks
         
-        return OptimizationRecommendation(
-            recommendation_id=f"retry_{workflow.workflow_id}_{int(datetime.now().timestamp())}",
-            type="retry_optimization",
-            description="Optimize retry policies to improve success rates and reduce unnecessary retries",
-            expected_improvement=15.0,
-            implementation_effort="low",
-            risk_level="low",
-            specific_changes=[
-                {
-                    "action": "adjust_retry_policies",
-                    "steps": [step_id for step_id, perf in metrics.step_performance.items()
-                             if perf["success_rate"] < 0.95],
-                    "max_retries": 5,
-                    "backoff_multiplier": 1.5
-                }
-            ]
-        )
-    
-    def _create_routing_optimization_recommendation(self, workflow: AdvancedWorkflow,
-                                                  metrics: PerformanceMetrics) -> OptimizationRecommendation:
-        """Create recommendation for routing optimization."""
+        # Find steps with high execution times
+        avg_times = [metrics["avg_execution_time"] for metrics in step_performance.values()]
+        if avg_times:
+            time_threshold = statistics.mean(avg_times) + statistics.stdev(avg_times)
+            
+            for step_id, metrics in step_performance.items():
+                if metrics["avg_execution_time"] > time_threshold:
+                    bottlenecks.append(step_id)
         
-        return OptimizationRecommendation(
-            recommendation_id=f"routing_{workflow.workflow_id}_{int(datetime.now().timestamp())}",
-            type="routing_optimization",
-            description="Optimize agent routing based on performance history and current load",
-            expected_improvement=18.0,
-            implementation_effort="medium",
-            risk_level="low",
-            specific_changes=[
-                {
-                    "action": "implement_smart_routing",
-                    "routing_algorithm": "performance_weighted",
-                    "consider_agent_load": True,
-                    "enable_failover": True
-                }
-            ]
-        )
+        # Find steps with high variance (inconsistent performance)
+        for step_id, metrics in step_performance.items():
+            if metrics["variance"] > metrics["avg_execution_time"] * 0.5:
+                if step_id not in bottlenecks:
+                    bottlenecks.append(step_id)
+        
+        return bottlenecks
 ```
 
 ---
