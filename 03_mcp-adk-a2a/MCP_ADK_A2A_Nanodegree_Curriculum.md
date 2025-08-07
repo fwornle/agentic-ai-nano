@@ -4,6 +4,9 @@
 ### 🎯 **Course Overview**
 This intensive 2-week module teaches students to build production-ready agent communication systems using the Model Context Protocol (MCP), Agent Development Kit (ADK), and Agent-to-Agent (A2A) protocols. Students emerge with practical skills to create interoperable, distributed agent architectures.
 
+![Distributed Agent Systems](images/mcp-adk-a2a.png)
+
+
 ### 📋 **Prerequisites**
 - Completed Agent Frameworks module (Week -4 to -3)
 - Completed RAG module (Week -2 to -1) 
