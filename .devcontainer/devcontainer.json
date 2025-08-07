@@ -1,0 +1,107 @@
+{
+    "name": "agentic_ai_nano",
+    // Build devcontainer from Dockerfile
+    "build": {
+        "dockerfile": "agentic_ai_nano.Dockerfile",
+        "options": [
+            "--platform=linux/amd64"
+        ]
+    },
+    // Use a non-root user in the container
+    "containerUser": "ubuntu",
+    // Install the following VS Code extensions by default
+    // "customizations": {
+    //     "vscode": {
+    //         "extensions": [
+    //             // C++-related extensions
+    //             "ms-vscode.cpptools",
+    //             // Github copilot
+    //             "github.copilot",
+    //             "github.copilot-chat",
+    //             // Python-related extensions
+    //             "charliermarsh.ruff",
+    //             "ms-python.python",
+    //             "ms-python.mypy-type-checker",
+    //             "ms-python.pylint",
+    //             // Docker syntax highlighting, etc.
+    //             "ms-azuretools.vscode-docker",
+    //             // View PDFs in VS Code
+    //             "tomoki1207.pdf"
+    //         ],
+    //         "settings": {
+    //             // Display a line at 80 characters in editors
+    //             "editor.rulers": [
+    //                 {
+    //                     "column": 80
+    //                 }
+    //             ],
+    //             // Note: All Python tools are mainly configured through the
+    //             //       pyproject.toml in the root of the repository
+    //             "[python]": {
+    //                 // Use ruff for Python linting/formatting (on-save)
+    //                 "editor.formatOnSave": true,
+    //                 "editor.codeActionsOnSave": {
+    //                     "source.fixAll": "explicit",
+    //                     "source.organizeImports": "explicit"
+    //                 },
+    //                 "editor.defaultFormatter": "charliermarsh.ruff"
+    //             },
+    //             // Use ruff for Jupyter notebook linting/formatting (on-save)
+    //             "notebook.formatOnSave.enabled": true,
+    //             "notebook.codeActionsOnSave": {
+    //                 "notebook.source.fixAll": "explicit",
+    //                 "notebook.source.organizeImports": "explicit"
+    //             },
+    //             "pylint.importStrategy": "fromEnvironment",
+    //             "pylint.args": [],
+    //             "mypy-type-checker.importStrategy": "fromEnvironment",
+    //             "mypy-type-checker.args": [],
+    //             "python.analysis.exclude": [
+    //                 "${workspaceFolder}/__build"
+    //             ],
+    //             "ruff.nativeServer": "on",
+    //             // Use bash as default terminal in the container
+    //             "terminal.integrated.defaultProfile.osx": "bash",
+    //             "terminal.integrated.defaultProfile.linux": "bash",
+    //             "terminal.integrated.profiles.linux": {
+    //                 "bash": {
+    //                     "path": "/bin/bash"
+    //                 }
+    //             },
+    //             "terminal.integrated.profiles.osx": {
+    //                 "bash": {
+    //                     "path": "/bin/bash"
+    //                 }
+    //             }
+    //         }
+    //     }
+    // },
+    // "features": {
+    //     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    // },
+    // Define mount points for the container
+    "mounts": [
+        // Use the host timezone in the container
+        "source=/etc/timezone,target=/etc/timezone,type=bind,readonly",
+        // Use the host time in the container
+        "source=/etc/localtime,target=/etc/localtime,type=bind,readonly",
+        // Use the host netrc (to enable access to internal repositories)
+        "source=${localEnv:HOME}/.netrc,target=/home/ubuntu/.netrc,type=bind,readonly",
+        // Mount the repository into the container
+        "source=${localWorkspaceFolder},target=/home/ubuntu/workdir,type=bind"
+        // Mount the ollama cache in the repository to avoid re-downloading models.
+        // "source=${localWorkspaceFolder}/.ollama,target=/home/developer/.ollama,type=bind"
+    ],
+    // Run the container in privileged mode
+    // (i.e., similar permissions as on the host)
+    // (while not recommended, it removes a potential source of issues)
+    "privileged": true,
+    // Set startup arguments for the container
+    "runArgs": [
+        // Use host network (i.e., full network access similar to the host)
+        "--network=host"
+    ],
+    // Open container user work directory by default
+    "workspaceFolder": "/home/ubuntu/workdir",
+    // "postStartCommand": "2>&1 nohup bash -c 'ollama serve &' > /home/developer/workdir/ollama.log"
+}
