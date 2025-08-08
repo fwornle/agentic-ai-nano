@@ -520,6 +520,130 @@ In the following sessions, you'll get hands-on experience building each componen
 
 The future of AI is not single agents working in isolation, but collaborative networks of specialized agents that can work together to solve complex problems. MCP, ADK, and A2A are the foundational technologies that make this vision possible.
 
+## Knowledge Check: Multiple Choice Quiz
+
+Test your understanding of MCP, ADK, and A2A concepts with this comprehensive quiz.
+
+### Question 1
+What is the primary purpose of the Model Context Protocol (MCP)?
+
+A) To enable direct communication between AI agents
+B) To standardize how LLMs interact with external data sources and tools
+C) To provide a framework for building AI agents
+D) To manage agent discovery across organizations
+
+### Question 2
+Which component of MCP is responsible for exposing capabilities to clients?
+
+A) MCP Client
+B) MCP Tools
+C) MCP Server
+D) MCP Resources
+
+### Question 3
+What are the three main types of capabilities that MCP servers can expose?
+
+A) Agents, Models, and Protocols
+B) Tools, Resources, and Prompts
+C) Servers, Clients, and Bridges
+D) APIs, Databases, and Files
+
+### Question 4
+Which Google technology provides a flexible orchestration framework for developing AI agents?
+
+A) A2A (Agent-to-Agent)
+B) MCP (Model Context Protocol)
+C) ADK (Agent Development Kit)
+D) ACP (Agent Communication Protocol)
+
+### Question 5
+What is a key advantage of ADK compared to traditional AI frameworks?
+
+A) It only works with Google's models
+B) It has built-in orchestration and error handling
+C) It requires less computational resources
+D) It doesn't support external tool integration
+
+### Question 6
+How do agents discover each other in the A2A protocol?
+
+A) Through manual configuration files
+B) Using centralized agent registries only
+C) Via `.well-known/agent.json` files and discovery services
+D) Through direct IP address connections
+
+### Question 7
+What format does A2A use for agent capability advertisement?
+
+A) XML configuration files
+B) YAML metadata files
+C) JSON capability descriptors
+D) Protocol buffer definitions
+
+### Question 8
+In the travel planning example, which technology handles access to customer preferences stored in a database?
+
+A) A2A protocol
+B) ADK orchestration
+C) MCP client/server
+D) Direct API calls
+
+### Question 9
+What is the primary function of MCP Inspector?
+
+A) To deploy MCP servers to production
+B) To test, debug, and validate MCP servers
+C) To create new MCP protocols
+D) To monitor agent-to-agent communication
+
+### Question 10
+Which command is used to install MCP Inspector via npm?
+
+A) `npm install mcp-inspector`
+B) `npm install -g @modelcontextprotocol/inspector`
+C) `npm install @mcp/inspector`
+D) `npm install -g mcp-protocol-inspector`
+
+### Question 11
+When should you use A2A protocol instead of MCP?
+
+A) When you need to access local databases
+B) When you need agents to communicate across organizational boundaries
+C) When you need to expose tools to LLMs
+D) When you need to manage prompt templates
+
+### Question 12
+What transport mechanism does MCP typically use for communication?
+
+A) HTTP REST only
+B) WebSocket only
+C) stdio (standard input/output) and other transports
+D) gRPC only
+
+### Question 13
+In ADK, what happens when an agent encounters an error during task execution?
+
+A) The agent stops and returns an error immediately
+B) The agent has built-in retry and fallback mechanisms
+C) The agent requires manual intervention to continue
+D) The agent restarts from the beginning
+
+### Question 14
+Which of the following is NOT a key problem that A2A solves?
+
+A) Agent discovery
+B) Communication standards
+C) Model training optimization
+D) Cross-organization collaboration
+
+### Question 15
+What is the recommended development path for mastering this technology stack?
+
+A) Start with A2A, then ADK, then MCP
+B) Start with ADK, then MCP, then A2A
+C) Start with MCP, then ADK, then A2A
+D) Learn all three simultaneously
+
 ---
 
 *Ready to build the future of AI agent systems? Let's start with Session 1: Building Your First MCP Server!*
