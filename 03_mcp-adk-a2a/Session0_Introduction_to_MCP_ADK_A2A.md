@@ -12,6 +12,8 @@ These technologies form the backbone of modern multi-agent AI systems, enabling 
 
 The **Model Context Protocol (MCP)** is an open standard that transforms how Large Language Models (LLMs) interact with external data sources and tools. Think of MCP as the universal translator that makes enterprise APIs tool-agnostic and LLM-friendly.
 
+![MCP](images/mcp-overview.png)
+
 ### Key Problems MCP Solves
 
 1. **API Complexity**: Enterprise APIs often have complex authentication, data formats, and interaction patterns that are difficult for LLMs to navigate
@@ -114,6 +116,8 @@ class TravelAgent(Agent):
 
 **Agent-to-Agent (A2A)** is an open communication standard that enables AI agents to discover, communicate, and collaborate with each other across organizational and technical boundaries. A2A solves the critical problem of agent interoperability in distributed AI systems.
 
+![A2A](images/a2a-overview.png)
+
 ### Key Problems A2A Solves
 
 1. **Agent Discovery**: How do agents find and connect with other relevant agents?
@@ -196,6 +200,8 @@ When combined, MCP, ADK, and A2A create a powerful ecosystem for building and or
 2. **ADK** provides the framework for building sophisticated agent behaviors
 3. **A2A** enables agents to discover and collaborate with other agents
 
+![MCP-A2A](images/mcp-a2a-combo.png)
+
 ### Multi-Agent Travel Planning Example
 
 Let's see how all three technologies work together in a real-world scenario:
@@ -276,6 +282,12 @@ class TravelPlannerAgent(Agent):
 3. **Interoperability**: Agents can work across different organizations and platforms
 4. **Maintainability**: Standardized protocols reduce integration complexity
 5. **Flexibility**: Agents can be developed using different frameworks while maintaining compatibility
+
+### When to use what?
+
+The following overview illustrated when to use which agent communication protocol (also introducing the [Agent Communication Protocol](https://agentcommunicationprotocol.dev/introduction/welcome), ACP):
+
+![MCP-ACP-A2A](images/mcp-acp-a2a-use-cases.png)
 
 ## MCP Inspector: Your Essential Development Tool
 
