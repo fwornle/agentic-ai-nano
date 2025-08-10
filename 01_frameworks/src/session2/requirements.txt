@@ -1,0 +1,9 @@
+langchain
+langchain-community
+langchain-openai
+langchain-anthropic
+fastapi
+uvicorn
+pydantic
+requests
+python-dotenv

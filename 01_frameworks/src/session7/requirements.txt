@@ -1,0 +1,7 @@
+agno
+prometheus-client
+kubernetes
+docker
+fastapi
+uvicorn
+pydantic

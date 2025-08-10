@@ -1,0 +1,9 @@
+asyncio
+pytest
+pytest-asyncio
+pydantic
+typing-extensions
+datetime
+json
+uuid
+logging

@@ -1,0 +1,5 @@
+langgraph
+langchain
+langchain-openai
+pydantic
+typing-extensions
