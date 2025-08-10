@@ -1,9 +1,9 @@
-asyncio
-pytest
-pytest-asyncio
-pydantic
-typing-extensions
-datetime
-json
-uuid
-logging
+# Core testing dependencies
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# Data validation and type hints
+pydantic>=2.0.0
+typing-extensions>=4.0.0
+
+# Note: asyncio, datetime, json, uuid, and logging are part of Python standard library

@@ -1,9 +1,18 @@
-langchain
-langchain-community
-langchain-openai
-langchain-anthropic
-fastapi
-uvicorn
-pydantic
-requests
-python-dotenv
+# LangChain core and extensions
+langchain>=0.1.0
+langchain-community>=0.0.20
+langchain-openai>=0.0.5
+langchain-anthropic>=0.0.4
+langchain-experimental>=0.0.50
+
+# API and web frameworks
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Data validation and utilities
+pydantic>=2.0.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# Optional search tools
+duckduckgo-search>=3.9.0
