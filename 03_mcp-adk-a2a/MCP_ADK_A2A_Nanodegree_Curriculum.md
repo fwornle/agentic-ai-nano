@@ -1,8 +1,8 @@
-# Agentic AI Protocols: MCP, ADK & A2A
+# Agentic AI Protocols: MCP, ACP & A2A
 ## 2-Week Nanodegree Module
 
 ### 🎯 **Module Overview**
-This self-paced 2-week module provides comprehensive instruction on building production-ready agent communication systems using the Model Context Protocol (MCP), Agent Development Kit (ADK), and Agent-to-Agent (A2A) protocols. Through hands-on tutorials and practical examples, you'll develop skills to create interoperable, distributed agent architectures.
+This self-paced 2-week module provides comprehensive instruction on building production-ready agent communication systems using the Model Context Protocol (MCP), Agent Communication Protocol (ACP), and Agent-to-Agent (A2A) protocols. Through hands-on tutorials and practical examples, you'll develop skills to create interoperable, distributed agent architectures.
 
 ![Distributed Agent Systems](images/mcp-adk-a2a.png)
 
@@ -19,9 +19,9 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ## **Week 1: MCP Fundamentals & Implementation**
 
-### **Session 0: Introduction to MCP, ADK, and A2A (Self-Study)**
-**Content:** Understanding the ecosystem, M×N integration problem, and technology overview
-**Materials:** Session0_Introduction_to_MCP_ADK_A2A.md
+### **Session 0: Introduction to MCP, ACP, and A2A (Self-Study)**
+**Content:** Understanding the agent communication ecosystem, M×N integration problem, and protocol overview
+**Materials:** Session0_Introduction_to_MCP_ACP_A2A.md
 **Self-Check:** 15-question multiple choice quiz covering core concepts
 
 ### **Session 1: Building Your First MCP Server**
@@ -51,12 +51,12 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ---
 
-## **Week 2: ADK & A2A Distributed Systems**
+## **Week 2: ACP & A2A Agent Communication**
 
-### **Session 6: Building Your First ADK Agent**
-**Content:** ADK architecture, agent lifecycle, MCP integration, and Google Cloud deployment
-**Materials:** Session6_First_ADK_Agent.md + Session6_First_ADK_Agent-solution.md
-**Self-Check:** Multiple choice quiz covering ADK fundamentals and agent creation
+### **Session 6: Agent Communication Protocol (ACP) Fundamentals**
+**Content:** ACP architecture, local agent discovery, edge deployment, and framework integration
+**Materials:** Session6_ACP_Fundamentals.md + Session6_ACP_Fundamentals-solution.md
+**Self-Check:** Multiple choice quiz covering ACP concepts and local coordination
 
 ### **Session 7: Agent-to-Agent Communication (A2A)**
 **Content:** A2A protocol fundamentals, agent discovery, communication patterns, and multi-agent coordination
@@ -78,9 +78,9 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 **Project Overview:** Build a comprehensive multi-agent system demonstrating MCP, ADK, and A2A integration
 
 **Requirements:**
-- Implement multiple specialized agents using ADK
+- Implement local agent coordination using ACP
 - Create MCP servers for data access and tool integration
-- Enable A2A communication between agents
+- Enable A2A communication for cross-platform collaboration
 - Deploy to production environment with monitoring
 
 **Deliverables:**
@@ -125,16 +125,16 @@ By completion, students will be able to:
 ### **Technical Skills**
 1. **Design and implement MCP servers** with tools, resources, and prompts
 2. **Create MCP clients** that integrate with multiple servers
-3. **Build agents using ADK** with proper lifecycle management  
-4. **Implement A2A protocol** for agent-to-agent communication
-5. **Deploy distributed agent systems** to cloud platforms
+3. **Implement ACP coordination** for local agent orchestration
+4. **Enable A2A protocol** for cross-platform agent communication
+5. **Deploy distributed agent systems** to cloud and edge platforms
 6. **Secure agent communications** with authentication and validation
 
 ### **Architectural Understanding**
-1. **Differentiate between MCP, ADK, and A2A** use cases
-2. **Design interoperable agent ecosystems** 
-3. **Implement proper separation of concerns** between agents and tools
-4. **Plan for scalability and fault tolerance** in distributed systems
+1. **Differentiate between MCP, ACP, and A2A** use cases and environments
+2. **Design interoperable agent ecosystems** for cloud and edge deployment
+3. **Implement proper separation of concerns** between protocols and agents
+4. **Plan for scalability and fault tolerance** in distributed and offline systems
 
 ### **Industry Readiness**
 1. **Follow protocol specifications** and best practices
@@ -202,7 +202,7 @@ To successfully complete this nanodegree module:
 3. Successfully implement all code examples and tutorials
 4. Build and deploy the capstone project demonstrating integration of all three technologies
 
-**Completion Recognition:** "MCP, ADK & A2A Nanodegree Module Certificate"
+**Completion Recognition:** "MCP, ACP & A2A Nanodegree Module Certificate"
 
 ---
 
@@ -219,4 +219,4 @@ To successfully complete this nanodegree module:
 2. **Week 2**: Explore ADK agent creation and A2A protocol implementation
 3. **Capstone**: Integrate all technologies in a production-ready distributed system
 
-This module provides comprehensive, self-paced instruction on the cutting-edge protocols shaping the future of agentic AI systems. You'll gain practical experience building interoperable, distributed agent architectures that power next-generation AI applications.
+This module provides comprehensive, self-paced instruction on the cutting-edge protocols shaping the future of agentic AI systems. You'll gain practical experience building interoperable agent architectures that work in cloud, edge, and offline environments.

@@ -1,8 +1,8 @@
-# Session 0: Introduction to MCP, ADK, and A2A - Building the Future of AI Agent Ecosystems
+# Session 0: Introduction to MCP, ACP, and A2A - Building the Future of AI Agent Ecosystems
 
 ## Overview
 
-Welcome to the world of next-generation AI agent systems! In this introductory session, we'll explore three revolutionary technologies that are reshaping how AI agents communicate, operate, and collaborate: **Model Context Protocol (MCP)**, **Agent Development Kit (ADK)**, and **Agent-to-Agent (A2A) protocol**.
+Welcome to the world of next-generation AI agent systems! In this introductory session, we'll explore three revolutionary protocols that are reshaping how AI agents communicate, operate, and collaborate: **Model Context Protocol (MCP)**, **Agent Communication Protocol (ACP)**, and **Agent-to-Agent (A2A) protocol**.
 
 These technologies form the backbone of modern multi-agent AI systems, enabling seamless communication, standardized interactions, and scalable agent ecosystems that can work across organizational and technical boundaries.
 
@@ -27,7 +27,13 @@ Without MCP, you would need to build **50 custom integrations** (M × N = 5 × 1
 - **Inconsistent implementations**: Each integration might handle the same data source differently
 - **Developer overhead**: Teams spend more time on integration plumbing than AI functionality
 
-![M×N Problem Illustration](images/mxn-problem.png)
+![M×N Problem - Without MCP](images/mxn-problem.png)
+
+### The MCP Solution
+
+MCP solves this integration explosion by providing a universal protocol that acts as a bridge between AI applications and data sources:
+
+![MCP Solution - M+N Pattern](images/mcp-solution.png)
 
 ### Key Problems MCP Solves
 
@@ -75,104 +81,102 @@ async def query_customers(query: str) -> list[dict]:
 
 Any MCP-compatible AI system can now use this database functionality without custom integration code.
 
-## What is ADK (Agent Development Kit)?
+## What is ACP (Agent Communication Protocol)?
 
 ### Core Concept
 
-Google's **Agent Development Kit (ADK)** is an open-source, code-first Python framework for building, evaluating, and deploying sophisticated AI agents with flexibility and control. Released in 2025, ADK is the same framework powering agents within Google products like Agentspace and the Google Customer Engagement Suite.
+The **Agent Communication Protocol (ACP)** is an open standard for agent interoperability that solves the growing challenge of connecting AI agents, applications, and humans. Originally developed by BeeAI and IBM, ACP is now maintained under the Linux Foundation as a community-driven standard for enabling structured communication, discovery, and coordination between AI agents.
 
-![ADK Architecture Overview](images/adk-architecture-overview.png)
+![ACP Architecture Overview](images/acp-architecture-overview.png)
 
-### Philosophy: Making Agent Development Feel Like Software Development
+### Philosophy: Local-First, Minimal Overhead Agent Communication
 
-ADK was designed with the principle that **agent development should feel like traditional software development**. This means:
+ACP was designed with the principle that **agent communication should be simple, efficient, and work everywhere** - from cloud environments to edge devices without internet connectivity. Key principles include:
 
-- **Code-first approach**: Define agent logic directly in Python, not configuration files
-- **Testability**: Write unit tests for agent behaviors and tool integrations
-- **Version control**: Manage agent logic like any other software artifact
-- **Modularity**: Compose complex systems from reusable agent components
+- **REST-native design**: Uses standard HTTP conventions requiring no specialized libraries
+- **Local-first architecture**: Agents can discover and communicate within shared runtimes without cloud dependencies
+- **Minimal specifications**: Focuses on essential compatibility rather than prescriptive implementations
+- **Multimodal support**: Handles text, audio, video, and other data types seamlessly
 
-### Core Architecture Components
+### Key Problems ACP Solves
 
-ADK's architecture consists of several key components that work together:
+1. **Local Agent Discovery**: How do agents find each other in disconnected or edge environments?
+2. **Efficient Communication**: How to minimize overhead in resource-constrained environments?
+3. **Framework Agnosticism**: How can agents built with different frameworks communicate?
+4. **Offline Operation**: How do agents collaborate without internet connectivity?
+5. **Scale-to-Zero**: How to support dynamic resource allocation where agents aren't always online?
 
-1. **Agents**: The central decision-making entities
-   - **LLM Agents**: Use Large Language Models for intelligent reasoning
-   - **Workflow Agents**: Orchestrate other agents in complex patterns
-   - **Custom Agents**: Specialized implementations for unique requirements
+### ACP Architecture Components
 
-2. **Tools**: Functions that agents can use to perform actions
-   - Pre-built tools (Search, Code Execution, File Operations)
-   - Model Context Protocol (MCP) tools
-   - Third-party integrations (LangChain, LlamaIndex)
-   - Other agents as tools (hierarchical composition)
+1. **Agent Registry**: Local or distributed registry for agent discovery
+   - Embedded metadata in agent packages
+   - Dynamic registration and deregistration
+   - Capability-based discovery
 
-3. **Runners**: Components that manage agent execution flow
-   - Handle message routing and state management
-   - Orchestrate communication between agents
-   - Manage event-driven workflows
+2. **Communication Layer**: REST-based messaging system
+   - Multi-part HTTP messages for complex data
+   - Asynchronous streaming support
+   - Standard MIME types for content negotiation
 
-4. **Sessions**: Maintain conversation context and state
-   - Persistent memory across interactions
-   - User preference learning
-   - Multi-turn conversation management
+3. **Discovery Mechanism**: Multiple discovery patterns
+   - Local runtime discovery (same process/container)
+   - Network discovery (LAN/edge networks)
+   - Registry-based discovery (centralized or federated)
 
-5. **Events**: Communication mechanism between components
-   - Represent steps in agent execution
-   - Enable debugging and monitoring
-   - Support real-time streaming interactions
+4. **Message Protocol**: Flexible message structure
+   - Synchronous request-response
+   - Asynchronous task delegation
+   - Streaming for long-running operations
+   - Stateful and stateless communication modes
 
-### Key Features of ADK
-
-1. **Multi-Agent by Design**: Build modular, scalable applications by composing multiple specialized agents in hierarchical, parallel, or sequential workflows
-
-2. **Model Flexibility**: Works with Gemini (optimized), Vertex AI Model Garden, and LiteLLM integration for providers like Anthropic, Meta, Mistral AI, and AI21 Labs
-
-3. **Built-in Orchestration**: Handle complex workflows with multiple steps, decision points, and error recovery
-
-4. **Rich Tool Ecosystem**: Seamlessly integrate with various APIs, databases, and services using standardized tool interfaces
-
-5. **Streaming Capabilities**: Support real-time interaction including bidirectional audio/video streaming
-
-6. **Agent-to-Agent Communication**: Built-in A2A protocol support for cross-organizational collaboration
-
-7. **Production Ready**: Easy containerization and deployment to Cloud Run, Kubernetes, or Vertex AI
-
-### ADK Agent Structure
+### ACP Communication Patterns
 
 ```python
-from adk import Agent, Tool
-
-class TravelAgent(Agent):
-    def __init__(self):
-        super().__init__(
-            name="travel_planner",
-            description="Comprehensive travel planning agent",
-            tools=[
-                FlightSearchTool(),
-                HotelBookingTool(),
-                WeatherTool()
-            ]
-        )
+# ACP Agent Registration
+class LocalAgent:
+    def __init__(self, name, capabilities):
+        self.metadata = {
+            "name": name,
+            "version": "1.0",
+            "capabilities": capabilities,
+            "endpoints": {
+                "communicate": "/agent/communicate",
+                "status": "/agent/status",
+                "discover": "/agent/discover"
+            },
+            "protocols": ["http", "websocket"],
+            "modalities": ["text", "audio", "video"]
+        }
     
-    async def plan_trip(self, destination: str, dates: tuple) -> dict:
-        # Complex multi-step planning logic
-        flights = await self.search_flights(destination, dates)
-        hotels = await self.search_hotels(destination, dates)
-        weather = await self.get_weather(destination, dates)
-        
-        return self.create_itinerary(flights, hotels, weather)
+    async def register_local(self, registry):
+        # Register with local runtime registry
+        await registry.register(self.metadata)
+    
+    async def discover_peers(self, capability_filter=None):
+        # Discover other agents in the local environment
+        peers = await self.registry.discover(capability_filter)
+        return peers
 ```
 
-### ADK vs Traditional AI Frameworks
+### ACP vs Other Protocols
 
-| Feature | Traditional Frameworks | ADK |
-|---------|----------------------|-----|
-| Agent Orchestration | Manual implementation | Built-in orchestration engine |
-| Error Handling | Custom error handling | Automatic retry and fallback |
-| State Management | External state stores | Integrated state management |
-| Tool Integration | Framework-specific | Universal tool interface |
-| Cross-Framework Support | Limited | Works with multiple frameworks |
+| Aspect | MCP | ACP | A2A |
+|--------|-----|-----|-----|
+| **Focus** | LLM-to-tools connection | Local agent coordination | Cross-platform agent collaboration |
+| **Environment** | Cloud/server-based | Edge/local-first | Web/enterprise |
+| **Discovery** | Static configuration | Dynamic local discovery | Web-based discovery |
+| **Protocol** | JSON-RPC | REST/HTTP | HTTP with Agent Cards |
+| **Overhead** | Medium | Minimal | Higher |
+| **Offline Support** | Limited | Excellent | Limited |
+| **Primary Use Case** | Tool integration | Edge orchestration | Enterprise workflows |
+
+### Real-World ACP Use Cases
+
+1. **Factory Floor Automation**: Agents controlling robots and sensors communicate locally without internet
+2. **Edge AI Orchestration**: Multiple AI models on edge devices coordinate processing tasks
+3. **Offline Mobile Agents**: Apps with embedded agents that work in airplane mode
+4. **IoT Device Coordination**: Smart home devices with agent-based intelligence
+5. **Disconnected Military/Emergency Systems**: Critical systems that can't rely on cloud connectivity
 
 ## What is A2A (Agent-to-Agent) Protocol?
 
@@ -254,34 +258,37 @@ Agents advertise their capabilities through `.well-known/agent.json` files:
 }
 ```
 
-## The Integration: How MCP, ADK, and A2A Work Together
+## The Integration: How MCP, ACP, and A2A Work Together
 
 ### The Complete Agent Ecosystem
 
-When combined, MCP, ADK, and A2A create a powerful ecosystem for building and orchestrating AI agents:
+When combined, MCP, ACP, and A2A create a comprehensive ecosystem for agent communication at different levels:
 
-1. **MCP** provides standardized access to external data and tools
-2. **ADK** provides the framework for building sophisticated agent behaviors
-3. **A2A** enables agents to discover and collaborate with other agents
+1. **MCP** provides standardized access to external data and tools (agent-to-tool communication)
+2. **ACP** enables efficient local agent coordination (agent-to-agent in same environment)
+3. **A2A** facilitates cross-platform agent collaboration (agent-to-agent across organizations)
 
 ![MCP-A2A](images/mcp-a2a-combo.png)
 
 ### Multi-Agent Travel Planning Example
 
-Let's see how all three technologies work together in a real-world scenario:
+Let's see how all three protocols work together in a real-world scenario:
 
 ```python
-# ADK Agent with MCP integration and A2A communication
+# Agent with MCP integration, ACP local coordination, and A2A communication
 class TravelPlannerAgent(Agent):
     def __init__(self):
         super().__init__(name="travel_planner")
         
-        # MCP integrations for local capabilities
+        # MCP integrations for tool access
         self.mcp_client = MCPClient()
         self.mcp_client.connect_to_server("database://customer-preferences")
         self.mcp_client.connect_to_server("file://travel-templates")
         
-        # A2A client for external agent communication
+        # ACP for local agent coordination
+        self.acp_registry = ACPRegistry()
+        
+        # A2A client for cross-platform agent communication
         self.a2a_client = A2AClient()
     
     async def plan_comprehensive_trip(self, user_request: str):
@@ -291,7 +298,11 @@ class TravelPlannerAgent(Agent):
             {"user_id": user_request.user_id}
         )
         
-        # Step 2: Use A2A to find and communicate with flight agents
+        # Step 2: Use ACP to coordinate with local agents for quick tasks
+        local_agents = await self.acp_registry.discover("data_processing")
+        processed_data = await local_agents[0].process(preferences)
+        
+        # Step 3: Use A2A to find and communicate with external flight agents
         flight_agents = await self.a2a_client.discover_agents(
             capability="flight_search"
         )
@@ -310,7 +321,7 @@ class TravelPlannerAgent(Agent):
             )
             flights.extend(flight_options)
         
-        # Step 3: Use A2A to find hotel agents
+        # Step 4: Use A2A to find hotel agents
         hotel_agents = await self.a2a_client.discover_agents(
             capability="hotel_search"
         )
@@ -326,7 +337,7 @@ class TravelPlannerAgent(Agent):
             }
         )
         
-        # Step 4: Use MCP to generate itinerary using templates
+        # Step 5: Use MCP to generate itinerary using templates
         itinerary = await self.mcp_client.call_tool(
             "generate_itinerary",
             {
@@ -385,29 +396,55 @@ npx @modelcontextprotocol/inspector
 #### 1. Starting the Inspector
 
 ```bash
-# Start inspector with default settings
+# Install and start inspector
+npx @modelcontextprotocol/inspector
+
+# Alternative: install globally first
+npm install -g @modelcontextprotocol/inspector
 mcp-inspector
 
-# Start with specific server configuration
+# Start with specific configuration
 mcp-inspector --config mcp-config.json
-
-# Start on specific port
-mcp-inspector --port 3000
 ```
+
+The inspector will start on `http://localhost:6274` and display a connection interface.
 
 #### 2. Connecting to MCP Servers
 
-Once the inspector is running, you can connect to MCP servers through the web interface:
+Once the inspector is running, you'll see the main interface:
 
-1. Open `http://localhost:3000` in your browser
-2. Enter your MCP server URL (e.g., `stdio://python weather_server.py`)
+![MCP-Inspector](images/mcp-inspector.png)
+
+**Connection Interface:**
+
+Behind the scenes, the connection interface of the MCP inspector is structured as follows:
+
+![MCP Inspector Connection Interface](images/mcp-inspector-connection.png)
+
+**Step-by-step connection:**
+1. Open `http://localhost:6274` in your browser
+2. Enter your MCP server configuration:
+   - `stdio://python weather_server.py` (for local Python servers)
+   - `http://localhost:8080` (for HTTP servers)
+   - Or select from saved configurations
 3. Click "Connect" to establish connection
+4. Wait for the green "Connected" indicator
 
 #### 3. Exploring Server Capabilities
 
-The inspector provides several tabs for exploring your MCP server:
+Once connected, the inspector displays three main tabs with your server's capabilities:
 
-**Tools Tab**: View and test all available tools
+**Main Interface After Connection:**
+
+![MCP Inspector Main Interface](images/mcp-inspector-interface.png)
+
+**Tools Tab Interface**: Interactive testing with auto-generated forms
+- Each tool shows its name, description, and input parameters
+- Input fields are automatically generated based on the tool's schema
+- "Execute" button sends requests and displays responses in real-time
+- Response area shows JSON results with syntax highlighting
+
+**Example Tool Definition:**
 ```json
 {
   "name": "get_weather",
@@ -425,26 +462,31 @@ The inspector provides several tabs for exploring your MCP server:
 }
 ```
 
-**Resources Tab**: Browse available data resources
-```json
-{
-  "uri": "file://customer_data.json",
-  "name": "Customer Database",
-  "description": "Customer information and preferences",
-  "mimeType": "application/json"
-}
-```
+**Resources Tab Interface** (shown in main interface diagram above):
 
-**Prompts Tab**: Test prompt templates
+**Resources Tab Features:**
+- Browse all available resources (files, URLs, data sources)
+- View resource metadata (MIME types, descriptions)
+- Read resource content directly in the browser
+- Subscribe to dynamic resources for real-time updates
+
+**Prompts Tab Interface** (shown in main interface diagram above):
+
+**Prompt Template Definition:**
 ```json
 {
-  "name": "analyze_data",
-  "description": "Template for data analysis tasks",
+  "name": "weather_analysis", 
+  "description": "Generate weather analysis report",
   "arguments": [
     {
-      "name": "dataset",
-      "description": "The dataset to analyze",
+      "name": "location",
+      "description": "City or region to analyze",
       "required": true
+    },
+    {
+      "name": "days",
+      "description": "Number of days to analyze", 
+      "required": false
     }
   ]
 }
@@ -452,28 +494,20 @@ The inspector provides several tabs for exploring your MCP server:
 
 #### 4. Testing Tools Interactively
 
-In the Tools tab, you can:
+The Tools tab provides a user-friendly way to test your MCP tools with real-time feedback:
 
-1. Select a tool from the list
-2. Fill in the required parameters
-3. Click "Execute" to run the tool
-4. View the response and any error messages
+**Interactive Testing Workflow:**
 
-Example tool execution:
-```json
-// Input
-{
-  "location": "San Francisco, CA"
-}
+The complete tool testing workflow is shown in the following diagram, which illustrates the step-by-step process from tool selection to result display:
 
-// Output
-{
-  "temperature": 22,
-  "condition": "Sunny",
-  "humidity": 60,
-  "wind_speed": 8
-}
-```
+![MCP Inspector Tool Testing Workflow](images/mcp-inspector-workflow.png)
+
+The workflow includes:
+- **Tool Selection**: Choose from available tools with auto-generated forms
+- **Parameter Input**: Fill in required and optional parameters with validation
+- **Execution**: Send requests and receive real-time responses
+- **Error Handling**: Display user-friendly error messages with debugging details
+- **Result Display**: Show formatted responses with syntax highlighting
 
 #### 5. Debugging Common Issues
 
@@ -524,13 +558,101 @@ Create a configuration file to manage multiple server connections:
 }
 ```
 
+### Complete MCP Inspector Workflow
+
+Here's a practical example of using MCP Inspector to develop and test a weather MCP server:
+
+#### **Development Workflow Example**
+
+**Step 1: Start Your MCP Server**
+```bash
+# Terminal 1: Start your weather server
+cd weather-mcp-server
+python server.py
+```
+
+**Step 2: Launch MCP Inspector**
+```bash
+# Terminal 2: Start inspector
+npx @modelcontextprotocol/inspector
+```
+
+**Step 3: Connect and Explore**
+
+Use the MCP Inspector connection interface (shown in the diagram above) to configure your server connection with the appropriate transport type and parameters.
+
+**Step 4: Test Each Capability**
+
+Once connected, use the main inspector interface to systematically test each tool with different parameters and observe the results. The interface provides real-time feedback and detailed request/response information.
+
+**Export Configuration:**
+After testing, export your server configuration for use with AI clients:
+
+```json
+{
+  "mcpServers": {
+    "weather": {
+      "command": "python",
+      "args": ["server.py"],
+      "env": {
+        "API_KEY": "your-weather-api-key"
+      }
+    }
+  }
+}
+```
+
 ### Best Practices for Using MCP Inspector
 
-1. **Development Workflow**: Use inspector during development to test each tool as you implement it
-2. **Integration Testing**: Validate that all tools work correctly before integrating with AI agents
-3. **Documentation**: Use inspector output to document your MCP server's capabilities
-4. **Debugging**: Use detailed logs to troubleshoot issues in production servers
-5. **Schema Validation**: Ensure your tool schemas are correctly defined and documented
+#### **Development Best Practices**
+
+1. **Test-Driven MCP Development**: 
+   - Write tool schemas first
+   - Test with inspector before implementing logic
+   - Validate error handling with invalid inputs
+
+2. **Real-Time Feedback Loop**:
+   ```
+   Code → Save → Inspector Auto-Refresh → Test → Iterate
+   ```
+
+3. **Documentation Generation**:
+   - Use inspector screenshots for documentation
+   - Export tool schemas for API documentation
+   - Test examples become usage documentation
+
+#### **Production Validation**
+
+**Pre-Deployment Checklist using MCP Inspector:**
+```
+☑ All tools execute without errors
+☑ Resource subscriptions work properly  
+☑ Prompt templates render correctly
+☑ Error messages are user-friendly
+☑ Input validation catches edge cases
+☑ Response formats match schemas
+☑ Performance is acceptable (<2s response time)
+```
+
+#### **Advanced Inspector Features**
+
+**Export to AI Clients:**
+- **Claude Desktop**: One-click export to `claude_desktop_config.json`
+- **Cursor**: Export configuration for Cursor IDE
+- **Custom Clients**: Generic JSON-RPC configuration
+
+**Real-Time Monitoring:**
+
+The MCP Inspector provides comprehensive real-time monitoring capabilities including:
+- **Connection Status**: Live connection health monitoring
+- **Request Metrics**: Track request counts, success rates, and response times
+- **Activity Logs**: Recent request history with detailed timing information  
+- **Performance Analytics**: Average response times and error rate analysis
+- **Message History**: Complete JSON-RPC message logs for debugging
+
+For detailed request/response flow analysis, refer to the following diagram:
+
+![MCP Inspector Request/Response Flow](images/mcp-inspector-request-response.png)
 
 ## Practical Applications and Use Cases
 
@@ -538,19 +660,19 @@ Create a configuration file to manage multiple server connections:
 
 **Scenario**: A company wants to make their customer database, inventory system, and analytics platform accessible to AI agents.
 
-**Solution**: Create MCP servers for each system, use ADK to build specialized agents for different business functions, and enable A2A communication for cross-departmental agent collaboration.
+**Solution**: Create MCP servers for each system, use ACP for efficient local agent coordination, and enable A2A communication for cross-departmental agent collaboration.
 
 ### 2. Multi-Vendor Service Integration  
 
 **Scenario**: A travel platform needs to integrate flight APIs from multiple airlines, hotel booking systems, and local activity providers.
 
-**Solution**: Each vendor provides A2A-compatible agents, the platform uses ADK to orchestrate booking workflows, and MCP servers handle the complex API integrations.
+**Solution**: Each vendor provides A2A-compatible agents, the platform uses ACP for local workflow coordination, and MCP servers handle the complex API integrations.
 
 ### 3. Research and Development Networks
 
 **Scenario**: Research institutions want to share specialized AI capabilities (data analysis, simulation, modeling) across organizations.
 
-**Solution**: Each institution deploys A2A-enabled agents with their specialized capabilities, researchers use ADK-built orchestration agents to compose complex research workflows, and MCP provides standardized access to research datasets and tools.
+**Solution**: Each institution deploys A2A-enabled agents with their specialized capabilities, researchers use ACP for efficient local agent orchestration, and MCP provides standardized access to research datasets and tools.
 
 ## Getting Started: Your Development Path
 
@@ -560,10 +682,10 @@ Create a configuration file to manage multiple server connections:
 - Add security and production deployment
 - Master LangChain integration
 
-### Phase 2: Mastering ADK (Session 6)
-- Create your first ADK agent
-- Understand agent orchestration patterns
-- Implement complex agent behaviors
+### Phase 2: Mastering Agent Communication (Sessions 6-7)
+- Understanding ACP for local agent coordination
+- Implementing A2A for cross-platform collaboration
+- Building multi-agent orchestration patterns
 
 ### Phase 3: Implementing A2A (Sessions 7-9)
 - Build agent-to-agent communication
@@ -573,7 +695,7 @@ Create a configuration file to manage multiple server connections:
 ## Key Takeaways
 
 1. **MCP** standardizes how AI agents access external data and tools, making integration simpler and more maintainable
-2. **ADK** provides the framework for building sophisticated agents with complex behaviors and error handling
+2. **ACP** enables efficient local agent coordination with minimal overhead, perfect for edge and offline scenarios
 3. **A2A** enables agents to discover and collaborate with each other across organizational boundaries
 4. **Together**, these technologies create a powerful ecosystem for building scalable, interoperable AI agent systems
 5. **MCP Inspector** is an essential tool for developing and debugging MCP servers effectively
@@ -582,11 +704,11 @@ Create a configuration file to manage multiple server connections:
 
 In the following sessions, you'll get hands-on experience building each component of this ecosystem. You'll start with basic MCP servers, progress through advanced agent architectures, and finish by deploying production-ready multi-agent systems that can operate at enterprise scale.
 
-The future of AI is not single agents working in isolation, but collaborative networks of specialized agents that can work together to solve complex problems. MCP, ADK, and A2A are the foundational technologies that make this vision possible.
+The future of AI is not single agents working in isolation, but collaborative networks of specialized agents that can work together to solve complex problems. MCP, ACP, and A2A are the foundational protocols that make this vision possible.
 
 ## Knowledge Check: Multiple Choice Quiz
 
-Test your understanding of MCP, ADK, and A2A concepts with this comprehensive quiz.
+Test your understanding of MCP, ACP, and A2A concepts with this comprehensive quiz.
 
 ### Question 1
 What is the primary purpose of the Model Context Protocol (MCP)?
@@ -613,7 +735,7 @@ C) Servers, Clients, and Bridges
 D) APIs, Databases, and Files
 
 ### Question 4
-Which Google technology provides a flexible orchestration framework for developing AI agents?
+Which protocol is designed for local-first agent coordination with minimal overhead?
 
 A) A2A (Agent-to-Agent)
 B) MCP (Model Context Protocol)
@@ -621,12 +743,12 @@ C) ADK (Agent Development Kit)
 D) ACP (Agent Communication Protocol)
 
 ### Question 5
-What is a key advantage of ADK compared to traditional AI frameworks?
+What is a key advantage of ACP compared to other agent protocols?
 
-A) It only works with Google's models
-B) It has built-in orchestration and error handling
-C) It requires less computational resources
-D) It doesn't support external tool integration
+A) It only works with cloud services
+B) It enables offline operation and local discovery
+C) It requires specialized SDK libraries
+D) It doesn't support multimodal communication
 
 ### Question 6
 How do agents discover each other in the A2A protocol?
@@ -645,10 +767,10 @@ C) JSON capability descriptors
 D) Protocol buffer definitions
 
 ### Question 8
-In the travel planning example, which technology handles access to customer preferences stored in a database?
+In the travel planning example, which protocol handles local agent coordination for data processing?
 
 A) A2A protocol
-B) ADK orchestration
+B) ACP registry
 C) MCP client/server
 D) Direct API calls
 
@@ -685,12 +807,12 @@ C) stdio (standard input/output) and other transports
 D) gRPC only
 
 ### Question 13
-In ADK, what happens when an agent encounters an error during task execution?
+In ACP, how do agents discover each other in offline environments?
 
-A) The agent stops and returns an error immediately
-B) The agent has built-in retry and fallback mechanisms
-C) The agent requires manual intervention to continue
-D) The agent restarts from the beginning
+A) Through cloud-based registries only
+B) Using local runtime discovery and embedded metadata
+C) They cannot discover each other offline
+D) Through manual configuration files
 
 ### Question 14
 Which of the following is NOT a key problem that A2A solves?
@@ -701,11 +823,11 @@ C) Model training optimization
 D) Cross-organization collaboration
 
 ### Question 15
-What is the recommended development path for mastering this technology stack?
+What is the recommended development path for mastering these protocols?
 
-A) Start with A2A, then ADK, then MCP
-B) Start with ADK, then MCP, then A2A
-C) Start with MCP, then ADK, then A2A
+A) Start with A2A, then ACP, then MCP
+B) Start with ACP, then MCP, then A2A
+C) Start with MCP, then ACP, then A2A
 D) Learn all three simultaneously
 
 ---

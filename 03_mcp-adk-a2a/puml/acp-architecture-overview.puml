@@ -1,0 +1,63 @@
+@startuml acp-architecture-overview
+!include ../../config/_standard-style.puml
+
+title Agent Communication Protocol (ACP) Architecture
+
+package "Local Runtime Environment" <<infra>> {
+  
+  package "Agent Registry" {
+    component "Local Discovery\nService" <<core>> as LDS
+    component "Capability\nIndex" <<storage>> as CI
+    component "Metadata\nStore" <<storage>> as MS
+  }
+  
+  package "Communication Layer" {
+    component "REST/HTTP\nEndpoints" <<api>> as REST
+    component "Message\nRouter" <<core>> as MR
+    component "Stream\nManager" <<core>> as SM
+  }
+  
+  package "Active Agents" {
+    component "Agent A\n(LangChain)" <<agent>> as A1
+    component "Agent B\n(CrewAI)" <<agent>> as A2
+    component "Agent C\n(BeeAI)" <<agent>> as A3
+    component "Agent D\n(Custom)" <<agent>> as A4
+  }
+}
+
+package "Edge/Offline Features" <<util>> {
+  component "Embedded\nMetadata" as EM
+  component "Scale-to-Zero\nSupport" as SZ
+  component "Local\nPersistence" as LP
+}
+
+note right of LDS : Agents discover peers\nwithout internet
+
+note left of REST : Standard HTTP\nno special libraries
+
+' Registry connections
+A1 --> LDS : register
+A2 --> LDS : register
+A3 --> LDS : register
+A4 --> LDS : register
+
+LDS --> CI : indexes
+CI --> MS : stores
+
+' Communication connections
+A1 <--> MR : messages
+A2 <--> MR : messages
+A3 <--> MR : messages
+A4 <--> MR : messages
+
+MR --> REST : exposes
+MR --> SM : streams
+
+' Edge features
+EM ..> MS : provides
+SZ ..> LDS : enables
+LP ..> MS : backs
+
+note bottom : ACP enables agent coordination in\ndisconnected environments with minimal overhead
+
+@enduml

@@ -1,0 +1,80 @@
+@startuml mcp-inspector-connection
+!include ../../config/_standard-style.puml
+
+title MCP Inspector Connection Interface
+
+rectangle "MCP Inspector Web Interface" as inspector {
+  rectangle "Connection Configuration" as config {
+    [Server Name] <<util>> as name
+    [Transport Type] <<core>> as transport  
+    [Command/URL] <<api>> as command
+    [Arguments] <<util>> as args
+    [Environment] <<util>> as env
+  }
+  
+  rectangle "Connection Controls" as controls {
+    [Connect Button] <<core>> as connect
+    [Status Indicator] <<util>> as status
+  }
+  
+  rectangle "Configuration Management" as mgmt {
+    [Save Config] <<storage>> as save
+    [Load Config] <<storage>> as load
+    [Export for Claude] <<api>> as export
+  }
+}
+
+rectangle "MCP Server Process" as server {
+  [Python/Node Server] <<external>> as process
+  [Server Implementation] <<core>> as impl
+}
+
+rectangle "Connection Types" as types {
+  [stdio Transport] <<infra>> as stdio
+  [HTTP Transport] <<infra>> as http
+  [WebSocket Transport] <<infra>> as ws
+}
+
+' Connection flow
+name SYNC_LINE transport : Configure
+transport SYNC_LINE command : Set Command
+command SYNC_LINE args : Add Args
+env SYNC_LINE connect : Environment Ready
+
+connect SYNC_LINE status : Connection Status
+connect SYNC_LINE server : Establish Connection
+
+' Transport options
+transport OPTIONAL_LINE stdio : Local Process
+transport OPTIONAL_LINE http : HTTP Server
+transport OPTIONAL_LINE ws : WebSocket Server
+
+stdio SYNC_LINE process : Launch Process
+http SYNC_LINE process : HTTP Request
+ws SYNC_LINE process : WebSocket Connect
+
+' Configuration management
+save SYNC_LINE mgmt : Store Settings
+load SYNC_LINE mgmt : Restore Settings
+export SYNC_LINE mgmt : Claude Desktop Config
+
+note right of config
+  **Common Configurations:**
+  • stdio://python server.py
+  • http://localhost:8080
+  • ws://localhost:8080/mcp
+  
+  **Environment Variables:**
+  • API_KEY=your-key
+  • DEBUG=true
+end note
+
+note left of status
+  **Connection States:**
+  🟢 Connected
+  🟡 Connecting
+  🔴 Disconnected
+  ⚠️ Error
+end note
+
+@enduml
