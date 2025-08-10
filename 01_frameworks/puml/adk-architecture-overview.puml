@@ -1,0 +1,62 @@
+@startuml adk-architecture-overview
+!include ../../config/_standard-style.puml
+
+title Agent Development Kit (ADK) Architecture
+
+package "Agent Layer" {
+  component "LLM Agents\n(Intelligent Reasoning)" <<agent>> as LA
+  component "Workflow Agents\n(Orchestration)" <<agent>> as WA
+  component "Custom Agents\n(Specialized Logic)" <<agent>> as CA
+}
+
+package "Core Components" <<core>> {
+  component "Runners\n(Execution Management)" as R
+  component "Sessions\n(State & Memory)" as S
+  component "Events\n(Communication)" as E
+}
+
+package "Tool Ecosystem" {
+  component "Pre-built Tools\n(Search, Code, Files)" <<util>> as PT
+  component "MCP Tools\n(External Systems)" <<api>> as MT
+  component "Third-party Tools\n(LangChain, LlamaIndex)" <<external>> as TT
+}
+
+package "Model Layer" {
+  cloud "Gemini Models" <<external>> as G
+  cloud "Vertex AI Models" <<external>> as V
+  cloud "LiteLLM\n(Multi-Provider)" <<external>> as L
+}
+
+package "Deployment Targets" <<infra>> {
+  component "Cloud Run" as CR
+  component "Kubernetes" as K8
+  component "Vertex AI" as VAI
+}
+
+' Agent to Core connections
+LA --> R : orchestrates
+WA --> R : orchestrates
+CA --> R : orchestrates
+
+' Core internal connections
+R <--> S : manages state
+R <--> E : handles events
+
+' Core to Tools connections
+R --> PT : invokes
+R --> MT : invokes
+R --> TT : invokes
+
+' Agent to Model connections
+LA ASYNC_LINE G : inference
+LA ASYNC_LINE V : inference
+LA ASYNC_LINE L : inference
+
+' Core to Deployment connections
+R ..> CR : deploys to
+R ..> K8 : deploys to
+R ..> VAI : deploys to
+
+note bottom : ADK provides code-first Python framework\nfor building production-ready AI agents
+
+@enduml

@@ -1,0 +1,134 @@
+@startuml mcp-inspector-workflow
+!include ../../config/_standard-style.puml
+
+title MCP Inspector Tool Testing Workflow
+
+participant "Developer" as dev
+participant "MCP Inspector\nBrowser" as inspector
+participant "MCP Inspector\nBackend" as backend  
+participant "MCP Server\nProcess" as server
+participant "External API/\nDatabase" as external
+
+== Connection Phase ==
+dev -> inspector : Open http://localhost:6274
+inspector -> backend : Initialize Web Interface
+backend -> server : Establish Connection\n(stdio/http/ws)
+server -> backend : Connection Confirmed
+backend -> inspector : Display Connection Status ✅
+inspector -> dev : Show Connected Interface
+
+== Tool Discovery Phase ==
+inspector -> backend : Request Available Capabilities
+backend -> server : tools/list JSON-RPC request
+server -> backend : Return tools list with schemas
+backend -> inspector : Display Tools in UI
+inspector -> dev : Show Interactive Tool Forms
+
+== Tool Testing Phase ==
+dev -> inspector : Select "get_weather" tool
+inspector -> dev : Display Parameter Form\n(auto-generated from schema)
+
+note over inspector
+  **Form Generation:**
+  • location: text input (required)
+  • format: dropdown (optional)
+  • Validation rules from schema
+end note
+
+dev -> inspector : Fill in parameters\nlocation: "San Francisco"
+inspector -> inspector : Validate Parameters\n(client-side validation)
+
+alt Validation Success
+  dev -> inspector : Click "Execute" button
+  inspector -> backend : Send tool execution request
+  
+  note over backend
+    **JSON-RPC Request:**
+    {
+      "method": "tools/call",
+      "params": {
+        "name": "get_weather", 
+        "arguments": {
+          "location": "San Francisco"
+        }
+      }
+    }
+  end note
+  
+  backend -> server : Forward JSON-RPC request
+  server -> external : Make API call
+  external -> server : Return weather data
+  server -> backend : JSON-RPC response with content
+  
+  note over backend
+    **JSON-RPC Response:**
+    {
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Temperature: 22°C..."
+          }
+        ]
+      }
+    }
+  end note
+  
+  backend -> inspector : Display formatted response
+  inspector -> dev : Show results with syntax highlighting
+  
+else Validation Error
+  inspector -> dev : Show validation errors\n"Location is required"
+end
+
+== Error Handling Test ==
+dev -> inspector : Enter invalid location: "InvalidCity"
+dev -> inspector : Click "Execute"
+inspector -> backend : Send request
+backend -> server : Forward request
+server -> external : Attempt API call
+external -> server : Return error (404 Not Found)
+server -> backend : Error response
+
+note over backend
+  **Error Response:**
+  {
+    "error": {
+      "code": "INVALID_PARAMS",
+      "message": "Location 'InvalidCity' not found"
+    }
+  }
+end note
+
+backend -> inspector : Display error information
+inspector -> dev : Show user-friendly error\nwith debugging details
+
+== Advanced Testing Phase ==
+dev -> inspector : Test complex tool\n"analyze_weather_data"
+inspector -> dev : Show multi-parameter form\n(date ranges, checkboxes, etc.)
+dev -> inspector : Fill complex parameters
+dev -> inspector : Execute tool
+inspector -> backend : Send complex request
+backend -> server : Process with multiple validations
+server -> external : Multiple API calls
+external -> server : Aggregated data
+server -> backend : Complex response
+backend -> inspector : Display structured results
+inspector -> dev : Show formatted tables/charts
+
+== Debugging Information ==
+inspector -> dev : Display Request History
+inspector -> dev : Show Response Times
+inspector -> dev : Export Configuration\nfor Claude Desktop
+
+note right of dev
+  **Developer Benefits:**
+  ✅ Real-time testing
+  ✅ Schema validation
+  ✅ Error debugging
+  ✅ Response formatting
+  ✅ Configuration export
+  ✅ Request logging
+end note
+
+@enduml
