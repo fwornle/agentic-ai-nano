@@ -14,12 +14,28 @@ The **Model Context Protocol (MCP)** is an open standard that transforms how Lar
 
 ![MCP](images/mcp-overview.png)
 
+### The M×N Integration Problem
+
+Imagine a world where:
+- **M = 5 different AI applications** (Claude, ChatGPT, Gemini, GitHub Copilot, Custom agents)
+- **N = 10 different data sources** (PostgreSQL, Salesforce, GitHub, Google Drive, Slack, etc.)
+
+Without MCP, you would need to build **50 custom integrations** (M × N = 5 × 10). Each AI application would need its own connector for each data source, leading to:
+
+- **Exponential complexity**: Adding one new AI app requires N new integrations
+- **Maintenance nightmare**: Changes to one data source require updates across M integrations
+- **Inconsistent implementations**: Each integration might handle the same data source differently
+- **Developer overhead**: Teams spend more time on integration plumbing than AI functionality
+
+![M×N Problem Illustration](images/mxn-problem.png)
+
 ### Key Problems MCP Solves
 
-1. **API Complexity**: Enterprise APIs often have complex authentication, data formats, and interaction patterns that are difficult for LLMs to navigate
-2. **Context Management**: LLMs need structured ways to access and understand external data sources
-3. **Tool Integration**: Different AI frameworks require different approaches to integrate the same tools
-4. **Scalability**: Manual integration of each API with each AI system doesn't scale
+1. **Integration Explosion**: Reduces M×N integrations to M+N by providing a standard protocol
+2. **API Complexity**: Enterprise APIs often have complex authentication, data formats, and interaction patterns that are difficult for LLMs to navigate
+3. **Context Management**: LLMs need structured ways to access and understand external data sources
+4. **Tool Integration**: Different AI frameworks require different approaches to integrate the same tools
+5. **Scalability**: Manual integration of each API with each AI system doesn't scale
 
 ### How MCP Works
 
@@ -63,16 +79,64 @@ Any MCP-compatible AI system can now use this database functionality without cus
 
 ### Core Concept
 
-Google's **Agent Development Kit (ADK)** is a flexible orchestration framework designed for developing sophisticated AI agents. ADK provides the infrastructure for building agents that can handle complex, multi-step tasks with built-in error handling, state management, and tool integration.
+Google's **Agent Development Kit (ADK)** is an open-source, code-first Python framework for building, evaluating, and deploying sophisticated AI agents with flexibility and control. Released in 2025, ADK is the same framework powering agents within Google products like Agentspace and the Google Customer Engagement Suite.
+
+![ADK Architecture Overview](images/adk-architecture-overview.png)
+
+### Philosophy: Making Agent Development Feel Like Software Development
+
+ADK was designed with the principle that **agent development should feel like traditional software development**. This means:
+
+- **Code-first approach**: Define agent logic directly in Python, not configuration files
+- **Testability**: Write unit tests for agent behaviors and tool integrations
+- **Version control**: Manage agent logic like any other software artifact
+- **Modularity**: Compose complex systems from reusable agent components
+
+### Core Architecture Components
+
+ADK's architecture consists of several key components that work together:
+
+1. **Agents**: The central decision-making entities
+   - **LLM Agents**: Use Large Language Models for intelligent reasoning
+   - **Workflow Agents**: Orchestrate other agents in complex patterns
+   - **Custom Agents**: Specialized implementations for unique requirements
+
+2. **Tools**: Functions that agents can use to perform actions
+   - Pre-built tools (Search, Code Execution, File Operations)
+   - Model Context Protocol (MCP) tools
+   - Third-party integrations (LangChain, LlamaIndex)
+   - Other agents as tools (hierarchical composition)
+
+3. **Runners**: Components that manage agent execution flow
+   - Handle message routing and state management
+   - Orchestrate communication between agents
+   - Manage event-driven workflows
+
+4. **Sessions**: Maintain conversation context and state
+   - Persistent memory across interactions
+   - User preference learning
+   - Multi-turn conversation management
+
+5. **Events**: Communication mechanism between components
+   - Represent steps in agent execution
+   - Enable debugging and monitoring
+   - Support real-time streaming interactions
 
 ### Key Features of ADK
 
-1. **Flexible Agent Architecture**: Build agents with custom capabilities and behaviors
-2. **Built-in Orchestration**: Handle complex workflows with multiple steps and decision points
-3. **Tool Integration**: Seamlessly integrate with various APIs and services
-4. **State Management**: Maintain conversation and task state across interactions
-5. **Error Handling**: Robust error recovery and fallback mechanisms
-6. **Framework Agnostic**: Works with LangChain, CrewAI, and other AI frameworks
+1. **Multi-Agent by Design**: Build modular, scalable applications by composing multiple specialized agents in hierarchical, parallel, or sequential workflows
+
+2. **Model Flexibility**: Works with Gemini (optimized), Vertex AI Model Garden, and LiteLLM integration for providers like Anthropic, Meta, Mistral AI, and AI21 Labs
+
+3. **Built-in Orchestration**: Handle complex workflows with multiple steps, decision points, and error recovery
+
+4. **Rich Tool Ecosystem**: Seamlessly integrate with various APIs, databases, and services using standardized tool interfaces
+
+5. **Streaming Capabilities**: Support real-time interaction including bidirectional audio/video streaming
+
+6. **Agent-to-Agent Communication**: Built-in A2A protocol support for cross-organizational collaboration
+
+7. **Production Ready**: Easy containerization and deployment to Cloud Run, Kubernetes, or Vertex AI
 
 ### ADK Agent Structure
 

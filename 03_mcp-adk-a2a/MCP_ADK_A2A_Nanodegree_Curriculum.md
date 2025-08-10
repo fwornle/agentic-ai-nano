@@ -1,203 +1,92 @@
 # Agentic AI Protocols: MCP, ADK & A2A
-## 2-Week Nanodegree Segment
+## 2-Week Nanodegree Module
 
-### 🎯 **Course Overview**
-This intensive 2-week module teaches students to build production-ready agent communication systems using the Model Context Protocol (MCP), Agent Development Kit (ADK), and Agent-to-Agent (A2A) protocols. Students emerge with practical skills to create interoperable, distributed agent architectures.
+### 🎯 **Module Overview**
+This self-paced 2-week module provides comprehensive instruction on building production-ready agent communication systems using the Model Context Protocol (MCP), Agent Development Kit (ADK), and Agent-to-Agent (A2A) protocols. Through hands-on tutorials and practical examples, you'll develop skills to create interoperable, distributed agent architectures.
 
 ![Distributed Agent Systems](images/mcp-adk-a2a.png)
 
 
 ### 📋 **Prerequisites**
-- Completed Agent Frameworks module (Week -4 to -3)
-- Completed RAG module (Week -2 to -1) 
-- Python programming experience
+- Completed Agent Frameworks module
+- Completed RAG module
+- Python programming experience (intermediate level)
 - Basic understanding of HTTP/REST APIs
-- Familiarity with LLM APIs
+- Familiarity with LLM APIs and JSON-RPC protocols
+- Experience with virtual environments and package management
 
 ---
 
 ## **Week 1: MCP Fundamentals & Implementation**
 
-### **Day 1-2: MCP Foundation & Architecture**
+### **Session 0: Introduction to MCP, ADK, and A2A (Self-Study)**
+**Content:** Understanding the ecosystem, M×N integration problem, and technology overview
+**Materials:** Session0_Introduction_to_MCP_ADK_A2A.md
+**Self-Check:** 15-question multiple choice quiz covering core concepts
 
-#### **Learning Objectives:**
-- Understand the MCP ecosystem and solve the M×N integration problem
-- Master the three core MCP primitives: Tools, Resources, and Prompts
-- Set up development environment with MCP SDKs
+### **Session 1: Building Your First MCP Server**
+**Content:** Hands-on creation of weather information MCP server with tools, resources, and prompts
+**Materials:** Session1_Basic_MCP_Server.md + Session1_Basic_MCP_Server-solution.md
+**Self-Check:** Multiple choice quiz covering MCP server development concepts
 
-#### **Session 1: MCP Introduction & Setup (2 hours)**
-**Theory (45 min):**
-- The M×N problem in AI integrations
-- MCP architecture: Client, Server, Host relationship
-- Transport mechanisms: stdio vs HTTP
-- Official MCP specification walkthrough
+### **Session 2: File System MCP Server**
+**Content:** Building advanced MCP server with file operations, error handling, and security
+**Materials:** Session2_FileSystem_MCP_Server.md + Session2_FileSystem_MCP_Server-solution.md
+**Self-Check:** Multiple choice quiz covering file system integration and security
 
-**Hands-on Lab 1 (75 min): Basic MCP Server**
-```python
-# First MCP server using FastMCP
-from mcp.server.fastmcp import FastMCP
+### **Session 3: LangChain MCP Integration**
+**Content:** Client development patterns, tool discovery, and framework integration
+**Materials:** Session3_LangChain_MCP_Integration.md + Session3_LangChain_MCP_Integration-solution.md
+**Self-Check:** Multiple choice quiz covering client integration patterns
 
-mcp = FastMCP("Hello World")
+### **Session 4: Production MCP Deployment**
+**Content:** Containerization, cloud deployment, authentication, and monitoring
+**Materials:** Session4_Production_MCP_Deployment.md + Session4_Production_MCP_Deployment-solution.md
+**Self-Check:** Multiple choice quiz covering deployment and production concerns
 
-@mcp.tool()
-def greet(name: str) -> str:
-    """Greet a person by name"""
-    return f"Hello, {name}!"
-
-@mcp.resource("greeting://template")
-def greeting_template() -> str:
-    """Get greeting template"""
-    return "Use this format: Hello, [NAME]!"
-```
-
-**Resources:**
-- [MCP Official Docs](https://modelcontextprotocol.io/)
-- [DataCamp MCP Tutorial](https://www.datacamp.com/tutorial/mcp-model-context-protocol)
-
-#### **Session 2: Advanced MCP Server Development (2 hours)**
-**Theory (30 min):**
-- Resource management and lifecycle
-- Error handling and validation
-- Security considerations
-
-**Hands-on Lab 2 (90 min): File System MCP Server**
-Build a server that exposes file operations as MCP tools and resources.
-
-### **Day 3-4: MCP Client Integration**
-
-#### **Session 3: MCP Client Development (2 hours)**
-**Theory (30 min):**
-- Client connection patterns
-- Tool discovery and invocation
-- Resource subscription
-
-**Hands-on Lab 3 (90 min): LangChain MCP Integration**
-```python
-from langchain_mcp_adapters.client import MultiServerMCPClient
-from langgraph.prebuilt import create_react_agent
-
-# Connect to multiple MCP servers
-client = MultiServerMCPClient({
-    "filesystem": {"command": "python", "args": ["fs_server.py"]},
-    "weather": {"url": "http://weather-server:8080"}
-})
-
-tools = await client.get_tools()
-agent = create_react_agent("openai:gpt-4", tools)
-```
-
-**Resources:**
-- [LangChain MCP Adapters](https://github.com/langchain-ai/langchain-mcp-adapters)
-
-#### **Session 4: Production MCP Deployment (2 hours)**
-**Hands-on Lab 4 (120 min): Deploy MCP Server to Cloud**
-- Containerize MCP server
-- Deploy to Cloud Run/AWS Lambda
-- Configure authentication and monitoring
-
-### **Day 5: MCP Security & Best Practices**
-
-#### **Session 5: Securing MCP Communications (2 hours)**
-**Theory (45 min):**
-- Authentication strategies
-- Input validation and sanitization
-- Rate limiting and resource protection
-
-**Hands-on Lab 5 (75 min): Secure MCP Server**
-Implement JWT authentication and input validation for MCP servers.
-
-**Resources:**
-- [MCP Security Considerations](https://medium.com/data-science-collective/mcp-is-a-security-nightmare-heres-how-the-agent-security-framework-fixes-it-fd419fdfaf4e)
+### **Session 5: Secure MCP Server**
+**Content:** Authentication strategies, input validation, rate limiting, and security best practices
+**Materials:** Session5_Secure_MCP_Server.md + Session5_Secure_MCP_Server-solution.md
+**Self-Check:** Multiple choice quiz covering security implementation
 
 ---
 
 ## **Week 2: ADK & A2A Distributed Systems**
 
-### **Day 6-7: Agent Development Kit (ADK)**
+### **Session 6: Building Your First ADK Agent**
+**Content:** ADK architecture, agent lifecycle, MCP integration, and Google Cloud deployment
+**Materials:** Session6_First_ADK_Agent.md + Session6_First_ADK_Agent-solution.md
+**Self-Check:** Multiple choice quiz covering ADK fundamentals and agent creation
 
-#### **Session 6: ADK Fundamentals (2 hours)**
-**Theory (45 min):**
-- ADK architecture and components
-- Agent lifecycle management
-- Integration with MCP servers
+### **Session 7: Agent-to-Agent Communication (A2A)**
+**Content:** A2A protocol fundamentals, agent discovery, communication patterns, and multi-agent coordination
+**Materials:** Session7_Agent_to_Agent_Communication.md + Session7_Agent_to_Agent_Communication-solution.md
+**Self-Check:** Multiple choice quiz covering A2A protocol and agent communication
 
-**Hands-on Lab 6 (75 min): First ADK Agent**
-```python
-# Currency conversion agent using ADK
-from google.cloud import adk
+### **Session 8: Advanced Agent Workflows**
+**Content:** Complex multi-agent orchestration, workflow patterns, and advanced coordination techniques
+**Materials:** Session8_Advanced_Agent_Workflows.md + Session8_Advanced_Agent_Workflows-solution.md
+**Self-Check:** Multiple choice quiz covering advanced workflow patterns
 
-agent = adk.Agent(
-    name="currency-agent",
-    model="gemini-2.0-flash",
-    system_instruction="You are a currency conversion expert."
-)
+### **Session 9: Production Agent Deployment**
+**Content:** Deploying distributed agent networks with fault tolerance, scaling, and monitoring
+**Materials:** Session9_Production_Agent_Deployment.md + Session9_Production_Agent_Deployment-solution.md
+**Self-Check:** Multiple choice quiz covering production deployment strategies
 
-# Connect to MCP server
-agent.add_mcp_server("currency", "http://currency-mcp:8080")
-```
+## **Capstone Project: Distributed Agent Ecosystem**
 
-**Resources:**
-- [Currency Agent Codelab](https://codelabs.developers.google.com/codelabs/currency-agent#0)
+**Project Overview:** Build a comprehensive multi-agent system demonstrating MCP, ADK, and A2A integration
 
-#### **Session 7: Advanced ADK Patterns (2 hours)**
-**Hands-on Lab 7 (120 min): Multi-Tool Agent System**
-Build an agent that coordinates multiple MCP servers for complex workflows.
-
-### **Day 8-9: Agent-to-Agent (A2A) Protocol**
-
-#### **Session 8: A2A Protocol Foundation (2 hours)**
-**Theory (45 min):**
-- A2A vs MCP: Agent collaboration vs tool integration
-- Agent discovery through Agent Cards
-- Communication patterns: sync/async, streaming
-
-**Hands-on Lab 8 (75 min): Basic A2A Server**
-```python
-from a2a import A2AServer
-
-# Expose agent via A2A protocol
-server = A2AServer(
-    agent_id="currency-agent",
-    capabilities=["currency_conversion", "financial_data"]
-)
-
-@server.handle_request
-async def process_request(request):
-    # Handle A2A communication
-    return await agent.process(request)
-```
-
-**Resources:**
-- [A2A Protocol Specification](https://a2aprotocol.ai/)
-- [Google A2A Blog Post](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)
-
-#### **Session 9: Multi-Agent Orchestration (2 hours)**
-**Hands-on Lab 9 (120 min): Agent Network**
-Create a network of specialized agents communicating via A2A protocol.
-
-### **Day 10: Capstone Project**
-
-#### **Final Project: Distributed Agent Ecosystem (4 hours)**
-**Project Requirements:**
-Build a multi-agent system with:
-1. **Data Agent** (MCP server): Provides database/API access
-2. **Analysis Agent** (ADK): Processes and analyzes data
-3. **Reporting Agent** (A2A): Generates and distributes reports
-4. **Orchestrator Agent** (A2A): Coordinates the workflow
-
-**Technical Specifications:**
-- Minimum 2 MCP servers with 3+ tools each
-- 3+ agents communicating via A2A protocol
-- Authentication and error handling
-- Deployed to cloud platform
-- Monitoring and logging
+**Requirements:**
+- Implement multiple specialized agents using ADK
+- Create MCP servers for data access and tool integration
+- Enable A2A communication between agents
+- Deploy to production environment with monitoring
 
 **Deliverables:**
-- Complete source code repository
-- Deployment configuration
-- API documentation
-- Demo video (5 minutes)
-- Architecture diagram
+- Complete source code with documentation
+- Working deployment with monitoring dashboard
+- Architecture documentation and API specifications
 
 ---
 
@@ -255,22 +144,23 @@ By completion, students will be able to:
 
 ---
 
-## **📊 Assessment Structure**
+## **📊 Self-Assessment Structure**
 
-### **Continuous Assessment (60%)**
-- **Lab Exercises** (30%): 9 hands-on labs with code submissions
-- **Mini-Projects** (20%): 3 intermediate projects throughout the course
-- **Participation** (10%): Code reviews, discussion forums, peer feedback
+### **Knowledge Checks**
+Each session includes multiple choice quizzes to verify understanding of key concepts:
+- **Session 0**: 15 questions covering MCP, ADK, and A2A fundamentals
+- **Sessions 1-9**: 8-12 questions per session covering specific implementation topics
+- **Capstone Project**: Self-evaluation checklist for project completeness
 
-### **Final Assessment (40%)**
-- **Capstone Project** (35%): Complete distributed agent system
-- **Technical Presentation** (5%): 10-minute demo and Q&A
+### **Practical Validation**
+- **Code Examples**: Each session provides working code examples with solutions
+- **Hands-on Tutorials**: Step-by-step implementation guides for all major concepts
+- **Self-Check Activities**: Verify your implementations work as expected
 
-### **Grading Rubric**
-- **Exceeds Expectations (A)**: Implements advanced features, excellent documentation, innovative approaches
-- **Meets Expectations (B)**: Functional implementation, good documentation, follows specifications
-- **Below Expectations (C)**: Basic functionality, minimal documentation, some specification gaps
-- **Unsatisfactory (F)**: Non-functional or incomplete implementation
+### **Progress Tracking**
+- Complete all session materials and quizzes to demonstrate mastery
+- Successfully implement and test all code examples
+- Build and deploy the capstone project following provided specifications
 
 ---
 
@@ -304,29 +194,29 @@ docker
 
 ---
 
-## **🎓 Certificate Requirements**
+## **🎓 Completion Requirements**
 
-To earn the certificate, students must:
-1. Complete all 9 lab exercises with passing grades (70%+)
-2. Submit functional capstone project meeting all requirements
-3. Participate in peer code reviews and discussions
-4. Pass technical interview demonstrating understanding
+To successfully complete this nanodegree module:
+1. Study all session materials (Sessions 0-9)
+2. Complete all multiple choice quizzes with satisfactory scores
+3. Successfully implement all code examples and tutorials
+4. Build and deploy the capstone project demonstrating integration of all three technologies
 
-**Certificate Title:** "Certified in Agentic AI Protocols: MCP, ADK & A2A"
+**Completion Recognition:** "MCP, ADK & A2A Nanodegree Module Certificate"
 
 ---
 
-## **👥 Learning Community**
+## **📚 Self-Study Support**
 
-### **Support Channels**
-- **Discord Server**: Real-time Q&A and peer support
-- **GitHub Organization**: Code sharing and collaboration
-- **Office Hours**: Twice weekly with instructors
-- **Study Groups**: Peer-organized technical discussions
+### **Available Resources**
+- **Comprehensive Documentation**: Each session includes detailed explanations and examples
+- **Solution Code**: Complete implementations provided for all exercises
+- **External References**: Curated links to official documentation and tutorials
+- **Community Resources**: Links to relevant GitHub repositories and developer communities
 
-### **Industry Connections**
-- **Guest Speakers**: Engineers from Anthropic, Google, LangChain
-- **Project Mentors**: Industry professionals providing guidance
-- **Career Services**: Portfolio reviews and interview preparation
+### **Learning Path**
+1. **Week 1**: Master MCP fundamentals through hands-on server and client development
+2. **Week 2**: Explore ADK agent creation and A2A protocol implementation
+3. **Capstone**: Integrate all technologies in a production-ready distributed system
 
-This curriculum provides a comprehensive, hands-on introduction to the cutting-edge protocols shaping the future of agentic AI systems. Students gain practical experience building the interoperable, distributed agent architectures that will power next-generation AI applications.
+This module provides comprehensive, self-paced instruction on the cutting-edge protocols shaping the future of agentic AI systems. You'll gain practical experience building interoperable, distributed agent architectures that power next-generation AI applications.
