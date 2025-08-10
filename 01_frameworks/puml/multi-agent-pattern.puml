@@ -1,0 +1,82 @@
+@startuml multi-agent-pattern
+!include ../../config/_standard-style.puml
+
+title Multi-Agent Pattern: Collaborative Intelligence
+
+actor "User" as user
+participant "Orchestrator Agent" as orchestrator
+
+box "Research Team"
+participant "Market Researcher" as researcher
+participant "Technical Analyst" as tech_analyst
+participant "Financial Analyst" as financial
+end box
+
+box "Content Team" 
+participant "Content Writer" as writer
+participant "Data Visualizer" as visualizer
+participant "Reviewer" as reviewer
+end box
+
+user -> orchestrator : "Create a comprehensive analysis of the AI agent market\nfor our investment committee"
+
+activate orchestrator
+
+orchestrator -> researcher : "Research AI agent market trends,\ncompetitors, and growth projections"
+activate researcher
+
+orchestrator -> tech_analyst : "Analyze technical capabilities and\ninnovation patterns in agent frameworks"
+activate tech_analyst
+
+orchestrator -> financial : "Examine market valuations, funding,\nand revenue models"
+activate financial
+
+note over researcher, financial : **Parallel Research Phase**
+
+researcher -> researcher : • Survey 50+ AI agent companies\n• Analyze market size and growth\n• Identify key trend patterns
+researcher -> orchestrator : **Market Research Results:**\n• Market size: $4.2B (2024)\n• Growth rate: 45% annually\n• Key players: OpenAI, Anthropic, LangChain\n• Emerging trends: Multi-agent systems
+
+tech_analyst -> tech_analyst : • Evaluate framework capabilities\n• Assess technical differentiation\n• Review innovation roadmaps
+tech_analyst -> orchestrator : **Technical Analysis:**\n• LangChain leads ecosystem (40% market share)\n• ReAct pattern adoption: 78% of implementations\n• Performance gap: 10x between frameworks\n• Key innovation: Graph-based orchestration
+
+financial -> financial : • Analyze funding rounds and valuations\n• Research revenue models\n• Project market opportunities
+financial -> orchestrator : **Financial Analysis:**\n• Total funding: $2.1B in 2024\n• Average valuation: 25x revenue\n• Revenue models: SaaS (60%), Usage-based (40%)\n• Investment opportunity: $500M-1B market
+
+deactivate researcher
+deactivate tech_analyst  
+deactivate financial
+
+note over orchestrator : **Synthesis Phase**\nCombine research findings into coherent narrative
+
+orchestrator -> writer : "Create executive summary and\ninvestment recommendations based on research"
+activate writer
+
+orchestrator -> visualizer : "Create charts and graphs for\nkey market data and trends"
+activate visualizer
+
+writer -> writer : • Synthesize research findings\n• Craft compelling narrative\n• Develop investment thesis
+visualizer -> visualizer : • Design market size charts\n• Create competitor comparison matrix\n• Build trend visualization
+
+writer -> orchestrator : **Draft Report:** 15-page investment analysis\nwith executive summary and recommendations
+visualizer -> orchestrator : **Visual Assets:** 8 charts and graphs\nillustrating market dynamics
+
+deactivate writer
+deactivate visualizer
+
+orchestrator -> reviewer : "Review complete report for accuracy,\nclarity, and investment committee needs"
+activate reviewer
+
+reviewer -> reviewer : • Fact-check all data points\n• Verify logical flow\n• Ensure executive focus
+reviewer -> orchestrator : **Quality Check:** Report approved\nwith minor formatting suggestions
+
+deactivate reviewer
+
+orchestrator -> orchestrator : Apply final formatting and compile final report
+
+orchestrator -> user : **Comprehensive AI Agent Market Analysis**\n\n**📊 Executive Summary:**\n• Market Opportunity: $4.2B growing at 45% annually\n• Investment Thesis: Early-stage market with clear winners emerging\n• Recommendation: $50M investment across 3-5 portfolio companies\n\n**🔍 Key Findings:**\n• Technical differentiation drives 90% of value creation\n• Multi-agent systems represent next innovation wave\n• Revenue models stabilizing around SaaS + usage hybrid\n\n**📈 Market Dynamics:**\n• 78% of implementations use ReAct patterns\n• LangChain ecosystem dominates (40% market share)\n• Performance optimization becoming key differentiator\n\n**💰 Financial Projections:**\n• Market expected to reach $15B by 2027\n• Current average valuation: 25x revenue\n• Funding velocity: $2.1B invested in 2024\n\n**🎯 Investment Recommendations:**\n1. Lead Series A in performance-focused framework (Agno)\n2. Participate in infrastructure round (LangChain ecosystem)\n3. Seed investment in vertical-specific solutions\n\n**📋 Includes:** Full report (15 pages) + 8 supporting visualizations\n**✅ Quality Assured:** Multi-agent review and fact-checking complete
+
+deactivate orchestrator
+
+note right of orchestrator : **Multi-Agent Benefits:**\n• Parallel processing = faster results\n• Specialized expertise = higher quality\n• Built-in quality control = reliability\n• Scalable team structure = handles complexity\n• Debate and consensus = better decisions
+
+@enduml

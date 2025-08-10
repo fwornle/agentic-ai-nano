@@ -1,0 +1,50 @@
+@startuml agent-evolution-overview
+!include ../../config/_standard-style.puml
+
+title Agent Evolution: From Prompts to Agentic Systems
+
+package "Traditional Prompting" as traditional {
+  component "User Query" as query1
+  component "LLM" as llm1  
+  component "Response" as response1
+  
+  query1 --> llm1 : "What's the weather?"
+  llm1 --> response1 : "I don't have access to current weather data"
+  
+  note bottom of llm1 : No external access\nNo memory\nNo reasoning\nBrittle responses
+}
+
+package "Agentic Systems" as agentic {
+  component "User Goal" as goal
+  component "Agent Core" as agent {
+    component "Reasoning Engine" as reasoning
+    component "Memory System" as memory
+    component "Tool Registry" as tools
+    component "Planning Module" as planning
+  }
+  
+  component "External Tools" as external {
+    component "Weather API" as weather
+    component "Database" as db
+    component "Web Search" as search
+    component "Calculator" as calc
+  }
+  
+  component "Multi-Step Solution" as solution
+  
+  goal --> agent : "Plan a day trip considering weather"
+  
+  agent --> external : Tool calls
+  external --> agent : Real data
+  
+  reasoning --> memory : Store/retrieve context
+  reasoning --> tools : Select appropriate tools
+  reasoning --> planning : Break down complex tasks
+  
+  agent --> solution : "Based on current weather (22°C, sunny),\nI recommend visiting the botanical garden.\nHere's your complete itinerary..."
+  
+  note bottom of agent : • Accesses real-time data\n• Maintains conversation context\n• Reasons through complex tasks\n• Plans multi-step solutions
+}
+
+traditional -right-> agentic : Evolution
+@enduml
