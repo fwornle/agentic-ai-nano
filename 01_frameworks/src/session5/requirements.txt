@@ -3,3 +3,34 @@ pydantic
 typing-extensions
 fastapi
 uvicorn
+
+# Additional dependencies for comprehensive Session 5 implementation
+asyncio
+logging
+psutil>=5.8.0
+phonenumbers>=8.12.0
+email-validator>=1.3.0
+pytest>=7.0.0
+memory-profiler>=0.60.0
+matplotlib>=3.5.0
+
+# For validation and middleware
+validators>=0.20.0
+python-multipart>=0.0.5
+
+# For testing and mocking
+pytest-asyncio>=0.21.0
+pytest-mock>=3.10.0
+
+# For performance optimization
+cachetools>=5.2.0
+redis>=4.3.0  # Optional for distributed caching
+aioredis>=2.0.0  # Optional for async Redis
+
+# For monitoring and health checks
+prometheus-client>=0.14.0  # Optional for Prometheus metrics
+structlog>=22.1.0  # Optional for structured logging
+
+# For benchmarking
+numpy>=1.21.0  # For statistical calculations
+scipy>=1.8.0   # For advanced statistics
