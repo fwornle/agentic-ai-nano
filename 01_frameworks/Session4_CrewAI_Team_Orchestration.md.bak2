@@ -1,13 +1,10 @@
 # Session 4: CrewAI Team Orchestration
-
 ## Hierarchical Multi-Agent Teams and Role-Based Collaboration
 
 ### 🎯 **Session Overview**
-
 CrewAI provides an intuitive framework for building hierarchical multi-agent teams where agents have specific roles, collaborate on shared tasks, and follow structured workflows. This session explores team-based agent orchestration patterns with role specialization, delegation, and collaborative decision-making.
 
 ### 📚 **Learning Objectives**
-
 1. **Master CrewAI architecture** with agents, tasks, and crews
 2. **Design role-based agent teams** with clear responsibilities and hierarchies
 3. **Implement collaborative workflows** with task delegation and coordination
@@ -16,7 +13,6 @@ CrewAI provides an intuitive framework for building hierarchical multi-agent tea
 6. **Compare team-based vs graph-based** multi-agent approaches
 
 ### 🏗️ **Architecture Overview**
-
 ![CrewAI Architecture](images/crewai-architecture.png)
 
 CrewAI organizes agents into collaborative teams with defined roles, clear task assignments, and structured communication patterns. The framework supports sequential, parallel, and hierarchical execution processes.
@@ -26,9 +22,7 @@ CrewAI organizes agents into collaborative teams with defined roles, clear task 
 ## **CrewAI Architecture & Core Components**
 
 ### **Foundation: Agents, Tasks, and Crews**
-
 **Import and Setup**
-
 ```python
 # src/session4/crewai_basics.py
 from crewai import Agent, Task, Crew, Process
@@ -39,8 +33,8 @@ from langchain.llms import OpenAI
 llm = OpenAI(temperature=0.7)
 ```
 
-**Create Research Agent**
 
+**Create Research Agent**
 ```python
 # Define specialized agents with clear roles
 researcher = Agent(
@@ -57,7 +51,6 @@ researcher = Agent(
 Research agent equipped with web search tools for comprehensive information gathering.
 
 **Create Analysis Agent**
-
 ```python
 # Analysis specialist
 analyst = Agent(
@@ -72,7 +65,6 @@ analyst = Agent(
 Analysis agent that processes research findings into actionable insights.
 
 **Define Tasks**
-
 ```python
 # Research task
 research_task = Task(
@@ -99,7 +91,6 @@ analysis_task = Task(
 Analysis task that processes the research findings and creates structured insights.
 
 **Create and Execute Crew**
-
 ```python
 # Create and execute crew
 basic_crew = Crew(
@@ -113,7 +104,6 @@ result = basic_crew.kickoff()
 ```
 
 Assemble agents and tasks into a crew, then execute the complete workflow.
-
 ```
 
 
@@ -128,7 +118,6 @@ from langchain.llms import OpenAI
 Import CrewAI components for hierarchical team management.
 
 **System Class Setup**
-
 ```python
 class AdvancedCrewSystem:
     def __init__(self, llm=None):
@@ -142,7 +131,6 @@ class AdvancedCrewSystem:
 Initialize the crew system with LLM configuration and crew storage.
 
 **Team Manager Creation**
-
 ```python
         # Senior manager with delegation authority
         manager = Agent(
@@ -158,10 +146,9 @@ Initialize the crew system with LLM configuration and crew storage.
         )
 ```
 
-Create the team manager with delegation authority to coordinate work.
+*Create the team manager with delegation authority to coordinate work.*
 
 **Senior Analyst Setup**
-
 ```python
         # Senior data analyst - specialist
         senior_analyst = Agent(
@@ -177,10 +164,9 @@ Create the team manager with delegation authority to coordinate work.
         )
 ```
 
-Define the senior analyst with advanced tools and deep expertise.
+*Define the senior analyst with advanced tools and deep expertise.*
 
 **Junior Analyst Setup**  
-
 ```python
         # Junior analyst - learning role
         junior_analyst = Agent(
@@ -196,10 +182,9 @@ Define the senior analyst with advanced tools and deep expertise.
         )
 ```
 
-Create the junior analyst with basic tools focused on learning and support.
+*Create the junior analyst with basic tools focused on learning and support.*
 
 **Quality Assurance Specialist**
-
 ```python
         # Quality assurance specialist
         qa_specialist = Agent(
@@ -215,10 +200,9 @@ Create the junior analyst with basic tools focused on learning and support.
         )
 ```
 
-Add the QA specialist to review and validate all analysis outputs.
+*Add the QA specialist to review and validate all analysis outputs.*
 
 **Planning Task Definition**
-
 ```python
         # Define hierarchical tasks
         planning_task = Task(
@@ -233,10 +217,9 @@ Add the QA specialist to review and validate all analysis outputs.
         )
 ```
 
-Create the initial planning task managed by the team leader.
+*Create the initial planning task managed by the team leader.*
 
 **Complex Analysis Task**
-
 ```python
         complex_analysis_task = Task(
             description="""Perform advanced statistical analysis on the dataset.
@@ -252,10 +235,9 @@ Create the initial planning task managed by the team leader.
         )
 ```
 
-Assign sophisticated analysis work to the senior analyst.
+*Assign sophisticated analysis work to the senior analyst.*
 
 **Basic Analysis Task**
-
 ```python
         basic_analysis_task = Task(
             description="""Handle routine data processing and basic analysis.
@@ -270,10 +252,9 @@ Assign sophisticated analysis work to the senior analyst.
         )
 ```
 
-Delegate routine processing tasks to the junior analyst.
+*Delegate routine processing tasks to the junior analyst.*
 
 **Quality Review Task**
-
 ```python
         qa_task = Task(
             description="""Review all analysis outputs for quality and accuracy.
@@ -290,10 +271,9 @@ Delegate routine processing tasks to the junior analyst.
         )
 ```
 
-Create QA validation task that reviews all analysis work.
+*Create QA validation task that reviews all analysis work.*
 
 **Final Consolidation Task**
-
 ```python
         final_review_task = Task(
             description="""Conduct final review and consolidate team outputs.
@@ -308,10 +288,9 @@ Create QA validation task that reviews all analysis work.
         )
 ```
 
-Manager consolidates all work into final deliverable.
+*Manager consolidates all work into final deliverable.*
 
 **Crew Assembly**
-
 ```python
         # Create hierarchical crew
         analysis_crew = Crew(
@@ -327,10 +306,9 @@ Manager consolidates all work into final deliverable.
         return analysis_crew
 ```
 
-Assemble the hierarchical crew with manager coordination.
+*Assemble the hierarchical crew with manager coordination.*
 
 **Tool Configuration Methods**
-
 ```python
     def _get_analysis_tools(self):
         """Get advanced analysis tools for senior analyst"""
@@ -347,15 +325,14 @@ Assemble the hierarchical crew with manager coordination.
         return [FileReadTool()]
 ```
 
-Helper methods providing role-appropriate tool sets.
+*Helper methods providing role-appropriate tool sets.*
 
 ---
 
 ## **Agentic Patterns in CrewAI**
 
 ### **Pattern 1: Reflection Pattern**
-
-Self-improvement through iterative review and refinement
+*Self-improvement through iterative review and refinement*
 
 ```python
 # src/session4/reflection_crew.py
@@ -365,10 +342,9 @@ def create_reflection_crew(llm):
     """Crew implementing reflection pattern for continuous improvement"""
 ```
 
-Import CrewAI components and define the reflection crew creation function.
+*Import CrewAI components and define the reflection crew creation function.*
 
 **Setting Up Reflection Agents**
-
 ```python
     # Primary worker agent
     worker = Agent(
@@ -381,7 +357,7 @@ Import CrewAI components and define the reflection crew creation function.
     )
 ```
 
-Content creator agent that produces initial work and incorporates feedback.
+*Content creator agent that produces initial work and incorporates feedback.*
 
 ```python
     # Self-critique agent
@@ -395,7 +371,7 @@ Content creator agent that produces initial work and incorporates feedback.
     )
 ```
 
-Reflection agent that provides constructive criticism of the work.
+*Reflection agent that provides constructive criticism of the work.*
 
 ```python
     # Quality assessment agent
@@ -409,10 +385,9 @@ Reflection agent that provides constructive criticism of the work.
     )
 ```
 
-Judge agent that determines if the reflection cycle should continue.
+*Judge agent that determines if the reflection cycle should continue.*
 
 **Reflection Task Workflow**
-
 ```python
     # Initial content creation
     create_task = Task(
@@ -422,7 +397,7 @@ Judge agent that determines if the reflection cycle should continue.
     )
 ```
 
-Start the cycle by creating initial content.
+*Start the cycle by creating initial content.*
 
 ```python
     # Self-reflection and critique
@@ -435,7 +410,7 @@ Start the cycle by creating initial content.
     )
 ```
 
-Analyze the created content and identify areas for improvement.
+*Analyze the created content and identify areas for improvement.*
 
 ```python
     # Content improvement based on reflection
@@ -447,7 +422,7 @@ Analyze the created content and identify areas for improvement.
     )
 ```
 
-Worker agent incorporates feedback to improve the content.
+*Worker agent incorporates feedback to improve the content.*
 
 ```python
     # Final quality evaluation
@@ -460,7 +435,7 @@ Worker agent incorporates feedback to improve the content.
     )
 ```
 
-Judge determines if the reflection cycle achieved sufficient quality.
+*Judge determines if the reflection cycle achieved sufficient quality.*
 
 ```python
     # Assemble reflection crew
@@ -472,13 +447,12 @@ Judge determines if the reflection cycle achieved sufficient quality.
     )
 ```
 
-Create crew that implements the complete reflection cycle.
-
+*Create crew that implements the complete reflection cycle.*
 ```
 
 
 ### **Pattern 2: Tool Use Pattern** 
-Intelligent tool selection and execution
+*Intelligent tool selection and execution*
 
 ```python
 # src/session4/tool_use_crew.py
@@ -492,10 +466,9 @@ def create_tool_specialist_crew(llm):
     """Crew with agents specialized in different tool categories"""
 ```
 
-Import specialized tools and define the tool-focused crew creation function.
+*Import specialized tools and define the tool-focused crew creation function.*
 
 **Research Tool Specialist**
-
 ```python
     # Research tool specialist
     research_specialist = Agent(
@@ -509,10 +482,9 @@ Import specialized tools and define the tool-focused crew creation function.
     )
 ```
 
-Agent specialized in web research and search tool usage.
+*Agent specialized in web research and search tool usage.*
 
 **File System Specialist**
-
 ```python
     # File system specialist  
     file_specialist = Agent(
@@ -527,10 +499,9 @@ Agent specialized in web research and search tool usage.
     )
 ```
 
-Agent focused on file operations and code analysis tools.
+*Agent focused on file operations and code analysis tools.*
 
 **Tool Coordination Manager**
-
 ```python
     # Tool coordinator
     coordinator = Agent(
@@ -544,10 +515,9 @@ Agent focused on file operations and code analysis tools.
     )
 ```
 
-Manager that orchestrates optimal tool usage across specialists.
+*Manager that orchestrates optimal tool usage across specialists.*
 
 **Tool Strategy Planning**
-
 ```python
     # Planning task
     planning_task = Task(
@@ -562,10 +532,9 @@ Manager that orchestrates optimal tool usage across specialists.
     )
 ```
 
-Strategic planning task for optimizing tool usage across the team.
+*Strategic planning task for optimizing tool usage across the team.*
 
 **Research Execution Task**
-
 ```python
     # Research execution
     research_task = Task(
@@ -581,10 +550,9 @@ Strategic planning task for optimizing tool usage across the team.
     )
 ```
 
-Research specialist executes web-based information gathering.
+*Research specialist executes web-based information gathering.*
 
 **File Analysis Task**
-
 ```python
     # File analysis task
     file_analysis_task = Task(
@@ -600,10 +568,9 @@ Research specialist executes web-based information gathering.
     )
 ```
 
-File specialist analyzes codebases and documentation.
+*File specialist analyzes codebases and documentation.*
 
 **Synthesis and Coordination**
-
 ```python
     # Synthesis task
     synthesis_task = Task(
@@ -619,10 +586,9 @@ File specialist analyzes codebases and documentation.
     )
 ```
 
-Coordinator synthesizes all tool-based insights into unified report.
+*Coordinator synthesizes all tool-based insights into unified report.*
 
 **Crew Assembly**
-
 ```python
     return Crew(
         agents=[coordinator, research_specialist, file_specialist],
@@ -632,11 +598,10 @@ Coordinator synthesizes all tool-based insights into unified report.
     )
 ```
 
-Assemble the tool-specialized crew with sequential execution.
+*Assemble the tool-specialized crew with sequential execution.*
 
 ### **Pattern 3: ReAct Pattern**
-
-Reasoning and Acting in iterative cycles
+*Reasoning and Acting in iterative cycles*
 
 ```python
 # src/session4/react_crew.py
@@ -646,10 +611,9 @@ def create_react_crew(llm):
     """Crew implementing ReAct pattern: Reason -> Act -> Observe -> Reason..."""
 ```
 
-Import components and define ReAct pattern crew creation function.
+*Import components and define ReAct pattern crew creation function.*
 
 **Strategic Reasoner Agent**
-
 ```python
     # Reasoning agent
     reasoner = Agent(
@@ -663,10 +627,9 @@ Import components and define ReAct pattern crew creation function.
     )
 ```
 
-Agent responsible for strategic thinking and action planning.
+*Agent responsible for strategic thinking and action planning.*
 
 **Action Executor Agent**
-
 ```python
     # Action executor
     actor = Agent(
@@ -681,10 +644,9 @@ Agent responsible for strategic thinking and action planning.
     )
 ```
 
-Agent equipped with tools to execute planned actions.
+*Agent equipped with tools to execute planned actions.*
 
 **Result Observer Agent**
-
 ```python
     # Observer and evaluator
     observer = Agent(
@@ -697,10 +659,9 @@ Agent equipped with tools to execute planned actions.
     )
 ```
 
-Agent that observes and evaluates action outcomes for improvement.
+*Agent that observes and evaluates action outcomes for improvement.*
 
 **Initial Reasoning Task**
-
 ```python
     # Initial reasoning task
     reason_task = Task(
@@ -717,10 +678,9 @@ Agent that observes and evaluates action outcomes for improvement.
     )
 ```
 
-Strategic reasoning task that creates the foundation for action.
+*Strategic reasoning task that creates the foundation for action.*
 
 **Action Execution Task**
-
 ```python
     # Action execution task
     act_task = Task(
@@ -736,10 +696,9 @@ Strategic reasoning task that creates the foundation for action.
     )
 ```
 
-Execute the reasoned plan and gather comprehensive results.
+*Execute the reasoned plan and gather comprehensive results.*
 
 **Observation and Evaluation**
-
 ```python
     # Observation task
     observe_task = Task(
@@ -757,10 +716,9 @@ Execute the reasoned plan and gather comprehensive results.
     )
 ```
 
-Evaluate action results and prepare feedback for next iteration.
+*Evaluate action results and prepare feedback for next iteration.*
 
 **Iterative Re-reasoning**
-
 ```python
     # Re-reasoning task based on observations
     re_reason_task = Task(
@@ -778,10 +736,9 @@ Evaluate action results and prepare feedback for next iteration.
     )
 ```
 
-Refine reasoning based on observations for continuous improvement.
+*Refine reasoning based on observations for continuous improvement.*
 
 **ReAct Crew Assembly**
-
 ```python
     return Crew(
         agents=[reasoner, actor, observer],
@@ -792,11 +749,10 @@ Refine reasoning based on observations for continuous improvement.
     )
 ```
 
-Assemble the ReAct crew with iterative reasoning cycles.
+*Assemble the ReAct crew with iterative reasoning cycles.*
 
 ### **Pattern 4: Planning Pattern**
-
-Strategic planning and execution coordination
+*Strategic planning and execution coordination*
 
 ```python
 # src/session4/planning_crew.py
@@ -806,10 +762,9 @@ def create_planning_crew(llm):
     """Crew implementing comprehensive planning pattern"""
 ```
 
-Import components and define planning-focused crew creation function.
+*Import components and define planning-focused crew creation function.*
 
 **Strategic Planner Agent**
-
 ```python
     # Strategic planner
     planner = Agent(
@@ -824,10 +779,9 @@ Import components and define planning-focused crew creation function.
     )
 ```
 
-Lead planner who creates comprehensive project plans with delegation capability.
+*Lead planner who creates comprehensive project plans with delegation capability.*
 
 **Resource Analyst Agent**
-
 ```python
     # Resource analyst
     resource_analyst = Agent(
@@ -840,10 +794,9 @@ Lead planner who creates comprehensive project plans with delegation capability.
     )
 ```
 
-Specialist focused on resource allocation and capacity planning.
+*Specialist focused on resource allocation and capacity planning.*
 
 **Risk Assessment Specialist**
-
 ```python
     # Risk assessor
     risk_assessor = Agent(
@@ -856,10 +809,9 @@ Specialist focused on resource allocation and capacity planning.
     )
 ```
 
-Expert in identifying and mitigating project risks.
+*Expert in identifying and mitigating project risks.*
 
 **Execution Coordinator**
-
 ```python
     # Execution coordinator
     coordinator = Agent(
@@ -873,10 +825,9 @@ Expert in identifying and mitigating project risks.
     )
 ```
 
-Coordinator who ensures smooth execution and progress tracking.
+*Coordinator who ensures smooth execution and progress tracking.*
 
 **Initial Planning Task**
-
 ```python
     # Initial planning task
     initial_planning = Task(
@@ -892,10 +843,9 @@ Coordinator who ensures smooth execution and progress tracking.
     )
 ```
 
-Foundation task that creates the master project plan.
+*Foundation task that creates the master project plan.*
 
 **Resource Planning Task**
-
 ```python
     # Resource planning task
     resource_planning = Task(
@@ -912,10 +862,9 @@ Foundation task that creates the master project plan.
     )
 ```
 
-Detailed analysis of all resource needs based on the project plan.
+*Detailed analysis of all resource needs based on the project plan.*
 
 **Risk Assessment Task**
-
 ```python
     # Risk assessment task
     risk_assessment = Task(
@@ -932,10 +881,9 @@ Detailed analysis of all resource needs based on the project plan.
     )
 ```
 
-Comprehensive risk analysis with mitigation strategies.
+*Comprehensive risk analysis with mitigation strategies.*
 
 **Plan Integration Task**
-
 ```python
     # Plan integration task
     plan_integration = Task(
@@ -952,10 +900,9 @@ Comprehensive risk analysis with mitigation strategies.
     )
 ```
 
-Consolidate all planning components into unified execution plan.
+*Consolidate all planning components into unified execution plan.*
 
 **Plan Validation Task**
-
 ```python
     # Plan validation task
     plan_validation = Task(
@@ -974,10 +921,9 @@ Consolidate all planning components into unified execution plan.
     )
 ```
 
-Final validation to ensure plan completeness and feasibility.
+*Final validation to ensure plan completeness and feasibility.*
 
 **Planning Crew Assembly**
-
 ```python
     return Crew(
         agents=[planner, resource_analyst, risk_assessor, coordinator],
@@ -988,11 +934,10 @@ Final validation to ensure plan completeness and feasibility.
     )
 ```
 
-Assemble the complete planning crew with sequential task execution.
+*Assemble the complete planning crew with sequential task execution.*
 
 ### **Pattern 5: Multi-Agent Collaboration**
-
-Complex team coordination and consensus building
+*Complex team coordination and consensus building*
 
 ```python
 # src/session4/multi_agent_crew.py
@@ -1002,10 +947,9 @@ def create_collaborative_crew(llm):
     """Multi-agent crew with complex collaboration patterns"""
 ```
 
-Import components and define multi-agent collaboration crew function.
+*Import components and define multi-agent collaboration crew function.*
 
 **Technical Architecture Expert**
-
 ```python
     # Domain experts
     tech_expert = Agent(
@@ -1018,10 +962,9 @@ Import components and define multi-agent collaboration crew function.
     )
 ```
 
-Technical expert providing architecture and implementation guidance.
+*Technical expert providing architecture and implementation guidance.*
 
 **Business Strategy Expert**
-
 ```python
     business_expert = Agent(
         role='Business Strategy Expert',
@@ -1033,10 +976,9 @@ Technical expert providing architecture and implementation guidance.
     )
 ```
 
-Business expert focused on strategy, ROI, and market analysis.
+*Business expert focused on strategy, ROI, and market analysis.*
 
 **User Experience Expert**
-
 ```python
     user_expert = Agent(
         role='User Experience Expert',
@@ -1048,10 +990,9 @@ Business expert focused on strategy, ROI, and market analysis.
     )
 ```
 
-UX expert ensuring user needs and usability are prioritized.
+*UX expert ensuring user needs and usability are prioritized.*
 
 **Collaboration Facilitator**
-
 ```python
     # Collaboration facilitator
     facilitator = Agent(
@@ -1065,10 +1006,9 @@ UX expert ensuring user needs and usability are prioritized.
     )
 ```
 
-Facilitator who manages expert collaboration and consensus building.
+*Facilitator who manages expert collaboration and consensus building.*
 
 **Decision Synthesizer**
-
 ```python
     # Decision synthesizer
     synthesizer = Agent(
@@ -1081,10 +1021,9 @@ Facilitator who manages expert collaboration and consensus building.
     )
 ```
 
-Synthesizer who combines all perspectives into unified recommendations.
+*Synthesizer who combines all perspectives into unified recommendations.*
 
 **Technical Input Task**
-
 ```python
     # Expert input tasks (parallel)
     tech_input_task = Task(
@@ -1100,10 +1039,9 @@ Synthesizer who combines all perspectives into unified recommendations.
     )
 ```
 
-Technical expert provides architecture and implementation perspective.
+*Technical expert provides architecture and implementation perspective.*
 
 **Business Input Task**
-
 ```python
     business_input_task = Task(
         description="""Provide business perspective on 'Building a Customer Service AI Agent'.
@@ -1118,10 +1056,9 @@ Technical expert provides architecture and implementation perspective.
     )
 ```
 
-Business expert analyzes value, ROI, and strategic implications.
+*Business expert analyzes value, ROI, and strategic implications.*
 
 **User Experience Input Task**
-
 ```python
     user_input_task = Task(
         description="""Provide user experience perspective on 'Building a Customer Service AI Agent'.
@@ -1136,10 +1073,9 @@ Business expert analyzes value, ROI, and strategic implications.
     )
 ```
 
-UX expert provides user-centered design perspective.
+*UX expert provides user-centered design perspective.*
 
 **Collaboration Facilitation**
-
 ```python
     # Collaboration facilitation task
     facilitation_task = Task(
@@ -1156,10 +1092,9 @@ UX expert provides user-centered design perspective.
     )
 ```
 
-Facilitator identifies synergies and conflicts across expert perspectives.
+*Facilitator identifies synergies and conflicts across expert perspectives.*
 
 **Consensus Building**
-
 ```python
     # Consensus building task
     consensus_task = Task(
@@ -1176,10 +1111,9 @@ Facilitator identifies synergies and conflicts across expert perspectives.
     )
 ```
 
-Build consensus and resolve conflicts between different perspectives.
+*Build consensus and resolve conflicts between different perspectives.*
 
 **Final Synthesis**
-
 ```python
     # Final synthesis task
     synthesis_task = Task(
@@ -1196,10 +1130,9 @@ Build consensus and resolve conflicts between different perspectives.
     )
 ```
 
-Synthesize all inputs into comprehensive unified recommendations.
+*Synthesize all inputs into comprehensive unified recommendations.*
 
 **Multi-Agent Crew Assembly**
-
 ```python
     return Crew(
         agents=[tech_expert, business_expert, user_expert, facilitator, synthesizer],
@@ -1210,14 +1143,13 @@ Synthesize all inputs into comprehensive unified recommendations.
     )
 ```
 
-Assemble the collaborative multi-agent crew with sequential processing.
+*Assemble the collaborative multi-agent crew with sequential processing.*
 
 ---
 
 ## **Production Patterns & Best Practices**
 
 ### **Error Handling and Recovery**
-
 ```python
 # src/session4/error_handling.py
 from crewai import Agent, Task, Crew, Process
@@ -1331,8 +1263,8 @@ class RobustCrewSystem:
         return {'strategy': 'simplify_and_retry', 'error': str(error)}
 ```
 
-### **Performance Optimization**
 
+### **Performance Optimization**
 ```python
 # src/session4/performance_optimization.py
 from crewai import Agent, Task, Crew, Process
@@ -1441,8 +1373,8 @@ class PerformanceOptimizedCrew:
         }
 ```
 
-### **Enterprise Integration**
 
+### **Enterprise Integration**
 ```python
 # src/session4/enterprise_integration.py
 from crewai import Agent, Task, Crew, Process
@@ -1593,6 +1525,7 @@ class ComplianceChecker:
         return True  # Placeholder implementation
 ```
 
+
 ---
 
 ## **Framework Comparisons**
@@ -1600,7 +1533,6 @@ class ComplianceChecker:
 ### **CrewAI vs LangGraph**
 
 **Key Differences:**
-
 ```python
 # CrewAI: Role-based approach
 manager = Agent(role='Team Lead', goal='Coordinate team', allow_delegation=True)
@@ -1612,7 +1544,7 @@ def worker_node(state): return execute_task(state)
 workflow.add_node('manager', manager_node)
 ```
 
-CrewAI uses role-based agents while LangGraph uses node functions.
+*CrewAI uses role-based agents while LangGraph uses node functions.*
 
 | **Aspect** | **CrewAI** | **LangGraph** |
 |------------|------------|---------------|
@@ -1624,7 +1556,6 @@ CrewAI uses role-based agents while LangGraph uses node functions.
 ### **CrewAI vs LangChain**
 
 **Architecture Differences:**
-
 ```python
 # CrewAI: Multi-agent teams
 crew = Crew(agents=[agent1, agent2], tasks=[task1, task2])
@@ -1633,7 +1564,7 @@ crew = Crew(agents=[agent1, agent2], tasks=[task1, task2])
 chain = LLMChain(llm=llm, prompt=prompt)
 ```
 
-CrewAI orchestrates multiple agents while LangChain focuses on single agent chains.
+*CrewAI orchestrates multiple agents while LangChain focuses on single agent chains.*
 
 | **Aspect** | **CrewAI** | **LangChain** |
 |------------|------------|---------------|
@@ -1648,7 +1579,6 @@ CrewAI orchestrates multiple agents while LangChain focuses on single agent chai
 ### **Use Case 1: Content Creation Pipeline**
 
 **Content Team Setup**
-
 ```python
 # Content creation specialists
 researcher = Agent(
@@ -1663,7 +1593,7 @@ writer = Agent(
 )
 ```
 
-Specialized agents for research and content creation.
+*Specialized agents for research and content creation.*
 
 ```python
 # Editorial team
@@ -1678,10 +1608,9 @@ seo_specialist = Agent(
 )
 ```
 
-Editorial specialists for refinement and optimization.
+*Editorial specialists for refinement and optimization.*
 
 **Content Pipeline Workflow**
-
 ```python
 # Sequential content creation process
 research = Task("Research AI trends and create brief", researcher)
@@ -1696,8 +1625,7 @@ content_crew = Crew(
 )
 ```
 
-Complete content creation pipeline from research to publication.
-
+*Complete content creation pipeline from research to publication.*
 ```
 
 
@@ -1713,7 +1641,7 @@ product_manager = Agent(
 )
 ```
 
-Product manager who coordinates the development process.
+*Product manager who coordinates the development process.*
 
 ```python
 # Design and technical specialists
@@ -1728,10 +1656,9 @@ tech_lead = Agent(
 )
 ```
 
-Specialists handling design and technical architecture.
+*Specialists handling design and technical architecture.*
 
-**Development Workflow**
-
+**Development Workflow** 
 ```python
 # Product development pipeline
 requirements = Task("Define product requirements", product_manager)
@@ -1746,8 +1673,7 @@ product_crew = Crew(
 )
 ```
 
-Hierarchical product development with PM coordination.
-
+*Hierarchical product development with PM coordination.*
 ```
 
 
@@ -1820,4 +1746,4 @@ Session 5 explores PydanticAI's type-safe approach to agent development with str
 
 ---
 
-This session demonstrated CrewAI's comprehensive team-based approach to multi-agent orchestration, from basic collaboration to enterprise-grade production deployments.
+*This session demonstrated CrewAI's comprehensive team-based approach to multi-agent orchestration, from basic collaboration to enterprise-grade production deployments.*

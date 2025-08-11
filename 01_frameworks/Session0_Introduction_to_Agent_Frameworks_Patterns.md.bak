@@ -23,7 +23,6 @@ response = llm.generate("What's the weather today?")
 # No context, no tools, no reasoning - just pattern matching
 ```
 
-
 **Problems with Simple Prompting:**
 - No access to external data or tools
 - No memory of previous interactions  
@@ -91,7 +90,6 @@ class ReflectiveAgent:
         return response
 ```
 
-
 ### Pattern 2: Tool Use - Extending Agent Capabilities
 
 **Core Concept**: Agents dynamically select and use external tools to access information and perform actions beyond their built-in capabilities.
@@ -154,7 +152,6 @@ def react_loop(self, goal):
     
     return self.format_final_result()
 ```
-
 
 ### Pattern 4: Planning - Multi-Step Task Decomposition
 
@@ -263,7 +260,6 @@ class BareMetalAgent:
         return self.process_response(response)
 ```
 
-
 #### **LangChain/LangGraph (Industry Standard)**
 
 **Philosophy**: Component-based architecture with extensive ecosystem
@@ -293,7 +289,6 @@ def create_agent_graph():
     
     return graph.compile()
 ```
-
 
 **When to Use LangChain/LangGraph:**
 - Rapid prototyping with proven components
@@ -348,7 +343,6 @@ crew = Crew(
 result = crew.kickoff()
 ```
 
-
 **When to Use CrewAI:**
 - Multi-step workflows requiring specialized expertise
 - Teams comfortable with role-based thinking
@@ -398,7 +392,6 @@ query = ResearchQuery(
 result: ResearchResult = research_agent.run_sync(query)
 ```
 
-
 **When to Use PydanticAI:**
 - Enterprise applications requiring predictable behavior
 - Teams prioritizing code quality and maintainability
@@ -435,7 +428,6 @@ workflow = Workflow(
 # Optimized for scale - handles 50x more concurrent agents
 results = await workflow.run_parallel(tasks)
 ```
-
 
 **When to Use Agno:**
 - High-throughput applications (serverless, microservices)

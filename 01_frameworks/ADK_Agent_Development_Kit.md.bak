@@ -89,7 +89,6 @@ class TravelAgent(Agent):
         return self.create_itinerary(flights, hotels, weather)
 ```
 
-
 ### ADK vs Traditional AI Frameworks
 
 | Feature | Traditional Frameworks | ADK |
@@ -112,7 +111,6 @@ pip install google-adk
 pip install git+https://github.com/google/adk-python.git@main
 ```
 
-
 ### Basic Agent Example
 
 ```python
@@ -129,7 +127,6 @@ agent = Agent(
 # Use the agent
 response = await agent.run("What's the weather in San Francisco?")
 ```
-
 
 ### Multi-Agent System Example
 
@@ -163,7 +160,6 @@ coordinator = LlmAgent(
 result = await coordinator.run("Create a report on quantum computing trends")
 ```
 
-
 ## Integration with MCP
 
 ADK seamlessly integrates with Model Context Protocol (MCP) servers, allowing agents to access external tools and data sources:
@@ -185,7 +181,6 @@ agent = Agent(
 )
 ```
 
-
 ## Deployment Options
 
 ### Cloud Run Deployment
@@ -198,7 +193,6 @@ RUN pip install -r requirements.txt
 COPY . .
 CMD ["python", "agent_server.py"]
 ```
-
 
 ### Vertex AI Deployment
 
@@ -213,7 +207,6 @@ endpoint = aiplatform.Endpoint.create(
     description="Production ADK agent"
 )
 ```
-
 
 ## Best Practices
 

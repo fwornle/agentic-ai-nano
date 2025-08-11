@@ -655,7 +655,6 @@ if __name__ == "__main__":
     asyncio.run(demo_planning_agent())
 ```
 
-
 ### Advanced Planning Features:
 
 1. **Goal Analysis**: Uses Gemini to analyze goals and determine complexity
