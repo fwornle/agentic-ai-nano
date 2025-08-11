@@ -745,4 +745,4 @@ In Session 4, we'll explore CrewAI's role-based approach to multi-agent systems,
 
 ---
 
-This session demonstrated how LangGraph's graph-based architecture enables sophisticated multi-agent workflows with advanced coordination patterns, parallel execution, and robust error handling.
+*This session demonstrated how LangGraph's graph-based architecture enables sophisticated multi-agent workflows with advanced coordination patterns, parallel execution, and robust error handling.*

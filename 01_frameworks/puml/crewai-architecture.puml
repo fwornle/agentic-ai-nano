@@ -1,0 +1,143 @@
+@startuml crewai-architecture
+!define RECTANGLE class
+!theme plain
+
+title CrewAI Architecture - Team-Based Multi-Agent Orchestration
+
+package "CrewAI Core Framework" {
+    RECTANGLE Agent {
+        + role: str
+        + goal: str  
+        + backstory: str
+        + tools: List[Tool]
+        + allow_delegation: bool
+        + verbose: bool
+        --
+        + execute(task)
+        + delegate(task, agent)
+        + collaborate(agents)
+    }
+    
+    RECTANGLE Task {
+        + description: str
+        + agent: Agent
+        + expected_output: str
+        + context: List[Task]
+        + output_file: str
+        --
+        + execute()
+        + validate_output()
+    }
+    
+    RECTANGLE Crew {
+        + agents: List[Agent]
+        + tasks: List[Task]
+        + process: Process
+        + manager_llm: LLM
+        + verbose: int
+        --
+        + kickoff()
+        + delegate_work()
+        + coordinate_agents()
+    }
+    
+    enum Process {
+        SEQUENTIAL
+        PARALLEL
+        HIERARCHICAL
+    }
+}
+
+package "Team Patterns" {
+    RECTANGLE HierarchicalTeam {
+        + manager: Agent
+        + specialists: List[Agent]
+        + reviewers: List[Agent]
+        --
+        + delegate_tasks()
+        + review_outputs()
+        + escalate_issues()
+    }
+    
+    RECTANGLE CollaborativeTeam {
+        + peers: List[Agent]
+        + shared_context: Dict
+        --
+        + collaborate()
+        + share_knowledge()
+        + reach_consensus()
+    }
+}
+
+package "Agent Roles" {
+    RECTANGLE Manager {
+        + plan_workflow()
+        + assign_tasks()  
+        + monitor_progress()
+        + resolve_conflicts()
+    }
+    
+    RECTANGLE Specialist {
+        + domain_expertise: str
+        + execute_specialized_task()
+        + provide_insights()
+    }
+    
+    RECTANGLE Reviewer {
+        + quality_standards: Dict
+        + review_work()
+        + provide_feedback()
+        + approve_outputs()
+    }
+}
+
+package "Tools & Integration" {
+    RECTANGLE CrewAITools {
+        + SerperDevTool
+        + WebsiteSearchTool
+        + CodeDocsSearchTool
+        + FileReadTool
+        + DirectoryReadTool
+    }
+    
+    RECTANGLE CustomTools {
+        + DataAnalysisTool
+        + VisualizationTool  
+        + ValidationTool
+        + NotificationTool
+    }
+}
+
+' Relationships
+Crew --> Agent : contains
+Crew --> Task : orchestrates
+Crew --> Process : follows
+Agent --> Task : executes
+Agent --> CrewAITools : uses
+Agent --> CustomTools : uses
+Task --> Agent : assigned_to
+
+HierarchicalTeam --> Manager : led_by
+HierarchicalTeam --> Specialist : includes
+HierarchicalTeam --> Reviewer : includes
+
+CollaborativeTeam --> Agent : peer_agents
+
+Manager --|> Agent : specializes
+Specialist --|> Agent : specializes  
+Reviewer --|> Agent : specializes
+
+note right of Crew
+CrewAI orchestrates teams of
+specialized agents working
+together on complex tasks
+with clear roles and hierarchies
+end note
+
+note bottom of Process
+- Sequential: Tasks executed in order
+- Parallel: Tasks executed simultaneously  
+- Hierarchical: Manager delegates and coordinates
+end note
+
+@enduml

@@ -52,7 +52,6 @@ deployment = KubernetesDeployment(
 )
 ```
 
-
 ### **Monitoring and Observability**
 ```python
 # Comprehensive monitoring setup
@@ -71,7 +70,6 @@ class AgentMonitoring:
         if not success:
             self.metrics['errors_total'].inc()
 ```
-
 
 ---
 
@@ -110,4 +108,4 @@ Session 8 explores advanced multi-agent patterns and ReAct implementations.
 
 ---
 
-This session covered production-grade agent deployment using Agno's enterprise-focused framework.
+*This session covered production-grade agent deployment using Agno's enterprise-focused framework.*

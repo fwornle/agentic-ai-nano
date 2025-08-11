@@ -47,7 +47,6 @@ EXPOSE 8000
 CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-
 ### **Kubernetes Deployment**
 ```yaml
 # k8s/deployment.yaml
@@ -98,7 +97,6 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
 ```
-
 
 ### **Enterprise Integration Patterns**
 ```python
@@ -193,7 +191,6 @@ class EnterpriseAgentGateway:
         raise Exception("Max retries exceeded")
 ```
 
-
 ---
 
 ## **CI/CD Pipeline**
@@ -257,7 +254,6 @@ jobs:
         kubectl set image deployment/agent-system agent-system=agent-system:${{ github.sha }}
 ```
 
-
 ---
 
 ## **Self-Assessment Questions**
@@ -296,4 +292,4 @@ Congratulations! You've completed the Agent Frameworks & Patterns module. You no
 
 ---
 
-This final session covered enterprise-grade deployment and integration patterns for production agent systems.
+*This final session covered enterprise-grade deployment and integration patterns for production agent systems.*

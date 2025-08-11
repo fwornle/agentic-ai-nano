@@ -2026,4 +2026,4 @@ In Session 2, we'll explore how LangChain provides high-level abstractions for t
 14. b) Transparent reasoning process
 15. b) To route messages and coordinate collaboration
 
-This session provided hands-on experience building intelligent agents from first principles. You now understand the core mechanics that power all agent frameworks and can make informed decisions about when to use frameworks versus building custom solutions.
+*This session provided hands-on experience building intelligent agents from first principles. You now understand the core mechanics that power all agent frameworks and can make informed decisions about when to use frameworks versus building custom solutions.*

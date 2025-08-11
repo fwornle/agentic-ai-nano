@@ -27,17 +27,13 @@ LangChain follows a **modular, composable architecture** where components can be
 
 **Traditional Programming:**
 ```
-
 Input → Fixed Logic → Output
 ```
 
-
 **LangChain Approach:**
 ```
-
 Input → LLM + Tools + Memory + Agent → Dynamic Output
 ```
-
 
 ### Step 1.1: Core Components Overview
 
@@ -50,7 +46,6 @@ from langchain.agents import Tool, initialize_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.callbacks import StdOutCallbackHandler
 ```
-
 
 **Why These Four?**
 - **LLMs**: The "brain" that makes decisions
@@ -77,7 +72,6 @@ class LLMFactory:
         """Create LLM instance based on provider"""
 ```
 
-
 **OpenAI Provider Configuration:**
 
 ```python
@@ -88,7 +82,6 @@ class LLMFactory:
                 openai_api_key=os.getenv("OPENAI_API_KEY")
             )
 ```
-
 
 **Anthropic Provider Configuration:**
 
@@ -105,7 +98,6 @@ class LLMFactory:
 # Usage example
 llm = LLMFactory.create_llm("openai", temperature=0.1)
 ```
-
 
 #### **2. Tools and Tool Integration**
 LangChain's tool system provides standardized interfaces:
@@ -124,7 +116,6 @@ import json
 import math
 ```
 
-
 **Method 1: Inheriting from BaseTool**
 
 This is the traditional approach for creating custom tools:
@@ -135,7 +126,6 @@ class CalculatorTool(BaseTool):
     name = "calculator"
     description = "Perform mathematical calculations and expressions"
 ```
-
 
 **Tool Execution Logic:**
 
@@ -155,7 +145,6 @@ class CalculatorTool(BaseTool):
             return f"Error: {str(e)}"
 ```
 
-
 **Async Support:**
 
 ```python
@@ -163,7 +152,6 @@ class CalculatorTool(BaseTool):
         """Async version (if needed)"""
         raise NotImplementedError("Calculator doesn't support async")
 ```
-
 **Method 2: Using @tool Decorator**
 
 The decorator approach is simpler for straightforward functions:
@@ -184,7 +172,6 @@ def weather_tool(city: str) -> str:
     except Exception as e:
         return f"Error getting weather for {city}: {str(e)}"
 ```
-
 **Method 3: StructuredTool with Pydantic Models**
 
 For complex inputs, use Pydantic schemas:
@@ -202,7 +189,6 @@ def send_email(recipient: str, subject: str, body: str) -> str:
     return f"Email sent to {recipient} with subject '{subject}'"
 ```
 
-
 **Structured Tool Creation:**
 
 ```python
@@ -213,7 +199,6 @@ email_tool = StructuredTool.from_function(
     args_schema=EmailInput
 )
 ```
-
 **Custom API Integration Tool**
 
 For external API integration:
@@ -228,7 +213,6 @@ class NewsAPITool(BaseTool):
         super().__init__()
         self.api_key = api_key
 ```
-
 
 **News API Implementation:**
 
@@ -247,7 +231,6 @@ class NewsAPITool(BaseTool):
             ]
 ```
 
-
 **Result Formatting:**
 
 ```python
@@ -259,7 +242,6 @@ class NewsAPITool(BaseTool):
         except Exception as e:
             return f"Error fetching news: {str(e)}"
 ```
-
 
 ---
 
@@ -377,7 +359,6 @@ async def demo_langchain_reflection():
     
     print("Final Response:", response)
 ```
-
 
 ### **Pattern 2: Tool Use with LangChain Agents**
 
@@ -502,7 +483,6 @@ async def demo_advanced_tool_use():
     print("Agent Response:", response)
     print("Tool Info:", agent.get_tool_info())
 ```
-
 
 ### **Pattern 3: ReAct with LangChain**
 
@@ -721,7 +701,6 @@ async def demo_react_agents():
     print("Custom ReAct Response:", response2)
     print("Reasoning Summary:", custom_agent.get_reasoning_summary())
 ```
-
 
 ---
 
@@ -981,7 +960,6 @@ async def demo_planning_agents():
     print("Custom Planning Response:", response2)
     print("Planning Analysis:", custom_agent.get_planning_analysis())
 ```
-
 
 ---
 
@@ -1268,7 +1246,6 @@ async def demo_multi_agent_system():
     print("\nSystem Status:", system.get_system_status())
 ```
 
-
 ---
 
 ## **Framework Comparison: LangChain vs Bare Metal**
@@ -1478,7 +1455,6 @@ if __name__ == "__main__":
     print_framework_tradeoffs()
 ```
 
-
 ---
 
 ## **Self-Assessment Questions**
@@ -1614,4 +1590,4 @@ In Session 3, we'll explore LangGraph, LangChain's workflow orchestration framew
 
 ---
 
-This session demonstrated how LangChain's abstractions can significantly accelerate agent development while providing access to a rich ecosystem of tools and integrations.
+*This session demonstrated how LangChain's abstractions can significantly accelerate agent development while providing access to a rich ecosystem of tools and integrations.*
