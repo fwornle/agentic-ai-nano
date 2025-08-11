@@ -8,7 +8,8 @@
       "Bash(find:*)",
       "Bash(sed:*)",
       "Bash(grep:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": []
   }
