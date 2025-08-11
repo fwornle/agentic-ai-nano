@@ -80,6 +80,10 @@ class AgentMessage:
 
 Agents need to use external tools, so let's create a consistent interface:
 
+Let's build the tool system step by step:
+
+**Step 1: Define the abstract tool interface**
+
 ```python
 # From src/session1/base_agent.py
 from abc import ABC, abstractmethod
@@ -90,12 +94,24 @@ class Tool(ABC):
     def __init__(self, name: str, description: str):
         self.name = name
         self.description = description
-    
+```
+
+This establishes the foundation for all tools. Each tool needs a name (for identification) and description (for the agent to understand its purpose).
+
+**Step 2: Define the tool execution contract**
+
+```python
     @abstractmethod
     async def execute(self, **kwargs) -> Dict[str, Any]:
         """Execute the tool with given parameters"""
         pass
-    
+```
+
+Every tool must implement `execute()`. It's async to handle I/O operations (API calls, file operations) and returns a dictionary for structured results.
+
+**Step 3: Add tool discovery capabilities**
+
+```python
     def get_schema(self) -> Dict[str, Any]:
         """Return tool schema for agent discovery"""
         return {
@@ -110,6 +126,8 @@ class Tool(ABC):
         pass
 ```
 
+The schema system allows agents to discover available tools and understand what parameters each tool expects - essential for dynamic tool selection.
+
 
 **Key Design Decisions:**
 - **Abstract base class**: Ensures all tools have consistent interfaces
@@ -120,12 +138,18 @@ class Tool(ABC):
 
 Now let's build the foundation that all agents will inherit from:
 
+**Core Imports and Dependencies:**
+
 ```python
 # From src/session1/base_agent.py
 import uuid
 import logging
 from typing import List, Optional, Any
+```
 
+**Agent Class Foundation:**
+
+```python
 class BaseAgent:
     """Foundation class for all agent implementations"""
     
@@ -137,10 +161,20 @@ class BaseAgent:
         tools: Optional[List[Tool]] = None,
         memory: Optional[Dict[str, Any]] = None
     ):
+```
+
+**Agent Identity and Core Attributes:**
+
+```python
         self.id = str(uuid.uuid4())           # Unique agent ID
         self.name = name                      # Human-readable name
         self.description = description        # What this agent does
         self.llm_client = llm_client         # Connection to language model
+```
+
+**Tool Management and State:**
+
+```python
         self.tools = {tool.name: tool for tool in (tools or [])}  # Available tools
         self.memory = memory or {}            # Persistent memory
         self.conversation_history = []        # Message history
@@ -351,6 +385,8 @@ class BaseAgent:
 
 **Message Processing Methods:**
 
+**Main Message Processing Method:**
+
 ```python
     async def process_message(self, message: str, context: Optional[Dict] = None) -> str:
         """Process a message and return response"""
@@ -362,7 +398,11 @@ class BaseAgent:
         self._store_agent_response(response)
         
         return response
+```
 
+**Step 1 - Store User Message:**
+
+```python
     def _store_user_message(self, message: str, context: Optional[Dict]):
         """Store user message in conversation history"""
         self.conversation_history.append({
@@ -371,7 +411,11 @@ class BaseAgent:
             "timestamp": datetime.now(),
             "context": context
         })
+```
 
+**Step 3 - Store Agent Response:**
+
+```python
     def _store_agent_response(self, response: str):
         """Store agent response in conversation history"""
         self.conversation_history.append({
@@ -441,6 +485,8 @@ The core reflection process works like this:
 
 **Reflection Loop Structure:**
 
+**Reflection Main Method Setup:**
+
 ```python
 # From src/session1/reflection_agent.py (continued)
 async def _generate_response(self, message: str, context: Dict = None) -> str:
@@ -448,6 +494,11 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
     current_response = await self._initial_response(message, context)
     
     for iteration in range(self.max_iterations):
+```
+
+**Reflection and Evaluation Steps:**
+
+```python
         # Step 1: Reflect on current response
         critique = await self._reflect_on_response(message, current_response)
         
@@ -457,8 +508,7 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
             break
 ```
 
-
-**Iterative Improvement:**
+**Iterative Improvement Process:**
 
 ```python
         # Step 3: Improve response based on critique
@@ -505,6 +555,8 @@ Now teach the agent to critique its own work:
 
 **Self-Critique Method:**
 
+**Self-Critique Method Setup:**
+
 ```python
 # From src/session1/reflection_agent.py (continued)
 async def _reflect_on_response(self, original_message: str, response: str) -> str:
@@ -514,7 +566,11 @@ async def _reflect_on_response(self, original_message: str, response: str) -> st
     
     Original Question: {original_message}
     Response: {response}
-    
+```
+
+**Evaluation Criteria Definition:**
+
+```python
     Evaluate the response on these criteria:
     1. Accuracy and correctness
     2. Completeness and thoroughness  
@@ -523,6 +579,7 @@ async def _reflect_on_response(self, original_message: str, response: str) -> st
     5. Actionability (if applicable)
 ```
 
+**Critique Completion and Processing:**
 
 ```python
     Provide specific, constructive feedback on what could be improved.
@@ -672,11 +729,17 @@ Let's implement concrete tools that agents can use:
 
 **Calculator Tool Implementation:**
 
+**Calculator Tool Dependencies:**
+
 ```python
 # From src/session1/tools.py
 import math
 from base_agent import Tool
+```
 
+**Calculator Tool Class Definition:**
+
+```python
 class CalculatorTool(Tool):
     """Mathematical calculation tool with safe evaluation"""
     
@@ -684,8 +747,7 @@ class CalculatorTool(Tool):
         super().__init__("calculator", "Perform mathematical calculations")
 ```
 
-
-**Safe Mathematical Execution:**
+**Safe Evaluation Environment Setup:**
 
 ```python
     async def execute(self, expression: str) -> Dict[str, Any]:
@@ -696,7 +758,11 @@ class CalculatorTool(Tool):
                 k: v for k, v in math.__dict__.items() if not k.startswith("__")
             }
             allowed_names.update({"abs": abs, "round": round})
-            
+```
+
+**Expression Evaluation and Result Handling:**
+
+```python
             # Evaluate with restricted environment
             result = eval(expression, {"__builtins__": {}}, allowed_names)
             return {"expression": expression, "result": result}
@@ -824,6 +890,8 @@ The agent follows a four-step process for tool use:
 
 **Tool Use Decision Process:**
 
+**Tool Use Main Method and Analysis:**
+
 ```python
 # From src/session1/tool_use_agent.py (continued)
 async def _generate_response(self, message: str, context: Dict = None) -> str:
@@ -837,6 +905,7 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
         return await self._simple_response(message)
 ```
 
+**Tool Planning and Execution:**
 
 ```python
     # Step 3: Plan which tools to use and how
@@ -859,7 +928,7 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
 
 Teach the agent to recognize when tools are needed:
 
-**Tool Analysis Setup:**
+**Tool Analysis Method and Setup:**
 
 ```python
 # From src/session1/tool_use_agent.py (continued)
@@ -872,7 +941,6 @@ async def _analyze_tool_needs(self, message: str) -> Dict[str, Any]:
     ])
 ```
 
-
 **Analysis Prompt Construction:**
 
 ```python
@@ -883,7 +951,11 @@ async def _analyze_tool_needs(self, message: str) -> Dict[str, Any]:
     
     Available tools:
     {tools_desc}
-    
+```
+
+**JSON Response Format Definition:**
+
+```python
     Respond with JSON:
     {{
         "needs_tools": true/false,
@@ -893,8 +965,7 @@ async def _analyze_tool_needs(self, message: str) -> Dict[str, Any]:
     """
 ```
 
-
-**Response Processing:**
+**Response Processing and Error Handling:**
 
 ```python
     response = await self._call_llm(analysis_prompt)
@@ -928,6 +999,8 @@ async def _plan_tool_usage(self, message: str, analysis: Dict) -> List[Dict]:
 
 **Plan Generation Prompt:**
 
+**Step 1: Set up the planning prompt structure**
+
 ```python
     planning_prompt = f"""
     Create a plan to use tools to answer this message:
@@ -937,7 +1010,13 @@ async def _plan_tool_usage(self, message: str, analysis: Dict) -> List[Dict]:
     
     Available relevant tools:
     {json.dumps(tool_schemas, indent=2)}
-    
+```
+
+This section provides context to the LLM about what the user wants and what tools are available for the task.
+
+**Step 2: Define the expected output format**
+
+```python
     Create a step-by-step plan in JSON format:
     {{
         "steps": [
@@ -951,6 +1030,8 @@ async def _plan_tool_usage(self, message: str, analysis: Dict) -> List[Dict]:
     }}
     """
 ```
+
+By specifying the exact JSON structure, we ensure the agent returns a structured plan we can programmatically parse and execute.
 
 
 **Plan Processing:**
@@ -974,6 +1055,8 @@ Execute the plan and combine results into a coherent response:
 
 **Plan Execution Loop:**
 
+**Plan Execution Method Setup:**
+
 ```python
 # From src/session1/tool_use_agent.py (continued)
 async def _execute_tool_plan(self, message: str, plan: List[Dict]) -> str:
@@ -985,15 +1068,18 @@ async def _execute_tool_plan(self, message: str, plan: List[Dict]) -> str:
         tool_name = step.get("tool")
         parameters = step.get("parameters", {})
         purpose = step.get("purpose", "")
-        
+```
+
+**Step Execution and Logging:**
+
+```python
         self.logger.info(f"Executing step {step.get('step')}: {purpose}")
         
         # Execute the tool
         result = await self.execute_tool(tool_name, **parameters)
 ```
 
-
-**Result Tracking and History:**
+**Result Tracking and History Management:**
 
 ```python
         # Track the execution
@@ -1005,7 +1091,11 @@ async def _execute_tool_plan(self, message: str, plan: List[Dict]) -> str:
             "result": result
         }
         tool_results.append(step_result)
-        
+```
+
+**Usage History and Response Generation:**
+
+```python
         # Add to usage history
         self.tool_usage_history.append({
             "message": message,
@@ -1200,6 +1290,8 @@ class ReActAgent(BaseAgent):
 
 **ReAct Main Loop Setup:**
 
+**ReAct Method Setup and Initialization:**
+
 ```python
 # From src/session1/react_agent.py (continued)
 async def _generate_response(self, message: str, context: Dict = None) -> str:
@@ -1209,7 +1301,11 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
     
     # Start with initial thought
     current_thought = await self._initial_thought(message)
-    
+```
+
+**Main ReAct Loop and Action Decision:**
+
+```python
     # ReAct loop: Think → Act → Observe → Repeat
     while step_number <= self.max_steps:
         step = ReActStep(step_number=step_number, thought=current_thought)
@@ -1218,8 +1314,7 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
         action_decision = await self._decide_action(message, steps, current_thought)
 ```
 
-
-**Action Decision and Execution:**
+**Final Answer Check and Action Execution:**
 
 ```python
         # Check if ready to give final answer
@@ -1233,7 +1328,11 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
         if action_decision.get("action"):
             step.action = action_decision["action"]
             step.action_input = action_decision.get("action_input", {})
-            
+```
+
+**Observation and Next Thought Generation:**
+
+```python
             # Perform action and observe result
             observation = await self._execute_action(step.action, step.action_input)
             step.observation = observation
@@ -1242,8 +1341,7 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
             current_thought = await self._next_thought(message, steps + [step], observation)
 ```
 
-
-**Loop Completion and Response:**
+**Loop Completion and Response Formatting:**
 
 ```python
         steps.append(step)
@@ -1292,6 +1390,8 @@ async def _initial_thought(self, message: str) -> str:
 
 Decide what action to take based on the current thought:
 
+**Action Decision Method Setup:**
+
 ```python
 # From src/session1/react_agent.py (continued)
 async def _decide_action(self, message: str, steps: List[ReActStep], thought: str) -> Dict:
@@ -1301,7 +1401,11 @@ async def _decide_action(self, message: str, steps: List[ReActStep], thought: st
         f"- {tool['name']}: {tool['description']}"
         for tool in self.get_available_tools()
     ])
-    
+```
+
+**Decision Prompt Context Building:**
+
+```python
     prompt = f"""
     Question: {message}
     
@@ -1312,7 +1416,11 @@ async def _decide_action(self, message: str, steps: List[ReActStep], thought: st
     
     Available tools:
     {tools_desc}
-    
+```
+
+**Action Options and Response Format:**
+
+```python
     Based on your current thought, decide what action to take next.
     You can either:
     1. Use a tool (provide tool name and parameters)
@@ -1325,7 +1433,11 @@ async def _decide_action(self, message: str, steps: List[ReActStep], thought: st
         "reasoning": "why you chose this action"
     }}
     """
-    
+```
+
+**Response Processing and Error Handling:**
+
+```python
     response = await self._call_llm(prompt)
     
     try:
@@ -1383,6 +1495,8 @@ async def _next_thought(self, message: str, steps: List[ReActStep], observation:
 
 Make the ReAct process visible to users:
 
+**Step 1: Format user-facing response with reasoning transparency**
+
 ```python
 # From src/session1/react_agent.py (continued)
 def _format_react_response(self, steps: List[ReActStep]) -> str:
@@ -1405,7 +1519,13 @@ def _format_react_response(self, steps: List[ReActStep]) -> str:
         response.append("")  # Empty line for readability
     
     return "\n".join(response)
+```
 
+This method creates a user-friendly display of the reasoning process, making the agent's thought process transparent and educational.
+
+**Step 2: Store reasoning sessions for analysis and improvement**
+
+```python
 def _store_reasoning_session(self, message: str, steps: List[ReActStep]):
     """Store reasoning session for later analysis"""
     self.react_history.append({
@@ -1413,7 +1533,13 @@ def _store_reasoning_session(self, message: str, steps: List[ReActStep]):
         "steps": steps,
         "timestamp": datetime.now()
     })
+```
 
+Storing reasoning sessions enables pattern analysis - understanding when agents succeed or fail, and optimizing prompts accordingly.
+
+**Step 3: Format steps for LLM prompt inclusion**
+
+```python
 def _format_steps_for_prompt(self, steps: List[ReActStep]) -> str:
     """Format steps for inclusion in prompts"""
     formatted = []
@@ -1426,6 +1552,8 @@ def _format_steps_for_prompt(self, steps: List[ReActStep]) -> str:
             formatted.append(f"  Observation: {step.observation}")
     return "\n".join(formatted)
 ```
+
+This utility formats the reasoning chain for inclusion in subsequent LLM prompts, maintaining context across conversation turns.
 
 
 **Transparency Benefit:** Users can follow the agent's reasoning process, building trust and enabling debugging.
@@ -1446,6 +1574,8 @@ When asked "What's the square root of 144 plus 5?", a ReAct agent might show:
     
 ### Step 5.8: Final Answer Generation and Analysis
 
+**Step 1: Generate final answer from reasoning chain**
+
 ```python
 # From src/session1/react_agent.py (continued)
 async def _generate_final_answer(self, message: str, steps: List[ReActStep]) -> str:
@@ -1463,7 +1593,13 @@ async def _generate_final_answer(self, message: str, steps: List[ReActStep]) -> 
     """
     
     return await self._call_llm(prompt)
+```
 
+This method synthesizes all the reasoning steps into a final, comprehensive answer. The prompt includes the full reasoning chain so the LLM can cite specific information sources.
+
+**Step 2: Performance analysis and optimization tracking**
+
+```python
 def get_react_analysis(self) -> Dict:
     """Analyze ReAct performance for optimization"""
     if not self.react_history:
@@ -1487,7 +1623,13 @@ def get_react_analysis(self) -> Dict:
         "action_distribution": action_counts,
         "most_recent": self.react_history[-1] if self.react_history else None
     }
+```
 
+This analysis function tracks key metrics: how many steps agents typically take, which actions are used most frequently, and overall conversation patterns. This data helps optimize the agent's reasoning efficiency.
+
+**Step 3: Utility methods for text processing and LLM integration**
+
+```python
 # Utility methods
 def _extract_json(self, text: str) -> str:
     """Extract JSON from text response"""
@@ -1501,6 +1643,8 @@ async def _call_llm(self, prompt: str) -> str:
         return await self.llm_client.chat(prompt)
     return f"Simulated response to: {prompt[:50]}..."
 ```
+
+These utility methods handle common operations: extracting JSON from unstructured LLM responses and providing a flexible interface for different LLM providers.
 
 
 **Performance Analysis:** Tracking step counts and action patterns helps optimize the reasoning process and identify bottlenecks.
@@ -1676,6 +1820,8 @@ def get_system_stats(self) -> Dict:
 
 Create tests to verify each agent pattern works correctly:
 
+**Test Dependencies and Setup:**
+
 ```python
 # From src/session1/test_agents.py
 import asyncio
@@ -1684,7 +1830,11 @@ from tool_use_agent import ToolUseAgent
 from react_agent import ReActAgent
 from tools import CalculatorTool, WebSearchTool
 from multi_agent_system import AgentCoordinator
+```
 
+**Mock LLM Client for Testing:**
+
+```python
 class MockLLMClient:
     """Mock LLM client for testing without real API calls"""
     
@@ -1705,7 +1855,11 @@ class MockLLMClient:
             return "I need to calculate this mathematical expression using the calculator tool."
         else:
             return "This is a test response demonstrating agent functionality."
+```
 
+**Reflection Agent Test:**
+
+```python
 # Test individual agent patterns
 async def test_reflection_agent():
     """Test reflection agent with self-improvement"""
@@ -1718,7 +1872,11 @@ async def test_reflection_agent():
     assert isinstance(response, str) and len(response) > 0
     assert hasattr(agent, 'reflection_history')
     print(f"  ✓ Reflection agent working correctly")
+```
 
+**Tool Use Agent Test:**
+
+```python
 async def test_tool_use_agent():
     """Test tool use agent with calculator"""
     print("\n🔧 Testing Tool Use Agent...")
@@ -1731,7 +1889,11 @@ async def test_tool_use_agent():
     assert isinstance(response, str) and len(response) > 0
     stats = agent.get_tool_usage_stats()
     print(f"  ✓ Tool use agent executed {stats.get('total_uses', 0)} tool operations")
+```
 
+**ReAct Agent Test:**
+
+```python
 async def test_react_agent():
     """Test ReAct agent with visible reasoning"""
     print("\n🧐 Testing ReAct Agent...")
@@ -1744,7 +1906,11 @@ async def test_react_agent():
     assert "Step" in response  # Should show reasoning steps
     analysis = agent.get_react_analysis()
     print(f"  ✓ ReAct agent completed reasoning in {analysis.get('average_steps', 0):.1f} average steps")
+```
 
+**Multi-Agent System Test Setup:**
+
+```python
 async def test_multi_agent_system():
     """Test multi-agent coordination"""
     print("\n🔗 Testing Multi-Agent System...")
@@ -1758,7 +1924,11 @@ async def test_multi_agent_system():
     # Register agents
     coordinator.register_agent(calculator_agent)
     coordinator.register_agent(reflection_agent)
-    
+```
+
+**Multi-Agent Collaborative Test:**
+
+```python
     # Test collaborative task
     task = "Calculate 15% tip on $80 and review the calculation"
     roles = {
@@ -1772,7 +1942,11 @@ async def test_multi_agent_system():
     assert stats["total_agents"] == 2
     print(f"  ✓ Multi-agent system coordinated {stats['total_agents']} agents")
     print(f"  ✓ Processed {stats['total_messages']} inter-agent messages")
+```
 
+**Main Test Runner:**
+
+```python
 # Main test runner
 async def run_comprehensive_tests():
     """Run all bare metal agent tests"""
@@ -1794,6 +1968,8 @@ if __name__ == "__main__":
 
 Create a demonstration showing all patterns working together:
 
+**Demo Dependencies and Setup:**
+
 ```python
 # From src/session1/demo_runner.py
 import asyncio
@@ -1803,7 +1979,11 @@ from tool_use_agent import ToolUseAgent
 from react_agent import ReActAgent
 from tools import CalculatorTool, WebSearchTool, FileOperationTool
 from test_agents import MockLLMClient
+```
 
+**Demo Initialization and Tool Setup:**
+
+```python
 async def demo_bare_metal_agents():
     """Comprehensive demonstration of all agent patterns"""
     print("=== Bare Metal Agent Framework Demo ===")
@@ -1817,7 +1997,11 @@ async def demo_bare_metal_agents():
     calculator_tool = CalculatorTool()
     search_tool = WebSearchTool()
     file_tool = FileOperationTool(["./demo_data/"])
-    
+```
+
+**Agent Creation and Registration:**
+
+```python
     # 1. Reflection Agent - Self-improving responses
     print("🔄 Creating Reflection Agent (self-improvement)")
     reflection_agent = ReflectionAgent("SelfImprover", llm_client, max_iterations=2)
@@ -1834,7 +2018,11 @@ async def demo_bare_metal_agents():
     coordinator.register_agent(react_agent)
     
     print(f"\n✓ Created {coordinator.get_system_stats()['total_agents']} specialized agents")
-    
+```
+
+**Individual Agent Demonstration:**
+
+```python
     # Demonstration scenarios
     print("\n=== Demonstration Scenarios ===")
     
@@ -1843,7 +2031,11 @@ async def demo_bare_metal_agents():
     task1 = "Calculate compound interest: $1000 at 5% annually for 3 years"
     result1 = await coordinator.route_message(task1, "Reasoner")
     print(f"Result: {result1[:200]}...")
-    
+```
+
+**Multi-Agent Collaboration Demo:**
+
+```python
     # Scenario 2: Multi-agent collaboration
     print("\n2. Collaborative Analysis:")
     task2 = "Analyze the cost-benefit of solar panels for a home"
@@ -1854,7 +2046,11 @@ async def demo_bare_metal_agents():
     }
     result2 = await coordinator.collaborative_task(task2, roles)
     print(f"Collaborative result completed with {len(roles)} agents")
-    
+```
+
+**Final Statistics and Cleanup:**
+
+```python
     # System statistics
     stats = coordinator.get_system_stats()
     print(f"\n=== Final Statistics ===")

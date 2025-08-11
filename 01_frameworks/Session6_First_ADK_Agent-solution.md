@@ -52,6 +52,10 @@
 
 ### Complete Solution:
 
+The planning agent demonstrates advanced ADK capabilities. Let's build it systematically:
+
+**Step 1: Set up the planning agent foundation**
+
 ```python
 # agents/planning_agent.py
 import json
@@ -93,7 +97,11 @@ Provide responses that are:
             "progress_monitoring",
             "plan_optimization"
         ]
-        
+```
+
+**Step 2: Initialize the planning agent with capabilities**
+
+```python        
         super().__init__(
             agent_name="PlanningAgent",
             system_instruction=system_instruction,
@@ -103,7 +111,13 @@ Provide responses that are:
         # Planning-specific state
         self.active_plans: Dict[str, Dict] = {}
         self.plan_templates: Dict[str, Dict] = self._load_plan_templates()
-    
+```
+
+The agent inherits from BaseADKAgent and adds planning-specific functionality including active plan tracking and reusable plan templates.
+
+**Step 3: Implement goal analysis and plan creation**
+
+```python
     async def create_plan(self, goal: str, constraints: Dict[str, Any] = None) -> Dict[str, Any]:
         """
         Create a detailed plan to achieve a goal.
@@ -123,7 +137,13 @@ Provide responses that are:
             
             # Analyze the goal and break it down
             goal_analysis = await self._analyze_goal(goal, constraints)
-            
+```
+
+The create_plan method coordinates the entire planning process by calling specialized analysis methods in sequence.
+
+**Step 4: Build the comprehensive plan structure**
+
+```python
             # Create step breakdown
             steps = await self._create_step_breakdown(goal_analysis)
             
@@ -135,7 +155,13 @@ Provide responses that are:
             
             # Assess risks and create contingencies
             risk_assessment = await self._assess_risks(steps, constraints)
-            
+```
+
+Each method specializes in one aspect of planning: steps, timeline, resources, and risks.
+
+**Step 5: Assemble and store the final plan**
+
+```python
             # Create the complete plan
             plan = {
                 "plan_id": plan_id,
@@ -171,7 +197,13 @@ Provide responses that are:
                 "goal": goal,
                 "timestamp": datetime.now().isoformat()
             }
-    
+```
+
+This method completes the plan creation and error handling. The plan is stored in memory and tracked for future reference.
+
+**Step 6: Implement goal analysis with Gemini**
+
+```python
     async def _analyze_goal(self, goal: str, constraints: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze the goal to understand scope and requirements."""
         
@@ -192,7 +224,13 @@ Provide responses that are:
         # Create a temporary chat session for analysis
         chat_session = self.model.start_chat()
         response = chat_session.send_message(analysis_prompt)
-        
+```
+
+This method leverages Gemini to intelligently analyze the goal and extract key planning insights.
+
+**Step 7: Parse analysis results and structure data**
+
+```python        
         # Parse the analysis (simplified - in production use structured parsing)
         analysis = {
             "goal_category": self._extract_category(response.text),
@@ -206,6 +244,13 @@ Provide responses that are:
         
         return analysis
     
+```
+
+The analysis results are parsed into structured data that drives the planning process.
+
+**Step 8: Create step breakdown using templates**
+
+```python
     async def _create_step_breakdown(self, goal_analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Break down the goal into actionable steps."""
         
@@ -217,7 +262,13 @@ Provide responses that are:
             template_steps = self.plan_templates[category]["steps"]
         else:
             template_steps = self.plan_templates["general"]["steps"]
-        
+```
+
+This method selects the appropriate planning template based on the goal category (software development, research, or general).
+
+**Step 9: Generate detailed step objects**
+
+```python        
         steps = []
         for i, template_step in enumerate(template_steps):
             step = {
@@ -237,6 +288,13 @@ Provide responses that are:
         
         return steps
     
+```
+
+Each step gets enriched with detailed metadata including duration estimates adjusted for complexity.
+
+**Step 10: Estimate timeline and dependencies**
+
+```python
     async def _estimate_timeline(self, steps: List[Dict], constraints: Dict[str, Any]) -> Dict[str, Any]:
         """Estimate timeline for plan execution."""
         
@@ -251,7 +309,13 @@ Provide responses that are:
             # Identify critical path steps
             if step.get("prerequisites"):
                 critical_path.append(step["step_id"])
-        
+```
+
+This method calculates the total time needed and identifies critical path steps that have dependencies.
+
+**Step 11: Apply constraints and validate timeline**
+
+```python        
         # Apply constraint adjustments
         deadline_constraint = constraints.get("deadline")
         resource_constraint = constraints.get("available_hours_per_day", 8)
@@ -280,6 +344,13 @@ Provide responses that are:
         
         return timeline
     
+```
+
+The timeline method validates constraints and determines if the plan is feasible within the given deadline.
+
+**Step 12: Identify required resources**
+
+```python
     async def _identify_resources(self, steps: List[Dict], constraints: Dict[str, Any]) -> Dict[str, Any]:
         """Identify required resources for plan execution."""
         
@@ -300,7 +371,13 @@ Provide responses that are:
             },
             "external_dependencies": []
         }
-        
+```
+
+This method structures resource requirements into categories: human, technical, financial, and external dependencies.
+
+**Step 13: Aggregate resource requirements from steps**
+
+```python        
         for step in steps:
             # Accumulate person hours
             resources["human_resources"]["estimated_person_hours"] += step["estimated_duration"]
@@ -319,6 +396,13 @@ Provide responses that are:
         
         return resources
     
+```
+
+The resource identification method iterates through all steps to aggregate skills, tools, and time requirements.
+
+**Step 14: Assess risks and create mitigation strategies**
+
+```python
     async def _assess_risks(self, steps: List[Dict], constraints: Dict[str, Any]) -> Dict[str, Any]:
         """Assess risks and create mitigation strategies."""
         
@@ -354,7 +438,13 @@ Provide responses that are:
                 "mitigation": "Define clear scope boundaries and change control process"
             }
         ]
-        
+```
+
+This method defines common project risk patterns with probability, impact, and mitigation strategies.
+
+**Step 15: Evaluate and categorize risks**
+
+```python        
         # Assess each risk pattern
         for risk_pattern in risk_patterns:
             risk_score = self._calculate_risk_score(risk_pattern, steps, constraints)

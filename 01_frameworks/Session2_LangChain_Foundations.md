@@ -63,6 +63,8 @@ LangChain provides unified interfaces for different LLM providers:
 
 **LLM Factory Setup:**
 
+The factory pattern allows us to create different LLM instances through a unified interface. This is particularly valuable when you need to switch between providers without changing your agent code.
+
 ```python
 # src/session2/llm_setup.py
 from langchain.chat_models import ChatOpenAI, ChatAnthropic
@@ -77,8 +79,9 @@ class LLMFactory:
         """Create LLM instance based on provider"""
 ```
 
-
 **OpenAI Provider Configuration:**
+
+The OpenAI integration is the most commonly used option, supporting GPT-3.5 and GPT-4 models with flexible configuration:
 
 ```python
         if provider == "openai":
@@ -89,8 +92,9 @@ class LLMFactory:
             )
 ```
 
-
 **Anthropic Provider Configuration:**
+
+Anthropic's Claude models offer strong reasoning capabilities and are configured similarly to OpenAI:
 
 ```python
         elif provider == "anthropic":
@@ -99,10 +103,17 @@ class LLMFactory:
                 temperature=kwargs.get("temperature", 0.7),
                 anthropic_api_key=os.getenv("ANTHROPIC_API_KEY")
             )
+```
+
+**Error Handling and Usage:**
+
+The factory includes validation and provides a simple interface for creating LLM instances:
+
+```python
         else:
             raise ValueError(f"Unsupported provider: {provider}")
 
-# Usage example
+# Usage example - easy switching between providers
 llm = LLMFactory.create_llm("openai", temperature=0.1)
 ```
 
@@ -111,6 +122,8 @@ llm = LLMFactory.create_llm("openai", temperature=0.1)
 LangChain's tool system provides standardized interfaces:
 
 **Tool Integration Imports:**
+
+LangChain provides multiple approaches for creating tools. Here are the essential imports for tool development:
 
 ```python
 # src/session2/langchain_tools.py
@@ -124,10 +137,9 @@ import json
 import math
 ```
 
-
 **Method 1: Inheriting from BaseTool**
 
-This is the traditional approach for creating custom tools:
+This is the traditional approach for creating custom tools, offering maximum control and flexibility:
 
 ```python
 class CalculatorTool(BaseTool):
@@ -136,8 +148,9 @@ class CalculatorTool(BaseTool):
     description = "Perform mathematical calculations and expressions"
 ```
 
-
 **Tool Execution Logic:**
+
+The `_run` method contains the core functionality. Note the safe evaluation approach to prevent security issues:
 
 ```python
     def _run(self, expression: str) -> str:
@@ -155,8 +168,9 @@ class CalculatorTool(BaseTool):
             return f"Error: {str(e)}"
 ```
 
-
 **Async Support:**
+
+For tools that may need asynchronous execution, implement the `_arun` method:
 
 ```python
     def _arun(self, expression: str):
@@ -166,7 +180,7 @@ class CalculatorTool(BaseTool):
 
 **Method 2: Using @tool Decorator**
 
-The decorator approach is simpler for straightforward functions:
+The decorator approach is simpler for straightforward functions and requires less boilerplate:
 
 ```python
 @tool
@@ -187,7 +201,7 @@ def weather_tool(city: str) -> str:
 
 **Method 3: StructuredTool with Pydantic Models**
 
-For complex inputs, use Pydantic schemas:
+For tools requiring complex, validated inputs, combine StructuredTool with Pydantic schemas:
 
 ```python
 class EmailInput(BaseModel):
@@ -202,8 +216,9 @@ def send_email(recipient: str, subject: str, body: str) -> str:
     return f"Email sent to {recipient} with subject '{subject}'"
 ```
 
-
 **Structured Tool Creation:**
+
+The structured approach provides automatic input validation and better error messages:
 
 ```python
 email_tool = StructuredTool.from_function(
@@ -216,7 +231,7 @@ email_tool = StructuredTool.from_function(
 
 **Custom API Integration Tool**
 
-For external API integration:
+For external API integrations, the BaseTool approach offers the most flexibility:
 
 ```python
 class NewsAPITool(BaseTool):
@@ -229,8 +244,9 @@ class NewsAPITool(BaseTool):
         self.api_key = api_key
 ```
 
+**API Implementation Details:**
 
-**News API Implementation:**
+The tool implementation handles API calls, data processing, and error management:
 
 ```python
     def _run(self, query: str, num_articles: int = 5) -> str:
@@ -247,8 +263,9 @@ class NewsAPITool(BaseTool):
             ]
 ```
 
-
 **Result Formatting:**
+
+Proper formatting ensures agents can effectively use the tool output:
 
 ```python
             result = f"Found {len(articles)} articles about '{query}':\n"
@@ -267,6 +284,10 @@ class NewsAPITool(BaseTool):
 
 ### **Pattern 1: Reflection with LangChain**
 
+The reflection pattern allows agents to critique and improve their own responses iteratively. LangChain's framework makes this pattern easier to implement with built-in memory and agent capabilities.
+
+**Core Imports and Setup:**
+
 ```python
 # src/session2/langchain_reflection.py
 from langchain.agents import Tool, AgentType, initialize_agent
@@ -275,7 +296,13 @@ from langchain.callbacks import StdOutCallbackHandler
 from langchain.schema import SystemMessage
 from typing import List, Dict
 import asyncio
+```
 
+**Reflection Agent Class Definition:**
+
+The agent maintains history and uses tools to facilitate the reflection process:
+
+```python
 class LangChainReflectionAgent:
     """Reflection agent using LangChain framework"""
     
@@ -290,7 +317,13 @@ class LangChainReflectionAgent:
             description="Critically evaluate and improve a response",
             func=self._reflect_on_response
         )
-        
+```
+
+**Agent Initialization:**
+
+The agent combines tools, memory, and LLM into a cohesive reflection system:
+
+```python
         # Initialize agent with reflection capability
         self.agent = initialize_agent(
             tools=[self.reflection_tool],
@@ -299,7 +332,13 @@ class LangChainReflectionAgent:
             verbose=True,
             memory=ConversationBufferMemory(memory_key="chat_history", return_messages=True)
         )
-    
+```
+
+**Reflection Logic:**
+
+The core reflection method evaluates responses against multiple criteria:
+
+```python
     def _reflect_on_response(self, response: str) -> str:
         """Reflect on and potentially improve a response"""
         reflection_prompt = f"""
@@ -319,7 +358,13 @@ class LangChainReflectionAgent:
         
         critique = self.llm.invoke(reflection_prompt).content
         return critique
-    
+```
+
+**Reflection Processing Loop:**
+
+The main processing method orchestrates the reflection iterations:
+
+```python
     async def process_with_reflection(self, message: str) -> str:
         """Process message with reflection pattern"""
         current_response = await self._initial_response(message)
@@ -337,7 +382,13 @@ class LangChainReflectionAgent:
                     "final_critique": critique
                 })
                 break
-            
+```
+
+**Response Improvement:**
+
+When reflection identifies issues, the agent generates an improved response:
+
+```python
             # Improve response
             improvement_prompt = f"""
             Original question: {message}
@@ -352,7 +403,13 @@ class LangChainReflectionAgent:
             current_response = improved_response
         
         return current_response
-    
+```
+
+**Initial Response Generation:**
+
+The initial response provides a baseline for the reflection process:
+
+```python
     async def _initial_response(self, message: str) -> str:
         """Generate initial response"""
         initial_prompt = f"""
@@ -363,7 +420,11 @@ class LangChainReflectionAgent:
         
         response = self.llm.invoke(initial_prompt).content
         return response
+```
 
+**Usage Example:**
+
+```python
 # Example usage
 async def demo_langchain_reflection():
     from llm_setup import LLMFactory
@@ -381,13 +442,23 @@ async def demo_langchain_reflection():
 
 ### **Pattern 2: Tool Use with LangChain Agents**
 
+LangChain's agent framework excels at orchestrating multiple tools to solve complex problems. The tool use pattern shows how agents can dynamically select and use appropriate tools based on the task.
+
+**Core Imports and Dependencies:**
+
 ```python
 # src/session2/langchain_tool_use.py
 from langchain.agents import Tool, AgentType, initialize_agent, AgentExecutor
 from langchain.agents.tools import InvalidTool
 from langchain.memory import ConversationBufferMemory
 from langchain_tools import CalculatorTool, weather_tool, email_tool, NewsAPITool
+```
 
+**Tool Agent Class Definition:**
+
+The agent class provides a robust framework for managing multiple tools with memory and error handling:
+
+```python
 class LangChainToolAgent:
     """Advanced tool use agent with LangChain"""
     
@@ -400,7 +471,13 @@ class LangChainToolAgent:
             memory_key="chat_history",
             return_messages=True
         )
-        
+```
+
+**Agent Initialization:**
+
+The agent initialization configures behavior, timeouts, and error handling:
+
+```python
         # Initialize agent with tools
         self.agent = initialize_agent(
             tools=self.tools,
@@ -412,7 +489,13 @@ class LangChainToolAgent:
             max_execution_time=30,
             max_iterations=10
         )
-    
+```
+
+**Default Tool Setup:**
+
+The agent comes with a sensible default set of tools for common operations:
+
+```python
     def _default_tools(self) -> List[Tool]:
         """Create default tool set"""
         tools = [
@@ -429,7 +512,13 @@ class LangChainToolAgent:
             print("Search tool not available")
         
         return tools
-    
+```
+
+**Message Processing:**
+
+The core processing method handles tool selection and execution with error recovery:
+
+```python
     async def process_message(self, message: str) -> str:
         """Process message using available tools"""
         try:
@@ -437,7 +526,13 @@ class LangChainToolAgent:
             return response
         except Exception as e:
             return f"Error processing message: {str(e)}"
-    
+```
+
+**Dynamic Tool Management:**
+
+Tools can be added dynamically to extend agent capabilities:
+
+```python
     def add_tool(self, tool: Tool):
         """Add a new tool to the agent"""
         self.tools.append(tool)
@@ -450,7 +545,13 @@ class LangChainToolAgent:
             memory=self.memory,
             handle_parsing_errors=True
         )
-    
+```
+
+**Tool Information Access:**
+
+The agent provides introspection capabilities to understand available tools:
+
+```python
     def get_tool_info(self) -> Dict:
         """Get information about available tools"""
         return {
@@ -460,7 +561,13 @@ class LangChainToolAgent:
                 tool.name: tool.description for tool in self.tools
             }
         }
+```
 
+**Custom Domain-Specific Tool:**
+
+Here's an example of creating specialized tools for specific domains:
+
+```python
 # Custom domain-specific tool
 class DatabaseQueryTool(BaseTool):
     """Tool for querying a database"""
@@ -478,7 +585,11 @@ class DatabaseQueryTool(BaseTool):
             return f"Found 23 products matching query: {query}"
         else:
             return f"Table '{table}' not found"
+```
 
+**Advanced Usage Example:**
+
+```python
 # Example usage with custom tools
 async def demo_advanced_tool_use():
     from llm_setup import LLMFactory
@@ -506,7 +617,9 @@ async def demo_advanced_tool_use():
 
 ### **Pattern 3: ReAct with LangChain**
 
-LangChain's built-in ReAct implementation:
+The ReAct (Reasoning + Acting) pattern combines reasoning and action in iterative cycles. LangChain provides both built-in implementations and the flexibility to create custom ReAct agents.
+
+**Core Imports and Setup:**
 
 ```python
 # src/session2/langchain_react.py
@@ -514,7 +627,15 @@ from langchain.agents import Tool, AgentType, initialize_agent
 from langchain.agents.react.base import ReActTextWorldAgent
 from langchain.memory import ConversationBufferMemory
 from typing import List, Dict
+```
 
+### **Built-in LangChain ReAct Agent**
+
+LangChain provides a ready-to-use ReAct implementation that handles the reasoning-action cycle automatically:
+
+**Agent Initialization:**
+
+```python
 class LangChainReActAgent:
     """ReAct agent using LangChain's built-in implementation"""
     
@@ -534,7 +655,13 @@ class LangChainReActAgent:
         )
         
         self.execution_history = []
-    
+```
+
+**Problem Solving Method:**
+
+The solve_problem method orchestrates the ReAct process and handles execution tracking:
+
+```python
     async def solve_problem(self, problem: str) -> str:
         """Solve problem using ReAct pattern"""
         print(f"🔍 Starting ReAct process for: {problem}")
@@ -553,15 +680,28 @@ class LangChainReActAgent:
             
         except Exception as e:
             return f"ReAct process failed: {str(e)}"
-    
+```
+
+**Reasoning Chain Access:**
+
+The built-in agent provides access to intermediate reasoning steps:
+
+```python
     def get_reasoning_chain(self) -> List[Dict]:
         """Get the reasoning chain from last execution"""
         # Access agent's intermediate steps
         if hasattr(self.agent, 'agent') and hasattr(self.agent.agent, 'get_intermediate_steps'):
             return self.agent.agent.get_intermediate_steps()
         return []
+```
 
-# Custom ReAct implementation for more control
+### **Custom ReAct Implementation**
+
+For maximum control over the reasoning process, you can implement custom ReAct logic:
+
+**Custom Agent Setup:**
+
+```python
 class CustomReActAgent:
     """Custom ReAct implementation with detailed step tracking"""
     
@@ -569,7 +709,13 @@ class CustomReActAgent:
         self.llm = llm
         self.tools = {tool.name: tool for tool in tools}
         self.reasoning_steps = []
-    
+```
+
+**Core ReAct Loop:**
+
+The main solving method implements the think-act-observe cycle:
+
+```python
     async def solve_problem(self, problem: str, max_steps: int = 10) -> str:
         """Solve problem with custom ReAct implementation"""
         self.reasoning_steps = []
@@ -594,25 +740,13 @@ class CustomReActAgent:
                 step_info["observation"] = f"Final Answer: {action_decision['answer']}"
                 self.reasoning_steps.append(step_info)
                 return action_decision["answer"]
-            
-            # Execute action
-            step_info["action"] = action_decision["action"]
-            step_info["action_input"] = action_decision["action_input"]
-            
-            observation = await self._execute_action(
-                action_decision["action"],
-                action_decision["action_input"]
-            )
-            
-            step_info["observation"] = observation
-            self.reasoning_steps.append(step_info)
-            
-            # Generate next thought
-            current_thought = await self._next_thought(problem, step_info, observation)
-            current_step += 1
-        
-        return "Maximum steps reached without final answer"
-    
+```
+
+**Action Decision Logic:**
+
+The agent decides what action to take based on its current reasoning:
+
+```python
     async def _decide_action(self, problem: str, thought: str) -> Dict:
         """Decide next action based on current thought"""
         tools_desc = "\n".join([
@@ -645,7 +779,13 @@ class CustomReActAgent:
             return json.loads(response.content)
         except Exception:
             return {"action": "ANSWER", "answer": "Failed to parse action decision"}
-    
+```
+
+**Action Execution and Observation:**
+
+The agent executes selected actions and processes observations:
+
+```python
     async def _execute_action(self, action: str, action_input: str) -> str:
         """Execute action and return observation"""
         if action not in self.tools:
@@ -657,7 +797,13 @@ class CustomReActAgent:
             return f"Tool {action} executed successfully. Result: {result}"
         except Exception as e:
             return f"Tool {action} failed: {str(e)}"
-    
+```
+
+**Next Thought Generation:**
+
+After observing action results, the agent generates the next reasoning step:
+
+```python
     async def _next_thought(self, problem: str, step_info: Dict, observation: str) -> str:
         """Generate next thought based on observation"""
         steps_summary = self._format_steps()
@@ -676,7 +822,13 @@ class CustomReActAgent:
         
         response = await self.llm.ainvoke(prompt)
         return response.content
-    
+```
+
+**Step Formatting and Analysis:**
+
+The agent provides tools for analyzing its reasoning process:
+
+```python
     def _format_steps(self) -> str:
         """Format reasoning steps for display"""
         formatted = []
@@ -696,7 +848,11 @@ class CustomReActAgent:
             "steps": self.reasoning_steps,
             "formatted_reasoning": self._format_steps()
         }
+```
 
+**Usage Example:**
+
+```python
 # Example usage
 async def demo_react_agents():
     from llm_setup import LLMFactory
@@ -727,6 +883,10 @@ async def demo_react_agents():
 
 ## **Pattern 4: Planning with LangChain**
 
+The planning pattern separates high-level strategic thinking from tactical execution. LangChain offers both built-in planning frameworks and the ability to create sophisticated hierarchical planning systems.
+
+**Core Imports and Dependencies:**
+
 ```python
 # src/session2/langchain_planning.py
 from langchain.agents import Tool, AgentType, initialize_agent
@@ -734,7 +894,15 @@ from langchain.experimental.plan_and_execute import PlanAndExecuteAgentExecutor,
 from langchain.memory import ConversationBufferMemory
 from typing import List, Dict
 import json
+```
 
+### **Built-in LangChain Planning Agent**
+
+LangChain's Plan-and-Execute framework provides a ready-to-use planning system that separates planning from execution:
+
+**Agent Initialization:**
+
+```python
 class LangChainPlanningAgent:
     """Planning agent using LangChain's Plan-and-Execute framework"""
     
@@ -756,7 +924,13 @@ class LangChainPlanningAgent:
         )
         
         self.execution_history = []
-    
+```
+
+**Task Execution:**
+
+The built-in agent handles complex multi-step tasks through automatic planning and execution:
+
+```python
     async def execute_complex_task(self, task: str) -> str:
         """Execute complex multi-step task with planning"""
         print(f"📋 Planning and executing: {task}")
@@ -781,8 +955,15 @@ class LangChainPlanningAgent:
         if hasattr(self.agent, 'planner') and hasattr(self.agent.planner, 'last_plan'):
             return self.agent.planner.last_plan
         return {}
+```
 
-# Custom hierarchical planning agent
+### **Custom Hierarchical Planning Agent**
+
+For more sophisticated planning scenarios, you can implement hierarchical task decomposition:
+
+**Hierarchical Agent Setup:**
+
+```python
 class HierarchicalPlanningAgent:
     """Custom planning agent with hierarchical task decomposition"""
     
@@ -790,7 +971,13 @@ class HierarchicalPlanningAgent:
         self.llm = llm
         self.tools = {tool.name: tool for tool in tools}
         self.planning_history = []
-    
+```
+
+**Planning Workflow:**
+
+The hierarchical approach breaks complex goals into manageable steps through multiple planning phases:
+
+```python
     async def execute_with_planning(self, goal: str) -> str:
         """Execute goal with hierarchical planning"""
         # Step 1: Create high-level plan
@@ -812,7 +999,13 @@ class HierarchicalPlanningAgent:
         })
         
         return execution_result
-    
+```
+
+**High-Level Planning:**
+
+The first phase creates strategic, high-level steps:
+
+```python
     async def _create_high_level_plan(self, goal: str) -> List[str]:
         """Create high-level plan steps"""
         tools_desc = "\n".join([
@@ -845,7 +1038,13 @@ class HierarchicalPlanningAgent:
             return plan_data.get("steps", [])
         except Exception:
             return ["Failed to create high-level plan"]
-    
+```
+
+**Detailed Planning:**
+
+The second phase decomposes high-level steps into specific, executable actions:
+
+```python
     async def _create_detailed_plan(self, goal: str, high_level_plan: List[str]) -> List[Dict]:
         """Create detailed execution plan"""
         detailed_steps = []
@@ -888,7 +1087,13 @@ class HierarchicalPlanningAgent:
                 })
         
         return detailed_steps
-    
+```
+
+**Plan Execution:**
+
+The execution phase processes each detailed step and handles tool interactions:
+
+```python
     async def _execute_plan(self, detailed_plan: List[Dict]) -> str:
         """Execute the detailed plan"""
         results = []
@@ -914,7 +1119,13 @@ class HierarchicalPlanningAgent:
         
         # Synthesize final result
         return await self._synthesize_results(detailed_plan, results)
-    
+```
+
+**Result Synthesis:**
+
+The final phase combines execution results into a comprehensive response:
+
+```python
     async def _synthesize_results(self, plan: List[Dict], results: List[str]) -> str:
         """Synthesize execution results into final response"""
         plan_summary = "\n".join([
@@ -937,7 +1148,13 @@ class HierarchicalPlanningAgent:
         
         response = await self.llm.ainvoke(prompt)
         return response.content
-    
+```
+
+**Planning Analytics:**
+
+The agent provides insights into planning performance and complexity:
+
+```python
     def get_planning_analysis(self) -> Dict:
         """Analyze planning performance"""
         if not self.planning_history:
@@ -956,7 +1173,11 @@ class HierarchicalPlanningAgent:
                 key=lambda p: len(p["detailed_plan"])
             )
         }
+```
 
+**Usage Example:**
+
+```python
 # Example usage
 async def demo_planning_agents():
     from llm_setup import LLMFactory
@@ -987,6 +1208,10 @@ async def demo_planning_agents():
 
 ## **Pattern 5: Multi-Agent with LangChain**
 
+Let's build a sophisticated multi-agent system using LangChain's orchestration capabilities:
+
+**Step 1: Set up the multi-agent system foundation**
+
 ```python
 # src/session2/langchain_multi_agent.py
 from langchain.agents import Tool, AgentType, initialize_agent
@@ -1002,7 +1227,13 @@ class LangChainMultiAgentSystem:
         self.llm = llm
         self.agents = {}
         self.communication_history = []
-        
+```
+
+This initializes our multi-agent system with an LLM and storage for agent instances and their communication history.
+
+**Step 2: Agent creation and specialization**
+
+```python        
     def create_specialized_agent(
         self, 
         name: str, 
@@ -1041,6 +1272,13 @@ class LangChainMultiAgentSystem:
         }
         
         print(f"Created agent '{name}' with role: {role}")
+```
+
+This method creates specialized agents with their own memory, role definitions, and tool sets. Each agent maintains conversation history and can be configured for specific tasks.
+
+**Step 3: Inter-agent communication system**
+
+```python
     
     async def send_message_to_agent(
         self, 
@@ -1070,6 +1308,13 @@ class LangChainMultiAgentSystem:
             
         except Exception as e:
             return f"Error communicating with {agent_name}: {str(e)}"
+```
+
+This communication system enables agents to send messages to each other while maintaining a complete audit log of inter-agent conversations.
+
+**Step 4: Collaborative workflow orchestration**
+
+```python
     
     async def collaborative_workflow(
         self, 

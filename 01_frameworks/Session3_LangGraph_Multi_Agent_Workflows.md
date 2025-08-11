@@ -41,14 +41,20 @@ Input ─→ Decision ─→ Agent B ─→ Synthesis ─→ Output
 
 ### Step 1.1: Core LangGraph Concepts
 
-LangGraph has four key components:
+LangGraph has four key components. Let's start by understanding the essential imports and state definition:
 
 ```python
 # From src/session3/langgraph_basics.py
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Annotated, Sequence
 import operator
+```
 
+The first step is importing the necessary components. `StateGraph` is the main graph builder, `END` marks workflow termination, and we use typing annotations for robust state management.
+
+Now, let's define our state structure - this is the data container that flows between all nodes in our workflow:
+
+```python
 # 1. State Definition - What data flows between nodes
 class AgentState(TypedDict):
     messages: Annotated[Sequence[BaseMessage], operator.add]
@@ -116,7 +122,7 @@ def configure_workflow_edges(workflow):
 
 ### Step 1.4: Node Implementation
 
-Nodes are functions that process state and return updates:
+Nodes are functions that process state and return updates. Let's start with a research node that gathers information:
 
 ```python
 # From src/session3/workflow_nodes.py
@@ -135,7 +141,13 @@ def research_node(state: AgentState) -> AgentState:
         "results": updated_results,
         "messages": state["messages"] + [HumanMessage(content=research_result)]
     }
+```
 
+Notice how the research node extracts the current task, performs work, and returns state updates. The key pattern is copying existing state and adding new data rather than replacing everything.
+
+Now let's implement an analysis node that processes the research data:
+
+```python
 def analyze_node(state: AgentState) -> AgentState:
     """Analysis node - processes research data"""
     research_data = state["results"].get("research", "")
@@ -165,7 +177,7 @@ def analyze_node(state: AgentState) -> AgentState:
 
 ### Step 2.1: Decision Functions
 
-Conditional edges rely on decision functions that examine state:
+Conditional edges rely on decision functions that examine state and return routing decisions. Let's start with a function that evaluates analysis quality:
 
 ```python
 # From src/session3/decision_logic.py
@@ -188,7 +200,13 @@ def should_continue_analysis(state: AgentState) -> str:
     
     # Analysis looks good
     return "end"
+```
 
+This decision function implements quality control with retry logic. It examines both the content quality and iteration count to prevent infinite loops while ensuring quality results.
+
+Here's another common pattern - routing based on task characteristics:
+
+```python
 def route_by_task_type(state: AgentState) -> str:
     """Route to different agents based on task type"""
     current_task = state["current_task"]
@@ -206,6 +224,8 @@ def route_by_task_type(state: AgentState) -> str:
 
 ### Step 2.2: Advanced Routing Patterns
 
+Let's build a more sophisticated workflow that intelligently routes tasks to specialized agents. First, we'll set up the graph structure:
+
 ```python
 # From src/session3/advanced_routing.py
 def create_intelligent_routing_workflow():
@@ -219,7 +239,13 @@ def create_intelligent_routing_workflow():
     workflow.add_node("research_specialist", handle_research_tasks)
     workflow.add_node("creative_specialist", handle_creative_tasks)
     workflow.add_node("quality_checker", check_output_quality)
-    
+```
+
+This creates our graph with specialized agents for different types of work. The task_analyzer acts as a dispatcher, examining incoming tasks to determine the best specialist.
+
+Now let's configure the routing logic:
+
+```python
     # Start with task analysis
     workflow.set_entry_point("task_analyzer")
     
@@ -245,6 +271,8 @@ def create_intelligent_routing_workflow():
 
 ### Step 2.3: Quality Control Loops
 
+Quality control is essential for reliable workflows. Let's implement a quality checking node that evaluates work and provides feedback:
+
 ```python
 # From src/session3/quality_control.py
 def check_output_quality(state: AgentState) -> AgentState:
@@ -266,7 +294,13 @@ def check_output_quality(state: AgentState) -> AgentState:
         "results": updated_results,
         "iteration_count": state.get("iteration_count", 0) + 1
     }
+```
 
+This node evaluates the quality of work and marks whether revision is needed. It also tracks iteration count to prevent infinite revision loops.
+
+Now we need a decision function to determine the next step based on quality assessment:
+
+```python
 def quality_decision(state: AgentState) -> str:
     """Decide if work needs revision"""
     quality_score = state["results"].get("quality_score", 0)
@@ -305,6 +339,8 @@ Task ├─→ Agent B ─┤→ Merge → Result (1x time)
 
 ### Step 3.1: Creating Parallel Nodes
 
+Parallel execution is one of LangGraph's most powerful features. Let's create a workflow that executes multiple research branches simultaneously:
+
 ```python
 # From src/session3/parallel_workflow.py
 def create_parallel_research_workflow():
@@ -318,7 +354,13 @@ def create_parallel_research_workflow():
     workflow.add_node("competitive_research", research_competitors)
     workflow.add_node("merge_research", merge_parallel_results)
     workflow.add_node("final_analysis", create_final_analysis)
-    
+```
+
+These nodes represent different research specializations that can work simultaneously. Each focuses on a specific aspect: technical details, market conditions, and competitive landscape.
+
+Now let's configure the parallel execution and synchronization:
+
+```python
     # All research nodes run in parallel from start
     workflow.set_entry_point("technical_research")
     workflow.set_entry_point("market_research") 
@@ -338,6 +380,8 @@ def create_parallel_research_workflow():
 
 ### Step 3.2: State Merging Strategies
 
+When parallel branches complete, we need to merge their results intelligently. Here's how to collect and combine parallel execution results:
+
 ```python
 # From src/session3/state_merging.py
 def merge_parallel_results(state: AgentState) -> AgentState:
@@ -349,7 +393,13 @@ def merge_parallel_results(state: AgentState) -> AgentState:
     technical_data = results.get("technical_research", {})
     market_data = results.get("market_research", {})
     competitive_data = results.get("competitive_research", {})
-    
+```
+
+This first step extracts the individual results from each parallel branch. Each branch stores its findings in the shared state under its own key.
+
+Now we create a comprehensive merged dataset that combines all insights:
+
+```python
     # Create comprehensive merged result
     merged_research = {
         "technical_insights": technical_data,
@@ -372,6 +422,8 @@ def merge_parallel_results(state: AgentState) -> AgentState:
 
 ### Step 3.3: Handling Parallel Timing Issues
 
+Sometimes you need explicit synchronization control for parallel workflows. Let's define an enhanced state that tracks completion:
+
 ```python
 # From src/session3/synchronization.py
 class SynchronizedState(TypedDict):
@@ -380,7 +432,13 @@ class SynchronizedState(TypedDict):
     results: dict
     completion_status: dict  # Track which branches are complete
     required_branches: list  # Which branches must complete
+```
 
+This enhanced state includes completion tracking fields. The `completion_status` tracks which branches have finished, while `required_branches` defines which ones must complete before proceeding.
+
+Here's a decision function that implements synchronization logic:
+
+```python
 def wait_for_all_branches(state: SynchronizedState) -> str:
     """Decision function that waits for all parallel branches"""
     
@@ -411,7 +469,7 @@ def wait_for_all_branches(state: SynchronizedState) -> str:
 
 ### Step 4.1: The Debate Pattern
 
-Create agents that can debate and reach consensus:
+Create agents that can debate and reach consensus. First, let's set up the debate workflow structure:
 
 ```python
 # From src/session3/debate_pattern.py
@@ -425,7 +483,13 @@ def create_debate_workflow():
     workflow.add_node("critic", critique_proposal)
     workflow.add_node("mediator", mediate_debate)
     workflow.add_node("consensus_checker", check_consensus)
-    
+```
+
+This creates our debate participants: a proposer who suggests solutions, a critic who challenges them, a mediator who facilitates discussion, and a consensus checker who evaluates agreement.
+
+Now let's configure the debate flow with conditional loops:
+
+```python
     # Debate flow
     workflow.set_entry_point("proposer")
     workflow.add_edge("proposer", "critic")
@@ -444,7 +508,13 @@ def create_debate_workflow():
     )
     
     return workflow.compile()
+```
 
+The key insight here is the conditional loop that can send the debate back to the proposer for another round if consensus hasn't been reached.
+
+Here's the decision logic that determines when to end the debate:
+
+```python
 def check_debate_completion(state: AgentState) -> str:
     """Determine if debate should continue"""
     iteration_count = state.get("iteration_count", 0)
@@ -461,7 +531,7 @@ def check_debate_completion(state: AgentState) -> str:
 
 ### Step 4.2: The Review Chain Pattern
 
-Implement a peer review system:
+Implement a peer review system with multiple reviewers and revision cycles. First, let's set up the review workflow:
 
 ```python
 # From src/session3/review_chain.py
@@ -476,7 +546,13 @@ def create_review_chain_workflow():
     workflow.add_node("peer_review_2", second_reviewer)
     workflow.add_node("author_revision", handle_revisions)
     workflow.add_node("final_approval", final_review)
-    
+```
+
+This creates a comprehensive review pipeline with initial drafting, two peer reviewers, author revision, and final approval stages.
+
+Now let's configure the review process flow with conditional branching:
+
+```python
     # Sequential review process
     workflow.set_entry_point("initial_draft")
     workflow.add_edge("initial_draft", "peer_review_1")
@@ -500,7 +576,7 @@ def create_review_chain_workflow():
 
 ### Step 4.3: The Hierarchical Team Pattern
 
-Create supervisor-worker relationships:
+Create supervisor-worker relationships where a supervisor coordinates specialized workers. Let's start with the team structure:
 
 ```python
 # From src/session3/hierarchical_team.py
@@ -515,7 +591,13 @@ def create_hierarchical_workflow():
     workflow.add_node("analysis_worker", handle_analysis_tasks)
     workflow.add_node("report_worker", handle_reporting_tasks)
     workflow.add_node("quality_assurance", qa_check)
-    
+```
+
+This creates a hierarchical structure with one supervisor coordinating three specialized workers, plus a quality assurance step.
+
+Now let's configure the supervision and reporting relationships:
+
+```python
     # Supervisor routes work to appropriate workers
     workflow.set_entry_point("supervisor")
     
@@ -537,7 +619,13 @@ def create_hierarchical_workflow():
     workflow.add_edge("report_worker", "supervisor")
     
     return workflow.compile()
+```
 
+The key pattern here is that all workers report back to the supervisor, creating a central coordination point.
+
+Here's the supervisor node implementation that manages the team:
+
+```python
 def supervise_team(state: AgentState) -> AgentState:
     """Supervisor node that coordinates team work"""
     current_task = state["current_task"]
@@ -564,6 +652,8 @@ def supervise_team(state: AgentState) -> AgentState:
 
 ### Step 5.1: Graceful Error Recovery
 
+Robust workflows need comprehensive error handling. Let's build a fault-tolerant workflow structure:
+
 ```python
 # From src/session3/error_handling.py
 def create_fault_tolerant_workflow():
@@ -576,7 +666,13 @@ def create_fault_tolerant_workflow():
     workflow.add_node("error_handler", handle_errors)
     workflow.add_node("retry_logic", retry_failed_operation)
     workflow.add_node("fallback_processor", fallback_processing)
-    
+```
+
+This creates specialized nodes for different aspects of error handling: main processing, error handling, retry logic, and fallback processing.
+
+Now let's configure the error handling flow with conditional routing:
+
+```python
     # Normal flow
     workflow.set_entry_point("main_processor")
     
@@ -593,7 +689,13 @@ def create_fault_tolerant_workflow():
     )
     
     return workflow.compile()
+```
 
+This routing logic evaluates the success or failure of the main processor and routes to appropriate error handling strategies.
+
+Here's the centralized error handling node that logs and processes errors:
+
+```python
 def handle_errors(state: AgentState) -> AgentState:
     """Centralized error handling node"""
     error_info = state["results"].get("error", {})

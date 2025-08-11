@@ -23,6 +23,37 @@ The architecture above shows how ADK agents integrate with:
 
 ---
 
+### Companion code for this session
+
+Hands-on code for this session lives in `01_frameworks/src/session6`. It demonstrates multi-agent orchestration you can adapt for ADK-based systems.
+
+Run locally:
+
+```bash
+cd 01_frameworks/src/session6
+pip install -r requirements.txt
+
+# Start the mini agent network (3 services)
+python bootstrap.py
+
+# In a separate terminal, run the test client
+python test_client.py
+```
+
+Services when running:
+- Coordinator: `http://localhost:8000`
+- Data agent: `http://localhost:8001`
+- Text agent: `http://localhost:8002`
+
+Key files in `01_frameworks/src/session6`:
+- `acp_agent.py`: Minimal agent base and REST endpoints
+- `data_agent.py`: CSV processing capabilities
+- `text_agent.py`: Text summarization and keyword extraction
+- `coordinator_agent.py`: Orchestrates a simple workflow
+- `bootstrap.py`: Spins up the network
+- `test_client.py`: End-to-end verification
+
+
 ## Part 1: ADK Environment and Foundation (15 minutes)
 
 ### Understanding ADK Architecture
@@ -134,6 +165,10 @@ settings = ADKSettings()
 
 Create a robust MCP client for agent-server communication:
 
+Let's implement a robust MCP client step by step:
+
+**Step 1: Set up the client foundation**
+
 ```python
 # mcp_integration/client.py
 import aiohttp
@@ -151,7 +186,11 @@ class MCPClient:
         self.server_name = server_name
         self.base_url = base_url
         self.session: Optional[aiohttp.ClientSession] = None
-    
+```
+
+**Step 2: Implement context manager for connection handling**
+
+```python
     async def __aenter__(self):
         """Async context manager entry."""
         self.session = aiohttp.ClientSession()
@@ -161,7 +200,13 @@ class MCPClient:
         """Async context manager exit."""
         if self.session:
             await self.session.close()
-    
+```
+
+This async context manager ensures proper connection lifecycle management.
+
+**Step 3: Implement tool calling functionality**
+
+```python
     async def call_tool(self, tool_name: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
         """Call a tool on the MCP server."""
         if not self.session:
@@ -194,7 +239,13 @@ class MCPClient:
         except Exception as e:
             logger.error(f"MCP client error: {str(e)}")
             return {"error": f"Connection error: {str(e)}"}
-    
+```
+
+This method implements the MCP JSON-RPC protocol for tool calling with comprehensive error handling.
+
+**Step 4: Add tool discovery functionality**
+
+```python
     async def list_tools(self) -> List[Dict[str, Any]]:
         """List available tools on the MCP server."""
         request_data = {
@@ -302,6 +353,10 @@ class ConversationMemory:
 
 Now let's create the foundation agent class:
 
+The base agent implementation requires careful architecture. Let's build it step by step:
+
+**Step 1: Set up imports and dependencies**
+
 ```python
 # agents/base_agent.py
 import asyncio
@@ -316,7 +371,11 @@ from mcp_integration.client import MCPClient
 from config.settings import settings
 
 logger = logging.getLogger(__name__)
+```
 
+**Step 2: Define the base agent class structure**
+
+```python
 class BaseADKAgent(ABC):
     """Base class for ADK agents with Gemini integration."""
     
@@ -335,6 +394,13 @@ class BaseADKAgent(ABC):
         
         self._initialize_model()
         self._setup_mcp_clients()
+```
+
+This establishes the base class with essential components: conversation memory, MCP client management, and model initialization.
+
+**Step 3: Implement model initialization**
+
+```python
     
     def _initialize_model(self):
         """Initialize the Gemini model."""
@@ -351,7 +417,11 @@ class BaseADKAgent(ABC):
         except Exception as e:
             logger.error(f"Failed to initialize Gemini model: {e}")
             raise
-    
+```
+
+**Step 4: Set up MCP client connections**
+
+```python
     def _setup_mcp_clients(self):
         """Initialize MCP clients for available servers."""
         for server_name, config in settings.MCP_SERVERS.items():
@@ -360,7 +430,13 @@ class BaseADKAgent(ABC):
                 base_url=config["url"]
             )
             logger.info(f"Configured MCP client for {server_name}")
-    
+```
+
+This method dynamically configures MCP clients based on the server settings, allowing the agent to access multiple data sources and tools.
+
+**Step 5: Implement core message processing**
+
+```python
     async def process_message(self, user_message: str, context: Dict[str, Any] = None) -> str:
         """Process a user message and generate a response."""
         # Add user message to memory
@@ -393,7 +469,13 @@ class BaseADKAgent(ABC):
             error_response = "I apologize, but I encountered an error processing your request. Please try again."
             self.memory.add_turn("agent", error_response)
             return error_response
-    
+```
+
+This method orchestrates the complete message processing pipeline: memory management, system prompt generation, response generation, and error handling.
+
+**Step 6: Dynamic system prompt generation**
+
+```python
     async def _generate_system_prompt(self) -> str:
         """Generate system prompt with available tools."""
         base_prompt = f"""You are {self.name}, {self.description}
@@ -420,7 +502,13 @@ When you need to use a tool, clearly indicate which tool you want to use and wha
 Always provide helpful, accurate responses based on the information available to you."""
         
         return base_prompt
-    
+```
+
+This system prompt dynamically includes available MCP tools, enabling the agent to understand its current capabilities.
+
+**Step 7: Implement response generation with Gemini**
+
+```python
     async def _generate_response(self, context: List[Dict[str, str]]) -> str:
         """Generate response using Gemini model."""
         # Convert context to Gemini format
@@ -441,7 +529,13 @@ Always provide helpful, accurate responses based on the information available to
         # Generate response
         response = await self.model.generate_content_async(formatted_context)
         return response.text
-    
+```
+
+This method handles the Gemini API format conversion and response generation.
+
+**Step 8: Add tool usage detection and handling**
+
+```python
     def _requires_tool_usage(self, response: str) -> bool:
         """Check if the response indicates tool usage is needed."""
         # Simple heuristic - look for tool usage indicators
@@ -459,7 +553,11 @@ Always provide helpful, accurate responses based on the information available to
             return await self._handle_data_request(original_request)
         
         return response
-    
+```
+
+**Step 9: Implement specific tool handlers**
+
+```python
     async def _handle_weather_request(self, request: str) -> str:
         """Handle weather-related requests."""
         weather_client = self.mcp_clients.get("weather")
@@ -757,5 +855,162 @@ In Session 7, we'll explore **Agent-to-Agent Communication (A2A)** including:
 - [Gemini API Reference](https://ai.google.dev/gemini-api/docs)
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [Async Python Programming](https://docs.python.org/3/library/asyncio.html)
+
+---
+
+## Appendix: ADK Overview and Reference
+
+The following consolidates the ADK overview into this session so everything is in one place.
+
+### What is ADK (Agent Development Kit)?
+
+#### Core Concept
+
+Google's ADK is an open-source, code-first Python framework for building, evaluating, and deploying sophisticated AI agents with flexibility and control. It powers agents within Google products like Agentspace and the Google Customer Engagement Suite.
+
+![ADK Architecture Overview](images/adk-architecture-overview.png)
+
+#### Philosophy: Making Agent Development Feel Like Software Development
+
+- Code-first approach
+- Testability
+- Version control
+- Modularity
+
+#### Core Architecture Components
+
+1. Agents (LLM, workflow, custom)
+2. Tools (pre-built, MCP, third-party, other agents)
+3. Runners (execution flow, routing, orchestration)
+4. Sessions (persistent context, memory)
+5. Events (execution steps, debugging, streaming)
+
+### Key Features of ADK
+
+1. Multi-agent by design
+2. Model flexibility (Gemini, Model Garden, LiteLLM providers)
+3. Built-in orchestration
+4. Rich tool ecosystem
+5. Streaming capabilities
+6. Agent-to-Agent communication (A2A)
+7. Production-ready deployment
+
+### Getting Started
+
+Install:
+
+```bash
+pip install google-adk
+# or
+pip install git+https://github.com/google/adk-python.git@main
+```
+
+Basic agent:
+
+```python
+from google.adk import Agent
+
+agent = Agent(
+    name="assistant",
+    model="gemini-2.0-flash",
+    instruction="You are a helpful assistant.",
+    tools=[web_search, calculator]
+)
+
+response = await agent.run("What's the weather in San Francisco?")
+```
+
+Multi-agent example:
+
+```python
+from google.adk import LlmAgent
+
+research_agent = LlmAgent(name="researcher", model="gemini-2.0-flash", tools=[web_search])
+writer_agent = LlmAgent(name="writer", model="gemini-2.0-flash", tools=[text_formatter])
+coordinator = LlmAgent(name="coordinator", model="gemini-2.0-flash", sub_agents=[research_agent, writer_agent])
+
+result = await coordinator.run("Create a report on quantum computing trends")
+```
+
+MCP integration:
+
+```python
+from google.adk import Agent
+from mcp import MCPClient
+
+mcp_client = MCPClient()
+mcp_client.connect("database://customer-data")
+mcp_client.connect("api://weather-service")
+
+agent = Agent(name="data_analyst", model="gemini-2.0-flash", tools=mcp_client.get_tools())
+```
+
+Deploy to Cloud Run:
+
+```dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "agent_server.py"]
+```
+
+Vertex AI endpoint:
+
+```python
+from google.cloud import aiplatform
+
+aiplatform.init(project="your-project", location="us-central1")
+endpoint = aiplatform.Endpoint.create(display_name="adk-agent-endpoint")
+```
+
+### ADK Agent Structure
+
+```python
+from adk import Agent, Tool
+
+class TravelAgent(Agent):
+    def __init__(self):
+        super().__init__(
+            name="travel_planner",
+            description="Comprehensive travel planning agent",
+            tools=[
+                FlightSearchTool(),
+                HotelBookingTool(),
+                WeatherTool()
+            ]
+        )
+    
+    async def plan_trip(self, destination: str, dates: tuple) -> dict:
+        flights = await self.search_flights(destination, dates)
+        hotels = await self.search_hotels(destination, dates)
+        weather = await self.get_weather(destination, dates)
+        return self.create_itinerary(flights, hotels, weather)
+```
+
+### ADK vs Traditional AI Frameworks
+
+| Feature | Traditional Frameworks | ADK |
+|---------|------------------------|-----|
+| Agent Orchestration | Manual implementation | Built-in orchestration engine |
+| Error Handling | Custom error handling | Automatic retry and fallback |
+| State Management | External state stores | Integrated state management |
+| Tool Integration | Framework-specific | Universal tool interface |
+| Cross-Framework Support | Limited | Works with multiple frameworks |
+
+### Best Practices
+
+1. Modular agent design with specialized sub-agents
+2. Comprehensive error handling and fallbacks
+3. Unit and integration testing for agents and workflows
+4. Monitoring via events for debugging/observability
+5. Security with proper authn/authz in production
+
+Resources:
+- ADK GitHub: https://github.com/google/adk-python
+- Docs: https://google.github.io/adk-docs/
+- Codelab: https://codelabs.developers.google.com/codelabs/currency-agent#0
+- Cloud guide: https://cloud.google.com/vertex-ai/generative-ai/docs/agent-engine/develop/adk
 
 Remember: Great agents combine powerful language models with thoughtful architecture and robust integration patterns! 🤖✨

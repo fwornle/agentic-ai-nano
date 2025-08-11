@@ -1223,6 +1223,8 @@ class ProductionDeployment:
 
 Docker configuration emphasizes security with non-root users, read-only filesystems, and proper resource limits.
 
+**Step 1: Configure Kubernetes deployment settings**
+
 ```python
         self.kubernetes_config = KubernetesConfig(
             namespace="agno-production",
@@ -1242,6 +1244,11 @@ Docker configuration emphasizes security with non-root users, read-only filesyst
                         "max_unavailable": "0%"
                     }
                 }
+```
+
+This establishes the basic Kubernetes deployment with zero-downtime rolling update strategy and replica management.
+
+**Step 2: Add service configuration and networking**
             },
             
             # Service configuration  
@@ -1251,7 +1258,13 @@ Docker configuration emphasizes security with non-root users, read-only filesyst
                 "target_port": 8000,
                 "selector": {"app": "agno-production"}
             },
-            
+```
+
+Service configuration sets up internal networking with proper port mapping and pod selection.
+
+**Step 3: Configure horizontal scaling and disruption budgets**
+
+```python            
             # Horizontal Pod Autoscaler
             hpa={
                 "min_replicas": 3,
@@ -2097,6 +2110,8 @@ Complex enterprise workflows orchestrate multiple systems while maintaining tran
 ### **Cost Management and Optimization**
 
 Enterprise deployments require sophisticated cost management and optimization:
+
+**Step 1: Initialize cost tracking infrastructure**
 
 ```python
 from agno.cost import CostTracker, BudgetManager, OptimizationEngine

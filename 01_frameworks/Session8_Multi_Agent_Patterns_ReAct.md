@@ -1291,6 +1291,8 @@ The Byzantine consensus implementation provides strong guarantees against malici
 
 When agents have conflicting goals or information, sophisticated conflict resolution is needed:
 
+**Step 1: Initialize conflict resolution framework**
+
 ```python
 class ConflictResolver:
     """Advanced conflict resolution for multi-agent systems"""
@@ -1306,6 +1308,11 @@ class ConflictResolver:
             'auction': self._auction_resolution,
             'game_theory': self._game_theory_resolution
         }
+```
+
+The conflict resolver supports multiple resolution strategies and maintains history for learning from past conflicts.
+
+**Step 2: Implement core conflict resolution logic**
     
     async def resolve_conflict(
         self, conflict: Dict[str, Any], strategy: str = 'auto'
