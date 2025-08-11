@@ -20,6 +20,8 @@ PydanticAI represents a paradigm shift in agent development, leveraging Pydantic
 
 PydanticAI builds on Pydantic's validation framework to ensure data integrity throughout the agent lifecycle. The foundation relies on three key concepts: structured data models, type-safe agents, and validated tool interfaces.
 
+First, let's establish the core imports that power PydanticAI's type-safe agent framework:
+
 ```python
 # src/session5/pydantic_agents.py - Core Foundation
 from pydantic_ai import Agent, RunContext
@@ -28,7 +30,13 @@ from typing import Optional, List, Dict, Any, Union, Literal
 from datetime import datetime, timezone
 from enum import Enum
 import uuid
+```
 
+These imports provide the essential building blocks: PydanticAI's agent system, Pydantic's validation framework, and Python's typing system for compile-time type safety.
+
+Next, we define string-based enumerations that ensure consistent values across our agent system:
+
+```python
 # Core enumeration types for better type safety
 class TaskPriority(str, Enum):
     """Priority levels with explicit string values for serialization."""
@@ -36,7 +44,11 @@ class TaskPriority(str, Enum):
     HIGH = "high" 
     MEDIUM = "medium"
     LOW = "low"
+```
 
+The `TaskPriority` enum extends `str` to ensure JSON serialization compatibility while maintaining type safety. This pattern prevents common bugs from typos or inconsistent priority values.
+
+```python
 class TaskStatus(str, Enum):
     """Task execution status enumeration."""
     PENDING = "pending"
@@ -46,7 +58,11 @@ class TaskStatus(str, Enum):
     CANCELLED = "cancelled"
 ```
 
+Similarly, `TaskStatus` provides a controlled vocabulary for task states, enabling reliable state machine implementations and preventing invalid status transitions.
+
 The foundation establishes type-safe data structures that serve as contracts between different agent components. Each model includes comprehensive validation rules and metadata for debugging and monitoring.
+
+Now we establish the foundational models that provide metadata and context tracking for our agents:
 
 ```python
 # Base models for structured agent communication
@@ -62,14 +78,26 @@ class AgentMetadata(BaseModel):
         json_encoders = {
             datetime: lambda v: v.isoformat()
         }
+```
 
+The `AgentMetadata` model tracks essential information about each agent instance. Notice the use of `default_factory` for UUID generation and timestamp creation, ensuring each agent gets a unique identity and creation time. The version field uses regex validation to enforce semantic versioning.
+
+For error handling, we define a structured error model that provides comprehensive debugging information:
+
+```python
 class ValidationError(BaseModel):
     """Structured validation error information."""
     field: str = Field(..., description="Field that failed validation")
     message: str = Field(..., description="Human-readable error message")
     code: str = Field(..., description="Machine-readable error code")
     value: Any = Field(..., description="Invalid value that caused the error")
-    
+```
+
+This error model standardizes how validation failures are communicated, making debugging more systematic and enabling automated error handling.
+
+Finally, we define the execution context that carries request metadata throughout the agent lifecycle:
+
+```python
 class ExecutionContext(BaseModel):
     """Context information for agent execution."""
     request_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -79,9 +107,15 @@ class ExecutionContext(BaseModel):
     timeout_seconds: int = Field(default=300, ge=1, le=3600)
 ```
 
+The `ExecutionContext` provides request tracking, user identification, and configurable timeouts. The timeout field includes validation constraints (1 to 3600 seconds) to prevent unreasonable execution limits.
+
 ### **Type-Safe Agent Definition**
 
 PydanticAI agents are defined with explicit result types and comprehensive system prompts. This ensures consistent output structure and enables compile-time type checking.
+
+The `ResearchResult` model demonstrates PydanticAI's comprehensive validation capabilities. Let's build it step by step:
+
+**Step 1: Define the basic structure with field constraints**
 
 ```python
 # Research domain models with comprehensive validation
@@ -105,6 +139,13 @@ class ResearchResult(BaseModel):
         le=1.0, 
         description="Confidence in findings (0.0-1.0)"
     )
+```
+
+This establishes the core data structure with built-in validation: topics must be between 5-200 characters, findings are required (1-20 items), and confidence scores are bounded between 0.0 and 1.0.
+
+**Step 2: Add metadata fields for tracking and context**
+
+```python
     sources: List[str] = Field(
         ..., 
         min_items=1,
@@ -115,7 +156,13 @@ class ResearchResult(BaseModel):
     )
     priority: TaskPriority = Field(default=TaskPriority.MEDIUM)
     metadata: AgentMetadata = Field(default_factory=lambda: AgentMetadata(agent_name="research_agent"))
-    
+```
+
+These fields handle source tracking, automatic timestamping, priority classification, and agent metadata. Notice how `default_factory` creates fresh instances for each model.
+
+**Step 3: Implement custom validation for findings quality**
+
+```python
     @validator('key_findings')
     def validate_findings_quality(cls, v):
         """Ensure findings meet quality standards."""
@@ -128,7 +175,13 @@ class ResearchResult(BaseModel):
             if finding.strip().lower() in ['none', 'n/a', 'unknown']:
                 raise ValueError(f"Finding {i+1} is not informative")
         return [finding.strip() for finding in v]
-    
+```
+
+This validator ensures each finding is substantial (minimum 10 characters) and informative (rejecting placeholder text). It also normalizes whitespace.
+
+**Step 4: Add source format validation**
+
+```python
     @validator('sources')
     def validate_source_format(cls, v):
         """Validate source format and credibility indicators."""
@@ -141,7 +194,13 @@ class ResearchResult(BaseModel):
                 raise ValueError(f"Source {i+1} too short to be valid")
         
         return [source.strip() for source in v]
-    
+```
+
+Source validation ensures citations follow recognizable patterns (URLs, DOIs, academic references) and meet minimum length requirements.
+
+**Step 5: Implement cross-field validation logic**
+
+```python
     @root_validator
     def validate_consistency(cls, values):
         """Validate consistency across all fields."""
@@ -161,9 +220,15 @@ class ResearchResult(BaseModel):
         return values
 ```
 
+The root validator ensures logical consistency between confidence scores and source counts - higher confidence claims require more supporting sources.
+
 ### **Agent Creation and Configuration**
 
 The agent creation process includes comprehensive configuration for type safety, error handling, and monitoring capabilities.
+
+Now that we have our validation models, let's create a properly configured research agent:
+
+**Step 1: Create the agent factory function**
 
 ```python
 def create_research_agent() -> Agent:
@@ -194,7 +259,13 @@ def create_research_agent() -> Agent:
     )
     
     return research_agent
+```
 
+This factory function creates a type-safe agent with explicit result validation. The `result_type=ResearchResult` ensures all responses conform to our validation schema.
+
+**Step 2: Implement error-handling execution wrapper**
+
+```python
 # Usage example with comprehensive error handling
 async def execute_research_with_validation():
     """Demonstrate comprehensive research execution."""
@@ -223,9 +294,15 @@ async def execute_research_with_validation():
         raise
 ```
 
+The execution wrapper provides comprehensive error handling and demonstrates how type safety gives us compile-time guarantees about the result structure.
+
 ### **Advanced Type Definitions and Constraints**
 
 PydanticAI supports complex type definitions with sophisticated validation rules for domain-specific requirements.
+
+Let's build advanced data analysis models to demonstrate complex validation patterns:
+
+**Step 1: Define the analysis request structure**
 
 ```python
 # Advanced data analysis types
@@ -247,6 +324,13 @@ class AnalysisRequest(BaseModel):
         le=0.999,
         description="Statistical confidence level"
     )
+```
+
+This establishes the core analysis request with bounded data (3-10,000 points), specific analysis types via `Literal`, and constrained confidence levels.
+
+**Step 2: Add optional configuration fields**
+
+```python
     include_visualization: bool = Field(
         default=False,
         description="Whether to include visualization data"
@@ -259,7 +343,13 @@ class AnalysisRequest(BaseModel):
         default_factory=dict,
         description="Additional analysis metadata"
     )
-    
+```
+
+These optional fields provide configuration control while maintaining reasonable defaults.
+
+**Step 3: Implement comprehensive data quality validation**
+
+```python
     @validator('data')
     def validate_data_quality(cls, v):
         """Comprehensive data quality validation."""
@@ -282,7 +372,13 @@ class AnalysisRequest(BaseModel):
             raise ValueError("Data contains extremely large values that may cause numerical issues")
         
         return v
-    
+```
+
+This validator performs comprehensive data quality checks: NaN detection, infinity checks, variation requirements, and reasonable range validation.
+
+**Step 4: Add contextual validation for confidence levels**
+
+```python
     @validator('confidence_level')
     def validate_confidence_level(cls, v, values):
         """Validate confidence level based on data size."""
@@ -292,7 +388,13 @@ class AnalysisRequest(BaseModel):
             raise ValueError("High confidence levels require more data points")
         
         return v
+```
 
+This validator demonstrates how to validate one field based on another - high confidence requires more data points.
+
+**Step 5: Define the comprehensive result structure**
+
+```python
 class AnalysisResult(BaseModel):
     """Type-safe analysis result with comprehensive information."""
     analysis_type: str = Field(..., description="Type of analysis performed")
@@ -333,6 +435,8 @@ class AnalysisResult(BaseModel):
         }
 ```
 
+The result model provides comprehensive analysis output with optional fields, validation constraints, and automatic timestamp generation.
+
 ---
 
 ## **Part 2: Advanced Validation (500 lines)**
@@ -340,6 +444,10 @@ class AnalysisResult(BaseModel):
 ### **Custom Validators and Constraints**
 
 PydanticAI's validation system extends beyond basic type checking to include domain-specific business logic and data integrity rules.
+
+Let's implement advanced validation patterns with a systematic approach:
+
+**Step 1: Import validation dependencies**
 
 ```python
 # Advanced validation patterns and custom validators
@@ -783,6 +891,8 @@ class ValidationMiddleware:
 
 Production PydanticAI applications require robust architecture patterns that handle concurrency, error recovery, and monitoring at scale.
 
+**Step 1: Set up production imports and logging**
+
 ```python
 # Production-ready agent patterns and architectures
 import asyncio
@@ -801,7 +911,13 @@ logging.basicConfig(
         logging.FileHandler('agent_production.log')
     ]
 )
+```
 
+Production agents require comprehensive logging and proper import organization for scalability and monitoring.
+
+**Step 2: Define agent protocol contracts**
+
+```python
 @runtime_checkable
 class AgentProtocol(Protocol):
     """Protocol defining agent interface contracts."""
@@ -818,6 +934,13 @@ class AgentProtocol(Protocol):
         """Return performance metrics."""
         ...
 
+```
+
+The protocol defines the contract that all production agents must implement for consistent behavior across the system.
+
+**Step 3: Create comprehensive metrics model**
+
+```python
 class AgentMetrics(BaseModel):
     """Comprehensive agent metrics for monitoring."""
     
@@ -838,7 +961,13 @@ class AgentMetrics(BaseModel):
         if self.total_requests == 0:
             return 100.0
         return (self.successful_requests / self.total_requests) * 100.0
+```
 
+This metrics model tracks all critical performance indicators including response times, error rates, and resource usage.
+
+**Step 4: Define production agent base class**
+
+```python
 class ProductionAgentBase(ABC):
     """Abstract base class for production-ready agents."""
     
@@ -857,6 +986,13 @@ class ProductionAgentBase(ABC):
         """Core request processing logic - must be implemented by subclasses."""
         pass
     
+```
+
+The base class initializes all necessary components including logging, metrics, threading, and health monitoring.
+
+**Step 5: Implement comprehensive request processing**
+
+```python
     async def process_request(self, request: BaseModel) -> Dict[str, Any]:
         """Process request with comprehensive monitoring and error handling."""
         
@@ -877,7 +1013,13 @@ class ProductionAgentBase(ABC):
             
             # Post-processing
             processed_result = await self._post_process_result(result)
-            
+```
+
+This method implements the complete request lifecycle with validation, timeout handling, and result processing.
+
+**Step 6: Handle success response and error scenarios**
+
+```python            
             # Update success metrics
             self._update_success_metrics(start_time, request_id)
             
@@ -899,6 +1041,13 @@ class ProductionAgentBase(ABC):
             self.logger.error(f"Request {request_id} failed: {str(e)}")
             return self._create_error_response(request_id, str(e), "processing_error")
     
+```
+
+The error handling includes timeout detection, comprehensive logging, and structured error responses with request tracing.
+
+**Step 7: Implement request validation and post-processing**
+
+```python
     async def _validate_request(self, request: BaseModel) -> None:
         """Validate incoming request."""
         # Validation is typically handled by Pydantic automatically
@@ -920,7 +1069,13 @@ class ProductionAgentBase(ABC):
         """Calculate processing time in milliseconds."""
         end_time = datetime.now(timezone.utc)
         return (end_time - start_time).total_seconds() * 1000
-    
+```
+
+These utility methods handle request validation, result enhancement, and precise timing calculations.
+
+**Step 8: Update performance metrics for monitoring**
+
+```python    
     def _update_success_metrics(self, start_time: datetime, request_id: str) -> None:
         """Update metrics for successful request."""
         processing_time = self._calculate_processing_time(start_time)
@@ -947,6 +1102,13 @@ class ProductionAgentBase(ABC):
         
         self.logger.warning(f"Request {request_id} failed ({error_type}) after {processing_time:.2f}ms")
     
+```
+
+Both success and error metrics update the response time tracking and maintain comprehensive logging for observability.
+
+**Step 9: Calculate performance percentiles and create error responses**
+
+```python
     def _update_percentile_metrics(self) -> None:
         """Update percentile response time metrics."""
         if not self._request_times:
@@ -976,6 +1138,13 @@ class ProductionAgentBase(ABC):
             'agent_name': self.name
         }
     
+```
+
+The percentile calculations track P95 and P99 response times for SLA monitoring, and memory management prevents unbounded growth.
+
+**Step 10: Implement comprehensive health monitoring**
+
+```python
     async def health_check(self) -> Dict[str, Any]:
         """Comprehensive health check for monitoring systems."""
         
@@ -1015,6 +1184,13 @@ class ProductionAgentBase(ABC):
             'version': self.config.get('version', '1.0.0')
         }
     
+```
+
+The health check automatically evaluates error rates, response times, and request patterns to determine agent status.
+
+**Step 11: Add metrics retrieval and graceful shutdown**
+
+```python
     def get_metrics(self) -> Dict[str, Any]:
         """Get detailed performance metrics."""
         current_time = datetime.now(timezone.utc)
@@ -1036,7 +1212,13 @@ class ProductionAgentBase(ABC):
         self.logger.info(f"Shutting down agent {self.name}")
         self._executor.shutdown(wait=True)
         self._health_status = "shutdown"
+```
 
+These methods provide comprehensive monitoring data and ensure clean resource cleanup during shutdown.
+
+**Step 12: Create production-ready research agent**
+
+```python
 class ProductionResearchAgent(ProductionAgentBase):
     """Production-ready research agent implementation."""
     
@@ -1056,6 +1238,13 @@ class ProductionResearchAgent(ProductionAgentBase):
         # Production-specific tools
         self._setup_production_tools()
     
+```
+
+This concrete implementation combines the base production class with PydanticAI's research capabilities.
+
+**Step 13: Set up production-optimized tools**
+
+```python
     def _setup_production_tools(self) -> None:
         """Setup production-optimized tools with caching and rate limiting."""
         
@@ -1094,7 +1283,13 @@ class ProductionResearchAgent(ProductionAgentBase):
             
             self.logger.debug(f"Web search completed: {query} ({max_results} results)")
             return search_results
-        
+```
+
+The web search tool includes comprehensive input validation, realistic result simulation, and detailed logging for production monitoring.
+
+**Step 14: Add credibility analysis and agent processing**
+
+```python        
         @self.pydantic_agent.tool
         async def analyze_source_credibility(ctx: RunContext[ExecutionContext], source_url: str) -> Dict[str, Any]:
             """Analyze source credibility with production-grade assessment."""
@@ -1240,6 +1435,9 @@ class ProductionAgentFactory:
         self.agents.clear()
 ```
 
+The factory provides centralized agent management with health monitoring and graceful shutdown capabilities for production environments.
+```
+
 ---
 
 ## **Part 4: Integration & Error Handling (400 lines)**
@@ -1247,6 +1445,8 @@ class ProductionAgentFactory:
 ### **Comprehensive Error Management**
 
 Production PydanticAI applications require sophisticated error handling strategies that maintain system stability while providing meaningful feedback.
+
+**Step 1: Import error handling dependencies**
 
 ```python
 # Advanced error handling and recovery patterns
@@ -1259,7 +1459,13 @@ from dataclasses import dataclass, field
 
 T = TypeVar('T')
 R = TypeVar('R')
+```
 
+These imports provide the foundation for sophisticated error handling with typing support and async capabilities.
+
+**Step 2: Define error severity and recovery strategies**
+
+```python
 class ErrorSeverity(str, Enum):
     """Error severity levels for classification."""
     LOW = "low"
@@ -1280,7 +1486,13 @@ class ErrorCategory(str, Enum):
     DATA_CORRUPTION = "data_corruption"
     CONFIGURATION = "configuration"
     UNKNOWN = "unknown"
+```
 
+The error classification system provides structured categories and severity levels for consistent error handling across the application.
+
+**Step 3: Create comprehensive error context tracking**
+
+```python
 @dataclass
 class ErrorContext:
     """Comprehensive error context for debugging and monitoring."""
@@ -1296,6 +1508,13 @@ class ErrorContext:
     recoverable: bool = True
     user_facing_message: str = ""
     
+```
+
+The ErrorContext class captures comprehensive error information including timing, categorization, retry logic, and user-friendly messaging.
+
+**Step 4: Add error context serialization and utility methods**
+
+```python    
     def to_dict(self) -> Dict[str, Any]:
         """Convert error context to dictionary for logging."""
         return {
@@ -1355,6 +1574,13 @@ class TimeoutAgentError(AgentError):
         )
         super().__init__(message, context, **kwargs)
 
+```
+
+The error context provides complete serialization and retry tracking for comprehensive error management.
+
+**Step 5: Create error classification system**
+
+```python
 class ErrorClassifier:
     """Classifies and categorizes errors for appropriate handling."""
     
@@ -1404,7 +1630,13 @@ class ErrorClassifier:
             return ErrorCategory.AUTHENTICATION, ErrorSeverity.HIGH
         
         return ErrorCategory.UNKNOWN, ErrorSeverity.MEDIUM
+```
 
+The error classifier analyzes exception types and error messages to automatically categorize errors for appropriate handling strategies.
+
+**Step 6: Implement intelligent retry strategies**
+
+```python
 class RetryStrategy:
     """Configurable retry strategies for error recovery."""
     
@@ -1521,6 +1753,13 @@ def error_handler(
     return decorator
 
 # Circuit breaker pattern for external service resilience
+```
+
+The retry strategy implements exponential backoff with jitter and intelligent retry decision-making based on error categories.
+
+**Step 7: Add circuit breaker pattern for service resilience**
+
+```python
 class CircuitBreakerState(Enum):
     """Circuit breaker states."""
     CLOSED = "closed"       # Normal operation
@@ -1626,6 +1865,13 @@ class CircuitBreaker:
             }
         }
 
+```
+
+The circuit breaker automatically opens when failure thresholds are reached, protecting the system from cascading failures.
+
+**Step 8: Create external service integration with resilience patterns**
+
+```python
 # Integration patterns for external services
 class ExternalServiceIntegration:
     """Base class for external service integrations with comprehensive error handling."""
@@ -1694,6 +1940,8 @@ class ExternalServiceIntegration:
                 'circuit_breaker': self.circuit_breaker.get_status()
             }
 ```
+
+The external service integration combines circuit breakers, retry strategies, and comprehensive error handling for robust production deployments.
 
 ### **Integration Testing and Monitoring**
 
@@ -1927,6 +2175,10 @@ class PerformanceMonitor:
 
 Performance optimization in PydanticAI applications focuses on intelligent caching, request batching, and resource management while maintaining type safety.
 
+Let's build a comprehensive performance optimization system for PydanticAI applications:
+
+**Step 1: Import optimization dependencies**
+
 ```python
 # Performance optimization patterns for PydanticAI applications
 import asyncio
@@ -1944,7 +2196,11 @@ import weakref
 T = TypeVar('T')
 K = TypeVar('K')
 V = TypeVar('V')
+```
 
+**Step 2: Define intelligent cache entry system**
+
+```python
 @dataclass
 class CacheEntry(Generic[V]):
     """Cache entry with metadata for intelligent eviction."""
@@ -1967,7 +2223,13 @@ class CacheEntry(Generic[V]):
         """Update access statistics."""
         self.last_accessed = datetime.now(timezone.utc)
         self.access_count += 1
+```
 
+The cache entry tracks creation time, access patterns, and expiration logic for intelligent cache management.
+
+**Step 3: Create high-performance intelligent cache**
+
+```python
 class IntelligentCache(Generic[K, V]):
     """High-performance cache with intelligent eviction strategies."""
     
@@ -1990,7 +2252,13 @@ class IntelligentCache(Generic[K, V]):
             'evictions': 0,
             'expired_cleanups': 0
         }
-    
+```
+
+This cache uses OrderedDict for LRU ordering and tracks memory usage, hit rates, and eviction statistics.
+
+**Step 4: Implement cache management utilities**
+
+```python    
     def _calculate_size(self, obj: Any) -> int:
         """Estimate object size in bytes."""
         try:
@@ -1998,7 +2266,11 @@ class IntelligentCache(Generic[K, V]):
         except:
             # Fallback estimation
             return len(str(obj)) * 2  # Rough estimate for Unicode
-    
+```
+
+**Step 5: Add intelligent eviction strategies**
+
+```python
     def _evict_lru(self) -> None:
         """Evict least recently used entries."""
         while len(self._cache) >= self.max_size or self._total_size_bytes >= self.max_memory_bytes:
@@ -2022,7 +2294,11 @@ class IntelligentCache(Generic[K, V]):
             if entry:
                 self._total_size_bytes -= entry.size_bytes
                 self._stats['expired_cleanups'] += 1
-    
+```
+
+**Step 6: Implement thread-safe cache operations**
+
+```python
     def get(self, key: K) -> Optional[V]:
         """Get value from cache with access tracking."""
         with self._lock:
@@ -2048,7 +2324,13 @@ class IntelligentCache(Generic[K, V]):
             self._stats['hits'] += 1
             
             return entry.value
-    
+```
+
+This implements intelligent caching with LRU eviction, expiration cleanup, and detailed statistics tracking.
+
+**Step 7: Add cache modification and management operations**
+
+```python
     def set(self, key: K, value: V, ttl_seconds: float = None) -> None:
         """Set value in cache with intelligent eviction."""
         with self._lock:
@@ -2106,7 +2388,13 @@ class IntelligentCache(Generic[K, V]):
                 'hit_rate_percent': hit_rate,
                 'stats': self._stats.copy()
             }
+```
 
+The cache provides management operations (invalidate, clear) and comprehensive statistics for monitoring performance and tuning cache parameters.
+
+**Step 8: Create intelligent caching decorator for methods**
+
+```python
 def cached_method(
     ttl_seconds: float = 3600,
     cache_size: int = 1000,
@@ -2145,7 +2433,7 @@ def cached_method(
         
         @wraps(func)
         def sync_wrapper(*args, **kwargs) -> T:
-            # Generate cache key (same logic as async)
+            # Same caching logic for synchronous functions
             if key_generator:
                 cache_key = key_generator(*args, **kwargs)
             else:
@@ -2154,12 +2442,10 @@ def cached_method(
                 key_parts.extend(f"{k}:{v}" for k, v in sorted(kwargs.items()))
                 cache_key = hashlib.md5('|'.join(key_parts).encode()).hexdigest()
             
-            # Try to get from cache
             cached_result = cache.get(cache_key)
             if cached_result is not None:
                 return cached_result
             
-            # Execute function and cache result
             result = func(*args, **kwargs)
             cache.set(cache_key, result)
             return result

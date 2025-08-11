@@ -14,9 +14,7 @@ By the end of this session, you will be able to:
 
 Enterprise integration represents the final frontier for AI agent deployment - moving from development prototypes to production-ready systems that integrate seamlessly with existing enterprise infrastructure. This session covers the complete enterprise deployment lifecycle, from containerization to monitoring.
 
-![Enterprise Agent Architecture](images/enterprise-architecture.png)
-
-The architecture above shows how enterprise agents integrate with:
+The enterprise agent architecture integrates with:
 - **Enterprise Systems**: ERP, CRM, databases, and legacy applications
 - **Security Infrastructure**: Identity providers, certificates, and compliance frameworks
 - **Cloud Platforms**: Kubernetes, service mesh, and managed services
@@ -32,25 +30,29 @@ Enterprise agent systems require a fundamentally different approach compared to 
 
 ### Step 1.1: Enterprise Integration Patterns
 
-The foundation of enterprise agents lies in robust integration patterns:
+The foundation of enterprise agents lies in robust integration patterns. Let's start by defining the common integration patterns:
 
 ```python
-# From src/session9/enterprise_architecture.py
+# Enterprise integration patterns
 from typing import Dict, Any, List, Protocol
-from abc import ABC, abstractmethod
-import asyncio
 from dataclasses import dataclass, field
 from enum import Enum
-import logging
 
 class IntegrationPattern(Enum):
     """Common enterprise integration patterns."""
     REQUEST_REPLY = "request_reply"
-    PUBLISH_SUBSCRIBE = "publish_subscribe"
+    PUBLISH_SUBSCRIBE = "publish_subscribe" 
     MESSAGE_QUEUE = "message_queue"
     API_GATEWAY = "api_gateway"
     SERVICE_MESH = "service_mesh"
+```
 
+These patterns represent the most common ways enterprise systems communicate. Each pattern serves different use cases - request/reply for synchronous operations, publish/subscribe for event-driven architectures, and service mesh for complex microservices environments.
+
+Now let's define the system connection configuration:
+
+```python
+# System connection configuration
 @dataclass
 class SystemConnection:
     """Configuration for enterprise system connections."""
@@ -60,12 +62,16 @@ class SystemConnection:
     credentials: Dict[str, Any]
     retry_policy: Dict[str, int] = field(default_factory=dict)
     circuit_breaker: bool = True
+    timeout_seconds: int = 30
+    rate_limit: Optional[int] = None
 ```
 
-Enterprise systems require different integration approaches. The `IntegrationPattern` enum defines common patterns used in enterprise environments, while `SystemConnection` provides a structured way to manage connections to various enterprise systems.
+The `SystemConnection` class provides a structured way to manage connections to various enterprise systems. It includes essential enterprise features like circuit breakers, rate limiting, and retry policies.
+
+Next, let's define the adapter protocol that ensures consistent behavior:
 
 ```python
-# From src/session9/enterprise_architecture.py (continued)
+# Standard adapter interface for enterprise systems
 class EnterpriseSystemAdapter(Protocol):
     """Protocol for enterprise system adapters."""
     
@@ -77,7 +83,8 @@ class EnterpriseSystemAdapter(Protocol):
         """Authenticate with enterprise system."""
         ...
     
-    async def execute_operation(self, operation: str, params: Dict[str, Any]) -> Any:
+    async def execute_operation(self, operation: str, 
+                               params: Dict[str, Any]) -> Any:
         """Execute operation on enterprise system."""
         ...
     
@@ -86,145 +93,216 @@ class EnterpriseSystemAdapter(Protocol):
         ...
 ```
 
-The `EnterpriseSystemAdapter` protocol defines a standard interface for connecting to various enterprise systems. This ensures consistent behavior regardless of whether you're integrating with SAP, Salesforce, or custom internal systems.
+This protocol defines the standard interface for connecting to various enterprise systems. Whether you're integrating with SAP, Salesforce, or custom internal systems, this interface ensures consistent behavior.
 
 ### Step 1.2: ERP System Integration
 
-Let's implement a concrete adapter for ERP systems:
+Now let's implement a concrete adapter for SAP ERP systems. We'll start with the imports and basic class structure:
 
 ```python
-# From src/session9/erp_integration.py
+# SAP ERP system adapter - imports and initialization
 import aiohttp
-from datetime import datetime
-from typing import Optional, Union
-import json
+from datetime import datetime, timedelta
+from typing import Optional
+import logging
+```
 
+The SAP adapter requires specific libraries for HTTP communication and datetime handling. We use `aiohttp` for asynchronous HTTP requests, which is essential for enterprise-grade performance.
+
+Here's the main adapter class with initialization:
+
+```python
+# SAP adapter class definition
 class SAPIntegrationAdapter:
     """Adapter for SAP ERP system integration."""
     
     def __init__(self, base_url: str, credentials: Dict[str, Any]):
-        self.base_url = base_url
+        self.base_url = base_url.rstrip('/')
         self.credentials = credentials
         self.session: Optional[aiohttp.ClientSession] = None
         self.auth_token: Optional[str] = None
         self.token_expires: Optional[datetime] = None
         self.logger = logging.getLogger(__name__)
+```
+
+This SAP adapter demonstrates enterprise-grade connection management. Notice how we properly handle the base URL and maintain authentication state.
+
+Here's the connection establishment with enterprise configuration:
+
+```python
+# Connection method definition
+async def connect(self) -> bool:
+    """Establish connection to SAP system with enterprise configuration."""
+    try:
+        # Configure TCP connector with enterprise settings
+        connector = aiohttp.TCPConnector(
+            limit=50,  # Total connection pool size
+            limit_per_host=10,  # Connections per host
+            keepalive_timeout=30  # Keep connections alive
+        )
+```
+
+The TCP connector configuration is crucial for enterprise environments. Connection pooling prevents resource exhaustion under high load, while keep-alive reduces connection overhead.
+
+Now let's set up the HTTP session with proper timeout and headers:
+
+```python
+# HTTP session configuration
+        self.session = aiohttp.ClientSession(
+            connector=connector,
+            timeout=aiohttp.ClientTimeout(total=30),
+            headers={
+                "User-Agent": "EnterpriseAgent-SAP/1.0",
+                "Accept": "application/json"
+            }
+        )
+        return await self.authenticate(self.credentials)
+    except Exception as e:
+        self.logger.error(f"SAP connection failed: {e}")
+        return False
+```
+
+The connection setup includes proper timeout, connection pooling, and headers that are essential for enterprise reliability and identification.
+
+Now let's implement OAuth 2.0 authentication:
+
+```python
+# OAuth 2.0 authentication method
+async def authenticate(self, credentials: Dict[str, Any]) -> bool:
+    """Authenticate with SAP using OAuth 2.0."""
+    auth_url = f"{self.base_url}/oauth/token"
     
-    async def connect(self) -> bool:
-        """Establish connection to SAP system."""
-        try:
-            self.session = aiohttp.ClientSession(
-                timeout=aiohttp.ClientTimeout(total=30)
-            )
+    # Prepare OAuth 2.0 client credentials grant
+    auth_data = {
+        "grant_type": "client_credentials",
+        "client_id": credentials["client_id"],
+        "client_secret": credentials["client_secret"],
+        "scope": credentials.get("scope", "read write")
+    }
+```
+
+OAuth 2.0 client credentials flow is ideal for server-to-server communication. The scope parameter allows fine-grained access control to SAP resources.
+
+Here's the authentication request and token handling:
+
+```python
+# Authentication request and token processing
+    try:
+        async with self.session.post(auth_url, data=auth_data) as response:
+            if response.status == 200:
+                token_data = await response.json()
+                self.auth_token = token_data["access_token"]
+                expires_in = token_data.get("expires_in", 3600)
+                self.token_expires = datetime.now() + timedelta(seconds=expires_in)
+                
+                # Update session headers with bearer token
+                self.session.headers.update({
+                    "Authorization": f"Bearer {self.auth_token}"
+                })
+                return True
+```
+
+The authentication process includes proper token expiration tracking and automatic header updates for subsequent requests.
+
+Now let's handle authentication errors:
+
+```python
+# Authentication error handling
+            else:
+                self.logger.error(f"SAP auth failed: {response.status}")
+                return False
+    except Exception as e:
+        self.logger.error(f"SAP authentication error: {e}")
+        return False
+```
+
+This implementation handles OAuth 2.0 with proper token management, expiration tracking, and automatic header updates.
+
+Let's implement customer data retrieval with error handling:
+
+```python
+# Customer data retrieval method
+async def get_customer_data(self, customer_id: str) -> Dict[str, Any]:
+    """Retrieve customer data from SAP."""
+    if not customer_id:
+        raise ValueError("customer_id is required")
+    
+    # Ensure we have valid authentication
+    if not await self._ensure_authenticated():
+        raise Exception("Authentication failed")
+```
+
+Input validation and authentication verification are critical first steps. The authentication check ensures tokens are valid before making API calls.
+
+Now let's build the SAP OData service URL:
+
+```python
+# SAP OData service URL construction
+    # Build SAP OData URL
+    service_url = f"{self.base_url}/sap/opu/odata/sap/ZCustomerService"
+    entity_url = f"{service_url}/CustomerSet('{customer_id}')"
+```
+
+SAP uses OData standard for REST API access. The URL structure follows SAP conventions with service and entity paths.
+
+Here's the API request with comprehensive error handling:
+
+```python
+# API request with error handling
+    try:
+        async with self.session.get(entity_url) as response:
+            if response.status == 200:
+                data = await response.json()
+                return self._transform_customer_data(data)
+            elif response.status == 404:
+                return {"error": "Customer not found", "customer_id": customer_id}
+            else:
+                error_text = await response.text()
+                raise Exception(f"SAP API error: {response.status} - {error_text}")
+    except Exception as e:
+        self.logger.error(f"Customer data retrieval failed: {e}")
+        raise
+```
+
+This method demonstrates enterprise-grade error handling with proper validation, authentication checking, and comprehensive exception management.
+
+Here's the authentication validation helper:
+
+```python
+# Token validation and refresh logic
+async def _ensure_authenticated(self) -> bool:
+    """Ensure we have a valid authentication token."""
+    if not self.auth_token:
+        return await self.authenticate(self.credentials)
+    
+    # Check if token is about to expire (refresh 5 minutes early)
+    if self.token_expires:
+        time_until_expiry = self.token_expires - datetime.now()
+        if time_until_expiry.total_seconds() < 300:  # 5 minutes
+            self.logger.info("Token expiring soon, refreshing...")
             return await self.authenticate(self.credentials)
-        except Exception as e:
-            self.logger.error(f"SAP connection failed: {e}")
-            return False
-```
-
-This SAP adapter demonstrates how to handle enterprise system connections with proper session management, authentication, and error handling. The connection pooling and timeout configuration are essential for enterprise environments.
-
-```python
-# From src/session9/erp_integration.py (continued)
-    async def authenticate(self, credentials: Dict[str, Any]) -> bool:
-        """Authenticate with SAP using OAuth 2.0."""
-        auth_url = f"{self.base_url}/oauth/token"
-        auth_data = {
-            "grant_type": "client_credentials",
-            "client_id": credentials["client_id"],
-            "client_secret": credentials["client_secret"],
-            "scope": credentials.get("scope", "read write")
-        }
-        
-        try:
-            async with self.session.post(auth_url, data=auth_data) as response:
-                if response.status == 200:
-                    token_data = await response.json()
-                    self.auth_token = token_data["access_token"]
-                    self.token_expires = datetime.now() + \
-                        timedelta(seconds=token_data.get("expires_in", 3600))
-                    return True
-                else:
-                    self.logger.error(f"SAP auth failed: {response.status}")
-                    return False
-        except Exception as e:
-            self.logger.error(f"SAP authentication error: {e}")
-            return False
-```
-
-Authentication is critical for enterprise systems. This example shows OAuth 2.0 implementation with proper token management and expiration handling. Enterprise systems often have complex authentication requirements that must be handled robustly.
-
-### Step 1.3: CRM System Integration
-
-Now let's implement Salesforce integration:
-
-```python
-# From src/session9/crm_integration.py
-class SalesforceAdapter:
-    """Salesforce CRM integration adapter."""
     
-    def __init__(self, instance_url: str, credentials: Dict[str, Any]):
-        self.instance_url = instance_url
-        self.credentials = credentials
-        self.session: Optional[aiohttp.ClientSession] = None
-        self.access_token: Optional[str] = None
-        self.logger = logging.getLogger(__name__)
-    
-    async def get_account_data(self, account_id: str) -> Dict[str, Any]:
-        """Retrieve account information from Salesforce."""
-        if not await self._ensure_authenticated():
-            raise Exception("Authentication failed")
-        
-        query_url = f"{self.instance_url}/services/data/v58.0/sobjects/Account/{account_id}"
-        headers = {
-            "Authorization": f"Bearer {self.access_token}",
-            "Content-Type": "application/json"
-        }
+    return True
 ```
 
-Salesforce integration requires handling their specific API patterns and authentication methods. The `_ensure_authenticated` method (shown next) handles token refresh automatically.
+This helper ensures we always have valid authentication by checking expiration and proactively refreshing tokens.
+
+### Step 1.3: Database Integration Patterns
+
+Enterprise agents often need to interact with multiple databases. Let's create a unified database manager:
 
 ```python
-# From src/session9/crm_integration.py (continued)
-        try:
-            async with self.session.get(query_url, headers=headers) as response:
-                if response.status == 200:
-                    account_data = await response.json()
-                    return {
-                        "id": account_data.get("Id"),
-                        "name": account_data.get("Name"),
-                        "industry": account_data.get("Industry"),
-                        "annual_revenue": account_data.get("AnnualRevenue"),
-                        "employees": account_data.get("NumberOfEmployees"),
-                        "created_date": account_data.get("CreatedDate")
-                    }
-                elif response.status == 401:
-                    # Token expired, refresh and retry
-                    if await self.authenticate(self.credentials):
-                        return await self.get_account_data(account_id)
-                    else:
-                        raise Exception("Re-authentication failed")
-                else:
-                    error_text = await response.text()
-                    raise Exception(f"Salesforce API error: {error_text}")
-        except Exception as e:
-            self.logger.error(f"Account data retrieval failed: {e}")
-            raise
-```
-
-This method demonstrates enterprise-grade error handling with automatic token refresh. When a 401 (Unauthorized) response is received, the system attempts to re-authenticate and retry the request automatically.
-
-### Step 1.4: Database Integration Patterns
-
-Enterprise agents often need to interact with multiple databases:
-
-```python
-# From src/session9/database_integration.py
+# Database manager imports
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-import asyncpg
-from typing import AsyncGenerator
+```
 
+We use SQLAlchemy's async support for enterprise-grade database operations. This ensures non-blocking database interactions.
+
+Here's the enterprise database connection manager:
+
+```python
+# Enterprise database connection manager
 class EnterpriseDatabase:
     """Enterprise database connection manager."""
     
@@ -232,48 +310,58 @@ class EnterpriseDatabase:
         self.configs = database_configs
         self.engines = {}
         self.session_factories = {}
-        self.connection_pools = {}
         
     async def initialize_connections(self):
-        """Initialize all database connections."""
+        """Initialize all configured database connections."""
         for db_name, config in self.configs.items():
-            if config["type"] == "postgresql":
-                await self._setup_postgresql(db_name, config)
-            elif config["type"] == "oracle":
-                await self._setup_oracle(db_name, config)
-            elif config["type"] == "sqlserver":
-                await self._setup_sqlserver(db_name, config)
+            await self._setup_database(db_name, config)
 ```
 
-The `EnterpriseDatabase` class provides a unified interface for managing connections to multiple database systems commonly found in enterprise environments. This abstraction allows agents to work with different databases through a consistent API.
+This manager provides a unified interface for managing connections to multiple database systems commonly found in enterprise environments.
+
+Here's PostgreSQL setup with enterprise configuration:
 
 ```python
-# From src/session9/database_integration.py (continued)
-    async def _setup_postgresql(self, db_name: str, config: Dict[str, Any]):
-        """Setup PostgreSQL connection with connection pooling."""
-        connection_string = (
-            f"postgresql+asyncpg://{config['username']}:{config['password']}"
-            f"@{config['host']}:{config['port']}/{config['database']}"
-        )
-        
-        engine = create_async_engine(
-            connection_string,
-            pool_size=config.get("pool_size", 10),
-            max_overflow=config.get("max_overflow", 20),
-            pool_pre_ping=True,
-            pool_recycle=3600,
-            echo=config.get("debug", False)
-        )
-        
-        self.engines[db_name] = engine
-        self.session_factories[db_name] = sessionmaker(
-            bind=engine,
-            class_=AsyncSession,
-            expire_on_commit=False
-        )
+# PostgreSQL connection setup
+async def _setup_postgresql(self, db_name: str, config: Dict[str, Any]):
+    """Setup PostgreSQL connection with enterprise configuration."""
+    connection_string = (
+        f"postgresql+asyncpg://{config['username']}:{config['password']}"
+        f"@{config['host']}:{config['port']}/{config['database']}"
+    )
 ```
 
-Connection pooling is essential for enterprise database access. This configuration ensures efficient resource utilization with proper connection limits, health checks, and recycling to handle enterprise workloads.
+The connection string uses asyncpg driver for optimal PostgreSQL async performance. Connection credentials are securely managed through configuration.
+
+Now let's configure the database engine with enterprise settings:
+
+```python
+# Database engine configuration
+    engine = create_async_engine(
+        connection_string,
+        pool_size=config.get("pool_size", 10),
+        max_overflow=config.get("max_overflow", 20),
+        pool_pre_ping=True,  # Validate connections before use
+        pool_recycle=3600,   # Recycle connections every hour
+        echo=config.get("debug", False)
+    )
+```
+
+Connection pooling is essential for enterprise database access. Pool settings prevent connection exhaustion while `pool_pre_ping` ensures connection health.
+
+Finally, let's set up the session factory:
+
+```python
+# Session factory setup
+    self.engines[db_name] = engine
+    self.session_factories[db_name] = sessionmaker(
+        bind=engine,
+        class_=AsyncSession,
+        expire_on_commit=False
+    )
+```
+
+Connection pooling is essential for enterprise database access. This configuration ensures efficient resource utilization with proper connection limits, health checks, and recycling.
 
 ---
 
@@ -281,10 +369,10 @@ Connection pooling is essential for enterprise database access. This configurati
 
 ### Step 2.1: Containerization Strategy
 
-Production agent systems require sophisticated containerization beyond basic Docker images:
+Production agent systems require sophisticated containerization beyond basic Docker images. Let's start with the build stage:
 
 ```dockerfile
-# From src/session9/deployment/Dockerfile
+# Multi-stage Dockerfile - Build stage
 FROM python:3.11-slim as builder
 
 # Build stage for dependencies
@@ -299,7 +387,13 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     curl \
     && rm -rf /var/lib/apt/lists/*
+```
 
+This first stage includes all the compilation tools needed for dependency installation. We separate the build environment from the runtime environment to optimize the final image size.
+
+Here's the dependency installation in the build stage:
+
+```dockerfile
 # Create virtual environment and install dependencies
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
@@ -307,10 +401,12 @@ RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 ```
 
-This multi-stage Dockerfile approach optimizes the final image size by separating the build environment from the runtime environment. The build stage includes all compilation tools needed for dependency installation.
+Using a virtual environment in the build stage ensures clean dependency management and makes it easier to copy to the runtime stage.
+
+Now let's create the runtime stage:
 
 ```dockerfile
-# From src/session9/deployment/Dockerfile (continued)
+# Multi-stage Dockerfile - Runtime stage
 FROM python:3.11-slim as runtime
 
 # Runtime stage with minimal footprint
@@ -319,32 +415,59 @@ WORKDIR /app
 # Copy virtual environment from builder
 COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
+```
 
+The runtime stage starts with a clean base image and copies only the compiled dependencies from the builder stage.
+
+Here's the runtime dependency installation:
+
+```dockerfile
 # Install only runtime dependencies
 RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
+```
 
+We install only essential runtime tools like `curl` for health checks, then clean up package cache to minimize image size.
+
+Now let's configure security with non-root user:
+
+```dockerfile
 # Create non-root user for security
 RUN groupadd -r agent && useradd -r -g agent agent
 RUN mkdir -p /app/logs /app/data && \
     chown -R agent:agent /app
+```
 
+Creating dedicated user and group follows security best practices. Directory permissions are set appropriately for the application.
+
+Here's the application deployment with security context:
+
+```dockerfile
 # Copy application code
 COPY --chown=agent:agent src/ ./src/
 COPY --chown=agent:agent config/ ./config/
-COPY --chown=agent:agent scripts/ ./scripts/
+
+# Switch to non-root user
+USER agent
+
+# Expose port
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+  CMD curl -f http://localhost:8000/health || exit 1
 ```
 
-The runtime stage creates a minimal environment with only necessary runtime dependencies. Security is enhanced by running as a non-root user with properly configured file permissions.
+Security is enhanced by running as a non-root user with properly configured file permissions and health checks.
 
 ### Step 2.2: Kubernetes Deployment Configuration
 
-Enterprise deployment requires sophisticated Kubernetes configurations:
+Enterprise deployment requires sophisticated Kubernetes configurations. Let's start with the deployment metadata:
 
 ```yaml
-# From src/session9/deployment/k8s/deployment.yaml
+# Kubernetes Deployment Configuration
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -361,20 +484,19 @@ spec:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
-  selector:
-    matchLabels:
-      app: enterprise-agent
+```
+
+This deployment configuration ensures zero-downtime updates with rolling deployment strategy. The replica count and update strategy are configured for high availability.
+
+Here's the pod template configuration:
+
+```yaml
+# Pod template with security and resource configuration
   template:
     metadata:
       labels:
         app: enterprise-agent
         version: v1.0.0
-```
-
-This deployment configuration ensures zero-downtime updates with rolling deployment strategy. The replica count and update strategy are configured for high availability in production environments.
-
-```yaml
-# From src/session9/deployment/k8s/deployment.yaml (continued)
     spec:
       securityContext:
         runAsNonRoot: true
@@ -389,6 +511,14 @@ This deployment configuration ensures zero-downtime updates with rolling deploym
           name: http
         - containerPort: 9090
           name: metrics
+```
+
+The security context ensures the container runs as a non-root user with proper group permissions.
+
+Now let's add resource limits and health probes:
+
+```yaml
+# Resource limits and health probes
         resources:
           requests:
             memory: "256Mi"
@@ -414,20 +544,32 @@ Resource limits and health probes are essential for production Kubernetes deploy
 
 ### Step 2.3: Service Mesh Configuration
 
-For enterprise environments, service mesh provides advanced traffic management:
+For enterprise environments, service mesh provides advanced traffic management. Here's an Istio VirtualService configuration:
 
 ```yaml
-# From src/session9/deployment/k8s/istio-virtualservice.yaml
+# Istio VirtualService metadata
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: enterprise-agent-vs
   namespace: agents
+```
+
+The VirtualService defines how traffic is routed through the service mesh. Next, we configure the routing specification:
+
+```yaml
+# VirtualService routing specification
 spec:
   hosts:
   - enterprise-agent.company.com
   gateways:
   - enterprise-gateway
+```
+
+This specification binds our service to the enterprise gateway and hostname. Now let's define the HTTP routing rules:
+
+```yaml
+# HTTP routing rules with version-based matching
   http:
   - match:
     - headers:
@@ -439,6 +581,14 @@ spec:
         port:
           number: 8000
       weight: 100
+```
+
+Service mesh configuration enables advanced traffic routing, allowing for A/B testing, canary deployments, and version-based routing.
+
+Here's a more complex routing rule for different API versions:
+
+```yaml
+# Multi-version routing configuration
   - match:
     - uri:
         prefix: "/v2/"
@@ -448,16 +598,21 @@ spec:
         port:
           number: 8000
       weight: 100
+  - fault:
+      delay:
+        percentage:
+          value: 0.1
+        fixedDelay: 5s
 ```
 
-Service mesh configuration enables advanced traffic routing, allowing for A/B testing, canary deployments, and version-based routing. This is essential for enterprise environments with multiple service versions.
+This configuration shows how to route different API versions to different services and inject faults for testing resilience.
 
 ### Step 2.4: CI/CD Pipeline Implementation
 
-Enterprise CI/CD pipelines require comprehensive testing and security scanning:
+Enterprise CI/CD pipelines require comprehensive testing and security scanning. Let's start with the basic workflow structure:
 
 ```yaml
-# From src/session9/deployment/.github/workflows/production-deploy.yml
+# GitHub Actions CI/CD Pipeline - Basic Configuration
 name: Production Deployment
 on:
   push:
@@ -467,7 +622,14 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: enterprise-agent
+```
 
+This pipeline configuration triggers on main branch pushes and version tags. Environment variables centralize registry and image naming for reuse across jobs.
+
+Here's the security scanning job configuration:
+
+```yaml
+# Security scanning job with vulnerability detection
 jobs:
   security-scan:
     runs-on: ubuntu-latest
@@ -481,17 +643,14 @@ jobs:
         scan-ref: '.'
         format: 'sarif'
         output: 'trivy-results.sarif'
-    
-    - name: Upload Trivy scan results
-      uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: 'trivy-results.sarif'
 ```
 
-Security scanning is integrated directly into the CI/CD pipeline, ensuring vulnerabilities are detected before deployment. This includes both code analysis and container image scanning.
+Security scanning is integrated directly into the CI/CD pipeline, ensuring vulnerabilities are detected before deployment.
+
+Here's the testing stage with service dependencies:
 
 ```yaml
-# From src/session9/deployment/.github/workflows/production-deploy.yml (continued)
+# Testing job with PostgreSQL service
   test:
     runs-on: ubuntu-latest
     needs: security-scan
@@ -501,6 +660,12 @@ Security scanning is integrated directly into the CI/CD pipeline, ensuring vulne
         env:
           POSTGRES_PASSWORD: testpass
           POSTGRES_DB: testdb
+```
+
+The testing job requires a PostgreSQL service for integration testing. We configure health checks to ensure the database is ready:
+
+```yaml
+# PostgreSQL health check configuration
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -508,7 +673,12 @@ Security scanning is integrated directly into the CI/CD pipeline, ensuring vulne
           --health-retries 5
         ports:
         - 5432:5432
-    
+```
+
+Next, we define the test execution steps:
+
+```yaml
+# Test execution steps
     steps:
     - uses: actions/checkout@v4
     
@@ -523,14 +693,14 @@ Security scanning is integrated directly into the CI/CD pipeline, ensuring vulne
         pip install -r requirements-test.txt
 ```
 
-The testing stage includes integration tests with real database services. This ensures that the application works correctly with its dependencies before deployment.
+The testing stage includes integration tests with real database services. This ensures that the application works correctly with its dependencies.
 
 ### Step 2.5: Production Deployment Automation
 
 The deployment stage includes comprehensive validation and rollback capabilities:
 
 ```yaml
-# From src/session9/deployment/.github/workflows/production-deploy.yml (continued)
+# Production deployment with validation
   deploy:
     runs-on: ubuntu-latest
     needs: [security-scan, test, build]
@@ -546,16 +716,25 @@ The deployment stage includes comprehensive validation and rollback capabilities
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
-    
+```
+
+The deployment process includes proper credential configuration and environment protection.
+
+Here's the deployment execution with health checks:
+
+```yaml
+# Deployment execution and validation
     - name: Deploy to EKS
       run: |
         aws eks update-kubeconfig --region us-west-2 --name production-cluster
-        kubectl set image deployment/enterprise-agent agent=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+        kubectl set image deployment/enterprise-agent \
+          agent=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
         kubectl rollout status deployment/enterprise-agent --timeout=600s
     
     - name: Validate deployment
       run: |
-        kubectl wait --for=condition=available deployment/enterprise-agent --timeout=300s
+        kubectl wait --for=condition=available \
+          deployment/enterprise-agent --timeout=300s
         ./scripts/health-check.sh https://enterprise-agent.company.com/health
 ```
 
@@ -567,16 +746,15 @@ The deployment process includes automatic health checks and rollout status monit
 
 ### Step 3.1: Enterprise Authentication & Authorization
 
-Enterprise security requires sophisticated identity and access management:
+Enterprise security requires sophisticated identity and access management. Let's start with the authentication methods:
 
 ```python
-# From src/session9/security/enterprise_auth.py
+# Enterprise authentication framework
 from typing import Dict, List, Optional, Set
 from datetime import datetime, timedelta
 import jwt
 import bcrypt
 from enum import Enum
-import asyncio
 from dataclasses import dataclass
 
 class AuthenticationMethod(Enum):
@@ -587,10 +765,17 @@ class AuthenticationMethod(Enum):
     LDAP = "ldap"
     MFA = "mfa"
     CERTIFICATE = "certificate"
+```
 
+The security framework supports multiple authentication methods commonly used in enterprise environments.
+
+Here's the user context definition:
+
+```python
+# User authentication and authorization context
 @dataclass
 class UserContext:
-    """User authentication and authorization context."""
+    """User context with comprehensive attributes."""
     user_id: str
     username: str
     email: str
@@ -603,10 +788,12 @@ class UserContext:
     session_expires: Optional[datetime] = None
 ```
 
-The security framework supports multiple authentication methods commonly used in enterprise environments. The `UserContext` includes comprehensive user attributes needed for fine-grained access control.
+The `UserContext` includes comprehensive user attributes needed for fine-grained access control.
+
+Now let's implement the authentication manager:
 
 ```python
-# From src/session9/security/enterprise_auth.py (continued)
+# Enterprise authentication manager class
 class EnterpriseAuthManager:
     """Comprehensive authentication and authorization manager."""
     
@@ -615,7 +802,14 @@ class EnterpriseAuthManager:
         self.active_sessions: Dict[str, UserContext] = {}
         self.failed_attempts: Dict[str, int] = {}
         self.blacklisted_tokens: Set[str] = set()
-        
+```
+
+The authentication manager maintains session state, tracks failed attempts for security, and manages token blacklists for compromised credentials.
+
+Here's the main authentication method with security checks:
+
+```python
+# Authentication method with security checks
     async def authenticate(self, credentials: Dict[str, Any]) -> Optional[UserContext]:
         """Authenticate user with multiple factor support."""
         auth_method = credentials.get("method", "basic")
@@ -624,7 +818,14 @@ class EnterpriseAuthManager:
         # Check for account lockout
         if self._is_account_locked(username):
             raise AuthenticationError("Account locked due to failed attempts")
-        
+```
+
+The authentication manager implements enterprise security patterns including account lockout protection.
+
+Here's the authentication routing logic:
+
+```python
+# Authentication method routing
         try:
             if auth_method == AuthenticationMethod.BASIC.value:
                 return await self._authenticate_basic(credentials)
@@ -639,16 +840,14 @@ class EnterpriseAuthManager:
             raise
 ```
 
-The authentication manager implements enterprise security patterns including account lockout protection, multiple authentication methods, and comprehensive session management.
+The routing logic supports multiple authentication methods with proper error handling and failed attempt tracking.
 
 ### Step 3.2: Role-Based Access Control (RBAC)
 
-Enterprise systems require sophisticated permission management:
+Enterprise systems require sophisticated permission management. Let's define the permission hierarchy:
 
 ```python
-# From src/session9/security/rbac.py
-from typing import Dict, Set, List
-from dataclasses import dataclass, field
+# Permission system with hierarchical structure - imports
 from enum import Enum
 
 class Permission(Enum):
@@ -659,18 +858,39 @@ class Permission(Enum):
     AGENT_UPDATE = "agent:update"
     AGENT_DELETE = "agent:delete"
     AGENT_EXECUTE = "agent:execute"
-    
-    # Data access
+```
+
+The permission system defines fine-grained access controls for agent operations. Agent permissions follow standard CRUD patterns with execution rights.
+
+Here are the data access permissions by classification level:
+
+```python
+# Data access permissions by classification
+    # Data access by classification
     DATA_READ_PUBLIC = "data:read:public"
     DATA_READ_INTERNAL = "data:read:internal"
     DATA_READ_CONFIDENTIAL = "data:read:confidential"
     DATA_READ_SECRET = "data:read:secret"
-    
+```
+
+Data permissions align with enterprise classification levels, ensuring proper access control based on data sensitivity.
+
+Finally, the system administration permissions:
+
+```python
+# System administration permissions
     # System administration
     SYSTEM_CONFIG = "system:config"
     SYSTEM_MONITOR = "system:monitor"
     SYSTEM_ADMIN = "system:admin"
+```
 
+The permission system uses a hierarchical structure that aligns with enterprise data classification levels.
+
+Here's the role definition with constraints:
+
+```python
+# Role definition with permissions and constraints
 @dataclass
 class Role:
     """Role definition with permissions and constraints."""
@@ -680,10 +900,12 @@ class Role:
     inherits_from: List[str] = field(default_factory=list)
 ```
 
-The permission system uses a hierarchical structure that aligns with enterprise data classification levels (public, internal, confidential, secret). This enables fine-grained access control based on data sensitivity.
+Roles can include both permissions and constraints like time restrictions and environment limitations.
+
+Let's implement the RBAC manager:
 
 ```python
-# From src/session9/security/rbac.py (continued)
+# Role-Based Access Control manager - class definition
 class RBACManager:
     """Role-Based Access Control manager."""
     
@@ -691,7 +913,14 @@ class RBACManager:
         self.roles: Dict[str, Role] = {}
         self.user_roles: Dict[str, Set[str]] = {}
         self._initialize_default_roles()
-    
+```
+
+The RBAC manager maintains role definitions and user-role mappings. It automatically initializes standard enterprise roles on startup.
+
+Here's the default role initialization with a data analyst example:
+
+```python
+# Default role initialization with data analyst role
     def _initialize_default_roles(self):
         """Initialize standard enterprise roles."""
         # Data Analyst role
@@ -709,40 +938,21 @@ class RBACManager:
                 "max_concurrent_sessions": 3
             }
         )
-        
-        # Agent Developer role
-        self.roles["agent_developer"] = Role(
-            name="agent_developer",
-            permissions={
-                Permission.AGENT_CREATE,
-                Permission.AGENT_READ,
-                Permission.AGENT_UPDATE,
-                Permission.AGENT_EXECUTE,
-                Permission.DATA_READ_PUBLIC,
-                Permission.DATA_READ_INTERNAL,
-                Permission.SYSTEM_MONITOR
-            },
-            constraints={
-                "environment_restriction": ["development", "staging"]
-            }
-        )
 ```
 
-Role definitions include both permissions and constraints. Constraints can include time restrictions, IP address limitations, and environment access controls that are common in enterprise security policies.
+Role definitions include both permissions and constraints. Constraints can include time restrictions, IP address limitations, and environment access controls.
 
 ### Step 3.3: Data Encryption and Protection
 
-Enterprise agents must handle sensitive data with appropriate encryption:
+Enterprise agents must handle sensitive data with appropriate encryption. Let's start with the encryption service:
 
 ```python
-# From src/session9/security/encryption.py
+# Enterprise-grade encryption service
 from cryptography.fernet import Fernet, MultiFernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives.asymmetric import rsa, padding
 import os
 import base64
-from typing import Dict, Any, Optional
 
 class EnterpriseEncryption:
     """Enterprise-grade encryption service."""
@@ -752,81 +962,109 @@ class EnterpriseEncryption:
         self.symmetric_keys = self._initialize_symmetric_keys()
         self.asymmetric_keys = self._initialize_asymmetric_keys()
         self.key_rotation_interval = config.get("key_rotation_hours", 24)
-        
-    def _initialize_symmetric_keys(self) -> MultiFernet:
-        """Initialize symmetric encryption with key rotation support."""
-        keys = []
-        
-        # Primary key (current)
-        primary_key = os.environ.get("ENCRYPTION_KEY_PRIMARY")
-        if primary_key:
-            keys.append(Fernet(primary_key.encode()))
-        else:
-            # Generate new key if none provided
-            keys.append(Fernet(Fernet.generate_key()))
-        
-        # Secondary key (for rotation)
-        secondary_key = os.environ.get("ENCRYPTION_KEY_SECONDARY")
-        if secondary_key:
-            keys.append(Fernet(secondary_key.encode()))
-            
-        return MultiFernet(keys)
 ```
 
-The encryption service supports key rotation, which is essential for enterprise security. Using `MultiFernet` allows for seamless key rotation without breaking existing encrypted data.
+The encryption service supports key rotation, which is essential for enterprise security.
+
+Here's the symmetric key initialization with rotation support:
 
 ```python
-# From src/session9/security/encryption.py (continued)
-    async def encrypt_sensitive_data(self, data: Dict[str, Any], 
-                                   classification: str = "internal") -> Dict[str, Any]:
-        """Encrypt data based on classification level."""
-        encrypted_data = {}
+# Symmetric key initialization with rotation
+def _initialize_symmetric_keys(self) -> MultiFernet:
+    """Initialize symmetric encryption with key rotation support."""
+    keys = []
+    
+    # Primary key (current)
+    primary_key = os.environ.get("ENCRYPTION_KEY_PRIMARY")
+    if primary_key:
+        keys.append(Fernet(primary_key.encode()))
+    else:
+        # Generate new key if none provided
+        keys.append(Fernet(Fernet.generate_key()))
+    
+    # Secondary key (for rotation)
+    secondary_key = os.environ.get("ENCRYPTION_KEY_SECONDARY")
+    if secondary_key:
+        keys.append(Fernet(secondary_key.encode()))
         
-        for key, value in data.items():
-            field_classification = self._get_field_classification(key, classification)
-            
-            if field_classification in ["confidential", "secret"]:
-                # Use asymmetric encryption for highly sensitive data
-                encrypted_value = self._asymmetric_encrypt(str(value))
-                encrypted_data[key] = {
-                    "value": encrypted_value,
-                    "encrypted": True,
-                    "method": "asymmetric",
-                    "classification": field_classification
-                }
-            elif field_classification == "internal":
-                # Use symmetric encryption for internal data
-                encrypted_value = self.symmetric_keys.encrypt(str(value).encode())
-                encrypted_data[key] = {
-                    "value": base64.b64encode(encrypted_value).decode(),
-                    "encrypted": True,
-                    "method": "symmetric",
-                    "classification": field_classification
-                }
-            else:
-                # Public data doesn't need encryption
-                encrypted_data[key] = {
-                    "value": value,
-                    "encrypted": False,
-                    "classification": field_classification
-                }
-        
-        return encrypted_data
+    return MultiFernet(keys)
 ```
 
-Data encryption is applied based on classification levels. Highly sensitive data uses asymmetric encryption, while less sensitive data uses more efficient symmetric encryption. This approach balances security with performance.
+Using `MultiFernet` allows for seamless key rotation without breaking existing encrypted data.
+
+Now let's implement classification-based encryption:
+
+```python
+# Data encryption based on classification level - method signature
+async def encrypt_sensitive_data(self, data: Dict[str, Any], 
+                               classification: str = "internal") -> Dict[str, Any]:
+    """Encrypt data based on classification level."""
+    encrypted_data = {}
+    
+    for key, value in data.items():
+        field_classification = self._get_field_classification(key, classification)
+```
+
+The encryption method processes each field individually, determining the appropriate encryption method based on data classification.
+
+Here's the handling for highly sensitive data:
+
+```python
+# Highly sensitive data encryption (asymmetric)
+        if field_classification in ["confidential", "secret"]:
+            # Use asymmetric encryption for highly sensitive data
+            encrypted_value = self._asymmetric_encrypt(str(value))
+            encrypted_data[key] = {
+                "value": encrypted_value,
+                "encrypted": True,
+                "method": "asymmetric",
+                "classification": field_classification
+            }
+```
+
+Highly sensitive data uses asymmetric encryption, which provides stronger security but is more computationally expensive.
+
+For internal data, we use efficient symmetric encryption:
+
+```python
+# Internal data encryption (symmetric)
+        elif field_classification == "internal":
+            # Use symmetric encryption for internal data
+            encrypted_value = self.symmetric_keys.encrypt(str(value).encode())
+            encrypted_data[key] = {
+                "value": base64.b64encode(encrypted_value).decode(),
+                "encrypted": True,
+                "method": "symmetric",
+                "classification": field_classification
+            }
+```
+
+Symmetric encryption is faster and suitable for less sensitive internal data.
+
+Finally, public data requires no encryption:
+
+```python
+# Public data handling (no encryption needed)
+        else:
+            # Public data doesn't need encryption
+            encrypted_data[key] = {
+                "value": value,
+                "encrypted": False,
+                "classification": field_classification
+            }
+    
+    return encrypted_data
+```
+
+Data encryption is applied based on classification levels. Highly sensitive data uses asymmetric encryption, while less sensitive data uses more efficient symmetric encryption.
 
 ### Step 3.4: Compliance Framework Implementation
 
-Enterprise environments require compliance with various regulations:
+Enterprise environments require compliance with various regulations. Let's define the compliance framework:
 
 ```python
-# From src/session9/security/compliance.py
+# Compliance framework definitions - imports and enums
 from enum import Enum
-from typing import Dict, List, Set, Any
-from datetime import datetime, timedelta
-import asyncio
-from dataclasses import dataclass
 
 class ComplianceFramework(Enum):
     """Supported compliance frameworks."""
@@ -836,7 +1074,14 @@ class ComplianceFramework(Enum):
     PCI_DSS = "pci_dss"
     ISO27001 = "iso27001"
     CCPA = "ccpa"
+```
 
+The compliance framework supports major regulatory standards commonly required in enterprise environments.
+
+Here's the individual compliance rule definition:
+
+```python
+# Individual compliance rule structure
 @dataclass
 class ComplianceRule:
     """Individual compliance rule definition."""
@@ -846,7 +1091,14 @@ class ComplianceRule:
     severity: str
     validation_function: str
     remediation_steps: List[str]
+```
 
+The compliance framework provides a systematic approach to meeting regulatory requirements.
+
+Here's the compliance manager implementation:
+
+```python
+# Comprehensive compliance management system
 class ComplianceManager:
     """Comprehensive compliance management system."""
     
@@ -857,42 +1109,50 @@ class ComplianceManager:
         self._initialize_compliance_rules()
 ```
 
-The compliance framework provides a systematic approach to meeting regulatory requirements. Different frameworks have different rules and validation criteria that must be continuously monitored.
+The compliance manager tracks active frameworks and maintains rule definitions.
+
+Let's implement GDPR-specific rules:
 
 ```python
-# From src/session9/security/compliance.py (continued)
-    def _initialize_compliance_rules(self):
-        """Initialize compliance rules for active frameworks."""
-        
-        if ComplianceFramework.GDPR in self.active_frameworks:
-            self.rules["gdpr_data_retention"] = ComplianceRule(
-                rule_id="gdpr_data_retention",
-                framework=ComplianceFramework.GDPR,
-                description="Personal data must not be retained longer than necessary",
-                severity="high",
-                validation_function="validate_data_retention",
-                remediation_steps=[
-                    "Identify data exceeding retention period",
-                    "Notify data subjects if required",
-                    "Securely delete or anonymize data"
-                ]
-            )
-            
-            self.rules["gdpr_consent"] = ComplianceRule(
-                rule_id="gdpr_consent",
-                framework=ComplianceFramework.GDPR,
-                description="Valid consent must exist for personal data processing",
-                severity="critical",
-                validation_function="validate_consent",
-                remediation_steps=[
-                    "Stop processing until consent obtained",
-                    "Document consent mechanism",
-                    "Implement consent withdrawal process"
-                ]
-            )
+# GDPR compliance rules initialization - method signature
+def _initialize_gdpr_rules(self):
+    """Initialize GDPR compliance rules."""
+    
+    self.rules["gdpr_data_retention"] = ComplianceRule(
+        rule_id="gdpr_data_retention",
+        framework=ComplianceFramework.GDPR,
+        description="Personal data must not be retained longer than necessary",
+        severity="high",
+        validation_function="validate_data_retention",
+        remediation_steps=[
+            "Identify data exceeding retention period",
+            "Notify data subjects if required",
+            "Securely delete or anonymize data"
+        ]
+    )
 ```
 
-GDPR compliance rules include data retention limits and consent management. Each rule includes specific validation functions and clear remediation steps for addressing violations.
+GDPR data retention rules ensure personal data isn't kept longer than necessary for the original purpose. The remediation steps provide clear guidance for compliance violations.
+
+Here's the GDPR consent rule definition:
+
+```python
+# GDPR consent rule definition
+    self.rules["gdpr_consent"] = ComplianceRule(
+        rule_id="gdpr_consent",
+        framework=ComplianceFramework.GDPR,
+        description="Valid consent must exist for personal data processing",
+        severity="critical",
+        validation_function="validate_consent",
+        remediation_steps=[
+            "Stop processing until consent obtained",
+            "Document consent mechanism",
+            "Implement consent withdrawal process"
+        ]
+    )
+```
+
+GDPR compliance rules include data retention limits and consent management. Each rule includes specific validation functions and clear remediation steps.
 
 ---
 
@@ -900,24 +1160,29 @@ GDPR compliance rules include data retention limits and consent management. Each
 
 ### Step 4.1: Comprehensive Monitoring Architecture
 
-Enterprise monitoring requires multi-layered observability:
+Enterprise monitoring requires multi-layered observability. Let's start with the metric type definitions:
 
 ```python
-# From src/session9/monitoring/observability.py
+# Monitoring system with metric types - imports
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
-import asyncio
-import json
 from enum import Enum
 
 class MetricType(Enum):
     """Types of metrics collected."""
-    COUNTER = "counter"
-    GAUGE = "gauge"
-    HISTOGRAM = "histogram"
-    SUMMARY = "summary"
+    COUNTER = "counter"      # Monotonically increasing values
+    GAUGE = "gauge"          # Snapshot values that can go up or down
+    HISTOGRAM = "histogram"  # Distribution of values with buckets
+    SUMMARY = "summary"      # Distribution with quantiles
+```
 
+The monitoring system supports different metric types that align with Prometheus standards. Each type serves different monitoring purposes.
+
+Here's the individual metric definition structure:
+
+```python
+# Individual metric definition structure
 @dataclass
 class Metric:
     """Individual metric definition."""
@@ -927,7 +1192,14 @@ class Metric:
     labels: Dict[str, str] = field(default_factory=dict)
     timestamp: datetime = field(default_factory=datetime.now)
     description: str = ""
+```
 
+The monitoring system supports different metric types that align with Prometheus standards.
+
+Here's the enterprise monitoring system:
+
+```python
+# Comprehensive monitoring and observability system
 class EnterpriseMonitoring:
     """Comprehensive monitoring and observability system."""
     
@@ -939,61 +1211,81 @@ class EnterpriseMonitoring:
         self.exporters = self._initialize_exporters()
 ```
 
-The monitoring system supports different metric types (counter, gauge, histogram, summary) that align with Prometheus standards. This ensures compatibility with enterprise monitoring stacks.
+The monitoring system provides comprehensive observability across multiple dimensions.
+
+Let's implement comprehensive agent metrics collection:
 
 ```python
-# From src/session9/monitoring/observability.py (continued)
-    async def collect_agent_metrics(self, agent_id: str) -> Dict[str, Any]:
-        """Collect comprehensive agent performance metrics."""
-        metrics = {
-            "agent_id": agent_id,
-            "timestamp": datetime.now().isoformat(),
-            "performance": await self._collect_performance_metrics(agent_id),
-            "health": await self._collect_health_metrics(agent_id),
-            "business": await self._collect_business_metrics(agent_id),
-            "security": await self._collect_security_metrics(agent_id)
-        }
-        
-        # Store metrics for historical analysis
-        await self._store_metrics(agent_id, metrics)
-        
-        # Check alert conditions
-        await self._evaluate_alert_rules(agent_id, metrics)
-        
-        return metrics
-    
-    async def _collect_performance_metrics(self, agent_id: str) -> Dict[str, Any]:
-        """Collect agent performance metrics."""
-        return {
-            "cpu_usage_percent": await self._get_cpu_usage(agent_id),
-            "memory_usage_mb": await self._get_memory_usage(agent_id),
-            "request_latency_ms": await self._get_avg_latency(agent_id),
-            "throughput_rps": await self._get_throughput(agent_id),
-            "error_rate_percent": await self._get_error_rate(agent_id)
-        }
+# Agent metrics collection method
+async def collect_agent_metrics(self, agent_id: str) -> Dict[str, Any]:
+    """Collect comprehensive agent performance metrics."""
+    metrics = {
+        "agent_id": agent_id,
+        "timestamp": datetime.now().isoformat(),
+        "performance": await self._collect_performance_metrics(agent_id),
+        "health": await self._collect_health_metrics(agent_id),
+        "business": await self._collect_business_metrics(agent_id),
+        "security": await self._collect_security_metrics(agent_id)
+    }
 ```
 
-Agent metrics collection includes performance, health, business, and security dimensions. This comprehensive approach provides visibility into all aspects of agent operation.
+The metrics collection includes performance, health, business, and security dimensions for comprehensive observability.
+
+Here's the metrics storage and alerting:
+
+```python
+# Metrics storage and alerting
+    # Store metrics for historical analysis
+    await self._store_metrics(agent_id, metrics)
+    
+    # Check alert conditions
+    await self._evaluate_alert_rules(agent_id, metrics)
+    
+    return metrics
+```
+
+Agent metrics collection includes performance, health, business, and security dimensions.
+
+Here's the performance metrics collection:
+
+```python
+# Performance metrics collection
+async def _collect_performance_metrics(self, agent_id: str) -> Dict[str, Any]:
+    """Collect agent performance metrics."""
+    return {
+        "cpu_usage_percent": await self._get_cpu_usage(agent_id),
+        "memory_usage_mb": await self._get_memory_usage(agent_id),
+        "request_latency_ms": await self._get_avg_latency(agent_id),
+        "throughput_rps": await self._get_throughput(agent_id),
+        "error_rate_percent": await self._get_error_rate(agent_id)
+    }
+```
+
+Performance metrics provide visibility into system resource usage and response characteristics.
 
 ### Step 4.2: Distributed Tracing Implementation
 
-Complex agent workflows require distributed tracing:
+Complex agent workflows require distributed tracing. Let's implement OpenTelemetry tracing:
 
 ```python
-# From src/session9/monitoring/tracing.py
+# Distributed tracing setup - imports
 import opentelemetry
 from opentelemetry import trace
 from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.instrumentation.requests import RequestsInstrumentor
-import uuid
-from typing import Dict, Any, Optional
 from contextlib import asynccontextmanager
 
 class DistributedTracing:
     """Distributed tracing for multi-agent workflows."""
-    
+```
+
+Distributed tracing is essential for understanding complex agent workflows that span multiple services. We use OpenTelemetry for standardized instrumentation.
+
+Here's the tracing initialization with Jaeger configuration:
+
+```python
+# Tracing initialization with Jaeger configuration
     def __init__(self, service_name: str, jaeger_endpoint: str):
         self.service_name = service_name
         self.tracer_provider = TracerProvider()
@@ -1008,57 +1300,58 @@ class DistributedTracing:
         
         span_processor = BatchSpanProcessor(jaeger_exporter)
         self.tracer_provider.add_span_processor(span_processor)
-        
         self.tracer = trace.get_tracer(service_name)
-        
-        # Auto-instrument common libraries
-        RequestsInstrumentor().instrument()
 ```
 
-Distributed tracing is configured with Jaeger for visualization and analysis. Auto-instrumentation captures traces from common libraries automatically, reducing manual instrumentation overhead.
+Distributed tracing is configured with Jaeger for visualization and analysis.
+
+Here's the tracing context manager:
 
 ```python
-# From src/session9/monitoring/tracing.py (continued)
-    @asynccontextmanager
-    async def trace_agent_operation(self, operation_name: str, 
-                                  agent_id: str, 
-                                  attributes: Optional[Dict[str, Any]] = None):
-        """Create a trace span for agent operations."""
-        with self.tracer.start_as_current_span(operation_name) as span:
-            # Add standard attributes
-            span.set_attribute("agent.id", agent_id)
-            span.set_attribute("agent.operation", operation_name)
-            span.set_attribute("service.name", self.service_name)
-            
-            # Add custom attributes
-            if attributes:
-                for key, value in attributes.items():
-                    span.set_attribute(f"custom.{key}", str(value))
-            
-            try:
-                yield span
-            except Exception as e:
-                span.set_status(trace.Status(trace.StatusCode.ERROR, str(e)))
-                span.set_attribute("error.type", type(e).__name__)
-                span.set_attribute("error.message", str(e))
-                raise
-            finally:
-                span.set_status(trace.Status(trace.StatusCode.OK))
+# Tracing context manager for operations - method signature
+@asynccontextmanager
+async def trace_agent_operation(self, operation_name: str, 
+                              agent_id: str, 
+                              attributes: Optional[Dict[str, Any]] = None):
+    """Create a trace span for agent operations."""
+    with self.tracer.start_as_current_span(operation_name) as span:
+        # Add standard attributes
+        span.set_attribute("agent.id", agent_id)
+        span.set_attribute("agent.operation", operation_name)
+        span.set_attribute("service.name", self.service_name)
 ```
 
-The tracing context manager automatically captures errors and sets appropriate status codes. This ensures comprehensive trace information for debugging and performance analysis.
+The tracing context manager creates a span for each agent operation and automatically adds standard attributes for consistent trace metadata.
+
+Here's the custom attribute handling and execution flow:
+
+```python
+# Custom attributes and execution flow
+        # Add custom attributes
+        if attributes:
+            for key, value in attributes.items():
+                span.set_attribute(f"custom.{key}", str(value))
+        
+        try:
+            yield span
+        except Exception as e:
+            span.set_status(trace.Status(trace.StatusCode.ERROR, str(e)))
+            span.set_attribute("error.type", type(e).__name__)
+            span.set_attribute("error.message", str(e))
+            raise
+        finally:
+            span.set_status(trace.Status(trace.StatusCode.OK))
+```
+
+The tracing context manager automatically captures errors and sets appropriate status codes.
 
 ### Step 4.3: Alert Management System
 
-Enterprise environments require sophisticated alerting:
+Enterprise environments require sophisticated alerting. Let's define alert types and states:
 
 ```python
-# From src/session9/monitoring/alerting.py
-from typing import Dict, Any, List, Callable
-from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+# Alert management system - imports and severity levels
 from enum import Enum
-import asyncio
 
 class AlertSeverity(Enum):
     """Alert severity levels."""
@@ -1073,7 +1366,14 @@ class AlertState(Enum):
     ACKNOWLEDGED = "acknowledged"
     RESOLVED = "resolved"
     SUPPRESSED = "suppressed"
+```
 
+The alert management system supports industry-standard severity levels and states that align with enterprise monitoring practices.
+
+Here's the comprehensive alert definition structure:
+
+```python
+# Alert definition structure
 @dataclass
 class Alert:
     """Alert definition and state."""
@@ -1087,7 +1387,14 @@ class Alert:
     resolved_at: Optional[datetime] = None
     labels: Dict[str, str] = field(default_factory=dict)
     annotations: Dict[str, str] = field(default_factory=dict)
+```
 
+The alert management system supports industry-standard severity levels and states.
+
+Here's the alert manager implementation:
+
+```python
+# Comprehensive alert management
 class AlertManager:
     """Comprehensive alert management system."""
     
@@ -1099,115 +1406,64 @@ class AlertManager:
         self.escalation_policies: Dict[str, List[Dict[str, Any]]] = {}
 ```
 
-The alert management system supports industry-standard severity levels and states. This aligns with enterprise incident management practices and integrates with existing monitoring tools.
+The alert manager tracks rules, active alerts, and notification channels.
+
+Let's implement alert rule evaluation:
 
 ```python
-# From src/session9/monitoring/alerting.py (continued)
-    async def evaluate_alert_rule(self, rule_name: str, metrics: Dict[str, Any]) -> Optional[Alert]:
-        """Evaluate alert rule against current metrics."""
-        rule = self.alert_rules.get(rule_name)
-        if not rule:
-            return None
-        
-        condition = rule["condition"]
-        threshold = rule["threshold"]
-        current_value = self._extract_metric_value(metrics, condition["metric"])
-        
-        # Evaluate threshold condition
-        if self._evaluate_condition(current_value, condition["operator"], threshold):
-            alert_id = f"{rule_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-            
-            alert = Alert(
-                alert_id=alert_id,
-                name=rule["name"],
-                description=rule["description"].format(**metrics),
-                severity=AlertSeverity(rule["severity"]),
-                state=AlertState.ACTIVE,
-                triggered_at=datetime.now(),
-                labels=rule.get("labels", {}),
-                annotations={
-                    "current_value": str(current_value),
-                    "threshold": str(threshold),
-                    "runbook_url": rule.get("runbook_url", "")
-                }
-            )
-            
-            self.active_alerts[alert_id] = alert
-            await self._send_notifications(alert)
-            return alert
-        
+# Alert rule evaluation logic - method signature and validation
+async def evaluate_alert_rule(self, rule_name: str, 
+                            metrics: Dict[str, Any]) -> Optional[Alert]:
+    """Evaluate alert rule against current metrics."""
+    rule = self.alert_rules.get(rule_name)
+    if not rule:
         return None
+    
+    condition = rule["condition"]
+    threshold = rule["threshold"]
+    current_value = self._extract_metric_value(metrics, condition["metric"])
 ```
 
-Alert evaluation includes detailed context information and supports runbook URLs for standardized incident response. The notification system can integrate with multiple channels (email, Slack, PagerDuty).
+The evaluation process begins by retrieving the alert rule configuration and extracting the current metric value for comparison.
 
-### Step 4.4: SLA Monitoring and Reporting
-
-Enterprise SLA monitoring requires comprehensive tracking:
+Here's the threshold evaluation and alert creation logic:
 
 ```python
-# From src/session9/monitoring/sla_monitoring.py
-from typing import Dict, Any, List
-from dataclasses import dataclass
-from datetime import datetime, timedelta
-import asyncio
-
-@dataclass
-class SLATarget:
-    """Service Level Agreement target definition."""
-    name: str
-    metric: str
-    target_value: float
-    operator: str  # ">=", "<=", "==", "!="
-    measurement_window: timedelta
-    grace_period: timedelta
-    
-@dataclass
-class SLAStatus:
-    """Current SLA status and compliance."""
-    target: SLATarget
-    current_value: float
-    compliance_percentage: float
-    violation_count: int
-    last_violation: Optional[datetime]
-    next_evaluation: datetime
-
-class SLAMonitor:
-    """Comprehensive SLA monitoring and reporting."""
-    
-    def __init__(self, config: Dict[str, Any]):
-        self.config = config
-        self.sla_targets: Dict[str, SLATarget] = {}
-        self.sla_status: Dict[str, SLAStatus] = {}
-        self.violation_history: List[Dict[str, Any]] = []
-        self._initialize_sla_targets()
-    
-    def _initialize_sla_targets(self):
-        """Initialize SLA targets from configuration."""
-        targets_config = self.config.get("sla_targets", {})
+# Threshold evaluation and alert creation
+    # Evaluate threshold condition
+    if self._evaluate_condition(current_value, condition["operator"], threshold):
+        alert_id = f"{rule_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         
-        # Availability SLA
-        self.sla_targets["availability"] = SLATarget(
-            name="System Availability",
-            metric="uptime_percentage",
-            target_value=99.9,
-            operator=">=",
-            measurement_window=timedelta(hours=24),
-            grace_period=timedelta(minutes=5)
-        )
-        
-        # Response Time SLA
-        self.sla_targets["response_time"] = SLATarget(
-            name="Response Time",
-            metric="avg_response_time_ms",
-            target_value=500,
-            operator="<=",
-            measurement_window=timedelta(hours=1),
-            grace_period=timedelta(seconds=30)
+        alert = Alert(
+            alert_id=alert_id,
+            name=rule["name"],
+            description=rule["description"].format(**metrics),
+            severity=AlertSeverity(rule["severity"]),
+            state=AlertState.ACTIVE,
+            triggered_at=datetime.now(),
+            labels=rule.get("labels", {}),
+            annotations={
+                "current_value": str(current_value),
+                "threshold": str(threshold),
+                "runbook_url": rule.get("runbook_url", "")
+            }
         )
 ```
 
-SLA monitoring includes standard enterprise metrics like availability and response time. The configuration supports different measurement windows and grace periods for different types of SLAs.
+When an alert condition is met, a comprehensive Alert object is created with detailed context including current values and runbook references.
+
+Finally, the alert is stored and notifications are triggered:
+
+```python
+# Alert storage and notification dispatch
+        self.active_alerts[alert_id] = alert
+        await self._send_notifications(alert)
+        return alert
+    
+    return None
+```
+
+Alert evaluation includes detailed context information and supports runbook URLs for standardized incident response.
 
 ---
 
@@ -1215,16 +1471,13 @@ SLA monitoring includes standard enterprise metrics like availability and respon
 
 ### Step 5.1: Auto-Scaling Implementation
 
-Enterprise agents require dynamic scaling based on workload:
+Enterprise agents require dynamic scaling based on workload. Let's define the scaling metrics:
 
 ```python
-# From src/session9/scaling/auto_scaling.py
-from typing import Dict, Any, List, Optional
+# Auto-scaling metrics and configuration
+from typing import Dict, Any, List
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-import asyncio
-import kubernetes
-from kubernetes import client, config
 
 @dataclass
 class ScalingMetrics:
@@ -1235,7 +1488,14 @@ class ScalingMetrics:
     avg_response_time: float
     active_connections: int
     error_rate: float
+```
 
+These metrics provide comprehensive input for scaling decisions.
+
+Here's the auto-scaler implementation:
+
+```python
+# Intelligent auto-scaling system
 class AutoScaler:
     """Intelligent auto-scaling system for agent workloads."""
     
@@ -1247,98 +1507,140 @@ class AutoScaler:
         self.target_memory_utilization = scaling_config.get("target_memory", 80.0)
         self.scale_up_threshold = scaling_config.get("scale_up_threshold", 2)
         self.scale_down_threshold = scaling_config.get("scale_down_threshold", 5)
-        
-        # Initialize Kubernetes client
-        config.load_incluster_config()
-        self.k8s_apps_v1 = client.AppsV1Api()
-        self.k8s_core_v1 = client.CoreV1Api()
 ```
 
-The auto-scaler uses multiple metrics for scaling decisions, not just CPU utilization. This provides more intelligent scaling based on actual application performance characteristics.
+The auto-scaler uses multiple metrics for scaling decisions, not just CPU utilization.
+
+Let's implement the scaling decision logic:
 
 ```python
-# From src/session9/scaling/auto_scaling.py (continued)
-    async def evaluate_scaling_decision(self, namespace: str, 
-                                      deployment_name: str) -> Optional[str]:
-        """Evaluate whether scaling action is needed."""
-        
-        # Get current metrics
-        metrics = await self._collect_scaling_metrics(namespace, deployment_name)
-        current_replicas = await self._get_current_replica_count(namespace, deployment_name)
-        
-        # Calculate scaling score
-        scaling_score = self._calculate_scaling_score(metrics)
-        
-        if scaling_score > self.scale_up_threshold:
-            # Scale up needed
-            target_replicas = min(current_replicas + 1, self.max_replicas)
-            if target_replicas > current_replicas:
-                await self._scale_deployment(namespace, deployment_name, target_replicas)
-                return f"scaled_up_to_{target_replicas}"
-                
-        elif scaling_score < -self.scale_down_threshold:
-            # Scale down possible
-            target_replicas = max(current_replicas - 1, self.min_replicas)
-            if target_replicas < current_replicas:
-                await self._scale_deployment(namespace, deployment_name, target_replicas)
-                return f"scaled_down_to_{target_replicas}"
-        
-        return None
+# Scaling decision method
+async def evaluate_scaling_decision(self, namespace: str, 
+                                  deployment_name: str) -> Optional[str]:
+    """Evaluate whether scaling action is needed."""
     
-    def _calculate_scaling_score(self, metrics: ScalingMetrics) -> float:
-        """Calculate composite scaling score."""
-        score = 0.0
-        
-        # CPU pressure (+/- 3 points)
-        cpu_pressure = (metrics.cpu_utilization - self.target_cpu_utilization) / 10.0
-        score += max(-3, min(3, cpu_pressure))
-        
-        # Memory pressure (+/- 2 points)
-        memory_pressure = (metrics.memory_utilization - self.target_memory_utilization) / 15.0
-        score += max(-2, min(2, memory_pressure))
-        
-        # Queue length pressure (+/- 2 points)
-        if metrics.request_queue_length > 100:
-            score += 2
-        elif metrics.request_queue_length < 10:
-            score -= 1
-            
-        # Response time pressure (+/- 1 point)
-        if metrics.avg_response_time > 1000:  # 1 second
-            score += 1
-        elif metrics.avg_response_time < 200:  # 200ms
-            score -= 0.5
-        
-        return score
+    # Get current metrics and replica count
+    metrics = await self._collect_scaling_metrics(namespace, deployment_name)
+    current_replicas = await self._get_current_replica_count(namespace, deployment_name)
+    
+    # Calculate composite scaling score
+    scaling_score = self._calculate_scaling_score(metrics)
 ```
 
-The scaling score algorithm considers multiple factors with different weights. This prevents oscillation and ensures scaling decisions are based on comprehensive system health rather than single metrics.
+The scaling decision process starts by collecting current metrics and calculating a composite score that considers multiple factors.
+
+Here's the scale-up logic:
+
+```python
+# Scale-up decision logic
+    if scaling_score > self.scale_up_threshold:
+        # Scale up needed
+        target_replicas = min(current_replicas + 1, self.max_replicas)
+        if target_replicas > current_replicas:
+            await self._scale_deployment(namespace, deployment_name, target_replicas)
+            return f"scaled_up_to_{target_replicas}"
+```
+
+Scale-up decisions respect maximum replica limits and increment replicas gradually to prevent resource spikes.
+
+Now let's handle scale-down decisions:
+
+```python
+# Scale-down decision logic
+    elif scaling_score < -self.scale_down_threshold:
+        # Scale down possible
+        target_replicas = max(current_replicas - 1, self.min_replicas)
+        if target_replicas < current_replicas:
+            await self._scale_deployment(namespace, deployment_name, target_replicas)
+            return f"scaled_down_to_{target_replicas}"
+    
+    return None
+```
+
+The scaling evaluation considers multiple factors and prevents oscillation.
+
+Here's the composite scoring algorithm:
+
+```python
+# Composite scaling score calculation
+def _calculate_scaling_score(self, metrics: ScalingMetrics) -> float:
+    """Calculate composite scaling score."""
+    score = 0.0
+    
+    # CPU pressure (+/- 3 points)
+    cpu_pressure = (metrics.cpu_utilization - self.target_cpu_utilization) / 10.0
+    score += max(-3, min(3, cpu_pressure))
+```
+
+CPU utilization is weighted most heavily in the scoring algorithm. The score is clamped to prevent extreme values.
+
+Here's the memory and queue pressure scoring:
+
+```python
+# Memory and queue pressure scoring
+    # Memory pressure (+/- 2 points)
+    memory_pressure = (metrics.memory_utilization - self.target_memory_utilization) / 15.0
+    score += max(-2, min(2, memory_pressure))
+    
+    # Queue length pressure (+/- 2 points)
+    if metrics.request_queue_length > 100:
+        score += 2
+    elif metrics.request_queue_length < 10:
+        score -= 1
+```
+
+Memory pressure and queue length provide additional scaling signals. High queue lengths indicate capacity issues.
+
+Finally, let's add response time pressure:
+
+```python
+# Response time pressure scoring
+    # Response time pressure (+/- 1 point)
+    if metrics.avg_response_time > 1000:  # 1 second
+        score += 1
+    elif metrics.avg_response_time < 200:  # 200ms
+        score -= 0.5
+    
+    return score
+```
+
+The scaling score algorithm considers multiple factors with different weights to prevent oscillation.
 
 ### Step 5.2: Performance Optimization
 
-Production agents require comprehensive performance optimization:
+Production agents require comprehensive performance optimization. Let's implement caching:
 
 ```python
-# From src/session9/performance/optimization.py
+# Performance optimization imports
 import asyncio
 import aioredis
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional
 import json
 import hashlib
-from datetime import datetime, timedelta
-import threading
-from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
+```
 
+Performance optimization requires Redis for caching, JSON for serialization, and hashlib for cache key generation.
+
+Here's the performance optimizer class:
+
+```python
+# Performance optimizer class
 class PerformanceOptimizer:
     """Comprehensive performance optimization system."""
     
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.redis_client = None
-        self.connection_pool = None
-        self.thread_pool = ThreadPoolExecutor(max_workers=config.get("max_threads", 10))
         self.cache_stats = {"hits": 0, "misses": 0, "evictions": 0}
-        
+```
+
+The optimizer tracks cache statistics for monitoring and optimization analysis.
+
+Now let's implement the Redis initialization:
+
+```python
+# Redis initialization
     async def initialize(self):
         """Initialize performance optimization components."""
         # Initialize Redis for caching
@@ -1348,76 +1650,43 @@ class PerformanceOptimizer:
             max_connections=redis_config.get("max_connections", 10),
             decode_responses=True
         )
-        
-        # Test Redis connection
-        await self.redis_client.ping()
-        
-    async def cache_agent_response(self, agent_id: str, input_hash: str, 
-                                 response: Dict[str, Any], ttl: int = 3600):
-        """Cache agent response with intelligent TTL."""
-        cache_key = f"agent:{agent_id}:response:{input_hash}"
-        
-        cached_response = {
-            "response": response,
-            "cached_at": datetime.now().isoformat(),
-            "agent_id": agent_id,
-            "ttl": ttl
-        }
-        
-        await self.redis_client.setex(
-            cache_key, 
-            ttl, 
-            json.dumps(cached_response)
-        )
 ```
 
-Performance optimization includes intelligent caching with configurable TTL values. The cache includes metadata about when responses were cached and which agent generated them.
+Performance optimization includes intelligent caching with Redis.
 
-### Step 5.3: Load Balancing Strategies
-
-Enterprise load balancing requires sophisticated algorithms:
+Here's the intelligent cache implementation:
 
 ```python
-# From src/session9/performance/load_balancing.py
-from typing import List, Dict, Any, Optional
-from dataclasses import dataclass, field
-from datetime import datetime
-import random
-import math
-from enum import Enum
-
-class LoadBalancingAlgorithm(Enum):
-    """Supported load balancing algorithms."""
-    ROUND_ROBIN = "round_robin"
-    WEIGHTED_ROUND_ROBIN = "weighted_round_robin"
-    LEAST_CONNECTIONS = "least_connections"
-    LEAST_RESPONSE_TIME = "least_response_time"
-    CONSISTENT_HASH = "consistent_hash"
-    ADAPTIVE = "adaptive"
-
-@dataclass
-class AgentInstance:
-    """Agent instance information for load balancing."""
-    instance_id: str
-    endpoint: str
-    weight: float = 1.0
-    current_connections: int = 0
-    avg_response_time: float = 0.0
-    error_count: int = 0
-    health_score: float = 1.0
-    last_health_check: datetime = field(default_factory=datetime.now)
-
-class LoadBalancer:
-    """Intelligent load balancer for agent instances."""
+# Intelligent agent response caching
+async def cache_agent_response(self, agent_id: str, input_hash: str, 
+                             response: Dict[str, Any], ttl: int = 3600):
+    """Cache agent response with intelligent TTL."""
+    cache_key = f"agent:{agent_id}:response:{input_hash}"
     
-    def __init__(self, algorithm: LoadBalancingAlgorithm = LoadBalancingAlgorithm.ADAPTIVE):
-        self.algorithm = algorithm
-        self.instances: List[AgentInstance] = []
-        self.round_robin_index = 0
-        self.performance_history: Dict[str, List[float]] = {}
+    cached_response = {
+        "response": response,
+        "cached_at": datetime.now().isoformat(),
+        "agent_id": agent_id,
+        "ttl": ttl
+    }
 ```
 
-The load balancer supports multiple algorithms including adaptive load balancing that adjusts based on real-time performance metrics. This ensures optimal distribution of requests across agent instances.
+The cache implementation uses structured keys and includes metadata for cache management and debugging.
+
+Here's the Redis storage with expiration:
+
+```python
+# Redis storage with expiration
+    await self.redis_client.setex(
+        cache_key, 
+        ttl, 
+        json.dumps(cached_response)
+    )
+    
+    self.cache_stats["evictions"] += 1  # Track cache operations
+```
+
+The cache includes metadata about when responses were cached and which agent generated them.
 
 ---
 
@@ -1461,7 +1730,7 @@ The load balancer supports multiple algorithms including adaptive load balancing
    a) Recreate strategy
    b) Rolling update strategy
    c) Blue-green deployment
-   d) Canary deployment
+   d) Both b and c are correct
 
 7. **What is the primary purpose of health probes in Kubernetes?**
    a) Performance monitoring
@@ -1560,7 +1829,7 @@ The load balancer supports multiple algorithms including adaptive load balancing
 3. **b)** Traffic management, security, and observability - Service mesh provides comprehensive communication control
 4. **b)** By providing fine-grained permissions based on user roles - RBAC ensures users have appropriate access levels
 5. **b)** Smaller final image size and improved security - Multi-stage builds separate build and runtime dependencies
-6. **b)** Rolling update strategy - Updates pods gradually without downtime
+6. **d)** Both b and c are correct - Both rolling updates and blue-green deployments can achieve zero downtime
 7. **b)** Automatic failure detection and recovery - Health probes enable Kubernetes to automatically manage container health
 8. **c)** Integrated security scanning and vulnerability assessment - Security must be integrated throughout the pipeline
 9. **b)** Parameterized and reusable deployment templates - Helm enables consistent deployments across environments
@@ -1618,245 +1887,3 @@ Congratulations! You've completed the comprehensive Agent Frameworks Nanodegree 
 - [Enterprise AI Deployment Best Practices](https://cloud.google.com/architecture/ai-ml)
 
 **The future of AI agents is in production-ready, enterprise-grade systems that seamlessly integrate with existing infrastructure while providing intelligent, reliable, and secure capabilities.** 🚀✨
-  labels:
-    app: agent-system
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: agent-system
-  template:
-    metadata:
-      labels:
-        app: agent-system
-    spec:
-      containers:
-      - name: agent-system
-        image: agent-system:latest
-        ports:
-        - containerPort: 8000
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: agent-secrets
-              key: database-url
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 5
-```
-
-
-### **Enterprise Integration Patterns**
-```python
-# src/session9/enterprise_integration.py
-from typing import Dict, Any, List
-import asyncio
-from dataclasses import dataclass
-
-@dataclass
-class EnterpriseIntegration:
-    """Enterprise integration configuration"""
-    system_name: str
-    endpoint_url: str
-    authentication: Dict[str, Any]
-    rate_limits: Dict[str, int]
-    retry_policy: Dict[str, Any]
-
-class EnterpriseAgentGateway:
-    """Gateway for integrating agents with enterprise systems"""
-    
-    def __init__(self, integrations: List[EnterpriseIntegration]):
-        self.integrations = {i.system_name: i for i in integrations}
-        self.circuit_breakers = {}
-        self.metrics_collector = MetricsCollector()
-    
-    async def call_enterprise_system(
-        self, 
-        system_name: str, 
-        operation: str, 
-        data: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """Call enterprise system with proper error handling"""
-        
-        integration = self.integrations.get(system_name)
-        if not integration:
-            raise ValueError(f"Unknown system: {system_name}")
-        
-        # Check circuit breaker
-        if self._is_circuit_open(system_name):
-            return {'error': 'Circuit breaker open', 'system': system_name}
-        
-        try:
-            # Apply rate limiting
-            await self._apply_rate_limiting(system_name)
-            
-            # Make the call with retry logic
-            result = await self._call_with_retry(integration, operation, data)
-            
-            # Record success
-            self._record_success(system_name)
-            
-            return result
-            
-        except Exception as e:
-            self._record_failure(system_name, str(e))
-            raise
-    
-    async def _call_with_retry(
-        self, 
-        integration: EnterpriseIntegration, 
-        operation: str, 
-        data: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """Execute call with retry policy"""
-        
-        retry_policy = integration.retry_policy
-        max_retries = retry_policy.get('max_retries', 3)
-        backoff_factor = retry_policy.get('backoff_factor', 2)
-        
-        for attempt in range(max_retries + 1):
-            try:
-                # Simulate enterprise system call
-                async with aiohttp.ClientSession() as session:
-                    async with session.post(
-                        f"{integration.endpoint_url}/{operation}",
-                        json=data,
-                        headers=self._get_auth_headers(integration)
-                    ) as response:
-                        if response.status == 200:
-                            return await response.json()
-                        else:
-                            raise Exception(f"HTTP {response.status}")
-                            
-            except Exception as e:
-                if attempt == max_retries:
-                    raise
-                
-                # Exponential backoff
-                wait_time = backoff_factor ** attempt
-                await asyncio.sleep(wait_time)
-        
-        raise Exception("Max retries exceeded")
-```
-
-
----
-
-## **CI/CD Pipeline**
-```yaml
-# .github/workflows/deploy.yml
-name: Deploy Agent System
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-        pip install pytest pytest-asyncio pytest-cov
-    
-    - name: Run tests
-      run: |
-        pytest tests/ --cov=src/ --cov-report=xml
-    
-    - name: Upload coverage
-      uses: codecov/codecov-action@v3
-
-  build-and-deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Build Docker image
-      run: |
-        docker build -t agent-system:${{ github.sha }} .
-    
-    - name: Deploy to staging
-      run: |
-        kubectl apply -f k8s/staging/
-        kubectl set image deployment/agent-system agent-system=agent-system:${{ github.sha }}
-    
-    - name: Run integration tests
-      run: |
-        python tests/integration_tests.py
-    
-    - name: Deploy to production
-      if: success()
-      run: |
-        kubectl apply -f k8s/production/
-        kubectl set image deployment/agent-system agent-system=agent-system:${{ github.sha }}
-```
-
-
----
-
-## **Self-Assessment Questions**
-
-1. What is the primary benefit of containerizing agent systems?
-   a) Better performance
-   b) Consistent deployment across environments
-   c) Lower costs
-   d) Simpler code
-
-2. Why are circuit breakers important in enterprise agent systems?
-   a) Performance optimization
-   b) Prevent cascade failures when external systems are down
-   c) Security enhancement
-   d) Cost reduction
-
-3. What should a comprehensive CI/CD pipeline for agents include?
-   a) Only deployment
-   b) Testing, building, staging deployment, and production deployment
-   c) Only testing
-   d) Only building
-
-**Answer Key**: 1-b, 2-b, 3-b
-
----
-
-## **Key Takeaways**
-1. **Containerization enables consistent deployment** across different environments
-2. **Enterprise integration requires** proper error handling, rate limiting, and circuit breakers
-3. **CI/CD pipelines ensure** reliable, tested deployments
-4. **Monitoring and observability** are critical for production systems
-5. **Security and compliance** must be built into agent systems from the start
-
-## **Module Completion**
-Congratulations! You've completed the Agent Frameworks & Patterns module. You now understand how to build, deploy, and maintain production-ready agent systems using various frameworks and patterns.
-
----
-
-This final session covered enterprise-grade deployment and integration patterns for production agent systems.

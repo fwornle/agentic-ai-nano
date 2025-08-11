@@ -1,1823 +1,1273 @@
 # Session 4: CrewAI Team Orchestration
+## Building Hierarchical Multi-Agent Teams with Role-Based Collaboration
 
-## Hierarchical Multi-Agent Teams and Role-Based Collaboration
+### 🎯 Session Overview
 
-### 🎯 **Session Overview**
+CrewAI revolutionizes multi-agent development by introducing intuitive, role-based team structures that mirror real-world organizational hierarchies. Unlike graph-based approaches, CrewAI focuses on creating agents with specific roles, goals, and backstories that collaborate naturally on complex tasks.
 
-CrewAI provides an intuitive framework for building hierarchical multi-agent teams where agents have specific roles, collaborate on shared tasks, and follow structured workflows. This session explores team-based agent orchestration patterns with role specialization, delegation, and collaborative decision-making.
+In this comprehensive session, we'll explore how to build sophisticated agent teams that can handle everything from research projects to software development workflows, with proper delegation, quality control, and performance monitoring.
 
-### 📚 **Learning Objectives**
+### 📚 Learning Objectives
 
+By the end of this session, you will be able to:
 1. **Master CrewAI architecture** with agents, tasks, and crews
 2. **Design role-based agent teams** with clear responsibilities and hierarchies
 3. **Implement collaborative workflows** with task delegation and coordination
-4. **Create production-ready crews** with monitoring and error handling
-5. **Apply agentic patterns** (Reflection, Tool Use, ReAct, Planning, Multi-Agent) in team contexts
-6. **Compare team-based vs graph-based** multi-agent approaches
-
-### 🏗️ **Architecture Overview**
-
-![CrewAI Architecture](images/crewai-architecture.png)
-
-CrewAI organizes agents into collaborative teams with defined roles, clear task assignments, and structured communication patterns. The framework supports sequential, parallel, and hierarchical execution processes.
+4. **Build custom tools** to extend agent capabilities
+5. **Create production-ready crews** with monitoring and error handling
+6. **Optimize team performance** through metrics and feedback loops
+7. **Compare team-based vs graph-based** multi-agent approaches
 
 ---
 
-## **CrewAI Architecture & Core Components**
+## Part 1: Understanding CrewAI Architecture (25 minutes)
 
-### **Foundation: Agents, Tasks, and Crews**
+### The Philosophy Behind CrewAI
 
-**Import and Setup**
+Traditional agent frameworks focus on technical execution flows. CrewAI takes a different approach by modeling agents after real teams:
 
-```python
-# src/session4/crewai_basics.py
-from crewai import Agent, Task, Crew, Process
-from crewai.tools import SerperDevTool, WebsiteSearchTool
-from langchain.llms import OpenAI
-
-# Initialize LLM for agents
-llm = OpenAI(temperature=0.7)
+**Traditional Approach:**
+```
+Input → Process → Output
 ```
 
-**Create Research Agent**
+**CrewAI Approach:**
+```
+Project Manager → Delegates → Team Members → Collaborate → Deliver
+```
+
+### Core Components Deep Dive
+
+#### 1. Agents - The Team Members
+
+Agents in CrewAI are more than just functions - they're team members with personalities:
+
+First, let's set up the basic imports and language model configuration:
 
 ```python
-# Define specialized agents with clear roles
+# From src/session4/crewai_basics.py
+
+from crewai import Agent
+from langchain_openai import ChatOpenAI
+
+# Initialize the language model
+llm = ChatOpenAI(model="gpt-4", temperature=0.7)
+```
+
+Next, we create a specialized research agent with detailed role configuration:
+
+```python
+# Create a specialized agent
 researcher = Agent(
     role='Senior Research Analyst',
-    goal='Conduct thorough research with deep analysis',
-    backstory="""Senior analyst with 10+ years experience. 
-    Excels at finding credible sources and identifying trends.""",
-    tools=[SerperDevTool(), WebsiteSearchTool()],
+    goal='Conduct thorough research on assigned topics',
+    backstory="""You are a senior research analyst with 15 years of experience 
+    in gathering and analyzing information from multiple sources. You excel at 
+    finding relevant data, identifying patterns, and extracting key insights.""",
     llm=llm,
+    verbose=True,
+    allow_delegation=False,
     max_iter=3
 )
 ```
 
-Research agent equipped with web search tools for comprehensive information gathering.
+**Key Agent Properties Explained:**
+- **role**: The agent's job title and primary function
+- **goal**: What the agent aims to achieve
+- **backstory**: Context that shapes the agent's behavior and expertise
+- **allow_delegation**: Whether the agent can delegate tasks to others
+- **max_iter**: Maximum attempts to complete a task
 
-**Create Analysis Agent**
+#### 2. Tasks - The Work Items
 
-```python
-# Analysis specialist
-analyst = Agent(
-    role='Data Analyst',
-    goal='Transform research into structured insights',
-    backstory="""Skilled analyst who identifies patterns and 
-    provides data-driven recommendations.""",
-    llm=llm
-)
-```
-
-Analysis agent that processes research findings into actionable insights.
-
-**Define Tasks**
+Tasks define specific work that needs to be done:
 
 ```python
-# Research task
+from crewai import Task
+
 research_task = Task(
-    description="""Research AI agent frameworks for 2024.
-    Focus on: emerging frameworks, benchmarks, adoption patterns.""",
+    description="""Conduct comprehensive research on AI agent frameworks.
+    
+    Your research should include:
+    1. Current state and recent developments
+    2. Key players and stakeholders
+    3. Challenges and opportunities
+    4. Future trends and predictions
+    
+    Provide detailed findings with sources.""",
     agent=researcher,
-    expected_output="Research report with findings and sources"
+    expected_output="Comprehensive research report with citations"
 )
 ```
 
-Initial research task that gathers comprehensive information using web search tools.
+#### 3. Crews - The Teams
+
+Crews orchestrate agents and tasks:
 
 ```python
-# Analysis task building on research
-analysis_task = Task(
-    description="""Analyze research to extract key insights.
-    Create comparison matrix and strategic recommendations.""",
-    agent=analyst,
-    expected_output="Structured analysis with insights",
-    context=[research_task]  # Uses research results
+from crewai import Crew, Process
+
+crew = Crew(
+    agents=[researcher, writer, reviewer],
+    tasks=[research_task, writing_task, review_task],
+    process=Process.sequential,  # or Process.hierarchical
+    verbose=2,
+    memory=True,
+    cache=True
 )
 ```
 
-Analysis task that processes the research findings and creates structured insights.
+### Process Types in CrewAI
 
-**Create and Execute Crew**
+CrewAI supports different execution patterns:
 
-```python
-# Create and execute crew
-basic_crew = Crew(
-    agents=[researcher, analyst],
-    tasks=[research_task, analysis_task],
-    process=Process.sequential,
-    memory=True
-)
-
-result = basic_crew.kickoff()
-```
-
-Assemble agents and tasks into a crew, then execute the complete workflow.
-
-```
-
-
-### **Hierarchical Team Structure**
-**Import Components**
-```python
-# src/session4/hierarchical_crew.py
-from crewai import Agent, Task, Crew, Process
-from langchain.llms import OpenAI
-```
-
-Import CrewAI components for hierarchical team management.
-
-**System Class Setup**
-
-```python
-class AdvancedCrewSystem:
-    def __init__(self, llm=None):
-        self.llm = llm or OpenAI(temperature=0.7)
-        self.crews = {}
-    
-    def create_analysis_crew(self):
-        """Create hierarchical analysis crew with manager delegation"""
-```
-
-Initialize the crew system with LLM configuration and crew storage.
-
-**Team Manager Creation**
-
-```python
-        # Senior manager with delegation authority
-        manager = Agent(
-            role='Analysis Team Lead',
-            goal='Coordinate analysis workflow, ensure quality, and manage team performance',
-            backstory="""You are an experienced team lead with 15+ years in data analysis 
-            and project management. You excel at task delegation, quality assurance, 
-            and team coordination. You know when to delegate and when to intervene.""",
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=True,
-            max_iter=5
-        )
-```
-
-Create the team manager with delegation authority to coordinate work.
-
-**Senior Analyst Setup**
-
-```python
-        # Senior data analyst - specialist
-        senior_analyst = Agent(
-            role='Senior Data Analyst',
-            goal='Perform complex data analysis and extract deep insights',
-            backstory="""You are a senior data analyst with expertise in statistical 
-            analysis, data modeling, and insight extraction. You can handle complex 
-            analytical challenges and mentor junior team members.""",
-            tools=self._get_analysis_tools(),
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=False
-        )
-```
-
-Define the senior analyst with advanced tools and deep expertise.
-
-**Junior Analyst Setup**  
-
-```python
-        # Junior analyst - learning role
-        junior_analyst = Agent(
-            role='Junior Data Analyst',
-            goal='Support data analysis tasks and learn from senior team members',
-            backstory="""You are an eager junior analyst learning the trade. 
-            You handle routine analysis tasks, data cleaning, and basic reporting 
-            while developing your analytical skills.""",
-            tools=self._get_basic_tools(),
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=False
-        )
-```
-
-Create the junior analyst with basic tools focused on learning and support.
-
-**Quality Assurance Specialist**
-
-```python
-        # Quality assurance specialist
-        qa_specialist = Agent(
-            role='Quality Assurance Specialist',
-            goal='Review analysis results, validate methodologies, and ensure accuracy',
-            backstory="""You are a meticulous QA specialist with expertise in 
-            data validation, methodology review, and quality standards. You ensure 
-            all analysis meets rigorous quality criteria.""",
-            tools=[],
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=True
-        )
-```
-
-Add the QA specialist to review and validate all analysis outputs.
-
-**Planning Task Definition**
-
-```python
-        # Define hierarchical tasks
-        planning_task = Task(
-            description="""Plan the analysis approach and delegate tasks appropriately.
-            Consider:
-            1. Analysis complexity and requirements
-            2. Team member capabilities and availability
-            3. Quality checkpoints and review stages
-            4. Timeline and resource allocation""",
-            agent=manager,
-            expected_output="Analysis plan with task assignments and timeline"
-        )
-```
-
-Create the initial planning task managed by the team leader.
-
-**Complex Analysis Task**
-
-```python
-        complex_analysis_task = Task(
-            description="""Perform advanced statistical analysis on the dataset.
-            Include:
-            1. Exploratory data analysis
-            2. Statistical modeling
-            3. Pattern identification
-            4. Trend analysis
-            5. Predictive insights""",
-            agent=senior_analyst,
-            expected_output="Comprehensive analysis report with statistical insights",
-            context=[planning_task]
-        )
-```
-
-Assign sophisticated analysis work to the senior analyst.
-
-**Basic Analysis Task**
-
-```python
-        basic_analysis_task = Task(
-            description="""Handle routine data processing and basic analysis.
-            Tasks:
-            1. Data cleaning and validation
-            2. Basic statistical summaries
-            3. Simple visualizations
-            4. Data quality reports""",
-            agent=junior_analyst,
-            expected_output="Data processing report with basic analysis",
-            context=[planning_task]
-        )
-```
-
-Delegate routine processing tasks to the junior analyst.
-
-**Quality Review Task**
-
-```python
-        qa_task = Task(
-            description="""Review all analysis outputs for quality and accuracy.
-            Validate:
-            1. Methodology appropriateness
-            2. Statistical accuracy
-            3. Interpretation validity
-            4. Completeness of analysis
-            
-            Provide feedback and approval/rejection with reasons.""",
-            agent=qa_specialist,
-            expected_output="Quality review report with approval status and feedback",
-            context=[complex_analysis_task, basic_analysis_task]
-        )
-```
-
-Create QA validation task that reviews all analysis work.
-
-**Final Consolidation Task**
-
-```python
-        final_review_task = Task(
-            description="""Conduct final review and consolidate team outputs.
-            Create:
-            1. Executive summary of findings
-            2. Team performance assessment
-            3. Lessons learned and improvements
-            4. Final recommendations""",
-            agent=manager,
-            expected_output="Final consolidated analysis report with team assessment",
-            context=[qa_task]
-        )
-```
-
-Manager consolidates all work into final deliverable.
-
-**Crew Assembly**
-
-```python
-        # Create hierarchical crew
-        analysis_crew = Crew(
-            agents=[manager, senior_analyst, junior_analyst, qa_specialist],
-            tasks=[planning_task, complex_analysis_task, basic_analysis_task, qa_task, final_review_task],
-            process=Process.hierarchical,
-            manager_llm=self.llm,
-            verbose=2,
-            memory=True
-        )
-        
-        self.crews['analysis'] = analysis_crew
-        return analysis_crew
-```
-
-Assemble the hierarchical crew with manager coordination.
-
-**Tool Configuration Methods**
-
-```python
-    def _get_analysis_tools(self):
-        """Get advanced analysis tools for senior analyst"""
-        from crewai.tools import (
-            FileReadTool, 
-            DirectoryReadTool,
-            CodeDocsSearchTool
-        )
-        return [FileReadTool(), DirectoryReadTool(), CodeDocsSearchTool()]
-    
-    def _get_basic_tools(self):
-        """Get basic tools for junior analyst"""
-        from crewai.tools import FileReadTool
-        return [FileReadTool()]
-```
-
-Helper methods providing role-appropriate tool sets.
+1. **Sequential Process**: Tasks execute one after another
+2. **Hierarchical Process**: Manager agent coordinates and delegates
+3. **Consensual Process** (Beta): Agents reach consensus on decisions
 
 ---
 
-## **Agentic Patterns in CrewAI**
+## Part 2: Building Your First Agent Team (30 minutes)
 
-### **Pattern 1: Reflection Pattern**
+### Step 2.1: Defining Team Roles
 
-Self-improvement through iterative review and refinement
-
-```python
-# src/session4/reflection_crew.py
-from crewai import Agent, Task, Crew, Process
-
-def create_reflection_crew(llm):
-    """Crew implementing reflection pattern for continuous improvement"""
-```
-
-Import CrewAI components and define the reflection crew creation function.
-
-**Setting Up Reflection Agents**
+Let's build a content creation team with specialized roles:
 
 ```python
-    # Primary worker agent
-    worker = Agent(
-        role='Content Creator',
-        goal='Create high-quality content through iterative improvement',
-        backstory="""Creates content and continuously improves through 
-        self-reflection and feedback incorporation.""",
-        llm=llm,
-        verbose=True
-    )
-```
+# From src/session4/content_team.py
 
-Content creator agent that produces initial work and incorporates feedback.
-
-```python
-    # Self-critique agent
-    reflector = Agent(
-        role='Self-Reflection Specialist',
-        goal='Provide honest critique and improvement suggestions', 
-        backstory="""Critical inner voice that evaluates work objectively. 
-        Focuses on quality, clarity, and impact.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Reflection agent that provides constructive criticism of the work.
-
-```python
-    # Quality assessment agent
-    quality_judge = Agent(
-        role='Quality Judge',
-        goal='Decide if work meets standards or needs more iteration',
-        backstory="""Impartial judge who decides if work is ready 
-        for publication or needs further refinement.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Judge agent that determines if the reflection cycle should continue.
-
-**Reflection Task Workflow**
-
-```python
-    # Initial content creation
-    create_task = Task(
-        description="Create initial content on 'The Future of AI Agents'",
-        agent=worker,
-        expected_output="First draft of content"
-    )
-```
-
-Start the cycle by creating initial content.
-
-```python
-    # Self-reflection and critique
-    reflect_task = Task(
-        description="""Reflect on content and provide detailed critique.
-        Focus on quality, clarity, structure, and improvements.""",
-        agent=reflector,
-        expected_output="Detailed critique with improvement suggestions",
-        context=[create_task]
-    )
-```
-
-Analyze the created content and identify areas for improvement.
-
-```python
-    # Content improvement based on reflection
-    improve_task = Task(
-        description="Improve content based on reflection feedback",
-        agent=worker,
-        expected_output="Improved version of content", 
-        context=[create_task, reflect_task]  # Uses both original and critique
-    )
-```
-
-Worker agent incorporates feedback to improve the content.
-
-```python
-    # Final quality evaluation
-    evaluate_task = Task(
-        description="""Evaluate if content meets quality standards.
-        Rate 1-10: APPROVED (≥8) or NEEDS_WORK (<8).""",
-        agent=quality_judge,
-        expected_output="APPROVED/NEEDS_WORK decision with reasoning",
-        context=[improve_task]
-    )
-```
-
-Judge determines if the reflection cycle achieved sufficient quality.
-
-```python
-    # Assemble reflection crew
-    return Crew(
-        agents=[worker, reflector, quality_judge],
-        tasks=[create_task, reflect_task, improve_task, evaluate_task],
-        process=Process.sequential,  # One step at a time
-        memory=True  # Remember previous iterations
-    )
-```
-
-Create crew that implements the complete reflection cycle.
-
-```
-
-
-### **Pattern 2: Tool Use Pattern** 
-Intelligent tool selection and execution
-
-```python
-# src/session4/tool_use_crew.py
-from crewai import Agent, Task, Crew, Process
-from crewai.tools import (
-    SerperDevTool, WebsiteSearchTool, FileReadTool,
-    DirectoryReadTool, CodeDocsSearchTool
-)
-
-def create_tool_specialist_crew(llm):
-    """Crew with agents specialized in different tool categories"""
-```
-
-Import specialized tools and define the tool-focused crew creation function.
-
-**Research Tool Specialist**
-
-```python
-    # Research tool specialist
-    research_specialist = Agent(
-        role='Research Tool Specialist',
-        goal='Execute research tasks using web search and analysis tools',
-        backstory="""You are expert at using research tools to gather, analyze, 
-        and synthesize information from web sources.""",
-        tools=[SerperDevTool(), WebsiteSearchTool()],
-        llm=llm,
-        verbose=True
-    )
-```
-
-Agent specialized in web research and search tool usage.
-
-**File System Specialist**
-
-```python
-    # File system specialist  
-    file_specialist = Agent(
-        role='File System Specialist',
-        goal='Handle file operations, code analysis, and documentation tasks',
-        backstory="""You specialize in file system operations, code analysis, 
-        and documentation processing. You can read, analyze, and extract 
-        insights from various file formats.""",
-        tools=[FileReadTool(), DirectoryReadTool(), CodeDocsSearchTool()],
-        llm=llm, 
-        verbose=True
-    )
-```
-
-Agent focused on file operations and code analysis tools.
-
-**Tool Coordination Manager**
-
-```python
-    # Tool coordinator
-    coordinator = Agent(
-        role='Tool Coordination Manager',
-        goal='Plan tool usage strategy and coordinate between specialists',
-        backstory="""You understand the capabilities of different tools and 
-        coordinate their optimal usage across team members.""",
+def create_content_team():
+    """Create a specialized content creation team."""
+    
+    # Content Strategist
+    strategist = Agent(
+        role='Content Strategist',
+        goal='Develop content strategy and themes',
+        backstory="""You are a strategic thinker with expertise in content 
+        marketing. You understand audience needs and can identify compelling 
+        angles for any topic.""",
         llm=llm,
         verbose=True,
-        allow_delegation=True
+        allow_delegation=True  # Can delegate research needs
     )
 ```
 
-Manager that orchestrates optimal tool usage across specialists.
-
-**Tool Strategy Planning**
+Create the content strategist with delegation capabilities for coordinating team efforts.
 
 ```python
-    # Planning task
-    planning_task = Task(
-        description="""Plan the tool usage strategy for analyzing 'AI Agent Frameworks'.
-        Determine:
-        1. What research tools are needed
-        2. What files/documentation to analyze
-        3. How to coordinate between specialists
-        4. Expected outputs from each tool category""",
-        agent=coordinator,
-        expected_output="Tool usage plan with specialist assignments"
+    # Subject Matter Expert
+    expert = Agent(
+        role='Subject Matter Expert',
+        goal='Provide deep technical knowledge and accuracy',
+        backstory="""You are a domain expert with deep knowledge across multiple 
+        fields. You ensure technical accuracy and provide expert insights.""",
+        llm=llm,
+        verbose=True,
+        allow_delegation=False
     )
 ```
 
-Strategic planning task for optimizing tool usage across the team.
-
-**Research Execution Task**
+Add subject matter expert focused on technical accuracy and domain expertise.
 
 ```python
-    # Research execution
+    # SEO Specialist
+    seo_specialist = Agent(
+        role='SEO Specialist',
+        goal='Optimize content for search engines',
+        backstory="""You are an SEO expert who knows how to make content 
+        discoverable. You understand keyword research, content structure, 
+        and ranking factors.""",
+        llm=llm,
+        verbose=True,
+        allow_delegation=False
+    )
+    
+    return [strategist, expert, seo_specialist]
+```
+
+Complete the team with SEO specialist and return the assembled content creation team.
+
+### Step 2.2: Creating Interconnected Tasks
+
+Tasks can depend on each other through context:
+
+```python
+def create_content_tasks(agents, topic):
+    """Create interconnected tasks for content creation."""
+    
+    strategist, expert, seo_specialist = agents
+    
+    # Strategy Task
+    strategy_task = Task(
+        description=f"""Develop a content strategy for: {topic}
+        
+        Include:
+        - Target audience analysis
+        - Key messages and themes
+        - Content format recommendations
+        - Distribution channels""",
+        agent=strategist,
+        expected_output="Content strategy document"
+    )
+```
+
+Create the foundational strategy task that guides all subsequent content development.
+
+```python
+    # Research Task
     research_task = Task(
-        description="""Execute comprehensive research on AI agent frameworks.
-        Use available tools to:
-        1. Search for latest developments
-        2. Find technical documentation  
-        3. Gather performance comparisons
-        4. Identify key players and trends""",
-        agent=research_specialist,
-        expected_output="Comprehensive research report with tool-gathered data",
-        context=[planning_task]
+        description="""Provide expert knowledge and insights.
+        
+        Include:
+        - Technical details and accuracy
+        - Current best practices
+        - Common misconceptions to address
+        - Expert tips and recommendations""",
+        agent=expert,
+        expected_output="Expert knowledge brief",
+        context=[strategy_task]  # Depends on strategy
     )
 ```
 
-Research specialist executes web-based information gathering.
-
-**File Analysis Task**
+Expert research task builds on the strategy to provide technical depth and accuracy.
 
 ```python
-    # File analysis task
-    file_analysis_task = Task(
-        description="""Analyze relevant code repositories and documentation.
-        Use file tools to:
-        1. Read framework documentation
-        2. Analyze code examples
-        3. Extract API patterns
-        4. Identify best practices""",
-        agent=file_specialist,
-        expected_output="Code and documentation analysis report",
-        context=[planning_task]
+    # SEO Optimization Task
+    seo_task = Task(
+        description="""Optimize content for search engines.
+        
+        Include:
+        - Keyword research and recommendations
+        - Meta descriptions and title tags
+        - Content structure for SEO
+        - Internal linking suggestions""",
+        agent=seo_specialist,
+        expected_output="SEO optimization guide",
+        context=[strategy_task, research_task]  # Depends on both
     )
+    
+    return [strategy_task, research_task, seo_task]
 ```
 
-File specialist analyzes codebases and documentation.
+SEO optimization task integrates both strategy and expert knowledge for maximum discoverability.
 
-**Synthesis and Coordination**
-
-```python
-    # Synthesis task
-    synthesis_task = Task(
-        description="""Synthesize insights from all tool-based analysis.
-        Create:
-        1. Unified findings report
-        2. Tool effectiveness assessment
-        3. Methodology recommendations
-        4. Future tool needs identification""",
-        agent=coordinator,
-        expected_output="Synthesized analysis with tool usage insights",
-        context=[research_task, file_analysis_task]
-    )
-```
-
-Coordinator synthesizes all tool-based insights into unified report.
-
-**Crew Assembly**
+### Step 2.3: Running the Crew
 
 ```python
-    return Crew(
-        agents=[coordinator, research_specialist, file_specialist],
-        tasks=[planning_task, research_task, file_analysis_task, synthesis_task],
+def run_content_crew(topic):
+    """Execute the content creation workflow."""
+    
+    # Create team and tasks
+    agents = create_content_team()
+    tasks = create_content_tasks(agents, topic)
+    
+    # Configure crew
+    crew = Crew(
+        agents=agents,
+        tasks=tasks,
         process=Process.sequential,
+        verbose=2,
+        memory=True,  # Remember context between tasks
+        cache=True,   # Cache results for efficiency
+        max_rpm=10    # Rate limiting for API calls
+    )
+    
+    # Execute
+    result = crew.kickoff()
+    return result
+```
+
+---
+
+## Part 3: Hierarchical Teams and Delegation (35 minutes)
+
+### Understanding Hierarchical Process
+
+In hierarchical mode, a manager agent coordinates the team:
+
+```python
+# From src/session4/hierarchical_crew.py
+
+def create_software_development_team():
+    """Create a hierarchical software development team."""
+    
+    # Project Manager (Top of hierarchy)
+    project_manager = Agent(
+        role='Project Manager',
+        goal='Oversee project execution and coordinate team efforts',
+        backstory="""You are an experienced project manager with expertise in 
+        agile methodologies. You excel at breaking down complex projects, 
+        delegating tasks, and ensuring timely delivery.""",
+        llm=llm,
+        verbose=True,
+        allow_delegation=True,  # Critical for hierarchical process
+        max_iter=5
+    )
+```
+
+Create the project manager at the top of the hierarchy with delegation authority.
+
+```python
+    # Tech Lead (Reports to PM)
+    tech_lead = Agent(
+        role='Technical Lead',
+        goal='Make technical decisions and guide development',
+        backstory="""You are a senior technical leader with deep expertise in 
+        software architecture. You make critical technical decisions and mentor 
+        the development team.""",
+        llm=llm,
+        verbose=True,
+        allow_delegation=True  # Can delegate to developers
+    )
+```
+
+Add technical lead who reports to PM and can delegate to development team.
+
+**Development Team Members**
+
+```python
+    # Development Team Members
+    backend_dev = Agent(
+        role='Backend Developer',
+        goal='Implement server-side logic and APIs',
+        backstory="""You are a skilled backend developer specializing in 
+        scalable API design and database optimization.""",
+        llm=llm,
+        verbose=True,
+        allow_delegation=False
+    )
+    
+    frontend_dev = Agent(
+        role='Frontend Developer',
+        goal='Create user interfaces and experiences',
+        backstory="""You are a frontend specialist who creates intuitive, 
+        responsive user interfaces with modern frameworks.""",
+        llm=llm,
+        verbose=True,
+        allow_delegation=False
+    )
+```
+
+Add specialized developers focused on backend and frontend implementation.
+
+```python
+    return {
+        'manager': project_manager,
+        'tech_lead': tech_lead,
+        'backend': backend_dev,
+        'frontend': frontend_dev
+    }
+```
+
+Return the complete hierarchical team structure as a dictionary for easy access.
+
+### Delegation Patterns
+
+In hierarchical crews, delegation follows organizational patterns:
+
+Start by setting up the crew creation function and getting the team structure:
+
+```python
+def create_hierarchical_crew(project_description):
+    """Create a hierarchical crew with proper delegation chain."""
+    
+    team = create_software_development_team()
+```
+
+Next, define the high-level project management task that coordinates the entire workflow:
+
+```python
+    # High-level project task
+    project_task = Task(
+        description=f"""Plan and execute: {project_description}
+        
+        As project manager:
+        1. Break down the project into phases
+        2. Assign tasks to appropriate team members
+        3. Coordinate between technical and business requirements
+        4. Ensure quality and timely delivery
+        
+        You can delegate technical decisions to the Tech Lead.""",
+        agent=team['manager'],
+        expected_output="Complete project plan with delegated tasks"
+    )
+```
+
+Create the technical architecture task that handles system design and implementation planning:
+
+```python
+    # Technical architecture task
+    architecture_task = Task(
+        description="""Design the technical architecture.
+        
+        As tech lead:
+        1. Define system architecture
+        2. Choose technology stack
+        3. Assign implementation tasks to developers
+        4. Review technical decisions""",
+        agent=team['tech_lead'],
+        expected_output="Technical architecture and task assignments"
+    )
+```
+
+Finally, assemble the hierarchical crew with proper configuration:
+
+```python
+    # Create hierarchical crew
+    crew = Crew(
+        agents=list(team.values()),
+        tasks=[project_task, architecture_task],
+        process=Process.hierarchical,
+        manager_llm=llm,  # LLM for the manager
         verbose=2
     )
+    
+    return crew
 ```
 
-Assemble the tool-specialized crew with sequential execution.
-
-### **Pattern 3: ReAct Pattern**
-
-Reasoning and Acting in iterative cycles
+### Advanced Delegation Strategies
 
 ```python
-# src/session4/react_crew.py
-from crewai import Agent, Task, Crew, Process
-
-def create_react_crew(llm):
-    """Crew implementing ReAct pattern: Reason -> Act -> Observe -> Reason..."""
+class DelegationStrategy:
+    """Advanced delegation patterns for hierarchical teams."""
+    
+    def __init__(self):
+        self.delegation_rules = {}
+        self.workload_tracker = {}
 ```
 
-Import components and define ReAct pattern crew creation function.
-
-**Strategic Reasoner Agent**
+Initialize delegation strategy with rule storage and workload tracking.
 
 ```python
-    # Reasoning agent
-    reasoner = Agent(
-        role='Strategic Reasoner',
-        goal='Analyze situations and develop reasoning-based action plans',
-        backstory="""You excel at logical reasoning, problem analysis, and 
-        strategic planning. You think through problems step-by-step and 
-        develop clear action plans.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Agent responsible for strategic thinking and action planning.
-
-**Action Executor Agent**
-
-```python
-    # Action executor
-    actor = Agent(
-        role='Action Executor', 
-        goal='Execute planned actions and gather results',
-        backstory="""You specialize in taking concrete actions based on 
-        reasoned plans. You execute tasks efficiently and gather 
-        comprehensive feedback.""",
-        tools=[SerperDevTool(), WebsiteSearchTool()],
-        llm=llm,
-        verbose=True
-    )
-```
-
-Agent equipped with tools to execute planned actions.
-
-**Result Observer Agent**
-
-```python
-    # Observer and evaluator
-    observer = Agent(
-        role='Result Observer',
-        goal='Observe action results and evaluate progress toward goals',
-        backstory="""You carefully observe action results, evaluate their 
-        effectiveness, and provide insights for next reasoning cycles.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Agent that observes and evaluates action outcomes for improvement.
-
-**Initial Reasoning Task**
-
-```python
-    # Initial reasoning task
-    reason_task = Task(
-        description="""Reason about how to research 'Best AI Agent Development Practices'.
-        Think through:
-        1. What specific information is needed?
-        2. What sources would be most valuable?
-        3. What approach would be most effective?
-        4. What success criteria should guide us?
+    def add_delegation_rule(self, from_role, to_role, condition):
+        """Add a delegation rule between roles."""
+        if from_role not in self.delegation_rules:
+            self.delegation_rules[from_role] = []
         
-        Develop a clear reasoning and action plan.""",
-        agent=reasoner,
-        expected_output="Detailed reasoning and actionable research plan"
-    )
+        self.delegation_rules[from_role].append({
+            'to_role': to_role,
+            'condition': condition
+        })
 ```
 
-Strategic reasoning task that creates the foundation for action.
-
-**Action Execution Task**
+Add delegation rules that define which roles can delegate to which other roles.
 
 ```python
-    # Action execution task
-    act_task = Task(
-        description="""Execute the reasoned plan from the Strategic Reasoner.
-        Take specific actions:
-        1. Implement the research strategy
-        2. Gather targeted information
-        3. Document what you find
-        4. Note any unexpected results or challenges""",
-        agent=actor,
-        expected_output="Action results with detailed findings and observations",
-        context=[reason_task]
-    )
-```
-
-Execute the reasoned plan and gather comprehensive results.
-
-**Observation and Evaluation**
-
-```python
-    # Observation task
-    observe_task = Task(
-        description="""Observe and evaluate the results of executed actions.
-        Analyze:
-        1. How well did actions achieve intended goals?
-        2. What worked effectively vs. what didn't?
-        3. What unexpected insights emerged?
-        4. What should be done differently in next iteration?
+    def can_delegate(self, from_agent, to_agent, task_type):
+        """Check if delegation is allowed based on rules."""
+        from_role = from_agent.role
+        to_role = to_agent.role
         
-        Provide evaluation for next reasoning cycle.""",
-        agent=observer,
-        expected_output="Comprehensive evaluation of action results and next steps",
-        context=[act_task]
-    )
-```
-
-Evaluate action results and prepare feedback for next iteration.
-
-**Iterative Re-reasoning**
-
-```python
-    # Re-reasoning task based on observations
-    re_reason_task = Task(
-        description="""Based on observations, refine reasoning and plan next actions.
-        Consider:
-        1. What the observations revealed
-        2. How to improve the approach
-        3. What additional actions are needed
-        4. Whether goals are being met effectively
+        if from_role in self.delegation_rules:
+            for rule in self.delegation_rules[from_role]:
+                if rule['to_role'] == to_role:
+                    return rule['condition'](task_type)
         
-        Update strategy based on learned insights.""",
-        agent=reasoner,
-        expected_output="Refined reasoning and updated action plan",
-        context=[observe_task]
-    )
+        return False
 ```
 
-Refine reasoning based on observations for continuous improvement.
+Validate delegation permissions based on established rules and task types.
 
-**ReAct Crew Assembly**
-
-```python
-    return Crew(
-        agents=[reasoner, actor, observer],
-        tasks=[reason_task, act_task, observe_task, re_reason_task],
-        process=Process.sequential,
-        verbose=2,
-        memory=True
-    )
-```
-
-Assemble the ReAct crew with iterative reasoning cycles.
-
-### **Pattern 4: Planning Pattern**
-
-Strategic planning and execution coordination
+**Workload Management**
 
 ```python
-# src/session4/planning_crew.py
-from crewai import Agent, Task, Crew, Process
-
-def create_planning_crew(llm):
-    """Crew implementing comprehensive planning pattern"""
-```
-
-Import components and define planning-focused crew creation function.
-
-**Strategic Planner Agent**
-
-```python
-    # Strategic planner
-    planner = Agent(
-        role='Strategic Project Planner',
-        goal='Create comprehensive project plans with clear phases and dependencies',
-        backstory="""You are an experienced project planner who excels at 
-        breaking down complex projects into manageable phases, identifying 
-        dependencies, and creating realistic timelines.""",
-        llm=llm,
-        verbose=True,
-        allow_delegation=True
-    )
-```
-
-Lead planner who creates comprehensive project plans with delegation capability.
-
-**Resource Analyst Agent**
-
-```python
-    # Resource analyst
-    resource_analyst = Agent(
-        role='Resource Planning Analyst',
-        goal='Analyze resource requirements and constraints for project execution',
-        backstory="""You specialize in resource analysis, capacity planning, 
-        and identifying potential bottlenecks or resource conflicts.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Specialist focused on resource allocation and capacity planning.
-
-**Risk Assessment Specialist**
-
-```python
-    # Risk assessor
-    risk_assessor = Agent(
-        role='Risk Assessment Specialist',
-        goal='Identify potential risks and develop mitigation strategies',
-        backstory="""You are expert at identifying project risks, assessing 
-        their impact and probability, and developing effective mitigation strategies.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Expert in identifying and mitigating project risks.
-
-**Execution Coordinator**
-
-```python
-    # Execution coordinator
-    coordinator = Agent(
-        role='Execution Coordinator',
-        goal='Coordinate plan execution and monitor progress against milestones',
-        backstory="""You coordinate project execution, track progress, 
-        and ensure plans are followed while adapting to changing circumstances.""",
-        llm=llm,
-        verbose=True,
-        allow_delegation=True
-    )
-```
-
-Coordinator who ensures smooth execution and progress tracking.
-
-**Initial Planning Task**
-
-```python
-    # Initial planning task
-    initial_planning = Task(
-        description="""Create a comprehensive project plan for 'Building an Enterprise AI Agent Platform'.
-        Include:
-        1. Project scope and objectives
-        2. Major phases and milestones
-        3. Task breakdown structure
-        4. Dependencies and critical path
-        5. Success criteria and metrics""",
-        agent=planner,
-        expected_output="Detailed project plan with phases, tasks, and timeline"
-    )
-```
-
-Foundation task that creates the master project plan.
-
-**Resource Planning Task**
-
-```python
-    # Resource planning task
-    resource_planning = Task(
-        description="""Analyze resource requirements for the AI platform project.
-        Assess:
-        1. Human resource needs (roles, skills, capacity)
-        2. Technical infrastructure requirements
-        3. Budget and cost considerations
-        4. External dependencies and vendor needs
-        5. Resource allocation timeline""",
-        agent=resource_analyst,
-        expected_output="Comprehensive resource plan with requirements and allocation",
-        context=[initial_planning]
-    )
-```
-
-Detailed analysis of all resource needs based on the project plan.
-
-**Risk Assessment Task**
-
-```python
-    # Risk assessment task
-    risk_assessment = Task(
-        description="""Conduct thorough risk assessment for the project.
-        Identify:
-        1. Technical risks and challenges
-        2. Resource and capacity risks
-        3. Timeline and delivery risks
-        4. Market and business risks
-        5. Mitigation strategies for each risk category""",
-        agent=risk_assessor,
-        expected_output="Risk register with mitigation strategies and contingency plans",
-        context=[initial_planning, resource_planning]
-    )
-```
-
-Comprehensive risk analysis with mitigation strategies.
-
-**Plan Integration Task**
-
-```python
-    # Plan integration task
-    plan_integration = Task(
-        description="""Integrate all planning inputs into final execution plan.
-        Create:
-        1. Master project plan with all components
-        2. Resource allocation schedule
-        3. Risk mitigation integration
-        4. Monitoring and control processes
-        5. Communication and reporting structure""",
-        agent=coordinator,
-        expected_output="Integrated master plan ready for execution",
-        context=[initial_planning, resource_planning, risk_assessment]
-    )
-```
-
-Consolidate all planning components into unified execution plan.
-
-**Plan Validation Task**
-
-```python
-    # Plan validation task
-    plan_validation = Task(
-        description="""Validate the integrated plan for feasibility and completeness.
-        Review:
-        1. Plan logic and dependencies
-        2. Resource allocation realism
-        3. Risk mitigation adequacy
-        4. Timeline achievability
-        5. Success criteria measurability
+    def track_workload(self, agent_name, task_count=1):
+        """Track agent workload for load balancing."""
+        if agent_name not in self.workload_tracker:
+            self.workload_tracker[agent_name] = 0
         
-        Provide final recommendations and adjustments.""",
-        agent=planner,
-        expected_output="Plan validation report with final recommendations",
-        context=[plan_integration]
-    )
+        self.workload_tracker[agent_name] += task_count
 ```
 
-Final validation to ensure plan completeness and feasibility.
-
-**Planning Crew Assembly**
+Track individual agent workloads for intelligent load balancing.
 
 ```python
-    return Crew(
-        agents=[planner, resource_analyst, risk_assessor, coordinator],
-        tasks=[initial_planning, resource_planning, risk_assessment, plan_integration, plan_validation],
-        process=Process.sequential,
-        verbose=2,
-        memory=True
-    )
+    def get_least_busy_agent(self, agent_list):
+        """Find the least busy agent for delegation."""
+        min_workload = float('inf')
+        least_busy = None
+        
+        for agent in agent_list:
+            workload = self.workload_tracker.get(agent.role, 0)
+            if workload < min_workload:
+                min_workload = workload
+                least_busy = agent
+        
+        return least_busy
 ```
 
-Assemble the complete planning crew with sequential task execution.
-
-### **Pattern 5: Multi-Agent Collaboration**
-
-Complex team coordination and consensus building
-
-```python
-# src/session4/multi_agent_crew.py
-from crewai import Agent, Task, Crew, Process
-
-def create_collaborative_crew(llm):
-    """Multi-agent crew with complex collaboration patterns"""
-```
-
-Import components and define multi-agent collaboration crew function.
-
-**Technical Architecture Expert**
-
-```python
-    # Domain experts
-    tech_expert = Agent(
-        role='Technical Architecture Expert',
-        goal='Provide technical expertise and architectural guidance',
-        backstory="""You are a senior technical architect with deep expertise 
-        in system design, scalability, and technical implementation.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Technical expert providing architecture and implementation guidance.
-
-**Business Strategy Expert**
-
-```python
-    business_expert = Agent(
-        role='Business Strategy Expert',
-        goal='Provide business perspective and strategic guidance',
-        backstory="""You are a business strategist with expertise in market 
-        analysis, business models, and strategic planning.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Business expert focused on strategy, ROI, and market analysis.
-
-**User Experience Expert**
-
-```python
-    user_expert = Agent(
-        role='User Experience Expert',
-        goal='Provide user-centric perspective and usability guidance',
-        backstory="""You are a UX expert focused on user needs, usability, 
-        and human-centered design principles.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-UX expert ensuring user needs and usability are prioritized.
-
-**Collaboration Facilitator**
-
-```python
-    # Collaboration facilitator
-    facilitator = Agent(
-        role='Collaboration Facilitator',
-        goal='Facilitate expert collaboration and build consensus',
-        backstory="""You excel at facilitating discussions between experts, 
-        identifying common ground, and building consensus on complex decisions.""",
-        llm=llm,
-        verbose=True,
-        allow_delegation=True
-    )
-```
-
-Facilitator who manages expert collaboration and consensus building.
-
-**Decision Synthesizer**
-
-```python
-    # Decision synthesizer
-    synthesizer = Agent(
-        role='Decision Synthesizer',
-        goal='Synthesize expert inputs into unified decisions and recommendations',
-        backstory="""You specialize in synthesizing diverse expert opinions 
-        into coherent decisions and actionable recommendations.""",
-        llm=llm,
-        verbose=True
-    )
-```
-
-Synthesizer who combines all perspectives into unified recommendations.
-
-**Technical Input Task**
-
-```python
-    # Expert input tasks (parallel)
-    tech_input_task = Task(
-        description="""Provide technical perspective on 'Building a Customer Service AI Agent'.
-        Consider:
-        1. Technical architecture requirements
-        2. Scalability and performance needs
-        3. Integration challenges
-        4. Technology stack recommendations
-        5. Technical risk factors""",
-        agent=tech_expert,
-        expected_output="Technical analysis and recommendations"
-    )
-```
-
-Technical expert provides architecture and implementation perspective.
-
-**Business Input Task**
-
-```python
-    business_input_task = Task(
-        description="""Provide business perspective on 'Building a Customer Service AI Agent'.
-        Consider:
-        1. Business value and ROI
-        2. Market opportunity and competition
-        3. Business model implications
-        4. Cost-benefit analysis
-        5. Strategic alignment""",
-        agent=business_expert,
-        expected_output="Business analysis and strategic recommendations"
-    )
-```
-
-Business expert analyzes value, ROI, and strategic implications.
-
-**User Experience Input Task**
-
-```python
-    user_input_task = Task(
-        description="""Provide user experience perspective on 'Building a Customer Service AI Agent'.
-        Consider:
-        1. User needs and pain points
-        2. Interaction design requirements
-        3. Accessibility and usability
-        4. User adoption factors
-        5. Experience quality metrics""",
-        agent=user_expert,
-        expected_output="UX analysis and design recommendations"
-    )
-```
-
-UX expert provides user-centered design perspective.
-
-**Collaboration Facilitation**
-
-```python
-    # Collaboration facilitation task
-    facilitation_task = Task(
-        description="""Facilitate collaboration between experts to identify synergies and conflicts.
-        Analyze:
-        1. Areas of agreement between experts
-        2. Points of disagreement or tension
-        3. Opportunities for creative synthesis
-        4. Trade-offs that need resolution
-        5. Shared priorities and values""",
-        agent=facilitator,
-        expected_output="Collaboration analysis with consensus opportunities",
-        context=[tech_input_task, business_input_task, user_input_task]
-    )
-```
-
-Facilitator identifies synergies and conflicts across expert perspectives.
-
-**Consensus Building**
-
-```python
-    # Consensus building task
-    consensus_task = Task(
-        description="""Build consensus on key decisions for the AI agent project.
-        Focus on:
-        1. Resolving disagreements between experts
-        2. Finding win-win solutions
-        3. Prioritizing conflicting requirements
-        4. Creating shared understanding
-        5. Establishing decision criteria""",
-        agent=facilitator,
-        expected_output="Consensus framework with agreed-upon decisions",
-        context=[facilitation_task]
-    )
-```
-
-Build consensus and resolve conflicts between different perspectives.
-
-**Final Synthesis**
-
-```python
-    # Final synthesis task
-    synthesis_task = Task(
-        description="""Synthesize all expert inputs and consensus into final recommendations.
-        Create:
-        1. Unified project recommendations
-        2. Multi-perspective implementation plan
-        3. Balanced trade-off decisions
-        4. Risk mitigation from all perspectives
-        5. Success metrics across all domains""",
-        agent=synthesizer,
-        expected_output="Comprehensive synthesis with unified recommendations",
-        context=[consensus_task]
-    )
-```
-
-Synthesize all inputs into comprehensive unified recommendations.
-
-**Multi-Agent Crew Assembly**
-
-```python
-    return Crew(
-        agents=[tech_expert, business_expert, user_expert, facilitator, synthesizer],
-        tasks=[tech_input_task, business_input_task, user_input_task, facilitation_task, consensus_task, synthesis_task],
-        process=Process.sequential,  # Could also use hierarchical with facilitator as manager
-        verbose=2,
-        memory=True
-    )
-```
-
-Assemble the collaborative multi-agent crew with sequential processing.
+Find the least busy agent for optimal task delegation and load distribution.
 
 ---
 
-## **Production Patterns & Best Practices**
+## Part 4: Custom Tools and Agent Capabilities (30 minutes)
 
-### **Error Handling and Recovery**
+### Creating Custom Tools
+
+CrewAI agents can use custom tools to extend their capabilities:
+
+First, set up the necessary imports for creating custom tools:
 
 ```python
-# src/session4/error_handling.py
-from crewai import Agent, Task, Crew, Process
-from crewai.tools import SerperDevTool
-import logging
-from typing import Dict, Any
+# From src/session4/custom_tools.py
 
-class RobustCrewSystem:
-    """Production-ready crew with comprehensive error handling"""
-    
-    def __init__(self, llm):
-        self.llm = llm
-        self.logger = logging.getLogger(__name__)
-        self.error_recovery_strategies = {
-            'tool_failure': self._handle_tool_failure,
-            'agent_failure': self._handle_agent_failure,
-            'task_timeout': self._handle_task_timeout
-        }
-    
-    def create_resilient_crew(self):
-        """Create crew with built-in error handling and recovery"""
-        
-        # Primary agent with error handling
-        primary_agent = Agent(
-            role='Resilient Primary Agent',
-            goal='Execute tasks with robust error handling and recovery',
-            backstory="""You are experienced in handling unexpected situations 
-            and have built-in error recovery mechanisms.""",
-            tools=[SerperDevTool()],
-            llm=self.llm,
-            verbose=True,
-            max_retry=3  # Built-in retry mechanism
-        )
-        
-        # Backup agent for failover
-        backup_agent = Agent(
-            role='Backup Agent',
-            goal='Provide failover support when primary agents encounter issues',
-            backstory="""You are the reliable backup who steps in when 
-            primary agents face difficulties.""",
-            tools=[],  # Simpler toolset for reliability
-            llm=self.llm,
-            verbose=True
-        )
-        
-        # Monitoring agent
-        monitor_agent = Agent(
-            role='System Monitor',
-            goal='Monitor crew execution and detect issues early',
-            backstory="""You continuously monitor system health and 
-            detect problems before they become critical.""",
-            llm=self.llm,
-            verbose=True
-        )
-        
-        # Error-prone task with recovery
-        main_task = Task(
-            description="""Execute web research with error handling.
-            If tools fail:
-            1. Retry with exponential backoff
-            2. Use alternative approaches
-            3. Escalate to backup agent if needed
-            4. Document all recovery actions taken""",
-            agent=primary_agent,
-            expected_output="Research results with error handling log"
-        )
-        
-        # Backup task
-        backup_task = Task(
-            description="""Provide backup execution if primary task fails.
-            Use simplified approaches and manual reasoning if tools are unavailable.""",
-            agent=backup_agent,
-            expected_output="Backup results using manual analysis",
-            context=[main_task]
-        )
-        
-        # Monitoring task
-        monitor_task = Task(
-            description="""Monitor crew execution and provide health report.
-            Track:
-            1. Task execution times
-            2. Error frequencies
-            3. Recovery success rates
-            4. System performance metrics""",
-            agent=monitor_agent,
-            expected_output="System health and performance report",
-            context=[main_task, backup_task]
-        )
-        
-        return Crew(
-            agents=[primary_agent, backup_agent, monitor_agent],
-            tasks=[main_task, backup_task, monitor_task],
-            process=Process.sequential,
-            verbose=2,
-            memory=True
-        )
-    
-    def _handle_tool_failure(self, error: Exception, context: Dict[str, Any]):
-        """Handle tool failure with fallback strategies"""
-        self.logger.warning(f"Tool failure: {error}")
-        return {'strategy': 'fallback_to_manual', 'error': str(error)}
-    
-    def _handle_agent_failure(self, error: Exception, context: Dict[str, Any]):
-        """Handle agent failure with backup agent activation"""
-        self.logger.error(f"Agent failure: {error}")
-        return {'strategy': 'activate_backup', 'error': str(error)}
-    
-    def _handle_task_timeout(self, error: Exception, context: Dict[str, Any]):
-        """Handle task timeout with simplified execution"""
-        self.logger.warning(f"Task timeout: {error}")
-        return {'strategy': 'simplify_and_retry', 'error': str(error)}
+from crewai.tools import BaseTool
+from pydantic import BaseModel, Field
+from typing import Type
 ```
 
-### **Performance Optimization**
+Define the input schema for structured tool parameters:
 
 ```python
-# src/session4/performance_optimization.py
-from crewai import Agent, Task, Crew, Process
-from concurrent.futures import ThreadPoolExecutor
-import time
-from typing import List, Dict, Any
+class SearchInput(BaseModel):
+    """Input schema for search tool."""
+    query: str = Field(..., description="Search query")
+    max_results: int = Field(default=5, description="Maximum results")
+```
 
-class PerformanceOptimizedCrew:
-    """Crew system optimized for performance and scalability"""
+Create the custom search tool class with comprehensive search capabilities:
+
+```python
+class CustomSearchTool(BaseTool):
+    """Advanced search tool for CrewAI agents."""
     
-    def __init__(self, llm, max_workers: int = 4):
-        self.llm = llm
-        self.max_workers = max_workers
-        self.performance_metrics = {}
-        
-    def create_optimized_crew(self):
-        """Create performance-optimized crew with parallel execution"""
-        
-        # Fast execution agents with minimal context
-        fast_researcher = Agent(
-            role='Fast Researcher',
-            goal='Execute research tasks quickly and efficiently',
-            backstory="You prioritize speed and efficiency while maintaining quality.",
-            tools=[SerperDevTool()],
-            llm=self.llm,
-            verbose=False,  # Reduced verbosity for speed
-            max_iter=2,     # Limited iterations for speed
-            memory=False    # Reduced memory overhead
-        )
-        
-        fast_analyzer = Agent(
-            role='Fast Analyzer',
-            goal='Perform rapid analysis with focused scope',
-            backstory="You specialize in quick, focused analysis.",
-            llm=self.llm,
-            verbose=False,
-            max_iter=2
-        )
-        
-        # Batch processor for multiple similar tasks
-        batch_processor = Agent(
-            role='Batch Processor',
-            goal='Process multiple similar tasks efficiently',
-            backstory="You excel at batch processing and parallel execution.",
-            llm=self.llm,
-            verbose=False
-        )
-        
-        # Performance monitor
-        perf_monitor = Agent(
-            role='Performance Monitor', 
-            goal='Monitor and optimize crew performance',
-            backstory="You track performance metrics and suggest optimizations.",
-            llm=self.llm,
-            verbose=False
-        )
-        
-        # Parallel research tasks
-        research_tasks = [
-            Task(
-                description=f"Quick research on topic {i}: AI frameworks",
-                agent=fast_researcher,
-                expected_output=f"Brief research summary {i}"
-            ) for i in range(3)
-        ]
-        
-        # Batch analysis task
-        batch_analysis = Task(
-            description="Analyze all research results in batch mode",
-            agent=batch_processor,
-            expected_output="Batch analysis results",
-            context=research_tasks
-        )
-        
-        # Performance monitoring task
-        perf_task = Task(
-            description="Monitor crew performance and provide optimization suggestions",
-            agent=perf_monitor,
-            expected_output="Performance report with optimization recommendations",
-            context=research_tasks + [batch_analysis]
-        )
-        
-        return Crew(
-            agents=[fast_researcher, fast_analyzer, batch_processor, perf_monitor],
-            tasks=research_tasks + [batch_analysis, perf_task],
-            process=Process.parallel,  # Parallel execution for speed
-            verbose=1,  # Reduced verbosity
-            memory=False  # Disabled for performance
-        )
+    name: str = "advanced_search"
+    description: str = "Search multiple sources for information"
+    args_schema: Type[BaseModel] = SearchInput
     
-    def measure_performance(self, crew: Crew) -> Dict[str, Any]:
-        """Measure crew performance metrics"""
-        start_time = time.time()
+    def _run(self, query: str, max_results: int = 5) -> str:
+        """Execute search across multiple sources."""
         
-        result = crew.kickoff()
+        results = {
+            'web_results': self._search_web(query, max_results),
+            'knowledge_base': self._search_knowledge_base(query),
+            'recent_news': self._search_news(query)
+        }
         
-        end_time = time.time()
-        execution_time = end_time - start_time
+        return json.dumps(results, indent=2)
+    
+    def _search_web(self, query: str, max_results: int) -> list:
+        """Search the web for information."""
+        # Implementation here
+        pass
+```
+
+### Tool Integration with Agents
+
+Start by importing the required custom tools:
+
+```python
+def create_research_agent_with_tools():
+    """Create an agent with custom tools."""
+    
+    # Import custom tools
+    from custom_tools import (
+        CustomSearchTool,
+        DatabaseTool,
+        DataAnalysisTool
+    )
+```
+
+Create instances of each tool for the agent to use:
+
+```python
+    # Create tool instances
+    search_tool = CustomSearchTool()
+    db_tool = DatabaseTool()
+    analysis_tool = DataAnalysisTool()
+```
+
+Finally, create the agent with integrated tools and comprehensive capabilities:
+
+```python
+    # Create agent with tools
+    researcher = Agent(
+        role='Data Research Analyst',
+        goal='Conduct comprehensive research with data analysis',
+        backstory="""You are a data-driven researcher who combines 
+        web research with statistical analysis to provide insights.""",
+        tools=[search_tool, db_tool, analysis_tool],
+        llm=llm,
+        verbose=True
+    )
+    
+    return researcher
+```
+
+### Advanced Tool Patterns
+
+Initialize the tool chain class with execution tracking:
+
+```python
+class ToolChain:
+    """Chain multiple tools together for complex operations."""
+    
+    def __init__(self, tools):
+        self.tools = tools
+        self.execution_history = []
+```
+
+Implement the chain execution with error handling and history tracking:
+
+```python
+    def execute_chain(self, initial_input):
+        """Execute tools in sequence, passing output to next tool."""
+        current_input = initial_input
+        
+        for tool in self.tools:
+            try:
+                output = tool._run(**current_input)
+                self.execution_history.append({
+                    'tool': tool.name,
+                    'input': current_input,
+                    'output': output,
+                    'status': 'success'
+                })
+                
+                # Transform output for next tool
+                current_input = self._transform_output(output)
+                
+            except Exception as e:
+                self.execution_history.append({
+                    'tool': tool.name,
+                    'input': current_input,
+                    'error': str(e),
+                    'status': 'failed'
+                })
+                raise
+        
+        return current_input
+```
+
+Add output transformation for seamless tool chaining:
+
+```python
+    def _transform_output(self, output):
+        """Transform tool output for next tool in chain."""
+        # Parse and transform output
+        if isinstance(output, str):
+            try:
+                return json.loads(output)
+            except:
+                return {'data': output}
+        return output
+```
+
+---
+
+## Part 5: Performance Monitoring and Optimization (25 minutes)
+
+### Implementing Performance Metrics
+
+Track and optimize your crew's performance:
+
+Start by setting up the performance monitoring class with metric tracking structures:
+
+```python
+# From src/session4/performance_monitor.py
+
+class CrewPerformanceMonitor:
+    """Monitor and optimize crew performance."""
+    
+    def __init__(self):
+        self.metrics = {
+            'task_completion_times': {},
+            'agent_utilization': {},
+            'error_rates': {},
+            'delegation_patterns': []
+        }
+        self.start_times = {}
+```
+
+Implement task tracking to monitor when tasks begin and agent workload assignment:
+
+
+```python
+    def start_task(self, task_id, agent_name):
+        """Record task start."""
+        self.start_times[task_id] = {
+            'agent': agent_name,
+            'start': datetime.now()
+        }
+        
+        if agent_name not in self.metrics['agent_utilization']:
+            self.metrics['agent_utilization'][agent_name] = {
+                'tasks_assigned': 0,
+                'tasks_completed': 0,
+                'total_time': 0
+            }
+        
+        self.metrics['agent_utilization'][agent_name]['tasks_assigned'] += 1
+```
+
+Add completion tracking to measure task duration and success rates:
+
+```python
+    def complete_task(self, task_id, success=True):
+        """Record task completion."""
+        if task_id not in self.start_times:
+            return
+        
+        start_info = self.start_times[task_id]
+        duration = (datetime.now() - start_info['start']).total_seconds()
+        agent_name = start_info['agent']
+        
+        # Update metrics
+        if agent_name not in self.metrics['task_completion_times']:
+            self.metrics['task_completion_times'][agent_name] = []
+        
+        self.metrics['task_completion_times'][agent_name].append(duration)
+        
+        if success:
+            self.metrics['agent_utilization'][agent_name]['tasks_completed'] += 1
+        else:
+            if agent_name not in self.metrics['error_rates']:
+                self.metrics['error_rates'][agent_name] = 0
+            self.metrics['error_rates'][agent_name] += 1
+        
+        self.metrics['agent_utilization'][agent_name]['total_time'] += duration
+        
+        del self.start_times[task_id]
+```
+
+Record delegation patterns to understand team collaboration dynamics:
+
+```python
+    def record_delegation(self, from_agent, to_agent, task_type):
+        """Record delegation patterns."""
+        self.metrics['delegation_patterns'].append({
+            'from': from_agent,
+            'to': to_agent,
+            'task_type': task_type,
+            'timestamp': datetime.now().isoformat()
+        })
+```
+
+Generate comprehensive performance reports by combining all metrics:
+
+```python
+    def get_performance_report(self):
+        """Generate comprehensive performance report."""
+        report = {
+            'summary': self._calculate_summary(),
+            'agent_performance': self._analyze_agent_performance(),
+            'delegation_analysis': self._analyze_delegation_patterns(),
+            'recommendations': self._generate_recommendations()
+        }
+        
+        return report
+```
+
+Calculate high-level performance summary statistics:
+
+```python
+    def _calculate_summary(self):
+        """Calculate summary statistics."""
+        total_tasks = sum(
+            agent['tasks_assigned'] 
+            for agent in self.metrics['agent_utilization'].values()
+        )
+        
+        completed_tasks = sum(
+            agent['tasks_completed'] 
+            for agent in self.metrics['agent_utilization'].values()
+        )
         
         return {
-            'execution_time': execution_time,
-            'tasks_completed': len(crew.tasks),
-            'agents_used': len(crew.agents),
-            'throughput': len(crew.tasks) / execution_time,
-            'result': result
+            'total_tasks': total_tasks,
+            'completed_tasks': completed_tasks,
+            'success_rate': (completed_tasks / total_tasks * 100) if total_tasks > 0 else 0,
+            'total_agents': len(self.metrics['agent_utilization'])
         }
 ```
 
-### **Enterprise Integration**
+Analyze individual agent performance with timing metrics:
 
 ```python
-# src/session4/enterprise_integration.py
-from crewai import Agent, Task, Crew, Process
-from dataclasses import dataclass
-from typing import Dict, List, Optional, Any
-import json
-from datetime import datetime
+    def _analyze_agent_performance(self):
+        """Analyze individual agent performance."""
+        analysis = {}
+        
+        for agent, times in self.metrics['task_completion_times'].items():
+            if times:
+                analysis[agent] = {
+                    'avg_completion_time': sum(times) / len(times),
+                    'min_time': min(times),
+                    'max_time': max(times),
+                    'task_count': len(times)
+                }
+        
+        return analysis
+```
 
-@dataclass
-class EnterpriseConfig:
-    """Configuration for enterprise crew deployment"""
-    environment: str
-    logging_level: str
-    monitoring_enabled: bool
-    compliance_mode: str
-    security_level: str
-    audit_trail: bool
+Examine delegation patterns to identify collaboration bottlenecks:
 
-class EnterpriseCrewSystem:
-    """Enterprise-grade crew system with governance and compliance"""
+```python
+    def _analyze_delegation_patterns(self):
+        """Analyze delegation patterns."""
+        delegation_counts = {}
+        
+        for delegation in self.metrics['delegation_patterns']:
+            key = f"{delegation['from']} -> {delegation['to']}"
+            if key not in delegation_counts:
+                delegation_counts[key] = 0
+            delegation_counts[key] += 1
+        
+        return delegation_counts
+```
+
+Generate actionable recommendations for team optimization:
+
+```python
+    def _generate_recommendations(self):
+        """Generate optimization recommendations."""
+        recommendations = []
+        
+        # Check for underutilized agents
+        for agent, util in self.metrics['agent_utilization'].items():
+            if util['tasks_assigned'] < 2:
+                recommendations.append(
+                    f"Agent '{agent}' is underutilized. Consider assigning more tasks."
+                )
+        
+        # Check for high error rates
+        for agent, error_count in self.metrics['error_rates'].items():
+            total_tasks = self.metrics['agent_utilization'][agent]['tasks_assigned']
+            error_rate = (error_count / total_tasks * 100) if total_tasks > 0 else 0
+            
+            if error_rate > 20:
+                recommendations.append(
+                    f"Agent '{agent}' has high error rate ({error_rate:.1f}%). Review task assignments."
+                )
+        
+        return recommendations
+```
+```
+
+### Optimization Strategies
+
+Initialize the crew optimizer with performance monitoring integration:
+
+```python
+class CrewOptimizer:
+    """Optimize crew configuration based on performance data."""
     
-    def __init__(self, config: EnterpriseConfig, llm):
-        self.config = config
-        self.llm = llm
-        self.audit_log = []
-        self.compliance_checker = ComplianceChecker(config.compliance_mode)
+    def __init__(self, performance_monitor):
+        self.monitor = performance_monitor
+        self.optimization_history = []
+```
+
+Optimize task assignments based on performance data and workload analysis:
+
+```python
+    def optimize_task_assignment(self, crew):
+        """Optimize task assignments based on performance."""
+        report = self.monitor.get_performance_report()
         
-    def create_enterprise_crew(self):
-        """Create enterprise crew with governance controls"""
+        optimizations = {
+            'reassignments': [],
+            'workload_balancing': [],
+            'skill_matching': []
+        }
         
-        # Governance agent
-        governance_agent = Agent(
-            role='Governance Officer',
-            goal='Ensure compliance and governance standards are met',
-            backstory="""You are responsible for ensuring all crew activities 
-            comply with enterprise governance, security, and regulatory requirements.""",
-            llm=self.llm,
-            verbose=True
-        )
+        # Balance workload
+        agent_performance = report['agent_performance']
+        if agent_performance:
+            avg_time = sum(p['avg_completion_time'] for p in agent_performance.values()) / len(agent_performance)
+            
+            for agent, perf in agent_performance.items():
+                if perf['avg_completion_time'] > avg_time * 1.5:
+                    optimizations['workload_balancing'].append({
+                        'agent': agent,
+                        'action': 'reduce_workload',
+                        'reason': 'Above average completion time'
+                    })
         
-        # Auditor agent
-        auditor = Agent(
-            role='Compliance Auditor',
-            goal='Audit crew activities and maintain compliance trail',
-            backstory="""You maintain detailed audit trails and ensure 
-            all activities are properly documented for compliance.""",
-            llm=self.llm,
-            verbose=True
-        )
+        self.optimization_history.append({
+            'timestamp': datetime.now().isoformat(),
+            'optimizations': optimizations
+        })
         
-        # Secure worker agent
-        secure_worker = Agent(
-            role='Secure Operations Agent',
-            goal='Execute tasks within security and compliance boundaries',
-            backstory="""You operate within strict security protocols 
-            and compliance requirements while maintaining effectiveness.""",
-            tools=self._get_approved_tools(),
-            llm=self.llm,
-            verbose=True
-        )
+        return optimizations
+```
+
+Analyze delegation patterns and suggest team restructuring improvements:
+
+```python
+    def suggest_team_restructuring(self):
+        """Suggest team structure changes."""
+        delegation_analysis = self.monitor.metrics['delegation_patterns']
         
-        # Governance review task
-        governance_review = Task(
-            description="""Review proposed work plan for compliance and governance.
-            Verify:
-            1. Security protocol adherence
-            2. Data privacy compliance
-            3. Regulatory requirement alignment
-            4. Risk assessment and mitigation
-            5. Approval workflow completion""",
-            agent=governance_agent,
-            expected_output="Governance review with approval/rejection decision"
-        )
+        suggestions = []
         
-        # Secure execution task
-        secure_execution = Task(
-            description="""Execute approved work within security boundaries.
-            Requirements:
-            1. Use only approved tools and data sources
-            2. Maintain data classification standards
-            3. Log all activities for audit trail
-            4. Follow incident response procedures if issues arise""",
-            agent=secure_worker,
-            expected_output="Secure execution results with compliance certification",
-            context=[governance_review]
-        )
+        # Analyze delegation bottlenecks
+        delegation_counts = {}
+        for pattern in delegation_analysis:
+            to_agent = pattern['to']
+            if to_agent not in delegation_counts:
+                delegation_counts[to_agent] = 0
+            delegation_counts[to_agent] += 1
         
-        # Compliance audit task
-        audit_task = Task(
-            description="""Conduct compliance audit of all crew activities.
-            Document:
-            1. Adherence to governance policies
-            2. Security protocol compliance
-            3. Data handling appropriateness
-            4. Risk mitigation effectiveness
-            5. Audit trail completeness""",
-            agent=auditor,
-            expected_output="Compliance audit report with certification",
-            context=[governance_review, secure_execution]
-        )
+        # Find overloaded agents
+        for agent, count in delegation_counts.items():
+            if count > 5:  # Threshold for overload
+                suggestions.append({
+                    'type': 'add_support',
+                    'for_agent': agent,
+                    'reason': f'Receiving too many delegations ({count})'
+                })
         
-        return Crew(
-            agents=[governance_agent, secure_worker, auditor],
-            tasks=[governance_review, secure_execution, audit_task],
+        return suggestions
+```
+
+---
+
+## Part 6: Production Deployment Patterns (20 minutes)
+
+### Error Handling and Resilience
+
+Initialize resilient crew with comprehensive error handling policies:
+
+```python
+class ResilientCrew:
+    """Crew with advanced error handling and recovery."""
+    
+    def __init__(self, agents, tasks):
+        self.agents = agents
+        self.tasks = tasks
+        self.retry_policy = {
+            'max_retries': 3,
+            'backoff_factor': 2,
+            'retry_on_errors': [
+                'RateLimitError',
+                'TemporaryFailure',
+                'TimeoutError'
+            ]
+        }
+        self.fallback_strategies = {}
+```
+
+Add fallback strategies for specific task failure scenarios:
+
+```python
+    def add_fallback_strategy(self, task_name, fallback_func):
+        """Add fallback strategy for task failures."""
+        self.fallback_strategies[task_name] = fallback_func
+```
+
+Execute crew with intelligent retry logic and fallback mechanisms:
+
+```python
+    async def execute_with_resilience(self):
+        """Execute crew with error handling and retries."""
+        crew = Crew(
+            agents=self.agents,
+            tasks=self.tasks,
             process=Process.sequential,
-            verbose=2,
-            memory=True
+            verbose=2
+        )
+        
+        for attempt in range(self.retry_policy['max_retries']):
+            try:
+                result = await crew.kickoff()
+                return result
+                
+            except Exception as e:
+                error_type = type(e).__name__
+                
+                if error_type in self.retry_policy['retry_on_errors']:
+                    wait_time = self.retry_policy['backoff_factor'] ** attempt
+                    print(f"Retry {attempt + 1} after {wait_time}s due to {error_type}")
+                    await asyncio.sleep(wait_time)
+                else:
+                    # Try fallback strategy
+                    task_name = self._identify_failed_task(e)
+                    if task_name in self.fallback_strategies:
+                        return self.fallback_strategies[task_name]()
+                    raise
+        
+        raise Exception("Max retries exceeded")
+    
+    def _identify_failed_task(self, error):
+        """Identify which task failed from error."""
+        # Parse error to identify task
+        # Implementation depends on error structure
+        return "unknown"
+```
+
+### Scaling Strategies
+
+Initialize scalable crew with base agents and scaling configuration:
+
+```python
+class ScalableCrew:
+    """Crew that can scale based on workload."""
+    
+    def __init__(self, base_agents):
+        self.base_agents = base_agents
+        self.additional_agents = []
+        self.scaling_rules = {
+            'task_threshold': 10,
+            'time_threshold': 300,  # seconds
+            'max_agents': 20
+        }
+```
+
+Implement automatic scaling logic based on workload and performance metrics:
+
+```python
+    def auto_scale(self, task_queue_size, avg_task_time):
+        """Automatically scale crew based on metrics."""
+        current_size = len(self.base_agents) + len(self.additional_agents)
+        
+        # Scale up conditions
+        if (task_queue_size > self.scaling_rules['task_threshold'] or 
+            avg_task_time > self.scaling_rules['time_threshold']):
+            
+            if current_size < self.scaling_rules['max_agents']:
+                new_agent = self._create_additional_agent()
+                self.additional_agents.append(new_agent)
+                print(f"Scaled up: Added {new_agent.role}")
+        
+        # Scale down conditions
+        elif (task_queue_size < self.scaling_rules['task_threshold'] / 2 and
+              len(self.additional_agents) > 0):
+            
+            removed_agent = self.additional_agents.pop()
+            print(f"Scaled down: Removed {removed_agent.role}")
+```
+
+Create flexible support agents and manage crew composition:
+
+```python
+    def _create_additional_agent(self):
+        """Create an additional agent for scaling."""
+        return Agent(
+            role=f'Support Agent {len(self.additional_agents) + 1}',
+            goal='Assist with overflow tasks',
+            backstory='A flexible agent that helps with various tasks.',
+            llm=llm,
+            verbose=True
         )
     
-    def _get_approved_tools(self):
-        """Get enterprise-approved tools based on security level"""
-        if self.config.security_level == 'high':
-            return []  # No external tools in high security mode
-        elif self.config.security_level == 'medium':
-            return [SerperDevTool()]  # Limited approved tools
-        else:
-            return [SerperDevTool(), WebsiteSearchTool()]  # Standard tools
+    def get_current_crew(self):
+        """Get current crew with scaled agents."""
+        return self.base_agents + self.additional_agents
+```
+
+---
+
+## Part 7: Real-World Examples and Case Studies (15 minutes)
+
+### Example 1: Customer Support Automation
+
+Create the customer support team with tier-based specialization:
+
+```python
+def create_customer_support_crew():
+    """Create a customer support automation crew."""
     
-    def log_activity(self, activity: str, metadata: Dict[str, Any]):
-        """Log activity for audit trail"""
-        if self.config.audit_trail:
-            self.audit_log.append({
-                'timestamp': datetime.now().isoformat(),
-                'activity': activity,
-                'metadata': metadata,
-                'environment': self.config.environment
-            })
+    # Tier 1 Support Agent
+    tier1_agent = Agent(
+        role='Customer Service Representative',
+        goal='Handle initial customer inquiries',
+        backstory="""You are a friendly customer service rep who handles 
+        initial inquiries, gathers information, and resolves simple issues.""",
+        tools=[CustomerDatabaseTool(), FAQSearchTool()],
+        llm=llm,
+        allow_delegation=True
+    )
+```
 
-class ComplianceChecker:
-    """Compliance checking utility"""
+Add technical specialist for complex issue resolution:
+
+```python
+    # Tier 2 Technical Support
+    tier2_agent = Agent(
+        role='Technical Support Specialist',
+        goal='Resolve complex technical issues',
+        backstory="""You are a technical expert who handles escalated issues 
+        requiring deep product knowledge and troubleshooting skills.""",
+        tools=[DiagnosticTool(), RemoteAccessTool()],
+        llm=llm,
+        allow_delegation=True
+    )
+```
+
+Complete the support hierarchy with management oversight:
+
+```python
+    # Support Manager
+    manager_agent = Agent(
+        role='Support Manager',
+        goal='Oversee support quality and handle escalations',
+        backstory="""You manage the support team, handle difficult cases, 
+        and ensure customer satisfaction.""",
+        llm=llm,
+        allow_delegation=True
+    )
     
-    def __init__(self, compliance_mode: str):
-        self.compliance_mode = compliance_mode
-        self.rules = self._load_compliance_rules()
+    # Create hierarchical support crew
+    return Crew(
+        agents=[tier1_agent, tier2_agent, manager_agent],
+        tasks=create_support_tasks(),
+        process=Process.hierarchical,
+        manager_llm=llm
+    )
+```
+
+### Example 2: Content Marketing Pipeline
+
+Start with market research to identify content opportunities:
+
+```python
+def create_content_marketing_crew():
+    """Create a content marketing pipeline crew."""
     
-    def _load_compliance_rules(self) -> Dict[str, Any]:
-        """Load compliance rules based on mode"""
-        rules = {
-            'GDPR': {'data_retention': 365, 'consent_required': True},
-            'HIPAA': {'phi_protection': True, 'access_logging': True},
-            'SOX': {'financial_controls': True, 'audit_trail': True}
-        }
-        return rules.get(self.compliance_mode, {})
+    # Market Researcher
+    market_researcher = Agent(
+        role='Market Research Analyst',
+        goal='Identify trending topics and audience interests',
+        backstory="""You analyze market trends, competitor content, and 
+        audience behavior to identify content opportunities.""",
+        tools=[TrendAnalysisTool(), CompetitorAnalysisTool()],
+        llm=llm
+    )
+```
+
+Add content creation specialist for multi-format content production:
+
+```python
+    # Content Creator
+    content_creator = Agent(
+        role='Content Creator',
+        goal='Produce engaging content across multiple formats',
+        backstory="""You create compelling content including articles, 
+        videos scripts, and social media posts.""",
+        llm=llm
+    )
+```
+
+Complete the pipeline with distribution and performance optimization:
+
+```python
+    # Distribution Specialist
+    distribution_specialist = Agent(
+        role='Content Distribution Specialist',
+        goal='Maximize content reach and engagement',
+        backstory="""You manage content distribution across channels, 
+        optimize timing, and track performance.""",
+        tools=[SocialMediaTool(), EmailMarketingTool()],
+        llm=llm
+    )
     
-    def check_compliance(self, activity: Dict[str, Any]) -> bool:
-        """Check if activity meets compliance requirements"""
-        # Simplified compliance checking
-        return True  # Placeholder implementation
+    return [market_researcher, content_creator, distribution_specialist]
 ```
 
 ---
 
-## **Framework Comparisons**
+## 🧪 Testing Your Understanding
 
-### **CrewAI vs LangGraph**
+### Quick Check Questions
 
-**Key Differences:**
+1. **What distinguishes CrewAI's approach from other multi-agent frameworks?**
+   - a) Better performance
+   - b) Role-based team collaboration with clear hierarchies
+   - c) Lower resource usage
+   - d) Simpler syntax
 
-```python
-# CrewAI: Role-based approach
-manager = Agent(role='Team Lead', goal='Coordinate team', allow_delegation=True)
-worker = Agent(role='Specialist', goal='Execute tasks')
+2. **In CrewAI, what is the purpose of the `allow_delegation` parameter?**
+   - a) Performance optimization
+   - b) Enables agents to delegate tasks to other team members
+   - c) Error handling
+   - d) Resource management
 
-# LangGraph: Graph-based approach  
-def manager_node(state): return coordinate_team(state)
-def worker_node(state): return execute_task(state)
-workflow.add_node('manager', manager_node)
-```
+3. **Which CrewAI process type enables hierarchical team management?**
+   - a) Process.sequential
+   - b) Process.parallel
+   - c) Process.hierarchical
+   - d) Process.distributed
 
-CrewAI uses role-based agents while LangGraph uses node functions.
+4. **What is the role of context in CrewAI tasks?**
+   - a) Memory optimization
+   - b) Defines task dependencies and information flow
+   - c) Error handling
+   - d) Performance monitoring
 
-| **Aspect** | **CrewAI** | **LangGraph** |
-|------------|------------|---------------|
-| Paradigm | Role-based teams | Graph workflows |
-| Coordination | Hierarchical delegation | Conditional routing |
-| Learning Curve | Moderate | Higher complexity |
-| Best For | Team collaboration | Complex workflows |
+5. **How does CrewAI handle agent collaboration?**
+   - a) Direct message passing
+   - b) Shared memory and task context
+   - c) File system
+   - d) External database
 
-### **CrewAI vs LangChain**
-
-**Architecture Differences:**
-
-```python
-# CrewAI: Multi-agent teams
-crew = Crew(agents=[agent1, agent2], tasks=[task1, task2])
-
-# LangChain: Single agent chains
-chain = LLMChain(llm=llm, prompt=prompt)
-```
-
-CrewAI orchestrates multiple agents while LangChain focuses on single agent chains.
-
-| **Aspect** | **CrewAI** | **LangChain** |
-|------------|------------|---------------|
-| Focus | Multi-agent teams | Single agent chains |
-| Abstraction | High-level team concepts | Lower-level components |
-| Scaling | Team-based | Chain composition |
+**Answer Key**: 1-b, 2-b, 3-c, 4-b, 5-b
 
 ---
 
-## **Advanced Use Cases**
+## 📝 Practical Exercises
 
-### **Use Case 1: Content Creation Pipeline**
+### Exercise 1: Build a Research Team
 
-**Content Team Setup**
-
-```python
-# Content creation specialists
-researcher = Agent(
-    role='Content Researcher',
-    goal='Research trending topics and gather data',
-    tools=[SerperDevTool(), WebsiteSearchTool()]
-)
-
-writer = Agent(
-    role='Content Writer',
-    goal='Create engaging, high-quality content'
-)
-```
-
-Specialized agents for research and content creation.
+Create a research team that can:
+1. Gather information from multiple sources
+2. Analyze and synthesize findings
+3. Generate comprehensive reports
+4. Review for accuracy
 
 ```python
-# Editorial team
-editor = Agent(
-    role='Content Editor', 
-    goal='Edit and refine content for publication quality'
-)
-
-seo_specialist = Agent(
-    role='SEO Specialist',
-    goal='Optimize content for search engines'
-)
+# Your implementation here
+def build_research_team():
+    # Create specialized agents
+    # Define interconnected tasks
+    # Configure crew with appropriate process
+    pass
 ```
 
-Editorial specialists for refinement and optimization.
+### Exercise 2: Implement Performance Monitoring
 
-**Content Pipeline Workflow**
+Add performance monitoring to your crew:
+1. Track task completion times
+2. Monitor agent utilization
+3. Identify bottlenecks
+4. Generate optimization recommendations
 
 ```python
-# Sequential content creation process
-research = Task("Research AI trends and create brief", researcher)
-writing = Task("Write article based on research", writer, context=[research])
-editing = Task("Edit for clarity and engagement", editor, context=[writing])
-seo = Task("Optimize for SEO", seo_specialist, context=[editing])
-
-content_crew = Crew(
-    agents=[researcher, writer, editor, seo_specialist],
-    tasks=[research, writing, editing, seo],
-    process=Process.sequential
-)
+# Your implementation here
+class MyPerformanceMonitor:
+    pass
 ```
-
-Complete content creation pipeline from research to publication.
-
-```
-
-
-### **Use Case 2: Product Development Team**
-
-**Cross-Functional Team**
-```python
-# Product leadership
-product_manager = Agent(
-    role='Product Manager',
-    goal='Define requirements and coordinate development', 
-    allow_delegation=True  # Can coordinate team
-)
-```
-
-Product manager who coordinates the development process.
-
-```python
-# Design and technical specialists
-ux_designer = Agent(
-    role='UX Designer',
-    goal='Design user experience and interaction flows'
-)
-
-tech_lead = Agent(
-    role='Technical Lead',
-    goal='Define architecture and implementation approach'
-)
-```
-
-Specialists handling design and technical architecture.
-
-**Development Workflow**
-
-```python
-# Product development pipeline
-requirements = Task("Define product requirements", product_manager)
-ux_design = Task("Create UX design", ux_designer, context=[requirements])
-tech_design = Task("Define architecture", tech_lead, context=[requirements])
-
-product_crew = Crew(
-    agents=[product_manager, ux_designer, tech_lead],
-    tasks=[requirements, ux_design, tech_design],
-    process=Process.hierarchical,  # PM coordinates
-    manager_llm=llm
-)
-```
-
-Hierarchical product development with PM coordination.
-
-```
-
 
 ---
 
-## **Self-Assessment Questions**
+## 🎯 Key Takeaways
 
-1. What distinguishes CrewAI's approach from other multi-agent frameworks?
-   a) Better performance
-   b) Role-based team collaboration with clear hierarchies  
-   c) Lower resource usage
-   d) Simpler syntax
-
-2. In CrewAI, what is the purpose of the `allow_delegation` parameter?
-   a) Performance optimization
-   b) Enables agents to delegate tasks to other team members
-   c) Error handling 
-   d) Resource management
-
-3. Which CrewAI process type enables hierarchical team management?
-   a) Process.sequential
-   b) Process.parallel
-   c) Process.hierarchical
-   d) Process.distributed
-
-4. How does CrewAI's reflection pattern differ from individual agent reflection?
-   a) It uses multiple agents for different reflection aspects
-   b) It's faster and more efficient
-   c) It requires less computational resources
-   d) It only works with specific LLMs
-
-5. What is the primary advantage of CrewAI's task context system?
-   a) Reduced memory usage
-   b) Faster execution
-   c) Tasks can build upon outputs of previous tasks
-   d) Better error handling
-
-6. In enterprise deployments, what is the role of the governance agent?
-   a) Performance optimization
-   b) Ensuring compliance and governance standards
-   c) Task scheduling
-   d) Resource allocation
-
-**Answer Key**: 1-b, 2-b, 3-c, 4-a, 5-c, 6-b
+1. **CrewAI excels at role-based team coordination** with intuitive agent definitions
+2. **Hierarchical processes** enable realistic organizational structures
+3. **Task dependencies** create natural information flow between agents
+4. **Custom tools** extend agent capabilities for specific domains
+5. **Performance monitoring** enables continuous optimization
+6. **Delegation patterns** mirror real-world team dynamics
+7. **Production patterns** ensure reliability and scalability
 
 ---
 
-## **Key Takeaways**
-1. **CrewAI excels at role-based team coordination** with clear agent responsibilities and hierarchies
-2. **Hierarchical processes** enable management delegation and complex team workflows
-3. **Task-agent mapping** provides clear accountability and domain specialization
-4. **Built-in collaboration patterns** simplify team-based multi-agent coordination
-5. **All agentic patterns** (Reflection, Tool Use, ReAct, Planning, Multi-Agent) can be implemented using team-based approaches
-6. **Enterprise features** support production deployment with governance and compliance
-7. **Performance optimization** enables scalable team-based agent systems
-8. **Error handling and resilience** patterns ensure robust production operations
+## 📚 Additional Resources
 
-## **Production Readiness Checklist**
-- [ ] Implement error handling and recovery strategies
-- [ ] Add performance monitoring and optimization
-- [ ] Configure enterprise governance and compliance
-- [ ] Set up audit trails and logging
-- [ ] Test failover and backup scenarios
-- [ ] Establish team coordination protocols
-- [ ] Implement security and access controls
-- [ ] Create operational monitoring dashboards
-
-## **Next Steps**
-Session 5 explores PydanticAI's type-safe approach to agent development with strong typing and validation.
+- [CrewAI Official Documentation](https://docs.crewai.com/)
+- [CrewAI GitHub Repository](https://github.com/joaomdmoura/crewAI)
+- [LangChain Integration Guide](https://python.langchain.com/docs/integrations/providers/crewai)
+- [Multi-Agent Systems Theory](https://www.cambridge.org/core/books/multiagent-systems)
 
 ---
 
-This session demonstrated CrewAI's comprehensive team-based approach to multi-agent orchestration, from basic collaboration to enterprise-grade production deployments.
+## Next Steps
+
+In Session 5, we'll explore **PydanticAI's type-safe approach** to agent development, focusing on:
+- Structured outputs with automatic validation
+- Type-safe tool implementations
+- Modern Python patterns for maintainable agents
+- Integration with existing codebases
+
+---
+
+*This session demonstrated CrewAI's intuitive approach to building collaborative agent teams that mirror real-world organizational structures.*

@@ -240,6 +240,9 @@ Agent frameworks can be categorized based on their primary architectural approac
 - **Cons**: Requires implementing all patterns from scratch
 - **Best For**: Learning fundamentals, custom implementations, research
 
+**Basic Agent Structure:**
+First, we establish the fundamental components every agent needs - an LLM client for reasoning, tools for actions, and memory for context:
+
 ```python
 # Bare metal approach - full control, full responsibility
 class BareMetalAgent:
@@ -247,14 +250,24 @@ class BareMetalAgent:
         self.llm_client = llm_client
         self.tools = tools
         self.conversation_history = []
-    
+```
+
+**Message Processing Foundation:**
+The core agent behavior starts with message handling and maintaining conversation context:
+
+```python
     def respond(self, message):
         # Manual implementation of all agent logic
         self.conversation_history.append({"role": "user", "content": message})
         
         # Custom tool selection logic
         selected_tool = self.select_tool(message)
-        
+```
+
+**LLM Integration and Response Generation:**
+Finally, we integrate with the language model and process the response, requiring manual implementation of prompt formatting and response handling:
+
+```python
         # Custom LLM interaction
         response = self.llm_client.generate(
             self.format_prompt_with_tools(message)
@@ -271,6 +284,9 @@ class BareMetalAgent:
 - **Strengths**: Mature ecosystem, extensive documentation, community support
 - **Architecture**: Nodes (operations) connected by edges (data flow)
 
+**Graph Structure Initialization:**
+LangGraph starts with creating a state graph and defining the operational nodes that represent different agent capabilities:
+
 ```python
 # LangGraph example - graph-based control flow
 from langgraph import StateGraph
@@ -282,7 +298,12 @@ def create_agent_graph():
     graph.add_node("planner", planning_node)
     graph.add_node("executor", execution_node)
     graph.add_node("validator", validation_node)
-    
+```
+
+**Control Flow Definition:**
+Edges define how information flows between nodes, including conditional logic for dynamic routing based on execution results:
+
+```python
     # Define edges (control flow)
     graph.add_edge("planner", "executor")
     graph.add_conditional_edges("executor", should_validate, {
@@ -308,6 +329,9 @@ def create_agent_graph():
 - **Strengths**: Intuitive team metaphors, built-in collaboration patterns
 - **Architecture**: Crews (teams) contain Agents (roles) executing Tasks (work)
 
+**Setting up the Team Structure:**
+CrewAI starts with importing core components and defining specialized agents with distinct roles, goals, and capabilities:
+
 ```python
 # CrewAI example - role-based collaboration
 from crewai import Agent, Task, Crew
@@ -319,14 +343,24 @@ researcher = Agent(
     backstory="Expert at finding relevant information",
     tools=[search_tool, scrape_tool]
 )
+```
 
+**Adding Team Members with Complementary Skills:**
+Each agent brings unique expertise to the team. The writer agent focuses on content creation, building on the researcher's findings:
+
+```python
 writer = Agent(
     role="Content Writer", 
     goal="Create engaging content",
     backstory="Skilled at crafting compelling narratives",
     tools=[writing_tool]
 )
+```
 
+**Defining Collaborative Tasks:**
+Tasks are assigned to specific agents and can have dependencies, creating a natural workflow where outputs from one agent inform another:
+
+```python
 # Define collaborative task
 research_task = Task(
     description="Research the latest trends in AI frameworks",
@@ -338,7 +372,12 @@ writing_task = Task(
     agent=writer,
     depends_on=[research_task]
 )
+```
 
+**Orchestrating Team Execution:**
+Finally, we create the crew (team) and execute the workflow. CrewAI handles the coordination and data flow between agents automatically:
+
+```python
 # Create and run crew
 crew = Crew(
     agents=[researcher, writer],
@@ -362,6 +401,9 @@ result = crew.kickoff()
 - **Strengths**: IDE support, validation, predictable behavior
 - **Architecture**: Schema-first development with runtime validation
 
+**Defining Type-Safe Data Structures:**
+PydanticAI begins with strict schema definitions. We define input and output models that enforce data validation and provide IDE support:
+
 ```python
 # PydanticAI example - type-safe agent development
 from pydantic import BaseModel
@@ -371,13 +413,23 @@ class ResearchQuery(BaseModel):
     topic: str
     depth: Literal["basic", "detailed", "comprehensive"]
     sources: List[str]
+```
 
+**Structured Output Models:**
+Output schemas ensure predictable, well-structured responses with clear field types and validation rules:
+
+```python
 class ResearchResult(BaseModel):
     summary: str
     key_findings: List[str]
     sources_used: List[str]
     confidence_score: float
+```
 
+**Type-Safe Agent Creation:**
+The agent is created with explicit input/output types, providing compile-time safety and runtime validation:
+
+```python
 research_agent = Agent[ResearchQuery, ResearchResult](
     model='gpt-4',
     system_message="You are a research assistant who provides structured analysis."
@@ -387,7 +439,12 @@ research_agent = Agent[ResearchQuery, ResearchResult](
 def search_academic_papers(query: str) -> List[dict]:
     # Type-safe tool implementation
     return perform_academic_search(query)
+```
 
+**Runtime Type Validation:**
+Usage demonstrates full type safety from input creation to result handling, with automatic validation at each step:
+
+```python
 # Usage with full type safety
 query = ResearchQuery(
     topic="AI agent frameworks",
@@ -412,6 +469,9 @@ result: ResearchResult = research_agent.run_sync(query)
 - **Strengths**: Low memory usage, fast instantiation, multimodal support
 - **Architecture**: Direct integration with 23+ model providers
 
+**Lightweight Agent Creation:**
+Agno focuses on minimal overhead with direct, efficient agent instantiation:
+
 ```python
 # Agno example - performance-focused implementation
 from agno import Agent, Workflow
@@ -424,7 +484,12 @@ agent = Agent(
     response_model=AnalysisResult,
     tools=[data_processing_tool]
 )
+```
 
+**High-Performance Workflow Configuration:**
+Workflows are optimized for speed and resource efficiency, supporting async execution and minimal memory strategies:
+
+```python
 # High-performance workflow
 workflow = Workflow(
     agents=[agent],

@@ -287,15 +287,27 @@ class SAPIntegrationAdapter:
         service_url = f"{self.base_url}{self.odata_service_root}/ZCustomerService"
         entity_url = f"{service_url}/CustomerSet('{customer_id}')"
         
-        async with self.session.get(entity_url) as response:
-            if response.status == 200:
-                data = await response.json()
-                return self._transform_customer_data(data)
-            elif response.status == 404:
-                return {"error": "Customer not found", "customer_id": customer_id}
-            else:
-                error_text = await response.text()
-                raise Exception(f"SAP API error: {response.status} - {error_text}")
+        try:
+            async with self.session.get(entity_url) as response:
+                if response.status == 200:
+                    try:
+                        data = await response.json()
+                        return self._transform_customer_data(data)
+                    except Exception as e:
+                        # Consume response to prevent warnings
+                        await response.read()
+                        raise Exception(f"Failed to parse SAP response: {e}")
+                elif response.status == 404:
+                    return {"error": "Customer not found", "customer_id": customer_id}
+                else:
+                    try:
+                        error_text = await response.text()
+                    except Exception:
+                        error_text = "Unable to read error response"
+                    raise Exception(f"SAP API error: {response.status} - {error_text}")
+        except Exception as e:
+            self.logger.error(f"Customer data retrieval failed for {customer_id}: {e}")
+            raise
     
     async def _create_customer(self, params: Dict[str, Any]) -> Dict[str, Any]:
         """Create new customer in SAP."""
@@ -537,7 +549,7 @@ class SAPIntegrationAdapter:
     async def disconnect(self) -> bool:
         """Disconnect from SAP system."""
         try:
-            if self.session:
+            if self.session and not self.session.closed:
                 await self.session.close()
             
             self.auth_token = None
@@ -551,6 +563,16 @@ class SAPIntegrationAdapter:
         except Exception as e:
             self.logger.error(f"Error disconnecting from SAP: {e}")
             return False
+    
+    async def __aenter__(self):
+        """Async context manager entry."""
+        await self.connect()
+        return self
+    
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """Async context manager exit with proper cleanup."""
+        await self.disconnect()
+        return False
 
 class OracleERPAdapter:
     """Adapter for Oracle ERP Cloud integration."""
