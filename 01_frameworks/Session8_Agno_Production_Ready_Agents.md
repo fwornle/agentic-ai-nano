@@ -3280,4 +3280,176 @@ Session 8 will explore advanced multi-agent patterns including ReAct (Reasoning 
 
 ---
 
+## **Multiple Choice Test - Session 8**
+
+### Section A: Agno Fundamentals (Questions 1-5)
+
+1. **What is Agno's primary design philosophy?**
+   a) Rapid prototyping for research
+   b) Production-first with built-in observability
+   c) Simple scripting for automation
+   d) Educational framework for learning
+
+2. **Which observability feature is built into Agno by default?**
+   a) Only basic console logging
+   b) OpenTelemetry with distributed tracing
+   c) File-based logging only
+   d) No built-in observability
+
+3. **How does Agno handle agent failures in production?**
+   a) Crashes immediately to prevent data corruption
+   b) Circuit breakers with exponential backoff
+   c) Ignores failures and continues
+   d) Manual intervention required
+
+4. **What format does Agno use for configuration management?**
+   a) XML configuration files
+   b) YAML with environment variable interpolation
+   c) Hardcoded configuration only
+   d) JSON without validation
+
+5. **Which deployment model does Agno NOT support?**
+   a) Kubernetes with auto-scaling
+   b) Serverless (Lambda/Cloud Functions)
+   c) Traditional VM deployment
+   d) Client-side browser deployment
+
+### Section B: Production Features (Questions 6-10)
+
+6. **What is the purpose of Agno's WorkflowOrchestrator?**
+   a) Simple task scheduling only
+   b) Complex DAG workflows with compensation
+   c) Basic sequential execution
+   d) Manual workflow management
+
+7. **How does Agno implement distributed tracing?**
+   a) Custom logging solution
+   b) OpenTelemetry with W3C trace context
+   c) No distributed tracing support
+   d) Third-party only integration
+
+8. **What retry strategy does Agno use for transient failures?**
+   a) Fixed delay retry
+   b) Exponential backoff with jitter
+   c) No retry mechanism
+   d) Immediate retry without delay
+
+9. **Which caching strategy is recommended for Agno agents?**
+   a) No caching for data freshness
+   b) Redis with TTL and invalidation
+   c) In-memory only caching
+   d) File-based caching
+
+10. **How does Agno handle concurrent request limiting?**
+    a) No concurrency control
+    b) Semaphores with configurable pools
+    c) Single-threaded execution only
+    d) Unlimited concurrent requests
+
+### Section C: Monitoring and Observability (Questions 11-15)
+
+11. **Which metrics are automatically collected by Agno?**
+    a) No automatic metrics
+    b) Request rate, latency, error rate, saturation
+    c) Only error counts
+    d) Manual metric collection required
+
+12. **What is the purpose of correlation IDs in Agno?**
+    a) Database indexing
+    b) Distributed request tracing
+    c) User authentication
+    d) Cache key generation
+
+13. **How does Agno implement health checks?**
+    a) No health check support
+    b) Liveness and readiness probes
+    c) Manual health verification
+    d) External monitoring only
+
+14. **Which alerting integration does Agno support?**
+    a) Email only
+    b) PagerDuty, Slack, custom webhooks
+    c) No alerting support
+    d) Console output only
+
+15. **What is Agno's approach to performance profiling?**
+    a) No profiling support
+    b) Continuous profiling with pprof
+    c) Manual profiling only
+    d) Third-party tools required
+
+### Section D: Security and Compliance (Questions 16-20)
+
+16. **How does Agno handle authentication?**
+    a) No authentication support
+    b) JWT, OAuth2, API keys with rotation
+    c) Basic auth only
+    d) Username/password only
+
+17. **What encryption does Agno use for data at rest?**
+    a) No encryption
+    b) AES-256 with key management
+    c) Base64 encoding only
+    d) ROT13 cipher
+
+18. **How does Agno support audit logging?**
+    a) No audit logging
+    b) Immutable audit trail with compliance formats
+    c) Console logging only
+    d) User-managed logging
+
+19. **Which compliance standards does Agno support?**
+    a) No compliance support
+    b) SOC2, GDPR, HIPAA templates
+    c) Custom compliance only
+    d) Regional compliance only
+
+20. **How does Agno handle sensitive data in logs?**
+    a) Logs everything including secrets
+    b) Automatic PII redaction and masking
+    c) No logging of any data
+    d) Manual redaction required
+
+### Section E: Cost Optimization (Questions 21-25)
+
+21. **How does Agno track LLM token usage?**
+    a) No usage tracking
+    b) Per-request token counting with attribution
+    c) Monthly estimates only
+    d) External tracking required
+
+22. **What is Agno's approach to cost allocation?**
+    a) No cost tracking
+    b) Tag-based with department/project attribution
+    c) Total cost only
+    d) Manual cost calculation
+
+23. **Which cost optimization feature does Agno provide?**
+    a) No optimization features
+    b) Automatic model selection based on task complexity
+    c) Always uses most expensive model
+    d) Random model selection
+
+24. **How does Agno implement usage quotas?**
+    a) No quota support
+    b) Configurable limits with soft/hard thresholds
+    c) Unlimited usage only
+    d) Fixed quotas only
+
+25. **What caching strategy reduces LLM costs in Agno?**
+    a) No caching for LLM responses
+    b) Semantic similarity caching with embeddings
+    c) Exact match caching only
+    d) Time-based caching only
+
+---
+
+## **Ready to Test Your Knowledge?**
+
+You've completed Session 8 on Agno Production-Ready Agents. Test your understanding with the multiple-choice questions above.
+
+**[View Test Solutions](Session8_Test_Solutions.md)**
+
+---
+
 This comprehensive session covered the complete spectrum of production-ready Agno implementations, from basic agent configuration through enterprise deployment and monitoring. The framework's production-first philosophy, combined with sophisticated monitoring, security, and cost management capabilities, makes it an excellent choice for enterprise-scale agent systems that require reliability, performance, and compliance.

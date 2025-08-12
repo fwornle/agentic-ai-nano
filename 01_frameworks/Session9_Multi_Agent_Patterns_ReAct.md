@@ -1895,6 +1895,178 @@ Session 9 will focus on **Enterprise Integration and Production Deployment**, co
 
 ---
 
+## **Multiple Choice Test - Session 9**
+
+### Section A: ReAct Pattern Fundamentals (Questions 1-5)
+
+1. **What does ReAct stand for in agent systems?**
+   a) Reactive Actions
+   b) Reasoning and Acting
+   c) Real-time Activation
+   d) Response and Acknowledgment
+
+2. **What is the key innovation of the ReAct pattern?**
+   a) Faster execution speed
+   b) Interleaving reasoning and action steps
+   c) Reduced memory usage
+   d) Simplified implementation
+
+3. **Which component tracks ReAct execution history?**
+   a) Action Logger
+   b) Memory Buffer
+   c) Thought Chain
+   d) Execution Trace
+
+4. **How does ReAct handle complex multi-step problems?**
+   a) Execute all steps simultaneously
+   b) Decompose and reason about each step
+   c) Skip intermediate steps
+   d) Use predetermined solutions
+
+5. **What is the purpose of "observations" in ReAct?**
+   a) Monitor system performance
+   b) Feedback from action execution
+   c) User interface updates
+   d) Debug logging
+
+### Section B: Coordination Patterns (Questions 6-10)
+
+6. **Which coordination pattern uses voting mechanisms?**
+   a) Hierarchical coordination
+   b) Consensus-based coordination
+   c) Market-based coordination
+   d) Stigmergic coordination
+
+7. **What is the primary benefit of hierarchical planning?**
+   a) Reduced communication overhead
+   b) Task decomposition and abstraction
+   c) Faster execution
+   d) Lower memory usage
+
+8. **How do auction mechanisms work in multi-agent systems?**
+   a) Random task assignment
+   b) Bid-based resource allocation
+   c) First-come-first-served
+   d) Equal distribution
+
+9. **What is Byzantine fault tolerance designed to handle?**
+   a) Network failures
+   b) Malicious or faulty agents
+   c) Performance issues
+   d) Memory limitations
+
+10. **Which pattern is best for emergent behavior?**
+    a) Central control
+    b) Stigmergic coordination
+    c) Direct messaging
+    d) Synchronous execution
+
+### Section C: Planning and Reasoning (Questions 11-15)
+
+11. **What is hierarchical task decomposition?**
+    a) Random task splitting
+    b) Breaking tasks into subtask hierarchies
+    c) Sequential execution
+    d) Parallel processing
+
+12. **How does contingency planning improve robustness?**
+    a) Faster execution
+    b) Alternative paths for failures
+    c) Reduced complexity
+    d) Better logging
+
+13. **What is meta-reasoning in agent systems?**
+    a) Basic reasoning
+    b) Reasoning about reasoning quality
+    c) Action selection
+    d) Memory management
+
+14. **Which planning algorithm uses state-space search?**
+    a) Random walk
+    b) STRIPS planning
+    c) Greedy selection
+    d) Round-robin
+
+15. **What is the role of heuristics in planning?**
+    a) Guarantee optimal solutions
+    b) Guide search toward promising paths
+    c) Increase search space
+    d) Slow down execution
+
+### Section D: Consensus and Negotiation (Questions 16-20)
+
+16. **What is required for Byzantine consensus?**
+    a) All agents must be honest
+    b) More than 2/3 honest agents
+    c) Single trusted coordinator
+    d) Synchronized clocks
+
+17. **Which voting method prevents strategic manipulation?**
+    a) Simple majority
+    b) Borda count with verification
+    c) Random selection
+    d) First vote wins
+
+18. **What is a Nash equilibrium in multi-agent systems?**
+    a) Perfect cooperation
+    b) No agent benefits from unilateral change
+    c) Maximum total utility
+    d) Equal resource distribution
+
+19. **How do negotiation protocols handle deadlock?**
+    a) Random restart
+    b) Timeout and escalation mechanisms
+    c) Ignore the problem
+    d) Manual intervention
+
+20. **What is Pareto optimality?**
+    a) Fastest solution
+    b) No improvement without harming others
+    c) Equal outcomes for all
+    d) Minimum resource usage
+
+### Section E: Production Implementation (Questions 21-25)
+
+21. **Which pattern ensures scalability in multi-agent systems?**
+    a) Centralized control
+    b) Distributed coordination with local decisions
+    c) Global state synchronization
+    d) Sequential processing
+
+22. **How should agent communication be implemented for reliability?**
+    a) Direct TCP connections
+    b) Message queues with acknowledgments
+    c) Shared memory
+    d) File-based communication
+
+23. **What monitoring is critical for multi-agent systems?**
+    a) Only error logs
+    b) Agent health, consensus metrics, coordination efficiency
+    c) CPU usage only
+    d) Network bandwidth only
+
+24. **How do you handle agent failures in production?**
+    a) System restart
+    b) Redundancy and automatic failover
+    c) Manual recovery
+    d) Ignore failed agents
+
+25. **What is essential for debugging distributed agent systems?**
+    a) Console logging
+    b) Distributed tracing with correlation IDs
+    c) Local debugging only
+    d) Production testing
+
+---
+
+## **Ready to Test Your Knowledge?**
+
+You've completed Session 9 on Multi-Agent Patterns and ReAct implementations. Test your understanding with the multiple-choice questions above.
+
+**[View Test Solutions](Session9_Test_Solutions.md)**
+
+---
+
 ## **Additional Resources**
 
 ### **Recommended Reading**
