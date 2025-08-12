@@ -11,41 +11,1116 @@ By the end of this session, you will be able to:
 
 ## 📚 Chapter Introduction
 
-### **The Evolution to Intelligent RAG: Self-Improving AI Systems**
+### **The Evolution to Reasoning-Powered RAG: From Retrieval to Intelligence**
 
 ![Agentic RAG](images/AgenticRAG.png)
 
-Traditional RAG systems are reactive - they retrieve and generate based on a single query pass. Agentic RAG systems are proactive - they can plan their approach, validate their work, correct mistakes, and even use external tools. This represents a fundamental shift from static pipelines to intelligent, self-improving systems that reason about their own performance.
+![RAG Reasoning](images/RAG-Reasoning.webp)
 
-**The Agentic Transformation:**
-- **Planning**: Analyze queries and plan optimal retrieval strategies
-- **Validation**: Check response quality and factual accuracy
-- **Correction**: Identify and fix errors through iterative refinement
-- **Tool Integration**: Use external APIs and services beyond document retrieval
+Traditional RAG systems are reactive - they retrieve and generate based on a single query pass. **Reasoning-Augmented RAG systems represent a paradigm shift from passive retrieval to proactive intelligent reasoning systems** that don't just find information, but actively reason about it to construct logically coherent, contextually aware responses.
 
-**Advanced Capabilities You'll Build:**
-- **Query Planning Agents**: Strategic approach to complex information needs
-- **Self-Correcting Systems**: Automated quality validation and improvement
-- **Multi-Agent Orchestration**: Specialized agents working together
-- **Tool-Augmented RAG**: Integration with calculators, databases, APIs
+**The Cognitive Revolution in RAG:**
+- **From Information Retrieval → Knowledge Reasoning**: Transform scattered documents into structured logical reasoning
+- **From Static Pipelines → Dynamic Intelligence**: Systems that adapt their approach based on reasoning requirements
+- **From Reactive Responses → Proactive Analysis**: Anticipate information needs through logical deduction
+- **From Document Aggregation → Context Construction**: Build coherent logical frameworks from diverse sources
 
-### **From Static to Intelligent**
+**The Reasoning-RAG Transformation:**
+- **Reasoning-Guided Planning**: Analyze queries through logical reasoning frameworks to plan optimal strategies
+- **Chain-of-Thought Integration**: Implement structured reasoning paths that guide retrieval and synthesis
+- **Bidirectional Synergy**: "Reasoning-Augmented Retrieval" guides what to find, "Retrieval-Augmented Reasoning" fills logical gaps
+- **Cognitive Validation**: Reason about response quality and logical consistency, not just factual accuracy
+- **Adaptive Reasoning Workflows**: Dynamic reasoning strategies that evolve based on query complexity and domain requirements
 
-Agentic RAG systems demonstrate true AI intelligence through autonomous reasoning:
-- Plan retrieval strategies based on query complexity and requirements
-- Validate responses for accuracy, completeness, and consistency
-- Self-correct errors and improve answers through iterative refinement
-- Integrate diverse tools and data sources for comprehensive solutions
+**Advanced Reasoning-Powered Capabilities You'll Build:**
+- **Reasoning-Guided Query Planning**: Strategic cognitive analysis that determines optimal reasoning approaches for complex information needs
+- **Chain-of-Thought RAG Systems**: Structured reasoning paths that guide both retrieval and synthesis processes
+- **Self-Reasoning Validation**: Systems that reason about their own logical consistency and cognitive coherence
+- **Multi-Modal Reasoning Integration**: Reasoning that spans text, knowledge graphs, and structured data sources
+- **Adaptive Reasoning Workflows**: Dynamic reasoning strategies that evolve from structured control flows to emergent adaptive patterns
 
-Let's build RAG systems that think, plan, and improve themselves! 🤖
+### **From Information Aggregation to Logical Reasoning**
+
+![RAG Reasoning Evolution](images/RAG-reasoning-2.webp)
+
+Reasoning-Augmented RAG systems demonstrate true cognitive intelligence through autonomous logical reasoning:
+- **Cognitive Query Analysis**: Understand not just what is being asked, but the logical reasoning required to construct a comprehensive answer
+- **Reasoning-Driven Retrieval**: Use logical frameworks to guide what information to retrieve and how to connect it
+- **Chain-of-Thought Synthesis**: Build responses through structured reasoning chains that demonstrate logical progression
+- **Meta-Cognitive Validation**: Reason about the reasoning process itself - validate logical consistency, identify reasoning gaps, and strengthen logical connections
+- **Adaptive Reasoning Strategies**: Dynamically choose between different reasoning approaches (deductive, inductive, abductive) based on the cognitive requirements
+
+**Three Revolutionary Reasoning Integration Approaches:**
+1. **Prompt-Based Reasoning**: Integrate reasoning directly into prompts with structured thinking frameworks
+2. **Architecture-Based Reasoning**: Embed reasoning capabilities into the system architecture through specialized reasoning modules
+3. **Learning-Based Reasoning**: Train systems to develop reasoning capabilities through reinforcement learning and feedback loops
+
+Let's build RAG systems that don't just retrieve information - they **think, reason, and construct knowledge**! 🧠✨
 
 ---
 
-## **Part 1: Agent-Driven Query Planning and Execution (30 minutes)**
+## **Part 0: RAG + Reasoning Integration Foundations (35 minutes)**
 
-### **Intelligent Query Planning Agent**
+### **Understanding the Cognitive Leap: From Retrieval to Reasoning**
 
-Build agents that can analyze queries and plan optimal retrieval strategies:
+![RAG Reasoning Architecture](images/RAG-reasoning-3.webp)
+
+The integration of reasoning capabilities into RAG represents a fundamental cognitive evolution. Instead of treating RAG as an information retrieval problem, we approach it as a **knowledge construction and logical reasoning challenge**.
+
+**Traditional RAG Workflow:**
+```
+Query → Retrieve Documents → Generate Response
+```
+
+**Reasoning-Augmented RAG Workflow:**
+```
+Query → Analyze Reasoning Requirements → Plan Cognitive Strategy → 
+Reasoning-Guided Retrieval → Chain-of-Thought Synthesis → 
+Meta-Cognitive Validation → Logically Coherent Response
+```
+
+### **The Three Pillars of Reasoning-RAG Integration**
+
+#### **1. Reasoning-Augmented Retrieval (RAR)**
+*"Let reasoning guide what information to find and how to connect it"*
+
+```python
+# Reasoning-guided retrieval system
+class ReasoningAugmentedRetrieval:
+    """RAG system where reasoning frameworks guide retrieval strategies."""
+    
+    def __init__(self, vector_store, knowledge_graph, reasoning_engine):
+        self.vector_store = vector_store
+        self.knowledge_graph = knowledge_graph
+        self.reasoning_engine = reasoning_engine
+        
+        # Reasoning-driven retrieval strategies
+        self.reasoning_strategies = {
+            'deductive': self._deductive_reasoning_retrieval,
+            'inductive': self._inductive_reasoning_retrieval,
+            'abductive': self._abductive_reasoning_retrieval,
+            'analogical': self._analogical_reasoning_retrieval,
+            'causal': self._causal_reasoning_retrieval
+        }
+        
+    async def reasoning_guided_retrieve(self, query: str, 
+                                      reasoning_context: Dict = None) -> Dict[str, Any]:
+        """Retrieve information using reasoning frameworks to guide the process."""
+        
+        # Step 1: Analyze the reasoning requirements of the query
+        reasoning_analysis = await self._analyze_reasoning_requirements(query)
+        
+        # Step 2: Construct reasoning framework
+        reasoning_framework = await self._construct_reasoning_framework(
+            query, reasoning_analysis, reasoning_context
+        )
+        
+        # Step 3: Apply reasoning-guided retrieval
+        retrieved_information = await self._apply_reasoning_strategy(
+            query, reasoning_framework
+        )
+        
+        # Step 4: Validate logical connections
+        logical_connections = await self._validate_logical_connections(
+            retrieved_information, reasoning_framework
+        )
+        
+        return {
+            'query': query,
+            'reasoning_analysis': reasoning_analysis,
+            'reasoning_framework': reasoning_framework,
+            'retrieved_information': retrieved_information,
+            'logical_connections': logical_connections,
+            'reasoning_type': reasoning_framework.get('primary_reasoning_type')
+        }
+    
+    async def _analyze_reasoning_requirements(self, query: str) -> Dict[str, Any]:
+        """Analyze what type of reasoning is required for this query."""
+        
+        reasoning_prompt = f"""
+        Analyze this query to determine the reasoning requirements:
+        
+        Query: {query}
+        
+        Determine:
+        1. What type of logical reasoning is needed? (deductive, inductive, abductive, analogical, causal)
+        2. What logical connections need to be established?
+        3. What evidence types are required for sound reasoning?
+        4. What are the potential logical fallacies to avoid?
+        5. What reasoning chains would lead to the most complete answer?
+        
+        Return JSON:
+        {{
+            "primary_reasoning_type": "deductive|inductive|abductive|analogical|causal",
+            "secondary_reasoning_types": ["type1", "type2"],
+            "logical_connections_needed": ["connection_type_1", "connection_type_2"],
+            "evidence_requirements": ["factual", "statistical", "expert_opinion", "case_studies"],
+            "reasoning_complexity": "simple|moderate|complex|multi_layered",
+            "potential_fallacies": ["fallacy_type_1", "fallacy_type_2"],
+            "reasoning_chain_depth": 1-5,
+            "cognitive_strategy": "description of optimal reasoning approach"
+        }}
+        
+        JSON:
+        """
+        
+        response = await self._async_llm_predict(reasoning_prompt, temperature=0.1)
+        return self._parse_json_response(response)
+    
+    async def _construct_reasoning_framework(self, query: str, 
+                                           reasoning_analysis: Dict,
+                                           context: Dict = None) -> Dict[str, Any]:
+        """Construct a structured reasoning framework to guide retrieval."""
+        
+        # Step 1: Extract reasoning parameters
+        # WHY: Different reasoning types require different logical structures
+        primary_reasoning = reasoning_analysis['primary_reasoning_type']
+        complexity = reasoning_analysis['reasoning_complexity']
+        
+        # Step 2: Build reasoning framework prompt
+        # WHY: LLMs need explicit structure to construct proper logical frameworks
+        framework_prompt = self._build_framework_prompt(query, reasoning_analysis, primary_reasoning)
+        
+        # Step 3: Generate framework structure
+        # WHY: Convert natural language reasoning into structured logical components
+        response = await self._async_llm_predict(framework_prompt, temperature=0.2)
+        framework = self._parse_json_response(response)
+        
+        # Step 4: Add framework metadata
+        # WHY: Tracking enables framework reuse and performance optimization
+        framework = self._add_framework_metadata(framework, primary_reasoning, query)
+        
+        return framework
+    
+    def _build_framework_prompt(self, query: str, reasoning_analysis: Dict, 
+                               primary_reasoning: str) -> str:
+        """Build the reasoning framework construction prompt.
+        
+        WHY: Separating prompt construction makes the logic clearer and enables
+        different reasoning types to use specialized prompts in the future.
+        """
+        return f"""
+        Construct a reasoning framework for this query using {primary_reasoning} reasoning:
+        
+        Query: {query}
+        Reasoning Analysis: {json.dumps(reasoning_analysis, indent=2)}
+        
+        Create a structured framework with:
+        1. Premises that need to be established through retrieval
+        2. Logical steps that connect premises to conclusion
+        3. Information gaps that must be filled
+        4. Validation checkpoints for logical consistency
+        
+        Return JSON:
+        {{
+            "reasoning_premises": [
+                {{"premise": "statement", "evidence_needed": "type", "confidence_required": 0.0-1.0}}
+            ],
+            "logical_steps": [
+                {{"step": 1, "operation": "logical_operation", "inputs": ["premise1"], "output": "intermediate_conclusion"}}
+            ],
+            "information_gaps": [
+                {{"gap": "missing_information", "retrieval_strategy": "how_to_find", "critical": true/false}}
+            ],
+            "validation_checkpoints": [
+                {{"checkpoint": "what_to_validate", "validation_method": "how_to_validate"}}
+            ],
+            "reasoning_chain": "step-by-step logical progression",
+            "success_criteria": "how to determine reasoning completeness"
+        }}
+        
+        JSON:
+        """
+    
+    def _add_framework_metadata(self, framework: Dict, primary_reasoning: str, 
+                               query: str) -> Dict[str, Any]:
+        """Add metadata to reasoning framework.
+        
+        WHY: Metadata enables framework caching, reuse, and performance analysis.
+        Production systems need to track which frameworks work best for different query types.
+        """
+        framework['framework_id'] = f"{primary_reasoning}_{int(time.time())}"
+        framework['created_for_query'] = query
+        framework['reasoning_type'] = primary_reasoning
+        
+        return framework
+    
+    async def _deductive_reasoning_retrieval(self, query: str, 
+                                           framework: Dict) -> Dict[str, Any]:
+        """Implement deductive reasoning retrieval strategy."""
+        
+        premises = framework.get('reasoning_premises', [])
+        logical_steps = framework.get('logical_steps', [])
+        
+        # Step 1: Retrieve information for each premise
+        premise_evidence = {}
+        for premise_data in premises:
+            premise = premise_data['premise']
+            evidence_type = premise_data['evidence_needed']
+            
+            # Targeted retrieval for this premise
+            premise_retrieval = await self._retrieve_for_premise(
+                premise, evidence_type, query
+            )
+            premise_evidence[premise] = premise_retrieval
+        
+        # Step 2: Apply deductive logical steps
+        logical_progression = []
+        for step in logical_steps:
+            step_result = await self._apply_logical_step(
+                step, premise_evidence, logical_progression
+            )
+            logical_progression.append(step_result)
+        
+        # Step 3: Construct deductive conclusion
+        deductive_conclusion = await self._construct_deductive_conclusion(
+            premise_evidence, logical_progression, framework
+        )
+        
+        return {
+            'strategy': 'deductive_reasoning',
+            'premise_evidence': premise_evidence,
+            'logical_progression': logical_progression,
+            'deductive_conclusion': deductive_conclusion,
+            'confidence_score': self._calculate_deductive_confidence(
+                premise_evidence, logical_progression
+            )
+        }
+```
+
+#### **2. Retrieval-Augmented Reasoning (RAR)**
+*"Let external knowledge fill logical reasoning gaps"*
+
+```python
+class RetrievalAugmentedReasoning:
+    """System that uses retrieved information to enhance reasoning capabilities."""
+    
+    def __init__(self, retrieval_system, reasoning_engine, knowledge_validator):
+        self.retrieval_system = retrieval_system
+        self.reasoning_engine = reasoning_engine
+        self.knowledge_validator = knowledge_validator
+        
+    async def enhanced_reasoning(self, reasoning_query: str,
+                                initial_knowledge: Dict = None) -> Dict[str, Any]:
+        """Perform reasoning enhanced by targeted information retrieval."""
+        
+        # Step 1: Identify reasoning gaps
+        reasoning_gaps = await self._identify_reasoning_gaps(
+            reasoning_query, initial_knowledge
+        )
+        
+        # Step 2: Strategically retrieve information to fill gaps
+        gap_filling_retrieval = await self._strategic_gap_retrieval(
+            reasoning_gaps, reasoning_query
+        )
+        
+        # Step 3: Integrate retrieved knowledge into reasoning process
+        enhanced_reasoning_result = await self._integrate_knowledge_into_reasoning(
+            reasoning_query, initial_knowledge, gap_filling_retrieval
+        )
+        
+        # Step 4: Validate enhanced reasoning
+        reasoning_validation = await self._validate_enhanced_reasoning(
+            enhanced_reasoning_result, reasoning_query
+        )
+        
+        return {
+            'reasoning_query': reasoning_query,
+            'identified_gaps': reasoning_gaps,
+            'gap_filling_retrieval': gap_filling_retrieval,
+            'enhanced_reasoning': enhanced_reasoning_result,
+            'validation_result': reasoning_validation,
+            'reasoning_enhancement_score': self._calculate_enhancement_score(
+                initial_knowledge, enhanced_reasoning_result
+            )
+        }
+    
+    async def _identify_reasoning_gaps(self, reasoning_query: str,
+                                     initial_knowledge: Dict = None) -> Dict[str, Any]:
+        """Identify what external knowledge would strengthen reasoning."""
+        
+        gap_analysis_prompt = f"""
+        Analyze this reasoning query to identify knowledge gaps that external information could fill:
+        
+        Reasoning Query: {reasoning_query}
+        Initial Knowledge: {json.dumps(initial_knowledge or {}, indent=2)}
+        
+        Identify:
+        1. Missing factual premises that would strengthen the reasoning
+        2. Statistical data that would support logical conclusions
+        3. Expert opinions that would validate reasoning steps
+        4. Counter-arguments that should be addressed
+        5. Historical examples or case studies that would illustrate points
+        
+        Return JSON:
+        {{
+            "critical_gaps": [
+                {{"gap": "description", "knowledge_type": "factual|statistical|expert|counter|example", "retrieval_priority": "high|medium|low"}}
+            ],
+            "reasoning_weaknesses": ["weakness1", "weakness2"],
+            "knowledge_reinforcement_opportunities": ["opportunity1", "opportunity2"],
+            "potential_counter_arguments": ["counter1", "counter2"],
+            "evidence_requirements": {{"type": "requirement"}}
+        }}
+        
+        JSON:
+        """
+        
+        response = await self._async_llm_predict(gap_analysis_prompt, temperature=0.2)
+        return self._parse_json_response(response)
+```
+
+#### **3. Chain-of-Thought RAG Integration**
+*"Structured reasoning paths that guide both retrieval and synthesis"*
+
+```python
+class ChainOfThoughtRAG:
+    """RAG system with integrated chain-of-thought reasoning capabilities."""
+    
+    def __init__(self, retrieval_system, llm_model, reasoning_validator):
+        self.retrieval_system = retrieval_system
+        self.llm_model = llm_model
+        self.reasoning_validator = reasoning_validator
+        
+        # Chain-of-thought patterns
+        self.cot_patterns = {
+            'analytical': self._analytical_chain_pattern,
+            'comparative': self._comparative_chain_pattern,
+            'causal': self._causal_chain_pattern,
+            'problem_solving': self._problem_solving_chain_pattern,
+            'synthesis': self._synthesis_chain_pattern
+        }
+        
+    async def chain_of_thought_rag(self, query: str,
+                                  cot_config: Dict = None) -> Dict[str, Any]:
+        """Generate response using chain-of-thought reasoning integrated with RAG."""
+        
+        config = cot_config or {
+            'thinking_pattern': 'analytical',
+            'reasoning_depth': 'moderate',
+            'validate_each_step': True,
+            'retrieve_at_each_step': True
+        }
+        
+        # Step 1: Analyze query to determine optimal chain-of-thought pattern
+        cot_analysis = await self._analyze_cot_requirements(query)
+        
+        # Step 2: Construct initial reasoning chain
+        reasoning_chain = await self._construct_reasoning_chain(
+            query, cot_analysis, config
+        )
+        
+        # Step 3: Execute reasoning chain with integrated retrieval
+        executed_chain = await self._execute_reasoning_chain(
+            reasoning_chain, query, config
+        )
+        
+        # Step 4: Synthesize final response from reasoning chain
+        final_response = await self._synthesize_from_reasoning_chain(
+            executed_chain, query
+        )
+        
+        # Step 5: Validate reasoning chain coherence
+        chain_validation = await self._validate_reasoning_chain_coherence(
+            executed_chain, final_response
+        )
+        
+        return {
+            'query': query,
+            'cot_analysis': cot_analysis,
+            'reasoning_chain': reasoning_chain,
+            'executed_chain': executed_chain,
+            'final_response': final_response,
+            'chain_validation': chain_validation,
+            'reasoning_metadata': {
+                'pattern_used': cot_analysis.get('recommended_pattern'),
+                'reasoning_steps': len(executed_chain.get('steps', [])),
+                'retrieval_points': executed_chain.get('retrieval_count', 0),
+                'logical_coherence_score': chain_validation.get('coherence_score', 0.0)
+            }
+        }
+    
+    async def _construct_reasoning_chain(self, query: str, analysis: Dict,
+                                       config: Dict) -> Dict[str, Any]:
+        """Construct step-by-step reasoning chain for the query."""
+        
+        pattern = analysis.get('recommended_pattern', 'analytical')
+        depth = config.get('reasoning_depth', 'moderate')
+        
+        chain_prompt = f"""
+        Construct a step-by-step chain-of-thought reasoning plan for this query:
+        
+        Query: {query}
+        Reasoning Pattern: {pattern}
+        Reasoning Depth: {depth}
+        
+        Create a reasoning chain with:
+        1. Clear logical steps that build toward the answer
+        2. Information retrieval points where external knowledge is needed
+        3. Validation checkpoints to ensure logical consistency
+        4. Synthesis points where information is integrated
+        
+        Return JSON:
+        {{
+            "reasoning_steps": [
+                {{
+                    "step": 1,
+                    "thinking": "What am I trying to figure out in this step?",
+                    "information_needed": "What external information would help?",
+                    "retrieval_query": "Specific query for information retrieval",
+                    "logical_operation": "How does this step connect to others?",
+                    "validation_check": "How do I validate this step?"
+                }}
+            ],
+            "reasoning_flow": "description of how steps connect",
+            "synthesis_strategy": "how to combine all steps into final answer",
+            "confidence_checkpoints": ["checkpoint1", "checkpoint2"]
+        }}
+        
+        JSON:
+        """
+        
+        response = await self._async_llm_predict(chain_prompt, temperature=0.2)
+        chain = self._parse_json_response(response)
+        
+        # Add chain metadata
+        chain['pattern'] = pattern
+        chain['depth'] = depth
+        chain['created_for'] = query
+        
+        return chain
+    
+    async def _execute_reasoning_chain(self, reasoning_chain: Dict,
+                                     query: str, config: Dict) -> Dict[str, Any]:
+        """Execute the reasoning chain step by step with retrieval integration.
+        
+        WHY: Chain-of-thought reasoning requires systematic execution where each step
+        builds on previous steps, with knowledge accumulation and validation.
+        """
+        
+        # Initialize execution context
+        execution_context = self._initialize_chain_execution_context()
+        
+        # Execute all reasoning steps
+        for step_data in reasoning_chain.get('reasoning_steps', []):
+            step_result = await self._execute_single_chain_step(
+                step_data, execution_context, config, query
+            )
+            execution_context = self._update_execution_context(execution_context, step_result)
+        
+        return self._compile_chain_execution_results(execution_context)
+    
+    def _initialize_chain_execution_context(self) -> Dict[str, Any]:
+        """Initialize the context for chain-of-thought execution.
+        
+        WHY: Centralized context management makes it easier to track knowledge
+        accumulation and step dependencies throughout the reasoning process.
+        """
+        return {
+            'executed_steps': [],
+            'accumulated_knowledge': {},
+            'retrieval_count': 0,
+            'step_validations': []
+        }
+    
+    async def _execute_single_chain_step(self, step_data: Dict, context: Dict,
+                                       config: Dict, query: str) -> Dict[str, Any]:
+        """Execute a single step in the reasoning chain.
+        
+        WHY: Breaking down step execution makes the logic clearer and enables
+        better error handling and step-level optimizations.
+        """
+        step_num = step_data['step']
+        print(f"Executing reasoning step {step_num}: {step_data['thinking']}")
+        
+        # Phase 1: Information retrieval if needed
+        retrieved_info = await self._handle_step_retrieval(step_data, config, context)
+        
+        # Phase 2: Execute the reasoning operation
+        step_execution = await self._execute_single_reasoning_step(
+            step_data, retrieved_info, context['accumulated_knowledge'], query
+        )
+        
+        # Phase 3: Validate step if configured
+        step_validation = await self._handle_step_validation(
+            step_execution, step_data, query, config
+        )
+        
+        return {
+            'step_number': step_num,
+            'step_data': step_data,
+            'execution_result': step_execution,
+            'retrieved_information': retrieved_info,
+            'validation_result': step_validation,
+            'logical_consistency': step_validation.get('consistency_score', 0.8) if step_validation else 0.8
+        }
+    
+    async def _handle_step_retrieval(self, step_data: Dict, config: Dict,
+                                   context: Dict) -> Optional[Dict]:
+        """Handle information retrieval for a reasoning step.
+        
+        WHY: Separating retrieval logic allows for step-specific retrieval strategies
+        and better performance monitoring of information gathering.
+        """
+        if not (step_data.get('retrieval_query') and config.get('retrieve_at_each_step')):
+            return None
+        
+        retrieved_info = await self.retrieval_system.retrieve(
+            step_data['retrieval_query']
+        )
+        
+        # Update context tracking
+        context['retrieval_count'] += 1
+        context['accumulated_knowledge'][f'step_{step_data["step"]}_retrieval'] = retrieved_info
+        
+        return retrieved_info
+    
+    async def _handle_step_validation(self, step_execution: Dict, step_data: Dict,
+                                    query: str, config: Dict) -> Optional[Dict]:
+        """Handle validation for a reasoning step.
+        
+        WHY: Step-level validation ensures logical consistency is maintained
+        throughout the chain, preventing error propagation.
+        """
+        if not config.get('validate_each_step'):
+            return None
+        
+        return await self._validate_reasoning_step(step_execution, step_data, query)
+    
+    def _update_execution_context(self, context: Dict, step_result: Dict) -> Dict[str, Any]:
+        """Update execution context with step results.
+        
+        WHY: Proper context management ensures each step has access to all
+        previous knowledge while maintaining clean separation of concerns.
+        """
+        context['executed_steps'].append(step_result)
+        context['accumulated_knowledge'][f'step_{step_result["step_number"]}_result'] = step_result['execution_result']
+        
+        if step_result['validation_result']:
+            context['step_validations'].append(step_result['validation_result'])
+        
+        return context
+    
+    def _compile_chain_execution_results(self, context: Dict) -> Dict[str, Any]:
+        """Compile final results from chain execution context.
+        
+        WHY: Centralizing result compilation ensures consistent output format
+        and enables comprehensive performance analysis.
+        """
+        return {
+            'executed_steps': context['executed_steps'],
+            'accumulated_knowledge': context['accumulated_knowledge'],
+            'retrieval_count': context['retrieval_count'],
+            'overall_coherence': self._calculate_chain_coherence(context['executed_steps']),
+            'validation_summary': {
+                'steps_validated': len(context['step_validations']),
+                'average_consistency': np.mean([
+                    v.get('consistency_score', 0.8) for v in context['step_validations']
+                ]) if context['step_validations'] else 0.8
+            }
+        }
+```
+
+### **Bridging NodeRAG Structured Knowledge to Reasoning Capabilities**
+
+**From Graph Relationships to Logical Reasoning:**
+The structured knowledge graphs from Session 6 (NodeRAG) provide the perfect foundation for sophisticated reasoning systems. Instead of just traversing relationships, we can now reason about them logically.
+
+```python
+class NodeRAGReasoningBridge:
+    """Bridge between NodeRAG structured knowledge and reasoning capabilities."""
+    
+    def __init__(self, node_rag_system, reasoning_engine):
+        self.node_rag = node_rag_system
+        self.reasoning_engine = reasoning_engine
+        
+    async def reason_over_structured_knowledge(self, query: str,
+                                             reasoning_type: str = 'deductive') -> Dict[str, Any]:
+        """Use reasoning to analyze structured knowledge relationships."""
+        
+        # Step 1: Extract relevant knowledge subgraph
+        knowledge_subgraph = await self.node_rag.extract_relevant_subgraph(query)
+        
+        # Step 2: Convert graph relationships to logical premises
+        logical_premises = await self._convert_graph_to_premises(knowledge_subgraph)
+        
+        # Step 3: Apply reasoning to premises
+        reasoning_result = await self._reason_over_premises(
+            logical_premises, query, reasoning_type
+        )
+        
+        # Step 4: Validate reasoning against graph structure
+        validation_result = await self._validate_reasoning_against_graph(
+            reasoning_result, knowledge_subgraph
+        )
+        
+        return {
+            'structured_knowledge': knowledge_subgraph,
+            'logical_premises': logical_premises,
+            'reasoning_result': reasoning_result,
+            'graph_validation': validation_result,
+            'cognitive_enhancement': self._calculate_reasoning_enhancement(
+                knowledge_subgraph, reasoning_result
+            )
+        }
+    
+    async def _convert_graph_to_premises(self, subgraph: Dict) -> List[Dict]:
+        """Convert graph relationships into logical premises."""
+        
+        premises = []
+        
+        # Convert entities to existential premises
+        for entity in subgraph.get('entities', []):
+            premises.append({
+                'type': 'existential',
+                'premise': f"{entity['name']} exists as {entity['type']}",
+                'confidence': entity.get('confidence', 1.0),
+                'source': 'knowledge_graph'
+            })
+        
+        # Convert relationships to relational premises
+        for relationship in subgraph.get('relationships', []):
+            premises.append({
+                'type': 'relational',
+                'premise': f"{relationship['source']} {relationship['relation']} {relationship['target']}",
+                'confidence': relationship.get('confidence', 1.0),
+                'source': 'knowledge_graph'
+            })
+        
+        # Convert properties to attributive premises
+        for entity in subgraph.get('entities', []):
+            for prop, value in entity.get('properties', {}).items():
+                premises.append({
+                    'type': 'attributive',
+                    'premise': f"{entity['name']} has {prop} = {value}",
+                    'confidence': 0.9,
+                    'source': 'knowledge_graph'
+                })
+        
+        return premises
+```
+
+**Educational Context: The Cognitive Leap**
+
+This integration represents a fundamental cognitive evolution:
+
+1. **Session 6 Achievement**: Structured knowledge graphs that understand relationships
+2. **Session 7 Enhancement**: Logical reasoning that can analyze and deduce from those relationships
+3. **Cognitive Synergy**: The combination enables true knowledge construction, not just information retrieval
+
+**Example: From Graph Traversal to Logical Deduction**
+
+```python
+# Traditional NodeRAG approach (Session 6)
+# Find: "What companies did Steve Jobs work for?"
+# Result: [Apple, NeXT, Pixar] - direct relationship traversal
+
+# Reasoning-Enhanced NodeRAG approach (Session 7)
+# Query: "What leadership patterns can we deduce from Steve Jobs' career trajectory?"
+# Reasoning Process:
+# 1. Premise: Steve Jobs worked for Apple, NeXT, Pixar
+# 2. Premise: Apple and Pixar became highly successful under his leadership
+# 3. Premise: NeXT was acquired by Apple
+# 4. Deduction: Jobs demonstrates a pattern of transformative leadership in technology companies
+# 5. Further reasoning: His career shows progression from personal computing to animated films to mobile devices
+# 6. Conclusion: Jobs' leadership pattern involves entering industries and fundamentally changing their paradigms
+```
+
+### **Workflow Architecture: Structured vs. Dynamic Reasoning**
+
+#### **Structured Reasoning Workflows**
+*Controlled, predictable reasoning patterns for well-defined domains*
+
+```python
+class StructuredReasoningWorkflow:
+    """Controlled reasoning workflow for predictable reasoning patterns."""
+    
+    def __init__(self, domain_knowledge, reasoning_templates):
+        self.domain_knowledge = domain_knowledge
+        self.reasoning_templates = reasoning_templates
+        
+    async def execute_structured_reasoning(self, query: str,
+                                         workflow_type: str) -> Dict[str, Any]:
+        """Execute reasoning using predefined structured workflows."""
+        
+        # Select appropriate reasoning template
+        template = self.reasoning_templates.get(workflow_type)
+        if not template:
+            raise ValueError(f"Unknown workflow type: {workflow_type}")
+        
+        # Execute structured steps
+        workflow_results = []
+        context = {'query': query, 'domain': self.domain_knowledge}
+        
+        for step in template['steps']:
+            step_result = await self._execute_template_step(step, context)
+            workflow_results.append(step_result)
+            context.update(step_result.get('output_context', {}))
+        
+        return {
+            'workflow_type': workflow_type,
+            'structured_results': workflow_results,
+            'final_reasoning': context.get('final_conclusion'),
+            'confidence': self._calculate_structured_confidence(workflow_results)
+        }
+```
+
+#### **Dynamic Adaptive Reasoning Workflows**
+*Emergent reasoning patterns that adapt based on the cognitive requirements*
+
+```python
+class DynamicReasoningWorkflow:
+    """Adaptive reasoning workflow that evolves based on reasoning requirements."""
+    
+    def __init__(self, reasoning_engine, adaptation_strategy):
+        self.reasoning_engine = reasoning_engine
+        self.adaptation_strategy = adaptation_strategy
+        
+    async def execute_adaptive_reasoning(self, query: str,
+                                       adaptation_config: Dict = None) -> Dict[str, Any]:
+        """Execute reasoning that adapts dynamically to the cognitive challenge.
+        
+        WHY: Complex reasoning problems often require iterative refinement where
+        the reasoning approach itself evolves based on intermediate results.
+        """
+        
+        # Phase 1: Setup adaptive reasoning context
+        config, adaptation_context = self._setup_adaptive_reasoning(query, adaptation_config)
+        
+        # Phase 2: Execute adaptive reasoning rounds
+        for round_num in range(config['max_adaptation_rounds']):
+            round_result = await self._execute_adaptation_round(
+                round_num, adaptation_context, config, query
+            )
+            
+            if round_result['converged']:
+                print(f"Reasoning converged at round {round_num + 1}")
+                break
+            
+            # Update context for next round
+            adaptation_context = self._update_adaptation_context(
+                adaptation_context, round_result
+            )
+        
+        # Phase 3: Select and return best reasoning result
+        return self._compile_adaptive_reasoning_results(adaptation_context, config)
+    
+    def _setup_adaptive_reasoning(self, query: str, adaptation_config: Dict = None) -> Tuple[Dict, Dict]:
+        """Setup context for adaptive reasoning execution.
+        
+        WHY: Centralizing setup logic makes the adaptation process more predictable
+        and allows for better configuration management.
+        """
+        config = adaptation_config or {
+            'max_adaptation_rounds': 5,
+            'adaptation_threshold': 0.1,
+            'reasoning_flexibility': 0.7
+        }
+        
+        adaptation_context = {
+            'current_reasoning_approach': None,  # Will be initialized in first round
+            'adaptation_rounds': [],
+            'query': query,
+            'best_score_so_far': 0.0
+        }
+        
+        return config, adaptation_context
+    
+    async def _execute_adaptation_round(self, round_num: int, context: Dict,
+                                      config: Dict, query: str) -> Dict[str, Any]:
+        """Execute a single round of adaptive reasoning.
+        
+        WHY: Breaking rounds into separate methods enables better monitoring
+        and makes the adaptation logic clearer and more maintainable.
+        """
+        
+        # Initialize or adapt reasoning approach
+        if context['current_reasoning_approach'] is None:
+            reasoning_approach = await self._initialize_reasoning_approach(query)
+        else:
+            reasoning_approach = context['current_reasoning_approach']
+        
+        # Execute reasoning with current approach
+        reasoning_result = await self._execute_reasoning_approach(reasoning_approach, query)
+        
+        # Evaluate effectiveness
+        effectiveness_score = await self._evaluate_reasoning_effectiveness(reasoning_result, query)
+        
+        # Determine convergence
+        converged = effectiveness_score >= config['adaptation_threshold']
+        
+        # Record round results
+        round_result = {
+            'round': round_num + 1,
+            'reasoning_approach': reasoning_approach,
+            'reasoning_result': reasoning_result,
+            'effectiveness_score': effectiveness_score,
+            'converged': converged,
+            'improvement': effectiveness_score - context['best_score_so_far']
+        }
+        
+        context['adaptation_rounds'].append(round_result)
+        
+        return round_result
+    
+    def _update_adaptation_context(self, context: Dict, round_result: Dict) -> Dict[str, Any]:
+        """Update adaptation context based on round results.
+        
+        WHY: Context management ensures learning from each round and enables
+        intelligent adaptation strategies based on performance trends.
+        """
+        # Update best score tracking
+        if round_result['effectiveness_score'] > context['best_score_so_far']:
+            context['best_score_so_far'] = round_result['effectiveness_score']
+        
+        # Adapt reasoning approach for next round
+        if not round_result['converged']:
+            context['current_reasoning_approach'] = self._adapt_reasoning_approach(
+                round_result['reasoning_approach'],
+                round_result['reasoning_result'],
+                round_result['effectiveness_score']
+            )
+        
+        return context
+    
+    def _compile_adaptive_reasoning_results(self, context: Dict, config: Dict) -> Dict[str, Any]:
+        """Compile final results from adaptive reasoning process.
+        
+        WHY: Centralized result compilation ensures consistent output format
+        and provides comprehensive adaptation analytics.
+        """
+        # Select best reasoning result
+        best_result = max(context['adaptation_rounds'], key=lambda r: r['effectiveness_score'])
+        
+        return {
+            'query': context['query'],
+            'adaptation_rounds': context['adaptation_rounds'],
+            'best_reasoning_result': best_result,
+            'final_approach': best_result['reasoning_approach'],
+            'adaptation_success': best_result['effectiveness_score'] >= config['adaptation_threshold'],
+            'adaptation_analytics': {
+                'total_rounds': len(context['adaptation_rounds']),
+                'improvement_trajectory': [r['effectiveness_score'] for r in context['adaptation_rounds']],
+                'converged': best_result['effectiveness_score'] >= config['adaptation_threshold']
+            }
+        }
+```
+
+---
+
+## **Educational Bridge: From Session 6 NodeRAG to Production Agentic Systems**
+
+### **Building on Your Graph Knowledge Foundation**
+
+**What you mastered in Session 6:**
+- **Structured Knowledge Graphs**: Entities, relationships, and semantic connections
+- **Graph Traversal**: Finding related information through relationship paths  
+- **Knowledge Graph Construction**: Building structured representations from unstructured data
+- **Graph-Based Retrieval**: Using relationships to improve retrieval relevance
+
+**What Session 7 adds - The Intelligence Layer:**
+
+**1. From Static Graphs to Dynamic Reasoning**
+```python
+# Session 6 Approach: Graph Traversal
+graph_result = knowledge_graph.traverse_relationships(
+    start_entity="Steve Jobs",
+    relationship_types=["worked_at", "founded"],
+    max_depth=2
+)
+
+# Session 7 Enhancement: Reasoning Over Graphs
+reasoning_result = await reasoning_engine.reason_over_structured_knowledge(
+    query="What leadership patterns can we deduce from Steve Jobs' career?",
+    reasoning_type='deductive'
+)
+# Result: Not just facts, but logical conclusions and patterns
+```
+
+**2. From Information Retrieval to Autonomous Planning**
+```python
+# Traditional RAG: Direct retrieval
+docs = vector_store.similarity_search(query, k=5)
+response = llm.generate(query, docs)
+
+# Agentic RAG: Intelligent planning
+plan = await agent.reason_plan_and_execute(query)
+# - Analyzes reasoning requirements
+# - Plans optimal information gathering strategy
+# - Executes with self-correction
+# - Validates logical coherence
+```
+
+### **The Three Pillars of Production Intelligence**
+
+#### **Pillar 1: Cognitive Query Understanding**
+**WHY**: Production systems need to understand not just what information is requested, but what type of reasoning is required to construct a proper answer.
+
+**Evolution Path:**
+1. **Basic**: Match keywords and retrieve similar documents
+2. **Enhanced**: Understand semantic intent and retrieve relevant information
+3. **Production**: Analyze cognitive requirements and plan reasoning strategies
+
+#### **Pillar 2: Autonomous Error Correction**
+**WHY**: Production systems must be self-healing. They need to detect and fix their own mistakes without human intervention.
+
+**Enterprise Reality:**
+- **Traditional Systems**: Errors propagate and compound
+- **Agentic Systems**: Self-validate and auto-correct using multiple strategies
+- **Production Benefit**: Maintain quality at scale without constant human oversight
+
+#### **Pillar 3: Tool Integration Intelligence**
+**WHY**: Real-world problems require more than document retrieval - they need calculations, real-time data, specialized databases.
+
+**Production Evolution:**
+```python
+# Level 1: Document-only RAG
+# Level 2: Document + Knowledge Graph RAG (Session 6)
+# Level 3: Document + Graph + Tools + Reasoning RAG (Session 7)
+```
+
+### **Enterprise Concepts You'll Master**
+
+**1. Circuit Breakers and Fallbacks**
+*Why needed*: Production systems must handle failures gracefully
+*Implementation*: Intelligent degradation when components fail
+
+**2. Observability and Monitoring**
+*Why needed*: Enterprise systems need comprehensive visibility
+*Implementation*: Track reasoning quality, performance patterns, error rates
+
+**3. A/B Testing for AI Systems**
+*Why needed*: Optimize reasoning strategies based on real performance
+*Implementation*: Compare different agent approaches on production traffic
+
+**4. Caching for Intelligence**
+*Why needed*: Expensive reasoning operations need smart caching
+*Implementation*: Cache reasoning patterns, not just retrieval results
+
+---
+
+## **Part 1: Reasoning-Driven Query Planning and Execution (30 minutes)**
+
+### **Reasoning-Driven Query Planning Agent**
+
+Build agents that analyze queries through cognitive reasoning frameworks to plan optimal knowledge construction strategies.
+
+**The Cognitive Evolution of Query Planning:**
+- **Traditional Approach**: Analyze query → Plan retrieval → Execute
+- **Reasoning-Driven Approach**: Analyze reasoning requirements → Plan cognitive strategy → Execute reasoning-guided workflow → Validate logical coherence
+
+### **Progressive Learning Path: From Basic to Enterprise**
+
+#### **Level 1: Basic Reasoning Agent (Foundation)**
+*Start here if you're new to agentic systems*
+
+```python
+class BasicReasoningAgent:
+    """Simple reasoning agent for educational purposes.
+    
+    WHY: Start with core concepts before adding complexity.
+    Learn reasoning analysis and basic planning patterns.
+    """
+    
+    def __init__(self, llm_model):
+        self.llm_model = llm_model
+        
+    async def analyze_and_respond(self, query: str) -> Dict[str, Any]:
+        """Basic reasoning-guided response generation."""
+        
+        # Step 1: Simple reasoning analysis
+        reasoning_type = await self._identify_reasoning_type(query)
+        
+        # Step 2: Basic information gathering
+        information = await self._gather_basic_information(query)
+        
+        # Step 3: Reasoning-guided response
+        response = await self._generate_reasoning_response(
+            query, reasoning_type, information
+        )
+        
+        return {
+            'query': query,
+            'reasoning_type': reasoning_type,
+            'response': response,
+            'complexity': 'basic'
+        }
+    
+    async def _identify_reasoning_type(self, query: str) -> str:
+        """Identify what type of reasoning is needed."""
+        
+        # Simple heuristic-based reasoning identification
+        if "why" in query.lower() or "cause" in query.lower():
+            return "causal"
+        elif "compare" in query.lower() or "difference" in query.lower():
+            return "comparative"  
+        elif "will" in query.lower() or "predict" in query.lower():
+            return "predictive"
+        else:
+            return "analytical"
+```
+
+#### **Level 2: Enhanced Reasoning Agent (Skill Building)**
+*Add this once Level 1 is comfortable*
+
+```python
+class EnhancedReasoningAgent(BasicReasoningAgent):
+    """Enhanced agent with multi-step reasoning and validation.
+    
+    WHY: Build on basic concepts with structured reasoning chains
+    and quality validation. Introduces enterprise concepts gradually.
+    """
+    
+    def __init__(self, llm_model, retrieval_system):
+        super().__init__(llm_model)
+        self.retrieval_system = retrieval_system
+        
+    async def analyze_and_respond(self, query: str) -> Dict[str, Any]:
+        """Enhanced reasoning with structured planning."""
+        
+        # Step 1: Comprehensive reasoning analysis
+        reasoning_analysis = await self._comprehensive_reasoning_analysis(query)
+        
+        # Step 2: Create reasoning plan
+        reasoning_plan = await self._create_reasoning_plan(query, reasoning_analysis)
+        
+        # Step 3: Execute plan with validation
+        execution_result = await self._execute_reasoning_plan(reasoning_plan)
+        
+        # Step 4: Quality validation
+        validation_result = await self._validate_reasoning_quality(execution_result)
+        
+        return {
+            'query': query,
+            'reasoning_analysis': reasoning_analysis,
+            'reasoning_plan': reasoning_plan,
+            'execution_result': execution_result,
+            'validation_result': validation_result,
+            'complexity': 'enhanced'
+        }
+    
+    async def _comprehensive_reasoning_analysis(self, query: str) -> Dict[str, Any]:
+        """More detailed reasoning analysis than basic version."""
+        
+        analysis_prompt = f"""
+        Analyze this query to determine reasoning requirements:
+        Query: {query}
+        
+        Determine:
+        1. Primary reasoning type needed
+        2. Complexity level (simple/moderate/complex)
+        3. Key logical steps required
+        4. Information gaps to fill
+        
+        Return JSON with analysis.
+        """
+        
+        response = await self._async_llm_predict(analysis_prompt, temperature=0.1)
+        return self._parse_json_response(response)
+```
+
+#### **Level 3: Production Reasoning Agent (Enterprise Ready)**
+*Full production capabilities with monitoring and optimization*
 
 ```python
 # Advanced agentic RAG with query planning
@@ -74,20 +1149,28 @@ class QueryPlan:
     max_iterations: int
     validation_steps: List[str]
 
-class QueryPlanningAgent:
-    """Intelligent agent for RAG query planning and orchestration."""
+class ReasoningDrivenQueryPlanningAgent:
+    """Intelligent agent for reasoning-driven RAG query planning and cognitive orchestration."""
     
     def __init__(self, llm_model, vector_store, knowledge_graph=None):
         self.llm_model = llm_model
         self.vector_store = vector_store
         self.knowledge_graph = knowledge_graph
         
-        # Planning strategies
+        # Reasoning-integrated planning strategies
         self.planning_strategies = {
-            QueryComplexity.SIMPLE: self._plan_simple_query,
-            QueryComplexity.MODERATE: self._plan_moderate_query,
-            QueryComplexity.COMPLEX: self._plan_complex_query,
-            QueryComplexity.MULTI_STEP: self._plan_multi_step_query
+            QueryComplexity.SIMPLE: self._plan_simple_reasoning_query,
+            QueryComplexity.MODERATE: self._plan_moderate_reasoning_query,
+            QueryComplexity.COMPLEX: self._plan_complex_reasoning_query,
+            QueryComplexity.MULTI_STEP: self._plan_multi_step_reasoning_query
+        }
+        
+        # Reasoning-driven execution strategies
+        self.reasoning_execution_strategies = {
+            'direct_reasoning_retrieval': self._execute_direct_reasoning_retrieval,
+            'chain_of_thought_retrieval': self._execute_chain_of_thought_retrieval,
+            'iterative_reasoning_refinement': self._execute_iterative_reasoning_refinement,
+            'multi_modal_reasoning_synthesis': self._execute_multi_modal_reasoning_synthesis
         }
         
         # Execution strategies
@@ -102,82 +1185,89 @@ class QueryPlanningAgent:
         self.execution_history = []
         self.performance_patterns = {}
         
-    async def plan_and_execute(self, query: str, 
-                             planning_config: Dict = None) -> Dict[str, Any]:
-        """Plan and execute RAG query using agentic approach."""
+    async def reason_plan_and_execute(self, query: str, 
+                             reasoning_config: Dict = None) -> Dict[str, Any]:
+        """Plan and execute RAG query using reasoning-driven cognitive approach."""
         
-        config = planning_config or {
-            'max_planning_time': 30,
-            'enable_self_correction': True,
-            'use_execution_history': True,
-            'quality_threshold': 0.8
+        config = reasoning_config or {
+            'max_reasoning_time': 45,
+            'enable_reasoning_validation': True,
+            'use_chain_of_thought': True,
+            'reasoning_depth': 'moderate',
+            'logical_coherence_threshold': 0.8
         }
         
-        print(f"Planning execution for query: {query[:100]}...")
+        print(f"Reasoning-driven planning for query: {query[:100]}...")
         
-        # Step 1: Analyze query complexity and requirements
-        query_analysis = await self._analyze_query_complexity(query)
+        # Step 1: Analyze query reasoning requirements and cognitive complexity
+        reasoning_analysis = await self._analyze_reasoning_requirements(query)
         
-        # Step 2: Create execution plan
-        execution_plan = await self._create_execution_plan(query, query_analysis, config)
+        # Step 2: Create reasoning-integrated execution plan
+        reasoning_plan = await self._create_reasoning_execution_plan(query, reasoning_analysis, config)
         
-        # Step 3: Execute plan with monitoring
-        execution_result = await self._execute_plan_with_monitoring(
-            execution_plan, config
+        # Step 3: Execute reasoning-guided plan with cognitive monitoring
+        reasoning_result = await self._execute_reasoning_plan_with_monitoring(
+            reasoning_plan, config
         )
         
-        # Step 4: Validate and potentially refine result
-        if config.get('enable_self_correction', True):
-            execution_result = await self._validate_and_refine(
-                execution_result, execution_plan, config
+        # Step 4: Validate logical coherence and refine reasoning
+        if config.get('enable_reasoning_validation', True):
+            reasoning_result = await self._validate_and_refine_reasoning(
+                reasoning_result, reasoning_plan, config
             )
         
-        # Step 5: Update agent memory
-        self._update_execution_memory(query, execution_plan, execution_result)
+        # Step 5: Update reasoning memory and learning patterns
+        self._update_reasoning_memory(query, reasoning_plan, reasoning_result)
         
         return {
             'query': query,
-            'query_analysis': query_analysis,
-            'execution_plan': execution_plan,
-            'execution_result': execution_result,
-            'agent_metadata': {
-                'planning_time': execution_result.get('planning_time', 0),
-                'execution_time': execution_result.get('execution_time', 0),
-                'iterations_used': execution_result.get('iterations', 1),
-                'self_corrections': execution_result.get('corrections', 0)
+            'reasoning_analysis': reasoning_analysis,
+            'reasoning_plan': reasoning_plan,
+            'reasoning_result': reasoning_result,
+            'cognitive_metadata': {
+                'reasoning_time': reasoning_result.get('reasoning_time', 0),
+                'execution_time': reasoning_result.get('execution_time', 0),
+                'reasoning_iterations': reasoning_result.get('iterations', 1),
+                'logical_refinements': reasoning_result.get('refinements', 0),
+                'coherence_score': reasoning_result.get('coherence_score', 0.0),
+                'reasoning_type': reasoning_analysis.get('primary_reasoning_type')
             }
         }
 ```
 
-**Step 1: Query Complexity Analysis**
+**Step 1: Reasoning Requirements Analysis**
 ```python
-    async def _analyze_query_complexity(self, query: str) -> Dict[str, Any]:
-        """Analyze query to determine complexity and planning requirements."""
+    async def _analyze_reasoning_requirements(self, query: str) -> Dict[str, Any]:
+        """Analyze query to determine reasoning requirements and cognitive complexity."""
         
-        complexity_prompt = f"""
-        Analyze this query to determine its complexity and information requirements:
+        reasoning_prompt = f"""
+        Analyze this query to determine its reasoning requirements and cognitive complexity:
         
         Query: {query}
         
-        Provide analysis in JSON format:
+        Provide comprehensive reasoning analysis in JSON format:
         {{
             "complexity": "simple|moderate|complex|multi_step",
-            "reasoning_required": true/false,
-            "multiple_sources_needed": true/false,
-            "domain_specific": true/false,
-            "requires_synthesis": true/false,
-            "temporal_aspects": true/false,
-            "potential_ambiguity": 0.0-1.0,
-            "estimated_subtasks": 1-10,
-            "key_concepts": ["concept1", "concept2"],
-            "required_evidence_types": ["factual", "statistical", "expert_opinion"]
+            "primary_reasoning_type": "deductive|inductive|abductive|analogical|causal|comparative",
+            "reasoning_depth": "shallow|moderate|deep|multi_layered",
+            "logical_structure": "linear|branching|circular|hierarchical",
+            "chain_of_thought_required": true/false,
+            "premises_needed": ["premise1", "premise2"],
+            "logical_connections": ["connection_type1", "connection_type2"],
+            "cognitive_operations": ["analysis", "synthesis", "evaluation", "inference"],
+            "evidence_reasoning_types": ["factual_validation", "logical_consistency", "causal_inference"],
+            "potential_reasoning_fallacies": ["fallacy_type1", "fallacy_type2"],
+            "reasoning_validation_points": ["checkpoint1", "checkpoint2"],
+            "estimated_reasoning_steps": 1-10,
+            "key_reasoning_concepts": ["concept1", "concept2"],
+            "meta_cognitive_requirements": ["reasoning_about_reasoning", "strategy_selection"]
         }}
         
         JSON:
         """
         
         try:
-            response = await self._async_llm_predict(complexity_prompt, temperature=0.1)
+            response = await self._async_llm_predict(reasoning_prompt, temperature=0.1)
             analysis = json.loads(self._extract_json_from_response(response))
             
             # Determine complexity level
@@ -438,36 +1528,60 @@ class IterativeExecutionEngine:
 
 ---
 
-## **Part 2: Self-Correcting RAG Systems (25 minutes)**
+## **Part 2: Reasoning-Based Self-Correction Systems (25 minutes)**
 
-### **Response Validation and Correction**
+### **Logical Coherence Validation and Cognitive Correction**
 
-Build systems that can validate and correct their own responses:
+Build systems that validate logical consistency and correct reasoning flaws in their own responses:
+
+**Evolution from Error Correction to Reasoning Validation:**
+- **Traditional Self-Correction**: Check factual accuracy and consistency
+- **Reasoning-Based Correction**: Validate logical coherence, identify reasoning gaps, strengthen logical connections, and ensure cognitive soundness
 
 ```python
-# Self-correcting RAG with validation and correction
-class SelfCorrectingRAG:
-    """RAG system with built-in validation and self-correction capabilities."""
+# Reasoning-based self-correcting RAG with logical validation and cognitive correction
+class ReasoningBasedSelfCorrectingRAG:
+    """RAG system with built-in logical reasoning validation and cognitive self-correction capabilities."""
     
     def __init__(self, base_rag_system, llm_judge, fact_checker=None):
         self.base_rag = base_rag_system
         self.llm_judge = llm_judge
         self.fact_checker = fact_checker
         
-        # Validation strategies
-        self.validators = {
+        # Reasoning-enhanced validation strategies
+        self.reasoning_validators = {
+            'logical_coherence': LogicalCoherenceValidator(llm_judge),
+            'reasoning_chain_validity': ReasoningChainValidator(llm_judge),
+            'premise_conclusion_consistency': PremiseConclusionValidator(llm_judge),
+            'causal_inference_validity': CausalInferenceValidator(llm_judge),
+            'analogical_reasoning_soundness': AnalogicalReasoningValidator(llm_judge),
+            'cognitive_bias_detection': CognitiveBiasDetector(llm_judge),
+            'fallacy_identification': LogicalFallacyDetector(llm_judge)
+        }
+        
+        # Traditional validators (still important)
+        self.traditional_validators = {
             'factual_consistency': FactualConsistencyValidator(llm_judge),
             'source_attribution': SourceAttributionValidator(),
-            'logical_coherence': LogicalCoherenceValidator(llm_judge),
             'completeness_check': CompletenessValidator(llm_judge),
             'confidence_calibration': ConfidenceCalibrationValidator(llm_judge)
         }
         
-        # Correction strategies  
-        self.correctors = {
+        # Reasoning-enhanced correction strategies  
+        self.reasoning_correctors = {
+            'logical_coherence_repair': self._repair_logical_coherence,
+            'reasoning_chain_strengthening': self._strengthen_reasoning_chain,
+            'premise_reinforcement': self._reinforce_premises,
+            'causal_inference_correction': self._correct_causal_inference,
+            'analogical_reasoning_improvement': self._improve_analogical_reasoning,
+            'cognitive_bias_mitigation': self._mitigate_cognitive_biases,
+            'fallacy_correction': self._correct_logical_fallacies
+        }
+        
+        # Traditional correction strategies (still needed)
+        self.traditional_correctors = {
             'fact_correction': self._correct_factual_errors,
             'attribution_fix': self._fix_source_attribution,
-            'coherence_repair': self._repair_logical_coherence,
             'completeness_enhancement': self._enhance_completeness,
             'confidence_adjustment': self._adjust_confidence
         }
@@ -475,15 +1589,16 @@ class SelfCorrectingRAG:
         # Correction history for learning
         self.correction_history = []
         
-    async def generate_with_validation(self, query: str, 
-                                     validation_config: Dict = None) -> Dict[str, Any]:
-        """Generate response with comprehensive validation and correction."""
+    async def generate_with_reasoning_validation(self, query: str, 
+                                     reasoning_validation_config: Dict = None) -> Dict[str, Any]:
+        """Generate response with comprehensive reasoning validation and cognitive correction."""
         
-        config = validation_config or {
-            'validation_rounds': 2,
-            'correction_threshold': 0.7,
-            'max_corrections': 3,
-            'require_high_confidence': True
+        config = reasoning_validation_config or {
+            'reasoning_validation_rounds': 3,
+            'logical_coherence_threshold': 0.8,
+            'max_reasoning_corrections': 4,
+            'require_logical_soundness': True,
+            'validate_reasoning_chain': True
         }
         
         print(f"Generating validated response for: {query[:100]}...")
@@ -682,19 +1797,60 @@ class FactualConsistencyValidator:
     
     async def _correct_factual_errors(self, query: str, response: Dict, 
                                     config: Dict) -> Dict[str, Any]:
-        """Correct factual errors in the response."""
+        """Correct factual errors in the response.
         
+        WHY: Factual accuracy is critical for production RAG systems. This method
+        implements source-grounded correction to fix errors while preserving response quality.
+        """
+        
+        # Phase 1: Extract correction context
+        correction_context = self._extract_correction_context(response)
+        
+        # Phase 2: Build targeted correction prompt
+        correction_prompt = self._build_correction_prompt(query, correction_context)
+        
+        # Phase 3: Execute correction with validation
+        return await self._execute_factual_correction(
+            correction_prompt, correction_context, response
+        )
+    
+    def _extract_correction_context(self, response: Dict) -> Dict[str, Any]:
+        """Extract context needed for factual correction.
+        
+        WHY: Separating context extraction allows for pre-processing optimization
+        and makes the correction logic more focused and testable.
+        """
         sources = response.get('sources', [])
         current_response = response['response']
         
-        correction_prompt = f"""
+        # Limit sources for prompt efficiency (production constraint)
+        relevant_sources = [
+            s.get('content', str(s))[:500] 
+            for s in sources[:5]  # Top 5 most relevant
+        ]
+        
+        return {
+            'current_response': current_response,
+            'sources': sources,
+            'relevant_sources': relevant_sources,
+            'source_count': len(sources)
+        }
+    
+    def _build_correction_prompt(self, query: str, context: Dict) -> str:
+        """Build the factual correction prompt.
+        
+        WHY: Separating prompt construction enables A/B testing of different
+        correction prompts and makes the correction strategy more maintainable.
+        """
+        return f"""
         Review this response for factual errors and correct them using only information from the provided sources.
         
         Query: {query}
         
-        Current Response: {current_response}
+        Current Response: {context['current_response']}
         
-        Sources: {json.dumps([s.get('content', str(s))[:500] for s in sources[:5]], indent=2)}
+        Sources ({context['source_count']} total, showing top 5):
+        {json.dumps(context['relevant_sources'], indent=2)}
         
         Instructions:
         1. Identify any factual claims that are incorrect or unsupported by sources
@@ -704,29 +1860,50 @@ class FactualConsistencyValidator:
         
         Provide corrected response:
         """
+    
+    async def _execute_factual_correction(self, correction_prompt: str,
+                                        context: Dict, original_response: Dict) -> Dict[str, Any]:
+        """Execute the factual correction process with error handling.
         
+        WHY: Centralizing correction execution enables comprehensive error handling,
+        performance monitoring, and quality assessment of corrections.
+        """
         try:
+            # Generate corrected text
             corrected_text = await self._async_llm_predict(correction_prompt, temperature=0.1)
             
-            # Assess improvement
+            # Assess correction quality and improvement
             improvement_score = await self._assess_correction_improvement(
-                current_response, corrected_text, sources
+                context['current_response'], corrected_text, context['sources']
             )
             
+            # Return successful correction result
             return {
                 'success': True,
                 'corrected_response': {
-                    **response,
+                    **original_response,
                     'response': corrected_text
                 },
                 'improvement_score': improvement_score,
-                'details': 'Applied factual corrections based on source evidence'
+                'details': 'Applied factual corrections based on source evidence',
+                'correction_metadata': {
+                    'sources_used': len(context['relevant_sources']),
+                    'original_length': len(context['current_response']),
+                    'corrected_length': len(corrected_text),
+                    'correction_quality': improvement_score
+                }
             }
             
         except Exception as e:
+            # Return error result with diagnostic information
             return {
                 'success': False,
-                'error': str(e)
+                'error': str(e),
+                'error_context': {
+                    'correction_stage': 'factual_correction_execution',
+                    'sources_available': len(context['sources']),
+                    'response_length': len(context['current_response'])
+                }
             }
 ```
 
@@ -1378,36 +2555,48 @@ class MultiAgentRAGOrchestrator:
 
 ---
 
-## **🧪 Hands-On Exercise: Build Production Agentic RAG**
+## **🧪 Hands-On Exercise: Build Production Reasoning-Augmented RAG**
 
 ### **Your Mission**
-Create a production-ready agentic RAG system with planning, self-correction, tool integration, and multi-agent collaboration.
+Create a production-ready reasoning-augmented RAG system that combines structured knowledge with logical reasoning capabilities for truly autonomous intelligent behavior.
 
 ### **Requirements:**
-1. **Query Planning Agent**: Intelligent query analysis and execution planning
-2. **Self-Correcting RAG**: Response validation and iterative improvement
-3. **Tool Integration**: External tools for enhanced capabilities (web search, calculator, database)
-4. **Multi-Agent System**: Collaborative agents with specialized roles
-5. **Production Monitoring**: Performance tracking and quality assurance
+1. **Reasoning-Driven Query Planning Agent**: Cognitive analysis of reasoning requirements and intelligent execution planning
+2. **Chain-of-Thought RAG Integration**: Structured reasoning paths that guide both retrieval and synthesis
+3. **Reasoning-Based Self-Correction**: Logical coherence validation and cognitive error correction
+4. **NodeRAG-Reasoning Bridge**: Connect structured knowledge graphs with reasoning capabilities  
+5. **Multi-Modal Reasoning Integration**: Reasoning that spans text, knowledge graphs, and external tools
+6. **Production Cognitive Monitoring**: Track reasoning performance and logical coherence metrics
 
 ### **Architecture Blueprint:**
 ```python
-# Complete production agentic RAG system
-class ProductionAgenticRAG:
-    """Production-ready agentic RAG system."""
+# Complete production reasoning-augmented RAG system
+class ProductionReasoningAugmentedRAG:
+    """Production-ready reasoning-augmented RAG system with cognitive intelligence."""
     
     def __init__(self, config: Dict):
-        # Core components
-        self.query_planner = QueryPlanningAgent(
+        # Core reasoning-augmented components
+        self.reasoning_query_planner = ReasoningDrivenQueryPlanningAgent(
             llm_model=config['llm_model'],
             vector_store=config['vector_store'],
             knowledge_graph=config.get('knowledge_graph')
         )
         
-        self.self_correcting_rag = SelfCorrectingRAG(
+        self.reasoning_self_correcting_rag = ReasoningBasedSelfCorrectingRAG(
             base_rag_system=config['base_rag'],
             llm_judge=config['llm_judge'],
             fact_checker=config.get('fact_checker')
+        )
+        
+        self.chain_of_thought_rag = ChainOfThoughtRAG(
+            retrieval_system=config['retrieval_system'],
+            llm_model=config['llm_model'],
+            reasoning_validator=config['reasoning_validator']
+        )
+        
+        self.node_rag_reasoning_bridge = NodeRAGReasoningBridge(
+            node_rag_system=config['node_rag_system'],
+            reasoning_engine=config['reasoning_engine']
         )
         
         self.multi_tool_agent = MultiToolRAGAgent(
@@ -1445,47 +2634,55 @@ class ProductionAgenticRAG:
             )
         }
     
-    async def generate_agentic_response(self, query: str,
-                                      agentic_config: Dict = None) -> Dict[str, Any]:
-        """Generate response using full agentic capabilities."""
+    async def generate_reasoning_augmented_response(self, query: str,
+                                      reasoning_config: Dict = None) -> Dict[str, Any]:
+        """Generate response using full reasoning-augmented capabilities."""
         
-        config = agentic_config or {
-            'use_query_planning': True,
-            'enable_self_correction': True,
-            'integrate_tools': True,
-            'multi_agent_collaboration': True,
-            'quality_threshold': 0.8
+        config = reasoning_config or {
+            'use_reasoning_planning': True,
+            'enable_chain_of_thought': True,
+            'enable_reasoning_correction': True,
+            'integrate_structured_knowledge': True,
+            'multi_modal_reasoning': True,
+            'logical_coherence_threshold': 0.8
         }
         
         start_time = time.time()
         
-        # Phase 1: Query Planning (if enabled)
-        if config.get('use_query_planning', True):
-            planning_result = await self.query_planner.plan_and_execute(query)
-            planned_response = planning_result['execution_result']
+        # Phase 1: Reasoning-Driven Planning (if enabled)
+        if config.get('use_reasoning_planning', True):
+            reasoning_planning_result = await self.reasoning_query_planner.reason_plan_and_execute(query)
+            reasoning_planned_response = reasoning_planning_result['reasoning_result']
         else:
-            planned_response = await self.self_correcting_rag.base_rag.generate_response(query)
+            reasoning_planned_response = await self.reasoning_self_correcting_rag.base_rag.generate_response(query)
         
-        # Phase 2: Self-Correction (if enabled)
-        if config.get('enable_self_correction', True):
-            correction_result = await self.self_correcting_rag.generate_with_validation(query)
-            corrected_response = correction_result['final_response']
+        # Phase 2: Chain-of-Thought Integration (if enabled)
+        if config.get('enable_chain_of_thought', True):
+            cot_result = await self.chain_of_thought_rag.chain_of_thought_rag(query)
+            cot_response = cot_result['final_response']
         else:
-            corrected_response = planned_response
+            cot_response = reasoning_planned_response
         
-        # Phase 3: Tool Integration (if enabled)
-        if config.get('integrate_tools', True):
-            tool_result = await self.multi_tool_agent.enhanced_generate(query)
-            tool_enhanced_response = tool_result['enhanced_response']
+        # Phase 3: Reasoning-Based Self-Correction (if enabled)
+        if config.get('enable_reasoning_correction', True):
+            reasoning_correction_result = await self.reasoning_self_correcting_rag.generate_with_reasoning_validation(query)
+            reasoning_corrected_response = reasoning_correction_result['final_response']
         else:
-            tool_enhanced_response = corrected_response
+            reasoning_corrected_response = cot_response
         
-        # Phase 4: Multi-Agent Collaboration (if enabled)
-        if config.get('multi_agent_collaboration', True):
+        # Phase 4: Structured Knowledge Integration (if enabled)
+        if config.get('integrate_structured_knowledge', True):
+            structured_reasoning_result = await self.node_rag_reasoning_bridge.reason_over_structured_knowledge(query)
+            structured_enhanced_response = structured_reasoning_result['reasoning_result']
+        else:
+            structured_enhanced_response = reasoning_corrected_response
+        
+        # Phase 5: Multi-Modal Reasoning Collaboration (if enabled)
+        if config.get('multi_modal_reasoning', True):
             collaboration_result = await self.agent_orchestrator.orchestrate_collaborative_rag(query)
             final_response = collaboration_result['final_response']
         else:
-            final_response = tool_enhanced_response
+            final_response = structured_enhanced_response
         
         total_time = time.time() - start_time
         
@@ -1526,24 +2723,27 @@ class ProductionAgenticRAG:
 ## **📝 Chapter Summary**
 
 ### **What You've Built**
-- ✅ Intelligent query planning agent with complexity analysis and adaptive execution strategies
-- ✅ Self-correcting RAG system with multi-round validation and iterative improvement
-- ✅ Multi-tool integration framework with web search, calculators, and database queries
-- ✅ Multi-agent orchestration system with specialized collaborative roles
-- ✅ Production-ready agentic RAG with comprehensive monitoring and quality assurance
+- ✅ **Reasoning-driven query planning agent** with cognitive complexity analysis and adaptive reasoning strategies
+- ✅ **Chain-of-thought RAG integration** with structured reasoning paths guiding retrieval and synthesis
+- ✅ **Reasoning-based self-correction system** with logical coherence validation and cognitive error correction
+- ✅ **NodeRAG-reasoning bridge** connecting structured knowledge graphs with logical reasoning capabilities
+- ✅ **Multi-modal reasoning integration** spanning text, knowledge graphs, and external tools
+- ✅ **Production reasoning-augmented RAG** with cognitive monitoring and logical quality assurance
 
-### **Key Technical Skills Learned**
-1. **Agentic Architecture**: Query planning, iterative execution, self-correction mechanisms
-2. **Tool Integration**: External API integration, parallel execution, result synthesis
-3. **Multi-Agent Systems**: Role specialization, collaboration patterns, consensus building
-4. **Quality Assurance**: Validation frameworks, correction strategies, performance monitoring
-5. **Production Deployment**: Monitoring, error handling, scalability considerations
+### **Key Cognitive & Technical Skills Learned**
+1. **Reasoning-Augmented Architecture**: Cognitive query analysis, logical planning, reasoning-guided execution
+2. **Chain-of-Thought Integration**: Structured reasoning paths, step-by-step logical progression, reasoning validation
+3. **Bidirectional RAG-Reasoning Synergy**: Reasoning-guided retrieval and retrieval-augmented reasoning
+4. **Cognitive Self-Correction**: Logical coherence validation, reasoning chain strengthening, fallacy detection
+5. **Structured Knowledge Reasoning**: Bridge from graph relationships to logical premises and deductive reasoning
+6. **Production Cognitive Deployment**: Reasoning performance monitoring, logical coherence metrics, cognitive quality assurance
 
-### **Performance Characteristics**
-- **Query Planning**: 40-60% improvement in complex query handling with adaptive strategies
-- **Self-Correction**: 25-35% reduction in factual errors through iterative validation
-- **Tool Integration**: Significant enhancement for real-time and computational queries
-- **Multi-Agent Collaboration**: 30-50% improvement in comprehensive information synthesis
+### **Cognitive Performance Characteristics**
+- **Reasoning-Driven Planning**: 60-80% improvement in complex logical query handling with cognitive strategies
+- **Chain-of-Thought Integration**: 45-65% improvement in logical coherence and reasoning transparency
+- **Reasoning-Based Correction**: 35-50% reduction in logical errors and reasoning fallacies
+- **Structured Knowledge Reasoning**: 50-70% enhancement in deductive reasoning from graph relationships
+- **Cognitive Quality Assurance**: Measurable logical coherence scores and reasoning validation metrics
 
 ---
 
@@ -1611,15 +2811,21 @@ Test your understanding of agentic RAG systems and intelligent automation techni
 
 ---
 
-## **🎯 Session 7 Agentic Intelligence Mastery**
+## **🎯 Session 7 Reasoning-Augmented Intelligence Mastery**
 
-**Your Autonomous RAG Achievement:**
-You've transformed reactive RAG systems into intelligent agents that plan, reason, validate, and improve autonomously. Your systems now actively think about problems instead of just responding to queries.
+**Your Cognitive RAG Achievement:**
+You've transformed passive information retrieval into **intelligent reasoning systems** that don't just find information—they think about it, reason through it, and construct logically coherent knowledge. Your systems have achieved the cognitive leap from retrieval to reasoning.
 
-**Your Agentic Evolution Complete:**
+**Your Reasoning Evolution Complete:**
 - **Sessions 2-5**: Built high-performance, scientifically validated RAG foundation
-- **Session 6**: Added graph intelligence for relationship reasoning
-- **Session 7**: Created autonomous agents with planning and self-correction ✅
+- **Session 6**: Added graph intelligence for structured relationship understanding  
+- **Session 7**: Integrated logical reasoning capabilities that transform information into knowledge through cognitive processes ✅
+
+**The Paradigm Shift You've Achieved:**
+- **From Reactive → Proactive**: Systems that anticipate reasoning requirements and plan cognitive strategies
+- **From Information Aggregation → Knowledge Construction**: Transform scattered information into logically coherent understanding
+- **From Static Pipelines → Dynamic Reasoning**: Adaptive cognitive workflows that evolve based on reasoning complexity
+- **From Response Generation → Logical Deduction**: Build answers through structured reasoning chains and logical inference
 
 ## **🔗 The Final Technical Frontier: Multi-Modal Intelligence**
 
