@@ -1,0 +1,314 @@
+{
+  "basic_evaluation": {
+    "individual_results": [
+      "RAGEvaluationResult(query='What is the capital of France?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+      "RAGEvaluationResult(query='How does photosynthesis work?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+      "RAGEvaluationResult(query='Explain the theory of relativity.', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+      "RAGEvaluationResult(query='What are the benefits of renewable energy?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+      "RAGEvaluationResult(query='How do neural networks learn?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)"
+    ],
+    "aggregate_metrics": {},
+    "evaluation_config": {
+      "include_custom_metrics": true
+    },
+    "dataset_size": 5,
+    "evaluation_timestamp": 1755002778.072984
+  },
+  "ragas_evaluation": {
+    "ragas_scores": {
+      "faithfulness": 0.82,
+      "answer_relevancy": 0.78,
+      "context_precision": 0.75,
+      "context_recall": 0.71
+    },
+    "dataset_size": 3,
+    "evaluation_summary": "Mock RAGAS evaluation (RAGAS not installed)"
+  },
+  "ab_testing": {
+    "test_name": "retrieval_method_comparison",
+    "test_setup": {
+      "test_name": "retrieval_method_comparison",
+      "variants": {
+        "baseline": {
+          "system_name": "BaselineRAG",
+          "retrieval_method": "basic_similarity",
+          "context_window": 3
+        },
+        "enhanced": {
+          "system_name": "EnhancedRAG",
+          "retrieval_method": "hybrid_search",
+          "context_window": 5
+        }
+      },
+      "dataset": [
+        {
+          "query": "What is the capital of France?",
+          "expected_answer": "Expected answer for: What is the capital of France?",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "How does photosynthesis work?",
+          "expected_answer": "Expected answer for: How does photosynthesis work?",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "Explain the theory of relativity.",
+          "expected_answer": "Expected answer for: Explain the theory of relativity.",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "What are the benefits of renewable energy?",
+          "expected_answer": "Expected answer for: What are the benefits of renewable energy?",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "How do neural networks learn?",
+          "expected_answer": "Expected answer for: How do neural networks learn?",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "What causes climate change?",
+          "expected_answer": "Expected answer for: What causes climate change?",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "Describe the water cycle.",
+          "expected_answer": "Expected answer for: Describe the water cycle.",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "What is quantum computing?",
+          "expected_answer": "Expected answer for: What is quantum computing?",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "How does the human immune system work?",
+          "expected_answer": "Expected answer for: How does the human immune system work?",
+          "category": "general_knowledge"
+        },
+        {
+          "query": "What are the major components of a cell?",
+          "expected_answer": "Expected answer for: What are the major components of a cell?",
+          "category": "general_knowledge"
+        }
+      ],
+      "config": {
+        "significance_threshold": 0.05
+      },
+      "start_time": 1755002778.0730171,
+      "status": "completed"
+    },
+    "variant_results": {
+      "baseline": {
+        "individual_results": [
+          "RAGEvaluationResult(query='What is the capital of France?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='How does photosynthesis work?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='Explain the theory of relativity.', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='What are the benefits of renewable energy?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='How do neural networks learn?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='What causes climate change?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='Describe the water cycle.', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='What is quantum computing?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='How does the human immune system work?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='What are the major components of a cell?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)"
+        ],
+        "aggregate_metrics": {},
+        "evaluation_config": {
+          "significance_threshold": 0.05
+        },
+        "dataset_size": 10,
+        "evaluation_timestamp": 1755002778.0730681
+      },
+      "enhanced": {
+        "individual_results": [
+          "RAGEvaluationResult(query='What is the capital of France?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='How does photosynthesis work?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='Explain the theory of relativity.', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='What are the benefits of renewable energy?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='How do neural networks learn?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='What causes climate change?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='Describe the water cycle.', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='What is quantum computing?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='How does the human immune system work?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)",
+          "RAGEvaluationResult(query='What are the major components of a cell?', retrieved_contexts=[], generated_answer='placeholder answer', reference_answer=None, retrieval_scores=None, generation_scores=None, end_to_end_scores=None, metadata=None)"
+        ],
+        "aggregate_metrics": {},
+        "evaluation_config": {
+          "significance_threshold": 0.05
+        },
+        "dataset_size": 10,
+        "evaluation_timestamp": 1755002778.073096
+      }
+    },
+    "analysis": {
+      "winner": "No significant winner",
+      "statistical_significance": {},
+      "effect_sizes": {},
+      "recommendations": [
+        "No clear winner - consider running longer test or different variants"
+      ],
+      "detailed_comparison": {}
+    },
+    "completion_time": 1755002778.073112,
+    "duration": 9.489059448242188e-05
+  },
+  "production_monitoring": [
+    {
+      "timestamp": 1755002778.177842,
+      "query": "How does machine learning work?",
+      "response": "Based on the available information, the answer to 'How does machine learning work?' is that this is a comprehensive response generated by the ProductionRAG system.",
+      "contexts": [
+        "Context 1 for query 'How does machine learning work?': This is relevant information.",
+        "Context 2 for query 'How does machine learning work?': Additional supporting details.",
+        "Context 3 for query 'How does machine learning work?': Further elaboration on the topic."
+      ],
+      "metadata": {
+        "response_time": 2.5941638647927636,
+        "retrieval_time": 1.556498318875658,
+        "generation_time": 1.0376655459171056,
+        "system_name": "ProductionRAG"
+      },
+      "performance": {
+        "response_time": 2.5941638647927636,
+        "retrieval_time": 1.556498318875658,
+        "generation_time": 1.0376655459171056,
+        "context_count": 3,
+        "response_length": 25,
+        "query_length": 5,
+        "throughput": 0.38548066048244245
+      },
+      "quality": {
+        "individual_scores": {
+          "response_length": 0.5,
+          "context_utilization": 0.40781440781440786,
+          "factual_consistency": 0.8,
+          "relevance_score": 0.75,
+          "citation_quality": 0.6
+        },
+        "overall_quality": 0.6115628815628816,
+        "quality_flags": [
+          {
+            "type": "quality_below_threshold",
+            "assessment": "response_length",
+            "score": 0.5,
+            "threshold": 50
+          }
+        ],
+        "assessment_timestamp": 1755002778.178047
+      },
+      "anomalies": []
+    },
+    {
+      "timestamp": 1755002778.388025,
+      "query": "What is the difference between AI and ML?",
+      "response": "Based on the available information, the answer to 'What is the difference between AI and ML?' is that this is a comprehensive response generated by the ProductionRAG system.",
+      "contexts": [
+        "Context 1 for query 'What is the difference between AI and ML?': This is relevant information.",
+        "Context 2 for query 'What is the difference between AI and ML?': Additional supporting details.",
+        "Context 3 for query 'What is the difference between AI and ML?': Further elaboration on the topic."
+      ],
+      "metadata": {
+        "response_time": 2.8763033821369084,
+        "retrieval_time": 1.725782029282145,
+        "generation_time": 1.1505213528547633,
+        "system_name": "ProductionRAG"
+      },
+      "performance": {
+        "response_time": 2.8763033821369084,
+        "retrieval_time": 1.725782029282145,
+        "generation_time": 1.1505213528547633,
+        "context_count": 3,
+        "response_length": 28,
+        "query_length": 8,
+        "throughput": 0.347668471347784
+      },
+      "quality": {
+        "individual_scores": {
+          "response_length": 0.56,
+          "context_utilization": 0.5,
+          "factual_consistency": 0.8,
+          "relevance_score": 0.75,
+          "citation_quality": 0.6
+        },
+        "overall_quality": 0.6420000000000001,
+        "quality_flags": [
+          {
+            "type": "quality_below_threshold",
+            "assessment": "response_length",
+            "score": 0.56,
+            "threshold": 50
+          }
+        ],
+        "assessment_timestamp": 1755002778.388129
+      },
+      "anomalies": []
+    },
+    {
+      "timestamp": 1755002778.597731,
+      "query": "Explain neural networks.",
+      "response": "Based on the available information, the answer to 'Explain neural networks.' is that this is a comprehensive response generated by the ProductionRAG system.",
+      "contexts": [
+        "Context 1 for query 'Explain neural networks.': This is relevant information.",
+        "Context 2 for query 'Explain neural networks.': Additional supporting details.",
+        "Context 3 for query 'Explain neural networks.': Further elaboration on the topic."
+      ],
+      "metadata": {
+        "response_time": 2.8958899256087216,
+        "retrieval_time": 1.737533955365233,
+        "generation_time": 1.1583559702434887,
+        "system_name": "ProductionRAG"
+      },
+      "performance": {
+        "response_time": 2.8958899256087216,
+        "retrieval_time": 1.737533955365233,
+        "generation_time": 1.1583559702434887,
+        "context_count": 3,
+        "response_length": 23,
+        "query_length": 3,
+        "throughput": 0.3453169925959109
+      },
+      "quality": {
+        "individual_scores": {
+          "response_length": 0.46,
+          "context_utilization": 0.298989898989899,
+          "factual_consistency": 0.8,
+          "relevance_score": 0.75,
+          "citation_quality": 0.6
+        },
+        "overall_quality": 0.5817979797979798,
+        "quality_flags": [
+          {
+            "type": "quality_below_threshold",
+            "assessment": "response_length",
+            "score": 0.46,
+            "threshold": 50
+          },
+          {
+            "type": "quality_below_threshold",
+            "assessment": "context_utilization",
+            "score": 0.298989898989899,
+            "threshold": 0.3
+          }
+        ],
+        "assessment_timestamp": 1755002778.597928
+      },
+      "anomalies": []
+    }
+  ],
+  "comprehensive_evaluation": {
+    "evaluation_suite": "full",
+    "timestamp": 1755002778.704982,
+    "components": {
+      "benchmark": {
+        "status": "mock - dependencies missing"
+      },
+      "quality_assessment": {
+        "status": "mock - dependencies missing"
+      },
+      "monitoring_setup": {
+        "status": "mock - dependencies missing"
+      }
+    },
+    "evaluation_report": "Mock comprehensive evaluation (dependencies not available)"
+  }
+}

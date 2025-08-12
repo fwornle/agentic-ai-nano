@@ -1,0 +1,61 @@
+# Session 8: Multi-Modal Advanced RAG - Requirements
+
+# Core multi-modal processing
+opencv-python>=4.6.0
+Pillow>=9.2.0
+whisper>=1.1.0
+transformers>=4.21.0
+
+# Vision processing
+torch>=1.12.0
+torchvision>=0.13.0
+clip-by-openai>=1.0.0
+
+# Audio processing
+librosa>=0.10.0
+soundfile>=0.11.0
+pydub>=0.25.0
+
+# Multi-modal models
+huggingface-hub>=0.10.0
+sentence-transformers>=2.2.0
+
+# Video processing
+moviepy>=1.0.3
+imageio>=2.22.0
+
+# Core RAG dependencies
+asyncio
+numpy>=1.21.0
+pandas>=1.3.0
+
+# Vector stores
+chromadb>=0.4.0
+faiss-cpu>=1.7.0
+
+# LLM integration
+openai>=1.0.0
+anthropic>=0.3.0
+
+# Web and API
+aiohttp>=3.8.0
+requests>=2.28.0
+
+# Image and document processing
+pdf2image>=1.16.0
+pytesseract>=0.3.10  # For OCR
+python-docx>=0.8.11
+
+# Monitoring and logging
+structlog>=22.1.0
+prometheus-client>=0.14.0
+
+# Testing
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# Optional advanced features
+# albumentations>=1.3.0    # Advanced image augmentation
+# timm>=0.6.0              # Pre-trained vision models
+# detectron2               # Object detection (complex install)
+# layout-parser            # Document layout analysis

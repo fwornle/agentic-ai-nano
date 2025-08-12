@@ -10,7 +10,9 @@
       "Bash(grep:*)",
       "Bash(mkdir:*)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:aiexpjourney.substack.com)"
+      "WebFetch(domain:aiexpjourney.substack.com)",
+      "Bash(python3:*)",
+      "Bash(python test:*)"
     ],
     "deny": []
   }
