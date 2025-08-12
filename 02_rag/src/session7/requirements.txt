@@ -1,0 +1,40 @@
+# Session 7: Agentic RAG Systems - Requirements
+
+# Core dependencies
+asyncio
+numpy>=1.21.0
+typing_extensions>=4.0.0
+
+# LLM and AI frameworks
+openai>=1.0.0
+anthropic>=0.3.0
+
+# Data processing
+pandas>=1.3.0
+json-logging>=1.3.0
+
+# Vector databases and search
+chromadb>=0.4.0
+faiss-cpu>=1.7.0
+pinecone-client>=2.2.0
+
+# Reasoning and logic
+networkx>=2.8.0  # For graph-based reasoning
+sympy>=1.9.0     # For symbolic reasoning
+
+# Async and concurrency
+aiohttp>=3.8.0
+asyncio-throttle>=1.0.0
+
+# Monitoring and logging
+structlog>=22.1.0
+prometheus-client>=0.14.0
+
+# Testing
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# Optional dependencies for advanced features
+# scikit-learn>=1.1.0  # For ML-based reasoning validation
+# spacy>=3.4.0         # For NLP in reasoning chains
+# rdflib>=6.2.0        # For semantic reasoning

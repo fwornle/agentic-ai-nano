@@ -1,0 +1,77 @@
+# Session 9: Production RAG & Enterprise Integration - Requirements
+
+# Core production frameworks
+asyncio
+aiohttp>=3.8.0
+uvicorn>=0.18.0
+fastapi>=0.100.0
+gunicorn>=20.1.0
+
+# Container and orchestration
+docker>=6.0.0
+kubernetes>=24.2.0
+
+# Database connectivity
+asyncpg>=0.26.0         # PostgreSQL async
+aiomysql>=0.1.1         # MySQL async
+redis>=4.3.0            # Redis for caching
+aioredis>=2.0.0         # Async Redis
+
+# Enterprise integrations
+Office365-REST-Python-Client>=2.4.0  # SharePoint
+atlassian-python-api>=3.25.0         # Confluence
+boto3>=1.24.0                         # AWS S3
+azure-storage-blob>=12.12.0           # Azure Blob
+
+# Authentication and security
+PyJWT>=2.4.0
+cryptography>=3.4.0
+passlib>=1.7.0
+python-multipart>=0.0.5
+
+# Monitoring and observability
+prometheus-client>=0.14.0
+structlog>=22.1.0
+opentelemetry-api>=1.12.0
+opentelemetry-sdk>=1.12.0
+
+# File system monitoring
+watchdog>=2.1.0
+
+# Message queues
+celery>=5.2.0
+kombu>=5.2.0
+
+# Data processing and analytics
+numpy>=1.21.0
+pandas>=1.3.0
+scikit-learn>=1.1.0
+
+# Configuration and environment
+pydantic>=1.9.0
+python-dotenv>=0.20.0
+PyYAML>=6.0
+
+# Testing and development
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+pytest-cov>=3.0.0
+httpx>=0.23.0  # For testing async HTTP
+
+# Load balancing and scaling
+nginx>=1.20.0  # External dependency
+haproxy>=2.4.0  # External dependency
+
+# Compliance and privacy
+gdpr-tools>=1.0.0  # Hypothetical package
+hipaa-compliance>=1.0.0  # Hypothetical package
+
+# Production utilities
+psutil>=5.9.0  # System monitoring
+schedule>=1.1.0  # Task scheduling
+
+# Optional enterprise features
+# ldap3>=2.9.0              # LDAP authentication
+# python-saml>=1.12.0       # SAML SSO
+# msal>=1.18.0              # Microsoft authentication
+# google-auth>=2.10.0       # Google authentication
