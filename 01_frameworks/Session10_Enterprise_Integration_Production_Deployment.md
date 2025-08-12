@@ -1,4 +1,4 @@
-# Session 9: Enterprise Integration & Production Deployment
+# Session 10: Enterprise Integration & Production Deployment
 
 ## 🎯 Learning Outcomes
 
