@@ -2470,28 +2470,11 @@ After completing these exercises:
 
 ---
 
-## Answer Key
+## **Ready to Test Your Knowledge?**
 
-1. **c)** Fault isolation and preventing cascade failures - Circuit breakers prevent failures from propagating through the system
-2. **c)** Multi-factor authentication with certificate-based auth - Provides the highest security level
-3. **b)** Traffic management, security, and observability - Service mesh provides comprehensive communication control
-4. **b)** By providing fine-grained permissions based on user roles - RBAC ensures users have appropriate access levels
-5. **b)** Smaller final image size and improved security - Multi-stage builds separate build and runtime dependencies
-6. **d)** Both b and c are correct - Both rolling updates and blue-green deployments can achieve zero downtime
-7. **b)** Automatic failure detection and recovery - Health probes enable Kubernetes to automatically manage container health
-8. **c)** Integrated security scanning and vulnerability assessment - Security must be integrated throughout the pipeline
-9. **b)** Parameterized and reusable deployment templates - Helm enables consistent deployments across environments
-10. **c)** Both a and b are correct - Different probe types serve different purposes
-11. **b)** Valid consent and lawful basis for processing personal data - GDPR requires explicit consent and legal justification
-12. **b)** Asymmetric encryption with key rotation - Provides strong security with manageable key lifecycle
-13. **b)** Applying appropriate security controls based on data sensitivity - Classification drives security policy application
-14. **b)** Users get only minimum permissions needed for their role - Minimizes potential security exposure
-15. **b)** Providing evidence of compliance and supporting incident investigation - Audit logs are essential for compliance proof
-16. **b)** Counter - Counters are designed for monotonically increasing values like request counts
-17. **b)** Understanding request flow across multiple services - Distributed tracing provides end-to-end visibility
-18. **b)** Through alert rules and escalation policies - Automated response systems handle SLA violations consistently
-19. **b)** Multiple metrics including CPU, memory, queue length, and response time - Comprehensive metrics provide better scaling decisions
-20. **b)** Multi-level caching with intelligent eviction policies - Provides optimal performance with efficient resource usage
+You've completed Session 10 on Enterprise Integration and Production Deployment. Test your understanding with the multiple-choice questions above.
+
+**[View Test Solutions](Session10_Test_Solutions.md)**
 
 ---
 

@@ -4996,70 +4996,11 @@ This comprehensive quiz tests understanding of PydanticAI concepts, patterns, an
 
 ---
 
-## **Answer Key and Explanations**
+## **Ready to Test Your Knowledge?**
 
-**Section A: Foundational Concepts**
-1. **b** - Automatic validation and structured outputs with compile-time type checking is PydanticAI's core advantage
-2. **b** - `ge` (greater than or equal) and `le` (less than or equal) provide inclusive bounds
-3. **b** - ValidationError with detailed information helps debugging and user experience
-4. **b** - `@agent.tool` is the standard decorator for PydanticAI tool definitions
-5. **a** - RunContext provides runtime configuration, dependencies, and execution context
+You've completed Session 5 on PydanticAI Type-Safe Agents. Test your understanding with the multiple-choice questions above.
 
-**Section B: Advanced Validation**
-6. **b** - `@root_validator` enables validation across multiple fields
-7. **b** - Custom `@validator` decorators provide the most flexibility for complex validation logic
-8. **b** - Structured error responses maintain user experience while providing debugging information
-9. **b** - `@root_validator` accesses all field values for conditional validation logic
-10. **b** - Enums provide type safety with automatic serialization support
-
-**Section C: Production Patterns**
-11. **b** - Circuit breaker pattern prevents cascade failures and enables graceful degradation
-12. **b** - `asyncio.wait_for()` with proper exception handling provides controlled timeout management
-13. **b** - Semaphores and rate limiting prevent resource exhaustion while maintaining performance
-14. **b** - Success rate and response times are key indicators of agent reliability and performance
-15. **b** - Environment variables with validation provide flexibility and security
-
-**Section D: Error Handling and Integration**
-16. **b** - Exponential backoff with circuit breaker provides the most robust recovery mechanism
-17. **b** - Circuit breaker with fallback maintains service availability during outages
-18. **b** - Structured logging with context enables effective monitoring and debugging
-19. **b** - Pydantic models ensure type safety throughout the integration chain
-20. **b** - Exponential backoff with jitter and limits prevents overwhelming failing services
-
-**Section E: Performance Optimization**
-21. **b** - LRU cache with TTL provides optimal balance of performance and memory management
-22. **b** - Batch processing improves throughput by reducing overhead and enabling efficient resource usage
-23. **b** - Field-level optimization and intelligent validation shortcuts maintain safety while improving performance
-24. **b** - Lazy loading with proper cleanup prevents memory leaks in long-running applications
-25. **b** - Automated monitoring provides real-time visibility into agent performance and health
-
----
-
-## **Key Takeaways and Best Practices**
-
-### **Essential PydanticAI Principles**
-1. **Type safety first** - Use comprehensive type hints and validation throughout your agent architecture
-2. **Validation at boundaries** - Implement rigorous input/output validation to prevent runtime errors
-3. **Structured error handling** - Design error responses that provide meaningful feedback for both users and systems
-4. **Performance optimization** - Implement caching, batching, and resource management for production scalability
-5. **Monitoring and observability** - Include comprehensive metrics and health checks from the beginning
-
-### **Production Readiness Checklist**
-- ✅ Comprehensive input validation with custom validators
-- ✅ Structured error handling with proper classification
-- ✅ Circuit breaker pattern for external service integrations
-- ✅ Intelligent caching with TTL and eviction policies
-- ✅ Concurrent request handling with resource limits
-- ✅ Performance monitoring and alerting systems
-- ✅ Comprehensive test coverage including error scenarios
-- ✅ Documentation of validation rules and error responses
-
-### **Performance Optimization Guidelines**
-- **Cache aggressively** but with intelligent eviction strategies
-- **Batch similar requests** to improve throughput and reduce overhead
-- **Monitor continuously** with automated alerting for performance degradation
-- **Profile regularly** to identify bottlenecks and optimization opportunities
-- **Test under load** to validate performance characteristics
+**[View Test Solutions](Session5_Test_Solutions.md)**
 
 ---
 

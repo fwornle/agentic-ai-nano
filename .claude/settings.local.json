@@ -12,7 +12,13 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:aiexpjourney.substack.com)",
       "Bash(python3:*)",
-      "Bash(python test:*)"
+      "Bash(python test:*)",
+      "Bash(for:*)",
+      "Bash(done)",
+      "Bash(if [[ -f \"$file\" ]])",
+      "Bash(! grep -q \"View Test Solutions\" \"$file\")",
+      "Bash(then echo \"Session $i needs solution link\")",
+      "Bash(fi)"
     ],
     "deny": []
   }
