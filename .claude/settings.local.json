@@ -9,7 +9,8 @@
       "Bash(sed:*)",
       "Bash(grep:*)",
       "Bash(mkdir:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:aiexpjourney.substack.com)"
     ],
     "deny": []
   }

@@ -14,6 +14,21 @@ By the end of this session, you will be able to:
 
 Enterprise integration represents the final frontier for AI agent deployment - moving from development prototypes to production-ready systems that integrate seamlessly with existing enterprise infrastructure. This session covers the complete enterprise deployment lifecycle, from containerization to monitoring.
 
+### Building on Previous Sessions
+
+In previous sessions, we've explored various agent frameworks and patterns:
+
+- **Session 8 (Multi-Agent Patterns)**: We learned about agent coordination, communication protocols, and complex workflow management
+- **Sessions 1-7**: We built expertise with different frameworks like LangChain, CrewAI, and PydanticAI
+
+Now we're ready to take these agent systems to production in enterprise environments. The transition from development to enterprise deployment involves several critical shifts:
+
+1. **Scale**: From handling a few requests to thousands per second
+2. **Reliability**: From "it works on my machine" to 99.9% uptime requirements
+3. **Security**: From basic authentication to enterprise-grade security and compliance
+4. **Integration**: From isolated systems to seamless enterprise ecosystem integration
+5. **Operations**: From manual deployment to automated CI/CD and monitoring
+
 The enterprise agent architecture integrates with:
 - **Enterprise Systems**: ERP, CRM, databases, and legacy applications
 - **Security Infrastructure**: Identity providers, certificates, and compliance frameworks
@@ -24,9 +39,50 @@ The enterprise agent architecture integrates with:
 
 ## Part 1: Enterprise Architecture & Integration (25 minutes)
 
+### Understanding Enterprise Systems and Integration
+
+Before diving into agent implementation, it's crucial to understand the enterprise landscape that our agents must integrate with. Enterprise environments are complex ecosystems of interconnected systems, each serving specific business functions.
+
+#### What Are Enterprise Systems?
+
+Enterprise systems are large-scale software applications that organizations use to manage their operations. These include:
+
+- **ERP (Enterprise Resource Planning)**: Systems like SAP, Oracle, and Microsoft Dynamics that manage business processes like finance, HR, and supply chain
+- **CRM (Customer Relationship Management)**: Platforms like Salesforce and HubSpot that manage customer interactions and sales processes
+- **Legacy Systems**: Older systems that may use outdated technology but contain critical business data and processes
+- **Data Warehouses**: Centralized repositories that store historical and analytical data from various business systems
+
+#### Why Enterprise Integration Is Complex
+
+Enterprise integration presents unique challenges:
+
+1. **Scale and Volume**: Enterprise systems process millions of transactions daily
+2. **Reliability Requirements**: System downtime can cost thousands of dollars per minute
+3. **Security and Compliance**: Strict requirements for data protection and regulatory compliance
+4. **Legacy Constraints**: Older systems may have limited APIs or use outdated protocols
+5. **Data Consistency**: Ensuring data integrity across multiple systems with different data models
+
+#### Common Integration Patterns
+
+Enterprise systems typically communicate using established patterns:
+
+- **Request-Reply**: Synchronous communication where the caller waits for a response
+- **Publish-Subscribe**: Event-driven pattern where systems publish events that others can subscribe to
+- **Message Queuing**: Asynchronous communication using message brokers like RabbitMQ or Apache Kafka
+- **API Gateway**: Centralized entry point that manages API access, security, and routing
+- **Service Mesh**: Infrastructure layer that handles service-to-service communication
+
 ### Understanding Enterprise Agent Architecture
 
 Enterprise agent systems require a fundamentally different approach compared to development prototypes. They must integrate with existing infrastructure, meet compliance requirements, and operate at scale with high availability.
+
+The key differences in enterprise agent architecture include:
+
+- **Multi-System Integration**: Agents must work with multiple enterprise systems simultaneously
+- **Security by Design**: Every interaction must be authenticated, authorized, and audited
+- **Fault Tolerance**: Agents must handle system failures gracefully without losing data
+- **Scalability**: Agents must handle variable workloads from dozens to thousands of requests per second
+- **Observability**: Complete visibility into agent behavior for monitoring and debugging
 
 ### Step 1.1: Enterprise Integration Patterns
 
@@ -97,7 +153,42 @@ This protocol defines the standard interface for connecting to various enterpris
 
 ### Step 1.2: ERP System Integration
 
-Now let's implement a concrete adapter for SAP ERP systems. We'll start with the imports and basic class structure:
+#### Understanding ERP Systems and SAP
+
+Enterprise Resource Planning (ERP) systems are the backbone of most large organizations. They integrate and manage core business processes like:
+
+- **Financial Management**: General ledger, accounts payable/receivable, financial reporting
+- **Human Resources**: Employee records, payroll, benefits administration  
+- **Supply Chain**: Inventory management, procurement, order processing
+- **Customer Management**: Customer data, order history, service records
+
+**SAP (Systems, Applications & Products)** is one of the world's largest ERP vendors, used by over 440,000 customers worldwide. SAP systems typically:
+
+- Store vast amounts of business-critical data
+- Use complex data models with thousands of tables
+- Require specialized knowledge to integrate with
+- Have strict security and compliance requirements
+
+#### SAP Integration Challenges
+
+When integrating agents with SAP systems, you'll encounter several challenges:
+
+1. **Authentication Complexity**: SAP uses various authentication methods (OAuth 2.0, SAML, certificates)
+2. **Data Structure Complexity**: SAP data models are intricate with many relationships and business rules
+3. **Performance Requirements**: SAP operations must be efficient to avoid impacting business processes
+4. **Error Handling**: Robust error handling is essential as SAP failures can affect critical business operations
+5. **Security Requirements**: SAP contains sensitive business data requiring strict access controls
+
+#### SAP OData Services
+
+Modern SAP systems expose data through OData (Open Data Protocol) services, which:
+
+- Provide RESTful APIs for data access
+- Use standardized URL patterns for entities and operations
+- Support filtering, sorting, and pagination
+- Include metadata for understanding data structures
+
+Now let's implement a production-ready SAP adapter that handles these challenges:
 
 ```python
 # SAP ERP system adapter - imports and initialization
@@ -218,7 +309,31 @@ Now let's handle authentication errors:
 
 This implementation handles OAuth 2.0 with proper token management, expiration tracking, and automatic header updates.
 
-Let's implement customer data retrieval with error handling:
+#### Enterprise Data Retrieval Patterns
+
+When retrieving data from enterprise systems like SAP, several important patterns must be considered:
+
+**1. Data Validation and Sanitization**
+- Validate all input parameters to prevent injection attacks
+- Sanitize data before processing to ensure system stability
+- Implement proper error handling for invalid requests
+
+**2. Security and Access Control**
+- Verify user permissions for requested data
+- Implement field-level security where required
+- Log all data access for audit trails
+
+**3. Performance and Scalability**
+- Use efficient queries to minimize system impact
+- Implement caching for frequently accessed data
+- Consider pagination for large datasets
+
+**4. Error Handling and Resilience**
+- Gracefully handle system unavailability
+- Provide meaningful error messages for troubleshooting
+- Implement retry logic for transient failures
+
+Let's implement customer data retrieval that demonstrates these enterprise patterns:
 
 ```python
 # Customer data retrieval method
@@ -367,9 +482,51 @@ Connection pooling is essential for enterprise database access. This configurati
 
 ## Part 2: Production Deployment & CI/CD (30 minutes)
 
-### Step 2.1: Containerization Strategy
+### Understanding Containerization and Docker
 
-Production agent systems require sophisticated containerization beyond basic Docker images. Let's start with the build stage:
+Before diving into production containerization, let's understand the fundamentals of containers and why they're essential for enterprise deployment.
+
+#### What Are Containers?
+
+Containers are lightweight, portable packages that include everything needed to run an application:
+
+- **Application Code**: Your agent implementation
+- **Runtime Environment**: Python interpreter, Node.js, etc.
+- **Dependencies**: Libraries, packages, and frameworks
+- **Configuration**: Environment variables and settings
+- **System Libraries**: Operating system components needed by the application
+
+#### Why Containers Are Essential for Enterprise Deployment
+
+Containers solve several critical enterprise challenges:
+
+1. **Consistency**: "It works on my machine" problems disappear - containers run identically everywhere
+2. **Scalability**: Containers can be quickly started, stopped, and scaled based on demand
+3. **Resource Efficiency**: Containers share the host OS kernel, using fewer resources than virtual machines
+4. **Security**: Containers provide process isolation and can run with minimal privileges
+5. **Portability**: Containers run on any platform that supports the container runtime
+
+#### Docker Fundamentals
+
+Docker is the most popular containerization platform. Key concepts include:
+
+- **Docker Image**: A template containing the application and its dependencies
+- **Docker Container**: A running instance of a Docker image
+- **Dockerfile**: A text file with instructions for building a Docker image
+- **Docker Registry**: A service for storing and distributing Docker images (like Docker Hub)
+
+#### Multi-Stage Builds for Production
+
+Enterprise applications benefit from multi-stage Docker builds, which:
+
+- **Separate Build and Runtime**: Build dependencies aren't included in the final image
+- **Reduce Image Size**: Smaller images deploy faster and have fewer vulnerabilities
+- **Improve Security**: Runtime images contain only necessary components
+- **Enable Caching**: Build stages can be cached independently for faster builds
+
+### Step 2.1: Production Containerization Strategy
+
+Production agent systems require sophisticated containerization beyond basic Docker images. We'll implement a multi-stage build that optimizes for security, performance, and maintainability.
 
 ```dockerfile
 # Multi-stage Dockerfile - Build stage
@@ -462,9 +619,56 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
 
 Security is enhanced by running as a non-root user with properly configured file permissions and health checks.
 
-### Step 2.2: Kubernetes Deployment Configuration
+### Understanding Kubernetes Orchestration
 
-Enterprise deployment requires sophisticated Kubernetes configurations. Let's start with the deployment metadata:
+Before implementing Kubernetes deployments, let's understand why container orchestration is essential for enterprise applications.
+
+#### What Is Container Orchestration?
+
+Container orchestration automates the deployment, management, and scaling of containerized applications. It handles:
+
+- **Container Deployment**: Starting containers across multiple servers
+- **Service Discovery**: Enabling containers to find and communicate with each other
+- **Load Balancing**: Distributing traffic across container instances
+- **Health Monitoring**: Detecting and replacing unhealthy containers
+- **Scaling**: Adding or removing containers based on demand
+- **Rolling Updates**: Updating applications without downtime
+
+#### Why Kubernetes for Enterprise Applications?
+
+Kubernetes (K8s) is the leading orchestration platform because it provides:
+
+1. **High Availability**: Applications remain available even when individual servers fail
+2. **Scalability**: Automatically scale applications based on resource usage or custom metrics  
+3. **Self-Healing**: Automatically restart failed containers and reschedule them to healthy nodes
+4. **Configuration Management**: Centralized management of application configuration and secrets
+5. **Resource Management**: Efficient allocation of CPU, memory, and storage across the cluster
+
+#### Key Kubernetes Concepts
+
+Understanding these concepts is crucial for enterprise deployment:
+
+- **Pod**: The smallest deployable unit, typically containing one container
+- **Deployment**: Manages multiple replicas of pods and handles updates
+- **Service**: Provides stable network access to pods, even as they're created and destroyed
+- **Ingress**: Manages external access to services, including load balancing and SSL termination
+- **ConfigMap**: Stores configuration data that can be consumed by containers
+- **Secret**: Stores sensitive data like passwords and API keys
+- **Namespace**: Provides logical separation between different applications or environments
+
+#### Enterprise Kubernetes Considerations
+
+Enterprise Kubernetes deployments require additional considerations:
+
+- **Security**: Network policies, RBAC, and pod security standards
+- **Monitoring**: Comprehensive observability across the cluster
+- **Backup and Recovery**: Protecting application state and configuration
+- **Multi-Environment Support**: Supporting development, staging, and production environments
+- **Compliance**: Meeting regulatory requirements for data protection and access control
+
+### Step 2.2: Production Kubernetes Configuration
+
+Enterprise deployment requires sophisticated Kubernetes configurations that handle security, scalability, and reliability requirements.
 
 ```yaml
 # Kubernetes Deployment Configuration
@@ -607,9 +811,57 @@ Here's a more complex routing rule for different API versions:
 
 This configuration shows how to route different API versions to different services and inject faults for testing resilience.
 
-### Step 2.4: CI/CD Pipeline Implementation
+### Understanding DevOps and CI/CD
 
-Enterprise CI/CD pipelines require comprehensive testing and security scanning. Let's start with the basic workflow structure:
+Before implementing CI/CD pipelines, let's understand the DevOps principles that make enterprise deployment successful.
+
+#### What Is DevOps?
+
+DevOps is a set of practices that combines software development (Dev) and IT operations (Ops) to:
+
+- **Increase Deployment Frequency**: Deploy updates more frequently and reliably
+- **Reduce Lead Time**: Decrease the time from code commit to production deployment
+- **Improve Mean Time to Recovery**: Recover from failures faster through automation
+- **Lower Change Failure Rate**: Reduce the percentage of deployments that cause production issues
+
+#### CI/CD Fundamentals
+
+**Continuous Integration (CI)** automatically:
+- Builds code when changes are committed
+- Runs automated tests to catch issues early
+- Performs security and quality scans
+- Creates deployment artifacts
+
+**Continuous Deployment (CD)** automatically:
+- Deploys applications to various environments
+- Performs additional testing in staging environments
+- Manages configuration and secrets
+- Monitors deployments for issues
+
+#### Why CI/CD Is Critical for Enterprise Agents
+
+Enterprise agent systems benefit significantly from CI/CD because they:
+
+1. **Handle Sensitive Data**: Automated testing ensures data handling remains secure
+2. **Require High Availability**: Automated deployment reduces human errors that cause downtime
+3. **Need Compliance**: Automated scans ensure security and compliance requirements are met
+4. **Integrate with Multiple Systems**: Testing across integrations prevents breaking changes
+5. **Scale Dynamically**: Automated deployment enables quick scaling responses
+
+#### Enterprise CI/CD Requirements
+
+Enterprise CI/CD pipelines must include:
+
+- **Security Scanning**: Vulnerability detection in dependencies and containers
+- **Compliance Checks**: Automated verification of regulatory requirements
+- **Integration Testing**: Testing against actual or simulated enterprise systems
+- **Approval Gates**: Manual approvals for production deployments
+- **Rollback Capabilities**: Quick recovery from failed deployments
+- **Audit Trails**: Complete logging of all deployment activities
+
+### Step 2.4: Enterprise CI/CD Pipeline Implementation
+
+Enterprise CI/CD pipelines require comprehensive testing and security scanning integrated throughout the deployment process.
 
 ```yaml
 # GitHub Actions CI/CD Pipeline - Basic Configuration
@@ -743,6 +995,40 @@ The deployment process includes automatic health checks and rollout status monit
 ---
 
 ## Part 3: Security & Compliance (25 minutes)
+
+### Understanding Enterprise Security Requirements
+
+Security in enterprise environments goes far beyond basic password protection. Enterprise agents handle sensitive business data, integrate with critical systems, and must meet strict regulatory requirements.
+
+#### Why Enterprise Security Is Different
+
+Enterprise security requirements are driven by several factors:
+
+1. **Regulatory Compliance**: Laws like GDPR, HIPAA, SOX, and PCI-DSS impose strict data protection requirements
+2. **Business Risk**: Security breaches can result in millions in losses, legal liability, and reputational damage
+3. **Data Sensitivity**: Enterprise systems contain confidential business information, personal data, and intellectual property
+4. **Integration Complexity**: Agents interact with multiple systems, multiplying potential attack vectors
+5. **Threat Landscape**: Sophisticated attackers specifically target enterprise systems for valuable data
+
+#### Security Architecture Principles
+
+Enterprise security follows established principles:
+
+- **Defense in Depth**: Multiple layers of security controls
+- **Principle of Least Privilege**: Users and systems get minimal necessary permissions
+- **Zero Trust**: Never trust, always verify - all access must be authenticated and authorized
+- **Security by Design**: Security considerations built into every system component
+- **Continuous Monitoring**: Ongoing surveillance for security threats and compliance violations
+
+#### Compliance Framework Integration
+
+Modern enterprise agents must integrate security controls with business processes:
+
+- **Authentication and Authorization**: Who can access what data and systems
+- **Data Classification**: Different security controls based on data sensitivity
+- **Audit Logging**: Complete records of all data access and system changes
+- **Encryption**: Protecting data at rest and in transit
+- **Incident Response**: Procedures for handling security breaches
 
 ### Step 3.1: Enterprise Authentication & Authorization
 
@@ -1467,7 +1753,193 @@ Alert evaluation includes detailed context information and supports runbook URLs
 
 ---
 
-## Part 5: Scaling & Performance (15 minutes)
+## Part 5: Troubleshooting & Operations (15 minutes)
+
+### Understanding Enterprise Operations
+
+Production agent systems require comprehensive operational support to maintain reliability, performance, and security. This section covers common issues, debugging techniques, and operational best practices.
+
+#### Common Enterprise Integration Issues
+
+**1. Authentication and Authorization Failures**
+
+*Symptoms:*
+- 401 Unauthorized responses from enterprise systems
+- Token expiration errors
+- Permission denied errors for specific operations
+
+*Root Causes:*
+- Expired or invalid authentication tokens
+- Insufficient user permissions
+- Changes to enterprise system security policies
+- Network connectivity issues to identity providers
+
+*Debugging Steps:*
+```bash
+# Check token validity
+curl -H "Authorization: Bearer $TOKEN" https://api.enterprise.com/auth/validate
+
+# Verify network connectivity
+nslookup auth.enterprise.com
+telnet auth.enterprise.com 443
+
+# Check certificate validity
+openssl s_client -connect auth.enterprise.com:443 -servername auth.enterprise.com
+```
+
+*Solutions:*
+- Implement automatic token refresh mechanisms
+- Add comprehensive error handling for authentication failures
+- Monitor token expiration and refresh proactively
+- Validate user permissions before attempting operations
+
+**2. Database Connection Issues**
+
+*Symptoms:*
+- Connection timeout errors
+- "Too many connections" errors
+- Slow query performance
+- Intermittent connection drops
+
+*Root Causes:*
+- Connection pool exhaustion
+- Network latency or instability
+- Database server overload
+- Incorrect connection string configuration
+
+*Debugging Steps:*
+```bash
+# Test database connectivity
+psql -h db.enterprise.com -U agent_user -d production -c "SELECT 1;"
+
+# Check connection pool status
+kubectl exec -it agent-pod -- python -c "
+import asyncpg
+# Check pool stats
+"
+
+# Monitor database performance
+kubectl exec -it postgres-pod -- psql -c "
+SELECT * FROM pg_stat_activity WHERE datname='production';
+"
+```
+
+*Solutions:*
+- Configure appropriate connection pool sizes
+- Implement connection retry logic with exponential backoff
+- Monitor database performance metrics
+- Use read replicas for read-heavy workloads
+
+**3. Container and Kubernetes Issues**
+
+*Symptoms:*
+- Pods stuck in Pending state
+- Frequent pod restarts
+- Out of Memory (OOMKilled) errors
+- Service discovery failures
+
+*Debugging Steps:*
+```bash
+# Check pod status and events
+kubectl describe pod agent-pod-name
+
+# Check resource usage
+kubectl top pods
+kubectl top nodes
+
+# Check logs for errors
+kubectl logs agent-pod-name --previous
+kubectl logs agent-pod-name -f
+
+# Check service endpoints
+kubectl get endpoints agent-service
+```
+
+*Solutions:*
+- Set appropriate resource requests and limits
+- Implement proper health checks
+- Monitor memory usage patterns
+- Use horizontal pod autoscaling
+
+#### Debugging Techniques
+
+**1. Distributed Tracing Analysis**
+
+Use distributed tracing to understand complex workflows:
+
+```bash
+# Query Jaeger for traces
+curl "http://jaeger-query:16686/api/traces?service=enterprise-agent&limit=20"
+
+# Analyze trace spans for performance issues
+# Look for:
+# - Long-running spans
+# - Error spans
+# - Missing expected spans
+```
+
+**2. Metrics-Based Debugging**
+
+Monitor key metrics to identify issues:
+
+```bash
+# Query Prometheus metrics
+curl "http://prometheus:9090/api/v1/query?query=rate(agent_requests_total[5m])"
+
+# Check error rates
+curl "http://prometheus:9090/api/v1/query?query=rate(agent_errors_total[5m])/rate(agent_requests_total[5m])"
+
+# Monitor resource usage
+curl "http://prometheus:9090/api/v1/query?query=container_memory_usage_bytes{container='agent'}"
+```
+
+**3. Log Analysis Techniques**
+
+Effective log analysis for troubleshooting:
+
+```bash
+# Search logs with structured queries
+kubectl logs -l app=enterprise-agent | grep "ERROR" | jq '.'
+
+# Filter by time range
+kubectl logs agent-pod-name --since=1h | grep "authentication"
+
+# Aggregate error patterns
+kubectl logs -l app=enterprise-agent | grep "ERROR" | sort | uniq -c | sort -nr
+```
+
+#### Operational Best Practices
+
+**1. Health Monitoring**
+
+Implement comprehensive health monitoring:
+
+- **Endpoint Health**: Monitor all external API endpoints
+- **Database Health**: Check connection pools and query performance
+- **Message Queue Health**: Monitor queue depths and processing rates
+- **Resource Health**: Track CPU, memory, and storage usage
+
+**2. Capacity Planning**
+
+Plan for growth and load variations:
+
+- Monitor historical usage patterns
+- Set up alerting for resource thresholds (80% CPU, 85% memory)
+- Implement auto-scaling based on multiple metrics
+- Regular load testing to validate capacity assumptions
+
+**3. Incident Response**
+
+Establish clear incident response procedures:
+
+- Document common troubleshooting steps
+- Create runbooks for typical scenarios
+- Implement escalation procedures
+- Conduct post-incident reviews
+
+---
+
+## Part 6: Scaling & Performance (15 minutes)
 
 ### Step 5.1: Auto-Scaling Implementation
 
@@ -1687,6 +2159,182 @@ Here's the Redis storage with expiration:
 ```
 
 The cache includes metadata about when responses were cached and which agent generated them.
+
+---
+
+## 🏗️ Hands-On Exercises
+
+These practical exercises help you apply enterprise deployment concepts in realistic scenarios. Work through them systematically to build production deployment expertise.
+
+### Exercise 1: Enterprise System Integration Setup
+
+**Objective**: Set up a secure connection to a mock enterprise system with proper authentication and error handling.
+
+**Scenario**: You need to integrate your agent with a company's Customer Management System (CMS) that uses OAuth 2.0 authentication and has strict rate limiting.
+
+**Tasks**:
+1. Create a configuration class for CMS connection settings
+2. Implement OAuth 2.0 authentication with automatic token refresh
+3. Add circuit breaker pattern for resilience
+4. Implement comprehensive error handling and logging
+
+**Expected Outcome**: A robust adapter that can handle authentication failures, rate limits, and network issues gracefully.
+
+**Starter Code**:
+```python
+# Complete this enterprise system adapter
+class CMSAdapter:
+    def __init__(self, config: Dict[str, Any]):
+        # TODO: Initialize connection parameters
+        pass
+    
+    async def authenticate(self) -> bool:
+        # TODO: Implement OAuth 2.0 flow
+        pass
+    
+    async def get_customer_profile(self, customer_id: str) -> Dict[str, Any]:
+        # TODO: Retrieve customer data with proper error handling
+        pass
+```
+
+### Exercise 2: Production Dockerfile Creation
+
+**Objective**: Create a production-ready multi-stage Dockerfile with security best practices.
+
+**Scenario**: Deploy a Python agent application that needs specific dependencies but must be secure and lightweight for production.
+
+**Requirements**:
+- Use multi-stage build to minimize final image size
+- Run as non-root user for security
+- Include health check endpoint
+- Optimize for caching and build speed
+- Handle secrets securely
+
+**Tasks**:
+1. Create a build stage with all development dependencies
+2. Create a runtime stage with only production requirements
+3. Set up proper user permissions and security context
+4. Add health check configuration
+5. Optimize layer caching
+
+### Exercise 3: Kubernetes Deployment Configuration
+
+**Objective**: Create comprehensive Kubernetes manifests for production deployment.
+
+**Scenario**: Deploy your agent application to a Kubernetes cluster with high availability, proper resource management, and monitoring.
+
+**Tasks**:
+1. Create Deployment with rolling update strategy
+2. Configure resource requests and limits
+3. Set up health probes (liveness and readiness)
+4. Create Service for internal communication
+5. Add HorizontalPodAutoscaler for automatic scaling
+6. Configure monitoring and logging
+
+**Template**:
+```yaml
+# Complete this Kubernetes deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enterprise-agent
+spec:
+  # TODO: Add deployment configuration
+  replicas: 3
+  strategy:
+    # TODO: Configure rolling update strategy
+  template:
+    spec:
+      containers:
+      - name: agent
+        # TODO: Add container configuration
+        resources:
+          # TODO: Set resource limits
+        livenessProbe:
+          # TODO: Configure health checks
+```
+
+### Exercise 4: CI/CD Pipeline Implementation
+
+**Objective**: Create a complete CI/CD pipeline with security scanning and automated deployment.
+
+**Scenario**: Set up GitHub Actions workflow that builds, tests, scans, and deploys your agent application with proper approval gates.
+
+**Requirements**:
+- Automated testing on pull requests
+- Security vulnerability scanning
+- Docker image building and pushing
+- Staging deployment with approval gate
+- Production deployment with rollback capability
+
+**Tasks**:
+1. Create test workflow for pull requests
+2. Add security scanning with Trivy or similar
+3. Implement Docker build and push
+4. Add staging deployment with environment protection
+5. Configure production deployment with manual approval
+
+### Exercise 5: Monitoring and Alerting Setup
+
+**Objective**: Implement comprehensive monitoring with Prometheus metrics and alert rules.
+
+**Scenario**: Your agent is in production and you need visibility into its performance, errors, and business metrics.
+
+**Tasks**:
+1. Add Prometheus metrics to your agent application
+2. Create custom metrics for business KPIs
+3. Configure Prometheus scraping
+4. Set up Grafana dashboards
+5. Create alerting rules for critical conditions
+6. Configure alert routing and escalation
+
+**Key Metrics to Track**:
+- Request rate and latency
+- Error rate by type
+- Database connection pool usage
+- Memory and CPU utilization
+- Business metrics (successful operations, data processed)
+
+### Exercise 6: Security Implementation
+
+**Objective**: Implement enterprise-grade security with RBAC, encryption, and audit logging.
+
+**Scenario**: Your agent handles sensitive customer data and must meet compliance requirements.
+
+**Tasks**:
+1. Implement role-based access control (RBAC)
+2. Add data encryption for sensitive fields
+3. Create comprehensive audit logging
+4. Set up secure secret management
+5. Implement API rate limiting and authentication
+
+**Security Checklist**:
+- [ ] All API endpoints require authentication
+- [ ] Sensitive data is encrypted at rest
+- [ ] All data access is logged for audit
+- [ ] Users have minimal necessary permissions
+- [ ] Secrets are managed securely (not in code)
+- [ ] Rate limiting prevents abuse
+
+### Self-Assessment Questions
+
+After completing these exercises, verify your understanding:
+
+1. **Can you explain the security implications of running containers as root vs. non-root users?**
+2. **What are the trade-offs between different Kubernetes deployment strategies?**
+3. **How would you troubleshoot a production agent that's experiencing authentication timeouts?**
+4. **What metrics would you monitor to detect a memory leak in your agent application?**
+5. **How would you implement zero-downtime deployment for a stateful agent application?**
+
+### Next Steps
+
+After completing these exercises:
+
+1. **Deploy to Cloud**: Try deploying your solutions to AWS EKS, Google GKE, or Azure AKS
+2. **Add Observability**: Integrate with APM tools like Datadog or New Relic
+3. **Implement GitOps**: Use tools like ArgoCD for declarative deployments
+4. **Security Hardening**: Implement network policies, pod security standards, and image scanning
+5. **Performance Testing**: Use tools like k6 or JMeter to validate performance under load
 
 ---
 
