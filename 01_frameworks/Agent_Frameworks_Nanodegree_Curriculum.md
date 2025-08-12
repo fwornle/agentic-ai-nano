@@ -47,28 +47,33 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 **Materials:** Session5_PydanticAI_Type_Safe_Agents.md + Session5_PydanticAI_Type_Safe_Agents-solution.md
 **Self-Check:** Multiple choice quiz covering type safety, streaming validation, and multi-provider agent architectures
 
+### **Session 6: Atomic Agents Modular Architecture**
+**Content:** Modular, composable agent architecture with atomic components, lightweight patterns, composable tool systems, and modular multi-agent coordination bridging individual frameworks and enterprise patterns
+**Materials:** Session6_Atomic_Agents_Modular_Architecture.md + Session6_Atomic_Agents_Modular_Architecture-solution.md
+**Self-Check:** Multiple choice quiz covering atomic patterns, component composition, and modular architecture design
+
 ---
 
 ## **Week 2: Production Frameworks & Enterprise Integration**
 
-### **Session 6: ADK Enterprise Agent Development**
+### **Session 7: ADK Enterprise Agent Development**
 **Content:** Google's Agent Development Kit for production-ready agent systems
-**Materials:** Session6_First_ADK_Agent.md + Session6_First_ADK_Agent-solution.md
+**Materials:** Session7_First_ADK_Agent.md + Session7_First_ADK_Agent-solution.md
 **Self-Check:** Multiple choice quiz covering ADK architecture and enterprise patterns
 
-### **Session 7: Agno Production-Ready Agents**
+### **Session 8: Agno Production-Ready Agents**
 **Content:** Agno framework for scalable agent deployment, advanced monitoring, enterprise integration patterns, and production-grade observability systems
-**Materials:** Session7_Agno_Production_Ready_Agents.md + Session7_Agno_Production_Ready_Agents-solution.md
+**Materials:** Session8_Agno_Production_Ready_Agents.md + Session8_Agno_Production_Ready_Agents-solution.md
 **Self-Check:** Multiple choice quiz covering enterprise deployment, advanced monitoring, and production observability
 
-### **Session 8: Multi-Agent Patterns & ReAct Implementation**
+### **Session 9: Multi-Agent Patterns & ReAct Implementation**
 **Content:** Advanced multi-agent architectures, ReAct reasoning patterns, coordination strategies, enterprise communication protocols, and production-grade pattern implementations
-**Materials:** Session8_Multi_Agent_Patterns_ReAct.md + Session8_Multi_Agent_Patterns_ReAct-solution.md
+**Materials:** Session9_Multi_Agent_Patterns_ReAct.md + Session9_Multi_Agent_Patterns_ReAct-solution.md
 **Self-Check:** Multiple choice quiz covering enterprise patterns, advanced reasoning, and production coordination strategies
 
-### **Session 9: Enterprise Integration & Production Deployment**
+### **Session 10: Enterprise Integration & Production Deployment**
 **Content:** Advanced containerization, cloud deployment, enterprise monitoring, modern protocol integration (MCP, A2A, ACP, ANP), performance benchmarking, and production-grade scaling strategies
-**Materials:** Session9_Enterprise_Integration_Production_Deployment.md + Session9_Enterprise_Integration_Production_Deployment-solution.md
+**Materials:** Session10_Enterprise_Integration_Production_Deployment.md + Session10_Enterprise_Integration_Production_Deployment-solution.md
 **Self-Check:** Multiple choice quiz covering advanced deployment, protocol integration, and enterprise scaling patterns
 
 ## **Capstone Project: Multi-Framework Agent Ecosystem**
@@ -81,6 +86,8 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 - Build ReAct agents for complex reasoning chains with performance optimization
 - Develop Planning agents for multi-step task execution using orchestrator-worker patterns
 - Deploy Multi-Agent systems with hierarchical coordination and A2A/ACP protocols
+- Design atomic agent components using modular architecture patterns
+- Implement composable tool systems with plug-and-play component integration
 - Integrate with enterprise systems using modern monitoring and protocol standards
 - Demonstrate performance improvements (measure against CrewAI's 5.76x benchmark)
 - Implement streaming validation and multi-provider support
@@ -117,6 +124,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 | **LangGraph** | Excellent | ⭐⭐⭐⭐ | Moderate | Very High | Orchestrator patterns, enterprise state |
 | **CrewAI** | Outstanding | ⭐⭐⭐⭐ | Easy | Very High | 5.76x speed, Flows architecture |
 | **PydanticAI** | Very Good | ⭐⭐⭐⭐⭐ | Easy | Very High | Streaming validation, multi-provider |
+| **Atomic Agents** | Excellent | ⭐⭐⭐⭐ | Easy | High | Modular components, lightweight patterns |
 | **Google ADK** | Excellent | ⭐⭐⭐⭐⭐ | Moderate | Extreme | Enterprise integration, Google Cloud |
 | **Agno** | Good | ⭐⭐⭐⭐ | Moderate | High | Production monitoring, observability |
 
@@ -201,7 +209,7 @@ By completion, students will be able to:
 ### **Knowledge Checks**
 Each session includes multiple choice quizzes to verify understanding of key concepts:
 - **Session 0**: 15 questions covering agentic patterns and framework fundamentals
-- **Sessions 1-9**: 10-12 questions per session covering specific implementation topics
+- **Sessions 1-10**: 10-12 questions per session covering specific implementation topics
 - **Capstone Project**: Self-evaluation checklist for project completeness
 
 ### **Practical Validation**
@@ -262,7 +270,7 @@ pip install kubernetes  # Container orchestration
 ## **🎓 Completion Requirements**
 
 To successfully complete this nanodegree module:
-1. Study all session materials (Sessions 0-9)
+1. Study all session materials (Sessions 0-10)
 2. Complete all multiple choice quizzes with satisfactory scores
 3. Successfully implement all code examples and framework integrations
 4. Build and deploy the capstone project demonstrating mastery of all five agentic patterns
@@ -280,8 +288,8 @@ To successfully complete this nanodegree module:
 - **Community Resources**: Links to official documentation and developer communities
 
 ### **Learning Path**
-1. **Week 1**: Master core patterns through framework-specific implementations
+1. **Week 1**: Master core patterns through framework-specific implementations including atomic/modular approaches
 2. **Week 2**: Explore production frameworks and enterprise integration
-3. **Capstone**: Integrate all patterns in a comprehensive multi-framework system
+3. **Capstone**: Integrate all patterns in a comprehensive multi-framework system with atomic components
 
 This module provides comprehensive, self-paced instruction on 2025 state-of-the-art agent frameworks and the five core agentic patterns. You'll gain practical experience building intelligent agents that can reflect, use tools, reason, plan, and collaborate effectively in production environments using cutting-edge performance optimizations, modern protocol standards, and enterprise-grade deployment strategies. Master the latest technological advances including CrewAI's 5.76x performance improvements, advanced observability systems, and modern protocol integration (MCP, A2A, ACP, ANP) for enterprise-ready agent systems.

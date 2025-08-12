@@ -3,7 +3,7 @@
 ## Learning Objectives
 By the end of this session, you will:
 - Understand the five core agentic patterns: Reflection, Tool Use, ReAct, Planning, and Multi-Agent
-- Compare major agent frameworks and their architectural approaches
+- Compare major agent frameworks and their architectural approaches including modular/atomic patterns
 - Identify when to use each framework based on project requirements
 - Recognize the evolution from simple prompts to sophisticated agent systems
 
@@ -227,7 +227,7 @@ def react_loop(self, goal):
 
 ### Framework Classification
 
-Agent frameworks can be categorized based on their primary architectural approach:
+Agent frameworks can be categorized based on their primary architectural approach, ranging from bare-metal implementations to enterprise-grade solutions, with atomic/modular approaches providing flexible middle ground:
 
 ![Framework Comparison Matrix](images/framework-comparison-matrix.png)
 
@@ -462,6 +462,73 @@ result: ResearchResult = research_agent.run_sync(query)
 - Integration with existing Pydantic-based systems
 - Scenarios where structured outputs are critical
 
+#### **Atomic Agents (Modular Architecture)**
+
+**Philosophy**: Composable, atomic components for maximum flexibility and reusability
+- **Approach**: Small, independent agent modules that can be combined
+- **Strengths**: Lightweight, modular design, easy to test and maintain
+- **Architecture**: Atomic components with clear interfaces and minimal dependencies
+
+![Atomic Agents Architecture](images/atomic-agents.png)
+
+**Atomic Component Design:**
+Atomic Agents emphasizes breaking down agent functionality into small, composable pieces that can be mixed and matched:
+
+```python
+# Atomic Agents example - modular component architecture
+from atomic_agents import AtomicAgent, ToolAtom, MemoryAtom
+
+# Define atomic components
+search_atom = ToolAtom(
+    name="web_search",
+    function=search_web,
+    schema=SearchSchema
+)
+
+memory_atom = MemoryAtom(
+    storage_type="in_memory",
+    retention_policy="session"
+)
+```
+
+**Component Composition:**
+Components are combined into functional agents through composition rather than inheritance:
+
+```python
+# Compose atomic components into a functional agent
+research_agent = AtomicAgent(
+    atoms=[search_atom, memory_atom],
+    coordination_strategy="sequential",
+    validation_level="strict"
+)
+```
+
+**Dynamic Assembly:**
+Agents can be dynamically assembled and reconfigured at runtime based on task requirements:
+
+```python
+# Dynamic agent assembly based on task needs
+def create_specialized_agent(task_type: str) -> AtomicAgent:
+    base_atoms = [memory_atom, logging_atom]
+    
+    if task_type == "research":
+        base_atoms.extend([search_atom, analysis_atom])
+    elif task_type == "writing":
+        base_atoms.extend([writing_atom, grammar_atom])
+    
+    return AtomicAgent(atoms=base_atoms)
+
+# Create task-specific agents on demand
+researcher = create_specialized_agent("research")
+writer = create_specialized_agent("writing")
+```
+
+**When to Use Atomic Agents:**
+- Projects requiring maximum modularity and component reuse
+- Teams building diverse agent applications with shared components
+- Applications needing dynamic agent assembly and reconfiguration
+- Systems where testing and maintenance of individual components is critical
+
 #### **Agno (Performance-Optimized)**
 
 **Philosophy**: Lightweight, high-performance agent development
@@ -534,6 +601,7 @@ results = await workflow.run_parallel(tasks)
 | **Complex Workflows** | LangGraph | Precise control over multi-step processes |
 | **Team Collaboration** | CrewAI | Natural role-based patterns and built-in coordination |
 | **Type Safety Priority** | PydanticAI | Strong schemas and validation throughout |
+| **Modular Architecture** | Atomic Agents | Composable components and dynamic assembly |
 | **High Performance** | Agno | Optimized for speed and resource efficiency |
 | **Enterprise Production** | ADK | Security, compliance, and monitoring built-in |
 
@@ -542,13 +610,14 @@ results = await workflow.run_parallel(tasks)
 **Complexity vs Control Trade-off:**
 - **High Control**: Bare Metal → PydanticAI → LangGraph
 - **High Abstraction**: CrewAI → LangChain → Agno
+- **Modular Balance**: Atomic Agents → ADK
 
 **Performance vs Features Trade-off:**
-- **Performance**: Agno → Bare Metal → PydanticAI
+- **Performance**: Agno → Bare Metal → Atomic Agents
 - **Features**: LangChain → CrewAI → LangGraph
 
 **Learning Curve:**
-- **Easiest**: CrewAI → LangChain → Agno  
+- **Easiest**: CrewAI → Atomic Agents → LangChain → Agno  
 - **Steepest**: Bare Metal → LangGraph → PydanticAI
 
 ---
@@ -570,11 +639,12 @@ Throughout this module, you'll implement all five agentic patterns using differe
 - Session 1: Pure Python implementation (all patterns from scratch)
 - Session 2-3: LangChain/LangGraph (industry standard approaches)
 - Session 4-5: CrewAI/PydanticAI (collaboration and type safety)
+- Session 6: Atomic Agents (modular architecture bridging individual and enterprise)
 
 **Week 2: Production & Advanced Patterns**
-- Session 6: ADK (enterprise-grade implementation)  
-- Session 7: Agno (performance optimization)
-- Session 8-9: Advanced patterns and production deployment
+- Session 7: ADK (enterprise-grade implementation)  
+- Session 8: Agno (performance optimization)
+- Session 9-10: Advanced patterns and production deployment
 
 ---
 
