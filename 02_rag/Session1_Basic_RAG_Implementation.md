@@ -3,6 +3,7 @@
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
+
 - **Build** a complete RAG pipeline from scratch using Python
 - **Implement** document parsing, chunking, and preprocessing strategies
 - **Configure** vector databases and embedding models for optimal performance
@@ -18,6 +19,7 @@ By the end of this session, you will be able to:
 This session transforms RAG theory into working code. You'll build a complete, production-ready RAG system from scratch, learning essential skills for document processing, vector search, and intelligent response generation.
 
 **What Makes This Implementation Special:**
+
 - **Production-Ready**: Built with enterprise-grade tools (LangChain, ChromaDB)
 - **Modular Design**: Clean architecture for easy extension and maintenance  
 - **Intelligent Chunking**: Token-aware splitting with semantic boundaries
@@ -27,6 +29,7 @@ This session transforms RAG theory into working code. You'll build a complete, p
 ### **Your Learning Journey**
 
 By the end of this hands-on session, you'll have:
+
 - A working RAG system you can query in real-time
 - Deep understanding of each pipeline component
 - Skills to customize and optimize for different domains
@@ -56,6 +59,7 @@ numpy==1.24.3
 ```
 
 **Step 1: Project Structure Setup**
+
 ```bash
 # Create project structure
 mkdir basic-rag-system
@@ -65,6 +69,7 @@ touch .env README.md
 ```
 
 **Step 2: Environment Variables**
+
 ```bash
 # .env file
 OPENAI_API_KEY=your_openai_api_key_here
@@ -74,6 +79,7 @@ TOP_K=5
 ```
 
 **Step 3: Core Dependencies**
+
 ```python
 # src/config.py
 import os
@@ -107,6 +113,7 @@ The first step in any RAG system is loading and processing documents. Let's buil
 ### **Document Loader Implementation**
 
 **Step 1: Initialize Document Loader**
+
 ```python
 # src/document_loader.py - Setup and imports
 from typing import List, Dict, Any
@@ -125,6 +132,7 @@ class DocumentLoader:
 *Sets up the document loader with support for common text formats. The modular design allows easy extension for additional file types.*
 
 **Step 2: File Loading Method**
+
 ```python
     def load_from_file(self, file_path: str) -> List[Document]:
         """Load document from local file."""
@@ -143,6 +151,7 @@ class DocumentLoader:
 *Loads local files with proper error handling and metadata tracking. The Document format includes both content and source information for retrieval.*
 
 **Step 3: Web Content Loader**
+
 ```python
     def load_from_url(self, url: str) -> List[Document]:
         """Load document from web URL."""
@@ -156,6 +165,7 @@ class DocumentLoader:
 *Fetches web content with timeout protection and status code checking for robust web scraping.*
 
 **Step 4: HTML Content Processing**
+
 ```python
             # Remove script and style elements
             for script in soup(["script", "style"]):
@@ -180,6 +190,7 @@ class DocumentLoader:
 *Cleans HTML by removing scripts/styles, then processes text to eliminate extra whitespace while preserving content structure.*
 
 **Step 5: Batch Document Processing**
+
 ```python
     def load_documents(self, sources: List[str]) -> List[Document]:
         """Load multiple documents from various sources."""
@@ -221,6 +232,7 @@ class IntelligentTextSplitter:
 ```
 
 **Step 6: Token-Aware Chunking**
+
 ```python
     def count_tokens(self, text: str) -> int:
         """Count tokens in text using tiktoken."""
@@ -250,6 +262,7 @@ class IntelligentTextSplitter:
 **Step 7: Semantic Chunking Implementation**
 
 ### **Paragraph-Based Splitting**
+
 ```python
     def semantic_split(self, documents: List[Document]) -> List[Document]:
         """Split based on semantic boundaries (paragraphs, sections)."""
@@ -268,6 +281,7 @@ class IntelligentTextSplitter:
 *Initializes semantic splitting by dividing content at paragraph boundaries (double newlines), which preserves natural content structure.*
 
 ### **Intelligent Chunk Building**
+
 ```python
             for paragraph in paragraphs:
                 paragraph_tokens = self.count_tokens(paragraph)
@@ -287,6 +301,7 @@ class IntelligentTextSplitter:
 *Builds chunks by adding paragraphs until the token limit is reached, then saves the chunk with metadata tracking.*
 
 ### **Overlap Management**
+
 ```python
                     # Start new chunk with overlap
                     overlap_text = current_chunk[-self.chunk_overlap:] if len(current_chunk) > self.chunk_overlap else current_chunk
@@ -343,6 +358,7 @@ class VectorStore:
 ```
 
 **Step 8: Vector Store Initialization**
+
 ```python
     def _initialize_store(self):
         """Initialize ChromaDB vector store."""
@@ -365,6 +381,7 @@ class VectorStore:
 ```
 
 **Step 9: Document Indexing**
+
 ```python
     def add_documents(self, documents: List[Document]) -> List[str]:
         """Add documents to vector store."""
@@ -388,6 +405,7 @@ class VectorStore:
 ```
 
 **Step 10: Similarity Search Implementation**
+
 ```python
     def similarity_search(self, query: str, k: Optional[int] = None) -> List[Document]:
         """Perform similarity search."""
@@ -449,6 +467,7 @@ class BasicRAGSystem:
 ```
 
 **Step 11: Prompt Template Design**
+
 ```python
     def _create_prompt_template(self) -> PromptTemplate:
         """Create the RAG prompt template."""
@@ -469,6 +488,7 @@ Answer: Let me help you with that based on the provided information."""
 ```
 
 **Step 12: Context Preparation**
+
 ```python
     def _prepare_context(self, documents: List[Document]) -> str:
         """Prepare context from retrieved documents."""
@@ -487,6 +507,7 @@ Answer: Let me help you with that based on the provided information."""
 **Step 13: RAG Query Processing Pipeline**
 
 ### **Document Retrieval Phase**
+
 ```python
     def query(self, question: str, k: Optional[int] = None) -> Dict[str, Any]:
         """Process a RAG query and return detailed results."""
@@ -507,6 +528,7 @@ Answer: Let me help you with that based on the provided information."""
 *Retrieves the most relevant documents using vector similarity search with scores to measure relevance quality.*
 
 ### **Context Preparation and Generation**
+
 ```python
         # Step 2: Prepare context
         documents = [doc for doc, score in retrieved_docs]
@@ -524,6 +546,7 @@ Answer: Let me help you with that based on the provided information."""
 *Formats retrieved documents into context, then generates an answer using the LLM with the augmented prompt.*
 
 ### **Response Quality Assessment**
+
 ```python
         # Step 4: Calculate confidence based on retrieval scores
         scores = [score for doc, score in retrieved_docs]
@@ -590,8 +613,9 @@ class InteractiveRAG:
 ```
 
 **Step 14: Chat Interface**
-```python
+
 ### **Interactive Chat Interface**
+
 ```python
     def start_chat(self):
         """Start interactive chat session."""
@@ -605,6 +629,7 @@ class InteractiveRAG:
 *Sets up a user-friendly chat interface with clear instructions and visual formatting.*
 
 ### **Chat Loop Implementation**
+
 ```python
         while True:
             try:
@@ -631,7 +656,7 @@ class InteractiveRAG:
 ```
 
 *Handles user input, processes queries through the RAG system, and provides robust error handling for a smooth user experience.*
-    
+
     def _display_result(self, result: dict):
         """Display query result in a formatted way."""
         print(f"\n🤖 **Answer** (Confidence: {result['confidence']})")
@@ -646,6 +671,7 @@ class InteractiveRAG:
                 print(f"   Source: {source['metadata'].get('source', 'Unknown')}")
                 print(f"   Preview: {source['content']}")
                 print()
+
 ```
 
 ---
@@ -754,15 +780,18 @@ if __name__ == "__main__":
 ## **🧪 Hands-On Exercise: Build Your RAG System**
 
 ### **Your Mission**
+
 Create a specialized RAG system for a domain of your choice (e.g., cooking, technology, history).
 
 ### **Requirements:**
+
 1. **Data Collection**: Find 3-5 relevant documents (web pages, PDFs, or text files)
 2. **Customization**: Modify the prompt template for your domain
 3. **Testing**: Create 5 test questions and evaluate the responses
 4. **Optimization**: Experiment with different chunk sizes and overlap values
 
 ### **Implementation Steps:**
+
 1. Clone the basic RAG code provided above
 2. Modify the sources list in `main.py` with your chosen documents
 3. Customize the prompt template in `BasicRAGSystem._create_prompt_template()`
@@ -774,6 +803,7 @@ Create a specialized RAG system for a domain of your choice (e.g., cooking, tech
 ## **📝 Chapter Summary**
 
 ### **What You've Built**
+
 - ✅ Complete document loading and processing pipeline
 - ✅ Intelligent text chunking with token awareness
 - ✅ Vector database integration with ChromaDB
@@ -782,6 +812,7 @@ Create a specialized RAG system for a domain of your choice (e.g., cooking, tech
 - ✅ Basic evaluation framework
 
 ### **Key Technical Skills Learned**
+
 1. **Document Processing**: Web scraping, file loading, content cleaning
 2. **Text Chunking**: Recursive splitting, semantic boundaries, overlap handling
 3. **Vector Operations**: Embedding generation, similarity search, scoring
@@ -789,6 +820,7 @@ Create a specialized RAG system for a domain of your choice (e.g., cooking, tech
 5. **System Integration**: Combining components into a cohesive pipeline
 
 ### **Performance Optimization Tips**
+
 - **Chunk Size**: Experiment with 500-1500 tokens based on your content
 - **Overlap**: Use 10-20% overlap for better context continuity
 - **Top-K**: Start with 3-5 retrieved documents, adjust based on needs
@@ -803,52 +835,60 @@ Test your understanding of RAG implementation fundamentals with our comprehensiv
 ### **Multiple Choice Questions**
 
 **1. What is the primary advantage of using metadata tracking in document loading?**
-   - A) Reduces memory usage during processing
-   - B) Enables source attribution and filtering capabilities
-   - C) Improves embedding quality
-   - D) Speeds up chunking operations
+
+- A) Reduces memory usage during processing
+- B) Enables source attribution and filtering capabilities
+- C) Improves embedding quality
+- D) Speeds up chunking operations
 
 **2. Which chunking approach is most likely to preserve semantic coherence in documents?**
-   - A) Fixed character-length splitting
-   - B) Random boundary splitting
-   - C) Semantic paragraph-based splitting
-   - D) Token-count only splitting
+
+- A) Fixed character-length splitting
+- B) Random boundary splitting
+- C) Semantic paragraph-based splitting
+- D) Token-count only splitting
 
 **3. In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?**
-   - A) Speeds up similarity searches
-   - B) Enables persistent storage between sessions
-   - C) Improves embedding accuracy
-   - D) Reduces memory consumption
+
+- A) Speeds up similarity searches
+- B) Enables persistent storage between sessions
+- C) Improves embedding accuracy
+- D) Reduces memory consumption
 
 **4. What is the primary benefit of including confidence scores in RAG responses?**
-   - A) Improves LLM generation quality
-   - B) Reduces retrieval time
-   - C) Provides transparency about answer reliability
-   - D) Enables faster document indexing
+
+- A) Improves LLM generation quality
+- B) Reduces retrieval time
+- C) Provides transparency about answer reliability
+- D) Enables faster document indexing
 
 **5. Why does the RAG system separate retrieval and generation into distinct phases?**
-   - A) To reduce computational costs
-   - B) To enable modular optimization and debugging
-   - C) To support multiple languages
-   - D) To prevent embedding conflicts
+
+- A) To reduce computational costs
+- B) To enable modular optimization and debugging
+- C) To support multiple languages
+- D) To prevent embedding conflicts
 
 **6. What is the main advantage of the structured response format (answer, sources, confidence, num_sources)?**
-   - A) Reduces token usage
-   - B) Improves embedding quality
-   - C) Enables comprehensive result evaluation and transparency
-   - D) Speeds up query processing
+
+- A) Reduces token usage
+- B) Improves embedding quality
+- C) Enables comprehensive result evaluation and transparency
+- D) Speeds up query processing
 
 **7. Why is using tiktoken for token counting important in RAG systems?**
-   - A) It improves semantic understanding
-   - B) It ensures chunks fit within LLM context limits
-   - C) It speeds up embedding generation
-   - D) It reduces storage requirements
+
+- A) It improves semantic understanding
+- B) It ensures chunks fit within LLM context limits
+- C) It speeds up embedding generation
+- D) It reduces storage requirements
 
 **8. What is the best practice for handling failed document loads in a production RAG system?**
-   - A) Stop the entire indexing process
-   - B) Skip failed documents and continue with others
-   - C) Retry indefinitely until success
-   - D) Use placeholder content for failed loads
+
+- A) Stop the entire indexing process
+- B) Skip failed documents and continue with others
+- C) Retry indefinitely until success
+- D) Use placeholder content for failed loads
 
 ---
 
@@ -861,6 +901,7 @@ Test your understanding of RAG implementation fundamentals with our comprehensiv
 ## **🔗 Next Session Preview**
 
 In **Session 2: Advanced Chunking & Preprocessing**, we'll dive deeper into:
+
 - **Hierarchical chunking strategies** for complex documents
 - **Metadata extraction and enrichment** techniques
 - **Multi-modal content processing** (images, tables, figures)
@@ -868,6 +909,7 @@ In **Session 2: Advanced Chunking & Preprocessing**, we'll dive deeper into:
 - **Advanced preprocessing pipelines** for better retrieval quality
 
 ### **Preparation Tasks**
+
 1. Experiment with your RAG system using different document types
 2. Note any challenges with chunking or retrieval quality
 3. Collect examples of complex documents (PDFs with tables, structured content)
