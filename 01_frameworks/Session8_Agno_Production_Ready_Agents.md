@@ -1050,7 +1050,6 @@ Semantic cache uses AI embeddings to match similar but not identical requests - 
             "total_requests": total
         }
 ```
-```
 
 **Integration Context: Performance and Cost Benefits**
 
@@ -1979,6 +1978,7 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
 # Start application
 CMD ["python", "-m", "src.main"]
 """
+```
 
 **Understanding Agno's Production Deployment Philosophy**
 
@@ -2591,7 +2591,6 @@ Distributed tracing provides request-level visibility across all system componen
 
 **Production Alerting Value:**
 This comprehensive alerting strategy ensures teams are notified of critical issues immediately while providing early warnings for proactive management, enabling effective incident response and continuous optimization.
-```
 
 **Integration Context: Holistic Production Observability**
 
@@ -2890,7 +2889,6 @@ class ProductionOptimizer:
 
 **Production Value of Continuous Optimization:**
 This intelligent optimization system maintains peak performance automatically, reduces operational costs through efficient resource utilization, and prevents performance degradation before it impacts users.
-```
 
 Automated performance optimization maintains system health and prevents degradation.
 
@@ -3555,9 +3553,137 @@ Comprehensive cost management provides visibility, control, and optimization opp
 
 ---
 
-## **📝 Test Your Knowledge**
+## **📝 Multiple Choice Test - Session 8**
 
-Ready to test your understanding of Agno production-ready agents? Take the comprehensive assessment to evaluate your mastery of enterprise deployment patterns, monitoring strategies, and production best practices.
+Test your understanding of Agno production-ready agents with this comprehensive assessment covering enterprise deployment patterns, monitoring strategies, and production best practices.
+
+### Section A: Agno Fundamentals (Questions 1-5)
+
+**1. What is Agno's primary design philosophy?**
+a) Framework-agnostic with maximum flexibility  
+b) Production-first with built-in observability  
+c) Development-focused with simple prototyping  
+d) Model-specific optimization  
+
+**2. Which observability feature is built into Agno by default?**
+a) Custom logging framework  
+b) OpenTelemetry with distributed tracing  
+c) Simple console output  
+d) File-based logging only  
+
+**3. How does Agno handle agent failures in production?**
+a) Simple retry with fixed delays  
+b) Circuit breakers with exponential backoff  
+c) Immediate failure without retry  
+d) Manual intervention required  
+
+**4. What format does Agno use for configuration management?**
+a) JSON with schema validation  
+b) YAML with environment variable interpolation  
+c) Python configuration files  
+d) INI files with sections  
+
+**5. Which deployment model does Agno NOT support?**
+a) Docker containers  
+b) Kubernetes clusters  
+c) Cloud functions  
+d) Client-side browser deployment  
+
+### Section B: Production Features (Questions 6-10)
+
+**6. What is the purpose of Agno's WorkflowOrchestrator?**
+a) Simple sequential task execution  
+b) Complex DAG workflows with compensation  
+c) Parallel processing only  
+d) Basic job queuing  
+
+**7. How does Agno implement distributed tracing?**
+a) Custom tracing solution  
+b) OpenTelemetry with W3C trace context  
+c) Simple request IDs  
+d) Database logging only  
+
+**8. What retry strategy does Agno use for transient failures?**
+a) Fixed interval retries  
+b) Exponential backoff with jitter  
+c) Linear increase delays  
+d) Random retry intervals  
+
+**9. Which caching strategy is recommended for Agno agents?**
+a) In-memory caching only  
+b) Redis with TTL and invalidation  
+c) File-based caching  
+d) Database caching only  
+
+**10. How does Agno handle concurrent request limiting?**
+a) Simple counter-based limiting  
+b) Semaphores with configurable pools  
+c) Database locks  
+d) Process-based limiting  
+
+### Section C: Monitoring and Observability (Questions 11-15)
+
+**11. What metrics does Agno's PrometheusMetrics collect by default?**
+a) Only response times  
+b) Request rates, latencies, error rates, and agent performance  
+c) Memory usage only  
+d) CPU utilization only  
+
+**12. How does Agno implement structured logging?**
+a) Plain text logging  
+b) JSON format with trace correlation  
+c) CSV format  
+d) Binary logging  
+
+**13. What alerting capabilities does Agno provide?**
+a) Email notifications only  
+b) Multi-channel alerts with severity levels  
+c) Console warnings only  
+d) SMS notifications only  
+
+**14. How does Agno handle performance monitoring?**
+a) Basic timing measurements  
+b) Comprehensive profiling with bottleneck detection  
+c) Manual performance testing  
+d) External monitoring tools only  
+
+**15. What security monitoring features does Agno include?**
+a) Basic authentication logs  
+b) Request validation, rate limiting, and security event tracking  
+c) Password strength checking  
+d) File system monitoring only  
+
+### Section D: Enterprise Integration (Questions 16-20)
+
+**16. How does Agno integrate with existing enterprise authentication systems?**
+a) Only supports API keys  
+b) OAuth 2.0, SAML, and LDAP integration  
+c) Basic username/password only  
+d) No authentication support  
+
+**17. What cost management features does Agno provide?**
+a) Basic usage counting  
+b) Budget tracking, cost alerts, and optimization recommendations  
+c) Manual cost calculation  
+d) No cost tracking  
+
+**18. How does Agno handle data privacy and compliance?**
+a) Basic data encryption  
+b) GDPR compliance, data masking, and audit trails  
+c) No privacy features  
+d) User responsibility only  
+
+**19. What scalability patterns does Agno support?**
+a) Single instance only  
+b) Horizontal scaling with load balancing and auto-scaling  
+c) Manual scaling only  
+d) Vertical scaling only  
+
+**20. How does Agno manage deployment environments?**
+a) Single environment support  
+b) Multi-environment configuration with promotion pipelines  
+c) Manual environment management  
+d) Development environment only  
 
 **[View Test Solutions](Session8_Test_Solutions.md)**
 
