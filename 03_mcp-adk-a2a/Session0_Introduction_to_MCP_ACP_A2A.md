@@ -832,4 +832,10 @@ D) Learn all three simultaneously
 
 ---
 
+## **Ready to Check Your Answers?**
+
+**[View Test Solutions](Session0_Test_Solutions.md)**
+
+---
+
 *Ready to build the future of AI agent systems? Let's start with Session 1: Building Your First MCP Server!*
