@@ -1444,86 +1444,12 @@ In Session 4, we'll explore CrewAI's role-based approach to multi-agent systems,
 
 ---
 
-## Knowledge Check: Multiple Choice Quiz
+## 📝 Test Your Knowledge
 
-### LangGraph Architecture (Questions 1-5)
+Ready to test your understanding of LangGraph multi-agent workflows and state management? Take the comprehensive assessment to evaluate your mastery of the concepts covered in this session.
 
-1. What is the primary advantage of LangGraph over sequential LangChain agents?
-   a) Better performance
-   b) Graph-based workflows with conditional routing and parallel execution
-   c) Lower cost
-   d) Simpler implementation
-
-2. In LangGraph, what component defines the data that flows between nodes?
-   a) Edges
-   b) State (TypedDict)
-   c) Tools
-   d) Memory
-
-3. What determines the flow between nodes in a LangGraph workflow?
-   a) Sequential execution only
-   b) Conditional edges and decision functions
-   c) Random selection
-   d) User input
-
-4. How does LangGraph handle parallel agent execution?
-   a) It doesn't support parallel execution
-   b) Through parallel nodes with state merging
-   c) Using threading only
-   d) Through external orchestration
-
-5. What happens when a LangGraph node updates state?
-   a) The entire state is replaced
-   b) Only specified fields are updated/merged
-   c) State is reset to default
-   d) Previous state is archived
-
-### Workflow Patterns (Questions 6-10)
-
-6. In the debate pattern, what determines when the debate ends?
-   a) Fixed number of rounds
-   b) Consensus score and maximum iterations
-   c) User intervention
-   d) Random timing
-
-7. What is the purpose of a decision function in conditional edges?
-   a) To process user input
-   b) To examine state and determine next node
-   c) To handle errors
-   d) To manage memory
-
-8. How does the hierarchical team pattern coordinate work?
-   a) All agents work independently
-   b) A supervisor routes tasks to specialized workers
-   c) Workers communicate directly
-   d) Random task assignment
-
-9. What is the circuit breaker pattern used for?
-   a) Stopping workflows manually
-   b) Preventing cascade failures from unreliable services
-   c) Optimizing performance
-   d) Managing memory usage
-
-10. In parallel execution, when should branches be synchronized?
-    a) Never - they should be independent
-    b) When downstream nodes need data from multiple branches
-    c) At random intervals
-    d) Only at the end of the workflow
+**[View Test Solutions](Session3_LangGraph_Multi_Agent_Workflows_Test_Solutions.md)**
 
 ---
 
-## Answer Key
-1. b) Graph-based workflows with conditional routing and parallel execution
-2. b) State (TypedDict)
-3. b) Conditional edges and decision functions
-4. b) Through parallel nodes with state merging
-5. b) Only specified fields are updated/merged
-6. b) Consensus score and maximum iterations
-7. b) To examine state and determine next node
-8. b) A supervisor routes tasks to specialized workers
-9. b) Preventing cascade failures from unreliable services
-10. b) When downstream nodes need data from multiple branches
-
----
-
-This session demonstrated how LangGraph's graph-based architecture enables sophisticated multi-agent workflows with advanced coordination patterns, parallel execution, and robust error handling.
+[← Back to Session 2](Session 2.md) | [Next: Session 4 →](Session 4.md)
