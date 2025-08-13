@@ -118,78 +118,113 @@ The `ExecutionContext` provides request tracking, user identification, and confi
 
 PydanticAI 2025 introduces real-time validation during streaming responses, ensuring schema compliance at each step of the generation process. This prevents malformed outputs and enables early error detection.
 
+#### **Core Streaming Validator Structure**
+
+The `StreamingValidator` class manages real-time validation checkpoints during response generation:
+
 ```python
-# Streaming validation with real-time schema compliance
+# Foundation class for streaming validation
 class StreamingValidator(BaseModel):
     """Real-time validation for streaming agent responses."""
     partial_schema: Dict[str, Any] = Field(default_factory=dict)
     accumulated_tokens: List[str] = Field(default_factory=list)
     validation_checkpoints: List[int] = Field(default_factory=lambda: [10, 25, 50, 100])
     current_position: int = Field(default=0)
-    
-    def validate_partial_response(self, token: str, target_schema: type[BaseModel]) -> Dict[str, Any]:
-        """Validate partial response against target schema."""
-        self.accumulated_tokens.append(token)
-        self.current_position += 1
-        
-        # Check validation at predefined checkpoints
-        if self.current_position in self.validation_checkpoints:
-            partial_text = ''.join(self.accumulated_tokens)
-            try:
-                # Attempt partial schema validation
-                partial_json = self._extract_partial_json(partial_text)
-                if partial_json:
-                    # Validate available fields against schema
-                    validated_fields = self._validate_available_fields(partial_json, target_schema)
-                    return {
-                        'status': 'valid_partial',
-                        'validated_fields': validated_fields,
-                        'completion_percentage': len(validated_fields) / len(target_schema.__fields__) * 100
-                    }
-            except Exception as e:
-                return {
-                    'status': 'validation_warning',
-                    'message': str(e),
-                    'position': self.current_position
-                }
-        
-        return {'status': 'streaming', 'position': self.current_position}
-    
-    def _extract_partial_json(self, text: str) -> Optional[Dict[str, Any]]:
-        """Extract partial JSON from streaming text."""
-        # Implementation for robust partial JSON parsing
-        import json
-        import re
-        
-        # Find JSON-like patterns
-        json_pattern = r'\{[^{}]*\}'
-        matches = re.findall(json_pattern, text)
-        
-        for match in reversed(matches):  # Try most recent first
-            try:
-                return json.loads(match)
-            except json.JSONDecodeError:
-                # Try with closing braces added
-                try:
-                    return json.loads(match + '}')
-                except json.JSONDecodeError:
-                    continue
-        
-        return None
-    
-    def _validate_available_fields(self, partial_data: Dict[str, Any], schema: type[BaseModel]) -> Dict[str, Any]:
-        """Validate only the fields present in partial data."""
-        validated = {}
-        for field_name, field_value in partial_data.items():
-            if field_name in schema.__fields__:
-                field_info = schema.__fields__[field_name]
-                try:
-                    # Use field's type for validation
-                    validated[field_name] = field_info.type_(field_value)
-                except (ValueError, TypeError) as e:
-                    validated[field_name] = {'error': str(e), 'value': field_value}
-        return validated
+```
 
+This validator tracks tokens as they arrive and validates at specific checkpoints (10, 25, 50, 100 tokens) to catch schema violations early without overwhelming the system with constant validation.
+
+#### **Partial Response Validation Logic**
+
+The core validation method processes each incoming token and triggers validation at checkpoints:
+
+```python
+def validate_partial_response(self, token: str, target_schema: type[BaseModel]) -> Dict[str, Any]:
+    """Validate partial response against target schema."""
+    self.accumulated_tokens.append(token)
+    self.current_position += 1
+    
+    # Check validation at predefined checkpoints
+    if self.current_position in self.validation_checkpoints:
+        partial_text = ''.join(self.accumulated_tokens)
+        try:
+            # Attempt partial schema validation
+            partial_json = self._extract_partial_json(partial_text)
+            if partial_json:
+                # Validate available fields against schema
+                validated_fields = self._validate_available_fields(partial_json, target_schema)
+                return {
+                    'status': 'valid_partial',
+                    'validated_fields': validated_fields,
+                    'completion_percentage': len(validated_fields) / len(target_schema.__fields__) * 100
+                }
+        except Exception as e:
+            return {
+                'status': 'validation_warning',
+                'message': str(e),
+                'position': self.current_position
+            }
+    
+    return {'status': 'streaming', 'position': self.current_position}
+```
+
+This method accumulates tokens and only validates at checkpoints, providing completion percentage feedback and early warning detection without constant processing overhead.
+
+#### **Robust Partial JSON Extraction**
+
+Extracting valid JSON from incomplete streaming responses requires careful pattern matching:
+
+```python
+def _extract_partial_json(self, text: str) -> Optional[Dict[str, Any]]:
+    """Extract partial JSON from streaming text."""
+    import json
+    import re
+    
+    # Find JSON-like patterns
+    json_pattern = r'\{[^{}]*\}'
+    matches = re.findall(json_pattern, text)
+    
+    for match in reversed(matches):  # Try most recent first
+        try:
+            return json.loads(match)
+        except json.JSONDecodeError:
+            # Try with closing braces added
+            try:
+                return json.loads(match + '}')
+            except json.JSONDecodeError:
+                continue
+    
+    return None
+```
+
+This method uses regex to find JSON-like patterns and attempts parsing, including graceful handling of incomplete JSON by adding closing braces when needed.
+
+#### **Field-Level Validation**
+
+Individual field validation ensures partial responses conform to schema requirements:
+
+```python
+def _validate_available_fields(self, partial_data: Dict[str, Any], schema: type[BaseModel]) -> Dict[str, Any]:
+    """Validate only the fields present in partial data."""
+    validated = {}
+    for field_name, field_value in partial_data.items():
+        if field_name in schema.__fields__:
+            field_info = schema.__fields__[field_name]
+            try:
+                # Use field's type for validation
+                validated[field_name] = field_info.type_(field_value)
+            except (ValueError, TypeError) as e:
+                validated[field_name] = {'error': str(e), 'value': field_value}
+    return validated
+```
+
+This validates only fields present in partial data against their schema types, collecting validation errors without stopping the process.
+
+#### **Streaming Response Handler Setup**
+
+The response handler orchestrates the entire streaming validation process:
+
+```python
 # Enhanced streaming response handler
 class StreamingResponseHandler:
     """Manages streaming responses with real-time validation."""
@@ -202,90 +237,112 @@ class StreamingResponseHandler:
             'backoff_factor': 1.5,
             'validation_timeout': 30.0
         }
-    
-    async def process_streaming_response(
-        self, 
-        response_stream: AsyncIterator[str],
-        validation_callback: Optional[Callable] = None
-    ) -> Dict[str, Any]:
-        """Process streaming response with real-time validation."""
-        validation_results = []
-        accumulated_response = ""
-        
-        try:
-            async for token in response_stream:
-                # Real-time validation
-                validation_result = self.validator.validate_partial_response(
-                    token, self.target_schema
-                )
-                validation_results.append(validation_result)
-                accumulated_response += token
-                
-                # Callback for real-time monitoring
-                if validation_callback:
-                    await validation_callback(token, validation_result)
-                
-                # Handle validation warnings
-                if validation_result['status'] == 'validation_warning':
-                    await self._handle_validation_warning(
-                        validation_result, accumulated_response
-                    )
-            
-            # Final validation of complete response
-            final_result = await self._final_validation(accumulated_response)
-            
-            return {
-                'response': final_result,
-                'validation_log': validation_results,
-                'streaming_stats': {
-                    'total_tokens': len(self.validator.accumulated_tokens),
-                    'validation_checkpoints': len([r for r in validation_results if r['status'] != 'streaming']),
-                    'warnings': len([r for r in validation_results if r['status'] == 'validation_warning'])
-                }
-            }
-            
-        except Exception as e:
-            return await self._handle_streaming_error(e, accumulated_response)
-    
-    async def _handle_validation_warning(self, warning: Dict[str, Any], partial_response: str) -> None:
-        """Handle validation warnings during streaming."""
-        # Log warning with context
-        print(f"Streaming validation warning at position {warning['position']}: {warning['message']}")
-        
-        # Could implement retry logic here if needed
-        # For now, continue streaming but log the issue
-    
-    async def _final_validation(self, complete_response: str) -> BaseModel:
-        """Perform final validation on complete response."""
-        try:
-            # Parse complete response as JSON
-            import json
-            response_data = json.loads(complete_response)
-            
-            # Validate against target schema
-            validated_response = self.target_schema(**response_data)
-            return validated_response
-            
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Invalid JSON in final response: {e}")
-        except ValidationError as e:
-            raise ValueError(f"Schema validation failed: {e}")
-    
-    async def _handle_streaming_error(self, error: Exception, partial_response: str) -> Dict[str, Any]:
-        """Handle errors during streaming validation."""
-        return {
-            'error': str(error),
-            'error_type': type(error).__name__,
-            'partial_response': partial_response,
-            'validation_log': self.validator.accumulated_tokens,
-            'recovery_suggestions': [
-                "Check network connection",
-                "Verify schema compatibility", 
-                "Review token limits",
-                "Consider retry with backoff"
-            ]
-        }
 ```
+
+The handler combines a validator instance with retry configuration, providing a complete solution for production streaming scenarios.
+
+#### **Core Streaming Processing Loop**
+
+The main processing method handles the complete streaming lifecycle:
+
+```python
+async def process_streaming_response(
+    self, 
+    response_stream: AsyncIterator[str],
+    validation_callback: Optional[Callable] = None
+) -> Dict[str, Any]:
+    """Process streaming response with real-time validation."""
+    validation_results = []
+    accumulated_response = ""
+    
+    try:
+        async for token in response_stream:
+            # Real-time validation
+            validation_result = self.validator.validate_partial_response(
+                token, self.target_schema
+            )
+            validation_results.append(validation_result)
+            accumulated_response += token
+            
+            # Callback for real-time monitoring
+            if validation_callback:
+                await validation_callback(token, validation_result)
+            
+            # Handle validation warnings
+            if validation_result['status'] == 'validation_warning':
+                await self._handle_validation_warning(
+                    validation_result, accumulated_response
+                )
+        
+        # Final validation of complete response
+        final_result = await self._final_validation(accumulated_response)
+        
+        return {
+            'response': final_result,
+            'validation_log': validation_results,
+            'streaming_stats': {
+                'total_tokens': len(self.validator.accumulated_tokens),
+                'validation_checkpoints': len([r for r in validation_results if r['status'] != 'streaming']),
+                'warnings': len([r for r in validation_results if r['status'] == 'validation_warning'])
+            }
+        }
+        
+    except Exception as e:
+        return await self._handle_streaming_error(e, accumulated_response)
+```
+
+This async method processes each token, validates at checkpoints, handles warnings, and provides comprehensive statistics about the streaming validation process.
+
+#### **Validation Warning Handling**
+
+```python
+async def _handle_validation_warning(self, warning: Dict[str, Any], partial_response: str) -> None:
+    """Handle validation warnings during streaming."""
+    # Log warning with context
+    print(f"Streaming validation warning at position {warning['position']}: {warning['message']}")
+    
+    # Could implement retry logic here if needed
+    # For now, continue streaming but log the issue
+```
+
+Warning handling allows the system to continue processing while logging issues for later analysis and debugging.
+
+#### **Final Validation and Error Handling**
+
+```python
+async def _final_validation(self, complete_response: str) -> BaseModel:
+    """Perform final validation on complete response."""
+    try:
+        # Parse complete response as JSON
+        import json
+        response_data = json.loads(complete_response)
+        
+        # Validate against target schema
+        validated_response = self.target_schema(**response_data)
+        return validated_response
+        
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON in final response: {e}")
+    except ValidationError as e:
+        raise ValueError(f"Schema validation failed: {e}")
+
+async def _handle_streaming_error(self, error: Exception, partial_response: str) -> Dict[str, Any]:
+    """Handle errors during streaming validation."""
+    return {
+        'error': str(error),
+        'error_type': type(error).__name__,
+        'partial_response': partial_response,
+        'validation_log': self.validator.accumulated_tokens,
+        'recovery_suggestions': [
+            "Check network connection",
+            "Verify schema compatibility", 
+            "Review token limits",
+            "Consider retry with backoff"
+        ]
+    }
+```
+
+The final validation ensures complete response integrity while error handling provides actionable recovery suggestions for troubleshooting production issues.
 
 This streaming validation system provides real-time feedback during response generation, enabling early error detection and improving response quality.
 
@@ -480,13 +537,23 @@ The execution wrapper provides comprehensive error handling and demonstrates how
 
 PydanticAI 2025 introduces advanced PromptedOutput control for managing custom instruction templates and enhanced schema management. This enables dynamic output control with external schemas and sophisticated prompt templates.
 
+#### **Advanced Template Foundation**
+
+The instruction template system starts with essential imports and generic type setup:
+
 ```python
 # Custom instruction templates with dynamic schema management
 from pydantic_ai import PromptedOutput, InstructionTemplate
 from typing import Type, Generic, TypeVar
 
 T = TypeVar('T', bound=BaseModel)
+```
 
+This establishes a type-safe foundation where templates can work with any BaseModel schema type.
+
+#### **Template Class Structure**
+
+```python
 class AdvancedInstructionTemplate(Generic[T]):
     """Advanced instruction template with dynamic schema binding."""
     
@@ -494,17 +561,23 @@ class AdvancedInstructionTemplate(Generic[T]):
         self.schema_type = schema_type
         self.template_cache = {}
         self.instruction_variants = {}
+```
+
+The template class uses Python's Generic system to bind to specific schema types while maintaining caching for performance optimization.
+
+#### **Dynamic Template Generation**
+
+```python
+def create_dynamic_template(
+    self, 
+    task_type: str,
+    complexity_level: Literal["simple", "moderate", "complex"] = "moderate",
+    domain_specific: bool = False
+) -> str:
+    """Create dynamic instruction templates based on context."""
     
-    def create_dynamic_template(
-        self, 
-        task_type: str,
-        complexity_level: Literal["simple", "moderate", "complex"] = "moderate",
-        domain_specific: bool = False
-    ) -> str:
-        """Create dynamic instruction templates based on context."""
-        
-        cache_key = f"{task_type}_{complexity_level}_{domain_specific}"
-        if cache_key in self.template_cache:
+    cache_key = f"{task_type}_{complexity_level}_{domain_specific}"
+    if cache_key in self.template_cache:
             return self.template_cache[cache_key]
         
         # Base instruction template
@@ -806,22 +879,40 @@ This PromptedOutput control system enables sophisticated output management with 
 
 PydanticAI 2025 provides unified interfaces across multiple LLM providers (OpenAI, Gemini, Groq) with provider-specific optimizations and seamless model switching capabilities.
 
+### **Step 1: Model Provider Imports and Enumerations**
+
+The model-agnostic system starts with essential imports and provider enumeration for type-safe provider selection:
+
 ```python
-# Model-agnostic provider configuration
+# Model-agnostic provider system imports
 from pydantic_ai.providers import ModelProvider, ProviderConfig
 from enum import Enum
 from typing import Protocol, runtime_checkable
+```
 
+These imports provide the foundation for PydanticAI's unified model provider interface.
+
+### **Step 2: Provider Enumeration and Type Safety**
+
+```python
+# Supported LLM providers with string enum for JSON serialization
 class SupportedProvider(str, Enum):
-    """Supported LLM providers with unified interface."""
+    """Enumeration of supported LLM providers with type safety."""
     OPENAI = "openai"
     GEMINI = "gemini"  
     GROQ = "groq"
     ANTHROPIC = "anthropic"
+```
 
+The string-based enum ensures JSON serialization compatibility while providing type safety for provider selection.
+
+### **Step 3: Unified Model Interface Protocol**
+
+```python
+# Protocol defining unified interface for all model providers
 @runtime_checkable
 class ModelInterface(Protocol):
-    """Unified interface for all supported model providers."""
+    """Unified interface ensuring consistent behavior across all model providers."""
     provider_name: str
     model_name: str
     max_tokens: int
@@ -831,28 +922,52 @@ class ModelInterface(Protocol):
     async def generate(self, prompt: str, **kwargs) -> str: ...
     async def stream_generate(self, prompt: str, **kwargs) -> AsyncIterator[str]: ...
     def get_provider_specific_config(self) -> Dict[str, Any]: ...
+```
 
+This protocol ensures all model providers implement consistent methods for generation, streaming, and configuration.
+
+### **Step 4: Provider Configuration Model**
+
+The configuration model provides comprehensive settings with validation for all supported providers:
+
+```python
+# Comprehensive configuration model for all providers
 class ModelProviderConfig(BaseModel):
-    """Configuration for model provider with optimization settings."""
-    provider: SupportedProvider = Field(..., description="LLM provider")
-    model_name: str = Field(..., description="Model identifier")
-    api_key: Optional[str] = Field(default=None, description="API key for provider")
-    base_url: Optional[str] = Field(default=None, description="Custom base URL")
+    """Validated configuration for model providers with optimization settings."""
+    provider: SupportedProvider = Field(..., description="Selected LLM provider")
+    model_name: str = Field(..., description="Specific model identifier")
+    api_key: Optional[str] = Field(default=None, description="Authentication API key")
+    base_url: Optional[str] = Field(default=None, description="Custom API base URL")
     max_tokens: int = Field(default=4096, ge=1, le=32768)
     temperature: float = Field(default=0.1, ge=0.0, le=2.0)
     timeout_seconds: int = Field(default=60, ge=5, le=300)
     retry_attempts: int = Field(default=3, ge=1, le=10)
-    
-    # Provider-specific optimizations
+```
+
+These fields provide comprehensive configuration with validation constraints for safe operation.
+
+### **Step 5: Provider-Specific Optimizations**
+
+```python
+    # Provider-specific optimization settings
     provider_optimizations: Dict[str, Any] = Field(default_factory=dict)
     
     class Config:
         use_enum_values = True
+```
 
+Provider optimizations enable custom settings per provider while maintaining type safety.
+
+### **Step 6: Model Provider Factory Foundation**
+
+The factory manages provider creation with default configurations and optimizations for each supported provider:
+
+```python
+# Factory for unified model provider management
 class ModelProviderFactory:
-    """Factory for creating model providers with unified interface."""
+    """Factory for creating optimized model providers with unified interface."""
     
-    # Provider-specific configurations and optimizations
+    # Comprehensive provider defaults with capabilities and optimizations
     PROVIDER_DEFAULTS = {
         SupportedProvider.OPENAI: {
             "models": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo"],
@@ -863,7 +978,14 @@ class ModelProviderFactory:
                 "enable_json_mode": True,
                 "parallel_function_calls": True
             }
-        },
+        }
+```
+
+OpenAI configuration includes advanced features like JSON mode and parallel function calling.
+
+### **Step 7: Additional Provider Configurations**
+
+```python
         SupportedProvider.GEMINI: {
             "models": ["gemini-pro", "gemini-pro-vision"],
             "supports_streaming": True,
@@ -892,7 +1014,13 @@ class ModelProviderFactory:
             }
         }
     }
-    
+    ```
+
+Each provider has specific capabilities and optimizations tailored for optimal performance.
+
+### **Step 8: Provider Configuration Creation**
+
+```python
     @classmethod
     def create_provider_config(
         cls,
@@ -900,20 +1028,21 @@ class ModelProviderFactory:
         model_name: Optional[str] = None,
         custom_config: Optional[Dict[str, Any]] = None
     ) -> ModelProviderConfig:
-        """Create optimized provider configuration."""
+        """Create optimized configuration for any supported provider."""
         
         provider_defaults = cls.PROVIDER_DEFAULTS.get(provider, {})
         
-        # Select default model if not specified
+        # Auto-select best model if not specified
         if not model_name:
             available_models = provider_defaults.get("models", [])
             model_name = available_models[0] if available_models else "default"
         
-        # Merge optimizations
+        # Merge provider optimizations with custom settings
         optimizations = provider_defaults.get("optimizations", {})
         if custom_config:
             optimizations.update(custom_config.get("optimizations", {}))
         
+        # Create validated configuration
         config = ModelProviderConfig(
             provider=provider,
             model_name=model_name,
@@ -923,15 +1052,21 @@ class ModelProviderFactory:
         )
         
         return config
-    
+    ```
+
+Configuration creation merges provider defaults with custom settings for optimal performance.
+
+### **Step 9: Model Identification and Feature Validation**
+
+```python
     @classmethod
     def get_model_identifier(cls, config: ModelProviderConfig) -> str:
-        """Get the full model identifier for PydanticAI."""
+        """Generate PydanticAI-compatible model identifier."""
         return f"{config.provider}:{config.model_name}"
     
     @classmethod
     def validate_provider_support(cls, config: ModelProviderConfig, required_features: List[str]) -> Dict[str, bool]:
-        """Validate that provider supports required features."""
+        """Validate provider capabilities against application requirements."""
         provider_info = cls.PROVIDER_DEFAULTS.get(config.provider, {})
         
         support_check = {}
@@ -944,30 +1079,44 @@ class ModelProviderFactory:
                 support_check[feature] = False
         
         return support_check
+```
 
-# Multi-provider agent factory
+Feature validation ensures compatibility between application requirements and provider capabilities.
+
+### **Step 10: Multi-Provider Agent Factory Foundation**
+
+The multi-provider factory enables agent creation with automatic fallback and performance monitoring:
+
+```python
+# Advanced multi-provider agent factory with fallback support
 class MultiProviderAgentFactory:
-    """Factory for creating agents with multiple provider support."""
+    """Factory for creating agents with multiple provider support and fallback handling."""
     
     def __init__(self):
-        self.provider_configs = {}
-        self.fallback_chain = []
-        self.provider_stats = {}
-    
+        self.provider_configs = {}  # Provider configurations
+        self.fallback_chain = []    # Fallback order for failures
+        self.provider_stats = {}    # Performance statistics
+```
+
+The factory maintains provider configurations, fallback chains, and performance statistics for intelligent routing.
+
+### **Step 11: Provider Registration and Statistics**
+
+```python
     def register_provider(
         self, 
         name: str, 
         config: ModelProviderConfig,
         priority: int = 1
     ) -> None:
-        """Register a model provider configuration."""
+        """Register a model provider with priority and enable statistics tracking."""
         self.provider_configs[name] = {
             'config': config,
             'priority': priority,
             'enabled': True
         }
         
-        # Initialize stats tracking
+        # Initialize comprehensive performance tracking
         self.provider_stats[name] = {
             'requests': 0,
             'successes': 0,
@@ -975,11 +1124,23 @@ class MultiProviderAgentFactory:
             'avg_response_time': 0.0,
             'last_used': None
         }
-    
+    ```
+
+Provider registration includes priority settings and comprehensive performance tracking for optimization.
+
+### **Step 12: Fallback Chain Configuration**
+
+```python
     def set_fallback_chain(self, provider_names: List[str]) -> None:
-        """Set the fallback chain for provider failure handling."""
+        """Configure fallback chain for automatic provider switching on failure."""
         self.fallback_chain = provider_names
-    
+```
+
+Fallback chains enable automatic switching to backup providers when primary providers fail.
+
+### **Step 13: Multi-Provider Agent Creation**
+
+```python
     async def create_research_agent(
         self,
         primary_provider: str = "openai",
@@ -987,32 +1148,46 @@ class MultiProviderAgentFactory:
         custom_system_prompt: Optional[str] = None,
         enable_fallback: bool = True
     ) -> Agent:
-        """Create research agent with multi-provider support."""
+        """Create research agent with multi-provider support and fallback handling."""
         
+        # Validate provider registration
         if primary_provider not in self.provider_configs:
             raise ValueError(f"Provider {primary_provider} not registered")
         
         primary_config = self.provider_configs[primary_provider]['config']
         
-        # Validate required features
+        # Validate provider capabilities against requirements
         required_features = ["streaming", "function_calling"]
         feature_support = ModelProviderFactory.validate_provider_support(
             primary_config, required_features
         )
-        
+```
+
+Agent creation validates provider capabilities and handles missing features gracefully.
+
+### **Step 14: Feature Validation and Agent Configuration**
+
+```python
+        # Validate all required features are supported
         if not all(feature_support.values()):
             missing_features = [f for f, supported in feature_support.items() if not supported]
             print(f"Warning: Provider {primary_provider} missing features: {missing_features}")
         
-        # Create model identifier
+        # Generate PydanticAI-compatible model identifier
         model_id = ModelProviderFactory.get_model_identifier(primary_config)
         
-        # Build system prompt with provider-specific optimizations
+        # Build provider-optimized system prompt
         system_prompt = custom_system_prompt or self._build_optimized_system_prompt(
             primary_config, result_type
         )
-        
-        # Create agent configuration
+```
+
+Feature validation warns about missing capabilities while model identification creates PydanticAI-compatible strings.
+
+### **Step 15: Agent Configuration and Creation**
+
+```python
+        # Create comprehensive agent configuration
         agent_config = {
             'model': model_id,
             'result_type': result_type,
@@ -1020,25 +1195,31 @@ class MultiProviderAgentFactory:
             'deps_type': ExecutionContext
         }
         
-        # Add provider-specific configurations
+        # Apply provider-specific optimizations
         if primary_config.provider_optimizations:
             agent_config.update(primary_config.provider_optimizations)
         
-        # Create the agent
+        # Create the configured agent
         agent = Agent(**agent_config)
         
-        # Wrap with fallback handling if enabled
+        # Enable fallback handling if configured
         if enable_fallback and self.fallback_chain:
             agent = await self._wrap_with_fallback(agent, result_type, system_prompt)
         
         return agent
-    
+    ```
+
+Agent configuration includes provider-specific optimizations and fallback handling for resilient operation.
+
+### **Step 16: Provider-Optimized System Prompts**
+
+```python
     def _build_optimized_system_prompt(
         self, 
         config: ModelProviderConfig, 
         result_type: Type[BaseModel]
     ) -> str:
-        """Build system prompt optimized for specific provider."""
+        """Build system prompt optimized for specific provider capabilities."""
         
         base_prompt = f"""You are a professional research analyst with expertise in data validation 
         and structured reporting. Your responses must always conform to the 
@@ -1051,7 +1232,7 @@ class MultiProviderAgentFactory:
         - Use clear, professional language
         - Prioritize recent and authoritative sources"""
         
-        # Add provider-specific optimizations
+        # Add provider-specific prompt optimizations
         if config.provider == SupportedProvider.ANTHROPIC:
             base_prompt += "\n\n- Structure responses using clear XML-like formatting when helpful"
             base_prompt += "\n- Include citations and source references explicitly"
@@ -1218,7 +1399,26 @@ async def demonstrate_multi_provider_agents():
         return None
 ```
 
-This model-agnostic integration provides unified interfaces across multiple LLM providers with automatic fallback handling, provider-specific optimizations, and comprehensive performance monitoring.
+### **Complete Multi-Provider Integration Summary**
+
+The model-agnostic integration system provides a production-ready foundation for type-safe agents that can seamlessly work across multiple LLM providers:
+
+**Key Capabilities:**
+- **Unified Provider Interface**: Consistent API across OpenAI, Gemini, Groq, and Anthropic
+- **Provider-Specific Optimizations**: Tailored configurations maximizing each model's strengths
+- **Automatic Fallback Handling**: Resilient operation with intelligent backup provider chains
+- **Performance Monitoring**: Real-time statistics tracking for optimization and operational insights
+- **Type-Safe Configuration**: Validated settings with comprehensive error handling
+- **Flexible Agent Creation**: Easy provider switching with minimal code changes
+
+**Production Benefits:**
+- Reduces vendor lock-in by supporting multiple providers
+- Ensures high availability through automatic failover
+- Optimizes performance through provider-specific tuning
+- Provides operational visibility through comprehensive monitoring
+- Maintains type safety throughout the entire integration stack
+
+This architecture enables production-ready agents that adapt to different LLM providers while maintaining consistent behavior, comprehensive monitoring, and reliable operation under various failure scenarios.
 
 ### **Advanced Type Definitions and Constraints**
 
@@ -1501,38 +1701,73 @@ class UserProfile(BaseModel):
         
         return values
 
+### **Step 1: Task Definition Core Structure**
+
+Complex validation rules demonstrate PydanticAI's ability to handle enterprise-level data validation requirements:
+
+```python
+# Complex task definition with comprehensive validation
 class TaskDefinition(BaseModel):
-    """Task definition with complex validation rules."""
+    """Enterprise task definition with extensive validation rules and constraints."""
     
+    # Core identification fields with length constraints
     task_id: str = Field(..., min_length=8, max_length=32)
     title: str = Field(..., min_length=5, max_length=200)
     description: str = Field(..., min_length=10, max_length=2000)
+```
+
+These core fields establish the foundation with appropriate length constraints for enterprise systems.
+
+### **Step 2: Task Status and Assignment Fields**
+
+```python
+    # Status and assignment management
     priority: TaskPriority
     status: TaskStatus = TaskStatus.PENDING
     assignee_id: Optional[str] = None
     reporter_id: str = Field(..., min_length=3)
+```
+
+Status fields use the type-safe enums we defined earlier, ensuring consistent task state management.
+
+### **Step 3: Metadata and Constraint Fields**
+
+```python
+    # Metadata and organizational fields
     labels: List[str] = Field(default_factory=list, max_items=10)
     estimated_hours: Optional[float] = Field(None, gt=0, le=1000)
     due_date: Optional[datetime] = None
     dependencies: List[str] = Field(default_factory=list, max_items=20)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    
+    ```
+
+Metadata fields include organizational tools like labels, time estimates, and dependency tracking.
+
+### **Step 4: Task ID Format Validation**
+
+```python
     @validator('task_id')
     def validate_task_id_format(cls, v):
-        """Validate task ID follows organizational format."""
-        # Format: PROJECT-NUMBER (e.g., PROJ-1234)
+        """Enforce organizational task ID format for consistency."""
+        # Required format: PROJECT-NUMBER (e.g., PROJ-1234, AI-5678)
         if not re.match(r'^[A-Z]{2,10}-\d{1,6}$', v):
             raise ValueError('Task ID must follow format: PROJECT-NUMBER (e.g., PROJ-1234)')
         return v
-    
+    ```
+
+Task ID validation ensures consistent organizational formatting across all tasks.
+
+### **Step 5: Title Quality Validation**
+
+```python
     @validator('title')
     def validate_title_quality(cls, v):
-        """Ensure title meets quality standards."""
-        # Remove extra whitespace
+        """Enforce title quality standards to improve task clarity."""
+        # Normalize whitespace
         cleaned_title = ' '.join(v.split())
         
-        # Check for common poor title patterns
+        # Detect and reject poor title patterns
         poor_patterns = [
             r'^(fix|bug|issue|problem|error)\s*$',  # Too generic
             r'^(do|make|create|update)\s*$',        # Too vague
@@ -1545,19 +1780,27 @@ class TaskDefinition(BaseModel):
                 raise ValueError(f'Title fails quality check: {cleaned_title}')
         
         return cleaned_title
-    
+    ```
+
+Title validation prevents common quality issues like overly generic or poorly formatted titles.
+
+### **Step 6: Label Format and Deduplication**
+
+```python
     @validator('labels')
     def validate_labels_format(cls, v):
-        """Validate label format and content."""
+        """Validate and normalize labels for consistent tagging."""
         validated_labels = []
         
         for label in v:
-            # Clean and validate label
+            # Normalize label format
             clean_label = label.strip().lower()
             
+            # Skip labels that are too short
             if len(clean_label) < 2:
-                continue  # Skip too short labels
+                continue
             
+            # Enforce alphanumeric characters with hyphens and underscores
             if not re.match(r'^[a-z0-9-_]+$', clean_label):
                 raise ValueError(f'Invalid label format: {label}')
             
@@ -1565,99 +1808,145 @@ class TaskDefinition(BaseModel):
         
         # Remove duplicates while preserving order
         return list(dict.fromkeys(validated_labels))
-    
+    ```
+
+Label validation ensures consistent tagging with automatic normalization and deduplication.
+
+### **Step 7: Comprehensive Due Date Validation**
+
+```python
     @validator('due_date')
     def validate_due_date_reasonable(cls, v, values):
-        """Validate due date is reasonable."""
+        """Comprehensive due date validation with business logic."""
         if v is None:
             return v
         
         now = datetime.now(timezone.utc)
         
-        # Due date cannot be in the past
+        # Prevent past due dates
         if v < now:
             raise ValueError('Due date cannot be in the past')
         
-        # Due date should not be more than 2 years in the future
+        # Reasonable future limit (2 years)
         max_future_date = now.replace(year=now.year + 2)
         if v > max_future_date:
             raise ValueError('Due date too far in the future (max 2 years)')
-        
-        # Validate against estimated hours
+```
+
+Basic due date validation ensures dates are neither in the past nor unreasonably far in the future.
+
+### **Step 8: Due Date and Work Estimation Correlation**
+
+```python
+        # Cross-validate with estimated work hours
         estimated_hours = values.get('estimated_hours')
         if estimated_hours:
             time_until_due = (v - now).days
             hours_per_day = estimated_hours / max(time_until_due, 1)
             
-            if hours_per_day > 16:  # More than 16 hours per day
+            # Prevent unrealistic work schedules (max 16 hours per day)
+            if hours_per_day > 16:
                 raise ValueError('Due date too soon for estimated work hours')
         
         return v
-    
+    ```
+
+Due date validation includes sophisticated cross-field validation with work estimation correlation.
+
+### **Step 9: Cross-Field Root Validation**
+
+```python
     @root_validator
     def validate_task_consistency(cls, values):
-        """Validate cross-field consistency."""
+        """Enforce business rules across multiple fields simultaneously."""
         status = values.get('status')
         assignee_id = values.get('assignee_id')
         due_date = values.get('due_date')
         estimated_hours = values.get('estimated_hours')
         
-        # Tasks in progress must have assignee
+        # Business rule: In-progress tasks require assignees
         if status == TaskStatus.IN_PROGRESS and not assignee_id:
             raise ValueError('In-progress tasks must have an assignee')
         
-        # Completed tasks should not have future due dates
+        # Data cleanup: Completed tasks shouldn't have future due dates
         if status == TaskStatus.COMPLETED and due_date:
             if due_date > datetime.now(timezone.utc):
-                values['due_date'] = None  # Clear future due date for completed task
-        
-        # High priority tasks should have reasonable estimates
+                values['due_date'] = None  # Auto-clear inconsistent due date
+```
+
+Root validation enforces business rules that span multiple fields, ensuring data consistency.
+
+### **Step 10: Priority-Based Validation Rules**
+
+```python
+        # Critical task requirements
         if values.get('priority') == TaskPriority.CRITICAL:
             if not estimated_hours:
                 raise ValueError('Critical tasks must have time estimates')
             if estimated_hours > 200:  # More than 5 weeks
                 raise ValueError('Critical tasks should not require more than 200 hours')
         
-        # Update timestamp
+        # Automatic timestamp update
         values['updated_at'] = datetime.now(timezone.utc)
         
         return values
 ```
 
-### **Validation Error Management**
+Priority-based validation ensures critical tasks meet organizational requirements for time estimation and resource allocation.
 
-Comprehensive error handling and validation reporting systems ensure robust agent behavior under all conditions.
+### **Step 11: Validation Error Management Foundation**
+
+Comprehensive error handling provides detailed feedback for validation failures with actionable suggestions:
 
 ```python
-# Advanced error handling and validation reporting
+# Advanced validation error management system
 from typing import Dict, List, Type, Any
 import traceback
 from dataclasses import dataclass
+```
 
+Error management imports provide the foundation for detailed validation reporting.
+
+### **Step 12: Detailed Error Information Structure**
+
+```python
 @dataclass
 class ValidationErrorDetail:
-    """Detailed validation error information."""
-    field_path: str
-    error_type: str
-    message: str
-    invalid_value: Any
-    constraint: str
-    suggestion: Optional[str] = None
+    """Comprehensive validation error details with suggestions."""
+    field_path: str       # Path to the field that failed (e.g., 'task.title')
+    error_type: str       # Type of validation error
+    message: str          # Human-readable error message
+    invalid_value: Any    # The value that caused the error
+    constraint: str       # The constraint that was violated
+    suggestion: Optional[str] = None  # Suggested fix for the error
+```
 
+Detailed error information provides comprehensive debugging and user feedback capabilities.
+
+### **Step 13: Validation Error Handler Foundation**
+
+```python
+# Centralized error processing with frequency tracking
 class ValidationErrorHandler:
-    """Centralized validation error handling and reporting."""
+    """Advanced validation error handling with analytics and suggestions."""
     
     def __init__(self):
-        self.error_counts: Dict[str, int] = {}
-        self.common_errors: List[ValidationErrorDetail] = []
-    
+        self.error_counts: Dict[str, int] = {}  # Track error frequency
+        self.common_errors: List[ValidationErrorDetail] = []  # Common error patterns
+```
+
+The error handler tracks error patterns to identify common validation issues.
+
+### **Step 14: Structured Error Processing**
+
+```python
     def handle_validation_error(self, error: Exception, model_class: Type[BaseModel]) -> Dict[str, Any]:
-        """Process validation errors and provide structured feedback."""
+        """Transform raw validation errors into structured, actionable feedback."""
         
         error_details = []
         
+        # Process Pydantic validation errors
         if hasattr(error, 'errors'):
-            # Pydantic validation error
             for err in error.errors():
                 detail = ValidationErrorDetail(
                     field_path='.'.join(str(loc) for loc in err['loc']),
@@ -1669,11 +1958,18 @@ class ValidationErrorHandler:
                 )
                 error_details.append(detail)
                 
-                # Track error frequency
+                # Track error frequency for analytics
                 error_key = f"{model_class.__name__}.{detail.field_path}.{detail.error_type}"
                 self.error_counts[error_key] = self.error_counts.get(error_key, 0) + 1
+```
+
+Error processing extracts detailed information from Pydantic errors and tracks frequency.
+
+### **Step 15: Generic Error Handling and Response Structure**
+
+```python
         else:
-            # Generic error
+            # Handle non-Pydantic errors
             detail = ValidationErrorDetail(
                 field_path="unknown",
                 error_type="generic_error",
@@ -1682,7 +1978,14 @@ class ValidationErrorHandler:
                 constraint="unknown"
             )
             error_details.append(detail)
-        
+        ```
+
+Generic error handling ensures all validation failures are captured and processed consistently.
+
+### **Step 16: Structured Error Response Generation**
+
+```python
+        # Generate comprehensive error response
         return {
             'validation_failed': True,
             'model': model_class.__name__,
@@ -1815,23 +2118,41 @@ class ValidationMiddleware:
 
 PydanticAI 2025 introduces an optional dependency injection system that enables clean separation between testing and production configurations, supporting eval-driven iterative development and robust production dependency management.
 
+### **Step 1: Import Dependencies and Define Core Protocols**
+
+The dependency injection system starts with essential imports and service protocol definitions. These protocols define the interfaces that both production and test implementations must follow:
+
 ```python
-# Advanced dependency injection system for PydanticAI
+# Essential imports for dependency injection
 from pydantic_ai.dependencies import DependencyProvider, Injectable, Scope
 from typing import Protocol, runtime_checkable
 from dataclasses import dataclass
 from contextlib import asynccontextmanager
 import asyncio
 import logging
+```
 
-# Define injectable service interfaces
+These imports provide the foundation for PydanticAI's dependency injection system, enabling clean separation between interface definitions and implementations.
+
+### **Step 2: Define Service Interface Protocols**
+
+Protocols define the contracts that all service implementations must follow, enabling seamless switching between production and test implementations:
+
+```python
+# Service interface definitions using Protocol pattern
 @runtime_checkable
 class DatabaseService(Protocol):
-    """Protocol for database operations."""
+    """Protocol for database operations with type safety."""
     async def save_result(self, result_data: Dict[str, Any]) -> str: ...
     async def get_result(self, result_id: str) -> Optional[Dict[str, Any]]: ...
     async def health_check(self) -> bool: ...
+```
 
+The `DatabaseService` protocol ensures all database implementations provide consistent async methods for saving, retrieving, and health checking.
+
+### **Step 3: Define External Service Protocols**
+
+```python
 @runtime_checkable  
 class ExternalAPIService(Protocol):
     """Protocol for external API integrations."""
@@ -1840,14 +2161,22 @@ class ExternalAPIService(Protocol):
     
 @runtime_checkable
 class CacheService(Protocol):
-    """Protocol for caching operations."""
+    """Protocol for caching operations with TTL support."""
     async def get(self, key: str) -> Optional[Any]: ...
     async def set(self, key: str, value: Any, ttl: int = 3600) -> None: ...
     async def invalidate(self, pattern: str) -> int: ...
+```
 
-# Production implementations
+These protocols define the core service interfaces that enable type-safe dependency injection. The `@runtime_checkable` decorator allows isinstance() checks at runtime.
+
+### **Step 4: Production Database Service Implementation**
+
+The production database service provides real database connectivity with connection pooling and proper error handling:
+
+```python
+# Production database implementation with connection pooling
 class ProductionDatabaseService:
-    """Production database service implementation."""
+    """Production database service with connection pool management."""
     
     def __init__(self, connection_string: str, pool_size: int = 10):
         self.connection_string = connection_string
@@ -1855,30 +2184,45 @@ class ProductionDatabaseService:
         self._connection_pool = None
     
     async def initialize(self):
-        """Initialize database connection pool."""
-        # Simulate database connection setup
+        """Initialize database connection pool for production use."""
+        # In real implementation, this would create actual connection pool
         self._connection_pool = f"ConnectionPool({self.connection_string}, size={self.pool_size})"
         logging.info(f"Database service initialized: {self._connection_pool}")
-    
+```
+
+The initialization method sets up connection pooling, which is essential for production database performance and resource management.
+
+### **Step 5: Database Operations Implementation**
+
+```python
     async def save_result(self, result_data: Dict[str, Any]) -> str:
-        """Save result to production database."""
-        # Simulate database save operation
+        """Save agent result to production database with transaction safety."""
+        # In production, this would use proper database transactions
         result_id = str(uuid.uuid4())
         logging.info(f"Saved result {result_id} to database")
         return result_id
     
     async def get_result(self, result_id: str) -> Optional[Dict[str, Any]]:
-        """Retrieve result from production database."""
-        # Simulate database retrieval
+        """Retrieve result from production database with error handling."""
+        # Production implementation would include proper error handling
         logging.info(f"Retrieved result {result_id} from database")
         return {"id": result_id, "status": "found"}
     
     async def health_check(self) -> bool:
-        """Check database health."""
+        """Monitor database connection health for production systems."""
         return self._connection_pool is not None
+```
 
+These database operations include proper UUID generation, logging, and structured return values essential for production agent systems.
+
+### **Step 6: Production API Service Implementation**
+
+The production API service handles external data sources with proper session management and authentication:
+
+```python
+# Production API service with HTTP session management
 class ProductionAPIService:
-    """Production external API service implementation."""
+    """Production external API service with authentication and session management."""
     
     def __init__(self, api_key: str, base_url: str = "https://api.example.com"):
         self.api_key = api_key
@@ -1886,14 +2230,20 @@ class ProductionAPIService:
         self.session = None
     
     async def initialize(self):
-        """Initialize HTTP session."""
-        # Simulate HTTP session setup
+        """Initialize HTTP session with authentication headers."""
+        # Production would create aiohttp session with proper headers
         self.session = f"HTTPSession(base_url={self.base_url})"
         logging.info("API service initialized")
-    
+```
+
+Session initialization is crucial for managing HTTP connections efficiently and securely in production environments.
+
+### **Step 7: API Data Operations**
+
+```python
     async def fetch_data(self, query: str) -> Dict[str, Any]:
-        """Fetch data from external API."""
-        # Simulate API call
+        """Fetch research data from external API with proper error handling."""
+        # Production implementation would include retry logic and error handling
         logging.info(f"Fetching data for query: {query}")
         return {
             "query": query,
@@ -1902,60 +2252,89 @@ class ProductionAPIService:
         }
     
     async def validate_source(self, source_url: str) -> bool:
-        """Validate source URL through external service."""
+        """Validate source URLs using external verification service."""
         logging.info(f"Validating source: {source_url}")
         return source_url.startswith(("https://", "http://"))
+```
 
-# Test implementations
+The API service provides structured data fetching and source validation, essential for maintaining data quality in research agents.
+
+### **Step 8: Test Database Service Implementation**
+
+Test implementations provide predictable behavior and call tracking for comprehensive testing:
+
+```python
+# Test database service with in-memory storage and call tracking
 class TestDatabaseService:
-    """Test database service implementation with in-memory storage."""
+    """Test database service with in-memory storage and comprehensive logging."""
     
     def __init__(self):
-        self.data_store = {}
-        self.call_log = []
+        self.data_store = {}  # In-memory storage for test data
+        self.call_log = []    # Track all method calls for verification
     
     async def initialize(self):
-        """Initialize test database."""
+        """Initialize test database - always succeeds for testing."""
         logging.info("Test database service initialized")
-    
+```
+
+The test service uses in-memory storage and call logging, enabling verification of agent behavior without external dependencies.
+
+### **Step 9: Test Database Operations**
+
+```python
     async def save_result(self, result_data: Dict[str, Any]) -> str:
-        """Save result to in-memory store."""
+        """Save result to in-memory store with predictable IDs."""
         result_id = f"test_{len(self.data_store)}"
         self.data_store[result_id] = result_data
         self.call_log.append(("save", result_id, result_data))
         return result_id
     
     async def get_result(self, result_id: str) -> Optional[Dict[str, Any]]:
-        """Retrieve result from in-memory store."""
+        """Retrieve result from in-memory store with call logging."""
         self.call_log.append(("get", result_id))
         return self.data_store.get(result_id)
     
     async def health_check(self) -> bool:
-        """Test database is always healthy."""
+        """Test database is always healthy for consistent testing."""
         return True
     
     def get_call_log(self) -> List[tuple]:
-        """Get log of all service calls for testing."""
+        """Get complete log of service calls for test verification."""
         return self.call_log.copy()
+```
 
+Test database operations provide deterministic behavior and comprehensive call tracking, essential for reliable agent testing.
+
+### **Step 10: Test API Service Implementation**
+
+```python
+# Test API service with configurable mock responses
 class TestAPIService:
-    """Test API service with predictable responses."""
+    """Test API service with predictable responses and call tracking."""
     
     def __init__(self, mock_responses: Optional[Dict[str, Any]] = None):
-        self.mock_responses = mock_responses or {}
-        self.call_log = []
+        self.mock_responses = mock_responses or {}  # Configurable test responses
+        self.call_log = []  # Track all API calls for verification
     
     async def initialize(self):
-        """Initialize test API service."""
+        """Initialize test API service - always succeeds."""
         logging.info("Test API service initialized")
-    
+```
+
+The test API service allows configurable responses, enabling comprehensive testing of different data scenarios.
+
+### **Step 11: Mock API Operations**
+
+```python
     async def fetch_data(self, query: str) -> Dict[str, Any]:
-        """Return mock data for testing."""
+        """Return configurable mock data for predictable testing."""
         self.call_log.append(("fetch_data", query))
         
+        # Return pre-configured response if available
         if query in self.mock_responses:
             return self.mock_responses[query]
         
+        # Default test response with predictable format
         return {
             "query": query,
             "results": [{"title": f"Test result for {query}", "confidence": 0.85}],
@@ -1963,21 +2342,35 @@ class TestAPIService:
         }
     
     async def validate_source(self, source_url: str) -> bool:
-        """Mock source validation for testing."""
+        """Mock source validation with predictable test behavior."""
         self.call_log.append(("validate_source", source_url))
         return not source_url.startswith("invalid://")
+```
 
-# Enhanced dependency injection container
+Mock API operations enable testing of various response scenarios, including error conditions and edge cases.
+
+### **Step 12: Dependency Injection Container Foundation**
+
+The dependency container manages service lifecycles, registration, and resolution with support for singletons and scoped services:
+
+```python
+# Advanced dependency injection container with lifecycle management
 class DependencyContainer:
-    """Advanced dependency injection container with lifecycle management."""
+    """Enterprise-grade dependency injection container with full lifecycle support."""
     
     def __init__(self):
-        self.services = {}
-        self.factories = {}
-        self.singletons = {}
-        self.scoped_services = {}
-        self.initialization_order = []
-    
+        self.services = {}              # Active service instances
+        self.factories = {}             # Service factory functions
+        self.singletons = {}           # Singleton service instances
+        self.scoped_services = {}      # Scoped service definitions
+        self.initialization_order = [] # Service initialization sequence
+```
+
+The container maintains separate tracking for different service lifecycles, ensuring proper initialization order and cleanup.
+
+### **Step 13: Service Registration Methods**
+
+```python
     def register_singleton(
         self, 
         interface: Type, 
@@ -1985,7 +2378,7 @@ class DependencyContainer:
         *args, 
         **kwargs
     ) -> None:
-        """Register a singleton service."""
+        """Register a singleton service that lives for the container lifetime."""
         self.factories[interface] = lambda: implementation(*args, **kwargs)
         self.initialization_order.append(interface)
     
@@ -1997,29 +2390,41 @@ class DependencyContainer:
         *args,
         **kwargs
     ) -> None:
-        """Register a scoped service."""
+        """Register a scoped service that lives for a specific scope lifetime."""
         if scope not in self.scoped_services:
             self.scoped_services[scope] = {}
         
         self.scoped_services[scope][interface] = lambda: implementation(*args, **kwargs)
-    
+```
+
+Service registration supports both singleton (application lifetime) and scoped (request lifetime) patterns.
+
+### **Step 14: Factory Registration and Service Resolution**
+
+```python
     def register_factory(
         self,
         interface: Type,
         factory_func: Callable,
     ) -> None:
-        """Register a factory function for service creation."""
+        """Register a factory function for custom service creation logic."""
         self.factories[interface] = factory_func
         self.initialization_order.append(interface)
-    
+    ```
+
+Factory registration enables custom service creation logic for complex initialization scenarios.
+
+### **Step 15: Service Resolution Logic**
+
+```python
     async def get_service(self, interface: Type, scope: str = "default") -> Any:
-        """Get service instance with proper initialization."""
+        """Resolve service instance with proper initialization and lifecycle management."""
         
-        # Check singletons first
+        # Check existing singletons first for performance
         if interface in self.singletons:
             return self.singletons[interface]
         
-        # Check scoped services
+        # Handle scoped services (per-request, per-session, etc.)
         if scope in self.scoped_services and interface in self.scoped_services[scope]:
             factory = self.scoped_services[scope][interface]
             instance = factory()
@@ -2027,7 +2432,7 @@ class DependencyContainer:
                 await instance.initialize()
             return instance
         
-        # Create singleton
+        # Create and cache singleton instances
         if interface in self.factories:
             instance = self.factories[interface]()
             if hasattr(instance, 'initialize'):
@@ -2036,19 +2441,33 @@ class DependencyContainer:
             return instance
         
         raise ValueError(f"No registration found for {interface}")
-    
+```
+
+Service resolution follows a clear priority: existing singletons, scoped services, then new singleton creation.
+
+### **Step 16: Container Lifecycle Management**
+
+```python
     async def initialize_all(self) -> None:
-        """Initialize all registered services in dependency order."""
+        """Initialize all registered services in proper dependency order."""
         for interface in self.initialization_order:
             if interface not in self.singletons:
                 await self.get_service(interface)
-    
+    ```
+
+Batch initialization ensures all services are ready before the application starts handling requests.
+
+### **Step 17: Service Cleanup and Scope Management**
+
+```python
     async def cleanup(self) -> None:
-        """Clean up all services."""
+        """Clean up all services with proper error handling."""
+        # Cleanup singleton services
         for service in self.singletons.values():
             if hasattr(service, 'cleanup'):
                 await service.cleanup()
         
+        # Cleanup scoped services safely
         for scope_services in self.scoped_services.values():
             for service in scope_services.values():
                 if hasattr(service, 'cleanup'):
@@ -2058,25 +2477,39 @@ class DependencyContainer:
                             await instance.cleanup()
                     except:
                         pass  # Service may not be instantiated
-    
+```
+
+Cleanup ensures proper resource disposal when the container shuts down.
+
+### **Step 18: Scoped Service Context Management**
+
+```python
     def create_scope_context(self, scope: str):
-        """Create context manager for scoped service lifecycle."""
+        """Create async context manager for scoped service lifecycle."""
         @asynccontextmanager
         async def scope_context():
             try:
                 yield self
             finally:
-                # Cleanup scoped services
+                # Cleanup scoped services when context exits
                 if scope in self.scoped_services:
                     for interface in list(self.scoped_services[scope].keys()):
                         # Remove from scoped services to trigger cleanup
                         del self.scoped_services[scope][interface]
         
         return scope_context()
+```
 
-# Enhanced agent with dependency injection
+Scope context management enables proper lifecycle handling for request-scoped and session-scoped services.
+
+### **Step 19: Dependency-Injected Agent Implementation**
+
+The dependency-injected agent integrates PydanticAI with the dependency injection container for clean architecture:
+
+```python
+# PydanticAI agent with comprehensive dependency injection
 class DependencyInjectedAgent:
-    """PydanticAI agent with dependency injection support."""
+    """PydanticAI agent with full dependency injection support and lifecycle management."""
     
     def __init__(
         self,
@@ -2086,23 +2519,29 @@ class DependencyInjectedAgent:
         self.agent_config = agent_config
         self.container = container
         self.agent = None
-    
+```
+
+The agent wrapper holds configuration and container references for lazy initialization.
+
+### **Step 20: Agent Initialization with Dependency Resolution**
+
+```python
     async def initialize(self) -> Agent:
-        """Initialize agent with injected dependencies."""
+        """Initialize agent with all required dependencies resolved."""
         
-        # Get required services
+        # Resolve all required services from the container
         db_service = await self.container.get_service(DatabaseService)
         api_service = await self.container.get_service(ExternalAPIService)
         cache_service = await self.container.get_service(CacheService, scope="request")
         
-        # Create dependency context
+        # Create dependency context for the agent
         dependency_context = {
             'db_service': db_service,
             'api_service': api_service,
             'cache_service': cache_service
         }
         
-        # Create agent with injected dependencies
+        # Create PydanticAI agent with injected dependencies
         self.agent = Agent(
             model=self.agent_config.get('model', 'openai:gpt-4'),
             result_type=self.agent_config.get('result_type', ResearchResult),
@@ -2111,26 +2550,39 @@ class DependencyInjectedAgent:
         )
         
         return self.agent
-    
+    ```
+
+Agent initialization creates the PydanticAI agent with all dependencies properly resolved and injected.
+
+### **Step 21: Agent Execution with Scoped Dependencies**
+
+```python
     async def run_with_dependencies(
         self, 
         user_prompt: str,
         execution_context: ExecutionContext,
         scope: str = "request"
     ) -> Any:
-        """Run agent with properly injected dependencies."""
+        """Execute agent with properly managed scoped dependencies."""
         
+        # Ensure agent is initialized
         if not self.agent:
             await self.initialize()
         
         # Create scoped context for request-level dependencies
         async with self.container.create_scope_context(scope):
-            # Get fresh instances for this request scope
+            # Get fresh service instances for this request scope
             db_service = await self.container.get_service(DatabaseService)
             api_service = await self.container.get_service(ExternalAPIService)
             cache_service = await self.container.get_service(CacheService, scope=scope)
-            
-            # Create dependency bundle
+```
+
+Scoped execution ensures clean isolation between different agent requests.
+
+### **Step 22: Dependency Bundle Creation and Agent Execution**
+
+```python
+            # Create dependency bundle for the agent
             deps = type('RequestDependencies', (), {
                 'db_service': db_service,
                 'api_service': api_service, 
@@ -2138,13 +2590,13 @@ class DependencyInjectedAgent:
                 'execution_context': execution_context
             })()
             
-            # Run agent with dependencies
+            # Execute agent with injected dependencies
             result = await self.agent.run(
                 user_prompt=user_prompt,
                 deps=deps
             )
             
-            # Save result using injected database service
+            # Automatically save result using injected database service
             result_id = await db_service.save_result({
                 'prompt': user_prompt,
                 'result': result.model_dump(),
@@ -2156,17 +2608,25 @@ class DependencyInjectedAgent:
                 'result_id': result_id,
                 'execution_context': execution_context
             }
+```
 
-# Configuration factories for different environments
+Dependency bundle creation and agent execution provide a complete request lifecycle with automatic persistence.
+
+### **Step 23: Environment-Specific Configuration Factories**
+
+Configuration factories enable easy switching between production, testing, and development environments:
+
+```python
+# Environment-specific dependency configuration factories
 class DependencyConfigFactory:
-    """Factory for creating environment-specific dependency configurations."""
+    """Factory for creating environment-specific dependency containers."""
     
     @staticmethod
     def create_production_container(config: Dict[str, Any]) -> DependencyContainer:
-        """Create production dependency container."""
+        """Create production container with real database and API services."""
         container = DependencyContainer()
         
-        # Register production services
+        # Register production database with connection pooling
         container.register_singleton(
             DatabaseService,
             ProductionDatabaseService,
@@ -2174,14 +2634,21 @@ class DependencyConfigFactory:
             pool_size=config['database']['pool_size']
         )
         
+        # Register production API service with authentication
         container.register_singleton(
             ExternalAPIService,
             ProductionAPIService,
             api_key=config['api']['key'],
             base_url=config['api']['base_url']
         )
-        
-        # Register cache service (could be Redis in production)
+```
+
+Production container registration uses real database connections and external API integrations.
+
+### **Step 24: Production Cache Service Registration**
+
+```python
+        # Register production cache service (Redis/Memcached in real deployment)
         from cachetools import TTLCache
         cache_impl = TTLCache(maxsize=1000, ttl=3600)
         container.register_factory(
@@ -2194,22 +2661,36 @@ class DependencyConfigFactory:
         )
         
         return container
-    
+    ```
+
+Production cache registration uses TTL cache with configurable size and timeout settings.
+
+### **Step 25: Test Container Configuration**
+
+```python
     @staticmethod
     def create_test_container(mock_config: Optional[Dict[str, Any]] = None) -> DependencyContainer:
-        """Create test dependency container with mocked services."""
+        """Create test container with mocked services for reliable testing."""
         container = DependencyContainer()
         mock_config = mock_config or {}
         
-        # Register test services
+        # Register test database with in-memory storage
         container.register_singleton(DatabaseService, TestDatabaseService)
+        
+        # Register test API service with configurable mock responses
         container.register_singleton(
             ExternalAPIService, 
             TestAPIService,
             mock_responses=mock_config.get('api_responses', {})
         )
-        
-        # Simple in-memory cache for testing
+```
+
+Test container uses in-memory services with configurable mock responses for predictable testing.
+
+### **Step 26: Test Cache Service Registration**
+
+```python
+        # Simple in-memory cache for testing consistency
         test_cache = {}
         container.register_factory(
             CacheService,
@@ -2221,12 +2702,20 @@ class DependencyConfigFactory:
         )
         
         return container
+```
 
-# Usage examples
+Test cache provides simple in-memory storage with consistent behavior for testing scenarios.
+
+### **Step 27: Complete Dependency Injection Demonstration**
+
+A comprehensive demonstration showing how to use dependency injection in both production and test environments:
+
+```python
+# Complete demonstration of dependency injection patterns
 async def demonstrate_dependency_injection():
-    """Demonstrate dependency injection patterns."""
+    """Show how to use dependency injection for production and testing."""
     
-    # Production configuration
+    # Production configuration with real connection details
     prod_config = {
         'database': {
             'connection_string': 'postgresql://prod_host:5432/agents',
@@ -2238,20 +2727,33 @@ async def demonstrate_dependency_injection():
         }
     }
     
-    # Create production container
+    # Create and initialize production container
     prod_container = DependencyConfigFactory.create_production_container(prod_config)
     await prod_container.initialize_all()
-    
-    # Create agent with production dependencies
+```
+
+Production configuration uses real database connections and API credentials for production deployment.
+
+### **Step 28: Agent Configuration and Environment Setup**
+
+```python
+    # Agent configuration shared between environments
     agent_config = {
         'model': 'openai:gpt-4',
         'result_type': ResearchResult,
         'system_prompt': 'Research assistant with production integrations.'
     }
     
+    # Create production agent
     prod_agent = DependencyInjectedAgent(agent_config, prod_container)
-    
-    # Test configuration with mocked services
+    ```
+
+Agent configuration defines the model, result type, and system prompt used across both environments.
+
+### **Step 29: Test Environment Configuration**
+
+```python
+    # Test configuration with mock responses for predictable testing
     test_container = DependencyConfigFactory.create_test_container({
         'api_responses': {
             'AI safety': {
@@ -2262,24 +2764,25 @@ async def demonstrate_dependency_injection():
     })
     await test_container.initialize_all()
     
+    # Create test agent with same configuration
     test_agent = DependencyInjectedAgent(agent_config, test_container)
-    
-    # Execute with both environments
+```
+
+Test environment uses configurable mock responses for consistent, predictable testing behavior.
+
+### **Step 30: Agent Execution and Verification**
+
+```python
+    # Create execution context for the request
     execution_context = ExecutionContext(user_id="test_user")
     
-    # Production execution (would use real services)
-    # prod_result = await prod_agent.run_with_dependencies(
-    #     "Research AI safety best practices",
-    #     execution_context
-    # )
-    
-    # Test execution (uses mocked services)
+    # Execute test agent (production would be similar)
     test_result = await test_agent.run_with_dependencies(
         "Research AI safety best practices",
         execution_context
     )
     
-    # Verify test service calls
+    # Verify service interactions for testing
     test_db = await test_container.get_service(DatabaseService)
     test_api = await test_container.get_service(ExternalAPIService)
     
@@ -3583,6 +4086,8 @@ class PerformanceMonitor:
 
 PydanticAI 2025 includes comprehensive monitoring and observability integration for enterprise deployment, with advanced configuration patterns and real-time performance tracking.
 
+#### **Essential Monitoring Imports**
+
 ```python
 # Enterprise monitoring and observability for PydanticAI
 from pydantic_ai.monitoring import AgentMonitor, MetricsCollector
@@ -3593,8 +4098,13 @@ from typing import Any, Dict, List, Optional, Callable
 from dataclasses import dataclass, field
 from contextlib import asynccontextmanager
 import structlog
+```
 
-# Advanced metrics collection system
+These imports provide the foundation for enterprise monitoring, including built-in PydanticAI monitoring tools, observability tracing, and structured logging capabilities.
+
+#### **Core Agent Metrics Structure**
+
+```python
 @dataclass
 class AgentMetrics:
     """Comprehensive agent performance metrics."""
@@ -3616,84 +4126,90 @@ class AgentMetrics:
     
     # Success rate over time
     success_rate_history: List[Dict[str, Any]] = field(default_factory=list)
-    
-    def update_response_time(self, response_time: float) -> None:
-        """Update response time metrics."""
-        self.response_times.append(response_time)
-        
-        # Keep only last 1000 response times for memory management
-        if len(self.response_times) > 1000:
-            self.response_times = self.response_times[-1000:]
-        
-        # Update aggregate metrics
-        self.avg_response_time = sum(self.response_times) / len(self.response_times)
-        self.min_response_time = min(self.min_response_time, response_time)
-        self.max_response_time = max(self.max_response_time, response_time)
-    
-    def record_success(self, response_time: float, tokens_used: int = 0, cost: float = 0.0) -> None:
-        """Record successful request."""
-        self.request_count += 1
-        self.success_count += 1
-        self.total_tokens_used += tokens_used
-        self.total_cost += cost
-        self.update_response_time(response_time)
-        
-        # Update success rate history (keep last 24 hours worth)
-        current_time = time.time()
-        self.success_rate_history.append({
-            'timestamp': current_time,
-            'success': True,
-            'response_time': response_time
-        })
-        
-        # Cleanup old entries (older than 24 hours)
-        cutoff_time = current_time - 24 * 3600
-        self.success_rate_history = [
-            entry for entry in self.success_rate_history 
-            if entry['timestamp'] > cutoff_time
-        ]
-    
-    def record_error(self, error_type: str, response_time: float = 0.0) -> None:
-        """Record failed request."""
-        self.request_count += 1
-        self.error_count += 1
-        
-        if error_type not in self.error_types:
-            self.error_types[error_type] = 0
-        self.error_types[error_type] += 1
-        
-        if response_time > 0:
-            self.update_response_time(response_time)
-        
-        # Update success rate history
-        current_time = time.time()
-        self.success_rate_history.append({
-            'timestamp': current_time,
-            'success': False,
-            'error_type': error_type
-        })
-    
-    def get_success_rate(self) -> float:
-        """Get current success rate."""
-        if self.request_count == 0:
-            return 1.0
-        return self.success_count / self.request_count
-    
-    def get_percentiles(self) -> Dict[str, float]:
-        """Get response time percentiles."""
-        if not self.response_times:
-            return {}
-        
-        sorted_times = sorted(self.response_times)
-        n = len(sorted_times)
-        
-        return {
-            'p50': sorted_times[int(n * 0.5)],
-            'p90': sorted_times[int(n * 0.9)],
-            'p95': sorted_times[int(n * 0.95)],
-            'p99': sorted_times[int(n * 0.99)]
-        }
+```
 
+The `AgentMetrics` class captures comprehensive performance data including request counts, response times, token usage, costs, and historical success rates for detailed analysis.
+
+#### **Response Time Tracking Methods**
+
+```python
+def update_response_time(self, response_time: float) -> None:
+    """Update response time metrics."""
+    self.response_times.append(response_time)
+    
+    # Keep only last 1000 response times for memory management
+    if len(self.response_times) > 1000:
+        self.response_times = self.response_times[-1000:]
+    
+    # Update aggregate metrics
+    self.avg_response_time = sum(self.response_times) / len(self.response_times)
+    self.min_response_time = min(self.min_response_time, response_time)
+    self.max_response_time = max(self.max_response_time, response_time)
+```
+
+This method maintains a rolling window of response times for memory efficiency while calculating real-time statistics for performance monitoring.
+
+#### **Success and Error Recording**
+
+```python
+def record_success(self, response_time: float, tokens_used: int = 0, cost: float = 0.0) -> None:
+    """Record successful request."""
+    self.request_count += 1
+    self.success_count += 1
+    self.total_tokens_used += tokens_used
+    self.total_cost += cost
+    self.update_response_time(response_time)
+    
+    # Update success rate history (keep last 24 hours worth)
+    current_time = time.time()
+    self.success_rate_history.append({
+        'timestamp': current_time,
+        'success': True,
+        'response_time': response_time
+    })
+
+def record_error(self, error_type: str, response_time: float = 0.0) -> None:
+    """Record failed request."""
+    self.request_count += 1
+    self.error_count += 1
+    
+    if error_type not in self.error_types:
+        self.error_types[error_type] = 0
+    self.error_types[error_type] += 1
+```
+
+These methods track both successful operations and failures, maintaining detailed error categorization and success rate history for trend analysis.
+
+#### **Performance Analysis Methods**
+
+```python
+def get_success_rate(self) -> float:
+    """Get current success rate."""
+    if self.request_count == 0:
+        return 1.0
+    return self.success_count / self.request_count
+
+def get_percentiles(self) -> Dict[str, float]:
+    """Get response time percentiles."""
+    if not self.response_times:
+        return {}
+    
+    sorted_times = sorted(self.response_times)
+    n = len(sorted_times)
+    
+    return {
+        'p50': sorted_times[int(n * 0.5)],
+        'p90': sorted_times[int(n * 0.9)],
+        'p95': sorted_times[int(n * 0.95)],
+        'p99': sorted_times[int(n * 0.99)]
+    }
+```
+
+These analysis methods provide success rate calculations and response time percentiles, essential for understanding system performance characteristics.
+
+#### **Enterprise Metrics Collector Setup**
+
+```python
 class EnterpriseMetricsCollector:
     """Enterprise-grade metrics collection and reporting."""
     

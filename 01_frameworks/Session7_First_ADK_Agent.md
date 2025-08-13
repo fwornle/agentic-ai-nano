@@ -763,39 +763,65 @@ Congratulations! You've built a sophisticated ADK agent with the following capab
 
 ---
 
-## 🧪 Testing Your Understanding
+## 📝 **Multiple Choice Test**
 
-### Quick Check Questions
+Test your understanding of ADK agent development with these questions:
 
-1. **What is the primary role of the ConversationMemory class?**
-   - A) Store user preferences
-   - B) Maintain conversation context and history
-   - C) Handle tool integration
-   - D) Manage cloud deployment
+### **Question 1: Conversation Memory**
+**What is the primary role of the ConversationMemory class?**
 
-2. **How does the ADK agent determine when to use MCP tools?**
-   - A) Random selection
-   - B) User explicitly requests tools
-   - C) Response analysis and pattern matching
-   - D) Fixed rule-based system
+A) Store user preferences  
+B) Maintain conversation context and history  
+C) Handle tool integration  
+D) Manage cloud deployment  
 
-3. **What advantage does async processing provide in agent implementations?**
-   - A) Simpler code structure
-   - B) Better error handling
-   - C) Non-blocking operations and improved performance
-   - D) Easier debugging
+---
 
-4. **How does the agent maintain context across conversation turns?**
-   - A) Static variables
-   - B) ConversationMemory with turn tracking
-   - C) External database
-   - D) Cloud storage
+### **Question 2: Tool Selection**
+**How does the ADK agent determine when to use MCP tools?**
 
-5. **What is the purpose of the system prompt in agent responses?**
-   - A) User identification
-   - B) Provide context about available tools and agent capabilities
-   - C) Error handling
-   - D) Performance optimization
+A) Random selection  
+B) User explicitly requests tools  
+C) Response analysis and pattern matching  
+D) Fixed rule-based system  
+
+---
+
+### **Question 3: Async Processing**
+**What advantage does async processing provide in agent implementations?**
+
+A) Simpler code structure  
+B) Better error handling  
+C) Non-blocking operations and improved performance  
+D) Easier debugging  
+
+---
+
+### **Question 4: Context Management**
+**How does the agent maintain context across conversation turns?**
+
+A) Static variables  
+B) ConversationMemory with turn tracking  
+C) External database  
+D) Cloud storage  
+
+---
+
+### **Question 5: System Prompt**
+**What is the purpose of the system prompt in agent responses?**
+
+A) User identification  
+B) Provide context about available tools and agent capabilities  
+C) Error handling  
+D) Performance optimization  
+
+---
+
+## **Ready to Check Your Answers?**
+
+**[View Test Solutions](Session7_Test_Solutions.md)**
+
+---
 
 ### Practical Exercise
 

@@ -270,59 +270,75 @@ Error handling is critical in ReAct systems because failed actions provide valua
 
 Advanced ReAct systems include meta-reasoning capabilities that evaluate the quality of the reasoning process itself:
 
+#### **Meta-Reasoning Analyzer Setup**
+
 ```python
 class MetaReActAnalyzer:
     """Analyzes and improves ReAct reasoning quality"""
     
     def __init__(self, llm_client):
         self.llm = llm_client
-    
-    async def analyze_reasoning_quality(
-        self, reasoning_history: List[ReActStep]
-    ) -> Dict[str, Any]:
-        """Comprehensive analysis of reasoning chain quality"""
-        
-        if len(reasoning_history) < 2:
-            return {'quality_score': 0.5, 'issues': [], 'recommendations': []}
-        
-        analyses = await asyncio.gather(
-            self._detect_circular_reasoning(reasoning_history),
-            self._assess_progress_quality(reasoning_history),
-            self._evaluate_action_choices(reasoning_history),
-            self._check_confidence_patterns(reasoning_history)
-        )
-        
-        return self._synthesize_quality_assessment(analyses)
-    
-    async def _detect_circular_reasoning(
-        self, history: List[ReActStep]
-    ) -> Dict[str, Any]:
-        """Detect if agent is stuck in reasoning loops"""
-        
-        recent_steps = history[-5:]  # Examine last 5 steps
-        action_sequence = [step.action for step in recent_steps]
-        
-        # Check for repeated action patterns
-        if len(set(action_sequence)) <= 2 and len(action_sequence) >= 4:
-            return {
-                'has_circular_reasoning': True,
-                'pattern': action_sequence,
-                'severity': 'high'
-            }
-        
-        # Check for repeated similar thoughts
-        thoughts = [step.thought.lower() for step in recent_steps]
-        similarity_scores = self._calculate_thought_similarity(thoughts)
-        
-        if any(score > 0.8 for score in similarity_scores):
-            return {
-                'has_circular_reasoning': True,
-                'pattern': 'similar_thoughts',
-                'severity': 'medium'
-            }
-        
-        return {'has_circular_reasoning': False}
 ```
+
+The meta-analyzer provides oversight of the reasoning process to identify failure patterns and quality issues.
+
+#### **Quality Analysis Orchestration**
+
+```python
+async def analyze_reasoning_quality(
+    self, reasoning_history: List[ReActStep]
+) -> Dict[str, Any]:
+    """Comprehensive analysis of reasoning chain quality"""
+    
+    if len(reasoning_history) < 2:
+        return {'quality_score': 0.5, 'issues': [], 'recommendations': []}
+    
+    analyses = await asyncio.gather(
+        self._detect_circular_reasoning(reasoning_history),
+        self._assess_progress_quality(reasoning_history),
+        self._evaluate_action_choices(reasoning_history),
+        self._check_confidence_patterns(reasoning_history)
+    )
+    
+    return self._synthesize_quality_assessment(analyses)
+```
+
+This method runs multiple parallel analyses to comprehensively evaluate reasoning chain quality and progress.
+
+#### **Circular Reasoning Detection**
+
+```python
+async def _detect_circular_reasoning(
+    self, history: List[ReActStep]
+) -> Dict[str, Any]:
+    """Detect if agent is stuck in reasoning loops"""
+    
+    recent_steps = history[-5:]  # Examine last 5 steps
+    action_sequence = [step.action for step in recent_steps]
+    
+    # Check for repeated action patterns
+    if len(set(action_sequence)) <= 2 and len(action_sequence) >= 4:
+        return {
+            'has_circular_reasoning': True,
+            'pattern': action_sequence,
+            'severity': 'high'
+        }
+    
+    # Check for repeated similar thoughts
+    thoughts = [step.thought.lower() for step in recent_steps]
+    similarity_scores = self._calculate_thought_similarity(thoughts)
+    
+    if any(score > 0.8 for score in similarity_scores):
+        return {
+            'has_circular_reasoning': True,
+            'pattern': 'similar_thoughts',
+            'severity': 'medium'
+        }
+    
+    return {'has_circular_reasoning': False}
+```
+
+This detection system identifies when agents get stuck in unproductive reasoning loops by analyzing action patterns and thought similarity.
 
 This meta-reasoning system can identify common failure patterns and suggest improvements to the reasoning process.
 
