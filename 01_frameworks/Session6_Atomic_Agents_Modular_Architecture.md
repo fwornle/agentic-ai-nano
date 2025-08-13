@@ -1718,7 +1718,7 @@ The **HorizontalPodAutoscaler** automatically adjusts replica counts based on CP
 
 Ready to test your understanding of Atomic Agents modular architecture and composition patterns? Take the comprehensive assessment to evaluate your mastery of the concepts covered in this session.
 
-**[View Test Solutions](Session6_Atomic_Agents_Modular_Architecture_Test_Solutions.md)**
+**[View Test Solutions](Session6_Test_Solutions.md)**
 
 ---
 

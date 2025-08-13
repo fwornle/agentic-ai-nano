@@ -1448,7 +1448,7 @@ In Session 4, we'll explore CrewAI's role-based approach to multi-agent systems,
 
 Ready to test your understanding of LangGraph multi-agent workflows and state management? Take the comprehensive assessment to evaluate your mastery of the concepts covered in this session.
 
-**[View Test Solutions](Session3_LangGraph_Multi_Agent_Workflows_Test_Solutions.md)**
+**[View Test Solutions](Session3_Test_Solutions.md)**
 
 ---
 
