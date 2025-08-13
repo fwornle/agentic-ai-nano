@@ -5,7 +5,7 @@
 By the end of this session, you will be able to:
 - **Deploy** multiple vector database architectures (Chroma, Pinecone, Qdrant, Weaviate)
 - **Implement** hybrid search strategies combining semantic and keyword search
-- **Optimize** vector indices for performance, scalability, and cost efficiency  
+- **Optimize** vector indices for performance, scalability, and cost efficiency
 - **Design** advanced retrieval pipelines with reranking and filtering
 - **Evaluate** search quality using precision, recall, and domain-specific metrics
 
@@ -19,7 +19,7 @@ Vector databases transform RAG from a concept into reality - they're the high-pe
 
 **The Vector Database Challenge:**
 - **Scale**: Millions of vectors with sub-second search times
-- **Accuracy**: Precise similarity matching across high dimensions  
+- **Accuracy**: Precise similarity matching across high dimensions
 - **Flexibility**: Support for filtering, hybrid search, and complex queries
 - **Reliability**: Production uptime and data consistency guarantees
 
@@ -51,22 +51,22 @@ Vector databases are specialized for storing and querying high-dimensional vecto
 # Core vector database operations
 class VectorDatabaseInterface:
     """Abstract interface for vector database operations."""
-    
+
     def __init__(self, dimension: int, metric: str = "cosine"):
         self.dimension = dimension
         self.metric = metric  # cosine, euclidean, dot_product
-    
-    def add_vectors(self, vectors: List[List[float]], 
+
+    def add_vectors(self, vectors: List[List[float]],
                    metadata: List[Dict], ids: List[str]):
         """Add vectors with metadata and IDs."""
         raise NotImplementedError
-    
-    def search(self, query_vector: List[float], 
+
+    def search(self, query_vector: List[float],
               top_k: int = 10, filters: Dict = None):
         """Search for similar vectors with optional filtering."""
         raise NotImplementedError
-    
-    def update_vector(self, vector_id: str, 
+
+    def update_vector(self, vector_id: str,
                      new_vector: List[float], new_metadata: Dict):
         """Update existing vector and metadata."""
         raise NotImplementedError
@@ -105,18 +105,18 @@ from typing import List, Dict, Optional, Tuple
 
 class ChromaVectorStore:
     """Advanced ChromaDB wrapper with optimization features.
-    
+
     This implementation prioritizes:
     - HNSW index optimization for 100k-1M document collections
     - Persistent storage for production reliability
     - Batch operations for efficient data loading
     - Memory-conscious configuration for stable performance
     """
-    
+
     def __init__(self, persist_directory: str, collection_name: str):
         self.persist_directory = persist_directory
         self.collection_name = collection_name
-        
+
         # Performance tracking for optimization feedback
         self.query_times = []
         self.build_times = []
@@ -135,7 +135,7 @@ The client configuration directly impacts both performance and reliability:
                 anonymized_telemetry=False  # Reduces network calls in production
             )
         )
-        
+
         # Create or get collection with optimized settings
         self.collection = self._initialize_collection()
 ```
@@ -152,7 +152,7 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
 ```python
     def _initialize_collection(self):
         """Initialize collection with carefully tuned HNSW parameters.
-        
+
         Parameter Selection Rationale:
         - cosine similarity: Optimal for text embeddings (handles normalization)
         - construction_ef=200: Higher accuracy during index building (2-3x query ef)
@@ -165,7 +165,7 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
                 name=self.collection_name
             )
             print(f"Loaded existing collection: {self.collection_name}")
-            
+
         except ValueError:
             # Create new collection with optimized HNSW settings
             collection = self.client.create_collection(
@@ -178,7 +178,7 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
                 }
             )
             print(f"Created new collection: {self.collection_name}")
-        
+
         return collection
 ```
 
@@ -190,41 +190,41 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
 
 - **`M=16`**: The bi-directional link count per node. This is perhaps the most critical parameter:
   - **M=8-12**: Lower memory, faster insertion, potentially lower recall
-  - **M=16**: Balanced choice for most applications 
+  - **M=16**: Balanced choice for most applications
   - **M=32+**: Higher memory usage but excellent recall (use for high-accuracy requirements)
 
 - **`search_ef=100`**: The query-time exploration parameter. We can tune this per-query based on accuracy needs:
   - **ef=50**: Fast searches, ~85-90% recall
-  - **ef=100**: Our default, ~92-95% recall  
+  - **ef=100**: Our default, ~92-95% recall
   - **ef=200+**: Highest accuracy, slower queries
 
 **Step 2: Batch Operations for Performance**
 ```python
-    def add_documents_batch(self, documents: List[str], 
-                           embeddings: List[List[float]], 
-                           metadata: List[Dict], 
-                           ids: List[str], 
+    def add_documents_batch(self, documents: List[str],
+                           embeddings: List[List[float]],
+                           metadata: List[Dict],
+                           ids: List[str],
                            batch_size: int = 1000):
         """Add documents in optimized batches."""
-        
+
         total_docs = len(documents)
         print(f"Adding {total_docs} documents in batches of {batch_size}")
-        
+
         for i in range(0, total_docs, batch_size):
             batch_end = min(i + batch_size, total_docs)
-            
+
             batch_documents = documents[i:batch_end]
             batch_embeddings = embeddings[i:batch_end]
             batch_metadata = metadata[i:batch_end]
             batch_ids = ids[i:batch_end]
-            
+
             self.collection.add(
                 documents=batch_documents,
                 embeddings=batch_embeddings,
                 metadatas=batch_metadata,
                 ids=batch_ids
             )
-            
+
             print(f"Added batch {i//batch_size + 1}/{(total_docs-1)//batch_size + 1}")
 ```
 
@@ -236,7 +236,7 @@ Pinecone represents the **enterprise-grade managed solution** that scales beyond
 
 **✅ Enterprise Advantages:**
 - **Horizontal scaling**: Auto-scales from millions to billions of vectors
-- **High availability**: Built-in replication and failover mechanisms  
+- **High availability**: Built-in replication and failover mechanisms
 - **Zero maintenance**: No index management, hardware provisioning, or performance tuning required
 - **Advanced features**: Namespaces, metadata filtering, real-time updates with no performance degradation
 - **Global distribution**: Multi-region deployment for low-latency worldwide access
@@ -256,31 +256,31 @@ from typing import List, Dict, Any
 
 class PineconeVectorStore:
     """Production-ready Pinecone vector store with enterprise optimizations.
-    
+
     This implementation focuses on:
     - Cost-effective pod configuration for RAG workloads
     - High availability through strategic replication
     - Metadata indexing for efficient filtering
     - Batch operations optimized for Pinecone's rate limits
     """
-    
-    def __init__(self, api_key: str, environment: str, 
+
+    def __init__(self, api_key: str, environment: str,
                  index_name: str, dimension: int = 1536):
         self.api_key = api_key
         self.environment = environment
         self.index_name = index_name
         self.dimension = dimension
-        
+
         # Performance and cost tracking
         self.operation_costs = {'queries': 0, 'upserts': 0, 'deletes': 0}
         self.batch_stats = {'successful_batches': 0, 'failed_batches': 0}
-        
+
         # Initialize Pinecone with connection pooling
         pinecone.init(
             api_key=api_key,
             environment=environment
         )
-        
+
         self.index = self._get_or_create_index()
 ```
 
@@ -291,25 +291,25 @@ Our Pinecone configuration balances **performance, cost, and reliability** for t
 ```python
     def _get_or_create_index(self):
         """Get existing index or create with production-optimized configuration.
-        
+
         Configuration Rationale:
         - pods=2: Balances cost vs. performance for moderate query load (1000-5000 QPS)
         - replicas=1: Provides failover without doubling costs (99.9% uptime)
         - pod_type='p1.x1': Cost-effective choice for most RAG applications
         - metadata indexing: Enables efficient filtering without full scans
         """
-        
+
         # Check if index exists
         if self.index_name in pinecone.list_indexes():
             print(f"Connecting to existing index: {self.index_name}")
             index = pinecone.Index(self.index_name)
-            
+
             # Log current index configuration for monitoring
             stats = index.describe_index_stats()
             print(f"Index stats: {stats['total_vector_count']} vectors, "
                   f"{stats['dimension']} dimensions")
             return index
-        
+
         # Create new index with carefully chosen parameters
         print(f"Creating new index: {self.index_name}")
         pinecone.create_index(
@@ -323,12 +323,12 @@ Our Pinecone configuration balances **performance, cost, and reliability** for t
                 'indexed': ['source', 'chunk_type', 'timestamp', 'topic']  # Enable fast filtering
             }
         )
-        
+
         # Wait for index initialization (typically 30-60 seconds)
         print("Waiting for index to be ready...")
         while not pinecone.describe_index(self.index_name).status['ready']:
             time.sleep(5)  # Check every 5 seconds
-        
+
         print("Index ready for operations!")
         return pinecone.Index(self.index_name)
 ```
@@ -337,7 +337,7 @@ Our Pinecone configuration balances **performance, cost, and reliability** for t
 
 **Pod Configuration Strategy:**
 - **`pods=2`**: Our choice handles 2000-5000 queries per second cost-effectively. Scaling decisions:
-  - **1 pod**: Development/testing (~1000 QPS max)  
+  - **1 pod**: Development/testing (~1000 QPS max)
   - **2-4 pods**: Production RAG systems (~2000-10000 QPS)
   - **8+ pods**: High-traffic applications (>20000 QPS)
 
@@ -358,33 +358,33 @@ Our Pinecone configuration balances **performance, cost, and reliability** for t
 
 **Step 4: Advanced Upsert Operations**
 ```python
-    def upsert_vectors_batch(self, vectors: List[Dict], 
-                           batch_size: int = 100, 
+    def upsert_vectors_batch(self, vectors: List[Dict],
+                           batch_size: int = 100,
                            namespace: str = "default"):
         """Efficient batch upsert with error handling."""
-        
+
         total_vectors = len(vectors)
         successful_upserts = 0
         failed_upserts = []
-        
+
         for i in range(0, total_vectors, batch_size):
             batch = vectors[i:i + batch_size]
-            
+
             try:
                 # Upsert batch with retry logic
                 response = self.index.upsert(
                     vectors=batch,
                     namespace=namespace
                 )
-                
+
                 successful_upserts += response.upserted_count
                 print(f"Upserted batch {i//batch_size + 1}: "
                       f"{response.upserted_count} vectors")
-                      
+
             except Exception as e:
                 print(f"Failed to upsert batch {i//batch_size + 1}: {e}")
                 failed_upserts.extend(batch)
-        
+
         return {
             'successful': successful_upserts,
             'failed': failed_upserts,
@@ -404,20 +404,20 @@ from qdrant_client.http.models import Distance, VectorParams, OptimizersConfig
 
 class QdrantVectorStore:
     """High-performance Qdrant vector store."""
-    
-    def __init__(self, host: str = "localhost", port: int = 6333, 
+
+    def __init__(self, host: str = "localhost", port: int = 6333,
                  collection_name: str = "documents"):
         self.host = host
         self.port = port
         self.collection_name = collection_name
-        
+
         # Initialize client
         self.client = QdrantClient(
-            host=host, 
+            host=host,
             port=port,
             timeout=60  # Extended timeout for large operations
         )
-        
+
         self._setup_collection()
 ```
 
@@ -425,11 +425,11 @@ class QdrantVectorStore:
 ```python
     def _setup_collection(self, dimension: int = 1536):
         """Create collection with performance optimizations."""
-        
+
         # Check if collection exists
         collections = self.client.get_collections().collections
         collection_names = [c.name for c in collections]
-        
+
         if self.collection_name not in collection_names:
             # Create collection with optimized settings
             self.client.create_collection(
@@ -457,7 +457,7 @@ class QdrantVectorStore:
                     on_disk=True  # Store index on disk
                 )
             )
-            
+
             print(f"Created optimized collection: {self.collection_name}")
         else:
             print(f"Using existing collection: {self.collection_name}")
@@ -481,11 +481,11 @@ import numpy as np
 
 class HybridSearchEngine:
     """Advanced hybrid search combining semantic and lexical retrieval."""
-    
+
     def __init__(self, vector_store, documents: List[str]):
         self.vector_store = vector_store
         self.documents = documents
-        
+
         # Initialize TF-IDF for lexical search
         self.tfidf_vectorizer = TfidfVectorizer(
             max_features=10000,
@@ -494,7 +494,7 @@ class HybridSearchEngine:
             lowercase=True,
             token_pattern=r'\b[a-zA-Z]\w{2,}\b'  # Words with 3+ chars
         )
-        
+
         # Fit TF-IDF on document corpus
         self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(documents)
         print(f"Built TF-IDF index for {len(documents)} documents")
@@ -515,55 +515,55 @@ BM25 (Best Matching 25) represents decades of information retrieval research, ad
 - **b=0.75**: Controls document length normalization. Higher values (0.8-1.0) penalize long documents more, lower values (0.5-0.7) are more lenient
 
 ```python
-    def _compute_bm25_scores(self, query: str, k1: float = 1.2, 
+    def _compute_bm25_scores(self, query: str, k1: float = 1.2,
                            b: float = 0.75) -> np.ndarray:
         """Compute BM25 scores using optimized algorithm for RAG workloads.
-        
+
         BM25 Formula: IDF * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * dl / avgdl))
-        
+
         Where:
         - tf: Term frequency in document
-        - df: Document frequency (documents containing term)  
+        - df: Document frequency (documents containing term)
         - dl: Document length
         - avgdl: Average document length
         - k1: Term frequency saturation parameter (1.2 optimal for most corpora)
         - b: Document length normalization (0.75 optimal for mixed-length documents)
         """
-        
+
         # Tokenize query using same preprocessing as corpus
         query_tokens = self.tfidf_vectorizer.build_analyzer()(query.lower())
-        
+
         # Pre-compute document statistics for efficiency
         doc_lengths = np.array([len(doc.split()) for doc in self.documents])
         avg_doc_length = np.mean(doc_lengths)
-        
+
         # Initialize score accumulator
         scores = np.zeros(len(self.documents))
-        
+
         # Process each query term
         for token in query_tokens:
             if token in self.tfidf_vectorizer.vocabulary_:
                 # Retrieve term statistics from pre-built TF-IDF matrix
                 term_idx = self.tfidf_vectorizer.vocabulary_[token]
                 tf_scores = self.tfidf_matrix[:, term_idx].toarray().flatten()
-                
+
                 # Convert normalized TF-IDF back to raw term frequencies
                 # This approximation works well when TF-IDF was built with sublinear_tf=False
                 tf = tf_scores * len(self.documents)
-                
+
                 # Calculate document frequency and inverse document frequency
                 df = np.sum(tf > 0)  # Number of documents containing this term
                 if df > 0:
                     # BM25 IDF formula (with +0.5 smoothing to prevent negative values)
                     idf = np.log((len(self.documents) - df + 0.5) / (df + 0.5))
-                    
+
                     # BM25 term frequency component with saturation
                     numerator = tf * (k1 + 1)
                     denominator = tf + k1 * (1 - b + b * doc_lengths / avg_doc_length)
-                    
+
                     # Combine IDF and normalized TF for final BM25 score
                     scores += idf * (numerator / denominator)
-        
+
         return scores
 ```
 
@@ -583,41 +583,41 @@ For typical RAG scenarios, BM25 provides **15-25% better precision** compared to
 
 **Step 7: Fusion Strategies**
 ```python
-    def hybrid_search(self, query: str, top_k: int = 10, 
+    def hybrid_search(self, query: str, top_k: int = 10,
                      semantic_weight: float = 0.7,
                      lexical_weight: float = 0.3,
                      rerank: bool = True) -> List[Dict]:
         """Perform hybrid search with multiple fusion strategies."""
-        
+
         # Step 1: Semantic search
         semantic_results = self.vector_store.similarity_search_with_scores(
             query, k=min(top_k * 3, 50)  # Retrieve more for reranking
         )
-        
+
         # Step 2: Lexical search (BM25)
         lexical_scores = self._compute_bm25_scores(query)
-        
+
         # Step 3: Combine scores using Reciprocal Rank Fusion (RRF)
         combined_results = self._reciprocal_rank_fusion(
             semantic_results, lexical_scores, k=60
         )
-        
+
         # Step 4: Optional reranking
         if rerank:
             combined_results = self._cross_encoder_rerank(
                 query, combined_results
             )
-        
+
         return combined_results[:top_k]
-    
-    def _reciprocal_rank_fusion(self, semantic_results: List[Tuple], 
-                               lexical_scores: np.ndarray, 
+
+    def _reciprocal_rank_fusion(self, semantic_results: List[Tuple],
+                               lexical_scores: np.ndarray,
                                k: int = 60) -> List[Dict]:
         """Implement Reciprocal Rank Fusion for score combination."""
-        
+
         # Create document score dictionary
         doc_scores = {}
-        
+
         # Add semantic scores (convert similarity to rank)
         for rank, (doc, similarity_score) in enumerate(semantic_results):
             doc_id = doc.metadata.get('chunk_id', rank)
@@ -626,12 +626,12 @@ For typical RAG scenarios, BM25 provides **15-25% better precision** compared to
                 'semantic_rrf': 1 / (k + rank + 1),
                 'semantic_score': similarity_score
             }
-        
+
         # Add lexical scores (BM25 rankings)
         lexical_rankings = np.argsort(-lexical_scores)  # Descending order
         for rank, doc_idx in enumerate(lexical_rankings[:len(semantic_results)]):
             doc_id = doc_idx  # Assuming document index as ID
-            
+
             if doc_id in doc_scores:
                 doc_scores[doc_id]['lexical_rrf'] = 1 / (k + rank + 1)
                 doc_scores[doc_id]['lexical_score'] = lexical_scores[doc_idx]
@@ -644,20 +644,20 @@ For typical RAG scenarios, BM25 provides **15-25% better precision** compared to
                     'semantic_score': 0,
                     'lexical_score': lexical_scores[doc_idx]
                 }
-        
+
         # Calculate final RRF scores
         for doc_id in doc_scores:
             semantic_rrf = doc_scores[doc_id].get('semantic_rrf', 0)
             lexical_rrf = doc_scores[doc_id].get('lexical_rrf', 0)
             doc_scores[doc_id]['final_score'] = semantic_rrf + lexical_rrf
-        
+
         # Sort by final score
         sorted_results = sorted(
             doc_scores.values(),
             key=lambda x: x['final_score'],
             reverse=True
         )
-        
+
         return sorted_results
 ```
 
@@ -671,40 +671,40 @@ from sentence_transformers import CrossEncoder
 
 class AdvancedReranker:
     """Cross-encoder based reranking for improved precision."""
-    
+
     def __init__(self, model_name: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"):
         self.cross_encoder = CrossEncoder(model_name)
         self.model_name = model_name
         print(f"Loaded cross-encoder model: {model_name}")
-    
-    def rerank_results(self, query: str, documents: List[Dict], 
+
+    def rerank_results(self, query: str, documents: List[Dict],
                       top_k: int = 10) -> List[Dict]:
         """Rerank documents using cross-encoder scores."""
-        
+
         if not documents:
             return []
-        
+
         # Prepare query-document pairs
         pairs = []
         for doc_data in documents:
             doc_text = self._extract_text(doc_data)
             pairs.append([query, doc_text])
-        
+
         # Get cross-encoder scores
         ce_scores = self.cross_encoder.predict(pairs)
-        
+
         # Update documents with reranking scores
         for i, doc_data in enumerate(documents):
             doc_data['rerank_score'] = float(ce_scores[i])
             doc_data['original_rank'] = i + 1
-        
+
         # Sort by cross-encoder scores
         reranked = sorted(
             documents,
             key=lambda x: x['rerank_score'],
             reverse=True
         )
-        
+
         return reranked[:top_k]
 ```
 
@@ -740,43 +740,43 @@ from typing import Tuple
 
 class OptimizedVectorIndex:
     """Advanced vector indexing with intelligent algorithm selection.
-    
+
     This implementation automatically selects the optimal indexing strategy
     based on dataset characteristics and performance requirements.
     """
-    
+
     def __init__(self, dimension: int, index_type: str = "auto"):
         self.dimension = dimension
         self.index_type = index_type
         self.index = None
         self.id_map = {}  # Map internal IDs to external IDs
         self.performance_metrics = {}  # Track build and search performance
-        
-    def build_index(self, vectors: np.ndarray, 
+
+    def build_index(self, vectors: np.ndarray,
                    external_ids: List[str],
                    performance_target: str = "balanced") -> None:
         """Build optimized index with intelligent algorithm selection.
-        
+
         Args:
             vectors: Vector data to index
             external_ids: External identifiers for vectors
             performance_target: "speed", "memory", "accuracy", or "balanced"
         """
-        
+
         n_vectors = vectors.shape[0]
         memory_gb = vectors.nbytes / (1024**3)
-        
+
         # Intelligent index selection if auto mode
         if self.index_type == "auto":
             self.index_type = self._select_optimal_index(
                 n_vectors, memory_gb, performance_target
             )
-        
+
         print(f"Building {self.index_type} index for {n_vectors:,} vectors "
               f"({memory_gb:.1f}GB)")
-        
+
         build_start = time.time()
-        
+
         if self.index_type == "HNSW":
             self.index = self._build_hnsw_index(vectors, performance_target)
         elif self.index_type == "IVF":
@@ -786,34 +786,34 @@ class OptimizedVectorIndex:
         else:
             # Fallback to flat index for small datasets
             self.index = self._build_flat_index(vectors)
-        
+
         build_time = time.time() - build_start
         self.performance_metrics['build_time'] = build_time
         self.performance_metrics['vectors_per_second'] = n_vectors / build_time
-        
+
         # Store ID mapping
         for i, external_id in enumerate(external_ids):
             self.id_map[i] = external_id
-            
+
         print(f"Index built in {build_time:.1f}s "
               f"({n_vectors/build_time:.0f} vectors/sec)")
-    
-    def _select_optimal_index(self, n_vectors: int, memory_gb: float, 
+
+    def _select_optimal_index(self, n_vectors: int, memory_gb: float,
                              target: str) -> str:
         """Intelligent index selection based on dataset characteristics."""
-        
+
         if n_vectors < 10000:
             return "Flat"  # Exact search for small datasets
-        
+
         if target == "speed" and memory_gb < 8.0:
             return "HNSW"  # Best latency for moderate memory usage
-        
+
         if target == "memory" or memory_gb > 16.0:
             return "IVF_PQ"  # Compression for large datasets
-            
+
         if target == "accuracy":
             return "HNSW"  # Superior recall characteristics
-            
+
         # Balanced approach
         if n_vectors > 1000000:
             return "IVF_PQ"  # Scale efficiency
@@ -834,16 +834,16 @@ IVF excels when **memory efficiency and scalability** outweigh the need for ultr
 - **Update efficiency**: New vectors easily added to appropriate clusters
 
 ```python
-    def _build_ivf_index(self, vectors: np.ndarray, n_vectors: int, 
+    def _build_ivf_index(self, vectors: np.ndarray, n_vectors: int,
                         performance_target: str) -> faiss.Index:
         """Build IVF index with target-specific optimizations.
-        
+
         IVF Design Decisions:
         - Centroid count: Balance between search speed and clustering accuracy
         - nprobe: Query-time speed/accuracy trade-off
         - Training data: Use full dataset vs. sample for very large collections
         """
-        
+
         # Adaptive centroid selection based on dataset size and target
         if performance_target == "speed":
             centroid_ratio = 0.05  # Fewer clusters, faster search
@@ -851,27 +851,27 @@ IVF excels when **memory efficiency and scalability** outweigh the need for ultr
             centroid_ratio = 0.15  # More clusters, better partitioning
         else:
             centroid_ratio = 0.08  # Balanced approach
-            
+
         n_centroids = max(32, min(65536, int(n_vectors * centroid_ratio)))
-        
+
         print(f"IVF Configuration: {n_centroids:,} centroids "
               f"(ratio: {centroid_ratio:.3f})")
-        
+
         # Create quantizer (centroid index)
         quantizer = faiss.IndexFlatIP(self.dimension)
-        
+
         # Choose IVF variant based on size
         if n_vectors > 100000:
             # Use Product Quantization for large datasets
             m = self._select_pq_segments(self.dimension)
-            index = faiss.IndexIVFPQ(quantizer, self.dimension, 
+            index = faiss.IndexIVFPQ(quantizer, self.dimension,
                                    n_centroids, m, 8)  # 8 bits per sub-vector
             print(f"Using IVF+PQ with {m} segments for compression")
         else:
             # Use flat storage for better accuracy on smaller datasets
             index = faiss.IndexIVFFlat(quantizer, self.dimension, n_centroids)
             print("Using IVFFlat for optimal accuracy")
-        
+
         # Training phase - critical for clustering quality
         print("Training IVF centroids...")
         if n_vectors > 1000000:
@@ -882,13 +882,13 @@ IVF excels when **memory efficiency and scalability** outweigh the need for ultr
             print(f"Using {sample_size:,} vectors for training")
         else:
             training_data = vectors
-            
+
         index.train(training_data)
-        
+
         # Add all vectors
         print("Adding vectors to index...")
         index.add(vectors)
-        
+
         # Set query parameters based on target
         if performance_target == "speed":
             index.nprobe = max(1, n_centroids // 32)  # Search fewer clusters
@@ -896,12 +896,12 @@ IVF excels when **memory efficiency and scalability** outweigh the need for ultr
             index.nprobe = min(n_centroids, n_centroids // 4)  # Search more clusters
         else:
             index.nprobe = max(8, n_centroids // 16)  # Balanced search
-            
+
         print(f"IVF index ready: nprobe={index.nprobe} "
               f"({100*index.nprobe/n_centroids:.1f}% cluster coverage)")
-        
+
         return index
-    
+
     def _select_pq_segments(self, dimension: int) -> int:
         """Select optimal number of PQ segments for compression."""
         # PQ segments must evenly divide the dimension
@@ -926,16 +926,16 @@ HNSW creates a hierarchical graph where each vector connects to its most similar
 - **Update challenge**: Graph modifications require careful rebalancing
 
 ```python
-    def _build_hnsw_index(self, vectors: np.ndarray, 
+    def _build_hnsw_index(self, vectors: np.ndarray,
                          performance_target: str) -> faiss.Index:
         """Build HNSW index with target-specific parameter optimization.
-        
+
         HNSW Parameter Philosophy:
         - M: Higher connectivity = better recall but more memory
         - efConstruction: Higher = better graph quality but slower build
         - efSearch: Query-time accuracy control (can adjust per query)
         """
-        
+
         # Parameter selection based on performance target
         if performance_target == "speed":
             M = 16           # Lower connectivity for speed
@@ -949,28 +949,28 @@ HNSW creates a hierarchical graph where each vector connects to its most similar
             M = 32           # Balanced connectivity
             ef_construct = 200   # Good graph quality
             ef_search = 128      # Balanced search
-            
+
         print(f"HNSW Configuration: M={M}, ef_construct={ef_construct}, "
               f"ef_search={ef_search}")
-        
+
         # Create HNSW index
         index = faiss.IndexHNSWFlat(self.dimension, M)
         index.hnsw.efConstruction = ef_construct
-        
+
         # Build the graph
         print("Building HNSW graph structure...")
         index.add(vectors)
-        
+
         # Set search parameter
         index.hnsw.efSearch = ef_search
-        
+
         # Calculate memory usage for monitoring
         memory_per_vector = self.dimension * 4 + M * 4  # Float32 + connections
         total_memory_mb = (len(vectors) * memory_per_vector) / (1024**2)
-        
+
         print(f"HNSW index ready: {len(vectors):,} vectors, "
               f"~{total_memory_mb:.1f}MB memory usage")
-        
+
         return index
 ```
 
@@ -1016,18 +1016,18 @@ Your vector database and indexing choices cascade through every aspect of RAG pe
 ```python
 class RAGArchitectureOptimizer:
     """Optimize vector database choice based on RAG requirements."""
-    
+
     @staticmethod
     def recommend_architecture(requirements: Dict) -> Dict:
         """Provide architecture recommendations based on RAG needs."""
-        
+
         # Extract key requirements
         query_volume = requirements.get('daily_queries', 1000)
         document_count = requirements.get('document_count', 100000)
         latency_requirement = requirements.get('max_latency_ms', 500)
         budget_constraint = requirements.get('monthly_budget_usd', 1000)
         accuracy_requirement = requirements.get('min_recall', 0.9)
-        
+
         recommendations = {
             'database': None,
             'index_type': None,
@@ -1035,7 +1035,7 @@ class RAGArchitectureOptimizer:
             'expected_performance': {},
             'cost_estimate': {}
         }
-        
+
         # Decision logic based on RAG-specific considerations
         if latency_requirement < 100 and budget_constraint > 500:
             # High-performance RAG
@@ -1054,7 +1054,7 @@ class RAGArchitectureOptimizer:
                     'qps_capacity': 5000
                 }
             })
-            
+
         elif document_count > 1000000 or budget_constraint < 200:
             # Cost-optimized RAG
             recommendations.update({
@@ -1072,7 +1072,7 @@ class RAGArchitectureOptimizer:
                     'memory_gb': document_count * 0.1  # With compression
                 }
             })
-            
+
         else:
             # Balanced RAG for most applications
             recommendations.update({
@@ -1090,7 +1090,7 @@ class RAGArchitectureOptimizer:
                     'memory_gb': document_count * 0.3
                 }
             })
-        
+
         return recommendations
 ```
 
@@ -1103,7 +1103,7 @@ class RAGArchitectureOptimizer:
 - **Result**: 95% recall, 80ms p95 latency, $150/month cost
 
 **Scenario 2: Legal Document Search**
-- **Volume**: 1,000 queries/day, 10M documents  
+- **Volume**: 1,000 queries/day, 10M documents
 - **Requirement**: High accuracy critical, budget constrained
 - **Choice**: Qdrant with IVF+PQ compression
 - **Result**: 91% recall, 300ms p95 latency, $400/month cost
@@ -1157,47 +1157,47 @@ from typing import Optional
 
 class OptimizedSearchEngine:
     """Production search engine with caching and optimization."""
-    
+
     def __init__(self, vector_store, cache_size: int = 1000):
         self.vector_store = vector_store
         self.cache_size = cache_size
         self.query_cache = {}
         self.embedding_cache = {}
-        
+
     @lru_cache(maxsize=1000)
     def _get_query_embedding(self, query: str) -> Tuple[float, ...]:
         """Cache query embeddings to avoid recomputation."""
         embedding = self.vector_store.embedding_function.embed_query(query)
         return tuple(embedding)  # Hashable for LRU cache
-    
+
     def optimized_search(self, query: str, top_k: int = 10,
                         filters: Optional[Dict] = None,
                         use_cache: bool = True) -> List[Dict]:
         """Optimized search with caching and preprocessing."""
-        
+
         # Create cache key
         cache_key = self._create_cache_key(query, top_k, filters)
-        
+
         # Check cache
         if use_cache and cache_key in self.query_cache:
             print("Cache hit!")
             return self.query_cache[cache_key]
-        
+
         # Preprocess query
         processed_query = self._preprocess_query(query)
-        
+
         # Get embedding (with caching)
         query_embedding = list(self._get_query_embedding(processed_query))
-        
+
         # Perform search with optimizations
         results = self._search_with_optimizations(
             query_embedding, top_k, filters
         )
-        
+
         # Cache results
         if use_cache and len(self.query_cache) < self.cache_size:
             self.query_cache[cache_key] = results
-        
+
         return results
 ```
 
@@ -1217,40 +1217,40 @@ import concurrent.futures
 
 class MultiStageRetriever:
     """Advanced multi-stage retrieval pipeline."""
-    
+
     def __init__(self, vector_store, reranker, query_enhancer):
         self.vector_store = vector_store
         self.reranker = reranker
         self.query_enhancer = query_enhancer
-        
+
         # Retrieval stages configuration
         self.stages = [
             {'name': 'initial_retrieval', 'k': 100},
-            {'name': 'keyword_filtering', 'k': 50}, 
+            {'name': 'keyword_filtering', 'k': 50},
             {'name': 'reranking', 'k': 20},
             {'name': 'final_filtering', 'k': 10}
         ]
-    
-    async def retrieve_multi_stage(self, query: str, 
+
+    async def retrieve_multi_stage(self, query: str,
                                  target_k: int = 10) -> List[Dict]:
         """Execute multi-stage retrieval pipeline."""
-        
+
         print(f"Starting multi-stage retrieval for: {query[:100]}...")
-        
+
         # Stage 1: Enhanced query generation
         enhanced_queries = await self._generate_query_variants(query)
-        
+
         # Stage 2: Parallel initial retrieval
         initial_results = await self._parallel_retrieval(enhanced_queries)
-        
+
         # Stage 3: Merge and deduplicate results
         merged_results = self._merge_and_deduplicate(initial_results)
-        
+
         # Stage 4: Apply progressive filtering
         filtered_results = await self._progressive_filtering(
             query, merged_results, target_k
         )
-        
+
         return filtered_results
 ```
 
@@ -1258,40 +1258,40 @@ class MultiStageRetriever:
 ```python
     async def _generate_query_variants(self, query: str) -> List[Dict]:
         """Generate multiple query variants for comprehensive retrieval."""
-        
+
         variants = []
-        
+
         # Original query
         variants.append({'type': 'original', 'query': query, 'weight': 1.0})
-        
+
         # Expanded query with synonyms
         expanded = await self._expand_with_synonyms(query)
         variants.append({'type': 'expanded', 'query': expanded, 'weight': 0.8})
-        
+
         # Hypothetical document (HyDE)
         hyde_doc = await self._generate_hypothetical_document(query)
         variants.append({'type': 'hyde', 'query': hyde_doc, 'weight': 0.9})
-        
+
         # Question decomposition
         sub_queries = await self._decompose_question(query)
         for i, sub_q in enumerate(sub_queries):
             variants.append({
-                'type': 'sub_query', 
-                'query': sub_q, 
+                'type': 'sub_query',
+                'query': sub_q,
                 'weight': 0.6,
                 'index': i
             })
-        
+
         return variants
-    
+
     async def _expand_with_synonyms(self, query: str) -> str:
         """Expand query with synonyms and related terms."""
-        # Implementation would use WordNet, domain-specific thesaurus, 
+        # Implementation would use WordNet, domain-specific thesaurus,
         # or LLM for synonym expansion
         expansion_prompt = f"""
         Expand this query by adding relevant synonyms and related terms:
         Query: {query}
-        
+
         Provide an expanded version that includes synonyms but maintains clarity:
         """
         # Use your LLM here
@@ -1302,27 +1302,27 @@ class MultiStageRetriever:
 ```python
     async def _parallel_retrieval(self, query_variants: List[Dict]) -> List[List[Dict]]:
         """Execute retrieval for multiple query variants in parallel."""
-        
+
         async def retrieve_single(variant: Dict) -> List[Dict]:
             """Retrieve results for a single query variant."""
             results = self.vector_store.similarity_search_with_scores(
-                variant['query'], 
+                variant['query'],
                 k=self.stages[0]['k']
             )
-            
+
             # Add variant metadata
             for result in results:
                 result['variant_type'] = variant['type']
                 result['variant_weight'] = variant['weight']
                 if 'index' in variant:
                     result['sub_query_index'] = variant['index']
-            
+
             return results
-        
+
         # Execute retrievals concurrently
         tasks = [retrieve_single(variant) for variant in query_variants]
         results = await asyncio.gather(*tasks)
-        
+
         return results
 ```
 
@@ -1330,66 +1330,66 @@ class MultiStageRetriever:
 ```python
     def _merge_and_deduplicate(self, result_lists: List[List[Dict]]) -> List[Dict]:
         """Merge results from multiple retrievals with deduplication."""
-        
+
         # Flatten all results
         all_results = []
         for result_list in result_lists:
             all_results.extend(result_list)
-        
+
         # Group by document content hash
         content_groups = {}
         for result in all_results:
             content_hash = hashlib.md5(
                 result['document'].page_content.encode()
             ).hexdigest()
-            
+
             if content_hash not in content_groups:
                 content_groups[content_hash] = []
             content_groups[content_hash].append(result)
-        
+
         # Merge grouped results
         merged_results = []
         for content_hash, group in content_groups.items():
             # Calculate combined score
             combined_score = self._calculate_combined_score(group)
-            
+
             # Take the first result as base
             base_result = group[0].copy()
             base_result['combined_score'] = combined_score
             base_result['variant_count'] = len(group)
             base_result['variant_types'] = [r['variant_type'] for r in group]
-            
+
             merged_results.append(base_result)
-        
+
         # Sort by combined score
         merged_results.sort(
-            key=lambda x: x['combined_score'], 
+            key=lambda x: x['combined_score'],
             reverse=True
         )
-        
+
         return merged_results
-    
+
     def _calculate_combined_score(self, result_group: List[Dict]) -> float:
         """Calculate combined relevance score for grouped results."""
-        
+
         # Weighted average of scores
         total_weighted_score = 0
         total_weight = 0
-        
+
         for result in result_group:
             weight = result['variant_weight']
             score = 1 - result['similarity_score']  # Convert distance to similarity
-            
+
             total_weighted_score += score * weight
             total_weight += weight
-        
+
         if total_weight == 0:
             return 0.0
-        
+
         # Boost score based on how many variants found this result
         variant_boost = min(len(result_group) * 0.1, 0.3)
         combined_score = (total_weighted_score / total_weight) + variant_boost
-        
+
         return min(combined_score, 1.0)
 ```
 
@@ -1401,7 +1401,7 @@ Implement sophisticated filtering based on context and user preferences:
 # Advanced filtering and ranking
 class ContextualFilter:
     """Context-aware filtering and ranking system."""
-    
+
     def __init__(self, llm_model):
         self.llm_model = llm_model
         self.filter_strategies = {
@@ -1410,13 +1410,13 @@ class ContextualFilter:
             'diversity': self._diversity_filter,
             'authority': self._authority_filter
         }
-    
+
     def apply_contextual_filters(self, query: str, results: List[Dict],
                                context: Dict, target_k: int = 10) -> List[Dict]:
         """Apply multiple contextual filters progressively."""
-        
+
         filtered_results = results.copy()
-        
+
         # Apply each filter strategy
         for filter_name, filter_func in self.filter_strategies.items():
             if context.get(f'use_{filter_name}', True):
@@ -1424,60 +1424,60 @@ class ContextualFilter:
                     query, filtered_results, context
                 )
                 print(f"After {filter_name}: {len(filtered_results)} results")
-        
+
         # Final ranking
         final_results = self._final_ranking(
             query, filtered_results, context, target_k
         )
-        
+
         return final_results
 ```
 
 **Step 13: Semantic Coherence Filtering**
 ```python
-    def _semantic_coherence_filter(self, query: str, results: List[Dict], 
+    def _semantic_coherence_filter(self, query: str, results: List[Dict],
                                  context: Dict) -> List[Dict]:
         """Filter results based on semantic coherence with query intent."""
-        
+
         # Use LLM to assess semantic relevance
         coherence_scores = []
-        
+
         for result in results:
             doc_text = result['document'].page_content[:500]  # Limit for efficiency
-            
+
             coherence_prompt = f"""
             Rate the semantic relevance of this document excerpt to the query on a scale of 1-10:
-            
+
             Query: {query}
-            
+
             Document Excerpt: {doc_text}
-            
+
             Consider:
             1. How directly the document answers the query
             2. Topical relevance and accuracy
             3. Completeness of information
-            
+
             Return only a number from 1-10:
             """
-            
+
             try:
                 score_text = self.llm_model.predict(coherence_prompt).strip()
                 coherence_score = float(score_text)
                 coherence_scores.append(coherence_score)
             except:
                 coherence_scores.append(5.0)  # Default score
-        
+
         # Filter based on coherence threshold
         coherence_threshold = context.get('coherence_threshold', 6.0)
         filtered_results = [
             result for result, score in zip(results, coherence_scores)
             if score >= coherence_threshold
         ]
-        
+
         # Add coherence scores to results
         for result, score in zip(filtered_results, coherence_scores):
             result['coherence_score'] = score
-        
+
         return filtered_results
 ```
 
@@ -1486,60 +1486,63 @@ class ContextualFilter:
 ## **🧪 Hands-On Exercise: Build Optimized Vector Search**
 
 ### **Your Mission**
+
 Create a production-ready vector search system with hybrid retrieval and optimization features.
 
 ### **Requirements:**
+
 1. **Vector Database Setup**: Deploy Chroma and Pinecone instances with optimized configurations
-2. **Hybrid Search**: Implement semantic + BM25 fusion with RRF scoring  
+2. **Hybrid Search**: Implement semantic + BM25 fusion with RRF scoring
 3. **Multi-Stage Pipeline**: Build retrieval with query enhancement and reranking
 4. **Performance Optimization**: Add caching, parallel processing, and index optimization
 5. **Evaluation**: Compare search quality across different configurations
 
 ### **Implementation Steps:**
+
 ```python
 # Complete exercise implementation
 class ProductionVectorSearch:
     """Complete production vector search system."""
-    
+
     def __init__(self, config: Dict):
         # Initialize multiple vector stores
         self.vector_stores = self._setup_vector_stores(config)
-        
+
         # Setup hybrid search
         self.hybrid_engine = HybridSearchEngine(
-            self.vector_stores['primary'], 
+            self.vector_stores['primary'],
             config['documents']
         )
-        
+
         # Multi-stage retriever
         self.multi_stage = MultiStageRetriever(
             self.vector_stores['primary'],
-            CrossEncoder(), 
+            CrossEncoder(),
             QueryEnhancer()
         )
-        
+
         # Performance optimizations
         self.search_cache = {}
         self.performance_metrics = {}
-    
-    async def production_search(self, query: str, 
+
+    async def production_search(self, query: str,
                                search_type: str = "hybrid",
                                top_k: int = 10) -> Dict:
         """Production-ready search with full pipeline."""
-        
+
         start_time = time.time()
-        
+
         if search_type == "hybrid":
             results = self.hybrid_engine.hybrid_search(query, top_k)
         elif search_type == "multi_stage":
             results = await self.multi_stage.retrieve_multi_stage(query, top_k)
         else:
             results = self.vector_stores['primary'].similarity_search(query, top_k)
-        
+
         # Track performance
         search_time = time.time() - start_time
         self._update_metrics(search_type, search_time, len(results))
-        
+
         return {
             'results': results,
             'search_time': search_time,
@@ -1553,6 +1556,7 @@ class ProductionVectorSearch:
 ## **📝 Chapter Summary**
 
 ### **What You've Built**
+
 - ✅ Multi-database vector search infrastructure (Chroma, Pinecone, Qdrant)
 - ✅ Hybrid search combining semantic and lexical retrieval
 - ✅ Multi-stage retrieval with query enhancement and reranking
@@ -1560,6 +1564,7 @@ class ProductionVectorSearch:
 - ✅ Advanced filtering and contextual ranking systems
 
 ### **Key Technical Skills Learned**
+
 1. **Vector Database Architecture**: Configuration, optimization, and scaling strategies
 2. **Hybrid Search**: RRF fusion, BM25 scoring, and multi-modal retrieval
 3. **Performance Engineering**: Indexing strategies, caching, and parallel processing
@@ -1567,6 +1572,7 @@ class ProductionVectorSearch:
 5. **Production Deployment**: Monitoring, error handling, and system optimization
 
 ### **Performance Benchmarks**
+
 - **Search Latency**: <100ms for most queries with proper indexing
 - **Index Build**: Optimized for 1M+ documents with incremental updates
 - **Cache Hit Rate**: 70-80% for common query patterns
@@ -1664,6 +1670,7 @@ Your hybrid search optimization, index tuning, and multi-database architecture p
 - **Session 9**: Deploy your optimized search infrastructure at enterprise scale
 
 ### **Preparation for Query Intelligence Mastery**
+
 1. **Document search failures**: Collect queries where your optimized search still struggles
 2. **Analyze semantic gaps**: Identify mismatches between user language and document content
 3. **Performance baseline**: Measure current search quality for enhancement comparison

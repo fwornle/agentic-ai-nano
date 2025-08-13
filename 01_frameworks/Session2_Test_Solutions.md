@@ -3,6 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: LangChain LLM Interface
+
 **What is the primary benefit of LangChain's unified LLM interface?**
 
 A) Better performance  
@@ -15,6 +16,7 @@ D) Faster response times
 ---
 
 ### Question 2: Conversation Context Management
+
 **Which LangChain component is responsible for managing conversation context?**
 
 A) Tools  
@@ -27,6 +29,7 @@ D) Chains
 ---
 
 ### Question 3: Tool Creation Methods
+
 **How many ways can you create tools in LangChain?**
 
 A) One - inheriting from BaseTool  
@@ -39,6 +42,7 @@ D) Four - including custom implementations
 ---
 
 ### Question 4: Error Handling Parameter
+
 **What is the purpose of the `handle_parsing_errors` parameter in LangChain agents?**
 
 A) To improve performance  
@@ -51,6 +55,7 @@ D) To enable debugging
 ---
 
 ### Question 5: ReAct Agent Types
+
 **Which LangChain agent type is specifically designed for the ReAct pattern?**
 
 A) STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION  
@@ -63,6 +68,7 @@ D) All of the above ✅
 ---
 
 ### Question 6: Reflection Loop Termination
+
 **In the LangChain reflection implementation, what determines when the reflection loop stops?**
 
 A) Fixed number of iterations  
@@ -75,6 +81,7 @@ D) When no changes are detected
 ---
 
 ### Question 7: Built-in vs Custom ReAct Agents
+
 **How does LangChain's built-in ReAct agent differ from the custom implementation?**
 
 A) Built-in agent is faster  
@@ -87,6 +94,7 @@ D) No significant difference
 ---
 
 ### Question 8: Plan-and-Execute Framework
+
 **What is the main advantage of LangChain's Plan-and-Execute framework?**
 
 A) Faster execution  
@@ -99,6 +107,7 @@ D) Lower computational cost
 ---
 
 ### Question 9: Context Sharing in Multi-Agent Systems
+
 **In the multi-agent system, how do agents share context between workflow steps?**
 
 A) Shared memory objects  
@@ -111,6 +120,7 @@ D) Database storage
 ---
 
 ### Question 10: Type-Safe Tool Creation
+
 **Which tool creation method provides the most type safety in LangChain?**
 
 A) Inheriting from BaseTool  
@@ -123,6 +133,7 @@ D) All provide equal type safety
 ---
 
 ### Question 11: LangChain vs Bare Metal Trade-offs
+
 **What is the primary trade-off when choosing LangChain over bare metal implementation?**
 
 A) Performance vs. ease of development ✅  
@@ -135,6 +146,7 @@ D) Security vs. functionality
 ---
 
 ### Question 12: When to Choose Bare Metal
+
 **When would you choose bare metal implementation over LangChain?**
 
 A) For rapid prototyping  
@@ -147,6 +159,7 @@ D) For standard use cases
 ---
 
 ### Question 13: LangChain Disadvantages
+
 **What is a potential disadvantage of using LangChain?**
 
 A) Poor documentation  
@@ -159,6 +172,7 @@ D) Slow development
 ---
 
 ### Question 14: Development Time Comparison
+
 **Which approach typically requires more initial development time?**
 
 A) LangChain  
@@ -171,6 +185,7 @@ D) Depends on the use case
 ---
 
 ### Question 15: Team Recommendation
+
 **For a team new to agent development, which approach is generally recommended?**
 
 A) Bare metal for learning purposes  
@@ -195,12 +210,14 @@ D) Neither - use different frameworks
 ## 📚 Key Concepts Review
 
 ### LangChain Core Architecture
+
 1. **LLMs**: Unified interface across providers (OpenAI, Anthropic, etc.)
 2. **Tools**: Three creation methods with varying type safety levels
 3. **Memory**: Conversation context and state management
 4. **Agents**: Orchestration layer with multiple implementation patterns
 
 ### Framework Implementation Patterns
+
 - **Reflection**: Self-critique with "SATISFACTORY" termination
 - **Tool Use**: Type-safe tools with StructuredTool and Pydantic
 - **ReAct**: Multiple agent types for reasoning-action loops
@@ -208,12 +225,14 @@ D) Neither - use different frameworks
 - **Multi-Agent**: Context sharing through instruction chaining
 
 ### LangChain vs Bare Metal Trade-offs
+
 - **Advantages**: Faster development, rich ecosystem, community support
 - **Disadvantages**: Performance overhead, framework dependency, reduced customization
 - **Use Cases**: Rapid prototyping, standard patterns, team productivity
 - **Alternatives**: Bare metal for maximum control and optimization
 
 ### Production Considerations
+
 - **Error Handling**: handle_parsing_errors for robust operations
 - **Type Safety**: Pydantic models for input/output validation
 - **Monitoring**: LangSmith integration for observability
@@ -222,6 +241,7 @@ D) Neither - use different frameworks
 ---
 
 ## Answer Summary
+
 1. B  2. C  3. C  4. B  5. D  6. B  7. B  8. C  9. B  10. C  11. A  12. B  13. C  14. B  15. B
 
 ---

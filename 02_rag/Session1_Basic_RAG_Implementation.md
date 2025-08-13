@@ -21,7 +21,7 @@ This session transforms RAG theory into working code. You'll build a complete, p
 **What Makes This Implementation Special:**
 
 - **Production-Ready**: Built with enterprise-grade tools (LangChain, ChromaDB)
-- **Modular Design**: Clean architecture for easy extension and maintenance  
+- **Modular Design**: Clean architecture for easy extension and maintenance
 - **Intelligent Chunking**: Token-aware splitting with semantic boundaries
 - **Performance Focused**: Efficient indexing and retrieval mechanisms
 - **Evaluation Ready**: Built-in metrics and testing framework
@@ -92,11 +92,11 @@ class RAGConfig:
     CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", 1000))
     CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", 200))
     TOP_K = int(os.getenv("TOP_K", 5))
-    
+
     # Vector database settings
     VECTOR_DB_PATH = "./chroma_db"
     COLLECTION_NAME = "rag_documents"
-    
+
     # Model settings
     EMBEDDING_MODEL = "text-embedding-ada-002"
     LLM_MODEL = "gpt-3.5-turbo"
@@ -124,7 +124,7 @@ import os
 
 class DocumentLoader:
     """Handles loading documents from various sources."""
-    
+
     def __init__(self):
         self.supported_formats = ['.txt', '.md', '.html']
 ```
@@ -138,10 +138,10 @@ class DocumentLoader:
         """Load document from local file."""
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
-        
+
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
-        
+
         return [Document(
             page_content=content,
             metadata={"source": file_path, "type": "file"}
@@ -158,7 +158,7 @@ class DocumentLoader:
         try:
             response = requests.get(url, timeout=30)
             response.raise_for_status()
-            
+
             soup = BeautifulSoup(response.content, 'html.parser')
 ```
 
@@ -170,18 +170,18 @@ class DocumentLoader:
             # Remove script and style elements
             for script in soup(["script", "style"]):
                 script.extract()
-            
+
             text = soup.get_text()
             lines = (line.strip() for line in text.splitlines())
-            chunks = (phrase.strip() for line in lines 
+            chunks = (phrase.strip() for line in lines
                      for phrase in line.split("  "))
             text = ' '.join(chunk for chunk in chunks if chunk)
-            
+
             return [Document(
                 page_content=text,
                 metadata={"source": url, "type": "web"}
             )]
-            
+
         except Exception as e:
             print(f"Error loading URL {url}: {str(e)}")
             return []
@@ -195,7 +195,7 @@ class DocumentLoader:
     def load_documents(self, sources: List[str]) -> List[Document]:
         """Load multiple documents from various sources."""
         all_documents = []
-        
+
         for source in sources:
             if source.startswith(('http://', 'https://')):
                 docs = self.load_from_url(source)
@@ -204,9 +204,9 @@ class DocumentLoader:
             else:
                 print(f"Unsupported source: {source}")
                 continue
-            
+
             all_documents.extend(docs)
-        
+
         print(f"Loaded {len(all_documents)} documents")
         return all_documents
 ```
@@ -224,7 +224,7 @@ import tiktoken
 
 class IntelligentTextSplitter:
     """Advanced text splitting with multiple strategies."""
-    
+
     def __init__(self, chunk_size: int = 1000, chunk_overlap: int = 200):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
@@ -237,7 +237,7 @@ class IntelligentTextSplitter:
     def count_tokens(self, text: str) -> int:
         """Count tokens in text using tiktoken."""
         return len(self.encoding.encode(text))
-    
+
     def recursive_split(self, documents: List[Document]) -> List[Document]:
         """Split documents using recursive character splitting."""
         text_splitter = RecursiveCharacterTextSplitter(
@@ -246,16 +246,16 @@ class IntelligentTextSplitter:
             length_function=self.count_tokens,
             separators=["\n\n", "\n", " ", ""]
         )
-        
+
         split_docs = text_splitter.split_documents(documents)
-        
+
         # Add chunk metadata
         for i, doc in enumerate(split_docs):
             doc.metadata.update({
                 "chunk_id": i,
                 "chunk_size": self.count_tokens(doc.page_content)
             })
-        
+
         return split_docs
 ```
 
@@ -267,13 +267,13 @@ class IntelligentTextSplitter:
     def semantic_split(self, documents: List[Document]) -> List[Document]:
         """Split based on semantic boundaries (paragraphs, sections)."""
         semantic_chunks = []
-        
+
         for doc in documents:
             content = doc.page_content
-            
+
             # Split by double newlines (paragraphs)
             paragraphs = content.split('\n\n')
-            
+
             current_chunk = ""
             current_tokens = 0
 ```
@@ -285,7 +285,7 @@ class IntelligentTextSplitter:
 ```python
             for paragraph in paragraphs:
                 paragraph_tokens = self.count_tokens(paragraph)
-                
+
                 # If adding this paragraph exceeds chunk size, save current chunk
                 if current_tokens + paragraph_tokens > self.chunk_size and current_chunk:
                     semantic_chunks.append(Document(
@@ -310,7 +310,7 @@ class IntelligentTextSplitter:
                 else:
                     current_chunk += "\n\n" + paragraph if current_chunk else paragraph
                     current_tokens += paragraph_tokens
-            
+
             # Add the final chunk
             if current_chunk:
                 semantic_chunks.append(Document(
@@ -321,7 +321,7 @@ class IntelligentTextSplitter:
                         "token_count": current_tokens
                     }
                 ))
-        
+
         return semantic_chunks
 ```
 
@@ -346,7 +346,7 @@ from src.config import RAGConfig
 
 class VectorStore:
     """Manages vector storage and retrieval operations."""
-    
+
     def __init__(self, config: RAGConfig):
         self.config = config
         self.embeddings = OpenAIEmbeddings(
@@ -370,7 +370,7 @@ class VectorStore:
                 collection_name=self.config.COLLECTION_NAME
             )
             print("Loaded existing vector store")
-            
+
         except Exception as e:
             print(f"Creating new vector store: {e}")
             self.vectorstore = Chroma(
@@ -387,19 +387,19 @@ class VectorStore:
         """Add documents to vector store."""
         if not documents:
             return []
-        
+
         print(f"Adding {len(documents)} documents to vector store...")
-        
+
         # Generate unique IDs for documents
-        doc_ids = [f"doc_{i}_{hash(doc.page_content[:100])}" 
+        doc_ids = [f"doc_{i}_{hash(doc.page_content[:100])}"
                   for i, doc in enumerate(documents)]
-        
+
         # Add documents with IDs
         self.vectorstore.add_documents(documents, ids=doc_ids)
-        
+
         # Persist the store
         self.vectorstore.persist()
-        
+
         print(f"Successfully indexed {len(documents)} document chunks")
         return doc_ids
 ```
@@ -410,23 +410,23 @@ class VectorStore:
     def similarity_search(self, query: str, k: Optional[int] = None) -> List[Document]:
         """Perform similarity search."""
         k = k or self.config.TOP_K
-        
+
         results = self.vectorstore.similarity_search(
             query=query,
             k=k
         )
-        
+
         return results
-    
+
     def similarity_search_with_scores(self, query: str, k: Optional[int] = None) -> List[tuple]:
         """Perform similarity search with relevance scores."""
         k = k or self.config.TOP_K
-        
+
         results = self.vectorstore.similarity_search_with_score(
             query=query,
             k=k
         )
-        
+
         return results
 ```
 
@@ -450,18 +450,18 @@ from src.vector_store import VectorStore
 
 class BasicRAGSystem:
     """Core RAG system combining retrieval and generation."""
-    
+
     def __init__(self, config: RAGConfig):
         self.config = config
         self.vector_store = VectorStore(config)
-        
+
         # Initialize LLM
         self.llm = ChatOpenAI(
             openai_api_key=config.OPENAI_API_KEY,
             model_name=config.LLM_MODEL,
             temperature=0.7
         )
-        
+
         # Define RAG prompt template
         self.prompt_template = self._create_prompt_template()
 ```
@@ -471,7 +471,7 @@ class BasicRAGSystem:
 ```python
     def _create_prompt_template(self) -> PromptTemplate:
         """Create the RAG prompt template."""
-        template = """You are a helpful AI assistant. Use the following context to answer the user's question. 
+        template = """You are a helpful AI assistant. Use the following context to answer the user's question.
 If you cannot find the answer in the context, say "I don't have enough information to answer that question."
 
 Context:
@@ -494,13 +494,13 @@ Answer: Let me help you with that based on the provided information."""
         """Prepare context from retrieved documents."""
         if not documents:
             return "No relevant information found."
-        
+
         context_parts = []
         for i, doc in enumerate(documents, 1):
             source = doc.metadata.get("source", "Unknown")
             chunk_info = f"[Source {i}: {source}]"
             context_parts.append(f"{chunk_info}\n{doc.page_content}")
-        
+
         return "\n\n".join(context_parts)
 ```
 
@@ -513,10 +513,10 @@ Answer: Let me help you with that based on the provided information."""
         """Process a RAG query and return detailed results."""
         # Step 1: Retrieve relevant documents
         retrieved_docs = self.vector_store.similarity_search_with_scores(
-            query=question, 
+            query=question,
             k=k or self.config.TOP_K
         )
-        
+
         if not retrieved_docs:
             return {
                 "answer": "I don't have any relevant information to answer your question.",
@@ -533,13 +533,13 @@ Answer: Let me help you with that based on the provided information."""
         # Step 2: Prepare context
         documents = [doc for doc, score in retrieved_docs]
         context = self._prepare_context(documents)
-        
+
         # Step 3: Generate response
         prompt = self.prompt_template.format(
             context=context,
             question=question
         )
-        
+
         response = self.llm.predict(prompt)
 ```
 
@@ -552,7 +552,7 @@ Answer: Let me help you with that based on the provided information."""
         scores = [score for doc, score in retrieved_docs]
         avg_score = sum(scores) / len(scores)
         confidence = max(0.0, min(1.0, 1.0 - avg_score))  # Convert distance to similarity
-        
+
         return {
             "answer": response,
             "sources": [
@@ -584,7 +584,7 @@ from src.config import RAGConfig
 
 class InteractiveRAG:
     """Interactive interface for RAG system."""
-    
+
     def __init__(self):
         self.config = RAGConfig()
         self.rag_system = BasicRAGSystem(self.config)
@@ -593,22 +593,22 @@ class InteractiveRAG:
             chunk_size=self.config.CHUNK_SIZE,
             chunk_overlap=self.config.CHUNK_OVERLAP
         )
-        
+
     def load_and_index_documents(self, sources: List[str]):
         """Load documents and add them to the vector store."""
         print("Loading documents...")
         documents = self.document_loader.load_documents(sources)
-        
+
         if not documents:
             print("No documents loaded.")
             return
-        
+
         print("Splitting documents into chunks...")
         chunks = self.text_splitter.recursive_split(documents)
-        
+
         print("Indexing documents...")
         self.rag_system.vector_store.add_documents(chunks)
-        
+
         print(f"Successfully processed and indexed {len(chunks)} chunks from {len(documents)} documents.")
 ```
 
@@ -634,20 +634,20 @@ class InteractiveRAG:
         while True:
             try:
                 question = input("\n📝 Your question: ").strip()
-                
+
                 if question.lower() in ['quit', 'exit', 'bye']:
                     print("👋 Goodbye!")
                     break
-                
+
                 if not question:
                     print("Please enter a question.")
                     continue
-                
+
                 print("\n🔍 Searching and generating answer...")
                 result = self.rag_system.query(question)
-                
+
                 self._display_result(result)
-                
+
             except KeyboardInterrupt:
                 print("\n👋 Goodbye!")
                 break
@@ -662,7 +662,7 @@ class InteractiveRAG:
         print(f"\n🤖 **Answer** (Confidence: {result['confidence']})")
         print("-" * 40)
         print(result['answer'])
-        
+
         if result['sources']:
             print(f"\n📚 **Sources** ({result['num_sources']} documents)")
             print("-" * 40)
@@ -683,62 +683,64 @@ class InteractiveRAG:
 Let's implement basic evaluation metrics for our RAG system:
 
 ```python
+
 # tests/test_rag_performance.py
+
 import time
 from typing import List, Dict
 from src.interactive_rag import InteractiveRAG
 
 class RAGEvaluator:
     """Basic evaluation metrics for RAG system."""
-    
+
     def __init__(self, rag_system: InteractiveRAG):
         self.rag_system = rag_system
-    
+
     def evaluate_response_time(self, questions: List[str]) -> Dict[str, float]:
         """Evaluate average response time."""
         times = []
-        
+
         for question in questions:
             start_time = time.time()
             self.rag_system.rag_system.query(question)
             end_time = time.time()
-            
+
             times.append(end_time - start_time)
-        
+
         return {
             "avg_response_time": sum(times) / len(times),
             "min_response_time": min(times),
             "max_response_time": max(times)
         }
-    
+
     def evaluate_retrieval_quality(self, test_cases: List[Dict]) -> Dict[str, float]:
         """Evaluate retrieval quality using test cases."""
         total_precision = 0
         total_recall = 0
-        
+
         for case in test_cases:
             question = case["question"]
             expected_sources = set(case["expected_sources"])
-            
+
             result = self.rag_system.rag_system.query(question)
             retrieved_sources = set([
-                source["metadata"].get("source", "") 
+                source["metadata"].get("source", "")
                 for source in result["sources"]
             ])
-            
+
             if retrieved_sources:
                 precision = len(expected_sources & retrieved_sources) / len(retrieved_sources)
                 recall = len(expected_sources & retrieved_sources) / len(expected_sources)
             else:
                 precision = recall = 0.0
-            
+
             total_precision += precision
             total_recall += recall
-        
+
         avg_precision = total_precision / len(test_cases)
         avg_recall = total_recall / len(test_cases)
         f1_score = 2 * (avg_precision * avg_recall) / (avg_precision + avg_recall) if (avg_precision + avg_recall) > 0 else 0
-        
+
         return {
             "precision": avg_precision,
             "recall": avg_recall,
@@ -751,23 +753,25 @@ class RAGEvaluator:
 Let's create a main script to run everything:
 
 ```python
+
 # main.py
+
 from src.interactive_rag import InteractiveRAG
 
 def main():
     # Initialize RAG system
     rag = InteractiveRAG()
-    
+
     # Sample documents to index
     sample_sources = [
         "https://en.wikipedia.org/wiki/Artificial_intelligence",
         "https://en.wikipedia.org/wiki/Machine_learning",
         "https://en.wikipedia.org/wiki/Natural_language_processing"
     ]
-    
+
     # Load and index documents
     rag.load_and_index_documents(sample_sources)
-    
+
     # Start interactive chat
     rag.start_chat()
 

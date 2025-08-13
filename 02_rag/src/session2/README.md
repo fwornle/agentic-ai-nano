@@ -25,23 +25,27 @@ session2/
 ## 🚀 Key Features
 
 ### 1. Document Structure Analysis
+
 - **Content Type Detection**: Automatically identifies headings, paragraphs, tables, code blocks, lists, and quotes
 - **Hierarchy Extraction**: Preserves document structure and organizational relationships
 - **Metadata Preservation**: Captures positional and structural information
 
 ### 2. Hierarchical Chunking
+
 - **Structure-Aware Splitting**: Uses document hierarchy as natural chunk boundaries
 - **Content Type Preservation**: Keeps related content together (tables, code blocks, lists)
 - **Intelligent Overlap**: Creates semantic continuity between chunks
 - **Rich Metadata**: Adds hierarchical context to each chunk
 
 ### 3. Specialized Processing
+
 - **Table-Aware Chunking**: Preserves table integrity and structure
 - **Multi-Modal Processing**: Handles images, structured data (CSV, JSON)
 - **Code Block Preservation**: Maintains code integrity and context
 - **List Grouping**: Keeps related list items together
 
 ### 4. Metadata Extraction
+
 - **Entity Recognition**: Extracts names, organizations, and key terms
 - **Keyword Identification**: Finds important terms and concepts
 - **Topic Classification**: Automatically categorizes content by domain
@@ -49,6 +53,7 @@ session2/
 - **Difficulty Assessment**: Evaluates content complexity level
 
 ### 5. Quality Assessment
+
 - **Coherence Scoring**: Measures topic consistency between chunks
 - **Information Density**: Evaluates unique information per chunk
 - **Metadata Richness**: Assesses completeness of extracted metadata

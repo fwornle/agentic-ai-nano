@@ -3,6 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: Agentic Patterns
+
 **Which agentic pattern involves an agent evaluating and improving its own outputs?**
 
 A) Tool Use  
@@ -15,6 +16,7 @@ D) Multi-Agent
 ---
 
 ### Question 2: ReAct Pattern
+
 **The ReAct pattern combines which two key capabilities?**
 
 A) Reading and Acting  
@@ -27,6 +29,7 @@ D) Retrieving and Acting
 ---
 
 ### Question 3: Performance-Optimized Framework
+
 **Which framework is best suited for high-performance applications with minimal resource usage?**
 
 A) LangChain  
@@ -39,6 +42,7 @@ D) PydanticAI
 ---
 
 ### Question 4: Multi-Agent Advantage
+
 **What is the primary advantage of the Multi-Agent pattern?**
 
 A) Faster execution  
@@ -51,6 +55,7 @@ D) Lower resource usage
 ---
 
 ### Question 5: Type Safety Framework
+
 **Which framework emphasizes type safety through schema validation?**
 
 A) LangChain  
@@ -63,6 +68,7 @@ D) PydanticAI ✅
 ---
 
 ### Question 6: Planning Pattern Use Case
+
 **The Planning pattern is most useful for:**
 
 A) Simple query-response interactions  
@@ -75,6 +81,7 @@ D) Static content generation
 ---
 
 ### Question 7: Tool Selection Logic
+
 **In the Tool Use pattern, what determines which tool an agent selects?**
 
 A) Random selection  
@@ -87,6 +94,7 @@ D) Execution speed
 ---
 
 ### Question 8: Graph-Based Architecture
+
 **Which framework uses a graph-based architecture for precise control flow?**
 
 A) CrewAI  
@@ -99,6 +107,7 @@ D) Agno
 ---
 
 ### Question 9: Framework Benefits
+
 **The primary benefit of using agent frameworks over bare metal implementation is:**
 
 A) Better performance  
@@ -111,6 +120,7 @@ D) Simpler deployment
 ---
 
 ### Question 10: Collaboration Patterns
+
 **Which collaboration pattern involves agents working on different aspects simultaneously?**
 
 A) Sequential Processing  
@@ -123,6 +133,7 @@ D) Hierarchical Teams
 ---
 
 ### Question 11: Bare Metal Implementation
+
 **When would you choose bare metal Python implementation over frameworks?**
 
 A) Production applications  
@@ -135,6 +146,7 @@ D) Enterprise integration
 ---
 
 ### Question 12: Reflection Pattern Phases
+
 **The reflection pattern typically involves how many phases?**
 
 A) 2 phases: Generate and Reflect  
@@ -147,6 +159,7 @@ D) 5 phases: Generate, Reflect, Refine, Test, Deploy
 ---
 
 ### Question 13: Enterprise Framework Features
+
 **What makes ADK particularly suitable for enterprise applications?**
 
 A) Open source licensing  
@@ -159,6 +172,7 @@ D) Simplest learning curve
 ---
 
 ### Question 14: Manager Agent Role
+
 **In multi-agent systems, what is the role of a "Manager Agent"?**
 
 A) Execute all tasks directly  
@@ -171,6 +185,7 @@ D) Provide user interface
 ---
 
 ### Question 15: Pattern Selection for Real-time Data
+
 **Which pattern would be most appropriate for a task requiring real-time stock price analysis?**
 
 A) Reflection (for self-improvement)  
@@ -195,6 +210,7 @@ D) Multi-Agent (for collaboration)
 ## 📚 Key Concepts Review
 
 ### Five Core Agentic Patterns
+
 1. **Reflection**: Self-evaluation and iterative improvement
 2. **Tool Use**: Dynamic tool selection and external capability extension
 3. **ReAct**: Reasoning and Acting in interactive loops
@@ -202,6 +218,7 @@ D) Multi-Agent (for collaboration)
 5. **Multi-Agent**: Specialized collaboration and expertise sharing
 
 ### Framework Comparison Matrix
+
 - **LangChain**: Comprehensive ecosystem with extensive tool integration
 - **LangGraph**: Graph-based workflows with precise control flow
 - **CrewAI**: Team-oriented collaboration and role-based agents
@@ -211,6 +228,7 @@ D) Multi-Agent (for collaboration)
 - **Agno**: Performance-optimized for high-throughput applications
 
 ### Pattern Selection Guidelines
+
 - **Simple Tasks**: Direct prompting or basic Tool Use
 - **Quality-Critical Work**: Reflection pattern for iterative improvement
 - **External Data Needs**: Tool Use for API and database access
@@ -221,6 +239,7 @@ D) Multi-Agent (for collaboration)
 ---
 
 ## Answer Summary
+
 1. B  2. B  3. C  4. B  5. D  6. B  7. C  8. B  9. C  10. B  11. B  12. B  13. B  14. C  15. B
 
 ---

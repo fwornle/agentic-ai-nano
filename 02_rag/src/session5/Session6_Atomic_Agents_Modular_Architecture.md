@@ -59,7 +59,7 @@ class AtomicContext(BaseModel):
     user_id: Optional[str] = None
     session_id: Optional[str] = None
     metadata: Dict[str, Any] = Field(default_factory=dict)
-    
+
     class Config:
         """Pydantic configuration for JSON serialization."""
         json_encoders = {datetime: lambda v: v.isoformat()}
@@ -80,24 +80,24 @@ T_Output = TypeVar('T_Output', bound=BaseModel)
 
 class AtomicAgent(Generic[T_Input, T_Output], ABC):
     """Base class for all atomic agents with type-safe I/O."""
-    
+
     def __init__(self, name: str, version: str = "1.0.0"):
         self.name = name
         self.version = version
         self.agent_id = str(uuid.uuid4())
         self._execution_count = 0
-        
+
     @abstractmethod
     async def execute(self, input_data: T_Input, context: AtomicContext) -> T_Output:
         """Execute the atomic operation with type-safe inputs and outputs."""
         pass
-    
+
     @abstractmethod
     def get_input_schema(self) -> type[T_Input]:
         """Return the input schema class."""
         pass
-    
-    @abstractmethod  
+
+    @abstractmethod
     def get_output_schema(self) -> type[T_Output]:
         """Return the output schema class."""
         pass
@@ -112,10 +112,10 @@ Atomic agents must handle errors gracefully and provide detailed debugging infor
 ```python
 class AtomicError(Exception):
     """Base exception for atomic agent errors."""
-    
+
     def __init__(
-        self, 
-        message: str, 
+        self,
+        message: str,
         agent_name: str,
         context: Optional[AtomicContext] = None,
         details: Optional[Dict[str, Any]] = None
@@ -157,7 +157,7 @@ class TextInput(BaseModel):
     content: str = Field(..., min_length=1, max_length=10000)
     operation: str = Field(..., regex=r'^(summarize|extract_keywords|sentiment)$')
     options: Dict[str, Any] = Field(default_factory=dict)
-    
+
     @validator('content')
     def validate_content(cls, v):
         """Ensure content is not just whitespace."""
@@ -181,33 +181,33 @@ These schemas define the exact contract for our text processing agent. Notice th
 ```python
 class TextProcessorAgent(AtomicAgent[TextInput, TextOutput]):
     """Atomic agent for text processing operations."""
-    
+
     def __init__(self):
         super().__init__("TextProcessor", "1.0.0")
-        
+
     async def execute(self, input_data: TextInput, context: AtomicContext) -> TextOutput:
         """Execute text processing with comprehensive error handling."""
         start_time = datetime.utcnow()
-        
+
         try:
             # Validate input schema
             if not isinstance(input_data, TextInput):
                 raise ValidationError(
-                    f"Invalid input type: expected TextInput, got {type(input_data)}", 
-                    self.name, 
+                    f"Invalid input type: expected TextInput, got {type(input_data)}",
+                    self.name,
                     context
                 )
-            
+
             # Process based on operation type
             result = await self._process_text(input_data.content, input_data.operation, input_data.options)
-            
+
             # Calculate processing metrics
             processing_time = (datetime.utcnow() - start_time).total_seconds() * 1000
             word_count = len(input_data.content.split())
-            
+
             # Update execution count
             self._execution_count += 1
-            
+
             return TextOutput(
                 result=result["text"],
                 confidence=result["confidence"],
@@ -219,12 +219,12 @@ class TextProcessorAgent(AtomicAgent[TextInput, TextOutput]):
                     "operation": input_data.operation
                 }
             )
-            
+
         except Exception as e:
             raise ExecutionError(
-                f"Text processing failed: {str(e)}", 
-                self.name, 
-                context, 
+                f"Text processing failed: {str(e)}",
+                self.name,
+                context,
                 {"input_length": len(input_data.content)}
             )
 ```
@@ -240,7 +240,7 @@ This implementation demonstrates key atomic agent principles:
 ```python
     async def _process_text(self, content: str, operation: str, options: Dict[str, Any]) -> Dict[str, Any]:
         """Core text processing logic with operation switching."""
-        
+
         if operation == "summarize":
             return await self._summarize(content, options)
         elif operation == "extract_keywords":
@@ -249,30 +249,30 @@ This implementation demonstrates key atomic agent principles:
             return await self._analyze_sentiment(content, options)
         else:
             raise ValueError(f"Unknown operation: {operation}")
-    
+
     async def _summarize(self, content: str, options: Dict[str, Any]) -> Dict[str, Any]:
         """Simple extractive summarization."""
         sentences = content.split('. ')
         max_sentences = options.get('max_sentences', 3)
-        
+
         # Simple heuristic: take first and last sentences, plus longest middle sentence
         if len(sentences) <= max_sentences:
             summary = content
         else:
             summary_sentences = [sentences[0]]  # First sentence
-            
+
             # Add longest sentence from middle
             if len(sentences) > 2:
                 middle_sentences = sentences[1:-1]
                 longest = max(middle_sentences, key=len)
                 summary_sentences.append(longest)
-            
+
             # Add last sentence
             if max_sentences > 2:
                 summary_sentences.append(sentences[-1])
-            
+
             summary = '. '.join(summary_sentences)
-        
+
         return {
             "text": summary,
             "confidence": 0.8  # Static confidence for demo
@@ -298,12 +298,12 @@ from typing import Any, Dict, Optional
 
 class ContextProvider(ABC):
     """Abstract base class for context providers."""
-    
+
     @abstractmethod
     async def provide(self, context: AtomicContext) -> Dict[str, Any]:
         """Provide context-specific resources."""
         pass
-    
+
     @abstractmethod
     def get_provider_type(self) -> str:
         """Return the type of context this provider supplies."""
@@ -311,27 +311,27 @@ class ContextProvider(ABC):
 
 class DatabaseContextProvider(ContextProvider):
     """Provides database connections and queries."""
-    
+
     def __init__(self, connection_string: str):
         self.connection_string = connection_string
         self._connection_pool = None
-        
+
     async def provide(self, context: AtomicContext) -> Dict[str, Any]:
         """Provide database connection with user context."""
         # Initialize connection pool if needed
         if self._connection_pool is None:
             self._connection_pool = await self._create_pool()
-        
+
         return {
             "db_connection": self._connection_pool.get_connection(),
             "user_id": context.user_id,
             "session_id": context.session_id,
             "query_timeout": 30
         }
-    
+
     def get_provider_type(self) -> str:
         return "database"
-    
+
     async def _create_pool(self):
         """Create database connection pool (simplified implementation)."""
         # In production, use proper connection pooling
@@ -339,16 +339,16 @@ class DatabaseContextProvider(ContextProvider):
 
 class MockConnectionPool:
     """Mock connection pool for demonstration."""
-    
+
     def __init__(self, connection_string: str):
         self.connection_string = connection_string
-    
+
     def get_connection(self):
         return MockDatabaseConnection(self.connection_string)
 
 class MockDatabaseConnection:
     """Mock database connection."""
-    
+
     def __init__(self, connection_string: str):
         self.connection_string = connection_string
 ```
@@ -366,38 +366,38 @@ import asyncio
 
 class AtomicPipeline:
     """Compose multiple atomic agents into a processing pipeline."""
-    
+
     def __init__(self, name: str):
         self.name = name
         self.pipeline_id = str(uuid.uuid4())
         self.agents: List[AtomicAgent] = []
         self.context_providers: Dict[str, ContextProvider] = {}
-        
+
     def add_agent(self, agent: AtomicAgent) -> 'AtomicPipeline':
         """Add an agent to the pipeline (builder pattern)."""
         self.agents.append(agent)
         return self
-    
+
     def add_context_provider(self, provider: ContextProvider) -> 'AtomicPipeline':
         """Add a context provider to the pipeline."""
         self.context_providers[provider.get_provider_type()] = provider
         return self
-    
+
     async def execute(self, initial_input: Any, context: AtomicContext) -> Any:
         """Execute the entire pipeline with data flowing between agents."""
         current_data = initial_input
         execution_trace = []
-        
+
         # Enrich context with providers
         enriched_context = await self._enrich_context(context)
-        
+
         for i, agent in enumerate(self.agents):
             try:
                 step_start = datetime.utcnow()
-                
+
                 # Execute current agent
                 current_data = await agent.execute(current_data, enriched_context)
-                
+
                 # Record execution trace
                 step_duration = (datetime.utcnow() - step_start).total_seconds() * 1000
                 execution_trace.append({
@@ -406,7 +406,7 @@ class AtomicPipeline:
                     "duration_ms": step_duration,
                     "success": True
                 })
-                
+
             except AtomicError as e:
                 # Record failure and stop pipeline
                 execution_trace.append({
@@ -415,18 +415,18 @@ class AtomicPipeline:
                     "error": str(e),
                     "success": False
                 })
-                
+
                 raise ExecutionError(
                     f"Pipeline failed at step {i + 1} ({agent.name}): {str(e)}",
                     self.name,
                     enriched_context,
                     {"execution_trace": execution_trace}
                 )
-        
+
         # Add execution trace to final result
         if hasattr(current_data, 'metadata'):
             current_data.metadata["pipeline_trace"] = execution_trace
-        
+
         return current_data
 ```
 
@@ -439,36 +439,36 @@ For independent operations, atomic agents can execute in parallel:
 ```python
 class AtomicParallelExecutor:
     """Execute multiple atomic agents in parallel."""
-    
+
     def __init__(self, max_concurrent: int = 5):
         self.max_concurrent = max_concurrent
         self.semaphore = asyncio.Semaphore(max_concurrent)
-    
+
     async def execute_parallel(
-        self, 
-        agent_tasks: List[tuple[AtomicAgent, Any]], 
+        self,
+        agent_tasks: List[tuple[AtomicAgent, Any]],
         context: AtomicContext
     ) -> List[Any]:
         """Execute multiple agents concurrently with concurrency control."""
-        
+
         async def execute_with_semaphore(agent: AtomicAgent, input_data: Any):
             async with self.semaphore:
                 return await agent.execute(input_data, context)
-        
+
         # Create tasks for all agents
         tasks = [
-            execute_with_semaphore(agent, input_data) 
+            execute_with_semaphore(agent, input_data)
             for agent, input_data in agent_tasks
         ]
-        
+
         # Execute all tasks concurrently
         try:
             results = await asyncio.gather(*tasks, return_exceptions=True)
-            
+
             # Separate successful results from exceptions
             successful_results = []
             errors = []
-            
+
             for i, result in enumerate(results):
                 if isinstance(result, Exception):
                     errors.append({
@@ -477,7 +477,7 @@ class AtomicParallelExecutor:
                     })
                 else:
                     successful_results.append(result)
-            
+
             if errors:
                 raise ExecutionError(
                     f"Parallel execution had {len(errors)} failures",
@@ -485,13 +485,13 @@ class AtomicParallelExecutor:
                     context,
                     {"errors": errors, "successful_count": len(successful_results)}
                 )
-            
+
             return successful_results
-            
+
         except Exception as e:
             raise ExecutionError(
                 f"Parallel execution failed: {str(e)}",
-                "ParallelExecutor", 
+                "ParallelExecutor",
                 context
             )
 ```
@@ -518,7 +518,7 @@ from pathlib import Path
 def cli(ctx, config):
     """Atomic Agents CLI interface."""
     ctx.ensure_object(dict)
-    
+
     # Load configuration
     config_path = Path(config)
     if config_path.exists():
@@ -529,30 +529,30 @@ def cli(ctx, config):
 
 @cli.command()
 @click.option('--text', required=True, help='Text to process')
-@click.option('--operation', type=click.Choice(['summarize', 'extract_keywords', 'sentiment']), 
+@click.option('--operation', type=click.Choice(['summarize', 'extract_keywords', 'sentiment']),
               default='summarize', help='Processing operation')
 @click.option('--output', help='Output file path')
 @click.pass_context
 def process_text(ctx, text, operation, output):
     """Process text using atomic text processor agent."""
-    
+
     async def run_processing():
         # Create atomic context
         context = AtomicContext(
             user_id='cli-user',
             metadata={'cli_command': 'process_text'}
         )
-        
+
         # Create input
         text_input = TextInput(
             content=text,
             operation=operation
         )
-        
+
         # Execute agent
         agent = TextProcessorAgent()
         result = await agent.execute(text_input, context)
-        
+
         # Output results
         output_data = {
             'result': result.result,
@@ -561,14 +561,14 @@ def process_text(ctx, text, operation, output):
             'word_count': result.word_count,
             'metadata': result.metadata
         }
-        
+
         if output:
             with open(output, 'w') as f:
                 json.dump(output_data, f, indent=2)
             click.echo(f"Results written to {output}")
         else:
             click.echo(json.dumps(output_data, indent=2))
-    
+
     # Run async operation
     asyncio.run(run_processing())
 
@@ -579,24 +579,24 @@ def process_text(ctx, text, operation, output):
 @click.pass_context
 def run_pipeline(ctx, config_file, input_file, output_file):
     """Execute an atomic agent pipeline from configuration."""
-    
+
     async def run_pipeline_execution():
         # Load pipeline configuration
         with open(config_file) as f:
             pipeline_config = json.load(f)
-        
+
         # Load input data
         with open(input_file) as f:
             input_data = json.load(f)
-        
+
         # Build pipeline from configuration (simplified)
         pipeline = AtomicPipeline(pipeline_config.get('name', 'CLI Pipeline'))
-        
+
         # Add agents based on configuration
         for agent_config in pipeline_config.get('agents', []):
             if agent_config['type'] == 'text_processor':
                 pipeline.add_agent(TextProcessorAgent())
-        
+
         # Create context
         context = AtomicContext(
             user_id='cli-user',
@@ -606,10 +606,10 @@ def run_pipeline(ctx, config_file, input_file, output_file):
                 'input_file': input_file
             }
         )
-        
+
         # Execute pipeline
         result = await pipeline.execute(input_data, context)
-        
+
         # Output results
         if output_file:
             with open(output_file, 'w') as f:
@@ -617,7 +617,7 @@ def run_pipeline(ctx, config_file, input_file, output_file):
             click.echo(f"Pipeline results written to {output_file}")
         else:
             click.echo(json.dumps(result.dict(), indent=2))
-    
+
     # Run async operation
     asyncio.run(run_pipeline_execution())
 
@@ -659,60 +659,60 @@ class ServiceRegistration:
 
 class AtomicOrchestrator:
     """Production orchestrator for atomic agent services."""
-    
+
     def __init__(
-        self, 
+        self,
         service_name: str = "atomic-orchestrator",
         health_check_interval: int = 30
     ):
         self.service_name = service_name
         self.orchestrator_id = str(uuid.uuid4())
         self.health_check_interval = health_check_interval
-        
+
         # Service registry
         self.services: Dict[str, ServiceRegistration] = {}
         self.service_lock = asyncio.Lock()
-        
+
         # Monitoring
         self.metrics_collector = MetricsCollector()
         self.logger = logging.getLogger(f"orchestrator.{service_name}")
-        
+
         # Background tasks
         self._health_check_task: Optional[asyncio.Task] = None
         self._shutdown_event = asyncio.Event()
-        
+
     async def start(self):
         """Start the orchestrator with health checking."""
         self.logger.info(f"Starting atomic orchestrator {self.orchestrator_id}")
-        
+
         # Start background health checking
         self._health_check_task = asyncio.create_task(self._health_check_loop())
-        
+
         self.logger.info("Orchestrator started successfully")
-    
+
     async def stop(self):
         """Gracefully shutdown the orchestrator."""
         self.logger.info("Shutting down orchestrator...")
-        
+
         # Signal shutdown
         self._shutdown_event.set()
-        
+
         # Wait for health check task to complete
         if self._health_check_task:
             await self._health_check_task
-        
+
         self.logger.info("Orchestrator shutdown complete")
-    
+
     async def register_service(self, registration: ServiceRegistration):
         """Register an atomic agent service."""
         async with self.service_lock:
             self.services[registration.service_id] = registration
-            
+
         self.logger.info(f"Registered service: {registration.service_name} ({registration.service_id})")
-        
+
         # Record registration metric
         await self.metrics_collector.record_service_registration(registration)
-    
+
     async def unregister_service(self, service_id: str):
         """Unregister a service."""
         async with self.service_lock:
@@ -720,30 +720,30 @@ class AtomicOrchestrator:
                 service = self.services.pop(service_id)
                 self.logger.info(f"Unregistered service: {service.service_name} ({service_id})")
                 await self.metrics_collector.record_service_unregistration(service)
-    
+
     async def discover_services(
-        self, 
+        self,
         agent_type: Optional[str] = None,
         capabilities: Optional[List[str]] = None
     ) -> List[ServiceRegistration]:
         """Discover available services with optional filtering."""
         async with self.service_lock:
             services = list(self.services.values())
-        
+
         # Filter by agent type
         if agent_type:
             services = [s for s in services if s.agent_type == agent_type]
-        
+
         # Filter by capabilities
         if capabilities:
             services = [
-                s for s in services 
+                s for s in services
                 if all(cap in s.capabilities for cap in capabilities)
             ]
-        
+
         # Only return healthy services
         services = [s for s in services if s.is_healthy]
-        
+
         return services
 ```
 
@@ -754,7 +754,7 @@ The orchestrator provides service discovery, health checking, and metrics collec
 ```python
 class MetricsCollector:
     """Collect and aggregate metrics from atomic agents."""
-    
+
     def __init__(self):
         self.metrics: Dict[str, Any] = {
             'service_registrations': 0,
@@ -767,38 +767,38 @@ class MetricsCollector:
         }
         self.execution_times: List[float] = []
         self.metrics_lock = asyncio.Lock()
-    
+
     async def record_service_registration(self, service: ServiceRegistration):
         """Record service registration metrics."""
         async with self.metrics_lock:
             self.metrics['service_registrations'] += 1
-    
+
     async def record_health_check(self, service_id: str, is_healthy: bool, response_time_ms: float):
         """Record health check results."""
         async with self.metrics_lock:
             self.metrics['health_checks_performed'] += 1
             if not is_healthy:
                 self.metrics['health_checks_failed'] += 1
-    
+
     async def record_agent_execution(self, agent_name: str, execution_time_ms: float, success: bool):
         """Record agent execution metrics."""
         async with self.metrics_lock:
             self.metrics['agent_executions'] += 1
-            
+
             if not success:
                 self.metrics['agent_execution_errors'] += 1
-            
+
             # Update execution time metrics
             self.execution_times.append(execution_time_ms)
-            
+
             # Keep only recent execution times (sliding window)
             if len(self.execution_times) > 1000:
                 self.execution_times = self.execution_times[-1000:]
-            
+
             # Calculate average execution time
             if self.execution_times:
                 self.metrics['average_execution_time_ms'] = sum(self.execution_times) / len(self.execution_times)
-    
+
     async def get_metrics_summary(self) -> Dict[str, Any]:
         """Get current metrics summary."""
         async with self.metrics_lock:
@@ -815,30 +815,30 @@ class MetricsCollector:
     async def _health_check_loop(self):
         """Background health checking for all registered services."""
         import aiohttp
-        
+
         while not self._shutdown_event.is_set():
             try:
                 # Get current services
                 async with self.service_lock:
                     services_to_check = list(self.services.values())
-                
+
                 # Check each service
                 health_check_tasks = []
                 for service in services_to_check:
                     task = asyncio.create_task(self._check_service_health(service))
                     health_check_tasks.append(task)
-                
+
                 # Wait for all health checks with timeout
                 if health_check_tasks:
                     await asyncio.wait(health_check_tasks, timeout=10.0)
-                
+
             except Exception as e:
                 self.logger.error(f"Health check loop error: {str(e)}")
-            
+
             # Wait for next check interval or shutdown
             try:
                 await asyncio.wait_for(
-                    self._shutdown_event.wait(), 
+                    self._shutdown_event.wait(),
                     timeout=self.health_check_interval
                 )
                 # If shutdown event is set, exit loop
@@ -846,42 +846,42 @@ class MetricsCollector:
             except asyncio.TimeoutError:
                 # Timeout is expected, continue with next health check
                 continue
-    
+
     async def _check_service_health(self, service: ServiceRegistration):
         """Check health of a single service."""
         import aiohttp
-        
+
         start_time = datetime.utcnow()
         is_healthy = False
-        
+
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(
-                    service.health_check_url, 
+                    service.health_check_url,
                     timeout=aiohttp.ClientTimeout(total=5.0)
                 ) as response:
                     is_healthy = response.status == 200
-                    
+
         except Exception as e:
             self.logger.warning(f"Health check failed for {service.service_name}: {str(e)}")
             is_healthy = False
-        
+
         # Calculate response time
         response_time = (datetime.utcnow() - start_time).total_seconds() * 1000
-        
+
         # Update service status
         async with self.service_lock:
             if service.service_id in self.services:
                 self.services[service.service_id].is_healthy = is_healthy
                 self.services[service.service_id].last_health_check = datetime.utcnow()
-        
+
         # Record metrics
         await self.metrics_collector.record_health_check(
-            service.service_id, 
-            is_healthy, 
+            service.service_id,
+            is_healthy,
             response_time
         )
-        
+
         if not is_healthy:
             self.logger.warning(f"Service {service.service_name} is unhealthy")
 ```
@@ -891,30 +891,30 @@ class MetricsCollector:
 ```python
 class AtomicLoadBalancer:
     """Load balancer for atomic agent services."""
-    
+
     def __init__(self, orchestrator: AtomicOrchestrator):
         self.orchestrator = orchestrator
         self.round_robin_counters: Dict[str, int] = {}
-        
+
     async def route_request(
-        self, 
-        agent_type: str, 
-        input_data: Any, 
+        self,
+        agent_type: str,
+        input_data: Any,
         context: AtomicContext,
         strategy: str = "round_robin"
     ) -> Any:
         """Route request to available service using specified strategy."""
-        
+
         # Discover available services
         services = await self.orchestrator.discover_services(agent_type=agent_type)
-        
+
         if not services:
             raise ExecutionError(
                 f"No healthy services available for agent type: {agent_type}",
                 "LoadBalancer",
                 context
             )
-        
+
         # Select service using strategy
         if strategy == "round_robin":
             selected_service = self._round_robin_select(agent_type, services)
@@ -923,27 +923,27 @@ class AtomicLoadBalancer:
         else:
             # Default to first available
             selected_service = services[0]
-        
+
         # Execute request with failover
         return await self._execute_with_failover(
-            selected_service, 
-            services, 
-            input_data, 
+            selected_service,
+            services,
+            input_data,
             context
         )
-    
+
     def _round_robin_select(self, agent_type: str, services: List[ServiceRegistration]) -> ServiceRegistration:
         """Select service using round-robin strategy."""
         if agent_type not in self.round_robin_counters:
             self.round_robin_counters[agent_type] = 0
-        
+
         selected_index = self.round_robin_counters[agent_type] % len(services)
         self.round_robin_counters[agent_type] += 1
-        
+
         return services[selected_index]
-    
+
     async def _execute_with_failover(
-        self, 
+        self,
         primary_service: ServiceRegistration,
         all_services: List[ServiceRegistration],
         input_data: Any,
@@ -952,9 +952,9 @@ class AtomicLoadBalancer:
     ) -> Any:
         """Execute request with automatic failover."""
         import aiohttp
-        
+
         services_to_try = [primary_service] + [s for s in all_services if s.service_id != primary_service.service_id]
-        
+
         for attempt, service in enumerate(services_to_try[:max_retries + 1]):
             try:
                 # Make HTTP request to service
@@ -963,20 +963,20 @@ class AtomicLoadBalancer:
                         'input_data': input_data.dict() if hasattr(input_data, 'dict') else input_data,
                         'context': context.dict()
                     }
-                    
+
                     async with session.post(
                         f"{service.endpoint}/execute",
                         json=request_data,
                         timeout=aiohttp.ClientTimeout(total=30.0)
                     ) as response:
-                        
+
                         if response.status == 200:
                             result_data = await response.json()
                             return result_data
                         else:
                             error_text = await response.text()
                             raise aiohttp.ClientError(f"HTTP {response.status}: {error_text}")
-            
+
             except Exception as e:
                 if attempt < len(services_to_try) - 1:
                     # Try next service
@@ -1006,7 +1006,7 @@ Test your understanding of atomic agent architecture and implementation patterns
 
 The four core principles are:
 1. **Single Responsibility** - Each agent handles one specific concern perfectly
-2. **Type Safety** - Schemas and validation ensure reliable data flow between components  
+2. **Type Safety** - Schemas and validation ensure reliable data flow between components
 3. **Composition** - Complex behaviors emerge from combining simple, interoperable components
 4. **Observability** - Built-in monitoring, logging, and debugging capabilities throughout the system
 
@@ -1110,7 +1110,7 @@ For atomic systems processing independent operations, parallel execution can dra
 
 CLI integration provides:
 - **Developer productivity** through command-line automation and testing
-- **CI/CD integration** enabling automated pipelines and deployments  
+- **CI/CD integration** enabling automated pipelines and deployments
 - **Configuration management** through file-based pipeline definitions
 - **Debugging capabilities** with detailed output and error reporting
 - **Scripting support** for complex workflows and batch operations
@@ -1147,7 +1147,7 @@ Compared to previous frameworks:
 - Production-ready patterns vs. educational foundations
 
 **vs. LangChain (Session 2):**
-- Explicit schemas vs. flexible but less predictable interfaces  
+- Explicit schemas vs. flexible but less predictable interfaces
 - Atomic composition vs. chain-based workflows
 - Type safety vs. runtime validation
 

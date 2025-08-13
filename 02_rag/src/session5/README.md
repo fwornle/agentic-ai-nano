@@ -98,27 +98,32 @@ results = quick_evaluate(
 ### Core Components
 
 #### 1. Evaluation Framework
+
 - Multi-dimensional assessment (retrieval, generation, end-to-end)
 - Pluggable evaluator architecture
 - Comprehensive metric registry
 
 #### 2. RAGAS Integration
+
 - Standardized evaluation metrics
 - Faithfulness, relevancy, precision, recall
 - Ground truth comparison
 
 #### 3. Custom Metrics
+
 - Answer completeness assessment
 - Citation quality evaluation
 - Domain-specific accuracy
 - Coherence and depth analysis
 
 #### 4. A/B Testing
+
 - Component variant comparison
 - Statistical significance testing
 - Multi-armed bandit optimization
 
 #### 5. Production Monitoring
+
 - Real-time quality assessment
 - Performance tracking
 - Anomaly detection
@@ -127,6 +132,7 @@ results = quick_evaluate(
 ## 📊 Evaluation Metrics
 
 ### Retrieval Quality
+
 - **Semantic Relevance**: Context-query similarity
 - **Context Diversity**: Information variety
 - **Precision@K**: Relevant documents in top-K
@@ -134,6 +140,7 @@ results = quick_evaluate(
 - **NDCG**: Normalized discounted cumulative gain
 
 ### Generation Quality
+
 - **Faithfulness**: Factual consistency with context
 - **Answer Relevancy**: Response relevance to query
 - **Completeness**: Comprehensive answer coverage
@@ -141,6 +148,7 @@ results = quick_evaluate(
 - **Citation Quality**: Source attribution accuracy
 
 ### End-to-End Performance
+
 - **Overall Quality**: Weighted combination score
 - **User Satisfaction**: Task completion rate
 - **Response Time**: System latency
@@ -293,6 +301,7 @@ The demo includes:
 ### Core Classes
 
 #### RAGEvaluationFramework
+
 Main evaluation framework for comprehensive RAG assessment.
 
 ```python
@@ -301,6 +310,7 @@ results = framework.evaluate_rag_system(test_dataset, rag_system, config)
 ```
 
 #### RAGASEvaluator
+
 RASAS integration for standardized evaluation metrics.
 
 ```python
@@ -309,6 +319,7 @@ results = ragas_eval.evaluate_with_ragas(rag_results)
 ```
 
 #### CustomRAGMetrics
+
 Custom evaluation metrics for specialized assessments.
 
 ```python
@@ -317,6 +328,7 @@ score = custom_metrics.evaluate_answer_completeness(query, answer, contexts)
 ```
 
 #### RAGProductionMonitor
+
 Production monitoring with real-time quality assessment.
 
 ```python
@@ -377,7 +389,7 @@ monitor = RAGProductionMonitor(
 # Integrate with your RAG system
 def enhanced_rag_query(query):
     response = your_rag_system.query(query)
-    
+
     # Monitor the interaction
     monitor.monitor_rag_interaction(
         query=query,
@@ -385,7 +397,7 @@ def enhanced_rag_query(query):
         contexts=response['contexts'],
         metadata=response['metadata']
     )
-    
+
     return response
 ```
 

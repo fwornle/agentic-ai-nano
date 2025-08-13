@@ -23,7 +23,7 @@ Modern GraphRAG represents a paradigm shift from passive information retrieval t
 
 **The GraphRAG Advantage:**
 - **Relationship Awareness**: Explicit modeling of entity connections
-- **Multi-Hop Reasoning**: Following chains of relationships for complex queries  
+- **Multi-Hop Reasoning**: Following chains of relationships for complex queries
 - **Structural Understanding**: Hierarchies, dependencies, and network effects
 - **Comprehensive Retrieval**: Finding related information through graph traversal
 - **Reasoning Integration**: Proactive reasoning that constructs logically coherent contexts
@@ -81,7 +81,7 @@ The integration of reasoning capabilities transforms GraphRAG from passive infor
 **Three Reasoning Integration Approaches:**
 
 1. **Prompt-Based Reasoning**: Enhanced prompts that guide reasoning through graph structures
-2. **Tuning-Based Integration**: Fine-tuned models that understand graph reasoning patterns  
+2. **Tuning-Based Integration**: Fine-tuned models that understand graph reasoning patterns
 3. **Reinforcement Learning**: Systems that learn optimal reasoning pathways through graph exploration
 
 **Bidirectional Synergy:**
@@ -119,7 +119,7 @@ NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pa
 **The NodeRAG Innovation Stack:**
 
 1. **Heterogeneous Node Types**: Specialized processors for different knowledge structures
-2. **Three-Stage Processing Pipeline**: Systematic knowledge pathway construction  
+2. **Three-Stage Processing Pipeline**: Systematic knowledge pathway construction
 3. **Personalized PageRank**: Semantic traversal following knowledge relationships
 4. **HNSW Similarity Edges**: High-performance similarity connections within graph structure
 5. **Graph-Centric Knowledge Representation**: Core knowledge mechanism, not just search index
@@ -147,13 +147,13 @@ Just as the human brain has specialized regions (visual cortex, language centers
 - **Content**: Topic definitions, conceptual frameworks, thematic connections
 - **Example**: "Supply Chain Management" node connecting to related methodologies and principles
 
-**2. Entity Nodes** - *The Fact Repositories* 
+**2. Entity Nodes** - *The Fact Repositories*
 - **Purpose**: Concrete entities like people, organizations, locations, products
 - **Content**: Rich metadata, canonical forms, entity attributes and relationships
 - **Example**: "Apple Inc." node with subsidiaries, partnerships, industry classifications
 
 **3. Relationship Nodes** - *The Connection Specialists*
-- **Purpose**: Explicit representation of connections between entities/concepts  
+- **Purpose**: Explicit representation of connections between entities/concepts
 - **Content**: Relationship types, confidence scores, temporal information, evidence
 - **Example**: "Partnership" node linking Apple and Foxconn with contract details and timeline
 
@@ -176,7 +176,7 @@ Just as the human brain has specialized regions (visual cortex, language centers
 
 Each node type has **specialized processing algorithms** optimized for its knowledge structure:
 - **Semantic Units**: Conceptual clustering and thematic analysis
-- **Entities**: Canonicalization and disambiguation  
+- **Entities**: Canonicalization and disambiguation
 - **Relationships**: Temporal reasoning and confidence propagation
 - **Attributes**: Statistical analysis and property inheritance
 - **Documents**: Source tracking and provenance management
@@ -191,17 +191,17 @@ Traditional systems extract uniform entities and relationships. NodeRAG performs
 ```python
 def noderag_decomposition(document):
     """NodeRAG Stage 1: Multi-granularity knowledge decomposition"""
-    
+
     # Parallel specialized extraction
     semantic_units = extract_semantic_concepts(document)     # Abstract themes and topics
     entities = extract_canonical_entities(document)          # People, orgs, locations with metadata
     relationships = extract_typed_relationships(document)     # Explicit connections with evidence
     attributes = extract_entity_properties(document)         # Quantitative and qualitative properties
     document_nodes = create_document_segments(document)      # Contextual source information
-    
+
     return {
         'semantic_units': semantic_units,
-        'entities': entities, 
+        'entities': entities,
         'relationships': relationships,
         'attributes': attributes,
         'document_nodes': document_nodes
@@ -215,22 +215,22 @@ This stage builds the **heterogeneous graph structure** by creating specialized 
 ```python
 def noderag_augmentation(decomposition_result):
     """NodeRAG Stage 2: Heterogeneous graph construction"""
-    
+
     # Create typed connections between specialized nodes
     semantic_entity_links = link_concepts_to_entities(
-        decomposition_result['semantic_units'], 
+        decomposition_result['semantic_units'],
         decomposition_result['entities']
     )
-    
+
     # Build HNSW similarity edges within the graph structure
     hnsw_similarity_edges = build_hnsw_graph_edges(
         all_nodes=decomposition_result,
         similarity_threshold=0.75
     )
-    
+
     # Cross-reference integration across node types
     cross_references = integrate_cross_type_references(decomposition_result)
-    
+
     return build_heterogeneous_graph(
         nodes=decomposition_result,
         typed_connections=semantic_entity_links,
@@ -246,7 +246,7 @@ The final stage builds **reasoning pathways** that enable coherent knowledge tra
 ```python
 def noderag_enrichment(heterogeneous_graph):
     """NodeRAG Stage 3: Reasoning pathway construction"""
-    
+
     # Apply Personalized PageRank for semantic importance
     pagerank_scores = personalized_pagerank(
         graph=heterogeneous_graph,
@@ -259,19 +259,19 @@ def noderag_enrichment(heterogeneous_graph):
             'summary': 0.05
         }
     )
-    
+
     # Construct logical reasoning pathways
     reasoning_pathways = build_reasoning_pathways(
         graph=heterogeneous_graph,
         pagerank_scores=pagerank_scores,
         max_pathway_length=5
     )
-    
+
     # Optimize graph structure for reasoning performance
     optimized_graph = optimize_for_reasoning(
         heterogeneous_graph, reasoning_pathways
     )
-    
+
     return {
         'enriched_graph': optimized_graph,
         'reasoning_pathways': reasoning_pathways,
@@ -288,10 +288,10 @@ NodeRAG uses **Personalized PageRank** to identify the most important semantic p
 ```python
 class NodeRAGPageRank:
     """Personalized PageRank optimized for heterogeneous NodeRAG graphs"""
-    
+
     def compute_semantic_pathways(self, query_context, heterogeneous_graph):
         """Compute query-aware semantic pathways using personalized PageRank"""
-        
+
         # Create personalization vector based on query relevance and node types
         personalization_vector = self.create_query_personalization(
             query_context=query_context,
@@ -304,7 +304,7 @@ class NodeRAGPageRank:
                 'summary': 0.1         # Synthesized insights
             }
         )
-        
+
         # Compute personalized PageRank with query bias
         pagerank_scores = nx.pagerank(
             heterogeneous_graph,
@@ -313,7 +313,7 @@ class NodeRAGPageRank:
             max_iter=100,
             tol=1e-6
         )
-        
+
         # Extract top semantic pathways
         semantic_pathways = self.extract_top_pathways(
             graph=heterogeneous_graph,
@@ -321,24 +321,24 @@ class NodeRAGPageRank:
             query_context=query_context,
             max_pathways=10
         )
-        
+
         return semantic_pathways
-    
+
     def extract_top_pathways(self, graph, pagerank_scores, query_context, max_pathways):
         """Extract the most relevant semantic pathways for the query"""
-        
+
         # Find high-scoring nodes as pathway anchors
         top_nodes = sorted(
-            pagerank_scores.items(), 
-            key=lambda x: x[1], 
+            pagerank_scores.items(),
+            key=lambda x: x[1],
             reverse=True
         )[:50]
-        
+
         pathways = []
         for start_node, score in top_nodes:
             if len(pathways) >= max_pathways:
                 break
-                
+
             # Use BFS to find semantic pathways from this anchor
             pathway = self.find_semantic_pathway(
                 graph=graph,
@@ -347,7 +347,7 @@ class NodeRAGPageRank:
                 max_depth=4,
                 pagerank_scores=pagerank_scores
             )
-            
+
             if pathway and len(pathway) > 1:
                 pathways.append({
                     'pathway': pathway,
@@ -355,13 +355,13 @@ class NodeRAGPageRank:
                     'pathway_coherence': self.calculate_pathway_coherence(pathway),
                     'query_relevance': self.calculate_query_relevance(pathway, query_context)
                 })
-        
+
         # Rank pathways by combined score
         pathways.sort(
             key=lambda p: (p['pathway_coherence'] * p['query_relevance'] * p['anchor_score']),
             reverse=True
         )
-        
+
         return pathways[:max_pathways]
 ```
 
@@ -384,28 +384,28 @@ NodeRAG integrates **Hierarchical Navigable Small World (HNSW)** similarity edge
 ```python
 class NodeRAGHNSW:
     """HNSW similarity edges integrated into NodeRAG heterogeneous graphs"""
-    
+
     def build_hnsw_graph_integration(self, heterogeneous_graph, embedding_model):
         """Build HNSW similarity edges within the existing graph structure"""
-        
+
         # Extract embeddings for all nodes by type
         node_embeddings = {}
         node_types = {}
-        
+
         for node_id, node_data in heterogeneous_graph.nodes(data=True):
             node_type = node_data.get('node_type')
             node_content = self.get_node_content_for_embedding(node_data, node_type)
-            
+
             # Generate specialized embeddings based on node type
             embedding = self.generate_typed_embedding(
                 content=node_content,
                 node_type=node_type,
                 embedding_model=embedding_model
             )
-            
+
             node_embeddings[node_id] = embedding
             node_types[node_id] = node_type
-        
+
         # Build HNSW index with type-aware similarity
         hnsw_index = self.build_typed_hnsw_index(
             embeddings=node_embeddings,
@@ -416,46 +416,46 @@ class NodeRAGHNSW:
             max_m0=32,
             ml=1 / np.log(2.0)
         )
-        
+
         # Add similarity edges to the existing heterogeneous graph
         similarity_edges_added = 0
         for node_id in heterogeneous_graph.nodes():
             # Find k most similar nodes using HNSW
             similar_nodes = hnsw_index.knn_query(
-                node_embeddings[node_id], 
+                node_embeddings[node_id],
                 k=10  # Top-10 most similar nodes
             )[1][0]  # Get node indices
-            
+
             node_list = list(node_embeddings.keys())
             for similar_idx in similar_nodes[1:]:  # Skip self
                 similar_node_id = node_list[similar_idx]
-                
+
                 # Calculate similarity score
                 similarity = cosine_similarity(
-                    [node_embeddings[node_id]], 
+                    [node_embeddings[node_id]],
                     [node_embeddings[similar_node_id]]
                 )[0][0]
-                
+
                 # Add similarity edge if above threshold and type-compatible
                 if similarity > 0.7 and self.are_types_compatible(
-                    node_types[node_id], 
+                    node_types[node_id],
                     node_types[similar_node_id]
                 ):
                     heterogeneous_graph.add_edge(
-                        node_id, 
+                        node_id,
                         similar_node_id,
                         edge_type='similarity',
                         similarity_score=float(similarity),
                         hnsw_based=True
                     )
                     similarity_edges_added += 1
-        
+
         print(f"Added {similarity_edges_added} HNSW similarity edges to heterogeneous graph")
         return heterogeneous_graph
-    
+
     def are_types_compatible(self, type1, type2):
         """Determine if two node types should have similarity connections"""
-        
+
         # Define type compatibility matrix
         compatibility_matrix = {
             'semantic_unit': ['semantic_unit', 'entity', 'summary'],
@@ -465,7 +465,7 @@ class NodeRAGHNSW:
             'document': ['document', 'summary'],
             'summary': ['summary', 'semantic_unit', 'document']
         }
-        
+
         return type2 in compatibility_matrix.get(type1, [])
 ```
 
@@ -480,10 +480,10 @@ NodeRAG's heterogeneous graph architecture provides the **structured foundation*
 1. **Planning with Graph Structure**: Agentic systems can use NodeRAG's relationship pathways to plan multi-step reasoning sequences
    ```
    Query: "Analyze Apple's supply chain risks in automotive"
-   
+
    Agent Planning with NodeRAG:
    Step 1: Traverse Apple → Partnership nodes → Automotive entities
-   Step 2: Follow Entity → Attribute nodes → Risk factors  
+   Step 2: Follow Entity → Attribute nodes → Risk factors
    Step 3: Cross-reference Summary nodes → Risk assessments
    Step 4: Synthesize coherent risk analysis
    ```
@@ -495,7 +495,7 @@ NodeRAG's heterogeneous graph architecture provides the **structured foundation*
 
 3. **Adaptive Reasoning Strategies**: NodeRAG's specialized nodes inform reasoning approach selection
    - **Concept-Heavy Queries** → Emphasize Semantic Unit and Summary nodes
-   - **Factual Queries** → Focus on Entity and Attribute nodes  
+   - **Factual Queries** → Focus on Entity and Attribute nodes
    - **Analytical Queries** → Leverage Relationship and cross-type connections
 
 4. **Iterative Refinement**: Graph structure enables systematic improvement
@@ -527,7 +527,7 @@ While NodeRAG provides advanced heterogeneous architectures, traditional GraphRA
 
 **Core Traditional GraphRAG Components:**
 1. **Entity Extraction**: Identify people, organizations, locations, concepts
-2. **Relationship Mapping**: Connect entities through typed relationships  
+2. **Relationship Mapping**: Connect entities through typed relationships
 3. **Graph Construction**: Build searchable knowledge graph
 4. **Query Processing**: Traverse graph for multi-hop reasoning
 
@@ -547,7 +547,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 class NodeType(Enum):
     """Specialized node types in heterogeneous NodeRAG architecture."""
     ENTITY = "entity"
-    CONCEPT = "concept" 
+    CONCEPT = "concept"
     DOCUMENT = "document"
     RELATIONSHIP = "relationship"
     CLUSTER = "cluster"
@@ -565,33 +565,33 @@ class NodeRAGNode:
 
 class NodeRAGExtractor:
     """NodeRAG heterogeneous graph construction with three-stage processing.
-    
+
     This extractor implements the breakthrough NodeRAG architecture that addresses
     traditional GraphRAG limitations through specialized node types and advanced
     graph reasoning capabilities:
-    
+
     **Heterogeneous Node Types:**
     - Entity Nodes: People, organizations, locations with rich metadata
-    - Concept Nodes: Abstract concepts, topics, themes with semantic relationships  
+    - Concept Nodes: Abstract concepts, topics, themes with semantic relationships
     - Document Nodes: Text chunks, sections, full documents with contextual information
     - Relationship Nodes: Explicit relationship representations with confidence scores
     - Cluster Nodes: Semantic clusters that group related information
-    
+
     **Three-Stage Processing:**
     - Decomposition: Multi-granularity analysis with specialized node creation
     - Augmentation: Cross-reference integration with HNSW similarity edges
     - Enrichment: Personalized PageRank and reasoning pathway construction
-    
+
     **Advanced Graph Reasoning:**
     - Personalized PageRank for semantic traversal
     - HNSW similarity edges for high-performance retrieval
     - Graph-centric knowledge representation for logical reasoning
     """
-    
+
     def __init__(self, llm_model, spacy_model: str = "en_core_web_lg"):
         self.llm_model = llm_model
         self.nlp = spacy.load(spacy_model)
-        
+
         # NodeRAG specialized processors for different node types
         self.node_processors = {
             NodeType.ENTITY: self._extract_entity_nodes,
@@ -600,49 +600,49 @@ class NodeRAGExtractor:
             NodeType.RELATIONSHIP: self._extract_relationship_nodes,
             NodeType.CLUSTER: self._extract_cluster_nodes
         }
-        
+
         # Three-stage processing pipeline
         self.processing_stages = {
             'decomposition': self._decomposition_stage,
             'augmentation': self._augmentation_stage,
             'enrichment': self._enrichment_stage
         }
-        
+
         # Advanced graph components
         self.heterogeneous_graph = nx.MultiDiGraph()  # Supports multiple node types
         self.node_registry = {}  # Central registry of all nodes
         self.pagerank_processor = PersonalizedPageRankProcessor()
         self.hnsw_similarity = HNSWSimilarityProcessor()
-        
+
         # Reasoning integration components
         self.reasoning_pathways = {}  # Store logical reasoning pathways
         self.coherence_validator = CoherenceValidator()
-    
+
     def extract_noderag_graph(self, documents: List[str],
                                extraction_config: Dict = None) -> Dict[str, Any]:
         """Extract NodeRAG heterogeneous graph using three-stage processing.
-        
+
         The NodeRAG extraction process follows the breakthrough three-stage approach:
-        
+
         **Stage 1 - Decomposition:**
         1. Multi-granularity analysis to extract different knowledge structures
         2. Specialized node creation for entities, concepts, documents, and relationships
         3. Hierarchical structuring at multiple abstraction levels
-        
+
         **Stage 2 - Augmentation:**
         4. Cross-reference integration linking related nodes across types
         5. HNSW similarity edges for high-performance retrieval
         6. Semantic enrichment with contextual metadata
-        
+
         **Stage 3 - Enrichment:**
         7. Personalized PageRank integration for semantic traversal
         8. Reasoning pathway construction for logically coherent contexts
         9. Graph-centric optimization for sophisticated reasoning tasks
-        
+
         This three-stage approach transforms fragmented retrieval into coherent
         knowledge pathway construction, enabling advanced reasoning capabilities.
         """
-        
+
         config = extraction_config or {
             'node_types': ['entity', 'concept', 'document', 'relationship'],  # Heterogeneous node types
             'enable_pagerank': True,                     # Personalized PageRank traversal
@@ -651,24 +651,24 @@ class NodeRAGExtractor:
             'confidence_threshold': 0.75,                # Higher threshold for NodeRAG quality
             'max_pathway_depth': 5                       # Maximum reasoning pathway depth
         }
-        
+
         print(f"Extracting NodeRAG heterogeneous graph from {len(documents)} documents...")
         print(f"Node types: {config['node_types']}, Reasoning integration: {config['reasoning_integration']}")
-        
+
         # NodeRAG three-stage processing
         print("\n=== STAGE 1: DECOMPOSITION ===")
         decomposition_result = self.processing_stages['decomposition'](documents, config)
-        
+
         print("=== STAGE 2: AUGMENTATION ===")
         augmentation_result = self.processing_stages['augmentation'](decomposition_result, config)
-        
-        print("=== STAGE 3: ENRICHMENT ===")  
+
+        print("=== STAGE 3: ENRICHMENT ===")
         enrichment_result = self.processing_stages['enrichment'](augmentation_result, config)
-        
+
         # Build heterogeneous graph structure
         print("Constructing heterogeneous graph with specialized node types...")
         self._build_heterogeneous_graph(enrichment_result)
-        
+
         # Apply Personalized PageRank for semantic traversal
         if config.get('enable_pagerank', True):
             print("Computing Personalized PageRank for semantic traversal...")
@@ -677,7 +677,7 @@ class NodeRAGExtractor:
             )
         else:
             pagerank_scores = {}
-        
+
         # Build HNSW similarity edges for high-performance retrieval
         if config.get('enable_hnsw_similarity', True):
             print("Constructing HNSW similarity edges...")
@@ -686,7 +686,7 @@ class NodeRAGExtractor:
             )
         else:
             similarity_edges = {}
-            
+
         # Construct reasoning pathways if enabled
         reasoning_pathways = {}
         if config.get('reasoning_integration', True):
@@ -694,10 +694,10 @@ class NodeRAGExtractor:
             reasoning_pathways = self._construct_reasoning_pathways(
                 enrichment_result, config
             )
-        
+
         # Calculate comprehensive NodeRAG statistics
         noderag_stats = self._calculate_noderag_statistics()
-        
+
         return {
             'heterogeneous_nodes': self.node_registry,
             'reasoning_pathways': reasoning_pathways,
@@ -725,7 +725,7 @@ class NodeRAGExtractor:
 ```python
     def _decomposition_stage(self, documents: List[str], config: Dict) -> Dict[str, Any]:
         """Stage 1: Multi-granularity decomposition with specialized node creation."""
-        
+
         print("Performing multi-granularity analysis...")
         decomposition_results = {
             'entity_nodes': [],
@@ -734,56 +734,56 @@ class NodeRAGExtractor:
             'relationship_nodes': [],
             'hierarchical_structures': {}
         }
-        
+
         for doc_idx, document in enumerate(documents):
             print(f"Decomposing document {doc_idx + 1}/{len(documents)}")
-            
+
             # Extract entity nodes with rich metadata
             if 'entity' in config['node_types']:
                 entity_nodes = self._extract_entity_nodes(document, doc_idx)
                 decomposition_results['entity_nodes'].extend(entity_nodes)
-            
+
             # Extract concept nodes for abstract concepts and topics
             if 'concept' in config['node_types']:
                 concept_nodes = self._extract_concept_nodes(document, doc_idx)
                 decomposition_results['concept_nodes'].extend(concept_nodes)
-            
+
             # Extract document nodes for text segments
             if 'document' in config['node_types']:
                 document_nodes = self._extract_document_nodes(document, doc_idx)
                 decomposition_results['document_nodes'].extend(document_nodes)
-            
+
             # Extract explicit relationship nodes
             if 'relationship' in config['node_types']:
                 relationship_nodes = self._extract_relationship_nodes(document, doc_idx)
                 decomposition_results['relationship_nodes'].extend(relationship_nodes)
-        
+
         # Build hierarchical structures at multiple abstraction levels
         decomposition_results['hierarchical_structures'] = self._build_hierarchical_structures(
             decomposition_results
         )
-        
+
         print(f"Decomposition complete: {sum(len(nodes) for nodes in decomposition_results.values() if isinstance(nodes, list))} nodes created")
         return decomposition_results
-    
+
     def _augmentation_stage(self, decomposition_result: Dict, config: Dict) -> Dict[str, Any]:
         """Stage 2: Cross-reference integration and HNSW similarity edge construction."""
-        
+
         print("Performing cross-reference integration...")
-        
+
         # Cross-link related nodes across different types
         cross_references = self._build_cross_references(decomposition_result)
-        
+
         # Build HNSW similarity edges for high-performance retrieval
         if config.get('enable_hnsw_similarity', True):
             print("Constructing HNSW similarity edges...")
             similarity_edges = self._build_hnsw_similarity_edges(decomposition_result)
         else:
             similarity_edges = {}
-        
+
         # Semantic enrichment with contextual metadata
         enriched_nodes = self._apply_semantic_enrichment(decomposition_result)
-        
+
         return {
             'enriched_nodes': enriched_nodes,
             'cross_references': cross_references,
@@ -794,24 +794,24 @@ class NodeRAGExtractor:
                 'enrichment_applied': True
             }
         }
-    
+
     def _enrichment_stage(self, augmentation_result: Dict, config: Dict) -> Dict[str, Any]:
         """Stage 3: Personalized PageRank and reasoning pathway construction."""
-        
+
         print("Constructing reasoning pathways...")
-        
+
         # Build reasoning pathways for logically coherent contexts
         reasoning_pathways = {}
         if config.get('reasoning_integration', True):
             reasoning_pathways = self._construct_reasoning_pathways_stage3(
                 augmentation_result, config
             )
-        
+
         # Apply graph-centric optimization
         optimized_structure = self._apply_graph_optimization(
             augmentation_result, reasoning_pathways
         )
-        
+
         return {
             'final_nodes': optimized_structure['nodes'],
             'reasoning_pathways': reasoning_pathways,
@@ -824,20 +824,20 @@ class NodeRAGExtractor:
 ```python
 class PersonalizedPageRankProcessor:
     """Personalized PageRank for semantic traversal in NodeRAG."""
-    
+
     def __init__(self, damping_factor: float = 0.85):
         self.damping_factor = damping_factor
         self.pagerank_cache = {}
-    
+
     def compute_pagerank(self, graph: nx.MultiDiGraph, node_registry: Dict) -> Dict[str, float]:
         """Compute personalized PageRank scores for semantic traversal."""
-        
+
         if not graph.nodes():
             return {}
-        
+
         # Create personalization vector based on node types and importance
         personalization = self._create_personalization_vector(graph, node_registry)
-        
+
         # Compute Personalized PageRank
         try:
             pagerank_scores = nx.pagerank(
@@ -847,25 +847,25 @@ class PersonalizedPageRankProcessor:
                 max_iter=100,
                 tol=1e-6
             )
-            
+
             # Normalize scores by node type for better semantic traversal
             normalized_scores = self._normalize_scores_by_type(
                 pagerank_scores, node_registry
             )
-            
+
             return normalized_scores
-            
+
         except Exception as e:
             print(f"PageRank computation error: {e}")
             return {}
-    
-    def _create_personalization_vector(self, graph: nx.MultiDiGraph, 
+
+    def _create_personalization_vector(self, graph: nx.MultiDiGraph,
                                      node_registry: Dict) -> Dict[str, float]:
         """Create personalization vector emphasizing important node types."""
-        
+
         personalization = {}
         total_nodes = len(graph.nodes())
-        
+
         # Weight different node types for semantic importance
         type_weights = {
             NodeType.ENTITY: 0.3,      # High weight for entities
@@ -874,132 +874,132 @@ class PersonalizedPageRankProcessor:
             NodeType.DOCUMENT: 0.15,   # Medium weight for documents
             NodeType.CLUSTER: 0.1      # Lower weight for clusters
         }
-        
+
         for node_id in graph.nodes():
             if node_id in node_registry:
                 node_type = node_registry[node_id].node_type
                 base_weight = type_weights.get(node_type, 0.1)
-                
+
                 # Boost weight based on node confidence and connections
                 confidence_boost = node_registry[node_id].confidence * 0.2
                 connection_boost = min(len(node_registry[node_id].connections) * 0.1, 0.3)
-                
+
                 final_weight = base_weight + confidence_boost + connection_boost
                 personalization[node_id] = final_weight
             else:
                 personalization[node_id] = 0.1  # Default weight
-        
+
         # Normalize to sum to 1.0
         total_weight = sum(personalization.values())
         if total_weight > 0:
             for node_id in personalization:
                 personalization[node_id] /= total_weight
-        
+
         return personalization
-    
+
     def get_semantic_pathway(self, graph: nx.MultiDiGraph, start_node: str,
                            target_concepts: List[str], max_depth: int = 5) -> List[str]:
         """Find semantic pathway using PageRank-guided traversal."""
-        
+
         if start_node not in graph:
             return []
-        
+
         # Use PageRank scores to guide pathway exploration
         pagerank_scores = self.pagerank_cache.get(id(graph))
         if not pagerank_scores:
             return []
-        
+
         visited = set()
         pathway = [start_node]
         current_node = start_node
         depth = 0
-        
+
         while depth < max_depth and current_node:
             visited.add(current_node)
-            
+
             # Find best next node based on PageRank scores and target concepts
             next_node = self._find_best_next_node(
                 graph, current_node, target_concepts, pagerank_scores, visited
             )
-            
+
             if next_node and next_node not in visited:
                 pathway.append(next_node)
                 current_node = next_node
                 depth += 1
             else:
                 break
-        
+
         return pathway
 ```
 
 **Step 3: HNSW Similarity Edges for High-Performance Retrieval**
 ```python
-    def _merge_similar_entities(self, entities: Dict[str, Any], 
+    def _merge_similar_entities(self, entities: Dict[str, Any],
                                similarity_threshold: float = 0.85) -> Dict[str, Any]:
         """Merge semantically similar entities."""
-        
+
         from sentence_transformers import SentenceTransformer
         from sklearn.metrics.pairwise import cosine_similarity
         import numpy as np
-        
+
         # Load embedding model for similarity computation
         embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-        
+
         entity_names = list(entities.keys())
         if len(entity_names) < 2:
             return entities
-        
+
         # Generate embeddings for entity canonical forms
         entity_embeddings = embedding_model.encode(entity_names)
-        
+
         # Calculate similarity matrix
         similarity_matrix = cosine_similarity(entity_embeddings)
-        
+
         # Find similar entity pairs
         merged_entities = {}
         entity_clusters = []
         processed_entities = set()
-        
+
         for i, entity1 in enumerate(entity_names):
             if entity1 in processed_entities:
                 continue
-                
+
             # Find similar entities
             cluster = [entity1]
             for j, entity2 in enumerate(entity_names):
                 if i != j and entity2 not in processed_entities:
                     if similarity_matrix[i][j] > similarity_threshold:
                         cluster.append(entity2)
-            
+
             # Create merged entity
             if len(cluster) > 1:
                 # Choose canonical form (highest confidence entity)
                 canonical_entity = max(
-                    cluster, 
+                    cluster,
                     key=lambda x: entities[x].get('confidence', 0.5)
                 )
-                
+
                 # Merge information
                 merged_entity = entities[canonical_entity].copy()
                 merged_entity['text_variants'] = []
                 merged_entity['merged_from'] = cluster
-                
+
                 for entity_name in cluster:
                     entity_data = entities[entity_name]
                     merged_entity['text_variants'].extend(
                         entity_data.get('text_variants', [entity_name])
                     )
                     processed_entities.add(entity_name)
-                
+
                 # Remove duplicates in text variants
                 merged_entity['text_variants'] = list(set(merged_entity['text_variants']))
                 merged_entities[canonical_entity] = merged_entity
-                
+
             else:
                 # Single entity, no merging needed
                 merged_entities[entity1] = entities[entity1]
                 processed_entities.add(entity1)
-        
+
         print(f"Entity merging: {len(entities)} -> {len(merged_entities)} entities")
         return merged_entities
 ```
@@ -1031,101 +1031,101 @@ Our Neo4j integration implements production best practices from day one, ensurin
 # Neo4j integration for production GraphRAG
 class Neo4jGraphManager:
     """Production Neo4j integration for GraphRAG systems.
-    
+
     This manager implements production-grade patterns for graph storage:
-    
+
     - Batch Operations: Minimizes transaction overhead for large-scale ingestion
     - Strategic Indexing: Optimizes common query patterns (entity lookup, type filtering)
     - Connection Pooling: Handles concurrent access efficiently
     - Error Recovery: Robust handling of network and database issues
-    
+
     Performance characteristics:
     - Batch entity storage: ~10,000 entities/second
-    - Relationship insertion: ~5,000 relationships/second  
+    - Relationship insertion: ~5,000 relationships/second
     - Query response: <100ms for 3-hop traversals on 100K+ entity graphs
     """
-    
+
     def __init__(self, uri: str, username: str, password: str):
         # Neo4j driver with production settings
         self.driver = GraphDatabase.driver(
-            uri, 
+            uri,
             auth=(username, password),
             # Production optimizations
             max_connection_pool_size=50,  # Handle concurrent access
             connection_acquisition_timeout=30,  # Timeout for busy periods
         )
-        
+
         # Create performance-critical indices
         self._create_indices()
-        
+
     def _create_indices(self):
         """Create necessary indices for GraphRAG performance.
-        
+
         These indices are critical for production performance:
         - entity_canonical: Enables O(1) entity lookup by canonical name
-        - entity_type: Supports filtering by entity type in traversals  
+        - entity_type: Supports filtering by entity type in traversals
         - document_id: Fast document-based queries for provenance
-        
+
         Index creation is idempotent - safe to run multiple times.
         """
-        
+
         with self.driver.session() as session:
             print("Creating performance indices...")
-            
+
             # Entity indices - critical for fast lookups
             session.run("CREATE INDEX entity_canonical IF NOT EXISTS FOR (e:Entity) ON (e.canonical)")
             session.run("CREATE INDEX entity_type IF NOT EXISTS FOR (e:Entity) ON (e.type)")
             session.run("CREATE INDEX entity_confidence IF NOT EXISTS FOR (e:Entity) ON (e.confidence)")
-            
+
             # Relationship indices - optimize traversal queries
             session.run("CREATE INDEX relationship_type IF NOT EXISTS FOR ()-[r:RELATED]-() ON (r.type)")
             session.run("CREATE INDEX relationship_confidence IF NOT EXISTS FOR ()-[r:RELATED]-() ON (r.confidence)")
-            
+
             # Document indices - support provenance and source tracking
             session.run("CREATE INDEX document_id IF NOT EXISTS FOR (d:Document) ON (d.doc_id)")
-            
+
             print("Neo4j indices created successfully - GraphRAG queries optimized")
-    
-    def store_knowledge_graph(self, entities: Dict[str, Any], 
+
+    def store_knowledge_graph(self, entities: Dict[str, Any],
                              relationships: List[Dict],
                              document_metadata: Dict = None) -> Dict[str, Any]:
         """Store knowledge graph in Neo4j with optimized batch operations.
-        
+
         This method implements production-grade storage patterns:
-        
+
         1. Batch Processing: Groups operations to minimize transaction overhead
         2. Transactional Safety: Ensures data consistency during storage
         3. Performance Monitoring: Tracks storage rates for optimization
         4. Error Recovery: Handles failures gracefully without data corruption
-        
+
         Storage performance scales linearly with batch size up to optimal thresholds.
         Large knowledge graphs (100K+ entities) typically store in 10-30 seconds.
         """
-        
+
         import time
         start_time = time.time()
-        
+
         with self.driver.session() as session:
             print(f"Storing knowledge graph: {len(entities)} entities, {len(relationships)} relationships")
-            
+
             # Store entities in optimized batches
             print("Storing entities...")
             entity_count = self._store_entities_batch(session, entities)
-            
+
             # Store relationships in optimized batches
             # Must happen after entities to maintain referential integrity
             print("Storing relationships...")
             relationship_count = self._store_relationships_batch(session, relationships)
-            
+
             # Store document metadata for provenance tracking
             doc_count = 0
             if document_metadata:
                 print("Storing document metadata...")
                 doc_count = self._store_document_metadata(session, document_metadata)
-        
+
         storage_duration = time.time() - start_time
         entities_per_second = len(entities) / storage_duration if storage_duration > 0 else 0
-        
+
         storage_result = {
             'entities_stored': entity_count,
             'relationships_stored': relationship_count,
@@ -1137,25 +1137,25 @@ class Neo4jGraphManager:
                 'relationships_per_second': len(relationships) / storage_duration if storage_duration > 0 else 0
             }
         }
-        
+
         print(f"Storage complete in {storage_duration:.2f}s - {entities_per_second:.0f} entities/sec")
         return storage_result
 ```
 
 **Step 4: Batch Entity Storage**
 ```python
-    def _store_entities_batch(self, session, entities: Dict[str, Any], 
+    def _store_entities_batch(self, session, entities: Dict[str, Any],
                              batch_size: int = 1000) -> int:
         """Store entities in optimized batches.
-        
+
         Batch storage is critical for performance:
         - Single transactions reduce overhead from ~10ms to ~0.1ms per entity
         - MERGE operations handle entity updates gracefully
         - Progress reporting enables monitoring of large ingestions
-        
+
         Batch size of 1000 balances memory usage with transaction efficiency.
         """
-        
+
         entity_list = []
         for canonical, entity_data in entities.items():
             entity_list.append({
@@ -1167,15 +1167,15 @@ class Neo4jGraphManager:
                 'context': entity_data.get('context', '')[:500],  # Limit context to prevent memory issues
                 'creation_timestamp': time.time()
             })
-        
+
         # Process in optimized batches
         total_stored = 0
         batch_count = (len(entity_list) + batch_size - 1) // batch_size
-        
+
         for i in range(0, len(entity_list), batch_size):
             batch = entity_list[i:i + batch_size]
             batch_num = (i // batch_size) + 1
-            
+
             # Cypher query optimized for batch operations
             cypher_query = """
             UNWIND $entities AS entity
@@ -1188,58 +1188,58 @@ class Neo4jGraphManager:
                 e.creation_timestamp = entity.creation_timestamp,
                 e.updated_at = datetime()
             """
-            
+
             session.run(cypher_query, entities=batch)
             total_stored += len(batch)
-            
+
             # Progress reporting for large datasets
             if batch_num % 10 == 0 or batch_num == batch_count:
                 print(f"Entity batch {batch_num}/{batch_count} complete - {total_stored}/{len(entity_list)} entities stored")
-        
+
         return total_stored
-    
+
     def _store_relationships_batch(self, session, relationships: List[Dict],
                                   batch_size: int = 1000) -> int:
         """Store relationships in optimized batches.
-        
+
         Relationship storage presents unique challenges:
         - Must ensure both entities exist before creating relationships
         - MERGE operations prevent duplicate relationships
         - Batch processing critical for performance at scale
-        
+
         Performance considerations:
         - Smaller batches for relationships due to MATCH complexity
         - Progress monitoring essential for large relationship sets
         - Error handling prevents partial relationship corruption
         """
-        
+
         if not relationships:
             return 0
-            
+
         # Filter relationships to only include those with existing entities
         valid_relationships = []
         for rel in relationships:
             if all(key in rel for key in ['subject', 'object', 'predicate']):
                 valid_relationships.append({
                     'subject': rel['subject'],
-                    'object': rel['object'], 
+                    'object': rel['object'],
                     'predicate': rel['predicate'],
                     'confidence': rel.get('confidence', 0.8),
                     'evidence': rel.get('evidence', ''),
                     'extraction_method': rel.get('extraction_method', ''),
                     'creation_timestamp': time.time()
                 })
-        
+
         print(f"Storing {len(valid_relationships)} valid relationships...")
-        
+
         # Process in batches - smaller batch size for relationship complexity
         total_stored = 0
         batch_count = (len(valid_relationships) + batch_size - 1) // batch_size
-        
+
         for i in range(0, len(valid_relationships), batch_size):
             batch = valid_relationships[i:i + batch_size]
             batch_num = (i // batch_size) + 1
-            
+
             # Optimized Cypher for batch relationship creation
             cypher_query = """
             UNWIND $relationships AS rel
@@ -1252,20 +1252,20 @@ class Neo4jGraphManager:
                 r.creation_timestamp = rel.creation_timestamp,
                 r.updated_at = datetime()
             """
-            
+
             try:
                 result = session.run(cypher_query, relationships=batch)
                 total_stored += len(batch)
-                
+
                 # Progress reporting
                 if batch_num % 5 == 0 or batch_num == batch_count:
                     print(f"Relationship batch {batch_num}/{batch_count} complete - {total_stored}/{len(valid_relationships)} relationships stored")
-                    
+
             except Exception as e:
                 print(f"Error storing relationship batch {batch_num}: {e}")
                 # Continue with next batch - partial failure handling
                 continue
-        
+
         return total_stored
 ```
 
@@ -1288,35 +1288,35 @@ from pathlib import Path
 
 class CodeGraphRAG:
     """GraphRAG system specialized for software repositories."""
-    
+
     def __init__(self, supported_languages: List[str] = ['python', 'javascript']):
         self.supported_languages = supported_languages
-        
+
         # Initialize Tree-sitter parsers
         self.parsers = self._setup_tree_sitter_parsers()
-        
+
         # Code entity types
         self.code_entity_types = {
-            'function', 'class', 'method', 'variable', 'module', 
+            'function', 'class', 'method', 'variable', 'module',
             'interface', 'enum', 'constant', 'type', 'namespace'
         }
-        
+
         # Code relationship types
         self.code_relation_types = {
             'calls', 'inherits', 'implements', 'imports', 'uses',
             'defines', 'contains', 'overrides', 'instantiates'
         }
-        
+
         # Code knowledge graph
         self.code_entities = {}
         self.code_relationships = []
         self.call_graph = nx.DiGraph()
         self.dependency_graph = nx.DiGraph()
-    
-    def analyze_repository(self, repo_path: str, 
+
+    def analyze_repository(self, repo_path: str,
                           analysis_config: Dict = None) -> Dict[str, Any]:
         """Analyze entire repository and build code knowledge graph."""
-        
+
         config = analysis_config or {
             'max_files': 1000,
             'include_patterns': ['*.py', '*.js', '*.ts'],
@@ -1325,36 +1325,36 @@ class CodeGraphRAG:
             'analyze_dependencies': True,
             'build_call_graph': True
         }
-        
+
         print(f"Analyzing repository: {repo_path}")
-        
+
         # Discover source files
         source_files = self._discover_source_files(repo_path, config)
         print(f"Found {len(source_files)} source files")
-        
+
         # Analyze each file
         all_entities = {}
         all_relationships = []
-        
+
         for file_path in source_files[:config.get('max_files', 1000)]:
             try:
                 file_analysis = self._analyze_source_file(file_path, config)
-                
+
                 if file_analysis:
                     all_entities.update(file_analysis['entities'])
                     all_relationships.extend(file_analysis['relationships'])
-                    
+
             except Exception as e:
                 print(f"Error analyzing {file_path}: {e}")
                 continue
-        
+
         # Build specialized graphs
         if config.get('build_call_graph', True):
             self.call_graph = self._build_call_graph(all_entities, all_relationships)
-        
+
         if config.get('analyze_dependencies', True):
             self.dependency_graph = self._build_dependency_graph(all_entities, all_relationships)
-        
+
         return {
             'entities': all_entities,
             'relationships': all_relationships,
@@ -1373,48 +1373,48 @@ class CodeGraphRAG:
 ```python
     def _analyze_python_file(self, file_path: str, config: Dict) -> Dict[str, Any]:
         """Analyze Python file using AST parsing."""
-        
+
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 source_code = f.read()
-            
+
             # Parse AST
             tree = ast.parse(source_code, filename=file_path)
-            
+
             entities = {}
             relationships = []
-            
+
             # Extract entities and relationships
             for node in ast.walk(tree):
                 # Function definitions
                 if isinstance(node, ast.FunctionDef):
                     func_entity = self._extract_function_entity(node, file_path, source_code)
                     entities[func_entity['canonical']] = func_entity
-                    
+
                     # Extract function relationships (calls, uses)
                     func_relationships = self._extract_function_relationships(
                         node, func_entity['canonical'], source_code
                     )
                     relationships.extend(func_relationships)
-                
+
                 # Class definitions
                 elif isinstance(node, ast.ClassDef):
                     class_entity = self._extract_class_entity(node, file_path, source_code)
                     entities[class_entity['canonical']] = class_entity
-                    
+
                     # Extract class relationships (inheritance, methods)
                     class_relationships = self._extract_class_relationships(
                         node, class_entity['canonical'], source_code
                     )
                     relationships.extend(class_relationships)
-                
+
                 # Import statements
                 elif isinstance(node, (ast.Import, ast.ImportFrom)):
                     import_relationships = self._extract_import_relationships(
                         node, file_path
                     )
                     relationships.extend(import_relationships)
-            
+
             return {
                 'entities': entities,
                 'relationships': relationships,
@@ -1425,30 +1425,30 @@ class CodeGraphRAG:
                     'ast_nodes': len(list(ast.walk(tree)))
                 }
             }
-            
+
         except Exception as e:
             print(f"Python AST analysis error for {file_path}: {e}")
             return None
-    
-    def _extract_function_entity(self, node: ast.FunctionDef, 
+
+    def _extract_function_entity(self, node: ast.FunctionDef,
                                file_path: str, source_code: str) -> Dict[str, Any]:
         """Extract function entity with comprehensive metadata."""
-        
+
         # Get function signature
         signature = self._get_function_signature(node)
-        
+
         # Extract docstring
         docstring = ast.get_docstring(node) or ""
-        
+
         # Get source code for function
         function_source = self._get_node_source(node, source_code)
-        
+
         # Analyze parameters and return type
         params = [arg.arg for arg in node.args.args]
         returns = self._extract_return_type(node)
-        
+
         canonical_name = f"{file_path}::{node.name}"
-        
+
         return {
             'canonical': canonical_name,
             'type': 'FUNCTION',
@@ -1469,12 +1469,12 @@ class CodeGraphRAG:
 
 **Step 6: Call Graph Construction**
 ```python
-    def _build_call_graph(self, entities: Dict[str, Any], 
+    def _build_call_graph(self, entities: Dict[str, Any],
                          relationships: List[Dict]) -> nx.DiGraph:
         """Build call graph from extracted entities and relationships."""
-        
+
         call_graph = nx.DiGraph()
-        
+
         # Add function nodes
         for entity_id, entity in entities.items():
             if entity['type'] == 'FUNCTION':
@@ -1485,38 +1485,38 @@ class CodeGraphRAG:
                     'parameters': entity.get('parameters', []),
                     'docstring': entity.get('docstring', '')[:200]  # Truncate for storage
                 })
-        
+
         # Add call edges
         for relationship in relationships:
             if relationship['predicate'] == 'calls':
                 caller = relationship['subject']
                 callee = relationship['object']
-                
+
                 if caller in call_graph.nodes and callee in call_graph.nodes:
                     call_graph.add_edge(caller, callee, **{
                         'confidence': relationship.get('confidence', 0.8),
                         'call_count': relationship.get('call_count', 1),
                         'evidence': relationship.get('evidence', '')
                     })
-        
+
         # Calculate graph metrics
         self._calculate_call_graph_metrics(call_graph)
-        
+
         return call_graph
-    
+
     def _calculate_call_graph_metrics(self, call_graph: nx.DiGraph):
         """Calculate and store call graph metrics."""
-        
+
         # Basic graph metrics
         num_nodes = call_graph.number_of_nodes()
         num_edges = call_graph.number_of_edges()
-        
+
         if num_nodes > 0:
             # Centrality measures
             in_degree_centrality = nx.in_degree_centrality(call_graph)
             out_degree_centrality = nx.out_degree_centrality(call_graph)
             betweenness_centrality = nx.betweenness_centrality(call_graph)
-            
+
             # Add centrality as node attributes
             for node in call_graph.nodes():
                 call_graph.nodes[node].update({
@@ -1524,15 +1524,15 @@ class CodeGraphRAG:
                     'out_degree_centrality': out_degree_centrality.get(node, 0),
                     'betweenness_centrality': betweenness_centrality.get(node, 0)
                 })
-            
+
             # Identify key functions (high centrality)
             key_functions = sorted(
                 call_graph.nodes(),
-                key=lambda x: (call_graph.nodes[x]['in_degree_centrality'] + 
+                key=lambda x: (call_graph.nodes[x]['in_degree_centrality'] +
                               call_graph.nodes[x]['betweenness_centrality']),
                 reverse=True
             )[:10]
-            
+
             # Store graph-level metadata
             call_graph.graph.update({
                 'num_functions': num_nodes,
@@ -1587,27 +1587,27 @@ This ensures comprehensive coverage while maintaining reasonable response times.
 # Advanced graph traversal for GraphRAG
 class GraphTraversalEngine:
     """Advanced graph traversal engine for multi-hop reasoning.
-    
+
     This engine solves the fundamental challenge of graph exploration: how to find
     meaningful paths through a knowledge graph without being overwhelmed by the
     exponential growth of possible paths.
-    
+
     Key innovations:
     - Adaptive Strategy Selection: Chooses optimal traversal based on query type
     - Semantic Guidance: Uses embedding similarity to prune irrelevant paths
     - Multi-Criteria Ranking: Evaluates paths on multiple quality dimensions
     - Early Termination: Stops exploration when sufficient quality paths found
-    
+
     Performance characteristics:
     - 3-hop traversals: <200ms on graphs with 100K entities
     - Semantic filtering reduces path space by 80-95%
     - Quality-based ranking improves answer relevance by 40-60%
     """
-    
+
     def __init__(self, neo4j_manager: Neo4jGraphManager, embedding_model):
         self.neo4j = neo4j_manager
         self.embedding_model = embedding_model
-        
+
         # Traversal strategies - each optimized for different exploration patterns
         self.traversal_strategies = {
             'breadth_first': self._breadth_first_traversal,        # Nearby relationships
@@ -1616,7 +1616,7 @@ class GraphTraversalEngine:
             'relevance_ranked': self._relevance_ranked_traversal, # High-quality relationships
             'community_focused': self._community_focused_traversal # Dense clusters
         }
-        
+
         # Path ranking functions - multi-criteria evaluation
         self.path_rankers = {
             'shortest_path': self._rank_by_path_length,              # Minimize hops
@@ -1624,23 +1624,23 @@ class GraphTraversalEngine:
             'entity_importance': self._rank_by_entity_importance,     # Entity significance
             'relationship_confidence': self._rank_by_relationship_confidence  # Extraction quality
         }
-    
+
     def multi_hop_retrieval(self, query: str, starting_entities: List[str],
                            traversal_config: Dict = None) -> Dict[str, Any]:
         """Perform multi-hop retrieval using graph traversal.
-        
+
         This is the core method that enables GraphRAG's multi-hop reasoning:
-        
+
         1. Path Discovery: Find all relevant paths from seed entities
         2. Intelligent Filtering: Apply semantic and confidence-based pruning
         3. Path Ranking: Score paths by multiple quality criteria
         4. Context Extraction: Convert graph paths into natural language
         5. Synthesis: Combine path information into comprehensive answers
-        
+
         The method balances exploration breadth with computational efficiency,
         ensuring comprehensive coverage while maintaining real-time response.
         """
-        
+
         config = traversal_config or {
             'max_hops': 3,                          # Reasonable depth limit
             'max_paths': 50,                        # Top-k path selection
@@ -1649,39 +1649,39 @@ class GraphTraversalEngine:
             'include_path_context': True,           # Rich context extraction
             'semantic_threshold': 0.7               # Quality gate
         }
-        
+
         print(f"Multi-hop retrieval for query: {query[:100]}...")
         print(f"Starting from entities: {starting_entities}")
         print(f"Configuration - Max hops: {config['max_hops']}, Strategy: {config['strategy']}")
-        
+
         # Step 1: Find relevant paths from starting entities
         # Each starting entity serves as a seed for exploration
         all_paths = []
         path_contexts = []
-        
+
         for start_entity in starting_entities:
             print(f"Exploring paths from: {start_entity}")
             entity_paths = self._find_entity_paths(start_entity, query, config)
             all_paths.extend(entity_paths)
             print(f"Found {len(entity_paths)} paths from {start_entity}")
-        
+
         print(f"Total paths discovered: {len(all_paths)}")
-        
+
         # Step 2: Rank and filter paths using configured ranking strategy
         # Multi-criteria ranking ensures high-quality path selection
         ranked_paths = self._rank_paths(all_paths, query, config)
         print(f"Path ranking complete - using {config['path_ranking']} strategy")
-        
+
         # Step 3: Extract context from top paths
         # Convert graph structures into natural language narratives
         top_paths = ranked_paths[:config.get('max_paths', 50)]
         path_contexts = self._extract_path_contexts(top_paths, query)
         print(f"Context extracted from {len(path_contexts)} top paths")
-        
+
         # Step 4: Generate comprehensive answer using path information
         # Synthesize individual path contexts into coherent response
         comprehensive_context = self._synthesize_path_contexts(path_contexts, query)
-        
+
         return {
             'query': query,
             'starting_entities': starting_entities,
@@ -1704,39 +1704,39 @@ class GraphTraversalEngine:
     def _semantic_guided_traversal(self, start_entity: str, query: str,
                                   config: Dict) -> List[List[str]]:
         """Traverse graph guided by semantic similarity to query.
-        
+
         This is the most sophisticated traversal strategy, implementing semantic
         filtering at the path level rather than just relationship level.
-        
+
         The approach solves a key GraphRAG challenge: how to explore the graph
         systematically without being overwhelmed by irrelevant paths. By using
         semantic similarity between the query and potential paths, we can:
-        
+
         1. Prioritize paths likely to contain relevant information
         2. Prune semantically unrelated branches early
         3. Maintain query focus throughout multi-hop exploration
         4. Scale to large graphs by intelligent path selection
-        
+
         This method typically reduces path exploration by 80-90% while
         maintaining high recall for relevant information.
         """
-        
+
         import numpy as np
-        
+
         # Generate query embedding for semantic comparison
         query_embedding = self.embedding_model.encode([query])[0]
         semantic_threshold = config.get('semantic_threshold', 0.7)
         max_hops = config.get('max_hops', 3)
-        
+
         print(f"Semantic-guided traversal from {start_entity} with threshold {semantic_threshold}")
-        
+
         with self.neo4j.driver.session() as session:
             # Optimized Cypher for path discovery with confidence filtering
             cypher_query = """
             MATCH path = (start:Entity {canonical: $start_entity})-[*1..$max_hops]-(end:Entity)
             WHERE ALL(r IN relationships(path) WHERE r.confidence > 0.6)
             AND length(path) <= $max_hops
-            RETURN path, 
+            RETURN path,
                    [n IN nodes(path) | n.canonical] AS entity_path,
                    [r IN relationships(path) | r.type] AS relation_path,
                    [r IN relationships(path) | r.confidence] AS confidence_path,
@@ -1744,39 +1744,39 @@ class GraphTraversalEngine:
                    [n IN nodes(path) | n.type] AS entity_types
             LIMIT 1000
             """
-            
-            result = session.run(cypher_query, 
-                               start_entity=start_entity, 
+
+            result = session.run(cypher_query,
+                               start_entity=start_entity,
                                max_hops=max_hops)
-            
+
             semantic_paths = []
             processed_paths = 0
-            
+
             for record in result:
                 processed_paths += 1
-                
+
                 entity_path = record['entity_path']
                 relation_path = record['relation_path']
                 confidence_path = record['confidence_path']
                 path_length = record['path_length']
                 entity_types = record['entity_types']
-                
+
                 # Construct natural language representation of path
                 path_text = self._construct_path_text(entity_path, relation_path)
-                
+
                 # Calculate semantic relevance using cosine similarity
                 path_embedding = self.embedding_model.encode([path_text])[0]
-                
+
                 semantic_similarity = np.dot(query_embedding, path_embedding) / (
                     np.linalg.norm(query_embedding) * np.linalg.norm(path_embedding)
                 )
-                
+
                 # Apply semantic threshold for path filtering
                 if semantic_similarity > semantic_threshold:
                     # Calculate additional path quality metrics
                     avg_confidence = sum(confidence_path) / len(confidence_path) if confidence_path else 0.5
                     path_diversity = len(set(entity_types)) / len(entity_types) if entity_types else 0
-                    
+
                     semantic_paths.append({
                         'entity_path': entity_path,
                         'relation_path': relation_path,
@@ -1788,16 +1788,16 @@ class GraphTraversalEngine:
                         'path_text': path_text,
                         'entity_types': entity_types
                     })
-            
+
             # Sort by semantic similarity (primary) and confidence (secondary)
             semantic_paths.sort(
-                key=lambda x: (x['semantic_similarity'], x['avg_confidence']), 
+                key=lambda x: (x['semantic_similarity'], x['avg_confidence']),
                 reverse=True
             )
-            
+
             print(f"Semantic filtering: {processed_paths} paths → {len(semantic_paths)} relevant paths")
             print(f"Filtering efficiency: {(1 - len(semantic_paths)/processed_paths)*100:.1f}% paths pruned")
-            
+
             return semantic_paths
 ```
 
@@ -1805,9 +1805,9 @@ class GraphTraversalEngine:
 ```python
     def _extract_path_contexts(self, paths: List[Dict], query: str) -> List[Dict]:
         """Extract rich context from graph paths."""
-        
+
         path_contexts = []
-        
+
         with self.neo4j.driver.session() as session:
             for path in paths:
                 try:
@@ -1815,17 +1815,17 @@ class GraphTraversalEngine:
                     entity_details = self._get_path_entity_details(
                         session, path['entity_path']
                     )
-                    
+
                     # Construct narrative context
                     narrative = self._construct_path_narrative(
                         path, entity_details
                     )
-                    
+
                     # Calculate context relevance
                     relevance_score = self._calculate_context_relevance(
                         narrative, query
                     )
-                    
+
                     path_contexts.append({
                         'path': path,
                         'entity_details': entity_details,
@@ -1833,50 +1833,50 @@ class GraphTraversalEngine:
                         'relevance_score': relevance_score,
                         'context_length': len(narrative.split())
                     })
-                    
+
                 except Exception as e:
                     print(f"Error extracting path context: {e}")
                     continue
-        
+
         # Sort by relevance
         path_contexts.sort(key=lambda x: x['relevance_score'], reverse=True)
-        
+
         return path_contexts
-    
+
     def _construct_path_narrative(self, path: Dict, entity_details: List[Dict]) -> str:
         """Construct coherent narrative from graph path."""
-        
+
         entity_path = path['entity_path']
         relation_path = path['relation_path']
-        
+
         if not entity_path or len(entity_path) < 2:
             return ""
-        
+
         narrative_parts = []
-        
+
         for i in range(len(entity_path) - 1):
             subject = entity_details[i]
             object_entity = entity_details[i + 1]
             relation = relation_path[i] if i < len(relation_path) else 'related_to'
-            
+
             # Create natural language description
             subject_desc = self._get_entity_description(subject)
             object_desc = self._get_entity_description(object_entity)
-            
+
             narrative_part = f"{subject_desc} {self._humanize_relation(relation)} {object_desc}"
             narrative_parts.append(narrative_part)
-        
+
         # Join with contextual connectors
         narrative = self._join_with_connectors(narrative_parts)
-        
+
         return narrative
-    
+
     def _humanize_relation(self, relation_type: str) -> str:
         """Convert technical relation types to human-readable form."""
-        
+
         relation_map = {
             'calls': 'calls',
-            'inherits': 'inherits from', 
+            'inherits': 'inherits from',
             'uses': 'uses',
             'contains': 'contains',
             'implements': 'implements',
@@ -1887,7 +1887,7 @@ class GraphTraversalEngine:
             'causes': 'causes',
             'leads_to': 'leads to'
         }
-        
+
         return relation_map.get(relation_type, f'is related to via {relation_type}')
 ```
 
@@ -1921,7 +1921,7 @@ Neither graph-only nor vector-only search is optimal for all scenarios:
 
 **Graph Search Limitations:**
 - Depends on explicit relationship extraction quality
-- May miss semantically similar but unconnected information  
+- May miss semantically similar but unconnected information
 - Can be computationally expensive for large traversals
 - Requires comprehensive entity recognition
 
@@ -1939,43 +1939,43 @@ This results in 30-40% improvement in answer quality over pure approaches, espec
 # Hybrid graph-vector search system
 class HybridGraphVectorRAG:
     """Hybrid system combining graph traversal with vector search.
-    
+
     This system represents the state-of-the-art in RAG architecture, addressing
     the fundamental limitation that neither graph nor vector search alone can
     handle the full spectrum of information retrieval challenges.
-    
+
     Key architectural principles:
-    
+
     1. **Complementary Strengths**: Leverages vector search for semantic similarity
        and graph search for relational reasoning
-    
+
     2. **Adaptive Fusion**: Dynamically weights approaches based on query analysis
        - Factual queries: Higher vector weight
        - Analytical queries: Higher graph weight
        - Complex queries: Balanced combination
-    
+
     3. **Intelligent Integration**: Ensures graph and vector results enhance
        rather than compete with each other
-    
+
     4. **Performance Optimization**: Parallel execution and result caching
        minimize latency while maximizing coverage
-    
+
     Performance characteristics:
     - Response time: 200-800ms for complex hybrid queries
     - Coverage improvement: 30-40% over single-method approaches
     - Accuracy improvement: 25-35% for multi-hop reasoning queries
     """
-    
-    def __init__(self, neo4j_manager: Neo4jGraphManager, 
+
+    def __init__(self, neo4j_manager: Neo4jGraphManager,
                  vector_store, embedding_model, llm_model):
         self.neo4j = neo4j_manager
         self.vector_store = vector_store
         self.embedding_model = embedding_model
         self.llm_model = llm_model
-        
+
         # Initialize graph traversal engine
         self.graph_traversal = GraphTraversalEngine(neo4j_manager, embedding_model)
-        
+
         # Fusion strategies - each optimized for different query patterns
         self.fusion_strategies = {
             'weighted_combination': self._weighted_fusion,        # Linear combination with learned weights
@@ -1983,7 +1983,7 @@ class HybridGraphVectorRAG:
             'cascade_retrieval': self._cascade_retrieval,       # Sequential refinement
             'adaptive_selection': self._adaptive_selection      # Query-aware strategy selection
         }
-        
+
         # Performance tracking
         self.performance_metrics = {
             'vector_retrieval_time': [],
@@ -1991,34 +1991,34 @@ class HybridGraphVectorRAG:
             'fusion_time': [],
             'total_query_time': []
         }
-        
+
     def hybrid_search(self, query: str, search_config: Dict = None) -> Dict[str, Any]:
         """Perform hybrid graph-vector search.
-        
+
         This method orchestrates the complete hybrid search pipeline:
-        
+
         1. **Parallel Retrieval**: Simultaneously performs vector and graph search
         2. **Entity Bridging**: Uses vector results to seed graph exploration
         3. **Intelligent Fusion**: Combines results based on query analysis
         4. **Quality Assurance**: Validates and ranks final context
         5. **Response Generation**: Synthesizes comprehensive answers
-        
+
         The hybrid approach is particularly powerful for queries that benefit from both:
         - Semantic similarity (vector strength)
         - Relational reasoning (graph strength)
-        
+
         Example scenarios where hybrid excels:
         - "What are the environmental impacts of technologies used by Tesla's suppliers?"
           (requires both semantic understanding of 'environmental impacts' and
            graph traversal: Tesla → suppliers → technologies → impacts)
         """
-        
+
         import time
         start_time = time.time()
-        
+
         config = search_config or {
             'vector_weight': 0.4,                    # Base weight for vector results
-            'graph_weight': 0.6,                     # Base weight for graph results  
+            'graph_weight': 0.6,                     # Base weight for graph results
             'fusion_strategy': 'adaptive_selection', # Dynamic strategy selection
             'max_vector_results': 20,                # Top-k vector retrieval
             'max_graph_paths': 15,                   # Top-k graph paths
@@ -2026,30 +2026,30 @@ class HybridGraphVectorRAG:
             'use_query_expansion': True,             # Enhance query coverage
             'parallel_execution': True               # Performance optimization
         }
-        
+
         print(f"Hybrid search for: {query[:100]}...")
         print(f"Strategy: {config['fusion_strategy']}, Weights: V={config['vector_weight']}, G={config['graph_weight']}")
-        
+
         # Step 1: Vector-based retrieval (semantic similarity)
         vector_start = time.time()
         print("Performing vector retrieval...")
         vector_results = self._perform_vector_retrieval(query, config)
         vector_time = time.time() - vector_start
         print(f"Vector retrieval complete: {len(vector_results.get('results', []))} results in {vector_time:.2f}s")
-        
+
         # Step 2: Identify seed entities for graph traversal
         # This bridges vector and graph search by using vector results to identify
         # relevant entities in the knowledge graph
         seed_entities = self._identify_seed_entities(query, vector_results)
         print(f"Identified {len(seed_entities)} seed entities for graph traversal")
-        
+
         # Step 3: Graph-based multi-hop retrieval (relationship reasoning)
         graph_start = time.time()
         print("Performing graph traversal...")
         graph_results = self._perform_graph_retrieval(query, seed_entities, config)
         graph_time = time.time() - graph_start
         print(f"Graph traversal complete: {len(graph_results.get('top_paths', []))} paths in {graph_time:.2f}s")
-        
+
         # Step 4: Intelligent fusion using configured strategy
         # This is where the magic happens - combining complementary strengths
         fusion_start = time.time()
@@ -2059,24 +2059,24 @@ class HybridGraphVectorRAG:
             query, vector_results, graph_results, config
         )
         fusion_time = time.time() - fusion_start
-        
+
         # Step 5: Generate comprehensive response
         response_start = time.time()
         comprehensive_response = self._generate_hybrid_response(
             query, fused_results, config
         )
         response_time = time.time() - response_start
-        
+
         total_time = time.time() - start_time
-        
+
         # Track performance metrics
         self.performance_metrics['vector_retrieval_time'].append(vector_time)
         self.performance_metrics['graph_retrieval_time'].append(graph_time)
         self.performance_metrics['fusion_time'].append(fusion_time)
         self.performance_metrics['total_query_time'].append(total_time)
-        
+
         print(f"Hybrid search complete in {total_time:.2f}s - {len(fused_results.get('contexts', []))} final contexts")
-        
+
         return {
             'query': query,
             'vector_results': vector_results,
@@ -2103,39 +2103,39 @@ class HybridGraphVectorRAG:
     def _adaptive_selection(self, query: str, vector_results: Dict,
                           graph_results: Dict, config: Dict) -> Dict[str, Any]:
         """Adaptively select and combine results based on query characteristics.
-        
+
         This is the most sophisticated fusion strategy, implementing query-aware
         combination of vector and graph results. The approach recognizes that
         different queries benefit from different retrieval emphasis:
-        
+
         - **Factual queries** ("What is X?") → Higher vector weight
-        - **Analytical queries** ("How does X affect Y?") → Balanced combination  
+        - **Analytical queries** ("How does X affect Y?") → Balanced combination
         - **Relational queries** ("What connects X to Y?") → Higher graph weight
         - **Complex synthesis** ("Analyze X's impact on Y through Z") → Dynamic weighting
-        
+
         The fusion process implements several key innovations:
         1. **Query Analysis**: LLM-based understanding of query intent and complexity
         2. **Dynamic Weighting**: Adaptive weights based on query characteristics
         3. **Diversity Selection**: Ensures varied perspectives in final context
         4. **Quality Assurance**: Validates context relevance and coherence
-        
+
         This approach typically improves answer quality by 25-40% over static weighting.
         """
-        
+
         print("Applying adaptive selection fusion strategy...")
-        
+
         # Analyze query characteristics using LLM
         query_analysis = self._analyze_query_characteristics(query)
         print(f"Query analysis: {query_analysis}")
-        
+
         # Determine optimal fusion weights based on query type
         fusion_weights = self._determine_adaptive_weights(query_analysis)
         print(f"Adaptive weights - Vector: {fusion_weights['vector_weight']:.2f}, Graph: {fusion_weights['graph_weight']:.2f}")
-        
+
         # Get vector contexts with enriched metadata
         vector_contexts = vector_results.get('results', [])
         print(f"Processing {len(vector_contexts)} vector contexts")
-        
+
         # Get graph contexts with path information
         graph_contexts = []
         if 'path_contexts' in graph_results:
@@ -2151,20 +2151,20 @@ class HybridGraphVectorRAG:
                 for ctx in graph_results['path_contexts']
             ]
         print(f"Processing {len(graph_contexts)} graph contexts")
-        
+
         # Score and rank all contexts with adaptive weighting
         all_contexts = []
-        
+
         # Process vector contexts with adapted scoring
         for ctx in vector_contexts:
             vector_score = ctx.get('similarity_score', 0.5)
             # Apply adaptive weight based on query analysis
             adapted_score = vector_score * fusion_weights['vector_weight']
-            
+
             # Add query-specific boosts
             if query_analysis.get('type') == 'factual' and vector_score > 0.8:
                 adapted_score *= 1.2  # Boost high-confidence factual matches
-            
+
             all_contexts.append({
                 'content': ctx['content'],
                 'score': adapted_score,
@@ -2173,20 +2173,20 @@ class HybridGraphVectorRAG:
                 'original_score': vector_score,
                 'boost_applied': adapted_score / (vector_score * fusion_weights['vector_weight']) if vector_score > 0 else 1.0
             })
-        
+
         # Process graph contexts with adapted scoring
         for ctx in graph_contexts:
             graph_score = ctx['score']
-            # Apply adaptive weight based on query analysis  
+            # Apply adaptive weight based on query analysis
             adapted_score = graph_score * fusion_weights['graph_weight']
-            
+
             # Add query-specific boosts
             if query_analysis.get('complexity') == 'complex' and ctx['path_length'] > 2:
                 adapted_score *= 1.3  # Boost multi-hop reasoning for complex queries
-            
+
             if ctx['confidence'] > 0.8:
                 adapted_score *= 1.1  # Boost high-confidence relationships
-            
+
             all_contexts.append({
                 'content': ctx['content'],
                 'score': adapted_score,
@@ -2197,21 +2197,21 @@ class HybridGraphVectorRAG:
                 'path_length': ctx['path_length'],
                 'confidence': ctx['confidence']
             })
-        
+
         # Rank by adapted scores
         all_contexts.sort(key=lambda x: x['score'], reverse=True)
         print(f"Ranked {len(all_contexts)} total contexts")
-        
+
         # Select top contexts with diversity to ensure comprehensive coverage
         selected_contexts = self._select_diverse_contexts(
             all_contexts, max_contexts=config.get('max_final_contexts', 10)
         )
         print(f"Selected {len(selected_contexts)} diverse contexts for final answer")
-        
+
         # Calculate fusion statistics
         vector_selected = sum(1 for ctx in selected_contexts if ctx['type'] == 'vector_similarity')
         graph_selected = sum(1 for ctx in selected_contexts if ctx['type'] == 'graph_path')
-        
+
         return {
             'contexts': selected_contexts,
             'fusion_weights': fusion_weights,
@@ -2223,40 +2223,40 @@ class HybridGraphVectorRAG:
                 'selection_ratio': f"{vector_selected}/{graph_selected}" if graph_selected > 0 else f"{vector_selected}/0"
             }
         }
-    
+
     def _analyze_query_characteristics(self, query: str) -> Dict[str, Any]:
         """Analyze query to determine optimal retrieval strategy.
-        
+
         This analysis is crucial for adaptive fusion - different query types
         benefit from different combinations of vector and graph search:
-        
+
         **Query Type Analysis:**
         - **Factual**: Direct lookup queries ("What is X?") → Vector-heavy
         - **Analytical**: Cause-effect relationships ("How does X impact Y?") → Balanced
-        - **Relational**: Connection queries ("How is X related to Y?") → Graph-heavy  
+        - **Relational**: Connection queries ("How is X related to Y?") → Graph-heavy
         - **Comparative**: Multi-entity analysis ("Compare X and Y") → Balanced
-        
+
         **Complexity Assessment:**
         - **Simple**: Single-hop, direct answer
         - **Complex**: Multi-step reasoning, synthesis required
-        
+
         **Scope Evaluation:**
         - **Narrow**: Specific entities or facts
         - **Broad**: General topics or concepts
-        
+
         The LLM analysis enables dynamic strategy selection rather than static rules.
         """
-        
+
         analysis_prompt = f"""
         As an expert query analyst, analyze this search query to determine the optimal retrieval strategy.
-        
+
         Query: "{query}"
-        
+
         Analyze the query on these dimensions and return ONLY a JSON response:
-        
+
         {{
             "complexity": "simple" or "complex",
-            "scope": "narrow" or "broad", 
+            "scope": "narrow" or "broad",
             "type": "factual" or "analytical" or "procedural" or "comparative" or "relational",
             "graph_benefit": 0.0-1.0,
             "vector_benefit": 0.0-1.0,
@@ -2264,20 +2264,20 @@ class HybridGraphVectorRAG:
             "multi_entity": true/false,
             "explanation": "Brief explanation of the classification"
         }}
-        
+
         Guidelines:
         - graph_benefit: High for queries requiring relationship traversal or multi-hop reasoning
         - vector_benefit: High for semantic similarity and factual lookup queries
         - reasoning_required: True if query needs synthesis or inference
         - multi_entity: True if query involves multiple entities or comparisons
-        
+
         Return only the JSON object:
         """
-        
+
         try:
             response = self.llm_model.predict(analysis_prompt, temperature=0.1)
             analysis = json.loads(self._extract_json_from_response(response))
-            
+
             # Validate required fields and add defaults if missing
             required_fields = ['complexity', 'scope', 'type', 'graph_benefit', 'vector_benefit']
             for field in required_fields:
@@ -2293,28 +2293,28 @@ class HybridGraphVectorRAG:
                         analysis[field] = 0.6 if 'how' in query.lower() or 'why' in query.lower() else 0.4
                     elif field == 'vector_benefit':
                         analysis[field] = 0.7
-            
+
             # Ensure numeric values are in valid range
             analysis['graph_benefit'] = max(0.0, min(1.0, float(analysis.get('graph_benefit', 0.5))))
             analysis['vector_benefit'] = max(0.0, min(1.0, float(analysis.get('vector_benefit', 0.7))))
-            
+
             return analysis
-            
+
         except Exception as e:
             print(f"Query analysis error: {e}")
             print("Using fallback query analysis")
-            
+
             # Enhanced fallback analysis based on query patterns
             query_lower = query.lower()
-            
+
             # Determine complexity based on query patterns
             complexity_indicators = ['how', 'why', 'explain', 'analyze', 'compare', 'relationship', 'impact', 'effect']
             is_complex = any(indicator in query_lower for indicator in complexity_indicators)
-            
+
             # Determine scope based on query specificity
             specific_patterns = ['what is', 'who is', 'when did', 'where is']
             is_narrow = any(pattern in query_lower for pattern in specific_patterns)
-            
+
             # Determine type based on query structure
             if any(word in query_lower for word in ['compare', 'versus', 'vs', 'difference']):
                 query_type = 'comparative'
@@ -2324,7 +2324,7 @@ class HybridGraphVectorRAG:
                 query_type = 'relational'
             else:
                 query_type = 'factual'
-            
+
             return {
                 'complexity': 'complex' if is_complex else 'simple',
                 'scope': 'narrow' if is_narrow else 'broad',
@@ -2342,47 +2342,47 @@ class HybridGraphVectorRAG:
     def _generate_hybrid_response(self, query: str, fused_results: Dict,
                                  config: Dict) -> Dict[str, Any]:
         """Generate comprehensive response using hybrid context."""
-        
+
         contexts = fused_results.get('contexts', [])
-        
+
         if not contexts:
             return {'response': "I couldn't find relevant information to answer your question."}
-        
+
         # Separate vector and graph contexts for specialized handling
         vector_contexts = [ctx for ctx in contexts if ctx['type'] == 'vector_similarity']
         graph_contexts = [ctx for ctx in contexts if ctx['type'] == 'graph_path']
-        
+
         # Create specialized prompts for different context types
         response_prompt = f"""
         You are an expert analyst with access to both direct factual information and relationship knowledge.
-        
+
         Question: {query}
-        
+
         DIRECT FACTUAL INFORMATION:
         {self._format_vector_contexts(vector_contexts)}
-        
+
         RELATIONSHIP KNOWLEDGE:
         {self._format_graph_contexts(graph_contexts)}
-        
+
         Instructions:
         1. Provide a comprehensive answer using both types of information
         2. When using relationship knowledge, explain the connections clearly
         3. Cite sources appropriately, distinguishing between direct facts and inferred relationships
         4. If graph relationships reveal additional insights, highlight them
         5. Maintain accuracy and avoid making unsupported claims
-        
+
         Provide a well-structured response that leverages both factual and relationship information:
         """
-        
+
         try:
             response = self.llm_model.predict(response_prompt, temperature=0.3)
-            
+
             # Extract source attributions
             source_attributions = self._extract_source_attributions(contexts)
-            
+
             # Calculate response confidence based on context quality
             response_confidence = self._calculate_response_confidence(contexts)
-            
+
             return {
                 'response': response,
                 'source_attributions': source_attributions,
@@ -2394,7 +2394,7 @@ class HybridGraphVectorRAG:
                 },
                 'reasoning_type': 'hybrid_graph_vector'
             }
-            
+
         except Exception as e:
             print(f"Response generation error: {e}")
             return {'response': "I encountered an error generating the response."}
@@ -2405,21 +2405,24 @@ class HybridGraphVectorRAG:
 ## **🧪 Hands-On Exercise: Build Production GraphRAG System**
 
 ### **Your Mission**
+
 Create a production-ready GraphRAG system that combines document analysis with code repository understanding.
 
 ### **Requirements:**
+
 1. **Knowledge Graph Construction**: Build KG from documents with entity/relationship extraction
-2. **Code Analysis**: Implement AST-based analysis for software repositories  
+2. **Code Analysis**: Implement AST-based analysis for software repositories
 3. **Graph Storage**: Deploy Neo4j with optimized schema and indices
 4. **Multi-Hop Retrieval**: Implement semantic-guided graph traversal
 5. **Hybrid Search**: Combine graph and vector search with adaptive fusion
 
 ### **Implementation Architecture:**
+
 ```python
 # Production GraphRAG system
 class ProductionGraphRAG:
     """Production-ready GraphRAG system."""
-    
+
     def __init__(self, config: Dict):
         # Initialize all components
         self.kg_extractor = KnowledgeGraphExtractor(
@@ -2430,7 +2433,7 @@ class ProductionGraphRAG:
         )
         self.neo4j_manager = Neo4jGraphManager(
             uri=config['neo4j_uri'],
-            username=config['neo4j_user'], 
+            username=config['neo4j_user'],
             password=config['neo4j_password']
         )
         self.hybrid_rag = HybridGraphVectorRAG(
@@ -2439,47 +2442,47 @@ class ProductionGraphRAG:
             embedding_model=config['embedding_model'],
             llm_model=config['llm_model']
         )
-        
+
         # Performance monitoring
         self.performance_metrics = {}
-        
+
     def ingest_documents(self, documents: List[str]) -> Dict[str, Any]:
         """Ingest documents and build knowledge graph."""
-        
+
         # Extract knowledge graph
         kg_result = self.kg_extractor.extract_knowledge_graph(documents)
-        
+
         # Store in Neo4j
         storage_result = self.neo4j_manager.store_knowledge_graph(
             kg_result['entities'],
             kg_result['relationships']
         )
-        
+
         return {
             'extraction_result': kg_result,
             'storage_result': storage_result
         }
-    
+
     def analyze_repository(self, repo_path: str) -> Dict[str, Any]:
         """Analyze code repository and build code graph."""
-        
+
         # Analyze repository
         code_analysis = self.code_analyzer.analyze_repository(repo_path)
-        
+
         # Store code entities and relationships
         code_storage = self.neo4j_manager.store_knowledge_graph(
             code_analysis['entities'],
             code_analysis['relationships']
         )
-        
+
         return {
             'code_analysis': code_analysis,
             'storage_result': code_storage
         }
-    
+
     def search(self, query: str, search_type: str = 'hybrid') -> Dict[str, Any]:
         """Perform GraphRAG search."""
-        
+
         if search_type == 'hybrid':
             return self.hybrid_rag.hybrid_search(query)
         else:
@@ -2491,6 +2494,7 @@ class ProductionGraphRAG:
 ## **📝 Chapter Summary**
 
 ### **What You've Built**
+
 - ✅ **NodeRAG Architecture**: Heterogeneous graph system with specialized node types and three-stage processing
 - ✅ **Structured Brain Architecture**: Six specialized node types mimicking human knowledge organization
 - ✅ **Advanced Graph Algorithms**: Personalized PageRank and HNSW similarity integration
@@ -2501,6 +2505,7 @@ class ProductionGraphRAG:
 - ✅ **Hybrid Graph-Vector Search**: Adaptive fusion strategies combining graph reasoning with vector similarity
 
 ### **Key Technical Skills Learned**
+
 1. **NodeRAG Architecture**: Heterogeneous graph design, specialized node processing, three-stage pipeline implementation
 2. **Advanced Graph Algorithms**: Personalized PageRank implementation, HNSW integration, semantic pathway construction
 3. **Knowledge Graph Engineering**: Traditional entity extraction, relationship mapping, graph construction
@@ -2510,6 +2515,7 @@ class ProductionGraphRAG:
 7. **Hybrid Retrieval**: Graph-vector fusion, adaptive weighting, comprehensive response generation
 
 ### **Performance Characteristics**
+
 - **NodeRAG Processing**: 3-stage pipeline processes 10K+ documents with 85-95% pathway coherence
 - **Personalized PageRank**: Sub-100ms semantic pathway computation on 100K+ heterogeneous graphs
 - **HNSW Graph Integration**: 200-500ms similarity edge construction with 80-90% type compatibility
@@ -2645,7 +2651,7 @@ You've transcended traditional RAG by building systems that understand entities,
 
 **From Vector Search to Structured Knowledge Reasoning:**
 1. **Sessions 2-3 Foundation**: High-quality chunks and optimized vector search
-2. **Sessions 4-5 Enhancement**: Query intelligence and scientific evaluation  
+2. **Sessions 4-5 Enhancement**: Query intelligence and scientific evaluation
 3. **Session 6 Evolution**: NodeRAG structured brain architecture and traditional GraphRAG reasoning ✅
 
 **NodeRAG Breakthrough**: You've built systems with specialized node types that mirror human knowledge organization - **Semantic Units**, **Entities**, **Relationships**, **Attributes**, **Documents**, and **Summary** nodes that work together through **Personalized PageRank** and **HNSW similarity edges**.
@@ -2673,6 +2679,7 @@ The entity extraction, relationship mapping, and graph traversal capabilities yo
 - **Session 9**: Deploy agentic GraphRAG systems at enterprise scale with monitoring
 
 ### **Preparation for Agentic Mastery**
+
 1. **Document reasoning patterns**: Identify queries requiring multi-step planning
 2. **Test graph adaptability**: Create scenarios needing dynamic approach selection
 3. **Evaluate current performance**: Establish baselines for agentic enhancement

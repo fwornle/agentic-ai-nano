@@ -21,7 +21,8 @@
       "Bash(fi)",
       "Bash(if [[ -f $file ]])",
       "Bash(then echo \"Session $i missing solution link\")",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
