@@ -1112,6 +1112,24 @@ Congratulations on completing the MCP, ADK, and A2A nano-degree program! You now
 
 ---
 
+## 📋 Test Your Knowledge
+
+Ready to test your understanding of Production Agent Deployment? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+
+### Multiple Choice Test
+Test your knowledge with 10 carefully crafted questions covering:
+- Container orchestration with Kubernetes
+- Auto-scaling strategies and resource optimization
+- Service mesh architecture and security
+- Observability and monitoring best practices
+- High availability and disaster recovery
+
+**[📝 Take the Test - Session 9 Test Solutions](Session9_Test_Solutions.md)**
+
+*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+
+---
+
 ## Additional Resources
 
 - [Kubernetes Production Best Practices](https://kubernetes.io/docs/setup/best-practices/)

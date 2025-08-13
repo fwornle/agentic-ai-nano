@@ -704,6 +704,24 @@ In Session 6, we'll focus on **Advanced MCP Patterns** including:
 
 ---
 
+## 📋 Test Your Knowledge
+
+Ready to test your understanding of Secure MCP Servers? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+
+### Multiple Choice Test
+Test your knowledge with 10 carefully crafted questions covering:
+- Defense-in-depth security architecture
+- JWT authentication and token management
+- Role-based access control (RBAC)
+- Input validation and injection prevention
+- Rate limiting and DDoS protection strategies
+
+**[📝 Take the Test - Session 5 Test Solutions](Session5_Test_Solutions.md)**
+
+*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+
+---
+
 ## Additional Resources
 
 - [OWASP API Security Top 10](https://owasp.org/www-project-api-security/)

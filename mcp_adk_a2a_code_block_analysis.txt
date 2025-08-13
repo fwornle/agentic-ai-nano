@@ -1,0 +1,1515 @@
+================================================================================
+CODE BLOCK LENGTH ANALYSIS REPORT
+================================================================================
+
+SUMMARY STATISTICS
+----------------------------------------
+Total files analyzed: 23
+Total code blocks found: 274
+Code blocks over 20 lines: 136
+Average block length: 45.6 lines
+Longest block: 868 lines
+Shortest block: 1 lines
+
+DETAILED ANALYSIS BY FILE
+----------------------------------------
+
+📁 Session0_Introduction_to_MCP_ACP_A2A-solutions.md
+   Total code blocks: 0
+   No code blocks found
+
+📁 Session0_Introduction_to_MCP_ACP_A2A.md
+   Total code blocks: 16
+   ⚠️  Blocks over 20 lines: 5
+   ✅ Block 1: 6 lines (mermaid) - Line 50
+   ✅ Block 2: 8 lines (python) - Line 71
+   ⚠️  Block 3: 24 lines (python) - Line 134
+       Preview: # ACP Agent Registration class LocalAgent:     def __init__(self, name, capabilities):         self....
+   ⚠️  Block 4: 24 lines (mermaid) - Line 198
+       Preview: graph TB     subgraph "Organization A"         A1[Travel Agent]         A2[Payment Agent]     end   ...
+   ⚠️  Block 5: 21 lines (json) - Line 237
+       Preview: {   "agent": {     "name": "flight_search_agent",     "version": "1.0",     "capabilities": [       ...
+   ⚠️  Block 6: 73 lines (python) - Line 277
+       Preview: # Agent with MCP integration, ACP local coordination, and A2A communication class TravelPlannerAgent...
+   ✅ Block 7: 8 lines (bash) - Line 383
+   ✅ Block 8: 9 lines (bash) - Line 398
+   ✅ Block 9: 14 lines (json) - Line 448
+   ✅ Block 10: 16 lines (json) - Line 476
+   ⚠️  Block 11: 23 lines (json) - Line 535
+       Preview: {   "servers": {     "weather": {       "command": "python",       "args": ["weather_server.py"],   ...
+   ✅ Block 12: 3 lines (bash) - Line 568
+   ✅ Block 13: 2 lines (bash) - Line 575
+   ✅ Block 14: 11 lines (json) - Line 591
+   ✅ Block 15: 1 lines (unknown) - Line 615
+   ✅ Block 16: 7 lines (unknown) - Line 627
+
+📁 Session0_Test_Solutions.md
+   Total code blocks: 0
+   No code blocks found
+
+📁 Session1_Basic_MCP_Server-solution.md
+   Total code blocks: 2
+   ⚠️  Blocks over 20 lines: 1
+   ⚠️  Block 1: 58 lines (python) - Line 55
+       Preview: @mcp.tool() def find_warmest_city(cities: List[str]) -> Dict:     """     Find the warmest city from...
+   ✅ Block 2: 11 lines (python) - Line 126
+
+📁 Session1_Basic_MCP_Server.md
+   Total code blocks: 21
+   ⚠️  Blocks over 20 lines: 5
+   ✅ Block 1: 10 lines (bash) - Line 39
+   ✅ Block 2: 5 lines (unknown) - Line 63
+   ✅ Block 3: 3 lines (txt) - Line 75
+   ✅ Block 4: 14 lines (python) - Line 91
+   ✅ Block 5: 12 lines (python) - Line 121
+   ✅ Block 6: 7 lines (python) - Line 145
+   ✅ Block 7: 6 lines (python) - Line 159
+   ✅ Block 8: 15 lines (python) - Line 172
+   ✅ Block 9: 12 lines (python) - Line 202
+   ✅ Block 10: 3 lines (python) - Line 219
+   ✅ Block 11: 16 lines (python) - Line 227
+   ⚠️  Block 12: 23 lines (python) - Line 255
+       Preview: @mcp.resource("weather://cities/available") def get_available_cities() -> Dict:     """Get list of c...
+   ⚠️  Block 13: 22 lines (python) - Line 291
+       Preview: @mcp.prompt() def weather_report_prompt(city: str = "London") -> str:     """Generate a weather repo...
+   ⚠️  Block 14: 27 lines (python) - Line 325
+       Preview: @mcp.tool() def save_user_preferences(user_id: str, city: str, units: str = "celsius") -> Dict:     ...
+   ⚠️  Block 15: 64 lines (python) - Line 365
+       Preview: # test_client.py import subprocess import json from typing import Dict, Any  class MCPTestClient:   ...
+   ✅ Block 16: 4 lines (python) - Line 442
+   ✅ Block 17: 1 lines (bash) - Line 450
+   ✅ Block 18: 20 lines (python) - Line 464
+   ✅ Block 19: 19 lines (python) - Line 496
+   ✅ Block 20: 19 lines (python) - Line 580
+   ⚠️  Block 21: 26 lines (python) - Line 606
+       Preview: @mcp.tool() def find_warmest_city(cities: List[str]) -> Dict:     """Find the warmest city from a li...
+
+📁 Session2_FileSystem_MCP_Server-solution.md
+   Total code blocks: 3
+   ⚠️  Blocks over 20 lines: 2
+   ⚠️  Block 1: 95 lines (python) - Line 55
+       Preview: @mcp.tool() async def move_file(source: str, destination: str, overwrite: bool = False) -> Dict:    ...
+   ⚠️  Block 2: 41 lines (python) - Line 155
+       Preview: @mcp.tool() async def move_or_copy_file(     source: str,     destination: str,     operation: str =...
+   ✅ Block 3: 11 lines (python) - Line 212
+
+📁 Session2_FileSystem_MCP_Server.md
+   Total code blocks: 13
+   ⚠️  Blocks over 20 lines: 10
+   ✅ Block 1: 10 lines (bash) - Line 42
+   ✅ Block 2: 11 lines (unknown) - Line 64
+   ⚠️  Block 3: 32 lines (python) - Line 82
+       Preview: # config.py import os from pathlib import Path from typing import List, Set  class FileSystemConfig:...
+   ⚠️  Block 4: 55 lines (python) - Line 130
+       Preview: # utils/sandbox.py from pathlib import Path from typing import Optional import os  class SandboxErro...
+   ⚠️  Block 5: 59 lines (python) - Line 197
+       Preview: # utils/validators.py from pathlib import Path from typing import Dict, Any import magic import hash...
+   ⚠️  Block 6: 32 lines (python) - Line 269
+       Preview: # filesystem_server.py from mcp.server.fastmcp import FastMCP import aiofiles from pathlib import Pa...
+   ⚠️  Block 7: 113 lines (python) - Line 308
+       Preview: @mcp.tool() async def list_directory(path: str = ".", pattern: str = "*") -> Dict:     """     List ...
+   ⚠️  Block 8: 78 lines (python) - Line 428
+       Preview: @mcp.tool() async def read_file(path: str, encoding: str = "utf-8",                    start_line: O...
+   ⚠️  Block 9: 80 lines (python) - Line 513
+       Preview: @mcp.tool() async def write_file(path: str, content: str,                     encoding: str = "utf-8...
+   ⚠️  Block 10: 104 lines (python) - Line 604
+       Preview: @mcp.tool() async def search_files(     pattern: str,     search_type: str = "name",     path: str =...
+   ⚠️  Block 11: 64 lines (python) - Line 715
+       Preview: @mcp.resource("fs://config") def get_server_config() -> Dict:     """Expose server configuration as ...
+   ✅ Block 12: 20 lines (python) - Line 786
+   ⚠️  Block 13: 22 lines (python) - Line 878
+       Preview: @mcp.tool() async def move_file(source: str, destination: str, overwrite: bool = False) -> Dict:    ...
+
+📁 Session3_LangChain_MCP_Integration-solution.md
+   Total code blocks: 2
+   ⚠️  Blocks over 20 lines: 2
+   ⚠️  Block 1: 404 lines (python) - Line 55
+       Preview: # agents/travel_planning_agent.py import asyncio import json from typing import Dict, Any, List from...
+   ⚠️  Block 2: 43 lines (python) - Line 472
+       Preview: # Additional tool for budget analysis async def analyze_travel_budget(destination_data: str):     ""...
+
+📁 Session3_LangChain_MCP_Integration.md
+   Total code blocks: 8
+   ⚠️  Blocks over 20 lines: 7
+   ✅ Block 1: 11 lines (bash) - Line 46
+   ⚠️  Block 2: 21 lines (unknown) - Line 70
+       Preview: langchain-mcp-integration/ ├── mcp_servers/           # Our MCP server implementations │   ├── weath...
+   ⚠️  Block 3: 75 lines (python) - Line 98
+       Preview: # config.py import os from typing import Dict, Any, List from dataclasses import dataclass from dote...
+   ⚠️  Block 4: 172 lines (python) - Line 190
+       Preview: # utils/mcp_manager.py import asyncio import logging from typing import Dict, List, Optional from co...
+   ⚠️  Block 5: 59 lines (python) - Line 376
+       Preview: # mcp_servers/weather_server.py from mcp.server.fastmcp import FastMCP from datetime import datetime...
+   ⚠️  Block 6: 144 lines (python) - Line 446
+       Preview: # agents/basic_agent.py import asyncio import logging from typing import Optional from langchain.age...
+   ⚠️  Block 7: 306 lines (python) - Line 603
+       Preview: # agents/multi_tool_agent.py import asyncio import logging from typing import Dict, List, Any, Optio...
+   ⚠️  Block 8: 290 lines (python) - Line 920
+       Preview: # workflows/research_workflow.py import asyncio from typing import Dict, Any, List from langchain_co...
+
+📁 Session3_LangChain_MCP_Integration_Improved.md
+   Total code blocks: 26
+   ⚠️  Blocks over 20 lines: 8
+   ✅ Block 1: 11 lines (bash) - Line 46
+   ✅ Block 2: 7 lines (bash) - Line 80
+   ✅ Block 3: 12 lines (python) - Line 94
+   ✅ Block 4: 8 lines (python) - Line 117
+   ✅ Block 5: 15 lines (python) - Line 151
+   ⚠️  Block 6: 32 lines (python) - Line 176
+       Preview: async def start_all_servers(self) -> Dict[str, bool]:     """Start all configured MCP servers."""   ...
+   ✅ Block 7: 20 lines (python) - Line 224
+   ⚠️  Block 8: 25 lines (python) - Line 256
+       Preview: # From: src/session3/mcp_servers/weather_server.py  @mcp.tool() def get_current_weather(city: str, u...
+   ✅ Block 9: 10 lines (python) - Line 310
+   ⚠️  Block 10: 25 lines (python) - Line 330
+       Preview: async def initialize(self) -> bool:     """Initialize the agent with LLM and tools."""     try:     ...
+   ⚠️  Block 11: 24 lines (python) - Line 360
+       Preview: async def _convert_mcp_tools(self, adapter: MCPAdapter) -> List[Tool]:     """Convert MCP tools to L...
+   ✅ Block 12: 20 lines (python) - Line 396
+   ✅ Block 13: 19 lines (python) - Line 429
+   ✅ Block 14: 3 lines (unknown) - Line 452
+   ✅ Block 15: 9 lines (python) - Line 468
+   ✅ Block 16: 8 lines (python) - Line 482
+   ⚠️  Block 17: 21 lines (python) - Line 500
+       Preview: async def _collect_all_tools(self) -> List[Tool]:     """Collect tools from all available MCP server...
+   ✅ Block 18: 15 lines (python) - Line 526
+   ⚠️  Block 19: 31 lines (python) - Line 553
+       Preview: multi_tool_prompt = PromptTemplate.from_template(""" You are an intelligent AI assistant with access...
+   ✅ Block 20: 19 lines (python) - Line 595
+   ✅ Block 21: 13 lines (python) - Line 641
+   ✅ Block 22: 20 lines (python) - Line 659
+   ⚠️  Block 23: 28 lines (python) - Line 684
+       Preview: async def _weather_research_node(self, state: ResearchState) -> ResearchState:     """Research weath...
+   ⚠️  Block 24: 21 lines (python) - Line 717
+       Preview: from langgraph.graph import StateGraph, END  async def build_workflow(self) -> StateGraph:     """Bu...
+   ✅ Block 25: 18 lines (python) - Line 743
+   ✅ Block 26: 10 lines (python) - Line 843
+
+📁 Session4_Production_MCP_Deployment-solution.md
+   Total code blocks: 2
+   ⚠️  Blocks over 20 lines: 2
+   ⚠️  Block 1: 368 lines (python) - Line 55
+       Preview: # src/resilience/circuit_breaker.py import asyncio import time from enum import Enum from typing imp...
+   ⚠️  Block 2: 37 lines (python) - Line 436
+       Preview: # Bulkhead pattern for resource isolation class BulkheadCircuitBreaker(CircuitBreaker):     """Circu...
+
+📁 Session4_Production_MCP_Deployment.md
+   Total code blocks: 20
+   ⚠️  Blocks over 20 lines: 16
+   ⚠️  Block 1: 22 lines (python) - Line 46
+       Preview: # src/production_mcp_server.py import os import logging import json from datetime import datetime fr...
+   ✅ Block 2: 5 lines (python) - Line 80
+   ⚠️  Block 3: 28 lines (python) - Line 97
+       Preview: class ProductionMCPServer:     """     Production-ready MCP server with comprehensive monitoring and...
+   ✅ Block 4: 16 lines (python) - Line 137
+   ⚠️  Block 5: 34 lines (python) - Line 160
+       Preview:     def _setup_tools(self):         """Set up MCP tools with decorators for monitoring."""          ...
+   ⚠️  Block 6: 30 lines (python) - Line 206
+       Preview:         @self.mcp.tool()         @self._monitor_tool         async def health_check() -> Dict:      ...
+   ⚠️  Block 7: 42 lines (dockerfile) - Line 253
+       Preview: # deployments/Dockerfile FROM python:3.11-slim  # Install system dependencies required for our appli...
+   ⚠️  Block 8: 66 lines (yaml) - Line 310
+       Preview: # deployments/docker-compose.yml version: '3.8'  services:   # Main MCP server   mcp-server:     bui...
+   ⚠️  Block 9: 23 lines (python) - Line 404
+       Preview: # src/cloud_run_adapter.py from fastapi import FastAPI, Request, Response from fastapi.responses imp...
+   ⚠️  Block 10: 23 lines (python) - Line 432
+       Preview: @app.on_event("startup") async def startup_event():     """     Initialize server on startup.      C...
+   ⚠️  Block 11: 78 lines (python) - Line 460
+       Preview: @app.post("/mcp") async def handle_mcp_request(request: Request):     """     Handle MCP requests ov...
+   ⚠️  Block 12: 22 lines (python) - Line 543
+       Preview: @app.get("/health") async def health_check():     """Health check endpoint for Cloud Run."""     try...
+   ⚠️  Block 13: 46 lines (yaml) - Line 574
+       Preview: # deployments/cloudbuild.yaml steps:   # Build the container image   - name: 'gcr.io/cloud-builders/...
+   ⚠️  Block 14: 155 lines (terraform) - Line 633
+       Preview: # deployments/terraform/main.tf terraform {   required_providers {     google = {       source  = "h...
+   ⚠️  Block 15: 169 lines (python) - Line 806
+       Preview: # src/lambda_handler.py import json import os import asyncio from typing import Dict, Any import log...
+   ✅ Block 16: 12 lines (dockerfile) - Line 980
+   ⚠️  Block 17: 161 lines (yaml) - Line 997
+       Preview: # deployments/template.yaml AWSTemplateFormatVersion: '2010-09-09' Transform: AWS::Serverless-2016-1...
+   ⚠️  Block 18: 307 lines (python) - Line 1175
+       Preview: # monitoring/monitor.py from prometheus_client import start_http_server, Counter, Histogram, Gauge i...
+   ⚠️  Block 19: 147 lines (json) - Line 1489
+       Preview: {   "dashboard": {     "id": null,     "title": "MCP Server Production Monitoring",     "tags": ["mc...
+   ✅ Block 20: 19 lines (python) - Line 1720
+
+📁 Session4_Production_MCP_Deployment_Complete.md
+   Total code blocks: 28
+   ⚠️  Blocks over 20 lines: 16
+   ⚠️  Block 1: 23 lines (python) - Line 71
+       Preview: # From: src/session4/production_mcp_server.py  import os import logging import json import time impo...
+   ⚠️  Block 2: 23 lines (python) - Line 105
+       Preview: # Prometheus metrics - comprehensive observability request_count = Counter(     'mcp_requests_total'...
+   ✅ Block 3: 14 lines (python) - Line 138
+   ⚠️  Block 4: 38 lines (python) - Line 167
+       Preview: def _monitor_tool(self, func):     """     Decorator to monitor tool execution with Prometheus metri...
+   ⚠️  Block 5: 32 lines (python) - Line 216
+       Preview: @self.mcp.tool() async def health_check() -> Dict:     """     Comprehensive health check for load b...
+   ✅ Block 6: 11 lines (python) - Line 261
+   ⚠️  Block 7: 27 lines (python) - Line 283
+       Preview: async def process_data(data: Dict[str, Any], operation: str = "transform") -> Dict:     """Process d...
+   ✅ Block 8: 8 lines (dockerfile) - Line 337
+   ✅ Block 9: 5 lines (dockerfile) - Line 355
+   ✅ Block 10: 10 lines (dockerfile) - Line 370
+   ✅ Block 11: 13 lines (dockerfile) - Line 390
+   ⚠️  Block 12: 21 lines (yaml) - Line 416
+       Preview: # docker-compose.yml version: '3.8'  services:   # Main MCP server   mcp-server:     build:       co...
+   ⚠️  Block 13: 32 lines (yaml) - Line 448
+       Preview:   # Redis for caching   redis:     image: redis:7-alpine     ports:       - "6379:6379"     volumes:...
+   ⚠️  Block 14: 50 lines (python) - Line 508
+       Preview: # cloud_run_adapter.py (excerpt) from fastapi import FastAPI, Request, Response from fastapi.respons...
+   ⚠️  Block 15: 28 lines (yaml) - Line 569
+       Preview: # cloudbuild.yaml steps:   # Build the container image   - name: 'gcr.io/cloud-builders/docker'     ...
+   ⚠️  Block 16: 49 lines (terraform) - Line 610
+       Preview: # main.tf resource "google_cloud_run_service" "mcp_server" {   name     = "mcp-server"   location = ...
+   ✅ Block 17: 17 lines (terraform) - Line 670
+   ✅ Block 18: 11 lines (python) - Line 700
+   ⚠️  Block 19: 25 lines (python) - Line 716
+       Preview: async def check_all_servers(self, session: aiohttp.ClientSession) -> List[ServerHealthStatus]:     "...
+   ✅ Block 20: 19 lines (python) - Line 754
+   ⚠️  Block 21: 21 lines (yaml) - Line 784
+       Preview: # prometheus_rules.yml groups:   - name: mcp_server_alerts     rules:       - alert: MCPServerDown  ...
+   ⚠️  Block 22: 23 lines (bash) - Line 816
+       Preview: #!/bin/bash # deploy.sh - Zero-downtime deployment script  # Build new version docker build -t mcp-s...
+   ✅ Block 23: 10 lines (bash) - Line 844
+   ✅ Block 24: 13 lines (python) - Line 861
+   ⚠️  Block 25: 37 lines (python) - Line 879
+       Preview: class CircuitBreaker:     """Circuit breaker for external service calls."""      def __init__(self, ...
+   ⚠️  Block 26: 28 lines (python) - Line 923
+       Preview: from collections import defaultdict import time  class RateLimiter:     """Token bucket rate limiter...
+   ⚠️  Block 27: 23 lines (python) - Line 956
+       Preview: from pydantic import BaseModel, validator from typing import Dict, Any  class ProcessDataRequest(Bas...
+   ✅ Block 28: 17 lines (python) - Line 1061
+
+📁 Session5_Secure_MCP_Server-solution.md
+   Total code blocks: 2
+   ⚠️  Blocks over 20 lines: 2
+   ⚠️  Block 1: 361 lines (python) - Line 55
+       Preview: # src/security/audit_system.py import asyncio import json from datetime import datetime, timedelta f...
+   ⚠️  Block 2: 75 lines (python) - Line 429
+       Preview: # Additional security features you could implement:  class AdvancedThreatDetection:     """Advanced ...
+
+📁 Session5_Secure_MCP_Server.md
+   Total code blocks: 14
+   ⚠️  Blocks over 20 lines: 11
+   ⚠️  Block 1: 25 lines (python) - Line 47
+       Preview: # src/auth/jwt_auth.py import jwt import bcrypt from datetime import datetime, timedelta, timezone f...
+   ✅ Block 2: 3 lines (python) - Line 82
+   ⚠️  Block 3: 32 lines (python) - Line 95
+       Preview:     def create_tokens(self, user_data: Dict[str, Any]) -> Dict[str, str]:         """Create access a...
+   ✅ Block 4: 20 lines (python) - Line 138
+   ⚠️  Block 5: 31 lines (python) - Line 163
+       Preview:     def _is_token_blacklisted(self, token: str) -> bool:         """Check if token is in the blackli...
+   ⚠️  Block 6: 33 lines (python) - Line 203
+       Preview: # src/auth/permissions.py from enum import Enum from typing import List, Set from functools import w...
+   ⚠️  Block 7: 22 lines (python) - Line 241
+       Preview: def require_permission(required_permission: Permission):     """Decorator to require specific permis...
+   ⚠️  Block 8: 37 lines (python) - Line 272
+       Preview: # src/auth/middleware.py from fastapi import Request, HTTPException from fastapi.security import HTT...
+   ⚠️  Block 9: 43 lines (python) - Line 314
+       Preview: # src/secure_mcp_server.py from mcp.server.fastmcp import FastMCP from src.auth.jwt_auth import JWTM...
+   ⚠️  Block 10: 51 lines (python) - Line 370
+       Preview: # src/auth/api_keys.py import secrets import hashlib from datetime import datetime, timedelta from t...
+   ⚠️  Block 11: 38 lines (python) - Line 426
+       Preview:     def validate_api_key(self, api_key: str) -> Optional[Dict]:         """Validate API key and retu...
+   ⚠️  Block 12: 68 lines (python) - Line 475
+       Preview: # src/security/rate_limiter.py import time from typing import Optional import redis import json  cla...
+   ⚠️  Block 13: 38 lines (python) - Line 548
+       Preview: class RateLimitMiddleware:     """Rate limiting middleware for MCP servers."""      def __init__(sel...
+   ✅ Block 14: 20 lines (python) - Line 663
+
+📁 Session6_ACP_Fundamentals-solution.md
+   Total code blocks: 12
+   ⚠️  Blocks over 20 lines: 7
+   ✅ Block 1: 7 lines (unknown) - Line 7
+   ⚠️  Block 2: 150 lines (python) - Line 21
+       Preview: from typing import Dict, List, Optional, Any import json import uuid from datetime import datetime f...
+   ⚠️  Block 3: 102 lines (python) - Line 176
+       Preview: from acp_agent import ACPAgent, AgentCapability import pandas as pd import json from io import Strin...
+   ⚠️  Block 4: 103 lines (python) - Line 283
+       Preview: from acp_agent import ACPAgent, AgentCapability import re from collections import Counter  class Tex...
+   ⚠️  Block 5: 137 lines (python) - Line 391
+       Preview: from acp_agent import ACPAgent, AgentCapability import asyncio import aiohttp  class CoordinatorAgen...
+   ⚠️  Block 6: 152 lines (python) - Line 533
+       Preview: import asyncio import aiohttp import json  class ACPTestClient:     def __init__(self, coordinator_u...
+   ⚠️  Block 7: 67 lines (python) - Line 690
+       Preview: import asyncio import subprocess import time import sys import signal  async def start_agent_network...
+   ✅ Block 8: 6 lines (txt) - Line 762
+   ✅ Block 9: 10 lines (bash) - Line 775
+   ✅ Block 10: 7 lines (bash) - Line 794
+   ✅ Block 11: 2 lines (bash) - Line 806
+   ⚠️  Block 12: 69 lines (unknown) - Line 815
+       Preview: 🧪 ACP Agent Network Test Suite ================================================== ⏳ Waiting for agen...
+
+📁 Session6_ACP_Fundamentals.md
+   Total code blocks: 29
+   ⚠️  Blocks over 20 lines: 1
+   ✅ Block 1: 3 lines (unknown) - Line 29
+   ✅ Block 2: 3 lines (unknown) - Line 36
+   ✅ Block 3: 7 lines (python) - Line 59
+   ✅ Block 4: 18 lines (python) - Line 72
+   ✅ Block 5: 9 lines (python) - Line 97
+   ✅ Block 6: 11 lines (python) - Line 110
+   ✅ Block 7: 20 lines (python) - Line 128
+   ✅ Block 8: 14 lines (python) - Line 168
+   ✅ Block 9: 7 lines (python) - Line 186
+   ✅ Block 10: 16 lines (python) - Line 199
+   ✅ Block 11: 11 lines (bash) - Line 219
+   ✅ Block 12: 17 lines (python) - Line 238
+   ✅ Block 13: 16 lines (python) - Line 259
+   ⚠️  Block 14: 31 lines (python) - Line 285
+       Preview: # From src/session6/coordinator_agent.py async def _execute_data_analysis_workflow(self, input_data:...
+   ✅ Block 15: 16 lines (python) - Line 334
+   ✅ Block 16: 5 lines (unknown) - Line 355
+   ✅ Block 17: 5 lines (python) - Line 364
+   ✅ Block 18: 11 lines (python) - Line 380
+   ✅ Block 19: 3 lines (bash) - Line 395
+   ✅ Block 20: 11 lines (unknown) - Line 402
+   ✅ Block 21: 1 lines (bash) - Line 420
+   ✅ Block 22: 15 lines (unknown) - Line 431
+   ✅ Block 23: 8 lines (python) - Line 457
+   ✅ Block 24: 9 lines (json) - Line 473
+   ✅ Block 25: 2 lines (bash) - Line 486
+   ✅ Block 26: 10 lines (json) - Line 492
+   ✅ Block 27: 10 lines (json) - Line 506
+   ✅ Block 28: 7 lines (json) - Line 520
+   ✅ Block 29: 8 lines (json) - Line 531
+
+📁 Session7_Agent_to_Agent_Communication-solution.md
+   Total code blocks: 2
+   ⚠️  Blocks over 20 lines: 2
+   ⚠️  Block 1: 582 lines (python) - Line 55
+       Preview: # customer_service/choreography.py import asyncio from typing import Dict, List, Any from datetime i...
+   ⚠️  Block 2: 64 lines (python) - Line 650
+       Preview: # Additional patterns for enhanced customer service  class AdvancedServicePatterns:     """Advanced ...
+
+📁 Session7_Agent_to_Agent_Communication.md
+   Total code blocks: 6
+   ⚠️  Blocks over 20 lines: 5
+   ⚠️  Block 1: 128 lines (python) - Line 41
+       Preview: # a2a/protocol.py from typing import Dict, Any, List, Optional, Union from dataclasses import datacl...
+   ⚠️  Block 2: 194 lines (python) - Line 176
+       Preview: # a2a/registry.py import asyncio import json from typing import Dict, List, Optional, Set from datet...
+   ⚠️  Block 3: 216 lines (python) - Line 377
+       Preview: # a2a/router.py import asyncio import json from typing import Dict, List, Optional, Callable, Any im...
+   ⚠️  Block 4: 219 lines (python) - Line 604
+       Preview: # a2a/orchestrator.py import asyncio from typing import Dict, List, Any, Optional from dataclasses i...
+   ⚠️  Block 5: 188 lines (python) - Line 830
+       Preview: # a2a/choreography.py import asyncio from typing import Dict, List, Any, Callable, Optional from dat...
+   ✅ Block 6: 20 lines (python) - Line 1090
+
+📁 Session8_Advanced_Agent_Workflows-solution.md
+   Total code blocks: 2
+   ⚠️  Blocks over 20 lines: 2
+   ⚠️  Block 1: 691 lines (python) - Line 55
+       Preview: # document_processing/intelligent_workflow.py import asyncio from typing import Dict, List, Any, Opt...
+   ⚠️  Block 2: 101 lines (python) - Line 762
+       Preview: # Additional advanced patterns for enterprise use  class EnterpriseWorkflowPatterns:     """Advanced...
+
+📁 Session8_Advanced_Agent_Workflows.md
+   Total code blocks: 25
+   ⚠️  Blocks over 20 lines: 11
+   ✅ Block 1: 15 lines (python) - Line 42
+   ✅ Block 2: 19 lines (python) - Line 62
+   ✅ Block 3: 17 lines (python) - Line 86
+   ✅ Block 4: 14 lines (python) - Line 108
+   ✅ Block 5: 11 lines (python) - Line 127
+   ✅ Block 6: 12 lines (python) - Line 145
+   ✅ Block 7: 14 lines (python) - Line 162
+   ✅ Block 8: 13 lines (python) - Line 183
+   ✅ Block 9: 18 lines (python) - Line 201
+   ✅ Block 10: 20 lines (python) - Line 224
+   ✅ Block 11: 20 lines (python) - Line 249
+   ⚠️  Block 12: 24 lines (python) - Line 276
+       Preview:     async def _execute_workflow_internal(self, context: ExecutionContext) -> Dict[str, Any]:        ...
+   ⚠️  Block 13: 22 lines (python) - Line 305
+       Preview:             # Execute ready steps with appropriate pattern             execution_tasks = []         ...
+   ⚠️  Block 14: 30 lines (python) - Line 332
+       Preview:             # Wait for tasks to complete             for step, task in execution_tasks:             ...
+   ⚠️  Block 15: 21 lines (python) - Line 369
+       Preview:     async def _execute_parallel_step(self, step: WorkflowStep,                                    co...
+   ⚠️  Block 16: 36 lines (python) - Line 395
+       Preview:         # Analyze results         successful_results = []         failed_results = []          for i...
+   ⚠️  Block 17: 24 lines (python) - Line 442
+       Preview: # workflows/optimizer.py import asyncio from typing import Dict, List, Any, Optional from dataclasse...
+   ✅ Block 18: 11 lines (python) - Line 471
+   ⚠️  Block 19: 33 lines (python) - Line 489
+       Preview: class WorkflowOptimizer:     """Intelligent workflow optimizer using performance data."""      def _...
+   ⚠️  Block 20: 21 lines (python) - Line 527
+       Preview:     async def analyze_workflow_performance(self, workflow: AdvancedWorkflow,                        ...
+   ⚠️  Block 21: 28 lines (python) - Line 553
+       Preview:         # Analyze step performance         step_performance = self._analyze_step_performance(workflo...
+   ⚠️  Block 22: 22 lines (python) - Line 588
+       Preview:     async def generate_optimization_recommendations(self,                                           ...
+   ✅ Block 23: 19 lines (python) - Line 615
+   ⚠️  Block 24: 24 lines (python) - Line 639
+       Preview:     def _identify_bottlenecks(self, step_performance: Dict[str, Dict[str, float]]) -> List[str]:    ...
+   ✅ Block 25: 17 lines (python) - Line 735
+
+📁 Session9_Production_Agent_Deployment-solution.md
+   Total code blocks: 2
+   ⚠️  Blocks over 20 lines: 2
+   ⚠️  Block 1: 868 lines (python) - Line 55
+       Preview: # production/capstone_system.py import asyncio import logging from typing import Dict, List, Any, Op...
+   ⚠️  Block 2: 50 lines (python) - Line 939
+       Preview: # Additional production patterns  class ProductionPatterns:     """Advanced production deployment pa...
+
+📁 Session9_Production_Agent_Deployment.md
+   Total code blocks: 39
+   ⚠️  Blocks over 20 lines: 19
+   ✅ Block 1: 8 lines (yaml) - Line 43
+   ✅ Block 2: 15 lines (yaml) - Line 56
+   ✅ Block 3: 13 lines (yaml) - Line 76
+   ⚠️  Block 4: 29 lines (yaml) - Line 96
+       Preview: # k8s/redis-deployment.yaml apiVersion: apps/v1 kind: Deployment metadata:   name: redis   namespace...
+   ✅ Block 5: 14 lines (yaml) - Line 130
+   ✅ Block 6: 20 lines (yaml) - Line 149
+   ⚠️  Block 7: 28 lines (yaml) - Line 174
+       Preview:       volumes:       - name: redis-data         persistentVolumeClaim:           claimName: redis-pv...
+   ✅ Block 8: 14 lines (yaml) - Line 209
+   ✅ Block 9: 14 lines (yaml) - Line 228
+   ⚠️  Block 10: 23 lines (yaml) - Line 247
+       Preview:         ports:         - containerPort: 8080           name: http         - containerPort: 8081     ...
+   ⚠️  Block 11: 22 lines (yaml) - Line 275
+       Preview:         - name: API_KEY           valueFrom:             secretKeyRef:               name: agent-sec...
+   ✅ Block 12: 11 lines (yaml) - Line 302
+   ⚠️  Block 13: 24 lines (yaml) - Line 318
+       Preview:         livenessProbe:           httpGet:             path: /health             port: 8080          ...
+   ✅ Block 14: 9 lines (yaml) - Line 347
+   ⚠️  Block 15: 22 lines (yaml) - Line 363
+       Preview: --- apiVersion: v1 kind: Service metadata:   name: mcp-agent-service   namespace: agent-system   lab...
+   ✅ Block 16: 13 lines (yaml) - Line 392
+   ✅ Block 17: 20 lines (yaml) - Line 410
+   ✅ Block 18: 17 lines (yaml) - Line 435
+   ⚠️  Block 19: 24 lines (yaml) - Line 459
+       Preview: # k8s/istio-config.yaml apiVersion: networking.istio.io/v1beta1 kind: VirtualService metadata:   nam...
+   ⚠️  Block 20: 24 lines (yaml) - Line 488
+       Preview: --- apiVersion: networking.istio.io/v1beta1 kind: DestinationRule metadata:   name: mcp-agent-dr   n...
+   ⚠️  Block 21: 27 lines (yaml) - Line 517
+       Preview: --- apiVersion: networking.istio.io/v1beta1 kind: Gateway metadata:   name: agent-gateway   namespac...
+   ⚠️  Block 22: 23 lines (python) - Line 555
+       Preview: # monitoring/agent_metrics.py import time import asyncio from typing import Dict, Any, Optional from...
+   ⚠️  Block 23: 24 lines (python) - Line 583
+       Preview:     def _initialize_metrics(self):         """Initialize all Prometheus metrics."""          # Syste...
+   ⚠️  Block 24: 24 lines (python) - Line 612
+       Preview:         # Agent-specific metrics         self.active_workflows = Gauge(             'active_workflow...
+   ⚠️  Block 25: 25 lines (python) - Line 641
+       Preview:         self.mcp_tool_calls = Counter(             'mcp_tool_calls_total',             'Total MCP to...
+   ⚠️  Block 26: 23 lines (python) - Line 671
+       Preview:         # Resource metrics         self.memory_usage = Gauge(             'memory_usage_bytes',     ...
+   ✅ Block 27: 12 lines (python) - Line 701
+   ✅ Block 28: 11 lines (python) - Line 718
+   ✅ Block 29: 13 lines (python) - Line 734
+   ✅ Block 30: 18 lines (python) - Line 752
+   ⚠️  Block 31: 24 lines (python) - Line 777
+       Preview: # monitoring/health_checker.py import asyncio import time from typing import Dict, Any, List, Callab...
+   ⚠️  Block 32: 33 lines (python) - Line 806
+       Preview:     async def check_health(self) -> Dict[str, Any]:         """Execute all health checks and return ...
+   ⚠️  Block 33: 33 lines (python) - Line 844
+       Preview:     async def check_readiness(self) -> Dict[str, Any]:         """Execute readiness checks and retur...
+   ⚠️  Block 34: 21 lines (yaml) - Line 884
+       Preview: # monitoring/prometheus.yml global:   scrape_interval: 15s   evaluation_interval: 15s   external_lab...
+   ✅ Block 35: 19 lines (yaml) - Line 910
+   ✅ Block 36: 17 lines (yaml) - Line 934
+   ⚠️  Block 37: 23 lines (yaml) - Line 958
+       Preview: # monitoring/alerts/system.yml groups: - name: system   rules:   - alert: HighCPUUsage     expr: cpu...
+   ✅ Block 38: 19 lines (yaml) - Line 986
+   ✅ Block 39: 14 lines (python) - Line 1077
+
+================================================================================
+BLOCKS REQUIRING ATTENTION (OVER 20 LINES)
+================================================================================
+
+🚨 #1 - 868 lines
+   File: Session9_Production_Agent_Deployment-solution.md
+   Location: Lines 55-924
+   Language: python
+   Preview: # production/capstone_system.py import asyncio import logging from typing import Dict, List, Any, Op...
+   ⚡ RECOMMENDATION: Break this 868-line block into smaller chunks
+
+🚨 #2 - 691 lines
+   File: Session8_Advanced_Agent_Workflows-solution.md
+   Location: Lines 55-747
+   Language: python
+   Preview: # document_processing/intelligent_workflow.py import asyncio from typing import Dict, List, Any, Opt...
+   ⚡ RECOMMENDATION: Break this 691-line block into smaller chunks
+
+🚨 #3 - 582 lines
+   File: Session7_Agent_to_Agent_Communication-solution.md
+   Location: Lines 55-638
+   Language: python
+   Preview: # customer_service/choreography.py import asyncio from typing import Dict, List, Any from datetime i...
+   ⚡ RECOMMENDATION: Break this 582-line block into smaller chunks
+
+🚨 #4 - 404 lines
+   File: Session3_LangChain_MCP_Integration-solution.md
+   Location: Lines 55-460
+   Language: python
+   Preview: # agents/travel_planning_agent.py import asyncio import json from typing import Dict, Any, List from...
+   ⚡ RECOMMENDATION: Break this 404-line block into smaller chunks
+
+🚨 #5 - 368 lines
+   File: Session4_Production_MCP_Deployment-solution.md
+   Location: Lines 55-424
+   Language: python
+   Preview: # src/resilience/circuit_breaker.py import asyncio import time from enum import Enum from typing imp...
+   ⚡ RECOMMENDATION: Break this 368-line block into smaller chunks
+
+🚨 #6 - 361 lines
+   File: Session5_Secure_MCP_Server-solution.md
+   Location: Lines 55-417
+   Language: python
+   Preview: # src/security/audit_system.py import asyncio import json from datetime import datetime, timedelta f...
+   ⚡ RECOMMENDATION: Break this 361-line block into smaller chunks
+
+🚨 #7 - 307 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 1175-1483
+   Language: python
+   Preview: # monitoring/monitor.py from prometheus_client import start_http_server, Counter, Histogram, Gauge i...
+   ⚡ RECOMMENDATION: Break this 307-line block into smaller chunks
+
+🚨 #8 - 306 lines
+   File: Session3_LangChain_MCP_Integration.md
+   Location: Lines 603-910
+   Language: python
+   Preview: # agents/multi_tool_agent.py import asyncio import logging from typing import Dict, List, Any, Optio...
+   ⚡ RECOMMENDATION: Break this 306-line block into smaller chunks
+
+🚨 #9 - 290 lines
+   File: Session3_LangChain_MCP_Integration.md
+   Location: Lines 920-1211
+   Language: python
+   Preview: # workflows/research_workflow.py import asyncio from typing import Dict, Any, List from langchain_co...
+   ⚡ RECOMMENDATION: Break this 290-line block into smaller chunks
+
+🚨 #10 - 219 lines
+   File: Session7_Agent_to_Agent_Communication.md
+   Location: Lines 604-824
+   Language: python
+   Preview: # a2a/orchestrator.py import asyncio from typing import Dict, List, Any, Optional from dataclasses i...
+   ⚡ RECOMMENDATION: Break this 219-line block into smaller chunks
+
+🚨 #11 - 216 lines
+   File: Session7_Agent_to_Agent_Communication.md
+   Location: Lines 377-594
+   Language: python
+   Preview: # a2a/router.py import asyncio import json from typing import Dict, List, Optional, Callable, Any im...
+   ⚡ RECOMMENDATION: Break this 216-line block into smaller chunks
+
+🚨 #12 - 194 lines
+   File: Session7_Agent_to_Agent_Communication.md
+   Location: Lines 176-371
+   Language: python
+   Preview: # a2a/registry.py import asyncio import json from typing import Dict, List, Optional, Set from datet...
+   ⚡ RECOMMENDATION: Break this 194-line block into smaller chunks
+
+🚨 #13 - 188 lines
+   File: Session7_Agent_to_Agent_Communication.md
+   Location: Lines 830-1019
+   Language: python
+   Preview: # a2a/choreography.py import asyncio from typing import Dict, List, Any, Callable, Optional from dat...
+   ⚡ RECOMMENDATION: Break this 188-line block into smaller chunks
+
+🚨 #14 - 172 lines
+   File: Session3_LangChain_MCP_Integration.md
+   Location: Lines 190-363
+   Language: python
+   Preview: # utils/mcp_manager.py import asyncio import logging from typing import Dict, List, Optional from co...
+   ⚡ RECOMMENDATION: Break this 172-line block into smaller chunks
+
+🚨 #15 - 169 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 806-976
+   Language: python
+   Preview: # src/lambda_handler.py import json import os import asyncio from typing import Dict, Any import log...
+   ⚡ RECOMMENDATION: Break this 169-line block into smaller chunks
+
+🚨 #16 - 161 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 997-1159
+   Language: yaml
+   Preview: # deployments/template.yaml AWSTemplateFormatVersion: '2010-09-09' Transform: AWS::Serverless-2016-1...
+   ⚡ RECOMMENDATION: Break this 161-line block into smaller chunks
+
+🚨 #17 - 155 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 633-789
+   Language: terraform
+   Preview: # deployments/terraform/main.tf terraform {   required_providers {     google = {       source  = "h...
+   ⚡ RECOMMENDATION: Break this 155-line block into smaller chunks
+
+🚨 #18 - 152 lines
+   File: Session6_ACP_Fundamentals-solution.md
+   Location: Lines 533-686
+   Language: python
+   Preview: import asyncio import aiohttp import json  class ACPTestClient:     def __init__(self, coordinator_u...
+   ⚡ RECOMMENDATION: Break this 152-line block into smaller chunks
+
+🚨 #19 - 150 lines
+   File: Session6_ACP_Fundamentals-solution.md
+   Location: Lines 21-172
+   Language: python
+   Preview: from typing import Dict, List, Optional, Any import json import uuid from datetime import datetime f...
+   ⚡ RECOMMENDATION: Break this 150-line block into smaller chunks
+
+🚨 #20 - 147 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 1489-1637
+   Language: json
+   Preview: {   "dashboard": {     "id": null,     "title": "MCP Server Production Monitoring",     "tags": ["mc...
+   ⚡ RECOMMENDATION: Break this 147-line block into smaller chunks
+
+🚨 #21 - 144 lines
+   File: Session3_LangChain_MCP_Integration.md
+   Location: Lines 446-591
+   Language: python
+   Preview: # agents/basic_agent.py import asyncio import logging from typing import Optional from langchain.age...
+   ⚡ RECOMMENDATION: Break this 144-line block into smaller chunks
+
+🚨 #22 - 137 lines
+   File: Session6_ACP_Fundamentals-solution.md
+   Location: Lines 391-529
+   Language: python
+   Preview: from acp_agent import ACPAgent, AgentCapability import asyncio import aiohttp  class CoordinatorAgen...
+   ⚡ RECOMMENDATION: Break this 137-line block into smaller chunks
+
+🚨 #23 - 128 lines
+   File: Session7_Agent_to_Agent_Communication.md
+   Location: Lines 41-170
+   Language: python
+   Preview: # a2a/protocol.py from typing import Dict, Any, List, Optional, Union from dataclasses import datacl...
+   ⚡ RECOMMENDATION: Break this 128-line block into smaller chunks
+
+🚨 #24 - 113 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 308-422
+   Language: python
+   Preview: @mcp.tool() async def list_directory(path: str = ".", pattern: str = "*") -> Dict:     """     List ...
+   ⚡ RECOMMENDATION: Break this 113-line block into smaller chunks
+
+🚨 #25 - 104 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 604-709
+   Language: python
+   Preview: @mcp.tool() async def search_files(     pattern: str,     search_type: str = "name",     path: str =...
+   ⚡ RECOMMENDATION: Break this 104-line block into smaller chunks
+
+🚨 #26 - 103 lines
+   File: Session6_ACP_Fundamentals-solution.md
+   Location: Lines 283-387
+   Language: python
+   Preview: from acp_agent import ACPAgent, AgentCapability import re from collections import Counter  class Tex...
+   ⚡ RECOMMENDATION: Break this 103-line block into smaller chunks
+
+🚨 #27 - 102 lines
+   File: Session6_ACP_Fundamentals-solution.md
+   Location: Lines 176-279
+   Language: python
+   Preview: from acp_agent import ACPAgent, AgentCapability import pandas as pd import json from io import Strin...
+   ⚡ RECOMMENDATION: Break this 102-line block into smaller chunks
+
+🚨 #28 - 101 lines
+   File: Session8_Advanced_Agent_Workflows-solution.md
+   Location: Lines 762-864
+   Language: python
+   Preview: # Additional advanced patterns for enterprise use  class EnterpriseWorkflowPatterns:     """Advanced...
+   ⚡ RECOMMENDATION: Break this 101-line block into smaller chunks
+
+🚨 #29 - 95 lines
+   File: Session2_FileSystem_MCP_Server-solution.md
+   Location: Lines 55-151
+   Language: python
+   Preview: @mcp.tool() async def move_file(source: str, destination: str, overwrite: bool = False) -> Dict:    ...
+   ⚡ RECOMMENDATION: Break this 95-line block into smaller chunks
+
+🚨 #30 - 80 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 513-594
+   Language: python
+   Preview: @mcp.tool() async def write_file(path: str, content: str,                     encoding: str = "utf-8...
+   ⚡ RECOMMENDATION: Break this 80-line block into smaller chunks
+
+🚨 #31 - 78 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 428-507
+   Language: python
+   Preview: @mcp.tool() async def read_file(path: str, encoding: str = "utf-8",                    start_line: O...
+   ⚡ RECOMMENDATION: Break this 78-line block into smaller chunks
+
+🚨 #32 - 78 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 460-539
+   Language: python
+   Preview: @app.post("/mcp") async def handle_mcp_request(request: Request):     """     Handle MCP requests ov...
+   ⚡ RECOMMENDATION: Break this 78-line block into smaller chunks
+
+🚨 #33 - 75 lines
+   File: Session3_LangChain_MCP_Integration.md
+   Location: Lines 98-174
+   Language: python
+   Preview: # config.py import os from typing import Dict, Any, List from dataclasses import dataclass from dote...
+   ⚡ RECOMMENDATION: Break this 75-line block into smaller chunks
+
+🚨 #34 - 75 lines
+   File: Session5_Secure_MCP_Server-solution.md
+   Location: Lines 429-505
+   Language: python
+   Preview: # Additional security features you could implement:  class AdvancedThreatDetection:     """Advanced ...
+   ⚡ RECOMMENDATION: Break this 75-line block into smaller chunks
+
+🚨 #35 - 73 lines
+   File: Session0_Introduction_to_MCP_ACP_A2A.md
+   Location: Lines 277-351
+   Language: python
+   Preview: # Agent with MCP integration, ACP local coordination, and A2A communication class TravelPlannerAgent...
+   ⚡ RECOMMENDATION: Break this 73-line block into smaller chunks
+
+🚨 #36 - 69 lines
+   File: Session6_ACP_Fundamentals-solution.md
+   Location: Lines 815-885
+   Language: unknown
+   Preview: 🧪 ACP Agent Network Test Suite ================================================== ⏳ Waiting for agen...
+   ⚡ RECOMMENDATION: Break this 69-line block into smaller chunks
+
+🚨 #37 - 68 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 475-544
+   Language: python
+   Preview: # src/security/rate_limiter.py import time from typing import Optional import redis import json  cla...
+   ⚡ RECOMMENDATION: Break this 68-line block into smaller chunks
+
+🚨 #38 - 67 lines
+   File: Session6_ACP_Fundamentals-solution.md
+   Location: Lines 690-758
+   Language: python
+   Preview: import asyncio import subprocess import time import sys import signal  async def start_agent_network...
+   ⚡ RECOMMENDATION: Break this 67-line block into smaller chunks
+
+🚨 #39 - 66 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 310-377
+   Language: yaml
+   Preview: # deployments/docker-compose.yml version: '3.8'  services:   # Main MCP server   mcp-server:     bui...
+   ⚡ RECOMMENDATION: Break this 66-line block into smaller chunks
+
+🚨 #40 - 64 lines
+   File: Session1_Basic_MCP_Server.md
+   Location: Lines 365-430
+   Language: python
+   Preview: # test_client.py import subprocess import json from typing import Dict, Any  class MCPTestClient:   ...
+   ⚡ RECOMMENDATION: Break this 64-line block into smaller chunks
+
+🚨 #41 - 64 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 715-780
+   Language: python
+   Preview: @mcp.resource("fs://config") def get_server_config() -> Dict:     """Expose server configuration as ...
+   ⚡ RECOMMENDATION: Break this 64-line block into smaller chunks
+
+🚨 #42 - 64 lines
+   File: Session7_Agent_to_Agent_Communication-solution.md
+   Location: Lines 650-715
+   Language: python
+   Preview: # Additional patterns for enhanced customer service  class AdvancedServicePatterns:     """Advanced ...
+   ⚡ RECOMMENDATION: Break this 64-line block into smaller chunks
+
+🚨 #43 - 59 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 197-257
+   Language: python
+   Preview: # utils/validators.py from pathlib import Path from typing import Dict, Any import magic import hash...
+   ⚡ RECOMMENDATION: Break this 59-line block into smaller chunks
+
+🚨 #44 - 59 lines
+   File: Session3_LangChain_MCP_Integration.md
+   Location: Lines 376-436
+   Language: python
+   Preview: # mcp_servers/weather_server.py from mcp.server.fastmcp import FastMCP from datetime import datetime...
+   ⚡ RECOMMENDATION: Break this 59-line block into smaller chunks
+
+🚨 #45 - 58 lines
+   File: Session1_Basic_MCP_Server-solution.md
+   Location: Lines 55-114
+   Language: python
+   Preview: @mcp.tool() def find_warmest_city(cities: List[str]) -> Dict:     """     Find the warmest city from...
+   ⚡ RECOMMENDATION: Break this 58-line block into smaller chunks
+
+🚨 #46 - 55 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 130-186
+   Language: python
+   Preview: # utils/sandbox.py from pathlib import Path from typing import Optional import os  class SandboxErro...
+   ⚡ RECOMMENDATION: Break this 55-line block into smaller chunks
+
+🚨 #47 - 51 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 370-422
+   Language: python
+   Preview: # src/auth/api_keys.py import secrets import hashlib from datetime import datetime, timedelta from t...
+   ⚡ RECOMMENDATION: Break this 51-line block into smaller chunks
+
+🚨 #48 - 50 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 508-559
+   Language: python
+   Preview: # cloud_run_adapter.py (excerpt) from fastapi import FastAPI, Request, Response from fastapi.respons...
+   ⚡ RECOMMENDATION: Break this 50-line block into smaller chunks
+
+🚨 #49 - 50 lines
+   File: Session9_Production_Agent_Deployment-solution.md
+   Location: Lines 939-990
+   Language: python
+   Preview: # Additional production patterns  class ProductionPatterns:     """Advanced production deployment pa...
+   ⚡ RECOMMENDATION: Break this 50-line block into smaller chunks
+
+🚨 #50 - 49 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 610-660
+   Language: terraform
+   Preview: # main.tf resource "google_cloud_run_service" "mcp_server" {   name     = "mcp-server"   location = ...
+   ⚡ RECOMMENDATION: Break this 49-line block into smaller chunks
+
+🚨 #51 - 46 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 574-621
+   Language: yaml
+   Preview: # deployments/cloudbuild.yaml steps:   # Build the container image   - name: 'gcr.io/cloud-builders/...
+   ⚡ RECOMMENDATION: Break this 46-line block into smaller chunks
+
+🚨 #52 - 43 lines
+   File: Session3_LangChain_MCP_Integration-solution.md
+   Location: Lines 472-516
+   Language: python
+   Preview: # Additional tool for budget analysis async def analyze_travel_budget(destination_data: str):     ""...
+   ⚡ RECOMMENDATION: Break this 43-line block into smaller chunks
+
+🚨 #53 - 43 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 314-358
+   Language: python
+   Preview: # src/secure_mcp_server.py from mcp.server.fastmcp import FastMCP from src.auth.jwt_auth import JWTM...
+   ⚡ RECOMMENDATION: Break this 43-line block into smaller chunks
+
+🚨 #54 - 42 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 253-296
+   Language: dockerfile
+   Preview: # deployments/Dockerfile FROM python:3.11-slim  # Install system dependencies required for our appli...
+   ⚡ RECOMMENDATION: Break this 42-line block into smaller chunks
+
+🚨 #55 - 41 lines
+   File: Session2_FileSystem_MCP_Server-solution.md
+   Location: Lines 155-197
+   Language: python
+   Preview: @mcp.tool() async def move_or_copy_file(     source: str,     destination: str,     operation: str =...
+   ⚡ RECOMMENDATION: Break this 41-line block into smaller chunks
+
+🚨 #56 - 38 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 167-206
+   Language: python
+   Preview: def _monitor_tool(self, func):     """     Decorator to monitor tool execution with Prometheus metri...
+   ⚡ RECOMMENDATION: Break this 38-line block into smaller chunks
+
+🚨 #57 - 38 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 426-465
+   Language: python
+   Preview:     def validate_api_key(self, api_key: str) -> Optional[Dict]:         """Validate API key and retu...
+   ⚡ RECOMMENDATION: Break this 38-line block into smaller chunks
+
+🚨 #58 - 38 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 548-587
+   Language: python
+   Preview: class RateLimitMiddleware:     """Rate limiting middleware for MCP servers."""      def __init__(sel...
+   ⚡ RECOMMENDATION: Break this 38-line block into smaller chunks
+
+🚨 #59 - 37 lines
+   File: Session4_Production_MCP_Deployment-solution.md
+   Location: Lines 436-474
+   Language: python
+   Preview: # Bulkhead pattern for resource isolation class BulkheadCircuitBreaker(CircuitBreaker):     """Circu...
+   ⚡ RECOMMENDATION: Break this 37-line block into smaller chunks
+
+🚨 #60 - 37 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 879-917
+   Language: python
+   Preview: class CircuitBreaker:     """Circuit breaker for external service calls."""      def __init__(self, ...
+   ⚡ RECOMMENDATION: Break this 37-line block into smaller chunks
+
+🚨 #61 - 37 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 272-310
+   Language: python
+   Preview: # src/auth/middleware.py from fastapi import Request, HTTPException from fastapi.security import HTT...
+   ⚡ RECOMMENDATION: Break this 37-line block into smaller chunks
+
+🚨 #62 - 36 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 395-432
+   Language: python
+   Preview:         # Analyze results         successful_results = []         failed_results = []          for i...
+   ⚡ RECOMMENDATION: Break this 36-line block into smaller chunks
+
+🚨 #63 - 34 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 160-195
+   Language: python
+   Preview:     def _setup_tools(self):         """Set up MCP tools with decorators for monitoring."""          ...
+   ⚡ RECOMMENDATION: Break this 34-line block into smaller chunks
+
+🚨 #64 - 33 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 203-237
+   Language: python
+   Preview: # src/auth/permissions.py from enum import Enum from typing import List, Set from functools import w...
+   ⚡ RECOMMENDATION: Break this 33-line block into smaller chunks
+
+🚨 #65 - 33 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 489-523
+   Language: python
+   Preview: class WorkflowOptimizer:     """Intelligent workflow optimizer using performance data."""      def _...
+   ⚡ RECOMMENDATION: Break this 33-line block into smaller chunks
+
+🚨 #66 - 33 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 806-840
+   Language: python
+   Preview:     async def check_health(self) -> Dict[str, Any]:         """Execute all health checks and return ...
+   ⚡ RECOMMENDATION: Break this 33-line block into smaller chunks
+
+🚨 #67 - 33 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 844-878
+   Language: python
+   Preview:     async def check_readiness(self) -> Dict[str, Any]:         """Execute readiness checks and retur...
+   ⚡ RECOMMENDATION: Break this 33-line block into smaller chunks
+
+🚨 #68 - 32 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 82-115
+   Language: python
+   Preview: # config.py import os from pathlib import Path from typing import List, Set  class FileSystemConfig:...
+   ⚡ RECOMMENDATION: Break this 32-line block into smaller chunks
+
+🚨 #69 - 32 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 269-302
+   Language: python
+   Preview: # filesystem_server.py from mcp.server.fastmcp import FastMCP import aiofiles from pathlib import Pa...
+   ⚡ RECOMMENDATION: Break this 32-line block into smaller chunks
+
+🚨 #70 - 32 lines
+   File: Session3_LangChain_MCP_Integration_Improved.md
+   Location: Lines 176-209
+   Language: python
+   Preview: async def start_all_servers(self) -> Dict[str, bool]:     """Start all configured MCP servers."""   ...
+   ⚡ RECOMMENDATION: Break this 32-line block into smaller chunks
+
+🚨 #71 - 32 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 216-249
+   Language: python
+   Preview: @self.mcp.tool() async def health_check() -> Dict:     """     Comprehensive health check for load b...
+   ⚡ RECOMMENDATION: Break this 32-line block into smaller chunks
+
+🚨 #72 - 32 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 448-481
+   Language: yaml
+   Preview:   # Redis for caching   redis:     image: redis:7-alpine     ports:       - "6379:6379"     volumes:...
+   ⚡ RECOMMENDATION: Break this 32-line block into smaller chunks
+
+🚨 #73 - 32 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 95-128
+   Language: python
+   Preview:     def create_tokens(self, user_data: Dict[str, Any]) -> Dict[str, str]:         """Create access a...
+   ⚡ RECOMMENDATION: Break this 32-line block into smaller chunks
+
+🚨 #74 - 31 lines
+   File: Session3_LangChain_MCP_Integration_Improved.md
+   Location: Lines 553-585
+   Language: python
+   Preview: multi_tool_prompt = PromptTemplate.from_template(""" You are an intelligent AI assistant with access...
+   ⚡ RECOMMENDATION: Break this 31-line block into smaller chunks
+
+🚨 #75 - 31 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 163-195
+   Language: python
+   Preview:     def _is_token_blacklisted(self, token: str) -> bool:         """Check if token is in the blackli...
+   ⚡ RECOMMENDATION: Break this 31-line block into smaller chunks
+
+🚨 #76 - 31 lines
+   File: Session6_ACP_Fundamentals.md
+   Location: Lines 285-317
+   Language: python
+   Preview: # From src/session6/coordinator_agent.py async def _execute_data_analysis_workflow(self, input_data:...
+   ⚡ RECOMMENDATION: Break this 31-line block into smaller chunks
+
+🚨 #77 - 30 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 206-237
+   Language: python
+   Preview:         @self.mcp.tool()         @self._monitor_tool         async def health_check() -> Dict:      ...
+   ⚡ RECOMMENDATION: Break this 30-line block into smaller chunks
+
+🚨 #78 - 30 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 332-363
+   Language: python
+   Preview:             # Wait for tasks to complete             for step, task in execution_tasks:             ...
+   ⚡ RECOMMENDATION: Break this 30-line block into smaller chunks
+
+🚨 #79 - 29 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 96-126
+   Language: yaml
+   Preview: # k8s/redis-deployment.yaml apiVersion: apps/v1 kind: Deployment metadata:   name: redis   namespace...
+   ⚡ RECOMMENDATION: Break this 29-line block into smaller chunks
+
+🚨 #80 - 28 lines
+   File: Session3_LangChain_MCP_Integration_Improved.md
+   Location: Lines 684-713
+   Language: python
+   Preview: async def _weather_research_node(self, state: ResearchState) -> ResearchState:     """Research weath...
+   ⚡ RECOMMENDATION: Break this 28-line block into smaller chunks
+
+🚨 #81 - 28 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 97-126
+   Language: python
+   Preview: class ProductionMCPServer:     """     Production-ready MCP server with comprehensive monitoring and...
+   ⚡ RECOMMENDATION: Break this 28-line block into smaller chunks
+
+🚨 #82 - 28 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 569-598
+   Language: yaml
+   Preview: # cloudbuild.yaml steps:   # Build the container image   - name: 'gcr.io/cloud-builders/docker'     ...
+   ⚡ RECOMMENDATION: Break this 28-line block into smaller chunks
+
+🚨 #83 - 28 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 923-952
+   Language: python
+   Preview: from collections import defaultdict import time  class RateLimiter:     """Token bucket rate limiter...
+   ⚡ RECOMMENDATION: Break this 28-line block into smaller chunks
+
+🚨 #84 - 28 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 553-582
+   Language: python
+   Preview:         # Analyze step performance         step_performance = self._analyze_step_performance(workflo...
+   ⚡ RECOMMENDATION: Break this 28-line block into smaller chunks
+
+🚨 #85 - 28 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 174-203
+   Language: yaml
+   Preview:       volumes:       - name: redis-data         persistentVolumeClaim:           claimName: redis-pv...
+   ⚡ RECOMMENDATION: Break this 28-line block into smaller chunks
+
+🚨 #86 - 27 lines
+   File: Session1_Basic_MCP_Server.md
+   Location: Lines 325-353
+   Language: python
+   Preview: @mcp.tool() def save_user_preferences(user_id: str, city: str, units: str = "celsius") -> Dict:     ...
+   ⚡ RECOMMENDATION: Break this 27-line block into smaller chunks
+
+🚨 #87 - 27 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 283-311
+   Language: python
+   Preview: async def process_data(data: Dict[str, Any], operation: str = "transform") -> Dict:     """Process d...
+   ⚡ RECOMMENDATION: Break this 27-line block into smaller chunks
+
+🚨 #88 - 27 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 517-545
+   Language: yaml
+   Preview: --- apiVersion: networking.istio.io/v1beta1 kind: Gateway metadata:   name: agent-gateway   namespac...
+   ⚡ RECOMMENDATION: Break this 27-line block into smaller chunks
+
+🚨 #89 - 26 lines
+   File: Session1_Basic_MCP_Server.md
+   Location: Lines 606-633
+   Language: python
+   Preview: @mcp.tool() def find_warmest_city(cities: List[str]) -> Dict:     """Find the warmest city from a li...
+   ⚡ RECOMMENDATION: Break this 26-line block into smaller chunks
+
+🚨 #90 - 25 lines
+   File: Session3_LangChain_MCP_Integration_Improved.md
+   Location: Lines 256-282
+   Language: python
+   Preview: # From: src/session3/mcp_servers/weather_server.py  @mcp.tool() def get_current_weather(city: str, u...
+   ⚡ RECOMMENDATION: Break this 25-line block into smaller chunks
+
+🚨 #91 - 25 lines
+   File: Session3_LangChain_MCP_Integration_Improved.md
+   Location: Lines 330-356
+   Language: python
+   Preview: async def initialize(self) -> bool:     """Initialize the agent with LLM and tools."""     try:     ...
+   ⚡ RECOMMENDATION: Break this 25-line block into smaller chunks
+
+🚨 #92 - 25 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 716-742
+   Language: python
+   Preview: async def check_all_servers(self, session: aiohttp.ClientSession) -> List[ServerHealthStatus]:     "...
+   ⚡ RECOMMENDATION: Break this 25-line block into smaller chunks
+
+🚨 #93 - 25 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 47-73
+   Language: python
+   Preview: # src/auth/jwt_auth.py import jwt import bcrypt from datetime import datetime, timedelta, timezone f...
+   ⚡ RECOMMENDATION: Break this 25-line block into smaller chunks
+
+🚨 #94 - 25 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 641-667
+   Language: python
+   Preview:         self.mcp_tool_calls = Counter(             'mcp_tool_calls_total',             'Total MCP to...
+   ⚡ RECOMMENDATION: Break this 25-line block into smaller chunks
+
+🚨 #95 - 24 lines
+   File: Session0_Introduction_to_MCP_ACP_A2A.md
+   Location: Lines 134-159
+   Language: python
+   Preview: # ACP Agent Registration class LocalAgent:     def __init__(self, name, capabilities):         self....
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #96 - 24 lines
+   File: Session0_Introduction_to_MCP_ACP_A2A.md
+   Location: Lines 198-223
+   Language: mermaid
+   Preview: graph TB     subgraph "Organization A"         A1[Travel Agent]         A2[Payment Agent]     end   ...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #97 - 24 lines
+   File: Session3_LangChain_MCP_Integration_Improved.md
+   Location: Lines 360-385
+   Language: python
+   Preview: async def _convert_mcp_tools(self, adapter: MCPAdapter) -> List[Tool]:     """Convert MCP tools to L...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #98 - 24 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 276-301
+   Language: python
+   Preview:     async def _execute_workflow_internal(self, context: ExecutionContext) -> Dict[str, Any]:        ...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #99 - 24 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 442-467
+   Language: python
+   Preview: # workflows/optimizer.py import asyncio from typing import Dict, List, Any, Optional from dataclasse...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #100 - 24 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 639-664
+   Language: python
+   Preview:     def _identify_bottlenecks(self, step_performance: Dict[str, Dict[str, float]]) -> List[str]:    ...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #101 - 24 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 318-343
+   Language: yaml
+   Preview:         livenessProbe:           httpGet:             path: /health             port: 8080          ...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #102 - 24 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 459-484
+   Language: yaml
+   Preview: # k8s/istio-config.yaml apiVersion: networking.istio.io/v1beta1 kind: VirtualService metadata:   nam...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #103 - 24 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 488-513
+   Language: yaml
+   Preview: --- apiVersion: networking.istio.io/v1beta1 kind: DestinationRule metadata:   name: mcp-agent-dr   n...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #104 - 24 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 583-608
+   Language: python
+   Preview:     def _initialize_metrics(self):         """Initialize all Prometheus metrics."""          # Syste...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #105 - 24 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 612-637
+   Language: python
+   Preview:         # Agent-specific metrics         self.active_workflows = Gauge(             'active_workflow...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #106 - 24 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 777-802
+   Language: python
+   Preview: # monitoring/health_checker.py import asyncio import time from typing import Dict, Any, List, Callab...
+   ⚡ RECOMMENDATION: Break this 24-line block into smaller chunks
+
+🚨 #107 - 23 lines
+   File: Session0_Introduction_to_MCP_ACP_A2A.md
+   Location: Lines 535-559
+   Language: json
+   Preview: {   "servers": {     "weather": {       "command": "python",       "args": ["weather_server.py"],   ...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #108 - 23 lines
+   File: Session1_Basic_MCP_Server.md
+   Location: Lines 255-279
+   Language: python
+   Preview: @mcp.resource("weather://cities/available") def get_available_cities() -> Dict:     """Get list of c...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #109 - 23 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 404-428
+   Language: python
+   Preview: # src/cloud_run_adapter.py from fastapi import FastAPI, Request, Response from fastapi.responses imp...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #110 - 23 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 432-456
+   Language: python
+   Preview: @app.on_event("startup") async def startup_event():     """     Initialize server on startup.      C...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #111 - 23 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 71-95
+   Language: python
+   Preview: # From: src/session4/production_mcp_server.py  import os import logging import json import time impo...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #112 - 23 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 105-129
+   Language: python
+   Preview: # Prometheus metrics - comprehensive observability request_count = Counter(     'mcp_requests_total'...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #113 - 23 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 816-840
+   Language: bash
+   Preview: #!/bin/bash # deploy.sh - Zero-downtime deployment script  # Build new version docker build -t mcp-s...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #114 - 23 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 956-980
+   Language: python
+   Preview: from pydantic import BaseModel, validator from typing import Dict, Any  class ProcessDataRequest(Bas...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #115 - 23 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 247-271
+   Language: yaml
+   Preview:         ports:         - containerPort: 8080           name: http         - containerPort: 8081     ...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #116 - 23 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 555-579
+   Language: python
+   Preview: # monitoring/agent_metrics.py import time import asyncio from typing import Dict, Any, Optional from...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #117 - 23 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 671-695
+   Language: python
+   Preview:         # Resource metrics         self.memory_usage = Gauge(             'memory_usage_bytes',     ...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #118 - 23 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 958-982
+   Language: yaml
+   Preview: # monitoring/alerts/system.yml groups: - name: system   rules:   - alert: HighCPUUsage     expr: cpu...
+   ⚡ RECOMMENDATION: Break this 23-line block into smaller chunks
+
+🚨 #119 - 22 lines
+   File: Session1_Basic_MCP_Server.md
+   Location: Lines 291-314
+   Language: python
+   Preview: @mcp.prompt() def weather_report_prompt(city: str = "London") -> str:     """Generate a weather repo...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #120 - 22 lines
+   File: Session2_FileSystem_MCP_Server.md
+   Location: Lines 878-901
+   Language: python
+   Preview: @mcp.tool() async def move_file(source: str, destination: str, overwrite: bool = False) -> Dict:    ...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #121 - 22 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 46-69
+   Language: python
+   Preview: # src/production_mcp_server.py import os import logging import json from datetime import datetime fr...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #122 - 22 lines
+   File: Session4_Production_MCP_Deployment.md
+   Location: Lines 543-566
+   Language: python
+   Preview: @app.get("/health") async def health_check():     """Health check endpoint for Cloud Run."""     try...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #123 - 22 lines
+   File: Session5_Secure_MCP_Server.md
+   Location: Lines 241-264
+   Language: python
+   Preview: def require_permission(required_permission: Permission):     """Decorator to require specific permis...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #124 - 22 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 305-328
+   Language: python
+   Preview:             # Execute ready steps with appropriate pattern             execution_tasks = []         ...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #125 - 22 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 588-611
+   Language: python
+   Preview:     async def generate_optimization_recommendations(self,                                           ...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #126 - 22 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 275-298
+   Language: yaml
+   Preview:         - name: API_KEY           valueFrom:             secretKeyRef:               name: agent-sec...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #127 - 22 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 363-386
+   Language: yaml
+   Preview: --- apiVersion: v1 kind: Service metadata:   name: mcp-agent-service   namespace: agent-system   lab...
+   ⚡ RECOMMENDATION: Break this 22-line block into smaller chunks
+
+🚨 #128 - 21 lines
+   File: Session0_Introduction_to_MCP_ACP_A2A.md
+   Location: Lines 237-259
+   Language: json
+   Preview: {   "agent": {     "name": "flight_search_agent",     "version": "1.0",     "capabilities": [       ...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+🚨 #129 - 21 lines
+   File: Session3_LangChain_MCP_Integration.md
+   Location: Lines 70-92
+   Language: unknown
+   Preview: langchain-mcp-integration/ ├── mcp_servers/           # Our MCP server implementations │   ├── weath...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+🚨 #130 - 21 lines
+   File: Session3_LangChain_MCP_Integration_Improved.md
+   Location: Lines 500-522
+   Language: python
+   Preview: async def _collect_all_tools(self) -> List[Tool]:     """Collect tools from all available MCP server...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+🚨 #131 - 21 lines
+   File: Session3_LangChain_MCP_Integration_Improved.md
+   Location: Lines 717-739
+   Language: python
+   Preview: from langgraph.graph import StateGraph, END  async def build_workflow(self) -> StateGraph:     """Bu...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+🚨 #132 - 21 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 416-438
+   Language: yaml
+   Preview: # docker-compose.yml version: '3.8'  services:   # Main MCP server   mcp-server:     build:       co...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+🚨 #133 - 21 lines
+   File: Session4_Production_MCP_Deployment_Complete.md
+   Location: Lines 784-806
+   Language: yaml
+   Preview: # prometheus_rules.yml groups:   - name: mcp_server_alerts     rules:       - alert: MCPServerDown  ...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+🚨 #134 - 21 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 369-391
+   Language: python
+   Preview:     async def _execute_parallel_step(self, step: WorkflowStep,                                    co...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+🚨 #135 - 21 lines
+   File: Session8_Advanced_Agent_Workflows.md
+   Location: Lines 527-549
+   Language: python
+   Preview:     async def analyze_workflow_performance(self, workflow: AdvancedWorkflow,                        ...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+🚨 #136 - 21 lines
+   File: Session9_Production_Agent_Deployment.md
+   Location: Lines 884-906
+   Language: yaml
+   Preview: # monitoring/prometheus.yml global:   scrape_interval: 15s   evaluation_interval: 15s   external_lab...
+   ⚡ RECOMMENDATION: Break this 21-line block into smaller chunks
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+🔧 IMMEDIATE ACTION REQUIRED:
+   - 136 code blocks exceed 20 lines
+   - These blocks should be broken into smaller, focused examples
+   - Consider splitting into:
+     • Conceptual examples (5-10 lines)
+     • Implementation chunks (10-15 lines)
+     • Complete examples (separate files with references)
+
+📂 FILES NEEDING MOST ATTENTION:
+   • Session9_Production_Agent_Deployment.md: 19 long blocks
+   • Session4_Production_MCP_Deployment.md: 16 long blocks
+   • Session4_Production_MCP_Deployment_Complete.md: 16 long blocks
+   • Session5_Secure_MCP_Server.md: 11 long blocks
+   • Session8_Advanced_Agent_Workflows.md: 11 long blocks
+   • Session2_FileSystem_MCP_Server.md: 10 long blocks
+   • Session3_LangChain_MCP_Integration_Improved.md: 8 long blocks
+   • Session3_LangChain_MCP_Integration.md: 7 long blocks
+   • Session6_ACP_Fundamentals-solution.md: 7 long blocks
+   • Session7_Agent_to_Agent_Communication.md: 5 long blocks
+   • Session0_Introduction_to_MCP_ACP_A2A.md: 5 long blocks
+   • Session1_Basic_MCP_Server.md: 5 long blocks
+   • Session9_Production_Agent_Deployment-solution.md: 2 long blocks
+   • Session8_Advanced_Agent_Workflows-solution.md: 2 long blocks
+   • Session7_Agent_to_Agent_Communication-solution.md: 2 long blocks
+   • Session3_LangChain_MCP_Integration-solution.md: 2 long blocks
+   • Session4_Production_MCP_Deployment-solution.md: 2 long blocks
+   • Session5_Secure_MCP_Server-solution.md: 2 long blocks
+   • Session2_FileSystem_MCP_Server-solution.md: 2 long blocks
+   • Session1_Basic_MCP_Server-solution.md: 1 long blocks
+   • Session6_ACP_Fundamentals.md: 1 long blocks
+
+💡 BEST PRACTICES FOR CODE BLOCKS:
+   • Keep examples focused on single concepts
+   • Use progressive disclosure (simple → complex)
+   • Include comments explaining key concepts
+   • Reference complete examples in separate files
+   • Break long examples into logical steps

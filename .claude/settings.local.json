@@ -33,7 +33,8 @@
       "Bash(__NEW_LINE__ echo -e \"\\nChecking if ''View Test Solutions'' link is present:\")",
       "Bash(if grep -q \"View Test Solutions\" /Users/q284340/Agentic/nano-degree/01_frameworks/Session8_Agno_Production_Ready_Agents.md)",
       "Bash(__NEW_LINE__ echo \"🧹 Cleaning up backup files...\")",
-      "Bash(__NEW_LINE__ echo \"✅ All test format fixes completed successfully!\")"
+      "Bash(__NEW_LINE__ echo \"✅ All test format fixes completed successfully!\")",
+      "Bash(do echo \"=== $session ===\")"
     ],
     "deny": []
   }

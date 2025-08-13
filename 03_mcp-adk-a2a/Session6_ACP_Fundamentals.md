@@ -559,50 +559,22 @@ In the next session, you'll learn how these local ACP agents can communicate wit
 
 ---
 
-## Knowledge Check: Multiple Choice Quiz
+## 📋 Test Your Knowledge
 
-### Question 1
-What is the main advantage of ACP's local-first design?
+Ready to test your understanding of ACP Fundamentals? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
 
-A) Better security through encryption
-B) Agents can work without internet connectivity  
-C) Faster model inference
-D) Automatic load balancing
+### Multiple Choice Test
+Test your knowledge with 10 carefully crafted questions covering:
+- Local-first agent coordination principles
+- ACP architecture and design patterns
+- Agent capability declaration and discovery
+- Coordinator pattern implementation
+- Service registration and metadata management
 
-### Question 2
-How many standard endpoints must every ACP agent implement?
+**[📝 Take the Test - Session 6 Test Solutions](Session6_Test_Solutions.md)**
 
-A) 2 endpoints
-B) 3 endpoints
-C) 4 endpoints (/metadata, /communicate, /discover, /status)
-D) 5 endpoints
-
-### Question 3
-In the coordinator pattern, what does the coordinator agent primarily do?
-
-A) Process all data itself
-B) Discover and orchestrate other agents to complete workflows
-C) Store data for other agents
-D) Provide security authentication
-
-### Question 4
-What information is included in an AgentCapability definition?
-
-A) Only the capability name
-B) Name, description, input schema, and output schema
-C) Just the input and output types
-D) Only the description
-
-### Question 5
-How do agents discover each other in the ACP network?
-
-A) Through cloud-based directories
-B) Using DNS service discovery
-C) Via local registries and embedded metadata
-D) Through manual configuration only
+*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
 
 ---
-
-**Answers:** 1-B, 2-C, 3-B, 4-B, 5-C
 
 *Ready to explore cross-platform agent collaboration? Continue to Session 7: Agent-to-Agent Communication (A2A)!*

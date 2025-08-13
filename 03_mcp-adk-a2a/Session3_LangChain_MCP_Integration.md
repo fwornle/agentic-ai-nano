@@ -1307,6 +1307,24 @@ In Session 4, we'll focus on **Production MCP Deployment** including:
 
 ---
 
+## 📋 Test Your Knowledge
+
+Ready to test your understanding of LangChain MCP Integration? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+
+### Multiple Choice Test
+Test your knowledge with 10 carefully crafted questions covering:
+- LangChain MCP integration concepts
+- ReAct pattern implementation
+- Multi-server management strategies
+- Error handling and fault tolerance
+- LangGraph workflow orchestration
+
+**[📝 Take the Test - Session 3 Test Solutions](Session3_Test_Solutions.md)**
+
+*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+
+---
+
 ## Additional Resources
 
 - [LangChain MCP Adapters Documentation](https://python.langchain.com/docs/integrations/providers/mcp)

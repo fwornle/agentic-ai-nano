@@ -773,6 +773,24 @@ In Session 9, we'll explore **Production Agent Deployment** including:
 
 ---
 
+## 📋 Test Your Knowledge
+
+Ready to test your understanding of Advanced Agent Workflows? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+
+### Multiple Choice Test
+Test your knowledge with 10 carefully crafted questions covering:
+- Complex workflow patterns (parallel, conditional, hybrid)
+- Adaptive optimization and performance tuning
+- Fault recovery and compensation mechanisms
+- Resource management and allocation strategies
+- Workflow monitoring and observability
+
+**[📝 Take the Test - Session 8 Test Solutions](Session8_Test_Solutions.md)**
+
+*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+
+---
+
 ## Additional Resources
 
 - [Workflow Orchestration Patterns](https://example.com/workflow-patterns)
