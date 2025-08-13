@@ -34,7 +34,6 @@ LangChain follows a **modular, composable architecture** where components can be
 
 ```text
 Input → Fixed Logic → Output
-
 ```
 
 **Modern LangChain Approach (2025):**
@@ -43,7 +42,6 @@ Input → Fixed Logic → Output
 Input → LangGraph Orchestration → Multi-Agent Coordination → Dynamic Output
        ↑                        ↑                        ↑
    Stateful Workflows    Context Sharing       Persistent Memory
-
 ```
 
 ### Step 1.1: Core Components Overview
@@ -51,24 +49,18 @@ Input → LangGraph Orchestration → Multi-Agent Coordination → Dynamic Outpu
 LangChain has four essential building blocks:
 
 ```python
-
 # From src/session2/langchain_basics.py - Core imports
-
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import Tool, initialize_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.callbacks import StdOutCallbackHandler
-
 ```
 
 **Why These Four?**
 
 - **LLMs**: The "brain" that makes decisions
-
 - **Tools**: The "hands" that interact with the world
-
 - **Memory**: The "context" that maintains conversation state
-
 - **Agents**: The "orchestrator" that coordinates everything
 
 #### **1. Language Models (LLMs)**
@@ -80,9 +72,7 @@ LangChain provides unified interfaces for different LLM providers:
 The factory pattern allows us to create different LLM instances through a unified interface. This is particularly valuable when you need to switch between providers without changing your agent code.
 
 ```python
-
 # src/session2/llm_setup.py
-
 from langchain.chat_models import ChatOpenAI, ChatAnthropic
 from langchain.llms import OpenAI
 import os
@@ -93,7 +83,6 @@ class LLMFactory:
     @staticmethod
     def create_llm(provider: str, **kwargs):
         """Create LLM instance based on provider"""
-
 ```
 
 **OpenAI Provider Configuration:**
@@ -107,7 +96,6 @@ The OpenAI integration is the most commonly used option, supporting GPT-3.5 and 
                 temperature=kwargs.get("temperature", 0.7),
                 openai_api_key=os.getenv("OPENAI_API_KEY")
             )
-
 ```
 
 **Anthropic Provider Configuration:**
@@ -121,7 +109,6 @@ Anthropic's Claude models offer strong reasoning capabilities and are configured
                 temperature=kwargs.get("temperature", 0.7),
                 anthropic_api_key=os.getenv("ANTHROPIC_API_KEY")
             )
-
 ```
 
 **Error Handling and Usage:**
@@ -133,9 +120,7 @@ The factory includes validation and provides a simple interface for creating LLM
             raise ValueError(f"Unsupported provider: {provider}")
 
 # Usage example - easy switching between providers
-
 llm = LLMFactory.create_llm("openai", temperature=0.1)
-
 ```
 
 #### **2. Tools and Tool Integration**
@@ -147,9 +132,7 @@ LangChain's tool system provides standardized interfaces:
 LangChain provides multiple approaches for creating tools. Here are the essential imports for tool development:
 
 ```python
-
 # src/session2/langchain_tools.py
-
 from langchain.tools import BaseTool, StructuredTool, tool
 from langchain.tools.file_management import ReadFileTool, WriteFileTool
 from langchain.tools import DuckDuckGoSearchResults
@@ -158,7 +141,6 @@ from pydantic import BaseModel, Field
 import requests
 import json
 import math
-
 ```
 
 #### Method 1: Inheriting from BaseTool
@@ -182,7 +164,6 @@ The `_run` method contains the core functionality. Note the safe evaluation appr
         """Execute the tool"""
         try:
             # Safe evaluation of mathematical expressions
-
             allowed_names = {
                 k: v for k, v in math.__dict__.items() if not k.startswith("__")
             }
@@ -192,7 +173,6 @@ The `_run` method contains the core functionality. Note the safe evaluation appr
             return f"Result: {result}"
         except Exception as e:
             return f"Error: {str(e)}"
-
 ```
 
 **Async Support:**

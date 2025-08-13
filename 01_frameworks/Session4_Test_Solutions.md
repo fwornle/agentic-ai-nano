@@ -3,6 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: CrewAI's Distinctive Approach
+
 **What distinguishes CrewAI's approach from other multi-agent frameworks?**
 
 A) Better performance  
@@ -15,6 +16,7 @@ D) Simpler syntax
 ---
 
 ### Question 2: Delegation Parameter Purpose
+
 **In CrewAI, what is the purpose of the `allow_delegation` parameter?**
 
 A) Performance optimization  
@@ -27,6 +29,7 @@ D) Resource management
 ---
 
 ### Question 3: Hierarchical Process Type
+
 **Which CrewAI process type enables hierarchical team management?**
 
 A) Process.sequential  
@@ -39,6 +42,7 @@ D) Process.distributed
 ---
 
 ### Question 4: Task Context Role
+
 **What is the role of context in CrewAI tasks?**
 
 A) Memory optimization  
@@ -51,6 +55,7 @@ D) Performance monitoring
 ---
 
 ### Question 5: Agent Collaboration Mechanism
+
 **How does CrewAI handle agent collaboration?**
 
 A) Direct message passing  
@@ -75,30 +80,35 @@ D) External database
 ## 📚 Key Concepts Review
 
 ### CrewAI Core Philosophy
+
 1. **Role-Based Teams**: Agents with specific roles, goals, and backstories
 2. **Hierarchical Structure**: Clear management and worker relationships
 3. **Task Dependencies**: Context-driven information flow between tasks
 4. **Delegation**: Intelligent task distribution among team members
 
 ### Process Types and Coordination
+
 - **Sequential**: Step-by-step task execution with context passing
 - **Parallel**: Concurrent execution of independent tasks
 - **Hierarchical**: Manager-worker relationships with oversight
 - **Task Context**: Defines dependencies and information flow
 
 ### Collaboration Mechanisms
+
 - **Shared Memory**: Common knowledge base accessible to all agents
 - **Task Context**: Structured information passing between workflow steps
 - **Delegation**: Dynamic task reassignment based on agent capabilities
 - **Role Specialization**: Agents optimized for specific domain expertise
 
 ### Enterprise Applications
+
 - **Content Creation Teams**: Writers, editors, and reviewers
 - **Research Teams**: Analysts, researchers, and synthesizers
 - **Development Teams**: Architects, developers, and testers
 - **Marketing Teams**: Strategists, creators, and analysts
 
 ### Production Features
+
 - **Error Handling**: Graceful failure recovery with task reassignment
 - **Performance Monitoring**: Team productivity and task completion metrics
 - **Scalability**: Dynamic team sizing based on workload
@@ -107,6 +117,7 @@ D) External database
 ---
 
 ## Answer Summary
+
 1. B  2. B  3. C  4. B  5. B
 
 ---

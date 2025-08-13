@@ -3,6 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: Foundation Benefits
+
 **What is the primary benefit of implementing agents from scratch before using frameworks?**
 
 A) Better performance  
@@ -15,6 +16,7 @@ D) Lower resource usage
 ---
 
 ### Question 2: BaseAgent Architecture
+
 **In the BaseAgent class, what is the purpose of the conversation_history attribute?**
 
 A) Tool execution logs  
@@ -27,6 +29,7 @@ D) Performance monitoring
 ---
 
 ### Question 3: Abstract Method Requirements
+
 **Which method must be implemented by all subclasses of BaseAgent?**
 
 A) process_message()  
@@ -39,6 +42,7 @@ D) get_available_tools()
 ---
 
 ### Question 4: Tool Interface Design
+
 **How does the Tool abstract base class ensure consistency across different tool implementations?**
 
 A) By providing default implementations  
@@ -51,6 +55,7 @@ D) By managing tool state
 ---
 
 ### Question 5: Design Pattern Recognition
+
 **What design pattern is demonstrated by the BaseAgent and its subclasses?**
 
 A) Factory Pattern  
@@ -63,6 +68,7 @@ D) Strategy Pattern
 ---
 
 ### Question 6: Reflection Loop Control
+
 **In the ReflectionAgent, when does the reflection loop terminate?**
 
 A) After a fixed number of iterations  
@@ -75,6 +81,7 @@ D) When no improvements are detected
 ---
 
 ### Question 7: Reflection History Storage
+
 **What information is stored in the reflection_history?**
 
 A) Only the final improved responses  
@@ -87,6 +94,7 @@ D) Performance metrics only
 ---
 
 ### Question 8: Reflection Pattern Benefits
+
 **What is the main advantage of the reflection pattern?**
 
 A) Faster response generation  
@@ -99,6 +107,7 @@ D) Simplified implementation
 ---
 
 ### Question 9: Tool Need Detection
+
 **How does the ToolUseAgent determine if tools are needed for a given message?**
 
 A) By analyzing message keywords  
@@ -111,6 +120,7 @@ D) By checking message length
 ---
 
 ### Question 10: Tool Failure Handling
+
 **What happens if a tool execution fails in the ToolUseAgent?**
 
 A) The agent stops processing  
@@ -123,6 +133,7 @@ D) A default response is returned
 ---
 
 ### Question 11: Tool Usage Tracking
+
 **What information is tracked in tool_usage_history?**
 
 A) Only successful tool executions  
@@ -135,6 +146,7 @@ D) Error logs only
 ---
 
 ### Question 12: ReAct Step Structure
+
 **What does each ReActStep contain?**
 
 A) Only the action and result  
@@ -147,6 +159,7 @@ D) Performance metrics
 ---
 
 ### Question 13: ReAct Termination Conditions
+
 **When does the ReAct loop terminate?**
 
 A) After a fixed number of steps  
@@ -159,6 +172,7 @@ D) Both a and b ✅
 ---
 
 ### Question 14: ReAct Pattern Advantage
+
 **What is the primary benefit of the ReAct pattern?**
 
 A) Faster execution  
@@ -171,6 +185,7 @@ D) Simpler implementation
 ---
 
 ### Question 15: Multi-Agent Coordination
+
 **What is the role of the AgentCoordinator in the multi-agent system?**
 
 A) To execute all agent logic  
@@ -195,24 +210,28 @@ D) To monitor performance
 ## 📚 Key Concepts Review
 
 ### Core Agent Architecture
+
 1. **BaseAgent**: Template method pattern with abstract _generate_response()
 2. **Conversation History**: Context maintenance across interactions
 3. **Tool Interface**: Consistent execute() and _get_parameters() methods
 4. **Error Handling**: Graceful failure recovery with informative feedback
 
 ### Agent Pattern Implementation
+
 - **Reflection**: Generate → Reflect → Refine cycle with satisfaction termination
 - **Tool Use**: LLM-driven tool selection with comprehensive usage tracking
 - **ReAct**: Transparent thought-action-observation loops with dual termination
 - **Multi-Agent**: Coordinator-based message routing and collaboration
 
 ### Design Principles
+
 - **Abstraction**: Clear separation between interface and implementation
 - **Extensibility**: Easy addition of new tools and agent types
 - **Transparency**: Complete reasoning and execution history tracking
 - **Reliability**: Robust error handling and state management
 
 ### Testing Strategies
+
 - **Mock LLM**: Deterministic testing without API dependencies
 - **Pattern Verification**: Ensure each agent follows its intended pattern
 - **Integration Testing**: Multi-agent coordination and tool interaction
@@ -221,6 +240,7 @@ D) To monitor performance
 ---
 
 ## Answer Summary
+
 1. B  2. C  3. C  4. B  5. C  6. B  7. B  8. C  9. C  10. B  11. C  12. B  13. D  14. B  15. B
 
 ---

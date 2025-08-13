@@ -3,6 +3,7 @@
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
+
 - **Understand** the fundamental architecture of intelligent agents
 - **Build** agents from scratch using pure Python (no frameworks)
 - **Implement** the five core agentic patterns: Reflection, Tool Use, ReAct, Planning, and Multi-Agent
@@ -24,25 +25,23 @@ In this session, we'll implement intelligent agents using pure Python, starting 
 ### What Makes an Agent "Intelligent"?
 
 Traditional programs follow predetermined paths:
-```
 
+```text
 User Input → Fixed Logic → Predetermined Output
 ```
 
-
 Intelligent agents adapt their behavior:
-```
 
+```text
 Goal → Reasoning → Action → Observation → Adapt → Repeat
 ```
-
 
 ### Core Agent Components
 
 Every intelligent agent needs five essential components:
 
 1. **Memory**: Context from previous interactions
-2. **Reasoning**: Decision-making capabilities  
+2. **Reasoning**: Decision-making capabilities
 3. **Tools**: Ways to interact with the external world
 4. **Communication**: Structured message handling
 5. **Learning**: Ability to improve over time
@@ -72,7 +71,6 @@ class AgentMessage:
     timestamp: datetime       # When it was sent
     metadata: Dict[str, Any]  # Additional context
 ```
-
 
 **Why This Structure?** Standard message formats enable agents to understand each other, track conversations, and handle different types of interactions.
 
@@ -128,8 +126,8 @@ Every tool must implement `execute()`. It's async to handle I/O operations (API 
 
 The schema system allows agents to discover available tools and understand what parameters each tool expects - essential for dynamic tool selection.
 
-
 **Key Design Decisions:**
+
 - **Abstract base class**: Ensures all tools have consistent interfaces
 - **Schema method**: Allows agents to discover what tools can do
 - **Async execution**: Supports tools that make network calls or I/O operations
@@ -181,8 +179,8 @@ class BaseAgent:
         self.logger = logging.getLogger(f"agent.{self.name}")
 ```
 
-
 **Why This Design?**
+
 - **Unique ID**: Enables tracking and routing in multi-agent systems
 - **Tool dictionary**: Fast lookup by tool name
 - **Conversation history**: Maintains context across interactions
@@ -193,6 +191,7 @@ class BaseAgent:
 Every agent needs to process messages consistently. Let's build this step by step:
 
 **Core Message Processing Method:**
+
 ```python
 # From src/session1/base_agent.py (continued)
 async def process_message(self, message: str, context: Optional[Dict] = None) -> str:
@@ -207,10 +206,10 @@ async def process_message(self, message: str, context: Optional[Dict] = None) ->
     return response
 ```
 
-
 **Why Break Into Steps?** Each step has a single responsibility, making the code easier to test and debug.
 
 **Step 1 - Store User Message:**
+
 ```python
 def _store_user_message(self, message: str, context: Optional[Dict]):
     """Store incoming user message with timestamp"""
@@ -222,8 +221,8 @@ def _store_user_message(self, message: str, context: Optional[Dict]):
     })
 ```
 
-
 **Step 2 - Abstract Response Generation:**
+
 ```python
 @abstractmethod
 async def _generate_response(self, message: str, context: Optional[Dict] = None) -> str:
@@ -231,8 +230,8 @@ async def _generate_response(self, message: str, context: Optional[Dict] = None)
     pass
 ```
 
-
 **Step 3 - Store Agent Response:**
+
 ```python
 def _store_agent_response(self, response: str):
     """Store agent response with timestamp"""
@@ -242,7 +241,6 @@ def _store_agent_response(self, response: str):
         "timestamp": datetime.now()
     })
 ```
-
 
 **The Template Method Pattern:** `process_message()` defines the structure, while `_generate_response()` is customized by each agent type.
 
@@ -263,7 +261,6 @@ def get_available_tools(self) -> List[Dict[str, Any]]:
     """Return list of available tool schemas"""
     return [tool.get_schema() for tool in self.tools.values()]
 ```
-
 
 **Tool Addition and Discovery:** These methods let agents dynamically manage their capabilities. The `add_tool()` method registers new tools, while `get_available_tools()` provides a catalog of what the agent can do.
 
@@ -286,7 +283,6 @@ async def execute_tool(self, tool_name: str, **kwargs) -> Dict[str, Any]:
         return {"success": False, "error": str(e)}
 ```
 
-
 **Error Handling Strategy:** Tools can fail, so we always return success/failure status rather than throwing exceptions that would crash the agent.
 
 **Core Imports and Data Structures:**
@@ -302,7 +298,6 @@ from datetime import datetime
 import uuid
 ```
 
-
 **Standard Message Format:**
 
 ```python
@@ -317,7 +312,6 @@ class AgentMessage:
     timestamp: datetime
     metadata: Dict[str, Any]
 ```
-
 
 **Message Design:** This dataclass defines how agents communicate. Each message has an ID for tracking, sender/recipient for routing, content for the actual data, and metadata for additional context.
 
@@ -337,7 +331,6 @@ class Tool(ABC):
         pass
 ```
 
-
 **Tool Discovery Schema:**
 
 ```python
@@ -354,7 +347,6 @@ class Tool(ABC):
         """Return parameter schema for this tool"""
         pass
 ```
-
 
 **Schema Pattern:** Tools self-describe their capabilities through JSON schemas, enabling dynamic discovery and validation.
 
@@ -381,7 +373,6 @@ class BaseAgent:
         self.conversation_history = []
         self.logger = logging.getLogger(f"agent.{self.name}")
 ```
-
 
 **Message Processing Methods:**
 
@@ -425,7 +416,6 @@ class BaseAgent:
         })
 ```
 
-
 **Abstract Response Generation:**
 
 ```python
@@ -434,7 +424,6 @@ class BaseAgent:
         """Generate response - implemented by specific agent types"""
         pass
 ```
-
 
 ---
 
@@ -445,18 +434,16 @@ class BaseAgent:
 The Reflection pattern enables agents to critique and improve their own responses through iterative self-evaluation.
 
 **Traditional Approach:**
-```
 
+```text
 Question → Generate Answer → Return Answer
 ```
 
-
 **Reflection Approach:**
-```
 
+```text
 Question → Initial Answer → Critique → Improve → Critique → Improve → Final Answer
 ```
-
 
 ### Step 3.1: Reflection Agent Structure
 
@@ -475,7 +462,6 @@ class ReflectionAgent(BaseAgent):
         self.max_iterations = max_iterations  # Prevent infinite loops
         self.reflection_history = []          # Track improvement process
 ```
-
 
 **Why Limit Iterations?** Without a maximum, the agent could get stuck in endless self-improvement loops.
 
@@ -524,7 +510,6 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
     return current_response
 ```
 
-
 **The Reflection Cycle:** Initial → Critique → Improve → Evaluate → Repeat (if needed)
 
 ### Step 3.3: Initial Response Generation
@@ -545,7 +530,6 @@ async def _initial_response(self, message: str, context: Dict = None) -> str:
     response = await self._call_llm(prompt)
     return response
 ```
-
 
 **Design Choice:** Keep the initial response focused on accuracy rather than perfection.
 
@@ -590,7 +574,6 @@ async def _reflect_on_response(self, original_message: str, response: str) -> st
     return critique
 ```
 
-
 **Why These Five Criteria?** They cover the most important aspects of response quality that can be objectively evaluated.
 
 ### Step 3.5: Response Improvement
@@ -617,7 +600,6 @@ async def _improve_response(self, message: str, current_response: str, critique:
     return improved
 ```
 
-
 **Satisfaction Check:**
 
 ```python
@@ -625,7 +607,6 @@ def _is_response_satisfactory(self, critique: str) -> bool:
     """Determine if response is satisfactory based on critique"""
     return "SATISFACTORY" in critique.upper()
 ```
-
 
 **Stopping Condition:** When the critique says "SATISFACTORY", the agent knows it's done improving.
 
@@ -648,7 +629,6 @@ def _track_reflection(self, iteration: int, original: str, critique: str, improv
     })
 ```
 
-
 **Reflection Analytics:**
 
 ```python
@@ -665,7 +645,6 @@ def get_reflection_summary(self) -> Dict:
         "recent_reflections": self.reflection_history[-5:]  # Last 5
     }
 ```
-
 
 **Why Track History?** Understanding how often and why the agent improves its responses helps optimize the reflection process.
 
@@ -685,11 +664,11 @@ async def _call_llm(self, prompt: str) -> str:
         return f"Simulated response to: {prompt[:50]}..."
 ```
 
-
 **Flexible Design:** The agent works with any LLM client that has a `chat()` method, and provides fallback for testing.
 
 **Real-World Example:**
 When you ask "What's the capital of France?", a reflection agent might:
+
 1. **Initial response:** "Paris is the capital of France."
 2. **Critique:** "Response is accurate but could include more context."
 3. **Improved response:** "Paris is the capital and largest city of France, located in the north-central part of the country."
@@ -706,20 +685,18 @@ When you ask "What's the capital of France?", a reflection agent might:
 The Tool Use pattern enables agents to extend their capabilities by integrating with external systems, APIs, and functions.
 
 **Without Tools:**
-```
 
+```text
 User: "What's the weather in London?"
 Agent: "I don't have access to current weather data."
 ```
 
-
 **With Tools:**
-```
 
+```text
 User: "What's the weather in London?"
 Agent: [Uses weather API] "It's currently 15°C and cloudy in London."
 ```
-
 
 ### Step 4.1: Creating Useful Tools
 
@@ -770,7 +747,6 @@ class CalculatorTool(Tool):
             return {"expression": expression, "error": str(e)}
 ```
 
-
 **Why Safe Evaluation?** Using `eval()` with restricted builtins prevents code injection while allowing mathematical operations.
 
 **Web Search Tool - External API Integration:**
@@ -786,7 +762,6 @@ class WebSearchTool(Tool):
         super().__init__("web_search", "Search the web for information")
         self.api_key = api_key
 ```
-
 
 **Search Execution (Simulated):**
 
@@ -805,7 +780,6 @@ class WebSearchTool(Tool):
         }
 ```
 
-
 **Parameter Schema:**
 
 ```python
@@ -815,7 +789,6 @@ class WebSearchTool(Tool):
             "num_results": {"type": "integer", "description": "Number of results", "default": 5}
         }
 ```
-
 
 **File Operations Tool - Secure File Access:**
 
@@ -830,7 +803,6 @@ class FileOperationTool(Tool):
         super().__init__("file_ops", "Read and write files")
         self.allowed_paths = allowed_paths or ["./data/"]  # Security: restrict paths
 ```
-
 
 **Secure File Operations:**
 
@@ -854,7 +826,6 @@ class FileOperationTool(Tool):
         except Exception as e:
             return {"error": str(e)}
 ```
-
 
 **Security First:** The tool restricts file access to allowed directories, preventing agents from accessing sensitive system files.
 
@@ -882,7 +853,6 @@ class ToolUseAgent(BaseAgent):
         )
         self.tool_usage_history = []  # Track tool usage for analysis
 ```
-
 
 ### Step 4.3: The Tool Use Decision Process
 
@@ -917,8 +887,8 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
     return response
 ```
 
-
 **The Four-Step Process:**
+
 1. **Analyze**: Does this question need tools?
 2. **Decide**: If not, respond directly
 3. **Plan**: Which tools, in what order?
@@ -976,7 +946,6 @@ async def _analyze_tool_needs(self, message: str) -> Dict[str, Any]:
         return {"needs_tools": False, "reasoning": "Failed to parse analysis"}
 ```
 
-
 **Smart Decision Making:** The agent considers both the question and available tools before deciding to use them.
 
 ### Step 4.5: Tool Usage Planning
@@ -995,7 +964,6 @@ async def _plan_tool_usage(self, message: str, analysis: Dict) -> List[Dict]:
         if tool["name"] in relevant_tools
     }
 ```
-
 
 **Plan Generation Prompt:**
 
@@ -1033,7 +1001,6 @@ This section provides context to the LLM about what the user wants and what tool
 
 By specifying the exact JSON structure, we ensure the agent returns a structured plan we can programmatically parse and execute.
 
-
 **Plan Processing:**
 
 ```python
@@ -1046,9 +1013,8 @@ By specifying the exact JSON structure, we ensure the agent returns a structured
         return []  # Fallback to no tools
 ```
 
-
 **Why Plan First?** Complex tasks might need multiple tools in sequence, and planning prevents inefficient tool usage.
-    
+
 ### Step 4.6: Plan Execution and Response Synthesis
 
 Execute the plan and combine results into a coherent response:
@@ -1109,7 +1075,6 @@ async def _execute_tool_plan(self, message: str, plan: List[Dict]) -> str:
     return await self._synthesize_response(message, tool_results)
 ```
 
-
 ### Step 4.7: Response Synthesis
 
 Combine tool results into a natural, helpful response:
@@ -1126,7 +1091,6 @@ async def _synthesize_response(self, message: str, tool_results: List[Dict]) -> 
     ])
 ```
 
-
 ```python
     synthesis_prompt = f"""
     User asked: {message}
@@ -1141,7 +1105,6 @@ async def _synthesize_response(self, message: str, tool_results: List[Dict]) -> 
     
     return await self._call_llm(synthesis_prompt)
 ```
-
 
 **Utility Methods:**
 
@@ -1161,11 +1124,10 @@ async def _simple_response(self, message: str) -> str:
     return await self._call_llm(prompt)
 ```
 
-
 **Natural Integration:** The final response hides the tool execution complexity and presents information as if the agent naturally knew it.
 
 ![Tool Use Pattern](images/tool-use-pattern.png)
-    
+
 ### Step 4.8: Usage Analytics
 
 Track tool usage patterns for optimization:
@@ -1186,7 +1148,6 @@ def get_tool_usage_stats(self) -> Dict:
         tool_counts[tool] = tool_counts.get(tool, 0) + 1
 ```
 
-
 ```python
     return {
         "total_uses": len(self.tool_usage_history),
@@ -1195,7 +1156,6 @@ def get_tool_usage_stats(self) -> Dict:
         "recent_usage": self.tool_usage_history[-5:]  # Last 5 uses
     }
 ```
-
 
 **LLM Integration:**
 
@@ -1208,11 +1168,11 @@ async def _call_llm(self, prompt: str) -> str:
     return f"Simulated response to: {prompt[:50]}..."
 ```
 
-
 **Usage Analytics Help:** Understanding which tools are used most helps optimize tool selection and identify missing capabilities.
 
 **Real-World Example:**
 When you ask "What's 15% of $1,200?", the tool use agent:
+
 1. **Analyzes:** "This needs mathematical calculation"
 2. **Plans:** "Use calculator tool with expression '1200 * 0.15'"
 3. **Executes:** Calculator returns `{"result": 180}`
@@ -1227,18 +1187,16 @@ When you ask "What's 15% of $1,200?", the tool use agent:
 ReAct combines reasoning and acting in a transparent loop, showing its thought process while solving problems.
 
 **Traditional Problem Solving:**
-```
 
+```text
 Question → Think Internally → Answer
 ```
 
-
 **ReAct Approach:**
-```
 
+```text
 Question → Think (visible) → Act → Observe → Think → Act → ... → Answer
 ```
-
 
 ### Step 5.1: ReAct Step Structure
 
@@ -1258,7 +1216,6 @@ class ReActStep:
     action_input: Optional[Dict] = None   # Parameters for the action
     observation: Optional[str] = None     # What it observes after acting
 ```
-
 
 **The ReAct Triple:** Thought → Action → Observation
 
@@ -1282,7 +1239,6 @@ class ReActAgent(BaseAgent):
         self.max_steps = max_steps    # Prevent infinite reasoning loops
         self.react_history = []       # Store all reasoning sessions
 ```
-
 
 **Safety First:** Max steps prevent the agent from getting stuck in endless reasoning loops.
 
@@ -1354,7 +1310,6 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
     return self._format_react_response(steps)
 ```
 
-
 **The ReAct Loop:** Each iteration contains reasoning (thought), action selection, action execution, and observation.
 
 ### Step 5.4: Generating Initial Thoughts
@@ -1392,7 +1347,6 @@ This method builds a catalog of available tools so the agent understands what ca
     
     return await self._call_llm(prompt)
 ```
-
 
 ### Step 5.5: Action Decision Making
 
@@ -1454,7 +1408,6 @@ async def _decide_action(self, message: str, steps: List[ReActStep], thought: st
         return {"action": "ANSWER", "reasoning": "Failed to parse action decision"}
 ```
 
-
 **Decision Points:** The agent can either use a tool to gather information or provide a final answer if it has enough information.
 
 ### Step 5.6: Action Execution and Observation
@@ -1504,9 +1457,8 @@ async def _next_thought(self, message: str, steps: List[ReActStep], observation:
     return await self._call_llm(prompt)
 ```
 
-
 **Continuous Learning:** Each observation informs the next thought, creating a learning loop.
-    
+
 ### Step 5.7: Response Formatting and Analysis
 
 Make the ReAct process visible to users:
@@ -1579,7 +1531,6 @@ def _format_steps_for_prompt(self, steps: List[ReActStep]) -> str:
 
 This utility formats the reasoning chain for inclusion in subsequent LLM prompts, maintaining context across conversation turns.
 
-
 **Transparency Benefit:** Users can follow the agent's reasoning process, building trust and enabling debugging.
 
 **Real-World Example:**
@@ -1595,7 +1546,7 @@ When asked "What's the square root of 144 plus 5?", a ReAct agent might show:
 *Final Answer:* The square root of 144 plus 5 equals 17.
 
 ![ReAct Pattern](images/react-pattern.png)
-    
+
 ### Step 5.8: Final Answer Generation and Analysis
 
 **Step 1: Generate final answer from reasoning chain**
@@ -1678,7 +1629,6 @@ async def _call_llm(self, prompt: str) -> str:
 
 These utility methods handle common operations: extracting JSON from unstructured LLM responses and providing a flexible interface for different LLM providers.
 
-
 **Performance Analysis:** Tracking step counts and action patterns helps optimize the reasoning process and identify bottlenecks.
 
 ---
@@ -1690,20 +1640,18 @@ These utility methods handle common operations: extracting JSON from unstructure
 Instead of building one super-agent that does everything, we can create specialized agents that excel at specific tasks and coordinate them.
 
 **Monolithic Agent:**
-```
 
+```text
 General Agent: Does math, writes text, searches web, manages files
 → Jack of all trades, master of none
 ```
 
-
 **Multi-Agent System:**
-```
 
+```text
 Math Agent + Writer Agent + Search Agent + File Agent + Coordinator
 → Each agent specializes and excels at its domain
 ```
-
 
 ### Step 6.1: Agent Coordinator Architecture
 
@@ -1724,7 +1672,6 @@ class AgentCoordinator:
         self.communication_patterns = {}       # Track who talks to whom
 ```
 
-
 **Agent Registration:**
 
 ```python
@@ -1734,7 +1681,6 @@ class AgentCoordinator:
         self.communication_patterns[agent.name] = []
         print(f"✓ Registered agent: {agent.name} ({agent.description})")
 ```
-
 
 ### Step 6.2: Message Routing System
 
@@ -1755,7 +1701,6 @@ async def route_message(self, message: str, to_agent: str, from_agent: str = "us
     })
 ```
 
-
 **Message Processing and History:**
 
 ```python
@@ -1774,7 +1719,6 @@ async def route_message(self, message: str, to_agent: str, from_agent: str = "us
     
     return response
 ```
-
 
 ### Step 6.3: Collaborative Task Management
 
@@ -1821,7 +1765,6 @@ async def _synthesize_collaborative_results(self, task: str, results: Dict[str, 
     return "\n".join(synthesis)
 ```
 
-
 ### Step 6.4: System Monitoring and Analytics
 
 **System Statistics and Monitoring:**
@@ -1856,7 +1799,6 @@ This method analyzes system performance by tracking message patterns and agent a
         "recent_activity": self.message_history[-5:]  # Last 5 messages
     }
 ```
-
 
 ![Multi-Agent Pattern](images/multi-agent-pattern.png)
 
@@ -2011,7 +1953,6 @@ if __name__ == "__main__":
     asyncio.run(run_comprehensive_tests())
 ```
 
-
 ### Step 7.2: Demo Runner
 
 Create a demonstration showing all patterns working together:
@@ -2112,16 +2053,16 @@ if __name__ == "__main__":
     asyncio.run(demo_bare_metal_agents())
 ```
 
-
 **To Run the Demo:**
+
 ```bash
 cd src/session1
 pip install -r requirements.txt
 python demo_runner.py
 ```
 
-
 **Expected Output:**
+
 - Agent creation and registration
 - Individual pattern demonstrations
 - Multi-agent collaboration example
@@ -2254,6 +2195,7 @@ In Session 2, we'll explore how LangChain provides high-level abstractions for t
 ---
 
 ## Answer Key
+
 1. b) Deeper understanding of agent mechanics
 2. c) Maintaining context across interactions
 3. c) _generate_response()

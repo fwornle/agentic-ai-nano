@@ -53,17 +53,17 @@ Traditional embedding models often struggle with the query-document mismatch pro
 # Demonstrating the semantic gap
 class SemanticGapAnalyzer:
     """Analyze and demonstrate semantic gaps in retrieval."""
-    
+
     def __init__(self, embedding_model):
         self.embedding_model = embedding_model
-    
+
     def analyze_query_document_gap(self, query: str, documents: List[str]) -> Dict:
         """Analyze semantic gaps between queries and documents."""
-        
+
         # Embed query and documents
         query_embedding = self.embedding_model.encode([query])
         doc_embeddings = self.embedding_model.encode(documents)
-        
+
         # Calculate similarities
         similarities = []
         for doc_emb in doc_embeddings:
@@ -71,7 +71,7 @@ class SemanticGapAnalyzer:
                 np.linalg.norm(query_embedding[0]) * np.linalg.norm(doc_emb)
             )
             similarities.append(similarity)
-        
+
         return {
             'query': query,
             'avg_similarity': np.mean(similarities),
@@ -104,12 +104,12 @@ import numpy as np
 
 class HyDEQueryEnhancer:
     """Hypothetical Document Embeddings for query enhancement."""
-    
+
     def __init__(self, llm_model, embedding_model, temperature: float = 0.7):
         self.llm_model = llm_model
         self.embedding_model = embedding_model
         self.temperature = temperature
-        
+
         # Different HyDE templates for various query types
         self.hyde_templates = {
             'factual': self._factual_hyde_template,
@@ -117,28 +117,28 @@ class HyDEQueryEnhancer:
             'analytical': self._analytical_hyde_template,
             'creative': self._creative_hyde_template
         }
-        
-    def enhance_query_with_hyde(self, query: str, 
+
+    def enhance_query_with_hyde(self, query: str,
                                query_type: str = 'factual',
                                num_hypotheticals: int = 3) -> Dict[str, Any]:
         """Generate hypothetical documents for query enhancement."""
-        
+
         print(f"Generating HyDE for query: {query[:100]}...")
-        
+
         # Step 1: Classify query type if not provided
         if query_type == 'auto':
             query_type = self._classify_query_type(query)
-        
+
         # Step 2: Generate hypothetical documents
         hypothetical_docs = self._generate_hypothetical_documents(
             query, query_type, num_hypotheticals
         )
-        
+
         # Step 3: Create enhanced embeddings
         enhanced_embeddings = self._create_enhanced_embeddings(
             query, hypothetical_docs
         )
-        
+
         # Step 4: Return comprehensive enhancement data
         return {
             'original_query': query,
@@ -166,26 +166,26 @@ The result bridges the semantic gap between user intent and document content, dr
 ```python
     def _classify_query_type(self, query: str) -> str:
         """Classify query type for appropriate HyDE template selection."""
-        
+
         classification_prompt = f"""
         Classify the following query into one of these categories:
         1. factual - Questions seeking specific facts or information
         2. procedural - Questions asking how to do something or step-by-step processes
         3. analytical - Questions requiring analysis, comparison, or interpretation
         4. creative - Questions requiring creative or open-ended responses
-        
+
         Query: {query}
-        
+
         Return only the category name:
         """
-        
+
         try:
             response = self.llm_model.predict(classification_prompt).strip().lower()
             if response in self.hyde_templates:
                 return response
         except Exception as e:
             print(f"Classification error: {e}")
-        
+
         # Default to factual
         return 'factual'
 ```
@@ -196,73 +196,73 @@ The result bridges the semantic gap between user intent and document content, dr
         """Template for factual query types."""
         return f"""
         Write a detailed, informative document that comprehensively answers this question: {query}
-        
+
         The document should:
         - Provide specific facts and data points
         - Include relevant context and background information
         - Use authoritative tone and precise language
         - Cover multiple aspects of the topic
         - Include examples where relevant
-        
+
         Document:
         """
-    
+
     def _procedural_hyde_template(self, query: str) -> str:
-        """Template for procedural query types.""" 
+        """Template for procedural query types."""
         return f"""
         Write a detailed how-to guide that explains: {query}
-        
+
         The guide should:
         - Provide step-by-step instructions
         - Include prerequisite requirements
         - Mention common pitfalls and how to avoid them
         - Explain the reasoning behind each step
         - Include tips for success
-        
+
         Guide:
         """
-    
+
     def _analytical_hyde_template(self, query: str) -> str:
         """Template for analytical query types."""
         return f"""
         Write an analytical document that thoroughly examines: {query}
-        
+
         The analysis should:
         - Present multiple perspectives or approaches
         - Compare and contrast different options
         - Discuss pros and cons
         - Provide evidence-based reasoning
         - Draw insightful conclusions
-        
+
         Analysis:
         """
 ```
 
 **Step 3: Multi-Hypothetical Generation**
 ```python
-    def _generate_hypothetical_documents(self, query: str, 
-                                       query_type: str, 
+    def _generate_hypothetical_documents(self, query: str,
+                                       query_type: str,
                                        num_docs: int) -> List[Dict]:
         """Generate multiple hypothetical documents with variations."""
-        
+
         base_template = self.hyde_templates[query_type]
         hypothetical_docs = []
-        
+
         for i in range(num_docs):
             # Add variation to temperature for diversity
             varied_temperature = self.temperature + (i * 0.1)
             varied_temperature = min(varied_temperature, 1.0)
-            
+
             try:
                 # Generate hypothetical document
                 prompt = base_template(query)
-                
+
                 # Use varied temperature for diversity
                 doc_text = self.llm_model.predict(
-                    prompt, 
+                    prompt,
                     temperature=varied_temperature
                 )
-                
+
                 hypothetical_docs.append({
                     'document': doc_text.strip(),
                     'temperature': varied_temperature,
@@ -270,46 +270,46 @@ The result bridges the semantic gap between user intent and document content, dr
                     'word_count': len(doc_text.split()),
                     'quality_score': self._assess_document_quality(doc_text, query)
                 })
-                
+
                 print(f"Generated hypothetical document {i+1}/{num_docs}")
-                
+
             except Exception as e:
                 print(f"Error generating document {i+1}: {e}")
                 continue
-        
+
         # Sort by quality score
         hypothetical_docs.sort(key=lambda x: x['quality_score'], reverse=True)
-        
+
         return hypothetical_docs
 ```
 
 **Step 4: Enhanced Embedding Creation**
 ```python
-    def _create_enhanced_embeddings(self, query: str, 
+    def _create_enhanced_embeddings(self, query: str,
                                   hypothetical_docs: List[Dict]) -> Dict:
         """Create enhanced embeddings combining query and hypothetical docs."""
-        
+
         # Original query embedding
         original_embedding = self.embedding_model.encode([query])[0]
-        
+
         # Hypothetical document embeddings
         hyde_texts = [doc['document'] for doc in hypothetical_docs]
         hyde_embeddings = self.embedding_model.encode(hyde_texts)
-        
+
         # Combine embeddings using weighted average
         weights = self._calculate_document_weights(hypothetical_docs)
-        
+
         # Weighted combination
         weighted_hyde = np.average(hyde_embeddings, axis=0, weights=weights)
-        
+
         # Combine original query with weighted hypotheticals
         # Give more weight to original query to preserve intent
-        combined_embedding = (0.3 * original_embedding + 
+        combined_embedding = (0.3 * original_embedding +
                             0.7 * weighted_hyde)
-        
+
         # Normalize the combined embedding
         combined_embedding = combined_embedding / np.linalg.norm(combined_embedding)
-        
+
         return {
             'original': original_embedding,
             'hyde_embeddings': hyde_embeddings,
@@ -317,16 +317,16 @@ The result bridges the semantic gap between user intent and document content, dr
             'combined': combined_embedding,
             'weights': weights
         }
-    
+
     def _calculate_document_weights(self, hypothetical_docs: List[Dict]) -> List[float]:
         """Calculate weights for hypothetical documents based on quality."""
-        
+
         quality_scores = [doc['quality_score'] for doc in hypothetical_docs]
-        
+
         # Softmax normalization for weights
         exp_scores = np.exp(np.array(quality_scores))
         weights = exp_scores / np.sum(exp_scores)
-        
+
         return weights.tolist()
 ```
 
@@ -357,19 +357,19 @@ from collections import defaultdict
 
 class IntelligentQueryExpander:
     """Advanced query expansion using multiple strategies."""
-    
+
     def __init__(self, llm_model, domain_corpus: Optional[List[str]] = None):
         self.llm_model = llm_model
         self.domain_corpus = domain_corpus
-        
+
         # Initialize expansion strategies
         self.expansion_strategies = {
             'synonym': self._synonym_expansion,
-            'semantic': self._semantic_expansion, 
+            'semantic': self._semantic_expansion,
             'contextual': self._contextual_expansion,
             'domain_specific': self._domain_specific_expansion
         }
-        
+
         # Domain-specific TF-IDF if corpus provided
         if domain_corpus:
             self.domain_tfidf = TfidfVectorizer(
@@ -378,15 +378,15 @@ class IntelligentQueryExpander:
                 ngram_range=(1, 3)
             )
             self.domain_tfidf.fit(domain_corpus)
-    
-    def expand_query(self, query: str, 
+
+    def expand_query(self, query: str,
                     strategies: List[str] = ['semantic', 'contextual'],
                     max_expansions: int = 5) -> Dict[str, Any]:
         """Expand query using multiple strategies."""
-        
+
         expansion_results = {}
         combined_expansions = set()
-        
+
         # Apply each expansion strategy
         for strategy in strategies:
             if strategy in self.expansion_strategies:
@@ -395,12 +395,12 @@ class IntelligentQueryExpander:
                 )
                 expansion_results[strategy] = expansions
                 combined_expansions.update(expansions)
-        
+
         # Create final expanded query
         expanded_query = self._create_expanded_query(
             query, list(combined_expansions)
         )
-        
+
         return {
             'original_query': query,
             'expansions_by_strategy': expansion_results,
@@ -414,30 +414,30 @@ class IntelligentQueryExpander:
 ```python
     def _semantic_expansion(self, query: str, max_expansions: int) -> List[str]:
         """Generate semantic expansions using LLM understanding."""
-        
+
         semantic_prompt = f"""
         Given this query, generate {max_expansions} semantically related terms or phrases that would help find relevant information:
-        
+
         Query: {query}
-        
+
         Requirements:
         1. Include synonyms and related concepts
         2. Add domain-specific terminology if applicable
         3. Include both broader and narrower terms
         4. Focus on terms likely to appear in relevant documents
-        
+
         Return only the expanded terms, one per line:
         """
-        
+
         try:
             response = self.llm_model.predict(semantic_prompt)
             expansions = [
-                term.strip() 
+                term.strip()
                 for term in response.strip().split('\n')
                 if term.strip() and not term.strip().startswith(('-', '*', '•'))
             ]
             return expansions[:max_expansions]
-            
+
         except Exception as e:
             print(f"Semantic expansion error: {e}")
             return []
@@ -447,21 +447,21 @@ class IntelligentQueryExpander:
 ```python
     def _contextual_expansion(self, query: str, max_expansions: int) -> List[str]:
         """Generate contextual reformulations of the query."""
-        
+
         reformulation_prompt = f"""
         Reformulate this query in {max_expansions} different ways that express the same information need:
-        
+
         Original Query: {query}
-        
+
         Create variations that:
         1. Use different phrasing and vocabulary
         2. Approach the question from different angles
         3. Include both specific and general formulations
         4. Maintain the original intent and meaning
-        
+
         Reformulations:
         """
-        
+
         try:
             response = self.llm_model.predict(reformulation_prompt)
             reformulations = [
@@ -470,7 +470,7 @@ class IntelligentQueryExpander:
                 if reform.strip() and '?' in reform or len(reform.split()) > 3
             ]
             return reformulations[:max_expansions]
-            
+
         except Exception as e:
             print(f"Contextual expansion error: {e}")
             return []
@@ -484,10 +484,10 @@ Generate multiple query perspectives for comprehensive retrieval:
 # Multi-query generation system
 class MultiQueryGenerator:
     """Generate multiple query perspectives for comprehensive retrieval."""
-    
+
     def __init__(self, llm_model):
         self.llm_model = llm_model
-        
+
         self.query_perspectives = {
             'decomposition': self._decompose_complex_query,
             'specificity_levels': self._generate_specificity_variants,
@@ -495,37 +495,37 @@ class MultiQueryGenerator:
             'perspective_shifts': self._generate_perspective_variants,
             'domain_focused': self._generate_domain_variants
         }
-    
-    def generate_multi_query_set(self, query: str, 
+
+    def generate_multi_query_set(self, query: str,
                                perspectives: List[str] = None,
                                total_queries: int = 8) -> Dict[str, Any]:
         """Generate comprehensive query set from multiple perspectives."""
-        
+
         if perspectives is None:
             perspectives = ['decomposition', 'specificity_levels', 'perspective_shifts']
-        
+
         all_queries = {'original': query}
         generation_metadata = {}
-        
+
         # Distribute query generation across perspectives
         queries_per_perspective = total_queries // len(perspectives)
         remaining_queries = total_queries % len(perspectives)
-        
+
         for i, perspective in enumerate(perspectives):
             num_queries = queries_per_perspective
             if i < remaining_queries:
                 num_queries += 1
-                
+
             generated = self.query_perspectives[perspective](query, num_queries)
             all_queries[perspective] = generated
             generation_metadata[perspective] = {
                 'count': len(generated),
                 'method': perspective
             }
-        
+
         # Flatten and deduplicate
         flattened_queries = self._flatten_and_deduplicate(all_queries)
-        
+
         return {
             'original_query': query,
             'query_variants': flattened_queries,
@@ -539,21 +539,21 @@ class MultiQueryGenerator:
 ```python
     def _decompose_complex_query(self, query: str, num_queries: int) -> List[str]:
         """Decompose complex queries into simpler sub-questions."""
-        
+
         decomposition_prompt = f"""
         Break down this complex query into {num_queries} simpler, focused sub-questions that together would fully answer the original question:
-        
+
         Complex Query: {query}
-        
+
         Requirements:
         1. Each sub-question should be independently searchable
         2. Sub-questions should cover different aspects of the main query
         3. Avoid redundancy between sub-questions
         4. Maintain logical flow and completeness
-        
+
         Sub-questions:
         """
-        
+
         try:
             response = self.llm_model.predict(decomposition_prompt)
             sub_questions = [
@@ -561,15 +561,15 @@ class MultiQueryGenerator:
                 for q in response.strip().split('\n')
                 if q.strip() and ('?' in q or len(q.split()) > 3)
             ]
-            
+
             # Ensure we have question marks
             sub_questions = [
                 q if q.endswith('?') else q + '?'
                 for q in sub_questions
             ]
-            
+
             return sub_questions[:num_queries]
-            
+
         except Exception as e:
             print(f"Decomposition error: {e}")
             return []
@@ -579,20 +579,20 @@ class MultiQueryGenerator:
 ```python
     def _generate_specificity_variants(self, query: str, num_queries: int) -> List[str]:
         """Generate queries at different levels of specificity."""
-        
+
         specificity_prompt = f"""
         Generate {num_queries} variants of this query at different levels of specificity:
-        
+
         Original Query: {query}
-        
+
         Create variants that range from:
         1. Very broad/general versions
-        2. Medium specificity versions  
+        2. Medium specificity versions
         3. Very specific/detailed versions
-        
+
         Each variant should maintain the core intent but adjust the scope:
         """
-        
+
         try:
             response = self.llm_model.predict(specificity_prompt)
             variants = [
@@ -600,9 +600,9 @@ class MultiQueryGenerator:
                 for variant in response.strip().split('\n')
                 if variant.strip() and len(variant.split()) > 2
             ]
-            
+
             return variants[:num_queries]
-            
+
         except Exception as e:
             print(f"Specificity variant error: {e}")
             return []
@@ -620,11 +620,11 @@ Optimize context windows for maximum information density:
 # Context window optimization system
 class ContextWindowOptimizer:
     """Optimize context assembly for maximum information density."""
-    
+
     def __init__(self, llm_tokenizer, max_context_tokens: int = 4000):
         self.tokenizer = llm_tokenizer
         self.max_context_tokens = max_context_tokens
-        
+
         # Context optimization strategies
         self.optimization_strategies = {
             'relevance_ranking': self._relevance_based_selection,
@@ -632,21 +632,21 @@ class ContextWindowOptimizer:
             'hierarchical_summary': self._hierarchical_summarization,
             'semantic_compression': self._semantic_compression
         }
-    
-    def optimize_context_window(self, query: str, 
+
+    def optimize_context_window(self, query: str,
                                retrieved_chunks: List[Dict],
                                strategy: str = 'relevance_ranking') -> Dict[str, Any]:
         """Optimize context window using specified strategy."""
-        
+
         # Calculate available token budget
         query_tokens = len(self.tokenizer.encode(query))
         available_tokens = self.max_context_tokens - query_tokens - 200  # Buffer
-        
+
         # Apply optimization strategy
         optimized_context = self.optimization_strategies[strategy](
             query, retrieved_chunks, available_tokens
         )
-        
+
         return {
             'optimized_context': optimized_context['context'],
             'selected_chunks': optimized_context['chunks'],
@@ -659,20 +659,20 @@ class ContextWindowOptimizer:
 
 **Step 9: Relevance-Based Context Selection**
 ```python
-    def _relevance_based_selection(self, query: str, chunks: List[Dict], 
+    def _relevance_based_selection(self, query: str, chunks: List[Dict],
                                  token_budget: int) -> Dict[str, Any]:
         """Select chunks based on relevance scores and token efficiency."""
-        
+
         # Calculate relevance scores and token costs
         chunk_analysis = []
         for i, chunk in enumerate(chunks):
             content = chunk['document'].page_content
             tokens = len(self.tokenizer.encode(content))
             relevance = 1 - chunk.get('similarity_score', 0.5)  # Convert distance to similarity
-            
+
             # Calculate efficiency: relevance per token
             efficiency = relevance / tokens if tokens > 0 else 0
-            
+
             chunk_analysis.append({
                 'index': i,
                 'content': content,
@@ -681,29 +681,29 @@ class ContextWindowOptimizer:
                 'efficiency': efficiency,
                 'metadata': chunk.get('metadata', {})
             })
-        
+
         # Sort by efficiency (relevance per token)
         chunk_analysis.sort(key=lambda x: x['efficiency'], reverse=True)
-        
+
         # Select chunks within token budget
         selected_chunks = []
         total_tokens = 0
-        
+
         for chunk_data in chunk_analysis:
             if total_tokens + chunk_data['tokens'] <= token_budget:
                 selected_chunks.append(chunk_data)
                 total_tokens += chunk_data['tokens']
             else:
                 break
-        
+
         # Assemble context
         context_parts = []
         for chunk_data in selected_chunks:
             source = chunk_data['metadata'].get('source', 'Unknown')
             context_parts.append(f"[Source: {source}]\n{chunk_data['content']}")
-        
+
         final_context = '\n\n'.join(context_parts)
-        
+
         return {
             'context': final_context,
             'chunks': selected_chunks,
@@ -717,24 +717,24 @@ class ContextWindowOptimizer:
     def _hierarchical_summarization(self, query: str, chunks: List[Dict],
                                   token_budget: int) -> Dict[str, Any]:
         """Create hierarchical summaries when context exceeds budget."""
-        
+
         # Group chunks by source/topic
         chunk_groups = self._group_chunks_by_source(chunks)
-        
+
         summarized_chunks = []
         total_tokens = 0
-        
+
         for group_key, group_chunks in chunk_groups.items():
             # Calculate total tokens for this group
             group_content = '\n'.join([
                 chunk['document'].page_content for chunk in group_chunks
             ])
             group_tokens = len(self.tokenizer.encode(group_content))
-            
+
             if group_tokens > token_budget // 4:  # Group too large, summarize
                 summary = self._summarize_chunk_group(query, group_chunks)
                 summary_tokens = len(self.tokenizer.encode(summary))
-                
+
                 if total_tokens + summary_tokens <= token_budget:
                     summarized_chunks.append({
                         'content': summary,
@@ -749,7 +749,7 @@ class ContextWindowOptimizer:
                 for chunk in group_chunks:
                     content = chunk['document'].page_content
                     chunk_tokens = len(self.tokenizer.encode(content))
-                    
+
                     if total_tokens + chunk_tokens <= token_budget:
                         summarized_chunks.append({
                             'content': content,
@@ -759,7 +759,7 @@ class ContextWindowOptimizer:
                             'metadata': chunk.get('metadata', {})
                         })
                         total_tokens += chunk_tokens
-        
+
         # Assemble final context
         context_parts = []
         for chunk in summarized_chunks:
@@ -768,9 +768,9 @@ class ContextWindowOptimizer:
             else:
                 source = chunk['metadata'].get('source', chunk['group_key'])
                 context_parts.append(f"[Source: {source}]\n{chunk['content']}")
-        
+
         final_context = '\n\n'.join(context_parts)
-        
+
         return {
             'context': final_context,
             'chunks': summarized_chunks,
@@ -791,10 +791,10 @@ Design prompts that maximize the effectiveness of retrieved context:
 # Advanced RAG prompt engineering
 class RAGPromptEngineer:
     """Advanced prompt engineering specifically for RAG systems."""
-    
+
     def __init__(self, llm_model):
         self.llm_model = llm_model
-        
+
         # Domain-specific prompt templates
         self.prompt_templates = {
             'factual_qa': self._factual_qa_template,
@@ -804,7 +804,7 @@ class RAGPromptEngineer:
             'creative': self._creative_template,
             'technical': self._technical_template
         }
-        
+
         # Prompt optimization techniques
         self.optimization_techniques = {
             'chain_of_thought': self._add_chain_of_thought,
@@ -812,19 +812,19 @@ class RAGPromptEngineer:
             'confidence_calibration': self._add_confidence_calibration,
             'multi_step_reasoning': self._add_multi_step_reasoning
         }
-    
+
     def engineer_rag_prompt(self, query: str, context: str,
                            query_type: str = 'factual_qa',
                            optimizations: List[str] = ['confidence_calibration']) -> Dict[str, Any]:
         """Engineer optimized RAG prompt with specified techniques."""
-        
+
         # Start with base template
         base_prompt = self.prompt_templates[query_type](query, context)
-        
+
         # Apply optimization techniques
         optimized_prompt = base_prompt
         optimization_metadata = {}
-        
+
         for technique in optimizations:
             if technique in self.optimization_techniques:
                 result = self.optimization_techniques[technique](
@@ -832,7 +832,7 @@ class RAGPromptEngineer:
                 )
                 optimized_prompt = result['prompt']
                 optimization_metadata[technique] = result['metadata']
-        
+
         return {
             'base_prompt': base_prompt,
             'optimized_prompt': optimized_prompt,
@@ -846,7 +846,7 @@ class RAGPromptEngineer:
 ```python
     def _factual_qa_template(self, query: str, context: str) -> str:
         """Optimized template for factual question answering."""
-        
+
         return f"""You are an expert information analyst. Use the provided context to answer the user's question accurately and comprehensively.
 
 CONTEXT INFORMATION:
@@ -873,10 +873,10 @@ ANSWER:"""
 
 **Step 12: Chain-of-Thought Enhancement**
 ```python
-    def _add_chain_of_thought(self, base_prompt: str, query: str, 
+    def _add_chain_of_thought(self, base_prompt: str, query: str,
                             context: str) -> Dict[str, Any]:
         """Add chain-of-thought reasoning to prompt."""
-        
+
         cot_enhancement = """
 REASONING PROCESS:
 Before providing your final answer, work through your reasoning step-by-step:
@@ -902,9 +902,9 @@ STEP 4 - Confidence Evaluation:
 
 FINAL ANSWER:
 """
-        
+
         enhanced_prompt = base_prompt + cot_enhancement
-        
+
         return {
             'prompt': enhanced_prompt,
             'metadata': {
@@ -920,7 +920,7 @@ FINAL ANSWER:
     def _add_confidence_calibration(self, base_prompt: str, query: str,
                                   context: str) -> Dict[str, Any]:
         """Add confidence calibration to improve answer reliability."""
-        
+
         confidence_enhancement = """
 CONFIDENCE ASSESSMENT:
 For your final answer, provide a confidence assessment:
@@ -945,13 +945,13 @@ Include this assessment at the end of your response:
 
 CONFIDENCE ASSESSMENT:
 - Evidence Strength: [Strong/Medium/Weak]
-- Completeness: [Complete/Partial/Incomplete] 
+- Completeness: [Complete/Partial/Incomplete]
 - Confidence Score: [0-100%]
 - Key Limitations: [List any significant limitations or uncertainties]
 """
-        
+
         enhanced_prompt = base_prompt + confidence_enhancement
-        
+
         return {
             'prompt': enhanced_prompt,
             'metadata': {
@@ -970,30 +970,30 @@ Adapt prompts based on context quality and query complexity:
 # Dynamic prompt adaptation system
 class DynamicPromptAdapter:
     """Adapt prompts based on context quality and query characteristics."""
-    
+
     def __init__(self, llm_model):
         self.llm_model = llm_model
-        
+
     def adapt_prompt_dynamically(self, query: str, context: str,
                                 retrieval_metadata: Dict) -> Dict[str, Any]:
         """Dynamically adapt prompt based on context and query analysis."""
-        
+
         # Analyze context quality
         context_analysis = self._analyze_context_quality(context, query)
-        
+
         # Analyze query characteristics
         query_analysis = self._analyze_query_characteristics(query)
-        
+
         # Choose optimal prompt strategy
         prompt_strategy = self._select_prompt_strategy(
             context_analysis, query_analysis, retrieval_metadata
         )
-        
+
         # Generate adapted prompt
         adapted_prompt = self._generate_adapted_prompt(
             query, context, prompt_strategy
         )
-        
+
         return {
             'adapted_prompt': adapted_prompt,
             'context_analysis': context_analysis,
@@ -1009,27 +1009,27 @@ class DynamicPromptAdapter:
 ```python
     def _analyze_context_quality(self, context: str, query: str) -> Dict[str, Any]:
         """Analyze the quality and characteristics of retrieved context."""
-        
+
         # Basic metrics
         context_length = len(context.split())
         context_diversity = self._calculate_context_diversity(context)
-        
+
         # Source analysis
         source_count = context.count('[Source:')
         source_diversity = self._analyze_source_diversity(context)
-        
+
         # Relevance assessment using LLM
         relevance_score = self._assess_context_relevance(context, query)
-        
+
         # Information density
         information_density = self._calculate_information_density(context)
-        
+
         # Quality classification
         quality_level = self._classify_context_quality(
-            context_length, context_diversity, source_count, 
+            context_length, context_diversity, source_count,
             relevance_score, information_density
         )
-        
+
         return {
             'length': context_length,
             'diversity_score': context_diversity,
@@ -1039,25 +1039,25 @@ class DynamicPromptAdapter:
             'information_density': information_density,
             'quality_level': quality_level  # High/Medium/Low
         }
-    
+
     def _assess_context_relevance(self, context: str, query: str) -> float:
         """Use LLM to assess context relevance to query."""
-        
+
         relevance_prompt = f"""
         Rate the relevance of this context to the given query on a scale of 0.0 to 1.0:
-        
+
         Query: {query}
-        
+
         Context: {context[:1000]}...
-        
+
         Consider:
         1. How directly the context addresses the query
         2. The completeness of information provided
         3. The accuracy and reliability of information
-        
+
         Return only a number between 0.0 and 1.0:
         """
-        
+
         try:
             response = self.llm_model.predict(relevance_prompt).strip()
             relevance_score = float(response)
@@ -1071,21 +1071,24 @@ class DynamicPromptAdapter:
 ## **🧪 Hands-On Exercise: Build Query Enhancement Pipeline**
 
 ### **Your Mission**
+
 Create a comprehensive query enhancement system that combines HyDE, multi-query generation, and context optimization.
 
 ### **Requirements:**
+
 1. **HyDE Implementation**: Generate hypothetical documents for semantic gap bridging
 2. **Query Expansion**: Multi-strategy query expansion and reformulation
-3. **Multi-Query System**: Generate query variants from multiple perspectives  
+3. **Multi-Query System**: Generate query variants from multiple perspectives
 4. **Context Optimization**: Smart context window management with token budgeting
 5. **Prompt Engineering**: Dynamic prompt adaptation based on context quality
 
 ### **Implementation Framework:**
+
 ```python
 # Complete query enhancement system
 class ComprehensiveQueryEnhancer:
     """Complete query enhancement pipeline for RAG systems."""
-    
+
     def __init__(self, llm_model, embedding_model, tokenizer):
         # Initialize components
         self.hyde_enhancer = HyDEQueryEnhancer(llm_model, embedding_model)
@@ -1094,47 +1097,47 @@ class ComprehensiveQueryEnhancer:
         self.context_optimizer = ContextWindowOptimizer(tokenizer)
         self.prompt_engineer = RAGPromptEngineer(llm_model)
         self.dynamic_adapter = DynamicPromptAdapter(llm_model)
-        
+
     async def comprehensive_enhancement(self, query: str,
                                       vector_store,
                                       enhancement_config: Dict) -> Dict[str, Any]:
         """Run comprehensive query enhancement pipeline."""
-        
+
         results = {'original_query': query}
-        
+
         # Step 1: HyDE Enhancement
         if enhancement_config.get('use_hyde', True):
             hyde_result = self.hyde_enhancer.enhance_query_with_hyde(query)
             results['hyde_enhancement'] = hyde_result
-        
+
         # Step 2: Query Expansion
         if enhancement_config.get('use_expansion', True):
             expansion_result = self.query_expander.expand_query(query)
             results['query_expansion'] = expansion_result
-        
+
         # Step 3: Multi-Query Generation
         if enhancement_config.get('use_multi_query', True):
             multi_query_result = self.multi_query_gen.generate_multi_query_set(query)
             results['multi_query'] = multi_query_result
-        
+
         # Step 4: Enhanced Retrieval
         enhanced_retrieval = await self._perform_enhanced_retrieval(
             results, vector_store, enhancement_config
         )
         results['enhanced_retrieval'] = enhanced_retrieval
-        
+
         # Step 5: Context Optimization
         context_result = self.context_optimizer.optimize_context_window(
             query, enhanced_retrieval['combined_results']
         )
         results['optimized_context'] = context_result
-        
+
         # Step 6: Dynamic Prompt Engineering
         prompt_result = self.dynamic_adapter.adapt_prompt_dynamically(
             query, context_result['optimized_context'], enhanced_retrieval
         )
         results['engineered_prompt'] = prompt_result
-        
+
         return results
 ```
 
@@ -1143,6 +1146,7 @@ class ComprehensiveQueryEnhancer:
 ## **📝 Chapter Summary**
 
 ### **What You've Built**
+
 - ✅ HyDE system for semantic gap bridging with multiple hypothetical document strategies
 - ✅ Multi-strategy query expansion using semantic, contextual, and domain-specific techniques
 - ✅ Multi-query generation from different perspectives and specificity levels
@@ -1150,6 +1154,7 @@ class ComprehensiveQueryEnhancer:
 - ✅ Advanced prompt engineering with dynamic adaptation and confidence calibration
 
 ### **Key Technical Skills Learned**
+
 1. **Query Enhancement**: HyDE, expansion strategies, and multi-query generation
 2. **Context Optimization**: Token budgeting, relevance ranking, and smart summarization
 3. **Prompt Engineering**: Template design, chain-of-thought, and confidence calibration
@@ -1157,6 +1162,7 @@ class ComprehensiveQueryEnhancer:
 5. **Pipeline Integration**: Combining multiple enhancement techniques effectively
 
 ### **Performance Improvements**
+
 - **Retrieval Relevance**: 25-35% improvement with HyDE and query expansion
 - **Context Utilization**: 40-50% better information density in optimized contexts
 - **Answer Quality**: 20-30% improvement with engineered prompts and confidence calibration
@@ -1233,15 +1239,15 @@ Test your understanding of query enhancement and context augmentation techniques
 **What You've Accomplished:**
 You've transformed your RAG system from simple similarity search to intelligent query understanding by mastering:
 
-✅ **HyDE Implementation**: Bridging semantic gaps through hypothetical document generation  
-✅ **Multi-Strategy Query Expansion**: Enriching queries with semantic, contextual, and domain-specific terms  
-✅ **Query Decomposition**: Breaking complex questions into manageable retrieval tasks  
-✅ **Context Optimization**: Intelligent window sizing and prompt engineering for better generation  
-✅ **Integration Mastery**: Combining query enhancement with your Session 3 vector optimization  
+✅ **HyDE Implementation**: Bridging semantic gaps through hypothetical document generation
+✅ **Multi-Strategy Query Expansion**: Enriching queries with semantic, contextual, and domain-specific terms
+✅ **Query Decomposition**: Breaking complex questions into manageable retrieval tasks
+✅ **Context Optimization**: Intelligent window sizing and prompt engineering for better generation
+✅ **Integration Mastery**: Combining query enhancement with your Session 3 vector optimization
 
 **Your RAG Evolution Journey So Far:**
 - **Session 2**: Smart document preprocessing and hierarchical chunking
-- **Session 3**: High-performance vector databases and hybrid search optimization  
+- **Session 3**: High-performance vector databases and hybrid search optimization
 - **Session 4**: Intelligent query understanding and semantic gap bridging ✅
 - **Session 5 Next**: Measuring and validating these enhancements actually work
 
@@ -1258,6 +1264,7 @@ You've built sophisticated query intelligence - HyDE, expansion, decomposition, 
 - **How to set up** A/B tests that prove your enhancements work in production?
 
 ### **Preparation for Evaluation Excellence**
+
 1. **Document your baseline**: RAG performance before query enhancements
 2. **Create test query sets**: Challenging questions that test each enhancement technique
 3. **Track enhancement metrics**: Response quality, retrieval success, user satisfaction

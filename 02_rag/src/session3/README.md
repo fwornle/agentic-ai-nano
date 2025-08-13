@@ -7,7 +7,7 @@ This module implements production-ready vector database architectures with hybri
 The module provides a comprehensive vector search infrastructure with:
 
 - **Multiple Vector Database Support**: ChromaDB, Pinecone, Qdrant implementations
-- **Hybrid Search**: Combines semantic similarity with BM25 lexical search  
+- **Hybrid Search**: Combines semantic similarity with BM25 lexical search
 - **Advanced Indexing**: HNSW and IVF optimization strategies
 - **Multi-Stage Retrieval**: Query enhancement, parallel search, and reranking
 - **Production Optimization**: Caching, batching, and performance monitoring
@@ -23,7 +23,7 @@ session3/
 │
 ├── vector_database_interface.py    # Abstract interface for vector DBs
 ├── chroma_vector_store.py          # ChromaDB implementation
-├── pinecone_vector_store.py        # Pinecone implementation  
+├── pinecone_vector_store.py        # Pinecone implementation
 ├── qdrant_vector_store.py          # Qdrant implementation
 │
 ├── hybrid_search_engine.py         # Semantic + BM25 fusion
@@ -59,8 +59,8 @@ search_system = ProductionVectorSearch(production_config)
 
 # Perform hybrid search
 results = await search_system.production_search(
-    "your query here", 
-    search_type="hybrid", 
+    "your query here",
+    search_type="hybrid",
     top_k=10
 )
 ```
@@ -88,6 +88,7 @@ export QDRANT_PORT="6333"
 ### Database-Specific Configuration
 
 #### ChromaDB (Local/Development)
+
 ```python
 chroma_config = {
     'persist_directory': './chroma_db',
@@ -99,10 +100,11 @@ chroma_config = {
 ```
 
 #### Pinecone (Managed/Production)
+
 ```python
 pinecone_config = {
     'api_key': 'your-api-key',
-    'environment': 'your-environment', 
+    'environment': 'your-environment',
     'index_name': 'rag-documents',
     'dimension': 1536,
     'pods': 2,
@@ -111,6 +113,7 @@ pinecone_config = {
 ```
 
 #### Qdrant (Self-Hosted/Hybrid)
+
 ```python
 qdrant_config = {
     'host': 'localhost',
@@ -123,6 +126,7 @@ qdrant_config = {
 ## 🔍 Search Methods
 
 ### 1. Hybrid Search
+
 Combines semantic vector similarity with BM25 keyword matching:
 
 ```python
@@ -139,12 +143,13 @@ results = await search_system.production_search(
 - Cross-encoder reranking for accuracy improvement
 
 ### 2. Multi-Stage Retrieval
+
 Advanced pipeline with query enhancement and progressive filtering:
 
 ```python
 results = await search_system.production_search(
     query="complex multi-part question",
-    search_type="multi_stage", 
+    search_type="multi_stage",
     top_k=10
 )
 ```
@@ -156,6 +161,7 @@ results = await search_system.production_search(
 4. Progressive filtering and reranking
 
 ### 3. Optimized Search
+
 High-performance search with caching and preprocessing:
 
 ```python
@@ -174,15 +180,17 @@ results = optimized_engine.optimized_search(
 ### Index Configuration
 
 #### HNSW Parameters (for accuracy-focused scenarios)
+
 ```python
 hnsw_config = {
     'M': 32,                    # Higher connectivity = better recall
-    'ef_construction': 200,     # Build-time accuracy 
+    'ef_construction': 200,     # Build-time accuracy
     'ef_search': 128           # Query-time accuracy
 }
 ```
 
-#### IVF Parameters (for scale-focused scenarios)  
+#### IVF Parameters (for scale-focused scenarios)
+
 ```python
 ivf_config = {
     'centroids': n_vectors * 0.08,    # ~8% of dataset size
@@ -197,7 +205,7 @@ ivf_config = {
 The system implements multi-level caching:
 
 1. **Query Embedding Cache**: Reuse embeddings for identical queries
-2. **Result Cache**: Store complete search results 
+2. **Result Cache**: Store complete search results
 3. **Index Cache**: Persist built indices across sessions
 
 ### Batch Operations
@@ -230,7 +238,7 @@ from session3 import RAGArchitectureOptimizer
 
 requirements = {
     'daily_queries': 10000,
-    'document_count': 1000000, 
+    'document_count': 1000000,
     'max_latency_ms': 100,
     'monthly_budget_usd': 500,
     'min_recall': 0.90
@@ -244,7 +252,7 @@ recommendation = RAGArchitectureOptimizer.recommend_architecture(requirements)
 | Scenario | Database | Index | Rationale |
 |----------|----------|-------|-----------|
 | High Performance (<100ms) | Pinecone | HNSW | Managed infrastructure, consistent latency |
-| Large Scale (>1M docs) | Qdrant | IVF+PQ | Compression, cost efficiency |  
+| Large Scale (>1M docs) | Qdrant | IVF+PQ | Compression, cost efficiency |
 | Development/Moderate | ChromaDB | HNSW | Local setup, balanced performance |
 
 ## 🧪 Evaluation Metrics
@@ -260,12 +268,12 @@ print(f"Average search time: {metrics['hybrid']['total_time'] / metrics['hybrid'
 def evaluate_search_quality(search_system, test_queries):
     precision_scores = []
     recall_scores = []
-    
+
     for query, expected_docs in test_queries:
         results = search_system.production_search(query, top_k=10)
         # Calculate precision@k, recall@k, NDCG
         # ...
-        
+
     return {
         'precision_at_10': np.mean(precision_scores),
         'recall_at_10': np.mean(recall_scores)
@@ -317,7 +325,7 @@ def evaluate_search_quality(search_system, test_queries):
 This vector search infrastructure enables:
 
 - **Session 4**: Query Enhancement & Context Augmentation
-- **Session 5**: RAG Evaluation & Quality Assessment  
+- **Session 5**: RAG Evaluation & Quality Assessment
 - **Session 6**: Graph-Enhanced Retrieval
 - **Session 9**: Production Deployment & Scaling
 

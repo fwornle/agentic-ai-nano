@@ -3508,7 +3508,6 @@ class ProductionAgentFactory:
 ```
 
 The factory provides centralized agent management with health monitoring and graceful shutdown capabilities for production environments.
-```
 
 ---
 

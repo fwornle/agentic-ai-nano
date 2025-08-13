@@ -3,96 +3,104 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: Document Loading Architecture
+
 **What is the primary advantage of using metadata tracking in document loading?**
 
-A) Reduces memory usage during processing  
-B) Enables source attribution and filtering capabilities ✅  
-C) Improves embedding quality  
-D) Speeds up chunking operations  
+A) Reduces memory usage during processing
+B) Enables source attribution and filtering capabilities ✅
+C) Improves embedding quality
+D) Speeds up chunking operations
 
 **Explanation:** Metadata tracking stores information like source path, document type, and other attributes with each document chunk. This enables source attribution (showing users where information came from), filtering by document type or source, and better debugging of retrieval issues.
 
 ---
 
 ### Question 2: Text Chunking Strategies
+
 **Which chunking approach is most likely to preserve semantic coherence in documents?**
 
-A) Fixed character-length splitting  
-B) Random boundary splitting  
-C) Semantic paragraph-based splitting ✅  
-D) Token-count only splitting  
+A) Fixed character-length splitting
+B) Random boundary splitting
+C) Semantic paragraph-based splitting ✅
+D) Token-count only splitting
 
 **Explanation:** Semantic paragraph-based splitting uses natural language boundaries (like paragraph breaks) to create chunks, preserving the logical flow and context of information. This approach maintains semantic coherence better than arbitrary character or token-based splits.
 
 ---
 
 ### Question 3: Vector Store Operations
+
 **In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?**
 
-A) Speeds up similarity searches  
-B) Enables persistent storage between sessions ✅  
-C) Improves embedding accuracy  
-D) Reduces memory consumption  
+A) Speeds up similarity searches
+B) Enables persistent storage between sessions ✅
+C) Improves embedding accuracy
+D) Reduces memory consumption
 
 **Explanation:** The `persist_directory` parameter specifies where ChromaDB should store the vector database on disk. This allows the indexed documents to persist between application restarts, avoiding the need to re-index documents every time the system starts.
 
 ---
 
 ### Question 4: RAG Query Processing
+
 **What is the primary benefit of including confidence scores in RAG responses?**
 
-A) Improves LLM generation quality  
-B) Reduces retrieval time  
-C) Provides transparency about answer reliability ✅  
-D) Enables faster document indexing  
+A) Improves LLM generation quality
+B) Reduces retrieval time
+C) Provides transparency about answer reliability ✅
+D) Enables faster document indexing
 
 **Explanation:** Confidence scores help users understand how reliable the RAG system's answer is based on the quality of retrieved documents. Low confidence scores can indicate that the system found limited relevant information, helping users interpret answers appropriately.
 
 ---
 
 ### Question 5: System Architecture Design
+
 **Why does the RAG system separate retrieval and generation into distinct phases?**
 
-A) To reduce computational costs  
-B) To enable modular optimization and debugging ✅  
-C) To support multiple languages  
-D) To prevent embedding conflicts  
+A) To reduce computational costs
+B) To enable modular optimization and debugging ✅
+C) To support multiple languages
+D) To prevent embedding conflicts
 
 **Explanation:** Separating retrieval and generation phases allows independent optimization of each component. You can experiment with different retrieval strategies, embedding models, or generation prompts without affecting the other components, making the system more maintainable and debuggable.
 
 ---
 
 ### Question 6: Interactive Interface Design
+
 **What is the main advantage of the structured response format (answer, sources, confidence, num_sources)?**
 
-A) Reduces token usage  
-B) Improves embedding quality  
-C) Enables comprehensive result evaluation and transparency ✅  
-D) Speeds up query processing  
+A) Reduces token usage
+B) Improves embedding quality
+C) Enables comprehensive result evaluation and transparency ✅
+D) Speeds up query processing
 
 **Explanation:** The structured response format provides complete transparency about the RAG process, including what sources were used, how confident the system is, and how many documents contributed to the answer. This enables users to evaluate answer quality and developers to debug system performance.
 
 ---
 
 ### Question 7: Token-Aware Chunking
+
 **Why is using tiktoken for token counting important in RAG systems?**
 
-A) It improves semantic understanding  
-B) It ensures chunks fit within LLM context limits ✅  
-C) It speeds up embedding generation  
-D) It reduces storage requirements  
+A) It improves semantic understanding
+B) It ensures chunks fit within LLM context limits ✅
+C) It speeds up embedding generation
+D) It reduces storage requirements
 
 **Explanation:** tiktoken provides accurate token counts for specific LLM models, ensuring that chunks don't exceed the model's context window limits. This prevents truncation issues and ensures all retrieved content can be processed by the generation model.
 
 ---
 
 ### Question 8: Error Handling
+
 **What is the best practice for handling failed document loads in a production RAG system?**
 
-A) Stop the entire indexing process  
-B) Skip failed documents and continue with others ✅  
-C) Retry indefinitely until success  
-D) Use placeholder content for failed loads  
+A) Stop the entire indexing process
+B) Skip failed documents and continue with others ✅
+C) Retry indefinitely until success
+D) Use placeholder content for failed loads
 
 **Explanation:** Robust RAG systems should skip failed document loads (with appropriate logging) and continue processing other documents. This ensures that the system remains functional even when some sources are temporarily unavailable or corrupted.
 
@@ -111,6 +119,7 @@ D) Use placeholder content for failed loads
 ## 📚 Key Implementation Concepts
 
 ### Core Components
+
 1. **DocumentLoader**: Multi-source document ingestion with metadata
 2. **IntelligentTextSplitter**: Token-aware chunking with semantic boundaries
 3. **VectorStore**: Persistent storage with similarity search capabilities
@@ -118,6 +127,7 @@ D) Use placeholder content for failed loads
 5. **InteractiveRAG**: User interface with comprehensive result display
 
 ### Best Practices
+
 - **Modular Design**: Separate concerns for maintainability
 - **Error Handling**: Graceful failure management
 - **Metadata Tracking**: Enable source attribution and filtering
@@ -125,6 +135,7 @@ D) Use placeholder content for failed loads
 - **Confidence Scoring**: Provide result quality indicators
 
 ### Performance Optimization
+
 - **Chunk Size**: Balance between context and specificity (500-1500 tokens)
 - **Overlap Strategy**: 10-20% overlap for continuity
 - **Top-K Selection**: Start with 3-5 documents, adjust based on needs

@@ -1,7 +1,9 @@
 # Session 0: Introduction to Agent Frameworks & Patterns
 
 ## Learning Objectives
+
 By the end of this session, you will:
+
 - Understand the five core agentic patterns: Reflection, Tool Use, ReAct, Planning, and Multi-Agent
 - Compare major agent frameworks and their architectural approaches including modular/atomic patterns
 - Identify when to use each framework based on project requirements
@@ -23,8 +25,8 @@ response = llm.generate("What's the weather today?")
 # No context, no tools, no reasoning - just pattern matching
 ```
 
-
 **Problems with Simple Prompting:**
+
 - No access to external data or tools
 - No memory of previous interactions  
 - No ability to plan or reason through complex tasks
@@ -34,6 +36,7 @@ response = llm.generate("What's the weather today?")
 #### The Agent Paradigm
 
 Agents transform LLMs from static text generators into dynamic, goal-oriented systems that can:
+
 - **Reason** about problems step-by-step
 - **Act** by using tools and external resources
 - **Plan** multi-step approaches to complex tasks
@@ -64,17 +67,20 @@ Based on recent research and practical implementations, five patterns have emerg
 ![Reflection Pattern](images/reflection-pattern.png)
 
 **How It Works:**
+
 1. **Generate**: Agent produces initial response
 2. **Reflect**: Agent analyzes its own output for quality, accuracy, completeness
 3. **Refine**: Agent revises based on self-criticism
 4. **Iterate**: Repeat until satisfactory quality achieved
 
 **When to Use:**
+
 - Content creation requiring high quality (writing, code, analysis)
 - Tasks where first attempts are typically insufficient
 - Systems that need to build confidence in their outputs
 
 **Example Implementation Pattern:**
+
 ```python
 class ReflectiveAgent:
     def generate_with_reflection(self, task):
@@ -91,7 +97,6 @@ class ReflectiveAgent:
         return response
 ```
 
-
 ### Pattern 2: Tool Use - Extending Agent Capabilities
 
 **Core Concept**: Agents dynamically select and use external tools to access information and perform actions beyond their built-in capabilities.
@@ -99,12 +104,14 @@ class ReflectiveAgent:
 ![Tool Use Pattern](images/tool-use-pattern.png)
 
 **Architecture Components:**
+
 - **Tool Registry**: Available tools with descriptions and schemas
 - **Tool Selection**: Logic to choose appropriate tools for tasks
 - **Execution Engine**: Safe tool execution with error handling
 - **Result Integration**: Incorporating tool outputs into reasoning
 
 **Essential Tool Categories:**
+
 - **Information Retrieval**: Web search, databases, APIs
 - **Computation**: Calculators, data analysis, mathematical operations
 - **Communication**: Email, messaging, notifications
@@ -112,6 +119,7 @@ class ReflectiveAgent:
 - **External Services**: Payment processing, scheduling, integrations
 
 **When to Use:**
+
 - Tasks requiring real-time information
 - Operations needing precise calculations
 - Integration with existing business systems
@@ -124,6 +132,7 @@ class ReflectiveAgent:
 ![ReAct Pattern](images/react-pattern.png)
 
 **The ReAct Cycle:**
+
 1. **Observe**: Analyze current state and available information
 2. **Think**: Reason about next steps and potential actions
 3. **Act**: Execute chosen action using available tools
@@ -131,11 +140,13 @@ class ReflectiveAgent:
 5. **Repeat**: Continue until goal achieved
 
 **ReAct vs Traditional Planning:**
+
 - **Traditional**: Plan everything upfront, then execute
 - **ReAct**: Plan-Act-Observe-Replan in continuous cycles
 - **Advantage**: Adapts to unexpected results and new information
 
 **Implementation Structure:**
+
 ```python
 def react_loop(self, goal):
     observation = self.get_initial_observation()
@@ -155,7 +166,6 @@ def react_loop(self, goal):
     return self.format_final_result()
 ```
 
-
 ### Pattern 4: Planning - Multi-Step Task Decomposition
 
 **Core Concept**: Agents break down complex goals into manageable subtasks, creating executable plans with proper sequencing and dependencies.
@@ -165,16 +175,19 @@ def react_loop(self, goal):
 **Planning Approaches:**
 
 **Hierarchical Planning:**
+
 - Break large tasks into smaller, manageable subtasks
 - Create dependency chains between tasks
 - Execute in proper sequence with error handling
 
 **Dynamic Planning:**
+
 - Adjust plans based on execution results
 - Handle unexpected obstacles and opportunities
 - Balance thorough planning with adaptive execution
 
 **Planning Components:**
+
 - **Goal Analysis**: Understanding requirements and constraints
 - **Task Decomposition**: Breaking down into executable steps
 - **Resource Assessment**: Identifying needed tools and information
@@ -182,6 +195,7 @@ def react_loop(self, goal):
 - **Monitoring**: Tracking progress and adjusting as needed
 
 **When to Use:**
+
 - Complex, multi-step workflows
 - Tasks with dependencies between steps
 - Long-running processes requiring coordination
@@ -196,26 +210,31 @@ def react_loop(self, goal):
 **Collaboration Patterns:**
 
 **Sequential Processing:**
+
 - Tasks flow from agent to agent in assembly-line fashion
 - Each agent adds specialized value
 - Clear handoff points and quality gates
 
 **Parallel Processing:**
+
 - Multiple agents work on different aspects simultaneously
 - Results are merged or synthesized
 - Faster execution for independent subtasks
 
 **Debate and Consensus:**
+
 - Agents discuss and critique each other's contributions
 - Multiple perspectives improve solution quality
 - Consensus mechanisms resolve conflicts
 
 **Hierarchical Teams:**
+
 - Manager agents coordinate worker agents
 - Clear role definitions and communication protocols
 - Scalable structure for complex organizations
 
 **Multi-Agent Coordination Mechanisms:**
+
 - **Message Passing**: Direct communication between agents
 - **Shared State**: Common workspace for collaboration
 - **Event Systems**: Pub/sub patterns for loose coupling
@@ -236,6 +255,7 @@ Agent frameworks can be categorized based on their primary architectural approac
 #### **Bare Metal Python (Educational Foundation)**
 
 **Philosophy**: Direct implementation using pure Python and LLM APIs
+
 - **Pros**: Complete control, no hidden abstractions, educational value
 - **Cons**: Requires implementing all patterns from scratch
 - **Best For**: Learning fundamentals, custom implementations, research
@@ -276,10 +296,10 @@ Finally, we integrate with the language model and process the response, requirin
         return self.process_response(response)
 ```
 
-
 #### **LangChain/LangGraph (Industry Standard)**
 
 **Philosophy**: Component-based architecture with extensive ecosystem
+
 - **Approach**: Chain composition with graph-based orchestration
 - **Strengths**: Mature ecosystem, extensive documentation, community support
 - **Architecture**: Nodes (operations) connected by edges (data flow)
@@ -315,8 +335,8 @@ Edges define how information flows between nodes, including conditional logic fo
     return graph.compile()
 ```
 
-
 **When to Use LangChain/LangGraph:**
+
 - Rapid prototyping with proven components
 - Complex workflows requiring precise control flow
 - Integration with extensive tool ecosystem
@@ -325,6 +345,7 @@ Edges define how information flows between nodes, including conditional logic fo
 #### **CrewAI (Team Orchestration)**
 
 **Philosophy**: Role-based multi-agent collaboration with human-like team dynamics
+
 - **Approach**: Define agent roles, assign tasks, let them collaborate
 - **Strengths**: Intuitive team metaphors, built-in collaboration patterns
 - **Architecture**: Crews (teams) contain Agents (roles) executing Tasks (work)
@@ -387,8 +408,8 @@ crew = Crew(
 result = crew.kickoff()
 ```
 
-
 **When to Use CrewAI:**
+
 - Multi-step workflows requiring specialized expertise
 - Teams comfortable with role-based thinking
 - Projects needing natural collaboration patterns
@@ -397,6 +418,7 @@ result = crew.kickoff()
 #### **PydanticAI (Type-Safe Agents)**
 
 **Philosophy**: Type safety and structured outputs through strong schemas
+
 - **Approach**: Pydantic models define all agent inputs/outputs
 - **Strengths**: IDE support, validation, predictable behavior
 - **Architecture**: Schema-first development with runtime validation
@@ -455,8 +477,8 @@ query = ResearchQuery(
 result: ResearchResult = research_agent.run_sync(query)
 ```
 
-
 **When to Use PydanticAI:**
+
 - Enterprise applications requiring predictable behavior
 - Teams prioritizing code quality and maintainability
 - Integration with existing Pydantic-based systems
@@ -465,6 +487,7 @@ result: ResearchResult = research_agent.run_sync(query)
 #### **Atomic Agents (Modular Architecture)**
 
 **Philosophy**: Composable, atomic components for maximum flexibility and reusability
+
 - **Approach**: Small, independent agent modules that can be combined
 - **Strengths**: Lightweight, modular design, easy to test and maintain
 - **Architecture**: Atomic components with clear interfaces and minimal dependencies
@@ -524,6 +547,7 @@ writer = create_specialized_agent("writing")
 ```
 
 **When to Use Atomic Agents:**
+
 - Projects requiring maximum modularity and component reuse
 - Teams building diverse agent applications with shared components
 - Applications needing dynamic agent assembly and reconfiguration
@@ -532,6 +556,7 @@ writer = create_specialized_agent("writing")
 #### **Agno (Performance-Optimized)**
 
 **Philosophy**: Lightweight, high-performance agent development
+
 - **Approach**: Minimal abstractions, maximum efficiency
 - **Strengths**: Low memory usage, fast instantiation, multimodal support
 - **Architecture**: Direct integration with 23+ model providers
@@ -568,8 +593,8 @@ workflow = Workflow(
 results = await workflow.run_parallel(tasks)
 ```
 
-
 **When to Use Agno:**
+
 - High-throughput applications (serverless, microservices)
 - Resource-constrained environments
 - Applications requiring multimodal capabilities
@@ -578,11 +603,13 @@ results = await workflow.run_parallel(tasks)
 #### **ADK (Enterprise Integration)**
 
 **Philosophy**: Enterprise-grade agent development with Google Cloud integration
+
 - **Approach**: Production-ready patterns with built-in observability
 - **Strengths**: Enterprise security, monitoring, scalability
 - **Architecture**: Cloud-native with comprehensive tooling
 
 **When to Use ADK:**
+
 - Enterprise applications requiring compliance and security
 - Google Cloud ecosystem integration
 - Production systems needing comprehensive monitoring
@@ -608,15 +635,18 @@ results = await workflow.run_parallel(tasks)
 ### Architectural Considerations
 
 **Complexity vs Control Trade-off:**
+
 - **High Control**: Bare Metal → PydanticAI → LangGraph
 - **High Abstraction**: CrewAI → LangChain → Agno
 - **Modular Balance**: Atomic Agents → ADK
 
 **Performance vs Features Trade-off:**
+
 - **Performance**: Agno → Bare Metal → Atomic Agents
 - **Features**: LangChain → CrewAI → LangGraph
 
 **Learning Curve:**
+
 - **Easiest**: CrewAI → Atomic Agents → LangChain → Agno  
 - **Steepest**: Bare Metal → LangGraph → PydanticAI
 
@@ -636,12 +666,14 @@ Throughout this module, you'll implement all five agentic patterns using differe
 ### Learning Progression
 
 **Week 1: Foundation & Popular Frameworks**
+
 - Session 1: Pure Python implementation (all patterns from scratch)
 - Session 2-3: LangChain/LangGraph (industry standard approaches)
 - Session 4-5: CrewAI/PydanticAI (collaboration and type safety)
 - Session 6: Atomic Agents (modular architecture bridging individual and enterprise)
 
 **Week 2: Production & Advanced Patterns**
+
 - Session 7: ADK (enterprise-grade implementation)  
 - Session 8: Agno (performance optimization)
 - Session 9-10: Advanced patterns and production deployment
@@ -653,90 +685,105 @@ Throughout this module, you'll implement all five agentic patterns using differe
 Test your understanding of agent frameworks and patterns:
 
 ### 1. Which agentic pattern involves an agent evaluating and improving its own outputs?
+
 a) Tool Use
 b) Reflection
 c) Planning  
 d) Multi-Agent
 
 ### 2. The ReAct pattern combines which two key capabilities?
+
 a) Reading and Acting
 b) Reasoning and Acting
 c) Reflecting and Acting
 d) Retrieving and Acting
 
 ### 3. Which framework is best suited for high-performance applications with minimal resource usage?
+
 a) LangChain
 b) CrewAI
 c) Agno
 d) PydanticAI
 
 ### 4. What is the primary advantage of the Multi-Agent pattern?
+
 a) Faster execution
 b) Specialized expertise collaboration
 c) Reduced complexity
 d) Lower resource usage
 
 ### 5. Which framework emphasizes type safety through schema validation?
+
 a) LangChain
 b) CrewAI
 c) Agno
 d) PydanticAI
 
-### 6. The Planning pattern is most useful for:
+### 6. The Planning pattern is most useful for
+
 a) Simple query-response interactions
 b) Complex multi-step workflows
 c) Real-time data processing
 d) Static content generation
 
 ### 7. In the Tool Use pattern, what determines which tool an agent selects?
+
 a) Random selection
 b) Tool availability
 c) Task requirements and tool descriptions
 d) Execution speed
 
 ### 8. Which framework uses a graph-based architecture for precise control flow?
+
 a) CrewAI
 b) LangGraph
 c) PydanticAI  
 d) Agno
 
-### 9. The primary benefit of using agent frameworks over bare metal implementation is:
+### 9. The primary benefit of using agent frameworks over bare metal implementation is
+
 a) Better performance
 b) Lower costs
 c) Pre-built components and patterns
 d) Simpler deployment
 
 ### 10. Which collaboration pattern involves agents working on different aspects simultaneously?
+
 a) Sequential Processing
 b) Parallel Processing
 c) Debate and Consensus
 d) Hierarchical Teams
 
 ### 11. When would you choose bare metal Python implementation over frameworks?
+
 a) Production applications
 b) Learning fundamentals and custom research
 c) Team collaboration projects
 d) Enterprise integration
 
 ### 12. The reflection pattern typically involves how many phases?
+
 a) 2 phases: Generate and Reflect
 b) 3 phases: Generate, Reflect, Refine
 c) 4 phases: Generate, Reflect, Refine, Validate
 d) 5 phases: Generate, Reflect, Refine, Test, Deploy
 
 ### 13. What makes ADK particularly suitable for enterprise applications?
+
 a) Open source licensing
 b) Built-in security, monitoring, and Google Cloud integration
 c) Fastest execution speed
 d) Simplest learning curve
 
 ### 14. In multi-agent systems, what is the role of a "Manager Agent"?
+
 a) Execute all tasks directly
 b) Store data and state
 c) Coordinate worker agents and manage interactions
 d) Provide user interface
 
 ### 15. Which pattern would be most appropriate for a task requiring real-time stock price analysis?
+
 a) Reflection (for self-improvement)
 b) Tool Use (for accessing live data APIs)
 c) Planning (for multi-step workflows)  
@@ -783,6 +830,7 @@ d) Multi-Agent (for collaboration)
 In **Session 1: Bare Metal Agents**, you'll implement all five agentic patterns from scratch using pure Python. This foundation will help you understand what frameworks are actually doing under the hood and appreciate the abstractions they provide.
 
 **Coming Up:**
+
 - Build a complete agent system without any frameworks
 - Implement each pattern step-by-step with detailed explanations
 - Create your own tool system and reasoning loops

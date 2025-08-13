@@ -7,17 +7,19 @@ This directory contains the complete implementation of advanced Graph-based Retr
 ## 🏗️ Architecture Components
 
 ### 1. NodeRAG - Heterogeneous Graph Architecture
+
 **File**: `noderag_extractor.py`
 
 The revolutionary NodeRAG system that addresses traditional GraphRAG limitations through specialized node types:
 
 - **Specialized Node Types**: Entity, Concept, Document, Relationship, Cluster nodes
 - **Three-Stage Processing**: Decomposition → Augmentation → Enrichment
-- **Personalized PageRank**: Semantic traversal for query-relevant pathways  
+- **Personalized PageRank**: Semantic traversal for query-relevant pathways
 - **HNSW Similarity Edges**: High-performance similarity connections
 - **Reasoning Pathways**: Coherent knowledge pathway construction
 
 ### 2. Traditional GraphRAG
+
 **File**: `knowledge_graph_extractor.py`
 
 Production-grade traditional GraphRAG implementation:
@@ -28,6 +30,7 @@ Production-grade traditional GraphRAG implementation:
 - **Graph Construction**: NetworkX-based knowledge graph building
 
 ### 3. Code GraphRAG
+
 **File**: `code_graphrag.py`
 
 Specialized GraphRAG for software repositories:
@@ -38,6 +41,7 @@ Specialized GraphRAG for software repositories:
 - **Code Entity Extraction**: Functions, classes, methods, variables
 
 ### 4. Neo4j Production Integration
+
 **File**: `neo4j_manager.py`
 
 Enterprise-grade graph database integration:
@@ -47,7 +51,8 @@ Enterprise-grade graph database integration:
 - **Production Patterns**: Connection pooling, error recovery, monitoring
 - **Query Optimization**: Cypher queries optimized for GraphRAG patterns
 
-### 5. Graph Traversal Engine  
+### 5. Graph Traversal Engine
+
 **File**: `graph_traversal_engine.py`
 
 Advanced multi-hop reasoning engine:
@@ -58,6 +63,7 @@ Advanced multi-hop reasoning engine:
 - **Context Synthesis**: Natural language narrative generation
 
 ### 6. Hybrid Graph-Vector Search
+
 **File**: `hybrid_graph_vector_rag.py`
 
 State-of-the-art fusion system:
@@ -68,6 +74,7 @@ State-of-the-art fusion system:
 - **Performance Optimization**: 30-40% improvement over single methods
 
 ### 7. Production Orchestration
+
 **File**: `production_graphrag.py`
 
 Complete system integration:
@@ -90,7 +97,7 @@ config = create_production_config(
     embedding_model=your_embedding_model,
     vector_store=your_vector_store,
     neo4j_uri="bolt://localhost:7687",
-    neo4j_user="neo4j", 
+    neo4j_user="neo4j",
     neo4j_password="your_password"
 )
 
@@ -128,7 +135,7 @@ result = noderag.extract_noderag_graph(documents, {
 
 # Access specialized nodes
 heterogeneous_nodes = result['heterogeneous_nodes']
-reasoning_pathways = result['reasoning_pathways'] 
+reasoning_pathways = result['reasoning_pathways']
 pagerank_scores = result['pagerank_scores']
 ```
 
@@ -156,25 +163,29 @@ relationships = analysis['relationships']
 ## 📊 Performance Characteristics
 
 ### NodeRAG Performance
-- **Processing**: 3-stage pipeline handles 10K+ documents 
+
+- **Processing**: 3-stage pipeline handles 10K+ documents
 - **Pathway Coherence**: 85-95% coherent reasoning pathways
 - **PageRank**: Sub-100ms semantic traversal on 100K+ node graphs
 - **HNSW Integration**: 200-500ms similarity edge construction
 
-### Traditional GraphRAG Performance  
+### Traditional GraphRAG Performance
+
 - **Entity Extraction**: 80-90% precision with LLM enhancement
 - **Graph Construction**: NetworkX optimized for 100K+ entities
 - **Relationship Mapping**: Pattern + LLM hybrid approach
 
 ### Neo4j Integration Performance
+
 - **Batch Storage**: 10,000+ entities/second
 - **Query Response**: <100ms for 3-hop traversals
 - **Relationship Storage**: 5,000+ relationships/second
 - **Index Optimization**: O(1) entity lookups
 
 ### Hybrid Search Performance
+
 - **Response Time**: 200-800ms for complex queries
-- **Coverage Improvement**: 30-40% over pure vector/graph approaches  
+- **Coverage Improvement**: 30-40% over pure vector/graph approaches
 - **Accuracy Gain**: 25-35% for multi-hop reasoning queries
 
 ## 🔧 Configuration
@@ -186,7 +197,7 @@ relationships = analysis['relationships']
 LLM_MODEL_NAME=gpt-3.5-turbo
 LLM_TEMPERATURE=0.1
 
-# Neo4j Configuration  
+# Neo4j Configuration
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USERNAME=neo4j
 NEO4J_PASSWORD=your_password
@@ -210,12 +221,12 @@ config = GraphRAGConfig(
     enable_pagerank=True,
     enable_hnsw_similarity=True,
     reasoning_integration=True,
-    
+
     # Performance Settings
     batch_size=1000,
     max_traversal_hops=3,
     semantic_filter_threshold=0.7,
-    
+
     # Quality Thresholds
     entity_confidence_threshold=0.6,
     similarity_threshold=0.75
@@ -225,38 +236,44 @@ config = GraphRAGConfig(
 ## 📈 Key Features
 
 ### NodeRAG Innovations
+
 - **Heterogeneous Nodes**: 6 specialized node types for different knowledge structures
 - **Three-Stage Pipeline**: Systematic knowledge pathway construction
 - **Reasoning Integration**: Proactive reasoning through graph structure
 - **Coherent Narratives**: Transform fragments into logical knowledge chains
 
 ### Advanced Capabilities
+
 - **Multi-Hop Reasoning**: Follow relationship chains across multiple entities
 - **Semantic Traversal**: Query-relevant path exploration with PageRank
 - **Adaptive Fusion**: Dynamic strategy selection based on query analysis
 - **Production Scale**: Handles 100K+ entities with sub-second response times
 
 ### Production Features
+
 - **Component Orchestration**: Unified system managing all GraphRAG types
-- **Performance Monitoring**: Comprehensive metrics and health tracking  
+- **Performance Monitoring**: Comprehensive metrics and health tracking
 - **Flexible Deployment**: Support for various infrastructure configurations
 - **Error Recovery**: Robust handling of failures and partial results
 
 ## 🎯 Use Cases
 
 ### When to Use NodeRAG
+
 - **Complex Reasoning**: Multi-step analytical queries requiring synthesis
 - **Educational Applications**: Understanding knowledge structure is important
 - **Multi-Domain Knowledge**: Specialized processing for different knowledge types
 - **Coherent Narratives**: Need logically connected information chains
 
-### When to Use Traditional GraphRAG  
+### When to Use Traditional GraphRAG
+
 - **Multi-Hop Queries**: "What technologies do Apple's partners use?"
 - **Relationship Discovery**: "How are these companies connected?"
 - **Comprehensive Exploration**: "Find all related information"
 - **Rich Entity Networks**: Business, scientific, or social network domains
 
 ### When to Use Hybrid Search
+
 - **Production Systems**: Diverse query types requiring maximum coverage
 - **Research Applications**: Both factual accuracy and insight discovery
 - **Complex Domains**: Queries spanning multiple information types
@@ -273,7 +290,7 @@ python demo_session6.py
 
 The demo showcases:
 - NodeRAG heterogeneous graph construction
-- Traditional GraphRAG entity-relationship extraction  
+- Traditional GraphRAG entity-relationship extraction
 - Code repository analysis
 - Graph metrics and performance analysis
 - Production system orchestration
@@ -343,11 +360,11 @@ result = noderag_extractor.extract_noderag_graph(papers, noderag_config)
 
 You've successfully implemented state-of-the-art GraphRAG systems that represent the cutting edge of intelligent information retrieval:
 
-✅ **NodeRAG Breakthrough**: Heterogeneous graph architecture with specialized reasoning  
-✅ **Production Ready**: Scalable Neo4j integration with monitoring  
-✅ **Hybrid Intelligence**: Combines graph reasoning with vector similarity  
-✅ **Multi-Modal**: Handles documents, code, and structured data  
-✅ **Advanced Reasoning**: Multi-hop traversal with semantic guidance  
+✅ **NodeRAG Breakthrough**: Heterogeneous graph architecture with specialized reasoning
+✅ **Production Ready**: Scalable Neo4j integration with monitoring
+✅ **Hybrid Intelligence**: Combines graph reasoning with vector similarity
+✅ **Multi-Modal**: Handles documents, code, and structured data
+✅ **Advanced Reasoning**: Multi-hop traversal with semantic guidance
 
 These systems enable sophisticated queries like "Analyze the environmental impact technologies used by Apple's automotive partners' suppliers" - requiring complex multi-hop reasoning that traditional RAG systems cannot handle.
 

@@ -1,4 +1,5 @@
 # Session 4: CrewAI Team Orchestration
+
 ## Building Hierarchical Multi-Agent Teams with Role-Based Collaboration
 
 ### 🎯 Session Overview
@@ -12,6 +13,7 @@ In this comprehensive session, we'll explore how to build sophisticated agent te
 ### 📚 Learning Objectives
 
 By the end of this session, you will be able to:
+
 1. **Master CrewAI architecture** with agents, tasks, and crews
 2. **Design role-based agent teams** with clear responsibilities and hierarchies
 3. **Implement collaborative workflows** with autonomous delegation and peer inquiry
@@ -30,16 +32,19 @@ By the end of this session, you will be able to:
 Traditional agent frameworks focus on technical execution flows. CrewAI takes a different approach by modeling agents after real teams:
 
 **Traditional Approach:**
+
 ```
 Input → Process → Output
 ```
 
 **CrewAI Approach:**
+
 ```
 Project Manager → Delegates → Team Members → Collaborate → Deliver
 ```
 
 **2025 Performance Advantage:**
+
 ```
 🏁 CrewAI:     5.76x Faster Execution + Higher Quality
 📊 LangGraph:  Baseline Performance
@@ -90,6 +95,7 @@ researcher = Agent(
 ```
 
 **Key Agent Properties Explained:**
+
 - **role**: The agent's job title and primary function
 - **goal**: What the agent aims to achieve
 - **backstory**: Context that shapes the agent's behavior and expertise
@@ -97,6 +103,7 @@ researcher = Agent(
 - **max_iter**: Maximum attempts to complete a task
 
 **🔄 Autonomous Delegation Benefits (2025):**
+
 - Agents can intelligently redistribute workload
 - Peer inquiry enables collaborative problem-solving
 - Enhanced efficiency through dynamic task allocation
@@ -180,6 +187,7 @@ class ResearchFlow(Flow):
 ```
 
 **Flow Advantages:**
+
 - **Deterministic execution** for production reliability
 - **Fine-grained state management** for complex workflows
 - **Recovery mechanisms** for enterprise deployment
@@ -1987,6 +1995,7 @@ The content marketing crew combines strategic research, creative production, and
 ### Exercise 1: Build a Research Team
 
 Create a research team that can:
+
 1. Gather information from multiple sources
 2. Analyze and synthesize findings
 3. Generate comprehensive reports
@@ -2004,6 +2013,7 @@ def build_research_team():
 ### Exercise 2: Implement Performance Monitoring
 
 Add performance monitoring to your crew:
+
 1. Track task completion times
 2. Monitor agent utilization
 3. Identify bottlenecks
@@ -2031,6 +2041,7 @@ class MyPerformanceMonitor:
 ### 2025 Performance Benchmarks
 
 **CrewAI vs. Competitors:**
+
 - **Execution Speed**: 5.76x faster than LangGraph
 - **Quality Scores**: Higher evaluation metrics across all benchmarks
 - **Resource Efficiency**: Lower memory footprint per task
@@ -2038,6 +2049,7 @@ class MyPerformanceMonitor:
 - **Development Velocity**: Faster time-to-production for complex workflows
 
 **Enterprise Adoption Metrics:**
+
 - 40% reduction in development time
 - 60% improvement in task completion rates
 - 25% lower operational costs
@@ -2048,17 +2060,20 @@ class MyPerformanceMonitor:
 ## 📚 Additional Resources
 
 ### Official Documentation
+
 - [CrewAI Official Documentation](https://docs.crewai.com/)
 - [CrewAI Flows Documentation](https://docs.crewai.com/flows) - 2025 deterministic workflows
 - [CrewAI GitHub Repository](https://github.com/joaomdmoura/crewAI)
 - [Enterprise Deployment Guide](https://docs.crewai.com/enterprise) - New 2025 features
 
 ### Performance and Benchmarking
+
 - [CrewAI vs LangGraph Performance Analysis](https://benchmark.crewai.com) - 2025 study
 - [Production Deployment Patterns](https://patterns.crewai.com)
 - [Cost Optimization Strategies](https://optimization.crewai.com)
 
 ### Integration Guides
+
 - [LangChain Integration Guide](https://python.langchain.com/docs/integrations/providers/crewai)
 - [Enterprise Monitoring Setup](https://monitoring.crewai.com)
 - [Multi-Agent Systems Theory](https://www.cambridge.org/core/books/multiagent-systems)
@@ -2068,6 +2083,7 @@ class MyPerformanceMonitor:
 ## Next Steps
 
 In Session 5, we'll explore **PydanticAI's type-safe approach** to agent development, focusing on:
+
 - Structured outputs with automatic validation
 - Type-safe tool implementations
 - Modern Python patterns for maintainable agents
@@ -2077,6 +2093,7 @@ In Session 5, we'll explore **PydanticAI's type-safe approach** to agent develop
 ### Practical Implementation Challenge
 
 **Build Your Own Enterprise Crew:** Using the 2025 features covered in this session:
+
 1. Create a dynamic team formation system
 2. Implement CrewAI Flows for deterministic execution
 3. Add autonomous delegation with peer inquiry
@@ -2084,6 +2101,7 @@ In Session 5, we'll explore **PydanticAI's type-safe approach** to agent develop
 5. Measure performance against the 5.76x benchmark
 
 **Expected Outcomes:**
+
 - Production-ready multi-agent system
 - Performance monitoring dashboard
 - Scalable architecture supporting 50+ agents

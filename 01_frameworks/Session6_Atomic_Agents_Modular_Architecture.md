@@ -44,6 +44,7 @@ This session bridges the gap between PydanticAI's type safety foundations and th
 ### **The LEGO Philosophy: Why Atomic Architecture Works**
 
 Imagine building with LEGO blocks. Each piece has:
+
 - **Clear Interface**: Predictable connection points (the studs and tubes)
 - **Single Purpose**: Each piece does one thing well
 - **Universal Compatibility**: Any piece can connect to any other piece
@@ -1601,7 +1602,7 @@ spec:
 
 The Kubernetes **Deployment** ensures the desired number of atomic agent replicas remain running. Label selectors link deployments to pods, enabling Kubernetes to manage the service lifecycle automatically.
 
-#### **Container Specification** 
+#### **Container Specification**
 
 ```python
   template:
@@ -1718,6 +1719,7 @@ The **HorizontalPodAutoscaler** automatically adjusts replica counts based on CP
 Test your understanding of Atomic Agents modular architecture with these questions:
 
 ### **Question 1: Core Philosophy**
+
 **What is the core philosophy behind Atomic Agents' "LEGO block" approach?**
 
 A) Agents should be as large and comprehensive as possible  
@@ -1728,6 +1730,7 @@ D) All agents must use the same programming language
 ---
 
 ### **Question 2: Framework Distinction**
+
 **Which feature distinguishes Atomic Agents from traditional frameworks like LangChain?**
 
 A) Better documentation  
@@ -1738,6 +1741,7 @@ D) Faster execution speed
 ---
 
 ### **Question 3: Context Providers**
+
 **What is the primary purpose of Context Providers in atomic agents?**
 
 A) To store conversation history  
@@ -1748,6 +1752,7 @@ D) To handle error messages
 ---
 
 ### **Question 4: Composition Pattern**
+
 **In the atomic agent composition pattern, what enables seamless pipeline creation?**
 
 A) Shared database connections  
@@ -1758,6 +1763,7 @@ D) Identical AI models
 ---
 
 ### **Question 5: CLI Advantage**
+
 **What advantage does the Atomic CLI provide for enterprise deployment?**
 
 A) Faster agent training  
@@ -1768,6 +1774,7 @@ D) Reduced API costs
 ---
 
 ### **Question 6: Production Orchestrator**
+
 **How does the production orchestrator handle service failures?**
 
 A) Stops all services immediately  
@@ -1778,6 +1785,7 @@ D) Restarts the entire system
 ---
 
 ### **Question 7: Auto-Scaling**
+
 **What triggers auto-scaling decisions in atomic agent systems?**
 
 A) Time of day only  
@@ -1788,6 +1796,7 @@ D) Number of users logged in
 ---
 
 ### **Question 8: Provider Agnosticism**
+
 **Why is provider agnosticism important in atomic agent architecture?**
 
 A) It reduces development costs  
@@ -1798,6 +1807,7 @@ D) It makes agents run faster
 ---
 
 ### **Question 9: Enterprise Suitability**
+
 **What makes atomic agents suitable for enterprise integration?**
 
 A) They only work with Microsoft products  
@@ -1808,6 +1818,7 @@ D) They work offline only
 ---
 
 ### **Question 10: Architectural Comparison**
+
 **How do atomic agents compare to monolithic agent approaches?**
 
 A) Atomic agents are always faster  
