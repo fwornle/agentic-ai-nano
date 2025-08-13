@@ -791,49 +791,12 @@ d) Multi-Agent (for collaboration)
 
 ---
 
-## Answer Key
+## 📝 Test Your Knowledge
 
-1. **b) Reflection** - The reflection pattern specifically involves agents evaluating and improving their own outputs through iterative self-assessment.
+Ready to test your understanding of agent framework patterns? Take the comprehensive assessment to evaluate your mastery of foundational concepts, architectural patterns, and framework evolution.
 
-2. **b) Reasoning and Acting** - ReAct stands for Reasoning and Acting, combining these capabilities in iterative loops.
-
-3. **c) Agno** - Agno is optimized for performance with claims of 50x more memory efficiency and 10,000x faster agent instantiation.
-
-4. **b) Specialized expertise collaboration** - Multi-Agent patterns allow different agents with specialized skills to collaborate on complex problems.
-
-5. **d) PydanticAI** - PydanticAI is built around Pydantic models for strong type safety and schema validation.
-
-6. **b) Complex multi-step workflows** - Planning patterns excel at breaking down complex tasks into manageable, sequenced subtasks.
-
-7. **c) Task requirements and tool descriptions** - Agents analyze task needs against available tool capabilities and descriptions to make selection decisions.
-
-8. **b) LangGraph** - LangGraph extends LangChain with graph-based architecture using nodes and edges for precise control flow.
-
-9. **c) Pre-built components and patterns** - Frameworks provide tested implementations of common patterns, reducing development time and complexity.
-
-10. **b) Parallel Processing** - Parallel processing involves multiple agents working simultaneously on different aspects of a problem.
-
-11. **b) Learning fundamentals and custom research** - Bare metal implementation provides complete control and understanding of underlying mechanisms.
-
-12. **b) 3 phases: Generate, Reflect, Refine** - The core reflection pattern involves generating initial output, reflecting on quality, then refining based on critique.
-
-13. **b) Built-in security, monitoring, and Google Cloud integration** - ADK provides enterprise features like security, compliance, monitoring, and cloud-native integration.
-
-14. **c) Coordinate worker agents and manage interactions** - Manager agents orchestrate team activities and handle inter-agent communication.
-
-15. **b) Tool Use (for accessing live data APIs)** - Real-time stock analysis requires accessing external APIs for current market data, making Tool Use the most appropriate pattern.
+**[View Test Solutions](Session0_Test_Solutions.md)**
 
 ---
 
-## Next Session Preview
-
-In **Session 1: Bare Metal Agents**, you'll implement all five agentic patterns from scratch using pure Python. This foundation will help you understand what frameworks are actually doing under the hood and appreciate the abstractions they provide.
-
-**Coming Up:**
-
-- Build a complete agent system without any frameworks
-- Implement each pattern step-by-step with detailed explanations
-- Create your own tool system and reasoning loops
-- Understand the complexity that frameworks abstract away
-
-This foundational knowledge will make you more effective with any framework you choose later!
+[← Back to Nanodegree Overview](Agent_Frameworks_Nanodegree_Curriculum.md) | [Next: Session 1 →](Session1_Bare_Metal_Agents.md)
