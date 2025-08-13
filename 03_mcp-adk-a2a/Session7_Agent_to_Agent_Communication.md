@@ -1131,6 +1131,24 @@ In Session 8, we'll explore **Advanced Agent Workflows** including:
 
 ---
 
+## 📋 Test Your Knowledge
+
+Ready to test your understanding of Agent-to-Agent Communication? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+
+### Multiple Choice Test
+Test your knowledge with 10 carefully crafted questions covering:
+- A2A communication protocols and message types
+- Service discovery and capability negotiation
+- Coordination patterns (orchestration vs choreography)
+- Fault tolerance and message reliability
+- Distributed agent team collaboration
+
+**[📝 Take the Test - Session 7 Test Solutions](Session7_Test_Solutions.md)**
+
+*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+
+---
+
 ## Additional Resources
 
 - [Multi-Agent Systems Design Patterns](https://example.com/mas-patterns)

@@ -929,3 +929,75 @@ In Session 3, we'll integrate MCP servers with **LangChain** to build intelligen
 - [Secure Coding Guidelines](https://security.berkeley.edu/secure-coding-practice-guidelines)
 
 Remember: Security is not a feature, it's a requirement. Always validate input, limit access, and log operations! 🔒
+
+---
+
+## 📝 Multiple Choice Test - Session 2
+
+Test your understanding of secure file system implementation and MCP security best practices with this comprehensive assessment covering sandboxing, validation, and production security considerations.
+
+**1. What is the primary purpose of the sandbox in our file system server?**
+a) To improve performance  
+b) To prevent unauthorized file access  
+c) To compress files  
+d) To cache file contents  
+
+**2. Which method is used to safely resolve file paths and prevent directory traversal attacks?**
+a) `os.path.join()`  
+b) `Path.resolve()`  
+c) `str.replace()`  
+d) `Path.absolute()`  
+
+**3. How are binary files handled in the read_file tool?**
+a) Rejected with an error  
+b) Converted to hexadecimal  
+c) Encoded as base64  
+d) Read as UTF-8  
+
+**4. What type of validation is performed on file types for security?**
+a) Extension only  
+b) MIME type only  
+c) Both extension and MIME type  
+d) File size only  
+
+**5. Which logging level is used for security violations in the file system server?**
+a) DEBUG  
+b) INFO  
+c) WARNING  
+d) ERROR  
+
+**6. What happens when a file path attempts to escape the sandbox?**
+a) The server crashes  
+b) A SandboxError is raised  
+c) The path is automatically corrected  
+d) Access is granted with a warning  
+
+**7. Why does the server implement file size limits?**
+a) To save disk space  
+b) To prevent denial of service attacks  
+c) To improve search performance  
+d) To maintain file quality  
+
+**8. What approach does the server use for file type restrictions?**
+a) Blacklist dangerous extensions  
+b) Whitelist safe extensions  
+c) Allow all extensions  
+d) Check file signatures only  
+
+**9. How does the search_files tool prevent performance issues?**
+a) By caching all file content  
+b) By limiting maximum results returned  
+c) By using external search engines  
+d) By compressing search results  
+
+**10. What is the primary benefit of using `aiofiles` for file operations?**
+a) Faster disk access  
+b) Better error handling  
+c) Non-blocking operations  
+d) Automatic file compression  
+
+**[View Test Solutions](Session2_Test_Solutions.md)**
+
+---
+
+[← Back to Session 1](Session1_Basic_MCP_Server.md) | [Next: Session 3 →](Session3_LangChain_MCP_Integration.md)

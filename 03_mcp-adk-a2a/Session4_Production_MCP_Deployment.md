@@ -1761,6 +1761,24 @@ In Session 5, we'll focus on **Security and Authentication** for MCP servers:
 
 ---
 
+## 📋 Test Your Knowledge
+
+Ready to test your understanding of Production MCP Deployment? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+
+### Multiple Choice Test
+Test your knowledge with 10 carefully crafted questions covering:
+- Production deployment requirements and patterns
+- Container orchestration and Docker best practices
+- Monitoring and observability with Prometheus
+- Auto-scaling strategies and performance optimization
+- CI/CD pipelines and infrastructure as code
+
+**[📝 Take the Test - Session 4 Test Solutions](Session4_Test_Solutions.md)**
+
+*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+
+---
+
 ## Additional Resources
 
 - [Google Cloud Run Best Practices](https://cloud.google.com/run/docs/tips)
