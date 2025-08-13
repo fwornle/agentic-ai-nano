@@ -116,6 +116,8 @@ adk-agent-tutorial/
 
 Create centralized configuration for easy deployment:
 
+**Configuration Imports and Setup:**
+
 ```python
 # config/settings.py
 import os
@@ -124,7 +126,13 @@ from pydantic import BaseSettings
 from dotenv import load_dotenv
 
 load_dotenv()
+```
 
+These imports establish the configuration foundation with environment variable support and type safety through Pydantic.
+
+**Core Configuration Class:**
+
+```python
 class ADKSettings(BaseSettings):
     """Configuration for ADK agents with environment-based settings."""
     
@@ -136,7 +144,13 @@ class ADKSettings(BaseSettings):
     GEMINI_MODEL: str = "gemini-2.0-flash-exp"
     GEMINI_TEMPERATURE: float = 0.7
     GEMINI_MAX_TOKENS: int = 2048
-    
+```
+
+This section defines Google Cloud integration settings and Gemini model parameters with sensible defaults.
+
+**MCP Server and Agent Configuration:**
+
+```python
     # MCP Server Configuration
     MCP_SERVERS: Dict[str, Dict[str, Any]] = {
         "weather": {
@@ -206,6 +220,8 @@ This async context manager ensures proper connection lifecycle management.
 
 **Step 3: Implement tool calling functionality**
 
+**Request Preparation and Validation:**
+
 ```python
     async def call_tool(self, tool_name: str, parameters: Dict[str, Any]) -> Dict[str, Any]:
         """Call a tool on the MCP server."""
@@ -221,7 +237,13 @@ This async context manager ensures proper connection lifecycle management.
             },
             "id": f"{self.server_name}_{tool_name}"
         }
-        
+```
+
+This method constructs the JSON-RPC request following MCP protocol standards for tool invocation.
+
+**HTTP Request Execution:**
+
+```python
         try:
             async with self.session.post(
                 f"{self.base_url}/mcp",
@@ -280,6 +302,8 @@ This method implements the MCP JSON-RPC protocol for tool calling with comprehen
 
 First, let's create a sophisticated memory system:
 
+**Memory System Imports and Data Structures:**
+
 ```python
 # memory/conversation.py
 from typing import List, Dict, Any, Optional
@@ -297,7 +321,13 @@ class ConversationTurn:
     
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
+```
 
+This data structure captures individual conversation turns with timestamps and metadata for comprehensive conversation tracking.
+
+**Conversation Memory Management:**
+
+```python
 class ConversationMemory:
     """Manages conversation history and context."""
     
@@ -320,7 +350,13 @@ class ConversationMemory:
         # Keep only the most recent turns
         if len(self.turns) > self.max_turns:
             self.turns = self.turns[-self.max_turns:]
-    
+```
+
+The memory management includes automatic pruning to prevent memory growth while maintaining conversation context.
+
+**Context Retrieval and Summarization:**
+
+```python
     def get_context(self, include_system: bool = True) -> List[Dict[str, Any]]:
         """Get conversation context for the model."""
         context = []

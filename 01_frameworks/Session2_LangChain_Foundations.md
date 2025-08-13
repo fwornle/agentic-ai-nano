@@ -3,10 +3,15 @@
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
+
 - **Understand** LangChain's architecture and core components (LLMs, Tools, Agents, Memory)
+
 - **Implement** the five agentic patterns using LangChain's built-in abstractions
+
 - **Create** custom tools and integrate them with LangChain agents
+
 - **Compare** LangChain vs bare metal approaches for different use cases
+
 - **Design** production-ready agent systems with proper error handling
 
 ## 📚 Chapter Overview
@@ -26,41 +31,48 @@ We'll implement the same five patterns from Session 1, but using LangChain's bui
 LangChain follows a **modular, composable architecture** where components can be mixed and matched. In 2025, LangChain has evolved significantly to focus on production-ready, enterprise-scale deployments with sophisticated orchestration capabilities.
 
 **Traditional Programming:**
-```
 
+```text
 Input → Fixed Logic → Output
-```
 
+```
 
 **Modern LangChain Approach (2025):**
-```
 
+```text
 Input → LangGraph Orchestration → Multi-Agent Coordination → Dynamic Output
        ↑                        ↑                        ↑
    Stateful Workflows    Context Sharing       Persistent Memory
-```
 
+```
 
 ### Step 1.1: Core Components Overview
 
 LangChain has four essential building blocks:
 
 ```python
+
 # From src/session2/langchain_basics.py - Core imports
+
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import Tool, initialize_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.callbacks import StdOutCallbackHandler
+
 ```
 
-
 **Why These Four?**
+
 - **LLMs**: The "brain" that makes decisions
+
 - **Tools**: The "hands" that interact with the world
+
 - **Memory**: The "context" that maintains conversation state
+
 - **Agents**: The "orchestrator" that coordinates everything
 
 #### **1. Language Models (LLMs)**
+
 LangChain provides unified interfaces for different LLM providers:
 
 **LLM Factory Setup:**
@@ -68,7 +80,9 @@ LangChain provides unified interfaces for different LLM providers:
 The factory pattern allows us to create different LLM instances through a unified interface. This is particularly valuable when you need to switch between providers without changing your agent code.
 
 ```python
+
 # src/session2/llm_setup.py
+
 from langchain.chat_models import ChatOpenAI, ChatAnthropic
 from langchain.llms import OpenAI
 import os
@@ -79,6 +93,7 @@ class LLMFactory:
     @staticmethod
     def create_llm(provider: str, **kwargs):
         """Create LLM instance based on provider"""
+
 ```
 
 **OpenAI Provider Configuration:**
@@ -92,6 +107,7 @@ The OpenAI integration is the most commonly used option, supporting GPT-3.5 and 
                 temperature=kwargs.get("temperature", 0.7),
                 openai_api_key=os.getenv("OPENAI_API_KEY")
             )
+
 ```
 
 **Anthropic Provider Configuration:**
@@ -105,6 +121,7 @@ Anthropic's Claude models offer strong reasoning capabilities and are configured
                 temperature=kwargs.get("temperature", 0.7),
                 anthropic_api_key=os.getenv("ANTHROPIC_API_KEY")
             )
+
 ```
 
 **Error Handling and Usage:**
@@ -116,11 +133,13 @@ The factory includes validation and provides a simple interface for creating LLM
             raise ValueError(f"Unsupported provider: {provider}")
 
 # Usage example - easy switching between providers
+
 llm = LLMFactory.create_llm("openai", temperature=0.1)
+
 ```
 
-
 #### **2. Tools and Tool Integration**
+
 LangChain's tool system provides standardized interfaces:
 
 **Tool Integration Imports:**
@@ -128,7 +147,9 @@ LangChain's tool system provides standardized interfaces:
 LangChain provides multiple approaches for creating tools. Here are the essential imports for tool development:
 
 ```python
+
 # src/session2/langchain_tools.py
+
 from langchain.tools import BaseTool, StructuredTool, tool
 from langchain.tools.file_management import ReadFileTool, WriteFileTool
 from langchain.tools import DuckDuckGoSearchResults
@@ -137,9 +158,10 @@ from pydantic import BaseModel, Field
 import requests
 import json
 import math
+
 ```
 
-**Method 1: Inheriting from BaseTool**
+#### Method 1: Inheriting from BaseTool
 
 This is the traditional approach for creating custom tools, offering maximum control and flexibility:
 
@@ -148,6 +170,7 @@ class CalculatorTool(BaseTool):
     """Enhanced calculator tool for LangChain"""
     name = "calculator"
     description = "Perform mathematical calculations and expressions"
+
 ```
 
 **Tool Execution Logic:**
@@ -159,6 +182,7 @@ The `_run` method contains the core functionality. Note the safe evaluation appr
         """Execute the tool"""
         try:
             # Safe evaluation of mathematical expressions
+
             allowed_names = {
                 k: v for k, v in math.__dict__.items() if not k.startswith("__")
             }
@@ -168,6 +192,7 @@ The `_run` method contains the core functionality. Note the safe evaluation appr
             return f"Result: {result}"
         except Exception as e:
             return f"Error: {str(e)}"
+
 ```
 
 **Async Support:**
@@ -178,9 +203,10 @@ For tools that may need asynchronous execution, implement the `_arun` method:
     def _arun(self, expression: str):
         """Async version (if needed)"""
         raise NotImplementedError("Calculator doesn't support async")
+
 ```
 
-**Method 2: Using @tool Decorator**
+#### Method 2: Using @tool Decorator
 
 The decorator approach is simpler for straightforward functions and requires less boilerplate:
 
@@ -189,8 +215,10 @@ The decorator approach is simpler for straightforward functions and requires les
 def weather_tool(city: str) -> str:
     """Get current weather for a city"""
     # Simulate weather API call
+
     try:
         # In real implementation, call actual weather API
+
         weather_data = {
             "temperature": 72,
             "condition": "sunny",
@@ -199,9 +227,10 @@ def weather_tool(city: str) -> str:
         return f"Weather in {city}: {weather_data['temperature']}°F, {weather_data['condition']}, {weather_data['humidity']}% humidity"
     except Exception as e:
         return f"Error getting weather for {city}: {str(e)}"
+
 ```
 
-**Method 3: StructuredTool with Pydantic Models**
+#### Method 3: StructuredTool with Pydantic Models
 
 For tools requiring complex, validated inputs, combine StructuredTool with Pydantic schemas:
 
@@ -215,7 +244,9 @@ class EmailInput(BaseModel):
 def send_email(recipient: str, subject: str, body: str) -> str:
     """Send an email"""
     # Simulate email sending
+
     return f"Email sent to {recipient} with subject '{subject}'"
+
 ```
 
 **Structured Tool Creation:**
@@ -229,9 +260,10 @@ email_tool = StructuredTool.from_function(
     description="Send an email to specified recipient",
     args_schema=EmailInput
 )
+
 ```
 
-**Custom API Integration Tool**
+#### Custom API Integration Tool
 
 For external API integrations, the BaseTool approach offers the most flexibility:
 
@@ -244,6 +276,7 @@ class NewsAPITool(BaseTool):
     def __init__(self, api_key: str):
         super().__init__()
         self.api_key = api_key
+
 ```
 
 **API Implementation Details:**
@@ -255,6 +288,7 @@ The tool implementation handles API calls, data processing, and error management
         """Fetch news articles"""
         try:
             # Simulate news API call
+
             articles = [
                 {
                     "title": f"Article about {query} #{i+1}",
@@ -263,6 +297,7 @@ The tool implementation handles API calls, data processing, and error management
                 }
                 for i in range(num_articles)
             ]
+
 ```
 
 **Result Formatting:**
@@ -277,8 +312,8 @@ Proper formatting ensures agents can effectively use the tool output:
             return result
         except Exception as e:
             return f"Error fetching news: {str(e)}"
-```
 
+```
 
 ---
 
@@ -291,12 +326,15 @@ LangGraph has become central to LangChain's 2025 architecture, providing statefu
 **Core LangGraph Concepts:**
 
 ```python
+
 # src/session2/langgraph_integration.py
+
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolExecutor, ToolInvocation
 from typing import TypedDict, Annotated, Sequence
 import operator
 from langchain_core.messages import BaseMessage
+
 ```
 
 **State Management with LangGraph:**
@@ -310,6 +348,7 @@ class AgentState(TypedDict):
     next_step: str
     iterations: int
     context: dict
+
 ```
 
 **Building Stateful Workflows:**
@@ -327,6 +366,7 @@ class LangGraphAgent:
         self.tools = tools
         self.tool_executor = ToolExecutor(tools)
         self.workflow = self._build_workflow()
+
 ```
 
 The agent initializes with an LLM, tools, and a tool executor, then builds its stateful workflow graph.
@@ -339,12 +379,15 @@ def _build_workflow(self):
     workflow = StateGraph(AgentState)
     
     # Add nodes for different processing stages
+
     workflow.add_node("agent", self._agent_node)
     workflow.add_node("action", self._action_node)
     workflow.add_node("reflection", self._reflection_node)
     
     # Define entry point
+
     workflow.set_entry_point("agent")
+
 ```
 
 This creates a `StateGraph` with three processing nodes: agent (reasoning), action (tool execution), and reflection (quality control).
@@ -353,6 +396,7 @@ This creates a `StateGraph` with three processing nodes: agent (reasoning), acti
 
 ```python
     # Add conditional routing
+
     workflow.add_conditional_edges(
         "agent",
         self._should_continue,
@@ -367,6 +411,7 @@ This creates a `StateGraph` with three processing nodes: agent (reasoning), acti
     workflow.add_edge("reflection", "agent")
     
     return workflow.compile()
+
 ```
 
 Conditional edges allow dynamic routing based on agent decisions, while standard edges create feedback loops that return control to the agent node after tool execution or reflection.
@@ -386,18 +431,22 @@ def _should_continue(self, state: AgentState) -> str:
     last_message = messages[-1]
     
     # Check if we have a tool call
+
     if hasattr(last_message, 'tool_calls') and last_message.tool_calls:
         return "continue"
     
     # Check if we need reflection
+
     if state["iterations"] > 0 and state["iterations"] % 3 == 0:
         return "reflect"
     
     # Check if we have a satisfactory answer
+
     if "final answer" in last_message.content.lower():
         return "end"
     
     return "continue"
+
 ```
 
 This decision function examines the current state and routes to appropriate workflow nodes based on tool calls, iteration count, or completion signals.
@@ -416,6 +465,7 @@ def _agent_node(self, state: AgentState):
         "messages": [response],
         "iterations": state["iterations"] + 1
     }
+
 ```
 
 This node invokes the LLM with current conversation state and increments the iteration counter for tracking workflow progress.
@@ -431,6 +481,7 @@ def _action_node(self, state: AgentState):
     last_message = messages[-1]
     
     # Execute tool calls
+
     if hasattr(last_message, 'tool_calls'):
         tool_calls = last_message.tool_calls
         
@@ -447,6 +498,7 @@ def _action_node(self, state: AgentState):
             }
     
     return {"messages": []}
+
 ```
 
 This node processes tool calls from the agent, executes them using the tool executor, and returns results to continue the conversation flow.
@@ -467,6 +519,7 @@ def _reflection_node(self, state: AgentState):
     3. What have we learned that can guide next steps?
     
     Conversation history: {messages[-5:]}  # Last 5 messages
+
     Current iteration: {state['iterations']}
     """
     
@@ -476,6 +529,7 @@ def _reflection_node(self, state: AgentState):
         "messages": [reflection],
         "context": {"reflected_at": state["iterations"]}
     }
+
 ```
 
 This reflection mechanism helps the agent evaluate its progress and adjust strategy when needed, improving overall solution quality.
@@ -483,7 +537,9 @@ This reflection mechanism helps the agent evaluate its progress and adjust strat
 **Usage Example - Complex Workflow:**
 
 ```python
+
 # Example usage showing stateful workflow
+
 async def demo_langgraph_integration():
     from llm_setup import LLMFactory
     from langchain_tools import CalculatorTool, weather_tool
@@ -492,9 +548,11 @@ async def demo_langgraph_integration():
     tools = [CalculatorTool(), weather_tool]
     
     # Create LangGraph-powered agent
+
     agent = LangGraphAgent(llm, tools)
     
     # Execute complex workflow with state management
+
     result = await agent.workflow.ainvoke({
         "messages": [{"role": "user", "content": "Plan a data analysis project involving weather data from 5 cities, calculate trends, and provide insights"}],
         "next_step": "agent",
@@ -504,6 +562,7 @@ async def demo_langgraph_integration():
     
     print("Workflow Result:", result)
     return result
+
 ```
 
 ### Why LangGraph Matters for Production Systems
@@ -525,12 +584,15 @@ async def demo_langgraph_integration():
 LangChain's 2025 performance improvements center around optimized execution patterns:
 
 ```python
+
 # src/session2/performance_optimization.py
+
 from langchain.schema.runnable import RunnableParallel, RunnableSequence
 from langchain.prompts import ChatPromptTemplate
 from concurrent.futures import ThreadPoolExecutor
 import asyncio
 import time
+
 ```
 
 **Parallel Execution for Independent Tasks:**
@@ -546,6 +608,7 @@ class OptimizedLangChainAgent:
     def __init__(self, llm, tools):
         self.llm = llm
         self.tools = {tool.name: tool for tool in tools}
+
 ```
 
 This agent class initializes with an LLM and a tools dictionary for efficient tool lookup during parallel execution.
@@ -559,6 +622,7 @@ async def parallel_data_gathering(self, queries: list) -> dict:
     """Execute multiple independent queries in parallel"""
     
     # Create parallel runnable for independent tasks
+
     parallel_chain = RunnableParallel(
         weather_data=self._create_weather_chain(),
         calculation_data=self._create_calculation_chain(),
@@ -578,6 +642,7 @@ async def parallel_data_gathering(self, queries: list) -> dict:
         "execution_time": execution_time,
         "performance_gain": "~3x faster than sequential execution"
     }
+
 ```
 
 This method creates a `RunnableParallel` that executes weather, calculation, and research chains simultaneously, measuring execution time and providing performance metrics.
@@ -600,6 +665,7 @@ def _create_calculation_chain(self):
         "Perform calculation: {calc_query}"
     )
     return prompt | self.llm | self._calc_parser
+
 ```
 
 These methods construct specialized chains with domain-specific prompts and parsers for different types of data processing.
@@ -616,6 +682,7 @@ def _weather_parser(self, response):
 def _calc_parser(self, response):
     """Parse calculation response"""
     return {"calc_result": response.content}
+
 ```
 
 These parser functions extract and structure results from LLM responses, enabling consistent data handling across parallel execution paths.
@@ -627,6 +694,7 @@ These parser functions extract and structure results from LLM responses, enablin
         """Optimize sequential processing for dependent tasks"""
         
         # Create optimized sequence with intermediate state management
+
         sequence = RunnableSequence(
             self._task_decomposition,
             self._context_enrichment,
@@ -643,6 +711,7 @@ These parser functions extract and structure results from LLM responses, enablin
             "execution_time": execution_time,
             "optimization_applied": "Context-aware sequential processing"
         }
+
 ```
 
 ### **Intelligent Memory Management for Production**
@@ -658,11 +727,15 @@ class MemoryOptimizedAgent:
         self.max_memory_size = max_memory_size
         self.memory_buffer = deque(maxlen=max_memory_size)
         self.memory_summary = ""
+
 ```
 
 **Memory Architecture Benefits:**
+
 - **Bounded Buffer**: Prevents unlimited memory growth with configurable limits
+
 - **Circular Buffer**: Automatically removes oldest entries when full
+
 - **Summary Storage**: Maintains compressed history for long-term context
 
 ### **Smart Memory Processing**
@@ -672,10 +745,12 @@ class MemoryOptimizedAgent:
         """Process message with intelligent memory management"""
         
         # Check memory usage
+
         if len(self.memory_buffer) > self.max_memory_size * 0.8:
             await self._compress_memory()
         
         # Add current message to memory
+
         self.memory_buffer.append({
             "message": message,
             "timestamp": time.time(),
@@ -683,6 +758,7 @@ class MemoryOptimizedAgent:
         })
         
         # Process with optimized context
+
         context = self._get_optimized_context()
         response = await self.llm.ainvoke([
             {"role": "system", "content": f"Context: {context}"},
@@ -690,11 +766,15 @@ class MemoryOptimizedAgent:
         ])
         
         return response.content
+
 ```
 
 **Processing Strategy:**
+
 - **Proactive Compression**: Triggers at 80% capacity to maintain performance
+
 - **Rich Context**: Stores messages with timestamps and extracted context
+
 - **Optimized Context**: Provides relevant history without overwhelming the LLM
 
 ### **Automatic Memory Compression**
@@ -717,14 +797,20 @@ class MemoryOptimizedAgent:
         self.memory_summary = summary.content
         
         # Remove compressed messages from buffer
+
         for _ in range(len(old_messages)):
             self.memory_buffer.popleft()
+
 ```
 
 **Compression Features:**
+
 - **Half-Buffer Compression**: Compresses oldest 50% of messages
+
 - **LLM-Powered Summarization**: Uses AI to preserve important context
+
 - **Incremental Updates**: Builds on previous summaries for continuity
+
 - **Atomic Operations**: Ensures memory consistency during compression
 
 ---
@@ -736,12 +822,15 @@ class MemoryOptimizedAgent:
 Modern LangChain deployment requires container-aware architectures:
 
 ```python
+
 # src/session2/production_deployment.py
+
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.callbacks.base import BaseCallbackHandler
 import logging
 import os
+
 ```
 
 ### **Production-Ready Agent Configuration**
@@ -757,6 +846,7 @@ class ProductionLangChainAgent:
         self.llm = self._initialize_llm()
         self.tools = self._initialize_tools()
         self.monitoring = self._initialize_monitoring()
+
 ```
 
 ### **Enterprise LLM Configuration**
@@ -774,12 +864,17 @@ class ProductionLangChainAgent:
                 self.monitoring.callback_handler
             ])
         )
+
 ```
 
 **Production Settings Explained:**
+
 - **Low Temperature (0.1)**: Ensures consistent, predictable responses for business applications
+
 - **30-Second Timeout**: Prevents hanging requests that could impact user experience
+
 - **3 Retries**: Provides resilience against temporary API failures
+
 - **Integrated Monitoring**: Built-in callbacks for real-time performance tracking
 
 ### **Monitoring Integration**
@@ -791,6 +886,7 @@ class ProductionLangChainAgent:
             metrics_endpoint=self.config.get("metrics_endpoint"),
             log_level=self.config.get("log_level", "INFO")
         )
+
 ```
 
 ---
@@ -817,11 +913,15 @@ class LangSmithIntegration:
         
         from langsmith import Client
         return Client()
+
 ```
 
 **LangSmith Setup Benefits:**
+
 - **Automatic Tracing**: Captures all LangChain operations for analysis
+
 - **Project Isolation**: Separates different applications or environments
+
 - **Secure Authentication**: Uses environment variables for API key management
 
 ### **Automated Evaluation Pipeline**
@@ -834,9 +934,11 @@ class LangSmithIntegration:
         for test_case in test_cases:
             try:
                 # Run with tracing
+
                 result = await agent.process_message(test_case["input"])
                 
                 # Evaluate result
+
                 evaluation = await self._evaluate_response(
                     test_case["input"],
                     result,
@@ -859,12 +961,17 @@ class LangSmithIntegration:
                 })
         
         return self._generate_evaluation_report(results)
+
 ```
 
 **Evaluation Features:**
+
 - **Comprehensive Testing**: Processes entire test suite with detailed results
+
 - **Error Handling**: Captures and reports test failures without stopping the suite
+
 - **Automated Scoring**: Uses 0.8 threshold for pass/fail determination
+
 - **Detailed Reporting**: Generates actionable insights from test results
 
 ### **AI-Powered Response Evaluation**
@@ -873,6 +980,7 @@ class LangSmithIntegration:
     async def _evaluate_response(self, input_text: str, output: str, criteria: dict):
         """Evaluate response quality using LangSmith"""
         # Implement evaluation logic
+
         evaluation_prompt = f"""
         Evaluate this agent response:
         
@@ -888,20 +996,31 @@ class LangSmithIntegration:
         """
         
         # Use evaluation LLM
+
         evaluation_llm = ChatOpenAI(model="gpt-4", temperature=0)
         result = await evaluation_llm.ainvoke(evaluation_prompt)
         
         # Parse evaluation result
+
         return self._parse_evaluation(result.content)
+
 ```
 
 **Evaluation Strategy:**
+
 - **Multi-Dimensional Assessment**: Evaluates accuracy, completeness, and relevance
+
 - **LLM-Powered Analysis**: Uses GPT-4 for sophisticated response evaluation
+
 - **Configurable Criteria**: Allows custom evaluation standards per test case
+
 - **Structured Feedback**: Provides scores and detailed reasoning for improvements
 
 **Cloud Deployment Patterns:**
+
+### **CloudDeploymentManager Foundation**
+
+Production LangChain agents require robust cloud deployment infrastructure. The CloudDeploymentManager provides automated Kubernetes deployment generation:
 
 ```python
 class CloudDeploymentManager:
@@ -910,7 +1029,16 @@ class CloudDeploymentManager:
     def __init__(self, cloud_provider: str):
         self.cloud_provider = cloud_provider
         self.deployment_config = self._load_deployment_config()
-    
+
+```
+
+This manager supports multiple cloud providers (AWS, GCP, Azure) and loads provider-specific configurations for optimal deployment.
+
+### **Kubernetes Manifest Generation**
+
+The system generates all necessary Kubernetes resources for a complete agent deployment:
+
+```python
     def generate_kubernetes_manifests(self, agent_config: dict):
         """Generate Kubernetes deployment manifests"""
         return {
@@ -919,7 +1047,24 @@ class CloudDeploymentManager:
             "configmap": self._create_configmap_manifest(agent_config),
             "ingress": self._create_ingress_manifest(agent_config)
         }
-    
+
+```
+
+**Why These Four Components:**
+
+- **Deployment**: Manages pod creation, scaling, and updates
+
+- **Service**: Provides network access to agent pods
+
+- **ConfigMap**: Stores environment-specific configuration
+
+- **Ingress**: Handles external traffic routing and SSL termination
+
+### **Deployment Manifest Structure**
+
+The deployment manifest defines the core container specifications and operational parameters:
+
+```python
     def _create_deployment_manifest(self, config: dict):
         """Create Kubernetes deployment manifest"""
         return {
@@ -934,6 +1079,22 @@ class CloudDeploymentManager:
                 "selector": {"matchLabels": {"app": config['name']}},
                 "template": {
                     "metadata": {"labels": {"app": config['name']}},
+
+```
+
+**Key Configuration Choices:**
+
+- **3 replicas default**: Ensures high availability and load distribution
+
+- **Label-based selection**: Enables Kubernetes service discovery
+
+- **Consistent naming**: Follows cloud-native naming conventions
+
+### **Container Resource Management**
+
+Production agents require careful resource allocation to prevent performance issues:
+
+```python
                     "spec": {
                         "containers": [{
                             "name": config['name'],
@@ -950,6 +1111,22 @@ class CloudDeploymentManager:
                                     "cpu": config.get("cpu_limit", "1000m")
                                 }
                             },
+
+```
+
+**Resource Strategy Explained:**
+
+- **Requests (512Mi/500m)**: Guaranteed minimum resources for stable operation
+
+- **Limits (1Gi/1000m)**: Maximum resources to prevent runaway processes
+
+- **2:1 Limit Ratio**: Allows burst capacity while maintaining cluster stability
+
+### **Health Check Configuration**
+
+Kubernetes health checks ensure agents are operational and ready to serve requests:
+
+```python
                             "livenessProbe": {
                                 "httpGet": {"path": "/health", "port": config.get("port", 8000)},
                                 "initialDelaySeconds": 30,
@@ -965,7 +1142,18 @@ class CloudDeploymentManager:
                 }
             }
         }
+
 ```
+
+**Health Check Strategy:**
+
+- **Liveness Probe**: Detects crashed or deadlocked agents (restarts container)
+
+- **Readiness Probe**: Determines when agent is ready to handle traffic
+
+- **Different Delays**: Readiness checks start sooner for faster traffic routing
+
+- **Regular Intervals**: Continuous monitoring ensures prompt failure detection
 
 ---
 
@@ -978,13 +1166,16 @@ The reflection pattern allows agents to critique and improve their own responses
 **Core Imports and Setup:**
 
 ```python
+
 # src/session2/langchain_reflection.py
+
 from langchain.agents import Tool, AgentType, initialize_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.callbacks import StdOutCallbackHandler
 from langchain.schema import SystemMessage
 from typing import List, Dict
 import asyncio
+
 ```
 
 **Reflection Agent Class Definition:**
@@ -1001,11 +1192,13 @@ class LangChainReflectionAgent:
         self.reflection_history = []
         
         # Create reflection tool
+
         self.reflection_tool = Tool(
             name="reflect_on_response",
             description="Critically evaluate and improve a response",
             func=self._reflect_on_response
         )
+
 ```
 
 **Agent Initialization:**
@@ -1014,6 +1207,7 @@ The agent combines tools, memory, and LLM into a cohesive reflection system:
 
 ```python
         # Initialize agent with reflection capability
+
         self.agent = initialize_agent(
             tools=[self.reflection_tool],
             llm=llm,
@@ -1021,6 +1215,7 @@ The agent combines tools, memory, and LLM into a cohesive reflection system:
             verbose=True,
             memory=ConversationBufferMemory(memory_key="chat_history", return_messages=True)
         )
+
 ```
 
 **Reflection Logic:**
@@ -1047,6 +1242,7 @@ The core reflection method evaluates responses against multiple criteria:
         
         critique = self.llm.invoke(reflection_prompt).content
         return critique
+
 ```
 
 **Reflection Processing Loop:**
@@ -1060,9 +1256,11 @@ The main processing method orchestrates the reflection iterations:
         
         for iteration in range(self.max_iterations):
             # Reflect on current response
+
             critique = self._reflect_on_response(current_response)
             
             # Check if satisfactory
+
             if "SATISFACTORY" in critique:
                 self.reflection_history.append({
                     "message": message,
@@ -1071,6 +1269,7 @@ The main processing method orchestrates the reflection iterations:
                     "final_critique": critique
                 })
                 break
+
 ```
 
 **Response Improvement:**
@@ -1079,6 +1278,7 @@ When reflection identifies issues, the agent generates an improved response:
 
 ```python
             # Improve response
+
             improvement_prompt = f"""
             Original question: {message}
             Current response: {current_response}
@@ -1092,6 +1292,7 @@ When reflection identifies issues, the agent generates an improved response:
             current_response = improved_response
         
         return current_response
+
 ```
 
 **Initial Response Generation:**
@@ -1109,12 +1310,15 @@ The initial response provides a baseline for the reflection process:
         
         response = self.llm.invoke(initial_prompt).content
         return response
+
 ```
 
 **Usage Example:**
 
 ```python
+
 # Example usage
+
 async def demo_langchain_reflection():
     from llm_setup import LLMFactory
     
@@ -1126,8 +1330,8 @@ async def demo_langchain_reflection():
     )
     
     print("Final Response:", response)
-```
 
+```
 
 ### **Pattern 2: Tool Use with LangChain Agents**
 
@@ -1136,11 +1340,14 @@ LangChain's agent framework excels at orchestrating multiple tools to solve comp
 **Core Imports and Dependencies:**
 
 ```python
+
 # src/session2/langchain_tool_use.py
+
 from langchain.agents import Tool, AgentType, initialize_agent, AgentExecutor
 from langchain.agents.tools import InvalidTool
 from langchain.memory import ConversationBufferMemory
 from langchain_tools import CalculatorTool, weather_tool, email_tool, NewsAPITool
+
 ```
 
 **Tool Agent Class Definition:**
@@ -1156,10 +1363,12 @@ class LangChainToolAgent:
         self.tools = tools or self._default_tools()
         
         # Create memory for conversation context
+
         self.memory = ConversationBufferMemory(
             memory_key="chat_history",
             return_messages=True
         )
+
 ```
 
 **Agent Initialization:**
@@ -1168,6 +1377,7 @@ The agent initialization configures behavior, timeouts, and error handling:
 
 ```python
         # Initialize agent with tools
+
         self.agent = initialize_agent(
             tools=self.tools,
             llm=llm,
@@ -1178,6 +1388,7 @@ The agent initialization configures behavior, timeouts, and error handling:
             max_execution_time=30,
             max_iterations=10
         )
+
 ```
 
 **Default Tool Setup:**
@@ -1194,6 +1405,7 @@ The agent comes with a sensible default set of tools for common operations:
         ]
         
         # Add search tool if available
+
         try:
             search_tool = DuckDuckGoSearchResults(num_results=5)
             tools.append(search_tool)
@@ -1201,6 +1413,7 @@ The agent comes with a sensible default set of tools for common operations:
             print("Search tool not available")
         
         return tools
+
 ```
 
 **Message Processing:**
@@ -1215,6 +1428,7 @@ The core processing method handles tool selection and execution with error recov
             return response
         except Exception as e:
             return f"Error processing message: {str(e)}"
+
 ```
 
 **Dynamic Tool Management:**
@@ -1226,6 +1440,7 @@ Tools can be added dynamically to extend agent capabilities:
         """Add a new tool to the agent"""
         self.tools.append(tool)
         # Reinitialize agent with new tools
+
         self.agent = initialize_agent(
             tools=self.tools,
             llm=self.llm,
@@ -1234,6 +1449,7 @@ Tools can be added dynamically to extend agent capabilities:
             memory=self.memory,
             handle_parsing_errors=True
         )
+
 ```
 
 **Tool Information Access:**
@@ -1250,6 +1466,7 @@ The agent provides introspection capabilities to understand available tools:
                 tool.name: tool.description for tool in self.tools
             }
         }
+
 ```
 
 **Custom Domain-Specific Tool:**
@@ -1257,7 +1474,9 @@ The agent provides introspection capabilities to understand available tools:
 Here's an example of creating specialized tools for specific domains:
 
 ```python
+
 # Custom domain-specific tool
+
 class DatabaseQueryTool(BaseTool):
     """Tool for querying a database"""
     name = "database_query"
@@ -1266,6 +1485,7 @@ class DatabaseQueryTool(BaseTool):
     def _run(self, query: str, table: str) -> str:
         """Execute database query (simulated)"""
         # Simulate database query
+
         if table.lower() == "customers":
             return f"Found 15 customers matching query: {query}"
         elif table.lower() == "orders":
@@ -1274,18 +1494,22 @@ class DatabaseQueryTool(BaseTool):
             return f"Found 23 products matching query: {query}"
         else:
             return f"Table '{table}' not found"
+
 ```
 
 **Advanced Usage Example:**
 
 ```python
+
 # Example usage with custom tools
+
 async def demo_advanced_tool_use():
     from llm_setup import LLMFactory
     
     llm = LLMFactory.create_llm("openai")
     
     # Create agent with custom tools
+
     custom_tools = [
         CalculatorTool(),
         DatabaseQueryTool(),
@@ -1295,14 +1519,15 @@ async def demo_advanced_tool_use():
     agent = LangChainToolAgent(llm, custom_tools)
     
     # Test complex tool usage
+
     response = await agent.process_message(
         "Check the weather in San Francisco, then calculate what our Q4 revenue would be if we had 15% more customers than our current customer count."
     )
     
     print("Agent Response:", response)
     print("Tool Info:", agent.get_tool_info())
-```
 
+```
 
 ### **Pattern 3: ReAct with LangChain**
 
@@ -1311,11 +1536,14 @@ The ReAct (Reasoning + Acting) pattern combines reasoning and action in iterativ
 **Core Imports and Setup:**
 
 ```python
+
 # src/session2/langchain_react.py
+
 from langchain.agents import Tool, AgentType, initialize_agent
 from langchain.agents.react.base import ReActTextWorldAgent
 from langchain.memory import ConversationBufferMemory
 from typing import List, Dict
+
 ```
 
 ### **Built-in LangChain ReAct Agent**
@@ -1334,16 +1562,19 @@ class LangChainReActAgent:
         self.max_iterations = max_iterations
         
         # Create ReAct agent
+
         self.agent = initialize_agent(
             tools=tools,
             llm=llm,
             agent=AgentType.REACT_DOCSTORE,  # ReAct pattern
+
             verbose=True,
             max_iterations=max_iterations,
             handle_parsing_errors=True
         )
         
         self.execution_history = []
+
 ```
 
 **Problem Solving Method:**
@@ -1359,6 +1590,7 @@ The solve_problem method orchestrates the ReAct process and handles execution tr
             response = await self.agent.arun(problem)
             
             # Store execution info
+
             self.execution_history.append({
                 "problem": problem,
                 "response": response,
@@ -1369,6 +1601,7 @@ The solve_problem method orchestrates the ReAct process and handles execution tr
             
         except Exception as e:
             return f"ReAct process failed: {str(e)}"
+
 ```
 
 **Reasoning Chain Access:**
@@ -1379,9 +1612,11 @@ The built-in agent provides access to intermediate reasoning steps:
     def get_reasoning_chain(self) -> List[Dict]:
         """Get the reasoning chain from last execution"""
         # Access agent's intermediate steps
+
         if hasattr(self.agent, 'agent') and hasattr(self.agent.agent, 'get_intermediate_steps'):
             return self.agent.agent.get_intermediate_steps()
         return []
+
 ```
 
 ---
@@ -1400,11 +1635,15 @@ class CustomReActAgent:
         self.llm = llm
         self.tools = {tool.name: tool for tool in tools}
         self.reasoning_steps = []
+
 ```
 
 **Custom Implementation Benefits:**
+
 - **Complete Control**: Full visibility and control over each reasoning step
+
 - **Detailed Tracking**: Comprehensive logging of thoughts, actions, and observations
+
 - **Customizable Logic**: Ability to modify decision-making and action selection
 
 ### **Core ReAct Loop Implementation**
@@ -1421,6 +1660,7 @@ The main solving method implements the think-act-observe cycle with detailed ste
         
         while current_step <= max_steps:
             # Record thought
+
             step_info = {
                 "step": current_step,
                 "thought": current_thought,
@@ -1430,17 +1670,22 @@ The main solving method implements the think-act-observe cycle with detailed ste
             }
             
             # Decide action based on thought
+
             action_decision = await self._decide_action(problem, current_thought)
             
             if action_decision["action"] == "ANSWER":
                 step_info["observation"] = f"Final Answer: {action_decision['answer']}"
                 self.reasoning_steps.append(step_info)
                 return action_decision["answer"]
+
 ```
 
 **Loop Architecture:**
+
 - **Structured Steps**: Each step contains thought, action, input, and observation
+
 - **Decision Points**: LLM decides whether to use tools or provide final answer
+
 - **Termination Logic**: Built-in answer detection and max step limits
 
 ### **Intelligent Action Decision System**
@@ -1480,12 +1725,17 @@ The agent uses structured prompting to make informed decisions about next action
             return json.loads(response.content)
         except Exception:
             return {"action": "ANSWER", "answer": "Failed to parse action decision"}
+
 ```
 
 **Decision Framework Features:**
+
 - **Structured Output**: JSON format ensures consistent decision parsing
+
 - **Tool Awareness**: Provides complete tool descriptions for informed choices
+
 - **Reasoning Capture**: Records why each action was selected
+
 - **Fallback Logic**: Graceful handling of parsing errors
 
 ### **Action Execution and Error Handling**
@@ -1502,11 +1752,15 @@ The agent uses structured prompting to make informed decisions about next action
             return f"Tool {action} executed successfully. Result: {result}"
         except Exception as e:
             return f"Tool {action} failed: {str(e)}"
+
 ```
 
 **Execution Benefits:**
+
 - **Tool Validation**: Ensures requested tools exist before execution
+
 - **Error Isolation**: Captures tool failures without breaking the reasoning loop
+
 - **Structured Feedback**: Provides clear success/failure indicators
 
 ### **Dynamic Thought Generation**
@@ -1530,11 +1784,15 @@ The agent uses structured prompting to make informed decisions about next action
         
         response = await self.llm.ainvoke(prompt)
         return response.content
+
 ```
 
 **Thought Generation Features:**
+
 - **Context Awareness**: Uses complete step history for informed reasoning
+
 - **Goal Orientation**: Keeps original problem in focus
+
 - **Progress Assessment**: Encourages evaluation of solution completeness
 
 ### **Reasoning Analysis and Debugging**
@@ -1559,17 +1817,23 @@ The agent uses structured prompting to make informed decisions about next action
             "steps": self.reasoning_steps,
             "formatted_reasoning": self._format_steps()
         }
+
 ```
 
 **Analysis Tools:**
+
 - **Human-Readable Formatting**: Clear display of reasoning chain for debugging
+
 - **Complete Step History**: Full access to all reasoning data
+
 - **Summary Statistics**: Quick overview of reasoning complexity
 
 ### **Comprehensive ReAct Demonstration**
 
 ```python
+
 # Example usage
+
 async def demo_react_agents():
     from llm_setup import LLMFactory
     from langchain_tools import CalculatorTool, weather_tool
@@ -1578,12 +1842,14 @@ async def demo_react_agents():
     tools = [CalculatorTool(), weather_tool]
     
     # Built-in ReAct agent
+
     builtin_agent = LangChainReActAgent(llm, tools)
     response1 = await builtin_agent.solve_problem(
         "What's the weather in New York and what would be 15% of the temperature?"
     )
     
     # Custom ReAct agent  
+
     custom_agent = CustomReActAgent(llm, tools)
     response2 = await custom_agent.solve_problem(
         "What's the weather in London and calculate the temperature in Celsius if it's currently 75°F?"
@@ -1592,13 +1858,16 @@ async def demo_react_agents():
     print("Built-in ReAct Response:", response1)
     print("Custom ReAct Response:", response2)
     print("Reasoning Summary:", custom_agent.get_reasoning_summary())
+
 ```
 
 **Comparison Benefits:**
-- **Built-in Agent**: Quick setup, proven reliability, optimized performance
-- **Custom Agent**: Full control, detailed logging, customizable logic
-- **Use Cases**: Built-in for production, custom for research and specialized requirements
 
+- **Built-in Agent**: Quick setup, proven reliability, optimized performance
+
+- **Custom Agent**: Full control, detailed logging, customizable logic
+
+- **Use Cases**: Built-in for production, custom for research and specialized requirements
 
 ---
 
@@ -1609,12 +1878,15 @@ The planning pattern separates high-level strategic thinking from tactical execu
 **Core Imports and Dependencies:**
 
 ```python
+
 # src/session2/langchain_planning.py
+
 from langchain.agents import Tool, AgentType, initialize_agent
 from langchain.experimental.plan_and_execute import PlanAndExecuteAgentExecutor, load_agent_executor, load_chat_planner
 from langchain.memory import ConversationBufferMemory
 from typing import List, Dict
 import json
+
 ```
 
 ### **Built-in LangChain Planning Agent**
@@ -1632,12 +1904,15 @@ class LangChainPlanningAgent:
         self.tools = tools
         
         # Create planner
+
         self.planner = load_chat_planner(llm)
         
         # Create executor
+
         self.executor = load_agent_executor(llm, tools, verbose=True)
         
         # Create plan-and-execute agent
+
         self.agent = PlanAndExecuteAgentExecutor(
             planner=self.planner,
             executor=self.executor,
@@ -1645,6 +1920,7 @@ class LangChainPlanningAgent:
         )
         
         self.execution_history = []
+
 ```
 
 **Task Execution:**
@@ -1660,6 +1936,7 @@ The built-in agent handles complex multi-step tasks through automatic planning a
             result = await self.agent.arun(task)
             
             # Store execution history
+
             self.execution_history.append({
                 "task": task,
                 "result": result,
@@ -1676,6 +1953,7 @@ The built-in agent handles complex multi-step tasks through automatic planning a
         if hasattr(self.agent, 'planner') and hasattr(self.agent.planner, 'last_plan'):
             return self.agent.planner.last_plan
         return {}
+
 ```
 
 ### **Custom Hierarchical Planning Agent**
@@ -1692,6 +1970,7 @@ class HierarchicalPlanningAgent:
         self.llm = llm
         self.tools = {tool.name: tool for tool in tools}
         self.planning_history = []
+
 ```
 
 **Planning Workflow:**
@@ -1702,15 +1981,19 @@ The hierarchical approach breaks complex goals into manageable steps through mul
     async def execute_with_planning(self, goal: str) -> str:
         """Execute goal with hierarchical planning"""
         # Step 1: Create high-level plan
+
         high_level_plan = await self._create_high_level_plan(goal)
         
         # Step 2: Decompose into detailed steps
+
         detailed_plan = await self._create_detailed_plan(goal, high_level_plan)
         
         # Step 3: Execute plan
+
         execution_result = await self._execute_plan(detailed_plan)
         
         # Store planning history
+
         self.planning_history.append({
             "goal": goal,
             "high_level_plan": high_level_plan,
@@ -1720,6 +2003,7 @@ The hierarchical approach breaks complex goals into manageable steps through mul
         })
         
         return execution_result
+
 ```
 
 **High-Level Planning:**
@@ -1759,11 +2043,14 @@ The first phase creates strategic, high-level steps:
             return plan_data.get("steps", [])
         except Exception:
             return ["Failed to create high-level plan"]
+
 ```
 
 **Detailed Planning:**
 
-The second phase decomposes high-level steps into specific, executable actions:
+### **Step-by-Step Decomposition Process**
+
+The detailed planning phase transforms high-level strategy into specific, executable actions:
 
 ```python
     async def _create_detailed_plan(self, goal: str, high_level_plan: List[str]) -> List[Dict]:
@@ -1771,6 +2058,16 @@ The second phase decomposes high-level steps into specific, executable actions:
         detailed_steps = []
         
         for i, high_level_step in enumerate(high_level_plan):
+
+```
+
+This method iterates through each high-level step, creating a detailed action plan that tools can execute.
+
+### **Structured Prompting for Action Decomposition**
+
+For each high-level step, the system generates a detailed prompt that guides the LLM to create actionable tasks:
+
+```python
             prompt = f"""
             Goal: {goal}
             High-level step {i+1}: {high_level_step}
@@ -1792,7 +2089,24 @@ The second phase decomposes high-level steps into specific, executable actions:
             """
             
             response = await self.llm.ainvoke(prompt)
-            
+
+```
+
+**Prompt Design Principles:**
+
+- **Context Preservation**: Maintains goal and current step context
+
+- **Tool Awareness**: Shows available tools for informed action selection
+
+- **Structured Output**: JSON format ensures consistent parsing
+
+- **Expected Outcomes**: Helps validate action effectiveness
+
+### **Robust Action Processing and Error Handling**
+
+The system processes LLM responses with comprehensive error handling and metadata enrichment:
+
+```python
             try:
                 step_data = json.loads(response.content)
                 for action in step_data.get("actions", []):
@@ -1808,7 +2122,18 @@ The second phase decomposes high-level steps into specific, executable actions:
                 })
         
         return detailed_steps
+
 ```
+
+**Error Resilience Strategy:**
+
+- **JSON Validation**: Safely parses LLM responses with fallback handling
+
+- **Metadata Enrichment**: Adds step tracking and context to each action
+
+- **Graceful Degradation**: Creates fallback actions when parsing fails
+
+- **Traceability**: Links detailed actions back to high-level steps for debugging
 
 **Plan Execution:**
 
@@ -1824,6 +2149,7 @@ The execution phase processes each detailed step and handles tool interactions:
             
             if step["action"] in self.tools:
                 # Execute tool
+
                 tool = self.tools[step["action"]]
                 try:
                     result = tool._run(step["input"])
@@ -1833,13 +2159,16 @@ The execution phase processes each detailed step and handles tool interactions:
             
             elif step["action"] == "direct_response":
                 # Direct response without tool
+
                 results.append(f"Step {i+1}: {step['input']}")
             
             else:
                 results.append(f"Step {i+1}: Unknown action {step['action']}")
         
         # Synthesize final result
+
         return await self._synthesize_results(detailed_plan, results)
+
 ```
 
 **Result Synthesis:**
@@ -1869,6 +2198,7 @@ The final phase combines execution results into a comprehensive response:
         
         response = await self.llm.ainvoke(prompt)
         return response.content
+
 ```
 
 **Planning Analytics:**
@@ -1889,17 +2219,21 @@ The agent provides insights into planning performance and complexity:
             "total_plans": len(self.planning_history),
             "average_steps_per_plan": avg_steps,
             "recent_plans": self.planning_history[-3:],  # Last 3 plans
+
             "most_complex_plan": max(
                 self.planning_history,
                 key=lambda p: len(p["detailed_plan"])
             )
         }
+
 ```
 
 **Usage Example:**
 
 ```python
+
 # Example usage
+
 async def demo_planning_agents():
     from llm_setup import LLMFactory
     from langchain_tools import CalculatorTool, weather_tool, email_tool
@@ -1908,12 +2242,14 @@ async def demo_planning_agents():
     tools = [CalculatorTool(), weather_tool, email_tool]
     
     # Built-in planning agent
+
     builtin_agent = LangChainPlanningAgent(llm, tools)
     response1 = await builtin_agent.execute_complex_task(
         "Research the weather in 3 different cities, calculate the average temperature, and send a summary email"
     )
     
     # Custom hierarchical planning agent
+
     custom_agent = HierarchicalPlanningAgent(llm, tools)
     response2 = await custom_agent.execute_with_planning(
         "Plan a data analysis workflow: get weather data for 5 cities, calculate statistics, and create a summary report"
@@ -1922,8 +2258,8 @@ async def demo_planning_agents():
     print("Built-in Planning Response:", response1)
     print("Custom Planning Response:", response2)
     print("Planning Analysis:", custom_agent.get_planning_analysis())
-```
 
+```
 
 ---
 
@@ -1936,7 +2272,9 @@ LangChain's 2025 multi-agent capabilities focus on sophisticated orchestration e
 **Core Imports and Enhanced Setup:**
 
 ```python
+
 # src/session2/advanced_multi_agent.py
+
 from langchain.agents import Tool, AgentType, initialize_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.schema import HumanMessage, AIMessage
@@ -1945,6 +2283,7 @@ from typing import Dict, List, Any, TypedDict, Annotated
 import asyncio
 import uuid
 from datetime import datetime
+
 ```
 
 **Advanced Multi-Agent State Management:**
@@ -1960,14 +2299,21 @@ class MultiAgentState(TypedDict):
     shared_context: Dict[str, Any]
     coordination_history: List[Dict[str, Any]]
     performance_metrics: Dict[str, float]
+
 ```
 
 **Why This State Structure Matters:**
+
 - **messages**: Maintains conversation history across all agents using LangChain's message format
+
 - **active_agents**: Tracks which agents are currently working to prevent overload
+
 - **task_queue**: Enables asynchronous task management and priority handling
+
 - **shared_context**: Allows agents to share knowledge and findings
+
 - **coordination_history**: Provides audit trail for debugging and optimization
+
 - **performance_metrics**: Enables real-time performance monitoring and adaptive routing
 
 ### **Enhanced Multi-Agent System Architecture**
@@ -1986,12 +2332,17 @@ class EnhancedMultiAgentSystem:
         self.coordination_graph = self._build_coordination_graph()
         self.performance_monitor = PerformanceMonitor()
         self.failure_handler = FailureHandler()
+
 ```
 
 **Architecture Components Explained:**
+
 - **task_router**: Intelligently assigns tasks based on agent capabilities and current load
+
 - **coordination_graph**: LangGraph workflow that manages the entire coordination process
+
 - **performance_monitor**: Tracks system health and agent performance in real-time
+
 - **failure_handler**: Provides resilient error recovery and task reassignment
 
 ### **Building the Coordination Workflow**
@@ -2004,20 +2355,28 @@ The coordination graph represents the heart of the multi-agent system, defining 
         workflow = StateGraph(MultiAgentState)
         
         # Add coordination nodes - each represents a distinct processing stage
+
         workflow.add_node("task_analysis", self._analyze_task_node)
         workflow.add_node("agent_selection", self._select_agents_node)
         workflow.add_node("task_delegation", self._delegate_tasks_node)
         workflow.add_node("execution_monitoring", self._monitor_execution_node)
         workflow.add_node("result_synthesis", self._synthesize_results_node)
         workflow.add_node("failure_recovery", self._handle_failures_node)
+
 ```
 
 **Understanding the Workflow Stages:**
+
 1. **task_analysis**: Breaks down complex requests into manageable components
+
 2. **agent_selection**: Matches tasks to agents based on capabilities and availability
+
 3. **task_delegation**: Distributes work and establishes communication channels
+
 4. **execution_monitoring**: Tracks progress and detects issues in real-time
+
 5. **result_synthesis**: Combines outputs from multiple agents into coherent results
+
 6. **failure_recovery**: Handles errors and reassigns tasks when agents fail
 
 ### **Workflow Routing and Decision Logic**
@@ -2026,9 +2385,11 @@ The workflow uses conditional edges to create intelligent routing based on task 
 
 ```python
         # Set entry point
+
         workflow.set_entry_point("task_analysis")
         
         # Add conditional edges for coordination logic
+
         workflow.add_conditional_edges(
             "task_analysis",
             self._route_after_analysis,
@@ -2056,12 +2417,17 @@ The workflow uses conditional edges to create intelligent routing based on task 
         workflow.add_edge("result_synthesis", END)
         
         return workflow.compile()
+
 ```
 
 **Key Routing Decisions:**
+
 - Simple tasks can bypass agent selection and go directly to delegation
+
 - Complex tasks require sophisticated agent selection and coordination
+
 - Failed executions trigger recovery processes that can reassign work
+
 - The system continuously monitors execution and adapts based on results
 
 ### **Specialized Agent Creation with Capability Mapping**
@@ -2079,11 +2445,15 @@ Creating specialized agents involves more than just assigning tools - it require
         performance_targets: Dict[str, float] = None
     ):
         """Create specialized agent with detailed capability mapping"""
+
 ```
 
 **Key Parameters Explained:**
+
 - **capabilities**: Numerical scores (0.0-1.0) for different skills like analytical_skills, research_skills
+
 - **performance_targets**: Expected response times, accuracy rates, and quality metrics
+
 - **system_message**: Custom instructions that define the agent's personality and approach
 
 ### **Enhanced Memory Configuration**
@@ -2092,12 +2462,14 @@ Each agent gets role-specific memory that maintains context throughout multi-tur
 
 ```python
         # Enhanced memory with role-specific context
+
         memory = ConversationBufferMemory(
             memory_key="chat_history",
             return_messages=True
         )
         
         # Add enhanced system message with capability context
+
         enhanced_system_message = f"""
         You are {name}, a specialized {role}.
         
@@ -2115,12 +2487,17 @@ Each agent gets role-specific memory that maintains context throughout multi-tur
         3. Share context that might help other agents
         4. Validate your outputs before final submission
         """
+
 ```
 
 **Why Enhanced System Messages Matter:**
+
 - Agents understand their role within the larger system
+
 - Clear capability boundaries prevent agents from attempting tasks beyond their expertise
+
 - Coordination protocols ensure smooth information flow between agents
+
 - Performance awareness helps agents self-regulate and request assistance when needed
 
 ### **Agent Initialization and Configuration**
@@ -2134,6 +2511,7 @@ The agent is created with production-ready settings optimized for multi-agent co
             )
         
         # Create agent with enhanced configuration
+
         agent = initialize_agent(
             tools=tools,
             llm=self.llm,
@@ -2142,14 +2520,20 @@ The agent is created with production-ready settings optimized for multi-agent co
             memory=memory,
             handle_parsing_errors=True,
             max_execution_time=120,  # Increased for complex tasks
+
             max_iterations=15
         )
+
 ```
 
 **Configuration Choices Explained:**
+
 - **STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION**: Supports complex tool use and reasoning
+
 - **max_execution_time=120**: Allows sufficient time for complex multi-step tasks
+
 - **max_iterations=15**: Prevents infinite loops while allowing thorough problem-solving
+
 - **handle_parsing_errors=True**: Provides resilience against malformed LLM responses
 
 ### **Agent Registration and Metadata Storage**
@@ -2158,6 +2542,7 @@ The system maintains comprehensive metadata for each agent to enable intelligent
 
 ```python
         # Store agent configuration
+
         self.agents[name] = {
             "agent": agent,
             "role": role,
@@ -2171,17 +2556,23 @@ The system maintains comprehensive metadata for each agent to enable intelligent
         }
         
         # Register capabilities for task routing
+
         self.agent_capabilities[name] = capabilities
         
         print(f"Created enhanced agent '{name}' with role: {role}")
         print(f"Capabilities: {capabilities}")
         return name
+
 ```
 
 **Metadata Fields Purpose:**
+
 - **task_history**: Tracks completed tasks for performance analysis
+
 - **performance_history**: Stores success rates and response times
+
 - **created_at**: Enables agent lifecycle management
+
 - **capabilities**: Used by the task router for intelligent assignment
 
 ### **Capability Formatting for Human-Readable Display**
@@ -2194,6 +2585,7 @@ The system maintains comprehensive metadata for each agent to enable intelligent
             level = "Expert" if score > 0.8 else "Intermediate" if score > 0.5 else "Basic"
             formatted.append(f"- {capability}: {level} ({score:.2f})")
         return "\n".join(formatted)
+
 ```
 
 This formatting helps agents understand their strengths and limitations, leading to better self-awareness and improved coordination decisions.
@@ -2214,14 +2606,21 @@ class TaskRouter:
         self.routing_history = []
         self.performance_weights = {
             "capability_match": 0.4,    # How well agent skills match task needs
+
             "current_load": 0.3,        # Agent's current workload
+
             "past_performance": 0.3     # Historical success rate
+
         }
+
 ```
 
 **Performance Weights Explained:**
+
 - **capability_match (40%)**: Most important factor - ensures agents work within their expertise
+
 - **current_load (30%)**: Prevents overloading high-performing agents
+
 - **past_performance (30%)**: Rewards agents with proven track records
 
 ### **Core Task Routing Algorithm**
@@ -2242,25 +2641,34 @@ The routing algorithm combines multiple factors to make optimal agent selection 
                 agent_info.get("performance_history", [])
             )
             agent_scores[agent_name] = score
+
 ```
 
 **Routing Process Steps:**
+
 1. **Task Analysis**: Extract capability requirements from task description
+
 2. **Score Calculation**: Evaluate each agent's suitability using weighted factors
+
 3. **Agent Selection**: Choose optimal agent(s) based on scores and complexity
+
 4. **History Tracking**: Record decisions for continuous improvement
 
 ### **Dynamic Agent Selection Based on Task Complexity**
 
 ```python
         # Sort agents by score and select top candidates
+
         sorted_agents = sorted(agent_scores.items(), key=lambda x: x[1], reverse=True)
         
         # Determine if task needs multiple agents
+
         if task.get("complexity", 0.5) > 0.7:
             selected_agents = [agent[0] for agent in sorted_agents[:2]]  # Top 2
+
         else:
             selected_agents = [sorted_agents[0][0]]  # Top 1
+
         
         self.routing_history.append({
             "task_id": task.get("id", str(uuid.uuid4())),
@@ -2270,11 +2678,15 @@ The routing algorithm combines multiple factors to make optimal agent selection 
         })
         
         return selected_agents
+
 ```
 
 **Why Complexity-Based Selection Matters:**
+
 - Simple tasks (complexity < 0.7): Single agent for efficiency
+
 - Complex tasks (complexity >= 0.7): Multiple agents for robustness and diverse perspectives
+
 - This approach balances resource utilization with task success probability
 
 ### **Intelligent Task Requirement Analysis**
@@ -2283,10 +2695,12 @@ The routing algorithm combines multiple factors to make optimal agent selection 
     def _analyze_task_requirements(self, task: Dict[str, Any]) -> Dict[str, float]:
         """Analyze task to determine capability requirements"""
         # Simple heuristic-based analysis (can be enhanced with ML)
+
         description = task.get("description", "").lower()
         requirements = {}
         
         # Keyword-based capability detection
+
         if any(word in description for word in ["calculate", "math", "compute", "analyze data"]):
             requirements["analytical_skills"] = 0.8
         
@@ -2300,12 +2714,17 @@ The routing algorithm combines multiple factors to make optimal agent selection 
             requirements["programming_skills"] = 0.9
         
         return requirements
+
 ```
 
 **Requirement Detection Strategy:**
+
 - Uses keyword analysis to identify capability needs
+
 - Assigns different importance levels (0.6-0.9) based on task difficulty
+
 - Programming tasks get highest weight (0.9) as they require precise technical skills
+
 - Can be enhanced with machine learning for more sophisticated pattern recognition
 
 ### **Advanced Agent Scoring Algorithm**
@@ -2317,6 +2736,7 @@ The routing algorithm combines multiple factors to make optimal agent selection 
                              performance_history: List[float]) -> float:
         """Calculate agent suitability score"""
         # Capability match score
+
         capability_score = 0
         if requirements:
             matches = []
@@ -2327,12 +2747,15 @@ The routing algorithm combines multiple factors to make optimal agent selection 
             capability_score = sum(matches) / len(matches) if matches else 0
         
         # Load score (lower load is better)
+
         load_score = max(0, 1.0 - current_load)
         
         # Performance score
+
         performance_score = sum(performance_history[-5:]) / len(performance_history[-5:]) if performance_history else 0.7
         
         # Weighted final score
+
         final_score = (
             capability_score * self.performance_weights["capability_match"] +
             load_score * self.performance_weights["current_load"] +
@@ -2340,21 +2763,31 @@ The routing algorithm combines multiple factors to make optimal agent selection 
         )
         
         return final_score
+
 ```
 
 **Scoring Components Breakdown:**
+
 - **Capability Match**: Compares agent skills to task requirements, capped at 1.0 for overqualified agents
+
 - **Load Score**: Inverted load factor - agents with lower current workload score higher
+
 - **Performance Score**: Uses last 5 performance metrics, defaults to 0.7 for new agents
+
 - **Final Score**: Weighted combination providing balanced agent selection
 
 **Advanced Coordination Patterns:**
+
+### **Hierarchical Coordination Entry Point**
+
+The hierarchical coordination method serves as the main entry point for complex multi-agent task execution:
 
 ```python
     async def hierarchical_coordination(self, complex_task: str) -> str:
         """Execute hierarchical coordination for complex tasks"""
         
         # Initialize coordination state
+
         initial_state = {
             "messages": [{"role": "user", "content": complex_task}],
             "active_agents": [],
@@ -2365,15 +2798,47 @@ The routing algorithm combines multiple factors to make optimal agent selection 
         }
         
         # Execute coordination workflow
+
         result = await self.coordination_graph.ainvoke(initial_state)
         
         return result.get("final_result", "Coordination completed")
-    
+
+```
+
+**State Structure Explained:**
+
+- **messages**: Conversation history maintained across all coordination steps
+
+- **active_agents**: Currently working agents to prevent overload
+
+- **task_queue**: Pending tasks waiting for agent assignment
+
+- **shared_context**: Knowledge shared between agents during execution
+
+- **coordination_history**: Audit trail of all coordination decisions
+
+- **performance_metrics**: Real-time monitoring data for optimization
+
+### **Intelligent Task Analysis Node**
+
+The task analysis node breaks down complex requests into manageable components using LLM-powered analysis:
+
+```python
     def _analyze_task_node(self, state: MultiAgentState) -> MultiAgentState:
         """Analyze task complexity and requirements"""
         task = state["messages"][-1]["content"]
-        
+
+```
+
+This node extracts the latest task from the message history and prepares it for comprehensive analysis.
+
+### **LLM-Powered Task Decomposition**
+
+The system uses structured prompting to analyze task complexity and requirements:
+
+```python
         # Use LLM to analyze task
+
         analysis_prompt = f"""
         Analyze this task for multi-agent coordination:
         
@@ -2392,7 +2857,24 @@ The routing algorithm combines multiple factors to make optimal agent selection 
         """
         
         analysis = self.llm.invoke(analysis_prompt)
-        
+
+```
+
+**Why This Analysis Matters:**
+
+- **Complexity Level**: Determines resource allocation and timeout settings
+
+- **Required Capabilities**: Matches tasks to agents with appropriate skills
+
+- **Estimated Subtasks**: Enables parallel execution planning
+
+- **Coordination Requirements**: Identifies dependencies between subtasks
+
+### **Robust Analysis Processing**
+
+The system handles LLM responses with proper error handling and fallback mechanisms:
+
+```python
         try:
             import json
             analysis_data = json.loads(analysis.content)
@@ -2400,6 +2882,7 @@ The routing algorithm combines multiple factors to make optimal agent selection 
             analysis_data = {"complexity": 5, "capabilities": [], "subtasks": []}
         
         # Update state with analysis
+
         state["shared_context"]["task_analysis"] = analysis_data
         state["coordination_history"].append({
             "step": "task_analysis",
@@ -2408,12 +2891,29 @@ The routing algorithm combines multiple factors to make optimal agent selection 
         })
         
         return state
+
 ```
+
+**Error Handling Strategy:**
+
+- **JSON Parsing**: Gracefully handles malformed LLM responses
+
+- **Default Values**: Provides sensible fallbacks when analysis fails
+
+- **State Updates**: Ensures analysis results are available to subsequent nodes
+
+- **History Tracking**: Maintains audit trail for debugging and optimization
 
 **Usage Example - Advanced Multi-Agent System:**
 
+### **Step 1: System Initialization**
+
+The first step is setting up the enhanced multi-agent system with the necessary dependencies:
+
 ```python
+
 # Example usage with enhanced coordination
+
 async def demo_enhanced_multi_agent():
     from llm_setup import LLMFactory
     from langchain_tools import CalculatorTool, weather_tool, email_tool
@@ -2421,9 +2921,20 @@ async def demo_enhanced_multi_agent():
     llm = LLMFactory.create_llm("openai")
     
     # Create enhanced multi-agent system
+
     system = EnhancedMultiAgentSystem(llm)
-    
-    # Create specialized agents with detailed capabilities
+
+```
+
+This initialization creates the foundation for our multi-agent orchestra. The `EnhancedMultiAgentSystem` handles task routing, coordination graphs, and performance monitoring.
+
+### **Step 2: Creating the Data Science Agent**
+
+Next, we create a specialized agent focused on quantitative analysis and statistical modeling:
+
+```python
+    # Create data science specialist
+
     system.create_specialized_agent(
         name="data_scientist",
         role="Data Analysis Specialist",
@@ -2437,7 +2948,26 @@ async def demo_enhanced_multi_agent():
         system_message="You excel at quantitative analysis, statistical modeling, and data-driven insights.",
         performance_targets={"accuracy": 0.95, "response_time": 30}
     )
-    
+
+```
+
+**Why These Capabilities Matter:**
+
+- **analytical_skills (0.95)**: Expert-level capability for complex data analysis
+
+- **mathematical_skills (0.90)**: Strong mathematical foundations for calculations
+
+- **statistical_analysis (0.85)**: Solid understanding of statistical methods
+
+- **data_visualization (0.75)**: Competent at creating charts and graphs
+
+### **Step 3: Creating the Research Specialist**
+
+We add a research-focused agent for information gathering and synthesis:
+
+```python
+    # Create research specialist
+
     system.create_specialized_agent(
         name="research_specialist",
         role="Research and Information Gathering Expert",
@@ -2451,7 +2981,26 @@ async def demo_enhanced_multi_agent():
         system_message="You specialize in comprehensive research, fact-checking, and information synthesis.",
         performance_targets={"thoroughness": 0.90, "reliability": 0.95}
     )
-    
+
+```
+
+**Research Agent's Strengths:**
+
+- **research_skills (0.90)**: Expert at finding and gathering information
+
+- **information_synthesis (0.85)**: Strong ability to combine multiple sources
+
+- **fact_verification (0.80)**: Skilled at validating information accuracy
+
+- **source_evaluation (0.75)**: Competent at assessing source credibility
+
+### **Step 4: Creating the Communication Expert**
+
+Finally, we add a specialist for clear communication and professional presentation:
+
+```python
+    # Create communication expert
+
     system.create_specialized_agent(
         name="communication_expert",
         role="Communication and Presentation Specialist",
@@ -2465,8 +3014,26 @@ async def demo_enhanced_multi_agent():
         system_message="You excel at clear communication, professional writing, and stakeholder engagement.",
         performance_targets={"clarity": 0.95, "engagement": 0.85}
     )
-    
+
+```
+
+**Communication Agent's Expertise:**
+
+- **communication_skills (0.95)**: Expert-level writing and presentation abilities
+
+- **report_writing (0.90)**: Strong technical and business writing skills
+
+- **presentation_design (0.80)**: Competent at creating engaging presentations
+
+- **stakeholder_management (0.85)**: Skilled at managing different audience needs
+
+### **Step 5: Defining a Complex Task**
+
+Now we create a sophisticated task that requires collaboration between all three agents:
+
+```python
     # Execute complex hierarchical coordination
+
     complex_task = """
     Create a comprehensive market analysis report for renewable energy adoption 
     in three major cities. Include:
@@ -2475,35 +3042,74 @@ async def demo_enhanced_multi_agent():
     3. Professional executive summary with recommendations
     4. Stakeholder communication plan
     """
-    
+
+```
+
+**Why This Task Requires Multiple Agents:**
+
+- **Research Agent**: Gathers weather data and market information
+
+- **Data Scientist**: Analyzes adoption rates and creates projections
+
+- **Communication Expert**: Writes executive summary and communication plan
+
+### **Step 6: Executing Hierarchical Coordination**
+
+The system orchestrates the agents to complete the complex task:
+
+```python
     result = await system.hierarchical_coordination(complex_task)
     
     print("Enhanced Multi-Agent Result:")
     print(result)
     
     # Get system performance metrics
+
     metrics = system.performance_monitor.get_system_metrics()
     print("\nSystem Performance Metrics:")
     print(metrics)
     
     return result
+
 ```
+
+**What Happens During Coordination:**
+
+1. Task analysis breaks down the complex request
+
+2. Agent selection matches subtasks to specialized agents
+
+3. Task delegation assigns work with proper context
+
+4. Execution monitoring tracks progress and handles failures
+
+5. Result synthesis combines outputs into a coherent final report
 
 This enhanced multi-agent implementation demonstrates LangChain's 2025 evolution toward sophisticated orchestration engines with:
 
 - **Intelligent Task Routing**: Capability-based agent selection
+
 - **Hierarchical Coordination**: Complex workflow orchestration using LangGraph
+
 - **Performance Monitoring**: Real-time system performance tracking
+
 - **Failure Handling**: Robust error recovery and task redistribution
 **🔗 Context Sharing**
+
 - Persistent shared state across agents using Redis backend
+
 - Knowledge graphs for maintaining relationship context
+
 - Session continuity across long-running workflows
 
 **Production Readiness Features:**
+
 - Enterprise security with role-based access control
+
 - Scalable deployment with Kubernetes orchestration
+
 - Comprehensive testing frameworks with LangSmith integration
+
 - Observability with distributed tracing and monitoring
 
 ---
@@ -2516,10 +3122,12 @@ This enhanced multi-agent implementation demonstrates LangChain's 2025 evolution
 
 Let's build a sophisticated multi-agent system using LangChain's orchestration capabilities:
 
-**Step 1: Set up the multi-agent system foundation**
+### Step 1: Set up the multi-agent system foundation
 
 ```python
+
 # src/session2/langchain_multi_agent.py
+
 from langchain.agents import Tool, AgentType, initialize_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.schema import HumanMessage, AIMessage
@@ -2533,13 +3141,18 @@ class LangChainMultiAgentSystem:
         self.llm = llm
         self.agents = {}
         self.communication_history = []
+
 ```
 
 This initializes our multi-agent system with an LLM and storage for agent instances and their communication history.
 
-**Step 2: Agent creation and specialization**
+### Step 2: Agent creation and specialization
 
-```python        
+#### Agent Initialization with Memory
+
+The first step in creating a specialized agent is setting up its memory system for conversation continuity:
+
+```python
     def create_specialized_agent(
         self, 
         name: str, 
@@ -2550,18 +3163,39 @@ This initializes our multi-agent system with an LLM and storage for agent instan
         """Create a specialized agent with specific role and tools"""
         
         # Create memory for this agent
+
         memory = ConversationBufferMemory(
             memory_key="chat_history",
             return_messages=True
         )
-        
+
+```
+
+Each agent gets its own isolated memory to maintain context throughout conversations without interference from other agents.
+
+### **Role-Specific System Message Configuration**
+
+Next, we configure the agent's personality and role through a system message:
+
+```python
         # Add role-specific system message to memory
+
         if system_message:
             memory.chat_memory.add_message(
                 HumanMessage(content=f"You are {name}. {system_message}")
             )
-        
+
+```
+
+This system message establishes the agent's identity and behavior patterns from the start of any conversation.
+
+### **Agent Creation and Registration**
+
+Finally, we create the agent instance and register it in the multi-agent system:
+
+```python
         # Create agent
+
         agent = initialize_agent(
             tools=tools,
             llm=self.llm,
@@ -2578,9 +3212,16 @@ This initializes our multi-agent system with an LLM and storage for agent instan
         }
         
         print(f"Created agent '{name}' with role: {role}")
+
 ```
 
-This method creates specialized agents with their own memory, role definitions, and tool sets. Each agent maintains conversation history and can be configured for specific tasks.
+**Key Configuration Choices:**
+
+- **STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION**: Enables complex reasoning and tool use
+
+- **verbose=True**: Provides detailed logging for debugging and monitoring
+
+- **Agent Registry**: Stores metadata for task routing and system management
 
 ### **Inter-Agent Communication System**
 
@@ -2603,6 +3244,7 @@ Effective multi-agent systems require robust communication channels with proper 
             response = await agent_info["agent"].arun(message)
             
             # Log communication
+
             self.communication_history.append({
                 "from": from_agent,
                 "to": agent_name,
@@ -2615,12 +3257,17 @@ Effective multi-agent systems require robust communication channels with proper 
             
         except Exception as e:
             return f"Error communicating with {agent_name}: {str(e)}"
+
 ```
 
 **Communication Features:**
+
 - **Agent Validation**: Ensures target agent exists before sending messages
+
 - **Comprehensive Logging**: Tracks all inter-agent communications with timestamps
+
 - **Error Handling**: Graceful failure recovery with descriptive error messages
+
 - **Async Support**: Non-blocking communication for better performance
 
 ### **Collaborative Workflow Orchestration**
@@ -2641,21 +3288,27 @@ The workflow orchestration engine manages complex multi-step processes across mu
         for step in workflow_steps:
             agent_name = step["agent"]
             step_instruction = step["instruction"]
+
 ```
 
 **Workflow Execution Strategy:**
+
 - **Sequential Processing**: Steps execute in order, building on previous results
+
 - **Context Preservation**: Each agent receives relevant information from prior steps
+
 - **Result Tracking**: Comprehensive logging of each step's output
 
 ### **Dynamic Context Building**
 
 ```python
             # Add context from previous steps
+
             if workflow_results:
                 context_info = "\n".join([
                     f"{r['agent']}: {r['result'][:100]}..." 
                     for r in workflow_results[-2:]  # Last 2 results
+
                 ])
                 full_instruction = f"""
                 Original task: {task}
@@ -2667,17 +3320,22 @@ The workflow orchestration engine manages complex multi-step processes across mu
                 """
             else:
                 full_instruction = f"Original task: {task}\n\nYour task: {step_instruction}"
+
 ```
 
 **Context Management Features:**
+
 - **Progressive Context**: Agents receive summaries of the last 2 steps to maintain relevance
+
 - **Task Continuity**: Original task always included to maintain focus
+
 - **Truncated Results**: Long outputs are shortened to prevent context overflow
 
 ### **Step Execution and Result Management**
 
 ```python
             # Execute step
+
             result = await self.send_message_to_agent(
                 agent_name, 
                 full_instruction, 
@@ -2692,18 +3350,24 @@ The workflow orchestration engine manages complex multi-step processes across mu
             })
             
             # Update context
+
             context[f"step_{len(workflow_results)}"] = result
         
         # Synthesize final result
+
         final_result = await self._synthesize_workflow_results(task, workflow_results)
         return final_result
+
 ```
 
 **Execution Benefits:**
+
 - **Audit Trail**: Complete record of which agent performed each step
+
 - **Error Isolation**: Failed steps don't break the entire workflow
+
 - **Result Synthesis**: Final step combines all outputs into coherent response
-    
+
 ### **Intelligent Result Synthesis**
 
 The synthesis engine combines outputs from multiple agents into coherent, comprehensive responses:
@@ -2733,11 +3397,15 @@ The synthesis engine combines outputs from multiple agents into coherent, compre
         
         response = await self.llm.ainvoke(synthesis_prompt)
         return response.content
+
 ```
 
 **Synthesis Benefits:**
+
 - **Coherent Integration**: Combines disparate agent outputs into unified response
+
 - **Quality Assurance**: LLM reviews all results for completeness and accuracy
+
 - **Task Alignment**: Ensures final output directly addresses original requirements
 
 ### **Agent-to-Agent Conversations**
@@ -2760,6 +3428,7 @@ Facilitate dynamic discussions between agents for collaborative problem-solving:
         
         for turn in range(max_turns):
             # Send message to current speaker
+
             response = await self.send_message_to_agent(
                 current_speaker, 
                 current_message,
@@ -2774,15 +3443,21 @@ Facilitate dynamic discussions between agents for collaborative problem-solving:
             })
             
             # Switch speakers
+
             current_speaker = agent2 if current_speaker == agent1 else agent1
             current_message = response  # Response becomes next message
+
         
         return conversation
+
 ```
 
 **Conversation Features:**
+
 - **Turn-Based Exchange**: Structured dialogue with alternating speakers
+
 - **Natural Flow**: Each response becomes the next speaker's prompt
+
 - **Conversation History**: Complete transcript for analysis and learning
 
 ### **System Status and Monitoring**
@@ -2802,11 +3477,15 @@ Facilitate dynamic discussions between agents for collaborative problem-solving:
             "total_communications": len(self.communication_history),
             "recent_communications": self.communication_history[-5:]
         }
+
 ```
 
 **Monitoring Capabilities:**
+
 - **Agent Inventory**: Track all active agents and their capabilities
+
 - **Communication Analytics**: Monitor interaction patterns and frequency
+
 - **System Health**: Real-time visibility into system performance
 
 ---
@@ -2818,7 +3497,9 @@ Facilitate dynamic discussions between agents for collaborative problem-solving:
 This comprehensive example demonstrates all the multi-agent capabilities working together:
 
 ```python
+
 # Example specialized agents
+
 async def demo_multi_agent_system():
     from llm_setup import LLMFactory
     from langchain_tools import CalculatorTool, weather_tool, email_tool
@@ -2826,7 +3507,9 @@ async def demo_multi_agent_system():
     llm = LLMFactory.create_llm("openai")
     
     # Create multi-agent system
+
     system = LangChainMultiAgentSystem(llm)
+
 ```
 
 ### **Creating Specialized Agent Team**
@@ -2835,6 +3518,7 @@ Each agent is designed with specific expertise and tools:
 
 ```python
     # Create specialized agents
+
     system.create_specialized_agent(
         name="data_analyst",
         role="Data Analysis Specialist",
@@ -2855,6 +3539,7 @@ Each agent is designed with specific expertise and tools:
         tools=[email_tool],
         system_message="You specialize in clear, professional communication and report writing."
     )
+
 ```
 
 ### **Defining Collaborative Workflow**
@@ -2863,6 +3548,7 @@ The workflow defines the sequence of tasks and agent assignments:
 
 ```python
     # Execute collaborative workflow
+
     workflow = [
         {
             "agent": "researcher",
@@ -2882,11 +3568,15 @@ The workflow defines the sequence of tasks and agent assignments:
         "Create a global weather analysis report for our executive team",
         workflow
     )
+
 ```
 
 **Workflow Design Principles:**
+
 - **Sequential Dependencies**: Each step builds on the previous one
+
 - **Agent Specialization**: Tasks matched to agent expertise
+
 - **Clear Instructions**: Specific, actionable directives for each agent
 
 ### **Demonstrating Advanced Features**
@@ -2896,6 +3586,7 @@ The workflow defines the sequence of tasks and agent assignments:
     print(result)
     
     # Agent conversation example
+
     conversation = await system.agent_conversation(
         "data_analyst",
         "researcher", 
@@ -2908,21 +3599,28 @@ The workflow defines the sequence of tasks and agent assignments:
         print(f"Turn {turn['turn']} - {turn['speaker']}: {turn['response'][:100]}...")
     
     print("\nSystem Status:", system.get_system_status())
+
 ```
 
 **Demo Features Highlighted:**
+
 - **Collaborative Workflow**: Multi-step process with agent coordination
+
 - **Agent Conversations**: Dynamic dialogue between agents
+
 - **System Monitoring**: Real-time status and performance metrics
 
 **Expected Output Structure:**
-1. **Research Phase**: Comprehensive weather data from multiple cities
-2. **Analysis Phase**: Statistical analysis with calculated averages and ranges
-3. **Communication Phase**: Executive-ready summary with key insights
-4. **Conversation Log**: Agent-to-agent knowledge sharing discussion
-5. **System Status**: Current system health and communication metrics
-```
 
+1. **Research Phase**: Comprehensive weather data from multiple cities
+
+2. **Analysis Phase**: Statistical analysis with calculated averages and ranges
+
+3. **Communication Phase**: Executive-ready summary with key insights
+
+4. **Conversation Log**: Agent-to-agent knowledge sharing discussion
+
+5. **System Status**: Current system health and communication metrics
 
 ---
 
@@ -2933,7 +3631,9 @@ The workflow defines the sequence of tasks and agent assignments:
 LangChain's 2025 updates include sophisticated memory management for long-running agents:
 
 ```python
+
 # src/session2/persistent_memory.py
+
 from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory
 from langchain.schema import BaseMemory
 import pickle
@@ -2941,6 +3641,7 @@ import redis
 import json
 from typing import Dict, Any, List
 import uuid
+
 ```
 
 ### **Redis-Based Persistent Memory Architecture**
@@ -2955,17 +3656,22 @@ class RedisPersistentMemory(BaseMemory):
         self.session_id = session_id
         self.redis_client = redis_client or redis.Redis(host='localhost', port=6379, db=0)
         self.ttl = ttl  # 7 days default
+
         self.memory_key = f"agent_memory:{session_id}"
         self.summary_key = f"agent_summary:{session_id}"
         
     @property
     def memory_variables(self) -> List[str]:
         return ["history", "summary"]
+
 ```
 
 **Architecture Benefits:**
+
 - **Session Isolation**: Each session has unique memory keys preventing data leakage
+
 - **TTL Management**: Automatic cleanup prevents Redis memory bloat
+
 - **Dual Storage**: Separate keys for detailed history and compressed summaries
 
 ### **Memory Loading and Error Handling**
@@ -2975,10 +3681,12 @@ class RedisPersistentMemory(BaseMemory):
         """Load memory from Redis"""
         try:
             # Load conversation history
+
             history_data = self.redis_client.get(self.memory_key)
             history = json.loads(history_data) if history_data else []
             
             # Load conversation summary
+
             summary_data = self.redis_client.get(self.summary_key)
             summary = summary_data.decode('utf-8') if summary_data else ""
             
@@ -2989,11 +3697,15 @@ class RedisPersistentMemory(BaseMemory):
         except Exception as e:
             print(f"Error loading memory: {e}")
             return {"history": [], "summary": ""}
+
 ```
 
 **Error Resilience Features:**
+
 - **Graceful Fallbacks**: Returns empty memory structures if Redis is unavailable
+
 - **Data Validation**: Handles corrupted JSON data without crashing
+
 - **Connection Recovery**: Continues operation even with temporary Redis outages
 
 ### **Context Persistence and Compression**
@@ -3003,10 +3715,12 @@ class RedisPersistentMemory(BaseMemory):
         """Save conversation context to Redis"""
         try:
             # Load existing history
+
             memory_vars = self.load_memory_variables(inputs)
             history = memory_vars["history"]
             
             # Add new interaction
+
             history.append({
                 "input": inputs,
                 "output": outputs,
@@ -3014,10 +3728,12 @@ class RedisPersistentMemory(BaseMemory):
             })
             
             # Compress history if too long
+
             if len(history) > 50:
                 history = await self._compress_history(history)
             
             # Save to Redis
+
             self.redis_client.setex(
                 self.memory_key, 
                 self.ttl, 
@@ -3026,11 +3742,15 @@ class RedisPersistentMemory(BaseMemory):
             
         except Exception as e:
             print(f"Error saving memory: {e}")
+
 ```
 
 **Memory Management Strategy:**
+
 - **Append-Only Operations**: New interactions are added without modifying existing data
+
 - **Automatic Compression**: Triggers when history exceeds 50 interactions
+
 - **Atomic Updates**: Uses Redis SETEX for consistent state updates
 
 ### **Intelligent History Compression**
@@ -3039,11 +3759,14 @@ class RedisPersistentMemory(BaseMemory):
     async def _compress_history(self, history: List[Dict]) -> List[Dict]:
         """Compress old history using summarization"""
         # Keep recent interactions and compress older ones
+
         recent_history = history[-20:]  # Keep last 20
+
         old_history = history[:-20]
         
         if old_history:
             # Create summary of old interactions
+
             summary_prompt = f"""
             Summarize these conversation interactions, preserving key context:
             {json.dumps(old_history, indent=2)}
@@ -3056,9 +3779,12 @@ class RedisPersistentMemory(BaseMemory):
             """
             
             # Use LLM for summarization (would need access to LLM instance)
+
             summary = "Compressed conversation history"  # Simplified
+
             
             # Save summary
+
             self.redis_client.setex(self.summary_key, self.ttl, summary)
         
         return recent_history
@@ -3066,11 +3792,15 @@ class RedisPersistentMemory(BaseMemory):
     def clear(self) -> None:
         """Clear memory"""
         self.redis_client.delete(self.memory_key, self.summary_key)
+
 ```
 
 **Compression Strategy:**
+
 - **Recent History Preservation**: Keeps last 20 interactions for immediate context
+
 - **LLM-Powered Summarization**: Uses AI to create meaningful summaries of older interactions
+
 - **Key Context Retention**: Focuses on decisions, learnings, and ongoing commitments
 
 ---
@@ -3088,6 +3818,7 @@ class AgentSessionManager:
     def __init__(self, redis_client=None):
         self.redis_client = redis_client or redis.Redis()
         self.active_sessions = {}
+
 ```
 
 ### **Session Creation and Lifecycle**
@@ -3107,18 +3838,24 @@ class AgentSessionManager:
         }
         
         # Save session metadata
+
         self.redis_client.setex(
             f"session:{session_id}",
             3600*24*30,  # 30 days
+
             json.dumps(session_data)
         )
         
         return session_id
+
 ```
 
 **Session Management Features:**
+
 - **Unique Session IDs**: Combines user, agent type, and UUID for collision-free identification
+
 - **Metadata Tracking**: Stores creation time, activity, and interaction counts
+
 - **Automatic Expiration**: 30-day TTL prevents orphaned sessions
 
 ### **Agent Instantiation with Persistent Memory**
@@ -3127,9 +3864,11 @@ class AgentSessionManager:
     def get_agent_with_session(self, session_id: str, llm, tools: List[Tool]):
         """Get agent instance with persistent memory"""
         # Create persistent memory for this session
+
         memory = RedisPersistentMemory(session_id, self.redis_client)
         
         # Create agent with persistent memory
+
         agent = initialize_agent(
             tools=tools,
             llm=llm,
@@ -3139,6 +3878,7 @@ class AgentSessionManager:
         )
         
         # Track active session
+
         self.active_sessions[session_id] = {
             "agent": agent,
             "created_at": datetime.now(),
@@ -3146,28 +3886,35 @@ class AgentSessionManager:
         }
         
         return agent
+
 ```
 
 **Key Benefits:**
+
 - **Seamless Memory Integration**: Automatic connection between agents and persistent storage
+
 - **Session Tracking**: Active session monitoring for resource management
+
 - **Consistent Configuration**: Standardized agent setup across all sessions
 
 ---
 
 ## **Production Testing with LangSmith**
 
-### **Comprehensive Testing Framework**
+### **Production Testing Setup**
 
 LangSmith provides enterprise-grade testing capabilities for production agent systems:
 
 ```python
+
 # src/session2/testing_strategies.py
+
 from langsmith import Client
 from langsmith.evaluation import evaluate
 from langsmith.schemas import Example, Run
 import asyncio
 from typing import List, Dict, Any
+
 ```
 
 ### **Test Suite Architecture**
@@ -3182,6 +3929,7 @@ class AgentTestSuite:
         self.project_name = project_name
         self.client = Client()
         self.test_dataset = None
+
 ```
 
 ### **Test Dataset Creation**
@@ -3203,6 +3951,7 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
             examples.append(example)
         
         # Create dataset
+
         dataset = self.client.create_dataset(
             dataset_name=dataset_name,
             examples=examples
@@ -3210,14 +3959,18 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
         
         self.test_dataset = dataset_name
         return dataset_name
+
 ```
 
 **Dataset Features:**
+
 - **Structured Examples**: Each test case includes inputs, expected outputs, and metadata
+
 - **Versioned Storage**: LangSmith tracks dataset versions for reproducible testing
+
 - **Metadata Support**: Rich context for understanding test case purpose and constraints
 
-### **Automated Evaluation Pipeline**
+### **Advanced Evaluation Pipeline**
 
 ```python
     async def run_evaluation_suite(self, agent_function, evaluators: List[Dict]) -> Dict:
@@ -3226,11 +3979,13 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
             raise ValueError("Test dataset not created")
         
         # Define evaluation functions
+
         eval_functions = []
         for evaluator in evaluators:
             eval_functions.append(self._create_evaluator(evaluator))
         
         # Run evaluation
+
         results = await evaluate(
             agent_function,
             data=self.test_dataset,
@@ -3239,11 +3994,15 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
         )
         
         return self._process_evaluation_results(results)
+
 ```
 
 **Evaluation Benefits:**
+
 - **Parallel Execution**: Async evaluation for faster test cycles
+
 - **Multiple Metrics**: Simultaneous evaluation across different quality dimensions
+
 - **Experiment Tracking**: Automatic versioning and comparison of evaluation runs
 
 ### **Evaluation Strategy Factory**
@@ -3263,12 +4022,17 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
             return self._response_time_evaluator
         else:
             raise ValueError(f"Unknown evaluator type: {eval_type}")
+
 ```
 
 **Supported Evaluation Types:**
+
 - **Accuracy**: Correctness of agent responses against expected outputs
+
 - **Relevance**: How well responses address the specific question asked
+
 - **Completeness**: Whether responses cover all required aspects
+
 - **Response Time**: Performance metrics for production SLA compliance
 
 ### **Example Accuracy Evaluator**
@@ -3277,10 +4041,12 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
     async def _accuracy_evaluator(self, run: Run, example: Example) -> Dict:
         """Evaluate response accuracy"""
         # Compare actual output with expected output
+
         actual = run.outputs.get("output", "")
         expected = example.outputs.get("output", "")
         
         # Use LLM for semantic comparison
+
         comparison_prompt = f"""
         Compare these two responses for accuracy:
         
@@ -3292,6 +4058,7 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
         """
         
         # Simplified scoring (in practice, use LLM evaluation)
+
         score = 0.8 if actual and expected else 0.0
         
         return {
@@ -3299,13 +4066,16 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
             "score": score,
             "reasoning": "Automated accuracy assessment"
         }
+
 ```
 
 **Accuracy Evaluation Features:**
+
 - **Semantic Comparison**: Uses LLM to evaluate meaning rather than exact string matching
+
 - **Structured Output**: Returns scores and reasoning for analysis
+
 - **Fallback Logic**: Provides reasonable defaults when evaluation fails
-```
 
 ---
 
@@ -3316,13 +4086,16 @@ Systematic test dataset creation ensures comprehensive evaluation coverage:
 Production LangChain deployments require comprehensive monitoring for reliability and performance optimization:
 
 ```python
+
 # src/session2/production_monitoring.py
+
 from langchain.callbacks.base import BaseCallbackHandler
 import logging
 import time
 import json
 from prometheus_client import Counter, Histogram, Gauge, start_http_server
 from typing import Any, Dict, List, Optional
+
 ```
 
 ### **Prometheus Metrics Architecture**
@@ -3335,6 +4108,7 @@ class PrometheusCallbackHandler(BaseCallbackHandler):
     
     def __init__(self):
         # Define metrics
+
         self.request_count = Counter(
             'langchain_requests_total',
             'Total number of LangChain requests',
@@ -3346,13 +4120,19 @@ class PrometheusCallbackHandler(BaseCallbackHandler):
             'Duration of LangChain requests',
             ['agent_type']
         )
+
 ```
 
 **Core Metrics Categories:**
+
 - **Request Count**: Tracks total requests with agent type and status labels
+
 - **Request Duration**: Measures response times for performance analysis
+
 - **Active Sessions**: Monitors concurrent user sessions
+
 - **Tool Usage**: Tracks which tools are used most frequently
+
 - **Error Count**: Categorizes errors by type and agent for debugging
 
 ### **Session and Tool Monitoring**
@@ -3376,11 +4156,15 @@ class PrometheusCallbackHandler(BaseCallbackHandler):
         )
         
         self.current_requests = {}
+
 ```
 
 **Monitoring Benefits:**
+
 - **Resource Planning**: Active session tracking for capacity planning
+
 - **Tool Analytics**: Understand which tools provide most value
+
 - **Error Analysis**: Categorized error tracking for targeted improvements
 
 ### **LLM Request Lifecycle Tracking**
@@ -3399,11 +4183,15 @@ class PrometheusCallbackHandler(BaseCallbackHandler):
             self.request_duration.labels(agent_type='llm').observe(duration)
             self.request_count.labels(agent_type='llm', status='success').inc()
             del self.current_requests[request_id]
+
 ```
 
 **Request Tracking Features:**
+
 - **Precise Timing**: Measures exact duration from start to completion
+
 - **Success Metrics**: Tracks successful request completion rates
+
 - **Memory Management**: Cleans up tracking data to prevent memory leaks
 
 ### **Error Monitoring and Recovery**
@@ -3419,46 +4207,52 @@ class PrometheusCallbackHandler(BaseCallbackHandler):
         request_id = kwargs.get('invocation_id', 'unknown')
         if request_id in self.current_requests:
             del self.current_requests[request_id]
+
 ```
 
 **Error Handling Strategy:**
+
 - **Error Classification**: Groups errors by type for pattern analysis
+
 - **Clean Cleanup**: Removes failed requests from tracking
+
 - **Alert Integration**: Enables alerts based on error rate thresholds
-    
+
+```python
     def on_tool_start(self, serialized: Dict[str, Any], input_str: str, **kwargs) -> None:
         """Track tool usage start"""
         tool_name = serialized.get('name', 'unknown')
         request_id = kwargs.get('invocation_id', 'unknown')
         self.current_requests[f"tool_{request_id}"] = time.time()
-    
+
     def on_tool_end(self, output: str, **kwargs) -> None:
         """Track tool completion"""
         tool_name = kwargs.get('name', 'unknown')
         self.tool_usage.labels(tool_name=tool_name, status='success').inc()
-        
+
         request_id = kwargs.get('invocation_id', 'unknown')
         if f"tool_{request_id}" in self.current_requests:
             del self.current_requests[f"tool_{request_id}"]
-    
+
     def on_tool_error(self, error: Exception, **kwargs) -> None:
         """Track tool errors"""
         tool_name = kwargs.get('name', 'unknown')
         self.tool_usage.labels(tool_name=tool_name, status='error').inc()
-        
+
         request_id = kwargs.get('invocation_id', 'unknown')
         if f"tool_{request_id}" in self.current_requests:
             del self.current_requests[f"tool_{request_id}"]
 
 class ProductionMonitoring:
     """Production monitoring system for LangChain agents"""
-    
+
     def __init__(self, metrics_port: int = 8000):
         self.metrics_port = metrics_port
         self.callback_handler = PrometheusCallbackHandler()
         self.logger = self._setup_logging()
         
         # Start Prometheus metrics server
+
         start_http_server(metrics_port)
         self.logger.info(f"Metrics server started on port {metrics_port}")
     
@@ -3500,6 +4294,7 @@ class ProductionMonitoring:
             handle_parsing_errors=True,
             metadata={"agent_type": agent_type}
         )
+
 ```
 
 ---
@@ -3509,7 +4304,9 @@ class ProductionMonitoring:
 ### **Comparison Analysis**
 
 ```python
+
 # src/session2/framework_comparison.py
+
 import time
 import asyncio
 from typing import Dict, Any
@@ -3524,9 +4321,11 @@ class FrameworkComparison:
         """Compare different implementation approaches"""
         
         # Test bare metal implementation (from Session 1)
+
         bare_metal_result = await self._test_bare_metal(test_message)
         
         # Test LangChain implementation
+
         langchain_result = await self._test_langchain(test_message)
         
         comparison = {
@@ -3548,9 +4347,12 @@ class FrameworkComparison:
         
         try:
             # Simulate bare metal agent
+
             tools = [CalculatorTool()]
             agent = ToolUseAgent("bare_metal_test", None, tools)  # Mock LLM
+
             response = "Simulated bare metal response"  # Simplified for demo
+
             
             execution_time = time.time() - start_time
             
@@ -3579,9 +4381,12 @@ class FrameworkComparison:
         
         try:
             # Simulate LangChain agent
+
             tools = [CalculatorTool()]
             # agent = LangChainToolAgent(llm, tools)  # Would need real LLM
+
             response = "Simulated LangChain response"  # Simplified for demo
+
             
             execution_time = time.time() - start_time
             
@@ -3628,6 +4433,7 @@ class FrameworkComparison:
         }
 
 # Trade-offs summary
+
 def print_framework_tradeoffs():
     """Print comprehensive framework trade-offs"""
     
@@ -3718,8 +4524,8 @@ def print_framework_tradeoffs():
 
 if __name__ == "__main__":
     print_framework_tradeoffs()
-```
 
+```
 
 ---
 
@@ -3759,31 +4565,31 @@ if __name__ == "__main__":
 
 ### **Pattern Implementation (Questions 6-10)**
 
-6. In the LangChain reflection implementation, what determines when the reflection loop stops?
+1. In the LangChain reflection implementation, what determines when the reflection loop stops?
    a) Fixed number of iterations
    b) When critique contains "SATISFACTORY"
    c) When response quality score exceeds threshold
    d) When no changes are detected
 
-7. How does LangChain's built-in ReAct agent differ from the custom implementation?
+2. How does LangChain's built-in ReAct agent differ from the custom implementation?
    a) Built-in agent is faster
    b) Built-in agent has more abstraction, custom has more control
    c) Built-in agent is more accurate
    d) No significant difference
 
-8. What is the main advantage of LangChain's Plan-and-Execute framework?
+3. What is the main advantage of LangChain's Plan-and-Execute framework?
    a) Faster execution
    b) Better tool integration
    c) Separation of planning and execution phases
    d) Lower computational cost
 
-9. In the multi-agent system, how do agents share context between workflow steps?
+4. In the multi-agent system, how do agents share context between workflow steps?
    a) Shared memory objects
    b) Previous step results are included in subsequent instructions
    c) Global state variables
    d) Database storage
 
-10. Which tool creation method provides the most type safety in LangChain?
+5. Which tool creation method provides the most type safety in LangChain?
     a) Inheriting from BaseTool
     b) Using @tool decorator
     c) Using StructuredTool with Pydantic models
@@ -3791,31 +4597,31 @@ if __name__ == "__main__":
 
 ### **Framework Comparison (Questions 11-15)**
 
-11. What is the primary trade-off when choosing LangChain over bare metal implementation?
+1. What is the primary trade-off when choosing LangChain over bare metal implementation?
     a) Performance vs. ease of development
     b) Cost vs. features
     c) Speed vs. accuracy
     d) Security vs. functionality
 
-12. When would you choose bare metal implementation over LangChain?
+2. When would you choose bare metal implementation over LangChain?
     a) For rapid prototyping
     b) When you need maximum customization and control
     c) When you want rich ecosystem integration
     d) For standard use cases
 
-13. What is a potential disadvantage of using LangChain?
+3. What is a potential disadvantage of using LangChain?
     a) Poor documentation
     b) Limited tool ecosystem
     c) Framework dependency and potential lock-in
     d) Slow development
 
-14. Which approach typically requires more initial development time?
+4. Which approach typically requires more initial development time?
     a) LangChain
     b) Bare metal
     c) Both require equal time
     d) Depends on the use case
 
-15. For a team new to agent development, which approach is generally recommended?
+5. For a team new to agent development, which approach is generally recommended?
     a) Bare metal for learning purposes
     b) LangChain for faster results and community support
     c) Both approaches simultaneously
@@ -3824,20 +4630,35 @@ if __name__ == "__main__":
 ---
 
 ## **Answer Key**
+
 1. b) Consistent API across different LLM providers
+
 2. c) Memory
+
 3. c) Three - BaseTool, @tool decorator, and StructuredTool
+
 4. b) To gracefully handle malformed LLM responses
+
 5. d) All of the above
+
 6. b) When critique contains "SATISFACTORY"
+
 7. b) Built-in agent has more abstraction, custom has more control
+
 8. c) Separation of planning and execution phases
+
 9. b) Previous step results are included in subsequent instructions
+
 10. c) Using StructuredTool with Pydantic models
+
 11. a) Performance vs. ease of development
+
 12. b) When you need maximum customization and control
+
 13. c) Framework dependency and potential lock-in
+
 14. b) Bare metal
+
 15. b) LangChain for faster results and community support
 
 ---
@@ -3845,28 +4666,43 @@ if __name__ == "__main__":
 ## **Key Takeaways (2025 Edition)**
 
 1. **LangGraph has revolutionized LangChain** - stateful workflows and graph-based orchestration are now central
+
 2. **Production-ready features** include monitoring, persistent memory, and enterprise deployment patterns
+
 3. **Multi-agent coordination** has evolved into sophisticated orchestration engines with intelligent task routing
+
 4. **Performance optimization** through RunnableParallel and memory management strategies
+
 5. **LangSmith integration** provides comprehensive testing, monitoring, and evaluation capabilities
+
 6. **Enterprise focus** with security, compliance, and scalability built into the core framework
+
 7. **Complex decision-making** through conditional branching and feedback loops in LangGraph workflows
 
 ## **Next Steps**
 
 In Session 3, we'll dive deeper into LangGraph's advanced features including:
+
 - Complex state persistence strategies
+
 - Advanced error handling and circuit breaker patterns  
+
 - Enterprise integration patterns and API gateways
+
 - Workflow monitoring and observability best practices
+
 - Production deployment with Kubernetes and container orchestration
 
 **Critical 2025 Update**: LangGraph is no longer just an add-on to LangChain - it's become the core orchestration engine. Understanding LangGraph's stateful workflows and graph-based execution is essential for modern agent development.
 
 **Why This Evolution Matters**:
+
 - Traditional chains are linear and stateless
+
 - LangGraph enables cyclical, stateful workflows with complex decision logic
+
 - Production systems require persistence, error recovery, and sophisticated coordination
+
 - Multi-agent systems need graph-based orchestration for optimal performance
 
 ---

@@ -493,15 +493,25 @@ Finally, assemble the hierarchical crew with proper configuration:
 
 #### Dynamic Team Formation
 
+CrewAI's 2025 enhancement includes dynamic team formation that automatically adapts team composition based on task requirements, similar to how real organizations form project teams.
+
+**Initialize the Dynamic Team Formation System**
+
 ```python
 class DynamicTeamFormation:
     """2025: Adaptive team composition based on task requirements."""
     
     def __init__(self):
-        self.agent_capabilities = {}
-        self.team_configurations = {}
-        self.performance_history = {}
-    
+        self.agent_capabilities = {}  # Maps agents to their skill scores
+        self.team_configurations = {}  # Stores successful team patterns
+        self.performance_history = {}  # Tracks historical performance data
+```
+
+This initialization creates a foundation for intelligent team assembly, tracking each agent's capabilities and successful collaboration patterns.
+
+**Analyze Task Requirements for Optimal Team Formation**
+
+```python
     def analyze_task_requirements(self, task_description):
         """Analyze task to determine required capabilities."""
         required_skills = self._extract_skills(task_description)
@@ -512,7 +522,13 @@ class DynamicTeamFormation:
             'complexity': complexity,
             'estimated_duration': self._estimate_duration(complexity)
         }
-    
+```
+
+This analysis phase breaks down tasks into required skills and complexity levels, enabling intelligent matching of agents to requirements - much like a project manager assessing team needs.
+
+**Form Optimal Teams Based on Capability Matching**
+
+```python
     def form_optimal_team(self, task_requirements):
         """Form team based on capability matching."""
         optimal_agents = []
@@ -523,7 +539,13 @@ class DynamicTeamFormation:
                 optimal_agents.append(best_agent)
         
         return optimal_agents
-    
+```
+
+The team formation process systematically matches required skills to available agents, ensuring each skill area is covered by the most capable agent available.
+
+**Find Best Agent for Specific Skills**
+
+```python
     def _find_best_agent_for_skill(self, skill):
         """Find agent with highest capability score for skill."""
         best_score = 0
@@ -539,19 +561,27 @@ class DynamicTeamFormation:
         return best_agent
 ```
 
+This skill-based matching considers both raw capability scores and performance history, ensuring optimal agent assignment for each required skill area.
+
 #### Enhanced Delegation with Peer Inquiry
+
+CrewAI's 2025 delegation strategy enables both hierarchical delegation (manager to subordinate) and peer inquiry (colleague to colleague), mirroring real workplace collaboration patterns.
+
+**Initialize Advanced Delegation Framework**
 
 ```python
 class DelegationStrategy:
     """2025: Advanced delegation with autonomous collaboration."""
     
     def __init__(self):
-        self.delegation_rules = {}
-        self.workload_tracker = {}
-        self.peer_inquiry_enabled = True  # New 2025 feature
+        self.delegation_rules = {}        # Hierarchical delegation rules
+        self.workload_tracker = {}        # Track individual workloads
+        self.peer_inquiry_enabled = True  # Enable peer collaboration
 ```
 
-Initialize delegation strategy with rule storage and workload tracking.
+This setup creates a sophisticated delegation system that tracks both formal hierarchical relationships and informal peer collaboration opportunities.
+
+**Define Team Delegation Rules**
 
 ```python
     def add_delegation_rule(self, from_role, to_role, condition):
@@ -565,7 +595,9 @@ Initialize delegation strategy with rule storage and workload tracking.
         })
 ```
 
-Add delegation rules that define which roles can delegate to which other roles.
+Delegation rules establish clear authority chains, similar to organizational charts that define who can assign work to whom under specific conditions.
+
+**Validate Delegation Permissions with Peer Support**
 
 ```python
     def can_delegate(self, from_agent, to_agent, task_type):
@@ -573,12 +605,18 @@ Add delegation rules that define which roles can delegate to which other roles.
         from_role = from_agent.role
         to_role = to_agent.role
         
-        # Standard delegation rules
+        # Check hierarchical delegation rules first
         if from_role in self.delegation_rules:
             for rule in self.delegation_rules[from_role]:
                 if rule['to_role'] == to_role:
                     return rule['condition'](task_type)
-        
+```
+
+First, the system checks traditional hierarchical delegation rules - can a manager delegate to a direct report?
+
+**Enable Peer-to-Peer Collaboration**
+
+```python
         # 2025: Peer inquiry - agents can request help from peers
         if self.peer_inquiry_enabled and self._is_peer_inquiry_appropriate(from_agent, to_agent, task_type):
             return True
@@ -587,16 +625,17 @@ Add delegation rules that define which roles can delegate to which other roles.
     
     def _is_peer_inquiry_appropriate(self, from_agent, to_agent, task_type):
         """Determine if peer inquiry delegation is appropriate."""
-        # Same hierarchy level and complementary skills
         same_level = self._get_hierarchy_level(from_agent) == self._get_hierarchy_level(to_agent)
         complementary = self._has_complementary_skills(from_agent, to_agent, task_type)
         
         return same_level and complementary
 ```
 
-Validate delegation permissions based on established rules and task types.
+Peer inquiry enables lateral collaboration between agents at the same hierarchy level with complementary skills - like colleagues consulting each other for expertise.
 
-**Workload Management**
+**Workload Management for Team Balance**
+
+Effective team orchestration requires monitoring individual workloads to prevent bottlenecks and ensure optimal task distribution across team members.
 
 ```python
     def track_workload(self, agent_name, task_count=1):
@@ -612,7 +651,11 @@ Validate delegation permissions based on established rules and task types.
         self.workload_tracker[agent_name]['complexity_score'] += self._calculate_task_complexity(task_count)
 ```
 
-Track individual agent workloads for intelligent load balancing.
+This workload tracking system maintains real-time awareness of each team member's current capacity, preventing overload situations that could impact team performance.
+
+**Intelligent Agent Selection for Task Assignment**
+
+When assigning new tasks, the system considers multiple factors to find the most suitable agent, similar to how a project manager evaluates team member availability and expertise.
 
 ```python
     def get_optimal_agent(self, agent_list, task_requirements):
@@ -627,7 +670,13 @@ Track individual agent workloads for intelligent load balancing.
             capability_score = self._get_capability_match(agent, task_requirements)
             availability_score = self._calculate_availability(workload_data)
             performance_history = self._get_performance_score(agent.role)
-            
+```
+
+The selection process evaluates three key dimensions: how well the agent's capabilities match the task requirements, their current availability, and their historical performance.
+
+**Composite Scoring for Optimal Assignment**
+
+```python
             composite_score = (
                 capability_score * 0.4 + 
                 availability_score * 0.3 + 
@@ -641,7 +690,7 @@ Track individual agent workloads for intelligent load balancing.
         return optimal_agent
 ```
 
-Find the least busy agent for optimal task delegation and load distribution.
+This weighted scoring system ensures task assignments consider skill match (40%), current workload (30%), and past performance (30%), leading to optimal team productivity and member satisfaction.
 
 ---
 
@@ -808,7 +857,9 @@ Add output transformation for seamless tool chaining:
 
 Track and optimize your crew's performance:
 
-Start by setting up the performance monitoring class with metric tracking structures:
+**Initialize Performance Monitoring System**
+
+CrewAI's performance monitoring provides comprehensive insights into team dynamics, individual agent performance, and collaboration patterns - essential for maintaining the 5.76x speed advantage.
 
 ```python
 # From src/session4/performance_monitor.py
@@ -818,57 +869,90 @@ class CrewPerformanceMonitor:
     
     def __init__(self):
         self.metrics = {
-            'task_completion_times': {},
-            'agent_utilization': {},
-            'error_rates': {},
-            'delegation_patterns': [],
+            'task_completion_times': {},   # Track execution speed
+            'agent_utilization': {},       # Monitor individual workloads
+            'error_rates': {},             # Quality metrics
+            'delegation_patterns': [],     # Collaboration analysis
             'performance_benchmarks': {},  # 2025: Track against baselines
-            'collaboration_efficiency': {}  # 2025: Measure peer inquiry success
+            'collaboration_efficiency': {} # 2025: Measure peer inquiry success
         }
-        self.start_times = {}
-        self.baseline_performance = 1.0  # LangGraph baseline
-        self.target_speedup = 5.76  # CrewAI 2025 target
 ```
 
-Implement task tracking to monitor when tasks begin and agent workload assignment:
+This monitoring foundation tracks multiple dimensions of team performance, from individual metrics to collaborative patterns that drive overall effectiveness.
 
+**Configure Performance Targets and Baselines**
+
+```python
+        self.start_times = {}           # Track task start timestamps
+        self.baseline_performance = 1.0  # LangGraph baseline for comparison
+        self.target_speedup = 5.76      # CrewAI 2025 performance target
+```
+
+Setting clear performance baselines and targets enables continuous optimization and ensures teams maintain competitive advantages in production environments.
+
+**Track Task Initiation and Agent Assignment**
+
+Effective orchestration requires monitoring when tasks begin and how workload distributes across team members.
 
 ```python
     def start_task(self, task_id, agent_name):
-        """Record task start."""
+        """Record task start and agent assignment."""
         self.start_times[task_id] = {
             'agent': agent_name,
             'start': datetime.now()
         }
         
+        # Initialize agent metrics if first assignment
         if agent_name not in self.metrics['agent_utilization']:
             self.metrics['agent_utilization'][agent_name] = {
                 'tasks_assigned': 0,
                 'tasks_completed': 0,
                 'total_time': 0
             }
-        
+```
+
+This tracking system captures the moment tasks are assigned, enabling analysis of workload distribution patterns and identification of potential bottlenecks.
+
+**Update Agent Workload Metrics**
+
+```python
         self.metrics['agent_utilization'][agent_name]['tasks_assigned'] += 1
 ```
 
-Add completion tracking to measure task duration and success rates:
+Incrementing task assignments provides real-time visibility into individual agent workloads, supporting intelligent load balancing decisions.
+
+**Track Task Completion and Performance Metrics**
+
+Measuring task completion provides insights into both individual agent performance and overall team velocity, critical for maintaining orchestration effectiveness.
 
 ```python
     def complete_task(self, task_id, success=True):
-        """Record task completion."""
+        """Record task completion and update performance metrics."""
         if task_id not in self.start_times:
             return
         
         start_info = self.start_times[task_id]
         duration = (datetime.now() - start_info['start']).total_seconds()
         agent_name = start_info['agent']
-        
-        # Update metrics
+```
+
+Capturing completion data enables calculation of key performance indicators like average task duration and success rates per agent.
+
+**Update Individual Agent Performance Records**
+
+```python
+        # Track completion times for performance analysis
         if agent_name not in self.metrics['task_completion_times']:
             self.metrics['task_completion_times'][agent_name] = []
         
         self.metrics['task_completion_times'][agent_name].append(duration)
-        
+```
+
+Maintaining completion time histories enables identification of performance trends and optimization opportunities for individual team members.
+
+**Record Success Rates and Error Tracking**
+
+```python
         if success:
             self.metrics['agent_utilization'][agent_name]['tasks_completed'] += 1
         else:
@@ -877,15 +961,18 @@ Add completion tracking to measure task duration and success rates:
             self.metrics['error_rates'][agent_name] += 1
         
         self.metrics['agent_utilization'][agent_name]['total_time'] += duration
-        
         del self.start_times[task_id]
 ```
 
-Record delegation patterns to understand team collaboration dynamics:
+Tracking both successes and failures provides a complete picture of agent reliability and helps identify training or support needs within the team.
+
+**Monitor Team Collaboration Patterns**
+
+Trackingdelegation patterns reveals how team members collaborate and identifies successful coordination strategies.
 
 ```python
     def record_delegation(self, from_agent, to_agent, task_type):
-        """Record delegation patterns."""
+        """Record delegation patterns for collaboration analysis."""
         self.metrics['delegation_patterns'].append({
             'from': from_agent,
             'to': to_agent,
@@ -894,7 +981,11 @@ Record delegation patterns to understand team collaboration dynamics:
         })
 ```
 
-Generate comprehensive performance reports by combining all metrics:
+This delegation tracking captures the flow of work between team members, revealing collaboration patterns that can be optimized for better team dynamics.
+
+**Generate Comprehensive Team Performance Reports**
+
+Combining all metrics into actionable reports enables data-driven team optimization and performance improvement decisions.
 
 ```python
     def get_performance_report(self):
@@ -909,11 +1000,15 @@ Generate comprehensive performance reports by combining all metrics:
         return report
 ```
 
-Calculate high-level performance summary statistics:
+The report structure provides multiple views of team performance, from high-level summaries to detailed individual analysis and actionable recommendations.
+
+**Calculate High-Level Team Performance Statistics**
+
+Summary statistics provide quick insights into overall team productivity and success rates, essential for executive reporting and team assessment.
 
 ```python
     def _calculate_summary(self):
-        """Calculate summary statistics."""
+        """Calculate team-wide performance summary."""
         total_tasks = sum(
             agent['tasks_assigned'] 
             for agent in self.metrics['agent_utilization'].values()
@@ -923,7 +1018,13 @@ Calculate high-level performance summary statistics:
             agent['tasks_completed'] 
             for agent in self.metrics['agent_utilization'].values()
         )
-        
+```
+
+These calculations aggregate individual agent metrics to provide team-wide visibility into workload and completion rates.
+
+**Generate Executive Summary Metrics**
+
+```python
         return {
             'total_tasks': total_tasks,
             'completed_tasks': completed_tasks,
@@ -932,11 +1033,15 @@ Calculate high-level performance summary statistics:
         }
 ```
 
-Analyze individual agent performance with timing metrics:
+The summary provides key performance indicators that stakeholders need: task volume, completion rates, and team size - critical for assessing team effectiveness.
+
+**Analyze Individual Agent Performance**
+
+Detailed individual analysis helps identify top performers, training needs, and optimization opportunities within the team structure.
 
 ```python
     def _analyze_agent_performance(self):
-        """Analyze individual agent performance."""
+        """Analyze individual agent performance metrics."""
         analysis = {}
         
         for agent, times in self.metrics['task_completion_times'].items():
@@ -951,11 +1056,15 @@ Analyze individual agent performance with timing metrics:
         return analysis
 ```
 
-Examine delegation patterns to identify collaboration bottlenecks:
+This analysis provides comprehensive performance profiles for each agent, enabling personalized coaching, workload adjustments, and recognition of high performers.
+
+**Analyze Team Collaboration and Delegation Patterns**
+
+Understanding how work flows between team members reveals collaboration effectiveness and potential coordination improvements.
 
 ```python
     def _analyze_delegation_patterns(self):
-        """Analyze delegation patterns."""
+        """Analyze delegation patterns and collaboration flows."""
         delegation_counts = {}
         
         for delegation in self.metrics['delegation_patterns']:
@@ -967,21 +1076,31 @@ Examine delegation patterns to identify collaboration bottlenecks:
         return delegation_counts
 ```
 
-Generate actionable recommendations for team optimization:
+This analysis identifies the most common delegation paths, helping optimize team structure and communication channels for better workflow efficiency.
+
+**Generate Actionable Team Optimization Recommendations**
+
+Data-driven recommendations help team leads make informed decisions about workload redistribution, training needs, and process improvements.
 
 ```python
     def _generate_recommendations(self):
-        """Generate optimization recommendations."""
+        """Generate optimization recommendations based on performance data."""
         recommendations = []
         
-        # Check for underutilized agents
+        # Identify underutilized team members
         for agent, util in self.metrics['agent_utilization'].items():
             if util['tasks_assigned'] < 2:
                 recommendations.append(
                     f"Agent '{agent}' is underutilized. Consider assigning more tasks."
                 )
-        
-        # Check for high error rates
+```
+
+Identifying underutilized agents helps optimize resource allocation and ensures all team members contribute to their full potential.
+
+**Detect Quality Issues and Performance Problems**
+
+```python
+        # Check for high error rates requiring intervention
         for agent, error_count in self.metrics['error_rates'].items():
             total_tasks = self.metrics['agent_utilization'][agent]['tasks_assigned']
             error_rate = (error_count / total_tasks * 100) if total_tasks > 0 else 0
@@ -990,7 +1109,13 @@ Generate actionable recommendations for team optimization:
                 recommendations.append(
                     f"Agent '{agent}' has high error rate ({error_rate:.1f}%). Review task assignments."
                 )
-        
+```
+
+Highlighting quality issues enables proactive intervention through training, task reassignment, or additional support for struggling team members.
+
+**Monitor Performance Against Strategic Targets**
+
+```python
         # 2025: Check performance against benchmarks
         avg_performance = self._calculate_avg_performance()
         if avg_performance < self.target_speedup * 0.8:  # Below 80% of target
@@ -1000,9 +1125,14 @@ Generate actionable recommendations for team optimization:
             )
         
         return recommendations
-    
+```
+
+Tracking performance against the 5.76x speed target ensures teams maintain competitive advantages and identify optimization opportunities.
+**Calculate Team Performance Multiplier**
+
+```python
     def _calculate_avg_performance(self):
-        """Calculate average performance multiplier."""
+        """Calculate average performance multiplier vs baseline."""
         if not self.metrics['task_completion_times']:
             return 1.0
         
@@ -1014,10 +1144,10 @@ Generate actionable recommendations for team optimization:
             return 1.0
         
         avg_time = sum(all_times) / len(all_times)
-        # Estimate speedup based on completion times vs baseline
-        return max(1.0, self.baseline_performance / (avg_time / 100))  # Simplified calculation
+        return max(1.0, self.baseline_performance / (avg_time / 100))
 ```
-```
+
+This performance multiplier calculation helps track whether the team is achieving the target 5.76x speed improvement over baseline frameworks.
 
 ### Optimization Strategies
 
@@ -1107,6 +1237,10 @@ Analyze delegation patterns and suggest team restructuring improvements:
 
 #### Production-Ready Architecture
 
+Enterprise deployments require comprehensive monitoring, scaling, and failure recovery capabilities that maintain performance while ensuring reliability.
+
+**Initialize Enterprise Components**
+
 ```python
 from crewai import Crew, Process
 from crewai.enterprise import EnterpriseMonitor, ScalingManager, FailureRecovery
@@ -1116,24 +1250,52 @@ class EnterpriseCrewDeployment:
     
     def __init__(self, config):
         self.config = config
+```
+
+The enterprise deployment starts with a configuration-driven approach, enabling customization for different production environments.
+
+**Configure Enterprise Monitoring System**
+
+```python
         self.monitor = EnterpriseMonitor(
             metrics_endpoint=config.get('metrics_endpoint'),
             alerting_enabled=True,
             performance_baseline=5.76  # 2025 performance target
         )
+```
+
+The monitoring system tracks performance against the 5.76x baseline, providing real-time visibility into production team performance.
+
+**Set Up Intelligent Scaling Management**
+
+```python
         self.scaling_manager = ScalingManager(
             min_agents=config.get('min_agents', 3),
             max_agents=config.get('max_agents', 50),
             scaling_policy=config.get('scaling_policy', 'adaptive')
         )
+```
+
+Adaptive scaling ensures teams can handle varying workloads while maintaining cost efficiency and performance standards.
+
+**Initialize Failure Recovery Mechanisms**
+
+```python
         self.failure_recovery = FailureRecovery(
             max_retries=config.get('max_retries', 3),
             circuit_breaker_enabled=True,
             fallback_strategies=config.get('fallback_strategies', {})
         )
-    
+```
+
+Robust failure recovery with circuit breakers and fallback strategies ensures high availability in production environments.
+**Deploy Crew with Enterprise Enhancements**
+
+Enterprise deployment integrates monitoring, scaling, and recovery capabilities into the core crew functionality.
+
+```python
     def deploy_crew(self, agents, tasks):
-        """Deploy crew with enterprise monitoring."""
+        """Deploy crew with enterprise monitoring and resilience."""
         crew = Crew(
             agents=agents,
             tasks=tasks,
@@ -1142,14 +1304,26 @@ class EnterpriseCrewDeployment:
             cache=True,
             max_rpm=self.config.get('max_rpm', 100)
         )
-        
+```
+
+The base crew configuration includes hierarchical processing and caching for optimal performance in enterprise environments.
+
+**Enhance with Enterprise Capabilities**
+
+```python
         # Attach enterprise capabilities
         crew = self._enhance_with_monitoring(crew)
         crew = self._enhance_with_scaling(crew)
         crew = self._enhance_with_recovery(crew)
         
         return crew
-    
+```
+
+Enhancing the crew with enterprise capabilities transforms a basic team into a production-ready system with full observability and resilience.
+
+**Integrate Comprehensive Monitoring**
+
+```python
     def _enhance_with_monitoring(self, crew):
         """Add comprehensive monitoring capabilities."""
         crew.add_callback('task_start', self.monitor.track_task_start)
@@ -1159,6 +1333,8 @@ class EnterpriseCrewDeployment:
         
         return crew
 ```
+
+Monitoring callbacks capture all critical team events, providing complete visibility into task execution, collaboration patterns, and error occurrences.
 
 ### Monitoring and Scaling Strategies
 
@@ -1201,29 +1377,47 @@ class ProductionMonitoring:
 
 ### Error Handling and Resilience
 
-Initialize resilient crew with comprehensive error handling policies:
+**Initialize Resilient Team with Error Handling Policies**
+
+Resilient crews implement comprehensive error handling, recovery mechanisms, and circuit breaker patterns to ensure high availability in production environments.
 
 ```python
 class ResilientCrew:
-    """Crew with advanced error handling and recovery."""
+    """Crew with advanced error handling and recovery capabilities."""
     
     def __init__(self, agents, tasks):
         self.agents = agents
         self.tasks = tasks
+```
+
+The resilient crew foundation starts with basic agent and task assignments, then layers on sophisticated error handling mechanisms.
+
+**Configure Comprehensive Retry Policies**
+
+```python
         self.retry_policy = {
-            'max_retries': 3,
-            'backoff_factor': 2,
-            'retry_on_errors': [
+            'max_retries': 3,                 # Maximum retry attempts
+            'backoff_factor': 2,              # Exponential backoff multiplier
+            'retry_on_errors': [              # Specific error types to retry
                 'RateLimitError',
-                'TemporaryFailure',
+                'TemporaryFailure', 
                 'TimeoutError'
             ],
-            'circuit_breaker_threshold': 5,  # 2025: Circuit breaker pattern
-            'health_check_interval': 30      # 2025: Regular health checks
+            'circuit_breaker_threshold': 5,   # 2025: Circuit breaker pattern
+            'health_check_interval': 30       # 2025: Regular health checks
         }
-        self.fallback_strategies = {}
-        self.circuit_breaker_state = 'closed'  # 2025: Track circuit breaker state
 ```
+
+Retry policies define which errors warrant retry attempts and how aggressive the retry strategy should be, preventing system overload.
+
+**Initialize Resilience State Management**
+
+```python
+        self.fallback_strategies = {}               # Task-specific fallback functions
+        self.circuit_breaker_state = 'closed'       # 2025: Track circuit breaker state
+```
+
+Fallback strategies and circuit breaker state tracking provide multiple layers of resilience for production reliability.
 
 Add fallback strategies for specific task failure scenarios:
 
@@ -1233,7 +1427,9 @@ Add fallback strategies for specific task failure scenarios:
         self.fallback_strategies[task_name] = fallback_func
 ```
 
-Execute crew with intelligent retry logic and fallback mechanisms:
+**Execute Crew with Comprehensive Resilience**
+
+The execution system combines intelligent retry logic, fallback strategies, and circuit breaker patterns for maximum reliability.
 
 ```python
     async def execute_with_resilience(self):
@@ -1244,7 +1440,13 @@ Execute crew with intelligent retry logic and fallback mechanisms:
             process=Process.sequential,
             verbose=2
         )
-        
+```
+
+The resilient execution starts with standard crew configuration, then applies sophisticated error handling layers.
+
+**Implement Intelligent Retry Logic with Exponential Backoff**
+
+```python
         for attempt in range(self.retry_policy['max_retries']):
             try:
                 result = await crew.kickoff()
@@ -1257,29 +1459,55 @@ Execute crew with intelligent retry logic and fallback mechanisms:
                     wait_time = self.retry_policy['backoff_factor'] ** attempt
                     print(f"Retry {attempt + 1} after {wait_time}s due to {error_type}")
                     await asyncio.sleep(wait_time)
+```
+
+Exponential backoff prevents overwhelming failing systems while giving transient issues time to resolve, improving overall system stability.
+
+**Apply Fallback Strategies for Non-Retryable Errors**
+
+```python
                 else:
-                    # Try fallback strategy
+                    # Try fallback strategy for permanent failures
                     task_name = self._identify_failed_task(e)
                     if task_name in self.fallback_strategies:
                         return self.fallback_strategies[task_name]()
                     raise
         
         raise Exception("Max retries exceeded")
-    
+```
+
+Fallback strategies provide alternative execution paths when primary approaches fail, ensuring graceful degradation rather than complete failure.
+**Implement Circuit Breaker Pattern for Reliability**
+
+Circuit breakers prevent cascading failures by detecting problematic services and routing around them until they recover.
+
+```python
     def _check_circuit_breaker(self):
         """2025: Implement circuit breaker pattern."""
         if self.circuit_breaker_state == 'open':
-            # Circuit is open, fail fast
+            # Circuit is open, fail fast to prevent cascading failures
             raise Exception("Circuit breaker is open - service unavailable")
         
         return True
-    
+```
+
+Circuit breaker checks prevent attempts to execute when the system is known to be failing, protecting downstream services.
+
+**Record Success for Circuit Breaker Recovery**
+
+```python
     def _record_success(self):
         """Record successful execution for circuit breaker."""
         if self.circuit_breaker_state == 'half_open':
             self.circuit_breaker_state = 'closed'
             print("Circuit breaker closed - service recovered")
-    
+```
+
+Success recording enables the circuit breaker to transition from half-open back to closed state when the system recovers.
+
+**Track Failures for Circuit Breaker Logic**
+
+```python
     def _record_failure(self):
         """Record failure for circuit breaker logic."""
         failure_count = getattr(self, '_failure_count', 0) + 1
@@ -1288,74 +1516,123 @@ Execute crew with intelligent retry logic and fallback mechanisms:
         if failure_count >= self.retry_policy['circuit_breaker_threshold']:
             self.circuit_breaker_state = 'open'
             print("Circuit breaker opened due to excessive failures")
-    
+```
+
+Failure tracking triggers circuit breaker state changes when failure thresholds are exceeded, protecting system stability.
+**Identify Failed Tasks for Targeted Recovery**
+
+```python
     def _identify_failed_task(self, error):
         """Identify which task failed from error."""
-        # Parse error to identify task
+        # Parse error to identify task for targeted recovery
         # Implementation depends on error structure
         return "unknown"
 ```
+
+Task identification enables targeted recovery strategies, allowing specific fallback mechanisms for different types of failures.
 
 ### Enterprise Scaling Strategies
 
 **2025 Enhancement:** Advanced scaling with predictive load management and cost optimization.
 
-Initialize scalable crew with base agents and scaling configuration:
+**Initialize Scalable Team Architecture**
+
+Scalable crews adapt team size dynamically based on workload demands while maintaining performance standards and cost efficiency.
 
 ```python
 class ScalableCrew:
-    """Crew that can scale based on workload."""
+    """Crew that can scale based on workload and performance requirements."""
     
     def __init__(self, base_agents):
-        self.base_agents = base_agents
-        self.additional_agents = []
+        self.base_agents = base_agents        # Core team members
+        self.additional_agents = []           # Dynamically added agents
+```
+
+The scalable architecture starts with a core team of essential agents and maintains a pool of additional agents for workload peaks.
+
+**Configure Advanced Scaling Parameters**
+
+```python
         self.scaling_rules = {
-            'task_threshold': 10,
-            'time_threshold': 300,  # seconds
-            'max_agents': 50,        # 2025: Increased for enterprise
-            'cost_per_agent': 0.10,  # 2025: Cost optimization
-            'performance_target': 5.76,  # 2025: Maintain speed advantage
-            'predictive_scaling': True   # 2025: Predictive load management
+            'task_threshold': 10,               # Tasks before scaling up
+            'time_threshold': 300,              # Seconds before scaling up
+            'max_agents': 50,                   # 2025: Enterprise capacity
+            'cost_per_agent': 0.10,             # 2025: Cost optimization
+            'performance_target': 5.76,         # 2025: Maintain speed advantage
+            'predictive_scaling': True          # 2025: Predictive load management
         }
 ```
 
-Implement automatic scaling logic based on workload and performance metrics:
+These scaling rules balance performance requirements with cost considerations, ensuring teams scale efficiently while maintaining the 5.76x speed advantage.
+
+**Implement Intelligent Automatic Scaling**
+
+The auto-scaling system evaluates current workload, predicts future needs, and makes cost-optimized scaling decisions to maintain performance.
 
 ```python
     def auto_scale(self, task_queue_size, avg_task_time, predicted_load=None):
         """2025: Enhanced autoscaling with predictive analytics and cost optimization."""
         current_size = len(self.base_agents) + len(self.additional_agents)
         
-        # 2025: Predictive scaling based on historical patterns
+        # Determine optimal team size based on available data
         if self.scaling_rules['predictive_scaling'] and predicted_load:
             recommended_size = self._calculate_optimal_size(predicted_load)
         else:
             recommended_size = self._calculate_reactive_size(task_queue_size, avg_task_time)
-        
-        # Cost optimization check
+```
+
+The scaling logic first assesses whether to use predictive analytics or reactive scaling based on data availability and configuration settings.
+
+**Apply Cost Optimization Controls**
+
+```python
+        # Cost optimization check - prevent excessive scaling costs
         cost_impact = self._calculate_cost_impact(current_size, recommended_size)
         if cost_impact > self.scaling_rules.get('max_cost_increase', 0.50):  # 50% increase limit
             print(f"Scaling limited by cost constraints: ${cost_impact:.2f}")
             recommended_size = min(recommended_size, current_size + 2)  # Gradual scaling
-        
-        # Apply scaling changes
+```
+
+Cost controls ensure scaling decisions consider budget constraints, preventing runaway costs while maintaining performance requirements.
+
+**Execute Scaling Decisions**
+
+```python
+        # Apply scaling changes based on calculated recommendations
         if recommended_size > current_size:
             self._scale_up(recommended_size - current_size)
         elif recommended_size < current_size:
             self._scale_down(current_size - recommended_size)
-    
+```
+
+The system executes scaling decisions by adding or removing agents, maintaining optimal team size for current workload demands.
+**Calculate Optimal Team Size for Predicted Workload**
+
+```python
     def _calculate_optimal_size(self, predicted_load):
         """Calculate optimal team size based on predicted load."""
         # Factor in CrewAI's 5.76x performance advantage
         effective_capacity_per_agent = 5.76
         optimal_size = max(1, int(predicted_load / effective_capacity_per_agent))
         return min(optimal_size, self.scaling_rules['max_agents'])
-    
+```
+
+This calculation leverages CrewAI's performance advantage to determine how many agents are needed for the predicted workload.
+
+**Calculate Cost Impact of Scaling Decisions**
+
+```python
     def _calculate_cost_impact(self, current_size, new_size):
         """Calculate cost impact of scaling decision."""
         size_change = new_size - current_size
         return abs(size_change * self.scaling_rules['cost_per_agent'])
-    
+```
+
+Cost impact calculation helps prevent budget overruns by quantifying the financial implications of scaling decisions.
+
+**Scale Up with Intelligent Agent Creation**
+
+```python
     def _scale_up(self, agents_to_add):
         """Add agents with intelligent role assignment."""
         for i in range(agents_to_add):
@@ -1364,7 +1641,13 @@ Implement automatic scaling logic based on workload and performance metrics:
             new_agent = self._create_specialized_agent(optimal_role)
             self.additional_agents.append(new_agent)
             print(f"Scaled up: Added {new_agent.role} (specialized for current workload)")
-    
+```
+
+Scaling up involves creating specialized agents based on current workload analysis, ensuring new team members address specific capacity gaps.
+
+**Scale Down with Performance Preservation**
+
+```python
     def _scale_down(self, agents_to_remove):
         """Remove agents intelligently to maintain performance."""
         for i in range(min(agents_to_remove, len(self.additional_agents))):
@@ -1375,7 +1658,11 @@ Implement automatic scaling logic based on workload and performance metrics:
                 print(f"Scaled down: Removed {agent_to_remove.role}")
 ```
 
-Create flexible support agents and manage crew composition:
+Intelligent scale-down removes the least utilized agents first, preserving team performance while reducing costs.
+
+**Create Flexible Support Agents for Scaling**
+
+Dynamic agent creation enables teams to adapt to changing workload demands while maintaining consistent quality and coordination.
 
 ```python
     def _create_additional_agent(self):
@@ -1387,11 +1674,19 @@ Create flexible support agents and manage crew composition:
             llm=llm,
             verbose=True
         )
-    
+```
+
+Support agents are designed to be versatile team members who can handle various tasks, providing flexibility during workload spikes.
+
+**Manage Complete Team Composition**
+
+```python
     def get_current_crew(self):
         """Get current crew with scaled agents."""
         return self.base_agents + self.additional_agents
 ```
+
+The current crew method combines core and additional agents, providing a complete view of active team members for coordination purposes.
 
 ---
 
@@ -1401,25 +1696,42 @@ Create flexible support agents and manage crew composition:
 
 **2025 Success Story:** A major financial institution achieved 8.2x performance improvement using CrewAI's enterprise features for fraud detection and customer service automation.
 
+**Initialize Financial Services Team Architecture**
+
+Financial services require specialized team configurations that balance performance with strict compliance requirements.
+
 ```python
 class FinancialServicesAITeam:
     """Enterprise financial services implementation."""
     
     def __init__(self):
         self.compliance_requirements = {
-            'data_retention': '7_years',
-            'audit_logging': True,
-            'pii_protection': True,
-            'regulatory_reporting': True
+            'data_retention': '7_years',    # Regulatory data retention
+            'audit_logging': True,          # Complete audit trails
+            'pii_protection': True,         # Personal data protection
+            'regulatory_reporting': True    # Automated compliance reporting
         }
-        
+```
+
+Compliance requirements define the regulatory framework that all team operations must satisfy, ensuring legal and ethical operation.
+
+**Configure Performance Targets for Financial Operations**
+
+```python
         self.performance_targets = {
-            'fraud_detection_latency': 100,  # milliseconds
-            'customer_query_resolution': 30,  # seconds
-            'accuracy_threshold': 0.995,     # 99.5%
-            'uptime_requirement': 0.9999     # 99.99%
+            'fraud_detection_latency': 100,  # milliseconds - real-time detection
+            'customer_query_resolution': 30,  # seconds - rapid response
+            'accuracy_threshold': 0.995,     # 99.5% - minimal false positives
+            'uptime_requirement': 0.9999     # 99.99% - financial grade reliability
         }
-    
+```
+
+Performance targets reflect the critical nature of financial services, where milliseconds matter and reliability is non-negotiable.
+**Create Specialized Fraud Detection Team**
+
+Fraud detection teams require specialized roles that balance speed with accuracy while maintaining regulatory compliance.
+
+```python
     def create_fraud_detection_crew(self):
         """Specialized crew for real-time fraud detection."""
         
@@ -1432,9 +1744,15 @@ class FinancialServicesAITeam:
             access to real-time transaction data and behavioral analytics.""",
             tools=[TransactionAnalysisTool(), BehaviorAnalysisTool()],
             llm=llm,
-            allow_delegation=True
+            allow_delegation=True  # Can delegate complex analysis
         )
-        
+```
+
+The risk analyst serves as the primary fraud detection specialist, equipped with advanced analytical tools and delegation capabilities for complex cases.
+
+**Add Compliance Oversight for Regulatory Requirements**
+
+```python
         # Compliance Monitor
         compliance_officer = Agent(
             role='Compliance Officer',
@@ -1443,9 +1761,15 @@ class FinancialServicesAITeam:
             with financial regulations and maintain proper audit trails.""",
             tools=[ComplianceTool(), AuditTool()],
             llm=llm,
-            allow_delegation=False
+            allow_delegation=False  # Maintains compliance authority
         )
-        
+```
+
+The compliance officer ensures all decisions meet regulatory standards, maintaining audit trails and preventing regulatory violations.
+
+**Configure High-Performance Fraud Detection Crew**
+
+```python
         return Crew(
             agents=[risk_analyst, compliance_officer],
             tasks=self._create_fraud_detection_tasks(),
@@ -1456,17 +1780,21 @@ class FinancialServicesAITeam:
         )
 ```
 
+The crew configuration prioritizes sequential processing to ensure compliance checks while maintaining high throughput for real-time fraud detection.
+
 ### Example 1: Advanced Customer Support Automation
 
 **2025 Enhancement:** Multi-channel support with sentiment analysis and predictive issue resolution.
 
-Create the customer support team with tier-based specialization:
+**Create Tier-Based Customer Support Team Structure**
+
+Customer support teams benefit from hierarchical structures that escalate complex issues while providing immediate assistance for common problems.
 
 ```python
 def create_customer_support_crew():
     """Create a customer support automation crew."""
     
-    # Tier 1 Support Agent
+    # Tier 1 Support Agent - First point of contact
     tier1_agent = Agent(
         role='Customer Service Representative',
         goal='Handle initial customer inquiries',
@@ -1479,14 +1807,18 @@ def create_customer_support_crew():
             PredictiveAnalyticsTool()  # 2025: Proactive support
         ],
         llm=llm,
-        allow_delegation=True
+        allow_delegation=True  # Can escalate to higher tiers
     )
 ```
 
-Add technical specialist for complex issue resolution:
+Tier 1 agents serve as the initial contact point, equipped with sentiment analysis and predictive tools to provide proactive, emotionally intelligent support.
+
+**Add Technical Specialist for Complex Issues**
+
+Tier 2 support handles escalated technical issues requiring specialized knowledge and advanced troubleshooting capabilities.
 
 ```python
-    # Tier 2 Technical Support
+    # Tier 2 Technical Support - Specialized problem solving
     tier2_agent = Agent(
         role='Technical Support Specialist',
         goal='Resolve complex technical issues',
@@ -1494,43 +1826,57 @@ Add technical specialist for complex issue resolution:
         requiring deep product knowledge and troubleshooting skills.""",
         tools=[DiagnosticTool(), RemoteAccessTool()],
         llm=llm,
-        allow_delegation=True
+        allow_delegation=True  # Can escalate to management when needed
     )
 ```
 
-Complete the support hierarchy with management oversight:
+Technical specialists provide deep expertise for complex problems, equipped with diagnostic tools and the authority to escalate to management for critical issues.
+
+**Complete Support Hierarchy with Management Oversight**
+
+Support managers coordinate the entire team, handle escalations, and ensure quality standards across all customer interactions.
 
 ```python
-    # Support Manager
+    # Support Manager - Team coordination and escalation handling
     manager_agent = Agent(
         role='Support Manager',
         goal='Oversee support quality and handle escalations',
         backstory="""You manage the support team, handle difficult cases, 
         and ensure customer satisfaction.""",
         llm=llm,
-        allow_delegation=True
+        allow_delegation=True  # Manages team workflow and assignments
     )
-    
-    # Create hierarchical support crew
+```
+
+The support manager provides final escalation authority and team coordination, ensuring consistent quality and customer satisfaction.
+
+**Configure Hierarchical Support Crew**
+
+```python
+    # Create hierarchical support crew with clear escalation paths
     return Crew(
         agents=[tier1_agent, tier2_agent, manager_agent],
         tasks=create_support_tasks(),
-        process=Process.hierarchical,
+        process=Process.hierarchical,  # Enables proper escalation flow
         manager_llm=llm
     )
 ```
+
+The hierarchical configuration ensures proper escalation paths while maintaining efficient resolution of customer issues at the appropriate skill level.
 
 ### Example 2: AI-Powered Content Marketing Pipeline
 
 **2025 Enhancement:** Multi-format content generation with performance optimization and A/B testing integration.
 
-Start with market research to identify content opportunities:
+**Build Strategic Content Marketing Pipeline**
+
+Content marketing teams require coordination between research, creation, and distribution to maximize audience engagement and business impact.
 
 ```python
 def create_content_marketing_crew():
     """Create a content marketing pipeline crew."""
     
-    # Market Researcher
+    # Market Researcher - Strategic content planning
     market_researcher = Agent(
         role='Market Research Analyst',
         goal='Identify trending topics and audience interests',
@@ -1546,28 +1892,36 @@ def create_content_marketing_crew():
     )
 ```
 
-Add content creation specialist for multi-format content production:
+The market researcher uses advanced analytics and trend forecasting to identify content opportunities that align with audience interests and market demands.
+
+**Add Multi-Format Content Creation Capability**
+
+Content creators transform research insights into engaging material across multiple formats and channels.
 
 ```python
-    # Content Creator
+    # Content Creator - Multi-format content production
     content_creator = Agent(
         role='Content Creator',
         goal='Produce engaging content across multiple formats',
         backstory="""You create compelling content including articles, 
-        videos scripts, and social media posts.""",
+        video scripts, and social media posts that resonate with target audiences.""",
         llm=llm
     )
 ```
 
-Complete the pipeline with distribution and performance optimization:
+The content creator specializes in transforming market insights into compelling narratives across various formats and platforms.
+
+**Complete Pipeline with Distribution and Optimization**
+
+Distribution specialists ensure content reaches the right audience through optimal channels and timing strategies.
 
 ```python
-    # Distribution Specialist
+    # Distribution Specialist - Channel optimization and performance tracking
     distribution_specialist = Agent(
         role='Content Distribution Specialist',
         goal='Maximize content reach and engagement',
         backstory="""You manage content distribution across channels, 
-        optimize timing, and track performance.""",
+        optimize timing, and track performance for continuous improvement.""",
         tools=[
             SocialMediaTool(), 
             EmailMarketingTool(),
@@ -1576,9 +1930,17 @@ Complete the pipeline with distribution and performance optimization:
         ],
         llm=llm
     )
-    
+```
+
+The distribution specialist uses A/B testing and real-time analytics to optimize content performance across all channels.
+
+**Return Complete Content Marketing Team**
+
+```python
     return [market_researcher, content_creator, distribution_specialist]
 ```
+
+The content marketing crew combines strategic research, creative production, and optimized distribution for maximum marketing impact.
 
 ---
 
