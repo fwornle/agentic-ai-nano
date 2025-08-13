@@ -22,7 +22,11 @@
       "Bash(if [[ -f $file ]])",
       "Bash(then echo \"Session $i missing solution link\")",
       "Bash(python:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(node:*)",
+      "Bash(do)",
+      "Bash(then)",
+      "Bash(echo:*)"
     ],
     "deny": []
   }
