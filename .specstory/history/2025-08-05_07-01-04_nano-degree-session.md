@@ -1,7 +1,7 @@
 # Project Session Log
 
 **Session Timestamp:** 2025-08-05_07-01-04  
-**Project:** coding  
+**Project:** nano-degree  
 **Session Type:** Project Development  
 **Logged At:** 2025-08-05T05:01:05.028Z  
 **Local Time:** 8/5/2025, 7:01:05 AM  
@@ -867,6 +867,6 @@ API Error: Request timed out.
 
 **Timestamp:** 2025-08-05_07-01-04  
 **Classification:** Project Development  
-**Original Project Path:** /Users/q284340/Agentic/coding  
-**Coding Repository:** /Users/q284340/Agentic/coding  
+**Original Project Path:** /Users/q284340/Agentic/nano-degree  
+**Project Repository:** /Users/q284340/Agentic/nano-degree  
 **Created:** 2025-08-05T05:01:05.028Z
