@@ -799,11 +799,71 @@ Congratulations! You've built a sophisticated ADK agent with the following capab
 
 ---
 
-## 📝 Test Your Knowledge
+## 📝 Multiple Choice Test - Session 7
 
-Ready to test your understanding of ADK agent implementation and enterprise patterns? Take the comprehensive assessment to evaluate your mastery of the concepts covered in this session.
+Test your understanding of ADK agent implementation and enterprise patterns with this comprehensive assessment covering conversation management, tool integration, and production deployment.
 
-**[View Test Solutions](Session7_First_ADK_Agent_Test_Solutions.md)**
+**1. What is the primary role of the ConversationMemory class?**
+a) Store user preferences  
+b) Maintain conversation context and history  
+c) Handle tool integration  
+d) Manage cloud deployment  
+
+**2. How does the ADK agent determine when to use MCP tools?**
+a) Random selection  
+b) User explicitly requests tools  
+c) Response analysis and pattern matching  
+d) Fixed rule-based system  
+
+**3. What advantage does async processing provide in agent implementations?**
+a) Simpler code structure  
+b) Better error handling  
+c) Non-blocking operations and improved performance  
+d) Easier debugging  
+
+**4. How does the agent maintain context across conversation turns?**
+a) Static variables  
+b) ConversationMemory with turn tracking  
+c) External database  
+d) Cloud storage  
+
+**5. What is the purpose of the ResponseProcessor class?**
+a) Format final output  
+b) Analyze responses and determine tool usage  
+c) Handle user input  
+d) Manage agent lifecycle  
+
+**6. Which authentication method is recommended for production MCP connections?**
+a) API key authentication  
+b) OAuth 2.0 with token refresh  
+c) Basic username/password  
+d) No authentication  
+
+**7. How should connection pooling be implemented for MCP clients?**
+a) Single connection per request  
+b) Connection pool with lifecycle management  
+c) Static connections only  
+d) Database connection pooling  
+
+**8. What is the best practice for handling MCP tool failures?**
+a) Immediate system shutdown  
+b) Graceful degradation with fallback responses  
+c) Retry indefinitely  
+d) Log error and continue  
+
+**9. How should agent conversation state be managed in production?**
+a) In-memory storage only  
+b) Persistent storage with session management  
+c) File-based storage  
+d) No state management  
+
+**10. What monitoring should be implemented for production agents?**
+a) Basic logging only  
+b) Comprehensive metrics, tracing, and health checks  
+c) Error logs only  
+d) Performance metrics only  
+
+**[View Test Solutions](Session7_Test_Solutions.md)**
 
 ---
 

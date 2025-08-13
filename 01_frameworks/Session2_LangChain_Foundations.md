@@ -4613,7 +4613,7 @@ if __name__ == "__main__":
 
 Ready to test your understanding of LangChain foundations and framework patterns? Take the comprehensive assessment to evaluate your mastery of the concepts covered in this session.
 
-**[View Test Solutions](Session2_LangChain_Foundations_Test_Solutions.md)**
+**[View Test Solutions](Session2_Test_Solutions.md)**
 
 ---
 

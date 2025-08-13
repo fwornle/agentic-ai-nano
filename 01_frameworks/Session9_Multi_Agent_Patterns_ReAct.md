@@ -1427,7 +1427,8 @@ class ConflictResolver:
 The conflict resolver supports multiple resolution strategies and maintains history for learning from past conflicts.
 
 **Step 2: Implement core conflict resolution logic**
-    
+
+```python
     async def resolve_conflict(
         self, conflict: Dict[str, Any], strategy: str = 'auto'
     ) -> Dict[str, Any]:
@@ -1773,12 +1774,141 @@ class SystemMonitor:
             'agent_metrics': agent_metrics,
             'collection_time': current_time
         }
+```
 
-## 📝 Test Your Knowledge
+## 📝 Multiple Choice Test - Session 9
 
-Ready to test your understanding of multi-agent patterns and ReAct implementations? Take the comprehensive assessment to evaluate your mastery of the concepts covered in this session.
+Test your understanding of multi-agent patterns and ReAct implementations with this comprehensive assessment covering coordination patterns, planning systems, and production deployment strategies.
 
-**[View Test Solutions](Session9_Multi_Agent_Patterns_ReAct_Test_Solutions.md)**
+### Section A: ReAct Pattern Fundamentals (Questions 1-5)
+
+**1. What does ReAct stand for in agent systems?**
+a) Reactive Actions  
+b) Reasoning and Acting  
+c) Real-time Activity  
+d) Recursive Acting  
+
+**2. What is the key innovation of the ReAct pattern?**
+a) Parallel processing of actions  
+b) Interleaving reasoning and action steps  
+c) Static planning approach  
+d) Cached response system  
+
+**3. Which component tracks ReAct execution history?**
+a) Action Log  
+b) Memory Bank  
+c) Thought Chain  
+d) State Buffer  
+
+**4. How does ReAct handle complex multi-step problems?**
+a) Execute all actions simultaneously  
+b) Decompose and reason about each step  
+c) Use pre-planned sequences  
+d) Delegate to other agents  
+
+**5. What is the purpose of "observations" in ReAct?**
+a) Monitor system performance  
+b) Feedback from action execution  
+c) Track user interactions  
+d) Store historical data  
+
+### Section B: Coordination Patterns (Questions 6-10)
+
+**6. Which coordination pattern uses voting mechanisms?**
+a) Hierarchical coordination  
+b) Consensus-based coordination  
+c) Market-based coordination  
+d) Reactive coordination  
+
+**7. What is the primary benefit of hierarchical planning?**
+a) Faster execution speed  
+b) Task decomposition and abstraction  
+c) Lower resource usage  
+d) Simpler implementation  
+
+**8. How do auction mechanisms work in multi-agent systems?**
+a) Fixed resource allocation  
+b) Bid-based resource allocation  
+c) Random assignment  
+d) Sequential processing  
+
+**9. What is Byzantine fault tolerance designed to handle?**
+a) Network connectivity issues  
+b) Malicious or faulty agents  
+c) Resource limitations  
+d) Performance bottlenecks  
+
+**10. Which pattern is best for emergent behavior?**
+a) Centralized control  
+b) Stigmergic coordination  
+c) Direct communication  
+d) Hierarchical management  
+
+### Section C: Planning and Reasoning (Questions 11-15)
+
+**11. What is the primary advantage of hierarchical planning?**
+a) Single-level task execution  
+b) Multi-level abstraction and decomposition  
+c) Faster computation  
+d) Less memory usage  
+
+**12. How does Monte Carlo Tree Search work in multi-agent planning?**
+a) Random action selection  
+b) Simulation-based exploration and evaluation  
+c) Fixed decision trees  
+d) Sequential processing  
+
+**13. What is the role of heuristics in planning algorithms?**
+a) Guarantee optimal solutions  
+b) Guide search toward promising states  
+c) Reduce memory requirements  
+d) Eliminate all search  
+
+**14. Which planning approach is best for dynamic environments?**
+a) Static pre-planning  
+b) Reactive re-planning  
+c) Offline optimization  
+d) Manual planning  
+
+**15. What is partial order planning?**
+a) Random task ordering  
+b) Flexible task sequencing with constraints  
+c) Fixed sequential execution  
+d) Parallel processing only  
+
+### Section D: Production Implementation (Questions 16-20)
+
+**16. What is the key principle of production monitoring?**
+a) Minimal logging  
+b) Comprehensive observability and alerting  
+c) Manual inspection only  
+d) Post-deployment analysis  
+
+**17. How should agent failures be handled in production?**
+a) System restart required  
+b) Graceful degradation with recovery  
+c) Immediate shutdown  
+d) Ignore failures  
+
+**18. What is the purpose of circuit breakers in multi-agent systems?**
+a) Power management  
+b) Prevent cascading failures  
+c) Speed optimization  
+d) Resource allocation  
+
+**19. Which deployment strategy minimizes production risks?**
+a) Big bang deployment  
+b) Gradual rollout with monitoring  
+c) All-or-nothing approach  
+d) Manual deployment  
+
+**20. What is essential for debugging multi-agent systems?**
+a) Single agent logging  
+b) Distributed tracing and correlation  
+c) Basic error messages  
+d) Static analysis only  
+
+**[View Test Solutions](Session9_Test_Solutions.md)**
 
 ---
 
