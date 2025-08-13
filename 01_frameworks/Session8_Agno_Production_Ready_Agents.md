@@ -124,6 +124,8 @@ print(f"Research Result: {result.content}")
 
 This Level 1 agent demonstrates Agno's simplicity - creating a functional agent requires just a few lines of code. The agent can use tools (DuckDuckGo for web search) and follows specific instructions.
 
+**Level 2: Reasoning Agent Setup**
+
 ```python
 # Level 2: Reasoning and Planning Agent
 from agno.reasoning import ChainOfThought, PlanAndSolve
@@ -136,6 +138,13 @@ reasoning_agent = Agent(
         PlanAndSolve()
     ],
     tools=[DuckDuckGoTools()],
+```
+
+This agent combines multiple reasoning strategies to tackle complex problems systematically.
+
+**Instructions and Problem Solving:**
+
+```python
     instructions="""
     You are an analytical problem solver. For complex questions:
     1. Break down the problem into steps
@@ -156,6 +165,8 @@ print(f"Reasoned Solution: {solution.content}")
 
 Level 2 introduces reasoning capabilities. The agent now uses Chain of Thought and Plan-and-Solve reasoning patterns to tackle complex problems systematically. This is crucial for production environments where decisions must be traceable and logical.
 
+**Level 3: Multi-Agent Team Setup**
+
 ```python
 # Level 3: Multi-Agent Collaboration
 from agno import Team
@@ -167,7 +178,13 @@ analyst = AnalystAgent(
     model="gpt-4o",
     instructions="Analyze market data and identify trends."
 )
+```
 
+Each specialized agent focuses on a specific domain of expertise for optimal collaboration.
+
+**Content Creation Team Assembly:**
+
+```python
 writer = WriterAgent(
     name="content_writer", 
     model="gpt-4o",

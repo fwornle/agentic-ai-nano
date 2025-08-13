@@ -254,7 +254,13 @@ async def process_streaming_response(
     """Process streaming response with real-time validation."""
     validation_results = []
     accumulated_response = ""
-    
+```
+
+This method signature establishes the streaming validation interface. The `AsyncIterator[str]` parameter provides type safety for the token stream, while the optional callback enables real-time monitoring. This type-safe approach ensures streaming operations maintain schema compliance throughout the process.
+
+**Token Processing with Real-Time Validation**
+
+```python
     try:
         async for token in response_stream:
             # Real-time validation
@@ -263,7 +269,13 @@ async def process_streaming_response(
             )
             validation_results.append(validation_result)
             accumulated_response += token
-            
+```
+
+The core streaming loop validates each token against the target schema. PydanticAI's type system ensures the validator receives properly typed inputs, enabling consistent validation behavior across different token types and schema structures.
+
+**Monitoring and Warning Handling**
+
+```python
             # Callback for real-time monitoring
             if validation_callback:
                 await validation_callback(token, validation_result)
@@ -273,7 +285,13 @@ async def process_streaming_response(
                 await self._handle_validation_warning(
                     validation_result, accumulated_response
                 )
-        
+```
+
+The optional callback system provides type-safe monitoring hooks. Warning handling allows the system to continue processing while maintaining data quality - a key benefit of PydanticAI's progressive validation approach.
+
+**Final Validation and Response Assembly**
+
+```python
         # Final validation of complete response
         final_result = await self._final_validation(accumulated_response)
         
@@ -290,6 +308,8 @@ async def process_streaming_response(
     except Exception as e:
         return await self._handle_streaming_error(e, accumulated_response)
 ```
+
+The final validation step ensures complete response integrity. The structured return type provides comprehensive streaming statistics and validation logs, demonstrating PydanticAI's ability to maintain type safety even in complex asynchronous operations.
 
 This async method processes each token, validates at checkpoints, handles warnings, and provides comprehensive statistics about the streaming validation process.
 
@@ -309,6 +329,8 @@ Warning handling allows the system to continue processing while logging issues f
 
 #### **Final Validation and Error Handling**
 
+**Complete Response Validation:**
+
 ```python
 async def _final_validation(self, complete_response: str) -> BaseModel:
     """Perform final validation on complete response."""
@@ -325,7 +347,13 @@ async def _final_validation(self, complete_response: str) -> BaseModel:
         raise ValueError(f"Invalid JSON in final response: {e}")
     except ValidationError as e:
         raise ValueError(f"Schema validation failed: {e}")
+```
 
+The final validation ensures the complete response conforms to the target schema, providing comprehensive error messages for debugging.
+
+**Streaming Error Recovery:**
+
+```python
 async def _handle_streaming_error(self, error: Exception, partial_response: str) -> Dict[str, Any]:
     """Handle errors during streaming validation."""
     return {
@@ -480,6 +508,13 @@ def create_research_agent() -> Agent:
     research_agent = Agent(
         'openai:gpt-4',
         result_type=ResearchResult,
+```
+
+This establishes the agent foundation with OpenAI GPT-4 and strict type enforcement through the `ResearchResult` schema.
+
+**System Prompt Configuration:**
+
+```python
         system_prompt="""
         You are a professional research analyst with expertise in data validation 
         and structured reporting. Your responses must always conform to the 
@@ -502,6 +537,8 @@ This factory function creates a type-safe agent with explicit result validation.
 
 **Step 2: Implement error-handling execution wrapper**
 
+**Context Setup and Agent Execution:**
+
 ```python
 # Usage example with comprehensive error handling
 async def execute_research_with_validation():
@@ -512,7 +549,13 @@ async def execute_research_with_validation():
         session_id="session_456", 
         metadata={"department": "research", "project": "ai_study"}
     )
-    
+```
+
+The execution context provides request tracking and metadata for comprehensive logging and monitoring.
+
+**Type-Safe Agent Execution:**
+
+```python
     try:
         result = await agent.run(
             user_prompt="Research the benefits of type-safe programming in AI systems",
@@ -578,109 +621,149 @@ def create_dynamic_template(
     
     cache_key = f"{task_type}_{complexity_level}_{domain_specific}"
     if cache_key in self.template_cache:
-            return self.template_cache[cache_key]
-        
-        # Base instruction template
-        base_template = f"""
-        You are an expert assistant specialized in {task_type} tasks.
-        Your response MUST conform to the following schema:
-        
-        {self._generate_schema_description()}
-        
-        Instructions:
-        """
-        
-        # Add complexity-specific instructions
-        complexity_instructions = {
-            "simple": "Provide concise, direct responses focusing on essential information.",
-            "moderate": "Include detailed explanations with supporting context and examples.",
-            "complex": "Provide comprehensive analysis with multiple perspectives, edge cases, and detailed reasoning."
-        }
-        
-        base_template += complexity_instructions[complexity_level]
-        
-        if domain_specific:
-            base_template += f"""
-            
-            Domain-specific requirements:
-            - Use technical terminology appropriate for {task_type} domain
-            - Include relevant industry standards and best practices
-            - Reference authoritative sources when applicable
-            """
-        
-        # Add validation reminders
-        base_template += """
-        
-        CRITICAL REQUIREMENTS:
-        - ALL fields in the response schema must be provided
-        - Values must pass all field validation constraints
-        - Use appropriate data types as specified in the schema
-        - Ensure JSON serialization compatibility
-        """
-        
-        self.template_cache[cache_key] = base_template
-        return base_template
-    
-    def _generate_schema_description(self) -> str:
-        """Generate human-readable schema description."""
-        schema_dict = self.schema_type.schema()
-        description = f"Schema: {self.schema_type.__name__}\n"
-        
-        for field_name, field_info in schema_dict.get('properties', {}).items():
-            field_type = field_info.get('type', 'unknown')
-            field_desc = field_info.get('description', 'No description')
-            required = field_name in schema_dict.get('required', [])
-            
-            description += f"  - {field_name} ({field_type}): {field_desc}"
-            if required:
-                description += " [REQUIRED]"
-            description += "\n"
-        
-        return description
-    
-    def create_conditional_template(
-        self,
-        conditions: Dict[str, Any],
-        fallback_template: Optional[str] = None
-    ) -> str:
-        """Create conditional templates based on runtime conditions."""
-        
-        template_parts = []
-        
-        # Add condition-specific instructions
-        if conditions.get('requires_sources', False):
-            template_parts.append("""
-            SOURCE REQUIREMENTS:
-            - Provide credible, verifiable sources for all claims
-            - Use recent sources (within last 2 years when possible)
-            - Include proper citations in the response
-            """)
-        
-        if conditions.get('requires_validation', True):
-            template_parts.append("""
-            VALIDATION REQUIREMENTS:
-            - Double-check all numerical values
-            - Verify logical consistency across response
-            - Ensure completeness of required fields
-            """)
-        
-        if conditions.get('streaming_mode', False):
-            template_parts.append("""
-            STREAMING MODE:
-            - Structure response for progressive disclosure
-            - Begin with most important information
-            - Organize content in logical chunks
-            """)
-        
-        # Combine template parts
-        final_template = self._generate_schema_description() + "\n"
-        final_template += "\n".join(template_parts)
-        
-        if not template_parts and fallback_template:
-            final_template += fallback_template
-        
-        return final_template
+        return self.template_cache[cache_key]
+```
 
+This method signature demonstrates PydanticAI's type-safe template generation. The `Literal` type ensures only valid complexity levels are accepted, while caching improves performance for repeated template requests.
+
+**Base Template Construction**
+
+```python
+    # Base instruction template
+    base_template = f"""
+    You are an expert assistant specialized in {task_type} tasks.
+    Your response MUST conform to the following schema:
+    
+    {self._generate_schema_description()}
+    
+    Instructions:
+    """
+    
+    # Add complexity-specific instructions
+    complexity_instructions = {
+        "simple": "Provide concise, direct responses focusing on essential information.",
+        "moderate": "Include detailed explanations with supporting context and examples.",
+        "complex": "Provide comprehensive analysis with multiple perspectives, edge cases, and detailed reasoning."
+    }
+    
+    base_template += complexity_instructions[complexity_level]
+```
+
+The template construction uses type-safe schema descriptions and complexity-based instruction variations. This ensures consistent output quality while maintaining schema compliance.
+
+**Domain-Specific Template Enhancement**
+
+```python
+    if domain_specific:
+        base_template += f"""
+        
+        Domain-specific requirements:
+        - Use technical terminology appropriate for {task_type} domain
+        - Include relevant industry standards and best practices
+        - Reference authoritative sources when applicable
+        """
+    
+    # Add validation reminders
+    base_template += """
+    
+    CRITICAL REQUIREMENTS:
+    - ALL fields in the response schema must be provided
+    - Values must pass all field validation constraints
+    - Use appropriate data types as specified in the schema
+    - Ensure JSON serialization compatibility
+    """
+    
+    self.template_cache[cache_key] = base_template
+    return base_template
+```
+
+Domain-specific enhancements and validation reminders ensure high-quality responses. The caching mechanism optimizes performance while maintaining type safety across template variations.
+
+**Schema Description Generation**
+
+```python
+def _generate_schema_description(self) -> str:
+    """Generate human-readable schema description."""
+    schema_dict = self.schema_type.schema()
+    description = f"Schema: {self.schema_type.__name__}\n"
+    
+    for field_name, field_info in schema_dict.get('properties', {}).items():
+        field_type = field_info.get('type', 'unknown')
+        field_desc = field_info.get('description', 'No description')
+        required = field_name in schema_dict.get('required', [])
+        
+        description += f"  - {field_name} ({field_type}): {field_desc}"
+        if required:
+            description += " [REQUIRED]"
+        description += "\n"
+    
+    return description
+```
+
+This method transforms Pydantic schema definitions into human-readable instructions. The type-safe approach ensures accurate field descriptions and requirement indicators, enabling consistent AI responses.
+
+**Conditional Template System**
+
+```python
+def create_conditional_template(
+    self,
+    conditions: Dict[str, Any],
+    fallback_template: Optional[str] = None
+) -> str:
+    """Create conditional templates based on runtime conditions."""
+    
+    template_parts = []
+    
+    # Add condition-specific instructions
+    if conditions.get('requires_sources', False):
+        template_parts.append("""
+        SOURCE REQUIREMENTS:
+        - Provide credible, verifiable sources for all claims
+        - Use recent sources (within last 2 years when possible)
+        - Include proper citations in the response
+        """)
+```
+
+The conditional system adds specific requirements based on runtime context. This type-safe approach ensures templates adapt to different use cases while maintaining validation consistency.
+
+**Validation and Streaming Requirements**
+
+```python
+    if conditions.get('requires_validation', True):
+        template_parts.append("""
+        VALIDATION REQUIREMENTS:
+        - Double-check all numerical values
+        - Verify logical consistency across response
+        - Ensure completeness of required fields
+        """)
+    
+    if conditions.get('streaming_mode', False):
+        template_parts.append("""
+        STREAMING MODE:
+        - Structure response for progressive disclosure
+        - Begin with most important information
+        - Organize content in logical chunks
+        """)
+    
+    # Combine template parts
+    final_template = self._generate_schema_description() + "\n"
+    final_template += "\n".join(template_parts)
+    
+    if not template_parts and fallback_template:
+        final_template += fallback_template
+    
+    return final_template
+```
+
+Different validation modes provide specialized handling for various scenarios. The streaming mode optimizes for progressive response building, while validation mode ensures data quality.
+
+### **Advanced PromptedOutput Controller**
+
+The PromptedOutput controller provides sophisticated schema management and multi-output coordination capabilities.
+
+**Controller Initialization and Schema Registry**
+
+```python
 # Enhanced PromptedOutput control system
 class PromptedOutputController:
     """Advanced control system for PromptedOutput with external schema management."""
@@ -703,122 +786,158 @@ class PromptedOutputController:
             'validation_rules': validation_rules or {},
             'template_generator': AdvancedInstructionTemplate(schema_class)
         }
-    
-    def create_prompted_output(
-        self,
-        schema_name: str,
-        context: Dict[str, Any],
-        output_config: Optional[Dict[str, Any]] = None
-    ) -> PromptedOutput:
-        """Create PromptedOutput with advanced control features."""
-        
-        if schema_name not in self.schema_registry:
-            raise ValueError(f"Schema '{schema_name}' not registered")
-        
-        schema_info = self.schema_registry[schema_name]
-        schema_class = schema_info['class']
-        template_generator = schema_info['template_generator']
-        
-        # Generate dynamic instruction template
-        instruction_template = template_generator.create_dynamic_template(
-            task_type=context.get('task_type', 'general'),
-            complexity_level=context.get('complexity', 'moderate'),
-            domain_specific=context.get('domain_specific', False)
-        )
-        
-        # Create conditional template based on context
-        conditional_template = template_generator.create_conditional_template(
-            conditions=context.get('conditions', {}),
-            fallback_template=context.get('fallback_template')
-        )
-        
-        # Combine templates
-        final_instruction = instruction_template + "\n\n" + conditional_template
-        
-        # Configure output validation
-        output_config = output_config or {}
-        validation_config = {
-            'strict_mode': output_config.get('strict_validation', True),
-            'allow_partial': output_config.get('allow_partial_validation', False),
-            'retry_on_failure': output_config.get('retry_on_failure', True),
-            'max_retries': output_config.get('max_retries', 3)
-        }
-        
-        # Create PromptedOutput with enhanced configuration
-        prompted_output = PromptedOutput(
-            schema=schema_class,
-            instruction_template=final_instruction,
-            validation_config=validation_config,
-            metadata={
-                'schema_name': schema_name,
-                'context': context,
-                'created_at': datetime.now(timezone.utc).isoformat(),
-                'template_hash': hashlib.md5(final_instruction.encode()).hexdigest()
-            }
-        )
-        
-        return prompted_output
-    
-    def create_multi_schema_output(
-        self,
-        schema_configs: List[Dict[str, Any]]
-    ) -> List[PromptedOutput]:
-        """Create multiple PromptedOutputs with coordinated schemas."""
-        
-        outputs = []
-        for config in schema_configs:
-            schema_name = config['schema_name']
-            context = config.get('context', {})
-            output_config = config.get('output_config', {})
-            
-            # Add coordination context for multi-schema scenarios
-            context['multi_schema_mode'] = True
-            context['total_schemas'] = len(schema_configs)
-            context['schema_index'] = len(outputs)
-            
-            output = self.create_prompted_output(schema_name, context, output_config)
-            outputs.append(output)
-        
-        return outputs
-    
-    def validate_output_consistency(
-        self,
-        outputs: List[Any],
-        consistency_rules: Dict[str, Callable]
-    ) -> Dict[str, Any]:
-        """Validate consistency across multiple outputs."""
-        
-        validation_results = {
-            'consistent': True,
-            'violations': [],
-            'warnings': [],
-            'cross_validation_score': 1.0
-        }
-        
-        for rule_name, rule_func in consistency_rules.items():
-            try:
-                result = rule_func(outputs)
-                if not result.get('passed', True):
-                    validation_results['consistent'] = False
-                    validation_results['violations'].append({
-                        'rule': rule_name,
-                        'message': result.get('message', 'Consistency check failed'),
-                        'affected_outputs': result.get('affected_indices', [])
-                    })
-            except Exception as e:
-                validation_results['warnings'].append({
-                    'rule': rule_name,
-                    'error': str(e)
-                })
-        
-        # Calculate overall consistency score
-        total_rules = len(consistency_rules)
-        violations = len(validation_results['violations'])
-        if total_rules > 0:
-            validation_results['cross_validation_score'] = max(0, (total_rules - violations) / total_rules)
-        
-        return validation_results
+```
 
+The controller provides centralized schema management with type-safe registration. Each schema gets its own template generator, enabling customized instruction generation for different data models.
+
+**PromptedOutput Creation with Advanced Configuration**
+
+```python
+def create_prompted_output(
+    self,
+    schema_name: str,
+    context: Dict[str, Any],
+    output_config: Optional[Dict[str, Any]] = None
+) -> PromptedOutput:
+    """Create PromptedOutput with advanced control features."""
+    
+    if schema_name not in self.schema_registry:
+        raise ValueError(f"Schema '{schema_name}' not registered")
+    
+    schema_info = self.schema_registry[schema_name]
+    schema_class = schema_info['class']
+    template_generator = schema_info['template_generator']
+```
+
+This method provides type-safe PromptedOutput creation with schema validation. The registry lookup ensures only registered schemas are used, preventing runtime errors from invalid schema references.
+
+**Template Generation and Configuration**
+
+```python
+    # Generate dynamic instruction template
+    instruction_template = template_generator.create_dynamic_template(
+        task_type=context.get('task_type', 'general'),
+        complexity_level=context.get('complexity', 'moderate'),
+        domain_specific=context.get('domain_specific', False)
+    )
+    
+    # Create conditional template based on context
+    conditional_template = template_generator.create_conditional_template(
+        conditions=context.get('conditions', {}),
+        fallback_template=context.get('fallback_template')
+    )
+    
+    # Combine templates
+    final_instruction = instruction_template + "\n\n" + conditional_template
+    
+    # Configure output validation
+    output_config = output_config or {}
+    validation_config = {
+        'strict_mode': output_config.get('strict_validation', True),
+        'allow_partial': output_config.get('allow_partial_validation', False),
+        'retry_on_failure': output_config.get('retry_on_failure', True),
+        'max_retries': output_config.get('max_retries', 3)
+    }
+```
+
+Template combination creates comprehensive instructions while validation configuration provides flexible error handling. This type-safe approach ensures consistent output quality across different scenarios.
+
+**PromptedOutput Assembly with Metadata**
+
+```python
+    # Create PromptedOutput with enhanced configuration
+    prompted_output = PromptedOutput(
+        schema=schema_class,
+        instruction_template=final_instruction,
+        validation_config=validation_config,
+        metadata={
+            'schema_name': schema_name,
+            'context': context,
+            'created_at': datetime.now(timezone.utc).isoformat(),
+            'template_hash': hashlib.md5(final_instruction.encode()).hexdigest()
+        }
+    )
+    
+    return prompted_output
+```
+
+The final PromptedOutput includes comprehensive metadata for tracking and debugging. The template hash enables caching and change detection, while timestamps provide audit trails.
+
+**Multi-Schema Coordination System**
+
+```python
+def create_multi_schema_output(
+    self,
+    schema_configs: List[Dict[str, Any]]
+) -> List[PromptedOutput]:
+    """Create multiple PromptedOutputs with coordinated schemas."""
+    
+    outputs = []
+    for config in schema_configs:
+        schema_name = config['schema_name']
+        context = config.get('context', {})
+        output_config = config.get('output_config', {})
+        
+        # Add coordination context for multi-schema scenarios
+        context['multi_schema_mode'] = True
+        context['total_schemas'] = len(schema_configs)
+        context['schema_index'] = len(outputs)
+        
+        output = self.create_prompted_output(schema_name, context, output_config)
+        outputs.append(output)
+    
+    return outputs
+```
+
+Multi-schema coordination enables complex workflows with interdependent data models. The coordination context ensures each output understands its role in the larger process.
+
+**Cross-Output Validation System**
+
+```python
+def validate_output_consistency(
+    self,
+    outputs: List[Any],
+    consistency_rules: Dict[str, Callable]
+) -> Dict[str, Any]:
+    """Validate consistency across multiple outputs."""
+    
+    validation_results = {
+        'consistent': True,
+        'violations': [],
+        'warnings': [],
+        'cross_validation_score': 1.0
+    }
+    
+    for rule_name, rule_func in consistency_rules.items():
+        try:
+            result = rule_func(outputs)
+            if not result.get('passed', True):
+                validation_results['consistent'] = False
+                validation_results['violations'].append({
+                    'rule': rule_name,
+                    'message': result.get('message', 'Consistency check failed'),
+                    'affected_outputs': result.get('affected_indices', [])
+                })
+        except Exception as e:
+            validation_results['warnings'].append({
+                'rule': rule_name,
+                'error': str(e)
+            })
+    
+    # Calculate overall consistency score
+    total_rules = len(consistency_rules)
+    violations = len(validation_results['violations'])
+    if total_rules > 0:
+        validation_results['cross_validation_score'] = max(0, (total_rules - violations) / total_rules)
+    
+    return validation_results
+```
+
+Cross-validation ensures consistency across multiple related outputs. The scoring system provides quantitative quality metrics for complex multi-schema workflows.
+
+**Usage Demonstration**
+
+```python
 # Usage examples for PromptedOutput control
 async def demonstrate_prompted_output_control():
     """Demonstrate advanced PromptedOutput control features."""
@@ -872,6 +991,8 @@ async def demonstrate_prompted_output_control():
         }
     }
 ```
+
+This comprehensive demonstration shows how type-safe PromptedOutput control enables sophisticated agent workflows with multiple coordinated schemas and advanced validation capabilities.
 
 This PromptedOutput control system enables sophisticated output management with dynamic schemas, conditional templates, and multi-schema coordination for complex agent workflows.
 
@@ -981,6 +1102,8 @@ class ModelProviderFactory:
         }
 ```
 
+The factory begins with OpenAI configuration, showcasing advanced features like JSON mode and parallel function calling. This type-safe approach ensures only valid models and capabilities are registered.
+
 OpenAI configuration includes advanced features like JSON mode and parallel function calling.
 
 ### **Step 7: Additional Provider Configurations**
@@ -995,6 +1118,13 @@ OpenAI configuration includes advanced features like JSON mode and parallel func
                 "generation_config": {"candidate_count": 1}
             }
         },
+```
+
+Gemini configuration includes safety settings and generation parameters specific to Google's model requirements.
+
+**Groq High-Speed Configuration**
+
+```python
         SupportedProvider.GROQ: {
             "models": ["mixtral-8x7b-32768", "llama2-70b-4096"],
             "supports_streaming": True,
@@ -1004,6 +1134,13 @@ OpenAI configuration includes advanced features like JSON mode and parallel func
                 "optimized_batching": True
             }
         },
+```
+
+Groq prioritizes speed with specialized optimizations for high-throughput inference and batching capabilities.
+
+**Anthropic Claude Configuration**
+
+```python
         SupportedProvider.ANTHROPIC: {
             "models": ["claude-3-sonnet", "claude-3-haiku"],
             "supports_streaming": True,
@@ -1014,72 +1151,90 @@ OpenAI configuration includes advanced features like JSON mode and parallel func
             }
         }
     }
-    ```
+```
+
+Anthropic configuration leverages Claude's XML formatting capabilities and citation features for enhanced output quality.
 
 Each provider has specific capabilities and optimizations tailored for optimal performance.
 
 ### **Step 8: Provider Configuration Creation**
 
 ```python
-    @classmethod
-    def create_provider_config(
-        cls,
-        provider: SupportedProvider,
-        model_name: Optional[str] = None,
-        custom_config: Optional[Dict[str, Any]] = None
-    ) -> ModelProviderConfig:
-        """Create optimized configuration for any supported provider."""
-        
-        provider_defaults = cls.PROVIDER_DEFAULTS.get(provider, {})
-        
-        # Auto-select best model if not specified
-        if not model_name:
-            available_models = provider_defaults.get("models", [])
-            model_name = available_models[0] if available_models else "default"
-        
-        # Merge provider optimizations with custom settings
-        optimizations = provider_defaults.get("optimizations", {})
-        if custom_config:
-            optimizations.update(custom_config.get("optimizations", {}))
-        
-        # Create validated configuration
-        config = ModelProviderConfig(
-            provider=provider,
-            model_name=model_name,
-            max_tokens=custom_config.get("max_tokens", 4096) if custom_config else 4096,
-            temperature=custom_config.get("temperature", 0.1) if custom_config else 0.1,
-            provider_optimizations=optimizations
-        )
-        
-        return config
-    ```
+@classmethod
+def create_provider_config(
+    cls,
+    provider: SupportedProvider,
+    model_name: Optional[str] = None,
+    custom_config: Optional[Dict[str, Any]] = None
+) -> ModelProviderConfig:
+    """Create optimized configuration for any supported provider."""
+    
+    provider_defaults = cls.PROVIDER_DEFAULTS.get(provider, {})
+    
+    # Auto-select best model if not specified
+    if not model_name:
+        available_models = provider_defaults.get("models", [])
+        model_name = available_models[0] if available_models else "default"
+```
+
+This method demonstrates PydanticAI's type-safe provider configuration. Automatic model selection chooses optimal defaults when specific models aren't specified.
+
+**Configuration Merging and Optimization**
+
+```python
+    # Merge provider optimizations with custom settings
+    optimizations = provider_defaults.get("optimizations", {})
+    if custom_config:
+        optimizations.update(custom_config.get("optimizations", {}))
+    
+    # Create validated configuration
+    config = ModelProviderConfig(
+        provider=provider,
+        model_name=model_name,
+        max_tokens=custom_config.get("max_tokens", 4096) if custom_config else 4096,
+        temperature=custom_config.get("temperature", 0.1) if custom_config else 0.1,
+        provider_optimizations=optimizations
+    )
+    
+    return config
+```
+
+Configuration merging combines provider defaults with custom settings, ensuring optimal performance while allowing customization. The `ModelProviderConfig` validates all parameters for type safety.
 
 Configuration creation merges provider defaults with custom settings for optimal performance.
 
 ### **Step 9: Model Identification and Feature Validation**
 
 ```python
-    @classmethod
-    def get_model_identifier(cls, config: ModelProviderConfig) -> str:
-        """Generate PydanticAI-compatible model identifier."""
-        return f"{config.provider}:{config.model_name}"
-    
-    @classmethod
-    def validate_provider_support(cls, config: ModelProviderConfig, required_features: List[str]) -> Dict[str, bool]:
-        """Validate provider capabilities against application requirements."""
-        provider_info = cls.PROVIDER_DEFAULTS.get(config.provider, {})
-        
-        support_check = {}
-        for feature in required_features:
-            if feature == "streaming":
-                support_check[feature] = provider_info.get("supports_streaming", False)
-            elif feature == "function_calling":
-                support_check[feature] = provider_info.get("supports_function_calling", False)
-            else:
-                support_check[feature] = False
-        
-        return support_check
+@classmethod
+def get_model_identifier(cls, config: ModelProviderConfig) -> str:
+    """Generate PydanticAI-compatible model identifier."""
+    return f"{config.provider}:{config.model_name}"
 ```
+
+This method creates PydanticAI-compatible model identifiers using the standard `provider:model` format for consistent agent initialization.
+
+**Feature Support Validation**
+
+```python
+@classmethod
+def validate_provider_support(cls, config: ModelProviderConfig, required_features: List[str]) -> Dict[str, bool]:
+    """Validate provider capabilities against application requirements."""
+    provider_info = cls.PROVIDER_DEFAULTS.get(config.provider, {})
+    
+    support_check = {}
+    for feature in required_features:
+        if feature == "streaming":
+            support_check[feature] = provider_info.get("supports_streaming", False)
+        elif feature == "function_calling":
+            support_check[feature] = provider_info.get("supports_function_calling", False)
+        else:
+            support_check[feature] = False
+    
+    return support_check
+```
+
+Feature validation ensures applications only use providers that support required capabilities, preventing runtime failures from unsupported features.
 
 Feature validation ensures compatibility between application requirements and provider capabilities.
 
@@ -1098,43 +1253,49 @@ class MultiProviderAgentFactory:
         self.provider_stats = {}    # Performance statistics
 ```
 
+The multi-provider factory manages complex agent deployment scenarios with automatic failover and performance monitoring.
+
 The factory maintains provider configurations, fallback chains, and performance statistics for intelligent routing.
 
 ### **Step 11: Provider Registration and Statistics**
 
 ```python
-    def register_provider(
-        self, 
-        name: str, 
-        config: ModelProviderConfig,
-        priority: int = 1
-    ) -> None:
-        """Register a model provider with priority and enable statistics tracking."""
-        self.provider_configs[name] = {
-            'config': config,
-            'priority': priority,
-            'enabled': True
-        }
-        
-        # Initialize comprehensive performance tracking
-        self.provider_stats[name] = {
-            'requests': 0,
-            'successes': 0,
-            'failures': 0,
-            'avg_response_time': 0.0,
-            'last_used': None
-        }
-    ```
+def register_provider(
+    self, 
+    name: str, 
+    config: ModelProviderConfig,
+    priority: int = 1
+) -> None:
+    """Register a model provider with priority and enable statistics tracking."""
+    self.provider_configs[name] = {
+        'config': config,
+        'priority': priority,
+        'enabled': True
+    }
+    
+    # Initialize comprehensive performance tracking
+    self.provider_stats[name] = {
+        'requests': 0,
+        'successes': 0,
+        'failures': 0,
+        'avg_response_time': 0.0,
+        'last_used': None
+    }
+```
+
+Provider registration with type-safe configuration and comprehensive performance tracking enables intelligent routing decisions.
 
 Provider registration includes priority settings and comprehensive performance tracking for optimization.
 
 ### **Step 12: Fallback Chain Configuration**
 
 ```python
-    def set_fallback_chain(self, provider_names: List[str]) -> None:
-        """Configure fallback chain for automatic provider switching on failure."""
-        self.fallback_chain = provider_names
+def set_fallback_chain(self, provider_names: List[str]) -> None:
+    """Configure fallback chain for automatic provider switching on failure."""
+    self.fallback_chain = provider_names
 ```
+
+Type-safe fallback chain configuration ensures reliable agent operation with automatic provider switching during failures.
 
 Fallback chains enable automatic switching to backup providers when primary providers fail.
 

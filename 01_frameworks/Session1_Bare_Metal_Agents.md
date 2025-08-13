@@ -1361,6 +1361,8 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
 
 Start each ReAct session with a clear initial thought:
 
+**Initial Thought Generation Setup:**
+
 ```python
 # From src/session1/react_agent.py (continued)
 async def _initial_thought(self, message: str) -> str:
@@ -1369,7 +1371,13 @@ async def _initial_thought(self, message: str) -> str:
         f"- {tool['name']}: {tool['description']}"
         for tool in self.get_available_tools()
     ])
-    
+```
+
+This method builds a catalog of available tools so the agent understands what capabilities it has access to.
+
+**Structured Prompt Construction:**
+
+```python
     prompt = f"""
     You need to answer this question: {message}
     
@@ -1451,6 +1459,8 @@ async def _decide_action(self, message: str, steps: List[ReActStep], thought: st
 
 ### Step 5.6: Action Execution and Observation
 
+**Action Execution and Result Processing:**
+
 ```python
 # From src/session1/react_agent.py (continued)
 async def _execute_action(self, action: str, action_input: Dict) -> str:
@@ -1465,7 +1475,13 @@ async def _execute_action(self, action: str, action_input: Dict) -> str:
         return f"Successfully executed {action}. Result: {result['result']}"
     else:
         return f"Failed to execute {action}. Error: {result['error']}"
+```
 
+The action execution provides clear success/failure feedback, which becomes the agent's "observation" for the next reasoning step.
+
+**Next Thought Generation Based on Observations:**
+
+```python
 async def _next_thought(self, message: str, steps: List[ReActStep], observation: str) -> str:
     """Generate next thought based on observation"""
     steps_summary = self._format_steps_for_prompt(steps)
@@ -1497,6 +1513,8 @@ Make the ReAct process visible to users:
 
 **Step 1: Format user-facing response with reasoning transparency**
 
+**User-Friendly Response Formatting:**
+
 ```python
 # From src/session1/react_agent.py (continued)
 def _format_react_response(self, steps: List[ReActStep]) -> str:
@@ -1506,7 +1524,13 @@ def _format_react_response(self, steps: List[ReActStep]) -> str:
     for step in steps:
         response.append(f"**Step {step.step_number}:**")
         response.append(f"*Thought:* {step.thought}")
-        
+```
+
+The formatting method creates a markdown-formatted display of the reasoning process, making it easy for users to follow the agent's thinking.
+
+**Action and Observation Display:**
+
+```python
         if step.action and step.action != "ANSWER":
             response.append(f"*Action:* {step.action} with {step.action_input}")
         
@@ -1599,6 +1623,8 @@ This method synthesizes all the reasoning steps into a final, comprehensive answ
 
 **Step 2: Performance analysis and optimization tracking**
 
+**Performance Analysis and Optimization Tracking:**
+
 ```python
 def get_react_analysis(self) -> Dict:
     """Analyze ReAct performance for optimization"""
@@ -1607,7 +1633,13 @@ def get_react_analysis(self) -> Dict:
     
     total_steps = sum(len(h["steps"]) for h in self.react_history)
     avg_steps = total_steps / len(self.react_history)
-    
+```
+
+The analysis method calculates key performance metrics to help optimize the reasoning process.
+
+**Action Usage Pattern Analysis:**
+
+```python
     # Analyze action usage patterns
     action_counts = {}
     for history in self.react_history:
@@ -1746,6 +1778,8 @@ async def route_message(self, message: str, to_agent: str, from_agent: str = "us
 
 ### Step 6.3: Collaborative Task Management
 
+**Collaborative Task Coordination:**
+
 ```python
 # From src/session1/multi_agent_system.py (continued)
 async def collaborative_task(self, task: str, agent_roles: Dict[str, str]) -> str:
@@ -1761,7 +1795,13 @@ async def collaborative_task(self, task: str, agent_roles: Dict[str, str]) -> st
             response = await self.route_message(full_instruction, agent_name, "coordinator")
             results[agent_name] = response
             print(f"✓ Completed by {agent_name}")
-    
+```
+
+The coordinator delegates specific roles to specialized agents, combining their individual expertise for complex tasks.
+
+**Result Synthesis and Integration:**
+
+```python
     # Synthesize collaborative results
     synthesis = await self._synthesize_collaborative_results(task, results)
     return synthesis
@@ -1784,6 +1824,8 @@ async def _synthesize_collaborative_results(self, task: str, results: Dict[str, 
 
 ### Step 6.4: System Monitoring and Analytics
 
+**System Statistics and Monitoring:**
+
 ```python
 # From src/session1/multi_agent_system.py (continued)
 def get_system_stats(self) -> Dict:
@@ -1797,7 +1839,13 @@ def get_system_stats(self) -> Dict:
         if agent not in agent_activity:
             agent_activity[agent] = 0
         agent_activity[agent] += 1
-    
+```
+
+This method analyzes system performance by tracking message patterns and agent activity levels.
+
+**Comprehensive Statistics Collection:**
+
+```python
     return {
         "total_agents": len(self.agents),
         "agent_names": list(self.agents.keys()),
