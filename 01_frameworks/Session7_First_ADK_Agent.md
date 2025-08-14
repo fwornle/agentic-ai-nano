@@ -695,6 +695,10 @@ class WeatherAgent(BaseADKAgent):
 
 Create a web interface for the agent:
 
+#### **FastAPI App Initialization**
+
+First, let's set up the FastAPI application and imports:
+
 ```python
 # main.py
 from fastapi import FastAPI, HTTPException
@@ -718,7 +722,13 @@ app = FastAPI(
 
 # Global agent instance
 weather_agent = WeatherAgent()
+```
 
+#### **Pydantic Models**
+
+Next, let's define the request and response models:
+
+```python
 class ChatRequest(BaseModel):
     message: str
     context: Optional[Dict[str, Any]] = None
@@ -727,7 +737,13 @@ class ChatResponse(BaseModel):
     response: str
     agent_name: str
     timestamp: str
+```
 
+#### **Chat Endpoint**
+
+Now let's implement the main chat endpoint:
+
+```python
 @app.post("/chat", response_model=ChatResponse)
 async def chat_with_agent(request: ChatRequest):
     """Chat with the weather agent."""
@@ -746,7 +762,13 @@ async def chat_with_agent(request: ChatRequest):
     except Exception as e:
         logger.error(f"Chat error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+```
 
+#### **Memory Management Endpoints**
+
+Finally, let's add memory management endpoints:
+
+```python
 @app.get("/agent/memory")
 async def get_agent_memory():
     """Get current agent memory/conversation history."""

@@ -811,6 +811,10 @@ class ToolChain:
 
 Implement the chain execution with error handling and history tracking:
 
+**Chain Execution Setup**
+
+First, we initialize the execution process and iterate through tools in sequence:
+
 ```python
     def execute_chain(self, initial_input):
         """Execute tools in sequence, passing output to next tool."""
@@ -819,6 +823,13 @@ Implement the chain execution with error handling and history tracking:
         for tool in self.tools:
             try:
                 output = tool._run(**current_input)
+```
+
+**Success Tracking and Output Transformation**
+
+Next, we record successful executions and transform output for the next tool in the chain:
+
+```python
                 self.execution_history.append({
                     'tool': tool.name,
                     'input': current_input,
@@ -828,7 +839,13 @@ Implement the chain execution with error handling and history tracking:
                 
                 # Transform output for next tool
                 current_input = self._transform_output(output)
-                
+```
+
+**Error Handling and History Recording**
+
+Finally, we handle exceptions and maintain complete execution history:
+
+```python
             except Exception as e:
                 self.execution_history.append({
                     'tool': tool.name,
@@ -1174,6 +1191,10 @@ class CrewOptimizer:
 
 Optimize task assignments based on performance data and workload analysis:
 
+**Performance Analysis and Optimization Setup**
+
+First, we gather performance data and initialize the optimization tracking structure:
+
 ```python
     def optimize_task_assignment(self, crew):
         """Optimize task assignments based on performance."""
@@ -1184,7 +1205,13 @@ Optimize task assignments based on performance data and workload analysis:
             'workload_balancing': [],
             'skill_matching': []
         }
-        
+```
+
+**Workload Balancing Analysis**
+
+Next, we analyze agent performance and identify workload imbalances:
+
+```python
         # Balance workload
         agent_performance = report['agent_performance']
         if agent_performance:
@@ -1197,7 +1224,13 @@ Optimize task assignments based on performance data and workload analysis:
                         'action': 'reduce_workload',
                         'reason': 'Above average completion time'
                     })
-        
+```
+
+**Optimization History Tracking**
+
+Finally, we record optimization decisions for future analysis and improvement:
+
+```python
         self.optimization_history.append({
             'timestamp': datetime.now().isoformat(),
             'optimizations': optimizations
@@ -1346,6 +1379,12 @@ Monitoring callbacks capture all critical team events, providing complete visibi
 
 ### Monitoring and Scaling Strategies
 
+The production monitoring system provides real-time analytics and automated scaling based on performance metrics and business requirements.
+
+**Monitoring Class Initialization**
+
+First, we set up the monitoring infrastructure with collectors, alerting, and dashboards:
+
 ```python
 class ProductionMonitoring:
     """2025: Production-grade monitoring with real-time analytics."""
@@ -1354,7 +1393,13 @@ class ProductionMonitoring:
         self.metrics_collector = MetricsCollector()
         self.alert_manager = AlertManager()
         self.dashboard = Dashboard()
-    
+```
+
+**Performance and Scaling Configuration**
+
+Next, we configure thresholds for performance alerts and automatic scaling triggers:
+
+```python
     def setup_monitoring(self, crew):
         """Configure comprehensive monitoring."""
         monitoring_config = {
@@ -1367,7 +1412,14 @@ class ProductionMonitoring:
                 'queue_depth_threshold': 20,
                 'cpu_utilization_threshold': 0.80,
                 'memory_utilization_threshold': 0.85
-            },
+            }
+```
+
+**Business Metrics and Throughput Calculation**
+
+Finally, we define business metrics tracking and calculate expected throughput:
+
+```python
             'business_metrics': {
                 'track_cost_per_task': True,
                 'track_quality_scores': True,

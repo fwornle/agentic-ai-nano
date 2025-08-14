@@ -439,7 +439,11 @@ class EmbeddingCache:
 
 ### **Load Balancing and Auto-Scaling**
 
-Implement intelligent load distribution and scaling:
+Implement intelligent load distribution and scaling to handle varying workloads efficiently. We'll create a comprehensive load balancing system with multiple strategies and auto-scaling capabilities.
+
+**Step 1: Initialize Load Balancer**
+
+Set up the load balancer with configurable strategies:
 
 ```python
 # Production load balancing and auto-scaling
@@ -448,11 +452,13 @@ class RAGLoadBalancer:
 
     def __init__(self, config: Dict[str, Any] = None):
         self.config = config or {}
-        self.service_instances = {}
-        self.health_status = {}
-        self.load_metrics = {}
+        
+        # Initialize service tracking
+        self.service_instances = {}  # Track available service instances
+        self.health_status = {}     # Monitor instance health
+        self.load_metrics = {}      # Track performance metrics
 
-        # Load balancing strategies
+        # Configure available load balancing strategies
         self.strategies = {
             'round_robin': self._round_robin_selection,
             'least_connections': self._least_connections_selection,
@@ -462,18 +468,29 @@ class RAGLoadBalancer:
 
         self.current_strategy = self.config.get('strategy', 'response_time')
 
+**Step 2: Configure Service Instances**
+
+Register and initialize tracking for all service instances:
+
+```python
     async def configure_services(self, services: Dict[str, Any]):
         """Configure services for load balancing."""
 
         for service_name, service_instances in services.items():
+            # Ensure service_instances is a list
             if not isinstance(service_instances, list):
                 service_instances = [service_instances]
 
+            # Register service instances
             self.service_instances[service_name] = service_instances
+            
+            # Initialize health status for all instances
             self.health_status[service_name] = {
                 instance: ServiceStatus.HEALTHY
                 for instance in service_instances
             }
+            
+            # Initialize performance metrics tracking
             self.load_metrics[service_name] = {
                 instance: {
                     'active_connections': 0,
@@ -485,13 +502,18 @@ class RAGLoadBalancer:
                 for instance in service_instances
             }
 
+**Step 3: Select Optimal Service Instance**
+
+Choose the best available instance using the configured strategy:
+
+```python
     async def get_service_instance(self, service_name: str) -> Optional[Any]:
         """Get optimal service instance based on current strategy."""
 
         if service_name not in self.service_instances:
             return None
 
-        # Filter healthy instances
+        # Filter to only healthy instances
         healthy_instances = [
             instance for instance in self.service_instances[service_name]
             if self.health_status[service_name][instance] == ServiceStatus.HEALTHY
@@ -501,17 +523,22 @@ class RAGLoadBalancer:
             self.logger.warning(f"No healthy instances available for {service_name}")
             return None
 
-        # Apply load balancing strategy
+        # Apply the configured load balancing strategy
         selected_instance = await self.strategies[self.current_strategy](
             service_name, healthy_instances
         )
 
-        # Update connection count
+        # Track the connection for load metrics
         if selected_instance:
             self.load_metrics[service_name][selected_instance]['active_connections'] += 1
 
         return selected_instance
 
+**Step 4: Implement Response Time Strategy**
+
+Select instances based on performance and current load:
+
+```python
     async def _response_time_selection(self, service_name: str,
                                      healthy_instances: List[Any]) -> Any:
         """Select instance with best average response time."""
@@ -523,7 +550,8 @@ class RAGLoadBalancer:
             metrics = self.load_metrics[service_name][instance]
             avg_response_time = metrics['avg_response_time']
 
-            # Consider both response time and current load
+            # Adjust response time based on current load
+            # Higher active connections increase the adjusted time
             adjusted_time = avg_response_time * (1 + metrics['active_connections'] * 0.1)
 
             if adjusted_time < best_response_time:
@@ -532,34 +560,45 @@ class RAGLoadBalancer:
 
         return best_instance
 
+**Step 5: Auto-Scaling System**
+
+Implement automatic scaling based on performance metrics:
+
+```python
 class RAGAutoScaler:
     """Auto-scaling system for RAG services based on load and performance metrics."""
 
     def __init__(self, config: Dict[str, Any]):
         self.config = config
-        self.scaling_policies = {}
+        self.scaling_policies = {}  # Per-service scaling configurations
         self.monitoring_interval = config.get('monitoring_interval', 30)  # seconds
 
-        # Scaling thresholds
+        # Define scale-up thresholds
         self.scale_up_thresholds = config.get('scale_up', {
-            'cpu_threshold': 70.0,
-            'memory_threshold': 80.0,
-            'response_time_threshold': 2.0,
-            'queue_size_threshold': 100,
-            'error_rate_threshold': 5.0
+            'cpu_threshold': 70.0,          # CPU usage percentage
+            'memory_threshold': 80.0,       # Memory usage percentage
+            'response_time_threshold': 2.0, # Response time in seconds
+            'queue_size_threshold': 100,    # Queue backlog size
+            'error_rate_threshold': 5.0     # Error rate percentage
         })
 
+        # Define scale-down thresholds (more conservative)
         self.scale_down_thresholds = config.get('scale_down', {
             'cpu_threshold': 30.0,
             'memory_threshold': 40.0,
             'response_time_threshold': 0.5,
             'queue_size_threshold': 10,
-            'stable_duration': 300  # 5 minutes of stability
+            'stable_duration': 300  # Require 5 minutes of stability
         })
 
-        # Start monitoring
+        # Start continuous monitoring
         self.monitoring_task = asyncio.create_task(self._continuous_monitoring())
 
+**Step 6: Register Services for Auto-Scaling**
+
+Configure scaling policies for individual services:
+
+```python
     async def register_service_for_scaling(self, service_name: str,
                                          scaling_config: Dict[str, Any]):
         """Register service for auto-scaling with specific configuration."""
@@ -568,35 +607,48 @@ class RAGAutoScaler:
             'min_instances': scaling_config.get('min_instances', 1),
             'max_instances': scaling_config.get('max_instances', 10),
             'current_instances': scaling_config.get('current_instances', 1),
-            'scaling_cooldown': scaling_config.get('cooldown', 300),  # 5 minutes
-            'last_scaling_action': 0,
-            'stability_window': [],
-            'custom_thresholds': scaling_config.get('thresholds', {})
+            'scaling_cooldown': scaling_config.get('cooldown', 300),  # Prevent rapid scaling
+            'last_scaling_action': 0,                                 # Track last action time
+            'stability_window': [],                                   # Track stability for scale-down
+            'custom_thresholds': scaling_config.get('thresholds', {}) # Service-specific thresholds
         }
 
+**Step 7: Continuous Monitoring Loop**
+
+Implement the main monitoring loop for scaling decisions:
+
+```python
     async def _continuous_monitoring(self):
         """Continuously monitor services and trigger scaling decisions."""
 
         while True:
             try:
+                # Check each registered service
                 for service_name in self.scaling_policies.keys():
-                    # Collect current metrics
+                    # Collect current performance metrics
                     current_metrics = await self._collect_service_metrics(service_name)
 
-                    # Make scaling decision
+                    # Evaluate if scaling action is needed
                     scaling_decision = await self._evaluate_scaling_decision(
                         service_name, current_metrics
                     )
 
+                    # Execute scaling action if required
                     if scaling_decision['action'] != 'none':
                         await self._execute_scaling_action(service_name, scaling_decision)
 
+                # Wait before next monitoring cycle
                 await asyncio.sleep(self.monitoring_interval)
 
             except Exception as e:
                 self.logger.error(f"Auto-scaling monitoring error: {e}")
                 await asyncio.sleep(self.monitoring_interval)
 
+**Step 8: Scaling Decision Evaluation**
+
+Determine when and how to scale services:
+
+```python
     async def _evaluate_scaling_decision(self, service_name: str,
                                        metrics: Dict[str, Any]) -> Dict[str, Any]:
         """Evaluate whether scaling action is needed."""
@@ -604,11 +656,11 @@ class RAGAutoScaler:
         policy = self.scaling_policies[service_name]
         current_time = time.time()
 
-        # Check cooldown period
+        # Respect cooldown period to prevent rapid scaling
         if current_time - policy['last_scaling_action'] < policy['scaling_cooldown']:
             return {'action': 'none', 'reason': 'cooldown_active'}
 
-        # Check scale-up conditions
+        # Check if any scale-up condition is met
         scale_up_triggered = (
             metrics['cpu_usage'] > self.scale_up_thresholds['cpu_threshold'] or
             metrics['memory_usage'] > self.scale_up_thresholds['memory_threshold'] or
@@ -617,6 +669,7 @@ class RAGAutoScaler:
             metrics['error_rate'] > self.scale_up_thresholds['error_rate_threshold']
         )
 
+        # Scale up if conditions are met and within limits
         if scale_up_triggered and policy['current_instances'] < policy['max_instances']:
             return {
                 'action': 'scale_up',
@@ -628,7 +681,12 @@ class RAGAutoScaler:
                 'metrics': metrics
             }
 
-        # Check scale-down conditions (requires sustained low usage)
+**Step 9: Scale-Down Decision Logic**
+
+Implement conservative scale-down with stability requirements:
+
+```python
+        # Check scale-down conditions (all must be met)
         scale_down_conditions = (
             metrics['cpu_usage'] < self.scale_down_thresholds['cpu_threshold'] and
             metrics['memory_usage'] < self.scale_down_thresholds['memory_threshold'] and
@@ -636,20 +694,20 @@ class RAGAutoScaler:
             metrics['queue_size'] < self.scale_down_thresholds['queue_size_threshold']
         )
 
-        # Track stability window
+        # Track stability over time
         policy['stability_window'].append({
             'timestamp': current_time,
             'stable': scale_down_conditions
         })
 
-        # Keep only recent measurements
+        # Keep only measurements within the stability window
         stable_duration = self.scale_down_thresholds['stable_duration']
         policy['stability_window'] = [
             measurement for measurement in policy['stability_window']
             if current_time - measurement['timestamp'] <= stable_duration
         ]
 
-        # Check if we have sustained stability for scale-down
+        # Scale down only if consistently stable
         if (len(policy['stability_window']) > 0 and
             all(m['stable'] for m in policy['stability_window']) and
             policy['current_instances'] > policy['min_instances'] and
@@ -667,6 +725,8 @@ class RAGAutoScaler:
 
         return {'action': 'none', 'reason': 'no_scaling_needed'}
 ```
+
+This intelligent load balancing and auto-scaling system ensures your RAG services can handle varying workloads efficiently while maintaining optimal performance and cost-effectiveness.
 
 ---
 
@@ -987,7 +1047,11 @@ class RBACManager:
 
 ### **Data Privacy and Compliance**
 
-Implement comprehensive privacy and compliance frameworks:
+Implement comprehensive privacy and compliance frameworks to ensure your RAG system meets regulatory requirements across different jurisdictions and industries.
+
+**Step 1: Initialize Privacy Compliance Manager**
+
+Set up the comprehensive compliance framework:
 
 ```python
 # Privacy and compliance framework
@@ -997,7 +1061,7 @@ class PrivacyComplianceManager:
     def __init__(self, compliance_config: Dict[str, Any]):
         self.config = compliance_config
 
-        # Compliance frameworks
+        # Initialize compliance framework handlers
         self.frameworks = {
             'gdpr': GDPRComplianceHandler(compliance_config.get('gdpr', {})),
             'hipaa': HIPAAComplianceHandler(compliance_config.get('hipaa', {})),
@@ -1005,18 +1069,24 @@ class PrivacyComplianceManager:
             'ccpa': CCPAComplianceHandler(compliance_config.get('ccpa', {}))
         }
 
-        # Data classification and handling
-        self.data_classifier = DataClassifier()
-        self.pii_detector = PIIDetector()
-        self.data_anonymizer = DataAnonymizer()
+        # Set up data processing components
+        self.data_classifier = DataClassifier()      # Classify data sensitivity
+        self.pii_detector = PIIDetector()           # Detect personal information
+        self.data_anonymizer = DataAnonymizer()     # Anonymize sensitive data
 
-        # Audit logging
+        # Initialize compliance audit system
         self.audit_logger = ComplianceAuditLogger(compliance_config.get('audit', {}))
 
+**Step 2: Data Processing with Compliance Checks**
+
+Process data through comprehensive compliance validation:
+
+```python
     async def process_data_with_compliance(self, data: Dict[str, Any],
                                          compliance_requirements: List[str]) -> Dict[str, Any]:
         """Process data while ensuring compliance with specified requirements."""
 
+        # Initialize processing result tracking
         processing_result = {
             'original_data_id': data.get('id'),
             'compliance_checks': {},
@@ -1024,15 +1094,21 @@ class PrivacyComplianceManager:
             'audit_entries': []
         }
 
-        # Classify data
+        # Step 1: Classify the data by sensitivity level
         data_classification = await self.data_classifier.classify_data(data)
         processing_result['data_classification'] = data_classification
 
-        # Detect PII/PHI
+        # Step 2: Detect personally identifiable information
         pii_detection = await self.pii_detector.detect_sensitive_data(data)
         processing_result['sensitive_data_detected'] = pii_detection
+```
 
-        # Apply compliance frameworks
+**Step 3: Apply Compliance Framework Checks**
+
+Run data through each required compliance framework:
+
+```python
+        # Process data through each compliance framework
         processed_data = data.copy()
         for framework in compliance_requirements:
             if framework in self.frameworks:
@@ -1042,8 +1118,8 @@ class PrivacyComplianceManager:
 
                 processing_result['compliance_checks'][framework] = compliance_result
 
+                # Apply modifications if not compliant
                 if not compliance_result['compliant']:
-                    # Apply necessary modifications
                     processed_data = await self._apply_compliance_modifications(
                         processed_data, compliance_result['required_actions']
                     )
@@ -1051,7 +1127,7 @@ class PrivacyComplianceManager:
                         compliance_result['required_actions']
                     )
 
-        # Log compliance processing
+        # Log the compliance processing for audit trail
         audit_entry = await self.audit_logger.log_compliance_processing(
             data.get('id'), compliance_requirements, processing_result
         )
@@ -1065,6 +1141,11 @@ class PrivacyComplianceManager:
             )
         }
 
+**Step 4: GDPR Compliance Handler**
+
+Implement specific GDPR requirements for European data protection:
+
+```python
 class GDPRComplianceHandler:
     """GDPR compliance handler for RAG systems."""
 
@@ -1073,6 +1154,11 @@ class GDPRComplianceHandler:
         self.lawful_basis = gdpr_config.get('lawful_basis', 'legitimate_interest')
         self.data_retention_days = gdpr_config.get('retention_days', 365)
 
+**Step 5: GDPR Data Processing Checks**
+
+Implement comprehensive GDPR compliance validation:
+
+```python
     async def process_data(self, data: Dict[str, Any],
                           classification: Dict[str, Any],
                           pii_detection: Dict[str, Any]) -> Dict[str, Any]:
@@ -1084,11 +1170,11 @@ class GDPRComplianceHandler:
             'gdpr_checks': {}
         }
 
-        # Check for personal data
+        # Process only if personal data is detected
         if pii_detection.get('contains_pii', False):
             compliance_result['gdpr_checks']['personal_data_detected'] = True
 
-            # Check consent/lawful basis
+            # Check 1: Verify lawful basis for processing
             consent_check = await self._check_consent(data, pii_detection)
             compliance_result['gdpr_checks']['consent'] = consent_check
 
@@ -1099,7 +1185,7 @@ class GDPRComplianceHandler:
                     'reason': 'No valid consent for personal data processing'
                 })
 
-            # Check data minimization
+            # Check 2: Data minimization principle
             minimization_check = await self._check_data_minimization(data, classification)
             compliance_result['gdpr_checks']['data_minimization'] = minimization_check
 
@@ -1109,7 +1195,7 @@ class GDPRComplianceHandler:
                     'fields_to_remove': minimization_check['excessive_fields']
                 })
 
-            # Check retention period
+            # Check 3: Data retention limits
             retention_check = await self._check_retention_period(data)
             compliance_result['gdpr_checks']['retention'] = retention_check
 
@@ -1121,10 +1207,16 @@ class GDPRComplianceHandler:
 
         return compliance_result
 
+**Step 6: GDPR Data Subject Rights**
+
+Handle individual rights requests under GDPR:
+
+```python
     async def handle_data_subject_request(self, request_type: str,
                                         subject_id: str) -> Dict[str, Any]:
         """Handle GDPR data subject requests."""
 
+        # Route request to appropriate handler
         if request_type == 'access':
             return await self._handle_access_request(subject_id)
         elif request_type == 'erasure':
@@ -1137,13 +1229,19 @@ class GDPRComplianceHandler:
             return {'error': f'Unsupported request type: {request_type}'}
 ```
 
+This privacy and compliance framework ensures your RAG system handles sensitive data according to regulatory requirements, protecting both your organization and your users' privacy rights.
+
 ---
 
 ## **Part 3: Real-Time Indexing and Incremental Updates (20 minutes)**
 
 ### **Change Detection and Incremental Processing**
 
-Build systems for real-time knowledge base updates:
+Build systems for real-time knowledge base updates. We'll create an incremental indexing system that can detect changes in your data sources and automatically update your RAG system.
+
+**Step 1: Initialize Incremental Indexing System**
+
+First, let's set up the core infrastructure for real-time indexing:
 
 ```python
 # Real-time indexing and incremental update system
@@ -1153,7 +1251,7 @@ class IncrementalIndexingSystem:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
 
-        # Change detection systems
+        # Initialize change detection systems for different source types
         self.change_detectors = {
             'file_system': FileSystemChangeDetector(),
             'database': DatabaseChangeDetector(),
@@ -1161,29 +1259,41 @@ class IncrementalIndexingSystem:
             'message_queue': MessageQueueChangeDetector()
         }
 
-        # Processing pipeline
+        # Set up processing pipeline components
         self.incremental_processor = IncrementalDocumentProcessor()
         self.vector_store_updater = VectorStoreUpdater()
         self.knowledge_graph_updater = KnowledgeGraphUpdater()
 
-        # Change tracking
+        # Initialize change tracking system
         self.change_tracker = ChangeTracker()
+```
 
-        # Processing queues
+**Step 2: Configure Processing Queues and Background Processors**
+
+Set up asynchronous queues and background processors for handling updates:
+
+```python
+        # Create processing queues with appropriate sizes
         self.update_queue = asyncio.Queue(maxsize=config.get('queue_size', 10000))
         self.deletion_queue = asyncio.Queue(maxsize=1000)
 
-        # Start background processors
+        # Start background processors for parallel processing
         self.processors = []
         for i in range(config.get('num_processors', 3)):
             processor = asyncio.create_task(self._incremental_update_processor(f"proc_{i}"))
             self.processors.append(processor)
 
+**Step 3: Set Up Change Detection for Data Sources**
+
+Configure monitoring for multiple data sources:
+
+```python
     async def setup_change_detection(self, sources: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Set up change detection for specified data sources."""
 
         setup_results = {}
 
+        # Configure each data source for monitoring
         for source in sources:
             source_type = source['type']
             source_config = source['config']
@@ -1191,10 +1301,11 @@ class IncrementalIndexingSystem:
 
             if source_type in self.change_detectors:
                 try:
+                    # Initialize the appropriate detector
                     detector = self.change_detectors[source_type]
                     setup_result = await detector.setup_monitoring(source_id, source_config)
 
-                    # Connect change events to our update queue
+                    # Connect change events to our processing pipeline
                     await detector.register_change_callback(
                         self._handle_change_event
                     )
@@ -1218,40 +1329,56 @@ class IncrementalIndexingSystem:
             'processors_active': len(self.processors)
         }
 
+**Step 4: Handle Change Events**
+
+Route different types of changes to appropriate processing queues:
+
+```python
     async def _handle_change_event(self, change_event: Dict[str, Any]):
         """Handle incoming change events and queue for processing."""
 
         change_type = change_event['type']  # 'create', 'update', 'delete'
 
+        # Route to appropriate queue based on change type
         if change_type == 'delete':
             await self.deletion_queue.put(change_event)
         else:
             await self.update_queue.put(change_event)
 
+**Step 5: Background Update Processor**
+
+Implement the background processor that handles queued updates:
+
+```python
     async def _incremental_update_processor(self, processor_id: str):
         """Background processor for incremental updates."""
 
         while True:
             try:
-                # Process updates
+                # Process document updates and creations
                 if not self.update_queue.empty():
                     change_event = await self.update_queue.get()
                     await self._process_incremental_update(change_event, processor_id)
                     self.update_queue.task_done()
 
-                # Process deletions
+                # Process document deletions
                 if not self.deletion_queue.empty():
                     deletion_event = await self.deletion_queue.get()
                     await self._process_deletion(deletion_event, processor_id)
                     self.deletion_queue.task_done()
 
-                # Small delay to prevent busy waiting
+                # Prevent busy waiting with small delay
                 await asyncio.sleep(0.1)
 
             except Exception as e:
                 self.logger.error(f"Processor {processor_id} error: {e}")
                 await asyncio.sleep(1)
 
+**Step 6: Process Individual Updates**
+
+Handle the processing of individual document changes:
+
+```python
     async def _process_incremental_update(self, change_event: Dict[str, Any],
                                         processor_id: str):
         """Process individual incremental update."""
@@ -1259,27 +1386,27 @@ class IncrementalIndexingSystem:
         start_time = time.time()
 
         try:
-            # Extract change information
+            # Extract change information from event
             source_id = change_event['source_id']
             document_id = change_event['document_id']
             change_type = change_event['type']  # 'create' or 'update'
             document_data = change_event['document_data']
 
-            # Track change
+            # Start tracking this change for monitoring
             tracking_id = await self.change_tracker.start_tracking(change_event)
 
-            # Process document incrementally
+            # Process the document through our pipeline
             processing_result = await self.incremental_processor.process_document(
                 document_data, change_type
             )
 
-            # Update vector store
             if processing_result['success']:
+                # Update vector store with processed chunks
                 vector_update_result = await self.vector_store_updater.update_document(
                     document_id, processing_result['chunks'], change_type
                 )
 
-                # Update knowledge graph if applicable
+                # Update knowledge graph if enabled
                 if self.config.get('update_knowledge_graph', True):
                     kg_update_result = await self.knowledge_graph_updater.update_document(
                         document_id, processing_result['entities'],
@@ -1288,7 +1415,7 @@ class IncrementalIndexingSystem:
                 else:
                     kg_update_result = {'skipped': True}
 
-                # Complete tracking
+                # Complete change tracking with results
                 await self.change_tracker.complete_tracking(tracking_id, {
                     'processing_time': time.time() - start_time,
                     'vector_update': vector_update_result,
@@ -1305,13 +1432,23 @@ class IncrementalIndexingSystem:
             if 'tracking_id' in locals():
                 await self.change_tracker.fail_tracking(tracking_id, str(e))
 
+**Step 7: File System Change Detection**
+
+Implement file system monitoring using OS-level change detection:
+
+```python
 class FileSystemChangeDetector:
     """File system change detection using OS-level monitoring."""
 
     def __init__(self):
-        self.watchers = {}
-        self.change_callbacks = []
+        self.watchers = {}  # Track active file system watchers
+        self.change_callbacks = []  # Registered callback functions
 
+**Step 8: Set Up File System Monitoring**
+
+Configure file system watchers for specified directories:
+
+```python
     async def setup_monitoring(self, source_id: str, config: Dict[str, Any]) -> Dict[str, Any]:
         """Set up file system monitoring for specified paths."""
 
@@ -1321,6 +1458,7 @@ class FileSystemChangeDetector:
         watch_paths = config.get('paths', [])
         file_patterns = config.get('patterns', ['*'])
 
+        # Create custom event handler for RAG system
         class RAGFileSystemEventHandler(FileSystemEventHandler):
             def __init__(self, detector_instance, source_id):
                 self.detector = detector_instance
@@ -1344,10 +1482,11 @@ class FileSystemChangeDetector:
                         self.source_id, event.src_path, 'delete'
                     ))
 
-        # Set up watchers
+        # Initialize file system observer
         observer = watchdog.observers.Observer()
         event_handler = RAGFileSystemEventHandler(self, source_id)
 
+        # Set up monitoring for all specified paths
         for path in watch_paths:
             observer.schedule(event_handler, path, recursive=True)
 
@@ -1360,11 +1499,16 @@ class FileSystemChangeDetector:
             'watcher_active': True
         }
 
+**Step 9: Handle File System Changes**
+
+Process detected file system changes and create change events:
+
+```python
     async def _handle_file_change(self, source_id: str, file_path: str, change_type: str):
         """Handle detected file system change."""
 
         try:
-            # Read file content for create/update
+            # Read file content for create/update operations
             if change_type in ['create', 'update']:
                 with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                     content = f.read()
@@ -1374,9 +1518,10 @@ class FileSystemChangeDetector:
                     'modified_time': os.path.getmtime(file_path)
                 }
             else:
+                # For deletions, no content is available
                 document_data = None
 
-            # Create change event
+            # Create standardized change event
             change_event = {
                 'source_id': source_id,
                 'document_id': file_path,
@@ -1385,7 +1530,7 @@ class FileSystemChangeDetector:
                 'timestamp': time.time()
             }
 
-            # Notify callbacks
+            # Notify all registered callbacks
             for callback in self.change_callbacks:
                 await callback(change_event)
 
@@ -1393,16 +1538,22 @@ class FileSystemChangeDetector:
             self.logger.error(f"File change handling error: {e}")
 ```
 
+This incremental indexing system enables real-time updates to your RAG knowledge base, ensuring your system stays current with changing data sources.
+
 ---
 
 ## **Part 4: Monitoring, Observability, and Analytics (25 minutes)**
 
 ### **Comprehensive Monitoring and Alerting**
 
-Build production monitoring with observability and analytics:
+Build production monitoring with observability and analytics. We'll create a comprehensive monitoring system that tracks performance, quality, and health across all RAG components.
+
+**Step 1: Initialize Monitoring System**
+
+First, let's set up the basic monitoring infrastructure with Prometheus metrics and structured logging:
 
 ```python
-# Production monitoring and observability system
+# Production monitoring and observability system setup
 import prometheus_client
 from prometheus_client import Counter, Histogram, Gauge, start_http_server
 import structlog
@@ -1413,28 +1564,26 @@ class RAGMonitoringSystem:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
 
-        # Prometheus metrics
+        # Initialize core monitoring components
         self._setup_prometheus_metrics()
-
-        # Structured logging
         self.logger = structlog.get_logger()
 
-        # Performance tracking
+        # Initialize specialized monitoring components
         self.performance_tracker = RAGPerformanceTracker()
-
-        # Alert manager
         self.alert_manager = RAGAlertManager(config.get('alerting', {}))
-
-        # Analytics dashboard
         self.analytics = RAGAnalytics(config.get('analytics', {}))
-
-        # Health checker
         self.health_checker = RAGHealthChecker()
+```
 
+**Step 2: Set Up Prometheus Metrics**
+
+Now let's configure the metrics that will track our RAG system's performance:
+
+```python
     def _setup_prometheus_metrics(self):
         """Set up Prometheus metrics for RAG system monitoring."""
 
-        # Request metrics
+        # Request tracking metrics
         self.request_counter = Counter(
             'rag_requests_total',
             'Total number of RAG requests',
@@ -1446,8 +1595,14 @@ class RAGMonitoringSystem:
             'RAG request duration in seconds',
             ['method', 'endpoint']
         )
+```
 
-        # System metrics
+**Step 3: Configure System and Quality Metrics**
+
+Add metrics for system health and response quality monitoring:
+
+```python
+        # System health metrics
         self.active_connections = Gauge(
             'rag_active_connections',
             'Number of active connections',
@@ -1460,7 +1615,7 @@ class RAGMonitoringSystem:
             ['queue_type']
         )
 
-        # Quality metrics
+        # Quality and accuracy metrics
         self.response_quality = Histogram(
             'rag_response_quality',
             'Response quality scores',
@@ -1473,29 +1628,35 @@ class RAGMonitoringSystem:
             ['retrieval_method']
         )
 
-        # Error metrics
+        # Error tracking
         self.error_counter = Counter(
             'rag_errors_total',
             'Total number of errors',
             ['error_type', 'service']
         )
 
-        # Start Prometheus metrics server
+        # Start the Prometheus metrics server
         metrics_port = self.config.get('metrics_port', 8000)
         start_http_server(metrics_port)
 
+**Step 4: Request Tracking and Monitoring**
+
+Implement comprehensive request tracking with success/error monitoring:
+
+```python
     async def track_request(self, method: str, endpoint: str,
                           request_func: Callable) -> Dict[str, Any]:
         """Track RAG request with comprehensive monitoring."""
 
         start_time = time.time()
 
+        # Use Prometheus histogram to automatically track duration
         with self.request_duration.labels(method=method, endpoint=endpoint).time():
             try:
-                # Execute request
+                # Execute the RAG request function
                 result = await request_func()
 
-                # Record successful request
+                # Record successful completion
                 self.request_counter.labels(
                     method=method, endpoint=endpoint, status='success'
                 ).inc()
@@ -1507,7 +1668,7 @@ class RAGMonitoringSystem:
                         result['quality_score']
                     )
 
-                # Log structured request info
+                # Log structured information for observability
                 self.logger.info(
                     "RAG request completed",
                     method=method,
@@ -1518,20 +1679,26 @@ class RAGMonitoringSystem:
                 )
 
                 return result
+```
 
+**Step 5: Error Handling and Alerting**
+
+Handle request failures with comprehensive error tracking:
+
+```python
             except Exception as e:
-                # Record failed request
+                # Record failed request metrics
                 self.request_counter.labels(
                     method=method, endpoint=endpoint, status='error'
                 ).inc()
 
-                # Record error
+                # Track error type for analysis
                 error_type = type(e).__name__
                 self.error_counter.labels(
                     error_type=error_type, service=endpoint
                 ).inc()
 
-                # Log error
+                # Log detailed error information
                 self.logger.error(
                     "RAG request failed",
                     method=method,
@@ -1540,11 +1707,17 @@ class RAGMonitoringSystem:
                     duration=time.time() - start_time
                 )
 
-                # Check if alert should be triggered
+                # Check if alert thresholds are exceeded
                 await self.alert_manager.check_error_threshold(endpoint, error_type)
 
+                # Re-raise the exception for proper error handling
                 raise
 
+**Step 6: Analytics System for Performance Analysis**
+
+Create an analytics system to analyze system performance patterns:
+
+```python
 class RAGAnalytics:
     """Advanced analytics for RAG system performance and usage."""
 
@@ -1552,22 +1725,23 @@ class RAGAnalytics:
         self.config = config
         self.analytics_data = {}
 
-        # Time series storage for metrics
+        # Initialize analytics components
         self.metrics_store = MetricsTimeSeriesStore()
-
-        # Query pattern analyzer
         self.query_analyzer = QueryPatternAnalyzer()
-
-        # Performance predictor
         self.performance_predictor = PerformancePredictor()
 
+**Step 7: Performance Analysis Engine**
+
+Implement comprehensive system performance analysis:
+
+```python
     async def analyze_system_performance(self, time_window: str = '1h') -> Dict[str, Any]:
         """Analyze comprehensive system performance over time window."""
 
-        # Get metrics for time window
+        # Retrieve metrics data for the specified time window
         metrics = await self.metrics_store.get_metrics_window(time_window)
 
-        # Calculate performance indicators
+        # Perform comprehensive performance analysis
         performance_analysis = {
             'request_volume': self._analyze_request_volume(metrics),
             'response_times': self._analyze_response_times(metrics),
@@ -1577,10 +1751,10 @@ class RAGAnalytics:
             'user_satisfaction': self._analyze_user_satisfaction(metrics)
         }
 
-        # Identify performance issues
+        # Identify potential performance issues
         performance_issues = self._identify_performance_issues(performance_analysis)
 
-        # Generate recommendations
+        # Generate actionable recommendations
         recommendations = self._generate_performance_recommendations(
             performance_analysis, performance_issues
         )
@@ -1593,6 +1767,11 @@ class RAGAnalytics:
             'overall_health_score': self._calculate_health_score(performance_analysis)
         }
 
+**Step 8: Request Volume Analysis**
+
+Analyze request patterns and volume trends:
+
+```python
     def _analyze_request_volume(self, metrics: Dict[str, List]) -> Dict[str, Any]:
         """Analyze request volume patterns and trends."""
 
@@ -1601,12 +1780,12 @@ class RAGAnalytics:
         if not request_counts:
             return {'error': 'No request data available'}
 
-        # Calculate volume statistics
+        # Calculate basic volume statistics
         total_requests = sum(request_counts)
         avg_requests_per_minute = total_requests / len(request_counts)
         peak_requests = max(request_counts)
 
-        # Identify trends
+        # Analyze request volume trends
         trend = 'stable'
         if len(request_counts) > 10:
             recent_avg = np.mean(request_counts[-10:])
@@ -1629,13 +1808,18 @@ class RAGAnalytics:
             }
         }
 
+**Step 9: Performance Recommendations Generator**
+
+Generate actionable recommendations based on performance analysis:
+
+```python
     def _generate_performance_recommendations(self, analysis: Dict[str, Any],
                                            issues: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Generate actionable performance recommendations."""
 
         recommendations = []
 
-        # High response time recommendations
+        # Check for high response time issues
         if analysis['response_times']['p95'] > 2.0:  # 2 second threshold
             recommendations.append({
                 'type': 'performance',
@@ -1645,7 +1829,7 @@ class RAGAnalytics:
                 'expected_impact': 'Reduce P95 response time by 30-50%'
             })
 
-        # Quality issues recommendations
+        # Check for quality issues
         if analysis['quality_trends']['average_score'] < 0.7:
             recommendations.append({
                 'type': 'quality',
@@ -1654,8 +1838,14 @@ class RAGAnalytics:
                 'recommendation': 'Review and update document chunking strategy, consider reranking implementation',
                 'expected_impact': 'Improve average quality score by 15-25%'
             })
+```
 
-        # Resource usage recommendations
+**Step 10: Resource and Error Rate Recommendations**
+
+Add recommendations for resource usage and error handling:
+
+```python
+        # Check for resource utilization issues
         if analysis['resource_usage']['cpu_utilization'] > 0.8:
             recommendations.append({
                 'type': 'scaling',
@@ -1665,7 +1855,7 @@ class RAGAnalytics:
                 'expected_impact': 'Reduce CPU utilization to 60-70% range'
             })
 
-        # Error rate recommendations
+        # Check for error rate issues
         if analysis['error_patterns']['error_rate'] > 0.05:  # 5% error rate
             recommendations.append({
                 'type': 'reliability',
@@ -1677,10 +1867,16 @@ class RAGAnalytics:
 
         return recommendations
 
+**Step 11: Health Checking System**
+
+Implement comprehensive health monitoring for all system components:
+
+```python
 class RAGHealthChecker:
     """Comprehensive health checking for RAG system components."""
 
     def __init__(self):
+        # Define all health check functions
         self.health_checks = {
             'database_connectivity': self._check_database_health,
             'vector_store_health': self._check_vector_store_health,
@@ -1691,13 +1887,18 @@ class RAGHealthChecker:
             'memory_usage': self._check_memory_usage
         }
 
+**Step 12: Comprehensive Health Check Execution**
+
+Run health checks across all system components:
+
+```python
     async def comprehensive_health_check(self) -> Dict[str, Any]:
         """Perform comprehensive health check of all system components."""
 
         health_results = {}
         overall_healthy = True
 
-        # Run all health checks
+        # Execute all registered health checks
         for check_name, check_func in self.health_checks.items():
             try:
                 health_result = await check_func()
@@ -1714,7 +1915,7 @@ class RAGHealthChecker:
                 }
                 overall_healthy = False
 
-        # Calculate health score
+        # Calculate overall health score
         healthy_checks = len([r for r in health_results.values() if r.get('healthy', False)])
         health_score = healthy_checks / len(health_results)
 
@@ -1729,19 +1930,24 @@ class RAGHealthChecker:
             'timestamp': time.time()
         }
 
+**Step 13: Vector Store Health Check Implementation**
+
+Implement specific health checks for critical components:
+
+```python
     async def _check_vector_store_health(self) -> Dict[str, Any]:
         """Check vector store health and performance."""
 
         try:
             start_time = time.time()
 
-            # Test basic connectivity
+            # Test basic connectivity with a simple query
             # This would be implemented based on your vector store
             # Example: test_query = await vector_store.similarity_search("test", k=1)
 
             response_time = time.time() - start_time
 
-            # Check performance thresholds
+            # Evaluate health based on response time thresholds
             healthy = response_time < 1.0  # 1 second threshold
 
             return {
@@ -1760,6 +1966,8 @@ class RAGHealthChecker:
                 'critical': True
             }
 ```
+
+This comprehensive monitoring system provides complete observability for your production RAG deployment. The modular design allows you to track performance, identify issues, and maintain high service quality across all components.
 
 ---
 
