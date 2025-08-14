@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comprehensive Code Block Length Analyzer for 01_frameworks Session Files
+Comprehensive Code Block Length Analyzer for 03_mcp-adk-a2a Session Files
 
 This script analyzes ALL Session*.md files to identify and report on code block lengths,
 specifically highlighting code blocks over 20 lines that need to be broken up.
@@ -232,19 +232,19 @@ def main():
     """Main function to run the analysis"""
     # Get the directory containing this script
     script_dir = Path(__file__).parent
-    frameworks_dir = script_dir / "01_frameworks"
+    mcp_dir = script_dir / "03_mcp-adk-a2a"
     
-    if not frameworks_dir.exists():
-        print(f"Error: Directory {frameworks_dir} not found!")
+    if not mcp_dir.exists():
+        print(f"Error: Directory {mcp_dir} not found!")
         print("Please run this script from the nano-degree root directory.")
         return
     
     print("Starting comprehensive code block analysis...")
-    print(f"Analyzing directory: {frameworks_dir}")
+    print(f"Analyzing directory: {mcp_dir}")
     print()
     
     # Create analyzer and run analysis
-    analyzer = CodeBlockAnalyzer(frameworks_dir)
+    analyzer = CodeBlockAnalyzer(mcp_dir)
     results = analyzer.analyze_all_files()
     
     # Generate and display report
@@ -252,7 +252,7 @@ def main():
     print(report)
     
     # Also save report to file
-    report_file = script_dir / "code_block_analysis_report.txt"
+    report_file = script_dir / "mcp_adk_a2a_code_block_analysis.txt"
     with open(report_file, 'w', encoding='utf-8') as f:
         f.write(report)
     

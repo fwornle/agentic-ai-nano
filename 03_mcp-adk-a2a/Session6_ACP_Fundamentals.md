@@ -282,25 +282,46 @@ async def _summarize_text(self, payload: dict) -> dict:
 The coordinator agent doesn't process data itself—it **orchestrates other agents** to complete complex workflows.
 
 **The Coordination Pattern:**
+
+ACP coordination follows a clear discovery-then-execute pattern. Let's break this down into stages:
+
+**Stage 1: Agent Discovery and Validation**
 ```python
-# From src/session6/coordinator_agent.py
+# From src/session6/coordinator_agent.py - Discovery phase
 async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
     agents_used = []
     
-    # Step 1: Discover required agents
+    # Step 1: Discover required agents using capability-based lookup
     print("🔍 Discovering agents...")
     data_agents = await self.discover_agents("process_csv")
     text_agents = await self.discover_agents("summarize_text")
     
-    # Step 2: Coordinate data processing
+    # Validate agents are available before proceeding
+    if not data_agents or not text_agents:
+        raise ValueError("Required agents not available")
+```
+
+**Why Discovery First?** ACP agents can join or leave the network at any time. The coordinator must verify capabilities are available before starting the workflow.
+
+**Stage 2: Data Processing Coordination**
+```python
+    # Step 2: Coordinate data processing with the discovered agent
     print("📊 Processing data...")
     data_result = await self.communicate_with_agent(
-        data_agents[0].id,
-        "process_csv", 
+        data_agents[0].id,           # Target the first available data agent
+        "process_csv",               # Request specific capability
         {"data": input_data["csv_data"], "operation": "summary"}
     )
     
-    # Step 3: Generate summary
+    # Track which agents participated in the workflow
+    agents_used.append(data_agents[0].id)
+```
+
+**Key ACP Concept:** Each communication request specifies both the target agent and the exact capability needed. This enables precise task routing.
+
+**Stage 3: Text Processing and Result Aggregation**
+```python
+    # Step 3: Generate summary using processed data
     print("📝 Generating summary...")
     summary_text = f"Analysis Results: {data_result['result']}"
     text_result = await self.communicate_with_agent(
@@ -309,6 +330,9 @@ async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
         {"text": summary_text, "max_sentences": 2}
     )
     
+    agents_used.append(text_agents[0].id)
+    
+    # Return aggregated results from multiple agents
     return {
         "data_analysis": data_result,
         "text_summary": text_result,

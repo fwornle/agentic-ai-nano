@@ -65,7 +65,7 @@ pip install langchain-mcp-adapters langgraph langchain-openai \
 
 ### Step 1.2: Project Structure
 
-We'll organize our code into logical modules for maintainability:
+We'll organize our code into logical modules for maintainability. This structure separates concerns and makes the codebase easier to navigate:
 
 ```
 langchain-mcp-integration/
@@ -91,9 +91,17 @@ langchain-mcp-integration/
 └── .env                  # Environment variables
 ```
 
+**Project organization benefits:**
+- **Separation of concerns**: Each directory has a specific purpose
+- **Scalability**: Easy to add new agents, servers, or workflows
+- **Maintainability**: Clear structure makes debugging and updates easier
+- **Reusability**: Components can be imported and reused across the project
+
 ### Step 1.3: Configuration Management
 
-First, let's create a robust configuration system that can manage multiple MCP servers:
+First, let's create a robust configuration system that can manage multiple MCP servers. We'll break this into logical components:
+
+**Step 1.3.1: Configuration Imports and Setup**
 
 ```python
 # config.py
@@ -103,7 +111,11 @@ from dataclasses import dataclass
 from dotenv import load_dotenv
 
 load_dotenv()
+```
 
+**Step 1.3.2: MCP Server Configuration Class**
+
+```python
 @dataclass
 class MCPServerConfig:
     """Configuration for a single MCP server."""
@@ -114,7 +126,11 @@ class MCPServerConfig:
     description: str = ""
     timeout: int = 30
     retry_attempts: int = 3
+```
 
+**Step 1.3.3: Language Model Configuration Class**
+
+```python
 @dataclass 
 class LLMConfig:
     """Configuration for language models."""
@@ -123,21 +139,34 @@ class LLMConfig:
     temperature: float = 0.7
     max_tokens: int = 2000
     timeout: int = 60
+```
 
+**Why dataclasses?**
+- Type hints improve code reliability and IDE support
+- Default values reduce configuration complexity
+- Immutable configurations prevent accidental changes
+
+**Step 1.3.2: Environment-Based Configuration**
+
+```python
 class Config:
     """Main configuration class for LangChain MCP integration."""
     
-    # API Keys
+    # API Keys from environment variables
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
     
-    # LLM Configuration
+    # LLM Configuration with environment overrides
     LLM = LLMConfig(
         provider=os.getenv("LLM_PROVIDER", "openai"),
         model=os.getenv("LLM_MODEL", "gpt-4"),
         temperature=float(os.getenv("LLM_TEMPERATURE", "0.7")),
     )
-    
+```
+
+**Step 1.3.4: MCP Server Registry**
+
+```python
     # MCP Server Configurations
     MCP_SERVERS = [
         MCPServerConfig(
@@ -159,7 +188,11 @@ class Config:
             description="Database query and manipulation"
         )
     ]
-    
+```
+
+**Step 1.3.5: Agent and Logging Configuration**
+
+```python
     # Agent Configuration
     AGENT_CONFIG = {
         "max_iterations": int(os.getenv("MAX_ITERATIONS", "10")),
@@ -173,11 +206,12 @@ class Config:
     LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 ```
 
-**Configuration insights:**
-- Dataclasses provide type safety and easy validation
-- Environment variables allow easy deployment configuration
-- Timeouts and retry logic prevent hanging processes
-- Structured logging helps with debugging complex agent workflows
+**Configuration best practices:**
+- **Environment variables** enable different settings per deployment
+- **Type safety** with dataclasses prevents configuration errors
+- **Sensible defaults** make development setup easier
+- **Timeout configuration** prevents hanging processes
+- **Structured logging** helps debug complex agent workflows
 
 ---
 
@@ -185,7 +219,9 @@ class Config:
 
 ### Step 2.1: MCP Manager Utility
 
-Before building agents, we need a robust system to manage multiple MCP servers. Let's create a manager that handles lifecycle, health checks, and error recovery:
+Before building agents, we need a robust system to manage multiple MCP servers. Let's understand the core concepts by building it step by step:
+
+**Step 2.1.1: Basic Manager Structure**
 
 ```python
 # utils/mcp_manager.py
@@ -206,40 +242,64 @@ class MCPServerManager:
         self.adapters: Dict[str, MCPAdapter] = {}
         self.health_status: Dict[str, bool] = {}
         self._health_check_task: Optional[asyncio.Task] = None
-    
+```
+
+**Key design decisions:**
+- **Dictionary lookups** for fast server access by name
+- **Health tracking** to know which servers are operational
+- **Background tasks** for continuous health monitoring
+
+**Step 2.1.2: Server Startup Logic**
+
+This segment shows how to start individual MCP servers with proper error handling:
+
+```python
     async def start_all_servers(self) -> Dict[str, bool]:
         """Start all configured MCP servers."""
         results = {}
         
         for name, config in self.server_configs.items():
-            try:
-                logger.info(f"Starting MCP server: {name}")
-                adapter = MCPAdapter(
-                    command=config.command,
-                    args=config.args,
-                    timeout=config.timeout
-                )
-                
-                # Test the connection
-                await adapter.start()
-                tools = await adapter.list_tools()
-                
-                self.adapters[name] = adapter
-                self.health_status[name] = True
-                results[name] = True
-                
-                logger.info(f"MCP server '{name}' started successfully with {len(tools)} tools")
-                
-            except Exception as e:
-                logger.error(f"Failed to start MCP server '{name}': {e}")
-                self.health_status[name] = False
-                results[name] = False
-        
-        # Start health monitoring
-        self._health_check_task = asyncio.create_task(self._health_monitor())
+            result = await self._start_single_server(name, config)
+            results[name] = result
         
         return results
     
+    async def _start_single_server(self, name: str, config: MCPServerConfig) -> bool:
+        """Start a single MCP server and test its connection."""
+        try:
+            logger.info(f"Starting MCP server: {name}")
+            adapter = MCPAdapter(
+                command=config.command,
+                args=config.args,
+                timeout=config.timeout
+            )
+```
+
+**Step 2.1.3: Server Connection Testing**
+
+This segment handles connection verification and tool discovery:
+
+```python
+            # Test the connection and discover tools
+            await adapter.start()
+            tools = await adapter.list_tools()
+            
+            # Store the adapter and update status
+            self.adapters[name] = adapter
+            self.health_status[name] = True
+            
+            logger.info(f"MCP server '{name}' started successfully with {len(tools)} tools")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to start MCP server '{name}': {e}")
+            self.health_status[name] = False
+            return False
+```
+
+**Step 2.1.4: Health Monitoring and Recovery**
+
+```python
     async def get_adapter(self, server_name: str) -> Optional[MCPAdapter]:
         """Get an adapter for a specific server, with health check."""
         if server_name not in self.adapters:
@@ -252,115 +312,13 @@ class MCPServerManager:
             await self._restart_server(server_name)
         
         return self.adapters.get(server_name)
-    
-    async def get_all_tools(self) -> Dict[str, List[str]]:
-        """Get all available tools from all healthy servers."""
-        all_tools = {}
-        
-        for name, adapter in self.adapters.items():
-            if self.health_status.get(name, False):
-                try:
-                    tools = await adapter.list_tools()
-                    all_tools[name] = [tool.name for tool in tools]
-                except Exception as e:
-                    logger.warning(f"Failed to list tools for server '{name}': {e}")
-                    self.health_status[name] = False
-        
-        return all_tools
-    
-    async def _health_monitor(self):
-        """Background task to monitor server health."""
-        while True:
-            try:
-                await asyncio.sleep(30)  # Check every 30 seconds
-                
-                for name, adapter in self.adapters.items():
-                    try:
-                        # Simple health check - list tools
-                        await asyncio.wait_for(adapter.list_tools(), timeout=5.0)
-                        self.health_status[name] = True
-                    except Exception as e:
-                        logger.warning(f"Health check failed for server '{name}': {e}")
-                        self.health_status[name] = False
-                        
-            except asyncio.CancelledError:
-                break
-            except Exception as e:
-                logger.error(f"Health monitor error: {e}")
-    
-    async def _restart_server(self, server_name: str) -> bool:
-        """Attempt to restart a failed server."""
-        if server_name not in self.server_configs:
-            return False
-        
-        try:
-            logger.info(f"Attempting to restart server: {server_name}")
-            
-            # Clean up old adapter
-            if server_name in self.adapters:
-                try:
-                    await self.adapters[server_name].stop()
-                except:
-                    pass
-                del self.adapters[server_name]
-            
-            # Start new adapter
-            config = self.server_configs[server_name]
-            adapter = MCPAdapter(
-                command=config.command,
-                args=config.args,
-                timeout=config.timeout
-            )
-            
-            await adapter.start()
-            self.adapters[server_name] = adapter
-            self.health_status[server_name] = True
-            
-            logger.info(f"Successfully restarted server: {server_name}")
-            return True
-            
-        except Exception as e:
-            logger.error(f"Failed to restart server '{server_name}': {e}")
-            self.health_status[server_name] = False
-            return False
-    
-    async def stop_all_servers(self):
-        """Stop all MCP servers and cleanup resources."""
-        if self._health_check_task:
-            self._health_check_task.cancel()
-            try:
-                await self._health_check_task
-            except asyncio.CancelledError:
-                pass
-        
-        for name, adapter in self.adapters.items():
-            try:
-                logger.info(f"Stopping MCP server: {name}")
-                await adapter.stop()
-            except Exception as e:
-                logger.warning(f"Error stopping server '{name}': {e}")
-        
-        self.adapters.clear()
-        self.health_status.clear()
-    
-    @asynccontextmanager
-    async def managed_servers(self):
-        """Context manager for automatic server lifecycle management."""
-        try:
-            results = await self.start_all_servers()
-            healthy_count = sum(results.values())
-            total_count = len(results)
-            
-            logger.info(f"Started {healthy_count}/{total_count} MCP servers")
-            
-            if healthy_count == 0:
-                raise RuntimeError("No MCP servers started successfully")
-            
-            yield self
-            
-        finally:
-            await self.stop_all_servers()
 ```
+
+**Complete implementation:** See `src/session3/complete_examples/mcp_manager_complete.py` for the full implementation with advanced features including:
+- Continuous health monitoring
+- Automatic server restart
+- Context manager for resource cleanup
+- Comprehensive error handling
 
 **Key features of our MCP manager:**
 - **Health Monitoring**: Continuous health checks with automatic restart
@@ -369,9 +327,17 @@ class MCPServerManager:
 - **Logging**: Comprehensive logging for debugging
 - **Async Support**: Non-blocking operations for better performance
 
+**Production benefits:**
+- **Resilience**: Automatically handles server failures
+- **Observability**: Detailed logging for troubleshooting
+- **Resource management**: Proper cleanup prevents memory leaks
+- **Scalability**: Easily add new servers to the configuration
+
 ### Step 2.2: Creating Simplified MCP Servers
 
-Let's create lightweight versions of our MCP servers for this integration:
+Let's create lightweight versions of our MCP servers for this integration. We'll start with a simple weather server:
+
+**Step 2.2.1: Server Setup and Data**
 
 ```python
 # mcp_servers/weather_server.py
@@ -381,14 +347,18 @@ from typing import Dict, List
 
 mcp = FastMCP("Weather Server")
 
-# Simulated weather data
+# Simulated weather data for demonstration
 WEATHER_DATA = {
     "London": {"temp": 15, "condition": "Cloudy", "humidity": 75},
     "New York": {"temp": 22, "condition": "Sunny", "humidity": 60},
     "Tokyo": {"temp": 18, "condition": "Rainy", "humidity": 85},
     "Sydney": {"temp": 25, "condition": "Clear", "humidity": 55},
 }
+```
 
+**Step 2.2.2: Current Weather Tool**
+
+```python
 @mcp.tool()
 def get_current_weather(city: str, units: str = "celsius") -> Dict:
     """Get current weather for a city."""
@@ -405,16 +375,34 @@ def get_current_weather(city: str, units: str = "celsius") -> Dict:
     data["city"] = city
     data["timestamp"] = datetime.now().isoformat()
     return data
+```
 
+**Step 2.2.3: Weather Forecast Input Validation**
+
+This segment handles input validation for the forecast tool:
+
+```python
 @mcp.tool()
 def get_weather_forecast(city: str, days: int = 3) -> List[Dict]:
     """Get weather forecast for multiple days."""
+    # Validate input parameters
     if days < 1 or days > 7:
         return [{"error": "Days must be between 1 and 7"}]
     
     if city not in WEATHER_DATA:
         return [{"error": f"Forecast not available for {city}"}]
     
+    # Generate forecast based on current weather
+    return _generate_forecast_data(city, days)
+```
+
+**Step 2.2.4: Forecast Data Generation**
+
+This segment creates realistic forecast data for demonstration:
+
+```python
+def _generate_forecast_data(city: str, days: int) -> List[Dict]:
+    """Generate realistic forecast data for demonstration."""
     base_temp = WEATHER_DATA[city]["temp"]
     conditions = ["Sunny", "Cloudy", "Rainy", "Partly Cloudy"]
     
@@ -435,13 +423,21 @@ if __name__ == "__main__":
     mcp.run()
 ```
 
+**Key design elements:**
+- **Simple data structure** for easy demonstration
+- **Error handling** for invalid inputs
+- **Unit conversion** to support different temperature scales
+- **Realistic forecast simulation** with varying conditions
+
 ---
 
 ## Part 3: Building ReAct Agents (25 minutes)
 
 ### Step 3.1: Basic Single-Tool Agent
 
-Let's start with a simple agent that uses one MCP server to understand the integration pattern:
+Let's start with a simple agent that uses one MCP server to understand the integration pattern. We'll build this incrementally:
+
+**Step 3.1.1: Agent Foundation**
 
 ```python
 # agents/basic_agent.py
@@ -466,7 +462,11 @@ class BasicMCPAgent:
         self.mcp_manager = mcp_manager
         self.llm = None
         self.agent_executor = None
-    
+```
+
+**Step 3.1.2: LLM and Tool Setup**
+
+```python
     async def initialize(self) -> bool:
         """Initialize the agent with LLM and tools."""
         try:
@@ -485,27 +485,52 @@ class BasicMCPAgent:
             
             # Convert MCP tools to LangChain tools
             mcp_tools = await adapter.list_tools()
-            langchain_tools = []
+            langchain_tools = self._create_langchain_tools(mcp_tools, adapter)
             
-            for mcp_tool in mcp_tools:
-                # Create a LangChain tool wrapper
-                async def tool_wrapper(tool_input: str, tool_name=mcp_tool.name):
-                    """Wrapper to call MCP tool from LangChain."""
-                    try:
-                        result = await adapter.call_tool(tool_name, {"input": tool_input})
-                        return str(result)
-                    except Exception as e:
-                        return f"Error calling tool {tool_name}: {str(e)}"
-                
-                langchain_tool = Tool(
-                    name=mcp_tool.name,
-                    description=mcp_tool.description or f"Tool from {self.server_name} server",
-                    func=lambda x, tn=mcp_tool.name: asyncio.create_task(tool_wrapper(x, tn))
-                )
-                langchain_tools.append(langchain_tool)
+            # Create the agent executor
+            self.agent_executor = self._create_agent_executor(langchain_tools)
             
-            # Create ReAct agent
-            react_prompt = PromptTemplate.from_template("""
+            logger.info(f"Initialized basic agent with {len(langchain_tools)} tools from {self.server_name}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize basic agent: {e}")
+            return False
+```
+
+**Step 3.1.3: Tool Wrapping Logic**
+
+```python
+    def _create_langchain_tools(self, mcp_tools, adapter):
+        """Convert MCP tools to LangChain tools."""
+        langchain_tools = []
+        
+        for mcp_tool in mcp_tools:
+            # Create a LangChain tool wrapper
+            async def tool_wrapper(tool_input: str, tool_name=mcp_tool.name):
+                """Wrapper to call MCP tool from LangChain."""
+                try:
+                    result = await adapter.call_tool(tool_name, {"input": tool_input})
+                    return str(result)
+                except Exception as e:
+                    return f"Error calling tool {tool_name}: {str(e)}"
+            
+            langchain_tool = Tool(
+                name=mcp_tool.name,
+                description=mcp_tool.description or f"Tool from {self.server_name} server",
+                func=lambda x, tn=mcp_tool.name: asyncio.create_task(tool_wrapper(x, tn))
+            )
+            langchain_tools.append(langchain_tool)
+        
+        return langchain_tools
+```
+
+**Step 3.1.4: ReAct Agent Creation**
+
+```python
+    def _create_agent_executor(self, langchain_tools):
+        """Create the ReAct agent executor with basic prompting."""
+        react_prompt = PromptTemplate.from_template("""
 You are a helpful AI assistant with access to external tools.
 
 Available tools:
@@ -525,28 +550,29 @@ Final Answer: the final answer to the original input question
 Question: {input}
 {agent_scratchpad}
 """)
-            
-            agent = create_react_agent(
-                llm=self.llm,
-                tools=langchain_tools,
-                prompt=react_prompt
-            )
-            
-            self.agent_executor = AgentExecutor(
-                agent=agent,
-                tools=langchain_tools,
-                verbose=Config.AGENT_CONFIG["verbose"],
-                max_iterations=Config.AGENT_CONFIG["max_iterations"],
-                handle_parsing_errors=True
-            )
-            
-            logger.info(f"Initialized basic agent with {len(langchain_tools)} tools from {self.server_name}")
-            return True
-            
-        except Exception as e:
-            logger.error(f"Failed to initialize basic agent: {e}")
-            return False
+        
+        return self._build_executor(langchain_tools, react_prompt)
     
+    def _build_executor(self, langchain_tools, react_prompt):
+        """Build the agent executor with configuration."""
+        agent = create_react_agent(
+            llm=self.llm,
+            tools=langchain_tools,
+            prompt=react_prompt
+        )
+        
+        return AgentExecutor(
+            agent=agent,
+            tools=langchain_tools,
+            verbose=Config.AGENT_CONFIG["verbose"],
+            max_iterations=Config.AGENT_CONFIG["max_iterations"],
+            handle_parsing_errors=True
+        )
+```
+
+**Step 3.1.5: Query Execution**
+
+```python
     async def run(self, query: str) -> str:
         """Run the agent with a query."""
         if not self.agent_executor:
@@ -560,34 +586,6 @@ Question: {input}
         except Exception as e:
             logger.error(f"Agent execution failed: {e}")
             return f"I encountered an error while processing your request: {str(e)}"
-
-# Example usage function
-async def run_basic_weather_agent():
-    """Example of running a basic weather agent."""
-    # Initialize MCP manager
-    manager = MCPServerManager(Config.MCP_SERVERS)
-    
-    async with manager.managed_servers():
-        # Create and initialize agent
-        agent = BasicMCPAgent("weather", manager)
-        
-        if await agent.initialize():
-            # Test queries
-            queries = [
-                "What's the weather like in London?",
-                "Can you give me a 5-day forecast for Tokyo?",
-                "Compare the weather between New York and Sydney"
-            ]
-            
-            for query in queries:
-                print(f"\n🤔 Query: {query}")
-                result = await agent.run(query)
-                print(f"🤖 Agent: {result}")
-        else:
-            print("Failed to initialize agent")
-
-if __name__ == "__main__":
-    asyncio.run(run_basic_weather_agent())
 ```
 
 **Key concepts in our basic agent:**
@@ -596,9 +594,17 @@ if __name__ == "__main__":
 - **Error Handling**: Graceful degradation when tools fail
 - **Async Support**: Non-blocking execution for better performance
 
+**Learning progression:**
+- **Single server focus** helps understand the integration pattern
+- **Clear separation** between initialization and execution
+- **Modular design** makes it easy to extend to multiple servers
+- **Comprehensive logging** aids in debugging and monitoring
+
 ### Step 3.2: Multi-Tool Agent with Advanced Reasoning
 
-Now let's build a more sophisticated agent that can use multiple MCP servers intelligently:
+Now let's build a more sophisticated agent that can use multiple MCP servers intelligently. This involves several advanced concepts:
+
+**Step 3.2.1: Agent Architecture**
 
 ```python
 # agents/multi_tool_agent.py
@@ -625,7 +631,11 @@ class MultiToolMCPAgent:
         self.agent_executor = None
         self.memory = None
         self.available_tools = {}
-    
+```
+
+**Step 3.2.2: Memory and Tool Collection**
+
+```python
     async def initialize(self) -> bool:
         """Initialize the agent with LLM, tools, and memory."""
         try:
@@ -650,8 +660,50 @@ class MultiToolMCPAgent:
                 logger.error("No tools available from MCP servers")
                 return False
             
-            # Create enhanced ReAct agent with better prompting
-            react_prompt = PromptTemplate.from_template("""
+            # Create the agent executor with enhanced prompting
+            self.agent_executor = self._create_enhanced_agent(langchain_tools)
+            
+            tool_count = len(langchain_tools)
+            server_count = len(self.available_tools)
+            logger.info(f"Initialized multi-tool agent with {tool_count} tools from {server_count} servers")
+            
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize multi-tool agent: {e}")
+            return False
+```
+
+**Step 3.2.3: Enhanced Agent Prompting Foundation**
+
+This segment creates the enhanced prompt template with clear instructions:
+
+```python
+    def _create_enhanced_agent(self, langchain_tools):
+        """Create an enhanced ReAct agent with better prompting."""
+        react_prompt = PromptTemplate.from_template("""
+You are an intelligent AI assistant with access to multiple specialized tools.
+You can use weather information, file system operations, and database queries to help users.
+
+INSTRUCTIONS:
+1. Analyze the user's request carefully
+2. Identify which tools might be helpful
+3. Use tools in logical sequence
+4. Provide comprehensive, helpful responses
+5. If a tool fails, try alternative approaches
+
+Available tools:
+{tools}
+""")
+```
+
+**Step 3.2.4: ReAct Pattern Template**
+
+This segment defines the reasoning format for the agent:
+
+```python
+        # Complete the prompt template with ReAct format
+        react_prompt = PromptTemplate.from_template("""
 You are an intelligent AI assistant with access to multiple specialized tools.
 You can use weather information, file system operations, and database queries to help users.
 
@@ -682,232 +734,52 @@ Final Answer: [provide detailed, helpful response]
 Question: {input}
 {agent_scratchpad}
 """)
-            
-            agent = create_react_agent(
-                llm=self.llm,
-                tools=langchain_tools,
-                prompt=react_prompt
-            )
-            
-            self.agent_executor = AgentExecutor(
-                agent=agent,
-                tools=langchain_tools,
-                memory=self.memory,
-                verbose=Config.AGENT_CONFIG["verbose"],
-                max_iterations=Config.AGENT_CONFIG["max_iterations"],
-                handle_parsing_errors=True,
-                return_intermediate_steps=True
-            )
-            
-            tool_count = len(langchain_tools)
-            server_count = len(self.available_tools)
-            logger.info(f"Initialized multi-tool agent with {tool_count} tools from {server_count} servers")
-            
-            return True
-            
-        except Exception as e:
-            logger.error(f"Failed to initialize multi-tool agent: {e}")
-            return False
-    
-    async def _collect_all_tools(self) -> List[Tool]:
-        """Collect and wrap tools from all available MCP servers."""
-        langchain_tools = []
-        
-        # Get all available tools from all servers
-        all_tools = await self.mcp_manager.get_all_tools()
-        
-        for server_name, tool_names in all_tools.items():
-            adapter = await self.mcp_manager.get_adapter(server_name)
-            if not adapter:
-                continue
-            
-            # Get detailed tool information
-            mcp_tools = await adapter.list_tools()
-            self.available_tools[server_name] = mcp_tools
-            
-            for mcp_tool in mcp_tools:
-                # Create async wrapper for each tool
-                async def create_tool_wrapper(server_name, tool_name):
-                    async def tool_wrapper(tool_input: str):
-                        try:
-                            adapter = await self.mcp_manager.get_adapter(server_name)
-                            if not adapter:
-                                return f"Server {server_name} is not available"
-                            
-                            # Parse input if it's JSON-like
-                            try:
-                                import json
-                                if tool_input.strip().startswith('{'):
-                                    tool_args = json.loads(tool_input)
-                                else:
-                                    tool_args = {"input": tool_input}
-                            except:
-                                tool_args = {"input": tool_input}
-                            
-                            result = await adapter.call_tool(tool_name, tool_args)
-                            return str(result)
-                            
-                        except Exception as e:
-                            logger.warning(f"Tool {tool_name} failed: {e}")
-                            return f"Error using {tool_name}: {str(e)}"
-                    
-                    return tool_wrapper
-                
-                # Create the wrapper
-                wrapper = await create_tool_wrapper(server_name, mcp_tool.name)
-                
-                # Enhanced tool description with server context
-                enhanced_description = f"""
-{mcp_tool.description or f'Tool from {server_name} server'}
-
-Server: {server_name}
-Tool: {mcp_tool.name}
-Use this tool when you need to: {self._get_tool_use_case(server_name, mcp_tool.name)}
-""".strip()
-                
-                langchain_tool = Tool(
-                    name=f"{server_name}_{mcp_tool.name}",
-                    description=enhanced_description,
-                    func=lambda x, w=wrapper: asyncio.create_task(w(x))
-                )
-                langchain_tools.append(langchain_tool)
-        
-        return langchain_tools
-    
-    def _get_tool_use_case(self, server_name: str, tool_name: str) -> str:
-        """Provide contextual use case descriptions for tools."""
-        use_cases = {
-            "weather": {
-                "get_current_weather": "get current weather conditions for a specific city",
-                "get_weather_forecast": "get multi-day weather predictions for planning"
-            },
-            "filesystem": {
-                "read_file": "read the contents of text files",
-                "write_file": "create or update files with content", 
-                "list_directory": "see what files and folders exist in a directory",
-                "search_files": "find files by name or search content within files"
-            },
-            "database": {
-                "query_database": "retrieve information from the database",
-                "insert_record": "add new data to the database",
-                "update_record": "modify existing database records"
-            }
-        }
-        
-        return use_cases.get(server_name, {}).get(tool_name, f"perform {tool_name} operations")
-    
-    async def run_conversation(self, query: str) -> Dict[str, Any]:
-        """Run the agent and return detailed results."""
-        if not self.agent_executor:
-            return {
-                "output": "Agent not initialized. Call initialize() first.",
-                "error": "Agent not initialized"
-            }
-        
-        try:
-            logger.info(f"Processing query: {query}")
-            
-            result = await self.agent_executor.ainvoke({"input": query})
-            
-            return {
-                "output": result["output"],
-                "intermediate_steps": result.get("intermediate_steps", []),
-                "success": True
-            }
-        
-        except Exception as e:
-            logger.error(f"Agent conversation failed: {e}")
-            return {
-                "output": f"I encountered an error while processing your request: {str(e)}",
-                "error": str(e),
-                "success": False
-            }
-    
-    async def get_conversation_history(self) -> str:
-        """Get the current conversation history."""
-        if self.memory:
-            return self.memory.buffer
-        return "No conversation history available"
-    
-    def clear_memory(self):
-        """Clear the conversation memory."""
-        if self.memory:
-            self.memory.clear()
-            logger.info("Conversation memory cleared")
-
-# Example usage with interactive conversation
-async def run_interactive_agent():
-    """Interactive example of the multi-tool agent."""
-    from rich.console import Console
-    from rich.panel import Panel
-    from rich.markdown import Markdown
-    
-    console = Console()
-    
-    # Initialize MCP manager
-    manager = MCPServerManager(Config.MCP_SERVERS)
-    
-    async with manager.managed_servers():
-        # Create and initialize agent
-        agent = MultiToolMCPAgent(manager)
-        
-        if not await agent.initialize():
-            console.print("❌ Failed to initialize agent", style="red")
-            return
-        
-        console.print(Panel.fit(
-            "🤖 Multi-Tool Agent Ready!\n"
-            "I can help you with weather, files, and database operations.\n"
-            "Type 'quit' to exit, 'clear' to clear memory, or 'history' to see conversation history.",
-            title="Agent Initialized"
-        ))
-        
-        while True:
-            try:
-                # Get user input
-                query = console.input("\n💬 You: ")
-                
-                if query.lower() in ['quit', 'exit', 'q']:
-                    break
-                elif query.lower() == 'clear':
-                    agent.clear_memory()
-                    console.print("🧹 Memory cleared!", style="green")
-                    continue
-                elif query.lower() == 'history':
-                    history = await agent.get_conversation_history()
-                    console.print(Panel(history, title="Conversation History"))
-                    continue
-                
-                # Process query
-                console.print("🤔 Thinking...", style="yellow")
-                result = await agent.run_conversation(query)
-                
-                if result["success"]:
-                    # Display response
-                    response_panel = Panel(
-                        Markdown(result["output"]),
-                        title="🤖 Agent Response",
-                        border_style="green"
-                    )
-                    console.print(response_panel)
-                    
-                    # Show intermediate steps if verbose
-                    if Config.AGENT_CONFIG["verbose"] and result.get("intermediate_steps"):
-                        console.print("\n🔍 Reasoning steps:", style="dim")
-                        for i, step in enumerate(result["intermediate_steps"], 1):
-                            console.print(f"  {i}. {step}", style="dim")
-                else:
-                    console.print(f"❌ Error: {result['output']}", style="red")
-                    
-            except KeyboardInterrupt:
-                console.print("\n👋 Goodbye!", style="blue")
-                break
-            except Exception as e:
-                console.print(f"❌ Unexpected error: {e}", style="red")
-
-if __name__ == "__main__":
-    asyncio.run(run_interactive_agent())
 ```
+
+**Step 3.2.5: Agent Creation and Executor Setup**
+
+This segment creates the agent and configures the executor:
+
+```python
+        # Create the ReAct agent with our enhanced prompt
+        agent = create_react_agent(
+            llm=self.llm,
+            tools=langchain_tools,
+            prompt=react_prompt
+        )
+        
+        # Configure the agent executor with enhanced features
+        return AgentExecutor(
+            agent=agent,
+            tools=langchain_tools,
+            memory=self.memory,
+            verbose=Config.AGENT_CONFIG["verbose"],
+            max_iterations=Config.AGENT_CONFIG["max_iterations"],
+            handle_parsing_errors=True,
+            return_intermediate_steps=True
+        )
+```
+
+**Enhanced prompting benefits:**
+- **Clear instructions**: Step-by-step guidance for tool usage
+- **Context awareness**: Includes conversation history
+- **Error recovery**: Instructions for handling tool failures
+- **Structured reasoning**: ReAct format ensures logical thinking
+- **Flexible execution**: Configurable iterations and error handling
+
+**Complete implementation:** See `src/session3/complete_examples/multi_tool_agent_complete.py` for the full implementation with advanced features including:
+- Tool collection from multiple servers
+- Enhanced tool descriptions with use case context
+- Conversation memory and history management
+- Comprehensive error handling and recovery
+- Interactive console interface with rich formatting
+
+**Key advances over basic agent:**
+- **Multi-server support**: Uses tools from all available MCP servers
+- **Conversation memory**: Maintains context across interactions
+- **Enhanced prompting**: Better instructions for tool selection
+- **Rich descriptions**: Tools include contextual use case information
+- **Error recovery**: Graceful handling of server failures
 
 ---
 
@@ -915,7 +787,11 @@ if __name__ == "__main__":
 
 ### Step 4.1: Creating a Research Workflow
 
-LangGraph allows us to create complex, stateful workflows. Let's build a research workflow that combines multiple tools systematically:
+LangGraph allows us to create complex, stateful workflows. Let's build a research workflow that combines multiple tools systematically. We'll break this down into logical segments to understand each component.
+
+**Step 4.1.1: Workflow Imports and State Definition**
+
+This segment sets up the foundation for our LangGraph workflow, including the state management:
 
 ```python
 # workflows/research_workflow.py
@@ -931,7 +807,7 @@ from config import Config
 
 @dataclass
 class ResearchState:
-    """State for the research workflow."""
+    """State for the research workflow - tracks data through each step."""
     query: str
     messages: List[Any] 
     research_plan: str = ""
@@ -940,7 +816,19 @@ class ResearchState:
     database_data: Dict = None
     final_report: str = ""
     step_count: int = 0
+```
 
+**Why this structure?**
+- **Dataclass**: Provides type hints and automatic equality/repr methods
+- **State persistence**: Each node can access and modify shared state
+- **Clear data flow**: Separate fields for each research domain
+- **Progress tracking**: Step count helps monitor workflow execution
+
+**Step 4.1.2: Workflow Class Foundation**
+
+This segment establishes the main workflow class and graph setup:
+
+```python
 class ResearchWorkflow:
     """Advanced research workflow using LangGraph and multiple MCP servers."""
     
@@ -949,19 +837,26 @@ class ResearchWorkflow:
         self.workflow = None
     
     async def build_workflow(self) -> StateGraph:
-        """Build the LangGraph workflow."""
-        
+        """Build the LangGraph workflow graph."""
         # Define the workflow graph
         workflow = StateGraph(ResearchState)
         
-        # Add nodes
+        # Add processing nodes
         workflow.add_node("planner", self._planning_node)
         workflow.add_node("weather_researcher", self._weather_research_node)
         workflow.add_node("file_researcher", self._file_research_node)
         workflow.add_node("database_researcher", self._database_research_node)
         workflow.add_node("synthesizer", self._synthesis_node)
         
-        # Add edges (workflow flow)
+        return workflow
+```
+
+**Step 4.1.3: Workflow Orchestration and Flow**
+
+This segment defines how the workflow steps connect and execute:
+
+```python
+        # Add edges (workflow execution flow)
         workflow.set_entry_point("planner")
         workflow.add_edge("planner", "weather_researcher")
         workflow.add_edge("weather_researcher", "file_researcher")
@@ -969,16 +864,28 @@ class ResearchWorkflow:
         workflow.add_edge("database_researcher", "synthesizer")
         workflow.add_edge("synthesizer", END)
         
+        # Compile the workflow for execution
         self.workflow = workflow.compile()
         return self.workflow
-    
+```
+
+**Key workflow design principles:**
+- **Sequential processing**: Each step builds on the previous one
+- **Modular nodes**: Each research domain has its own processing node
+- **Clear flow**: Linear progression from planning to synthesis
+- **Compiled execution**: Optimized for performance
+
+**Step 4.1.4: Planning Node Implementation**
+
+This segment handles intelligent planning based on query analysis:
+
+```python
     async def _planning_node(self, state: ResearchState) -> ResearchState:
-        """Plan the research approach based on the query."""
-        # Simple planning logic - in production, use LLM for planning
+        """Plan the research approach based on query keywords."""
         query_lower = state.query.lower()
-        
         plan_elements = []
         
+        # Analyze query for different research domains
         if any(word in query_lower for word in ["weather", "climate", "temperature", "forecast"]):
             plan_elements.append("- Gather weather information from weather server")
         
@@ -988,13 +895,25 @@ class ResearchWorkflow:
         if any(word in query_lower for word in ["database", "record", "history", "log"]):
             plan_elements.append("- Query database for historical information")
         
+        # Build research plan
         state.research_plan = "Research Plan:\n" + "\n".join(plan_elements) if plan_elements else "General research approach"
         state.step_count += 1
-        
         return state
-    
+```
+
+**Planning logic benefits:**
+- **Keyword analysis**: Determines which tools to use
+- **Dynamic planning**: Adapts to different query types
+- **Documentation**: Creates clear plan for transparency
+- **Extensible**: Easy to add new research domains
+
+**Step 4.1.5: Weather Research Node**
+
+This segment handles weather-specific research with proper error handling:
+
+```python
     async def _weather_research_node(self, state: ResearchState) -> ResearchState:
-        """Research weather-related information."""
+        """Research weather-related information if relevant."""
         if "weather" not in state.query.lower():
             state.weather_data = {"skipped": True, "reason": "No weather terms in query"}
             return state
@@ -1002,7 +921,7 @@ class ResearchWorkflow:
         try:
             adapter = await self.mcp_manager.get_adapter("weather")
             if adapter:
-                # Extract potential city names (simple approach)
+                # Extract potential city names from query
                 cities = self._extract_cities_from_query(state.query)
                 
                 weather_results = {}
@@ -1011,7 +930,7 @@ class ResearchWorkflow:
                         result = await adapter.call_tool("get_current_weather", {"city": city})
                         weather_results[city] = result
                     except:
-                        pass
+                        pass  # Continue with other cities if one fails
                 
                 state.weather_data = weather_results if weather_results else {"error": "No weather data found"}
             else:
@@ -1022,19 +941,25 @@ class ResearchWorkflow:
         
         state.step_count += 1
         return state
-    
+```
+
+**Step 4.1.6: File System Research Node**
+
+This segment handles file system searches with term extraction:
+
+```python
     async def _file_research_node(self, state: ResearchState) -> ResearchState:
-        """Research file-based information."""
+        """Research file-based information using extracted search terms."""
         try:
             adapter = await self.mcp_manager.get_adapter("filesystem")
             if adapter:
-                # Search for relevant files
+                # Extract search terms from the original query
                 search_terms = self._extract_search_terms(state.query)
                 
                 file_results = {}
                 for term in search_terms:
                     try:
-                        # Search by filename
+                        # Search for files matching the term
                         result = await adapter.call_tool("search_files", {
                             "pattern": f"*{term}*",
                             "search_type": "name"
@@ -1042,7 +967,7 @@ class ResearchWorkflow:
                         if result:
                             file_results[f"files_matching_{term}"] = result
                     except:
-                        pass
+                        pass  # Continue with other terms if one fails
                 
                 state.file_data = file_results if file_results else {"info": "No relevant files found"}
             else:
@@ -1053,13 +978,19 @@ class ResearchWorkflow:
         
         state.step_count += 1
         return state
-    
+```
+
+**Step 4.1.7: Database Research and Synthesis Nodes**
+
+This segment handles database queries and final report synthesis:
+
+```python
     async def _database_research_node(self, state: ResearchState) -> ResearchState:
-        """Research database information."""
+        """Research database information (placeholder for future implementation)."""
         try:
             adapter = await self.mcp_manager.get_adapter("database")
             if adapter:
-                # Simulate database queries based on the research query
+                # Placeholder for actual database integration
                 state.database_data = {
                     "info": "Database research completed",
                     "note": "Database server integration would go here"
@@ -1072,16 +1003,22 @@ class ResearchWorkflow:
         
         state.step_count += 1
         return state
-    
+```
+
+**Step 4.1.8: Report Synthesis Logic**
+
+This segment combines all research results into a comprehensive report:
+
+```python
     async def _synthesis_node(self, state: ResearchState) -> ResearchState:
-        """Synthesize all research into a final report."""
+        """Synthesize all research into a comprehensive final report."""
         report_sections = []
         
-        # Add query and plan
+        # Add header and research plan
         report_sections.append(f"# Research Report\n\n**Query:** {state.query}\n")
         report_sections.append(f"**Research Plan:**\n{state.research_plan}\n")
         
-        # Add weather findings
+        # Add weather findings if available
         if state.weather_data and not state.weather_data.get("skipped"):
             report_sections.append("## Weather Information")
             if "error" in state.weather_data:
@@ -1091,6 +1028,16 @@ class ResearchWorkflow:
                     if isinstance(data, dict) and "temp" in data:
                         report_sections.append(f"- **{city}**: {data['temp']}{data.get('units', '°C')}, {data.get('condition', 'N/A')}")
         
+        return self._finalize_report(state, report_sections)
+```
+
+**Step 4.1.9: Report Finalization and Helper Methods**
+
+This segment completes the report and provides utility functions:
+
+```python
+    def _finalize_report(self, state: ResearchState, report_sections: List[str]) -> ResearchState:
+        """Complete the report with file and database findings."""
         # Add file findings
         if state.file_data:
             report_sections.append("\n## File System Research")
@@ -1113,102 +1060,49 @@ class ResearchWorkflow:
         
         state.final_report = "\n".join(report_sections)
         state.step_count += 1
-        
         return state
-    
+```
+
+**Step 4.1.10: Utility Methods and Workflow Execution**
+
+This segment provides text processing and workflow execution methods:
+
+```python
     def _extract_cities_from_query(self, query: str) -> List[str]:
         """Extract potential city names from query (simple implementation)."""
-        # In production, use NER or more sophisticated methods
         common_cities = ["London", "New York", "Tokyo", "Sydney", "Paris", "Berlin", "Moscow"]
-        found_cities = []
-        
-        query_words = query.lower().split()
-        for city in common_cities:
-            if city.lower() in query.lower():
-                found_cities.append(city)
-        
+        found_cities = [city for city in common_cities if city.lower() in query.lower()]
         return found_cities or ["London"]  # Default to London
     
     def _extract_search_terms(self, query: str) -> List[str]:
-        """Extract search terms from query."""
-        # Simple keyword extraction
+        """Extract meaningful search terms from query."""
         stop_words = {"the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with", "by"}
-        words = query.lower().split()
-        return [word for word in words if len(word) > 3 and word not in stop_words][:3]
+        words = [word for word in query.lower().split() if len(word) > 3 and word not in stop_words]
+        return words[:3]  # Limit to 3 terms for efficiency
     
     async def run_research(self, query: str) -> Dict[str, Any]:
-        """Run the complete research workflow."""
+        """Execute the complete research workflow."""
         if not self.workflow:
             await self.build_workflow()
         
-        # Initialize state
-        initial_state = ResearchState(
-            query=query,
-            messages=[HumanMessage(content=query)]
-        )
+        # Initialize state with the user query
+        initial_state = ResearchState(query=query, messages=[HumanMessage(content=query)])
         
         try:
-            # Run the workflow
             final_state = await self.workflow.ainvoke(initial_state)
-            
             return {
-                "success": True,
-                "query": query,
-                "report": final_state.final_report,
-                "steps": final_state.step_count,
-                "research_plan": final_state.research_plan
+                "success": True, "query": query, "report": final_state.final_report,
+                "steps": final_state.step_count, "research_plan": final_state.research_plan
             }
-        
         except Exception as e:
-            return {
-                "success": False,
-                "query": query,
-                "error": str(e),
-                "report": f"Research workflow failed: {str(e)}"
-            }
-
-# Example usage
-async def run_research_example():
-    """Example of running the research workflow."""
-    from rich.console import Console
-    from rich.panel import Panel
-    from rich.markdown import Markdown
-    
-    console = Console()
-    
-    # Initialize MCP manager
-    manager = MCPServerManager(Config.MCP_SERVERS)
-    
-    async with manager.managed_servers():
-        # Create research workflow
-        researcher = ResearchWorkflow(manager)
-        
-        # Example queries
-        queries = [
-            "What's the weather like in London and how does it compare to Tokyo?",
-            "Find any documentation files about weather patterns",
-            "Research climate data and file system information"
-        ]
-        
-        for query in queries:
-            console.print(f"\n📊 Research Query: {query}")
-            console.print("🔬 Conducting research...", style="yellow")
-            
-            result = await researcher.run_research(query)
-            
-            if result["success"]:
-                report_panel = Panel(
-                    Markdown(result["report"]),
-                    title=f"Research Report ({result['steps']} steps)",
-                    border_style="green"
-                )
-                console.print(report_panel)
-            else:
-                console.print(f"❌ Research failed: {result['error']}", style="red")
-
-if __name__ == "__main__":
-    asyncio.run(run_research_example())
+            return {"success": False, "query": query, "error": str(e), "report": f"Research workflow failed: {str(e)}"}
 ```
+
+**Complete implementation:** See `src/session3/complete_examples/research_workflow_complete.py` for the full implementation with:
+- Advanced error recovery and retry logic
+- Parallel research execution for better performance
+- Rich console interface for interactive use
+- Comprehensive logging and debugging features
 
 ---
 

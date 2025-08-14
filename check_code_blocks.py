@@ -42,15 +42,15 @@ def analyze_code_blocks(file_path):
     return code_blocks
 
 def main():
-    framework_dir = Path('01_frameworks')
+    mcp_dir = Path('03_mcp-adk-a2a')
     
-    print("=== CODE BLOCK ANALYSIS FOR MODULE 01 ===\n")
+    print("=== CODE BLOCK ANALYSIS FOR MODULE 03 (MCP-ADK-A2A) ===\n")
     
     all_long_blocks = []
     
-    for i in range(11):  # Sessions 0-10
-        session_files = list(framework_dir.glob(f'Session{i}_*.md'))
-        session_files = [f for f in session_files if 'Test_Solutions' not in f.name]
+    for i in range(10):  # Sessions 0-9
+        session_files = list(mcp_dir.glob(f'Session{i}_*.md'))
+        session_files = [f for f in session_files if 'Test_Solutions' not in f.name and 'solution' not in f.name]
         
         if not session_files:
             continue

@@ -91,10 +91,13 @@ data:
 
 ### Step 1.2: Redis Deployment
 
-Deploy Redis as the message queue and state store:
+**Deployment Progression: Foundation → Message Queue → State Management**
 
+Redis serves as the central message queue and state store for agent communication. Let's deploy it step by step.
+
+**Stage 1: Basic Redis Deployment Metadata**
 ```yaml
-# k8s/redis-deployment.yaml
+# k8s/redis-deployment.yaml - Deployment foundation
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -102,8 +105,16 @@ metadata:
   namespace: agent-system
   labels:
     app: redis
+    component: message-queue
+    tier: data
+```
+
+**Why This Structure?** Labels help Kubernetes organize resources and enable proper service discovery for multi-agent coordination.
+
+**Stage 2: Redis Pod Configuration**
+```yaml
 spec:
-  replicas: 1
+  replicas: 1                    # Single instance for simplicity
   selector:
     matchLabels:
       app: redis
@@ -111,41 +122,57 @@ spec:
     metadata:
       labels:
         app: redis
+        component: message-queue
+```
+
+**Stage 3: Container and Security Setup**
+```yaml
     spec:
       containers:
       - name: redis
-        image: redis:7-alpine
+        image: redis:7-alpine     # Latest stable Redis
         ports:
         - containerPort: 6379
         env:
-        - name: REDIS_PASSWORD
+        - name: REDIS_PASSWORD    # Secure password from secrets
           valueFrom:
             secretKeyRef:
               name: agent-secrets
               key: redis-password
 ```
 
-Configure Redis startup and health checks:
+**Stage 4: Redis Startup and Resource Management**
+
+Configure Redis with secure startup and production resource limits:
 
 ```yaml
         command:
         - redis-server
         - --requirepass
-        - $(REDIS_PASSWORD)
+        - $(REDIS_PASSWORD)        # Secure Redis with password
         resources:
-          requests:
+          requests:                # Minimum guaranteed resources
             memory: "256Mi"
             cpu: "250m"
-          limits:
+          limits:                  # Maximum allowed resources
             memory: "512Mi"
             cpu: "500m"
-        volumeMounts:
-        - name: redis-data
-          mountPath: /data
 ```
 
-Add health probes for Redis:
+**Production Insight:** Resource limits prevent Redis from consuming excessive resources and impacting agent performance.
 
+**Stage 5: Data Persistence Configuration**
+```yaml
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data         # Redis data directory for persistence
+```
+
+**Stage 6: Health Monitoring Setup**
+
+Production Redis requires comprehensive health monitoring for reliability:
+
+**Liveness Probe - Is Redis Running?**
 ```yaml
         livenessProbe:
           exec:
@@ -155,8 +182,12 @@ Add health probes for Redis:
             - -a
             - $(REDIS_PASSWORD)
             - ping
-          initialDelaySeconds: 30
-          periodSeconds: 10
+          initialDelaySeconds: 30     # Wait for Redis startup
+          periodSeconds: 10           # Check every 10 seconds
+```
+
+**Readiness Probe - Can Redis Accept Connections?**
+```yaml
         readinessProbe:
           exec:
             command:
@@ -165,17 +196,24 @@ Add health probes for Redis:
             - -a
             - $(REDIS_PASSWORD)
             - ping
-          initialDelaySeconds: 5
-          periodSeconds: 5
+          initialDelaySeconds: 5      # Quick readiness check
+          periodSeconds: 5            # Frequent ready checks
 ```
 
-Complete Redis configuration with persistence and service:
+**Stage 7: Storage and Service Configuration**
 
+Complete the Redis deployment with persistent storage and network access:
+
+**Volume Configuration**
 ```yaml
       volumes:
       - name: redis-data
         persistentVolumeClaim:
-          claimName: redis-pvc
+          claimName: redis-pvc      # Link to persistent volume
+```
+
+**Service for Agent Access**
+```yaml
 ---
 apiVersion: v1
 kind: Service
@@ -186,8 +224,12 @@ spec:
   selector:
     app: redis
   ports:
-  - port: 6379
-    targetPort: 6379
+  - port: 6379                    # Standard Redis port
+    targetPort: 6379              # Container port
+```
+
+**Persistent Volume Claim**
+```yaml
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -196,10 +238,10 @@ metadata:
   namespace: agent-system
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteOnce                 # Single-node access
   resources:
     requests:
-      storage: 10Gi
+      storage: 10Gi               # Storage for agent data
 ```
 
 ### Step 1.3: Agent Service Deployment
@@ -242,22 +284,28 @@ Configure the pod template with monitoring annotations:
         image: agent-registry/mcp-agent:v1.0.0
 ```
 
-Set up container ports and environment configuration:
+**Container Orchestration: Ports and Connectivity**
+
+Set up the agent's network ports for different communication protocols:
 
 ```yaml
         ports:
         - containerPort: 8080
-          name: http
+          name: http              # REST API for agent communication
         - containerPort: 8081
-          name: grpc  
+          name: grpc              # gRPC for high-performance calls  
         - containerPort: 9090
-          name: metrics
+          name: metrics           # Prometheus metrics endpoint
+```
+
+**Configuration Management: Redis Connection**
+```yaml
         env:
         - name: REDIS_HOST
           valueFrom:
             configMapKeyRef:
               name: agent-config
-              key: redis.host
+              key: redis.host     # Dynamic Redis host configuration
         - name: REDIS_PORT
           valueFrom:
             configMapKeyRef:
@@ -266,35 +314,38 @@ Set up container ports and environment configuration:
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: agent-secrets
+              name: agent-secrets # Secure password management
               key: redis-password
 ```
 
-Add API keys and additional environment variables:
-
+**Security Configuration: API Keys and Authentication**
 ```yaml
         - name: API_KEY
           valueFrom:
             secretKeyRef:
               name: agent-secrets
-              key: api-key
+              key: api-key        # External API authentication
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
               name: agent-secrets
-              key: jwt-secret
+              key: jwt-secret     # Token signing secret
         - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: "/secrets/google-cloud-key.json"
+          value: "/secrets/google-cloud-key.json"  # Cloud service auth
+```
+
+**Operational Configuration: Logging and Performance**
+```yaml
         - name: LOG_LEVEL
           valueFrom:
             configMapKeyRef:
               name: agent-config
-              key: log.level
+              key: log.level      # Centralized log level control
         - name: MAX_CONCURRENT_WORKFLOWS
           valueFrom:
             configMapKeyRef:
               name: agent-config
-              key: agent.max_concurrent_workflows
+              key: agent.max_concurrent_workflows  # Performance tuning
 ```
 
 Configure resource limits and volume mounts:
@@ -313,33 +364,42 @@ Configure resource limits and volume mounts:
           readOnly: true
 ```
 
-Add comprehensive health checks:
+**Production Health Monitoring: Three-Tier Probe Strategy**
 
+**Startup Probe - Initial Agent Bootstrapping**
+```yaml
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30    # Wait for agent initialization
+          periodSeconds: 10          # Check every 10 seconds
+          timeoutSeconds: 5          # 5-second timeout
+          failureThreshold: 10       # Allow up to 100 seconds startup
+```
+
+**Liveness Probe - Agent Process Health**
 ```yaml
         livenessProbe:
           httpGet:
             path: /health
             port: 8080
-          initialDelaySeconds: 60
-          periodSeconds: 30
-          timeoutSeconds: 10
-          failureThreshold: 3
+          initialDelaySeconds: 60    # Start after startup completes
+          periodSeconds: 30          # Check every 30 seconds
+          timeoutSeconds: 10         # Longer timeout for busy agents
+          failureThreshold: 3        # Restart after 3 failures
+```
+
+**Readiness Probe - Traffic Acceptance**
+```yaml
         readinessProbe:
           httpGet:
-            path: /ready
+            path: /ready             # Different endpoint for readiness
             port: 8080
           initialDelaySeconds: 30
-          periodSeconds: 10
+          periodSeconds: 10          # Frequent readiness checks
           timeoutSeconds: 5
-          failureThreshold: 3
-        startupProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 10
+          failureThreshold: 3        # Quick traffic removal
 ```
 
 Complete the deployment with volumes and security:
@@ -550,8 +610,11 @@ spec:
 
 ### Step 2.1: Metrics Collection System
 
-Create the core metrics class structure:
+**Observability Foundation: Metrics Collection Architecture**
 
+Start with the core monitoring framework that tracks agent performance and health.
+
+**Import Dependencies and Logger Setup**
 ```python
 # monitoring/agent_metrics.py
 import time
@@ -562,7 +625,10 @@ import logging
 from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
+```
 
+**Metrics Class Foundation**
+```python
 class AgentMetrics:
     """Comprehensive metrics collection for agent systems."""
     
@@ -572,8 +638,11 @@ class AgentMetrics:
         
         # Initialize Prometheus metrics
         self._initialize_metrics()
-        
-        # Start metrics server
+```
+
+**Start Metrics Server**
+```python
+        # Start metrics server for Prometheus scraping
         start_http_server(metrics_port)
         logger.info(f"Metrics server started on port {metrics_port}")
 ```

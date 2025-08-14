@@ -131,23 +131,51 @@ ACP was designed with the principle that **agent communication should be simple,
 
 ### ACP Communication Patterns
 
+ACP agents follow a simple registration and discovery pattern. Let's break this down step by step:
+
+**Step 1: Agent Metadata Definition**
+
+First, each agent defines its capabilities and endpoints:
+
 ```python
-# ACP Agent Registration
+# Basic agent class structure
 class LocalAgent:
     def __init__(self, name, capabilities):
         self.metadata = {
             "name": name,
             "version": "1.0",
             "capabilities": capabilities,
-            "endpoints": {
-                "communicate": "/agent/communicate",
-                "status": "/agent/status",
-                "discover": "/agent/discover"
-            },
-            "protocols": ["http", "websocket"],
-            "modalities": ["text", "audio", "video"]
         }
-    
+```
+
+**Step 2: Communication Endpoints**
+
+Next, we define how other agents can communicate with us:
+
+```python
+        # Add communication endpoints to metadata
+        self.metadata["endpoints"] = {
+            "communicate": "/agent/communicate",
+            "status": "/agent/status", 
+            "discover": "/agent/discover"
+        }
+```
+
+**Step 3: Protocol and Modality Support**
+
+Finally, we specify supported protocols and data types:
+
+```python
+        # Specify supported protocols and modalities
+        self.metadata["protocols"] = ["http", "websocket"]
+        self.metadata["modalities"] = ["text", "audio", "video"]
+```
+
+**Step 4: Registration and Discovery Methods**
+
+Now we implement the core ACP functionality:
+
+```python
     async def register_local(self, registry):
         # Register with local runtime registry
         await registry.register(self.metadata)
@@ -157,6 +185,8 @@ class LocalAgent:
         peers = await self.registry.discover(capability_filter)
         return peers
 ```
+
+Complete implementation available in `src/session0/acp_agent_example.py`
 
 ### ACP vs Other Protocols
 
@@ -195,31 +225,65 @@ class LocalAgent:
 
 ### A2A Architecture
 
+A2A creates a distributed network of specialized agents across organizations. Let's visualize this step by step:
+
+**Step 1: Organization A (Consumer Agents)**
+
+The requesting organization hosts agents that need services:
+
 ```mermaid
 graph TB
     subgraph "Organization A"
         A1[Travel Agent]
         A2[Payment Agent]
     end
-    
+```
+
+**Step 2: Organization B (Service Providers)**
+
+Service organizations provide specialized capabilities:
+
+```mermaid
+graph TB
     subgraph "Organization B"
         B1[Flight API Agent]
         B2[Hotel API Agent]
     end
-    
+```
+
+**Step 3: Organization C (Additional Services)**
+
+More organizations can provide complementary services:
+
+```mermaid
+graph TB
     subgraph "Organization C"
         C1[Weather Agent]
         C2[Currency Agent]
     end
-    
-    A1 <--> B1
-    A1 <--> B2
-    A1 <--> C1
-    A2 <--> C2
-    
-    A1 -.-> D[Agent Discovery Service]
-    B1 -.-> D
-    C1 -.-> D
+```
+
+**Step 4: Cross-Organization Communication**
+
+Agents communicate directly across organizational boundaries:
+
+```mermaid
+graph TB
+    A1[Travel Agent] <--> B1[Flight API Agent]
+    A1 <--> B2[Hotel API Agent]
+    A1 <--> C1[Weather Agent]
+    A2[Payment Agent] <--> C2[Currency Agent]
+```
+
+**Step 5: Discovery Service Integration**
+
+All agents register with discovery services for dynamic connection:
+
+```mermaid
+graph TB
+    A1[Travel Agent] -.-> D[Agent Discovery Service]
+    B1[Flight API Agent] -.-> D
+    C1[Weather Agent] -.-> D
 ```
 
 ### A2A Communication Flow
@@ -232,31 +296,58 @@ graph TB
 
 ### A2A Discovery Mechanism
 
-Agents advertise their capabilities through `.well-known/agent.json` files:
+Agents advertise their capabilities through `.well-known/agent.json` files. Let's break down this configuration:
+
+**Step 1: Basic Agent Information**
+
+Every agent starts with essential metadata:
 
 ```json
 {
   "agent": {
     "name": "flight_search_agent",
-    "version": "1.0",
+    "version": "1.0"
+  }
+}
+```
+
+**Step 2: Capability Definition**
+
+Next, we define what the agent can do:
+
+```json
     "capabilities": [
       {
         "name": "search_flights",
-        "description": "Search for available flights",
+        "description": "Search for available flights"
+      }
+    ]
+```
+
+**Step 3: Input Schema Specification**
+
+We specify exactly what parameters are needed:
+
+```json
         "input_schema": {
           "origin": "string",
           "destination": "string", 
           "departure_date": "date"
         }
-      }
-    ],
+```
+
+**Step 4: Communication Protocols**
+
+Finally, we define how other agents can connect:
+
+```json
     "communication": {
       "protocols": ["https", "websocket"],
       "authentication": ["oauth2", "api_key"]
     }
-  }
-}
 ```
+
+This standardized format allows automatic agent discovery and integration.
 
 ## The Integration: How MCP, ACP, and A2A Work Together
 
@@ -274,8 +365,13 @@ When combined, MCP, ACP, and A2A create a comprehensive ecosystem for agent comm
 
 Let's see how all three protocols work together in a real-world scenario:
 
+Let's build a comprehensive travel planning agent that demonstrates all three protocols working together:
+
+**Step 1: Agent Initialization and MCP Setup**
+
+First, we initialize the agent and connect to MCP servers for data access:
+
 ```python
-# Agent with MCP integration, ACP local coordination, and A2A communication
 class TravelPlannerAgent(Agent):
     def __init__(self):
         super().__init__(name="travel_planner")
@@ -284,24 +380,48 @@ class TravelPlannerAgent(Agent):
         self.mcp_client = MCPClient()
         self.mcp_client.connect_to_server("database://customer-preferences")
         self.mcp_client.connect_to_server("file://travel-templates")
-        
+```
+
+**Step 2: ACP and A2A Client Setup**
+
+Next, we set up local coordination and cross-platform communication:
+
+```python
         # ACP for local agent coordination
         self.acp_registry = ACPRegistry()
         
         # A2A client for cross-platform agent communication
         self.a2a_client = A2AClient()
-    
+```
+
+**Step 3: MCP Data Retrieval**
+
+The main planning method starts by retrieving user preferences via MCP:
+
+```python
     async def plan_comprehensive_trip(self, user_request: str):
         # Step 1: Use MCP to access customer preferences
         preferences = await self.mcp_client.call_tool(
             "query_preferences", 
             {"user_id": user_request.user_id}
         )
-        
+```
+
+**Step 4: ACP Local Processing**
+
+We use ACP to coordinate with local agents for data processing:
+
+```python
         # Step 2: Use ACP to coordinate with local agents for quick tasks
         local_agents = await self.acp_registry.discover("data_processing")
         processed_data = await local_agents[0].process(preferences)
-        
+```
+
+**Step 5: A2A Flight Search**
+
+Now we use A2A to discover and communicate with external flight agents:
+
+```python
         # Step 3: Use A2A to find and communicate with external flight agents
         flight_agents = await self.a2a_client.discover_agents(
             capability="flight_search"
@@ -320,7 +440,13 @@ class TravelPlannerAgent(Agent):
                 }
             )
             flights.extend(flight_options)
-        
+```
+
+**Step 6: A2A Hotel Search**
+
+Similarly, we find hotel agents across organizations:
+
+```python
         # Step 4: Use A2A to find hotel agents
         hotel_agents = await self.a2a_client.discover_agents(
             capability="hotel_search"
@@ -336,7 +462,13 @@ class TravelPlannerAgent(Agent):
                 "preferences": preferences
             }
         )
-        
+```
+
+**Step 7: MCP Itinerary Generation**
+
+Finally, we use MCP tools to generate the final itinerary:
+
+```python
         # Step 5: Use MCP to generate itinerary using templates
         itinerary = await self.mcp_client.call_tool(
             "generate_itinerary",
@@ -349,6 +481,8 @@ class TravelPlannerAgent(Agent):
         
         return itinerary
 ```
+
+Complete implementation available in `src/session0/travel_planner_example.py`
 
 ### Benefits of the Integrated Approach
 
@@ -530,16 +664,36 @@ The inspector helps identify common MCP server issues:
 
 ### MCP Inspector Configuration
 
-Create a configuration file to manage multiple server connections:
+Create a configuration file to manage multiple server connections step by step:
+
+**Step 1: Basic Server Configuration Structure**
+
+Start with the basic JSON structure:
 
 ```json
 {
   "servers": {
+  }
+}
+```
+
+**Step 2: Weather Server Configuration**
+
+Add a simple Python-based server:
+
+```json
     "weather": {
       "command": "python",
       "args": ["weather_server.py"],
       "transport": "stdio"
-    },
+    }
+```
+
+**Step 3: Database Server with Environment Variables**
+
+Add a Node.js server with database connection:
+
+```json
     "database": {
       "command": "node",
       "args": ["db_server.js"],
@@ -547,16 +701,23 @@ Create a configuration file to manage multiple server connections:
       "env": {
         "DB_CONNECTION": "postgresql://localhost:5432/mydb"
       }
-    },
+    }
+```
+
+**Step 4: File System Server with Custom Working Directory**
+
+Add a modular Python server with specific working directory:
+
+```json
     "file_system": {
       "command": "python", 
       "args": ["-m", "filesystem_server"],
       "transport": "stdio",
       "cwd": "/path/to/server"
     }
-  }
-}
 ```
+
+This modular configuration allows easy management of multiple MCP servers with different requirements.
 
 ### Complete MCP Inspector Workflow
 
