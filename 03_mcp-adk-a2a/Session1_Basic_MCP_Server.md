@@ -252,6 +252,10 @@ def get_weather_forecast(city: str, days: int = 3) -> List[Dict]:
 
 Resources are different from tools - they're data endpoints that can be queried but don't perform actions. Think of them as read-only data sources.
 
+**Step 2.4.1: Static Resource - Available Cities**
+
+First, let's create a simple resource that lists available cities:
+
 ```python
 @mcp.resource("weather://cities/available")
 def get_available_cities() -> Dict:
@@ -261,14 +265,26 @@ def get_available_cities() -> Dict:
         "last_updated": datetime.now().isoformat(),
         "total_count": 4
     }
+```
 
+**Step 2.4.2: Dynamic Resource - User Preferences**
+
+Next, let's create a dynamic resource that handles user-specific data:
+
+```python
 @mcp.resource("weather://user/preferences/{user_id}")
 def get_user_preferences(user_id: str) -> Dict:
     """Get weather preferences for a specific user."""
     # Check if we have saved preferences for this user
     if user_id in user_preferences:
         return user_preferences[user_id]
-    
+```
+
+**Step 2.4.3: Default Values**
+
+Always provide sensible defaults when data isn't available:
+
+```python
     # Return default preferences if user not found
     return {
         "user_id": user_id,
@@ -288,6 +304,10 @@ def get_user_preferences(user_id: str) -> Dict:
 
 Prompts are pre-configured templates that help AI agents understand common use cases for your server:
 
+**Step 2.5.1: Single City Weather Report Prompt**
+
+First, let's create a prompt for detailed weather reporting:
+
 ```python
 @mcp.prompt()
 def weather_report_prompt(city: str = "London") -> str:
@@ -299,7 +319,13 @@ def weather_report_prompt(city: str = "London") -> str:
     4. Best times for outdoor activities
     
     Use the available weather tools to gather this information."""
+```
 
+**Step 2.5.2: Multi-City Travel Comparison Prompt**
+
+Next, let's create a prompt for comparing weather across multiple cities:
+
+```python
 @mcp.prompt()
 def travel_weather_prompt(cities: List[str]) -> str:
     """Generate a travel weather comparison prompt."""
@@ -322,6 +348,10 @@ def travel_weather_prompt(cities: List[str]) -> str:
 
 Let's add a tool that can modify state, demonstrating how MCP servers can maintain user preferences:
 
+**Step 2.6.1: Tool Definition and Documentation**
+
+First, define the tool with clear parameter documentation:
+
 ```python
 @mcp.tool()
 def save_user_preferences(user_id: str, city: str, units: str = "celsius") -> Dict:
@@ -336,10 +366,23 @@ def save_user_preferences(user_id: str, city: str, units: str = "celsius") -> Di
     Returns:
         Saved preferences
     """
+```
+
+**Step 2.6.2: Input Validation**
+
+Always validate user input before processing:
+
+```python
     # Validate units parameter
     if units not in ["celsius", "fahrenheit"]:
         return {"error": "Units must be 'celsius' or 'fahrenheit'"}
-    
+```
+
+**Step 2.6.3: State Storage and Response**
+
+Store the preferences and return the saved data:
+
+```python
     # Save preferences to our in-memory store
     user_preferences[user_id] = {
         "user_id": user_id,
@@ -360,7 +403,11 @@ Testing is crucial for ensuring your MCP server works correctly. Let's create a 
 
 ### Step 3.1: Create Test Client
 
-This test client demonstrates the JSON-RPC protocol that MCP uses under the hood:
+This test client demonstrates the JSON-RPC protocol that MCP uses under the hood. Let's build it step by step:
+
+**Step 3.1.1: Basic Client Class Structure**
+
+First, set up the basic class with initialization:
 
 ```python
 # test_client.py
@@ -372,7 +419,13 @@ class MCPTestClient:
     def __init__(self, server_script: str):
         self.server_script = server_script
         self.process = None
-    
+```
+
+**Step 3.1.2: Server Process Management**
+
+Add methods to start and stop the server process:
+
+```python
     def start_server(self):
         """Start the MCP server process."""
         self.process = subprocess.Popen(
@@ -383,6 +436,18 @@ class MCPTestClient:
             text=True
         )
     
+    def stop_server(self):
+        """Stop the MCP server process."""
+        if self.process:
+            self.process.terminate()
+            self.process.wait()
+```
+
+**Step 3.1.3: JSON-RPC Communication**
+
+Implement the core communication method:
+
+```python
     def send_request(self, method: str, params: Dict[str, Any] = None) -> Dict:
         """Send JSON-RPC request to server."""
         request = {
@@ -399,13 +464,13 @@ class MCPTestClient:
         # Read response
         response_line = self.process.stdout.readline()
         return json.loads(response_line)
-    
-    def stop_server(self):
-        """Stop the MCP server process."""
-        if self.process:
-            self.process.terminate()
-            self.process.wait()
+```
 
+**Step 3.1.4: Test Implementation**
+
+Finally, implement the test logic:
+
+```python
 # Test the server
 if __name__ == "__main__":
     client = MCPTestClient("weather_server.py")
@@ -428,6 +493,8 @@ if __name__ == "__main__":
     finally:
         client.stop_server()
 ```
+
+Complete test client implementation available in `src/session1/test_client.py`
 
 **Testing insights:**
 - MCP uses JSON-RPC 2.0 protocol for communication
@@ -603,16 +670,32 @@ def find_warmest_city(cities: List[str]) -> Dict:
 <details>
 <summary>Click to see the solution</summary>
 
+**Step 1: Input Validation**
+
+Start with proper input validation:
+
 ```python
 @mcp.tool()
 def find_warmest_city(cities: List[str]) -> Dict:
     """Find the warmest city from a list."""
     if not cities:
         return {"error": "Cities list cannot be empty"}
-    
+```
+
+**Step 2: Initialize Tracking Variables**
+
+Set up variables to track the warmest city:
+
+```python
     warmest = None
     max_temp = float('-inf')
-    
+```
+
+**Step 3: Iterate and Compare**
+
+Loop through cities and find the warmest:
+
+```python
     for city in cities:
         weather = get_current_weather(city)
         if "error" not in weather:
@@ -625,12 +708,20 @@ def find_warmest_city(cities: List[str]) -> Dict:
                     "units": weather["units"],
                     "condition": weather["condition"]
                 }
-    
+```
+
+**Step 4: Return Results**
+
+Handle edge cases and return the result:
+
+```python
     if warmest is None:
         return {"error": "No valid weather data found for any city"}
     
     return warmest
 ```
+
+Complete solution available in `src/session1/weather_server.py`
 </details>
 
 ---

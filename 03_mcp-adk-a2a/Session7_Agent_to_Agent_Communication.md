@@ -171,10 +171,14 @@ class AgentProfile:
 
 ### Step 1.2: Agent Registry and Discovery
 
-Implement a centralized registry for agent discovery:
+The agent registry serves as the central directory for agent discovery and capability matching in an A2A network. It provides dynamic service discovery, health monitoring, and intelligent agent selection based on capabilities and availability.
+
+#### 1.2.1: Registry Foundation and Infrastructure Setup
+
+First, let's establish the registry infrastructure with Redis for scalable, distributed storage:
 
 ```python
-# a2a/registry.py
+# a2a/registry.py - Registry Foundation
 import asyncio
 import json
 from typing import Dict, List, Optional, Set
@@ -184,7 +188,15 @@ import logging
 from a2a.protocol import AgentProfile, AgentCapability, A2AMessage, MessageType
 
 logger = logging.getLogger(__name__)
+```
 
+**Key Concepts**: Redis provides fast, distributed storage for agent profiles and capability indices. The foundation supports both single-node and clustered Redis deployments for scalability.
+
+#### 1.2.2: Registry Class and Configuration Management
+
+The registry class manages configuration and connection state for distributed agent tracking:
+
+```python
 class AgentRegistry:
     """Centralized agent registry for discovery and coordination."""
     
@@ -198,7 +210,15 @@ class AgentRegistry:
         # Start background tasks
         self._heartbeat_task = None
         self._cleanup_task = None
-    
+```
+
+**Key Concepts**: The registry uses prefixed keys for organization and capability indices for fast lookup. Heartbeat configuration ensures timely detection of agent failures.
+
+#### 1.2.3: Agent Registration with Capability Indexing
+
+Agent registration creates both profile storage and capability indices for efficient discovery:
+
+```python
     async def register_agent(self, profile: AgentProfile) -> bool:
         """Register an agent in the registry."""
         try:
@@ -221,7 +241,15 @@ class AgentRegistry:
         except Exception as e:
             logger.error(f"Failed to register agent {profile.agent_id}: {e}")
             return False
-    
+```
+
+**Key Concepts**: Registration creates both profile storage and reverse capability indices. TTL expiration ensures automatic cleanup of dead agents, while capability indexing enables fast discovery queries.
+
+#### 1.2.4: Agent Unregistration and Cleanup
+
+Proper unregistration removes both profile data and capability index entries:
+
+```python
     async def unregister_agent(self, agent_id: str) -> bool:
         """Unregister an agent from the registry."""
         try:
@@ -244,7 +272,15 @@ class AgentRegistry:
         except Exception as e:
             logger.error(f"Failed to unregister agent {agent_id}: {e}")
             return False
-    
+```
+
+**Key Concepts**: Unregistration requires cleanup of both profile data and capability indices to prevent orphaned references. This ensures accurate discovery results.
+
+#### 1.2.5: Heartbeat Updates and Status Management
+
+Heartbeat updates maintain agent liveness information and current status:
+
+```python
     async def update_heartbeat(self, agent_id: str, load: float = None, 
                              status: str = None) -> bool:
         """Update agent heartbeat and status."""
@@ -272,7 +308,15 @@ class AgentRegistry:
         except Exception as e:
             logger.error(f"Failed to update heartbeat for {agent_id}: {e}")
             return False
-    
+```
+
+**Key Concepts**: Heartbeats update both liveness timestamps and dynamic status information like current load. This enables intelligent load balancing and availability decisions.
+
+#### 1.2.6: Capability-Based Agent Discovery
+
+Agent discovery uses capability indices for efficient matching of requirements to available agents:
+
+```python
     async def discover_agents(self, required_capabilities: List[str] = None,
                             status_filter: str = "active",
                             max_load: float = 0.8) -> List[AgentProfile]:
@@ -296,7 +340,15 @@ class AgentRegistry:
                 pattern = f"{self.registry_prefix}*"
                 keys = self.redis_client.keys(pattern)
                 candidate_agents = {key.decode().split(':')[-1] for key in keys}
-            
+```
+
+**Key Concepts**: Discovery uses set intersection to find agents with ALL required capabilities. Capability indices make this operation very fast even with many agents.
+
+#### 1.2.7: Agent Filtering and Selection
+
+After capability matching, additional filters ensure only suitable agents are selected:
+
+```python
             # Filter by status and load
             matching_agents = []
             for agent_id in candidate_agents:
@@ -317,7 +369,15 @@ class AgentRegistry:
         except Exception as e:
             logger.error(f"Failed to discover agents: {e}")
             return []
-    
+```
+
+**Key Concepts**: Multi-criteria filtering considers status, load, and liveness. Load-based sorting enables intelligent work distribution across available agents.
+
+#### 1.2.8: Profile Retrieval and Data Reconstruction
+
+Profile retrieval reconstructs agent objects from stored JSON data:
+
+```python
     async def get_agent_profile(self, agent_id: str) -> Optional[AgentProfile]:
         """Get detailed profile for a specific agent."""
         try:
@@ -340,7 +400,15 @@ class AgentRegistry:
         except Exception as e:
             logger.error(f"Failed to get profile for agent {agent_id}: {e}")
             return None
-    
+```
+
+**Key Concepts**: Profile retrieval handles JSON deserialization and object reconstruction, ensuring type safety and proper data structure restoration.
+
+#### 1.2.9: Agent Liveness Detection
+
+Liveness checking determines if agents are still responsive based on heartbeat timing:
+
+```python
     def _is_agent_alive(self, profile: AgentProfile) -> bool:
         """Check if agent is still alive based on heartbeat."""
         try:
@@ -351,7 +419,15 @@ class AgentRegistry:
             
         except Exception:
             return False
-    
+```
+
+**Key Concepts**: Liveness detection uses configurable timeout thresholds to determine agent availability. This prevents routing to dead or unresponsive agents.
+
+#### 1.2.10: Dead Agent Cleanup and Maintenance
+
+Automatic cleanup removes agents that have stopped sending heartbeats:
+
+```python
     async def cleanup_dead_agents(self):
         """Remove agents that haven't sent heartbeats."""
         try:
@@ -370,12 +446,20 @@ class AgentRegistry:
             logger.error(f"Error during cleanup: {e}")
 ```
 
+**Key Concepts**: Cleanup operations maintain registry hygiene by removing dead agents. This should run periodically to prevent accumulation of stale entries.
+
+**💡 Complete Implementation**: For advanced registry features including clustering and metrics, see [`src/session7/registry.py`](src/session7/registry.py) in the course materials.
+
 ### Step 1.3: Message Router
 
-Create a message routing system for A2A communication:
+The message router is the core component responsible for intelligent message routing between agents in an A2A network. Let's build it step by step, demonstrating the communication progression from discovery to coordination.
+
+#### 1.3.1: Router Foundation and Initialization
+
+First, let's establish the basic router infrastructure with dependency management:
 
 ```python
-# a2a/router.py
+# a2a/router.py - Router Foundation
 import asyncio
 import json
 from typing import Dict, List, Optional, Callable, Any
@@ -387,7 +471,15 @@ from a2a.protocol import A2AMessage, MessageType, Priority
 from a2a.registry import AgentRegistry
 
 logger = logging.getLogger(__name__)
+```
 
+**Key Concepts**: This foundation imports all necessary components for asynchronous message handling, HTTP communication, and integration with our A2A protocol and registry systems.
+
+#### 1.3.2: Router Class Structure and State Management
+
+Next, we define the router class with essential state management for tracking connections and pending operations:
+
+```python
 class MessageRouter:
     """Routes messages between agents in an A2A network."""
     
@@ -397,10 +489,20 @@ class MessageRouter:
         self.pending_requests: Dict[str, asyncio.Future] = {}
         self.message_queue: asyncio.Queue = asyncio.Queue()
         self.session: Optional[aiohttp.ClientSession] = None
-        
-        # Start message processing
         self._processor_task = None
-    
+```
+
+**Key Concepts**: The router maintains several critical data structures:
+- `message_handlers`: Maps actions to their handling functions
+- `pending_requests`: Tracks ongoing request-response pairs using futures
+- `message_queue`: Asynchronous queue for message processing
+- `session`: HTTP session for agent communication
+
+#### 1.3.3: Router Lifecycle Management
+
+Lifecycle management ensures proper startup and cleanup of the router's asynchronous components:
+
+```python
     async def start(self):
         """Start the message router."""
         self.session = aiohttp.ClientSession()
@@ -416,12 +518,28 @@ class MessageRouter:
             await self.session.close()
         
         logger.info("Message router stopped")
-    
+```
+
+**Key Concepts**: Proper lifecycle management prevents resource leaks and ensures graceful shutdown. The router starts a background task for message processing and maintains an HTTP session pool.
+
+#### 1.3.4: Handler Registration for Action Mapping
+
+Agent capabilities are exposed through registered handlers that map actions to executable functions:
+
+```python
     def register_handler(self, action: str, handler: Callable):
         """Register a message handler for a specific action."""
         self.message_handlers[action] = handler
         logger.info(f"Registered handler for action: {action}")
-    
+```
+
+**Key Concepts**: This registration system allows agents to expose their capabilities dynamically. When an agent receives a message with a specific action, the router can invoke the appropriate handler.
+
+#### 1.3.5: Direct Message Sending with Response Handling
+
+The core message sending functionality handles both fire-and-forget and request-response patterns:
+
+```python
     async def send_message(self, message: A2AMessage, 
                          wait_for_response: bool = None) -> Optional[A2AMessage]:
         """Send a message to another agent."""
@@ -452,7 +570,15 @@ class MessageRouter:
         except Exception as e:
             logger.error(f"Failed to send message: {e}")
             return None
-    
+```
+
+**Key Concepts**: This method demonstrates the request-response pattern in A2A communication. It uses asyncio.Future to handle asynchronous responses and implements timeout handling for reliability.
+
+#### 1.3.6: Broadcast Messaging for Group Coordination
+
+Broadcast functionality enables one-to-many communication for coordinating multiple agents:
+
+```python
     async def broadcast_message(self, message: A2AMessage, 
                               capability_filter: List[str] = None) -> int:
         """Broadcast a message to multiple agents."""
@@ -482,7 +608,15 @@ class MessageRouter:
         
         logger.info(f"Broadcast sent to {sent_count} agents")
         return sent_count
-    
+```
+
+**Key Concepts**: Broadcasting uses agent discovery to find suitable recipients based on capabilities. Each agent receives an individual message, allowing for personalized communication while maintaining broadcast semantics.
+
+#### 1.3.7: Asynchronous Message Processing Queue
+
+The message processing queue ensures all messages are handled efficiently without blocking:
+
+```python
     async def _process_messages(self):
         """Process messages from the queue."""
         while True:
@@ -495,7 +629,15 @@ class MessageRouter:
                 break
             except Exception as e:
                 logger.error(f"Error processing message: {e}")
-    
+```
+
+**Key Concepts**: This background task continuously processes messages from the queue, ensuring non-blocking operation. Error handling prevents one failed message from stopping the entire router.
+
+#### 1.3.8: Intelligent Message Routing Logic
+
+The routing logic determines the best agent to handle each message based on capabilities and availability:
+
+```python
     async def _route_message(self, message: A2AMessage):
         """Route a message to its destination."""
         
@@ -513,7 +655,15 @@ class MessageRouter:
                 await self._send_to_agent(message, agents[0].agent_id)
             else:
                 logger.warning(f"No suitable agents found for message {message.message_id}")
-    
+```
+
+**Key Concepts**: Routing implements both direct (recipient specified) and capability-based routing. The system automatically selects the best available agent when no specific recipient is provided.
+
+#### 1.3.9: Agent Communication and Error Handling
+
+Actual agent communication uses HTTP to deliver messages and handle responses:
+
+```python
     async def _send_to_agent(self, message: A2AMessage, agent_id: str):
         """Send message to a specific agent."""
         
@@ -543,7 +693,15 @@ class MessageRouter:
                     
         except Exception as e:
             logger.error(f"Error sending message to {agent_id}: {e}")
-    
+```
+
+**Key Concepts**: HTTP-based communication allows agents to run on different machines. The method handles network errors gracefully and processes responses for request-response patterns.
+
+#### 1.3.10: Response Correlation and Future Resolution
+
+Response handling links incoming responses to their original requests using correlation IDs:
+
+```python
     async def _handle_response(self, response: A2AMessage):
         """Handle a response message."""
         
@@ -554,7 +712,15 @@ class MessageRouter:
             future = self.pending_requests[correlation_id]
             if not future.done():
                 future.set_result(response)
-    
+```
+
+**Key Concepts**: Correlation IDs enable asynchronous request-response patterns. When a response arrives, the router uses the correlation ID to complete the corresponding Future, unblocking the waiting sender.
+
+#### 1.3.11: Incoming Message Processing and Action Dispatch
+
+Incoming messages are processed through registered handlers, enabling agents to respond to requests:
+
+```python
     async def handle_incoming_message(self, message_data: Dict[str, Any]) -> Dict[str, Any]:
         """Handle an incoming message from another agent."""
         
@@ -593,16 +759,24 @@ class MessageRouter:
             return {"error": str(e)}
 ```
 
+**Key Concepts**: This method completes the communication cycle by processing incoming messages, dispatching them to appropriate handlers, and generating responses when required. The message type determines whether to process as a new request or as a response to an existing request.
+
+**💡 Complete Implementation**: For the complete router implementation, see [`src/session7/router.py`](src/session7/router.py) in the course materials.
+
 ---
 
 ## Part 2: Multi-Agent Coordination Patterns (25 minutes)
 
 ### Step 2.1: Orchestration Pattern
 
-Implement an orchestrator that coordinates multiple agents:
+Orchestration provides centralized control over multi-agent workflows, enabling complex coordination patterns where a central orchestrator manages the execution sequence, dependencies, and data flow between agents. Let's build a comprehensive orchestration system step by step.
+
+#### 2.1.1: Workflow Data Structures and Foundation
+
+First, let's define the core data structures that represent workflow steps and overall workflows:
 
 ```python
-# a2a/orchestrator.py
+# a2a/orchestrator.py - Foundation and Data Structures
 import asyncio
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
@@ -614,7 +788,15 @@ from a2a.router import MessageRouter
 from a2a.registry import AgentRegistry
 
 logger = logging.getLogger(__name__)
+```
 
+**Key Concepts**: The foundation imports support asynchronous orchestration with proper logging, type hints, and integration with our A2A communication components.
+
+#### 2.1.2: Workflow Step Definition
+
+Each workflow step represents a unit of work that requires specific agent capabilities:
+
+```python
 @dataclass
 class WorkflowStep:
     """Represents a step in a workflow."""
@@ -630,7 +812,15 @@ class WorkflowStep:
     def __post_init__(self):
         if self.dependencies is None:
             self.dependencies = []
+```
 
+**Key Concepts**: Workflow steps define the mapping between workflow data and agent inputs/outputs, enabling data flow through the workflow. Dependencies ensure proper execution order.
+
+#### 2.1.3: Workflow Definition Structure
+
+A workflow combines multiple steps with their dependencies and initial data:
+
+```python
 @dataclass
 class Workflow:
     """Defines a multi-agent workflow."""
@@ -643,7 +833,15 @@ class Workflow:
     def __post_init__(self):
         if self.initial_data is None:
             self.initial_data = {}
+```
 
+**Key Concepts**: Workflows encapsulate the complete definition of a multi-agent process, including metadata and initial context data that flows through the execution.
+
+#### 2.1.4: Orchestrator Class Initialization
+
+The orchestrator manages workflow execution with access to the agent registry and message router:
+
+```python
 class WorkflowOrchestrator:
     """Orchestrates multi-agent workflows."""
     
@@ -651,7 +849,15 @@ class WorkflowOrchestrator:
         self.router = router
         self.registry = registry
         self.active_workflows: Dict[str, Dict] = {}
-    
+```
+
+**Key Concepts**: The orchestrator serves as the central coordination point, maintaining state for active workflows and using the router and registry for agent communication and discovery.
+
+#### 2.1.5: Workflow State Initialization
+
+When starting a workflow, we establish comprehensive state tracking:
+
+```python
     async def execute_workflow(self, workflow: Workflow) -> Dict[str, Any]:
         """Execute a multi-agent workflow."""
         
@@ -666,7 +872,15 @@ class WorkflowOrchestrator:
         }
         
         self.active_workflows[workflow.workflow_id] = workflow_state
-        
+```
+
+**Key Concepts**: Workflow state tracks execution progress, data transformations, and step completion status. This enables recovery, monitoring, and debugging of complex workflows.
+
+#### 2.1.6: Dependency Resolution and Step Selection
+
+The orchestrator continuously evaluates which steps can execute based on dependency satisfaction:
+
+```python
         try:
             # Execute steps based on dependencies
             remaining_steps = workflow.steps.copy()
@@ -688,7 +902,15 @@ class WorkflowOrchestrator:
                     # Wait for more steps to complete
                     await asyncio.sleep(1)
                     continue
-                
+```
+
+**Key Concepts**: Dependency resolution ensures proper execution order while enabling parallel execution of independent steps. Failed step detection prevents infinite waiting.
+
+#### 2.1.7: Parallel Step Execution and Result Gathering
+
+Ready steps execute in parallel for optimal performance:
+
+```python
                 # Execute ready steps in parallel
                 tasks = []
                 for step in ready_steps:
@@ -699,7 +921,15 @@ class WorkflowOrchestrator:
                 
                 # Wait for all ready steps to complete
                 results = await asyncio.gather(*tasks, return_exceptions=True)
-                
+```
+
+**Key Concepts**: Parallel execution maximizes throughput while maintaining dependency constraints. Exception handling ensures one failed step doesn't crash the entire workflow.
+
+#### 2.1.8: Result Processing and State Management
+
+Step results update workflow state and enable data flow to dependent steps:
+
+```python
                 # Process results
                 for i, result in enumerate(results):
                     step = ready_steps[i]
@@ -720,7 +950,15 @@ class WorkflowOrchestrator:
                     if step.step_id not in workflow_state["completed_steps"] 
                     and step.step_id not in workflow_state["failed_steps"]
                 ]
-            
+```
+
+**Key Concepts**: Result processing updates workflow state, applies output mappings for data flow, and removes completed steps from the execution queue.
+
+#### 2.1.9: Workflow Completion and Status Determination
+
+Final workflow status reflects the overall execution outcome:
+
+```python
             # Determine final status
             if workflow_state["failed_steps"]:
                 workflow_state["status"] = "failed"
@@ -737,7 +975,15 @@ class WorkflowOrchestrator:
                 "completed_steps": len(workflow_state["completed_steps"]),
                 "failed_steps": len(workflow_state["failed_steps"])
             }
-            
+```
+
+**Key Concepts**: Workflow completion provides comprehensive execution results including final data state, timing information, and success metrics.
+
+#### 2.1.10: Error Handling and Workflow Cleanup
+
+Proper error handling ensures graceful failure recovery:
+
+```python
         except Exception as e:
             logger.error(f"Workflow {workflow.workflow_id} execution failed: {e}")
             workflow_state["status"] = "error"
@@ -752,7 +998,15 @@ class WorkflowOrchestrator:
         finally:
             # Cleanup
             self.active_workflows.pop(workflow.workflow_id, None)
-    
+```
+
+**Key Concepts**: Exception handling captures unexpected errors while cleanup ensures no resource leaks from abandoned workflows.
+
+#### 2.1.11: Individual Step Execution with Agent Discovery
+
+Each step executes by discovering suitable agents and delegating work:
+
+```python
     async def _execute_step(self, workflow: Workflow, step: WorkflowStep, 
                           workflow_state: Dict) -> Any:
         """Execute a single workflow step."""
@@ -767,7 +1021,15 @@ class WorkflowOrchestrator:
         
         if not agents:
             raise Exception(f"No agents found with capability: {step.agent_capability}")
-        
+```
+
+**Key Concepts**: Step execution begins with input preparation and agent discovery, ensuring the right agent handles each task based on required capabilities.
+
+#### 2.1.12: Step Execution with Retry Logic and Fault Tolerance
+
+Robust step execution includes retry mechanisms and error handling:
+
+```python
         # Try executing with retries
         last_error = None
         for attempt in range(step.retry_count + 1):
@@ -803,7 +1065,15 @@ class WorkflowOrchestrator:
                     await asyncio.sleep(2 ** attempt)  # Exponential backoff
         
         raise last_error
-    
+```
+
+**Key Concepts**: Retry logic with exponential backoff and agent failover provides resilience against transient failures and agent unavailability.
+
+#### 2.1.13: Data Mapping and Transformation Utilities
+
+Helper methods handle data flow between workflow context and step inputs/outputs:
+
+```python
     def _prepare_step_input(self, step: WorkflowStep, workflow_data: Dict[str, Any]) -> Dict[str, Any]:
         """Prepare input data for a workflow step."""
         step_input = {}
@@ -823,12 +1093,20 @@ class WorkflowOrchestrator:
                 workflow_data[workflow_key] = step_output[step_param]
 ```
 
+**Key Concepts**: Data mapping enables seamless data flow through the workflow by transforming between step-specific formats and the shared workflow context.
+
+**💡 Complete Implementation**: For complete orchestrator examples and advanced patterns, see [`src/session7/orchestrator.py`](src/session7/orchestrator.py) in the course materials.
+
 ### Step 2.2: Choreography Pattern
 
-Implement event-driven choreography where agents coordinate themselves:
+Choreography enables decentralized agent coordination through event-driven patterns, where agents react to events autonomously without central control. This creates flexible, loosely-coupled systems that can adapt dynamically to changing conditions.
+
+#### 2.2.1: Choreography Foundation and Event Structures
+
+First, let's establish the foundation for event-driven coordination:
 
 ```python
-# a2a/choreography.py
+# a2a/choreography.py - Foundation
 import asyncio
 from typing import Dict, List, Any, Callable, Optional
 from dataclasses import dataclass
@@ -839,7 +1117,15 @@ from a2a.protocol import A2AMessage, MessageType
 from a2a.router import MessageRouter
 
 logger = logging.getLogger(__name__)
+```
 
+**Key Concepts**: Choreography relies on event-driven architecture where agents publish events and subscribe to patterns, creating reactive coordination without central orchestration.
+
+#### 2.2.2: Event Pattern Definition
+
+Event patterns define the triggers and actions that enable autonomous agent coordination:
+
+```python
 @dataclass
 class EventPattern:
     """Defines an event pattern that triggers agent actions."""
@@ -848,7 +1134,15 @@ class EventPattern:
     action: str                 # Action to perform when pattern matches
     target_capability: str      # Required capability for handling agent
     priority: int = 1           # Pattern priority (higher = more important)
-    
+```
+
+**Key Concepts**: Event patterns map event types to actions through conditional logic. Priority ordering ensures important events are processed first during high-load scenarios.
+
+#### 2.2.3: Choreography Engine Initialization
+
+The choreography engine manages event patterns, handlers, and event history:
+
+```python
 class ChoreographyEngine:
     """Event-driven choreography engine for agent coordination."""
     
@@ -861,7 +1155,15 @@ class ChoreographyEngine:
         
         # Register default message handler
         self.router.register_handler("choreography_event", self._handle_choreography_event)
-    
+```
+
+**Key Concepts**: The engine maintains event patterns for triggering actions, handlers for processing events, and history for context-aware decision making.
+
+#### 2.2.4: Event Pattern Registration and Management
+
+Pattern registration enables dynamic configuration of choreography behaviors:
+
+```python
     def register_event_pattern(self, pattern: EventPattern):
         """Register an event pattern for choreography."""
         self.event_patterns.append(pattern)
@@ -873,7 +1175,15 @@ class ChoreographyEngine:
         """Register a handler for specific event types."""
         self.event_handlers[event_type] = handler
         logger.info(f"Registered event handler: {event_type}")
-    
+```
+
+**Key Concepts**: Pattern registration supports dynamic choreography reconfiguration. Priority-based sorting ensures critical patterns are evaluated first.
+
+#### 2.2.5: Event Publishing and History Management
+
+Event publishing triggers the choreography process and maintains context history:
+
+```python
     async def publish_event(self, event_type: str, event_data: Dict[str, Any], 
                           source_agent: str = None):
         """Publish an event that may trigger choreographed actions."""
@@ -895,7 +1205,15 @@ class ChoreographyEngine:
         
         # Check event patterns and trigger actions
         await self._process_event_patterns(event)
-    
+```
+
+**Key Concepts**: Event publishing creates structured event records with unique IDs and timestamps. History management enables pattern matching based on event sequences.
+
+#### 2.2.6: Event Pattern Processing and Matching
+
+Pattern processing evaluates events against registered patterns to determine triggered actions:
+
+```python
     async def _process_event_patterns(self, event: Dict[str, Any]):
         """Process event against registered patterns."""
         
@@ -910,7 +1228,15 @@ class ChoreographyEngine:
         # Execute triggered actions
         for pattern in triggered_actions:
             await self._execute_choreography_action(pattern, event)
-    
+```
+
+**Key Concepts**: Pattern matching supports both specific event types and wildcard patterns. Condition evaluation enables sophisticated trigger logic based on event content.
+
+#### 2.2.7: Conditional Logic Evaluation
+
+Condition evaluation determines whether patterns should trigger based on event content and context:
+
+```python
     def _evaluate_condition(self, condition: str, event: Dict[str, Any]) -> bool:
         """Evaluate a condition expression against event data."""
         
@@ -933,7 +1259,15 @@ class ChoreographyEngine:
         except Exception as e:
             logger.warning(f"Failed to evaluate condition '{condition}': {e}")
             return False
-    
+```
+
+**Key Concepts**: Condition evaluation provides a rich context including current event data, source agent, and recent event history. Safe evaluation prevents malicious code execution.
+
+#### 2.2.8: Choreography Action Execution
+
+Action execution translates triggered patterns into concrete agent messages:
+
+```python
     async def _execute_choreography_action(self, pattern: EventPattern, event: Dict[str, Any]):
         """Execute a choreography action triggered by an event pattern."""
         
@@ -960,7 +1294,15 @@ class ChoreographyEngine:
             
         except Exception as e:
             logger.error(f"Failed to execute choreography action {pattern.action}: {e}")
-    
+```
+
+**Key Concepts**: Action execution creates A2A messages with trigger context. Fire-and-forget messaging supports asynchronous, decoupled coordination.
+
+#### 2.2.9: Incoming Event Message Handling
+
+Event message handling processes choreography events received from other agents:
+
+```python
     async def _handle_choreography_event(self, message: A2AMessage) -> Dict[str, Any]:
         """Handle incoming choreography event messages."""
         
@@ -974,7 +1316,15 @@ class ChoreographyEngine:
         
         # Default handling - just acknowledge
         return {"status": "event_received", "event_type": event_type}
+```
 
+**Key Concepts**: Message handling enables agents to receive and process choreography events from other agents, supporting distributed event-driven coordination.
+
+#### 2.2.10: Practical Choreography Example
+
+Let's see a complete choreography pattern for travel planning coordination:
+
+```python
 # Example choreography patterns
 def create_travel_planning_choreography() -> List[EventPattern]:
     """Create choreography patterns for travel planning scenario."""
@@ -1017,6 +1367,10 @@ def create_travel_planning_choreography() -> List[EventPattern]:
         )
     ]
 ```
+
+**Key Concepts**: This example demonstrates a complete travel planning workflow where each event triggers the next step. Agents coordinate autonomously based on event-driven patterns, creating a flexible, decentralized process.
+
+**💡 Complete Implementation**: For advanced choreography patterns and complex event processing, see [`src/session7/choreography.py`](src/session7/choreography.py) in the course materials.
 
 ---
 

@@ -79,6 +79,10 @@ mcp-filesystem-server/
 
 First, let's create a configuration module that centralizes all settings. This makes the server easily customizable without changing code:
 
+**Step 1: Basic Configuration Structure**
+
+Start with the class definition and sandbox setup:
+
 ```python
 # config.py
 import os
@@ -92,7 +96,13 @@ class FileSystemConfig:
         # Set base path (sandbox root) - this is the ONLY directory we can access
         self.base_path = Path(base_path or os.getcwd()) / "sandbox"
         self.base_path.mkdir(exist_ok=True)
-        
+```
+
+**Step 2: Security Settings**
+
+Add file size limits and extension restrictions:
+
+```python
         # Security settings
         self.max_file_size = 10 * 1024 * 1024  # 10MB limit prevents DoS
         
@@ -102,17 +112,31 @@ class FileSystemConfig:
             '.py', '.js', '.ts', '.html', '.css',
             '.csv', '.log', '.conf', '.ini'
         }
-        
+```
+
+**Step 3: Path Traversal Protection**
+
+Define forbidden patterns that indicate security threats:
+
+```python
         # Forbidden patterns that might indicate path traversal
         self.forbidden_patterns: List[str] = [
             '..', '~/', '/etc/', '/usr/', '/var/',
             'C:\\Windows', 'C:\\Program Files'
         ]
-        
+```
+
+**Step 4: Performance Tuning**
+
+Set limits to prevent resource exhaustion:
+
+```python
         # Performance settings
         self.chunk_size = 8192  # For streaming large files
         self.search_limit = 1000  # Max search results to prevent overload
 ```
+
+Complete configuration implementation available in `src/session2/config.py`
 
 **Security decisions explained:**
 - **Whitelist extensions**: Only allow known safe file types
@@ -126,6 +150,10 @@ class FileSystemConfig:
 ### Step 2.1: Path Validation and Sandboxing
 
 The sandbox is our primary security boundary. Every file path must be validated to ensure it stays within the allowed directory:
+
+**Step 1: Basic Sandbox Class Structure**
+
+Start with the class definition and error handling:
 
 ```python
 # utils/sandbox.py
@@ -143,38 +171,53 @@ class FileSystemSandbox:
     def __init__(self, base_path: Path):
         # Resolve to absolute path to prevent tricks with relative paths
         self.base_path = base_path.resolve()
-    
+```
+
+**Step 2: Core Path Validation Logic**
+
+This is the critical security function that prevents directory traversal:
+
+```python
     def validate_path(self, path: str) -> Path:
         """
         Validate and resolve a path within the sandbox.
         
         This is our critical security function - it prevents directory traversal
         attacks by ensuring all paths resolve within our sandbox.
-        
-        Args:
-            path: Requested file path (can be relative or absolute)
-            
-        Returns:
-            Resolved safe path within sandbox
-            
-        Raises:
-            SandboxError: If path escapes sandbox
         """
         try:
             # Convert string to Path and resolve all symlinks and '..' components
             requested_path = (self.base_path / path).resolve()
-            
+```
+
+**Step 3: Security Boundary Check**
+
+The most important security check - ensure the path stays in sandbox:
+
+```python
             # Critical check: ensure resolved path is within sandbox
             # This prevents attacks like "../../etc/passwd"
             if not str(requested_path).startswith(str(self.base_path)):
                 raise SandboxError(f"Path '{path}' escapes sandbox")
             
             return requested_path
-            
+```
+
+**Step 4: Error Handling and Safety**
+
+Handle any edge cases and provide clear error messages:
+
+```python
         except Exception as e:
             # Any path resolution errors are security errors
             raise SandboxError(f"Invalid path '{path}': {str(e)}")
-    
+```
+
+**Step 5: Filename Safety Validation**
+
+Add a helper method for validating individual filenames:
+
+```python
     def is_safe_filename(self, filename: str) -> bool:
         """
         Check if filename is safe (no directory separators or special chars).
@@ -185,6 +228,8 @@ class FileSystemSandbox:
         return not any(char in filename for char in dangerous_chars)
 ```
 
+Complete sandbox implementation available in `src/session2/utils/sandbox.py`
+
 **Security insights:**
 - `resolve()` is crucial - it resolves symlinks and normalizes paths
 - String prefix check ensures the resolved path stays in sandbox
@@ -193,6 +238,10 @@ class FileSystemSandbox:
 ### Step 2.2: File Validators
 
 Next, we need validators to check file types and prevent malicious file operations:
+
+**Step 1: Validator Class Setup**
+
+Start with the basic validator class and MIME type detection:
 
 ```python
 # utils/validators.py
@@ -208,11 +257,23 @@ class FileValidator:
         self.config = config
         # python-magic can detect file types by content, not just extension
         self.mime = magic.Magic(mime=True)
-    
+```
+
+**Step 2: File Size Validation**
+
+Prevent denial-of-service attacks through large files:
+
+```python
     def validate_file_size(self, path: Path) -> bool:
         """Check if file size is within limits to prevent DoS."""
         return path.stat().st_size <= self.config.max_file_size
-    
+```
+
+**Step 3: File Type Detection and Validation**
+
+Check both file extension and actual content for security:
+
+```python
     def validate_file_type(self, path: Path) -> Dict[str, Any]:
         """
         Validate file type and return metadata.
@@ -226,7 +287,13 @@ class FileValidator:
         
         # Check against allowed extensions
         allowed = extension in self.config.allowed_extensions
-        
+```
+
+**Step 4: Text vs Binary Detection**
+
+Properly categorize files for appropriate handling:
+
+```python
         # Detect if file is text or binary for proper handling
         is_text = mime_type.startswith('text/') or mime_type in [
             'application/json', 'application/xml', 'application/yaml'
@@ -239,7 +306,13 @@ class FileValidator:
             "is_text": is_text,
             "is_binary": not is_text
         }
-    
+```
+
+**Step 5: Integrity Verification**
+
+Add checksum calculation for file integrity:
+
+```python
     def calculate_checksum(self, path: Path) -> str:
         """
         Calculate SHA256 checksum of file.
@@ -255,6 +328,8 @@ class FileValidator:
                 
         return sha256_hash.hexdigest()
 ```
+
+Complete validators implementation available in `src/session2/utils/validators.py`
 
 ---
 
@@ -306,6 +381,11 @@ logger.info(f"File System MCP Server initialized with sandbox at: {config.base_p
 Let's implement tools for safely browsing the file system:
 
 ```python
+**Step 1: Directory Listing Tool Definition**
+
+First, let's define the main directory listing tool with proper documentation:
+
+```python
 @mcp.tool()
 async def list_directory(path: str = ".", pattern: str = "*") -> Dict:
     """
@@ -321,6 +401,13 @@ async def list_directory(path: str = ".", pattern: str = "*") -> Dict:
     Returns:
         Directory contents with metadata
     """
+```
+
+**Step 2: Path Validation and Directory Check**
+
+Validate the path and ensure it's a directory:
+
+```python
     try:
         # First, validate the path is safe
         safe_path = sandbox.validate_path(path)
@@ -328,7 +415,13 @@ async def list_directory(path: str = ".", pattern: str = "*") -> Dict:
         # Ensure it's actually a directory
         if not safe_path.is_dir():
             return {"error": f"'{path}' is not a directory"}
-        
+```
+
+**Step 3: Item Collection and Metadata**
+
+Gather information about each file and directory:
+
+```python
         items = []
         # Use glob to support patterns like "*.py"
         for item in safe_path.glob(pattern):
@@ -345,7 +438,13 @@ async def list_directory(path: str = ".", pattern: str = "*") -> Dict:
                 "modified": datetime.fromtimestamp(stat.st_mtime).isoformat(),
                 "permissions": oct(stat.st_mode)[-3:]  # Unix-style permissions
             })
-        
+```
+
+**Step 4: Response Formatting and Logging**
+
+Sort results and create the response:
+
+```python
         # Sort for consistent output: directories first, then files
         items.sort(key=lambda x: (x["type"] != "directory", x["name"]))
         
@@ -357,38 +456,37 @@ async def list_directory(path: str = ".", pattern: str = "*") -> Dict:
             "total_items": len(items),
             "items": items
         }
-        
+```
+
+**Step 5: Error Handling**
+
+Handle security violations and other errors:
+
+```python
     except SandboxError as e:
         logger.warning(f"Sandbox violation attempt: {e}")
         return {"error": str(e)}
     except Exception as e:
         logger.error(f"Error listing directory: {e}")
         return {"error": f"Failed to list directory: {str(e)}"}
+```
 
+**Step 6: File Information Tool**
+
+Add a complementary tool for detailed file information:
+
+```python
 @mcp.tool()
 async def get_file_info(path: str) -> Dict:
-    """
-    Get detailed information about a file.
-    
-    Provides comprehensive metadata including file type detection,
-    size, timestamps, and permissions.
-    
-    Args:
-        path: File path relative to sandbox
-    
-    Returns:
-        Detailed file metadata
-    """
+    """Get detailed information about a file."""
     try:
         safe_path = sandbox.validate_path(path)
         
         if not safe_path.exists():
             return {"error": f"File '{path}' not found"}
         
-        # Get file statistics
+        # Get file statistics and validate file type
         stat = safe_path.stat()
-        
-        # Validate file type (checks MIME type, not just extension)
         file_type = validator.validate_file_type(safe_path)
         
         info = {
@@ -398,28 +496,23 @@ async def get_file_info(path: str) -> Dict:
             "size_human": f"{stat.st_size / 1024:.2f} KB",
             "created": datetime.fromtimestamp(stat.st_ctime).isoformat(),
             "modified": datetime.fromtimestamp(stat.st_mtime).isoformat(),
-            "accessed": datetime.fromtimestamp(stat.st_atime).isoformat(),
-            "permissions": oct(stat.st_mode)[-3:],
             "is_directory": safe_path.is_dir(),
-            "is_file": safe_path.is_file(),
-            "is_symlink": safe_path.is_symlink(),
             **file_type  # Include MIME type, extension, etc.
         }
         
-        # Add checksum for text files (useful for change detection)
+        # Add checksum for text files
         if safe_path.is_file() and info["is_text"]:
             info["checksum"] = validator.calculate_checksum(safe_path)
         
-        logger.info(f"Retrieved info for: {path}")
         return info
         
     except SandboxError as e:
-        logger.warning(f"Sandbox violation attempt: {e}")
         return {"error": str(e)}
     except Exception as e:
-        logger.error(f"Error getting file info: {e}")
         return {"error": f"Failed to get file info: {str(e)}"}
 ```
+
+Complete file listing implementation available in `src/session2/filesystem_server.py`
 
 ### Step 3.3: File Reading with Binary Support
 
