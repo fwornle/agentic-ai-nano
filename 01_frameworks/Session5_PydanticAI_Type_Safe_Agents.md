@@ -136,14 +136,24 @@ This validator tracks tokens as they arrive and validates at specific checkpoint
 
 #### **Partial Response Validation Logic**
 
-The core validation method processes each incoming token and triggers validation at checkpoints:
+The core validation method processes each incoming token and triggers validation at checkpoints. This approach balances real-time validation with performance efficiency.
+
+**Token Accumulation and Position Tracking**
+
+First, we accumulate tokens and track the current position in the stream:
 
 ```python
 def validate_partial_response(self, token: str, target_schema: type[BaseModel]) -> Dict[str, Any]:
     """Validate partial response against target schema."""
     self.accumulated_tokens.append(token)
     self.current_position += 1
-    
+```
+
+**Checkpoint-Based Validation**
+
+Next, we check if we've reached a validation checkpoint and attempt partial validation:
+
+```python
     # Check validation at predefined checkpoints
     if self.current_position in self.validation_checkpoints:
         partial_text = ''.join(self.accumulated_tokens)
@@ -158,6 +168,13 @@ def validate_partial_response(self, token: str, target_schema: type[BaseModel]) 
                     'validated_fields': validated_fields,
                     'completion_percentage': len(validated_fields) / len(target_schema.__fields__) * 100
                 }
+```
+
+**Error Handling and Streaming Status**
+
+Finally, we handle validation errors and provide streaming status for non-checkpoint positions:
+
+```python
         except Exception as e:
             return {
                 'status': 'validation_warning',
@@ -893,6 +910,12 @@ Multi-schema coordination enables complex workflows with interdependent data mod
 
 **Cross-Output Validation System**
 
+The cross-output validation system ensures consistency across multiple related outputs by applying customizable validation rules. This system is essential for maintaining data integrity in complex multi-schema workflows.
+
+**Validation Function Setup**
+
+First, we define the function signature and initialize the validation results structure:
+
 ```python
 def validate_output_consistency(
     self,
@@ -901,13 +924,21 @@ def validate_output_consistency(
 ) -> Dict[str, Any]:
     """Validate consistency across multiple outputs."""
     
+    # Initialize validation results structure
     validation_results = {
         'consistent': True,
         'violations': [],
         'warnings': [],
         'cross_validation_score': 1.0
     }
-    
+```
+
+**Rule Execution and Error Handling**
+
+Next, we iterate through each consistency rule and handle both successful validations and exceptions:
+
+```python
+    # Execute each validation rule with error handling
     for rule_name, rule_func in consistency_rules.items():
         try:
             result = rule_func(outputs)
@@ -923,7 +954,13 @@ def validate_output_consistency(
                 'rule': rule_name,
                 'error': str(e)
             })
-    
+```
+
+**Consistency Score Calculation**
+
+Finally, we calculate a quantitative consistency score based on rule compliance:
+
+```python
     # Calculate overall consistency score
     total_rules = len(consistency_rules)
     violations = len(validation_results['violations'])
@@ -937,18 +974,30 @@ Cross-validation ensures consistency across multiple related outputs. The scorin
 
 **Usage Demonstration**
 
+Now let's demonstrate how to use the PromptedOutput controller with practical examples that show the system's capabilities:
+
+**Setting Up the Controller and Schemas**
+
+First, we initialize the controller and register our data schemas:
+
 ```python
-# Usage examples for PromptedOutput control
+# Initialize the PromptedOutput controller
 async def demonstrate_prompted_output_control():
     """Demonstrate advanced PromptedOutput control features."""
     
     # Initialize controller
     controller = PromptedOutputController()
     
-    # Register schemas
+    # Register schemas for different output types
     controller.register_schema('research', ResearchResult)
     controller.register_schema('analysis', StatisticalAnalysisInput)
-    
+```
+
+**Creating Advanced Context Configuration**
+
+Next, we set up context that defines how the agent should handle this specific task:
+
+```python
     # Create prompted output with advanced context
     context = {
         'task_type': 'research_analysis',
@@ -961,9 +1010,18 @@ async def demonstrate_prompted_output_control():
         }
     }
     
+    # Create prompted output instance with context
     prompted_output = controller.create_prompted_output('research', context)
-    
-    # Create multi-schema workflow
+```
+
+The context object provides metadata that helps the controller optimize template generation and validation strategies based on task requirements.
+
+**Multi-Schema Workflow Coordination**
+
+For complex workflows requiring multiple output types, we configure coordinated schemas:
+
+```python
+    # Create multi-schema workflow configuration
     multi_schema_configs = [
         {
             'schema_name': 'research',
@@ -977,8 +1035,15 @@ async def demonstrate_prompted_output_control():
         }
     ]
     
+    # Create coordinated outputs
     multi_outputs = controller.create_multi_schema_output(multi_schema_configs)
-    
+```
+
+**Returning Comprehensive Results**
+
+Finally, we return all created outputs along with system statistics:
+
+```python
     print(f"Created {len(multi_outputs)} coordinated PromptedOutputs")
     
     return {

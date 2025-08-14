@@ -93,17 +93,25 @@ Meta-Cognitive Validation → Logically Coherent Response
 
 *"Let reasoning guide what information to find and how to connect it"*
 
+**Setting Up the Reasoning-Augmented Retrieval System**
+
+This system uses different reasoning strategies to intelligently guide information retrieval:
+
 ```python
 # Reasoning-guided retrieval system
 class ReasoningAugmentedRetrieval:
-    """RAG system where reasoning frameworks guide retrieval strategies."""
+    """RAG system where reasoning frameworks guide retrieval strategies.
+    
+    Instead of simple similarity search, this system analyzes what type
+    of reasoning is needed and uses that to guide information gathering.
+    """
 
     def __init__(self, vector_store, knowledge_graph, reasoning_engine):
         self.vector_store = vector_store
         self.knowledge_graph = knowledge_graph
         self.reasoning_engine = reasoning_engine
 
-        # Reasoning-driven retrieval strategies
+        # Map reasoning types to specific retrieval strategies
         self.reasoning_strategies = {
             'deductive': self._deductive_reasoning_retrieval,
             'inductive': self._inductive_reasoning_retrieval,
@@ -111,25 +119,36 @@ class ReasoningAugmentedRetrieval:
             'analogical': self._analogical_reasoning_retrieval,
             'causal': self._causal_reasoning_retrieval
         }
+```
+
+**Main Reasoning-Guided Retrieval Method**
+
+The core orchestration method that coordinates the entire reasoning-retrieval process:
+
+```python
 
     async def reasoning_guided_retrieve(self, query: str,
                                       reasoning_context: Dict = None) -> Dict[str, Any]:
-        """Retrieve information using reasoning frameworks to guide the process."""
+        """Retrieve information using reasoning frameworks to guide the process.
+        
+        This method analyzes what type of reasoning the query requires,
+        then uses that analysis to guide intelligent information retrieval.
+        """
 
-        # Step 1: Analyze the reasoning requirements of the query
+        # Phase 1: Understand what type of reasoning this query needs
         reasoning_analysis = await self._analyze_reasoning_requirements(query)
 
-        # Step 2: Construct reasoning framework
+        # Phase 2: Build a structured framework based on reasoning type
         reasoning_framework = await self._construct_reasoning_framework(
             query, reasoning_analysis, reasoning_context
         )
 
-        # Step 3: Apply reasoning-guided retrieval
+        # Phase 3: Use the framework to guide targeted information retrieval
         retrieved_information = await self._apply_reasoning_strategy(
             query, reasoning_framework
         )
 
-        # Step 4: Validate logical connections
+        # Phase 4: Verify that retrieved information supports logical reasoning
         logical_connections = await self._validate_logical_connections(
             retrieved_information, reasoning_framework
         )
@@ -142,9 +161,20 @@ class ReasoningAugmentedRetrieval:
             'logical_connections': logical_connections,
             'reasoning_type': reasoning_framework.get('primary_reasoning_type')
         }
+```
+
+**Reasoning Requirements Analysis**
+
+This method determines what type of logical reasoning the query requires:
+
+```python
 
     async def _analyze_reasoning_requirements(self, query: str) -> Dict[str, Any]:
-        """Analyze what type of reasoning is required for this query."""
+        """Analyze what type of reasoning is required for this query.
+        
+        This analysis determines the optimal reasoning strategy and what
+        types of evidence will be needed to support logical conclusions.
+        """
 
         reasoning_prompt = f"""
         Analyze this query to determine the reasoning requirements:
@@ -173,40 +203,55 @@ class ReasoningAugmentedRetrieval:
         JSON:
         """
 
+        # Use low temperature for consistent analysis
         response = await self._async_llm_predict(reasoning_prompt, temperature=0.1)
         return self._parse_json_response(response)
+```
+
+**Reasoning Framework Construction**
+
+This method builds a structured framework to guide the retrieval process:
+
+```python
 
     async def _construct_reasoning_framework(self, query: str,
                                            reasoning_analysis: Dict,
                                            context: Dict = None) -> Dict[str, Any]:
-        """Construct a structured reasoning framework to guide retrieval."""
+        """Construct a structured reasoning framework to guide retrieval.
+        
+        This method converts reasoning analysis into a concrete framework
+        that can guide targeted information gathering.
+        """
 
-        # Step 1: Extract reasoning parameters
-        # WHY: Different reasoning types require different logical structures
+        # Extract key parameters from analysis
         primary_reasoning = reasoning_analysis['primary_reasoning_type']
         complexity = reasoning_analysis['reasoning_complexity']
 
-        # Step 2: Build reasoning framework prompt
-        # WHY: LLMs need explicit structure to construct proper logical frameworks
+        # Build specialized prompt based on reasoning type
         framework_prompt = self._build_framework_prompt(query, reasoning_analysis, primary_reasoning)
 
-        # Step 3: Generate framework structure
-        # WHY: Convert natural language reasoning into structured logical components
+        # Generate structured framework using LLM
         response = await self._async_llm_predict(framework_prompt, temperature=0.2)
         framework = self._parse_json_response(response)
 
-        # Step 4: Add framework metadata
-        # WHY: Tracking enables framework reuse and performance optimization
+        # Add tracking metadata for optimization
         framework = self._add_framework_metadata(framework, primary_reasoning, query)
 
         return framework
+```
+
+**Framework Prompt Builder**
+
+This helper method creates specialized prompts for different reasoning types:
+
+```python
 
     def _build_framework_prompt(self, query: str, reasoning_analysis: Dict,
                                primary_reasoning: str) -> str:
         """Build the reasoning framework construction prompt.
 
-        WHY: Separating prompt construction makes the logic clearer and enables
-        different reasoning types to use specialized prompts in the future.
+        Creates specialized prompts that help the LLM construct proper
+        logical frameworks for different reasoning types.
         """
         return f"""
         Construct a reasoning framework for this query using {primary_reasoning} reasoning:
@@ -240,40 +285,58 @@ class ReasoningAugmentedRetrieval:
 
         JSON:
         """
+```
+
+**Framework Metadata Addition**
+
+Adds tracking information for performance optimization and framework reuse:
+
+```python
 
     def _add_framework_metadata(self, framework: Dict, primary_reasoning: str,
                                query: str) -> Dict[str, Any]:
         """Add metadata to reasoning framework.
 
-        WHY: Metadata enables framework caching, reuse, and performance analysis.
-        Production systems need to track which frameworks work best for different query types.
+        Metadata enables framework caching, reuse, and performance analysis.
+        Production systems use this to track effective reasoning patterns.
         """
         framework['framework_id'] = f"{primary_reasoning}_{int(time.time())}"
         framework['created_for_query'] = query
         framework['reasoning_type'] = primary_reasoning
 
         return framework
+```
+
+**Deductive Reasoning Strategy Implementation**
+
+This method implements the deductive reasoning approach to information retrieval:
+
+```python
 
     async def _deductive_reasoning_retrieval(self, query: str,
                                            framework: Dict) -> Dict[str, Any]:
-        """Implement deductive reasoning retrieval strategy."""
+        """Implement deductive reasoning retrieval strategy.
+        
+        Deductive reasoning works from general premises to specific conclusions.
+        This method retrieves evidence for each premise and applies logical steps.
+        """
 
         premises = framework.get('reasoning_premises', [])
         logical_steps = framework.get('logical_steps', [])
 
-        # Step 1: Retrieve information for each premise
+        # Phase 1: Gather evidence for each logical premise
         premise_evidence = {}
         for premise_data in premises:
             premise = premise_data['premise']
             evidence_type = premise_data['evidence_needed']
 
-            # Targeted retrieval for this premise
+            # Find specific evidence to support this premise
             premise_retrieval = await self._retrieve_for_premise(
                 premise, evidence_type, query
             )
             premise_evidence[premise] = premise_retrieval
 
-        # Step 2: Apply deductive logical steps
+        # Phase 2: Apply logical steps using gathered evidence
         logical_progression = []
         for step in logical_steps:
             step_result = await self._apply_logical_step(
@@ -281,7 +344,7 @@ class ReasoningAugmentedRetrieval:
             )
             logical_progression.append(step_result)
 
-        # Step 3: Construct deductive conclusion
+        # Phase 3: Build final deductive conclusion
         deductive_conclusion = await self._construct_deductive_conclusion(
             premise_evidence, logical_progression, framework
         )
@@ -301,35 +364,54 @@ class ReasoningAugmentedRetrieval:
 
 *"Let external knowledge fill logical reasoning gaps"*
 
+**Setting Up Retrieval-Augmented Reasoning**
+
+This system identifies where reasoning is weak and uses targeted retrieval to strengthen it:
+
 ```python
 class RetrievalAugmentedReasoning:
-    """System that uses retrieved information to enhance reasoning capabilities."""
+    """System that uses retrieved information to enhance reasoning capabilities.
+    
+    This approach identifies gaps in reasoning and strategically retrieves
+    external knowledge to fill those gaps, creating stronger logical arguments.
+    """
 
     def __init__(self, retrieval_system, reasoning_engine, knowledge_validator):
         self.retrieval_system = retrieval_system
         self.reasoning_engine = reasoning_engine
         self.knowledge_validator = knowledge_validator
+```
+
+**Enhanced Reasoning with Strategic Information Retrieval**
+
+The main method that coordinates gap identification and knowledge integration:
+
+```python
 
     async def enhanced_reasoning(self, reasoning_query: str,
                                 initial_knowledge: Dict = None) -> Dict[str, Any]:
-        """Perform reasoning enhanced by targeted information retrieval."""
+        """Perform reasoning enhanced by targeted information retrieval.
+        
+        This method analyzes reasoning weaknesses, retrieves relevant knowledge
+        to address those weaknesses, and integrates it into stronger reasoning.
+        """
 
-        # Step 1: Identify reasoning gaps
+        # Phase 1: Analyze where the reasoning is incomplete or weak
         reasoning_gaps = await self._identify_reasoning_gaps(
             reasoning_query, initial_knowledge
         )
 
-        # Step 2: Strategically retrieve information to fill gaps
+        # Phase 2: Strategically gather information to address the gaps
         gap_filling_retrieval = await self._strategic_gap_retrieval(
             reasoning_gaps, reasoning_query
         )
 
-        # Step 3: Integrate retrieved knowledge into reasoning process
+        # Phase 3: Combine original reasoning with retrieved knowledge
         enhanced_reasoning_result = await self._integrate_knowledge_into_reasoning(
             reasoning_query, initial_knowledge, gap_filling_retrieval
         )
 
-        # Step 4: Validate enhanced reasoning
+        # Phase 4: Validate that the enhanced reasoning is logically sound
         reasoning_validation = await self._validate_enhanced_reasoning(
             enhanced_reasoning_result, reasoning_query
         )
@@ -344,10 +426,21 @@ class RetrievalAugmentedReasoning:
                 initial_knowledge, enhanced_reasoning_result
             )
         }
+```
+
+**Reasoning Gap Identification**
+
+This method analyzes reasoning to find where external knowledge would help:
+
+```python
 
     async def _identify_reasoning_gaps(self, reasoning_query: str,
                                      initial_knowledge: Dict = None) -> Dict[str, Any]:
-        """Identify what external knowledge would strengthen reasoning."""
+        """Identify what external knowledge would strengthen reasoning.
+        
+        Analyzes the reasoning chain to find missing facts, weak premises,
+        counter-arguments, and other knowledge that would improve logical soundness.
+        """
 
         gap_analysis_prompt = f"""
         Analyze this reasoning query to identify knowledge gaps that external information could fill:
@@ -376,6 +469,7 @@ class RetrievalAugmentedReasoning:
         JSON:
         """
 
+        # Use low temperature for consistent gap analysis
         response = await self._async_llm_predict(gap_analysis_prompt, temperature=0.2)
         return self._parse_json_response(response)
 ```
@@ -384,16 +478,24 @@ class RetrievalAugmentedReasoning:
 
 *"Structured reasoning paths that guide both retrieval and synthesis"*
 
+**Step 1: Initialize the Chain-of-Thought RAG System**
+
+First, let's set up the core system that manages different reasoning patterns:
+
 ```python
 class ChainOfThoughtRAG:
-    """RAG system with integrated chain-of-thought reasoning capabilities."""
+    """RAG system with integrated chain-of-thought reasoning capabilities.
+    
+    This system combines structured reasoning with information retrieval,
+    enabling step-by-step logical processing of complex queries.
+    """
 
     def __init__(self, retrieval_system, llm_model, reasoning_validator):
         self.retrieval_system = retrieval_system
         self.llm_model = llm_model
         self.reasoning_validator = reasoning_validator
 
-        # Chain-of-thought patterns
+        # Chain-of-thought patterns for different reasoning types
         self.cot_patterns = {
             'analytical': self._analytical_chain_pattern,
             'comparative': self._comparative_chain_pattern,
@@ -401,11 +503,22 @@ class ChainOfThoughtRAG:
             'problem_solving': self._problem_solving_chain_pattern,
             'synthesis': self._synthesis_chain_pattern
         }
+```
 
+**Step 2: Main Chain-of-Thought Processing Method**
+
+Now let's implement the core method that orchestrates the entire reasoning process:
+
+```python
     async def chain_of_thought_rag(self, query: str,
                                   cot_config: Dict = None) -> Dict[str, Any]:
-        """Generate response using chain-of-thought reasoning integrated with RAG."""
+        """Generate response using chain-of-thought reasoning integrated with RAG.
+        
+        This is the main orchestration method that coordinates the entire
+        reasoning process from analysis to final validated response.
+        """
 
+        # Setup configuration with sensible defaults
         config = cot_config or {
             'thinking_pattern': 'analytical',
             'reasoning_depth': 'moderate',
@@ -413,29 +526,41 @@ class ChainOfThoughtRAG:
             'retrieve_at_each_step': True
         }
 
-        # Step 1: Analyze query to determine optimal chain-of-thought pattern
+        # Phase 1: Analyze reasoning requirements for this query
         cot_analysis = await self._analyze_cot_requirements(query)
 
-        # Step 2: Construct initial reasoning chain
+        # Phase 2: Build structured reasoning plan
         reasoning_chain = await self._construct_reasoning_chain(
             query, cot_analysis, config
         )
+```
 
-        # Step 3: Execute reasoning chain with integrated retrieval
+**Execute and Synthesize Chain-of-Thought Response**
+
+Now execute the reasoning plan and create the final response:
+
+```python
+        # Phase 3: Execute reasoning with integrated retrieval
         executed_chain = await self._execute_reasoning_chain(
             reasoning_chain, query, config
         )
 
-        # Step 4: Synthesize final response from reasoning chain
+        # Phase 4: Synthesize final response from reasoning steps
         final_response = await self._synthesize_from_reasoning_chain(
             executed_chain, query
         )
 
-        # Step 5: Validate reasoning chain coherence
+        # Phase 5: Validate logical consistency
         chain_validation = await self._validate_reasoning_chain_coherence(
             executed_chain, final_response
         )
+```
 
+**Return Comprehensive Results**
+
+Compile all results with metadata for analysis and debugging:
+
+```python
         return {
             'query': query,
             'cot_analysis': cot_analysis,
@@ -450,15 +575,43 @@ class ChainOfThoughtRAG:
                 'logical_coherence_score': chain_validation.get('coherence_score', 0.0)
             }
         }
+```
 
+**Step 3: Reasoning Chain Construction**
+
+This method builds the structured plan for step-by-step reasoning:
+
+```python
     async def _construct_reasoning_chain(self, query: str, analysis: Dict,
                                        config: Dict) -> Dict[str, Any]:
-        """Construct step-by-step reasoning chain for the query."""
+        """Construct step-by-step reasoning chain for the query.
+        
+        Creates a structured plan that breaks complex reasoning into
+        manageable steps with clear objectives and retrieval points.
+        """
 
         pattern = analysis.get('recommended_pattern', 'analytical')
         depth = config.get('reasoning_depth', 'moderate')
 
-        chain_prompt = f"""
+        # Build comprehensive reasoning chain prompt
+        chain_prompt = self._build_reasoning_chain_prompt(query, pattern, depth)
+
+        # Generate reasoning chain with consistent parameters
+        response = await self._async_llm_predict(chain_prompt, temperature=0.2)
+        chain = self._parse_json_response(response)
+
+        # Add tracking metadata
+        return self._add_chain_metadata(chain, pattern, depth, query)
+```
+
+**Reasoning Chain Prompt Builder**
+
+Helper method that constructs the detailed prompt for reasoning chain generation:
+
+```python
+    def _build_reasoning_chain_prompt(self, query: str, pattern: str, depth: str) -> str:
+        """Build detailed prompt for reasoning chain construction."""
+        return f"""
         Construct a step-by-step chain-of-thought reasoning plan for this query:
 
         Query: {query}
@@ -490,29 +643,39 @@ class ChainOfThoughtRAG:
 
         JSON:
         """
+```
 
-        response = await self._async_llm_predict(chain_prompt, temperature=0.2)
-        chain = self._parse_json_response(response)
+**Chain Metadata Addition**
 
-        # Add chain metadata
+Utility method for adding tracking information to reasoning chains:
+
+```python
+    def _add_chain_metadata(self, chain: Dict, pattern: str, depth: str, query: str) -> Dict[str, Any]:
+        """Add metadata to reasoning chain for tracking and optimization."""
         chain['pattern'] = pattern
         chain['depth'] = depth
         chain['created_for'] = query
-
         return chain
+```
+
+**Step 4: Chain Execution Framework**
+
+The execution system manages the step-by-step processing:
+
+```python
 
     async def _execute_reasoning_chain(self, reasoning_chain: Dict,
                                      query: str, config: Dict) -> Dict[str, Any]:
         """Execute the reasoning chain step by step with retrieval integration.
 
-        WHY: Chain-of-thought reasoning requires systematic execution where each step
-        builds on previous steps, with knowledge accumulation and validation.
+        This method systematically processes each reasoning step, accumulating
+        knowledge and maintaining context throughout the chain execution.
         """
 
-        # Initialize execution context
+        # Setup execution tracking and context management
         execution_context = self._initialize_chain_execution_context()
 
-        # Execute all reasoning steps
+        # Process each reasoning step sequentially
         for step_data in reasoning_chain.get('reasoning_steps', []):
             step_result = await self._execute_single_chain_step(
                 step_data, execution_context, config, query
@@ -520,39 +683,52 @@ class ChainOfThoughtRAG:
             execution_context = self._update_execution_context(execution_context, step_result)
 
         return self._compile_chain_execution_results(execution_context)
+```
+
+**Step 5: Context Management Methods**
+
+These helper methods manage the execution state throughout the reasoning process:
+
+```python
 
     def _initialize_chain_execution_context(self) -> Dict[str, Any]:
         """Initialize the context for chain-of-thought execution.
 
-        WHY: Centralized context management makes it easier to track knowledge
-        accumulation and step dependencies throughout the reasoning process.
+        Creates a clean state for tracking knowledge accumulation,
+        step results, and validation throughout the reasoning process.
         """
         return {
-            'executed_steps': [],
-            'accumulated_knowledge': {},
-            'retrieval_count': 0,
-            'step_validations': []
+            'executed_steps': [],        # Results from each reasoning step
+            'accumulated_knowledge': {}, # Knowledge gathered throughout process
+            'retrieval_count': 0,        # Track information retrieval operations
+            'step_validations': []       # Validation results for quality control
         }
+```
 
+**Step 6: Individual Step Processing**
+
+This method handles the execution of each reasoning step with integrated retrieval:
+
+```python
     async def _execute_single_chain_step(self, step_data: Dict, context: Dict,
                                        config: Dict, query: str) -> Dict[str, Any]:
         """Execute a single step in the reasoning chain.
 
-        WHY: Breaking down step execution makes the logic clearer and enables
-        better error handling and step-level optimizations.
+        Each step involves: information gathering, reasoning execution,
+        and validation - building toward the complete answer.
         """
         step_num = step_data['step']
         print(f"Executing reasoning step {step_num}: {step_data['thinking']}")
 
-        # Phase 1: Information retrieval if needed
+        # Phase 1: Gather external information if this step needs it
         retrieved_info = await self._handle_step_retrieval(step_data, config, context)
 
-        # Phase 2: Execute the reasoning operation
+        # Phase 2: Execute the actual reasoning operation for this step
         step_execution = await self._execute_single_reasoning_step(
             step_data, retrieved_info, context['accumulated_knowledge'], query
         )
 
-        # Phase 3: Validate step if configured
+        # Phase 3: Validate the step's logical consistency if enabled
         step_validation = await self._handle_step_validation(
             step_execution, step_data, query, config
         )
@@ -565,22 +741,31 @@ class ChainOfThoughtRAG:
             'validation_result': step_validation,
             'logical_consistency': step_validation.get('consistency_score', 0.8) if step_validation else 0.8
         }
+```
+
+**Step 7: Retrieval and Validation Handlers**
+
+Specialized methods for handling information gathering and step validation:
+
+```python
 
     async def _handle_step_retrieval(self, step_data: Dict, config: Dict,
                                    context: Dict) -> Optional[Dict]:
         """Handle information retrieval for a reasoning step.
 
-        WHY: Separating retrieval logic allows for step-specific retrieval strategies
-        and better performance monitoring of information gathering.
+        Retrieves external knowledge when a reasoning step needs additional
+        information to make logical progress.
         """
+        # Skip retrieval if not configured or no query specified
         if not (step_data.get('retrieval_query') and config.get('retrieve_at_each_step')):
             return None
 
+        # Perform targeted retrieval for this reasoning step
         retrieved_info = await self.retrieval_system.retrieve(
             step_data['retrieval_query']
         )
 
-        # Update context tracking
+        # Update tracking metrics and accumulated knowledge
         context['retrieval_count'] += 1
         context['accumulated_knowledge'][f'step_{step_data["step"]}_retrieval'] = retrieved_info
 
@@ -590,19 +775,25 @@ class ChainOfThoughtRAG:
                                     query: str, config: Dict) -> Optional[Dict]:
         """Handle validation for a reasoning step.
 
-        WHY: Step-level validation ensures logical consistency is maintained
-        throughout the chain, preventing error propagation.
+        Validates logical consistency to prevent error propagation
+        throughout the reasoning chain.
         """
         if not config.get('validate_each_step'):
             return None
 
         return await self._validate_reasoning_step(step_execution, step_data, query)
+```
 
+**Step 8: Context Update and Result Compilation**
+
+Final methods for managing execution state and compiling results:
+
+```python
     def _update_execution_context(self, context: Dict, step_result: Dict) -> Dict[str, Any]:
         """Update execution context with step results.
 
-        WHY: Proper context management ensures each step has access to all
-        previous knowledge while maintaining clean separation of concerns.
+        Ensures each step has access to all previous knowledge while
+        maintaining clean separation of concerns.
         """
         context['executed_steps'].append(step_result)
         context['accumulated_knowledge'][f'step_{step_result["step_number"]}_result'] = step_result['execution_result']
@@ -615,8 +806,8 @@ class ChainOfThoughtRAG:
     def _compile_chain_execution_results(self, context: Dict) -> Dict[str, Any]:
         """Compile final results from chain execution context.
 
-        WHY: Centralizing result compilation ensures consistent output format
-        and enables comprehensive performance analysis.
+        Centralizes result compilation for consistent output format
+        and comprehensive performance analysis.
         """
         return {
             'executed_steps': context['executed_steps'],
@@ -630,7 +821,6 @@ class ChainOfThoughtRAG:
                 ]) if context['step_validations'] else 0.8
             }
         }
-```
 
 ### **Bridging NodeRAG Structured Knowledge to Reasoning Capabilities**
 

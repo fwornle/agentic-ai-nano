@@ -172,6 +172,8 @@ class BaseAgent:
 
 **Tool Management and State:**
 
+This section initializes the agent's core operational components. The tools dictionary enables fast tool lookup by name, the memory system provides persistence across conversations, and the conversation history maintains context for improved interactions.
+
 ```python
         self.tools = {tool.name: tool for tool in (tools or [])}  # Available tools
         self.memory = memory or {}            # Persistent memory
@@ -316,6 +318,8 @@ class AgentMessage:
 **Message Design:** This dataclass defines how agents communicate. Each message has an ID for tracking, sender/recipient for routing, content for the actual data, and metadata for additional context.
 
 **Abstract Tool Interface:**
+
+This abstract base class defines the standard interface for all agent tools. It ensures consistent tool behavior across different implementations and provides the foundation for tool discovery and execution. Every tool must implement the execute method with their specific functionality.
 
 ```python
 class Tool(ABC):
@@ -582,6 +586,8 @@ Use the critique to generate a better response:
 
 **Response Improvement:**
 
+This method implements the core improvement phase of the reflection pattern. It takes the original question, current response, and critique to generate an enhanced version that addresses identified weaknesses while preserving strengths. The improvement prompt is carefully crafted to ensure focused enhancements without unnecessary verbosity.
+
 ```python
 # From src/session1/reflection_agent.py (continued)
 async def _improve_response(self, message: str, current_response: str, critique: str) -> str:
@@ -615,6 +621,8 @@ def _is_response_satisfactory(self, critique: str) -> bool:
 For debugging and analysis, track each improvement:
 
 **Reflection Tracking:**
+
+This method captures the complete reflection journey for analysis and debugging purposes. By recording each iteration of the improvement process, developers can understand how the agent's reasoning evolves and identify patterns that could guide further optimization of the reflection process.
 
 ```python
 # From src/session1/reflection_agent.py (continued)
@@ -692,6 +700,8 @@ Agent: "I don't have access to current weather data."
 ```
 
 **With Tools:**
+
+This example demonstrates how tool access transforms agent capabilities, enabling them to provide real-time, accurate information by integrating with external APIs:
 
 ```text
 User: "What's the weather in London?"
@@ -834,6 +844,8 @@ class FileOperationTool(Tool):
 Now let's build an agent that can intelligently select and use tools:
 
 **Tool Use Agent Structure:**
+
+This specialized agent extends the base agent with intelligent tool discovery and usage capabilities. It can analyze available tools, select the most appropriate tool for each task, and track tool usage patterns to improve future decisions. The tool usage history enables analysis of tool effectiveness and optimization opportunities.
 
 ```python
 # From src/session1/tool_use_agent.py
@@ -1091,6 +1103,8 @@ async def _synthesize_response(self, message: str, tool_results: List[Dict]) -> 
     ])
 ```
 
+This synthesis prompt combines all tool results into a coherent, user-friendly response. It instructs the LLM to integrate information naturally while hiding technical execution details, ensuring the final response appears seamless to the user.
+
 ```python
     synthesis_prompt = f"""
     User asked: {message}
@@ -1107,6 +1121,8 @@ async def _synthesize_response(self, message: str, tool_results: List[Dict]) -> 
 ```
 
 **Utility Methods:**
+
+These utility methods provide essential support functions for text processing and fallback response generation when tools aren't needed:
 
 ```python
 # Utility methods
@@ -1159,6 +1175,8 @@ def get_tool_usage_stats(self) -> Dict:
 
 **LLM Integration:**
 
+This method provides a flexible interface for LLM communication, with fallback simulation for testing and development environments:
+
 ```python
 # LLM client integration
 async def _call_llm(self, prompt: str) -> str:
@@ -1188,11 +1206,15 @@ ReAct combines reasoning and acting in a transparent loop, showing its thought p
 
 **Traditional Problem Solving:**
 
+In traditional problem-solving approaches, the reasoning process remains hidden from users and developers:
+
 ```text
 Question → Think Internally → Answer
 ```
 
 **ReAct Approach:**
+
+ReAct makes the reasoning process transparent and iterative, enabling better debugging and understanding:
 
 ```text
 Question → Think (visible) → Act → Observe → Think → Act → ... → Answer
@@ -2038,6 +2060,8 @@ async def demo_bare_metal_agents():
 ```
 
 **Final Statistics and Cleanup:**
+
+After completing all demonstrations, we gather system statistics to show the overall activity and successfully conclude the demo:
 
 ```python
     # System statistics

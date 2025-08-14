@@ -2099,44 +2099,56 @@ class HybridGraphVectorRAG:
 ```
 
 **Step 9: Adaptive Fusion Strategy**
+
+**Understanding Adaptive Selection**
+
+This sophisticated fusion strategy implements query-aware combination of results. Different queries benefit from different retrieval emphasis:
+
+- **Factual queries** ("What is X?") → Higher vector weight  
+- **Analytical queries** ("How does X affect Y?") → Balanced combination
+- **Relational queries** ("What connects X to Y?") → Higher graph weight
+- **Complex synthesis** ("Analyze X's impact on Y through Z") → Dynamic weighting
+
+The fusion process implements key innovations:
+1. **Query Analysis**: LLM-based understanding of query intent and complexity
+2. **Dynamic Weighting**: Adaptive weights based on query characteristics  
+3. **Diversity Selection**: Ensures varied perspectives in final context
+4. **Quality Assurance**: Validates context relevance and coherence
+
+**Core Adaptive Selection Method**
+
 ```python
     def _adaptive_selection(self, query: str, vector_results: Dict,
                           graph_results: Dict, config: Dict) -> Dict[str, Any]:
         """Adaptively select and combine results based on query characteristics.
-
-        This is the most sophisticated fusion strategy, implementing query-aware
-        combination of vector and graph results. The approach recognizes that
-        different queries benefit from different retrieval emphasis:
-
-        - **Factual queries** ("What is X?") → Higher vector weight
-        - **Analytical queries** ("How does X affect Y?") → Balanced combination
-        - **Relational queries** ("What connects X to Y?") → Higher graph weight
-        - **Complex synthesis** ("Analyze X's impact on Y through Z") → Dynamic weighting
-
-        The fusion process implements several key innovations:
-        1. **Query Analysis**: LLM-based understanding of query intent and complexity
-        2. **Dynamic Weighting**: Adaptive weights based on query characteristics
-        3. **Diversity Selection**: Ensures varied perspectives in final context
-        4. **Quality Assurance**: Validates context relevance and coherence
-
-        This approach typically improves answer quality by 25-40% over static weighting.
+        
+        This approach typically improves answer quality by 25-40% over static weighting
+        by intelligently weighing vector vs graph results based on query type.
         """
 
         print("Applying adaptive selection fusion strategy...")
 
-        # Analyze query characteristics using LLM
+        # Phase 1: Analyze query to understand characteristics and intent
         query_analysis = self._analyze_query_characteristics(query)
         print(f"Query analysis: {query_analysis}")
 
-        # Determine optimal fusion weights based on query type
+        # Phase 2: Determine optimal fusion weights based on query type
         fusion_weights = self._determine_adaptive_weights(query_analysis)
-        print(f"Adaptive weights - Vector: {fusion_weights['vector_weight']:.2f}, Graph: {fusion_weights['graph_weight']:.2f}")
+        print(f"Adaptive weights - Vector: {fusion_weights['vector_weight']:.2f}, "
+              f"Graph: {fusion_weights['graph_weight']:.2f}")
+```
 
-        # Get vector contexts with enriched metadata
+**Context Extraction and Processing**
+
+Extract and prepare contexts from both vector and graph retrieval:
+
+```python
+
+        # Phase 3: Extract vector contexts with enriched metadata
         vector_contexts = vector_results.get('results', [])
         print(f"Processing {len(vector_contexts)} vector contexts")
 
-        # Get graph contexts with path information
+        # Phase 4: Extract graph contexts with path information
         graph_contexts = []
         if 'path_contexts' in graph_results:
             graph_contexts = [
@@ -2151,17 +2163,24 @@ class HybridGraphVectorRAG:
                 for ctx in graph_results['path_contexts']
             ]
         print(f"Processing {len(graph_contexts)} graph contexts")
+```
 
-        # Score and rank all contexts with adaptive weighting
+**Adaptive Scoring and Context Processing**
+
+Now apply adaptive weights and query-specific boosts to all contexts:
+
+```python
+        # Phase 5: Initialize context collection with adaptive scoring
         all_contexts = []
 
-        # Process vector contexts with adapted scoring
+        # Process vector contexts with adaptive weights and boosts
         for ctx in vector_contexts:
             vector_score = ctx.get('similarity_score', 0.5)
+            
             # Apply adaptive weight based on query analysis
             adapted_score = vector_score * fusion_weights['vector_weight']
 
-            # Add query-specific boosts
+            # Apply query-specific boosts for better relevance
             if query_analysis.get('type') == 'factual' and vector_score > 0.8:
                 adapted_score *= 1.2  # Boost high-confidence factual matches
 
@@ -2173,14 +2192,22 @@ class HybridGraphVectorRAG:
                 'original_score': vector_score,
                 'boost_applied': adapted_score / (vector_score * fusion_weights['vector_weight']) if vector_score > 0 else 1.0
             })
+```
 
-        # Process graph contexts with adapted scoring
+**Graph Context Processing with Adaptive Scoring**
+
+Process graph contexts with relationship-aware scoring:
+
+```python
+
+        # Process graph contexts with relationship-aware adaptive scoring
         for ctx in graph_contexts:
             graph_score = ctx['score']
+            
             # Apply adaptive weight based on query analysis
             adapted_score = graph_score * fusion_weights['graph_weight']
 
-            # Add query-specific boosts
+            # Apply query-specific boosts for relationship understanding
             if query_analysis.get('complexity') == 'complex' and ctx['path_length'] > 2:
                 adapted_score *= 1.3  # Boost multi-hop reasoning for complex queries
 

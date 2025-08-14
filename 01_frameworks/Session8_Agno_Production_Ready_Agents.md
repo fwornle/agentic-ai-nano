@@ -597,6 +597,10 @@ Each agent in the pool is optimized for speed and consistency. Using GPT-4o-mini
 - **Round-Robin Load Distribution**: Evenly distributes work across all pool agents
 - **Resource Efficiency**: Maintains optimal resource utilization without overloading individual agents
 
+#### **Benchmark Setup**
+
+First, let's set up the throughput benchmarking:
+
 ```python
 # Usage example with performance monitoring
 import time
@@ -610,21 +614,41 @@ async def benchmark_throughput():
         for i in range(20)
     ]
     
+    return await measure_performance(agent, requests)
+```
+
+#### **Performance Measurement**
+
+Next, let's implement the performance measurement logic:
+
+```python
+async def measure_performance(agent, requests):
+    """Measure and report performance metrics"""
     start_time = time.time()
     results = await agent.process_batch(requests)
     end_time = time.time()
     
-    # Calculate performance metrics
+    # Calculate and display metrics
     total_time = end_time - start_time
     requests_per_second = len(requests) / total_time
     
     print(f"Processed {len(requests)} requests in {total_time:.2f} seconds")
     print(f"Throughput: {requests_per_second:.2f} requests/second")
     
-    # Check for errors
+    return calculate_success_rate(results)
+```
+
+#### **Success Rate Calculation**
+
+Finally, let's calculate and report the success rate:
+
+```python
+def calculate_success_rate(results):
+    """Calculate success rate from batch results"""
     successful_results = [r for r in results if not isinstance(r, Exception)]
     error_rate = (len(results) - len(successful_results)) / len(results)
     print(f"Success rate: {(1 - error_rate):.1%}")
+    return successful_results
 
 # Run benchmark
 asyncio.run(benchmark_throughput())
@@ -697,6 +721,10 @@ The configuration establishes failure thresholds, retry behavior, and health mon
 
 Circuit breakers prevent cascade failures by failing fast when downstream services are unavailable.
 
+#### **Circuit Breaker Check**
+
+First, let's check the circuit breaker state before processing:
+
 ```python
     async def process_with_resilience(self, request: str) -> str:
         """Process request with full fault tolerance"""
@@ -705,12 +733,21 @@ Circuit breakers prevent cascade failures by failing fast when downstream servic
         if self.circuit_breaker.state == CircuitState.OPEN:
             raise Exception("Circuit breaker open - service unavailable")
         
-        # Attempt processing with retries
+        return await self._execute_with_retries(request)
+```
+
+#### **Retry Logic Implementation**
+
+Now let's implement the retry logic with proper error handling:
+
+```python
+    async def _execute_with_retries(self, request: str) -> str:
+        """Execute request with retry logic"""
         last_exception = None
         
         for attempt in range(self.retry_policy.max_retries + 1):
             try:
-                # Process with timeout
+                # Process with timeout protection
                 result = await asyncio.wait_for(
                     self.agent.run(request),
                     timeout=30.0
@@ -723,18 +760,31 @@ Circuit breakers prevent cascade failures by failing fast when downstream servic
             except Exception as e:
                 last_exception = e
                 self.circuit_breaker.record_failure()
-                
-                if attempt < self.retry_policy.max_retries:
-                    delay = self.retry_policy.get_delay(attempt)
-                    logging.warning(f"Attempt {attempt + 1} failed, retrying in {delay}s")
-                    await asyncio.sleep(delay)
-                else:
-                    logging.error(f"All retry attempts failed: {e}")
+                await self._handle_retry_attempt(attempt, e)
         
         raise last_exception
 ```
 
+#### **Retry Attempt Handling**
+
+Finally, let's handle individual retry attempts:
+
+```python
+    async def _handle_retry_attempt(self, attempt: int, error: Exception):
+        """Handle retry attempt with appropriate delays"""
+        if attempt < self.retry_policy.max_retries:
+            delay = self.retry_policy.get_delay(attempt)
+            logging.warning(f"Attempt {attempt + 1} failed, retrying in {delay}s")
+            await asyncio.sleep(delay)
+        else:
+            logging.error(f"All retry attempts failed: {error}")
+```
+
 This comprehensive error handling ensures production stability even when individual components fail.
+
+#### **Health Monitoring Agent Setup**
+
+First, let's create the base health monitoring agent:
 
 ```python
 # Health monitoring integration
@@ -746,7 +796,13 @@ class HealthMonitoringAgent(ResilientAgent):
     def start_health_monitoring(self):
         """Start background health monitoring"""
         asyncio.create_task(self._health_monitor_loop())
-    
+```
+
+#### **Health Monitor Loop**
+
+Next, let's implement the continuous monitoring loop:
+
+```python
     async def _health_monitor_loop(self):
         """Continuous health monitoring"""
         while True:
@@ -756,7 +812,6 @@ class HealthMonitoringAgent(ResilientAgent):
                 
                 if not health_status.healthy:
                     logging.error(f"Health check failed: {health_status.message}")
-                    # Trigger alerts or recovery procedures
                     await self._handle_unhealthy_state()
                 else:
                     logging.debug("Health check passed")
@@ -765,11 +820,17 @@ class HealthMonitoringAgent(ResilientAgent):
                 logging.error(f"Health monitoring error: {e}")
             
             await asyncio.sleep(self.health_check.check_interval)
-    
+```
+
+#### **Health Check Implementation**
+
+Finally, let's implement the health check logic:
+
+```python
     async def _check_health(self) -> HealthStatus:
         """Perform comprehensive health check"""
         try:
-            # Test basic functionality
+            # Test basic functionality with timeout
             test_response = await asyncio.wait_for(
                 self.agent.run("Health check test"),
                 timeout=10.0
@@ -1828,6 +1889,10 @@ class AdvancedWorkflowEngine:
 
 Event-driven workflows provide loose coupling and better observability for complex production processes.
 
+**Initialize scatter-gather workflow**
+
+Start the scatter-gather pattern with proper workflow tracking:
+
 ```python
     async def execute_scatter_gather_workflow(self, 
                                             data_sources: List[str], 
@@ -1836,23 +1901,37 @@ Event-driven workflows provide loose coupling and better observability for compl
         
         workflow_id = f"scatter_gather_{int(time.time())}"
         
-        # Emit workflow started event
+        # Emit workflow started event for monitoring
         await self.event_bus.emit("workflow.started", {
             "workflow_id": workflow_id,
             "pattern": "scatter_gather",
             "data_sources": data_sources
         })
-        
+```
+
+**Implement scatter phase - distribute work**
+
+Create multiple agents to process data sources in parallel:
+
+```python
         try:
             # Scatter Phase: Distribute work across multiple agents
             scatter_tasks = []
             for i, data_source in enumerate(data_sources):
+                # Create specialized agent for each data source
                 agent = Agent(
                     name=f"scatter_agent_{i}",
                     model="gpt-4o-mini",  # Use faster model for parallel work
                     instructions=f"Analyze data from {data_source} for: {analysis_task}"
                 )
-                
+```
+
+**Execute scatter tasks concurrently**
+
+Run all scatter tasks in parallel for optimal performance:
+
+```python
+                # Create async task for parallel execution
                 task = asyncio.create_task(
                     self._execute_scatter_task(agent, data_source, analysis_task)
                 )
@@ -1860,16 +1939,29 @@ Event-driven workflows provide loose coupling and better observability for compl
             
             # Wait for all scatter tasks to complete
             scatter_results = await asyncio.gather(*scatter_tasks, return_exceptions=True)
-            
-            # Filter successful results
+```
+
+**Handle scatter results and errors**
+
+Filter successful results and handle partial failures gracefully:
+
+```python
+            # Filter successful results from any failed tasks
             successful_results = [
                 result for result in scatter_results 
                 if not isinstance(result, Exception)
             ]
             
+            # Ensure we have at least some successful results
             if not successful_results:
                 raise WorkflowExecutionError("All scatter tasks failed")
-            
+```
+
+**Initialize gather phase**
+
+Create a specialized agent for synthesizing scattered results:
+
+```python
             # Gather Phase: Combine results with specialized agent
             gather_agent = Agent(
                 name="gather_agent",
@@ -1879,24 +1971,45 @@ Event-driven workflows provide loose coupling and better observability for compl
                 Identify patterns, conflicts, and key insights across all sources.
                 """
             )
-            
+```
+
+**Prepare data for synthesis**
+
+Structure the scattered results for the gather agent:
+
+```python
+            # Prepare combined input for synthesis
             combined_input = {
                 "task": analysis_task,
                 "source_analyses": successful_results,
                 "data_sources": data_sources
             }
             
+            # Execute synthesis with gather agent
             final_result = await gather_agent.run(
                 f"Synthesize analysis results: {json.dumps(combined_input)}"
             )
-            
-            # Emit completion event
+```
+
+**Emit completion events**
+
+Track successful workflow completion for monitoring:
+
+```python
+            # Emit completion event for workflow monitoring
             await self.event_bus.emit("workflow.completed", {
                 "workflow_id": workflow_id,
                 "success": True,
                 "results_processed": len(successful_results)
             })
-            
+```
+
+**Return comprehensive results**
+
+Provide detailed workflow results with metadata:
+
+```python
+            # Return comprehensive workflow results
             return {
                 "workflow_id": workflow_id,
                 "pattern": "scatter_gather", 
@@ -1905,16 +2018,39 @@ Event-driven workflows provide loose coupling and better observability for compl
                 "data_sources_processed": len(successful_results),
                 "execution_time": time.time() - self.active_workflows[workflow_id]["start_time"]
             }
-            
+```
+
+**Handle workflow errors**
+
+Implement comprehensive error handling with event tracking:
+
+```python
         except Exception as e:
+            # Emit failure event for monitoring and alerting
             await self.event_bus.emit("workflow.failed", {
                 "workflow_id": workflow_id,
                 "error": str(e)
             })
             raise
 ```
+```
 
-Scatter-gather patterns are ideal for processing data from multiple sources in parallel, then combining results.
+**Testing Your Scatter-Gather Implementation**
+
+Test the scatter-gather workflow with this validation example:
+
+```python
+# Test scatter-gather workflow
+workflow = AgentWorkflowOrchestrator()
+data_sources = ["database_a", "api_b", "file_c"]
+analysis_task = "Identify customer satisfaction trends"
+
+# Execute workflow
+result = await workflow.execute_scatter_gather_workflow(data_sources, analysis_task)
+print(f"Processed {result['data_sources_processed']} sources in {result['execution_time']:.2f}s")
+```
+
+Scatter-gather patterns are ideal for processing data from multiple sources in parallel, then combining results for comprehensive analysis.
 
 ---
 
@@ -2463,44 +2599,76 @@ Distributed tracing provides request-level visibility across all system componen
 
 **Step 4: Structured Logging - Detailed Event Records**
 
+**Initialize structured logging configuration**
+
+Set up comprehensive logging with machine-readable JSON format:
+
 ```python    
     def _setup_structured_logging(self) -> StructuredLogger:
         """Configure comprehensive structured logging"""
         
+        # Create logger with JSON format for machine processing
         logger = StructuredLogger(
             name="agno-production",
             level=self.monitoring_config.get("log_level", "INFO"),
             format="json",              # Machine-readable format
-            
-            # Include rich context in every log entry
-            default_fields={
-                "service": "agno-production",
-                "environment": self.monitoring_config["environment"],
-                "version": "1.0.0",
-                "timestamp": "auto",
-                "trace_id": "auto",     # Correlate with traces
-                "span_id": "auto"
-            },
-            
-            # Configure log aggregation for analysis
-            aggregators=[
-                LogAggregator(
-                    type="elasticsearch",
-                    endpoint="http://elasticsearch:9200",
-                    index_pattern="agno-logs-{date}",
-                    batch_size=100,
-                    flush_interval=10
-                ),
-                # Add multiple aggregators for redundancy
-                LogAggregator(
-                    type="cloudwatch",
-                    log_group="/aws/agno/production",
-                    log_stream="application-{hostname}",
-                    retention_days=self.monitoring_config["retention_days"]
-                )
-            ]
         )
-        
+```
+
+**Configure default logging context**
+
+Add rich context fields to every log entry for better traceability:
+
+```python
+        # Include rich context in every log entry
+        logger.configure_defaults({
+            "service": "agno-production",
+            "environment": self.monitoring_config["environment"],
+            "version": "1.0.0",
+            "timestamp": "auto",
+            "trace_id": "auto",     # Correlate with traces
+            "span_id": "auto"
+        })
+```
+
+**Set up log aggregation systems**
+
+Configure multiple log aggregators for redundancy and analysis:
+
+```python
+        # Configure log aggregation for analysis
+        logger.add_aggregators([
+            LogAggregator(
+                type="elasticsearch",
+                endpoint="http://elasticsearch:9200",
+                index_pattern="agno-logs-{date}",
+                batch_size=100,
+                flush_interval=10
+            ),
+        ])
+```
+
+**Add cloud logging integration**
+
+Integrate with cloud-based logging services for enterprise monitoring:
+
+```python
+        # Add cloud logging for enterprise environments
+        logger.add_aggregator(
+            LogAggregator(
+                type="cloudwatch",
+                log_group="/aws/agno/production",
+                log_stream="application-{hostname}",
+                retention_days=self.monitoring_config["retention_days"]
+            )
+        )
+```
+
+**Configure intelligent log sampling**
+
+Optimize log volume with smart sampling strategies:
+
+```python
         # Configure log sampling to manage volume
         logger.configure_sampling({
             "debug": 0.01,      # Sample 1% of debug logs
@@ -2511,43 +2679,90 @@ Distributed tracing provides request-level visibility across all system componen
         })
         
         return logger
+```
     
+**Initialize alerting system**
+
+Set up intelligent alerting with webhook integration:
+
+```python
     def _setup_alerting(self) -> AlertManager:
         """Configure intelligent alerting system"""
         
+        # Initialize alert manager with webhook integration
         alert_manager = AlertManager(
             webhook_url="http://alertmanager:9093/api/v1/alerts",
-            default_channels=self.monitoring_config["alert_channels"],
-            
-            # Critical production alerts
-            critical_alerts=[
-                {
-                    "name": "AgentSystemDown",
-                    "condition": "up{job='agno-production'} == 0",
-                    "duration": "1m",
-                    "description": "Agno production system is completely down",
-                    "severity": "critical",
-                    "channels": ["pagerduty", "slack"],
-                    "escalation": "immediate"
-                },
-                {
-                    "name": "HighErrorRate", 
-                    "condition": "rate(agno_requests_total{status='error'}[5m]) > 0.1",
-                    "duration": "2m",
-                    "description": "Error rate exceeds 10% for 2 minutes",
-                    "severity": "critical",
-                    "channels": ["pagerduty", "slack"]
-                },
-                {
-                    "name": "ExcessiveCosts",
-                    "condition": f"increase(agno_api_cost_dollars_total[1d]) > {self.monitoring_config['cost_alert_threshold']}",
-                    "duration": "5m",
-                    "description": f"Daily API costs exceed ${self.monitoring_config['cost_alert_threshold']}",
-                    "severity": "critical",
-                    "channels": ["email", "slack"]
-                }
-            ]
+            default_channels=self.monitoring_config["alert_channels"]
         )
+```
+
+**Configure system availability alerts**
+
+Define critical alerts for system health monitoring:
+
+```python
+        # Critical system availability alert
+        alert_manager.add_critical_alert({
+            "name": "AgentSystemDown",
+            "condition": "up{job='agno-production'} == 0",
+            "duration": "1m",
+            "description": "Agno production system is completely down",
+            "severity": "critical",
+            "channels": ["pagerduty", "slack"],
+            "escalation": "immediate"
+        })
+```
+
+**Set up error rate monitoring**
+
+Implement alerts for high error rates that could impact users:
+
+```python
+        # High error rate alert to prevent customer impact
+        alert_manager.add_critical_alert({
+            "name": "HighErrorRate", 
+            "condition": "rate(agno_requests_total{status='error'}[5m]) > 0.1",
+            "duration": "2m",
+            "description": "Error rate exceeds 10% for 2 minutes",
+            "severity": "critical",
+            "channels": ["pagerduty", "slack"]
+        })
+```
+
+**Configure cost monitoring alerts**
+
+Set up proactive cost control with budget threshold alerts:
+
+```python
+        # Cost control alert for budget management
+        alert_manager.add_critical_alert({
+            "name": "ExcessiveCosts",
+            "condition": f"increase(agno_api_cost_dollars_total[1d]) > {self.monitoring_config['cost_alert_threshold']}",
+            "duration": "5m",
+            "description": f"Daily API costs exceed ${self.monitoring_config['cost_alert_threshold']}",
+            "severity": "critical",
+            "channels": ["email", "slack"]
+        })
+        
+        return alert_manager
+```
+```
+
+**Testing Your Monitoring Configuration**
+
+Validate your monitoring setup with this comprehensive test:
+
+```python
+# Test monitoring configuration
+monitoring = ProductionMonitoring()
+
+# Test structured logging
+logger = monitoring._setup_structured_logging()
+logger.info("Test log entry", extra={"agent_id": "test-123", "operation": "validate"})
+
+# Test alerting system
+alert_manager = monitoring._setup_alerting()
+print(f"Configured {len(alert_manager.critical_alerts)} critical alerts")
 ```
 
 **Alert Strategy Benefits:**
@@ -2918,23 +3133,40 @@ You now have production-deployed, monitored agent systems running at scale. The 
 
 Production Agno deployments in enterprise environments require comprehensive security measures and compliance with industry standards:
 
+**Step 1: Import enterprise security dependencies**
+
+Import essential security, compliance, and authentication modules:
+
 ```python
 from agno.security import SecurityManager, EncryptionService, AuditLogger
 from agno.compliance import ComplianceValidator, DataGovernance
 from agno.auth import EnterpriseAuth, RoleBasedAccess
 import jwt
 import hashlib
+```
 
+**Step 2: Initialize enterprise security layer**
+
+Create the main security class with all required components:
+
+```python
 class EnterpriseSecurityLayer:
     """Enterprise-grade security for Agno deployments"""
     
     def __init__(self):
+        # Initialize core security components
         self.security_manager = SecurityManager()
         self.encryption_service = EncryptionService()
         self.audit_logger = AuditLogger()
         self.compliance_validator = ComplianceValidator()
-        
-        # Security configuration
+```
+
+**Step 3: Configure encryption standards**
+
+Set up encryption policies for data at rest and in transit:
+
+```python
+        # Encryption configuration for enterprise standards
         self.security_config = {
             "encryption": {
                 "at_rest": True,
@@ -2942,43 +3174,92 @@ class EnterpriseSecurityLayer:
                 "algorithm": "AES-256-GCM",
                 "key_rotation_days": 90
             },
-            "authentication": {
-                "method": "enterprise_sso",
-                "token_expiry": 3600,  # 1 hour
-                "refresh_token_expiry": 604800,  # 1 week
-                "multi_factor_required": True
-            },
-            "authorization": {
-                "rbac_enabled": True,
-                "fine_grained_permissions": True,
-                "audit_all_access": True
-            },
-            "compliance": {
-                "frameworks": ["SOC2", "GDPR", "HIPAA", "PCI-DSS"],
-                "data_retention_days": 2555,  # 7 years
-                "anonymization_required": True
-            }
         }
-    
-    async def secure_agent_request(self, request: AgentRequest, user_context: UserContext) -> SecuredRequest:
+```
+
+**Step 4: Configure authentication policies**
+
+Define enterprise SSO and multi-factor authentication requirements:
+
+```python
+        # Authentication and token management policies
+        self.security_config["authentication"] = {
+            "method": "enterprise_sso",
+            "token_expiry": 3600,  # 1 hour
+            "refresh_token_expiry": 604800,  # 1 week
+            "multi_factor_required": True
+        }
+```
+
+**Step 5: Set authorization and access control**
+
+Implement role-based access control with fine-grained permissions:
+
+```python
+        # Authorization and access control configuration
+        self.security_config["authorization"] = {
+            "rbac_enabled": True,
+            "fine_grained_permissions": True,
+            "audit_all_access": True
+        }
+```
+
+**Step 6: Define compliance frameworks**
+
+Configure compliance requirements for multiple industry standards:
+
+```python
+        # Compliance framework requirements
+        self.security_config["compliance"] = {
+            "frameworks": ["SOC2", "GDPR", "HIPAA", "PCI-DSS"],
+            "data_retention_days": 2555,  # 7 years
+            "anonymization_required": True
+        }
+```
+
+**Step 7: Implement secure request processing**
+
+Begin the main method for securing agent requests:
+
+```python
+    async def secure_agent_request(self, request: AgentRequest, 
+                                 user_context: UserContext) -> SecuredRequest:
         """Apply comprehensive security to agent requests"""
         
-        # Authentication validation
+        # Step 1: Validate authentication token
         auth_result = await self._validate_authentication(request.auth_token)
         if not auth_result.valid:
             raise SecurityException("Invalid authentication token")
-        
-        # Authorization check
+```
+
+**Step 8: Perform authorization checks**
+
+Validate user permissions and log access attempts:
+
+```python
+        # Step 2: Check user permissions for the requested operation
         permissions = await self._check_permissions(auth_result.user, request.operation)
         if not permissions.allowed:
             await self.audit_logger.log_access_denied(auth_result.user, request.operation)
             raise AuthorizationException("Insufficient permissions")
-        
-        # Data classification and protection
+```
+
+**Step 9: Apply data protection measures**
+
+Classify and protect sensitive data according to policies:
+
+```python
+        # Step 3: Classify and protect sensitive data
         classified_data = await self._classify_request_data(request.data)
         protected_request = await self._apply_data_protection(request, classified_data)
-        
-        # Compliance validation
+```
+
+**Step 10: Validate compliance requirements**
+
+Ensure request meets all applicable compliance frameworks:
+
+```python
+        # Step 4: Validate compliance with enterprise frameworks
         compliance_check = await self.compliance_validator.validate_request(
             request=protected_request,
             user=auth_result.user,
@@ -2988,15 +3269,28 @@ class EnterpriseSecurityLayer:
         if not compliance_check.compliant:
             await self.audit_logger.log_compliance_violation(compliance_check)
             raise ComplianceException(f"Request violates compliance: {compliance_check.violations}")
-        
-        # Audit logging
+```
+
+**Step 11: Log security audit trail**
+
+Create comprehensive audit logs for security monitoring:
+
+```python
+        # Step 5: Create comprehensive audit trail
         await self.audit_logger.log_secure_request(
             user=auth_result.user,
             request=protected_request,
             classifications=classified_data,
             timestamp=datetime.utcnow()
         )
-        
+```
+
+**Step 12: Return secured request object**
+
+Generate final secured request with all security metadata:
+
+```python
+        # Return fully secured request with metadata
         return SecuredRequest(
             original_request=request,
             user_context=auth_result.user,
@@ -3005,8 +3299,30 @@ class EnterpriseSecurityLayer:
             compliance_metadata=compliance_check.metadata
         )
 ```
+```
 
-Enterprise security encompasses authentication, authorization, data protection, and compliance validation.
+**Testing Your Enterprise Security Implementation**
+
+Validate the security layer with this comprehensive test:
+
+```python
+# Test enterprise security implementation
+security_layer = EnterpriseSecurityLayer()
+test_request = AgentRequest(
+    auth_token="jwt_token_here",
+    operation="process_pii_data",
+    data={"customer_email": "test@example.com", "account_balance": 1500.00}
+)
+user_context = UserContext(user_id="user123", department="finance")
+
+# Test secure request processing
+secured_request = await security_layer.secure_agent_request(test_request, user_context)
+print(f"Security applied: {secured_request.applied_protections}")
+```
+
+Enterprise security encompasses authentication, authorization, data protection, and compliance validation to ensure production-ready agent deployments.
+
+Start by creating a method to classify data according to enterprise policies:
 
 ```python
     async def _classify_request_data(self, data: Dict[str, Any]) -> DataClassification:
@@ -3014,8 +3330,16 @@ Enterprise security encompasses authentication, authorization, data protection, 
         
         classifications = {}
         
+        # Process each field in the request data
         for field, value in data.items():
-            # PII detection
+```
+
+**Step 2: Implement PII detection and classification**
+
+Detect and classify personally identifiable information with high sensitivity:
+
+```python
+            # PII detection with strict protection requirements
             if self._contains_pii(value):
                 classifications[field] = {
                     "type": "PII",
@@ -3023,8 +3347,14 @@ Enterprise security encompasses authentication, authorization, data protection, 
                     "protection_required": ["encryption", "anonymization"],
                     "retention_policy": "7_years_then_delete"
                 }
-            
-            # Financial data detection
+```
+
+**Step 3: Classify financial and regulatory data**
+
+Identify financial data requiring regulatory compliance:
+
+```python
+            # Financial data detection with regulatory requirements
             elif self._contains_financial_data(value):
                 classifications[field] = {
                     "type": "financial",
@@ -3032,8 +3362,14 @@ Enterprise security encompasses authentication, authorization, data protection, 
                     "protection_required": ["encryption", "access_logging"],
                     "retention_policy": "10_years_regulatory"
                 }
-            
-            # Business confidential
+```
+
+**Step 4: Handle confidential business information**
+
+Classify business confidential data with medium sensitivity:
+
+```python
+            # Business confidential data classification
             elif self._contains_confidential_info(value):
                 classifications[field] = {
                     "type": "confidential",
@@ -3041,7 +3377,14 @@ Enterprise security encompasses authentication, authorization, data protection, 
                     "protection_required": ["encryption"],
                     "retention_policy": "standard_business"
                 }
-            
+```
+
+**Step 5: Default classification for public data**
+
+Assign default classification for non-sensitive public data:
+
+```python
+            # Default classification for public data
             else:
                 classifications[field] = {
                     "type": "public",
@@ -3049,13 +3392,26 @@ Enterprise security encompasses authentication, authorization, data protection, 
                     "protection_required": [],
                     "retention_policy": "standard"
                 }
-        
+```
+
+**Step 6: Generate comprehensive classification report**
+
+Return complete data classification with overall sensitivity assessment:
+
+```python
+        # Generate comprehensive classification report
         return DataClassification(
             fields=classifications,
             overall_sensitivity=self._determine_overall_sensitivity(classifications),
             required_protections=self._aggregate_protection_requirements(classifications)
         )
-    
+```
+
+**Step 7: Initialize data protection application**
+
+Begin applying protection measures based on classifications:
+
+```python
     async def _apply_data_protection(self, 
                                    request: AgentRequest, 
                                    classifications: DataClassification) -> ProtectedRequest:
@@ -3063,42 +3419,80 @@ Enterprise security encompasses authentication, authorization, data protection, 
         
         protected_data = {}
         protection_metadata = {}
-        
+```
+
+**Step 8: Apply encryption for sensitive data**
+
+Implement encryption protection for classified sensitive fields:
+
+```python
+        # Process each field and apply required protections
         for field, value in request.data.items():
             field_classification = classifications.fields[field]
             
+            # Apply encryption for sensitive data
             if "encryption" in field_classification["protection_required"]:
-                # Encrypt sensitive data
                 encrypted_value = await self.encryption_service.encrypt(
                     data=value,
                     key_id=self._get_encryption_key_id(field_classification["type"])
                 )
                 protected_data[field] = encrypted_value
+```
+
+**Step 9: Track encryption metadata**
+
+Record encryption details for audit and recovery purposes:
+
+```python
+                # Record encryption metadata for audit trail
                 protection_metadata[field] = {
                     "protection_applied": "AES-256-GCM encryption",
                     "key_id": encrypted_value.key_id,
                     "encrypted_at": datetime.utcnow()
                 }
-            
+```
+
+**Step 10: Apply anonymization techniques**
+
+Implement anonymization for PII data requiring privacy protection:
+
+```python
+            # Apply anonymization for PII data
             if "anonymization" in field_classification["protection_required"]:
-                # Apply anonymization techniques
                 anonymized_value = await self._anonymize_data(value, field_classification["type"])
                 protected_data[field] = anonymized_value
+                
+                # Record anonymization metadata
                 protection_metadata[field] = {
                     **protection_metadata.get(field, {}),
                     "anonymization_method": anonymized_value.method,
                     "anonymized_at": datetime.utcnow()
                 }
-            
+```
+
+**Step 11: Handle unprotected public data**
+
+Process public data without additional protection overhead:
+
+```python
+            # Process public data without protection overhead
             if not field_classification["protection_required"]:
                 protected_data[field] = value
-        
+```
+
+**Step 12: Return protected request object**
+
+Generate final protected request with all applied safeguards:
+
+```python
+        # Return comprehensive protected request
         return ProtectedRequest(
             original_request=request,
             protected_data=protected_data,
             protection_metadata=protection_metadata,
             classification=classifications
         )
+```
 ```
 
 **Protection Application Benefits:**
@@ -3410,23 +3804,38 @@ This workflow demonstrates how Agno transforms a typical 2-3 day manual process 
 
 Enterprise deployments require sophisticated cost management and optimization:
 
-**Step 1: Initialize cost tracking infrastructure**
+**Step 1: Import cost management dependencies**
+
+Start by importing the essential cost tracking and optimization modules:
 
 ```python
 from agno.cost import CostTracker, BudgetManager, OptimizationEngine
 from agno.analytics import UsageAnalytics, ROICalculator
+```
 
+**Step 2: Initialize the enterprise cost management class**
+
+Create the main cost management class with monitoring components:
+
+```python
 class EnterpriseCostManagement:
     """Enterprise cost management and optimization"""
     
     def __init__(self):
+        # Initialize core cost tracking components
         self.cost_tracker = CostTracker()
         self.budget_manager = BudgetManager()
         self.optimization_engine = OptimizationEngine()
         self.usage_analytics = UsageAnalytics()
         self.roi_calculator = ROICalculator()
-        
-        # Cost configuration
+```
+
+**Step 3: Configure budget limits and thresholds**
+
+Set up organizational budget structure with department and project limits:
+
+```python
+        # Cost configuration with organizational structure
         self.cost_config = {
             "budgets": {
                 "monthly_total": 50000,  # $50K per month
@@ -3436,12 +3845,17 @@ class EnterpriseCostManagement:
                     "marketing": 10000,
                     "hr": 5000
                 },
-                "project_limits": {
-                    "high_priority": 5000,
-                    "medium_priority": 2000,
-                    "low_priority": 500
-                }
-            },
+            }
+        }
+```
+
+**Step 4: Set optimization and alerting parameters**
+
+Define efficiency targets and alerting thresholds:
+
+```python
+        # Optimization and alerting configuration
+        self.cost_config.update({
             "optimization": {
                 "target_efficiency": 0.85,  # 85% cost efficiency
                 "model_switching_threshold": 0.1,  # Switch if 10% cost savings
@@ -3452,25 +3866,33 @@ class EnterpriseCostManagement:
                 "budget_critical_threshold": 0.95,  # 95% of budget
                 "anomaly_detection": True
             }
-        }
-    
-    async def track_request_cost(self, agent_request: AgentRequest, response: AgentResponse) -> CostRecord:
+        })
+```
+
+**Step 5: Implement comprehensive cost tracking**
+
+Create the main method to track costs for each agent request:
+
+```python
+    async def track_request_cost(self, agent_request: AgentRequest, 
+                               response: AgentResponse) -> CostRecord:
         """Track comprehensive cost for each request"""
         
-        # Calculate base model costs
+        # Calculate all cost components
         model_cost = await self._calculate_model_cost(agent_request, response)
-        
-        # Calculate infrastructure costs
         infrastructure_cost = await self._calculate_infrastructure_cost(agent_request)
-        
-        # Calculate tool usage costs  
         tool_cost = await self._calculate_tool_costs(agent_request.tools_used)
-        
-        # Calculate storage costs
         storage_cost = await self._calculate_storage_cost(agent_request, response)
         
         total_cost = model_cost + infrastructure_cost + tool_cost + storage_cost
-        
+```
+
+**Step 6: Create detailed cost records**
+
+Build comprehensive cost records with metadata for analysis:
+
+```python
+        # Build detailed cost record with all metadata
         cost_record = CostRecord(
             request_id=agent_request.id,
             timestamp=datetime.utcnow(),
@@ -3479,42 +3901,62 @@ class EnterpriseCostManagement:
             project_id=agent_request.project_id,
             agent_type=agent_request.agent_type,
             model_used=response.model,
-            costs={
-                "model": model_cost,
-                "infrastructure": infrastructure_cost,
-                "tools": tool_cost,
-                "storage": storage_cost,
-                "total": total_cost
-            },
-            tokens={
-                "input_tokens": response.input_tokens,
-                "output_tokens": response.output_tokens,
-                "total_tokens": response.total_tokens
-            },
-            performance={
-                "response_time": response.processing_time,
-                "cache_hit": response.cache_hit,
-                "quality_score": response.quality_score
-            }
         )
+```
+
+**Step 7: Structure cost and performance data**
+
+Organize cost breakdown and performance metrics:
+
+```python
+        # Add cost breakdown and performance metrics
+        cost_record.costs = {
+            "model": model_cost,
+            "infrastructure": infrastructure_cost,
+            "tools": tool_cost,
+            "storage": storage_cost,
+            "total": total_cost
+        }
         
-        # Store cost record
+        cost_record.performance = {
+            "response_time": response.processing_time,
+            "cache_hit": response.cache_hit,
+            "quality_score": response.quality_score
+        }
+```
+
+**Step 8: Store and validate cost records**
+
+Save the cost record and check budget compliance:
+
+```python
+        # Store cost record and validate budget compliance
         await self.cost_tracker.record_cost(cost_record)
-        
-        # Check budget compliance
         await self._check_budget_compliance(cost_record)
         
         return cost_record
-    
+```
+
+**Step 9: Generate optimization reports**
+
+Implement comprehensive cost optimization analysis:
+
+```python
     async def generate_cost_optimization_report(self, period_days: int = 30) -> CostOptimizationReport:
         """Generate comprehensive cost optimization recommendations"""
         
-        # Analyze usage patterns
+        # Analyze usage patterns over the specified period
         usage_data = await self.usage_analytics.get_usage_patterns(
             start_date=datetime.utcnow() - timedelta(days=period_days),
             end_date=datetime.utcnow()
         )
-        
+```
+
+**Step 10: Analyze cost breakdown and identify savings**
+
+Break down costs by dimensions and find optimization opportunities:
+
+```python
         # Calculate current costs by dimension
         cost_breakdown = await self.cost_tracker.get_cost_breakdown(
             period_days=period_days,
@@ -3526,11 +3968,15 @@ class EnterpriseCostManagement:
             usage_data=usage_data,
             cost_data=cost_breakdown
         )
-        
-        # Calculate potential savings
+```
+
+**Step 11: Calculate ROI and generate final report**
+
+Complete the optimization report with ROI analysis:
+
+```python
+        # Calculate potential savings and ROI
         potential_savings = await self._calculate_potential_savings(optimizations)
-        
-        # Generate ROI analysis
         roi_analysis = await self.roi_calculator.calculate_roi(
             costs=cost_breakdown["total"],
             benefits=await self._calculate_business_benefits(usage_data),
@@ -3540,8 +3986,6 @@ class EnterpriseCostManagement:
         return CostOptimizationReport(
             period=f"{period_days} days",
             total_cost=cost_breakdown["total"],
-            cost_breakdown=cost_breakdown,
-            usage_patterns=usage_data,
             optimization_opportunities=optimizations,
             potential_savings=potential_savings,
             roi_analysis=roi_analysis,
@@ -3549,7 +3993,22 @@ class EnterpriseCostManagement:
         )
 ```
 
-Comprehensive cost management provides visibility, control, and optimization opportunities for enterprise deployments.
+**Testing Your Cost Management Implementation**
+
+Test the cost management system with this validation script:
+
+```python
+# Test cost tracking functionality
+cost_manager = EnterpriseCostManagement()
+test_request = AgentRequest(id="test-123", user_id="user-1", department="engineering")
+test_response = AgentResponse(model="gpt-4", processing_time=1.2, cache_hit=True)
+
+# Track a test request
+cost_record = await cost_manager.track_request_cost(test_request, test_response)
+print(f"Tracked cost: ${cost_record.costs['total']:.4f}")
+```
+
+This comprehensive cost management system provides enterprise-grade visibility, control, and optimization opportunities for production agent deployments.
 
 ---
 

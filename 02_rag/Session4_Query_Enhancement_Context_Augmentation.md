@@ -95,8 +95,12 @@ Remember from Session 3 how vector similarity search relies on embedding space p
 
 HyDE transforms semantic gaps into vector space advantages:
 
+**Step 1: Initialize the HyDE Query Enhancer**
+
+First, let's set up the core HyDE class that bridges semantic gaps:
+
 ```python
-# Advanced HyDE implementation
+# Core HyDE setup
 from typing import List, Dict, Any, Optional
 import openai
 from sentence_transformers import SentenceTransformer
@@ -109,7 +113,13 @@ class HyDEQueryEnhancer:
         self.llm_model = llm_model
         self.embedding_model = embedding_model
         self.temperature = temperature
+```
 
+**Step 2: Configure Query Type Templates**
+
+Next, set up templates for different types of queries:
+
+```python
         # Different HyDE templates for various query types
         self.hyde_templates = {
             'factual': self._factual_hyde_template,
@@ -117,7 +127,13 @@ class HyDEQueryEnhancer:
             'analytical': self._analytical_hyde_template,
             'creative': self._creative_hyde_template
         }
+```
 
+**Step 3: Core Enhancement Method**
+
+Now implement the main query enhancement workflow:
+
+```python
     def enhance_query_with_hyde(self, query: str,
                                query_type: str = 'factual',
                                num_hypotheticals: int = 3) -> Dict[str, Any]:
@@ -133,7 +149,13 @@ class HyDEQueryEnhancer:
         hypothetical_docs = self._generate_hypothetical_documents(
             query, query_type, num_hypotheticals
         )
+```
 
+**Step 4: Create Enhanced Embeddings**
+
+Finally, combine the generated hypothetical documents into enhanced embeddings:
+
+```python
         # Step 3: Create enhanced embeddings
         enhanced_embeddings = self._create_enhanced_embeddings(
             query, hypothetical_docs
@@ -190,7 +212,10 @@ The result bridges the semantic gap between user intent and document content, dr
         return 'factual'
 ```
 
-**Step 2: Template-Based Document Generation**
+**Step 2A: Factual Query Template**
+
+Create templates that generate different document types. Start with factual queries:
+
 ```python
     def _factual_hyde_template(self, query: str) -> str:
         """Template for factual query types."""
@@ -206,7 +231,13 @@ The result bridges the semantic gap between user intent and document content, dr
 
         Document:
         """
+```
 
+**Step 2B: Procedural Query Template**
+
+Handle step-by-step and how-to queries:
+
+```python
     def _procedural_hyde_template(self, query: str) -> str:
         """Template for procedural query types."""
         return f"""
@@ -221,7 +252,13 @@ The result bridges the semantic gap between user intent and document content, dr
 
         Guide:
         """
+```
 
+**Step 2C: Analytical Query Template**
+
+Support analytical and comparative queries:
+
+```python
     def _analytical_hyde_template(self, query: str) -> str:
         """Template for analytical query types."""
         return f"""
@@ -238,7 +275,10 @@ The result bridges the semantic gap between user intent and document content, dr
         """
 ```
 
-**Step 3: Multi-Hypothetical Generation**
+**Step 3A: Document Generation Setup**
+
+Generate multiple hypothetical documents with variations for better coverage:
+
 ```python
     def _generate_hypothetical_documents(self, query: str,
                                        query_type: str,
@@ -252,7 +292,13 @@ The result bridges the semantic gap between user intent and document content, dr
             # Add variation to temperature for diversity
             varied_temperature = self.temperature + (i * 0.1)
             varied_temperature = min(varied_temperature, 1.0)
+```
 
+**Step 3B: Document Generation Loop**
+
+Generate each hypothetical document with error handling:
+
+```python
             try:
                 # Generate hypothetical document
                 prompt = base_template(query)
@@ -276,14 +322,23 @@ The result bridges the semantic gap between user intent and document content, dr
             except Exception as e:
                 print(f"Error generating document {i+1}: {e}")
                 continue
+```
 
+**Step 3C: Quality Ranking**
+
+Sort generated documents by quality for best results:
+
+```python
         # Sort by quality score
         hypothetical_docs.sort(key=lambda x: x['quality_score'], reverse=True)
 
         return hypothetical_docs
 ```
 
-**Step 4: Enhanced Embedding Creation**
+**Step 4A: Create Base Embeddings**
+
+Convert query and hypothetical documents into embedding vectors:
+
 ```python
     def _create_enhanced_embeddings(self, query: str,
                                   hypothetical_docs: List[Dict]) -> Dict:
@@ -295,7 +350,13 @@ The result bridges the semantic gap between user intent and document content, dr
         # Hypothetical document embeddings
         hyde_texts = [doc['document'] for doc in hypothetical_docs]
         hyde_embeddings = self.embedding_model.encode(hyde_texts)
+```
 
+**Step 4B: Weight and Combine Embeddings**
+
+Create quality-weighted combination of hypothetical documents:
+
+```python
         # Combine embeddings using weighted average
         weights = self._calculate_document_weights(hypothetical_docs)
 
@@ -309,7 +370,13 @@ The result bridges the semantic gap between user intent and document content, dr
 
         # Normalize the combined embedding
         combined_embedding = combined_embedding / np.linalg.norm(combined_embedding)
+```
 
+**Step 4C: Return Comprehensive Results**
+
+Provide all embedding variations for analysis and debugging:
+
+```python
         return {
             'original': original_embedding,
             'hyde_embeddings': hyde_embeddings,
@@ -317,7 +384,13 @@ The result bridges the semantic gap between user intent and document content, dr
             'combined': combined_embedding,
             'weights': weights
         }
+```
 
+**Step 4D: Quality-Based Weighting**
+
+Calculate document importance based on quality scores:
+
+```python
     def _calculate_document_weights(self, hypothetical_docs: List[Dict]) -> List[float]:
         """Calculate weights for hypothetical documents based on quality."""
 
@@ -345,7 +418,9 @@ Building on HyDE's hypothetical document generation, query expansion tackles the
 
 This multi-layered approach ensures your optimized vector search from Session 3 captures content through multiple semantic pathways:
 
-### **Intelligent Query Expansion Implementation**
+### **Step 5A: Query Expansion Setup**
+
+Set up the intelligent query expansion system with multiple strategies:
 
 ```python
 # Advanced query expansion system
@@ -361,7 +436,13 @@ class IntelligentQueryExpander:
     def __init__(self, llm_model, domain_corpus: Optional[List[str]] = None):
         self.llm_model = llm_model
         self.domain_corpus = domain_corpus
+```
 
+### **Step 5B: Configure Expansion Strategies**
+
+Set up different approaches to query expansion:
+
+```python
         # Initialize expansion strategies
         self.expansion_strategies = {
             'synonym': self._synonym_expansion,
@@ -378,7 +459,13 @@ class IntelligentQueryExpander:
                 ngram_range=(1, 3)
             )
             self.domain_tfidf.fit(domain_corpus)
+```
 
+### **Step 5C: Core Expansion Method**
+
+Implement the main query expansion workflow:
+
+```python
     def expand_query(self, query: str,
                     strategies: List[str] = ['semantic', 'contextual'],
                     max_expansions: int = 5) -> Dict[str, Any]:
@@ -395,7 +482,13 @@ class IntelligentQueryExpander:
                 )
                 expansion_results[strategy] = expansions
                 combined_expansions.update(expansions)
+```
 
+### **Step 5D: Combine and Return Results**
+
+Create the final expanded query with comprehensive results:
+
+```python
         # Create final expanded query
         expanded_query = self._create_expanded_query(
             query, list(combined_expansions)
@@ -476,9 +569,9 @@ class IntelligentQueryExpander:
             return []
 ```
 
-### **Multi-Query Generation Strategy**
+### **Step 6A: Multi-Query Generator Setup**
 
-Generate multiple query perspectives for comprehensive retrieval:
+Set up the multi-query generation system with different perspectives:
 
 ```python
 # Multi-query generation system
@@ -495,7 +588,13 @@ class MultiQueryGenerator:
             'perspective_shifts': self._generate_perspective_variants,
             'domain_focused': self._generate_domain_variants
         }
+```
 
+### **Step 6B: Multi-Query Generation Workflow**
+
+Coordinate multiple perspective generation strategies:
+
+```python
     def generate_multi_query_set(self, query: str,
                                perspectives: List[str] = None,
                                total_queries: int = 8) -> Dict[str, Any]:
@@ -510,7 +609,13 @@ class MultiQueryGenerator:
         # Distribute query generation across perspectives
         queries_per_perspective = total_queries // len(perspectives)
         remaining_queries = total_queries % len(perspectives)
+```
 
+### **Step 6C: Generate Perspective Variants**
+
+Create queries from each perspective and collect metadata:
+
+```python
         for i, perspective in enumerate(perspectives):
             num_queries = queries_per_perspective
             if i < remaining_queries:
@@ -525,7 +630,13 @@ class MultiQueryGenerator:
 
         # Flatten and deduplicate
         flattened_queries = self._flatten_and_deduplicate(all_queries)
+```
 
+### **Step 6D: Return Comprehensive Query Set**
+
+Package all generated query variants with metadata:
+
+```python
         return {
             'original_query': query,
             'query_variants': flattened_queries,

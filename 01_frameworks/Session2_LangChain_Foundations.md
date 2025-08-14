@@ -190,25 +190,42 @@ For tools that may need asynchronous execution, implement the `_arun` method:
 
 The decorator approach is simpler for straightforward functions and requires less boilerplate:
 
+**Step 1: Basic Function Definition**
+
+Start with the tool decorator and function signature:
+
 ```python
 @tool
 def weather_tool(city: str) -> str:
     """Get current weather for a city"""
-    # Simulate weather API call
+    # This decorator automatically converts the function to a LangChain tool
+```
 
+**Step 2: Add API Simulation Logic**
+
+Now add the core weather data simulation:
+
+```python
     try:
         # In real implementation, call actual weather API
-
         weather_data = {
             "temperature": 72,
-            "condition": "sunny",
+            "condition": "sunny", 
             "humidity": 45
         }
+```
+
+**Step 3: Format and Return Response**
+
+Complete the tool with proper response formatting:
+
+```python
         return f"Weather in {city}: {weather_data['temperature']}°F, {weather_data['condition']}, {weather_data['humidity']}% humidity"
     except Exception as e:
         return f"Error getting weather for {city}: {str(e)}"
-
 ```
+
+**Try this:** Test the tool independently before integrating with an agent.
 
 #### Method 3: StructuredTool with Pydantic Models
 
@@ -374,9 +391,12 @@ This creates a `StateGraph` with three processing nodes: agent (reasoning), acti
 
 #### **Conditional Routing and Edges**
 
-```python
-    # Add conditional routing
+**Step 1: Set Up Conditional Routing**
 
+First, define the conditional logic that determines the next step:
+
+```python
+    # Add conditional routing based on agent decisions
     workflow.add_conditional_edges(
         "agent",
         self._should_continue,
@@ -386,12 +406,23 @@ This creates a `StateGraph` with three processing nodes: agent (reasoning), acti
             "end": END
         }
     )
-    
+```
+
+**Step 2: Add Return Paths**
+
+Create feedback loops to return control to the agent after processing:
+
+```python
     workflow.add_edge("action", "agent")
     workflow.add_edge("reflection", "agent")
-    
-    return workflow.compile()
+```
 
+**Step 3: Compile the Workflow**
+
+Finally, compile the graph into an executable workflow:
+
+```python
+    return workflow.compile()
 ```
 
 Conditional edges allow dynamic routing based on agent decisions, while standard edges create feedback loops that return control to the agent node after tool execution or reflection.
@@ -404,29 +435,47 @@ LangGraph enables sophisticated decision-making with conditional branching. Let'
 
 The `_should_continue` method implements the core routing logic for workflow branches:
 
+**Step 1: Function Setup and State Extraction**
+
+Start by extracting the current state information:
+
 ```python
 def _should_continue(self, state: AgentState) -> str:
     """Decide next workflow step based on current state"""
     messages = state["messages"]
     last_message = messages[-1]
-    
-    # Check if we have a tool call
+```
 
+**Step 2: Check for Tool Usage**
+
+First, check if the agent wants to use a tool:
+
+```python
+    # Check if we have a tool call
     if hasattr(last_message, 'tool_calls') and last_message.tool_calls:
         return "continue"
-    
-    # Check if we need reflection
+```
 
+**Step 3: Periodic Reflection Check**
+
+Every few iterations, trigger reflection to improve quality:
+
+```python
+    # Check if we need reflection (every 3rd iteration)
     if state["iterations"] > 0 and state["iterations"] % 3 == 0:
         return "reflect"
-    
-    # Check if we have a satisfactory answer
+```
 
+**Step 4: Completion Detection**
+
+Check if the agent has provided a final answer:
+
+```python
+    # Check if we have a satisfactory answer
     if "final answer" in last_message.content.lower():
         return "end"
     
     return "continue"
-
 ```
 
 This decision function examines the current state and routes to appropriate workflow nodes based on tool calls, iteration count, or completion signals.
@@ -454,31 +503,51 @@ This node invokes the LLM with current conversation state and increments the ite
 
 The action node executes tools when the agent determines they're needed:
 
+**Step 1: Extract Tool Call Information**
+
+Start by getting the current message and tool calls:
+
 ```python
 def _action_node(self, state: AgentState):
     """Execute tools based on agent decisions"""
     messages = state["messages"]
     last_message = messages[-1]
-    
-    # Execute tool calls
+```
 
+**Step 2: Process Tool Calls**
+
+Check for and extract tool calls from the agent's response:
+
+```python
+    # Execute tool calls
     if hasattr(last_message, 'tool_calls'):
         tool_calls = last_message.tool_calls
-        
+```
+
+**Step 3: Execute Each Tool**
+
+Process each tool call individually:
+
+```python
         for tool_call in tool_calls:
             action = ToolInvocation(
                 tool=tool_call["name"],
                 tool_input=tool_call["args"]
             )
             response = self.tool_executor.invoke(action)
-            
+```
+
+**Step 4: Return Results**
+
+Package the results for the next workflow step:
+
+```python
             return {
                 "messages": [response],
                 "context": {"last_action": tool_call["name"]}
             }
     
     return {"messages": []}
-
 ```
 
 This node processes tool calls from the agent, executes them using the tool executor, and returns results to continue the conversation flow.
@@ -487,11 +556,21 @@ This node processes tool calls from the agent, executes them using the tool exec
 
 The reflection node provides periodic quality assessment:
 
+**Step 1: Initialize Reflection Process**
+
+Start by extracting the current conversation state:
+
 ```python
 def _reflection_node(self, state: AgentState):
     """Reflection node for quality improvement"""
     messages = state["messages"]
-    
+```
+
+**Step 2: Create Reflection Prompt**
+
+Build a structured prompt for quality assessment:
+
+```python
     reflection_prompt = f"""
     Review the conversation so far and assess:
     1. Are we making progress toward the goal?
@@ -499,51 +578,74 @@ def _reflection_node(self, state: AgentState):
     3. What have we learned that can guide next steps?
     
     Conversation history: {messages[-5:]}  # Last 5 messages
-
     Current iteration: {state['iterations']}
     """
-    
+```
+
+**Step 3: Generate and Return Reflection**
+
+Get LLM reflection and package the result:
+
+```python
     reflection = self.llm.invoke([{"role": "user", "content": reflection_prompt}])
     
     return {
         "messages": [reflection],
         "context": {"reflected_at": state["iterations"]}
     }
-
 ```
 
 This reflection mechanism helps the agent evaluate its progress and adjust strategy when needed, improving overall solution quality.
 
 **Usage Example - Complex Workflow:**
 
+**Step 1: Set Up Dependencies**
+
+Import the required components for the workflow:
+
 ```python
-
-# Example usage showing stateful workflow
-
 async def demo_langgraph_integration():
     from llm_setup import LLMFactory
     from langchain_tools import CalculatorTool, weather_tool
-    
+```
+
+**Step 2: Initialize LLM and Tools**
+
+Create the language model and tool instances:
+
+```python
     llm = LLMFactory.create_llm("openai")
     tools = [CalculatorTool(), weather_tool]
     
     # Create LangGraph-powered agent
-
     agent = LangGraphAgent(llm, tools)
-    
-    # Execute complex workflow with state management
+```
 
-    result = await agent.workflow.ainvoke({
+**Step 3: Define Initial State**
+
+Set up the starting state for the workflow:
+
+```python
+    initial_state = {
         "messages": [{"role": "user", "content": "Plan a data analysis project involving weather data from 5 cities, calculate trends, and provide insights"}],
         "next_step": "agent",
         "iterations": 0,
         "context": {}
-    })
+    }
+```
+
+**Step 4: Execute and Return Results**
+
+Run the workflow and return the results:
+
+```python
+    result = await agent.workflow.ainvoke(initial_state)
     
     print("Workflow Result:", result)
     return result
-
 ```
+
+**Try this:** Start with a simpler task to understand the workflow before complex scenarios.
 
 ### Why LangGraph Matters for Production Systems
 
@@ -597,18 +699,27 @@ This agent class initializes with an LLM and a tools dictionary for efficient to
 
 The core parallel execution method coordinates multiple independent queries:
 
+**Step 1: Create Parallel Chain Structure**
+
+Set up the parallel execution framework:
+
 ```python
 async def parallel_data_gathering(self, queries: list) -> dict:
     """Execute multiple independent queries in parallel"""
     
     # Create parallel runnable for independent tasks
-
     parallel_chain = RunnableParallel(
         weather_data=self._create_weather_chain(),
         calculation_data=self._create_calculation_chain(),
         research_data=self._create_research_chain()
     )
-    
+```
+
+**Step 2: Execute Parallel Chains**
+
+Run all chains simultaneously and measure performance:
+
+```python
     start_time = time.time()
     results = await parallel_chain.ainvoke({
         "weather_query": queries[0],
@@ -616,14 +727,21 @@ async def parallel_data_gathering(self, queries: list) -> dict:
         "research_query": queries[2]
     })
     execution_time = time.time() - start_time
-    
+```
+
+**Step 3: Return Performance Metrics**
+
+Package results with timing information:
+
+```python
     return {
         "results": results,
         "execution_time": execution_time,
         "performance_gain": "~3x faster than sequential execution"
     }
-
 ```
+
+**Try this:** Compare execution times between parallel and sequential approaches.
 
 This method creates a `RunnableParallel` that executes weather, calculation, and research chains simultaneously, measuring execution time and providing performance metrics.
 
@@ -669,29 +787,43 @@ These parser functions extract and structure results from LLM responses, enablin
 
 **Sequential Optimization for Dependent Tasks:**
 
+**Step 1: Create Optimized Sequence**
+
+Build a sequence chain with dependent processing stages:
+
 ```python
-    async def optimized_sequential_processing(self, complex_task: str) -> dict:
-        """Optimize sequential processing for dependent tasks"""
-        
-        # Create optimized sequence with intermediate state management
+async def optimized_sequential_processing(self, complex_task: str) -> dict:
+    """Optimize sequential processing for dependent tasks"""
+    
+    # Create optimized sequence with intermediate state management
+    sequence = RunnableSequence(
+        self._task_decomposition,
+        self._context_enrichment,
+        self._execution_optimization,
+        self._result_synthesis
+    )
+```
 
-        sequence = RunnableSequence(
-            self._task_decomposition,
-            self._context_enrichment,
-            self._execution_optimization,
-            self._result_synthesis
-        )
-        
-        start_time = time.time()
-        result = await sequence.ainvoke({"task": complex_task})
-        execution_time = time.time() - start_time
-        
-        return {
-            "result": result,
-            "execution_time": execution_time,
-            "optimization_applied": "Context-aware sequential processing"
-        }
+**Step 2: Execute with Performance Tracking**
 
+Run the sequence and measure execution time:
+
+```python
+    start_time = time.time()
+    result = await sequence.ainvoke({"task": complex_task})
+    execution_time = time.time() - start_time
+```
+
+**Step 3: Return Results with Metrics**
+
+Package the results with optimization information:
+
+```python
+    return {
+        "result": result,
+        "execution_time": execution_time,
+        "optimization_applied": "Context-aware sequential processing"
+    }
 ```
 
 ### **Intelligent Memory Management for Production**
@@ -720,33 +852,45 @@ class MemoryOptimizedAgent:
 
 ### **Smart Memory Processing**
 
+**Step 1: Check Memory Usage**
+
+Monitor memory buffer and trigger compression if needed:
+
 ```python
-    async def process_with_memory_management(self, message: str) -> str:
-        """Process message with intelligent memory management"""
-        
-        # Check memory usage
+async def process_with_memory_management(self, message: str) -> str:
+    """Process message with intelligent memory management"""
+    
+    # Check memory usage
+    if len(self.memory_buffer) > self.max_memory_size * 0.8:
+        await self._compress_memory()
+```
 
-        if len(self.memory_buffer) > self.max_memory_size * 0.8:
-            await self._compress_memory()
-        
-        # Add current message to memory
+**Step 2: Store Message with Context**
 
-        self.memory_buffer.append({
-            "message": message,
-            "timestamp": time.time(),
-            "context": self._extract_context(message)
-        })
-        
-        # Process with optimized context
+Add the new message to the memory buffer with metadata:
 
-        context = self._get_optimized_context()
-        response = await self.llm.ainvoke([
-            {"role": "system", "content": f"Context: {context}"},
-            {"role": "user", "content": message}
-        ])
-        
-        return response.content
+```python
+    # Add current message to memory
+    self.memory_buffer.append({
+        "message": message,
+        "timestamp": time.time(),
+        "context": self._extract_context(message)
+    })
+```
 
+**Step 3: Process with Optimized Context**
+
+Generate response using the optimized context:
+
+```python
+    # Process with optimized context
+    context = self._get_optimized_context()
+    response = await self.llm.ainvoke([
+        {"role": "system", "content": f"Context: {context}"},
+        {"role": "user", "content": message}
+    ])
+    
+    return response.content
 ```
 
 **Processing Strategy:**
@@ -759,28 +903,48 @@ class MemoryOptimizedAgent:
 
 ### **Automatic Memory Compression**
 
+**Step 1: Select Messages for Compression**
+
+Identify the oldest half of messages to compress:
+
 ```python
-    async def _compress_memory(self):
-        """Compress old memory into summary"""
-        old_messages = list(self.memory_buffer)[:len(self.memory_buffer)//2]
-        
-        compression_prompt = f"""
-        Summarize the following conversation history, preserving key facts and context:
-        {old_messages}
-        
-        Previous summary: {self.memory_summary}
-        
-        Provide a concise but comprehensive summary.
-        """
-        
-        summary = await self.llm.ainvoke(compression_prompt)
-        self.memory_summary = summary.content
-        
-        # Remove compressed messages from buffer
+async def _compress_memory(self):
+    """Compress old memory into summary"""
+    old_messages = list(self.memory_buffer)[:len(self.memory_buffer)//2]
+```
 
-        for _ in range(len(old_messages)):
-            self.memory_buffer.popleft()
+**Step 2: Create Compression Prompt**
 
+Build a prompt for LLM-powered summarization:
+
+```python
+    compression_prompt = f"""
+    Summarize the following conversation history, preserving key facts and context:
+    {old_messages}
+    
+    Previous summary: {self.memory_summary}
+    
+    Provide a concise but comprehensive summary.
+    """
+```
+
+**Step 3: Generate and Store Summary**
+
+Get the summary and update memory state:
+
+```python
+    summary = await self.llm.ainvoke(compression_prompt)
+    self.memory_summary = summary.content
+```
+
+**Step 4: Clean Up Compressed Messages**
+
+Remove the compressed messages from the buffer:
+
+```python
+    # Remove compressed messages from buffer
+    for _ in range(len(old_messages)):
+        self.memory_buffer.popleft()
 ```
 
 **Compression Features:**
@@ -859,6 +1023,8 @@ class ProductionLangChainAgent:
 
 ### **Monitoring Integration**
 
+This method sets up production-grade monitoring for the LangChain agent, enabling real-time performance tracking and debugging in enterprise environments. The monitoring system provides metrics collection, logging, and observability features essential for production deployments.
+
 ```python
     def _initialize_monitoring(self):
         """Initialize production monitoring"""
@@ -877,6 +1043,10 @@ class ProductionLangChainAgent:
 
 LangSmith provides enterprise-grade testing and monitoring capabilities:
 
+**Step 1: Class Initialization**
+
+Set up the LangSmith integration class:
+
 ```python
 class LangSmithIntegration:
     """LangSmith integration for testing and monitoring"""
@@ -884,7 +1054,13 @@ class LangSmithIntegration:
     def __init__(self, project_name: str):
         self.project_name = project_name
         self.client = self._initialize_client()
-    
+```
+
+**Step 2: Client Configuration**
+
+Configure the LangSmith environment and create the client:
+
+```python
     def _initialize_client(self):
         """Initialize LangSmith client"""
         os.environ["LANGCHAIN_TRACING_V2"] = "true"
@@ -893,7 +1069,6 @@ class LangSmithIntegration:
         
         from langsmith import Client
         return Client()
-
 ```
 
 **LangSmith Setup Benefits:**
@@ -906,6 +1081,12 @@ class LangSmithIntegration:
 
 ### **Automated Evaluation Pipeline**
 
+The evaluation pipeline processes test cases systematically, executing each test and collecting detailed results for analysis.
+
+**Test Case Processing Loop**
+
+First, we iterate through test cases and execute each one with proper error handling:
+
 ```python
     async def run_evaluation_suite(self, agent, test_cases: list):
         """Run comprehensive evaluation suite"""
@@ -914,11 +1095,15 @@ class LangSmithIntegration:
         for test_case in test_cases:
             try:
                 # Run with tracing
-
                 result = await agent.process_message(test_case["input"])
-                
-                # Evaluate result
+```
 
+**Result Evaluation and Scoring**
+
+Next, we evaluate each result against expected criteria and calculate scores:
+
+```python
+                # Evaluate result
                 evaluation = await self._evaluate_response(
                     test_case["input"],
                     result,
@@ -932,7 +1117,13 @@ class LangSmithIntegration:
                     "evaluation": evaluation,
                     "passed": evaluation["score"] > 0.8
                 })
-                
+```
+
+**Error Handling and Report Generation**
+
+Finally, we handle exceptions and generate comprehensive evaluation reports:
+
+```python
             except Exception as e:
                 results.append({
                     "test_case": test_case["name"],
@@ -941,7 +1132,6 @@ class LangSmithIntegration:
                 })
         
         return self._generate_evaluation_report(results)
-
 ```
 
 **Evaluation Features:**
@@ -956,34 +1146,46 @@ class LangSmithIntegration:
 
 ### **AI-Powered Response Evaluation**
 
+**Step 1: Build Evaluation Prompt**
+
+Create a structured prompt for response assessment:
+
 ```python
-    async def _evaluate_response(self, input_text: str, output: str, criteria: dict):
-        """Evaluate response quality using LangSmith"""
-        # Implement evaluation logic
+async def _evaluate_response(self, input_text: str, output: str, criteria: dict):
+    """Evaluate response quality using LangSmith"""
+    
+    evaluation_prompt = f"""
+    Evaluate this agent response:
+    
+    Input: {input_text}
+    Output: {output}
+    
+    Criteria:
+    - Accuracy: {criteria.get('accuracy', 'High')}
+    - Completeness: {criteria.get('completeness', 'High')}
+    - Relevance: {criteria.get('relevance', 'High')}
+    
+    Provide a score from 0-1 and detailed feedback.
+    """
+```
 
-        evaluation_prompt = f"""
-        Evaluate this agent response:
-        
-        Input: {input_text}
-        Output: {output}
-        
-        Criteria:
-        - Accuracy: {criteria.get('accuracy', 'High')}
-        - Completeness: {criteria.get('completeness', 'High')}
-        - Relevance: {criteria.get('relevance', 'High')}
-        
-        Provide a score from 0-1 and detailed feedback.
-        """
-        
-        # Use evaluation LLM
+**Step 2: Execute Evaluation**
 
-        evaluation_llm = ChatOpenAI(model="gpt-4", temperature=0)
-        result = await evaluation_llm.ainvoke(evaluation_prompt)
-        
-        # Parse evaluation result
+Use GPT-4 to perform the evaluation:
 
-        return self._parse_evaluation(result.content)
+```python
+    # Use evaluation LLM
+    evaluation_llm = ChatOpenAI(model="gpt-4", temperature=0)
+    result = await evaluation_llm.ainvoke(evaluation_prompt)
+```
 
+**Step 3: Parse and Return Results**
+
+Process the evaluation response:
+
+```python
+    # Parse evaluation result
+    return self._parse_evaluation(result.content)
 ```
 
 **Evaluation Strategy:**
@@ -1295,6 +1497,8 @@ The initial response provides a baseline for the reflection process:
 
 **Usage Example:**
 
+This example demonstrates how to use the LangChain reflection agent to process complex queries that benefit from iterative improvement. The agent will generate an initial response, reflect on its quality, and refine the answer for better accuracy and completeness.
+
 ```python
 
 # Example usage
@@ -1479,6 +1683,8 @@ class DatabaseQueryTool(BaseTool):
 
 **Advanced Usage Example:**
 
+This advanced example demonstrates multi-tool orchestration where the agent must intelligently sequence tool usage to solve a complex, multi-step problem. The agent will analyze the request, determine the optimal tool sequence, and coordinate multiple tools to provide a comprehensive answer.
+
 ```python
 
 # Example usage with custom tools
@@ -1531,6 +1737,8 @@ from typing import List, Dict
 LangChain provides a ready-to-use ReAct implementation that handles the reasoning-action cycle automatically:
 
 **Agent Initialization:**
+
+This implementation creates a LangChain ReAct agent that automatically follows the Reason-Act-Observe pattern. The agent will reason about the task, take actions using available tools, observe the results, and continue until the task is complete or the iteration limit is reached.
 
 ```python
 class LangChainReActAgent:
@@ -1672,40 +1880,55 @@ The main solving method implements the think-act-observe cycle with detailed ste
 
 The agent uses structured prompting to make informed decisions about next actions:
 
-```python
-    async def _decide_action(self, problem: str, thought: str) -> Dict:
-        """Decide next action based on current thought"""
-        tools_desc = "\n".join([
-            f"- {name}: {tool.description}"
-            for name, tool in self.tools.items()
-        ])
-        
-        prompt = f"""
-        Problem: {problem}
-        Current thought: {thought}
-        
-        Available tools:
-        {tools_desc}
-        
-        Based on your thought, decide what to do next.
-        
-        Respond with JSON:
-        {{
-            "action": "tool_name" or "ANSWER",
-            "action_input": "input for tool" or null,
-            "answer": "final answer if action is ANSWER" or null,
-            "reasoning": "why you chose this action"
-        }}
-        """
-        
-        response = await self.llm.ainvoke(prompt)
-        
-        try:
-            import json
-            return json.loads(response.content)
-        except Exception:
-            return {"action": "ANSWER", "answer": "Failed to parse action decision"}
+**Step 1: Prepare Tool Information**
 
+Build a description of available tools:
+
+```python
+async def _decide_action(self, problem: str, thought: str) -> Dict:
+    """Decide next action based on current thought"""
+    tools_desc = "\n".join([
+        f"- {name}: {tool.description}"
+        for name, tool in self.tools.items()
+    ])
+```
+
+**Step 2: Create Structured Decision Prompt**
+
+Build a prompt for action selection with JSON response format:
+
+```python
+    prompt = f"""
+    Problem: {problem}
+    Current thought: {thought}
+    
+    Available tools:
+    {tools_desc}
+    
+    Based on your thought, decide what to do next.
+    
+    Respond with JSON:
+    {{
+        "action": "tool_name" or "ANSWER",
+        "action_input": "input for tool" or null,
+        "answer": "final answer if action is ANSWER" or null,
+        "reasoning": "why you chose this action"
+    }}
+    """
+```
+
+**Step 3: Get Decision and Parse Response**
+
+Execute the decision-making and handle errors:
+
+```python
+    response = await self.llm.ainvoke(prompt)
+    
+    try:
+        import json
+        return json.loads(response.content)
+    except Exception:
+        return {"action": "ANSWER", "answer": "Failed to parse action decision"}
 ```
 
 **Decision Framework Features:**
@@ -1719,6 +1942,8 @@ The agent uses structured prompting to make informed decisions about next action
 - **Fallback Logic**: Graceful handling of parsing errors
 
 ### **Action Execution and Error Handling**
+
+This method handles the critical "Act" phase of the ReAct pattern, executing the chosen tool with proper error handling and returning structured observations. It provides robust tool validation and graceful error recovery to ensure the agent can continue reasoning even when individual actions fail.
 
 ```python
     async def _execute_action(self, action: str, action_input: str) -> str:
@@ -1776,6 +2001,8 @@ The agent uses structured prompting to make informed decisions about next action
 - **Progress Assessment**: Encourages evaluation of solution completeness
 
 ### **Reasoning Analysis and Debugging**
+
+These methods provide essential debugging and analysis capabilities for understanding how the agent reaches its conclusions. They format and summarize the complete reasoning chain, making it easy to trace the agent's decision-making process and identify potential improvements or issues.
 
 ```python
     def _format_steps(self) -> str:
@@ -1990,40 +2217,55 @@ The hierarchical approach breaks complex goals into manageable steps through mul
 
 The first phase creates strategic, high-level steps:
 
-```python
-    async def _create_high_level_plan(self, goal: str) -> List[str]:
-        """Create high-level plan steps"""
-        tools_desc = "\n".join([
-            f"- {name}: {tool.description}"
-            for name, tool in self.tools.items()
-        ])
-        
-        prompt = f"""
-        Goal: {goal}
-        
-        Available tools:
-        {tools_desc}
-        
-        Create a high-level plan to achieve this goal. Break it down into 3-7 major steps.
-        
-        Respond with JSON:
-        {{
-            "steps": [
-                "Step 1 description",
-                "Step 2 description",
-                ...
-            ]
-        }}
-        """
-        
-        response = await self.llm.ainvoke(prompt)
-        
-        try:
-            plan_data = json.loads(response.content)
-            return plan_data.get("steps", [])
-        except Exception:
-            return ["Failed to create high-level plan"]
+**Step 1: Prepare Planning Context**
 
+Set up the available tools for planning consideration:
+
+```python
+async def _create_high_level_plan(self, goal: str) -> List[str]:
+    """Create high-level plan steps"""
+    tools_desc = "\n".join([
+        f"- {name}: {tool.description}"
+        for name, tool in self.tools.items()
+    ])
+```
+
+**Step 2: Create Strategic Planning Prompt**
+
+Build a prompt for high-level strategic planning:
+
+```python
+    prompt = f"""
+    Goal: {goal}
+    
+    Available tools:
+    {tools_desc}
+    
+    Create a high-level plan to achieve this goal. Break it down into 3-7 major steps.
+    
+    Respond with JSON:
+    {{
+        "steps": [
+            "Step 1 description",
+            "Step 2 description",
+            ...
+        ]
+    }}
+    """
+```
+
+**Step 3: Execute Planning and Parse Results**
+
+Generate the plan and handle any parsing errors:
+
+```python
+    response = await self.llm.ainvoke(prompt)
+    
+    try:
+        plan_data = json.loads(response.content)
+        return plan_data.get("steps", [])
+    except Exception:
+        return ["Failed to create high-level plan"]
 ```
 
 **Detailed Planning:**
@@ -2363,13 +2605,21 @@ The coordination graph represents the heart of the multi-agent system, defining 
 
 The workflow uses conditional edges to create intelligent routing based on task complexity and current system state:
 
+**Step 1: Set Workflow Entry Point**
+
+Configure the starting point for task processing:
+
 ```python
         # Set entry point
-
         workflow.set_entry_point("task_analysis")
-        
-        # Add conditional edges for coordination logic
+```
 
+**Step 2: Configure Task Analysis Routing**
+
+Set up conditional routing after task analysis:
+
+```python
+        # Add conditional edges for coordination logic
         workflow.add_conditional_edges(
             "task_analysis",
             self._route_after_analysis,
@@ -2379,10 +2629,22 @@ The workflow uses conditional edges to create intelligent routing based on task 
                 "complex": "agent_selection"
             }
         )
-        
+```
+
+**Step 3: Add Direct Connections**
+
+Connect agent selection to task delegation:
+
+```python
         workflow.add_edge("agent_selection", "task_delegation")
         workflow.add_edge("task_delegation", "execution_monitoring")
-        
+```
+
+**Step 4: Configure Execution Monitoring**
+
+Set up monitoring and failure handling:
+
+```python
         workflow.add_conditional_edges(
             "execution_monitoring",
             self._check_execution_status,
@@ -2392,12 +2654,17 @@ The workflow uses conditional edges to create intelligent routing based on task 
                 "continue": "execution_monitoring"
             }
         )
-        
+```
+
+**Step 5: Complete the Workflow**
+
+Add recovery paths and compile:
+
+```python
         workflow.add_edge("failure_recovery", "agent_selection")
         workflow.add_edge("result_synthesis", END)
         
         return workflow.compile()
-
 ```
 
 **Key Routing Decisions:**
@@ -2709,41 +2976,53 @@ The routing algorithm combines multiple factors to make optimal agent selection 
 
 ### **Advanced Agent Scoring Algorithm**
 
+**Step 1: Function Setup and Capability Scoring**
+
+Initialize the scoring algorithm and calculate capability match:
+
 ```python
-    def _calculate_agent_score(self, capabilities: Dict[str, float], 
-                             requirements: Dict[str, float],
-                             current_load: float,
-                             performance_history: List[float]) -> float:
-        """Calculate agent suitability score"""
-        # Capability match score
+def _calculate_agent_score(self, capabilities: Dict[str, float], 
+                         requirements: Dict[str, float],
+                         current_load: float,
+                         performance_history: List[float]) -> float:
+    """Calculate agent suitability score"""
+    
+    # Capability match score
+    capability_score = 0
+    if requirements:
+        matches = []
+        for req, req_level in requirements.items():
+            agent_level = capabilities.get(req, 0)
+            match = min(agent_level / req_level, 1.0) if req_level > 0 else 0
+            matches.append(match)
+        capability_score = sum(matches) / len(matches) if matches else 0
+```
 
-        capability_score = 0
-        if requirements:
-            matches = []
-            for req, req_level in requirements.items():
-                agent_level = capabilities.get(req, 0)
-                match = min(agent_level / req_level, 1.0) if req_level > 0 else 0
-                matches.append(match)
-            capability_score = sum(matches) / len(matches) if matches else 0
-        
-        # Load score (lower load is better)
+**Step 2: Calculate Load and Performance Scores**
 
-        load_score = max(0, 1.0 - current_load)
-        
-        # Performance score
+Evaluate current workload and historical performance:
 
-        performance_score = sum(performance_history[-5:]) / len(performance_history[-5:]) if performance_history else 0.7
-        
-        # Weighted final score
+```python
+    # Load score (lower load is better)
+    load_score = max(0, 1.0 - current_load)
+    
+    # Performance score
+    performance_score = sum(performance_history[-5:]) / len(performance_history[-5:]) if performance_history else 0.7
+```
 
-        final_score = (
-            capability_score * self.performance_weights["capability_match"] +
-            load_score * self.performance_weights["current_load"] +
-            performance_score * self.performance_weights["past_performance"]
-        )
-        
-        return final_score
+**Step 3: Compute Final Weighted Score**
 
+Combine all factors into final selection score:
+
+```python
+    # Weighted final score
+    final_score = (
+        capability_score * self.performance_weights["capability_match"] +
+        load_score * self.performance_weights["current_load"] +
+        performance_score * self.performance_weights["past_performance"]
+    )
+    
+    return final_score
 ```
 
 **Scoring Components Breakdown:**
@@ -3392,6 +3671,10 @@ The synthesis engine combines outputs from multiple agents into coherent, compre
 
 Facilitate dynamic discussions between agents for collaborative problem-solving:
 
+#### **Conversation Setup**
+
+First, let's set up the conversation structure and initialize the dialogue:
+
 ```python
     async def agent_conversation(
         self, 
@@ -3406,15 +3689,30 @@ Facilitate dynamic discussions between agents for collaborative problem-solving:
         current_speaker = agent1
         current_message = f"Let's discuss: {topic}"
         
+        return await self._execute_conversation_loop(
+            conversation, agent1, agent2, current_speaker, current_message, max_turns
+        )
+```
+
+#### **Conversation Loop**
+
+Now let's implement the turn-by-turn conversation logic:
+
+```python
+    async def _execute_conversation_loop(
+        self, conversation, agent1, agent2, current_speaker, current_message, max_turns
+    ):
+        """Execute the conversation loop with turn management"""
+        
         for turn in range(max_turns):
             # Send message to current speaker
-
             response = await self.send_message_to_agent(
                 current_speaker, 
                 current_message,
                 "conversation_facilitator"
             )
             
+            # Record conversation turn
             conversation.append({
                 "turn": turn + 1,
                 "speaker": current_speaker,
@@ -3422,14 +3720,11 @@ Facilitate dynamic discussions between agents for collaborative problem-solving:
                 "response": response
             })
             
-            # Switch speakers
-
+            # Switch speakers for next turn
             current_speaker = agent2 if current_speaker == agent1 else agent1
             current_message = response  # Response becomes next message
-
         
         return conversation
-
 ```
 
 **Conversation Features:**
@@ -3690,39 +3985,56 @@ class RedisPersistentMemory(BaseMemory):
 
 ### **Context Persistence and Compression**
 
+**Step 1: Load Existing Context**
+
+Retrieve current conversation history:
+
 ```python
-    def save_context(self, inputs: Dict[str, Any], outputs: Dict[str, str]) -> None:
-        """Save conversation context to Redis"""
-        try:
-            # Load existing history
+def save_context(self, inputs: Dict[str, Any], outputs: Dict[str, str]) -> None:
+    """Save conversation context to Redis"""
+    try:
+        # Load existing history
+        memory_vars = self.load_memory_variables(inputs)
+        history = memory_vars["history"]
+```
 
-            memory_vars = self.load_memory_variables(inputs)
-            history = memory_vars["history"]
-            
-            # Add new interaction
+**Step 2: Add New Interaction**
 
-            history.append({
-                "input": inputs,
-                "output": outputs,
-                "timestamp": datetime.now().isoformat()
-            })
-            
-            # Compress history if too long
+Append the current interaction to history:
 
-            if len(history) > 50:
-                history = await self._compress_history(history)
-            
-            # Save to Redis
+```python
+        # Add new interaction
+        history.append({
+            "input": inputs,
+            "output": outputs,
+            "timestamp": datetime.now().isoformat()
+        })
+```
 
-            self.redis_client.setex(
-                self.memory_key, 
-                self.ttl, 
-                json.dumps(history)
-            )
-            
-        except Exception as e:
-            print(f"Error saving memory: {e}")
+**Step 3: Check for Compression Need**
 
+Compress history if it becomes too long:
+
+```python
+        # Compress history if too long
+        if len(history) > 50:
+            history = await self._compress_history(history)
+```
+
+**Step 4: Persist to Redis**
+
+Save the updated history with TTL:
+
+```python
+        # Save to Redis
+        self.redis_client.setex(
+            self.memory_key, 
+            self.ttl, 
+            json.dumps(history)
+        )
+        
+    except Exception as e:
+        print(f"Error saving memory: {e}")
 ```
 
 **Memory Management Strategy:**
@@ -3735,44 +4047,59 @@ class RedisPersistentMemory(BaseMemory):
 
 ### **Intelligent History Compression**
 
+#### **History Segmentation**
+
+First, let's separate recent from old history:
+
 ```python
     async def _compress_history(self, history: List[Dict]) -> List[Dict]:
         """Compress old history using summarization"""
         # Keep recent interactions and compress older ones
-
         recent_history = history[-20:]  # Keep last 20
-
         old_history = history[:-20]
         
         if old_history:
-            # Create summary of old interactions
-
-            summary_prompt = f"""
-            Summarize these conversation interactions, preserving key context:
-            {json.dumps(old_history, indent=2)}
-            
-            Focus on:
-            - Key decisions made
-            - Important information learned
-            - Ongoing tasks or commitments
-            - User preferences or requirements
-            """
-            
-            # Use LLM for summarization (would need access to LLM instance)
-
-            summary = "Compressed conversation history"  # Simplified
-
-            
-            # Save summary
-
-            self.redis_client.setex(self.summary_key, self.ttl, summary)
+            compressed_summary = await self._create_history_summary(old_history)
+            await self._save_summary(compressed_summary)
         
         return recent_history
+```
+
+#### **Summary Creation**
+
+Now let's create intelligent history summaries:
+
+```python
+    async def _create_history_summary(self, old_history: List[Dict]) -> str:
+        """Create intelligent summary of old conversation history"""
+        summary_prompt = f"""
+        Summarize these conversation interactions, preserving key context:
+        {json.dumps(old_history, indent=2)}
+        
+        Focus on:
+        - Key decisions made
+        - Important information learned
+        - Ongoing tasks or commitments
+        - User preferences or requirements
+        """
+        
+        # In production: use actual LLM for summarization
+        summary = "Compressed conversation history"  # Simplified for demo
+        return summary
+```
+
+#### **Summary Storage and Cleanup**
+
+Finally, let's handle summary storage and memory cleanup:
+
+```python
+    async def _save_summary(self, summary: str) -> None:
+        """Save compressed summary to Redis"""
+        self.redis_client.setex(self.summary_key, self.ttl, summary)
     
     def clear(self) -> None:
-        """Clear memory"""
+        """Clear all memory data"""
         self.redis_client.delete(self.memory_key, self.summary_key)
-
 ```
 
 **Compression Strategy:**
@@ -4198,6 +4525,10 @@ class PrometheusCallbackHandler(BaseCallbackHandler):
 
 - **Alert Integration**: Enables alerts based on error rate thresholds
 
+#### **Tool Callback Methods**
+
+First, let's implement the tool monitoring callbacks:
+
 ```python
     def on_tool_start(self, serialized: Dict[str, Any], input_str: str, **kwargs) -> None:
         """Track tool usage start"""
@@ -4213,7 +4544,13 @@ class PrometheusCallbackHandler(BaseCallbackHandler):
         request_id = kwargs.get('invocation_id', 'unknown')
         if f"tool_{request_id}" in self.current_requests:
             del self.current_requests[f"tool_{request_id}"]
+```
 
+#### **Error Tracking**
+
+Next, let's handle tool error tracking:
+
+```python
     def on_tool_error(self, error: Exception, **kwargs) -> None:
         """Track tool errors"""
         tool_name = kwargs.get('name', 'unknown')
@@ -4222,7 +4559,13 @@ class PrometheusCallbackHandler(BaseCallbackHandler):
         request_id = kwargs.get('invocation_id', 'unknown')
         if f"tool_{request_id}" in self.current_requests:
             del self.current_requests[f"tool_{request_id}"]
+```
 
+#### **Production Monitoring System**
+
+Now let's create the main production monitoring class:
+
+```python
 class ProductionMonitoring:
     """Production monitoring system for LangChain agents"""
 
@@ -4232,10 +4575,15 @@ class ProductionMonitoring:
         self.logger = self._setup_logging()
         
         # Start Prometheus metrics server
-
         start_http_server(metrics_port)
         self.logger.info(f"Metrics server started on port {metrics_port}")
-    
+```
+
+#### **Logging Configuration**
+
+Let's set up structured logging for production:
+
+```python
     def _setup_logging(self):
         """Setup structured logging"""
         logging.basicConfig(
@@ -4247,7 +4595,13 @@ class ProductionMonitoring:
             ]
         )
         return logging.getLogger('LangChainProduction')
-    
+```
+
+#### **Interaction Logging**
+
+Now let's implement agent interaction logging:
+
+```python
     def log_agent_interaction(self, session_id: str, input_text: str, 
                             output_text: str, metadata: Dict[str, Any]):
         """Log agent interaction with structured data"""
@@ -4260,7 +4614,13 @@ class ProductionMonitoring:
         }
         
         self.logger.info(f"Agent interaction: {json.dumps(log_data)}")
-    
+```
+
+#### **Monitored Agent Creation**
+
+Finally, let's create agents with built-in monitoring:
+
+```python
     def create_monitored_agent(self, llm, tools: List[Tool], agent_type: str):
         """Create agent with production monitoring"""
         callback_manager = CallbackManager([self.callback_handler])
@@ -4274,7 +4634,6 @@ class ProductionMonitoring:
             handle_parsing_errors=True,
             metadata={"agent_type": agent_type}
         )
-
 ```
 
 ---
@@ -4283,8 +4642,13 @@ class ProductionMonitoring:
 
 ### **Comparison Analysis**
 
-```python
+In this section, we'll build a comprehensive comparison system to evaluate LangChain against bare metal implementations. We'll break this into logical components that you can test and understand individually.
 
+#### **Step 1: Framework Comparison Base Class**
+
+First, let's create the foundation for our comparison system:
+
+```python
 # src/session2/framework_comparison.py
 
 import time
@@ -4300,12 +4664,8 @@ class FrameworkComparison:
     async def compare_implementations(self, test_message: str) -> Dict[str, Any]:
         """Compare different implementation approaches"""
         
-        # Test bare metal implementation (from Session 1)
-
+        # Test both implementations and analyze results
         bare_metal_result = await self._test_bare_metal(test_message)
-        
-        # Test LangChain implementation
-
         langchain_result = await self._test_langchain(test_message)
         
         comparison = {
@@ -4317,23 +4677,27 @@ class FrameworkComparison:
         
         self.comparison_results[test_message] = comparison
         return comparison
-    
+```
+
+#### **Step 2: Bare Metal Implementation Testing**
+
+Now let's implement the bare metal testing method:
+
+```python
     async def _test_bare_metal(self, message: str) -> Dict[str, Any]:
-        """Test bare metal implementation"""
+        """Test bare metal implementation performance and characteristics"""
         from session1.tool_use_agent import ToolUseAgent
         from session1.tools import CalculatorTool
         
         start_time = time.time()
         
         try:
-            # Simulate bare metal agent
-
+            # Create bare metal agent with tools
             tools = [CalculatorTool()]
-            agent = ToolUseAgent("bare_metal_test", None, tools)  # Mock LLM
-
-            response = "Simulated bare metal response"  # Simplified for demo
-
+            agent = ToolUseAgent("bare_metal_test", None, tools)
             
+            # Simulate processing (replace with actual agent call)
+            response = "Simulated bare metal response"
             execution_time = time.time() - start_time
             
             return {
@@ -4352,22 +4716,26 @@ class FrameworkComparison:
                 "success": False,
                 "error": str(e)
             }
-    
+```
+
+#### **Step 3: LangChain Implementation Testing**
+
+Next, let's implement the LangChain testing method:
+
+```python
     async def _test_langchain(self, message: str) -> Dict[str, Any]:
-        """Test LangChain implementation"""
+        """Test LangChain implementation performance and characteristics"""
         from langchain_tools import CalculatorTool
         
         start_time = time.time()
         
         try:
-            # Simulate LangChain agent
-
+            # Create LangChain agent with tools
             tools = [CalculatorTool()]
-            # agent = LangChainToolAgent(llm, tools)  # Would need real LLM
-
-            response = "Simulated LangChain response"  # Simplified for demo
-
+            # In production: agent = LangChainToolAgent(llm, tools)
             
+            # Simulate processing (replace with actual agent call)
+            response = "Simulated LangChain response"
             execution_time = time.time() - start_time
             
             return {
@@ -4386,9 +4754,15 @@ class FrameworkComparison:
                 "success": False,
                 "error": str(e)
             }
-    
+```
+
+#### **Step 4: Results Analysis**
+
+Finally, let's implement comprehensive results analysis:
+
+```python
     def _analyze_results(self, bare_metal: Dict, langchain: Dict) -> Dict:
-        """Analyze comparison results"""
+        """Analyze and compare implementation results"""
         return {
             "speed_comparison": {
                 "bare_metal": bare_metal.get("execution_time", 0),
@@ -4411,11 +4785,17 @@ class FrameworkComparison:
                 "winner": "langchain"
             }
         }
+```
 
-# Trade-offs summary
+### **Framework Trade-offs Analysis (2025)**
 
+Understanding when to use each approach is crucial for making informed architectural decisions. Let's examine this systematically:
+
+#### **Trade-offs Summary Function**
+
+```python
 def print_framework_tradeoffs():
-    """Print comprehensive framework trade-offs"""
+    """Print comprehensive framework trade-offs for decision making"""
     
     tradeoffs = {
         "Bare Metal Implementation": {
@@ -4439,7 +4819,13 @@ def print_framework_tradeoffs():
                 "Educational purposes",
                 "Unique agent architectures"
             ]
-        },
+        }
+    }
+```
+
+#### **LangChain 2025 Analysis**
+
+```python
         "LangChain Implementation (2025)": {
             "Pros": [
                 "Rapid development with LangGraph orchestration",
@@ -4468,8 +4854,18 @@ def print_framework_tradeoffs():
                 "Scenarios requiring persistent context"
             ]
         }
-    }
-    
+```
+
+#### **Decision Framework Output**
+
+The framework generates formatted analysis output to help with decision making. This involves printing tradeoffs and decision guidance.
+
+**Formatted Analysis Output**
+
+First, we iterate through each approach and print its details in a formatted structure:
+
+```python
+    # Print formatted analysis
     for approach, details in tradeoffs.items():
         print(f"\n{'='*50}")
         print(f"{approach}")
@@ -4479,18 +4875,33 @@ def print_framework_tradeoffs():
             print(f"\n{category}:")
             for item in items:
                 print(f"  • {item}")
-    
+```
+
+**Decision Guidance Framework**
+
+Next, we provide structured guidance to help teams make informed architectural decisions:
+
+```python
+    # Decision guidance
     print(f"\n{'='*50}")
     print("DECISION FRAMEWORK")
     print(f"{'='*50}")
     print("""
     Choose Bare Metal When:
     • You need maximum performance
-    • You have unique requirements
+    • You have unique requirements  
     • You want deep understanding
     • You have experienced team
     • You need specific optimizations
-    
+    """)
+```
+
+**Enterprise LangChain Recommendations**
+
+Finally, we outline when to choose LangChain for enterprise scenarios:
+
+```python
+    print("""
     Choose LangChain (2025) When:  
     • You need enterprise-grade production systems
     • You require sophisticated multi-agent coordination
@@ -4504,7 +4915,6 @@ def print_framework_tradeoffs():
 
 if __name__ == "__main__":
     print_framework_tradeoffs()
-
 ```
 
 ---

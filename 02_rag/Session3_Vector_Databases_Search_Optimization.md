@@ -732,6 +732,10 @@ Choosing between HNSW and IVF represents one of the most critical architectural 
 | High-accuracy requirements (>95% recall) | **HNSW** | Better recall-latency trade-offs |
 | Write-heavy workloads (frequent updates) | **IVF** | More efficient incremental updates |
 
+**Advanced Vector Index Implementation**
+
+Let's implement an intelligent vector index that automatically selects optimal strategies:
+
 ```python
 # Advanced indexing strategies with decision logic
 import faiss
@@ -751,6 +755,13 @@ class OptimizedVectorIndex:
         self.index = None
         self.id_map = {}  # Map internal IDs to external IDs
         self.performance_metrics = {}  # Track build and search performance
+```
+
+**Main Index Building Method**
+
+The core method that handles intelligent index construction:
+
+```python
 
     def build_index(self, vectors: np.ndarray,
                    external_ids: List[str],
@@ -766,7 +777,7 @@ class OptimizedVectorIndex:
         n_vectors = vectors.shape[0]
         memory_gb = vectors.nbytes / (1024**3)
 
-        # Intelligent index selection if auto mode
+        # Auto-select optimal index type based on data characteristics
         if self.index_type == "auto":
             self.index_type = self._select_optimal_index(
                 n_vectors, memory_gb, performance_target
@@ -776,7 +787,15 @@ class OptimizedVectorIndex:
               f"({memory_gb:.1f}GB)")
 
         build_start = time.time()
+```
 
+**Index Type Selection and Building**
+
+Actual index construction based on the selected algorithm:
+
+```python
+
+        # Build index using selected algorithm
         if self.index_type == "HNSW":
             self.index = self._build_hnsw_index(vectors, performance_target)
         elif self.index_type == "IVF":
@@ -787,38 +806,54 @@ class OptimizedVectorIndex:
             # Fallback to flat index for small datasets
             self.index = self._build_flat_index(vectors)
 
+        # Record performance metrics
         build_time = time.time() - build_start
         self.performance_metrics['build_time'] = build_time
         self.performance_metrics['vectors_per_second'] = n_vectors / build_time
 
-        # Store ID mapping
+        # Store ID mapping for result retrieval
         for i, external_id in enumerate(external_ids):
             self.id_map[i] = external_id
 
         print(f"Index built in {build_time:.1f}s "
               f"({n_vectors/build_time:.0f} vectors/sec)")
+```
+
+**Intelligent Index Selection Logic**
+
+This method chooses the best algorithm based on dataset characteristics:
+
+```python
 
     def _select_optimal_index(self, n_vectors: int, memory_gb: float,
                              target: str) -> str:
-        """Intelligent index selection based on dataset characteristics."""
+        """Intelligent index selection based on dataset characteristics.
+        
+        Uses dataset size, memory constraints, and performance targets
+        to select the most appropriate indexing algorithm.
+        """
 
+        # Small datasets: use exact search
         if n_vectors < 10000:
-            return "Flat"  # Exact search for small datasets
+            return "Flat"
 
+        # Speed priority with moderate memory
         if target == "speed" and memory_gb < 8.0:
-            return "HNSW"  # Best latency for moderate memory usage
+            return "HNSW"
 
+        # Memory constraints or very large datasets
         if target == "memory" or memory_gb > 16.0:
-            return "IVF_PQ"  # Compression for large datasets
+            return "IVF_PQ"
 
+        # Accuracy priority
         if target == "accuracy":
-            return "HNSW"  # Superior recall characteristics
+            return "HNSW"
 
-        # Balanced approach
+        # Balanced approach based on scale
         if n_vectors > 1000000:
-            return "IVF_PQ"  # Scale efficiency
+            return "IVF_PQ"  # Scale efficiency for large datasets
         else:
-            return "HNSW"    # Performance consistency
+            return "HNSW"    # Performance consistency for medium datasets
 ```
 
 **Step 8: IVF Index - Clustering for Scale**
@@ -1013,32 +1048,54 @@ Your vector database and indexing choices cascade through every aspect of RAG pe
 
 **Optimizing the RAG Pipeline Stack:**
 
+**RAG Architecture Optimization System**
+
+This optimizer helps choose the right vector database based on specific RAG requirements:
+
 ```python
 class RAGArchitectureOptimizer:
-    """Optimize vector database choice based on RAG requirements."""
+    """Optimize vector database choice based on RAG requirements.
+    
+    Analyzes performance, cost, and accuracy requirements to recommend
+    the optimal vector database and indexing strategy for RAG systems.
+    """
 
     @staticmethod
     def recommend_architecture(requirements: Dict) -> Dict:
         """Provide architecture recommendations based on RAG needs."""
 
-        # Extract key requirements
+        # Extract key requirements from user specifications
         query_volume = requirements.get('daily_queries', 1000)
         document_count = requirements.get('document_count', 100000)
         latency_requirement = requirements.get('max_latency_ms', 500)
         budget_constraint = requirements.get('monthly_budget_usd', 1000)
         accuracy_requirement = requirements.get('min_recall', 0.9)
+```
 
+**Initialize Recommendation Structure**
+
+Set up the framework for delivering comprehensive architecture recommendations:
+
+```python
+
+        # Initialize recommendation structure
         recommendations = {
             'database': None,
             'index_type': None,
             'configuration': {},
             'expected_performance': {},
-            'cost_estimate': {}
+            'cost_estimate': {},
+            'rationale': ''
         }
+```
 
-        # Decision logic based on RAG-specific considerations
+**High-Performance RAG Configuration**
+
+For applications requiring ultra-low latency with adequate budget:
+
+```python
+        # High-performance RAG: Low latency + adequate budget
         if latency_requirement < 100 and budget_constraint > 500:
-            # High-performance RAG
             recommendations.update({
                 'database': 'Pinecone',
                 'index_type': 'HNSW-based managed',
@@ -1054,9 +1111,16 @@ class RAGArchitectureOptimizer:
                     'qps_capacity': 5000
                 }
             })
+```
+
+**Cost-Optimized RAG Configuration**
+
+For large-scale deployments or budget-constrained environments:
+
+```python
 
         elif document_count > 1000000 or budget_constraint < 200:
-            # Cost-optimized RAG
+            # Cost-optimized RAG for scale or budget constraints
             recommendations.update({
                 'database': 'Qdrant',
                 'index_type': 'IVF+PQ',

@@ -73,6 +73,10 @@ class ReActStep:
 
 This foundational structure captures each step of reasoning with full traceability. The `confidence` field allows for probabilistic reasoning, while `metadata` provides extensibility for additional context.
 
+#### **ReAct Agent Initialization**
+
+First, let's set up the basic ReAct agent structure:
+
 ```python
 class BasicReActAgent:
     """Foundation ReAct agent with core reasoning capabilities"""
@@ -82,7 +86,13 @@ class BasicReActAgent:
         self.tools = tools
         self.max_steps = max_steps
         self.reasoning_history: List[ReActStep] = []
-        
+```
+
+#### **Problem Solving Loop**
+
+Next, let's implement the main reasoning loop:
+
+```python
     async def solve(self, problem: str) -> Dict[str, Any]:
         """Main problem-solving method using ReAct pattern"""
         self.reasoning_history = []
@@ -92,8 +102,21 @@ class BasicReActAgent:
         # Initial problem analysis
         initial_thought = await self._generate_initial_thought(problem)
         
+        return await self._reasoning_loop(current_context, initial_thought, current_step)
+```
+
+#### **Reasoning Loop Implementation**
+
+Finally, let's implement the step-by-step reasoning process:
+
+```python
+    async def _reasoning_loop(self, context: str, initial_thought: str, step: int) -> Dict[str, Any]:
+        """Execute the reasoning loop with step tracking"""
+        current_context = context
+        current_step = step
+        
         while current_step <= self.max_steps:
-            # Generate reasoning step
+            # Generate and execute reasoning step
             step = await self._execute_reasoning_step(
                 current_context, initial_thought, current_step
             )
@@ -228,6 +251,10 @@ The thought generation includes structured reasoning questions that guide the ag
 
 The action execution phase is where the agent interacts with its environment. This requires robust error handling and observation processing:
 
+#### **Action Dispatcher**
+
+First, let's create the main action execution dispatcher:
+
 ```python
     async def _execute_action(self, action: ActionType, action_input: str) -> str:
         """Execute action and return observation"""
@@ -246,7 +273,13 @@ The action execution phase is where the agent interacts with its environment. Th
                 
         except Exception as e:
             return f"Action failed: {str(e)}\nThis requires a different approach."
-    
+```
+
+#### **Search Action Implementation**
+
+Next, let's implement the search action with robust error handling:
+
+```python
     async def _execute_search(self, query: str) -> str:
         """Execute search action with comprehensive result processing"""
         
@@ -254,12 +287,20 @@ The action execution phase is where the agent interacts with its environment. Th
             return "Search tool not available. Need to use reasoning or other tools."
             
         search_results = await self.tools['search'].execute(query)
-        
-        # Process and summarize results
+        return self._process_search_results(query, search_results)
+```
+
+#### **Search Results Processing**
+
+Finally, let's process and format search results:
+
+```python
+    def _process_search_results(self, query: str, search_results) -> str:
+        """Process and format search results"""
         if not search_results:
             return f"Search for '{query}' returned no results. May need to rephrase query."
             
-        # Extract key information
+        # Extract and summarize key information
         summary = self._summarize_search_results(search_results)
         return f"Search results for '{query}':\n{summary}"
 ```
