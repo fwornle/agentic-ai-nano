@@ -1,0 +1,148 @@
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*~
+
+# Text files (if you want to exclude all, otherwise comment this line)
+*.txt
+
+# Logs and analysis
+logs/
+*.log
+log/
+*.log.*
+analysis_reports/
+*_analysis.json
+*_report.md
+
+# Environment and configuration
+.env
+.env.*
+.env.local
+.env.development
+.env.test
+.env.production
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+*.cover
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.hypothesis/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+*.tgz
+package-lock.json
+yarn.lock
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+.DS_Store
+Thumbs.db
+.project
+.classpath
+.settings/
+*.sublime-*
+
+# MCP and semantic analysis
+.mcp/
+mcp-cache/
+semantic-analysis/
+ukb-entities/
+plantuml/
+*.puml
+*.plantuml
+
+# Session and history files
+.specstory/
+session_*.md
+*-session.md
+.claude_code_sessions/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+.cache/
+
+# Test outputs
+test_results/
+test_reports/
+coverage/
+
+# Generated documentation
+docs/_build/
+site/
+.docusaurus/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Secrets and credentials
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+secrets/
+credentials/
+
+# Large files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+*.dmg
+*.iso
+
+# OS generated files
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Custom project-specific exclusions
+/notebooks/analysis/
+/src/temp/
+sandbox/
+experiments/
+scratch/
