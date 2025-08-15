@@ -285,6 +285,10 @@ class CalculateOutput(BaseModel):
 def create_calculator_tool() -> Tool:
     async def calculate(input_data: CalculateInput) -> CalculateOutput:
         try:
+            # WARNING: Using eval() in production requires extreme caution
+            # The regex validation above provides basic protection, but consider
+            # using a proper math expression parser like ast.literal_eval()
+            # or a dedicated math library for production use
             result = eval(input_data.expression)
             formatted = f"{result:.{input_data.precision}f}"
             

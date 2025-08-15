@@ -45,6 +45,8 @@ LangChain has four essential building blocks that work together:
 
 🗂️ **File**: `src/session2/langchain_basics.py` - Core setup and imports
 
+**Setup Requirements**: Install LangChain with `pip install langchain openai`. You'll also need to set your API key with `export OPENAI_API_KEY="your-key-here"`.
+
 ```python
 # Essential LangChain imports
 from langchain.chat_models import ChatOpenAI
@@ -63,6 +65,8 @@ from langchain.callbacks import StdOutCallbackHandler
 Quick LLM initialization for different providers:
 
 🗂️ **File**: `src/session2/llm_setup.py` - LLM factory pattern implementation
+
+This factory pattern helps you switch between different LLM providers easily. The temperature parameter controls randomness (0=deterministic, 1=creative). Make sure you have the appropriate API keys set in your environment variables.
 
 ```python
 # Simple LLM factory pattern
@@ -97,6 +101,8 @@ Input → Agent → Tool Selection → LLM Reasoning → Output
 #### Simple Chain Creation (8 minutes)
 Basic chain for sequential processing:
 
+LLMChain is the most basic building block in LangChain. It combines an LLM with a prompt template for reusable workflows. The `{text}` placeholder in the template will be replaced with actual input when you run the chain.
+
 ```python
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
@@ -112,6 +118,8 @@ result = chain.run("AI agents are becoming more capable")
 
 #### Sequential Chains (7 minutes)
 Connecting multiple chains for complex workflows:
+
+SequentialChain allows you to chain multiple operations together where each chain's output becomes the next chain's input. This is perfect for multi-step processing pipelines.
 
 ```python
 from langchain.chains import SequentialChain
@@ -147,6 +155,8 @@ full_chain = SequentialChain(
 #### Prompt Templates (5 minutes)
 Dynamic prompt creation with variables:
 
+Prompt templates allow you to create reusable, parameterized prompts. This is especially useful when you need consistent formatting across different inputs. Variables are filled in at runtime, enabling dynamic prompt generation.
+
 ```python
 # Template with multiple variables
 template = """
@@ -173,6 +183,8 @@ result = chain.run(
 
 #### Error Handling Patterns (5 minutes)
 Basic error handling and retry logic:
+
+Robust error handling is crucial for production LangChain applications. Common failure reasons include API rate limits, network timeouts, and temporary service unavailability. This pattern implements retry logic with exponential backoff (wait times: 1s, 2s, 4s, etc.).
 
 ```python
 from langchain.callbacks import StdOutCallbackHandler
@@ -204,6 +216,10 @@ except Exception as e:
 Three methods for creating tools:
 
 🗂️ **File**: `src/session2/langchain_tools.py` - Complete tool implementations
+
+LangChain provides multiple ways to create tools for agents. Each method has its use case - the Tool class is most explicit and configurable, the @tool decorator is cleanest for simple tools, and quick function tools are good for prototyping.
+
+**⚠️ Security Warning**: The calculate_math example uses `eval()` which is dangerous in production! Use a proper math parser like sympy or numexpr instead.
 
 ```python
 from langchain.agents import Tool
@@ -247,6 +263,8 @@ search_tool = Tool(
 #### Agent Initialization (7 minutes)
 Creating agents with tools and memory:
 
+This is where LangChain's power really shines - orchestrating complex workflows with tools and memory. The agent uses the ReAct pattern (Reasoning + Acting) to decide when and how to use tools. The CHAT_CONVERSATIONAL_REACT_DESCRIPTION agent type uses chat models, maintains conversation history, and follows the ReAct pattern for tool use.
+
 ```python
 from langchain.agents import initialize_agent, AgentType
 from langchain.memory import ConversationBufferMemory
@@ -273,6 +291,8 @@ agent = initialize_agent(
 #### Tool Calling Patterns (5 minutes)
 How agents decide when and how to use tools:
 
+The agent automatically chooses tools based on input, demonstrating its ability to understand complex, multi-part queries. Behind the scenes, it analyzes the request, identifies needed tools, executes them with appropriate parameters, and synthesizes results into a coherent response.
+
 ```python
 # Agent automatically chooses tools based on input
 response = agent.run("What's the weather in New York and calculate 15 * 24?")
@@ -286,6 +306,8 @@ response = agent.run("What's the weather in New York and calculate 15 * 24?")
 
 #### Basic Error Recovery (5 minutes)
 Handling tool failures gracefully:
+
+Tools can fail for many reasons: API limits, network issues, invalid inputs, or parsing errors. This production-ready pattern ensures graceful degradation when tools encounter problems.
 
 ```python
 def robust_tool_execution(agent, query, fallback_response=None):

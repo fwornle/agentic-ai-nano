@@ -39,7 +39,9 @@
 **Learning Mode**: Conceptual Understanding
 
 #### Production vs Development Mindset (10 minutes)
-Agno emphasizes production-first thinking from the start:
+Agno emphasizes production-first thinking from the start. These imports provide built-in monitoring, persistent storage, and enterprise-grade tools that distinguish Agno from development-focused frameworks:
+
+🗂️ **File**: `src/session8/agno_foundation.py` - Core Agno implementation and setup
 
 ```python
 # Essential Agno imports for production
@@ -62,6 +64,10 @@ Agno's production-ready architecture:
 
 ![Agno Agent Architecture](images/agno-agent.png)
 *This diagram showcases Agno's production-first architecture, highlighting built-in monitoring, persistent storage, and reliability features. The architecture emphasizes operational excellence with integrated telemetry, structured logging, and automated recovery mechanisms.*
+
+This basic Agno agent setup demonstrates how production features like persistent storage and monitoring are built into the framework from the ground up:
+
+🗂️ **File**: `src/session8/agno_foundation.py` - Basic production agent setup
 
 ```python
 # Basic Agno agent with production features
@@ -136,6 +142,10 @@ Built-in monitoring for production systems:
 ![Agno Telemetry & Debugging](images/agno-telemetry-debugging.png)
 *This visualization demonstrates Agno's comprehensive telemetry and debugging capabilities, showing real-time metrics collection, distributed tracing, error tracking, and performance monitoring dashboards that enable effective production operations and troubleshooting.*
 
+Setting up comprehensive monitoring involves configuring structured logging, Prometheus metrics, and agent-level monitoring. This configuration ensures you can track performance, errors, and usage patterns in production:
+
+🗂️ **File**: `src/session8/structured_outputs.py` - Monitoring and telemetry setup
+
 ```python
 from agno.monitoring import PrometheusExporter
 import logging
@@ -168,7 +178,9 @@ prometheus_exporter = PrometheusExporter(
 ```
 
 #### Error Handling & Recovery (8 minutes)
-Production-grade error handling:
+Production-grade error handling requires implementing retry mechanisms with exponential backoff, proper exception handling, and graceful degradation. This pattern ensures your agents can handle transient failures and maintain service availability:
+
+🗂️ **File**: `src/session8/performance_resilience.py` - Error handling and recovery patterns
 
 ```python
 import asyncio
@@ -204,7 +216,9 @@ result = await robust_agent.run_with_retry("Analyze market trends")
 ```
 
 #### Resource Management (7 minutes)
-Managing resources in production:
+Managing resources in production involves controlling memory usage, managing database connections, and implementing session limits. This resource manager pattern helps prevent resource exhaustion and ensures consistent performance:
+
+🗂️ **File**: `src/session8/performance_resilience.py` - Resource management patterns
 
 ```python
 from agno.storage import PostgresStorage
@@ -251,7 +265,9 @@ async with resource_manager.get_agent_session("user_123") as agent:
 ```
 
 #### Performance Optimization (5 minutes)
-Optimizing for production performance:
+Optimizing for production performance involves implementing intelligent caching, connection pooling, and response optimization. This performance-optimized agent demonstrates how to reduce latency and improve throughput:
+
+🗂️ **File**: `src/session8/performance_resilience.py` - Performance optimization patterns
 
 ```python
 from agno.cache import RedisCache
@@ -304,7 +320,9 @@ result = await optimized_agent.run_cached("Common query")
 **Learning Mode**: Application & Deployment
 
 #### Docker Deployment (8 minutes)
-Containerizing Agno applications:
+Containerizing Agno applications requires careful configuration of the container environment, dependencies, and health checks. This Dockerfile demonstrates production-ready containerization with proper security and monitoring:
+
+🗂️ **File**: `src/session8/Dockerfile` - Production container configuration
 
 ```dockerfile
 # Dockerfile for Agno production deployment
@@ -331,6 +349,10 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
 EXPOSE 8000
 CMD ["python", "main.py"]
 ```
+
+This production server implementation shows how to expose Agno agents through a REST API with proper error handling, health checks, and request validation:
+
+🗂️ **File**: `src/session8/agno_foundation.py` - Production API server
 
 ```python
 # main.py - Production server
@@ -373,7 +395,9 @@ if __name__ == "__main__":
 ```
 
 #### Basic Scaling (7 minutes)
-Simple scaling strategies:
+Simple scaling strategies involve load balancing, service replication, and shared resources like databases and caches. This Docker Compose configuration demonstrates horizontal scaling with multiple service instances:
+
+🗂️ **File**: `src/session8/docker-compose.yml` - Scaling configuration
 
 ```yaml
 # docker-compose.yml for basic scaling
@@ -419,7 +443,9 @@ volumes:
 ```
 
 #### Health Monitoring (5 minutes)
-Production health checks:
+Production health checks must verify all system dependencies including database connectivity, cache availability, and agent responsiveness. This comprehensive health checker provides detailed system status information:
+
+🗂️ **File**: `src/session8/team_coordination.py` - Health monitoring and system checks
 
 ```python
 from agno.monitoring import HealthChecker
