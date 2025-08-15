@@ -37,7 +37,7 @@
 **Learning Mode**: Conceptual Understanding
 
 #### Understanding Enterprise Systems (8 minutes)
-Enterprise environments are complex ecosystems of interconnected systems:
+Enterprise environments are complex ecosystems of interconnected systems requiring robust integration patterns, authentication mechanisms, and fault tolerance. This foundation code demonstrates the protocols and configurations needed for reliable enterprise integration:
 
 🗂️ **File**: `src/session10/enterprise_architecture.py` - Enterprise integration patterns
 
@@ -99,7 +99,7 @@ class EnterpriseSystemAdapter(Protocol):
 4. **Health Monitoring**: Built-in health checks for system reliability
 
 #### ERP System Integration (12 minutes)
-Enterprise Resource Planning systems are the backbone of most organizations:
+Enterprise Resource Planning systems are the backbone of most organizations, requiring specialized adapters that handle authentication, session management, and data transformation. This SAP integration demonstrates OAuth 2.0 authentication, connection pooling, and proper error handling:
 
 🗂️ **File**: `src/session10/erp_integration.py` - SAP/ERP integration patterns
 
@@ -214,9 +214,9 @@ class SAPIntegrationAdapter:
 ```
 
 #### Database Integration Patterns (10 minutes)
-Enterprise agents often need to interact with multiple databases:
+Enterprise agents often need to interact with multiple databases with different engines, connection requirements, and performance characteristics. This database manager handles connection pooling, transaction management, and multi-database coordination:
 
-🗂️ **File**: `src/session10/database_integration.py` - Multi-database management
+🗂️ **File**: `src/session10/erp_integration.py` - Multi-database management patterns
 
 ```python
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
@@ -268,7 +268,7 @@ class EnterpriseDatabase:
 **Learning Mode**: Implementation & Practice
 
 #### Container Strategy (8 minutes)
-Production containerization requires multi-stage builds and security:
+Production containerization requires multi-stage builds and security hardening to minimize attack surface, reduce image size, and ensure secure runtime environments. This Dockerfile demonstrates security best practices including non-root users and minimal base images:
 
 🗂️ **File**: `src/session10/deployment/docker_config.py` - Docker configuration
 
@@ -335,7 +335,9 @@ CMD ["python", "src/main.py"]
 ```
 
 #### Kubernetes Deployment (10 minutes)
-Enterprise Kubernetes configuration with high availability:
+Enterprise Kubernetes configuration with high availability requires proper resource management, health checks, and rolling update strategies. This configuration demonstrates production-ready Kubernetes deployment with security contexts and monitoring:
+
+🗂️ **File**: `src/session10/deployment/k8s-deployment.yaml` - Kubernetes deployment
 
 ```yaml
 # Kubernetes Deployment Configuration
@@ -417,7 +419,9 @@ spec:
 ```
 
 #### CI/CD Pipeline (7 minutes)
-Automated deployment with security scanning:
+Automated deployment with security scanning ensures code quality, vulnerability detection, and reliable deployments. This GitHub Actions pipeline demonstrates comprehensive CI/CD with security scanning, testing, and staged deployment:
+
+🗂️ **File**: `src/session10/deployment/.github/workflows/deploy.yml` - CI/CD pipeline
 
 ```yaml
 # GitHub Actions CI/CD Pipeline

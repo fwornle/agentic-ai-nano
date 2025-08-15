@@ -43,6 +43,8 @@ Every agent needs these core components:
 
 🗂️ **File**: `src/session1/base_agent.py`
 
+This is the foundation class for all agents. Think of it as the blueprint that defines what capabilities every agent should have. The memory list stores past interactions, while the tools dictionary holds functions the agent can call.
+
 ```python
 class BaseAgent:
     def __init__(self, model_name="gpt-4"):
@@ -59,6 +61,8 @@ class BaseAgent:
         pass
 ```
 
+The `run` method is where the magic happens. The actual implementation (available in the source file) involves parsing user input, determining if tools are needed, executing actions, and formatting the response.
+
 **Key Concepts:**
 1. **Model Interface**: How agents talk to LLMs
 2. **Memory Management**: Keeping track of context
@@ -67,8 +71,9 @@ class BaseAgent:
 #### Input/Output Handling (7 minutes)
 Clean interfaces for agent interaction:
 
+These methods belong to the BaseAgent class and handle data transformation between raw user input and structured agent processing. They ensure consistent formatting across all agent interactions.
+
 ```python
-# Simple but effective I/O patterns
 def process_input(self, user_input: str) -> dict:
     """Convert user input to structured format"""
     return {
@@ -84,6 +89,8 @@ def format_output(self, agent_response: str) -> str:
 
 #### State Management Basics (5 minutes)
 Simple but effective state tracking:
+
+The AgentState class tracks everything the agent needs to remember during conversations. This is crucial for maintaining context and making informed decisions throughout multi-turn interactions.
 
 ```python
 class AgentState:
@@ -147,6 +154,8 @@ Implementing the core agent thinking process:
 
 🗂️ **File**: `src/session1/react_agent.py` - See the reasoning loop implementation
 
+This method implements the ReAct (Reasoning + Acting) pattern, a fundamental pattern where agents think, act, and observe in a loop. Each iteration involves analyzing the situation, deciding on an action, executing it, and observing the results.
+
 ```python
 def reasoning_loop(self, task: str) -> str:
     """Simple ReAct-style reasoning"""
@@ -176,6 +185,8 @@ def reasoning_loop(self, task: str) -> str:
 
 #### Error Handling Patterns (4 minutes)
 Making agents robust:
+
+This wrapper method ensures agents handle errors gracefully, preventing crashes and providing user-friendly error messages when something goes wrong.
 
 ```python
 def safe_agent_execution(self, user_input: str) -> str:
@@ -225,6 +236,10 @@ Building tools that agents can use:
 ![Agent Pattern Tool Integration](images/agent-pattern-tool-integration.png)
 
 🗂️ **File**: `src/session1/tools.py` - Complete tool implementations
+
+The SimpleTool base class provides a consistent interface for all tools. The name is used by the agent to identify the tool, while the description helps the agent decide when to use it.
+
+**⚠️ Security Warning**: The calculator example uses `eval()` which is dangerous! This implementation includes basic safety checks, but in production you should use a proper math expression parser like sympy or numexpr instead.
 
 ```python
 class SimpleTool:
@@ -296,6 +311,8 @@ class ToolUseAgent:
 #### Basic Validation (3 minutes)
 Ensuring tool outputs are useful:
 
+This validation method helps agents determine if a tool executed successfully. It's part of the agent's quality control system, checking for common failure indicators like error messages or empty responses.
+
 ```python
 def validate_tool_output(self, tool_name: str, output: str) -> bool:
     """Check if tool output looks reasonable"""
@@ -308,6 +325,8 @@ def validate_tool_output(self, tool_name: str, output: str) -> bool:
 
 #### Integration Testing (3 minutes)
 Testing agents with tools:
+
+This integration test verifies that agents and tools work together correctly, testing the complete flow from user input through tool execution to final response.
 
 ```python
 def test_tool_integration():
