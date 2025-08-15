@@ -22,8 +22,8 @@
 | ✅ Best Practices | 2 concepts | 5 min | Production |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **Module A: Advanced ADK Features** (25 min) - Sophisticated ADK capabilities
-- 🏭 **Module B: Enterprise Deployment** (20 min) - Production ADK systems
+- 🔬 **[Module A: Advanced ADK Integration](Session7_ModuleA_Advanced_ADK_Integration.md)** (35 min) - Sophisticated Gemini integration & MCP orchestration
+- 🏭 **[Module B: Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md)** (30 min) - Production deployment & enterprise monitoring
 
 **🗂️ Code Files**: All examples use files in `src/session7/`
 **🚀 Quick Start**: Run `cd src/session7 && python basic_agent.py` to see ADK in action
@@ -587,46 +587,16 @@ python integration_patterns.py     # Cloud integration
 **Next Session Prerequisites**: ✅ Core Section Complete
 **Ready for**: Session 8: Agno Production-Ready Agents
 
----
+### 🧭 **Choose Your Next Path:**
+- **[🔬 Module A: Advanced ADK Integration →](Session7_ModuleA_Advanced_ADK_Integration.md)** - Sophisticated Gemini integration & MCP orchestration
+- **[🏭 Module B: Enterprise Agent Systems →](Session7_ModuleB_Enterprise_Agent_Systems.md)** - Production deployment & enterprise monitoring
+- **[📝 Test Your Knowledge →](Session7_Test_Solutions.md)** - Comprehensive quiz
+- **[📖 Next Session: Agno Production Ready Agents →](Session8_Agno_Production_Ready_Agents.md)** - Advanced agent production patterns
 
-# 🎛️ OPTIONAL MODULES (Choose Your Adventure)
-
-## 🔬 Module A: Advanced ADK Features (25 minutes)
-**Prerequisites**: Core Section Complete + Google Cloud access
-**Target Audience**: Enterprise ADK implementers
-**Cognitive Load**: 4 advanced concepts
-
-### A1: Advanced Reasoning Engines (15 minutes)
-🗂️ **Files**: Advanced reasoning examples in `src/session7/`
-
-Sophisticated reasoning patterns, multi-step problem solving, and enterprise reasoning workflows.
-
-### A2: Enterprise Workflow Integration (10 minutes)
-Integrating ADK agents with existing enterprise workflows and business processes.
-
----
-
-## 🏭 Module B: Enterprise Deployment (20 minutes)
-**Prerequisites**: Core Section Complete + Google Cloud knowledge
-**Target Audience**: DevOps and platform engineers
-**Cognitive Load**: 3 deployment concepts
-
-### B1: Production Deployment Patterns (15 minutes)
-Complete production deployment strategies including CI/CD, monitoring, and scaling.
-
-### B2: Enterprise Governance (5 minutes)
-Governance, compliance, and audit requirements for enterprise ADK deployments.
-
----
-
-## 📊 Progress Tracking
-
-### Completion Status
-- [ ] Core Section (60 min) - Essential for next session
-- [ ] Module A: Advanced ADK Features (25 min)
-- [ ] Module B: Enterprise Deployment (20 min)
-
-**🗂️ All Code Examples**: Available in `src/session7/` - 11 Python files with complete ADK implementations!
+### 🎆 Complete Learning Path Options
+**Sequential Learning**: Core → Module A → Module B  
+**Enterprise Focus**: Core → Module B  
+**Advanced Integration**: Core → Module A
 
 ---
 
@@ -722,4 +692,14 @@ D) On-premises only
 
 ---
 
-[← Back to Session 6](Session6_Atomic_Agents_Modular_Architecture.md) | [Next: Session 8 →](Session8_Agno_Production_Ready_Agents.md)
+## 🧭 Navigation
+
+**Previous: [Session 6 - Atomic Agents Modular Architecture](Session6_Atomic_Agents_Modular_Architecture.md)**
+
+**Optional Deep Dive Modules:**
+- **[🔬 Module A: Advanced ADK Integration](Session7_ModuleA_Advanced_ADK_Integration.md)**
+- **[🏭 Module B: Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md)**
+
+**[📝 Test Your Knowledge: Session 7 Solutions](Session7_Test_Solutions.md)**
+
+**[Next: Session 8 - Agno Production Ready Agents →](Session8_Agno_Production_Ready_Agents.md)**

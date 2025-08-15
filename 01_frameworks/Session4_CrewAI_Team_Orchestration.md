@@ -22,8 +22,8 @@
 | ⚡ Performance & Optimization | 3 concepts | 10 min | Optimization |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **Module A: Advanced CrewAI Flows** (45 min) - Sophisticated workflow patterns
-- 🏭 **Module B: Enterprise Team Patterns** (40 min) - Production team architectures
+- 🔬 **[Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)** (45 min) - Sophisticated workflow patterns & dynamic team formation
+- 🏭 **[Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)** (40 min) - Production team architectures & custom tools
 
 **🗂️ Code Files**: All examples use files in `src/session4/`
 **🚀 Quick Start**: Run `cd src/session4 && python crewai_basics.py` to see CrewAI teams in action
@@ -531,48 +531,20 @@ python hierarchical_crew.py          # Team management
 - [ ] I'm ready for advanced modules or next session
 
 **Next Session Prerequisites**: ✅ Core Section Complete  
-**Ready for**: Session 5: PydanticAI Type-Safe Agents
+**Ready for**: Session 6: Agent Communication Protocols
 
 ---
 
-# 🎛️ OPTIONAL MODULES (Choose Your Adventure)
+### 🧭 **Choose Your Next Path:**
+- **[🔬 Module A: Advanced CrewAI Flows →](Session4_ModuleA_Advanced_CrewAI_Flows.md)** - Sophisticated workflow patterns & dynamic team formation
+- **[🏭 Module B: Enterprise Team Patterns →](Session4_ModuleB_Enterprise_Team_Patterns.md)** - Production team architectures & custom tools
+- **[📝 Test Your Knowledge →](Session4_Test_Solutions.md)** - Comprehensive quiz
+- **[📖 Next Session: Agent Communication Protocols →](Session6_Agent_Communication_Protocols.md)** - Message passing and coordination
 
-## 🔬 Module A: Advanced CrewAI Flows (45 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Advanced implementers
-**Cognitive Load**: 6 advanced concepts
-
-### A1: CrewAI Flows Architecture (25 minutes)
-🗂️ **File**: `src/session4/planning_crew.py` - Advanced flow patterns
-
-Sophisticated workflow management with CrewAI Flows, including conditional logic, parallel execution, and dynamic task generation.
-
-### A2: Complex Team Structures (20 minutes)
-Multi-layered team hierarchies, cross-team collaboration, and specialized team formations for complex projects.
-
----
-
-## 🏭 Module B: Enterprise Team Patterns (40 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Enterprise developers
-**Cognitive Load**: 5 enterprise concepts
-
-### B1: Production Team Architecture (25 minutes)
-Scalable team patterns for production environments, including error handling, monitoring, and resource management.
-
-### B2: Team Performance Analytics (15 minutes)
-Measuring and optimizing team performance, including metrics collection and performance tuning strategies.
-
----
-
-## 📊 Progress Tracking
-
-### Completion Status
-- [ ] Core Section (75 min) - Essential for next session
-- [ ] Module A: Advanced CrewAI Flows (45 min)
-- [ ] Module B: Enterprise Team Patterns (40 min)
-
-**🗂️ All Code Examples**: Available in `src/session4/` - 11 Python files with complete team implementations!
+### 🎆 Complete Learning Path Options
+**Sequential Learning**: Core → Module A → Module B  
+**Production Focus**: Core → Module B  
+**Advanced Flows**: Core → Module A
 
 ---
 
@@ -668,4 +640,14 @@ D) Cloud integration
 
 ---
 
-[← Back to Session 3](Session3_LangGraph_Multi_Agent_Workflows.md) | [Next: Session 5 →](Session5_PydanticAI_Type_Safe_Agents.md)
+## 🧭 Navigation
+
+**Previous: [Session 3 - LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)**
+
+**Optional Deep Dive Modules:**
+- **[🔬 Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)**
+- **[🏭 Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)**
+
+**[📝 Test Your Knowledge: Session 4 Solutions](Session4_Test_Solutions.md)**
+
+**[Next: Session 6 - Agent Communication Protocols →](Session6_Agent_Communication_Protocols.md)**

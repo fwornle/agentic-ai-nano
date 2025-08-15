@@ -22,8 +22,8 @@
 | 🚀 Deployment & Scaling | 2 concepts | 5 min | Production |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **Module A: Advanced Composition Patterns** (35 min) - Sophisticated component architectures
-- 🏭 **Module B: Enterprise Modular Systems** (30 min) - Production-scale atomic systems
+- 🔬 **[Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)** (35 min) - Sophisticated pipeline orchestration & dynamic assembly
+- 🏭 **[Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)** (30 min) - Production-scale atomic systems & multi-tenant architectures
 
 **🗂️ Code Files**: All examples use files in `src/session6/`
 **🚀 Quick Start**: Run `cd src/session6 && python example_usage.py` to see atomic agents in action
@@ -556,44 +556,16 @@ python -m pytest test_client.py  # Validate your understanding
 
 ---
 
-# 🎛️ OPTIONAL MODULES (Choose Your Adventure)
+### 🧭 **Choose Your Next Path:**
+- **[🔬 Module A: Advanced Composition Patterns →](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Sophisticated pipeline orchestration & dynamic assembly
+- **[🏭 Module B: Enterprise Modular Systems →](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production-scale atomic systems & multi-tenant architectures
+- **[📝 Test Your Knowledge →](Session6_Test_Solutions.md)** - Comprehensive quiz
+- **[📖 Next Session: First ADK Agent →](Session7_First_ADK_Agent.md)** - Enterprise agent development
 
-## 🔬 Module A: Advanced Composition Patterns (35 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Advanced system architects
-**Cognitive Load**: 5 advanced concepts
-
-### A1: Complex Component Architectures (20 minutes)
-🗂️ **Files**: Advanced composition examples in `src/session6/`
-
-Sophisticated component patterns including dynamic composition, plugin architectures, and micro-service patterns.
-
-### A2: Component Lifecycle Management (15 minutes)
-Managing component creation, destruction, and resource allocation in complex systems.
-
----
-
-## 🏭 Module B: Enterprise Modular Systems (30 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Enterprise developers
-**Cognitive Load**: 4 enterprise concepts
-
-### B1: Production Scaling Patterns (20 minutes)
-Scaling atomic agent systems for enterprise workloads, including load balancing and resource management.
-
-### B2: Integration with Enterprise Systems (10 minutes)
-Connecting atomic agents with existing enterprise infrastructure and workflows.
-
----
-
-## 📊 Progress Tracking
-
-### Completion Status
-- [ ] Core Section (70 min) - Essential for next session
-- [ ] Module A: Advanced Composition (35 min)
-- [ ] Module B: Enterprise Systems (30 min)
-
-**🗂️ All Code Examples**: Available in `src/session6/` - 13 Python files with complete modular implementations!
+### 🎆 Complete Learning Path Options
+**Sequential Learning**: Core → Module A → Module B  
+**Production Focus**: Core → Module B  
+**Advanced Patterns**: Core → Module A
 
 ---
 
@@ -689,4 +661,14 @@ D) Better error handling
 
 ---
 
-[← Back to Session 5](Session5_PydanticAI_Type_Safe_Agents.md) | [Next: Session 7 →](Session7_First_ADK_Agent.md)
+## 🧭 Navigation
+
+**Previous: [Session 5 - PydanticAI Type-Safe Agents](Session5_PydanticAI_Type_Safe_Agents.md)**
+
+**Optional Deep Dive Modules:**
+- **[🔬 Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)**
+- **[🏭 Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)**
+
+**[📝 Test Your Knowledge: Session 6 Solutions](Session6_Test_Solutions.md)**
+
+**[Next: Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)**

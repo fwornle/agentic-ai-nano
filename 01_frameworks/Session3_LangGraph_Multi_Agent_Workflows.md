@@ -22,8 +22,8 @@
 | ✅ Integration & Testing | 2 concepts | 5 min | Verification |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **Module A: Advanced Orchestration Patterns** (40 min) - Complex workflow coordination
-- 🏭 **Module B: Enterprise State Management** (35 min) - Production state handling
+- 🔬 **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** (40 min) - Complex workflow coordination & dynamic agent generation
+- 🏭 **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** (35 min) - Production state handling & sophisticated routing
 
 **🗂️ Code Files**: All examples use files in `src/session3/`
 **🚀 Quick Start**: Run `cd src/session3 && python simple_workflow.py` to see LangGraph in action
@@ -421,35 +421,16 @@ python hierarchical_team.py        # Multi-agent coordination
 
 ---
 
-# 🎛️ OPTIONAL MODULES (Choose Your Adventure)
+### 🧭 **Choose Your Next Path:**
+- **[🔬 Module A: Advanced Orchestration Patterns →](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
+- **[🏭 Module B: Enterprise State Management →](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
+- **[📝 Test Your Knowledge →](Session3_Test_Solutions.md)** - Comprehensive quiz
+- **[📖 Next Session: CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)** - Team-based agent frameworks
 
-## 🔬 Module A: Advanced Orchestration Patterns (40 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Implementers seeking sophisticated coordination
-**Cognitive Load**: 5 advanced concepts
-
-### A1: Complex Workflow Patterns (20 minutes)
-🗂️ **File**: `src/session3/parallel_workflow.py` - Advanced coordination patterns
-
-Sophisticated orchestration including parallel execution, synchronization points, and complex routing logic.
-
-### A2: Dynamic Agent Generation (20 minutes)
-Creating agents dynamically based on workflow needs and runtime conditions.
-
----
-
-## 🏭 Module B: Enterprise State Management (35 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Enterprise system builders
-**Cognitive Load**: 4 enterprise concepts
-
-### B1: Persistent State Storage (20 minutes)
-🗂️ **Files**: Enhanced versions with database integration
-
-Storing workflow state in databases for persistence, recovery, and audit trails.
-
-### B2: State Synchronization (15 minutes)
-Managing state across distributed workflow instances and handling concurrent access.
+### 🎆 Complete Learning Path Options
+**Sequential Learning**: Core → Module A → Module B  
+**Production Focus**: Core → Module B  
+**Advanced Patterns**: Core → Module A
 
 ---
 
@@ -556,4 +537,14 @@ D) Handles user interface
 
 ---
 
-[← Back to Session 2](Session2_LangChain_Foundations.md) | [Next: Session 4 →](Session4_CrewAI_Team_Orchestration.md)
+## 🧭 Navigation
+
+**Previous: [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md)**
+
+**Optional Deep Dive Modules:**
+- **[🔬 Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)**
+- **[🏭 Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)**
+
+**[📝 Test Your Knowledge: Session 3 Solutions](Session3_Test_Solutions.md)**
+
+**[Next: Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)**

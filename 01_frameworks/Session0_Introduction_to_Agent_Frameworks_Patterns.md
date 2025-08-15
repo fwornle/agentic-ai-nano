@@ -22,8 +22,8 @@
 | 📚 Module Overview | 1 concept | 5 min | Planning |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 📊 **Module A: Historical Context & Evolution** (20 min) - Deep AI agent history
-- 🔬 **Module B: Advanced Pattern Theory** (25 min) - Pattern implementation details
+- 📊 **[Module A: Historical Context & Evolution](Session0_ModuleA_Historical_Context_Evolution.md)** (20 min) - Deep AI agent history  
+- 🔬 **[Module B: Advanced Pattern Theory](Session0_ModuleB_Advanced_Pattern_Theory.md)** (25 min) - Pattern implementation details
 
 ---
 
@@ -223,72 +223,17 @@ Test your understanding of the foundations:
 - [ ] I'm ready to start building agents in Session 1
 
 **Next Session Prerequisites**: ✅ Core Section Complete
-**Ready for**: Session 1: Bare Metal Agents (building from scratch)
+**Recommended**: Explore optional modules for specialized knowledge
 
----
+### 🧭 **Choose Your Next Path:**
+- **[📊 Module A: Historical Context & Evolution →](Session0_ModuleA_Historical_Context_Evolution.md)** - Deep AI agent history
+- **[🔬 Module B: Advanced Pattern Theory →](Session0_ModuleB_Advanced_Pattern_Theory.md)** - Pattern implementation details
+- **[📝 Test Your Knowledge →](Session0_Test_Solutions.md)** - Comprehensive quiz
+- **[📖 Next Session: Bare Metal Agents →](Session1_Bare_Metal_Agents.md)** - Build agents from scratch
 
-# 🎛️ OPTIONAL MODULES (Choose Your Adventure)
-
-## 📊 Module A: Historical Context & Evolution (20 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Those interested in AI agent history
-**Cognitive Load**: 3 historical concepts
-
-### A1: Pre-Agent Era Limitations (7 minutes)
-Deep dive into why simple prompt-response models weren't sufficient for complex tasks.
-
-### A2: Agent Research Breakthroughs (8 minutes)
-Key research papers and developments that led to modern agent frameworks.
-
-### A3: Industry Adoption Timeline (5 minutes)
-How major companies adopted and scaled agent systems in production.
-
----
-
-## 🔬 Module B: Advanced Pattern Theory (25 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Developers wanting deeper pattern understanding
-**Cognitive Load**: 4 advanced concepts
-
-### B1: Pattern Implementation Strategies (10 minutes)
-Technical deep-dive into how each pattern is actually implemented across frameworks.
-
-### B2: Pattern Combinations (8 minutes)
-How patterns work together and compound effects in sophisticated agent systems.
-
-### B3: Emerging Patterns (7 minutes)
-New agentic patterns being developed beyond the core five.
-
----
-
-## 🔄 LEARNING REINFORCEMENT
-
-### Spaced Repetition Schedule
-- **Day 1**: Complete core concepts ✅
-- **Day 3**: Review pattern definitions (5 min)
-- **Week 1**: Identify patterns in Session 2-6 implementations (10 min)
-- **Week 2**: Compare pattern implementations across frameworks (15 min)
-
-### Cross-Session Integration
-**Connections to Other Sessions:**
-- **Session 1**: Implement patterns from scratch (bare metal)
-- **Sessions 2-8**: See patterns in each framework
-- **Session 9**: Advanced pattern combinations
-- **Capstone**: All patterns working together
-
----
-
-## 📊 Progress Tracking
-
-### Completion Status
-- [ ] Core Section (45 min) - Essential foundation
-- [ ] Module A: Historical Context (20 min)
-- [ ] Module B: Advanced Theory (25 min)
-
-### Time Investment Tracking
-- **Minimum Path**: 45 minutes (Core only)
-- **Enriched Path**: 65 minutes (Core + Module A)
-- **Comprehensive Path**: 90 minutes (Core + both modules)
+### 🎆 Complete Learning Path Options
+**Sequential Learning**: Core → Module A → Module B  
+**Targeted Learning**: Pick modules based on your interests
 
 ---
 
@@ -430,4 +375,14 @@ Given these scenarios, which framework would you recommend?
 
 ---
 
-*This completes the restructured Session 0. You now have the foundation to understand agent frameworks and patterns, setting you up for success in the hands-on sessions that follow.*
+## 🧭 Navigation
+
+**Previous: Introduction** (You are here)
+
+**Optional Deep Dive Modules:**
+- **[📊 Module A: Historical Context & Evolution](Session0_ModuleA_Historical_Context_Evolution.md)**
+- **[🔬 Module B: Advanced Pattern Theory](Session0_ModuleB_Advanced_Pattern_Theory.md)**
+
+**[📝 Test Your Knowledge: Session 0 Solutions](Session0_Test_Solutions.md)**
+
+**[Next: Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)**
