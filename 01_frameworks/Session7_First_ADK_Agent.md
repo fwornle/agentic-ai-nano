@@ -632,6 +632,10 @@ This method handles the Gemini API format conversion and response generation.
 
 Let's create a specialized weather agent:
 
+#### **Step 3.1a: Weather Agent Class Foundation**
+
+First, let's establish the basic weather agent structure with proper inheritance:
+
 ```python
 # agents/weather_agent.py
 from typing import Dict, Any
@@ -645,11 +649,23 @@ class WeatherAgent(BaseADKAgent):
             name="WeatherBot",
             description="a helpful weather assistant that provides current conditions, forecasts, and weather-related advice"
         )
-    
+```
+
+#### **Step 3.1b: Request Handling Interface**
+
+Implement the core request handling that delegates to weather-specific logic:
+
+```python
     async def _handle_data_request(self, request: str) -> str:
         """Handle data requests (delegated to weather-specific logic)."""
         return await self._handle_weather_request(request)
-    
+```
+
+#### **Step 3.1c: Detailed Forecast Capability**
+
+Add the ability to get comprehensive weather forecasts for any city:
+
+```python
     async def get_detailed_forecast(self, city: str, days: int = 3) -> Dict[str, Any]:
         """Get detailed weather forecast for a city."""
         weather_client = self.mcp_clients.get("weather")
@@ -663,7 +679,13 @@ class WeatherAgent(BaseADKAgent):
             )
         
         return forecast_data
-    
+```
+
+#### **Step 3.1d: Multi-City Weather Analysis**
+
+Implement advanced functionality to analyze weather patterns across multiple cities:
+
+```python
     async def analyze_weather_trends(self, cities: list, period: str = "week") -> str:
         """Analyze weather trends across multiple cities."""
         weather_client = self.mcp_clients.get("weather")
@@ -672,11 +694,18 @@ class WeatherAgent(BaseADKAgent):
         
         city_data = {}
         
+        # Collect weather data for all cities
         async with weather_client:
             for city in cities:
                 data = await weather_client.call_tool("compare_weather", {"cities": [city]})
                 city_data[city] = data
-        
+```
+
+#### **Step 3.1e: Analysis Report Generation**
+
+Generate a comprehensive analysis report from the collected weather data:
+
+```python
         # Generate analysis summary
         analysis = f"Weather Analysis for {', '.join(cities)}:\n\n"
         
@@ -691,9 +720,11 @@ class WeatherAgent(BaseADKAgent):
 ```
 
 
+**Try It Yourself**: Test each method individually to understand how the weather agent builds from basic requests to complex multi-city analysis. This modular approach makes debugging and extending functionality much easier.
+
 ### Step 3.2: FastAPI Integration
 
-Create a web interface for the agent:
+Now let's create a web interface for the agent to make it accessible via HTTP:
 
 #### **FastAPI App Initialization**
 

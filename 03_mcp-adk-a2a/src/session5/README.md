@@ -31,21 +31,21 @@ session5/
 ## 🚀 Quick Start
 
 1. **Install Dependencies**:
-   ```bash
+```bash
    pip install -r requirements.txt
-   ```
+```
 
 2. **Setup Environment**:
-   ```bash
+```bash
    export JWT_SECRET_KEY="your-secret-key-at-least-32-chars"
    export REDIS_HOST="localhost"
    export REDIS_PORT="6379"
-   ```
+```
 
 3. **Run Demo**:
-   ```bash
+```bash
    python demo.py
-   ```
+```
 
 ## 🔧 Configuration
 

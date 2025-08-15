@@ -773,9 +773,9 @@ After testing, export your server configuration for use with AI clients:
    - Validate error handling with invalid inputs
 
 2. **Real-Time Feedback Loop**:
-   ```
+```
    Code → Save → Inspector Auto-Refresh → Test → Iterate
-   ```
+```
 
 3. **Documentation Generation**:
    - Use inspector screenshots for documentation

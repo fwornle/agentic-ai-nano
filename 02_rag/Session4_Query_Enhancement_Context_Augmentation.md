@@ -97,7 +97,9 @@ HyDE transforms semantic gaps into vector space advantages:
 
 **Step 1: Initialize the HyDE Query Enhancer**
 
-First, let's set up the core HyDE class that bridges semantic gaps:
+**Understanding HyDE (Hypothetical Document Embeddings)**: HyDE solves a fundamental RAG problem - the semantic gap between how users ask questions and how information is stored in documents. Instead of searching with the query directly, HyDE generates hypothetical answers and searches with those.
+
+**Why This Approach Works**: Questions and answers exist in different semantic spaces. By generating hypothetical documents that would answer the query, we search in the same semantic space as our stored documents, dramatically improving retrieval accuracy.
 
 ```python
 # Core HyDE setup
@@ -114,6 +116,8 @@ class HyDEQueryEnhancer:
         self.embedding_model = embedding_model
         self.temperature = temperature
 ```
+
+**Temperature Parameter**: The 0.7 temperature balances creativity and accuracy in hypothetical document generation, ensuring diverse but relevant hypothetical answers.
 
 **Step 2: Configure Query Type Templates**
 
