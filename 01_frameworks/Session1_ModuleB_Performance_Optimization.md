@@ -25,7 +25,7 @@ By the end of this module, you will:
 
 🗂️ **File**: `src/session1/memory_optimized_agent.py` - Memory-efficient agent implementations
 
-Memory management is crucial for long-running agent systems that need to maintain conversation context without memory leaks:
+Memory management is crucial for long-running agent systems that need to maintain conversation context without memory leaks. The foundation is a structured approach to tracking memory usage:
 
 ```python
 from collections import deque
@@ -40,7 +40,11 @@ class MemoryEntry:
     timestamp: datetime
     importance_score: float
     size_bytes: int
+```
 
+The `MemoryEntry` dataclass tracks not just content but also metadata essential for intelligent memory management - when it was created, how important it is, and its memory footprint.
+
+```python
 class MemoryOptimizedAgent(BaseAgent):
     """Agent with intelligent memory management for long conversations"""
     
@@ -48,12 +52,16 @@ class MemoryOptimizedAgent(BaseAgent):
         super().__init__(name, "Memory optimized agent", llm_client)
         self.max_memory_bytes = max_memory_mb * 1024 * 1024
         self.memory_entries: deque = deque(maxlen=1000)  # Hard limit
+```
+
+The agent uses a `deque` with a hard maximum to prevent unbounded memory growth, while the configurable memory limit allows fine-tuning based on deployment constraints.
         self.importance_threshold = 0.5
         self.cleanup_interval = 100  # Clean up every N messages
         self.message_count = 0
-```
 
 ### Conversation History Optimization
+
+The memory addition process includes proactive cleanup to maintain performance:
 
 ```python
 def add_to_memory(self, content: str, importance_score: float = 0.5):
@@ -69,7 +77,11 @@ def add_to_memory(self, content: str, importance_score: float = 0.5):
         importance_score=importance_score,
         size_bytes=content_size
     )
-    
+```
+
+Each entry tracks its actual memory footprint using `sys.getsizeof()`, enabling precise memory management decisions based on real usage rather than estimates.
+
+```python
     # Check if cleanup is needed
     self.message_count += 1
     if self.message_count % self.cleanup_interval == 0:
@@ -81,15 +93,16 @@ def add_to_memory(self, content: str, importance_score: float = 0.5):
     # Force cleanup if memory limit exceeded
     if self._get_total_memory_usage() > self.max_memory_bytes:
         self._aggressive_cleanup()
+```
 
+Regular cleanup prevents memory from growing unchecked, while emergency cleanup handles situations where memory limits are exceeded despite regular maintenance.
+
+```python
 def _cleanup_memory(self):
     """Intelligent memory cleanup based on importance and age"""
     
     if not self.memory_entries:
         return
-    
-    # Remove low-importance old entries
-    cutoff_time = datetime.now() - timedelta(hours=24)
     
     # Convert to list for easier manipulation
     entries_list = list(self.memory_entries)
@@ -105,13 +118,21 @@ def _cleanup_memory(self):
     self.memory_entries.clear()
     for entry in entries_to_keep:
         self.memory_entries.append(entry)
-    
+```
+
+The cleanup algorithm prioritizes entries by both importance and age, ensuring critical recent information is preserved while older, less important content is removed.
+
+```python
     self.logger.info(f"Memory cleanup: kept {len(entries_to_keep)} entries")
 
 def _get_total_memory_usage(self) -> int:
     """Calculate total memory usage in bytes"""
     return sum(entry.size_bytes for entry in self.memory_entries)
+```
 
+Utility methods track memory consumption by summing the size_bytes field of all entries, providing accurate memory usage data for optimization decisions.
+
+```python
 def get_memory_stats(self) -> Dict[str, Any]:
     """Get comprehensive memory usage statistics"""
     total_entries = len(self.memory_entries)
@@ -134,7 +155,11 @@ def get_memory_stats(self) -> Dict[str, Any]:
     return {"total_entries": 0, "total_memory_mb": 0}
 ```
 
+The statistics method provides comprehensive analytics including memory utilization percentages, average importance scores, and temporal spans, enabling data-driven memory management decisions.
+
 ### Context Compression Strategies
+
+Context compression ensures optimal LLM performance by providing relevant information within size constraints:
 
 ```python
 def get_compressed_context(self, max_context_size: int = 2000) -> str:
@@ -146,7 +171,11 @@ def get_compressed_context(self, max_context_size: int = 2000) -> str:
         key=lambda x: (x.importance_score * 0.7 + self._recency_score(x) * 0.3),
         reverse=True
     )
-    
+```
+
+The sorting algorithm weights importance higher (70%) than recency (30%), ensuring critical information is prioritized while still valuing recent context.
+
+```python
     # Build context within size limit
     context_parts = []
     current_size = 0
@@ -157,7 +186,11 @@ def get_compressed_context(self, max_context_size: int = 2000) -> str:
         
         context_parts.append(entry.content)
         current_size += len(entry.content)
-    
+```
+
+The packing algorithm greedily includes entries until the size limit is reached, maximizing the amount of relevant context provided to the LLM.
+
+```python
     # Add summary if we had to truncate
     if len(context_parts) < len(sorted_entries):
         truncated_count = len(sorted_entries) - len(context_parts)
@@ -165,7 +198,11 @@ def get_compressed_context(self, max_context_size: int = 2000) -> str:
         context_parts.append(summary)
     
     return "\n".join(context_parts)
+```
 
+When truncation occurs, a clear summary informs the LLM that additional context exists but was omitted, helping it understand the conversation's scope.
+
+```python
 def _recency_score(self, entry: MemoryEntry) -> float:
     """Calculate recency score (1.0 = most recent, 0.0 = oldest)"""
     if not self.memory_entries:
@@ -182,6 +219,8 @@ def _recency_score(self, entry: MemoryEntry) -> float:
     return 1.0 - (entry_age / total_span)
 ```
 
+The recency scoring normalizes timestamps to a 0-1 scale relative to the conversation span, ensuring fair comparison regardless of absolute time differences.
+
 ---
 
 ## Part 2: Tool Execution Speed (10 minutes)
@@ -189,6 +228,8 @@ def _recency_score(self, entry: MemoryEntry) -> float:
 ### Caching and Parallel Execution
 
 🗂️ **File**: `src/session1/optimized_tools.py` - High-performance tool implementations
+
+Tool performance optimization combines intelligent caching with parallel execution capabilities:
 
 ```python
 import asyncio
@@ -207,14 +248,22 @@ class OptimizedToolAgent(BaseAgent):
         self.tool_cache = {}
         self.execution_stats = {}
         self.thread_pool = ThreadPoolExecutor(max_workers=4)
-        
+```
+
+The agent maintains separate caches and statistics for each tool, while the thread pool enables parallel execution of CPU-intensive tool operations.
+
+```python
     def _cache_key(self, tool_name: str, params: Dict[str, Any]) -> str:
         """Generate cache key for tool execution"""
         # Create deterministic hash of tool name and parameters
         param_str = str(sorted(params.items()))
         cache_input = f"{tool_name}:{param_str}"
         return hashlib.md5(cache_input.encode()).hexdigest()
-    
+```
+
+Caching uses deterministic hashing of tool names and parameters. Sorting the parameters ensures consistent cache keys regardless of parameter order.
+
+```python
     def _is_cacheable(self, tool_name: str) -> bool:
         """Determine if tool results should be cached"""
         # Don't cache tools that have side effects or time-dependent results
@@ -222,7 +271,11 @@ class OptimizedToolAgent(BaseAgent):
         return tool_name not in non_cacheable
 ```
 
+Intelligent caching excludes tools with side effects or time-dependent results, preventing stale data while maximizing cache effectiveness for deterministic operations.
+
 ### Intelligent Tool Caching
+
+The caching system balances performance gains with result freshness:
 
 ```python
 async def execute_tool_cached(self, tool_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
@@ -233,6 +286,11 @@ async def execute_tool_cached(self, tool_name: str, params: Dict[str, Any]) -> D
     # Check cache first
     if self._is_cacheable(tool_name):
         cache_key = self._cache_key(tool_name, params)
+```
+
+Each execution is timed for performance analysis, and cacheable tools are checked for existing results before expensive re-execution.
+
+```python
         if cache_key in self.tool_cache:
             cached_result = self.tool_cache[cache_key]
             # Check if cache entry is still valid (within 1 hour)
@@ -240,7 +298,11 @@ async def execute_tool_cached(self, tool_name: str, params: Dict[str, Any]) -> D
                 execution_time = time.time() - start_time
                 self._update_stats(tool_name, execution_time, True)
                 return cached_result["result"]
-    
+```
+
+Cache validation includes expiry checks (1-hour TTL) to balance performance gains with result freshness. Cache hits are tracked in performance statistics to measure caching effectiveness.
+
+```python
     # Execute tool
     if tool_name not in self.tools:
         raise ValueError(f"Tool {tool_name} not available")
@@ -254,7 +316,11 @@ async def execute_tool_cached(self, tool_name: str, params: Dict[str, Any]) -> D
             "result": result,
             "timestamp": time.time()
         }
-    
+```
+
+When cache misses occur, the tool is executed normally and results are stored in the cache with timestamps for future TTL validation.
+
+```python
     # Update performance stats
     execution_time = time.time() - start_time
     self._update_stats(tool_name, execution_time, False)
@@ -280,12 +346,19 @@ def _update_stats(self, tool_name: str, execution_time: float, cache_hit: bool):
         stats["cache_hits"] += 1
 ```
 
+Performance statistics track execution times, call counts, and cache hit rates per tool, enabling optimization decisions based on actual usage patterns.
+```
+
 ### Parallel Tool Execution
+
+Parallel execution maximizes throughput when multiple tools can run simultaneously:
 
 ```python
 async def execute_tools_parallel(self, tool_requests: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Execute multiple tools in parallel for better performance"""
-    
+```
+
+The parallel execution system handles multiple tool requests concurrently, significantly reducing total execution time for independent operations.
     async def execute_single_tool(request):
         tool_name = request["tool"]
         params = request.get("params", {})
@@ -486,6 +559,49 @@ async def optimize_performance(self):
     
     self.logger.info(f"Performance optimization: target time {self.target_response_time:.2f}s, cache size {len(self.response_cache)}")
 ```
+
+---
+
+## 📝 Multiple Choice Test - Module B
+
+Test your understanding of performance optimization concepts:
+
+**Question 1:** What information does the `MemoryEntry` dataclass track to enable intelligent memory management?
+
+A) Only content and timestamp  
+B) Content, timestamp, importance_score, and size_bytes  
+C) Just the memory size and creation time  
+D) Content and importance score only  
+
+**Question 2:** How does the memory cleanup algorithm prioritize which entries to keep?
+
+A) Random selection  
+B) First-in-first-out (FIFO)  
+C) Sorts by importance and age, keeps top 70%  
+D) Only keeps the most recent entries  
+
+**Question 3:** Why are certain tools marked as non-cacheable in the optimization system?
+
+A) They consume too much memory  
+B) They have side effects or time-dependent results  
+C) They execute too slowly  
+D) They require special permissions  
+
+**Question 4:** What technique does the context compression use to fit within size limits?
+
+A) Truncates all messages to the same length  
+B) Removes all older messages completely  
+C) Weights importance (70%) higher than recency (30%) when sorting  
+D) Compresses text using algorithms  
+
+**Question 5:** What does the performance monitoring system track to optimize agent responses?
+
+A) Only response times  
+B) Memory usage exclusively  
+C) Response times, percentiles, cache hit rates, and target achievement  
+D) Just error rates and failures  
+
+[**View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
 
 ---
 

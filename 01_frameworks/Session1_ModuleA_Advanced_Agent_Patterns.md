@@ -105,6 +105,9 @@ async def _initial_response(self, message: str, context: Dict = None) -> str:
 ```
 
 **Self-Critique Implementation:**
+
+The reflection method analyzes the agent's own response using structured evaluation criteria. This systematic approach ensures consistent, high-quality feedback:
+
 ```python
 async def _reflect_on_response(self, original_message: str, response: str) -> str:
     """Generate critique of the current response"""
@@ -128,7 +131,12 @@ async def _reflect_on_response(self, original_message: str, response: str) -> st
     return critique
 ```
 
+The "SATISFACTORY" keyword provides a clear stopping condition, preventing endless improvement cycles when the response is already good enough.
+
 **Response Improvement:**
+
+The improvement process takes the critique and generates an enhanced response that specifically addresses the identified issues:
+
 ```python
 async def _improve_response(self, message: str, current_response: str, critique: str) -> str:
     """Improve response based on critique"""
@@ -187,6 +195,8 @@ class PlanningAgent(BaseAgent):
 
 ### Plan Generation
 
+The planning system breaks complex tasks into manageable, executable steps with clear dependencies:
+
 ```python
 async def create_plan(self, complex_task: str) -> List[PlanStep]:
     """Break down complex task into executable steps"""
@@ -211,7 +221,11 @@ async def create_plan(self, complex_task: str) -> List[PlanStep]:
     self.current_plan = steps
     
     return steps
+```
 
+The LLM generates a text-based plan which is then parsed into structured objects for programmatic execution.
+
+```python
 def _parse_plan_text(self, plan_text: str) -> List[PlanStep]:
     """Parse LLM-generated plan into structured steps"""
     steps = []
@@ -222,7 +236,11 @@ def _parse_plan_text(self, plan_text: str) -> List[PlanStep]:
             # Extract step information
             step_id = f"step_{i+1}"
             description = line.split('.', 1)[1].strip() if '.' in line else line.strip()
-            
+```
+
+The parser identifies numbered steps and extracts their descriptions. This approach handles various formatting styles from different LLM responses.
+
+```python
             # Simple dependency detection (look for "after step X" patterns)
             dependencies = self._extract_dependencies(description)
             
@@ -236,7 +254,11 @@ def _parse_plan_text(self, plan_text: str) -> List[PlanStep]:
     return steps
 ```
 
+Dependency extraction looks for phrases like "after step 2" to understand task ordering. Each step becomes a structured object that can be executed systematically.
+
 ### Plan Execution Engine
+
+The execution engine manages the sequential execution of plan steps while respecting dependencies:
 
 ```python
 async def execute_plan(self) -> Dict[str, any]:
@@ -253,7 +275,11 @@ async def execute_plan(self) -> Dict[str, any]:
         
         if not next_step:
             return {"error": "No executable steps found - circular dependencies?"}
-        
+```
+
+The main loop continues until all steps are completed, finding the next executable step at each iteration. The circular dependency check prevents infinite loops.
+
+```python
         # Execute the step
         self.logger.info(f"Executing step: {next_step.description}")
         next_step.status = TaskStatus.IN_PROGRESS
@@ -269,7 +295,11 @@ async def execute_plan(self) -> Dict[str, any]:
                 "result": result,
                 "status": "completed"
             })
-            
+```
+
+Each step execution is wrapped in a try-catch block with proper status tracking. Successful completions are logged and the step ID is added to the completed set.
+
+```python
         except Exception as e:
             next_step.status = TaskStatus.FAILED
             execution_log.append({
@@ -285,7 +315,11 @@ async def execute_plan(self) -> Dict[str, any]:
         "total_steps": len(self.current_plan),
         "success": len(completed_steps) == len(self.current_plan)
     }
+```
 
+Failure handling stops the execution and logs the error. The return structure provides complete visibility into the execution process and outcomes.
+
+```python
 def _find_next_executable_step(self, completed_steps: set) -> Optional[PlanStep]:
     """Find a step whose dependencies are satisfied"""
     for step in self.current_plan:
@@ -293,7 +327,11 @@ def _find_next_executable_step(self, completed_steps: set) -> Optional[PlanStep]
             all(dep in completed_steps for dep in step.dependencies)):
             return step
     return None
+```
 
+The dependency resolver ensures steps only execute when their prerequisites are complete, maintaining proper execution order.
+
+```python
 async def _execute_step(self, step: PlanStep) -> str:
     """Execute an individual plan step"""
     execution_prompt = f"""
@@ -307,6 +345,8 @@ async def _execute_step(self, step: PlanStep) -> str:
     result = await self._call_llm(execution_prompt)
     return result
 ```
+
+Individual step execution uses focused prompts that clearly specify what needs to be accomplished and what kind of output is expected.
 
 ---
 
@@ -340,6 +380,8 @@ class AgentCoordinator:
 
 ### Message Routing System
 
+The routing system manages communication between agents while maintaining detailed logs for analysis:
+
 ```python
 async def route_message(self, message: str, to_agent: str, from_agent: str = "user") -> str:
     """Route message to specific agent and track communication"""
@@ -352,7 +394,11 @@ async def route_message(self, message: str, to_agent: str, from_agent: str = "us
         "message": message[:50] + "..." if len(message) > 50 else message,
         "timestamp": datetime.now()
     })
-    
+```
+
+Communication patterns are tracked separately from full message history, allowing analysis of agent interaction frequency and patterns while keeping logs manageable.
+
+```python
     # Process message with target agent
     agent = self.agents[to_agent]
     response = await agent.process_message(message)
@@ -369,7 +415,11 @@ async def route_message(self, message: str, to_agent: str, from_agent: str = "us
     return response
 ```
 
+The complete message history stores full conversations for debugging and audit purposes, while the response is returned immediately to maintain system responsiveness.
+
 ### Collaborative Task Management
+
+Complex tasks are broken down and delegated to the most appropriate specialized agents:
 
 ```python
 async def delegate_complex_task(self, task: str) -> Dict[str, Any]:
@@ -382,12 +432,21 @@ async def delegate_complex_task(self, task: str) -> Dict[str, Any]:
     delegation_plan = self._create_delegation_plan(task_analysis)
     
     # Step 3: Execute delegation plan
+```
+
+The three-phase approach ensures systematic task decomposition: first understanding what skills are needed, then planning how to use available agents, and finally executing the coordinated effort.
+
+```python
     results = {}
     for agent_name, subtask in delegation_plan.items():
         if agent_name in self.agents:
             result = await self.route_message(subtask, agent_name, "coordinator")
             results[agent_name] = result
-    
+```
+
+The execution phase iterates through the delegation plan, routing each subtask to the appropriate specialized agent and collecting their results.
+
+```python
     # Step 4: Integrate results
     final_result = await self._integrate_agent_results(task, results)
     
@@ -397,13 +456,23 @@ async def delegate_complex_task(self, task: str) -> Dict[str, Any]:
         "agent_results": results,
         "integrated_result": final_result
     }
+```
 
+The final integration step combines individual agent results into a cohesive response that addresses the original complex task comprehensively.
+
+Task analysis uses the LLM to understand which specialized agents are needed:
+
+```python
 async def _analyze_task_requirements(self, task: str) -> Dict[str, Any]:
     """Analyze what types of agents are needed for this task"""
     analysis_prompt = f"""
     Analyze this task and determine what types of specialized agents would be needed:
     Task: {task}
-    
+```
+
+The task analysis prompt asks the LLM to break down the task requirements and identify which types of specialized agents would be most effective for each component.
+
+```python
     Available agent types: {list(self.agents.keys())}
     
     For each needed agent type, specify:
@@ -416,6 +485,52 @@ async def _analyze_task_requirements(self, task: str) -> Dict[str, Any]:
     # This would use an LLM to analyze - simplified for example
     return {"required_agents": list(self.agents.keys())[:2]}  # Simplified
 ```
+
+The analysis provides context about available agents and requests specific justifications for agent selection, ensuring intelligent task distribution rather than random assignment.
+```
+
+---
+
+## 📝 Multiple Choice Test - Module A
+
+Test your understanding of advanced agent patterns:
+
+**Question 1:** What is the key mechanism that prevents infinite loops in reflection agents?
+
+A) Memory limitations  
+B) Maximum iteration limits with satisfactory conditions  
+C) Network timeouts  
+D) User intervention  
+
+**Question 2:** In multi-step planning, what is the primary purpose of dependency management?
+
+A) Reducing memory usage  
+B) Ensuring steps execute in the correct order  
+C) Speeding up execution  
+D) Simplifying code structure  
+
+**Question 3:** What does the planning agent's `_parse_plan_text` method accomplish?
+
+A) Generates new plans from scratch  
+B) Converts LLM-generated text into structured PlanStep objects  
+C) Executes individual plan steps  
+D) Validates plan correctness  
+
+**Question 4:** In multi-agent orchestration, what information is stored in communication patterns?
+
+A) Complete message history with full content  
+B) Summarized message data with sender, recipient, and timestamp  
+C) Only error messages  
+D) Agent performance metrics  
+
+**Question 5:** What is the three-phase approach used in collaborative task management?
+
+A) Planning, execution, validation  
+B) Analysis, delegation, integration  
+C) Task analysis, delegation plan creation, plan execution  
+D) Registration, routing, completion  
+
+[**View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
 
 ---
 
