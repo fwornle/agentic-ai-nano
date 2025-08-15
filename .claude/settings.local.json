@@ -34,8 +34,14 @@
       "Bash(if grep -q \"View Test Solutions\" /Users/q284340/Agentic/nano-degree/01_frameworks/Session8_Agno_Production_Ready_Agents.md)",
       "Bash(__NEW_LINE__ echo \"🧹 Cleaning up backup files...\")",
       "Bash(__NEW_LINE__ echo \"✅ All test format fixes completed successfully!\")",
-      "Bash(do echo \"=== $session ===\")"
+      "Bash(do echo \"=== $session ===\")",
+      "Bash(cp:*)",
+      "Bash(do echo \"=== Session $i ===\")",
+      "Bash(do echo \"=== Session $i END ===\")",
+      "Bash(tail:*)",
+      "Bash(do echo \"Creating Session$i_Test_Solutions.md\")"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "acceptEdits"
   }
 }
