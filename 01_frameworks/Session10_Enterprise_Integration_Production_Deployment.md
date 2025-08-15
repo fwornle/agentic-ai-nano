@@ -22,8 +22,8 @@
 | 📊 Basic Monitoring | 3 concepts | 15 min | Operations |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **Module A: Advanced Security & Compliance** (80 min) - GDPR, RBAC, encryption
-- 🏭 **Module B: Enterprise Operations & Scaling** (80 min) - Auto-scaling, performance optimization
+- 🔬 **[Module A: Advanced Security & Compliance →](Session10_ModuleA_Advanced_Security_Compliance.md)** (80 min) - GDPR, RBAC, encryption
+- 🏭 **[Module B: Enterprise Operations & Scaling →](Session10_ModuleB_Enterprise_Operations_Scaling.md)** (80 min) - Auto-scaling, performance optimization
 
 **🗂️ Code Files**: All examples use files in `src/session10/`
 **🚀 Quick Start**: Run `cd src/session10 && python enterprise_architecture.py` to see enterprise integration
@@ -1000,8 +1000,8 @@ Distributed tracing with OpenTelemetry, comprehensive alerting systems, log aggr
 
 ### Completion Status
 - [ ] Core Section (95 min) - Complete enterprise foundation
-- [ ] Module A: Advanced Security & Compliance (80 min)
-- [ ] Module B: Enterprise Operations & Scaling (80 min)
+- [ ] [Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md) (80 min)
+- [ ] [Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md) (80 min)
 
 **🗂️ All Code Examples**: Available in `src/session10/` - Complete enterprise implementation!
 

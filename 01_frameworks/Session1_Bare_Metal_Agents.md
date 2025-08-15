@@ -22,9 +22,9 @@
 | ✅ Testing & Validation | 3 concepts | 10 min | Verification |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **Module A: Advanced Agent Patterns** (40 min) - Sophisticated reasoning loops
-- ⚡ **Module B: Performance Optimization** (35 min) - Speed & efficiency patterns
-- 🔄 **Module C: Complex State Management** (30 min) - Advanced memory systems
+- 🔬 **[Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** (40 min) - Sophisticated reasoning loops
+- ⚡ **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** (35 min) - Speed & efficiency patterns
+- 🔄 **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** (30 min) - Advanced memory systems
 
 **🗂️ Code Files**: All examples use files in `src/session1/`
 
@@ -451,66 +451,31 @@ python test_agents.py
 
 ---
 
-# 🎛️ OPTIONAL MODULES (Choose Your Adventure)
+### 🧭 **Choose Your Next Path:**
+- **[🔬 Module A: Advanced Agent Patterns →](Session1_ModuleA_Advanced_Agent_Patterns.md)** - Sophisticated reasoning loops
+- **[⚡ Module B: Performance Optimization →](Session1_ModuleB_Performance_Optimization.md)** - Speed & efficiency patterns
+- **[🔄 Module C: Complex State Management →](Session1_ModuleC_Complex_State_Management.md)** - Advanced memory systems
+- **[📝 Test Your Knowledge →](Session1_Test_Solutions.md)** - Comprehensive quiz
+- **[📖 Next Session: LangChain Foundations →](Session2_LangChain_Foundations.md)** - Framework implementation
 
-## 🔬 Module A: Advanced Agent Patterns (40 minutes)
-**Prerequisites**: Core Section Complete  
-**Target Audience**: Implementers seeking sophisticated patterns
-**Cognitive Load**: 6 advanced concepts
-
-### A1: Sophisticated Reasoning Loops (15 minutes)
-🗂️ **File**: `src/session1/react_agent.py` - Advanced ReAct implementation
-
-Advanced thinking patterns beyond simple if/else logic.
-
-### A2: Multi-Step Planning (15 minutes)  
-Breaking complex tasks into subtasks and executing them sequentially.
-
-### A3: Self-Improvement Mechanisms (10 minutes)
-Agents that analyze their own performance and adapt behavior.
+### 🎆 Complete Learning Path Options
+**Sequential Learning**: Core → Module A → Module B → Module C  
+**Targeted Learning**: Pick modules based on your interests
 
 ---
 
-## ⚡ Module B: Performance Optimization (35 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Performance-focused developers  
-**Cognitive Load**: 5 optimization concepts
+## 🧭 Navigation
 
-### B1: Memory Management (15 minutes)
-Efficient memory usage patterns and conversation history optimization.
+**Previous: [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)**
 
-### B2: Tool Execution Speed (10 minutes)
-Caching, parallel execution, and tool performance optimization.
+**Optional Deep Dive Modules:**
+- **[🔬 Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)**
+- **[⚡ Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)**
+- **[🔄 Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)**
 
-### B3: Response Time Optimization (10 minutes)
-Strategies for faster agent responses and user experience.
+**[📝 Test Your Knowledge: Session 1 Solutions](Session1_Test_Solutions.md)**
 
----
-
-## 🔄 Module C: Complex State Management (30 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Developers building stateful agents
-**Cognitive Load**: 4 state concepts
-
-### C1: Persistent State Storage (15 minutes)
-🗂️ **Files**: Enhanced versions with database storage
-
-Saving agent state to files or databases for persistence across sessions.
-
-### C2: Multi-Session Memory (15 minutes)
-Managing context across multiple conversation sessions.
-
----
-
-## 📊 Progress Tracking
-
-### Completion Status
-- [ ] Core Section (75 min) - Essential for next session
-- [ ] Module A: Advanced Patterns (40 min)
-- [ ] Module B: Performance Optimization (35 min)  
-- [ ] Module C: Complex State Management (30 min)
-
-**🗂️ All Code Examples**: Available in `src/session1/` - run `python demo_runner.py` to see everything in action!
+**[Next: Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)**
 
 ---
 
@@ -604,6 +569,3 @@ D) It has better error handling
 
 **Success Criteria**: Score 8+ out of 10 to demonstrate mastery of bare metal agent concepts.
 
----
-
-[← Back to Session 0](Session0_Introduction_to_Agent_Frameworks_Patterns.md) | [Next: Session 2 →](Session2_LangChain_Foundations.md)

@@ -624,81 +624,20 @@ health = await service.check_health()
 - [ ] I'm ready to explore optional modules or move to next session
 
 **Next Session Prerequisites**: ✅ Core Section Complete
-**Recommended**: Explore Module A or B for enterprise deployment
+**Recommended**: Explore advanced modules for enterprise deployment
 
----
+### 🧭 **Choose Your Next Path:**
+- **[🔬 Module A: Advanced Monitoring & Observability →](Session8_ModuleA_Advanced_Monitoring_Observability.md)** (65 min) - Comprehensive monitoring systems
+- **[🏭 Module B: Enterprise Scaling & Architecture →](Session8_ModuleB_Enterprise_Scaling_Architecture.md)** (70 min) - Kubernetes & auto-scaling  
+- **[🔧 Module C: Performance Optimization →](Session8_ModuleC_Performance_Optimization.md)** (50 min) - Cost management & caching
+- **[🛡️ Module D: Security & Compliance →](Session8_ModuleD_Security_Compliance.md)** (45 min) - Enterprise security patterns
 
-# 🎛️ OPTIONAL MODULES (Choose Your Adventure)
+### 🎆 Complete Learning Path Options
+**Production Focus**: Core → Module A → Module B  
+**Performance Focus**: Core → Module C → Module A  
+**Security Focus**: Core → Module D → Module A  
+**Enterprise Complete**: Core → All Modules
 
-## 🔬 Module A: Advanced Monitoring & Observability (65 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Production system operators
-**Cognitive Load**: 6 monitoring concepts
-
-### A1: Comprehensive Monitoring Setup (25 minutes)
-Advanced Prometheus integration, Grafana dashboards, custom metrics creation, and alerting configuration.
-
-### A2: Distributed Tracing & Logging (25 minutes)
-OpenTelemetry integration, distributed tracing across agent networks, centralized logging, and performance profiling.
-
-### A3: Alerting & Incident Response (15 minutes)
-Automated alerting systems, incident response procedures, escalation patterns, and recovery automation.
-
-[Detailed content moved from original Part 4: Deployment & Monitoring]
-
----
-
-## 🏭 Module B: Enterprise Scaling & Architecture (70 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Enterprise architects
-**Cognitive Load**: 7 scaling concepts
-
-### B1: Kubernetes Deployment Patterns (30 minutes)
-Kubernetes deployment, auto-scaling configuration, service mesh integration, and multi-region deployment.
-
-### B2: Load Balancing & Traffic Management (25 minutes)
-Advanced load balancing, traffic routing, circuit breakers, and failover strategies for high availability.
-
-### B3: Multi-Tenant Architecture (15 minutes)
-Multi-tenant patterns, resource isolation, tenant-specific scaling, and enterprise governance.
-
-[Detailed content moved from original Part 2: Production Agent Architecture & Part 3: Multi-Agent Teams]
-
----
-
-## 🔧 Module C: Performance Optimization (50 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Performance engineers
-**Cognitive Load**: 5 optimization concepts
-
-### C1: Caching Strategies (20 minutes)
-Advanced caching patterns, cache invalidation, distributed caching with Redis, and cache warming strategies.
-
-### C2: Resource Optimization (15 minutes)
-Memory management, connection pooling, request batching, and resource allocation optimization.
-
-### C3: Cost Management (15 minutes)
-Cost monitoring, budget controls, usage optimization, and multi-provider cost balancing.
-
-[Detailed content moved from original Part 1: Foundation & Performance sections]
-
----
-
-## 🛡️ Module D: Security & Compliance (45 minutes)
-**Prerequisites**: Core Section Complete  
-**Target Audience**: Security engineers
-**Cognitive Load**: 5 security concepts
-
-### D1: Enterprise Security Patterns (20 minutes)
-Authentication systems, authorization patterns, API security, and security monitoring.
-
-### D2: Data Privacy & Compliance (15 minutes)
-GDPR compliance, data encryption, audit logging, and privacy-by-design patterns.
-
-### D3: Secure Deployment (10 minutes)
-Security scanning, secure containers, secrets management, and vulnerability monitoring.
-
-[Detailed content moved from original Part 5: Enterprise Integration]
 
 ---
 

@@ -22,8 +22,8 @@
 | ✅ Basic Production Patterns | 2 concepts | 10 min | Deployment |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **Module A: Advanced Consensus Algorithms** (70 min) - Byzantine fault tolerance & game theory
-- 🏭 **Module B: Production Multi-Agent Systems** (70 min) - Enterprise deployment & monitoring
+- 🔬 **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** (70 min) - Byzantine fault tolerance & game theory
+- 🏭 **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** (70 min) - Enterprise deployment & monitoring
 
 **🗂️ Code Files**: All examples use files in `src/session9/`
 **🚀 Quick Start**: Run `cd src/session9 && python react_agent.py` to see multi-agent coordination
@@ -881,33 +881,14 @@ python planning_systems.py               # HTN planning
 
 # 🎛️ OPTIONAL MODULES (Choose Your Adventure)
 
-## 🔬 Module A: Advanced Consensus Algorithms (70 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: System architects building robust coordination
-**Cognitive Load**: 6 advanced concepts
+**🧭 Choose Your Learning Path:**
+- **[🔬 Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** (70 min) - Byzantine fault tolerance & game theory
+- **[🏭 Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** (70 min) - Enterprise deployment & monitoring
 
-### A1: Byzantine Fault Tolerance (35 minutes)
-🗂️ **Files**: Advanced consensus examples in `src/session9/`
-
-Practical Byzantine Fault Tolerance (pBFT) algorithms for handling malicious agents, three-phase consensus protocols, and mathematical guarantees for system safety.
-
-### A2: Game-Theoretic Conflict Resolution (35 minutes)
-Nash equilibria, Pareto optimal solutions, cooperative game theory, auction mechanisms, and strategic behavior analysis for competitive multi-agent scenarios.
-
----
-
-## 🏭 Module B: Production Multi-Agent Systems (70 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Production engineers and DevOps
-**Cognitive Load**: 5 production concepts
-
-### B1: Enterprise Monitoring & Observability (40 minutes)
-🗂️ **Files**: Production monitoring examples in `src/session9/`
-
-Distributed tracing across agent networks, comprehensive metrics collection, alert systems, performance profiling, and operational dashboards.
-
-### B2: Scalable Deployment Patterns (30 minutes)
-Container orchestration, service mesh integration, auto-scaling multi-agent systems, load balancing, and fault isolation strategies.
+### 🎆 Complete Learning Path Options
+**Research Focus**: Core → Module A (for advanced algorithms)  
+**Production Focus**: Core → Module B (for enterprise deployment)  
+**Comprehensive**: Core → Module A → Module B
 
 ---
 
@@ -915,8 +896,8 @@ Container orchestration, service mesh integration, auto-scaling multi-agent syst
 
 ### Completion Status
 - [ ] Core Section (90 min) - Essential for next session
-- [ ] Module A: Advanced Consensus (70 min)
-- [ ] Module B: Production Systems (70 min)
+- [ ] [Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md) (70 min)
+- [ ] [Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md) (70 min)
 
 **🗂️ All Code Examples**: Available in `src/session9/` - 12 Python files with complete multi-agent implementations!
 

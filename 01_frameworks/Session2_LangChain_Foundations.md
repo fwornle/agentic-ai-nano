@@ -22,10 +22,10 @@
 | 💾 Memory & State | 3 concepts | 15 min | Integration |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **Module A: Advanced LangChain Patterns** (60 min) - Complex workflows & optimization
-- 🏭 **Module B: Production Deployment Strategies** (70 min) - Enterprise deployment & monitoring  
-- 🔧 **Module C: Custom Tool Development** (45 min) - Building specialized tools
-- 📊 **Module D: Performance & Monitoring** (50 min) - Optimization & observability
+- 🔬 **[Module A: Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md)** (60 min) - Complex workflows & optimization
+- 🏭 **[Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)** (70 min) - Enterprise deployment & monitoring  
+- 🔧 **[Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)** (45 min) - Building specialized tools
+- 📊 **[Module D: Performance & Monitoring](Session2_ModuleD_Performance_Monitoring.md)** (50 min) - Optimization & observability
 
 **🗂️ Code Files**: All examples use files in `src/session2/`
 **🚀 Quick Start**: Run `cd src/session2 && python langchain_basics.py` to see LangChain in action
@@ -470,120 +470,34 @@ result = agent.run("Help me with a simple task")
 
 ---
 
-# 🎛️ OPTIONAL MODULES (Choose Your Adventure)
+### 🧭 **Choose Your Next Path:**
+- **[🔬 Module A: Advanced LangChain Patterns →](Session2_ModuleA_Advanced_LangChain_Patterns.md)** - Complex workflows & optimization
+- **[🏭 Module B: Production Deployment Strategies →](Session2_ModuleB_Production_Deployment_Strategies.md)** - Enterprise deployment & monitoring
+- **[🔧 Module C: Custom Tool Development →](Session2_ModuleC_Custom_Tool_Development.md)** - Building specialized tools
+- **[📊 Module D: Performance & Monitoring →](Session2_ModuleD_Performance_Monitoring.md)** - Optimization & observability
+- **[📝 Test Your Knowledge →](Session2_Test_Solutions.md)** - Comprehensive quiz
+- **[📖 Next Session: LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)** - Graph-based workflows
 
-## 🔬 Module A: Advanced LangChain Patterns (60 minutes)
-**Prerequisites**: Core Section Complete  
-**Target Audience**: Implementers seeking deeper understanding
-**Cognitive Load**: 6 advanced concepts
-
-### A1: Complex Multi-Agent Workflows (20 minutes)
-Advanced orchestration patterns with multiple specialized agents working together in sophisticated coordination patterns.
-
-### A2: Custom Chain Development (20 minutes)  
-Building custom chain classes, implementing advanced chain logic, and creating reusable chain components for enterprise applications.
-
-### A3: Advanced Tool Patterns (20 minutes)
-Creating sophisticated tools with state management, async operations, and error recovery mechanisms for production environments.
-
-[Detailed content would be moved here from original session]
+### 🎆 Complete Learning Path Options
+**Sequential Learning**: Core → Module A → Module B → Module C → Module D  
+**Production Focus**: Core → Module B → Module D  
+**Development Focus**: Core → Module A → Module C
 
 ---
 
-## 🏭 Module B: Production Deployment Strategies (70 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Those building real systems
-**Cognitive Load**: 7 production concepts
+## 🧭 Navigation
 
-### B1: LangGraph Integration & Production Patterns (25 minutes)
-Deep dive into LangGraph integration, production workflow patterns, and enterprise-scale orchestration strategies.
+**Previous: [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)**
 
-### B2: Performance Optimization & Monitoring (25 minutes)
-Advanced performance tuning, caching strategies, monitoring setup, and observability for production LangChain applications.
+**Optional Deep Dive Modules:**
+- **[🔬 Module A: Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md)**
+- **[🏭 Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)**
+- **[🔧 Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)**
+- **[📊 Module D: Performance & Monitoring](Session2_ModuleD_Performance_Monitoring.md)**
 
-### B3: Enterprise Deployment Architecture (20 minutes)
-Container deployment, scaling patterns, load balancing, and production infrastructure for LangChain systems.
+**[📝 Test Your Knowledge: Session 2 Solutions](Session2_Test_Solutions.md)**
 
-[Detailed content would be moved here from original session]
-
----
-
-## 🔧 Module C: Custom Tool Development (45 minutes)
-**Prerequisites**: Core Section Complete
-**Target Audience**: Developers wanting customization
-**Cognitive Load**: 5 specialized concepts
-
-### C1: Advanced Tool Creation Patterns (15 minutes)
-Sophisticated tool development using Pydantic models, structured inputs/outputs, and validation patterns.
-
-### C2: API Integration Tools (15 minutes)
-Building tools that integrate with external APIs, handling authentication, rate limiting, and error recovery.
-
-### C3: Database & External System Integration (15 minutes)
-Creating tools that interact with databases, file systems, and other external services with proper connection management.
-
-[Detailed content would be moved here from original session]
-
----
-
-## 📊 Module D: Performance & Monitoring (50 minutes)
-**Prerequisites**: Core Section Complete  
-**Target Audience**: Production-focused developers
-**Cognitive Load**: 6 optimization concepts
-
-### D1: Performance Benchmarking & Optimization (20 minutes)
-Measuring LangChain performance, identifying bottlenecks, and implementing optimization strategies.
-
-### D2: Advanced Monitoring & Observability (20 minutes)
-Setting up comprehensive monitoring, logging, and observability for production LangChain applications.
-
-### D3: Cost Optimization & Resource Management (10 minutes)
-Managing API costs, token usage optimization, and resource allocation strategies.
-
-[Detailed content would be moved here from original session]
-
----
-
-## 🔄 LEARNING REINFORCEMENT
-
-### Spaced Repetition Schedule
-- **Day 1**: Complete core concepts ✅
-- **Day 3**: Review key patterns (10 min quick review)  
-- **Week 1**: Apply concepts in different context (15 min practice)
-- **Week 2**: Teach-back exercise (20 min explanation to others)
-
-### Cross-Session Integration  
-**Connections to Other Sessions:**
-- **Session 1**: Compare with bare-metal implementations
-- **Session 3**: LangGraph patterns expand on concepts here
-- **Session 5**: Type safety patterns complement LangChain usage
-
-### Knowledge Application Projects
-1. **Simple**: Build a basic QA agent with 2 tools
-2. **Intermediate**: Create a multi-step research agent  
-3. **Advanced**: Implement a customer service agent with memory
-
----
-
-## 📊 Progress Tracking
-
-### Completion Status
-- [ ] Core Section (85 min) - Essential for next session
-- [ ] Module A: Advanced Patterns (60 min)  
-- [ ] Module B: Production Deployment (70 min)
-- [ ] Module C: Custom Tools (45 min)
-- [ ] Module D: Performance (50 min)
-
-### Time Investment Tracking
-- **Minimum Path**: 85 minutes (Core only)
-- **Recommended Path**: 145 minutes (Core + 1 optional module)
-- **Comprehensive Path**: 310 minutes (Core + all modules)
-
-### Next Steps
-- **To Session 3**: Complete Core Section
-- **For Production Use**: Add Module B  
-- **For Advanced Development**: Add Module A
-- **For Custom Tools**: Add Module C
+**[Next: Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)**
 
 ---
 
@@ -684,6 +598,3 @@ Build a working agent that can:
 
 **Success Criteria**: Score 8+ out of 10 to demonstrate mastery of LangChain foundations.
 
----
-
-[← Back to Session 1](Session1_Bare_Metal_Agents.md) | [Next: Session 3 →](Session3_LangGraph_Multi_Agent_Workflows.md)
