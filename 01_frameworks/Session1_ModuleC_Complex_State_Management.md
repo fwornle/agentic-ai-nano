@@ -25,7 +25,7 @@ By the end of this module, you will:
 
 🗂️ **File**: `src/session1/conversation_memory.py` - Advanced memory management systems
 
-Building on the memory optimization patterns, sophisticated conversation memory requires hierarchical storage, semantic indexing, and intelligent retrieval:
+Building on the memory optimization patterns, sophisticated conversation memory requires hierarchical storage, semantic indexing, and intelligent retrieval. The foundation is a structured memory system with priority levels:
 
 ```python
 from typing import Dict, List, Any, Optional, Tuple
@@ -42,19 +42,32 @@ class MemoryPriority(Enum):
     MEDIUM = 2
     HIGH = 3
     CRITICAL = 4
+```
 
+The priority system enables intelligent memory management by distinguishing between casual conversation and critical information that must be preserved.
+
+```python
 @dataclass
 class ConversationMemory:
     id: str
     content: str
     timestamp: datetime
+```
+
+The `ConversationMemory` structure forms the core unit of the memory system, containing both the content and essential metadata for retrieval and management:
+
+```python
     priority: MemoryPriority
     context_tags: List[str] = field(default_factory=list)
     embedding: Optional[np.ndarray] = None
     access_count: int = 0
     last_accessed: Optional[datetime] = None
     related_memories: List[str] = field(default_factory=list)
+```
 
+Extended fields track usage patterns (access_count, last_accessed) and relationships (related_memories), enabling sophisticated memory management based on actual usage patterns.
+
+```python
 class HierarchicalMemoryAgent(BaseAgent):
     """Agent with hierarchical memory management and semantic retrieval"""
     
@@ -67,7 +80,12 @@ class HierarchicalMemoryAgent(BaseAgent):
         self._init_memory_database()
 ```
 
+The agent initialization sets up both semantic embeddings (via SentenceTransformer) and persistent storage (via SQLite database), creating a dual-layer memory system.
+```
+
 ### Semantic Memory Retrieval
+
+The memory storage system combines semantic embeddings with hierarchical organization:
 
 ```python
 def store_memory(self, content: str, priority: MemoryPriority = MemoryPriority.MEDIUM, 
@@ -88,7 +106,11 @@ def store_memory(self, content: str, priority: MemoryPriority = MemoryPriority.M
         context_tags=context_tags or [],
         embedding=embedding
     )
-    
+```
+
+Each memory gets a unique ID and semantic embedding for similarity search. Context tags provide additional metadata for more sophisticated retrieval patterns.
+
+```python
     # Add to working memory
     self.working_memory.append(memory)
     
@@ -100,7 +122,11 @@ def store_memory(self, content: str, priority: MemoryPriority = MemoryPriority.M
     self._store_in_database(memory)
     
     return memory_id
+```
 
+The dual storage approach keeps recent memories in fast working memory while archiving older memories to persistent storage, balancing performance with long-term retention.
+
+```python
 def retrieve_relevant_memories(self, query: str, limit: int = 5) -> List[ConversationMemory]:
     """Retrieve memories using semantic similarity and priority"""
     
@@ -115,7 +141,11 @@ def retrieve_relevant_memories(self, query: str, limit: int = 5) -> List[Convers
                 np.linalg.norm(query_embedding) * np.linalg.norm(memory.embedding)
             )
             working_candidates.append((memory, similarity))
-    
+```
+
+Retrieval starts with working memory using cosine similarity between the query and stored embeddings. This provides semantically relevant matches rather than just keyword matching.
+
+```python
     # Search long-term memory
     long_term_candidates = self._search_long_term_memory(query_embedding, limit * 2)
     
@@ -127,6 +157,11 @@ def retrieve_relevant_memories(self, query: str, limit: int = 5) -> List[Convers
     for memory, similarity in all_candidates:
         priority_weight = memory.priority.value / 4.0  # Normalize to 0-1
         recency_weight = self._calculate_recency_weight(memory.timestamp)
+```
+
+The scoring system combines semantic similarity with priority and recency weights, ensuring important recent information surfaces even if it's not the most semantically similar match.
+
+```python
         access_weight = min(memory.access_count / 10.0, 1.0)  # Normalize access frequency
         
         combined_score = (
@@ -137,6 +172,9 @@ def retrieve_relevant_memories(self, query: str, limit: int = 5) -> List[Convers
         )
         
         scored_candidates.append((memory, combined_score))
+```
+
+The access weight component rewards frequently referenced memories, creating a usage-based relevance boost that helps surface commonly needed information.
     
     # Sort by combined score and return top results
     scored_candidates.sort(key=lambda x: x[1], reverse=True)
@@ -176,6 +214,8 @@ def _consolidate_to_long_term(self):
 
 ### Memory Context Integration
 
+Context integration connects retrieved memories with current interactions for coherent, memory-aware responses:
+
 ```python
 def generate_contextual_response(self, message: str) -> str:
     """Generate response using relevant memory context"""
@@ -185,7 +225,11 @@ def generate_contextual_response(self, message: str) -> str:
     
     # Build context from memories
     memory_context = self._build_memory_context(relevant_memories)
-    
+```
+
+The system retrieves the most relevant memories and formats them into coherent context that can be seamlessly integrated into the response generation prompt.
+
+```python
     # Generate response with memory-enhanced prompt
     enhanced_prompt = f"""
     Current message: {message}
@@ -202,25 +246,42 @@ def generate_contextual_response(self, message: str) -> str:
     # Store this interaction
     interaction_content = f"User: {message}\nAgent: {response}"
     self.store_memory(
+```
+
+The enhanced prompt explicitly instructs the LLM to use the provided context naturally, creating responses that acknowledge and build upon previous interactions rather than treating each message in isolation.
+
+```python
         content=interaction_content,
         priority=MemoryPriority.MEDIUM,
         context_tags=["conversation", "interaction"]
     )
-    
-    return response
 
+    return response
+```
+
+Each interaction is automatically stored with medium priority and appropriate tags, building the memory foundation for future context retrieval.
+
+```python
 def _build_memory_context(self, memories: List[ConversationMemory]) -> str:
     """Build readable context from retrieved memories"""
     if not memories:
         return "No relevant conversation history found."
     
     context_parts = []
+```
+
+The context building process formats retrieved memories into coherent, readable context that can be seamlessly integrated into LLM prompts.
+
+```python
     for i, memory in enumerate(memories, 1):
         timestamp = memory.timestamp.strftime("%Y-%m-%d %H:%M")
         tags = ", ".join(memory.context_tags) if memory.context_tags else "general"
         
         context_parts.append(f"""
         Memory {i} ({timestamp}) - Context: {tags}
+```
+
+Each memory is formatted with a timestamp and context tags, providing clear temporal and categorical information that helps the LLM understand when and in what context the information was captured.
         {memory.content}
         """)
     
@@ -622,6 +683,49 @@ def _build_dynamic_context_prompt(self, message: str, activated_contexts: Dict[s
     
     return "\n".join(prompt_parts)
 ```
+
+---
+
+## 📝 Multiple Choice Test - Module C
+
+Test your understanding of complex state management concepts:
+
+**Question 1:** What four pieces of information does the `ConversationMemory` dataclass track for intelligent memory management?
+
+A) Content, timestamp, tags, and size  
+B) ID, content, timestamp, and priority  
+C) Content, priority, embedding, and context_tags  
+D) All of the above plus embedding and other metadata  
+
+**Question 2:** How does the semantic memory retrieval system determine relevance?
+
+A) Keyword matching only  
+B) Cosine similarity between query and memory embeddings  
+C) Random selection from recent memories  
+D) Alphabetical ordering of content  
+
+**Question 3:** What is the purpose of the dual storage approach with working memory and long-term storage?
+
+A) To save disk space  
+B) Balance performance with long-term retention  
+C) Reduce memory usage only  
+D) Simplify the codebase  
+
+**Question 4:** In the state persistence system, what triggers automatic state saving?
+
+A) Only manual user commands  
+B) Fixed time intervals exclusively  
+C) Critical state changes and periodic intervals  
+D) When the application shuts down  
+
+**Question 5:** What determines which context layers are activated in dynamic context management?
+
+A) Random selection  
+B) Only the most recent layer  
+C) Layer scope, message content, context hints, and activation conditions  
+D) User-specified preferences only  
+
+[**View Test Solutions →**](Session1_ModuleC_Test_Solutions.md)
 
 ---
 

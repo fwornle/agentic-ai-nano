@@ -369,7 +369,7 @@ Given these scenarios, which framework would you recommend?
 - **Enterprise with strict type safety requirements**: PydanticAI (schema validation, type safety)
 - **Research lab exploring complex reasoning workflows**: LangGraph (flexible graph architecture)
 
-**🗂️ View Test Solutions**: Complete answers and explanations available in `Session0_Test_Solutions.md`
+[**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 
 **Success Criteria**: Score 12+ out of 15 to demonstrate mastery of agent frameworks and patterns.
 
