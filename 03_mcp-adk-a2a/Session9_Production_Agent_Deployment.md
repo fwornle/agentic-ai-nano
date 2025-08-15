@@ -612,92 +612,117 @@ spec:
 
 **Observability Foundation: Metrics Collection Architecture**
 
-Start with the core monitoring framework that tracks agent performance and health.
+**Understanding Production Monitoring for Agent Systems**: Effective monitoring is critical for production agent systems that must operate reliably 24/7. This monitoring framework provides real-time visibility into agent performance, resource utilization, and business metrics essential for maintaining SLA compliance and operational excellence.
+
+**In This Step**: You'll build a comprehensive metrics collection system using Prometheus, the industry-standard for cloud-native monitoring. This teaches you how to instrument agent systems for observability, enabling proactive issue detection and data-driven optimization decisions.
 
 **Import Dependencies and Logger Setup**
 ```python
-# monitoring/agent_metrics.py
-import time
-import asyncio
-from typing import Dict, Any, Optional
-from prometheus_client import Counter, Histogram, Gauge, Info, start_http_server
-import logging
-from datetime import datetime, timedelta
+# monitoring/agent_metrics.py - Production monitoring foundation
+import time                                                    # For timing measurements
+import asyncio                                                # Async monitoring operations
+from typing import Dict, Any, Optional                        # Type hints for clarity
+from prometheus_client import Counter, Histogram, Gauge, Info, start_http_server  # Prometheus metrics
+import logging                                                # Structured logging
+from datetime import datetime, timedelta                      # Time-based calculations
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)                          # Component-specific logging
 ```
 
+**Why These Dependencies**: Each import serves a specific monitoring purpose: Prometheus client provides industry-standard metrics, asyncio enables non-blocking monitoring, and structured logging provides debugging context. This combination creates comprehensive observability for production systems.
+
 **Metrics Class Foundation**
+
+**Understanding Service-Level Monitoring Architecture**: This class encapsulates all monitoring functionality for an agent service, providing a clean interface for instrumenting code while handling the complexity of metrics collection, aggregation, and exposure to monitoring systems.
+
+**In This Step**: You'll create a monitoring class that automatically starts a Prometheus metrics endpoint and initializes standard metrics. This pattern makes it easy to add monitoring to any agent service while maintaining consistency across your agent ecosystem.
+
 ```python
 class AgentMetrics:
-    """Comprehensive metrics collection for agent systems."""
+    """Comprehensive metrics collection for production agent systems."""
     
     def __init__(self, service_name: str = "mcp-agent", metrics_port: int = 9090):
-        self.service_name = service_name
-        self.metrics_port = metrics_port
+        self.service_name = service_name              # Service identifier for metric labeling
+        self.metrics_port = metrics_port              # Prometheus scraping endpoint port
         
-        # Initialize Prometheus metrics
+        # Initialize Prometheus metrics registry
         self._initialize_metrics()
 ```
 
+**Why This Constructor Pattern**: The service name enables multi-tenant monitoring where different agents can be monitored independently, while the configurable port allows multiple services to run on the same host without conflicts.
+
 **Start Metrics Server**
 ```python
-        # Start metrics server for Prometheus scraping
+        # Start HTTP server for Prometheus metrics scraping
         start_http_server(metrics_port)
         logger.info(f"Metrics server started on port {metrics_port}")
 ```
 
-Initialize basic system and request metrics:
+**Why This Matters**: The metrics server exposes an HTTP endpoint that Prometheus can scrape to collect metrics. This push-pull model is more reliable than push-based systems and enables centralized monitoring configuration through Prometheus service discovery.
+
+**Initialize Core Monitoring Metrics:**
+
+**Understanding Production Metrics Strategy**: Production monitoring requires both technical metrics (request rates, latencies) and business metrics (workflow success rates, agent utilization). This comprehensive metrics suite provides 360-degree visibility into system health and business performance.
+
+**In This Step**: You'll create a complete metrics suite covering system information, request patterns, and agent-specific operations. This teaches you how to design monitoring that supports both operational troubleshooting and business performance analysis.
 
 ```python
     def _initialize_metrics(self):
-        """Initialize all Prometheus metrics."""
+        """Initialize comprehensive Prometheus metrics for production monitoring."""
         
-        # System info
-        self.info = Info('agent_info', 'Agent system information')
+        # System identification and metadata
+        self.info = Info('agent_info', 'Agent system information and metadata')
         self.info.info({
-            'service': self.service_name,
-            'version': '1.0.0',
-            'environment': 'production'
+            'service': self.service_name,      # Service identifier for routing alerts
+            'version': '1.0.0',               # Version for change correlation  
+            'environment': 'production'       # Environment for alert scoping
         })
         
-        # Request metrics
+        # HTTP request tracking for API performance
         self.request_count = Counter(
-            'http_requests_total',
-            'Total HTTP requests',
-            ['method', 'endpoint', 'status_code']
+            'http_requests_total',            # Standard metric name for dashboards
+            'Total HTTP requests received',
+            ['method', 'endpoint', 'status_code']  # Labels for detailed analysis
         )
         
+        # Request latency distribution for SLA monitoring
         self.request_duration = Histogram(
-            'http_request_duration_seconds',
-            'HTTP request duration in seconds',
+            'http_request_duration_seconds',   # Duration in seconds (Prometheus standard)
+            'HTTP request duration distribution',
             ['method', 'endpoint'],
-            buckets=[0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0]
+            buckets=[0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0]  # SLA-aligned buckets
         )
 ```
 
-Add workflow and agent-specific metrics:
+**Why These Metric Types**: Info metrics provide context for alerts, Counters track event volumes for capacity planning, and Histograms measure latencies for SLA compliance. The bucket configuration aligns with typical API performance SLAs.
+
+**Add Agent-Specific Business Metrics:**
+
+**Understanding Business Logic Monitoring**: Beyond technical metrics, production agent systems need business-focused metrics that track workflow success, agent utilization, and service discovery patterns. These metrics enable business performance optimization and capacity planning decisions.
 
 ```python
-        # Agent-specific metrics
+        # Real-time workflow monitoring for capacity planning
         self.active_workflows = Gauge(
-            'active_workflows',
-            'Number of currently active workflows'
+            'active_workflows',                         # Current workflow load
+            'Number of currently active workflows'     # For auto-scaling decisions
         )
         
+        # Workflow success tracking for reliability metrics
         self.workflow_executions = Counter(
-            'workflow_executions_total',
-            'Total workflow executions',
-            ['workflow_type', 'status']
+            'workflow_executions_total',               # Total executions over time
+            'Total workflow executions by type and outcome',
+            ['workflow_type', 'status']                # Success/failure breakdown
         )
         
+        # Workflow performance distribution for SLA monitoring
         self.workflow_duration = Histogram(
-            'workflow_duration_seconds',
-            'Workflow execution duration in seconds',
-            ['workflow_type'],
-            buckets=[1, 5, 10, 30, 60, 300, 600, 1800]
+            'workflow_duration_seconds',               # Execution time tracking
+            'Workflow execution duration by type',
+            ['workflow_type'],                         # Per-workflow-type performance
+            buckets=[1, 5, 10, 30, 60, 300, 600, 1800]  # Agent workflow time buckets
         )
         
+        # Service discovery health for agent coordination
         self.agent_discovery_requests = Counter(
             'agent_discovery_requests_total',
             'Total agent discovery requests',

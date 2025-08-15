@@ -288,17 +288,14 @@ class PineconeVectorStore:
 
 Our Pinecone configuration balances **performance, cost, and reliability** for typical RAG workloads:
 
+#### **Step 2a: Check for Existing Index**
+
+First, we check if the index already exists to avoid recreation costs:
+
 ```python
     def _get_or_create_index(self):
-        """Get existing index or create with production-optimized configuration.
-
-        Configuration Rationale:
-        - pods=2: Balances cost vs. performance for moderate query load (1000-5000 QPS)
-        - replicas=1: Provides failover without doubling costs (99.9% uptime)
-        - pod_type='p1.x1': Cost-effective choice for most RAG applications
-        - metadata indexing: Enables efficient filtering without full scans
-        """
-
+        """Get existing index or create with production-optimized configuration."""
+        
         # Check if index exists
         if self.index_name in pinecone.list_indexes():
             print(f"Connecting to existing index: {self.index_name}")
@@ -309,7 +306,13 @@ Our Pinecone configuration balances **performance, cost, and reliability** for t
             print(f"Index stats: {stats['total_vector_count']} vectors, "
                   f"{stats['dimension']} dimensions")
             return index
+```
 
+#### **Step 2b: Create Production-Optimized Index**
+
+If no index exists, create one with carefully chosen production parameters:
+
+```python
         # Create new index with carefully chosen parameters
         print(f"Creating new index: {self.index_name}")
         pinecone.create_index(
@@ -323,7 +326,13 @@ Our Pinecone configuration balances **performance, cost, and reliability** for t
                 'indexed': ['source', 'chunk_type', 'timestamp', 'topic']  # Enable fast filtering
             }
         )
+```
 
+#### **Step 2c: Wait for Index Initialization**
+
+Pinecone requires initialization time - we wait and monitor the status:
+
+```python
         # Wait for index initialization (typically 30-60 seconds)
         print("Waiting for index to be ready...")
         while not pinecone.describe_index(self.index_name).status['ready']:
@@ -332,6 +341,12 @@ Our Pinecone configuration balances **performance, cost, and reliability** for t
         print("Index ready for operations!")
         return pinecone.Index(self.index_name)
 ```
+
+**Configuration Rationale:**
+- **pods=2**: Balances cost vs. performance for moderate query load (1000-5000 QPS)
+- **replicas=1**: Provides failover without doubling costs (99.9% uptime)  
+- **pod_type='p1.x1'**: Cost-effective choice for most RAG applications
+- **metadata indexing**: Enables efficient filtering without full scans
 
 **Critical Parameter Analysis:**
 
@@ -1193,7 +1208,7 @@ Understanding how database optimizations impact the entire RAG pipeline:
        400: {'recall': 0.98, 'latency': '280ms', 'answer_accuracy': 0.92}
    }
    # Sweet spot: ef=100-200 for most RAG applications
-   ```
+```
 
 2. **Hybrid Search Weight Tuning → Domain Adaptation**
    ```python
@@ -1204,7 +1219,7 @@ Understanding how database optimizations impact the entire RAG pipeline:
        'medical': {'semantic': 0.5, 'lexical': 0.5},   # Balanced approach
        'creative': {'semantic': 0.8, 'lexical': 0.2}   # Conceptual similarity
    }
-   ```
+```
 
 This architectural understanding transforms you from someone who uses vector databases to someone who engineers optimal retrieval systems. The next session will build on these foundations to enhance query understanding and context augmentation.
 
