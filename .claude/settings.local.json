@@ -39,7 +39,8 @@
       "Bash(do echo \"=== Session $i ===\")",
       "Bash(do echo \"=== Session $i END ===\")",
       "Bash(tail:*)",
-      "Bash(do echo \"Creating Session$i_Test_Solutions.md\")"
+      "Bash(do echo \"Creating Session$i_Test_Solutions.md\")",
+      "Bash(markdownlint:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"
