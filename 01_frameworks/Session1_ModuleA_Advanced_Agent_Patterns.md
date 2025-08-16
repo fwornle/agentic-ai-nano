@@ -11,7 +11,9 @@
 This module explores sophisticated agent patterns including reflection-based self-improvement, multi-step planning systems, and collaborative multi-agent architectures. You'll implement advanced reasoning loops that form the foundation of professional agent frameworks.
 
 ### Learning Objectives
+
 By the end of this module, you will:
+
 - Build reflection agents that improve their own outputs through self-critique
 - Implement multi-step planning systems for complex task decomposition
 - Create multi-agent orchestration systems with specialized roles
@@ -28,11 +30,13 @@ By the end of this module, you will:
 The reflection pattern enables agents to iteratively improve their responses through self-critique and refinement:
 
 **Traditional Approach:**
+
 ```text
 Question → Generate Answer → Return Answer
 ```
 
 **Reflection Approach:**
+
 ```text
 Question → Initial Answer → Critique → Improve → Critique → Improve → Final Answer
 ```
@@ -90,6 +94,7 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
 ### Reflection Methods Implementation
 
 **Initial Response Generation:**
+
 ```python
 async def _initial_response(self, message: str, context: Dict = None) -> str:
     """Generate initial response without reflection"""
@@ -174,7 +179,11 @@ class TaskStatus(Enum):
     IN_PROGRESS = "in_progress" 
     COMPLETED = "completed"
     FAILED = "failed"
+```
 
+The `TaskStatus` enum provides clear tracking of each step's execution state, enabling proper workflow management and error handling throughout the planning process.
+
+```python
 @dataclass
 class PlanStep:
     id: str
@@ -183,7 +192,11 @@ class PlanStep:
     estimated_time: int
     status: TaskStatus = TaskStatus.PENDING
     result: Optional[str] = None
-    
+```
+
+The `PlanStep` dataclass captures all essential information for step execution: what to do (description), when to do it (dependencies), how long it might take (estimated_time), and what happened (status and result).
+
+```python
 class PlanningAgent(BaseAgent):
     """Agent that breaks down complex tasks into executable plans"""
     
@@ -487,7 +500,6 @@ The task analysis prompt asks the LLM to break down the task requirements and id
 ```
 
 The analysis provides context about available agents and requests specific justifications for agent selection, ensuring intelligent task distribution rather than random assignment.
-```
 
 ---
 
@@ -528,7 +540,7 @@ D) Agent performance metrics
 A) Planning, execution, validation  
 B) Analysis, delegation, integration  
 C) Task analysis, delegation plan creation, plan execution  
-D) Registration, routing, completion  
+D) Registration, routing, completion
 
 [**View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
 

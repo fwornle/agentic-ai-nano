@@ -293,7 +293,11 @@ Due date validation includes sophisticated cross-field validation with work esti
         max_future_date = now.replace(year=now.year + 2)
         if v > max_future_date:
             raise ValueError('Due date too far in the future (max 2 years)')
-        
+```
+
+Now we perform cross-validation with estimated work hours to prevent unrealistic schedules:
+
+```python
         # Cross-validate with estimated work hours
         estimated_hours = values.get('estimated_hours')
         if estimated_hours:
@@ -362,12 +366,21 @@ class ValidationErrorHandler:
                     constraint=err.get('ctx', {}).get('limit_value', 'unknown'),
                     suggestion=self._generate_suggestion(err['type'], err['msg'])
                 )
+```
+
+Now we complete the error processing and track error patterns:
+
+```python
                 error_details.append(detail)
                 
                 # Track error frequency for analytics
                 error_key = f"{model_class.__name__}.{detail.field_path}.{detail.error_type}"
                 self.error_counts[error_key] = self.error_counts.get(error_key, 0) + 1
-        
+```
+
+Finally, we generate a comprehensive error response:
+
+```python
         # Generate comprehensive error response
         return {
             'validation_failed': True,
@@ -412,7 +425,11 @@ This method provides contextual suggestions based on error types and messages, i
                 'default': 'This field is required and cannot be empty'
             }
         }
-        
+```
+
+Now we match the error type and message to provide contextual suggestions:
+
+```python
         # Extract error category and provide suggestion
         for category, subcategories in suggestions.items():
             if category in error_type:
@@ -443,7 +460,11 @@ class ValidationMiddleware:
         
         if cache_key in self.validation_cache:
             return {'valid': True, 'cached': True}
-        
+```
+
+Now we attempt validation and handle both success and failure cases:
+
+```python
         try:
             # Attempt validation
             validated_instance = model_class(**data if isinstance(data, dict) else data.__dict__)
@@ -457,7 +478,11 @@ class ValidationMiddleware:
                 'model': model_class.__name__,
                 'cached': False
             }
-            
+```
+
+Finally, we handle validation failures with detailed error reporting:
+
+```python
         except Exception as e:
             # Handle validation failure
             error_report = self.error_handler.handle_validation_error(e, model_class)
@@ -479,6 +504,44 @@ You've now mastered advanced type systems in PydanticAI, including:
 ✅ **Enterprise Task Management**: Implemented real-world validation for complex business entities  
 ✅ **Advanced Error Handling**: Created intelligent error reporting with suggestions and analytics  
 ✅ **Validation Middleware**: Built performance-optimized validation systems with caching
+
+---
+
+## 📝 Multiple Choice Test - Module A
+
+Test your understanding of advanced type systems and validation patterns:
+
+**Question 1:** What validation approach does the CrossFieldValidator use for complex business logic?
+A) Simple field-by-field validation only  
+B) Cross-field validation with business rules and date logic  
+C) Basic type checking without business logic  
+D) External API validation calls  
+
+**Question 2:** In the enterprise task validation system, what happens when budget exceeds $50,000?
+A) Task is automatically rejected  
+B) Requires executive approval flag to be set  
+C) Budget is automatically reduced  
+D) Task proceeds without additional validation  
+
+**Question 3:** How does the ValidationErrorHandler categorize validation errors?
+A) Only by field name  
+B) By error type, severity, field, message, and suggestions  
+C) Simple true/false validation  
+D) Error code numbers only  
+
+**Question 4:** What performance optimization does the ValidationMiddleware implement?
+A) Database connection pooling  
+B) Validation result caching with hash-based keys  
+C) Parallel processing only  
+D) Memory compression  
+
+**Question 5:** When a validation fails in the middleware, what information is included in the error report?
+A) Just the error message  
+B) Error type and field only  
+C) Complete error report with analytics, suggestions, and context  
+D) HTTP status code only  
+
+[**🗂️ View Test Solutions →**](Session5_ModuleA_Test_Solutions.md)
 
 ### Next Steps
 - **Continue to Module B**: [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md) for production deployment patterns

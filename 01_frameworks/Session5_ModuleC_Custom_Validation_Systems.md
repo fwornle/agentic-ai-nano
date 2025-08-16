@@ -31,11 +31,14 @@ Production PydanticAI applications require sophisticated error handling strategi
 ```python
 # Advanced error handling and recovery patterns
 from enum import Enum
-from typing import Callable, Awaitable, TypeVar, Union
+from typing import Callable, Awaitable, TypeVar, Union, Dict, Any
 import asyncio
 from functools import wraps
 import traceback
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
+import uuid
+import logging
 
 T = TypeVar('T')
 R = TypeVar('R')
@@ -87,7 +90,11 @@ class ErrorContext:
     max_retries: int = 3
     recoverable: bool = True
     user_facing_message: str = ""
-    
+```
+
+Now we add the dictionary conversion method for logging and monitoring:
+
+```python
     def to_dict(self) -> Dict[str, Any]:
         """Convert error context to dictionary for logging."""
         return {
@@ -119,7 +126,11 @@ class AgentError(Exception):
         self.context.message = message
         self.context.stack_trace = traceback.format_exc()
         self.__cause__ = cause
+```
 
+Now we define specialized error classes for different types of failures:
+
+```python
 class ValidationAgentError(AgentError):
     """Error specific to validation failures."""
     
@@ -168,7 +179,11 @@ class ErrorClassifier:
             # Permission errors  
             (PermissionError,): (ErrorCategory.PERMISSION, ErrorSeverity.HIGH),
         }
-    
+```
+
+Now we implement the intelligent error classification logic:
+
+```python
     def classify_error(self, error: Exception) -> tuple[ErrorCategory, ErrorSeverity]:
         """Classify an error into category and severity."""
         
@@ -216,7 +231,11 @@ class RetryStrategy:
             ErrorCategory.RATE_LIMIT,
             ErrorCategory.EXTERNAL_SERVICE
         }
-    
+```
+
+Next, we implement intelligent retry decision logic:
+
+```python
     def should_retry(self, error_context: ErrorContext) -> bool:
         """Determine if error should be retried."""
         
@@ -266,7 +285,11 @@ The core retry execution engine attempts function calls, classifies errors, make
                     retry_count=attempt,
                     max_retries=self.max_retries
                 )
-                
+```
+
+Now we handle retry logic and delay calculation:
+
+```python
                 last_error = AgentError(str(e), error_context, e)
                 
                 if not self.should_retry(error_context):
@@ -308,7 +331,11 @@ def error_handler(
             except AgentError:
                 # Re-raise AgentErrors with their existing context
                 raise
-                
+```
+
+Now we handle generic exceptions and wrap them appropriately:
+
+```python
             except Exception as e:
                 # Wrap other exceptions in AgentError
                 classifier = ErrorClassifier()
@@ -386,7 +413,11 @@ The core circuit breaker protection logic blocks calls when the circuit is open 
                         message="Service unavailable due to repeated failures"
                     )
                 )
-        
+```
+
+Now we execute the protected function call with timeout and error handling:
+
+```python
         try:
             result = await asyncio.wait_for(
                 func(*args, **kwargs),
@@ -425,7 +456,11 @@ Automatic state management ensures services can recover gracefully while protect
                 self.state = CircuitBreakerState.CLOSED
                 self.success_count = 0
                 self.logger.info(f"Circuit breaker {self.name} CLOSED after successful recovery")
-    
+```
+
+Next, we handle failure scenarios and state transitions:
+
+```python
     async def _on_failure(self) -> None:
         """Handle failed call."""
         self.failure_count += 1
@@ -456,7 +491,11 @@ class ExternalServiceIntegration:
         self.circuit_breaker = CircuitBreaker(service_name, circuit_breaker_config)
         self.retry_strategy = RetryStrategy(max_retries=3, base_delay=1.0)
         self.logger = logging.getLogger(f"Integration.{service_name}")
-    
+```
+
+Now we implement the HTTP request method with comprehensive error handling:
+
+```python
     @error_handler(
         category=ErrorCategory.EXTERNAL_SERVICE,
         severity=ErrorSeverity.HIGH,
@@ -482,7 +521,11 @@ class ExternalServiceIntegration:
                     endpoint=url,
                     status_code=503
                 )
-            
+```
+
+Finally, we return the successful response through the circuit breaker:
+
+```python
             # Simulate successful response
             return {
                 'success': True,
@@ -504,6 +547,44 @@ You've now mastered custom validation systems and resilient error handling, incl
 ✅ **Intelligent Retry Strategies**: Implemented exponential backoff with smart retry decisions  
 ✅ **Circuit Breaker Patterns**: Created resilient service protection with automatic recovery  
 ✅ **External Service Integration**: Built robust integration patterns with comprehensive error handling
+
+---
+
+## 📝 Multiple Choice Test - Module C
+
+Test your understanding of custom validation systems and error handling:
+
+**Question 1:** How does the ErrorManager classify different types of validation errors?
+A) By timestamp only  
+B) By error type, severity level, context, and metadata tracking  
+C) Simple binary classification  
+D) Random categorization  
+
+**Question 2:** What retry strategy does the RetryHandler implement for exponential backoff?
+A) Fixed 1-second intervals  
+B) Linear increase only  
+C) Exponential backoff with jitter and maximum retry limits  
+D) Random retry intervals  
+
+**Question 3:** When does the CircuitBreaker transition from CLOSED to OPEN state?
+A) After any single failure  
+B) When failure count exceeds threshold within time window  
+C) At random intervals  
+D) Only when manually triggered  
+
+**Question 4:** What information does the error context include for comprehensive tracking?
+A) Just the error message  
+B) Full context with operation, agent_id, error details, and metadata  
+C) Only error codes  
+D) Simple boolean flags  
+
+**Question 5:** How long does the CircuitBreaker stay in HALF_OPEN state before making a transition decision?
+A) 10 seconds  
+B) Until 3 consecutive test requests succeed or fail  
+C) Indefinitely  
+D) 1 minute exactly  
+
+[**🗂️ View Test Solutions →**](Session5_ModuleC_Test_Solutions.md)
 
 ### Next Steps
 - **Continue to Module D**: [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md) for comprehensive testing strategies
