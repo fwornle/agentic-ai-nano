@@ -316,7 +316,11 @@ class AgentState:
     tool_usage_stats: Dict[str, int]
     performance_metrics: Dict[str, float]
     custom_attributes: Dict[str, Any]
+```
 
+The `AgentState` dataclass provides a comprehensive structure for capturing all aspects of agent state, from conversation history to performance metrics and learned preferences.
+
+```python
 class PersistentStateAgent(BaseAgent):
     """Agent with automatic state persistence and recovery"""
     
@@ -328,7 +332,11 @@ class PersistentStateAgent(BaseAgent):
         self.state: Optional[AgentState] = None
         self.auto_save_interval = 10  # Save every N interactions
         self.interaction_count = 0
-        
+```
+
+Agent initialization creates a dedicated state directory and generates a unique session ID. The auto-save interval ensures regular persistence without manual intervention.
+
+```python
     def initialize_or_restore_state(self, agent_id: str) -> AgentState:
         """Initialize new state or restore from previous session"""
         
@@ -348,7 +356,11 @@ class PersistentStateAgent(BaseAgent):
                 
                 self.logger.info(f"Restored state for agent {agent_id} from {state_file}")
                 return self.state
-                
+```
+
+State restoration first attempts to load existing state from the JSON file, converting timestamps back to datetime objects and updating the session ID to the current session.
+
+```python
             except Exception as e:
                 self.logger.error(f"Failed to restore state: {e}")
                 # Fall through to create new state
@@ -369,7 +381,11 @@ class PersistentStateAgent(BaseAgent):
         
         self.logger.info(f"Created new state for agent {agent_id}")
         return self.state
-    
+```
+
+If state restoration fails or no previous state exists, the system creates a new AgentState with empty collections, ensuring the agent can always start cleanly.
+
+```python
     def save_state(self, force: bool = False) -> bool:
         """Save current state to persistent storage"""
         
@@ -388,7 +404,11 @@ class PersistentStateAgent(BaseAgent):
             state_file = self.state_dir / f"{self.state.agent_id}_state.json"
             with open(state_file, 'w') as f:
                 json.dump(state_dict, f, indent=2)
-            
+```
+
+State saving converts the dataclass to a dictionary and handles datetime serialization by converting to ISO format. The main state file is written with human-readable JSON formatting.
+
+```python
             # Create backup
             backup_file = self.state_dir / f"{self.state.agent_id}_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
             with open(backup_file, 'w') as f:
@@ -426,7 +446,11 @@ async def process_message_with_state(self, message: str, goals: List[str] = None
         "content": message,
         "session_id": self.session_id
     })
-    
+```
+
+The method begins by validating the agent state and updating active goals. Each user message is recorded in the conversation history with a timestamp and session ID for complete interaction tracking.
+
+```python
     # Generate response with state context
     state_context = self._build_state_context()
     enhanced_prompt = f"""
@@ -439,7 +463,11 @@ async def process_message_with_state(self, message: str, goals: List[str] = None
     """
     
     response = await self._call_llm(enhanced_prompt)
-    
+```
+
+The system builds state context from current agent information and incorporates it into the LLM prompt, ensuring responses are informed by goals, conversation history, and learned preferences.
+
+```python
     # Update state with response
     self.state.conversation_history.append({
         "timestamp": datetime.now().isoformat(),
@@ -458,7 +486,11 @@ async def process_message_with_state(self, message: str, goals: List[str] = None
                 "completed_at": datetime.now().isoformat(),
                 "session_id": self.session_id
             })
-    
+```
+
+After generating the response, the system records it in conversation history and checks for goal completion. Completed goals are moved from active to completed status with timestamps for tracking progress.
+
+```python
     # Auto-save state periodically
     self.interaction_count += 1
     if self.interaction_count % self.auto_save_interval == 0:
@@ -471,7 +503,11 @@ async def process_message_with_state(self, message: str, goals: List[str] = None
         "session_id": self.session_id,
         "state_saved": self.interaction_count % self.auto_save_interval == 0
     }
+```
 
+The method automatically saves state at configured intervals and returns comprehensive information about the interaction, including response, goal status, and whether state was persisted.
+
+```python
 def _build_state_context(self) -> str:
     """Build readable context from current agent state"""
     context_parts = []
@@ -486,7 +522,11 @@ def _build_state_context(self) -> str:
         context_parts.append("Recent conversation:")
         for entry in recent_history:
             context_parts.append(f"  {entry['type']}: {entry['content'][:100]}...")
-    
+```
+
+The context building process creates readable summaries of agent state, including current goals and recent conversation snippets truncated for prompt efficiency.
+
+```python
     # Completed tasks
     if self.state.completed_tasks:
         recent_tasks = self.state.completed_tasks[-3:]
@@ -518,7 +558,11 @@ class ContextScope(Enum):
     SESSION = "session"          # Current session
     HISTORICAL = "historical"    # Across sessions
     DOMAIN = "domain"           # Subject/domain specific
+```
 
+The `ContextScope` enum defines four different levels of context activation, allowing the system to intelligently decide when context is relevant based on temporal and semantic boundaries.
+
+```python
 @dataclass
 class ContextLayer:
     scope: ContextScope
@@ -526,7 +570,11 @@ class ContextLayer:
     content: Dict[str, Any]
     expiry_time: Optional[datetime] = None
     activation_conditions: List[str] = None
+```
 
+Each `ContextLayer` contains both content and metadata for intelligent activation. The `activation_conditions` list contains keywords or patterns that trigger this layer's inclusion in the active context.
+
+```python
 class DynamicContextAgent(BaseAgent):
     """Agent with dynamic, multi-layered context management"""
     
@@ -535,7 +583,11 @@ class DynamicContextAgent(BaseAgent):
         self.context_layers: Dict[str, ContextLayer] = {}
         self.context_activation_rules: Dict[str, Callable] = {}
         self.context_history: List[Dict[str, Any]] = []
-        
+```
+
+The agent initialization creates storage for context layers and tracks activation history, enabling learning from past context usage patterns.
+
+```python
     def add_context_layer(self, layer_id: str, scope: ContextScope, 
                          content: Dict[str, Any], priority: int = 1,
                          expiry_time: Optional[datetime] = None,
@@ -554,7 +606,11 @@ class DynamicContextAgent(BaseAgent):
         
         self.logger.info(f"Added context layer: {layer_id} (scope: {scope.value}, priority: {priority})")
         return layer_id
-    
+```
+
+The `add_context_layer` method provides a clean interface for registering new context with expiration times and activation conditions, enabling dynamic context management.
+
+```python
     def activate_context_dynamically(self, message: str, context_hints: List[str] = None) -> Dict[str, Any]:
         """Dynamically determine which context layers to activate"""
         
@@ -577,7 +633,11 @@ class DynamicContextAgent(BaseAgent):
                     "priority": layer.priority,
                     "activation_reason": self._get_activation_reason(layer, message, context_hints)
                 })
-        
+```
+
+The activation process evaluates each layer for relevance, automatically removing expired contexts and building an activation log for transparency and debugging.
+
+```python
         # Sort by priority
         activation_log.sort(key=lambda x: x["priority"], reverse=True)
         
@@ -586,7 +646,11 @@ class DynamicContextAgent(BaseAgent):
             "activation_log": activation_log,
             "total_layers": len(activated_contexts)
         }
-    
+```
+
+Returning both the activated contexts and the activation log provides transparency into why specific contexts were chosen, enabling system optimization and debugging.
+
+```python
     def _should_activate_layer(self, layer: ContextLayer, message: str, 
                               context_hints: List[str] = None) -> bool:
         """Determine if a context layer should be activated"""
@@ -602,7 +666,11 @@ class DynamicContextAgent(BaseAgent):
                     return True
                 if context_hints and condition in context_hints:
                     return True
-        
+```
+
+The activation logic starts with immediate scope (always relevant) and then checks explicit activation conditions, including both message content and external context hints.
+
+```python
         # Check for domain-specific activation
         if layer.scope == ContextScope.DOMAIN:
             domain_keywords = layer.content.get("keywords", [])
@@ -619,7 +687,11 @@ class DynamicContextAgent(BaseAgent):
                     return True
         
         return False
+```
 
+Domain and session scope activation uses semantic matching and session state comparison, enabling context-aware responses that adapt to current conversational and domain contexts.
+
+```python
 async def process_with_dynamic_context(self, message: str, context_hints: List[str] = None) -> Dict[str, Any]:
     """Process message using dynamically activated context"""
     
@@ -635,7 +707,11 @@ async def process_with_dynamic_context(self, message: str, context_hints: List[s
     
     # Generate response
     response = await self._call_llm(context_prompt)
-    
+```
+
+The processing method orchestrates context activation, prompt building, and response generation, creating a seamless flow from message input to context-aware output.
+
+```python
     # Update context based on interaction
     self._update_context_from_interaction(message, response, context_activation)
     
@@ -652,7 +728,11 @@ async def process_with_dynamic_context(self, message: str, context_hints: List[s
         "context_info": context_activation,
         "context_efficiency": self._calculate_context_efficiency(context_activation)
     }
+```
 
+After generating the response, the system updates context based on the interaction and records usage statistics, enabling learning and optimization of context activation patterns.
+
+```python
 def _build_dynamic_context_prompt(self, message: str, activated_contexts: Dict[str, Any], 
                                  activation_log: List[Dict[str, Any]]) -> str:
     """Build prompt incorporating dynamically activated context"""
@@ -664,7 +744,11 @@ def _build_dynamic_context_prompt(self, message: str, activated_contexts: Dict[s
         
         # Sort contexts by priority from activation log
         sorted_contexts = sorted(activation_log, key=lambda x: x["priority"], reverse=True)
-        
+```
+
+The prompt building process starts with the user message and then adds activated contexts in priority order, ensuring the most important context appears first in the LLM prompt.
+
+```python
         for context_info in sorted_contexts:
             layer_id = context_info["layer_id"]
             context_data = activated_contexts[layer_id]

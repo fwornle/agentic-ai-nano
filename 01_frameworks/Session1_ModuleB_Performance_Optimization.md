@@ -347,7 +347,6 @@ def _update_stats(self, tool_name: str, execution_time: float, cache_hit: bool):
 ```
 
 Performance statistics track execution times, call counts, and cache hit rates per tool, enabling optimization decisions based on actual usage patterns.
-```
 
 ### Parallel Tool Execution
 
@@ -359,6 +358,8 @@ async def execute_tools_parallel(self, tool_requests: List[Dict[str, Any]]) -> L
 ```
 
 The parallel execution system handles multiple tool requests concurrently, significantly reducing total execution time for independent operations.
+
+```python
     async def execute_single_tool(request):
         tool_name = request["tool"]
         params = request.get("params", {})
@@ -425,7 +426,11 @@ class FastResponseAgent(BaseAgent):
         self.precomputed_responses = {}
         self.response_times = []
         self.target_response_time = 2.0  # seconds
-        
+```
+
+The agent initialization sets up caching infrastructure and tracks response times with a configurable target latency (2 seconds default), enabling performance-driven optimizations.
+
+```python        
     async def process_message_fast(self, message: str) -> Dict[str, Any]:
         """Process message with speed optimizations"""
         start_time = time.time()
@@ -440,7 +445,11 @@ class FastResponseAgent(BaseAgent):
                 "response_time": response_time,
                 "cache_hit": True
             }
-        
+```
+
+The processing method starts with timing and immediately checks for exact cache matches, providing sub-millisecond responses for repeated messages. All response times are tracked for performance analysis.
+
+```python
         # Check for similar message (fuzzy matching)
         similar_response = self._find_similar_response(message)
         if similar_response:
@@ -451,7 +460,11 @@ class FastResponseAgent(BaseAgent):
                 "response_time": response_time,
                 "cache_hit": "fuzzy"
             }
-        
+```
+
+When exact matches fail, fuzzy matching using Jaccard similarity finds responses to similar messages, significantly reducing response time while maintaining quality for semantically related queries.
+
+```python
         # Generate new response with timeout
         try:
             response = await asyncio.wait_for(
@@ -472,7 +485,11 @@ class FastResponseAgent(BaseAgent):
             "response_time": response_time,
             "cache_hit": False
         }
-    
+```
+
+For new messages, the system uses asyncio timeout to enforce response time limits. When LLM processing exceeds the target time, fallback responses ensure users always receive timely feedback.
+
+```python
     def _find_similar_response(self, message: str) -> Optional[str]:
         """Find cached response for similar message using fuzzy matching"""
         message_words = set(message.lower().split())
@@ -494,7 +511,11 @@ class FastResponseAgent(BaseAgent):
                     best_match = cached_response
         
         return best_match
-    
+```
+
+The similarity algorithm uses Jaccard coefficient to compare word sets, requiring 70% similarity threshold to prevent false matches while enabling semantic reuse of cached responses.
+
+```python
     def _get_fallback_response(self, message: str) -> str:
         """Generate quick fallback response when main processing times out"""
         fallback_responses = [
@@ -535,7 +556,11 @@ def get_response_time_stats(self) -> Dict[str, Any]:
         "target_achievement_rate": sum(1 for t in sorted_times if t < self.target_response_time) / n * 100,
         "cache_entries": len(self.response_cache)
     }
+```
 
+The analytics method provides comprehensive performance metrics including percentile distributions (P50, P90, P95) that are essential for understanding response time characteristics under different load conditions.
+
+```python
 async def optimize_performance(self):
     """Automatically optimize agent performance based on metrics"""
     stats = self.get_response_time_stats()

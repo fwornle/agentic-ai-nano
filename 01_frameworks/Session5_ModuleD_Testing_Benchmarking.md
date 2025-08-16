@@ -35,17 +35,28 @@ from unittest.mock import AsyncMock, patch
 from typing import AsyncGenerator, List, Dict, Any
 import asyncio
 import random
+import logging
+import time
+```
 
+Now we'll define the main testing suite class that coordinates all integration tests:
+
+```python
 class IntegrationTestSuite:
     """Comprehensive integration testing for PydanticAI agents."""
     
     def __init__(self):
         self.test_results: List[Dict[str, Any]] = []
         self.logger = logging.getLogger(self.__class__.__name__)
-    
+```
+
+Next, we implement the core validation testing method that tests agents against various input scenarios:
+
+```python
     async def test_agent_validation(self, agent: ProductionAgentBase) -> Dict[str, Any]:
         """Test agent validation capabilities with comprehensive scenarios."""
         
+        # Define comprehensive test cases covering valid inputs and edge cases
         test_cases = [
             # Valid inputs
             {
@@ -58,7 +69,15 @@ class IntegrationTestSuite:
                 'name': 'empty_request',
                 'input': '',
                 'should_pass': False
-            },
+            }
+        ]
+```
+
+We continue defining edge cases that test agent boundary conditions:
+
+```python
+        # Add more edge cases to test comprehensive validation
+        test_cases.extend([
             {
                 'name': 'extremely_long_request',
                 'input': 'x' * 10000,
@@ -69,8 +88,12 @@ class IntegrationTestSuite:
                 'input': 'Research 中文 émojis 🤖 and symbols @#$%',
                 'should_pass': True
             }
-        ]
-        
+        ])
+```
+
+Now we execute each test case and collect detailed results for analysis:
+
+```python
         results = []
         
         for test_case in test_cases:
@@ -95,7 +118,11 @@ class IntegrationTestSuite:
                 }
             
             results.append(test_result)
-        
+```
+
+Finally, we return a comprehensive summary of the validation test results:
+
+```python
         return {
             'test_type': 'validation',
             'agent_name': agent.name,
@@ -113,6 +140,7 @@ Comprehensive error scenario testing validates that agents handle various failur
     async def test_error_handling(self, agent: ProductionAgentBase) -> Dict[str, Any]:
         """Test agent error handling capabilities."""
         
+        # Define various error scenarios to test agent resilience
         error_scenarios = [
             {
                 'name': 'network_timeout',
@@ -130,7 +158,11 @@ Comprehensive error scenario testing validates that agents handle various failur
                 'expected_category': ErrorCategory.RATE_LIMIT
             }
         ]
-        
+```
+
+Now we execute each error scenario and verify proper error handling:
+
+```python
         results = []
         
         for scenario in error_scenarios:
@@ -154,7 +186,11 @@ Comprehensive error scenario testing validates that agents handle various failur
                 }
             
             results.append(test_result)
-        
+```
+
+Finally, we return comprehensive error handling test results:
+
+```python
         return {
             'test_type': 'error_handling',
             'agent_name': agent.name,
@@ -162,7 +198,11 @@ Comprehensive error scenario testing validates that agents handle various failur
             'passed_scenarios': len([r for r in results if r['status'] == 'pass']),
             'results': results
         }
-    
+```
+
+These helper methods simulate different types of errors for comprehensive testing:
+
+```python
     def _simulate_timeout_error(self) -> Exception:
         """Simulate a timeout error for testing."""
         return TimeoutAgentError("Simulated timeout error", timeout_seconds=30.0)
@@ -190,7 +230,7 @@ Load testing validates agent performance under concurrent usage scenarios typica
         """Test agent performance under concurrent load."""
         
         async def single_request(request_id: int) -> Dict[str, Any]:
-            """Execute a single test request."""
+            """Execute a single test request with timing and error handling."""
             start_time = time.time()
             try:
                 result = await agent.process_request(f"Test request {request_id}")
@@ -200,6 +240,11 @@ Load testing validates agent performance under concurrent usage scenarios typica
                     'response_time': time.time() - start_time,
                     'result': result
                 }
+```
+
+We handle exceptions and track failed requests for comprehensive analysis:
+
+```python
             except Exception as e:
                 return {
                     'request_id': request_id,
@@ -207,8 +252,12 @@ Load testing validates agent performance under concurrent usage scenarios typica
                     'response_time': time.time() - start_time,
                     'error': str(e)
                 }
-        
-        # Execute concurrent batches
+```
+
+Next, we set up concurrent execution using semaphores to control load:
+
+```python
+        # Execute concurrent batches with controlled concurrency
         results = []
         semaphore = asyncio.Semaphore(concurrent_requests)
         
@@ -216,12 +265,16 @@ Load testing validates agent performance under concurrent usage scenarios typica
             async with semaphore:
                 return await single_request(request_id)
         
-        # Run all requests
+        # Run all requests concurrently
         tasks = [execute_with_semaphore(i) for i in range(total_requests)]
         batch_results = await asyncio.gather(*tasks)
         results.extend(batch_results)
-        
-        # Analyze results
+```
+
+Finally, we analyze the load test results and calculate performance metrics:
+
+```python
+        # Analyze results for comprehensive performance metrics
         successful_requests = [r for r in results if r['success']]
         failed_requests = [r for r in results if not r['success']]
         response_times = [r['response_time'] for r in successful_requests]
@@ -259,7 +312,11 @@ from typing import Any, Dict, List, Optional, Callable
 from dataclasses import dataclass, field
 from contextlib import asynccontextmanager
 import structlog
+```
 
+Now we define the core metrics data structure that tracks comprehensive agent performance:
+
+```python
 @dataclass
 class AgentMetrics:
     """Comprehensive agent performance metrics."""
@@ -281,7 +338,11 @@ class AgentMetrics:
     
     # Success rate over time
     success_rate_history: List[Dict[str, Any]] = field(default_factory=list)
-    
+```
+
+Next, we implement intelligent response time tracking with memory management:
+
+```python
     def update_response_time(self, response_time: float) -> None:
         """Update response time metrics with memory management."""
         self.response_times.append(response_time)
@@ -294,7 +355,11 @@ class AgentMetrics:
         self.avg_response_time = sum(self.response_times) / len(self.response_times)
         self.min_response_time = min(self.min_response_time, response_time)
         self.max_response_time = max(self.max_response_time, response_time)
-    
+```
+
+Finally, we add percentile calculation for detailed performance analysis:
+
+```python
     def get_percentiles(self) -> Dict[str, float]:
         """Get response time percentiles for performance analysis."""
         if not self.response_times:
@@ -333,7 +398,11 @@ class EnterpriseMetricsCollector:
         
         # Structured logging
         self.logger = structlog.get_logger("pydantic_ai.metrics")
-    
+```
+
+Now we implement the core method for recording agent request metrics:
+
+```python
     def record_request(
         self, 
         agent_id: str, 
@@ -351,7 +420,11 @@ class EnterpriseMetricsCollector:
             self.agent_metrics[agent_id] = AgentMetrics(agent_id)
         
         agent_metrics = self.agent_metrics[agent_id]
-        
+```
+
+Next, we record success or error metrics and update global statistics:
+
+```python
         if success:
             agent_metrics.record_success(response_time, tokens_used, estimated_cost)
             self.global_metrics.record_success(response_time, tokens_used, estimated_cost)
@@ -359,7 +432,11 @@ class EnterpriseMetricsCollector:
             error_type = error_type or "unknown_error"
             agent_metrics.record_error(error_type, response_time)
             self.global_metrics.record_error(error_type, response_time)
-        
+```
+
+Finally, we handle custom metrics and structured logging:
+
+```python
         # Record custom metrics
         if custom_metrics:
             for metric_name, metric_value in custom_metrics.items():
@@ -396,7 +473,7 @@ Integration with Prometheus provides industry-standard metrics collection and al
         
         metrics_output = []
         
-        # Global metrics
+        # Global metrics with standard Prometheus format
         global_summary = self.get_global_summary()
         metrics_output.extend([
             f"# HELP pydantic_ai_requests_total Total number of requests",
@@ -410,8 +487,12 @@ Integration with Prometheus provides industry-standard metrics collection and al
             f"# HELP pydantic_ai_response_time_seconds Response time in seconds",
             f"# TYPE pydantic_ai_response_time_seconds histogram"
         ])
-        
-        # Per-agent metrics
+```
+
+Now we add per-agent metrics to the Prometheus export:
+
+```python
+        # Per-agent metrics with proper labeling
         for agent_id in self.agent_metrics.keys():
             summary = self.get_agent_summary(agent_id)
             if summary:
@@ -450,7 +531,11 @@ from dataclasses import dataclass
 T = TypeVar('T')
 K = TypeVar('K')
 V = TypeVar('V')
+```
 
+Now we define the cache entry data structure with intelligent metadata tracking:
+
+```python
 @dataclass
 class CacheEntry(Generic[V]):
     """Cache entry with metadata for intelligent eviction."""
@@ -502,7 +587,11 @@ class IntelligentCache(Generic[K, V]):
             'evictions': 0,
             'expired_cleanups': 0
         }
-    
+```
+
+Now we implement the intelligent cache retrieval method with access tracking:
+
+```python
     def get(self, key: K) -> Optional[V]:
         """Get value from cache with intelligent access tracking."""
         with self._lock:
@@ -528,7 +617,11 @@ class IntelligentCache(Generic[K, V]):
             self._stats['hits'] += 1
             
             return entry.value
-    
+```
+
+Next, we implement the cache storage method with intelligent eviction:
+
+```python
     def set(self, key: K, value: V, ttl_seconds: float = None) -> None:
         """Set value in cache with intelligent eviction."""
         with self._lock:
@@ -539,7 +632,11 @@ class IntelligentCache(Generic[K, V]):
             if key in self._cache:
                 old_entry = self._cache.pop(key)
                 self._total_size_bytes -= old_entry.size_bytes
-            
+```
+
+Next, we create the new cache entry with proper metadata:
+
+```python
             # Create new entry
             entry = CacheEntry(
                 value=value,
@@ -556,7 +653,11 @@ class IntelligentCache(Generic[K, V]):
             # Add new entry
             self._cache[key] = entry
             self._total_size_bytes += size_bytes
-    
+```
+
+Finally, we add helper methods for size calculation, LRU eviction, and statistics:
+
+```python
     def _calculate_size(self, obj: Any) -> int:
         """Estimate object size in bytes for memory management."""
         try:
@@ -574,7 +675,11 @@ class IntelligentCache(Generic[K, V]):
             key, entry = self._cache.popitem(last=False)  # Remove oldest (LRU)
             self._total_size_bytes -= entry.size_bytes
             self._stats['evictions'] += 1
-    
+```
+
+Finally, we provide comprehensive cache performance statistics:
+
+```python
     def get_stats(self) -> Dict[str, Any]:
         """Get comprehensive cache performance statistics."""
         with self._lock:
@@ -606,14 +711,18 @@ def cached_agent_method(
     def decorator(func: Callable) -> Callable:
         @wraps(func)
         async def wrapper(*args, **kwargs):
-            # Generate cache key
+            # Generate cache key using custom generator or default hashing
             if key_generator:
                 cache_key = key_generator(*args, **kwargs)
             else:
                 key_data = f"{func.__name__}:{hash(str(args) + str(sorted(kwargs.items())))}"
                 cache_key = hashlib.md5(key_data.encode()).hexdigest()
-            
-            # Try to get from cache
+```
+
+Now we handle cache lookup and function execution:
+
+```python
+            # Try to get from cache first
             cached_result = cache.get(cache_key)
             if cached_result is not None:
                 return cached_result
@@ -638,6 +747,44 @@ You've now mastered testing and benchmarking for PydanticAI, including:
 ✅ **Performance Monitoring**: Implemented enterprise metrics collection with Prometheus integration  
 ✅ **Intelligent Caching**: Created high-performance caching with LRU eviction and memory management  
 ✅ **Production Monitoring**: Built observability with distributed tracing and structured logging
+
+---
+
+## 📝 Multiple Choice Test - Module D
+
+Test your understanding of testing and benchmarking systems:
+
+**Question 1:** What does the comprehensive integration test framework validate?
+A) Only basic functionality  
+B) Valid inputs, error scenarios, edge cases, and performance under load  
+C) Simple unit tests only  
+D) Manual testing procedures  
+
+**Question 2:** How does the MetricsCollector track agent performance data?
+A) Simple counters only  
+B) Comprehensive metrics with request counts, response times, error rates, and success rates  
+C) Binary success/failure tracking  
+D) Manual logging only  
+
+**Question 3:** What eviction strategy does the IntelligentCache use when memory limits are reached?
+A) Random removal  
+B) LRU (Least Recently Used) with memory usage tracking  
+C) First-in-first-out only  
+D) Manual cache clearing  
+
+**Question 4:** What information does the performance decorator capture for monitoring?
+A) Just execution time  
+B) Request metrics, performance data, error tracking, and distributed tracing  
+C) Function names only  
+D) Memory usage only  
+
+**Question 5:** How does the load testing framework simulate realistic usage patterns?
+A) Single threaded execution  
+B) Concurrent user simulation with configurable load patterns and performance analysis  
+C) Random API calls  
+D) Simple sequential testing  
+
+[**🗂️ View Test Solutions →**](Session5_ModuleD_Test_Solutions.md)
 
 ### Next Steps
 - **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)

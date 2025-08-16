@@ -25,7 +25,7 @@ By the end of this module, you will:
 
 🗂️ **File**: `src/session6/enterprise_context.py` - Production context management
 
-Enterprise atomic agents require sophisticated context awareness that goes beyond simple configuration:
+Enterprise atomic agents require sophisticated context awareness that goes beyond simple configuration. Let's start by defining the foundational types and enums:
 
 ```python
 from typing import Dict, List, Any, Optional, Protocol, runtime_checkable
@@ -35,7 +35,13 @@ from datetime import datetime, timedelta
 import asyncio
 import logging
 from enum import Enum
+```
 
+The import statements establish our foundation for enterprise context management, including typing for strong contracts and asyncio for scalable operations.
+
+Next, we define the hierarchical context scope system that enables granular control over information access:
+
+```python
 class ContextScope(Enum):
     """Scope levels for enterprise context"""
     GLOBAL = "global"          # Organization-wide context
@@ -44,7 +50,11 @@ class ContextScope(Enum):
     PROJECT = "project"        # Project-level context
     USER = "user"             # User-specific context
     SESSION = "session"       # Session-specific context
+```
 
+This scope hierarchy allows agents to access context at appropriate organizational levels, ensuring security and relevance. Now we need metadata structures to track context lifecycle:
+
+```python
 @dataclass
 class ContextMetadata:
     """Metadata for context entries"""
@@ -55,7 +65,11 @@ class ContextMetadata:
     expires_at: Optional[datetime] = None
     tags: List[str] = field(default_factory=list)
     access_control: Dict[str, List[str]] = field(default_factory=dict)
+```
 
+The metadata structure provides audit trails, expiration management, and access control - critical for enterprise compliance. Finally, we define the contract that all context providers must implement:
+
+```python
 @runtime_checkable
 class EnterpriseContextProvider(Protocol):
     """Protocol for enterprise context providers"""
@@ -78,6 +92,9 @@ class EnterpriseContextProvider(Protocol):
         """Invalidate context entry"""
         ...
 
+Now let's implement the policy context provider that manages enterprise compliance and governance rules:
+
+```python
 class PolicyContextProvider:
     """Enterprise policy and compliance context provider"""
     
@@ -86,7 +103,11 @@ class PolicyContextProvider:
         self.policy_cache = {}
         self.cache_ttl = timedelta(minutes=30)
         self.logger = logging.getLogger(__name__)
-        
+```
+
+The policy provider manages enterprise governance rules with configurable caching to balance performance with policy freshness. The main context retrieval method implements intelligent caching:
+
+```python
     async def get_context(self, scope: ContextScope, 
                          context_key: str, 
                          user_id: Optional[str] = None) -> Dict[str, Any]:
@@ -111,6 +132,9 @@ class PolicyContextProvider:
         
         return policy_context
     
+The core policy fetching logic assembles comprehensive enterprise governance rules:
+
+```python
     async def _fetch_policy_context(self, scope: ContextScope, 
                                    context_key: str, 
                                    user_id: Optional[str]) -> Dict[str, Any]:
@@ -136,7 +160,11 @@ class PolicyContextProvider:
                 "session_timeout_minutes": 60
             }
         }
-        
+```
+
+These base policies establish enterprise-wide standards for data protection, AI governance, and security. The system then applies contextual overrides:
+
+```python
         # Apply user-specific overrides
         if user_id:
             user_policies = await self._get_user_specific_policies(user_id)
@@ -154,6 +182,9 @@ class PolicyContextProvider:
             "compliance_frameworks": ["GDPR", "SOX", "HIPAA", "ISO27001"]
         }
     
+The policy system provides role-based customization to ensure users get appropriate permissions:
+
+```python
     async def _get_user_specific_policies(self, user_id: str) -> Dict[str, Any]:
         """Get user-specific policy overrides"""
         
@@ -177,7 +208,11 @@ class PolicyContextProvider:
             }
         
         return user_policies
-    
+```
+
+This role-based approach ensures that different user types get appropriate policy configurations. The role lookup system integrates with enterprise identity management:
+
+```python
     async def _get_user_roles(self, user_id: str) -> List[str]:
         """Get user roles from identity management system"""
         # Simulate role lookup
@@ -188,6 +223,9 @@ class PolicyContextProvider:
         }
         return role_mapping.get(user_id, ["user"])
 
+Next, we implement the business context provider that gives agents awareness of market and operational conditions:
+
+```python
 class BusinessContextProvider:
     """Business context provider for market and operational awareness"""
     
@@ -195,7 +233,11 @@ class BusinessContextProvider:
         self.data_sources = business_data_sources
         self.context_cache = {}
         self.logger = logging.getLogger(__name__)
-        
+```
+
+The business context provider connects agents to real-world business intelligence, making them aware of market conditions and operational constraints. The main context retrieval method routes to specialized context types:
+
+```python
     async def get_context(self, scope: ContextScope, 
                          context_key: str, 
                          user_id: Optional[str] = None) -> Dict[str, Any]:
@@ -214,6 +256,9 @@ class BusinessContextProvider:
         
         return business_context
     
+The market context method provides agents with comprehensive market intelligence:
+
+```python
     async def _get_market_context(self) -> Dict[str, Any]:
         """Get current market conditions and trends"""
         
@@ -241,6 +286,9 @@ class BusinessContextProvider:
             "data_confidence": 0.85
         }
     
+This market intelligence enables agents to make business-aware decisions based on current economic and competitive conditions. The operational context provides real-time system health and performance data:
+
+```python
     async def _get_operational_context(self) -> Dict[str, Any]:
         """Get current operational metrics and system health"""
         
@@ -272,6 +320,9 @@ class BusinessContextProvider:
             }
         }
 
+This operational context enables agents to make resource-aware decisions and respond to system constraints. Now we implement the orchestrator that coordinates multiple context providers:
+
+```python
 class EnterpriseContextOrchestrator:
     """Orchestrates multiple context providers for comprehensive enterprise awareness"""
     
@@ -280,7 +331,11 @@ class EnterpriseContextOrchestrator:
         self.context_hierarchy = {}
         self.access_policies = {}
         self.logger = logging.getLogger(__name__)
-        
+```
+
+The orchestrator manages multiple context providers, enabling agents to access comprehensive enterprise intelligence from a single interface. Provider registration establishes priority and access control:
+
+```python
     def register_provider(self, provider_name: str, 
                          provider: EnterpriseContextProvider,
                          priority: int = 5):
@@ -293,6 +348,9 @@ class EnterpriseContextOrchestrator:
             "last_accessed": None
         }
     
+The core orchestration method aggregates context from multiple providers based on priority:
+
+```python
     async def get_comprehensive_context(self, scope: ContextScope,
                                       context_keys: List[str],
                                       user_id: Optional[str] = None) -> Dict[str, Any]:
@@ -314,7 +372,11 @@ class EnterpriseContextOrchestrator:
             key=lambda x: self.context_hierarchy[x[0]]["priority"],
             reverse=True
         )
-        
+```
+
+The method iterates through providers in priority order, collecting context while handling failures gracefully:
+
+```python
         for context_key in context_keys:
             context_data = {}
             
@@ -342,6 +404,9 @@ class EnterpriseContextOrchestrator:
         
         return comprehensive_context
     
+The orchestrator also provides context integration capabilities for agent prompts:
+
+```python
     def apply_context_to_prompt(self, base_prompt: str, 
                                context: Dict[str, Any],
                                context_integration_strategy: str = "append") -> str:
@@ -355,7 +420,11 @@ class EnterpriseContextOrchestrator:
             return self._template_context_strategy(base_prompt, context)
         else:
             return base_prompt
-    
+```
+
+The append strategy provides a simple but effective way to add context to agent prompts:
+
+```python
     def _append_context_strategy(self, prompt: str, context: Dict[str, Any]) -> str:
         """Append context information to the end of the prompt"""
         
@@ -369,7 +438,11 @@ class EnterpriseContextOrchestrator:
                     context_section += f"• {provider_name}: {self._format_context_data(data)}\n"
         
         return prompt + context_section
-    
+```
+
+The formatting utility ensures context data is presented in a digestible format for language models:
+
+```python
     def _format_context_data(self, data: Dict[str, Any]) -> str:
         """Format context data for prompt inclusion"""
         

@@ -35,12 +35,17 @@ Protocols define the contracts that all service implementations must follow, ena
 ```python
 # Essential imports for dependency injection
 from pydantic_ai.dependencies import DependencyProvider, Injectable, Scope
-from typing import Protocol, runtime_checkable
+from typing import Protocol, runtime_checkable, Dict, Any, Optional
 from dataclasses import dataclass
 from contextlib import asynccontextmanager
 import asyncio
 import logging
+import uuid
+```
 
+Now we define service interface protocols for type-safe dependency injection:
+
+```python
 # Service interface definitions using Protocol pattern
 @runtime_checkable
 class DatabaseService(Protocol):
@@ -54,7 +59,11 @@ class ExternalAPIService(Protocol):
     """Protocol for external API integrations."""
     async def fetch_data(self, query: str) -> Dict[str, Any]: ...
     async def validate_source(self, source_url: str) -> bool: ...
-    
+```
+
+Finally, we add the cache service protocol:
+
+```python
 @runtime_checkable
 class CacheService(Protocol):
     """Protocol for caching operations with TTL support."""
@@ -84,7 +93,11 @@ class ProductionDatabaseService:
         # In real implementation, this would create actual connection pool
         self._connection_pool = f"ConnectionPool({self.connection_string}, size={self.pool_size})"
         logging.info(f"Database service initialized: {self._connection_pool}")
-    
+```
+
+Now we implement the core database operations with proper error handling:
+
+```python
     async def save_result(self, result_data: Dict[str, Any]) -> str:
         """Save agent result to production database with transaction safety."""
         # In production, this would use proper database transactions
@@ -126,7 +139,11 @@ class TestDatabaseService:
         self.data_store[result_id] = result_data
         self.call_log.append(("save", result_id, result_data))
         return result_id
-    
+```
+
+Now we add retrieval and health check methods with call tracking:
+
+```python
     async def get_result(self, result_id: str) -> Optional[Dict[str, Any]]:
         """Retrieve result from in-memory store with call logging."""
         self.call_log.append(("get", result_id))
@@ -167,7 +184,11 @@ class DependencyContainer:
         """Register a singleton service that lives for the container lifetime."""
         self.factories[interface] = lambda: implementation(*args, **kwargs)
         self.initialization_order.append(interface)
-    
+```
+
+Now we implement the service resolution with proper lifecycle management:
+
+```python
     async def get_service(self, interface: Type, scope: str = "default") -> Any:
         """Resolve service instance with proper initialization and lifecycle management."""
         
@@ -260,7 +281,11 @@ class ProductionAgentBase(ABC):
         self._request_times: List[float] = []
         self._executor = ThreadPoolExecutor(max_workers=4)
         self._health_status = "healthy"
-        
+```
+
+Now we define the abstract interface that all production agents must implement:
+
+```python
     @abstractmethod
     async def _process_core_request(self, request: BaseModel) -> BaseModel:
         """Core request processing logic - must be implemented by subclasses."""
@@ -289,7 +314,11 @@ Request processing includes comprehensive monitoring, error handling, and perfor
             self._health_status = "healthy"
             
             return result
-            
+```
+
+Now we handle errors and track performance metrics in the exception handler:
+
+```python
         except Exception as e:
             # Track failure
             self.metrics.failed_requests += 1
@@ -378,8 +407,13 @@ import secrets
 from typing import List, Optional, Dict, Any
 from datetime import datetime, timedelta, timezone
 from pydantic import BaseModel, Field
+from enum import Enum
 import logging
+```
 
+Now we define the security configuration model for enterprise deployments:
+
+```python
 class SecurityConfig(BaseModel):
     """Security configuration for enterprise deployments."""
     
@@ -409,7 +443,11 @@ class AuthenticationService:
     def __init__(self, config: SecurityConfig):
         self.config = config
         self.logger = logging.getLogger(__name__)
-    
+```
+
+Next, we implement JWT token creation with proper security and expiration:
+
+```python
     def create_access_token(self, user_id: str, roles: List[UserRole]) -> str:
         """Create JWT access token with user information and roles."""
         now = datetime.now(timezone.utc)
@@ -424,7 +462,11 @@ class AuthenticationService:
         token = jwt.encode(payload, self.config.jwt_secret_key, algorithm="HS256")
         self.logger.info(f"Created access token for user {user_id}")
         return token
-    
+```
+
+Finally, we add secure token verification with proper error handling:
+
+```python
     def verify_token(self, token: str) -> Optional[Dict[str, Any]]:
         """Verify JWT token and return user information."""
         try:
@@ -465,7 +507,11 @@ class DataPrivacyService:
         
         if 'user_id' in anonymized:
             anonymized['user_hash'] = self._hash_pii(anonymized.pop('user_id'))
-        
+```
+
+Now we remove sensitive fields and provide PII hashing for anonymization:
+
+```python
         # Remove sensitive fields
         sensitive_fields = ['ssn', 'phone', 'address', 'credit_card']
         for field in sensitive_fields:
@@ -501,7 +547,11 @@ class AuditLogger:
         audit_handler.setFormatter(audit_formatter)
         self.audit_logger.addHandler(audit_handler)
         self.audit_logger.setLevel(logging.INFO)
-    
+```
+
+Now we implement the core audit logging functionality:
+
+```python
     def log_agent_request(
         self, 
         user_id: str, 
@@ -537,6 +587,44 @@ You've now mastered enterprise PydanticAI patterns, including:
 ✅ **Production Scalability**: Implemented monitoring, metrics, and concurrent processing  
 ✅ **Enterprise Security**: Created authentication, authorization, and compliance systems  
 ✅ **Audit & Monitoring**: Built comprehensive logging and health monitoring
+
+---
+
+## 📝 Multiple Choice Test - Module B
+
+Test your understanding of enterprise PydanticAI patterns and production systems:
+
+**Question 1:** What design pattern does the dependency injection system use for service management?
+A) Singleton pattern with global state  
+B) Protocol-based interfaces with container-managed lifecycles  
+C) Static factory methods only  
+D) Direct class instantiation  
+
+**Question 2:** How does the ProductionAgent handle concurrent request processing?
+A) Sequential processing only  
+B) Semaphore-controlled concurrency with configurable limits and performance tracking  
+C) Unlimited concurrent execution  
+D) Single-threaded execution with queuing  
+
+**Question 3:** What security measures does the EnterpriseSecurityAgent implement for authentication?
+A) Simple password checking  
+B) JWT token validation, role-based authorization, and audit logging  
+C) Basic username verification  
+D) No authentication required  
+
+**Question 4:** What information does the comprehensive audit logging system capture?
+A) Only request timestamps  
+B) Complete request/response tracking with user context, performance metrics, and error details  
+C) Simple success/failure flags  
+D) Database query logs only  
+
+**Question 5:** How does the health monitoring system track service dependencies?
+A) Manual status checks only  
+B) Automated dependency health checks with circuit breaker integration and alert generation  
+C) Simple ping tests  
+D) Log file analysis only  
+
+[**🗂️ View Test Solutions →**](Session5_ModuleB_Test_Solutions.md)
 
 ### Next Steps
 - **Continue to Module C**: [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md) for specialized validation patterns
