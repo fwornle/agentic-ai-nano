@@ -11,7 +11,9 @@
 This module explores comprehensive security and compliance frameworks for enterprise agent systems including GDPR compliance, RBAC implementation, advanced encryption strategies, audit logging, zero-trust architecture, and regulatory compliance patterns. You'll learn to build enterprise-grade security systems that meet the highest standards for data protection and regulatory requirements.
 
 ### Learning Objectives
+
 By the end of this module, you will:
+
 - Implement GDPR-compliant data handling with automated privacy protection
 - Design comprehensive RBAC systems with fine-grained access control
 - Create zero-trust security architectures with end-to-end encryption
@@ -25,6 +27,8 @@ By the end of this module, you will:
 
 🗂️ **File**: `src/session10/security/gdpr_compliance.py` - GDPR compliance framework
 
+Let's start by setting up the foundational imports and enumerations for our GDPR compliance system. This demonstrates the comprehensive scope of data protection requirements in enterprise systems:
+
 ```python
 from typing import Dict, List, Any, Optional, Set
 from dataclasses import dataclass, field
@@ -35,7 +39,11 @@ import json
 import hashlib
 import logging
 from abc import ABC, abstractmethod
+```
 
+Next, we define the GDPR legal basis types, which form the foundation of all data processing activities. Every piece of personal data must have a valid legal basis under GDPR Article 6:
+
+```python
 class LegalBasisType(Enum):
     """GDPR legal basis for data processing"""
     CONSENT = "consent"
@@ -45,6 +53,11 @@ class LegalBasisType(Enum):
     PUBLIC_TASK = "public_task"
     LEGITIMATE_INTERESTS = "legitimate_interests"
 
+```
+
+We also need to define the data subject rights that individuals can exercise under GDPR. These rights form the core of data protection and must be implemented in any compliant system:
+
+```python
 class DataSubjectRights(Enum):
     """GDPR data subject rights"""
     ACCESS = "access"           # Article 15
@@ -55,6 +68,11 @@ class DataSubjectRights(Enum):
     OBJECT = "object"          # Article 21
     WITHDRAW_CONSENT = "withdraw_consent"  # Article 7
 
+```
+
+Now we create a comprehensive data structure to track every piece of personal data with its GDPR metadata. This demonstrates the principle of accountability - we must be able to prove compliance for every data element:
+
+```python
 @dataclass
 class PersonalDataElement:
     """Individual personal data element with GDPR metadata"""
@@ -71,6 +89,11 @@ class PersonalDataElement:
     last_accessed: datetime = field(default_factory=datetime.now)
     encryption_status: str = "encrypted"
 
+```
+
+Next, we implement the main GDPR compliance manager class. This serves as the central orchestrator for all data protection activities, maintaining comprehensive records as required by GDPR Articles 30 and 35:
+
+```python
 class GDPRComplianceManager:
     """Comprehensive GDPR compliance management system"""
     
@@ -82,6 +105,11 @@ class GDPRComplianceManager:
         self.privacy_impact_assessments: Dict[str, Dict[str, Any]] = {}
         self.logger = logging.getLogger(__name__)
         
+```
+
+The data registration method implements the core principle of lawful processing. Before any personal data can be stored, we must validate the legal basis and obtain consent where required:
+
+```python
     async def register_personal_data(self, data_element: PersonalDataElement,
                                    data_subject_id: str) -> Dict[str, Any]:
         """Register personal data with GDPR compliance tracking"""
@@ -101,7 +129,11 @@ class GDPRComplianceManager:
                     'success': False,
                     'error': 'Valid consent required for processing'
                 }
-        
+```
+
+After validation, we register the data element and perform necessary compliance actions including logging and privacy impact assessment triggers:
+
+```python
         # Register data element
         registry_key = f"{data_subject_id}:{data_element.element_id}"
         self.personal_data_registry[registry_key] = data_element
@@ -124,6 +156,11 @@ class GDPRComplianceManager:
             'retention_until': datetime.now() + timedelta(days=data_element.retention_period_days)
         }
     
+```
+
+The data subject request handler is the cornerstone of GDPR compliance, implementing all the rights guaranteed to individuals under Articles 15-22:
+
+```python
     async def handle_data_subject_request(self, request_type: DataSubjectRights,
                                         data_subject_id: str,
                                         request_details: Dict[str, Any] = None) -> Dict[str, Any]:
@@ -138,7 +175,11 @@ class GDPRComplianceManager:
                 'success': False,
                 'error': 'Data subject identity validation failed'
             }
-        
+```
+
+The routing logic directs requests to specialized handlers, each implementing specific GDPR article requirements:
+
+```python
         # Process specific request type
         if request_type == DataSubjectRights.ACCESS:
             result = await self._handle_access_request(data_subject_id)
@@ -156,7 +197,11 @@ class GDPRComplianceManager:
             result = await self._handle_consent_withdrawal(data_subject_id, request_details)
         else:
             result = {'success': False, 'error': 'Unsupported request type'}
-        
+```
+
+Comprehensive audit trails ensure accountability and transparency:
+
+```python
         # Store request record
         self.data_subject_requests[request_id] = {
             'request_type': request_type.value,
@@ -177,6 +222,11 @@ class GDPRComplianceManager:
         
         return {**result, 'request_id': request_id}
     
+```
+
+The access request handler implements Article 15 (Right of access), which requires providing comprehensive information about all data processing. This is often the most complex right to implement:
+
+```python
     async def _handle_access_request(self, data_subject_id: str) -> Dict[str, Any]:
         """Handle Article 15 - Right of access by the data subject"""
         
@@ -194,7 +244,11 @@ class GDPRComplianceManager:
                     'created_at': data_element.created_at.isoformat(),
                     'last_accessed': data_element.last_accessed.isoformat()
                 }
-        
+```
+
+We must also include processing activities and third-party sharing information to provide complete transparency as required by Article 15:
+
+```python
         # Include processing activities
         processing_info = [
             activity for activity in self.processing_activities
@@ -216,6 +270,11 @@ class GDPRComplianceManager:
             'format': 'structured_json'
         }
     
+```
+
+The erasure request handler implements Article 17 (Right to be forgotten), one of the most challenging rights to implement as it requires careful legal analysis and comprehensive data removal:
+
+```python
     async def _handle_erasure_request(self, data_subject_id: str, 
                                     request_details: Dict[str, Any]) -> Dict[str, Any]:
         """Handle Article 17 - Right to erasure (right to be forgotten)"""
@@ -229,7 +288,11 @@ class GDPRComplianceManager:
                 'error': 'Erasure not permitted',
                 'reason': erasure_permitted['reason']
             }
-        
+```
+
+When erasure is permitted, we must systematically remove all traces of the individual's data from our systems:
+
+```python
         # Perform erasure
         erased_elements = []
         
@@ -247,7 +310,11 @@ class GDPRComplianceManager:
                 'erasure_timestamp': datetime.now().isoformat()
             })
             del self.personal_data_registry[key]
-        
+```
+
+Critically, we must also handle cascade effects including consent record removal and third-party notifications as required by Article 17(2):
+
+```python
         # Remove consent records
         if data_subject_id in self.consent_records:
             del self.consent_records[data_subject_id]
@@ -262,6 +329,11 @@ class GDPRComplianceManager:
             'third_party_notifications': third_party_notifications
         }
     
+```
+
+The data portability handler implements Article 20, which applies only to data processed under consent or contract legal bases. This creates a machine-readable export for data subject empowerment:
+
+```python
     async def _handle_portability_request(self, data_subject_id: str) -> Dict[str, Any]:
         """Handle Article 20 - Right to data portability"""
         
@@ -278,7 +350,11 @@ class GDPRComplianceManager:
                     'created_at': data_element.created_at.isoformat(),
                     'legal_basis': data_element.legal_basis.value
                 }
-        
+```
+
+The export package includes comprehensive metadata and integrity verification to ensure the portability package meets technical and security requirements:
+
+```python
         # Create portable format
         portable_package = {
             'data_subject_id': data_subject_id,
@@ -301,6 +377,11 @@ class GDPRComplianceManager:
             'encryption_available': True
         }
     
+```
+
+The consent management system is fundamental to GDPR compliance, implementing the requirements for valid, specific, informed, and freely given consent under Article 7:
+
+```python
     async def manage_consent(self, data_subject_id: str, purpose: str,
                            consent_given: bool, consent_details: Dict[str, Any] = None) -> Dict[str, Any]:
         """Manage GDPR consent with granular controls"""
@@ -317,7 +398,11 @@ class GDPRComplianceManager:
             'withdrawal_timestamp': None,
             'is_active': consent_given
         }
-        
+```
+
+Consent storage and withdrawal handling must implement cascade effects as required by Article 7(3) - consent withdrawal must be as easy as giving consent:
+
+```python
         # Store consent record
         if data_subject_id not in self.consent_records:
             self.consent_records[data_subject_id] = {}
@@ -341,6 +426,11 @@ class GDPRComplianceManager:
             'status': 'active' if consent_given else 'withdrawn'
         }
     
+```
+
+The Privacy Impact Assessment (PIA) implementation follows Article 35 requirements, mandating systematic privacy risk evaluation for high-risk processing:
+
+```python
     async def perform_data_protection_impact_assessment(self, 
                                                       processing_activity: Dict[str, Any]) -> Dict[str, Any]:
         """Perform Data Protection Impact Assessment (DPIA) as required by Article 35"""
@@ -355,7 +445,11 @@ class GDPRComplianceManager:
         
         # Evaluate safeguards and measures
         safeguards_assessment = await self._assess_safeguards(processing_activity)
-        
+```
+
+The comprehensive risk analysis combines necessity, risk, and safeguards assessments to determine if supervisory authority consultation is required:
+
+```python
         # Overall risk determination
         overall_risk = await self._determine_overall_risk(
             necessity_assessment, risk_assessment, safeguards_assessment
@@ -384,6 +478,11 @@ class GDPRComplianceManager:
             'recommendations': overall_risk['recommendations']
         }
     
+```
+
+The compliance reporting system provides comprehensive oversight and demonstrates accountability as required by Article 5(2). This generates executive-level compliance dashboards:
+
+```python
     async def generate_compliance_report(self) -> Dict[str, Any]:
         """Generate comprehensive GDPR compliance report"""
         
@@ -402,7 +501,11 @@ class GDPRComplianceManager:
                 if elem.is_sensitive
             ])
         }
-        
+```
+
+Rights request metrics demonstrate our responsiveness to data subject exercises, which is critical for regulatory audits:
+
+```python
         # Rights requests statistics
         rights_stats = {
             'total_requests': len(self.data_subject_requests),
@@ -417,7 +520,11 @@ class GDPRComplianceManager:
             'average_response_time_hours': 48,  # Calculated from actual response times
             'compliance_rate': 100.0
         }
-        
+```
+
+The comprehensive report combines all compliance dimensions into a single accountability document:
+
+```python
         # Consent management statistics
         consent_stats = {
             'total_consents': sum(len(consents) for consents in self.consent_records.values()),
@@ -455,7 +562,11 @@ class GDPRComplianceManager:
         }
         
         return compliance_report
-    
+```
+
+The compliance scoring algorithm provides quantitative assessment of GDPR adherence for management oversight:
+
+```python
     def _calculate_compliance_score(self) -> float:
         """Calculate overall GDPR compliance score"""
         
@@ -478,13 +589,22 @@ class GDPRComplianceManager:
         
         return round(score, 1)
 
+```
+
+Advanced data anonymization techniques protect against re-identification while preserving data utility. K-anonymity ensures each individual cannot be distinguished from at least k-1 others:
+
+```python
 class DataAnonymization:
     """Advanced data anonymization and pseudonymization techniques"""
     
     def __init__(self):
         self.anonymization_techniques = {}
         self.pseudonymization_keys = {}
-        
+```
+
+K-anonymity implementation groups records by quasi-identifiers and applies generalization or suppression to meet privacy requirements:
+
+```python
     async def k_anonymize_dataset(self, dataset: List[Dict[str, Any]], 
                                 k_value: int = 5,
                                 quasi_identifiers: List[str] = None) -> Dict[str, Any]:
@@ -500,7 +620,11 @@ class DataAnonymization:
             if qi_signature not in groups:
                 groups[qi_signature] = []
             groups[qi_signature].append(record)
-        
+```
+
+Records that don't meet the k-anonymity threshold are either generalized (reducing precision) or suppressed (removed) to prevent re-identification:
+
+```python
         # Identify groups smaller than k
         small_groups = {sig: records for sig, records in groups.items() if len(records) < k_value}
         
@@ -529,6 +653,11 @@ class DataAnonymization:
             'privacy_level': f"{k_value}-anonymous"
         }
     
+```
+
+Differential privacy provides mathematically rigorous privacy guarantees by adding calibrated noise to query results, ensuring individual contributions cannot be detected:
+
+```python
     async def differential_privacy_noise(self, query_result: float,
                                        epsilon: float = 1.0,
                                        sensitivity: float = 1.0) -> Dict[str, Any]:
@@ -551,13 +680,22 @@ class DataAnonymization:
             'privacy_guarantee': f"({epsilon}, 0)-differential privacy"
         }
 
+```
+
+Comprehensive audit logging is essential for GDPR accountability, providing detailed records of all data processing activities for regulatory compliance and security monitoring:
+
+```python
 class AuditLoggingSystem:
     """Comprehensive audit logging for GDPR compliance"""
     
     def __init__(self):
         self.audit_logs: List[Dict[str, Any]] = []
         self.log_retention_days = 2555  # 7 years for compliance
-        
+```
+
+Data access logging captures all interactions with personal data, creating immutable audit trails for compliance verification:
+
+```python
     async def log_data_access(self, access_details: Dict[str, Any]):
         """Log data access events"""
         
@@ -576,6 +714,11 @@ class AuditLoggingSystem:
         
         self.audit_logs.append(log_entry)
         
+```
+
+Data modification logging captures all changes to personal data, supporting both security monitoring and data subject rights verification:
+
+```python
     async def log_data_modification(self, modification_details: Dict[str, Any]):
         """Log data modification events"""
         
@@ -592,6 +735,11 @@ class AuditLoggingSystem:
         
         self.audit_logs.append(log_entry)
     
+```
+
+Audit report generation provides comprehensive analysis of all logged activities, supporting compliance demonstrations and security investigations:
+
+```python
     async def generate_audit_report(self, start_date: datetime = None, 
                                   end_date: datetime = None) -> Dict[str, Any]:
         """Generate comprehensive audit report"""
@@ -634,6 +782,8 @@ class AuditLoggingSystem:
 
 🗂️ **File**: `src/session10/security/enterprise_auth.py` - Advanced RBAC and zero-trust security
 
+Now we implement advanced Role-Based Access Control (RBAC) with zero-trust principles. Let's start with the foundational imports and permission system:
+
 ```python
 from typing import Dict, List, Any, Optional, Set
 from dataclasses import dataclass, field
@@ -644,7 +794,11 @@ import jwt
 import hashlib
 import logging
 from abc import ABC, abstractmethod
+```
 
+Granular permissions form the foundation of enterprise access control, enabling fine-grained authorization decisions based on the principle of least privilege:
+
+```python
 class Permission(Enum):
     """Granular permission system"""
     READ_PERSONAL_DATA = "read_personal_data"
@@ -657,6 +811,11 @@ class Permission(Enum):
     COMPLIANCE_VIEW = "compliance_view"
     SECURITY_ADMIN = "security_admin"
 
+```
+
+Next, we define comprehensive role and user data structures that support hierarchical roles and attribute-based access control (ABAC):
+
+```python
 @dataclass
 class Role:
     """Enterprise role with fine-grained permissions"""
@@ -667,7 +826,11 @@ class Role:
     created_at: datetime = field(default_factory=datetime.now)
     is_active: bool = True
     parent_roles: Set[str] = field(default_factory=set)
-    
+```
+
+User objects integrate RBAC with additional security attributes, supporting multi-factor authentication and session management:
+
+```python
 @dataclass
 class User:
     """Enterprise user with RBAC"""
@@ -682,6 +845,11 @@ class User:
     password_hash: str = ""
     mfa_enabled: bool = False
 
+```
+
+The Zero-Trust Security Manager implements the core principle of "never trust, always verify" with comprehensive session management and policy enforcement:
+
+```python
 class ZeroTrustSecurityManager:
     """Zero-trust security architecture implementation"""
     
@@ -696,6 +864,11 @@ class ZeroTrustSecurityManager:
         # Initialize default roles
         self._initialize_default_roles()
         
+```
+
+Default role initialization establishes enterprise-standard roles that align with organizational structures and regulatory requirements:
+
+```python
     def _initialize_default_roles(self):
         """Initialize enterprise default roles"""
         
@@ -723,7 +896,11 @@ class ZeroTrustSecurityManager:
             },
             description="Full system administration role"
         )
-        
+```
+
+We also define operational roles that provide least-privilege access for day-to-day business functions:
+
+```python
         # Data Analyst
         analyst_role = Role(
             role_id="data_analyst",
@@ -750,6 +927,11 @@ class ZeroTrustSecurityManager:
             "customer_service": csr_role
         })
     
+```
+
+Multi-factor authentication with zero-trust verification ensures that every authentication attempt is thoroughly validated before granting access:
+
+```python
     async def authenticate_user(self, username: str, password: str,
                               additional_factors: Dict[str, Any] = None) -> Dict[str, Any]:
         """Multi-factor authentication with zero-trust verification"""
@@ -767,7 +949,11 @@ class ZeroTrustSecurityManager:
                 'reason': 'user_not_found_or_inactive'
             })
             return {'success': False, 'error': 'Authentication failed'}
-        
+```
+
+Password verification and multi-factor authentication create multiple security layers, following defense-in-depth principles:
+
+```python
         # Verify password
         if not self._verify_password(password, user.password_hash):
             await self._log_security_event("authentication_failed", {
@@ -782,7 +968,11 @@ class ZeroTrustSecurityManager:
             mfa_result = await self._verify_mfa(user, additional_factors or {})
             if not mfa_result['success']:
                 return mfa_result
-        
+```
+
+Successful authentication creates a comprehensive security context and generates secure session tokens for subsequent authorization decisions:
+
+```python
         # Create security context
         security_context = await self._create_security_context(user)
         
@@ -810,6 +1000,11 @@ class ZeroTrustSecurityManager:
             'security_context': security_context
         }
     
+```
+
+Zero-trust authorization validates every request, regardless of the user's authentication status, implementing continuous verification principles:
+
+```python
     async def authorize_request(self, session_token: str, 
                               required_permission: Permission,
                               resource_context: Dict[str, Any] = None) -> Dict[str, Any]:
@@ -831,7 +1026,11 @@ class ZeroTrustSecurityManager:
                 'resource_context': resource_context
             })
             return {'authorized': False, 'error': 'Insufficient permissions'}
-        
+```
+
+Contextual access policies add dynamic authorization layers based on environmental factors, time, location, and data sensitivity:
+
+```python
         # Apply contextual access policies
         policy_result = await self._evaluate_access_policies(
             user, required_permission, resource_context or {}
@@ -864,6 +1063,11 @@ class ZeroTrustSecurityManager:
             'access_constraints': policy_result.get('constraints', {})
         }
     
+```
+
+Security context creation establishes comprehensive user context including permissions, risk assessment, and ABAC attributes for informed authorization decisions:
+
+```python
     async def _create_security_context(self, user: User) -> Dict[str, Any]:
         """Create comprehensive security context for user"""
         
@@ -897,6 +1101,11 @@ class ZeroTrustSecurityManager:
         
         return security_context
     
+```
+
+Dynamic access policy evaluation implements contextual security controls that adapt to environmental factors, data sensitivity, and operational constraints:
+
+```python
     async def _evaluate_access_policies(self, user: User, permission: Permission,
                                       resource_context: Dict[str, Any]) -> Dict[str, Any]:
         """Evaluate dynamic access policies"""
@@ -917,7 +1126,11 @@ class ZeroTrustSecurityManager:
                 'allowed': False,
                 'reason': 'Sensitive data access not allowed from remote locations'
             }
-        
+```
+
+Data classification and clearance level policies ensure only authorized personnel can access highly sensitive information:
+
+```python
         # Data sensitivity-based access
         data_classification = resource_context.get('data_classification')
         if data_classification == 'highly_confidential':
@@ -948,6 +1161,11 @@ class ZeroTrustSecurityManager:
             }
         }
     
+```
+
+Attribute-Based Access Control (ABAC) provides fine-grained authorization decisions based on subject, object, environment, and action attributes:
+
+```python
     async def implement_attribute_based_access_control(self, 
                                                      request_context: Dict[str, Any]) -> Dict[str, Any]:
         """Advanced ABAC (Attribute-Based Access Control) implementation"""
@@ -956,7 +1174,11 @@ class ZeroTrustSecurityManager:
         object_attrs = request_context.get('object_attributes', {})
         environment_attrs = request_context.get('environment_attributes', {})
         action = request_context.get('action')
-        
+```
+
+The ABAC policy engine evaluates complex rules using lambda functions for flexible, runtime-configurable authorization policies:
+
+```python
         # ABAC policy engine
         policy_rules = [
             {
@@ -988,7 +1210,11 @@ class ZeroTrustSecurityManager:
                 'reason': 'Cross-department data access requires admin role'
             }
         ]
-        
+```
+
+Policy evaluation follows a deny-by-default approach, with explicit allow decisions only when no restrictive policies match:
+
+```python
         # Evaluate policies
         for rule in policy_rules:
             if rule['condition'](subject_attrs, object_attrs, environment_attrs, action):
@@ -1005,6 +1231,11 @@ class ZeroTrustSecurityManager:
             'reason': 'No restrictive policies applied'
         }
     
+```
+
+Dynamic risk scoring evaluates multiple factors to adjust security controls based on user behavior and environmental conditions:
+
+```python
     async def _calculate_user_risk_score(self, user: User) -> float:
         """Calculate dynamic user risk score"""
         
@@ -1036,6 +1267,11 @@ class ZeroTrustSecurityManager:
         
         return min(1.0, base_risk + additional_risk)
 
+```
+
+Comprehensive security event logging provides real-time threat detection and forensic capabilities for enterprise security operations:
+
+```python
 class SecurityEventLogger:
     """Comprehensive security event logging"""
     
@@ -1046,7 +1282,11 @@ class SecurityEventLogger:
             'privilege_escalation_attempts': 3,
             'suspicious_access_patterns': 10
         }
-        
+```
+
+Security event logging captures detailed information about all security-relevant activities with automated threat analysis:
+
+```python
     async def log_security_event(self, event_type: str, event_details: Dict[str, Any]):
         """Log security events with threat detection"""
         
@@ -1063,6 +1303,11 @@ class SecurityEventLogger:
         # Check for security threats
         await self._analyze_for_threats(event)
         
+```
+
+Severity calculation enables prioritized security response and automated alerting based on threat levels:
+
+```python
     def _calculate_event_severity(self, event_type: str, details: Dict[str, Any]) -> str:
         """Calculate event severity for security monitoring"""
         
@@ -1085,7 +1330,11 @@ class SecurityEventLogger:
             return 'medium'
         else:
             return 'low'
-    
+```
+
+Threat analysis automatically detects common attack patterns including brute force attempts and privilege escalation:
+
+```python
     async def _analyze_for_threats(self, event: Dict[str, Any]):
         """Analyze events for security threats"""
         
@@ -1100,6 +1349,11 @@ class SecurityEventLogger:
         # Check for unusual access patterns
         await self._check_access_patterns(event)
     
+```
+
+Security reporting provides executive-level dashboards and operational intelligence for security teams to assess threat landscape and system health:
+
+```python
     async def generate_security_report(self, hours: int = 24) -> Dict[str, Any]:
         """Generate comprehensive security report"""
         
@@ -1136,6 +1390,8 @@ class SecurityEventLogger:
 
 🗂️ **File**: `src/session10/security/encryption_framework.py` - Advanced encryption systems
 
+Enterprise-grade encryption requires comprehensive key management and multiple encryption algorithms. Let's start with the essential imports and key management structures:
+
 ```python
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
@@ -1149,7 +1405,11 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import base64
 import os
 import json
+```
 
+Encryption keys require comprehensive metadata tracking for enterprise security compliance and operational management:
+
+```python
 @dataclass
 class EncryptionKey:
     """Encryption key with metadata"""
@@ -1161,6 +1421,11 @@ class EncryptionKey:
     algorithm: str = "AES-256-GCM"
     purpose: str = "data_encryption"
 
+```
+
+The Advanced Encryption Manager orchestrates all cryptographic operations with comprehensive key lifecycle management and audit capabilities:
+
+```python
 class AdvancedEncryptionManager:
     """Enterprise-grade encryption management system"""
     
@@ -1169,6 +1434,11 @@ class AdvancedEncryptionManager:
         self.key_rotation_schedule: Dict[str, timedelta] = {}
         self.encrypted_data_registry: Dict[str, Dict[str, Any]] = {}
         
+```
+
+Key generation creates both symmetric and asymmetric keys, supporting hybrid encryption schemes that combine the efficiency of symmetric encryption with the security of asymmetric key exchange:
+
+```python
     async def generate_encryption_keys(self, purpose: str = "data_encryption") -> Dict[str, Any]:
         """Generate comprehensive encryption key set"""
         
@@ -1185,7 +1455,11 @@ class AdvancedEncryptionManager:
             algorithm="Fernet",
             purpose=purpose
         )
-        
+```
+
+RSA key pair generation provides secure key exchange capabilities with enterprise-grade 4096-bit keys:
+
+```python
         # Generate RSA key pair for key exchange
         private_key = rsa.generate_private_key(
             public_exponent=65537,
@@ -1202,7 +1476,11 @@ class AdvancedEncryptionManager:
             format=serialization.PrivateFormat.PKCS8,
             encryption_algorithm=serialization.NoEncryption()
         )
-        
+```
+
+Key object creation and storage with rotation scheduling ensures proper key lifecycle management:
+
+```python
         public_key_obj = EncryptionKey(
             key_id=f"{key_set_id}_public",
             key_type="asymmetric_public",
@@ -1238,6 +1516,11 @@ class AdvancedEncryptionManager:
             'keys_generated_at': datetime.now().isoformat()
         }
     
+```
+
+Data encryption with comprehensive metadata tracking ensures auditability and compliance with data protection regulations:
+
+```python
     async def encrypt_sensitive_data(self, data: str, key_id: str,
                                    classification: str = "confidential") -> Dict[str, Any]:
         """Encrypt sensitive data with comprehensive protection"""
@@ -1254,7 +1537,11 @@ class AdvancedEncryptionManager:
             
         else:
             return {'success': False, 'error': 'Unsupported key type for data encryption'}
-        
+```
+
+Encryption metadata includes integrity hashes and classification information for comprehensive data governance:
+
+```python
         # Create encryption metadata
         encryption_metadata = {
             'encrypted_at': datetime.now().isoformat(),
@@ -1281,6 +1568,11 @@ class AdvancedEncryptionManager:
             'metadata': encryption_metadata
         }
     
+```
+
+Decryption with comprehensive access logging provides audit trails essential for compliance and security monitoring:
+
+```python
     async def decrypt_sensitive_data(self, encrypted_data_id: str, 
                                    accessor_id: str,
                                    purpose: str) -> Dict[str, Any]:
@@ -1309,7 +1601,11 @@ class AdvancedEncryptionManager:
             
         except Exception as e:
             return {'success': False, 'error': f'Decryption failed: {str(e)}'}
-        
+```
+
+Access logging captures who accessed what data for what purpose, creating immutable audit trails:
+
+```python
         # Log access
         access_entry = {
             'accessor_id': accessor_id,
@@ -1327,6 +1623,11 @@ class AdvancedEncryptionManager:
             'access_logged': True
         }
     
+```
+
+Field-level encryption enables granular data protection within database records, allowing different encryption policies for different data types:
+
+```python
     async def implement_field_level_encryption(self, record: Dict[str, Any],
                                              field_encryption_map: Dict[str, str]) -> Dict[str, Any]:
         """Implement field-level encryption for database records"""
@@ -1356,6 +1657,11 @@ class AdvancedEncryptionManager:
             'original_fields_encrypted': list(field_encryption_map.keys())
         }
     
+```
+
+Key rotation is essential for maintaining cryptographic security over time, requiring careful coordination to avoid data loss:
+
+```python
     async def rotate_encryption_keys(self, key_id: str) -> Dict[str, Any]:
         """Rotate encryption keys for security"""
         
@@ -1393,10 +1699,19 @@ class AdvancedEncryptionManager:
             'grace_period_days': 30
         }
     
+```
+
+Data integrity verification through cryptographic hashing ensures encrypted data hasn't been tampered with:
+
+```python
     def _compute_hash(self, data: str) -> str:
         """Compute SHA-256 hash for data integrity"""
         return hashlib.sha256(data.encode()).hexdigest()
-    
+```
+
+Encryption status reporting provides operational intelligence for security teams and compliance auditors:
+
+```python
     async def get_encryption_status_report(self) -> Dict[str, Any]:
         """Generate comprehensive encryption status report"""
         
@@ -1434,6 +1749,11 @@ class AdvancedEncryptionManager:
             'recommendations': self._generate_encryption_recommendations(key_stats, data_stats)
         }
     
+```
+
+Recommendation generation provides actionable insights for maintaining optimal encryption security posture:
+
+```python
     def _generate_encryption_recommendations(self, key_stats: Dict[str, Any],
                                            data_stats: Dict[str, Any]) -> List[str]:
         """Generate encryption recommendations"""
@@ -1465,6 +1785,7 @@ You've now mastered advanced security and compliance for enterprise agent system
 ✅ **Zero-Trust Security**: Implemented context-aware authentication and authorization systems
 
 ### Next Steps
+
 - **Continue to Module B**: [Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md) for operational excellence
 - **Return to Core**: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)
 - **Portfolio Project**: Build a complete enterprise-grade secure agent system
@@ -1472,6 +1793,79 @@ You've now mastered advanced security and compliance for enterprise agent system
 ---
 
 **🗂️ Source Files for Module A:**
+
 - `src/session10/security/gdpr_compliance.py` - Comprehensive GDPR compliance framework
 - `src/session10/security/enterprise_auth.py` - Advanced RBAC and zero-trust security
 - `src/session10/security/encryption_framework.py` - Enterprise encryption and key management
+
+---
+
+## 📝 Multiple Choice Test - Module A
+
+Test your understanding of advanced security and compliance for enterprise agent systems:
+
+**Question 1:** Under GDPR, which legal basis requires the most complex implementation due to withdrawal requirements and proof of consent?
+
+A) Contract  
+B) Legal obligation  
+C) Consent  
+D) Legitimate interests  
+
+**Question 2:** In zero-trust architecture, what principle governs every access request?
+
+A) Trust but verify  
+B) Never trust, always verify  
+C) Verify once, trust always  
+D) Trust by default  
+
+**Question 3:** What is the primary purpose of k-anonymity in data anonymization?
+
+A) To encrypt sensitive data  
+B) To ensure each individual cannot be distinguished from at least k-1 others  
+C) To hash personal identifiers  
+D) To compress large datasets  
+
+**Question 4:** In ABAC (Attribute-Based Access Control), which attributes are NOT typically evaluated?
+
+A) Subject attributes  
+B) Object attributes  
+C) Environment attributes  
+D) Network attributes  
+
+**Question 5:** What is the recommended approach for key rotation in enterprise encryption systems?
+
+A) Immediate replacement without grace period  
+B) Rotate keys only when compromised  
+C) Generate new key and provide grace period for old key  
+D) Never rotate keys to avoid data loss  
+
+**Question 6:** Which GDPR article mandates Data Protection Impact Assessments (DPIA) for high-risk processing?
+
+A) Article 15  
+B) Article 17  
+C) Article 20  
+D) Article 35  
+
+**Question 7:** In field-level encryption, what is the primary advantage over full-record encryption?
+
+A) Faster encryption performance  
+B) Granular protection allowing different encryption policies per field  
+C) Smaller storage requirements  
+D) Simplified key management  
+
+[**🗂️ View Test Solutions →**](Session10A_Test_Solutions.md)
+
+---
+
+## 🧭 Navigation
+
+**Previous: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)**
+
+**Optional Deep Dive Modules:**
+
+- **[🔒 Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)**
+- **[⚙️ Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)**
+
+**[📝 Test Your Knowledge: Session 10A Solutions](Session10A_Test_Solutions.md)**
+
+**[Next: Session 11 (Coming Soon) →](Session11_Advanced_Production_Patterns.md)**
