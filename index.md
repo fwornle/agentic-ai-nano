@@ -192,6 +192,7 @@ Ready to begin your journey? Choose your starting point:
 
 ---
 
+
 **Ready to become an expert in Agentic AI?** Choose your path and start your journey today!
 
 [Get Started with Agent Frameworks →](01_frameworks/index.md){ .md-button .md-button--primary }
