@@ -55,9 +55,14 @@ class MemoryOptimizedAgent(BaseAgent):
 ```
 
 The agent uses a `deque` with a hard maximum to prevent unbounded memory growth, while the configurable memory limit allows fine-tuning based on deployment constraints.
+
+```python
         self.importance_threshold = 0.5
         self.cleanup_interval = 100  # Clean up every N messages
         self.message_count = 0
+```
+
+The additional configuration parameters control memory management behavior: importance_threshold determines the minimum significance level for keeping entries, cleanup_interval sets how frequently maintenance occurs, and message_count tracks when to trigger cleanup operations.
 
 ### Conversation History Optimization
 
@@ -81,12 +86,20 @@ def add_to_memory(self, content: str, importance_score: float = 0.5):
 
 Each entry tracks its actual memory footprint using `sys.getsizeof()`, enabling precise memory management decisions based on real usage rather than estimates.
 
+Next, the method implements proactive memory management by checking cleanup intervals:
+
 ```python
     # Check if cleanup is needed
     self.message_count += 1
     if self.message_count % self.cleanup_interval == 0:
         self._cleanup_memory()
-    
+```
+
+Regular cleanup prevents memory from growing unchecked. The message counter triggers maintenance at predetermined intervals, ensuring consistent performance.
+
+Finally, the method adds the entry and handles emergency cleanup situations:
+
+```python
     # Add entry
     self.memory_entries.append(entry)
     
@@ -97,6 +110,10 @@ Each entry tracks its actual memory footprint using `sys.getsizeof()`, enabling 
 
 Regular cleanup prevents memory from growing unchecked, while emergency cleanup handles situations where memory limits are exceeded despite regular maintenance.
 
+### Intelligent Memory Cleanup
+
+The cleanup method implements a sophisticated algorithm that balances importance and recency:
+
 ```python
 def _cleanup_memory(self):
     """Intelligent memory cleanup based on importance and age"""
@@ -106,23 +123,31 @@ def _cleanup_memory(self):
     
     # Convert to list for easier manipulation
     entries_list = list(self.memory_entries)
-    
+```
+
+First, the method checks for empty memory and converts the deque to a list for sorting operations. This conversion is necessary because deques don't support the sorting operations required.
+
+Next, the algorithm sorts entries using a composite key that considers both importance and chronological order:
+
+```python
     # Sort by importance and age (keep important recent items)
     entries_list.sort(key=lambda x: (x.importance_score, x.timestamp))
     
     # Keep top 70% of entries
     keep_count = int(len(entries_list) * 0.7)
     entries_to_keep = entries_list[-keep_count:]
-    
+```
+
+The sorting prioritizes entries by both importance and age, ensuring critical recent information is preserved. Keeping 70% of entries provides a balance between memory conservation and information retention.
+
+Finally, the method updates the memory structure and logs the cleanup operation:
+
+```python
     # Update deque
     self.memory_entries.clear()
     for entry in entries_to_keep:
         self.memory_entries.append(entry)
-```
-
-The cleanup algorithm prioritizes entries by both importance and age, ensuring critical recent information is preserved while older, less important content is removed.
-
-```python
+    
     self.logger.info(f"Memory cleanup: kept {len(entries_to_keep)} entries")
 
 def _get_total_memory_usage(self) -> int:
@@ -131,6 +156,10 @@ def _get_total_memory_usage(self) -> int:
 ```
 
 Utility methods track memory consumption by summing the size_bytes field of all entries, providing accurate memory usage data for optimization decisions.
+
+### Comprehensive Memory Statistics
+
+The statistics method provides detailed analytics for memory management optimization:
 
 ```python
 def get_memory_stats(self) -> Dict[str, Any]:
@@ -142,7 +171,13 @@ def get_memory_stats(self) -> Dict[str, Any]:
         avg_importance = sum(e.importance_score for e in self.memory_entries) / total_entries
         oldest_entry = min(self.memory_entries, key=lambda x: x.timestamp)
         newest_entry = max(self.memory_entries, key=lambda x: x.timestamp)
-        
+```
+
+The method starts by collecting basic metrics and identifying temporal boundaries. Average importance helps understand the quality of retained information.
+
+Next, it calculates comprehensive utilization and temporal metrics:
+
+```python
         return {
             "total_entries": total_entries,
             "total_memory_mb": total_bytes / (1024 * 1024),
@@ -175,6 +210,8 @@ def get_compressed_context(self, max_context_size: int = 2000) -> str:
 
 The sorting algorithm weights importance higher (70%) than recency (30%), ensuring critical information is prioritized while still valuing recent context.
 
+Next, the method builds the context string using a greedy packing approach:
+
 ```python
     # Build context within size limit
     context_parts = []
@@ -189,6 +226,8 @@ The sorting algorithm weights importance higher (70%) than recency (30%), ensuri
 ```
 
 The packing algorithm greedily includes entries until the size limit is reached, maximizing the amount of relevant context provided to the LLM.
+
+Finally, the method handles truncation gracefully by informing the LLM about omitted content:
 
 ```python
     # Add summary if we had to truncate
@@ -275,6 +314,8 @@ Intelligent caching excludes tools with side effects or time-dependent results, 
 
 ### Intelligent Tool Caching
 
+### Intelligent Tool Caching Implementation
+
 The caching system balances performance gains with result freshness:
 
 ```python
@@ -290,6 +331,8 @@ async def execute_tool_cached(self, tool_name: str, params: Dict[str, Any]) -> D
 
 Each execution is timed for performance analysis, and cacheable tools are checked for existing results before expensive re-execution.
 
+The cache validation process includes TTL (Time-To-Live) checks to ensure result freshness:
+
 ```python
         if cache_key in self.tool_cache:
             cached_result = self.tool_cache[cache_key]
@@ -301,6 +344,8 @@ Each execution is timed for performance analysis, and cacheable tools are checke
 ```
 
 Cache validation includes expiry checks (1-hour TTL) to balance performance gains with result freshness. Cache hits are tracked in performance statistics to measure caching effectiveness.
+
+When cache misses occur, the system executes the tool and stores results for future use:
 
 ```python
     # Execute tool
@@ -318,7 +363,7 @@ Cache validation includes expiry checks (1-hour TTL) to balance performance gain
         }
 ```
 
-When cache misses occur, the tool is executed normally and results are stored in the cache with timestamps for future TTL validation.
+Finally, performance statistics are updated regardless of cache hit or miss:
 
 ```python
     # Update performance stats
@@ -327,6 +372,7 @@ When cache misses occur, the tool is executed normally and results are stored in
     
     return result
 
+```python
 def _update_stats(self, tool_name: str, execution_time: float, cache_hit: bool):
     """Update tool execution statistics"""
     if tool_name not in self.execution_stats:
@@ -350,16 +396,14 @@ Performance statistics track execution times, call counts, and cache hit rates p
 
 ### Parallel Tool Execution
 
+### Parallel Tool Execution
+
 Parallel execution maximizes throughput when multiple tools can run simultaneously:
 
 ```python
 async def execute_tools_parallel(self, tool_requests: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Execute multiple tools in parallel for better performance"""
-```
-
-The parallel execution system handles multiple tool requests concurrently, significantly reducing total execution time for independent operations.
-
-```python
+    
     async def execute_single_tool(request):
         tool_name = request["tool"]
         params = request.get("params", {})
@@ -368,11 +412,23 @@ The parallel execution system handles multiple tool requests concurrently, signi
             return {"success": True, "result": result, "tool": tool_name}
         except Exception as e:
             return {"success": False, "error": str(e), "tool": tool_name}
-    
+```
+
+The parallel execution system handles multiple tool requests concurrently, significantly reducing total execution time for independent operations. Each tool execution is wrapped in error handling to prevent one failure from affecting others.
+
+Next, the method executes all requests concurrently using asyncio.gather:
+
+```python
     # Execute all tool requests concurrently
     tasks = [execute_single_tool(request) for request in tool_requests]
     results = await asyncio.gather(*tasks, return_exceptions=True)
-    
+```
+
+The `return_exceptions=True` parameter ensures that exceptions don't cancel other concurrent operations, allowing partial success scenarios.
+
+Finally, the method processes results and handles any exceptions that occurred:
+
+```python
     # Handle any exceptions
     processed_results = []
     for result in results:
@@ -386,7 +442,13 @@ The parallel execution system handles multiple tool requests concurrently, signi
             processed_results.append(result)
     
     return processed_results
+```
 
+### Performance Statistics Collection
+
+Comprehensive performance tracking enables data-driven optimization decisions:
+
+```python
 def get_performance_stats(self) -> Dict[str, Any]:
     """Get comprehensive performance statistics"""
     total_calls = sum(stats["total_calls"] for stats in self.execution_stats.values())
@@ -430,7 +492,11 @@ class FastResponseAgent(BaseAgent):
 
 The agent initialization sets up caching infrastructure and tracks response times with a configurable target latency (2 seconds default), enabling performance-driven optimizations.
 
-```python        
+### Fast Message Processing
+
+The core processing method implements multiple optimization strategies:
+
+```python
     async def process_message_fast(self, message: str) -> Dict[str, Any]:
         """Process message with speed optimizations"""
         start_time = time.time()
@@ -449,6 +515,8 @@ The agent initialization sets up caching infrastructure and tracks response time
 
 The processing method starts with timing and immediately checks for exact cache matches, providing sub-millisecond responses for repeated messages. All response times are tracked for performance analysis.
 
+When exact matches aren't available, the system uses fuzzy matching for similar queries:
+
 ```python
         # Check for similar message (fuzzy matching)
         similar_response = self._find_similar_response(message)
@@ -463,6 +531,8 @@ The processing method starts with timing and immediately checks for exact cache 
 ```
 
 When exact matches fail, fuzzy matching using Jaccard similarity finds responses to similar messages, significantly reducing response time while maintaining quality for semantically related queries.
+
+For new messages, the system uses timeout controls to ensure timely responses:
 
 ```python
         # Generate new response with timeout
@@ -489,6 +559,10 @@ When exact matches fail, fuzzy matching using Jaccard similarity finds responses
 
 For new messages, the system uses asyncio timeout to enforce response time limits. When LLM processing exceeds the target time, fallback responses ensure users always receive timely feedback.
 
+### Fuzzy Matching Algorithm
+
+The similarity detection system uses Jaccard coefficient for semantic matching:
+
 ```python
     def _find_similar_response(self, message: str) -> Optional[str]:
         """Find cached response for similar message using fuzzy matching"""
@@ -496,7 +570,13 @@ For new messages, the system uses asyncio timeout to enforce response time limit
         
         best_match = None
         best_similarity = 0.0
-        
+```
+
+The method starts by converting the input message to a set of lowercase words, enabling case-insensitive comparison and duplicate removal.
+
+Next, it iterates through all cached messages to find the best semantic match:
+
+```python
         for cached_message, cached_response in self.response_cache.items():
             cached_words = set(cached_message.lower().split())
             
@@ -533,7 +613,9 @@ The similarity algorithm uses Jaccard coefficient to compare word sets, requirin
             return fallback_responses[2]
 ```
 
-### Performance Monitoring
+### Performance Monitoring and Analytics
+
+Comprehensive performance tracking enables data-driven optimization:
 
 ```python
 def get_response_time_stats(self) -> Dict[str, Any]:
@@ -543,7 +625,13 @@ def get_response_time_stats(self) -> Dict[str, Any]:
     
     sorted_times = sorted(self.response_times)
     n = len(sorted_times)
-    
+```
+
+The analytics method starts by validating data availability and sorting response times for percentile calculations.
+
+Next, it calculates comprehensive performance metrics:
+
+```python
     return {
         "total_responses": n,
         "avg_response_time": sum(sorted_times) / n,
@@ -558,7 +646,11 @@ def get_response_time_stats(self) -> Dict[str, Any]:
     }
 ```
 
-The analytics method provides comprehensive performance metrics including percentile distributions (P50, P90, P95) that are essential for understanding response time characteristics under different load conditions.
+The analytics provide comprehensive performance metrics including percentile distributions (P50, P90, P95) that are essential for understanding response time characteristics under different load conditions.
+
+### Automated Performance Optimization
+
+The system automatically adjusts its behavior based on performance metrics:
 
 ```python
 async def optimize_performance(self):
@@ -575,7 +667,13 @@ async def optimize_performance(self):
     elif stats["target_achievement_rate"] < 50:
         # Struggling, be more lenient
         self.target_response_time *= 1.2
-    
+```
+
+The optimization algorithm adjusts targets based on actual performance: when achieving 90%+ success rate, it becomes more ambitious; when below 50%, it becomes more lenient.
+
+Finally, the system manages cache size to prevent memory issues:
+
+```python
     # Clean cache if it's getting too large
     if len(self.response_cache) > 1000:
         # Keep only most recent 500 entries
@@ -591,42 +689,37 @@ async def optimize_performance(self):
 
 Test your understanding of performance optimization concepts:
 
-**Question 1:** What information does the `MemoryEntry` dataclass track to enable intelligent memory management?
-
+**Question 1:** What information does the `MemoryEntry` dataclass track to enable intelligent memory management?  
 A) Only content and timestamp  
 B) Content, timestamp, importance_score, and size_bytes  
 C) Just the memory size and creation time  
 D) Content and importance score only  
 
-**Question 2:** How does the memory cleanup algorithm prioritize which entries to keep?
-
+**Question 2:** How does the memory cleanup algorithm prioritize which entries to keep?  
 A) Random selection  
 B) First-in-first-out (FIFO)  
 C) Sorts by importance and age, keeps top 70%  
 D) Only keeps the most recent entries  
 
-**Question 3:** Why are certain tools marked as non-cacheable in the optimization system?
-
+**Question 3:** Why are certain tools marked as non-cacheable in the optimization system?  
 A) They consume too much memory  
 B) They have side effects or time-dependent results  
 C) They execute too slowly  
 D) They require special permissions  
 
-**Question 4:** What technique does the context compression use to fit within size limits?
-
+**Question 4:** What technique does the context compression use to fit within size limits?  
 A) Truncates all messages to the same length  
 B) Removes all older messages completely  
 C) Weights importance (70%) higher than recency (30%) when sorting  
 D) Compresses text using algorithms  
 
-**Question 5:** What does the performance monitoring system track to optimize agent responses?
-
+**Question 5:** What does the performance monitoring system track to optimize agent responses?  
 A) Only response times  
 B) Memory usage exclusively  
 C) Response times, percentiles, cache hit rates, and target achievement  
 D) Just error rates and failures  
 
-[**View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session1_ModuleB_Test_Solutions.md`
 
 ---
 
@@ -639,14 +732,18 @@ You've now mastered performance optimization for bare metal agents:
 ✅ **Response Time Optimization**: Created strategies for faster agent responses with fallback mechanisms  
 ✅ **Performance Monitoring**: Designed analytics systems for continuous performance improvement
 
-### Next Steps
-- **Continue to Module C**: [Complex State Management](Session1_ModuleC_Complex_State_Management.md) for advanced memory systems
-- **Return to Core**: [Session 1 Main](Session1_Bare_Metal_Agents.md)
-- **Advance to Session 2**: [LangChain Foundations](Session2_LangChain_Foundations.md)
+## 🧭 Navigation
+
+**Related Modules:**
+- **Core Session:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
+- **Module A:** [Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)
+- **Module C:** [Complex State Management](Session1_ModuleC_Complex_State_Management.md)
+
+**🗂️ Code Files:** All examples use files in `src/session1/`
+- `memory_optimized_agent.py` - Memory-efficient agent implementations
+- `optimized_tools.py` - High-performance tool execution
+- `fast_response_agent.py` - Speed-optimized response generation
+
+**🚀 Quick Start:** Run `cd src/session1 && python demo_runner.py` to see performance optimization examples
 
 ---
-
-**🗂️ Source Files for Module B:**
-- `src/session1/memory_optimized_agent.py` - Memory-efficient agent implementations
-- `src/session1/optimized_tools.py` - High-performance tool execution
-- `src/session1/fast_response_agent.py` - Speed-optimized response generation

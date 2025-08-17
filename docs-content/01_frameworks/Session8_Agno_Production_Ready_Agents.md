@@ -769,19 +769,19 @@ B) Authentication, authorization, encryption, and audit logging
 C) Network isolation only  
 D) No security needed  
 
+[**🗂️ View Test Solutions →**](Session8_Test_Solutions.md)
+
+## 🧭 Navigation
+
+**Previous:** [Session 7 - First ADK Agent](Session7_First_ADK_Agent.md)
+
+**Optional Deep Dive Modules:**
+
+- 🔬 **[Module A: Advanced Monitoring & Observability](Session8_ModuleA_Advanced_Monitoring_Observability.md)** - Production monitoring
+- 🏭 **[Module B: Enterprise Scaling Architecture](Session8_ModuleB_Enterprise_Scaling_Architecture.md)** - Scaling patterns
+- ⚡ **[Module C: Performance Optimization](Session8_ModuleC_Performance_Optimization.md)** - Optimization techniques  
+- 🔒 **[Module D: Security & Compliance](Session8_ModuleD_Security_Compliance.md)** - Security patterns
+
+**Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+
 ---
-
-### Practical Validation
-Build a working production system that:
-- Deploys an agent with Docker
-- Includes monitoring and health checks
-- Handles errors gracefully
-- Has basic security measures
-
-**🗂️ View Test Solutions**: Complete answers and explanations available in `Session8_Test_Solutions.md`
-
-**Success Criteria**: Score 8+ out of 10 to demonstrate mastery of production agent systems.
-
----
-
-[← Back to Session 7](Session7_First_ADK_Agent.md) | [Next: Session 9 →](Session9_Multi_Agent_Patterns.md)

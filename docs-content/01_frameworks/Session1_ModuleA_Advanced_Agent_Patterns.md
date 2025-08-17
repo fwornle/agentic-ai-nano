@@ -63,6 +63,8 @@ class ReflectionAgent(BaseAgent):
 
 ### The Core Reflection Loop
 
+The core reflection loop orchestrates the iterative improvement process:
+
 ```python
 # From src/session1/reflection_agent.py (continued)
 async def _generate_response(self, message: str, context: Dict = None) -> str:
@@ -77,7 +79,11 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
         if self._is_response_satisfactory(critique):
             self.logger.info(f"Response satisfactory after {iteration + 1} iterations")
             break
-        
+```
+
+The loop continues with improvement and tracking phases:
+
+```python
         # Step 3: Improve response based on critique
         improved_response = await self._improve_response(
             message, current_response, critique
@@ -165,7 +171,7 @@ async def _improve_response(self, message: str, current_response: str, critique:
 
 ### Planning Agent Architecture
 
-🗂️ **File**: `src/session1/planning_agent.py` - Multi-step planning implementation
+🗂️ **File**: `src/session1/react_agent.py` - Multi-step planning implementation
 
 Complex tasks require breaking down into manageable steps with proper execution order and dependency handling:
 
@@ -210,6 +216,8 @@ class PlanningAgent(BaseAgent):
 
 The planning system breaks complex tasks into manageable, executable steps with clear dependencies:
 
+The planning system breaks complex tasks into manageable, executable steps with clear dependencies:
+
 ```python
 async def create_plan(self, complex_task: str) -> List[PlanStep]:
     """Break down complex task into executable steps"""
@@ -226,7 +234,11 @@ async def create_plan(self, complex_task: str) -> List[PlanStep]:
     Format as a numbered list with dependencies noted.
     Be specific and actionable.
     """
-    
+```
+
+After generating the plan text, it's parsed into structured objects:
+
+```python
     plan_text = await self._call_llm(planning_prompt)
     
     # Parse the plan into PlanStep objects
@@ -475,19 +487,21 @@ The final integration step combines individual agent results into a cohesive res
 
 Task analysis uses the LLM to understand which specialized agents are needed:
 
+Task analysis uses the LLM to understand which specialized agents are needed:
+
 ```python
 async def _analyze_task_requirements(self, task: str) -> Dict[str, Any]:
     """Analyze what types of agents are needed for this task"""
     analysis_prompt = f"""
     Analyze this task and determine what types of specialized agents would be needed:
     Task: {task}
+    
+    Available agent types: {list(self.agents.keys())}
 ```
 
-The task analysis prompt asks the LLM to break down the task requirements and identify which types of specialized agents would be most effective for each component.
+The analysis provides context about available agents and requests specific justifications:
 
 ```python
-    Available agent types: {list(self.agents.keys())}
-    
     For each needed agent type, specify:
     1. What specific subtask they should handle
     2. Why this agent type is appropriate
@@ -507,42 +521,37 @@ The analysis provides context about available agents and requests specific justi
 
 Test your understanding of advanced agent patterns:
 
-**Question 1:** What is the key mechanism that prevents infinite loops in reflection agents?
-
+**Question 1:** What is the key mechanism that prevents infinite loops in reflection agents?  
 A) Memory limitations  
 B) Maximum iteration limits with satisfactory conditions  
 C) Network timeouts  
 D) User intervention  
 
-**Question 2:** In multi-step planning, what is the primary purpose of dependency management?
-
+**Question 2:** In multi-step planning, what is the primary purpose of dependency management?  
 A) Reducing memory usage  
 B) Ensuring steps execute in the correct order  
 C) Speeding up execution  
 D) Simplifying code structure  
 
-**Question 3:** What does the planning agent's `_parse_plan_text` method accomplish?
-
+**Question 3:** What does the planning agent's `_parse_plan_text` method accomplish?  
 A) Generates new plans from scratch  
 B) Converts LLM-generated text into structured PlanStep objects  
 C) Executes individual plan steps  
 D) Validates plan correctness  
 
-**Question 4:** In multi-agent orchestration, what information is stored in communication patterns?
-
+**Question 4:** In multi-agent orchestration, what information is stored in communication patterns?  
 A) Complete message history with full content  
 B) Summarized message data with sender, recipient, and timestamp  
 C) Only error messages  
 D) Agent performance metrics  
 
-**Question 5:** What is the three-phase approach used in collaborative task management?
-
+**Question 5:** What is the three-phase approach used in collaborative task management?  
 A) Planning, execution, validation  
 B) Analysis, delegation, integration  
 C) Task analysis, delegation plan creation, plan execution  
 D) Registration, routing, completion
 
-[**View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session1_ModuleA_Test_Solutions.md`
 
 ---
 
@@ -555,15 +564,22 @@ You've now mastered advanced agent patterns including:
 ✅ **Multi-Agent Orchestration**: Created coordination systems for specialized agent collaboration  
 ✅ **Self-Improvement Mechanisms**: Designed agents that enhance their performance over time
 
-### Next Steps
-- **Continue to Module B**: [Performance Optimization](Session1_ModuleB_Performance_Optimization.md) for speed & efficiency patterns
-- **Continue to Module C**: [Complex State Management](Session1_ModuleC_Complex_State_Management.md) for advanced memory systems
-- **Return to Core**: [Session 1 Main](Session1_Bare_Metal_Agents.md)
-- **Advance to Session 2**: [LangChain Foundations](Session2_LangChain_Foundations.md)
-
 ---
 
-**🗂️ Source Files for Module A:**
-- `src/session1/reflection_agent.py` - Self-improving reflection agents
-- `src/session1/planning_agent.py` - Multi-step planning implementation
-- `src/session1/multi_agent_system.py` - Multi-agent coordination system
+## 🧭 Navigation & Quick Start
+
+**Related Modules:**
+
+- **Core Session:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
+- **Module B:** [Performance Optimization](Session1_ModuleB_Performance_Optimization.md)
+- **Module C:** [Complex State Management](Session1_ModuleC_Complex_State_Management.md)
+
+**🗂️ Code Files:** All examples use files in `src/session1/`
+
+- `reflection_agent.py` - Self-improving reflection agents
+- `react_agent.py` - Multi-step planning implementation (includes planning patterns)
+- `multi_agent_system.py` - Multi-agent coordination system
+
+**🚀 Quick Start:** Run `cd src/session1 && python demo_runner.py` to see implementations
+
+**Next Session:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md) →

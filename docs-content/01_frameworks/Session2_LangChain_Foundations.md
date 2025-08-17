@@ -529,7 +529,6 @@ result = agent.run("Help me with a simple task")
 - **[🏭 Module B: Production Deployment Strategies →](Session2_ModuleB_Production_Deployment_Strategies.md)** - Enterprise deployment & monitoring
 - **[🔧 Module C: Custom Tool Development →](Session2_ModuleC_Custom_Tool_Development.md)** - Building specialized tools
 - **[📊 Module D: Performance & Monitoring →](Session2_ModuleD_Performance_Monitoring.md)** - Optimization & observability
-- **[📝 Test Your Knowledge →](Session2_Test_Solutions.md)** - Comprehensive quiz
 - **[📖 Next Session: LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)** - Graph-based workflows
 
 ### 🎆 Complete Learning Path Options
@@ -537,23 +536,6 @@ result = agent.run("Help me with a simple task")
 **Sequential Learning**: Core → Module A → Module B → Module C → Module D  
 **Production Focus**: Core → Module B → Module D  
 **Development Focus**: Core → Module A → Module C
-
----
-
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
-
-**Optional Deep Dive Modules:**
-
-- 🔬 **[Module A: Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md)** - Complex workflows & optimization
-- 🏭 **[Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)** - Enterprise deployment & monitoring
-- 🔧 **[Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)** - Building specialized tools
-- 📊 **[Module D: Performance & Monitoring](Session2_ModuleD_Performance_Monitoring.md)** - Optimization & observability
-
-**📝 Test Your Knowledge:** [Session 2 Solutions](Session2_Test_Solutions.md)
-
-**Next:** Session 3 - LangGraph Multi-Agent Workflows →
 
 ---
 
@@ -592,4 +574,19 @@ C) ZERO_SHOT_REACT_DESCRIPTION
 D) All of the above  
 
 [**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
+
+## 🧭 Navigation
+
+**Previous:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
+
+**Optional Deep Dive Modules:**
+
+- 🔬 **[Module A: Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md)** - Complex workflows & optimization
+- 🏭 **[Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)** - Enterprise deployment & monitoring
+- 🔧 **[Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)** - Building specialized tools
+- 📊 **[Module D: Performance & Monitoring](Session2_ModuleD_Performance_Monitoring.md)** - Optimization & observability
+
+**Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+
+---
 

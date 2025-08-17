@@ -555,12 +555,11 @@ D) Previous state is archived
 
 ## 🧭 Navigation
 
-**Previous:** Session 2 - LangChain Foundations
+**Previous:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md)
 
 **Optional Deep Dive Modules:**
+
 - 🔬 **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
 - 🏭 **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
 
-**📝 Test Your Knowledge:** [Session 3 Solutions](Session3_Test_Solutions.md)
-
-**Next:** Session 4 - CrewAI Team Orchestration →
+**Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
