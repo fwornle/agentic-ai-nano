@@ -914,36 +914,31 @@ Test your understanding of RAG architecture fundamentals with our comprehensive 
 
 ### **Multiple Choice Questions**
 
-**1. What are the three main stages of a RAG system?**
-
+**1. What are the three main stages of a RAG system?**  
    - A) Parse, Search, Respond  
    - B) Index, Retrieve, Generate  
    - C) Chunk, Embed, Query  
    - D) Store, Find, Answer  
 
-**2. Which RAG evolution phase introduced self-correcting mechanisms?**
-
+**2. Which RAG evolution phase introduced self-correcting mechanisms?**  
    - A) 2020 - RAG Foundation  
    - B) 2022 - LLM Integration  
    - C) 2023 - Adaptive RAG  
    - D) 2025 - Next-Gen RAG  
 
-**3. What is the primary advantage of HyDE (Hypothetical Document Embeddings)?**
-
+**3. What is the primary advantage of HyDE (Hypothetical Document Embeddings)?**  
    - A) Reduces computational cost  
    - B) Improves query-document semantic alignment  
    - C) Eliminates need for vector databases  
    - D) Simplifies system architecture  
 
-**4. When should you choose RAG over fine-tuning?**
-
+**4. When should you choose RAG over fine-tuning?**  
    - A) When the domain knowledge is static  
    - B) When you need frequent knowledge updates  
    - C) When computational resources are unlimited  
    - D) When source attribution is not needed  
 
-**5. What is the key benefit of Agentic RAG systems?**
-
+**5. What is the key benefit of Agentic RAG systems?**  
    - A) Faster retrieval speed  
    - B) Lower computational requirements  
    - C) Iterative query refinement and self-correction  

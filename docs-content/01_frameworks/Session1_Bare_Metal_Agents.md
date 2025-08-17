@@ -1,10 +1,12 @@
 # Session 1: Bare Metal Agents (Pure Python Implementation)
 
 ## 🎯 Learning Navigation Hub
+
 **Total Time Investment**: 75 minutes (Core) + 30-105 minutes (Optional)  
 **Your Learning Path**: Choose your engagement level
 
 ### Quick Start Guide
+
 - **👀 Observer (40 min)**: Read concepts + examine code structure
 - **🙋‍♂️ Participant (75 min)**: Follow exercises + implement basic agents  
 - **🛠️ Implementer (120 min)**: Build custom agents + explore advanced patterns
@@ -14,6 +16,7 @@
 ## 📋 SESSION OVERVIEW DASHBOARD
 
 ### Core Learning Track (75 minutes) - REQUIRED
+
 | Section | Concept Load | Time | Skills |
 |---------|--------------|------|--------|
 | 🏗️ Agent Architecture | 3 concepts | 20 min | Understanding |
@@ -22,6 +25,7 @@
 | ✅ Testing & Validation | 3 concepts | 10 min | Verification |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
+
 - 🔬 **[Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** (40 min) - Sophisticated reasoning loops
 - ⚡ **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** (35 min) - Speed & efficiency patterns
 - 🔄 **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** (30 min) - Advanced memory systems
@@ -33,10 +37,12 @@
 ## 🧭 CORE SECTION (Required - 75 minutes)
 
 ### Part 1: Agent Architecture Fundamentals (20 minutes)
+
 **Cognitive Load**: 3 new concepts
 **Learning Mode**: Conceptual Understanding
 
 #### Basic Agent Structure (8 minutes)
+
 Every agent needs these core components:
 
 ![Agent Pattern Control](images/agent-core-components.png)
@@ -63,12 +69,14 @@ class BaseAgent:
 
 The `run` method is where the magic happens. The actual implementation (available in the source file) involves parsing user input, determining if tools are needed, executing actions, and formatting the response.
 
-**Key Concepts:**
+**Key Concepts:**  
+
 1. **Model Interface**: How agents talk to LLMs
 2. **Memory Management**: Keeping track of context
 3. **Tool Registry**: Available actions the agent can take
 
 #### Input/Output Handling (7 minutes)
+
 Clean interfaces for agent interaction:
 
 These methods belong to the BaseAgent class and handle data transformation between raw user input and structured agent processing. They ensure consistent formatting across all agent interactions.
@@ -88,6 +96,7 @@ def format_output(self, agent_response: str) -> str:
 ```
 
 #### State Management Basics (5 minutes)
+
 Simple but effective state tracking:
 
 The AgentState class tracks everything the agent needs to remember during conversations. This is crucial for maintaining context and making informed decisions throughout multi-turn interactions.
@@ -112,10 +121,12 @@ class AgentState:
 ---
 
 ### Part 2: Building Your First Agent (25 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Hands-on Implementation
 
 #### Simple Agent Implementation (10 minutes)
+
 Let's build a working agent from scratch:
 
 🗂️ **File**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py) - See the `SimpleAgent` class
@@ -150,6 +161,7 @@ print(response)
 ```
 
 #### Basic Reasoning Loop (8 minutes)
+
 Implementing the core agent thinking process:
 
 🗂️ **File**: [`src/session1/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/react_agent.py) - See the reasoning loop implementation
@@ -184,6 +196,7 @@ def reasoning_loop(self, task: str) -> str:
 ```
 
 #### Error Handling Patterns (4 minutes)
+
 Making agents robust:
 
 This wrapper method ensures agents handle errors gracefully, preventing crashes and providing user-friendly error messages when something goes wrong.
@@ -200,6 +213,7 @@ def safe_agent_execution(self, user_input: str) -> str:
 ```
 
 #### Testing Your Agent (3 minutes)
+
 🗂️ **File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
 
 ```python
@@ -227,10 +241,12 @@ test_simple_agent()
 ---
 
 ### Part 3: Tool Integration Basics (20 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Application & Integration
 
 #### Simple Tool Creation (8 minutes)
+
 Building tools that agents can use:
 
 ![Agent Pattern Tool Integration](images/agent-pattern-tool-integration.png)
@@ -274,6 +290,7 @@ print(result)  # "Calculation result: 14"
 ```
 
 #### Tool Calling Mechanisms (6 minutes)
+
 How agents decide when and how to use tools:
 
 🗂️ **File**: [`src/session1/tool_use_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tool_use_agent.py) - See the `ToolUseAgent` class
@@ -309,6 +326,7 @@ class ToolUseAgent:
 ```
 
 #### Basic Validation (3 minutes)
+
 Ensuring tool outputs are useful:
 
 This validation method helps agents determine if a tool executed successfully. It's part of the agent's quality control system, checking for common failure indicators like error messages or empty responses.
@@ -324,6 +342,7 @@ def validate_tool_output(self, tool_name: str, output: str) -> bool:
 ```
 
 #### Integration Testing (3 minutes)
+
 Testing agents with tools:
 
 This integration test verifies that agents and tools work together correctly, testing the complete flow from user input through tool execution to final response.
@@ -349,10 +368,12 @@ def test_tool_integration():
 ---
 
 ### Part 4: Testing & Validation (10 minutes)
+
 **Cognitive Load**: 3 new concepts
 **Learning Mode**: Production Readiness
 
 #### Unit Testing Approaches (4 minutes)
+
 🗂️ **File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
 
 ```python
@@ -382,6 +403,7 @@ if __name__ == "__main__":
 ```
 
 #### Common Troubleshooting (3 minutes)
+
 Typical issues and solutions:
 
 ```python
@@ -400,6 +422,7 @@ def debug_agent_issues(agent, user_input):
 ```
 
 #### Running Everything (3 minutes)
+
 🗂️ **File**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py) - Complete demonstration
 
 ```python
@@ -431,6 +454,7 @@ if __name__ == "__main__":
 ## ✅ Core Section Validation (5 minutes)
 
 ### Quick Implementation Exercise
+
 🗂️ **Files to Run**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py)
 
 ```bash
@@ -440,6 +464,7 @@ python test_agents.py
 ```
 
 ### Self-Assessment Checklist
+
 - [ ] I understand basic agent architecture (input/output, memory, tools)
 - [ ] I can implement a simple reasoning loop
 - [ ] I can create and integrate basic tools
@@ -452,6 +477,7 @@ python test_agents.py
 ---
 
 ### 🧭 **Choose Your Next Path:**
+
 - **[🔬 Module A: Advanced Agent Patterns →](Session1_ModuleA_Advanced_Agent_Patterns.md)** - Sophisticated reasoning loops
 - **[⚡ Module B: Performance Optimization →](Session1_ModuleB_Performance_Optimization.md)** - Speed & efficiency patterns
 - **[🔄 Module C: Complex State Management →](Session1_ModuleC_Complex_State_Management.md)** - Advanced memory systems
@@ -459,6 +485,7 @@ python test_agents.py
 - **[📖 Next Session: LangChain Foundations →](Session2_LangChain_Foundations.md)** - Framework implementation
 
 ### 🎆 Complete Learning Path Options
+
 **Sequential Learning**: Core → Module A → Module B → Module C  
 **Targeted Learning**: Pick modules based on your interests
 
@@ -469,6 +496,7 @@ python test_agents.py
 **Previous: [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)**
 
 **Optional Deep Dive Modules:**
+
 - **[🔬 Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)**
 - **[⚡ Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)**
 - **[🔄 Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)**
@@ -484,6 +512,7 @@ python test_agents.py
 Test your understanding of bare metal agent implementation and core patterns.
 
 ### Question 1
+
 **What is the primary benefit of implementing agents from scratch before using frameworks?**
 
 A) Better performance  
@@ -492,6 +521,7 @@ C) Easier deployment
 D) Lower resource usage  
 
 ### Question 2
+
 **In the BaseAgent class, what is the purpose of the conversation_history attribute?**
 
 A) Tool execution logs  
@@ -500,6 +530,7 @@ C) Maintaining context across interactions
 D) Performance monitoring  
 
 ### Question 3
+
 **Which method must be implemented by all subclasses of BaseAgent?**
 
 A) process_message()  
@@ -508,6 +539,7 @@ C) _generate_response()
 D) get_available_tools()  
 
 ### Question 4
+
 **How does the Tool abstract base class ensure consistency across different tool implementations?**
 
 A) By providing default implementations  
@@ -516,6 +548,7 @@ C) By handling errors automatically
 D) By managing tool state  
 
 ### Question 5
+
 **What design pattern is demonstrated by the BaseAgent and its subclasses?**
 
 A) Factory Pattern  
@@ -524,6 +557,7 @@ C) Template Method Pattern
 D) Strategy Pattern  
 
 ### Question 6
+
 **In the ReflectionAgent, when does the reflection loop terminate?**
 
 A) After a fixed number of iterations  
@@ -532,6 +566,7 @@ C) When the response length exceeds a threshold
 D) When no improvements are detected  
 
 ### Question 7
+
 **What information is stored in the reflection_history?**
 
 A) Only the final improved responses  
@@ -540,6 +575,7 @@ C) Just the critique feedback
 D) Performance metrics only  
 
 ### Question 8
+
 **What is the main advantage of the reflection pattern?**
 
 A) Faster response generation  
@@ -548,6 +584,7 @@ C) Reduced computational costs
 D) Simplified implementation  
 
 ### Question 9
+
 **Which component is responsible for determining tool selection in the ToolAgent?**
 
 A) The tool itself  
@@ -556,6 +593,7 @@ C) LLM reasoning about available tools
 D) Random selection  
 
 ### Question 10
+
 **What makes the ReActAgent different from the basic ToolAgent?**
 
 A) It has more tools available  
@@ -568,4 +606,3 @@ D) It has better error handling
 **🗂️ View Test Solutions**: Complete answers and explanations available in `Session1_Test_Solutions.md`
 
 **Success Criteria**: Score 8+ out of 10 to demonstrate mastery of bare metal agent concepts.
-
