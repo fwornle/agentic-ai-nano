@@ -84,9 +84,7 @@ plantuml/
 *.plantuml
 
 # Session and history files
-.specstory/
 session_*.md
-*-session.md
 .claude_code_sessions/
 
 # Temporary files
