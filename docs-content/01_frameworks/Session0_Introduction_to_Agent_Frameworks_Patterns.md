@@ -243,127 +243,43 @@ Test your understanding of the foundations:
 
 ---
 
-## 📝 Multiple Choice Test - Session 0 (15 minutes)
+---
 
-Test your understanding of agent frameworks and patterns with this comprehensive assessment.
+## 📝 Multiple Choice Test - Session 0
+
+Test your understanding of agent frameworks and patterns:
 
 **Question 1:** Which agentic pattern involves an agent evaluating and improving its own outputs?  
-
 A) Tool Use  
 B) Reflection  
 C) Planning  
 D) Multi-Agent  
 
 **Question 2:** The ReAct pattern combines which two key capabilities?  
-
 A) Reading and Acting  
 B) Reasoning and Acting  
 C) Reflecting and Acting  
 D) Retrieving and Acting  
 
 **Question 3:** Which framework is best suited for high-performance applications with minimal resource usage?  
-
 A) LangChain  
 B) CrewAI  
 C) Agno  
 D) PydanticAI  
 
 **Question 4:** What is the primary advantage of the Multi-Agent pattern?  
-
 A) Faster execution  
 B) Specialized expertise collaboration  
 C) Reduced complexity  
 D) Lower resource usage  
 
 **Question 5:** Which framework emphasizes type safety through schema validation?  
-
 A) LangChain  
 B) CrewAI  
 C) Agno  
 D) PydanticAI  
 
-**Question 6:** The Planning pattern is most useful for:  
-
-A) Simple query-response interactions  
-B) Complex multi-step workflows  
-C) Real-time data processing  
-D) Static content generation  
-
-**Question 7:** In the Tool Use pattern, what determines which tool an agent selects?  
-
-A) Random selection  
-B) Tool availability  
-C) Task requirements and tool descriptions  
-D) Execution speed  
-
-**Question 8:** Which framework uses a graph-based architecture for precise control flow?  
-
-A) CrewAI  
-B) LangGraph  
-C) PydanticAI  
-D) Agno  
-
-**Question 9:** The primary benefit of using agent frameworks over bare metal implementation is:  
-
-A) Better performance  
-B) Lower costs  
-C) Pre-built components and patterns  
-D) Simpler deployment  
-
-**Question 10:** Which collaboration pattern involves agents working on different aspects simultaneously?  
-
-A) Sequential Processing  
-B) Parallel Processing  
-C) Debate and Consensus  
-D) Hierarchical Teams  
-
-**Question 11:** When would you choose bare metal Python implementation over frameworks?  
-
-A) Production applications  
-B) Learning fundamentals and custom research  
-C) Team collaboration projects  
-D) Enterprise integration  
-
-**Question 12:** The reflection pattern typically involves how many phases?  
-
-A) 2 phases: Generate and Reflect  
-B) 3 phases: Generate, Reflect, Refine  
-C) 4 phases: Generate, Reflect, Refine, Validate  
-D) 5 phases: Generate, Reflect, Refine, Test, Deploy  
-
-**Question 13:** What makes ADK particularly suitable for enterprise applications?  
-
-A) Open source licensing  
-B) Built-in security, monitoring, and Google Cloud integration  
-C) Fastest execution speed  
-D) Simplest learning curve  
-
-**Question 14:** In multi-agent systems, what is the role of a "Manager Agent"?  
-
-A) Execute all tasks directly  
-B) Store data and state  
-C) Coordinate worker agents and manage interactions  
-D) Provide user interface  
-
-**Question 15:** Which pattern would be most appropriate for a task requiring real-time stock price analysis?  
-
-A) Reflection (for self-improvement)  
-B) Tool Use (for accessing live data APIs)  
-C) Planning (for multi-step workflows)  
-D) Multi-Agent (for collaboration)  
-
----
-
-### Framework Selection Exercise
-Given these scenarios, which framework would you recommend?
-
-- **Startup building MVP with small team**: CrewAI (easy collaboration, fast setup)
-- **Enterprise with strict type safety requirements**: PydanticAI (schema validation, type safety)
-- **Research lab exploring complex reasoning workflows**: LangGraph (flexible graph architecture)
-
 [**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
-
----
 
 ## 🧭 Navigation
 
@@ -374,6 +290,6 @@ Given these scenarios, which framework would you recommend?
 - 📊 **[Module A: Historical Context & Evolution](Session0_ModuleA_Historical_Context_Evolution.md)** - Deep AI agent history
 - 🔬 **[Module B: Advanced Pattern Theory](Session0_ModuleB_Advanced_Pattern_Theory.md)** - Pattern implementation details
 
-**📝 Test Your Knowledge:** [Session 0 Solutions](Session0_Test_Solutions.md)
+**Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
 
-**Next:** Session 1 - Bare Metal Agents →
+---
