@@ -1943,6 +1943,5 @@ Your hybrid search optimization, index tuning, and multi-database architecture p
 **Optional Deep Dive Modules:**
 - **[🔬 Module A: Advanced Index Algorithms](Session3_ModuleA_Index_Algorithms.md)**
 
-**[📝 Test Your Knowledge: Session 3 Solutions](Session3_Test_Solutions.md)**
 
 **[Next: Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)**

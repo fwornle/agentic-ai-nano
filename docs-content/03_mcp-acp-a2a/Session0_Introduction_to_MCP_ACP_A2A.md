@@ -986,10 +986,8 @@ D) Learn all three simultaneously
 
 ## 🧭 Navigation
 
-**Next:** Session 1 - Building Your First MCP Server →
+**Previous:** Introduction (You are here)
 
-**📝 Test Your Knowledge:** [Session 0 Solutions](Session0_Test_Solutions.md)
+**Next:** [Session 1 - Building Your First MCP Server →](Session1_Basic_MCP_Server.md)
 
 ---
-
-*Ready to build the future of AI agent systems? Let's start with Session 1: Building Your First MCP Server!*

@@ -1466,6 +1466,5 @@ Ready to build RAG systems that reason about connections, not just similarities?
 - **[🔬 Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)**
 - **[🏭 Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)**
 
-**[📝 Test Your Knowledge: Session 5 Solutions](Session5_Test_Solutions.md)**
 
 **[Next: Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)**

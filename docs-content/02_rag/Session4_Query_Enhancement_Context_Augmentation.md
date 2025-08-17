@@ -1599,6 +1599,5 @@ Ready to prove your enhancements deliver real value? Let's master RAG evaluation
 **Optional Deep Dive Modules:**
 - **[🔬 Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)**
 
-**[📝 Test Your Knowledge: Session 4 Solutions](Session4_Test_Solutions.md)**
 
 **[Next: Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)**
