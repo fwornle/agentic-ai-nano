@@ -1,0 +1,237 @@
+/* Custom styles for Agentic AI Nano-Degree */
+
+/* Learning path badges */
+.learning-path {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.5rem;
+}
+
+.path-observer {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.path-participant {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.path-implementer {
+    background-color: #e8f5e8;
+    color: #388e3c;
+}
+
+/* Session cards */
+.session-card {
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.session-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.session-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.session-meta {
+    font-size: 0.875rem;
+    color: var(--md-default-fg-color--light);
+    margin-bottom: 0.5rem;
+}
+
+/* Code block enhancements */
+.highlight .filename {
+    background-color: var(--md-code-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-bottom: none;
+    border-radius: 0.1rem 0.1rem 0 0;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.85em;
+    padding: 0.5rem 1rem;
+    margin: 0;
+}
+
+/* Navigation enhancements */
+.navigation-section {
+    background-color: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.navigation-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.navigation-title .material-icons {
+    margin-right: 0.5rem;
+}
+
+/* Assessment styling */
+.assessment-section {
+    background-color: #fafafa;
+    border-left: 4px solid #2196f3;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+[data-md-color-scheme="slate"] .assessment-section {
+    background-color: #2a2a2a;
+}
+
+.question-number {
+    font-weight: 600;
+    color: #2196f3;
+}
+
+.answer-option {
+    margin: 0.25rem 0;
+    padding-left: 1.5rem;
+}
+
+.correct-answer {
+    background-color: #e8f5e8;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+}
+
+[data-md-color-scheme="slate"] .correct-answer {
+    background-color: #2d5a2d;
+}
+
+/* Time indicators */
+.time-indicator {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 1rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #666;
+}
+
+[data-md-color-scheme="slate"] .time-indicator {
+    background-color: #333;
+    color: #ccc;
+}
+
+.time-indicator .material-icons {
+    font-size: 1rem;
+    margin-right: 0.25rem;
+}
+
+/* Module overview grid */
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.module-card {
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.module-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--md-primary-fg-color);
+}
+
+/* Progress indicators */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0.5rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--md-primary-fg-color);
+    transition: width 0.3s ease;
+}
+
+/* Alert boxes */
+.alert {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    color: #1976d2;
+}
+
+.alert-warning {
+    background-color: #fff3e0;
+    border-left: 4px solid #ff9800;
+    color: #f57c00;
+}
+
+.alert-success {
+    background-color: #e8f5e8;
+    border-left: 4px solid #4caf50;
+    color: #388e3c;
+}
+
+[data-md-color-scheme="slate"] .alert-info {
+    background-color: #1a2332;
+    color: #64b5f6;
+}
+
+[data-md-color-scheme="slate"] .alert-warning {
+    background-color: #2d251a;
+    color: #ffb74d;
+}
+
+[data-md-color-scheme="slate"] .alert-success {
+    background-color: #1b2d1b;
+    color: #81c784;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .module-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .session-card {
+        padding: 0.75rem;
+    }
+    
+    .learning-path {
+        display: block;
+        margin: 0.25rem 0;
+    }
+}

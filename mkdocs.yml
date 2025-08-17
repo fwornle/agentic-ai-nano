@@ -1,0 +1,194 @@
+site_name: Agentic AI Nano-Degree
+site_description: Complete nano-degree program covering Agent Frameworks and RAG Architecture
+site_author: Agentic AI
+site_url: https://yourusername.github.io/nano-degree
+
+# Repository
+repo_name: yourusername/nano-degree
+repo_url: https://github.com/yourusername/nano-degree
+edit_uri: edit/main/
+
+# Copyright
+copyright: Copyright &copy; 2025 Agentic AI
+
+# Configuration
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - content.tooltips
+    - header.autohide
+    - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - toc.integrate
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  icon:
+    logo: material/school
+    repo: fontawesome/brands/github
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: yourusername
+      repo: nano-degree
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Page tree
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  
+  - Agent Frameworks:
+    - 01_frameworks/index.md
+    - Session 0 - Introduction: 01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md
+    - Session 1 - Bare Metal Agents: 01_frameworks/Session1_Bare_Metal_Agents.md
+    - Session 2 - LangChain Foundations: 01_frameworks/Session2_LangChain_Foundations.md
+    - Session 3 - LangGraph Workflows: 01_frameworks/Session3_LangGraph_Multi_Agent_Workflows.md
+    - Session 4 - CrewAI Orchestration: 01_frameworks/Session4_CrewAI_Team_Orchestration.md
+    - Session 5 - PydanticAI Type Safety: 01_frameworks/Session5_PydanticAI_Type_Safe_Agents.md
+    - Session 6 - Atomic Agents: 01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md
+    - Session 7 - First ADK Agent: 01_frameworks/Session7_First_ADK_Agent.md
+    - Session 8 - Agno Production: 01_frameworks/Session8_Agno_Production_Ready_Agents.md
+    - Session 9 - Multi-Agent Patterns: 01_frameworks/Session9_Multi_Agent_Patterns.md
+    - Session 10 - Enterprise Integration: 01_frameworks/Session10_Enterprise_Integration_Production_Deployment.md
+
+  - RAG Architecture:
+    - 02_rag/index.md
+    - Session 0 - RAG Introduction: 02_rag/Session0_Introduction_to_RAG_Architecture.md
+    - Session 1 - Basic RAG: 02_rag/Session1_Basic_RAG_Implementation.md
+    - Session 2 - Advanced Chunking: 02_rag/Session2_Advanced_Chunking_Preprocessing.md
+    - Session 3 - Vector Databases: 02_rag/Session3_Vector_Databases_Search_Optimization.md
+    - Session 4 - Query Enhancement: 02_rag/Session4_Query_Enhancement_Context_Augmentation.md
+    - Session 5 - RAG Evaluation: 02_rag/Session5_RAG_Evaluation_Quality_Assessment.md
+    - Session 6 - Graph-Based RAG: 02_rag/Session6_Graph_Based_RAG.md
+    - Session 7 - Agentic RAG: 02_rag/Session7_Agentic_RAG_Systems.md
+    - Session 8 - MultiModal RAG: 02_rag/Session8_MultiModal_Advanced_RAG.md
+    - Session 9 - Production RAG: 02_rag/Session9_Production_RAG_Enterprise_Integration.md
+
+# Extra
+extra:
+  status:
+    new: Recently added
+    deprecated: Deprecated
+  
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/nano-degree
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/mkdocs-material/
+    - icon: fontawesome/brands/mastodon
+      link: https://fosstodon.org/@squidfunk
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/squidfunk
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
