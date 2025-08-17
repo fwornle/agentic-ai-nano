@@ -9,7 +9,7 @@
 A) It reduces processing time for all documents  
 B) Enables optimal processing strategy selection based on document characteristics ✅  
 C) It eliminates the need for human document review  
-D) It automatically fixes document formatting issues    
+D) It automatically fixes document formatting issues  
 
 **Explanation:** Document complexity scoring analyzes structural, semantic, and processing difficulty aspects to recommend the most appropriate chunking and processing strategies. This ensures that simple documents use efficient processing while complex documents receive the specialized handling they require.
 
@@ -22,7 +22,7 @@ D) It automatically fixes document formatting issues
 A) Word count and character length only  
 B) Semantic similarity to source document  
 C) Balance of coherence, information density, and completeness ✅  
-D) Reading level and vocabulary complexity    
+D) Reading level and vocabulary complexity  
 
 **Explanation:** Effective chunk quality assessment requires evaluating multiple dimensions simultaneously. Coherence ensures adjacent chunks maintain topical relationships, information density measures content value, and completeness ensures chunks contain sufficient context for understanding.
 
@@ -35,7 +35,7 @@ D) Reading level and vocabulary complexity
 A) It reduces computational requirements  
 B) It preserves domain-specific structure and terminology for better retrieval ✅  
 C) It standardizes all documents to a common format  
-D) It eliminates the need for manual document preparation    
+D) It eliminates the need for manual document preparation  
 
 **Explanation:** Domain-specific processing recognizes that legal documents, medical records, and technical documentation have unique structures, terminology, and relationships. Preserving these domain-specific elements significantly improves retrieval accuracy and maintains critical contextual information.
 
@@ -48,7 +48,7 @@ D) It eliminates the need for manual document preparation
 A) Total word count divided by paragraph count  
 B) Ratio of unique words to total words ✅  
 C) Number of sentences per chunk  
-D) Average word length in the chunk    
+D) Average word length in the chunk  
 
 **Explanation:** Information density is calculated as the ratio of unique words to total words in a chunk. This metric helps identify chunks that are either too sparse (low unique word ratio, indicating repetitive content) or appropriately dense with distinct information.
 
@@ -61,7 +61,7 @@ D) Average word length in the chunk
 A) By word overlap and shared vocabulary  
 B) By semantic similarity and topic consistency ✅  
 C) By document structure and formatting  
-D) By reading level and complexity scores    
+D) By reading level and complexity scores  
 
 **Explanation:** Coherence between chunks should be measured using semantic similarity algorithms that evaluate topic consistency and conceptual relationships. This ensures that adjacent chunks maintain logical flow and contextual continuity for both retrieval systems and end users.
 
