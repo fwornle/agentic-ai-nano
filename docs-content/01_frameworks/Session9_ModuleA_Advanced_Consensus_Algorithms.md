@@ -865,6 +865,5 @@ D) To increase fault tolerance threshold
 - **[🔬 Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)**
 - **[📡 Module B: Agent Communication Protocols](Session9_ModuleB_Agent_Communication_Protocols.md)**
 
-**[📝 Test Your Knowledge: Session 9A Solutions](Session9A_Test_Solutions.md)**
 
 **[Next: Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)**
