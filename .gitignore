@@ -5,9 +5,6 @@
 *.orig
 *~
 
-# Text files (if you want to exclude all, otherwise comment this line)
-*.txt
-
 # Logs and analysis
 logs/
 *.log
