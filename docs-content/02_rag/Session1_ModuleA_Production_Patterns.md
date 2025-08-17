@@ -17,9 +17,9 @@
 
 ### 🗂️ Code Files
 
-- **Production Examples**: `src/session1/rag_system.py` - Production RAG implementation
-- **Testing Framework**: `src/session1/test_rag_performance.py` - Performance testing tools
-- **Interactive Demo**: `src/session1/interactive_rag.py` - Hands-on RAG exploration
+- **Production Examples**: [`src/session1/rag_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/rag_system.py) - Production RAG implementation
+- **Testing Framework**: [`src/session1/test_rag_performance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/test_rag_performance.py) - Performance testing tools
+- **Interactive Demo**: [`src/session1/interactive_rag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/interactive_rag.py) - Hands-on RAG exploration
 
 ### 🚀 Quick Start
 

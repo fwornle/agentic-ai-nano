@@ -448,7 +448,7 @@ Automatic cleanup removes agents that have stopped sending heartbeats:
 
 **Key Concepts**: Cleanup operations maintain registry hygiene by removing dead agents. This should run periodically to prevent accumulation of stale entries.
 
-**💡 Complete Implementation**: For advanced registry features including clustering and metrics, see [`src/session7/registry.py`](src/session7/registry.py) in the course materials.
+**💡 Complete Implementation**: For advanced registry features including clustering and metrics, see [`src/session7/registry.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/registry.py) in the course materials.
 
 ### Step 1.3: Message Router
 
@@ -761,7 +761,7 @@ Incoming messages are processed through registered handlers, enabling agents to 
 
 **Key Concepts**: This method completes the communication cycle by processing incoming messages, dispatching them to appropriate handlers, and generating responses when required. The message type determines whether to process as a new request or as a response to an existing request.
 
-**💡 Complete Implementation**: For the complete router implementation, see [`src/session7/router.py`](src/session7/router.py) in the course materials.
+**💡 Complete Implementation**: For the complete router implementation, see [`src/session7/router.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/router.py) in the course materials.
 
 ---
 
@@ -1095,7 +1095,7 @@ Helper methods handle data flow between workflow context and step inputs/outputs
 
 **Key Concepts**: Data mapping enables seamless data flow through the workflow by transforming between step-specific formats and the shared workflow context.
 
-**💡 Complete Implementation**: For complete orchestrator examples and advanced patterns, see [`src/session7/orchestrator.py`](src/session7/orchestrator.py) in the course materials.
+**💡 Complete Implementation**: For complete orchestrator examples and advanced patterns, see [`src/session7/orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/orchestrator.py) in the course materials.
 
 ### Step 2.2: Choreography Pattern
 
@@ -1370,7 +1370,7 @@ def create_travel_planning_choreography() -> List[EventPattern]:
 
 **Key Concepts**: This example demonstrates a complete travel planning workflow where each event triggers the next step. Agents coordinate autonomously based on event-driven patterns, creating a flexible, decentralized process.
 
-**💡 Complete Implementation**: For advanced choreography patterns and complex event processing, see [`src/session7/choreography.py`](src/session7/choreography.py) in the course materials.
+**💡 Complete Implementation**: For advanced choreography patterns and complex event processing, see [`src/session7/choreography.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/choreography.py) in the course materials.
 
 ---
 

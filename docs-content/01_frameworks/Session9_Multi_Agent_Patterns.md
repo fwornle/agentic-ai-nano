@@ -25,7 +25,7 @@
 - 🔬 **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** (70 min) - Byzantine fault tolerance & game theory
 - 🏭 **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** (70 min) - Enterprise deployment & monitoring
 
-**🗂️ Code Files**: All examples use files in `src/session9/`
+**🗂️ Code Files**: All examples use files in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9)
 **🚀 Quick Start**: Run `cd src/session9 && python react_agent.py` to see multi-agent coordination
 
 ---
@@ -42,7 +42,7 @@ The ReAct pattern (Reasoning + Acting) makes agent thinking transparent and iter
 ![ReAct Pattern](images/react-pattern.png)
 *This diagram illustrates the ReAct (Reasoning + Acting) pattern flow, showing the iterative cycle of thought, action, and observation that enables transparent reasoning. The pattern demonstrates how agents can break down complex problems into manageable steps with clear decision points.*
 
-🗂️ **File**: `src/session9/react_agent.py` - Core ReAct implementation
+🗂️ **File**: [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - Core ReAct implementation
 
 ```python
 from typing import Dict, List, Any, Optional
@@ -103,7 +103,7 @@ class BasicReActAgent:
 #### ReAct Execution Flow (10 minutes)
 Implementing the reasoning-action loop:
 
-🗂️ **File**: `src/session9/reasoning_engine.py` - Advanced reasoning patterns
+🗂️ **File**: [`src/session9/reasoning_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reasoning_engine.py) - Advanced reasoning patterns
 
 ```python
 async def _execute_reasoning_step(
@@ -222,7 +222,7 @@ Structured communication for multi-agent systems:
 ![Multi-Agent Pattern](images/multi-agent-pattern.png)
 *This diagram depicts various multi-agent coordination patterns including hierarchical delegation, consensus voting, and peer-to-peer communication. The visualization shows how agents collaborate through structured message passing and coordination protocols.*
 
-🗂️ **File**: `src/session9/multi_agent_coordination.py` - Communication framework
+🗂️ **File**: [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Communication framework
 
 ```python
 from typing import Dict, List, Any, Optional, Set
@@ -288,7 +288,7 @@ class CommunicationHub:
 #### Basic Consensus Mechanisms (8 minutes)
 Simple voting and agreement patterns:
 
-🗂️ **File**: `src/session9/consensus_algorithms.py` - Basic consensus implementation
+🗂️ **File**: [`src/session9/consensus_algorithms.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/consensus_algorithms.py) - Basic consensus implementation
 
 ```python
 class SimpleConsensusManager:
@@ -422,7 +422,7 @@ class HierarchicalCoordinator:
 #### Auction-Based Coordination (5 minutes)
 Market-based task allocation:
 
-🗂️ **File**: `src/session9/auction_mechanisms.py` - Competitive coordination
+🗂️ **File**: [`src/session9/auction_mechanisms.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/auction_mechanisms.py) - Competitive coordination
 
 ```python
 class SimpleAuctionCoordinator:
@@ -480,7 +480,7 @@ Breaking complex tasks into manageable hierarchies:
 ![Planning Pattern](images/planning-pattern.png)
 *This diagram illustrates Hierarchical Task Network (HTN) planning methodology, showing how complex tasks are decomposed into smaller, manageable subtasks. The visualization demonstrates the hierarchical breakdown from abstract goals to concrete, executable actions.*
 
-🗂️ **File**: `src/session9/planning_systems.py` - HTN planning implementation
+🗂️ **File**: [`src/session9/planning_systems.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/planning_systems.py) - HTN planning implementation
 
 ```python
 from typing import Dict, List, Any, Optional, Tuple
@@ -558,7 +558,7 @@ class HTNPlanner:
 #### Dynamic Replanning (8 minutes)
 Adaptive planning during execution:
 
-🗂️ **File**: `src/session9/dynamic_planning.py` - Adaptive replanning systems
+🗂️ **File**: [`src/session9/dynamic_planning.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/dynamic_planning.py) - Adaptive replanning systems
 
 ```python
 class DynamicReplanner:
@@ -652,7 +652,7 @@ Continuous improvement through experience:
 ![Reflection Pattern](images/reflection-pattern.png)
 *This visualization shows the reflection and learning cycle where agents analyze their execution experiences, identify patterns, assess performance trends, and adapt their strategies. The diagram demonstrates how continuous learning improves agent performance over time.*
 
-🗂️ **File**: `src/session9/reflection_engine.py` - Learning from execution
+🗂️ **File**: [`src/session9/reflection_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reflection_engine.py) - Learning from execution
 
 ```python
 class ReflectionEngine:
@@ -728,7 +728,7 @@ class ReflectionEngine:
 #### Production Configuration (5 minutes)
 Basic production setup for multi-agent systems:
 
-🗂️ **File**: `src/session9/production_deployment.py` - Production patterns
+🗂️ **File**: [`src/session9/production_deployment.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/production_deployment.py) - Production patterns
 
 ```python
 from dataclasses import dataclass
@@ -856,8 +856,8 @@ System Health: {metrics['system_health']:.2%}
 
 ### Quick Implementation Exercise
 🗂️ **Exercise Files**: 
-- `src/session9/react_agent.py` - ReAct pattern implementation
-- `src/session9/multi_agent_coordination.py` - Multi-agent coordination
+- [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - ReAct pattern implementation
+- [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Multi-agent coordination
 
 ```bash
 # Try the examples:
@@ -899,7 +899,7 @@ python planning_systems.py               # HTN planning
 - [ ] [Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md) (70 min)
 - [ ] [Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md) (70 min)
 
-**🗂️ All Code Examples**: Available in `src/session9/` - 12 Python files with complete multi-agent implementations!
+**🗂️ All Code Examples**: Available in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9) - 12 Python files with complete multi-agent implementations!
 
 ---
 

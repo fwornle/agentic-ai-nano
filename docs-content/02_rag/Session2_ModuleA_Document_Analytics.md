@@ -14,10 +14,10 @@
 - **[📊 Session 1 Modules →](Session1_ModuleA_Production_Patterns.md)** - Production patterns reference
 
 ### 🗂️ Code Files
-- **Analytics Pipeline**: `src/session2/advanced_chunking/document_analyzer.py` - Document analysis engine
-- **Quality Assessment**: `src/session2/advanced_chunking/quality_assessor.py` - Quality scoring tools  
-- **Metadata Extraction**: `src/session2/advanced_chunking/metadata_extractor.py` - Document metadata analysis
-- **Demo Application**: `src/session2/demo_advanced_chunking.py` - Full analytics workflow
+- **Analytics Pipeline**: [`src/session2/advanced_chunking/document_analyzer.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session2/advanced_chunking/document_analyzer.py) - Document analysis engine
+- **Quality Assessment**: [`src/session2/advanced_chunking/quality_assessor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session2/advanced_chunking/quality_assessor.py) - Quality scoring tools  
+- **Metadata Extraction**: [`src/session2/advanced_chunking/metadata_extractor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session2/advanced_chunking/metadata_extractor.py) - Document metadata analysis
+- **Demo Application**: [`src/session2/demo_advanced_chunking.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session2/demo_advanced_chunking.py) - Full analytics workflow
 
 ### 🚀 Quick Start
 ```bash

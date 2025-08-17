@@ -69,7 +69,7 @@ Let's examine our production server implementation piece by piece:
 **Step 1.1.1: Core Imports and Logging Setup**
 
 ```python
-# From: src/session4/production_mcp_server.py
+# From: [`src/session4/production_mcp_server.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/production_mcp_server.py)
 
 import os
 import logging
@@ -335,7 +335,7 @@ Let's examine our production-ready Dockerfile:
 **Step 2.1.1: Base Image and Dependencies**
 
 ```dockerfile
-# From: src/session4/deployments/Dockerfile
+# From: [`src/session4/deployments/Dockerfile`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/deployments/Dockerfile)
 
 FROM python:3.11-slim
 
@@ -422,7 +422,7 @@ services:
   mcp-server:
     build:
       context: .
-      dockerfile: src/session4/deployments/Dockerfile
+      dockerfile: [`src/session4/deployments/Dockerfile`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/deployments/Dockerfile)
     ports:
       - "8080:8080"  # MCP server port
       - "9090:9090"  # Prometheus metrics port
@@ -575,7 +575,7 @@ steps:
       'build',
       '-t', 'gcr.io/$PROJECT_ID/mcp-server:$COMMIT_SHA',
       '-t', 'gcr.io/$PROJECT_ID/mcp-server:latest',
-      '-f', 'src/session4/deployments/Dockerfile',
+      '-f', '[`src/session4/deployments/Dockerfile`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/deployments/Dockerfile)',
       '.'
     ]
   
@@ -698,7 +698,7 @@ Our monitoring system tracks multiple MCP servers across different environments:
 **Step 4.1.1: Health Status Tracking**
 
 ```python
-# From: src/session4/monitoring/monitor.py
+# From: [`src/session4/monitoring/monitor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/monitoring/monitor.py)
 
 @dataclass
 class ServerHealthStatus:
@@ -1078,7 +1078,7 @@ async def create_monitoring_dashboard():
     pass
 ```
 
-**💡 Hint:** Check the complete implementations in the `src/session4/` directory.
+**💡 Hint:** Check the complete implementations in the [`src/session4/`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/) directory.
 
 ---
 
@@ -1100,9 +1100,9 @@ In **Session 5: Advanced MCP Patterns**, we'll explore:
 5. **Create alerting rules** for proactive issue detection
 
 **Files created in this session:**
-- `src/session4/production_mcp_server.py` - Full production server implementation
-- `src/session4/deployments/Dockerfile` - Production-ready containerization
-- `src/session4/monitoring/monitor.py` - Multi-server monitoring system
+- [`src/session4/production_mcp_server.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/production_mcp_server.py) - Full production server implementation
+- [`src/session4/deployments/Dockerfile`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/deployments/Dockerfile) - Production-ready containerization
+- [`src/session4/monitoring/monitor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/monitoring/monitor.py) - Multi-server monitoring system
 - Infrastructure as Code templates for cloud deployment
 
 You now have enterprise-grade MCP servers ready for production workloads! 🚀📊

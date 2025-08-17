@@ -14,10 +14,10 @@
 - **[🔍 Session 3 Modules →](Session3_ModuleA_Index_Algorithms.md)** - Vector search optimization
 
 ### 🗂️ Code Files
-- **Query Enhancement**: `src/session4/comprehensive_enhancer.py` - Complete query processing pipeline
-- **Intent Analysis**: `src/session4/semantic_gap_analyzer.py` - Query intent detection
-- **Multi-Query Generation**: `src/session4/multi_query_generator.py` - Query expansion techniques
-- **Demo Application**: `src/session4/demo_query_enhancement.py` - Query understanding showcase
+- **Query Enhancement**: [`src/session4/comprehensive_enhancer.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session4/comprehensive_enhancer.py) - Complete query processing pipeline
+- **Intent Analysis**: [`src/session4/semantic_gap_analyzer.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session4/semantic_gap_analyzer.py) - Query intent detection
+- **Multi-Query Generation**: [`src/session4/multi_query_generator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session4/multi_query_generator.py) - Query expansion techniques
+- **Demo Application**: [`src/session4/demo_query_enhancement.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session4/demo_query_enhancement.py) - Query understanding showcase
 
 ### 🚀 Quick Start
 ```bash

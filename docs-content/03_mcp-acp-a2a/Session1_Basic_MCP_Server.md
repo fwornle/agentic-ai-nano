@@ -494,7 +494,7 @@ if __name__ == "__main__":
         client.stop_server()
 ```
 
-Complete test client implementation available in `src/session1/test_client.py`
+Complete test client implementation available in [`src/session1/test_client.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session1/test_client.py)
 
 **Testing insights:**
 - MCP uses JSON-RPC 2.0 protocol for communication
@@ -721,7 +721,7 @@ Handle edge cases and return the result:
     return warmest
 ```
 
-Complete solution available in `src/session1/weather_server.py`
+Complete solution available in [`src/session1/weather_server.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session1/weather_server.py)
 </details>
 
 ---

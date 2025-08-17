@@ -16,10 +16,10 @@
 
 ### 🗂️ Code Files
 
-- **Evaluation Framework**: `src/session5/evaluation_framework.py` - Advanced metrics implementation
-- **Custom Metrics**: `src/session5/custom_metrics.py` - Domain-specific evaluation metrics
-- **Benchmark System**: `src/session5/benchmark_system.py` - Performance benchmarking tools
-- **Demo Application**: `src/session5/demo_evaluation_system.py` - Complete evaluation showcase
+- **Evaluation Framework**: [`src/session5/evaluation_framework.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/evaluation_framework.py) - Advanced metrics implementation
+- **Custom Metrics**: [`src/session5/custom_metrics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/custom_metrics.py) - Domain-specific evaluation metrics
+- **Benchmark System**: [`src/session5/benchmark_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/benchmark_system.py) - Performance benchmarking tools
+- **Demo Application**: [`src/session5/demo_evaluation_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/demo_evaluation_system.py) - Complete evaluation showcase
 
 ### 🚀 Quick Start
 

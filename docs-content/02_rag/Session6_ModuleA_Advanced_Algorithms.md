@@ -16,10 +16,10 @@
 
 ### 🗂️ Code Files
 
-- **Graph Traversal**: `src/session6/graph_traversal_engine.py` - Advanced traversal algorithms
-- **Knowledge Extraction**: `src/session6/knowledge_graph_extractor.py` - Graph construction and analysis
-- **Hybrid Graph-Vector**: `src/session6/hybrid_graph_vector_rag.py` - Combined graph and vector search
-- **Demo Application**: `src/session6/demo_session6.py` - Complete GraphRAG showcase
+- **Graph Traversal**: [`src/session6/graph_traversal_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/graph_traversal_engine.py) - Advanced traversal algorithms
+- **Knowledge Extraction**: [`src/session6/knowledge_graph_extractor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/knowledge_graph_extractor.py) - Graph construction and analysis
+- **Hybrid Graph-Vector**: [`src/session6/hybrid_graph_vector_rag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/hybrid_graph_vector_rag.py) - Combined graph and vector search
+- **Demo Application**: [`src/session6/demo_session6.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/demo_session6.py) - Complete GraphRAG showcase
 
 ### 🚀 Quick Start
 
