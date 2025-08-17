@@ -7,7 +7,7 @@
 
 ### Quick Start Guide
 
-- **👀 Observer (40 min)**: Read concepts + examine code structure
+- **👀 Observer (40 min)**: Read concepts + examine code structure  
 - **🙋‍♂️ Participant (75 min)**: Follow exercises + implement basic agents  
 - **🛠️ Implementer (120 min)**: Build custom agents + explore advanced patterns
 
@@ -26,8 +26,8 @@
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
 
-- 🔬 **[Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** (40 min) - Sophisticated reasoning loops
-- ⚡ **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** (35 min) - Speed & efficiency patterns
+- 🔬 **[Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** (40 min) - Sophisticated reasoning loops  
+- ⚡ **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** (35 min) - Speed & efficiency patterns  
 - 🔄 **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** (30 min) - Advanced memory systems
 
 **🗂️ Code Files**: All examples use files in [`src/session1/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session1)
@@ -69,10 +69,10 @@ class BaseAgent:
 
 The `run` method is where the magic happens. The actual implementation (available in the source file) involves parsing user input, determining if tools are needed, executing actions, and formatting the response.
 
-**Key Concepts:**  
+**Key Concepts:**
 
-1. **Model Interface**: How agents talk to LLMs
-2. **Memory Management**: Keeping track of context
+1. **Model Interface**: How agents talk to LLMs  
+2. **Memory Management**: Keeping track of context  
 3. **Tool Registry**: Available actions the agent can take
 
 #### Input/Output Handling (7 minutes)
@@ -135,7 +135,13 @@ Let's build a working agent from scratch:
 class SimpleAgent:
     def __init__(self):
         self.memory = []
-        
+```
+
+The SimpleAgent class starts with basic initialization, creating an empty memory list to store conversation history.
+
+Now let's add the core thinking logic that processes user input:
+
+```python
     def think(self, input_text: str) -> str:
         """Basic reasoning step"""
         # Add to memory
@@ -149,7 +155,11 @@ class SimpleAgent:
             
         self.memory.append(f"Agent: {response}")
         return response
-    
+```
+
+Finally, we add the main execution method and test the agent:
+
+```python
     def run(self, input_text: str) -> str:
         """Main execution method"""
         return self.think(input_text)
@@ -177,14 +187,24 @@ def reasoning_loop(self, task: str) -> str:
         # Think: Analyze current situation
         thought = self.generate_thought(task, step)
         print(f"Step {step + 1} - Thought: {thought}")
-        
+```
+
+The reasoning loop begins by setting up the thinking phase - the agent analyzes the current situation and generates thoughts about how to proceed.
+
+Next comes the action decision phase:
+
+```python
         # Act: Decide what to do
         if self.is_task_complete(thought):
             return self.generate_final_answer(thought)
             
         action = self.decide_action(thought)
         print(f"Step {step + 1} - Action: {action}")
-        
+```
+
+Finally, the agent observes the results and updates its memory for the next iteration:
+
+```python
         # Observe: See results
         observation = self.execute_action(action)
         print(f"Step {step + 1} - Observation: {observation}")
@@ -266,7 +286,13 @@ class SimpleTool:
     def execute(self, input_data: str) -> str:
         """Override this method in specific tools"""
         raise NotImplementedError
+```
 
+This base class defines the interface that all tools must follow. Each tool needs a name and description, plus an execute method.
+
+Now let's implement a specific calculator tool with safety checks:
+
+```python
 class CalculatorTool(SimpleTool):
     def __init__(self):
         super().__init__("calculator", "Performs basic math calculations")
@@ -282,7 +308,11 @@ class CalculatorTool(SimpleTool):
             return f"Calculation result: {result}"
         except Exception as e:
             return f"Math error: {e}"
+```
 
+Here's how to use the calculator tool:
+
+```python
 # Usage example
 calc = CalculatorTool()
 result = calc.execute("2 + 3 * 4")
@@ -304,14 +334,24 @@ class ToolUseAgent:
     def register_tool(self, tool: SimpleTool):
         """Add a tool to the agent's toolkit"""
         self.tools[tool.name] = tool
-    
+```
+
+The ToolUseAgent starts with basic setup, maintaining a registry of available tools and conversation memory.
+
+Now let's add the decision logic for when to use tools:
+
+```python
     def should_use_tool(self, user_input: str) -> tuple[bool, str]:
         """Decide if we need a tool for this input"""
         # Simple keyword-based tool selection
         if any(word in user_input.lower() for word in ['calculate', 'math', '+', '-', '*', '/']):
             return True, 'calculator'
         return False, None
-    
+```
+
+Finally, the main execution method that ties everything together:
+
+```python
     def run(self, user_input: str) -> str:
         """Execute with tool usage"""
         needs_tool, tool_name = self.should_use_tool(user_input)
@@ -385,7 +425,13 @@ class TestAgentFunctionality(unittest.TestCase):
         self.agent = SimpleAgent()
         self.tool_agent = ToolUseAgent()
         self.tool_agent.register_tool(CalculatorTool())
-    
+```
+
+The test class starts with setup, creating agent instances and registering tools for consistent testing.
+
+Now let's add the individual test methods:
+
+```python
     def test_basic_responses(self):
         """Test basic agent responses"""
         response = self.agent.run("Hello")
@@ -396,7 +442,11 @@ class TestAgentFunctionality(unittest.TestCase):
         """Test tool usage"""
         response = self.tool_agent.run("What is 5 * 6?")
         self.assertIn("30", response)
+```
 
+Finally, the test runner:
+
+```python
 # Run tests
 if __name__ == "__main__":
     unittest.main()
@@ -433,12 +483,22 @@ def run_agent_demo():
     # 1. Simple agent
     simple_agent = SimpleAgent()
     print("Simple Agent Response:", simple_agent.run("What is AI?"))
-    
+```
+
+The demo starts by testing our basic SimpleAgent with a question to see how it responds.
+
+Next, we test tool integration capabilities:
+
+```python
     # 2. Tool-enabled agent
     tool_agent = ToolUseAgent()
     tool_agent.register_tool(CalculatorTool())
     print("Tool Agent Response:", tool_agent.run("Calculate 12 * 8"))
-    
+```
+
+Finally, we demonstrate the advanced ReAct reasoning pattern:
+
+```python
     # 3. ReAct agent
     react_agent = ReActAgent()  # From react_agent.py
     print("ReAct Agent working on complex task...")
@@ -476,133 +536,94 @@ python test_agents.py
 
 ---
 
-### 🧭 **Choose Your Next Path:**
-
-- **[🔬 Module A: Advanced Agent Patterns →](Session1_ModuleA_Advanced_Agent_Patterns.md)** - Sophisticated reasoning loops
-- **[⚡ Module B: Performance Optimization →](Session1_ModuleB_Performance_Optimization.md)** - Speed & efficiency patterns
-- **[🔄 Module C: Complex State Management →](Session1_ModuleC_Complex_State_Management.md)** - Advanced memory systems
-- **[📝 Test Your Knowledge →](Session1_Test_Solutions.md)** - Comprehensive quiz
-- **[📖 Next Session: LangChain Foundations →](Session2_LangChain_Foundations.md)** - Framework implementation
-
-### 🎆 Complete Learning Path Options
-
-**Sequential Learning**: Core → Module A → Module B → Module C  
-**Targeted Learning**: Pick modules based on your interests
-
----
-
 ## 🧭 Navigation
 
-**Previous: [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)**
+**Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 
 **Optional Deep Dive Modules:**
 
-- **[🔬 Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)**
-- **[⚡ Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)**
-- **[🔄 Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)**
+- 🔬 **[Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** - Sophisticated reasoning loops  
+- ⚡ **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** - Speed & efficiency patterns  
+- 🔄 **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** - Advanced memory systems
 
-**[📝 Test Your Knowledge: Session 1 Solutions](Session1_Test_Solutions.md)**
+**📝 Test Your Knowledge:** [Session 1 Solutions](Session1_Test_Solutions.md)
 
-**[Next: Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)**
+**Next:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md) →
 
 ---
 
-## 📝 Multiple Choice Test - Session 1 (15 minutes)
+## 📝 Multiple Choice Test - Session 1
 
-Test your understanding of bare metal agent implementation and core patterns.
+Test your understanding of bare metal agent implementation and core patterns:
 
-### Question 1
-
-**What is the primary benefit of implementing agents from scratch before using frameworks?**
+**Question 1:** What is the primary benefit of implementing agents from scratch before using frameworks?  
 
 A) Better performance  
 B) Deeper understanding of agent mechanics  
 C) Easier deployment  
 D) Lower resource usage  
 
-### Question 2
-
-**In the BaseAgent class, what is the purpose of the conversation_history attribute?**
+**Question 2:** In the BaseAgent class, what is the purpose of the conversation_history attribute?  
 
 A) Tool execution logs  
 B) Error tracking  
 C) Maintaining context across interactions  
 D) Performance monitoring  
 
-### Question 3
-
-**Which method must be implemented by all subclasses of BaseAgent?**
+**Question 3:** Which method must be implemented by all subclasses of BaseAgent?  
 
 A) process_message()  
 B) add_tool()  
 C) _generate_response()  
 D) get_available_tools()  
 
-### Question 4
-
-**How does the Tool abstract base class ensure consistency across different tool implementations?**
+**Question 4:** How does the Tool abstract base class ensure consistency across different tool implementations?  
 
 A) By providing default implementations  
 B) By requiring execute() and _get_parameters() methods  
 C) By handling errors automatically  
 D) By managing tool state  
 
-### Question 5
-
-**What design pattern is demonstrated by the BaseAgent and its subclasses?**
+**Question 5:** What design pattern is demonstrated by the BaseAgent and its subclasses?  
 
 A) Factory Pattern  
 B) Observer Pattern  
 C) Template Method Pattern  
 D) Strategy Pattern  
 
-### Question 6
-
-**In the ReflectionAgent, when does the reflection loop terminate?**
+**Question 6:** In the ReflectionAgent, when does the reflection loop terminate?  
 
 A) After a fixed number of iterations  
 B) When the critique contains "SATISFACTORY"  
 C) When the response length exceeds a threshold  
 D) When no improvements are detected  
 
-### Question 7
-
-**What information is stored in the reflection_history?**
+**Question 7:** What information is stored in the reflection_history?  
 
 A) Only the final improved responses  
 B) Original response, critique, and improved response for each iteration  
 C) Just the critique feedback  
 D) Performance metrics only  
 
-### Question 8
-
-**What is the main advantage of the reflection pattern?**
+**Question 8:** What is the main advantage of the reflection pattern?  
 
 A) Faster response generation  
 B) Quality improvement through self-evaluation  
 C) Reduced computational costs  
 D) Simplified implementation  
 
-### Question 9
-
-**Which component is responsible for determining tool selection in the ToolAgent?**
+**Question 9:** Which component is responsible for determining tool selection in the ToolAgent?  
 
 A) The tool itself  
 B) The conversation history  
 C) LLM reasoning about available tools  
 D) Random selection  
 
-### Question 10
-
-**What makes the ReActAgent different from the basic ToolAgent?**
+**Question 10:** What makes the ReActAgent different from the basic ToolAgent?  
 
 A) It has more tools available  
 B) It explicitly shows thought and action steps  
 C) It runs faster  
 D) It has better error handling  
 
----
-
-**🗂️ View Test Solutions**: Complete answers and explanations available in `Session1_Test_Solutions.md`
-
-**Success Criteria**: Score 8+ out of 10 to demonstrate mastery of bare metal agent concepts.
+[**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)

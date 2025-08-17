@@ -3,6 +3,7 @@
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
+
 - **Deploy** production-ready MCP servers using containerization and cloud platforms
 - **Implement** comprehensive monitoring, health checks, and observability systems
 - **Configure** auto-scaling, load balancing, and high availability architectures
@@ -16,6 +17,7 @@ Moving from development to production requires addressing scalability, reliabili
 ![Production Deployment Architecture](images/production-deployment-architecture.png)
 
 The architecture above shows our comprehensive production deployment strategy:
+
 - **Containerization** with Docker for consistent environments
 - **Cloud deployment** on Google Cloud Run and AWS Lambda for scalability
 - **Monitoring stack** with Prometheus, Grafana, and distributed tracing
@@ -55,7 +57,11 @@ import aioredis
 import asyncio
 from prometheus_client import Counter, Histogram, Gauge
 import time
+```
 
+Next, we configure structured logging for production environments:
+
+```python
 # Configure structured logging for production
 logging.basicConfig(
     level=logging.INFO,
@@ -69,6 +75,7 @@ logger = logging.getLogger(__name__)
 ```
 
 **Key points:**
+
 - Structured logging with timestamps for debugging
 - File logging for persistent log storage
 - Standard log levels (INFO, WARNING, ERROR)
@@ -86,6 +93,7 @@ error_count = Counter('mcp_errors_total', 'Total MCP errors', ['error_type'])
 ```
 
 **Metrics explained:**
+
 - **Counter**: Tracks total counts (requests, errors)
 - **Histogram**: Measures distributions (response times)
 - **Gauge**: Tracks current values (active connections)
@@ -112,7 +120,11 @@ class ProductionMCPServer:
         self.redis_client: Optional[aioredis.Redis] = None
         self.cache_ttl = int(os.getenv('CACHE_TTL', '300'))  # 5 minutes default
         self.start_time = time.time()
-        
+```
+
+Next, we configure environment variables for cloud deployment compatibility:
+
+```python
         # Configuration from environment variables - essential for cloud deployment
         self.config = {
             'redis_url': os.getenv('REDIS_URL', 'redis://localhost:6379'),
@@ -126,6 +138,7 @@ class ProductionMCPServer:
 ```
 
 **Configuration strategy:**
+
 - All settings from environment variables
 - Sensible defaults for development
 - Production overrides through deployment
@@ -208,6 +221,7 @@ Perform operations and cache results for future requests:
 ```
 
 **Caching strategy:**
+
 - Deterministic cache keys ensure consistency
 - Cache misses trigger computation and storage
 - Cache hits dramatically improve response times
@@ -337,6 +351,7 @@ CMD ["python", "-m", "src.production_mcp_server"]
 ```
 
 **Container security features:**
+
 - **Minimal base image**: python:3.11-slim reduces attack surface
 - **Non-root execution**: Application runs as unprivileged user
 - **Layer optimization**: Dependencies cached separately from code
@@ -446,6 +461,7 @@ volumes:
 ```
 
 **Development environment features:**
+
 - **Service isolation**: Each component runs in its own container
 - **Dependency management**: Proper startup order with depends_on
 - **Health monitoring**: Built-in health checks for reliability
@@ -453,6 +469,7 @@ volumes:
 - **Production parity**: Same services and configurations as production
 
 **Development Environment Benefits:**
+
 - Complete monitoring stack included
 - Persistent data volumes for development continuity
 - Hot-reload capabilities for rapid iteration
@@ -641,6 +658,7 @@ Handle parsing errors and unexpected exceptions:
 ```
 
 **Handler features:**
+
 - **JSON-RPC compliance**: Proper error codes and response format
 - **Method routing**: Support for tools/list and tools/call operations
 - **Error handling**: Comprehensive exception catching and reporting
@@ -751,12 +769,14 @@ options:
 ```
 
 **CI/CD pipeline features:**
+
 - **Automatic triggers**: Builds triggered by git commits
 - **Version control**: Each deployment tagged with commit SHA
 - **Resource optimization**: High-CPU build machines for faster builds
 - **Environment promotion**: Configurable variables for different environments
 
 **Production Deployment Features:**
+
 - **Automatic scaling**: 1-50 instances based on demand  
 - **Resource limits**: 1GB memory, 2 CPU cores per instance
 - **Timeout configuration**: 5-minute timeout for long-running requests
@@ -977,6 +997,7 @@ output "service_account_email" {
 ```
 
 **Terraform advantages:**
+
 - **Infrastructure as Code**: Version-controlled, repeatable deployments
 - **State management**: Tracks resource changes and dependencies
 - **Plan before apply**: Preview changes before deployment
@@ -1023,6 +1044,7 @@ logger.setLevel(logging.INFO)
 ```
 
 **Lambda-specific considerations:**
+
 - **mangum**: Converts ASGI apps (FastAPI) to Lambda handlers
 - **Logging**: Use AWS CloudWatch-compatible logging
 - **Environment**: Cold starts require efficient initialization
@@ -1218,6 +1240,7 @@ async def execute_tool(body: Dict[str, Any]) -> Dict[str, Any]:
 ```
 
 **Lambda advantages:**
+
 - **Fast cold starts**: Direct handler minimizes initialization time
 - **AWS integration**: Native access to AWS services and context
 - **Cost optimization**: Pay only for execution time
@@ -1272,6 +1295,7 @@ Globals:
 ```
 
 **Global configuration benefits:**
+
 - **Consistent settings**: All functions inherit the same baseline configuration
 - **Resource limits**: 5-minute timeout and 1GB memory for compute-intensive tasks
 - **Environment variables**: Production-ready logging and environment detection
@@ -1468,6 +1492,7 @@ Outputs:
 ```
 
 **SAM template advantages:**
+
 - **Simplified serverless**: Higher-level abstractions for Lambda and API Gateway
 - **Built-in best practices**: Automatic IAM roles and resource relationships
 - **Easy deployment**: Single command deployment with `sam deploy`
@@ -1509,6 +1534,7 @@ from datetime import datetime, timedelta
 ```
 
 **Key libraries explained:**
+
 - **prometheus_client**: Industry-standard metrics collection
 - **aiohttp**: Async HTTP client for efficient health checks
 - **dataclasses**: Type-safe data structures for better code quality
@@ -1543,6 +1569,7 @@ class ServerHealthStatus:
 ```
 
 **Status categories:**
+
 - **healthy**: Server responding correctly
 - **unhealthy**: Server responding with errors
 - **error**: Server not reachable or timing out
@@ -1603,6 +1630,7 @@ Define comprehensive metrics for observability:
 ```
 
 **Metrics explained:**
+
 - **Counter**: Tracks total events (health checks)
 - **Histogram**: Measures distributions with buckets (response times)
 - **Gauge**: Tracks current values (availability, failure counts)
@@ -1726,6 +1754,7 @@ Handle network timeouts and unexpected errors:
 ```
 
 **Error handling strategy:**
+
 - **Timeouts**: 10-second limit prevents hanging requests
 - **HTTP errors**: Distinguish between server errors and connectivity issues
 - **JSON parsing**: Handle malformed responses gracefully
@@ -1764,6 +1793,7 @@ Check multiple servers simultaneously for better performance:
 ```
 
 **Concurrency benefits:**
+
 - **Parallel execution**: All servers checked simultaneously
 - **Exception isolation**: One failed check doesn't break others
 - **Improved performance**: Total check time is limited by slowest server
@@ -1815,6 +1845,7 @@ Analyze trends and generate actionable insights:
 ```
 
 **Analysis features:**
+
 - **Server categorization**: Healthy, unhealthy, and error states
 - **Alert triggers**: 3+ consecutive failures trigger alerts
 - **Performance metrics**: Average response time calculation
@@ -1875,6 +1906,7 @@ Implement the main monitoring loop with comprehensive error handling:
 ```
 
 **Loop features:**
+
 - **Continuous operation**: Runs indefinitely with configurable intervals
 - **State management**: Updates internal tracking for all servers
 - **Progressive alerting**: Logs warnings for issues, errors for critical problems
@@ -1919,6 +1951,7 @@ if __name__ == "__main__":
 ```
 
 **Configuration options:**
+
 - **servers**: List of MCP server URLs to monitor
 - **check_interval**: Health check frequency in seconds
 - **metrics_port**: Prometheus metrics exposure port
@@ -1952,6 +1985,7 @@ Set up the basic dashboard structure and metadata:
 ```
 
 **Dashboard features:**
+
 - **Auto-refresh**: Updates every 30 seconds for real-time monitoring
 - **Dark theme**: Reduces eye strain during long monitoring sessions
 - **Flexible time range**: Default 1-hour view with customizable timeframes
@@ -2118,12 +2152,14 @@ Display detailed health information and server filtering:
 ```
 
 **Dashboard benefits:**
+
 - **Comprehensive coverage**: Availability, performance, errors, and health status
 - **Real-time alerting**: Built-in alerts for critical thresholds
 - **Percentile tracking**: P50, P95, P99 response times for SLA monitoring
 - **Server filtering**: Dynamic server selection for focused analysis
 
 **Key metrics explained:**
+
 - **Availability**: Percentage of time servers are responding correctly
 - **Request rate**: Traffic volume per second across all servers
 - **Error rate**: Failed requests per second with automatic alerting
@@ -2141,18 +2177,21 @@ Congratulations! You've successfully transformed your MCP servers from developme
 ### Production Deployment Achievements:
 
 #### 🐳 **Containerization & Infrastructure**
+
 - ✅ **Docker containerization** with security best practices and health checks
 - ✅ **Multi-environment configuration** using environment variables
 - ✅ **Infrastructure as Code** with Terraform for reproducible deployments
 - ✅ **Container orchestration** with Docker Compose for local development
 
 #### ☁️ **Cloud Platform Deployment**
+
 - ✅ **Google Cloud Run** deployment with auto-scaling and load balancing
 - ✅ **AWS Lambda** serverless deployment with API Gateway integration
 - ✅ **CI/CD pipelines** with Cloud Build and SAM for automated deployments
 - ✅ **Secret management** using cloud-native secret stores
 
 #### 📊 **Monitoring & Observability**
+
 - ✅ **Prometheus metrics** collection for comprehensive monitoring
 - ✅ **Structured logging** with proper log levels and formatting
 - ✅ **Health check endpoints** for load balancer integration
@@ -2160,6 +2199,7 @@ Congratulations! You've successfully transformed your MCP servers from developme
 - ✅ **Distributed monitoring** across multiple server instances
 
 #### 🔧 **Production Features**
+
 - ✅ **Redis caching** for improved performance and reduced load
 - ✅ **Error handling** with graceful degradation and retries
 - ✅ **Resource management** with memory and CPU limits
@@ -2179,35 +2219,40 @@ Congratulations! You've successfully transformed your MCP servers from developme
 
 ### Quick Check Questions
 
-1. **What is the primary purpose of health checks in production MCP servers?**
-   - A) Improve performance
-   - B) Enable auto-scaling and monitoring
-   - C) Reduce costs  
-   - D) Increase security
+1. **What is the primary purpose of health checks in production MCP servers?**  
 
-2. **Which cloud service automatically scales based on request volume?**
-   - A) EC2
-   - B) Cloud Run
-   - C) Compute Engine
-   - D) Virtual Machines
+A) Improve performance  
+B) Enable auto-scaling and monitoring  
+C) Reduce costs  
+D) Increase security  
 
-3. **What format does Prometheus use for metrics?**
-   - A) JSON
-   - B) XML
-   - C) Plain text with specific format
-   - D) Binary
+2. **Which cloud service automatically scales based on request volume?**  
 
-4. **How does the Lambda handler communicate with MCP servers?**
-   - A) Direct function calls
-   - B) HTTP/JSON-RPC protocol
-   - C) gRPC
-   - D) WebSockets
+A) EC2  
+B) Cloud Run  
+C) Compute Engine  
+D) Virtual Machines  
 
-5. **What's the benefit of using Redis cache in MCP servers?**
-   - A) Security
-   - B) Reduced latency and load
-   - C) Better logging
-   - D) Simpler deployment
+3. **What format does Prometheus use for metrics?**  
+
+A) JSON  
+B) XML  
+C) Plain text with specific format  
+D) Binary  
+
+4. **How does the Lambda handler communicate with MCP servers?**  
+
+A) Direct function calls  
+B) HTTP/JSON-RPC protocol  
+C) gRPC  
+D) WebSockets  
+
+5. **What's the benefit of using Redis cache in MCP servers?**  
+
+A) Security  
+B) Reduced latency and load  
+C) Better logging  
+D) Simpler deployment  
 
 ### Practical Exercise
 
@@ -2240,6 +2285,7 @@ async def resilient_operation(data: Dict[str, Any]) -> Dict:
 ## Next Session Preview
 
 In Session 5, we'll focus on **Security and Authentication** for MCP servers:
+
 - JWT authentication and authorization
 - API key management and rotation
 - Rate limiting and DDoS protection
@@ -2263,15 +2309,69 @@ Ready to test your understanding of Production MCP Deployment? Take our comprehe
 
 ### Multiple Choice Test
 Test your knowledge with 10 carefully crafted questions covering:
+
 - Production deployment requirements and patterns
 - Container orchestration and Docker best practices
 - Monitoring and observability with Prometheus
 - Auto-scaling strategies and performance optimization
 - CI/CD pipelines and infrastructure as code
 
-**[📝 Take the Test - Session 4 Test Solutions](Session4_Test_Solutions.md)**
+---
 
-*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+## 📝 Multiple Choice Test - Session 4
+
+Test your understanding of Production MCP Deployment:
+
+**Question 1:** What is the primary benefit of containerizing MCP servers for production deployment?  
+
+A) Reduced development time  
+B) Consistent environments across development, staging, and production  
+C) Lower licensing costs  
+D) Simplified code structure  
+
+**Question 2:** Which Prometheus metric type is best suited for tracking the number of active connections to an MCP server?  
+
+A) Counter  
+B) Histogram  
+C) Gauge  
+D) Summary  
+
+**Question 3:** What is the main advantage of using Infrastructure as Code (Terraform) for MCP server deployment?  
+
+A) Faster code execution  
+B) Version-controlled, repeatable deployments  
+C) Reduced memory usage  
+D) Better error handling  
+
+**Question 4:** In AWS Lambda deployment, what is the purpose of the Mangum adapter?  
+
+A) Database connection pooling  
+B) Converting ASGI applications to Lambda handlers  
+C) Monitoring Lambda functions  
+D) Managing environment variables  
+
+**Question 5:** Which component is essential for load balancers to determine if an MCP server is ready to handle requests?  
+
+A) Metrics endpoint  
+B) Health check endpoint  
+C) Authentication endpoint  
+D) Logging endpoint  
+
+[**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
+
+---
+
+## 🧭 Navigation
+
+**Previous:** Session 3 - Agent Communication Patterns
+
+**Optional Deep Dive Modules:**
+- 🔬 **[Module A: Advanced Container Orchestration](Session4_ModuleA_Container_Orchestration.md)** - Kubernetes deployment and service mesh patterns
+- 🏭 **[Module B: Multi-Cloud Deployment Strategies](Session4_ModuleB_Multi_Cloud.md)** - Cross-cloud redundancy and failover
+
+**📝 Test Your Knowledge:** [Session 4 Test Solutions](Session4_Test_Solutions.md)
+
+**Next:** Session 5 - Security and Authentication →
 
 ---
 

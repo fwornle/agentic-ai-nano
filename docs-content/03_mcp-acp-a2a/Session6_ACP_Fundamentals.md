@@ -3,9 +3,10 @@
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
+
 - **Understand** the Agent Communication Protocol (ACP) architecture and its role in local agent coordination
 - **Build** your first ACP-compatible agent from scratch
-- **Implement** agent discovery mechanisms for offline environments  
+- **Implement** agent discovery mechanisms for offline environments
 - **Create** specialized agents for different tasks (data processing, text analysis)
 - **Orchestrate** multi-agent workflows using the coordinator pattern
 
@@ -126,7 +127,7 @@ agent_metadata = AgentMetadata(
 Every ACP agent exposes four standard REST endpoints:
 
 ```python
-# From [`src/session6/acp_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/acp_agent.py) - simplified
+# From [`src/session6/acp_agent.py`] - simplified
 @app.get("/metadata")
 async def get_metadata():
     """Return this agent's information"""
@@ -136,7 +137,11 @@ async def get_metadata():
 async def communicate(message: ACPMessage):
     """Handle requests from other agents"""
     return await self.handle_message(message)
+```
 
+Additional endpoints for discovery and health checks:
+
+```python
 @app.get("/discover")
 async def discover(capability: Optional[str] = None):
     """Find other agents, optionally filtered by capability"""
@@ -149,9 +154,10 @@ async def get_status():
 ```
 
 **Why These Four?**
+
 - **metadata**: "Who are you and what can you do?"
 - **communicate**: "Please do this task for me"
-- **discover**: "Who else is available?"  
+- **discover**: "Who else is available?"
 - **status**: "Are you still working?"
 
 ---
@@ -448,7 +454,7 @@ python test_client.py
 **What the Test Does:**
 
 1. **Discovery Test**: Asks coordinator what agents it knows about
-2. **Individual Tests**: Tests each agent's capabilities directly  
+2. **Individual Tests**: Tests each agent's capabilities directly
 3. **Workflow Test**: Runs a complete data processing workflow
 
 **Sample Test Output:**
@@ -568,13 +574,9 @@ GET http://localhost:8000/discover?capability=process_csv
 ## Key Takeaways
 
 1. **Local-First Design**: ACP agents work without internet, perfect for edge environments
-
 2. **Standard REST**: No specialized libraries—any HTTP client can communicate
-
 3. **Capability-Based Discovery**: Agents find each other by what they can do, not who they are
-
 4. **Orchestration Pattern**: Coordinator agents manage complex workflows without doing the work themselves
-
 5. **Error Resilience**: Always check if required agents are available before starting workflows
 
 ## What's Next?
@@ -583,22 +585,56 @@ In the next session, you'll learn how these local ACP agents can communicate wit
 
 ---
 
-## 📋 Test Your Knowledge
+## 📝 Multiple Choice Test - Session 6
 
-Ready to test your understanding of ACP Fundamentals? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+Test your understanding of ACP Fundamentals:
 
-### Multiple Choice Test
-Test your knowledge with 10 carefully crafted questions covering:
-- Local-first agent coordination principles
-- ACP architecture and design patterns
-- Agent capability declaration and discovery
-- Coordinator pattern implementation
-- Service registration and metadata management
+**Question 1:** What is the primary advantage of ACP's local-first design over cloud-dependent protocols?
 
-**[📝 Take the Test - Session 6 Test Solutions](Session6_Test_Solutions.md)**
+A) Higher security through encryption  
+B) Better scalability with more agents  
+C) Offline capability and reduced latency  
+D) Lower computational requirements  
 
-*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+**Question 2:** Which four standard REST endpoints must every ACP agent expose?
+
+A) /start, /stop, /status, /logs  
+B) /metadata, /communicate, /discover, /status  
+C) /register, /unregister, /health, /metrics  
+D) /init, /execute, /query, /shutdown  
+
+**Question 3:** In ACP, how do agents discover capabilities of other agents?
+
+A) Through a centralized directory service  
+B) By scanning network ports automatically  
+C) Using capability-based discovery via the /discover endpoint  
+D) Through configuration files shared between agents  
+
+**Question 4:** What is the role of a coordinator agent in ACP workflows?
+
+A) To execute all computational tasks directly  
+B) To orchestrate multiple agents without doing the work itself  
+C) To serve as a backup for failed agents  
+D) To monitor network performance and security  
+
+**Question 5:** In the ACP message structure, what does the "capability" field specify?
+
+A) The agent's computational capacity  
+B) The specific function or service being requested  
+C) The maximum message size allowed  
+D) The authentication level required  
+
+[**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
 
 ---
 
-*Ready to explore cross-platform agent collaboration? Continue to Session 7: Agent-to-Agent Communication (A2A)!*
+## 🧭 Navigation
+
+**Previous:** Session 5 - MCP Integration Patterns
+
+**Optional Deep Dive Modules:**
+
+- 🔬 **[Module A: Advanced ACP Patterns](Session6_ModuleA_Advanced_ACP.md)** - Error handling and resilience patterns
+- 🏭 **[Module B: Production Deployment](Session6_ModuleB_Production.md)** - Scaling ACP networks in production
+
+**Next:** Session 7 - Agent-to-Agent Communication (A2A) →

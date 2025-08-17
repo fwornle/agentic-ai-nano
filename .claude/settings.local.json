@@ -44,7 +44,8 @@
       "Bash(source:*)",
       "Bash(mkdocs serve:*)",
       "Bash(git add:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(rg:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"

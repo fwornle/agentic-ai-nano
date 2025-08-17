@@ -773,6 +773,7 @@ After testing, export your server configuration for use with AI clients:
    - Validate error handling with invalid inputs
 
 2. **Real-Time Feedback Loop**:
+
 ```
    Code → Save → Inspector Auto-Refresh → Test → Iterate
 ```
@@ -785,9 +786,10 @@ After testing, export your server configuration for use with AI clients:
 #### **Production Validation**
 
 **Pre-Deployment Checklist using MCP Inspector:**
+
 ```
 ☑ All tools execute without errors
-☑ Resource subscriptions work properly  
+☑ Resource subscriptions work properly
 ☑ Prompt templates render correctly
 ☑ Error messages are user-friendly
 ☑ Input validation catches edge cases
@@ -807,7 +809,7 @@ After testing, export your server configuration for use with AI clients:
 The MCP Inspector provides comprehensive real-time monitoring capabilities including:
 - **Connection Status**: Live connection health monitoring
 - **Request Metrics**: Track request counts, success rates, and response times
-- **Activity Logs**: Recent request history with detailed timing information  
+- **Activity Logs**: Recent request history with detailed timing information
 - **Performance Analytics**: Average response times and error rate analysis
 - **Message History**: Complete JSON-RPC message logs for debugging
 
@@ -823,7 +825,7 @@ For detailed request/response flow analysis, refer to the following diagram:
 
 **Solution**: Create MCP servers for each system, use ACP for efficient local agent coordination, and enable A2A communication for cross-departmental agent collaboration.
 
-### 2. Multi-Vendor Service Integration  
+### 2. Multi-Vendor Service Integration
 
 **Scenario**: A travel platform needs to integrate flight APIs from multiple airlines, hotel booking systems, and local activity providers.
 
@@ -839,7 +841,7 @@ For detailed request/response flow analysis, refer to the following diagram:
 
 ### Phase 1: Understanding MCP (Sessions 1-5)
 - Build basic MCP servers and clients
-- Integrate with file systems and databases  
+- Integrate with file systems and databases
 - Add security and production deployment
 - Master LangChain integration
 
@@ -867,135 +869,126 @@ In the following sessions, you'll get hands-on experience building each componen
 
 The future of AI is not single agents working in isolation, but collaborative networks of specialized agents that can work together to solve complex problems. MCP, ACP, and A2A are the foundational protocols that make this vision possible.
 
-## Knowledge Check: Multiple Choice Quiz
+---
 
-Test your understanding of MCP, ACP, and A2A concepts with this comprehensive quiz.
+## 📝 Multiple Choice Test - Session 0
 
-### Question 1
-What is the primary purpose of the Model Context Protocol (MCP)?
+Test your understanding of MCP, ACP, and A2A concepts:
 
-A) To enable direct communication between AI agents
-B) To standardize how LLMs interact with external data sources and tools
-C) To provide a framework for building AI agents
-D) To manage agent discovery across organizations
+**Question 1:** What is the primary purpose of the Model Context Protocol (MCP)?
 
-### Question 2
-Which component of MCP is responsible for exposing capabilities to clients?
+A) To enable direct communication between AI agents  
+B) To standardize how LLMs interact with external data sources and tools  
+C) To provide a framework for building AI agents  
+D) To manage agent discovery across organizations  
 
-A) MCP Client
-B) MCP Tools
-C) MCP Server
-D) MCP Resources
+**Question 2:** Which component of MCP is responsible for exposing capabilities to clients?
 
-### Question 3
-What are the three main types of capabilities that MCP servers can expose?
+A) MCP Client  
+B) MCP Tools  
+C) MCP Server  
+D) MCP Resources  
 
-A) Agents, Models, and Protocols
-B) Tools, Resources, and Prompts
-C) Servers, Clients, and Bridges
-D) APIs, Databases, and Files
+**Question 3:** What are the three main types of capabilities that MCP servers can expose?
 
-### Question 4
-Which protocol is designed for local-first agent coordination with minimal overhead?
+A) Agents, Models, and Protocols  
+B) Tools, Resources, and Prompts  
+C) Servers, Clients, and Bridges  
+D) APIs, Databases, and Files  
 
-A) A2A (Agent-to-Agent)
-B) MCP (Model Context Protocol)
-C) ADK (Agent Development Kit)
-D) ACP (Agent Communication Protocol)
+**Question 4:** Which protocol is designed for local-first agent coordination with minimal overhead?
 
-### Question 5
-What is a key advantage of ACP compared to other agent protocols?
+A) A2A (Agent-to-Agent)  
+B) MCP (Model Context Protocol)  
+C) ADK (Agent Development Kit)  
+D) ACP (Agent Communication Protocol)  
 
-A) It only works with cloud services
-B) It enables offline operation and local discovery
-C) It requires specialized SDK libraries
-D) It doesn't support multimodal communication
+**Question 5:** What is a key advantage of ACP compared to other agent protocols?
 
-### Question 6
-How do agents discover each other in the A2A protocol?
+A) It only works with cloud services  
+B) It enables offline operation and local discovery  
+C) It requires specialized SDK libraries  
+D) It doesn't support multimodal communication  
 
-A) Through manual configuration files
-B) Using centralized agent registries only
-C) Via `.well-known/agent.json` files and discovery services
-D) Through direct IP address connections
+**Question 6:** How do agents discover each other in the A2A protocol?
 
-### Question 7
-What format does A2A use for agent capability advertisement?
+A) Through manual configuration files  
+B) Using centralized agent registries only  
+C) Via `.well-known/agent.json` files and discovery services  
+D) Through direct IP address connections  
 
-A) XML configuration files
-B) YAML metadata files
-C) JSON capability descriptors
-D) Protocol buffer definitions
+**Question 7:** What format does A2A use for agent capability advertisement?
 
-### Question 8
-In the travel planning example, which protocol handles local agent coordination for data processing?
+A) XML configuration files  
+B) YAML metadata files  
+C) JSON capability descriptors  
+D) Protocol buffer definitions  
 
-A) A2A protocol
-B) ACP registry
-C) MCP client/server
-D) Direct API calls
+**Question 8:** In the travel planning example, which protocol handles local agent coordination for data processing?
 
-### Question 9
-What is the primary function of MCP Inspector?
+A) A2A protocol  
+B) ACP registry  
+C) MCP client/server  
+D) Direct API calls  
 
-A) To deploy MCP servers to production
-B) To test, debug, and validate MCP servers
-C) To create new MCP protocols
-D) To monitor agent-to-agent communication
+**Question 9:** What is the primary function of MCP Inspector?
 
-### Question 10
-Which command is used to install MCP Inspector via npm?
+A) To deploy MCP servers to production  
+B) To test, debug, and validate MCP servers  
+C) To create new MCP protocols  
+D) To monitor agent-to-agent communication  
 
-A) `npm install mcp-inspector`
-B) `npm install -g @modelcontextprotocol/inspector`
-C) `npm install @mcp/inspector`
-D) `npm install -g mcp-protocol-inspector`
+**Question 10:** Which command is used to install MCP Inspector via npm?
 
-### Question 11
-When should you use A2A protocol instead of MCP?
+A) `npm install mcp-inspector`  
+B) `npm install -g @modelcontextprotocol/inspector`  
+C) `npm install @mcp/inspector`  
+D) `npm install -g mcp-protocol-inspector`  
 
-A) When you need to access local databases
-B) When you need agents to communicate across organizational boundaries
-C) When you need to expose tools to LLMs
-D) When you need to manage prompt templates
+**Question 11:** When should you use A2A protocol instead of MCP?
 
-### Question 12
-What transport mechanism does MCP typically use for communication?
+A) When you need to access local databases  
+B) When you need agents to communicate across organizational boundaries  
+C) When you need to expose tools to LLMs  
+D) When you need to manage prompt templates  
 
-A) HTTP REST only
-B) WebSocket only
-C) stdio (standard input/output) and other transports
-D) gRPC only
+**Question 12:** What transport mechanism does MCP typically use for communication?
 
-### Question 13
-In ACP, how do agents discover each other in offline environments?
+A) HTTP REST only  
+B) WebSocket only  
+C) stdio (standard input/output) and other transports  
+D) gRPC only  
 
-A) Through cloud-based registries only
-B) Using local runtime discovery and embedded metadata
-C) They cannot discover each other offline
-D) Through manual configuration files
+**Question 13:** In ACP, how do agents discover each other in offline environments?
 
-### Question 14
-Which of the following is NOT a key problem that A2A solves?
+A) Through cloud-based registries only  
+B) Using local runtime discovery and embedded metadata  
+C) They cannot discover each other offline  
+D) Through manual configuration files  
 
-A) Agent discovery
-B) Communication standards
-C) Model training optimization
-D) Cross-organization collaboration
+**Question 14:** Which of the following is NOT a key problem that A2A solves?
 
-### Question 15
-What is the recommended development path for mastering these protocols?
+A) Agent discovery  
+B) Communication standards  
+C) Model training optimization  
+D) Cross-organization collaboration  
 
-A) Start with A2A, then ACP, then MCP
-B) Start with ACP, then MCP, then A2A
-C) Start with MCP, then ACP, then A2A
-D) Learn all three simultaneously
+**Question 15:** What is the recommended development path for mastering these protocols?
+
+A) Start with A2A, then ACP, then MCP  
+B) Start with ACP, then MCP, then A2A  
+C) Start with MCP, then ACP, then A2A  
+D) Learn all three simultaneously  
+
+[**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 
 ---
 
-## **Ready to Check Your Answers?**
+## 🧭 Navigation
 
-**[View Test Solutions](Session0_Test_Solutions.md)**
+**Next:** Session 1 - Building Your First MCP Server →
+
+**📝 Test Your Knowledge:** [Session 0 Solutions](Session0_Test_Solutions.md)
 
 ---
 

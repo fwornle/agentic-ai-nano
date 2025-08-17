@@ -5,6 +5,7 @@
 **Your Learning Path**: Choose your engagement level
 
 ### Quick Start Guide
+
 - **👀 Observer (45 min)**: Read concepts + examine team patterns
 - **🙋‍♂️ Participant (75 min)**: Follow exercises + build crews
 - **🛠️ Implementer (110 min)**: Create custom teams + explore advanced flows
@@ -22,10 +23,11 @@
 | ⚡ Performance & Optimization | 3 concepts | 10 min | Optimization |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
+
 - 🔬 **[Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)** (45 min) - Sophisticated workflow patterns & dynamic team formation
 - 🏭 **[Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)** (40 min) - Production team architectures & custom tools
 
-**🗂️ Code Files**: All examples use files in [`src/session4/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session4)
+**🗂️ Code Files**: All examples use files in [`src/session4/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session4)  
 **🚀 Quick Start**: Run `cd src/session4 && python crewai_basics.py` to see CrewAI teams in action
 
 ---
@@ -43,11 +45,17 @@ CrewAI models agent systems like human teams with specialized roles:
 
 🗂️ **File**: [`src/session4/crewai_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/crewai_basics.py) - Core team setup
 
+First, we import the necessary CrewAI components:
+
 ```python
 from crewai import Agent, Task, Crew, Process
 from crewai_tools import SerperDevTool, FileReadTool
+```
 
-# Define specialized team members
+Next, we define our research specialist with web search capabilities:
+
+```python
+# Research specialist with search tools
 researcher = Agent(
     role='Research Specialist',
     goal='Gather comprehensive information on assigned topics',
@@ -55,14 +63,24 @@ researcher = Agent(
     tools=[SerperDevTool()],
     verbose=True
 )
+```
 
+Then we create a content writer for generating engaging materials:
+
+```python
+# Content creation specialist
 writer = Agent(
     role='Content Writer', 
     goal='Create engaging, well-structured content',
     backstory='Professional writer skilled in various content formats',
     verbose=True
 )
+```
 
+Finally, we add an editor for quality assurance:
+
+```python
+# Quality assurance editor
 editor = Agent(
     role='Content Editor',
     goal='Review and refine content for quality and accuracy',
@@ -72,6 +90,7 @@ editor = Agent(
 ```
 
 **Key Concepts:**
+
 1. **Role Specialization**: Each agent has specific expertise and responsibilities
 2. **Goal-Oriented Design**: Agents work toward clear, defined objectives
 3. **Collaborative Workflow**: Agents hand off work in structured sequences
@@ -98,8 +117,10 @@ data_analyst = Agent(
 #### Collaboration Patterns (5 minutes)
 How agents work together effectively:
 
+First, let's see the sequential collaboration pattern:
+
 ```python
-# Sequential collaboration pattern
+# Sequential collaboration - agents work one after another
 def create_content_team():
     return Crew(
         agents=[researcher, writer, editor],
@@ -107,8 +128,12 @@ def create_content_team():
         verbose=True,
         memory=True
     )
+```
 
-# Hierarchical pattern (with manager)
+Now, here's the hierarchical pattern with a manager:
+
+```python
+# Hierarchical pattern requires a manager agent
 def create_hierarchical_team():
     manager = Agent(
         role='Team Manager',
@@ -116,7 +141,11 @@ def create_hierarchical_team():
         backstory='Experienced project manager with technical background',
         allow_delegation=True
     )
-    
+```
+
+Finally, we assemble the hierarchical crew with the manager in control:
+
+```python
     return Crew(
         agents=[manager, researcher, writer, editor],
         process=Process.hierarchical,
@@ -134,11 +163,13 @@ def create_hierarchical_team():
 #### Agent Role Creation (8 minutes)
 🗂️ **File**: [`src/session4/multi_agent_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/multi_agent_crew.py) - Complete team implementations
 
+Let's start by defining our research team with three specialized agents:
+
 ```python
 def create_research_crew():
     """Create a research-focused crew"""
     
-    # Primary researcher
+    # Primary researcher - leads the research effort
     lead_researcher = Agent(
         role='Lead Researcher',
         goal='Conduct thorough research and coordinate findings',
@@ -148,8 +179,12 @@ def create_research_crew():
         allow_delegation=True,
         verbose=True
     )
-    
-    # Specialized fact-checker  
+```
+
+Next, we add a specialized fact-checker to ensure accuracy:
+
+```python
+    # Specialized fact-checker for verification
     fact_checker = Agent(
         role='Fact Checker',
         goal='Verify accuracy of research findings',
@@ -158,8 +193,12 @@ def create_research_crew():
         tools=[SerperDevTool()],
         verbose=True
     )
-    
-    # Report synthesizer
+```
+
+Finally, we include a synthesizer to combine findings into coherent insights:
+
+```python
+    # Report synthesizer for final output
     synthesizer = Agent(
         role='Research Synthesizer', 
         goal='Combine research into coherent, actionable insights',
@@ -173,6 +212,8 @@ def create_research_crew():
 
 #### Task Definition (7 minutes)
 Creating clear, actionable tasks:
+
+Now we define the tasks for our research crew. First, the primary research task:
 
 ```python
 def create_research_tasks(topic: str):
@@ -192,8 +233,12 @@ def create_research_tasks(topic: str):
         agent=lead_researcher,
         expected_output='Comprehensive research report with citations'
     )
-    
-    # Fact verification task  
+```
+
+Next, we define the fact verification task that builds on the research:
+
+```python
+    # Fact verification task builds on research findings
     verification_task = Task(
         description=f'''Verify the accuracy of research findings on: {topic}
         
@@ -207,8 +252,12 @@ def create_research_tasks(topic: str):
         agent=fact_checker,
         expected_output='Verification report with accuracy assessment'
     )
-    
-    # Synthesis task
+```
+
+Finally, the synthesis task combines everything into a final report:
+
+```python
+    # Synthesis task combines verified research into final output
     synthesis_task = Task(
         description=f'''Synthesize research and verification into final report
         
@@ -229,6 +278,8 @@ def create_research_tasks(topic: str):
 #### Crew Assembly (5 minutes)
 Putting the team together:
 
+Now we assemble everything into a functioning crew:
+
 ```python
 def assemble_research_crew(topic: str):
     """Assemble and configure the complete crew"""
@@ -236,8 +287,12 @@ def assemble_research_crew(topic: str):
     # Get agents and tasks
     agents = create_research_crew()
     tasks = create_research_tasks(topic)
-    
-    # Create the crew
+```
+
+Next, we create the crew with performance optimizations:
+
+```python
+    # Create the crew with optimization settings
     crew = Crew(
         agents=agents,
         tasks=tasks,
@@ -250,8 +305,12 @@ def assemble_research_crew(topic: str):
     )
     
     return crew
+```
 
-# Usage
+Finally, here's how to use the assembled crew:
+
+```python
+# Usage example
 topic = "Impact of AI on software development"
 research_crew = assemble_research_crew(topic)
 result = research_crew.kickoff()
@@ -298,11 +357,13 @@ Managing task dependencies and handoffs:
 
 🗂️ **File**: [`src/session4/hierarchical_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/hierarchical_crew.py) - Advanced orchestration
 
+Let's create a hierarchical workflow starting with the team manager:
+
 ```python
 def create_hierarchical_workflow():
     """Create a hierarchical crew with delegation"""
     
-    # Team manager
+    # Team manager with delegation capabilities
     project_manager = Agent(
         role='Project Manager',
         goal='Coordinate team activities and ensure deliverable quality',
@@ -311,8 +372,12 @@ def create_hierarchical_workflow():
         allow_delegation=True,
         verbose=True
     )
-    
-    # Specialized workers
+```
+
+Now we add the specialized development team members:
+
+```python
+    # Backend specialist
     backend_dev = Agent(
         role='Backend Developer',
         goal='Design and implement server-side functionality',
@@ -320,14 +385,19 @@ def create_hierarchical_workflow():
         verbose=True
     )
     
+    # Frontend specialist
     frontend_dev = Agent(
         role='Frontend Developer', 
         goal='Create user interfaces and user experiences',
         backstory='UI/UX focused developer with modern framework expertise.',
         verbose=True
     )
-    
-    # Complex project task
+```
+
+Next, we define the complex project task that requires coordination:
+
+```python
+    # Complex project task requiring delegation
     project_task = Task(
         description='''Plan and coordinate development of a web application
         
@@ -342,7 +412,11 @@ def create_hierarchical_workflow():
         agent=project_manager,
         expected_output='Complete project plan with task assignments'
     )
-    
+```
+
+Finally, we assemble the hierarchical crew with the manager in control:
+
+```python
     return Crew(
         agents=[project_manager, backend_dev, frontend_dev],
         tasks=[project_task],
@@ -355,6 +429,8 @@ def create_hierarchical_workflow():
 #### Result Aggregation (7 minutes)
 Collecting and combining agent outputs:
 
+First, let's create a function to process and analyze crew results:
+
 ```python
 def process_crew_results(result):
     """Process and analyze crew results"""
@@ -366,8 +442,12 @@ def process_crew_results(result):
         'output_length': len(str(result)),
         'key_insights': []
     }
-    
-    # Analyze result content (simplified)
+```
+
+Next, we analyze the result content for insights:
+
+```python
+    # Analyze result content for key insights
     result_text = str(result)
     if 'recommendation' in result_text.lower():
         summary['key_insights'].append('Contains recommendations')
@@ -375,8 +455,12 @@ def process_crew_results(result):
         summary['key_insights'].append('Includes analysis')
         
     return summary
+```
 
-# Usage
+Here's how to use the result processing function:
+
+```python
+# Usage example
 crew = create_hierarchical_workflow()
 result = crew.kickoff()
 analysis = process_crew_results(result)
@@ -385,6 +469,8 @@ print(f"Result Analysis: {analysis}")
 
 #### Communication Patterns (5 minutes)
 How agents share information:
+
+First, let's create a crew with enhanced memory capabilities:
 
 ```python
 # Memory-enabled communication
@@ -404,7 +490,11 @@ def create_memory_enabled_crew():
     )
     
     return crew
+```
 
+Now, here's how to create tasks that share information across the crew:
+
+```python
 # Cross-task information sharing
 task_with_context = Task(
     description='''Build upon previous research findings.
@@ -432,6 +522,8 @@ CrewAI's performance enhancements:
 
 🗂️ **File**: [`src/session4/performance_optimization.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/performance_optimization.py) - Performance patterns
 
+Here's how to create a performance-optimized crew:
+
 ```python
 def create_optimized_crew():
     """Create performance-optimized crew"""
@@ -445,6 +537,11 @@ def create_optimized_crew():
         cache=True,           # Cache intermediate results
         max_rpm=30,          # Increase rate limit
         memory=True,         # Enable memory for context
+```
+
+Add efficient embeddings and resource management:
+
+```python
         embedder={           # Efficient embeddings
             "provider": "openai",
             "config": {"model": "text-embedding-3-small"}
@@ -485,8 +582,10 @@ def monitor_crew_execution(crew, task_description):
 #### Optimization Techniques (3 minutes)
 Best practices for crew performance:
 
+Here are the key performance optimization strategies for CrewAI:
+
 ```python
-# Performance best practices
+# Performance best practices organized by category
 optimization_tips = {
     'agent_design': [
         'Use specific, focused roles',
@@ -524,6 +623,7 @@ python hierarchical_crew.py          # Team management
 ```
 
 ### Self-Assessment Checklist
+
 - [ ] I understand CrewAI's team-based approach
 - [ ] I can create agents with specialized roles
 - [ ] I can design tasks and coordinate workflows
@@ -536,6 +636,7 @@ python hierarchical_crew.py          # Team management
 ---
 
 ### 🧭 **Choose Your Next Path:**
+
 - **[🔬 Module A: Advanced CrewAI Flows →](Session4_ModuleA_Advanced_CrewAI_Flows.md)** - Sophisticated workflow patterns & dynamic team formation
 - **[🏭 Module B: Enterprise Team Patterns →](Session4_ModuleB_Enterprise_Team_Patterns.md)** - Production team architectures & custom tools
 - **[📝 Test Your Knowledge →](Session4_Test_Solutions.md)** - Comprehensive quiz
@@ -552,81 +653,61 @@ python hierarchical_crew.py          # Team management
 
 Test your understanding of CrewAI team orchestration and collaborative patterns.
 
-### Question 1
-**What is CrewAI's primary strength compared to other agent frameworks?**
-
+**Question 1:** What is CrewAI's primary strength compared to other agent frameworks?  
 A) Fastest execution speed  
 B) Team-based collaboration with role specialization  
 C) Lowest resource usage  
 D) Easiest deployment  
 
-### Question 2
-**In CrewAI, what defines an agent's behavior and capabilities?**
-
+**Question 2:** In CrewAI, what defines an agent's behavior and capabilities?  
 A) Tools only  
 B) Role, goal, and backstory  
 C) Memory capacity  
 D) Processing speed  
 
-### Question 3
-**What is the purpose of the `expected_output` parameter in CrewAI tasks?**
-
+**Question 3:** What is the purpose of the `expected_output` parameter in CrewAI tasks?  
 A) To validate agent responses  
 B) To guide task execution and set clear expectations  
 C) To measure performance  
 D) To handle errors  
 
-### Question 4
-**Which CrewAI process type offers the most control over task execution order?**
-
+**Question 4:** Which CrewAI process type offers the most control over task execution order?  
 A) Sequential  
 B) Hierarchical  
 C) Parallel  
 D) Random  
 
-### Question 5
-**What makes CrewAI Flows different from regular CrewAI execution?**
-
+**Question 5:** What makes CrewAI Flows different from regular CrewAI execution?  
 A) They use different agents  
 B) They provide structured workflow control with conditional logic  
 C) They run faster  
 D) They require fewer resources  
 
-### Question 6
-**In hierarchical process, what role does the manager agent play?**
-
+**Question 6:** In hierarchical process, what role does the manager agent play?  
 A) Executes all tasks  
 B) Delegates tasks and coordinates team activities  
 C) Stores team memory  
 D) Handles user interface  
 
-### Question 7
-**What is the main advantage of using custom tools in CrewAI?**
-
+**Question 7:** What is the main advantage of using custom tools in CrewAI?  
 A) Better performance  
 B) Extending agent capabilities for specific business needs  
 C) Lower costs  
 D) Simpler implementation  
 
-### Question 8
-**How does CrewAI handle memory sharing between agents?**
-
+**Question 8:** How does CrewAI handle memory sharing between agents?  
 A) Global variables  
 B) Shared crew memory and individual agent memories  
 C) Database storage  
 D) File-based sharing  
 
-### Question 9
-**What is the purpose of the backstory in a CrewAI agent?**
-
+**Question 9:** What is the purpose of the backstory in a CrewAI agent?  
 A) Performance tracking  
 B) Providing context and personality for better role performance  
 C) Error handling  
 D) Task scheduling  
 
-### Question 10
-**Which feature makes CrewAI particularly suitable for business workflows?**
-
+**Question 10:** Which feature makes CrewAI particularly suitable for business workflows?  
 A) Technical complexity  
 B) Role-based specialization mimicking human team structures  
 C) Programming language flexibility  
@@ -634,9 +715,7 @@ D) Cloud integration
 
 ---
 
-**🗂️ View Test Solutions**: [Complete answers and explanations available in Session4_Test_Solutions.md](Session4_Test_Solutions.md)
-
-**Success Criteria**: Score 8+ out of 10 to demonstrate mastery of CrewAI team orchestration.
+**[🗂️ View Test Solutions →](Session4_Test_Solutions.md)**
 
 ---
 
@@ -645,9 +724,8 @@ D) Cloud integration
 **Previous: [Session 3 - LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)**
 
 **Optional Deep Dive Modules:**
+
 - **[🔬 Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)**
 - **[🏭 Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)**
-
-**[📝 Test Your Knowledge: Session 4 Solutions](Session4_Test_Solutions.md)**
 
 **[Next: Session 6 - Agent Communication Protocols →](Session6_Agent_Communication_Protocols.md)**

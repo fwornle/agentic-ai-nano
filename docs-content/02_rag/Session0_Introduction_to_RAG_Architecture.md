@@ -330,14 +330,22 @@ class EnhancedRAG:
         self.llm = llm  # GPT-3.5/4, Claude, or Mistral
         self.vector_store = vector_store
         self.query_expander = query_expander
+```
 
+*Enhanced RAG systems integrate modern LLMs with sophisticated query processing capabilities for improved retrieval accuracy.*
+
+```python
     def fusion_generate(self, query):
         # Multi-query retrieval with RRF
         expanded_queries = self.query_expander.generate_variants(query)
         contexts = []
         for q in expanded_queries:
             contexts.append(self.retrieve_context(q))
+```
 
+*The fusion approach generates multiple query variants to capture different aspects of the user's intent, retrieving diverse contexts that are then combined.*
+
+```python
         # Reciprocal Rank Fusion
         fused_context = self.reciprocal_rank_fusion(contexts)
 
@@ -370,7 +378,11 @@ class AdaptiveRAG:
         self.llm = llm
         self.retriever = retriever
         self.critic = critic_model
+```
 
+*Adaptive RAG introduces self-assessment capabilities, allowing the system to evaluate and improve its own performance through critic models.*
+
+```python
     def self_correcting_generate(self, query):
         # Decide if retrieval is needed
         if self.needs_retrieval(query):
@@ -384,7 +396,11 @@ class AdaptiveRAG:
                 context = self.corrective_retrieve(query, context)
         else:
             context = None
+```
 
+*The system intelligently decides when retrieval is necessary and validates the quality of retrieved context before proceeding.*
+
+```python
         # Generate with self-reflection
         response = self.llm.generate_with_reflection(query, context)
 
@@ -424,13 +440,21 @@ class AgenticRAG:
         self.coordinator = agent_coordinator
         self.kg = knowledge_graph
         self.vector_store = vector_store
+```
 
+*Agentic RAG represents the latest evolution, using multiple specialized agents working in coordination to handle complex reasoning tasks.*
+
+```python
         # Specialized agents
         self.query_agent = QueryPlanningAgent()
         self.retrieval_agent = AdaptiveRetrievalAgent()
         self.reasoning_agent = MultiHopReasoningAgent()
         self.synthesis_agent = ResponseSynthesisAgent()
+```
 
+*Each agent specializes in a specific aspect: query planning, adaptive retrieval, multi-hop reasoning, and response synthesis.*
+
+```python
     async def agentic_generate(self, query):
         # Query planning and decomposition
         plan = await self.query_agent.create_plan(query)
@@ -442,7 +466,11 @@ class AgenticRAG:
                 sub_query, self.kg, self.vector_store
             )
             retrieval_tasks.append(task)
+```
 
+*The system decomposes complex queries into sub-queries and executes parallel retrieval tasks for efficiency.*
+
+```python
         # Gather and integrate results
         contexts = await asyncio.gather(*retrieval_tasks)
 
@@ -593,7 +621,11 @@ class QueryEnhancer:
 class QueryClarifier:
     def __init__(self, llm):
         self.llm = llm
+```
 
+*Query clarification helps resolve ambiguous user queries by using conversation history and clarifying questions.*
+
+```python
     def clarify_query(self, query, conversation_history):
         clarification_prompt = f"""
         Given the conversation history and current query,
@@ -796,7 +828,11 @@ class HybridSystem:
     def __init__(self, rag_system, function_registry):
         self.rag_system = rag_system
         self.function_registry = function_registry
+```
 
+*Hybrid systems intelligently route queries between RAG retrieval and function calling based on the query type.*
+
+```python
     def intelligent_routing(self, query):
         # Determine best approach for query
         if self.needs_computation(query):
@@ -908,47 +944,43 @@ class LegalRAGSystem:
 
 ---
 
-## **📝 Multiple Choice Test - Session 0 (15 minutes)
-
-Test your understanding of RAG architecture fundamentals with our comprehensive assessment.
-
-### **Multiple Choice Questions**
-
-**1. What are the three main stages of a RAG system?**  
-   - A) Parse, Search, Respond  
-   - B) Index, Retrieve, Generate  
-   - C) Chunk, Embed, Query  
-   - D) Store, Find, Answer  
-
-**2. Which RAG evolution phase introduced self-correcting mechanisms?**  
-   - A) 2020 - RAG Foundation  
-   - B) 2022 - LLM Integration  
-   - C) 2023 - Adaptive RAG  
-   - D) 2025 - Next-Gen RAG  
-
-**3. What is the primary advantage of HyDE (Hypothetical Document Embeddings)?**  
-   - A) Reduces computational cost  
-   - B) Improves query-document semantic alignment  
-   - C) Eliminates need for vector databases  
-   - D) Simplifies system architecture  
-
-**4. When should you choose RAG over fine-tuning?**  
-   - A) When the domain knowledge is static  
-   - B) When you need frequent knowledge updates  
-   - C) When computational resources are unlimited  
-   - D) When source attribution is not needed  
-
-**5. What is the key benefit of Agentic RAG systems?**  
-   - A) Faster retrieval speed  
-   - B) Lower computational requirements  
-   - C) Iterative query refinement and self-correction  
-   - D) Simpler system architecture  
-
 ---
 
-**📋 [View Solutions](Session0_Test_Solutions.md)**
+## 📝 Multiple Choice Test - Session 0
 
-*Complete the test above, then check your answers and review the detailed explanations in the solutions.*
+Test your understanding of RAG architecture fundamentals:
+
+**Question 1:** What are the three main stages of a RAG system?
+A) Parse, Search, Respond  
+B) Index, Retrieve, Generate  
+C) Chunk, Embed, Query  
+D) Store, Find, Answer  
+
+**Question 2:** Which RAG evolution phase introduced self-correcting mechanisms?
+A) 2020 - RAG Foundation  
+B) 2022 - LLM Integration  
+C) 2023 - Adaptive RAG  
+D) 2025 - Next-Gen RAG  
+
+**Question 3:** What is the primary advantage of HyDE (Hypothetical Document Embeddings)?
+A) Reduces computational cost  
+B) Improves query-document semantic alignment  
+C) Eliminates need for vector databases  
+D) Simplifies system architecture  
+
+**Question 4:** When should you choose RAG over fine-tuning?
+A) When the domain knowledge is static  
+B) When you need frequent knowledge updates  
+C) When computational resources are unlimited  
+D) When source attribution is not needed  
+
+**Question 5:** What is the key benefit of Agentic RAG systems?
+A) Faster retrieval speed  
+B) Lower computational requirements  
+C) Iterative query refinement and self-correction  
+D) Simpler system architecture  
+
+[**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 
 ---
 
@@ -976,13 +1008,9 @@ Test your understanding of RAG architecture fundamentals with our comprehensive 
 **Previous:** None (First Session)
 
 **Optional Deep Dive Modules:**
-- 🔬 **[Module A: Advanced RAG Patterns](Session0_ModuleA_Advanced_Patterns.md)** (45 min) - Complex workflow coordination & dynamic agent generation  
-- 🏭 **[Module B: Enterprise RAG Architectures](Session0_ModuleB_Enterprise.md)** (45 min) - Production state handling & sophisticated routing
+- 🔬 **[Module A: Advanced RAG Patterns](Session0_ModuleA_Advanced_Patterns.md)** - Complex workflow coordination & dynamic agent generation
+- 🏭 **[Module B: Enterprise RAG Architectures](Session0_ModuleB_Enterprise.md)** - Production state handling & sophisticated routing
 
 **📝 Test Your Knowledge:** [Session 0 Solutions](Session0_Test_Solutions.md)
 
-**Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
-
----
-
-The journey from architectural understanding to production-ready RAG systems starts with solid implementation fundamentals. Let's build your first intelligent RAG system! 🚀
+**Next:** Session 1 - Basic RAG Implementation →

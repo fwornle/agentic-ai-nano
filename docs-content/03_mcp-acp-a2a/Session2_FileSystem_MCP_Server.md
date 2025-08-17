@@ -61,7 +61,7 @@ pip install fastmcp aiofiles watchdog python-magic-bin
 
 Our production-ready structure separates concerns into modules:
 
-```
+```text
 mcp-filesystem-server/
 ├── filesystem_server.py    # Main server implementation
 ├── file_watcher.py        # Real-time file monitoring
@@ -341,6 +341,10 @@ Now let's build the main server with our security layers in place.
 
 We'll start by importing our security modules and initializing the server:
 
+**Step 1: Import Dependencies and Security Modules**
+
+First, we import all necessary modules and our custom security components:
+
 ```python
 # filesystem_server.py
 from mcp.server.fastmcp import FastMCP
@@ -351,18 +355,36 @@ from typing import Dict, List, Optional, AsyncIterator
 import json
 import base64
 import logging
+```
 
+**Step 2: Import Security Components**
+
+Next, we import our custom security modules that provide sandboxing and validation:
+
+```python
 from config import FileSystemConfig
 from utils.sandbox import FileSystemSandbox, SandboxError
 from utils.validators import FileValidator
+```
 
+**Step 3: Configure Logging for Security Auditing**
+
+Set up comprehensive logging to track all operations for security monitoring:
+
+```python
 # Set up logging for security auditing
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+```
 
+**Step 4: Initialize Server Components**
+
+Create the main server instance and initialize all security components:
+
+```python
 # Initialize server components
 config = FileSystemConfig()
 mcp = FastMCP("File System Server")
@@ -380,7 +402,6 @@ logger.info(f"File System MCP Server initialized with sandbox at: {config.base_p
 
 Let's implement tools for safely browsing the file system:
 
-```python
 **Step 1: Directory Listing Tool Definition**
 
 First, let's define the main directory listing tool with proper documentation:
@@ -471,7 +492,7 @@ Handle security violations and other errors:
         return {"error": f"Failed to list directory: {str(e)}"}
 ```
 
-**Step 6: File Information Tool**
+**Step 6: File Information Tool Definition**
 
 Add a complementary tool for detailed file information:
 
@@ -484,7 +505,13 @@ async def get_file_info(path: str) -> Dict:
         
         if not safe_path.exists():
             return {"error": f"File '{path}' not found"}
-        
+```
+
+**Step 7: File Metadata Collection**
+
+Gather comprehensive file statistics and type information:
+
+```python
         # Get file statistics and validate file type
         stat = safe_path.stat()
         file_type = validator.validate_file_type(safe_path)
@@ -499,7 +526,13 @@ async def get_file_info(path: str) -> Dict:
             "is_directory": safe_path.is_dir(),
             **file_type  # Include MIME type, extension, etc.
         }
-        
+```
+
+**Step 8: Checksum and Final Processing**
+
+Add integrity verification and error handling:
+
+```python
         # Add checksum for text files
         if safe_path.is_file() and info["is_text"]:
             info["checksum"] = validator.calculate_checksum(safe_path)
@@ -517,6 +550,10 @@ Complete file listing implementation available in [`src/session2/filesystem_serv
 ### Step 3.3: File Reading with Binary Support
 
 Now let's implement secure file reading that handles both text and binary files:
+
+**Step 1: File Reading Tool Definition**
+
+Define the main tool with comprehensive documentation:
 
 ```python
 @mcp.tool()
@@ -538,6 +575,13 @@ async def read_file(path: str, encoding: str = "utf-8",
     Returns:
         File contents (text or base64-encoded binary)
     """
+```
+
+**Step 2: Path Validation and Security Checks**
+
+Validate the file path and check file size limits:
+
+```python
     try:
         safe_path = sandbox.validate_path(path)
         
@@ -550,7 +594,13 @@ async def read_file(path: str, encoding: str = "utf-8",
         
         # Detect file type to handle binary vs text
         file_type = validator.validate_file_type(safe_path)
-        
+```
+
+**Step 3: Binary File Handling**
+
+Handle binary files by encoding them as base64:
+
+```python
         # Handle binary files by encoding to base64
         if file_type["is_binary"]:
             async with aiofiles.open(safe_path, 'rb') as f:
@@ -564,7 +614,13 @@ async def read_file(path: str, encoding: str = "utf-8",
                     "encoding": "base64",
                     "mime_type": file_type["mime_type"]
                 }
-        
+```
+
+**Step 4: Text File Processing**
+
+Handle text files with optional line selection for large files:
+
+```python
         # Handle text files with optional line selection
         async with aiofiles.open(safe_path, 'r', encoding=encoding) as f:
             if start_line or end_line:
@@ -579,7 +635,13 @@ async def read_file(path: str, encoding: str = "utf-8",
                 # Read entire file
                 content = await f.read()
                 logger.info(f"Read text file: {path} ({len(content)} chars)")
-        
+```
+
+**Step 5: Response Generation and Error Handling**
+
+Create the response and handle any errors that may occur:
+
+```python
         return {
             "path": str(safe_path.relative_to(config.base_path)),
             "content": content,
@@ -603,6 +665,10 @@ async def read_file(path: str, encoding: str = "utf-8",
 
 Writing files requires extra security checks to prevent malicious file creation:
 
+**Step 1: File Writing Tool Definition**
+
+Define the secure file writing tool with comprehensive validation:
+
 ```python
 @mcp.tool()
 async def write_file(path: str, content: str, 
@@ -614,7 +680,13 @@ async def write_file(path: str, content: str,
     
     This tool ensures files can only be written within the sandbox
     and validates filenames for safety.
-    
+    """
+```
+
+Continue with the function parameters and return documentation:
+
+```python
+    """
     Args:
         path: File path relative to sandbox
         content: Content to write (text or base64 for binary)
@@ -625,6 +697,13 @@ async def write_file(path: str, content: str,
     Returns:
         Success status with file metadata
     """
+```
+
+**Step 2: Security Validation**
+
+Perform comprehensive security checks on the target path and filename:
+
+```python
     try:
         safe_path = sandbox.validate_path(path)
         
@@ -636,7 +715,13 @@ async def write_file(path: str, content: str,
         file_type = {"extension": safe_path.suffix.lower()}
         if file_type["extension"] not in config.allowed_extensions:
             return {"error": f"File type '{file_type['extension']}' not allowed"}
-        
+```
+
+**Step 3: Directory Management**
+
+Handle directory creation and validation:
+
+```python
         # Create parent directories if requested and safe
         if create_dirs:
             safe_path.parent.mkdir(parents=True, exist_ok=True)
@@ -645,7 +730,13 @@ async def write_file(path: str, content: str,
         # Ensure parent directory exists
         if not safe_path.parent.exists():
             return {"error": "Parent directory does not exist"}
-        
+```
+
+**Step 4: Binary Content Handling**
+
+Process base64-encoded binary content:
+
+```python
         # Handle binary content (base64 encoded)
         if encoding == "base64":
             try:
@@ -659,6 +750,13 @@ async def write_file(path: str, content: str,
                 
             except Exception as e:
                 return {"error": f"Invalid base64 content: {str(e)}"}
+```
+
+**Step 5: Text Content and Response Generation**
+
+Handle text content and return success status:
+
+```python
         else:
             # Handle text content
             mode = 'a' if append else 'w'
@@ -667,7 +765,13 @@ async def write_file(path: str, content: str,
                 await f.write(content)
                 
             logger.info(f"Wrote text file: {path} ({len(content)} chars, append={append})")
-        
+```
+
+**Step 6: Success Response and Error Handling**
+
+Generate the success response and handle any errors:
+
+```python
         # Return success with file info
         stat = safe_path.stat()
         return {
@@ -694,6 +798,10 @@ async def write_file(path: str, content: str,
 
 Let's add a powerful search tool that can find files by name or content:
 
+**Step 1: Search Tool Definition**
+
+Define the search tool with comprehensive documentation:
+
 ```python
 @mcp.tool()
 async def search_files(
@@ -707,7 +815,13 @@ async def search_files(
     
     Provides powerful search capabilities while respecting
     sandbox boundaries and performance limits.
-    
+    """
+```
+
+Continue with the parameter documentation:
+
+```python
+    """
     Args:
         pattern: Search pattern (glob for names, text for content)
         search_type: "name" or "content"
@@ -717,6 +831,13 @@ async def search_files(
     Returns:
         List of matching files with context
     """
+```
+
+**Step 2: Path Validation and Search Setup**
+
+Validate the search path and initialize result collection:
+
+```python
     try:
         safe_path = sandbox.validate_path(path)
         
@@ -725,7 +846,13 @@ async def search_files(
         
         results = []
         count = 0
-        
+```
+
+**Step 3: Filename-Based Search**
+
+Implement glob pattern matching for filename searches:
+
+```python
         if search_type == "name":
             # Search by filename using glob patterns
             for file_path in safe_path.rglob(pattern):
@@ -740,7 +867,13 @@ async def search_files(
                         "size": file_path.stat().st_size
                     })
                     count += 1
-                    
+```
+
+**Step 4: Content-Based Search Implementation**
+
+Search through file contents with safety checks:
+
+```python
         elif search_type == "content":
             # Search file contents
             for file_path in safe_path.rglob("*"):
@@ -755,7 +888,13 @@ async def search_files(
                         try:
                             async with aiofiles.open(file_path, 'r', encoding='utf-8') as f:
                                 content = await f.read()
-                                
+```
+
+**Step 5: Match Processing and Context Generation**
+
+Process matches and provide context for content searches:
+
+```python
                             # Case-insensitive search
                             if pattern.lower() in content.lower():
                                 # Find matching lines for context
@@ -768,7 +907,11 @@ async def search_files(
                                             "line_number": i + 1,
                                             "content": line.strip()[:100]  # First 100 chars
                                         })
-                                
+```
+
+Continue with result processing:
+
+```python
                                 relative = file_path.relative_to(config.base_path)
                                 results.append({
                                     "path": str(relative),
@@ -780,6 +923,13 @@ async def search_files(
                         except Exception:
                             # Skip files that can't be read
                             pass
+```
+
+**Step 6: Result Processing and Error Handling**
+
+Finalize results and handle any errors:
+
+```python
         else:
             return {"error": "search_type must be 'name' or 'content'"}
         
@@ -805,6 +955,10 @@ async def search_files(
 
 Finally, let's add resources and prompts to guide AI agents:
 
+**Step 1: Server Configuration Resource**
+
+Expose server settings and capabilities as a resource:
+
 ```python
 @mcp.resource("fs://config")
 def get_server_config() -> Dict:
@@ -820,7 +974,13 @@ def get_server_config() -> Dict:
             "compression": False
         }
     }
+```
 
+**Step 2: Filesystem Statistics Resource**
+
+Provide real-time statistics about the sandbox:
+
+```python
 @mcp.resource("fs://stats")
 def get_filesystem_stats() -> Dict:
     """Get statistics about the sandbox filesystem."""
@@ -841,7 +1001,13 @@ def get_filesystem_stats() -> Dict:
         "total_size_bytes": total_size,
         "total_size_human": f"{total_size / (1024*1024):.2f} MB"
     }
+```
 
+**Step 3: Codebase Analysis Prompt**
+
+Generate structured prompts for code analysis tasks:
+
+```python
 @mcp.prompt()
 def analyze_codebase_prompt(language: str = "python") -> str:
     """Generate a prompt for analyzing a codebase."""
@@ -857,7 +1023,13 @@ def analyze_codebase_prompt(language: str = "python") -> str:
    - Potential improvements
 
 Start by listing the root directory and looking for documentation files."""
+```
 
+**Step 4: Issue Resolution Prompt**
+
+Create prompts for finding and fixing code issues:
+
+```python
 @mcp.prompt()
 def find_and_fix_prompt(issue: str) -> str:
     """Generate a prompt for finding and fixing issues."""
@@ -876,6 +1048,10 @@ Please be thorough in your search and analysis."""
 
 Finally, add the server startup code:
 
+**Step 1: Example Data Creation**
+
+Set up sample files for testing the server functionality:
+
 ```python
 if __name__ == "__main__":
     # Create example files in sandbox for testing
@@ -884,13 +1060,25 @@ if __name__ == "__main__":
     
     # Create a sample text file
     (example_dir / "hello.txt").write_text("Hello from the secure file system server!")
-    
+```
+
+**Step 2: Sample JSON Data**
+
+Create structured data files for testing:
+
+```python
     # Create a sample JSON file
     (example_dir / "data.json").write_text(json.dumps({
         "message": "This is sample data",
         "timestamp": datetime.now().isoformat()
     }, indent=2))
-    
+```
+
+**Step 3: Server Startup**
+
+Display startup information and launch the server:
+
+```python
     print(f"🔒 Secure File System MCP Server")
     print(f"📁 Sandbox directory: {config.base_path}")
     print(f"✅ Server ready for connections!")
@@ -932,41 +1120,13 @@ Congratulations! You've built a production-grade file system MCP server with com
 
 ## 🧪 Testing Your Understanding
 
-### Quick Check Questions
-
-1. **What is the primary purpose of the sandbox in our file system server?**
-   - A) To improve performance
-   - B) To prevent unauthorized file access
-   - C) To compress files
-   - D) To cache file contents
-
-2. **Which method do we use to safely resolve file paths?**
-   - A) `os.path.join()`
-   - B) `Path.resolve()`
-   - C) `str.replace()`
-   - D) `Path.absolute()`
-
-3. **How do we handle binary files in the read_file tool?**
-   - A) Reject them with an error
-   - B) Convert to hexadecimal
-   - C) Encode as base64
-   - D) Read as UTF-8
-
-4. **What type of validation do we perform on file types?**
-   - A) Extension only
-   - B) MIME type only
-   - C) Both extension and MIME type
-   - D) File size only
-
-5. **Which logging level do we use for security violations?**
-   - A) DEBUG
-   - B) INFO
-   - C) WARNING
-   - D) ERROR
-
 ### Practical Exercise
 
 Extend the server with a tool that safely moves/renames files:
+
+**Step 1: Tool Definition and Documentation**
+
+Define the file move/rename tool with proper parameters:
 
 ```python
 @mcp.tool()
@@ -982,6 +1142,13 @@ async def move_file(source: str, destination: str, overwrite: bool = False) -> D
     Returns:
         Success status or error
     """
+```
+
+**Step 2: Implementation Guidelines**
+
+Implementation hints for the move operation:
+
+```python
     # TODO: Implement this function
     # Hints:
     # 1. Validate both source and destination paths
@@ -1093,4 +1260,14 @@ d) Automatic file compression
 
 ---
 
-[← Back to Session 1](Session1_Basic_MCP_Server.md) | [Next: Session 3 →](Session3_LangChain_MCP_Integration.md)
+## 🧭 Navigation
+
+**Previous:** [Session 1 - Basic MCP Server](Session1_Basic_MCP_Server.md)
+
+**Optional Deep Dive Modules:**
+- 🔬 **[Module A: Advanced Security Features](Session2_ModuleA_Advanced_Security.md)** - Deep dive into file system security and threat mitigation
+- 🏭 **[Module B: File Operations at Scale](Session2_ModuleB_File_Operations.md)** - Performance optimization and enterprise-grade features
+
+**📝 Test Your Knowledge:** [Session 2 Test Solutions](Session2_Test_Solutions.md)
+
+**Next:** [Session 3 - LangChain MCP Integration](Session3_LangChain_MCP_Integration.md) →

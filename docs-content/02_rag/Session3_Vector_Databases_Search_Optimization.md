@@ -74,14 +74,18 @@ Let's transform your RAG system into a high-performance search engine! ⚡
 Vector databases are specialized for storing and querying high-dimensional vectors efficiently:
 
 ```python
-# Core vector database operations
+# Core vector database operations - Interface definition
 class VectorDatabaseInterface:
     """Abstract interface for vector database operations."""
 
     def __init__(self, dimension: int, metric: str = "cosine"):
         self.dimension = dimension
         self.metric = metric  # cosine, euclidean, dot_product
+```
 
+This interface establishes the contract that all vector database implementations must follow. The metric parameter is crucial for RAG applications - cosine similarity works best for text embeddings since it handles varying document lengths naturally.
+
+```python
     def add_vectors(self, vectors: List[List[float]],
                    metadata: List[Dict], ids: List[str]):
         """Add vectors with metadata and IDs."""
@@ -91,7 +95,11 @@ class VectorDatabaseInterface:
               top_k: int = 10, filters: Dict = None):
         """Search for similar vectors with optional filtering."""
         raise NotImplementedError
+```
 
+These core methods handle the fundamental vector operations. The search method includes filtering capability - essential for production RAG systems where you need to filter by document type, date, or user permissions.
+
+```python
     def update_vector(self, vector_id: str,
                      new_vector: List[float], new_metadata: Dict):
         """Update existing vector and metadata."""
@@ -123,12 +131,16 @@ Our optimization strategy focuses on three key areas:
 3. **Memory management** for stable production performance
 
 ```python
-# Advanced ChromaDB setup - Core initialization
+# Advanced ChromaDB setup - Core imports and class definition
 import chromadb
 from chromadb.config import Settings
 import numpy as np
 from typing import List, Dict, Optional, Tuple
+```
 
+We start with essential imports for ChromaDB integration. The Settings import is crucial for production configuration, while numpy handles vector operations efficiently.
+
+```python
 class ChromaVectorStore:
     """Advanced ChromaDB wrapper with optimization features.
 
@@ -138,7 +150,11 @@ class ChromaVectorStore:
     - Batch operations for efficient data loading
     - Memory-conscious configuration for stable performance
     """
+```
 
+Our ChromaDB wrapper focuses on production-ready optimization. The class handles the sweet spot for ChromaDB: moderate-scale collections where its simplicity and performance shine.
+
+```python
     def __init__(self, persist_directory: str, collection_name: str):
         self.persist_directory = persist_directory
         self.collection_name = collection_name
@@ -191,7 +207,11 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
                 name=self.collection_name
             )
             print(f"Loaded existing collection: {self.collection_name}")
+```
 
+The method first attempts to load an existing collection - this prevents accidentally recreating indexes and losing data. Always check for existing collections in production code.
+
+```python
         except ValueError:
             # Create new collection with optimized HNSW settings
             collection = self.client.create_collection(
@@ -225,6 +245,9 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
   - **ef=200+**: Highest accuracy, slower queries
 
 **Step 2: Batch Operations for Performance**
+
+Batch processing is essential for efficient data loading. ChromaDB performs better with moderately-sized batches rather than individual document inserts.
+
 ```python
     def add_documents_batch(self, documents: List[str],
                            embeddings: List[List[float]],
@@ -235,7 +258,11 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
 
         total_docs = len(documents)
         print(f"Adding {total_docs} documents in batches of {batch_size}")
+```
 
+We start by calculating the total workload and announcing the batching strategy. A batch size of 1000 typically provides the best balance between memory usage and insertion speed.
+
+```python
         for i in range(0, total_docs, batch_size):
             batch_end = min(i + batch_size, total_docs)
 
@@ -243,7 +270,11 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
             batch_embeddings = embeddings[i:batch_end]
             batch_metadata = metadata[i:batch_end]
             batch_ids = ids[i:batch_end]
+```
 
+Each iteration creates a batch slice from the input data. The `min()` function ensures the final batch doesn't exceed the available data when the total isn't evenly divisible by batch_size.
+
+```python
             self.collection.add(
                 documents=batch_documents,
                 embeddings=batch_embeddings,
@@ -275,11 +306,15 @@ Pinecone represents the **enterprise-grade managed solution** that scales beyond
 **Strategic Positioning**: Pinecone is optimal when reliability, scalability, and developer productivity outweigh cost concerns. Typical use cases include production RAG systems with >1M vectors, multi-tenant applications, and enterprise deployments requiring 99.9%+ uptime.
 
 ```python
-# Production Pinecone implementation
+# Production Pinecone implementation - Core imports
 import pinecone
 import time
 from typing import List, Dict, Any
+```
 
+Pinecone represents the managed, enterprise-grade solution for vector search. These imports provide the core functionality for production deployment.
+
+```python
 class PineconeVectorStore:
     """Production-ready Pinecone vector store with enterprise optimizations.
 
@@ -289,7 +324,11 @@ class PineconeVectorStore:
     - Metadata indexing for efficient filtering
     - Batch operations optimized for Pinecone's rate limits
     """
+```
 
+Our Pinecone wrapper emphasizes enterprise concerns: cost optimization, high availability, and operational efficiency. This reflects real-world production requirements.
+
+```python
     def __init__(self, api_key: str, environment: str,
                  index_name: str, dimension: int = 1536):
         self.api_key = api_key
@@ -300,7 +339,11 @@ class PineconeVectorStore:
         # Performance and cost tracking
         self.operation_costs = {'queries': 0, 'upserts': 0, 'deletes': 0}
         self.batch_stats = {'successful_batches': 0, 'failed_batches': 0}
+```
 
+Initialization includes cost tracking - essential for Pinecone's usage-based pricing model. Monitoring operations helps optimize expenses in production.
+
+```python
         # Initialize Pinecone with connection pooling
         pinecone.init(
             api_key=api_key,
@@ -407,7 +450,11 @@ Pinecone requires initialization time - we wait and monitor the status:
         total_vectors = len(vectors)
         successful_upserts = 0
         failed_upserts = []
+```
 
+Batch upserts are critical for Pinecone performance and cost efficiency. We track success/failure rates to monitor system health and identify problematic data.
+
+```python
         for i in range(0, total_vectors, batch_size):
             batch = vectors[i:i + batch_size]
 
@@ -421,7 +468,11 @@ Pinecone requires initialization time - we wait and monitor the status:
                 successful_upserts += response.upserted_count
                 print(f"Upserted batch {i//batch_size + 1}: "
                       f"{response.upserted_count} vectors")
+```
 
+The upsert operation updates existing vectors or inserts new ones. Namespaces provide data isolation - useful for multi-tenant applications or environment separation.
+
+```python
             except Exception as e:
                 print(f"Failed to upsert batch {i//batch_size + 1}: {e}")
                 failed_upserts.extend(batch)
@@ -438,11 +489,15 @@ Pinecone requires initialization time - we wait and monitor the status:
 Qdrant offers excellent performance and advanced filtering capabilities:
 
 ```python
-# High-performance Qdrant implementation
+# High-performance Qdrant implementation - Imports
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 from qdrant_client.http.models import Distance, VectorParams, OptimizersConfig
+```
 
+Qdrant provides high-performance vector search with excellent filtering capabilities. These imports give us access to the full configuration API for optimization.
+
+```python
 class QdrantVectorStore:
     """High-performance Qdrant vector store."""
 
@@ -451,7 +506,11 @@ class QdrantVectorStore:
         self.host = host
         self.port = port
         self.collection_name = collection_name
+```
 
+Qdrant excels in scenarios requiring complex filtering and high-performance search. It's particularly strong for applications with rich metadata requirements.
+
+```python
         # Initialize client
         self.client = QdrantClient(
             host=host,
@@ -463,6 +522,9 @@ class QdrantVectorStore:
 ```
 
 **Step 5: Optimized Collection Configuration**
+
+Qdrant's collection setup provides extensive optimization options. Let's configure each component for optimal RAG performance.
+
 ```python
     def _setup_collection(self, dimension: int = 1536):
         """Create collection with performance optimizations."""
@@ -472,7 +534,12 @@ class QdrantVectorStore:
         collection_names = [c.name for c in collections]
 
         if self.collection_name not in collection_names:
-            # Create collection with optimized settings
+```
+
+First, we check for existing collections to avoid recreating indexes. This is essential for production systems where index recreation is expensive.
+
+```python
+            # Create collection with optimized vector configuration
             self.client.create_collection(
                 collection_name=self.collection_name,
                 vectors_config=VectorParams(
@@ -480,6 +547,11 @@ class QdrantVectorStore:
                     distance=Distance.COSINE,
                     on_disk=True  # Store vectors on disk for memory efficiency
                 ),
+```
+
+The vector configuration sets cosine distance (optimal for text) and enables disk storage to manage memory usage efficiently with large datasets.
+
+```python
                 optimizers_config=OptimizersConfig(
                     deleted_threshold=0.2,
                     vacuum_min_vector_number=1000,
@@ -490,6 +562,11 @@ class QdrantVectorStore:
                     flush_interval_sec=1,
                     max_optimization_threads=2
                 ),
+```
+
+Optimizer configuration controls how Qdrant manages segments and memory. These settings balance performance with resource usage for typical RAG workloads.
+
+```python
                 hnsw_config=models.HnswConfig(
                     m=16,  # Number of bi-directional connections
                     ef_construct=200,  # Size of dynamic candidate list
@@ -513,20 +590,28 @@ class QdrantVectorStore:
 Hybrid search combines vector similarity with traditional keyword search for enhanced relevance:
 
 ```python
-# Hybrid search implementation
+# Hybrid search implementation - Core imports
 import re
 from collections import Counter
 from typing import List, Dict, Tuple, Set
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
+```
 
+Hybrid search combines the semantic understanding of vector search with the precision of keyword matching. These imports provide the tools for both approaches.
+
+```python
 class HybridSearchEngine:
     """Advanced hybrid search combining semantic and lexical retrieval."""
 
     def __init__(self, vector_store, documents: List[str]):
         self.vector_store = vector_store
         self.documents = documents
+```
 
+Our hybrid engine takes a vector store and the original documents. The documents are needed to build the lexical search index for keyword matching.
+
+```python
         # Initialize TF-IDF for lexical search
         self.tfidf_vectorizer = TfidfVectorizer(
             max_features=10000,
@@ -570,7 +655,11 @@ BM25 (Best Matching 25) represents decades of information retrieval research, ad
         - k1: Term frequency saturation parameter (1.2 optimal for most corpora)
         - b: Document length normalization (0.75 optimal for mixed-length documents)
         """
+```
 
+The BM25 algorithm provides superior ranking compared to basic TF-IDF by addressing term frequency saturation and document length normalization issues.
+
+```python
         # Tokenize query using same preprocessing as corpus
         query_tokens = self.tfidf_vectorizer.build_analyzer()(query.lower())
 
@@ -580,7 +669,11 @@ BM25 (Best Matching 25) represents decades of information retrieval research, ad
 
         # Initialize score accumulator
         scores = np.zeros(len(self.documents))
+```
 
+Pre-computing document statistics improves efficiency when processing multiple terms. The score accumulator will sum BM25 contributions from each query term.
+
+```python
         # Process each query term
         for token in query_tokens:
             if token in self.tfidf_vectorizer.vocabulary_:
@@ -591,7 +684,11 @@ BM25 (Best Matching 25) represents decades of information retrieval research, ad
                 # Convert normalized TF-IDF back to raw term frequencies
                 # This approximation works well when TF-IDF was built with sublinear_tf=False
                 tf = tf_scores * len(self.documents)
+```
 
+For each query term, we extract term frequency data from our pre-built TF-IDF matrix. This reuses computation and ensures consistent preprocessing.
+
+```python
                 # Calculate document frequency and inverse document frequency
                 df = np.sum(tf > 0)  # Number of documents containing this term
                 if df > 0:
@@ -623,6 +720,9 @@ For typical RAG scenarios, BM25 provides **15-25% better precision** compared to
 - **Decrease b (0.5-0.7)**: When longer documents naturally contain more relevant information
 
 **Step 7: Fusion Strategies**
+
+Reciprocal Rank Fusion (RRF) provides an elegant way to combine semantic and lexical search results without needing to normalize different scoring scales.
+
 ```python
     def hybrid_search(self, query: str, top_k: int = 10,
                      semantic_weight: float = 0.7,
@@ -637,7 +737,11 @@ For typical RAG scenarios, BM25 provides **15-25% better precision** compared to
 
         # Step 2: Lexical search (BM25)
         lexical_scores = self._compute_bm25_scores(query)
+```
 
+We retrieve more results initially (3x target) to provide the reranker with a broader set of candidates. This improves final result quality.
+
+```python
         # Step 3: Combine scores using Reciprocal Rank Fusion (RRF)
         combined_results = self._reciprocal_rank_fusion(
             semantic_results, lexical_scores, k=60
@@ -650,7 +754,11 @@ For typical RAG scenarios, BM25 provides **15-25% better precision** compared to
             )
 
         return combined_results[:top_k]
+```
 
+RRF elegantly combines rankings from different systems without requiring score normalization. The k=60 parameter controls fusion smoothness.
+
+```python
     def _reciprocal_rank_fusion(self, semantic_results: List[Tuple],
                                lexical_scores: np.ndarray,
                                k: int = 60) -> List[Dict]:
@@ -667,7 +775,11 @@ For typical RAG scenarios, BM25 provides **15-25% better precision** compared to
                 'semantic_rrf': 1 / (k + rank + 1),
                 'semantic_score': similarity_score
             }
+```
 
+RRF converts rankings to reciprocal scores: RRF = 1/(k + rank). This gives higher scores to better-ranked items while avoiding division by zero.
+
+```python
         # Add lexical scores (BM25 rankings)
         lexical_rankings = np.argsort(-lexical_scores)  # Descending order
         for rank, doc_idx in enumerate(lexical_rankings[:len(semantic_results)]):
@@ -685,7 +797,11 @@ For typical RAG scenarios, BM25 provides **15-25% better precision** compared to
                     'semantic_score': 0,
                     'lexical_score': lexical_scores[doc_idx]
                 }
+```
 
+We process lexical rankings similarly, creating entries for documents found only by keyword search. This ensures comprehensive coverage.
+
+```python
         # Calculate final RRF scores
         for doc_id in doc_scores:
             semantic_rrf = doc_scores[doc_id].get('semantic_rrf', 0)
@@ -717,7 +833,11 @@ class AdvancedReranker:
         self.cross_encoder = CrossEncoder(model_name)
         self.model_name = model_name
         print(f"Loaded cross-encoder model: {model_name}")
+```
 
+Cross-encoders provide superior relevance scoring by processing query-document pairs together, capturing interaction patterns that bi-encoders miss.
+
+```python
     def rerank_results(self, query: str, documents: List[Dict],
                       top_k: int = 10) -> List[Dict]:
         """Rerank documents using cross-encoder scores."""
@@ -730,7 +850,11 @@ class AdvancedReranker:
         for doc_data in documents:
             doc_text = self._extract_text(doc_data)
             pairs.append([query, doc_text])
+```
 
+We create query-document pairs for joint processing. The cross-encoder can then capture semantic relationships between query terms and document content.
+
+```python
         # Get cross-encoder scores
         ce_scores = self.cross_encoder.predict(pairs)
 
@@ -782,7 +906,11 @@ Let's implement an intelligent vector index that automatically selects optimal s
 import faiss
 import numpy as np
 from typing import Tuple
+```
 
+FAISS provides high-performance implementations of multiple indexing algorithms. Our intelligent wrapper will select the optimal approach based on data characteristics.
+
+```python
 class OptimizedVectorIndex:
     """Advanced vector indexing with intelligent algorithm selection.
 
@@ -803,7 +931,6 @@ class OptimizedVectorIndex:
 The core method that handles intelligent index construction:
 
 ```python
-
     def build_index(self, vectors: np.ndarray,
                    external_ids: List[str],
                    performance_target: str = "balanced") -> None:
@@ -817,7 +944,11 @@ The core method that handles intelligent index construction:
 
         n_vectors = vectors.shape[0]
         memory_gb = vectors.nbytes / (1024**3)
+```
 
+We start by analyzing the dataset characteristics - size and memory requirements drive our algorithm selection strategy.
+
+```python
         # Auto-select optimal index type based on data characteristics
         if self.index_type == "auto":
             self.index_type = self._select_optimal_index(
@@ -835,7 +966,6 @@ The core method that handles intelligent index construction:
 Actual index construction based on the selected algorithm:
 
 ```python
-
         # Build index using selected algorithm
         if self.index_type == "HNSW":
             self.index = self._build_hnsw_index(vectors, performance_target)
@@ -846,7 +976,11 @@ Actual index construction based on the selected algorithm:
         else:
             # Fallback to flat index for small datasets
             self.index = self._build_flat_index(vectors)
+```
 
+The factory pattern allows us to use the optimal indexing algorithm for each scenario while maintaining a consistent interface.
+
+```python
         # Record performance metrics
         build_time = time.time() - build_start
         self.performance_metrics['build_time'] = build_time
@@ -865,7 +999,6 @@ Actual index construction based on the selected algorithm:
 This method chooses the best algorithm based on dataset characteristics:
 
 ```python
-
     def _select_optimal_index(self, n_vectors: int, memory_gb: float,
                              target: str) -> str:
         """Intelligent index selection based on dataset characteristics.
@@ -877,7 +1010,11 @@ This method chooses the best algorithm based on dataset characteristics:
         # Small datasets: use exact search
         if n_vectors < 10000:
             return "Flat"
+```
 
+For small datasets, exact search (Flat index) provides perfect accuracy with minimal overhead. The crossover point is around 10,000 vectors.
+
+```python
         # Speed priority with moderate memory
         if target == "speed" and memory_gb < 8.0:
             return "HNSW"
@@ -889,7 +1026,11 @@ This method chooses the best algorithm based on dataset characteristics:
         # Accuracy priority
         if target == "accuracy":
             return "HNSW"
+```
 
+The decision matrix considers both performance targets and resource constraints. HNSW excels at speed and accuracy, while IVF+PQ optimizes for memory efficiency.
+
+```python
         # Balanced approach based on scale
         if n_vectors > 1000000:
             return "IVF_PQ"  # Scale efficiency for large datasets
@@ -929,7 +1070,11 @@ IVF excels when **memory efficiency and scalability** outweigh the need for ultr
             centroid_ratio = 0.08  # Balanced approach
 
         n_centroids = max(32, min(65536, int(n_vectors * centroid_ratio)))
+```
 
+Centroid selection balances clustering quality with search speed. More centroids create better partitioning but require more clusters to search for high recall.
+
+```python
         print(f"IVF Configuration: {n_centroids:,} centroids "
               f"(ratio: {centroid_ratio:.3f})")
 
@@ -947,7 +1092,11 @@ IVF excels when **memory efficiency and scalability** outweigh the need for ultr
             # Use flat storage for better accuracy on smaller datasets
             index = faiss.IndexIVFFlat(quantizer, self.dimension, n_centroids)
             print("Using IVFFlat for optimal accuracy")
+```
 
+For large datasets, Product Quantization (PQ) provides significant memory compression at the cost of some accuracy. Smaller datasets use flat storage for optimal quality.
+
+```python
         # Training phase - critical for clustering quality
         print("Training IVF centroids...")
         if n_vectors > 1000000:
@@ -964,7 +1113,11 @@ IVF excels when **memory efficiency and scalability** outweigh the need for ultr
         # Add all vectors
         print("Adding vectors to index...")
         index.add(vectors)
+```
 
+Training phase learns the optimal cluster centroids. For very large datasets, we sample to balance training quality with build time.
+
+```python
         # Set query parameters based on target
         if performance_target == "speed":
             index.nprobe = max(1, n_centroids // 32)  # Search fewer clusters
@@ -1025,7 +1178,11 @@ HNSW creates a hierarchical graph where each vector connects to its most similar
             M = 32           # Balanced connectivity
             ef_construct = 200   # Good graph quality
             ef_search = 128      # Balanced search
+```
 
+HNSW parameter selection creates distinct performance profiles. Higher M values increase memory usage but improve recall through better graph connectivity.
+
+```python
         print(f"HNSW Configuration: M={M}, ef_construct={ef_construct}, "
               f"ef_search={ef_search}")
 
@@ -1039,7 +1196,11 @@ HNSW creates a hierarchical graph where each vector connects to its most similar
 
         # Set search parameter
         index.hnsw.efSearch = ef_search
+```
 
+Graph construction with higher efConstruction values creates better-quality graphs at the cost of longer build times. This is a one-time cost that pays dividends in query quality.
+
+```python
         # Calculate memory usage for monitoring
         memory_per_vector = self.dimension * 4 + M * 4  # Float32 + connections
         total_memory_mb = (len(vectors) * memory_per_vector) / (1024**2)
@@ -1159,7 +1320,6 @@ For applications requiring ultra-low latency with adequate budget:
 For large-scale deployments or budget-constrained environments:
 
 ```python
-
         elif document_count > 1000000 or budget_constraint < 200:
             # Cost-optimized RAG for scale or budget constraints
             recommendations.update({
@@ -1170,14 +1330,13 @@ For large-scale deployments or budget-constrained environments:
                     'centroids': int(document_count * 0.08),
                     'pq_segments': 16,
                     'memory_mapping': True
-                },
-                'expected_performance': {
-                    'p95_latency_ms': 200,
-                    'recall_at_10': 0.88,
-                    'memory_gb': document_count * 0.1  # With compression
                 }
             })
+```
 
+For large-scale or budget-constrained deployments, Qdrant with IVF+PQ provides excellent compression and cost efficiency while maintaining reasonable performance.
+
+```python
         else:
             # Balanced RAG for most applications
             recommendations.update({

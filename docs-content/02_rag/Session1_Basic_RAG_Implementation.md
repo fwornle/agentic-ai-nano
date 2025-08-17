@@ -5,6 +5,7 @@
 **Your Learning Path**: Choose your engagement level
 
 ### Quick Start Guide
+
 - **👀 Observer (45 min)**: Read concepts + examine code patterns
 - **🙋‍♂️ Participant (90 min)**: Follow exercises + implement solutions  
 - **🛠️ Implementer (150 min)**: Build custom systems + explore advanced patterns
@@ -21,6 +22,7 @@
 | Testing Framework | 2 concepts | 15 min | Evaluation |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
+
 - 🔬 **[Module A: Production RAG Patterns](Session1_ModuleA_Production_Patterns.md)** (30 min)
 - 🏭 **[Module B: Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)** (30 min)
 
@@ -145,6 +147,7 @@ The first step in any RAG system is loading and processing documents. Let's buil
 A robust document loader forms the foundation of any RAG system. It must handle multiple file formats, provide error resilience, and maintain metadata for source attribution during retrieval.
 
 **Core Design Principles:**
+
 - **Format flexibility**: Support common document types without tight coupling
 - **Error handling**: Graceful failure when documents can't be loaded
 - **Metadata preservation**: Track source information for citation and debugging
@@ -220,6 +223,8 @@ Web content requires special handling because HTML contains structural elements 
 
 **Step 4: HTML Content Cleaning Pipeline**
 
+First, we remove noise elements that interfere with semantic search:
+
 ```python
     def _clean_html_content(self, soup, url: str) -> List[Document]:
         """Clean HTML content for optimal RAG processing."""
@@ -229,7 +234,13 @@ Web content requires special handling because HTML contains structural elements 
 
         # Extract clean text
         text = soup.get_text()
-        
+```
+
+*This first phase removes structural HTML elements that don't contain useful information for RAG.*
+
+Next, we normalize whitespace while preserving semantic structure:
+
+```python
         # Normalize whitespace while preserving paragraph structure
         lines = (line.strip() for line in text.splitlines())
         chunks = (phrase.strip() for line in lines
@@ -244,7 +255,7 @@ Web content requires special handling because HTML contains structural elements 
         )]
 ```
 
-*This cleaning pipeline removes noise elements and normalizes text while preserving semantic structure.*
+*This cleaning pipeline normalizes whitespace and packages the clean text into a Document object with source metadata.*
 
 **Step 5: Intelligent Batch Processing**
 
@@ -262,7 +273,13 @@ RAG systems typically need to process multiple documents from various sources. S
         
         for i, source in enumerate(sources, 1):
             print(f"[{i}/{len(sources)}] Processing: {source[:50]}...")
-            
+```
+
+*This initialization sets up tracking variables and begins iterating through document sources.*
+
+The processing logic handles different source types with error isolation:
+
+```python
             try:
                 if source.startswith(('http://', 'https://')):
                     docs = self.load_from_url(source)
@@ -272,7 +289,13 @@ RAG systems typically need to process multiple documents from various sources. S
                     print(f"  ❌ Unsupported source type: {source}")
                     error_count += 1
                     continue
+```
 
+*Source type detection routes to appropriate loading methods while handling unsupported formats gracefully.*
+
+Finally, we collect successful results and provide comprehensive feedback:
+
+```python
                 if docs:  # Only add if documents were successfully loaded
                     all_documents.extend(docs)
                     success_count += 1
@@ -314,11 +337,19 @@ class IntelligentTextSplitter:
 
 **Step 6: Token-Aware Chunking**
 
+First, we implement token counting for accurate length measurement:
+
 ```python
     def count_tokens(self, text: str) -> int:
         """Count tokens in text using tiktoken."""
         return len(self.encoding.encode(text))
+```
 
+*This token counting ensures chunks respect LLM token limits rather than just character counts.*
+
+Next, we implement recursive character splitting with intelligent separators:
+
+```python
     def recursive_split(self, documents: List[Document]) -> List[Document]:
         """Split documents using recursive character splitting."""
         text_splitter = RecursiveCharacterTextSplitter(
@@ -329,7 +360,13 @@ class IntelligentTextSplitter:
         )
 
         split_docs = text_splitter.split_documents(documents)
+```
 
+*The hierarchical separators ensure splits happen at paragraph, sentence, and word boundaries first.*
+
+Finally, we add metadata tracking for each chunk:
+
+```python
         # Add chunk metadata
         for i, doc in enumerate(split_docs):
             doc.metadata.update({
@@ -487,6 +524,8 @@ class VectorStore:
 
 **Step 10: Similarity Search Implementation**
 
+First, we implement basic similarity search for document retrieval:
+
 ```python
     def similarity_search(self, query: str, k: Optional[int] = None) -> List[Document]:
         """Perform similarity search."""
@@ -498,7 +537,13 @@ class VectorStore:
         )
 
         return results
+```
 
+*This method returns the most relevant documents without similarity scores.*
+
+For more detailed analysis, we also provide search with relevance scores:
+
+```python
     def similarity_search_with_scores(self, query: str, k: Optional[int] = None) -> List[tuple]:
         """Perform similarity search with relevance scores."""
         k = k or self.config.TOP_K
@@ -528,7 +573,13 @@ from langchain.schema import Document
 from langchain.prompts import PromptTemplate
 from src.config import RAGConfig
 from src.vector_store import VectorStore
+```
 
+*These imports provide the essential components for building our integrated RAG system.*
+
+Now we implement the core RAG system class with initialization:
+
+```python
 class BasicRAGSystem:
     """Core RAG system combining retrieval and generation."""
 
@@ -674,7 +725,13 @@ class InteractiveRAG:
             chunk_size=self.config.CHUNK_SIZE,
             chunk_overlap=self.config.CHUNK_OVERLAP
         )
+```
 
+*This initialization sets up all the components needed for an interactive RAG session.*
+
+Now we implement the document loading and indexing pipeline:
+
+```python
     def load_and_index_documents(self, sources: List[str]):
         """Load documents and add them to the vector store."""
         print("Loading documents...")
@@ -723,7 +780,13 @@ class InteractiveRAG:
                 if not question:
                     print("Please enter a question.")
                     continue
+```
 
+*This input handling validates user questions and provides exit conditions.*
+
+The main processing logic handles query execution and error management:
+
+```python
                 print("\n🔍 Searching and generating answer...")
                 result = self.rag_system.query(question)
 
@@ -764,9 +827,7 @@ class InteractiveRAG:
 Let's implement basic evaluation metrics for our RAG system:
 
 ```python
-
 # tests/test_rag_performance.py
-
 import time
 from typing import List, Dict
 from src.interactive_rag import InteractiveRAG
@@ -776,7 +837,13 @@ class RAGEvaluator:
 
     def __init__(self, rag_system: InteractiveRAG):
         self.rag_system = rag_system
+```
 
+*This evaluator class provides comprehensive metrics for testing RAG system performance.*
+
+**Response Time Evaluation:**
+
+```python
     def evaluate_response_time(self, questions: List[str]) -> Dict[str, float]:
         """Evaluate average response time."""
         times = []
@@ -793,7 +860,13 @@ class RAGEvaluator:
             "min_response_time": min(times),
             "max_response_time": max(times)
         }
+```
 
+*This method measures system performance by timing query responses across multiple test questions.*
+
+**Retrieval Quality Assessment:**
+
+```python
     def evaluate_retrieval_quality(self, test_cases: List[Dict]) -> Dict[str, float]:
         """Evaluate retrieval quality using test cases."""
         total_precision = 0
@@ -808,7 +881,13 @@ class RAGEvaluator:
                 source["metadata"].get("source", "")
                 for source in result["sources"]
             ])
+```
 
+*This evaluation compares retrieved documents against expected sources for precision and recall.*
+
+**Precision and Recall Calculation:**
+
+```python
             if retrieved_sources:
                 precision = len(expected_sources & retrieved_sources) / len(retrieved_sources)
                 recall = len(expected_sources & retrieved_sources) / len(expected_sources)
@@ -834,9 +913,7 @@ class RAGEvaluator:
 Let's create a main script to run everything:
 
 ```python
-
 # main.py
-
 from src.interactive_rag import InteractiveRAG
 
 def main():
@@ -849,7 +926,13 @@ def main():
         "https://en.wikipedia.org/wiki/Machine_learning",
         "https://en.wikipedia.org/wiki/Natural_language_processing"
     ]
+```
 
+*This setup initializes the RAG system and defines sample Wikipedia sources for demonstration.*
+
+Now we load the documents and start the interactive session:
+
+```python
     # Load and index documents
     rag.load_and_index_documents(sample_sources)
 
@@ -918,36 +1001,31 @@ Create a specialized RAG system for a domain of your choice (e.g., cooking, tech
 
 Test your understanding of RAG implementation fundamentals:
 
-**Question 1:** What is the primary advantage of using metadata tracking in document loading?
-
+**Question 1:** What is the primary advantage of using metadata tracking in document loading?  
 A) Reduces memory usage during processing  
 B) Enables source attribution and filtering capabilities  
 C) Improves embedding quality  
 D) Speeds up chunking operations  
 
-**Question 2:** Which chunking approach is most likely to preserve semantic coherence in documents?
-
+**Question 2:** Which chunking approach is most likely to preserve semantic coherence in documents?  
 A) Fixed character-length splitting  
 B) Random boundary splitting  
 C) Semantic paragraph-based splitting  
 D) Token-count only splitting  
 
-**Question 3:** In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?
-
+**Question 3:** In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?  
 A) Speeds up similarity searches  
 B) Enables persistent storage between sessions  
 C) Improves embedding accuracy  
 D) Reduces memory consumption  
 
-**Question 4:** What is the primary benefit of including confidence scores in RAG responses?
-
+**Question 4:** What is the primary benefit of including confidence scores in RAG responses?  
 A) Improves LLM generation quality  
 B) Reduces retrieval time  
 C) Provides transparency about answer reliability  
 D) Enables faster document indexing  
 
-**Question 5:** Why does the RAG system separate retrieval and generation into distinct phases?
-
+**Question 5:** Why does the RAG system separate retrieval and generation into distinct phases?  
 A) To reduce computational costs  
 B) To enable modular optimization and debugging  
 C) To support multiple languages  
@@ -955,7 +1033,7 @@ D) To prevent embedding conflicts
 
 ---
 
-**🗂️ View Test Solutions**: Complete answers in `Session1_Test_Solutions.md`
+[**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
 
 ---
 
@@ -971,6 +1049,7 @@ You've built a complete RAG system from scratch, mastering document processing, 
 **Previous:** [Session 0 - Introduction to RAG Architecture](Session0_Introduction_to_RAG_Architecture.md)
 
 **Optional Deep Dive Modules:**
+
 - 🔬 **[Module A: Production RAG Patterns](Session1_ModuleA_Production_Patterns.md)** (30 min) - Advanced patterns for production RAG systems
 - 🏭 **[Module B: Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)** (30 min) - Enterprise-scale deployment strategies
 

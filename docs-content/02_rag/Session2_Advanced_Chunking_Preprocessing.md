@@ -5,6 +5,7 @@
 **Your Learning Path**: Choose your engagement level
 
 ### Quick Start Guide
+
 - **👀 Observer (55 min)**: Read concepts + examine intelligent processing patterns
 - **🙋‍♂️ Participant (110 min)**: Follow exercises + implement structure-aware chunking
 - **🛠️ Implementer (190 min)**: Build custom processors + explore enterprise patterns
@@ -29,6 +30,7 @@
 ### Learning Outcomes
 
 By the end of this session, you will be able to:
+
 - **Design** hierarchical chunking strategies for complex document structures
 - **Extract** and utilize metadata to enhance retrieval quality
 - **Process** multi-modal content including tables, images, and structured data
@@ -44,12 +46,14 @@ By the end of this session, you will be able to:
 Real-world documents are complex beasts - they contain tables, images, hierarchical structures, and domain-specific information that naive chunking destroys. This session transforms your RAG system from a simple text splitter into an intelligent document understanding engine.
 
 **The Challenge:**
+
 - **Structural Loss**: Tables split across chunks lose meaning
 - **Context Fragmentation**: Related information scattered
 - **Metadata Poverty**: Rich document information ignored
 - **Quality Variance**: Inconsistent chunk usefulness
 
 **Our Advanced Solution:**
+
 - **Structure-Aware Processing**: Preserves document hierarchy and relationships
 - **Intelligent Metadata Extraction**: Captures entities, topics, and context
 - **Multi-Modal Handling**: Processes tables, images, and mixed content
@@ -58,6 +62,7 @@ Real-world documents are complex beasts - they contain tables, images, hierarchi
 ### **What You'll Master**
 
 This session elevates your preprocessing capabilities to enterprise levels:
+
 - Transform complex documents into semantically coherent chunks
 - Extract and utilize rich metadata for superior retrieval
 - Handle multi-modal content that stumps basic systems
@@ -72,6 +77,7 @@ Let's dive into the sophisticated techniques that separate production RAG system
 ### **The Problem with Naive Chunking**
 
 From our PDF analysis, we learned that naive RAG systems often struggle with:
+
 - **Fragmented Content**: Important information split across chunks
 - **Loss of Context**: Document structure ignored during chunking
 - **Redundant Information**: Similar content repeated across chunks
@@ -168,6 +174,7 @@ class DocumentStructureAnalyzer:
 By recognizing these patterns, our system can identify organizational structure regardless of the specific formatting style used by different authors or document types.
 
 **Step 1: Content Type Detection**
+
 ```python
     def detect_content_type(self, text: str) -> ContentType:
         """Detect the type of content based on patterns."""
@@ -180,7 +187,11 @@ By recognizing these patterns, our system can identify organizational structure 
         for pattern in self.heading_patterns:
             if re.match(pattern, text, re.MULTILINE):
                 return ContentType.HEADING
+```
 
+**Pattern Matching for Lists and Code**: Next, we check for common list and code patterns that require special handling:
+
+```python
         # Check for lists
         if re.match(r'^\s*[-*+•]\s+', text) or re.match(r'^\s*\d+\.\s+', text):
             return ContentType.LIST
@@ -201,6 +212,7 @@ By recognizing these patterns, our system can identify organizational structure 
 ```
 
 **Benefits Over Naive Approaches**: This detection logic provides crucial advantages:
+
 1. **Semantic Preservation**: Tables stay intact rather than being split mid-row
 2. **Context Enhancement**: Code blocks are recognized and can receive specialized processing
 3. **Hierarchy Awareness**: Headings are identified for structure-based chunking
@@ -274,7 +286,11 @@ This foundation allows our chunking algorithms to respect document structure rat
                 },
                 position=position
             )
+```
 
+**Complete Processing Loop**: After creating each element, we update our tracking variables and continue processing:
+
+```python
             elements.append(element)
 
             i += lines_consumed
@@ -285,6 +301,8 @@ This foundation allows our chunking algorithms to respect document structure rat
 ```
 
 *Creates structured elements with rich metadata tracking position, size, and hierarchy information for intelligent chunking.*
+
+**Helper Method - Level Determination**: This method intelligently determines the hierarchical level of content based on formatting patterns:
 
 ```python
     def _determine_level(self, line: str, current_level: int, content_type: ContentType) -> int:
@@ -300,7 +318,11 @@ This foundation allows our chunking algorithms to respect document structure rat
                 return current_level + 1
 
         return current_level + 1
+```
 
+**Helper Method - Content Grouping**: Groups related lines together based on content type to maintain semantic units:
+
+```python
     def _group_content_lines(self, lines: List[str], start_idx: int,
                            content_type: ContentType) -> Tuple[str, int]:
         """Group related lines for complex content types."""
@@ -371,6 +393,7 @@ The fundamental insight of hierarchical chunking is that documents have natural 
 4. **Improve user experience**: Retrieved content is naturally readable
 
 **Step 3: Structure-Aware Chunking**
+
 ```python
     def create_hierarchical_chunks(self, document: Document) -> List[Document]:
         """Create chunks that preserve document hierarchy."""
@@ -387,7 +410,11 @@ The fundamental insight of hierarchical chunking is that documents have natural 
             chunks.extend(section_chunks)
 
         return chunks
+```
 
+**Hierarchical Grouping Logic**: This method groups document elements into logical sections based on heading hierarchy:
+
+```python
     def _group_elements_by_hierarchy(self, elements: List[DocumentElement]) -> List[List[DocumentElement]]:
         """Group elements into hierarchical sections."""
         sections = []
@@ -401,6 +428,11 @@ The fundamental insight of hierarchical chunking is that documents have natural 
                 sections.append(current_section)
                 current_section = [element]
                 current_level = element.level
+```
+
+**Section Processing Completion**: Handles the remaining elements and finalizes the section grouping:
+
+```python
             elif element.element_type == ContentType.HEADING and not current_section:
                 current_section = [element]
                 current_level = element.level
@@ -485,6 +517,7 @@ The result is chunks that align with human understanding of document organizatio
 *Ensures no content is lost by processing the final set of elements into a complete chunk.*
 
 **Step 5: Rich Metadata Preservation**
+
 ```python
     def _create_chunk_from_elements(self, elements: List[DocumentElement],
                                   base_metadata: Dict, section_title: str) -> Document:
@@ -498,7 +531,11 @@ The result is chunks that align with human understanding of document organizatio
                 content_parts.append(element.content)
 
         content = "\n".join(content_parts).strip()
+```
 
+**Metadata Enrichment**: Extract comprehensive metadata from the document elements to enhance retrieval capabilities:
+
+```python
         # Extract rich metadata
         content_types = [e.element_type.value for e in elements]
         hierarchy_levels = [e.level for e in elements]
@@ -518,14 +555,22 @@ The result is chunks that align with human understanding of document organizatio
         }
 
         return Document(page_content=content, metadata=enhanced_metadata)
+```
 
+**Helper Methods for Section Management**: These utility methods support the chunking process:
+
+```python
     def _extract_section_title(self, section: List[DocumentElement]) -> str:
         """Extract title from section elements."""
         for element in section:
             if element.element_type == ContentType.HEADING:
                 return element.content.strip('#').strip()
         return "Untitled Section"
+```
 
+**Overlap Management**: Creates intelligent overlap between chunks for context continuity:
+
+```python
     def _get_overlap_elements(self, elements: List[DocumentElement]) -> List[DocumentElement]:
         """Get elements for overlap between chunks."""
         if not elements:
@@ -576,7 +621,11 @@ class TableAwareChunker:
 
     def __init__(self, max_chunk_size: int = 1500):
         self.max_chunk_size = max_chunk_size
+```
 
+**Table-Aware Chunking Algorithm**: This method identifies tables and processes content around them intelligently:
+
+```python
     def chunk_with_tables(self, document: Document) -> List[Document]:
         """Chunk document while preserving table integrity."""
         content = document.page_content
@@ -586,7 +635,11 @@ class TableAwareChunker:
 
         chunks = []
         current_pos = 0
+```
 
+**Content Segmentation Strategy**: Process content before, during, and after table sections:
+
+```python
         for table_start, table_end in table_sections:
             # Add content before table
             if current_pos < table_start:
@@ -601,7 +654,11 @@ class TableAwareChunker:
             chunks.append(table_chunk)
 
             current_pos = table_end
+```
 
+**Finalize Content Processing**: Handle any remaining content after the last table:
+
+```python
         # Add remaining content
         if current_pos < len(content):
             remaining_content = content[current_pos:].strip()
@@ -621,6 +678,7 @@ class TableAwareChunker:
 **Bridge to RAG Architecture**: This specialized processing dramatically improves retrieval for documents containing structured data. When users query for "product pricing" or "feature comparisons," the system returns complete, meaningful table chunks rather than fragmented rows or headers without data. This preserves the relational nature of tabular information that is crucial for accurate question answering.
 
 **Step 6: Table Processing**
+
 ```python
     def _create_table_chunk(self, table_content: str, base_metadata: Dict) -> Document:
         """Create a specialized chunk for table content."""
@@ -640,7 +698,11 @@ class TableAwareChunker:
         enhanced_content = self._enhance_table_content(table_content, table_info)
 
         return Document(page_content=enhanced_content, metadata=enhanced_metadata)
+```
 
+**Table Structure Analysis**: Extract structural information from table content for metadata enrichment:
+
+```python
     def _analyze_table_structure(self, table_content: str) -> Dict[str, Any]:
         """Analyze table structure and extract metadata."""
         lines = table_content.strip().split('\n')
@@ -660,7 +722,11 @@ class TableAwareChunker:
             "columns": len(headers),
             "headers": headers
         }
+```
 
+**Table Content Enhancement**: Add descriptive context to make tables more searchable:
+
+```python
     def _enhance_table_content(self, table_content: str, table_info: Dict) -> str:
         """Add descriptive text to table content."""
         description = f"Table with {table_info['rows']} rows and {table_info['columns']} columns"
@@ -699,7 +765,11 @@ class ExtractedMetadata:
     technical_terms: List[str]
     difficulty_level: str
     content_summary: str
+```
 
+**Metadata Extractor Initialization**: Set up pattern matching for technical content and dates:
+
+```python
 class MetadataExtractor:
     """Extracts rich metadata from document content."""
 
@@ -719,6 +789,7 @@ class MetadataExtractor:
 ```
 
 **Step 7: Entity and Keyword Extraction**
+
 ```python
     def extract_enhanced_metadata(self, document: Document) -> ExtractedMetadata:
         """Extract comprehensive metadata from document."""
@@ -733,7 +804,11 @@ class MetadataExtractor:
         technical_terms = self._extract_technical_terms(content)
         difficulty_level = self._assess_difficulty(content)
         content_summary = self._generate_summary(content)
+```
 
+**Metadata Object Creation**: Combine all extracted information into a structured metadata object:
+
+```python
         return ExtractedMetadata(
             entities=entities,
             keywords=keywords,
@@ -744,7 +819,11 @@ class MetadataExtractor:
             difficulty_level=difficulty_level,
             content_summary=content_summary
         )
+```
 
+**Entity Extraction Implementation**: Use pattern matching to identify named entities and important terms:
+
+```python
     def _extract_entities(self, content: str) -> List[str]:
         """Extract named entities using pattern matching."""
         entities = []
@@ -764,6 +843,7 @@ class MetadataExtractor:
 ```
 
 **Step 8: Topic and Difficulty Assessment**
+
 ```python
     def _infer_topics(self, content: str) -> List[str]:
         """Infer topics from content using keyword analysis."""
@@ -775,7 +855,11 @@ class MetadataExtractor:
             "education": ["learning", "student", "teach", "course", "curriculum", "knowledge"],
             "health": ["medical", "health", "patient", "treatment", "diagnosis", "therapy"]
         }
+```
 
+**Topic Scoring Algorithm**: Score topics based on keyword frequency and return the most relevant ones:
+
+```python
         content_lower = content.lower()
         topic_scores = {}
 
@@ -786,7 +870,11 @@ class MetadataExtractor:
 
         # Return topics sorted by relevance
         return sorted(topic_scores.keys(), key=lambda x: topic_scores[x], reverse=True)[:3]
+```
 
+**Difficulty Assessment Logic**: Evaluate content complexity using multiple readability metrics:
+
+```python
     def _assess_difficulty(self, content: str) -> str:
         """Assess content difficulty level."""
         words = content.split()
@@ -803,7 +891,11 @@ class MetadataExtractor:
         # Technical term density
         technical_terms = len(self._extract_technical_terms(content))
         technical_density = technical_terms / len(words) if words else 0
+```
 
+**Difficulty Level Classification**: Apply thresholds to determine content complexity:
+
+```python
         # Determine difficulty
         if avg_words_per_sentence > 20 or long_word_ratio > 0.3 or technical_density > 0.1:
             return "advanced"
@@ -811,7 +903,11 @@ class MetadataExtractor:
             return "intermediate"
         else:
             return "beginner"
+```
 
+**Content Summary Generation**: Create concise summaries for enhanced retrieval:
+
+```python
     def _generate_summary(self, content: str) -> str:
         """Generate a brief summary of the content."""
         sentences = content.split('.')
@@ -848,7 +944,11 @@ class MetadataEnhancedChunker:
     def __init__(self, max_chunk_size: int = 1000):
         self.hierarchical_chunker = HierarchicalChunker(max_chunk_size=max_chunk_size)
         self.metadata_extractor = MetadataExtractor()
+```
 
+**Enhanced Chunking Pipeline**: Create hierarchical chunks and then enrich each with extracted metadata:
+
+```python
     def create_enhanced_chunks(self, document: Document) -> List[Document]:
         """Create chunks with rich metadata."""
         # First, create hierarchical chunks
@@ -864,6 +964,7 @@ class MetadataEnhancedChunker:
 ```
 
 **Step 9: Chunk Enhancement**
+
 ```python
     def _enhance_chunk_metadata(self, chunk: Document) -> Document:
         """Enhance chunk with extracted metadata."""
@@ -884,7 +985,11 @@ class MetadataEnhancedChunker:
             "char_count": len(chunk.page_content),
             "enhanced_at": datetime.now().isoformat()
         }
+```
 
+**Searchable Content Creation**: Combine original content with metadata for enhanced retrieval:
+
+```python
         # Create searchable content that includes metadata
         searchable_content = self._create_searchable_content(chunk.page_content, extracted_metadata)
 
@@ -892,7 +997,11 @@ class MetadataEnhancedChunker:
             page_content=searchable_content,
             metadata=enhanced_metadata
         )
+```
 
+**Metadata Text Integration**: Build searchable metadata text that enhances retrieval without cluttering content:
+
+```python
     def _create_searchable_content(self, original_content: str, metadata: Any) -> str:
         """Create enhanced searchable content."""
         # Add metadata as searchable text
@@ -911,7 +1020,11 @@ class MetadataEnhancedChunker:
             metadata_text_parts.append(f"Summary: {metadata.content_summary}")
 
         metadata_text = "\n".join(metadata_text_parts)
+```
 
+**Content Combination**: Merge original content with searchable metadata:
+
+```python
         # Combine original content with metadata
         if metadata_text:
             return f"{original_content}\n\n--- Metadata ---\n{metadata_text}"
@@ -942,7 +1055,11 @@ class MultiModalProcessor:
     def __init__(self):
         self.supported_image_formats = ['.jpg', '.jpeg', '.png', '.gif', '.bmp']
         self.supported_table_formats = ['.csv', '.xlsx', '.xls']
+```
 
+**Image Processing Pipeline**: Handle documents containing image references by replacing them with descriptive text:
+
+```python
     def process_document_with_images(self, document: Document,
                                    image_descriptions: Dict[str, str] = None) -> Document:
         """Process document that may contain image references."""
@@ -959,7 +1076,11 @@ class MultiModalProcessor:
                 img_ref,
                 f"[IMAGE: {description}]"
             )
+```
 
+**Image Metadata Enhancement**: Add image-related metadata for better document understanding:
+
+```python
         enhanced_metadata = {
             **document.metadata,
             "has_images": len(image_refs) > 0,
@@ -971,6 +1092,7 @@ class MultiModalProcessor:
 ```
 
 **Step 10: Structured Data Processing**
+
 ```python
     def process_structured_data(self, data_content: str, data_type: str) -> Document:
         """Process structured data (CSV, JSON, etc.)."""
@@ -981,7 +1103,11 @@ class MultiModalProcessor:
         else:
             # Fallback to text processing
             return Document(page_content=data_content)
+```
 
+**CSV Processing Implementation**: Convert CSV data into human-readable format with metadata:
+
+```python
     def _process_csv_data(self, csv_content: str) -> Document:
         """Process CSV data into readable format."""
         try:
@@ -997,7 +1123,11 @@ class MultiModalProcessor:
             if len(df) > 0:
                 description_parts.append("Sample data:")
                 description_parts.append(df.head(3).to_string(index=False))
+```
 
+**Statistical Summary Generation**: Add numeric column summaries and create rich metadata:
+
+```python
             # Add summary statistics for numeric columns
             numeric_cols = df.select_dtypes(include=['number']).columns
             if len(numeric_cols) > 0:
@@ -1007,7 +1137,11 @@ class MultiModalProcessor:
                     description_parts.append(f"{col}: mean={stats['mean']:.2f}, std={stats['std']:.2f}")
 
             processed_content = "\n\n".join(description_parts)
+```
 
+**Metadata Creation and Error Handling**: Build rich metadata and handle processing errors gracefully:
+
+```python
             metadata = {
                 "content_type": "structured_data",
                 "data_format": "csv",
@@ -1042,7 +1176,11 @@ from .specialized_chunkers import TableAwareChunker
 
 class AdvancedProcessingPipeline:
     """Complete advanced document processing pipeline."""
+```
 
+**Pipeline Configuration**: Initialize the comprehensive processing pipeline with configurable components:
+
+```python
     def __init__(self,
                  max_chunk_size: int = 1000,
                  enable_metadata_extraction: bool = True,
@@ -1060,6 +1198,7 @@ class AdvancedProcessingPipeline:
 ```
 
 **Step 11: Intelligent Processing Strategy**
+
 ```python
     def process_document(self, document: Document) -> List[Document]:
         """Process document using the most appropriate strategy."""
@@ -1073,7 +1212,11 @@ class AdvancedProcessingPipeline:
         else:
             print("Using hierarchical chunking...")
             processed_docs = self.hierarchical_chunker.create_hierarchical_chunks(document)
+```
 
+**Multimodal and Metadata Processing**: Apply additional processing layers based on document characteristics:
+
+```python
         # Apply multimodal processing if enabled
         if self.enable_multimodal_processing and doc_analysis["has_media"]:
             print("Applying multimodal processing...")
@@ -1090,7 +1233,11 @@ class AdvancedProcessingPipeline:
                 enhanced_doc = self.metadata_chunker._enhance_chunk_metadata(doc)
                 final_docs.append(enhanced_doc)
             processed_docs = final_docs
+```
 
+**Pipeline Metadata Addition**: Add processing information to document metadata:
+
+```python
         # Add pipeline metadata
         for doc in processed_docs:
             doc.metadata.update({
@@ -1100,7 +1247,11 @@ class AdvancedProcessingPipeline:
             })
 
         return processed_docs
+```
 
+**Document Complexity Analysis**: Analyze content characteristics to choose optimal processing strategy:
+
+```python
     def _analyze_document_complexity(self, document: Document) -> Dict[str, Any]:
         """Analyze document to determine optimal processing strategy."""
         content = document.page_content
@@ -1111,7 +1262,11 @@ class AdvancedProcessingPipeline:
         has_lists = content.count("- ") > 3 or content.count("* ") > 3
         has_headings = content.count("#") > 2 or len([line for line in content.split('\n') if line.isupper()]) > 2
         has_media = any(ext in content.lower() for ext in ['.jpg', '.png', '.gif', '.pdf'])
+```
 
+**Complexity Scoring and Strategy Selection**: Calculate complexity score and determine optimal processing approach:
+
+```python
         # Calculate complexity score
         complexity_score = 0
         if has_tables: complexity_score += 3
@@ -1127,7 +1282,11 @@ class AdvancedProcessingPipeline:
             strategy = "hierarchical"
         else:
             strategy = "standard"
+```
 
+**Return Analysis Results**: Package all analysis results for pipeline decision making:
+
+```python
         return {
             "has_tables": has_tables,
             "has_code": has_code,
@@ -1165,7 +1324,11 @@ class ChunkQualityAssessor:
             "size_consistency",
             "overlap_efficiency"
         ]
+```
 
+**Quality Assessment Pipeline**: Comprehensive evaluation of chunk quality across multiple dimensions:
+
+```python
     def assess_chunk_quality(self, chunks: List[Document]) -> Dict[str, float]:
         """Comprehensive quality assessment of chunks."""
         if not chunks:
@@ -1177,7 +1340,11 @@ class ChunkQualityAssessor:
         metadata_richness = self._calculate_metadata_richness(chunks)
         size_consistency = self._calculate_size_consistency(chunks)
         overlap_efficiency = self._calculate_overlap_efficiency(chunks)
+```
 
+**Quality Score Compilation**: Combine all metrics into a comprehensive quality assessment:
+
+```python
         return {
             "coherence_score": coherence,
             "information_density": density,
@@ -1189,6 +1356,7 @@ class ChunkQualityAssessor:
 ```
 
 **Step 12: Quality Metrics Implementation**
+
 ```python
     def _calculate_coherence_score(self, chunks: List[Document]) -> float:
         """Calculate coherence score based on topic consistency."""
@@ -1200,7 +1368,11 @@ class ChunkQualityAssessor:
         for chunk in chunks:
             topics = chunk.metadata.get("topics", [])
             chunk_topics.append(set(topics))
+```
 
+**Topic Overlap Calculation**: Measure coherence by analyzing topic overlap between adjacent chunks:
+
+```python
         # Calculate topic overlap between adjacent chunks
         overlaps = []
         for i in range(len(chunk_topics) - 1):
@@ -1212,7 +1384,11 @@ class ChunkQualityAssessor:
                 overlaps.append(overlap)
 
         return np.mean(overlaps) if overlaps else 0.0
+```
 
+**Information Density Calculation**: Measure the uniqueness and richness of content within chunks:
+
+```python
     def _calculate_information_density(self, chunks: List[Document]) -> float:
         """Calculate information density score."""
         densities = []
@@ -1230,7 +1406,11 @@ class ChunkQualityAssessor:
                 densities.append(density)
 
         return np.mean(densities) if densities else 0.0
+```
 
+**Metadata Richness Assessment**: Evaluate the completeness of extracted metadata across chunks:
+
+```python
     def _calculate_metadata_richness(self, chunks: List[Document]) -> float:
         """Calculate metadata richness score."""
         metadata_features = [
@@ -1283,7 +1463,11 @@ class CustomDocumentProcessor(AdvancedProcessingPipeline):
         """Implement your structure detection logic."""
         # Your code here
         pass
+```
 
+**Domain-Specific Processing Methods**: Implement custom extraction and chunking for your specific document type:
+
+```python
     def extract_domain_metadata(self, document: Document):
         """Extract domain-specific metadata."""
         # Your code here
@@ -1325,64 +1509,37 @@ class CustomDocumentProcessor(AdvancedProcessingPipeline):
 
 ## 📝 Multiple Choice Test - Session 2 (15 minutes)
 
-**1. What is the primary benefit of detecting content types (headings, tables, code) during document analysis?**  
-   - A) Reduces processing time  
-   - B) Enables structure-aware chunking that preserves meaning  
-   - C) Improves embedding quality  
-   - D) Reduces storage requirements  
+**Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?  
+A) Reduces processing time  
+B) Enables structure-aware chunking that preserves meaning  
+C) Improves embedding quality  
+D) Reduces storage requirements  
 
-**2. In hierarchical chunking, why is it important to track element hierarchy levels?**  
-   - A) To improve processing speed  
-   - B) To reduce memory usage  
-   - C) To preserve document structure and create meaningful chunk boundaries  
-   - D) To simplify the codebase  
+**Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?  
+A) To improve processing speed  
+B) To reduce memory usage  
+C) To preserve document structure and create meaningful chunk boundaries  
+D) To simplify the codebase  
 
-**3. What is the main advantage of extracting entities, keywords, and topics during preprocessing?**  
-   - A) Reduces chunk size  
-   - B) Improves computational efficiency  
-   - C) Enables more precise retrieval through enriched context  
-   - D) Simplifies the chunking process  
+**Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?  
+A) Reduces chunk size  
+B) Improves computational efficiency  
+C) Enables more precise retrieval through enriched context  
+D) Simplifies the chunking process  
 
-**4. Why do tables require specialized processing in RAG systems?**  
-   - A) Tables contain more text than paragraphs  
-   - B) Tables have structured relationships that are lost in naive chunking  
-   - C) Tables are always larger than the chunk size  
-   - D) Tables use different encoding formats  
+**Question 4:** Why do tables require specialized processing in RAG systems?  
+A) Tables contain more text than paragraphs  
+B) Tables have structured relationships that are lost in naive chunking  
+C) Tables are always larger than the chunk size  
+D) Tables use different encoding formats  
 
-**5. When processing documents with images, what is the best practice for RAG systems?**  
-   - A) Ignore images completely  
-   - B) Store images as binary data in chunks  
-   - C) Replace image references with descriptive text  
-   - D) Create separate chunks for each image  
+**Question 5:** When processing documents with images, what is the best practice for RAG systems?  
+A) Ignore images completely  
+B) Store images as binary data in chunks  
+C) Replace image references with descriptive text  
+D) Create separate chunks for each image    
 
-**6. Which metric is most important for measuring chunk coherence in hierarchical chunking?**  
-   - A) Average chunk size  
-   - B) Processing speed  
-   - C) Topic consistency between related chunks  
-   - D) Number of chunks created  
-
-**7. What is the optimal overlap ratio for hierarchical chunks?**  
-   - A) 0% - no overlap needed  
-   - B) 50% - maximum context preservation  
-   - C) 10-20% - balanced context and efficiency  
-   - D) 100% - complete duplication  
-
-**8. Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?**  
-   - A) To reduce computational costs  
-   - B) To select the most appropriate processing approach for the content type  
-   - C) To determine the number of chunks to create  
-   - D) To set the embedding model parameters  
-
----
-
-**🗂️ View Test Solutions**: Complete answers in `Session2_Test_Solutions.md`
-
----
-
-## 🎯 Session 2 Foundation Complete
-
-**Your Chunking Mastery Achievement:**
-You've mastered intelligent document processing that preserves structure, extracts metadata, and creates semantically coherent chunks. This foundation is crucial for everything that follows in your RAG journey.
+**[🗂️ View Test Solutions →](Session2_Test_Solutions.md)**
 
 ---
 
@@ -1391,12 +1548,7 @@ You've mastered intelligent document processing that preserves structure, extrac
 **Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 
 **Optional Deep Dive Modules:**
-- 🔬 **[Module A: Advanced Document Analytics](Session2_ModuleA_Document_Analytics.md)** (40 min) - Deep analytics for document structure analysis
-
-**📝 Test Your Knowledge:** [Session 2 Solutions](Session2_Test_Solutions.md)
+- 🔬 **[Module A: Advanced Document Analytics](Session2_ModuleA_Document_Analytics.md)** - Deep analytics for document structure analysis
+- 🏭 **[Module B: Enterprise Content Processing](Session2_ModuleB_Enterprise_Processing.md)** - Enterprise-scale content processing strategies
 
 **Next:** [Session 3 - Vector Databases Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
-
----
-
-**The Foundation is Set:** Your intelligent document processing creates the high-quality chunks that enable everything else. Ready to build vector search excellence on this solid foundation? 🚀

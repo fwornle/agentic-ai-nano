@@ -3,12 +3,13 @@
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
-- **Implement** robust JWT authentication and authorization systems for MCP servers
-- **Configure** API key management with automatic rotation and secure storage
-- **Apply** rate limiting and DDoS protection to prevent abuse
-- **Secure** data transmission using TLS encryption and certificate management
-- **Validate** all inputs and sanitize data to prevent injection attacks
-- **Monitor** security events through comprehensive audit logging
+
+- **Implement** robust JWT authentication and authorization systems for MCP servers  
+- **Configure** API key management with automatic rotation and secure storage  
+- **Apply** rate limiting and DDoS protection to prevent abuse  
+- **Secure** data transmission using TLS encryption and certificate management  
+- **Validate** all inputs and sanitize data to prevent injection attacks  
+- **Monitor** security events through comprehensive audit logging  
 
 ## 📚 Chapter Overview
 
@@ -17,10 +18,11 @@ Security is paramount when deploying MCP servers in production environments. Thi
 ![MCP Security Architecture](images/mcp-security-architecture.png)
 
 The security architecture above shows our defense-in-depth approach:
-- **Authentication Layer**: JWT tokens and API keys for identity verification
-- **Authorization Layer**: Role-based access control (RBAC) for permission management
-- **Network Security**: TLS encryption and rate limiting for traffic protection
-- **Application Security**: Input validation and audit logging for attack prevention
+
+- **Authentication Layer**: JWT tokens and API keys for identity verification  
+- **Authorization Layer**: Role-based access control (RBAC) for permission management  
+- **Network Security**: TLS encryption and rate limiting for traffic protection  
+- **Application Security**: Input validation and audit logging for attack prevention  
 
 ---
 
@@ -30,11 +32,11 @@ The security architecture above shows our defense-in-depth approach:
 
 Before implementing security measures, let's understand the threats we're protecting against:
 
-1. **Unauthorized Access**: Attackers trying to use your MCP server without permission
-2. **Token Theft**: Stolen authentication tokens being used maliciously
-3. **Privilege Escalation**: Users accessing resources beyond their permissions
-4. **API Abuse**: Excessive requests overwhelming your server
-5. **Data Injection**: Malicious input attempting to compromise your system
+1. **Unauthorized Access**: Attackers trying to use your MCP server without permission  
+2. **Token Theft**: Stolen authentication tokens being used maliciously  
+3. **Privilege Escalation**: Users accessing resources beyond their permissions  
+4. **API Abuse**: Excessive requests overwhelming your server  
+5. **Data Injection**: Malicious input attempting to compromise your system  
 
 ### Step 1.1: JWT Authentication Foundation
 
@@ -67,10 +69,11 @@ logger = logging.getLogger(__name__)
 ```
 
 **Security libraries explained:**
-- `jwt`: PyJWT library for creating and verifying JSON Web Tokens
-- `secrets`: Cryptographically secure random number generation
-- `hashlib`: Secure hashing functions for token blacklisting
-- `bcrypt`: Password hashing (for future user authentication)
+
+- `jwt`: PyJWT library for creating and verifying JSON Web Tokens  
+- `secrets`: Cryptographically secure random number generation  
+- `hashlib`: Secure hashing functions for token blacklisting  
+- `bcrypt`: Password hashing (for future user authentication)  
 
 **Step 1.1.2: JWT Manager Class Foundation**
 
@@ -91,9 +94,10 @@ class JWTManager:
 ```
 
 **Security design principles:**
-- **Environment variables** prevent secrets in code
-- **Short access tokens** (30 min) limit exposure window
-- **Separate refresh tokens** (7 days) balance security and usability
+
+- **Environment variables** prevent secrets in code  
+- **Short access tokens** (30 min) limit exposure window  
+- **Separate refresh tokens** (7 days) balance security and usability  
 
 **Step 1.1.3: Secret Key Validation**
 
@@ -110,9 +114,10 @@ class JWTManager:
 ```
 
 **Security considerations:**
-- Secret key must be at least 32 characters for cryptographic security
-- Environment variables keep secrets out of code
-- Automatic secret generation for development environments
+
+- Secret key must be at least 32 characters for cryptographic security  
+- Environment variables keep secrets out of code  
+- Automatic secret generation for development environments  
 
 **Step 1.1.2: Secure Secret Generation**
 
@@ -123,9 +128,10 @@ class JWTManager:
 ```
 
 **Why this matters:**
-- `secrets.token_urlsafe()` uses cryptographically secure random generation
-- 64-byte keys provide 512 bits of entropy
-- URL-safe encoding prevents encoding issues
+
+- `secrets.token_urlsafe()` uses cryptographically secure random generation  
+- 64-byte keys provide 512 bits of entropy  
+- URL-safe encoding prevents encoding issues  
 
 **Step 1.1.4: Access Token Payload Creation**
 
@@ -149,9 +155,10 @@ Access tokens contain user identity and permissions for authorization:
 ```
 
 **Access token security:**
-- **Short expiration** (30 minutes) limits damage from token theft
-- **Comprehensive claims** enable fine-grained authorization
-- **Type field** prevents token confusion attacks
+
+- **Short expiration** (30 minutes) limits damage from token theft  
+- **Comprehensive claims** enable fine-grained authorization  
+- **Type field** prevents token confusion attacks  
 
 **Step 1.1.5: Refresh Token Design**
 
@@ -168,9 +175,10 @@ Refresh tokens use minimal claims to reduce information leakage:
 ```
 
 **Refresh token principles:**
-- **Minimal data** reduces exposure risk if compromised
-- **Longer lifespan** (7 days) for user convenience
-- **Single purpose** - only for generating new access tokens
+
+- **Minimal data** reduces exposure risk if compromised  
+- **Longer lifespan** (7 days) for user convenience  
+- **Single purpose** - only for generating new access tokens  
 
 **Step 1.1.6: Token Generation and Response**
 
@@ -189,9 +197,10 @@ Refresh tokens use minimal claims to reduce information leakage:
 ```
 
 **Token generation security:**
-- **HS256 algorithm** provides strong cryptographic signatures
-- **Standard OAuth 2.0 response** ensures client compatibility
-- **Expires_in field** helps clients manage token lifecycle
+
+- **HS256 algorithm** provides strong cryptographic signatures  
+- **Standard OAuth 2.0 response** ensures client compatibility  
+- **Expires_in field** helps clients manage token lifecycle  
 
 **Step 1.1.7: Token Verification Process**
 
@@ -228,9 +237,10 @@ Token verification follows a multi-step security validation process:
 ```
 
 **Verification security:**
-- **Blacklist check first** prevents using revoked tokens
-- **Cryptographic validation** ensures token integrity
-- **Type validation** prevents refresh tokens being used as access tokens
+
+- **Blacklist check first** prevents using revoked tokens  
+- **Cryptographic validation** ensures token integrity  
+- **Type validation** prevents refresh tokens being used as access tokens  
 
 **Step 1.1.9: Blacklist Checking for Revoked Tokens**
 
@@ -253,9 +263,10 @@ Token blacklisting enables secure logout and revocation:
 ```
 
 **Blacklist security:**
-- **Token hashing** prevents storing full tokens in Redis
-- **Graceful degradation** when Redis is unavailable
-- **Secure failure mode** allows access if blacklist check fails
+
+- **Token hashing** prevents storing full tokens in Redis  
+- **Graceful degradation** when Redis is unavailable  
+- **Secure failure mode** allows access if blacklist check fails  
 
 **Step 1.1.10: Token Revocation Implementation**
 
@@ -330,9 +341,10 @@ class Permission(Enum):
 ```
 
 **Permission design principles:**
-- **Namespace format** (resource:action) for clear organization
-- **Granular permissions** enable precise access control
-- **Enum-based** prevents typos and enables IDE autocomplete
+
+- **Namespace format** (resource:action) for clear organization  
+- **Granular permissions** enable precise access control  
+- **Enum-based** prevents typos and enables IDE autocomplete  
 
 **Step 1.2.2: Role Hierarchy Definition**
 
@@ -370,9 +382,10 @@ ROLE_PERMISSIONS: Dict[Role, Set[Permission]] = {
 ```
 
 **Role hierarchy benefits:**
-- **Progressive permissions** from guest to admin
-- **Clear separation** of capabilities
-- **Easy to audit** and understand access levels
+
+- **Progressive permissions** from guest to admin  
+- **Clear separation** of capabilities  
+- **Easy to audit** and understand access levels  
 
 **Step 1.2.4: Permission Validation Helper**
 
@@ -413,6 +426,11 @@ def require_permission(required_permission: Permission):
                     f"Permission denied: User {current_user.get('username')} "
                     f"attempted {required_permission.value}"
                 )
+```
+
+The decorator continues with error handling and security logging:
+
+```python
                 raise HTTPException(
                     status_code=403, 
                     detail=f"Permission '{required_permission.value}' required"
@@ -424,9 +442,10 @@ def require_permission(required_permission: Permission):
 ```
 
 **Authorization security:**
-- **Fail-secure design** denies access by default
-- **Audit logging** tracks permission violations
-- **Clear error messages** help developers debug issues
+
+- **Fail-secure design** denies access by default  
+- **Audit logging** tracks permission violations  
+- **Clear error messages** help developers debug issues  
 
 ### Step 1.3: Secure MCP Server Integration
 
@@ -473,7 +492,11 @@ class MCPAuthMiddleware:
                 status_code=401, 
                 detail="Bearer token format required"
             )
-        
+```
+
+Now we extract and validate the token format:
+
+```python
         # Extract token (handle malformed headers safely)
         parts = auth_header.split(" ")
         if len(parts) != 2:
@@ -502,7 +525,11 @@ class MCPAuthMiddleware:
             
             # Step 2: Verify token cryptographically
             payload = self.jwt_manager.verify_token(token)
-            
+```
+
+The authentication continues with performance logging and success tracking:
+
+```python
             # Step 3: Log successful authentication
             auth_duration = (time.time() - start_time) * 1000
             logger.info(
@@ -532,10 +559,11 @@ class MCPAuthMiddleware:
 ```
 
 **Middleware security features:**
-- **Path exclusions** for health checks and monitoring
-- **Comprehensive error handling** with security logging
-- **Performance monitoring** tracks authentication latency
-- **IP and user agent logging** for security analysis
+
+- **Path exclusions** for health checks and monitoring  
+- **Comprehensive error handling** with security logging  
+- **Performance monitoring** tracks authentication latency  
+- **IP and user agent logging** for security analysis  
 
 **Step 1.3.5: Server Class and Dependencies**
 
@@ -549,7 +577,11 @@ from typing import Dict, List
 import re
 import os
 from pathlib import Path
+```
 
+Now we initialize the secure MCP server with all security components:
+
+```python
 class SecureMCPServer:
     """Production-ready MCP server with comprehensive security."""
     
@@ -624,10 +656,11 @@ class SecureMCPServer:
 ```
 
 **Security integration benefits:**
-- **Permission decorators** provide declarative access control
-- **Input validation** prevents injection attacks
-- **Path restrictions** limit file system access
-- **Size limits** prevent resource exhaustion attacks
+
+- **Permission decorators** provide declarative access control  
+- **Input validation** prevents injection attacks  
+- **Path restrictions** limit file system access  
+- **Size limits** prevent resource exhaustion attacks  
 
 ---
 
@@ -681,9 +714,10 @@ class APIKeyManager:
 ```
 
 **API key security:**
-- **UUID key IDs** provide collision-free identifiers
-- **URL-safe encoding** prevents issues in HTTP headers
-- **SHA256 hashing** protects stored keys from database breaches
+
+- **UUID key IDs** provide collision-free identifiers  
+- **URL-safe encoding** prevents issues in HTTP headers  
+- **SHA256 hashing** protects stored keys from database breaches  
 
 **Step 2.1.3: Metadata Creation**
 
@@ -722,7 +756,11 @@ class APIKeyManager:
         # Generate secure key components
         key_id, api_key = self._generate_secure_key()
         key_hash = self._hash_api_key(api_key)
-        
+```
+
+Next, we create and store the key metadata securely:
+
+```python
         # Create metadata and store securely
         expiry_days = expires_in_days or self.default_expiry_days
         metadata = self._create_key_metadata(key_id, user_id, name, permissions, expiry_days)
@@ -756,10 +794,11 @@ class APIKeyManager:
 ```
 
 **API key generation security:**
-- **Automatic expiration** reduces long-term exposure risk
-- **Secure random generation** prevents key prediction
-- **Metadata tracking** enables usage monitoring and auditing
-- **Error handling** prevents partial key creation
+
+- **Automatic expiration** reduces long-term exposure risk  
+- **Secure random generation** prevents key prediction  
+- **Metadata tracking** enables usage monitoring and auditing  
+- **Error handling** prevents partial key creation  
 
 **Step 2.1.6: Initial Key Validation**
 
@@ -777,7 +816,11 @@ API key validation follows a multi-step security process:
             metadata = self._get_key_metadata(api_key)
             if not metadata:
                 return None
-            
+```
+
+Finally, we check the key status and update usage tracking:
+
+```python
             # Step 3: Check key status and update usage
             if self._is_key_active(metadata):
                 self._update_key_usage(api_key, metadata)
@@ -877,6 +920,11 @@ API key validation follows a multi-step security process:
             ttl = self.redis_client.ttl(redis_key)
             if ttl > 0:
                 self.redis_client.setex(redis_key, ttl, json.dumps(metadata))
+```
+
+Usage tracking continues with fallback handling for expired TTL:
+
+```python
             else:
                 # Fallback: use default expiry
                 self.redis_client.setex(
@@ -891,11 +939,12 @@ API key validation follows a multi-step security process:
 ```
 
 **API key validation security:**
-- **Multi-step validation** prevents bypassing security checks
-- **Format validation** blocks malformed or malicious keys
-- **Active status checking** enforces key revocation
-- **Usage tracking** enables monitoring and rate limiting
-- **Graceful error handling** maintains system availability
+
+- **Multi-step validation** prevents bypassing security checks  
+- **Format validation** blocks malformed or malicious keys  
+- **Active status checking** enforces key revocation  
+- **Usage tracking** enables monitoring and rate limiting  
+- **Graceful error handling** maintains system availability  
 
 ---
 
@@ -932,9 +981,10 @@ class TokenBucketRateLimiter:
 ```
 
 **Token bucket principles:**
-- **Capacity**: Maximum burst size allowed
-- **Refill rate**: Steady-state requests per second
-- **Distributed**: Redis enables rate limiting across multiple servers
+
+- **Capacity**: Maximum burst size allowed  
+- **Refill rate**: Steady-state requests per second  
+- **Distributed**: Redis enables rate limiting across multiple servers  
 
 **Step 3.1.2: Bucket State Retrieval**
 
@@ -995,7 +1045,11 @@ class TokenBucketRateLimiter:
             available_tokens = self._calculate_tokens(
                 last_refill, current_tokens, current_time, capacity, refill_rate
             )
-            
+```
+
+Now we determine if the request should be allowed and update bucket state:
+
+```python
             # Step 3: Check if request can be allowed
             if available_tokens >= 1.0:
                 # Allow request and consume token
@@ -1038,10 +1092,11 @@ class TokenBucketRateLimiter:
 ```
 
 **Rate limiting security:**
-- **Fail-open design** maintains availability during Redis outages
-- **TTL cleanup** prevents infinite bucket accumulation
-- **Precise timing** ensures accurate rate calculations
-- **Distributed consistency** works across multiple server instances
+
+- **Fail-open design** maintains availability during Redis outages  
+- **TTL cleanup** prevents infinite bucket accumulation  
+- **Precise timing** ensures accurate rate calculations  
+- **Distributed consistency** works across multiple server instances  
 
 **Step 3.1.6: Middleware Class and Role-Based Limits**
 
@@ -1115,11 +1170,12 @@ class RateLimitMiddleware:
 ```
 
 **Rate limiting middleware features:**
-- **Role-based limits** provide fair access based on user tier
+
+- **Role-based limits** provide fair access based on user tier  
 - **Unique identifiers** prevent cross-user rate limit sharing  
-- **Standard HTTP 429** responses with retry guidance
-- **Security logging** enables monitoring and alerting
-- **Graceful degradation** when rate limiter fails
+- **Standard HTTP 429** responses with retry guidance  
+- **Security logging** enables monitoring and alerting  
+- **Graceful degradation** when rate limiter fails  
 
 ---
 
@@ -1132,30 +1188,33 @@ You've successfully implemented a comprehensive security system for MCP servers!
 ### Security Features Implemented:
 
 #### 🔐 **Authentication & Authorization**
-- ✅ **JWT token system** with access and refresh tokens
-- ✅ **API key management** with automatic rotation
-- ✅ **Role-based access control** (RBAC) with fine-grained permissions
-- ✅ **Token blacklisting** for secure logout and revocation
+
+- ✅ **JWT token system** with access and refresh tokens  
+- ✅ **API key management** with automatic rotation  
+- ✅ **Role-based access control** (RBAC) with fine-grained permissions  
+- ✅ **Token blacklisting** for secure logout and revocation  
 
 #### 🛡️ **Protection Mechanisms**
-- ✅ **Rate limiting** with token bucket algorithm
-- ✅ **Input validation** and sanitization
-- ✅ **Permission decorators** for easy tool protection
-- ✅ **Secure secret management** with environment variables
+
+- ✅ **Rate limiting** with token bucket algorithm  
+- ✅ **Input validation** and sanitization  
+- ✅ **Permission decorators** for easy tool protection  
+- ✅ **Secure secret management** with environment variables  
 
 #### 📊 **Security Monitoring**
-- ✅ **Audit logging** for all authentication events
-- ✅ **Usage tracking** for API keys and tokens
-- ✅ **Error handling** with secure failure modes
-- ✅ **Security metrics** for monitoring and alerting
+
+- ✅ **Audit logging** for all authentication events  
+- ✅ **Usage tracking** for API keys and tokens  
+- ✅ **Error handling** with secure failure modes  
+- ✅ **Security metrics** for monitoring and alerting  
 
 ### Production Security Considerations:
 
-1. **Encryption**: All tokens use strong cryptographic algorithms
-2. **Storage**: Sensitive data is hashed, never stored in plaintext
-3. **Expiration**: Short-lived tokens limit exposure windows
-4. **Monitoring**: Comprehensive logging enables threat detection
-5. **Scalability**: Redis backend supports high-throughput scenarios
+1. **Encryption**: All tokens use strong cryptographic algorithms  
+2. **Storage**: Sensitive data is hashed, never stored in plaintext  
+3. **Expiration**: Short-lived tokens limit exposure windows  
+4. **Monitoring**: Comprehensive logging enables threat detection  
+5. **Scalability**: Redis backend supports high-throughput scenarios  
 
 ---
 
@@ -1163,35 +1222,35 @@ You've successfully implemented a comprehensive security system for MCP servers!
 
 ### Quick Check Questions
 
-1. **Why do we use short-lived access tokens (30 minutes) instead of long-lived ones?**
-   - A) To reduce server load
-   - B) To limit exposure if tokens are compromised
-   - C) To improve performance
-   - D) To simplify implementation
+1. **Why do we use short-lived access tokens (30 minutes) instead of long-lived ones?**  
+A) To reduce server load  
+B) To limit exposure if tokens are compromised  
+C) To improve performance  
+D) To simplify implementation  
 
-2. **What is the purpose of token blacklisting?**
-   - A) To improve token performance
-   - B) To enable secure logout and token revocation
-   - C) To reduce memory usage
-   - D) To simplify token validation
+2. **What is the purpose of token blacklisting?**  
+A) To improve token performance  
+B) To enable secure logout and token revocation  
+C) To reduce memory usage  
+D) To simplify token validation  
 
-3. **How does the token bucket rate limiter work?**
-   - A) It counts requests per minute
-   - B) It blocks all requests after a limit
-   - C) It allows bursts but limits average rate
-   - D) It only limits failed requests
+3. **How does the token bucket rate limiter work?**  
+A) It counts requests per minute  
+B) It blocks all requests after a limit  
+C) It allows bursts but limits average rate  
+D) It only limits failed requests  
 
-4. **Why do we hash API keys before storing them?**
-   - A) To save storage space
-   - B) To improve lookup performance
-   - C) To prevent key theft from database breaches
-   - D) To enable key rotation
+4. **Why do we hash API keys before storing them?**  
+A) To save storage space  
+B) To improve lookup performance  
+C) To prevent key theft from database breaches  
+D) To enable key rotation  
 
-5. **What does "fail secure" mean in security systems?**
-   - A) Always allow access when in doubt
-   - B) Always deny access when systems fail
-   - C) Log all security events
-   - D) Use multiple authentication methods
+5. **What does "fail secure" mean in security systems?**  
+A) Always allow access when in doubt  
+B) Always deny access when systems fail  
+C) Log all security events  
+D) Use multiple authentication methods  
 
 ### Practical Exercise
 
@@ -1225,46 +1284,75 @@ async def get_security_audit(time_range: str = "24h") -> Dict:
 ## Next Session Preview
 
 In Session 6, we'll focus on **Advanced MCP Patterns** including:
-- Custom transport protocols for specialized use cases
-- Event-driven MCP architectures with webhooks
-- Distributed MCP server clusters and load balancing
-- Real-time streaming data with Server-Sent Events
+
+- Custom transport protocols for specialized use cases  
+- Event-driven MCP architectures with webhooks  
+- Distributed MCP server clusters and load balancing  
+- Real-time streaming data with Server-Sent Events  
 
 ### Homework
 
-1. **Implement OAuth 2.0 integration** for third-party authentication providers
-2. **Create a security dashboard** showing real-time threat metrics
-3. **Add IP-based rate limiting** in addition to user-based limits
-4. **Implement certificate-based authentication** for high-security environments
+1. **Implement OAuth 2.0 integration** for third-party authentication providers  
+2. **Create a security dashboard** showing real-time threat metrics  
+3. **Add IP-based rate limiting** in addition to user-based limits  
+4. **Implement certificate-based authentication** for high-security environments  
 
 **💡 Hint:** Check the [`Session5_Secure_MCP_Server-solution.md`](Session5_Secure_MCP_Server-solution.md) file for complete implementations and advanced security patterns.
 
 ---
 
-## 📋 Test Your Knowledge
+## 📝 Multiple Choice Test - Session 5
 
-Ready to test your understanding of Secure MCP Servers? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+Test your understanding of Secure MCP Servers:
 
-### Multiple Choice Test
-Test your knowledge with 10 carefully crafted questions covering:
-- Defense-in-depth security architecture
-- JWT authentication and token management
-- Role-based access control (RBAC)
-- Input validation and injection prevention
-- Rate limiting and DDoS protection strategies
+**Question 1:** What is the primary benefit of using short-lived access tokens (30 minutes) in a JWT authentication system?  
+A) To reduce server computational load  
+B) To limit exposure window if tokens are compromised  
+C) To improve network performance  
+D) To simplify token storage requirements  
 
-**[📝 Take the Test - Session 5 Test Solutions](Session5_Test_Solutions.md)**
+**Question 2:** In a token blacklisting system, why do we hash tokens before storing them in Redis?  
+A) To improve lookup performance  
+B) To save storage space  
+C) To prevent token theft from database breaches  
+D) To enable faster token validation  
 
-*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+**Question 3:** How does the token bucket rate limiting algorithm provide better user experience than simple request counting?  
+A) It only counts failed requests  
+B) It allows bursts of traffic while maintaining average rate limits  
+C) It blocks all traffic after reaching the limit  
+D) It provides unlimited access to premium users  
+
+**Question 4:** What is the main security advantage of using role-based access control (RBAC) over simple user authentication?  
+A) Faster authentication processing  
+B) Reduced memory usage  
+C) Fine-grained permission management based on user roles  
+D) Simplified database schema  
+
+**Question 5:** Why do we implement "fail secure" behavior in authentication middleware?  
+A) To always allow access when systems are uncertain  
+B) To deny access by default when security checks fail  
+C) To log all authentication attempts  
+D) To improve system performance  
+
+[**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
+
+---
+
+## 🧭 Navigation
+
+**Previous:** Session 4 - Building Production MCP Servers
+
+**Next:** Session 6 - Advanced MCP Patterns →
 
 ---
 
 ## Additional Resources
 
-- [OWASP API Security Top 10](https://owasp.org/www-project-api-security/)
-- [JWT Security Best Practices](https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/)
-- [Redis Security Guidelines](https://redis.io/docs/manual/security/)
-- [Python Cryptography Documentation](https://cryptography.io/en/latest/)
-- [FastAPI Security Patterns](https://fastapi.tiangolo.com/tutorial/security/)
+- [OWASP API Security Top 10](https://owasp.org/www-project-api-security/)  
+- [JWT Security Best Practices](https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/)  
+- [Redis Security Guidelines](https://redis.io/docs/manual/security/)  
+- [Python Cryptography Documentation](https://cryptography.io/en/latest/)  
+- [FastAPI Security Patterns](https://fastapi.tiangolo.com/tutorial/security/)  
 
 Remember: Security is not a feature, it's a foundation. Always assume breach, validate everything, and log comprehensively! 🔒

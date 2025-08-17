@@ -5,6 +5,7 @@
 **Your Learning Path**: Choose your engagement level
 
 ### Quick Start Guide
+
 - **👀 Observer (40 min)**: Read concepts + examine workflow patterns
 - **🙋‍♂️ Participant (70 min)**: Follow exercises + implement workflows
 - **🛠️ Implementer (100 min)**: Build custom systems + explore advanced patterns
@@ -22,6 +23,7 @@
 | ✅ Integration & Testing | 2 concepts | 5 min | Verification |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
+
 - 🔬 **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** (40 min) - Complex workflow coordination & dynamic agent generation
 - 🏭 **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** (35 min) - Production state handling & sophisticated routing
 
@@ -51,12 +53,17 @@ class WorkflowState(TypedDict):
     messages: List[str]
     current_step: str
     completed_tasks: List[str]
+```
 
+This establishes the foundation for our workflow. The `WorkflowState` acts as a shared data structure that flows between all nodes in our graph.
+
+```python
 # Create the workflow graph
 workflow = StateGraph(WorkflowState)
 ```
 
 **Key Concepts:**
+
 1. **Graph Structure**: Nodes (agents/functions) connected by edges (flow control)
 2. **State Management**: Shared state that flows through the entire workflow
 3. **Conditional Routing**: Dynamic decision-making about next steps
@@ -76,7 +83,11 @@ def research_node(state: WorkflowState):
         "messages": state["messages"] + ["Research completed"],
         "completed_tasks": state["completed_tasks"] + ["research"]
     }
+```
 
+Each node function receives the current state and returns an updated state. The `**state` syntax preserves existing state while updating specific fields.
+
+```python
 def analysis_node(state: WorkflowState):
     """Analysis phase of the workflow"""
     print(f"📊 Analysis: Processing research results")
@@ -85,7 +96,11 @@ def analysis_node(state: WorkflowState):
         "messages": state["messages"] + ["Analysis completed"],
         "completed_tasks": state["completed_tasks"] + ["analysis"]
     }
+```
 
+Now we connect these nodes to create our workflow structure:
+
+```python
 # Add nodes to workflow
 workflow.add_node("research", research_node)
 workflow.add_node("analysis", analysis_node)
@@ -131,7 +146,11 @@ from langchain.tools import tool
 class ResearchAgent:
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-4", temperature=0.7)
-        
+```
+
+Specialized agents encapsulate specific capabilities and LLM configurations. Higher temperature for creative research:
+
+```python        
     def research_node(self, state: WorkflowState):
         """Specialized research agent"""
         query = state.get("query", "")
@@ -142,7 +161,11 @@ class ResearchAgent:
             "research_results": research_result.content,
             "messages": state["messages"] + [f"Research: {research_result.content[:100]}..."]
         }
+```
 
+Analysis agents use lower temperature for focused, analytical output:
+
+```python
 class AnalysisAgent:
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-4", temperature=0.3)
@@ -179,7 +202,11 @@ def coordinator_node(state: WorkflowState):
         "coordination_summary": coordination_result,
         "messages": state["messages"] + [coordination_result]
     }
+```
 
+The coordinator aggregates results from multiple agents and provides final synthesis:
+
+```python
 # Enhanced workflow with coordination
 workflow.add_node("coordinator", coordinator_node)
 workflow.add_edge("analysis", "coordinator")
@@ -204,7 +231,11 @@ def create_research_workflow():
     workflow.add_node("research", research_agent.research_node)
     workflow.add_node("analysis", analysis_agent.analysis_node)
     workflow.add_node("coordinator", coordinator_node)
-    
+```
+
+Defining the workflow structure with entry point and edges:
+
+```python    
     # Define flow
     workflow.set_entry_point("research")
     workflow.add_edge("research", "analysis")
@@ -212,7 +243,11 @@ def create_research_workflow():
     workflow.add_edge("coordinator", END)
     
     return workflow.compile()
+```
 
+Running the compiled workflow with initial state:
+
+```python
 # Usage
 app = create_research_workflow()
 result = app.invoke({
@@ -268,7 +303,11 @@ class AdvancedWorkflowState(TypedDict):
     research_results: Optional[str]
     analysis_results: Optional[str]
     final_output: Optional[str]
-    
+```
+
+Advanced state includes control flow tracking for robust execution:
+
+```python    
     # Control flow
     completed_tasks: List[str]
     failed_tasks: List[str]
@@ -278,7 +317,11 @@ class AdvancedWorkflowState(TypedDict):
     workflow_id: str
     start_time: str
     last_updated: str
+```
 
+Utility function for maintaining state metadata throughout execution:
+
+```python
 def update_state_metadata(state: AdvancedWorkflowState) -> AdvancedWorkflowState:
     """Update state metadata"""
     from datetime import datetime
@@ -304,7 +347,11 @@ def route_after_research(state: AdvancedWorkflowState) -> str:
         return "detailed_analysis"
     else:
         return "standard_analysis"
+```
 
+Conditional routing enables dynamic workflow decisions based on intermediate results:
+
+```python
 def route_after_analysis(state: AdvancedWorkflowState) -> str:
     """Decide if workflow is complete"""
     analysis_results = state.get("analysis_results", "")
@@ -315,7 +362,11 @@ def route_after_analysis(state: AdvancedWorkflowState) -> str:
         return END
     else:
         return "review"
+```
 
+Implementing conditional routing in the workflow:
+
+```python
 # Add conditional routing
 from langgraph.graph import Condition
 
@@ -345,6 +396,11 @@ def error_recovery_node(state: AdvancedWorkflowState):
             "current_step": "retry",
             "messages": state["messages"] + [f"Retrying (attempt {error_count + 1})"]
         }
+```
+
+Graceful failure handling with maximum retry limits:
+
+```python
     else:
         return {
             **state,
@@ -379,7 +435,11 @@ def test_simple_workflow():
     assert "analysis_results" in result
     assert len(result["messages"]) > 0
     print("✅ Workflow test passed!")
+```
 
+Executing the test to verify workflow functionality:
+
+```python
 # Run test
 test_simple_workflow()
 ```
@@ -398,7 +458,9 @@ python -m pytest test_workflows.py
 ## ✅ Core Section Validation (5 minutes)
 
 ### Quick Implementation Exercise
+
 🗂️ **Exercise Files**: 
+
 - [`src/session3/simple_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/simple_workflow.py) - Complete working example
 - [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Test your understanding
 
@@ -410,6 +472,7 @@ python hierarchical_team.py        # Multi-agent coordination
 ```
 
 ### Self-Assessment Checklist
+
 - [ ] I understand LangGraph's graph-based approach
 - [ ] I can create nodes and connect them with edges
 - [ ] I can implement multi-agent coordination
@@ -422,6 +485,7 @@ python hierarchical_team.py        # Multi-agent coordination
 ---
 
 ### 🧭 **Choose Your Next Path:**
+
 - **[🔬 Module A: Advanced Orchestration Patterns →](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
 - **[🏭 Module B: Enterprise State Management →](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
 - **[📝 Test Your Knowledge →](Session3_Test_Solutions.md)** - Comprehensive quiz
@@ -437,6 +501,7 @@ python hierarchical_team.py        # Multi-agent coordination
 ## 📊 Progress Tracking
 
 ### Completion Status
+
 - [ ] Core Section (70 min) - Essential for next session
 - [ ] Module A: Advanced Orchestration (40 min)
 - [ ] Module B: Enterprise State Management (35 min)
@@ -445,106 +510,57 @@ python hierarchical_team.py        # Multi-agent coordination
 
 ---
 
-## 📝 Multiple Choice Test - Session 3 (15 minutes)
+## 📝 Multiple Choice Test - Session 3
 
-Test your understanding of LangGraph workflows and multi-agent coordination.
+Test your understanding of LangGraph workflows and multi-agent coordination:
 
-### Question 1
-**What is the primary advantage of LangGraph over sequential LangChain agents?**
+**Question 1:** What is the primary advantage of LangGraph over sequential LangChain agents?  
 
 A) Better performance  
 B) Graph-based workflows with conditional routing and parallel execution  
 C) Lower cost  
 D) Simpler implementation  
 
-### Question 2
-**In LangGraph, what component defines the data that flows between nodes?**
+**Question 2:** In LangGraph, what component defines the data that flows between nodes?  
 
 A) Edges  
 B) State (TypedDict)  
 C) Tools  
 D) Memory  
 
-### Question 3
-**What determines the flow between nodes in a LangGraph workflow?**
+**Question 3:** What determines the flow between nodes in a LangGraph workflow?  
 
 A) Sequential execution only  
 B) Conditional edges and decision functions  
 C) Random selection  
 D) User input  
 
-### Question 4
-**How does LangGraph handle parallel agent execution?**
+**Question 4:** How does LangGraph handle parallel agent execution?  
 
 A) It doesn't support parallel execution  
 B) Through parallel nodes with state merging  
 C) Using threading only  
 D) Through external orchestration  
 
-### Question 5
-**What happens when a LangGraph node updates state?**
+**Question 5:** What happens when a LangGraph node updates state?  
 
 A) The entire state is replaced  
 B) Only specified fields are updated/merged  
 C) State is reset to default  
 D) Previous state is archived  
 
-### Question 6
-**In the debate pattern, what determines when the debate ends?**
-
-A) Fixed number of rounds  
-B) Consensus score and maximum iterations  
-C) User intervention  
-D) Random timing  
-
-### Question 7
-**What is the purpose of a decision function in conditional edges?**
-
-A) To process user input  
-B) To determine the next node based on current state  
-C) To validate node outputs  
-D) To handle errors  
-
-### Question 8
-**How does LangGraph's state merging work in parallel execution?**
-
-A) Last node wins  
-B) First node wins  
-C) States are automatically merged based on field types  
-D) Manual merging required  
-
-### Question 9
-**What makes LangGraph suitable for complex multi-agent workflows?**
-
-A) Built-in LLM integration  
-B) Graph architecture with conditional routing and state management  
-C) Better error handling  
-D) Faster execution speed  
-
-### Question 10
-**In the hierarchical team pattern, what role does the manager node play?**
-
-A) Executes all tasks  
-B) Coordinates worker agents and manages workflow state  
-C) Stores all data  
-D) Handles user interface  
-
----
-
-**🗂️ View Test Solutions**: Complete answers and explanations available in `Session3_Test_Solutions.md`
-
-**Success Criteria**: Score 8+ out of 10 to demonstrate mastery of LangGraph workflows.
+[**🗂️ View Test Solutions →**](Session3_Test_Solutions.md)
 
 ---
 
 ## 🧭 Navigation
 
-**Previous: [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md)**
+**Previous:** Session 2 - LangChain Foundations
 
 **Optional Deep Dive Modules:**
-- **[🔬 Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)**
-- **[🏭 Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)**
+- 🔬 **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
+- 🏭 **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
 
-**[📝 Test Your Knowledge: Session 3 Solutions](Session3_Test_Solutions.md)**
+**📝 Test Your Knowledge:** [Session 3 Solutions](Session3_Test_Solutions.md)
 
-**[Next: Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)**
+**Next:** Session 4 - CrewAI Team Orchestration →
