@@ -1,4 +1,0 @@
-fastmcp==0.1.0
-aiofiles==23.2.1
-watchdog==3.0.0
-python-magic-bin==0.4.14

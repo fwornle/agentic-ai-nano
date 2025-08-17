@@ -4,7 +4,7 @@ Welcome to the comprehensive **Agentic AI Nano-Degree** program! This intensive 
 
 ## 🎯 Program Overview
 
-This nano-degree consists of two core modules designed to take you from fundamentals to production-ready implementations:
+This nano-degree consists of three comprehensive modules designed to take you from fundamentals to production-ready implementations:
 
 ### 📚 Module 1: Agent Frameworks (10 Sessions)
 Master the art of building intelligent agents using cutting-edge frameworks and patterns.
@@ -33,6 +33,20 @@ Build sophisticated Retrieval-Augmented Generation systems for enterprise applic
 - Agentic RAG systems
 - Multi-modal RAG architectures
 - Production deployment and enterprise integration
+
+### 🔗 Module 3: MCP, ACP & Agent-to-Agent Communication (10 Sessions)
+Master the Model Context Protocol, Agent Communication Protocol, and sophisticated agent-to-agent communication patterns.
+
+**What You'll Learn:**
+- MCP (Model Context Protocol) fundamentals and server development
+- Secure MCP implementations with authentication and authorization
+- ACP (Agent Communication Protocol) architecture and patterns
+- Agent-to-agent communication strategies and coordination
+- Advanced agent workflow orchestration
+- Production deployment of agent communication systems
+- Security and compliance in multi-agent environments
+- Enterprise integration of communication protocols
+- Scalable agent coordination architectures
 
 ## 🚀 Learning Paths
 
@@ -82,6 +96,12 @@ Upon completion of this nano-degree, you will be able to:
 - Implement advanced retrieval strategies and query optimization
 - Evaluate and improve RAG system performance and accuracy
 - Deploy enterprise-grade RAG solutions with proper security and compliance
+
+**Agent Communication & Protocols:**
+- Master MCP and ACP protocol implementations
+- Build secure, scalable agent-to-agent communication systems
+- Design sophisticated multi-agent coordination patterns
+- Deploy enterprise-grade agent communication infrastructures
 
 ## 🛠️ Tools & Technologies
 
@@ -139,6 +159,14 @@ Ready to begin your journey? Choose your starting point:
 
     [:octicons-arrow-right-24: Begin Module 2](02_rag/index.md)
 
+-   :material-network:{ .lg .middle } **MCP, ACP & A2A Communication**
+
+    ---
+
+    Master agent communication protocols and distributed system coordination
+
+    [:octicons-arrow-right-24: Begin Module 3](03_mcp-acp-a2a/index.md)
+
 </div>
 
 ## 💡 Study Tips
@@ -168,3 +196,4 @@ Ready to begin your journey? Choose your starting point:
 
 [Get Started with Agent Frameworks →](01_frameworks/index.md){ .md-button .md-button--primary }
 [Explore RAG Architecture →](02_rag/index.md){ .md-button }
+[Master Agent Communication →](03_mcp-acp-a2a/index.md){ .md-button }
