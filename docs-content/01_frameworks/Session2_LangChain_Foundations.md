@@ -5,6 +5,7 @@
 **Your Learning Path**: Choose your engagement level
 
 ### Quick Start Guide
+
 - **👀 Observer (45 min)**: Read core concepts + watch demonstrations  
 - **🙋‍♂️ Participant (85 min)**: Follow guided exercises + implement examples
 - **🛠️ Implementer (120 min)**: Build custom solutions + explore optional modules
@@ -22,6 +23,7 @@
 | 💾 Memory & State | 3 concepts | 15 min | Integration |
 
 ### Optional Deep Dive Modules (Choose Your Adventure)
+
 - 🔬 **[Module A: Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md)** (60 min) - Complex workflows & optimization
 - 🏭 **[Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)** (70 min) - Enterprise deployment & monitoring  
 - 🔧 **[Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)** (45 min) - Building specialized tools
@@ -56,6 +58,7 @@ from langchain.callbacks import StdOutCallbackHandler
 ```
 
 **The Four Pillars:**
+
 1. **LLMs**: The "brain" that makes decisions
 2. **Tools**: The "hands" that interact with the world  
 3. **Memory**: The "context" that maintains state
@@ -78,7 +81,11 @@ def create_llm(provider="openai"):
         )
     elif provider == "anthropic":
         return ChatAnthropic(model="claude-3-sonnet")
-    
+```
+
+Now we can use our factory to create an LLM instance:
+
+```python
 # Usage
 llm = create_llm("openai")
 ```
@@ -133,7 +140,11 @@ summary_chain = LLMChain(
     ),
     output_key="summary"
 )
+```
 
+Next, we create the sentiment analysis chain that takes the summary as input:
+
+```python
 # Chain 2: Analyze sentiment  
 sentiment_chain = LLMChain(
     llm=llm,
@@ -143,7 +154,11 @@ sentiment_chain = LLMChain(
     ),
     output_key="sentiment"
 )
+```
 
+Finally, we combine both chains into a sequential workflow:
+
+```python
 # Combine chains
 full_chain = SequentialChain(
     chains=[summary_chain, sentiment_chain],
@@ -170,7 +185,11 @@ prompt = PromptTemplate(
     template=template,
     input_variables=["role", "task", "context", "format"]
 )
+```
 
+Now we can use this template with a chain to generate dynamic responses:
+
+```python
 # Use with chain
 chain = LLMChain(llm=llm, prompt=prompt)
 result = chain.run(
@@ -237,7 +256,11 @@ weather_tool = Tool(
     description="Get current weather for any location",
     func=get_weather
 )
+```
 
+Method 2 uses the @tool decorator for a cleaner syntax:
+
+```python
 # Method 2: @tool decorator
 @tool
 def calculate_math(expression: str) -> str:
@@ -247,7 +270,11 @@ def calculate_math(expression: str) -> str:
         return f"Result: {result}"
     except:
         return "Invalid mathematical expression"
+```
 
+Method 3 creates tools using simple functions:
+
+```python
 # Method 3: Quick function tool
 def search_web(query: str) -> str:
     """Search the web for information"""
@@ -296,7 +323,11 @@ The agent automatically chooses tools based on input, demonstrating its ability 
 ```python
 # Agent automatically chooses tools based on input
 response = agent.run("What's the weather in New York and calculate 15 * 24?")
+```
 
+Behind the scenes, the agent follows a sophisticated decision process:
+
+```python
 # The agent will:
 # 1. Analyze the request  
 # 2. Identify need for weather_tool and calculate_math
@@ -349,14 +380,22 @@ buffer_memory = ConversationBufferMemory(
     memory_key="chat_history",
     return_messages=True
 )
+```
 
+Summary memory is more efficient for long conversations:
+
+```python
 # Summary memory - summarizes old conversations  
 summary_memory = ConversationSummaryMemory(
     llm=llm,
     memory_key="chat_history",
     return_messages=True
 )
+```
 
+Window memory provides a balance between context and efficiency:
+
+```python
 # Window memory - keeps last N messages
 window_memory = ConversationBufferWindowMemory(
     memory_key="chat_history",
@@ -386,7 +425,11 @@ def load_memory(memory, filename):
                 memory.chat_memory.add_message(msg)
     except FileNotFoundError:
         print("No previous memory file found")
+```
 
+Now you can persist and restore agent memory across sessions:
+
+```python
 # Usage
 save_memory(memory, "agent_memory.json")
 load_memory(memory, "agent_memory.json")
@@ -405,7 +448,11 @@ def create_context_aware_agent(context_info):
     
     Always consider this context when responding.
     """
-    
+```
+
+Next, we set up memory and initialize the agent with the context:
+
+```python
     memory = ConversationBufferMemory(
         memory_key="chat_history",
         return_messages=True
@@ -419,7 +466,11 @@ def create_context_aware_agent(context_info):
         verbose=True,
         agent_kwargs={"system_message": system_message}
     )
+```
 
+Now we can create specialized agents with domain-specific context:
+
+```python
 # Create specialized agent
 research_agent = create_context_aware_agent(
     "You are helping with academic research on AI agents"
@@ -434,6 +485,7 @@ research_agent = create_context_aware_agent(
 Build a simple LangChain agent to verify your understanding:
 
 🗂️ **Exercise Files**: 
+
 - [`src/session2/langchain_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_basics.py) - Complete working examples
 - [`src/session2/langchain_tool_use.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_tool_use.py) - Agent with tools implementation
 
@@ -459,6 +511,7 @@ result = agent.run("Help me with a simple task")
 ```
 
 ### Self-Assessment Checklist
+
 - [ ] I understand the 4 core LangChain components
 - [ ] I can create basic chains and prompt templates  
 - [ ] I can build simple tools and agents
@@ -471,6 +524,7 @@ result = agent.run("Help me with a simple task")
 ---
 
 ### 🧭 **Choose Your Next Path:**
+
 - **[🔬 Module A: Advanced LangChain Patterns →](Session2_ModuleA_Advanced_LangChain_Patterns.md)** - Complex workflows & optimization
 - **[🏭 Module B: Production Deployment Strategies →](Session2_ModuleB_Production_Deployment_Strategies.md)** - Enterprise deployment & monitoring
 - **[🔧 Module C: Custom Tool Development →](Session2_ModuleC_Custom_Tool_Development.md)** - Building specialized tools
@@ -479,6 +533,7 @@ result = agent.run("Help me with a simple task")
 - **[📖 Next Session: LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)** - Graph-based workflows
 
 ### 🎆 Complete Learning Path Options
+
 **Sequential Learning**: Core → Module A → Module B → Module C → Module D  
 **Production Focus**: Core → Module B → Module D  
 **Development Focus**: Core → Module A → Module C
@@ -487,114 +542,54 @@ result = agent.run("Help me with a simple task")
 
 ## 🧭 Navigation
 
-**Previous: [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)**
+**Previous:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
 
 **Optional Deep Dive Modules:**
-- **[🔬 Module A: Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md)**
-- **[🏭 Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)**
-- **[🔧 Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)**
-- **[📊 Module D: Performance & Monitoring](Session2_ModuleD_Performance_Monitoring.md)**
 
-**[📝 Test Your Knowledge: Session 2 Solutions](Session2_Test_Solutions.md)**
+- 🔬 **[Module A: Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md)** - Complex workflows & optimization
+- 🏭 **[Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)** - Enterprise deployment & monitoring
+- 🔧 **[Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)** - Building specialized tools
+- 📊 **[Module D: Performance & Monitoring](Session2_ModuleD_Performance_Monitoring.md)** - Optimization & observability
 
-**[Next: Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)**
+**📝 Test Your Knowledge:** [Session 2 Solutions](Session2_Test_Solutions.md)
+
+**Next:** Session 3 - LangGraph Multi-Agent Workflows →
 
 ---
 
-## 📝 Multiple Choice Test - Session 2 (15 minutes)
+## 📝 Multiple Choice Test - Session 2
 
-Test your understanding of LangChain foundations and agent patterns.
+Test your understanding of LangChain foundations and agent patterns:
 
-### Question 1
-**What is the primary benefit of LangChain's unified LLM interface?**
-
+**Question 1:** What is the primary benefit of LangChain's unified LLM interface?  
 A) Better performance  
 B) Consistent API across different LLM providers  
 C) Lower cost  
 D) Faster response times  
 
-### Question 2
-**Which LangChain component is responsible for managing conversation context?**
-
+**Question 2:** Which LangChain component is responsible for managing conversation context?  
 A) Tools  
 B) Agents  
 C) Memory  
 D) Chains  
 
-### Question 3
-**How many ways can you create tools in LangChain?**
-
+**Question 3:** How many ways can you create tools in LangChain?  
 A) One - inheriting from BaseTool  
 B) Two - BaseTool and @tool decorator  
 C) Three - BaseTool, @tool decorator, and StructuredTool  
 D) Four - including custom implementations  
 
-### Question 4
-**What is the purpose of the `handle_parsing_errors` parameter in LangChain agents?**
-
+**Question 4:** What is the purpose of the `handle_parsing_errors` parameter in LangChain agents?  
 A) To improve performance  
 B) To gracefully handle malformed LLM responses  
 C) To reduce costs  
 D) To enable debugging  
 
-### Question 5
-**Which LangChain agent type is specifically designed for the ReAct pattern?**
-
+**Question 5:** Which LangChain agent type is specifically designed for the ReAct pattern?  
 A) STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION  
 B) REACT_DOCSTORE  
 C) ZERO_SHOT_REACT_DESCRIPTION  
 D) All of the above  
 
-### Question 6
-**In the LangChain reflection implementation, what determines when the reflection loop stops?**
-
-A) Fixed number of iterations  
-B) When critique contains "SATISFACTORY"  
-C) When response quality score exceeds threshold  
-D) When no changes are detected  
-
-### Question 7
-**How does LangChain's built-in ReAct agent differ from the custom implementation?**
-
-A) Built-in agent is faster  
-B) Built-in agent has more abstraction, custom has more control  
-C) Built-in agent is more accurate  
-D) No significant difference  
-
-### Question 8
-**What is the main advantage of LangChain's Plan-and-Execute framework?**
-
-A) Faster execution  
-B) Better tool integration  
-C) Separation of planning and execution phases  
-D) Lower computational cost  
-
-### Question 9
-**In the multi-agent system, how do agents share context between workflow steps?**
-
-A) Shared memory objects  
-B) Previous step results are included in subsequent instructions  
-C) Global state variables  
-D) Database storage  
-
-### Question 10
-**What makes the conversation memory BufferWindowMemory different from ConversationBufferMemory?**
-
-A) It's faster  
-B) It only keeps the last K interactions  
-C) It has better accuracy  
-D) It works with more LLM providers  
-
----
-
-### Practical Validation
-Build a working agent that can:
-- Use at least 2 tools
-- Maintain conversation memory  
-- Handle basic error scenarios
-- Provide helpful responses
-
-**🗂️ View Test Solutions**: Complete answers and explanations available in `Session2_Test_Solutions.md`
-
-**Success Criteria**: Score 8+ out of 10 to demonstrate mastery of LangChain foundations.
+[**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
 
