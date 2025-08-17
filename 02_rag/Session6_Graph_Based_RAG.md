@@ -1,5 +1,30 @@
 # Session 6: Graph-Based RAG (GraphRAG)
 
+## 🎯 Learning Navigation Hub
+**Total Time Investment**: 100 minutes (Core) + 80 minutes (Optional)
+**Your Learning Path**: Choose your engagement level
+
+### Quick Start Guide
+- **👀 Observer (100 min)**: Read concepts + examine graph patterns and reasoning techniques
+- **🙋‍♂️ Participant (140 min)**: Follow exercises + implement basic GraphRAG systems
+- **🛠️ Implementer (180 min)**: Build production GraphRAG + deploy reasoning-enhanced systems
+
+## 📋 SESSION OVERVIEW DASHBOARD
+
+### Core Learning Track (100 minutes) - REQUIRED
+| Section | Concept Load | Time | Skills |
+|---------|--------------|------|--------|
+| Knowledge Graph Fundamentals | 5 concepts | 25 min | Graph Theory |
+| Entity & Relationship Extraction | 4 concepts | 25 min | NLP Processing |
+| Graph Traversal & Reasoning | 4 concepts | 25 min | Algorithm Design |
+| Hybrid Graph-Vector Integration | 3 concepts | 25 min | System Integration |
+
+### Optional Deep Dive Modules (Choose Your Adventure)
+- 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** (40 min)
+- 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** (40 min)
+
+## 🧭 CORE SECTION (Required - 100 minutes)
+
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
@@ -2643,65 +2668,75 @@ class ProductionGraphRAG:
 
 ---
 
-## **🧪 Knowledge Check**
+## 📝 Multiple Choice Test - Session 6 (15 minutes)
 
-Test your understanding of graph-based RAG systems and GraphRAG implementations with our comprehensive assessment.
+Test your understanding of graph-based RAG systems and GraphRAG implementations.
 
-### **Multiple Choice Questions**
+### Question 1: GraphRAG Primary Advantage
+**What is the primary advantage of GraphRAG over traditional vector-based RAG?**
 
-**1. What is the primary advantage of GraphRAG over traditional vector-based RAG?**
-   - A) Faster query processing
-   - B) Lower computational requirements
-   - C) Multi-hop reasoning through explicit relationship modeling
-   - D) Simpler system architecture
+A) Faster query processing  
+B) Lower computational requirements  
+C) Multi-hop reasoning through explicit relationship modeling  
+D) Simpler system architecture  
 
-**2. In knowledge graph construction, what is the purpose of entity standardization?**
-   - A) To reduce memory usage
-   - B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")
-   - C) To improve query speed
-   - D) To compress graph storage
+### Question 2: Entity Standardization Purpose
+**In knowledge graph construction, what is the purpose of entity standardization?**
 
-**3. Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?**
-   - A) Depth-First Search (DFS)
-   - B) Breadth-First Search (BFS)
-   - C) Dijkstra's algorithm
-   - D) A* search
+A) To reduce memory usage  
+B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")  
+C) To improve query speed  
+D) To compress graph storage  
 
-**4. In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?**
-   - A) Only function definitions
-   - B) Function calls, imports, class hierarchies, and variable dependencies
-   - C) Only variable names
-   - D) Just file names and sizes
+### Question 3: Graph Traversal Algorithm Selection
+**Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?**
 
-**5. What is the key benefit of hybrid graph-vector search?**
-   - A) Reduced computational cost
-   - B) Combining structural relationships with semantic similarity
-   - C) Simpler implementation
-   - D) Faster indexing
+A) Depth-First Search (DFS)  
+B) Breadth-First Search (BFS)  
+C) Dijkstra's algorithm  
+D) A* search  
 
-**6. When should you choose Neo4j over a simple graph data structure for GraphRAG?**
-   - A) Always, regardless of scale
-   - B) When you need persistent storage and complex queries at scale
-   - C) Only for small datasets
-   - D) Never, simple structures are always better
+### Question 4: Code GraphRAG AST Information
+**In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?**
 
-**7. What is the primary challenge in multi-hop graph traversal for RAG?**
-   - A) Memory limitations
-   - B) Balancing comprehensiveness with relevance and avoiding information explosion
-   - C) Slow database queries
-   - D) Complex code implementation
+A) Only function definitions  
+B) Function calls, imports, class hierarchies, and variable dependencies  
+C) Only variable names  
+D) Just file names and sizes  
 
-**8. In production GraphRAG systems, what is the most important consideration for incremental updates?**
-   - A) Minimizing downtime while maintaining graph consistency
-   - B) Reducing storage costs
-   - C) Maximizing query speed
-   - D) Simplifying the codebase
+### Question 5: Hybrid Graph-Vector Search Benefit
+**What is the key benefit of hybrid graph-vector search?**
 
----
+A) Reduced computational cost  
+B) Combining structural relationships with semantic similarity  
+C) Simpler implementation  
+D) Faster indexing  
 
-**📋 [View Solutions](Session6_Test_Solutions.md)**
+### Question 6: Neo4j vs Simple Graph Structures
+**When should you choose Neo4j over a simple graph data structure for GraphRAG?**
 
-*Complete the test above, then check your answers and review the detailed explanations in the solutions.*
+A) Always, regardless of scale  
+B) When you need persistent storage and complex queries at scale  
+C) Only for small datasets  
+D) Never, simple structures are always better  
+
+### Question 7: Multi-Hop Traversal Challenge
+**What is the primary challenge in multi-hop graph traversal for RAG?**
+
+A) Memory limitations  
+B) Balancing comprehensiveness with relevance and avoiding information explosion  
+C) Slow database queries  
+D) Complex code implementation  
+
+### Question 8: Production GraphRAG Update Considerations
+**In production GraphRAG systems, what is the most important consideration for incremental updates?**
+
+A) Minimizing downtime while maintaining graph consistency  
+B) Reducing storage costs  
+C) Maximizing query speed  
+D) Simplifying the codebase  
+
+**🗂️ View Test Solutions**: Complete answers in `Session6_Test_Solutions.md`
 
 ---
 
@@ -2751,3 +2786,16 @@ The entity extraction, relationship mapping, and graph traversal capabilities yo
 4. **Plan iterative workflows**: Design feedback loops for continuous improvement
 
 **The Knowledge Foundation is Set:** Your graph intelligence provides the structured reasoning capabilities that enable autonomous agent behavior. Ready to build RAG systems that think and plan? 🤖
+
+---
+
+## 🧭 Navigation
+**Previous:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
+
+**Optional Deep Dive Modules:**
+- 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Complex graph traversal and reasoning patterns
+- 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise graph database deployment
+
+**📝 Test Your Knowledge:** [Session 6 Solutions](Session6_Test_Solutions.md)
+
+**Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
