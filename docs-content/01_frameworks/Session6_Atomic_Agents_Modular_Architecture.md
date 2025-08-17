@@ -655,20 +655,17 @@ D) Better error handling
 
 ---
 
-**🗂️ View Test Solutions**: [Complete answers and explanations available in Session6_Test_Solutions.md](Session6_Test_Solutions.md)
-
-**Success Criteria**: Score 8+ out of 10 to demonstrate mastery of atomic agent architecture.
+[**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
 
 ---
 
 ## 🧭 Navigation
 
-**Previous: [Session 5 - PydanticAI Type-Safe Agents](Session5_PydanticAI_Type_Safe_Agents.md)**
+**Previous:** [Session 5 - PydanticAI Type-Safe Agents](Session5_PydanticAI_Type_Safe_Agents.md)
 
 **Optional Deep Dive Modules:**
-- **[🔬 Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)**
-- **[🏭 Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)**
 
-**[📝 Test Your Knowledge: Session 6 Solutions](Session6_Test_Solutions.md)**
+- 🔬 **[Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Advanced patterns
+- 🏭 **[Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production systems
 
-**[Next: Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)**
+**Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)

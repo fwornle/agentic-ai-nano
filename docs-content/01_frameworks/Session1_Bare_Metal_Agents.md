@@ -536,6 +536,42 @@ python test_agents.py
 
 ---
 
+## 📝 Multiple Choice Test - Session 1
+
+Test your understanding of bare metal agent implementation and core patterns:
+
+**Question 1:** What is the primary benefit of implementing agents from scratch before using frameworks?  
+A) Better performance  
+B) Deeper understanding of agent mechanics  
+C) Easier deployment  
+D) Lower resource usage  
+
+**Question 2:** In the BaseAgent class, what is the purpose of the conversation_history attribute?  
+A) Tool execution logs  
+B) Error tracking  
+C) Maintaining context across interactions  
+D) Performance monitoring  
+
+**Question 3:** Which method must be implemented by all subclasses of BaseAgent?  
+A) process_message()  
+B) add_tool()  
+C) _generate_response()  
+D) get_available_tools()  
+
+**Question 4:** How does the Tool abstract base class ensure consistency across different tool implementations?  
+A) By providing default implementations  
+B) By requiring execute() and _get_parameters() methods  
+C) By handling errors automatically  
+D) By managing tool state  
+
+**Question 5:** What design pattern is demonstrated by the BaseAgent and its subclasses?  
+A) Factory Pattern  
+B) Observer Pattern  
+C) Template Method Pattern  
+D) Strategy Pattern  
+
+[**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
+
 ## 🧭 Navigation
 
 **Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
@@ -546,84 +582,6 @@ python test_agents.py
 - ⚡ **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** - Speed & efficiency patterns  
 - 🔄 **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** - Advanced memory systems
 
-**📝 Test Your Knowledge:** [Session 1 Solutions](Session1_Test_Solutions.md)
-
 **Next:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md) →
 
 ---
-
-## 📝 Multiple Choice Test - Session 1
-
-Test your understanding of bare metal agent implementation and core patterns:
-
-**Question 1:** What is the primary benefit of implementing agents from scratch before using frameworks?  
-
-A) Better performance  
-B) Deeper understanding of agent mechanics  
-C) Easier deployment  
-D) Lower resource usage  
-
-**Question 2:** In the BaseAgent class, what is the purpose of the conversation_history attribute?  
-
-A) Tool execution logs  
-B) Error tracking  
-C) Maintaining context across interactions  
-D) Performance monitoring  
-
-**Question 3:** Which method must be implemented by all subclasses of BaseAgent?  
-
-A) process_message()  
-B) add_tool()  
-C) _generate_response()  
-D) get_available_tools()  
-
-**Question 4:** How does the Tool abstract base class ensure consistency across different tool implementations?  
-
-A) By providing default implementations  
-B) By requiring execute() and _get_parameters() methods  
-C) By handling errors automatically  
-D) By managing tool state  
-
-**Question 5:** What design pattern is demonstrated by the BaseAgent and its subclasses?  
-
-A) Factory Pattern  
-B) Observer Pattern  
-C) Template Method Pattern  
-D) Strategy Pattern  
-
-**Question 6:** In the ReflectionAgent, when does the reflection loop terminate?  
-
-A) After a fixed number of iterations  
-B) When the critique contains "SATISFACTORY"  
-C) When the response length exceeds a threshold  
-D) When no improvements are detected  
-
-**Question 7:** What information is stored in the reflection_history?  
-
-A) Only the final improved responses  
-B) Original response, critique, and improved response for each iteration  
-C) Just the critique feedback  
-D) Performance metrics only  
-
-**Question 8:** What is the main advantage of the reflection pattern?  
-
-A) Faster response generation  
-B) Quality improvement through self-evaluation  
-C) Reduced computational costs  
-D) Simplified implementation  
-
-**Question 9:** Which component is responsible for determining tool selection in the ToolAgent?  
-
-A) The tool itself  
-B) The conversation history  
-C) LLM reasoning about available tools  
-D) Random selection  
-
-**Question 10:** What makes the ReActAgent different from the basic ToolAgent?  
-
-A) It has more tools available  
-B) It explicitly shows thought and action steps  
-C) It runs faster  
-D) It has better error handling  
-
-[**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)

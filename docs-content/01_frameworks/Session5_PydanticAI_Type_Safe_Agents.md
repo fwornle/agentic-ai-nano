@@ -886,6 +886,4 @@ Build a working type-safe agent that:
 - 🔧 **[Module C: Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)** - Specialized validators & middleware
 - 🧪 **[Module D: Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)** - Comprehensive testing strategies
 
-**📝 Test Your Knowledge:** [Session 5 Solutions](Session5_Test_Solutions.md)
-
-**Next:** [Session 6 - Atomic Agents Modular Architecture](Session6_Atomic_Agents_Modular_Architecture.md) →
+**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)

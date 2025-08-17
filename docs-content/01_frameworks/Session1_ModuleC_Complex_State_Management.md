@@ -12,6 +12,7 @@ This module explores sophisticated state management patterns for bare metal agen
 
 ### Learning Objectives
 By the end of this module, you will:
+
 - Implement conversation memory systems that scale with long interactions
 - Build agent state persistence for session continuity and recovery
 - Design dynamic context management for adaptive agent behavior
@@ -175,7 +176,8 @@ The scoring system combines semantic similarity with priority and recency weight
 ```
 
 The access weight component rewards frequently referenced memories, creating a usage-based relevance boost that helps surface commonly needed information.
-    
+
+```python
     # Sort by combined score and return top results
     scored_candidates.sort(key=lambda x: x[1], reverse=True)
     
@@ -187,7 +189,9 @@ The access weight component rewards frequently referenced memories, creating a u
         self._update_memory_access(memory)
     
     return relevant_memories
+```
 
+```python
 def _consolidate_to_long_term(self):
     """Move older, less important memories from working to long-term storage"""
     
@@ -201,7 +205,11 @@ def _consolidate_to_long_term(self):
     # Keep high-priority and recent memories in working memory
     to_keep = sorted_memories[:self.working_memory_limit // 2]
     to_archive = sorted_memories[self.working_memory_limit // 2:]
-    
+```
+
+The consolidation process preserves the most important and recent memories in fast working memory while archiving older memories to persistent storage.
+
+```python
     # Archive to long-term storage
     for memory in to_archive:
         self._archive_to_long_term(memory)
@@ -242,15 +250,14 @@ The system retrieves the most relevant memories and formats them into coherent c
     """
     
     response = await self._call_llm(enhanced_prompt)
-    
-    # Store this interaction
-    interaction_content = f"User: {message}\nAgent: {response}"
-    self.store_memory(
 ```
 
 The enhanced prompt explicitly instructs the LLM to use the provided context naturally, creating responses that acknowledge and build upon previous interactions rather than treating each message in isolation.
 
 ```python
+    # Store this interaction
+    interaction_content = f"User: {message}\nAgent: {response}"
+    self.store_memory(
         content=interaction_content,
         priority=MemoryPriority.MEDIUM,
         context_tags=["conversation", "interaction"]
@@ -279,14 +286,13 @@ The context building process formats retrieved memories into coherent, readable 
         
         context_parts.append(f"""
         Memory {i} ({timestamp}) - Context: {tags}
-```
-
-Each memory is formatted with a timestamp and context tags, providing clear temporal and categorical information that helps the LLM understand when and in what context the information was captured.
         {memory.content}
         """)
     
     return "\n".join(context_parts)
 ```
+
+Each memory is formatted with a timestamp and context tags, providing clear temporal and categorical information that helps the LLM understand when and in what context the information was captured.
 
 ---
 
@@ -303,7 +309,11 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 from dataclasses import dataclass, asdict
 from datetime import datetime
+```
 
+The imports establish the foundation for state persistence, combining JSON serialization for human-readable storage with dataclasses for structured state management.
+
+```python
 @dataclass
 class AgentState:
     agent_id: str
@@ -625,7 +635,11 @@ The `add_context_layer` method provides a clean interface for registering new co
                 if layer.expiry_time and datetime.now() > layer.expiry_time:
                     self._remove_expired_layer(layer_id)
                     continue
-                
+```
+
+For each context layer, the system first checks activation criteria, then validates expiration status to prevent using stale context.
+
+```python
                 activated_contexts[layer_id] = layer.content
                 activation_log.append({
                     "layer_id": layer_id,
@@ -774,42 +788,37 @@ The prompt building process starts with the user message and then adds activated
 
 Test your understanding of complex state management concepts:
 
-**Question 1:** What four pieces of information does the `ConversationMemory` dataclass track for intelligent memory management?
-
+**Question 1:** What four pieces of information does the `ConversationMemory` dataclass track for intelligent memory management?  
 A) Content, timestamp, tags, and size  
 B) ID, content, timestamp, and priority  
 C) Content, priority, embedding, and context_tags  
 D) All of the above plus embedding and other metadata  
 
-**Question 2:** How does the semantic memory retrieval system determine relevance?
-
+**Question 2:** How does the semantic memory retrieval system determine relevance?  
 A) Keyword matching only  
 B) Cosine similarity between query and memory embeddings  
 C) Random selection from recent memories  
 D) Alphabetical ordering of content  
 
-**Question 3:** What is the purpose of the dual storage approach with working memory and long-term storage?
-
+**Question 3:** What is the purpose of the dual storage approach with working memory and long-term storage?  
 A) To save disk space  
 B) Balance performance with long-term retention  
 C) Reduce memory usage only  
 D) Simplify the codebase  
 
-**Question 4:** In the state persistence system, what triggers automatic state saving?
-
+**Question 4:** In the state persistence system, what triggers automatic state saving?  
 A) Only manual user commands  
 B) Fixed time intervals exclusively  
 C) Critical state changes and periodic intervals  
 D) When the application shuts down  
 
-**Question 5:** What determines which context layers are activated in dynamic context management?
-
+**Question 5:** What determines which context layers are activated in dynamic context management?  
 A) Random selection  
 B) Only the most recent layer  
 C) Layer scope, message content, context hints, and activation conditions  
 D) User-specified preferences only  
 
-[**View Test Solutions →**](Session1_ModuleC_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session1_ModuleC_Test_Solutions.md`
 
 ---
 
@@ -822,14 +831,18 @@ You've now mastered complex state management for bare metal agents:
 ✅ **Dynamic Context Management**: Created adaptive context systems that activate relevant information dynamically  
 ✅ **State Synchronization**: Designed patterns for maintaining consistency across agent interactions
 
-### Next Steps
-- **Return to Core**: [Session 1 Main](Session1_Bare_Metal_Agents.md)
-- **Advance to Session 2**: [LangChain Foundations](Session2_LangChain_Foundations.md)
-- **Review Performance**: [Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)
+## 🧭 Navigation
 
----
+**Related Modules:**
 
-**🗂️ Source Files for Module C:**
-- `src/session1/conversation_memory.py` - Hierarchical memory systems with semantic retrieval
-- `src/session1/persistent_state.py` - Agent state persistence and recovery
-- `src/session1/dynamic_context.py` - Dynamic context activation and management
+- **Core Session:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
+- **Module A:** [Advanced Patterns](Session1_ModuleA_Advanced_Patterns.md)
+- **Module B:** [Performance Optimization](Session1_ModuleB_Performance_Optimization.md)
+
+**🗂️ Code Files:** All examples use files in `src/session1/`
+
+- `conversation_memory.py` - Hierarchical memory systems with semantic retrieval
+- `persistent_state.py` - Agent state persistence and recovery
+- `dynamic_context.py` - Dynamic context activation and management
+
+**🚀 Quick Start:** Run `cd src/session1 && python conversation_memory.py` to see memory implementation
