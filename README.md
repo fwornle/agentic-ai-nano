@@ -53,28 +53,28 @@ Master production-ready AI agents using 2025 state-of-the-art frameworks and the
 
 ## **Week 1: Core Agent Patterns & Framework Foundations**
 
-| Session | Topic | Materials | Test |
+| Session | Topic | Materials | Solutions |
 |---------|-------|-----------|------|
-| **Session 0** | [Introduction to Agent Frameworks & Patterns](docs-content/01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md) | Self-study overview + optional modules | [📝 Test](docs-content/01_frameworks/Session0_Test_Solutions.md) |
-| **Session 1** | [Bare Metal Agents](docs-content/01_frameworks/Session1_Bare_Metal_Agents.md) | Pure Python implementation + optional modules | [📝 Test](docs-content/01_frameworks/Session1_Test_Solutions.md) |
-| **Session 2** | [LangChain Foundations](docs-content/01_frameworks/Session2_LangChain_Foundations.md) | Tool integration & chains + optional modules | [📝 Test](docs-content/01_frameworks/Session2_Test_Solutions.md) |
-| **Session 3** | [LangGraph Multi-Agent Workflows](docs-content/01_frameworks/Session3_LangGraph_Multi_Agent_Workflows.md) | Advanced orchestration + optional modules | [📝 Test](docs-content/01_frameworks/Session3_Test_Solutions.md) |
-| **Session 4** | [CrewAI Team Orchestration](docs-content/01_frameworks/Session4_CrewAI_Team_Orchestration.md) | Role-based collaboration + optional modules | [📝 Test](docs-content/01_frameworks/Session4_Test_Solutions.md) |
-| **Session 5** | [PydanticAI Type-Safe Agents](docs-content/01_frameworks/Session5_PydanticAI_Type_Safe_Agents.md) | Type safety & validation + optional modules | [📝 Test](docs-content/01_frameworks/Session5_Test_Solutions.md) |
+| **Session 0** | [Introduction to Agent Frameworks & Patterns](docs-content/01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md) | Core concepts + [📚 A: Historical Context](docs-content/01_frameworks/Session0_ModuleA_Historical_Context_Evolution.md) + [📚 B: Advanced Theory](docs-content/01_frameworks/Session0_ModuleB_Advanced_Pattern_Theory.md) | [📝 Solutions](docs-content/01_frameworks/Session0_Test_Solutions.md) |
+| **Session 1** | [Bare Metal Agents](docs-content/01_frameworks/Session1_Bare_Metal_Agents.md) | Python implementation + [📚 A: Advanced Patterns](docs-content/01_frameworks/Session1_ModuleA_Advanced_Agent_Patterns.md) + [📚 B: Performance](docs-content/01_frameworks/Session1_ModuleB_Performance_Optimization.md) + [📚 C: State Management](docs-content/01_frameworks/Session1_ModuleC_Complex_State_Management.md) | [📝 Solutions](docs-content/01_frameworks/Session1_Test_Solutions.md) |
+| **Session 2** | [LangChain Foundations](docs-content/01_frameworks/Session2_LangChain_Foundations.md) | Tool integration + [📚 A: Advanced Patterns](docs-content/01_frameworks/Session2_ModuleA_Advanced_LangChain_Patterns.md) + [📚 B: Production](docs-content/01_frameworks/Session2_ModuleB_Production_Deployment_Strategies.md) + [📚 C: Custom Tools](docs-content/01_frameworks/Session2_ModuleC_Custom_Tool_Development.md) + [📚 D: Monitoring](docs-content/01_frameworks/Session2_ModuleD_Performance_Monitoring.md) | [📝 Solutions](docs-content/01_frameworks/Session2_Test_Solutions.md) |
+| **Session 3** | [LangGraph Multi-Agent Workflows](docs-content/01_frameworks/Session3_LangGraph_Multi_Agent_Workflows.md) | Advanced orchestration + [📚 A: Orchestration](docs-content/01_frameworks/Session3_ModuleA_Advanced_Orchestration_Patterns.md) + [📚 B: State Management](docs-content/01_frameworks/Session3_ModuleB_Enterprise_State_Management.md) | [📝 Solutions](docs-content/01_frameworks/Session3_Test_Solutions.md) |
+| **Session 4** | [CrewAI Team Orchestration](docs-content/01_frameworks/Session4_CrewAI_Team_Orchestration.md) | Role-based collaboration + [📚 A: Advanced Flows](docs-content/01_frameworks/Session4_ModuleA_Advanced_CrewAI_Flows.md) + [📚 B: Enterprise Patterns](docs-content/01_frameworks/Session4_ModuleB_Enterprise_Team_Patterns.md) | [📝 Solutions](docs-content/01_frameworks/Session4_Test_Solutions.md) |
+| **Session 5** | [PydanticAI Type-Safe Agents](docs-content/01_frameworks/Session5_PydanticAI_Type_Safe_Agents.md) | Type safety + [📚 A: Advanced Types](docs-content/01_frameworks/Session5_ModuleA_Advanced_Type_Systems.md) + [📚 B: Enterprise](docs-content/01_frameworks/Session5_ModuleB_Enterprise_PydanticAI.md) + [📚 C: Validation](docs-content/01_frameworks/Session5_ModuleC_Custom_Validation_Systems.md) + [📚 D: Testing](docs-content/01_frameworks/Session5_ModuleD_Testing_Benchmarking.md) | [📝 Solutions](docs-content/01_frameworks/Session5_Test_Solutions.md) |
 
 ## **Week 2: Advanced Frameworks & Production Deployment**
 
-| Session | Topic | Materials | Test |
+| Session | Topic | Materials | Solutions |
 |---------|-------|-----------|------|
-| **Session 6** | [Atomic Agents Modular Architecture](docs-content/01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md) | LEGO-block approach + optional modules | [📝 Test](docs-content/01_frameworks/Session6_Test_Solutions.md) |
-| **Session 7** | [Building Your First ADK Agent](docs-content/01_frameworks/Session7_First_ADK_Agent.md) | Claude integration + optional modules | [📝 Test](docs-content/01_frameworks/Session7_Test_Solutions.md) |
-| **Session 8** | [Agno Production-Ready Agents](docs-content/01_frameworks/Session8_Agno_Production_Ready_Agents.md) | Enterprise deployment + optional modules | [📝 Test](docs-content/01_frameworks/Session8_Test_Solutions.md) |
-| **Session 9** | [Multi-Agent Patterns](docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md) | Advanced coordination + optional modules | [📝 Test](docs-content/01_frameworks/Session9_Test_Solutions.md) |
-| **Session 10** | [Enterprise Integration & Production](docs-content/01_frameworks/Session10_Enterprise_Integration_Production_Deployment.md) | Production deployment + optional modules | [📝 Test](docs-content/01_frameworks/Session10_Test_Solutions.md) |
+| **Session 6** | [Atomic Agents Modular Architecture](docs-content/01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md) | LEGO-block approach + [📚 A: Composition](docs-content/01_frameworks/Session6_ModuleA_Advanced_Composition_Patterns.md) + [📚 B: Enterprise Systems](docs-content/01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md) | [📝 Solutions](docs-content/01_frameworks/Session6_Test_Solutions.md) |
+| **Session 7** | [Building Your First ADK Agent](docs-content/01_frameworks/Session7_First_ADK_Agent.md) | Claude integration + [📚 A: Advanced Integration](docs-content/01_frameworks/Session7_ModuleA_Advanced_ADK_Integration.md) + [📚 B: Enterprise Systems](docs-content/01_frameworks/Session7_ModuleB_Enterprise_Agent_Systems.md) | [📝 Solutions](docs-content/01_frameworks/Session7_Test_Solutions.md) |
+| **Session 8** | [Agno Production-Ready Agents](docs-content/01_frameworks/Session8_Agno_Production_Ready_Agents.md) | Enterprise deployment + [📚 A: Monitoring](docs-content/01_frameworks/Session8_ModuleA_Advanced_Monitoring_Observability.md) + [📚 B: Scaling](docs-content/01_frameworks/Session8_ModuleB_Enterprise_Scaling_Architecture.md) + [📚 C: Performance](docs-content/01_frameworks/Session8_ModuleC_Performance_Optimization.md) + [📚 D: Security](docs-content/01_frameworks/Session8_ModuleD_Security_Compliance.md) | [📝 Solutions](docs-content/01_frameworks/Session8_Test_Solutions.md) |
+| **Session 9** | [Multi-Agent Patterns](docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md) | Advanced coordination + [📚 A: Consensus](docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md) + [📚 B: Production Systems](docs-content/01_frameworks/Session9_ModuleB_Production_Multi_Agent_Systems.md) | [📝 Solutions](docs-content/01_frameworks/Session9_Test_Solutions.md) |
+| **Session 10** | [Enterprise Integration & Production](docs-content/01_frameworks/Session10_Enterprise_Integration_Production_Deployment.md) | Production deployment + [📚 A: Security](docs-content/01_frameworks/Session10_ModuleA_Advanced_Security_Compliance.md) + [📚 B: Operations](docs-content/01_frameworks/Session10_ModuleB_Enterprise_Operations_Scaling.md) | [📝 Solutions](docs-content/01_frameworks/Session10_Test_Solutions.md) |
 
 ### 💻 **Source Code & Examples**
 - [Session Source Code](docs-content/01_frameworks/src/) - Complete implementation examples
-- [Architectural Diagrams](docs-content/01_frameworks/puml/) - PlantUML architecture diagrams
+- [Architectural Diagrams](docs-content/01_frameworks/puml/) - PlantUML architecture diagrams  
 - [Visual Assets](docs-content/01_frameworks/images/) - Supporting images and diagrams
 
 ---
@@ -87,26 +87,27 @@ Build sophisticated RAG systems from basic document retrieval to cutting-edge au
 
 ## **Week 1: RAG Fundamentals & Advanced Techniques**
 
-| Session | Topic | Materials | Test |
+| Session | Topic | Materials | Solutions |
 |---------|-------|-----------|------|
-| **Session 0** | [Introduction to RAG Architecture](docs-content/02_rag/Session0_Introduction_to_RAG_Architecture.md) | RAG fundamentals + optional modules | [📝 Test](docs-content/02_rag/Session0_Test_Solutions.md) |
-| **Session 1** | [Basic RAG Implementation](docs-content/02_rag/Session1_Basic_RAG_Implementation.md) | Core RAG pipeline + optional modules | [📝 Test](docs-content/02_rag/Session1_Test_Solutions.md) |
-| **Session 2** | [Advanced Chunking & Preprocessing](docs-content/02_rag/Session2_Advanced_Chunking_Preprocessing.md) | Smart document processing + optional modules | [📝 Test](docs-content/02_rag/Session2_Test_Solutions.md) |
-| **Session 3** | [Vector Databases & Search Optimization](docs-content/02_rag/Session3_Vector_Databases_Search_Optimization.md) | Search infrastructure + optional modules | [📝 Test](docs-content/02_rag/Session3_Test_Solutions.md) |
-| **Session 4** | [Query Enhancement & Context Augmentation](docs-content/02_rag/Session4_Query_Enhancement_Context_Augmentation.md) | Query optimization + optional modules | [📝 Test](docs-content/02_rag/Session4_Test_Solutions.md) |
-| **Session 5** | [RAG Evaluation & Quality Assessment](docs-content/02_rag/Session5_RAG_Evaluation_Quality_Assessment.md) | Performance measurement + optional modules | [📝 Test](docs-content/02_rag/Session5_Test_Solutions.md) |
+| **Session 0** | [Introduction to RAG Architecture](docs-content/02_rag/Session0_Introduction_to_RAG_Architecture.md) | RAG fundamentals | [📝 Solutions](docs-content/02_rag/Session0_Test_Solutions.md) |
+| **Session 1** | [Basic RAG Implementation](docs-content/02_rag/Session1_Basic_RAG_Implementation.md) | Core pipeline + [📚 A: Production Patterns](docs-content/02_rag/Session1_ModuleA_Production_Patterns.md) + [📚 B: Enterprise Deployment](docs-content/02_rag/Session1_ModuleB_Enterprise_Deployment.md) | [📝 Solutions](docs-content/02_rag/Session1_Test_Solutions.md) |
+| **Session 2** | [Advanced Chunking & Preprocessing](docs-content/02_rag/Session2_Advanced_Chunking_Preprocessing.md) | Smart processing + [📚 A: Document Analytics](docs-content/02_rag/Session2_ModuleA_Document_Analytics.md) | [📝 Solutions](docs-content/02_rag/Session2_Test_Solutions.md) |
+| **Session 3** | [Vector Databases & Search Optimization](docs-content/02_rag/Session3_Vector_Databases_Search_Optimization.md) | Search infrastructure + [📚 A: Index Algorithms](docs-content/02_rag/Session3_ModuleA_Index_Algorithms.md) | [📝 Solutions](docs-content/02_rag/Session3_Test_Solutions.md) |
+| **Session 4** | [Query Enhancement & Context Augmentation](docs-content/02_rag/Session4_Query_Enhancement_Context_Augmentation.md) | Query optimization + [📚 A: Query Understanding](docs-content/02_rag/Session4_ModuleA_Query_Understanding.md) | [📝 Solutions](docs-content/02_rag/Session4_Test_Solutions.md) |
+| **Session 5** | [RAG Evaluation & Quality Assessment](docs-content/02_rag/Session5_RAG_Evaluation_Quality_Assessment.md) | Performance measurement + [📚 A: Advanced Metrics](docs-content/02_rag/Session5_ModuleA_Advanced_Metrics.md) + [📚 B: Enterprise Monitoring](docs-content/02_rag/Session5_ModuleB_Enterprise_Monitoring.md) | [📝 Solutions](docs-content/02_rag/Session5_Test_Solutions.md) |
 
 ## **Week 2: Advanced RAG & Cognitive Architectures**
 
-| Session | Topic | Materials | Test |
+| Session | Topic | Materials | Solutions |
 |---------|-------|-----------|------|
-| **Session 6** | [Graph-Based RAG](docs-content/02_rag/Session6_Graph_Based_RAG.md) | NodeRAG implementation + optional modules | [📝 Test](docs-content/02_rag/Session6_Test_Solutions.md) |
-| **Session 7** | [Agentic RAG Systems](docs-content/02_rag/Session7_Agentic_RAG_Systems.md) | Reasoning-augmented retrieval + optional modules | [📝 Test](docs-content/02_rag/Session7_Test_Solutions.md) |
-| **Session 8** | [MultiModal & Advanced RAG](docs-content/02_rag/Session8_MultiModal_Advanced_RAG.md) | MRAG Evolution (1.0→3.0) + optional modules | [📝 Test](docs-content/02_rag/Session8_Test_Solutions.md) |
-| **Session 9** | [Production RAG & Enterprise Integration](docs-content/02_rag/Session9_Production_RAG_Enterprise_Integration.md) | Scalable deployment + optional modules | [📝 Test](docs-content/02_rag/Session9_Test_Solutions.md) |
+| **Session 6** | [Graph-Based RAG](docs-content/02_rag/Session6_Graph_Based_RAG.md) | NodeRAG implementation + [📚 A: Advanced Algorithms](docs-content/02_rag/Session6_ModuleA_Advanced_Algorithms.md) + [📚 B: Production Systems](docs-content/02_rag/Session6_ModuleB_Production_Systems.md) | [📝 Solutions](docs-content/02_rag/Session6_Test_Solutions.md) |
+| **Session 7** | [Agentic RAG Systems](docs-content/02_rag/Session7_Agentic_RAG_Systems.md) | Reasoning-augmented retrieval | [📝 Solutions](docs-content/02_rag/Session7_Test_Solutions.md) |
+| **Session 8** | [MultiModal & Advanced RAG](docs-content/02_rag/Session8_MultiModal_Advanced_RAG.md) | MRAG Evolution (1.0→3.0) | [📝 Solutions](docs-content/02_rag/Session8_Test_Solutions.md) |
+| **Session 9** | [Production RAG & Enterprise Integration](docs-content/02_rag/Session9_Production_RAG_Enterprise_Integration.md) | Scalable deployment + [📚 A: Advanced Production](docs-content/02_rag/Session9_ModuleA_Advanced_Production.md) + [📚 B: Enterprise Architecture](docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md) | [📝 Solutions](docs-content/02_rag/Session9_Test_Solutions.md) |
 
 ### 💻 **Source Code & Examples**
 - [Session Source Code](docs-content/02_rag/src/) - Complete RAG implementations
+- [Architectural Diagrams](docs-content/02_rag/puml/) - PlantUML architecture diagrams
 - [Visual Assets](docs-content/02_rag/images/) - RAG architecture diagrams
 - [Documentation](docs-content/02_rag/src/README.md) - Implementation guides
 
@@ -123,20 +124,20 @@ Build production-ready agent communication systems using Model Context Protocol 
 | Session | Topic | Materials | Solutions |
 |---------|-------|-----------|-----------|
 | **Session 0** | [Introduction to MCP, ACP & A2A](docs-content/03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md) | Protocol ecosystem overview | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session0_Test_Solutions.md) |
-| **Session 1** | [Building Your First MCP Server](docs-content/03_mcp-acp-a2a/Session1_Basic_MCP_Server.md) | Weather server implementation | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session1_Basic_MCP_Server-solution.md) |
-| **Session 2** | [FileSystem MCP Server](docs-content/03_mcp-acp-a2a/Session2_FileSystem_MCP_Server.md) | Advanced MCP capabilities | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session2_FileSystem_MCP_Server-solution.md) |
-| **Session 3** | [LangChain MCP Integration](docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md) | Framework integration | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration-solution.md) |
-| **Session 4** | [Production MCP Deployment](docs-content/03_mcp-acp-a2a/Session4_Production_MCP_Deployment.md) | Enterprise deployment | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session4_Production_MCP_Deployment-solution.md) |
+| **Session 1** | [Building Your First MCP Server](docs-content/03_mcp-acp-a2a/Session1_Basic_MCP_Server.md) | Weather server implementation | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session1_Basic_MCP_Server-solution.md) |
+| **Session 2** | [FileSystem MCP Server](docs-content/03_mcp-acp-a2a/Session2_FileSystem_MCP_Server.md) | Advanced MCP capabilities | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session2_FileSystem_MCP_Server-solution.md) |
+| **Session 3** | [LangChain MCP Integration](docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md) | Framework integration | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration-solution.md) |
+| **Session 4** | [Production MCP Deployment](docs-content/03_mcp-acp-a2a/Session4_Production_MCP_Deployment.md) | Enterprise deployment | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session4_Production_MCP_Deployment-solution.md) |
 
 ## **Week 2: ACP & A2A Advanced Protocols**
 
 | Session | Topic | Materials | Solutions |
 |---------|-------|-----------|-----------|
-| **Session 5** | [Secure MCP Server](docs-content/03_mcp-acp-a2a/Session5_Secure_MCP_Server.md) | Security & authentication | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session5_Secure_MCP_Server-solution.md) |
-| **Session 6** | [ACP Fundamentals](docs-content/03_mcp-acp-a2a/Session6_ACP_Fundamentals.md) | Agent Communication Protocol | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session6_ACP_Fundamentals-solution.md) |
-| **Session 7** | [Agent-to-Agent Communication](docs-content/03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication.md) | A2A implementation | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication-solution.md) |
-| **Session 8** | [Advanced Agent Workflows](docs-content/03_mcp-acp-a2a/Session8_Advanced_Agent_Workflows.md) | Complex orchestration | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session8_Advanced_Agent_Workflows-solution.md) |
-| **Session 9** | [Production Agent Deployment](docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md) | Scalable deployment | [💡 Solutions](docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment-solution.md) |
+| **Session 5** | [Secure MCP Server](docs-content/03_mcp-acp-a2a/Session5_Secure_MCP_Server.md) | Security & authentication | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session5_Secure_MCP_Server-solution.md) |
+| **Session 6** | [ACP Fundamentals](docs-content/03_mcp-acp-a2a/Session6_ACP_Fundamentals.md) | Agent Communication Protocol | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session6_ACP_Fundamentals-solution.md) |
+| **Session 7** | [Agent-to-Agent Communication](docs-content/03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication.md) | A2A implementation | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication-solution.md) |
+| **Session 8** | [Advanced Agent Workflows](docs-content/03_mcp-acp-a2a/Session8_Advanced_Agent_Workflows.md) | Complex orchestration | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session8_Advanced_Agent_Workflows-solution.md) |
+| **Session 9** | [Production Agent Deployment](docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md) | Scalable deployment | [📝 Solutions](docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment-solution.md) |
 
 ### 💻 **Source Code & Examples**
 - [Session Source Code](docs-content/03_mcp-acp-a2a/src/) - Protocol implementations
@@ -223,7 +224,7 @@ This nanodegree is continuously updated with the latest research and industry be
 
 ## 📄 **License**
 
-This educational content is provided under [appropriate license]. See LICENSE file for details.
+This educational content is provided under the [MIT License](LICENSE). You are free to use, modify, and distribute this content for both personal and commercial purposes.
 
 ---
 
@@ -238,16 +239,12 @@ This educational content is provided under [appropriate license]. See LICENSE fi
 - 📖 [**Complete Documentation Site**](http://127.0.0.1:8001) - Interactive browsing experience
 - 🌐 [**Live Documentation**](https://fwornle.github.io/agentic-ai-nano) - GitHub Pages deployment
 
-### **Resources:**
-- 📊 [**Architectural Diagrams**](config/) - System architecture references
-- 🐳 [**Docker Setup**](docker/) - Containerized development environment
-- 📈 [**Analytics & Logs**](logs/) - Learning progress tracking
-
 ---
 
-**Ready to build the future of AI agents?** 🚀  
+**Ready to build the future of AI agents?** 🚀
 
 **Choose Your Path:**
+
 - 📖 [**Browse Documentation Site**](http://127.0.0.1:8001) - Interactive experience with search and navigation
 - 🛠️ [**Start with Module 01**](docs-content/01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md) - Direct access to course materials
 
