@@ -23,7 +23,7 @@ By the end of this module, you will:
 
 ### Advanced State Persistence Strategies
 
-🗂️ **File**: `src/session3/enterprise_state_management.py` - Production state systems
+🗂️ **File**: [`src/session3/enterprise_state_management.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/enterprise_state_management.py) - Production state systems
 
 Modern enterprise workflows require robust state persistence that can handle failures, scaling, and complex recovery scenarios:
 
@@ -515,7 +515,7 @@ Recovery metadata supports checkpoint management decisions. Health status indica
 
 ### Sophisticated Multi-Factor Routing Logic
 
-🗂️ **File**: `src/session3/advanced_routing_patterns.py` - Complex decision systems
+🗂️ **File**: [`src/session3/advanced_routing_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing_patterns.py) - Complex decision systems
 
 Enterprise workflows require intelligent routing that considers multiple factors beyond simple conditions.
 
@@ -957,6 +957,6 @@ D) Length (50%) + Keywords (50%)
 ---
 
 **🗂️ Source Files for Module B:**
-- `src/session3/enterprise_state_management.py` - Production state systems
-- `src/session3/advanced_routing_patterns.py` - Complex decision engines
-- `src/session3/contextual_processing.py` - Adaptive workflow patterns
+- [`src/session3/enterprise_state_management.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/enterprise_state_management.py) - Production state systems
+- [`src/session3/advanced_routing_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing_patterns.py) - Complex decision engines
+- [`src/session3/contextual_processing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/contextual_processing.py) - Adaptive workflow patterns

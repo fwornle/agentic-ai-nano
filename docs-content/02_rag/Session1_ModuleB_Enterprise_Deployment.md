@@ -14,9 +14,9 @@
 - **[📄 Session 1 Core: Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)** - Foundation concepts
 
 ### 🗂️ Code Files
-- **Core System**: `src/session1/rag_system.py` - Main RAG implementation
-- **Configuration**: `src/session1/config.py` - Deployment configuration management
-- **Performance Testing**: `src/session1/test_rag_performance.py` - Load testing tools
+- **Core System**: [`src/session1/rag_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/rag_system.py) - Main RAG implementation
+- **Configuration**: [`src/session1/config.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/config.py) - Deployment configuration management
+- **Performance Testing**: [`src/session1/test_rag_performance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/test_rag_performance.py) - Load testing tools
 
 ### 🚀 Quick Start
 ```bash

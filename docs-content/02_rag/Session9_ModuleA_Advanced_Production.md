@@ -16,10 +16,10 @@
 
 ### 🗂️ Code Files
 
-- **Production Deployment**: `src/session9/production_deployment.py` - Advanced deployment orchestration
-- **Load Balancer**: `src/session9/load_balancer_autoscaler.py` - Intelligent load balancing and scaling
-- **Monitoring System**: `src/session9/monitoring_analytics.py` - Comprehensive production monitoring
-- **Incremental Indexing**: `src/session9/incremental_indexing.py` - Advanced index management
+- **Production Deployment**: [`src/session9/production_deployment.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/production_deployment.py) - Advanced deployment orchestration
+- **Load Balancer**: [`src/session9/load_balancer_autoscaler.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/load_balancer_autoscaler.py) - Intelligent load balancing and scaling
+- **Monitoring System**: [`src/session9/monitoring_analytics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/monitoring_analytics.py) - Comprehensive production monitoring
+- **Incremental Indexing**: [`src/session9/incremental_indexing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/incremental_indexing.py) - Advanced index management
 
 ### 🚀 Quick Start
 

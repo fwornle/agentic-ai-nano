@@ -25,7 +25,7 @@
 - 🔬 **[Module A: Advanced Security & Compliance →](Session10_ModuleA_Advanced_Security_Compliance.md)** (80 min) - GDPR, RBAC, encryption
 - 🏭 **[Module B: Enterprise Operations & Scaling →](Session10_ModuleB_Enterprise_Operations_Scaling.md)** (80 min) - Auto-scaling, performance optimization
 
-**🗂️ Code Files**: All examples use files in `src/session10/`
+**🗂️ Code Files**: All examples use files in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
 **🚀 Quick Start**: Run `cd src/session10 && python enterprise_architecture.py` to see enterprise integration
 
 ---
@@ -39,7 +39,7 @@
 #### Understanding Enterprise Systems (8 minutes)
 Enterprise environments are complex ecosystems of interconnected systems requiring robust integration patterns, authentication mechanisms, and fault tolerance. This foundation code demonstrates the protocols and configurations needed for reliable enterprise integration:
 
-🗂️ **File**: `src/session10/enterprise_architecture.py` - Enterprise integration patterns
+🗂️ **File**: [`src/session10/enterprise_architecture.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/enterprise_architecture.py) - Enterprise integration patterns
 
 ```python
 from typing import Dict, Any, List, Protocol
@@ -101,7 +101,7 @@ class EnterpriseSystemAdapter(Protocol):
 #### ERP System Integration (12 minutes)
 Enterprise Resource Planning systems are the backbone of most organizations, requiring specialized adapters that handle authentication, session management, and data transformation. This SAP integration demonstrates OAuth 2.0 authentication, connection pooling, and proper error handling:
 
-🗂️ **File**: `src/session10/erp_integration.py` - SAP/ERP integration patterns
+🗂️ **File**: [`src/session10/erp_integration.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/erp_integration.py) - SAP/ERP integration patterns
 
 ```python
 class SAPIntegrationAdapter:
@@ -216,7 +216,7 @@ class SAPIntegrationAdapter:
 #### Database Integration Patterns (10 minutes)
 Enterprise agents often need to interact with multiple databases with different engines, connection requirements, and performance characteristics. This database manager handles connection pooling, transaction management, and multi-database coordination:
 
-🗂️ **File**: `src/session10/erp_integration.py` - Multi-database management patterns
+🗂️ **File**: [`src/session10/erp_integration.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/erp_integration.py) - Multi-database management patterns
 
 ```python
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
@@ -270,7 +270,7 @@ class EnterpriseDatabase:
 #### Container Strategy (8 minutes)
 Production containerization requires multi-stage builds and security hardening to minimize attack surface, reduce image size, and ensure secure runtime environments. This Dockerfile demonstrates security best practices including non-root users and minimal base images:
 
-🗂️ **File**: `src/session10/deployment/docker_config.py` - Docker configuration
+🗂️ **File**: [`src/session10/deployment/docker_config.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/deployment/docker_config.py) - Docker configuration
 
 ```dockerfile
 # Multi-stage Dockerfile - Build stage
@@ -337,7 +337,7 @@ CMD ["python", "src/main.py"]
 #### Kubernetes Deployment (10 minutes)
 Enterprise Kubernetes configuration with high availability requires proper resource management, health checks, and rolling update strategies. This configuration demonstrates production-ready Kubernetes deployment with security contexts and monitoring:
 
-🗂️ **File**: `src/session10/deployment/k8s-deployment.yaml` - Kubernetes deployment
+🗂️ **File**: [`src/session10/deployment/k8s-deployment.yaml`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/deployment/k8s-deployment.yaml) - Kubernetes deployment
 
 ```yaml
 # Kubernetes Deployment Configuration
@@ -421,7 +421,7 @@ spec:
 #### CI/CD Pipeline (7 minutes)
 Automated deployment with security scanning ensures code quality, vulnerability detection, and reliable deployments. This GitHub Actions pipeline demonstrates comprehensive CI/CD with security scanning, testing, and staged deployment:
 
-🗂️ **File**: `src/session10/deployment/.github/workflows/deploy.yml` - CI/CD pipeline
+🗂️ **File**: [`src/session10/deployment/.github/workflows/deploy.yml`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/deployment/.github/workflows/deploy.yml) - CI/CD pipeline
 
 ```yaml
 # GitHub Actions CI/CD Pipeline
@@ -520,7 +520,7 @@ jobs:
 #### Authentication & Authorization (10 minutes)
 Enterprise-grade security with multiple authentication methods:
 
-🗂️ **File**: `src/session10/security/enterprise_auth.py` - Authentication framework
+🗂️ **File**: [`src/session10/security/enterprise_auth.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/security/enterprise_auth.py) - Authentication framework
 
 ```python
 from typing import Dict, List, Optional, Set
@@ -672,7 +672,7 @@ class RBACManager:
 #### Data Encryption (7 minutes)
 Classification-based data protection:
 
-🗂️ **File**: `src/session10/security/data_protection.py` - Encryption systems
+🗂️ **File**: [`src/session10/security/data_protection.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/security/data_protection.py) - Encryption systems
 
 ```python
 from cryptography.fernet import Fernet, MultiFernet
@@ -753,7 +753,7 @@ class EnterpriseEncryption:
 #### Basic Metrics Collection (6 minutes)
 Essential monitoring for production systems:
 
-🗂️ **File**: `src/session10/monitoring/observability.py` - Monitoring system
+🗂️ **File**: [`src/session10/monitoring/observability.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/monitoring/observability.py) - Monitoring system
 
 ```python
 from typing import Dict, Any, List
@@ -934,8 +934,8 @@ class BasicAlertManager:
 
 ### Quick Implementation Exercise
 🗂️ **Exercise Files**: 
-- `src/session10/enterprise_architecture.py` - Complete integration example
-- `src/session10/deployment/` - Production deployment configs
+- [`src/session10/enterprise_architecture.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/enterprise_architecture.py) - Complete integration example
+- [`src/session10/deployment/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10/deployment/) - Production deployment configs
 
 ```bash
 # Try the examples:
@@ -972,7 +972,7 @@ kubectl get pods -l app=enterprise-agent
 **Cognitive Load**: 6 advanced concepts
 
 ### A1: GDPR & Compliance Frameworks (40 minutes)
-🗂️ **Files**: Advanced compliance examples in `src/session10/`
+🗂️ **Files**: Advanced compliance examples in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
 
 Comprehensive GDPR implementation, data retention policies, consent management, audit logging, and multi-framework compliance (HIPAA, SOC 2, PCI-DSS).
 
@@ -987,7 +987,7 @@ Asymmetric encryption, key rotation strategies, certificate management, data cla
 **Cognitive Load**: 5 operational concepts
 
 ### B1: Auto-Scaling & Performance Optimization (45 minutes)
-🗂️ **Files**: Scaling examples in `src/session10/`
+🗂️ **Files**: Scaling examples in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
 
 Intelligent auto-scaling with multi-factor decision making, Redis caching strategies, connection pooling, and performance profiling.
 
@@ -1003,7 +1003,7 @@ Distributed tracing with OpenTelemetry, comprehensive alerting systems, log aggr
 - [ ] [Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md) (80 min)
 - [ ] [Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md) (80 min)
 
-**🗂️ All Code Examples**: Available in `src/session10/` - Complete enterprise implementation!
+**🗂️ All Code Examples**: Available in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10) - Complete enterprise implementation!
 
 ---
 

@@ -23,7 +23,7 @@ By the end of this module, you will:
 
 ### Advanced Parallel Execution Strategies
 
-🗂️ **File**: `src/session3/parallel_workflow.py` - Advanced coordination patterns
+🗂️ **File**: [`src/session3/parallel_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/parallel_workflow.py) - Advanced coordination patterns
 
 Modern enterprise workflows require sophisticated parallel execution patterns that go beyond simple parallelism to include synchronization points, conditional joining, and dynamic load balancing:
 
@@ -700,7 +700,7 @@ Adaptive synchronization handling provides multiple response strategies. Complet
 
 ### Runtime Agent Creation Patterns
 
-🗂️ **File**: `src/session3/dynamic_agent_generation.py` - Dynamic agent creation systems
+🗂️ **File**: [`src/session3/dynamic_agent_generation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/dynamic_agent_generation.py) - Dynamic agent creation systems
 
 ```python
 from typing import Type, Callable, Dict, Any, List
@@ -1147,6 +1147,6 @@ D) Quality threshold and response time target
 ---
 
 **🗂️ Source Files for Module A:**
-- `src/session3/parallel_workflow.py` - Advanced parallel execution patterns
-- `src/session3/dynamic_agent_generation.py` - Runtime agent creation systems
-- `src/session3/orchestration_patterns.py` - Sophisticated coordination strategies
+- [`src/session3/parallel_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/parallel_workflow.py) - Advanced parallel execution patterns
+- [`src/session3/dynamic_agent_generation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/dynamic_agent_generation.py) - Runtime agent creation systems
+- [`src/session3/orchestration_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/orchestration_patterns.py) - Sophisticated coordination strategies

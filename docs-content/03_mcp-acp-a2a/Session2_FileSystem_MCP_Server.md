@@ -136,7 +136,7 @@ Set limits to prevent resource exhaustion:
         self.search_limit = 1000  # Max search results to prevent overload
 ```
 
-Complete configuration implementation available in `src/session2/config.py`
+Complete configuration implementation available in [`src/session2/config.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session2/config.py)
 
 **Security decisions explained:**
 - **Whitelist extensions**: Only allow known safe file types
@@ -228,7 +228,7 @@ Add a helper method for validating individual filenames:
         return not any(char in filename for char in dangerous_chars)
 ```
 
-Complete sandbox implementation available in `src/session2/utils/sandbox.py`
+Complete sandbox implementation available in [`src/session2/utils/sandbox.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session2/utils/sandbox.py)
 
 **Security insights:**
 - `resolve()` is crucial - it resolves symlinks and normalizes paths
@@ -329,7 +329,7 @@ Add checksum calculation for file integrity:
         return sha256_hash.hexdigest()
 ```
 
-Complete validators implementation available in `src/session2/utils/validators.py`
+Complete validators implementation available in [`src/session2/utils/validators.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session2/utils/validators.py)
 
 ---
 
@@ -512,7 +512,7 @@ async def get_file_info(path: str) -> Dict:
         return {"error": f"Failed to get file info: {str(e)}"}
 ```
 
-Complete file listing implementation available in `src/session2/filesystem_server.py`
+Complete file listing implementation available in [`src/session2/filesystem_server.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session2/filesystem_server.py)
 
 ### Step 3.3: File Reading with Binary Support
 
