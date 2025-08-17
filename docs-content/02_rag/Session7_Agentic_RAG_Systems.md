@@ -3130,6 +3130,5 @@ The planning, validation, and iterative refinement capabilities you've mastered 
 ## 🧭 Navigation
 **Previous:** [Session 6 - Graph-Based RAG (GraphRAG)](Session6_Graph_Based_RAG.md)
 
-**📝 Test Your Knowledge:** [Session 7 Solutions](Session7_Test_Solutions.md)
 
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)

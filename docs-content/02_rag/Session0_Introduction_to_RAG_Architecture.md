@@ -944,37 +944,35 @@ class LegalRAGSystem:
 
 ---
 
----
-
 ## 📝 Multiple Choice Test - Session 0
 
 Test your understanding of RAG architecture fundamentals:
 
-**Question 1:** What are the three main stages of a RAG system?
+**Question 1:** What are the three main stages of a RAG system?  
 A) Parse, Search, Respond  
 B) Index, Retrieve, Generate  
 C) Chunk, Embed, Query  
 D) Store, Find, Answer  
 
-**Question 2:** Which RAG evolution phase introduced self-correcting mechanisms?
+**Question 2:** Which RAG evolution phase introduced self-correcting mechanisms?  
 A) 2020 - RAG Foundation  
 B) 2022 - LLM Integration  
 C) 2023 - Adaptive RAG  
 D) 2025 - Next-Gen RAG  
 
-**Question 3:** What is the primary advantage of HyDE (Hypothetical Document Embeddings)?
+**Question 3:** What is the primary advantage of HyDE (Hypothetical Document Embeddings)?  
 A) Reduces computational cost  
 B) Improves query-document semantic alignment  
 C) Eliminates need for vector databases  
 D) Simplifies system architecture  
 
-**Question 4:** When should you choose RAG over fine-tuning?
+**Question 4:** When should you choose RAG over fine-tuning?  
 A) When the domain knowledge is static  
 B) When you need frequent knowledge updates  
 C) When computational resources are unlimited  
 D) When source attribution is not needed  
 
-**Question 5:** What is the key benefit of Agentic RAG systems?
+**Question 5:** What is the key benefit of Agentic RAG systems?  
 A) Faster retrieval speed  
 B) Lower computational requirements  
 C) Iterative query refinement and self-correction  
@@ -982,35 +980,15 @@ D) Simpler system architecture
 
 [**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 
----
-
-## **🔗 Next Session Preview**
-
-**Session 1: Basic RAG Implementation** - Transform theory into working code:
-
-- Build a complete RAG pipeline from scratch
-- Implement intelligent document processing and chunking  
-- Set up optimized vector search with embeddings
-- Create your first retrieval-augmented responses
-- Establish evaluation framework for continuous improvement
-
-### **Preparation Tasks**
-
-1. **Install required packages**: `pip install langchain chromadb openai sentence-transformers`
-2. **Review embedding concepts**: Vector similarity, cosine distance, semantic search
-3. **Prepare test documents**: Gather 10-15 documents in your domain of interest
-4. **Set up API access**: OpenAI for embeddings/generation (or configure open-source alternatives)
-
----
-
 ## 🧭 Navigation
 
-**Previous:** None (First Session)
+**Previous:** Introduction (You are here)
 
 **Optional Deep Dive Modules:**
+
 - 🔬 **[Module A: Advanced RAG Patterns](Session0_ModuleA_Advanced_Patterns.md)** - Complex workflow coordination & dynamic agent generation
 - 🏭 **[Module B: Enterprise RAG Architectures](Session0_ModuleB_Enterprise.md)** - Production state handling & sophisticated routing
 
-**📝 Test Your Knowledge:** [Session 0 Solutions](Session0_Test_Solutions.md)
+**Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
 
-**Next:** Session 1 - Basic RAG Implementation →
+---
