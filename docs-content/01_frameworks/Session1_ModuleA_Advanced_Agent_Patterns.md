@@ -582,4 +582,4 @@ You've now mastered advanced agent patterns including:
 
 **🚀 Quick Start:** Run `cd src/session1 && python demo_runner.py` to see implementations
 
-**Next Session:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md) →
+**Next:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md) →

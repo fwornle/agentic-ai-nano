@@ -1612,6 +1612,5 @@ D) An emergency alert is triggered
 - **[🔬 Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)**
 - **[📡 Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)**
 
-**[📝 Test Your Knowledge: Session 9B Solutions](Session9B_Test_Solutions.md)**
 
 **[Next: Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)**

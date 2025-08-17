@@ -1866,6 +1866,5 @@ D) Simplified key management
 - **[🔒 Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)**
 - **[⚙️ Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)**
 
-**[📝 Test Your Knowledge: Session 10A Solutions](Session10A_Test_Solutions.md)**
 
 **[Next: Session 11 (Coming Soon) →](Session11_Advanced_Production_Patterns.md)**
