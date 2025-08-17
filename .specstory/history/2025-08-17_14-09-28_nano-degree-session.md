@@ -1,4 +1,4 @@
-# Coding Infrastructure Session Log
+# Project Session Log
 
 **Session Timestamp:** 2025-08-17_14-09-28  
 **Project:** nano-degree  

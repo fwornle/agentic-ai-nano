@@ -481,7 +481,11 @@ if __name__ == "__main__":
         print("Testing tool listing...")
         response = client.send_request("tools/list")
         print(f"Available tools: {response}")
-        
+```
+
+Now let's test our weather tool specifically:
+
+```python
         # Test weather tool
         print("\nTesting weather tool...")
         response = client.send_request("tools/call", {
@@ -763,67 +767,46 @@ Remember: The best way to learn is by doing. Experiment with the code, break thi
 Test your understanding of MCP fundamentals and server implementation with this comprehensive assessment covering architecture, tools, resources, and best practices.
 
 **1. What is the primary purpose of the Model Context Protocol (MCP)?**
-a) To enable direct communication between AI agents  
-b) To standardize how LLMs interact with external data sources and tools  
-c) To provide a framework for building AI agents  
-d) To manage agent discovery across organizations  
+
+A) To enable direct communication between AI agents  
+B) To standardize how LLMs interact with external data sources and tools  
+C) To provide a framework for building AI agents  
+D) To manage agent discovery across organizations  
 
 **2. Which component of MCP is responsible for exposing capabilities to clients?**
-a) MCP Client  
-b) MCP Tools  
-c) MCP Server  
-d) MCP Resources  
+
+A) MCP Client  
+B) MCP Tools  
+C) MCP Server  
+D) MCP Resources  
 
 **3. What are the three main types of capabilities that MCP servers can expose?**
-a) Agents, Models, and Protocols  
-b) Tools, Resources, and Prompts  
-c) Servers, Clients, and Bridges  
-d) APIs, Databases, and Files  
+
+A) Agents, Models, and Protocols  
+B) Tools, Resources, and Prompts  
+C) Servers, Clients, and Bridges  
+D) APIs, Databases, and Files  
 
 **4. What is the correct decorator to define an MCP tool?**
-a) `@mcp.function()`  
-b) `@mcp.tool()`  
-c) `@mcp.method()`  
-d) `@mcp.action()`  
+
+A) `@mcp.function()`  
+B) `@mcp.tool()`  
+C) `@mcp.method()`  
+D) `@mcp.action()`  
 
 **5. Which transport mechanism is used in this session's MCP server?**
-a) HTTP  
-b) WebSocket  
-c) stdio  
-d) gRPC  
 
-**6. What format do MCP servers use for communication?**
-a) REST  
-b) GraphQL  
-c) JSON-RPC  
-d) Protocol Buffers  
+A) HTTP  
+B) WebSocket  
+C) stdio  
+D) gRPC  
 
-**7. When defining a resource, what URI scheme is used in the weather server example?**
-a) http://  
-b) mcp://  
-c) weather://  
-d) resource://  
-
-**8. What should a tool return when encountering an error?**
-a) Raise an exception  
-b) Return None  
-c) Return a dict with an "error" key  
-d) Return False  
-
-**9. Why are type hints crucial in MCP tool definitions?**
-a) They improve performance  
-b) They tell AI agents how to use the tool  
-c) They prevent runtime errors  
-d) They enable code completion  
-
-**10. What is a best practice for handling invalid city names in the weather tool?**
-a) Ignore invalid inputs  
-b) Return default weather for London  
-c) Return error with available cities list  
-d) Raise an exception  
-
-**[View Test Solutions](Session1_Test_Solutions.md)**
+[🗂️ View Test Solutions →](Session1_Test_Solutions.md)
 
 ---
 
-[← Back to Session 0](Session0_Introduction_to_MCP_ACP_A2A.md) | [Next: Session 2 →](Session2_FileSystem_MCP_Server.md)
+## 🧭 Navigation
+
+**Previous:** [Session 0 - Introduction to MCP, ACP, and A2A](Session0_Introduction_to_MCP_ACP_A2A.md)
+
+**Next:** [Session 2 - File System MCP Server](Session2_FileSystem_MCP_Server.md) →

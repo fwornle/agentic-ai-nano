@@ -32,6 +32,7 @@ The diagram shows how LangChain agents can seamlessly integrate with multiple MC
 ### Understanding the Integration Challenge
 
 When we built our MCP servers in previous sessions, they worked well independently. But real-world AI applications need to:
+
 - Use multiple tools together (weather + file system + database)
 - Make intelligent decisions about which tools to use
 - Handle failures gracefully
@@ -58,6 +59,7 @@ pip install langchain-mcp-adapters langgraph langchain-openai \
 ```
 
 **New dependencies explained:**
+
 - `langchain-mcp-adapters`: Official LangChain integration for MCP servers
 - `langgraph`: Advanced workflow and graph-based agent execution
 - `langchain-openai/anthropic`: LLM providers for our agents
@@ -92,6 +94,7 @@ langchain-mcp-integration/
 ```
 
 **Project organization benefits:**
+
 - **Separation of concerns**: Each directory has a specific purpose
 - **Scalability**: Easy to add new agents, servers, or workflows
 - **Maintainability**: Clear structure makes debugging and updates easier
@@ -142,6 +145,7 @@ class LLMConfig:
 ```
 
 **Why dataclasses?**
+
 - Type hints improve code reliability and IDE support
 - Default values reduce configuration complexity
 - Immutable configurations prevent accidental changes
@@ -207,6 +211,7 @@ class Config:
 ```
 
 **Configuration best practices:**
+
 - **Environment variables** enable different settings per deployment
 - **Type safety** with dataclasses prevents configuration errors
 - **Sensible defaults** make development setup easier
@@ -245,6 +250,7 @@ class MCPServerManager:
 ```
 
 **Key design decisions:**
+
 - **Dictionary lookups** for fast server access by name
 - **Health tracking** to know which servers are operational
 - **Background tasks** for continuous health monitoring
@@ -315,12 +321,14 @@ This segment handles connection verification and tool discovery:
 ```
 
 **Complete implementation:** See [`src/session3/complete_examples/mcp_manager_complete.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/complete_examples/mcp_manager_complete.py) for the full implementation with advanced features including:
+
 - Continuous health monitoring
 - Automatic server restart
 - Context manager for resource cleanup
 - Comprehensive error handling
 
 **Key features of our MCP manager:**
+
 - **Health Monitoring**: Continuous health checks with automatic restart
 - **Error Recovery**: Graceful handling of server failures
 - **Context Management**: Automatic cleanup of resources
@@ -328,6 +336,7 @@ This segment handles connection verification and tool discovery:
 - **Async Support**: Non-blocking operations for better performance
 
 **Production benefits:**
+
 - **Resilience**: Automatically handles server failures
 - **Observability**: Detailed logging for troubleshooting
 - **Resource management**: Proper cleanup prevents memory leaks
@@ -424,6 +433,7 @@ if __name__ == "__main__":
 ```
 
 **Key design elements:**
+
 - **Simple data structure** for easy demonstration
 - **Error handling** for invalid inputs
 - **Unit conversion** to support different temperature scales
@@ -552,7 +562,11 @@ Question: {input}
 """)
         
         return self._build_executor(langchain_tools, react_prompt)
-    
+```
+
+This segment handles agent creation and configuration:
+
+```python
     def _build_executor(self, langchain_tools, react_prompt):
         """Build the agent executor with configuration."""
         agent = create_react_agent(
@@ -589,12 +603,14 @@ Question: {input}
 ```
 
 **Key concepts in our basic agent:**
+
 - **Tool Wrapping**: Converting MCP tools to LangChain-compatible tools
 - **ReAct Pattern**: The agent reasons (Thought) then acts (Action) iteratively
 - **Error Handling**: Graceful degradation when tools fail
 - **Async Support**: Non-blocking execution for better performance
 
 **Learning progression:**
+
 - **Single server focus** helps understand the integration pattern
 - **Clear separation** between initialization and execution
 - **Modular design** makes it easy to extend to multiple servers
@@ -719,7 +735,14 @@ Available tools:
 
 CONVERSATION HISTORY:
 {chat_history}
+""")
+```
 
+This segment completes the ReAct template with the reasoning format:
+
+```python
+        # Add the ReAct reasoning format to the template
+        react_prompt = PromptTemplate.from_template("""
 Use this format for your reasoning:
 
 Question: {input}
@@ -761,6 +784,7 @@ This segment creates the agent and configures the executor:
 ```
 
 **Enhanced prompting benefits:**
+
 - **Clear instructions**: Step-by-step guidance for tool usage
 - **Context awareness**: Includes conversation history
 - **Error recovery**: Instructions for handling tool failures
@@ -768,6 +792,7 @@ This segment creates the agent and configures the executor:
 - **Flexible execution**: Configurable iterations and error handling
 
 **Complete implementation:** See [`src/session3/complete_examples/multi_tool_agent_complete.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/complete_examples/multi_tool_agent_complete.py) for the full implementation with advanced features including:
+
 - Tool collection from multiple servers
 - Enhanced tool descriptions with use case context
 - Conversation memory and history management
@@ -775,6 +800,7 @@ This segment creates the agent and configures the executor:
 - Interactive console interface with rich formatting
 
 **Key advances over basic agent:**
+
 - **Multi-server support**: Uses tools from all available MCP servers
 - **Conversation memory**: Maintains context across interactions
 - **Enhanced prompting**: Better instructions for tool selection
@@ -819,6 +845,7 @@ class ResearchState:
 ```
 
 **Why this structure?**
+
 - **Dataclass**: Provides type hints and automatic equality/repr methods
 - **State persistence**: Each node can access and modify shared state
 - **Clear data flow**: Separate fields for each research domain
@@ -870,6 +897,7 @@ This segment defines how the workflow steps connect and execute:
 ```
 
 **Key workflow design principles:**
+
 - **Sequential processing**: Each step builds on the previous one
 - **Modular nodes**: Each research domain has its own processing node
 - **Clear flow**: Linear progression from planning to synthesis
@@ -902,6 +930,7 @@ This segment handles intelligent planning based on query analysis:
 ```
 
 **Planning logic benefits:**
+
 - **Keyword analysis**: Determines which tools to use
 - **Dynamic planning**: Adapts to different query types
 - **Documentation**: Creates clear plan for transparency
@@ -1099,6 +1128,7 @@ This segment provides text processing and workflow execution methods:
 ```
 
 **Complete implementation:** See [`src/session3/complete_examples/research_workflow_complete.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/complete_examples/research_workflow_complete.py) for the full implementation with:
+
 - Advanced error recovery and retry logic
 - Parallel research execution for better performance
 - Rich console interface for interactive use
@@ -1137,43 +1167,10 @@ Congratulations! You've mastered LangChain MCP integration and built sophisticat
 
 ---
 
-## 🧪 Testing Your Understanding
-
-### Quick Check Questions
-
-1. **What is the primary advantage of using LangChain MCP adapters?**
-   - A) Better performance
-   - B) Automatic tool discovery and integration
-   - C) Reduced memory usage  
-   - D) Simplified configuration
-
-2. **In the ReAct pattern, what does the agent do after each Action?**
-   - A) Plan the next action
-   - B) Wait for user input
-   - C) Observe the result
-   - D) Generate a final answer
-
-3. **What is the purpose of the health monitoring in MCPServerManager?**
-   - A) Improve performance
-   - B) Automatically restart failed servers
-   - C) Monitor memory usage
-   - D) Log user interactions
-
-4. **What advantage does LangGraph provide over simple ReAct agents?**
-   - A) Faster execution
-   - B) Complex stateful workflows
-   - C) Better error handling
-   - D) Simpler configuration
-
-5. **How does our multi-tool agent decide which tools to use?**
-   - A) Random selection
-   - B) Pre-configured rules
-   - C) LLM reasoning about tool descriptions
-   - D) User specification
-
-### Practical Exercise
+## 🧪 Practical Exercise
 
 Create a travel planning agent that:
+
 1. Gets weather information for multiple destinations
 2. Searches for travel documents in the file system
 3. Stores trip preferences in the database
@@ -1186,6 +1183,7 @@ Create a travel planning agent that:
 ## Next Session Preview
 
 In Session 4, we'll focus on **Production MCP Deployment** including:
+
 - Docker containerization of MCP servers
 - Cloud deployment strategies (AWS Lambda, Google Cloud Run)
 - Load balancing and scaling
@@ -1201,21 +1199,69 @@ In Session 4, we'll focus on **Production MCP Deployment** including:
 
 ---
 
-## 📋 Test Your Knowledge
+## 📝 Multiple Choice Test - Session 3
 
-Ready to test your understanding of LangChain MCP Integration? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
+Test your understanding of LangChain MCP Integration:
 
-### Multiple Choice Test
-Test your knowledge with 10 carefully crafted questions covering:
-- LangChain MCP integration concepts
-- ReAct pattern implementation
-- Multi-server management strategies
-- Error handling and fault tolerance
-- LangGraph workflow orchestration
+**Question 1:** What is the primary advantage of using LangChain MCP adapters?
 
-**[📝 Take the Test - Session 3 Test Solutions](Session3_Test_Solutions.md)**
+A) Better performance  
+B) Automatic tool discovery and integration  
+C) Reduced memory usage  
+D) Simplified configuration  
 
-*The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
+**Question 2:** In the ReAct pattern, what does the agent do after each Action?
+
+A) Plan the next action  
+B) Wait for user input  
+C) Observe the result  
+D) Generate a final answer  
+
+**Question 3:** What is the purpose of health monitoring in MCPServerManager?
+
+A) Improve performance  
+B) Automatically restart failed servers  
+C) Monitor memory usage  
+D) Log user interactions  
+
+**Question 4:** What advantage does LangGraph provide over simple ReAct agents?
+
+A) Faster execution  
+B) Complex stateful workflows  
+C) Better error handling  
+D) Simpler configuration  
+
+**Question 5:** How does our multi-tool agent decide which tools to use?
+
+A) Random selection  
+B) Pre-configured rules  
+C) LLM reasoning about tool descriptions  
+D) User specification  
+
+[**🗂️ View Test Solutions →**](Session3_Test_Solutions.md)
+
+---
+
+## 🧭 Navigation
+
+**Previous:** Session 2 - Building Production MCP Servers
+
+**Related Sessions:**
+
+- 🚀 **[Session 1: MCP Fundamentals](Session1_MCP_Fundamentals.md)** - Core MCP concepts and architecture
+- 🏗️ **[Session 2: Building Production MCP Servers](Session2_Building_Production_MCP_Servers.md)** - Server implementation patterns
+
+**🗂️ Code Files:** All examples use files in `src/session3/`
+
+- `config.py` - Configuration management for multi-server setups
+- `utils/mcp_manager.py` - MCP server management with health monitoring
+- `agents/basic_agent.py` - Single-server ReAct agent implementation
+- `agents/multi_tool_agent.py` - Multi-server intelligent agent
+- `workflows/research_workflow.py` - LangGraph workflow orchestration
+
+**🚀 Quick Start:** Run `cd src/session3 && python main.py` to see complete integration
+
+**Next:** Session 4 - Production MCP Deployment →
 
 ---
 

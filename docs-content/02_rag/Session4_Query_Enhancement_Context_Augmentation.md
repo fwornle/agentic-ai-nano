@@ -82,14 +82,22 @@ class SemanticGapAnalyzer:
 
     def __init__(self, embedding_model):
         self.embedding_model = embedding_model
+```
 
+**Core Functionality**: This analyzer helps identify why traditional embedding models struggle with query-document matching by quantifying the semantic distance between user questions and stored content.
+
+```python
     def analyze_query_document_gap(self, query: str, documents: List[str]) -> Dict:
         """Analyze semantic gaps between queries and documents."""
 
         # Embed query and documents
         query_embedding = self.embedding_model.encode([query])
         doc_embeddings = self.embedding_model.encode(documents)
+```
 
+**Embedding Process**: We convert both the query and documents into vector representations using the same embedding model to ensure comparable semantic spaces.
+
+```python
         # Calculate similarities
         similarities = []
         for doc_emb in doc_embeddings:
@@ -97,7 +105,11 @@ class SemanticGapAnalyzer:
                 np.linalg.norm(query_embedding[0]) * np.linalg.norm(doc_emb)
             )
             similarities.append(similarity)
+```
 
+**Similarity Computation**: Using cosine similarity to measure semantic closeness, revealing gaps where relevant documents score poorly due to linguistic differences.
+
+```python
         return {
             'query': query,
             'avg_similarity': np.mean(similarities),
@@ -133,7 +145,11 @@ from typing import List, Dict, Any, Optional
 import openai
 from sentence_transformers import SentenceTransformer
 import numpy as np
+```
 
+**Essential Imports**: We need these libraries for LLM communication, embedding generation, and numerical operations that power the HyDE system.
+
+```python
 class HyDEQueryEnhancer:
     """Hypothetical Document Embeddings for query enhancement."""
 
@@ -174,7 +190,11 @@ Now implement the main query enhancement workflow:
         # Step 1: Classify query type if not provided
         if query_type == 'auto':
             query_type = self._classify_query_type(query)
+```
 
+**Query Classification**: Automatically determining query type enables us to use appropriate templates for generating hypothetical documents that match the expected answer format.
+
+```python
         # Step 2: Generate hypothetical documents
         hypothetical_docs = self._generate_hypothetical_documents(
             query, query_type, num_hypotheticals
@@ -190,7 +210,11 @@ Finally, combine the generated hypothetical documents into enhanced embeddings:
         enhanced_embeddings = self._create_enhanced_embeddings(
             query, hypothetical_docs
         )
+```
 
+**Embedding Integration**: Converting hypothetical documents into vector representations and combining them with the original query for improved semantic matching.
+
+```python
         # Step 4: Return comprehensive enhancement data
         return {
             'original_query': query,
@@ -215,6 +239,7 @@ This implementation demonstrates query enhancement working in harmony with your 
 The result bridges the semantic gap between user intent and document content, dramatically improving retrieval success in your hybrid search systems.
 
 **Step 1: Query Type Classification - Tailoring HyDE to Query Nature**
+
 ```python
     def _classify_query_type(self, query: str) -> str:
         """Classify query type for appropriate HyDE template selection."""
@@ -230,7 +255,11 @@ The result bridges the semantic gap between user intent and document content, dr
 
         Return only the category name:
         """
+```
 
+**Classification Strategy**: Using the LLM to automatically categorize queries enables appropriate template selection for generating relevant hypothetical documents.
+
+```python
         try:
             response = self.llm_model.predict(classification_prompt).strip().lower()
             if response in self.hyde_templates:
@@ -317,7 +346,11 @@ Generate multiple hypothetical documents with variations for better coverage:
 
         base_template = self.hyde_templates[query_type]
         hypothetical_docs = []
+```
 
+**Document Variation Strategy**: Generating multiple hypothetical documents with different temperature settings creates diverse perspectives that increase retrieval coverage.
+
+```python
         for i in range(num_docs):
             # Add variation to temperature for diversity
             varied_temperature = self.temperature + (i * 0.1)
@@ -338,7 +371,11 @@ Generate each hypothetical document with error handling:
                     prompt,
                     temperature=varied_temperature
                 )
+```
 
+**Document Generation**: Each iteration creates a hypothetical document using the query-appropriate template with temperature variation for diverse outputs.
+
+```python
                 hypothetical_docs.append({
                     'document': doc_text.strip(),
                     'temperature': varied_temperature,
@@ -348,7 +385,11 @@ Generate each hypothetical document with error handling:
                 })
 
                 print(f"Generated hypothetical document {i+1}/{num_docs}")
+```
 
+**Metadata Collection**: Tracking temperature, quality scores, and variations helps optimize the document generation process and selection.
+
+```python
             except Exception as e:
                 print(f"Error generating document {i+1}: {e}")
                 continue
@@ -392,7 +433,11 @@ Create quality-weighted combination of hypothetical documents:
 
         # Weighted combination
         weighted_hyde = np.average(hyde_embeddings, axis=0, weights=weights)
+```
 
+**Weighted Averaging**: Quality-based weighting ensures higher-quality hypothetical documents have more influence on the final embedding representation.
+
+```python
         # Combine original query with weighted hypotheticals
         # Give more weight to original query to preserve intent
         combined_embedding = (0.3 * original_embedding +
@@ -459,7 +504,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 import nltk
 from nltk.corpus import wordnet
 from collections import defaultdict
+```
 
+**Query Expansion Libraries**: These imports provide statistical analysis, semantic relationships, and domain-specific term extraction capabilities.
+
+```python
 class IntelligentQueryExpander:
     """Advanced query expansion using multiple strategies."""
 
@@ -480,7 +529,11 @@ Set up different approaches to query expansion:
             'contextual': self._contextual_expansion,
             'domain_specific': self._domain_specific_expansion
         }
+```
 
+**Strategy Framework**: Multiple expansion approaches ensure comprehensive coverage - from simple synonyms to complex semantic relationships and domain-specific terminology.
+
+```python
         # Domain-specific TF-IDF if corpus provided
         if domain_corpus:
             self.domain_tfidf = TfidfVectorizer(
@@ -503,7 +556,11 @@ Implement the main query expansion workflow:
 
         expansion_results = {}
         combined_expansions = set()
+```
 
+**Multi-Strategy Coordination**: Coordinating different expansion approaches allows leveraging the strengths of each method for comprehensive query enhancement.
+
+```python
         # Apply each expansion strategy
         for strategy in strategies:
             if strategy in self.expansion_strategies:
@@ -534,6 +591,7 @@ Create the final expanded query with comprehensive results:
 ```
 
 **Step 5: Semantic Expansion Using LLM**
+
 ```python
     def _semantic_expansion(self, query: str, max_expansions: int) -> List[str]:
         """Generate semantic expansions using LLM understanding."""
@@ -551,7 +609,11 @@ Create the final expanded query with comprehensive results:
 
         Return only the expanded terms, one per line:
         """
+```
 
+**Semantic Expansion Strategy**: Using LLM understanding to generate related terms creates expansions that capture conceptual relationships beyond simple synonyms.
+
+```python
         try:
             response = self.llm_model.predict(semantic_prompt)
             expansions = [
@@ -560,13 +622,18 @@ Create the final expanded query with comprehensive results:
                 if term.strip() and not term.strip().startswith(('-', '*', '•'))
             ]
             return expansions[:max_expansions]
+```
 
+**Response Processing**: Filtering and cleaning LLM output ensures we get high-quality expansion terms while removing formatting artifacts.
+
+```python
         except Exception as e:
             print(f"Semantic expansion error: {e}")
             return []
 ```
 
 **Step 6: Contextual Query Reformulation**
+
 ```python
     def _contextual_expansion(self, query: str, max_expansions: int) -> List[str]:
         """Generate contextual reformulations of the query."""
@@ -584,7 +651,11 @@ Create the final expanded query with comprehensive results:
 
         Reformulations:
         """
+```
 
+**Reformulation Strategy**: Creating multiple ways to express the same information need increases the likelihood of matching documents with different linguistic styles.
+
+```python
         try:
             response = self.llm_model.predict(reformulation_prompt)
             reformulations = [
@@ -593,7 +664,11 @@ Create the final expanded query with comprehensive results:
                 if reform.strip() and '?' in reform or len(reform.split()) > 3
             ]
             return reformulations[:max_expansions]
+```
 
+**Quality Filtering**: Ensuring reformulations are substantive questions rather than fragments improves the quality of query variations.
+
+```python
         except Exception as e:
             print(f"Contextual expansion error: {e}")
             return []
@@ -610,7 +685,11 @@ class MultiQueryGenerator:
 
     def __init__(self, llm_model):
         self.llm_model = llm_model
+```
 
+**Perspective Framework**: Multiple query generation approaches ensure comprehensive coverage by viewing the same information need from different angles and specificity levels.
+
+```python
         self.query_perspectives = {
             'decomposition': self._decompose_complex_query,
             'specificity_levels': self._generate_specificity_variants,
@@ -635,7 +714,11 @@ Coordinate multiple perspective generation strategies:
 
         all_queries = {'original': query}
         generation_metadata = {}
+```
 
+**Query Distribution Strategy**: Intelligently distributing query generation across different perspectives ensures balanced coverage of the information space.
+
+```python
         # Distribute query generation across perspectives
         queries_per_perspective = total_queries // len(perspectives)
         remaining_queries = total_queries % len(perspectives)
@@ -653,6 +736,11 @@ Create queries from each perspective and collect metadata:
 
             generated = self.query_perspectives[perspective](query, num_queries)
             all_queries[perspective] = generated
+```
+
+**Perspective Execution**: Each perspective method generates query variants using its specific approach, whether decomposition, specificity adjustment, or angle shifting.
+
+```python
             generation_metadata[perspective] = {
                 'count': len(generated),
                 'method': perspective
@@ -677,6 +765,7 @@ Package all generated query variants with metadata:
 ```
 
 **Step 7: Complex Query Decomposition**
+
 ```python
     def _decompose_complex_query(self, query: str, num_queries: int) -> List[str]:
         """Decompose complex queries into simpler sub-questions."""
@@ -694,7 +783,11 @@ Package all generated query variants with metadata:
 
         Sub-questions:
         """
+```
 
+**Decomposition Strategy**: Breaking complex questions into focused sub-questions enables more precise retrieval and comprehensive coverage of multifaceted information needs.
+
+```python
         try:
             response = self.llm_model.predict(decomposition_prompt)
             sub_questions = [
@@ -702,7 +795,11 @@ Package all generated query variants with metadata:
                 for q in response.strip().split('\n')
                 if q.strip() and ('?' in q or len(q.split()) > 3)
             ]
+```
 
+**Question Processing**: Ensuring proper question formatting and filtering maintains quality while standardizing the output format.
+
+```python
             # Ensure we have question marks
             sub_questions = [
                 q if q.endswith('?') else q + '?'
@@ -717,6 +814,7 @@ Package all generated query variants with metadata:
 ```
 
 **Step 8: Specificity Level Variants**
+
 ```python
     def _generate_specificity_variants(self, query: str, num_queries: int) -> List[str]:
         """Generate queries at different levels of specificity."""
@@ -733,7 +831,11 @@ Package all generated query variants with metadata:
 
         Each variant should maintain the core intent but adjust the scope:
         """
+```
 
+**Specificity Adjustment**: Creating query variants at different granularity levels ensures retrieval of both overview information and detailed specifics.
+
+```python
         try:
             response = self.llm_model.predict(specificity_prompt)
             variants = [
@@ -765,7 +867,11 @@ class ContextWindowOptimizer:
     def __init__(self, llm_tokenizer, max_context_tokens: int = 4000):
         self.tokenizer = llm_tokenizer
         self.max_context_tokens = max_context_tokens
+```
 
+**Token Management**: Setting up tokenizer and context limits enables precise control over the information density within LLM context windows.
+
+```python
         # Context optimization strategies
         self.optimization_strategies = {
             'relevance_ranking': self._relevance_based_selection,
@@ -773,7 +879,11 @@ class ContextWindowOptimizer:
             'hierarchical_summary': self._hierarchical_summarization,
             'semantic_compression': self._semantic_compression
         }
+```
 
+**Strategy Selection**: Multiple optimization approaches allow choosing the best method based on the specific characteristics of retrieved content and query requirements.
+
+```python
     def optimize_context_window(self, query: str,
                                retrieved_chunks: List[Dict],
                                strategy: str = 'relevance_ranking') -> Dict[str, Any]:
@@ -782,7 +892,11 @@ class ContextWindowOptimizer:
         # Calculate available token budget
         query_tokens = len(self.tokenizer.encode(query))
         available_tokens = self.max_context_tokens - query_tokens - 200  # Buffer
+```
 
+**Budget Calculation**: Precise token budgeting ensures context stays within limits while reserving space for the query and response generation.
+
+```python
         # Apply optimization strategy
         optimized_context = self.optimization_strategies[strategy](
             query, retrieved_chunks, available_tokens
@@ -799,6 +913,7 @@ class ContextWindowOptimizer:
 ```
 
 **Step 9: Relevance-Based Context Selection**
+
 ```python
     def _relevance_based_selection(self, query: str, chunks: List[Dict],
                                  token_budget: int) -> Dict[str, Any]:
@@ -813,7 +928,11 @@ class ContextWindowOptimizer:
 
             # Calculate efficiency: relevance per token
             efficiency = relevance / tokens if tokens > 0 else 0
+```
 
+**Efficiency Calculation**: Computing relevance-per-token ratios enables optimal selection of chunks that provide maximum information value within token constraints.
+
+```python
             chunk_analysis.append({
                 'index': i,
                 'content': content,
@@ -825,7 +944,11 @@ class ContextWindowOptimizer:
 
         # Sort by efficiency (relevance per token)
         chunk_analysis.sort(key=lambda x: x['efficiency'], reverse=True)
+```
 
+**Efficiency Ranking**: Sorting chunks by efficiency ensures the most valuable content per token is prioritized for inclusion in the context window.
+
+```python
         # Select chunks within token budget
         selected_chunks = []
         total_tokens = 0
@@ -836,7 +959,11 @@ class ContextWindowOptimizer:
                 total_tokens += chunk_data['tokens']
             else:
                 break
+```
 
+**Budget Management**: Greedy selection based on efficiency ensures optimal use of available tokens while staying within limits.
+
+```python
         # Assemble context
         context_parts = []
         for chunk_data in selected_chunks:
@@ -854,6 +981,7 @@ class ContextWindowOptimizer:
 ```
 
 **Step 10: Hierarchical Context Summarization**
+
 ```python
     def _hierarchical_summarization(self, query: str, chunks: List[Dict],
                                   token_budget: int) -> Dict[str, Any]:
@@ -864,7 +992,11 @@ class ContextWindowOptimizer:
 
         summarized_chunks = []
         total_tokens = 0
+```
 
+**Grouping Strategy**: Organizing chunks by source or topic enables intelligent summarization that preserves information coherence while reducing token usage.
+
+```python
         for group_key, group_chunks in chunk_groups.items():
             # Calculate total tokens for this group
             group_content = '\n'.join([
@@ -875,7 +1007,11 @@ class ContextWindowOptimizer:
             if group_tokens > token_budget // 4:  # Group too large, summarize
                 summary = self._summarize_chunk_group(query, group_chunks)
                 summary_tokens = len(self.tokenizer.encode(summary))
+```
 
+**Adaptive Summarization**: Groups exceeding 25% of token budget are summarized to maintain information while fitting constraints.
+
+```python
                 if total_tokens + summary_tokens <= token_budget:
                     summarized_chunks.append({
                         'content': summary,
@@ -885,6 +1021,11 @@ class ContextWindowOptimizer:
                         'group_key': group_key
                     })
                     total_tokens += summary_tokens
+```
+
+**Summary Integration**: Summarized content is tracked with metadata indicating its condensed nature and original source count.
+
+```python
             else:
                 # Use original chunks if they fit
                 for chunk in group_chunks:
@@ -900,7 +1041,11 @@ class ContextWindowOptimizer:
                             'metadata': chunk.get('metadata', {})
                         })
                         total_tokens += chunk_tokens
+```
 
+**Original Content Preservation**: Smaller groups remain intact to preserve detailed information when token budget allows.
+
+```python
         # Assemble final context
         context_parts = []
         for chunk in summarized_chunks:
@@ -935,7 +1080,11 @@ class RAGPromptEngineer:
 
     def __init__(self, llm_model):
         self.llm_model = llm_model
+```
 
+**Prompt Engineering Foundation**: Specialized RAG prompt engineering requires understanding how context and query types interact to produce optimal responses.
+
+```python
         # Domain-specific prompt templates
         self.prompt_templates = {
             'factual_qa': self._factual_qa_template,
@@ -945,7 +1094,11 @@ class RAGPromptEngineer:
             'creative': self._creative_template,
             'technical': self._technical_template
         }
+```
 
+**Template Framework**: Different query types require specialized prompt structures that guide the LLM toward appropriate response patterns and information organization.
+
+```python
         # Prompt optimization techniques
         self.optimization_techniques = {
             'chain_of_thought': self._add_chain_of_thought,
@@ -953,7 +1106,11 @@ class RAGPromptEngineer:
             'confidence_calibration': self._add_confidence_calibration,
             'multi_step_reasoning': self._add_multi_step_reasoning
         }
+```
 
+**Optimization Techniques**: Advanced prompt optimization methods enhance response quality through structured reasoning, source attribution, and confidence assessment.
+
+```python
     def engineer_rag_prompt(self, query: str, context: str,
                            query_type: str = 'factual_qa',
                            optimizations: List[str] = ['confidence_calibration']) -> Dict[str, Any]:
@@ -961,7 +1118,11 @@ class RAGPromptEngineer:
 
         # Start with base template
         base_prompt = self.prompt_templates[query_type](query, context)
+```
 
+**Template Selection**: Choosing the appropriate base template based on query type ensures the prompt structure aligns with the expected response format.
+
+```python
         # Apply optimization techniques
         optimized_prompt = base_prompt
         optimization_metadata = {}
@@ -973,7 +1134,11 @@ class RAGPromptEngineer:
                 )
                 optimized_prompt = result['prompt']
                 optimization_metadata[technique] = result['metadata']
+```
 
+**Sequential Optimization**: Applying optimization techniques iteratively builds up prompt sophistication while tracking the contribution of each enhancement.
+
+```python
         return {
             'base_prompt': base_prompt,
             'optimized_prompt': optimized_prompt,
@@ -984,6 +1149,7 @@ class RAGPromptEngineer:
 ```
 
 **Step 11: Factual QA Template with Source Attribution**
+
 ```python
     def _factual_qa_template(self, query: str, context: str) -> str:
         """Optimized template for factual question answering."""
@@ -994,7 +1160,11 @@ CONTEXT INFORMATION:
 {context}
 
 QUESTION: {query}
+```
 
+**Context Integration**: The template establishes clear boundaries between context and query, ensuring the LLM maintains focus on provided information rather than generating unsupported content.
+
+```python
 INSTRUCTIONS:
 1. Base your answer strictly on the provided context
 2. If the context doesn't contain sufficient information, clearly state this limitation
@@ -1002,7 +1172,11 @@ INSTRUCTIONS:
 4. Provide direct quotes when appropriate
 5. Distinguish between facts and interpretations
 6. If there are contradictions in the sources, acknowledge and explain them
+```
 
+**Response Guidelines**: Specific instructions ensure accurate, well-sourced responses that acknowledge limitations and handle conflicting information appropriately.
+
+```python
 ANSWER STRUCTURE:
 - Start with a direct answer to the question
 - Provide supporting details from the context
@@ -1013,6 +1187,7 @@ ANSWER:"""
 ```
 
 **Step 12: Chain-of-Thought Enhancement**
+
 ```python
     def _add_chain_of_thought(self, base_prompt: str, query: str,
                             context: str) -> Dict[str, Any]:
@@ -1026,7 +1201,11 @@ Before providing your final answer, work through your reasoning step-by-step:
 2. RELEVANCE ASSESSMENT: How does each piece of information address the question?
 3. SYNTHESIS: How do you combine the information to form a comprehensive answer?
 4. CONFIDENCE EVALUATION: How confident are you in your answer based on the available evidence?
+```
 
+**Structured Reasoning**: Chain-of-thought prompting guides the LLM through explicit reasoning steps, improving accuracy and providing insight into the decision-making process.
+
+```python
 Let me work through this systematically:
 
 STEP 1 - Information Extraction:
@@ -1043,7 +1222,11 @@ STEP 4 - Confidence Evaluation:
 
 FINAL ANSWER:
 """
+```
 
+**Reasoning Framework**: The four-step process ensures systematic analysis of context, leading to more thorough and reliable responses.
+
+```python
         enhanced_prompt = base_prompt + cot_enhancement
 
         return {
