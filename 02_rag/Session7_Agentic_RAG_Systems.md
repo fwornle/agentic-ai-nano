@@ -1,5 +1,30 @@
 # Session 7: Agentic RAG Systems
 
+## 🎯 Learning Navigation Hub
+**Total Time Investment**: 110 minutes (Core) + 70 minutes (Optional)
+**Your Learning Path**: Choose your engagement level
+
+### Quick Start Guide
+- **👀 Observer (110 min)**: Read concepts + examine autonomous agent patterns
+- **🙋‍♂️ Participant (150 min)**: Follow exercises + implement basic agentic systems
+- **🛠️ Implementer (180 min)**: Build production agents + deploy autonomous RAG systems
+
+## 📋 SESSION OVERVIEW DASHBOARD
+
+### Core Learning Track (110 minutes) - REQUIRED
+| Section | Concept Load | Time | Skills |
+|---------|--------------|------|--------|
+| Reasoning Foundations | 4 concepts | 30 min | Cognitive Planning |
+| Agent Architecture | 5 concepts | 30 min | System Design |
+| Self-Correction Loops | 3 concepts | 25 min | Feedback Systems |
+| Tool Integration | 4 concepts | 25 min | Agent Orchestration |
+
+### Optional Deep Dive Modules (Choose Your Adventure)
+- 🔬 **[Module A: Advanced Agent Reasoning](Session7_ModuleA_Advanced_Reasoning.md)** (35 min)
+- 🏭 **[Module B: Production Agent Deployment](Session7_ModuleB_Production_Agents.md)** (35 min)
+
+## 🧭 CORE SECTION (Required - 110 minutes)
+
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
@@ -2978,73 +3003,75 @@ class ProductionReasoningAugmentedRAG:
 
 ---
 
-## **🧪 Knowledge Check**
+## 📝 Multiple Choice Test - Session 7 (15 minutes)
 
-Test your understanding of agentic RAG systems and intelligent automation techniques with our comprehensive assessment.
+Test your understanding of agentic RAG systems and intelligent automation techniques.
 
-### **Multiple Choice Questions**
+### Question 1: Query Planning Advantage
+**What is the primary advantage of query planning in agentic RAG systems?**
 
-**1. What is the primary advantage of query planning in agentic RAG systems?**
+A) Faster response times  
+B) Strategic analysis of queries to determine optimal retrieval and generation approaches  
+C) Reduced computational costs  
+D) Simpler system architecture  
 
-- A) Faster response times
-- B) Strategic analysis of queries to determine optimal retrieval and generation approaches
-- C) Reduced computational costs
-- D) Simpler system architecture
+### Question 2: Self-Correction Error Detection
+**In self-correcting RAG systems, what is the most effective approach for error detection?**
 
-**2. In self-correcting RAG systems, what is the most effective approach for error detection?**
+A) Random response sampling  
+B) LLM-as-a-judge evaluation with factual consistency checking  
+C) Simple keyword matching  
+D) Response length validation  
 
-- A) Random response sampling
-- B) LLM-as-a-judge evaluation with factual consistency checking
-- C) Simple keyword matching
-- D) Response length validation
+### Question 3: External Tool Integration
+**When should agentic RAG systems use external tools rather than just document retrieval?**
 
-**3. When should agentic RAG systems use external tools rather than just document retrieval?**
+A) Always, for every query  
+B) Never, document retrieval is always sufficient  
+C) When queries require real-time data, calculations, or specialized functionality  
+D) Only for simple questions  
 
-- A) Always, for every query
-- B) Never, document retrieval is always sufficient
-- C) When queries require real-time data, calculations, or specialized functionality
-- D) Only for simple questions
+### Question 4: Multi-Agent Collaboration Benefit
+**What is the key benefit of multi-agent collaboration in RAG systems?**
 
-**4. What is the key benefit of multi-agent collaboration in RAG systems?**
+A) Faster processing through parallel execution  
+B) Specialized expertise and comprehensive analysis through role-based collaboration  
+C) Reduced memory usage  
+D) Simpler error handling  
 
-- A) Faster processing through parallel execution
-- B) Specialized expertise and comprehensive analysis through role-based collaboration
-- C) Reduced memory usage
-- D) Simpler error handling
+### Question 5: Iterative Refinement Stopping Criterion
+**In iterative self-correction, what criterion should determine when to stop refinement?**
 
-**5. In iterative self-correction, what criterion should determine when to stop refinement?**
+A) Fixed number of iterations regardless of quality  
+B) Quality threshold achievement or diminishing improvement returns  
+C) Time limits only  
+D) User interruption  
 
-- A) Fixed number of iterations regardless of quality
-- B) Quality threshold achievement or diminishing improvement returns
-- C) Time limits only
-- D) User interruption
+### Question 6: Critical Agent Role
+**Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?**
 
-**6. Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?**
+A) Researcher agent  
+B) Synthesizer agent  
+C) Validator agent  
+D) Coordinator agent  
 
-- A) Researcher agent
-- B) Synthesizer agent
-- C) Validator agent
-- D) Coordinator agent
+### Question 7: Production Deployment Challenge
+**What is the primary challenge in production deployment of agentic RAG systems?**
 
-**7. What is the primary challenge in production deployment of agentic RAG systems?**
+A) High computational costs  
+B) Balancing system complexity with reliability and performance  
+C) Lack of suitable frameworks  
+D) Limited use cases  
 
-- A) High computational costs
-- B) Balancing system complexity with reliability and performance
-- C) Lack of suitable frameworks
-- D) Limited use cases
+### Question 8: Validation Assessment Priority
+**When designing agentic RAG validation, what aspect is most important to assess?**
 
-**8. When designing agentic RAG validation, what aspect is most important to assess?**
+A) Response length  
+B) Processing speed  
+C) Factual accuracy and logical consistency  
+D) Token usage  
 
-- A) Response length
-- B) Processing speed
-- C) Factual accuracy and logical consistency
-- D) Token usage
-
----
-
-**📋 [View Solutions](Session7_Test_Solutions.md)**
-
-*Complete the test above, then check your answers and review the detailed explanations in the solutions.*
+**🗂️ View Test Solutions**: Complete answers in `Session7_Test_Solutions.md`
 
 ---
 
@@ -3097,3 +3124,12 @@ The planning, validation, and iterative refinement capabilities you've mastered 
 4. **Prepare for expansion**: Consider how agentic intelligence applies to images and audio
 
 **Autonomous Intelligence Achieved:** Your RAG systems now think, plan, and improve independently. Ready to apply this intelligence to the complete spectrum of human knowledge? 🎨🔊📱
+
+---
+
+## 🧭 Navigation
+**Previous:** [Session 6 - Graph-Based RAG (GraphRAG)](Session6_Graph_Based_RAG.md)
+
+**📝 Test Your Knowledge:** [Session 7 Solutions](Session7_Test_Solutions.md)
+
+**Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)

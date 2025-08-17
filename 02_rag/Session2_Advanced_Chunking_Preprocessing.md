@@ -1,6 +1,32 @@
 # Session 2: Advanced Chunking & Preprocessing - Mastering Document Intelligence
 
-## 🎯 Learning Outcomes
+## 🎯 Learning Navigation Hub
+**Total Time Investment**: 110 minutes (Core) + 80 minutes (Optional)
+**Your Learning Path**: Choose your engagement level
+
+### Quick Start Guide
+- **👀 Observer (55 min)**: Read concepts + examine intelligent processing patterns
+- **🙋‍♂️ Participant (110 min)**: Follow exercises + implement structure-aware chunking
+- **🛠️ Implementer (190 min)**: Build custom processors + explore enterprise patterns
+
+## 📋 SESSION OVERVIEW DASHBOARD
+
+### Core Learning Track (110 minutes) - REQUIRED
+| Section | Concept Load | Time | Skills |
+|---------|--------------|------|--------|
+| Structure Analysis | 6 concepts | 20 min | Document Understanding |
+| Hierarchical Chunking | 8 concepts | 25 min | Smart Segmentation |
+| Metadata Extraction | 7 concepts | 25 min | Information Enrichment |
+| Multi-Modal Processing | 5 concepts | 20 min | Complex Content |
+| Quality Assessment | 4 concepts | 15 min | Performance Optimization |
+
+### Optional Deep Dive Modules (Choose Your Adventure)
+- 🔬 **[Module A: Advanced Document Analytics](Session2_ModuleA_Document_Analytics.md)** (40 min)
+- 🏭 **[Module B: Enterprise Content Processing](Session2_ModuleB_Enterprise_Processing.md)** (40 min)
+
+## 🧭 CORE SECTION (Required - 110 minutes)
+
+### Learning Outcomes
 
 By the end of this session, you will be able to:
 - **Design** hierarchical chunking strategies for complex document structures
@@ -1304,85 +1330,131 @@ Test your understanding of advanced chunking and preprocessing techniques with o
 ### **Multiple Choice Questions**
 
 **1. What is the primary benefit of detecting content types (headings, tables, code) during document analysis?**
-   - A) Reduces processing time
-   - B) Enables structure-aware chunking that preserves meaning
-   - C) Improves embedding quality
-   - D) Reduces storage requirements
+   - A) Reduces processing time  
+   - B) Enables structure-aware chunking that preserves meaning  
+   - C) Improves embedding quality  
+   - D) Reduces storage requirements  
 
 **2. In hierarchical chunking, why is it important to track element hierarchy levels?**
-   - A) To improve processing speed
-   - B) To reduce memory usage
-   - C) To preserve document structure and create meaningful chunk boundaries
-   - D) To simplify the codebase
+   - A) To improve processing speed  
+   - B) To reduce memory usage  
+   - C) To preserve document structure and create meaningful chunk boundaries  
+   - D) To simplify the codebase  
 
 **3. What is the main advantage of extracting entities, keywords, and topics during preprocessing?**
-   - A) Reduces chunk size
-   - B) Improves computational efficiency
-   - C) Enables more precise retrieval through enriched context
-   - D) Simplifies the chunking process
+   - A) Reduces chunk size  
+   - B) Improves computational efficiency  
+   - C) Enables more precise retrieval through enriched context  
+   - D) Simplifies the chunking process  
 
 **4. Why do tables require specialized processing in RAG systems?**
-   - A) Tables contain more text than paragraphs
-   - B) Tables have structured relationships that are lost in naive chunking
-   - C) Tables are always larger than the chunk size
-   - D) Tables use different encoding formats
+   - A) Tables contain more text than paragraphs  
+   - B) Tables have structured relationships that are lost in naive chunking  
+   - C) Tables are always larger than the chunk size  
+   - D) Tables use different encoding formats  
 
 **5. When processing documents with images, what is the best practice for RAG systems?**
-   - A) Ignore images completely
-   - B) Store images as binary data in chunks
-   - C) Replace image references with descriptive text
-   - D) Create separate chunks for each image
+   - A) Ignore images completely  
+   - B) Store images as binary data in chunks  
+   - C) Replace image references with descriptive text  
+   - D) Create separate chunks for each image  
 
 **6. Which metric is most important for measuring chunk coherence in hierarchical chunking?**
-   - A) Average chunk size
-   - B) Processing speed
-   - C) Topic consistency between related chunks
-   - D) Number of chunks created
+   - A) Average chunk size  
+   - B) Processing speed  
+   - C) Topic consistency between related chunks  
+   - D) Number of chunks created  
 
 **7. What is the optimal overlap ratio for hierarchical chunks?**
-   - A) 0% - no overlap needed
-   - B) 50% - maximum context preservation
-   - C) 10-20% - balanced context and efficiency
-   - D) 100% - complete duplication
+   - A) 0% - no overlap needed  
+   - B) 50% - maximum context preservation  
+   - C) 10-20% - balanced context and efficiency  
+   - D) 100% - complete duplication  
 
 **8. Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?**
-   - A) To reduce computational costs
-   - B) To select the most appropriate processing approach for the content type
-   - C) To determine the number of chunks to create
-   - D) To set the embedding model parameters
-
----
-
-**📋 [View Solutions](Session2_Test_Solutions.md)**
-
-*Complete the test above, then check your answers and review the detailed explanations in the solutions.*
+   - A) To reduce computational costs  
+   - B) To select the most appropriate processing approach for the content type  
+   - C) To determine the number of chunks to create  
+   - D) To set the embedding model parameters  
 
 ---
 
 ---
 
-## **🎯 Session 2 Foundation Complete**
+## 📝 Multiple Choice Test - Session 2 (15 minutes)
+
+**1. What is the primary benefit of detecting content types (headings, tables, code) during document analysis?**
+   - A) Reduces processing time  
+   - B) Enables structure-aware chunking that preserves meaning  
+   - C) Improves embedding quality  
+   - D) Reduces storage requirements  
+
+**2. In hierarchical chunking, why is it important to track element hierarchy levels?**
+   - A) To improve processing speed  
+   - B) To reduce memory usage  
+   - C) To preserve document structure and create meaningful chunk boundaries  
+   - D) To simplify the codebase  
+
+**3. What is the main advantage of extracting entities, keywords, and topics during preprocessing?**
+   - A) Reduces chunk size  
+   - B) Improves computational efficiency  
+   - C) Enables more precise retrieval through enriched context  
+   - D) Simplifies the chunking process  
+
+**4. Why do tables require specialized processing in RAG systems?**
+   - A) Tables contain more text than paragraphs  
+   - B) Tables have structured relationships that are lost in naive chunking  
+   - C) Tables are always larger than the chunk size  
+   - D) Tables use different encoding formats  
+
+**5. When processing documents with images, what is the best practice for RAG systems?**
+   - A) Ignore images completely  
+   - B) Store images as binary data in chunks  
+   - C) Replace image references with descriptive text  
+   - D) Create separate chunks for each image  
+
+**6. Which metric is most important for measuring chunk coherence in hierarchical chunking?**
+   - A) Average chunk size  
+   - B) Processing speed  
+   - C) Topic consistency between related chunks  
+   - D) Number of chunks created  
+
+**7. What is the optimal overlap ratio for hierarchical chunks?**
+   - A) 0% - no overlap needed  
+   - B) 50% - maximum context preservation  
+   - C) 10-20% - balanced context and efficiency  
+   - D) 100% - complete duplication  
+
+**8. Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?**
+   - A) To reduce computational costs  
+   - B) To select the most appropriate processing approach for the content type  
+   - C) To determine the number of chunks to create  
+   - D) To set the embedding model parameters  
+
+---
+
+**🗂️ View Test Solutions**: Complete answers in `Session2_Test_Solutions.md`
+
+---
+
+## 🎯 Session 2 Foundation Complete
 
 **Your Chunking Mastery Achievement:**
 You've mastered intelligent document processing that preserves structure, extracts metadata, and creates semantically coherent chunks. This foundation is crucial for everything that follows in your RAG journey.
 
-## **🔗 Building Your RAG Excellence Path**
+---
 
-**Next: Session 3 - Vector Database Optimization**
-Your sophisticated chunks need high-performance storage and retrieval. Session 3 will optimize your vector infrastructure to handle your intelligent preprocessing at scale.
+## 🧭 Navigation
 
-**Looking Ahead - Your Complete RAG Journey:**
-- **Session 4**: Query enhancement will make your chunks more discoverable through HyDE and expansion
-- **Session 5**: Evaluation frameworks will measure your preprocessing quality scientifically
-- **Session 6**: Graph RAG will extend your metadata extraction into relationship mapping
-- **Session 8**: Multi-modal processing will apply your chunking strategies to images and audio
-- **Session 9**: Production deployment will scale your preprocessing for enterprise workloads
+**Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 
-### **Preparation for Vector Excellence**
+**Optional Deep Dive Modules:**
+- 🔬 **[Module A: Advanced Document Analytics](Session2_ModuleA_Document_Analytics.md)** (40 min) - Deep analytics for document structure analysis
 
-1. **Test chunk quality**: Verify your hierarchical chunking creates semantically coherent segments
-2. **Measure preprocessing performance**: Collect metrics on processing speed and quality
-3. **Document metadata schemas**: Prepare structured metadata for vector database optimization
-4. **Consider search requirements**: Think about how your enhanced chunks should be retrieved
+**📝 Test Your Knowledge:** [Session 2 Solutions](Session2_Test_Solutions.md)
+
+**Next:** [Session 3 - Vector Databases Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
+
+---
 
 **The Foundation is Set:** Your intelligent document processing creates the high-quality chunks that enable everything else. Ready to build vector search excellence on this solid foundation? 🚀

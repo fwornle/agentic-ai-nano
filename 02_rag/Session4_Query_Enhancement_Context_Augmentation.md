@@ -1,6 +1,32 @@
 # Session 4: Query Enhancement & Context Augmentation - Bridging the Semantic Gap
 
-## 🎯 Learning Outcomes
+## 🎯 Learning Navigation Hub
+**Total Time Investment**: 130 minutes (Core) + 100 minutes (Optional)
+**Your Learning Path**: Choose your engagement level
+
+### Quick Start Guide
+- **👀 Observer (65 min)**: Read concepts + examine query intelligence patterns
+- **🙋‍♂️ Participant (130 min)**: Follow exercises + implement HyDE and context optimization
+- **🛠️ Implementer (230 min)**: Build custom enhancement systems + explore production patterns
+
+## 📋 SESSION OVERVIEW DASHBOARD
+
+### Core Learning Track (130 minutes) - REQUIRED
+| Section | Concept Load | Time | Skills |
+|---------|--------------|------|--------|
+| HyDE Implementation | 8 concepts | 25 min | Semantic Gap Bridging |
+| Query Enhancement | 9 concepts | 25 min | Multi-Strategy Expansion |
+| Context Optimization | 6 concepts | 20 min | Window Management |
+| Prompt Engineering | 10 concepts | 30 min | Generation Quality |
+| Integration Pipeline | 7 concepts | 30 min | System Architecture |
+
+### Optional Deep Dive Modules (Choose Your Adventure)
+- 🔬 **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** (50 min)
+- 🏭 **[Module B: Enterprise Context Systems](Session4_ModuleB_Enterprise_Context.md)** (50 min)
+
+## 🧭 CORE SECTION (Required - 130 minutes)
+
+### Learning Outcomes
 
 By the end of this session, you will be able to:
 - **Implement** HyDE (Hypothetical Document Embeddings) for semantic gap bridging
@@ -1292,64 +1318,114 @@ Test your understanding of query enhancement and context augmentation techniques
 ### **Multiple Choice Questions**
 
 **1. What is the primary purpose of HyDE (Hypothetical Document Embeddings)?**
-   - A) To generate multiple query variations
-   - B) To bridge the semantic gap between queries and documents
-   - C) To compress document embeddings
-   - D) To speed up retrieval performance
+   - A) To generate multiple query variations  
+   - B) To bridge the semantic gap between queries and documents  
+   - C) To compress document embeddings  
+   - D) To speed up retrieval performance  
 
 **2. When implementing query decomposition, which approach is most effective for complex questions?**
-   - A) Random sentence splitting
-   - B) Breaking questions into answerable sub-questions using LLMs
-   - C) Fixed-length query segments
-   - D) Keyword-based fragmentation
+   - A) Random sentence splitting  
+   - B) Breaking questions into answerable sub-questions using LLMs  
+   - C) Fixed-length query segments  
+   - D) Keyword-based fragmentation  
 
 **3. What is the key advantage of multi-query generation in RAG systems?**
-   - A) Reduced computational cost
-   - B) Faster query processing
-   - C) Comprehensive coverage of different query perspectives
-   - D) Simplified system architecture
+   - A) Reduced computational cost  
+   - B) Faster query processing  
+   - C) Comprehensive coverage of different query perspectives  
+   - D) Simplified system architecture  
 
 **4. In context window optimization, what factor is most important for maintaining quality?**
-   - A) Maximum token count
-   - B) Processing speed
-   - C) Balance between relevance and information density
-   - D) Number of source documents
+   - A) Maximum token count  
+   - B) Processing speed  
+   - C) Balance between relevance and information density  
+   - D) Number of source documents  
 
 **5. Which prompt engineering technique is most effective for improving RAG response quality?**
-   - A) Longer prompts with more examples
-   - B) Chain-of-thought reasoning with context integration
-   - C) Simple template-based prompts
-   - D) Keyword-heavy prompts
+   - A) Longer prompts with more examples  
+   - B) Chain-of-thought reasoning with context integration  
+   - C) Simple template-based prompts  
+   - D) Keyword-heavy prompts  
 
 **6. What is the optimal strategy for handling ambiguous user queries?**
-   - A) Return an error message
-   - B) Use the original query without modification
-   - C) Generate clarifying questions and query variants
-   - D) Pick the most common interpretation
+   - A) Return an error message  
+   - B) Use the original query without modification  
+   - C) Generate clarifying questions and query variants  
+   - D) Pick the most common interpretation  
 
 **7. When should you prioritize context summarization over full context inclusion?**
-   - A) When computational resources are unlimited
-   - B) When context exceeds token limits and relevance is mixed
-   - C) Always, to reduce processing time
-   - D) Never, full context is always better
+   - A) When computational resources are unlimited  
+   - B) When context exceeds token limits and relevance is mixed  
+   - C) Always, to reduce processing time  
+   - D) Never, full context is always better  
 
 **8. What is the most important factor in dynamic prompt adaptation?**
-   - A) User preference settings
-   - B) Context quality and query complexity assessment
-   - C) Available computational resources
-   - D) Response length requirements
-
----
-
-**📋 [View Solutions](Session4_Test_Solutions.md)**
-
-*Complete the test above, then check your answers and review the detailed explanations in the solutions.*
+   - A) User preference settings  
+   - B) Context quality and query complexity assessment  
+   - C) Available computational resources  
+   - D) Response length requirements  
 
 ---
 
 ---
 
-## **🎯 Session 4 Mastery Summary**
+## 📝 Multiple Choice Test - Session 4 (15 minutes)
+
+**1. What is the primary purpose of HyDE (Hypothetical Document Embeddings)?**
+   - A) To generate multiple query variations  
+   - B) To bridge the semantic gap between queries and documents  
+   - C) To compress document embeddings  
+   - D) To speed up retrieval performance  
+
+**2. When implementing query decomposition, which approach is most effective for complex questions?**
+   - A) Random sentence splitting  
+   - B) Breaking questions into answerable sub-questions using LLMs  
+   - C) Fixed-length query segments  
+   - D) Keyword-based fragmentation  
+
+**3. What is the key advantage of multi-query generation in RAG systems?**
+   - A) Reduced computational cost  
+   - B) Faster query processing  
+   - C) Comprehensive coverage of different query perspectives  
+   - D) Simplified system architecture  
+
+**4. In context window optimization, what factor is most important for maintaining quality?**
+   - A) Maximum token count  
+   - B) Processing speed  
+   - C) Balance between relevance and information density  
+   - D) Number of source documents  
+
+**5. Which prompt engineering technique is most effective for improving RAG response quality?**
+   - A) Longer prompts with more examples  
+   - B) Chain-of-thought reasoning with context integration  
+   - C) Simple template-based prompts  
+   - D) Keyword-heavy prompts  
+
+**6. What is the optimal strategy for handling ambiguous user queries?**
+   - A) Return an error message  
+   - B) Use the original query without modification  
+   - C) Generate clarifying questions and query variants  
+   - D) Pick the most common interpretation  
+
+**7. When should you prioritize context summarization over full context inclusion?**
+   - A) When computational resources are unlimited  
+   - B) When context exceeds token limits and relevance is mixed  
+   - C) Always, to reduce processing time  
+   - D) Never, full context is always better  
+
+**8. What is the most important factor in dynamic prompt adaptation?**
+   - A) User preference settings  
+   - B) Context quality and query complexity assessment  
+   - C) Available computational resources  
+   - D) Response length requirements  
+
+---
+
+**🗂️ View Test Solutions**: Complete answers in `Session4_Test_Solutions.md`
+
+---
+
+## 🎯 Session 4 Mastery Summary
 
 **What You've Accomplished:**
 You've transformed your RAG system from simple similarity search to intelligent query understanding by mastering:
@@ -1366,7 +1442,7 @@ You've transformed your RAG system from simple similarity search to intelligent 
 - **Session 4**: Intelligent query understanding and semantic gap bridging ✅
 - **Session 5 Next**: Measuring and validating these enhancements actually work
 
-## **🔗 Critical Bridge to Session 5: Proving Enhancement Value**
+## 🔗 Critical Bridge to Session 5: Proving Enhancement Value
 
 **The Essential Question:** Do your query enhancements actually improve RAG quality?
 
@@ -1378,7 +1454,7 @@ You've built sophisticated query intelligence - HyDE, expansion, decomposition, 
 - **What metrics** reveal true RAG performance beyond simple accuracy?
 - **How to set up** A/B tests that prove your enhancements work in production?
 
-### **Preparation for Evaluation Excellence**
+### Preparation for Evaluation Excellence
 
 1. **Document your baseline**: RAG performance before query enhancements
 2. **Create test query sets**: Challenging questions that test each enhancement technique
@@ -1388,3 +1464,16 @@ You've built sophisticated query intelligence - HyDE, expansion, decomposition, 
 **The Next Challenge:** Transform your sophisticated query enhancement system into a measurably superior RAG experience through rigorous evaluation and quality assessment.
 
 Ready to prove your enhancements deliver real value? Let's master RAG evaluation! 📊
+
+---
+
+## 🧭 Navigation
+
+**Previous: [Session 3 - Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)**
+
+**Optional Deep Dive Modules:**
+- **[🔬 Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)**
+
+**[📝 Test Your Knowledge: Session 4 Solutions](Session4_Test_Solutions.md)**
+
+**[Next: Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)**

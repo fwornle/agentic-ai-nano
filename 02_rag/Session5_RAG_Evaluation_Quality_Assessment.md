@@ -1,5 +1,30 @@
 # Session 5: RAG Evaluation & Quality Assessment - Proving Enhancement Value
 
+## 🎯 Learning Navigation Hub
+**Total Time Investment**: 90 minutes (Core) + 60 minutes (Optional)
+**Your Learning Path**: Choose your engagement level
+
+### Quick Start Guide
+- **👀 Observer (90 min)**: Read concepts + examine evaluation patterns
+- **🙋‍♂️ Participant (120 min)**: Follow exercises + implement basic evaluation systems
+- **🛠️ Implementer (150 min)**: Build comprehensive evaluation frameworks + deploy monitoring systems
+
+## 📋 SESSION OVERVIEW DASHBOARD
+
+### Core Learning Track (90 minutes) - REQUIRED
+| Section | Concept Load | Time | Skills |
+|---------|--------------|------|--------|
+| Multi-Dimensional Evaluation | 4 concepts | 25 min | Framework Design |
+| Quality Assessment | 3 concepts | 20 min | Automated Testing |
+| A/B Testing | 3 concepts | 20 min | Experimental Design |
+| Production Monitoring | 4 concepts | 25 min | Observability |
+
+### Optional Deep Dive Modules (Choose Your Adventure)
+- 🔬 **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** (30 min)
+- 🏭 **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** (30 min)
+
+## 🧭 CORE SECTION (Required - 90 minutes)
+
 ## 🎯 Learning Outcomes
 
 By the end of this session, you will be able to:
@@ -1311,65 +1336,75 @@ class RAGEvaluationEcosystem:
 
 ---
 
-## **🧪 Knowledge Check**
+## 📝 Multiple Choice Test - Session 5 (15 minutes)
 
-Test your understanding of RAG evaluation and quality assessment techniques with our comprehensive assessment.
+Test your understanding of RAG evaluation and quality assessment techniques.
 
-### **Multiple Choice Questions**
+### Question 1: Retrieval Quality Metrics
+**Which metric is most important for evaluating retrieval quality in RAG systems?**
 
-**1. Which metric is most important for evaluating retrieval quality in RAG systems?**
-   - A) Response time
-   - B) Recall@K (how many relevant documents are in top-K results)
-   - C) Token count
-   - D) Database size
+A) Response time  
+B) Recall@K (how many relevant documents are in top-K results)  
+C) Token count  
+D) Database size  
 
-**2. What does the RAGAS faithfulness metric measure?**
-   - A) How fast the system responds
-   - B) How well retrieved documents match the query
-   - C) How factually accurate the generated response is relative to retrieved context
-   - D) How many sources are cited
+### Question 2: RAGAS Faithfulness
+**What does the RAGAS faithfulness metric measure?**
 
-**3. In A/B testing for RAG systems, what is the most reliable success metric?**
-   - A) System latency
-   - B) Cost per query
-   - C) User satisfaction and task completion rates
-   - D) Number of retrieved documents
+A) How fast the system responds  
+B) How well retrieved documents match the query  
+C) How factually accurate the generated response is relative to retrieved context  
+D) How many sources are cited  
 
-**4. When should you use automated LLM-as-a-judge evaluation over human evaluation?**
-   - A) When you need perfect accuracy
-   - B) When you need to evaluate at scale with consistent criteria
-   - C) When the stakes are very high
-   - D) Never, human evaluation is always better
+### Question 3: A/B Testing Success
+**In A/B testing for RAG systems, what is the most reliable success metric?**
 
-**5. What is the primary purpose of regression testing in RAG evaluation?**
-   - A) To test system speed
-   - B) To ensure new changes don't decrease quality on established benchmarks
-   - C) To measure user satisfaction
-   - D) To optimize costs
+A) System latency  
+B) Cost per query  
+C) User satisfaction and task completion rates  
+D) Number of retrieved documents  
 
-**6. Which RAG component failure mode is hardest to detect with automated metrics?**
-   - A) Slow retrieval speed
-   - B) Empty results from vector search
-   - C) Subtle hallucinations in generated responses
-   - D) Database connection errors
+### Question 4: Automated vs Human Evaluation
+**When should you use automated LLM-as-a-judge evaluation over human evaluation?**
 
-**7. What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?**
-   - A) Faster evaluation
-   - B) Lower computational cost
-   - C) Captures different failure modes that single metrics might miss
-   - D) Easier to implement
+A) When you need perfect accuracy  
+B) When you need to evaluate at scale with consistent criteria  
+C) When the stakes are very high  
+D) Never, human evaluation is always better  
 
-**8. In production RAG monitoring, what threshold approach is most effective for quality alerts?**
-   - A) Fixed absolute thresholds for all metrics
-   - B) Adaptive thresholds based on historical performance patterns
-   - C) No thresholds, manual monitoring only
-   - D) Random threshold selection
+### Question 5: Regression Testing Purpose
+**What is the primary purpose of regression testing in RAG evaluation?**
 
----
+A) To test system speed  
+B) To ensure new changes don't decrease quality on established benchmarks  
+C) To measure user satisfaction  
+D) To optimize costs  
 
-**📋 [View Solutions](Session5_Test_Solutions.md)**
+### Question 6: Hardest Failure Mode
+**Which RAG component failure mode is hardest to detect with automated metrics?**
 
-*Complete the test above, then check your answers and review the detailed explanations in the solutions.*
+A) Slow retrieval speed  
+B) Empty results from vector search  
+C) Subtle hallucinations in generated responses  
+D) Database connection errors  
+
+### Question 7: Multi-Dimensional Evaluation
+**What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?**
+
+A) Faster evaluation  
+B) Lower computational cost  
+C) Captures different failure modes that single metrics might miss  
+D) Easier to implement  
+
+### Question 8: Production Monitoring
+**In production RAG monitoring, what threshold approach is most effective for quality alerts?**
+
+A) Fixed absolute thresholds for all metrics  
+B) Adaptive thresholds based on historical performance patterns  
+C) No thresholds, manual monitoring only  
+D) Random threshold selection  
+
+**🗂️ View Test Solutions**: Complete answers in `Session5_Test_Solutions.md`
 
 ---
 
@@ -1420,3 +1455,17 @@ The metrics and testing frameworks you've mastered will prove whether graph-base
 **The Next Challenge:** Transform your proven RAG system into a graph-intelligent architecture that understands relationships and enables complex reasoning.
 
 Ready to build RAG systems that reason about connections, not just similarities? Let's master GraphRAG! 🕸️
+
+---
+
+## 🧭 Navigation
+
+**Previous: [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)**
+
+**Optional Deep Dive Modules:**
+- **[🔬 Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)**
+- **[🏭 Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)**
+
+**[📝 Test Your Knowledge: Session 5 Solutions](Session5_Test_Solutions.md)**
+
+**[Next: Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)**
