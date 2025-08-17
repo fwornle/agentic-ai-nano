@@ -2796,6 +2796,5 @@ The entity extraction, relationship mapping, and graph traversal capabilities yo
 - 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Complex graph traversal and reasoning patterns
 - 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise graph database deployment
 
-**📝 Test Your Knowledge:** [Session 6 Solutions](Session6_Test_Solutions.md)
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)

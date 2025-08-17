@@ -1053,7 +1053,6 @@ You've built a complete RAG system from scratch, mastering document processing, 
 - 🔬 **[Module A: Production RAG Patterns](Session1_ModuleA_Production_Patterns.md)** (30 min) - Advanced patterns for production RAG systems
 - 🏭 **[Module B: Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)** (30 min) - Enterprise-scale deployment strategies
 
-**📝 Test Your Knowledge:** [Session 1 Solutions](Session1_Test_Solutions.md)
 
 **Next:** [Session 2 - Advanced Chunking Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
 
