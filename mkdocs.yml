@@ -165,6 +165,19 @@ nav:
     - Session 8 - MultiModal RAG: 02_rag/Session8_MultiModal_Advanced_RAG.md
     - Session 9 - Production RAG: 02_rag/Session9_Production_RAG_Enterprise_Integration.md
 
+  - MCP, ACP & A2A Communication:
+    - 03_mcp-acp-a2a/index.md
+    - Session 0 - Protocol Introduction: 03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md
+    - Session 1 - Basic MCP Server: 03_mcp-acp-a2a/Session1_Basic_MCP_Server.md
+    - Session 2 - FileSystem MCP: 03_mcp-acp-a2a/Session2_FileSystem_MCP_Server.md
+    - Session 3 - LangChain Integration: 03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md
+    - Session 4 - Production MCP: 03_mcp-acp-a2a/Session4_Production_MCP_Deployment.md
+    - Session 5 - Secure MCP: 03_mcp-acp-a2a/Session5_Secure_MCP_Server.md
+    - Session 6 - ACP Fundamentals: 03_mcp-acp-a2a/Session6_ACP_Fundamentals.md
+    - Session 7 - A2A Communication: 03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication.md
+    - Session 8 - Advanced Workflows: 03_mcp-acp-a2a/Session8_Advanced_Agent_Workflows.md
+    - Session 9 - Production Deployment: 03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md
+
 # Extra
 extra:
   status:
