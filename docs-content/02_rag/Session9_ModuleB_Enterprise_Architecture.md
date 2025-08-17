@@ -16,10 +16,10 @@
 
 ### 🗂️ Code Files
 
-- **Enterprise Integration**: `src/session9/enterprise_integration.py` - Enterprise system integration patterns
-- **Privacy & Compliance**: `src/session9/privacy_compliance.py` - Data privacy and regulatory compliance
-- **Production Orchestrator**: `src/session9/production_rag_orchestrator.py` - Enterprise RAG orchestration
-- **Monitoring Analytics**: `src/session9/monitoring_analytics.py` - Enterprise monitoring and governance
+- **Enterprise Integration**: [`src/session9/enterprise_integration.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/enterprise_integration.py) - Enterprise system integration patterns
+- **Privacy & Compliance**: [`src/session9/privacy_compliance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/privacy_compliance.py) - Data privacy and regulatory compliance
+- **Production Orchestrator**: [`src/session9/production_rag_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/production_rag_orchestrator.py) - Enterprise RAG orchestration
+- **Monitoring Analytics**: [`src/session9/monitoring_analytics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/monitoring_analytics.py) - Enterprise monitoring and governance
 
 ### 🚀 Quick Start
 

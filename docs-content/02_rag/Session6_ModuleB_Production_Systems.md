@@ -16,10 +16,10 @@
 
 ### 🗂️ Code Files
 
-- **Production GraphRAG**: `src/session6/production_graphrag.py` - Enterprise-ready GraphRAG implementation
-- **Neo4j Manager**: `src/session6/neo4j_manager.py` - Production graph database management
-- **CodeGraphRAG**: `src/session6/code_graphrag.py` - Specialized code analysis GraphRAG
-- **Demo Application**: `src/session6/demo_session6.py` - Production GraphRAG showcase
+- **Production GraphRAG**: [`src/session6/production_graphrag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/production_graphrag.py) - Enterprise-ready GraphRAG implementation
+- **Neo4j Manager**: [`src/session6/neo4j_manager.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/neo4j_manager.py) - Production graph database management
+- **CodeGraphRAG**: [`src/session6/code_graphrag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/code_graphrag.py) - Specialized code analysis GraphRAG
+- **Demo Application**: [`src/session6/demo_session6.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/demo_session6.py) - Production GraphRAG showcase
 
 ### 🚀 Quick Start
 

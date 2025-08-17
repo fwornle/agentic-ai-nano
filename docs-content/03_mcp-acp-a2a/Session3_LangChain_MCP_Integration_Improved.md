@@ -92,7 +92,7 @@ MAX_ITERATIONS=10
 Now let's examine our configuration structure:
 
 ```python
-# From: src/session3/config.py
+# From: [`src/session3/config.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/config.py)
 
 @dataclass
 class MCPServerConfig:
@@ -254,7 +254,7 @@ async def _health_monitor(self):
 Before building complex agents, let's create a simple MCP server to test with:
 
 ```python
-# From: src/session3/mcp_servers/weather_server.py
+# From: [`src/session3/mcp_servers/weather_server.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/mcp_servers/weather_server.py)
 
 @mcp.tool()
 def get_current_weather(city: str, units: str = "celsius") -> Dict:
@@ -853,7 +853,7 @@ async def plan_travel():
     pass
 ```
 
-**💡 Hint:** Check the [`Session3_LangChain_MCP_Integration-solution.md`](src/session3/Session3_solution.md) file for complete implementations.
+**💡 Hint:** Check the [`Session3_LangChain_MCP_Integration-solution.md`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/Session3_solution.md) file for complete implementations.
 
 ---
 
@@ -866,9 +866,9 @@ In Session 4, we'll focus on **Production MCP Deployment** including:
 - CI/CD pipelines for automated deployment
 
 **Files created in this session:**
-- `src/session3/config.py` - Configuration management
-- `src/session3/utils/mcp_manager.py` - Server management
-- `src/session3/mcp_servers/weather_server.py` - Sample MCP server
+- [`src/session3/config.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/config.py) - Configuration management
+- [`src/session3/utils/mcp_manager.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/utils/mcp_manager.py) - Server management
+- [`src/session3/mcp_servers/weather_server.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/mcp_servers/weather_server.py) - Sample MCP server
 - Additional agent and workflow implementations
 
 You now have the foundation for building production-ready AI agents that can intelligently coordinate multiple tools and handle complex, multi-step tasks! 🚀

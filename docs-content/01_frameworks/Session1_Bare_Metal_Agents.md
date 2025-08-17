@@ -26,7 +26,7 @@
 - ⚡ **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** (35 min) - Speed & efficiency patterns
 - 🔄 **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** (30 min) - Advanced memory systems
 
-**🗂️ Code Files**: All examples use files in `src/session1/`
+**🗂️ Code Files**: All examples use files in [`src/session1/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session1)
 
 ---
 
@@ -39,9 +39,9 @@
 #### Basic Agent Structure (8 minutes)
 Every agent needs these core components:
 
-![Agent Pattern Control](images/agent-pattern-control.png)
+![Agent Pattern Control](images/agent-core-components.png)
 
-🗂️ **File**: `src/session1/base_agent.py`
+🗂️ **File**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py)
 
 This is the foundation class for all agents. Think of it as the blueprint that defines what capabilities every agent should have. The memory list stores past interactions, while the tools dictionary holds functions the agent can call.
 
@@ -118,7 +118,7 @@ class AgentState:
 #### Simple Agent Implementation (10 minutes)
 Let's build a working agent from scratch:
 
-🗂️ **File**: `src/session1/base_agent.py` - See the `SimpleAgent` class
+🗂️ **File**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py) - See the `SimpleAgent` class
 
 ```python
 class SimpleAgent:
@@ -152,7 +152,7 @@ print(response)
 #### Basic Reasoning Loop (8 minutes)
 Implementing the core agent thinking process:
 
-🗂️ **File**: `src/session1/react_agent.py` - See the reasoning loop implementation
+🗂️ **File**: [`src/session1/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/react_agent.py) - See the reasoning loop implementation
 
 This method implements the ReAct (Reasoning + Acting) pattern, a fundamental pattern where agents think, act, and observe in a loop. Each iteration involves analyzing the situation, deciding on an action, executing it, and observing the results.
 
@@ -200,7 +200,7 @@ def safe_agent_execution(self, user_input: str) -> str:
 ```
 
 #### Testing Your Agent (3 minutes)
-🗂️ **File**: `src/session1/test_agents.py` - Complete test suite
+🗂️ **File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
 
 ```python
 def test_simple_agent():
@@ -235,7 +235,7 @@ Building tools that agents can use:
 
 ![Agent Pattern Tool Integration](images/agent-pattern-tool-integration.png)
 
-🗂️ **File**: `src/session1/tools.py` - Complete tool implementations
+🗂️ **File**: [`src/session1/tools.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tools.py) - Complete tool implementations
 
 The SimpleTool base class provides a consistent interface for all tools. The name is used by the agent to identify the tool, while the description helps the agent decide when to use it.
 
@@ -276,7 +276,7 @@ print(result)  # "Calculation result: 14"
 #### Tool Calling Mechanisms (6 minutes)
 How agents decide when and how to use tools:
 
-🗂️ **File**: `src/session1/tool_use_agent.py` - See the `ToolUseAgent` class
+🗂️ **File**: [`src/session1/tool_use_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tool_use_agent.py) - See the `ToolUseAgent` class
 
 ```python
 class ToolUseAgent:
@@ -353,7 +353,7 @@ def test_tool_integration():
 **Learning Mode**: Production Readiness
 
 #### Unit Testing Approaches (4 minutes)
-🗂️ **File**: `src/session1/test_agents.py` - Complete test suite
+🗂️ **File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
 
 ```python
 import unittest
@@ -400,7 +400,7 @@ def debug_agent_issues(agent, user_input):
 ```
 
 #### Running Everything (3 minutes)
-🗂️ **File**: `src/session1/demo_runner.py` - Complete demonstration
+🗂️ **File**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py) - Complete demonstration
 
 ```python
 def run_agent_demo():
@@ -431,7 +431,7 @@ if __name__ == "__main__":
 ## ✅ Core Section Validation (5 minutes)
 
 ### Quick Implementation Exercise
-🗂️ **Files to Run**: `src/session1/demo_runner.py`
+🗂️ **Files to Run**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py)
 
 ```bash
 cd src/session1

@@ -25,7 +25,7 @@
 - 🔬 **[Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)** (45 min) - Sophisticated workflow patterns & dynamic team formation
 - 🏭 **[Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)** (40 min) - Production team architectures & custom tools
 
-**🗂️ Code Files**: All examples use files in `src/session4/`
+**🗂️ Code Files**: All examples use files in [`src/session4/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session4)
 **🚀 Quick Start**: Run `cd src/session4 && python crewai_basics.py` to see CrewAI teams in action
 
 ---
@@ -41,7 +41,7 @@ CrewAI models agent systems like human teams with specialized roles:
 
 ![CrewAI Overview](images/crewai-overview.png)
 
-🗂️ **File**: `src/session4/crewai_basics.py` - Core team setup
+🗂️ **File**: [`src/session4/crewai_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/crewai_basics.py) - Core team setup
 
 ```python
 from crewai import Agent, Task, Crew, Process
@@ -132,7 +132,7 @@ def create_hierarchical_team():
 **Learning Mode**: Hands-on Implementation
 
 #### Agent Role Creation (8 minutes)
-🗂️ **File**: `src/session4/multi_agent_crew.py` - Complete team implementations
+🗂️ **File**: [`src/session4/multi_agent_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/multi_agent_crew.py) - Complete team implementations
 
 ```python
 def create_research_crew():
@@ -260,7 +260,7 @@ result = research_crew.kickoff()
 #### Basic Testing (5 minutes)
 Validating crew functionality:
 
-🗂️ **File**: `src/session4/test_crews.py` - Testing framework
+🗂️ **File**: [`src/session4/test_crews.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/test_crews.py) - Testing framework
 
 ```python
 def test_crew_creation():
@@ -296,7 +296,7 @@ Managing task dependencies and handoffs:
 
 ![CrewAI Workflows](images/crewai-workflows.png)
 
-🗂️ **File**: `src/session4/hierarchical_crew.py` - Advanced orchestration
+🗂️ **File**: [`src/session4/hierarchical_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/hierarchical_crew.py) - Advanced orchestration
 
 ```python
 def create_hierarchical_workflow():
@@ -430,7 +430,7 @@ task_with_context = Task(
 #### 5.76x Performance Improvements (4 minutes)
 CrewAI's performance enhancements:
 
-🗂️ **File**: `src/session4/performance_optimization.py` - Performance patterns
+🗂️ **File**: [`src/session4/performance_optimization.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/performance_optimization.py) - Performance patterns
 
 ```python
 def create_optimized_crew():
@@ -512,8 +512,8 @@ optimization_tips = {
 
 ### Quick Implementation Exercise
 🗂️ **Exercise Files**: 
-- `src/session4/crewai_basics.py` - Basic crew setup
-- `src/session4/multi_agent_crew.py` - Complete team example
+- [`src/session4/crewai_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/crewai_basics.py) - Basic crew setup
+- [`src/session4/multi_agent_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/multi_agent_crew.py) - Complete team example
 
 ```bash
 # Try the examples:

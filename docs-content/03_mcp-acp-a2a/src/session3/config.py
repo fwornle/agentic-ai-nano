@@ -45,19 +45,19 @@ class Config:
         MCPServerConfig(
             name="weather",
             command="python",
-            args=["src/session3/mcp_servers/weather_server.py"],
+            args=["https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/mcp_servers/weather_server.py"],
             description="Weather information and forecasts"
         ),
         MCPServerConfig(
             name="filesystem", 
             command="python",
-            args=["src/session3/mcp_servers/filesystem_server.py"],
+            args=["https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/mcp_servers/filesystem_server.py"],
             description="Secure file system operations"
         ),
         MCPServerConfig(
             name="database",
             command="python", 
-            args=["src/session3/mcp_servers/database_server.py"],
+            args=["https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/mcp_servers/database_server.py"],
             description="Database query and manipulation"
         )
     ]

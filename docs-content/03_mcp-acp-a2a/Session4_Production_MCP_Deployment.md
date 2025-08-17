@@ -1223,7 +1223,7 @@ async def execute_tool(body: Dict[str, Any]) -> Dict[str, Any]:
 - **Cost optimization**: Pay only for execution time
 - **Auto-scaling**: Scales to zero when not in use
 
-*For complete implementation details, see [`src/session4/lambda/lambda_handler.py`](src/session4/lambda/lambda_handler.py)*
+*For complete implementation details, see [`src/session4/lambda/lambda_handler.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/lambda/lambda_handler.py)*
 
 ### Step 3.2: Lambda Container Image
 
@@ -1923,7 +1923,7 @@ if __name__ == "__main__":
 - **check_interval**: Health check frequency in seconds
 - **metrics_port**: Prometheus metrics exposure port
 
-*For complete implementation details, see [`src/session4/monitoring/monitor.py`](src/session4/monitoring/monitor.py)*
+*For complete implementation details, see [`src/session4/monitoring/monitor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/monitoring/monitor.py)*
 
 ### Step 4.2: Grafana Dashboard Configuration
 

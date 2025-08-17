@@ -16,10 +16,10 @@
 
 ### 🗂️ Code Files
 
-- **Production Monitor**: `src/session5/production_monitor.py` - Real-time monitoring system
-- **Alerting System**: `src/session5/alerting_system.py` - Enterprise alerting and escalation
-- **A/B Testing**: `src/session5/ab_testing.py` - Performance comparison tools
-- **Demo Application**: `src/session5/demo_evaluation_system.py` - Complete monitoring showcase
+- **Production Monitor**: [`src/session5/production_monitor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/production_monitor.py) - Real-time monitoring system
+- **Alerting System**: [`src/session5/alerting_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/alerting_system.py) - Enterprise alerting and escalation
+- **A/B Testing**: [`src/session5/ab_testing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/ab_testing.py) - Performance comparison tools
+- **Demo Application**: [`src/session5/demo_evaluation_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/demo_evaluation_system.py) - Complete monitoring showcase
 
 ### 🚀 Quick Start
 

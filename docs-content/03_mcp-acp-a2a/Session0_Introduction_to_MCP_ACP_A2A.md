@@ -186,7 +186,7 @@ Now we implement the core ACP functionality:
         return peers
 ```
 
-Complete implementation available in `src/session0/acp_agent_example.py`
+Complete implementation available in [`src/session0/acp_agent_example.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session0/acp_agent_example.py)
 
 ### ACP vs Other Protocols
 
@@ -482,7 +482,7 @@ Finally, we use MCP tools to generate the final itinerary:
         return itinerary
 ```
 
-Complete implementation available in `src/session0/travel_planner_example.py`
+Complete implementation available in [`src/session0/travel_planner_example.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session0/travel_planner_example.py)
 
 ### Benefits of the Integrated Approach
 

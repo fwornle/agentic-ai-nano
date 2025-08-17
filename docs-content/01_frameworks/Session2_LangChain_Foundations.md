@@ -27,7 +27,7 @@
 - 🔧 **[Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)** (45 min) - Building specialized tools
 - 📊 **[Module D: Performance & Monitoring](Session2_ModuleD_Performance_Monitoring.md)** (50 min) - Optimization & observability
 
-**🗂️ Code Files**: All examples use files in `src/session2/`
+**🗂️ Code Files**: All examples use files in [`src/session2/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session2)
 **🚀 Quick Start**: Run `cd src/session2 && python langchain_basics.py` to see LangChain in action
 
 ---
@@ -43,7 +43,7 @@ LangChain has four essential building blocks that work together:
 
 ![LangChain Overview](images/langchain-overview.svg)
 
-🗂️ **File**: `src/session2/langchain_basics.py` - Core setup and imports
+🗂️ **File**: [`src/session2/langchain_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_basics.py) - Core setup and imports
 
 **Setup Requirements**: Install LangChain with `pip install langchain openai`. You'll also need to set your API key with `export OPENAI_API_KEY="your-key-here"`.
 
@@ -64,7 +64,7 @@ from langchain.callbacks import StdOutCallbackHandler
 #### LLM Setup Patterns (8 minutes)
 Quick LLM initialization for different providers:
 
-🗂️ **File**: `src/session2/llm_setup.py` - LLM factory pattern implementation
+🗂️ **File**: [`src/session2/llm_setup.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/llm_setup.py) - LLM factory pattern implementation
 
 This factory pattern helps you switch between different LLM providers easily. The temperature parameter controls randomness (0=deterministic, 1=creative). Make sure you have the appropriate API keys set in your environment variables.
 
@@ -215,7 +215,7 @@ except Exception as e:
 #### Basic Tool Creation (8 minutes)
 Three methods for creating tools:
 
-🗂️ **File**: `src/session2/langchain_tools.py` - Complete tool implementations
+🗂️ **File**: [`src/session2/langchain_tools.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_tools.py) - Complete tool implementations
 
 LangChain provides multiple ways to create tools for agents. Each method has its use case - the Tool class is most explicit and configurable, the @tool decorator is cleanest for simple tools, and quick function tools are good for prototyping.
 
@@ -434,8 +434,8 @@ research_agent = create_context_aware_agent(
 Build a simple LangChain agent to verify your understanding:
 
 🗂️ **Exercise Files**: 
-- `src/session2/langchain_basics.py` - Complete working examples
-- `src/session2/langchain_tool_use.py` - Agent with tools implementation
+- [`src/session2/langchain_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_basics.py) - Complete working examples
+- [`src/session2/langchain_tool_use.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_tool_use.py) - Agent with tools implementation
 
 ```bash
 # Try the examples:

@@ -23,7 +23,7 @@ By the end of this module, you will:
 
 ### Deterministic Workflow Patterns
 
-🗂️ **File**: `src/session4/advanced_flows.py` - CrewAI Flow implementations
+🗂️ **File**: [`src/session4/advanced_flows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/advanced_flows.py) - CrewAI Flow implementations
 
 CrewAI Flows represent a paradigm shift from reactive coordination to deterministic orchestration, essential for enterprise systems.
 
@@ -548,7 +548,7 @@ Research execution extracts task parameters for focused processing. Focus area g
 
 ### Adaptive Team Assembly
 
-🗂️ **File**: `src/session4/dynamic_teams.py` - Dynamic team formation systems
+🗂️ **File**: [`src/session4/dynamic_teams.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/dynamic_teams.py) - Dynamic team formation systems
 
 ```python
 from typing import Dict, List, Any, Optional, Tuple
@@ -914,6 +914,6 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination:
 ---
 
 **🗂️ Source Files for Module A:**
-- `src/session4/advanced_flows.py` - CrewAI Flow implementations
-- `src/session4/dynamic_teams.py` - Dynamic team formation systems
-- `src/session4/delegation_patterns.py` - Sophisticated delegation strategies
+- [`src/session4/advanced_flows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/advanced_flows.py) - CrewAI Flow implementations
+- [`src/session4/dynamic_teams.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/dynamic_teams.py) - Dynamic team formation systems
+- [`src/session4/delegation_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/delegation_patterns.py) - Sophisticated delegation strategies

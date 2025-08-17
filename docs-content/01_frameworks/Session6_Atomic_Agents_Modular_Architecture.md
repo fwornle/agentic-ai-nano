@@ -25,7 +25,7 @@
 - 🔬 **[Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)** (35 min) - Sophisticated pipeline orchestration & dynamic assembly
 - 🏭 **[Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)** (30 min) - Production-scale atomic systems & multi-tenant architectures
 
-**🗂️ Code Files**: All examples use files in `src/session6/`
+**🗂️ Code Files**: All examples use files in [`src/session6/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session6)
 **🚀 Quick Start**: Run `cd src/session6 && python example_usage.py` to see atomic agents in action
 
 ---
@@ -42,7 +42,7 @@ Atomic Agents emphasize composable, lightweight components:
 ![Atomic Agent Architecture](images/atomic-agent.png)
 *This diagram illustrates the core atomic agent structure with individual, focused components that can be composed together. Each agent is designed with single responsibility and minimal dependencies, making them lightweight and highly reusable building blocks.*
 
-🗂️ **File**: `src/session6/atomic_foundation.py` - Core atomic patterns
+🗂️ **File**: [`src/session6/atomic_foundation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/atomic_foundation.py) - Core atomic patterns
 
 ```python
 from atomic_agents.agents import BaseAgent
@@ -76,7 +76,7 @@ Building systems through component assembly:
 ![Atomic Agents System](images/atomic-agents.png)
 *This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle.*
 
-🗂️ **File**: `src/session6/composition_engine.py` - Component composition patterns
+🗂️ **File**: [`src/session6/composition_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/composition_engine.py) - Component composition patterns
 
 ```python
 from atomic_agents.lib.components import ToolsComponent, MemoryComponent
@@ -148,7 +148,7 @@ def create_specialized_agent(role: str, tools: list = None):
 #### Component Creation (8 minutes)
 Building reusable atomic components:
 
-🗂️ **File**: `src/session6/text_agent.py` - Specialized text processing agent
+🗂️ **File**: [`src/session6/text_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/text_agent.py) - Specialized text processing agent
 
 ```python
 from atomic_agents.agents import BaseAgent
@@ -190,7 +190,7 @@ summary = text_agent.summarize("Long article text here...")
 #### Interface Design (6 minutes)
 Creating clean, composable interfaces:
 
-🗂️ **File**: `src/session6/data_agent.py` - Data processing specialist
+🗂️ **File**: [`src/session6/data_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/data_agent.py) - Data processing specialist
 
 ```python
 from abc import ABC, abstractmethod
@@ -236,7 +236,7 @@ class AtomicDataAgent(BaseAgent, DataProcessor):
 #### Basic Composition (6 minutes)
 Combining components into systems:
 
-🗂️ **File**: `src/session6/coordinator_agent.py` - Component coordination
+🗂️ **File**: [`src/session6/coordinator_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/coordinator_agent.py) - Component coordination
 
 ```python
 class AtomicCoordinator:
@@ -289,7 +289,7 @@ result = coordinator.process_mixed_content(
 #### Testing Strategies (5 minutes)
 Validating atomic components:
 
-🗂️ **File**: `src/session6/test_client.py` - Testing atomic systems
+🗂️ **File**: [`src/session6/test_client.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/test_client.py) - Testing atomic systems
 
 ```python
 def test_atomic_components():
@@ -342,7 +342,7 @@ Assembling components into complete systems:
 
 *The Atomic Assembler helps you integrate Atomic Agents.*
 
-🗂️ **File**: `src/session6/production_orchestrator.py` - Production integration patterns
+🗂️ **File**: [`src/session6/production_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/production_orchestrator.py) - Production integration patterns
 
 ```python
 from typing import Dict, List, Any, Optional
@@ -497,7 +497,7 @@ def test_system_integration():
 **Learning Mode**: Production Readiness
 
 #### Deployment Patterns (3 minutes)
-🗂️ **File**: `src/session6/bootstrap.py` - Deployment configuration
+🗂️ **File**: [`src/session6/bootstrap.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/bootstrap.py) - Deployment configuration
 
 ```python
 def deploy_atomic_system():

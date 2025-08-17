@@ -314,7 +314,7 @@ This segment handles connection verification and tool discovery:
         return self.adapters.get(server_name)
 ```
 
-**Complete implementation:** See `src/session3/complete_examples/mcp_manager_complete.py` for the full implementation with advanced features including:
+**Complete implementation:** See [`src/session3/complete_examples/mcp_manager_complete.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/complete_examples/mcp_manager_complete.py) for the full implementation with advanced features including:
 - Continuous health monitoring
 - Automatic server restart
 - Context manager for resource cleanup
@@ -767,7 +767,7 @@ This segment creates the agent and configures the executor:
 - **Structured reasoning**: ReAct format ensures logical thinking
 - **Flexible execution**: Configurable iterations and error handling
 
-**Complete implementation:** See `src/session3/complete_examples/multi_tool_agent_complete.py` for the full implementation with advanced features including:
+**Complete implementation:** See [`src/session3/complete_examples/multi_tool_agent_complete.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/complete_examples/multi_tool_agent_complete.py) for the full implementation with advanced features including:
 - Tool collection from multiple servers
 - Enhanced tool descriptions with use case context
 - Conversation memory and history management
@@ -1098,7 +1098,7 @@ This segment provides text processing and workflow execution methods:
             return {"success": False, "query": query, "error": str(e), "report": f"Research workflow failed: {str(e)}"}
 ```
 
-**Complete implementation:** See `src/session3/complete_examples/research_workflow_complete.py` for the full implementation with:
+**Complete implementation:** See [`src/session3/complete_examples/research_workflow_complete.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session3/complete_examples/research_workflow_complete.py) for the full implementation with:
 - Advanced error recovery and retry logic
 - Parallel research execution for better performance
 - Rich console interface for interactive use

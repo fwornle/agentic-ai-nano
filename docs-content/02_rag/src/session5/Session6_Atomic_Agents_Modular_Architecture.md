@@ -45,7 +45,7 @@ Think of atomic agents like LEGO blocks:
 Let's start by defining the foundation of an atomic agent:
 
 ```python
-# From src/session6/atomic_foundation.py
+# From [`src/session6/atomic_foundation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/atomic_foundation.py)
 from typing import Any, Dict, List, Optional, TypeVar, Generic
 from pydantic import BaseModel, Field, validator
 from abc import ABC, abstractmethod
@@ -147,7 +147,7 @@ class ExecutionError(AtomicError):
 Let's build our first atomic agent that demonstrates the core principles:
 
 ```python
-# From src/session6/text_processor_agent.py
+# From [`src/session6/text_processor_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/text_processor_agent.py)
 from typing import List
 import re
 from dataclasses import dataclass
@@ -292,7 +292,7 @@ This processing logic demonstrates the atomic principle of focused functionality
 Context providers supply external dependencies and configuration to atomic agents:
 
 ```python
-# From src/session6/context_providers.py
+# From [`src/session6/context_providers.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/context_providers.py)
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 
@@ -360,7 +360,7 @@ Context providers follow the dependency injection pattern, allowing atomic agent
 The power of atomic agents emerges through composition. Let's build a pipeline that chains multiple atomic agents:
 
 ```python
-# From src/session6/composition_engine.py
+# From [`src/session6/composition_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/composition_engine.py)
 from typing import List, Type, Any
 import asyncio
 
@@ -506,7 +506,7 @@ class AtomicParallelExecutor:
 Atomic agents integrate seamlessly with command-line interfaces:
 
 ```python
-# From src/session6/atomic_cli.py
+# From [`src/session6/atomic_cli.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/atomic_cli.py)
 import click
 import asyncio
 import json
@@ -636,7 +636,7 @@ This CLI integration shows how atomic agents can be exposed through command-line
 Production atomic systems require sophisticated orchestration and monitoring:
 
 ```python
-# From src/session6/production_orchestrator.py
+# From [`src/session6/production_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/production_orchestrator.py)
 from typing import Dict, List, Any, Optional
 import asyncio
 import logging
