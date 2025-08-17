@@ -1311,109 +1311,51 @@ class ComprehensiveQueryEnhancer:
 
 ---
 
-## **🧪 Knowledge Check**
-
-Test your understanding of query enhancement and context augmentation techniques with our comprehensive assessment.
-
-### **Multiple Choice Questions**
-
-**1. What is the primary purpose of HyDE (Hypothetical Document Embeddings)?**
-   - A) To generate multiple query variations  
-   - B) To bridge the semantic gap between queries and documents  
-   - C) To compress document embeddings  
-   - D) To speed up retrieval performance  
-
-**2. When implementing query decomposition, which approach is most effective for complex questions?**
-   - A) Random sentence splitting  
-   - B) Breaking questions into answerable sub-questions using LLMs  
-   - C) Fixed-length query segments  
-   - D) Keyword-based fragmentation  
-
-**3. What is the key advantage of multi-query generation in RAG systems?**
-   - A) Reduced computational cost  
-   - B) Faster query processing  
-   - C) Comprehensive coverage of different query perspectives  
-   - D) Simplified system architecture  
-
-**4. In context window optimization, what factor is most important for maintaining quality?**
-   - A) Maximum token count  
-   - B) Processing speed  
-   - C) Balance between relevance and information density  
-   - D) Number of source documents  
-
-**5. Which prompt engineering technique is most effective for improving RAG response quality?**
-   - A) Longer prompts with more examples  
-   - B) Chain-of-thought reasoning with context integration  
-   - C) Simple template-based prompts  
-   - D) Keyword-heavy prompts  
-
-**6. What is the optimal strategy for handling ambiguous user queries?**
-   - A) Return an error message  
-   - B) Use the original query without modification  
-   - C) Generate clarifying questions and query variants  
-   - D) Pick the most common interpretation  
-
-**7. When should you prioritize context summarization over full context inclusion?**
-   - A) When computational resources are unlimited  
-   - B) When context exceeds token limits and relevance is mixed  
-   - C) Always, to reduce processing time  
-   - D) Never, full context is always better  
-
-**8. What is the most important factor in dynamic prompt adaptation?**
-   - A) User preference settings  
-   - B) Context quality and query complexity assessment  
-   - C) Available computational resources  
-   - D) Response length requirements  
-
----
-
----
-
 ## 📝 Multiple Choice Test - Session 4 (15 minutes)
 
-**1. What is the primary purpose of HyDE (Hypothetical Document Embeddings)?**
+**1. What is the primary purpose of HyDE (Hypothetical Document Embeddings)?**  
    - A) To generate multiple query variations  
    - B) To bridge the semantic gap between queries and documents  
    - C) To compress document embeddings  
    - D) To speed up retrieval performance  
 
-**2. When implementing query decomposition, which approach is most effective for complex questions?**
+**2. When implementing query decomposition, which approach is most effective for complex questions?**  
    - A) Random sentence splitting  
    - B) Breaking questions into answerable sub-questions using LLMs  
    - C) Fixed-length query segments  
    - D) Keyword-based fragmentation  
 
-**3. What is the key advantage of multi-query generation in RAG systems?**
+**3. What is the key advantage of multi-query generation in RAG systems?**  
    - A) Reduced computational cost  
    - B) Faster query processing  
    - C) Comprehensive coverage of different query perspectives  
    - D) Simplified system architecture  
 
-**4. In context window optimization, what factor is most important for maintaining quality?**
+**4. In context window optimization, what factor is most important for maintaining quality?**  
    - A) Maximum token count  
    - B) Processing speed  
    - C) Balance between relevance and information density  
    - D) Number of source documents  
 
-**5. Which prompt engineering technique is most effective for improving RAG response quality?**
+**5. Which prompt engineering technique is most effective for improving RAG response quality?**  
    - A) Longer prompts with more examples  
    - B) Chain-of-thought reasoning with context integration  
    - C) Simple template-based prompts  
    - D) Keyword-heavy prompts  
 
-**6. What is the optimal strategy for handling ambiguous user queries?**
+**6. What is the optimal strategy for handling ambiguous user queries?**  
    - A) Return an error message  
    - B) Use the original query without modification  
    - C) Generate clarifying questions and query variants  
    - D) Pick the most common interpretation  
 
-**7. When should you prioritize context summarization over full context inclusion?**
+**7. When should you prioritize context summarization over full context inclusion?**  
    - A) When computational resources are unlimited  
    - B) When context exceeds token limits and relevance is mixed  
    - C) Always, to reduce processing time  
    - D) Never, full context is always better  
 
-**8. What is the most important factor in dynamic prompt adaptation?**
+**8. What is the most important factor in dynamic prompt adaptation?**  
    - A) User preference settings  
    - B) Context quality and query complexity assessment  
    - C) Available computational resources  

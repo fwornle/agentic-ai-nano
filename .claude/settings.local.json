@@ -43,7 +43,8 @@
       "Bash(markdownlint:*)",
       "Bash(source:*)",
       "Bash(mkdocs serve:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "WebSearch"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"

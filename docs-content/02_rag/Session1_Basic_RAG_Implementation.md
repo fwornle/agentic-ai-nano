@@ -913,127 +913,45 @@ Create a specialized RAG system for a domain of your choice (e.g., cooking, tech
 
 ---
 
-## **🧪 Knowledge Check**
 
-Test your understanding of RAG implementation fundamentals with our comprehensive assessment.
+## 📝 Multiple Choice Test - Session 1
 
-### **Multiple Choice Questions**
+Test your understanding of RAG implementation fundamentals:
 
-**1. What is the primary advantage of using metadata tracking in document loading?**
-
-- A) Reduces memory usage during processing  
-- B) Enables source attribution and filtering capabilities  
-- C) Improves embedding quality  
-- D) Speeds up chunking operations  
-
-**2. Which chunking approach is most likely to preserve semantic coherence in documents?**
-
-- A) Fixed character-length splitting  
-- B) Random boundary splitting  
-- C) Semantic paragraph-based splitting  
-- D) Token-count only splitting  
-
-**3. In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?**
-
-- A) Speeds up similarity searches  
-- B) Enables persistent storage between sessions  
-- C) Improves embedding accuracy  
-- D) Reduces memory consumption  
-
-**4. What is the primary benefit of including confidence scores in RAG responses?**
-
-- A) Improves LLM generation quality  
-- B) Reduces retrieval time  
-- C) Provides transparency about answer reliability  
-- D) Enables faster document indexing  
-
-**5. Why does the RAG system separate retrieval and generation into distinct phases?**
-
-- A) To reduce computational costs  
-- B) To enable modular optimization and debugging  
-- C) To support multiple languages  
-- D) To prevent embedding conflicts  
-
-**6. What is the main advantage of the structured response format (answer, sources, confidence, num_sources)?**
-
-- A) Reduces token usage  
-- B) Improves embedding quality  
-- C) Enables comprehensive result evaluation and transparency  
-- D) Speeds up query processing  
-
-**7. Why is using tiktoken for token counting important in RAG systems?**
-
-- A) It improves semantic understanding  
-- B) It ensures chunks fit within LLM context limits  
-- C) It speeds up embedding generation  
-- D) It reduces storage requirements  
-
-**8. What is the best practice for handling failed document loads in a production RAG system?**
-
-- A) Stop the entire indexing process  
-- B) Skip failed documents and continue with others  
-- C) Retry indefinitely until success  
-- D) Use placeholder content for failed loads  
-
----
-
-## 📝 Multiple Choice Test - Session 1 (15 minutes)
-
-**1. What is the primary advantage of using metadata tracking in document loading?**
+**Question 1:** What is the primary advantage of using metadata tracking in document loading?
 
 A) Reduces memory usage during processing  
 B) Enables source attribution and filtering capabilities  
 C) Improves embedding quality  
 D) Speeds up chunking operations  
 
-**2. Which chunking approach is most likely to preserve semantic coherence in documents?**
+**Question 2:** Which chunking approach is most likely to preserve semantic coherence in documents?
 
 A) Fixed character-length splitting  
 B) Random boundary splitting  
 C) Semantic paragraph-based splitting  
 D) Token-count only splitting  
 
-**3. In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?**
+**Question 3:** In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?
 
 A) Speeds up similarity searches  
 B) Enables persistent storage between sessions  
 C) Improves embedding accuracy  
 D) Reduces memory consumption  
 
-**4. What is the primary benefit of including confidence scores in RAG responses?**
+**Question 4:** What is the primary benefit of including confidence scores in RAG responses?
 
 A) Improves LLM generation quality  
 B) Reduces retrieval time  
 C) Provides transparency about answer reliability  
 D) Enables faster document indexing  
 
-**5. Why does the RAG system separate retrieval and generation into distinct phases?**
+**Question 5:** Why does the RAG system separate retrieval and generation into distinct phases?
 
 A) To reduce computational costs  
 B) To enable modular optimization and debugging  
 C) To support multiple languages  
-D) To prevent embedding conflicts  
-
-**6. What is the main advantage of the structured response format (answer, sources, confidence, num_sources)?**
-
-A) Reduces token usage  
-B) Improves embedding quality  
-C) Enables comprehensive result evaluation and transparency  
-D) Speeds up query processing  
-
-**7. Why is using tiktoken for token counting important in RAG systems?**
-
-A) It improves semantic understanding  
-B) It ensures chunks fit within LLM context limits  
-C) It speeds up embedding generation  
-D) It reduces storage requirements  
-
-**8. What is the best practice for handling failed document loads in a production RAG system?**
-
-A) Stop the entire indexing process  
-B) Skip failed documents and continue with others  
-C) Retry indefinitely until success  
-D) Use placeholder content for failed loads  
+D) To prevent embedding conflicts    
 
 ---
 

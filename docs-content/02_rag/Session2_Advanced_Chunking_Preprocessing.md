@@ -1323,109 +1323,51 @@ class CustomDocumentProcessor(AdvancedProcessingPipeline):
 
 ---
 
-## **🧪 Knowledge Check**
-
-Test your understanding of advanced chunking and preprocessing techniques with our comprehensive assessment.
-
-### **Multiple Choice Questions**
-
-**1. What is the primary benefit of detecting content types (headings, tables, code) during document analysis?**
-   - A) Reduces processing time  
-   - B) Enables structure-aware chunking that preserves meaning  
-   - C) Improves embedding quality  
-   - D) Reduces storage requirements  
-
-**2. In hierarchical chunking, why is it important to track element hierarchy levels?**
-   - A) To improve processing speed  
-   - B) To reduce memory usage  
-   - C) To preserve document structure and create meaningful chunk boundaries  
-   - D) To simplify the codebase  
-
-**3. What is the main advantage of extracting entities, keywords, and topics during preprocessing?**
-   - A) Reduces chunk size  
-   - B) Improves computational efficiency  
-   - C) Enables more precise retrieval through enriched context  
-   - D) Simplifies the chunking process  
-
-**4. Why do tables require specialized processing in RAG systems?**
-   - A) Tables contain more text than paragraphs  
-   - B) Tables have structured relationships that are lost in naive chunking  
-   - C) Tables are always larger than the chunk size  
-   - D) Tables use different encoding formats  
-
-**5. When processing documents with images, what is the best practice for RAG systems?**
-   - A) Ignore images completely  
-   - B) Store images as binary data in chunks  
-   - C) Replace image references with descriptive text  
-   - D) Create separate chunks for each image  
-
-**6. Which metric is most important for measuring chunk coherence in hierarchical chunking?**
-   - A) Average chunk size  
-   - B) Processing speed  
-   - C) Topic consistency between related chunks  
-   - D) Number of chunks created  
-
-**7. What is the optimal overlap ratio for hierarchical chunks?**
-   - A) 0% - no overlap needed  
-   - B) 50% - maximum context preservation  
-   - C) 10-20% - balanced context and efficiency  
-   - D) 100% - complete duplication  
-
-**8. Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?**
-   - A) To reduce computational costs  
-   - B) To select the most appropriate processing approach for the content type  
-   - C) To determine the number of chunks to create  
-   - D) To set the embedding model parameters  
-
----
-
----
-
 ## 📝 Multiple Choice Test - Session 2 (15 minutes)
 
-**1. What is the primary benefit of detecting content types (headings, tables, code) during document analysis?**
+**1. What is the primary benefit of detecting content types (headings, tables, code) during document analysis?**  
    - A) Reduces processing time  
    - B) Enables structure-aware chunking that preserves meaning  
    - C) Improves embedding quality  
    - D) Reduces storage requirements  
 
-**2. In hierarchical chunking, why is it important to track element hierarchy levels?**
+**2. In hierarchical chunking, why is it important to track element hierarchy levels?**  
    - A) To improve processing speed  
    - B) To reduce memory usage  
    - C) To preserve document structure and create meaningful chunk boundaries  
    - D) To simplify the codebase  
 
-**3. What is the main advantage of extracting entities, keywords, and topics during preprocessing?**
+**3. What is the main advantage of extracting entities, keywords, and topics during preprocessing?**  
    - A) Reduces chunk size  
    - B) Improves computational efficiency  
    - C) Enables more precise retrieval through enriched context  
    - D) Simplifies the chunking process  
 
-**4. Why do tables require specialized processing in RAG systems?**
+**4. Why do tables require specialized processing in RAG systems?**  
    - A) Tables contain more text than paragraphs  
    - B) Tables have structured relationships that are lost in naive chunking  
    - C) Tables are always larger than the chunk size  
    - D) Tables use different encoding formats  
 
-**5. When processing documents with images, what is the best practice for RAG systems?**
+**5. When processing documents with images, what is the best practice for RAG systems?**  
    - A) Ignore images completely  
    - B) Store images as binary data in chunks  
    - C) Replace image references with descriptive text  
    - D) Create separate chunks for each image  
 
-**6. Which metric is most important for measuring chunk coherence in hierarchical chunking?**
+**6. Which metric is most important for measuring chunk coherence in hierarchical chunking?**  
    - A) Average chunk size  
    - B) Processing speed  
    - C) Topic consistency between related chunks  
    - D) Number of chunks created  
 
-**7. What is the optimal overlap ratio for hierarchical chunks?**
+**7. What is the optimal overlap ratio for hierarchical chunks?**  
    - A) 0% - no overlap needed  
    - B) 50% - maximum context preservation  
    - C) 10-20% - balanced context and efficiency  
    - D) 100% - complete duplication  
 
-**8. Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?**
+**8. Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?**  
    - A) To reduce computational costs  
    - B) To select the most appropriate processing approach for the content type  
    - C) To determine the number of chunks to create  
