@@ -1,12 +1,15 @@
 site_name: Agentic AI Nano-Degree
-site_description: Complete nano-degree program covering Agent Frameworks and RAG Architecture
+site_description: Complete nano-degree program covering Agent Frameworks, RAG Architecture, and Agent Communication Protocols
 site_author: Agentic AI
-site_url: https://yourusername.github.io/nano-degree
+site_url: https://fwornle.github.io/agentic-ai-nano
 
 # Repository
-repo_name: yourusername/nano-degree
-repo_url: https://github.com/yourusername/nano-degree
+repo_name: fwornle/agentic-ai-nano
+repo_url: https://github.com/fwornle/agentic-ai-nano
 edit_uri: edit/main/
+
+# Documentation directory
+docs_dir: 'docs-content'
 
 # Copyright
 copyright: Copyright &copy; 2025 Agentic AI
@@ -111,8 +114,8 @@ markdown_extensions:
   - pymdownx.magiclink:
       normalize_issue_symbols: true
       repo_url_shorthand: true
-      user: yourusername
-      repo: nano-degree
+      user: fwornle
+      repo: agentic-ai-nano
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.snippets:
@@ -190,7 +193,7 @@ extra:
   
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/yourusername/nano-degree
+      link: https://github.com/fwornle/agentic-ai-nano
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/mkdocs-material/
     - icon: fontawesome/brands/mastodon
@@ -203,5 +206,4 @@ extra_css:
 
 extra_javascript:
   - javascripts/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

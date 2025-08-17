@@ -5,6 +5,9 @@
 *.orig
 *~
 
+# MkDocs local files
+docs-env/
+
 # Logs and analysis
 logs/
 *.log
