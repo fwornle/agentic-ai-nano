@@ -2469,56 +2469,56 @@ The autonomous multimodal systems you've built can handle complex real-world sce
 Test your understanding of Multi-Modal & Advanced RAG Variants:
 
 **Question 1:** What is the fundamental difference between MRAG 1.0 and MRAG 2.0 systems?  
-A) MRAG 2.0 processes data faster than MRAG 1.0  
-B) MRAG 1.0 uses lossy translation while MRAG 2.0 preserves semantic integrity  
-C) MRAG 2.0 requires less computational resources  
+A) MRAG 2.0 processes data faster than MRAG 1.0    
+B) MRAG 1.0 uses lossy translation while MRAG 2.0 preserves semantic integrity    
+C) MRAG 2.0 requires less computational resources    
 D) MRAG 1.0 handles more modalities than MRAG 2.0  
 
 **Question 2:** What distinguishes MRAG 3.0 from MRAG 2.0 systems?  
-A) Better storage efficiency  
-B) Autonomous decision-making and dynamic reasoning capabilities  
-C) Support for more file formats  
+A) Better storage efficiency    
+B) Autonomous decision-making and dynamic reasoning capabilities    
+C) Support for more file formats    
 D) Faster processing speed  
 
 **Question 3:** In RRF, what does the parameter 'k' control?  
-A) The number of query variants generated  
-B) The smoothing factor that reduces the impact of rank position  
-C) The maximum number of results to return  
+A) The number of query variants generated    
+B) The smoothing factor that reduces the impact of rank position    
+C) The maximum number of results to return    
 D) The similarity threshold for documents  
 
 **Question 4:** What is the key benefit of weighted ensemble approaches over simple voting?  
-A) Faster computation  
-B) Lower memory usage  
-C) Better handling of system reliability differences  
+A) Faster computation    
+B) Lower memory usage    
+C) Better handling of system reliability differences    
 D) Simpler implementation  
 
 **Question 5:** What is the most critical requirement for legal RAG systems?  
-A) Fast response time  
-B) Accurate citation validation and precedent analysis  
-C) Large knowledge base size  
+A) Fast response time    
+B) Accurate citation validation and precedent analysis    
+C) Large knowledge base size    
 D) Simple user interface  
 
 **Question 6:** Why do medical RAG systems require safety pre-screening?  
-A) To improve response speed  
-B) To prevent potential harm from medical misinformation  
-C) To reduce computational costs  
+A) To improve response speed    
+B) To prevent potential harm from medical misinformation    
+C) To reduce computational costs    
 D) To simplify the user interface  
 
 **Question 7:** How does ColBERT's late interaction differ from traditional dense retrieval?  
-A) It uses sparse embeddings instead of dense ones  
-B) It computes token-level interactions between queries and documents  
-C) It requires less computational power  
+A) It uses sparse embeddings instead of dense ones    
+B) It computes token-level interactions between queries and documents    
+C) It requires less computational power    
 D) It only works with short documents  
 
 **Question 8:** What is the primary benefit of progressing from MRAG 1.0 through MRAG 3.0?  
-A) Reduced computational costs  
-B) Simpler implementation requirements  
-C) Elimination of information loss and addition of autonomous intelligence  
+A) Reduced computational costs    
+B) Simpler implementation requirements    
+C) Elimination of information loss and addition of autonomous intelligence    
 D) Compatibility with legacy systems  
 
 ---
 
-**🗂️ View Test Solutions →** Complete answers and explanations available in `Session8_Test_Solutions.md`
+[**🗂️ View Test Solutions →**](Session8_Test_Solutions.md)
 
 ---
 

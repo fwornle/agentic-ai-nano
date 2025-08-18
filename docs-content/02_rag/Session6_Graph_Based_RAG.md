@@ -2758,68 +2758,68 @@ Test your understanding of graph-based RAG systems and GraphRAG implementations.
 ### Question 1: GraphRAG Primary Advantage
 **What is the primary advantage of GraphRAG over traditional vector-based RAG?**
 
-A) Faster query processing  
-B) Lower computational requirements  
-C) Multi-hop reasoning through explicit relationship modeling  
+A) Faster query processing    
+B) Lower computational requirements    
+C) Multi-hop reasoning through explicit relationship modeling    
 D) Simpler system architecture  
 
 ### Question 2: Entity Standardization Purpose
 **In knowledge graph construction, what is the purpose of entity standardization?**
 
-A) To reduce memory usage  
-B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")  
-C) To improve query speed  
+A) To reduce memory usage    
+B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")    
+C) To improve query speed    
 D) To compress graph storage  
 
 ### Question 3: Graph Traversal Algorithm Selection
 **Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?**
 
-A) Depth-First Search (DFS)  
-B) Breadth-First Search (BFS)  
-C) Dijkstra's algorithm  
+A) Depth-First Search (DFS)    
+B) Breadth-First Search (BFS)    
+C) Dijkstra's algorithm    
 D) A* search  
 
 ### Question 4: Code GraphRAG AST Information
 **In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?**
 
-A) Only function definitions  
-B) Function calls, imports, class hierarchies, and variable dependencies  
-C) Only variable names  
+A) Only function definitions    
+B) Function calls, imports, class hierarchies, and variable dependencies    
+C) Only variable names    
 D) Just file names and sizes  
 
 ### Question 5: Hybrid Graph-Vector Search Benefit
 **What is the key benefit of hybrid graph-vector search?**
 
-A) Reduced computational cost  
-B) Combining structural relationships with semantic similarity  
-C) Simpler implementation  
+A) Reduced computational cost    
+B) Combining structural relationships with semantic similarity    
+C) Simpler implementation    
 D) Faster indexing  
 
 ### Question 6: Neo4j vs Simple Graph Structures
 **When should you choose Neo4j over a simple graph data structure for GraphRAG?**
 
-A) Always, regardless of scale  
-B) When you need persistent storage and complex queries at scale  
-C) Only for small datasets  
+A) Always, regardless of scale    
+B) When you need persistent storage and complex queries at scale    
+C) Only for small datasets    
 D) Never, simple structures are always better  
 
 ### Question 7: Multi-Hop Traversal Challenge
 **What is the primary challenge in multi-hop graph traversal for RAG?**
 
-A) Memory limitations  
-B) Balancing comprehensiveness with relevance and avoiding information explosion  
-C) Slow database queries  
+A) Memory limitations    
+B) Balancing comprehensiveness with relevance and avoiding information explosion    
+C) Slow database queries    
 D) Complex code implementation  
 
 ### Question 8: Production GraphRAG Update Considerations
 **In production GraphRAG systems, what is the most important consideration for incremental updates?**
 
-A) Minimizing downtime while maintaining graph consistency  
-B) Reducing storage costs  
-C) Maximizing query speed  
+A) Minimizing downtime while maintaining graph consistency    
+B) Reducing storage costs    
+C) Maximizing query speed    
 D) Simplifying the codebase  
 
-**🗂️ View Test Solutions**: Complete answers in `Session6_Test_Solutions.md`
+[**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
 
 ---
 
