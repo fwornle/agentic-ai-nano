@@ -818,7 +818,7 @@ B) Only the most recent layer
 C) Layer scope, message content, context hints, and activation conditions  
 D) User-specified preferences only  
 
-**🗂️ View Test Solutions →** Complete answers and explanations available in `Session1_ModuleC_Test_Solutions.md`
+[**🗂️ View Test Solutions →**](Session1_ModuleC_Test_Solutions.md)
 
 ---
 
