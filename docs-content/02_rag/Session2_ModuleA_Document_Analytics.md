@@ -286,36 +286,36 @@ Domain-specific processing recognizes that different types of documents require 
 Test your understanding of advanced document analytics:
 
 **Question 1:** What is the primary benefit of document complexity scoring?  
-A) Reduces processing time  
-B) Enables optimal processing strategy selection based on document characteristics  
-C) Improves storage efficiency  
+A) Reduces processing time    
+B) Enables optimal processing strategy selection based on document characteristics    
+C) Improves storage efficiency    
 D) Reduces memory usage  
 
 **Question 2:** Which metric is most important for measuring chunk quality?  
-A) Chunk size only  
-B) Processing speed  
-C) Balance of coherence, information density, and completeness  
+A) Chunk size only    
+B) Processing speed    
+C) Balance of coherence, information density, and completeness    
 D) Number of chunks created  
 
 **Question 3:** Why is domain-specific processing important for enterprise RAG systems?  
-A) It reduces costs  
-B) It preserves domain-specific structure and terminology for better retrieval  
-C) It simplifies implementation  
+A) It reduces costs    
+B) It preserves domain-specific structure and terminology for better retrieval    
+C) It simplifies implementation    
 D) It reduces storage requirements  
 
 **Question 4:** What does information density measure in chunk quality assessment?  
-A) Total word count  
-B) Ratio of unique words to total words  
-C) Document length  
+A) Total word count    
+B) Ratio of unique words to total words    
+C) Document length    
 D) Processing time  
 
 **Question 5:** How should coherence be measured between adjacent chunks?  
-A) By word count similarity  
-B) By semantic similarity and topic consistency  
-C) By length similarity  
+A) By word count similarity    
+B) By semantic similarity and topic consistency    
+C) By length similarity    
 D) By processing time similarity  
 
-**🗂️ View Test Solutions →** Complete answers and explanations available in `Session2_ModuleA_Test_Solutions.md`
+[**🗂️ View Test Solutions →**](Session2_ModuleA_Test_Solutions.md)
 
 ## 🧭 Navigation
 
