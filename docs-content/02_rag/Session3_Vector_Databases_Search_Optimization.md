@@ -90,14 +90,18 @@ This interface establishes the contract that all vector database implementations
                    metadata: List[Dict], ids: List[str]):
         """Add vectors with metadata and IDs."""
         raise NotImplementedError
+```
 
+The add_vectors method defines the core insertion operation for vector databases. By accepting vectors, metadata, and IDs as separate lists, this design enables batch operations while maintaining data integrity.
+
+```python
     def search(self, query_vector: List[float],
               top_k: int = 10, filters: Dict = None):
         """Search for similar vectors with optional filtering."""
         raise NotImplementedError
 ```
 
-These core methods handle the fundamental vector operations. The search method includes filtering capability - essential for production RAG systems where you need to filter by document type, date, or user permissions.
+The search method is the heart of any vector database. The filters parameter is essential for production RAG systems where you need to filter by document type, date, or user permissions before computing similarity.
 
 ```python
     def update_vector(self, vector_id: str,
@@ -164,6 +168,8 @@ Our ChromaDB wrapper focuses on production-ready optimization. The class handles
         self.build_times = []
 ```
 
+The constructor establishes the foundation for our ChromaDB implementation. The performance tracking attributes allow us to monitor and optimize query performance over time.
+
 **Step 2: Client Configuration with Production Settings**
 
 The client configuration directly impacts both performance and reliability:
@@ -177,7 +183,11 @@ The client configuration directly impacts both performance and reliability:
                 anonymized_telemetry=False  # Reduces network calls in production
             )
         )
+```
 
+The PersistentClient ensures our vector index survives application restarts - critical for production systems. The settings optimize for both development flexibility and production performance.
+
+```python
         # Create or get collection with optimized settings
         self.collection = self._initialize_collection()
 ```
@@ -201,6 +211,11 @@ The HNSW (Hierarchical Navigable Small World) algorithm is the heart of ChromaDB
         - M=16: Sweet spot for memory vs. connectivity (typical range: 12-48)
         - search_ef=100: Balances speed vs. accuracy for RAG recall requirements
         """
+```
+
+This method handles the critical task of collection initialization with optimized HNSW parameters. The parameter choices reflect extensive research into optimal settings for RAG workloads.
+
+```python
         try:
             # Try to get existing collection
             collection = self.client.get_collection(
@@ -224,7 +239,11 @@ The method first attempts to load an existing collection - this prevents acciden
                 }
             )
             print(f"Created new collection: {self.collection_name}")
+```
 
+When creating a new collection, we specify HNSW parameters that balance performance and accuracy. These settings are optimized for typical RAG workloads with moderate-scale document collections.
+
+```python
         return collection
 ```
 
@@ -255,12 +274,11 @@ Batch processing is essential for efficient data loading. ChromaDB performs bett
                            ids: List[str],
                            batch_size: int = 1000):
         """Add documents in optimized batches."""
-
         total_docs = len(documents)
         print(f"Adding {total_docs} documents in batches of {batch_size}")
 ```
 
-We start by calculating the total workload and announcing the batching strategy. A batch size of 1000 typically provides the best balance between memory usage and insertion speed.
+Batch processing is essential for efficient data loading. ChromaDB performs better with moderately-sized batches rather than individual document inserts.
 
 ```python
         for i in range(0, total_docs, batch_size):
@@ -272,7 +290,7 @@ We start by calculating the total workload and announcing the batching strategy.
             batch_ids = ids[i:batch_end]
 ```
 
-Each iteration creates a batch slice from the input data. The `min()` function ensures the final batch doesn't exceed the available data when the total isn't evenly divisible by batch_size.
+Each iteration creates a batch slice from the input data. The `min()` function ensures the final batch doesn't exceed available data when the total isn't evenly divisible.
 
 ```python
             self.collection.add(
@@ -335,13 +353,17 @@ Our Pinecone wrapper emphasizes enterprise concerns: cost optimization, high ava
         self.environment = environment
         self.index_name = index_name
         self.dimension = dimension
+```
 
+The constructor establishes the connection parameters for Pinecone. The default dimension of 1536 matches OpenAI's text-embedding-ada-002 model.
+
+```python
         # Performance and cost tracking
         self.operation_costs = {'queries': 0, 'upserts': 0, 'deletes': 0}
         self.batch_stats = {'successful_batches': 0, 'failed_batches': 0}
 ```
 
-Initialization includes cost tracking - essential for Pinecone's usage-based pricing model. Monitoring operations helps optimize expenses in production.
+Cost tracking is essential for Pinecone's usage-based pricing model. Monitoring operations helps optimize expenses in production environments.
 
 ```python
         # Initialize Pinecone with connection pooling
@@ -349,7 +371,6 @@ Initialization includes cost tracking - essential for Pinecone's usage-based pri
             api_key=api_key,
             environment=environment
         )
-
         self.index = self._get_or_create_index()
 ```
 
@@ -369,7 +390,11 @@ First, we check if the index already exists to avoid recreation costs:
         if self.index_name in pinecone.list_indexes():
             print(f"Connecting to existing index: {self.index_name}")
             index = pinecone.Index(self.index_name)
+```
 
+First, we check if the index already exists to avoid recreation costs. This is critical for production systems where index creation can be expensive.
+
+```python
             # Log current index configuration for monitoring
             stats = index.describe_index_stats()
             print(f"Index stats: {stats['total_vector_count']} vectors, "
@@ -390,6 +415,11 @@ If no index exists, create one with carefully chosen production parameters:
             metric='cosine',              # Optimal for text embeddings
             pods=2,                       # 2 pods handle ~5000 QPS efficiently
             replicas=1,                   # High availability with cost control
+```
+
+If no index exists, we create one with carefully chosen production parameters. The cosine metric is optimal for text embeddings, and the pod configuration balances performance with cost.
+
+```python
             pod_type='p1.x1',            # Balanced performance pod (1.5GB RAM)
             metadata_config={
                 'indexed': ['source', 'chunk_type', 'timestamp', 'topic']  # Enable fast filtering
@@ -406,7 +436,11 @@ Pinecone requires initialization time - we wait and monitor the status:
         print("Waiting for index to be ready...")
         while not pinecone.describe_index(self.index_name).status['ready']:
             time.sleep(5)  # Check every 5 seconds
+```
 
+Pinecone requires initialization time - we wait and monitor the status to ensure the index is ready before use.
+
+```python
         print("Index ready for operations!")
         return pinecone.Index(self.index_name)
 ```
@@ -441,12 +475,12 @@ Pinecone requires initialization time - we wait and monitor the status:
 - **Performance impact**: Indexed metadata enables sub-50ms filtered queries vs. 200ms+ without indexing
 
 **Step 4: Advanced Upsert Operations**
+
 ```python
     def upsert_vectors_batch(self, vectors: List[Dict],
                            batch_size: int = 100,
                            namespace: str = "default"):
         """Efficient batch upsert with error handling."""
-
         total_vectors = len(vectors)
         successful_upserts = 0
         failed_upserts = []
@@ -464,19 +498,23 @@ Batch upserts are critical for Pinecone performance and cost efficiency. We trac
                     vectors=batch,
                     namespace=namespace
                 )
+```
 
+The upsert operation updates existing vectors or inserts new ones. Namespaces provide data isolation - useful for multi-tenant applications.
+
+```python
                 successful_upserts += response.upserted_count
                 print(f"Upserted batch {i//batch_size + 1}: "
                       f"{response.upserted_count} vectors")
-```
 
-The upsert operation updates existing vectors or inserts new ones. Namespaces provide data isolation - useful for multi-tenant applications or environment separation.
-
-```python
             except Exception as e:
                 print(f"Failed to upsert batch {i//batch_size + 1}: {e}")
                 failed_upserts.extend(batch)
+```
 
+Error handling ensures robust operation even when individual batches fail. We collect failed vectors for retry or analysis.
+
+```python
         return {
             'successful': successful_upserts,
             'failed': failed_upserts,
@@ -517,7 +555,6 @@ Qdrant excels in scenarios requiring complex filtering and high-performance sear
             port=port,
             timeout=60  # Extended timeout for large operations
         )
-
         self._setup_collection()
 ```
 
@@ -528,7 +565,6 @@ Qdrant's collection setup provides extensive optimization options. Let's configu
 ```python
     def _setup_collection(self, dimension: int = 1536):
         """Create collection with performance optimizations."""
-
         # Check if collection exists
         collections = self.client.get_collections().collections
         collection_names = [c.name for c in collections]
@@ -575,7 +611,6 @@ Optimizer configuration controls how Qdrant manages segments and memory. These s
                     on_disk=True  # Store index on disk
                 )
             )
-
             print(f"Created optimized collection: {self.collection_name}")
         else:
             print(f"Using existing collection: {self.collection_name}")
@@ -620,7 +655,11 @@ Our hybrid engine takes a vector store and the original documents. The documents
             lowercase=True,
             token_pattern=r'\b[a-zA-Z]\w{2,}\b'  # Words with 3+ chars
         )
+```
 
+The TF-IDF vectorizer configuration balances vocabulary size with performance. Including bigrams captures important phrase patterns in the text.
+
+```python
         # Fit TF-IDF on document corpus
         self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(documents)
         print(f"Built TF-IDF index for {len(documents)} documents")
@@ -646,14 +685,6 @@ BM25 (Best Matching 25) represents decades of information retrieval research, ad
         """Compute BM25 scores using optimized algorithm for RAG workloads.
 
         BM25 Formula: IDF * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * dl / avgdl))
-
-        Where:
-        - tf: Term frequency in document
-        - df: Document frequency (documents containing term)
-        - dl: Document length
-        - avgdl: Average document length
-        - k1: Term frequency saturation parameter (1.2 optimal for most corpora)
-        - b: Document length normalization (0.75 optimal for mixed-length documents)
         """
 ```
 
@@ -666,12 +697,10 @@ The BM25 algorithm provides superior ranking compared to basic TF-IDF by address
         # Pre-compute document statistics for efficiency
         doc_lengths = np.array([len(doc.split()) for doc in self.documents])
         avg_doc_length = np.mean(doc_lengths)
-
-        # Initialize score accumulator
         scores = np.zeros(len(self.documents))
 ```
 
-Pre-computing document statistics improves efficiency when processing multiple terms. The score accumulator will sum BM25 contributions from each query term.
+We tokenize the query using the same preprocessing as the corpus to ensure consistency. Pre-computing document statistics improves efficiency.
 
 ```python
         # Process each query term
@@ -680,26 +709,18 @@ Pre-computing document statistics improves efficiency when processing multiple t
                 # Retrieve term statistics from pre-built TF-IDF matrix
                 term_idx = self.tfidf_vectorizer.vocabulary_[token]
                 tf_scores = self.tfidf_matrix[:, term_idx].toarray().flatten()
-
-                # Convert normalized TF-IDF back to raw term frequencies
-                # This approximation works well when TF-IDF was built with sublinear_tf=False
                 tf = tf_scores * len(self.documents)
 ```
 
 For each query term, we extract term frequency data from our pre-built TF-IDF matrix. This reuses computation and ensures consistent preprocessing.
 
 ```python
-                # Calculate document frequency and inverse document frequency
-                df = np.sum(tf > 0)  # Number of documents containing this term
+                # Calculate BM25 components
+                df = np.sum(tf > 0)  # Document frequency
                 if df > 0:
-                    # BM25 IDF formula (with +0.5 smoothing to prevent negative values)
                     idf = np.log((len(self.documents) - df + 0.5) / (df + 0.5))
-
-                    # BM25 term frequency component with saturation
                     numerator = tf * (k1 + 1)
                     denominator = tf + k1 * (1 - b + b * doc_lengths / avg_doc_length)
-
-                    # Combine IDF and normalized TF for final BM25 score
                     scores += idf * (numerator / denominator)
 
         return scores
@@ -734,19 +755,23 @@ Reciprocal Rank Fusion (RRF) provides an elegant way to combine semantic and lex
         semantic_results = self.vector_store.similarity_search_with_scores(
             query, k=min(top_k * 3, 50)  # Retrieve more for reranking
         )
-
-        # Step 2: Lexical search (BM25)
-        lexical_scores = self._compute_bm25_scores(query)
 ```
 
 We retrieve more results initially (3x target) to provide the reranker with a broader set of candidates. This improves final result quality.
 
 ```python
+        # Step 2: Lexical search (BM25)
+        lexical_scores = self._compute_bm25_scores(query)
+
         # Step 3: Combine scores using Reciprocal Rank Fusion (RRF)
         combined_results = self._reciprocal_rank_fusion(
             semantic_results, lexical_scores, k=60
         )
+```
 
+RRF elegantly combines rankings from different systems without requiring score normalization. The k=60 parameter controls fusion smoothness.
+
+```python
         # Step 4: Optional reranking
         if rerank:
             combined_results = self._cross_encoder_rerank(
@@ -763,10 +788,13 @@ RRF elegantly combines rankings from different systems without requiring score n
                                lexical_scores: np.ndarray,
                                k: int = 60) -> List[Dict]:
         """Implement Reciprocal Rank Fusion for score combination."""
-
         # Create document score dictionary
         doc_scores = {}
+```
 
+RRF converts rankings to reciprocal scores: RRF = 1/(k + rank). This gives higher scores to better-ranked items while avoiding division by zero.
+
+```python
         # Add semantic scores (convert similarity to rank)
         for rank, (doc, similarity_score) in enumerate(semantic_results):
             doc_id = doc.metadata.get('chunk_id', rank)
@@ -777,7 +805,7 @@ RRF elegantly combines rankings from different systems without requiring score n
             }
 ```
 
-RRF converts rankings to reciprocal scores: RRF = 1/(k + rank). This gives higher scores to better-ranked items while avoiding division by zero.
+Semantic results are processed first, converting similarity rankings to RRF scores. Each document gets its semantic ranking contribution.
 
 ```python
         # Add lexical scores (BM25 rankings)
@@ -802,19 +830,17 @@ RRF converts rankings to reciprocal scores: RRF = 1/(k + rank). This gives highe
 We process lexical rankings similarly, creating entries for documents found only by keyword search. This ensures comprehensive coverage.
 
 ```python
-        # Calculate final RRF scores
+        # Calculate final RRF scores and sort
         for doc_id in doc_scores:
             semantic_rrf = doc_scores[doc_id].get('semantic_rrf', 0)
             lexical_rrf = doc_scores[doc_id].get('lexical_rrf', 0)
             doc_scores[doc_id]['final_score'] = semantic_rrf + lexical_rrf
 
-        # Sort by final score
         sorted_results = sorted(
             doc_scores.values(),
             key=lambda x: x['final_score'],
             reverse=True
         )
-
         return sorted_results
 ```
 
@@ -841,7 +867,6 @@ Cross-encoders provide superior relevance scoring by processing query-document p
     def rerank_results(self, query: str, documents: List[Dict],
                       top_k: int = 10) -> List[Dict]:
         """Rerank documents using cross-encoder scores."""
-
         if not documents:
             return []
 
@@ -855,21 +880,23 @@ Cross-encoders provide superior relevance scoring by processing query-document p
 We create query-document pairs for joint processing. The cross-encoder can then capture semantic relationships between query terms and document content.
 
 ```python
-        # Get cross-encoder scores
+        # Get cross-encoder scores and update documents
         ce_scores = self.cross_encoder.predict(pairs)
 
-        # Update documents with reranking scores
         for i, doc_data in enumerate(documents):
             doc_data['rerank_score'] = float(ce_scores[i])
             doc_data['original_rank'] = i + 1
+```
 
+The cross-encoder processes all pairs simultaneously for efficiency, then we update each document with its reranking score and preserve the original ranking.
+
+```python
         # Sort by cross-encoder scores
         reranked = sorted(
             documents,
             key=lambda x: x['rerank_score'],
             reverse=True
         )
-
         return reranked[:top_k]
 ```
 
@@ -935,13 +962,7 @@ The core method that handles intelligent index construction:
                    external_ids: List[str],
                    performance_target: str = "balanced") -> None:
         """Build optimized index with intelligent algorithm selection.
-
-        Args:
-            vectors: Vector data to index
-            external_ids: External identifiers for vectors
-            performance_target: "speed", "memory", "accuracy", or "balanced"
         """
-
         n_vectors = vectors.shape[0]
         memory_gb = vectors.nbytes / (1024**3)
 ```
@@ -957,7 +978,6 @@ We start by analyzing the dataset characteristics - size and memory requirements
 
         print(f"Building {self.index_type} index for {n_vectors:,} vectors "
               f"({memory_gb:.1f}GB)")
-
         build_start = time.time()
 ```
 
@@ -985,7 +1005,11 @@ The factory pattern allows us to use the optimal indexing algorithm for each sce
         build_time = time.time() - build_start
         self.performance_metrics['build_time'] = build_time
         self.performance_metrics['vectors_per_second'] = n_vectors / build_time
+```
 
+We track build performance to optimize future indexing operations and provide feedback on the chosen algorithm's efficiency.
+
+```python
         # Store ID mapping for result retrieval
         for i, external_id in enumerate(external_ids):
             self.id_map[i] = external_id
@@ -1002,11 +1026,7 @@ This method chooses the best algorithm based on dataset characteristics:
     def _select_optimal_index(self, n_vectors: int, memory_gb: float,
                              target: str) -> str:
         """Intelligent index selection based on dataset characteristics.
-        
-        Uses dataset size, memory constraints, and performance targets
-        to select the most appropriate indexing algorithm.
         """
-
         # Small datasets: use exact search
         if n_vectors < 10000:
             return "Flat"
@@ -1053,14 +1073,7 @@ IVF excels when **memory efficiency and scalability** outweigh the need for ultr
 ```python
     def _build_ivf_index(self, vectors: np.ndarray, n_vectors: int,
                         performance_target: str) -> faiss.Index:
-        """Build IVF index with target-specific optimizations.
-
-        IVF Design Decisions:
-        - Centroid count: Balance between search speed and clustering accuracy
-        - nprobe: Query-time speed/accuracy trade-off
-        - Training data: Use full dataset vs. sample for very large collections
-        """
-
+        """Build IVF index with target-specific optimizations."""
         # Adaptive centroid selection based on dataset size and target
         if performance_target == "speed":
             centroid_ratio = 0.05  # Fewer clusters, faster search
@@ -1080,7 +1093,11 @@ Centroid selection balances clustering quality with search speed. More centroids
 
         # Create quantizer (centroid index)
         quantizer = faiss.IndexFlatIP(self.dimension)
+```
 
+The quantizer creates the centroid index that will organize vectors into clusters. We use inner product (IP) for the quantizer.
+
+```python
         # Choose IVF variant based on size
         if n_vectors > 100000:
             # Use Product Quantization for large datasets
@@ -1094,13 +1111,12 @@ Centroid selection balances clustering quality with search speed. More centroids
             print("Using IVFFlat for optimal accuracy")
 ```
 
-For large datasets, Product Quantization (PQ) provides significant memory compression at the cost of some accuracy. Smaller datasets use flat storage for optimal quality.
+For large datasets, Product Quantization provides significant memory compression. Smaller datasets use flat storage for optimal quality.
 
 ```python
         # Training phase - critical for clustering quality
         print("Training IVF centroids...")
         if n_vectors > 1000000:
-            # Use sample for very large datasets to speed training
             sample_size = min(1000000, n_vectors)
             sample_indices = np.random.choice(n_vectors, sample_size, replace=False)
             training_data = vectors[sample_indices]
@@ -1109,13 +1125,11 @@ For large datasets, Product Quantization (PQ) provides significant memory compre
             training_data = vectors
 
         index.train(training_data)
-
-        # Add all vectors
         print("Adding vectors to index...")
         index.add(vectors)
 ```
 
-Training phase learns the optimal cluster centroids. For very large datasets, we sample to balance training quality with build time.
+Training learns optimal cluster centroids. For very large datasets, we sample to balance training quality with build time.
 
 ```python
         # Set query parameters based on target
@@ -1128,13 +1142,10 @@ Training phase learns the optimal cluster centroids. For very large datasets, we
 
         print(f"IVF index ready: nprobe={index.nprobe} "
               f"({100*index.nprobe/n_centroids:.1f}% cluster coverage)")
-
         return index
 
     def _select_pq_segments(self, dimension: int) -> int:
         """Select optimal number of PQ segments for compression."""
-        # PQ segments must evenly divide the dimension
-        # Common choices: 8, 16, 32, 64 segments
         for m in [8, 16, 32, 64, 96, 128]:
             if dimension % m == 0 and m <= dimension // 2:
                 return m
@@ -1157,14 +1168,7 @@ HNSW creates a hierarchical graph where each vector connects to its most similar
 ```python
     def _build_hnsw_index(self, vectors: np.ndarray,
                          performance_target: str) -> faiss.Index:
-        """Build HNSW index with target-specific parameter optimization.
-
-        HNSW Parameter Philosophy:
-        - M: Higher connectivity = better recall but more memory
-        - efConstruction: Higher = better graph quality but slower build
-        - efSearch: Query-time accuracy control (can adjust per query)
-        """
-
+        """Build HNSW index with target-specific parameter optimization."""
         # Parameter selection based on performance target
         if performance_target == "speed":
             M = 16           # Lower connectivity for speed
@@ -1189,7 +1193,11 @@ HNSW parameter selection creates distinct performance profiles. Higher M values 
         # Create HNSW index
         index = faiss.IndexHNSWFlat(self.dimension, M)
         index.hnsw.efConstruction = ef_construct
+```
 
+We create the HNSW index with the selected parameters. The efConstruction parameter is set before adding vectors to ensure proper graph construction.
+
+```python
         # Build the graph
         print("Building HNSW graph structure...")
         index.add(vectors)
@@ -1198,7 +1206,7 @@ HNSW parameter selection creates distinct performance profiles. Higher M values 
         index.hnsw.efSearch = ef_search
 ```
 
-Graph construction with higher efConstruction values creates better-quality graphs at the cost of longer build times. This is a one-time cost that pays dividends in query quality.
+Graph construction builds the navigable small world structure. The efSearch parameter can be adjusted per query for different speed/accuracy trade-offs.
 
 ```python
         # Calculate memory usage for monitoring
@@ -1207,7 +1215,6 @@ Graph construction with higher efConstruction values creates better-quality grap
 
         print(f"HNSW index ready: {len(vectors):,} vectors, "
               f"~{total_memory_mb:.1f}MB memory usage")
-
         return index
 ```
 
@@ -1265,7 +1272,6 @@ class RAGArchitectureOptimizer:
     @staticmethod
     def recommend_architecture(requirements: Dict) -> Dict:
         """Provide architecture recommendations based on RAG needs."""
-
         # Extract key requirements from user specifications
         query_volume = requirements.get('daily_queries', 1000)
         document_count = requirements.get('document_count', 100000)
@@ -1279,7 +1285,6 @@ class RAGArchitectureOptimizer:
 Set up the framework for delivering comprehensive architecture recommendations:
 
 ```python
-
         # Initialize recommendation structure
         recommendations = {
             'database': None,
@@ -1354,7 +1359,6 @@ For large-scale or budget-constrained deployments, Qdrant with IVF+PQ provides e
                     'memory_gb': document_count * 0.3
                 }
             })
-
         return recommendations
 ```
 
@@ -1847,52 +1851,52 @@ class ProductionVectorSearch:
 ## 📝 Multiple Choice Test - Session 3 (15 minutes)
 
 **1. Which vector database metric is most suitable for RAG applications using cosine similarity?**  
-   - A) Euclidean distance  
-   - B) Manhattan distance  
-   - C) Cosine similarity  
-   - D) Hamming distance  
+A) Euclidean distance  
+B) Manhattan distance  
+C) Cosine similarity  
+D) Hamming distance  
 
 **2. What is the primary advantage of HNSW indexing over IVF indexing?**  
-   - A) Lower memory usage  
-   - B) Better compression ratios  
-   - C) Faster query performance with high recall  
-   - D) Simpler configuration  
+A) Lower memory usage  
+B) Better compression ratios  
+C) Faster query performance with high recall  
+D) Simpler configuration  
 
 **3. In Reciprocal Rank Fusion (RRF), what does the 'k' parameter control?**  
-   - A) Number of results to return  
-   - B) Weight balance between semantic and lexical scores  
-   - C) The smoothing factor in rank combination  
-   - D) Maximum number of query variants  
+A) Number of results to return  
+B) Weight balance between semantic and lexical scores  
+C) The smoothing factor in rank combination  
+D) Maximum number of query variants  
 
 **4. What is the key benefit of cross-encoder reranking compared to bi-encoder similarity?**  
-   - A) Faster inference speed  
-   - B) Lower computational requirements  
-   - C) Joint processing of query-document pairs for better accuracy  
-   - D) Simpler model architecture  
+A) Faster inference speed  
+B) Lower computational requirements  
+C) Joint processing of query-document pairs for better accuracy  
+D) Simpler model architecture  
 
 **5. When should you choose IVF indexing over HNSW for vector search?**  
-   - A) When you need the fastest possible queries  
-   - B) When you have limited memory and large datasets  
-   - C) When accuracy is more important than speed  
-   - D) When you need real-time updates  
+A) When you need the fastest possible queries  
+B) When you have limited memory and large datasets  
+C) When accuracy is more important than speed  
+D) When you need real-time updates  
 
 **6. What is the purpose of the 'ef_construction' parameter in HNSW?**  
-   - A) Controls memory usage during search  
-   - B) Determines the number of connections per node  
-   - C) Sets the dynamic candidate list size during index building  
-   - D) Defines the maximum number of layers  
+A) Controls memory usage during search  
+B) Determines the number of connections per node  
+C) Sets the dynamic candidate list size during index building  
+D) Defines the maximum number of layers  
 
 **7. In hybrid search, what does BM25 provide that semantic search lacks?**  
-   - A) Better understanding of context  
-   - B) Exact term matching and frequency analysis  
-   - C) Handling of synonyms and related concepts  
-   - D) Multi-language support  
+A) Better understanding of context  
+B) Exact term matching and frequency analysis  
+C) Handling of synonyms and related concepts  
+D) Multi-language support  
 
 **8. Why is query caching particularly effective in RAG systems?**  
-   - A) Vector embeddings are expensive to compute  
-   - B) Users often ask similar or repeated questions  
-   - C) Database queries are the main bottleneck  
-   - D) All of the above  
+A) Vector embeddings are expensive to compute  
+B) Users often ask similar or repeated questions  
+C) Database queries are the main bottleneck  
+D) All of the above  
 
 ---
 
@@ -1938,10 +1942,10 @@ Your hybrid search optimization, index tuning, and multi-database architecture p
 
 ## 🧭 Navigation
 
-**Previous: [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)**
+**Previous:** [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
 
 **Optional Deep Dive Modules:**
-- **[🔬 Module A: Advanced Index Algorithms](Session3_ModuleA_Index_Algorithms.md)**
 
+- 🔬 **[Module A: Advanced Index Algorithms](Session3_ModuleA_Index_Algorithms.md)** - Advanced indexing strategies and optimization
 
-**[Next: Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)**
+**Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)

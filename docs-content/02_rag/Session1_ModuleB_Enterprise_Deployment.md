@@ -9,27 +9,18 @@
 
 ## 🧭 Navigation & Quick Start
 
-### Related Modules
-- **[🔧 Module A: Production Patterns →](Session1_ModuleA_Production_Patterns.md)** - Production-ready RAG implementation patterns
-- **[📄 Session 1 Core: Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)** - Foundation concepts
+**Related Modules:**
 
-### 🗂️ Code Files
-- **Core System**: [`src/session1/rag_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/rag_system.py) - Main RAG implementation
-- **Configuration**: [`src/session1/config.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/config.py) - Deployment configuration management
-- **Performance Testing**: [`src/session1/test_rag_performance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/test_rag_performance.py) - Load testing tools
+- **Core Session:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
+- **Related Module:** [Module A - Production Patterns](Session1_ModuleA_Production_Patterns.md)
 
-### 🚀 Quick Start
-```bash
-# Deploy RAG system locally
-cd src/session1
-python main.py
+**🗂️ Code Files:** All examples use files in `src/session1/`
 
-# Test enterprise configuration
-python -c "from config import Config; Config().validate()"
+- `rag_system.py` - Main RAG implementation
+- `config.py` - Deployment configuration management
+- `test_rag_performance.py` - Load testing tools
 
-# Run deployment readiness check
-python test_rag_performance.py --enterprise-mode
-```
+**🚀 Quick Start:** Run `cd src/session1 && python main.py` to deploy RAG system locally
 
 ---
 
@@ -59,7 +50,11 @@ class RAGRequest:
     session_id: str
     context_filters: Optional[Dict[str, Any]] = None
     max_tokens: int = 1000
+```
 
+The response dataclass captures all information needed for client applications and monitoring systems:
+
+```python
 @dataclass
 class RAGResponse:
     answer: str
@@ -102,7 +97,11 @@ The batch processing method demonstrates enterprise-grade error handling. Each d
             "processing_time": 0.0,
             "document_ids": []
         }
-        
+```
+
+The core processing loop implements fault tolerance by isolating each document's processing. This ensures partial batch success even when individual documents fail:
+
+```python
         # Implement batch processing with queue management
         for doc in documents:
             try:
@@ -133,11 +132,19 @@ Multi-database retrieval with reranking provides both redundancy and improved re
         """Retrieve and rank relevant documents."""
         # Implement multi-database retrieval
         all_results = []
-        
+```
+
+The retrieval process queries multiple vector stores concurrently, collecting diverse results from different data sources:
+
+```python
         for store_url in self.vector_stores:
             store_results = await self._query_vector_store(store_url, query, filters)
             all_results.extend(store_results)
-            
+```
+
+After collecting all results, we apply reranking to improve result quality and remove duplicates across data sources:
+
+```python
         # Rerank combined results
         ranked_results = await self._rerank_documents(query, all_results)
         return ranked_results
@@ -152,7 +159,11 @@ class GenerationService(RAGServiceInterface):
     def __init__(self, llm_endpoints: List[str], load_balancer: str):
         self.llm_endpoints = llm_endpoints
         self.load_balancer = load_balancer
-        
+```
+
+The generation method implements graceful failover by attempting each endpoint in sequence until one succeeds:
+
+```python
     async def generate_answer(self, query: str, context: List[Dict]) -> Dict[str, Any]:
         """Generate answer using retrieved context."""
         # Implement load-balanced generation with fallback
@@ -197,7 +208,11 @@ JWT authentication provides stateless, scalable user verification. The token val
         """Validate JWT authentication token."""
         try:
             payload = jwt.decode(token, self.secret_key, algorithms=["HS256"])
-            
+```
+
+Time-based validation prevents replay attacks and ensures tokens have limited lifetimes:
+
+```python
             # Check token expiration
             if payload.get("exp", 0) < time.time():
                 return None
@@ -244,7 +259,11 @@ Comprehensive audit logging is essential for compliance and security monitoring.
             "success": success,
             "ip_address": self._get_client_ip()
         }
-        
+```
+
+The audit entry is then written to a secure, append-only logging system for compliance and forensic analysis:
+
+```python
         # Write to audit log (implement your logging backend)
         self._write_audit_log(audit_entry)
 ```
@@ -301,7 +320,11 @@ Concurrent health checking maximizes efficiency while monitoring multiple servic
     async def health_check_all_services(self) -> Dict[str, HealthCheck]:
         """Perform health checks on all services."""
         tasks = []
-        
+```
+
+We create concurrent health check tasks for all services to minimize overall monitoring latency:
+
+```python
         for service_name, endpoint in self.primary_endpoints.items():
             task = self._check_service_health(service_name, endpoint)
             tasks.append(task)
@@ -322,6 +345,11 @@ Health status processing transforms raw results into actionable service status. 
                     last_check=time.time(),
                     error_message=str(health_results[i])
                 )
+```
+
+Successful health checks are stored directly, providing current service status for routing decisions:
+
+```python
             else:
                 self.health_status[service_name] = health_results[i]
                 
@@ -340,7 +368,11 @@ The failover mechanism implements graceful degradation with automatic fallback. 
                 return await operation(self.primary_endpoints[service_name])
             except Exception as e:
                 self._mark_service_unhealthy(service_name, str(e))
-        
+```
+
+If the primary service fails, we automatically attempt the backup service to maintain availability:
+
+```python
         # Failover to backup endpoint
         if service_name in self.backup_endpoints:
             try:
@@ -419,7 +451,11 @@ Metric recording with automatic alert checking provides real-time monitoring. Th
         
         if key not in self.metrics:
             self.metrics[key] = []
-            
+```
+
+Each metric value is timestamped and stored, building a historical record for trend analysis:
+
+```python
         self.metrics[key].append({
             "value": value,
             "timestamp": time.time()
@@ -436,7 +472,11 @@ The alert checking logic begins with rule lookup and threshold comparison logic.
         """Check if metric value triggers any alerts."""
         if metric_name in self.alert_rules:
             rule = self.alert_rules[metric_name]
-            
+```
+
+The comparison logic supports different threshold types to handle various monitoring scenarios:
+
+```python
             should_alert = False
             if rule["comparison"] == "greater" and value > rule["threshold"]:
                 should_alert = True
@@ -457,7 +497,11 @@ When a threshold violation is detected, we construct a comprehensive alert objec
                     timestamp=time.time(),
                     message=f"{service} {metric_name} is {value}, exceeding threshold {rule['threshold']}"
                 )
-                
+```
+
+The alert is then sent to all registered handlers for appropriate response and escalation:
+
+```python
                 self._trigger_alert(alert)
 ```
 
@@ -479,41 +523,47 @@ Alert triggering with handler resilience ensures notifications reach operations 
 
 Test your understanding of enterprise RAG deployment:
 
-**Question 1:** What is the primary benefit of microservices architecture for enterprise RAG systems?
-
+**Question 1:** What is the primary benefit of microservices architecture for enterprise RAG systems?  
 A) Reduces development time  
 B) Enables independent scaling and deployment of components  
 C) Simplifies codebase  
 D) Reduces infrastructure costs  
 
-**Question 2:** Why is JWT authentication important for enterprise RAG systems?
-
+**Question 2:** Why is JWT authentication important for enterprise RAG systems?  
 A) It improves query performance  
 B) It provides stateless, secure authentication with role-based access  
 C) It reduces memory usage  
 D) It enables caching  
 
-**Question 3:** What is the purpose of circuit breaker pattern in high availability systems?
-
+**Question 3:** What is the purpose of circuit breaker pattern in high availability systems?  
 A) To reduce costs  
 B) To prevent cascading failures by temporarily disabling failing services  
 C) To improve accuracy  
 D) To enable load balancing  
 
-**Question 4:** How should enterprise RAG systems handle sensitive data?
-
+**Question 4:** How should enterprise RAG systems handle sensitive data?  
 A) Store in plain text for performance  
 B) Encrypt at rest and in transit, with audit logging  
 C) Use only public data  
 D) Store in separate databases only  
 
-**Question 5:** What metrics are most important for enterprise RAG monitoring?
-
+**Question 5:** What metrics are most important for enterprise RAG monitoring?  
 A) Only response time  
 B) Response time, error rates, throughput, and business KPIs  
 C) Only error counts  
 D) Only resource utilization  
 
-[**🗂️ View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session1_ModuleB_Test_Solutions.md`
+
+## 🧭 Navigation
+
+**Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
+
+**Optional Deep Dive Modules:**
+
+- 🔧 **[Module A: Production Patterns](Session1_ModuleA_Production_Patterns.md)** - Production-ready RAG implementation patterns
+- 🏭 **[Module B: Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)** - Enterprise-scale deployment patterns
+
+**Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
 
 ---

@@ -95,8 +95,10 @@ Your Session 4 enhancements - HyDE, query expansion, context optimization - add 
 
 This framework enables scientific comparison between your baseline RAG and enhanced systems:
 
+First, we establish the foundation imports and data structures for our comprehensive evaluation system:
+
 ```python
-# Comprehensive RAG evaluation framework
+# Foundation imports for RAG evaluation framework
 from typing import List, Dict, Any, Optional, Tuple
 import numpy as np
 from dataclasses import dataclass
@@ -104,7 +106,11 @@ from abc import ABC, abstractmethod
 import json
 import time
 from collections import defaultdict
+```
 
+Next, we define the structured result container that captures all evaluation dimensions:
+
+```python
 @dataclass
 class RAGEvaluationResult:
     """Structured result for RAG evaluation."""
@@ -116,7 +122,11 @@ class RAGEvaluationResult:
     generation_scores: Dict[str, float] = None
     end_to_end_scores: Dict[str, float] = None
     metadata: Dict[str, Any] = None
+```
 
+Now we implement the main evaluation framework class with initialization and evaluator setup:
+
+```python
 class RAGEvaluationFramework:
     """Comprehensive evaluation framework for RAG systems."""
 
@@ -132,7 +142,11 @@ class RAGEvaluationFramework:
             'factual': FactualConsistencyEvaluator(llm_judge),
             'relevance': RelevanceEvaluator(llm_judge)
         }
+```
 
+We register the comprehensive metrics that will be available for evaluation across different dimensions:
+
+```python
         # Evaluation metrics registry
         self.metrics_registry = {
             'precision_at_k': self._precision_at_k,
@@ -145,7 +159,11 @@ class RAGEvaluationFramework:
             'context_precision': self._context_precision,
             'context_recall': self._context_recall
         }
+```
 
+Finally, we implement the main evaluation method that processes the entire test dataset:
+
+```python
     def evaluate_rag_system(self, test_dataset: List[Dict],
                            rag_system,
                            evaluation_config: Dict) -> Dict[str, Any]:
@@ -155,7 +173,11 @@ class RAGEvaluationFramework:
 
         evaluation_results = []
         performance_metrics = defaultdict(list)
+```
 
+We iterate through each test case and evaluate the RAG system performance:
+
+```python
         for i, test_case in enumerate(test_dataset):
             if i % 10 == 0:
                 print(f"Evaluating example {i+1}/{len(test_dataset)}")
@@ -172,8 +194,12 @@ class RAGEvaluationFramework:
 
             # Aggregate metrics
             self._aggregate_metrics(eval_result, performance_metrics)
+```
 
-        # Compute final metrics
+Finally, we compute final metrics and return comprehensive evaluation results:
+
+```python
+        # Compute final metrics and return comprehensive results
         final_metrics = self._compute_final_metrics(performance_metrics)
 
         return {
@@ -189,6 +215,10 @@ class RAGEvaluationFramework:
 
 RAGAS (RAG Assessment) provides standardized evaluation metrics:
 
+**RAGAS Integration**
+
+RAGAS (RAG Assessment) provides standardized evaluation metrics. First, we import the necessary components:
+
 ```python
 # RAGAS integration for standardized evaluation
 from ragas import evaluate
@@ -202,7 +232,11 @@ from ragas.metrics import (
     answer_similarity
 )
 from datasets import Dataset
+```
 
+Next, we create the RAGAS evaluator class that configures the standardized metrics:
+
+```python
 class RAGASEvaluator:
     """RAGAS-based evaluation system."""
 
@@ -210,7 +244,7 @@ class RAGASEvaluator:
         self.llm_model = llm_model
         self.embedding_model = embedding_model
 
-        # Configure RAGAS metrics
+        # Configure RAGAS metrics with their purposes
         self.metrics = [
             faithfulness,           # Factual consistency
             answer_relevancy,       # Answer relevance to question
@@ -220,12 +254,20 @@ class RAGASEvaluator:
             answer_correctness,     # Correctness compared to ground truth
             answer_similarity       # Semantic similarity to ground truth
         ]
+```
 
-        # Initialize with models
+We initialize the metrics with our models:
+
+```python
+        # Initialize metrics with models
         for metric in self.metrics:
             if hasattr(metric, 'init'):
                 metric.init(self.llm_model, self.embedding_model)
+```
 
+The main evaluation method prepares data and selects appropriate metrics:
+
+```python
     def evaluate_with_ragas(self, rag_results: List[Dict],
                            include_ground_truth: bool = True) -> Dict[str, Any]:
         """Evaluate using RAGAS framework."""
@@ -238,8 +280,12 @@ class RAGASEvaluator:
         selected_metrics = self._select_metrics(include_ground_truth)
 
         print(f"Running RAGAS evaluation with {len(selected_metrics)} metrics...")
+```
 
-        # Run evaluation
+We execute the RAGAS evaluation and return comprehensive results:
+
+```python
+        # Run evaluation and return comprehensive results
         ragas_results = evaluate(
             dataset=dataset,
             metrics=selected_metrics
@@ -254,6 +300,9 @@ class RAGASEvaluator:
 ```
 
 **Step 1: RAGAS Dataset Preparation**
+
+This crucial method transforms your RAG results into the standardized RAGAS format:
+
 ```python
     def _prepare_ragas_dataset(self, rag_results: List[Dict],
                               include_ground_truth: bool) -> Dict[str, List]:
@@ -265,7 +314,11 @@ class RAGASEvaluator:
             'contexts': [],
             'ground_truths': [] if include_ground_truth else None
         }
+```
 
+We iterate through each RAG result and format the data according to RAGAS requirements:
+
+```python
         for result in rag_results:
             dataset_dict['question'].append(result['query'])
             dataset_dict['answer'].append(result['generated_answer'])
@@ -278,7 +331,11 @@ class RAGASEvaluator:
                     for ctx in result['retrieved_contexts']
                 ]
             dataset_dict['contexts'].append(contexts)
+```
 
+Finally, we handle ground truth data if available:
+
+```python
             # Add ground truth if available
             if include_ground_truth and 'ground_truth' in result:
                 if dataset_dict['ground_truths'] is not None:
@@ -287,7 +344,11 @@ class RAGASEvaluator:
                     if isinstance(gt, str):
                         gt = [gt]
                     dataset_dict['ground_truths'].append(gt)
+```
 
+We clean up the dataset structure and return the formatted data:
+
+```python
         # Remove ground_truths if not using
         if not include_ground_truth:
             del dataset_dict['ground_truths']
@@ -299,6 +360,10 @@ class RAGASEvaluator:
 
 Implement domain-specific and advanced evaluation metrics:
 
+**Custom Evaluation Metrics**
+
+Implement domain-specific and advanced evaluation metrics. First, we establish the custom metrics class:
+
 ```python
 # Custom evaluation metrics
 class CustomRAGMetrics:
@@ -307,7 +372,11 @@ class CustomRAGMetrics:
     def __init__(self, llm_judge, domain_knowledge: Optional[Dict] = None):
         self.llm_judge = llm_judge
         self.domain_knowledge = domain_knowledge or {}
+```
 
+Now we implement the answer completeness evaluation using LLM-as-a-judge:
+
+```python
     def evaluate_answer_completeness(self, query: str, answer: str,
                                    contexts: List[str]) -> float:
         """Evaluate how completely the answer addresses the query."""
@@ -327,7 +396,11 @@ class CustomRAGMetrics:
         - 0.4: Answer partially addresses the question but lacks important information
         - 0.1: Answer barely addresses the question or contains mostly irrelevant information
         - 0.0: Answer completely fails to address the question
+```
 
+We define specific evaluation criteria and handle the LLM response:
+
+```python
         Consider:
         1. Does the answer cover all aspects of the question?
         2. Are important details included?
@@ -343,7 +416,11 @@ class CustomRAGMetrics:
             return max(0.0, min(1.0, score))
         except:
             return 0.5
+```
 
+Next, we implement citation quality evaluation by counting citation patterns:
+
+```python
     def evaluate_citation_quality(self, answer: str, contexts: List[str]) -> float:
         """Evaluate quality of citations and source attribution."""
 
@@ -352,7 +429,11 @@ class CustomRAGMetrics:
         citation_count = sum(
             answer.lower().count(pattern.lower()) for pattern in citation_patterns
         )
+```
 
+We check if citations match available contexts through overlap analysis:
+
+```python
         # Check if citations match available contexts
         valid_citations = 0
         for context in contexts:
@@ -363,7 +444,11 @@ class CustomRAGMetrics:
 
             if overlap > 5:  # Threshold for meaningful overlap
                 valid_citations += 1
+```
 
+Finally, we calculate and return the overall citation quality score:
+
+```python
         # Calculate citation quality score
         if len(contexts) == 0:
             return 0.0
@@ -378,13 +463,20 @@ class CustomRAGMetrics:
 ```
 
 **Step 2: Retrieval Quality Assessment**
+
+Specialized evaluator for analyzing retrieval performance. First, we establish the evaluator class:
+
 ```python
 class RetrievalEvaluator:
     """Specialized evaluator for retrieval quality."""
 
     def __init__(self, embedding_model):
         self.embedding_model = embedding_model
+```
 
+The main evaluation method calculates multiple retrieval quality dimensions:
+
+```python
     def evaluate_retrieval_quality(self, query: str, retrieved_contexts: List[str],
                                  ground_truth_contexts: List[str] = None) -> Dict[str, float]:
         """Comprehensive retrieval quality evaluation."""
@@ -414,7 +506,11 @@ class RetrievalEvaluator:
             metrics.update(precision_recall)
 
         return metrics
+```
 
+We calculate semantic relevance by measuring embedding similarity between query and contexts:
+
+```python
     def _calculate_semantic_relevance(self, query: str,
                                     contexts: List[str]) -> float:
         """Calculate average semantic relevance of contexts to query."""
@@ -434,7 +530,11 @@ class RetrievalEvaluator:
             similarities.append(similarity)
 
         return float(np.mean(similarities))
+```
 
+Finally, we assess context diversity to ensure retrieved contexts provide varied perspectives:
+
+```python
     def _calculate_context_diversity(self, contexts: List[str]) -> float:
         """Calculate diversity among retrieved contexts."""
 
@@ -467,6 +567,10 @@ class RetrievalEvaluator:
 
 Use LLMs to evaluate response quality automatically:
 
+**LLM-as-a-Judge Evaluation**
+
+Use LLMs to evaluate response quality automatically. First, we establish the judge evaluator with aspect-specific prompts:
+
 ```python
 # LLM-as-a-Judge evaluation system
 class LLMJudgeEvaluator:
@@ -484,7 +588,11 @@ class LLMJudgeEvaluator:
             'coherence': self._coherence_evaluation_prompt,
             'helpfulness': self._helpfulness_evaluation_prompt
         }
+```
 
+The main evaluation method processes multiple quality aspects and calculates comprehensive scores:
+
+```python
     def evaluate_response_quality(self, query: str, response: str,
                                 contexts: List[str],
                                 aspects: List[str] = None) -> Dict[str, Any]:
@@ -504,7 +612,7 @@ class LLMJudgeEvaluator:
                 evaluation_results[aspect] = score
                 detailed_feedback[aspect] = feedback
 
-        # Calculate overall score
+        # Calculate overall score and return comprehensive evaluation
         overall_score = np.mean(list(evaluation_results.values()))
 
         return {
@@ -518,6 +626,9 @@ class LLMJudgeEvaluator:
 ```
 
 **Step 3: Aspect-Specific Evaluation Prompts**
+
+Here we implement detailed prompts for different evaluation dimensions. First, the relevance evaluation prompt:
+
 ```python
     def _relevance_evaluation_prompt(self, query: str, response: str,
                                    contexts: List[str]) -> str:
@@ -536,7 +647,11 @@ EVALUATION CRITERIA:
 2. Scope Alignment: Is the response appropriately scoped to the query?
 3. Focus: Does the response stay focused on the main question?
 4. Completeness: Does it address all parts of multi-part questions?
+```
 
+We define the scoring scale and output format for consistent evaluation:
+
+```python
 SCORING SCALE:
 5 - Excellent: Response perfectly addresses the query with complete relevance
 4 - Good: Response addresses the query well with minor irrelevant content
@@ -549,7 +664,11 @@ SCORE: [1-5]
 REASONING: [Detailed explanation of your scoring decision]
 SUGGESTIONS: [How the response could be improved]
 """
+```
 
+Next, we implement the accuracy evaluation prompt that focuses on factual correctness:
+
+```python
     def _accuracy_evaluation_prompt(self, query: str, response: str,
                                   contexts: List[str]) -> str:
         """Generate prompt for accuracy evaluation."""
@@ -572,14 +691,22 @@ EVALUATION CRITERIA:
 2. Source Consistency: Does the response align with the provided contexts?
 3. No Hallucinations: Does the response avoid making up information not in the contexts?
 4. Proper Attribution: Are claims properly supported by the available information?
+```
 
+Finally, we define the accuracy scoring system with specific focus on factual verification:
+
+```python
 SCORING SCALE:
 5 - Excellent: All information is accurate and well-supported by contexts
 4 - Good: Mostly accurate with minor unsupported details
 3 - Average: Generally accurate but contains some questionable claims
 2 - Poor: Contains several inaccuracies or unsupported claims
 1 - Very Poor: Contains significant inaccuracies or fabricated information
+```
 
+We specify the required output format for consistent evaluation:
+
+```python
 Provide your evaluation in this format:
 SCORE: [1-5]
 REASONING: [Detailed explanation focusing on specific factual claims]
@@ -592,6 +719,10 @@ SUGGESTIONS: [How accuracy could be improved]
 
 Create automated pipelines for continuous evaluation:
 
+**Automated Benchmark Testing**
+
+Create automated pipelines for continuous evaluation. First, we establish the benchmark testing framework:
+
 ```python
 # Automated benchmark testing system
 class AutomatedRAGBenchmark:
@@ -601,7 +732,11 @@ class AutomatedRAGBenchmark:
         self.evaluation_framework = evaluation_framework
         self.test_datasets = test_datasets
         self.benchmark_history = []
+```
 
+The comprehensive benchmark method coordinates evaluation across multiple datasets:
+
+```python
     def run_comprehensive_benchmark(self, rag_system,
                                    benchmark_config: Dict) -> Dict[str, Any]:
         """Run comprehensive benchmark across multiple test datasets."""
@@ -614,7 +749,11 @@ class AutomatedRAGBenchmark:
         }
 
         print("Starting comprehensive RAG benchmark...")
+```
 
+We iterate through each test dataset and evaluate the RAG system performance:
+
+```python
         # Run evaluation on each test dataset
         for dataset_name, dataset in self.test_datasets.items():
             print(f"\nEvaluating on {dataset_name} dataset ({len(dataset)} examples)")
@@ -627,7 +766,11 @@ class AutomatedRAGBenchmark:
 
             # Extract key metrics for aggregation
             self._extract_key_metrics(dataset_name, dataset_result, benchmark_results)
+```
 
+Finally, we aggregate results and generate comprehensive performance reports:
+
+```python
         # Calculate cross-dataset aggregates
         benchmark_results['aggregate_performance'] = self._calculate_aggregate_performance(
             benchmark_results['dataset_results']
@@ -644,6 +787,9 @@ class AutomatedRAGBenchmark:
 ```
 
 **Step 4: Performance Tracking and Regression Detection**
+
+This critical method detects performance changes between benchmark runs. We start by checking historical data availability:
+
 ```python
     def detect_performance_regression(self, current_results: Dict,
                                     threshold: float = 0.05) -> Dict[str, Any]:
@@ -661,7 +807,11 @@ class AutomatedRAGBenchmark:
             'stable_metrics': [],
             'overall_change': 0.0
         }
+```
 
+We compare current metrics against previous benchmarks across all datasets:
+
+```python
         # Compare key metrics across datasets
         for dataset_name in current_results['dataset_results']:
             if dataset_name in previous_results['dataset_results']:
@@ -673,7 +823,11 @@ class AutomatedRAGBenchmark:
                         current_score = current_metrics[metric_name]
                         previous_score = previous_metrics[metric_name]
                         change = current_score - previous_score
+```
 
+We categorize performance changes based on significance thresholds:
+
+```python
                         if change < -threshold:  # Significant decline
                             regression_analysis['declining_metrics'].append({
                                 'dataset': dataset_name,
@@ -697,7 +851,11 @@ class AutomatedRAGBenchmark:
                                 'metric': metric_name,
                                 'change': change
                             })
+```
 
+Finally, we calculate the overall performance trend and return the analysis:
+
+```python
         # Calculate overall performance change
         if regression_analysis['declining_metrics'] or regression_analysis['improving_metrics']:
             all_changes = [m['change'] for m in regression_analysis['declining_metrics']] + \
@@ -724,6 +882,10 @@ You've implemented multiple Session 4 enhancements, but which ones actually impr
 
 **A/B Testing for Enhancement Validation:**
 
+**A/B Testing for Enhancement Validation:**
+
+First, we establish the A/B testing framework for scientific RAG component comparison:
+
 ```python
 # A/B testing framework for RAG systems
 class RAGABTestFramework:
@@ -733,7 +895,11 @@ class RAGABTestFramework:
         self.evaluation_framework = evaluation_framework
         self.active_tests = {}
         self.test_history = []
+```
 
+The test setup method configures experiments for comparing different RAG component variants:
+
+```python
     def setup_ab_test(self, test_name: str,
                      component_variants: Dict[str, Any],
                      test_dataset: List[Dict],
@@ -758,7 +924,11 @@ class RAGABTestFramework:
 
         print(f"A/B test '{test_name}' setup complete with {len(component_variants)} variants")
         return test_setup
+```
 
+The execution method runs the test across all variants and collects performance data:
+
+```python
     def run_ab_test(self, test_name: str) -> Dict[str, Any]:
         """Execute A/B test and collect results."""
 
@@ -787,7 +957,11 @@ class RAGABTestFramework:
             )
 
             variant_results[variant_name] = variant_result
+```
 
+Finally, we analyze results and complete the test with comprehensive reporting:
+
+```python
         # Analyze results
         analysis_result = self._analyze_ab_results(variant_results, test_setup)
 
@@ -809,6 +983,9 @@ class RAGABTestFramework:
 ```
 
 **Step 5: Statistical Significance Testing**
+
+This method provides rigorous statistical analysis of A/B test results. We begin by setting up the analysis structure:
+
 ```python
     def _analyze_ab_results(self, variant_results: Dict,
                           test_setup: Dict) -> Dict[str, Any]:
@@ -830,7 +1007,11 @@ class RAGABTestFramework:
         for variant_name, result in variant_results.items():
             for metric_name, metric_value in result['aggregate_metrics'].items():
                 metric_comparisons[metric_name][variant_name] = metric_value
+```
 
+We perform pairwise comparisons between all variants for each metric:
+
+```python
         # Perform pairwise comparisons
         variant_names = list(variant_results.keys())
 
@@ -842,7 +1023,11 @@ class RAGABTestFramework:
 
                     score_a = metric_data[variant_a]
                     score_b = metric_data[variant_b]
+```
 
+We calculate effect sizes and statistical significance:
+
+```python
                     # Calculate effect size (Cohen's d approximation)
                     effect_size = abs(score_a - score_b) / max(
                         np.std([score_a, score_b]), 0.01
@@ -851,7 +1036,11 @@ class RAGABTestFramework:
                     # Simple significance test (would need individual scores for proper test)
                     difference = abs(score_a - score_b)
                     is_significant = difference > 0.05  # Simple threshold
+```
 
+We compile detailed comparison results:
+
+```python
                     comparison_key = f"{variant_a}_vs_{variant_b}"
                     analysis['detailed_comparison'][metric_name][comparison_key] = {
                         'variant_a_score': score_a,
@@ -861,7 +1050,11 @@ class RAGABTestFramework:
                         'is_significant': is_significant,
                         'better_variant': variant_a if score_a > score_b else variant_b
                     }
+```
 
+Finally, we determine the overall winner and generate actionable recommendations:
+
+```python
         # Determine overall winner
         analysis['winner'] = self._determine_overall_winner(
             variant_results, analysis['detailed_comparison']
@@ -876,6 +1069,10 @@ class RAGABTestFramework:
 ### **Multi-Armed Bandit Testing**
 
 Implement adaptive testing strategies:
+
+**Multi-Armed Bandit Testing**
+
+Implement adaptive testing strategies that learn from user interactions. First, we initialize the bandit with exploration parameters:
 
 ```python
 # Multi-armed bandit for RAG optimization
@@ -893,7 +1090,11 @@ class RAGMultiArmedBandit:
 
         self.total_trials = 0
         self.trial_history = []
+```
 
+The selection algorithm balances exploration of new variants with exploitation of known good ones:
+
+```python
     def select_variant(self) -> str:
         """Select variant using epsilon-greedy strategy."""
 
@@ -912,7 +1113,11 @@ class RAGMultiArmedBandit:
                 selection_reason = "exploitation"
 
         return selected_variant
+```
 
+We update rewards based on actual performance feedback:
+
+```python
     def update_reward(self, variant: str, reward: float):
         """Update reward for selected variant."""
 
@@ -921,7 +1126,11 @@ class RAGMultiArmedBandit:
         self.arm_avg_rewards[variant] = self.arm_rewards[variant] / self.arm_counts[variant]
 
         self.total_trials += 1
+```
 
+We maintain detailed trial history for analysis:
+
+```python
         # Record trial
         self.trial_history.append({
             'trial': self.total_trials,
@@ -930,7 +1139,11 @@ class RAGMultiArmedBandit:
             'avg_reward': self.arm_avg_rewards[variant],
             'timestamp': time.time()
         })
+```
 
+Finally, we provide comprehensive performance summaries:
+
+```python
     def get_performance_summary(self) -> Dict[str, Any]:
         """Get current performance summary."""
 
@@ -958,6 +1171,10 @@ class RAGMultiArmedBandit:
 
 Monitor RAG system performance in production:
 
+**Production RAG Monitoring**
+
+Monitor RAG system performance in production. First, we establish the monitoring framework with all necessary components:
+
 ```python
 # Production monitoring system
 class RAGProductionMonitor:
@@ -979,7 +1196,11 @@ class RAGProductionMonitor:
             'alerts': [],
             'system_health': []
         }
+```
 
+The main monitoring method captures and analyzes each RAG interaction:
+
+```python
     def monitor_rag_interaction(self, query: str, response: str,
                               contexts: List[str], metadata: Dict) -> Dict[str, Any]:
         """Monitor individual RAG interaction."""
@@ -1003,7 +1224,11 @@ class RAGProductionMonitor:
             query, response, contexts
         )
         monitoring_result['quality'] = quality_scores
+```
 
+We detect anomalies and trigger alerts when quality thresholds are exceeded:
+
+```python
         # Anomaly detection
         anomaly_flags = self.anomaly_detector.detect_anomalies(
             performance_metrics, quality_scores
@@ -1022,6 +1247,9 @@ class RAGProductionMonitor:
 ```
 
 **Step 6: Quality Monitoring Implementation**
+
+Real-time quality assessment for production RAG responses. We start by establishing the quality monitoring framework:
+
 ```python
 class QualityMonitor:
     """Real-time quality monitoring for RAG responses."""
@@ -1045,7 +1273,11 @@ class QualityMonitor:
             'relevance_score': {'min': 0.6, 'optimal': 0.8},
             'citation_quality': {'min': 0.4, 'optimal': 0.7}
         }
+```
 
+The main assessment method runs multiple quality checks and flags potential issues:
+
+```python
     def assess_quality(self, query: str, response: str,
                       contexts: List[str]) -> Dict[str, Any]:
         """Assess quality of RAG response."""
@@ -1073,7 +1305,11 @@ class QualityMonitor:
             except Exception as e:
                 print(f"Quality assessment error for {assessment_name}: {e}")
                 quality_scores[assessment_name] = None
+```
 
+We calculate overall quality and return comprehensive assessment results:
+
+```python
         # Calculate overall quality score
         valid_scores = [score for score in quality_scores.values() if score is not None]
         overall_quality = np.mean(valid_scores) if valid_scores else 0.0
@@ -1084,7 +1320,11 @@ class QualityMonitor:
             'quality_flags': quality_flags,
             'assessment_timestamp': time.time()
         }
+```
 
+We implement response length assessment to ensure appropriate detail level:
+
+```python
     def _assess_response_length(self, query: str, response: str,
                               contexts: List[str]) -> float:
         """Assess if response length is appropriate."""
@@ -1102,7 +1342,11 @@ class QualityMonitor:
             max_distance = max(baseline['optimal'] - baseline['min'],
                              baseline['max'] - baseline['optimal'])
             return 1.0 - (distance_from_optimal / max_distance)
+```
 
+We assess context utilization by calculating word overlap:
+
+```python
     def _assess_context_utilization(self, query: str, response: str,
                                   contexts: List[str]) -> float:
         """Assess how well the response utilizes provided contexts."""
@@ -1119,7 +1363,11 @@ class QualityMonitor:
             overlap = len(response_words.intersection(context_words))
             context_utilization = overlap / len(context_words) if context_words else 0
             utilization_scores.append(context_utilization)
+```
 
+Finally, we return the average utilization across all contexts:
+
+```python
         # Return average utilization across all contexts
         return np.mean(utilization_scores) if utilization_scores else 0.0
 ```
@@ -1127,6 +1375,10 @@ class QualityMonitor:
 ### **Alerting and Incident Response**
 
 Implement alerting for quality degradation:
+
+**Alerting and Incident Response**
+
+Implement alerting for quality degradation. First, we establish the alerting system with severity levels:
 
 ```python
 # Alerting system for RAG monitoring
@@ -1145,7 +1397,11 @@ class RAGAlertingSystem:
             'high': {'threshold_multiplier': 2.0, 'cooldown': 60},
             'critical': {'threshold_multiplier': 3.0, 'cooldown': 0}
         }
+```
 
+The main evaluation method checks multiple alert conditions and manages cooldown periods:
+
+```python
     def evaluate_alert_conditions(self, monitoring_data: Dict) -> List[Dict]:
         """Evaluate if any alert conditions are met."""
 
@@ -1163,7 +1419,11 @@ class RAGAlertingSystem:
         # Check anomaly alerts
         anomaly_alerts = self._check_anomaly_alerts(monitoring_data)
         alerts_to_trigger.extend(anomaly_alerts)
+```
 
+We filter alerts based on cooldown periods to prevent alert fatigue:
+
+```python
         # Filter out alerts in cooldown
         filtered_alerts = []
         for alert in alerts_to_trigger:
@@ -1186,7 +1446,11 @@ class RAGAlertingSystem:
             }
 
         return filtered_alerts
+```
 
+We implement quality-specific alert checking for both overall and individual metrics:
+
+```python
     def _check_quality_alerts(self, monitoring_data: Dict) -> List[Dict]:
         """Check for quality degradation alerts."""
 
@@ -1209,7 +1473,11 @@ class RAGAlertingSystem:
                         'message': f"Overall quality score {overall_score:.3f} below threshold",
                         'timestamp': time.time()
                     })
+```
 
+Finally, we check individual quality metrics against their specific thresholds:
+
+```python
             # Individual quality metric alerts
             individual_scores = quality_data.get('individual_scores', {})
             for metric, score in individual_scores.items():
@@ -1248,6 +1516,10 @@ Create a production-ready RAG evaluation and monitoring system.
 
 ### **Implementation Framework:**
 
+**Implementation Framework:**
+
+The complete RAG evaluation ecosystem brings together all components. We initialize the comprehensive system:
+
 ```python
 # Complete RAG evaluation ecosystem
 class RAGEvaluationEcosystem:
@@ -1272,7 +1544,11 @@ class RAGEvaluationEcosystem:
             'active_tests': {},
             'quality_metrics': {}
         }
+```
 
+The comprehensive evaluation method orchestrates different evaluation suites based on your needs:
+
+```python
     def run_comprehensive_evaluation(self, rag_system,
                                    evaluation_suite: str = 'full') -> Dict[str, Any]:
         """Run comprehensive evaluation suite."""
@@ -1282,7 +1558,11 @@ class RAGEvaluationEcosystem:
             'timestamp': time.time(),
             'components': {}
         }
+```
 
+We conditionally run different evaluation components:
+
+```python
         if evaluation_suite in ['full', 'benchmark']:
             # Run automated benchmark
             benchmark_results = self.benchmark_system.run_comprehensive_benchmark(
@@ -1299,7 +1579,11 @@ class RAGEvaluationEcosystem:
             # Setup production monitoring
             monitoring_setup = self._setup_production_monitoring(rag_system)
             results['components']['monitoring_setup'] = monitoring_setup
+```
 
+Finally, we generate comprehensive evaluation reports:
+
+```python
         # Generate evaluation report
         evaluation_report = self._generate_comprehensive_report(results)
         results['evaluation_report'] = evaluation_report
@@ -1336,77 +1620,59 @@ class RAGEvaluationEcosystem:
 
 ---
 
-## 📝 Multiple Choice Test - Session 5 (15 minutes)
+## 📝 Multiple Choice Test - Session 5
 
-Test your understanding of RAG evaluation and quality assessment techniques.
+Test your understanding of RAG evaluation and quality assessment techniques:
 
-### Question 1: Retrieval Quality Metrics
-**Which metric is most important for evaluating retrieval quality in RAG systems?**
-
+**Question 1:** Which metric is most important for evaluating retrieval quality in RAG systems?  
 A) Response time  
 B) Recall@K (how many relevant documents are in top-K results)  
 C) Token count  
 D) Database size  
 
-### Question 2: RAGAS Faithfulness
-**What does the RAGAS faithfulness metric measure?**
-
+**Question 2:** What does the RAGAS faithfulness metric measure?  
 A) How fast the system responds  
 B) How well retrieved documents match the query  
 C) How factually accurate the generated response is relative to retrieved context  
 D) How many sources are cited  
 
-### Question 3: A/B Testing Success
-**In A/B testing for RAG systems, what is the most reliable success metric?**
-
+**Question 3:** In A/B testing for RAG systems, what is the most reliable success metric?  
 A) System latency  
 B) Cost per query  
 C) User satisfaction and task completion rates  
 D) Number of retrieved documents  
 
-### Question 4: Automated vs Human Evaluation
-**When should you use automated LLM-as-a-judge evaluation over human evaluation?**
-
+**Question 4:** When should you use automated LLM-as-a-judge evaluation over human evaluation?  
 A) When you need perfect accuracy  
 B) When you need to evaluate at scale with consistent criteria  
 C) When the stakes are very high  
 D) Never, human evaluation is always better  
 
-### Question 5: Regression Testing Purpose
-**What is the primary purpose of regression testing in RAG evaluation?**
-
+**Question 5:** What is the primary purpose of regression testing in RAG evaluation?  
 A) To test system speed  
 B) To ensure new changes don't decrease quality on established benchmarks  
 C) To measure user satisfaction  
 D) To optimize costs  
 
-### Question 6: Hardest Failure Mode
-**Which RAG component failure mode is hardest to detect with automated metrics?**
-
+**Question 6:** Which RAG component failure mode is hardest to detect with automated metrics?  
 A) Slow retrieval speed  
 B) Empty results from vector search  
 C) Subtle hallucinations in generated responses  
 D) Database connection errors  
 
-### Question 7: Multi-Dimensional Evaluation
-**What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?**
-
+**Question 7:** What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?  
 A) Faster evaluation  
 B) Lower computational cost  
 C) Captures different failure modes that single metrics might miss  
 D) Easier to implement  
 
-### Question 8: Production Monitoring
-**In production RAG monitoring, what threshold approach is most effective for quality alerts?**
-
+**Question 8:** In production RAG monitoring, what threshold approach is most effective for quality alerts?  
 A) Fixed absolute thresholds for all metrics  
 B) Adaptive thresholds based on historical performance patterns  
 C) No thresholds, manual monitoring only  
 D) Random threshold selection  
 
-**🗂️ View Test Solutions**: Complete answers in `Session5_Test_Solutions.md`
-
----
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session5_Test_Solutions.md`
 
 ---
 
@@ -1460,11 +1726,11 @@ Ready to build RAG systems that reason about connections, not just similarities?
 
 ## 🧭 Navigation
 
-**Previous: [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)**
+**Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 
 **Optional Deep Dive Modules:**
-- **[🔬 Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)**
-- **[🏭 Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)**
 
+- 🔬 **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Custom metrics and domain-specific evaluation
+- 🏭 **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production-scale monitoring and alerting
 
-**[Next: Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)**
+**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)

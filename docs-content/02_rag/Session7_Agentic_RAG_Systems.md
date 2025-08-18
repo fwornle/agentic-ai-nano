@@ -135,7 +135,11 @@ class ReasoningAugmentedRetrieval:
         self.vector_store = vector_store
         self.knowledge_graph = knowledge_graph
         self.reasoning_engine = reasoning_engine
+```
 
+Now we set up the reasoning strategy mapping, which connects each type of logical reasoning to its specific implementation method:
+
+```python
         # Map reasoning types to specific retrieval strategies
         self.reasoning_strategies = {
             'deductive': self._deductive_reasoning_retrieval,
@@ -151,7 +155,6 @@ class ReasoningAugmentedRetrieval:
 The core orchestration method that coordinates the entire reasoning-retrieval process:
 
 ```python
-
     async def reasoning_guided_retrieve(self, query: str,
                                       reasoning_context: Dict = None) -> Dict[str, Any]:
         """Retrieve information using reasoning frameworks to guide the process.
@@ -167,7 +170,11 @@ The core orchestration method that coordinates the entire reasoning-retrieval pr
         reasoning_framework = await self._construct_reasoning_framework(
             query, reasoning_analysis, reasoning_context
         )
+```
 
+Next, we apply the reasoning strategy and validate the logical connections:
+
+```python
         # Phase 3: Use the framework to guide targeted information retrieval
         retrieved_information = await self._apply_reasoning_strategy(
             query, reasoning_framework
@@ -177,7 +184,11 @@ The core orchestration method that coordinates the entire reasoning-retrieval pr
         logical_connections = await self._validate_logical_connections(
             retrieved_information, reasoning_framework
         )
+```
 
+Finally, we return the complete reasoning-guided retrieval results:
+
+```python
         return {
             'query': query,
             'reasoning_analysis': reasoning_analysis,
@@ -193,14 +204,17 @@ The core orchestration method that coordinates the entire reasoning-retrieval pr
 This method determines what type of logical reasoning the query requires:
 
 ```python
-
     async def _analyze_reasoning_requirements(self, query: str) -> Dict[str, Any]:
         """Analyze what type of reasoning is required for this query.
         
         This analysis determines the optimal reasoning strategy and what
         types of evidence will be needed to support logical conclusions.
         """
+```
 
+We construct a comprehensive analysis prompt that examines the query's reasoning requirements:
+
+```python
         reasoning_prompt = f"""
         Analyze this query to determine the reasoning requirements:
 
@@ -212,7 +226,11 @@ This method determines what type of logical reasoning the query requires:
         3. What evidence types are required for sound reasoning?
         4. What are the potential logical fallacies to avoid?
         5. What reasoning chains would lead to the most complete answer?
+```
 
+The prompt specifies the exact JSON structure needed for consistent reasoning analysis:
+
+```python
         Return JSON:
         {{
             "primary_reasoning_type": "deductive|inductive|abductive|analogical|causal",
@@ -227,7 +245,11 @@ This method determines what type of logical reasoning the query requires:
 
         JSON:
         """
+```
 
+Finally, we execute the analysis with low temperature for consistency:
+
+```python
         # Use low temperature for consistent analysis
         response = await self._async_llm_predict(reasoning_prompt, temperature=0.1)
         return self._parse_json_response(response)
@@ -238,7 +260,6 @@ This method determines what type of logical reasoning the query requires:
 This method builds a structured framework to guide the retrieval process:
 
 ```python
-
     async def _construct_reasoning_framework(self, query: str,
                                            reasoning_analysis: Dict,
                                            context: Dict = None) -> Dict[str, Any]:
@@ -254,7 +275,11 @@ This method builds a structured framework to guide the retrieval process:
 
         # Build specialized prompt based on reasoning type
         framework_prompt = self._build_framework_prompt(query, reasoning_analysis, primary_reasoning)
+```
 
+Now we generate the framework and add metadata for tracking and optimization:
+
+```python
         # Generate structured framework using LLM
         response = await self._async_llm_predict(framework_prompt, temperature=0.2)
         framework = self._parse_json_response(response)
@@ -270,7 +295,6 @@ This method builds a structured framework to guide the retrieval process:
 This helper method creates specialized prompts for different reasoning types:
 
 ```python
-
     def _build_framework_prompt(self, query: str, reasoning_analysis: Dict,
                                primary_reasoning: str) -> str:
         """Build the reasoning framework construction prompt.
@@ -278,6 +302,11 @@ This helper method creates specialized prompts for different reasoning types:
         Creates specialized prompts that help the LLM construct proper
         logical frameworks for different reasoning types.
         """
+```
+
+The prompt template starts by setting up the reasoning context and requirements:
+
+```python
         return f"""
         Construct a reasoning framework for this query using {primary_reasoning} reasoning:
 
@@ -289,7 +318,11 @@ This helper method creates specialized prompts for different reasoning types:
         2. Logical steps that connect premises to conclusion
         3. Information gaps that must be filled
         4. Validation checkpoints for logical consistency
+```
 
+The prompt defines the exact JSON structure needed for consistent framework generation:
+
+```python
         Return JSON:
         {{
             "reasoning_premises": [
@@ -337,7 +370,6 @@ Adds tracking information for performance optimization and framework reuse:
 This method implements the deductive reasoning approach to information retrieval:
 
 ```python
-
     async def _deductive_reasoning_retrieval(self, query: str,
                                            framework: Dict) -> Dict[str, Any]:
         """Implement deductive reasoning retrieval strategy.
@@ -348,7 +380,11 @@ This method implements the deductive reasoning approach to information retrieval
 
         premises = framework.get('reasoning_premises', [])
         logical_steps = framework.get('logical_steps', [])
+```
 
+**Phase 1: Evidence Gathering** - We systematically collect evidence for each logical premise:
+
+```python
         # Phase 1: Gather evidence for each logical premise
         premise_evidence = {}
         for premise_data in premises:
@@ -360,7 +396,11 @@ This method implements the deductive reasoning approach to information retrieval
                 premise, evidence_type, query
             )
             premise_evidence[premise] = premise_retrieval
+```
 
+**Phase 2: Logical Step Application** - We apply reasoning steps using the gathered evidence:
+
+```python
         # Phase 2: Apply logical steps using gathered evidence
         logical_progression = []
         for step in logical_steps:
@@ -368,7 +408,11 @@ This method implements the deductive reasoning approach to information retrieval
                 step, premise_evidence, logical_progression
             )
             logical_progression.append(step_result)
+```
 
+**Phase 3: Conclusion Construction** - We build the final deductive conclusion and return results:
+
+```python
         # Phase 3: Build final deductive conclusion
         deductive_conclusion = await self._construct_deductive_conclusion(
             premise_evidence, logical_progression, framework
@@ -412,7 +456,6 @@ class RetrievalAugmentedReasoning:
 The main method that coordinates gap identification and knowledge integration:
 
 ```python
-
     async def enhanced_reasoning(self, reasoning_query: str,
                                 initial_knowledge: Dict = None) -> Dict[str, Any]:
         """Perform reasoning enhanced by targeted information retrieval.
@@ -430,7 +473,11 @@ The main method that coordinates gap identification and knowledge integration:
         gap_filling_retrieval = await self._strategic_gap_retrieval(
             reasoning_gaps, reasoning_query
         )
+```
 
+Now we integrate the retrieved knowledge with original reasoning and validate the results:
+
+```python
         # Phase 3: Combine original reasoning with retrieved knowledge
         enhanced_reasoning_result = await self._integrate_knowledge_into_reasoning(
             reasoning_query, initial_knowledge, gap_filling_retrieval
@@ -440,7 +487,11 @@ The main method that coordinates gap identification and knowledge integration:
         reasoning_validation = await self._validate_enhanced_reasoning(
             enhanced_reasoning_result, reasoning_query
         )
+```
 
+Finally, we return the complete enhanced reasoning results with quality metrics:
+
+```python
         return {
             'reasoning_query': reasoning_query,
             'identified_gaps': reasoning_gaps,
@@ -458,7 +509,6 @@ The main method that coordinates gap identification and knowledge integration:
 This method analyzes reasoning to find where external knowledge would help:
 
 ```python
-
     async def _identify_reasoning_gaps(self, reasoning_query: str,
                                      initial_knowledge: Dict = None) -> Dict[str, Any]:
         """Identify what external knowledge would strengthen reasoning.
@@ -466,7 +516,11 @@ This method analyzes reasoning to find where external knowledge would help:
         Analyzes the reasoning chain to find missing facts, weak premises,
         counter-arguments, and other knowledge that would improve logical soundness.
         """
+```
 
+We create a comprehensive prompt to analyze what knowledge gaps exist in the reasoning:
+
+```python
         gap_analysis_prompt = f"""
         Analyze this reasoning query to identify knowledge gaps that external information could fill:
 
@@ -479,7 +533,11 @@ This method analyzes reasoning to find where external knowledge would help:
         3. Expert opinions that would validate reasoning steps
         4. Counter-arguments that should be addressed
         5. Historical examples or case studies that would illustrate points
+```
 
+The prompt defines the specific JSON structure needed for systematic gap analysis:
+
+```python
         Return JSON:
         {{
             "critical_gaps": [
@@ -493,7 +551,11 @@ This method analyzes reasoning to find where external knowledge would help:
 
         JSON:
         """
+```
 
+Finally, we execute the gap analysis with consistent temperature settings:
+
+```python
         # Use low temperature for consistent gap analysis
         response = await self._async_llm_predict(gap_analysis_prompt, temperature=0.2)
         return self._parse_json_response(response)
@@ -550,7 +612,11 @@ Now let's implement the core method that orchestrates the entire reasoning proce
             'validate_each_step': True,
             'retrieve_at_each_step': True
         }
+```
 
+Next, we analyze the query requirements and build a structured reasoning plan:
+
+```python
         # Phase 1: Analyze reasoning requirements for this query
         cot_analysis = await self._analyze_cot_requirements(query)
 
@@ -636,6 +702,11 @@ Helper method that constructs the detailed prompt for reasoning chain generation
 ```python
     def _build_reasoning_chain_prompt(self, query: str, pattern: str, depth: str) -> str:
         """Build detailed prompt for reasoning chain construction."""
+```
+
+The method constructs a comprehensive prompt that defines the reasoning chain requirements:
+
+```python
         return f"""
         Construct a step-by-step chain-of-thought reasoning plan for this query:
 
@@ -648,7 +719,11 @@ Helper method that constructs the detailed prompt for reasoning chain generation
         2. Information retrieval points where external knowledge is needed
         3. Validation checkpoints to ensure logical consistency
         4. Synthesis points where information is integrated
+```
 
+The prompt defines the specific JSON structure for systematic reasoning chain generation:
+
+```python
         Return JSON:
         {{
             "reasoning_steps": [
@@ -3128,7 +3203,14 @@ The planning, validation, and iterative refinement capabilities you've mastered 
 ---
 
 ## 🧭 Navigation
+
 **Previous:** [Session 6 - Graph-Based RAG (GraphRAG)](Session6_Graph_Based_RAG.md)
 
+**Optional Deep Dive Modules:**
+
+- 🔬 **[Module A: Advanced Agent Reasoning](Session7_ModuleA_Advanced_Reasoning.md)** - Deep dive into sophisticated reasoning algorithms and cognitive architectures
+- 🏭 **[Module B: Production Agent Deployment](Session7_ModuleB_Production_Agents.md)** - Enterprise-scale agent deployment patterns and monitoring systems
+
+**📝 Test Your Knowledge:** [Session 7 Test Solutions](Session7_Test_Solutions.md)
 
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)

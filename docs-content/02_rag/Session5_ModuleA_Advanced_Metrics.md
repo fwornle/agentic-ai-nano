@@ -160,43 +160,51 @@ The attribution calculation uses a leave-one-out approach: by removing each docu
 
 Test your understanding of advanced evaluation metrics:
 
-**Question 1:** What is the main advantage of BERTScore over traditional BLEU scores?
-
+**Question 1:** What is the main advantage of BERTScore over traditional BLEU scores?  
 A) Faster computation  
 B) Better semantic similarity assessment using contextual embeddings  
 C) Simpler implementation  
 D) Lower memory requirements  
 
-**Question 2:** Why are domain-specific evaluation metrics important for specialized RAG systems?
-
+**Question 2:** Why are domain-specific evaluation metrics important for specialized RAG systems?  
 A) They reduce computational costs  
 B) They provide more accurate assessment of domain-relevant quality factors  
 C) They are easier to implement  
 D) They require less training data  
 
-**Question 3:** What do attribution scores in explainability evaluation measure?
-
+**Question 3:** What do attribution scores in explainability evaluation measure?  
 A) The speed of document retrieval  
 B) The contribution of each retrieved document to the final response  
 C) The storage efficiency of the system  
 D) The user satisfaction ratings  
 
-**Question 4:** What is the key benefit of neural evaluation metrics?
-
+**Question 4:** What is the key benefit of neural evaluation metrics?  
 A) Lower computational requirements  
 B) Ability to capture nuanced semantic relationships that traditional metrics miss  
 C) Simpler implementation process  
 D) Better compatibility with older systems  
 
-**Question 5:** In medical RAG evaluation, what is the most critical safety metric?
-
+**Question 5:** In medical RAG evaluation, what is the most critical safety metric?  
 A) Response speed  
 B) Contraindication detection and safety assessment  
 C) Text length optimization  
 D) User interface quality  
 
-[**🗂️ View Test Solutions →**](Session5_ModuleA_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session5_ModuleA_Test_Solutions.md`
 
 ---
 
-**Navigation**: [← Back to Session 5](Session5_RAG_Evaluation_Quality_Assessment.md) | [Module B: Enterprise Monitoring →](Session5_ModuleB_Enterprise_Monitoring.md)
+## 🧭 Navigation
+
+**Related Modules:**
+- **Core Session:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
+- **Related Module:** [Module B - Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)
+
+**🗂️ Code Files:** All examples use files in `src/session5/`
+- `evaluation_framework.py` - Advanced metrics implementation
+- `custom_metrics.py` - Domain-specific evaluation metrics
+- `benchmark_system.py` - Performance benchmarking tools
+
+**🚀 Quick Start:** Run `cd src/session5 && python demo_evaluation_system.py` to see advanced metrics in action
+
+---

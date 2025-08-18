@@ -102,7 +102,10 @@ Network segmentation creates isolated security zones for different component typ
 ```
 
 Identity management goes beyond traditional authentication with continuous verification, risk-based decisions, and special handling for privileged access. This ensures authentic users are continuously validated throughout their session.
-        
+
+Next, we implement comprehensive data protection with four-tier classification:
+
+```python
         # 3. Data Protection
         data_protection = await self.data_classifier.implement_data_protection({
             'classification_levels': ['public', 'internal', 'confidential', 'restricted'],
@@ -292,7 +295,10 @@ Data discovery performs comprehensive analysis of each source, including deep sc
 ```
 
 Automated classification applies multiple frameworks to identify personally identifiable information (PII), protected health information (PHI), financial data, and proprietary content with high confidence thresholds.
-            
+
+Next, we establish data lineage tracking to map data flow and transformations:
+
+```python
             # 3. Data Lineage Tracking
             lineage_setup = await self.lineage_tracker.establish_lineage_tracking({
                 'source_id': source_id,
@@ -631,53 +637,59 @@ class RAGInfrastructureAsCode:
     def _get_kubernetes_resources(self, environment: str) -> Dict[str, List[Dict]]:
         """Generate Kubernetes resource definitions for RAG system."""
         
+        # Define RAG orchestrator deployment
+        orchestrator_deployment = {
+            'apiVersion': 'apps/v1',
+            'kind': 'Deployment',
+            'metadata': {
+                'name': 'rag-orchestrator',
+                'namespace': 'rag-system'
+            },
+            'spec': {
+                'replicas': self.config.get(f'{environment}.orchestrator.replicas', 3),
+                'selector': {'matchLabels': {'app': 'rag-orchestrator'}},
+                'template': {
+                    'metadata': {'labels': {'app': 'rag-orchestrator'}},
+                    'spec': {
+                        'containers': [{
+                            'name': 'orchestrator',
+                            'image': f"rag-orchestrator:{self.config.get('image_tag', 'latest')}",
+                            'resources': {
+                                'requests': {'cpu': '500m', 'memory': '1Gi'},
+                                'limits': {'cpu': '2', 'memory': '4Gi'}
+                            },
+                            'env': [
+                                {'name': 'ENVIRONMENT', 'value': environment},
+                                {'name': 'LOG_LEVEL', 'value': 'INFO'}
+                            ]
+                        }]
+                    }
+                }
+            }
+        }
+```
+
+Next, we define the orchestrator service for internal communication:
+
+```python
+        # Define orchestrator service
+        orchestrator_service = {
+            'apiVersion': 'v1',
+            'kind': 'Service',
+            'metadata': {
+                'name': 'rag-orchestrator-service',
+                'namespace': 'rag-system'
+            },
+            'spec': {
+                'selector': {'app': 'rag-orchestrator'},
+                'ports': [{'port': 8080, 'targetPort': 8080}],
+                'type': 'ClusterIP'
+            }
+        }
+        
         return {
-            'deployments': [
-                {
-                    'apiVersion': 'apps/v1',
-                    'kind': 'Deployment',
-                    'metadata': {
-                        'name': 'rag-orchestrator',
-                        'namespace': 'rag-system'
-                    },
-                    'spec': {
-                        'replicas': self.config.get(f'{environment}.orchestrator.replicas', 3),
-                        'selector': {'matchLabels': {'app': 'rag-orchestrator'}},
-                        'template': {
-                            'metadata': {'labels': {'app': 'rag-orchestrator'}},
-                            'spec': {
-                                'containers': [{
-                                    'name': 'orchestrator',
-                                    'image': f"rag-orchestrator:{self.config.get('image_tag', 'latest')}",
-                                    'resources': {
-                                        'requests': {'cpu': '500m', 'memory': '1Gi'},
-                                        'limits': {'cpu': '2', 'memory': '4Gi'}
-                                    },
-                                    'env': [
-                                        {'name': 'ENVIRONMENT', 'value': environment},
-                                        {'name': 'LOG_LEVEL', 'value': 'INFO'}
-                                    ]
-                                }]
-                            }
-                        }
-                    }
-                }
-            ],
-            'services': [
-                {
-                    'apiVersion': 'v1',
-                    'kind': 'Service',
-                    'metadata': {
-                        'name': 'rag-orchestrator-service',
-                        'namespace': 'rag-system'
-                    },
-                    'spec': {
-                        'selector': {'app': 'rag-orchestrator'},
-                        'ports': [{'port': 8080, 'targetPort': 8080}],
-                        'type': 'ClusterIP'
-                    }
-                }
-            ]
+            'deployments': [orchestrator_deployment],
+            'services': [orchestrator_service]
         }
 ```
 
@@ -785,66 +797,55 @@ class EnterpriseComplianceFramework:
 
 *Enterprise compliance automation ensures continuous adherence to regulatory requirements with minimal manual oversight and comprehensive audit trails.*
 
-## 📝 Module Test
+## 📝 Multiple Choice Test - Module B
 
-### Question 1: Zero-Trust Security
-**What is the core principle of zero-trust security for RAG systems?**
+Test your understanding of enterprise integration architectures:
 
+**Question 1:** What is the core principle of zero-trust security for RAG systems?  
 A) Trust internal network components by default  
 B) Never trust, always verify every component and user  
 C) Use simple password authentication  
 D) Focus only on external threats  
 
-### Question 2: Dynamic Access Control
-**Why is dynamic access control superior to static RBAC for enterprise RAG?**
-
+**Question 2:** Why is dynamic access control superior to static RBAC for enterprise RAG?  
 A) It's easier to configure  
 B) It adapts security measures based on real-time risk assessment  
 C) It requires fewer resources  
 D) It's compatible with legacy systems  
 
-### Question 3: Data Governance
-**What is the most critical component of enterprise data governance for RAG?**
-
+**Question 3:** What is the most critical component of enterprise data governance for RAG?  
 A) Data storage optimization  
 B) Automated classification and lineage tracking  
 C) User interface design  
 D) Network bandwidth management  
 
-### Question 4: CI/CD for RAG
-**Which testing stage is most unique to RAG CI/CD pipelines?**
-
+**Question 4:** Which testing stage is most unique to RAG CI/CD pipelines?  
 A) Unit testing  
 B) Integration testing  
 C) Model validation and embedding consistency testing  
 D) Load testing  
 
-### Question 5: Infrastructure as Code
-**What is the primary benefit of Infrastructure as Code for RAG deployments?**
-
+**Question 5:** What is the primary benefit of Infrastructure as Code for RAG deployments?  
 A) Faster deployment speed  
 B) Consistent, repeatable, and version-controlled deployments  
 C) Lower infrastructure costs  
 D) Simpler debugging  
 
-### Question 6: Compliance Automation
-**Which approach is most effective for enterprise compliance in RAG systems?**
-
-A) Manual compliance checks  
-B) Continuous automated monitoring with real-time remediation  
-C) Annual compliance audits  
-D) Documentation-only compliance  
-
-### Question 7: Enterprise Integration
-**What is the most challenging aspect of enterprise RAG integration?**
-
-A) Hardware compatibility  
-B) Balancing security, compliance, and performance requirements  
-C) User training requirements  
-D) Software licensing costs  
-
-[**🗂️ View Test Solutions →**](Session9_ModuleB_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session9_ModuleB_Test_Solutions.md`
 
 ---
 
-[← Back to Session 9](Session9_Production_RAG_Enterprise_Integration.md) | [Module A](Session9_ModuleA_Advanced_Production.md)
+## 🧭 Navigation
+
+**Related Modules:**
+- **Core Session:** [Session 9 - Production RAG & Enterprise Integration](Session9_Production_RAG_Enterprise_Integration.md)
+- **Related Module:** [Module A - Advanced Production](Session9_ModuleA_Advanced_Production.md)
+
+**🗂️ Code Files:** All examples use files in `src/session9/`
+- `enterprise_integration.py` - Enterprise system integration patterns
+- `privacy_compliance.py` - Data privacy and regulatory compliance
+- `production_rag_orchestrator.py` - Enterprise RAG orchestration
+
+**🚀 Quick Start:** Run `cd src/session9 && python enterprise_integration.py` to see enterprise integration patterns in action
+
+---

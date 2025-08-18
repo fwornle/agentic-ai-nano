@@ -4,13 +4,11 @@
 
 ### Question 1: Query Planning Advantage
 
-**What is the primary advantage of query planning in agentic RAG systems?**
-
-A) Strategic analysis of queries to determine optimal retrieval and generation approaches ✅  
-B) Simpler system architecture  
-C) Faster response times  
-D) Reduced computational costs  
-**Correct Answer: A) Strategic analysis of queries to determine optimal retrieval and generation approaches**
+**What is the primary advantage of query planning in agentic RAG systems?**  
+A) Faster response times  
+B) Strategic analysis of queries to determine optimal retrieval and generation approaches ✅  
+C) Reduced computational costs  
+D) Simpler system architecture  
 
 **Explanation:** Query planning enables agentic RAG systems to analyze query complexity and characteristics, then determine the optimal approach (simple retrieval, multi-hop reasoning, tool integration, etc.). This strategic analysis leads to better results rather than applying a one-size-fits-all approach to all queries.
 
@@ -18,41 +16,35 @@ D) Reduced computational costs
 
 ### Question 2: Self-Correction Error Detection
 
-**In self-correcting RAG systems, what is the most effective approach for error detection?**
-
-A) LLM-as-a-judge evaluation with factual consistency checking ✅  
-B) Simple keyword matching  
-C) Response length validation  
-D) Random response sampling  
-**Correct Answer: A) LLM-as-a-judge evaluation with factual consistency checking**
+**In self-correcting RAG systems, what is the most effective approach for error detection?**  
+A) Random response sampling  
+B) LLM-as-a-judge evaluation with factual consistency checking ✅  
+C) Simple keyword matching  
+D) Response length validation  
 
 **Explanation:** LLM-as-a-judge evaluation can assess factual consistency, logical coherence, and completeness of responses against the retrieved context. This sophisticated evaluation captures subtle errors that simple heuristics would miss, enabling effective self-correction.
 
 ---
 
-### Question 3: External Tool Usage Criteria
+### Question 3: External Tool Integration
 
-**When should agentic RAG systems use external tools rather than just document retrieval?**
-
-A) Only for simple questions  
+**When should agentic RAG systems use external tools rather than just document retrieval?**  
+A) Always, for every query  
 B) Never, document retrieval is always sufficient  
-C) Always, for every query  
-D) When queries require real-time data, calculations, or specialized functionality ✅  
-**Correct Answer: D) When queries require real-time data, calculations, or specialized functionality**
+C) When queries require real-time data, calculations, or specialized functionality ✅  
+D) Only for simple questions  
 
 **Explanation:** External tools should be used when document retrieval alone cannot satisfy the query requirements. This includes real-time information (weather, stock prices), mathematical calculations, database queries, or specialized API calls that provide capabilities beyond static document content.
 
 ---
 
-### Question 4: Multi-Agent Collaboration Benefits
+### Question 4: Multi-Agent Collaboration Benefit
 
-**What is the key benefit of multi-agent collaboration in RAG systems?**
-
-A) Reduced memory usage  
+**What is the key benefit of multi-agent collaboration in RAG systems?**  
+A) Faster processing through parallel execution  
 B) Specialized expertise and comprehensive analysis through role-based collaboration ✅  
-C) Simpler error handling  
-D) Faster processing through parallel execution  
-**Correct Answer: B) Specialized expertise and comprehensive analysis through role-based collaboration**
+C) Reduced memory usage  
+D) Simpler error handling  
 
 **Explanation:** Multi-agent collaboration leverages specialized agents (researcher, analyzer, synthesizer, validator) that each bring focused expertise to their role. This specialization enables more thorough analysis and higher-quality synthesis than a single general-purpose agent could achieve.
 

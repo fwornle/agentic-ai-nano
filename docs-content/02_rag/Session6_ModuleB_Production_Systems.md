@@ -293,7 +293,11 @@ Batch processing triggers when either the size limit (1000 operations) or time l
 
         # Group updates by operation type for optimization
         grouped_updates = self._group_updates_by_type(batch)
+```
 
+The batch execution begins by grouping operations by type to optimize database interactions:
+
+```python
         # Execute each group with appropriate strategy
         for operation_type, operations in grouped_updates.items():
             try:
@@ -431,7 +435,11 @@ The metrics collection loop runs continuously with configurable intervals (defau
             # Node and relationship counts
             node_count = session.run("MATCH (n) RETURN count(n) as count").single()['count']
             rel_count = session.run("MATCH ()-[r]->() RETURN count(r) as count").single()['count']
+```
 
+Next, we collect growth rate metrics to track system activity levels:
+
+```python
             # Graph growth rate
             recent_nodes = session.run("""
                 MATCH (n)
@@ -441,6 +449,8 @@ The metrics collection loop runs continuously with configurable intervals (defau
 ```
 
 Graph metrics focus on structural health indicators: total node and relationship counts track overall size, while hourly growth rates indicate system activity levels. These metrics help identify unusual growth patterns that might indicate data quality issues or system problems.
+
+Finally, we analyze entity distribution and calculate graph density:
 
 ```python
             # Entity type distribution
@@ -617,43 +627,51 @@ Scaling logic requires multiple scale-up conditions (≥2) to prevent unnecessar
 
 Test your understanding of production GraphRAG systems:
 
-**Question 1:** What is the primary benefit of distributed GraphRAG over single-node deployments?
-
+**Question 1:** What is the primary benefit of distributed GraphRAG over single-node deployments?  
 A) Simpler implementation  
 B) Lower costs  
 C) Horizontal scalability for large knowledge graphs and high query loads  
 D) Better accuracy  
 
-**Question 2:** What is the main challenge in implementing real-time graph updates?
-
+**Question 2:** What is the main challenge in implementing real-time graph updates?  
 A) Storage space  
 B) Maintaining consistency while providing low-latency access  
 C) User interface complexity  
 D) Network bandwidth  
 
-**Question 3:** Which sharding strategy is most effective for GraphRAG systems?
-
+**Question 3:** Which sharding strategy is most effective for GraphRAG systems?  
 A) Random distribution  
 B) Size-based partitioning  
 C) Entity-hash based sharding to maintain relationship locality  
 D) Time-based sharding  
 
-**Question 4:** Which metrics are most important for GraphRAG auto-scaling decisions?
-
+**Question 4:** Which metrics are most important for GraphRAG auto-scaling decisions?  
 A) Storage size only  
 B) Query latency, CPU usage, memory usage, and queue length  
 C) Number of users only  
 D) Network traffic only  
 
-**Question 5:** In production GraphRAG monitoring, what should be the highest priority alert?
-
+**Question 5:** In production GraphRAG monitoring, what should be the highest priority alert?  
 A) High storage usage  
 B) Query failures or response time degradation affecting user experience  
 C) High CPU usage  
 D) Network latency  
 
-[**🗂️ View Test Solutions →**](Session6_ModuleB_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session6_ModuleB_Test_Solutions.md`
 
 ---
 
-**Navigation**: [← Module A: Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md) | [Back to Session 6 →](Session6_Graph_Based_RAG.md)
+## 🧭 Navigation
+
+**Related Modules:**
+- **Core Session:** [Session 6 - Graph-Based RAG](Session6_Graph_Based_RAG.md)
+- **Related Module:** [Module A - Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)
+
+**🗂️ Code Files:** All examples use files in `src/session6/`
+- `production_graphrag.py` - Enterprise-ready GraphRAG implementation
+- `neo4j_manager.py` - Production graph database management
+- `code_graphrag.py` - Specialized code analysis GraphRAG
+
+**🚀 Quick Start:** Run `cd src/session6 && python production_graphrag.py` to see production GraphRAG systems in action
+
+---

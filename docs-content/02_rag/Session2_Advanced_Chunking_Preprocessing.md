@@ -192,19 +192,23 @@ By recognizing these patterns, our system can identify organizational structure 
 **Pattern Matching for Lists and Code**: Next, we check for common list and code patterns that require special handling:
 
 ```python
-        # Check for lists
+        # Check for lists (bullet points and numbered)
         if re.match(r'^\s*[-*+•]\s+', text) or re.match(r'^\s*\d+\.\s+', text):
             return ContentType.LIST
 
-        # Check for code blocks
+        # Check for code blocks (fenced or indented)
         if text.startswith('```') or text.startswith('    ') or text.startswith('\t'):
             return ContentType.CODE
+```
 
-        # Check for quotes
+**Additional Content Type Detection**: Continue with quotes and tables, which require different processing strategies:
+
+```python
+        # Check for quotes (markdown or standard)
         if text.startswith('>') or text.startswith('"'):
             return ContentType.QUOTE
 
-        # Check for tables (simple detection)
+        # Check for tables (pipe-separated values)
         if '|' in text and text.count('|') >= 2:
             return ContentType.TABLE
 
@@ -474,11 +478,13 @@ The result is chunks that align with human understanding of document organizatio
 
 ### **Element Processing Loop**
 
+Now we iterate through each element in the section and intelligently decide when to create chunk boundaries:
+
 ```python
         for element in section:
             element_size = len(element.content)
 
-            # If adding this element would exceed chunk size
+            # Size-based chunking decision
             if current_size + element_size > self.max_chunk_size and current_chunk_elements:
                 # Create chunk from current elements
                 chunk = self._create_chunk_from_elements(
@@ -487,12 +493,17 @@ The result is chunks that align with human understanding of document organizatio
                     section_title
                 )
                 chunks.append(chunk)
+```
 
-                # Start new chunk with overlap
+**Intelligent Overlap Management**: When starting a new chunk, we preserve context by including overlapping elements:
+
+```python
+                # Start new chunk with overlap for continuity
                 overlap_elements = self._get_overlap_elements(current_chunk_elements)
                 current_chunk_elements = overlap_elements + [element]
                 current_size = sum(len(e.content) for e in current_chunk_elements)
             else:
+                # Add element to current chunk if size permits
                 current_chunk_elements.append(element)
                 current_size += element_size
 ```
@@ -536,10 +547,11 @@ The result is chunks that align with human understanding of document organizatio
 **Metadata Enrichment**: Extract comprehensive metadata from the document elements to enhance retrieval capabilities:
 
 ```python
-        # Extract rich metadata
+        # Extract structural information from elements
         content_types = [e.element_type.value for e in elements]
         hierarchy_levels = [e.level for e in elements]
 
+        # Build enhanced metadata with structural intelligence
         enhanced_metadata = {
             **base_metadata,
             "section_title": section_title,
@@ -547,6 +559,11 @@ The result is chunks that align with human understanding of document organizatio
             "content_types": list(set(content_types)),
             "hierarchy_levels": hierarchy_levels,
             "element_count": len(elements),
+```
+
+**Content Type Flags and Hierarchy Analysis**: Add boolean flags and hierarchy metrics for intelligent retrieval:
+
+```python
             "has_heading": ContentType.HEADING.value in content_types,
             "has_table": ContentType.TABLE.value in content_types,
             "has_code": ContentType.CODE.value in content_types,
@@ -576,13 +593,18 @@ The result is chunks that align with human understanding of document organizatio
         if not elements:
             return []
 
+        # Calculate target overlap size
         total_chars = sum(len(e.content) for e in elements)
         overlap_chars = int(total_chars * self.overlap_ratio)
+```
 
+**Element Selection Algorithm**: Select elements from the end of the current chunk to create context bridges:
+
+```python
         overlap_elements = []
         current_chars = 0
 
-        # Take elements from the end for overlap
+        # Take elements from the end for overlap (maintains reading order)
         for element in reversed(elements):
             overlap_elements.insert(0, element)
             current_chars += len(element.content)
@@ -710,8 +732,12 @@ class TableAwareChunker:
 
         if not table_lines:
             return {"rows": 0, "columns": 0, "headers": []}
+```
 
-        # Extract headers from first row
+**Header Extraction and Metadata Compilation**: Extract table headers and compile structural information:
+
+```python
+        # Extract headers from first row for context understanding
         headers = []
         if table_lines:
             header_row = table_lines[0]
@@ -965,19 +991,26 @@ class MetadataEnhancedChunker:
 
 **Step 9: Chunk Enhancement**
 
+Now we enhance each chunk with rich extracted metadata for superior retrieval performance:
+
 ```python
     def _enhance_chunk_metadata(self, chunk: Document) -> Document:
         """Enhance chunk with extracted metadata."""
         # Extract metadata from chunk content
         extracted_metadata = self.metadata_extractor.extract_enhanced_metadata(chunk)
 
-        # Merge with existing metadata
+        # Merge extracted metadata with existing structural metadata
         enhanced_metadata = {
             **chunk.metadata,
             "entities": extracted_metadata.entities,
             "keywords": extracted_metadata.keywords,
             "topics": extracted_metadata.topics,
             "dates": extracted_metadata.dates,
+```
+
+**Complete Metadata Integration**: Add technical analysis and processing timestamps:
+
+```python
             "technical_terms": extracted_metadata.technical_terms,
             "difficulty_level": extracted_metadata.difficulty_level,
             "content_summary": extracted_metadata.content_summary,
@@ -1004,15 +1037,20 @@ class MetadataEnhancedChunker:
 ```python
     def _create_searchable_content(self, original_content: str, metadata: Any) -> str:
         """Create enhanced searchable content."""
-        # Add metadata as searchable text
+        # Build searchable metadata components
         metadata_text_parts = []
 
+        # Add key searchable elements
         if metadata.keywords:
             metadata_text_parts.append(f"Keywords: {', '.join(metadata.keywords)}")
 
         if metadata.topics:
             metadata_text_parts.append(f"Topics: {', '.join(metadata.topics)}")
+```
 
+**Entity and Summary Integration**: Complete the searchable content with entities and summaries:
+
+```python
         if metadata.entities:
             metadata_text_parts.append(f"Entities: {', '.join(metadata.entities[:5])}")
 
@@ -1397,10 +1435,14 @@ class ChunkQualityAssessor:
             content = chunk.page_content
             words = content.split()
 
-            # Count unique words vs total words
+            # Calculate vocabulary richness ratio
             unique_words = len(set(words))
             total_words = len(words)
+```
 
+**Density Score Computation**: Calculate and aggregate density scores across all chunks:
+
+```python
             if total_words > 0:
                 density = unique_words / total_words
                 densities.append(density)
@@ -1507,7 +1549,9 @@ class CustomDocumentProcessor(AdvancedProcessingPipeline):
 
 ---
 
-## 📝 Multiple Choice Test - Session 2 (15 minutes)
+## 📝 Multiple Choice Test - Session 2
+
+Test your understanding of advanced chunking and preprocessing concepts:
 
 **Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?  
 A) Reduces processing time  
@@ -1515,15 +1559,11 @@ B) Enables structure-aware chunking that preserves meaning
 C) Reduces storage requirements  
 D) Improves embedding quality  
 
-
-
 **Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?  
 A) To reduce memory usage  
 B) To simplify the codebase  
 C) To improve processing speed  
 D) To preserve document structure and create meaningful chunk boundaries  
-
-
 
 **Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?  
 A) Reduces chunk size  
@@ -1531,15 +1571,11 @@ B) Enables more precise retrieval through enriched context
 C) Simplifies the chunking process  
 D) Improves computational efficiency  
 
-
-
 **Question 4:** Why do tables require specialized processing in RAG systems?  
 A) Tables use different encoding formats  
 B) Tables contain more text than paragraphs  
 C) Tables are always larger than the chunk size  
 D) Tables have structured relationships that are lost in naive chunking  
-
-
 
 **Question 5:** When processing documents with images, what is the best practice for RAG systems?  
 A) Store images as binary data in chunks  
@@ -1547,9 +1583,25 @@ B) Create separate chunks for each image
 C) Replace image references with descriptive text  
 D) Ignore images completely  
 
+**Question 6:** Which metric is most important for measuring chunk coherence in hierarchical chunking?  
+A) Topic consistency between related chunks  
+B) Number of chunks created  
+C) Average chunk size  
+D) Processing speed  
 
+**Question 7:** What is the optimal overlap ratio for hierarchical chunks?  
+A) 100% - complete duplication  
+B) 0% - no overlap needed  
+C) 10-20% - balanced context and efficiency  
+D) 50% - maximum context preservation  
 
-**[🗂️ View Test Solutions →](Session2_Test_Solutions.md)**
+**Question 8:** Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?  
+A) To select the most appropriate processing approach for the content type  
+B) To set the embedding model parameters  
+C) To reduce computational costs  
+D) To determine the number of chunks to create  
+
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session2_Test_Solutions.md`
 
 ---
 
@@ -1558,6 +1610,7 @@ D) Ignore images completely
 **Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 
 **Optional Deep Dive Modules:**
+
 - 🔬 **[Module A: Advanced Document Analytics](Session2_ModuleA_Document_Analytics.md)** - Deep analytics for document structure analysis
 - 🏭 **[Module B: Enterprise Content Processing](Session2_ModuleB_Enterprise_Processing.md)** - Enterprise-scale content processing strategies
 

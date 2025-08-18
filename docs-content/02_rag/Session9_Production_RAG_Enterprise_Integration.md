@@ -112,6 +112,8 @@ Let's build a production-ready RAG orchestrator step by step, focusing on scalab
 
 **Step 1: Define Core Service Infrastructure**
 
+First, let's establish the foundation with our core imports and health monitoring infrastructure:
+
 ```python
 # Production-ready containerized RAG system
 from typing import Dict, List, Any, Optional
@@ -121,7 +123,11 @@ from enum import Enum
 import logging
 import time
 from datetime import datetime
+```
 
+Next, we define the health monitoring framework that will track the status of all our microservices:
+
+```python
 class ServiceStatus(Enum):
     HEALTHY = "healthy"
     DEGRADED = "degraded"
@@ -142,6 +148,8 @@ class ServiceHealth:
 
 **Step 2: Initialize Production Orchestrator**
 
+Now we create the central orchestrator that manages all RAG microservices and their interactions:
+
 ```python
 class RAGServiceOrchestrator:
     """Production orchestrator for RAG microservices."""
@@ -150,7 +158,11 @@ class RAGServiceOrchestrator:
         self.service_config = service_config
         self.services = {}
         self.health_monitors = {}
+```
 
+The orchestrator maintains a service registry that maps logical service names to their implementation classes, enabling flexible service swapping:
+
+```python
         # Service registry maps service names to their implementation classes
         self.service_registry = {
             'document_processor': DocumentProcessingService,
@@ -160,7 +172,11 @@ class RAGServiceOrchestrator:
             'generation_service': GenerationService,
             'orchestration_api': OrchestrationAPIService
         }
+```
 
+Finally, we initialize the critical production infrastructure components:
+
+```python
         # Initialize critical production components
         self.load_balancer = RAGLoadBalancer()
         self.health_checker = ServiceHealthChecker()
@@ -170,6 +186,8 @@ class RAGServiceOrchestrator:
 *The orchestrator acts as the central coordinator, managing service lifecycles, health monitoring, and load balancing. This microservices architecture allows independent scaling and fault isolation.*
 
 **Step 3: Implement Service Startup with Dependency Management**
+
+The service startup process follows a carefully orchestrated dependency sequence to ensure each service has the infrastructure it needs:
 
 ```python
     async def start_services(self) -> Dict[str, Any]:
@@ -183,7 +201,11 @@ class RAGServiceOrchestrator:
             'vector_store', 'embeddings_service', 'document_processor',
             'retrieval_service', 'generation_service', 'orchestration_api'
         ]
+```
 
+For each service in our dependency order, we start the service and establish health monitoring:
+
+```python
         for service_name in service_start_order:
             if service_name in self.service_config:
                 try:
@@ -203,7 +225,11 @@ class RAGServiceOrchestrator:
                 except Exception as e:
                     startup_results[service_name] = {'status': 'failed', 'error': str(e)}
                     self.logger.error(f"Failed to start service {service_name}: {e}")
+```
 
+After all services are started, we configure the load balancer and return comprehensive startup status:
+
+```python
         # Configure load balancer with all successfully started services
         await self.load_balancer.configure_services(self.services)
 
@@ -244,6 +270,8 @@ Let's build a production-grade document processing service that can handle high 
 
 **Step 1: Initialize Processing Infrastructure**
 
+Let's build a production-grade document processing service with worker pool architecture for high-throughput document handling:
+
 ```python
 class DocumentProcessingService:
     """Scalable document processing microservice with worker pool architecture."""
@@ -254,7 +282,11 @@ class DocumentProcessingService:
         self.processing_queue = asyncio.Queue(maxsize=config.get('max_queue_size', 1000))
         self.worker_pool_size = config.get('workers', 4)
         self.workers = []
+```
 
+The service maintains comprehensive statistics for monitoring and performance optimization:
+
+```python
         # Track processing statistics for monitoring
         self.stats = {
             'documents_processed': 0,
@@ -267,6 +299,8 @@ class DocumentProcessingService:
 *The bounded queue prevents memory overflow during traffic spikes. Worker pool size should match your CPU cores for CPU-bound tasks or be higher for I/O-bound operations.*
 
 **Step 2: Service Initialization with Worker Pool**
+
+The initialization process creates worker processes and starts background monitoring:
 
 ```python
     async def initialize(self):
@@ -288,6 +322,8 @@ class DocumentProcessingService:
 
 **Step 3: Document Batch Processing**
 
+The document processing interface accepts multiple documents and creates trackable processing jobs:
+
 ```python
     async def process_documents(self, documents: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Process multiple documents asynchronously with job tracking."""
@@ -306,7 +342,11 @@ class DocumentProcessingService:
             # Add to processing queue
             await self.processing_queue.put(processing_task)
             processing_tasks.append(processing_id)
+```
 
+The system returns comprehensive job tracking information for client monitoring:
+
+```python
         # Return job information for client tracking
         return {
             'processing_job_id': f"batch_{int(time.time())}",
@@ -320,6 +360,8 @@ class DocumentProcessingService:
 *This batch processing approach allows clients to submit multiple documents and track progress. The queue automatically balances load across workers.*
 
 **Step 4: Worker Process Implementation**
+
+Each worker continuously processes documents from the queue, providing fault tolerance:
 
 ```python
     async def _document_processing_worker(self, worker_id: str):
@@ -335,7 +377,11 @@ class DocumentProcessingService:
                 processing_result = await self._process_single_document(
                     processing_task['document']
                 )
+```
 
+Workers update statistics and handle errors gracefully to maintain system stability:
+
+```python
                 # Update performance statistics
                 processing_time = time.time() - start_time
                 self._update_processing_stats(processing_time, success=True)
@@ -354,6 +400,8 @@ class DocumentProcessingService:
 
 **Step 5: Document Processing Pipeline**
 
+The document processing pipeline handles each document through multiple stages with comprehensive error handling:
+
 ```python
     async def _process_single_document(self, document: Dict[str, Any]) -> Dict[str, Any]:
         """Process individual document through the complete pipeline."""
@@ -370,7 +418,11 @@ class DocumentProcessingService:
 
             # Step 4: Create chunks for vector storage
             chunks = await self._create_document_chunks(extracted_content, enriched_metadata)
+```
 
+Successful processing returns comprehensive results, while errors are handled gracefully:
+
+```python
             return {
                 'success': True,
                 'processed_content': extracted_content,
@@ -390,6 +442,9 @@ class DocumentProcessingService:
 *The processing pipeline handles documents through multiple stages. Each stage can be independently optimized and monitored for performance bottlenecks.*
 
 **Step 2: Embedding Service with Caching**
+
+Now let's build a high-performance embedding service that uses caching and batching to optimize embedding generation:
+
 ```python
 class EmbeddingService:
     """Production embedding service with caching and batching."""
@@ -402,7 +457,11 @@ class EmbeddingService:
 
         # Initialize embedding model
         self.embedding_model = self._initialize_embedding_model()
+```
 
+The service sets up caching and batching infrastructure to maximize throughput:
+
+```python
         # Caching system
         if self.cache_enabled:
             self.embedding_cache = EmbeddingCache(config.get('cache_config', {}))
@@ -410,7 +469,11 @@ class EmbeddingService:
         # Batching queue
         self.embedding_queue = asyncio.Queue()
         self.batch_processor = asyncio.create_task(self._batch_embedding_processor())
+```
 
+The main embedding interface optimizes performance through intelligent caching:
+
+```python
     async def embed_texts(self, texts: List[str],
                          cache_key_prefix: str = "") -> Dict[str, Any]:
         """Embed multiple texts with caching and batching optimization."""
@@ -418,7 +481,11 @@ class EmbeddingService:
         embedding_results = {}
         cache_hits = 0
         cache_misses = 0
+```
 
+First, we check the cache for existing embeddings to avoid redundant computations:
+
+```python
         # Check cache for existing embeddings
         texts_to_embed = []
         for i, text in enumerate(texts):
@@ -433,7 +500,11 @@ class EmbeddingService:
 
             texts_to_embed.append((i, text, cache_key))
             cache_misses += 1
+```
 
+For texts not found in cache, we generate embeddings in optimized batches:
+
+```python
         # Generate embeddings for uncached texts
         if texts_to_embed:
             new_embeddings = await self._generate_embeddings_batch([
@@ -446,7 +517,11 @@ class EmbeddingService:
 
                 if self.cache_enabled:
                     await self.embedding_cache.set(cache_key, embedding)
+```
 
+Finally, we return embeddings in the original order with comprehensive performance statistics:
+
+```python
         # Return embeddings in original order
         ordered_embeddings = [embedding_results[i] for i in range(len(texts))]
 
@@ -460,7 +535,11 @@ class EmbeddingService:
             'model_used': self.model_name,
             'batch_size_used': min(self.batch_size, len(texts_to_embed))
         }
+```
 
+The batch processing implementation includes comprehensive error handling and fallback strategies:
+
+```python
     async def _generate_embeddings_batch(self, texts: List[str]) -> List[List[float]]:
         """Generate embeddings in optimized batches."""
 
@@ -473,7 +552,11 @@ class EmbeddingService:
             try:
                 batch_embeddings = self.embedding_model.embed_documents(batch)
                 all_embeddings.extend(batch_embeddings)
+```
 
+If batch processing fails, the system falls back to individual processing to maintain reliability:
+
+```python
             except Exception as e:
                 self.logger.error(f"Batch embedding error: {e}")
                 # Fallback to individual processing
@@ -487,7 +570,11 @@ class EmbeddingService:
                         all_embeddings.append([0.0] * 1536)  # Adjust dimension as needed
 
         return all_embeddings
+```
 
+The embedding cache provides high-performance storage with automatic expiration and eviction policies:
+
+```python
 class EmbeddingCache:
     """High-performance embedding cache with TTL and LRU eviction."""
 
@@ -500,7 +587,11 @@ class EmbeddingCache:
         self.cache = {}
         self.access_times = {}
         self.creation_times = {}
+```
 
+Cache retrieval includes TTL checking and LRU tracking for optimal performance:
+
+```python
     async def get(self, key: str) -> Optional[List[float]]:
         """Get embedding from cache."""
 
@@ -516,7 +607,11 @@ class EmbeddingCache:
         self.access_times[key] = time.time()
 
         return self.cache[key]
+```
 
+Cache storage handles capacity limits with intelligent eviction policies:
+
+```python
     async def set(self, key: str, embedding: List[float]):
         """Set embedding in cache with eviction if needed."""
 
@@ -539,6 +634,8 @@ Implement intelligent load distribution and scaling to handle varying workloads 
 
 Set up the load balancer with configurable strategies:
 
+The load balancer manages multiple service instances with configurable balancing strategies:
+
 ```python
 # Production load balancing and auto-scaling
 class RAGLoadBalancer:
@@ -551,7 +648,11 @@ class RAGLoadBalancer:
         self.service_instances = {}  # Track available service instances
         self.health_status = {}     # Monitor instance health
         self.load_metrics = {}      # Track performance metrics
+```
 
+The system supports multiple load balancing algorithms optimized for different scenarios:
+
+```python
         # Configure available load balancing strategies
         self.strategies = {
             'round_robin': self._round_robin_selection,
@@ -561,6 +662,7 @@ class RAGLoadBalancer:
         }
 
         self.current_strategy = self.config.get('strategy', 'response_time')
+```
 
 **Step 2: Configure Service Instances**
 
@@ -838,6 +940,8 @@ Your advanced RAG capabilities - graph intelligence, multi-modal processing, age
 
 **Enterprise Integration for Your Advanced Stack:**
 
+The enterprise integration framework connects advanced RAG capabilities to business systems:
+
 ```python
 # Enterprise integration framework
 class EnterpriseRAGIntegrator:
@@ -845,7 +949,11 @@ class EnterpriseRAGIntegrator:
 
     def __init__(self, integration_config: Dict[str, Any]):
         self.config = integration_config
+```
 
+The integrator supports multiple enterprise data source types with dedicated connectors:
+
+```python
         # Data source connectors
         self.data_connectors = {
             'sharepoint': SharePointConnector(integration_config.get('sharepoint', {})),
@@ -855,7 +963,11 @@ class EnterpriseRAGIntegrator:
             'api_endpoints': APIConnector(integration_config.get('api', {})),
             's3': S3Connector(integration_config.get('s3', {}))
         }
+```
 
+Critical enterprise components include authentication, data transformation, and change detection:
+
+```python
         # Authentication and authorization
         self.auth_manager = EnterpriseAuthManager(integration_config.get('auth', {}))
 
@@ -864,7 +976,11 @@ class EnterpriseRAGIntegrator:
 
         # Change detection and incremental updates
         self.change_detector = ChangeDetectionSystem(integration_config.get('change_detection', {}))
+```
 
+The integration setup process connects to each data source and establishes monitoring:
+
+```python
     async def setup_enterprise_integration(self, data_sources: List[str]) -> Dict[str, Any]:
         """Set up integration with specified enterprise data sources."""
 
@@ -879,7 +995,11 @@ class EnterpriseRAGIntegrator:
 
                     # Test connectivity and permissions
                     test_result = await connector.test_connection()
+```
 
+For each successful connection, we establish change monitoring and track results:
+
+```python
                     # Set up change monitoring
                     if self.config.get('enable_change_detection', True):
                         change_monitoring = await self.change_detector.setup_monitoring(
@@ -900,7 +1020,11 @@ class EnterpriseRAGIntegrator:
                         'status': 'failed',
                         'error': str(e)
                     }
+```
 
+Finally, we return comprehensive integration status and statistics:
+
+```python
         return {
             'integration_results': integration_results,
             'successful_connections': len([r for r in integration_results.values()
@@ -908,7 +1032,11 @@ class EnterpriseRAGIntegrator:
             'total_sources': len(data_sources),
             'change_detection_enabled': self.config.get('enable_change_detection', True)
         }
+```
 
+The SharePoint connector provides secure access to enterprise document repositories:
+
+```python
 class SharePointConnector:
     """Enterprise SharePoint integration for document retrieval."""
 
@@ -921,6 +1049,7 @@ class SharePointConnector:
 
         # SharePoint client
         self.sp_client = None
+```
 
     async def initialize_connection(self) -> Dict[str, Any]:
         """Initialize SharePoint connection with authentication."""
@@ -2233,75 +2362,53 @@ Congratulations on mastering production RAG systems! You're now equipped to buil
 
 ---
 
-## 📝 Multiple Choice Test
+## 📝 Multiple Choice Test - Session 9
 
-### Question 1: Microservices Architecture Benefits
+Test your understanding of production RAG deployment and enterprise integration:
 
-**What is the primary advantage of microservices architecture for production RAG systems?**
-
+**Question 1:** What is the primary advantage of microservices architecture for production RAG systems?  
 A) Simpler deployment process  
 B) Lower development costs  
 C) Independent scaling and fault isolation of components  
 D) Reduced system complexity  
 
-### Question 2: Load Balancing Strategy Selection
-
-**When should you choose response-time-based load balancing over round-robin?**
-
+**Question 2:** When should you choose response-time-based load balancing over round-robin?  
 A) When all service instances have identical performance  
 B) When service instances have varying performance characteristics  
 C) When implementing simple systems only  
 D) When minimizing configuration complexity  
 
-### Question 3: Enterprise Authentication
-
-**What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?**
-
+**Question 3:** What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?  
 A) Faster authentication speed  
 B) Reduced server load  
 C) Granular permission management and security policy enforcement  
 D) Simpler user interface design  
 
-### Question 4: GDPR Compliance
-
-**Which GDPR principle is most critical for RAG systems processing personal data?**
-
+**Question 4:** Which GDPR principle is most critical for RAG systems processing personal data?  
 A) Data portability  
 B) Data minimization and lawful basis for processing  
 C) Right to be forgotten only  
 D) Consent form design  
 
-### Question 5: Incremental Indexing
-
-**What is the primary challenge in real-time incremental indexing for RAG systems?**
-
+**Question 5:** What is the primary challenge in real-time incremental indexing for RAG systems?  
 A) Storage capacity limitations  
 B) Managing change detection and maintaining index consistency during updates  
 C) Network bandwidth constraints  
 D) User interface complexity  
 
-### Question 6: Production Monitoring
-
-**Which metric is most critical for production RAG system health monitoring?**
-
+**Question 6:** Which metric is most critical for production RAG system health monitoring?  
 A) CPU usage only  
 B) Memory consumption only  
 C) Response quality scores combined with system performance metrics  
 D) Network traffic volume  
 
-### Question 7: Auto-Scaling Decisions
-
-**What should trigger scale-up actions in production RAG systems?**
-
+**Question 7:** What should trigger scale-up actions in production RAG systems?  
 A) Time of day only  
 B) CPU threshold, response time, queue size, and error rate exceeding thresholds  
 C) Manual administrator requests only  
 D) Random intervals for load testing  
 
-### Question 8: Enterprise Data Integration
-
-**What is the most important consideration when integrating RAG with SharePoint/Confluence?**
-
+**Question 8:** What is the most important consideration when integrating RAG with SharePoint/Confluence?  
 A) File size limitations  
 B) Authentication, permissions, and change detection for real-time updates  
 C) Color scheme compatibility  
@@ -2309,9 +2416,7 @@ D) Font rendering capabilities
 
 ---
 
-**📋 [View Solutions](Session9_Test_Solutions.md)**
-
-*Complete the test above, then check your answers and review the detailed explanations in the solutions.*
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session9_Test_Solutions.md`
 
 ---
 

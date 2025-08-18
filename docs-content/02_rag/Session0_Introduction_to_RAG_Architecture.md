@@ -431,7 +431,14 @@ The current frontier representing the evolution toward multi-agent systems with 
 
 **Future Direction**: 2025 is being called the "Year of AI Agents" with RAG systems evolving into sophisticated agent ecosystems capable of complex reasoning, planning, and autonomous knowledge acquisition.
 
-**Next-Generation Architecture:**
+### **Next-Generation Agentic RAG Architecture**
+
+The 2024-2025 evolution represents the most sophisticated RAG systems yet developed. Let's build this multi-agent architecture step by step:
+
+**Understanding Agentic RAG:**
+Unlike traditional RAG that follows a simple retrieve-then-generate pattern, agentic RAG employs multiple specialized AI agents that can plan, reason, and collaborate to handle complex queries requiring multi-step logic.
+
+**Step 1: Initialize the Agent Coordination System**
 
 ```python
 # Agentic RAG with multi-agent coordination (2024-2025)
@@ -444,15 +451,19 @@ class AgenticRAG:
 
 *Agentic RAG represents the latest evolution, using multiple specialized agents working in coordination to handle complex reasoning tasks.*
 
+**Step 2: Initialize Specialized Agent Types**
+
 ```python
-        # Specialized agents
+        # Specialized agents for different capabilities
         self.query_agent = QueryPlanningAgent()
         self.retrieval_agent = AdaptiveRetrievalAgent()
         self.reasoning_agent = MultiHopReasoningAgent()
         self.synthesis_agent = ResponseSynthesisAgent()
 ```
 
-*Each agent specializes in a specific aspect: query planning, adaptive retrieval, multi-hop reasoning, and response synthesis.*
+*Each agent specializes in a specific aspect: query planning breaks down complex questions, adaptive retrieval finds relevant information, multi-hop reasoning connects related concepts, and response synthesis creates coherent answers.*
+
+**Step 3: Implement Asynchronous Query Processing**
 
 ```python
     async def agentic_generate(self, query):
@@ -468,7 +479,9 @@ class AgenticRAG:
             retrieval_tasks.append(task)
 ```
 
-*The system decomposes complex queries into sub-queries and executes parallel retrieval tasks for efficiency.*
+*The system decomposes complex queries into sub-queries and executes parallel retrieval tasks for efficiency. This parallel processing dramatically speeds up information gathering.*
+
+**Step 4: Multi-Source Reasoning and Response Synthesis**
 
 ```python
         # Gather and integrate results
@@ -484,6 +497,8 @@ class AgenticRAG:
             query, reasoning_result
         )
 ```
+
+*The final stage combines retrieved information with graph-based reasoning to generate comprehensive answers that connect multiple pieces of information logically.*
 
 ---
 
@@ -954,13 +969,11 @@ B) Chunk, Embed, Query
 C) Index, Retrieve, Generate  
 D) Parse, Search, Respond  
 
-
 **Question 2:** Which RAG evolution phase introduced self-correcting mechanisms?  
 A) 2022 - LLM Integration  
 B) 2025 - Next-Gen RAG  
 C) 2020 - RAG Foundation  
 D) 2023 - Adaptive RAG  
-
 
 **Question 3:** What is the primary advantage of HyDE (Hypothetical Document Embeddings)?  
 A) Reduces computational cost  
@@ -968,13 +981,11 @@ B) Simplifies system architecture
 C) Eliminates need for vector databases  
 D) Improves query-document semantic alignment  
 
-
 **Question 4:** When should you choose RAG over fine-tuning?  
 A) When computational resources are unlimited  
 B) When source attribution is not needed  
 C) When the domain knowledge is static  
 D) When you need frequent knowledge updates  
-
 
 **Question 5:** What is the key benefit of Agentic RAG systems?  
 A) Simpler system architecture  
@@ -983,7 +994,7 @@ C) Faster retrieval speed
 D) Iterative query refinement and self-correction  
 
 
-[**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session0_Test_Solutions.md`
 
 ## 🧭 Navigation
 
