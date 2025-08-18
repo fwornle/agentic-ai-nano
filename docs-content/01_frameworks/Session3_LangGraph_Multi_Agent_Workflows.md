@@ -517,37 +517,47 @@ Test your understanding of LangGraph workflows and multi-agent coordination:
 **Question 1:** What is the primary advantage of LangGraph over sequential LangChain agents?  
 
 A) Better performance  
-B) Graph-based workflows with conditional routing and parallel execution  
-C) Lower cost  
+B) Lower cost  
+C) Graph-based workflows with conditional routing and parallel execution  
 D) Simpler implementation  
+
+ Simpler implementation  
 
 **Question 2:** In LangGraph, what component defines the data that flows between nodes?  
 
-A) Edges  
-B) State (TypedDict)  
-C) Tools  
-D) Memory  
+A) State (TypedDict)  
+B) Edges  
+C) Memory  
+D) Tools  
+
+ Memory  
 
 **Question 3:** What determines the flow between nodes in a LangGraph workflow?  
 
-A) Sequential execution only  
-B) Conditional edges and decision functions  
-C) Random selection  
-D) User input  
+A) Random selection  
+B) User input  
+C) Sequential execution only  
+D) Conditional edges and decision functions  
+
+ User input  
 
 **Question 4:** How does LangGraph handle parallel agent execution?  
 
-A) It doesn't support parallel execution  
-B) Through parallel nodes with state merging  
-C) Using threading only  
-D) Through external orchestration  
+A) Through parallel nodes with state merging  
+B) It doesn't support parallel execution  
+C) Through external orchestration  
+D) Using threading only  
+
+ Through external orchestration  
 
 **Question 5:** What happens when a LangGraph node updates state?  
 
-A) The entire state is replaced  
-B) Only specified fields are updated/merged  
-C) State is reset to default  
-D) Previous state is archived  
+A) State is reset to default  
+B) The entire state is replaced  
+C) Previous state is archived  
+D) Only specified fields are updated/merged  
+
+ Previous state is archived  
 
 [**🗂️ View Test Solutions →**](Session3_Test_Solutions.md)
 

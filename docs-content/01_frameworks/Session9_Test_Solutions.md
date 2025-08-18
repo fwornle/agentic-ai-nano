@@ -6,9 +6,10 @@
 **What does "ReAct" stand for in the ReAct pattern?**
 
 A) Read and Act  
-B) Reasoning and Acting ✅  
+B) Retrieve and Act  
 C) Reflect and Act  
-D) Retrieve and Act  
+D) Reasoning and Acting ✅  
+**Correct Answer: D) Reasoning and Acting**
 
 **Explanation:** ReAct stands for Reasoning and Acting, representing the iterative cycle of thinking about what to do and then taking action.
 
@@ -16,39 +17,43 @@ D) Retrieve and Act
 **What is the primary benefit of the ReAct pattern over direct prompting?**
 
 A) Faster execution  
-B) Transparent reasoning with step-by-step thought processes ✅  
-C) Lower cost  
-D) Simpler implementation  
+B) Simpler implementation  
+C) Transparent reasoning with step-by-step thought processes ✅  
+D) Lower cost  
+**Correct Answer: C) Transparent reasoning with step-by-step thought processes**
 
 **Explanation:** ReAct provides transparency by showing the agent's reasoning process step-by-step, making it easier to understand and debug agent behavior.
 
 ### Question 3
 **In multi-agent systems, what is the purpose of a Communication Hub?**
 
-A) Store data  
-B) Coordinate message passing between agents ✅  
-C) Execute agent logic  
-D) Manage user interface  
+A) Execute agent logic  
+B) Manage user interface  
+C) Store data  
+D) Coordinate message passing between agents ✅  
+**Correct Answer: D) Coordinate message passing between agents**
 
 **Explanation:** The Communication Hub manages message routing and coordination between agents, enabling structured multi-agent communication.
 
 ### Question 4
 **What determines when the ReAct reasoning loop terminates?**
 
-A) Fixed number of steps  
-B) When final_answer action is reached or max steps exceeded ✅  
-C) User intervention  
+A) User intervention  
+B) Fixed number of steps  
+C) When final_answer action is reached or max steps exceeded ✅  
 D) Random timing  
+**Correct Answer: C) When final_answer action is reached or max steps exceeded**
 
 **Explanation:** The ReAct loop terminates when the agent reaches a final_answer action or when the maximum number of reasoning steps is exceeded.
 
 ### Question 5
 **How do agents typically reach consensus in multi-agent systems?**
 
-A) First agent decides  
+A) Random selection  
 B) Voting mechanisms and consensus algorithms ✅  
-C) Random selection  
-D) Manager override  
+C) Manager override  
+D) First agent decides  
+**Correct Answer: B) Voting mechanisms and consensus algorithms**
 
 **Explanation:** Multi-agent consensus is achieved through structured voting mechanisms and consensus algorithms that aggregate agent opinions.
 
@@ -56,9 +61,10 @@ D) Manager override
 **What is the main advantage of hierarchical coordination patterns?**
 
 A) Faster execution  
-B) Clear command structure with specialized delegation ✅  
-C) Lower resource usage  
-D) Simpler implementation  
+B) Lower resource usage  
+C) Simpler implementation  
+D) Clear command structure with specialized delegation ✅  
+**Correct Answer: D) Clear command structure with specialized delegation**
 
 **Explanation:** Hierarchical patterns provide clear command structures with specialized agents handling specific tasks under coordinator oversight.
 
@@ -66,9 +72,10 @@ D) Simpler implementation
 **In auction-based coordination, how are tasks typically allocated?**
 
 A) Random assignment  
-B) Based on agent capabilities and bid evaluation ✅  
-C) First-come first-served  
-D) Manager assignment  
+B) Manager assignment  
+C) Based on agent capabilities and bid evaluation ✅  
+D) First-come first-served  
+**Correct Answer: C) Based on agent capabilities and bid evaluation**
 
 **Explanation:** Auction-based coordination allocates tasks by evaluating agent capabilities and bids, ensuring optimal task-agent matching.
 
@@ -76,29 +83,32 @@ D) Manager assignment
 **What is the purpose of Hierarchical Task Network (HTN) planning?**
 
 A) Simple task execution  
-B) Breaking complex tasks into manageable hierarchies ✅  
-C) Agent communication  
-D) Error handling  
+B) Error handling  
+C) Breaking complex tasks into manageable hierarchies ✅  
+D) Agent communication  
+**Correct Answer: C) Breaking complex tasks into manageable hierarchies**
 
 **Explanation:** HTN planning decomposes complex tasks into hierarchical subtasks, making them more manageable and executable by specialized agents.
 
 ### Question 9
 **How does dynamic replanning differ from static planning?**
 
-A) No difference  
-B) Adapts plans during execution based on changing conditions ✅  
-C) Plans are created faster  
-D) Uses different algorithms  
+A) Uses different algorithms  
+B) Plans are created faster  
+C) No difference  
+D) Adapts plans during execution based on changing conditions ✅  
+**Correct Answer: D) Adapts plans during execution based on changing conditions**
 
 **Explanation:** Dynamic replanning continuously adapts the plan during execution based on changing conditions and feedback, unlike static planning.
 
 ### Question 10
 **What is the main benefit of reflection patterns in multi-agent systems?**
 
-A) Faster execution  
-B) Continuous learning and improvement from experience ✅  
-C) Lower costs  
-D) Simpler deployment  
+A) Continuous learning and improvement from experience ✅  
+B) Simpler deployment  
+C) Faster execution  
+D) Lower costs  
+**Correct Answer: A) Continuous learning and improvement from experience**
 
 **Explanation:** Reflection patterns enable agents to learn from their experiences and continuously improve their performance over time.
 

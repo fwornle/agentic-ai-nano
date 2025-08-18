@@ -3,53 +3,43 @@
 ## Testing & Benchmarking - Answer Key
 
 ### Question 1: Integration Test Framework Validation
-A) Only basic functionality  
-B) ✅ Valid inputs, error scenarios, edge cases, and performance under load  
+A) Valid inputs, error scenarios, edge cases, and performance under load ✅  
+B) Only basic functionality  
 C) Simple unit tests only  
+**Correct Answer: A) Valid inputs, error scenarios, edge cases, and performance under load**
 D) Manual testing procedures  
-
-**Correct Answer: B) Valid inputs, error scenarios, edge cases, and performance under load**
-
 **Explanation**: The comprehensive testing framework validates multiple dimensions including proper functionality with expected data, graceful handling of invalid inputs and system failures, boundary conditions and unusual scenarios, and behavior under stress and concurrent usage.
 
 ### Question 2: MetricsCollector Performance Tracking
-A) Simple counters only  
-B) ✅ Comprehensive metrics with request counts, response times, error rates, and success rates  
+A) Comprehensive metrics with request counts, response times, error rates, and success rates ✅  
+B) Simple counters only  
 C) Binary success/failure tracking  
+**Correct Answer: A) Comprehensive metrics with request counts, response times, error rates, and success rates**
 D) Manual logging only  
-
-**Correct Answer: B) Comprehensive metrics with request counts, response times, error rates, and success rates**
-
 **Explanation**: The MetricsCollector captures detailed performance data including request counts, average and percentile response times, error and success rates, and throughput metrics that enable performance analysis, optimization, and SLA monitoring.
 
 ### Question 3: Cache Eviction Strategy
 A) Random removal  
-B) ✅ LRU (Least Recently Used) with memory usage tracking  
-C) First-in-first-out only  
+B) First-in-first-out only  
+C) LRU (Least Recently Used) with memory usage tracking ✅  
+**Correct Answer: C) LRU (Least Recently Used) with memory usage tracking**
 D) Manual cache clearing  
-
-**Correct Answer: B) LRU (Least Recently Used) with memory usage tracking**
-
 **Explanation**: The IntelligentCache implements sophisticated memory management that removes items that haven't been accessed recently, tracks actual memory usage rather than just item count, and balances cache effectiveness with memory constraints while preserving frequently used data.
 
 ### Question 4: Performance Decorator Monitoring
-A) Just execution time  
-B) ✅ Request metrics, performance data, error tracking, and distributed tracing  
-C) Function names only  
+A) Request metrics, performance data, error tracking, and distributed tracing ✅  
+B) Function names only  
+C) Just execution time  
+**Correct Answer: A) Request metrics, performance data, error tracking, and distributed tracing**
 D) Memory usage only  
-
-**Correct Answer: B) Request metrics, performance data, error tracking, and distributed tracing**
-
 **Explanation**: The performance decorator captures comprehensive operational data including request metrics (count, size, type), performance data (execution time, resource usage), error tracking (exceptions, failure modes), and distributed tracing for observability and optimization.
 
 ### Question 5: Load Testing Simulation
 A) Single threaded execution  
-B) ✅ Concurrent user simulation with configurable load patterns and performance analysis  
+B) Concurrent user simulation with configurable load patterns and performance analysis ✅  
 C) Random API calls  
-D) Simple sequential testing  
-
 **Correct Answer: B) Concurrent user simulation with configurable load patterns and performance analysis**
-
+D) Simple sequential testing  
 **Explanation**: The load testing framework simulates realistic usage with multiple users operating simultaneously, configurable patterns for different request types and behaviors, performance analysis measuring response times and throughput under load, and realistic scenarios that mimic actual user behavior.
 
 ---

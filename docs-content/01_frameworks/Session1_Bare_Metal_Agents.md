@@ -541,34 +541,49 @@ python test_agents.py
 Test your understanding of bare metal agent implementation and core patterns:
 
 **Question 1:** What is the primary benefit of implementing agents from scratch before using frameworks?  
-A) Better performance  
-B) Deeper understanding of agent mechanics  
-C) Easier deployment  
-D) Lower resource usage  
+A) Lower resource usage  
+B) Easier deployment  
+C) Better performance  
+D) Deeper understanding of agent mechanics  
+
+ Deeper understanding of agent mechanics  
+
 
 **Question 2:** In the BaseAgent class, what is the purpose of the conversation_history attribute?  
-A) Tool execution logs  
+A) Maintaining context across interactions  
 B) Error tracking  
-C) Maintaining context across interactions  
-D) Performance monitoring  
+C) Performance monitoring  
+D) Tool execution logs  
+
+ Tool execution logs  
+
 
 **Question 3:** Which method must be implemented by all subclasses of BaseAgent?  
-A) process_message()  
-B) add_tool()  
-C) _generate_response()  
-D) get_available_tools()  
+A) get_available_tools()  
+B) process_message()  
+C) add_tool()  
+D) _generate_response()  
+
+ _generate_response()  
+
 
 **Question 4:** How does the Tool abstract base class ensure consistency across different tool implementations?  
-A) By providing default implementations  
-B) By requiring execute() and _get_parameters() methods  
-C) By handling errors automatically  
+A) By handling errors automatically  
+B) By providing default implementations  
+C) By requiring execute() and _get_parameters() methods  
 D) By managing tool state  
 
+ By managing tool state  
+
+
 **Question 5:** What design pattern is demonstrated by the BaseAgent and its subclasses?  
-A) Factory Pattern  
-B) Observer Pattern  
+A) Strategy Pattern  
+B) Factory Pattern  
 C) Template Method Pattern  
-D) Strategy Pattern  
+D) Observer Pattern  
+
+ Observer Pattern  
+
 
 [**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
 

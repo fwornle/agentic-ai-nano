@@ -949,34 +949,44 @@ class LegalRAGSystem:
 Test your understanding of RAG architecture fundamentals:
 
 **Question 1:** What are the three main stages of a RAG system?  
-A) Parse, Search, Respond  
-B) Index, Retrieve, Generate  
-C) Chunk, Embed, Query  
-D) Store, Find, Answer  
+A) Store, Find, Answer  
+B) Chunk, Embed, Query  
+C) Index, Retrieve, Generate  
+D) Parse, Search, Respond  
+
+ Store, Find, Answer  
 
 **Question 2:** Which RAG evolution phase introduced self-correcting mechanisms?  
-A) 2020 - RAG Foundation  
-B) 2022 - LLM Integration  
-C) 2023 - Adaptive RAG  
-D) 2025 - Next-Gen RAG  
+A) 2022 - LLM Integration  
+B) 2025 - Next-Gen RAG  
+C) 2020 - RAG Foundation  
+D) 2023 - Adaptive RAG  
+
+ 2025 - Next-Gen RAG  
 
 **Question 3:** What is the primary advantage of HyDE (Hypothetical Document Embeddings)?  
 A) Reduces computational cost  
-B) Improves query-document semantic alignment  
+B) Simplifies system architecture  
 C) Eliminates need for vector databases  
-D) Simplifies system architecture  
+D) Improves query-document semantic alignment  
+
+ Simplifies system architecture  
 
 **Question 4:** When should you choose RAG over fine-tuning?  
-A) When the domain knowledge is static  
-B) When you need frequent knowledge updates  
-C) When computational resources are unlimited  
-D) When source attribution is not needed  
+A) When computational resources are unlimited  
+B) When source attribution is not needed  
+C) When the domain knowledge is static  
+D) When you need frequent knowledge updates  
+
+ When source attribution is not needed  
 
 **Question 5:** What is the key benefit of Agentic RAG systems?  
-A) Faster retrieval speed  
+A) Simpler system architecture  
 B) Lower computational requirements  
-C) Iterative query refinement and self-correction  
-D) Simpler system architecture  
+C) Faster retrieval speed  
+D) Iterative query refinement and self-correction  
+
+ Simpler system architecture  
 
 [**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 

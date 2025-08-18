@@ -5,10 +5,11 @@
 ### Question 1: Security Challenge
 **What is the primary purpose of the sandbox in our file system server?**
 
-A) To improve performance  
-B) To prevent unauthorized file access ✅  
-C) To compress files  
-D) To cache file contents  
+A) To compress files  
+B) To cache file contents  
+C) To improve performance  
+D) To prevent unauthorized file access ✅  
+**Correct Answer: D) To prevent unauthorized file access**
 
 **Explanation:** The sandbox is the critical security boundary that restricts all file operations to a designated directory, preventing access to sensitive system files and implementing defense-in-depth security.
 
@@ -17,10 +18,11 @@ D) To cache file contents
 ### Question 2: Path Resolution
 **Which method is used to safely resolve file paths and prevent directory traversal attacks?**
 
-A) `os.path.join()`  
-B) `Path.resolve()` ✅  
+A) `Path.absolute()`  
+B) `os.path.join()`  
 C) `str.replace()`  
-D) `Path.absolute()`  
+D) `Path.resolve()` ✅  
+**Correct Answer: D) `Path.resolve()`**
 
 **Explanation:** `Path.resolve()` resolves all symlinks and normalizes paths (including `..` components), which is essential for preventing directory traversal attacks like `../../../etc/passwd`.
 
@@ -29,10 +31,11 @@ D) `Path.absolute()`
 ### Question 3: Binary File Handling
 **How are binary files handled in the read_file tool?**
 
-A) Rejected with an error  
+A) Read as UTF-8  
 B) Converted to hexadecimal  
-C) Encoded as base64 ✅  
-D) Read as UTF-8  
+C) Rejected with an error  
+D) Encoded as base64 ✅  
+**Correct Answer: D) Encoded as base64**
 
 **Explanation:** Binary files are encoded as base64 strings for safe transmission through the JSON-RPC protocol, since JSON cannot directly contain binary data.
 
@@ -41,10 +44,11 @@ D) Read as UTF-8
 ### Question 4: File Type Validation
 **What type of validation is performed on file types for security?**
 
-A) Extension only  
-B) MIME type only  
+A) MIME type only  
+B) File size only  
 C) Both extension and MIME type ✅  
-D) File size only  
+D) Extension only  
+**Correct Answer: C) Both extension and MIME type**
 
 **Explanation:** The server validates both file extensions (whitelist approach) and MIME types (content-based detection) to prevent disguised malicious files from bypassing security checks.
 
@@ -53,10 +57,11 @@ D) File size only
 ### Question 5: Security Logging
 **Which logging level is used for security violations in the file system server?**
 
-A) DEBUG  
-B) INFO  
-C) WARNING ✅  
-D) ERROR  
+A) INFO  
+B) ERROR  
+C) DEBUG  
+D) WARNING ✅  
+**Correct Answer: D) WARNING**
 
 **Explanation:** Security violations like sandbox escape attempts are logged at WARNING level to ensure they're captured in production logs without being as severe as system errors.
 
@@ -65,10 +70,11 @@ D) ERROR
 ### Question 6: Path Validation Security
 **What happens when a file path attempts to escape the sandbox?**
 
-A) The server crashes  
-B) A SandboxError is raised ✅  
-C) The path is automatically corrected  
-D) Access is granted with a warning  
+A) A SandboxError is raised ✅  
+B) The server crashes  
+C) Access is granted with a warning  
+D) The path is automatically corrected  
+**Correct Answer: A) A SandboxError is raised**
 
 **Explanation:** The `validate_path()` method raises a `SandboxError` when paths attempt to escape the sandbox, providing a clear security boundary that can be handled gracefully.
 
@@ -77,10 +83,11 @@ D) Access is granted with a warning
 ### Question 7: File Size Limits
 **Why does the server implement file size limits?**
 
-A) To save disk space  
-B) To prevent denial of service attacks ✅  
-C) To improve search performance  
+A) To prevent denial of service attacks ✅  
+B) To improve search performance  
+C) To save disk space  
 D) To maintain file quality  
+**Correct Answer: A) To prevent denial of service attacks**
 
 **Explanation:** File size limits (10MB default) prevent memory exhaustion attacks where malicious users could attempt to crash the server by requesting very large files.
 
@@ -90,9 +97,10 @@ D) To maintain file quality
 **What approach does the server use for file type restrictions?**
 
 A) Blacklist dangerous extensions  
-B) Whitelist safe extensions ✅  
-C) Allow all extensions  
-D) Check file signatures only  
+B) Check file signatures only  
+C) Whitelist safe extensions ✅  
+D) Allow all extensions  
+**Correct Answer: C) Whitelist safe extensions**
 
 **Explanation:** The server uses a whitelist approach, only allowing known safe file extensions (`.txt`, `.md`, `.json`, etc.), which is more secure than trying to block all dangerous types.
 
@@ -101,10 +109,11 @@ D) Check file signatures only
 ### Question 9: Search Performance
 **How does the search_files tool prevent performance issues?**
 
-A) By caching all file content  
-B) By limiting maximum results returned ✅  
-C) By using external search engines  
+A) By using external search engines  
+B) By caching all file content  
+C) By limiting maximum results returned ✅  
 D) By compressing search results  
+**Correct Answer: C) By limiting maximum results returned**
 
 **Explanation:** The search tool limits results (default 100) and respects file size limits to prevent performance degradation from exhaustive searches or large file processing.
 
@@ -113,10 +122,11 @@ D) By compressing search results
 ### Question 10: Asynchronous I/O
 **What is the primary benefit of using `aiofiles` for file operations?**
 
-A) Faster disk access  
-B) Better error handling  
-C) Non-blocking operations ✅  
-D) Automatic file compression  
+A) Automatic file compression  
+B) Non-blocking operations ✅  
+C) Better error handling  
+D) Faster disk access  
+**Correct Answer: B) Non-blocking operations**
 
 **Explanation:** `aiofiles` enables asynchronous file I/O operations that don't block the server thread, allowing it to handle multiple requests concurrently for better performance.
 

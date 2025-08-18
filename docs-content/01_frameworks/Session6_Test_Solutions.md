@@ -5,100 +5,110 @@
 ### Question 1
 **What is the core principle behind Atomic Agents architecture?**
 
-A) Maximum performance optimization  
+A) Complex integrated systems  
 B) Single-purpose, composable components with clear interfaces ✅  
 C) Minimal resource usage  
-D) Complex integrated systems  
+D) Maximum performance optimization  
+**Correct Answer: B) Single-purpose, composable components with clear interfaces**
 
 **Explanation:** Atomic Agents are built on the principle of single-purpose components that can be composed together, each with well-defined interfaces and responsibilities.
 
 ### Question 2
 **How do atomic agents communicate with each other?**
 
-A) Direct method calls  
-B) Standardized message protocols and context providers ✅  
-C) Shared global variables  
+A) Shared global variables  
+B) Direct method calls  
+C) Standardized message protocols and context providers ✅  
 D) Database transactions  
+**Correct Answer: C) Standardized message protocols and context providers**
 
 **Explanation:** Atomic agents use standardized message protocols and context providers to maintain loose coupling while enabling effective communication.
 
 ### Question 3
 **What makes an agent "atomic" in this architecture?**
 
-A) Small code size  
+A) Single, focused responsibility with well-defined interfaces ✅  
 B) Fast execution  
-C) Single, focused responsibility with well-defined interfaces ✅  
-D) Low memory usage  
+C) Low memory usage  
+D) Small code size  
+**Correct Answer: A) Single, focused responsibility with well-defined interfaces**
 
 **Explanation:** An "atomic" agent has a single, focused responsibility and provides well-defined interfaces, making it indivisible and reusable.
 
 ### Question 4
 **What is the role of Context Providers in atomic agent systems?**
 
-A) Execute agent logic  
-B) Manage shared state and coordination between agents ✅  
-C) Handle user interface  
-D) Store persistent data  
+A) Manage shared state and coordination between agents ✅  
+B) Store persistent data  
+C) Execute agent logic  
+D) Handle user interface  
+**Correct Answer: A) Manage shared state and coordination between agents**
 
 **Explanation:** Context Providers manage shared state and facilitate coordination between agents while maintaining the modular architecture.
 
 ### Question 5
 **How does the Composition Engine work in atomic systems?**
 
-A) Compiles agents into single executable  
-B) Dynamically assembles agents based on requirements ✅  
-C) Optimizes agent performance  
-D) Manages agent memory  
+A) Optimizes agent performance  
+B) Manages agent memory  
+C) Compiles agents into single executable  
+D) Dynamically assembles agents based on requirements ✅  
+**Correct Answer: D) Dynamically assembles agents based on requirements**
 
 **Explanation:** The Composition Engine dynamically assembles different atomic agents based on current requirements and workflow needs.
 
 ### Question 6
 **What is the primary benefit of modular agent composition?**
 
-A) Faster execution  
-B) Flexibility to assemble different workflows from same components ✅  
-C) Lower development costs  
-D) Better user interface  
+A) Lower development costs  
+B) Faster execution  
+C) Better user interface  
+D) Flexibility to assemble different workflows from same components ✅  
+**Correct Answer: D) Flexibility to assemble different workflows from same components**
 
 **Explanation:** Modular composition provides flexibility to create different workflows by combining the same reusable components in different ways.
 
 ### Question 7
 **How do atomic agents handle failure isolation?**
 
-A) Global error handling  
-B) Individual agent failures don't cascade to others ✅  
-C) Automatic restart mechanisms  
-D) Backup agent systems  
+A) Backup agent systems  
+B) Global error handling  
+C) Individual agent failures don't cascade to others ✅  
+D) Automatic restart mechanisms  
+**Correct Answer: C) Individual agent failures don't cascade to others**
 
 **Explanation:** The atomic architecture ensures that failures in one agent don't cascade to other agents, providing natural failure isolation.
 
 ### Question 8
 **What makes atomic agents suitable for microservices architectures?**
 
-A) Built-in API gateways  
-B) Single-responsibility principle and loose coupling ✅  
-C) Automatic scaling features  
-D) Built-in monitoring  
+A) Automatic scaling features  
+B) Built-in monitoring  
+C) Single-responsibility principle and loose coupling ✅  
+D) Built-in API gateways  
+**Correct Answer: C) Single-responsibility principle and loose coupling**
 
 **Explanation:** Atomic agents follow the single-responsibility principle and maintain loose coupling, making them naturally compatible with microservices architectures.
 
 ### Question 9
 **How do you scale atomic agent systems?**
 
-A) Vertical scaling only  
-B) Horizontal scaling by replicating individual agents ✅  
+A) Horizontal scaling by replicating individual agents ✅  
+B) Container orchestration required  
 C) Cloud deployment only  
-D) Container orchestration required  
+D) Vertical scaling only  
+**Correct Answer: A) Horizontal scaling by replicating individual agents**
 
 **Explanation:** Atomic agents can be horizontally scaled by replicating individual agents based on demand, providing flexible scaling options.
 
 ### Question 10
 **What is the main advantage of the Coordinator Agent pattern?**
 
-A) Centralized control of agent interactions and workflow orchestration ✅  
-B) Faster agent execution  
-C) Lower resource usage  
-D) Better error handling  
+A) Faster agent execution  
+B) Lower resource usage  
+C) Better error handling  
+D) Centralized control of agent interactions and workflow orchestration ✅  
+**Correct Answer: D) Centralized control of agent interactions and workflow orchestration**
 
 **Explanation:** The Coordinator Agent pattern provides centralized control and orchestration while maintaining the modular benefits of atomic agents.
 

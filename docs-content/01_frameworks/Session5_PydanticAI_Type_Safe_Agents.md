@@ -792,52 +792,66 @@ Test your understanding of PydanticAI type-safe agent development.
 
 **Question 1:** What is the primary advantage of PydanticAI over traditional agent frameworks?  
 
-A) Lower computational cost  
-B) Automatic validation and structured outputs with compile-time type checking  
+A) Faster execution speed  
+B) Lower computational cost  
 C) Better user interface  
-D) Faster execution speed  
+D) Automatic validation and structured outputs with compile-time type checking  
+
+ Faster execution speed  
 
 **Question 2:** Which validation constraint ensures a field value falls within a specific numeric range?  
 
-A) Field(min=0, max=100)  
-B) Field(ge=0, le=100)  
-C) Field(range=(0, 100))  
-D) Field(between=0:100)  
+A) Field(range=(0, 100))  
+B) Field(between=0:100)  
+C) Field(min=0, max=100)  
+D) Field(ge=0, le=100)  
+
+ Field(between=0:100)  
 
 **Question 3:** What happens when PydanticAI model validation fails?  
 
-A) Silent failure with default values  
-B) ValidationError is raised with detailed field information  
-C) Application crashes immediately  
-D) Warning message is logged  
+A) Application crashes immediately  
+B) Silent failure with default values  
+C) Warning message is logged  
+D) ValidationError is raised with detailed field information  
+
+ Warning message is logged  
 
 **Question 4:** How do you define a tool function for a PydanticAI agent?  
 
 A) Using @tool decorator  
-B) Using @agent.tool decorator  
+B) Using def tool() syntax  
 C) Using @function decorator  
-D) Using def tool() syntax  
+D) Using @agent.tool decorator  
+
+ Using def tool() syntax  
 
 **Question 5:** What is the purpose of RunContext in PydanticAI?  
 
-A) Provides runtime configuration and dependencies  
-B) Handles error messages  
+A) Handles error messages  
+B) Provides runtime configuration and dependencies  
 C) Manages conversation history  
 D) Controls execution speed  
 
+ Controls execution speed  
+
 **Question 6:** Which decorator enables cross-field validation in Pydantic models?  
 
-A) @field_validator  
-B) @root_validator  
-C) @cross_validator  
-D) @model_validator  
+A) @cross_validator  
+B) @model_validator  
+C) @root_validator  
+D) @field_validator  
+
+ @model_validator  
 
 **Question 7:** How do you implement custom validation logic for complex business rules?  
 
-A) Built-in validators only  
-B) Custom validator methods with @field_validator or @root_validator  
-C) External validation libraries  
-D) Manual checks in application code  
+A) Custom @validator decorator with logic  
+B) External validation services  
+C) Built-in validators only  
+D) Database constraints  
+
+ Manual checks in application code  
 
 **Question 8:** What is the main benefit of using structured outputs in PydanticAI?  
 

@@ -544,34 +544,49 @@ result = agent.run("Help me with a simple task")
 Test your understanding of LangChain foundations and agent patterns:
 
 **Question 1:** What is the primary benefit of LangChain's unified LLM interface?  
-A) Better performance  
+A) Lower cost  
 B) Consistent API across different LLM providers  
-C) Lower cost  
-D) Faster response times  
+C) Faster response times  
+D) Better performance  
+
+ Better performance  
+
 
 **Question 2:** Which LangChain component is responsible for managing conversation context?  
-A) Tools  
-B) Agents  
+A) Chains  
+B) Tools  
 C) Memory  
-D) Chains  
+D) Agents  
+
+ Agents  
+
 
 **Question 3:** How many ways can you create tools in LangChain?  
-A) One - inheriting from BaseTool  
+A) Four - including custom implementations  
 B) Two - BaseTool and @tool decorator  
 C) Three - BaseTool, @tool decorator, and StructuredTool  
-D) Four - including custom implementations  
+D) One - inheriting from BaseTool  
+
+ One - inheriting from BaseTool  
+
 
 **Question 4:** What is the purpose of the `handle_parsing_errors` parameter in LangChain agents?  
-A) To improve performance  
-B) To gracefully handle malformed LLM responses  
-C) To reduce costs  
-D) To enable debugging  
+A) To gracefully handle malformed LLM responses  
+B) To reduce costs  
+C) To enable debugging  
+D) To improve performance  
+
+ To improve performance  
+
 
 **Question 5:** Which LangChain agent type is specifically designed for the ReAct pattern?  
-A) STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION  
-B) REACT_DOCSTORE  
-C) ZERO_SHOT_REACT_DESCRIPTION  
-D) All of the above  
+A) All of the above  
+B) ZERO_SHOT_REACT_DESCRIPTION  
+C) STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION  
+D) REACT_DOCSTORE  
+
+ REACT_DOCSTORE  
+
 
 [**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
 

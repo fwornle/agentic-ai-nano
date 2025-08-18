@@ -3,53 +3,43 @@
 ## Enterprise PydanticAI - Answer Key
 
 ### Question 1: Dependency Injection Design Pattern
-A) Singleton pattern with global state  
-B) ✅ Protocol-based interfaces with container-managed lifecycles  
+A) Protocol-based interfaces with container-managed lifecycles ✅  
+B) Singleton pattern with global state  
 C) Static factory methods only  
+**Correct Answer: A) Protocol-based interfaces with container-managed lifecycles**
 D) Direct class instantiation  
-
-**Correct Answer: B) Protocol-based interfaces with container-managed lifecycles**
-
 **Explanation**: The enterprise dependency injection system uses protocol-based design for flexibility with centralized service instantiation and management, automatic injection based on type annotations, and easy mocking for testing.
 
 ### Question 2: Concurrent Request Processing
-A) Sequential processing only  
-B) ✅ Semaphore-controlled concurrency with configurable limits and performance tracking  
-C) Unlimited concurrent execution  
-D) Single-threaded execution with queuing  
-
+A) Unlimited concurrent execution  
+B) Semaphore-controlled concurrency with configurable limits and performance tracking ✅  
+C) Sequential processing only  
 **Correct Answer: B) Semaphore-controlled concurrency with configurable limits and performance tracking**
-
+D) Single-threaded execution with queuing  
 **Explanation**: The ProductionAgent implements sophisticated concurrency management with semaphore control to limit concurrent requests, configurable limits adjustable based on system capacity, and performance tracking that monitors response times and throughput.
 
 ### Question 3: Enterprise Security Measures
-A) Simple password checking  
-B) ✅ JWT token validation, role-based authorization, and audit logging  
-C) Basic username verification  
+A) Basic username verification  
+B) Simple password checking  
+C) JWT token validation, role-based authorization, and audit logging ✅  
+**Correct Answer: C) JWT token validation, role-based authorization, and audit logging**
 D) No authentication required  
-
-**Correct Answer: B) JWT token validation, role-based authorization, and audit logging**
-
 **Explanation**: The EnterpriseSecurityAgent implements comprehensive security with JWT validation for secure token-based authentication, role-based access control for granular permissions, and comprehensive audit logging for compliance and security event tracking.
 
 ### Question 4: Audit Logging Information
 A) Only request timestamps  
-B) ✅ Complete request/response tracking with user context, performance metrics, and error details  
-C) Simple success/failure flags  
+B) Simple success/failure flags  
+C) Complete request/response tracking with user context, performance metrics, and error details ✅  
+**Correct Answer: C) Complete request/response tracking with user context, performance metrics, and error details**
 D) Database query logs only  
-
-**Correct Answer: B) Complete request/response tracking with user context, performance metrics, and error details**
-
 **Explanation**: The audit system captures comprehensive operational data including full transaction visibility for debugging, user context linking actions to specific users, performance metrics for optimization, and comprehensive failure tracking.
 
 ### Question 5: Health Monitoring Dependencies
-A) Manual status checks only  
-B) ✅ Automated dependency health checks with circuit breaker integration and alert generation  
+A) Automated dependency health checks with circuit breaker integration and alert generation ✅  
+B) Manual status checks only  
 C) Simple ping tests  
+**Correct Answer: A) Automated dependency health checks with circuit breaker integration and alert generation**
 D) Log file analysis only  
-
-**Correct Answer: B) Automated dependency health checks with circuit breaker integration and alert generation**
-
 **Explanation**: The health monitoring system provides comprehensive service oversight with continuous automated monitoring, circuit breaker integration to protect against cascading failures, proactive alert generation, and comprehensive visibility into service relationships.
 
 ---

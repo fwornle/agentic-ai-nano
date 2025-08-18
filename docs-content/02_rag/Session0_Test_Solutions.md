@@ -5,10 +5,11 @@
 ### Question 1: RAG System Architecture
 **What are the three main stages of a RAG system?**
 
-A) Parse, Search, Respond
-B) Index, Retrieve, Generate ✅
-C) Chunk, Embed, Query
-D) Store, Find, Answer
+A) Store, Find, Answer  
+B) Chunk, Embed, Query  
+C) Index, Retrieve, Generate ✅  
+D) Parse, Search, Respond  
+**Correct Answer: C) Index, Retrieve, Generate**
 
 **Explanation:** The fundamental RAG architecture consists of three main stages: (1) **Index** - offline preprocessing where documents are chunked, embedded, and stored in vector databases; (2) **Retrieve** - real-time similarity search to find relevant context for user queries; (3) **Generate** - LLM synthesis of retrieved context into coherent responses. This three-stage pipeline forms the backbone of all RAG systems.
 
@@ -17,10 +18,11 @@ D) Store, Find, Answer
 ### Question 2: RAG Evolution Timeline
 **Which RAG evolution phase introduced self-correcting mechanisms?**
 
-A) 2020 - RAG Foundation
-B) 2022 - LLM Integration
-C) 2023 - Adaptive RAG ✅
-D) 2025 - Next-Gen RAG
+A) 2022 - LLM Integration  
+B) 2025 - Next-Gen RAG  
+C) 2020 - RAG Foundation  
+D) 2023 - Adaptive RAG ✅  
+**Correct Answer: D) 2023 - Adaptive RAG**
 
 **Explanation:** The 2023 Adaptive RAG phase introduced self-correcting mechanisms through Self-RAG and Corrective RAG (CRAG) systems. These systems could evaluate their own outputs, decide when to retrieve additional information, and refine responses through multiple iterations. This marked the transition from static "retrieve-then-generate" to intelligent, self-correcting architectures.
 
@@ -29,10 +31,11 @@ D) 2025 - Next-Gen RAG
 ### Question 3: HyDE Technology
 **What is the primary advantage of HyDE (Hypothetical Document Embeddings)?**
 
-A) Reduces computational cost
-B) Improves query-document semantic alignment ✅
-C) Eliminates need for vector databases
-D) Simplifies system architecture
+A) Reduces computational cost  
+B) Simplifies system architecture  
+C) Eliminates need for vector databases  
+D) Improves query-document semantic alignment ✅  
+**Correct Answer: D) Improves query-document semantic alignment**
 
 **Explanation:** HyDE (Hypothetical Document Embeddings) bridges the semantic gap between user queries and document content by generating hypothetical documents that would answer the query, then searching with those documents instead of the original query. This dramatically improves retrieval because hypothetical answers exist in the same semantic space as actual documents, leading to better query-document alignment.
 
@@ -41,10 +44,11 @@ D) Simplifies system architecture
 ### Question 4: RAG vs Fine-tuning Decision
 **When should you choose RAG over fine-tuning?**
 
-A) When the domain knowledge is static
-B) When you need frequent knowledge updates ✅
-C) When computational resources are unlimited
-D) When source attribution is not needed
+A) When computational resources are unlimited  
+B) When source attribution is not needed  
+C) When the domain knowledge is static  
+D) When you need frequent knowledge updates ✅  
+**Correct Answer: D) When you need frequent knowledge updates**
 
 **Explanation:** RAG is superior when knowledge needs frequent updates because it can incorporate new information without expensive model retraining. Fine-tuning is better for static domain knowledge, but RAG excels when you need to add new documents, update facts, or access real-time information while maintaining source attribution and transparency.
 
@@ -53,10 +57,11 @@ D) When source attribution is not needed
 ### Question 5: Agentic RAG Systems
 **What is the key benefit of Agentic RAG systems?**
 
-A) Faster retrieval speed
-B) Lower computational requirements
-C) Iterative query refinement and self-correction ✅
-D) Simpler system architecture
+A) Simpler system architecture  
+B) Lower computational requirements  
+C) Faster retrieval speed  
+D) Iterative query refinement and self-correction ✅  
+**Correct Answer: D) Iterative query refinement and self-correction**
 
 **Explanation:** Agentic RAG systems (2024-2025 evolution) employ multiple specialized agents that can iteratively refine queries, self-correct responses, and coordinate complex reasoning workflows. This enables sophisticated planning, multi-hop reasoning, and autonomous knowledge acquisition that far exceeds simple retrieve-and-generate approaches.
 
@@ -65,10 +70,11 @@ D) Simpler system architecture
 ### Question 6: Intelligent Chunking
 **Which problem does intelligent chunking primarily solve?**
 
-A) Slow retrieval speed
-B) High computational costs
-C) Loss of document structure and semantic coherence ✅
-D) Limited storage capacity
+A) Loss of document structure and semantic coherence ✅  
+B) Slow retrieval speed  
+C) Limited storage capacity  
+D) High computational costs  
+**Correct Answer: A) Loss of document structure and semantic coherence**
 
 **Explanation:** Intelligent chunking addresses the critical problem of preserving document structure and semantic coherence during the indexing process. Naive character-based splitting destroys meaning by cutting through paragraphs, tables, and logical sections. Smart chunking preserves semantic boundaries, maintaining context and improving retrieval quality.
 
@@ -77,10 +83,11 @@ D) Limited storage capacity
 ### Question 7: Indexing Stage Purpose
 **What is the main purpose of the indexing stage in RAG?**
 
-A) Generate responses to user queries
-B) Transform documents into searchable vector representations ✅
-C) Validate response accuracy
-D) Handle user authentication
+A) Transform documents into searchable vector representations ✅  
+B) Handle user authentication  
+C) Generate responses to user queries  
+D) Validate response accuracy  
+**Correct Answer: A) Transform documents into searchable vector representations**
 
 **Explanation:** The indexing stage is the offline preparation phase that transforms raw documents into searchable vector representations. This involves document parsing, chunking, embedding generation, and vector database storage. It's the foundation that enables fast semantic search during the retrieval stage.
 
@@ -89,10 +96,11 @@ D) Handle user authentication
 ### Question 8: Semantic Query Enhancement
 **Why is semantic query enhancement important in RAG systems?**
 
-A) It reduces storage requirements
-B) It speeds up vector database queries
-C) It bridges the gap between user language and document content ✅
-D) It simplifies the system architecture
+A) It reduces storage requirements  
+B) It speeds up vector database queries  
+C) It simplifies the system architecture  
+D) It bridges the gap between user language and document content ✅  
+**Correct Answer: D) It bridges the gap between user language and document content**
 
 **Explanation:** Semantic query enhancement (including techniques like HyDE and query expansion) is crucial because users often phrase questions differently than how information appears in documents. Enhancement techniques bridge this semantic gap by generating multiple query representations, improving the likelihood of finding relevant content.
 
@@ -101,10 +109,11 @@ D) It simplifies the system architecture
 ### Question 9: Legal RAG Specialization
 **What distinguishes legal RAG systems from general RAG implementations?**
 
-A) Faster processing speed
-B) Lower accuracy requirements
-C) Specialized components for citations and jurisdictional awareness ✅
-D) Simpler query processing
+A) Simpler query processing  
+B) Faster processing speed  
+C) Lower accuracy requirements  
+D) Specialized components for citations and jurisdictional awareness ✅  
+**Correct Answer: D) Specialized components for citations and jurisdictional awareness**
 
 **Explanation:** Legal RAG systems require specialized components including LegalBERT embeddings for legal language understanding, hierarchical indexing for legal document structure, citation-aware retrieval systems, and jurisdiction-specific processing. The extreme accuracy requirements and specialized formatting needs of legal work demand these domain-specific adaptations.
 
@@ -113,10 +122,11 @@ D) Simpler query processing
 ### Question 10: RAG Generator Component
 **Which component is responsible for combining retrieved context with user queries?**
 
-A) Vector database
-B) Embedding model
-C) RAG Generator ✅
-D) Document chunker
+A) RAG Generator ✅  
+B) Document chunker  
+C) Vector database  
+D) Embedding model  
+**Correct Answer: A) RAG Generator**
 
 **Explanation:** The RAG Generator is responsible for the synthesis phase where retrieved context is combined with user queries to generate coherent responses. It builds augmented prompts, manages context integration, and uses LLMs to produce final answers grounded in the retrieved information.
 

@@ -5,10 +5,11 @@
 ### Question 1: ACP Purpose
 **What is the primary purpose of the Agent Communication Protocol (ACP)?**
 
-A) To enable cloud-based agent coordination  
-B) To facilitate local-first agent coordination with minimal overhead ✅  
-C) To replace REST APIs entirely  
-D) To provide internet-dependent agent communication  
+A) To provide internet-dependent agent communication  
+B) To replace REST APIs entirely  
+C) To facilitate local-first agent coordination with minimal overhead ✅  
+D) To enable cloud-based agent coordination  
+**Correct Answer: C) To facilitate local-first agent coordination with minimal overhead**
 
 **Explanation:** ACP is specifically designed for local-first agent coordination that works within the same runtime, edge device, or local network without requiring internet connectivity.
 
@@ -17,10 +18,11 @@ D) To provide internet-dependent agent communication
 ### Question 2: ACP Advantage
 **What is the main advantage of ACP over traditional cloud-dependent agent protocols?**
 
-A) Better security  
-B) Higher performance  
-C) Offline capability and low latency ✅  
-D) Easier implementation  
+A) Higher performance  
+B) Easier implementation  
+C) Better security  
+D) Offline capability and low latency ✅  
+**Correct Answer: D) Offline capability and low latency**
 
 **Explanation:** ACP's offline capability and low latency make it ideal for edge computing and local environments where internet connectivity may be unreliable or unavailable.
 
@@ -29,10 +31,11 @@ D) Easier implementation
 ### Question 3: Agent Capabilities
 **What information must an ACP agent capability declaration include?**
 
-A) Only the capability name  
-B) Name, description, input schema, and output schema ✅  
+A) Only the agent ID  
+B) Only the capability name  
 C) Just the input parameters  
-D) Only the agent ID  
+D) Name, description, input schema, and output schema ✅  
+**Correct Answer: D) Name, description, input schema, and output schema**
 
 **Explanation:** Complete capability declarations include name, human-readable description, input schema for parameters, and output schema for return values to enable proper agent discovery and interaction.
 
@@ -41,10 +44,11 @@ D) Only the agent ID
 ### Question 4: Agent Discovery
 **How do ACP agents discover each other's capabilities?**
 
-A) Through a centralized cloud registry  
-B) Via embedded metadata and local REST endpoints ✅  
-C) Using UDP broadcasts only  
-D) Through manual configuration files  
+A) Via embedded metadata and local REST endpoints ✅  
+B) Through a centralized cloud registry  
+C) Through manual configuration files  
+D) Using UDP broadcasts only  
+**Correct Answer: A) Via embedded metadata and local REST endpoints**
 
 **Explanation:** ACP agents use embedded metadata exposed through standard REST endpoints, enabling automatic discovery without external dependencies.
 
@@ -55,8 +59,9 @@ D) Through manual configuration files
 
 A) WebSocket  
 B) gRPC  
-C) Standard HTTP/REST ✅  
-D) Custom binary protocol  
+C) Custom binary protocol  
+D) Standard HTTP/REST ✅  
+**Correct Answer: D) Standard HTTP/REST**
 
 **Explanation:** ACP uses standard HTTP/REST endpoints, making it framework-agnostic and easy to implement with existing web technologies.
 
@@ -65,10 +70,11 @@ D) Custom binary protocol
 ### Question 6: Coordinator Pattern
 **What role does the coordinator agent play in ACP architectures?**
 
-A) Stores all data permanently  
+A) Provides security authentication  
 B) Orchestrates multi-agent workflows and manages task distribution ✅  
-C) Provides security authentication  
+C) Stores all data permanently  
 D) Acts as a backup for other agents  
+**Correct Answer: B) Orchestrates multi-agent workflows and manages task distribution**
 
 **Explanation:** The coordinator agent orchestrates multi-agent workflows by discovering available agents, distributing tasks, and managing the overall workflow execution.
 
@@ -77,10 +83,11 @@ D) Acts as a backup for other agents
 ### Question 7: Agent Specialization
 **Why are specialized agents (like data agents and text agents) beneficial in ACP systems?**
 
-A) They require less memory  
-B) They provide focused expertise and better task delegation ✅  
-C) They are faster than general-purpose agents  
-D) They cost less to deploy  
+A) They cost less to deploy  
+B) They require less memory  
+C) They provide focused expertise and better task delegation ✅  
+D) They are faster than general-purpose agents  
+**Correct Answer: C) They provide focused expertise and better task delegation**
 
 **Explanation:** Specialized agents provide focused expertise in specific domains, enabling better task delegation and more efficient problem-solving through division of labor.
 
@@ -90,9 +97,10 @@ D) They cost less to deploy
 **How do agents register their services in an ACP system?**
 
 A) Through manual configuration  
-B) By exposing standardized metadata endpoints ✅  
-C) Using external service registries only  
-D) Through database entries  
+B) Using external service registries only  
+C) Through database entries  
+D) By exposing standardized metadata endpoints ✅  
+**Correct Answer: D) By exposing standardized metadata endpoints**
 
 **Explanation:** Agents register services by exposing standardized metadata endpoints that describe their capabilities, allowing for automatic service discovery.
 
@@ -102,9 +110,10 @@ D) Through database entries
 **What is the purpose of the local registry in ACP systems?**
 
 A) To store all agent data  
-B) To facilitate agent discovery and capability lookup ✅  
-C) To provide internet connectivity  
+B) To provide internet connectivity  
+C) To facilitate agent discovery and capability lookup ✅  
 D) To handle authentication  
+**Correct Answer: C) To facilitate agent discovery and capability lookup**
 
 **Explanation:** The local registry serves as a central point for agent discovery and capability lookup, maintaining a directory of available agents and their services.
 
@@ -113,10 +122,11 @@ D) To handle authentication
 ### Question 10: Framework Agnostic Design
 **Why is ACP designed to be framework-agnostic?**
 
-A) To reduce development costs  
-B) To enable integration with any agent implementation ✅  
-C) To improve performance  
-D) To simplify testing  
+A) To improve performance  
+B) To simplify testing  
+C) To enable integration with any agent implementation ✅  
+D) To reduce development costs  
+**Correct Answer: C) To enable integration with any agent implementation**
 
 **Explanation:** Framework-agnostic design allows ACP to work with any agent implementation, providing flexibility and enabling integration across different agent frameworks and technologies.
 

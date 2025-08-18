@@ -6,9 +6,10 @@
 **What is the primary advantage of LangGraph over sequential LangChain agents?**
 
 A) Better performance  
-B) Graph-based workflows with conditional routing and parallel execution ✅  
-C) Lower cost  
+B) Lower cost  
+C) Graph-based workflows with conditional routing and parallel execution ✅  
 D) Simpler implementation  
+**Correct Answer: C) Graph-based workflows with conditional routing and parallel execution**
 
 **Explanation:** LangGraph's graph-based architecture enables sophisticated workflows with conditional routing, parallel execution, and dynamic flow control, far beyond the sequential limitations of traditional agent chains.
 
@@ -17,10 +18,11 @@ D) Simpler implementation
 ### Question 2: State Management Component
 **In LangGraph, what component defines the data that flows between nodes?**
 
-A) Edges  
-B) State (TypedDict) ✅  
-C) Tools  
-D) Memory  
+A) State (TypedDict) ✅  
+B) Edges  
+C) Memory  
+D) Tools  
+**Correct Answer: A) State (TypedDict)**
 
 **Explanation:** State in LangGraph is defined using TypedDict, providing a structured, type-safe way to define what data flows between nodes and how it's updated throughout the workflow.
 
@@ -29,10 +31,11 @@ D) Memory
 ### Question 3: Flow Determination
 **What determines the flow between nodes in a LangGraph workflow?**
 
-A) Sequential execution only  
-B) Conditional edges and decision functions ✅  
-C) Random selection  
-D) User input  
+A) Random selection  
+B) User input  
+C) Sequential execution only  
+D) Conditional edges and decision functions ✅  
+**Correct Answer: D) Conditional edges and decision functions**
 
 **Explanation:** LangGraph uses conditional edges with decision functions that examine the current state and determine which node to execute next, enabling dynamic and intelligent workflow routing.
 
@@ -41,10 +44,11 @@ D) User input
 ### Question 4: Parallel Execution Handling
 **How does LangGraph handle parallel agent execution?**
 
-A) It doesn't support parallel execution  
-B) Through parallel nodes with state merging ✅  
-C) Using threading only  
-D) Through external orchestration  
+A) Through parallel nodes with state merging ✅  
+B) It doesn't support parallel execution  
+C) Through external orchestration  
+D) Using threading only  
+**Correct Answer: A) Through parallel nodes with state merging**
 
 **Explanation:** LangGraph supports parallel execution through parallel nodes that can run simultaneously, with their outputs automatically merged into the shared state for downstream processing.
 
@@ -53,10 +57,11 @@ D) Through external orchestration
 ### Question 5: State Updates
 **What happens when a LangGraph node updates state?**
 
-A) The entire state is replaced  
-B) Only specified fields are updated/merged ✅  
-C) State is reset to default  
-D) Previous state is archived  
+A) State is reset to default  
+B) The entire state is replaced  
+C) Previous state is archived  
+D) Only specified fields are updated/merged ✅  
+**Correct Answer: D) Only specified fields are updated/merged**
 
 **Explanation:** LangGraph uses state merging where nodes only update the specific fields they return, preserving other state data and enabling incremental workflow progress.
 
@@ -66,9 +71,10 @@ D) Previous state is archived
 **In the debate pattern, what determines when the debate ends?**
 
 A) Fixed number of rounds  
-B) Consensus score and maximum iterations ✅  
-C) User intervention  
+B) User intervention  
+C) Consensus score and maximum iterations ✅  
 D) Random timing  
+**Correct Answer: C) Consensus score and maximum iterations**
 
 **Explanation:** The debate pattern uses a consensus scoring mechanism combined with maximum iteration limits to determine when agents have reached sufficient agreement or when the debate should terminate.
 
@@ -77,10 +83,11 @@ D) Random timing
 ### Question 7: Decision Function Purpose
 **What is the purpose of a decision function in conditional edges?**
 
-A) To process user input  
-B) To examine state and determine next node ✅  
-C) To handle errors  
-D) To manage memory  
+A) To manage memory  
+B) To handle errors  
+C) To process user input  
+D) To examine state and determine next node ✅  
+**Correct Answer: D) To examine state and determine next node**
 
 **Explanation:** Decision functions in conditional edges examine the current workflow state and use that information to intelligently determine which node should be executed next in the graph.
 
@@ -89,10 +96,11 @@ D) To manage memory
 ### Question 8: Hierarchical Team Coordination
 **How does the hierarchical team pattern coordinate work?**
 
-A) All agents work independently  
-B) A supervisor routes tasks to specialized workers ✅  
+A) Random task assignment  
+B) All agents work independently  
 C) Workers communicate directly  
-D) Random task assignment  
+D) A supervisor routes tasks to specialized workers ✅  
+**Correct Answer: D) A supervisor routes tasks to specialized workers**
 
 **Explanation:** The hierarchical team pattern uses a supervisor agent that analyzes tasks, routes them to appropriate specialized worker agents, and coordinates their collaboration.
 
@@ -102,9 +110,10 @@ D) Random task assignment
 **What is the circuit breaker pattern used for?**
 
 A) Stopping workflows manually  
-B) Preventing cascade failures from unreliable services ✅  
-C) Optimizing performance  
-D) Managing memory usage  
+B) Optimizing performance  
+C) Managing memory usage  
+D) Preventing cascade failures from unreliable services ✅  
+**Correct Answer: D) Preventing cascade failures from unreliable services**
 
 **Explanation:** The circuit breaker pattern prevents cascade failures by monitoring service reliability and temporarily disabling calls to failing services, allowing workflows to degrade gracefully.
 
@@ -113,10 +122,11 @@ D) Managing memory usage
 ### Question 10: Parallel Branch Synchronization
 **In parallel execution, when should branches be synchronized?**
 
-A) Never - they should be independent  
-B) When downstream nodes need data from multiple branches ✅  
+A) Only at the end of the workflow  
+B) Never - they should be independent  
 C) At random intervals  
-D) Only at the end of the workflow  
+D) When downstream nodes need data from multiple branches ✅  
+**Correct Answer: D) When downstream nodes need data from multiple branches**
 
 **Explanation:** Parallel branches should be synchronized when downstream processing requires data from multiple branches, ensuring all necessary information is available before proceeding.
 

@@ -10,6 +10,7 @@ A) Reduced deployment complexity
 B) Lower operational costs  
 C) Geographic distribution and disaster recovery ✅  
 D) Simplified monitoring  
+**Correct Answer: C) Geographic distribution and disaster recovery**
 
 **Explanation:** Multi-cluster RAG architecture provides geographic distribution for reduced latency, disaster recovery capabilities through redundancy, and massive scaling potential. This is essential for enterprise systems that need high availability and global reach.
 
@@ -23,6 +24,7 @@ A) It requires less configuration
 B) It predicts future load patterns and scales proactively ✅  
 C) It uses fewer computational resources  
 D) It's easier to debug  
+**Correct Answer: B) It predicts future load patterns and scales proactively**
 
 **Explanation:** Machine learning-based scaling uses historical patterns, seasonality, and trends to predict future load and scale proactively before performance degrades. This prevents reactive scaling that can lead to temporary performance issues during traffic spikes.
 
@@ -36,6 +38,7 @@ A) Reduced system complexity
 B) Lower storage requirements  
 C) End-to-end visibility across all pipeline components ✅  
 D) Faster query processing  
+**Correct Answer: C) End-to-end visibility across all pipeline components**
 
 **Explanation:** Distributed tracing provides complete visibility into how requests flow through the entire RAG pipeline - from query processing through retrieval, context generation, LLM generation, and response assembly. This is crucial for debugging performance issues and optimizing complex RAG architectures.
 
@@ -49,6 +52,7 @@ A) CPU usage only
 B) Memory consumption and network traffic  
 C) Query efficiency, retrieval quality, response quality, and resource efficiency ✅  
 D) Disk space and bandwidth  
+**Correct Answer: C) Query efficiency, retrieval quality, response quality, and resource efficiency**
 
 **Explanation:** RAG system optimization requires a holistic view including query processing efficiency, retrieval accuracy and speed, response quality scores, and resource utilization efficiency. This multi-dimensional approach ensures both technical performance and output quality.
 
@@ -62,6 +66,7 @@ A) Reduced compliance costs
 B) Simplified audit processes  
 C) Continuous adherence without manual oversight ✅  
 D) Faster system performance  
+**Correct Answer: C) Continuous adherence without manual oversight**
 
 **Explanation:** Automated compliance monitoring ensures continuous adherence to regulatory requirements (GDPR, HIPAA, SOX) without requiring constant manual oversight. It can detect violations in real-time and trigger automated remediation actions.
 

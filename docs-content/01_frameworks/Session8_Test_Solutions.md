@@ -6,9 +6,10 @@
 **What is Agno's primary design philosophy?**
 
 A) Framework-agnostic with maximum flexibility  
-B) Production-first with built-in observability ✅  
-C) Development-focused with simple prototyping  
+B) Development-focused with simple prototyping  
+C) Production-first with built-in observability ✅  
 D) Model-specific optimization  
+**Correct Answer: C) Production-first with built-in observability**
 
 **Explanation:** Agno is designed from the ground up for production deployments with comprehensive observability, monitoring, and enterprise-grade features built in from day one.
 
@@ -17,10 +18,11 @@ D) Model-specific optimization
 ### Question 2: Observability Features
 **Which observability feature is built into Agno by default?**
 
-A) Custom logging framework  
-B) OpenTelemetry with distributed tracing ✅  
-C) Simple console output  
-D) File-based logging only  
+A) Simple console output  
+B) Custom logging framework  
+C) File-based logging only  
+D) OpenTelemetry with distributed tracing ✅  
+**Correct Answer: D) OpenTelemetry with distributed tracing**
 
 **Explanation:** Agno includes OpenTelemetry integration for comprehensive distributed tracing, metrics collection, and observability across complex agent systems.
 
@@ -29,10 +31,11 @@ D) File-based logging only
 ### Question 3: Failure Handling
 **How does Agno handle agent failures in production?**
 
-A) Simple retry with fixed delays  
-B) Circuit breakers with exponential backoff ✅  
-C) Immediate failure without retry  
-D) Manual intervention required  
+A) Immediate failure without retry  
+B) Manual intervention required  
+C) Circuit breakers with exponential backoff ✅  
+D) Simple retry with fixed delays  
+**Correct Answer: C) Circuit breakers with exponential backoff**
 
 **Explanation:** Agno implements sophisticated failure handling with circuit breakers, exponential backoff, and intelligent retry strategies to maintain system resilience.
 
@@ -41,10 +44,11 @@ D) Manual intervention required
 ### Question 4: Configuration Management
 **What format does Agno use for configuration management?**
 
-A) JSON with schema validation  
+A) INI files with sections  
 B) YAML with environment variable interpolation ✅  
 C) Python configuration files  
-D) INI files with sections  
+D) JSON with schema validation  
+**Correct Answer: B) YAML with environment variable interpolation**
 
 **Explanation:** YAML configuration with environment variable support provides flexibility, security, and easy deployment across different environments.
 
@@ -53,10 +57,11 @@ D) INI files with sections
 ### Question 5: Deployment Models
 **Which deployment model does Agno NOT support?**
 
-A) Docker containers  
-B) Kubernetes clusters  
-C) Cloud functions  
+A) Kubernetes clusters  
+B) Cloud functions  
+C) Docker containers  
 D) Client-side browser deployment ✅  
+**Correct Answer: D) Client-side browser deployment**
 
 **Explanation:** Agno is designed for server-side deployments and enterprise environments, not browser-based execution due to security and performance requirements.
 
@@ -66,9 +71,10 @@ D) Client-side browser deployment ✅
 **What is the purpose of Agno's WorkflowOrchestrator?**
 
 A) Simple sequential task execution  
-B) Complex DAG workflows with compensation ✅  
-C) Parallel processing only  
-D) Basic job queuing  
+B) Basic job queuing  
+C) Complex DAG workflows with compensation ✅  
+D) Parallel processing only  
+**Correct Answer: C) Complex DAG workflows with compensation**
 
 **Explanation:** WorkflowOrchestrator handles sophisticated directed acyclic graph workflows with compensation logic, saga patterns, and complex orchestration requirements.
 
@@ -78,9 +84,10 @@ D) Basic job queuing
 **How does Agno implement distributed tracing?**
 
 A) Custom tracing solution  
-B) OpenTelemetry with W3C trace context ✅  
-C) Simple request IDs  
-D) Database logging only  
+B) Simple request IDs  
+C) Database logging only  
+D) OpenTelemetry with W3C trace context ✅  
+**Correct Answer: D) OpenTelemetry with W3C trace context**
 
 **Explanation:** Uses industry-standard OpenTelemetry with W3C trace context propagation for comprehensive distributed system observability.
 
@@ -90,9 +97,10 @@ D) Database logging only
 **What retry strategy does Agno use for transient failures?**
 
 A) Fixed interval retries  
-B) Exponential backoff with jitter ✅  
-C) Linear increase delays  
-D) Random retry intervals  
+B) Random retry intervals  
+C) Exponential backoff with jitter ✅  
+D) Linear increase delays  
+**Correct Answer: C) Exponential backoff with jitter**
 
 **Explanation:** Exponential backoff with jitter prevents thundering herd problems and provides optimal retry patterns for distributed systems.
 
@@ -101,10 +109,11 @@ D) Random retry intervals
 ### Question 9: Caching Strategy
 **Which caching strategy is recommended for Agno agents?**
 
-A) In-memory caching only  
-B) Redis with TTL and invalidation ✅  
-C) File-based caching  
+A) File-based caching  
+B) In-memory caching only  
+C) Redis with TTL and invalidation ✅  
 D) Database caching only  
+**Correct Answer: C) Redis with TTL and invalidation**
 
 **Explanation:** Redis provides distributed caching with time-to-live, cache invalidation, and high-performance access patterns suitable for production agents.
 
@@ -113,10 +122,11 @@ D) Database caching only
 ### Question 10: Request Limiting
 **How does Agno handle concurrent request limiting?**
 
-A) Simple counter-based limiting  
-B) Semaphores with configurable pools ✅  
-C) Database locks  
+A) Semaphores with configurable pools ✅  
+B) Database locks  
+C) Simple counter-based limiting  
 D) Process-based limiting  
+**Correct Answer: A) Semaphores with configurable pools**
 
 **Explanation:** Configurable semaphore pools prevent resource exhaustion while maintaining high throughput and system stability under load.
 
@@ -125,10 +135,11 @@ D) Process-based limiting
 ### Question 11: Metrics Collection
 **What metrics does Agno's PrometheusMetrics collect by default?**
 
-A) Only response times  
-B) Request rates, latencies, error rates, and agent performance ✅  
-C) Memory usage only  
-D) CPU utilization only  
+A) Request rates, latencies, error rates, and agent performance ✅  
+B) CPU utilization only  
+C) Only response times  
+D) Memory usage only  
+**Correct Answer: A) Request rates, latencies, error rates, and agent performance**
 
 **Explanation:** Comprehensive metrics collection including RED metrics (Rate, Errors, Duration) plus agent-specific performance indicators for complete observability.
 
@@ -137,10 +148,11 @@ D) CPU utilization only
 ### Question 12: Structured Logging
 **How does Agno implement structured logging?**
 
-A) Plain text logging  
-B) JSON format with trace correlation ✅  
-C) CSV format  
-D) Binary logging  
+A) JSON format with trace correlation ✅  
+B) CSV format  
+C) Binary logging  
+D) Plain text logging  
+**Correct Answer: A) JSON format with trace correlation**
 
 **Explanation:** JSON structured logging with trace correlation enables efficient log aggregation, analysis, and correlation with distributed tracing data.
 
@@ -149,10 +161,11 @@ D) Binary logging
 ### Question 13: Alerting Capabilities
 **What alerting capabilities does Agno provide?**
 
-A) Email notifications only  
-B) Multi-channel alerts with severity levels ✅  
-C) Console warnings only  
-D) SMS notifications only  
+A) SMS notifications only  
+B) Console warnings only  
+C) Email notifications only  
+D) Multi-channel alerts with severity levels ✅  
+**Correct Answer: D) Multi-channel alerts with severity levels**
 
 **Explanation:** Comprehensive alerting system with multiple notification channels, severity-based routing, and intelligent alert management.
 
@@ -161,10 +174,11 @@ D) SMS notifications only
 ### Question 14: Performance Monitoring
 **How does Agno handle performance monitoring?**
 
-A) Basic timing measurements  
-B) Comprehensive profiling with bottleneck detection ✅  
-C) Manual performance testing  
-D) External monitoring tools only  
+A) Manual performance testing  
+B) External monitoring tools only  
+C) Basic timing measurements  
+D) Comprehensive profiling with bottleneck detection ✅  
+**Correct Answer: D) Comprehensive profiling with bottleneck detection**
 
 **Explanation:** Built-in performance profiling, bottleneck detection, and optimization recommendations for maintaining optimal system performance.
 
@@ -173,10 +187,11 @@ D) External monitoring tools only
 ### Question 15: Security Monitoring
 **What security monitoring features does Agno include?**
 
-A) Basic authentication logs  
-B) Request validation, rate limiting, and security event tracking ✅  
+A) Request validation, rate limiting, and security event tracking ✅  
+B) File system monitoring only  
 C) Password strength checking  
-D) File system monitoring only  
+D) Basic authentication logs  
+**Correct Answer: A) Request validation, rate limiting, and security event tracking**
 
 **Explanation:** Comprehensive security monitoring including request validation, rate limiting, authentication tracking, and security event correlation.
 
@@ -185,10 +200,11 @@ D) File system monitoring only
 ### Question 16: Authentication Integration
 **How does Agno integrate with existing enterprise authentication systems?**
 
-A) Only supports API keys  
-B) OAuth 2.0, SAML, and LDAP integration ✅  
+A) No authentication support  
+B) Only supports API keys  
 C) Basic username/password only  
-D) No authentication support  
+D) OAuth 2.0, SAML, and LDAP integration ✅  
+**Correct Answer: D) OAuth 2.0, SAML, and LDAP integration**
 
 **Explanation:** Enterprise-grade authentication integration supporting industry-standard protocols for seamless enterprise system integration.
 
@@ -197,10 +213,11 @@ D) No authentication support
 ### Question 17: Cost Management
 **What cost management features does Agno provide?**
 
-A) Basic usage counting  
-B) Budget tracking, cost alerts, and optimization recommendations ✅  
-C) Manual cost calculation  
-D) No cost tracking  
+A) Manual cost calculation  
+B) Basic usage counting  
+C) No cost tracking  
+D) Budget tracking, cost alerts, and optimization recommendations ✅  
+**Correct Answer: D) Budget tracking, cost alerts, and optimization recommendations**
 
 **Explanation:** Comprehensive cost management with budget tracking, proactive alerting, and AI-driven optimization recommendations for cost efficiency.
 
@@ -209,10 +226,11 @@ D) No cost tracking
 ### Question 18: Privacy and Compliance
 **How does Agno handle data privacy and compliance?**
 
-A) Basic data encryption  
-B) GDPR compliance, data masking, and audit trails ✅  
-C) No privacy features  
-D) User responsibility only  
+A) User responsibility only  
+B) No privacy features  
+C) GDPR compliance, data masking, and audit trails ✅  
+D) Basic data encryption  
+**Correct Answer: C) GDPR compliance, data masking, and audit trails**
 
 **Explanation:** Built-in GDPR compliance features, data masking capabilities, and comprehensive audit trails for regulatory compliance.
 
@@ -221,10 +239,11 @@ D) User responsibility only
 ### Question 19: Scalability Patterns
 **What scalability patterns does Agno support?**
 
-A) Single instance only  
-B) Horizontal scaling with load balancing and auto-scaling ✅  
+A) Horizontal scaling with load balancing and auto-scaling ✅  
+B) Single instance only  
 C) Manual scaling only  
 D) Vertical scaling only  
+**Correct Answer: A) Horizontal scaling with load balancing and auto-scaling**
 
 **Explanation:** Enterprise-grade horizontal scaling with intelligent load balancing, auto-scaling policies, and resource optimization.
 
@@ -233,10 +252,11 @@ D) Vertical scaling only
 ### Question 20: Environment Management
 **How does Agno manage deployment environments?**
 
-A) Single environment support  
-B) Multi-environment configuration with promotion pipelines ✅  
+A) Multi-environment configuration with promotion pipelines ✅  
+B) Development environment only  
 C) Manual environment management  
-D) Development environment only  
+D) Single environment support  
+**Correct Answer: A) Multi-environment configuration with promotion pipelines**
 
 **Explanation:** Sophisticated multi-environment configuration management with automated promotion pipelines and environment-specific settings.
 
