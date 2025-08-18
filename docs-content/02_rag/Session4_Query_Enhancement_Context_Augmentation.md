@@ -1240,12 +1240,43 @@ FINAL ANSWER:
 ```
 
 **Step 13: Confidence Calibration**
+
+Confidence calibration helps RAG systems provide transparent reliability assessments:
+
 ```python
     def _add_confidence_calibration(self, base_prompt: str, query: str,
                                   context: str) -> Dict[str, Any]:
         """Add confidence calibration to improve answer reliability."""
+        
+        # Define confidence assessment framework
+        confidence_enhancement = self._build_confidence_framework()
+```
 
-        confidence_enhancement = """
+**Confidence Framework**: Structured assessment dimensions ensure consistent evaluation of evidence strength, answer completeness, and overall confidence.
+
+```python
+        # Apply confidence enhancement to base prompt
+        enhanced_prompt = base_prompt + confidence_enhancement
+        
+        return {
+            'prompt': enhanced_prompt,
+            'metadata': {
+                'technique': 'confidence_calibration',
+                'added_tokens': len(confidence_enhancement.split()),
+                'assessment_dimensions': 3
+            }
+        }
+```
+
+**Metadata Tracking**: Recording technique details and token costs enables optimization of prompt engineering strategies.
+
+Now create the confidence assessment framework:
+
+```python
+    def _build_confidence_framework(self) -> str:
+        """Build structured confidence assessment framework."""
+        
+        return """
 CONFIDENCE ASSESSMENT:
 For your final answer, provide a confidence assessment:
 
@@ -1253,12 +1284,26 @@ For your final answer, provide a confidence assessment:
    - Strong: Multiple reliable sources with consistent information
    - Medium: Some sources with mostly consistent information
    - Weak: Limited or inconsistent source information
+"""
+```
 
+**Evidence Strength Assessment**: The first dimension evaluates the reliability and consistency of source information.
+
+```python
+        # Continue with completeness assessment
+        completeness_section = """
 2. COMPLETENESS: Rate answer completeness (Complete/Partial/Incomplete)
    - Complete: Context fully addresses the question
    - Partial: Context addresses some aspects but missing key information
    - Incomplete: Context has minimal relevant information
+"""
+```
 
+**Completeness Evaluation**: The second dimension assesses how thoroughly the context addresses the user's question.
+
+```python
+        # Add confidence scoring system
+        confidence_scoring = """
 3. CONFIDENCE SCORE: Provide an overall confidence score (0-100%)
    - 90-100%: Highly confident, strong evidence base
    - 70-89%: Confident, adequate evidence base
@@ -1273,22 +1318,13 @@ CONFIDENCE ASSESSMENT:
 - Confidence Score: [0-100%]
 - Key Limitations: [List any significant limitations or uncertainties]
 """
-
-        enhanced_prompt = base_prompt + confidence_enhancement
-
-        return {
-            'prompt': enhanced_prompt,
-            'metadata': {
-                'technique': 'confidence_calibration',
-                'added_tokens': len(confidence_enhancement.split()),
-                'assessment_dimensions': 3
-            }
-        }
+        
+        return base_framework + completeness_section + confidence_scoring
 ```
 
 ### **Dynamic Prompt Adaptation**
 
-Adapt prompts based on context quality and query complexity:
+Adapt prompts based on context quality and query complexity. This system analyzes input characteristics and selects optimal prompt strategies:
 
 ```python
 # Dynamic prompt adaptation system
@@ -1297,27 +1333,37 @@ class DynamicPromptAdapter:
 
     def __init__(self, llm_model):
         self.llm_model = llm_model
+```
 
+**Adaptive Framework**: Dynamic prompt adaptation requires analyzing both context quality and query characteristics to select appropriate response strategies.
+
+```python
     def adapt_prompt_dynamically(self, query: str, context: str,
                                 retrieval_metadata: Dict) -> Dict[str, Any]:
         """Dynamically adapt prompt based on context and query analysis."""
-
-        # Analyze context quality
+        
+        # Step 1: Analyze input characteristics
         context_analysis = self._analyze_context_quality(context, query)
-
-        # Analyze query characteristics
         query_analysis = self._analyze_query_characteristics(query)
+```
 
-        # Choose optimal prompt strategy
+**Input Analysis**: Understanding context quality and query complexity enables intelligent selection of appropriate prompt engineering techniques.
+
+```python
+        # Step 2: Select optimal strategy
         prompt_strategy = self._select_prompt_strategy(
             context_analysis, query_analysis, retrieval_metadata
         )
+```
 
-        # Generate adapted prompt
+**Strategy Selection**: Based on analysis results, choose the most effective prompt structure and enhancement techniques.
+
+```python
+        # Step 3: Generate adapted prompt
         adapted_prompt = self._generate_adapted_prompt(
             query, context, prompt_strategy
         )
-
+        
         return {
             'adapted_prompt': adapted_prompt,
             'context_analysis': context_analysis,
@@ -1330,48 +1376,87 @@ class DynamicPromptAdapter:
 ```
 
 **Step 14: Context Quality Assessment**
+
+Context quality analysis involves multiple dimensions to determine optimal prompt strategies:
+
 ```python
     def _analyze_context_quality(self, context: str, query: str) -> Dict[str, Any]:
         """Analyze the quality and characteristics of retrieved context."""
+        
+        # Collect basic context metrics
+        basic_metrics = self._collect_basic_metrics(context)
+```
 
-        # Basic metrics
-        context_length = len(context.split())
-        context_diversity = self._calculate_context_diversity(context)
+**Basic Metrics Collection**: Fundamental measurements of context length and diversity provide baseline quality indicators.
 
-        # Source analysis
-        source_count = context.count('[Source:')
-        source_diversity = self._analyze_source_diversity(context)
+```python
+        # Analyze source characteristics
+        source_analysis = self._analyze_context_sources(context)
+```
 
-        # Relevance assessment using LLM
+**Source Analysis**: Understanding source count and diversity helps assess the breadth of information available for response generation.
+
+```python
+        # Assess relevance using LLM
         relevance_score = self._assess_context_relevance(context, query)
-
-        # Information density
+        
+        # Calculate information density
         information_density = self._calculate_information_density(context)
+```
 
-        # Quality classification
+**Quality Assessment**: LLM-based relevance scoring and information density calculation provide sophisticated quality metrics.
+
+```python
+        # Generate overall quality classification
         quality_level = self._classify_context_quality(
-            context_length, context_diversity, source_count,
-            relevance_score, information_density
+            basic_metrics, source_analysis, relevance_score, information_density
         )
-
+        
         return {
-            'length': context_length,
-            'diversity_score': context_diversity,
-            'source_count': source_count,
-            'source_diversity': source_diversity,
+            **basic_metrics,
+            **source_analysis,
             'relevance_score': relevance_score,
             'information_density': information_density,
-            'quality_level': quality_level  # High/Medium/Low
+            'quality_level': quality_level
         }
+```
 
+**Comprehensive Assessment**: Combining multiple quality dimensions into a unified assessment enables intelligent prompt adaptation.
+
+Now implement the supporting methods:
+
+```python
+    def _collect_basic_metrics(self, context: str) -> Dict[str, Any]:
+        """Collect basic context metrics."""
+        
+        return {
+            'length': len(context.split()),
+            'diversity_score': self._calculate_context_diversity(context)
+        }
+```
+
+**Basic Metrics**: Length and diversity scores provide fundamental context characteristics for quality assessment.
+
+```python
+    def _analyze_context_sources(self, context: str) -> Dict[str, Any]:
+        """Analyze source characteristics in context."""
+        
+        return {
+            'source_count': context.count('[Source:'),
+            'source_diversity': self._analyze_source_diversity(context)
+        }
+```
+
+**Source Analysis**: Source count and diversity indicate the breadth and reliability of information in the context.
+
+```python
     def _assess_context_relevance(self, context: str, query: str) -> float:
         """Use LLM to assess context relevance to query."""
-
+        
         relevance_prompt = f"""
         Rate the relevance of this context to the given query on a scale of 0.0 to 1.0:
 
         Query: {query}
-
         Context: {context[:1000]}...
 
         Consider:
@@ -1381,7 +1466,11 @@ class DynamicPromptAdapter:
 
         Return only a number between 0.0 and 1.0:
         """
+```
 
+**Relevance Assessment**: LLM-based relevance scoring provides intelligent evaluation of context-query alignment beyond simple keyword matching.
+
+```python
         try:
             response = self.llm_model.predict(relevance_prompt).strip()
             relevance_score = float(response)
@@ -1408,60 +1497,106 @@ Create a comprehensive query enhancement system that combines HyDE, multi-query 
 
 ### **Implementation Framework:**
 
+The comprehensive system integrates all enhancement techniques into a unified pipeline:
+
 ```python
 # Complete query enhancement system
 class ComprehensiveQueryEnhancer:
     """Complete query enhancement pipeline for RAG systems."""
 
     def __init__(self, llm_model, embedding_model, tokenizer):
-        # Initialize components
+        # Initialize all enhancement components
+        self._initialize_components(llm_model, embedding_model, tokenizer)
+```
+
+**Component Integration**: Initializing all enhancement systems enables coordinated query processing through multiple improvement strategies.
+
+```python
+    def _initialize_components(self, llm_model, embedding_model, tokenizer):
+        """Initialize all query enhancement components."""
+        
         self.hyde_enhancer = HyDEQueryEnhancer(llm_model, embedding_model)
         self.query_expander = IntelligentQueryExpander(llm_model)
         self.multi_query_gen = MultiQueryGenerator(llm_model)
         self.context_optimizer = ContextWindowOptimizer(tokenizer)
         self.prompt_engineer = RAGPromptEngineer(llm_model)
         self.dynamic_adapter = DynamicPromptAdapter(llm_model)
+```
 
+**System Architecture**: Each component handles a specific aspect of query enhancement, from semantic gap bridging to prompt optimization.
+
+```python
     async def comprehensive_enhancement(self, query: str,
                                       vector_store,
                                       enhancement_config: Dict) -> Dict[str, Any]:
         """Run comprehensive query enhancement pipeline."""
-
+        
         results = {'original_query': query}
+        
+        # Phase 1: Query Enhancement
+        await self._apply_query_enhancements(query, results, enhancement_config)
+```
 
-        # Step 1: HyDE Enhancement
-        if enhancement_config.get('use_hyde', True):
-            hyde_result = self.hyde_enhancer.enhance_query_with_hyde(query)
-            results['hyde_enhancement'] = hyde_result
+**Pipeline Coordination**: The enhancement pipeline processes queries through multiple phases for comprehensive improvement.
 
-        # Step 2: Query Expansion
-        if enhancement_config.get('use_expansion', True):
-            expansion_result = self.query_expander.expand_query(query)
-            results['query_expansion'] = expansion_result
-
-        # Step 3: Multi-Query Generation
-        if enhancement_config.get('use_multi_query', True):
-            multi_query_result = self.multi_query_gen.generate_multi_query_set(query)
-            results['multi_query'] = multi_query_result
-
-        # Step 4: Enhanced Retrieval
+```python        
+        # Phase 2: Enhanced Retrieval
         enhanced_retrieval = await self._perform_enhanced_retrieval(
             results, vector_store, enhancement_config
         )
         results['enhanced_retrieval'] = enhanced_retrieval
+```
 
-        # Step 5: Context Optimization
+**Enhanced Retrieval**: Using improved queries to retrieve better context from the vector store.
+
+```python
+        # Phase 3: Context and Prompt Optimization  
+        final_results = await self._optimize_context_and_prompts(
+            query, results, enhanced_retrieval
+        )
+        
+        return final_results
+```
+
+Now implement the enhancement phases:
+
+```python
+    async def _apply_query_enhancements(self, query: str, results: Dict, 
+                                      config: Dict):
+        """Apply configured query enhancement techniques."""
+        
+        # HyDE Enhancement
+        if config.get('use_hyde', True):
+            results['hyde_enhancement'] = self.hyde_enhancer.enhance_query_with_hyde(query)
+            
+        # Query Expansion  
+        if config.get('use_expansion', True):
+            results['query_expansion'] = self.query_expander.expand_query(query)
+            
+        # Multi-Query Generation
+        if config.get('use_multi_query', True):
+            results['multi_query'] = self.multi_query_gen.generate_multi_query_set(query)
+```
+
+**Selective Enhancement**: Configuration-driven enhancement allows optimal performance by enabling only beneficial techniques for specific use cases.
+
+```python
+    async def _optimize_context_and_prompts(self, query: str, results: Dict,
+                                          enhanced_retrieval: Dict) -> Dict:
+        """Optimize context window and engineer prompts."""
+        
+        # Context Optimization
         context_result = self.context_optimizer.optimize_context_window(
             query, enhanced_retrieval['combined_results']
         )
         results['optimized_context'] = context_result
-
-        # Step 6: Dynamic Prompt Engineering
+        
+        # Dynamic Prompt Engineering
         prompt_result = self.dynamic_adapter.adapt_prompt_dynamically(
             query, context_result['optimized_context'], enhanced_retrieval
         )
         results['engineered_prompt'] = prompt_result
-
+        
         return results
 ```
 
@@ -1494,59 +1629,41 @@ class ComprehensiveQueryEnhancer:
 
 ---
 
-## 📝 Multiple Choice Test - Session 4 (15 minutes)
+## 📝 Multiple Choice Test - Session 4
 
-**1. What is the primary purpose of HyDE (Hypothetical Document Embeddings)?**  
-   - A) To generate multiple query variations  
-   - B) To bridge the semantic gap between queries and documents  
-   - C) To compress document embeddings  
-   - D) To speed up retrieval performance  
+Test your understanding of query enhancement and context augmentation:
 
-**2. When implementing query decomposition, which approach is most effective for complex questions?**  
-   - A) Random sentence splitting  
-   - B) Breaking questions into answerable sub-questions using LLMs  
-   - C) Fixed-length query segments  
-   - D) Keyword-based fragmentation  
+**Question 1:** What is the primary purpose of HyDE (Hypothetical Document Embeddings)?  
+A) To generate multiple query variations  
+B) To bridge the semantic gap between queries and documents  
+C) To compress document embeddings  
+D) To speed up retrieval performance  
 
-**3. What is the key advantage of multi-query generation in RAG systems?**  
-   - A) Reduced computational cost  
-   - B) Faster query processing  
-   - C) Comprehensive coverage of different query perspectives  
-   - D) Simplified system architecture  
+**Question 2:** When implementing query decomposition, which approach is most effective for complex questions?  
+A) Random sentence splitting  
+B) Breaking questions into answerable sub-questions using LLMs  
+C) Fixed-length query segments  
+D) Keyword-based fragmentation  
 
-**4. In context window optimization, what factor is most important for maintaining quality?**  
-   - A) Maximum token count  
-   - B) Processing speed  
-   - C) Balance between relevance and information density  
-   - D) Number of source documents  
+**Question 3:** What is the key advantage of multi-query generation in RAG systems?  
+A) Reduced computational cost  
+B) Faster query processing  
+C) Comprehensive coverage of different query perspectives  
+D) Simplified system architecture  
 
-**5. Which prompt engineering technique is most effective for improving RAG response quality?**  
-   - A) Longer prompts with more examples  
-   - B) Chain-of-thought reasoning with context integration  
-   - C) Simple template-based prompts  
-   - D) Keyword-heavy prompts  
+**Question 4:** In context window optimization, what factor is most important for maintaining quality?  
+A) Maximum token count  
+B) Processing speed  
+C) Balance between relevance and information density  
+D) Number of source documents  
 
-**6. What is the optimal strategy for handling ambiguous user queries?**  
-   - A) Return an error message  
-   - B) Use the original query without modification  
-   - C) Generate clarifying questions and query variants  
-   - D) Pick the most common interpretation  
+**Question 5:** Which prompt engineering technique is most effective for improving RAG response quality?  
+A) Longer prompts with more examples  
+B) Chain-of-thought reasoning with context integration  
+C) Simple template-based prompts  
+D) Keyword-heavy prompts  
 
-**7. When should you prioritize context summarization over full context inclusion?**  
-   - A) When computational resources are unlimited  
-   - B) When context exceeds token limits and relevance is mixed  
-   - C) Always, to reduce processing time  
-   - D) Never, full context is always better  
-
-**8. What is the most important factor in dynamic prompt adaptation?**  
-   - A) User preference settings  
-   - B) Context quality and query complexity assessment  
-   - C) Available computational resources  
-   - D) Response length requirements  
-
----
-
-**🗂️ View Test Solutions**: Complete answers in `Session4_Test_Solutions.md`
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session4_Test_Solutions.md`
 
 ---
 
@@ -1594,10 +1711,10 @@ Ready to prove your enhancements deliver real value? Let's master RAG evaluation
 
 ## 🧭 Navigation
 
-**Previous: [Session 3 - Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)**
+**Previous:** [Session 3 - Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)
 
 **Optional Deep Dive Modules:**
-- **[🔬 Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)**
 
+- 🔬 **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Deep dive into query analysis and understanding systems
 
-**[Next: Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)**
+**Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)

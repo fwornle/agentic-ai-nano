@@ -4,13 +4,11 @@
 
 ### Question 1: HyDE Purpose
 
-**What is the primary purpose of HyDE (Hypothetical Document Embeddings)?**
-
-A) To bridge the semantic gap between queries and documents ✅  
-B) To speed up retrieval performance  
+**What is the primary purpose of HyDE (Hypothetical Document Embeddings)?**  
+A) To generate multiple query variations  
+B) To bridge the semantic gap between queries and documents ✅  
 C) To compress document embeddings  
-D) To generate multiple query variations  
-**Correct Answer: A) To bridge the semantic gap between queries and documents**
+D) To speed up retrieval performance  
 
 **Explanation:** HyDE bridges the semantic gap by generating hypothetical documents that would answer the user's query, then using these generated documents for retrieval instead of the original query. This technique addresses the mismatch between how users ask questions (query language) and how documents are written (document language).
 
@@ -18,13 +16,11 @@ D) To generate multiple query variations
 
 ### Question 2: Query Decomposition Approach
 
-**When implementing query decomposition, which approach is most effective for complex questions?**
-
+**When implementing query decomposition, which approach is most effective for complex questions?**  
 A) Random sentence splitting  
-B) Fixed-length query segments  
-C) Keyword-based fragmentation  
-D) Breaking questions into answerable sub-questions using LLMs ✅  
-**Correct Answer: D) Breaking questions into answerable sub-questions using LLMs**
+B) Breaking questions into answerable sub-questions using LLMs ✅  
+C) Fixed-length query segments  
+D) Keyword-based fragmentation  
 
 **Explanation:** LLM-based query decomposition intelligently breaks complex questions into logical, answerable sub-questions that maintain semantic meaning. This approach understands question structure and dependencies, unlike mechanical splitting methods that can destroy meaning.
 
@@ -32,13 +28,11 @@ D) Breaking questions into answerable sub-questions using LLMs ✅
 
 ### Question 3: Multi-Query Generation Advantage
 
-**What is the key advantage of multi-query generation in RAG systems?**
-
-A) Simplified system architecture  
-B) Comprehensive coverage of different query perspectives ✅  
-C) Reduced computational cost  
-D) Faster query processing  
-**Correct Answer: B) Comprehensive coverage of different query perspectives**
+**What is the key advantage of multi-query generation in RAG systems?**  
+A) Reduced computational cost  
+B) Faster query processing  
+C) Comprehensive coverage of different query perspectives ✅  
+D) Simplified system architecture  
 
 **Explanation:** Multi-query generation creates multiple formulations of the same information need, covering different perspectives, specificity levels, and phrasings. This comprehensive coverage increases the likelihood of retrieving relevant documents that might be missed by a single query formulation.
 
@@ -46,13 +40,11 @@ D) Faster query processing
 
 ### Question 4: Context Window Optimization
 
-**In context window optimization, what factor is most important for maintaining quality?**
-
-A) Number of source documents  
-B) Balance between relevance and information density ✅  
-C) Maximum token count  
-D) Processing speed  
-**Correct Answer: B) Balance between relevance and information density**
+**In context window optimization, what factor is most important for maintaining quality?**  
+A) Maximum token count  
+B) Processing speed  
+C) Balance between relevance and information density ✅  
+D) Number of source documents  
 
 **Explanation:** The key is balancing relevance (how well the context addresses the query) with information density (how much useful information per token). Simply maximizing tokens or documents can include irrelevant information, while focusing only on speed can sacrifice quality.
 
@@ -60,67 +52,24 @@ D) Processing speed
 
 ### Question 5: Prompt Engineering Technique
 
-**Which prompt engineering technique is most effective for improving RAG response quality?**
-
-A) Simple template-based prompts  
-B) Keyword-heavy prompts  
-C) Chain-of-thought reasoning with context integration ✅  
-D) Longer prompts with more examples  
-**Correct Answer: C) Chain-of-thought reasoning with context integration**
+**Which prompt engineering technique is most effective for improving RAG response quality?**  
+A) Longer prompts with more examples  
+B) Chain-of-thought reasoning with context integration ✅  
+C) Simple template-based prompts  
+D) Keyword-heavy prompts  
 
 **Explanation:** Chain-of-thought reasoning guides the model through logical steps while properly integrating retrieved context. This technique helps the model understand relationships between the query, context, and required reasoning, leading to more accurate and well-structured responses.
 
----
-
-### Question 6: Handling Ambiguous Queries
-
-**What is the optimal strategy for handling ambiguous user queries?**
-
-A) Return an error message  
-B) Pick the most common interpretation  
-C) Use the original query without modification  
-D) Generate clarifying questions and query variants ✅  
-**Correct Answer: D) Generate clarifying questions and query variants**
-
-**Explanation:** Generating clarifying questions and query variants addresses ambiguity constructively by either seeking clarification from the user or exploring multiple interpretations simultaneously. This approach maximizes the chance of addressing the user's actual intent.
-
----
-
-### Question 7: Context Summarization Priority
-
-**When should you prioritize context summarization over full context inclusion?**
-
-A) When context exceeds token limits and relevance is mixed ✅  
-B) When computational resources are unlimited  
-C) Never, full context is always better  
-D) Always, to reduce processing time  
-**Correct Answer: A) When context exceeds token limits and relevance is mixed**
-
-**Explanation:** Context summarization is most valuable when you have more relevant information than the token limit allows and the context quality is mixed. Summarization can preserve the most important information while removing less relevant details, optimizing the use of available context window.
-
----
-
-### Question 8: Dynamic Prompt Adaptation Factor
-
-**What is the most important factor in dynamic prompt adaptation?**
-
-A) Available computational resources  
-B) User preference settings  
-C) Context quality and query complexity assessment ✅  
-D) Response length requirements  
-**Correct Answer: C) Context quality and query complexity assessment**
-
-**Explanation:** Dynamic prompt adaptation should primarily respond to context quality (how good the retrieved information is) and query complexity (how sophisticated the reasoning required). These factors determine what type of prompt structure and reasoning approach will be most effective.
 
 ---
 
 ## 🎯 Performance Scoring
 
-- **8/8 Correct**: Excellent mastery of query enhancement techniques
-- **7/8 Correct**: Strong understanding with minor gaps
-- **6/8 Correct**: Good grasp of concepts, review HyDE and context optimization
-- **5/8 Correct**: Adequate knowledge, focus on prompt engineering strategies
-- **4/8 or below**: Recommend hands-on practice with query enhancement pipelines
+- **5/5 Correct**: Excellent mastery of query enhancement techniques
+- **4/5 Correct**: Strong understanding with minor gaps  
+- **3/5 Correct**: Good grasp of concepts, review HyDE and context optimization
+- **2/5 Correct**: Adequate knowledge, focus on prompt engineering strategies
+- **1/5 or below**: Recommend hands-on practice with query enhancement pipelines
 
 ---
 

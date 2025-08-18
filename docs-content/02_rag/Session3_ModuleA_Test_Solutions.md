@@ -4,72 +4,64 @@
 
 ### Question 1: Custom HNSW for RAG
 
-**What is the primary advantage of custom HNSW implementations for RAG systems?**
+**What is the key advantage of custom HNSW implementation for RAG?**  
+A) Reduced memory usage  
+B) RAG-specific optimizations like semantic clustering and keyword integration ✅  
+C) Faster build times  
+D) Simpler configuration  
 
-A) RAG-specific optimizations like semantic clustering and keyword integration ✅  
-B) Better memory efficiency  
-C) Faster training times  
-D) Lower computational requirements  
-**Correct Answer: A) RAG-specific optimizations like semantic clustering and keyword integration**
-
-**Explanation:** Custom HNSW implementations for RAG can incorporate domain-specific optimizations such as semantic clustering to group related content, keyword indexing for hybrid search capabilities, and temporal indexing for recency-aware retrieval. These optimizations are specifically designed for RAG workloads.
+**Explanation:** Custom HNSW implementations for RAG enable domain-specific optimizations beyond generic vector search. These include semantic clustering for topic-focused search, keyword integration for exact-match capabilities, and temporal indexing for recency weighting. The hierarchical structure of HNSW (multi-level skip-list approach) combined with RAG-specific enhancements creates an efficient retrieval system optimized for generation tasks.
 
 ---
 
 ### Question 2: Dynamic Index Optimization
 
-**How does dynamic index optimization improve RAG performance?**
+**Why is dynamic index optimization important?**  
+A) It reduces storage costs  
+B) It adapts index parameters based on actual query patterns for better performance ✅  
+C) It simplifies maintenance  
+D) It reduces memory usage  
 
-A) It automatically generates new content  
-B) It eliminates the need for embeddings  
-C) It adapts index parameters based on actual query patterns for better performance ✅  
-D) It reduces storage requirements  
-**Correct Answer: C) It adapts index parameters based on actual query patterns for better performance**
-
-**Explanation:** Dynamic index optimization analyzes real query patterns to adjust parameters like `ef_search`, `M`, and `ef_construction`. This data-driven approach ensures that the index configuration matches actual usage patterns, improving both speed and accuracy for the specific workload.
+**Explanation:** Dynamic index optimization creates a feedback loop where the system learns from actual query patterns to self-improve. It analyzes query diversity, frequency, dimensional preferences, and performance metrics to adjust parameters like `ef_search`, `M`, and `ef_construction`. This adaptive approach ensures optimal performance for the specific workload rather than relying on generic default settings.
 
 ---
 
 ### Question 3: Semantic Clustering Benefits
 
-**What is the main benefit of semantic clustering in RAG index structures?**
+**How does semantic clustering improve RAG performance?**  
+A) It reduces index size  
+B) It groups similar content for more efficient search within relevant topics ✅  
+C) It speeds up indexing  
+D) It reduces computational requirements  
 
-A) It groups similar content for more efficient search within relevant topics ✅  
-B) It reduces vector dimensions  
-C) It compresses the index size  
-D) It eliminates duplicate content  
-**Correct Answer: A) It groups similar content for more efficient search within relevant topics**
-
-**Explanation:** Semantic clustering organizes vectors by topic similarity, allowing search algorithms to focus on relevant content clusters rather than searching the entire index. This reduces search time while maintaining high recall for topically related queries.
+**Explanation:** Semantic clustering creates a hierarchical organization where conceptually related content is grouped together. This enables cluster-aware search that can quickly focus on relevant topic areas rather than scanning the entire vector space. The result is faster retrieval with maintained accuracy, as the search space is intelligently narrowed to topically relevant content.
 
 ---
 
 ### Question 4: Hybrid Indexing Benefits
 
-**Why is hybrid indexing valuable for RAG systems?**
+**What is the benefit of hybrid indexing (vector + keyword + temporal)?**  
+A) Reduces complexity  
+B) Enables multi-dimensional optimization for semantic, exact match, and recency needs ✅  
+C) Reduces memory usage  
+D) Simplifies implementation  
 
-A) It eliminates the need for preprocessing  
-B) It reduces computational overhead  
-C) It simplifies implementation complexity  
-D) Enables multi-dimensional optimization for semantic, exact match, and recency needs ✅  
-**Correct Answer: D) Enables multi-dimensional optimization for semantic, exact match, and recency needs**
-
-**Explanation:** Hybrid indexing combines vector similarity (semantic), keyword matching (exact terms), and temporal indexing (recency) to provide comprehensive retrieval capabilities. This multi-signal approach addresses different types of user information needs more effectively than any single indexing method.
+**Explanation:** Hybrid indexing recognizes that RAG retrieval requires more than semantic similarity. It combines three complementary signals: vector similarity for conceptual matching, keyword indexing for exact term precision, and temporal indexing for freshness weighting. This multi-dimensional approach ensures that whether users ask conceptual questions, seek specific terms, or need recent information, the system can respond appropriately.
 
 ---
 
 ### Question 5: RAG-Optimized vs General Vector Search
 
-**How does RAG-optimized search differ from general vector search?**
+**Why is RAG-optimized search different from general vector search?**  
+A) It's always faster  
+B) It combines semantic similarity with domain-specific factors like keywords and recency ✅  
+C) It uses less memory  
+D) It's simpler to implement  
 
-A) It processes queries faster  
-B) It uses different embedding models  
-C) It combines semantic similarity with domain-specific factors like keywords and recency ✅  
-D) It requires less training data  
-**Correct Answer: C) It combines semantic similarity with domain-specific factors like keywords and recency**
-
-**Explanation:** RAG-optimized search recognizes that information retrieval for generation tasks requires more than semantic similarity. It incorporates keyword relevance for specific terms, temporal factors for fresh information, and contextual factors specific to the knowledge domain being searched.
+**Explanation:** RAG-optimized search is designed specifically for retrieval-augmented generation workflows, where the goal isn't just finding similar content but finding the most useful content for answering questions. It combines semantic similarity with keyword boosting for precision, recency weighting for fresh information, and content diversity considerations for comprehensive context. This multi-signal fusion creates retrieval results optimized for generation quality rather than just similarity scoring.
 
 ---
 
-[← Back to Session 3](Session3_ModuleA_Index_Algorithms.md)
+---
+
+[← Back to Module A: Advanced Index Algorithms](Session3_ModuleA_Index_Algorithms.md)

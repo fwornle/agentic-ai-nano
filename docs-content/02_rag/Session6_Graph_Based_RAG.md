@@ -248,19 +248,27 @@ This stage builds the **heterogeneous graph structure** by creating specialized 
 ```python
 def noderag_augmentation(decomposition_result):
     """NodeRAG Stage 2: Heterogeneous graph construction"""
-
+    
     # Create typed connections between specialized nodes
     semantic_entity_links = link_concepts_to_entities(
         decomposition_result['semantic_units'],
         decomposition_result['entities']
     )
+```
 
+First, we establish typed connections between our specialized node types. This step links abstract semantic concepts to concrete entities, creating the foundational relationships that enable multi-hop reasoning across different knowledge domains.
+
+```python
     # Build HNSW similarity edges within the graph structure
     hnsw_similarity_edges = build_hnsw_graph_edges(
         all_nodes=decomposition_result,
         similarity_threshold=0.75
     )
+```
 
+Next, we integrate HNSW (Hierarchical Navigable Small World) similarity edges directly into the graph structure. This hybrid approach combines the precision of explicit relationships with the coverage of semantic similarity, enabling both structured traversal and similarity-based discovery within a single unified system.
+
+```python
     # Cross-reference integration across node types
     cross_references = integrate_cross_type_references(decomposition_result)
 
@@ -296,14 +304,22 @@ def noderag_enrichment(heterogeneous_graph):
             'summary': 0.05
         }
     )
+```
 
+First, we apply Personalized PageRank to identify semantically important nodes across our heterogeneous graph. Notice how we assign different weights to each node type - entities get the highest weight (0.30) because they're often central to queries, while semantic units get substantial weight (0.25) for conceptual reasoning. This weighted approach ensures our reasoning pathways prioritize the most valuable knowledge connections.
+
+```python
     # Construct logical reasoning pathways
     reasoning_pathways = build_reasoning_pathways(
         graph=heterogeneous_graph,
         pagerank_scores=pagerank_scores,
         max_pathway_length=5
     )
+```
 
+Next, we construct logical reasoning pathways using the PageRank scores to guide pathway selection. The maximum pathway length of 5 prevents information explosion while enabling complex multi-hop reasoning. These pathways represent coherent chains of knowledge that can answer complex queries requiring multiple logical steps.
+
+```python
     # Optimize graph structure for reasoning performance
     optimized_graph = optimize_for_reasoning(
         heterogeneous_graph, reasoning_pathways
@@ -332,7 +348,7 @@ class NodeRAGPageRank:
 
     def compute_semantic_pathways(self, query_context, heterogeneous_graph):
         """Compute query-aware semantic pathways using personalized PageRank"""
-
+        
         # Create personalization vector based on query relevance and node types
         personalization_vector = self.create_query_personalization(
             query_context=query_context,
@@ -345,7 +361,11 @@ class NodeRAGPageRank:
                 'summary': 0.1         # Synthesized insights
             }
         )
+```
 
+The class starts by creating a **personalization vector** that biases PageRank scores toward query-relevant nodes. Notice how semantic units get the highest weight (0.3) - this reflects their importance in conceptual reasoning, while relationships get significant weight (0.2) for connection discovery.
+
+```python
         # Compute personalized PageRank with query bias
         pagerank_scores = nx.pagerank(
             heterogeneous_graph,
@@ -354,7 +374,11 @@ class NodeRAGPageRank:
             max_iter=100,
             tol=1e-6
         )
+```
 
+Next, we compute the actual PageRank scores using NetworkX's implementation. The alpha parameter (0.85) is the standard damping factor that balances between following graph structure and returning to personalized nodes. This creates query-aware importance scores across our heterogeneous graph.
+
+```python
         # Extract top semantic pathways
         semantic_pathways = self.extract_top_pathways(
             graph=heterogeneous_graph,
@@ -362,19 +386,29 @@ class NodeRAGPageRank:
             query_context=query_context,
             max_pathways=10
         )
-
+        
         return semantic_pathways
+```
 
+Finally, we extract the top semantic pathways using the PageRank scores. This step transforms raw importance scores into coherent reasoning pathways that can guide RAG retrieval through the knowledge graph.
+
+Now let's implement the pathway extraction logic:
+
+```python
     def extract_top_pathways(self, graph, pagerank_scores, query_context, max_pathways):
         """Extract the most relevant semantic pathways for the query"""
-
+        
         # Find high-scoring nodes as pathway anchors
         top_nodes = sorted(
             pagerank_scores.items(),
             key=lambda x: x[1],
             reverse=True
         )[:50]
+```
 
+The pathway extraction begins by identifying high-scoring nodes as **pathway anchors**. We select the top 50 nodes as starting points - this provides sufficient coverage while maintaining computational efficiency.
+
+```python
         pathways = []
         for start_node, score in top_nodes:
             if len(pathways) >= max_pathways:
@@ -388,7 +422,11 @@ class NodeRAGPageRank:
                 max_depth=4,
                 pagerank_scores=pagerank_scores
             )
+```
 
+For each anchor node, we use breadth-first search (BFS) to discover semantic pathways. The maximum depth of 4 allows for meaningful multi-hop reasoning while preventing computational explosion. Each pathway represents a coherent chain of knowledge connections.
+
+```python
             if pathway and len(pathway) > 1:
                 pathways.append({
                     'pathway': pathway,
@@ -450,7 +488,11 @@ class NodeRAGHNSW:
 
             node_embeddings[node_id] = embedding
             node_types[node_id] = node_type
+```
 
+The HNSW integration begins by extracting **type-aware embeddings** for all nodes in our heterogeneous graph. This is crucial - we generate specialized embeddings based on node type because semantic units, entities, and relationships require different embedding strategies for optimal similarity detection.
+
+```python
         # Build HNSW index with type-aware similarity
         hnsw_index = self.build_typed_hnsw_index(
             embeddings=node_embeddings,
@@ -461,7 +503,11 @@ class NodeRAGHNSW:
             max_m0=32,
             ml=1 / np.log(2.0)
         )
+```
 
+Next, we build the HNSW index with carefully tuned parameters. M=16 creates 16 bi-directional links per node - this balances search speed with recall. The ef_construction=200 parameter controls build quality, creating a more thorough index that improves retrieval performance.
+
+```python
         # Add similarity edges to the existing heterogeneous graph
         similarity_edges_added = 0
         for node_id in heterogeneous_graph.nodes():
@@ -470,7 +516,11 @@ class NodeRAGHNSW:
                 node_embeddings[node_id],
                 k=10  # Top-10 most similar nodes
             )[1][0]  # Get node indices
+```
 
+Now we integrate HNSW similarity directly into our graph structure. For each node, we find the 10 most similar nodes using the HNSW index. This creates similarity bridges that complement our explicit relationship edges.
+
+```python
             node_list = list(node_embeddings.keys())
             for similar_idx in similar_nodes[1:]:  # Skip self
                 similar_node_id = node_list[similar_idx]
@@ -480,7 +530,11 @@ class NodeRAGHNSW:
                     [node_embeddings[node_id]],
                     [node_embeddings[similar_node_id]]
                 )[0][0]
+```
 
+For each similar node, we calculate the precise cosine similarity score. This score becomes edge metadata that enables weighted traversal through both structural relationships and semantic similarity connections.
+
+```python
                 # Add similarity edge if above threshold and type-compatible
                 if similarity > 0.7 and self.are_types_compatible(
                     node_types[node_id],
@@ -497,7 +551,13 @@ class NodeRAGHNSW:
 
         print(f"Added {similarity_edges_added} HNSW similarity edges to heterogeneous graph")
         return heterogeneous_graph
+```
 
+We only add similarity edges that meet two criteria: high similarity (>0.7) and type compatibility. This prevents noise while ensuring meaningful connections. The edge metadata includes the similarity score and HNSW flag for intelligent traversal algorithms.
+
+Finally, let's implement the type compatibility logic:
+
+```python
     def are_types_compatible(self, type1, type2):
         """Determine if two node types should have similarity connections"""
 
@@ -592,7 +652,11 @@ from enum import Enum
 from dataclasses import dataclass
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+```
 
+We begin with the necessary imports for building a comprehensive NodeRAG system. Note the combination of traditional NLP (spacy), graph processing (networkx), vector operations (numpy, sklearn), and database connectivity (neo4j) - this reflects the hybrid nature of NodeRAG.
+
+```python
 class NodeType(Enum):
     """Specialized node types in heterogeneous NodeRAG architecture."""
     ENTITY = "entity"
@@ -600,7 +664,11 @@ class NodeType(Enum):
     DOCUMENT = "document"
     RELATIONSHIP = "relationship"
     CLUSTER = "cluster"
+```
 
+The NodeType enumeration defines the five specialized node types that make NodeRAG powerful. Unlike traditional GraphRAG that treats all nodes uniformly, this heterogeneous approach enables specialized processing for different knowledge structures.
+
+```python
 @dataclass
 class NodeRAGNode:
     """Structured node representation for heterogeneous graph."""
@@ -611,36 +679,31 @@ class NodeRAGNode:
     embeddings: Dict[str, np.ndarray]
     connections: List[str]
     confidence: float
+```
 
+The NodeRAGNode dataclass defines the structure for each node in our heterogeneous graph. Key features include multiple embeddings (for different tasks), rich metadata, and a confidence score that enables quality-based traversal algorithms.
+
+Now let's implement the complete NodeRAG extractor with its three-stage processing pipeline:
+
+```python
 class NodeRAGExtractor:
     """NodeRAG heterogeneous graph construction with three-stage processing.
 
     This extractor implements the breakthrough NodeRAG architecture that addresses
     traditional GraphRAG limitations through specialized node types and advanced
-    graph reasoning capabilities:
-
-    **Heterogeneous Node Types:**
-    - Entity Nodes: People, organizations, locations with rich metadata
-    - Concept Nodes: Abstract concepts, topics, themes with semantic relationships
-    - Document Nodes: Text chunks, sections, full documents with contextual information
-    - Relationship Nodes: Explicit relationship representations with confidence scores
-    - Cluster Nodes: Semantic clusters that group related information
-
-    **Three-Stage Processing:**
-    - Decomposition: Multi-granularity analysis with specialized node creation
-    - Augmentation: Cross-reference integration with HNSW similarity edges
-    - Enrichment: Personalized PageRank and reasoning pathway construction
-
-    **Advanced Graph Reasoning:**
-    - Personalized PageRank for semantic traversal
-    - HNSW similarity edges for high-performance retrieval
-    - Graph-centric knowledge representation for logical reasoning
+    graph reasoning capabilities.
     """
 
     def __init__(self, llm_model, spacy_model: str = "en_core_web_lg"):
         self.llm_model = llm_model
         self.nlp = spacy.load(spacy_model)
+```
 
+The NodeRAGExtractor implements the complete three-stage processing pipeline. The class design reflects the heterogeneous architecture with specialized processors for different node types (Entity, Concept, Document, Relationship, Cluster).
+
+Let's examine the specialized processors setup:
+
+```python
         # NodeRAG specialized processors for different node types
         self.node_processors = {
             NodeType.ENTITY: self._extract_entity_nodes,
@@ -649,14 +712,24 @@ class NodeRAGExtractor:
             NodeType.RELATIONSHIP: self._extract_relationship_nodes,
             NodeType.CLUSTER: self._extract_cluster_nodes
         }
+```
 
+This processor mapping enables the system to handle each node type with specialized extraction logic. Unlike traditional GraphRAG's uniform processing, each node type gets optimized handling for its specific knowledge structure.
+
+Now let's configure the three-stage processing pipeline:
+
+```python
         # Three-stage processing pipeline
         self.processing_stages = {
             'decomposition': self._decomposition_stage,
             'augmentation': self._augmentation_stage,
             'enrichment': self._enrichment_stage
         }
+```
 
+The three-stage pipeline (decomposition → augmentation → enrichment) transforms raw documents into sophisticated reasoning-capable knowledge graphs through systematic architectural progression.
+
+```python
         # Advanced graph components
         self.heterogeneous_graph = nx.MultiDiGraph()  # Supports multiple node types
         self.node_registry = {}  # Central registry of all nodes
@@ -666,6 +739,16 @@ class NodeRAGExtractor:
         # Reasoning integration components
         self.reasoning_pathways = {}  # Store logical reasoning pathways
         self.coherence_validator = CoherenceValidator()
+```
+
+Finally, we initialize the core graph infrastructure. The MultiDiGraph supports multiple node types with directed edges, while the node registry provides centralized management. The PersonalizedPageRank and HNSW processors enable the advanced reasoning capabilities that make NodeRAG superior to traditional approaches.
+
+Now let's implement the main extraction method:
+
+```python
+    def extract_noderag_graph(self, documents: List[str],
+                               extraction_config: Dict = None) -> Dict[str, Any]:
+        """Extract NodeRAG heterogeneous graph using three-stage processing.
 
     def extract_noderag_graph(self, documents: List[str],
                                extraction_config: Dict = None) -> Dict[str, Any]:

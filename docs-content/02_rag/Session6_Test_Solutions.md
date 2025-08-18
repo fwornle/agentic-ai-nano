@@ -4,13 +4,11 @@
 
 ### Question 1: GraphRAG Primary Advantage
 
-**What is the primary advantage of GraphRAG over traditional vector-based RAG?**
-
-A) Multi-hop reasoning through explicit relationship modeling ✅  
-B) Faster query processing  
-C) Lower computational requirements  
+**What is the primary advantage of GraphRAG over traditional vector-based RAG?**  
+A) Faster query processing  
+B) Lower computational requirements  
+C) Multi-hop reasoning through explicit relationship modeling ✅  
 D) Simpler system architecture  
-**Correct Answer: A) Multi-hop reasoning through explicit relationship modeling**
 
 **Explanation:** GraphRAG's key advantage is its ability to perform multi-hop reasoning by following explicit relationships in the knowledge graph. While vector search finds similar content, GraphRAG can answer complex questions like "find companies that supply Apple's automotive partners" by traversing relationship chains that connect entities through multiple hops.
 
@@ -18,13 +16,11 @@ D) Simpler system architecture
 
 ### Question 2: Entity Standardization Purpose
 
-**In knowledge graph construction, what is the purpose of entity standardization?**
-
+**In knowledge graph construction, what is the purpose of entity standardization?**  
 A) To reduce memory usage  
-B) To compress graph storage  
-C) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple") ✅  
-D) To improve query speed  
-**Correct Answer: C) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")**
+B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple") ✅  
+C) To improve query speed  
+D) To compress graph storage  
 
 **Explanation:** Entity standardization (also called entity resolution or deduplication) identifies when different text mentions refer to the same real-world entity. This prevents the graph from having duplicate nodes for "Apple Inc.", "Apple Computer", and "Apple" when they all refer to the same company, ensuring accurate relationship modeling.
 
@@ -32,13 +28,11 @@ D) To improve query speed
 
 ### Question 3: Graph Traversal Algorithm Selection
 
-**Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?**
-
-A) A* search  
-B) Depth-First Search (DFS)  
-C) Breadth-First Search (BFS) ✅  
-D) Dijkstra's algorithm  
-**Correct Answer: C) Breadth-First Search (BFS)**
+**Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?**  
+A) Depth-First Search (DFS)  
+B) Breadth-First Search (BFS) ✅  
+C) Dijkstra's algorithm  
+D) A* search  
 
 **Explanation:** BFS is ideal for finding entities within a limited number of hops because it explores all nodes at distance k before exploring nodes at distance k+1. This ensures you find all related entities within your hop limit without going deeper unnecessarily, making it perfect for controlled multi-hop exploration in RAG systems.
 
@@ -46,13 +40,11 @@ D) Dijkstra's algorithm
 
 ### Question 4: Code GraphRAG AST Information
 
-**In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?**
-
-A) Function calls, imports, class hierarchies, and variable dependencies ✅  
-B) Only variable names  
-C) Only function definitions  
+**In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?**  
+A) Only function definitions  
+B) Function calls, imports, class hierarchies, and variable dependencies ✅  
+C) Only variable names  
 D) Just file names and sizes  
-**Correct Answer: A) Function calls, imports, class hierarchies, and variable dependencies**
 
 **Explanation:** Code GraphRAG extracts comprehensive structural information from ASTs including function calls (who calls whom), imports (module dependencies), class hierarchies (inheritance relationships), and variable dependencies. This creates a rich knowledge graph that captures code relationships and dependencies for intelligent code search and analysis.
 
@@ -60,13 +52,11 @@ D) Just file names and sizes
 
 ### Question 5: Hybrid Graph-Vector Search Benefit
 
-**What is the key benefit of hybrid graph-vector search?**
-
-A) Simpler implementation  
+**What is the key benefit of hybrid graph-vector search?**  
+A) Reduced computational cost  
 B) Combining structural relationships with semantic similarity ✅  
-C) Faster indexing  
-D) Reduced computational cost  
-**Correct Answer: B) Combining structural relationships with semantic similarity**
+C) Simpler implementation  
+D) Faster indexing  
 
 **Explanation:** Hybrid graph-vector search combines the structural understanding of graphs (explicit relationships) with the semantic similarity of vector search (content similarity). This allows the system to find both explicitly related entities and semantically similar content, providing more comprehensive and nuanced retrieval.
 
@@ -74,13 +64,11 @@ D) Reduced computational cost
 
 ### Question 6: Neo4j vs Simple Graph Structures
 
-**When should you choose Neo4j over a simple graph data structure for GraphRAG?**
-
-A) When you need persistent storage and complex queries at scale ✅  
-B) Never, simple structures are always better  
-C) Always, regardless of scale  
-D) Only for small datasets  
-**Correct Answer: A) When you need persistent storage and complex queries at scale**
+**When should you choose Neo4j over a simple graph data structure for GraphRAG?**  
+A) Always, regardless of scale  
+B) When you need persistent storage and complex queries at scale ✅  
+C) Only for small datasets  
+D) Never, simple structures are always better  
 
 **Explanation:** Neo4j becomes valuable when you need persistent storage (graphs that survive application restarts), complex query capabilities (Cypher queries), and scalability for large graphs. For small, in-memory graphs with simple traversal needs, simpler data structures may suffice, but production GraphRAG systems typically benefit from dedicated graph databases.
 
@@ -88,13 +76,11 @@ D) Only for small datasets
 
 ### Question 7: Multi-Hop Traversal Challenge
 
-**What is the primary challenge in multi-hop graph traversal for RAG?**
-
-A) Balancing comprehensiveness with relevance and avoiding information explosion ✅  
-B) Memory limitations  
-C) Complex code implementation  
-D) Slow database queries  
-**Correct Answer: A) Balancing comprehensiveness with relevance and avoiding information explosion**
+**What is the primary challenge in multi-hop graph traversal for RAG?**  
+A) Memory limitations  
+B) Balancing comprehensiveness with relevance and avoiding information explosion ✅  
+C) Slow database queries  
+D) Complex code implementation  
 
 **Explanation:** The key challenge is preventing information explosion while maintaining relevance. As you traverse more hops, the number of connected entities grows exponentially, but not all paths are equally relevant to the query. The system must intelligently prune paths and rank results to provide comprehensive but focused information.
 
@@ -102,13 +88,11 @@ D) Slow database queries
 
 ### Question 8: Production GraphRAG Update Considerations
 
-**In production GraphRAG systems, what is the most important consideration for incremental updates?**
-
+**In production GraphRAG systems, what is the most important consideration for incremental updates?**  
 A) Minimizing downtime while maintaining graph consistency ✅  
-B) Maximizing query speed  
-C) Reducing storage costs  
+B) Reducing storage costs  
+C) Maximizing query speed  
 D) Simplifying the codebase  
-**Correct Answer: A) Minimizing downtime while maintaining graph consistency**
 
 **Explanation:** In production systems, maintaining graph consistency while minimizing downtime is crucial. Updates must ensure that new entities and relationships are properly integrated without breaking existing connections, and the system should remain available for queries during updates. Inconsistent graphs can lead to incorrect reasoning and poor RAG quality.
 
