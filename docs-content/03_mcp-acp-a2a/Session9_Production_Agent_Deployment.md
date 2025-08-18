@@ -1218,7 +1218,7 @@ Test your knowledge with 10 carefully crafted questions covering:
 - Observability and monitoring best practices
 - High availability and disaster recovery
 
-**[📝 Take the Test - Session 9 Test Solutions](Session9_Test_Solutions.md)**
+[**🗂️ View Test Solutions →**](Session9_Test_Solutions.md)
 
 *The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
 

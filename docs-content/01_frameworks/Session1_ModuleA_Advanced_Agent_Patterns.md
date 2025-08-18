@@ -551,7 +551,7 @@ B) Analysis, delegation, integration
 C) Task analysis, delegation plan creation, plan execution  
 D) Registration, routing, completion
 
-**🗂️ View Test Solutions →** Complete answers and explanations available in `Session1_ModuleA_Test_Solutions.md`
+[**🗂️ View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
 
 ---
 

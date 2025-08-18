@@ -1497,7 +1497,7 @@ Test your knowledge with 10 carefully crafted questions covering:
 - Fault tolerance and message reliability
 - Distributed agent team collaboration
 
-**[📝 Take the Test - Session 7 Test Solutions](Session7_Test_Solutions.md)**
+[**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
 
 *The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
 
