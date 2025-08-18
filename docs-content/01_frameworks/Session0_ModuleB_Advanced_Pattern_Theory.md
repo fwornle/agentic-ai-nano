@@ -679,7 +679,7 @@ B) Simplified code architecture
 C) Strategic planning with coordinated execution across specialized agents  
 D) Faster individual agent performance  
 
-**🗂️ View Test Solutions →** Complete answers and explanations available in `Session0_ModuleB_Test_Solutions.md`
+[**🗂️ View Test Solutions →**](Session0_ModuleB_Test_Solutions.md)
 
 ---
 

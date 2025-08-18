@@ -1323,7 +1323,7 @@ Test your knowledge with 10 carefully crafted questions covering:
 - Resource management and allocation strategies
 - Workflow monitoring and observability
 
-**[📝 Take the Test - Session 8 Test Solutions](Session8_Test_Solutions.md)**
+[**🗂️ View Test Solutions →**](Session8_Test_Solutions.md)
 
 *The test includes detailed explanations for each answer and a scoring guide to help you identify areas for further study.*
 

@@ -1256,7 +1256,7 @@ b) Better error handling
 c) Non-blocking operations  
 d) Automatic file compression  
 
-**[View Test Solutions](Session2_Test_Solutions.md)**
+[**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
 
 ---
 

@@ -3211,6 +3211,6 @@ The planning, validation, and iterative refinement capabilities you've mastered 
 - 🔬 **[Module A: Advanced Agent Reasoning](Session7_ModuleA_Advanced_Reasoning.md)** - Deep dive into sophisticated reasoning algorithms and cognitive architectures
 - 🏭 **[Module B: Production Agent Deployment](Session7_ModuleB_Production_Agents.md)** - Enterprise-scale agent deployment patterns and monitoring systems
 
-**📝 Test Your Knowledge:** [Session 7 Test Solutions](Session7_Test_Solutions.md)
+[**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
 
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)
