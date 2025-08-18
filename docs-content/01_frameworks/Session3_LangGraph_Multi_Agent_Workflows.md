@@ -521,7 +521,6 @@ B) Lower cost
 C) Graph-based workflows with conditional routing and parallel execution  
 D) Simpler implementation  
 
- Simpler implementation  
 
 **Question 2:** In LangGraph, what component defines the data that flows between nodes?  
 
@@ -530,7 +529,6 @@ B) Edges
 C) Memory  
 D) Tools  
 
- Memory  
 
 **Question 3:** What determines the flow between nodes in a LangGraph workflow?  
 
@@ -539,7 +537,6 @@ B) User input
 C) Sequential execution only  
 D) Conditional edges and decision functions  
 
- User input  
 
 **Question 4:** How does LangGraph handle parallel agent execution?  
 
@@ -548,7 +545,6 @@ B) It doesn't support parallel execution
 C) Through external orchestration  
 D) Using threading only  
 
- Through external orchestration  
 
 **Question 5:** What happens when a LangGraph node updates state?  
 
@@ -557,7 +553,6 @@ B) The entire state is replaced
 C) Previous state is archived  
 D) Only specified fields are updated/merged  
 
- Previous state is archived  
 
 [**🗂️ View Test Solutions →**](Session3_Test_Solutions.md)
 

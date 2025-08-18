@@ -1228,25 +1228,21 @@ B) To limit exposure if tokens are compromised
 C) To improve performance  
 D) To simplify implementation  
 
-2. **What is the purpose of token blacklisting?**  
 A) To improve token performance  
 B) To enable secure logout and token revocation  
 C) To reduce memory usage  
 D) To simplify token validation  
 
-3. **How does the token bucket rate limiter work?**  
 A) It counts requests per minute  
 B) It blocks all requests after a limit  
 C) It allows bursts but limits average rate  
 D) It only limits failed requests  
 
-4. **Why do we hash API keys before storing them?**  
 A) To save storage space  
 B) To improve lookup performance  
 C) To prevent key theft from database breaches  
 D) To enable key rotation  
 
-5. **What does "fail secure" mean in security systems?**  
 A) Always allow access when in doubt  
 B) Always deny access when systems fail  
 C) Log all security events  

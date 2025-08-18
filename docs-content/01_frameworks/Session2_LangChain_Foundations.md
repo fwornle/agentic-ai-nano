@@ -549,7 +549,6 @@ B) Consistent API across different LLM providers
 C) Faster response times  
 D) Better performance  
 
- Better performance  
 
 
 **Question 2:** Which LangChain component is responsible for managing conversation context?  
@@ -558,7 +557,6 @@ B) Tools
 C) Memory  
 D) Agents  
 
- Agents  
 
 
 **Question 3:** How many ways can you create tools in LangChain?  
@@ -567,7 +565,6 @@ B) Two - BaseTool and @tool decorator
 C) Three - BaseTool, @tool decorator, and StructuredTool  
 D) One - inheriting from BaseTool  
 
- One - inheriting from BaseTool  
 
 
 **Question 4:** What is the purpose of the `handle_parsing_errors` parameter in LangChain agents?  
@@ -576,7 +573,6 @@ B) To reduce costs
 C) To enable debugging  
 D) To improve performance  
 
- To improve performance  
 
 
 **Question 5:** Which LangChain agent type is specifically designed for the ReAct pattern?  
@@ -585,7 +581,6 @@ B) ZERO_SHOT_REACT_DESCRIPTION
 C) STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION  
 D) REACT_DOCSTORE  
 
- REACT_DOCSTORE  
 
 
 [**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)

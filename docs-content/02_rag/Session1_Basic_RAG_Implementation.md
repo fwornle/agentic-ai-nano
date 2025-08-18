@@ -1007,7 +1007,6 @@ B) Speeds up chunking operations
 C) Reduces memory usage during processing  
 D) Enables source attribution and filtering capabilities  
 
- Enables source attribution and filtering capabilities  
 
 
 **Question 2:** Which chunking approach is most likely to preserve semantic coherence in documents?  
@@ -1016,7 +1015,6 @@ B) Token-count only splitting
 C) Fixed character-length splitting  
 D) Semantic paragraph-based splitting  
 
- Semantic paragraph-based splitting  
 
 
 **Question 3:** In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?  
@@ -1025,7 +1023,6 @@ B) Enables persistent storage between sessions
 C) Improves embedding accuracy  
 D) Reduces memory consumption  
 
- Reduces memory consumption  
 
 
 **Question 4:** What is the primary benefit of including confidence scores in RAG responses?  
@@ -1034,7 +1031,6 @@ B) Improves LLM generation quality
 C) Provides transparency about answer reliability  
 D) Enables faster document indexing  
 
- Enables faster document indexing  
 
 
 **Question 5:** Why does the RAG system separate retrieval and generation into distinct phases?  
@@ -1043,7 +1039,6 @@ B) To support multiple languages
 C) To enable modular optimization and debugging  
 D) To prevent embedding conflicts  
 
- To prevent embedding conflicts  
 
 
 ---
