@@ -546,7 +546,6 @@ B) Easier deployment
 C) Better performance  
 D) Deeper understanding of agent mechanics  
 
- Deeper understanding of agent mechanics  
 
 
 **Question 2:** In the BaseAgent class, what is the purpose of the conversation_history attribute?  
@@ -555,7 +554,6 @@ B) Error tracking
 C) Performance monitoring  
 D) Tool execution logs  
 
- Tool execution logs  
 
 
 **Question 3:** Which method must be implemented by all subclasses of BaseAgent?  
@@ -564,7 +562,6 @@ B) process_message()
 C) add_tool()  
 D) _generate_response()  
 
- _generate_response()  
 
 
 **Question 4:** How does the Tool abstract base class ensure consistency across different tool implementations?  
@@ -573,7 +570,6 @@ B) By providing default implementations
 C) By requiring execute() and _get_parameters() methods  
 D) By managing tool state  
 
- By managing tool state  
 
 
 **Question 5:** What design pattern is demonstrated by the BaseAgent and its subclasses?  
@@ -582,7 +578,6 @@ B) Factory Pattern
 C) Template Method Pattern  
 D) Observer Pattern  
 
- Observer Pattern  
 
 
 [**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)

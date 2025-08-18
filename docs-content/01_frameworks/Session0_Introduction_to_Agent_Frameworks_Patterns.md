@@ -255,7 +255,6 @@ B) Planning
 C) Tool Use  
 D) Reflection  
 
- Multi-Agent  
 
 **Question 2:** The ReAct pattern combines which two key capabilities?  
 A) Reflecting and Acting  
@@ -263,7 +262,6 @@ B) Reading and Acting
 C) Retrieving and Acting  
 D) Reasoning and Acting  
 
- Retrieving and Acting  
 
 **Question 3:** Which framework is best suited for high-performance applications with minimal resource usage?  
 A) PydanticAI  
@@ -271,7 +269,6 @@ B) LangChain
 C) Agno  
 D) CrewAI  
 
- PydanticAI  
 
 **Question 4:** What is the primary advantage of the Multi-Agent pattern?  
 A) Lower resource usage  
@@ -279,7 +276,6 @@ B) Reduced complexity
 C) Specialized expertise collaboration  
 D) Faster execution  
 
- Lower resource usage  
 
 **Question 5:** Which framework emphasizes type safety through schema validation?  
 A) PydanticAI  
@@ -287,7 +283,6 @@ B) CrewAI
 C) LangChain  
 D) Agno  
 
- PydanticAI  
 
 [**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 
