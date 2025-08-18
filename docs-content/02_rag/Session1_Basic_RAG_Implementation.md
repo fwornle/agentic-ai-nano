@@ -1002,41 +1002,41 @@ Create a specialized RAG system for a domain of your choice (e.g., cooking, tech
 Test your understanding of RAG implementation fundamentals:
 
 **Question 1:** What is the primary advantage of using metadata tracking in document loading?  
-A) Improves embedding quality  
-B) Speeds up chunking operations  
-C) Reduces memory usage during processing  
+A) Improves embedding quality    
+B) Speeds up chunking operations    
+C) Reduces memory usage during processing    
 D) Enables source attribution and filtering capabilities  
 
 
 
 **Question 2:** Which chunking approach is most likely to preserve semantic coherence in documents?  
-A) Random boundary splitting  
-B) Token-count only splitting  
-C) Fixed character-length splitting  
+A) Random boundary splitting    
+B) Token-count only splitting    
+C) Fixed character-length splitting    
 D) Semantic paragraph-based splitting  
 
 
 
 **Question 3:** In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?  
-A) Speeds up similarity searches  
-B) Enables persistent storage between sessions  
-C) Improves embedding accuracy  
+A) Speeds up similarity searches    
+B) Enables persistent storage between sessions    
+C) Improves embedding accuracy    
 D) Reduces memory consumption  
 
 
 
 **Question 4:** What is the primary benefit of including confidence scores in RAG responses?  
-A) Reduces retrieval time  
-B) Improves LLM generation quality  
-C) Provides transparency about answer reliability  
+A) Reduces retrieval time    
+B) Improves LLM generation quality    
+C) Provides transparency about answer reliability    
 D) Enables faster document indexing  
 
 
 
 **Question 5:** Why does the RAG system separate retrieval and generation into distinct phases?  
-A) To reduce computational costs  
-B) To support multiple languages  
-C) To enable modular optimization and debugging  
+A) To reduce computational costs    
+B) To support multiple languages    
+C) To enable modular optimization and debugging    
 D) To prevent embedding conflicts  
 
 
