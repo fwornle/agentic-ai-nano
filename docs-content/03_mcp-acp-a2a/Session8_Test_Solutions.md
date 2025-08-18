@@ -5,10 +5,11 @@
 ### Question 1: Workflow Patterns
 **Which workflow pattern enables multiple tasks to execute simultaneously?**
 
-A) Sequential workflows  
+A) Loop workflows  
 B) Parallel workflows ✅  
-C) Conditional workflows  
-D) Loop workflows  
+C) Sequential workflows  
+D) Conditional workflows  
+**Correct Answer: B) Parallel workflows**
 
 **Explanation:** Parallel workflows enable concurrent execution of independent tasks, improving overall workflow performance through simultaneous processing of multiple operations.
 
@@ -18,9 +19,10 @@ D) Loop workflows
 **What triggers dynamic branching in conditional workflows?**
 
 A) Random selection  
-B) Data values and context evaluation ✅  
+B) Agent availability  
 C) Time-based schedules  
-D) Agent availability  
+D) Data values and context evaluation ✅  
+**Correct Answer: D) Data values and context evaluation**
 
 **Explanation:** Conditional workflows use data values and context evaluation to make dynamic routing decisions, allowing workflows to adapt their execution path based on runtime conditions.
 
@@ -29,10 +31,11 @@ D) Agent availability
 ### Question 3: Fault Recovery
 **What is the most comprehensive approach to workflow fault recovery?**
 
-A) Simple retry mechanisms  
-B) Rollback and retry with compensation actions ✅  
+A) Restarting the entire workflow  
+B) Simple retry mechanisms  
 C) Ignoring errors and continuing  
-D) Restarting the entire workflow  
+D) Rollback and retry with compensation actions ✅  
+**Correct Answer: D) Rollback and retry with compensation actions**
 
 **Explanation:** Comprehensive fault recovery includes rollback capabilities and retry mechanisms with compensation actions to undo partial work when failures occur, ensuring system consistency.
 
@@ -41,10 +44,11 @@ D) Restarting the entire workflow
 ### Question 4: Adaptive Optimization
 **How do adaptive workflows improve their performance over time?**
 
-A) By using faster hardware  
-B) By analyzing performance metrics and adjusting execution strategies ✅  
-C) By reducing the number of steps  
-D) By running more frequently  
+A) By running more frequently  
+B) By reducing the number of steps  
+C) By analyzing performance metrics and adjusting execution strategies ✅  
+D) By using faster hardware  
+**Correct Answer: C) By analyzing performance metrics and adjusting execution strategies**
 
 **Explanation:** Adaptive workflows analyze performance metrics like execution times and success rates to automatically adjust execution strategies, optimizing their performance based on historical data.
 
@@ -54,9 +58,10 @@ D) By running more frequently
 **What information does the workflow execution context typically maintain?**
 
 A) Only the current step  
-B) State data, execution history, and resource allocations ✅  
-C) Just error messages  
+B) Just error messages  
+C) State data, execution history, and resource allocations ✅  
 D) Only timing information  
+**Correct Answer: C) State data, execution history, and resource allocations**
 
 **Explanation:** Execution context maintains comprehensive information including state data, execution history, resource allocations, and metadata needed for proper workflow execution and recovery.
 
@@ -65,10 +70,11 @@ D) Only timing information
 ### Question 6: Step Dependencies
 **How are dependencies between workflow steps managed?**
 
-A) Through timing delays only  
-B) Using dependency graphs and prerequisite checking ✅  
-C) By alphabetical ordering  
+A) Using dependency graphs and prerequisite checking ✅  
+B) By alphabetical ordering  
+C) Through timing delays only  
 D) Through random execution  
+**Correct Answer: A) Using dependency graphs and prerequisite checking**
 
 **Explanation:** Step dependencies are managed through dependency graphs that define prerequisite relationships, ensuring steps execute in the correct order based on their interdependencies.
 
@@ -78,9 +84,10 @@ D) Through random execution
 **What is the purpose of resource allocation in advanced workflows?**
 
 A) To reduce costs  
-B) To prevent resource contention and ensure optimal performance ✅  
+B) To improve security  
 C) To simplify configuration  
-D) To improve security  
+D) To prevent resource contention and ensure optimal performance ✅  
+**Correct Answer: D) To prevent resource contention and ensure optimal performance**
 
 **Explanation:** Resource allocation prevents resource contention by managing CPU, memory, and agent assignments, ensuring workflows have necessary resources for optimal performance.
 
@@ -89,10 +96,11 @@ D) To improve security
 ### Question 8: Workflow Monitoring
 **What metrics are most important for workflow observability?**
 
-A) Only execution time  
-B) Execution time, success rates, resource utilization, and error patterns ✅  
-C) Just memory usage  
-D) Only network traffic  
+A) Only network traffic  
+B) Only execution time  
+C) Execution time, success rates, resource utilization, and error patterns ✅  
+D) Just memory usage  
+**Correct Answer: C) Execution time, success rates, resource utilization, and error patterns**
 
 **Explanation:** Comprehensive workflow observability requires monitoring execution time, success rates, resource utilization, and error patterns to understand system behavior and identify optimization opportunities.
 
@@ -101,10 +109,11 @@ D) Only network traffic
 ### Question 9: Loop Termination
 **What mechanisms prevent infinite loops in workflow systems?**
 
-A) Random termination  
-B) Maximum iteration limits and conditional exit criteria ✅  
-C) Time-based termination only  
-D) Manual intervention  
+A) Time-based termination only  
+B) Manual intervention  
+C) Maximum iteration limits and conditional exit criteria ✅  
+D) Random termination  
+**Correct Answer: C) Maximum iteration limits and conditional exit criteria**
 
 **Explanation:** Loop termination is ensured through maximum iteration limits combined with conditional exit criteria that evaluate whether the loop's objectives have been met.
 
@@ -113,10 +122,11 @@ D) Manual intervention
 ### Question 10: Hybrid Workflows
 **What advantage do hybrid workflows provide over simple workflow patterns?**
 
-A) Easier implementation  
-B) Flexibility to combine multiple execution patterns for complex scenarios ✅  
-C) Lower resource usage  
-D) Faster execution  
+A) Lower resource usage  
+B) Faster execution  
+C) Easier implementation  
+D) Flexibility to combine multiple execution patterns for complex scenarios ✅  
+**Correct Answer: D) Flexibility to combine multiple execution patterns for complex scenarios**
 
 **Explanation:** Hybrid workflows combine multiple execution patterns (sequential, parallel, conditional) providing the flexibility needed to handle complex real-world scenarios that require sophisticated coordination.
 

@@ -6,29 +6,32 @@
 **What is the primary challenge in enterprise agent integration?**
 
 A) Code complexity  
-B) Connecting with legacy systems and ensuring security ✅  
-C) Performance optimization  
+B) Performance optimization  
+C) Connecting with legacy systems and ensuring security ✅  
 D) User interface design  
+**Correct Answer: C) Connecting with legacy systems and ensuring security**
 
 **Explanation:** Enterprise integration primarily involves connecting with existing legacy systems while maintaining security and compliance requirements.
 
 ### Question 2
 **Which pattern is most effective for ERP system integration?**
 
-A) Direct database access  
-B) Adapter pattern with OAuth 2.0 authentication ✅  
-C) File-based integration  
-D) Screen scraping  
+A) File-based integration  
+B) Direct database access  
+C) Screen scraping  
+D) Adapter pattern with OAuth 2.0 authentication ✅  
+**Correct Answer: D) Adapter pattern with OAuth 2.0 authentication**
 
 **Explanation:** The adapter pattern provides a clean interface to ERP systems while OAuth 2.0 ensures secure enterprise authentication.
 
 ### Question 3
 **What is the main benefit of multi-stage Docker builds for agent deployment?**
 
-A) Faster builds  
-B) Reduced image size and improved security ✅  
-C) Better documentation  
-D) Easier debugging  
+A) Better documentation  
+B) Faster builds  
+C) Easier debugging  
+D) Reduced image size and improved security ✅  
+**Correct Answer: D) Reduced image size and improved security**
 
 **Explanation:** Multi-stage builds separate build dependencies from runtime, resulting in smaller, more secure production images.
 
@@ -36,9 +39,10 @@ D) Easier debugging
 **How should you handle secrets and credentials in production deployments?**
 
 A) Environment variables  
-B) Encrypted secret management systems with rotation ✅  
-C) Configuration files  
+B) Configuration files  
+C) Encrypted secret management systems with rotation ✅  
 D) Code comments  
+**Correct Answer: C) Encrypted secret management systems with rotation**
 
 **Explanation:** Production systems require encrypted secret management with automatic rotation and secure access controls.
 
@@ -46,59 +50,65 @@ D) Code comments
 **What is the purpose of health checks in production agent systems?**
 
 A) Performance monitoring only  
-B) Comprehensive system and dependency validation ✅  
-C) User authentication  
-D) Cost optimization  
+B) Cost optimization  
+C) Comprehensive system and dependency validation ✅  
+D) User authentication  
+**Correct Answer: C) Comprehensive system and dependency validation**
 
 **Explanation:** Health checks validate the entire system including dependencies, ensuring the agent is ready to handle requests.
 
 ### Question 6
 **Which deployment strategy minimizes downtime during updates?**
 
-A) All-at-once deployment  
-B) Rolling updates with health checks ✅  
-C) Maintenance windows  
-D) Manual deployment  
+A) Maintenance windows  
+B) Manual deployment  
+C) All-at-once deployment  
+D) Rolling updates with health checks ✅  
+**Correct Answer: D) Rolling updates with health checks**
 
 **Explanation:** Rolling updates deploy changes incrementally with health checks, ensuring zero downtime deployments.
 
 ### Question 7
 **What is the most important aspect of enterprise security for agents?**
 
-A) Password complexity  
-B) Zero-trust architecture with encryption and audit logging ✅  
-C) VPN access  
-D) Firewall rules  
+A) Firewall rules  
+B) VPN access  
+C) Password complexity  
+D) Zero-trust architecture with encryption and audit logging ✅  
+**Correct Answer: D) Zero-trust architecture with encryption and audit logging**
 
 **Explanation:** Enterprise security requires zero-trust architecture with comprehensive encryption, audit logging, and access controls.
 
 ### Question 8
 **How should you approach monitoring in enterprise agent systems?**
 
-A) Log files only  
-B) Comprehensive observability with metrics, traces, and alerts ✅  
-C) Manual monitoring  
-D) Error counting  
+A) Comprehensive observability with metrics, traces, and alerts ✅  
+B) Error counting  
+C) Log files only  
+D) Manual monitoring  
+**Correct Answer: A) Comprehensive observability with metrics, traces, and alerts**
 
 **Explanation:** Enterprise monitoring requires comprehensive observability including metrics, distributed tracing, and intelligent alerting.
 
 ### Question 9
 **What makes Kubernetes suitable for enterprise agent deployment?**
 
-A) Simple configuration  
-B) Auto-scaling, self-healing, and enterprise orchestration ✅  
+A) Auto-scaling, self-healing, and enterprise orchestration ✅  
+B) Simple configuration  
 C) Low cost  
 D) Better performance  
+**Correct Answer: A) Auto-scaling, self-healing, and enterprise orchestration**
 
 **Explanation:** Kubernetes provides auto-scaling, self-healing capabilities, and enterprise-grade orchestration features needed for production agents.
 
 ### Question 10
 **Which approach is best for handling enterprise agent failures?**
 
-A) Immediate restart  
-B) Circuit breakers, graceful degradation, and compensation patterns ✅  
+A) Circuit breakers, graceful degradation, and compensation patterns ✅  
+B) System shutdown  
 C) Manual intervention  
-D) System shutdown  
+D) Immediate restart  
+**Correct Answer: A) Circuit breakers, graceful degradation, and compensation patterns**
 
 **Explanation:** Enterprise failure handling requires circuit breakers, graceful degradation, and compensation patterns to maintain system reliability.
 
