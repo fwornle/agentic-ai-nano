@@ -41,21 +41,26 @@ Transform existing course materials into a structured, professional three-path l
 
 ### Phase 1: Content Analysis & Research
 
-1. **Parse existing materials** to understand structure and content depth
-2. **Professional presentation audit**:
+1. **Parse ALL existing materials** including:
+   - Main session files (SessionX_[Topic].md)
+   - Optional modules (SessionX_ModuleA_*.md, SessionX_ModuleB_*.md, etc.)
+   - Test solution files (SessionX_*_Test_Solutions.md)
+   - Any other session-related content files
+2. **Understand complete structure and content depth** across all files
+3. **Professional presentation audit**:
    - Identify excessive emoji usage (reduce to 3-5 key emojis maximum per section)
    - Mark optional vs. core content clearly
    - Ensure professional tone throughout
-3. **Learning path research**:
+4. **Learning path research**:
    - Conduct web searches for real-world context and industry applications
    - Find relevant screenshots/diagrams to enhance understanding
    - Research why this topic/framework matters in practice
    - Identify unique selling points and distinguishing features
-4. **Code quality assessment**:
+5. **Code quality assessment**:
    - Code blocks exceeding 20 lines require segmentation and explanation
    - Every code block needs clear, educational explanation
    - Progressive understanding through well-explained examples
-5. **Time estimation (realistic targets)**:
+6. **Time estimation (realistic targets)**:
    - Observer path: Focus on achievable timeframes for quick understanding
    - Reading: 200-250 words/minute
    - Code comprehension: 20-30 lines per 10 minutes (with explanations)
@@ -330,7 +335,9 @@ For each session restructuring:
 ## Constraints & Quality Standards
 
 ### Content Standards
-- **Preserve all original technical content** - no removal of concepts or code examples
+- **CRITICAL: Preserve all original technical content** - no removal of concepts, code examples, or educational material
+- **Content transformation only** - move content between learning paths (Observer/Participant/Implementer) but never delete
+- **Replacement rule** - only delete content if replacing with improved version that covers same concepts
 - **Maintain technical accuracy** - all code and explanations must remain correct
 - **Limit emoji usage** - maximum 3-5 per section, primarily for navigation
 - **Professional tone** - educational and authoritative presentation
