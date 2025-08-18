@@ -2226,28 +2226,24 @@ B) Enable auto-scaling and monitoring
 C) Reduce costs  
 D) Increase security  
 
-2. **Which cloud service automatically scales based on request volume?**  
 
 A) EC2  
 B) Cloud Run  
 C) Compute Engine  
 D) Virtual Machines  
 
-3. **What format does Prometheus use for metrics?**  
 
 A) JSON  
 B) XML  
 C) Plain text with specific format  
 D) Binary  
 
-4. **How does the Lambda handler communicate with MCP servers?**  
 
 A) Direct function calls  
 B) HTTP/JSON-RPC protocol  
 C) gRPC  
 D) WebSockets  
 
-5. **What's the benefit of using Redis cache in MCP servers?**  
 
 A) Security  
 B) Reduced latency and load  

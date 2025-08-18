@@ -882,7 +882,6 @@ B) To manage agent discovery across organizations
 C) To standardize how LLMs interact with external data sources and tools  
 D) To provide a framework for building AI agents  
 
- To manage agent discovery across organizations  
 
 **Question 2:** Which component of MCP is responsible for exposing capabilities to clients?
 
@@ -891,7 +890,6 @@ B) MCP Resources
 C) MCP Tools  
 D) MCP Client  
 
- MCP Resources  
 
 **Question 3:** What are the three main types of capabilities that MCP servers can expose?
 
@@ -900,7 +898,6 @@ B) Functions, Data, and Templates
 C) Tools, Resources, and Prompts  
 D) Commands, Files, and Scripts  
 
- APIs, Databases, and Files  
 
 **Question 4:** Which protocol is designed for local-first agent coordination with minimal overhead?
 
@@ -979,7 +976,6 @@ B) Cross-organization collaboration
 C) Agent discovery  
 D) Communication standards  
 
- Cross-organization collaboration  
 
 **Question 15:** What is the recommended development path for mastering these protocols?
 
@@ -988,7 +984,6 @@ B) Start with ACP, then MCP, then A2A
 C) Start with MCP, then ACP, then A2A  
 D) Start with A2A, then ACP, then MCP  
 
- Learn all three simultaneously  
 
 [**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 

@@ -954,7 +954,6 @@ B) Chunk, Embed, Query
 C) Index, Retrieve, Generate  
 D) Parse, Search, Respond  
 
- Store, Find, Answer  
 
 **Question 2:** Which RAG evolution phase introduced self-correcting mechanisms?  
 A) 2022 - LLM Integration  
@@ -962,7 +961,6 @@ B) 2025 - Next-Gen RAG
 C) 2020 - RAG Foundation  
 D) 2023 - Adaptive RAG  
 
- 2025 - Next-Gen RAG  
 
 **Question 3:** What is the primary advantage of HyDE (Hypothetical Document Embeddings)?  
 A) Reduces computational cost  
@@ -970,7 +968,6 @@ B) Simplifies system architecture
 C) Eliminates need for vector databases  
 D) Improves query-document semantic alignment  
 
- Simplifies system architecture  
 
 **Question 4:** When should you choose RAG over fine-tuning?  
 A) When computational resources are unlimited  
@@ -978,7 +975,6 @@ B) When source attribution is not needed
 C) When the domain knowledge is static  
 D) When you need frequent knowledge updates  
 
- When source attribution is not needed  
 
 **Question 5:** What is the key benefit of Agentic RAG systems?  
 A) Simpler system architecture  
@@ -986,7 +982,6 @@ B) Lower computational requirements
 C) Faster retrieval speed  
 D) Iterative query refinement and self-correction  
 
- Simpler system architecture  
 
 [**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 

@@ -1515,7 +1515,6 @@ B) Enables structure-aware chunking that preserves meaning
 C) Reduces storage requirements  
 D) Improves embedding quality  
 
- Improves embedding quality  
 
 
 **Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?  
@@ -1524,7 +1523,6 @@ B) To simplify the codebase
 C) To improve processing speed  
 D) To preserve document structure and create meaningful chunk boundaries  
 
- To preserve document structure and create meaningful chunk boundaries  
 
 
 **Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?  
@@ -1533,7 +1531,6 @@ B) Enables more precise retrieval through enriched context
 C) Simplifies the chunking process  
 D) Improves computational efficiency  
 
- Improves computational efficiency  
 
 
 **Question 4:** Why do tables require specialized processing in RAG systems?  
@@ -1542,7 +1539,6 @@ B) Tables contain more text than paragraphs
 C) Tables are always larger than the chunk size  
 D) Tables have structured relationships that are lost in naive chunking  
 
- Tables have structured relationships that are lost in naive chunking  
 
 
 **Question 5:** When processing documents with images, what is the best practice for RAG systems?  
@@ -1551,7 +1547,6 @@ B) Create separate chunks for each image
 C) Replace image references with descriptive text  
 D) Ignore images completely  
 
- Ignore images completely  
 
 
 **[🗂️ View Test Solutions →](Session2_Test_Solutions.md)**

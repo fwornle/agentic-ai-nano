@@ -797,7 +797,6 @@ B) Lower computational cost
 C) Better user interface  
 D) Automatic validation and structured outputs with compile-time type checking  
 
- Faster execution speed  
 
 **Question 2:** Which validation constraint ensures a field value falls within a specific numeric range?  
 
@@ -806,7 +805,6 @@ B) Field(between=0:100)
 C) Field(min=0, max=100)  
 D) Field(ge=0, le=100)  
 
- Field(between=0:100)  
 
 **Question 3:** What happens when PydanticAI model validation fails?  
 
@@ -815,7 +813,6 @@ B) Silent failure with default values
 C) Warning message is logged  
 D) ValidationError is raised with detailed field information  
 
- Warning message is logged  
 
 **Question 4:** How do you define a tool function for a PydanticAI agent?  
 
@@ -824,7 +821,6 @@ B) Using def tool() syntax
 C) Using @function decorator  
 D) Using @agent.tool decorator  
 
- Using def tool() syntax  
 
 **Question 5:** What is the purpose of RunContext in PydanticAI?  
 
@@ -833,7 +829,6 @@ B) Provides runtime configuration and dependencies
 C) Manages conversation history  
 D) Controls execution speed  
 
- Controls execution speed  
 
 **Question 6:** Which decorator enables cross-field validation in Pydantic models?  
 
@@ -842,7 +837,6 @@ B) @model_validator
 C) @root_validator  
 D) @field_validator  
 
- @model_validator  
 
 **Question 7:** How do you implement custom validation logic for complex business rules?  
 
@@ -851,7 +845,6 @@ B) External validation services
 C) Built-in validators only  
 D) Database constraints  
 
- Manual checks in application code  
 
 **Question 8:** What is the main benefit of using structured outputs in PydanticAI?  
 
