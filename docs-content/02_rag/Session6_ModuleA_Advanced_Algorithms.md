@@ -387,6 +387,8 @@ Graph Neural Networks (GNNs) enable learning sophisticated node representations 
 
 Graph Attention Networks (GATs) learn to focus on the most relevant neighbors for each node through attention mechanisms. Multiple attention heads (8) capture different types of relationships, while dropout (0.1) prevents overfitting. The learning rate (0.001) balances training speed with stability.
 
+First, we prepare the graph data and import the necessary PyTorch Geometric components:
+
 ```python
         # Convert NetworkX graph to PyTorch Geometric format
         edge_index, node_feature_matrix = self._prepare_graph_data(graph, node_features)
@@ -395,7 +397,11 @@ Graph Attention Networks (GATs) learn to focus on the most relevant neighbors fo
         from torch_geometric.nn import GATConv
         import torch
         import torch.nn.functional as F
+```
 
+Next, we define the Graph Attention Network architecture with two attention layers:
+
+```python
         class GraphAttentionNetwork(torch.nn.Module):
             def __init__(self, input_dim, hidden_dim, output_dim, num_heads):
                 super().__init__()
@@ -404,6 +410,8 @@ Graph Attention Networks (GATs) learn to focus on the most relevant neighbors fo
 ```
 
 The GAT architecture uses two graph attention layers with different head configurations. The first layer uses multiple heads to capture diverse relationship patterns, while the second layer aggregates these patterns into final representations. PyTorch Geometric provides optimized implementations for large graphs.
+
+The forward pass implements the attention mechanism with dropout regularization:
 
 ```python
             def forward(self, x, edge_index):
@@ -416,6 +424,8 @@ The GAT architecture uses two graph attention layers with different head configu
 ```
 
 The forward pass applies dropout for regularization, computes attention-weighted neighbor aggregation in each layer, and uses ELU activation for smooth gradients. This architecture learns node representations that adaptively focus on the most relevant neighbors for each specific node.
+
+Finally, we initialize the model with the appropriate dimensions and return the training results:
 
 ```python
         # Initialize and train model
@@ -445,43 +455,51 @@ The trained GAT model produces enhanced node embeddings that incorporate learned
 
 Test your understanding of advanced graph algorithms:
 
-**Question 1:** What is the main advantage of temporal PageRank over standard PageRank in GraphRAG?
-
+**Question 1:** What is the main advantage of temporal PageRank over standard PageRank in GraphRAG?  
 A) Faster computation  
 B) Considers information freshness and time-based relationships  
 C) Requires less memory  
 D) Simpler implementation  
 
-**Question 2:** In Node2Vec embeddings, what do the parameters p and q control?
-
+**Question 2:** In Node2Vec embeddings, what do the parameters p and q control?  
 A) Embedding dimensions and learning rate  
 B) Walk length and number of walks  
 C) Return probability and in-out bias for walk exploration  
 D) Training epochs and batch size  
 
-**Question 3:** Why is community detection important for large-scale GraphRAG systems?
-
+**Question 3:** Why is community detection important for large-scale GraphRAG systems?  
 A) It reduces storage requirements  
 B) It organizes knowledge into coherent clusters for better retrieval  
 C) It speeds up all queries equally  
 D) It simplifies graph construction  
 
-**Question 4:** What advantage do Graph Attention Networks provide for GraphRAG?
-
+**Question 4:** What advantage do Graph Attention Networks provide for GraphRAG?  
 A) Faster training than traditional neural networks  
 B) Learn adaptive importance weights for different relationships and neighbors  
 C) Require less data for training  
 D) Work only with directed graphs  
 
-**Question 5:** In GraphRAG applications, when would you use biased random walks over uniform walks?
-
+**Question 5:** In GraphRAG applications, when would you use biased random walks over uniform walks?  
 A) When you want faster computation  
 B) When you need to explore specific regions or relationship types more thoroughly  
 C) When the graph is very small  
 D) When memory is limited  
 
-[**🗂️ View Test Solutions →**](Session6_ModuleA_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session6_ModuleA_Test_Solutions.md`
 
 ---
 
-**Navigation**: [← Back to Session 6](Session6_Graph_Based_RAG.md) | [Module B: Production Systems →](Session6_ModuleB_Production_Systems.md)
+## 🧭 Navigation
+
+**Related Modules:**
+- **Core Session:** [Session 6 - Graph-Based RAG](Session6_Graph_Based_RAG.md)
+- **Related Module:** [Module B - Production Systems](Session6_ModuleB_Production_Systems.md)
+
+**🗂️ Code Files:** All examples use files in `src/session6/`
+- `graph_traversal_engine.py` - Advanced traversal algorithms
+- `knowledge_graph_extractor.py` - Graph construction and analysis
+- `hybrid_graph_vector_rag.py` - Combined graph and vector search
+
+**🚀 Quick Start:** Run `cd src/session6 && python demo_session6.py` to see advanced graph algorithms in action
+
+---

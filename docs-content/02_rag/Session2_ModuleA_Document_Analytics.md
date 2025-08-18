@@ -56,7 +56,7 @@ class DocumentComplexityScore:
 
 The `DocumentComplexityScore` dataclass encapsulates all the metrics we need to evaluate how challenging a document will be to process. This structured approach helps RAG systems make informed decisions about chunking strategies and processing resources.
 
-Next, we'll implement the main analyzer class that orchestrates the complexity assessment:
+Next, we'll implement the main analyzer class that orchestrates the complexity assessment. This class serves as the entry point for comprehensive document analysis:
 
 ```python
 class DocumentComplexityAnalyzer:
@@ -67,7 +67,13 @@ class DocumentComplexityAnalyzer:
         
         # Structural complexity analysis
         structural_score = self._analyze_structural_complexity(document)
-        
+```
+
+The analyzer begins with structural complexity assessment, examining the document's formatting elements, hierarchy, and organizational patterns. This helps identify documents that may require specialized handling due to tables, code blocks, or complex nested structures.
+
+Next, we analyze the semantic complexity and processing difficulty:
+
+```python
         # Semantic complexity analysis
         semantic_score = self._analyze_semantic_complexity(document)
         
@@ -78,9 +84,9 @@ class DocumentComplexityAnalyzer:
         overall_score = np.mean([structural_score, semantic_score, processing_score])
 ```
 
-The analysis method coordinates three distinct complexity assessments to build a comprehensive understanding of document processing requirements.
+Semantic complexity measures the conceptual density and terminology sophistication, while processing difficulty assesses computational requirements. The overall score provides a balanced view across all dimensions.
 
-Next, we generate recommendations and return the complete analysis:
+Finally, we generate actionable recommendations and compile the complete analysis:
 
 ```python
         # Generate processing recommendations
@@ -123,9 +129,7 @@ Now let's implement the structural complexity analysis, which examines the docum
         return min(complexity_factors, 1.0)  # Normalize to 0-1
 ```
 
-### **Pattern 2: Content Quality Assessment**
-
-Structural complexity analysis identifies documents with complex formatting that may require specialized chunking strategies. Tables, code blocks, and hierarchical structures each present unique challenges for content preservation during chunking.
+This three-dimensional analysis approach ensures that processing strategies are tailored to each document's specific characteristics. Simple text documents receive efficient processing, while complex technical or legal documents get the specialized attention they require.
 
 ### **Pattern 2: Content Quality Assessment**
 
@@ -160,7 +164,13 @@ Let's examine how coherence measurement works between adjacent chunks:
         """Measure semantic coherence between chunks."""
         if len(chunks) < 2:
             return 1.0
-            
+```
+
+The coherence function first handles the edge case where there's only one chunk. With fewer than two chunks, coherence is perfect by definition.
+
+For multiple chunks, we calculate similarity scores between adjacent pairs:
+
+```python
         coherence_scores = []
         for i in range(len(chunks) - 1):
             score = self._calculate_similarity(chunks[i], chunks[i + 1])
@@ -169,7 +179,7 @@ Let's examine how coherence measurement works between adjacent chunks:
         return np.mean(coherence_scores)
 ```
 
-Coherence measurement ensures that adjacent chunks maintain topical similarity, preventing abrupt context switches that could confuse retrieval systems and end users.
+This pairwise comparison approach ensures that adjacent chunks maintain topical similarity, preventing abrupt context switches that could confuse retrieval systems and end users. The average score provides an overall coherence metric.
 
 Now we'll implement information density analysis, which measures how much unique information each chunk contains:
 
@@ -193,7 +203,9 @@ Now we'll implement information density analysis, which measures how much unique
 
 Information density analysis helps identify chunks that are either too sparse (low information value) or too dense (potentially overwhelming). This balance is crucial for effective retrieval and comprehension.
 
-Different domains require specialized processing approaches. Legal documents, medical records, and technical documentation each have unique structures and terminology that affect optimal chunking strategies:
+Different domains require specialized processing approaches. Legal documents, medical records, and technical documentation each have unique structures and terminology that affect optimal chunking strategies.
+
+First, let's initialize our domain-specific processor with configuration patterns for different document types:
 
 ```python
 class DomainSpecificProcessor:
@@ -206,18 +218,18 @@ class DomainSpecificProcessor:
                 "citation_patterns": [r'\d+\s+U\.S\.C\.\s+§\s+\d+', r'\d+\s+F\.\d+d\s+\d+'],
                 "special_handling": ["definitions", "whereas", "therefore"]
             },
+```
+
+Legal domain configuration recognizes statutory structure markers, citation patterns, and legal terminology that must be preserved during chunking. This ensures that legal references remain intact and contextually connected.
+
+Next, we define medical and technical domain patterns:
+
+```python
             "medical": {
                 "section_markers": ["History", "Examination", "Assessment", "Plan"],
                 "terminology_patterns": [r'[A-Z]{2,}', r'\d+mg', r'\d+ml'],
                 "special_handling": ["medications", "dosages", "contraindications"]
             },
-```
-
-The domain patterns define the structural and terminology markers that characterize different document types.
-
-We continue with technical domain patterns:
-
-```python
             "technical": {
                 "section_markers": ["Prerequisites", "Procedure", "Examples", "Notes"],
                 "code_patterns": [r'```[\s\S]*?```', r'`[^`]+`'],
@@ -226,7 +238,7 @@ We continue with technical domain patterns:
         }
 ```
 
-This domain configuration defines the specific patterns and structures that characterize different document types. Understanding these patterns enables more intelligent chunking that preserves domain-specific relationships and terminology.
+Medical patterns focus on clinical document structure and dosage information that must remain precise, while technical patterns preserve code blocks and API references that require exact formatting.
 
 Now let's implement the main processing method that applies domain-specific rules:
 
@@ -238,14 +250,20 @@ Now let's implement the main processing method that applies domain-specific rule
             domain = "general"
             
         domain_config = self.domain_patterns.get(domain, {})
-        
+```
+
+The method first validates the requested domain and falls back to general processing if the domain isn't recognized. This ensures robust handling of unexpected document types.
+
+Next, we extract domain-specific elements using the appropriate configuration:
+
+```python
         # Extract domain-specific elements
         sections = self._extract_domain_sections(document, domain_config)
         terminology = self._extract_domain_terminology(document, domain_config)
         special_elements = self._handle_special_elements(document, domain_config)
 ```
 
-The processing method applies domain-specific extraction rules to identify and preserve important structural elements.
+These extraction methods identify structural sections, domain terminology, and special elements that require careful preservation during processing.
 
 Finally, we compile the results and recommend an optimal processing strategy:
 
@@ -267,43 +285,47 @@ Domain-specific processing recognizes that different types of documents require 
 
 Test your understanding of advanced document analytics:
 
-**Question 1:** What is the primary benefit of document complexity scoring?
-
+**Question 1:** What is the primary benefit of document complexity scoring?  
 A) Reduces processing time  
 B) Enables optimal processing strategy selection based on document characteristics  
 C) Improves storage efficiency  
 D) Reduces memory usage  
 
-**Question 2:** Which metric is most important for measuring chunk quality?
-
+**Question 2:** Which metric is most important for measuring chunk quality?  
 A) Chunk size only  
 B) Processing speed  
 C) Balance of coherence, information density, and completeness  
 D) Number of chunks created  
 
-**Question 3:** Why is domain-specific processing important for enterprise RAG systems?
-
+**Question 3:** Why is domain-specific processing important for enterprise RAG systems?  
 A) It reduces costs  
 B) It preserves domain-specific structure and terminology for better retrieval  
 C) It simplifies implementation  
 D) It reduces storage requirements  
 
-**Question 4:** What does information density measure in chunk quality assessment?
-
+**Question 4:** What does information density measure in chunk quality assessment?  
 A) Total word count  
 B) Ratio of unique words to total words  
 C) Document length  
 D) Processing time  
 
-**Question 5:** How should coherence be measured between adjacent chunks?
-
+**Question 5:** How should coherence be measured between adjacent chunks?  
 A) By word count similarity  
 B) By semantic similarity and topic consistency  
 C) By length similarity  
 D) By processing time similarity  
 
-[**🗂️ View Test Solutions →**](Session2_ModuleA_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session2_ModuleA_Test_Solutions.md`
+
+## 🧭 Navigation
+
+**Previous:** [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
+
+**Related Modules:**
+
+- **[Core Session: Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)** - Foundation chunking concepts
+- **[Session 1 Module A: Production Patterns](Session1_ModuleA_Production_Patterns.md)** - Production patterns reference
+
+**Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
 
 ---
-
-[← Back to Session 2](Session2_Advanced_Chunking_Preprocessing.md)

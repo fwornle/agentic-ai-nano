@@ -4,13 +4,11 @@
 
 ### Question 1: Microservices Architecture Benefits
 
-**What is the primary advantage of microservices architecture for production RAG systems?**
-
-A) Reduced system complexity  
+**What is the primary advantage of microservices architecture for production RAG systems?**  
+A) Simpler deployment process  
 B) Lower development costs  
-C) Simpler deployment process  
-D) Independent scaling and fault isolation of components ✅  
-**Correct Answer: D) Independent scaling and fault isolation of components**
+C) Independent scaling and fault isolation of components ✅  
+D) Reduced system complexity  
 
 **Explanation:** Microservices architecture allows each RAG component (document processing, embedding service, retrieval service, generation service) to scale independently based on demand and provides fault isolation - if one service fails, others continue operating. This is crucial for production systems handling varying workloads and maintaining high availability.
 
@@ -18,13 +16,11 @@ D) Independent scaling and fault isolation of components ✅
 
 ### Question 2: Load Balancing Strategy Selection
 
-**When should you choose response-time-based load balancing over round-robin?**
-
-A) When service instances have varying performance characteristics ✅  
-B) When all service instances have identical performance  
-C) When minimizing configuration complexity  
-D) When implementing simple systems only  
-**Correct Answer: A) When service instances have varying performance characteristics**
+**When should you choose response-time-based load balancing over round-robin?**  
+A) When all service instances have identical performance  
+B) When service instances have varying performance characteristics ✅  
+C) When implementing simple systems only  
+D) When minimizing configuration complexity  
 
 **Explanation:** Response-time-based load balancing is essential when service instances have different performance characteristics (different hardware, varying loads, or different processing capabilities). It routes requests to the fastest-responding instances, optimizing overall system performance.
 
@@ -32,13 +28,11 @@ D) When implementing simple systems only
 
 ### Question 3: Enterprise Authentication
 
-**What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?**
-
-A) Granular permission management and security policy enforcement ✅  
-B) Simpler user interface design  
-C) Reduced server load  
-D) Faster authentication speed  
-**Correct Answer: A) Granular permission management and security policy enforcement**
+**What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?**  
+A) Faster authentication speed  
+B) Reduced server load  
+C) Granular permission management and security policy enforcement ✅  
+D) Simpler user interface design  
 
 **Explanation:** RBAC provides granular control over who can access what resources and perform which actions in the RAG system. This is essential for enterprise security, ensuring users only access appropriate documents and functionality based on their role and clearance level.
 

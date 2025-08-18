@@ -9,28 +9,19 @@
 
 ## 🧭 Navigation & Quick Start
 
-### Related Modules
-- **[📄 Session 4 Core: Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)** - Foundation query processing
-- **[🔍 Session 3 Modules →](Session3_ModuleA_Index_Algorithms.md)** - Vector search optimization
+**Related Modules:**
 
-### 🗂️ Code Files
-- **Query Enhancement**: [`src/session4/comprehensive_enhancer.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session4/comprehensive_enhancer.py) - Complete query processing pipeline
-- **Intent Analysis**: [`src/session4/semantic_gap_analyzer.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session4/semantic_gap_analyzer.py) - Query intent detection
-- **Multi-Query Generation**: [`src/session4/multi_query_generator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session4/multi_query_generator.py) - Query expansion techniques
-- **Demo Application**: [`src/session4/demo_query_enhancement.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session4/demo_query_enhancement.py) - Query understanding showcase
+- **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
+- **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)
 
-### 🚀 Quick Start
-```bash
-# Test advanced query understanding
-cd src/session4
-python demo_query_enhancement.py
+**🗂️ Code Files:** All examples use files in `src/session4/`
 
-# Test query intent detection
-python -c "from semantic_gap_analyzer import SemanticGapAnalyzer; print('Query understanding ready!')"
+- `comprehensive_enhancer.py` - Complete query processing pipeline
+- `semantic_gap_analyzer.py` - Query intent detection
+- `multi_query_generator.py` - Query expansion techniques
+- `demo_query_enhancement.py` - Query understanding showcase
 
-# Test multi-query generation
-python -c "from multi_query_generator import MultiQueryGenerator; MultiQueryGenerator().test_generation()"
-```
+**🚀 Quick Start:** Run `cd src/session4 && python demo_query_enhancement.py` to see advanced query understanding
 
 ---
 
@@ -38,7 +29,9 @@ python -c "from multi_query_generator import MultiQueryGenerator; MultiQueryGene
 
 ### **Pattern 1: Intent Classification and Query Routing**
 
-Let's start by establishing the foundation for sophisticated query understanding. This involves defining query types and the data structures needed to capture comprehensive query analysis:
+Let's start by establishing the foundation for sophisticated query understanding. Query understanding goes beyond simple keyword extraction to comprehend user intent, context, and the type of response needed. This involves defining query types and the data structures needed to capture comprehensive query analysis.
+
+First, we define the fundamental intent categories that represent different types of information needs:
 
 ```python
 from typing import Dict, List, Any, Optional
@@ -56,7 +49,7 @@ class QueryIntent(Enum):
     DEFINITIONAL = "definitional"
 ```
 
-These intent categories represent the fundamental types of information needs that users express. Understanding intent is crucial because different query types require different retrieval and processing strategies.
+These intent categories represent the fundamental types of information needs that users express. Understanding intent is crucial because different query types require different retrieval and processing strategies. For example, a factual query like "What is the capital of France?" needs direct information retrieval, while a procedural query like "How do I deploy a RAG system?" requires step-by-step instructions.
 
 Next, we'll define the comprehensive analysis result structure:
 
@@ -86,7 +79,7 @@ class AdvancedQueryAnalyzer:
         self.domain_classifiers = self._initialize_domain_classifiers()
 ```
 
-The analyzer combines pattern-based recognition with LLM-powered analysis, providing both speed and sophistication in query understanding.
+The analyzer combines pattern-based recognition with LLM-powered analysis, providing both speed and sophistication in query understanding. This hybrid approach uses fast pattern matching for common query structures while leveraging LLM capabilities for complex or ambiguous queries that require deeper semantic understanding.
 
 Let's implement the comprehensive analysis method that coordinates all aspects of query understanding:
 
@@ -147,7 +140,7 @@ Now let's examine the intent classification method that combines pattern matchin
                     return intent
 ```
 
-Pattern-based classification provides fast intent detection for common query structures and keywords.
+Pattern-based classification provides fast intent detection for common query structures and keywords. This approach uses regular expressions to identify linguistic patterns that strongly indicate specific intent types, enabling rapid classification without expensive LLM calls for straightforward queries.
 
 For more complex queries, we fallback to LLM-powered analysis:
 
@@ -169,7 +162,7 @@ For more complex queries, we fallback to LLM-powered analysis:
         """
 ```
 
-The LLM prompt provides clear category definitions for accurate intent classification.
+The LLM prompt provides clear category definitions and examples for accurate intent classification. By explicitly defining each category and providing the query context, we guide the LLM to make consistent classification decisions that align with our processing capabilities.
 
 Finally, we handle the LLM response with error handling:
 
@@ -180,8 +173,6 @@ Finally, we handle the LLM response with error handling:
         except:
             return QueryIntent.FACTUAL  # Default fallback
 ```
-
-### **Pattern 2: Context-Aware Query Enhancement**
 
 Intent classification combines fast pattern matching for common query types with sophisticated LLM analysis for complex cases. This hybrid approach provides both speed and accuracy in understanding user intent.
 
@@ -199,7 +190,7 @@ class ContextAwareQueryEnhancer:
         self.user_profiles = {}
 ```
 
-The context-aware enhancer maintains conversation history and user profiles to provide personalized and contextually relevant query processing.
+The context-aware enhancer maintains conversation history and user profiles to provide personalized and contextually relevant query processing. This is essential for conversational RAG systems where users build upon previous interactions and expect the system to remember context from earlier in the session.
 
 Let's implement the main enhancement method that coordinates context integration:
 
@@ -290,7 +281,7 @@ class MultiModalQueryProcessor:
         self.llm_model = llm_model
 ```
 
-The multi-modal processor combines vision models for image analysis with language models for text processing, enabling comprehensive understanding of complex queries.
+The multi-modal processor combines vision models for image analysis with language models for text processing, enabling comprehensive understanding of complex queries. This capability is increasingly important as users interact with RAG systems through rich media interfaces that support images, documents, and other file types alongside text.
 
 Let's implement the main processing method that handles various attachment types:
 
@@ -317,7 +308,7 @@ Let's implement the main processing method that handles various attachment types
                 })
 ```
 
-This processing loop extracts meaningful information from each attachment type using specialized models.
+This processing loop extracts meaningful information from each attachment type using specialized models. For images, vision models generate descriptive text that can be integrated into text-based retrieval. For documents, summarization techniques extract key information while preserving important context.
 
 Next, we integrate the attachment context with the original query:
 
@@ -357,7 +348,7 @@ Now let's examine the image analysis and context integration methods:
                 context_parts.append(f"Document content: {attachment['summary']}")
 ```
 
-The integration method builds contextual descriptions from each attachment type.
+The integration method builds contextual descriptions from each attachment type. Rather than treating attachments as separate entities, we weave their content into the query context to create a unified search target that leverages both textual and multi-modal information.
 
 Finally, we combine the original query with the attachment context:
 
@@ -374,43 +365,47 @@ Multi-modal query processing enables RAG systems to handle rich user interaction
 
 Test your understanding of advanced query understanding:
 
-**Question 1:** What is the primary benefit of intent classification in query processing?
-
+**Question 1:** What is the primary benefit of intent classification in query processing?  
 A) Reduces processing time  
 B) Enables specialized processing strategies tailored to query types  
 C) Reduces memory usage  
 D) Simplifies implementation  
 
-**Question 2:** Why is context-aware query enhancement important?
-
+**Question 2:** Why is context-aware query enhancement important?  
 A) It reduces computational costs  
 B) It resolves ambiguities and adds implicit context from conversation history  
 C) It speeds up retrieval  
 D) It reduces storage requirements  
 
-**Question 3:** How does multi-modal query processing improve RAG systems?
-
+**Question 3:** How does multi-modal query processing improve RAG systems?  
 A) It reduces complexity  
 B) It enables processing of queries with images, documents, and other media types  
 C) It reduces memory usage  
 D) It simplifies deployment  
 
-**Question 4:** What is the value of reference resolution in conversational RAG?
-
+**Question 4:** What is the value of reference resolution in conversational RAG?  
 A) It improves speed  
 B) It resolves pronouns and references using conversation context for clarity  
 C) It reduces costs  
 D) It simplifies architecture  
 
-**Question 5:** Why should query complexity assessment guide processing strategy?
-
+**Question 5:** Why should query complexity assessment guide processing strategy?  
 A) It reduces infrastructure costs  
 B) It allows allocation of appropriate computational resources and techniques  
 C) It speeds up all queries  
 D) It reduces memory usage  
 
-[**🗂️ View Test Solutions →**](Session4_ModuleA_Test_Solutions.md)
+**🗂️ View Test Solutions →** Complete answers and explanations available in `Session4_ModuleA_Test_Solutions.md`
+
+## 🧭 Navigation
+
+**Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
+
+**Related Modules:**
+
+- **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
+- **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)
+
+**Next:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
 
 ---
-
-[← Back to Session 4](Session4_Query_Enhancement_Context_Augmentation.md)
