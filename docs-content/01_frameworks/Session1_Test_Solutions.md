@@ -5,10 +5,11 @@
 ### Question 1: Foundation Benefits
 
 **What is the primary benefit of implementing agents from scratch before using frameworks?**  
-A) Better performance  
-B) Deeper understanding of agent mechanics ✅  
-C) Easier deployment  
-D) Lower resource usage  
+A) Lower resource usage  
+B) Easier deployment  
+C) Better performance  
+D) Deeper understanding of agent mechanics ✅  
+**Correct Answer: D) Deeper understanding of agent mechanics**
 
 **Explanation:** Building agents from scratch provides deep insight into the core mechanics, patterns, and architecture decisions that frameworks abstract away, enabling better framework selection and customization.
 
@@ -17,10 +18,11 @@ D) Lower resource usage
 ### Question 2: BaseAgent Architecture
 
 **In the BaseAgent class, what is the purpose of the conversation_history attribute?**  
-A) Tool execution logs  
+A) Maintaining context across interactions ✅  
 B) Error tracking  
-C) Maintaining context across interactions ✅  
-D) Performance monitoring  
+C) Performance monitoring  
+D) Tool execution logs  
+**Correct Answer: A) Maintaining context across interactions**
 
 **Explanation:** The conversation_history maintains the context of previous interactions, allowing agents to understand the conversation flow and provide contextually relevant responses.
 
@@ -29,10 +31,11 @@ D) Performance monitoring
 ### Question 3: Abstract Method Requirements
 
 **Which method must be implemented by all subclasses of BaseAgent?**  
-A) process_message()  
-B) add_tool()  
-C) _generate_response() ✅  
-D) get_available_tools()  
+A) get_available_tools()  
+B) process_message()  
+C) add_tool()  
+D) _generate_response() ✅  
+**Correct Answer: D) _generate_response()**
 
 **Explanation:** The _generate_response() method is the abstract method that each agent subclass must implement to define its specific response generation logic.
 
@@ -41,10 +44,11 @@ D) get_available_tools()
 ### Question 4: Tool Interface Design
 
 **How does the Tool abstract base class ensure consistency across different tool implementations?**  
-A) By providing default implementations  
-B) By requiring execute() and _get_parameters() methods ✅  
-C) By handling errors automatically  
+A) By handling errors automatically  
+B) By providing default implementations  
+C) By requiring execute() and _get_parameters() methods ✅  
 D) By managing tool state  
+**Correct Answer: C) By requiring execute() and _get_parameters() methods**
 
 **Explanation:** The Tool abstract base class defines a consistent interface by requiring all tools to implement execute() for functionality and _get_parameters() for metadata.
 
@@ -53,10 +57,11 @@ D) By managing tool state
 ### Question 5: Design Pattern Recognition
 
 **What design pattern is demonstrated by the BaseAgent and its subclasses?**  
-A) Factory Pattern  
-B) Observer Pattern  
+A) Strategy Pattern  
+B) Factory Pattern  
 C) Template Method Pattern ✅  
-D) Strategy Pattern  
+D) Observer Pattern  
+**Correct Answer: C) Template Method Pattern**
 
 **Explanation:** The Template Method Pattern defines the skeleton of an algorithm in the base class while letting subclasses override specific steps - exactly how BaseAgent works with _generate_response().
 

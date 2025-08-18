@@ -1512,32 +1512,47 @@ class CustomDocumentProcessor(AdvancedProcessingPipeline):
 **Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?  
 A) Reduces processing time  
 B) Enables structure-aware chunking that preserves meaning  
-C) Improves embedding quality  
-D) Reduces storage requirements  
+C) Reduces storage requirements  
+D) Improves embedding quality  
+
+ Improves embedding quality  
+
 
 **Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?  
-A) To improve processing speed  
-B) To reduce memory usage  
-C) To preserve document structure and create meaningful chunk boundaries  
-D) To simplify the codebase  
+A) To reduce memory usage  
+B) To simplify the codebase  
+C) To improve processing speed  
+D) To preserve document structure and create meaningful chunk boundaries  
+
+ To preserve document structure and create meaningful chunk boundaries  
+
 
 **Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?  
 A) Reduces chunk size  
-B) Improves computational efficiency  
-C) Enables more precise retrieval through enriched context  
-D) Simplifies the chunking process  
+B) Enables more precise retrieval through enriched context  
+C) Simplifies the chunking process  
+D) Improves computational efficiency  
+
+ Improves computational efficiency  
+
 
 **Question 4:** Why do tables require specialized processing in RAG systems?  
-A) Tables contain more text than paragraphs  
-B) Tables have structured relationships that are lost in naive chunking  
+A) Tables use different encoding formats  
+B) Tables contain more text than paragraphs  
 C) Tables are always larger than the chunk size  
-D) Tables use different encoding formats  
+D) Tables have structured relationships that are lost in naive chunking  
+
+ Tables have structured relationships that are lost in naive chunking  
+
 
 **Question 5:** When processing documents with images, what is the best practice for RAG systems?  
-A) Ignore images completely  
-B) Store images as binary data in chunks  
+A) Store images as binary data in chunks  
+B) Create separate chunks for each image  
 C) Replace image references with descriptive text  
-D) Create separate chunks for each image    
+D) Ignore images completely  
+
+ Ignore images completely  
+
 
 **[🗂️ View Test Solutions →](Session2_Test_Solutions.md)**
 

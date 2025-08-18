@@ -6,10 +6,11 @@
 
 **Which vector database metric is most suitable for RAG applications using cosine similarity?**
 
-A) Euclidean distance
-B) Manhattan distance
-C) Cosine similarity ✅
-D) Hamming distance
+A) Euclidean distance  
+B) Manhattan distance  
+C) Cosine similarity ✅  
+D) Hamming distance  
+**Correct Answer: C) Cosine similarity**
 
 **Explanation:** Cosine similarity is ideal for RAG applications because it measures the angle between vectors rather than their magnitude, making it particularly effective for text embeddings where document length doesn't affect semantic similarity. It's normalized and works well with high-dimensional sparse vectors typical in NLP.
 
@@ -19,10 +20,11 @@ D) Hamming distance
 
 **What is the primary advantage of HNSW indexing over IVF indexing?**
 
-A) Lower memory usage
-B) Better compression ratios
-C) Faster query performance with high recall ✅
-D) Simpler configuration
+A) Lower memory usage  
+B) Better compression ratios  
+C) Faster query performance with high recall ✅  
+D) Simpler configuration  
+**Correct Answer: C) Faster query performance with high recall**
 
 **Explanation:** HNSW (Hierarchical Navigable Small World) provides faster query performance with high recall compared to IVF (Inverted File). While IVF can be more memory efficient with compression, HNSW excels in speed by using a graph-based structure that enables efficient approximate nearest neighbor search.
 
@@ -32,10 +34,11 @@ D) Simpler configuration
 
 **In Reciprocal Rank Fusion (RRF), what does the 'k' parameter control?**
 
-A) Number of results to return
-B) Weight balance between semantic and lexical scores
-C) The smoothing factor in rank combination ✅
-D) Maximum number of query variants
+A) Number of results to return  
+B) Weight balance between semantic and lexical scores  
+C) The smoothing factor in rank combination ✅  
+D) Maximum number of query variants  
+**Correct Answer: C) The smoothing factor in rank combination**
 
 **Explanation:** In RRF, the 'k' parameter (typically 60) acts as a smoothing factor in the formula: score = 1/(k + rank). It prevents the top-ranked items from dominating the fusion and provides more balanced combination of rankings from different retrieval methods.
 
@@ -45,10 +48,11 @@ D) Maximum number of query variants
 
 **What is the key benefit of cross-encoder reranking compared to bi-encoder similarity?**
 
-A) Faster inference speed
-B) Lower computational requirements
-C) Joint processing of query-document pairs for better accuracy ✅
-D) Simpler model architecture
+A) Faster inference speed  
+B) Lower computational requirements  
+C) Joint processing of query-document pairs for better accuracy ✅  
+D) Simpler model architecture  
+**Correct Answer: C) Joint processing of query-document pairs for better accuracy**
 
 **Explanation:** Cross-encoders process query-document pairs jointly, allowing for attention mechanisms to directly compare the query and document tokens. This provides more accurate relevance scoring compared to bi-encoders, which encode query and documents separately, though at the cost of slower inference speed.
 
@@ -58,10 +62,11 @@ D) Simpler model architecture
 
 **When should you choose IVF indexing over HNSW for vector search?**
 
-A) When you need the fastest possible queries
-B) When you have limited memory and large datasets ✅
-C) When accuracy is more important than speed
-D) When you need real-time updates
+A) When you need the fastest possible queries  
+B) When you have limited memory and large datasets ✅  
+C) When accuracy is more important than speed  
+D) When you need real-time updates  
+**Correct Answer: B) When you have limited memory and large datasets**
 
 **Explanation:** IVF indexing is preferred when you have memory constraints and large datasets because it supports Product Quantization (PQ) compression, reducing memory usage significantly. While HNSW is faster for queries, IVF with PQ can handle much larger datasets within memory limits.
 
@@ -71,10 +76,11 @@ D) When you need real-time updates
 
 **What is the purpose of the 'ef_construction' parameter in HNSW?**
 
-A) Controls memory usage during search
-B) Determines the number of connections per node
-C) Sets the dynamic candidate list size during index building ✅
-D) Defines the maximum number of layers
+A) Controls memory usage during search  
+B) Determines the number of connections per node  
+C) Sets the dynamic candidate list size during index building ✅  
+D) Defines the maximum number of layers  
+**Correct Answer: C) Sets the dynamic candidate list size during index building**
 
 **Explanation:** The 'ef_construction' parameter controls the size of the dynamic candidate list during index construction. A higher value (e.g., 200) improves index quality by considering more candidates when building connections, leading to better search accuracy but longer build times.
 
@@ -84,10 +90,11 @@ D) Defines the maximum number of layers
 
 **In hybrid search, what does BM25 provide that semantic search lacks?**
 
-A) Better understanding of context
-B) Exact term matching and frequency analysis ✅
-C) Handling of synonyms and related concepts
-D) Multi-language support
+A) Better understanding of context  
+B) Exact term matching and frequency analysis ✅  
+C) Handling of synonyms and related concepts  
+D) Multi-language support  
+**Correct Answer: B) Exact term matching and frequency analysis**
 
 **Explanation:** BM25 provides exact term matching and considers term frequency and document frequency statistics, which semantic search may miss. While semantic search excels at understanding context and synonyms, BM25 ensures that specific terminology and exact phrases are properly weighted in the results.
 
@@ -97,10 +104,11 @@ D) Multi-language support
 
 **Why is query caching particularly effective in RAG systems?**
 
-A) Vector embeddings are expensive to compute
-B) Users often ask similar or repeated questions
-C) Database queries are the main bottleneck
-D) All of the above ✅
+A) Vector embeddings are expensive to compute  
+B) Users often ask similar or repeated questions  
+C) Database queries are the main bottleneck  
+D) All of the above ✅  
+**Correct Answer: D) All of the above**
 
 **Explanation:** All factors contribute to caching effectiveness: (A) Vector embeddings require significant computation time, (B) Users frequently ask similar questions making cache hits likely, and (C) Database vector similarity searches can be computationally expensive. Together, these factors make caching highly beneficial for RAG performance.
 

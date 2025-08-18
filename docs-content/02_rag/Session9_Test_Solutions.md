@@ -6,10 +6,11 @@
 
 **What is the primary advantage of microservices architecture for production RAG systems?**
 
-A) Simpler deployment process
-B) Lower development costs
-C) Independent scaling and fault isolation of components ✅
-D) Reduced system complexity
+A) Reduced system complexity  
+B) Lower development costs  
+C) Simpler deployment process  
+D) Independent scaling and fault isolation of components ✅  
+**Correct Answer: D) Independent scaling and fault isolation of components**
 
 **Explanation:** Microservices architecture allows each RAG component (document processing, embedding service, retrieval service, generation service) to scale independently based on demand and provides fault isolation - if one service fails, others continue operating. This is crucial for production systems handling varying workloads and maintaining high availability.
 
@@ -19,10 +20,11 @@ D) Reduced system complexity
 
 **When should you choose response-time-based load balancing over round-robin?**
 
-A) When all service instances have identical performance
-B) When service instances have varying performance characteristics ✅
-C) When implementing simple systems only
-D) When minimizing configuration complexity
+A) When service instances have varying performance characteristics ✅  
+B) When all service instances have identical performance  
+C) When minimizing configuration complexity  
+D) When implementing simple systems only  
+**Correct Answer: A) When service instances have varying performance characteristics**
 
 **Explanation:** Response-time-based load balancing is essential when service instances have different performance characteristics (different hardware, varying loads, or different processing capabilities). It routes requests to the fastest-responding instances, optimizing overall system performance.
 
@@ -32,10 +34,11 @@ D) When minimizing configuration complexity
 
 **What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?**
 
-A) Faster authentication speed
-B) Reduced server load
-C) Granular permission management and security policy enforcement ✅
-D) Simpler user interface design
+A) Granular permission management and security policy enforcement ✅  
+B) Simpler user interface design  
+C) Reduced server load  
+D) Faster authentication speed  
+**Correct Answer: A) Granular permission management and security policy enforcement**
 
 **Explanation:** RBAC provides granular control over who can access what resources and perform which actions in the RAG system. This is essential for enterprise security, ensuring users only access appropriate documents and functionality based on their role and clearance level.
 
@@ -45,10 +48,11 @@ D) Simpler user interface design
 
 **Which GDPR principle is most critical for RAG systems processing personal data?**
 
-A) Data portability
-B) Data minimization and lawful basis for processing ✅
-C) Right to be forgotten only
-D) Consent form design
+A) Data portability  
+B) Right to be forgotten only  
+C) Consent form design  
+D) Data minimization and lawful basis for processing ✅  
+**Correct Answer: D) Data minimization and lawful basis for processing**
 
 **Explanation:** Data minimization (processing only necessary personal data) and having a lawful basis for processing are fundamental GDPR principles. RAG systems must ensure they only process personal data that's necessary for their purpose and have valid legal grounds (consent, legitimate interest, etc.) for processing.
 
@@ -58,10 +62,11 @@ D) Consent form design
 
 **What is the primary challenge in real-time incremental indexing for RAG systems?**
 
-A) Storage capacity limitations
-B) Managing change detection and maintaining index consistency during updates ✅
-C) Network bandwidth constraints
-D) User interface complexity
+A) Network bandwidth constraints  
+B) Storage capacity limitations  
+C) User interface complexity  
+D) Managing change detection and maintaining index consistency during updates ✅  
+**Correct Answer: D) Managing change detection and maintaining index consistency during updates**
 
 **Explanation:** The key challenge is detecting changes across multiple data sources and updating vector indices and knowledge graphs while maintaining consistency. This involves handling concurrent updates, managing index versions, and ensuring search quality doesn't degrade during updates.
 
@@ -71,10 +76,11 @@ D) User interface complexity
 
 **Which metric is most critical for production RAG system health monitoring?**
 
-A) CPU usage only
-B) Memory consumption only
-C) Response quality scores combined with system performance metrics ✅
-D) Network traffic volume
+A) CPU usage only  
+B) Network traffic volume  
+C) Memory consumption only  
+D) Response quality scores combined with system performance metrics ✅  
+**Correct Answer: D) Response quality scores combined with system performance metrics**
 
 **Explanation:** Production RAG monitoring requires both technical performance metrics (CPU, memory, response time) AND quality metrics (response accuracy, retrieval relevance) since a system can be technically healthy but producing poor-quality responses, or vice versa.
 
@@ -84,10 +90,11 @@ D) Network traffic volume
 
 **What should trigger scale-up actions in production RAG systems?**
 
-A) Time of day only
-B) CPU threshold, response time, queue size, and error rate exceeding thresholds ✅
-C) Manual administrator requests only
-D) Random intervals for load testing
+A) CPU threshold, response time, queue size, and error rate exceeding thresholds ✅  
+B) Random intervals for load testing  
+C) Time of day only  
+D) Manual administrator requests only  
+**Correct Answer: A) CPU threshold, response time, queue size, and error rate exceeding thresholds**
 
 **Explanation:** Effective auto-scaling considers multiple indicators: high CPU/memory usage, increasing response times, growing processing queues, and rising error rates. This multi-dimensional approach prevents both under-scaling (performance degradation) and over-scaling (unnecessary costs).
 
@@ -97,10 +104,11 @@ D) Random intervals for load testing
 
 **What is the most important consideration when integrating RAG with SharePoint/Confluence?**
 
-A) File size limitations
-B) Authentication, permissions, and change detection for real-time updates ✅
-C) Color scheme compatibility
-D) Font rendering capabilities
+A) File size limitations  
+B) Color scheme compatibility  
+C) Font rendering capabilities  
+D) Authentication, permissions, and change detection for real-time updates ✅  
+**Correct Answer: D) Authentication, permissions, and change detection for real-time updates**
 
 **Explanation:** Enterprise integration requires proper authentication (OAuth/SAML), respecting existing permissions (users should only see documents they're authorized to access), and implementing change detection to keep the RAG system synchronized with updates to enterprise content.
 
