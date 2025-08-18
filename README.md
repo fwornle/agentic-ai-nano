@@ -319,7 +319,8 @@ Build production-ready agent communication systems using Model Context Protocol 
 <tr>
 <td><strong>Session 0</strong></td>
 <td><a href="docs-content/03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md">Introduction to MCP, ACP & A2A</a></td>
-<td><strong>Protocol ecosystem overview</strong></td>
+<td><strong>Protocol ecosystem overview</strong><br>
+📚 <a href="docs-content/03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A-solutions.md">Extended: Protocol Solutions</a></td>
 <td><a href="docs-content/03_mcp-acp-a2a/Session0_Test_Solutions.md">📝 Solutions</a></td>
 </tr>
 <tr>
@@ -337,13 +338,15 @@ Build production-ready agent communication systems using Model Context Protocol 
 <tr>
 <td><strong>Session 3</strong></td>
 <td><a href="docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md">LangChain MCP Integration</a></td>
-<td><strong>Framework integration</strong></td>
+<td><strong>Framework integration</strong><br>
+📚 <a href="docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration_Improved.md">Advanced: Multi-Tool Agents</a></td>
 <td><a href="docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration-solution.md">📝 Solutions</a></td>
 </tr>
 <tr>
 <td><strong>Session 4</strong></td>
 <td><a href="docs-content/03_mcp-acp-a2a/Session4_Production_MCP_Deployment.md">Production MCP Deployment</a></td>
-<td><strong>Enterprise deployment</strong></td>
+<td><strong>Enterprise deployment</strong><br>
+📚 <a href="docs-content/03_mcp-acp-a2a/Session4_Production_MCP_Deployment_Complete.md">Complete: Scalable Systems</a></td>
 <td><a href="docs-content/03_mcp-acp-a2a/Session4_Production_MCP_Deployment-solution.md">📝 Solutions</a></td>
 </tr>
 </tbody>
