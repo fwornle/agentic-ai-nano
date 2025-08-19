@@ -48,7 +48,6 @@ RUN apt-get update \
         fzf \
         git \
         git-lfs \
-        gh \
         gnupg \
         graphviz \
         htop \
@@ -73,6 +72,58 @@ RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${user} \
 # ###############################################################################
 # # Use Codecraft pip mirror
 COPY pip.conf /etc/xdg/pip/pip.conf
+
+################################################################################
+# Install developer tools
+ARG DDAD_AF=https://ddad.artifactory.cc.bmwgroup.net/artifactory
+ARG GITHUB_MIRROR=${DDAD_AF}/external-github-com
+ARG NODE_MIRROR="${DDAD_AF}/external-nodejs"
+
+# Install uv (Python package manager and build tool.)
+ARG UV_VERSION=0.8.12
+RUN curl ${GITHUB_MIRROR}/astral-sh/uv/releases/download/${UV_VERSION}/uv-x86_64-unknown-linux-gnu.tar.gz \
+  | tar -xzv -C /usr/local/bin/ --strip-components=1
+ENV UV_PYTHON_INSTALL_MIRROR=${GITHUB_MIRROR}/astral-sh/python-build-standalone/releases/download
+ENV UV_DEFAULT_INDEX=${DDAD_AF}/api/pypi/adp-pypi-with-upstream-collection/simple
+
+# Node
+ARG NODE_VERSION=22.17.0
+RUN cd /tmp && \
+    wget "${NODE_MIRROR}/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz" && \
+    tar -xf node-v${NODE_VERSION}-linux-x64.tar.xz -C /opt && \
+    rm node-v${NODE_VERSION}-linux-x64.tar.xz && \
+    ln -s /opt/node-v${NODE_VERSION}-linux-x64/bin/node /usr/local/bin/node && \
+    ln -s /opt/node-v${NODE_VERSION}-linux-x64/bin/npm /usr/local/bin/npm && \
+    ln -s /opt/node-v${NODE_VERSION}-linux-x64/bin/npx /usr/local/bin/npx
+
+# fd
+ARG FD_VERSION=10.2.0
+RUN cd /tmp && \
+    wget ${GITHUB_MIRROR}/sharkdp/fd/releases/download/v${FD_VERSION}/fd-musl_${FD_VERSION}_amd64.deb && \
+    dpkg -i fd-musl_${FD_VERSION}_amd64.deb
+
+# gh
+ARG GH_VERSION=2.75.0
+RUN cd /tmp && \
+    wget ${GITHUB_MIRROR}/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.deb && \
+    dpkg -i gh_${GH_VERSION}_linux_amd64.deb
+
+# eza
+ARG EZA_VERSION=0.22.0
+RUN cd /tmp && \
+    wget ${GITHUB_MIRROR}/eza-community/eza/releases/download/v${EZA_VERSION}/eza_x86_64-unknown-linux-gnu.tar.gz && \
+    tar -xf eza_x86_64-unknown-linux-gnu.tar.gz -C /usr/local/bin/ && \
+    rm eza_x86_64-unknown-linux-gnu.tar.gz
+
+# ruff
+RUN UV_TOOL_BIN_DIR=/usr/local/bin/ \
+    UV_TOOL_DIR=/usr/local/share/uv/tools/ \
+    uv tool install ruff==0.11.2
+
+# install bmw certificates
+RUN wget https://trustbundle.bmwgroup.net/BMW_Trusted_Certificates_Latest.pem \
+    -O /usr/local/share/ca-certificates/BMW_Trusted_Certificates_Latest.crt \
+    && update-ca-certificates --fresh
 
 # # Install Python dependencies
 # ARG py_reqs="requirements.txt"
