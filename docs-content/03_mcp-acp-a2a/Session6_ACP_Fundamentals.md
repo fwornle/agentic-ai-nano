@@ -739,9 +739,6 @@ D) To reduce development costs
 
 **Previous:** Session 5 - MCP Integration Patterns
 
-**Optional Deep Dive Modules:**
-
-- 🔬 **[Module A: Advanced ACP Patterns](Session6_ModuleA_Advanced_ACP.md)** - Error handling and resilience patterns
-- 🏭 **[Module B: Production Deployment](Session6_ModuleB_Production.md)** - Scaling ACP networks in production
+**Note:** Advanced ACP patterns and production deployment strategies are covered in Sessions 8 and 9, focusing on advanced workflows and production deployment.
 
 **Next:** Session 7 - Agent-to-Agent Communication (A2A) →
