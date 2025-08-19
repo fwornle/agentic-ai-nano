@@ -1370,65 +1370,75 @@ Remember: Security is not a feature, it's a requirement. Always validate input, 
 
 Test your understanding of secure file system implementation and MCP security best practices with this comprehensive assessment covering sandboxing, validation, and production security considerations.
 
-**1. What is the primary purpose of the sandbox in our file system server?**
-a) To improve performance  
-b) To prevent unauthorized file access  
-c) To compress files  
-d) To cache file contents  
+**1. What is the primary purpose of the sandbox in our file system server?**  
 
-**2. Which method is used to safely resolve file paths and prevent directory traversal attacks?**
-a) `os.path.join()`  
-b) `Path.resolve()`  
-c) `str.replace()`  
-d) `Path.absolute()`  
+A) To improve performance  
+B) To prevent unauthorized file access  
+C) To compress files  
+D) To cache file contents  
 
-**3. How are binary files handled in the read_file tool?**
-a) Rejected with an error  
-b) Converted to hexadecimal  
-c) Encoded as base64  
-d) Read as UTF-8  
+**2. Which method is used to safely resolve file paths and prevent directory traversal attacks?**  
 
-**4. What type of validation is performed on file types for security?**
-a) Extension only  
-b) MIME type only  
-c) Both extension and MIME type  
-d) File size only  
+A) `os.path.join()`  
+B) `Path.resolve()`  
+C) `str.replace()`  
+D) `Path.absolute()`  
 
-**5. Which logging level is used for security violations in the file system server?**
-a) DEBUG  
-b) INFO  
-c) WARNING  
-d) ERROR  
+**3. How are binary files handled in the read_file tool?**  
 
-**6. What happens when a file path attempts to escape the sandbox?**
-a) The server crashes  
-b) A SandboxError is raised  
-c) The path is automatically corrected  
-d) Access is granted with a warning  
+A) Rejected with an error  
+B) Converted to hexadecimal  
+C) Encoded as base64  
+D) Read as UTF-8  
 
-**7. Why does the server implement file size limits?**
-a) To save disk space  
-b) To prevent denial of service attacks  
-c) To improve search performance  
-d) To maintain file quality  
+**4. What type of validation is performed on file types for security?**  
 
-**8. What approach does the server use for file type restrictions?**
-a) Blacklist dangerous extensions  
-b) Whitelist safe extensions  
-c) Allow all extensions  
-d) Check file signatures only  
+A) Extension only  
+B) MIME type only  
+C) Both extension and MIME type  
+D) File size only  
 
-**9. How does the search_files tool prevent performance issues?**
-a) By caching all file content  
-b) By limiting maximum results returned  
-c) By using external search engines  
-d) By compressing search results  
+**5. Which logging level is used for security violations in the file system server?**  
 
-**10. What is the primary benefit of using `aiofiles` for file operations?**
-a) Faster disk access  
-b) Better error handling  
-c) Non-blocking operations  
-d) Automatic file compression  
+A) DEBUG  
+B) INFO  
+C) WARNING  
+D) ERROR  
+
+**6. What happens when a file path attempts to escape the sandbox?**  
+
+A) The server crashes  
+B) A SandboxError is raised  
+C) The path is automatically corrected  
+D) Access is granted with a warning  
+
+**7. Why does the server implement file size limits?**  
+
+A) To save disk space  
+B) To prevent denial of service attacks  
+C) To improve search performance  
+D) To maintain file quality  
+
+**8. What approach does the server use for file type restrictions?**  
+
+A) Blacklist dangerous extensions  
+B) Whitelist safe extensions  
+C) Allow all extensions  
+D) Check file signatures only  
+
+**9. How does the search_files tool prevent performance issues?**  
+
+A) By caching all file content  
+B) By limiting maximum results returned  
+C) By using external search engines  
+D) By compressing search results  
+
+**10. What is the primary benefit of using `aiofiles` for file operations?**  
+
+A) Faster disk access  
+B) Better error handling  
+C) Non-blocking operations  
+D) Automatic file compression  
 
 [**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
 

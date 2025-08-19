@@ -964,132 +964,16 @@ You've mastered LangChain MCP integration and built sophisticated multi-tool AI 
 
 ---
 
-## Practical Exercise
+## Additional Resources
 
-Create a travel planning agent that:
-
-1. Gets weather information for multiple destinations
-2. Searches for travel documents in the file system
-3. Stores trip preferences in the database
-4. Creates a comprehensive travel report
-
-**Hint:** Use the multi-tool agent pattern with enhanced prompting for intelligent tool coordination.
+- [LangChain MCP Adapters GitHub](https://github.com/langchain-ai/langchain-mcp-adapters) - Official integration library
+- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Workflow orchestration guide
+- [Model Context Protocol](https://modelcontextprotocol.io/) - Official MCP specification
+- [ReAct Paper](https://arxiv.org/abs/2210.03629) - Original research on reasoning and acting patterns
 
 ---
 
-## Optional Deep-Dive Modules
-
-**Choose based on your learning goals:**
-
-- **[Module A: Enterprise Agent Patterns](Session3_ModuleA_Enterprise_Patterns.md)** - Production deployment, advanced error handling, and performance optimization
-- **[Module B: Advanced Workflow Orchestration](Session3_ModuleB_Advanced_Workflows.md)** - Parallel processing, conditional branching, and distributed coordination
-
----
-
-## Next Session Preview
-
-In Session 4, we'll focus on **Production MCP Deployment** including Docker containerization, cloud deployment strategies, and monitoring systems.
-
----
-
-## Multiple Choice Test - Session 3 (15 minutes)
-
-Test your understanding of LangChain MCP Integration:
-
-**Question 1:** What is the primary advantage of using LangChain MCP adapters?
-
-A) Better performance  
-B) Automatic tool discovery and integration  
-C) Reduced memory usage  
-D) Simplified configuration  
-
-**Question 2:** In the ReAct pattern, what does the agent do after each Action?
-
-A) Plan the next action  
-B) Wait for user input  
-C) Observe the result  
-D) Generate a final answer  
-
-**Question 3:** What is the purpose of health monitoring in MCPServerManager?
-
-A) Improve performance  
-B) Automatically restart failed servers  
-C) Monitor memory usage  
-D) Log user interactions  
-
-**Question 4:** What advantage does LangGraph provide over simple ReAct agents?
-
-A) Faster execution  
-B) Complex stateful workflows  
-C) Better error handling  
-D) Simpler configuration  
-
-**Question 5:** How does our multi-tool agent decide which tools to use?
-
-A) Random selection  
-B) Pre-configured rules  
-C) LLM reasoning about tool descriptions  
-D) User specification
-
-**Question 6:** What enterprise benefit does MCP provide over traditional API integrations?
-
-A) Faster response times
-B) Standardized protocol for tool integration
-C) Lower development costs
-D) Better user interfaces
-
-**Question 7:** Which companies have adopted MCP in their production systems?
-
-A) Only startups
-B) Block, OpenAI, and Google DeepMind
-C) Government agencies only
-D) Educational institutions
-
-**Question 8:** What authentication standard does MCP use for enterprise security?
-
-A) Basic authentication
-B) API keys only
-C) OAuth 2.0
-D) Custom tokens
-
-**Question 9:** In LangGraph workflows, what tracks data between processing nodes?
-
-A) Global variables
-B) State objects
-C) Database records
-D) Configuration files
-
-**Question 10:** What happens when an MCP server fails in our architecture?
-
-A) The entire system crashes
-B) Other servers are affected
-C) Automatic restart is attempted
-D) Manual intervention is required
-
-[**View Test Solutions →**](Session3_Test_Solutions.md)
-
----
-
-## Navigation
-
-**Previous:** [Session 2 - FileSystem MCP Server](Session2_FileSystem_MCP_Server.md)
-
-**Related Sessions:**
-- [Session 1: Basic MCP Server](Session1_Basic_MCP_Server.md) - Core MCP concepts and architecture
-- [Session 2: FileSystem MCP Server](Session2_FileSystem_MCP_Server.md) - Advanced server implementation patterns
-
-**Code Files:** All examples use files in `src/session3/`
-- `config.py` - Configuration management for multi-server setups
-- `utils/mcp_manager.py` - MCP server management with health monitoring
-- `agents/basic_agent.py` - Single-server ReAct agent implementation
-- `agents/multi_tool_agent.py` - Multi-server intelligent agent
-- `workflows/research_workflow.py` - LangGraph workflow orchestration
-
-**Quick Start:** Run `cd src/session3 && python main.py` to see complete integration
-
----
-
-## 💡 Practical Exercise: Multi-Tool Travel Planning Agent (30 minutes)
+## 💡 Practical Exercise
 
 **Challenge:** Create a travel planning agent that gets weather, searches files, stores preferences, and creates a report.
 
@@ -1123,83 +1007,94 @@ all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_
 - Store new preferences based on user input
 - Generate a structured travel recommendation
 
-This exercise reinforces multi-server coordination, tool selection, and complex workflow management.
+**Hint:** Use the multi-tool agent pattern with enhanced prompting for intelligent tool coordination.
 
 ---
 
-## 📝 Multiple Choice Test - Session 3 (15 minutes)
+## 📝 Multiple Choice Test - Session 3
 
-**Question 1:** What is the primary advantage of using LangChain MCP adapters?
+Test your understanding of LangChain MCP Integration:
+
+**Question 1:** What is the primary advantage of using LangChain MCP adapters?  
+
 A) Better performance  
-B) Automatic tool discovery and integration  
+B) Automatic tool discovery and integration ✅  
 C) Reduced memory usage  
 D) Simplified configuration  
 
-**Question 2:** In the ReAct pattern, what does the agent do after each Action?
+**Question 2:** In the ReAct pattern, what does the agent do after each Action?  
+
 A) Plan the next action  
 B) Wait for user input  
-C) Observe the result  
+C) Observe the result ✅  
 D) Generate a final answer  
 
-**Question 3:** What is the purpose of health monitoring in MCPServerManager?
+**Question 3:** What is the purpose of health monitoring in MCPServerManager?  
+
 A) Improve performance  
-B) Automatically restart failed servers  
+B) Automatically restart failed servers ✅  
 C) Monitor memory usage  
 D) Log user interactions  
 
-**Question 4:** What advantage does LangGraph provide over simple ReAct agents?
+**Question 4:** What advantage does LangGraph provide over simple ReAct agents?  
+
 A) Faster execution  
-B) Complex stateful workflows  
+B) Complex stateful workflows ✅  
 C) Better error handling  
 D) Simpler configuration  
 
-**Question 5:** How does the MCPServerManager handle server failures?
-A) Logs errors and continues  
-B) Automatically restarts failed servers  
-C) Switches to backup servers  
-D) Terminates the application  
+**Question 5:** How does our multi-tool agent decide which tools to use?  
 
-**Question 6:** What is the primary benefit of using multiple MCP servers in one agent?
-A) Reduced latency  
-B) Access to diverse tool capabilities  
-C) Lower memory usage  
-D) Simplified error handling  
+A) Random selection  
+B) Pre-configured rules  
+C) LLM reasoning about tool descriptions ✅  
+D) User specification  
 
-**Question 7:** In LangGraph workflows, what enables parallel tool execution?
-A) Multi-threading  
-B) Async/await patterns  
-C) Conditional node routing  
-D) State-based branching  
+**Question 6:** What enterprise benefit does MCP provide over traditional API integrations?  
 
-**Question 8:** What is the correct way to handle MCP server connection errors?
-A) Retry indefinitely  
-B) Implement exponential backoff with circuit breakers  
-C) Switch to alternative servers immediately  
-D) Log errors and continue  
+A) Faster response times  
+B) Standardized protocol for tool integration ✅  
+C) Lower development costs  
+D) Better user interfaces  
 
-**Question 9:** Which pattern provides the most flexibility for complex multi-step workflows?
-A) Simple ReAct agents  
-B) LangGraph workflows  
-C) Direct tool chaining  
-D) Sequential processing  
+**Question 7:** Which companies have adopted MCP in their production systems?  
 
-**Question 10:** What is essential for production MCP agent deployments?
-A) Single server configurations  
-B) Manual error handling  
-C) Health monitoring and automatic recovery  
-D) Synchronous processing only  
+A) Only startups  
+B) Block, OpenAI, and Google DeepMind ✅  
+C) Government agencies only  
+D) Educational institutions  
+
+**Question 8:** What authentication standard does MCP use for enterprise security?  
+
+A) Basic authentication  
+B) API keys only  
+C) OAuth 2.0 ✅  
+D) Custom tokens  
+
+**Question 9:** In LangGraph workflows, what tracks data between processing nodes?  
+
+A) Global variables  
+B) State objects ✅  
+C) Database records  
+D) Configuration files  
+
+**Question 10:** What happens when an MCP server fails in our architecture?  
+
+A) The entire system crashes  
+B) Other servers are affected  
+C) Automatic restart is attempted ✅  
+D) Manual intervention is required  
 
 [**🗂️ View Test Solutions →**](Session3_Test_Solutions.md)
 
-**Next:** [Session 4 - Production MCP Deployment](Session4_Production_MCP_Deployment.md) →
-
 ---
 
-## Additional Resources
+## 🧭 Navigation
 
-- [LangChain MCP Adapters GitHub](https://github.com/langchain-ai/langchain-mcp-adapters) - Official integration library
-- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Workflow orchestration guide
-- [Model Context Protocol](https://modelcontextprotocol.io/) - Official MCP specification
-- [ReAct Paper](https://arxiv.org/abs/2210.03629) - Original research on reasoning and acting patterns
+**Previous:** [Session 2 - FileSystem MCP Server](Session2_FileSystem_MCP_Server.md)
 
-You've built the foundation for production-ready AI agents that intelligently coordinate multiple tools. Next, we'll deploy these systems at enterprise scale.
+**Optional Deep-Dive Modules:**
+- **[Module A: Enterprise Agent Patterns](Session3_ModuleA_Enterprise_Patterns.md)** - Production deployment, advanced error handling, and performance optimization
+- **[Module B: Advanced Workflow Orchestration](Session3_ModuleB_Advanced_Workflows.md)** - Parallel processing, conditional branching, and distributed coordination
+
+**Next:** [Session 4 - Production MCP Deployment](Session4_Production_MCP_Deployment.md)
