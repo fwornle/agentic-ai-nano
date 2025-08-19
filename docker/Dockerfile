@@ -48,6 +48,7 @@ RUN apt-get update \
         fzf \
         git \
         git-lfs \
+        gh \
         gnupg \
         graphviz \
         htop \
@@ -71,7 +72,7 @@ RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${user} \
 
 # ###############################################################################
 # # Use Codecraft pip mirror
-# COPY pip.conf /etc/xdg/pip/pip.conf
+COPY pip.conf /etc/xdg/pip/pip.conf
 
 # # Install Python dependencies
 # ARG py_reqs="requirements.txt"
