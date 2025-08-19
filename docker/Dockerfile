@@ -2,7 +2,7 @@ FROM common.artifactory.cc.bmwgroup.net/external-docker-io/nvidia/cuda:12.9.1-cu
 
 ###############################################################################
 # Configure container user
-ARG user=developer
+ARG user=ubuntu
 ARG uid=1000
 ARG gid=1000
 
@@ -12,8 +12,8 @@ ARG gid=1000
 # # Use bash for the build
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
-# # Remove Ubuntu default user (clashes with new container user)
-RUN userdel -r ubuntu
+# # # Remove Ubuntu default user (clashes with new container user)
+# RUN userdel -r ubuntu
 
 ###############################################################################
 # Use Codecraft Ubuntu mirror for apt
