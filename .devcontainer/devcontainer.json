@@ -8,7 +8,7 @@
         ]
     },
     // Use a non-root user in the container
-    "containerUser": "developer",
+    "containerUser": "ubuntu",
     // Install the following VS Code extensions by default
     // "customizations": {
     //     "vscode": {
