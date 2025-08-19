@@ -306,6 +306,47 @@ npx @modelcontextprotocol/inspector
 
 ---
 
+## 💡 Practical Exercise: Advanced Weather Tool (20 minutes)
+
+**Challenge:** Create a tool that finds the warmest city from a list.
+
+Now that you've built your basic weather MCP server, let's extend it with a more sophisticated tool that demonstrates proper error handling, data processing, and result aggregation.
+
+### Requirements:
+- Accept a list of city names as input
+- Query weather data for each city using your existing `get_current_weather` tool
+- Return the city with the highest temperature
+- Handle errors gracefully (invalid cities, network issues, etc.)
+- Include comparison metadata in the response
+
+### Implementation Tips:
+- Use proper type hints for function parameters and return values
+- Validate input parameters (empty lists, invalid data types)
+- Implement comprehensive error handling for each weather API call
+- Return structured data with both the result and metadata about the comparison
+- Use logging to track the comparison process
+
+### Expected Function Signature:
+```python
+@mcp.tool()
+def find_warmest_city(cities: List[str]) -> Dict:
+    """
+    Find the warmest city from a list.
+    
+    Args:
+        cities: List of city names to compare
+        
+    Returns:
+        Dictionary with the warmest city and its temperature,
+        or error information if the operation fails
+    """
+    pass  # Your implementation here
+```
+
+Try implementing this tool before looking at the solution! This exercise reinforces the MCP patterns you've learned while building something more complex.
+
+---
+
 ## 📝 Multiple Choice Test - Session 1 (15 minutes)
 
 **Question 1:** What are the three core capabilities that MCP servers can expose?

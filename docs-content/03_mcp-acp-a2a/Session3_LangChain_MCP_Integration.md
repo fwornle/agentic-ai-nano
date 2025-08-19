@@ -1087,6 +1087,110 @@ D) Manual intervention is required
 
 **Quick Start:** Run `cd src/session3 && python main.py` to see complete integration
 
+---
+
+## 💡 Practical Exercise: Multi-Tool Travel Planning Agent (30 minutes)
+
+**Challenge:** Create a travel planning agent that gets weather, searches files, stores preferences, and creates a report.
+
+Build an intelligent travel planning agent that demonstrates the power of coordinating multiple MCP servers. Your agent should:
+
+### Requirements:
+1. **Weather Integration**: Get current weather for destination cities
+2. **File Search**: Search existing travel documents and preferences
+3. **Preference Storage**: Store user travel preferences (budget, activities, etc.)
+4. **Report Generation**: Create a comprehensive travel report
+
+### Implementation Guidelines:
+
+```python
+from langchain_mcp import MCPToolkit
+from langchain.agents import initialize_agent, AgentType
+from langchain.llm import OpenAI
+
+# Your multi-server agent setup
+weather_toolkit = MCPToolkit.from_server("weather-server")
+file_toolkit = MCPToolkit.from_server("filesystem-server") 
+preference_toolkit = MCPToolkit.from_server("preference-server")
+
+# Combine toolkits and create agent
+all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_toolkit.get_tools()
+```
+
+### Expected Functionality:
+- Query weather for multiple destinations
+- Search for previous travel experiences in files
+- Store new preferences based on user input
+- Generate a structured travel recommendation
+
+This exercise reinforces multi-server coordination, tool selection, and complex workflow management.
+
+---
+
+## 📝 Multiple Choice Test - Session 3 (15 minutes)
+
+**Question 1:** What is the primary advantage of using LangChain MCP adapters?
+A) Better performance  
+B) Automatic tool discovery and integration  
+C) Reduced memory usage  
+D) Simplified configuration  
+
+**Question 2:** In the ReAct pattern, what does the agent do after each Action?
+A) Plan the next action  
+B) Wait for user input  
+C) Observe the result  
+D) Generate a final answer  
+
+**Question 3:** What is the purpose of health monitoring in MCPServerManager?
+A) Improve performance  
+B) Automatically restart failed servers  
+C) Monitor memory usage  
+D) Log user interactions  
+
+**Question 4:** What advantage does LangGraph provide over simple ReAct agents?
+A) Faster execution  
+B) Complex stateful workflows  
+C) Better error handling  
+D) Simpler configuration  
+
+**Question 5:** How does the MCPServerManager handle server failures?
+A) Logs errors and continues  
+B) Automatically restarts failed servers  
+C) Switches to backup servers  
+D) Terminates the application  
+
+**Question 6:** What is the primary benefit of using multiple MCP servers in one agent?
+A) Reduced latency  
+B) Access to diverse tool capabilities  
+C) Lower memory usage  
+D) Simplified error handling  
+
+**Question 7:** In LangGraph workflows, what enables parallel tool execution?
+A) Multi-threading  
+B) Async/await patterns  
+C) Conditional node routing  
+D) State-based branching  
+
+**Question 8:** What is the correct way to handle MCP server connection errors?
+A) Retry indefinitely  
+B) Implement exponential backoff with circuit breakers  
+C) Switch to alternative servers immediately  
+D) Log errors and continue  
+
+**Question 9:** Which pattern provides the most flexibility for complex multi-step workflows?
+A) Simple ReAct agents  
+B) LangGraph workflows  
+C) Direct tool chaining  
+D) Sequential processing  
+
+**Question 10:** What is essential for production MCP agent deployments?
+A) Single server configurations  
+B) Manual error handling  
+C) Health monitoring and automatic recovery  
+D) Synchronous processing only  
+
+[**🗂️ View Test Solutions →**](Session3_Test_Solutions.md)
+
 **Next:** [Session 4 - Production MCP Deployment](Session4_Production_MCP_Deployment.md) →
 
 ---

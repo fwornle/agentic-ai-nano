@@ -2377,7 +2377,7 @@ In Session 5, we'll focus on **Security and Authentication** for MCP servers:
 3. **Build load testing scripts** to verify your servers can handle production traffic
 4. **Add automatic failover** between multiple regions for high availability
 
-**💡 Hint:** Check the [`Session4_Production_MCP_Deployment-solution.md`](Session4_Production_MCP_Deployment-solution.md) file for complete implementations and advanced patterns.
+**💡 Hint:** Check the [Session4_Test_Solutions.md](Session4_Test_Solutions.md) file for complete implementations and advanced patterns.
 
 ---
 
@@ -2396,44 +2396,69 @@ Test your knowledge with 10 carefully crafted questions covering:
 
 ---
 
-## 📝 Multiple Choice Test - Session 4
+## 📝 Multiple Choice Test - Session 4 (15 minutes)
 
 Test your understanding of Production MCP Deployment:
 
-**Question 1:** What is the primary benefit of containerizing MCP servers for production deployment?  
+**Question 1:** What is the primary difference between development and production MCP servers?
+A) Production servers are slower than development servers  
+B) Production servers use different protocols  
+C) Production servers only work with specific LLMs  
+D) Production servers require observability, scalability, and reliability  
 
-A) Reduced development time  
-B) Consistent environments across development, staging, and production  
-C) Lower licensing costs  
-D) Simplified code structure  
+**Question 2:** What is the main advantage of containerizing MCP servers with Docker?
+A) Improved performance  
+B) Better security by default  
+C) Automatic scaling capabilities  
+D) Consistent environments across development and production  
 
-**Question 2:** Which Prometheus metric type is best suited for tracking the number of active connections to an MCP server?  
-
-A) Counter  
-B) Histogram  
+**Question 3:** Which Prometheus metric type is best suited for tracking response times?
+A) Histogram  
+B) Counter  
 C) Gauge  
 D) Summary  
 
-**Question 3:** What is the main advantage of using Infrastructure as Code (Terraform) for MCP server deployment?  
+**Question 4:** What information should a comprehensive health check endpoint provide?
+A) Database connectivity and dependent services status  
+B) Only HTTP 200 status  
+C) Server uptime only  
+D) Current server load only  
 
-A) Faster code execution  
-B) Version-controlled, repeatable deployments  
-C) Reduced memory usage  
-D) Better error handling  
+**Question 5:** What metric is most important for auto-scaling MCP servers?
+A) CPU utilization only  
+B) Network bandwidth only  
+C) Request rate combined with response time  
+D) Memory usage only  
 
-**Question 4:** In AWS Lambda deployment, what is the purpose of the Mangum adapter?  
+**Question 6:** What type of caching is most effective for MCP server responses?
+A) File-based caching  
+B) In-memory caching only  
+C) Redis distributed caching with TTL expiration  
+D) Database-level caching only  
 
-A) Database connection pooling  
-B) Converting ASGI applications to Lambda handlers  
-C) Monitoring Lambda functions  
-D) Managing environment variables  
+**Question 7:** When should a circuit breaker transition to the "open" state?
+A) When the server starts up  
+B) When response times are slightly elevated  
+C) When memory usage is high  
+D) When error rates exceed the configured threshold  
 
-**Question 5:** Which component is essential for load balancers to determine if an MCP server is ready to handle requests?  
+**Question 8:** What is the recommended approach for deploying MCP servers through CI/CD?
+A) Direct deployment to production  
+B) Blue-green deployment with health checks  
+C) Rolling deployment without testing  
+D) Manual deployment with downtime  
 
-A) Metrics endpoint  
-B) Health check endpoint  
-C) Authentication endpoint  
-D) Logging endpoint  
+**Question 9:** Which security practice is essential for production MCP server containers?
+A) Running containers as root user for full access  
+B) Using non-root users and resource limits  
+C) Disabling all logging to reduce overhead  
+D) Allowing unlimited resource consumption  
+
+**Question 10:** What is the primary purpose of implementing structured logging in production MCP servers?
+A) Reduce file sizes  
+B) Improve code readability  
+C) Enable efficient searching and monitoring  
+D) Decrease memory usage  
 
 [**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
 

@@ -1465,43 +1465,73 @@ In Session 6, we'll focus on **Advanced MCP Patterns** including:
 3. **Add IP-based rate limiting** in addition to user-based limits  
 4. **Implement certificate-based authentication** for high-security environments  
 
-**💡 Hint:** Check the [`Session5_Secure_MCP_Server-solution.md`](Session5_Secure_MCP_Server-solution.md) file for complete implementations and advanced security patterns.
+**💡 Hint:** Check the [Session5_Test_Solutions.md](Session5_Test_Solutions.md) file for complete implementations and advanced security patterns.
 
 ---
 
-## 📝 Multiple Choice Test - Session 5
+## 📝 Multiple Choice Test - Session 5 (15 minutes)
 
 Test your understanding of Secure MCP Servers:
 
-**Question 1:** What is the primary benefit of using short-lived access tokens (30 minutes) in a JWT authentication system?  
-A) To reduce server computational load  
-B) To limit exposure window if tokens are compromised  
-C) To improve network performance  
-D) To simplify token storage requirements  
+**Question 1:** What security approach does the session recommend for MCP servers?
+A) Client-side security only  
+B) Single-layer authentication only  
+C) Defense-in-depth with multiple security layers  
+D) Network security only  
 
-**Question 2:** In a token blacklisting system, why do we hash tokens before storing them in Redis?  
-A) To improve lookup performance  
-B) To save storage space  
-C) To prevent token theft from database breaches  
-D) To enable faster token validation  
+**Question 2:** What is the minimum recommended length for JWT secret keys?
+A) 16 characters  
+B) 64 characters  
+C) 32 characters  
+D) 24 characters  
 
-**Question 3:** How does the token bucket rate limiting algorithm provide better user experience than simple request counting?  
-A) It only counts failed requests  
-B) It allows bursts of traffic while maintaining average rate limits  
-C) It blocks all traffic after reaching the limit  
-D) It provides unlimited access to premium users  
+**Question 3:** How should refresh tokens be handled for maximum security?
+A) Include them in URL parameters  
+B) Store them in localStorage  
+C) Store them in browser cookies only  
+D) Use Redis with automatic expiration and blacklisting  
 
-**Question 4:** What is the main security advantage of using role-based access control (RBAC) over simple user authentication?  
-A) Faster authentication processing  
-B) Reduced memory usage  
-C) Fine-grained permission management based on user roles  
-D) Simplified database schema  
+**Question 4:** Which rate limiting algorithm provides the best balance of fairness and burst handling?
+A) Fixed window  
+B) Sliding window  
+C) Leaky bucket  
+D) Token bucket  
 
-**Question 5:** Why do we implement "fail secure" behavior in authentication middleware?  
-A) To always allow access when systems are uncertain  
-B) To deny access by default when security checks fail  
-C) To log all authentication attempts  
-D) To improve system performance  
+**Question 5:** What is the advantage of role-based permissions over user-specific permissions?
+A) Higher security  
+B) Better performance  
+C) Easier management and scalability  
+D) Simpler implementation  
+
+**Question 6:** What is the recommended approach for validating MCP tool inputs?
+A) Server-side validation using Pydantic models  
+B) Database constraints only  
+C) Client-side validation only  
+D) No validation needed  
+
+**Question 7:** What TLS version should be the minimum requirement for production MCP servers?
+A) SSL 3.0  
+B) TLS 1.1  
+C) TLS 1.0  
+D) TLS 1.2  
+
+**Question 8:** How should API keys be rotated securely in production?
+A) Rotate only when compromised  
+B) Automatic rotation with overlap periods  
+C) Never rotate keys  
+D) Manual rotation monthly  
+
+**Question 9:** What information is most critical to include in security audit logs?
+A) System performance metrics  
+B) Only successful operations  
+C) Debug information only  
+D) Authentication events and permission changes  
+
+**Question 10:** Which technique is most effective for protecting MCP servers from DDoS attacks?
+A) Blocking all international traffic  
+B) Using only strong authentication  
+C) Implementing multiple rate limiting layers  
+D) Increasing server capacity  
 
 [**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
 
