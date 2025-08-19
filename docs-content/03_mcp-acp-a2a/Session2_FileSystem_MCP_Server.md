@@ -1255,7 +1255,7 @@ Display startup information and launch the server:
 ```python
     print(f"🔒 Secure File System MCP Server")
     print(f"📁 Sandbox directory: {config.base_path}")
-    print(f"✅ Server ready for connections!")
+    print(f"Server ready for connections!")
     
     # Run the server
     mcp.run()
@@ -1276,13 +1276,13 @@ Congratulations! You've built a production-grade file system MCP server with com
 6. **Audit Logging**: Tracks all operations for security monitoring
 
 ### Capabilities Built:
-- ✅ **Directory browsing** with metadata and filtering
-- ✅ **File reading** with support for both text and binary files
-- ✅ **File writing** with safety checks and directory creation
-- ✅ **Content search** across multiple files with context
-- ✅ **File information** including checksums and permissions
-- ✅ **Resources** exposing configuration and statistics
-- ✅ **Prompts** for common file system tasks
+- **Directory browsing** with metadata and filtering
+- **File reading** with support for both text and binary files
+- **File writing** with safety checks and directory creation
+- **Content search** across multiple files with context
+- **File information** including checksums and permissions
+- **Resources** exposing configuration and statistics
+- **Prompts** for common file system tasks
 
 ### Production Considerations:
 - **Performance**: Async I/O for non-blocking operations
