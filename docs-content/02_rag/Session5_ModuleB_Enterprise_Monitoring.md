@@ -1,9 +1,17 @@
 # Session 5 - Module B: Enterprise Monitoring & Alerting
 
-## 🎯 Module Overview
-**Time Investment**: 30 minutes
-**Prerequisites**: Session 5 Core Content
-**Learning Outcome**: Build enterprise-grade monitoring systems with advanced alerting and compliance tracking
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> This is supplementary content for deeper specialization.  
+> **Prerequisites**: Complete Session 5 core content first.
+> **Time Investment**: 30 minutes
+> **Target Audience**: Implementer path students and DevOps engineers
+
+## Module Learning Outcomes
+After completing this module, you will master:
+- Enterprise-grade monitoring systems with real-time alerting capabilities
+- Advanced compliance tracking and audit trail management
+- Performance analytics and automated incident response
+- Integration with enterprise monitoring ecosystems (Prometheus, Grafana, etc.)
 
 ---
 

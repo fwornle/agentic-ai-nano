@@ -1,82 +1,211 @@
-# Session 7: Agent-to-Agent Communication (A2A)
+# Session 7: Agent-to-Agent Communication (A2A) - Enterprise Multi-Agent Orchestration
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 By the end of this session, you will be able to:
-- **Understand** Agent-to-Agent (A2A) communication protocols and patterns
-- **Implement** multi-agent coordination systems with message passing
-- **Create** agent discovery and service registration mechanisms  
-- **Build** collaborative agent teams for complex problem solving
-- **Deploy** distributed agent networks with fault tolerance and scaling
+- **Understand** the Agent2Agent (A2A) protocol standard and Google's multi-agent orchestration framework
+- **Implement** JSON-RPC 2.0 based agent communication with enterprise security
+- **Create** agent discovery systems using standardized Agent Cards
+- **Build** collaborative agent teams with distributed task management
+- **Deploy** scalable multi-agent networks with Microsoft Azure AI Foundry integration
 
-## 📚 Chapter Overview
+## Chapter Overview
 
-Agent-to-Agent (A2A) communication enables multiple AI agents to collaborate, share information, and coordinate actions to solve complex problems that require diverse expertise. This session explores the protocols, patterns, and architectures that enable seamless agent collaboration.
+### What You'll Learn: The A2A Protocol Standard
+
+In this session, we'll implement the Agent2Agent (A2A) protocol - the first open standard designed specifically for AI agent collaboration. A2A enables multiple AI agents to communicate, coordinate, and share information across different platforms and organizational boundaries while maintaining enterprise-grade security and observability.
+
+### Why This Matters: The 2024-2025 Multi-Agent Revolution
+
+Based on industry research, A2A represents a critical advancement in enterprise AI:
+
+- **Industry Consortium**: Google launched A2A with support from 50+ technology partners including Atlassian, Box, Cohere, Intuit, LangChain, MongoDB, PayPal, Salesforce, SAP, ServiceNow, and major consulting firms (Accenture, BCG, McKinsey, PwC, Deloitte)
+- **Enterprise Integration**: Microsoft committed to A2A support in Azure AI Foundry and Copilot Studio for cross-cloud agent collaboration
+- **Protocol Foundation**: Built on JSON-RPC 2.0 and HTTP(S) with enterprise features like streaming, push notifications, and standard authentication
+- **Task Management Standard**: Formal task lifecycle management (submitted, working, completed, failed) with tracking IDs
+- **Distributed Memory**: Standardized protocol for agents to exchange task-specific information and maintain coherent interaction history
+
+### How A2A Stands Out: Enterprise-Grade Agent Orchestration
+
+The Agent2Agent protocol differentiates itself through standardized enterprise features:
+- **Agent Cards**: Machine-readable JSON documents advertising capabilities, endpoints, and authentication requirements
+- **Task Lifecycle Management**: Structured workflows with states (pending, in progress, completed) and message exchanges
+- **Transport Flexibility**: HTTP(S) for standard communication, Server-Sent Events (SSE) for real-time streaming
+- **Security Integration**: Enterprise authentication with parity to OpenAPI's authentication schemes
+- **Cross-Platform Compatibility**: Enables collaboration across clouds, platforms, and organizational boundaries
+
+### Where You'll Apply This: Enterprise Multi-Agent Use Cases
+
+A2A excels in complex enterprise scenarios requiring agent collaboration:
+- **Enterprise Workflow Automation**: Agents coordinating across CRM, ERP, and business intelligence systems
+- **Cross-Organizational Collaboration**: Secure agent communication between different companies and platforms
+- **Distributed Decision Making**: Multiple specialized agents contributing to complex business decisions
+- **Scalable AI Operations**: Agent networks that can grow and adapt with changing business requirements
+- **Compliance and Auditing**: Standardized communication patterns that support regulatory requirements
 
 ![A2A Communication Architecture](images/a2a-communication-architecture.png)
+*Figure 1: A2A enterprise architecture showing Agent Cards for discovery, JSON-RPC 2.0 communication, distributed task management, and cross-platform coordination enabling scalable multi-agent collaboration*
 
-The architecture above demonstrates:
-- **Message Routing**: Intelligent routing of messages between agents
-- **Service Discovery**: Dynamic discovery of available agents and their capabilities
-- **Coordination Patterns**: Orchestration vs choreography for multi-agent workflows
-- **Fault Tolerance**: Resilient communication with failover and recovery mechanisms
+### Learning Path Options
+
+**🎯 Observer Path (30 minutes)**: Understand A2A protocol concepts and enterprise patterns
+- Focus: Quick insights into Agent Cards, task management, and distributed coordination
+- Best for: Getting oriented with enterprise multi-agent architectures
+
+**📝 Participant Path (55 minutes)**: Implement working A2A agents and coordination systems  
+- Focus: Hands-on Agent Card creation, JSON-RPC communication, and task lifecycle management
+- Best for: Building practical enterprise multi-agent systems
+
+**⚙️ Implementer Path (85 minutes)**: Advanced enterprise deployment and cross-platform integration
+- Focus: Azure AI Foundry integration, security patterns, and scalable orchestration
+- Best for: Enterprise multi-agent architecture and platform integration
 
 ---
 
-## Part 1: A2A Protocol Fundamentals (20 minutes)
+## Part 1: A2A Protocol Architecture (Observer: 10 min | Participant: 22 min)
 
-### Understanding A2A Communication
+### The Enterprise Multi-Agent Challenge
 
-Agent-to-Agent communication follows specific protocols that enable:
+As organizations deploy multiple AI agents across different platforms and departments, they face the fundamental challenge of enabling secure, standardized communication between heterogeneous agent systems. A2A solves this through formal protocol standardization.
 
-1. **Agent Discovery**: Finding agents with required capabilities
-2. **Message Exchange**: Structured communication using standardized formats
-3. **Capability Negotiation**: Matching agent capabilities with task requirements
-4. **Coordination Patterns**: Orchestrating complex multi-step workflows
+**Enterprise Requirements Addressed:**
+1. **Cross-Platform Discovery**: Finding and registering agents across different cloud environments
+2. **Standardized Communication**: JSON-RPC 2.0 based message exchange with enterprise security
+3. **Task Coordination**: Formal lifecycle management for complex multi-agent workflows
+4. **Distributed Memory**: Maintaining coherent interaction history across agent networks
+5. **Audit and Compliance**: Traceable communication patterns for regulatory requirements
 
-### Step 1.1: A2A Message Protocol
+### **OBSERVER PATH**: A2A Protocol Standards
 
-Let's define the core A2A message structure:
+**Google's A2A Foundation (2024-2025):**
+The Agent2Agent protocol emerged as the first open standard specifically for AI agent collaboration, addressing the collaboration challenges when agents are developed by different organizations.
+
+**Core Protocol Components:**
+1. **Agent Cards**: JSON documents advertising agent capabilities, endpoints, and requirements
+2. **Task Management**: Formal task lifecycle with states (pending, working, completed, failed)
+3. **Message Exchange**: JSON-RPC 2.0 over HTTP(S) with streaming support via Server-Sent Events
+4. **Authentication**: Enterprise-grade security with OpenAPI authentication scheme parity
+5. **Distributed Coordination**: Cross-platform task coordination with unique tracking identifiers
+
+**Industry Consortium Support:**
+With 50+ technology partners including major enterprise platforms (Salesforce, SAP, ServiceNow) and consulting firms (McKinsey, PwC, Deloitte), A2A provides production-ready enterprise adoption.
+
+### **PARTICIPANT PATH**: Implementing A2A JSON-RPC Protocol
+
+**Step 1: Standard A2A Message Structure**
+
+Implement the JSON-RPC 2.0 based A2A protocol following Google's specification:
 
 ```python
-# a2a/protocol.py
-from typing import Dict, Any, List, Optional, Union
+# a2a/protocol.py - Google A2A Standard Implementation
+from typing import Dict, Any, List, Optional, Union, Literal
 from dataclasses import dataclass, asdict
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import uuid
 import json
+from jsonrpc import JSONRPCRequestManager, dispatcher
 
-class MessageType(Enum):
-    """Types of A2A messages."""
-    REQUEST = "request"           # Request for service
-    RESPONSE = "response"         # Response to request
-    BROADCAST = "broadcast"       # Broadcast to multiple agents
-    DISCOVERY = "discovery"       # Agent discovery request
-    ANNOUNCEMENT = "announcement" # Agent capability announcement
-    HEARTBEAT = "heartbeat"      # Agent health check
-    ERROR = "error"              # Error notification
+class TaskState(Enum):
+    """A2A standard task lifecycle states."""
+    SUBMITTED = "submitted"
+    PENDING = "pending"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    CANCELLED = "cancelled"
 
-class Priority(Enum):
-    """Message priority levels."""
-    LOW = 1
-    NORMAL = 2
-    HIGH = 3
-    URGENT = 4
+class MessagePriority(Enum):
+    """A2A message priority levels for enterprise workflows."""
+    LOW = "low"
+    NORMAL = "normal"
+    HIGH = "high"
+    URGENT = "urgent"
 
 @dataclass
-class A2AMessage:
-    """Standard A2A communication message."""
+class A2ATask:
+    """A2A standard task with formal lifecycle management."""
     
-    # Message identification
-    message_id: str = None
-    correlation_id: str = None  # Links related messages
-    message_type: MessageType = MessageType.REQUEST
+    # Task identification (A2A standard)
+    task_id: str
+    session_id: str = None
+    correlation_id: str = None
     
-    # Routing information
-    sender_id: str = None
-    recipient_id: str = None    # Specific agent or None for broadcast
-    reply_to: str = None        # Where to send response
+    # Task lifecycle
+    state: TaskState = TaskState.SUBMITTED
+    created_at: datetime = None
+    updated_at: datetime = None
+    
+    # Task content
+    task_type: str = None
+    description: str = None
+    requirements: Dict[str, Any] = None
+    context: Dict[str, Any] = None
+    
+    # Agent routing
+    requesting_agent: str = None
+    assigned_agent: str = None
+    
+    # Results and artifacts
+    result: Any = None
+    artifacts: List[Dict[str, Any]] = None
+    error_info: Dict[str, Any] = None
+    
+    def __post_init__(self):
+        if not self.task_id:
+            self.task_id = str(uuid.uuid4())
+        if not self.session_id:
+            self.session_id = str(uuid.uuid4())
+        if not self.created_at:
+            self.created_at = datetime.now(timezone.utc)
+        if not self.artifacts:
+            self.artifacts = []
+```
+
+**A2A Standard Benefits:**
+- **Task Tracking**: Unique identifiers enable distributed task coordination
+- **Lifecycle Management**: Formal states provide clear workflow progression
+- **Artifact Support**: Structured storage for task outputs and intermediate results
+- **Enterprise Integration**: Compatible with existing enterprise task management systems
+
+**Step 2: Agent Card Implementation**
+
+Implement standardized Agent Cards for discovery:
+
+```python
+@dataclass
+class AgentCard:
+    """A2A standard Agent Card for capability advertisement."""
+    
+    # Agent identity
+    agent_id: str
+    name: str
+    version: str
+    description: str
+    
+    # Capabilities and endpoints
+    capabilities: List[str]  # What the agent can do
+    endpoints: Dict[str, str]  # Available API endpoints
+    supported_protocols: List[str] = None  # ["jsonrpc-2.0", "http", "sse"]
+    
+    # Authentication and security
+    authentication: Dict[str, Any] = None  # Auth requirements
+    rate_limits: Dict[str, Any] = None     # Usage limits
+    
+    # Operational metadata
+    availability: str = "24/7"  # Availability schedule
+    response_time_sla: str = "<1s"  # Expected response time
+    max_concurrent_tasks: int = 10
+    
+    # Contact and governance
+    owner: str = None
+    contact_email: str = None
+    documentation_url: str = None
+    
+    def to_json(self) -> str:
+        """Export Agent Card as JSON for A2A discovery."""
+        return json.dumps(asdict(self), indent=2, default=str)
+```
     
     # Message metadata
     timestamp: str = None
