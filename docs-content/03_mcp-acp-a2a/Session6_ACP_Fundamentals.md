@@ -661,40 +661,75 @@ In the next session, you'll learn how these local ACP agents can communicate wit
 
 Test your understanding of ACP Fundamentals:
 
-**Question 1:** What is the primary advantage of ACP's local-first design over cloud-dependent protocols?
+**Question 1:** What is the primary purpose of the Agent Communication Protocol (ACP)?
 
-A) Higher security through encryption  
-B) Better scalability with more agents  
-C) Offline capability and reduced latency  
-D) Lower computational requirements  
+A) To provide internet-dependent agent communication  
+B) To replace REST APIs entirely  
+C) To facilitate local-first agent coordination with minimal overhead  
+D) To enable cloud-based agent coordination  
 
-**Question 2:** Which four standard REST endpoints must every ACP agent expose?
+**Question 2:** What is the main advantage of ACP over traditional cloud-dependent agent protocols?
 
-A) /start, /stop, /status, /logs  
-B) /metadata, /communicate, /discover, /status  
-C) /register, /unregister, /health, /metrics  
-D) /init, /execute, /query, /shutdown  
+A) Higher performance  
+B) Easier implementation  
+C) Better security  
+D) Offline capability and low latency  
 
-**Question 3:** In ACP, how do agents discover capabilities of other agents?
+**Question 3:** What information must an ACP agent capability declaration include?
 
-A) Through a centralized directory service  
-B) By scanning network ports automatically  
-C) Using capability-based discovery via the /discover endpoint  
-D) Through configuration files shared between agents  
+A) Only the agent ID  
+B) Only the capability name  
+C) Just the input parameters  
+D) Name, description, input schema, and output schema  
 
-**Question 4:** What is the role of a coordinator agent in ACP workflows?
+**Question 4:** How do ACP agents discover each other's capabilities?
 
-A) To execute all computational tasks directly  
-B) To orchestrate multiple agents without doing the work itself  
-C) To serve as a backup for failed agents  
-D) To monitor network performance and security  
+A) Via embedded metadata and local REST endpoints  
+B) Through a centralized cloud registry  
+C) Through manual configuration files  
+D) Using UDP broadcasts only  
 
-**Question 5:** In the ACP message structure, what does the "capability" field specify?
+**Question 5:** What communication protocol does ACP use for agent interactions?
 
-A) The agent's computational capacity  
-B) The specific function or service being requested  
-C) The maximum message size allowed  
-D) The authentication level required  
+A) WebSocket  
+B) gRPC  
+C) Custom binary protocol  
+D) Standard HTTP/REST  
+
+**Question 6:** What role does the coordinator agent play in ACP architectures?
+
+A) Provides security authentication  
+B) Orchestrates multi-agent workflows and manages task distribution  
+C) Stores all data permanently  
+D) Acts as a backup for other agents  
+
+**Question 7:** Why are specialized agents (like data agents and text agents) beneficial in ACP systems?
+
+A) They cost less to deploy  
+B) They require less memory  
+C) They provide focused expertise and better task delegation  
+D) They are faster than general-purpose agents  
+
+**Question 8:** How do agents register their services in an ACP system?
+
+A) Through manual configuration  
+B) Using external service registries only  
+C) Through database entries  
+D) By exposing standardized metadata endpoints  
+
+**Question 9:** What is the purpose of the local registry in ACP systems?
+
+A) To store all agent data  
+B) To provide internet connectivity  
+C) To facilitate agent discovery and capability lookup  
+D) To handle authentication  
+
+**Question 10:** Why is ACP designed to be framework-agnostic?
+
+A) To improve performance  
+B) To simplify testing  
+C) To enable integration with any agent implementation  
+D) To reduce development costs  
 
 [**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
 
