@@ -1,4 +1,0 @@
-deb https://common.artifactory.cc.bmwgroup.net/artifactory/external-ubuntu-com-archive-remote noble main restricted universe
-deb https://common.artifactory.cc.bmwgroup.net/artifactory/external-ubuntu-com-archive-remote noble-updates main restricted universe
-deb https://common.artifactory.cc.bmwgroup.net/artifactory/external-ubuntu-com-archive-remote noble-backports main restricted universe
-deb https://common.artifactory.cc.bmwgroup.net/artifactory/external-ubuntu-com-security-remote noble-security main restricted universe
