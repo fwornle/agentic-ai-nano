@@ -1,66 +1,73 @@
 FROM common.artifactory.cc.bmwgroup.net/external-docker-io/nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04
 
-# ###############################################################################
-# # Configure container user
-# ARG user=developer
-# ARG uid=1000
-# ARG gid=1000
+###############################################################################
+# Configure container user
+ARG user=developer
+ARG uid=1000
+ARG gid=1000
 
 # # Enable non-interactive install for package installation
 # ENV DEBIAN_FRONTEND=noninteractive
 
 # # Use bash for the build
-# SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
+SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
 # # Remove Ubuntu default user (clashes with new container user)
-# RUN userdel -r ubuntu
+RUN userdel -r ubuntu
 
-# ###############################################################################
-# # Use Codecraft Ubuntu mirror for apt
-# RUN rm -f /etc/apt/sources.list.d/ubuntu.sources
-# COPY cc-ubuntu.list /etc/apt/sources.list.d/
+###############################################################################
+# Use Codecraft Ubuntu mirror for apt
+RUN rm -f /etc/apt/sources.list.d/ubuntu.sources
+COPY cc-ubuntu.list /etc/apt/sources.list.d/
 
-# # Install CA certificates (unverified, as there are no certificates yet)
-# RUN apt-get -o "Acquire::https::Verify-Peer=false" update \
-#     && apt-get -o "Acquire::https::Verify-Peer=false" install -y \
-#         ca-certificates \
-#     && rm -rf /var/lib/apt/lists/*
+# Install CA certificates (unverified, as there are no certificates yet)
+RUN apt-get -o "Acquire::https::Verify-Peer=false" update \
+    && apt-get -o "Acquire::https::Verify-Peer=false" install -y \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-# # Install updates
-# RUN apt update \
-#     && apt upgrade -y
+# Install updates
+RUN apt update \
+    && apt upgrade -y
 
-# # Setup timezone
-# ENV TZ="Europe/Berlin"
-# RUN apt update \
-#     && apt install -y \
-#         tzdata
+# Setup timezone
+ENV TZ="Europe/Berlin"
+RUN apt update \
+    && apt install -y \
+        tzdata
 
-# ###############################################################################
-# # Install common tools
-# RUN apt update \
-#     && apt install -y \
-#         bash-completion \
-#         build-essential \
-#         ca-certificates \
-#         cmake \
-#         curl \
-#         git \
-#         git-lfs \
-#         gnupg \
-#         graphviz \
-#         htop \
-#         jq \
-#         moreutils \
-#         python3 \
-#         python3-pip \
-#         python3-venv \
-#         rsync \
-#         sudo \
-#         unzip \
-#         vim \
-#         wget \
-#         zip
+###############################################################################
+# Install common tools
+RUN apt-get update \
+    && apt-get install -y \
+        bash-completion \
+        build-essential \
+        ca-certificates \
+        cmake \
+        curl \
+        fzf \
+        git \
+        git-lfs \
+        gnupg \
+        graphviz \
+        htop \
+        jq \
+        moreutils \
+        nvidia-utils-550 \
+        python3 \
+        python3-pip \
+        python3-venv \
+        rsync \
+        ripgrep \
+        sudo \
+        unzip \
+        vim \
+        wget \
+        zip
+
+# Add user to sudoers with NOPASSWD
+RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${user} \
+    && chmod 0440 /etc/sudoers.d/${user}
 
 # ###############################################################################
 # # Use Codecraft pip mirror
@@ -109,21 +116,24 @@ FROM common.artifactory.cc.bmwgroup.net/external-docker-io/nvidia/cuda:12.9.1-cu
 # RUN jq ".proxies.\"no-proxy\" = \"$no_proxy\"" /etc/docker/daemon.json | \
 #     sponge /etc/docker/daemon.json
 
-# ###############################################################################
-# # Create non-root user
-# RUN groupadd --gid ${gid} ${user} \
-#     && useradd --uid ${uid} --gid ${gid} -m ${user}
+###############################################################################
+# Create non-root user
+RUN groupadd --gid ${gid} ${user} \
+    && useradd --uid ${uid} --gid ${gid} -m ${user}
 
-# # Add user to sudoers
-# RUN echo "${user} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${user} \
-#     && chmod 0440 /etc/sudoers.d/${user}
+# Change default shell to bash for the user
+RUN chsh -s /bin/bash ${user}
 
-# # Add user to docker
-# # RUN usermod -aG docker ${user}
+# Add user to sudoers
+RUN echo "${user} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${user} \
+    && chmod 0440 /etc/sudoers.d/${user}
 
-# # Switch to user (-> running as non-root now)
-# USER ${user}
-# ENV HOME="/home/${user}"
+# Add user to docker
+# RUN usermod -aG docker ${user}
+
+# Switch to user (-> running as non-root now)
+USER ${user}
+ENV HOME="/home/${user}"
 
 # # Setup Docker client config
 # COPY --chown=${uid}:${gid} docker/config.json ${HOME}/.docker/config.json
@@ -137,10 +147,10 @@ FROM common.artifactory.cc.bmwgroup.net/external-docker-io/nvidia/cuda:12.9.1-cu
 #     ${HOME}/.docker/config.json | \
 #     sponge ${HOME}/.docker/config.json
 
-# # Create working directory for the user
-# ENV WORKDIR="${HOME}/workdir"
-# RUN mkdir -p ${WORKDIR}
+# Create working directory for the user
+ENV WORKDIR="${HOME}/workdir"
+RUN mkdir -p ${WORKDIR}
 
 # # Set bash as entrypoint for the container
-# ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]
 

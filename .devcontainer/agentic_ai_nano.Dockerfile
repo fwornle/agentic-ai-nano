@@ -11,7 +11,7 @@ FROM 799634405166.dkr.ecr.eu-central-1.amazonaws.com/coder/agentic-ai-nano:lates
 # # Enable non-interactive install for package installation
 # ENV DEBIAN_FRONTEND=noninteractive
 
-# # Use bash for the build
+# Use bash for the build
 # SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
 # # Remove Ubuntu default user (clashes with new container user)
