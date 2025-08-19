@@ -3,7 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: Security Architecture
-**What security approach does the session recommend for MCP servers?**
+**What security approach does the session recommend for MCP servers?**  
 
 A) Client-side security only  
 B) Single-layer authentication only  
@@ -16,7 +16,7 @@ D) Network security only
 ---
 
 ### Question 2: JWT Token Security
-**What is the minimum recommended length for JWT secret keys?**
+**What is the minimum recommended length for JWT secret keys?**  
 
 A) 16 characters  
 B) 64 characters  
@@ -29,7 +29,7 @@ D) 24 characters
 ---
 
 ### Question 3: Token Management
-**How should refresh tokens be handled for maximum security?**
+**How should refresh tokens be handled for maximum security?**  
 
 A) Include them in URL parameters  
 B) Store them in localStorage  
@@ -42,7 +42,7 @@ D) Use Redis with automatic expiration and blacklisting ✅
 ---
 
 ### Question 4: Rate Limiting Strategy
-**Which rate limiting algorithm provides the best balance of fairness and burst handling?**
+**Which rate limiting algorithm provides the best balance of fairness and burst handling?**  
 
 A) Fixed window  
 B) Sliding window  
@@ -55,7 +55,7 @@ D) Token bucket ✅
 ---
 
 ### Question 5: Role-Based Access Control
-**What is the advantage of role-based permissions over user-specific permissions?**
+**What is the advantage of role-based permissions over user-specific permissions?**  
 
 A) Higher security  
 B) Better performance  
@@ -68,7 +68,7 @@ D) Simpler implementation
 ---
 
 ### Question 6: Input Validation
-**What is the recommended approach for validating MCP tool inputs?**
+**What is the recommended approach for validating MCP tool inputs?**  
 
 A) Server-side validation using Pydantic models ✅  
 B) Database constraints only  
@@ -81,7 +81,7 @@ D) No validation needed
 ---
 
 ### Question 7: TLS Configuration
-**What TLS version should be the minimum requirement for production MCP servers?**
+**What TLS version should be the minimum requirement for production MCP servers?**  
 
 A) SSL 3.0  
 B) TLS 1.1  
@@ -94,7 +94,7 @@ D) TLS 1.2 ✅
 ---
 
 ### Question 8: API Key Management
-**How should API keys be rotated securely in production?**
+**How should API keys be rotated securely in production?**  
 
 A) Rotate only when compromised  
 B) Automatic rotation with overlap periods ✅  
@@ -107,7 +107,7 @@ D) Manual rotation monthly
 ---
 
 ### Question 9: Audit Logging
-**What information is most critical to include in security audit logs?**
+**What information is most critical to include in security audit logs?**  
 
 A) System performance metrics  
 B) Only successful operations  
@@ -120,7 +120,7 @@ D) Authentication events and permission changes ✅
 ---
 
 ### Question 10: DDoS Protection
-**Which technique is most effective for protecting MCP servers from DDoS attacks?**
+**Which technique is most effective for protecting MCP servers from DDoS attacks?**  
 
 A) Blocking all international traffic  
 B) Using only strong authentication  

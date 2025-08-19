@@ -3,7 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: Workflow Patterns
-**Which workflow pattern enables multiple tasks to execute simultaneously?**
+**Which workflow pattern enables multiple tasks to execute simultaneously?**  
 
 A) Loop workflows  
 B) Parallel workflows ✅  
@@ -16,7 +16,7 @@ D) Conditional workflows
 ---
 
 ### Question 2: Conditional Logic
-**What triggers dynamic branching in conditional workflows?**
+**What triggers dynamic branching in conditional workflows?**  
 
 A) Random selection  
 B) Agent availability  
@@ -29,7 +29,7 @@ D) Data values and context evaluation ✅
 ---
 
 ### Question 3: Fault Recovery
-**What is the most comprehensive approach to workflow fault recovery?**
+**What is the most comprehensive approach to workflow fault recovery?**  
 
 A) Restarting the entire workflow  
 B) Simple retry mechanisms  
@@ -42,7 +42,7 @@ D) Rollback and retry with compensation actions ✅
 ---
 
 ### Question 4: Adaptive Optimization
-**How do adaptive workflows improve their performance over time?**
+**How do adaptive workflows improve their performance over time?**  
 
 A) By running more frequently  
 B) By reducing the number of steps  
@@ -55,7 +55,7 @@ D) By using faster hardware
 ---
 
 ### Question 5: Execution Context
-**What information does the workflow execution context typically maintain?**
+**What information does the workflow execution context typically maintain?**  
 
 A) Only the current step  
 B) Just error messages  
@@ -68,7 +68,7 @@ D) Only timing information
 ---
 
 ### Question 6: Step Dependencies
-**How are dependencies between workflow steps managed?**
+**How are dependencies between workflow steps managed?**  
 
 A) Using dependency graphs and prerequisite checking ✅  
 B) By alphabetical ordering  
@@ -81,7 +81,7 @@ D) Through random execution
 ---
 
 ### Question 7: Resource Management
-**What is the purpose of resource allocation in advanced workflows?**
+**What is the purpose of resource allocation in advanced workflows?**  
 
 A) To reduce costs  
 B) To improve security  
@@ -94,7 +94,7 @@ D) To prevent resource contention and ensure optimal performance ✅
 ---
 
 ### Question 8: Workflow Monitoring
-**What metrics are most important for workflow observability?**
+**What metrics are most important for workflow observability?**  
 
 A) Only network traffic  
 B) Only execution time  
@@ -107,7 +107,7 @@ D) Just memory usage
 ---
 
 ### Question 9: Loop Termination
-**What mechanisms prevent infinite loops in workflow systems?**
+**What mechanisms prevent infinite loops in workflow systems?**  
 
 A) Time-based termination only  
 B) Manual intervention  
@@ -120,7 +120,7 @@ D) Random termination
 ---
 
 ### Question 10: Hybrid Workflows
-**What advantage do hybrid workflows provide over simple workflow patterns?**
+**What advantage do hybrid workflows provide over simple workflow patterns?**  
 
 A) Lower resource usage  
 B) Faster execution  

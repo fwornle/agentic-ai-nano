@@ -2468,9 +2468,7 @@ D) Decrease memory usage
 
 **Previous:** Session 3 - Agent Communication Patterns
 
-**Optional Deep Dive Modules:**
-- 🔬 **[Module A: Advanced Container Orchestration](Session4_ModuleA_Container_Orchestration.md)** - Kubernetes deployment and service mesh patterns
-- 🏭 **[Module B: Multi-Cloud Deployment Strategies](Session4_ModuleB_Multi_Cloud.md)** - Cross-cloud redundancy and failover
+**Note:** Advanced container orchestration and multi-cloud strategies are covered within this session and expanded upon in Session 9 (Production Agent Deployment).
 
 
 **Next:** Session 5 - Security and Authentication →

@@ -3,7 +3,7 @@
 ## 📝 Multiple Choice Test - Answer Key
 
 ### Question 1: MCP Purpose
-**What is the primary purpose of the Model Context Protocol (MCP)?**
+**What is the primary purpose of the Model Context Protocol (MCP)?**  
 
 A) To enable direct communication between AI agents  
 B) To manage agent discovery across organizations  
@@ -16,7 +16,7 @@ D) To provide a framework for building AI agents
 ---
 
 ### Question 2: Local-First Protocol
-**Which protocol is designed for local-first agent coordination with minimal overhead?**
+**Which protocol is designed for local-first agent coordination with minimal overhead?**  
 
 A) A2A (Agent-to-Agent)  
 B) MCP (Model Context Protocol)  
@@ -29,7 +29,7 @@ D) ACP (Agent Communication Protocol) ✅
 ---
 
 ### Question 3: A2A Discovery
-**How do agents discover each other in the A2A protocol?**
+**How do agents discover each other in the A2A protocol?**  
 
 A) Through manual configuration files  
 B) Using centralized agent registries only  
@@ -42,7 +42,7 @@ D) Through direct IP address connections
 ---
 
 ### Question 4: MCP Inspector
-**What is the primary function of MCP Inspector?**
+**What is the primary function of MCP Inspector?**  
 
 A) To deploy MCP servers to production  
 B) To test, debug, and validate MCP servers ✅  
@@ -55,7 +55,7 @@ D) To monitor agent-to-agent communication
 ---
 
 ### Question 5: Protocol Selection
-**When should you use A2A protocol instead of MCP?**
+**When should you use A2A protocol instead of MCP?**  
 
 A) When you need to access local databases  
 B) When you need agents to communicate across organizational boundaries ✅  
@@ -68,7 +68,7 @@ D) When you need to manage prompt templates
 ---
 
 ### Question 6: MCP Transport
-**What transport mechanism does MCP typically use for communication?**
+**What transport mechanism does MCP typically use for communication?**  
 
 A) HTTP REST only  
 B) WebSocket only  
@@ -81,7 +81,7 @@ D) gRPC only
 ---
 
 ### Question 7: ACP Offline Discovery
-**In ACP, how do agents discover each other in offline environments?**
+**In ACP, how do agents discover each other in offline environments?**  
 
 A) Through cloud-based registries only  
 B) Using local runtime discovery and embedded metadata ✅  
@@ -94,7 +94,7 @@ D) Through manual configuration files
 ---
 
 ### Question 8: A2A Scope
-**Which of the following is NOT a key problem that A2A solves?**
+**Which of the following is NOT a key problem that A2A solves?**  
 
 A) Model training optimization ✅  
 B) Cross-organization collaboration  
@@ -107,7 +107,7 @@ D) Communication standards
 ---
 
 ### Question 9: Learning Path
-**What is the recommended development path for mastering these protocols?**
+**What is the recommended development path for mastering these protocols?**  
 
 A) Learn all three simultaneously  
 B) Start with ACP, then MCP, then A2A  
@@ -120,7 +120,7 @@ D) Start with A2A, then ACP, then MCP
 ---
 
 ### Question 10: Industry Adoption
-**Which major companies adopted MCP in 2024-2025?**
+**Which major companies adopted MCP in 2024-2025?**  
 
 A) Only Anthropic and small startups  
 B) Microsoft, Google, OpenAI, and major tech leaders ✅  

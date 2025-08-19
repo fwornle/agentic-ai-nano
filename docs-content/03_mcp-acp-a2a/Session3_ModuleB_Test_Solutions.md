@@ -3,7 +3,7 @@
 ## Module Assessment Solutions
 
 ### Question 1: Parallel Processing
-**What is the primary advantage of parallel processing in workflows?**
+**What is the primary advantage of parallel processing in workflows?**  
 
 A) Simplified code structure
 B) Reduced resource usage
@@ -15,7 +15,7 @@ D) Better error handling
 ---
 
 ### Question 2: Conditional Workflow Routing
-**In conditional workflow routing, what determines the execution path?**
+**In conditional workflow routing, what determines the execution path?**  
 
 A) Random selection
 B) Runtime conditions and content analysis ✅
@@ -27,7 +27,7 @@ D) System load
 ---
 
 ### Question 3: Compensation Actions
-**What is the purpose of compensation actions in workflow patterns?**
+**What is the purpose of compensation actions in workflow patterns?**  
 
 A) Improve performance
 B) Undo completed steps when later steps fail ✅
@@ -39,7 +39,7 @@ D) Simplify configuration
 ---
 
 ### Question 4: Parallel Workflow Failures
-**How does the parallel workflow handle partial failures?**
+**How does the parallel workflow handle partial failures?**  
 
 A) Stops all processing immediately
 B) Continues with successful results and reports failures ✅
@@ -51,7 +51,7 @@ D) Ignores failed operations
 ---
 
 ### Question 5: Escalation Triggers
-**What triggers escalation in the conditional workflow router?**
+**What triggers escalation in the conditional workflow router?**  
 
 A) High system load
 B) Customer tier, priority level, or escalation keywords ✅
@@ -63,7 +63,7 @@ D) Random intervals
 ---
 
 ### Question 6: Compensation Execution Order
-**In the compensation pattern, in what order are compensation actions executed?**
+**In the compensation pattern, in what order are compensation actions executed?**  
 
 A) Random order
 B) Same order as original execution
@@ -75,7 +75,7 @@ D) Priority-based order
 ---
 
 ### Question 7: Checkpoint Data Benefits
-**What is the benefit of checkpoint data in advanced workflows?**
+**What is the benefit of checkpoint data in advanced workflows?**  
 
 A) Performance optimization
 B) State recovery and resumption after failures ✅

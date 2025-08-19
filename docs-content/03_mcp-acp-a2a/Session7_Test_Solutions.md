@@ -3,7 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: A2A Communication Purpose
-**What is the primary purpose of Agent-to-Agent (A2A) communication?**
+**What is the primary purpose of Agent-to-Agent (A2A) communication?**  
 
 A) To reduce computational costs  
 B) To improve individual agent performance  
@@ -16,7 +16,7 @@ D) To replace human operators
 ---
 
 ### Question 2: Message Types
-**Which message type is used for finding agents with specific capabilities?**
+**Which message type is used for finding agents with specific capabilities?**  
 
 A) RESPONSE  
 B) HEARTBEAT  
@@ -29,7 +29,7 @@ D) REQUEST
 ---
 
 ### Question 3: Message Routing
-**What information is essential for proper A2A message routing?**
+**What information is essential for proper A2A message routing?**  
 
 A) Just the timestamp  
 B) Only the priority level  
@@ -42,7 +42,7 @@ D) Sender ID, recipient ID, and message type ✅
 ---
 
 ### Question 4: Coordination Patterns
-**What is the difference between orchestration and choreography in multi-agent systems?**
+**What is the difference between orchestration and choreography in multi-agent systems?**  
 
 A) Orchestration uses centralized control, choreography uses distributed coordination ✅  
 B) Choreography requires more memory  
@@ -55,7 +55,7 @@ D) Orchestration is faster than choreography
 ---
 
 ### Question 5: Service Discovery
-**How do agents announce their capabilities in an A2A system?**
+**How do agents announce their capabilities in an A2A system?**  
 
 A) Using ANNOUNCEMENT messages with capability metadata ✅  
 B) Through manual configuration  
@@ -68,7 +68,7 @@ D) Through file-based configurations
 ---
 
 ### Question 6: Fault Tolerance
-**What mechanism ensures A2A communication reliability when agents become unavailable?**
+**What mechanism ensures A2A communication reliability when agents become unavailable?**  
 
 A) Faster processing  
 B) Increased memory allocation  
@@ -81,7 +81,7 @@ D) Multiple network interfaces
 ---
 
 ### Question 7: Capability Negotiation
-**What is the purpose of capability negotiation in A2A systems?**
+**What is the purpose of capability negotiation in A2A systems?**  
 
 A) To improve performance  
 B) To match agent capabilities with task requirements ✅  
@@ -94,7 +94,7 @@ D) To reduce costs
 ---
 
 ### Question 8: Message Priority
-**When should URGENT priority be used for A2A messages?**
+**When should URGENT priority be used for A2A messages?**  
 
 A) For time-critical operations requiring immediate attention ✅  
 B) For data backup operations  
@@ -107,7 +107,7 @@ D) For all important messages
 ---
 
 ### Question 9: Correlation ID
-**What is the purpose of correlation IDs in A2A messaging?**
+**What is the purpose of correlation IDs in A2A messaging?**  
 
 A) To validate message integrity  
 B) To encrypt messages  
@@ -120,7 +120,7 @@ D) To link related messages in multi-step workflows ✅
 ---
 
 ### Question 10: Distributed Teams
-**What is a key benefit of collaborative agent teams in A2A systems?**
+**What is a key benefit of collaborative agent teams in A2A systems?**  
 
 A) Diverse expertise and parallel problem-solving capabilities ✅  
 B) Lower computational requirements  

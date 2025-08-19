@@ -3,7 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: ACP Purpose
-**What is the primary purpose of the Agent Communication Protocol (ACP)?**
+**What is the primary purpose of the Agent Communication Protocol (ACP)?**  
 
 A) To provide internet-dependent agent communication  
 B) To replace REST APIs entirely  
@@ -16,7 +16,7 @@ D) To enable cloud-based agent coordination
 ---
 
 ### Question 2: ACP Advantage
-**What is the main advantage of ACP over traditional cloud-dependent agent protocols?**
+**What is the main advantage of ACP over traditional cloud-dependent agent protocols?**  
 
 A) Higher performance  
 B) Easier implementation  
@@ -29,7 +29,7 @@ D) Offline capability and low latency ✅
 ---
 
 ### Question 3: Agent Capabilities
-**What information must an ACP agent capability declaration include?**
+**What information must an ACP agent capability declaration include?**  
 
 A) Only the agent ID  
 B) Only the capability name  
@@ -42,7 +42,7 @@ D) Name, description, input schema, and output schema ✅
 ---
 
 ### Question 4: Agent Discovery
-**How do ACP agents discover each other's capabilities?**
+**How do ACP agents discover each other's capabilities?**  
 
 A) Via embedded metadata and local REST endpoints ✅  
 B) Through a centralized cloud registry  
@@ -55,7 +55,7 @@ D) Using UDP broadcasts only
 ---
 
 ### Question 5: Communication Protocol
-**What communication protocol does ACP use for agent interactions?**
+**What communication protocol does ACP use for agent interactions?**  
 
 A) WebSocket  
 B) gRPC  
@@ -68,7 +68,7 @@ D) Standard HTTP/REST ✅
 ---
 
 ### Question 6: Coordinator Pattern
-**What role does the coordinator agent play in ACP architectures?**
+**What role does the coordinator agent play in ACP architectures?**  
 
 A) Provides security authentication  
 B) Orchestrates multi-agent workflows and manages task distribution ✅  
@@ -81,7 +81,7 @@ D) Acts as a backup for other agents
 ---
 
 ### Question 7: Agent Specialization
-**Why are specialized agents (like data agents and text agents) beneficial in ACP systems?**
+**Why are specialized agents (like data agents and text agents) beneficial in ACP systems?**  
 
 A) They cost less to deploy  
 B) They require less memory  
@@ -94,7 +94,7 @@ D) They are faster than general-purpose agents
 ---
 
 ### Question 8: Service Registration
-**How do agents register their services in an ACP system?**
+**How do agents register their services in an ACP system?**  
 
 A) Through manual configuration  
 B) Using external service registries only  
@@ -107,7 +107,7 @@ D) By exposing standardized metadata endpoints ✅
 ---
 
 ### Question 9: Local Registry
-**What is the purpose of the local registry in ACP systems?**
+**What is the purpose of the local registry in ACP systems?**  
 
 A) To store all agent data  
 B) To provide internet connectivity  
@@ -120,7 +120,7 @@ D) To handle authentication
 ---
 
 ### Question 10: Framework Agnostic Design
-**Why is ACP designed to be framework-agnostic?**
+**Why is ACP designed to be framework-agnostic?**  
 
 A) To improve performance  
 B) To simplify testing  

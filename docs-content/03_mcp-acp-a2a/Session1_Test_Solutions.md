@@ -3,7 +3,7 @@
 ## 📝 Multiple Choice Test - Answer Key
 
 ### Question 1: MCP Capabilities
-**What are the three core capabilities that MCP servers can expose?**
+**What are the three core capabilities that MCP servers can expose?**  
 
 A) APIs, Databases, and Services  
 B) Functions, Classes, and Modules  
@@ -16,7 +16,7 @@ D) Inputs, Outputs, and Errors
 ---
 
 ### Question 2: Tool Decorator
-**Which decorator is used to expose a function as an MCP tool?**
+**Which decorator is used to expose a function as an MCP tool?**  
 
 A) `@tool()`  
 B) `@mcp.tool()` ✅  
@@ -29,7 +29,7 @@ D) `@expose_tool()`
 ---
 
 ### Question 3: MCP Inspector Purpose
-**What is the primary purpose of MCP Inspector?**
+**What is the primary purpose of MCP Inspector?**  
 
 A) To deploy MCP servers to production  
 B) To test, debug, and validate MCP servers ✅  
@@ -42,7 +42,7 @@ D) To manage server configurations
 ---
 
 ### Question 4: Transport Mechanism
-**Which transport mechanism is commonly used for local MCP server testing?**
+**Which transport mechanism is commonly used for local MCP server testing?**  
 
 A) HTTP  
 B) WebSocket  
@@ -55,7 +55,7 @@ D) TCP
 ---
 
 ### Question 5: Type Hints Importance
-**Why are type hints important in MCP server functions?**
+**Why are type hints important in MCP server functions?**  
 
 A) They improve code readability only  
 B) They enable automatic schema generation for AI clients ✅  
@@ -68,7 +68,7 @@ D) They reduce memory usage
 ---
 
 ### Question 6: Error Handling
-**What should MCP tools return when encountering invalid input?**
+**What should MCP tools return when encountering invalid input?**  
 
 A) Raise an exception  
 B) Return None  
@@ -81,7 +81,7 @@ D) Log the error silently
 ---
 
 ### Question 7: Resources vs Tools
-**How do MCP resources differ from tools?**
+**How do MCP resources differ from tools?**  
 
 A) Resources are executable functions, tools are data sources  
 B) Resources provide read-only data access, tools are executable functions ✅  
@@ -94,7 +94,7 @@ D) Resources require authentication, tools do not
 ---
 
 ### Question 8: MCP Inspector Command
-**What command is used to launch MCP Inspector?**
+**What command is used to launch MCP Inspector?**  
 
 A) `mcp-inspector`  
 B) `npm start inspector`  
@@ -107,7 +107,7 @@ D) `python -m mcp.inspector`
 ---
 
 ### Question 9: Industry Adoption
-**Which company reported 60% faster AI integration development using MCP?**
+**Which company reported 60% faster AI integration development using MCP?**  
 
 A) Microsoft  
 B) Google  
@@ -120,7 +120,7 @@ D) OpenAI
 ---
 
 ### Question 10: MCP Advantages
-**What is the main advantage of MCP over custom API integrations?**
+**What is the main advantage of MCP over custom API integrations?**  
 
 A) Better performance  
 B) Standardized protocol with automatic schema validation ✅  

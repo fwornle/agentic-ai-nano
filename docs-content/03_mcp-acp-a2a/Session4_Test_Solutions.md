@@ -3,7 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: Production Requirements
-**What is the primary difference between development and production MCP servers?**
+**What is the primary difference between development and production MCP servers?**  
 
 A) Production servers are slower than development servers  
 B) Production servers use different protocols  
@@ -16,7 +16,7 @@ D) Production servers require observability, scalability, and reliability ✅
 ---
 
 ### Question 2: Containerization Benefits
-**What is the main advantage of containerizing MCP servers with Docker?**
+**What is the main advantage of containerizing MCP servers with Docker?**  
 
 A) Improved performance  
 B) Better security by default  
@@ -29,7 +29,7 @@ D) Consistent environments across development and production ✅
 ---
 
 ### Question 3: Prometheus Metrics
-**Which Prometheus metric type is best suited for tracking response times?**
+**Which Prometheus metric type is best suited for tracking response times?**  
 
 A) Histogram ✅  
 B) Counter  
@@ -42,7 +42,7 @@ D) Summary
 ---
 
 ### Question 4: Health Checks
-**What information should a comprehensive health check endpoint provide?**
+**What information should a comprehensive health check endpoint provide?**  
 
 A) Database connectivity and dependent services status ✅  
 B) Only HTTP 200 status  
@@ -55,7 +55,7 @@ D) Current server load only
 ---
 
 ### Question 5: Auto-scaling Strategy
-**What metric is most important for auto-scaling MCP servers?**
+**What metric is most important for auto-scaling MCP servers?**  
 
 A) CPU utilization only  
 B) Network bandwidth only  
@@ -68,7 +68,7 @@ D) Memory usage only
 ---
 
 ### Question 6: Caching Implementation
-**What type of caching is most effective for MCP server responses?**
+**What type of caching is most effective for MCP server responses?**  
 
 A) File-based caching  
 B) In-memory caching only  
@@ -81,7 +81,7 @@ D) Database-level caching only
 ---
 
 ### Question 7: Circuit Breaker Pattern
-**When should a circuit breaker transition to the "open" state?**
+**When should a circuit breaker transition to the "open" state?**  
 
 A) When the server starts up  
 B) When response times are slightly elevated  
@@ -94,7 +94,7 @@ D) When error rates exceed the configured threshold ✅
 ---
 
 ### Question 8: CI/CD Pipeline
-**What is the recommended approach for deploying MCP servers through CI/CD?**
+**What is the recommended approach for deploying MCP servers through CI/CD?**  
 
 A) Direct deployment to production  
 B) Blue-green deployment with health checks ✅  
@@ -107,7 +107,7 @@ D) Rolling updates without testing
 ---
 
 ### Question 9: Monitoring Strategy
-**Which monitoring approach provides the most comprehensive observability?**
+**Which monitoring approach provides the most comprehensive observability?**  
 
 A) The three pillars: metrics, logs, and distributed tracing ✅  
 B) Logs only  
@@ -120,7 +120,7 @@ D) Health checks only
 ---
 
 ### Question 10: Infrastructure as Code
-**What is the primary benefit of using Terraform for MCP server infrastructure?**
+**What is the primary benefit of using Terraform for MCP server infrastructure?**  
 
 A) Lower costs  
 B) Faster deployment  

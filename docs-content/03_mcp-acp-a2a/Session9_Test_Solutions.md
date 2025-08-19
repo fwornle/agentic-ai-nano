@@ -3,7 +3,7 @@
 ## 📝 Multiple Choice Test
 
 ### Question 1: Container Orchestration
-**What is the primary benefit of using Kubernetes for production agent deployment?**
+**What is the primary benefit of using Kubernetes for production agent deployment?**  
 
 A) Better security by default  
 B) Auto-scaling, service discovery, and resource management ✅  
@@ -16,7 +16,7 @@ D) Simpler development
 ---
 
 ### Question 2: High Availability
-**What uptime target is typically expected for production agent systems?**
+**What uptime target is typically expected for production agent systems?**  
 
 A) 99.9%+ ✅  
 B) 98%  
@@ -29,7 +29,7 @@ D) 95%
 ---
 
 ### Question 3: Service Mesh
-**What primary benefit does Istio provide in production agent deployments?**
+**What primary benefit does Istio provide in production agent deployments?**  
 
 A) Simpler configuration  
 B) Lower resource usage  
@@ -42,7 +42,7 @@ D) Secure service-to-service communication with traffic management ✅
 ---
 
 ### Question 4: Configuration Management
-**Why is centralized configuration management important for production agent systems?**
+**Why is centralized configuration management important for production agent systems?**  
 
 A) Enables consistent configuration across environments and version control ✅  
 B) Improves performance  
@@ -55,7 +55,7 @@ D) Reduces development time
 ---
 
 ### Question 5: Auto-scaling Triggers
-**What metrics should trigger auto-scaling in production agent systems?**
+**What metrics should trigger auto-scaling in production agent systems?**  
 
 A) Network bandwidth only  
 B) Memory usage only  
@@ -68,7 +68,7 @@ D) CPU usage only
 ---
 
 ### Question 6: Observability Stack
-**What are the three pillars of observability for production agent systems?**
+**What are the three pillars of observability for production agent systems?**  
 
 A) Metrics, logs, and distributed tracing ✅  
 B) Alerts, dashboards, reports  
@@ -81,7 +81,7 @@ D) CPU, Memory, Disk
 ---
 
 ### Question 7: Secrets Management
-**How should sensitive information be handled in Kubernetes agent deployments?**
+**How should sensitive information be handled in Kubernetes agent deployments?**  
 
 A) Environment variables in deployment files  
 B) Configuration files in containers  
@@ -94,7 +94,7 @@ D) Kubernetes Secrets with encryption at rest ✅
 ---
 
 ### Question 8: CI/CD Pipeline
-**What testing approach is recommended for production agent deployments?**
+**What testing approach is recommended for production agent deployments?**  
 
 A) No testing required  
 B) Manual testing only  
@@ -107,7 +107,7 @@ D) Automated testing with staging environment validation ✅
 ---
 
 ### Question 9: Resource Optimization
-**What Kubernetes feature helps optimize resource utilization in agent deployments?**
+**What Kubernetes feature helps optimize resource utilization in agent deployments?**  
 
 A) No resource management  
 B) Resource requests and limits with horizontal pod autoscaling ✅  
@@ -120,7 +120,7 @@ D) Fixed resource assignments
 ---
 
 ### Question 10: Disaster Recovery
-**What is essential for disaster recovery in production agent systems?**
+**What is essential for disaster recovery in production agent systems?**  
 
 A) Single data center with backups  
 B) Multi-region deployment with automated failover ✅  
