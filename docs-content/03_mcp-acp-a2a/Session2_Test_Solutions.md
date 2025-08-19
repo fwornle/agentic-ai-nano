@@ -1,15 +1,11 @@
 # Session 2: Building a Secure File System MCP Server - Test Solutions
 
-## 📝 Multiple Choice Test
+## 📝 Multiple Choice Test - Answer Key
 
-### Question 1: Security Challenge
+### Question 1: Sandbox Purpose
 **What is the primary purpose of the sandbox in our file system server?**
 
-A) To compress files  
-B) To cache file contents  
-C) To improve performance  
-D) To prevent unauthorized file access ✅  
-**Correct Answer: D) To prevent unauthorized file access**
+**Correct Answer: b) To prevent unauthorized file access**
 
 **Explanation:** The sandbox is the critical security boundary that restricts all file operations to a designated directory, preventing access to sensitive system files and implementing defense-in-depth security.
 
@@ -18,11 +14,7 @@ D) To prevent unauthorized file access ✅
 ### Question 2: Path Resolution
 **Which method is used to safely resolve file paths and prevent directory traversal attacks?**
 
-A) `Path.absolute()`  
-B) `os.path.join()`  
-C) `str.replace()`  
-D) `Path.resolve()` ✅  
-**Correct Answer: D) `Path.resolve()`**
+**Correct Answer: b) `Path.resolve()`**
 
 **Explanation:** `Path.resolve()` resolves all symlinks and normalizes paths (including `..` components), which is essential for preventing directory traversal attacks like `../../../etc/passwd`.
 
@@ -31,11 +23,7 @@ D) `Path.resolve()` ✅
 ### Question 3: Binary File Handling
 **How are binary files handled in the read_file tool?**
 
-A) Read as UTF-8  
-B) Converted to hexadecimal  
-C) Rejected with an error  
-D) Encoded as base64 ✅  
-**Correct Answer: D) Encoded as base64**
+**Correct Answer: c) Encoded as base64**
 
 **Explanation:** Binary files are encoded as base64 strings for safe transmission through the JSON-RPC protocol, since JSON cannot directly contain binary data.
 
@@ -44,110 +32,220 @@ D) Encoded as base64 ✅
 ### Question 4: File Type Validation
 **What type of validation is performed on file types for security?**
 
-A) MIME type only  
-B) File size only  
-C) Both extension and MIME type ✅  
-D) Extension only  
-**Correct Answer: C) Both extension and MIME type**
+**Correct Answer: c) Both extension and MIME type**
 
-**Explanation:** The server validates both file extensions (whitelist approach) and MIME types (content-based detection) to prevent disguised malicious files from bypassing security checks.
+**Explanation:** The server validates both the file extension (user-provided) and MIME type (content-based detection) to prevent disguised malicious files and ensure accurate file type identification.
 
 ---
 
 ### Question 5: Security Logging
 **Which logging level is used for security violations in the file system server?**
 
-A) INFO  
-B) ERROR  
-C) DEBUG  
-D) WARNING ✅  
-**Correct Answer: D) WARNING**
+**Correct Answer: c) WARNING**
 
-**Explanation:** Security violations like sandbox escape attempts are logged at WARNING level to ensure they're captured in production logs without being as severe as system errors.
+**Explanation:** Security violations like sandbox escape attempts are logged at WARNING level to indicate suspicious activity that should be monitored but doesn't necessarily break the application.
 
 ---
 
-### Question 6: Path Validation Security
+### Question 6: Sandbox Violations
 **What happens when a file path attempts to escape the sandbox?**
 
-A) A SandboxError is raised ✅  
-B) The server crashes  
-C) Access is granted with a warning  
-D) The path is automatically corrected  
-**Correct Answer: A) A SandboxError is raised**
+**Correct Answer: b) A SandboxError is raised**
 
-**Explanation:** The `validate_path()` method raises a `SandboxError` when paths attempt to escape the sandbox, providing a clear security boundary that can be handled gracefully.
+**Explanation:** The server raises a SandboxError exception when paths attempt to escape the designated sandbox directory, providing a clear security boundary enforcement mechanism.
 
 ---
 
 ### Question 7: File Size Limits
 **Why does the server implement file size limits?**
 
-A) To prevent denial of service attacks ✅  
-B) To improve search performance  
-C) To save disk space  
-D) To maintain file quality  
-**Correct Answer: A) To prevent denial of service attacks**
+**Correct Answer: b) To prevent denial of service attacks**
 
-**Explanation:** File size limits (10MB default) prevent memory exhaustion attacks where malicious users could attempt to crash the server by requesting very large files.
+**Explanation:** File size limits prevent attackers from uploading extremely large files that could exhaust server memory or disk space, causing denial of service attacks.
 
 ---
 
-### Question 8: Allowed File Extensions
+### Question 8: File Type Restrictions
 **What approach does the server use for file type restrictions?**
 
-A) Blacklist dangerous extensions  
-B) Check file signatures only  
-C) Whitelist safe extensions ✅  
-D) Allow all extensions  
-**Correct Answer: C) Whitelist safe extensions**
+**Correct Answer: b) Whitelist safe extensions**
 
-**Explanation:** The server uses a whitelist approach, only allowing known safe file extensions (`.txt`, `.md`, `.json`, etc.), which is more secure than trying to block all dangerous types.
+**Explanation:** The server uses a whitelist approach, only allowing predefined safe file extensions, which is more secure than blacklisting dangerous extensions that can be easily circumvented.
 
 ---
 
 ### Question 9: Search Performance
 **How does the search_files tool prevent performance issues?**
 
-A) By using external search engines  
-B) By caching all file content  
-C) By limiting maximum results returned ✅  
-D) By compressing search results  
-**Correct Answer: C) By limiting maximum results returned**
+**Correct Answer: b) By limiting maximum results returned**
 
-**Explanation:** The search tool limits results (default 100) and respects file size limits to prevent performance degradation from exhaustive searches or large file processing.
+**Explanation:** The search tool implements result limits to prevent performance degradation when searching through large file sets, ensuring consistent response times.
 
 ---
 
-### Question 10: Asynchronous I/O
+### Question 10: Async File Operations
 **What is the primary benefit of using `aiofiles` for file operations?**
 
-A) Automatic file compression  
-B) Non-blocking operations ✅  
-C) Better error handling  
-D) Faster disk access  
-**Correct Answer: B) Non-blocking operations**
+**Correct Answer: a) Non-blocking file I/O operations**
 
-**Explanation:** `aiofiles` enables asynchronous file I/O operations that don't block the server thread, allowing it to handle multiple requests concurrently for better performance.
+**Explanation:** `aiofiles` provides asynchronous file operations that don't block the event loop, allowing the server to handle multiple concurrent requests efficiently.
+
+---
+
+## 💡 Practical Exercise Solution
+
+**Challenge:** Extend the server with a tool that safely moves/renames files.
+
+### Complete Solution:
+
+```python
+@mcp.tool()
+async def move_file(source: str, destination: str, overwrite: bool = False) -> Dict:
+    """
+    Move or rename a file within the sandbox.
+    
+    This tool safely moves files while maintaining all security boundaries
+    and providing comprehensive validation.
+    
+    Args:
+        source: Source file path relative to sandbox
+        destination: Destination file path relative to sandbox
+        overwrite: Allow overwriting existing files (default: False)
+    
+    Returns:
+        Success status with operation details or error information
+    """
+    try:
+        # Validate both paths are within sandbox
+        safe_source = sandbox.validate_path(source)
+        safe_destination = sandbox.validate_path(destination)
+        
+        # Check source exists and is a file
+        if not safe_source.exists():
+            return {"error": f"Source file '{source}' does not exist"}
+        
+        if not safe_source.is_file():
+            return {"error": f"Source '{source}' is not a file (directories not supported)"}
+        
+        # Validate destination filename
+        if not sandbox.is_safe_filename(safe_destination.name):
+            return {"error": f"Unsafe destination filename: {safe_destination.name}"}
+        
+        # Check destination file extension is allowed
+        dest_extension = safe_destination.suffix.lower()
+        if dest_extension and dest_extension not in config.allowed_extensions:
+            return {"error": f"Destination file type '{dest_extension}' not allowed"}
+        
+        # Check if destination already exists
+        if safe_destination.exists():
+            if not overwrite:
+                return {
+                    "error": f"Destination '{destination}' already exists. Use overwrite=true to replace it."
+                }
+            
+            # Additional check: ensure destination is a file if overwriting
+            if not safe_destination.is_file():
+                return {"error": f"Cannot overwrite '{destination}': not a file"}
+            
+            logger.warning(f"Overwriting existing file: {destination}")
+        
+        # Create destination directory if it doesn't exist
+        safe_destination.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Get source file info before moving (for logging)
+        source_stat = safe_source.stat()
+        source_size = source_stat.st_size
+        
+        # Perform the move operation
+        safe_source.rename(safe_destination)
+        
+        # Verify the move was successful
+        if not safe_destination.exists():
+            return {"error": "Move operation failed: destination file not found after move"}
+        
+        if safe_source.exists():
+            return {"error": "Move operation failed: source file still exists after move"}
+        
+        # Get destination file info
+        dest_stat = safe_destination.stat()
+        
+        # Log the successful operation
+        logger.info(f"File moved: {source} -> {destination} ({source_size} bytes)")
+        
+        return {
+            "success": True,
+            "operation": "move",
+            "source": source,
+            "destination": destination,
+            "size": dest_stat.st_size,
+            "modified": datetime.fromtimestamp(dest_stat.st_mtime).isoformat(),
+            "overwritten": overwrite and safe_destination.exists()
+        }
+        
+    except SandboxError as e:
+        logger.warning(f"Sandbox violation in move operation: {e}")
+        return {"error": str(e)}
+    except PermissionError as e:
+        logger.error(f"Permission denied during move: {e}")
+        return {"error": f"Permission denied: {str(e)}"}
+    except OSError as e:
+        logger.error(f"OS error during move: {e}")
+        return {"error": f"File system error: {str(e)}"}
+```
+
+### Key Learning Points:
+
+1. **Comprehensive Path Validation:** Both source and destination paths must be validated against the sandbox
+2. **File Type Security:** Destination file extensions are validated against the allowed list
+3. **Existence Checks:** Verify source exists and handle destination conflicts appropriately
+4. **Error Recovery:** Verify the operation completed successfully before returning success
+5. **Detailed Logging:** Log all operations for security monitoring and debugging
+6. **Graceful Error Handling:** Different exception types are handled with appropriate responses
+
+### Security Considerations:
+
+- **Sandbox Enforcement:** All paths are validated to prevent directory traversal
+- **Overwrite Protection:** Explicit permission required to overwrite existing files
+- **File Type Validation:** Destination files must have allowed extensions
+- **Operation Verification:** Success is verified by checking file system state
+- **Audit Trail:** All operations are logged for security monitoring
+
+### Extension Ideas:
+
+1. **Atomic Operations:** Implement temporary files to ensure operation atomicity
+2. **Batch Operations:** Support moving multiple files in a single operation
+3. **Copy Operations:** Add similar functionality for file copying
+4. **Directory Support:** Extend to support moving entire directories
+5. **Backup on Overwrite:** Create backups when overwriting files
 
 ---
 
 ## Scoring Guide
 
-- **10 correct**: Expert level - Ready for production MCP server security  
-- **8-9 correct**: Proficient - Strong understanding of secure file systems  
-- **6-7 correct**: Competent - Good grasp of security concepts  
-- **4-5 correct**: Developing - Review sandboxing and validation sections  
-- **Below 4**: Beginner - Revisit security fundamentals and practice examples  
+- **9-10 correct**: Excellent understanding of secure file system implementation
+- **7-8 correct**: Good grasp of security concepts, review specific areas where questions were missed
+- **5-6 correct**: Basic understanding present, recommend reviewing security sections
+- **Below 5**: Recommend thoroughly reviewing Session 2 content and security best practices
 
-## Key Concepts Summary
+## Key Concepts Review
 
-1. **Sandboxing**: Critical security boundary preventing unauthorized file access  
-2. **Path Validation**: Use `Path.resolve()` and prefix checking to prevent traversal attacks  
-3. **Defense in Depth**: Multiple security layers including validation, logging, and limits  
-4. **Binary Handling**: Base64 encoding for safe JSON transmission  
-5. **Performance Security**: Size limits and result caps prevent denial of service  
+If you missed questions in these areas, review the corresponding sections:
+
+**Security Fundamentals (Questions 1, 2, 5, 6):**
+- Review sandbox implementation and path validation
+- Focus on security logging and violation handling
+- Study directory traversal prevention techniques
+
+**File Handling (Questions 3, 4, 7, 8):**
+- Review binary file encoding strategies
+- Focus on file type validation approaches
+- Study whitelist vs blacklist security models
+
+**Performance & Architecture (Questions 9, 10):**
+- Review async programming benefits
+- Focus on performance optimization techniques
+- Study scalability considerations
 
 ---
 
-[Return to Session 2](Session2_FileSystem_MCP_Server.md)
+[← Return to Session 2](Session2_FileSystem_MCP_Server.md)

@@ -1,153 +1,237 @@
 # Session 1: Building Your First MCP Server - Test Solutions
 
-## 📝 Multiple Choice Test
+## 📝 Multiple Choice Test - Answer Key
 
-### Question 1: MCP Problem Solving
-**What is the primary purpose of the Model Context Protocol (MCP)?**
+### Question 1: MCP Capabilities
+**What are the three core capabilities that MCP servers can expose?**
 
-A) To standardize how LLMs interact with external data sources and tools ✅  
-B) To enable direct communication between AI agents  
-C) To provide a framework for building AI agents  
-D) To manage agent discovery across organizations  
-**Correct Answer: A) To standardize how LLMs interact with external data sources and tools**
+**Correct Answer: C) Tools, Resources, and Prompts**
 
-**Explanation:** MCP solves the M×N integration problem by providing a standardized bridge between AI applications and external data sources, reducing the complexity from M×N integrations to M+N.
+**Explanation:** MCP servers expose three types of capabilities: Tools (executable functions that can be called), Resources (data sources that can be queried), and Prompts (reusable templates for common tasks).
 
 ---
 
-### Question 2: MCP Server Components
-**Which component of MCP is responsible for exposing capabilities to clients?**
+### Question 2: Tool Decorator
+**Which decorator is used to expose a function as an MCP tool?**
 
-A) MCP Server ✅  
-B) MCP Tools  
-C) MCP Resources  
-D) MCP Client  
-**Correct Answer: A) MCP Server**
+**Correct Answer: B) `@mcp.tool()`**
 
-**Explanation:** The MCP Server exposes capabilities (tools, resources, and prompts) to clients, which then make these capabilities available to LLMs.
+**Explanation:** The `@mcp.tool()` decorator is the FastMCP framework's way to register a function as an MCP tool that can be called by AI agents.
 
 ---
 
-### Question 3: MCP Capabilities
-**What are the three main types of capabilities that MCP servers can expose?**
+### Question 3: MCP Inspector Purpose
+**What is the primary purpose of MCP Inspector?**
 
-A) APIs, Databases, and Files  
-B) Agents, Models, and Protocols  
-C) Servers, Clients, and Bridges  
-D) Tools, Resources, and Prompts ✅  
-**Correct Answer: D) Tools, Resources, and Prompts**
+**Correct Answer: B) To test, debug, and validate MCP servers**
 
-**Explanation:** MCP servers expose three core capability types: Tools (functions that can be called), Resources (data endpoints that can be queried), and Prompts (pre-configured templates).
+**Explanation:** MCP Inspector is a developer tool (like Postman for MCP) that provides an interactive interface to explore MCP server capabilities, test tools, debug issues, and validate that servers follow the protocol correctly.
 
 ---
 
-### Question 4: Tool Registration
-**What is the correct decorator to define an MCP tool?**
+### Question 4: Transport Mechanism
+**Which transport mechanism is commonly used for local MCP server testing?**
 
-A) `@mcp.tool()` ✅  
-B) `@mcp.method()`  
-C) `@mcp.function()`  
-D) `@mcp.action()`  
-**Correct Answer: A) `@mcp.tool()`**
+**Correct Answer: C) stdio (standard input/output)**
 
-**Explanation:** The `@mcp.tool()` decorator registers a function as an MCP tool that can be called by AI agents, with type hints providing parameter information.
+**Explanation:** MCP servers communicate over stdio (standard input/output) by default for local development, which allows them to work as subprocess-based tools.
 
 ---
 
-### Question 5: Transport Mechanism
-**Which transport mechanism is used in this session's MCP server?**
+### Question 5: Type Hints Importance
+**Why are type hints important in MCP server functions?**
 
-A) stdio ✅  
-B) WebSocket  
-C) HTTP  
-D) gRPC  
-**Correct Answer: A) stdio**
+**Correct Answer: B) They enable automatic schema generation for AI clients**
 
-**Explanation:** The session uses stdio (standard input/output) transport, which allows communication through standard input and output streams using JSON-RPC protocol.
+**Explanation:** Type hints are used by the MCP framework to automatically generate JSON schemas that describe the tool's parameters and return values to AI clients, enabling proper validation and usage.
 
 ---
 
-### Question 6: Communication Protocol
-**What format do MCP servers use for communication?**
+### Question 6: Error Handling
+**What should MCP tools return when encountering invalid input?**
 
-A) JSON-RPC ✅  
-B) GraphQL  
-C) Protocol Buffers  
-D) REST  
-**Correct Answer: A) JSON-RPC**
+**Correct Answer: C) Return a structured error dictionary**
 
-**Explanation:** MCP uses JSON-RPC 2.0 protocol for all client-server communication, providing a standardized way to call methods and exchange data.
+**Explanation:** MCP tools should return structured error responses as dictionaries with an "error" key rather than raising exceptions, which provides better error handling for clients.
 
 ---
 
-### Question 7: Resource Naming
-**When defining a resource, what URI scheme is used in the weather server example?**
+### Question 7: Resources vs Tools
+**How do MCP resources differ from tools?**
 
-A) resource://  
-B) weather:// ✅  
-C) mcp://  
-D) http://  
-**Correct Answer: B) weather://**
+**Correct Answer: B) Resources provide read-only data access, tools are executable functions**
 
-**Explanation:** The weather server uses custom URI schemes like `weather://cities/available` to organize and identify different resource endpoints.
+**Explanation:** Resources are read-only data endpoints that provide information (like file contents or database records), while tools are executable functions that can perform actions or computations.
 
 ---
 
-### Question 8: Error Handling
-**What should a tool return when encountering an error?**
+### Question 8: MCP Inspector Command
+**What command is used to launch MCP Inspector?**
 
-A) Return a dict with an "error" key ✅  
-B) Return False  
-C) Raise an exception  
-D) Return None  
-**Correct Answer: A) Return a dict with an "error" key**
+**Correct Answer: A) `mcp-inspector`**
 
-**Explanation:** MCP tools should return dictionaries with an "error" key for graceful error handling, allowing clients to understand and respond to specific error conditions.
+**Explanation:** Once installed globally via npm, MCP Inspector can be launched using the `mcp-inspector` command from the terminal.
 
 ---
 
-### Question 9: Type Hints Importance
-**Why are type hints crucial in MCP tool definitions?**
+### Question 9: Industry Adoption
+**Which company reported 60% faster AI integration development using MCP?**
 
-A) They enable code completion  
-B) They prevent runtime errors  
-C) They improve performance  
-D) They tell AI agents how to use the tool ✅  
-**Correct Answer: D) They tell AI agents how to use the tool**
+**Correct Answer: C) Block Inc.**
 
-**Explanation:** Type hints provide essential metadata to AI agents, allowing them to understand parameter types, requirements, and return values for proper tool usage.
+**Explanation:** Block Inc. reported significant development speed improvements when using MCP for their AI integrations, demonstrating the protocol's real-world benefits in enterprise environments.
 
 ---
 
-### Question 10: Data Validation
-**What is a best practice for handling invalid city names in the weather tool?**
+### Question 10: MCP Advantages
+**What is the main advantage of MCP over custom API integrations?**
 
-A) Raise an exception  
-B) Return default weather for London  
-C) Return error with available cities list ✅  
-D) Ignore invalid inputs  
-**Correct Answer: C) Return error with available cities list**
+**Correct Answer: B) Standardized protocol with automatic schema validation**
 
-**Explanation:** Returning an error with helpful context (like available cities) provides informative feedback that guides users toward valid inputs while maintaining system stability.
+**Explanation:** MCP provides a standardized protocol that includes automatic schema validation, discovery mechanisms, and consistent error handling, reducing the complexity of custom integrations.
+
+---
+
+## 💡 Practical Exercise Solution
+
+**Challenge:** Create a tool that finds the warmest city from a list.
+
+### Complete Solution:
+
+```python
+@mcp.tool()
+def find_warmest_city(cities: List[str]) -> Dict:
+    """
+    Find the warmest city from a list.
+    
+    Args:
+        cities: List of city names to compare
+        
+    Returns:
+        Dictionary with the warmest city and its temperature
+    """
+    # Input validation
+    if not cities:
+        return {"error": "Cities list cannot be empty"}
+    
+    if not isinstance(cities, list):
+        return {"error": "Cities must be provided as a list"}
+    
+    warmest = None
+    max_temp = float('-inf')
+    valid_cities_checked = 0
+    
+    # Check each city's temperature
+    for city in cities:
+        if not isinstance(city, str):
+            continue  # Skip invalid city names
+            
+        weather = get_current_weather(city)
+        if "error" not in weather:
+            temp = weather["temp"]
+            valid_cities_checked += 1
+            
+            if temp > max_temp:
+                max_temp = temp
+                warmest = {
+                    "city": city,
+                    "temperature": temp,
+                    "units": weather["units"],
+                    "condition": weather["condition"],
+                    "timestamp": weather["timestamp"]
+                }
+    
+    # Check if we found any valid cities
+    if warmest is None:
+        return {
+            "error": "No valid weather data found for any city",
+            "checked_cities": len(cities),
+            "valid_responses": valid_cities_checked
+        }
+    
+    # Add comparison metadata
+    warmest["comparison"] = {
+        "total_cities": len(cities),
+        "valid_cities": valid_cities_checked,
+        "temperature_advantage": f"{max_temp - (-10):.1f}° warmer than baseline"
+    }
+    
+    return warmest
+```
+
+### Key Learning Points:
+
+1. **Input Validation:** Always check for empty lists and invalid input types
+2. **Error Handling:** Gracefully handle cases where weather data isn't available
+3. **Data Structure:** Return consistent, structured responses
+4. **Metadata:** Include useful information about the comparison process
+5. **Type Safety:** Use proper type hints and validate input types
+
+### Test Cases You Should Consider:
+
+```python
+# Test with valid cities
+result = find_warmest_city(["London", "New York", "Sydney"])
+
+# Test with empty list
+result = find_warmest_city([])
+
+# Test with invalid city
+result = find_warmest_city(["Atlantis", "Wakanda"])
+
+# Test with mixed valid/invalid cities  
+result = find_warmest_city(["London", "Atlantis", "Tokyo"])
+```
+
+---
+
+## 🎯 Extension Challenges
+
+Once you've mastered the basic solution, try these additional challenges:
+
+1. **Add Temperature Units Conversion:** Modify the function to accept a `units` parameter and convert all temperatures to the same unit before comparison.
+
+2. **Find Coldest City:** Create a companion function `find_coldest_city()` that finds the city with the lowest temperature.
+
+3. **Weather Ranking:** Create a function that returns all cities sorted by temperature from warmest to coldest.
+
+4. **Condition Filtering:** Add the ability to filter cities by weather condition (e.g., only consider cities with "Sunny" weather).
+
+5. **Advanced Comparison:** Include additional factors like humidity or precipitation chance in the comparison logic.
 
 ---
 
 ## Scoring Guide
 
-- **10 correct**: Expert level - Ready for advanced MCP server development  
-- **8-9 correct**: Proficient - Strong understanding of MCP fundamentals  
-- **6-7 correct**: Competent - Good grasp of core concepts  
-- **4-5 correct**: Developing - Review MCP architecture and tool creation  
-- **Below 4**: Beginner - Revisit session materials and practice examples  
+- **9-10 correct**: Excellent understanding of MCP server fundamentals
+- **7-8 correct**: Good grasp of the core concepts, review specific areas where questions were missed
+- **5-6 correct**: Basic understanding present, recommend reviewing the session content before proceeding
+- **Below 5**: Recommend thoroughly reviewing Session 1 content and hands-on exercises
 
-## Key Concepts Summary
+## Key Concepts Review
 
-1. **MCP Architecture**: Solves M×N integration problem with standardized protocol  
-2. **Server Components**: Tools (functions), Resources (data), Prompts (templates)  
-3. **Tool Registration**: Use `@mcp.tool()` decorator with type hints and docstrings  
-4. **JSON-RPC Protocol**: Standard communication format for MCP  
-5. **Error Handling**: Return structured error dictionaries for graceful failures  
+If you missed questions in these areas, review the corresponding sections:
+
+**MCP Architecture (Questions 1, 7, 10):**
+- Review "MCP Server Capabilities" section
+- Focus on the difference between tools, resources, and prompts
+- Study the advantages of standardized protocols
+
+**Implementation Details (Questions 2, 5, 6):**
+- Review the FastMCP framework syntax
+- Focus on type hints and their importance
+- Study error handling best practices
+
+**Development Tools (Questions 3, 8):**
+- Review the MCP Inspector section
+- Practice using the inspector tool
+- Study debugging and validation workflows
+
+**Industry Context (Questions 4, 9):**
+- Review transport mechanisms
+- Study real-world adoption cases
+- Focus on enterprise benefits
 
 ---
 
-[Return to Session 1](Session1_Basic_MCP_Server.md)
+[← Return to Session 1](Session1_Basic_MCP_Server.md)
