@@ -2360,104 +2360,125 @@ async def resilient_operation(data: Dict[str, Any]) -> Dict:
 
 ---
 
-## Next Session Preview
+## Additional Resources
 
-In Session 5, we'll focus on **Security and Authentication** for MCP servers:
+- [Google Cloud Run Best Practices](https://cloud.google.com/run/docs/tips) - Containerized deployment optimization
+- [AWS Lambda Container Images Guide](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/) - Serverless container deployment
+- [Prometheus Monitoring Best Practices](https://prometheus.io/docs/practices/naming/) - Metrics collection and naming conventions
+- [Docker Security Best Practices](https://docs.docker.com/develop/security-best-practices/) - Container security hardening
+- [Grafana Dashboard Design Guidelines](https://grafana.com/docs/grafana/latest/best-practices/) - Effective monitoring dashboards
 
-- JWT authentication and authorization
-- API key management and rotation
-- Rate limiting and DDoS protection
-- Input validation and sanitization
-- TLS/SSL configuration and certificate management
+---
 
-### Homework
+## 💡 Practical Exercise
 
+**Challenge:** Implement a circuit breaker pattern for production MCP servers.
+
+Build a robust circuit breaker system that prevents cascade failures and enables graceful degradation:
+
+### Your Task:
+```python
+class CircuitBreaker:
+    """Circuit breaker for production MCP server operations."""
+    
+    def __init__(self, failure_threshold=5, recovery_timeout=60):
+        """Initialize circuit breaker with thresholds."""
+        pass
+    
+    async def call(self, operation, *args, **kwargs):
+        """Execute operation with circuit breaker protection."""
+        pass
+```
+
+### Requirements:
+1. **State Management**: Implement CLOSED, OPEN, and HALF_OPEN states
+2. **Failure Detection**: Track failure rates and response times
+3. **Automatic Recovery**: Test recovery after timeout periods
+4. **Metrics Integration**: Expose circuit breaker metrics for monitoring
+5. **Graceful Degradation**: Provide fallback responses when circuit is open
+
+### Implementation Tasks:
 1. **Implement distributed tracing** using OpenTelemetry to track requests across services
-2. **Create a blue-green deployment** strategy for zero-downtime updates
+2. **Create a blue-green deployment** strategy for zero-downtime updates  
 3. **Build load testing scripts** to verify your servers can handle production traffic
 4. **Add automatic failover** between multiple regions for high availability
 
-**💡 Hint:** Check the [Session4_Test_Solutions.md](Session4_Test_Solutions.md) file for complete implementations and advanced patterns.
+**Hint:** Use exponential backoff for recovery attempts and integrate with your existing monitoring stack.
 
 ---
 
-## 📋 Test Your Knowledge
-
-Ready to test your understanding of Production MCP Deployment? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
-
-### Multiple Choice Test
-Test your knowledge with 10 carefully crafted questions covering:
-
-- Production deployment requirements and patterns
-- Container orchestration and Docker best practices
-- Monitoring and observability with Prometheus
-- Auto-scaling strategies and performance optimization
-- CI/CD pipelines and infrastructure as code
-
----
-
-## 📝 Multiple Choice Test - Session 4 (15 minutes)
+## 📝 Multiple Choice Test - Session 4
 
 Test your understanding of Production MCP Deployment:
 
-**Question 1:** What is the primary difference between development and production MCP servers?
+**Question 1:** What is the primary difference between development and production MCP servers?  
+
 A) Production servers are slower than development servers  
 B) Production servers use different protocols  
 C) Production servers only work with specific LLMs  
-D) Production servers require observability, scalability, and reliability  
+D) Production servers require observability, scalability, and reliability ✅  
 
-**Question 2:** What is the main advantage of containerizing MCP servers with Docker?
+**Question 2:** What is the main advantage of containerizing MCP servers with Docker?  
+
 A) Improved performance  
 B) Better security by default  
 C) Automatic scaling capabilities  
-D) Consistent environments across development and production  
+D) Consistent environments across development and production ✅  
 
-**Question 3:** Which Prometheus metric type is best suited for tracking response times?
-A) Histogram  
+**Question 3:** Which Prometheus metric type is best suited for tracking response times?  
+
+A) Histogram ✅  
 B) Counter  
 C) Gauge  
 D) Summary  
 
-**Question 4:** What information should a comprehensive health check endpoint provide?
-A) Database connectivity and dependent services status  
+**Question 4:** What information should a comprehensive health check endpoint provide?  
+
+A) Database connectivity and dependent services status ✅  
 B) Only HTTP 200 status  
 C) Server uptime only  
 D) Current server load only  
 
-**Question 5:** What metric is most important for auto-scaling MCP servers?
+**Question 5:** What metric is most important for auto-scaling MCP servers?  
+
 A) CPU utilization only  
 B) Network bandwidth only  
-C) Request rate combined with response time  
+C) Request rate combined with response time ✅  
 D) Memory usage only  
 
-**Question 6:** What type of caching is most effective for MCP server responses?
+**Question 6:** What type of caching is most effective for MCP server responses?  
+
 A) File-based caching  
 B) In-memory caching only  
-C) Redis distributed caching with TTL expiration  
+C) Redis distributed caching with TTL expiration ✅  
 D) Database-level caching only  
 
-**Question 7:** When should a circuit breaker transition to the "open" state?
+**Question 7:** When should a circuit breaker transition to the "open" state?  
+
 A) When the server starts up  
 B) When response times are slightly elevated  
 C) When memory usage is high  
-D) When error rates exceed the configured threshold  
+D) When error rates exceed the configured threshold ✅  
 
-**Question 8:** What is the recommended approach for deploying MCP servers through CI/CD?
+**Question 8:** What is the recommended approach for deploying MCP servers through CI/CD?  
+
 A) Direct deployment to production  
-B) Blue-green deployment with health checks  
+B) Blue-green deployment with health checks ✅  
 C) Rolling deployment without testing  
 D) Manual deployment with downtime  
 
-**Question 9:** Which security practice is essential for production MCP server containers?
+**Question 9:** Which security practice is essential for production MCP server containers?  
+
 A) Running containers as root user for full access  
-B) Using non-root users and resource limits  
+B) Using non-root users and resource limits ✅  
 C) Disabling all logging to reduce overhead  
 D) Allowing unlimited resource consumption  
 
-**Question 10:** What is the primary purpose of implementing structured logging in production MCP servers?
+**Question 10:** What is the primary purpose of implementing structured logging in production MCP servers?  
+
 A) Reduce file sizes  
 B) Improve code readability  
-C) Enable efficient searching and monitoring  
+C) Enable efficient searching and monitoring ✅  
 D) Decrease memory usage  
 
 [**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
@@ -2466,21 +2487,8 @@ D) Decrease memory usage
 
 ## 🧭 Navigation
 
-**Previous:** Session 3 - Agent Communication Patterns
+**Previous:** [Session 3 - LangChain MCP Integration](Session3_LangChain_MCP_Integration.md)
 
 **Note:** Advanced container orchestration and multi-cloud strategies are covered within this session and expanded upon in Session 9 (Production Agent Deployment).
 
-
-**Next:** Session 5 - Security and Authentication →
-
----
-
-## Additional Resources
-
-- [Google Cloud Run Best Practices](https://cloud.google.com/run/docs/tips)
-- [AWS Lambda Container Images Guide](https://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/)
-- [Prometheus Monitoring Best Practices](https://prometheus.io/docs/practices/naming/)
-- [Docker Security Best Practices](https://docs.docker.com/develop/security-best-practices/)
-- [Grafana Dashboard Design Guidelines](https://grafana.com/docs/grafana/latest/best-practices/)
-
-Remember: Production deployment is about reliability, scalability, and observability. Always monitor, always test, and always plan for failure! 📊🔧
+**Next:** [Session 5 - Secure MCP Server](Session5_Secure_MCP_Server.md)
