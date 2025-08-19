@@ -347,7 +347,58 @@ Try implementing this tool before looking at the solution! This exercise reinfor
 
 ---
 
-## 📝 Multiple Choice Test - Session 1 (15 minutes)
+## Additional Resources
+
+- [FastMCP Documentation](https://fastmcp.readthedocs.io/) - Complete framework reference and advanced patterns
+- [MCP Specification](https://modelcontextprotocol.io/specification/) - Official protocol specification and JSON-RPC details
+- [MCP Inspector GitHub](https://github.com/modelcontextprotocol/inspector) - Essential debugging and testing tool
+- [JSON Schema Guide](https://json-schema.org/learn/) - Understanding schema validation for MCP tools
+- [Python Type Hints](https://docs.python.org/3/library/typing.html) - Essential for automatic schema generation
+
+---
+
+## 💡 Practical Exercise
+
+**Challenge:** Create a tool that finds the warmest city from a list.
+
+Build a more complex MCP tool that demonstrates data processing, error handling, and structured responses:
+
+### Your Task:
+```python
+@mcp.tool()
+def find_warmest_city(cities: List[str]) -> Dict:
+    """
+    Find the warmest city from a list.
+    
+    Args:
+        cities: List of city names to compare
+        
+    Returns:
+        Dictionary with the warmest city and its temperature,
+        or error information if the operation fails
+    """
+    # Your implementation here
+    pass
+```
+
+### Requirements:
+1. **Input validation**: Handle empty lists and invalid city names
+2. **Weather lookup**: Use the existing `get_current_weather` function
+3. **Comparison logic**: Find the city with highest temperature
+4. **Error handling**: Return structured error messages for failures
+5. **Rich responses**: Include temperature, condition, and metadata
+
+### Expected Features:
+- Handle cases where some cities have invalid weather data
+- Return the warmest city with complete weather information
+- Provide meaningful error messages for troubleshooting
+- Include comparison metadata (cities checked, temperature differences)
+
+**Hint:** Use the existing weather data structure and build comparison logic on top.
+
+---
+
+## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What are the three core capabilities that MCP servers can expose?
 A) APIs, Databases, and Services  
