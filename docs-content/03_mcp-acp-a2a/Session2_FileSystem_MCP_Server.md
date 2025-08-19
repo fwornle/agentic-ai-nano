@@ -248,7 +248,7 @@ Implement resource limits to prevent system overload:
 
 ### **IMPLEMENTER PATH**: Advanced Configuration Features
 
-*See Session2_ModuleA_Advanced_Security.md for enterprise configuration patterns including encryption, compliance settings, and advanced threat detection.*
+*Advanced enterprise configuration patterns including encryption, compliance settings, and advanced threat detection are covered in the production security section above.*
 
 ---
 
@@ -1438,9 +1438,7 @@ d) Automatic file compression
 
 **Previous:** [Session 1 - Basic MCP Server](Session1_Basic_MCP_Server.md)
 
-**Optional Deep Dive Modules:**
-- 🔬 **[Module A: Advanced Security Features](Session2_ModuleA_Advanced_Security.md)** - Deep dive into file system security and threat mitigation
-- 🏭 **[Module B: File Operations at Scale](Session2_ModuleB_File_Operations.md)** - Performance optimization and enterprise-grade features
+**Note:** Advanced security features and enterprise-scale file operations are covered in Sessions 4 and 5, which focus on production deployment and security hardening.
 
 
 **Next:** [Session 3 - LangChain MCP Integration](Session3_LangChain_MCP_Integration.md) →
