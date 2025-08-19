@@ -84,7 +84,7 @@ ARG UV_VERSION=0.8.12
 RUN curl ${GITHUB_MIRROR}/astral-sh/uv/releases/download/${UV_VERSION}/uv-x86_64-unknown-linux-gnu.tar.gz \
   | tar -xzv -C /usr/local/bin/ --strip-components=1
 ENV UV_PYTHON_INSTALL_MIRROR=${GITHUB_MIRROR}/astral-sh/python-build-standalone/releases/download
-ENV UV_DEFAULT_INDEX=${DDAD_AF}/api/pypi/adp-pypi-with-upstream-collection/simple
+ENV UV_DEFAULT_INDEX=${DDAD_AF}/api/pypi/external-pypi-org/simple
 
 # Node
 ARG NODE_VERSION=22.17.0
