@@ -117,9 +117,9 @@ RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${user} \
 #     sponge /etc/docker/daemon.json
 
 ###############################################################################
-# Create non-root user
-RUN groupadd --gid ${gid} ${user} \
-    && useradd --uid ${uid} --gid ${gid} -m ${user}
+# # Create non-root user
+# RUN groupadd --gid ${gid} ${user} \
+#     && useradd --uid ${uid} --gid ${gid} -m ${user}
 
 # Change default shell to bash for the user
 RUN chsh -s /bin/bash ${user}
