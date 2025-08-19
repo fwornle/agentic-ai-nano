@@ -1,9 +1,17 @@
 # Session 1 - Module B: Enterprise Deployment
 
-## 🎯 Module Overview
-**Time Investment**: 30 minutes
-**Prerequisites**: Session 1 Core Content
-**Learning Outcome**: Master enterprise-scale RAG deployment patterns
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> This is supplementary content for deeper specialization.  
+> **Prerequisites**: Complete Session 1 core content first.
+> **Time Investment**: 30 minutes
+> **Target Audience**: Implementer path students and enterprise engineers
+
+## Module Learning Outcomes
+After completing this module, you will master:
+- Enterprise-scale RAG deployment patterns and architectures
+- Container orchestration and microservices design for RAG systems
+- Production monitoring, logging, and observability strategies
+- Security and compliance considerations for enterprise environments
 
 ---
 

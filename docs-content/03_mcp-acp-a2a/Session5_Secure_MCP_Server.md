@@ -1,81 +1,253 @@
-# Session 5: Building Secure MCP Servers
+# Session 5: Secure MCP Servers - Enterprise Security Architecture
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 By the end of this session, you will be able to:
 
-- **Implement** robust JWT authentication and authorization systems for MCP servers  
-- **Configure** API key management with automatic rotation and secure storage  
-- **Apply** rate limiting and DDoS protection to prevent abuse  
+- **Implement** OAuth 2.1 with PKCE authentication following 2025 MCP security standards
+- **Configure** Resource Indicators (RFC 8707) to prevent token misuse and scope violations
+- **Apply** comprehensive rate limiting and DDoS protection with distributed controls
 - **Secure** data transmission using TLS encryption and certificate management  
 - **Validate** all inputs and sanitize data to prevent injection attacks  
-- **Monitor** security events through comprehensive audit logging  
+- **Monitor** security events through comprehensive audit logging and anomaly detection
 
-## 📚 Chapter Overview
+## Chapter Overview
 
-Security is paramount when deploying MCP servers in production environments. This session covers the essential security layers that protect your servers from common threats and ensure compliance with security standards.
+### What You'll Learn: Enterprise MCP Security Architecture
+
+In this session, we'll implement enterprise-grade security for MCP servers, following the latest 2025 security standards and addressing the critical vulnerabilities discovered in early MCP deployments. This covers the essential security layers that protect against sophisticated threats while maintaining compliance with security frameworks.
+
+### Why This Matters: The 2025 MCP Security Crisis and Response
+
+Based on 2024-2025 security research, MCP security has undergone significant evolution:
+
+- **Critical Vulnerability Recognition**: Security researchers identified MCP as "powerful but dangerous" with serious security problems due to lack of security-first design
+- **OAuth 2.1 Standardization**: March 2025 specification mandated OAuth 2.1 with PKCE for all clients, raising the baseline security significantly
+- **Resource Indicators Requirement**: RFC 8707 implementation now prevents malicious servers from misusing tokens across different resources
+- **Enterprise Adoption Challenges**: Every MCP integration is considered "a potential backdoor" until proper security controls are implemented
+- **Human-in-the-Loop Requirements**: Industry consensus treats "SHOULD" security recommendations as "MUST" for production systems
+
+### How Secure MCP Stands Out: Defense-in-Depth Architecture
+
+The 2025 secure MCP architecture implements multiple security layers:
+- **OAuth 2.1 with PKCE**: Mandatory implementation preventing authorization code interception attacks
+- **Resource Indicators**: Token scoping prevents cross-resource abuse and privilege escalation
+- **Attribute-Based Access Control (ABAC)**: Dynamic permissions based on user role, data sensitivity, and context
+- **Comprehensive Monitoring**: Anomaly detection for failed authentication, unusual access patterns, and data exfiltration
+
+### Where You'll Apply This: Enterprise Security Use Cases
+
+Secure MCP implementations are critical for:
+- **Financial Services**: Compliance with PCI-DSS and SOX regulations for AI-driven trading and analysis
+- **Healthcare Systems**: HIPAA-compliant AI agents accessing patient records and medical databases
+- **Government Agencies**: FedRAMP-authorized AI systems with classified data access
+- **Enterprise SaaS**: Multi-tenant AI platforms with strict data isolation requirements
 
 ![MCP Security Architecture](images/mcp-security-architecture.png)
+*Figure 1: Enterprise MCP security architecture showing OAuth 2.1 authentication, Resource Indicators, rate limiting, and comprehensive monitoring layers working together to create a defense-in-depth security posture*
 
-The security architecture above shows our defense-in-depth approach:
+### Learning Path Options
 
-- **Authentication Layer**: JWT tokens and API keys for identity verification  
-- **Authorization Layer**: Role-based access control (RBAC) for permission management  
-- **Network Security**: TLS encryption and rate limiting for traffic protection  
-- **Application Security**: Input validation and audit logging for attack prevention  
+**🎯 Observer Path (30 minutes)**: Understand MCP security concepts and threat landscape
+- Focus: Quick insights into OAuth 2.1, security vulnerabilities, and protection strategies
+- Best for: Getting oriented with enterprise security requirements
+
+**📝 Participant Path (60 minutes)**: Implement working secure authentication and monitoring  
+- Focus: Hands-on OAuth 2.1 implementation, rate limiting, and security controls
+- Best for: Building practical secure MCP systems
+
+**⚙️ Implementer Path (95 minutes)**: Advanced enterprise security and compliance
+- Focus: ABAC policies, advanced threat detection, and regulatory compliance
+- Best for: Enterprise security architecture and compliance expertise
 
 ---
 
-## Part 1: Authentication and Authorization (25 minutes)
+## Part 1: Modern MCP Security Fundamentals (Observer: 8 min | Participant: 20 min)
 
-### Understanding Security Threats
+### The 2025 MCP Security Threat Landscape
 
-Before implementing security measures, let's understand the threats we're protecting against:
+Based on security research and vulnerability disclosures, MCP faces sophisticated threats that require enterprise-grade countermeasures:
 
-1. **Unauthorized Access**: Attackers trying to use your MCP server without permission  
-2. **Token Theft**: Stolen authentication tokens being used maliciously  
-3. **Privilege Escalation**: Users accessing resources beyond their permissions  
-4. **API Abuse**: Excessive requests overwhelming your server  
-5. **Data Injection**: Malicious input attempting to compromise your system  
+**Critical Threat Vectors:**
+1. **Token Misuse Across Resources**: Malicious servers using stolen tokens to access unintended resources
+2. **Authorization Code Interception**: Man-in-the-middle attacks against OAuth flows without PKCE
+3. **Unintended LLM Actions**: AI models performing destructive operations without explicit user intent  
+4. **Privilege Escalation**: Users or AI agents accessing resources beyond their intended permissions
+5. **Distributed Rate Limit Bypass**: Coordinated attacks from multiple IP addresses
+6. **Data Exfiltration**: Malicious extraction of sensitive data through seemingly legitimate tool calls
 
-### Step 1.1: JWT Authentication Foundation
+**Industry Security Assessment:**
+Security researchers have identified MCP as having "serious security problems" with every integration being "a potential backdoor" until proper controls are implemented. This has driven the rapid evolution of security standards in 2025.
 
-Let's start by building a secure JWT authentication system step by step.
+### **OBSERVER PATH**: Understanding Modern MCP Security
 
-**Step 1.1.1: Basic JWT Manager Setup**
+**Key Security Evolution (2024-2025):**
 
-First, let's create the foundation for our JWT management:
+1. **OAuth 2.1 with PKCE Mandate**: March 2025 specification requires PKCE for all clients, preventing authorization code attacks
+2. **Resource Indicators (RFC 8707)**: Tokens explicitly scoped to specific MCP servers prevent cross-resource abuse
+3. **Human-in-the-Loop Requirements**: Production systems treat optional security controls as mandatory
+4. **Sandbox Isolation**: Local MCP servers must run in restricted execution environments  
 
-**Step 1.1.1: Security Dependencies and Imports**
+### **PARTICIPANT PATH**: Implementing OAuth 2.1 with PKCE
 
-First, let's import the essential security libraries for JWT authentication:
+**Step 1: Modern OAuth 2.1 Implementation**
+
+Implement the 2025 MCP security standard with OAuth 2.1 and PKCE:
 
 ```python
-# src/auth/jwt_auth.py
-import jwt
-import bcrypt
-import hashlib
-from datetime import datetime, timedelta, timezone
-from typing import Optional, Dict, Any, List
-from fastapi import HTTPException, Depends
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-import redis
-import json
+# src/auth/oauth_mcp.py - 2025 MCP Security Standard
 import secrets
-import os
-import logging
+import hashlib
+import base64
+import jwt
+from datetime import datetime, timedelta, timezone
+from typing import Optional, Dict, Any, List, Tuple
+from authlib.integrations.fastapi_oauth2 import AuthorizationServer
+from authlib.oauth2.rfc7636 import CodeChallenge
+from authlib.oauth2.rfc8707 import ResourceIndicator
+import redis
+import structlog
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
-logger = logging.getLogger(__name__)
+logger = structlog.get_logger()
 ```
 
-**Security libraries explained:**
+**2025 Security Dependencies Explained:**
+- `authlib`: Enterprise OAuth 2.1 implementation with PKCE support
+- `cryptography`: FIPS-compliant cryptographic operations
+- `rfc7636`: PKCE (Proof Key for Code Exchange) implementation
+- `rfc8707`: Resource Indicators for token scoping
 
-- `jwt`: PyJWT library for creating and verifying JSON Web Tokens  
-- `secrets`: Cryptographically secure random number generation  
-- `hashlib`: Secure hashing functions for token blacklisting  
-- `bcrypt`: Password hashing (for future user authentication)  
+**Step 2: PKCE Code Challenge Generation**
 
-**Step 1.1.2: JWT Manager Class Foundation**
+Implement secure PKCE challenge generation following RFC 7636:
+
+```python
+class PKCEGenerator:
+    """RFC 7636 PKCE implementation for MCP OAuth 2.1."""
+    
+    @staticmethod
+    def generate_code_verifier() -> str:
+        """
+        Generate cryptographically secure code verifier.
+        
+        RFC 7636 requires 43-128 character URL-safe string.
+        """
+        code_verifier = base64.urlsafe_b64encode(
+            secrets.token_bytes(96)
+        ).decode('utf-8').rstrip('=')
+        
+        logger.info("Generated PKCE code verifier", length=len(code_verifier))
+        return code_verifier
+    
+    @staticmethod 
+    def generate_code_challenge(verifier: str) -> Tuple[str, str]:
+        """
+        Generate code challenge from verifier using SHA256.
+        
+        Returns: (challenge, method)
+        """
+        digest = hashes.Hash(hashes.SHA256())
+        digest.update(verifier.encode('utf-8'))
+        challenge = base64.urlsafe_b64encode(
+            digest.finalize()
+        ).decode('utf-8').rstrip('=')
+        
+        return challenge, "S256"
+```
+
+**PKCE Security Benefits:**
+- **Authorization Code Protection**: Prevents interception attacks
+- **Public Client Security**: Secure OAuth for mobile and SPA clients
+- **Cryptographic Proof**: Mathematical verification of client authenticity  
+
+**Step 3: Resource Indicators Implementation**
+
+Implement RFC 8707 Resource Indicators to prevent token misuse:
+
+```python
+class ResourceIndicatorManager:
+    """RFC 8707 Resource Indicators for MCP token scoping."""
+    
+    def __init__(self, redis_client):
+        self.redis = redis_client
+        self.valid_resources = {
+            'mcp://filesystem-server': {
+                'description': 'File system operations',
+                'scopes': ['read', 'write', 'list']
+            },
+            'mcp://database-server': {
+                'description': 'Database operations', 
+                'scopes': ['select', 'insert', 'update']
+            },
+            'mcp://api-server': {
+                'description': 'External API calls',
+                'scopes': ['call', 'webhook']
+            }
+        }
+    
+    def validate_resource_request(self, resource: str, scopes: List[str]) -> bool:
+        """
+        Validate resource indicator and requested scopes.
+        
+        Prevents tokens from being used on unintended resources.
+        """
+        if resource not in self.valid_resources:
+            logger.warning("Invalid resource requested", resource=resource)
+            return False
+            
+        valid_scopes = self.valid_resources[resource]['scopes']
+        invalid_scopes = set(scopes) - set(valid_scopes)
+        
+        if invalid_scopes:
+            logger.warning(
+                "Invalid scopes requested", 
+                resource=resource, 
+                invalid_scopes=list(invalid_scopes)
+            )
+            return False
+            
+        return True
+    
+    def create_scoped_token(self, resource: str, scopes: List[str], 
+                           user_context: Dict[str, Any]) -> str:
+        """
+        Create JWT token scoped to specific resource and permissions.
+        
+        Token can ONLY be used for the specified resource.
+        """
+        if not self.validate_resource_request(resource, scopes):
+            raise ValueError(f"Invalid resource or scopes: {resource}")
+            
+        payload = {
+            'aud': resource,  # RFC 8707 audience claim
+            'scope': ' '.join(scopes),
+            'sub': user_context['user_id'],
+            'iat': datetime.utcnow(),
+            'exp': datetime.utcnow() + timedelta(hours=1),
+            'resource_indicator': resource,
+            'context': user_context
+        }
+        
+        token = jwt.encode(payload, os.getenv('JWT_SECRET'), algorithm='HS256')
+        logger.info(
+            "Created scoped token",
+            resource=resource,
+            scopes=scopes,
+            user_id=user_context['user_id']
+        )
+        
+        return token
+```
+
+**Resource Indicator Security Benefits:**
+- **Token Scoping**: Mathematically prevents cross-resource token usage
+- **Audience Validation**: Explicit resource targeting in JWT audience claim
+- **Scope Limitation**: Granular permission control per resource
+- **Audit Trail**: Complete tracking of token creation and usage
+
+**Step 4: Enhanced JWT Management with Security Controls**
 
 ```python
 class JWTManager:

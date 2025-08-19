@@ -1,9 +1,17 @@
 # Session 4 - Module A: Advanced Query Understanding
 
-## 🎯 Module Overview
-**Time Investment**: 50 minutes
-**Prerequisites**: Session 4 Core Content
-**Learning Outcome**: Master sophisticated query understanding and intent detection
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> This is supplementary content for deeper specialization.  
+> **Prerequisites**: Complete Session 4 core content first.
+> **Time Investment**: 50 minutes
+> **Target Audience**: Implementer path students and NLP specialists
+
+## Module Learning Outcomes
+After completing this module, you will master:
+- Sophisticated query understanding and intent detection techniques
+- Multi-turn conversation context management for RAG systems
+- Advanced query expansion and refinement strategies
+- Semantic gap analysis and query-document alignment optimization
 
 ---
 

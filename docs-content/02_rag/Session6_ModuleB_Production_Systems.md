@@ -1,9 +1,17 @@
 # Session 6 - Module B: Production GraphRAG Systems
 
-## 🎯 Module Overview
-**Time Investment**: 40 minutes
-**Prerequisites**: Session 6 Core Content
-**Learning Outcome**: Deploy enterprise-grade GraphRAG systems with advanced scalability and monitoring
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> This is supplementary content for deeper specialization.  
+> **Prerequisites**: Complete Session 6 core content first.
+> **Time Investment**: 40 minutes
+> **Target Audience**: Implementer path students and production engineers
+
+## Module Learning Outcomes
+After completing this module, you will master:
+- Enterprise-grade GraphRAG deployment with advanced scalability patterns
+- Production monitoring and performance optimization for graph systems
+- High-availability architecture design for mission-critical GraphRAG
+- Integration strategies with enterprise data and security infrastructure
 
 ---
 

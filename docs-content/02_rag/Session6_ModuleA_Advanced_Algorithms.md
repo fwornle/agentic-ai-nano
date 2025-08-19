@@ -1,9 +1,17 @@
 # Session 6 - Module A: Advanced Graph Algorithms
 
-## 🎯 Module Overview
-**Time Investment**: 40 minutes
-**Prerequisites**: Session 6 Core Content
-**Learning Outcome**: Master advanced graph algorithms for high-performance GraphRAG systems
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> This is supplementary content for deeper specialization.  
+> **Prerequisites**: Complete Session 6 core content first.
+> **Time Investment**: 40 minutes
+> **Target Audience**: Implementer path students and graph algorithm specialists
+
+## Module Learning Outcomes
+After completing this module, you will master:
+- Advanced graph traversal algorithms for complex knowledge networks
+- Optimization techniques for large-scale graph operations
+- Custom algorithm development for specialized graph patterns
+- Performance analysis and scaling strategies for graph-based RAG
 
 ---
 

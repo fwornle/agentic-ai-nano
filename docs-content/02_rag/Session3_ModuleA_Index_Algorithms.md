@@ -1,9 +1,17 @@
 # Session 3 - Module A: Advanced Index Algorithms
 
-## 🎯 Module Overview
-**Time Investment**: 45 minutes
-**Prerequisites**: Session 3 Core Content
-**Learning Outcome**: Master advanced vector indexing algorithms and optimization
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> This is supplementary content for deeper specialization.  
+> **Prerequisites**: Complete Session 3 core content first.
+> **Time Investment**: 45 minutes
+> **Target Audience**: Implementer path students and vector database specialists
+
+## Module Learning Outcomes
+After completing this module, you will master:
+- Advanced vector indexing algorithms (HNSW, IVF, Product Quantization)
+- Performance optimization techniques for large-scale vector operations
+- Custom index design for specialized retrieval patterns
+- Benchmarking and tuning strategies for production vector systems
 
 ---
 
