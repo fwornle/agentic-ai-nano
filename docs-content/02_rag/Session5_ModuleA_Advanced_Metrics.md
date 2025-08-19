@@ -1,9 +1,17 @@
 # Session 5 - Module A: Advanced Evaluation Metrics
 
-## 🎯 Module Overview
-**Time Investment**: 30 minutes
-**Prerequisites**: Session 5 Core Content
-**Learning Outcome**: Master advanced domain-specific and research-level evaluation metrics
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> This is supplementary content for deeper specialization.  
+> **Prerequisites**: Complete Session 5 core content first.
+> **Time Investment**: 30 minutes
+> **Target Audience**: Implementer path students and research professionals
+
+## Module Learning Outcomes
+After completing this module, you will master:
+- Advanced domain-specific evaluation metrics beyond basic accuracy
+- Research-level evaluation frameworks for RAG systems
+- Custom metric development for specialized use cases
+- Performance benchmarking and comparative analysis techniques
 
 ---
 

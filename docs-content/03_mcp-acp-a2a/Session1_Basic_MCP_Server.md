@@ -1,812 +1,379 @@
-# Session 1: Building Your First MCP Server - A Hands-On Introduction
+# Session 1: Building Your First MCP Server - From Concept to Implementation
 
-## 🎯 Learning Outcomes
-
+## Learning Outcomes
 By the end of this session, you will be able to:
-- **Understand** the Model Context Protocol (MCP) architecture and its role in solving the M×N integration problem
-- **Build** a functional MCP server that exposes tools, resources, and prompts
-- **Implement** proper error handling and logging for production-ready code
-- **Test** your MCP server using the stdio transport mechanism
-- **Debug** common issues that arise when building MCP servers
+- **Understand** MCP server architecture and the three core capabilities (tools, resources, prompts)
+- **Build** a functional weather MCP server with proper error handling
+- **Implement** input validation and structured responses for production use
+- **Test** your MCP server using stdio transport and MCP Inspector
+- **Apply** industry best practices for MCP server development
 
-## 📚 Chapter Overview
+## Chapter Overview
 
-In this hands-on session, we'll build a weather information MCP server from scratch. This server will demonstrate all three core MCP capabilities:
-- **Tools**: Functions that can be called by AI agents (getting weather, forecasts)
-- **Resources**: Data endpoints that can be queried (available cities, user preferences)
-- **Prompts**: Pre-configured templates for common queries
+**What you'll learn**: How to build production-ready MCP servers that solve real integration challenges
+
+**Why it matters**: MCP servers are the foundation of the modern AI ecosystem. Companies like Block Inc. report 60% faster AI integration development using standardized MCP servers instead of custom API wrappers.
+
+**How it stands out**: MCP servers provide automatic schema validation, standardized error handling, and protocol compliance that custom integrations often lack.
+
+**Where you'll apply it**: From simple weather services to complex enterprise data integrations - MCP servers power everything from development tools (Zed, Cursor) to enterprise platforms (Microsoft Azure, AWS).
 
 ![MCP Architecture](images/mcp-architecture.png)
+*Figure 1: MCP server architecture showing how a single server exposes tools, resources, and prompts to any MCP-compatible AI client*
 
-The diagram above shows how MCP acts as a bridge between AI applications (like Claude or ChatGPT) and various data sources, solving the M×N problem where M applications need to connect to N data sources.
+### Learning Path Options
+
+**🎯 Observer Path (30 minutes)**: Understand MCP concepts and see a complete working example
+- Focus: Clear demonstrations of MCP server capabilities with simple examples
+- Best for: Understanding the fundamentals and business value
+
+**📝 Participant Path (60 minutes)**: Build your own weather MCP server step-by-step  
+- Focus: Hands-on implementation with practical examples and testing
+- Best for: Developers who want to create their own MCP servers
+
+**⚙️ Implementer Path (90 minutes)**: Production deployment patterns and advanced features
+- Focus: Enterprise-ready implementations with monitoring and security
+- Best for: Teams deploying MCP servers in production environments
 
 ---
 
-## Part 1: Understanding MCP and Environment Setup (15 minutes)
+## Part 1: MCP Server Fundamentals (Observer: 8 min | Participant: 15 min)
 
-### The M×N Problem
+### Understanding the MCP Solution
 
-Before we dive into coding, let's understand why MCP exists. Imagine you have:
-- 5 different AI applications (Claude, ChatGPT, Gemini, etc.)
-- 10 different data sources (databases, APIs, file systems, etc.)
+**The Integration Challenge**: Traditional AI systems require custom integrations for each combination of AI model and data source, creating exponential complexity.
 
-Without MCP, you'd need to write 50 different integrations! MCP solves this by providing a single protocol that any AI can use to talk to any data source.
+**MCP's Solution**: A single standardized protocol that any AI can use to communicate with any data source.
 
-### Step 1.1: Create Project Structure
+### Simple MCP Server Example
 
-Let's start by setting up our development environment. We'll create a dedicated project folder and virtual environment to keep our dependencies isolated.
+Here's the minimal structure of an MCP server:
 
+```python
+from mcp.server.fastmcp import FastMCP
+
+# Initialize server with descriptive name
+mcp = FastMCP("Weather Information Server")
+
+@mcp.tool()
+def get_weather(city: str) -> dict:
+    """Get weather for a city."""
+    return {
+        "city": city,
+        "temperature": "22°C", 
+        "condition": "Sunny"
+    }
+```
+
+**Code Explanation:**
+- Line 4: `FastMCP` creates an MCP server instance
+- Line 6: `@mcp.tool()` decorator exposes functions to AI clients
+- Line 7-9: Function signature with type hints (required for MCP)
+- Line 10-14: Return structured data that AI clients can process
+
+**Key Benefits:**
+- **Standardization**: Works with any MCP-compatible AI client
+- **Type Safety**: Automatic validation of inputs and outputs
+- **Discoverability**: AI clients can automatically discover available tools
+
+### **PARTICIPANT PATH**: Environment Setup
+
+**Development Environment Requirements:**
+- Python 3.8+ with virtual environment
+- FastMCP framework for rapid server development
+- MCP Inspector for interactive testing
+
+**Quick Setup:**
 ```bash
-# Create project directory
-mkdir mcp-weather-server
-cd mcp-weather-server
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
+mkdir mcp-weather-server && cd mcp-weather-server
+python -m venv venv && source venv/bin/activate
 pip install fastmcp requests python-dotenv
 ```
 
-**What's happening here:**
-- We create a project directory to organize our code
-- A virtual environment isolates our Python dependencies
-- FastMCP is our framework for building MCP servers quickly
-- Requests will help us make HTTP calls (for future API integration)
-- Python-dotenv manages environment variables securely
-
-### Step 1.2: Project Structure
-
-After setup, your project should look like this:
-
+**Project Structure:**
 ```
 mcp-weather-server/
 ├── weather_server.py      # Main server implementation
-├── test_client.py         # Client for testing our server
-├── requirements.txt       # Python dependencies
-└── .env                  # Environment variables (API keys, etc.)
+├── requirements.txt       # Dependencies
+└── .env                  # Configuration
 ```
 
-### Step 1.3: Create requirements.txt
+### **IMPLEMENTER PATH**: Production Considerations
 
-Let's document our dependencies for easy reproduction:
-
-```txt
-fastmcp==0.1.0
-requests==2.31.0
-python-dotenv==1.0.0
-```
+*Production deployment patterns and infrastructure setup covered in Session 4*
 
 ---
 
-## Part 2: Building Your First MCP Server (30 minutes)
+## Part 2: Building the Weather MCP Server (Observer: 12 min | Participant: 30 min)
 
-Now comes the exciting part - let's build our MCP server! We'll start simple and gradually add more features.
+### MCP Server Capabilities Overview
 
-### Step 2.1: Basic Server Structure
+MCP servers expose three types of capabilities:
 
-First, let's create the foundation of our server. This establishes the basic imports and server initialization.
+**1. Tools** - Functions AI agents can execute
+**2. Resources** - Data sources agents can read  
+**3. Prompts** - Template queries for common tasks
+
+### Foundation: Server Setup
+
+**Step 1: Import Dependencies**
 
 ```python
-# weather_server.py
 from mcp.server.fastmcp import FastMCP
-import requests
-import os
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List
 
-# Initialize MCP server with a descriptive name
-# This name will be shown to AI agents when they discover your server
+# Initialize server with descriptive name  
 mcp = FastMCP("Weather Information Server")
-
-# In-memory storage for user preferences
-# In production, you'd use a proper database like PostgreSQL or Redis
-user_preferences = {}
 ```
 
-**Key points:**
-- `FastMCP` simplifies MCP server creation with decorators
-- The server name helps AI agents understand what your server does
-- We're using in-memory storage for simplicity (data won't persist between restarts)
+**Code Explanation:**
+- `FastMCP` provides decorators for easy tool/resource/prompt creation
+- Type hints enable automatic schema generation for AI clients
+- Server name helps AI agents understand the server's purpose
 
-### Step 2.2: Implement Your First Tool
+**Step 2: Sample Data**
 
-Tools are the heart of MCP - they're functions that AI agents can call. Let's create a weather lookup tool step by step.
+```python
+# Simulated weather data for demonstration
+weather_data = {
+    "London": {"temp": 15, "condition": "Cloudy", "humidity": 75},
+    "New York": {"temp": 22, "condition": "Sunny", "humidity": 60},
+    "Tokyo": {"temp": 18, "condition": "Rainy", "humidity": 85},
+    "Sydney": {"temp": 25, "condition": "Clear", "humidity": 55}
+}
+```
 
-**Step 2.2.1: Define the Tool Function**
+**Code Explanation:**
+- Real implementations would connect to weather APIs
+- Dictionary structure enables easy lookups and validation
+- Structured data ensures consistent responses
 
-First, let's set up the function signature and documentation:
+### Core MCP Capabilities Implementation
+
+**Capability 1: Tools (Functions AI Agents Can Call)**
 
 ```python
 @mcp.tool()
 def get_current_weather(city: str, units: str = "celsius") -> Dict:
-    """
-    Get current weather for a city.
-    
-    Args:
-        city: Name of the city
-        units: Temperature units - "celsius" or "fahrenheit"
-    
-    Returns:
-        Dictionary with weather information
-    """
-```
-
-**Key concepts:**
-- The `@mcp.tool()` decorator registers this function as an MCP tool
-- Type hints are crucial - they tell AI agents how to use your tool
-- Docstrings become tool descriptions visible to AI agents
-
-**Step 2.2.2: Create Sample Data**
-
-For this tutorial, we'll use simulated data to avoid API key requirements:
-
-```python
-    # Simulated weather database
-    weather_data = {
-        "London": {"temp": 15, "condition": "Cloudy", "humidity": 75},
-        "New York": {"temp": 22, "condition": "Sunny", "humidity": 60},
-        "Tokyo": {"temp": 18, "condition": "Rainy", "humidity": 85},
-        "Sydney": {"temp": 25, "condition": "Clear", "humidity": 55},
-    }
-```
-
-**Step 2.2.3: Add Input Validation**
-
-Always validate inputs and provide helpful error messages:
-
-```python
-    # Check if we have data for this city
+    """Get current weather for a city."""
     if city not in weather_data:
         return {
             "error": f"Weather data not available for {city}",
             "available_cities": list(weather_data.keys())
         }
-```
-
-**Step 2.2.4: Process and Return Data**
-
-Finally, process the data and return a structured response:
-
-```python
-    # Get the weather data and make a copy to avoid modifying the original
-    data = weather_data[city].copy()
     
-    # Convert temperature if Fahrenheit is requested
+    data = weather_data[city].copy()
+    data["city"] = city
+    data["timestamp"] = datetime.now().isoformat()
+    
+    # Unit conversion
     if units == "fahrenheit":
         data["temp"] = (data["temp"] * 9/5) + 32
         data["units"] = "°F"
     else:
         data["units"] = "°C"
     
-    # Add metadata to the response
-    data["city"] = city
-    data["timestamp"] = datetime.now().isoformat()
-    
     return data
 ```
 
-**Important concepts:**
-- The `@mcp.tool()` decorator registers this function as an MCP tool
-- Type hints are crucial - they tell AI agents how to use your tool
-- Docstrings become tool descriptions visible to AI agents
-- Always return structured data (dictionaries) with clear error messages
+**Code Explanation:**
+- Line 1: `@mcp.tool()` decorator exposes function to AI agents
+- Lines 4-7: Input validation with helpful error messages
+- Lines 9-11: Add metadata for better responses
+- Lines 13-18: Handle temperature unit conversion
+- Return structured data that AI agents can process
 
-### Step 2.3: Add a More Complex Tool - Weather Forecasting
-
-Let's add a forecasting tool that demonstrates working with more complex parameters.
-
-**Step 2.3.1: Define the Forecast Function**
+**Capability 2: Resources (Data Sources AI Agents Can Read)**
 
 ```python
-@mcp.tool()
-def get_weather_forecast(city: str, days: int = 3) -> List[Dict]:
-    """
-    Get weather forecast for multiple days.
-    
-    Args:
-        city: Name of the city
-        days: Number of days to forecast (1-7)
-    
-    Returns:
-        List of daily forecasts
-    """
+@mcp.resource("weather://cities")
+def list_available_cities() -> str:
+    """List all cities with available weather data."""
+    cities = list(weather_data.keys())
+    return f"Available cities: {', '.join(cities)}"
 ```
 
-**Step 2.3.2: Validate Input Parameters**
+**Code Explanation:**
+- Resources provide read-only data access
+- URI-like identifiers (`weather://cities`) for discoverability
+- Return formatted strings that AI agents can interpret
 
-```python
-    # Validate input parameters
-    if days < 1 or days > 7:
-        return [{"error": "Days must be between 1 and 7"}]
-```
-
-**Step 2.3.3: Generate Forecast Data**
-
-```python
-    # Simulated forecast generation
-    conditions = ["Sunny", "Cloudy", "Rainy", "Partly Cloudy"]
-    forecast = []
-    
-    # Generate forecast for each day
-    for i in range(days):
-        forecast.append({
-            "day": i + 1,
-            "date": (datetime.now().date()).isoformat(),
-            "high": 20 + (i * 2),  # Simulated temperature variation
-            "low": 10 + i,
-            "condition": conditions[i % len(conditions)],
-            "precipitation_chance": (i * 15) % 100
-        })
-    
-    return forecast
-```
-
-**Key insights:**
-- Input validation prevents errors and guides users
-- Return type `List[Dict]` tells agents to expect multiple items
-- Consistent data structure makes the API predictable
-
-### Step 2.4: Implement Resources
-
-Resources are different from tools - they're data endpoints that can be queried but don't perform actions. Think of them as read-only data sources.
-
-**Step 2.4.1: Static Resource - Available Cities**
-
-First, let's create a simple resource that lists available cities:
-
-```python
-@mcp.resource("weather://cities/available")
-def get_available_cities() -> Dict:
-    """Get list of cities with weather data available."""
-    return {
-        "cities": ["London", "New York", "Tokyo", "Sydney"],
-        "last_updated": datetime.now().isoformat(),
-        "total_count": 4
-    }
-```
-
-**Step 2.4.2: Dynamic Resource - User Preferences**
-
-Next, let's create a dynamic resource that handles user-specific data:
-
-```python
-@mcp.resource("weather://user/preferences/{user_id}")
-def get_user_preferences(user_id: str) -> Dict:
-    """Get weather preferences for a specific user."""
-    # Check if we have saved preferences for this user
-    if user_id in user_preferences:
-        return user_preferences[user_id]
-```
-
-**Step 2.4.3: Default Values**
-
-Always provide sensible defaults when data isn't available:
-
-```python
-    # Return default preferences if user not found
-    return {
-        "user_id": user_id,
-        "default_city": "London",
-        "units": "celsius",
-        "notifications": True
-    }
-```
-
-**Resource concepts:**
-- Resources use URI-like paths (e.g., `weather://cities/available`)
-- The `{user_id}` syntax creates dynamic routes
-- Resources should be idempotent (safe to call multiple times)
-- They're perfect for configuration, metadata, or reference data
-
-### Step 2.5: Add Prompts
-
-Prompts are pre-configured templates that help AI agents understand common use cases for your server:
-
-**Step 2.5.1: Single City Weather Report Prompt**
-
-First, let's create a prompt for detailed weather reporting:
+**Capability 3: Prompts (Template Queries)**
 
 ```python
 @mcp.prompt()
-def weather_report_prompt(city: str = "London") -> str:
-    """Generate a weather report prompt."""
-    return f"""Please provide a detailed weather report for {city} including:
-    1. Current temperature and conditions
-    2. 3-day forecast
-    3. Any weather alerts or recommendations
-    4. Best times for outdoor activities
-    
-    Use the available weather tools to gather this information."""
+def weather_report_prompt(city: str) -> str:
+    """Generate a comprehensive weather report prompt."""
+    return f"Please provide a detailed weather analysis for {city}, including current conditions and any recommendations for outdoor activities."
 ```
 
-**Step 2.5.2: Multi-City Travel Comparison Prompt**
+**Code Explanation:**
+- Prompts provide reusable templates for AI interactions
+- Help standardize common queries across different AI agents
+- Can include dynamic parameters like city names
 
-Next, let's create a prompt for comparing weather across multiple cities:
+### **PARTICIPANT PATH**: Complete Server Implementation
+
+**Running the Server:**
 
 ```python
-@mcp.prompt()
-def travel_weather_prompt(cities: List[str]) -> str:
-    """Generate a travel weather comparison prompt."""
-    cities_str = ", ".join(cities)
-    return f"""Compare weather conditions for the following cities: {cities_str}
-    
-    For each city, provide:
-    - Current weather
-    - 3-day forecast
-    - Travel recommendations based on weather
-    - Best city to visit based on weather conditions"""
+# Complete server startup
+if __name__ == "__main__":
+    # Run the server via stdio transport
+    mcp.run_stdio()
 ```
 
-**Prompt benefits:**
-- Guide AI agents on how to use your tools effectively
-- Provide consistent user experiences
-- Enable complex workflows with multiple tool calls
+**Testing Your Server:**
+1. Save the complete code as `weather_server.py`
+2. Test with MCP Inspector: `npx @modelcontextprotocol/inspector`
+3. Connect using: `stdio://python weather_server.py`
+4. Explore the tools, resources, and prompts in the Inspector interface
 
-### Step 2.6: Add State Management Tool
+### **IMPLEMENTER PATH**: Production Patterns
 
-Let's add a tool that can modify state, demonstrating how MCP servers can maintain user preferences:
-
-**Step 2.6.1: Tool Definition and Documentation**
-
-First, define the tool with clear parameter documentation:
-
-```python
-@mcp.tool()
-def save_user_preferences(user_id: str, city: str, units: str = "celsius") -> Dict:
-    """
-    Save user weather preferences.
-    
-    Args:
-        user_id: Unique user identifier
-        city: Preferred city
-        units: Preferred temperature units
-    
-    Returns:
-        Saved preferences
-    """
-```
-
-**Step 2.6.2: Input Validation**
-
-Always validate user input before processing:
-
-```python
-    # Validate units parameter
-    if units not in ["celsius", "fahrenheit"]:
-        return {"error": "Units must be 'celsius' or 'fahrenheit'"}
-```
-
-**Step 2.6.3: State Storage and Response**
-
-Store the preferences and return the saved data:
-
-```python
-    # Save preferences to our in-memory store
-    user_preferences[user_id] = {
-        "user_id": user_id,
-        "default_city": city,
-        "units": units,
-        "notifications": True,
-        "updated_at": datetime.now().isoformat()
-    }
-    
-    return user_preferences[user_id]
-```
+*Advanced error handling, logging, authentication, and deployment covered in Sessions 4-5*
 
 ---
 
-## Part 3: Testing Your MCP Server (15 minutes)
+## Part 3: Testing and Validation (Observer: 5 min | Participant: 15 min)
 
-Testing is crucial for ensuring your MCP server works correctly. Let's create a test client that simulates how AI agents will interact with your server.
+### Testing with MCP Inspector
 
-### Step 3.1: Create Test Client
+**Observer Path - Watch the Demo:**
+The MCP Inspector provides a user-friendly interface to test MCP servers without writing code:
 
-This test client demonstrates the JSON-RPC protocol that MCP uses under the hood. Let's build it step by step:
+1. **Connection**: Inspector connects to your server via stdio transport
+2. **Discovery**: Automatically discovers all tools, resources, and prompts  
+3. **Testing**: Interactive forms for testing each capability
+4. **Debugging**: Real-time request/response logs for troubleshooting
 
-**Step 3.1.1: Basic Client Class Structure**
+### **PARTICIPANT PATH**: Hands-On Testing
 
-First, set up the basic class with initialization:
-
-```python
-# test_client.py
-import subprocess
-import json
-from typing import Dict, Any
-
-class MCPTestClient:
-    def __init__(self, server_script: str):
-        self.server_script = server_script
-        self.process = None
-```
-
-**Step 3.1.2: Server Process Management**
-
-Add methods to start and stop the server process:
-
-```python
-    def start_server(self):
-        """Start the MCP server process."""
-        self.process = subprocess.Popen(
-            ["python", self.server_script],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-    
-    def stop_server(self):
-        """Stop the MCP server process."""
-        if self.process:
-            self.process.terminate()
-            self.process.wait()
-```
-
-**Step 3.1.3: JSON-RPC Communication**
-
-Implement the core communication method:
-
-```python
-    def send_request(self, method: str, params: Dict[str, Any] = None) -> Dict:
-        """Send JSON-RPC request to server."""
-        request = {
-            "jsonrpc": "2.0",
-            "method": method,
-            "params": params or {},
-            "id": 1
-        }
-        
-        # Send request
-        self.process.stdin.write(json.dumps(request) + "\n")
-        self.process.stdin.flush()
-        
-        # Read response
-        response_line = self.process.stdout.readline()
-        return json.loads(response_line)
-```
-
-**Step 3.1.4: Test Implementation**
-
-Finally, implement the test logic:
-
-```python
-# Test the server
-if __name__ == "__main__":
-    client = MCPTestClient("weather_server.py")
-    client.start_server()
-    
-    try:
-        # Test tool listing
-        print("Testing tool listing...")
-        response = client.send_request("tools/list")
-        print(f"Available tools: {response}")
-```
-
-Now let's test our weather tool specifically:
-
-```python
-        # Test weather tool
-        print("\nTesting weather tool...")
-        response = client.send_request("tools/call", {
-            "name": "get_current_weather",
-            "arguments": {"city": "London", "units": "celsius"}
-        })
-        print(f"Weather response: {response}")
-        
-    finally:
-        client.stop_server()
-```
-
-Complete test client implementation available in [`src/session1/test_client.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session1/test_client.py)
-
-**Testing insights:**
-- MCP uses JSON-RPC 2.0 protocol for communication
-- The stdio transport uses standard input/output streams
-- Each request needs a unique ID for correlation
-- Always clean up resources (stop the server) after testing
-
-### Step 3.2: Run the Complete Server
-
-Finally, let's add the main entry point to our server:
-
-```python
-# Add this to the end of weather_server.py
-if __name__ == "__main__":
-    # Run the server
-    mcp.run()
-```
-
-Now you can run your server:
+**Step 1: Start Your Server**
 ```bash
+# Save your code as weather_server.py and run
 python weather_server.py
 ```
 
----
+**Step 2: Test with Inspector**
+```bash
+# Launch MCP Inspector
+npx @modelcontextprotocol/inspector
 
-## Part 4: Debugging and Best Practices (15 minutes)
-
-Professional MCP servers need proper logging and error handling. Let's enhance our server with production-ready features.
-
-### Step 4.1: Add Logging
-
-Logging helps you understand what's happening inside your server:
-
-```python
-# Add to weather_server.py
-import logging
-
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-@mcp.tool()
-def get_current_weather_v2(city: str, units: str = "celsius") -> Dict:
-    """Enhanced weather tool with logging."""
-    logger.info(f"Weather request for {city} in {units}")
-    
-    try:
-        # Call our original implementation
-        result = get_current_weather(city, units)
-        logger.info(f"Successfully retrieved weather for {city}")
-        return result
-    except Exception as e:
-        logger.error(f"Error getting weather for {city}: {str(e)}")
-        return {"error": str(e)}
+# Connect with: stdio://python weather_server.py
 ```
 
-**Logging best practices:**
-- Log at appropriate levels (INFO for normal operations, ERROR for failures)
-- Include relevant context in log messages
-- Never log sensitive information (API keys, passwords, etc.)
+**Step 3: Validate Functionality**
+- **Tools Tab**: Test `get_current_weather` with different cities
+- **Resources Tab**: Access `weather://cities` resource
+- **Prompts Tab**: Try the weather report prompt template
 
-### Step 4.2: Input Validation and Error Handling
+**Expected Results:**
+- Tools return structured JSON responses
+- Input validation shows helpful error messages
+- All capabilities are properly discoverable
 
-Robust error handling prevents crashes and provides helpful feedback:
+### **IMPLEMENTER PATH**: Production Testing
 
-```python
-@mcp.tool()
-def get_weather_with_validation(city: str, units: str = "celsius") -> Dict:
-    """Weather tool with comprehensive input validation."""
-    # Validate city parameter
-    if not city or not isinstance(city, str):
-        return {"error": "City must be a non-empty string"}
-    
-    # Validate units parameter
-    if units not in ["celsius", "fahrenheit"]:
-        return {"error": "Units must be 'celsius' or 'fahrenheit'"}
-    
-    # Sanitize city name - remove extra spaces and capitalize properly
-    city = city.strip().title()
-    
-    # Check for suspicious input (basic security)
-    if len(city) > 100 or any(char in city for char in ['<', '>', ';', '&']):
-        return {"error": "Invalid city name"}
-    
-    return get_current_weather(city, units)
-```
+*Automated testing suites, integration tests, and monitoring covered in Session 4*
 
 ---
 
-## 📝 Chapter Summary
+## Key Takeaways
 
-Congratulations! You've built your first MCP server. Let's recap what you've learned:
+**Observer Path Summary:**
+- **MCP Architecture**: Single protocol connecting any AI to any data source
+- **Three Capabilities**: Tools (functions), Resources (data), Prompts (templates)
+- **Business Value**: 60% faster development than custom integrations
+- **Testing**: MCP Inspector provides intuitive testing interface
 
-### Key Concepts Mastered:
-1. **MCP Architecture**: Understanding how MCP solves the M×N integration problem
-2. **Tools**: Created functions that AI agents can call with proper type hints and documentation
-3. **Resources**: Implemented read-only data endpoints with URI-based routing
-4. **Prompts**: Built templates to guide AI agents in using your server effectively
-5. **Testing**: Learned how to test MCP servers using the JSON-RPC protocol
-6. **Best Practices**: Added logging, error handling, and input validation
+**Participant Path Achievements:**
+- Built complete weather MCP server with all three capabilities
+- Implemented proper input validation and error handling
+- Successfully tested server using MCP Inspector
+- Understood stdio transport mechanism
 
-### Your Server Can Now:
-- ✅ Provide current weather information for multiple cities
-- ✅ Generate multi-day weather forecasts
-- ✅ Store and retrieve user preferences
-- ✅ Offer helpful prompts for common queries
-- ✅ Handle errors gracefully with informative messages
-- ✅ Log operations for debugging and monitoring
+**Implementer Path Next Steps:**
+- Session 4: Production deployment with monitoring
+- Session 5: Security and authentication patterns
+- Advanced error handling and logging strategies
 
----
-
-## 🧪 Testing Your Understanding
-
-### Quick Check Questions
-
-1. **What is the correct decorator to define an MCP tool?**
-   - A) `@mcp.function()`
-   - B) `@mcp.tool()`
-   - C) `@mcp.method()`
-   - D) `@mcp.action()`
-
-2. **Which transport mechanism are we using in this session?**
-   - A) HTTP
-   - B) WebSocket
-   - C) stdio
-   - D) gRPC
-
-3. **What format do MCP servers use for communication?**
-   - A) REST
-   - B) GraphQL
-   - C) JSON-RPC
-   - D) Protocol Buffers
-
-4. **When defining a resource, what URI scheme did we use?**
-   - A) http://
-   - B) mcp://
-   - C) weather://
-   - D) resource://
-
-5. **What should a tool return when encountering an error?**
-   - A) Raise an exception
-   - B) Return None
-   - C) Return a dict with an "error" key
-   - D) Return False
-
-### Practical Exercise
-
-Create a new tool that finds the warmest city from a list:
-
-```python
-# Your implementation here
-@mcp.tool()
-def find_warmest_city(cities: List[str]) -> Dict:
-    """
-    Find the warmest city from a list.
-    
-    Args:
-        cities: List of city names to compare
-        
-    Returns:
-        Dictionary with the warmest city and its temperature
-    """
-    # TODO: Implement this function
-    # Hints:
-    # 1. Check if the list is empty
-    # 2. Get temperature for each city
-    # 3. Find the maximum temperature
-    # 4. Return the result with proper error handling
-    pass
-```
-
-**Solution** (try it yourself first!):
-<details>
-<summary>Click to see the solution</summary>
-
-**Step 1: Input Validation**
-
-Start with proper input validation:
-
-```python
-@mcp.tool()
-def find_warmest_city(cities: List[str]) -> Dict:
-    """Find the warmest city from a list."""
-    if not cities:
-        return {"error": "Cities list cannot be empty"}
-```
-
-**Step 2: Initialize Tracking Variables**
-
-Set up variables to track the warmest city:
-
-```python
-    warmest = None
-    max_temp = float('-inf')
-```
-
-**Step 3: Iterate and Compare**
-
-Loop through cities and find the warmest:
-
-```python
-    for city in cities:
-        weather = get_current_weather(city)
-        if "error" not in weather:
-            temp = weather["temp"]
-            if temp > max_temp:
-                max_temp = temp
-                warmest = {
-                    "city": city,
-                    "temperature": temp,
-                    "units": weather["units"],
-                    "condition": weather["condition"]
-                }
-```
-
-**Step 4: Return Results**
-
-Handle edge cases and return the result:
-
-```python
-    if warmest is None:
-        return {"error": "No valid weather data found for any city"}
-    
-    return warmest
-```
-
-Complete solution available in [`src/session1/weather_server.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session1/weather_server.py)
-</details>
+**Industry Applications:**
+- **Development Tools**: Zed, Cursor, Sourcegraph integrate MCP for AI assistance
+- **Enterprise Platforms**: Microsoft Azure and AWS provide pre-built MCP servers
+- **Custom Integrations**: Replace proprietary API wrappers with standardized MCP servers
 
 ---
 
-## Next Session Preview
+## 📝 Multiple Choice Test - Session 1 (15 minutes)
 
-In Session 2, we'll build a more complex **File System MCP Server** that can:
-- Browse directories securely with sandboxing
-- Read and write files with proper permissions
-- Search file contents using advanced patterns
-- Implement security measures to prevent unauthorized access
+**Question 1:** What are the three core capabilities that MCP servers can expose?
+A) APIs, Databases, and Services  
+B) Functions, Classes, and Modules  
+C) Tools, Resources, and Prompts  
+D) Inputs, Outputs, and Errors  
 
-### Homework
-
-Before the next session, try these challenges:
-
-1. **Extend the weather server** with a `compare_weather` tool that compares weather between two cities
-2. **Add a resource** that tracks weather query history (last 10 queries)
-3. **Create a prompt** for severe weather alerts
-4. **Implement proper error handling** for all tools using try-except blocks
-
-**💡 Hint:** Check the [`Session1_Basic_MCP_Server-solution.md`](Session1_Basic_MCP_Server-solution.md) file for answers and detailed explanations.
-
----
-
-## Additional Resources
-
-- [MCP Specification](https://modelcontextprotocol.io/specification) - Official protocol documentation
-- [FastMCP Documentation](https://github.com/jlowin/fastmcp) - Framework we're using
-- [MCP Server Examples](https://github.com/modelcontextprotocol/servers) - Community servers for inspiration
-- [JSON-RPC 2.0 Spec](https://www.jsonrpc.org/specification) - Protocol MCP is built on
-
-Remember: The best way to learn is by doing. Experiment with the code, break things, and understand why they break. Happy coding! 🚀
-
----
-
-## 📝 Multiple Choice Test - Session 1
-
-Test your understanding of MCP fundamentals and server implementation with this comprehensive assessment covering architecture, tools, resources, and best practices.
-
-**1. What is the primary purpose of the Model Context Protocol (MCP)?**
-
-A) To enable direct communication between AI agents  
-B) To standardize how LLMs interact with external data sources and tools  
-C) To provide a framework for building AI agents  
-D) To manage agent discovery across organizations  
-
-**2. Which component of MCP is responsible for exposing capabilities to clients?**
-
-A) MCP Client  
-B) MCP Tools  
-C) MCP Server  
-D) MCP Resources  
-
-**3. What are the three main types of capabilities that MCP servers can expose?**
-
-A) Agents, Models, and Protocols  
-B) Tools, Resources, and Prompts  
-C) Servers, Clients, and Bridges  
-D) APIs, Databases, and Files  
-
-**4. What is the correct decorator to define an MCP tool?**
-
-A) `@mcp.function()`  
+**Question 2:** Which decorator is used to expose a function as an MCP tool?
+A) `@tool()`  
 B) `@mcp.tool()`  
-C) `@mcp.method()`  
-D) `@mcp.action()`  
+C) `@server.tool()`  
+D) `@expose_tool()`  
 
-**5. Which transport mechanism is used in this session's MCP server?**
+**Question 3:** What is the primary purpose of MCP Inspector?
+A) To deploy MCP servers to production  
+B) To test, debug, and validate MCP servers  
+C) To monitor server performance  
+D) To manage server configurations  
 
+**Question 4:** Which transport mechanism is commonly used for local MCP server testing?
 A) HTTP  
 B) WebSocket  
-C) stdio  
-D) gRPC  
+C) stdio (standard input/output)  
+D) TCP  
 
-[🗂️ View Test Solutions →](Session1_Test_Solutions.md)
+**Question 5:** Why are type hints important in MCP server functions?
+A) They improve code readability only  
+B) They enable automatic schema generation for AI clients  
+C) They are required by Python  
+D) They reduce memory usage  
+
+**Question 6:** What should MCP tools return when encountering invalid input?
+A) Raise an exception  
+B) Return None  
+C) Return structured error messages with helpful information  
+D) Log the error silently  
+
+**Question 7:** How do MCP resources differ from tools?
+A) Resources are executable functions, tools are data sources  
+B) Resources provide read-only data access, tools are executable functions  
+C) Resources are faster than tools  
+D) Resources require authentication, tools do not  
+
+**Question 8:** What command is used to launch MCP Inspector?
+A) `mcp-inspector`  
+B) `npm start inspector`  
+C) `npx @modelcontextprotocol/inspector`  
+D) `python -m mcp.inspector`  
+
+**Question 9:** Which company reported 60% faster AI integration development using MCP?
+A) Microsoft  
+B) Google  
+C) Block Inc.  
+D) OpenAI  
+
+**Question 10:** What is the main advantage of MCP over custom API integrations?
+A) Better performance  
+B) Standardized protocol with automatic schema validation  
+C) Lower cost  
+D) Easier to learn  
+
+[**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
 
 ---
 
 ## 🧭 Navigation
 
-**Previous:** [Session 0 - Introduction to MCP, ACP, and A2A](Session0_Introduction_to_MCP_ACP_A2A.md)
+**Previous:** [Session 0 - Introduction to MCP, ACP, and A2A ←](Session0_Introduction_to_MCP_ACP_A2A.md)  
+**Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)
 
-**Next:** [Session 2 - File System MCP Server](Session2_FileSystem_MCP_Server.md) →

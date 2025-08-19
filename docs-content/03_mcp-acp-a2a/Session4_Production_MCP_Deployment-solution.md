@@ -1,51 +1,5 @@
 # Session 4: Production MCP Deployment - Solution Guide
 
-## 🧪 Multiple Choice Quiz - Answer Key
-
-### Quick Check Questions
-
-1. **What is the primary purpose of health checks in production MCP servers?**
-   - A) Improve performance
-   - B) Enable auto-scaling and monitoring ✅ **CORRECT**
-   - C) Reduce costs
-   - D) Increase security
-
-   **Explanation:** Health checks are essential for load balancers and orchestrators to determine if a server instance is ready to receive traffic. They enable auto-scaling decisions and provide monitoring systems with server status information.
-
-2. **Which cloud service automatically scales based on request volume?**
-   - A) EC2
-   - B) Cloud Run ✅ **CORRECT**
-   - C) Compute Engine
-   - D) Virtual Machines
-
-   **Explanation:** Google Cloud Run is a serverless platform that automatically scales containers based on incoming request volume, scaling to zero when idle and scaling up based on demand.
-
-3. **What format does Prometheus use for metrics?**
-   - A) JSON
-   - B) XML
-   - C) Plain text with specific format ✅ **CORRECT**
-   - D) Binary
-
-   **Explanation:** Prometheus uses a plain text exposition format with specific syntax for metrics collection. This format is human-readable and standardized across the ecosystem.
-
-4. **How does the Lambda handler communicate with MCP servers?**
-   - A) Direct function calls
-   - B) HTTP/JSON-RPC protocol ✅ **CORRECT**
-   - C) gRPC
-   - D) WebSockets
-
-   **Explanation:** Lambda functions communicate with MCP servers using HTTP requests formatted according to the JSON-RPC protocol specification, which is the standard for MCP communication.
-
-5. **What's the benefit of using Redis cache in MCP servers?**
-   - A) Security
-   - B) Reduced latency and load ✅ **CORRECT**
-   - C) Better logging
-   - D) Simpler deployment
-
-   **Explanation:** Redis caching reduces response latency by storing frequently accessed data in memory and reduces load on backend systems by avoiding repeated computations.
-
----
-
 ## 💡 Practical Exercise Solution
 
 **Challenge:** Implement a circuit breaker pattern for MCP server resilience.
