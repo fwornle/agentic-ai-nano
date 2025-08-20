@@ -102,6 +102,6 @@
         "--network=host"
     ],
     // Open container user work directory by default
-    "workspaceFolder": "/home/ubuntu/workdir",
+    "workspaceFolder": "/workspaces/agentic-ai-nano",
     // "postStartCommand": "2>&1 nohup bash -c 'ollama serve &' > /home/developer/workdir/ollama.log"
 }
