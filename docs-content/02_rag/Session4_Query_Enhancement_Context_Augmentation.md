@@ -25,11 +25,11 @@ By the end of this session, you will be able to:
 - Focus: Conceptual understanding with practical examples
 - Best for: Getting oriented and understanding the business value
 
-**📝 Participant Path (130 minutes)**: Follow exercises and implement HyDE and context optimization
+**🙋‍♂️ Participant Path (130 minutes)**: Follow exercises and implement HyDE and context optimization
 - Focus: Hands-on implementation with guided examples
 - Best for: Learning through practical implementation
 
-**⚙️ Implementer Path (230 minutes)**: Build custom enhancement systems and explore production patterns
+**🛠️ Implementer Path (230 minutes)**: Build custom enhancement systems and explore production patterns
 - Focus: Advanced techniques and production deployment
 - Best for: Technical teams planning real-world deployments
 

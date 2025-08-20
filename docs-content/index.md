@@ -57,12 +57,12 @@ Each session offers **three distinct learning paths** to accommodate different l
 - **Activities**: Read core concepts, examine patterns
 - **Ideal for**: Quick overview, decision makers, time-constrained learners
 
-### Participant Path (60-90 min)
+### 🙋‍♂️ Participant Path (60-90 min)
 - **Focus**: Guided implementation
 - **Activities**: Follow exercises, analyze examples
 - **Ideal for**: Active learners, developers, technical managers
 
-### Implementer Path (120-180 min)
+### 🛠️ Implementer Path (120-180 min)
 - **Focus**: Hands-on development
 - **Activities**: Build systems, explore advanced patterns
 - **Ideal for**: Engineers, architects, deep technical expertise

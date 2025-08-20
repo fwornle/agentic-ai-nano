@@ -42,11 +42,11 @@ Based on current industry trends, advanced chunking in 2025 employs:
 - Focus: Core concepts and practical applications with clear demonstrations
 - Best for: Getting oriented with intelligent document processing fundamentals
 
-**📝 Participant Path (65 minutes)**: Implement structure-aware chunking
+**🙋‍♂️ Participant Path (65 minutes)**: Implement structure-aware chunking
 - Focus: Hands-on implementation of hierarchical and metadata-enhanced chunking
 - Best for: Building practical preprocessing pipelines with real-world applications
 
-**⚙️ Implementer Path (105 minutes)**: Advanced patterns and enterprise deployment
+**🛠️ Implementer Path (105 minutes)**: Advanced patterns and enterprise deployment
 - Focus: Domain-specific processors and enterprise-scale optimization
 - Best for: Deep technical mastery with production-ready implementations
 

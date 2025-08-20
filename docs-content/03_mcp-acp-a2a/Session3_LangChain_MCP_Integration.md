@@ -1118,7 +1118,7 @@ D) Manual intervention is required
 **Previous:** [Session 2 - FileSystem MCP Server](Session2_FileSystem_MCP_Server.md)
 
 **Optional Deep-Dive Modules:**
-- **[Module A: Enterprise Agent Patterns](Session3_ModuleA_Enterprise_Patterns.md)** - Production deployment, advanced error handling, and performance optimization
-- **[Module B: Advanced Workflow Orchestration](Session3_ModuleB_Advanced_Workflows.md)** - Parallel processing, conditional branching, and distributed coordination
+- 🔬 **[Module A: Enterprise Agent Patterns](Session3_ModuleA_Enterprise_Patterns.md)** - Production deployment, advanced error handling, and performance optimization
+- 🏭 **[Module B: Advanced Workflow Orchestration](Session3_ModuleB_Advanced_Workflows.md)** - Parallel processing, conditional branching, and distributed coordination
 
 **Next:** [Session 4 - Production MCP Deployment](Session4_Production_MCP_Deployment.md)

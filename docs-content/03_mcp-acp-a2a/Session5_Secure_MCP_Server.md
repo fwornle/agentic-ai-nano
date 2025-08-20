@@ -52,11 +52,11 @@ Secure MCP implementations are critical for:
 - Focus: Quick insights into OAuth 2.1, security vulnerabilities, and protection strategies
 - Best for: Getting oriented with enterprise security requirements
 
-**📝 Participant Path (60 minutes)**: Implement working secure authentication and monitoring  
+**🙋‍♂️ Participant Path (60 minutes)**: Implement working secure authentication and monitoring  
 - Focus: Hands-on OAuth 2.1 implementation, rate limiting, and security controls
 - Best for: Building practical secure MCP systems
 
-**⚙️ Implementer Path (95 minutes)**: Advanced enterprise security and compliance
+**🛠️ Implementer Path (95 minutes)**: Advanced enterprise security and compliance
 - Focus: ABAC policies, advanced threat detection, and regulatory compliance
 - Best for: Enterprise security architecture and compliance expertise
 
@@ -1553,9 +1553,9 @@ D) Increasing server capacity
 
 ## Navigation
 
-**Previous:** Session 4 - Building Production MCP Servers
+**Previous:** [Session 4 - Production MCP Deployment](Session4_Production_MCP_Deployment.md)
 
-**Next:** Session 6 - Advanced MCP Patterns →
+**Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
 
 ---
 
