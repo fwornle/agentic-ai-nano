@@ -134,6 +134,20 @@ RUN wget https://trustbundle.bmwgroup.net/BMW_Trusted_Certificates_Latest.pem \
     -O /usr/local/share/ca-certificates/BMW_Trusted_Certificates_Latest.crt \
     && update-ca-certificates --fresh
 
+# coding assistant
+ARG CA_VERSION=235965d7ad85a09683c6dacada1ef2f4157259ee
+RUN cd /tmp && \
+    mkdir /opt/coding_assistant && \
+    wget ${GITHUB_MIRROR}/msc94/coding_assistant/archive/${CA_VERSION}.tar.gz && \
+    tar -C /opt/coding_assistant --strip-components=1 -xf ${CA_VERSION}.tar.gz
+RUN echo '#!/bin/bash' > /usr/local/bin/coding-assistant
+RUN chmod +x /usr/local/bin/coding-assistant
+RUN echo 'export SSL_CERT_FILE=/usr/local/share/ca-certificates/BMW_Trusted_Certificates_Latest.crt'\
+    >> /usr/local/bin/coding-assistant
+RUN echo 'uv run --project /opt/coding_assistant coding-assistant --no-sandbox --model claude-sonnet-4 "$@"' \
+    >> /usr/local/bin/coding-assistant
+RUN mkdir -p /opt/coding_assistant && chown ${user}:${user} /opt/coding_assistant
+
 # # Install Python dependencies
 # ARG py_reqs="requirements.txt"
 # COPY ${py_reqs} .
