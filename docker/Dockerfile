@@ -144,7 +144,7 @@ RUN echo '#!/bin/bash' > /usr/local/bin/coding-assistant
 RUN chmod +x /usr/local/bin/coding-assistant
 RUN echo 'export SSL_CERT_FILE=/usr/local/share/ca-certificates/BMW_Trusted_Certificates_Latest.crt'\
     >> /usr/local/bin/coding-assistant
-RUN echo 'uv run --project /opt/coding_assistant coding-assistant --no-sandbox --model claude-sonnet-4 "$@"' \
+RUN echo 'uv run --project /opt/coding_assistant coding-assistant --no-sandbox --model openai/claude-sonnet-4 --expert-model openai/claude-sonnet-4 "$@"' \
     >> /usr/local/bin/coding-assistant
 RUN mkdir -p /opt/coding_assistant && chown ${user}:${user} /opt/coding_assistant
 
