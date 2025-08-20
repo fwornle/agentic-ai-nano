@@ -14,20 +14,29 @@ In this module, you'll master three revolutionary protocols that are reshaping h
 
 Choose your path based on your learning goals and time availability:
 
-### 👀 Observer Path (30-50 min per session)
-- **Focus**: Understanding concepts and architecture
-- **Activities**: Read core concepts, examine examples
-- **Ideal for**: Decision makers, architects, overview learners
+=== "👀 Observer (30-50 min)"
 
-### Participant Path (60-90 min per session)
-- **Focus**: Guided implementation and analysis
-- **Activities**: Follow tutorials, analyze code examples
-- **Ideal for**: Developers, technical leads, hands-on learners
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Read core concepts, examine examples
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### Implementer Path (120-180 min per session)
-- **Focus**: Complete implementation and customization
-- **Activities**: Build systems, extend examples, create solutions
-- **Ideal for**: Senior engineers, architects, specialists
+=== "🙋‍♂️ Participant (60-90 min)"
+
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Follow tutorials, analyze code examples
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "🛠️ Implementer (120-180 min)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Build systems, extend examples, create solutions
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ## Prerequisites
 
