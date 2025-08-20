@@ -88,7 +88,7 @@
         // Use the host netrc (to enable access to internal repositories)
         "source=${localEnv:HOME}/.netrc,target=/home/ubuntu/.netrc,type=bind,readonly",
         // Mount the repository into the container
-        "source=${localWorkspaceFolder},target=/home/ubuntu/workdir,type=bind"
+        "source=${localWorkspaceFolder},target=/home/ubuntu/agentic-ai-nano,type=bind"
         // Mount the ollama cache in the repository to avoid re-downloading models.
         // "source=${localWorkspaceFolder}/.ollama,target=/home/developer/.ollama,type=bind"
     ],
@@ -102,6 +102,6 @@
         "--network=host"
     ],
     // Open container user work directory by default
-    "workspaceFolder": "/workspaces/agentic-ai-nano",
+    "workspaceFolder": "/home/ubuntu/agentic-ai-nano",
     // "postStartCommand": "2>&1 nohup bash -c 'ollama serve &' > /home/developer/workdir/ollama.log"
 }
