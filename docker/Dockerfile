@@ -62,6 +62,7 @@ RUN apt-get update \
         rsync \
         ripgrep \
         sudo \
+        tmux \
         unzip \
         vim \
         wget \
