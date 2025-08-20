@@ -212,7 +212,7 @@ D) Planning (for multi-step workflows)
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **15/15 Correct**: Excellent understanding of agent frameworks and patterns
 - **12-14 Correct**: Good grasp with minor knowledge gaps
@@ -222,7 +222,7 @@ D) Planning (for multi-step workflows)
 
 ---
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### Five Core Agentic Patterns
 

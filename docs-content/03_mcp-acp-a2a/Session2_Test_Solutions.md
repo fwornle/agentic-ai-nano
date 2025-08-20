@@ -132,7 +132,7 @@ D) Automatic file compression
 
 ---
 
-## 💡 Practical Exercise Solution
+## Practical Exercise Solution
 
 **Challenge:** Extend the server with a tool that safely moves/renames files.
 

@@ -22,7 +22,7 @@ session2/
 └── README.md                   # This file
 ```
 
-## 🚀 Key Features
+## Key Features
 
 ### 1. Document Structure Analysis
 
@@ -142,7 +142,7 @@ technical_config = get_config("technical")   # For technical manuals
 business_config = get_config("business")     # For business documents
 ```
 
-## 🧪 Running the Demo
+## Running the Demo
 
 Execute the comprehensive demonstration:
 
@@ -195,7 +195,7 @@ This will demonstrate:
 - **MultiModalProcessor**: Handles mixed content types including images and structured data
 - **ChunkQualityAssessor**: Evaluates and scores chunk quality across multiple dimensions
 
-## 📊 Performance Benefits
+## Performance Benefits
 
 Compared to naive chunking approaches, this advanced system provides:
 
@@ -205,7 +205,7 @@ Compared to naive chunking approaches, this advanced system provides:
 - **Enhanced search capabilities** through metadata integration
 - **Quality measurement and optimization** through comprehensive assessment
 
-## 🔧 Customization
+## Customization
 
 ### Custom Content Types
 
@@ -241,7 +241,7 @@ class CustomQualityAssessor(ChunkQualityAssessor):
         pass
 ```
 
-## 🚀 Production Considerations
+## Production Considerations
 
 - **Performance**: Advanced processing requires more computational resources
 - **Configuration**: Many parameters need tuning for optimal performance

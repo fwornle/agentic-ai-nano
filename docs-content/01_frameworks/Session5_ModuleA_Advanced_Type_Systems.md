@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores sophisticated validation patterns, complex field types, and advanced business rule enforcement in PydanticAI. You'll learn to build enterprise-grade validation systems that handle complex data relationships and business logic.
 
@@ -496,7 +496,7 @@ Finally, we handle validation failures with detailed error reporting:
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced type systems in PydanticAI, including:
 

@@ -67,7 +67,7 @@ D) Observer Pattern
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **5/5 Correct**: Excellent mastery of bare metal agent implementation
 - **4 Correct**: Good understanding with minor gaps
@@ -77,7 +77,7 @@ D) Observer Pattern
 
 ---
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### Core Agent Architecture
 

@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores enterprise-grade production deployment patterns for multi-agent systems including distributed monitoring, scalable orchestration, container-based deployment, service mesh integration, and operational excellence practices. You'll learn to build production-ready multi-agent systems that can handle enterprise scale and operational requirements.
 
@@ -1522,7 +1522,7 @@ ServiceMonitor enables automatic Prometheus scraping configuration:
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered production deployment patterns for multi-agent systems:
 

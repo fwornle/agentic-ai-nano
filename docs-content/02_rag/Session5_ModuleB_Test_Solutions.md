@@ -72,7 +72,7 @@ D) Only user queries and response times
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **5/5 Correct**: Excellent mastery of enterprise monitoring and compliance
 - **4/5 Correct**: Good understanding with minor gaps in monitoring strategies
@@ -82,7 +82,7 @@ D) Only user queries and response times
 
 ---
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### Enterprise Monitoring Framework
 1. **SLA Metrics**: Availability, response time, and user experience indicators

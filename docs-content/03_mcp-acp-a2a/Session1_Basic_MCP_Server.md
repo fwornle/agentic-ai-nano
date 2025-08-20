@@ -1,6 +1,7 @@
 # Session 1: Building Your First MCP Server - From Concept to Implementation
 
 ## Learning Outcomes
+
 By the end of this session, you will be able to:
 - **Understand** MCP server architecture and the three core capabilities (tools, resources, prompts)
 - **Build** a functional weather MCP server with proper error handling
@@ -23,7 +24,7 @@ By the end of this session, you will be able to:
 
 ### Learning Path Options
 
-**🎯 Observer Path (30 minutes)**: Understand MCP concepts and see a complete working example
+**Observer Path (30 minutes)**: Understand MCP concepts and see a complete working example
 - Focus: Clear demonstrations of MCP server capabilities with simple examples
 - Best for: Understanding the fundamentals and business value
 
@@ -53,6 +54,7 @@ Here's the minimal structure of an MCP server:
 from mcp.server.fastmcp import FastMCP
 
 # Initialize server with descriptive name
+
 mcp = FastMCP("Weather Information Server")
 
 @mcp.tool()
@@ -123,7 +125,8 @@ from mcp.server.fastmcp import FastMCP
 from datetime import datetime
 from typing import Dict, List
 
-# Initialize server with descriptive name  
+# Initialize server with descriptive name
+
 mcp = FastMCP("Weather Information Server")
 ```
 
@@ -135,7 +138,9 @@ mcp = FastMCP("Weather Information Server")
 **Step 2: Sample Data**
 
 ```python
+
 # Simulated weather data for demonstration
+
 weather_data = {
     "London": {"temp": 15, "condition": "Cloudy", "humidity": 75},
     "New York": {"temp": 22, "condition": "Sunny", "humidity": 60},
@@ -218,7 +223,9 @@ def weather_report_prompt(city: str) -> str:
 **Running the Server:**
 
 ```python
+
 # Complete server startup
+
 if __name__ == "__main__":
     # Run the server via stdio transport
     mcp.run_stdio()
@@ -252,16 +259,21 @@ The MCP Inspector provides a user-friendly interface to test MCP servers without
 
 **Step 1: Start Your Server**
 ```bash
+
 # Save your code as weather_server.py and run
+
 python weather_server.py
 ```
 
 **Step 2: Test with Inspector**
 ```bash
+
 # Launch MCP Inspector
+
 npx @modelcontextprotocol/inspector
 
 # Connect with: stdio://python weather_server.py
+
 ```
 
 **Step 3: Validate Functionality**
@@ -306,7 +318,7 @@ npx @modelcontextprotocol/inspector
 
 ---
 
-## 💡 Practical Exercise: Advanced Weather Tool (20 minutes)
+## Practical Exercise: Advanced Weather Tool (20 minutes)
 
 **Challenge:** Create a tool that finds the warmest city from a list.
 
@@ -327,6 +339,7 @@ Now that you've built your basic weather MCP server, let's extend it with a more
 - Use logging to track the comparison process
 
 ### Expected Function Signature:
+
 ```python
 @mcp.tool()
 def find_warmest_city(cities: List[str]) -> Dict:
@@ -357,13 +370,14 @@ Try implementing this tool before looking at the solution! This exercise reinfor
 
 ---
 
-## 💡 Practical Exercise
+## Practical Exercise
 
 **Challenge:** Create a tool that finds the warmest city from a list.
 
 Build a more complex MCP tool that demonstrates data processing, error handling, and structured responses:
 
 ### Your Task:
+
 ```python
 @mcp.tool()
 def find_warmest_city(cities: List[str]) -> Dict:
@@ -382,6 +396,7 @@ def find_warmest_city(cities: List[str]) -> Dict:
 ```
 
 ### Requirements:
+
 1. **Input validation**: Handle empty lists and invalid city names
 2. **Weather lookup**: Use the existing `get_current_weather` function
 3. **Comparison logic**: Find the city with highest temperature
@@ -398,7 +413,7 @@ def find_warmest_city(cities: List[str]) -> Dict:
 
 ---
 
-## 📝 Multiple Choice Test - Session 1
+## Multiple Choice Test - Session 1
 
 **Question 1:** What are the three core capabilities that MCP servers can expose?
 A) APIs, Databases, and Services  
@@ -464,7 +479,7 @@ D) Easier to learn
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 0 - Introduction to MCP, ACP, and A2A ←](Session0_Introduction_to_MCP_ACP_A2A.md)  
 **Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)

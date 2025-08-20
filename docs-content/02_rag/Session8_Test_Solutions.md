@@ -98,7 +98,7 @@ D) Compatibility with legacy systems
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **8/8 Correct**: Excellent mastery of MRAG evolution and advanced multimodal concepts
 - **7/8 Correct**: Strong understanding with minor gaps in advanced techniques
@@ -108,7 +108,7 @@ D) Compatibility with legacy systems
 
 ---
 
-## 📚 Key MRAG Evolution Concepts
+## Key MRAG Evolution Concepts
 
 ### MRAG Evolution Paradigms
 

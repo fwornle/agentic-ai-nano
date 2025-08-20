@@ -106,7 +106,7 @@ D) Token usage
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **8/8 Correct**: Excellent mastery of agentic RAG concepts and architecture
 - **7/8 Correct**: Strong understanding with minor gaps
@@ -116,7 +116,7 @@ D) Token usage
 
 ---
 
-## 📚 Key Agentic RAG Concepts
+## Key Agentic RAG Concepts
 
 ### Query Planning and Execution
 

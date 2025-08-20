@@ -66,21 +66,26 @@ This integration enables you to build AI workflows that seamlessly integrate wit
 Let's see how easily LangChain connects to MCP servers:
 
 ```python
+
 # Basic MCP-LangChain integration
+
 from langchain_mcp_adapters import MultiServerMCPClient
 from langchain.agents import create_react_agent
 from langchain_openai import ChatOpenAI
 
 # Connect to multiple MCP servers
+
 client = MultiServerMCPClient({
     "weather": {"command": "python", "args": ["weather_server.py"]},
     "files": {"command": "python", "args": ["file_server.py"]}
 })
 
 # Get tools from all servers
+
 tools = client.list_tools()
 
 # Create intelligent agent
+
 agent = create_react_agent(
     llm=ChatOpenAI(model="gpt-4"),
     tools=tools,
@@ -99,15 +104,19 @@ agent = create_react_agent(
 For hands-on implementation, set up your development environment:
 
 ```bash
+
 # Create project directory
+
 mkdir langchain-mcp-integration
 cd langchain-mcp-integration
 
 # Create virtual environment
+
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install core dependencies
+
 pip install langchain-mcp-adapters langgraph langchain-openai \
             langchain-anthropic python-dotenv colorama rich
 ```
@@ -154,7 +163,9 @@ langchain-mcp-integration/
 Create a robust configuration system for enterprise deployments:
 
 ```python
+
 # config.py - Foundation
+
 import os
 from typing import Dict, Any, List
 from dataclasses import dataclass
@@ -190,7 +201,9 @@ class LLMConfig:
 - **IDE support**: Full autocomplete and error detection
 
 ```python
+
 # Main configuration class
+
 class Config:
     """Main configuration class for LangChain MCP integration."""
     
@@ -263,12 +276,19 @@ class Config:
 Real enterprise AI agents need to coordinate multiple tools intelligently. Consider this customer service scenario:
 
 ```python
+
 # Customer inquiry: "What's the weather like for my shipment to London?"
+
 # Agent needs to:
+
 # 1. Query customer database for shipment details
+
 # 2. Get weather data for London
+
 # 3. Check file system for shipping policies
+
 # 4. Combine information into helpful response
+
 ```
 
 This requires an agent that can:
@@ -282,7 +302,9 @@ This requires an agent that can:
 Build a robust system to manage multiple MCP servers:
 
 ```python
+
 # utils/mcp_manager.py - Foundation
+
 import asyncio
 import logging
 from typing import Dict, List, Optional
@@ -343,7 +365,6 @@ class MCPServerManager:
             return False
 ```
 
-
 ```python
     async def get_adapter(self, server_name: str) -> Optional[MCPAdapter]:
         """Get adapter with automatic health checking."""
@@ -380,12 +401,15 @@ class MCPServerManager:
 Now let's see how LangChain agents use the ReAct (Reasoning and Acting) pattern to coordinate multiple tools:
 
 ```python
+
 # Basic ReAct agent with MCP tools
+
 from langchain.agents import create_react_agent, AgentExecutor
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
 # Simple ReAct prompt template
+
 react_prompt = PromptTemplate.from_template("""
 You have access to multiple tools. Use this format:
 
@@ -415,7 +439,9 @@ Question: {input}
 Create lightweight MCP servers for your agent integration:
 
 ```python
+
 # mcp_servers/weather_server.py
+
 from mcp.server.fastmcp import FastMCP
 from datetime import datetime
 from typing import Dict
@@ -423,6 +449,7 @@ from typing import Dict
 mcp = FastMCP("Weather Server")
 
 # Sample weather data
+
 WEATHER_DATA = {
     "London": {"temp": 15, "condition": "Cloudy", "humidity": 75},
     "New York": {"temp": 22, "condition": "Sunny", "humidity": 60},
@@ -449,7 +476,6 @@ def get_current_weather(city: str, units: str = "celsius") -> Dict:
 if __name__ == "__main__":
     mcp.run()
 ```
-
 
 **Design principles:**
 - **Simple data structure**: Easy to understand and extend
@@ -486,7 +512,9 @@ Agent reasoning:
 Start with a simple agent to understand the integration pattern:
 
 ```python
+
 # agents/basic_agent.py
+
 import asyncio
 import logging
 from typing import Optional
@@ -578,14 +606,11 @@ class BasicMCPAgent:
             return f"Error processing request: {str(e)}"
 ```
 
-
 **Key integration concepts:**
 - **Tool wrapping**: MCP tools become LangChain-compatible
 - **Error handling**: Graceful degradation when tools fail
 - **Async support**: Non-blocking execution for better performance
 - **ReAct pattern**: Transparent reasoning process
-
-
 
 ### Enterprise Multi-Tool Coordination
 
@@ -611,7 +636,9 @@ This requires sophisticated reasoning about:
 Build an agent that intelligently coordinates multiple MCP servers:
 
 ```python
+
 # agents/multi_tool_agent.py
+
 import asyncio
 import logging
 from typing import Dict, List, Any, Optional
@@ -724,9 +751,6 @@ Question: {input}
         )
 ```
 
-
-
-
 **Enhanced prompting benefits:**
 - **Clear instructions**: Step-by-step guidance for intelligent tool usage
 - **Context awareness**: Includes conversation history for better responses
@@ -757,10 +781,11 @@ Complex enterprise tasks require orchestrated workflows that coordinate multiple
 - **Error handling**: Recover from failures without losing progress
 
 **Enterprise Example**: Customer onboarding workflow
-1. **Validate information** → Check customer data in database
-2. **Generate documents** → Create account files
-3. **Send notifications** → Email welcome materials
-4. **Schedule followup** → Add to calendar system
+
+1. **Validate information**: Check customer data in database
+2. **Generate documents**: Create account files
+3. **Send notifications**: Email welcome materials
+4. **Schedule followup**: Add to calendar system
 
 Each step depends on previous ones but can be designed for optimal efficiency.
 
@@ -769,7 +794,9 @@ Each step depends on previous ones but can be designed for optimal efficiency.
 Build a sophisticated research workflow using LangGraph:
 
 ```python
+
 # workflows/research_workflow.py
+
 import asyncio
 from typing import Dict, Any, List
 from langchain_core.messages import HumanMessage, AIMessage
@@ -828,7 +855,6 @@ class ResearchWorkflow:
         self.workflow = workflow.compile()
         return self.workflow
 ```
-
 
 **Workflow design principles:**
 - **Sequential processing**: Each step builds on previous results
@@ -918,11 +944,6 @@ class ResearchWorkflow:
             }
 ```
 
-
-
-
-
-
 **LangGraph workflow advantages:**
 - **State management**: Track data flow between processing nodes
 - **Error isolation**: Individual node failures don't crash entire workflow
@@ -973,13 +994,14 @@ You've mastered LangChain MCP integration and built sophisticated multi-tool AI 
 
 ---
 
-## 💡 Practical Exercise
+## Practical Exercise
 
 **Challenge:** Create a travel planning agent that gets weather, searches files, stores preferences, and creates a report.
 
 Build an intelligent travel planning agent that demonstrates the power of coordinating multiple MCP servers. Your agent should:
 
 ### Requirements:
+
 1. **Weather Integration**: Get current weather for destination cities
 2. **File Search**: Search existing travel documents and preferences
 3. **Preference Storage**: Store user travel preferences (budget, activities, etc.)
@@ -993,11 +1015,13 @@ from langchain.agents import initialize_agent, AgentType
 from langchain.llm import OpenAI
 
 # Your multi-server agent setup
+
 weather_toolkit = MCPToolkit.from_server("weather-server")
 file_toolkit = MCPToolkit.from_server("filesystem-server") 
 preference_toolkit = MCPToolkit.from_server("preference-server")
 
 # Combine toolkits and create agent
+
 all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_toolkit.get_tools()
 ```
 
@@ -1011,7 +1035,7 @@ all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_
 
 ---
 
-## 📝 Multiple Choice Test - Session 3
+## Multiple Choice Test - Session 3
 
 Test your understanding of LangChain MCP Integration:
 
@@ -1089,7 +1113,7 @@ D) Manual intervention is required
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 2 - FileSystem MCP Server](Session2_FileSystem_MCP_Server.md)
 

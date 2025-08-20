@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores advanced performance optimization techniques for Agno agent systems including intelligent caching strategies, cost management systems, memory optimization, latency reduction techniques, and automated performance tuning. You'll learn to build highly efficient agent systems that minimize costs while maximizing performance.
 
@@ -2128,7 +2128,7 @@ Processes batched requests for specific models with connection pooling and fallb
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered performance optimization for production Agno systems:
 

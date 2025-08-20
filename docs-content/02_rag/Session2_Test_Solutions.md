@@ -114,7 +114,7 @@ D) To determine the number of chunks to create
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **8/8 Correct**: Excellent mastery of advanced preprocessing concepts
 - **7/8 Correct**: Strong understanding with minor gaps
@@ -124,7 +124,7 @@ D) To determine the number of chunks to create
 
 ---
 
-## 📚 Key Advanced Concepts
+## Key Advanced Concepts
 
 ### Document Analysis Framework
 

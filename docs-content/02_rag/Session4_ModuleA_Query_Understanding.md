@@ -33,7 +33,7 @@ After completing this module, you will master:
 
 ---
 
-## 📚 Advanced Query Understanding Patterns
+## Advanced Query Understanding Patterns
 
 ### **Pattern 1: Intent Classification and Query Routing**
 

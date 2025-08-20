@@ -43,7 +43,7 @@ Real-world applications of secure MCP file system servers include:
 
 ### Learning Path Options
 
-**🎯 Observer Path (45 minutes)**: Understand file system security concepts and see practical examples
+**Observer Path (45 minutes)**: Understand file system security concepts and see practical examples
 - Focus: Quick insights into sandboxing, path validation, and security patterns
 - Best for: Getting oriented with security concepts and understanding the architecture
 
@@ -87,7 +87,9 @@ Our server implements multiple security layers:
 We'll create a modular file system server with security-first architecture:
 
 ```bash
+
 # Basic setup (Observer - just understand the structure)
+
 mkdir mcp-filesystem-server && cd mcp-filesystem-server
 python -m venv venv && source venv/bin/activate
 pip install fastmcp aiofiles python-magic-bin
@@ -105,7 +107,9 @@ pip install fastmcp aiofiles python-magic-bin
 Implement the complete project structure with additional security dependencies:
 
 ```bash
+
 # Create project with full security stack
+
 mkdir mcp-filesystem-server
 cd mcp-filesystem-server
 
@@ -113,6 +117,7 @@ python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # Install production dependencies
+
 pip install fastmcp aiofiles watchdog python-magic-bin cryptography
 ```
 
@@ -152,7 +157,9 @@ mcp-filesystem-server/
 The configuration module is our security control center - every security setting is defined here to prevent accidental security holes in the code.
 
 ```python
+
 # config.py - Security-first configuration
+
 from pathlib import Path
 import os
 
@@ -263,7 +270,9 @@ A sandbox is a security mechanism that creates an isolated environment where fil
 Based on 2024 security research, 85% of file system vulnerabilities involve path traversal attacks. Sandboxing provides mathematical certainty that file operations cannot escape designated boundaries.
 
 ```python
+
 # utils/sandbox.py - Core security boundary
+
 from pathlib import Path
 
 class SandboxError(Exception):
@@ -392,7 +401,9 @@ Using libraries like `python-magic` (based on the Unix `file` command), we can d
 Implement security-focused file validation that examines actual content:
 
 ```python
+
 # utils/validators.py - Content-based security validation
+
 from pathlib import Path
 from typing import Dict, Any
 import magic
@@ -520,7 +531,9 @@ We'll start by importing our security modules and initializing the server:
 First, we import all necessary modules and our custom security components:
 
 ```python
+
 # filesystem_server.py
+
 from mcp.server.fastmcp import FastMCP
 import aiofiles
 from pathlib import Path
@@ -546,7 +559,9 @@ from utils.validators import FileValidator
 Set up comprehensive logging to track all operations for security monitoring:
 
 ```python
+
 # Set up logging for security auditing
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -559,16 +574,20 @@ logger = logging.getLogger(__name__)
 Create the main server instance and initialize all security components:
 
 ```python
+
 # Initialize server components
+
 config = FileSystemConfig()
 mcp = FastMCP("File System Server")
 sandbox = FileSystemSandbox(config.base_path)
 validator = FileValidator(config)
 
 # Store for file watchers (for real-time monitoring)
+
 active_watchers = {}
 
 # Log server startup
+
 logger.info(f"File System MCP Server initialized with sandbox at: {config.base_path}")
 ```
 
@@ -1263,11 +1282,12 @@ Display startup information and launch the server:
 
 ---
 
-## 📝 Chapter Summary
+## Chapter Summary
 
 Congratulations! You've built a production-grade file system MCP server with comprehensive security features. Let's review what you've accomplished:
 
 ### Security Features Implemented:
+
 1. **Sandboxing**: All file operations are restricted to a designated directory
 2. **Path Validation**: Prevents directory traversal attacks with robust path resolution
 3. **File Type Validation**: Checks both extensions and MIME types for safety
@@ -1292,7 +1312,7 @@ Congratulations! You've built a production-grade file system MCP server with com
 
 ---
 
-## 🧪 Testing Your Understanding
+## Testing Your Understanding
 
 ### Practical Exercise
 
@@ -1351,7 +1371,7 @@ In Session 3, we'll integrate MCP servers with **LangChain** to build intelligen
 3. **Create a file diff tool** that compares two files and shows differences
 4. **Add rate limiting** to prevent abuse of search operations
 
-**💡 Hint:** Check the [Session2_Test_Solutions.md](Session2_Test_Solutions.md) file for the complete solution and detailed explanations.
+**Hint:** Check the [Session2_Test_Solutions.md](Session2_Test_Solutions.md) file for the complete solution and detailed explanations.
 
 ---
 
@@ -1366,7 +1386,7 @@ Remember: Security is not a feature, it's a requirement. Always validate input, 
 
 ---
 
-## 📝 Multiple Choice Test - Session 2
+## Multiple Choice Test - Session 2
 
 Test your understanding of secure file system implementation and MCP security best practices with this comprehensive assessment covering sandboxing, validation, and production security considerations.
 
@@ -1444,11 +1464,10 @@ D) Automatic file compression
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 1 - Basic MCP Server](Session1_Basic_MCP_Server.md)
 
 **Note:** Advanced security features and enterprise-scale file operations are covered in Sessions 4 and 5, which focus on production deployment and security hardening.
-
 
 **Next:** [Session 3 - LangChain MCP Integration](Session3_LangChain_MCP_Integration.md) →

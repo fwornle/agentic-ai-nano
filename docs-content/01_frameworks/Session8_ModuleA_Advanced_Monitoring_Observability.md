@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores comprehensive monitoring and observability for production Agno agent systems including distributed tracing, metrics collection, alerting strategies, performance profiling, and automated incident response. You'll learn to build robust observability stacks that provide deep visibility into agent performance, costs, and reliability.
 
@@ -1593,7 +1593,7 @@ Let's complete the dimensional aggregation with result formatting:
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced monitoring and observability for production Agno systems:
 

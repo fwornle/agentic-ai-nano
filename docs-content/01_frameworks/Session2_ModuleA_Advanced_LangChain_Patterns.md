@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores sophisticated LangChain patterns including complex multi-agent workflows, custom chain development, and advanced tool patterns. You'll learn how to build production-ready systems with LangChain's most powerful features.
 
@@ -1245,7 +1245,7 @@ D) Error handling and recovery
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced LangChain patterns for production systems:
 

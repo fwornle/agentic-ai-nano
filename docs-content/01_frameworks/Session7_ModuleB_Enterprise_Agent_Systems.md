@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores production-scale ADK agent deployment including container orchestration, load balancing, monitoring systems, security hardening, and enterprise integration patterns. You'll learn to deploy robust, scalable ADK agents that can handle enterprise workloads with comprehensive observability and security.
 
@@ -1379,7 +1379,7 @@ With these 23 detailed steps, we've built a complete enterprise ADK agent deploy
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered enterprise-scale ADK agent deployment:
 

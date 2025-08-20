@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module covers comprehensive testing strategies, performance benchmarking, and enterprise monitoring for PydanticAI applications. You'll learn to implement systematic testing, performance optimization, and production monitoring systems.
 
@@ -739,7 +739,7 @@ Now we handle cache lookup and function execution:
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered testing and benchmarking for PydanticAI, including:
 

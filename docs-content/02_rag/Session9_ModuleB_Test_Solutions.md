@@ -100,7 +100,7 @@ D) Software licensing costs
 
 ---
 
-## 🎯 Module Performance Scoring
+## Module Performance Scoring
 
 - **7/7 Correct**: Excellent mastery of enterprise integration architectures and governance
 - **6/7 Correct**: Strong understanding with minor gaps in advanced enterprise concepts
@@ -110,7 +110,7 @@ D) Software licensing costs
 
 ---
 
-## 📚 Key Enterprise Integration Concepts
+## Key Enterprise Integration Concepts
 
 ### Zero-Trust Security Architecture
 1. **Network Segmentation**: Security zones for different RAG components

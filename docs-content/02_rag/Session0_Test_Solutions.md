@@ -57,14 +57,14 @@ D) Iterative query refinement and self-correction ✅
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **4-5 Correct**: Excellent mastery - You have a solid understanding of RAG architecture fundamentals
 - **3 Correct**: Good understanding - Minor concepts to review, overall strong foundation
 - **2 Correct**: Adequate grasp - Review evolution timeline and technical components  
 - **0-1 Correct**: Review recommended - Revisit core concepts before proceeding to implementation
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### Essential RAG Architecture Concepts:
 1. **Three-Stage Pipeline**: Index → Retrieve → Generate

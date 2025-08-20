@@ -1,13 +1,13 @@
 # Agentic AI Protocols: MCP, ACP & A2A
 ## 2-Week Nanodegree Module
 
-### 🎯 **Module Overview**
+### **Module Overview**
 This self-paced 2-week module provides comprehensive instruction on building production-ready agent communication systems using the Model Context Protocol (MCP), Agent Communication Protocol (ACP), and Agent-to-Agent (A2A) protocols. Through hands-on tutorials and practical examples, you'll develop skills to create interoperable, distributed agent architectures.
 
 ![Distributed Agent Systems](images/mcp-acp-a2a.png)
 
 
-### 📋 **Prerequisites**
+### **Prerequisites**
 - Completed Agent Frameworks module
 - Completed RAG module
 - Python programming experience (intermediate level)
@@ -90,7 +90,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ---
 
-## **📚 Comprehensive Resource Library**
+## **Comprehensive Resource Library**
 
 ### **Core Documentation**
 - [MCP Official Specification](https://modelcontextprotocol.io/)
@@ -118,7 +118,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ---
 
-## **🎯 Learning Outcomes**
+## **Learning Outcomes**
 
 By completion, students will be able to:
 
@@ -144,7 +144,7 @@ By completion, students will be able to:
 
 ---
 
-## **📊 Self-Assessment Structure**
+## **Self-Assessment Structure**
 
 ### **Knowledge Checks**
 Each session includes multiple choice quizzes to verify understanding of key concepts:
@@ -164,7 +164,7 @@ Each session includes multiple choice quizzes to verify understanding of key con
 
 ---
 
-## **🛠️ Development Environment Setup**
+## **Development Environment Setup**
 
 ### **Required Software**
 ```bash
@@ -194,7 +194,7 @@ docker
 
 ---
 
-## **🎓 Completion Requirements**
+## **Completion Requirements**
 
 To successfully complete this nanodegree module:
 1. Study all session materials (Sessions 0-9)
@@ -206,7 +206,7 @@ To successfully complete this nanodegree module:
 
 ---
 
-## **📚 Self-Study Support**
+## **Self-Study Support**
 
 ### **Available Resources**
 - **Comprehensive Documentation**: Each session includes detailed explanations and examples

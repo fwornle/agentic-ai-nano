@@ -49,7 +49,7 @@ ACP excels in scenarios requiring autonomous agent coordination:
 
 ### Learning Path Options
 
-**🎯 Observer Path (25 minutes)**: Understand local-first agent concepts and coordination patterns
+**Observer Path (25 minutes)**: Understand local-first agent concepts and coordination patterns
 - Focus: Quick insights into ACP principles, discovery mechanisms, and agent orchestration
 - Best for: Getting oriented with decentralized agent architectures
 
@@ -130,7 +130,9 @@ Let's start by understanding the basic structure of an ACP agent. We'll build th
 Every ACP agent must describe what it can do. This is called **capability declaration**:
 
 ```python
+
 # From [`src/session6/acp_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/acp_agent.py)
+
 class AgentCapability(BaseModel):
     """Defines what an agent can do"""
     name: str                    # e.g., "process_data"
@@ -168,7 +170,9 @@ weather_capability = AgentCapability(
 Each agent needs a unique identity and way to be discovered:
 
 ```python
+
 # From [`src/session6/acp_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/acp_agent.py)
+
 class AgentMetadata(BaseModel):
     """Complete agent information for discovery"""
     id: str                      # Unique identifier
@@ -199,7 +203,9 @@ agent_metadata = AgentMetadata(
 Every ACP agent exposes four standard REST endpoints:
 
 ```python
+
 # From [`src/session6/acp_agent.py`] - simplified
+
 @app.get("/metadata")
 async def get_metadata():
     """Return this agent's information"""
@@ -244,7 +250,9 @@ Our first specialized agent handles CSV data processing and analysis.
 
 **Capabilities Declaration:**
 ```python
+
 # From [`src/session6/data_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/data_agent.py)
+
 capabilities = [
     AgentCapability(
         name="process_csv",
@@ -314,7 +322,9 @@ Our second agent specializes in natural language processing tasks.
 
 **Capabilities Declaration:**
 ```python
-# From [`src/session6/text_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/text_agent.py)  
+
+# From [`src/session6/text_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/text_agent.py)
+
 capabilities = [
     AgentCapability(
         name="summarize_text",
@@ -365,7 +375,9 @@ ACP coordination follows a clear discovery-then-execute pattern. Let's break thi
 
 **Stage 1: Agent Discovery and Validation**
 ```python
+
 # From [`src/session6/coordinator_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/coordinator_agent.py) - Discovery phase
+
 async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
     agents_used = []
     
@@ -434,7 +446,9 @@ async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
 ACP uses a **local registry pattern** where agents register with each other:
 
 ```python
+
 # From [`src/session6/coordinator_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/coordinator_agent.py)
+
 async def register_with_peers(self, peer_ports: list):
     """Register with known peer agents"""
     
@@ -464,10 +478,13 @@ async def register_with_peers(self, peer_ports: list):
 
 **Discovery Request Example:**
 ```python
+
 # Find all agents that can process CSV
+
 data_agents = await self.discover_agents("process_csv")
 
-# Find any available agents  
+# Find any available agents
+
 all_agents = await self.discover_agents()
 ```
 
@@ -480,7 +497,9 @@ all_agents = await self.discover_agents()
 We've created a bootstrap script to manage the entire network:
 
 ```python
+
 # From [`src/session6/bootstrap.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/bootstrap.py) - simplified
+
 agents = [
     {"script": "data_agent.py", "port": 8001, "name": "DataProcessor"},
     {"script": "text_agent.py", "port": 8002, "name": "TextProcessor"},  
@@ -502,7 +521,7 @@ python bootstrap.py
 
 **Expected Output:**
 ```
-🚀 Starting ACP Agent Network...
+Starting ACP Agent Network...
    🔧 Starting DataProcessor on port 8001...
    🔧 Starting TextProcessor on port 8002...
    🔧 Starting Coordinator on port 8000...
@@ -539,7 +558,7 @@ python test_client.py
 
 📊 Testing Data Processing Agent...
    ✅ Data processing successful
-   📈 Processed 4 rows
+   Processed 4 rows
    📋 Columns: ['name', 'age', 'city', 'salary']
 
 🔄 Testing Workflow Orchestration...
@@ -557,7 +576,9 @@ python test_client.py
 Every ACP message follows this standard format:
 
 ```python
+
 # From [`src/session6/acp_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/acp_agent.py)
+
 class ACPMessage(BaseModel):
     id: str                    # Unique message ID
     from_agent: str           # Who sent it
@@ -587,7 +608,9 @@ Let's trace a complete workflow execution:
 **2. Coordinator Discovery:**
 ```bash
 GET http://localhost:8000/discover?capability=process_csv
+
 # Returns: [{"id": "data-agent-456", "name": "DataProcessor", ...}]
+
 ```
 
 **3. Coordinator → Data Agent:**
@@ -657,7 +680,7 @@ In the next session, you'll learn how these local ACP agents can communicate wit
 
 ---
 
-## 📝 Multiple Choice Test - Session 6
+## Multiple Choice Test - Session 6
 
 Test your understanding of ACP Fundamentals:
 
@@ -735,7 +758,7 @@ D) To reduce development costs
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** Session 5 - MCP Integration Patterns
 

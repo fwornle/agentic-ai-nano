@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores the historical development of AI agents, from early chatbots to modern agentic frameworks. You'll understand the research breakthroughs that made today's agent systems possible and how major companies adopted these technologies.
 
@@ -306,7 +306,7 @@ D) 50%
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now explored the historical context that led to modern agent frameworks:
 

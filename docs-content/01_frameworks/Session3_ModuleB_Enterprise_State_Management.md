@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores LangGraph's enterprise-grade state management capabilities including persistent state systems, advanced routing patterns, production-ready error handling, and continuous contextual processing. You'll learn how to build robust, scalable multi-agent systems with comprehensive state persistence and intelligent workflow orchestration.
 
@@ -902,7 +902,7 @@ The workflow establishes feedback loops to maintain contextual awareness through
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered enterprise-grade state management for LangGraph workflows:
 
