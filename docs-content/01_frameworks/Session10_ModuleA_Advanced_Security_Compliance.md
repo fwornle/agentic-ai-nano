@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores comprehensive security and compliance frameworks for enterprise agent systems including GDPR compliance, RBAC implementation, advanced encryption strategies, audit logging, zero-trust architecture, and regulatory compliance patterns. You'll learn to build enterprise-grade security systems that meet the highest standards for data protection and regulatory requirements.
 
@@ -1774,7 +1774,7 @@ Recommendation generation provides actionable insights for maintaining optimal e
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced security and compliance for enterprise agent systems:
 

@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores sophisticated LangGraph orchestration patterns including complex workflow coordination, dynamic agent generation, parallel execution strategies, and enterprise-grade state synchronization. You'll learn how to build production-ready multi-agent systems with advanced coordination patterns.
 
@@ -1092,7 +1092,7 @@ Agent registration maintains workflow state consistency. Active agent tracking e
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced orchestration patterns for LangGraph workflows:
 

@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores sophisticated ADK (Agent Development Kit) integration patterns including advanced Gemini model usage, MCP server orchestration, conversation memory systems, and production deployment strategies. You'll learn to build enterprise-grade ADK agents that can handle complex workflows with persistent state and multi-service coordination.
 
@@ -1270,7 +1270,7 @@ This completes our advanced memory system with 32 comprehensive steps that provi
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced ADK integration patterns:
 

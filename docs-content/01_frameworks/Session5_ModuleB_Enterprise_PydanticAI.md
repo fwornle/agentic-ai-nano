@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module focuses on enterprise-grade PydanticAI deployment patterns, including dependency injection, scalable architectures, monitoring, and production deployment strategies. You'll learn to build robust, maintainable agent systems for enterprise environments.
 
@@ -579,7 +579,7 @@ Now we implement the core audit logging functionality:
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered enterprise PydanticAI patterns, including:
 

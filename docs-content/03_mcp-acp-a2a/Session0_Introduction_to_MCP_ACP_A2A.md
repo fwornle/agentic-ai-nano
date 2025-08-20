@@ -1,6 +1,7 @@
 # Session 0: Introduction to MCP, ACP, and A2A - Building the Future of AI Agent Ecosystems
 
 ## Learning Outcomes
+
 By the end of this session, you will be able to:
 - **Understand** the fundamental concepts and architecture of Model Context Protocol (MCP)
 - **Distinguish** between MCP, ACP, and A2A protocols and their respective use cases
@@ -23,7 +24,7 @@ By the end of this session, you will be able to:
 
 ### Learning Path Options
 
-**🎯 Observer Path (25 minutes)**: Understand concepts and see practical examples
+**Observer Path (25 minutes)**: Understand concepts and see practical examples
 - Focus: Quick insights with clear demonstrations and industry context
 - Best for: Getting oriented and understanding the business value
 
@@ -50,7 +51,9 @@ The **Model Context Protocol (MCP)** is Anthropic's open standard that solves th
 Here's how MCP standardizes database access for any AI model:
 
 ```python
+
 # Traditional approach: Custom integration for each AI system
+
 class CustomDatabaseConnector:
     def connect_to_claude(self): # Custom code for Claude
         # 50+ lines of integration code
@@ -64,7 +67,9 @@ class CustomDatabaseConnector:
 - Results in exponential complexity as systems scale
 
 ```python
+
 # MCP approach: Single standard interface
+
 @mcp_server.tool()
 async def query_database(query: str) -> dict:
     """Execute database query - works with any MCP client"""
@@ -112,7 +117,9 @@ async def query_database(query: str) -> dict:
 Here's how ACP enables local agent discovery:
 
 ```python
+
 # Simple local agent registration
+
 class ProcessingAgent:
     def __init__(self):
         self.capabilities = ["data_processing", "file_analysis"]
@@ -217,13 +224,17 @@ When combined, these protocols create a complete enterprise AI ecosystem:
 **Multi-Protocol Travel Agent:**
 
 ```python
+
 # Step 1: MCP - Access customer preferences
+
 preferences = await mcp_client.call_tool("get_customer_prefs", user_id)
 
-# Step 2: ACP - Local processing coordination  
+# Step 2: ACP - Local processing coordination
+
 processed_data = await acp_registry.find("processor").process(preferences)
 
 # Step 3: A2A - External flight search
+
 flights = await a2a_client.request("airline-corp.com", "search_flights", params)
 ```
 
@@ -250,14 +261,20 @@ flights = await a2a_client.request("airline-corp.com", "search_flights", params)
 
 **Step 1: Installation and Startup**
 ```bash
-# Install and start inspector  
+
+# Install and start inspector
+
 npx @modelcontextprotocol/inspector
+
 # Launches on http://localhost:6274
+
 ```
 
 **Step 2: Connect to MCP Server**
 ```bash
+
 # Example server connection
+
 stdio://python weather_server.py
 ```
 
@@ -272,10 +289,11 @@ stdio://python weather_server.py
 ### **PARTICIPANT PATH**: Development Workflow Integration
 
 **Production Testing Pattern:**
-1. **Develop** → Write MCP server tools
-2. **Test** → Use Inspector to validate functionality  
-3. **Debug** → Inspector shows detailed error messages
-4. **Deploy** → Export configuration for production
+
+1. **Develop**: Write MCP server tools
+2. **Test**: Use Inspector to validate functionality  
+3. **Debug**: Inspector shows detailed error messages
+4. **Deploy**: Export configuration for production
 
 **Inspector Features for Teams:**
 - **Schema Validation**: Ensures MCP protocol compliance
@@ -362,11 +380,12 @@ stdio://python weather_server.py
 
 ---
 
-## 💡 Practical Exercise
+## Practical Exercise
 
 **Challenge:** Set up your development environment and explore the protocol ecosystem.
 
 ### Tasks:
+
 1. **Install MCP Inspector** and connect to a sample MCP server
 2. **Explore protocol differences** by comparing MCP, ACP, and A2A use cases
 3. **Plan your integration** by identifying which protocols your projects need
@@ -382,7 +401,7 @@ stdio://python weather_server.py
 
 ---
 
-## 📝 Multiple Choice Test - Session 0
+## Multiple Choice Test - Session 0
 
 **Question 1:** What is the primary purpose of the Model Context Protocol (MCP)?  
 A) To enable direct communication between AI agents  
@@ -448,7 +467,7 @@ D) Only cloud service providers
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** Introduction (You are here)  
 **Next:** [Session 1 - Building Your First MCP Server →](Session1_Basic_MCP_Server.md)

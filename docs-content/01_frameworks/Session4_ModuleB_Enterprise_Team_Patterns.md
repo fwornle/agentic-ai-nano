@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores production-ready CrewAI team architectures including custom tool development, hierarchical delegation strategies, enterprise monitoring systems, and performance optimization patterns. You'll learn to build scalable agent teams that can handle enterprise workloads with sophisticated coordination and monitoring.
 
@@ -1164,7 +1164,7 @@ Continuous monitoring maintains system health through regular checks. Five-minut
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered enterprise CrewAI team patterns and production architectures:
 
@@ -1180,7 +1180,7 @@ You've now mastered enterprise CrewAI team patterns and production architectures
 
 ---
 
-## 📝 Module B Knowledge Check
+## Module B Knowledge Check
 
 **Test your understanding of enterprise team patterns and delegation systems:**
 

@@ -19,6 +19,7 @@ Atomic Agents makes it easy to chain agents and tools together by aligning their
 Atomic Agents excels in enterprise environments requiring modular AI solutions. Organizations use it for natural language interfaces, personalized content recommendation systems, and semantic search applications. The framework's seamless integration with deployment platforms enables instant agent pipeline deployment while maintaining granular control over individual components.
 
 ## Learning Navigation Hub
+
 **Total Time Investment**: 80 minutes (Core) + 65 minutes (Optional)
 
 ### Learning Path Options
@@ -29,9 +30,10 @@ Atomic Agents excels in enterprise environments requiring modular AI solutions. 
 
 ---
 
-## 📋 SESSION OVERVIEW DASHBOARD
+## Session Overview Dashboard
 
 ### Core Learning Track (80 minutes) - REQUIRED
+
 | Section | Concept Load | Time | Skills |
 |---------|--------------|------|--------|
 | Atomic Architecture Principles | 3 concepts | 25 min | Understanding |
@@ -46,24 +48,26 @@ Atomic Agents excels in enterprise environments requiring modular AI solutions. 
 - **[Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)** (35 min) - Sophisticated pipeline orchestration & dynamic assembly
 - **[Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)** (30 min) - Production-scale atomic systems & multi-tenant architectures
 
-**🗂️ Code Files**: All examples use files in [`src/session6/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session6)
-**🚀 Quick Start**: Run `cd src/session6 && python example_usage.py` to see atomic agents in action
+**Code Files**: All examples use files in [`src/session6/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session6)
+**Quick Start**: Run `cd src/session6 && python example_usage.py` to see atomic agents in action
 
 ---
 
-## CORE SECTION (Required - 80 minutes)
+## Core Section (Required - 80 minutes)
 
 ### Part 1: Atomic Architecture Principles (25 minutes)
+
 **Cognitive Load**: 3 new concepts  
 **Learning Mode**: Conceptual Understanding
 
 #### Enterprise Modular Design Philosophy (12 minutes)
+
 Atomic Agents transforms AI development through extreme modularity and component-based architecture:
 
 ![Atomic Agent Architecture](images/atomic-agent.png)
 *This diagram illustrates the core atomic agent structure with individual, focused components that can be composed together. Each agent is designed with single responsibility and minimal dependencies, making them lightweight and highly reusable building blocks.*
 
-🗂️ **File**: [`src/session6/atomic_foundation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/atomic_foundation.py) - Core atomic patterns
+**File**: [`src/session6/atomic_foundation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/atomic_foundation.py) - Core atomic patterns
 
 ```python
 from atomic_agents.agents import BaseAgent
@@ -71,6 +75,7 @@ from atomic_agents.lib.components.chat_memory import ChatMemory
 from atomic_agents.lib.tools.web_scraper import WebScraperTool
 
 # Atomic agent - minimal, focused functionality
+
 class AtomicTextAgent(BaseAgent):
     def __init__(self, name: str):
         super().__init__(
@@ -92,12 +97,13 @@ class AtomicTextAgent(BaseAgent):
 3. **Lightweight by Design**: Minimal resource footprint per component
 
 #### Component Composition (7 minutes)
+
 Building systems through component assembly:
 
 ![Atomic Agents System](images/atomic-agents.png)
 *This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle.*
 
-🗂️ **File**: [`src/session6/composition_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/composition_engine.py) - Component composition patterns
+**File**: [`src/session6/composition_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/composition_engine.py) - Component composition patterns
 
 ```python
 from atomic_agents.lib.components import ToolsComponent, MemoryComponent
@@ -133,10 +139,13 @@ class ComponentComposer:
 ```
 
 #### Lightweight Patterns (5 minutes)
+
 Optimizing for efficiency and modularity:
 
 ```python
+
 # Minimal agent configuration
+
 minimal_agent = BaseAgent(
     agent_name="minimal_processor",
     system_prompt="Process inputs efficiently",
@@ -146,6 +155,7 @@ minimal_agent = BaseAgent(
 )
 
 # Composable tool sets
+
 research_tools = [WebScraperTool()]
 analysis_tools = []  # Add analysis tools as needed
 writing_tools = []   # Writing agents work with pure text
@@ -163,13 +173,15 @@ def create_specialized_agent(role: str, tools: list = None):
 ---
 
 ### Part 2: Building Atomic Components (25 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Implementation & Practice
 
 #### Component Creation (8 minutes)
+
 Building reusable atomic components:
 
-🗂️ **File**: [`src/session6/text_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/text_agent.py) - Specialized text processing agent
+**File**: [`src/session6/text_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/text_agent.py) - Specialized text processing agent
 
 ```python
 from atomic_agents.agents import BaseAgent
@@ -204,14 +216,16 @@ class TextProcessorAgent(BaseAgent):
         return self.run(prompt)
 
 # Usage
+
 text_agent = TextProcessorAgent()
 summary = text_agent.summarize("Long article text here...")
 ```
 
 #### Interface Design (6 minutes)
+
 Creating clean, composable interfaces:
 
-🗂️ **File**: [`src/session6/data_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/data_agent.py) - Data processing specialist
+**File**: [`src/session6/data_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/data_agent.py) - Data processing specialist
 
 ```python
 from abc import ABC, abstractmethod
@@ -255,9 +269,10 @@ class AtomicDataAgent(BaseAgent, DataProcessor):
 ```
 
 #### Basic Composition (6 minutes)
+
 Combining components into systems:
 
-🗂️ **File**: [`src/session6/coordinator_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/coordinator_agent.py) - Component coordination
+**File**: [`src/session6/coordinator_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/coordinator_agent.py) - Component coordination
 
 ```python
 class AtomicCoordinator:
@@ -300,6 +315,7 @@ class AtomicCoordinator:
         return results
 
 # Usage
+
 coordinator = AtomicCoordinator()
 result = coordinator.process_mixed_content(
     text="Article content here...",
@@ -308,9 +324,10 @@ result = coordinator.process_mixed_content(
 ```
 
 #### Testing Strategies (5 minutes)
+
 Validating atomic components:
 
-🗂️ **File**: [`src/session6/test_client.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/test_client.py) - Testing atomic systems
+**File**: [`src/session6/test_client.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/test_client.py) - Testing atomic systems
 
 ```python
 def test_atomic_components():
@@ -353,17 +370,19 @@ def test_coordination():
 ---
 
 ### Part 3: System Assembly & Integration (20 minutes)
+
 **Cognitive Load**: 3 new concepts
 **Learning Mode**: Integration & Orchestration
 
 #### Component Integration (8 minutes)
+
 Assembling components into complete systems:
 
 ![Atomic Assembler](images/atomic-assembler.png)
 
 *The Atomic Assembler helps you integrate Atomic Agents.*
 
-🗂️ **File**: [`src/session6/production_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/production_orchestrator.py) - Production integration patterns
+**File**: [`src/session6/production_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/production_orchestrator.py) - Production integration patterns
 
 ```python
 from typing import Dict, List, Any, Optional
@@ -423,6 +442,7 @@ class AtomicOrchestrator:
 ```
 
 #### System Coordination (7 minutes)
+
 Managing complex multi-agent systems:
 
 ```python
@@ -481,6 +501,7 @@ class SystemCoordinator:
 ```
 
 #### Testing Integration (5 minutes)
+
 Validating integrated systems:
 
 ```python
@@ -514,11 +535,13 @@ def test_system_integration():
 ---
 
 ### Part 4: Deployment & Scaling (5 minutes)
+
 **Cognitive Load**: 2 new concepts
 **Learning Mode**: Production Readiness
 
 #### Deployment Patterns (3 minutes)
-🗂️ **File**: [`src/session6/bootstrap.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/bootstrap.py) - Deployment configuration
+
+**File**: [`src/session6/bootstrap.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/bootstrap.py) - Deployment configuration
 
 ```python
 def deploy_atomic_system():
@@ -528,18 +551,22 @@ def deploy_atomic_system():
     orchestrator = AtomicOrchestrator()
     coordinator = SystemCoordinator()
     
-    print("🚀 Atomic agent system deployed")
+    print("Atomic agent system deployed")
     print(f"Available agents: {list(orchestrator.agents.keys())}")
     
     return {"orchestrator": orchestrator, "coordinator": coordinator}
 
 # Quick deployment
+
 system = deploy_atomic_system()
 ```
 
 #### Scaling Considerations (2 minutes)
+
 ```python
+
 # Scaling patterns for atomic agents
+
 scaling_config = {
     "horizontal_scaling": "Add more agent instances",
     "vertical_scaling": "Increase agent capabilities",
@@ -550,15 +577,19 @@ scaling_config = {
 
 ---
 
-## ✅ Core Section Validation (5 minutes)
+## Core Section Validation (5 minutes)
 
 ### Quick Implementation Exercise
-🗂️ **Exercise Files**: 
+
+🗂️ **Exercise Files**:
+
 - `src/session6/example_usage.py` - Complete working example
 - `src/session6/test_client.py` - Test your understanding
 
 ```bash
+
 # Try the examples:
+
 cd src/session6
 python example_usage.py           # See atomic agents in action
 python bootstrap.py               # Deploy atomic system
@@ -577,24 +608,26 @@ python -m pytest test_client.py  # Validate your understanding
 
 ---
 
-### 🧭 **Choose Your Next Path:**
-- **[🔬 Module A: Advanced Composition Patterns →](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Sophisticated pipeline orchestration & dynamic assembly
-- **[🏭 Module B: Enterprise Modular Systems →](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production-scale atomic systems & multi-tenant architectures
+### **Choose Your Next Path:**
+- **[Module A: Advanced Composition Patterns →](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Sophisticated pipeline orchestration & dynamic assembly
+- **[Module B: Enterprise Modular Systems →](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production-scale atomic systems & multi-tenant architectures
 - **[📝 Test Your Knowledge →](Session6_Test_Solutions.md)** - Comprehensive quiz
 - **[📖 Next Session: First ADK Agent →](Session7_First_ADK_Agent.md)** - Enterprise agent development
 
-### 🎆 Complete Learning Path Options
+### Complete Learning Path Options
+
 **Sequential Learning**: Core → Module A → Module B  
 **Production Focus**: Core → Module B  
 **Advanced Patterns**: Core → Module A
 
 ---
 
-## 📝 Multiple Choice Test - Session 6 (15 minutes)
+## Multiple Choice Test - Session 6 (15 minutes)
 
 Test your understanding of atomic agent architecture and modular composition.
 
 ### Question 1
+
 **What is the core principle behind Atomic Agents architecture?**
 
 A) Maximum performance optimization  
@@ -603,6 +636,7 @@ C) Minimal resource usage
 D) Complex integrated systems  
 
 ### Question 2
+
 **How do atomic agents communicate with each other?**
 
 A) Direct method calls  
@@ -611,6 +645,7 @@ C) Shared global variables
 D) Database transactions  
 
 ### Question 3
+
 **What makes an agent "atomic" in this architecture?**
 
 A) Small code size  
@@ -619,6 +654,7 @@ C) Single, focused responsibility with well-defined interfaces
 D) Low memory usage  
 
 ### Question 4
+
 **What is the role of Context Providers in atomic agent systems?**
 
 A) Execute agent logic  
@@ -627,6 +663,7 @@ C) Handle user interface
 D) Store persistent data  
 
 ### Question 5
+
 **How does the Composition Engine work in atomic systems?**
 
 A) Compiles agents into single executable  
@@ -635,6 +672,7 @@ C) Optimizes agent performance
 D) Manages agent memory  
 
 ### Question 6
+
 **What is the primary benefit of modular agent composition?**
 
 A) Faster execution  
@@ -643,6 +681,7 @@ C) Lower development costs
 D) Better user interface  
 
 ### Question 7
+
 **How do atomic agents handle failure isolation?**
 
 A) Global error handling  
@@ -651,6 +690,7 @@ C) Automatic restart mechanisms
 D) Backup agent systems  
 
 ### Question 8
+
 **What makes atomic agents suitable for microservices architectures?**
 
 A) Built-in API gateways  
@@ -659,6 +699,7 @@ C) Automatic scaling features
 D) Built-in monitoring  
 
 ### Question 9
+
 **How do you scale atomic agent systems?**
 
 A) Vertical scaling only  
@@ -667,6 +708,7 @@ C) Cloud deployment only
 D) Container orchestration required  
 
 ### Question 10
+
 **What is the main advantage of the Coordinator Agent pattern?**
 
 A) Centralized control of agent interactions and workflow orchestration  
@@ -680,7 +722,7 @@ D) Better error handling
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 5 - PydanticAI Type-Safe Agents](Session5_PydanticAI_Type_Safe_Agents.md)
 

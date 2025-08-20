@@ -21,13 +21,13 @@ After completing this module, you will master:
 - **[📄 Session 3 Core: Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)** - Foundation vector search concepts
 - **[🔍 Session 4 Modules →](Session4_ModuleA_Query_Understanding.md)** - Query processing techniques
 
-### 🗂️ Code Files
+### Code Files
 - **Vector Index Engine**: [`src/session3/optimized_vector_index.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/optimized_vector_index.py) - Advanced indexing algorithms
 - **Search Optimization**: [`src/session3/optimized_search_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/optimized_search_engine.py) - Search performance optimization
 - **Hybrid Search**: [`src/session3/hybrid_search_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/hybrid_search_engine.py) - Combined vector/keyword search
 - **Demo Application**: [`src/session3/demo_vector_search.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/demo_vector_search.py) - Index algorithms showcase
 
-### 🚀 Quick Start
+### Quick Start
 ```bash
 # Test advanced indexing algorithms
 cd src/session3
@@ -42,7 +42,7 @@ python -c "from hybrid_search_engine import HybridSearchEngine; print('Advanced 
 
 ---
 
-## 📚 Advanced Indexing Algorithms
+## Advanced Indexing Algorithms
 
 ### **Algorithm 1: Custom HNSW Implementation**
 

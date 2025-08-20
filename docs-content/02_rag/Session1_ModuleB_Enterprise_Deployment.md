@@ -32,7 +32,7 @@ After completing this module, you will master:
 
 ---
 
-## 📚 Enterprise Deployment Architecture
+## Enterprise Deployment Architecture
 
 ### **Architecture Pattern 1: Microservices RAG Deployment**
 

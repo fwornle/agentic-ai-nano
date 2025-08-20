@@ -150,7 +150,7 @@ D) Simpler implementation
 
 ---
 
-## 💡 Practical Exercise Solution
+## Practical Exercise Solution
 
 **Challenge:** Create a multi-agent customer service system with A2A coordination.
 

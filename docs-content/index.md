@@ -2,11 +2,11 @@
 
 Welcome to the comprehensive **Agentic AI Nano-Degree** program! This intensive curriculum covers the complete landscape of modern AI agent development and Retrieval-Augmented Generation (RAG) systems.
 
-## 🎯 Program Overview
+## Program Overview
 
 This nano-degree consists of three comprehensive modules designed to take you from fundamentals to production-ready implementations:
 
-### 📚 Module 1: Agent Frameworks (10 Sessions)
+### Module 1: Agent Frameworks (10 Sessions)
 Master the art of building intelligent agents using cutting-edge frameworks and patterns.
 
 **What You'll Learn:**
@@ -20,7 +20,7 @@ Master the art of building intelligent agents using cutting-edge frameworks and 
 - Multi-agent coordination patterns
 - Enterprise integration strategies
 
-### 🔍 Module 2: RAG Architecture (10 Sessions)
+### Module 2: RAG Architecture (10 Sessions)
 Build sophisticated Retrieval-Augmented Generation systems for enterprise applications.
 
 **What You'll Learn:**
@@ -48,7 +48,7 @@ Master the Model Context Protocol, Agent Communication Protocol, and sophisticat
 - Enterprise integration of communication protocols
 - Scalable agent coordination architectures
 
-## 🚀 Learning Paths
+## Learning Paths
 
 Each session offers **three distinct learning paths** to accommodate different learning styles and time commitments:
 
@@ -57,17 +57,17 @@ Each session offers **three distinct learning paths** to accommodate different l
 - **Activities**: Read core concepts, examine patterns
 - **Ideal for**: Quick overview, decision makers, time-constrained learners
 
-### 🙋‍♂️ Participant Path (60-90 min)
+### Participant Path (60-90 min)
 - **Focus**: Guided implementation
 - **Activities**: Follow exercises, analyze examples
 - **Ideal for**: Active learners, developers, technical managers
 
-### 🛠️ Implementer Path (120-180 min)
+### Implementer Path (120-180 min)
 - **Focus**: Hands-on development
 - **Activities**: Build systems, explore advanced patterns
 - **Ideal for**: Engineers, architects, deep technical expertise
 
-## 📋 Prerequisites
+## Prerequisites
 
 **Technical Background:**
 - Intermediate Python programming experience
@@ -81,7 +81,7 @@ Each session offers **three distinct learning paths** to accommodate different l
 - Understanding of cloud computing concepts
 - Familiarity with containerization (Docker)
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 Upon completion of this nano-degree, you will be able to:
 
@@ -103,7 +103,7 @@ Upon completion of this nano-degree, you will be able to:
 - Design sophisticated multi-agent coordination patterns
 - Deploy enterprise-grade agent communication infrastructures
 
-## 🛠️ Tools & Technologies
+## Tools & Technologies
 
 **Frameworks & Libraries:**
 - LangChain & LangGraph
@@ -126,7 +126,7 @@ Upon completion of this nano-degree, you will be able to:
 - Cloud platforms (AWS, GCP, Azure)
 - Monitoring tools (Prometheus, Grafana)
 
-## 📈 Course Structure
+## Course Structure
 
 Each session follows a consistent structure:
 
@@ -169,7 +169,7 @@ Ready to begin your journey? Choose your starting point:
 
 </div>
 
-## 💡 Study Tips
+## Study Tips
 
 **For Best Results:**
 - Complete sessions in order within each module

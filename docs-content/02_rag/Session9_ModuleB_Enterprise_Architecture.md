@@ -22,14 +22,14 @@ After completing this module, you will master:
 - **[🔧 Module A: Advanced Production →](Session9_ModuleA_Advanced_Production.md)** - Advanced production patterns and scaling techniques
 - **[📄 Session 9 Core: Production RAG & Enterprise Integration →](Session9_Production_RAG_Enterprise_Integration.md)** - Foundation production concepts
 
-### 🗂️ Code Files
+### Code Files
 
 - **Enterprise Integration**: [`src/session9/enterprise_integration.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/enterprise_integration.py) - Enterprise system integration patterns
 - **Privacy & Compliance**: [`src/session9/privacy_compliance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/privacy_compliance.py) - Data privacy and regulatory compliance
 - **Production Orchestrator**: [`src/session9/production_rag_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/production_rag_orchestrator.py) - Enterprise RAG orchestration
 - **Monitoring Analytics**: [`src/session9/monitoring_analytics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/monitoring_analytics.py) - Enterprise monitoring and governance
 
-### 🚀 Quick Start
+### Quick Start
 
 ```bash
 # Test enterprise integration patterns
@@ -45,7 +45,7 @@ python -c "from production_rag_orchestrator import ProductionRAGOrchestrator; Pr
 
 ---
 
-## 📚 Advanced Content
+## Advanced Content
 
 ### **Enterprise Security Architecture (25 minutes)**
 

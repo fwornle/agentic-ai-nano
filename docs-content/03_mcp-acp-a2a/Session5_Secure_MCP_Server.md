@@ -48,7 +48,7 @@ Secure MCP implementations are critical for:
 
 ### Learning Path Options
 
-**🎯 Observer Path (30 minutes)**: Understand MCP security concepts and threat landscape
+**Observer Path (30 minutes)**: Understand MCP security concepts and threat landscape
 - Focus: Quick insights into OAuth 2.1, security vulnerabilities, and protection strategies
 - Best for: Getting oriented with enterprise security requirements
 
@@ -95,7 +95,9 @@ Security researchers have identified MCP as having "serious security problems" w
 Implement the 2025 MCP security standard with OAuth 2.1 and PKCE:
 
 ```python
+
 # src/auth/oauth_mcp.py - 2025 MCP Security Standard
+
 import secrets
 import hashlib
 import base64
@@ -492,7 +494,9 @@ Now let's implement a flexible authorization system:
 Permissions define specific actions users can perform:
 
 ```python
+
 # src/auth/permissions.py
+
 from enum import Enum
 from typing import List, Set, Dict
 from functools import wraps
@@ -534,7 +538,9 @@ class Role(Enum):
 **Step 1.2.3: Role-Permission Mapping**
 
 ```python
+
 # Progressive permission assignment by role
+
 ROLE_PERMISSIONS: Dict[Role, Set[Permission]] = {
     Role.GUEST: {
         Permission.READ_WEATHER  # Basic read access only
@@ -628,7 +634,9 @@ Let's integrate our authentication system with the MCP server:
 Authentication middleware intercepts all MCP requests for security validation:
 
 ```python
+
 # src/auth/middleware.py
+
 from fastapi import Request, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Dict, Any, Optional
@@ -740,7 +748,9 @@ The authentication continues with performance logging and success tracking:
 **Step 1.3.5: Server Class and Dependencies**
 
 ```python
+
 # src/secure_mcp_server.py
+
 from mcp.server.fastmcp import FastMCP
 from src.auth.jwt_auth import JWTManager
 from src.auth.permissions import require_permission, Permission
@@ -849,7 +859,9 @@ In addition to JWT tokens, we'll implement API keys for machine-to-machine authe
 API keys provide secure authentication for automated systems:
 
 ```python
+
 # src/auth/api_keys.py
+
 import secrets
 import hashlib
 import json
@@ -1131,7 +1143,9 @@ Usage tracking continues with fallback handling for expired TTL:
 Token bucket algorithm provides smooth rate limiting with burst capability:
 
 ```python
+
 # src/security/rate_limiter.py
+
 import time
 import json
 import logging
@@ -1351,7 +1365,7 @@ class RateLimitMiddleware:
 
 ---
 
-## 📝 Chapter Summary
+## Chapter Summary
 
 **Security implementation complete!** You've built a production-ready security system that demonstrates defense-in-depth principles through multiple complementary layers.
 
@@ -1359,21 +1373,21 @@ You've successfully implemented a comprehensive security system for MCP servers!
 
 ### Security Features Implemented:
 
-#### 🔐 **Authentication & Authorization**
+#### **Authentication & Authorization**
 
 - **JWT token system** with access and refresh tokens  
 - **API key management** with automatic rotation  
 - **Role-based access control** (RBAC) with fine-grained permissions  
 - **Token blacklisting** for secure logout and revocation  
 
-#### 🛡️ **Protection Mechanisms**
+#### **Protection Mechanisms**
 
 - **Rate limiting** with token bucket algorithm  
 - **Input validation** and sanitization  
 - **Permission decorators** for easy tool protection  
 - **Secure secret management** with environment variables  
 
-#### 📊 **Security Monitoring**
+#### **Security Monitoring**
 
 - **Audit logging** for all authentication events  
 - **Usage tracking** for API keys and tokens  
@@ -1390,7 +1404,7 @@ You've successfully implemented a comprehensive security system for MCP servers!
 
 ---
 
-## 🧪 Testing Your Understanding
+## Testing Your Understanding
 
 ### Quick Check Questions
 
@@ -1465,11 +1479,11 @@ In Session 6, we'll focus on **Advanced MCP Patterns** including:
 3. **Add IP-based rate limiting** in addition to user-based limits  
 4. **Implement certificate-based authentication** for high-security environments  
 
-**💡 Hint:** Check the [Session5_Test_Solutions.md](Session5_Test_Solutions.md) file for complete implementations and advanced security patterns.
+**Hint:** Check the [Session5_Test_Solutions.md](Session5_Test_Solutions.md) file for complete implementations and advanced security patterns.
 
 ---
 
-## 📝 Multiple Choice Test - Session 5 (15 minutes)
+## Multiple Choice Test - Session 5 (15 minutes)
 
 Test your understanding of Secure MCP Servers:
 
@@ -1537,7 +1551,7 @@ D) Increasing server capacity
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** Session 4 - Building Production MCP Servers
 

@@ -2,7 +2,7 @@
 
 Welcome to the **Agent Frameworks** module of the Agentic AI Nano-Degree! This comprehensive 10-session journey takes you from basic agent concepts to production-ready enterprise implementations.
 
-## 🎯 Module Overview
+## Module Overview
 
 This module covers the complete landscape of modern AI agent development, focusing on practical frameworks, patterns, and production deployment strategies.
 
@@ -10,7 +10,7 @@ This module covers the complete landscape of modern AI agent development, focusi
 **Time Investment**: 60-180 minutes per session (depending on chosen path)  
 **Prerequisites**: Intermediate Python, basic ML concepts  
 
-## 📚 Learning Journey
+## Learning Journey
 
 ### Foundation (Sessions 0-2)
 Build your understanding of agent fundamentals and core patterns.
@@ -93,7 +93,7 @@ Master complex multi-agent systems and enterprise integration.
 - Monitoring and operations
 - Scaling and maintenance
 
-## 🚀 Learning Paths
+## Learning Paths
 
 Choose your engagement level for each session:
 
@@ -139,7 +139,7 @@ Choose your engagement level for each session:
     - Implement production features
     - Create original solutions
 
-## 🛠️ Technical Stack
+## Technical Stack
 
 **Core Frameworks:**
 - **LangChain**: Foundation for agent development
@@ -158,7 +158,7 @@ Choose your engagement level for each session:
 - **Redis**: Caching and message queuing
 - **Prometheus/Grafana**: Monitoring and observability
 
-## 📈 Session Structure
+## Session Structure
 
 Each session follows a consistent, learner-friendly structure:
 
@@ -192,7 +192,7 @@ Each session follows a consistent, learner-friendly structure:
    - Related resources
    - Preparation for next session
 
-## 💡 Success Strategies
+## Success Strategies
 
 **For Optimal Learning:**
 
@@ -209,7 +209,7 @@ Each session follows a consistent, learner-friendly structure:
 - **Implementer Path**: 1 session every 2-3 days
 - **Mixed Approach**: Adapt path based on session complexity and available time
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 By completing this module, you will be able to:
 

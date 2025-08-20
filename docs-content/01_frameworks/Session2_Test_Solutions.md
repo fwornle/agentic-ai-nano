@@ -212,7 +212,7 @@ D) Bare metal for learning purposes
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **15/15 Correct**: Excellent mastery of LangChain foundations and trade-offs
 - **12-14 Correct**: Good understanding with minor gaps
@@ -222,7 +222,7 @@ D) Bare metal for learning purposes
 
 ---
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### LangChain Core Architecture
 

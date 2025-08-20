@@ -28,7 +28,7 @@ session5/
 └── requirements.txt      # Dependencies
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Install Dependencies**:
 ```bash
@@ -47,7 +47,7 @@ session5/
    python demo.py
 ```
 
-## 🔧 Configuration
+## Configuration
 
 The `SecurityConfig` class provides comprehensive configuration options:
 
@@ -57,7 +57,7 @@ The `SecurityConfig` class provides comprehensive configuration options:
 - **File Security**: Size limits and allowed extensions
 - **Audit System**: Event retention and logging preferences
 
-## 🎭 User Roles & Permissions
+## User Roles & Permissions
 
 | Role | Permissions |
 |------|-------------|
@@ -66,7 +66,7 @@ The `SecurityConfig` class provides comprehensive configuration options:
 | **Premium** | weather:read/write, files:read/write |
 | **Admin** | All permissions |
 
-## 📊 Security Monitoring
+## Security Monitoring
 
 The audit system tracks:
 - Login attempts (success/failure)
@@ -85,7 +85,7 @@ The audit system tracks:
 5. **Input Validation**: Sanitize all user inputs
 6. **Secure Defaults**: Safe configuration out of the box
 
-## 💡 Usage Example
+## Usage Example
 
 ```python
 from session5 import SecureMCPServer, SecurityConfig

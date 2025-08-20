@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores comprehensive enterprise operations and scaling strategies for agent systems including advanced auto-scaling, performance optimization, operational excellence practices, SRE principles, chaos engineering, and enterprise monitoring. You'll learn to build and operate agent systems at enterprise scale with high reliability and operational efficiency.
 
@@ -1782,7 +1782,7 @@ Finally, we ensure postmortem completion for organizational learning and continu
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered enterprise operations and scaling for production agent systems:
 

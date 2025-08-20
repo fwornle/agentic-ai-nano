@@ -150,7 +150,7 @@ D) Improved security
 
 ---
 
-## 💡 Practical Exercise Solution
+## Practical Exercise Solution
 
 **Challenge:** Implement a circuit breaker pattern for MCP server resilience.
 

@@ -1,6 +1,7 @@
 # Session 1: Basic RAG Implementation
 
 ## Learning Outcomes
+
 By the end of this session, you will be able to:
 - **Build** a complete RAG pipeline from scratch using Python
 - **Implement** document parsing, chunking, and preprocessing strategies
@@ -45,7 +46,7 @@ This session transforms RAG theory into working code. You'll build a complete, p
 
 ### Learning Path Options
 
-**🎯 Observer Path (45 minutes)**: Understand concepts and examine code patterns
+**Observer Path (45 minutes)**: Understand concepts and examine code patterns
 - Focus: Industry context and architectural patterns
 - Best for: Getting oriented with production RAG systems
 
@@ -76,7 +77,9 @@ Modern RAG systems must process diverse document formats, handle production-scal
 ### Production Environment Configuration
 
 ```python
+
 # requirements.txt - 2024 Production Stack
+
 langchain==0.1.0
 langchain-community==0.0.13
 langchain-openai==0.0.5
@@ -92,7 +95,9 @@ numpy==1.24.3
 
 **Project Structure Setup:**
 ```bash
+
 # Production-Ready Project Structure
+
 mkdir production-rag-system
 cd production-rag-system
 mkdir data documents src tests config
@@ -101,7 +106,9 @@ touch .env README.md requirements.txt
 
 **Configuration Management:**
 ```python
+
 # src/config.py - Production Configuration Pattern
+
 import os
 from dotenv import load_dotenv
 
@@ -136,7 +143,9 @@ class RAGConfig:
 *Before proceeding, let's verify your setup works correctly:*
 
 ```python
+
 # tests/test_setup.py - Environment Validation
+
 from src.config import RAGConfig
 import chromadb
 from langchain.embeddings import OpenAIEmbeddings
@@ -181,7 +190,9 @@ if __name__ == "__main__":
 The document loader must handle multiple formats, provide error resilience, and maintain metadata for source attribution - critical for applications in healthcare and legal services where source tracking is mandatory.
 
 ```python
+
 # src/document_loader.py - Production Document Loader
+
 from typing import List, Dict, Any
 import requests
 from bs4 import BeautifulSoup
@@ -231,6 +242,7 @@ class ProductionDocumentLoader:
 ```
 
 **Production Features**:
+
 - **Statistics Tracking**: Essential for monitoring system health
 - **Rich Metadata**: Character count and timestamps enable performance analysis
 - **Error Isolation**: Single file failures don't crash the entire batch
@@ -284,6 +296,7 @@ class ProductionDocumentLoader:
 ```
 
 **Advanced Cleaning Features**:
+
 - **User-Agent Header**: Prevents blocking by web servers
 - **Comprehensive Element Removal**: Eliminates all non-content HTML elements
 - **Text Normalization**: Handles whitespace and line breaks properly
@@ -339,6 +352,7 @@ class ProductionDocumentLoader:
 ```
 
 **Production Monitoring Features**:
+
 - **Success Rate Calculation**: Critical metric for system health monitoring
 - **Detailed Error Reporting**: Enables quick identification of problematic sources
 - **Progress Tracking**: Essential for long-running batch operations
@@ -352,6 +366,7 @@ class ProductionDocumentLoader:
 **Critical Reality**: Research shows that 70% of RAG system effectiveness depends on chunking quality. Poor chunking destroys document context, leading to irrelevant retrieval and incorrect responses.
 
 **2024 Industry Findings**:
+
 - **Context Loss**: Documents lose semantic coherence when chunked improperly
 - **Size Optimization**: Chunk sizes between 500-1500 tokens show optimal performance
 - **Boundary Awareness**: Semantic boundaries (paragraphs, sections) outperform arbitrary splits
@@ -362,7 +377,9 @@ class ProductionDocumentLoader:
 **Why Token Counting Matters**: LLMs operate on tokens, not characters. Accurate token measurement ensures chunks fit within model context windows and prevents truncation.
 
 ```python
+
 # src/text_splitter.py - Advanced Chunking System
+
 from typing import List
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
@@ -383,6 +400,7 @@ class AdvancedTextSplitter:
 ```
 
 **Code Explanation**:
+
 - **Line 9-10**: Configurable chunking parameters based on 2024 research
 - **Line 11**: Token encoder ensures compatibility with target LLM
 - **Line 12**: Statistics tracking for performance monitoring
@@ -426,6 +444,7 @@ class AdvancedTextSplitter:
 ```
 
 **Why This Works**:
+
 - **Hierarchical Separators**: Preserves paragraph and sentence boundaries
 - **Token-Based Length**: Ensures compatibility with LLM context limits
 - **Rich Metadata**: Enables chunk-level analysis and debugging
@@ -520,6 +539,7 @@ class AdvancedTextSplitter:
 ```
 
 **Hybrid Strategy Benefits**:
+
 - **Adaptive Processing**: Chooses optimal method per document type
 - **Quality Validation**: Ensures chunks meet effectiveness standards
 - **Fallback Mechanism**: Prevents processing failures
@@ -533,6 +553,7 @@ class AdvancedTextSplitter:
 **Industry Context**: ChromaDB powers production RAG systems at companies requiring persistent, scalable vector storage. Unlike in-memory solutions, ChromaDB provides the durability needed for enterprise applications.
 
 **2024 Production Requirements**:
+
 - **Persistent Storage**: Data survives system restarts
 - **Scalable Architecture**: Handles growing document collections
 - **Efficient Retrieval**: Sub-second similarity search at scale
@@ -541,7 +562,9 @@ class AdvancedTextSplitter:
 ### Production Vector Store Architecture
 
 ```python
+
 # src/vector_store.py - Enterprise Vector Storage
+
 from typing import List, Optional, Dict, Any
 import chromadb
 from langchain.vectorstores import Chroma
@@ -565,6 +588,7 @@ class ProductionVectorStore:
 ```
 
 **Production Features**:
+
 - **Operation Statistics**: Track system usage for monitoring
 - **Configuration Management**: Centralized settings for maintainability
 - **Error Tracking**: Monitor system health in production
@@ -598,6 +622,7 @@ class ProductionVectorStore:
 ```
 
 **Why This Initialization Works**:
+
 - **Graceful Fallback**: Handles both new and existing databases
 - **Collection Validation**: Confirms database integrity on startup
 - **Document Counting**: Provides immediate system status
@@ -651,6 +676,7 @@ class ProductionVectorStore:
 ```
 
 **Production Optimizations**:
+
 - **Batch Processing**: Reduces memory usage and improves performance
 - **Error Isolation**: Single batch failures don't stop entire operation
 - **Performance Metrics**: Monitor indexing speed for capacity planning
@@ -764,6 +790,7 @@ class ProductionVectorStore:
 ```
 
 **Hybrid Search Benefits**:
+
 - **Improved Recall**: Catches relevant documents missed by vector search alone
 - **Robustness**: Reduces dependency on embedding quality
 - **Flexibility**: Adjustable weighting for different use cases
@@ -777,6 +804,7 @@ class ProductionVectorStore:
 **The Integration Challenge**: Combining document loading, chunking, vector storage, and generation into a cohesive system that handles real-world complexity while maintaining performance and reliability.
 
 **Enterprise Requirements**:
+
 - **Error Resilience**: System continues operating despite component failures
 - **Performance Monitoring**: Real-time metrics for system health
 - **Response Quality**: Consistent, accurate answers with source attribution
@@ -785,7 +813,9 @@ class ProductionVectorStore:
 ### Core RAG System Implementation
 
 ```python
+
 # src/rag_system.py - Production RAG System
+
 from typing import List, Dict, Any, Optional
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import Document
@@ -815,6 +845,7 @@ class ProductionRAGSystem:
 ```
 
 **Production Configuration Choices**:
+
 - **Low Temperature**: Ensures consistent, reliable responses
 - **Request Timeout**: Prevents hanging requests in production
 - **Comprehensive Monitoring**: Track all system interactions
@@ -851,6 +882,7 @@ Response:"""
 ```
 
 **Prompt Engineering Best Practices**:
+
 - **Clear Instructions**: Explicit guidance prevents unwanted behavior
 - **Source Attribution**: Essential for production transparency
 - **Confidence Expression**: Helps users understand response reliability
@@ -890,6 +922,7 @@ Source {i} (Relevance: {similarity_score}, Source: {source}, Chunk: {chunk_info}
 ```
 
 **Context Enhancement Features**:
+
 - **Source Attribution**: Full traceability for audit requirements
 - **Relevance Scoring**: Helps LLM weight information appropriately  
 - **Confidence Assessment**: Quantifies context quality
@@ -943,6 +976,7 @@ Source {i} (Relevance: {similarity_score}, Source: {source}, Chunk: {chunk_info}
 ```
 
 **Production Pipeline Features**:
+
 - **Input Validation**: Prevents processing of invalid queries
 - **Quality Thresholds**: Filters low-relevance results
 - **Comprehensive Error Handling**: Graceful failure modes
@@ -1005,6 +1039,7 @@ Source {i} (Relevance: {similarity_score}, Source: {source}, Chunk: {chunk_info}
 ```
 
 **Quality Assessment Features**:
+
 - **Length Validation**: Ensures substantial responses
 - **Source Utilization**: Measures how well context is used
 - **Uncertainty Bonus**: Rewards honest uncertainty over hallucination
@@ -1012,7 +1047,9 @@ Source {i} (Relevance: {similarity_score}, Source: {source}, Chunk: {chunk_info}
 ### Interactive RAG Interface with Monitoring
 
 ```python
+
 # src/interactive_rag.py - Production Interface
+
 from src.rag_system import ProductionRAGSystem
 from src.document_loader import ProductionDocumentLoader
 from src.text_splitter import AdvancedTextSplitter
@@ -1144,6 +1181,7 @@ class ProductionRAGInterface:
 **The Challenge**: Ensuring RAG systems maintain quality and performance in production requires comprehensive evaluation across multiple dimensions: retrieval accuracy, response quality, system performance, and user satisfaction.
 
 **2024 Industry Standards**:
+
 - **Retrieval Metrics**: Precision, recall, and relevance scoring
 - **Generation Quality**: Factual accuracy, coherence, and source utilization
 - **System Performance**: Response time, throughput, and error rates
@@ -1152,7 +1190,9 @@ class ProductionRAGInterface:
 ### Comprehensive Evaluation Framework
 
 ```python
+
 # tests/evaluation_framework.py - Production Testing
+
 import time
 import json
 from typing import List, Dict, Any
@@ -1218,7 +1258,7 @@ class RAGEvaluationFramework:
         precision_scores = []
         recall_scores = []
         
-        print("🎯 Testing retrieval quality...")
+        print("Testing retrieval quality...")
         
         for case in test_cases:
             if 'expected_sources' not in case:
@@ -1385,7 +1425,7 @@ def run_production_evaluation():
     
     # Display results
     print("\n" + "="*60)
-    print("🎯 PRODUCTION RAG EVALUATION RESULTS")
+    print("PRODUCTION RAG EVALUATION RESULTS")
     print("="*60)
     
     print(f"Overall System Score: {results['overall_score']:.3f}")
@@ -1409,6 +1449,7 @@ if __name__ == "__main__":
 ```
 
 **Production Testing Benefits**:
+
 - **Comprehensive Coverage**: Tests all system aspects
 - **Automated Evaluation**: Consistent, repeatable testing
 - **Performance Monitoring**: Track system health over time
@@ -1452,7 +1493,9 @@ if __name__ == "__main__":
 ### **PARTICIPANT PATH**: Implementation Guide
 
 ```python
+
 # Your Implementation Template
+
 class DomainSpecificRAG(ProductionRAGSystem):
     """Specialized RAG system for [YOUR DOMAIN]."""
     

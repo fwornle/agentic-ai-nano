@@ -19,6 +19,7 @@ PydanticAI harnesses the power of Pydantic validation to ensure responses are co
 PydanticAI excels in enterprise applications requiring data integrity and validation. Financial services use it for structured financial reporting, healthcare organizations deploy it for patient data processing with HIPAA compliance, and e-commerce platforms rely on it for order processing where data accuracy is critical. The framework's type safety prevents the data corruption issues that plague 40% of AI production deployments.
 
 ## Learning Navigation Hub
+
 **Total Time Investment**: 95 minutes (Core) + 220 minutes (Optional)
 
 ### Learning Path Options
@@ -29,9 +30,10 @@ PydanticAI excels in enterprise applications requiring data integrity and valida
 
 ---
 
-## 📋 SESSION OVERVIEW DASHBOARD
+## Session Overview Dashboard
 
 ### Core Learning Track (95 minutes) - REQUIRED
+
 | Section | Concept Load | Time | Skills |
 |---------|--------------|------|--------|
 | Type Safety Architecture | 3 concepts | 25 min | Understanding |
@@ -48,26 +50,30 @@ PydanticAI excels in enterprise applications requiring data integrity and valida
 - **[Module C: Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)** (50 min) - Specialized validators & middleware
 - **[Module D: Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)** (40 min) - Comprehensive testing strategies
 
-**🗂️ Code Files**: All examples use files in `src/session5/`
-**🚀 Quick Start**: Run `cd src/session5 && python pydantic_agents.py` to see PydanticAI in action
+**Code Files**: All examples use files in `src/session5/`
+**Quick Start**: Run `cd src/session5 && python pydantic_agents.py` to see PydanticAI in action
 
 ---
 
-## CORE SECTION (Required - 95 minutes)
+## Core Section (Required - 95 minutes)
 
 ### Part 1: Type Safety Architecture (25 minutes)
+
 **Cognitive Load**: 3 new concepts  
 **Learning Mode**: Conceptual Understanding
 
 #### Enterprise Type Safety Foundation (12 minutes)
+
 PydanticAI revolutionizes AI development by bringing production-grade type safety and validation to agent systems:
 
 ![PydanticAI](images/pydantic-ai.png)
 
-🗂️ **File**: `src/session5/pydantic_agents.py` - Core agent implementations and examples
+**File**: `src/session5/pydantic_agents.py` - Core agent implementations and examples
 
 ```python
+
 # Essential PydanticAI imports
+
 from pydantic_ai import Agent, RunContext
 from pydantic import BaseModel, Field
 from typing import Optional, List
@@ -81,6 +87,7 @@ from enum import Enum
 3. **Type Hints**: Compile-time error prevention
 
 #### Basic Model Definition (8 minutes)
+
 Create type-safe data structures:
 
 Before we can build type-safe agents, we need to define the data structures they'll work with. Think of Pydantic models as contracts that specify exactly what data looks like and what values are acceptable. This prevents common bugs like typos in field names, wrong data types, or invalid values.
@@ -92,6 +99,7 @@ from pydantic import BaseModel, Field
 from enum import Enum
 
 # Define enums for controlled values
+
 class Priority(str, Enum):
     HIGH = "high"
     MEDIUM = "medium" 
@@ -101,7 +109,9 @@ class Priority(str, Enum):
 Now we create structured models with field validation rules:
 
 ```python
+
 # Create structured models
+
 class TaskRequest(BaseModel):
     title: str = Field(..., min_length=1, max_length=100)
     description: str = Field(..., min_length=5)
@@ -112,7 +122,9 @@ class TaskRequest(BaseModel):
 Finally, we demonstrate usage with automatic validation:
 
 ```python
+
 # Usage - automatic validation
+
 task = TaskRequest(
     title="Learn PydanticAI",
     description="Complete the type-safe agent tutorial",
@@ -122,6 +134,7 @@ task = TaskRequest(
 ```
 
 #### Validation Benefits (7 minutes)
+
 Understanding why type safety matters:
 
 The real power of type safety becomes apparent when you compare traditional "stringly-typed" code with validated approaches. Without validation, typos and incorrect values can cause silent failures that are hard to debug. With Pydantic validation, errors are caught immediately with clear messages about what went wrong.
@@ -129,7 +142,9 @@ The real power of type safety becomes apparent when you compare traditional "str
 Notice how the unsafe version uses string comparisons that can have typos, while the safe version uses enum values that are checked at runtime and provide IDE autocompletion.
 
 ```python
+
 # Without validation (prone to errors)
+
 def process_task_unsafe(data):
     if data.get('priority') == 'urgent':  # Typo! Should be 'high'
         handle_urgent(data)
@@ -139,7 +154,9 @@ def process_task_unsafe(data):
 Compare this with the type-safe approach that prevents typos:
 
 ```python
+
 # With PydanticAI validation (catches errors early)
+
 def process_task_safe(task: TaskRequest):
     if task.priority == Priority.HIGH:  # Type-safe, no typos possible
         handle_urgent(task)
@@ -149,7 +166,9 @@ def process_task_safe(task: TaskRequest):
 Validation catches issues immediately with clear error messages:
 
 ```python
+
 # Validation catches issues immediately
+
 try:
     bad_task = TaskRequest(
         title="",  # Too short - will raise validation error
@@ -163,10 +182,12 @@ except ValidationError as e:
 ---
 
 ### Part 2: Agent Creation & Structure (25 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Implementation & Practice
 
 #### Basic Agent Setup (8 minutes)
+
 Creating your first type-safe agent:
 
 PydanticAI agents are different from other frameworks because they guarantee the structure of their responses. When you specify a `result_type`, the agent will always return data in that exact format, or raise a validation error if the LLM produces invalid output.
@@ -178,6 +199,7 @@ from pydantic_ai import Agent
 from pydantic import BaseModel
 
 # Define the response structure
+
 class TaskResponse(BaseModel):
     task_id: str
     status: str
@@ -188,7 +210,9 @@ class TaskResponse(BaseModel):
 Next, we create the type-safe agent with guaranteed response structure:
 
 ```python
+
 # Create a type-safe agent
+
 task_agent = Agent(
     'openai:gpt-4',
     result_type=TaskResponse,
@@ -199,7 +223,9 @@ task_agent = Agent(
 Finally, we use the agent with guaranteed structured output:
 
 ```python
+
 # Use the agent with guaranteed structure
+
 async def plan_task(description: str) -> TaskResponse:
     result = await task_agent.run(f"Plan this task: {description}")
     # Result is guaranteed to be TaskResponse type
@@ -207,6 +233,7 @@ async def plan_task(description: str) -> TaskResponse:
 ```
 
 #### Agent with Dependencies (6 minutes)
+
 Adding external services and context:
 
 Real applications need access to external services like databases, APIs, or file systems. PydanticAI's dependency injection system lets you provide these services to agents in a clean, testable way. The agent can access dependencies through the `RunContext`, and you can easily swap implementations for testing.
@@ -214,7 +241,9 @@ Real applications need access to external services like databases, APIs, or file
 The `@system_prompt` decorator allows dynamic prompt generation based on the available dependencies, making prompts context-aware and more effective.
 
 ```python
+
 # Define dependencies for the agent
+
 class DatabaseDep:
     def __init__(self, db_url: str):
         self.db_url = db_url
@@ -227,7 +256,9 @@ class DatabaseDep:
 Now we create an agent that uses dependency injection:
 
 ```python
+
 # Agent with dependency injection
+
 task_agent_with_db = Agent(
     'openai:gpt-4',
     result_type=TaskResponse,
@@ -242,7 +273,9 @@ def system_prompt(ctx: RunContext[DatabaseDep]) -> str:
 Finally, we demonstrate usage with dependencies:
 
 ```python
+
 # Usage with dependencies
+
 db = DatabaseDep("postgresql://localhost:5432/tasks")
 result = await task_agent_with_db.run(
     "Create a project plan",
@@ -251,6 +284,7 @@ result = await task_agent_with_db.run(
 ```
 
 #### Custom Result Validation (6 minutes)
+
 Adding business logic validation:
 
 Beyond basic type checking, you often need business logic validation. Pydantic validators let you implement complex rules that reflect real-world constraints. Field validators check individual values, while root validators can examine relationships between multiple fields.
@@ -292,7 +326,9 @@ Now we add custom validation logic for business rules:
 Finally, we create an agent that uses this enhanced validation:
 
 ```python
+
 # Agent with enhanced validation
+
 validated_agent = Agent(
     'openai:gpt-4',
     result_type=ValidatedTaskResponse
@@ -300,6 +336,7 @@ validated_agent = Agent(
 ```
 
 #### Error Handling Patterns (5 minutes)
+
 Managing validation failures gracefully:
 
 In production systems, you need robust error handling that distinguishes between different failure types. Validation errors indicate the LLM produced invalid output (usually fixable with prompt improvements), while execution errors suggest system issues.
@@ -339,7 +376,9 @@ Handle other types of errors with fallback responses:
 Finally, demonstrate usage with proper error checking:
 
 ```python
+
 # Usage
+
 result = await safe_agent_execution(
     validated_agent, 
     "Plan a complex software project"
@@ -355,10 +394,12 @@ else:
 ---
 
 ### Part 3: Tool Integration & Validation (25 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Application & Integration
 
 #### Type-Safe Tool Creation (8 minutes)
+
 Building validated tools:
 
 Type-safe tools are where PydanticAI really shines. Instead of tools that accept and return arbitrary data, you define exact input and output schemas. This eliminates entire classes of bugs - the tool can't receive malformed input, and it must return properly structured output.
@@ -370,6 +411,7 @@ from pydantic_ai import Tool
 from pydantic import BaseModel, Field
 
 # Define tool input/output schemas
+
 class CalculateInput(BaseModel):
     expression: str = Field(..., regex=r'^[0-9+\-*/().\s]+$')
     precision: int = Field(default=2, ge=0, le=10)
@@ -383,7 +425,9 @@ class CalculateOutput(BaseModel):
 Now we create the type-safe tool with validation:
 
 ```python
+
 # Create type-safe tool
+
 def create_calculator_tool() -> Tool:
     async def calculate(input_data: CalculateInput) -> CalculateOutput:
         try:
@@ -408,7 +452,9 @@ def create_calculator_tool() -> Tool:
 Finally, register the tool with an agent:
 
 ```python
+
 # Register tool with agent
+
 calc_tool = create_calculator_tool()
 math_agent = Agent(
     'openai:gpt-4',
@@ -417,6 +463,7 @@ math_agent = Agent(
 ```
 
 #### API Integration Tools (7 minutes)
+
 Connecting to external services:
 
 Real applications need to integrate with external APIs. Type-safe tools make these integrations more reliable by validating both the input parameters and the API responses. Even if the external API changes its response format, your validation will catch the mismatch immediately rather than causing silent failures downstream.
@@ -459,7 +506,9 @@ async def create_weather_tool() -> Tool:
 Finally, we use the tool in an agent:
 
 ```python
+
 # Usage in agent
+
 weather_tool = await create_weather_tool()
 weather_agent = Agent(
     'openai:gpt-4', 
@@ -471,6 +520,7 @@ result = await weather_agent.run("What's the weather in London?")
 ```
 
 #### Tool Composition (5 minutes)
+
 Combining multiple tools effectively:
 
 The power of type-safe agents becomes apparent when combining multiple tools. The agent can use different tools as needed and return structured responses that combine information from multiple sources. The response model ensures all required fields are present and properly formatted.
@@ -478,7 +528,9 @@ The power of type-safe agents becomes apparent when combining multiple tools. Th
 Notice how the agent might use both calculation and weather tools to answer a complex query, returning structured data that includes confidence levels and metadata about which tools were used.
 
 ```python
+
 # Create a multi-tool agent
+
 class AgentResponse(BaseModel):
     answer: str
     calculations_used: List[str] = Field(default_factory=list)
@@ -504,13 +556,16 @@ multi_tool_agent = Agent(
 Finally, we demonstrate a query that uses multiple tools:
 
 ```python
+
 # Example query that might use multiple tools
+
 result = await multi_tool_agent.run(
     "If it's 72°F in New York, what's that in Celsius? Also get current weather."
 )
 ```
 
 #### Tool Error Recovery (5 minutes)
+
 Handling tool failures gracefully:
 
 Production tools must handle failures gracefully. Network timeouts, API rate limits, and service outages are inevitable. This robust tool wrapper implements retry logic with exponential backoff and provides structured error responses instead of crashing.
@@ -547,17 +602,21 @@ Handle final failure with structured error response:
 Finally, wrap existing tools for reliability:
 
 ```python
+
 # Wrap existing tools for reliability
+
 robust_calc = RobustTool(calc_tool)
 ```
 
 ---
 
 ### Part 4: Testing & Deployment (15 minutes)
+
 **Cognitive Load**: 3 new concepts
 **Learning Mode**: Production Readiness
 
 #### Basic Testing Patterns (6 minutes)
+
 Testing type-safe agents:
 
 Type-safe agents are easier to test because their inputs and outputs are predictable. You can test model validation separately from agent behavior, and use mocks to simulate agent responses without calling expensive LLM APIs.
@@ -569,6 +628,7 @@ import pytest
 from unittest.mock import AsyncMock
 
 # Test model validation
+
 def test_task_request_validation():
     # Valid request
     valid_task = TaskRequest(
@@ -593,7 +653,9 @@ Test validation failures to ensure models reject invalid data:
 Test agent behavior using mocks to avoid LLM API calls:
 
 ```python
+
 # Test agent behavior
+
 @pytest.mark.asyncio
 async def test_agent_response():
     # Mock the agent for testing
@@ -611,6 +673,7 @@ async def test_agent_response():
 ```
 
 #### Configuration Management (5 minutes)
+
 Managing different environments:
 
 Pydantic's BaseSettings class provides powerful configuration management that automatically loads values from environment variables or configuration files. This makes it easy to deploy the same code across different environments (development, staging, production) with different settings.
@@ -634,14 +697,18 @@ class AgentConfig(BaseSettings):
 Load configuration from environment variables or config files:
 
 ```python
+
 # Load configuration
+
 config = AgentConfig()
 ```
 
 Finally, create an agent using the configuration:
 
 ```python
+
 # Create agent with config
+
 production_agent = Agent(
     config.model_name,
     result_type=TaskResponse,
@@ -650,6 +717,7 @@ production_agent = Agent(
 ```
 
 #### Basic Deployment (4 minutes)
+
 Simple deployment patterns:
 
 Deploying PydanticAI agents as web APIs is straightforward with FastAPI, which automatically handles request/response validation using your Pydantic models. The framework generates OpenAPI documentation automatically, and validation errors are handled gracefully with proper HTTP status codes.
@@ -684,7 +752,9 @@ Handle validation and execution errors with proper HTTP status codes:
 Add a health check endpoint for monitoring:
 
 ```python
+
 # Health check endpoint
+
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "version": "1.0.0"}
@@ -692,13 +762,16 @@ async def health_check():
 
 ---
 
-## ✅ Core Section Validation (5 minutes)
+## Core Section Validation (5 minutes)
 
 ### Quick Implementation Exercise
+
 Build a simple PydanticAI agent to verify understanding:
 
 ```python
+
 # Challenge: Create a book recommendation agent
+
 class BookRequest(BaseModel):
     genre: str
     max_pages: int = Field(..., ge=50, le=1000)
@@ -717,6 +790,7 @@ def create_book_agent():
     pass
 
 # Test your implementation
+
 agent = create_book_agent()
 result = await agent.run("Recommend a sci-fi book under 300 pages")
 ```
@@ -732,12 +806,12 @@ result = await agent.run("Recommend a sci-fi book under 300 pages")
 **Next Session Prerequisites**: ✅ Core Section Complete
 **Recommended**: Explore optional modules for specialized knowledge
 
-
 ---
 
-## 🎛️ OPTIONAL MODULES (Choose Your Adventure)
+## OPTIONAL MODULES (Choose Your Adventure)
 
-## 🔬 Module A: Advanced Type Systems (60 minutes)
+## Module A: Advanced Type Systems (60 minutes)
+
 **Prerequisites**: Core Section Complete  
 **Target Audience**: Developers seeking sophisticated validation  
 **Cognitive Load**: 6 advanced concepts
@@ -754,7 +828,8 @@ result = await agent.run("Recommend a sci-fi book under 300 pages")
 
 ---
 
-## 🏭 Module B: Enterprise PydanticAI (70 minutes)
+## Module B: Enterprise PydanticAI (70 minutes)
+
 **Prerequisites**: Core Section Complete  
 **Target Audience**: Production system builders  
 **Cognitive Load**: 7 production concepts
@@ -771,7 +846,8 @@ result = await agent.run("Recommend a sci-fi book under 300 pages")
 
 ---
 
-## 🔧 Module C: Custom Validation Systems (50 minutes)
+## Module C: Custom Validation Systems (50 minutes)
+
 **Prerequisites**: Core Section Complete  
 **Target Audience**: Developers building specialized systems  
 **Cognitive Load**: 5 specialized concepts
@@ -788,7 +864,8 @@ result = await agent.run("Recommend a sci-fi book under 300 pages")
 
 ---
 
-## 🧪 Module D: Testing & Benchmarking (40 minutes)
+## Module D: Testing & Benchmarking (40 minutes)
+
 **Prerequisites**: Core Section Complete  
 **Target Audience**: Quality assurance engineers and performance analysts  
 **Cognitive Load**: 4 testing concepts
@@ -803,9 +880,7 @@ result = await agent.run("Recommend a sci-fi book under 300 pages")
 
 **[📖 Start Module D: Testing & Benchmarking →](Session5_ModuleD_Testing_Benchmarking.md)**
 
-
-
-## 📝 Multiple Choice Test - Session 5 (15 minutes)
+## Multiple Choice Test - Session 5 (15 minutes)
 
 Test your understanding of PydanticAI type-safe agent development.
 
@@ -816,14 +891,12 @@ B) Lower computational cost
 C) Better user interface  
 D) Automatic validation and structured outputs with compile-time type checking  
 
-
 **Question 2:** Which validation constraint ensures a field value falls within a specific numeric range?  
 
 A) Field(range=(0, 100))  
 B) Field(between=0:100)  
 C) Field(min=0, max=100)  
 D) Field(ge=0, le=100)  
-
 
 **Question 3:** What happens when PydanticAI model validation fails?  
 
@@ -832,14 +905,12 @@ B) Silent failure with default values
 C) Warning message is logged  
 D) ValidationError is raised with detailed field information  
 
-
 **Question 4:** How do you define a tool function for a PydanticAI agent?  
 
 A) Using @tool decorator  
 B) Using def tool() syntax  
 C) Using @function decorator  
 D) Using @agent.tool decorator  
-
 
 **Question 5:** What is the purpose of RunContext in PydanticAI?  
 
@@ -848,7 +919,6 @@ B) Provides runtime configuration and dependencies
 C) Manages conversation history  
 D) Controls execution speed  
 
-
 **Question 6:** Which decorator enables cross-field validation in Pydantic models?  
 
 A) @cross_validator  
@@ -856,14 +926,12 @@ B) @model_validator
 C) @root_validator  
 D) @field_validator  
 
-
 **Question 7:** How do you implement custom validation logic for complex business rules?  
 
 A) Custom @validator decorator with logic  
 B) External validation services  
 C) Built-in validators only  
 D) Database constraints  
-
 
 **Question 8:** What is the main benefit of using structured outputs in PydanticAI?  
 
@@ -901,7 +969,7 @@ Build a working type-safe agent that:
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 4 - CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)
 

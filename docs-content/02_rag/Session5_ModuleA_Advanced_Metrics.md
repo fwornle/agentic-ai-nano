@@ -22,14 +22,14 @@ After completing this module, you will master:
 - **[🔬 Module B: Enterprise Monitoring →](Session5_ModuleB_Enterprise_Monitoring.md)** - Production monitoring and alerting systems
 - **[📄 Session 5 Core: RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts
 
-### 🗂️ Code Files
+### Code Files
 
 - **Evaluation Framework**: [`src/session5/evaluation_framework.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/evaluation_framework.py) - Advanced metrics implementation
 - **Custom Metrics**: [`src/session5/custom_metrics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/custom_metrics.py) - Domain-specific evaluation metrics
 - **Benchmark System**: [`src/session5/benchmark_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/benchmark_system.py) - Performance benchmarking tools
 - **Demo Application**: [`src/session5/demo_evaluation_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/demo_evaluation_system.py) - Complete evaluation showcase
 
-### 🚀 Quick Start
+### Quick Start
 
 ```bash
 # Test advanced evaluation metrics
@@ -45,7 +45,7 @@ python -c "from evaluation_framework import EvaluationFramework; print('Advanced
 
 ---
 
-## 📚 Advanced Metrics Content
+## Advanced Metrics Content
 
 ### Neural Evaluation Metrics
 

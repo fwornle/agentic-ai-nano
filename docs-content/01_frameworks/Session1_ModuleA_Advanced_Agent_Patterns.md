@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores sophisticated agent patterns including reflection-based self-improvement, multi-step planning systems, and collaborative multi-agent architectures. You'll implement advanced reasoning loops that form the foundation of professional agent frameworks.
 
@@ -555,7 +555,7 @@ D) Registration, routing, completion
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced agent patterns including:
 

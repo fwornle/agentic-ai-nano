@@ -72,7 +72,7 @@ D) Query failures or response time degradation affecting user experience ✅
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **5/5 Correct**: Excellent mastery of production GraphRAG systems
 - **4/5 Correct**: Good understanding with minor gaps in production concepts
@@ -82,7 +82,7 @@ D) Query failures or response time degradation affecting user experience ✅
 
 ---
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### Production Architecture
 1. **Distributed Design**: Horizontal scalability for enterprise-scale knowledge graphs
