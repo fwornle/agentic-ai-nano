@@ -121,7 +121,11 @@ Each session includes:
 - **Multiple Choice Tests** - Verify conceptual understanding
 - **Hands-on Exercises** - Practice implementation skills
 - **Code Examples** - Study working implementations
-- **Optional Modules** - Deep-dive into advanced topics
+
+4. **🔬 Optional Deep Dive Modules**
+   - Advanced enterprise patterns
+   - Production considerations  
+   - Workflow orchestration features
 
 ## Development Environment
 

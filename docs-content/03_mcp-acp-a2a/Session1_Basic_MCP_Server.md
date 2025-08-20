@@ -28,11 +28,11 @@ By the end of this session, you will be able to:
 - Focus: Clear demonstrations of MCP server capabilities with simple examples
 - Best for: Understanding the fundamentals and business value
 
-**📝 Participant Path (60 minutes)**: Build your own weather MCP server step-by-step  
+**🙋‍♂️ Participant Path (60 minutes)**: Build your own weather MCP server step-by-step  
 - Focus: Hands-on implementation with practical examples and testing
 - Best for: Developers who want to create their own MCP servers
 
-**⚙️ Implementer Path (90 minutes)**: Production deployment patterns and advanced features
+**🛠️ Implementer Path (90 minutes)**: Production deployment patterns and advanced features
 - Focus: Enterprise-ready implementations with monitoring and security
 - Best for: Teams deploying MCP servers in production environments
 
