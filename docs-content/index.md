@@ -34,7 +34,7 @@ Build sophisticated Retrieval-Augmented Generation systems for enterprise applic
 - Multi-modal RAG architectures
 - Production deployment and enterprise integration
 
-### 🔗 Module 3: MCP, ACP & Agent-to-Agent Communication (10 Sessions)
+### Module 3: MCP, ACP & Agent-to-Agent Communication (10 Sessions)
 Master the Model Context Protocol, Agent Communication Protocol, and sophisticated agent-to-agent communication patterns.
 
 **What You'll Learn:**
@@ -137,7 +137,7 @@ Each session follows a consistent structure:
 5. **Assessment** - Multiple choice tests with detailed solutions
 6. **Navigation** - Clear paths to previous/next sessions
 
-## 🔗 Quick Start
+## Quick Start
 
 Ready to begin your journey? Choose your starting point:
 
@@ -183,7 +183,7 @@ Ready to begin your journey? Choose your starting point:
 - Participant Path: 1 session per day
 - Implementer Path: 1 session every 2-3 days
 
-## 🤝 Community & Support
+## Community & Support
 
 - **GitHub Discussions**: Ask questions and share insights
 - **Code Examples**: All implementations available in the repository
