@@ -51,8 +51,10 @@ RUN apt-get update \
         gnupg \
         graphviz \
         htop \
+        iproute2 \
         jq \
         moreutils \
+        net-tools \
         nvidia-utils-550 \
         python3 \
         python3-pip \
@@ -75,8 +77,9 @@ COPY pip.conf /etc/xdg/pip/pip.conf
 
 ################################################################################
 # Install developer tools
+ARG COMMON_AF=https://common.artifactory.cc.bmwgroup.net/artifactory
 ARG DDAD_AF=https://ddad.artifactory.cc.bmwgroup.net/artifactory
-ARG GITHUB_MIRROR=${DDAD_AF}/external-github-com
+ARG GITHUB_MIRROR=${COMMON_AF}/external-github-com
 ARG NODE_MIRROR="${DDAD_AF}/external-nodejs"
 
 # Install uv (Python package manager and build tool.)
@@ -84,7 +87,7 @@ ARG UV_VERSION=0.8.12
 RUN curl ${GITHUB_MIRROR}/astral-sh/uv/releases/download/${UV_VERSION}/uv-x86_64-unknown-linux-gnu.tar.gz \
   | tar -xzv -C /usr/local/bin/ --strip-components=1
 ENV UV_PYTHON_INSTALL_MIRROR=${GITHUB_MIRROR}/astral-sh/python-build-standalone/releases/download
-ENV UV_DEFAULT_INDEX=${DDAD_AF}/api/pypi/external-pypi-org/simple
+ENV UV_DEFAULT_INDEX=${COMMON_AF}/api/pypi/external-pypi-org/simple
 
 # Node
 ARG NODE_VERSION=22.17.0
@@ -120,6 +123,11 @@ RUN UV_TOOL_BIN_DIR=/usr/local/bin/ \
     UV_TOOL_DIR=/usr/local/share/uv/tools/ \
     uv tool install ruff==0.11.2
 
+# llm
+RUN UV_TOOL_BIN_DIR=/usr/local/bin/ \
+    UV_TOOL_DIR=/usr/local/share/uv/tools/ \
+    uv tool install llm==0.27.1
+
 # install bmw certificates
 RUN wget https://trustbundle.bmwgroup.net/BMW_Trusted_Certificates_Latest.pem \
     -O /usr/local/share/ca-certificates/BMW_Trusted_Certificates_Latest.crt \
@@ -150,11 +158,11 @@ RUN wget https://trustbundle.bmwgroup.net/BMW_Trusted_Certificates_Latest.pem \
 #     && apt-get install -y \
 #         gh
 
-# # ###############################################################################
-# # Setup Ollama
-# ARG ollama_version="0.6.2"
-# ARG ollama_url="${af_server}/external-github-com/ollama/ollama/releases/download/v${ollama_version}/ollama-linux-amd64.tgz"
-# RUN curl -L ${ollama_url} | tar -C /usr -xvz
+# ###############################################################################
+# Setup Ollama
+ARG ollama_version="0.11.5"
+ARG ollama_url="${COMMON_AF}/external-github-com/ollama/ollama/releases/download/v${ollama_version}/ollama-linux-amd64.tgz"
+RUN curl -L ${ollama_url} | tar -C /usr -xvz
 # ENV OLLAMA_HOST="127.0.0.1:11434"
 
 # # ###############################################################################
@@ -180,6 +188,9 @@ RUN chsh -s /bin/bash ${user}
 RUN echo "${user} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${user} \
     && chmod 0440 /etc/sudoers.d/${user}
 
+# fzf bash integration.
+RUN echo 'eval "$(fzf --bash)"' >> ${HOME}/.bashrc
+
 # Add user to docker
 # RUN usermod -aG docker ${user}
 
@@ -199,10 +210,12 @@ ENV HOME="/home/${user}"
 #     ${HOME}/.docker/config.json | \
 #     sponge ${HOME}/.docker/config.json
 
+# llm config
+COPY --chown=${uid}:${gid} extra-openai-models.yaml ${HOME}/.config/io.datasette.llm/extra-openai-models.yaml
+
 # Create working directory for the user
 ENV WORKDIR="${HOME}/workdir"
 RUN mkdir -p ${WORKDIR}
 
 # # Set bash as entrypoint for the container
 ENTRYPOINT ["/bin/bash"]
-

@@ -1,0 +1,10 @@
+- model_id: claude-3-haiku
+  model_name: claude-3-haiku
+- model_id: claude-3-sonnet
+  model_name: claude-3-sonnet
+- model_id: claude-3-5-sonnet
+  model_name: claude-3-5-sonnet
+- model_id: claude-3-7-sonnet
+  model_name: claude-3-7-sonnet
+- model_id: claude-sonnet-4
+  model_name: claude-sonnet-4
