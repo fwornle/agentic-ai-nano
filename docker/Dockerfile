@@ -57,6 +57,7 @@ RUN apt-get update \
         moreutils \
         net-tools \
         nvidia-utils-550 \
+        python \
         python3 \
         python3-pip \
         python3-venv \
