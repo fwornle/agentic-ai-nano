@@ -50,11 +50,11 @@ This session transforms RAG theory into working code. You'll build a complete, p
 - Focus: Industry context and architectural patterns
 - Best for: Getting oriented with production RAG systems
 
-**📝 Participant Path (90 minutes)**: Follow exercises and implement solutions
+**🙋‍♂️ Participant Path (90 minutes)**: Follow exercises and implement solutions
 - Focus: Hands-on implementation with guided examples
 - Best for: Building practical RAG development skills
 
-**⚙️ Implementer Path (150 minutes)**: Build custom systems and explore advanced patterns
+**🛠️ Implementer Path (150 minutes)**: Build custom systems and explore advanced patterns
 - Focus: Production deployment and optimization strategies
 - Best for: Enterprise-level RAG system design
 

@@ -52,11 +52,11 @@ A2A excels in complex enterprise scenarios requiring agent collaboration:
 - Focus: Quick insights into Agent Cards, task management, and distributed coordination
 - Best for: Getting oriented with enterprise multi-agent architectures
 
-**📝 Participant Path (55 minutes)**: Implement working A2A agents and coordination systems  
+**🙋‍♂️ Participant Path (55 minutes)**: Implement working A2A agents and coordination systems  
 - Focus: Hands-on Agent Card creation, JSON-RPC communication, and task lifecycle management
 - Best for: Building practical enterprise multi-agent systems
 
-**⚙️ Implementer Path (85 minutes)**: Advanced enterprise deployment and cross-platform integration
+**🛠️ Implementer Path (85 minutes)**: Advanced enterprise deployment and cross-platform integration
 - Focus: Azure AI Foundry integration, security patterns, and scalable orchestration
 - Best for: Enterprise multi-agent architecture and platform integration
 

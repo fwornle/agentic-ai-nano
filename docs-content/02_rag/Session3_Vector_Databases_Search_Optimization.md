@@ -43,11 +43,11 @@ Based on current enterprise deployments, the vector database ecosystem in 2025 f
 - Focus: Core concepts with clear examples of indexing algorithms and search strategies
 - Best for: Getting oriented with vector search fundamentals and trade-offs
 
-**📝 Participant Path (70 minutes)**: Implement hybrid search systems
+**🙋‍♂️ Participant Path (70 minutes)**: Implement hybrid search systems
 - Focus: Hands-on setup of multiple vector databases and hybrid search implementation
 - Best for: Building practical search infrastructure with real-world optimization
 
-**⚙️ Implementer Path (120 minutes)**: Advanced optimization and enterprise deployment
+**🛠️ Implementer Path (120 minutes)**: Advanced optimization and enterprise deployment
 - Focus: Production-grade performance tuning and multi-database architecture
 - Best for: Deep technical mastery with enterprise-scale optimization patterns
 

@@ -36,11 +36,11 @@ These patterns power automated research pipelines, content generation systems, b
 - Focus: Quick insights with industry context and pattern recognition
 - Best for: Getting oriented and understanding the business value
 
-**📝 Participant Path (45 minutes)**: Hands-on pattern recognition and framework comparison exercises  
+**🙋‍♂️ Participant Path (45 minutes)**: Hands-on pattern recognition and framework comparison exercises  
 - Focus: Interactive examples and framework evaluation exercises
 - Best for: Learning through practical analysis
 
-**⚙️ Implementer Path (65 minutes)**: Deep dive into code examples with optional advanced modules
+**🛠️ Implementer Path (65 minutes)**: Deep dive into code examples with optional advanced modules
 - Focus: Technical implementation details and enterprise patterns
 - Best for: Technical teams planning real-world deployments
 
@@ -359,7 +359,7 @@ D) Agno
 
 ## Navigation
 
-**Previous:** Introduction (You are here)  
+**Previous:** [Module 1: Agent Frameworks](index.md) (Introduction)  
 **Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
 
 ---

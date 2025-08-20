@@ -53,11 +53,11 @@ ACP excels in scenarios requiring autonomous agent coordination:
 - Focus: Quick insights into ACP principles, discovery mechanisms, and agent orchestration
 - Best for: Getting oriented with decentralized agent architectures
 
-**📝 Participant Path (50 minutes)**: Implement working ACP agents and coordination systems  
+**🙋‍♂️ Participant Path (50 minutes)**: Implement working ACP agents and coordination systems  
 - Focus: Hands-on agent development, local discovery, and multi-agent workflows
 - Best for: Building practical local-first agent systems
 
-**⚙️ Implementer Path (80 minutes)**: Advanced edge deployment and autonomous coordination
+**🛠️ Implementer Path (80 minutes)**: Advanced edge deployment and autonomous coordination
 - Focus: Edge computing patterns, resilient architectures, and production deployment
 - Best for: Enterprise edge AI and autonomous system development
 
@@ -760,8 +760,8 @@ D) To reduce development costs
 
 ## Navigation
 
-**Previous:** Session 5 - MCP Integration Patterns
+**Previous:** [Session 5 - Secure MCP Server](Session5_Secure_MCP_Server.md)
 
 **Note:** Advanced ACP patterns and production deployment strategies are covered in Sessions 8 and 9, focusing on advanced workflows and production deployment.
 
-**Next:** Session 7 - Agent-to-Agent Communication (A2A) →
+**Next:** [Session 7 - Agent-to-Agent Communication →](Session7_Agent_to_Agent_Communication.md)

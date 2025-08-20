@@ -28,11 +28,11 @@ By the end of this session, you will be able to:
 - Focus: Quick insights with clear demonstrations and industry context
 - Best for: Getting oriented and understanding the business value
 
-**📝 Participant Path (45 minutes)**: Explore implementation patterns and workflows  
+**🙋‍♂️ Participant Path (45 minutes)**: Explore implementation patterns and workflows  
 - Focus: Hands-on exploration with practical integration scenarios
 - Best for: Learning through guided examples
 
-**⚙️ Implementer Path (65 minutes)**: Deep technical implementation and enterprise deployment
+**🛠️ Implementer Path (65 minutes)**: Deep technical implementation and enterprise deployment
 - Focus: Production-ready patterns and advanced configurations
 - Best for: Technical teams planning real-world deployments
 
@@ -469,7 +469,7 @@ D) Only cloud service providers
 
 ## Navigation
 
-**Previous:** Introduction (You are here)  
+**Previous:** [Module 3: MCP, ACP & A2A](index.md) (Introduction)  
 **Next:** [Session 1 - Building Your First MCP Server →](Session1_Basic_MCP_Server.md)
 
 ---

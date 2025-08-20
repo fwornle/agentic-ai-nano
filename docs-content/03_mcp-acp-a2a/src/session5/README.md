@@ -2,7 +2,7 @@
 
 This directory contains a production-ready, security-focused MCP (Model Context Protocol) server implementation with comprehensive security features.
 
-## 🛡️ Security Features
+## Security Features
 
 - **JWT Authentication**: Secure token-based authentication with access/refresh token pattern
 - **Role-Based Access Control (RBAC)**: Fine-grained permissions system with predefined roles
@@ -11,7 +11,7 @@ This directory contains a production-ready, security-focused MCP (Model Context 
 - **Input Validation**: Secure file path validation and content sanitization
 - **Token Blacklisting**: Secure logout and token revocation capabilities
 
-## 📁 File Structure
+## File Structure
 
 ```
 session5/
@@ -76,7 +76,7 @@ The audit system tracks:
 - API key usage
 - Invalid requests
 
-## 🔒 Best Practices Implemented
+## Best Practices Implemented
 
 1. **Defense in Depth**: Multiple security layers
 2. **Principle of Least Privilege**: Minimal required permissions

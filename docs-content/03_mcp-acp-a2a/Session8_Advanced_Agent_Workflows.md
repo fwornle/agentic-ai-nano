@@ -52,11 +52,11 @@ Advanced agent workflows excel in sophisticated business scenarios:
 - Focus: Quick insights into ReAct patterns, parallel processing, and enterprise coordination
 - Best for: Getting oriented with production agentic workflow architecture
 
-**📝 Participant Path (65 minutes)**: Implement working advanced workflows with LangGraph  
+**🙋‍♂️ Participant Path (65 minutes)**: Implement working advanced workflows with LangGraph  
 - Focus: Hands-on orchestrator-worker patterns, conditional logic, and fault tolerance
 - Best for: Building practical enterprise workflow systems
 
-**⚙️ Implementer Path (95 minutes)**: Advanced orchestration and production deployment
+**🛠️ Implementer Path (95 minutes)**: Advanced orchestration and production deployment
 - Focus: Multi-agent coordination, adaptive optimization, and enterprise monitoring
 - Best for: Production workflow architecture and scalable orchestration
 

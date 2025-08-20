@@ -111,7 +111,7 @@ python test_setup.py
 
 **Setup**: Minimal - just read the materials
 
-### Participant Path (50-110 min/session)
+### 🙋‍♂️ Participant Path (50-110 min/session)
 **Best for**: Hands-on learners, developers, practical understanding
 
 **Activities**:
@@ -122,7 +122,7 @@ python test_setup.py
 
 **Setup**: Full environment with API keys
 
-### Implementer Path (120-260 min/session)
+### 🛠️ Implementer Path (120-260 min/session)
 **Best for**: Deep expertise, architects, production focus
 
 **Activities**:

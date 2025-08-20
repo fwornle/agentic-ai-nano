@@ -51,11 +51,11 @@ Production MCP infrastructure supports:
 - Focus: Quick insights into containerization, monitoring, and cloud deployment strategies
 - Best for: Getting oriented with enterprise infrastructure concepts
 
-**📝 Participant Path (65 minutes)**: Implement working production deployment pipeline  
+**🙋‍♂️ Participant Path (65 minutes)**: Implement working production deployment pipeline  
 - Focus: Hands-on containerization, monitoring setup, and cloud deployment
 - Best for: Building practical production deployment skills
 
-**⚙️ Implementer Path (100 minutes)**: Advanced enterprise architecture and multi-region deployment
+**🛠️ Implementer Path (100 minutes)**: Advanced enterprise architecture and multi-region deployment
 - Focus: High-availability patterns, advanced monitoring, and enterprise security
 - Best for: Production infrastructure architecture and DevOps expertise
 

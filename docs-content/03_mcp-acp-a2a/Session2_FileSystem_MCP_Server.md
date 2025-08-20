@@ -47,11 +47,11 @@ Real-world applications of secure MCP file system servers include:
 - Focus: Quick insights into sandboxing, path validation, and security patterns
 - Best for: Getting oriented with security concepts and understanding the architecture
 
-**📝 Participant Path (75 minutes)**: Implement a working secure file system server  
+**🙋‍♂️ Participant Path (75 minutes)**: Implement a working secure file system server  
 - Focus: Hands-on implementation of security layers and file operations
 - Best for: Building practical skills with guided development
 
-**⚙️ Implementer Path (120 minutes)**: Advanced security features and production deployment
+**🛠️ Implementer Path (120 minutes)**: Advanced security features and production deployment
 - Focus: Enterprise-level security, performance optimization, and monitoring
 - Best for: Production deployment and security architecture expertise
 
