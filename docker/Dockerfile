@@ -57,7 +57,7 @@ RUN apt-get update \
         moreutils \
         net-tools \
         nvidia-utils-550 \
-        python \
+        python-is-python3 \
         python3 \
         python3-pip \
         python3-venv \
@@ -234,9 +234,14 @@ ENV HOME="/home/${user}"
 # llm config
 COPY --chown=${uid}:${gid} extra-openai-models.yaml ${HOME}/.config/io.datasette.llm/extra-openai-models.yaml
 
+# Backup the user's home directory before it gets mounted over
+RUN sudo mkdir -p /home/${user}-bak \
+    && sudo chown ${user}:${user} /home/${user}-bak \
+    && cp -r /home/${user}/. /home/${user}-bak/
+
 # Create working directory for the user
-ENV WORKDIR="${HOME}/workdir"
-RUN mkdir -p ${WORKDIR}
+# ENV WORKDIR="${HOME}/workdir"
+# RUN mkdir -p ${WORKDIR}
 
 # # Set bash as entrypoint for the container
 ENTRYPOINT ["/bin/bash"]
