@@ -16,4 +16,5 @@ To try it out you can run the [`llm`](https://llm.datasette.io/en/stable/index.h
 
 ```bash
 llm -m "claude-sonnet-4" "How many r's in blueberry?"
+There are 2 r's in "blueberry".
 ```
