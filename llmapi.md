@@ -18,3 +18,24 @@ To try it out you can run the [`llm`](https://llm.datasette.io/en/stable/index.h
 llm -m "claude-sonnet-4" "How many r's in blueberry?"
 There are 2 r's in "blueberry".
 ```
+
+## Preinstalled tools
+
+### [`coding_assistant`](https://github.com/msc94/coding_assistant)
+
+```bash
+coding-assistant --task "Create a program fibonacci.py that asks a user and calculates N numbers."
+```
+
+### ollama
+
+```bash
+ollama run qwen:0.6b
+```
+
+### [`llm`](https://llm.datasette.io/en/stable/index.html)
+
+```bash
+llm -m "claude-sonnet-4" "How many r's in blueberry?"
+There are 2 r's in "blueberry".
+```
