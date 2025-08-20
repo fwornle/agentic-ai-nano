@@ -2,14 +2,14 @@
 
 Welcome to the Agentic AI Nano-Degree! This guide will help you set up your environment and begin your learning journey.
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Choose Your Module**: Start with [Agent Frameworks](01_frameworks/index.md) or [RAG Architecture](02_rag/index.md)
 2. **Select Learning Path**: Observer, Participant, or Implementer based on your time and depth needs
 3. **Set Up Environment**: Follow the setup instructions below
 4. **Begin Learning**: Start with Session 0 of your chosen module
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### Required Knowledge
 - **Python Programming**: Intermediate level (functions, classes, modules)
@@ -29,7 +29,7 @@ Welcome to the Agentic AI Nano-Degree! This guide will help you set up your envi
 - **Internet**: Stable connection for API calls and model downloads
 - **OS**: Windows 10+, macOS 10.15+, or Linux (Ubuntu 18.04+)
 
-## 🛠️ Environment Setup
+## Environment Setup
 
 ### 1. Python Environment
 
@@ -98,7 +98,7 @@ cd 01_frameworks/src/session1
 python test_setup.py
 ```
 
-## 📚 Learning Paths Guide
+## Learning Paths Guide
 
 ### 👀 Observer Path (30-80 min/session)
 **Best for**: Quick understanding, decision makers, busy schedules
@@ -111,7 +111,7 @@ python test_setup.py
 
 **Setup**: Minimal - just read the materials
 
-### 🙋‍♂️ Participant Path (50-110 min/session)  
+### Participant Path (50-110 min/session)
 **Best for**: Hands-on learners, developers, practical understanding
 
 **Activities**:
@@ -122,7 +122,7 @@ python test_setup.py
 
 **Setup**: Full environment with API keys
 
-### 🛠️ Implementer Path (120-260 min/session)
+### Implementer Path (120-260 min/session)
 **Best for**: Deep expertise, architects, production focus
 
 **Activities**:
@@ -133,7 +133,7 @@ python test_setup.py
 
 **Setup**: Full environment plus additional tools (Docker, cloud access)
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 nano-degree/
@@ -153,7 +153,7 @@ nano-degree/
 └── README.md              # Project overview
 ```
 
-## 🎯 Study Recommendations
+## Study Recommendations
 
 ### Time Management
 - **Consistent Schedule**: Set aside dedicated learning time
@@ -185,7 +185,7 @@ nano-degree/
 - More time for practice and projects
 - Deep exploration of optional modules
 
-## 🔧 Development Tools
+## Development Tools
 
 ### Recommended IDEs
 - **VS Code**: Excellent Python support, extensions
@@ -246,7 +246,7 @@ pip install mkdocs mkdocs-material
 4. Check API status pages
 5. Ask for help with specific error details
 
-## 📊 Progress Tracking
+## Progress Tracking
 
 ### Session Completion
 - [ ] Read all core content
@@ -269,7 +269,7 @@ Consider building these throughout your learning:
 3. **Multi-Agent Collaboration** (Sessions 7-9)
 4. **Enterprise RAG System** (Sessions 6-9 RAG)
 
-## 🎓 Certification
+## Certification
 
 Upon completion, you can:
 - **Document Progress**: Keep a portfolio of implementations

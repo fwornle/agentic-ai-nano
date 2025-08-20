@@ -1,6 +1,7 @@
 # Session 3: Vector Databases & Search Optimization
 
 ## Learning Outcomes
+
 By the end of this session, you will be able to:
 - **Deploy** multiple vector database architectures and select optimal solutions for specific use cases
 - **Implement** hybrid search strategies that combine semantic similarity with keyword matching
@@ -38,7 +39,7 @@ Based on current enterprise deployments, the vector database ecosystem in 2025 f
 
 ### Learning Path Options
 
-**🎯 Observer Path (35 minutes)**: Understand vector database concepts and architectures
+**Observer Path (35 minutes)**: Understand vector database concepts and architectures
 - Focus: Core concepts with clear examples of indexing algorithms and search strategies
 - Best for: Getting oriented with vector search fundamentals and trade-offs
 
@@ -72,7 +73,9 @@ This approach requires 1 million similarity calculations per query - far too slo
 Here's a simple interface that shows the essential operations every vector database must support:
 
 ```python
+
 # Simple vector database interface
+
 from typing import List, Dict, Any
 
 class VectorDatabaseInterface:
@@ -309,12 +312,14 @@ The choice between HNSW and IVF indexing algorithms represents one of the most c
 ### Index Algorithm Comparison (Observer Focus)
 
 **HNSW (Hierarchical Navigable Small World)**:
+
 - **Philosophy**: Navigate through similarity space like a GPS system
 - **Performance**: 3x faster than IVF with better accuracy
 - **Memory**: Higher usage but consistent performance
 - **Best for**: Real-time applications requiring <100ms latency
 
 **IVF (Inverted File)**:
+
 - **Philosophy**: Divide and conquer through intelligent clustering
 - **Performance**: Good balance of speed and memory efficiency
 - **Memory**: Lower usage, better for resource-constrained environments
@@ -323,7 +328,9 @@ The choice between HNSW and IVF indexing algorithms represents one of the most c
 Here's a simple comparison of their characteristics:
 
 ```python
+
 # Index performance comparison
+
 index_comparison = {
     "HNSW": {
         "query_latency": "0.1-1ms",
@@ -533,7 +540,9 @@ Pure semantic search might miss this match because "remote work" and "work from 
 Here's a simple hybrid search approach:
 
 ```python
+
 # Simple hybrid search concept
+
 def simple_hybrid_search(query, vector_store, documents, top_k=10):
     """Combine semantic and keyword search results."""
     
@@ -804,7 +813,9 @@ Production vector search requires multiple optimization layers: caching frequent
 Here are the key optimization strategies that provide the most impact:
 
 ```python
+
 # Essential performance optimizations
+
 from functools import lru_cache
 import hashlib
 import time
@@ -1101,7 +1112,7 @@ class AdaptivePerformanceTuner:
 
 ---
 
-## 📝 Multiple Choice Test - Session 3
+## Multiple Choice Test - Session 3
 
 Test your understanding of vector databases and search optimization:
 

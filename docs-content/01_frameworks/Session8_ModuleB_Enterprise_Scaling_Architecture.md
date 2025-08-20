@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores enterprise-scale architecture patterns for Agno agent systems including Kubernetes orchestration, auto-scaling strategies, multi-tenant architectures, service mesh integration, and global deployment patterns. You'll learn to build massively scalable agent platforms that can handle enterprise workloads across multiple regions.
 
@@ -1548,7 +1548,7 @@ class CostOptimizedScaling:
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered enterprise-scale architecture for Agno agent systems:
 

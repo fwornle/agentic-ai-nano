@@ -22,14 +22,14 @@ After completing this module, you will master:
 - **[🏢 Module B: Enterprise Architecture →](Session9_ModuleB_Enterprise_Architecture.md)** - Enterprise integration and governance patterns
 - **[📄 Session 9 Core: Production RAG & Enterprise Integration →](Session9_Production_RAG_Enterprise_Integration.md)** - Foundation production concepts
 
-### 🗂️ Code Files
+### Code Files
 
 - **Production Deployment**: [`src/session9/production_deployment.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/production_deployment.py) - Advanced deployment orchestration
 - **Load Balancer**: [`src/session9/load_balancer_autoscaler.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/load_balancer_autoscaler.py) - Intelligent load balancing and scaling
 - **Monitoring System**: [`src/session9/monitoring_analytics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/monitoring_analytics.py) - Comprehensive production monitoring
 - **Incremental Indexing**: [`src/session9/incremental_indexing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/incremental_indexing.py) - Advanced index management
 
-### 🚀 Quick Start
+### Quick Start
 
 ```bash
 # Test advanced production patterns
@@ -45,7 +45,7 @@ python -c "from incremental_indexing import IncrementalIndexing; IncrementalInde
 
 ---
 
-## 📚 Advanced Content
+## Advanced Content
 
 ### **Advanced Production Scaling Patterns (25 minutes)**
 

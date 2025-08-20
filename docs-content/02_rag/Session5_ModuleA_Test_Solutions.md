@@ -72,7 +72,7 @@ D) User interface quality
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **5/5 Correct**: Excellent mastery of advanced RAG evaluation metrics
 - **4/5 Correct**: Good understanding with minor conceptual gaps
@@ -82,7 +82,7 @@ D) User interface quality
 
 ---
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### Advanced Evaluation Metrics
 1. **BERTScore**: Contextual embedding-based semantic similarity measurement

@@ -7,7 +7,7 @@
 
 **Explanation**: The PipelineOrchestrator implements sophisticated error handling with configurable retry policies, exponential backoff to prevent system overload, and circuit breaker integration to protect against cascading failures while maintaining pipeline reliability.
 
-### Question 2: Load Distribution Algorithm  
+### Question 2: Load Distribution Algorithm
 **Correct Answer: C) Workload calculation considering active tasks and agent capacity**
 
 **Explanation**: The ParallelProcessor uses intelligent workload calculation that considers each agent's current active tasks and capacity limits to ensure balanced load distribution and optimal resource utilization across the agent pool.

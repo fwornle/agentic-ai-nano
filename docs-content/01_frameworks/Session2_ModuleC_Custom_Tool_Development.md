@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module focuses on building sophisticated custom tools for LangChain agents with advanced patterns including Pydantic validation, API integration, database connectivity, and external system integration with proper error handling and performance optimization.
 
@@ -1629,7 +1629,7 @@ D) Configure caching behavior
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered custom tool development for LangChain with enterprise features:
 

@@ -22,14 +22,14 @@ After completing this module, you will master:
 - **[🏗️ Module B: Production Systems →](Session6_ModuleB_Production_Systems.md)** - Production GraphRAG deployment patterns
 - **[📄 Session 6 Core: Graph-Based RAG →](Session6_Graph_Based_RAG.md)** - Foundation graph concepts
 
-### 🗂️ Code Files
+### Code Files
 
 - **Graph Traversal**: [`src/session6/graph_traversal_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/graph_traversal_engine.py) - Advanced traversal algorithms
 - **Knowledge Extraction**: [`src/session6/knowledge_graph_extractor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/knowledge_graph_extractor.py) - Graph construction and analysis
 - **Hybrid Graph-Vector**: [`src/session6/hybrid_graph_vector_rag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/hybrid_graph_vector_rag.py) - Combined graph and vector search
 - **Demo Application**: [`src/session6/demo_session6.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/demo_session6.py) - Complete GraphRAG showcase
 
-### 🚀 Quick Start
+### Quick Start
 
 ```bash
 # Test advanced graph algorithms
@@ -45,7 +45,7 @@ python -c "from hybrid_graph_vector_rag import HybridGraphVectorRAG; HybridGraph
 
 ---
 
-## 📚 Advanced Algorithms Content
+## Advanced Algorithms Content
 
 ### PageRank Variants for Knowledge Graphs
 

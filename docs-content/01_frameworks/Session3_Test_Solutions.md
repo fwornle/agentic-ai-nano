@@ -132,7 +132,7 @@ D) When downstream nodes need data from multiple branches ✅
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **10/10 Correct**: Excellent mastery of LangGraph workflows and multi-agent patterns
 - **8-9 Correct**: Good understanding with minor conceptual gaps
@@ -142,7 +142,7 @@ D) When downstream nodes need data from multiple branches ✅
 
 ---
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### LangGraph Core Architecture
 1. **Graph Structure**: Nodes (processing) and edges (flow control) with state management

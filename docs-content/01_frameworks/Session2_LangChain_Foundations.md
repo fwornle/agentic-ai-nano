@@ -1,6 +1,15 @@
 # Session 2: LangChain Foundations - Mastering Production-Ready AI Application Development
 
-## Professional Chapter Overview: LangChain's 2025 Market Position
+## Learning Outcomes
+
+By the end of this session, you will be able to:
+- **Implement** LangChain's modular component system for production AI applications
+- **Build** sophisticated chain orchestration patterns with tool integration
+- **Apply** state management strategies for complex workflows
+- **Evaluate** when LangChain excels versus when enterprise teams need alternatives
+- **Deploy** LangChain applications with proper monitoring and performance optimization
+
+## Chapter Overview: LangChain's 2025 Market Position
 
 **Industry Context & Market Leadership**
 
@@ -23,6 +32,7 @@ LangChain pioneered modular AI development, establishing industry-standard conce
 Enterprise customers including Microsoft, Boston Consulting Group, and Morningstar leverage LangChain for customer support (35-45% resolution rate improvements), financial analysis, and document processing. However, teams targeting enterprise-scale, real-time systems often transition to specialized solutions after prototype validation.
 
 ## Learning Navigation Hub
+
 **Total Time Investment**: 85 minutes (Core) + 225 minutes (Optional Advanced)
 
 ### Professional Learning Paths
@@ -33,9 +43,10 @@ Enterprise customers including Microsoft, Boston Consulting Group, and Morningst
 
 ---
 
-## SESSION OVERVIEW DASHBOARD
+## Session Overview Dashboard
 
 ### Core Learning Track (85 minutes) - REQUIRED
+
 | Section | Business Value | Time | Competency Level |
 |---------|----------------|------|------------------|
 | Architecture Foundation | Enterprise design patterns | 20 min | Strategic Understanding |
@@ -57,13 +68,15 @@ Enterprise customers including Microsoft, Boston Consulting Group, and Morningst
 
 ---
 
-## CORE SECTION (Required - 85 minutes)
+## Core Section (Required - 85 minutes)
 
 ### Part 1: LangChain Architecture Overview (20 minutes)
+
 **Cognitive Load**: 3 new concepts  
 **Learning Mode**: Conceptual Understanding
 
 #### Core Components (7 minutes)
+
 LangChain has four essential building blocks that work together:
 
 ![LangChain Overview](images/langchain-overview.svg)
@@ -75,7 +88,9 @@ LangChain has four essential building blocks that work together:
 Installation and environment configuration for production-ready development:
 
 ```bash
+
 # Production-grade installation with version pinning
+
 pip install langchain==0.1.0 openai==1.0.0
 export OPENAI_API_KEY="your-production-key"
 ```
@@ -85,7 +100,9 @@ export OPENAI_API_KEY="your-production-key"
 **Essential Import Structure**
 
 ```python
+
 # Core LangChain foundation imports
+
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import Tool, initialize_agent
 from langchain.memory import ConversationBufferMemory
@@ -110,6 +127,7 @@ This modular design separates concerns for maintainable production systems:
 **Production Considerations**: This separation enables independent scaling, testing, and replacement of components. However, the abstraction layers can introduce performance overhead and debugging complexity in enterprise environments.
 
 #### LLM Setup Patterns (8 minutes)
+
 Quick LLM initialization for different providers:
 
 **Reference Implementation**: [`src/session2/llm_setup.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/llm_setup.py)
@@ -130,7 +148,9 @@ def create_llm(provider="openai"):
 **Participant Path**: Environment variable configuration enables secure API key management. The factory pattern supports easy provider switching for cost optimization or feature requirements.
 
 ```python
+
 # Usage with error handling
+
 try:
     llm = create_llm("openai")
 except Exception as e:
@@ -141,6 +161,7 @@ except Exception as e:
 **Implementer Path**: Enterprise deployments extend this pattern with connection pooling, rate limiting, and failover mechanisms for production reliability.
 
 #### Component Relationships (5 minutes)
+
 How components work together in the LangChain ecosystem:
 
 ```text
@@ -152,10 +173,12 @@ Input → Agent → Tool Selection → LLM Reasoning → Output
 ---
 
 ### Part 2: Essential Chain Patterns (25 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Hands-on Implementation
 
 #### Simple Chain Creation (8 minutes)
+
 Basic chain for sequential processing:
 
 **LLMChain - Fundamental Building Block**
@@ -165,6 +188,7 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 
 # Template with variable substitution
+
 template = "Analyze this text and provide insights: {text}"
 prompt = PromptTemplate(template=template, input_variables=["text"])
 ```
@@ -174,7 +198,9 @@ prompt = PromptTemplate(template=template, input_variables=["text"])
 **Participant Path**: Build the chain and execute with real data:
 
 ```python
+
 # Chain construction and execution
+
 chain = LLMChain(llm=llm, prompt=prompt)
 result = chain.run("AI agents are becoming more capable")
 print(f"Analysis: {result}")
@@ -183,6 +209,7 @@ print(f"Analysis: {result}")
 **Implementer Path**: Production chains require error handling, input validation, and output parsing for reliable automation systems.
 
 #### Sequential Chains (7 minutes)
+
 Connecting multiple chains for complex workflows:
 
 **Sequential Chain - Pipeline Processing**
@@ -191,6 +218,7 @@ Connecting multiple chains for complex workflows:
 from langchain.chains import SequentialChain
 
 # Step 1: Content summarization
+
 summary_chain = LLMChain(
     llm=llm,
     prompt=PromptTemplate(
@@ -204,7 +232,9 @@ summary_chain = LLMChain(
 **Observer Path**: Sequential chains enable multi-step processing where each step's output feeds the next step's input - ideal for complex analysis pipelines.
 
 ```python
+
 # Step 2: Sentiment analysis
+
 sentiment_chain = LLMChain(
     llm=llm,
     prompt=PromptTemplate(
@@ -218,7 +248,9 @@ sentiment_chain = LLMChain(
 **Participant Path**: Chain composition creates sophisticated workflows:
 
 ```python
+
 # Pipeline assembly
+
 analysis_pipeline = SequentialChain(
     chains=[summary_chain, sentiment_chain],
     input_variables=["text"],
@@ -226,18 +258,22 @@ analysis_pipeline = SequentialChain(
 )
 
 # Execute complete pipeline
+
 results = analysis_pipeline.run({"text": "Long document content..."})
 ```
 
 **Implementer Path**: Production pipelines require intermediate result validation, error recovery, and performance monitoring between chain steps.
 
 #### Prompt Templates (5 minutes)
+
 Dynamic prompt creation with variables:
 
 Prompt templates allow you to create reusable, parameterized prompts. This is especially useful when you need consistent formatting across different inputs. Variables are filled in at runtime, enabling dynamic prompt generation.
 
 ```python
+
 # Template with multiple variables
+
 template = """
 Role: {role}
 Task: {task} 
@@ -254,7 +290,9 @@ prompt = PromptTemplate(
 Now we can use this template with a chain to generate dynamic responses:
 
 ```python
+
 # Use with chain
+
 chain = LLMChain(llm=llm, prompt=prompt)
 result = chain.run(
     role="Data Analyst",
@@ -265,6 +303,7 @@ result = chain.run(
 ```
 
 #### Error Handling Patterns (5 minutes)
+
 Basic error handling and retry logic:
 
 Robust error handling is crucial for production LangChain applications. Common failure reasons include API rate limits, network timeouts, and temporary service unavailability. This pattern implements retry logic with exponential backoff (wait times: 1s, 2s, 4s, etc.).
@@ -282,7 +321,9 @@ def run_with_retry(chain, inputs, max_retries=3):
                 raise e
             time.sleep(2 ** attempt)  # Exponential backoff
     
+
 # Usage
+
 try:
     result = run_with_retry(chain, {"text": "example input"})
 except Exception as e:
@@ -292,10 +333,12 @@ except Exception as e:
 ---
 
 ### Part 3: Agent Creation & Tool Integration (25 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Application & Synthesis
 
 #### Basic Tool Creation (8 minutes)
+
 Three methods for creating tools:
 
 **Reference Implementation**: [`src/session2/langchain_tools.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_tools.py)
@@ -322,6 +365,7 @@ from langchain.agents import Tool
 from langchain.tools import tool
 
 # Method 1: Explicit tool creation
+
 def get_weather(location: str) -> str:
     """Get weather for any city"""
     # In reality, call weather API
@@ -339,7 +383,9 @@ weather_tool = Tool(
 Method 2 - Cleaner syntax:
 
 ```python
+
 # Method 2: Decorator approach (cleaner)
+
 @tool
 def simple_calculator(math_problem: str) -> str:
     """Solve basic math like '2 + 2' or '10 * 5'"""
@@ -356,7 +402,9 @@ def simple_calculator(math_problem: str) -> str:
 Method 3 - Quick testing:
 
 ```python
+
 # Method 3: Simple wrapper for testing
+
 def web_search_demo(query: str) -> str:
     """Pretend to search the web"""
     return f"Found 3 articles about '{query}'"
@@ -394,6 +442,7 @@ from langchain.agents import initialize_agent, AgentType
 from langchain.memory import ConversationBufferMemory
 
 # Memory = conversation history
+
 memory = ConversationBufferMemory(
     memory_key="chat_history",
     return_messages=True  # Keep message format
@@ -403,10 +452,13 @@ memory = ConversationBufferMemory(
 **Observer Path**: Memory stores what was said before, like a conversation transcript.
 
 ```python
+
 # Give agent access to tools
+
 tools = [weather_tool, simple_calculator, search_tool]
 
 # Create the agent
+
 agent = initialize_agent(
     tools=tools,           # What it can do
     llm=llm,              # How it thinks
@@ -423,7 +475,9 @@ agent = initialize_agent(
 **See Your Agent Think and Act**
 
 ```python
+
 # Complex request that needs multiple tools
+
 response = agent.run(
     "What's the weather in New York and what's 15 times 24?"
 )
@@ -476,6 +530,7 @@ def safe_agent_run(agent, user_question, backup_message=None):
             return "I'm having technical difficulties. Please try again later."
 
 # Usage example
+
 result = safe_agent_run(
     agent,
     "What's the weather in Mars?",  # This might fail!
@@ -490,6 +545,7 @@ result = safe_agent_run(
 ---
 
 ### Part 4: Memory & State Management (15 minutes)
+
 **Cognitive Load**: 3 new concepts
 **Learning Mode**: Integration & Application
 
@@ -516,12 +572,14 @@ from langchain.memory import (
 )
 
 # Option 1: Remember everything
+
 full_memory = ConversationBufferMemory(
     memory_key="chat_history",
     return_messages=True
 )
 
 # Option 2: Summarize old conversations
+
 smart_memory = ConversationSummaryMemory(
     llm=llm,  # Needs LLM to create summaries
     memory_key="chat_history", 
@@ -529,6 +587,7 @@ smart_memory = ConversationSummaryMemory(
 )
 
 # Option 3: Keep last 5 exchanges only
+
 recent_memory = ConversationBufferWindowMemory(
     memory_key="chat_history",
     k=5,  # Last 5 question-answer pairs
@@ -569,10 +628,13 @@ def load_conversation(memory, filename):
 Usage example:
 
 ```python
+
 # At end of session
+
 save_conversation(memory, "customer_chat.json")
 
-# At start of new session  
+# At start of new session
+
 load_conversation(memory, "customer_chat.json")
 ```
 
@@ -625,13 +687,16 @@ Build the complete agent:
 Create different expert agents:
 
 ```python
+
 # Medical assistant
+
 med_agent = create_specialized_agent(
     "a medical research assistant helping doctors find information",
     [medical_database_tool, drug_interaction_tool]
 )
 
 # Coding tutor
+
 code_agent = create_specialized_agent(
     "a programming tutor helping students learn Python",
     [code_runner_tool, documentation_tool]
@@ -644,7 +709,8 @@ code_agent = create_specialized_agent(
 
 ### Professional Implementation Exercise
 
-**Exercise Files**: 
+**Exercise Files**:
+
 - [`src/session2/langchain_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_basics.py) - Foundation patterns
 - [`src/session2/langchain_tool_use.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_tool_use.py) - Agent implementation
 
@@ -699,7 +765,7 @@ def create_business_agent():
 
 ---
 
-## 📝 Multiple Choice Test - Session 2
+## Multiple Choice Test - Session 2
 
 Test your understanding of LangChain foundations and agent patterns:
 
@@ -709,15 +775,11 @@ B) Consistent API across different LLM providers
 C) Faster response times  
 D) Better performance  
 
-
-
 **Question 2:** Which LangChain component is responsible for managing conversation context?  
 A) Chains  
 B) Tools  
 C) Memory  
 D) Agents  
-
-
 
 **Question 3:** How many ways can you create tools in LangChain?  
 A) Four - including custom implementations  
@@ -725,15 +787,11 @@ B) Two - BaseTool and @tool decorator
 C) Three - BaseTool, @tool decorator, and StructuredTool  
 D) One - inheriting from BaseTool  
 
-
-
 **Question 4:** What is the purpose of the `handle_parsing_errors` parameter in LangChain agents?  
 A) To gracefully handle malformed LLM responses  
 B) To reduce costs  
 C) To enable debugging  
 D) To improve performance  
-
-
 
 **Question 5:** Which LangChain agent type is specifically designed for the ReAct pattern?  
 A) All of the above  
@@ -741,9 +799,7 @@ B) ZERO_SHOT_REACT_DESCRIPTION
 C) STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION  
 D) REACT_DOCSTORE  
 
-
-
-**[View Test Solutions →](Session2_Test_Solutions.md)**
+**[**View Test Solutions →**](Session2_Test_Solutions.md)**
 
 ## Navigation
 

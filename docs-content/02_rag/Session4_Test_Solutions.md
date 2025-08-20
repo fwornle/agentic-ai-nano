@@ -63,7 +63,7 @@ D) Keyword-heavy prompts
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **5/5 Correct**: Excellent mastery of query enhancement techniques
 - **4/5 Correct**: Strong understanding with minor gaps  
@@ -73,7 +73,7 @@ D) Keyword-heavy prompts
 
 ---
 
-## 📚 Key Enhancement Concepts
+## Key Enhancement Concepts
 
 ### HyDE Implementation
 

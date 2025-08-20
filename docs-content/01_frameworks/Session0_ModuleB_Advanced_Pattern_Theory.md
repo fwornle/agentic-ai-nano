@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module dives deep into the technical implementation strategies behind the five core agentic patterns, explores how patterns combine for sophisticated behaviors, and examines emerging patterns being developed beyond the foundational five.
 
@@ -683,7 +683,7 @@ D) Faster individual agent performance
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced pattern theory and implementation strategies:
 

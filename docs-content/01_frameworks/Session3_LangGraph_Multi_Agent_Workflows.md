@@ -1,5 +1,14 @@
 # Session 3: LangGraph Multi-Agent Workflows - Production-Grade Graph Orchestration
 
+## Learning Outcomes
+
+By the end of this session, you will be able to:
+- **Design** and implement graph-based workflow orchestration using LangGraph
+- **Build** complex multi-agent systems with stateful coordination and conditional routing
+- **Apply** state management patterns for enterprise-scale agent coordination
+- **Implement** production-grade tracing and observability for multi-agent workflows
+- **Evaluate** when to choose graph-based architectures over simple chain-based systems
+
 ## Chapter Overview: LangGraph's Rise in Enterprise Multi-Agent Systems
 
 **Industry Context & Market Significance**
@@ -19,6 +28,7 @@ LangGraph's stateful, graph-driven reasoning engines with first-class tracing re
 LangGraph excels in complex workflows requiring coordination between multiple specialized agents. Klarna's deployment serves 85 million users with 80% faster resolution times, while AppFolio's implementation improved response accuracy by 200%. These production deployments demonstrate LangGraph's capability to handle enterprise-scale multi-agent coordination.
 
 ## Learning Navigation Hub
+
 **Total Time Investment**: 85 minutes (Core) + 75 minutes (Optional)
 
 ### Learning Path Options
@@ -29,9 +39,10 @@ LangGraph excels in complex workflows requiring coordination between multiple sp
 
 ---
 
-## 📋 SESSION OVERVIEW DASHBOARD
+## Session Overview Dashboard
 
 ### Core Learning Track (85 minutes) - REQUIRED
+
 | Section | Concept Load | Time | Skills |
 |---------|--------------|------|--------|
 | Graph Architecture Overview | 3 concepts | 25 min | Understanding |
@@ -46,21 +57,23 @@ LangGraph excels in complex workflows requiring coordination between multiple sp
 - **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** (40 min) - Complex workflow coordination & dynamic agent generation
 - **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** (35 min) - Production state handling & sophisticated routing
 
-**🗂️ Code Files**: All examples use files in [`src/session3/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session3)
-**🚀 Quick Start**: Run `cd src/session3 && python simple_workflow.py` to see LangGraph in action
+**Code Files**: All examples use files in [`src/session3/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session3)
+**Quick Start**: Run `cd src/session3 && python simple_workflow.py` to see LangGraph in action
 
 ---
 
-## CORE SECTION (Required - 85 minutes)
+## Core Section (Required - 85 minutes)
 
 ### Part 1: Graph Architecture Overview (25 minutes)
+
 **Cognitive Load**: 3 new concepts  
 **Learning Mode**: Conceptual Understanding
 
 #### Graph-Based Workflow Foundation (10 minutes)
+
 LangGraph transforms multi-agent systems from linear chains into sophisticated graph structures that mirror real-world decision processes:
 
-🗂️ **File**: [`src/session3/langgraph_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/langgraph_basics.py) - Core workflow setup
+**File**: [`src/session3/langgraph_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/langgraph_basics.py) - Core workflow setup
 
 **Production-Grade State Management**
 
@@ -72,6 +85,7 @@ from langgraph.prebuilt import ToolNode
 from typing import TypedDict, List, Optional
 
 # Enterprise workflow state with comprehensive tracking
+
 class WorkflowState(TypedDict):
     messages: List[str]           # Communication history
     current_step: str            # Active workflow stage  
@@ -83,7 +97,9 @@ class WorkflowState(TypedDict):
 This state structure provides the observability and error handling required for production deployments. Each field serves a specific purpose in maintaining workflow integrity and enabling debugging.
 
 ```python
+
 # Initialize the enterprise workflow graph
+
 workflow = StateGraph(WorkflowState)
 ```
 
@@ -94,9 +110,10 @@ workflow = StateGraph(WorkflowState)
 3. **Conditional Decision Points**: Dynamic routing based on state content and external conditions
 
 #### Nodes and Edges (7 minutes)
+
 Building blocks of LangGraph workflows:
 
-🗂️ **File**: [`src/session3/workflow_nodes.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/workflow_nodes.py) - Node implementations
+**File**: [`src/session3/workflow_nodes.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/workflow_nodes.py) - Node implementations
 
 ```python
 def research_node(state: WorkflowState):
@@ -126,24 +143,31 @@ def analysis_node(state: WorkflowState):
 Now we connect these nodes to create our workflow structure:
 
 ```python
+
 # Add nodes to workflow
+
 workflow.add_node("research", research_node)
 workflow.add_node("analysis", analysis_node)
 workflow.add_edge("research", "analysis")
 ```
 
 #### Basic Graph Creation (5 minutes)
+
 Putting it all together:
 
 ```python
+
 # Set entry point and compile
+
 workflow.set_entry_point("research")
 workflow.add_edge("analysis", END)
 
 # Compile the workflow
+
 app = workflow.compile()
 
 # Run the workflow
+
 result = app.invoke({
     "messages": [],
     "current_step": "start",
@@ -154,13 +178,15 @@ result = app.invoke({
 ---
 
 ### Part 2: Multi-Agent Orchestration (25 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Implementation & Coordination
 
 #### Agent Node Creation (8 minutes)
+
 Creating specialized agent nodes:
 
-🗂️ **File**: [`src/session3/hierarchical_team.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/hierarchical_team.py) - Multi-agent team setup
+**File**: [`src/session3/hierarchical_team.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/hierarchical_team.py) - Multi-agent team setup
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -168,6 +194,7 @@ from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain.tools import tool
 
 # Create specialized agents
+
 class ResearchAgent:
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-4", temperature=0.7)
@@ -208,9 +235,10 @@ class AnalysisAgent:
 ```
 
 #### Message Passing (7 minutes)
+
 Communication between agents:
 
-🗂️ **File**: [`src/session3/state_merging.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/state_merging.py) - State management patterns
+**File**: [`src/session3/state_merging.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/state_merging.py) - State management patterns
 
 ```python
 def coordinator_node(state: WorkflowState):
@@ -232,16 +260,19 @@ def coordinator_node(state: WorkflowState):
 The coordinator aggregates results from multiple agents and provides final synthesis:
 
 ```python
+
 # Enhanced workflow with coordination
+
 workflow.add_node("coordinator", coordinator_node)
 workflow.add_edge("analysis", "coordinator")
 workflow.add_edge("coordinator", END)
 ```
 
 #### Simple Workflow Patterns (6 minutes)
+
 Common orchestration patterns:
 
-🗂️ **File**: [`src/session3/simple_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/simple_workflow.py) - Complete workflow example
+**File**: [`src/session3/simple_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/simple_workflow.py) - Complete workflow example
 
 ```python
 def create_research_workflow():
@@ -273,7 +304,9 @@ Defining the workflow structure with entry point and edges:
 Running the compiled workflow with initial state:
 
 ```python
+
 # Usage
+
 app = create_research_workflow()
 result = app.invoke({
     "query": "Benefits of renewable energy",
@@ -284,6 +317,7 @@ result = app.invoke({
 ```
 
 #### Error Handling (4 minutes)
+
 Robust workflow execution:
 
 ```python
@@ -301,19 +335,22 @@ def safe_node_execution(node_func):
     return wrapper
 
 # Apply to nodes
+
 workflow.add_node("research", safe_node_execution(research_agent.research_node))
 ```
 
 ---
 
 ### Part 3: State Management & Flow Control (20 minutes)
+
 **Cognitive Load**: 3 new concepts
 **Learning Mode**: Application & Control
 
 #### State Schemas (8 minutes)
+
 Defining and managing workflow state:
 
-🗂️ **File**: [`src/session3/advanced_routing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing.py) - State management examples
+**File**: [`src/session3/advanced_routing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing.py) - State management examples
 
 ```python
 from typing import TypedDict, Optional, List, Dict, Any
@@ -357,9 +394,10 @@ def update_state_metadata(state: AdvancedWorkflowState) -> AdvancedWorkflowState
 ```
 
 #### Conditional Routing (7 minutes)
+
 Dynamic workflow decisions:
 
-🗂️ **File**: [`src/session3/decision_logic.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/decision_logic.py) - Decision-making logic
+**File**: [`src/session3/decision_logic.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/decision_logic.py) - Decision-making logic
 
 ```python
 def route_after_research(state: AdvancedWorkflowState) -> str:
@@ -392,7 +430,9 @@ def route_after_analysis(state: AdvancedWorkflowState) -> str:
 Implementing conditional routing in the workflow:
 
 ```python
+
 # Add conditional routing
+
 from langgraph.graph import Condition
 
 workflow.add_conditional_edges(
@@ -407,6 +447,7 @@ workflow.add_conditional_edges(
 ```
 
 #### Error Recovery (5 minutes)
+
 Handling failures gracefully:
 
 ```python
@@ -438,11 +479,13 @@ Graceful failure handling with maximum retry limits:
 ---
 
 ### Part 4: Integration & Testing (5 minutes)
+
 **Cognitive Load**: 2 new concepts
 **Learning Mode**: Verification
 
 #### Workflow Validation (3 minutes)
-🗂️ **File**: [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Complete test suite
+
+**File**: [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Complete test suite
 
 ```python
 def test_simple_workflow():
@@ -465,13 +508,18 @@ def test_simple_workflow():
 Executing the test to verify workflow functionality:
 
 ```python
+
 # Run test
+
 test_simple_workflow()
 ```
 
 #### Basic Testing Patterns (2 minutes)
+
 ```bash
+
 # Run workflow examples
+
 cd src/session3
 python simple_workflow.py
 python hierarchical_team.py
@@ -480,17 +528,19 @@ python -m pytest test_workflows.py
 
 ---
 
-## ✅ Core Section Validation (5 minutes)
+## Core Section Validation (5 minutes)
 
 ### Quick Implementation Exercise
 
-🗂️ **Exercise Files**: 
+🗂️ **Exercise Files**:
 
 - [`src/session3/simple_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/simple_workflow.py) - Complete working example
 - [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Test your understanding
 
 ```bash
+
 # Try the examples:
+
 cd src/session3
 python simple_workflow.py          # Basic workflow
 python hierarchical_team.py        # Multi-agent coordination
@@ -509,21 +559,22 @@ python hierarchical_team.py        # Multi-agent coordination
 
 ---
 
-### 🧭 **Choose Your Next Path:**
+### **Choose Your Next Path:**
 
-- **[🔬 Module A: Advanced Orchestration Patterns →](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
-- **[🏭 Module B: Enterprise State Management →](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
+- **[Module A: Advanced Orchestration Patterns →](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
+- **[Module B: Enterprise State Management →](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
 - **[📝 Test Your Knowledge →](Session3_Test_Solutions.md)** - Comprehensive quiz
 - **[📖 Next Session: CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)** - Team-based agent frameworks
 
-### 🎆 Complete Learning Path Options
+### Complete Learning Path Options
+
 **Sequential Learning**: Core → Module A → Module B  
 **Production Focus**: Core → Module B  
 **Advanced Patterns**: Core → Module A
 
 ---
 
-## 📊 Progress Tracking
+## Progress Tracking
 
 ### Completion Status
 
@@ -535,7 +586,7 @@ python hierarchical_team.py        # Multi-agent coordination
 
 ---
 
-## 📝 Multiple Choice Test - Session 3
+## Multiple Choice Test - Session 3
 
 Test your understanding of LangGraph workflows and multi-agent coordination:
 
@@ -546,14 +597,12 @@ B) Lower cost
 C) Graph-based workflows with conditional routing and parallel execution  
 D) Simpler implementation  
 
-
 **Question 2:** In LangGraph, what component defines the data that flows between nodes?  
 
 A) State (TypedDict)  
 B) Edges  
 C) Memory  
 D) Tools  
-
 
 **Question 3:** What determines the flow between nodes in a LangGraph workflow?  
 
@@ -562,14 +611,12 @@ B) User input
 C) Sequential execution only  
 D) Conditional edges and decision functions  
 
-
 **Question 4:** How does LangGraph handle parallel agent execution?  
 
 A) Through parallel nodes with state merging  
 B) It doesn't support parallel execution  
 C) Through external orchestration  
 D) Using threading only  
-
 
 **Question 5:** What happens when a LangGraph node updates state?  
 
@@ -578,12 +625,11 @@ B) The entire state is replaced
 C) Previous state is archived  
 D) Only specified fields are updated/merged  
 
-
 [**🗂️ View Test Solutions →**](Session3_Test_Solutions.md)
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md)
 

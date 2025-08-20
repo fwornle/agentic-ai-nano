@@ -98,7 +98,7 @@ D) Simplifying the codebase
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **8/8 Correct**: Excellent mastery of GraphRAG concepts and implementation
 - **7/8 Correct**: Strong understanding with minor technical gaps
@@ -108,7 +108,7 @@ D) Simplifying the codebase
 
 ---
 
-## 📚 Key GraphRAG Concepts
+## Key GraphRAG Concepts
 
 ### Knowledge Graph Construction
 

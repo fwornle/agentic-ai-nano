@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores CrewAI's most advanced workflow patterns including deterministic CrewAI Flows, dynamic team formation, sophisticated delegation strategies, and production-ready orchestration patterns. You'll learn to build enterprise-grade agent systems that can handle complex multi-step workflows with guaranteed execution order and state management.
 
@@ -859,7 +859,7 @@ Default compatibility calculation averages individual collaboration ratings when
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced CrewAI flow patterns and dynamic team coordination:
 
@@ -875,7 +875,7 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination:
 
 ---
 
-## 📝 Module A Knowledge Check
+## Module A Knowledge Check
 
 **Test your understanding of advanced CrewAI flows and dynamic team formation:**
 

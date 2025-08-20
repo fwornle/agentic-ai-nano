@@ -1,5 +1,14 @@
 # Session 4: CrewAI Team Orchestration - Enterprise Multi-Agent Collaboration
 
+## Learning Outcomes
+
+By the end of this session, you will be able to:
+- **Design** role-based multi-agent teams with defined responsibilities and collaboration patterns
+- **Implement** CrewAI workflows that mirror successful human team structures
+- **Build** agents with personalities, backstories, and specialized capabilities for team synergy
+- **Orchestrate** complex business processes using hierarchical and sequential execution patterns
+- **Deploy** production-ready CrewAI systems with monitoring and performance optimization
+
 ## Chapter Overview: CrewAI's Breakthrough in Team-Based AI Systems
 
 **Industry Context & Market Significance**
@@ -19,6 +28,7 @@ CrewAI's role-playing autonomous agents foster collaborative intelligence by des
 CrewAI excels in business process automation where multiple specialized roles collaborate. Financial services clients report reducing quarterly reporting from 2 weeks to 2 days with 35% improved accuracy. Marketing automation teams achieve 40% efficiency improvements within three months, while customer support operations see 75% reduction in processing time through automated workflow orchestration.
 
 ## Learning Navigation Hub
+
 **Total Time Investment**: 90 minutes (Core) + 85 minutes (Optional)
 
 ### Learning Path Options
@@ -29,9 +39,10 @@ CrewAI excels in business process automation where multiple specialized roles co
 
 ---
 
-## 📋 SESSION OVERVIEW DASHBOARD
+## Session Overview Dashboard
 
 ### Core Learning Track (90 minutes) - REQUIRED
+
 | Section | Concept Load | Time | Skills |
 |---------|--------------|------|--------|
 | Team Architecture Foundations | 3 concepts | 25 min | Understanding |
@@ -46,23 +57,25 @@ CrewAI excels in business process automation where multiple specialized roles co
 - **[Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)** (45 min) - Sophisticated workflow patterns & dynamic team formation
 - **[Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)** (40 min) - Production team architectures & custom tools
 
-**🗂️ Code Files**: All examples use files in [`src/session4/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session4)  
-**🚀 Quick Start**: Run `cd src/session4 && python crewai_basics.py` to see CrewAI teams in action
+**Code Files**: All examples use files in [`src/session4/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session4)  
+**Quick Start**: Run `cd src/session4 && python crewai_basics.py` to see CrewAI teams in action
 
 ---
 
-## CORE SECTION (Required - 90 minutes)
+## Core Section (Required - 90 minutes)
 
 ### Part 1: Team Architecture Foundations (25 minutes)
+
 **Cognitive Load**: 3 new concepts  
 **Learning Mode**: Conceptual Understanding
 
 #### Enterprise Team-Based Approach (12 minutes)
+
 CrewAI revolutionizes AI automation by modeling agent systems like proven human organizational structures:
 
 ![CrewAI Overview](images/crewai-overview.png)
 
-🗂️ **File**: [`src/session4/crewai_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/crewai_basics.py) - Core team setup
+**File**: [`src/session4/crewai_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/crewai_basics.py) - Core team setup
 
 First, we import the necessary CrewAI components:
 
@@ -74,7 +87,9 @@ from crewai_tools import SerperDevTool, FileReadTool
 Next, we define our research specialist with web search capabilities:
 
 ```python
+
 # Research specialist with search tools
+
 researcher = Agent(
     role='Research Specialist',
     goal='Gather comprehensive information on assigned topics',
@@ -87,7 +102,9 @@ researcher = Agent(
 Then we create a content writer for generating engaging materials:
 
 ```python
+
 # Content creation specialist
+
 writer = Agent(
     role='Content Writer', 
     goal='Create engaging, well-structured content',
@@ -99,7 +116,9 @@ writer = Agent(
 Finally, we add an editor for quality assurance:
 
 ```python
+
 # Quality assurance editor
+
 editor = Agent(
     role='Content Editor',
     goal='Review and refine content for quality and accuracy',
@@ -115,10 +134,13 @@ editor = Agent(
 3. **Collaborative Workflow**: Agents hand off work in structured sequences
 
 #### Role Definitions (7 minutes)
+
 Creating effective agent roles:
 
 ```python
+
 # Detailed role configuration
+
 data_analyst = Agent(
     role='Data Analyst',
     goal='Analyze data and extract meaningful insights',
@@ -134,12 +156,15 @@ data_analyst = Agent(
 ```
 
 #### Collaboration Patterns (5 minutes)
+
 How agents work together effectively:
 
 First, let's see the sequential collaboration pattern:
 
 ```python
+
 # Sequential collaboration - agents work one after another
+
 def create_content_team():
     return Crew(
         agents=[researcher, writer, editor],
@@ -152,7 +177,9 @@ def create_content_team():
 Now, here's the hierarchical pattern with a manager:
 
 ```python
+
 # Hierarchical pattern requires a manager agent
+
 def create_hierarchical_team():
     manager = Agent(
         role='Team Manager',
@@ -176,11 +203,13 @@ Finally, we assemble the hierarchical crew with the manager in control:
 ---
 
 ### Part 2: Building Your First Crew (25 minutes)
+
 **Cognitive Load**: 4 new concepts
 **Learning Mode**: Hands-on Implementation
 
 #### Agent Role Creation (8 minutes)
-🗂️ **File**: [`src/session4/multi_agent_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/multi_agent_crew.py) - Complete team implementations
+
+**File**: [`src/session4/multi_agent_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/multi_agent_crew.py) - Complete team implementations
 
 Let's start by defining our research team with three specialized agents:
 
@@ -230,6 +259,7 @@ Finally, we include a synthesizer to combine findings into coherent insights:
 ```
 
 #### Task Definition (7 minutes)
+
 Creating clear, actionable tasks:
 
 Now we define the tasks for our research crew. First, the primary research task:
@@ -295,6 +325,7 @@ Finally, the synthesis task combines everything into a final report:
 ```
 
 #### Crew Assembly (5 minutes)
+
 Putting the team together:
 
 Now we assemble everything into a functioning crew:
@@ -329,16 +360,19 @@ Next, we create the crew with performance optimizations:
 Finally, here's how to use the assembled crew:
 
 ```python
+
 # Usage example
+
 topic = "Impact of AI on software development"
 research_crew = assemble_research_crew(topic)
 result = research_crew.kickoff()
 ```
 
 #### Basic Testing (5 minutes)
+
 Validating crew functionality:
 
-🗂️ **File**: [`src/session4/test_crews.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/test_crews.py) - Testing framework
+**File**: [`src/session4/test_crews.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/test_crews.py) - Testing framework
 
 ```python
 def test_crew_creation():
@@ -366,15 +400,17 @@ def test_crew_execution():
 ---
 
 ### Part 3: Task Orchestration & Delegation (20 minutes)
+
 **Cognitive Load**: 3 new concepts
 **Learning Mode**: Application & Coordination
 
 #### Workflow Coordination (8 minutes)
+
 Managing task dependencies and handoffs:
 
 ![CrewAI Workflows](images/crewai-workflows.png)
 
-🗂️ **File**: [`src/session4/hierarchical_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/hierarchical_crew.py) - Advanced orchestration
+**File**: [`src/session4/hierarchical_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/hierarchical_crew.py) - Advanced orchestration
 
 Let's create a hierarchical workflow starting with the team manager:
 
@@ -446,6 +482,7 @@ Finally, we assemble the hierarchical crew with the manager in control:
 ```
 
 #### Result Aggregation (7 minutes)
+
 Collecting and combining agent outputs:
 
 First, let's create a function to process and analyze crew results:
@@ -479,7 +516,9 @@ Next, we analyze the result content for insights:
 Here's how to use the result processing function:
 
 ```python
+
 # Usage example
+
 crew = create_hierarchical_workflow()
 result = crew.kickoff()
 analysis = process_crew_results(result)
@@ -487,12 +526,15 @@ print(f"Result Analysis: {analysis}")
 ```
 
 #### Communication Patterns (5 minutes)
+
 How agents share information:
 
 First, let's create a crew with enhanced memory capabilities:
 
 ```python
+
 # Memory-enabled communication
+
 def create_memory_enabled_crew():
     """Crew with enhanced memory and communication"""
     
@@ -514,7 +556,9 @@ def create_memory_enabled_crew():
 Now, here's how to create tasks that share information across the crew:
 
 ```python
+
 # Cross-task information sharing
+
 task_with_context = Task(
     description='''Build upon previous research findings.
     
@@ -533,13 +577,15 @@ task_with_context = Task(
 ---
 
 ### Part 4: Performance & Optimization (10 minutes)
+
 **Cognitive Load**: 3 new concepts
 **Learning Mode**: Optimization
 
 #### 5.76x Performance Improvements (4 minutes)
+
 CrewAI's performance enhancements:
 
-🗂️ **File**: [`src/session4/performance_optimization.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/performance_optimization.py) - Performance patterns
+**File**: [`src/session4/performance_optimization.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/performance_optimization.py) - Performance patterns
 
 Here's how to create a performance-optimized crew:
 
@@ -575,6 +621,7 @@ Add efficient embeddings and resource management:
 ```
 
 #### Basic Monitoring (3 minutes)
+
 Tracking crew performance:
 
 ```python
@@ -585,7 +632,7 @@ def monitor_crew_execution(crew, task_description):
     
     start_time = time.time()
     
-    print(f"🚀 Starting crew execution: {task_description}")
+    print(f"Starting crew execution: {task_description}")
     result = crew.kickoff()
     
     end_time = time.time()
@@ -599,12 +646,15 @@ def monitor_crew_execution(crew, task_description):
 ```
 
 #### Optimization Techniques (3 minutes)
+
 Best practices for crew performance:
 
 Here are the key performance optimization strategies for CrewAI:
 
 ```python
+
 # Performance best practices organized by category
+
 optimization_tips = {
     'agent_design': [
         'Use specific, focused roles',
@@ -626,15 +676,19 @@ optimization_tips = {
 
 ---
 
-## ✅ Core Section Validation (5 minutes)
+## Core Section Validation (5 minutes)
 
 ### Quick Implementation Exercise
-🗂️ **Exercise Files**: 
+
+🗂️ **Exercise Files**:
+
 - [`src/session4/crewai_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/crewai_basics.py) - Basic crew setup
 - [`src/session4/multi_agent_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/multi_agent_crew.py) - Complete team example
 
 ```bash
+
 # Try the examples:
+
 cd src/session4
 python crewai_basics.py              # Basic crew functionality
 python multi_agent_crew.py           # Multi-agent coordination
@@ -654,21 +708,22 @@ python hierarchical_crew.py          # Team management
 
 ---
 
-### 🧭 **Choose Your Next Path:**
+### **Choose Your Next Path:**
 
-- **[🔬 Module A: Advanced CrewAI Flows →](Session4_ModuleA_Advanced_CrewAI_Flows.md)** - Sophisticated workflow patterns & dynamic team formation
-- **[🏭 Module B: Enterprise Team Patterns →](Session4_ModuleB_Enterprise_Team_Patterns.md)** - Production team architectures & custom tools
+- **[Module A: Advanced CrewAI Flows →](Session4_ModuleA_Advanced_CrewAI_Flows.md)** - Sophisticated workflow patterns & dynamic team formation
+- **[Module B: Enterprise Team Patterns →](Session4_ModuleB_Enterprise_Team_Patterns.md)** - Production team architectures & custom tools
 - **[📝 Test Your Knowledge →](Session4_Test_Solutions.md)** - Comprehensive quiz
 - **[📖 Next Session: Agent Communication Protocols →](Session6_Agent_Communication_Protocols.md)** - Message passing and coordination
 
-### 🎆 Complete Learning Path Options
+### Complete Learning Path Options
+
 **Sequential Learning**: Core → Module A → Module B  
 **Production Focus**: Core → Module B  
 **Advanced Flows**: Core → Module A
 
 ---
 
-## 📝 Multiple Choice Test - Session 4 (15 minutes)
+## Multiple Choice Test - Session 4 (15 minutes)
 
 Test your understanding of CrewAI team orchestration and collaborative patterns.
 
@@ -738,7 +793,7 @@ D) Cloud integration
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 3 - LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)
 

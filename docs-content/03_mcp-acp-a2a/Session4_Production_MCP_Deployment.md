@@ -47,7 +47,7 @@ Production MCP infrastructure supports:
 
 ### Learning Path Options
 
-**🎯 Observer Path (35 minutes)**: Understand production deployment concepts and architecture patterns
+**Observer Path (35 minutes)**: Understand production deployment concepts and architecture patterns
 - Focus: Quick insights into containerization, monitoring, and cloud deployment strategies
 - Best for: Getting oriented with enterprise infrastructure concepts
 
@@ -94,7 +94,9 @@ According to enterprise deployment studies, containerized MCP servers eliminate 
 Implement enterprise-grade server architecture with observability:
 
 ```python
+
 # src/production_mcp_server.py - Enterprise MCP Server
+
 import os
 import json
 import structlog  # Enterprise structured logging
@@ -119,7 +121,9 @@ import time
 Implement structured logging following enterprise standards:
 
 ```python
+
 # Configure enterprise-grade structured logging
+
 structlog.configure(
     processors=[
         structlog.stdlib.filter_by_level,
@@ -151,8 +155,11 @@ logger = structlog.get_logger()
 Implement comprehensive observability with Prometheus metrics:
 
 ```python
+
 # Enterprise-grade Prometheus metrics
+
 # Request metrics
+
 request_count = Counter(
     'mcp_requests_total', 
     'Total MCP requests', 
@@ -166,16 +173,19 @@ request_duration = Histogram(
 )
 
 # System health metrics
+
 active_connections = Gauge('mcp_active_connections', 'Active MCP connections')
 cpu_usage = Gauge('mcp_cpu_usage_percent', 'CPU usage percentage')
 memory_usage = Gauge('mcp_memory_usage_bytes', 'Memory usage in bytes')
 
 # Business metrics
+
 tool_usage = Counter('mcp_tool_usage_total', 'Tool usage counts', ['tool_name', 'success'])
 cache_hits = Counter('mcp_cache_hits_total', 'Cache hit/miss counts', ['type'])
 ratelimit_violations = Counter('mcp_ratelimit_violations_total', 'Rate limit violations')
 
 # Start Prometheus metrics server
+
 start_http_server(9090)  # Metrics available at :9090/metrics
 logger.info("Prometheus metrics server started", port=9090)
 ```
@@ -399,10 +409,13 @@ Containerize the MCP server for consistent deployment across environments. Let's
 Start with a secure, minimal base image:
 
 ```dockerfile
+
 # deployments/Dockerfile
+
 FROM python:3.11-slim
 
 # Install system dependencies required for our application
+
 RUN apt-get update && apt-get install -y \
     gcc \
     && rm -rf /var/lib/apt/lists/*
@@ -413,10 +426,13 @@ RUN apt-get update && apt-get install -y \
 Create a non-root user for security (principle of least privilege):
 
 ```dockerfile
+
 # Create non-root user for security (principle of least privilege)
+
 RUN useradd -m -u 1000 mcpuser
 
 # Set working directory
+
 WORKDIR /app
 ```
 
@@ -425,8 +441,11 @@ WORKDIR /app
 Optimize Docker layer caching by installing dependencies first:
 
 ```dockerfile
+
 # Copy requirements first for better Docker layer caching
+
 # If requirements don't change, Docker can reuse this layer
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 ```
@@ -436,14 +455,18 @@ RUN pip install --no-cache-dir -r requirements.txt
 Copy application code and set up proper permissions:
 
 ```dockerfile
+
 # Copy application code
+
 COPY src/ ./src/
 COPY scripts/ ./scripts/
 
 # Create log directory with proper permissions
+
 RUN mkdir -p /var/log/mcp && chown mcpuser:mcpuser /var/log/mcp
 
 # Switch to non-root user before running the application
+
 USER mcpuser
 ```
 
@@ -452,18 +475,23 @@ USER mcpuser
 Configure health checks and runtime environment:
 
 ```dockerfile
+
 # Health check endpoint for container orchestrators
+
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD python scripts/health_check.py || exit 1
 
 # Environment variables for consistent behavior
+
 ENV PYTHONUNBUFFERED=1
 ENV MCP_LOG_LEVEL=INFO
 
 # Expose metrics port (separate from main application port)
+
 EXPOSE 9090
 
 # Run the server
+
 CMD ["python", "-m", "src.production_mcp_server"]
 ```
 
@@ -491,7 +519,9 @@ Create a complete local development environment that mirrors production. Let's b
 Set up the main MCP server with proper configuration:
 
 ```yaml
+
 # deployments/docker-compose.yml
+
 version: '3.8'
 
 services:
@@ -612,7 +642,9 @@ Cloud Run expects HTTP traffic, so we need an adapter to convert MCP JSON-RPC to
 **Step 2.1.1: FastAPI Application Setup**
 
 ```python
+
 # src/cloud_run_adapter.py
+
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse, StreamingResponse
 import json
@@ -624,6 +656,7 @@ import logging
 from src.production_mcp_server import ProductionMCPServer
 
 # Configure logging for Cloud Run (structured logging recommended)
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -634,6 +667,7 @@ app = FastAPI(
 )
 
 # Global server instance
+
 server = ProductionMCPServer()
 ```
 
@@ -819,7 +853,9 @@ Automate the build and deployment process with Google Cloud Build. This creates 
 Build and tag the container image with version control:
 
 ```yaml
+
 # deployments/cloudbuild.yaml
+
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
@@ -875,11 +911,14 @@ Deploy the new image to Cloud Run with production configuration:
 Configure build parameters and substitutions:
 
 ```yaml
+
 # Configurable substitutions
+
 substitutions:
   _REDIS_URL: 'redis://10.0.0.3:6379'  # Replace with your Redis instance
 
 # Build options
+
 options:
   logging: CLOUD_LOGGING_ONLY
   machineType: 'E2_HIGHCPU_8'
@@ -908,7 +947,9 @@ Terraform enables reproducible infrastructure deployments. Let's build the compl
 Set up Terraform with Google Cloud provider:
 
 ```terraform
+
 # deployments/terraform/main.tf
+
 terraform {
   required_providers {
     google = {
@@ -929,7 +970,9 @@ provider "google" {
 Define configurable parameters for flexible deployments:
 
 ```terraform
+
 # Variables
+
 variable "project_id" {
   description = "GCP Project ID"
   type        = string
@@ -947,7 +990,9 @@ variable "region" {
 Define the core Cloud Run service structure:
 
 ```terraform
+
 # Cloud Run Service
+
 resource "google_cloud_run_service" "mcp_server" {
   name     = "mcp-server"
   location = var.region
@@ -1026,7 +1071,9 @@ Configure scaling behavior and traffic routing:
 Create service account and configure access permissions:
 
 ```terraform
+
 # Service Account for the Cloud Run service
+
 resource "google_service_account" "mcp_server" {
   account_id   = "mcp-server"
   display_name = "MCP Server Service Account"
@@ -1034,6 +1081,7 @@ resource "google_service_account" "mcp_server" {
 }
 
 # IAM binding to allow public access
+
 resource "google_cloud_run_service_iam_member" "public" {
   service  = google_cloud_run_service.mcp_server.name
   location = google_cloud_run_service.mcp_server.location
@@ -1047,7 +1095,9 @@ resource "google_cloud_run_service_iam_member" "public" {
 Configure secure storage for sensitive configuration:
 
 ```terraform
+
 # Secret Manager for sensitive configuration
+
 resource "google_secret_manager_secret" "redis_url" {
   secret_id = "redis-url"
   
@@ -1062,7 +1112,9 @@ resource "google_secret_manager_secret" "redis_url" {
 Set up automated monitoring and notification channels:
 
 ```terraform
+
 # Cloud Monitoring alert policy
+
 resource "google_monitoring_alert_policy" "high_error_rate" {
   display_name = "MCP Server High Error Rate"
   combiner     = "OR"
@@ -1086,6 +1138,7 @@ resource "google_monitoring_alert_policy" "high_error_rate" {
 }
 
 # Notification channel for alerts
+
 resource "google_monitoring_notification_channel" "email" {
   display_name = "Email Notification"
   type         = "email"
@@ -1101,7 +1154,9 @@ resource "google_monitoring_notification_channel" "email" {
 Export important infrastructure information:
 
 ```terraform
+
 # Output the service URL
+
 output "service_url" {
   value = google_cloud_run_service.mcp_server.status[0].url
   description = "URL of the deployed Cloud Run service"
@@ -1144,7 +1199,9 @@ AWS Lambda provides a different serverless model than Cloud Run. Let's implement
 Start with essential imports and logging configuration:
 
 ```python
+
 # src/lambda_handler.py
+
 import json
 import os
 import asyncio
@@ -1153,9 +1210,11 @@ import logging
 from mangum import Mangum
 
 # Import our FastAPI app from the Cloud Run adapter
+
 from src.cloud_run_adapter import app
 
 # Configure logging for Lambda
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 ```
@@ -1171,7 +1230,9 @@ logger.setLevel(logging.INFO)
 Convert our existing FastAPI app for Lambda deployment:
 
 ```python
+
 # Create Mangum handler to convert ASGI app to Lambda handler
+
 handler = Mangum(app, lifespan="off")
 ```
 
@@ -1368,17 +1429,22 @@ async def execute_tool(body: Dict[str, Any]) -> Dict[str, Any]:
 ### Step 3.2: Lambda Container Image
 
 ```dockerfile
+
 # deployments/Dockerfile.lambda
+
 FROM public.ecr.aws/lambda/python:3.11
 
 # Copy requirements first for better caching
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
+
 COPY src/ ./src/
 
 # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
+
 CMD ["src.lambda_handler.handler"]
 ```
 
@@ -1391,7 +1457,9 @@ AWS SAM (Serverless Application Model) provides Infrastructure as Code for serve
 Start with the SAM template structure and global settings:
 
 ```yaml
+
 # deployments/template.yaml
+
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
@@ -1401,6 +1469,7 @@ Description: >
   API Gateway, monitoring, and observability.
 
 # Global settings for all functions
+
 Globals:
   Function:
     Timeout: 300
@@ -1593,7 +1662,9 @@ Set up automated alerting for production issues:
 Export important values for other stacks and external systems:
 
 ```yaml
+
 # Outputs for other stacks or external systems
+
 Outputs:
   MCPServerApi:
     Description: API Gateway endpoint URL for MCP Server
@@ -1638,7 +1709,9 @@ Effective production monitoring requires multiple components working together. L
 First, we'll set up the foundation with proper imports and health status tracking:
 
 ```python
+
 # monitoring/monitor.py
+
 from prometheus_client import start_http_server, Counter, Histogram, Gauge
 import time
 import asyncio
@@ -1661,7 +1734,9 @@ from datetime import datetime, timedelta
 Production systems need consistent, parsable logs:
 
 ```python
+
 # Configure structured logging for production environments
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -2053,7 +2128,9 @@ Start the monitoring system with both metrics server and health checking:
 Configure and start the monitoring system:
 
 ```python
+
 # Example usage and configuration
+
 if __name__ == "__main__":
     # Configure servers to monitor
     servers = [
@@ -2287,27 +2364,27 @@ Display detailed health information and server filtering:
 
 ---
 
-## 📝 Chapter Summary
+## Chapter Summary
 
 Congratulations! You've successfully transformed your MCP servers from development prototypes to production-ready services. Let's review the comprehensive production features you've implemented:
 
 ### Production Deployment Achievements:
 
-#### 🐳 **Containerization & Infrastructure**
+#### **Containerization & Infrastructure**
 
 - **Docker containerization** with security best practices and health checks
 - **Multi-environment configuration** using environment variables
 - **Infrastructure as Code** with Terraform for reproducible deployments
 - **Container orchestration** with Docker Compose for local development
 
-#### ☁️ **Cloud Platform Deployment**
+#### **Cloud Platform Deployment**
 
 - **Google Cloud Run** deployment with auto-scaling and load balancing
 - **AWS Lambda** serverless deployment with API Gateway integration
 - **CI/CD pipelines** with Cloud Build and SAM for automated deployments
 - **Secret management** using cloud-native secret stores
 
-#### 📊 **Monitoring & Observability**
+#### **Monitoring & Observability**
 
 - **Prometheus metrics** collection for comprehensive monitoring
 - **Structured logging** with proper log levels and formatting
@@ -2315,7 +2392,7 @@ Congratulations! You've successfully transformed your MCP servers from developme
 - **Grafana dashboards** for visualization and alerting
 - **Distributed monitoring** across multiple server instances
 
-#### 🔧 **Production Features**
+#### **Production Features**
 
 - **Redis caching** for improved performance and reduced load
 - **Error handling** with graceful degradation and retries
@@ -2370,13 +2447,14 @@ async def resilient_operation(data: Dict[str, Any]) -> Dict:
 
 ---
 
-## 💡 Practical Exercise
+## Practical Exercise
 
 **Challenge:** Implement a circuit breaker pattern for production MCP servers.
 
 Build a robust circuit breaker system that prevents cascade failures and enables graceful degradation:
 
 ### Your Task:
+
 ```python
 class CircuitBreaker:
     """Circuit breaker for production MCP server operations."""
@@ -2391,6 +2469,7 @@ class CircuitBreaker:
 ```
 
 ### Requirements:
+
 1. **State Management**: Implement CLOSED, OPEN, and HALF_OPEN states
 2. **Failure Detection**: Track failure rates and response times
 3. **Automatic Recovery**: Test recovery after timeout periods
@@ -2398,6 +2477,7 @@ class CircuitBreaker:
 5. **Graceful Degradation**: Provide fallback responses when circuit is open
 
 ### Implementation Tasks:
+
 1. **Implement distributed tracing** using OpenTelemetry to track requests across services
 2. **Create a blue-green deployment** strategy for zero-downtime updates  
 3. **Build load testing scripts** to verify your servers can handle production traffic
@@ -2407,7 +2487,7 @@ class CircuitBreaker:
 
 ---
 
-## 📝 Multiple Choice Test - Session 4
+## Multiple Choice Test - Session 4
 
 Test your understanding of Production MCP Deployment:
 
@@ -2485,7 +2565,7 @@ D) Decrease memory usage
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 3 - LangChain MCP Integration](Session3_LangChain_MCP_Integration.md)
 

@@ -10,7 +10,7 @@ C) Basic type checking without business logic
 D) External API validation calls  
 **Explanation**: The CrossFieldValidator implements sophisticated business logic validation that validates relationships between multiple fields (start_date < end_date), applies domain-specific constraints (budget limits, approval requirements), and ensures temporal consistency. This approach goes beyond simple type checking to enforce real-world business constraints.
 
-### Question 2: Enterprise Task Budget Validation  
+### Question 2: Enterprise Task Budget Validation
 A) Budget is automatically reduced  
 B) Task is automatically rejected  
 C) Requires executive approval flag to be set ✅  

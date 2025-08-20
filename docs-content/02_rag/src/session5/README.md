@@ -2,7 +2,7 @@
 
 A comprehensive framework for evaluating, testing, and monitoring RAG (Retrieval-Augmented Generation) systems in production environments.
 
-## 🎯 Overview
+## Overview
 
 This package provides enterprise-grade tools for:
 
@@ -35,7 +35,7 @@ session5/
 └── README.md                  # This file
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -93,7 +93,7 @@ results = quick_evaluate(
 )
 ```
 
-## 🏗️ Architecture
+## Architecture
 
 ### Core Components
 
@@ -129,7 +129,7 @@ results = quick_evaluate(
 - Anomaly detection
 - Alert management
 
-## 📊 Evaluation Metrics
+## Evaluation Metrics
 
 ### Retrieval Quality
 
@@ -154,7 +154,7 @@ results = quick_evaluate(
 - **Response Time**: System latency
 - **Throughput**: Requests per second
 
-## 🧪 Testing and Benchmarking
+## Testing and Benchmarking
 
 ### Automated Benchmarking
 
@@ -204,7 +204,7 @@ results = ab_test.run_ab_test("retrieval_comparison")
 print(f"Winner: {results['analysis']['winner']}")
 ```
 
-## 📈 Production Monitoring
+## Production Monitoring
 
 ### Real-time Monitoring
 
@@ -247,7 +247,7 @@ for alert in alerts:
     alerting.send_alert(alert, channels=['console', 'email'])
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Configuration
 
@@ -280,7 +280,7 @@ alert_config = {
 }
 ```
 
-## 🎮 Demo and Examples
+## Demo and Examples
 
 Run the comprehensive demonstration:
 
@@ -296,7 +296,7 @@ The demo includes:
 4. **Production Monitoring**: Real-time quality assessment
 5. **Comprehensive Ecosystem**: Full system integration
 
-## 📋 API Reference
+## API Reference
 
 ### Core Classes
 
@@ -336,7 +336,7 @@ monitor = RAGProductionMonitor(framework, alert_thresholds)
 result = monitor.monitor_rag_interaction(query, response, contexts, metadata)
 ```
 
-## 🔧 Extending the Framework
+## Extending the Framework
 
 ### Custom Evaluators
 
@@ -401,7 +401,7 @@ def enhanced_rag_query(query):
     return response
 ```
 
-## 📚 Additional Resources
+## Additional Resources
 
 - **Session 5 Documentation**: Detailed evaluation methodology
 - **RAGAS Documentation**: https://github.com/explodinggradients/ragas

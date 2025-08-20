@@ -22,14 +22,14 @@ After completing this module, you will master:
 - **[🔬 Module A: Advanced Algorithms →](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
 - **[📄 Session 6 Core: Graph-Based RAG →](Session6_Graph_Based_RAG.md)** - Foundation graph concepts
 
-### 🗂️ Code Files
+### Code Files
 
 - **Production GraphRAG**: [`src/session6/production_graphrag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/production_graphrag.py) - Enterprise-ready GraphRAG implementation
 - **Neo4j Manager**: [`src/session6/neo4j_manager.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/neo4j_manager.py) - Production graph database management
 - **CodeGraphRAG**: [`src/session6/code_graphrag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/code_graphrag.py) - Specialized code analysis GraphRAG
 - **Demo Application**: [`src/session6/demo_session6.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/demo_session6.py) - Production GraphRAG showcase
 
-### 🚀 Quick Start
+### Quick Start
 
 ```bash
 # Test production GraphRAG system
@@ -45,7 +45,7 @@ python -c "from code_graphrag import CodeGraphRAG; CodeGraphRAG().test_system()"
 
 ---
 
-## 📚 Production Systems Content
+## Production Systems Content
 
 ### Distributed Graph Processing
 

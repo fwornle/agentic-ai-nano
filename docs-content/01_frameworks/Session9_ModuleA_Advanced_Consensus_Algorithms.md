@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores sophisticated consensus algorithms for multi-agent systems including Byzantine Fault Tolerance, Practical Byzantine Fault Tolerance (pBFT), game-theoretic conflict resolution, auction mechanisms, and strategic behavior analysis. You'll learn to build robust multi-agent systems that can handle adversarial conditions and competitive scenarios.
 
@@ -777,7 +777,7 @@ The remaining game theory mechanisms (cooperative games, Shapley values, and coa
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced consensus algorithms and game theory for multi-agent systems:
 

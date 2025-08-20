@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores production-scale atomic agent systems including enterprise context management, multi-tenant architectures, performance monitoring, and deployment strategies. You'll learn to build robust, scalable atomic systems that can handle enterprise workloads with comprehensive governance and observability.
 
@@ -1278,7 +1278,7 @@ This intelligent alerting system identifies performance degradation and error ra
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered enterprise-scale atomic agent systems:
 

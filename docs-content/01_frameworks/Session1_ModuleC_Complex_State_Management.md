@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores sophisticated state management patterns for bare metal agents, including conversation memory, agent state persistence, and dynamic context management. You'll learn how to build agents that maintain complex state across interactions and sessions.
 
@@ -822,7 +822,7 @@ D) User-specified preferences only
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered complex state management for bare metal agents:
 

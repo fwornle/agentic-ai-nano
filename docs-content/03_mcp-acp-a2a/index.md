@@ -2,7 +2,7 @@
 
 Welcome to **Module 3** of the Agentic AI Nano-Degree! This module covers the cutting-edge protocols that enable modern agent communication and coordination.
 
-## 🎯 Module Overview
+## Module Overview
 
 In this module, you'll master three revolutionary protocols that are reshaping how AI agents communicate, operate, and collaborate:
 
@@ -10,7 +10,7 @@ In this module, you'll master three revolutionary protocols that are reshaping h
 - **Agent Communication Protocol (ACP)** - Local-first agent coordination
 - **Agent-to-Agent (A2A) Protocol** - Cross-organizational agent communication
 
-## 📚 Learning Paths
+## Learning Paths
 
 Choose your path based on your learning goals and time availability:
 
@@ -19,17 +19,17 @@ Choose your path based on your learning goals and time availability:
 - **Activities**: Read core concepts, examine examples
 - **Ideal for**: Decision makers, architects, overview learners
 
-### 🙋‍♂️ Participant Path (60-90 min per session)
+### Participant Path (60-90 min per session)
 - **Focus**: Guided implementation and analysis
 - **Activities**: Follow tutorials, analyze code examples
 - **Ideal for**: Developers, technical leads, hands-on learners
 
-### 🛠️ Implementer Path (120-180 min per session)
+### Implementer Path (120-180 min per session)
 - **Focus**: Complete implementation and customization
 - **Activities**: Build systems, extend examples, create solutions
 - **Ideal for**: Senior engineers, architects, specialists
 
-## 📋 Prerequisites
+## Prerequisites
 
 **Required Knowledge:**
 - Completed Modules 1 (Agent Frameworks) and 2 (RAG Architecture)
@@ -43,7 +43,7 @@ Choose your path based on your learning goals and time availability:
 - Docker (for production deployment)
 - VS Code with relevant extensions
 
-## 🗓️ Session Structure
+## Session Structure
 
 ### Week 1: MCP Fundamentals & Implementation
 - **Session 0**: Introduction to MCP, ACP, and A2A
@@ -59,7 +59,7 @@ Choose your path based on your learning goals and time availability:
 - **Session 8**: Advanced Agent Workflows
 - **Session 9**: Production Agent Deployment
 
-## 🚀 Quick Start
+## Quick Start
 
 Ready to dive into agent communication protocols? Choose your starting point:
 
@@ -91,7 +91,7 @@ Ready to dive into agent communication protocols? Choose your starting point:
 
 </div>
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 By completing this module, you will be able to:
 
@@ -115,7 +115,7 @@ By completing this module, you will be able to:
 3. **Monitor and maintain** production agent systems
 4. **Evaluate architectural trade-offs** for different use cases
 
-## 📊 Assessment Structure
+## Assessment Structure
 
 Each session includes:
 - **Multiple Choice Tests** - Verify conceptual understanding
@@ -123,7 +123,7 @@ Each session includes:
 - **Code Examples** - Study working implementations
 - **Optional Modules** - Deep-dive into advanced topics
 
-## 🛠️ Development Environment
+## Development Environment
 
 ### Required Software
 ```bash
@@ -145,7 +145,7 @@ docker
 - **Monitoring**: Prometheus + Grafana
 - **Version Control**: Git with GitHub/GitLab
 
-## 📈 Progress Tracking
+## Progress Tracking
 
 Track your progress through the module:
 

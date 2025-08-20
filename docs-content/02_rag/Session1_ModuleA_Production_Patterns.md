@@ -22,13 +22,13 @@ After completing this module, you will master:
 - **[🏢 Module B: Enterprise Deployment →](Session1_ModuleB_Enterprise_Deployment.md)** - Scaling RAG systems for enterprise environments
 - **[📄 Session 1 Core: Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)** - Foundation concepts
 
-### 🗂️ Code Files
+### Code Files
 
 - **Production Examples**: [`src/session1/rag_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/rag_system.py) - Production RAG implementation
 - **Testing Framework**: [`src/session1/test_rag_performance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/test_rag_performance.py) - Performance testing tools
 - **Interactive Demo**: [`src/session1/interactive_rag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/interactive_rag.py) - Hands-on RAG exploration
 
-### 🚀 Quick Start
+### Quick Start
 
 ```bash
 # Test production RAG patterns
@@ -44,7 +44,7 @@ python interactive_rag.py
 
 ---
 
-## 📚 Advanced Production Patterns
+## Advanced Production Patterns
 
 ### **Pattern 1: Resilient Document Processing Pipeline**
 

@@ -1,5 +1,14 @@
 # Session 1: Bare Metal Agents - Pure Python Implementation
 
+## Learning Outcomes
+
+By the end of this session, you will be able to:
+- **Implement** the core agent architecture patterns using only Python and LLM APIs
+- **Build** functional agents that demonstrate all five agentic patterns (Reflection, Tool Use, ReAct, Planning, Multi-Agent)
+- **Understand** the separation between model layer (LLM) and application layer (Python logic)
+- **Create** agents that integrate with existing enterprise APIs and legacy systems
+- **Debug** and customize agent behavior with complete transparency and control
+
 ## Chapter Overview: Understanding Agent Architecture at the Core
 
 **Industry Context & Market Significance**
@@ -18,42 +27,42 @@ Unlike frameworks that abstract implementation details, bare metal agents offer 
 
 Companies use bare metal agents for enterprise API integration, legacy system connectivity, and custom security implementations. You'll build agents that can integrate with any existing infrastructure while maintaining full control over data flow and processing logic.
 
-## 📊 Learning Navigation Hub
+## Learning Navigation Hub
 
 **Total Time Investment**: 75 minutes (Core) + 30-105 minutes (Optional)
 
 ### Learning Path Options
 
-- **🔍 Observer (40 min)**: Architecture analysis and code structure understanding  
-- **🎓 Participant (75 min)**: Hands-on agent implementation with guided exercises  
-- **⚙️ Implementer (120 min)**: Custom agent development with advanced patterns
+- **Observer (40 min)**: Architecture analysis and code structure understanding  
+- **Participant (75 min)**: Hands-on agent implementation with guided exercises  
+- **Implementer (120 min)**: Custom agent development with advanced patterns
 
 ---
 
-## 📋 SESSION OVERVIEW DASHBOARD
+## Session Overview Dashboard
 
 ### Core Learning Track (75 minutes) - REQUIRED
 
 | Section | Concept Load | Time | Skills |
 |---------|--------------|------|--------|
-| 🏗️ Agent Architecture | 3 concepts | 20 min | Understanding |
-| 🤖 Building First Agent | 4 concepts | 25 min | Implementation |
-| 🛠️ Tool Integration | 4 concepts | 20 min | Application |
+| Agent Architecture | 3 concepts | 20 min | Understanding |
+| Building First Agent | 4 concepts | 25 min | Implementation |
+| Tool Integration | 4 concepts | 20 min | Application |
 | ✅ Testing & Validation | 3 concepts | 10 min | Verification |
 
 ### Optional Advanced Modules
 
 **⚠️ Advanced Content**: These modules contain specialized material for production environments
 
-- **[🔬 Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** (40 min) - Sophisticated reasoning loops & error recovery  
-- **[⚡ Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** (35 min) - Production-grade speed & efficiency patterns  
-- **[🔄 Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** (30 min) - Enterprise memory & persistence systems
+- **[Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** (40 min) - Sophisticated reasoning loops & error recovery  
+- **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** (35 min) - Production-grade speed & efficiency patterns  
+- **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** (30 min) - Enterprise memory & persistence systems
 
-**🗂️ Code Files**: All examples use files in [`src/session1/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session1)
+**Code Files**: All examples use files in [`src/session1/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session1)
 
 ---
 
-## 🧭 CORE SECTION (Required - 75 minutes)
+## Core Section (Required - 75 minutes)
 
 ### Part 1: Agent Architecture Fundamentals (20 minutes)
 
@@ -66,7 +75,7 @@ Every agent needs these core components:
 
 ![Agent Pattern Control](images/agent-core-components.png)
 
-🗂️ **File**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py)
+**File**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py)
 
 This is the foundation class for all agents. Think of it as the blueprint that defines what capabilities every agent should have. The memory list stores past interactions, while the tools dictionary holds functions the agent can call.
 
@@ -131,7 +140,7 @@ def process_input(self, user_input: str) -> dict:
 ```python
 def format_output(self, agent_response: str) -> str:
     """Standard response formatting for user display"""
-    return f"🤖 Agent: {agent_response}"
+    return f"Agent: {agent_response}"
 ```
 
 **Enterprise Output Considerations**: In production, response formatting handles multiple output channels (web, API, mobile), adds response metadata, implements content filtering, and formats structured data for downstream systems.
@@ -180,7 +189,7 @@ class AgentState:
 
 **Building Your First Production-Ready Agent**
 
-🗂️ **File Reference**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py) - Complete SimpleAgent implementation
+**File Reference**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py) - Complete SimpleAgent implementation
 
 **Agent Initialization - Memory Foundation**
 
@@ -230,7 +239,9 @@ The run method provides a clean public interface that abstracts internal complex
 **Agent Testing and Validation**
 
 ```python
+
 # Production-ready testing pattern
+
 agent = SimpleAgent()
 response = agent.run("What is machine learning?")
 print(f"Agent Response: {response}")
@@ -244,7 +255,7 @@ Implementing the core agent thinking process:
 
 **Advanced Reasoning Engine - ReAct Pattern Implementation**
 
-🗂️ **File Reference**: [`src/session1/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/react_agent.py) - Complete ReAct implementation
+**File Reference**: [`src/session1/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/react_agent.py) - Complete ReAct implementation
 
 The ReAct (Reasoning + Acting) pattern forms the backbone of modern agent systems, implementing an iterative cycle of thought, action, and observation that mirrors human problem-solving.
 
@@ -309,7 +320,7 @@ def safe_agent_execution(self, user_input: str) -> str:
 
 #### Testing Your Agent (3 minutes)
 
-🗂️ **File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
+**File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
 
 ```python
 def test_simple_agent():
@@ -330,6 +341,7 @@ def test_simple_agent():
     print("✅ All tests passed!")
 
 # Run the test
+
 test_simple_agent()
 ```
 
@@ -346,7 +358,7 @@ Building tools that agents can use:
 
 ![Agent Pattern Tool Integration](images/agent-pattern-tool-integration.png)
 
-🗂️ **File**: [`src/session1/tools.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tools.py) - Complete tool implementations
+**File**: [`src/session1/tools.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tools.py) - Complete tool implementations
 
 The SimpleTool base class provides a consistent interface for all tools. The name is used by the agent to identify the tool, while the description helps the agent decide when to use it.
 
@@ -388,7 +400,9 @@ class CalculatorTool(SimpleTool):
 Here's how to use the calculator tool:
 
 ```python
+
 # Usage example
+
 calc = CalculatorTool()
 result = calc.execute("2 + 3 * 4")
 print(result)  # "Calculation result: 14"
@@ -398,7 +412,7 @@ print(result)  # "Calculation result: 14"
 
 How agents decide when and how to use tools:
 
-🗂️ **File**: [`src/session1/tool_use_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tool_use_agent.py) - See the `ToolUseAgent` class
+**File**: [`src/session1/tool_use_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tool_use_agent.py) - See the `ToolUseAgent` class
 
 ```python
 class ToolUseAgent:
@@ -489,7 +503,7 @@ def test_tool_integration():
 
 #### Unit Testing Approaches (4 minutes)
 
-🗂️ **File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
+**File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
 
 ```python
 import unittest
@@ -522,7 +536,9 @@ Now let's add the individual test methods:
 Finally, the test runner:
 
 ```python
+
 # Run tests
+
 if __name__ == "__main__":
     unittest.main()
 ```
@@ -543,12 +559,12 @@ def debug_agent_issues(agent, user_input):
         print(f"Response: {response}")
     except Exception as e:
         print(f"❌ Error: {e}")
-        print("💡 Check input format and agent state")
+        print("Check input format and agent state")
 ```
 
 #### Running Everything (3 minutes)
 
-🗂️ **File**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py) - Complete demonstration
+**File**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py) - Complete demonstration
 
 ```python
 def run_agent_demo():
@@ -586,11 +602,11 @@ if __name__ == "__main__":
 
 ---
 
-## ✅ Core Section Validation (5 minutes)
+## Core Section Validation (5 minutes)
 
 ### Quick Implementation Exercise
 
-🗂️ **Files to Run**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py)
+**Files to Run**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py)
 
 ```bash
 cd src/session1
@@ -611,7 +627,7 @@ python test_agents.py
 
 ---
 
-## 📝 Multiple Choice Test - Session 1
+## Multiple Choice Test - Session 1
 
 Test your understanding of bare metal agent implementation and core patterns:
 
@@ -621,15 +637,11 @@ B) Easier deployment
 C) Better performance  
 D) Deeper understanding of agent mechanics  
 
-
-
 **Question 2:** In the BaseAgent class, what is the purpose of the conversation_history attribute?  
 A) Maintaining context across interactions  
 B) Error tracking  
 C) Performance monitoring  
 D) Tool execution logs  
-
-
 
 **Question 3:** Which method must be implemented by all subclasses of BaseAgent?  
 A) get_available_tools()  
@@ -637,15 +649,11 @@ B) process_message()
 C) add_tool()  
 D) _generate_response()  
 
-
-
 **Question 4:** How does the Tool abstract base class ensure consistency across different tool implementations?  
 A) By handling errors automatically  
 B) By providing default implementations  
 C) By requiring execute() and _get_parameters() methods  
 D) By managing tool state  
-
-
 
 **Question 5:** What design pattern is demonstrated by the BaseAgent and its subclasses?  
 A) Strategy Pattern  
@@ -653,19 +661,17 @@ B) Factory Pattern
 C) Template Method Pattern  
 D) Observer Pattern  
 
-
-
 [**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 
 **Optional Advanced Modules:**
 
-- **[🔬 Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** - ⚠️ Advanced: Sophisticated reasoning loops & error recovery  
-- **[⚡ Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** - ⚠️ Advanced: Production-grade speed & efficiency patterns  
-- **[🔄 Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** - ⚠️ Advanced: Enterprise memory & persistence systems
+- **[Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** - ⚠️ Advanced: Sophisticated reasoning loops & error recovery  
+- **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** - ⚠️ Advanced: Production-grade speed & efficiency patterns  
+- **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** - ⚠️ Advanced: Enterprise memory & persistence systems
 
 **Next:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md) →
 

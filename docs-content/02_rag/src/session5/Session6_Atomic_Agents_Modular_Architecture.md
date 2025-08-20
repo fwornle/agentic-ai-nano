@@ -1,7 +1,7 @@
 # Session 6: Atomic Agents Modular Architecture
 ## Building Composable, Type-Safe Agent Systems
 
-### 🎯 **Learning Outcomes**
+### **Learning Outcomes**
 
 By the end of this session, you will be able to:
 - **Master atomic agent design principles** using modular, composable architecture patterns
@@ -10,7 +10,7 @@ By the end of this session, you will be able to:
 - **Apply LEGO-like composition patterns** for building complex agent workflows from simple components
 - **Deploy enterprise atomic architectures** with service discovery and orchestration
 
-### 📚 **Chapter Overview**
+### **Chapter Overview**
 
 Atomic Agents represent the next evolution in agent architecture, embracing the principle that complex systems should be built from simple, composable, and reusable components. Like LEGO blocks, each atomic agent is designed to be self-contained yet seamlessly interoperable with others.
 

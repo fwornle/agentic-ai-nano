@@ -1,6 +1,7 @@
 # Session 0: Introduction to RAG Architecture
 
 ## Learning Outcomes
+
 By the end of this session, you will be able to:
 - **Understand** the fundamental architecture and components of RAG systems
 - **Analyze** the evolution of RAG from 2017 to 2025 and key technological advances
@@ -45,7 +46,7 @@ Retrieval-Augmented Generation (RAG) represents the most significant breakthroug
 
 ### Learning Path Options
 
-**🎯 Observer Path (35 minutes)**: Understand concepts and see architectural patterns
+**Observer Path (35 minutes)**: Understand concepts and see architectural patterns
 - Focus: Quick insights with industry context and visual demonstrations
 - Best for: Getting oriented and understanding the business value
 
@@ -71,7 +72,9 @@ Every RAG system follows a consistent three-stage architecture that transforms s
 This is where we prepare knowledge for retrieval:
 
 ```python
+
 # RAG Indexer - Simple Implementation
+
 class RAGIndexer:
     def __init__(self, embedding_model, vector_store):
         self.embedding_model = embedding_model  # Converts text to vectors
@@ -105,7 +108,9 @@ class RAGIndexer:
 When a user asks a question, we find the most relevant information:
 
 ```python
+
 # RAG Retriever - Query Processing
+
 class RAGRetriever:
     def __init__(self, embedding_model, vector_store, top_k=5):
         self.embedding_model = embedding_model  # Same model as indexing
@@ -142,7 +147,9 @@ class RAGRetriever:
 Finally, we combine retrieved context with the LLM to generate accurate answers:
 
 ```python
+
 # RAG Generator - Response Synthesis
+
 class RAGGenerator:
     def __init__(self, llm_model):
         self.llm_model = llm_model  # GPT-4, Claude, etc.
@@ -179,7 +186,9 @@ class RAGGenerator:
 *Building on the basic architecture, let's see how these components work together in practice:*
 
 ```python
+
 # Complete RAG System Integration
+
 class BasicRAGSystem:
     def __init__(self, embedding_model, vector_store, llm):
         self.indexer = RAGIndexer(embedding_model, vector_store)
@@ -225,7 +234,9 @@ This era established that computers could understand meaning, not just match wor
 
 **Technical Foundation:**
 ```python
+
 # Early Dense Retrieval (2017-2019)
+
 class EarlyDenseRetrieval:
     def __init__(self, bi_encoder):
         self.encoder = bi_encoder  # Separate encoding for queries and documents
@@ -253,7 +264,9 @@ class EarlyDenseRetrieval:
 
 **2020 RAG Architecture:**
 ```python
+
 # Foundational RAG (2020)
+
 class FoundationalRAG:
     def __init__(self, retriever, generator):
         self.retriever = retriever    # DPR-style dual encoder
@@ -288,7 +301,9 @@ class FoundationalRAG:
 
 **Enhanced RAG Architecture:**
 ```python
+
 # Enhanced RAG (2021-2022)
+
 class EnhancedRAG:
     def __init__(self, llm, vector_store):
         self.llm = llm              # GPT-4, Claude, etc.
@@ -331,7 +346,9 @@ class EnhancedRAG:
 
 **Adaptive RAG Architecture:**
 ```python
+
 # Adaptive RAG (2023) - Self-Correcting Systems
+
 class AdaptiveRAG:
     def __init__(self, llm, retriever, critic):
         self.llm = llm
@@ -380,7 +397,9 @@ class AdaptiveRAG:
 
 **Next-Generation Multi-Agent System:**
 ```python
+
 # Agentic RAG (2024-2025) - Multi-Agent Coordination
+
 class AgenticRAG:
     def __init__(self, knowledge_graph, vector_store):
         self.kg = knowledge_graph
@@ -451,7 +470,9 @@ This represents the cutting edge of RAG technology, where systems can handle que
 **The Solution**: Structure-aware, semantic chunking that preserves meaning
 
 ```python
+
 # Intelligent Chunking Solution
+
 class SmartChunker:
     def __init__(self, chunk_size=512, overlap=50):
         self.chunk_size = chunk_size    # Target size in tokens
@@ -490,7 +511,9 @@ class SmartChunker:
 **The Solution**: Query enhancement techniques that bridge the semantic gap
 
 ```python
+
 # Query Enhancement Solution
+
 class QueryEnhancer:
     def __init__(self, llm):
         self.llm = llm
@@ -530,7 +553,9 @@ class QueryEnhancer:
 **The Solution**: Intelligent query clarification and context analysis
 
 ```python
+
 # Query Clarification Solution
+
 class QueryClarifier:
     def __init__(self, llm):
         self.llm = llm
@@ -571,7 +596,9 @@ class QueryClarifier:
 **The Solution**: Hierarchical indexing with rich metadata
 
 ```python
+
 # Optimized Index Solution
+
 class HierarchicalIndex:
     def __init__(self, vector_store):
         self.vector_store = vector_store
@@ -618,7 +645,9 @@ class HierarchicalIndex:
 **The Solution**: Multi-stage context optimization and quality validation
 
 ```python
+
 # Context Quality Optimization Solution
+
 class ContextOptimizer:
     def __init__(self, llm):
         self.llm = llm
@@ -684,7 +713,9 @@ class ContextOptimizer:
 - **Enterprise Search**: Google's Vertex AI handles document intelligence at scale
 
 ```python
+
 # RAG Decision Framework
+
 class RAGDecisionHelper:
     def should_use_rag(self, use_case):
         rag_score = 0
@@ -729,7 +760,9 @@ class RAGDecisionHelper:
 
 **2024 Cost Analysis:**
 ```python
+
 # Cost-Benefit Decision Framework
+
 class ApproachSelector:
     def recommend_approach(self, requirements):
         if requirements.data_freshness == 'real_time':
@@ -759,7 +792,9 @@ Most production systems now combine multiple techniques. For example:
 *Real-world systems often combine RAG with other approaches:*
 
 ```python
+
 # Hybrid System Architecture
+
 class IntelligentHybridSystem:
     def __init__(self, rag_system, fine_tuned_model, function_registry):
         self.rag = rag_system              # For knowledge retrieval
@@ -808,7 +843,9 @@ This intelligent routing ensures each query type gets handled by the most approp
 ### **PARTICIPANT PATH**: Legal RAG Solution Design
 
 ```python
+
 # Legal RAG - Specialized System
+
 class LegalRAGSystem:
     def __init__(self):
         # Domain-specific components
@@ -951,8 +988,13 @@ B) LLM integration with existing models
 C) Multi-agent systems with knowledge graph integration
 D) Basic similarity matching with cosine distance
 
-[**View Test Solutions**](Session0_Test_Solutions.md)
+[**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 
 ---
 
-**Previous:** Introduction (You are here) | **Next:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
+## Navigation
+
+**Previous:** Introduction (You are here)  
+**Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
+---

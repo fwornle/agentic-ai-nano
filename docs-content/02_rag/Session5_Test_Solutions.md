@@ -98,7 +98,7 @@ D) Random threshold selection
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **8/8 Correct**: Excellent mastery of RAG evaluation methodologies
 - **7/8 Correct**: Strong understanding with minor gaps
@@ -108,7 +108,7 @@ D) Random threshold selection
 
 ---
 
-## 📚 Key Evaluation Concepts
+## Key Evaluation Concepts
 
 ### Evaluation Framework Design
 

@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores sophisticated atomic agent composition patterns including pipeline orchestration, parallel processing, dynamic agent assembly, and CLI integration for DevOps workflows. You'll learn to build complex, maintainable systems from simple atomic components using proven architectural patterns.
 
@@ -1337,7 +1337,7 @@ This method demonstrates the full power of dynamic composition - from capability
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered advanced atomic agent composition patterns:
 

@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module focuses on performance benchmarking, monitoring, and cost optimization for production LangChain applications. You'll learn how to measure performance, implement comprehensive monitoring, and optimize resource usage for enterprise-scale deployments.
 
@@ -1826,7 +1826,7 @@ D) Improve execution speed
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered performance optimization and monitoring for production LangChain systems:
 

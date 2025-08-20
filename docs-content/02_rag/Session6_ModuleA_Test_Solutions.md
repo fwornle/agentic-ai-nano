@@ -72,7 +72,7 @@ D) When you want faster traversal
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **5/5 Correct**: Excellent mastery of advanced graph algorithms for RAG
 - **4/5 Correct**: Good understanding with minor gaps in algorithm details
@@ -82,7 +82,7 @@ D) When you want faster traversal
 
 ---
 
-## 📚 Key Concepts Review
+## Key Concepts Review
 
 ### Advanced Graph Algorithms
 1. **Temporal PageRank**: Time-aware ranking with decay for information freshness

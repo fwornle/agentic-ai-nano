@@ -132,7 +132,7 @@ D) Easier to learn
 
 ---
 
-## 💡 Practical Exercise Solution
+## Practical Exercise Solution
 
 **Challenge:** Create a tool that finds the warmest city from a list.
 
@@ -225,7 +225,7 @@ result = find_warmest_city(["London", "Atlantis", "Tokyo"])
 
 ---
 
-## 🎯 Extension Challenges
+## Extension Challenges
 
 Once you've mastered the basic solution, try these additional challenges:
 

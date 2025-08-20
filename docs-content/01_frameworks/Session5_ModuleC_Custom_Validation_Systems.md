@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module focuses on building custom validation systems for specialized business domains, industry-specific validation rules, and comprehensive error management. You'll learn to create robust error handling with intelligent retry strategies and circuit breaker patterns.
 
@@ -539,7 +539,7 @@ Finally, we return the successful response through the circuit breaker:
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered custom validation systems and resilient error handling, including:
 

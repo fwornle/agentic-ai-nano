@@ -1,7 +1,7 @@
 # Retrieval-Augmented Generation (RAG)
 ## 2-Week Nanodegree Module
 
-### 🎯 **Module Overview**
+### **Module Overview**
 
 This self-paced 2-week module provides comprehensive instruction on building sophisticated Retrieval-Augmented Generation (RAG) systems, from basic document retrieval to cutting-edge autonomous intelligent systems. Through hands-on tutorials and progressive implementation, you'll develop skills to create next-generation RAG architectures that represent the 2024-2025 state-of-the-art in intelligent information retrieval and reasoning.
 
@@ -14,7 +14,7 @@ This self-paced 2-week module provides comprehensive instruction on building sop
 
 ![RAG Universal Architecture](images/RAG.webp)
 
-## **🚀 Latest Research Integration & Paradigm Evolution**
+## **Latest Research Integration & Paradigm Evolution**
 
 This curriculum has been extensively enhanced with cutting-edge research from three key breakthrough papers, representing the 2024-2025 state-of-the-art in RAG development:
 
@@ -32,21 +32,21 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 - **Meta-Cognitive Validation**: Self-reasoning about logical consistency and coherence
 - **Adaptive Reasoning Workflows**: From structured control flows to emergent cognitive patterns
 
-### **🎯 MRAG Evolution: Autonomous Multimodal Intelligence**
+### **MRAG Evolution: Autonomous Multimodal Intelligence**
 
 - **MRAG 1.0**: Understanding limitations of lossy pseudo-multimodal translation approaches
 - **MRAG 2.0**: True multimodality breakthrough with Multimodal Large Language Models (MLLMs)
 - **MRAG 3.0**: Autonomous intelligent control with dynamic reasoning and multimodal search planning
 - **Cross-Modal Reasoning**: Integrated cognitive frameworks spanning multiple modalities
 
-### **📈 Paradigm Shifts Covered**
+### **Paradigm Shifts Covered**
 
 - **From Information Retrieval → Knowledge Reasoning**: Transform documents into structured logical reasoning
 - **From Static Pipelines → Dynamic Intelligence**: Adaptive systems based on reasoning requirements
 - **From Reactive Responses → Proactive Analysis**: Anticipate needs through logical deduction
 - **From Document Aggregation → Context Construction**: Build coherent logical frameworks from diverse sources
 
-### 📋 **Prerequisites**
+### **Prerequisites**
 
 - Python programming experience (intermediate level)
 - Basic understanding of LLMs and embeddings
@@ -248,7 +248,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 ---
 
-## **📚 Comprehensive Resource Library**
+## **Comprehensive Resource Library**
 
 ### **Core Documentation**
 
@@ -298,7 +298,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 ---
 
-## **🎓 Learning Outcomes**
+## **Learning Outcomes**
 
 Upon completion of this module, students will be able to:
 

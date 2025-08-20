@@ -1,17 +1,19 @@
 # Session 7: Agentic RAG Systems
 
-## 🎯 Learning Navigation Hub
+## Learning Navigation Hub
+
 **Total Time Investment**: 110 minutes (Core) + 70 minutes (Optional)
 **Your Learning Path**: Choose your engagement level
 
 ### Quick Start Guide
-- **👀 Observer (110 min)**: Read concepts + examine autonomous agent patterns
-- **🙋‍♂️ Participant (150 min)**: Follow exercises + implement basic agentic systems
-- **🛠️ Implementer (180 min)**: Build production agents + deploy autonomous RAG systems
+- **Observer (110 min)**: Read concepts + examine autonomous agent patterns
+- **Participant (150 min)**: Follow exercises + implement basic agentic systems
+- **Implementer (180 min)**: Build production agents + deploy autonomous RAG systems
 
-## 📋 SESSION OVERVIEW DASHBOARD
+## Session Overview Dashboard
 
 ### Core Learning Track (110 minutes) - REQUIRED
+
 | Section | Concept Load | Time | Skills |
 |---------|--------------|------|--------|
 | Reasoning Foundations | 4 concepts | 30 min | Cognitive Planning |
@@ -23,9 +25,9 @@
 - 🔬 **[Module A: Advanced Agent Reasoning](Session7_ModuleA_Advanced_Reasoning.md)** (35 min)
 - 🏭 **[Module B: Production Agent Deployment](Session7_ModuleB_Production_Agents.md)** (35 min)
 
-## 🧭 CORE SECTION (Required - 110 minutes)
+## Core Section (Required - 110 minutes)
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 By the end of this session, you will be able to:
 
@@ -35,7 +37,7 @@ By the end of this session, you will be able to:
 - **Build** multi-agent orchestration systems for complex information synthesis tasks
 - **Deploy** production agentic RAG architectures with monitoring and quality assurance
 
-## 📚 Chapter Introduction
+## Chapter Introduction
 
 ### **The Evolution to Reasoning-Powered RAG: From Retrieval to Intelligence**
 
@@ -123,7 +125,9 @@ Meta-Cognitive Validation → Logically Coherent Response
 This system uses different reasoning strategies to intelligently guide information retrieval:
 
 ```python
+
 # Reasoning-guided retrieval system
+
 class ReasoningAugmentedRetrieval:
     """RAG system where reasoning frameworks guide retrieval strategies.
     
@@ -1012,19 +1016,31 @@ This integration represents a fundamental cognitive evolution:
 **Example: From Graph Traversal to Logical Deduction**
 
 ```python
+
 # Traditional NodeRAG approach (Session 6)
+
 # Find: "What companies did Steve Jobs work for?"
+
 # Result: [Apple, NeXT, Pixar] - direct relationship traversal
 
 # Reasoning-Enhanced NodeRAG approach (Session 7)
+
 # Query: "What leadership patterns can we deduce from Steve Jobs' career trajectory?"
+
 # Reasoning Process:
+
 # 1. Premise: Steve Jobs worked for Apple, NeXT, Pixar
+
 # 2. Premise: Apple and Pixar became highly successful under his leadership
+
 # 3. Premise: NeXT was acquired by Apple
+
 # 4. Deduction: Jobs demonstrates a pattern of transformative leadership in technology companies
+
 # 5. Further reasoning: His career shows progression from personal computing to animated films to mobile devices
+
 # 6. Conclusion: Jobs' leadership pattern involves entering industries and fundamentally changing their paradigms
+
 ```
 
 ### **Workflow Architecture: Structured vs. Dynamic Reasoning**
@@ -1227,7 +1243,9 @@ class DynamicReasoningWorkflow:
 **1. From Static Graphs to Dynamic Reasoning**
 
 ```python
+
 # Session 6 Approach: Graph Traversal
+
 graph_result = knowledge_graph.traverse_relationships(
     start_entity="Steve Jobs",
     relationship_types=["worked_at", "founded"],
@@ -1235,26 +1253,37 @@ graph_result = knowledge_graph.traverse_relationships(
 )
 
 # Session 7 Enhancement: Reasoning Over Graphs
+
 reasoning_result = await reasoning_engine.reason_over_structured_knowledge(
     query="What leadership patterns can we deduce from Steve Jobs' career?",
     reasoning_type='deductive'
 )
+
 # Result: Not just facts, but logical conclusions and patterns
+
 ```
 
 **2. From Information Retrieval to Autonomous Planning**
 
 ```python
+
 # Traditional RAG: Direct retrieval
+
 docs = vector_store.similarity_search(query, k=5)
 response = llm.generate(query, docs)
 
 # Agentic RAG: Intelligent planning
+
 plan = await agent.reason_plan_and_execute(query)
+
 # - Analyzes reasoning requirements
+
 # - Plans optimal information gathering strategy
+
 # - Executes with self-correction
+
 # - Validates logical coherence
+
 ```
 
 ### **The Three Pillars of Production Intelligence**
@@ -1286,9 +1315,13 @@ plan = await agent.reason_plan_and_execute(query)
 **Production Evolution:**
 
 ```python
+
 # Level 1: Document-only RAG
+
 # Level 2: Document + Knowledge Graph RAG (Session 6)
+
 # Level 3: Document + Graph + Tools + Reasoning RAG (Session 7)
+
 ```
 
 ### **Enterprise Concepts You'll Master**
@@ -1439,7 +1472,9 @@ class EnhancedReasoningAgent(BasicReasoningAgent):
 *Full production capabilities with monitoring and optimization*
 
 ```python
+
 # Advanced agentic RAG with query planning
+
 from typing import List, Dict, Any, Optional, Callable
 from dataclasses import dataclass
 from enum import Enum
@@ -1689,7 +1724,9 @@ class ReasoningDrivenQueryPlanningAgent:
 Implement sophisticated execution with adaptive refinement:
 
 ```python
+
 # Iterative execution with self-correction
+
 class IterativeExecutionEngine:
     """Engine for iterative RAG execution with self-correction."""
 
@@ -1859,7 +1896,9 @@ Build systems that validate logical consistency and correct reasoning flaws in t
 - **Reasoning-Based Correction**: Validate logical coherence, identify reasoning gaps, strengthen logical connections, and ensure cognitive soundness
 
 ```python
+
 # Reasoning-based self-correcting RAG with logical validation and cognitive correction
+
 class ReasoningBasedSelfCorrectingRAG:
     """RAG system with built-in logical reasoning validation and cognitive self-correction capabilities."""
 
@@ -2238,7 +2277,9 @@ class FactualConsistencyValidator:
 Integrate external tools to enhance RAG capabilities:
 
 ```python
+
 # Multi-tool RAG agent with external integrations
+
 from typing import Protocol
 import requests
 from datetime import datetime
@@ -2579,7 +2620,9 @@ class MultiToolRAGAgent:
 Build systems where multiple specialized agents collaborate:
 
 ```python
+
 # Multi-agent collaborative RAG system
+
 from abc import ABC, abstractmethod
 from enum import Enum
 
@@ -2880,7 +2923,7 @@ class MultiAgentRAGOrchestrator:
 
 ---
 
-## **🧪 Hands-On Exercise: Build Production Reasoning-Augmented RAG**
+## **Hands-On Exercise: Build Production Reasoning-Augmented RAG**
 
 ### **Your Mission**
 
@@ -2898,7 +2941,9 @@ Create a production-ready reasoning-augmented RAG system that combines structure
 ### **Architecture Blueprint:**
 
 ```python
+
 # Complete production reasoning-augmented RAG system
+
 class ProductionReasoningAugmentedRAG:
     """Production-ready reasoning-augmented RAG system with cognitive intelligence."""
 
@@ -3048,7 +3093,7 @@ class ProductionReasoningAugmentedRAG:
 
 ---
 
-## **📝 Chapter Summary**
+## ** Chapter Summary**
 
 ### **What You've Built**
 
@@ -3078,11 +3123,12 @@ class ProductionReasoningAugmentedRAG:
 
 ---
 
-## 📝 Multiple Choice Test - Session 7 (15 minutes)
+## Multiple Choice Test - Session 7 (15 minutes)
 
 Test your understanding of agentic RAG systems and intelligent automation techniques.
 
 ### Question 1: Query Planning Advantage
+
 **What is the primary advantage of query planning in agentic RAG systems?**
 
 A) Faster response times    
@@ -3091,6 +3137,7 @@ C) Reduced computational costs
 D) Simpler system architecture  
 
 ### Question 2: Self-Correction Error Detection
+
 **In self-correcting RAG systems, what is the most effective approach for error detection?**
 
 A) Random response sampling    
@@ -3099,6 +3146,7 @@ C) Simple keyword matching
 D) Response length validation  
 
 ### Question 3: External Tool Integration
+
 **When should agentic RAG systems use external tools rather than just document retrieval?**
 
 A) Always, for every query    
@@ -3107,6 +3155,7 @@ C) When queries require real-time data, calculations, or specialized functionali
 D) Only for simple questions  
 
 ### Question 4: Multi-Agent Collaboration Benefit
+
 **What is the key benefit of multi-agent collaboration in RAG systems?**
 
 A) Faster processing through parallel execution    
@@ -3115,6 +3164,7 @@ C) Reduced memory usage
 D) Simpler error handling  
 
 ### Question 5: Iterative Refinement Stopping Criterion
+
 **In iterative self-correction, what criterion should determine when to stop refinement?**
 
 A) Fixed number of iterations regardless of quality    
@@ -3123,6 +3173,7 @@ C) Time limits only
 D) User interruption  
 
 ### Question 6: Critical Agent Role
+
 **Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?**
 
 A) Researcher agent    
@@ -3131,6 +3182,7 @@ C) Validator agent
 D) Coordinator agent  
 
 ### Question 7: Production Deployment Challenge
+
 **What is the primary challenge in production deployment of agentic RAG systems?**
 
 A) High computational costs    
@@ -3139,6 +3191,7 @@ C) Lack of suitable frameworks
 D) Limited use cases  
 
 ### Question 8: Validation Assessment Priority
+
 **When designing agentic RAG validation, what aspect is most important to assess?**
 
 A) Response length    
@@ -3152,7 +3205,7 @@ D) Token usage
 
 ---
 
-## **🎯 Session 7 Reasoning-Augmented Intelligence Mastery**
+## ** Session 7 Reasoning-Augmented Intelligence Mastery**
 
 **Your Cognitive RAG Achievement:**
 You've transformed passive information retrieval into **intelligent reasoning systems** that don't just find information—they think about it, reason through it, and construct logically coherent knowledge. Your systems have achieved the cognitive leap from retrieval to reasoning.
@@ -3170,7 +3223,7 @@ You've transformed passive information retrieval into **intelligent reasoning sy
 - **From Static Pipelines → Dynamic Reasoning**: Adaptive cognitive workflows that evolve based on reasoning complexity
 - **From Response Generation → Logical Deduction**: Build answers through structured reasoning chains and logical inference
 
-## **🔗 The Final Technical Frontier: Multi-Modal Intelligence**
+## ** The Final Technical Frontier: Multi-Modal Intelligence**
 
 **Beyond Text: The Complete Knowledge Challenge**
 
@@ -3202,7 +3255,7 @@ The planning, validation, and iterative refinement capabilities you've mastered 
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 6 - Graph-Based RAG (GraphRAG)](Session6_Graph_Based_RAG.md)
 

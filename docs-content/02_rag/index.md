@@ -2,7 +2,7 @@
 
 Welcome to the **RAG Architecture** module of the Agentic AI Nano-Degree! This comprehensive 10-session program takes you from RAG fundamentals to production-ready enterprise implementations.
 
-## 🎯 Module Overview
+## Module Overview
 
 This module provides complete coverage of Retrieval-Augmented Generation (RAG) systems, from basic concepts to advanced multi-modal and agentic implementations.
 
@@ -10,7 +10,7 @@ This module provides complete coverage of Retrieval-Augmented Generation (RAG) s
 **Time Investment**: 50-140 minutes per session (depending on chosen path)  
 **Prerequisites**: Basic ML concepts, Python experience, understanding of vector spaces  
 
-## 🔍 Learning Journey
+## Learning Journey
 
 ### Foundation (Sessions 0-2)
 Establish your understanding of RAG fundamentals and core implementation patterns.
@@ -87,7 +87,7 @@ Deploy and maintain enterprise-grade RAG systems.
 - Monitoring and observability
 - Enterprise workflow integration
 
-## 🚀 Learning Paths
+## Learning Paths
 
 Select your engagement level for optimal learning:
 
@@ -133,7 +133,7 @@ Select your engagement level for optimal learning:
     - Explore advanced optimization
     - Create production-ready solutions
 
-## 🛠️ Technical Stack
+## Technical Stack
 
 **Core Technologies:**
 - **Vector Databases**: Chroma, Pinecone, Weaviate, Qdrant
@@ -156,7 +156,7 @@ Select your engagement level for optimal learning:
 - **PostgreSQL**: Metadata and configuration storage
 - **Prometheus/Grafana**: System monitoring
 
-## 📈 Session Structure
+## Session Structure
 
 Each session follows a learner-optimized structure:
 
@@ -190,7 +190,7 @@ Each session follows a learner-optimized structure:
    - Related resource connections
    - Learning path continuity
 
-## 💡 Success Strategies
+## Success Strategies
 
 **For Maximum Learning Impact:**
 
@@ -207,7 +207,7 @@ Each session follows a learner-optimized structure:
 - **Implementer Path**: 1 session per week with practice time
 - **Hybrid Approach**: Adjust based on session complexity and available time
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 Upon completion of this module, you will master:
 
@@ -269,7 +269,7 @@ Upon completion of this module, you will master:
 
 </div>
 
-## 🌟 Special Features
+## Special Features
 
 **Three-Path Learning System:**
 Each session accommodates different learning styles and time constraints while maintaining educational rigor and practical applicability.

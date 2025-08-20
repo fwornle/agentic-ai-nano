@@ -12,7 +12,7 @@
 
 This multi-factor approach ensures optimal resource utilization while respecting task dependencies.
 
-### Question 2: Synchronization Points  
+### Question 2: Synchronization Points
 **Correct Answer: b) Conditional proceed with timeout protection**
 
 **Explanation**: The adaptive synchronization policy handles different completion levels:
@@ -67,7 +67,7 @@ These parameters optimize research agents for specific investigation tasks and q
 - **Adaptive synchronization** provides flexibility while maintaining coordination
 - **Quality-weighted merging** prioritizes accuracy while rewarding efficiency
 
-### Dynamic Agent Generation  
+### Dynamic Agent Generation
 - **Composite scoring** evaluates agent suitability across multiple dimensions
 - **Specialization parameters** customize agent behavior for specific task types
 - **Resource management** ensures system stability during dynamic creation

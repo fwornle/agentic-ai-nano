@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module focuses on deploying LangChain agents to production environments with enterprise-grade reliability, monitoring, and performance. You'll learn cloud deployment patterns, performance optimization, and comprehensive monitoring strategies.
 
@@ -1631,7 +1631,7 @@ D) Simplify configuration management
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered production deployment strategies for LangChain systems:
 

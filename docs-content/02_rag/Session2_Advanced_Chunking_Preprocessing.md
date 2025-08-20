@@ -1,6 +1,7 @@
 # Session 2: Advanced Chunking & Preprocessing
 
 ## Learning Outcomes
+
 By the end of this session, you will be able to:
 - **Design** hierarchical chunking strategies that preserve document structure and meaning
 - **Extract** and utilize rich metadata to enhance retrieval quality and context
@@ -11,12 +12,15 @@ By the end of this session, you will be able to:
 ## Chapter Overview
 
 ### What You'll Learn: Enterprise-Grade Document Understanding
+
 Advanced chunking transforms RAG systems from simple text splitters into intelligent document understanding engines. Unlike naive approaches that arbitrarily split text, enterprise systems preserve document structure, extract rich metadata, and handle complex content types that include tables, images, and domain-specific formatting.
 
 ### Why It Matters: Real-World Document Complexity
+
 Enterprise documents contain structured relationships that naive chunking destroys. Tables split across chunks lose meaning, hierarchical information gets fragmented, and rich contextual metadata is discarded. Advanced preprocessing preserves these relationships, leading to 50-70% better context preservation and 30-40% improvement in retrieval relevance.
 
 ### How It Stands Out: 2025 Enterprise Standards
+
 Based on current industry trends, advanced chunking in 2025 employs:
 - **Neural boundary detection** that learns optimal split points
 - **Context-aware processing** that adapts to document types
@@ -34,7 +38,7 @@ Based on current industry trends, advanced chunking in 2025 employs:
 
 ### Learning Path Options
 
-**🎯 Observer Path (30 minutes)**: Understand concepts with simple examples
+**Observer Path (30 minutes)**: Understand concepts with simple examples
 - Focus: Core concepts and practical applications with clear demonstrations
 - Best for: Getting oriented with intelligent document processing fundamentals
 
@@ -71,7 +75,9 @@ Intelligent document analysis provides several critical capabilities:
 Here's a straightforward example of how we can detect different content types in documents:
 
 ```python
+
 # Simple content type detection
+
 from enum import Enum
 
 class ContentType(Enum):
@@ -970,7 +976,7 @@ class ChunkQualityAssessor:
 
 ---
 
-## 📝 Multiple Choice Test - Session 2
+## Multiple Choice Test - Session 2
 
 Test your understanding of advanced chunking and preprocessing concepts:
 

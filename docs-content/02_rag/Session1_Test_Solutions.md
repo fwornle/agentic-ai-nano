@@ -114,7 +114,7 @@ D) Use placeholder content for failed loads
 
 ---
 
-## 🎯 Performance Scoring
+## Performance Scoring
 
 - **8/8 Correct**: Excellent mastery of RAG implementation concepts
 - **7/8 Correct**: Strong understanding with minor gaps
@@ -124,7 +124,7 @@ D) Use placeholder content for failed loads
 
 ---
 
-## 📚 Key Implementation Concepts
+## Key Implementation Concepts
 
 ### Core Components
 

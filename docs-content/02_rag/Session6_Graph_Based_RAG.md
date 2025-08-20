@@ -1,17 +1,19 @@
 # Session 6: Graph-Based RAG (GraphRAG)
 
-## 🎯 Learning Navigation Hub
+## Learning Navigation Hub
+
 **Total Time Investment**: 100 minutes (Core) + 80 minutes (Optional)
 **Your Learning Path**: Choose your engagement level
 
 ### Quick Start Guide
-- **👀 Observer (100 min)**: Read concepts + examine graph patterns and reasoning techniques
-- **🙋‍♂️ Participant (140 min)**: Follow exercises + implement basic GraphRAG systems
-- **🛠️ Implementer (180 min)**: Build production GraphRAG + deploy reasoning-enhanced systems
+- **Observer (100 min)**: Read concepts + examine graph patterns and reasoning techniques
+- **Participant (140 min)**: Follow exercises + implement basic GraphRAG systems
+- **Implementer (180 min)**: Build production GraphRAG + deploy reasoning-enhanced systems
 
-## 📋 SESSION OVERVIEW DASHBOARD
+## Session Overview Dashboard
 
 ### Core Learning Track (100 minutes) - REQUIRED
+
 | Section | Concept Load | Time | Skills |
 |---------|--------------|------|--------|
 | Knowledge Graph Fundamentals | 5 concepts | 25 min | Graph Theory |
@@ -23,9 +25,9 @@
 - 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** (40 min)
 - 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** (40 min)
 
-## 🧭 CORE SECTION (Required - 100 minutes)
+## Core Section (Required - 100 minutes)
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 By the end of this session, you will be able to:
 - **Build** knowledge graphs from unstructured documents using entity extraction and relationship mapping
@@ -34,7 +36,7 @@ By the end of this session, you will be able to:
 - **Integrate** graph databases (Neo4j, Memgraph) with vector search for hybrid retrieval
 - **Deploy** production-ready GraphRAG systems with incremental graph updates
 
-## 📚 Chapter Introduction
+## Chapter Introduction
 
 ### **Beyond Vector Search: Knowledge Graphs Meet RAG**
 
@@ -641,7 +643,9 @@ While NodeRAG provides advanced heterogeneous architectures, traditional GraphRA
 **Production Impact**: Heterogeneous node architecture improves complex query handling by 60-85% and reduces retrieval fragmentation by 70% because specialized processors optimize each knowledge type while Personalized PageRank and HNSW integration enable efficient reasoning pathways.
 
 ```python
+
 # NodeRAG: Heterogeneous Graph Architecture for Advanced Knowledge Representation
+
 import spacy
 from typing import List, Dict, Any, Tuple, Set, Union
 import networkx as nx
@@ -1174,7 +1178,9 @@ Our Neo4j integration implements production best practices from day one, ensurin
 **Production Impact**: Production Neo4j integration supports 10,000+ entities/second ingestion and sub-100ms query responses for complex traversals, enabling enterprise GraphRAG systems that maintain performance and reliability at scale with millions of entities and relationships.
 
 ```python
+
 # Neo4j integration for production GraphRAG
+
 class Neo4jGraphManager:
     """Production Neo4j integration for GraphRAG systems.
 
@@ -1424,7 +1430,9 @@ class Neo4jGraphManager:
 Build specialized GraphRAG systems for code repositories:
 
 ```python
+
 # Code GraphRAG using AST parsing
+
 import ast
 import tree_sitter
 from tree_sitter import Language, Parser
@@ -1730,7 +1738,9 @@ Graph traversal faces the "explosion problem" - the number of possible paths gro
 This ensures comprehensive coverage while maintaining reasonable response times.
 
 ```python
+
 # Advanced graph traversal for GraphRAG
+
 class GraphTraversalEngine:
     """Advanced graph traversal engine for multi-hop reasoning.
 
@@ -2082,7 +2092,9 @@ Hybrid search combines both approaches strategically:
 This results in 30-40% improvement in answer quality over pure approaches, especially for complex queries requiring both semantic understanding and relational reasoning.
 
 ```python
+
 # Hybrid graph-vector search system
+
 class HybridGraphVectorRAG:
     """Hybrid system combining graph traversal with vector search.
 
@@ -2575,7 +2587,7 @@ Process graph contexts with relationship-aware scoring:
 
 ---
 
-## **🧪 Hands-On Exercise: Build Production GraphRAG System**
+## **Hands-On Exercise: Build Production GraphRAG System**
 
 ### **Your Mission**
 
@@ -2592,7 +2604,9 @@ Create a production-ready GraphRAG system that combines document analysis with c
 ### **Implementation Architecture:**
 
 ```python
+
 # Production GraphRAG system
+
 class ProductionGraphRAG:
     """Production-ready GraphRAG system."""
 
@@ -2664,7 +2678,7 @@ class ProductionGraphRAG:
 
 ---
 
-## **📝 Chapter Summary**
+## ** Chapter Summary**
 
 ### **What You've Built**
 
@@ -2751,11 +2765,12 @@ class ProductionGraphRAG:
 
 ---
 
-## 📝 Multiple Choice Test - Session 6 (15 minutes)
+## Multiple Choice Test - Session 6 (15 minutes)
 
 Test your understanding of graph-based RAG systems and GraphRAG implementations.
 
 ### Question 1: GraphRAG Primary Advantage
+
 **What is the primary advantage of GraphRAG over traditional vector-based RAG?**
 
 A) Faster query processing    
@@ -2764,6 +2779,7 @@ C) Multi-hop reasoning through explicit relationship modeling
 D) Simpler system architecture  
 
 ### Question 2: Entity Standardization Purpose
+
 **In knowledge graph construction, what is the purpose of entity standardization?**
 
 A) To reduce memory usage    
@@ -2772,6 +2788,7 @@ C) To improve query speed
 D) To compress graph storage  
 
 ### Question 3: Graph Traversal Algorithm Selection
+
 **Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?**
 
 A) Depth-First Search (DFS)    
@@ -2780,6 +2797,7 @@ C) Dijkstra's algorithm
 D) A* search  
 
 ### Question 4: Code GraphRAG AST Information
+
 **In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?**
 
 A) Only function definitions    
@@ -2788,6 +2806,7 @@ C) Only variable names
 D) Just file names and sizes  
 
 ### Question 5: Hybrid Graph-Vector Search Benefit
+
 **What is the key benefit of hybrid graph-vector search?**
 
 A) Reduced computational cost    
@@ -2796,6 +2815,7 @@ C) Simpler implementation
 D) Faster indexing  
 
 ### Question 6: Neo4j vs Simple Graph Structures
+
 **When should you choose Neo4j over a simple graph data structure for GraphRAG?**
 
 A) Always, regardless of scale    
@@ -2804,6 +2824,7 @@ C) Only for small datasets
 D) Never, simple structures are always better  
 
 ### Question 7: Multi-Hop Traversal Challenge
+
 **What is the primary challenge in multi-hop graph traversal for RAG?**
 
 A) Memory limitations    
@@ -2812,6 +2833,7 @@ C) Slow database queries
 D) Complex code implementation  
 
 ### Question 8: Production GraphRAG Update Considerations
+
 **In production GraphRAG systems, what is the most important consideration for incremental updates?**
 
 A) Minimizing downtime while maintaining graph consistency    
@@ -2825,7 +2847,7 @@ D) Simplifying the codebase
 
 ---
 
-## **🎯 Session 6 Graph Intelligence Mastery**
+## ** Session 6 Graph Intelligence Mastery**
 
 **Your Knowledge Reasoning Achievement:**
 You've transcended traditional RAG by building systems that understand entities, relationships, and complex connections. Your RAG system now reasons about knowledge through **structured brain architecture** instead of just finding similar content.
@@ -2841,7 +2863,7 @@ You've transcended traditional RAG by building systems that understand entities,
 
 You now have RAG systems that construct **coherent knowledge pathways** for complex multi-hop queries like "companies partnering with Apple's suppliers in automotive and their environmental impact technologies" - queries that require structured reasoning across multiple specialized knowledge types.
 
-## **🔗 The Next Frontier: Agentic Intelligence**
+## ** The Next Frontier: Agentic Intelligence**
 
 **The Adaptive Challenge Ahead**
 
@@ -2872,12 +2894,12 @@ The entity extraction, relationship mapping, and graph traversal capabilities yo
 
 ---
 
-## 🧭 Navigation
+## Navigation
+
 **Previous:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
 
 **Optional Deep Dive Modules:**
 - 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Complex graph traversal and reasoning patterns
 - 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise graph database deployment
-
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)

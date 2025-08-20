@@ -1,12 +1,12 @@
 # Agent Frameworks & Patterns
 ## 2-Week Nanodegree Module
 
-### 🎯 **Module Overview**
+### **Module Overview**
 This self-paced 2-week module provides comprehensive instruction on building production-ready AI agents using 2025 state-of-the-art frameworks and implementing the five core agentic patterns: Reflection, Tool Use, ReAct, Planning, and Multi-Agent Collaboration. Through hands-on tutorials and progressive implementation, you'll master cutting-edge agent development with performance breakthroughs (CrewAI 5.76x faster execution), enterprise production capabilities, and modern protocol standardization (MCP, A2A, ACP, ANP). You'll develop skills to create intelligent, adaptable agents using both bare-metal approaches and established frameworks optimized for 2025 production environments.
 
 ![Agent Frameworks Architecture](images/agent-frameworks-overview.png)
 
-### 📋 **Prerequisites**
+### **Prerequisites**
 - Python programming experience (intermediate level)
 - Basic understanding of LLMs and API interactions
 - Familiarity with JSON/REST APIs and HTTP protocols
@@ -102,7 +102,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ---
 
-## **🚀 2025 Technology Stack & Performance Benchmarks**
+## **2025 Technology Stack & Performance Benchmarks**
 
 ### **Modern Protocol Standards**
 - **Model Context Protocol (MCP)**: Standardized LLM-application integration
@@ -138,7 +138,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ---
 
-## **📚 Comprehensive Resource Library**
+## **Comprehensive Resource Library**
 
 ### **Core Documentation**
 - [LangChain Agent Documentation](https://python.langchain.com/docs/modules/agents/)
@@ -172,7 +172,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ---
 
-## **🎯 Learning Outcomes**
+## **Learning Outcomes**
 
 By completion, students will be able to:
 
@@ -204,7 +204,7 @@ By completion, students will be able to:
 
 ---
 
-## **📊 Self-Assessment Structure**
+## **Self-Assessment Structure**
 
 ### **Knowledge Checks**
 Each session includes multiple choice quizzes to verify understanding of key concepts:
@@ -225,7 +225,7 @@ Each session includes multiple choice quizzes to verify understanding of key con
 
 ---
 
-## **🛠️ Development Environment Setup**
+## **Development Environment Setup**
 
 ### **Required Software**
 ```bash
@@ -267,7 +267,7 @@ pip install kubernetes  # Container orchestration
 
 ---
 
-## **🎓 Completion Requirements**
+## **Completion Requirements**
 
 To successfully complete this nanodegree module:
 1. Study all session materials (Sessions 0-10)
@@ -279,7 +279,7 @@ To successfully complete this nanodegree module:
 
 ---
 
-## **📚 Self-Study Support**
+## **Self-Study Support**
 
 ### **Available Resources**
 - **Comprehensive Documentation**: Each session includes detailed explanations and examples

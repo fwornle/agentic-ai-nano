@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module explores enterprise security and compliance frameworks for Agno agent systems including zero-trust architecture, data encryption, audit logging, privacy controls, and regulatory compliance (GDPR, HIPAA, SOC2). You'll learn to build security-first agent systems that meet enterprise compliance requirements.
 
@@ -1314,7 +1314,7 @@ Geographic and identifier anonymization protects location privacy:
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered security and compliance for enterprise Agno systems:
 

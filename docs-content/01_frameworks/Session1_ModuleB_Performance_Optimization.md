@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 Module Overview
+## Module Overview
 
 This module focuses on optimizing bare metal agents for performance, memory efficiency, and speed. You'll learn memory management patterns, tool execution optimization, and response time improvement strategies essential for production agent systems.
 
@@ -723,7 +723,7 @@ D) Just error rates and failures
 
 ---
 
-## 🎯 Module Summary
+## Module Summary
 
 You've now mastered performance optimization for bare metal agents:
 

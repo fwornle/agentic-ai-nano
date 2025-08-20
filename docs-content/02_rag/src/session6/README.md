@@ -1,10 +1,10 @@
 # Session 6: Graph-Based RAG Implementation
 
-## 🎯 Overview
+## Overview
 
 This directory contains the complete implementation of advanced Graph-based Retrieval Augmented Generation (GraphRAG) systems from Session 6. The implementation includes both traditional GraphRAG and the breakthrough **NodeRAG** architecture with heterogeneous node types and advanced reasoning capabilities.
 
-## 🏗️ Architecture Components
+## Architecture Components
 
 ### 1. NodeRAG - Heterogeneous Graph Architecture
 
@@ -84,7 +84,7 @@ Complete system integration:
 - **Performance Monitoring**: Comprehensive metrics and health tracking
 - **Scalable Architecture**: Production-ready with monitoring and recovery
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Basic Usage
 
@@ -160,7 +160,7 @@ entities = analysis['entities']
 relationships = analysis['relationships']
 ```
 
-## 📊 Performance Characteristics
+## Performance Characteristics
 
 ### NodeRAG Performance
 
@@ -188,7 +188,7 @@ relationships = analysis['relationships']
 - **Coverage Improvement**: 30-40% over pure vector/graph approaches
 - **Accuracy Gain**: 25-35% for multi-hop reasoning queries
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -233,7 +233,7 @@ config = GraphRAGConfig(
 )
 ```
 
-## 📈 Key Features
+## Key Features
 
 ### NodeRAG Innovations
 
@@ -256,7 +256,7 @@ config = GraphRAGConfig(
 - **Flexible Deployment**: Support for various infrastructure configurations
 - **Error Recovery**: Robust handling of failures and partial results
 
-## 🎯 Use Cases
+## Use Cases
 
 ### When to Use NodeRAG
 
@@ -279,7 +279,7 @@ config = GraphRAGConfig(
 - **Complex Domains**: Queries spanning multiple information types
 - **Best of Both Worlds**: Most real-world applications benefit from hybrid
 
-## 🧪 Demo and Testing
+## Demo and Testing
 
 Run the comprehensive demo:
 
@@ -296,7 +296,7 @@ The demo showcases:
 - Production system orchestration
 - Sample multi-hop reasoning queries
 
-## 📚 Dependencies
+## Dependencies
 
 Key requirements (see `requirements.txt`):
 - `spacy>=3.7.0` - NLP and entity recognition
@@ -306,7 +306,7 @@ Key requirements (see `requirements.txt`):
 - `scikit-learn>=1.3.0` - Similarity calculations
 - `numpy>=1.24.0` - Numerical computations
 
-## 🔍 Advanced Examples
+## Advanced Examples
 
 ### Complex Multi-Hop Query
 
@@ -356,7 +356,7 @@ noderag_config = {
 result = noderag_extractor.extract_noderag_graph(papers, noderag_config)
 ```
 
-## 🎉 Session 6 Achievement
+## Session 6 Achievement
 
 You've successfully implemented state-of-the-art GraphRAG systems that represent the cutting edge of intelligent information retrieval:
 

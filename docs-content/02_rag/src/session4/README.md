@@ -2,7 +2,7 @@
 
 This directory contains the implementation of advanced query enhancement techniques for RAG (Retrieval-Augmented Generation) systems, focusing on bridging the semantic gap between user queries and document content.
 
-## 🎯 Overview
+## Overview
 
 Session 4 builds upon the vector search optimization from Session 3 by adding intelligent query understanding and context optimization. The implementation includes:
 
@@ -30,7 +30,7 @@ session4/
 └── README.md                      # This documentation
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 
@@ -75,7 +75,7 @@ results = asyncio.run(enhance_query())
 python demo_query_enhancement.py
 ```
 
-## 🔧 Components
+## Components
 
 ### 1. Semantic Gap Analyzer (`semantic_gap_analyzer.py`)
 
@@ -213,7 +213,7 @@ Unified pipeline integrating all enhancement techniques.
 - Result deduplication and ranking
 - End-to-end query enhancement workflow
 
-## ⚙️ Configuration
+## Configuration
 
 The `config.py` file provides comprehensive configuration management:
 
@@ -267,7 +267,7 @@ enhanced_results = await enhancer._perform_enhanced_retrieval(
 )
 ```
 
-## 🧪 Testing and Validation
+## Testing and Validation
 
 ### Unit Tests
 
@@ -284,7 +284,7 @@ benchmark = QueryEnhancementBenchmark()
 results = benchmark.run_enhancement_comparison(test_queries)
 ```
 
-## 📊 Expected Performance Improvements
+## Expected Performance Improvements
 
 Based on the implementation, you can expect:
 

@@ -48,7 +48,7 @@ A2A excels in complex enterprise scenarios requiring agent collaboration:
 
 ### Learning Path Options
 
-**🎯 Observer Path (30 minutes)**: Understand A2A protocol concepts and enterprise patterns
+**Observer Path (30 minutes)**: Understand A2A protocol concepts and enterprise patterns
 - Focus: Quick insights into Agent Cards, task management, and distributed coordination
 - Best for: Getting oriented with enterprise multi-agent architectures
 
@@ -97,7 +97,9 @@ With 50+ technology partners including major enterprise platforms (Salesforce, S
 Implement the JSON-RPC 2.0 based A2A protocol following Google's specification:
 
 ```python
+
 # a2a/protocol.py - Google A2A Standard Implementation
+
 from typing import Dict, Any, List, Optional, Union, Literal
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
@@ -307,7 +309,9 @@ The agent registry serves as the central directory for agent discovery and capab
 First, let's establish the registry infrastructure with Redis for scalable, distributed storage:
 
 ```python
+
 # a2a/registry.py - Registry Foundation
+
 import asyncio
 import json
 from typing import Dict, List, Optional, Set
@@ -577,7 +581,7 @@ Automatic cleanup removes agents that have stopped sending heartbeats:
 
 **Key Concepts**: Cleanup operations maintain registry hygiene by removing dead agents. This should run periodically to prevent accumulation of stale entries.
 
-**💡 Complete Implementation**: For advanced registry features including clustering and metrics, see [`src/session7/registry.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/registry.py) in the course materials.
+**Complete Implementation**: For advanced registry features including clustering and metrics, see [`src/session7/registry.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/registry.py) in the course materials.
 
 ### Step 1.3: Message Router
 
@@ -588,7 +592,9 @@ The message router is the core component responsible for intelligent message rou
 First, let's establish the basic router infrastructure with dependency management:
 
 ```python
+
 # a2a/router.py - Router Foundation
+
 import asyncio
 import json
 from typing import Dict, List, Optional, Callable, Any
@@ -890,7 +896,7 @@ Incoming messages are processed through registered handlers, enabling agents to 
 
 **Key Concepts**: This method completes the communication cycle by processing incoming messages, dispatching them to appropriate handlers, and generating responses when required. The message type determines whether to process as a new request or as a response to an existing request.
 
-**💡 Complete Implementation**: For the complete router implementation, see [`src/session7/router.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/router.py) in the course materials.
+**Complete Implementation**: For the complete router implementation, see [`src/session7/router.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/router.py) in the course materials.
 
 ---
 
@@ -905,7 +911,9 @@ Orchestration provides centralized control over multi-agent workflows, enabling 
 First, let's define the core data structures that represent workflow steps and overall workflows:
 
 ```python
+
 # a2a/orchestrator.py - Foundation and Data Structures
+
 import asyncio
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
@@ -1224,7 +1232,7 @@ Helper methods handle data flow between workflow context and step inputs/outputs
 
 **Key Concepts**: Data mapping enables seamless data flow through the workflow by transforming between step-specific formats and the shared workflow context.
 
-**💡 Complete Implementation**: For complete orchestrator examples and advanced patterns, see [`src/session7/orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/orchestrator.py) in the course materials.
+**Complete Implementation**: For complete orchestrator examples and advanced patterns, see [`src/session7/orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/orchestrator.py) in the course materials.
 
 ### Step 2.2: Choreography Pattern
 
@@ -1235,7 +1243,9 @@ Choreography enables decentralized agent coordination through event-driven patte
 First, let's establish the foundation for event-driven coordination:
 
 ```python
+
 # a2a/choreography.py - Foundation
+
 import asyncio
 from typing import Dict, List, Any, Callable, Optional
 from dataclasses import dataclass
@@ -1454,7 +1464,9 @@ Event message handling processes choreography events received from other agents:
 Let's see a complete choreography pattern for travel planning coordination:
 
 ```python
+
 # Example choreography patterns
+
 def create_travel_planning_choreography() -> List[EventPattern]:
     """Create choreography patterns for travel planning scenario."""
     
@@ -1499,31 +1511,31 @@ def create_travel_planning_choreography() -> List[EventPattern]:
 
 **Key Concepts**: This example demonstrates a complete travel planning workflow where each event triggers the next step. Agents coordinate autonomously based on event-driven patterns, creating a flexible, decentralized process.
 
-**💡 Complete Implementation**: For advanced choreography patterns and complex event processing, see [`src/session7/choreography.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/choreography.py) in the course materials.
+**Complete Implementation**: For advanced choreography patterns and complex event processing, see [`src/session7/choreography.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/choreography.py) in the course materials.
 
 ---
 
-## 📝 Chapter Summary
+## Chapter Summary
 
 Congratulations! You've built a comprehensive A2A communication system with the following capabilities:
 
 ### Communication Infrastructure Implemented
 
-#### 🔗 **Protocol Layer**
+#### **Protocol Layer**
 
 - **Standardized messaging** with A2AMessage protocol
 - **Agent profiles** with capability descriptions  
 - **Message routing** with priority and timeout handling
 - **Service discovery** through centralized registry
 
-#### 🎭 **Coordination Patterns**
+#### **Coordination Patterns**
 
 - **Orchestration** for centralized workflow management
 - **Choreography** for event-driven agent coordination
 - **Multi-step workflows** with dependency management
 - **Fault tolerance** with retries and error handling
 
-#### 🌐 **Distributed Architecture**
+#### **Distributed Architecture**
 
 - **Agent registry** with heartbeat monitoring
 - **Message broadcasting** for group coordination
@@ -1532,7 +1544,7 @@ Congratulations! You've built a comprehensive A2A communication system with the 
 
 ---
 
-## 🧪 Testing Your Understanding
+## Testing Your Understanding
 
 ### Quick Check Questions
 
@@ -1593,7 +1605,7 @@ class CustomerServiceChoreography:
             self.engine.register_event_pattern(pattern)
 ```
 
-**💡 Hint:** Check the [`Session7_Agent_to_Agent_Communication-solution.md`](Session7_Agent_to_Agent_Communication-solution.md) file for complete implementations and advanced patterns.
+**Hint:** Check the [**🗂️ View Test Solutions →**](Session7_Test_Solutions.md) for complete implementations and advanced patterns.
 
 ---
 
@@ -1614,11 +1626,11 @@ In Session 8, we'll explore **Advanced Agent Workflows** including:
 
 ---
 
-## 📋 Test Your Knowledge
+## Test Your Knowledge
 
 Ready to test your understanding of Agent-to-Agent Communication? Take our comprehensive multiple-choice test to verify your mastery of the concepts.
 
-## 📝 Multiple Choice Test - Session 7
+## Multiple Choice Test - Session 7
 
 Test your understanding of Agent-to-Agent Communication:
 
