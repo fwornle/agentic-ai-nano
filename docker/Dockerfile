@@ -53,6 +53,7 @@ RUN apt-get update \
         htop \
         iproute2 \
         jq \
+        man-db \
         moreutils \
         net-tools \
         nvidia-utils-550 \
@@ -67,6 +68,10 @@ RUN apt-get update \
         vim \
         wget \
         zip
+
+# Enable man pages and update the database
+RUN yes | unminimize 2>/dev/null || true \
+    && mandb
 
 # Add user to sudoers with NOPASSWD
 RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${user} \
