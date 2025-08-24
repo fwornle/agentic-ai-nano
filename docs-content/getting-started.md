@@ -230,6 +230,7 @@ Consider building these throughout your learning:
 ## Certification
 
 Upon completion, you can:
+
 - **Document Progress**: Keep a portfolio of implementations
 - **Share Projects**: Publish code examples and write-ups
 - **Join Alumni**: Access to ongoing community and updates
