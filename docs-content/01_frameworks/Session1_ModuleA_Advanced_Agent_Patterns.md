@@ -29,13 +29,13 @@ By the end of this module, you will:
 
 The reflection pattern enables agents to iteratively improve their responses through self-critique and refinement:
 
-**Traditional Approach:**
+### Traditional Approach:
 
 ```text
 Question → Generate Answer → Return Answer
 ```
 
-**Reflection Approach:**
+### Reflection Approach:
 
 ```text
 Question → Initial Answer → Critique → Improve → Critique → Improve → Final Answer
@@ -99,7 +99,7 @@ The loop continues with improvement and tracking phases:
 
 ### Reflection Methods Implementation
 
-**Initial Response Generation:**
+### Initial Response Generation:
 
 ```python
 async def _initial_response(self, message: str, context: Dict = None) -> str:
@@ -115,7 +115,7 @@ async def _initial_response(self, message: str, context: Dict = None) -> str:
     return response
 ```
 
-**Self-Critique Implementation:**
+### Self-Critique Implementation:
 
 The reflection method analyzes the agent's own response using structured evaluation criteria. This systematic approach ensures consistent, high-quality feedback:
 
@@ -144,7 +144,7 @@ async def _reflect_on_response(self, original_message: str, response: str) -> st
 
 The "SATISFACTORY" keyword provides a clear stopping condition, preventing endless improvement cycles when the response is already good enough.
 
-**Response Improvement:**
+### Response Improvement:
 
 The improvement process takes the critique and generates an enhanced response that specifically addresses the identified issues:
 
@@ -568,7 +568,7 @@ You've now mastered advanced agent patterns including:
 
 ## 🧭 Navigation & Quick Start
 
-**Related Modules:**
+### Related Modules:
 
 - **Core Session:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
 - **Module B:** [Performance Optimization](Session1_ModuleB_Performance_Optimization.md)

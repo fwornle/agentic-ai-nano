@@ -27,7 +27,7 @@ By the end of this module, you will:
 
 Modern enterprise workflows require robust state persistence that can handle failures, scaling, and complex recovery scenarios:
 
-**Enterprise Infrastructure Setup**
+### Enterprise Infrastructure Setup
 
 We begin by importing the components needed for production-grade state management across different backend systems:
 
@@ -44,7 +44,7 @@ import logging
 
 These imports provide access to multiple persistence backends, enabling deployment flexibility from development (memory) through staging (Redis) to production (PostgreSQL) environments.
 
-**Enterprise State Schema Foundation**
+### Enterprise State Schema Foundation
 
 The enterprise state schema extends basic workflow tracking with comprehensive monitoring and recovery capabilities. Let's start with the core workflow elements:
 
@@ -61,7 +61,7 @@ class EnterpriseAgentState(TypedDict):
 
 The core workflow data maintains essential processing state including message sequences with automatic aggregation, current task tracking, accumulated results, and iteration counting for loop detection.
 
-**Production Workflow Tracking**
+### Production Workflow Tracking
 
 Next, we add production-specific identifiers and versioning for enterprise deployments:
 
@@ -75,7 +75,7 @@ Next, we add production-specific identifiers and versioning for enterprise deplo
 
 Production features enable workflow identification, temporal tracking, and version control. These elements support audit trails, performance analysis, and debugging in enterprise environments.
 
-**Orchestrator-Worker Pattern Support**
+### Orchestrator-Worker Pattern Support
 
 We include specialized fields for managing distributed worker architectures:
 
@@ -88,7 +88,7 @@ We include specialized fields for managing distributed worker architectures:
 
 Worker pattern support tracks active worker instances, collects results from distributed processing, and maintains command history for coordination analysis and replay capabilities.
 
-**Monitoring and Enterprise Management**
+### Monitoring and Enterprise Management
 
 Finally, we add comprehensive monitoring and enterprise state management capabilities:
 
@@ -104,7 +104,7 @@ Finally, we add comprehensive monitoring and enterprise state management capabil
     state_integrity_hash: str
 ```
 
-**Enterprise State Manager Architecture**
+### Enterprise State Manager Architecture
 
 The `EnterpriseStateManager` provides production-ready state persistence with environment-specific backends and comprehensive monitoring:
 
@@ -120,7 +120,7 @@ class EnterpriseStateManager:
 
 The manager initialization establishes environment context and configures appropriate persistence strategies. Environment-specific configuration ensures optimal performance characteristics for each deployment stage.
 
-**Multi-Environment Persistence Configuration**
+### Multi-Environment Persistence Configuration
 
 Persistence configuration adapts to different deployment environments with appropriate backend technologies:
 
@@ -143,7 +143,7 @@ Persistence configuration adapts to different deployment environments with appro
 
 Production environments use PostgreSQL clusters with primary and backup configurations. This ensures data durability, ACID compliance, and disaster recovery capabilities essential for enterprise deployments.
 
-**Staging and Development Backends**
+### Staging and Development Backends
 
 Different environments use optimized backends suited to their specific requirements:
 
@@ -167,7 +167,7 @@ Different environments use optimized backends suited to their specific requireme
             }
 ```
     
-**Production Workflow Construction**
+### Production Workflow Construction
 
 The production workflow integrates comprehensive state management with monitoring and recovery capabilities:
 
@@ -194,7 +194,7 @@ The production workflow integrates comprehensive state management with monitorin
         )
 ```
     
-**Enterprise State Initialization**
+### Enterprise State Initialization
 
 State initialization establishes comprehensive tracking infrastructure for enterprise workflows:
 
@@ -207,7 +207,7 @@ State initialization establishes comprehensive tracking infrastructure for enter
 
 Workflow ID generation creates unique identifiers combining timestamp and task hash. This enables workflow tracking, correlation with external systems, and debugging across distributed environments.
 
-**Comprehensive Metadata Creation**
+### Comprehensive Metadata Creation
 
 We establish core tracking metadata and worker management infrastructure:
 
@@ -225,7 +225,7 @@ We establish core tracking metadata and worker management infrastructure:
 
 Core metadata establishes workflow identity, temporal tracking, and version control. Worker management fields prepare for distributed processing coordination.
 
-**Performance Monitoring Infrastructure**
+### Performance Monitoring Infrastructure
 
 Next, we initialize comprehensive performance and execution tracking:
 
@@ -246,7 +246,7 @@ Next, we initialize comprehensive performance and execution tracking:
 
 Execution metrics track processing performance including timing, state changes, and error rates. Performance data captures resource utilization for optimization and capacity planning.
 
-**Checkpoint and Recovery Infrastructure**
+### Checkpoint and Recovery Infrastructure
 
 Finally, we establish enterprise-grade checkpoint and recovery capabilities:
 
@@ -279,7 +279,7 @@ Finally, we establish enterprise-grade checkpoint and recovery capabilities:
         task_complexity = self._analyze_task_complexity(current_task, state)
 ```
 
-**Task Complexity Analysis and Worker Allocation**
+### Task Complexity Analysis and Worker Allocation
 
 Based on the complexity analysis, the orchestrator determines which specialized workers are needed for the current task:
 
@@ -302,7 +302,7 @@ Based on the complexity analysis, the orchestrator determines which specialized 
 
 Worker allocation follows domain-specific requirements. Research workers handle information gathering while analysis workers process and synthesize findings. The allocation strategy adapts to task complexity.
 
-**Command Logging and State Update**
+### Command Logging and State Update
 
 Finally, we log the orchestration decision and update the workflow state with tracking information:
 
@@ -376,7 +376,7 @@ Finally, we log the orchestration decision and update the workflow state with tr
 
 State integrity validation ensures data consistency while performance monitoring tracks execution efficiency and resource utilization for health assessment.
 
-**Comprehensive Health Assessment**
+### Comprehensive Health Assessment
 
 The health assessment evaluates multiple dimensions of workflow state:
 
@@ -394,7 +394,7 @@ The health assessment evaluates multiple dimensions of workflow state:
 
 Health status assessment combines integrity validation, performance tracking, and error monitoring to provide comprehensive workflow health visibility.
 
-**Automatic Recovery Actions**
+### Automatic Recovery Actions
 
 Based on health assessment, the system determines appropriate recovery actions:
 
@@ -413,7 +413,7 @@ Based on health assessment, the system determines appropriate recovery actions:
 
 Recovery actions are triggered automatically based on configurable thresholds. Circuit breakers prevent cascade failures, state recovery restores integrity, and checkpoints preserve progress.
 
-**State Integration and Return**
+### State Integration and Return
 
 Finally, we integrate health monitoring data into the workflow state:
 
@@ -519,7 +519,7 @@ Recovery metadata supports checkpoint management decisions. Health status indica
 
 Enterprise workflows require intelligent routing that considers multiple factors beyond simple conditions.
 
-**Routing Infrastructure Setup**
+### Routing Infrastructure Setup
 
 We start by establishing the foundational components for multi-factor routing decisions:
 
@@ -541,7 +541,7 @@ class RoutingDecision(Enum):
 
 Routing decision enumeration defines the possible workflow paths. Each option represents a different strategy for handling workflow execution based on current conditions and constraints.
 
-**Routing Context Data Structure**
+### Routing Context Data Structure
 
 The routing context captures all factors that influence routing decisions:
 
@@ -560,7 +560,7 @@ class RoutingContext:
 
 Context information provides comprehensive decision-making data including quality metrics, performance indicators, error tracking, resource usage, business constraints, and deadline pressure.
 
-**Enterprise Routing Engine Foundation**
+### Enterprise Routing Engine Foundation
 
 The routing engine maintains decision history and performance thresholds for intelligent routing:
 
@@ -578,7 +578,7 @@ class EnterpriseRoutingEngine:
         self.logger = logging.getLogger(__name__)
 ```
     
-**Advanced Multi-Factor Decision Process**
+### Advanced Multi-Factor Decision Process
 
 The core routing decision process integrates multiple analysis stages to determine optimal workflow paths:
 
@@ -604,7 +604,7 @@ The core routing decision process integrates multiple analysis stages to determi
         return optimal_decision.value
 ```
     
-**Routing Context Extraction**
+### Routing Context Extraction
 
 Context extraction analyzes workflow state to gather all factors influencing routing decisions:
 
@@ -619,7 +619,7 @@ Context extraction analyzes workflow state to gather all factors influencing rou
 
 Quality assessment analyzes the current analysis results to determine output quality. This score influences whether high-quality or standard processing paths are appropriate.
 
-**Performance and Error Analysis**
+### Performance and Error Analysis
 
 We extract performance indicators and calculate error rates for decision making:
 
@@ -636,7 +636,7 @@ We extract performance indicators and calculate error rates for decision making:
 
 Performance metrics track execution efficiency while error rate calculation provides reliability indicators. These metrics determine whether circuit breaker or retry strategies are appropriate.
 
-**Resource and Business Context Analysis**
+### Resource and Business Context Analysis
 
 Finally, we gather resource utilization and business constraint information:
 
@@ -661,7 +661,7 @@ Finally, we gather resource utilization and business constraint information:
         )
 ```
 
-**Decision Score Calculation**
+### Decision Score Calculation
 
 Weighted scoring evaluates each routing option across multiple performance dimensions:
 
@@ -863,7 +863,7 @@ High quality path validation ensures strict threshold compliance. Quality ≥0.9
 
 Each node specializes in a specific aspect of contextual processing: analysis, adaptation, updating, monitoring, and decision-making. This separation enables precise control over context evolution.
 
-**Dynamic Context-Based Routing**
+### Dynamic Context-Based Routing
 
 The routing system adapts workflow paths based on changing contextual understanding:
 
@@ -884,7 +884,7 @@ The routing system adapts workflow paths based on changing contextual understand
 
 Conditional routing enables dynamic path selection based on contextual analysis. Deep analysis, context shifts, monitoring, and decision points each trigger appropriate specialized processing.
 
-**Continuous Feedback Loops**
+### Continuous Feedback Loops
 
 The workflow establishes feedback loops to maintain contextual awareness throughout execution:
 

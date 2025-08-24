@@ -57,7 +57,7 @@ from agno.monitoring import PrometheusExporter
 from agno.tools import DuckDuckGo, FileTools
 ```
 
-**Key Mindset Shift:**
+### Key Mindset Shift:
 | Development Focus | Production Focus |
 |-------------------|------------------|  
 | Speed of iteration | Reliability & stability |
@@ -70,7 +70,7 @@ from agno.tools import DuckDuckGo, FileTools
 Agno's production-ready architecture:
 
 ![Agno Agent Architecture](images/agno-agent.png)
-*This diagram showcases Agno's production-first architecture, highlighting built-in monitoring, persistent storage, and reliability features. The architecture emphasizes operational excellence with integrated telemetry, structured logging, and automated recovery mechanisms.*
+### This diagram showcases Agno's production-first architecture, highlighting built-in monitoring, persistent storage, and reliability features. The architecture emphasizes operational excellence with integrated telemetry, structured logging, and automated recovery mechanisms.
 
 This basic Agno agent setup demonstrates how production features like persistent storage and monitoring are built into the framework from the ground up:
 
@@ -100,7 +100,7 @@ production_agent = Agent(
 )
 ```
 
-**Agno's Production Advantages:**
+### Agno's Production Advantages:
 1. **Built-in Storage**: PostgreSQL integration out of the box
 2. **Monitoring Ready**: Prometheus metrics included
 3. **Multi-Provider**: 23+ LLM providers supported
@@ -156,7 +156,7 @@ def create_enterprise_agent():
 Built-in monitoring for production systems:
 
 ![Agno Telemetry & Debugging](images/agno-telemetry-debugging.png)
-*This visualization demonstrates Agno's comprehensive telemetry and debugging capabilities, showing real-time metrics collection, distributed tracing, error tracking, and performance monitoring dashboards that enable effective production operations and troubleshooting.*
+### This visualization demonstrates Agno's comprehensive telemetry and debugging capabilities, showing real-time metrics collection, distributed tracing, error tracking, and performance monitoring dashboards that enable effective production operations and troubleshooting.
 
 Setting up comprehensive monitoring involves configuring structured logging, Prometheus metrics, and agent-level monitoring. This configuration ensures you can track performance, errors, and usage patterns in production:
 
@@ -702,7 +702,7 @@ health = await service.check_health()
 
 ### Cross-Session Integration
 
-**Connections to Other Sessions:**
+### Connections to Other Sessions:
 - **Session 6**: Build on atomic agents for production
 - **Session 9**: Multi-agent patterns in production
 - **Session 10**: Enterprise integration patterns
@@ -744,7 +744,7 @@ Test your understanding of Agno production-ready agent systems.
 
 ### Question 1
 
-**What is Agno's primary advantage over other agent frameworks?**
+### What is Agno's primary advantage over other agent frameworks?
 
 A) Simplest learning curve  
 B) Performance optimization and production focus  
@@ -753,7 +753,7 @@ D) Largest community
 
 ### Question 2
 
-**How does Agno achieve better performance than traditional frameworks?**
+### How does Agno achieve better performance than traditional frameworks?
 
 A) Better algorithms  
 B) Optimized memory usage and faster agent instantiation  
@@ -762,7 +762,7 @@ D) Cloud-only deployment
 
 ### Question 3
 
-**What is the purpose of circuit breaker patterns in production agents?**
+### What is the purpose of circuit breaker patterns in production agents?
 
 A) Improve performance  
 B) Prevent cascading failures in distributed systems  
@@ -771,7 +771,7 @@ D) Simplify deployment
 
 ### Question 4
 
-**How should you handle API rate limits in production agent systems?**
+### How should you handle API rate limits in production agent systems?
 
 A) Ignore them  
 B) Exponential backoff and jitter strategies  
@@ -780,7 +780,7 @@ D) Multiple API keys
 
 ### Question 5
 
-**What makes a health check endpoint effective?**
+### What makes a health check endpoint effective?
 
 A) Fast response time only  
 B) Comprehensive dependency and resource checks  
@@ -789,7 +789,7 @@ D) Authentication requirements
 
 ### Question 6
 
-**Which monitoring approach is most suitable for production agents?**
+### Which monitoring approach is most suitable for production agents?
 
 A) Log files only  
 B) Comprehensive metrics with alerting and observability  
@@ -798,7 +798,7 @@ D) Error counts only
 
 ### Question 7
 
-**How should production agent configurations be managed?**
+### How should production agent configurations be managed?
 
 A) Hard-coded values  
 B) Environment variables and external config management  
@@ -807,7 +807,7 @@ D) Code comments
 
 ### Question 8
 
-**What is the most important aspect of production error handling?**
+### What is the most important aspect of production error handling?
 
 A) Hiding errors from users  
 B) Graceful degradation with meaningful error responses  
@@ -816,7 +816,7 @@ D) Detailed error messages to all users
 
 ### Question 9
 
-**How should you approach scaling production agent systems?**
+### How should you approach scaling production agent systems?
 
 A) Vertical scaling only  
 B) Horizontal scaling with load balancing and auto-scaling  
@@ -825,7 +825,7 @@ D) Single instance deployment
 
 ### Question 10
 
-**What security measures are essential for production agents?**
+### What security measures are essential for production agents?
 
 A) Password protection only  
 B) Authentication, authorization, encryption, and audit logging  
@@ -838,7 +838,7 @@ D) No security needed
 
 **Previous:** [Session 7 - First ADK Agent](Session7_First_ADK_Agent.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced Monitoring & Observability](Session8_ModuleA_Advanced_Monitoring_Observability.md)** - Production monitoring
 - 🏭 **[Module B: Enterprise Scaling Architecture](Session8_ModuleB_Enterprise_Scaling_Architecture.md)** - Scaling patterns

@@ -44,7 +44,7 @@ A2A excels in complex enterprise scenarios requiring agent collaboration:
 - **Compliance and Auditing**: Standardized communication patterns that support regulatory requirements
 
 ![A2A Communication Architecture](images/a2a-communication-architecture.png)
-*Figure 1: A2A enterprise architecture showing Agent Cards for discovery, JSON-RPC 2.0 communication, distributed task management, and cross-platform coordination enabling scalable multi-agent collaboration*
+### Figure 1: A2A enterprise architecture showing Agent Cards for discovery, JSON-RPC 2.0 communication, distributed task management, and cross-platform coordination enabling scalable multi-agent collaboration
 
 ### Learning Path Options
 
@@ -68,7 +68,7 @@ A2A excels in complex enterprise scenarios requiring agent collaboration:
 
 As organizations deploy multiple AI agents across different platforms and departments, they face the fundamental challenge of enabling secure, standardized communication between heterogeneous agent systems. A2A solves this through formal protocol standardization.
 
-**Enterprise Requirements Addressed:**
+### Enterprise Requirements Addressed:
 1. **Cross-Platform Discovery**: Finding and registering agents across different cloud environments
 2. **Standardized Communication**: JSON-RPC 2.0 based message exchange with enterprise security
 3. **Task Coordination**: Formal lifecycle management for complex multi-agent workflows
@@ -77,22 +77,22 @@ As organizations deploy multiple AI agents across different platforms and depart
 
 ### **OBSERVER PATH**: A2A Protocol Standards
 
-**Google's A2A Foundation (2024-2025):**
+### Google's A2A Foundation (2024-2025):
 The Agent2Agent protocol emerged as the first open standard specifically for AI agent collaboration, addressing the collaboration challenges when agents are developed by different organizations.
 
-**Core Protocol Components:**
+### Core Protocol Components:
 1. **Agent Cards**: JSON documents advertising agent capabilities, endpoints, and requirements
 2. **Task Management**: Formal task lifecycle with states (pending, working, completed, failed)
 3. **Message Exchange**: JSON-RPC 2.0 over HTTP(S) with streaming support via Server-Sent Events
 4. **Authentication**: Enterprise-grade security with OpenAPI authentication scheme parity
 5. **Distributed Coordination**: Cross-platform task coordination with unique tracking identifiers
 
-**Industry Consortium Support:**
+### Industry Consortium Support:
 With 50+ technology partners including major enterprise platforms (Salesforce, SAP, ServiceNow) and consulting firms (McKinsey, PwC, Deloitte), A2A provides production-ready enterprise adoption.
 
 ### **PARTICIPANT PATH**: Implementing A2A JSON-RPC Protocol
 
-**Step 1: Standard A2A Message Structure**
+### Step 1: Standard A2A Message Structure
 
 Implement the JSON-RPC 2.0 based A2A protocol following Google's specification:
 
@@ -164,13 +164,13 @@ class A2ATask:
             self.artifacts = []
 ```
 
-**A2A Standard Benefits:**
+### A2A Standard Benefits:
 - **Task Tracking**: Unique identifiers enable distributed task coordination
 - **Lifecycle Management**: Formal states provide clear workflow progression
 - **Artifact Support**: Structured storage for task outputs and intermediate results
 - **Enterprise Integration**: Compatible with existing enterprise task management systems
 
-**Step 2: Agent Card Implementation**
+### Step 2: Agent Card Implementation
 
 Implement standardized Agent Cards for discovery:
 

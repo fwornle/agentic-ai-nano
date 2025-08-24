@@ -68,13 +68,13 @@ By the end of this session, you will be able to:
 
 In Session 3, you mastered vector databases and hybrid search optimization - now we tackle the next critical challenge: the query-document semantic gap. Even the most sophisticated vector search fails when user queries don't linguistically match document content. This session transforms your optimized retrieval system into an intelligent query interpreter that understands intent and bridges semantic mismatches.
 
-**The Query Enhancement Challenge:**
+### The Query Enhancement Challenge:
 - **Semantic Mismatch**: User questions vs. document language styles create embedding distance
 - **Vector Search Limitations**: Perfect similarity doesn't guarantee relevant context
 - **Incomplete Queries**: Users provide minimal context, defeating your optimized indices
 - **Domain-Specific Language**: Technical documents use terms users don't know to query
 
-**Advanced Solutions Building on Your Vector Expertise:**
+### Advanced Solutions Building on Your Vector Expertise:
 - **HyDE Integration**: Generate hypothetical documents that match your vector space
 - **Query Decomposition**: Break complex questions into your optimized retrieval patterns
 - **Multi-Query Generation**: Leverage multiple search perspectives across your hybrid system
@@ -148,11 +148,11 @@ class SemanticGapAnalyzer:
 
 ### **HyDE Implementation: Building on Vector Search Excellence**
 
-**Why HyDE Enhances Your Optimized Vector System**
+### Why HyDE Enhances Your Optimized Vector System
 
 Remember from Session 3 how vector similarity search relies on embedding space proximity? HyDE exploits this by generating documents that exist in the same semantic space as your indexed content, creating better query-document matching within your optimized vector infrastructure.
 
-**The HyDE Process:**
+### The HyDE Process:
 1. **Query Analysis**: Understand the semantic intent of the user question
 2. **Hypothetical Generation**: Create documents that would naturally contain the answer
 3. **Vector Integration**: Embed these hypothetical documents using your embedding models
@@ -160,7 +160,7 @@ Remember from Session 3 how vector similarity search relies on embedding space p
 
 HyDE transforms semantic gaps into vector space advantages:
 
-**Step 1: Initialize the HyDE Query Enhancer**
+### Step 1: Initialize the HyDE Query Enhancer
 
 **Understanding HyDE (Hypothetical Document Embeddings)**: HyDE solves a fundamental RAG problem - the semantic gap between how users ask questions and how information is stored in documents. Instead of searching with the query directly, HyDE generates hypothetical answers and searches with those.
 
@@ -190,7 +190,7 @@ class HyDEQueryEnhancer:
 
 **Temperature Parameter**: The 0.7 temperature balances creativity and accuracy in hypothetical document generation, ensuring diverse but relevant hypothetical answers.
 
-**Step 2: Configure Query Type Templates**
+### Step 2: Configure Query Type Templates
 
 Next, set up templates for different types of queries:
 
@@ -204,7 +204,7 @@ Next, set up templates for different types of queries:
         }
 ```
 
-**Step 3: Core Enhancement Method**
+### Step 3: Core Enhancement Method
 
 Now implement the main query enhancement workflow:
 
@@ -230,7 +230,7 @@ Now implement the main query enhancement workflow:
         )
 ```
 
-**Step 4: Create Enhanced Embeddings**
+### Step 4: Create Enhanced Embeddings
 
 Finally, combine the generated hypothetical documents into enhanced embeddings:
 
@@ -258,7 +258,7 @@ Finally, combine the generated hypothetical documents into enhanced embeddings:
         }
 ```
 
-**Educational Context: Understanding HyDE's Impact**
+### Educational Context: Understanding HyDE's Impact
 
 This implementation demonstrates query enhancement working in harmony with your vector infrastructure from Session 3. Notice how:
 - **Enhanced embeddings** leverage your optimized embedding models
@@ -267,7 +267,7 @@ This implementation demonstrates query enhancement working in harmony with your 
 
 The result bridges the semantic gap between user intent and document content, dramatically improving retrieval success in your hybrid search systems.
 
-**Step 1: Query Type Classification - Tailoring HyDE to Query Nature**
+### Step 1: Query Type Classification - Tailoring HyDE to Query Nature
 
 ```python
     def _classify_query_type(self, query: str) -> str:
@@ -300,7 +300,7 @@ The result bridges the semantic gap between user intent and document content, dr
         return 'factual'
 ```
 
-**Step 2A: Factual Query Template**
+### Step 2A: Factual Query Template
 
 Create templates that generate different document types. Start with factual queries:
 
@@ -321,7 +321,7 @@ Create templates that generate different document types. Start with factual quer
         """
 ```
 
-**Step 2B: Procedural Query Template**
+### Step 2B: Procedural Query Template
 
 Handle step-by-step and how-to queries:
 
@@ -342,7 +342,7 @@ Handle step-by-step and how-to queries:
         """
 ```
 
-**Step 2C: Analytical Query Template**
+### Step 2C: Analytical Query Template
 
 Support analytical and comparative queries:
 
@@ -363,7 +363,7 @@ Support analytical and comparative queries:
         """
 ```
 
-**Step 3A: Document Generation Setup**
+### Step 3A: Document Generation Setup
 
 Generate multiple hypothetical documents with variations for better coverage:
 
@@ -386,7 +386,7 @@ Generate multiple hypothetical documents with variations for better coverage:
             varied_temperature = min(varied_temperature, 1.0)
 ```
 
-**Step 3B: Document Generation Loop**
+### Step 3B: Document Generation Loop
 
 Generate each hypothetical document with error handling:
 
@@ -424,7 +424,7 @@ Generate each hypothetical document with error handling:
                 continue
 ```
 
-**Step 3C: Quality Ranking**
+### Step 3C: Quality Ranking
 
 Sort generated documents by quality for best results:
 
@@ -435,7 +435,7 @@ Sort generated documents by quality for best results:
         return hypothetical_docs
 ```
 
-**Step 4A: Create Base Embeddings**
+### Step 4A: Create Base Embeddings
 
 Convert query and hypothetical documents into embedding vectors:
 
@@ -452,7 +452,7 @@ Convert query and hypothetical documents into embedding vectors:
         hyde_embeddings = self.embedding_model.encode(hyde_texts)
 ```
 
-**Step 4B: Weight and Combine Embeddings**
+### Step 4B: Weight and Combine Embeddings
 
 Create quality-weighted combination of hypothetical documents:
 
@@ -476,7 +476,7 @@ Create quality-weighted combination of hypothetical documents:
         combined_embedding = combined_embedding / np.linalg.norm(combined_embedding)
 ```
 
-**Step 4C: Return Comprehensive Results**
+### Step 4C: Return Comprehensive Results
 
 Provide all embedding variations for analysis and debugging:
 
@@ -490,7 +490,7 @@ Provide all embedding variations for analysis and debugging:
         }
 ```
 
-**Step 4D: Quality-Based Weighting**
+### Step 4D: Quality-Based Weighting
 
 Calculate document importance based on quality scores:
 
@@ -515,7 +515,7 @@ Calculate document importance based on quality scores:
 
 Building on HyDE's hypothetical document generation, query expansion tackles the problem from a different angle - instead of creating new content, it enriches the original query with related terms and concepts that increase the likelihood of matching relevant documents in your vector database.
 
-**The Expansion Strategy:**
+### The Expansion Strategy:
 - **HyDE (Part 1)**: Generate hypothetical documents → embed → search
 - **Query Expansion (Part 2)**: Enrich original query → search with expanded terms
 - **Combined Power**: Use both approaches for maximum retrieval success
@@ -621,7 +621,7 @@ Create the final expanded query with comprehensive results:
         }
 ```
 
-**Step 5: Semantic Expansion Using LLM**
+### Step 5: Semantic Expansion Using LLM
 
 ```python
     def _semantic_expansion(self, query: str, max_expansions: int) -> List[str]:
@@ -663,7 +663,7 @@ Create the final expanded query with comprehensive results:
             return []
 ```
 
-**Step 6: Contextual Query Reformulation**
+### Step 6: Contextual Query Reformulation
 
 ```python
     def _contextual_expansion(self, query: str, max_expansions: int) -> List[str]:
@@ -797,7 +797,7 @@ Package all generated query variants with metadata:
         }
 ```
 
-**Step 7: Complex Query Decomposition**
+### Step 7: Complex Query Decomposition
 
 ```python
     def _decompose_complex_query(self, query: str, num_queries: int) -> List[str]:
@@ -846,7 +846,7 @@ Package all generated query variants with metadata:
             return []
 ```
 
-**Step 8: Specificity Level Variants**
+### Step 8: Specificity Level Variants
 
 ```python
     def _generate_specificity_variants(self, query: str, num_queries: int) -> List[str]:
@@ -947,7 +947,7 @@ class ContextWindowOptimizer:
         }
 ```
 
-**Step 9: Relevance-Based Context Selection**
+### Step 9: Relevance-Based Context Selection
 
 ```python
     def _relevance_based_selection(self, query: str, chunks: List[Dict],
@@ -1015,7 +1015,7 @@ class ContextWindowOptimizer:
         }
 ```
 
-**Step 10: Hierarchical Context Summarization**
+### Step 10: Hierarchical Context Summarization
 
 ```python
     def _hierarchical_summarization(self, query: str, chunks: List[Dict],
@@ -1185,7 +1185,7 @@ class RAGPromptEngineer:
         }
 ```
 
-**Step 11: Factual QA Template with Source Attribution**
+### Step 11: Factual QA Template with Source Attribution
 
 ```python
     def _factual_qa_template(self, query: str, context: str) -> str:
@@ -1223,7 +1223,7 @@ ANSWER STRUCTURE:
 ANSWER:"""
 ```
 
-**Step 12: Chain-of-Thought Enhancement**
+### Step 12: Chain-of-Thought Enhancement
 
 ```python
     def _add_chain_of_thought(self, base_prompt: str, query: str,
@@ -1276,7 +1276,7 @@ FINAL ANSWER:
         }
 ```
 
-**Step 13: Confidence Calibration**
+### Step 13: Confidence Calibration
 
 Confidence calibration helps RAG systems provide transparent reliability assessments:
 
@@ -1414,7 +1414,7 @@ class DynamicPromptAdapter:
         }
 ```
 
-**Step 14: Context Quality Assessment**
+### Step 14: Context Quality Assessment
 
 Context quality analysis involves multiple dimensions to determine optimal prompt strategies:
 
@@ -1710,7 +1710,7 @@ D) Keyword-heavy prompts
 
 ## Session 4 Mastery Summary
 
-**What You've Accomplished:**
+### What You've Accomplished:
 You've transformed your RAG system from simple similarity search to intelligent query understanding by mastering:
 
 ✅ **HyDE Implementation**: Bridging semantic gaps through hypothetical document generation
@@ -1719,7 +1719,7 @@ You've transformed your RAG system from simple similarity search to intelligent 
 ✅ **Context Optimization**: Intelligent window sizing and prompt engineering for better generation
 ✅ **Integration Mastery**: Combining query enhancement with your Session 3 vector optimization
 
-**Your RAG Evolution Journey So Far:**
+### Your RAG Evolution Journey So Far:
 - **Session 2**: Smart document preprocessing and hierarchical chunking
 - **Session 3**: High-performance vector databases and hybrid search optimization
 - **Session 4**: Intelligent query understanding and semantic gap bridging ✅
@@ -1731,7 +1731,7 @@ You've transformed your RAG system from simple similarity search to intelligent 
 
 You've built sophisticated query intelligence - HyDE, expansion, decomposition, and context optimization. But without proper evaluation, you can't know if these techniques truly enhance user experience or just add complexity.
 
-**Session 5 Will Answer:**
+### Session 5 Will Answer:
 - **Which enhancements** provide measurable quality improvements?
 - **How to quantify** the impact of HyDE vs. query expansion vs. context optimization?
 - **What metrics** reveal true RAG performance beyond simple accuracy?
@@ -1754,7 +1754,7 @@ Ready to prove your enhancements deliver real value? Let's master RAG evaluation
 
 **Previous:** [Session 3 - Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Deep dive into query analysis and understanding systems
 

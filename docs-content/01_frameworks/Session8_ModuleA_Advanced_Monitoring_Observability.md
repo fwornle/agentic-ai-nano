@@ -145,7 +145,7 @@ RUN apt-get update && apt-get install -y \\
     && rm -rf /var/lib/apt/lists/*
 ```
 
-**Why these packages**:
+### Why these packages
 
 - `curl`: For health checks and debugging
 - `procps`: For process monitoring tools like `ps` and `top`
@@ -315,7 +315,7 @@ Let's implement comprehensive health checking for high availability:
                                 },
 ```
 
-**Health check strategy**:
+### Health check strategy
 
 - **Liveness**: "Is the app alive?" - restarts if failing
 - **Readiness**: "Can it handle traffic?" - removes from load balancer if failing

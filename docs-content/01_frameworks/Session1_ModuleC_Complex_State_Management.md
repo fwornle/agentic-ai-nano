@@ -833,7 +833,7 @@ You've now mastered complex state management for bare metal agents:
 
 ## 🧭 Navigation
 
-**Related Modules:**
+### Related Modules:
 
 - **Core Session:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
 - **Module A:** [Advanced Patterns](Session1_ModuleA_Advanced_Patterns.md)

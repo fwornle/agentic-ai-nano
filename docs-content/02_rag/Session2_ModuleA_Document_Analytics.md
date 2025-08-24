@@ -19,13 +19,13 @@ After completing this module, you will master:
 
 Based on current industry trends, advanced document analytics has become critical for enterprise RAG systems. Major platforms like IBM watsonx.ai and Databricks now provide sophisticated preprocessing capabilities that go far beyond simple text splitting.
 
-**Key Industry Applications:**
+### Key Industry Applications:
 - **Legal Tech**: Automated contract analysis with clause extraction and risk assessment
 - **Healthcare**: Medical record processing with dosage validation and treatment correlation
 - **Financial Services**: Regulatory document analysis with compliance scoring
 - **Research & Development**: Academic paper processing with citation network analysis
 
-**Enterprise Performance Metrics:**
+### Enterprise Performance Metrics:
 - Document complexity scoring achieves 85-90% accuracy in processing strategy selection
 - Quality assessment frameworks reduce manual review time by 60-70%
 - Domain-specific processing improves retrieval accuracy by 40-50%
@@ -636,7 +636,7 @@ D) Processing time and resource utilization
 
 **Previous:** [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
 
-**Related Modules:**
+### Related Modules:
 
 - **[Core Session: Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)** - Foundation chunking concepts
 - **[Session 1 Module A: Production Patterns](Session1_ModuleA_Production_Patterns.md)** - Production patterns reference

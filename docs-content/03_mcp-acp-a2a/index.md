@@ -42,13 +42,13 @@ Choose your path based on your learning goals and time availability:
 
 ## Prerequisites
 
-**Required Knowledge:**
+### Required Knowledge:
 - Completed Modules 1 (Agent Frameworks) and 2 (RAG Architecture)
 - Intermediate Python programming
 - Understanding of HTTP/REST APIs
 - Familiarity with JSON-RPC protocols
 
-**Recommended Setup:**
+### Recommended Setup:
 - Python 3.11+
 - Node.js 18+ (for TypeScript development)
 - Docker (for production deployment)

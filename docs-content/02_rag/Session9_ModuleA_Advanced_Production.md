@@ -53,7 +53,7 @@ python -c "from incremental_indexing import IncrementalIndexing; IncrementalInde
 
 Deploy RAG systems across multiple Kubernetes clusters for high availability and geographic distribution:
 
-**Step 1: Initialize Multi-Cluster Orchestrator**
+### Step 1: Initialize Multi-Cluster Orchestrator
 
 ```python
 class MultiClusterRAGOrchestrator:
@@ -79,9 +79,9 @@ The orchestrator initializes by setting up individual cluster managers for each 
         self.data_replicator = CrossClusterDataReplicator()
 ```
 
-*Multi-cluster architecture provides disaster recovery, geographic distribution for latency optimization, and massive scaling capabilities.*
+### Multi-cluster architecture provides disaster recovery, geographic distribution for latency optimization, and massive scaling capabilities.
 
-**Step 2: Cross-Cluster Service Discovery**
+### Step 2: Cross-Cluster Service Discovery
 
 ```python
     async def deploy_cross_cluster_services(self) -> Dict[str, Any]:
@@ -149,13 +149,13 @@ Each deployment is tracked individually, allowing partial success scenarios wher
         }
 ```
 
-*Cross-cluster deployment enables true enterprise-scale RAG systems with geographic distribution and automatic failover.*
+### Cross-cluster deployment enables true enterprise-scale RAG systems with geographic distribution and automatic failover.
 
 #### **Advanced Auto-Scaling with Machine Learning**
 
 Implement predictive scaling using machine learning to anticipate load patterns:
 
-**Step 1: ML-Based Scaling Predictor**
+### Step 1: ML-Based Scaling Predictor
 
 ```python
 class MLScalingPredictor:
@@ -230,7 +230,7 @@ Each model generates predictions with confidence intervals, enabling the system 
         }
 ```
 
-*Machine learning-based scaling uses historical patterns to predict future load, enabling proactive scaling before performance degrades.*
+### Machine learning-based scaling uses historical patterns to predict future load, enabling proactive scaling before performance degrades.
 
 ### **Advanced Monitoring and Observability (25 minutes)**
 
@@ -238,7 +238,7 @@ Each model generates predictions with confidence intervals, enabling the system 
 
 Implement comprehensive request tracing across all RAG components:
 
-**Step 1: Initialize Distributed Tracing**
+### Step 1: Initialize Distributed Tracing
 
 ```python
 class RAGDistributedTracing:
@@ -309,13 +309,13 @@ Each RAG request gets a parent span that tracks the entire operation lifecycle. 
 
 Child spans track individual component operations within the larger RAG request, creating a hierarchical view of the entire pipeline execution. This enables precise performance bottleneck identification.
 
-*Distributed tracing provides end-to-end visibility into RAG request processing, enabling performance optimization and debugging.*
+### Distributed tracing provides end-to-end visibility into RAG request processing, enabling performance optimization and debugging.
 
 #### **Advanced Performance Analytics**
 
 Create sophisticated analytics for RAG system optimization:
 
-**Step 2: RAG Performance Analytics Engine**
+### Step 2: RAG Performance Analytics Engine
 
 ```python
 class RAGPerformanceAnalytics:
@@ -433,7 +433,7 @@ Retrieval quality prioritizes precision and recall equally (40% each), with spee
         return scores
 ```
 
-*Advanced analytics provide deep insights into system performance, enabling data-driven optimization and continuous improvement.*
+### Advanced analytics provide deep insights into system performance, enabling data-driven optimization and continuous improvement.
 
 ### **Enterprise Compliance and Governance (25 minutes)**
 
@@ -441,7 +441,7 @@ Retrieval quality prioritizes precision and recall equally (40% each), with spee
 
 Implement automated compliance monitoring and enforcement:
 
-**Step 1: Compliance Automation Engine**
+### Step 1: Compliance Automation Engine
 
 ```python
 class ComplianceAutomationEngine:
@@ -522,7 +522,7 @@ When compliance scores fall below the threshold (default 90%), automated remedia
         }
 ```
 
-*Automated compliance monitoring ensures continuous adherence to regulatory requirements without manual oversight.*
+### Automated compliance monitoring ensures continuous adherence to regulatory requirements without manual oversight.
 
 ## 📝 Multiple Choice Test - Module A
 
@@ -564,7 +564,7 @@ D) Faster system performance
 
 ## 🧭 Navigation
 
-**Related Modules:**
+### Related Modules:
 - **Core Session:** [Session 9 - Production RAG & Enterprise Integration](Session9_Production_RAG_Enterprise_Integration.md)
 - **Related Module:** [Module B - Enterprise Architecture](Session9_ModuleB_Enterprise_Architecture.md)
 

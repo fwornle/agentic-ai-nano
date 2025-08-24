@@ -27,7 +27,7 @@ By the end of this module, you will:
 
 Modern enterprise workflows require sophisticated parallel execution patterns that go beyond simple parallelism to include synchronization points, conditional joining, and dynamic load balancing:
 
-**Core Infrastructure Setup**
+### Core Infrastructure Setup
 
 We begin by importing the essential components for building sophisticated LangGraph orchestration systems:
 
@@ -43,7 +43,7 @@ import logging
 
 These imports provide the foundation for sophisticated workflow orchestration. The `StateGraph` enables complex state management, while `PostgresSaver` provides enterprise-grade persistence for workflow checkpoints.
 
-**Advanced State Schema Design**
+### Advanced State Schema Design
 
 The state schema for complex parallel workflows requires multiple layers of data organization. Let's start with the core workflow tracking:
 
@@ -60,7 +60,7 @@ class AdvancedWorkflowState(TypedDict):
 
 The core workflow data tracks the fundamental elements: message sequences using `operator.add` for automatic aggregation, task queues for work distribution, and branch status tracking for parallel execution monitoring.
 
-**Synchronization and Coordination Infrastructure**
+### Synchronization and Coordination Infrastructure
 
 Next, we add the coordination mechanisms that enable sophisticated branch management:
 
@@ -73,7 +73,7 @@ Next, we add the coordination mechanisms that enable sophisticated branch manage
 
 Synchronization mechanisms enable sophisticated coordination patterns. Sync points define where branches must wait for each other, dependencies prevent out-of-order execution, and the timeline provides audit trails for debugging.
 
-**Dynamic Control and Enterprise Features**
+### Dynamic Control and Enterprise Features
 
 Finally, we include the advanced control systems and enterprise monitoring capabilities:
 
@@ -91,7 +91,7 @@ Finally, we include the advanced control systems and enterprise monitoring capab
 
 Dynamic workflow control adapts execution strategy based on runtime conditions. Load balancing metrics guide resource allocation, while performance tracking optimizes future workflow decisions.
 
-**Orchestrator Class Foundation**
+### Orchestrator Class Foundation
 
 The `AdvancedParallelOrchestrator` serves as the central coordinator for complex parallel workflows. Let's examine its initialization:
 
@@ -108,7 +108,7 @@ class AdvancedParallelOrchestrator:
 
 The orchestrator initialization sets up enterprise-grade infrastructure. PostgreSQL checkpointing enables fault tolerance, performance tracking provides optimization insights, and load balancing ensures efficient resource utilization.
 
-**Workflow Graph Construction**
+### Workflow Graph Construction
 
 Now we'll build the workflow graph with its various node types. Let's start with the core orchestration infrastructure:
 
@@ -127,7 +127,7 @@ Now we'll build the workflow graph with its various node types. Let's start with
 
 Core orchestration nodes provide the foundation for sophisticated coordination. The task analyzer determines optimal execution strategies, the coordinator manages parallel branches, sync points handle convergence, and load balancing optimizes resource allocation.
 
-**Specialized Worker Branches**
+### Specialized Worker Branches
 
 Next, we add the specialized execution branches that handle different types of parallel work:
 
@@ -142,7 +142,7 @@ Next, we add the specialized execution branches that handle different types of p
 
 Specialized execution branches handle different types of work. Multiple research branches enable diverse investigation approaches, while primary and secondary analysis branches provide quality redundancy and load distribution.
 
-**Result Integration and Quality Control**
+### Result Integration and Quality Control
 
 Finally, we add the nodes responsible for merging results and ensuring quality standards:
 
@@ -164,7 +164,7 @@ Finally, we add the nodes responsible for merging results and ensuring quality s
 
 The workflow compilation includes checkpointing for fault tolerance and interrupts at critical decision points. This enables human oversight and recovery from failures while maintaining workflow state.
 
-**Task Analysis and Complexity Assessment**
+### Task Analysis and Complexity Assessment
 
 The task analysis node serves as the intelligent entry point that determines how work should be distributed across parallel branches:
 
@@ -178,7 +178,7 @@ The task analysis node serves as the intelligent entry point that determines how
 
 Task analysis begins by evaluating complexity and available resources. Complexity scoring considers task interdependencies and computational requirements, while resource assessment checks CPU, memory, and concurrent execution capacity.
 
-**Workflow Mode Selection Logic**
+### Workflow Mode Selection Logic
 
 Based on the complexity analysis, we determine the optimal execution strategy:
 
@@ -197,7 +197,7 @@ Based on the complexity analysis, we determine the optimal execution strategy:
 
 Workflow mode selection balances complexity with available resources. High complexity with sufficient resources enables full parallelization, strong interdependencies force sequential execution, while moderate conditions trigger adaptive strategies.
 
-**Branch Allocation and State Updates**
+### Branch Allocation and State Updates
 
 Finally, we create the allocation strategy and update the workflow state with our analysis results:
 
@@ -233,7 +233,7 @@ Branch allocation creates an optimized distribution strategy that maps tasks to 
 
 Analysis routing prioritizes high-priority tasks to primary branches with more resources, while secondary branches handle lower-priority work. This ensures critical analyses receive optimal resource allocation.
 
-**Parallel Coordination and Worker Dispatch**
+### Parallel Coordination and Worker Dispatch
 
 The parallel coordination node serves as the traffic director, routing work to specialized branches based on the analysis results:
 
@@ -247,7 +247,7 @@ The parallel coordination node serves as the traffic director, routing work to s
 
 Parallel coordination dynamically creates worker branches based on the allocation strategy. Each branch receives specific configuration and resource allocation to optimize execution for its assigned workload.
 
-**Research Branch Routing Logic**
+### Research Branch Routing Logic
 
 Research tasks are distributed across specialized branches based on domain focus:
 
@@ -271,7 +271,7 @@ Research tasks are distributed across specialized branches based on domain focus
 
 Research branch routing directs specialized work to appropriate workers. Technical research goes to Alpha branch (optimized for technical analysis), while market research flows to Beta branch, ensuring domain expertise alignment.
 
-**Multi-Domain Research Distribution**
+### Multi-Domain Research Distribution
 
 We continue routing different research focuses to their optimal processing branches:
 
@@ -298,7 +298,7 @@ We continue routing different research focuses to their optimal processing branc
 
 Different research focuses are routed to specialized branches: market analysis to Beta branch, competitive intelligence to Gamma branch. This specialization improves accuracy and processing efficiency.
 
-**Analysis Task Priority Routing**
+### Analysis Task Priority Routing
 
 Analysis tasks are routed based on priority levels to ensure critical work gets optimal resources:
 
@@ -328,7 +328,7 @@ Analysis tasks are routed based on priority levels to ensure critical work gets 
 
 Analysis routing prioritizes high-priority tasks to primary branches with more resources, while secondary branches handle lower-priority work. This ensures critical analyses receive optimal resource allocation.
 
-**Synchronization Point Management**
+### Synchronization Point Management
 
 Synchronization points are critical for coordinating parallel workflows. Let's examine how branch completion is tracked and managed:
 
@@ -343,7 +343,7 @@ Synchronization points are critical for coordinating parallel workflows. Let's e
 
 Synchronization management tracks branch completion status against defined sync points. This enables sophisticated coordination patterns where certain branches must complete before others can proceed.
 
-**Progress Tracking and Assessment**
+### Progress Tracking and Assessment
 
 We calculate completion progress to determine if synchronization requirements are met:
 
@@ -360,7 +360,7 @@ We calculate completion progress to determine if synchronization requirements ar
 
 Progress calculation determines how many required branches have completed at each sync point. This creates a completion ratio that drives conditional workflow advancement decisions.
 
-**Adaptive Synchronization Policies**
+### Adaptive Synchronization Policies
 
 Based on completion progress, we determine the appropriate coordination action:
 
@@ -382,7 +382,7 @@ Based on completion progress, we determine the appropriate coordination action:
 
 Adaptive synchronization policies balance completion requirements with timeout considerations. Full completion enables immediate progression, while 75% completion triggers conditional advancement with timeout protection.
 
-**Metrics Collection and State Updates**
+### Metrics Collection and State Updates
 
 Finally, we collect comprehensive metrics and update the workflow state:
 

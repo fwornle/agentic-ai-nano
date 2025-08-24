@@ -80,7 +80,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 **Project Overview:** Build a comprehensive 2025 state-of-the-art agent system demonstrating all five agentic patterns using multiple frameworks with modern protocol integration
 
-**Requirements:**
+### Requirements:
 - Implement Reflection pattern for self-improvement with enterprise observability
 - Create Tool Use agents with external API integration and MCP protocol support
 - Build ReAct agents for complex reasoning chains with performance optimization
@@ -92,7 +92,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 - Demonstrate performance improvements (measure against CrewAI's 5.76x benchmark)
 - Implement streaming validation and multi-provider support
 
-**Deliverables:**
+### Deliverables:
 - Complete source code with comprehensive documentation and 2025 best practices
 - Working deployment with advanced monitoring, observability, and protocol integration
 - Architecture documentation and 2025 framework comparison analysis

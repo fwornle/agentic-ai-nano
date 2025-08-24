@@ -20,7 +20,7 @@ By the end of this session, you will be able to:
 **Where you'll apply it**: From simple weather services to complex enterprise data integrations - MCP servers power everything from development tools (Zed, Cursor) to enterprise platforms (Microsoft Azure, AWS).
 
 ![MCP Architecture](images/mcp-architecture.png)
-*Figure 1: MCP server architecture showing how a single server exposes tools, resources, and prompts to any MCP-compatible AI client*
+### Figure 1: MCP server architecture showing how a single server exposes tools, resources, and prompts to any MCP-compatible AI client
 
 ### Learning Path Options
 
@@ -67,32 +67,32 @@ def get_weather(city: str) -> dict:
     }
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Line 4: `FastMCP` creates an MCP server instance
 - Line 6: `@mcp.tool()` decorator exposes functions to AI clients
 - Line 7-9: Function signature with type hints (required for MCP)
 - Line 10-14: Return structured data that AI clients can process
 
-**Key Benefits:**
+### Key Benefits:
 - **Standardization**: Works with any MCP-compatible AI client
 - **Type Safety**: Automatic validation of inputs and outputs
 - **Discoverability**: AI clients can automatically discover available tools
 
 ### **PARTICIPANT PATH**: Environment Setup
 
-**Development Environment Requirements:**
+### Development Environment Requirements:
 - Python 3.8+ with virtual environment
 - FastMCP framework for rapid server development
 - MCP Inspector for interactive testing
 
-**Quick Setup:**
+### Quick Setup:
 ```bash
 mkdir mcp-weather-server && cd mcp-weather-server
 python -m venv venv && source venv/bin/activate
 pip install fastmcp requests python-dotenv
 ```
 
-**Project Structure:**
+### Project Structure:
 ```
 mcp-weather-server/
 ├── weather_server.py      # Main server implementation
@@ -102,7 +102,7 @@ mcp-weather-server/
 
 ### **IMPLEMENTER PATH**: Production Considerations
 
-*Production deployment patterns and infrastructure setup covered in Session 4*
+### Production deployment patterns and infrastructure setup covered in Session 4
 
 ---
 
@@ -118,7 +118,7 @@ MCP servers expose three types of capabilities:
 
 ### Foundation: Server Setup
 
-**Step 1: Import Dependencies**
+### Step 1: Import Dependencies
 
 ```python
 from mcp.server.fastmcp import FastMCP
@@ -130,12 +130,12 @@ from typing import Dict, List
 mcp = FastMCP("Weather Information Server")
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - `FastMCP` provides decorators for easy tool/resource/prompt creation
 - Type hints enable automatic schema generation for AI clients
 - Server name helps AI agents understand the server's purpose
 
-**Step 2: Sample Data**
+### Step 2: Sample Data
 
 ```python
 
@@ -149,14 +149,14 @@ weather_data = {
 }
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Real implementations would connect to weather APIs
 - Dictionary structure enables easy lookups and validation
 - Structured data ensures consistent responses
 
 ### Core MCP Capabilities Implementation
 
-**Capability 1: Tools (Functions AI Agents Can Call)**
+### Capability 1: Tools (Functions AI Agents Can Call)
 
 ```python
 @mcp.tool()
@@ -182,14 +182,14 @@ def get_current_weather(city: str, units: str = "celsius") -> Dict:
     return data
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Line 1: `@mcp.tool()` decorator exposes function to AI agents
 - Lines 4-7: Input validation with helpful error messages
 - Lines 9-11: Add metadata for better responses
 - Lines 13-18: Handle temperature unit conversion
 - Return structured data that AI agents can process
 
-**Capability 2: Resources (Data Sources AI Agents Can Read)**
+### Capability 2: Resources (Data Sources AI Agents Can Read)
 
 ```python
 @mcp.resource("weather://cities")
@@ -199,12 +199,12 @@ def list_available_cities() -> str:
     return f"Available cities: {', '.join(cities)}"
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Resources provide read-only data access
 - URI-like identifiers (`weather://cities`) for discoverability
 - Return formatted strings that AI agents can interpret
 
-**Capability 3: Prompts (Template Queries)**
+### Capability 3: Prompts (Template Queries)
 
 ```python
 @mcp.prompt()
@@ -213,14 +213,14 @@ def weather_report_prompt(city: str) -> str:
     return f"Please provide a detailed weather analysis for {city}, including current conditions and any recommendations for outdoor activities."
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Prompts provide reusable templates for AI interactions
 - Help standardize common queries across different AI agents
 - Can include dynamic parameters like city names
 
 ### **PARTICIPANT PATH**: Complete Server Implementation
 
-**Running the Server:**
+### Running the Server:
 
 ```python
 
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     mcp.run_stdio()
 ```
 
-**Testing Your Server:**
+### Testing Your Server:
 1. Save the complete code as `weather_server.py`
 2. Test with MCP Inspector: `npx @modelcontextprotocol/inspector`
 3. Connect using: `stdio://python weather_server.py`
@@ -239,7 +239,7 @@ if __name__ == "__main__":
 
 ### **IMPLEMENTER PATH**: Production Patterns
 
-*Advanced error handling, logging, authentication, and deployment covered in Sessions 4-5*
+### Advanced error handling, logging, authentication, and deployment covered in Sessions 4-5
 
 ---
 
@@ -247,7 +247,7 @@ if __name__ == "__main__":
 
 ### Testing with MCP Inspector
 
-**Observer Path - Watch the Demo:**
+### Observer Path - Watch the Demo:
 The MCP Inspector provides a user-friendly interface to test MCP servers without writing code:
 
 1. **Connection**: Inspector connects to your server via stdio transport
@@ -257,7 +257,7 @@ The MCP Inspector provides a user-friendly interface to test MCP servers without
 
 ### **PARTICIPANT PATH**: Hands-On Testing
 
-**Step 1: Start Your Server**
+### Step 1: Start Your Server
 ```bash
 
 # Save your code as weather_server.py and run
@@ -265,7 +265,7 @@ The MCP Inspector provides a user-friendly interface to test MCP servers without
 python weather_server.py
 ```
 
-**Step 2: Test with Inspector**
+### Step 2: Test with Inspector
 ```bash
 
 # Launch MCP Inspector
@@ -276,42 +276,42 @@ npx @modelcontextprotocol/inspector
 
 ```
 
-**Step 3: Validate Functionality**
+### Step 3: Validate Functionality
 - **Tools Tab**: Test `get_current_weather` with different cities
 - **Resources Tab**: Access `weather://cities` resource
 - **Prompts Tab**: Try the weather report prompt template
 
-**Expected Results:**
+### Expected Results:
 - Tools return structured JSON responses
 - Input validation shows helpful error messages
 - All capabilities are properly discoverable
 
 ### **IMPLEMENTER PATH**: Production Testing
 
-*Automated testing suites, integration tests, and monitoring covered in Session 4*
+### Automated testing suites, integration tests, and monitoring covered in Session 4
 
 ---
 
 ## Key Takeaways
 
-**Observer Path Summary:**
+### Observer Path Summary:
 - **MCP Architecture**: Single protocol connecting any AI to any data source
 - **Three Capabilities**: Tools (functions), Resources (data), Prompts (templates)
 - **Business Value**: 60% faster development than custom integrations
 - **Testing**: MCP Inspector provides intuitive testing interface
 
-**Participant Path Achievements:**
+### Participant Path Achievements:
 - Built complete weather MCP server with all three capabilities
 - Implemented proper input validation and error handling
 - Successfully tested server using MCP Inspector
 - Understood stdio transport mechanism
 
-**Implementer Path Next Steps:**
+### Implementer Path Next Steps:
 - Session 4: Production deployment with monitoring
 - Session 5: Security and authentication patterns
 - Advanced error handling and logging strategies
 
-**Industry Applications:**
+### Industry Applications:
 - **Development Tools**: Zed, Cursor, Sourcegraph integrate MCP for AI assistance
 - **Enterprise Platforms**: Microsoft Azure and AWS provide pre-built MCP servers
 - **Custom Integrations**: Replace proprietary API wrappers with standardized MCP servers

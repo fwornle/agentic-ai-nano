@@ -45,7 +45,7 @@ ACP excels in scenarios requiring autonomous agent coordination:
 - **Disaster Response**: Resilient AI systems operating when external communication is compromised
 
 ![ACP Architecture](images/acp-architecture-overview.png)
-*Figure 1: ACP local-first architecture showing decentralized agent discovery, event-driven messaging, and local coordination patterns that enable autonomous multi-agent systems without cloud dependencies*
+### Figure 1: ACP local-first architecture showing decentralized agent discovery, event-driven messaging, and local coordination patterns that enable autonomous multi-agent systems without cloud dependencies
 
 ### Learning Path Options
 
@@ -69,14 +69,14 @@ ACP excels in scenarios requiring autonomous agent coordination:
 
 ACP addresses a critical challenge in modern AI systems: **how do agents efficiently coordinate within edge environments and local networks without cloud dependencies?**
 
-**Traditional Cloud-Centric Approach:**
+### Traditional Cloud-Centric Approach:
 ```
 Agent A → Cloud API Gateway → Message Queue → Agent B
    ↓         (requires internet)         (high latency)     ↓
 Complex setup     Security risks        Dependency failure    Cost scaling
 ```
 
-**ACP Local-First Approach:**
+### ACP Local-First Approach:
 ```
 Agent A ←→ Local Event Bus ←→ Agent B
    ↓      (IPC/local network)     ↓
@@ -85,7 +85,7 @@ RESTful API    Millisecond latency    Autonomous operation
 
 ### **OBSERVER PATH**: Core ACP Principles
 
-**Foundational ACP Concepts:**
+### Foundational ACP Concepts:
 
 1. **Decentralized Discovery**: Agents advertise capabilities through local broadcast without external registries
 2. **RESTful Communication**: Standard HTTP endpoints enable cross-framework interoperability
@@ -93,25 +93,25 @@ RESTful API    Millisecond latency    Autonomous operation
 4. **Autonomous Operation**: Full functionality during network partitions or offline scenarios
 5. **Multimodal Messaging**: Support for text, embeddings, control signals, and structured data
 
-**Industry Implementation:**
+### Industry Implementation:
 IBM's BeeAI demonstrates production ACP usage, showing how agents can coordinate in real-time for complex workflows while maintaining local-first principles.
 
 ### **PARTICIPANT PATH**: Understanding ACP Technical Architecture
 
-**The IBM BeeAI Standard:**
+### The IBM BeeAI Standard:
 Based on IBM Research's implementation, ACP defines three core layers:
 
 1. **Discovery Layer**: Local broadcast mechanisms for agent capability advertisement
 2. **Communication Layer**: RESTful interfaces for message exchange and streaming
 3. **Coordination Layer**: Event-driven patterns for workflow orchestration
 
-**Technical Advantages:**
+### Technical Advantages:
 - **Low Latency**: Local IPC communication provides sub-millisecond response times
 - **High Reliability**: No single points of failure through decentralized architecture
 - **Resource Efficiency**: Minimal network overhead compared to cloud-based coordination
 - **Privacy Preservation**: Sensitive data never leaves the local environment
 
-**Real-World Performance Comparison:**
+### Real-World Performance Comparison:
 ```
 Cloud-Based Coordination:     50-200ms latency, $0.01-0.10 per request
 ACP Local Coordination:       1-5ms latency, $0 operational cost
@@ -143,7 +143,7 @@ class AgentCapability(BaseModel):
 
 **Why This Matters:** Other agents can discover and understand your capabilities without reading your code.
 
-**Example Capability:**
+### Example Capability:
 ```python
 weather_capability = AgentCapability(
     name="get_weather",
@@ -183,7 +183,7 @@ class AgentMetadata(BaseModel):
     created_at: datetime         # When it started
 ```
 
-**Real Example:**
+### Real Example:
 ```python
 agent_metadata = AgentMetadata(
     id="agent-123e4567-e89b-12d3-a456-426614174000",
@@ -231,7 +231,7 @@ async def get_status():
     return {"status": "active", "uptime": "..."}
 ```
 
-**Why These Four?**
+### Why These Four?
 
 - **metadata**: "Who are you and what can you do?"
 - **communicate**: "Please do this task for me"
@@ -248,7 +248,7 @@ Now let's build specialized agents for different tasks. We'll create three agent
 
 Our first specialized agent handles CSV data processing and analysis.
 
-**Capabilities Declaration:**
+### Capabilities Declaration:
 ```python
 
 # From [`src/session6/data_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/data_agent.py)
@@ -268,7 +268,7 @@ capabilities = [
 ]
 ```
 
-**Key Implementation Pattern:**
+### Key Implementation Pattern:
 ```python
 async def execute_capability(self, capability_name: str, payload: dict) -> dict:
     """Route capability requests to specific handlers"""
@@ -281,7 +281,7 @@ async def execute_capability(self, capability_name: str, payload: dict) -> dict:
 
 **Why This Pattern?** It makes it easy to add new capabilities without changing the core agent logic.
 
-**Sample CSV Processing:**
+### Sample CSV Processing:
 ```python
 async def _process_csv(self, payload: dict) -> dict:
     data_str = payload["data"]
@@ -320,7 +320,7 @@ curl -X POST http://localhost:8001/communicate \
 
 Our second agent specializes in natural language processing tasks.
 
-**Capabilities Declaration:**
+### Capabilities Declaration:
 ```python
 
 # From [`src/session6/text_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/text_agent.py)
@@ -343,7 +343,7 @@ capabilities = [
 ]
 ```
 
-**Text Summarization Implementation:**
+### Text Summarization Implementation:
 ```python
 async def _summarize_text(self, payload: dict) -> dict:
     text = payload["text"]
@@ -369,11 +369,11 @@ async def _summarize_text(self, payload: dict) -> dict:
 
 The coordinator agent doesn't process data itself—it **orchestrates other agents** to complete complex workflows.
 
-**The Coordination Pattern:**
+### The Coordination Pattern:
 
 ACP coordination follows a clear discovery-then-execute pattern. Let's break this down into stages:
 
-**Stage 1: Agent Discovery and Validation**
+### Stage 1: Agent Discovery and Validation
 ```python
 
 # From [`src/session6/coordinator_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/coordinator_agent.py) - Discovery phase
@@ -393,7 +393,7 @@ async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
 
 **Why Discovery First?** ACP agents can join or leave the network at any time. The coordinator must verify capabilities are available before starting the workflow.
 
-**Stage 2: Data Processing Coordination**
+### Stage 2: Data Processing Coordination
 ```python
     # Step 2: Coordinate data processing with the discovered agent
     print("📊 Processing data...")
@@ -409,7 +409,7 @@ async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
 
 **Key ACP Concept:** Each communication request specifies both the target agent and the exact capability needed. This enables precise task routing.
 
-**Stage 3: Text Processing and Result Aggregation**
+### Stage 3: Text Processing and Result Aggregation
 ```python
     # Step 3: Generate summary using processed data
     print("📝 Generating summary...")
@@ -430,7 +430,7 @@ async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
     }
 ```
 
-**Key Coordination Concepts:**
+### Key Coordination Concepts:
 
 1. **Discovery Before Action**: Always find available agents first
 2. **Error Handling**: Check if required agents are available
@@ -476,7 +476,7 @@ async def register_with_peers(self, peer_ports: list):
 5. Agent A can now communicate with discovered agents
 ```
 
-**Discovery Request Example:**
+### Discovery Request Example:
 ```python
 
 # Find all agents that can process CSV
@@ -512,14 +512,14 @@ for agent in agents:
     time.sleep(2)  # Let each agent start
 ```
 
-**Start the Network:**
+### Start the Network:
 ```bash
 cd [`src/session6`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6)
 pip install -r requirements.txt
 python bootstrap.py
 ```
 
-**Expected Output:**
+### Expected Output:
 ```
 Starting ACP Agent Network...
    🔧 Starting DataProcessor on port 8001...
@@ -542,13 +542,13 @@ Run the test client to verify everything works:
 python test_client.py
 ```
 
-**What the Test Does:**
+### What the Test Does:
 
 1. **Discovery Test**: Asks coordinator what agents it knows about
 2. **Individual Tests**: Tests each agent's capabilities directly
 3. **Workflow Test**: Runs a complete data processing workflow
 
-**Sample Test Output:**
+### Sample Test Output:
 ```
 🧪 ACP Agent Network Test Suite
 🔍 Testing Agent Discovery...

@@ -1606,9 +1606,9 @@ D) An emergency alert is triggered
 
 ## 🧭 Navigation
 
-**Previous: [Session 9 Main](Session9_Multi_Agent_Patterns.md)**
+### Previous: [Session 9 Main](Session9_Multi_Agent_Patterns.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 - **[🔬 Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)**
 - **[📡 Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)**
 

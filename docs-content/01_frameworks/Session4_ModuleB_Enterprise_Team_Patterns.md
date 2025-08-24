@@ -767,7 +767,7 @@ Department management delegation enables project coordination within defined sco
 
 Team coordination rules enable task delegation within teams with skill matching requirements and defined resource limits.
 
-**Peer Collaboration Rules**
+### Peer Collaboration Rules
 
 Peer-to-peer delegation supports knowledge sharing and collaborative development:
 
@@ -911,7 +911,7 @@ Once validation passes, we execute the delegation with comprehensive tracking:
 
 Delegation execution begins with validation to ensure all prerequisites are met. Failed validations return detailed error information for debugging.
 
-**Delegation Record Creation**
+### Delegation Record Creation
 
 Successful validations proceed to create comprehensive delegation records:
 
@@ -942,7 +942,7 @@ Successful validations proceed to create comprehensive delegation records:
 
 Delegation records capture all essential information for tracking, including timeline estimates and monitoring configuration.
 
-**Workload and Monitoring Setup**
+### Workload and Monitoring Setup
 
 The final execution phase updates workload tracking and establishes monitoring:
 
@@ -996,7 +996,7 @@ Advanced optimization algorithms distribute workload for maximum efficiency:
 
 Workload optimization analyzes current distribution patterns and generates optimal assignments based on agent capabilities and capacity.
 
-**Optimization Results Assembly**
+### Optimization Results Assembly
 
 The optimization process returns comprehensive recommendations and performance projections:
 
@@ -1048,7 +1048,7 @@ The delegation system relies on sophisticated rule matching and evaluation:
 
 Rule matching ensures delegation requests comply with organizational hierarchy and task type restrictions.
 
-**Condition Evaluation Logic**
+### Condition Evaluation Logic
 
 Complex condition evaluation supports flexible delegation policies:
 
@@ -1182,7 +1182,7 @@ You've now mastered enterprise CrewAI team patterns and production architectures
 
 ## Module B Knowledge Check
 
-**Test your understanding of enterprise team patterns and delegation systems:**
+### Test your understanding of enterprise team patterns and delegation systems:
 
 **Question 1:** What sources receive the highest weighting in the search result aggregation?
 A) Web sources (1.0 weight)  

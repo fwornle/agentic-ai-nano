@@ -4,13 +4,13 @@
 
 ### Question 1: Multi-Cluster Architecture
 
-**What is the primary benefit of deploying RAG across multiple Kubernetes clusters?**
+### What is the primary benefit of deploying RAG across multiple Kubernetes clusters?
 
 A) Reduced deployment complexity  
 B) Lower operational costs  
 C) Geographic distribution and disaster recovery ✅  
 D) Simplified monitoring  
-**Correct Answer: C) Geographic distribution and disaster recovery**
+### Correct Answer: C) Geographic distribution and disaster recovery
 
 **Explanation:** Multi-cluster RAG architecture provides geographic distribution for reduced latency, disaster recovery capabilities through redundancy, and massive scaling potential. This is essential for enterprise systems that need high availability and global reach.
 
@@ -18,13 +18,13 @@ D) Simplified monitoring
 
 ### Question 2: ML-Based Scaling
 
-**Why is machine learning-based scaling superior to threshold-based scaling?**
+### Why is machine learning-based scaling superior to threshold-based scaling?
 
 A) It requires less configuration  
 B) It predicts future load patterns and scales proactively ✅  
 C) It uses fewer computational resources  
 D) It's easier to debug  
-**Correct Answer: B) It predicts future load patterns and scales proactively**
+### Correct Answer: B) It predicts future load patterns and scales proactively
 
 **Explanation:** Machine learning-based scaling uses historical patterns, seasonality, and trends to predict future load and scale proactively before performance degrades. This prevents reactive scaling that can lead to temporary performance issues during traffic spikes.
 
@@ -32,13 +32,13 @@ D) It's easier to debug
 
 ### Question 3: Distributed Tracing
 
-**What is the key advantage of distributed tracing in RAG systems?**
+### What is the key advantage of distributed tracing in RAG systems?
 
 A) Reduced system complexity  
 B) Lower storage requirements  
 C) End-to-end visibility across all pipeline components ✅  
 D) Faster query processing  
-**Correct Answer: C) End-to-end visibility across all pipeline components**
+### Correct Answer: C) End-to-end visibility across all pipeline components
 
 **Explanation:** Distributed tracing provides complete visibility into how requests flow through the entire RAG pipeline - from query processing through retrieval, context generation, LLM generation, and response assembly. This is crucial for debugging performance issues and optimizing complex RAG architectures.
 
@@ -46,13 +46,13 @@ D) Faster query processing
 
 ### Question 4: Performance Analytics
 
-**Which metric combination is most important for RAG system optimization?**
+### Which metric combination is most important for RAG system optimization?
 
 A) CPU usage only  
 B) Memory consumption and network traffic  
 C) Query efficiency, retrieval quality, response quality, and resource efficiency ✅  
 D) Disk space and bandwidth  
-**Correct Answer: C) Query efficiency, retrieval quality, response quality, and resource efficiency**
+### Correct Answer: C) Query efficiency, retrieval quality, response quality, and resource efficiency
 
 **Explanation:** RAG system optimization requires a holistic view including query processing efficiency, retrieval accuracy and speed, response quality scores, and resource utilization efficiency. This multi-dimensional approach ensures both technical performance and output quality.
 
@@ -60,13 +60,13 @@ D) Disk space and bandwidth
 
 ### Question 5: Compliance Automation
 
-**What is the primary advantage of automated compliance monitoring?**
+### What is the primary advantage of automated compliance monitoring?
 
 A) Reduced compliance costs  
 B) Simplified audit processes  
 C) Continuous adherence without manual oversight ✅  
 D) Faster system performance  
-**Correct Answer: C) Continuous adherence without manual oversight**
+### Correct Answer: C) Continuous adherence without manual oversight
 
 **Explanation:** Automated compliance monitoring ensures continuous adherence to regulatory requirements (GDPR, HIPAA, SOX) without requiring constant manual oversight. It can detect violations in real-time and trigger automated remediation actions.
 

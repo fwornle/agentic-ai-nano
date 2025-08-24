@@ -3,6 +3,7 @@
 ## Learning Outcomes
 
 By the end of this session, you will be able to:
+
 - **Understand** the evolution from simple prompt-response to sophisticated agent systems
 - **Identify** the five core agentic patterns that power all production systems
 - **Compare** seven leading frameworks and their enterprise adoption patterns
@@ -11,36 +12,40 @@ By the end of this session, you will be able to:
 
 ## Chapter Overview: The Agent Revolution Transforming Enterprise Software
 
-**Industry Context & Market Significance**
+### Industry Context & Market Significance
 
 The AI agent landscape is experiencing unprecedented growth. Gartner forecasts that by 2028, 33% of enterprise software applications will incorporate agentic AI - a dramatic leap from less than 1% in 2024. This session introduces you to the frameworks driving this transformation and the fundamental patterns that power autonomous AI systems.
 
-**What You'll Learn & Why It Matters**
+### What You'll Learn & Why It Matters
 
 You'll master the five core agentic patterns that every production system implements, compare seven leading frameworks used by companies like Microsoft, Google, and emerging startups, and understand why enterprises are moving from simple prompt-response to sophisticated agent orchestration. This foundation enables you to make informed technology choices and build systems that scale from prototype to production.
 
-**How These Frameworks Stand Out**
+### How These Frameworks Stand Out
 
 Modern agent frameworks like LangChain, CrewAI, and PydanticAI represent a paradigm shift from handcrafted logic to framework-driven engineering. Each addresses different production challenges: LangChain excels at modular orchestration, CrewAI specializes in role-based collaboration, and PydanticAI brings type safety to AI development.
 
-**Real-World Applications**
+### Real-World Applications
 
 These patterns power automated research pipelines, content generation systems, business intelligence platforms, and decision automation tools across industries. You'll see how companies implement these patterns in production environments with monitoring, error handling, and enterprise integration.
 
 ![Agent Evolution Overview](images/agent-evolution-overview.png)
-*Figure 1: The evolution of agent frameworks from simple tools to sophisticated autonomous systems*
+
+### Figure 1: The evolution of agent frameworks from simple tools to sophisticated autonomous systems
 
 ### Learning Path Options
 
 **Observer Path (30 minutes)**: Research-backed conceptual understanding of agent evolution and framework landscape
+
 - Focus: Quick insights with industry context and pattern recognition
 - Best for: Getting oriented and understanding the business value
 
 **🙋‍♂️ Participant Path (45 minutes)**: Hands-on pattern recognition and framework comparison exercises  
+
 - Focus: Interactive examples and framework evaluation exercises
 - Best for: Learning through practical analysis
 
 **🛠️ Implementer Path (65 minutes)**: Deep dive into code examples with optional advanced modules
+
 - Focus: Technical implementation details and enterprise patterns
 - Best for: Technical teams planning real-world deployments
 
@@ -208,7 +213,7 @@ frameworks = ["Atomic Agents", "CrewAI"]
 
 ![Framework Comparison Matrix](images/framework-comparison-matrix.png)
 
-**Enterprise Framework Analysis:**
+### Enterprise Framework Analysis
 
 | Framework | Production Ready | Enterprise Adoption | Primary Use Case |
 |-----------|------------------|-------------------|------------------|
@@ -236,7 +241,7 @@ elif use_case == "microservice_architecture":
     choose(Atomic_Agents)  # Compositional systems
 ```
 
-**Production Deployment Considerations:**
+### Production Deployment Considerations
 
 - **Hidden Costs**: LangChain's modularity can create configuration complexity in production
 - **Type Safety**: PydanticAI reduces runtime errors through schema validation
@@ -266,7 +271,7 @@ Session 10: Enterprise Integration
 Capstone: Multi-Framework Agent Ecosystem
 ```
 
-**Key Learning Outcomes:**
+### Key Learning Outcomes
 
 - Master all 5 agentic patterns with hands-on implementation
 - Build agents using 7+ different frameworks

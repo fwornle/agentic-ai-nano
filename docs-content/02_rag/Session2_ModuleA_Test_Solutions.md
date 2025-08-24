@@ -4,7 +4,7 @@
 
 ### Question 1: Document Complexity Scoring
 
-**What is the primary benefit of document complexity scoring in RAG systems?**  
+### What is the primary benefit of document complexity scoring in RAG systems?
 A) It reduces processing time for all documents  
 B) Enables optimal processing strategy selection based on document characteristics ✅  
 C) It eliminates the need for human document review  
@@ -16,7 +16,7 @@ D) It automatically fixes document formatting issues
 
 ### Question 2: Chunk Quality Assessment
 
-**What represents the most comprehensive approach to chunk quality assessment?**  
+### What represents the most comprehensive approach to chunk quality assessment?
 A) Balance of coherence, information density, and completeness ✅  
 B) Semantic similarity to source document  
 C) Reading level and vocabulary complexity  
@@ -28,7 +28,7 @@ D) Word count and character length only
 
 ### Question 3: Domain-Specific Processing
 
-**Why is domain-specific document processing important for RAG systems?**  
+### Why is domain-specific document processing important for RAG systems?
 A) It preserves domain-specific structure and terminology for better retrieval ✅  
 B) It reduces computational requirements  
 C) It standardizes all documents to a common format  
@@ -40,7 +40,7 @@ D) It eliminates the need for manual document preparation
 
 ### Question 4: Information Density Measurement
 
-**How is information density typically measured in document chunks?**  
+### How is information density typically measured in document chunks?
 A) Total word count divided by paragraph count  
 B) Number of sentences per chunk  
 C) Ratio of unique words to total words ✅  
@@ -52,7 +52,7 @@ D) Average word length in the chunk
 
 ### Question 5: Coherence Measurement
 
-**What is the best method for measuring coherence between document chunks?**  
+### What is the best method for measuring coherence between document chunks?
 A) By document structure and formatting  
 B) By word overlap and shared vocabulary  
 C) By reading level and complexity scores  

@@ -11,19 +11,19 @@ By the end of this session, you will be able to:
 
 ## Chapter Overview: LangGraph's Rise in Enterprise Multi-Agent Systems
 
-**Industry Context & Market Significance**
+### Industry Context & Market Significance
 
 LangGraph has emerged as the leading platform for production-grade multi-agent systems in 2025. With enterprises reporting a 35-45% increase in resolution rates using multi-agent designs over single-agent bots, LangGraph powers mission-critical systems at Replit, Uber, LinkedIn, and GitLab. The platform went Generally Available in May 2025, marking its transition from experimental to enterprise-ready infrastructure.
 
-**What You'll Learn & Why It Matters**
+### What You'll Learn & Why It Matters
 
 You'll master graph-based workflow orchestration, learn the state management patterns that enable complex agent coordination, and understand conditional routing for dynamic decision-making. More importantly, you'll discover why 51% of teams already run agents in production choose graph-based architectures for reliability and observability.
 
-**How LangGraph Stands Out**
+### How LangGraph Stands Out
 
 LangGraph's stateful, graph-driven reasoning engines with first-class tracing represent a major advancement over simple chain-based systems. Its sophisticated orchestration layer acts as a conductor, coordinating how agents interact, sequence tasks, share context, and respond to failures within a structured but flexible framework.
 
-**Real-World Applications & Production Evidence**
+### Real-World Applications & Production Evidence
 
 LangGraph excels in complex workflows requiring coordination between multiple specialized agents. Klarna's deployment serves 85 million users with 80% faster resolution times, while AppFolio's implementation improved response accuracy by 200%. These production deployments demonstrate LangGraph's capability to handle enterprise-scale multi-agent coordination.
 
@@ -75,7 +75,7 @@ LangGraph transforms multi-agent systems from linear chains into sophisticated g
 
 **File**: [`src/session3/langgraph_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/langgraph_basics.py) - Core workflow setup
 
-**Production-Grade State Management**
+### Production-Grade State Management
 
 LangGraph's StateGraph provides the foundation for enterprise multi-agent coordination:
 
@@ -103,7 +103,7 @@ This state structure provides the observability and error handling required for 
 workflow = StateGraph(WorkflowState)
 ```
 
-**Core Architecture Principles:**
+### Core Architecture Principles:
 
 1. **Directed Graph Structure**: Nodes (specialized agents) connected by conditional edges (intelligent routing)
 2. **Immutable State Flow**: State evolves through nodes without mutation, ensuring traceability
@@ -633,7 +633,7 @@ D) Only specified fields are updated/merged
 
 **Previous:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
 - 🏭 **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
