@@ -10,6 +10,21 @@ A comprehensive 6-week self-paced nanodegree covering the complete spectrum of m
 
 ---
 
+## 🚀 Getting Started - Cloud Development Environment
+
+**IMPORTANT: Start Here!** → [**Cloud Development Environment Setup (Coder)**](docs-content/00_intro/coder.md)
+
+Before diving into the course content, participants should first:
+1. **Access the cloud development environment** via [Coder](docs-content/00_intro/coder.md) - your pre-configured workspace
+2. **Review the LLM API setup** in [LLM API Configuration](docs-content/00_intro/llmapi.md)
+3. **Understand the infrastructure** that eliminates traditional setup friction
+
+The cloud environment provides:
+- Pre-installed frameworks and dependencies
+- GPU access for AI workloads
+- Integrated AI coding assistants (GitHub Copilot, Coding-Assistant)
+- Zero local installation requirements
+
 ## Course Structure
 
 This nanodegree consists of **3 specialized modules**, each designed as a 2-week intensive study program:
@@ -421,12 +436,22 @@ Build production-ready agent communication systems using Model Context Protocol 
 
 ## **Getting Started**
 
-### **1. Choose Your Learning Path:**
+### **1. Access Your Cloud Development Environment:**
+**[→ Start with Coder Setup](docs-content/00_intro/coder.md)** - Access your pre-configured workspace at `http://10.21.202.14/workspaces`
+
+No local installation needed! The cloud environment includes:
+- All required Python packages and frameworks pre-installed
+- Integrated AI coding assistants (GitHub Copilot, Coding-Assistant CLI)
+- GPU access for model training and inference
+- Pre-configured LLM API access via Gaia
+
+### **2. Choose Your Learning Path:**
 - **Sequential**: Complete modules 01 → 02 → 03 for comprehensive understanding
 - **Selective**: Focus on specific modules based on your interests and needs
 - **Project-Based**: Use the nanodegree as reference while building your own agent systems
 
-### **2. Setup Your Environment:**
+### **3. Alternative: Local Setup (Optional):**
+If you prefer local development instead of the cloud environment:
 ```bash
 # Clone the repository
 git clone <repository-url>
@@ -445,7 +470,7 @@ pip install -r docs-content/01_frameworks/src/session1/requirements.txt
 mkdocs serve
 ```
 
-### **3. Follow the Learning Structure:**
+### **4. Follow the Learning Structure:**
 - Read session materials thoroughly
 - Complete hands-on exercises and implementations  
 - Take self-assessment tests to validate understanding
@@ -487,6 +512,10 @@ This educational content is provided under the [MIT License](LICENSE). You are f
 
 ## **Quick Navigation**
 
+### **Essential Starting Points:**
+- [**🚀 Cloud Development Environment (Coder)**](docs-content/00_intro/coder.md) - **START HERE** - Your workspace setup
+- [**📡 LLM API Configuration**](docs-content/00_intro/llmapi.md) - Gaia API access and usage
+
 ### **Module Quick Links:**
 - [**Module 01: Agent Frameworks**](docs-content/01_frameworks/) - Core patterns and frameworks
 - [**Module 02: RAG Systems**](docs-content/02_rag/) - Advanced retrieval and reasoning  
@@ -500,9 +529,10 @@ This educational content is provided under the [MIT License](LICENSE). You are f
 
 **Ready to build the future of AI agents?** 
 
-**Choose Your Path:**
+**Start Your Journey:**
 
-- [**Browse Documentation Site**](http://127.0.0.1:8001) - Interactive experience with search and navigation
-- [**Start with Module 01**](docs-content/01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md) - Direct access to course materials
+1. **[🚀 Setup Your Cloud Workspace](docs-content/00_intro/coder.md)** - Access Coder at `http://10.21.202.14/workspaces`
+2. **[📖 Browse Documentation Site](http://127.0.0.1:8001)** - Interactive experience with search and navigation
+3. **[📚 Begin Module 01](docs-content/01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md)** - Dive into agent frameworks
 
-Embark on your journey to becoming an expert in agentic AI development!
+Embark on your journey to becoming an expert in agentic AI development with zero setup friction!
