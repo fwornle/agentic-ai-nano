@@ -1,287 +1,99 @@
 # Development Environment Setup
 
-<!-- BMW Corporate Network Content -->
-<div class="bmw-corporate-only">
-
-<h2>BMW Cloud Development Environment with Coder</h2>
-
-<h3>Overview: Developing in the BMW Cloud</h3>
-
-<p>The Agentic AI Nano-Degree leverages <strong>Coder</strong>, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces. This eliminates the traditional friction of local environment setup, dependency conflicts, and corporate network complexity - both technical and procedural - that often delay or derail learning initiatives.</p>
-
+<div id="loading-message">
+<p>🔄 Detecting your network environment and loading appropriate setup instructions...</p>
 </div>
 
-<!-- Public Network Alternative Content -->
-<div class="bmw-public-alternative" markdown="1">
-
-## Local Development Environment Setup
-
-### Overview: Setting Up Your Local Environment
-
-For public access to the Agentic AI Nano-Degree, you'll need to set up your local development environment. While this requires more initial setup than a pre-configured cloud environment, it provides full control over your development setup and works with any LLM API provider.
-
-### Local Setup Requirements
-
-Before beginning the course modules, ensure you have:
-
-1. **Python 3.11+** installed with pip and virtual environment support
-2. **Git** for version control and cloning repositories  
-3. **Code editor** (VS Code recommended with Python extension)
-4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
-
-### Local Environment Setup Guide
-
-#### 1. Python Environment
-
-We recommend using Python 3.11 or higher with a virtual environment:
-
-```bash
-# Create virtual environment
-python -m venv agentic-ai
-source agentic-ai/bin/activate  # On Windows: agentic-ai\Scripts\activate
-
-# Upgrade pip
-pip install --upgrade pip
-```
-
-#### 2. Clone Repository
-
-```bash
-git clone https://github.com/fwornle/agentic-ai-nano.git
-cd agentic-ai-nano
-```
-
-#### 3. Install Dependencies
-
-```bash
-# Install core requirements (if available)
-pip install -r requirements.txt
-
-# For specific modules, install additional dependencies:
-# Agent Frameworks
-pip install -r docs-content/01_frameworks/src/session1/requirements.txt
-
-# RAG Architecture  
-pip install -r docs-content/02_rag/src/session1/requirements.txt
-
-# MCP & Agent Protocols
-pip install -r docs-content/03_mcp-acp-a2a/src/session1/requirements.txt
-```
-
-#### 4. API Keys Setup
-
-Create a `.env` file in the project root:
-
-```bash
-# OpenAI (required for most examples)
-OPENAI_API_KEY=your_openai_api_key_here
-
-# Optional: Other LLM providers
-ANTHROPIC_API_KEY=your_anthropic_key_here
-COHERE_API_KEY=your_cohere_key_here
-
-# Vector Database APIs (choose based on your preference)
-PINECONE_API_KEY=your_pinecone_key_here
-WEAVIATE_URL=your_weaviate_instance_url
-CHROMA_PERSIST_DIRECTORY=./chroma_db
-
-# Other services
-GOOGLE_API_KEY=your_google_key_here
-HF_TOKEN=your_huggingface_token_here
-```
-
-#### 5. Verify Installation
-
-```bash
-# Test basic Python setup
-python --version
-pip --version
-
-# Test a simple import (if dependencies are installed)
-python -c "print('Setup looks good!')"
-
-# Navigate to your chosen module to begin
-cd docs-content/01_frameworks  # or 02_rag or 03_mcp-acp-a2a
-```
-
+<div id="setup-content">
+<!-- Content will be loaded here by JavaScript -->
 </div>
 
-<!-- BMW Corporate Network Content Continued -->
-<div class="bmw-corporate-only" markdown="1">
-
-![Coder Architecture](images/coder-architecture.png)
-*Figure 1: Coder's architecture enables secure, scalable cloud development environments accessible from any browser or IDE*
-
-Within the context of this nano-degree, an AWS cloud room has been set up (inside the corporate network for easy access to process resources) and controlled access to the Internet (through the corporate network firewall).
-
-![Cloud Room Standard](images/cn-cloudroom-standard.png)
-*Figure 2: Standard cloud development room configuration*
-
-All relevant ports have been configured and firewall settings have been chosen to allow you to work with the libraries used by this course. This way, you should experience minimal friction due to the added complexity and limitations of a corporate environment.
-
-![Coder Cluster](images/cn-cluster.png)
-*Figure 3: Coder cluster providing scalable compute resources*
-
-The cloud room runs an AWS Elastic Kubernetes Service (EKS) to deploy workloads. Coder uses this service to run your dev-containers.
-
-### Cluster Resources
-
-The nano-degree infrastructure provides:
-
-- **Elastic Scaling**: Resources adjust to demand
-- **GPU Availability**: For training and inference workloads
-- **Persistent Storage**: Your work is saved between sessions
-- **Network Isolation**: Secure, private development spaces
-
-## Why Cloud Development?
-
-### Traditional Challenges in Corporate Environments
-
-Corporate developers and learners typically face:
-
-- **Tool Installation Restrictions**: IT policies blocking software installations
-- **Network Limitations**: Firewalls preventing package downloads
-- **Version Conflicts**: Incompatible Python versions, library dependencies
-- **Platform Inconsistencies**: Windows vs Mac vs Linux differences
-- **Resource Constraints**: Limited local computing power for AI workloads
-
-### The Cloud Development Solution
-
-Cloud development environments solve these challenges by:
-
-- **Pre-configured Environments**: All tools, dependencies, and configurations ready-to-use
-- **Browser-Based Access**: Work from any device within the VPN
-- **Consistent Experience**: Identical environment for all participants
-- **Scalable Resources**: Cloud computing power for intensive AI/ML workloads
-- **Zero Local Installation**: No conflicts with corporate IT policies
-
-## How to Work with Coder
-
-Go to [http://10.21.202.14/workspaces](http://10.21.202.14/workspaces) and log in with the provided credentials.
-
-![Coder Login](images/coder-login.png)
-*Figure 4: Coder login screen*
-
-Once logged-in, you get to your workspace from which you can launch into a previously configured workspace or create a new workspace.
-
-![Coder Workspaces](images/coder-workspaces.png)
-*Figure 5: Coder workspace dashboard showing available development environments*
-
-Coder provides self-hosted development environments that can be:
-
-1. **Deployed** on your infrastructure (cloud, on-premises, or air-gapped)
-2. **Configured** using Terraform templates for consistency
-3. **Provisioned** instantly by developers or AI coding agents
-4. **Accessed** through browsers, VS Code, or other IDEs
-
-### Workspace Lifecycle
-
-For this course, a template has been configured: **Agentic AI Nanodegree (m6i.xlarge)**. Use this template when starting out with the course and creating your first very own workspace.
-
-![Coder New Workspace](images/coder-new-workspace.png)
-*Figure 6: Creating a new workspace with pre-configured templates*
-
-If, at some stage, you need a larger machine, with GPUs or more RAM, you can easily clone and re-configure one of the existing templates - or create a new template from scratch:
-
-1. **Select Template**: Choose from pre-configured nano-degree environments
-2. **Configure Resources**: Adjust CPU, memory, and GPU as needed
-3. **Launch Workspace**: Environment provisions in seconds
-4. **Start Developing**: All tools and dependencies ready immediately
-
-![Coder Workspace Configuration](images/coder-new-workspace-config.png)
-*Figure 7: Workspace configuration options for resource allocation*
-
-## Dev Containers: The Foundation
-
-Once the infrastructure has been configured and the corresponding workspace has been started, you can interact with this workspace through a terminal (SSH) or from within the configured development environment (eg. VSCode - either your desktop version which transparently tunnels into the cloud space, or as browser based instance served from Coder).
-
-Click on VSCode (either desktop or browser-based) to start a new instance of your development environment connected to the workspace instance. A typical set-up of connecting to a remote dev-Container from a local Client (eg. VSCode) is shown below:
-
-![VS Code Dev Container](images/vscode-dev-container.png)
-*Figure 8: VS Code seamlessly connecting to a dev container environment*
-
-Dev containers provide:
-
-- **Containerized Environments**: Isolated, reproducible development spaces
-- **Full IDE Integration**: Complete IntelliSense, debugging, and extensions
-- **Configuration as Code**: `devcontainer.json` defines entire environment
-- **Portable Settings**: Personal preferences follow you across workspaces
-
-### Key Benefits for Nano-Degree Participants
-
-1. **Instant Setup**: No installation required - start coding immediately
-2. **Consistent Environment**: Everyone uses identical configurations
-3. **Pre-installed Tools**: Python, frameworks, libraries all ready
-4. **GPU Access**: Cloud GPUs for AI model training and inference
-5. **Collaboration Ready**: Share workspaces for pair programming or assistance
-
-## Nano-Degree Specific Setup
-
-Once your configured workspace has successfully been launched, you should be presented with a screen similar to this one:
-
-![Coder Workspace Running](images/coder-workspace.png)
-*Figure 9: Active Coder workspace with nano-degree environment*
-
-## Getting Started
-
-You can connect to your workspace using various ways. Options include:
-
-- **Browser-based VS Code**: No installation needed
-- **Local VS Code**: Connect via Remote-SSH extension
-- **JetBrains IDEs**: Full support via Gateway
-- **Terminal Access**: SSH for command-line users
-
-### Pre-configured Environments
-
-Within the context of the nano-degree, each module comes with specialized workspaces:
-
-#### Module 1 - Agent Frameworks
-
-- Python 3.11+
-- LangChain, CrewAI, PydanticAI pre-installed
-- API keys securely managed
-- Sample data and examples loaded
-
-#### Module 2 - RAG Architecture
-
-- Vector databases (Chroma, Pinecone clients)
-- Embedding models cached
-- Document processing tools
-- Performance monitoring dashboards
-
-#### Module 3 - MCP/ACP/A2A
-
-- Protocol servers configured
-- Network tools for testing
-- Security certificates installed
-- Multi-agent simulation environments
-
-### Working with AI Assistants
-
-As a product, Coder workspaces integrate with:
-
-- **Claude**: Anthropic's AI assistant
-- **GitHub Copilot**: Code completion and generation
-- **OpenAI GPT**: Custom agent development
-- **Local LLMs**: Private, secure AI assistance
-
-Inside our corporate network, you have access to **GitHub Copilot** as well as [Coding-Assistant](https://github.com/msc94/coding_assistant?tab=readme-ov-file#readme), a CLI-based open-source coding assistant developed by our very own Marcel Schneider who kindly made his hobby an open-source project. This coding agent can be used from the command line using the preinstalled command *coding-assistant*:
-
-![Coding Assistant](images/coder-llm-coding-assistant.png)
-*Figure 10: Pre-installed coding agent "coding-assistant"*
-
-In addition, to facilitate your agentic developments, the [Gaia LLM API has been pre-configured](llmapi.md) by setting the environment variables OPENAI_BASE_URL and OPENAI_API_KEY, as well as the provision of command *llm*. You can try using this from the command line as follows:
-
-![Coder LLM Integration](images/coder-llm.png)
-*Figure 11: Coder environments support AI coding assistants*
-
-### When you are done
-
-**Stop workspaces** when not in use to conserve resources:
-
-![Coder Stopped](images/coder-stopped.png)
-*Figure 12: Workspaces can be stopped to save resources when not in use*
-
----
-
-**Ready to start?** Access your [cloud development environment](http://10.21.202.14/workspaces) and begin your journey into Agentic AI development with zero friction and maximum productivity!
+<script>
+(function() {
+    'use strict';
+    
+    function detectNetwork() {
+        const hostname = window.location.hostname;
+        console.log('Detecting network for hostname:', hostname);
+        
+        // Check for corporate network indicators
+        const corporatePatterns = [
+            /^10\./,
+            /^192\.168\./,
+            /^172\.(1[6-9]|2[0-9]|3[01])\./,
+            /bmw\.com$/,
+            /bmwgroup\.com$/
+        ];
+        
+        // Check hostname for corporate patterns
+        for (const pattern of corporatePatterns) {
+            if (pattern.test(hostname)) {
+                console.log('Corporate network detected via hostname');
+                return Promise.resolve(true);
+            }
+        }
+        
+        // GitHub Pages should always be public
+        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
+            console.log('GitHub Pages detected - using public mode');
+            return Promise.resolve(false);
+        }
+        
+        // Localhost defaults to corporate for testing
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            console.log('Localhost detected - using corporate mode for testing');
+            return Promise.resolve(true);
+        }
+        
+        // Check if we can reach BMW internal service
+        return checkInternalService();
+    }
+    
+    function checkInternalService() {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                console.log('BMW internal service reachable - corporate network');
+                resolve(true);
+            };
+            img.onerror = () => {
+                console.log('BMW internal service not reachable - public network');
+                resolve(false);
+            };
+            img.src = 'http://10.21.202.14/favicon.ico?' + Date.now();
+            
+            // Timeout after 2 seconds
+            setTimeout(() => {
+                console.log('Service check timeout - assuming public network');
+                resolve(false);
+            }, 2000);
+        });
+    }
+    
+    async function loadContent() {
+        try {
+            const isCorporate = await detectNetwork();
+            const targetFile = isCorporate ? 'coder-bmw.html' : 'coder-public.html';
+            
+            console.log('Redirecting to:', targetFile);
+            
+            // Hide loading message
+            document.getElementById('loading-message').style.display = 'none';
+            
+            // Redirect to the appropriate page
+            window.location.href = targetFile;
+        } catch (error) {
+            console.error('Network detection error:', error);
+            // Default to public on error
+            window.location.href = 'coder-public.html';
+        }
+    }
+    
+    // Start detection when page loads
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadContent);
+    } else {
+        loadContent();
+    }
+})();
+</script>
