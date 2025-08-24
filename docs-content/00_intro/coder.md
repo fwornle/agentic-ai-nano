@@ -1,13 +1,13 @@
 # Development Environment Setup
 
 <!-- BMW Corporate Network Content -->
-<div class="bmw-corporate-only" markdown="1">
+<div class="bmw-corporate-only">
 
-## BMW Cloud Development Environment with Coder
+<h2>BMW Cloud Development Environment with Coder</h2>
 
-### Overview: Developing in the BMW Cloud
+<h3>Overview: Developing in the BMW Cloud</h3>
 
-The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces. This eliminates the traditional friction of local environment setup, dependency conflicts, and corporate network complexity - both technical and procedural - that often delay or derail learning initiatives.
+<p>The Agentic AI Nano-Degree leverages <strong>Coder</strong>, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces. This eliminates the traditional friction of local environment setup, dependency conflicts, and corporate network complexity - both technical and procedural - that often delay or derail learning initiatives.</p>
 
 </div>
 

@@ -87,10 +87,19 @@
 
         // Show BMW-specific navigation items in corporate mode
         showNavigationItems([
-            'Overview: Developing in the BMW Cloud',
             'BMW Cloud Development Environment with Coder',
             'BMW Cloud Development Environment',
-            'Why BMW Cloud Development'
+            'Overview: Developing in the BMW Cloud',
+            'Why BMW Cloud Development',
+            'Cluster Resources',
+            'Traditional Challenges in Corporate Environments',
+            'The Cloud Development Solution',
+            'How to Work with Coder',
+            'Workspace Lifecycle',
+            'Dev Containers: The Foundation',
+            'Nano-Degree Specific Setup',
+            'Getting Started',
+            'Working with AI Assistants'
         ]);
 
         // Update any dynamic text content
@@ -111,10 +120,19 @@
 
         // Hide BMW-specific navigation items in public mode
         hideNavigationItems([
-            'Overview: Developing in the BMW Cloud',
             'BMW Cloud Development Environment with Coder',
             'BMW Cloud Development Environment',
-            'Why BMW Cloud Development'
+            'Overview: Developing in the BMW Cloud',
+            'Why BMW Cloud Development',
+            'Cluster Resources',
+            'Traditional Challenges in Corporate Environments',
+            'The Cloud Development Solution',
+            'How to Work with Coder',
+            'Workspace Lifecycle',
+            'Dev Containers: The Foundation',
+            'Nano-Degree Specific Setup',
+            'Getting Started',
+            'Working with AI Assistants'
         ]);
 
         // Update any dynamic text content
@@ -122,19 +140,43 @@
     }
 
     function hideNavigationItems(itemTexts) {
-        // Wait for navigation to load
-        setTimeout(() => {
-            const navItems = document.querySelectorAll('.md-nav__item');
-            navItems.forEach(item => {
-                const link = item.querySelector('.md-nav__link');
-                if (link) {
-                    const linkText = link.textContent.trim();
-                    if (itemTexts.some(text => linkText.includes(text))) {
-                        item.style.display = 'none';
+        // Wait for navigation to load and repeatedly check (since ToC might load later)
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        function hideItems() {
+            let found = false;
+            
+            // Target both main nav and table of contents
+            const selectors = [
+                '.md-nav__item',
+                '.md-nav__list .md-nav__item',
+                '.md-sidebar__scrollwrap .md-nav__item',
+                '.md-nav--secondary .md-nav__item'
+            ];
+            
+            selectors.forEach(selector => {
+                const navItems = document.querySelectorAll(selector);
+                navItems.forEach(item => {
+                    const link = item.querySelector('.md-nav__link');
+                    if (link) {
+                        const linkText = link.textContent.trim();
+                        if (itemTexts.some(text => linkText.includes(text) || linkText.toLowerCase().includes(text.toLowerCase()))) {
+                            item.style.display = 'none';
+                            found = true;
+                            console.log('Hiding navigation item:', linkText);
+                        }
                     }
-                }
+                });
             });
-        }, 500);
+            
+            attempts++;
+            if (!found && attempts < maxAttempts) {
+                setTimeout(hideItems, 200);
+            }
+        }
+        
+        hideItems();
     }
 
     function showNavigationItems(itemTexts) {
@@ -236,6 +278,38 @@
         document.addEventListener('DOMContentLoaded', initializeNetworkDetection);
     } else {
         initializeNetworkDetection();
+    }
+
+    // Also observe for navigation changes (Material theme dynamic loading)
+    const observer = new MutationObserver(() => {
+        const hostname = window.location.hostname;
+        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
+            // Re-hide BMW content on dynamic updates
+            hideNavigationItems([
+                'BMW Cloud Development Environment with Coder',
+                'BMW Cloud Development Environment',
+                'Overview: Developing in the BMW Cloud',
+                'Why BMW Cloud Development',
+                'Cluster Resources',
+                'Traditional Challenges in Corporate Environments',
+                'The Cloud Development Solution',
+                'How to Work with Coder',
+                'Workspace Lifecycle',
+                'Dev Containers: The Foundation',
+                'Nano-Degree Specific Setup',
+                'Getting Started',
+                'Working with AI Assistants'
+            ]);
+        }
+    });
+
+    // Start observing once DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
+    } else {
+        observer.observe(document.body, { childList: true, subtree: true });
     }
 
 })();
