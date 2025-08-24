@@ -74,20 +74,31 @@
             .then(response => response.json())
             .then(data => {
                 console.log('🌐 External IP detected:', data.ip);
-                // BMW corporate IP ranges (you may need to adjust these)
+                // BMW corporate IP ranges (includes both private and public corporate ranges)
                 const corporateIPPatterns = [
-                    /^10\./,
-                    /^192\.168\./,
-                    /^172\.(1[6-9]|2[0-9]|3[01])\./
+                    /^10\./,                           // Private range
+                    /^192\.168\./,                     // Private range
+                    /^172\.(1[6-9]|2[0-9]|3[01])\./,   // Private range
+                    /^160\.46\./,                      // BMW public IP range
+                    /^194\.114\./,                     // BMW public IP range
+                    /^195\.34\./,                      // BMW public IP range
+                    /^212\.204\./                      // BMW public IP range
                 ];
                 
-                const isCorporateIP = corporateIPPatterns.some(pattern => pattern.test(data.ip));
+                const isCorporateIP = corporateIPPatterns.some(pattern => {
+                    if (pattern.test(data.ip)) {
+                        console.log(`✅ IP ${data.ip} matches corporate pattern: ${pattern}`);
+                        return true;
+                    }
+                    return false;
+                });
+                
                 if (isCorporateIP && !detectionComplete) {
                     console.log('✅ Corporate IP range detected - showing corporate content');
                     detectionComplete = true;
                     showCorporateContent();
                 } else if (!detectionComplete) {
-                    console.log('📍 Public IP detected, trying internal service check');
+                    console.log(`📍 IP ${data.ip} not in corporate ranges, trying internal service check`);
                     tryInternalServiceCheck();
                 }
             })
@@ -99,10 +110,11 @@
         function tryInternalServiceCheck() {
             if (detectionComplete) return;
             
-            // Try internal service check with both HTTP and HTTPS
+            // Try internal service check with multiple BMW internal services
             const testUrls = [
-                'https://10.21.202.14/favicon.ico',  // Try HTTPS first
-                'http://10.21.202.14/favicon.ico'    // Fallback to HTTP
+                'https://contenthub.bmwgroup.net/favicon.ico',  // BMW Content Hub (most reliable)
+                'https://10.21.202.14/favicon.ico',             // Coder instance HTTPS
+                'http://10.21.202.14/favicon.ico'               // Coder instance HTTP fallback
             ];
             
             let urlIndex = 0;
@@ -144,11 +156,12 @@
         // Set a timeout to ensure we don't wait forever
         setTimeout(() => {
             if (!detectionComplete) {
-                console.log('⏱️ All detection methods timed out - defaulting to public content');
+                console.log('⏱️ Network detection timed out after 5s - defaulting to public content');
+                console.log('💡 If you are on BMW network, try manual override by clicking the status indicator');
                 hideCorporateContent();
                 detectionComplete = true;
             }
-        }, 8000);
+        }, 5000);
     }
 
     function showCorporateContent() {
