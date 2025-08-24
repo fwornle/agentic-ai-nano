@@ -204,85 +204,9 @@
         updateNetworkStatusIndicator('public');
     }
 
-    function hideNavigationItems(itemTexts) {
-        // Wait for navigation to load and repeatedly check (since ToC might load later)
-        let attempts = 0;
-        const maxAttempts = 10;
-        
-        function hideItems() {
-            let found = false;
-            
-            // Target both main nav and table of contents
-            const selectors = [
-                '.md-nav__item',
-                '.md-nav__list .md-nav__item',
-                '.md-sidebar__scrollwrap .md-nav__item',
-                '.md-nav--secondary .md-nav__item'
-            ];
-            
-            selectors.forEach(selector => {
-                const navItems = document.querySelectorAll(selector);
-                navItems.forEach(item => {
-                    const link = item.querySelector('.md-nav__link');
-                    if (link) {
-                        const linkText = link.textContent.trim();
-                        if (itemTexts.some(text => linkText.includes(text) || linkText.toLowerCase().includes(text.toLowerCase()))) {
-                            item.style.display = 'none';
-                            found = true;
-                            console.log('Hiding navigation item:', linkText);
-                        }
-                    }
-                });
-            });
-            
-            attempts++;
-            if (!found && attempts < maxAttempts) {
-                setTimeout(hideItems, 200);
-            }
-        }
-        
-        hideItems();
-    }
-
-    function showNavigationItems(itemTexts) {
-        // Show navigation items immediately and with retries
-        let attempts = 0;
-        const maxAttempts = 10;
-        
-        function showItems() {
-            let found = false;
-            
-            // Target both main nav and table of contents
-            const selectors = [
-                '.md-nav__item',
-                '.md-nav__list .md-nav__item',
-                '.md-sidebar__scrollwrap .md-nav__item',
-                '.md-nav--secondary .md-nav__item'
-            ];
-            
-            selectors.forEach(selector => {
-                const navItems = document.querySelectorAll(selector);
-                navItems.forEach(item => {
-                    const link = item.querySelector('.md-nav__link');
-                    if (link) {
-                        const linkText = link.textContent.trim();
-                        if (itemTexts.some(text => linkText.includes(text) || linkText.toLowerCase().includes(text.toLowerCase()))) {
-                            item.style.setProperty('display', 'block', 'important');
-                            found = true;
-                            console.log('Showing navigation item:', linkText);
-                        }
-                    }
-                });
-            });
-            
-            attempts++;
-            if (!found && attempts < maxAttempts) {
-                setTimeout(showItems, 200);
-            }
-        }
-        
-        showItems();
-    }
+    // REMOVED: Navigation manipulation functions
+    // Navigation structure should be handled entirely by MkDocs
+    // Only content within pages should be conditional
 
     function updateNetworkSpecificContent(isCorporate) {
         // Update setup instructions based on network
@@ -454,47 +378,8 @@
     // Also run detection on navigation changes (for SPA behavior)
     window.addEventListener('popstate', runDetection);
 
-    // Also observe for navigation changes (Material theme dynamic loading)
-    const observer = new MutationObserver(() => {
-        // Only handle content visibility, not navigation structure
-        console.log('🔍 MutationObserver: Ensuring content visibility matches network detection');
-        
-        if (isCorporateNetworkDetected) {
-            // Re-apply corporate content visibility after DOM changes
-            const corporateElements = document.querySelectorAll('.bmw-corporate-only');
-            corporateElements.forEach(element => {
-                element.classList.add('show-corporate');
-                element.style.setProperty('display', 'block', 'important');
-            });
-            
-            const publicElements = document.querySelectorAll('.bmw-public-alternative');
-            publicElements.forEach(element => {
-                element.classList.add('hide-public');
-                element.style.setProperty('display', 'none', 'important');
-            });
-        } else {
-            // Ensure public content is visible
-            const corporateElements = document.querySelectorAll('.bmw-corporate-only');
-            corporateElements.forEach(element => {
-                element.classList.remove('show-corporate');
-                element.style.removeProperty('display');
-            });
-            
-            const publicElements = document.querySelectorAll('.bmw-public-alternative');
-            publicElements.forEach(element => {
-                element.classList.remove('hide-public');
-                element.style.removeProperty('display');
-            });
-        }
-    });
-
-    // Start observing once DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            observer.observe(document.body, { childList: true, subtree: true });
-        });
-    } else {
-        observer.observe(document.body, { childList: true, subtree: true });
-    }
+    // REMOVED: MutationObserver navigation interference
+    // Let MkDocs handle navigation structure completely
+    // Content visibility is handled by CSS classes only
 
 })();
