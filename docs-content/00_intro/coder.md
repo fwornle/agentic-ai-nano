@@ -119,26 +119,12 @@ Once your configured workspace has successfully been launched, you should be pre
 
 ## Getting Started
 
-### Step 3: Connect Your IDE
-
-Options include:
+You can connect to your workspace using various ways. Options include:
 
 - **Browser-based VS Code**: No installation needed
 - **Local VS Code**: Connect via Remote-SSH extension
 - **JetBrains IDEs**: Full support via Gateway
 - **Terminal Access**: SSH for command-line users
-
-### Step 4: Start Learning
-
-![Coder Stopped](images/coder-stopped.png)
-*Figure 10: Workspaces can be stopped to save resources when not in use*
-
-Best practices:
-
-- **Stop workspaces** when not in use to conserve resources
-- **Use persistent storage** for important work
-- **Leverage pre-built images** for faster startup
-- **Customize your dotfiles** for personal preferences
 
 ### Pre-configured Environments
 
@@ -165,7 +151,7 @@ Within the context of the nano-degree, each module comes with specialized worksp
 - Security certificates installed
 - Multi-agent simulation environments
 
-## Working with AI Assistants
+### Working with AI Assistants
 
 As a product, Coder workspaces integrate with:
 
@@ -177,64 +163,20 @@ As a product, Coder workspaces integrate with:
 Inside our corporate network, you have access to **GitHub Copilot** as well as [Coding-Assistant](https://github.com/msc94/coding_assistant?tab=readme-ov-file#readme), a CLI-based open-source coding assistant developed by our very own Marcel Schneider who kindly made his hobby an open-source project. This coding agent can be used from the command line using the preinstalled command *coding-assistant*:
 
 ![Coding Assistant](images/coder-llm-coding-assistant.png)
-*Figure 11: Pre-installed coding agent "coding-assistant"*
+*Figure 10: Pre-installed coding agent "coding-assistant"*
 
 In addition, to facilitate your agentic developments, the [Gaia LLM API has been pre-configured](llmapi.md) by setting the environment variables OPENAI_BASE_URL and OPENAI_API_KEY, as well as the provision of command *llm*. You can try using this from the command line as follows:
 
 ![Coder LLM Integration](images/coder-llm.png)
-*Figure 12: Coder environments support AI coding assistants*
+*Figure 11: Coder environments support AI coding assistants*
 
-## Security and Compliance
+### When you are done
 
-Coder provides enterprise-grade security:
+**Stop workspaces** when not in use to conserve resources:
 
-- **SOC 2 Type II Compliant**: Audited security controls
-- **Air-Gap Support**: For classified environments
-- **RBAC**: Role-based access control
-- **Audit Logging**: Complete activity tracking
-- **Encryption**: At-rest and in-transit protection
-
-## Troubleshooting
-
-### Common Issues and Solutions
-
-#### Workspace Won't Start
-
-- Check resource availability in cluster
-- Verify network connectivity
-- Contact support if persistent
-
-#### Extensions Not Working
-
-- Ensure extensions are installed in container
-- Check devcontainer.json configuration
-- Rebuild container if necessary
-
-#### Performance Issues
-
-- Upgrade to higher resource tier
-- Check network latency
-- Optimize code for cloud execution
-
-## Support Resources
-
-- **Documentation**: Comprehensive guides at coder.com/docs
-- **Community Forum**: Get help from other users
-- **Office Hours**: Weekly support sessions
-- **Slack Channel**: Real-time assistance
-
-## Conclusion
-
-The cloud development infrastructure removes traditional barriers to learning and development. With Coder and dev containers, you can:
-
-- **Start immediately** without installation hassles
-- **Focus on learning** rather than environment setup
-- **Access powerful resources** beyond typical laptops
-- **Collaborate seamlessly** with instructors and peers
-- **Work from anywhere** with just a browser
-
-This modern approach to development environments ensures every participant can fully engage with the nano-degree content, regardless of their local system constraints or corporate IT policies.
+![Coder Stopped](images/coder-stopped.png)
+*Figure 12: Workspaces can be stopped to save resources when not in use*
 
 ---
 
-**Ready to start?** Access your cloud development environment and begin your journey into Agentic AI development with zero friction and maximum productivity!
+**Ready to start?** Access your [cloud development environment](http://10.21.202.14/workspaces) and begin your journey into Agentic AI development with zero friction and maximum productivity!
