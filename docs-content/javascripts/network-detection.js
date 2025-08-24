@@ -241,54 +241,58 @@
     }
 
     function hideNavigationItemsReliably() {
-        // Wait for MkDocs Material navigation to be fully loaded
-        const waitForNavigation = setInterval(() => {
+        console.log('🔧 Starting to hide BMW navigation items in public mode');
+        
+        // Function to actually hide items
+        function doHiding() {
             const navItems = document.querySelectorAll('.md-nav__item');
-            if (navItems.length > 0) {
-                clearInterval(waitForNavigation);
-                
-                navItems.forEach(item => {
-                    const link = item.querySelector('.md-nav__link');
-                    if (link) {
-                        const linkText = link.textContent.trim();
-                        
-                        // Hide BMW-specific navigation items in public mode
-                        const bmwItems = [
-                            'BMW Cloud Development Environment with Coder',
-                            'Overview: Developing in the BMW Cloud', 
-                            'Cluster Resources',
-                            'Why Cloud Development?',
-                            'Traditional Challenges in Corporate Environments',
-                            'The Cloud Development Solution',
-                            'How to Work with Coder',
-                            'Workspace Lifecycle',
-                            'Dev Containers: The Foundation',
-                            'Nano-Degree Specific Setup',
-                            'Working with AI Assistants',
-                            'When you are done'
-                        ];
-                        
-                        const shouldHide = bmwItems.some(bmwItem => 
-                            linkText.includes(bmwItem) || 
-                            linkText === bmwItem ||
-                            linkText.toLowerCase().includes(bmwItem.toLowerCase())
-                        );
-                        
-                        if (shouldHide) {
+            console.log(`📋 Found ${navItems.length} navigation items to check`);
+            
+            navItems.forEach(item => {
+                const link = item.querySelector('.md-nav__link');
+                if (link) {
+                    const linkText = link.textContent.trim();
+                    
+                    // BMW-specific items from the LLM API sidebar
+                    const bmwItems = [
+                        'BMW Gaia LLM API',
+                        'Quick Setup',
+                        'Testing Your Connection',
+                        'Available Models',
+                        'Using in Code',
+                        'Framework Integration'
+                    ];
+                    
+                    // Check if this item should be hidden
+                    bmwItems.forEach(bmwItem => {
+                        if (linkText === bmwItem || linkText.includes(bmwItem)) {
                             item.style.setProperty('display', 'none', 'important');
                             item.style.setProperty('visibility', 'hidden', 'important');
                             item.style.setProperty('height', '0', 'important');
                             item.style.setProperty('margin', '0', 'important');
                             item.style.setProperty('padding', '0', 'important');
+                            item.style.setProperty('overflow', 'hidden', 'important');
                             console.log('🚫 Hidden BMW nav item:', linkText);
                         }
-                    }
-                });
+                    });
+                }
+            });
+        }
+        
+        // Run immediately
+        doHiding();
+        
+        // Keep checking as MkDocs dynamically loads content
+        let attempts = 0;
+        const checkInterval = setInterval(() => {
+            attempts++;
+            doHiding();
+            
+            if (attempts > 20) { // Check for 2 seconds (20 * 100ms)
+                clearInterval(checkInterval);
+                console.log('✅ Finished hiding BMW navigation items');
             }
         }, 100);
-        
-        // Cleanup after 5 seconds if navigation never loads
-        setTimeout(() => clearInterval(waitForNavigation), 5000);
     }
 
     function showNavigationItemsReliably() {
