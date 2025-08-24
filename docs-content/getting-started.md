@@ -47,7 +47,8 @@ Master the Model Context Protocol, Agent Communication Protocol, and sophisticat
 ### 👀 Observer Path (30-80 min/session)
 **Best for**: Quick understanding, decision makers, busy schedules
 
-### Activities
+**Activities:**
+
 - Read core concepts and architectural overviews
 - Examine code examples and patterns
 - Understand design decisions and trade-offs
@@ -58,7 +59,8 @@ Master the Model Context Protocol, Agent Communication Protocol, and sophisticat
 ### 🙋‍♂️ Participant Path (50-110 min/session)
 **Best for**: Hands-on learners, developers, practical understanding
 
-### Activities
+**Activities:**
+
 - Follow guided implementations step-by-step
 - Run provided code examples
 - Complete exercises and mini-projects
@@ -69,7 +71,8 @@ Master the Model Context Protocol, Agent Communication Protocol, and sophisticat
 ### 🛠️ Implementer Path (120-260 min/session)
 **Best for**: Deep expertise, architects, production focus
 
-### Activities
+**Activities:**
+
 - Build complete systems from scratch
 - Implement custom components and optimizations
 - Explore advanced patterns and architectures
@@ -119,17 +122,20 @@ nano-degree/
 
 ### Common Schedules
 
-### Intensive (2-3 weeks)
+**Intensive (2-3 weeks)**
+
 - 2 sessions per day (Observer path)
 - 1 session per day (Participant path)  
 - 1 session every 2 days (Implementer path)
 
-### Regular (4-6 weeks)
+**Regular (4-6 weeks)**
+
 - 1 session per day (Observer path)
 - 1 session every 2 days (Participant path)
 - 2-3 sessions per week (Implementer path)
 
-### Extended (8-12 weeks)
+**Extended (8-12 weeks)**
+
 - 3-4 sessions per week (any path)
 - More time for practice and projects
 - Deep exploration of optional modules
@@ -181,14 +187,14 @@ pip install mkdocs mkdocs-material
 
 ### Troubleshooting
 
-### Common Issues
+**Common Issues**
 
 - **API Rate Limits**: Use smaller examples, implement delays
 - **Memory Issues**: Close other applications, use smaller models
 - **Import Errors**: Check virtual environment activation
 - **Network Issues**: Verify API keys and internet connection
 
-### Debug Steps
+**Debug Steps**
 1. Check error messages carefully
 2. Verify environment variables
 3. Test with minimal examples
@@ -197,20 +203,23 @@ pip install mkdocs mkdocs-material
 
 ## Progress Tracking
 
-### Session Completion
+**Session Completion**
+
 - [ ] Read all core content
 - [ ] Run code examples successfully  
 - [ ] Complete exercises/assignments
 - [ ] Pass assessment quizzes
 - [ ] Understand key concepts
 
-### Module Milestones
+**Module Milestones**
+
 - [ ] **Session 0-2**: Foundations established
 - [ ] **Session 3-5**: Intermediate concepts mastered  
 - [ ] **Session 6-8**: Advanced patterns implemented
 - [ ] **Session 9**: Production deployment ready
 
-### Portfolio Projects
+**Portfolio Projects**
+
 Consider building these throughout your learning:
 
 1. **Personal Assistant Agent** (Sessions 1-4)
