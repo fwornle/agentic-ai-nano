@@ -58,30 +58,97 @@
         // Show initial status
         updateNetworkStatusIndicator('checking');
         
-        // Attempt to reach BMW internal service (non-blocking)
-        const img = new Image();
-        img.onload = function() {
-            // If image loads, we're likely on corporate network
-            console.log('✅ Internal service reachable - showing corporate content');
+        // Try multiple detection methods
+        let detectionComplete = false;
+        
+        // Method 1: Check if user manually wants to enable corporate mode (for testing)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('corporate') === 'true') {
+            console.log('🔧 Corporate mode forced via URL parameter');
             showCorporateContent();
-        };
-        img.onerror = function() {
-            // If image fails, we're likely on public network
-            console.log('❌ Internal service not reachable - showing public content');
-            hideCorporateContent();
-        };
+            return;
+        }
+        
+        // Method 2: Check for BMW-specific network indicators in IP ranges
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                console.log('🌐 External IP detected:', data.ip);
+                // BMW corporate IP ranges (you may need to adjust these)
+                const corporateIPPatterns = [
+                    /^10\./,
+                    /^192\.168\./,
+                    /^172\.(1[6-9]|2[0-9]|3[01])\./
+                ];
+                
+                const isCorporateIP = corporateIPPatterns.some(pattern => pattern.test(data.ip));
+                if (isCorporateIP && !detectionComplete) {
+                    console.log('✅ Corporate IP range detected - showing corporate content');
+                    detectionComplete = true;
+                    showCorporateContent();
+                } else if (!detectionComplete) {
+                    console.log('📍 Public IP detected, trying internal service check');
+                    tryInternalServiceCheck();
+                }
+            })
+            .catch(error => {
+                console.log('❌ IP detection failed, trying internal service check:', error);
+                tryInternalServiceCheck();
+            });
+            
+        function tryInternalServiceCheck() {
+            if (detectionComplete) return;
+            
+            // Try internal service check with both HTTP and HTTPS
+            const testUrls = [
+                'https://10.21.202.14/favicon.ico',  // Try HTTPS first
+                'http://10.21.202.14/favicon.ico'    // Fallback to HTTP
+            ];
+            
+            let urlIndex = 0;
+            
+            function testNextUrl() {
+                if (urlIndex >= testUrls.length || detectionComplete) {
+                    // All URLs failed
+                    if (!detectionComplete) {
+                        console.log('❌ All internal service checks failed - showing public content');
+                        hideCorporateContent();
+                        detectionComplete = true;
+                    }
+                    return;
+                }
+                
+                const testUrl = testUrls[urlIndex];
+                console.log(`🔍 Trying internal service: ${testUrl}`);
+                
+                const img = new Image();
+                img.onload = function() {
+                    if (!detectionComplete) {
+                        console.log('✅ Internal service reachable - showing corporate content');
+                        showCorporateContent();
+                        detectionComplete = true;
+                    }
+                };
+                img.onerror = function() {
+                    console.log(`❌ Failed to reach: ${testUrl}`);
+                    urlIndex++;
+                    setTimeout(testNextUrl, 500); // Try next URL after short delay
+                };
+                
+                img.src = testUrl + '?' + Date.now();
+            }
+            
+            testNextUrl();
+        }
         
         // Set a timeout to ensure we don't wait forever
         setTimeout(() => {
-            console.log('⏱️ Internal service check timeout - defaulting to public content');
-            if (!document.querySelector('.corporate-network-detected') && 
-                !document.querySelector('.public-network-detected')) {
+            if (!detectionComplete) {
+                console.log('⏱️ All detection methods timed out - defaulting to public content');
                 hideCorporateContent();
+                detectionComplete = true;
             }
-        }, 5000);
-        
-        // Use a small internal resource that exists only on corporate network
-        img.src = 'http://10.21.202.14/favicon.ico?' + Date.now();
+        }, 8000);
     }
 
     function showCorporateContent() {
@@ -294,6 +361,18 @@
                     Local Setup Required
                 </div>
             `;
+        }
+
+        // Make indicator clickable for manual override
+        if (networkType === 'public') {
+            indicator.style.cursor = 'pointer';
+            indicator.title = 'Click to manually enable corporate mode for testing';
+            indicator.addEventListener('click', () => {
+                if (confirm('Enable BMW corporate mode? This will show internal BMW content.')) {
+                    console.log('🔧 Manual override: Enabling corporate mode');
+                    showCorporateContent();
+                }
+            });
         }
 
         document.body.appendChild(indicator);
