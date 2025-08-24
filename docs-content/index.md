@@ -2,80 +2,27 @@
 
 Welcome to the comprehensive **Agentic AI Nano-Degree** program! This intensive curriculum covers the complete landscape of modern AI agent development and Retrieval-Augmented Generation (RAG) systems.
 
-## 🚀 Before You Begin - Essential Setup
+## 🚀 Getting Started
 
-<div class="setup-instructions">
-<!-- Dynamic content will be inserted here by network-detection.js -->
-</div>
-
-<!-- BMW Corporate Network Content -->
-<div class="bmw-corporate-only" markdown="1">
-
-**Important:** Access your pre-configured BMW cloud development environment for zero-friction learning!
+Ready to begin your learning journey? Choose your path based on your setup and learning preferences:
 
 <div class="grid cards" markdown>
 
--   :material-cloud:{ .lg .middle } **BMW Cloud Development Environment**
+-   :material-cog:{ .lg .middle } **Setup & Environment**
 
     ---
 
-    Access your pre-configured Coder workspace with all BMW tools ready
+    Configure your development environment (local or cloud-based)
 
-    [:octicons-arrow-right-24: Setup Guide](00_intro/coder.md)
+    [:octicons-arrow-right-24: Environment Setup](00_intro/coder.md)
 
--   :material-api:{ .lg .middle } **BMW Gaia LLM API**
-
-    ---
-
-    Connect to the internal Gaia LLM API for agent development
-
-    [:octicons-arrow-right-24: API Setup](00_intro/llmapi.md)
-
-</div>
-
-### Why BMW Cloud Development?
-
-Your BMW Coder workspace includes:
-
-- **Pre-installed frameworks** (LangChain, CrewAI, PydanticAI, etc.)
-- **GPU access** for AI model training and inference
-- **Integrated AI assistants** (GitHub Copilot, BMW Coding-Assistant CLI)
-- **Zero local installation** requirements
-- **BMW security compliance** and network access
-
-<!-- Public Network Alternative Content -->
-<div class="bmw-public-alternative" markdown="1">
-
-**Important:** Set up your local development environment for hands-on learning!
-
-<div class="grid cards" markdown>
-
--   :material-download:{ .lg .middle } **Local Development Setup**
+-   :material-book-open:{ .lg .middle } **Course Guide**
 
     ---
 
-    Install and configure your local development environment
+    Learn about the program structure, prerequisites, and learning paths
 
-    [:octicons-arrow-right-24: Local Setup Guide](getting-started.md)
-
--   :material-key:{ .lg .middle } **API Configuration**
-
-    ---
-
-    Configure your own LLM API keys (OpenAI, Anthropic, etc.)
-
-    [:octicons-arrow-right-24: API Setup Guide](getting-started.md#api-setup)
-
-</div>
-
-### Local Development Requirements
-
-For local setup, you'll need:
-
-- **Python 3.11+** with virtual environment support
-- **LLM API access** (OpenAI, Anthropic Claude, or local models)
-- **Development tools** (Git, VS Code or preferred IDE)
-- **Hardware recommendations** for AI workloads (GPU optional but beneficial)
+    [:octicons-arrow-right-24: Getting Started Guide](getting-started.md)
 
 </div>
 
@@ -214,29 +161,9 @@ Each session follows a consistent structure:
 5. **Assessment** - Multiple choice tests with detailed solutions
 6. **Navigation** - Clear paths to previous/next sessions
 
-## Quick Start
+## Choose Your Learning Module
 
-Ready to begin your journey? **First, set up your environment, then choose your starting point:**
-
-<!-- BMW Corporate Network Quick Start -->
-<div class="bmw-corporate-only" markdown="1">
-
-### Step 1: BMW Cloud Environment Setup
-Access your [BMW cloud development environment](00_intro/coder.md) at `http://10.21.202.14/workspaces`
-
-### Step 2: Choose Your Learning Path
-
-</div>
-
-<!-- Public Network Quick Start -->
-<div class="bmw-public-alternative" markdown="1">
-
-### Step 1: Local Environment Setup
-Follow the [local setup guide](getting-started.md) to install Python, dependencies, and configure API keys
-
-### Step 2: Choose Your Learning Path
-
-</div>
+Ready to begin your journey? Select the module that best fits your learning goals:
 
 <div class="grid cards" markdown>
 

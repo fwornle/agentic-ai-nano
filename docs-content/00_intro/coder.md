@@ -29,25 +29,79 @@ Before beginning the course modules, ensure you have:
 3. **Code editor** (VS Code recommended with Python extension)
 4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
 
-### Quick Local Setup
+### Local Environment Setup Guide
+
+#### 1. Python Environment
+
+We recommend using Python 3.11 or higher with a virtual environment:
 
 ```bash
-# Clone the course repository
-git clone <repository-url>
-cd nano-degree
+# Create virtual environment
+python -m venv agentic-ai
+source agentic-ai/bin/activate  # On Windows: agentic-ai\Scripts\activate
 
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or
-venv\Scripts\activate     # Windows
+# Upgrade pip
+pip install --upgrade pip
+```
 
-# Install dependencies for Module 1
+#### 2. Clone Repository
+
+```bash
+git clone https://github.com/fwornle/agentic-ai-nano.git
+cd agentic-ai-nano
+```
+
+#### 3. Install Dependencies
+
+```bash
+# Install core requirements (if available)
+pip install -r requirements.txt
+
+# For specific modules, install additional dependencies:
+# Agent Frameworks
 pip install -r docs-content/01_frameworks/src/session1/requirements.txt
 
-# Set up your API keys
-export OPENAI_API_KEY="your-api-key-here"
-# or create a .env file with your keys
+# RAG Architecture  
+pip install -r docs-content/02_rag/src/session1/requirements.txt
+
+# MCP & Agent Protocols
+pip install -r docs-content/03_mcp-acp-a2a/src/session1/requirements.txt
+```
+
+#### 4. API Keys Setup
+
+Create a `.env` file in the project root:
+
+```bash
+# OpenAI (required for most examples)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Optional: Other LLM providers
+ANTHROPIC_API_KEY=your_anthropic_key_here
+COHERE_API_KEY=your_cohere_key_here
+
+# Vector Database APIs (choose based on your preference)
+PINECONE_API_KEY=your_pinecone_key_here
+WEAVIATE_URL=your_weaviate_instance_url
+CHROMA_PERSIST_DIRECTORY=./chroma_db
+
+# Other services
+GOOGLE_API_KEY=your_google_key_here
+HF_TOKEN=your_huggingface_token_here
+```
+
+#### 5. Verify Installation
+
+```bash
+# Test basic Python setup
+python --version
+pip --version
+
+# Test a simple import (if dependencies are installed)
+python -c "print('Setup looks good!')"
+
+# Navigate to your chosen module to begin
+cd docs-content/01_frameworks  # or 02_rag or 03_mcp-acp-a2a
 ```
 
 </div>

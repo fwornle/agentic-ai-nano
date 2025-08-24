@@ -4,9 +4,9 @@ Welcome to the Agentic AI Nano-Degree! This guide will help you set up your envi
 
 ## Quick Start
 
-1. **Choose Your Module**: Start with [Agent Frameworks](01_frameworks/index.md), [RAG Architecture](02_rag/index.md), or [MCP & Agent Protocols](03_mcp-acp-a2a/index.md)
-2. **Select Learning Path**: Observer, Participant, or Implementer based on your time and depth needs
-3. **Set Up Environment**: Follow the setup instructions below
+1. **Set Up Environment**: Configure your development environment - see [Setup & Environment](00_intro/coder.md)
+2. **Choose Your Module**: Start with [Agent Frameworks](01_frameworks/index.md), [RAG Architecture](02_rag/index.md), or [MCP & Agent Protocols](03_mcp-acp-a2a/index.md)
+3. **Select Learning Path**: Observer, Participant, or Implementer based on your time and depth needs
 4. **Begin Learning**: Start with Session 0 of your chosen module
 
 ## Prerequisites
@@ -29,77 +29,18 @@ Welcome to the Agentic AI Nano-Degree! This guide will help you set up your envi
 - **Internet**: Stable connection for API calls and model downloads
 - **OS**: Windows 10+, macOS 10.15+, or Linux (Ubuntu 18.04+)
 
-## Environment Setup
+## Course Overview
 
-### 1. Python Environment
+This nano-degree consists of three comprehensive modules:
 
-We recommend using Python 3.9 or higher with a virtual environment:
+### 🤖 Module 1: Agent Frameworks (10 Sessions)
+Master the art of building intelligent agents using cutting-edge frameworks like LangChain, CrewAI, PydanticAI, and more.
 
-```bash
-# Create virtual environment
-python -m venv agentic-ai
-source agentic-ai/bin/activate  # On Windows: agentic-ai\Scripts\activate
+### 🔍 Module 2: RAG Architecture (10 Sessions)
+Build sophisticated Retrieval-Augmented Generation systems for enterprise applications with advanced chunking, vector databases, and evaluation techniques.
 
-# Upgrade pip
-pip install --upgrade pip
-```
-
-### 2. Clone Repository
-
-```bash
-git clone https://github.com/yourusername/nano-degree.git
-cd nano-degree
-```
-
-### 3. Install Dependencies
-
-```bash
-# Install core requirements
-pip install -r requirements.txt
-
-# For specific modules, install additional dependencies:
-# Agent Frameworks
-pip install -r 01_frameworks/requirements.txt
-
-# RAG Architecture  
-pip install -r 02_rag/requirements.txt
-
-# MCP & Agent Protocols
-pip install -r 03_mcp-acp-a2a/requirements.txt
-```
-
-### 4. API Keys Setup
-
-Create a `.env` file in the project root:
-
-```bash
-# OpenAI (required for most examples)
-OPENAI_API_KEY=your_openai_api_key_here
-
-# Optional: Other LLM providers
-ANTHROPIC_API_KEY=your_anthropic_key_here
-COHERE_API_KEY=your_cohere_key_here
-
-# Vector Database APIs (choose based on your preference)
-PINECONE_API_KEY=your_pinecone_key_here
-WEAVIATE_URL=your_weaviate_instance_url
-CHROMA_PERSIST_DIRECTORY=./chroma_db
-
-# Other services
-GOOGLE_API_KEY=your_google_key_here
-HF_TOKEN=your_huggingface_token_here
-```
-
-### 5. Verify Installation
-
-```bash
-# Test core functionality
-python -c "import openai, langchain, chromadb; print('Setup complete!')"
-
-# Run a simple test
-cd 01_frameworks/src/session1
-python test_setup.py
-```
+### 🌐 Module 3: MCP, ACP & Agent-to-Agent Communication (10 Sessions)
+Master the Model Context Protocol, Agent Communication Protocol, and sophisticated multi-agent coordination patterns.
 
 ## Learning Paths Guide
 
@@ -291,3 +232,4 @@ Upon completion, you can:
 
 [Start with Agent Frameworks →](01_frameworks/index.md){ .md-button .md-button--primary }
 [Begin with RAG Architecture →](02_rag/index.md){ .md-button }
+[Master Agent Communication →](03_mcp-acp-a2a/index.md){ .md-button }
