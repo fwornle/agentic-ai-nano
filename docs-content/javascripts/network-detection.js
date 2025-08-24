@@ -43,22 +43,28 @@
             return true;
         }
 
-        // Additional check: try to reach BMW internal service
-        // This is a non-blocking check that won't delay page load
-        checkInternalService();
-        
+        // Default to public network if no corporate indicators found
         return false;
     }
 
     function checkInternalService() {
+        // Only run this check if we're not on GitHub Pages
+        const hostname = window.location.hostname;
+        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
+            console.log('Skipping internal service check - on public GitHub Pages');
+            return;
+        }
+        
         // Attempt to reach BMW internal service (non-blocking)
         const img = new Image();
         img.onload = function() {
             // If image loads, we're likely on corporate network
+            console.log('Internal service reachable - showing corporate content');
             showCorporateContent();
         };
         img.onerror = function() {
             // If image fails, we're likely on public network
+            console.log('Internal service not reachable - showing public content');
             hideCorporateContent();
         };
         // Use a small internal resource that exists only on corporate network
@@ -68,13 +74,13 @@
     function showCorporateContent() {
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         corporateElements.forEach(element => {
-            element.style.display = 'block';
+            element.style.setProperty('display', 'block', 'important');
             element.classList.add('corporate-network-detected');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
         publicElements.forEach(element => {
-            element.style.display = 'none';
+            element.style.setProperty('display', 'none', 'important');
         });
 
         // Update any dynamic text content
@@ -84,12 +90,12 @@
     function hideCorporateContent() {
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         corporateElements.forEach(element => {
-            element.style.display = 'none';
+            element.style.setProperty('display', 'none', 'important');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
         publicElements.forEach(element => {
-            element.style.display = 'block';
+            element.style.setProperty('display', 'block', 'important');
             element.classList.add('public-network-detected');
         });
 
@@ -127,8 +133,11 @@
     }
 
     function initializeNetworkDetection() {
-        // Add CSS for smooth transitions
+        // Add CSS for smooth transitions and ensure BMW content is hidden by default on public sites
         const style = document.createElement('style');
+        const hostname = window.location.hostname;
+        const isPublicSite = hostname.includes('github.io') || hostname.includes('fwornle');
+        
         style.textContent = `
             .bmw-corporate-only, .bmw-public-alternative {
                 transition: opacity 0.3s ease-in-out;
@@ -147,15 +156,17 @@
             .setup-instructions {
                 min-height: 100px;
             }
+            /* Force hide BMW content on public sites */
+            ${isPublicSite ? '.bmw-corporate-only { display: none !important; } .bmw-public-alternative { display: block !important; }' : ''}
         `;
         document.head.appendChild(style);
 
         // Default to public content (safer for public internet)
         // GitHub Pages should always show public content
-        const hostname = window.location.hostname;
-        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
-            console.log('GitHub Pages detected - showing public content');
+        if (isPublicSite) {
+            console.log('GitHub Pages detected - forcing public content');
             hideCorporateContent();
+            // Disable the async check for public sites
             return;
         }
 
