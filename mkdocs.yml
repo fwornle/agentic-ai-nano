@@ -142,7 +142,7 @@ nav:
   - Getting Started: getting-started.md
   
   - Setup & Environment:
-    - Cloud Development (Coder): 00_intro/coder.md
+    - Development Environment: 00_intro/coder.md
     - LLM API Configuration: llmapi.md
   
   - Agent Frameworks:
@@ -239,3 +239,4 @@ extra_css:
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/network-detection.js
