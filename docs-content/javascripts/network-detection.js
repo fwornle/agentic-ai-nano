@@ -69,43 +69,9 @@
             return;
         }
         
-        // Method 2: Check for BMW-specific network indicators in IP ranges
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-                console.log('🌐 External IP detected:', data.ip);
-                // BMW corporate IP ranges (includes both private and public corporate ranges)
-                const corporateIPPatterns = [
-                    /^10\./,                           // Private range
-                    /^192\.168\./,                     // Private range
-                    /^172\.(1[6-9]|2[0-9]|3[01])\./,   // Private range
-                    /^160\.46\./,                      // BMW public IP range
-                    /^194\.114\./,                     // BMW public IP range
-                    /^195\.34\./,                      // BMW public IP range
-                    /^212\.204\./                      // BMW public IP range
-                ];
-                
-                const isCorporateIP = corporateIPPatterns.some(pattern => {
-                    if (pattern.test(data.ip)) {
-                        console.log(`✅ IP ${data.ip} matches corporate pattern: ${pattern}`);
-                        return true;
-                    }
-                    return false;
-                });
-                
-                if (isCorporateIP && !detectionComplete) {
-                    console.log('✅ Corporate IP range detected - showing corporate content');
-                    detectionComplete = true;
-                    showCorporateContent();
-                } else if (!detectionComplete) {
-                    console.log(`📍 IP ${data.ip} not in corporate ranges, trying internal service check`);
-                    tryInternalServiceCheck();
-                }
-            })
-            .catch(error => {
-                console.log('❌ IP detection failed, trying internal service check:', error);
-                tryInternalServiceCheck();
-            });
+        // Method 2: Direct internal service check (faster, no external API calls)
+        console.log('🔍 Checking internal BMW services for corporate network access');
+        tryInternalServiceCheck();
             
         function tryInternalServiceCheck() {
             if (detectionComplete) return;
@@ -153,15 +119,15 @@
             testNextUrl();
         }
         
-        // Set a timeout to ensure we don't wait forever
+        // Set a timeout to ensure we don't wait forever  
         setTimeout(() => {
             if (!detectionComplete) {
-                console.log('⏱️ Network detection timed out after 5s - defaulting to public content');
+                console.log('⏱️ BMW service check timed out after 3s - defaulting to public content');
                 console.log('💡 If you are on BMW network, try manual override by clicking the status indicator');
                 hideCorporateContent();
                 detectionComplete = true;
             }
-        }, 5000);
+        }, 3000);
     }
 
     function showCorporateContent() {
@@ -173,14 +139,14 @@
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         console.log(`Found ${corporateElements.length} corporate elements to show`);
         corporateElements.forEach(element => {
-            element.style.setProperty('display', 'block', 'important');
+            element.classList.add('show-corporate');
             element.classList.add('corporate-network-detected');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
         console.log(`Found ${publicElements.length} public elements to hide`);
         publicElements.forEach(element => {
-            element.style.setProperty('display', 'none', 'important');
+            element.classList.add('hide-public');
         });
 
         // Show BMW-specific navigation items in corporate mode
@@ -215,13 +181,14 @@
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         console.log(`Found ${corporateElements.length} corporate elements to hide`);
         corporateElements.forEach(element => {
-            element.style.setProperty('display', 'none', 'important');
+            element.classList.remove('show-corporate');
+            element.classList.remove('corporate-network-detected');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
         console.log(`Found ${publicElements.length} public elements to show`);
         publicElements.forEach(element => {
-            element.style.setProperty('display', 'block', 'important');
+            element.classList.remove('hide-public');
             element.classList.add('public-network-detected');
         });
 
@@ -454,7 +421,10 @@
                 min-height: 100px;
             }
             /* Default to public content on public sites but allow override */
-            ${isPublicSite ? '.bmw-corporate-only { display: none; } .bmw-public-alternative { display: block; }' : ''}
+            ${isPublicSite ? '.bmw-corporate-only { display: none !important; } .bmw-public-alternative { display: block !important; }' : ''}
+            /* Corporate override styles */
+            .bmw-corporate-only.show-corporate { display: block !important; }
+            .bmw-public-alternative.hide-public { display: none !important; }
         `;
         document.head.appendChild(style);
 
