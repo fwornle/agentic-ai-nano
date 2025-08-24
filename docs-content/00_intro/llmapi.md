@@ -1,99 +1,99 @@
 # LLM API Configuration
 
-<div id="loading-message">
-<p>🔄 Detecting your network environment and loading appropriate API setup instructions...</p>
+<!-- BMW Corporate Network Content -->
+<div class="bmw-corporate-only" markdown="1">
+
+## BMW Gaia LLM API
+
+The [BMW Gaia LLM API](https://pages.atc-github.azure.cloud.bmw/Data-Transformation-AI/llm-api/getting_started/introduction/) is available automatically from your Coder workspace.
+
+### Automatic Configuration
+
+The following environment variables are automatically configured:
+
+```bash
+$ env | grep OPENAI
+OPENAI_BASE_URL=...
+OPENAI_API_KEY=...
+```
+
+### Testing Your Connection
+
+Test with the pre-installed `llm` command:
+
+```bash
+llm -m "claude-sonnet-4" "How many r's in blueberry?"
+# Output: There are 2 r's in "blueberry".
+```
+
+### Available Models
+
+- **Claude Sonnet 4**: High-quality reasoning and analysis
+- **GPT-4 variants**: OpenAI's latest models  
+- **Other enterprise-approved models**: Additional models as available
+
+### Using in Code
+
+```python
+from openai import OpenAI
+
+# Uses pre-configured environment variables
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="claude-sonnet-4",
+    messages=[{"role": "user", "content": "Explain agentic AI"}]
+)
+```
+
 </div>
 
-<div id="setup-content">
-<!-- Content will be loaded here by JavaScript -->
-</div>
+<!-- Public Network Alternative Content -->
+<div class="bmw-public-alternative" markdown="1">
 
-<script>
-(function() {
-    'use strict';
-    
-    function detectNetwork() {
-        const hostname = window.location.hostname;
-        console.log('Detecting network for hostname:', hostname);
-        
-        // Check for corporate network indicators
-        const corporatePatterns = [
-            /^10\./,
-            /^192\.168\./,
-            /^172\.(1[6-9]|2[0-9]|3[01])\./,
-            /bmw\.com$/,
-            /bmwgroup\.com$/
-        ];
-        
-        // Check hostname for corporate patterns
-        for (const pattern of corporatePatterns) {
-            if (pattern.test(hostname)) {
-                console.log('Corporate network detected via hostname');
-                return Promise.resolve(true);
-            }
-        }
-        
-        // GitHub Pages should always be public
-        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
-            console.log('GitHub Pages detected - using public mode');
-            return Promise.resolve(false);
-        }
-        
-        // Localhost defaults to corporate for testing
-        if (hostname === 'localhost' || hostname === '127.0.0.1') {
-            console.log('Localhost detected - using corporate mode for testing');
-            return Promise.resolve(true);
-        }
-        
-        // Check if we can reach BMW internal service
-        return checkInternalService();
-    }
-    
-    function checkInternalService() {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => {
-                console.log('BMW internal service reachable - corporate network');
-                resolve(true);
-            };
-            img.onerror = () => {
-                console.log('BMW internal service not reachable - public network');
-                resolve(false);
-            };
-            img.src = 'http://10.21.202.14/favicon.ico?' + Date.now();
-            
-            // Timeout after 2 seconds
-            setTimeout(() => {
-                console.log('Service check timeout - assuming public network');
-                resolve(false);
-            }, 2000);
-        });
-    }
-    
-    async function loadContent() {
-        try {
-            const isCorporate = await detectNetwork();
-            const targetFile = isCorporate ? 'llmapi-bmw/' : 'llmapi-public/';
-            
-            console.log('Redirecting to:', targetFile);
-            
-            // Hide loading message
-            document.getElementById('loading-message').style.display = 'none';
-            
-            // Redirect to the appropriate page
-            window.location.href = targetFile;
-        } catch (error) {
-            console.error('Network detection error:', error);
-            // Default to public on error
-            window.location.href = 'llmapi-public/';
-        }
-    }
-    
-    // Start detection when page loads
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadContent);
-    } else {
-        loadContent();
-    }
-})();
-</script>
+## Public LLM API Configuration
+
+For public access, you'll need to configure your own LLM API keys.
+
+### OpenAI Setup
+
+1. Sign up at [OpenAI](https://platform.openai.com/)
+2. Create an API key in your dashboard
+3. Add to your `.env` file:
+
+```bash
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+### Anthropic Claude Setup
+
+1. Sign up at [Anthropic](https://console.anthropic.com/)
+2. Create an API key in your console
+3. Add to your `.env` file:
+
+```bash
+ANTHROPIC_API_KEY=your_anthropic_key_here
+```
+
+### Testing Your Setup
+
+```python
+from openai import OpenAI
+
+client = OpenAI()
+response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+print(response.choices[0].message.content)
+```
+
+### Local LLM Options
+
+For development without API costs:
+
+- **Ollama**: Run models locally (`ollama pull llama2`)
+- **LM Studio**: User-friendly local LLM interface  
+- **GPT4All**: Open-source local models
+
+</div>

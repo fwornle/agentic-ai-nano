@@ -1,99 +1,72 @@
 # Development Environment Setup
 
-<div id="loading-message">
-<p>🔄 Detecting your network environment and loading appropriate setup instructions...</p>
+<!-- BMW Corporate Network Content -->
+<div class="bmw-corporate-only" markdown="1">
+
+## BMW Cloud Development Environment with Coder
+
+The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces.
+
+### Quick Setup
+
+1. **Access your workspace**: [http://10.21.202.14/workspaces](http://10.21.202.14/workspaces)
+2. **Log in** with your BMW credentials
+3. **Select** the "Agentic AI Nanodegree" template
+4. **Launch** your pre-configured development environment
+
+All tools, dependencies, and BMW Gaia LLM API access are pre-configured and ready to use.
+
+### Why Cloud Development?
+
+- **Zero Installation**: No local setup required
+- **Consistent Environment**: Identical setup for all participants  
+- **Corporate Integration**: Seamless access to BMW resources
+- **Scalable Resources**: Cloud computing power for AI workloads
+- **Pre-configured APIs**: BMW Gaia LLM API ready to use
+
 </div>
 
-<div id="setup-content">
-<!-- Content will be loaded here by JavaScript -->
-</div>
+<!-- Public Network Alternative Content -->
+<div class="bmw-public-alternative" markdown="1">
 
-<script>
-(function() {
-    'use strict';
-    
-    function detectNetwork() {
-        const hostname = window.location.hostname;
-        console.log('Detecting network for hostname:', hostname);
-        
-        // Check for corporate network indicators
-        const corporatePatterns = [
-            /^10\./,
-            /^192\.168\./,
-            /^172\.(1[6-9]|2[0-9]|3[01])\./,
-            /bmw\.com$/,
-            /bmwgroup\.com$/
-        ];
-        
-        // Check hostname for corporate patterns
-        for (const pattern of corporatePatterns) {
-            if (pattern.test(hostname)) {
-                console.log('Corporate network detected via hostname');
-                return Promise.resolve(true);
-            }
-        }
-        
-        // GitHub Pages should always be public
-        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
-            console.log('GitHub Pages detected - using public mode');
-            return Promise.resolve(false);
-        }
-        
-        // Localhost defaults to corporate for testing
-        if (hostname === 'localhost' || hostname === '127.0.0.1') {
-            console.log('Localhost detected - using corporate mode for testing');
-            return Promise.resolve(true);
-        }
-        
-        // Check if we can reach BMW internal service
-        return checkInternalService();
-    }
-    
-    function checkInternalService() {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => {
-                console.log('BMW internal service reachable - corporate network');
-                resolve(true);
-            };
-            img.onerror = () => {
-                console.log('BMW internal service not reachable - public network');
-                resolve(false);
-            };
-            img.src = 'http://10.21.202.14/favicon.ico?' + Date.now();
-            
-            // Timeout after 2 seconds
-            setTimeout(() => {
-                console.log('Service check timeout - assuming public network');
-                resolve(false);
-            }, 2000);
-        });
-    }
-    
-    async function loadContent() {
-        try {
-            const isCorporate = await detectNetwork();
-            const targetFile = isCorporate ? 'coder-bmw/' : 'coder-public/';
-            
-            console.log('Redirecting to:', targetFile);
-            
-            // Hide loading message
-            document.getElementById('loading-message').style.display = 'none';
-            
-            // Redirect to the appropriate page
-            window.location.href = targetFile;
-        } catch (error) {
-            console.error('Network detection error:', error);
-            // Default to public on error
-            window.location.href = 'coder-public/';
-        }
-    }
-    
-    // Start detection when page loads
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadContent);
-    } else {
-        loadContent();
-    }
-})();
-</script>
+## Local Development Environment Setup
+
+For public access, you'll need to set up your local development environment. While this requires more initial setup than a cloud environment, it provides full control over your development setup.
+
+### Local Setup Requirements
+
+Before beginning the course modules, ensure you have:
+
+1. **Python 3.11+** installed with pip and virtual environment support
+2. **Git** for version control and cloning repositories  
+3. **Code editor** (VS Code recommended with Python extension)
+4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
+
+### Setup Steps
+
+```bash
+# Create virtual environment
+python -m venv agentic-ai
+source agentic-ai/bin/activate  # On Windows: agentic-ai\Scripts\activate
+
+# Clone repository
+git clone https://github.com/fwornle/agentic-ai-nano.git
+cd agentic-ai-nano
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### API Configuration
+
+Create a `.env` file in the project root:
+
+```bash
+# OpenAI (required for most examples)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Optional: Other LLM providers
+ANTHROPIC_API_KEY=your_anthropic_key_here
+```
+
+</div>
