@@ -33,13 +33,13 @@ Welcome to the Agentic AI Nano-Degree! This guide will help you set up your envi
 
 This nano-degree consists of three comprehensive modules:
 
-### 🤖 Module 1: Agent Frameworks (10 Sessions)
+### Module 1: Agent Frameworks (10 Sessions)
 Master the art of building intelligent agents using cutting-edge frameworks like LangChain, CrewAI, PydanticAI, and more.
 
-### 🔍 Module 2: RAG Architecture (10 Sessions)
+### Module 2: RAG Architecture (10 Sessions)
 Build sophisticated Retrieval-Augmented Generation systems for enterprise applications with advanced chunking, vector databases, and evaluation techniques.
 
-### 🌐 Module 3: MCP, ACP & Agent-to-Agent Communication (10 Sessions)
+### Module 3: MCP, ACP & Agent-to-Agent Communication (10 Sessions)
 Master the Model Context Protocol, Agent Communication Protocol, and sophisticated multi-agent coordination patterns.
 
 ## Learning Paths Guide
