@@ -167,6 +167,9 @@
     function showCorporateContent() {
         console.log('🏢 Showing BMW corporate content');
         
+        // Set global flag to prevent MutationObserver from re-hiding content
+        isCorporateNetworkDetected = true;
+        
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         console.log(`Found ${corporateElements.length} corporate elements to show`);
         corporateElements.forEach(element => {
@@ -205,6 +208,9 @@
 
     function hideCorporateContent() {
         console.log('🌐 Showing public content');
+        
+        // Clear global flag to allow MutationObserver to hide BMW content
+        isCorporateNetworkDetected = false;
         
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         console.log(`Found ${corporateElements.length} corporate elements to hide`);
@@ -283,19 +289,43 @@
     }
 
     function showNavigationItems(itemTexts) {
-        // Wait for navigation to load and show specified items
-        setTimeout(() => {
-            const navItems = document.querySelectorAll('.md-nav__item');
-            navItems.forEach(item => {
-                const link = item.querySelector('.md-nav__link');
-                if (link) {
-                    const linkText = link.textContent.trim();
-                    if (itemTexts.some(text => linkText.includes(text))) {
-                        item.style.display = 'block';
+        // Show navigation items immediately and with retries
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        function showItems() {
+            let found = false;
+            
+            // Target both main nav and table of contents
+            const selectors = [
+                '.md-nav__item',
+                '.md-nav__list .md-nav__item',
+                '.md-sidebar__scrollwrap .md-nav__item',
+                '.md-nav--secondary .md-nav__item'
+            ];
+            
+            selectors.forEach(selector => {
+                const navItems = document.querySelectorAll(selector);
+                navItems.forEach(item => {
+                    const link = item.querySelector('.md-nav__link');
+                    if (link) {
+                        const linkText = link.textContent.trim();
+                        if (itemTexts.some(text => linkText.includes(text) || linkText.toLowerCase().includes(text.toLowerCase()))) {
+                            item.style.setProperty('display', 'block', 'important');
+                            found = true;
+                            console.log('Showing navigation item:', linkText);
+                        }
                     }
-                }
+                });
             });
-        }, 500);
+            
+            attempts++;
+            if (!found && attempts < maxAttempts) {
+                setTimeout(showItems, 200);
+            }
+        }
+        
+        showItems();
     }
 
     function updateNetworkSpecificContent(isCorporate) {
@@ -455,11 +485,15 @@
         initializeNetworkDetection();
     }
 
+    // Global variable to track corporate network status
+    let isCorporateNetworkDetected = false;
+
     // Also observe for navigation changes (Material theme dynamic loading)
     const observer = new MutationObserver(() => {
         const hostname = window.location.hostname;
-        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
-            // Re-hide BMW content on dynamic updates
+        // Only hide BMW content on public sites AND when corporate network is NOT detected
+        if ((hostname.includes('github.io') || hostname.includes('fwornle')) && !isCorporateNetworkDetected) {
+            console.log('🔍 MutationObserver: Re-hiding BMW content on public site (corporate not detected)');
             hideNavigationItems([
                 'BMW Cloud Development Environment with Coder',
                 'BMW Cloud Development Environment',
@@ -472,7 +506,24 @@
                 'Workspace Lifecycle',
                 'Dev Containers: The Foundation',
                 'Nano-Degree Specific Setup',
-                    'Working with AI Assistants'
+                'Working with AI Assistants'
+            ]);
+        } else if (isCorporateNetworkDetected) {
+            console.log('🏢 MutationObserver: Corporate network detected, ensuring BMW content is visible');
+            // Make sure corporate content is still visible after navigation changes
+            showNavigationItems([
+                'BMW Cloud Development Environment with Coder',
+                'BMW Cloud Development Environment',
+                'Overview: Developing in the BMW Cloud',
+                'Why BMW Cloud Development',
+                'Cluster Resources',
+                'Traditional Challenges in Corporate Environments',
+                'The Cloud Development Solution',
+                'How to Work with Coder',
+                'Workspace Lifecycle',
+                'Dev Containers: The Foundation',
+                'Nano-Degree Specific Setup',
+                'Working with AI Assistants'
             ]);
         }
     });
