@@ -73,7 +73,7 @@
     async function loadContent() {
         try {
             const isCorporate = await detectNetwork();
-            const targetFile = isCorporate ? 'llmapi-bmw.html' : 'llmapi-public.html';
+            const targetFile = isCorporate ? 'llmapi-bmw/' : 'llmapi-public/';
             
             console.log('Redirecting to:', targetFile);
             
@@ -85,7 +85,7 @@
         } catch (error) {
             console.error('Network detection error:', error);
             // Default to public on error
-            window.location.href = 'llmapi-public.html';
+            window.location.href = 'llmapi-public/';
         }
     }
     
