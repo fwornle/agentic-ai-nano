@@ -98,7 +98,6 @@
             'Workspace Lifecycle',
             'Dev Containers: The Foundation',
             'Nano-Degree Specific Setup',
-            'Getting Started',
             'Working with AI Assistants'
         ]);
 
@@ -131,7 +130,6 @@
             'Workspace Lifecycle',
             'Dev Containers: The Foundation',
             'Nano-Degree Specific Setup',
-            'Getting Started',
             'Working with AI Assistants'
         ]);
 
@@ -297,8 +295,7 @@
                 'Workspace Lifecycle',
                 'Dev Containers: The Foundation',
                 'Nano-Degree Specific Setup',
-                'Getting Started',
-                'Working with AI Assistants'
+                    'Working with AI Assistants'
             ]);
         }
     });
