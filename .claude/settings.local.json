@@ -51,7 +51,8 @@
       "WebFetch(domain:code.visualstudio.com)",
       "Bash(npx markdownlint-cli:*)",
       "Bash(npx markdownlint:*)",
-      "Bash(mkdocs build:*)"
+      "Bash(mkdocs build:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"
