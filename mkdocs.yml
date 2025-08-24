@@ -141,6 +141,10 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   
+  - Setup & Environment:
+    - Cloud Development (Coder): 00_intro/coder.md
+    - LLM API Configuration: llmapi.md
+  
   - Agent Frameworks:
     - 01_frameworks/index.md
     - Session 0 - Introduction: 01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md
