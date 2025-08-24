@@ -10,7 +10,7 @@
     function isCorporateNetwork() {
         // Check if accessing from BMW corporate network indicators
         const hostname = window.location.hostname;
-        const userAgent = navigator.userAgent;
+        const host = window.location.host;
         
         // Corporate network indicators
         const corporateIndicators = [
@@ -20,17 +20,27 @@
             /^172\.(1[6-9]|2[0-9]|3[01])\./,
             // BMW-specific domains
             /bmw\.com$/,
-            /bmwgroup\.com$/,
-            // Local development (for testing)
-            /localhost/,
-            /127\.0\.0\.1/
+            /bmwgroup\.com$/
         ];
 
         // Check hostname against corporate patterns
         for (const pattern of corporateIndicators) {
-            if (pattern.test(hostname) || pattern.test(window.location.host)) {
+            if (pattern.test(hostname) || pattern.test(host)) {
+                console.log('Corporate network detected via hostname:', hostname);
                 return true;
             }
+        }
+
+        // For development/testing - check if we're on GitHub Pages from public internet
+        if (hostname.includes('github.io')) {
+            console.log('GitHub Pages detected - showing public content');
+            return false;
+        }
+
+        // For localhost/127.0.0.1 - default to corporate for testing
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            console.log('Localhost detected - defaulting to corporate content for testing');
+            return true;
         }
 
         // Additional check: try to reach BMW internal service
@@ -58,7 +68,7 @@
     function showCorporateContent() {
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         corporateElements.forEach(element => {
-            element.style.display = '';
+            element.style.display = 'block';
             element.classList.add('corporate-network-detected');
         });
 
@@ -79,7 +89,7 @@
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
         publicElements.forEach(element => {
-            element.style.display = '';
+            element.style.display = 'block';
             element.classList.add('public-network-detected');
         });
 
@@ -124,21 +134,29 @@
             hideCorporateContent();
         }
 
-        // Add CSS for smooth transitions
+        // Add CSS for smooth transitions and initial hiding
         const style = document.createElement('style');
         style.textContent = `
+            /* Initially hide both sections until network detection completes */
             .bmw-corporate-only, .bmw-public-alternative {
+                display: none;
                 transition: opacity 0.3s ease-in-out;
             }
             .bmw-corporate-only.corporate-network-detected {
+                display: block !important;
                 animation: fadeIn 0.5s ease-in-out;
             }
             .bmw-public-alternative.public-network-detected {
+                display: block !important;
                 animation: fadeIn 0.5s ease-in-out;
             }
             @keyframes fadeIn {
                 from { opacity: 0; }
                 to { opacity: 1; }
+            }
+            /* Ensure setup instructions are visible */
+            .setup-instructions {
+                min-height: 100px;
             }
         `;
         document.head.appendChild(style);
