@@ -79,11 +79,9 @@
         function tryInternalServiceCheck() {
             if (detectionComplete) return;
             
-            // Try internal service check with multiple BMW internal services
+            // Try internal service check with BMW Content Hub only (no 10.x latency)
             const testUrls = [
-                'https://contenthub.bmwgroup.net/favicon.ico',  // BMW Content Hub (most reliable)
-                'https://10.21.202.14/favicon.ico',             // Coder instance HTTPS
-                'http://10.21.202.14/favicon.ico'               // Coder instance HTTP fallback
+                'https://contenthub.bmwgroup.net/favicon.ico'  // BMW Content Hub (most reliable, no VPN latency)
             ];
             
             let urlIndex = 0;
@@ -125,12 +123,12 @@
         // Set a timeout to ensure we don't wait forever  
         setTimeout(() => {
             if (!detectionComplete) {
-                console.log('⏱️ BMW service check timed out after 3s - defaulting to public content');
+                console.log('⏱️ BMW ContentHub check timed out after 2s - defaulting to public content');
                 console.log('💡 If you are on BMW network, try manual override by clicking the status indicator');
                 hideCorporateContent();
                 detectionComplete = true;
             }
-        }, 3000);
+        }, 2000);
     }
 
     function showCorporateContent() {
@@ -158,21 +156,10 @@
             element.style.setProperty('display', 'none', 'important');
         });
 
-        // Show BMW-specific navigation items in corporate mode
-        showNavigationItems([
-            'BMW Cloud Development Environment with Coder',
-            'BMW Cloud Development Environment',
-            'Overview: Developing in the BMW Cloud',
-            'Why BMW Cloud Development',
-            'Cluster Resources',
-            'Traditional Challenges in Corporate Environments',
-            'The Cloud Development Solution',
-            'How to Work with Coder',
-            'Workspace Lifecycle',
-            'Dev Containers: The Foundation',
-            'Nano-Degree Specific Setup',
-            'Working with AI Assistants'
-        ]);
+        // In corporate mode, show all navigation items normally
+        // Content filtering is handled by CSS classes within pages
+        console.log('🏢 Corporate mode: Navigation items visible, BMW content enabled via CSS');
+        
 
         // Update any dynamic text content
         updateNetworkSpecificContent(true);
@@ -205,21 +192,10 @@
             element.style.removeProperty('display');
         });
 
-        // Hide BMW-specific navigation items in public mode
-        hideNavigationItems([
-            'BMW Cloud Development Environment with Coder',
-            'BMW Cloud Development Environment',
-            'Overview: Developing in the BMW Cloud',
-            'Why BMW Cloud Development',
-            'Cluster Resources',
-            'Traditional Challenges in Corporate Environments',
-            'The Cloud Development Solution',
-            'How to Work with Coder',
-            'Workspace Lifecycle',
-            'Dev Containers: The Foundation',
-            'Nano-Degree Specific Setup',
-            'Working with AI Assistants'
-        ]);
+        // In public mode, don't hide any navigation items - they should all be visible
+        // Only the content inside pages should be conditional, not the navigation structure
+        console.log('📋 Public mode: Showing all navigation items (content filtering handled by CSS)');
+        
 
         // Update any dynamic text content
         updateNetworkSpecificContent(false);
@@ -480,41 +456,35 @@
 
     // Also observe for navigation changes (Material theme dynamic loading)
     const observer = new MutationObserver(() => {
-        const hostname = window.location.hostname;
-        // Only hide BMW content on public sites AND when corporate network is NOT detected
-        if ((hostname.includes('github.io') || hostname.includes('fwornle')) && !isCorporateNetworkDetected) {
-            console.log('🔍 MutationObserver: Re-hiding BMW content on public site (corporate not detected)');
-            hideNavigationItems([
-                'BMW Cloud Development Environment with Coder',
-                'BMW Cloud Development Environment',
-                'Overview: Developing in the BMW Cloud',
-                'Why BMW Cloud Development',
-                'Cluster Resources',
-                'Traditional Challenges in Corporate Environments',
-                'The Cloud Development Solution',
-                'How to Work with Coder',
-                'Workspace Lifecycle',
-                'Dev Containers: The Foundation',
-                'Nano-Degree Specific Setup',
-                'Working with AI Assistants'
-            ]);
-        } else if (isCorporateNetworkDetected) {
-            console.log('🏢 MutationObserver: Corporate network detected, ensuring BMW content is visible');
-            // Make sure corporate content is still visible after navigation changes
-            showNavigationItems([
-                'BMW Cloud Development Environment with Coder',
-                'BMW Cloud Development Environment',
-                'Overview: Developing in the BMW Cloud',
-                'Why BMW Cloud Development',
-                'Cluster Resources',
-                'Traditional Challenges in Corporate Environments',
-                'The Cloud Development Solution',
-                'How to Work with Coder',
-                'Workspace Lifecycle',
-                'Dev Containers: The Foundation',
-                'Nano-Degree Specific Setup',
-                'Working with AI Assistants'
-            ]);
+        // Only handle content visibility, not navigation structure
+        console.log('🔍 MutationObserver: Ensuring content visibility matches network detection');
+        
+        if (isCorporateNetworkDetected) {
+            // Re-apply corporate content visibility after DOM changes
+            const corporateElements = document.querySelectorAll('.bmw-corporate-only');
+            corporateElements.forEach(element => {
+                element.classList.add('show-corporate');
+                element.style.setProperty('display', 'block', 'important');
+            });
+            
+            const publicElements = document.querySelectorAll('.bmw-public-alternative');
+            publicElements.forEach(element => {
+                element.classList.add('hide-public');
+                element.style.setProperty('display', 'none', 'important');
+            });
+        } else {
+            // Ensure public content is visible
+            const corporateElements = document.querySelectorAll('.bmw-corporate-only');
+            corporateElements.forEach(element => {
+                element.classList.remove('show-corporate');
+                element.style.removeProperty('display');
+            });
+            
+            const publicElements = document.querySelectorAll('.bmw-public-alternative');
+            publicElements.forEach(element => {
+                element.classList.remove('hide-public');
+                element.style.removeProperty('display');
+            });
         }
     });
 
