@@ -179,7 +179,7 @@ Inside our corporate network, you have access to **GitHub Copilot** as well as [
 ![Coding Assistant](images/coder-llm-coding-assistant.png)
 *Figure 11: Pre-installed coding agent "coding-assistant"*
 
-In addition, to facilitate your agentic developments, the [Gaia LLM API has been pre-configured](../llmapi.md) by setting the environment variables OPENAI_BASE_URL and OPENAI_API_KEY, as well as the provision of command *llm*. You can try using this from the command line as follows:
+In addition, to facilitate your agentic developments, the [Gaia LLM API has been pre-configured](llmapi.md) by setting the environment variables OPENAI_BASE_URL and OPENAI_API_KEY, as well as the provision of command *llm*. You can try using this from the command line as follows:
 
 ![Coder LLM Integration](images/coder-llm.png)
 *Figure 12: Coder environments support AI coding assistants*
