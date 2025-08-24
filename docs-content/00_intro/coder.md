@@ -73,7 +73,7 @@
     async function loadContent() {
         try {
             const isCorporate = await detectNetwork();
-            const targetFile = isCorporate ? 'coder-bmw.html' : 'coder-public.html';
+            const targetFile = isCorporate ? 'coder-bmw/' : 'coder-public/';
             
             console.log('Redirecting to:', targetFile);
             
@@ -85,7 +85,7 @@
         } catch (error) {
             console.error('Network detection error:', error);
             // Default to public on error
-            window.location.href = 'coder-public.html';
+            window.location.href = 'coder-public/';
         }
     }
     
