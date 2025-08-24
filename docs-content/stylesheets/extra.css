@@ -1,5 +1,14 @@
 /* Custom styles for Agentic AI Nano-Degree */
 
+/* Network-based content visibility - default to public mode for safety */
+.bmw-corporate-only {
+    display: none !important;
+}
+
+.bmw-public-alternative {
+    display: block;
+}
+
 /* Learning path badges */
 .learning-path {
     display: inline-block;
