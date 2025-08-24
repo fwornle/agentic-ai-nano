@@ -156,9 +156,8 @@
             element.style.setProperty('display', 'none', 'important');
         });
 
-        // In corporate mode, show all navigation items normally
-        // Content filtering is handled by CSS classes within pages
-        console.log('🏢 Corporate mode: Navigation items visible, BMW content enabled via CSS');
+        // Corporate mode: Navigation stays the same, only content changes
+        console.log('🏢 Corporate mode: BMW content enabled via CSS');
         
 
         // Update any dynamic text content
@@ -192,9 +191,8 @@
             element.style.removeProperty('display');
         });
 
-        // In public mode, don't hide any navigation items - they should all be visible
-        // Only the content inside pages should be conditional, not the navigation structure
-        console.log('📋 Public mode: Showing all navigation items (content filtering handled by CSS)');
+        // Public mode: Navigation stays the same, only content changes  
+        console.log('📋 Public mode: Public content visible via CSS');
         
 
         // Update any dynamic text content
@@ -204,9 +202,35 @@
         updateNetworkStatusIndicator('public');
     }
 
-    // REMOVED: Navigation manipulation functions
-    // Navigation structure should be handled entirely by MkDocs
-    // Only content within pages should be conditional
+    function hideSpecificNavigationItems(itemTexts) {
+        console.log('Hiding specific navigation items:', itemTexts);
+        const navItems = document.querySelectorAll('.md-nav__item');
+        navItems.forEach(item => {
+            const link = item.querySelector('.md-nav__link');
+            if (link) {
+                const linkText = link.textContent.trim();
+                if (itemTexts.some(text => linkText === text)) {
+                    item.style.display = 'none';
+                    console.log('Hidden:', linkText);
+                }
+            }
+        });
+    }
+
+    function showSpecificNavigationItems(itemTexts) {
+        console.log('Showing specific navigation items:', itemTexts);
+        const navItems = document.querySelectorAll('.md-nav__item');
+        navItems.forEach(item => {
+            const link = item.querySelector('.md-nav__link');
+            if (link) {
+                const linkText = link.textContent.trim();
+                if (itemTexts.some(text => linkText === text)) {
+                    item.style.display = 'block';
+                    console.log('Shown:', linkText);
+                }
+            }
+        });
+    }
 
     function updateNetworkSpecificContent(isCorporate) {
         // Update setup instructions based on network
@@ -333,11 +357,14 @@
             .setup-instructions {
                 min-height: 100px;
             }
-            /* Default to public content on public sites but allow override */
+            /* Default to public content on public sites */
             ${isPublicSite ? '.bmw-corporate-only { display: none !important; } .bmw-public-alternative { display: block !important; }' : ''}
-            /* Corporate override styles */
-            .bmw-corporate-only.show-corporate { display: block !important; }
+            /* Corporate override styles (must be more specific) */
+            .bmw-corporate-only.show-corporate.corporate-network-detected { display: block !important; }
             .bmw-public-alternative.hide-public { display: none !important; }
+            /* Ensure forced styles override defaults */
+            [style*="display: block"] { display: block !important; }
+            [style*="display: none"] { display: none !important; }
         `;
         document.head.appendChild(style);
 
