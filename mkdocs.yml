@@ -143,8 +143,6 @@ nav:
   
   - Setup & Environment:
     - Development Environment: 00_intro/coder.md
-    - BMW Cloud Environment: 00_intro/coder-bmw.md
-    - Local Development: 00_intro/coder-public.md
     - LLM API Configuration: 00_intro/llmapi.md
   
   - Agent Frameworks:
