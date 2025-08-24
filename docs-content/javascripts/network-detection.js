@@ -55,32 +55,47 @@
         // Run internal service check to detect corporate network access
         console.log('Running internal service check to detect corporate network access');
         
+        // Show initial status
+        updateNetworkStatusIndicator('checking');
+        
         // Attempt to reach BMW internal service (non-blocking)
         const img = new Image();
         img.onload = function() {
             // If image loads, we're likely on corporate network
-            console.log('Internal service reachable - showing corporate content');
+            console.log('✅ Internal service reachable - showing corporate content');
             showCorporateContent();
         };
         img.onerror = function() {
             // If image fails, we're likely on public network
-            console.log('Internal service not reachable - showing public content');
+            console.log('❌ Internal service not reachable - showing public content');
             hideCorporateContent();
         };
+        
+        // Set a timeout to ensure we don't wait forever
+        setTimeout(() => {
+            console.log('⏱️ Internal service check timeout - defaulting to public content');
+            if (!document.querySelector('.corporate-network-detected') && 
+                !document.querySelector('.public-network-detected')) {
+                hideCorporateContent();
+            }
+        }, 5000);
+        
         // Use a small internal resource that exists only on corporate network
         img.src = 'http://10.21.202.14/favicon.ico?' + Date.now();
     }
 
     function showCorporateContent() {
-        console.log('Showing BMW corporate content');
+        console.log('🏢 Showing BMW corporate content');
         
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
+        console.log(`Found ${corporateElements.length} corporate elements to show`);
         corporateElements.forEach(element => {
             element.style.setProperty('display', 'block', 'important');
             element.classList.add('corporate-network-detected');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
+        console.log(`Found ${publicElements.length} public elements to hide`);
         publicElements.forEach(element => {
             element.style.setProperty('display', 'none', 'important');
         });
@@ -103,15 +118,22 @@
 
         // Update any dynamic text content
         updateNetworkSpecificContent(true);
+        
+        // Update network status indicator
+        updateNetworkStatusIndicator('corporate');
     }
 
     function hideCorporateContent() {
+        console.log('🌐 Showing public content');
+        
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
+        console.log(`Found ${corporateElements.length} corporate elements to hide`);
         corporateElements.forEach(element => {
             element.style.setProperty('display', 'none', 'important');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
+        console.log(`Found ${publicElements.length} public elements to show`);
         publicElements.forEach(element => {
             element.style.setProperty('display', 'block', 'important');
             element.classList.add('public-network-detected');
@@ -135,6 +157,9 @@
 
         // Update any dynamic text content
         updateNetworkSpecificContent(false);
+        
+        // Update network status indicator
+        updateNetworkStatusIndicator('public');
     }
 
     function hideNavigationItems(itemTexts) {
@@ -222,6 +247,66 @@
         }
     }
 
+    function updateNetworkStatusIndicator(networkType) {
+        // Remove any existing status indicator
+        const existingIndicator = document.querySelector('.network-status-indicator');
+        if (existingIndicator) {
+            existingIndicator.remove();
+        }
+
+        // Create new status indicator
+        const indicator = document.createElement('div');
+        indicator.className = 'network-status-indicator';
+        indicator.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: ${networkType === 'corporate' ? '#0066cc' : '#28a745'};
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        `;
+        
+        if (networkType === 'corporate') {
+            indicator.innerHTML = `
+                🏢 BMW Corporate Network
+                <div style="font-size: 10px; font-weight: normal; margin-top: 2px;">
+                    Cloud Dev Environment Available
+                </div>
+            `;
+        } else if (networkType === 'checking') {
+            indicator.innerHTML = `
+                🔍 Detecting Network...
+                <div style="font-size: 10px; font-weight: normal; margin-top: 2px;">
+                    Checking corporate access
+                </div>
+            `;
+            indicator.style.background = '#ffa500';
+        } else {
+            indicator.innerHTML = `
+                🌐 Public Network
+                <div style="font-size: 10px; font-weight: normal; margin-top: 2px;">
+                    Local Setup Required
+                </div>
+            `;
+        }
+
+        document.body.appendChild(indicator);
+
+        // Auto-hide after 10 seconds
+        setTimeout(() => {
+            if (indicator && indicator.parentNode) {
+                indicator.style.opacity = '0.7';
+                indicator.style.transition = 'opacity 0.3s ease';
+            }
+        }, 10000);
+    }
+
     function initializeNetworkDetection() {
         // Add CSS for smooth transitions and ensure BMW content is hidden by default on public sites
         const style = document.createElement('style');
@@ -246,16 +331,16 @@
             .setup-instructions {
                 min-height: 100px;
             }
-            /* Force hide BMW content on public sites */
-            ${isPublicSite ? '.bmw-corporate-only { display: none !important; } .bmw-public-alternative { display: block !important; }' : ''}
+            /* Default to public content on public sites but allow override */
+            ${isPublicSite ? '.bmw-corporate-only { display: none; } .bmw-public-alternative { display: block; }' : ''}
         `;
         document.head.appendChild(style);
 
         // Default to public content but allow corporate override
         if (isPublicSite) {
-            console.log('GitHub Pages detected - defaulting to public content, but checking for corporate access');
-            hideCorporateContent();
-            // Try the internal service check even on GitHub Pages
+            console.log('GitHub Pages detected - checking for corporate access');
+            // Don't immediately hide corporate content, let the service check determine it
+            // Try the internal service check on GitHub Pages
             // in case someone is accessing from corporate network
             checkInternalService();
             return;
