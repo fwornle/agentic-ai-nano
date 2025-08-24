@@ -4,7 +4,7 @@ Welcome to the Agentic AI Nano-Degree! This guide will help you set up your envi
 
 ## Quick Start
 
-1. **Choose Your Module**: Start with [Agent Frameworks](01_frameworks/index.md) or [RAG Architecture](02_rag/index.md)
+1. **Choose Your Module**: Start with [Agent Frameworks](01_frameworks/index.md), [RAG Architecture](02_rag/index.md), or [MCP & Agent Protocols](03_mcp-acp-a2a/index.md)
 2. **Select Learning Path**: Observer, Participant, or Implementer based on your time and depth needs
 3. **Set Up Environment**: Follow the setup instructions below
 4. **Begin Learning**: Start with Session 0 of your chosen module
@@ -63,6 +63,9 @@ pip install -r 01_frameworks/requirements.txt
 
 # RAG Architecture  
 pip install -r 02_rag/requirements.txt
+
+# MCP & Agent Protocols
+pip install -r 03_mcp-acp-a2a/requirements.txt
 ```
 
 ### 4. API Keys Setup
@@ -147,6 +150,11 @@ nano-degree/
 │   ├── Session1_Basic_RAG/
 │   ├── ...
 │   └── src/                # RAG implementations
+├── 03_mcp-acp-a2a/         # MCP, ACP & A2A Module
+│   ├── Session0_Introduction/
+│   ├── Session1_Basic_MCP/
+│   ├── ...
+│   └── src/                # Protocol implementations
 ├── docs/                   # Documentation and guides
 ├── tests/                  # Test suites
 ├── requirements.txt        # Core dependencies
