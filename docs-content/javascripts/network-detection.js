@@ -72,9 +72,45 @@
             return;
         }
         
-        // Method 2: Direct internal service check (faster, no external API calls)
-        console.log('🔍 Checking internal BMW services for corporate network access');
-        tryInternalServiceCheck();
+        // Method 2: Check external IP first, then try internal service
+        console.log('🔍 Checking BMW network access');
+        console.log('🌍 Current hostname:', window.location.hostname);
+        console.log('🌍 Current URL:', window.location.href);
+        
+        // Check external IP for BMW ranges (this was working before!)
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                console.log('🌐 External IP detected:', data.ip);
+                // BMW corporate IP ranges
+                const corporateIPPatterns = [
+                    /^160\.46\./,    // Your working IP range
+                    /^194\.114\./,   // BMW public IP range
+                    /^195\.34\./,    // BMW public IP range
+                    /^212\.204\./    // BMW public IP range
+                ];
+                
+                const isCorporateIP = corporateIPPatterns.some(pattern => {
+                    if (pattern.test(data.ip)) {
+                        console.log(`✅ IP ${data.ip} matches corporate pattern: ${pattern}`);
+                        return true;
+                    }
+                    return false;
+                });
+                
+                if (isCorporateIP && !detectionComplete) {
+                    console.log('✅ Corporate IP range detected - showing corporate content');
+                    detectionComplete = true;
+                    showCorporateContent();
+                } else if (!detectionComplete) {
+                    console.log(`📍 IP ${data.ip} not in corporate ranges, trying internal service check`);
+                    tryInternalServiceCheck();
+                }
+            })
+            .catch(error => {
+                console.log('❌ IP detection failed, trying internal service check:', error);
+                tryInternalServiceCheck();
+            });
             
         function tryInternalServiceCheck() {
             if (detectionComplete) return;
