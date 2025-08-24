@@ -43,17 +43,17 @@
             return true;
         }
 
+        // Check user agent or other indicators that might suggest corporate network
+        // This is a fallback check
+        console.log('No corporate network indicators found for hostname:', hostname);
+
         // Default to public network if no corporate indicators found
         return false;
     }
 
     function checkInternalService() {
-        // Only run this check if we're not on GitHub Pages
-        const hostname = window.location.hostname;
-        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
-            console.log('Skipping internal service check - on public GitHub Pages');
-            return;
-        }
+        // Run internal service check to detect corporate network access
+        console.log('Running internal service check to detect corporate network access');
         
         // Attempt to reach BMW internal service (non-blocking)
         const img = new Image();
@@ -72,6 +72,8 @@
     }
 
     function showCorporateContent() {
+        console.log('Showing BMW corporate content');
+        
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         corporateElements.forEach(element => {
             element.style.setProperty('display', 'block', 'important');
@@ -82,6 +84,14 @@
         publicElements.forEach(element => {
             element.style.setProperty('display', 'none', 'important');
         });
+
+        // Show BMW-specific navigation items in corporate mode
+        showNavigationItems([
+            'Overview: Developing in the BMW Cloud',
+            'BMW Cloud Development Environment with Coder',
+            'BMW Cloud Development Environment',
+            'Why BMW Cloud Development'
+        ]);
 
         // Update any dynamic text content
         updateNetworkSpecificContent(true);
@@ -99,8 +109,48 @@
             element.classList.add('public-network-detected');
         });
 
+        // Hide BMW-specific navigation items in public mode
+        hideNavigationItems([
+            'Overview: Developing in the BMW Cloud',
+            'BMW Cloud Development Environment with Coder',
+            'BMW Cloud Development Environment',
+            'Why BMW Cloud Development'
+        ]);
+
         // Update any dynamic text content
         updateNetworkSpecificContent(false);
+    }
+
+    function hideNavigationItems(itemTexts) {
+        // Wait for navigation to load
+        setTimeout(() => {
+            const navItems = document.querySelectorAll('.md-nav__item');
+            navItems.forEach(item => {
+                const link = item.querySelector('.md-nav__link');
+                if (link) {
+                    const linkText = link.textContent.trim();
+                    if (itemTexts.some(text => linkText.includes(text))) {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+        }, 500);
+    }
+
+    function showNavigationItems(itemTexts) {
+        // Wait for navigation to load and show specified items
+        setTimeout(() => {
+            const navItems = document.querySelectorAll('.md-nav__item');
+            navItems.forEach(item => {
+                const link = item.querySelector('.md-nav__link');
+                if (link) {
+                    const linkText = link.textContent.trim();
+                    if (itemTexts.some(text => linkText.includes(text))) {
+                        item.style.display = 'block';
+                    }
+                }
+            });
+        }, 500);
     }
 
     function updateNetworkSpecificContent(isCorporate) {
@@ -161,12 +211,13 @@
         `;
         document.head.appendChild(style);
 
-        // Default to public content (safer for public internet)
-        // GitHub Pages should always show public content
+        // Default to public content but allow corporate override
         if (isPublicSite) {
-            console.log('GitHub Pages detected - forcing public content');
+            console.log('GitHub Pages detected - defaulting to public content, but checking for corporate access');
             hideCorporateContent();
-            // Disable the async check for public sites
+            // Try the internal service check even on GitHub Pages
+            // in case someone is accessing from corporate network
+            checkInternalService();
             return;
         }
 
