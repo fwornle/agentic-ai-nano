@@ -127,27 +127,16 @@
     }
 
     function initializeNetworkDetection() {
-        // Initial check
-        if (isCorporateNetwork()) {
-            showCorporateContent();
-        } else {
-            hideCorporateContent();
-        }
-
-        // Add CSS for smooth transitions and initial hiding
+        // Add CSS for smooth transitions
         const style = document.createElement('style');
         style.textContent = `
-            /* Initially hide both sections until network detection completes */
             .bmw-corporate-only, .bmw-public-alternative {
-                display: none;
                 transition: opacity 0.3s ease-in-out;
             }
             .bmw-corporate-only.corporate-network-detected {
-                display: block !important;
                 animation: fadeIn 0.5s ease-in-out;
             }
             .bmw-public-alternative.public-network-detected {
-                display: block !important;
                 animation: fadeIn 0.5s ease-in-out;
             }
             @keyframes fadeIn {
@@ -160,6 +149,24 @@
             }
         `;
         document.head.appendChild(style);
+
+        // Default to public content (safer for public internet)
+        // GitHub Pages should always show public content
+        const hostname = window.location.hostname;
+        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
+            console.log('GitHub Pages detected - showing public content');
+            hideCorporateContent();
+            return;
+        }
+
+        // Initial network check
+        if (isCorporateNetwork()) {
+            console.log('Corporate network detected initially');
+            showCorporateContent();
+        } else {
+            console.log('Public network assumed initially');
+            hideCorporateContent();
+        }
     }
 
     // Initialize when DOM is ready

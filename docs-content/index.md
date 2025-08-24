@@ -9,7 +9,7 @@ Welcome to the comprehensive **Agentic AI Nano-Degree** program! This intensive 
 </div>
 
 <!-- BMW Corporate Network Content -->
-<div class="bmw-corporate-only">
+<div class="bmw-corporate-only" markdown="1">
 
 **Important:** Access your pre-configured BMW cloud development environment for zero-friction learning!
 
@@ -29,23 +29,22 @@ Welcome to the comprehensive **Agentic AI Nano-Degree** program! This intensive 
 
     Connect to the internal Gaia LLM API for agent development
 
-    [:octicons-arrow-right-24: API Setup](llmapi.md)
+    [:octicons-arrow-right-24: API Setup](00_intro/llmapi.md)
 
 </div>
 
 ### Why BMW Cloud Development?
 
 Your BMW Coder workspace includes:
+
 - **Pre-installed frameworks** (LangChain, CrewAI, PydanticAI, etc.)
 - **GPU access** for AI model training and inference
 - **Integrated AI assistants** (GitHub Copilot, BMW Coding-Assistant CLI)
 - **Zero local installation** requirements
 - **BMW security compliance** and network access
 
-</div>
-
 <!-- Public Network Alternative Content -->
-<div class="bmw-public-alternative">
+<div class="bmw-public-alternative" markdown="1">
 
 **Important:** Set up your local development environment for hands-on learning!
 
@@ -72,6 +71,7 @@ Your BMW Coder workspace includes:
 ### Local Development Requirements
 
 For local setup, you'll need:
+
 - **Python 3.11+** with virtual environment support
 - **LLM API access** (OpenAI, Anthropic Claude, or local models)
 - **Development tools** (Git, VS Code or preferred IDE)
@@ -219,7 +219,7 @@ Each session follows a consistent structure:
 Ready to begin your journey? **First, set up your environment, then choose your starting point:**
 
 <!-- BMW Corporate Network Quick Start -->
-<div class="bmw-corporate-only">
+<div class="bmw-corporate-only" markdown="1">
 
 ### Step 1: BMW Cloud Environment Setup
 Access your [BMW cloud development environment](00_intro/coder.md) at `http://10.21.202.14/workspaces`
@@ -229,7 +229,7 @@ Access your [BMW cloud development environment](00_intro/coder.md) at `http://10
 </div>
 
 <!-- Public Network Quick Start -->
-<div class="bmw-public-alternative">
+<div class="bmw-public-alternative" markdown="1">
 
 ### Step 1: Local Environment Setup
 Follow the [local setup guide](getting-started.md) to install Python, dependencies, and configure API keys
