@@ -45,7 +45,7 @@ Production AI agent deployment excels in mission-critical scenarios:
 - **Supply Chain**: Multi-region agent networks optimizing logistics and inventory management
 
 ![Production Deployment Architecture](images/production-deployment-architecture.png)
-*Figure 1: Enterprise Kubernetes AI agent architecture showing container orchestration, service mesh, observability stack, and CI/CD integration creating a scalable, compliant production environment supporting enterprise SLA requirements*
+### Figure 1: Enterprise Kubernetes AI agent architecture showing container orchestration, service mesh, observability stack, and CI/CD integration creating a scalable, compliant production environment supporting enterprise SLA requirements
 
 ### Learning Path Options
 
@@ -69,7 +69,7 @@ Production AI agent deployment excels in mission-critical scenarios:
 
 As the enterprise AI orchestration market explodes from $5.8B to $48.7B (2024-2034), organizations need sophisticated infrastructure to deploy AI agents that meet enterprise SLA requirements while maintaining compliance and cost efficiency.
 
-**Enterprise Production Requirements:**
+### Enterprise Production Requirements:
 1. **99.99% Availability**: Multi-region redundancy with automated failover and disaster recovery
 2. **Intelligent Auto-scaling**: GPU-aware scaling based on ML workload demands and performance metrics
 3. **Resource Optimization**: Efficient allocation of GPUs, memory, and CPU for diverse AI workloads
@@ -77,12 +77,12 @@ As the enterprise AI orchestration market explodes from $5.8B to $48.7B (2024-20
 5. **Compliance Automation**: RBAC, network policies, and audit trails for regulatory requirements
 6. **MLOps Integration**: GitOps practices for model deployment, versioning, and lifecycle management
 
-**Industry Impact (2024-2025):**
+### Industry Impact (2024-2025):
 Kubernetes has become the backbone of AI infrastructure, with major cloud providers (Azure AI Foundry, Google Vertex AI, AWS SageMaker) offering unified orchestration platforms that simplify AI deployment while maintaining enterprise-grade reliability and cost-effectiveness.
 
 ### **OBSERVER PATH**: Kubernetes AI Orchestration Patterns
 
-**Core Production Architecture Components:**
+### Core Production Architecture Components:
 
 1. **Container Orchestration**: Kubernetes manages containerized AI workloads with automatic scaling and resource allocation
 2. **GPU Management**: Specialized node pools with GPU-optimized scheduling for ML inference and training
@@ -91,7 +91,7 @@ Kubernetes has become the backbone of AI infrastructure, with major cloud provid
 5. **Edge Integration**: K3s/MicroK8s for lightweight edge AI deployment with cloud synchronization
 6. **Compliance Framework**: RBAC, network policies, and namespace isolation for regulatory compliance
 
-**Enterprise Platform Evolution:**
+### Enterprise Platform Evolution:
 - **Microsoft Azure AI Foundry**: Multi-agent orchestration with built-in governance and compliance
 - **Google Cloud Vertex AI**: Agent Builder with Agent Engine and development kits for Python/Java
 - **AWS SageMaker AI**: Unified Studio with CustomOrchestrator for inference workflows
@@ -99,7 +99,7 @@ Kubernetes has become the backbone of AI infrastructure, with major cloud provid
 
 ### **PARTICIPANT PATH**: Implementing Enterprise Kubernetes Deployment
 
-**Step 1: Production-Grade Namespace and Resource Management**
+### Step 1: Production-Grade Namespace and Resource Management
 
 Implement comprehensive Kubernetes configuration with enterprise patterns:
 
@@ -141,12 +141,12 @@ spec:
     services.loadbalancers: "5"
 ```
 
-**Enterprise Benefits:**
+### Enterprise Benefits:
 - **Resource Governance**: Prevents resource exhaustion and enables cost tracking
 - **Compliance Labeling**: Enables automated policy enforcement and audit trails
 - **GPU Management**: Explicit GPU resource allocation for AI workloads
 
-**Step 2: Enterprise Configuration Management**
+### Step 2: Enterprise Configuration Management
 
 Implement comprehensive configuration with security best practices:
 
@@ -207,7 +207,7 @@ data:
   scaling.gpu_utilization_threshold: "75"
 ```
 
-**Step 3: Enterprise Secrets Management**
+### Step 3: Enterprise Secrets Management
 
 Implement secure secrets management with encryption:
 
@@ -266,7 +266,7 @@ spec:
     compliance-webhook-secret: <sealed-encrypted-data>
 ```
 
-**Enterprise Security Features:**
+### Enterprise Security Features:
 - **Rotation Automation**: Labeled secrets enable automated rotation schedules
 - **Sealed Secrets**: GitOps-compatible encrypted secrets for version control
 - **Service Account Binding**: Secure access through Kubernetes service accounts
@@ -284,11 +284,11 @@ data:
 
 ### Step 1.2: Redis Deployment
 
-**Deployment Progression: Foundation → Message Queue → State Management**
+### Deployment Progression: Foundation → Message Queue → State Management
 
 Redis serves as the central message queue and state store for agent communication. Let's deploy it step by step.
 
-**Stage 1: Basic Redis Deployment Metadata**
+### Stage 1: Basic Redis Deployment Metadata
 ```yaml
 
 # k8s/redis-deployment.yaml - Deployment foundation
@@ -306,7 +306,7 @@ metadata:
 
 **Why This Structure?** Labels help Kubernetes organize resources and enable proper service discovery for multi-agent coordination.
 
-**Stage 2: Redis Pod Configuration**
+### Stage 2: Redis Pod Configuration
 ```yaml
 spec:
   replicas: 1                    # Single instance for simplicity
@@ -320,7 +320,7 @@ spec:
         component: message-queue
 ```
 
-**Stage 3: Container and Security Setup**
+### Stage 3: Container and Security Setup
 ```yaml
     spec:
       containers:
@@ -336,7 +336,7 @@ spec:
               key: redis-password
 ```
 
-**Stage 4: Redis Startup and Resource Management**
+### Stage 4: Redis Startup and Resource Management
 
 Configure Redis with secure startup and production resource limits:
 
@@ -356,18 +356,18 @@ Configure Redis with secure startup and production resource limits:
 
 **Production Insight:** Resource limits prevent Redis from consuming excessive resources and impacting agent performance.
 
-**Stage 5: Data Persistence Configuration**
+### Stage 5: Data Persistence Configuration
 ```yaml
         volumeMounts:
         - name: redis-data
           mountPath: /data         # Redis data directory for persistence
 ```
 
-**Stage 6: Health Monitoring Setup**
+### Stage 6: Health Monitoring Setup
 
 Production Redis requires comprehensive health monitoring for reliability:
 
-**Liveness Probe - Is Redis Running?**
+### Liveness Probe - Is Redis Running?
 ```yaml
         livenessProbe:
           exec:
@@ -381,7 +381,7 @@ Production Redis requires comprehensive health monitoring for reliability:
           periodSeconds: 10           # Check every 10 seconds
 ```
 
-**Readiness Probe - Can Redis Accept Connections?**
+### Readiness Probe - Can Redis Accept Connections?
 ```yaml
         readinessProbe:
           exec:
@@ -395,11 +395,11 @@ Production Redis requires comprehensive health monitoring for reliability:
           periodSeconds: 5            # Frequent ready checks
 ```
 
-**Stage 7: Storage and Service Configuration**
+### Stage 7: Storage and Service Configuration
 
 Complete the Redis deployment with persistent storage and network access:
 
-**Volume Configuration**
+### Volume Configuration
 ```yaml
       volumes:
       - name: redis-data
@@ -407,7 +407,7 @@ Complete the Redis deployment with persistent storage and network access:
           claimName: redis-pvc      # Link to persistent volume
 ```
 
-**Service for Agent Access**
+### Service for Agent Access
 ```yaml
 ---
 apiVersion: v1
@@ -423,7 +423,7 @@ spec:
     targetPort: 6379              # Container port
 ```
 
-**Persistent Volume Claim**
+### Persistent Volume Claim
 ```yaml
 ---
 apiVersion: v1
@@ -481,7 +481,7 @@ Configure the pod template with monitoring annotations:
         image: agent-registry/mcp-agent:v1.0.0
 ```
 
-**Container Orchestration: Ports and Connectivity**
+### Container Orchestration: Ports and Connectivity
 
 Set up the agent's network ports for different communication protocols:
 
@@ -495,7 +495,7 @@ Set up the agent's network ports for different communication protocols:
           name: metrics           # Prometheus metrics endpoint
 ```
 
-**Configuration Management: Redis Connection**
+### Configuration Management: Redis Connection
 ```yaml
         env:
         - name: REDIS_HOST
@@ -515,7 +515,7 @@ Set up the agent's network ports for different communication protocols:
               key: redis-password
 ```
 
-**Security Configuration: API Keys and Authentication**
+### Security Configuration: API Keys and Authentication
 ```yaml
         - name: API_KEY
           valueFrom:
@@ -531,7 +531,7 @@ Set up the agent's network ports for different communication protocols:
           value: "/secrets/google-cloud-key.json"  # Cloud service auth
 ```
 
-**Operational Configuration: Logging and Performance**
+### Operational Configuration: Logging and Performance
 ```yaml
         - name: LOG_LEVEL
           valueFrom:
@@ -561,9 +561,9 @@ Configure resource limits and volume mounts:
           readOnly: true
 ```
 
-**Production Health Monitoring: Three-Tier Probe Strategy**
+### Production Health Monitoring: Three-Tier Probe Strategy
 
-**Startup Probe - Initial Agent Bootstrapping**
+### Startup Probe - Initial Agent Bootstrapping
 ```yaml
         startupProbe:
           httpGet:
@@ -575,7 +575,7 @@ Configure resource limits and volume mounts:
           failureThreshold: 10       # Allow up to 100 seconds startup
 ```
 
-**Liveness Probe - Agent Process Health**
+### Liveness Probe - Agent Process Health
 ```yaml
         livenessProbe:
           httpGet:
@@ -587,7 +587,7 @@ Configure resource limits and volume mounts:
           failureThreshold: 3        # Restart after 3 failures
 ```
 
-**Readiness Probe - Traffic Acceptance**
+### Readiness Probe - Traffic Acceptance
 ```yaml
         readinessProbe:
           httpGet:
@@ -809,13 +809,13 @@ spec:
 
 ### Step 2.1: Metrics Collection System
 
-**Observability Foundation: Metrics Collection Architecture**
+### Observability Foundation: Metrics Collection Architecture
 
 **Understanding Production Monitoring for Agent Systems**: Effective monitoring is critical for production agent systems that must operate reliably 24/7. This monitoring framework provides real-time visibility into agent performance, resource utilization, and business metrics essential for maintaining SLA compliance and operational excellence.
 
 **In This Step**: You'll build a comprehensive metrics collection system using Prometheus, the industry-standard for cloud-native monitoring. This teaches you how to instrument agent systems for observability, enabling proactive issue detection and data-driven optimization decisions.
 
-**Import Dependencies and Logger Setup**
+### Import Dependencies and Logger Setup
 ```python
 
 # monitoring/agent_metrics.py - Production monitoring foundation
@@ -832,7 +832,7 @@ logger = logging.getLogger(__name__)                          # Component-specif
 
 **Why These Dependencies**: Each import serves a specific monitoring purpose: Prometheus client provides industry-standard metrics, asyncio enables non-blocking monitoring, and structured logging provides debugging context. This combination creates comprehensive observability for production systems.
 
-**Metrics Class Foundation**
+### Metrics Class Foundation
 
 **Understanding Service-Level Monitoring Architecture**: This class encapsulates all monitoring functionality for an agent service, providing a clean interface for instrumenting code while handling the complexity of metrics collection, aggregation, and exposure to monitoring systems.
 
@@ -852,7 +852,7 @@ class AgentMetrics:
 
 **Why This Constructor Pattern**: The service name enables multi-tenant monitoring where different agents can be monitored independently, while the configurable port allows multiple services to run on the same host without conflicts.
 
-**Start Metrics Server**
+### Start Metrics Server
 ```python
         # Start HTTP server for Prometheus metrics scraping
         start_http_server(metrics_port)
@@ -861,7 +861,7 @@ class AgentMetrics:
 
 **Why This Matters**: The metrics server exposes an HTTP endpoint that Prometheus can scrape to collect metrics. This push-pull model is more reliable than push-based systems and enables centralized monitoring configuration through Prometheus service discovery.
 
-**Initialize Core Monitoring Metrics:**
+### Initialize Core Monitoring Metrics:
 
 **Understanding Production Metrics Strategy**: Production monitoring requires both technical metrics (request rates, latencies) and business metrics (workflow success rates, agent utilization). This comprehensive metrics suite provides 360-degree visibility into system health and business performance.
 
@@ -897,7 +897,7 @@ class AgentMetrics:
 
 **Why These Metric Types**: Info metrics provide context for alerts, Counters track event volumes for capacity planning, and Histograms measure latencies for SLA compliance. The bucket configuration aligns with typical API performance SLAs.
 
-**Add Agent-Specific Business Metrics:**
+### Add Agent-Specific Business Metrics:
 
 **Understanding Business Logic Monitoring**: Beyond technical metrics, production agent systems need business-focused metrics that track workflow success, agent utilization, and service discovery patterns. These metrics enable business performance optimization and capacity planning decisions.
 

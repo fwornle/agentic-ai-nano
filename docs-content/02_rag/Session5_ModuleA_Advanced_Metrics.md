@@ -204,7 +204,7 @@ D) User interface quality
 
 ## 🧭 Navigation
 
-**Related Modules:**
+### Related Modules:
 - **Core Session:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
 - **Related Module:** [Module B - Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)
 

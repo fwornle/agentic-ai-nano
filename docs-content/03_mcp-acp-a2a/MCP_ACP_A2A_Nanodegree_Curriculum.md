@@ -77,13 +77,13 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 **Project Overview:** Build a comprehensive multi-agent system demonstrating MCP, ACP, and A2A integration
 
-**Requirements:**
+### Requirements:
 - Implement local agent coordination using ACP
 - Create MCP servers for data access and tool integration
 - Enable A2A communication for cross-platform collaboration
 - Deploy to production environment with monitoring
 
-**Deliverables:**
+### Deliverables:
 - Complete source code with documentation
 - Working deployment with monitoring dashboard
 - Architecture documentation and API specifications

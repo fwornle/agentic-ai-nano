@@ -44,7 +44,7 @@ Advanced agent workflows excel in sophisticated business scenarios:
 - **Quality Assurance**: Maker-checker patterns where agents debate and validate outputs together
 
 ![Advanced Workflow Architecture](images/advanced-workflow-architecture.png)
-*Figure 1: Enterprise agentic workflow architecture showing parallel processing, conditional routing, orchestrator-worker patterns, and ReAct loops working together to create resilient, scalable AI systems that overcome the 85% failure rate*
+### Figure 1: Enterprise agentic workflow architecture showing parallel processing, conditional routing, orchestrator-worker patterns, and ReAct loops working together to create resilient, scalable AI systems that overcome the 85% failure rate
 
 ### Learning Path Options
 
@@ -68,7 +68,7 @@ Advanced agent workflows excel in sophisticated business scenarios:
 
 According to Gartner research, while 33% of enterprise software will depend on agentic AI by 2028, current systems face an 85% failure rate due to inadequate orchestration patterns. Advanced workflows solve this through sophisticated coordination mechanisms.
 
-**Enterprise Workflow Requirements:**
+### Enterprise Workflow Requirements:
 1. **Fault Tolerance**: Graceful handling of agent failures and external system unavailability
 2. **Scalability**: Dynamic resource allocation based on workload demands
 3. **Observability**: Complete visibility into workflow execution and performance metrics
@@ -77,7 +77,7 @@ According to Gartner research, while 33% of enterprise software will depend on a
 
 ### **OBSERVER PATH**: Production Workflow Patterns (2024-2025)
 
-**Core Enterprise Orchestration Patterns:**
+### Core Enterprise Orchestration Patterns:
 
 1. **Sequential Orchestration**: Tasks decomposed into step-by-step subgoals where each agent's output becomes the next step's input, ideal for complex customer support and context preservation
 2. **Parallel Processing**: Large tasks split into independent sub-tasks for concurrent execution, drastically reducing time to resolution for code review and consensus building
@@ -85,14 +85,14 @@ According to Gartner research, while 33% of enterprise software will depend on a
 4. **Conditional Routing**: Input classification determines which specialized agent handles each workflow part, enabling scalable multi-domain expertise
 5. **ReAct Pattern**: Real-time problem-solving where agents alternate between reasoning and action, adapting to ambiguity and evolving requirements
 
-**Framework Ecosystem Leadership:**
+### Framework Ecosystem Leadership:
 - **LangGraph**: Graph-based architecture with state machines for conditional logic and complex processes
 - **AutoGen**: Role-based collaborative systems mirroring actual team structures
 - **Azure AI Agent Factory**: Enterprise patterns for production deployment and monitoring
 
 ### **PARTICIPANT PATH**: Implementing Enterprise Workflow Engine
 
-**Step 1: LangGraph-Compatible Workflow Foundation**
+### Step 1: LangGraph-Compatible Workflow Foundation
 
 Implement the enterprise workflow engine using production-grade patterns:
 
@@ -125,13 +125,13 @@ import structlog
 logger = structlog.get_logger()
 ```
 
-**Enterprise Dependencies Explained:**
+### Enterprise Dependencies Explained:
 - **LangGraph**: Production-grade state graph orchestration with conditional logic
 - **Circuit Breaker**: Fault tolerance patterns preventing cascade failures
 - **MetricsCollector**: Enterprise monitoring with SLA tracking
 - **Structured Logging**: JSON logging for enterprise observability systems
 
-**Step 2: Enterprise Workflow State Management**
+### Step 2: Enterprise Workflow State Management
 
 Implement comprehensive state management for complex workflows:
 
@@ -204,13 +204,13 @@ class EnterpriseWorkflowState:
             self.workflow_id = str(uuid.uuid4())
 ```
 
-**Enterprise State Benefits:**
+### Enterprise State Benefits:
 - **Complete Auditability**: Full execution history for compliance requirements
 - **Performance Monitoring**: Detailed timing and resource usage tracking
 - **Error Recovery**: Rollback points and retry management for fault tolerance
 - **Human Integration**: Approval workflows for regulated processes
 
-**Step 3: LangGraph Orchestrator-Worker Implementation**
+### Step 3: LangGraph Orchestrator-Worker Implementation
 
 Implement the enterprise orchestrator-worker pattern:
 
@@ -307,14 +307,14 @@ class EnterpriseWorkflowOrchestrator:
             return {'next_action': 'error'}
 ```
 
-**LangGraph Orchestration Benefits:**
+### LangGraph Orchestration Benefits:
 - **State Machine Reliability**: Formal state transitions prevent invalid workflow states
 - **Conditional Logic**: Dynamic routing based on real-time analysis and context
 - **Metrics Integration**: Enterprise monitoring with performance and decision tracking
 - **Error Resilience**: Circuit breakers and retry policies prevent cascade failures
 ```
 
-**Step Type Capabilities:**
+### Step Type Capabilities:
 - **ACTION**: Executes individual workflow operations (API calls, data processing)
 - **CONDITION**: Enables dynamic routing based on data evaluation
 - **PARALLEL**: Allows concurrent execution of multiple independent operations
@@ -339,7 +339,7 @@ class StepStatus(Enum):
     RETRYING = "retrying"    # Attempting retry after failure
 ```
 
-**Status Flow Logic:**
+### Status Flow Logic:
 - Steps start in **PENDING** state upon workflow initialization
 - Transition to **RUNNING** when execution begins
 - Move to **COMPLETED** on successful execution
@@ -367,7 +367,7 @@ class WorkflowStep:
     timeout: int = 300                     # Step timeout in seconds
 ```
 
-**Core Configuration Elements:**
+### Core Configuration Elements:
 - **step_id**: Unique identifier for dependency tracking and monitoring
 - **name**: Human-readable step description for debugging and logging
 - **step_type**: Determines execution pattern and behavior
@@ -386,7 +386,7 @@ Configure data flow and validation for step inputs and outputs:
     input_validation: Dict[str, Any] = field(default_factory=dict)
 ```
 
-**Data Flow Management:**
+### Data Flow Management:
 - **input_mapping**: Maps workflow variables to step input parameters
   - Example: `{"customer_id": "workflow.customer_data.id"}`
 - **output_mapping**: Maps step results to workflow variables
@@ -406,7 +406,7 @@ Define step relationships and execution flow control:
     error_handlers: List[str] = field(default_factory=list)
 ```
 
-**Flow Control Mechanisms:**
+### Flow Control Mechanisms:
 - **dependencies**: List of step IDs that must complete before this step can execute
 - **conditions**: Boolean expressions that determine if step should execute
   - Example: `[{"expression": "workflow.order_total > 100", "operator": ">"}]`
@@ -423,7 +423,7 @@ Implement comprehensive error handling and retry mechanisms:
     rollback_actions: List[str] = field(default_factory=list)
 ```
 
-**Error Recovery Configuration:**
+### Error Recovery Configuration:
 - **retry_policy**: Defines retry behavior for transient failures
   - `{"max_attempts": 3, "backoff_strategy": "exponential", "delay": 5}`
 - **rollback_actions**: Compensation actions to undo changes on failure
@@ -440,7 +440,7 @@ Configure parallel processing and loop execution capabilities:
     loop_max_iterations: int = 100
 ```
 
-**Advanced Pattern Support:**
+### Advanced Pattern Support:
 - **parallel_steps**: Child steps for parallel execution containers
   - Enables concurrent processing of independent operations
 - **loop_condition**: Boolean expression for loop termination
@@ -457,7 +457,7 @@ Add comprehensive monitoring and metrics collection:
     custom_metrics: List[str] = field(default_factory=list)
 ```
 
-**Observability Features:**
+### Observability Features:
 - **metrics_enabled**: Controls whether step execution metrics are collected
 - **custom_metrics**: Additional business metrics to track during execution
   - Examples: `["processing_rate", "quality_score", "resource_usage"]`
@@ -476,7 +476,7 @@ Track execution state and performance data:
     retry_count: int = 0
 ```
 
-**Runtime Tracking:**
+### Runtime Tracking:
 - **status**: Current execution status for workflow coordination
 - **start_time/end_time**: Execution timing for performance analysis
 - **execution_data**: Step-specific data and intermediate results
@@ -501,7 +501,7 @@ class AdvancedWorkflow:
     version: str = "1.0"   # Version for workflow evolution
 ```
 
-**Workflow Identity Management:**
+### Workflow Identity Management:
 - **workflow_id**: UUID-based unique identifier for tracking and referencing
 - **name**: Descriptive name for UI display and logging
 - **description**: Comprehensive explanation of workflow purpose and behavior
@@ -517,7 +517,7 @@ Define the core workflow composition and data management:
     global_variables: Dict[str, Any] = field(default_factory=dict)
 ```
 
-**Structural Components:**
+### Structural Components:
 - **steps**: Ordered list of workflow steps defining execution flow
 - **global_variables**: Shared data accessible across all workflow steps
   - Used for configuration, shared state, and cross-step communication
@@ -533,7 +533,7 @@ Configure workflow-level execution parameters and limits:
     retry_policy: Dict[str, Any] = field(default_factory=dict)  # Global retry settings
 ```
 
-**Configuration Parameters:**
+### Configuration Parameters:
 - **timeout**: Maximum workflow execution time (3600 seconds = 1 hour default)
 - **max_parallel_steps**: Limits concurrent step execution to prevent resource exhaustion
 - **retry_policy**: Default retry behavior for all steps unless overridden
@@ -550,7 +550,7 @@ Configure advanced monitoring and optimization features:
     adaptive_routing: bool = True
 ```
 
-**Advanced Features:**
+### Advanced Features:
 - **sla_targets**: Service Level Agreement targets for performance monitoring
   - Example: `{"max_execution_time": 300, "min_success_rate": 0.95}`
 - **optimization_enabled**: Enables automatic workflow optimization based on performance data
@@ -567,7 +567,7 @@ Add metadata for workflow governance and lifecycle management:
     tags: List[str] = field(default_factory=list)
 ```
 
-**Governance Information:**
+### Governance Information:
 - **created_at**: ISO timestamp for audit trail and lifecycle tracking
 - **created_by**: User/system identifier for accountability and authorization
 - **tags**: Categorical labels for workflow organization and discovery
@@ -593,7 +593,7 @@ class AdvancedWorkflowEngine:
         self.workflow_templates: Dict[str, AdvancedWorkflow] = {}
 ```
 
-**Engine Architecture:**
+### Engine Architecture:
 - **step_executor**: Handles the actual execution of individual workflow steps
 - **monitor**: Provides real-time monitoring, logging, and metrics collection
 - **active_workflows**: Tracks currently executing workflows by execution ID
@@ -610,7 +610,7 @@ Configure resource limits and management systems:
         self.optimizer = WorkflowOptimizer()
 ```
 
-**Resource Management:**
+### Resource Management:
 - **max_concurrent_workflows**: Prevents system overload by limiting concurrent executions
 - **resource_manager**: Manages agent allocation, memory usage, and system resources
 - **optimizer**: Analyzes workflow performance and provides optimization recommendations
@@ -631,7 +631,7 @@ Implement the workflow execution entry point with context setup:
         execution_options = execution_options or {}
 ```
 
-**Execution Setup:**
+### Execution Setup:
 - **execution_id**: UUID ensures unique tracking across distributed systems
 - **input_data**: Initial workflow data and parameters
 - **execution_options**: Runtime configuration overrides and execution preferences
@@ -652,7 +652,7 @@ Create and register the execution context for monitoring and state management:
         self.active_workflows[execution_id] = context
 ```
 
-**Context Management:**
+### Context Management:
 - **ExecutionContext**: Encapsulates all workflow execution state and data
 - **active_workflows**: Registry for monitoring and managing concurrent executions
 - Context includes workflow definition, input data, runtime options, and execution state
@@ -671,7 +671,7 @@ Implement the complete workflow execution lifecycle with monitoring:
             context.start_time = datetime.now()
 ```
 
-**Execution Initialization:**
+### Execution Initialization:
 - **start_workflow_monitoring**: Begins real-time metrics collection and observability
 - **WorkflowState.RUNNING**: Marks workflow as actively executing for status tracking
 - **start_time**: Records execution start for performance analysis and SLA monitoring
@@ -695,7 +695,7 @@ Execute the workflow with proper timeout handling:
             return self._create_execution_result(context, "completed", result)
 ```
 
-**Execution Management:**
+### Execution Management:
 - **asyncio.wait_for**: Enforces workflow timeout to prevent runaway executions
 - **_execute_workflow_internal**: Core execution logic handling step orchestration
 - **WorkflowState.COMPLETED**: Marks successful completion for audit and monitoring
@@ -713,7 +713,7 @@ Handle workflow timeout scenarios gracefully:
             return self._create_execution_result(context, "timeout", None)
 ```
 
-**Timeout Management:**
+### Timeout Management:
 - **WorkflowState.TIMEOUT**: Distinguishes timeouts from other failure types
 - **Error logging**: Records timeout events for performance analysis and alerting
 - **Graceful return**: Provides structured response even on timeout
@@ -734,7 +734,7 @@ Implement comprehensive error handling with rollback capabilities:
             return self._create_execution_result(context, "failed", None)
 ```
 
-**Error Recovery:**
+### Error Recovery:
 - **WorkflowState.FAILED**: Marks workflow failure for monitoring and retry logic
 - **Error context capture**: Preserves error details for debugging and analysis
 - **_execute_rollback**: Attempts to undo partial changes for data consistency
@@ -750,7 +750,7 @@ Ensure proper resource cleanup regardless of execution outcome:
             self.active_workflows.pop(execution_id, None)
 ```
 
-**Cleanup Operations:**
+### Cleanup Operations:
 - **stop_workflow_monitoring**: Finalizes metrics collection and releases monitoring resources
 - **active_workflows cleanup**: Removes completed workflow from active registry
 - **finally block**: Ensures cleanup occurs regardless of success, timeout, or failure
@@ -769,7 +769,7 @@ Implement the core workflow orchestration logic with dependency resolution:
         execution_graph = self._build_execution_graph(workflow)
 ```
 
-**Execution Setup:**
+### Execution Setup:
 - **execution_graph**: Creates dependency graph for step ordering and parallel execution planning
 - **Graph structure**: Maps step dependencies, enabling efficient execution scheduling
 
@@ -783,7 +783,7 @@ Initialize tracking for step execution progress:
         failed_steps = set()
 ```
 
-**State Tracking:**
+### State Tracking:
 - **completed_steps**: Tracks successfully completed steps for dependency resolution
 - **failed_steps**: Tracks failed steps to prevent dependent step execution
 
@@ -806,7 +806,7 @@ Implement the primary execution loop with deadlock detection:
                 break
 ```
 
-**Execution Logic:**
+### Execution Logic:
 - **ready_steps**: Identifies steps with all dependencies satisfied
 - **Deadlock detection**: Prevents infinite loops when dependencies cannot be resolved
 - **remaining_steps**: Calculates steps that haven't been processed
@@ -826,7 +826,7 @@ Create execution tasks for all ready steps using appropriate patterns:
                     )
 ```
 
-**Task Creation Process:**
+### Task Creation Process:
 - **execution_tasks**: Collection of concurrent tasks for ready steps
 - **PARALLEL type**: Creates task for concurrent child step execution
 
@@ -851,7 +851,7 @@ Handle different step types with specialized execution methods:
                 execution_tasks.append((step, task))
 ```
 
-**Specialized Execution:**
+### Specialized Execution:
 - **LOOP**: Implements iterative processing with termination conditions
 - **CONDITION**: Evaluates conditions and routes execution accordingly
 - **Default (ACTION)**: Executes single operations like API calls or data processing
@@ -874,7 +874,7 @@ Process the results of executed steps with proper success/failure handling:
                         self._apply_output_mapping(step, result, context.data)
 ```
 
-**Success Processing:**
+### Success Processing:
 - **await task**: Waits for individual step completion
 - **completed_steps.add**: Tracks completion for dependency resolution
 - **StepStatus.COMPLETED**: Updates step status for monitoring
@@ -895,7 +895,7 @@ Handle step failures with configurable failure policies:
                             raise Exception(f"Step {step.step_id} failed: {result.get('error')}")
 ```
 
-**Failure Management:**
+### Failure Management:
 - **failed_steps.add**: Prevents dependent steps from executing
 - **error_info**: Captures detailed error information for debugging
 - **continue_on_failure**: Policy setting allows workflow to continue despite step failures
@@ -918,7 +918,7 @@ Implement comprehensive exception handling with recovery mechanisms:
         return context.data
 ```
 
-**Recovery Process:**
+### Recovery Process:
 - **Exception capture**: Handles unexpected errors during step execution
 - **Timestamped errors**: Records when errors occurred for analysis
 - **_handle_step_error**: Attempts error recovery through retry policies or compensation
@@ -938,7 +938,7 @@ Implement parallel step execution with proper resource management:
             return {"success": True, "message": "No parallel steps to execute"}
 ```
 
-**Parallel Execution Validation:**
+### Parallel Execution Validation:
 - **parallel_steps check**: Validates that the step contains child steps for parallel execution
 - **Empty step handling**: Returns success for containers without child steps
 
@@ -955,7 +955,7 @@ Implement semaphore-based concurrency control to prevent resource exhaustion:
                 return await self._execute_single_step(parallel_step, context)
 ```
 
-**Resource Management:**
+### Resource Management:
 - **asyncio.Semaphore**: Limits maximum concurrent step executions
 - **max_parallel_steps**: Configurable limit prevents system overload
 - **execute_with_semaphore**: Wrapper function that ensures semaphore control
@@ -974,7 +974,7 @@ Create and execute all parallel tasks concurrently:
         results = await asyncio.gather(*tasks, return_exceptions=True)
 ```
 
-**Concurrent Execution:**
+### Concurrent Execution:
 - **asyncio.create_task**: Creates concurrent tasks for each parallel step
 - **asyncio.gather**: Waits for all parallel tasks to complete
 - **return_exceptions=True**: Captures exceptions without stopping other tasks
@@ -1003,7 +1003,7 @@ Analyze parallel execution results and categorize successes and failures:
                 })
 ```
 
-**Result Classification:**
+### Result Classification:
 - **Exception handling**: Captures and logs exceptions from parallel execution
 - **Success identification**: Identifies successfully completed parallel steps
 - **Error aggregation**: Collects detailed error information for failed steps
@@ -1021,7 +1021,7 @@ Determine overall parallel execution success based on configurable thresholds:
         success = (successful_steps / total_steps) >= failure_threshold
 ```
 
-**Success Evaluation:**
+### Success Evaluation:
 - **parallel_failure_threshold**: Configurable threshold (default 50%) for considering parallel execution successful
 - **Success rate calculation**: Compares successful steps against total steps
 - **Flexible failure tolerance**: Allows workflows to continue even if some parallel steps fail
@@ -1044,7 +1044,7 @@ Assemble detailed execution results for monitoring and decision making:
         }
 ```
 
-**Result Structure:**
+### Result Structure:
 - **success**: Overall execution success based on threshold evaluation
 - **total_steps**: Complete count for performance analysis
 - **success_rate**: Percentage success rate for monitoring and optimization
@@ -1081,7 +1081,7 @@ from workflows.execution_context import ExecutionContext
 logger = logging.getLogger(__name__)
 ```
 
-**Module Dependencies:**
+### Module Dependencies:
 - **asyncio**: For asynchronous performance analysis operations
 - **statistics**: For calculating performance metrics and identifying patterns
 - **ExecutionContext**: Access to workflow execution data for analysis
@@ -1105,7 +1105,7 @@ class PerformanceMetrics:
     optimization_score: float                          # Overall optimization opportunity score
 ```
 
-**Metrics Categories:**
+### Metrics Categories:
 - **execution_time**: Used for performance trend analysis and SLA monitoring
 - **resource_usage**: Tracks system resource consumption for capacity planning
 - **success_rate/error_rate**: Reliability metrics for quality assessment
@@ -1131,7 +1131,7 @@ class OptimizationRecommendation:
     specific_changes: List[Dict[str, Any]] # Detailed implementation steps
 ```
 
-**Recommendation Components:**
+### Recommendation Components:
 - **type**: Category of optimization (parallelization, caching, resource allocation)
 - **expected_improvement**: Quantified performance benefit for prioritization
 - **implementation_effort**: Resource requirements for implementation planning
@@ -1154,7 +1154,7 @@ class WorkflowOptimizer:
         self._initialize_optimization_rules()
 ```
 
-**Optimizer Components:**
+### Optimizer Components:
 - **performance_history**: Historical metrics for trend analysis and machine learning
 - **optimization_rules**: Rule-based optimization detection and recommendation system
 - **learning_enabled**: Controls whether the optimizer learns from execution patterns
@@ -1176,7 +1176,7 @@ Define the most impactful optimization rules first:
             },
 ```
 
-**Highest Priority Rule:**
+### Highest Priority Rule:
 - **parallel_optimization**: Detects steps that can be executed concurrently
 - **Priority 9**: Highest impact optimization (typically 35%+ improvement)
 - **condition**: Lambda function evaluates metrics for parallelization opportunities
@@ -1201,13 +1201,13 @@ Add caching and resource optimization rules:
         ]
 ```
 
-**Additional Optimization Rules:**
+### Additional Optimization Rules:
 - **caching_optimization**: Identifies repeated operations that benefit from result caching
 - **resource_optimization**: Detects inefficient resource usage patterns
 - **Priority system**: Ensures high-impact optimizations are applied first
 ```
 
-**Optimization Rules:**
+### Optimization Rules:
 - **parallel_optimization**: Identifies opportunities to parallelize sequential steps
 - **caching_optimization**: Detects repeated operations that could benefit from caching
 - **resource_optimization**: Finds inefficient resource usage patterns
@@ -1235,7 +1235,7 @@ Implement comprehensive workflow performance analysis:
         avg_execution_time = statistics.mean(execution_times) if execution_times else 0
 ```
 
-**Performance Analysis Setup:**
+### Performance Analysis Setup:
 - **execution_history validation**: Ensures sufficient data for meaningful analysis
 - **execution_times calculation**: Extracts timing data from completed workflow executions
 - **avg_execution_time**: Primary performance metric for trend analysis
@@ -1252,7 +1252,7 @@ Analyze workflow reliability and error patterns:
         error_rate = 1 - success_rate
 ```
 
-**Reliability Metrics:**
+### Reliability Metrics:
 - **successful_executions**: Count of workflows that completed successfully
 - **success_rate**: Percentage reliability for SLA monitoring
 - **error_rate**: Failure percentage for identifying stability issues
@@ -1277,7 +1277,7 @@ Integrate all analysis components into comprehensive performance metrics:
         )
 ```
 
-**Advanced Analysis:**
+### Advanced Analysis:
 - **step_performance**: Granular per-step performance data for targeted optimization
 - **bottlenecks**: Identifies specific steps causing performance issues
 - **resource_usage**: Tracks system resource consumption patterns
@@ -1304,7 +1304,7 @@ Assemble final metrics and store for machine learning:
         return metrics
 ```
 
-**Data Management:**
+### Data Management:
 - **PerformanceMetrics construction**: Assembles all analysis results into structured format
 - **_store_performance_metrics**: Preserves metrics for historical analysis and machine learning
 - **Return metrics**: Provides immediate analysis results for optimization recommendations
@@ -1333,7 +1333,7 @@ Generate actionable optimization recommendations based on performance analysis:
                 logger.warning(f"Error applying optimization rule {rule['name']}: {e}")
 ```
 
-**Recommendation Generation Process:**
+### Recommendation Generation Process:
 - **Priority-based evaluation**: Applies highest-impact optimization rules first
 - **Condition evaluation**: Only generates recommendations when metrics indicate opportunity
 - **Error handling**: Continues processing even if individual rules fail
@@ -1349,7 +1349,7 @@ Rank and select the most impactful optimization recommendations:
         return recommendations[:5]  # Return top 5 recommendations
 ```
 
-**Selection Criteria:**
+### Selection Criteria:
 - **expected_improvement**: Primary ranking factor for maximum performance impact
 - **Top 5 limit**: Prevents recommendation overwhelm while focusing on highest-value changes
 - **Sorted presentation**: Enables prioritized implementation planning
@@ -1380,7 +1380,7 @@ Create specific parallelization recommendations with detailed implementation gui
         )
 ```
 
-**Parallelization Recommendation:**
+### Parallelization Recommendation:
 - **35% improvement**: Based on analysis of typical parallelization benefits
 - **Medium effort**: Requires workflow restructuring but no algorithm changes
 - **Low risk**: Parallelization typically doesn't affect business logic
@@ -1409,7 +1409,7 @@ Implement sophisticated bottleneck detection using statistical analysis:
                     bottlenecks.append(step_id)
 ```
 
-**Statistical Bottleneck Detection:**
+### Statistical Bottleneck Detection:
 - **time_threshold**: Uses mean + standard deviation to identify outlier steps
 - **Statistical significance**: Ensures only truly slow steps are flagged as bottlenecks
 - **Dynamic thresholds**: Adapts to each workflow's performance profile
@@ -1428,7 +1428,7 @@ Detect steps with inconsistent performance that may benefit from optimization:
         return bottlenecks
 ```
 
-**Variance-Based Detection:**
+### Variance-Based Detection:
 - **High variance detection**: Identifies steps with inconsistent performance
 - **50% threshold**: Steps with variance > 50% of mean execution time are flagged
 - **Consistency improvement**: Targets steps that would benefit from caching or resource optimization

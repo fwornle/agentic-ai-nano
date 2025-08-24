@@ -20,7 +20,7 @@ By the end of this session, you will be able to:
 **Where you'll apply it**: Enterprise workflow automation, customer service systems, multi-system integration, and any scenario requiring AI agents to coordinate multiple external tools while maintaining conversation context and handling failures gracefully.
 
 ![LangChain MCP Architecture](images/langchain-mcp-architecture.png)
-*Figure 1: LangChain agents seamlessly integrate with multiple MCP servers, providing a unified interface for complex reasoning and tool execution workflows*
+### Figure 1: LangChain agents seamlessly integrate with multiple MCP servers, providing a unified interface for complex reasoning and tool execution workflows
 
 ### Learning Path Options
 
@@ -93,7 +93,7 @@ agent = create_react_agent(
 )
 ```
 
-**Key concepts demonstrated:**
+### Key concepts demonstrated:
 - **Multi-server connection**: One client manages multiple MCP servers
 - **Automatic tool discovery**: Tools are dynamically loaded from servers
 - **ReAct pattern**: Agent reasons about which tools to use
@@ -121,7 +121,7 @@ pip install langchain-mcp-adapters langgraph langchain-openai \
             langchain-anthropic python-dotenv colorama rich
 ```
 
-**Dependencies explained:**
+### Dependencies explained:
 - `langchain-mcp-adapters`: Official LangChain integration for MCP servers
 - `langgraph`: Advanced workflow and graph-based agent execution
 - `langchain-openai/anthropic`: LLM providers for our agents
@@ -152,7 +152,7 @@ langchain-mcp-integration/
 └── .env                  # Environment variables
 ```
 
-**Enterprise organization benefits:**
+### Enterprise organization benefits:
 - **Separation of concerns**: Each module has a specific responsibility
 - **Scalability**: Add new agents or servers without restructuring
 - **Team collaboration**: Clear boundaries for different development teams
@@ -194,7 +194,7 @@ class LLMConfig:
     timeout: int = 60
 ```
 
-**Configuration design benefits:**
+### Configuration design benefits:
 - **Type safety**: Dataclasses provide compile-time type checking
 - **Default values**: Sensible defaults reduce configuration complexity
 - **Immutability**: Prevents accidental runtime configuration changes
@@ -257,7 +257,7 @@ class Config:
     LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 ```
 
-**Enterprise configuration practices:**
+### Enterprise configuration practices:
 - **Environment-based**: Different settings for dev/staging/production
 - **Type safety**: Prevents runtime configuration errors
 - **Timeout controls**: Prevents hanging processes in production
@@ -265,7 +265,7 @@ class Config:
 
 ### **IMPLEMENTER PATH**: Advanced Configuration
 
-*See optional modules below for enterprise-level configuration patterns*
+### See optional modules below for enterprise-level configuration patterns
 
 ---
 
@@ -322,7 +322,7 @@ class MCPServerManager:
         self.health_status: Dict[str, bool] = {}
 ```
 
-**Key design decisions:**
+### Key design decisions:
 - **Dictionary lookups**: Fast O(1) server access by name
 - **Health tracking**: Know which servers are operational in real-time
 - **Separation of concerns**: Configuration vs. runtime state
@@ -386,7 +386,7 @@ class MCPServerManager:
             await self._start_single_server(name, config)
 ```
 
-**Production features:**
+### Production features:
 - **Health monitoring**: Continuous checks with automatic restart
 - **Error recovery**: Graceful handling of server failures  
 - **Resource management**: Proper cleanup prevents memory leaks
@@ -394,7 +394,7 @@ class MCPServerManager:
 
 ### **IMPLEMENTER PATH**: Advanced Server Management
 
-*See optional modules below for enterprise patterns including continuous health monitoring, connection pooling, and distributed server deployment*
+### See optional modules below for enterprise patterns including continuous health monitoring, connection pooling, and distributed server deployment
 
 ### Simple ReAct Agent Pattern
 
@@ -428,7 +428,7 @@ Question: {input}
 """)
 ```
 
-**ReAct pattern benefits:**
+### ReAct pattern benefits:
 - **Transparent reasoning**: See how the agent thinks through problems
 - **Iterative improvement**: Agent can use tool results to inform next actions
 - **Error recovery**: Can try different tools if first attempts fail
@@ -477,7 +477,7 @@ if __name__ == "__main__":
     mcp.run()
 ```
 
-**Design principles:**
+### Design principles:
 - **Simple data structure**: Easy to understand and extend
 - **Error handling**: Graceful responses for invalid inputs
 - **Unit conversion**: Support different temperature scales
@@ -491,13 +491,13 @@ if __name__ == "__main__":
 
 Intelligent agents must decide which tools to use based on user queries. Here's how LangChain agents make these decisions:
 
-**Query Analysis Process:**
+### Query Analysis Process:
 1. **Parse user intent**: What is the user trying to accomplish?
 2. **Identify relevant tools**: Which tools can help with this task?
 3. **Plan execution order**: What sequence makes sense?
 4. **Handle failures**: What if a tool doesn't work?
 
-**Example Decision Tree:**
+### Example Decision Tree:
 ```
 User: "What's the weather in London and do I have any files about UK shipping?"
 
@@ -606,7 +606,7 @@ class BasicMCPAgent:
             return f"Error processing request: {str(e)}"
 ```
 
-**Key integration concepts:**
+### Key integration concepts:
 - **Tool wrapping**: MCP tools become LangChain-compatible
 - **Error handling**: Graceful degradation when tools fail
 - **Async support**: Non-blocking execution for better performance
@@ -618,7 +618,7 @@ Real-world enterprise agents coordinate multiple tools to solve complex problems
 
 **Scenario**: "Check my order status for shipment to London, considering weather delays"
 
-**Agent Coordination Process**:
+### Agent Coordination Process
 1. **Parse request**: Extract order ID and destination
 2. **Query database**: Get order and shipping details  
 3. **Check weather**: Get current conditions for London
@@ -751,13 +751,13 @@ Question: {input}
         )
 ```
 
-**Enhanced prompting benefits:**
+### Enhanced prompting benefits:
 - **Clear instructions**: Step-by-step guidance for intelligent tool usage
 - **Context awareness**: Includes conversation history for better responses
 - **Error recovery**: Instructions for handling tool failures gracefully
 - **Structured reasoning**: ReAct format ensures transparent thinking
 
-**Key advances over basic agents:**
+### Key advances over basic agents:
 - **Multi-server support**: Uses tools from all available MCP servers
 - **Conversation memory**: Maintains context across interactions
 - **Enhanced prompting**: Better instructions for intelligent tool selection
@@ -765,7 +765,7 @@ Question: {input}
 
 ### **IMPLEMENTER PATH**: Production Agent Patterns
 
-*See optional modules below for enterprise-level agent architectures including distributed tool coordination, advanced error recovery, and performance optimization*
+### See optional modules below for enterprise-level agent architectures including distributed tool coordination, advanced error recovery, and performance optimization
 
 ---
 
@@ -819,7 +819,7 @@ class ResearchState:
     step_count: int = 0
 ```
 
-**State design benefits:**
+### State design benefits:
 - **Type safety**: Dataclass provides compile-time checking
 - **State persistence**: Each node can access and modify shared state
 - **Clear data flow**: Separate fields for each research domain
@@ -856,7 +856,7 @@ class ResearchWorkflow:
         return self.workflow
 ```
 
-**Workflow design principles:**
+### Workflow design principles:
 - **Sequential processing**: Each step builds on previous results
 - **Modular nodes**: Each research domain has dedicated processing
 - **Clear flow**: Linear progression from planning to synthesis
@@ -884,7 +884,7 @@ class ResearchWorkflow:
         return state
 ```
 
-**Planning benefits:**
+### Planning benefits:
 - **Keyword analysis**: Determines relevant tools automatically
 - **Dynamic adaptation**: Responds to different query types
 - **Transparency**: Creates clear plan documentation
@@ -944,7 +944,7 @@ class ResearchWorkflow:
             }
 ```
 
-**LangGraph workflow advantages:**
+### LangGraph workflow advantages:
 - **State management**: Track data flow between processing nodes
 - **Error isolation**: Individual node failures don't crash entire workflow
 - **Parallel execution**: Run independent research tasks simultaneously
@@ -952,7 +952,7 @@ class ResearchWorkflow:
 
 ### **IMPLEMENTER PATH**: Production Workflows
 
-*See optional modules below for enterprise workflow patterns including parallel execution, conditional branching, and distributed processing*
+### See optional modules below for enterprise workflow patterns including parallel execution, conditional branching, and distributed processing
 
 ---
 
@@ -1117,7 +1117,7 @@ D) Manual intervention is required
 
 **Previous:** [Session 2 - FileSystem MCP Server](Session2_FileSystem_MCP_Server.md)
 
-**Optional Deep-Dive Modules:**
+### Optional Deep-Dive Modules:
 - 🔬 **[Module A: Enterprise Agent Patterns](Session3_ModuleA_Enterprise_Patterns.md)** - Production deployment, advanced error handling, and performance optimization
 - 🏭 **[Module B: Advanced Workflow Orchestration](Session3_ModuleB_Advanced_Workflows.md)** - Parallel processing, conditional branching, and distributed coordination
 

@@ -9,7 +9,7 @@ This nano-degree consists of three comprehensive modules designed to take you fr
 ### Module 1: Agent Frameworks (10 Sessions)
 Master the art of building intelligent agents using cutting-edge frameworks and patterns.
 
-**What You'll Learn:**
+### What You'll Learn:
 - Bare metal agent implementation patterns
 - LangChain and LangGraph workflow orchestration
 - CrewAI team-based agent coordination
@@ -23,7 +23,7 @@ Master the art of building intelligent agents using cutting-edge frameworks and 
 ### Module 2: RAG Architecture (10 Sessions)
 Build sophisticated Retrieval-Augmented Generation systems for enterprise applications.
 
-**What You'll Learn:**
+### What You'll Learn:
 - RAG architecture fundamentals and evolution
 - Advanced chunking and preprocessing strategies
 - Vector database optimization techniques
@@ -37,7 +37,7 @@ Build sophisticated Retrieval-Augmented Generation systems for enterprise applic
 ### Module 3: MCP, ACP & Agent-to-Agent Communication (10 Sessions)
 Master the Model Context Protocol, Agent Communication Protocol, and sophisticated agent-to-agent communication patterns.
 
-**What You'll Learn:**
+### What You'll Learn:
 - MCP (Model Context Protocol) fundamentals and server development
 - Secure MCP implementations with authentication and authorization
 - ACP (Agent Communication Protocol) architecture and patterns
@@ -69,13 +69,13 @@ Each session offers **three distinct learning paths** to accommodate different l
 
 ## Prerequisites
 
-**Technical Background:**
+### Technical Background:
 - Intermediate Python programming experience
 - Basic understanding of APIs and web services
 - Familiarity with Git and command-line tools
 - Understanding of basic machine learning concepts
 
-**Recommended Knowledge:**
+### Recommended Knowledge:
 - Experience with REST APIs
 - Basic knowledge of databases
 - Understanding of cloud computing concepts
@@ -85,19 +85,19 @@ Each session offers **three distinct learning paths** to accommodate different l
 
 Upon completion of this nano-degree, you will be able to:
 
-**Agent Development:**
+### Agent Development:
 - Design and implement sophisticated AI agents using multiple frameworks
 - Create multi-agent systems with proper coordination and communication
 - Deploy production-ready agents with monitoring and scaling capabilities
 - Integrate agents into enterprise workflows and systems
 
-**RAG Systems:**
+### RAG Systems:
 - Architect and build comprehensive RAG systems from scratch
 - Implement advanced retrieval strategies and query optimization
 - Evaluate and improve RAG system performance and accuracy
 - Deploy enterprise-grade RAG solutions with proper security and compliance
 
-**Agent Communication & Protocols:**
+### Agent Communication & Protocols:
 - Master MCP and ACP protocol implementations
 - Build secure, scalable agent-to-agent communication systems
 - Design sophisticated multi-agent coordination patterns
@@ -105,7 +105,7 @@ Upon completion of this nano-degree, you will be able to:
 
 ## Tools & Technologies
 
-**Frameworks & Libraries:**
+### Frameworks & Libraries:
 - LangChain & LangGraph
 - CrewAI
 - PydanticAI
@@ -113,14 +113,14 @@ Upon completion of this nano-degree, you will be able to:
 - ADK (Agent Development Kit)
 - Agno
 
-**RAG Technologies:**
+### RAG Technologies:
 - Vector databases (Chroma, Pinecone, Weaviate)
 - Embedding models (OpenAI, Sentence Transformers)
 - LLMs (GPT-4, Claude, Llama)
 - Graph databases (Neo4j)
 - Search engines (Elasticsearch)
 
-**Infrastructure:**
+### Infrastructure:
 - Docker & Kubernetes
 - GitHub Actions
 - Cloud platforms (AWS, GCP, Azure)
@@ -171,14 +171,14 @@ Ready to begin your journey? Choose your starting point:
 
 ## Study Tips
 
-**For Best Results:**
+### For Best Results:
 - Complete sessions in order within each module
 - Practice with the provided code examples
 - Implement the exercises in your own environment
 - Join the community discussions and share your progress
 - Take breaks between intensive sessions
 
-**Time Management:**
+### Time Management:
 - Observer Path: 1-2 sessions per day
 - Participant Path: 1 session per day
 - Implementer Path: 1 session every 2-3 days

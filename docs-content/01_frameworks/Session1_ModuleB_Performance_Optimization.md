@@ -734,7 +734,7 @@ You've now mastered performance optimization for bare metal agents:
 
 ## 🧭 Navigation
 
-**Related Modules:**
+### Related Modules:
 - **Core Session:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
 - **Module A:** [Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)
 - **Module C:** [Complex State Management](Session1_ModuleC_Complex_State_Management.md)

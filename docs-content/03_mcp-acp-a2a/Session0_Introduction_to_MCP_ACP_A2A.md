@@ -20,7 +20,7 @@ By the end of this session, you will be able to:
 **Where you'll apply them**: From factory floor automation and IoT coordination to enterprise knowledge management and cross-company workflows, these protocols enable AI agents to work together seamlessly across any environment.
 
 ![MCP Architecture Overview](images/mcp-overview.png)
-*Figure 1: Model Context Protocol ecosystem showing how MCP standardizes the connection between AI models and external data sources, eliminating the need for custom integrations*
+### Figure 1: Model Context Protocol ecosystem showing how MCP standardizes the connection between AI models and external data sources, eliminating the need for custom integrations
 
 ### Learning Path Options
 
@@ -61,7 +61,7 @@ class CustomDatabaseConnector:
         # Another 50+ lines of different integration code
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Traditional approach requires custom connectors for each AI system
 - Each integration has different APIs, authentication, and data formats
 - Results in exponential complexity as systems scale
@@ -77,13 +77,13 @@ async def query_database(query: str) -> dict:
     return {"data": results, "schema": schema}
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Single tool definition works with all MCP-compatible AI systems
 - Standard response format ensures consistency
 - Authentication and transport handled by MCP protocol
 
 ![M×N Problem vs MCP Solution](images/mcp-solution.png)
-*Figure 2: MCP transforms the M×N integration problem into a manageable M+N pattern*
+### Figure 2: MCP transforms the M×N integration problem into a manageable M+N pattern
 
 ### **PARTICIPANT PATH**: Industry Adoption Analysis
 
@@ -93,14 +93,14 @@ async def query_database(query: str) -> dict:
 - **April 2025**: Google DeepMind integrates MCP into Gemini models
 - **Mid-2025**: Microsoft adds MCP support to Azure, GitHub, and Office 365
 
-**Enterprise Benefits Observed:**
+### Enterprise Benefits Observed:
 - Block Inc.: 60% reduction in AI integration development time
 - Apollo: Streamlined tool connectivity across multiple AI frameworks
 - Azure customers: Standardized access to AWS services via MCP
 
 ### **IMPLEMENTER PATH**: Technical Architecture Deep Dive
 
-*Advanced technical implementation details available in upcoming sessions*
+### Advanced technical implementation details available in upcoming sessions
 
 ---
 
@@ -130,22 +130,22 @@ class ProcessingAgent:
         await local_registry.register(self.capabilities, self.endpoint)
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Agents register capabilities without external dependencies
 - Uses standard HTTP - no specialized libraries required
 - Local-first design enables offline operation
 
 ![ACP Architecture Overview](images/acp-architecture-overview.png)
-*Figure 3: ACP enables local-first agent communication without cloud dependencies*
+### Figure 3: ACP enables local-first agent communication without cloud dependencies
 
 ### **PARTICIPANT PATH**: ACP vs Alternatives Comparison
 
-**Why ACP over other protocols:**
+### Why ACP over other protocols:
 - **MCP**: Tool integration vs ACP's agent coordination
 - **A2A**: Cross-organization vs ACP's local-first approach
 - **Custom solutions**: ACP provides standardized REST interface
 
-**ACP Use Cases in 2025:**
+### ACP Use Cases in 2025:
 - Factory automation: Coordinating robots without internet
 - Edge AI: Multiple models on IoT devices
 - Emergency systems: Critical infrastructure with no cloud dependency
@@ -182,23 +182,23 @@ Here's how agents discover each other across organizations:
 }
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Standard JSON format for agent capability advertisement
 - Published at `.well-known/agent.json` for automatic discovery
 - Cross-organizational communication via HTTPS with authentication
 
 ![A2A Communication Architecture](images/a2a-communication-architecture.png)
-*Figure 4: A2A enables secure agent collaboration across organizational boundaries*
+### Figure 4: A2A enables secure agent collaboration across organizational boundaries
 
 ### **PARTICIPANT PATH**: Enterprise A2A Workflows
 
-**Travel Industry Example:**
+### Travel Industry Example:
 1. Travel platform agent discovers airline agents
 2. Secure handshake establishes communication
 3. Flight search requests handled by specialized agents
 4. Results integrated into comprehensive itineraries
 
-**Supply Chain Coordination:**
+### Supply Chain Coordination:
 - Manufacturing agents coordinate with supplier agents
 - Inventory systems communicate across company boundaries
 - Real-time demand signals flow between partners
@@ -211,7 +211,7 @@ Here's how agents discover each other across organizations:
 
 When combined, these protocols create a complete enterprise AI ecosystem:
 
-**Protocol Comparison:**
+### Protocol Comparison:
 
 | Protocol | Scope | Environment | Best for |
 |----------|-------|-------------|----------|
@@ -221,7 +221,7 @@ When combined, these protocols create a complete enterprise AI ecosystem:
 
 ### **PARTICIPANT PATH**: Complete Workflow Example
 
-**Multi-Protocol Travel Agent:**
+### Multi-Protocol Travel Agent:
 
 ```python
 
@@ -238,14 +238,14 @@ processed_data = await acp_registry.find("processor").process(preferences)
 flights = await a2a_client.request("airline-corp.com", "search_flights", params)
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - Line 2: MCP retrieves data from internal systems
 - Line 5: ACP coordinates with local processing agents
 - Line 8: A2A communicates with external partner agents
 
 ### **IMPLEMENTER PATH**: Advanced Integration Patterns
 
-*Complete multi-protocol implementations available in Sessions 3, 6, and 8*
+### Complete multi-protocol implementations available in Sessions 3, 6, and 8
 
 ---
 
@@ -259,7 +259,7 @@ flights = await a2a_client.request("airline-corp.com", "search_flights", params)
 
 ### Simple Inspector Workflow
 
-**Step 1: Installation and Startup**
+### Step 1: Installation and Startup
 ```bash
 
 # Install and start inspector
@@ -270,7 +270,7 @@ npx @modelcontextprotocol/inspector
 
 ```
 
-**Step 2: Connect to MCP Server**
+### Step 2: Connect to MCP Server
 ```bash
 
 # Example server connection
@@ -278,24 +278,24 @@ npx @modelcontextprotocol/inspector
 stdio://python weather_server.py
 ```
 
-**Step 3: Interactive Testing**
+### Step 3: Interactive Testing
 - Browse available tools, resources, and prompts
 - Execute tools with auto-generated forms
 - View real-time responses with syntax highlighting
 
 ![MCP Inspector Interface](images/mcp-inspector-interface.png)
-*Figure 5: MCP Inspector provides interactive testing with auto-generated forms and real-time feedback*
+### Figure 5: MCP Inspector provides interactive testing with auto-generated forms and real-time feedback
 
 ### **PARTICIPANT PATH**: Development Workflow Integration
 
-**Production Testing Pattern:**
+### Production Testing Pattern:
 
 1. **Develop**: Write MCP server tools
 2. **Test**: Use Inspector to validate functionality  
 3. **Debug**: Inspector shows detailed error messages
 4. **Deploy**: Export configuration for production
 
-**Inspector Features for Teams:**
+### Inspector Features for Teams:
 - **Schema Validation**: Ensures MCP protocol compliance
 - **Performance Monitoring**: Track response times and error rates
 - **Configuration Export**: One-click export to Claude Desktop, Cursor IDE
@@ -307,63 +307,63 @@ stdio://python weather_server.py
 
 ### Your Learning Journey
 
-**Phase 1: Master MCP (Sessions 1-5)**
+### Phase 1: Master MCP (Sessions 1-5)
 - Build your first MCP server with practical tools
 - Integrate with file systems and databases securely
 - Deploy production-ready MCP servers with monitoring
 - Connect MCP servers to LangChain agents for complex workflows
 
-**Phase 2: Agent Communication (Sessions 6-7)**  
+### Phase 2: Agent Communication (Sessions 6-7)
 - Implement ACP for local agent coordination patterns
 - Build A2A-enabled agents for cross-organizational collaboration
 - Create multi-agent orchestration systems
 
-**Phase 3: Enterprise Deployment (Sessions 8-9)**
+### Phase 3: Enterprise Deployment (Sessions 8-9)
 - Advanced agent workflows with error handling and resilience
 - Production deployment with monitoring and scaling
 - End-to-end enterprise agent ecosystems
 
 ### Key Takeaways
 
-**Business Impact:**
+### Business Impact:
 - MCP reduces integration development time by 60%
 - ACP enables edge/offline agent coordination
 - A2A creates new business partnership models through agent ecosystems
 
-**Technical Foundation:**
+### Technical Foundation:
 - **MCP**: Standardizes AI-to-tool communication
 - **ACP**: Enables efficient local agent coordination
 - **A2A**: Facilitates cross-organizational agent collaboration
 
-**Industry Adoption:**
+### Industry Adoption:
 - 90% of organizations expected to adopt these protocols by end of 2025
 - Major tech companies (Microsoft, Google, OpenAI) already integrated
 - Open standards ensure vendor neutrality and long-term stability
 
 ### **PARTICIPANT PATH**: Hands-On Preparation
 
-**Before Session 1:**
+### Before Session 1:
 1. Install Node.js and Python 3.8+
 2. Set up development environment with VSCode
 3. Install MCP Inspector: `npx @modelcontextprotocol/inspector`
 
-**Recommended Reading:**
+### Recommended Reading:
 - [MCP Specification](https://modelcontextprotocol.io/)
 - [IBM ACP Documentation](https://agentcommunicationprotocol.dev/)
 
 ### **IMPLEMENTER PATH**: Enterprise Planning Checklist
 
-**Architecture Considerations:**
+### Architecture Considerations:
 - Which systems need MCP server integration?
 - Where will agent coordination benefit from ACP?
 - What external partnerships could leverage A2A?
 
-**Security Planning:**
+### Security Planning:
 - Authentication and authorization strategies
 - Network security and API access controls
 - Data privacy and compliance requirements
 
-**Deployment Strategy:**
+### Deployment Strategy:
 - Development and testing environments
 - Production monitoring and alerting
 - Scaling and performance optimization

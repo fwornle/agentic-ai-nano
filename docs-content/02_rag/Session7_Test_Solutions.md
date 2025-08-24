@@ -4,7 +4,7 @@
 
 ### Question 1: Query Planning Advantage
 
-**What is the primary advantage of query planning in agentic RAG systems?**  
+### What is the primary advantage of query planning in agentic RAG systems?
 A) Faster response times  
 B) Strategic analysis of queries to determine optimal retrieval and generation approaches ✅  
 C) Reduced computational costs  
@@ -16,7 +16,7 @@ D) Simpler system architecture
 
 ### Question 2: Self-Correction Error Detection
 
-**In self-correcting RAG systems, what is the most effective approach for error detection?**  
+### In self-correcting RAG systems, what is the most effective approach for error detection?
 A) Random response sampling  
 B) LLM-as-a-judge evaluation with factual consistency checking ✅  
 C) Simple keyword matching  
@@ -28,7 +28,7 @@ D) Response length validation
 
 ### Question 3: External Tool Integration
 
-**When should agentic RAG systems use external tools rather than just document retrieval?**  
+### When should agentic RAG systems use external tools rather than just document retrieval?
 A) Always, for every query  
 B) Never, document retrieval is always sufficient  
 C) When queries require real-time data, calculations, or specialized functionality ✅  
@@ -40,7 +40,7 @@ D) Only for simple questions
 
 ### Question 4: Multi-Agent Collaboration Benefit
 
-**What is the key benefit of multi-agent collaboration in RAG systems?**  
+### What is the key benefit of multi-agent collaboration in RAG systems?
 A) Faster processing through parallel execution  
 B) Specialized expertise and comprehensive analysis through role-based collaboration ✅  
 C) Reduced memory usage  
@@ -52,13 +52,13 @@ D) Simpler error handling
 
 ### Question 5: Self-Correction Stopping Criteria
 
-**In iterative self-correction, what criterion should determine when to stop refinement?**
+### In iterative self-correction, what criterion should determine when to stop refinement?
 
 A) Quality threshold achievement or diminishing improvement returns ✅  
 B) Fixed number of iterations regardless of quality  
 C) Time limits only  
 D) User interruption  
-**Correct Answer: A) Quality threshold achievement or diminishing improvement returns**
+### Correct Answer: A) Quality threshold achievement or diminishing improvement returns
 
 **Explanation:** Effective stopping criteria should be based on quality metrics - either achieving a satisfactory quality threshold or detecting that additional iterations provide diminishing returns. This ensures resources aren't wasted on unnecessary refinement while maintaining quality standards.
 
@@ -66,13 +66,13 @@ D) User interruption
 
 ### Question 6: Critical Agent Role for Accuracy
 
-**Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?**
+### Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?
 
 A) Synthesizer agent  
 B) Researcher agent  
 C) Validator agent ✅  
 D) Coordinator agent  
-**Correct Answer: C) Validator agent**
+### Correct Answer: C) Validator agent
 
 **Explanation:** The validator agent is specifically responsible for checking factual accuracy, logical consistency, and overall response quality. While other agents contribute to accuracy, the validator agent has the specialized role of ensuring the final response meets accuracy standards.
 
@@ -80,13 +80,13 @@ D) Coordinator agent
 
 ### Question 7: Production Deployment Challenge
 
-**What is the primary challenge in production deployment of agentic RAG systems?**
+### What is the primary challenge in production deployment of agentic RAG systems?
 
 A) Balancing system complexity with reliability and performance ✅  
 B) Lack of suitable frameworks  
 C) High computational costs  
 D) Limited use cases  
-**Correct Answer: A) Balancing system complexity with reliability and performance**
+### Correct Answer: A) Balancing system complexity with reliability and performance
 
 **Explanation:** Agentic RAG systems are inherently more complex than traditional RAG, with multiple components, iterative processes, and decision points. The key challenge is maintaining this sophistication while ensuring the system remains reliable, performant, and manageable in production environments.
 
@@ -94,13 +94,13 @@ D) Limited use cases
 
 ### Question 8: Validation Assessment Priority
 
-**When designing agentic RAG validation, what aspect is most important to assess?**
+### When designing agentic RAG validation, what aspect is most important to assess?
 
 A) Response length  
 B) Processing speed  
 C) Factual accuracy and logical consistency ✅  
 D) Token usage  
-**Correct Answer: C) Factual accuracy and logical consistency**
+### Correct Answer: C) Factual accuracy and logical consistency
 
 **Explanation:** Factual accuracy and logical consistency are paramount in RAG systems, as users rely on these systems for reliable information. While performance metrics matter, incorrect or inconsistent information undermines the fundamental value proposition of RAG systems.
 

@@ -11,19 +11,19 @@ By the end of this session, you will be able to:
 
 ## Chapter Overview: CrewAI's Breakthrough in Team-Based AI Systems
 
-**Industry Context & Market Significance**
+### Industry Context & Market Significance
 
 CrewAI has emerged as the leading framework for team-based AI automation in 2025, with over 100,000 developers certified and 25,000 GitHub stars. Enterprise surveys reveal that 4,500+ professionals are actively deploying CrewAI in production, with larger enterprises showing 23% more production deployments than smaller organizations. The framework's team-centric approach mirrors human organizational structures, making it intuitive for enterprise adoption.
 
-**What You'll Learn & Why It Matters**
+### What You'll Learn & Why It Matters
 
 You'll master role-based agent design, learn collaborative workflow patterns that mirror successful human teams, and understand task orchestration for complex business processes. Most importantly, you'll discover why companies report jumping from 10% to 70%+ accuracy in automated processes using CrewAI's team-based approach.
 
-**How CrewAI Stands Out**
+### How CrewAI Stands Out
 
 CrewAI's role-playing autonomous agents foster collaborative intelligence by design. Unlike single-agent or chain-based systems, CrewAI agents work together seamlessly with defined roles, goals, and backstories that create natural team dynamics. This approach has proven particularly effective for enterprises migrating from human-led processes to AI automation.
 
-**Real-World Applications & Production Evidence**
+### Real-World Applications & Production Evidence
 
 CrewAI excels in business process automation where multiple specialized roles collaborate. Financial services clients report reducing quarterly reporting from 2 weeks to 2 days with 35% improved accuracy. Marketing automation teams achieve 40% efficiency improvements within three months, while customer support operations see 75% reduction in processing time through automated workflow orchestration.
 
@@ -127,7 +127,7 @@ editor = Agent(
 )
 ```
 
-**Key Concepts:**
+### Key Concepts:
 
 1. **Role Specialization**: Each agent has specific expertise and responsibilities
 2. **Goal-Oriented Design**: Agents work toward clear, defined objectives
@@ -797,7 +797,7 @@ D) Cloud integration
 
 **Previous:** [Session 3 - LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)** - Advanced workflow patterns
 - 🏭 **[Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)** - Production team coordination

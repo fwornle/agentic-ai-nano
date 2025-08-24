@@ -2,19 +2,19 @@
 
 ## Chapter Overview: ADK's Strategic Position in Enterprise AI Infrastructure
 
-**Industry Context & Market Significance**
+### Industry Context & Market Significance
 
 Google's Agent Development Kit (ADK) emerged in August 2025 as the enterprise-grade foundation powering Google Agentspace and Customer Engagement Suite, establishing it as a critical production platform for enterprise AI agents. With Python ADK v1.0.0 reaching stable release status, the framework delivers production-ready capabilities for confidently deploying agents in live environments. Major enterprises including Renault Group, Box, and Revionics have adopted ADK, demonstrating its enterprise reliability and scalability.
 
-**What You'll Learn & Why It Matters**
+### What You'll Learn & Why It Matters
 
 You'll master Google Cloud-native agent development, learn enterprise integration patterns with VPC Service Controls and IAM authentication, and understand the Model Context Protocol (MCP) for standardized data movement. Most importantly, you'll discover why ADK's bidirectional audio/video streaming and native Vertex AI deployment provide competitive advantages over framework-agnostic solutions, with direct pathways to enterprise-grade runtime and security.
 
-**How ADK Stands Out**
+### How ADK Stands Out
 
 ADK's tight integration with Google Cloud provides unique capabilities including native Vertex AI deployment, VPC Service Controls for data security, and over 100 pre-built enterprise connectors. Unlike framework-agnostic solutions, ADK offers "build an AI agent in under 100 lines of intuitive code" while maintaining enterprise-grade controls including output moderation, identity permissions, input screening, and comprehensive behavior monitoring.
 
-**Real-World Applications & Production Evidence**
+### Real-World Applications & Production Evidence
 
 ADK excels in enterprise environments requiring Google Cloud integration and advanced multimedia capabilities. The framework's bidirectional audio/video streaming enables natural interactions that move beyond text-based interfaces, while its support for 200+ models from providers like Anthropic, Meta, and Mistral AI ensures flexibility. Production deployments demonstrate ADK's effectiveness in customer engagement, workflow automation, and multi-system agent orchestration.
 
@@ -65,11 +65,11 @@ ADK excels in enterprise environments requiring Google Cloud integration and adv
 Google's Agent Development Kit represents a paradigm shift in enterprise AI development, providing the same foundation that powers Google Agentspace and Customer Engagement Suite. The framework's strategic advantage lies in its native Google Cloud integration and enterprise-grade security controls:
 
 ![ADK Architecture Overview](images/adk-architecture-overview.png)
-*This comprehensive architectural diagram illustrates Google's ADK framework structure, showing the integration layers between the agent development environment, Vertex AI services, VPC Service Controls, and enterprise security components. The ADK provides a direct pathway from development to enterprise-grade production deployment with built-in governance and compliance controls.*
+### This comprehensive architectural diagram illustrates Google's ADK framework structure, showing the integration layers between the agent development environment, Vertex AI services, VPC Service Controls, and enterprise security components. The ADK provides a direct pathway from development to enterprise-grade production deployment with built-in governance and compliance controls.
 
 **File**: [`src/session7/basic_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session7/basic_agent.py) - ADK setup and initialization
 
-**The ADK Enterprise Value Proposition:**
+### The ADK Enterprise Value Proposition:
 
 ADK addresses critical enterprise needs that traditional agent frameworks struggle to provide. Unlike framework-agnostic solutions, ADK delivers native Google Cloud integration with enterprise-grade controls from the ground up:
 
@@ -104,7 +104,7 @@ class EnterpriseAgent:
         return self.agent.process(query)
 ```
 
-**Key Concepts:**
+### Key Concepts:
 1. **Enterprise Integration**: Native Google Cloud services integration
 2. **Security-First**: Built-in authentication, authorization, and audit logging
 3. **Scalable Architecture**: Designed for enterprise-scale deployments
@@ -448,7 +448,7 @@ result = cloud_agent.analyze_stored_data("sales_data")
 Enterprise security with ADK:
 
 ![ADK Authentication](images/adk-authentication.svg)
-*This flowchart demonstrates ADK's enterprise authentication mechanisms, including service account authentication, IAM integration, and audit logging flows. The diagram shows how ADK securely handles authentication and authorization in enterprise environments.*
+### This flowchart demonstrates ADK's enterprise authentication mechanisms, including service account authentication, IAM integration, and audit logging flows. The diagram shows how ADK securely handles authentication and authorization in enterprise environments.
 
 **File**: `src/session7/enterprise_security.py` - Security implementations
 
@@ -672,7 +672,7 @@ Test your understanding of Google's ADK enterprise agent development.
 
 ### Question 1
 
-**What is the primary advantage of Google's ADK over other agent frameworks?**
+### What is the primary advantage of Google's ADK over other agent frameworks?
 
 A) Open source licensing  
 B) Enterprise integration with Google Cloud and built-in security  
@@ -681,7 +681,7 @@ D) Lowest learning curve
 
 ### Question 2
 
-**Which Google Cloud service is most tightly integrated with ADK?**
+### Which Google Cloud service is most tightly integrated with ADK?
 
 A) Google Cloud Storage  
 B) Vertex AI  
@@ -690,7 +690,7 @@ D) All of the above
 
 ### Question 3
 
-**What makes ADK particularly suitable for enterprise applications?**
+### What makes ADK particularly suitable for enterprise applications?
 
 A) Built-in security, monitoring, and compliance features  
 B) Fastest performance  
@@ -699,7 +699,7 @@ D) Simplest implementation
 
 ### Question 4
 
-**How does ADK handle authentication in enterprise environments?**
+### How does ADK handle authentication in enterprise environments?
 
 A) Basic username/password  
 B) OAuth 2.0 and service account integration  
@@ -708,7 +708,7 @@ D) No authentication required
 
 ### Question 5
 
-**What is the purpose of the ReasoningEngine in ADK?**
+### What is the purpose of the ReasoningEngine in ADK?
 
 A) Data storage  
 B) Structured reasoning with chain-of-thought patterns  
@@ -717,7 +717,7 @@ D) Performance optimization
 
 ### Question 6
 
-**How does ADK's MultiModalAgent differ from standard agents?**
+### How does ADK's MultiModalAgent differ from standard agents?
 
 A) Faster execution  
 B) Support for text, image, and audio inputs  
@@ -726,7 +726,7 @@ D) Lower resource usage
 
 ### Question 7
 
-**What is the role of audit logging in ADK enterprise deployments?**
+### What is the role of audit logging in ADK enterprise deployments?
 
 A) Performance monitoring  
 B) Compliance and security tracking of agent activities  
@@ -735,7 +735,7 @@ D) Cost optimization
 
 ### Question 8
 
-**How does ADK handle production scaling?**
+### How does ADK handle production scaling?
 
 A) Manual scaling only  
 B) Integration with Google Cloud scaling services  
@@ -744,7 +744,7 @@ D) No scaling support
 
 ### Question 9
 
-**What makes ADK's security model enterprise-ready?**
+### What makes ADK's security model enterprise-ready?
 
 A) Password protection  
 B) Built-in IAM, encryption, and audit trails  
@@ -753,7 +753,7 @@ D) Open security model
 
 ### Question 10
 
-**Which deployment platform is ADK optimized for?**
+### Which deployment platform is ADK optimized for?
 
 A) Local development only  
 B) Google Cloud Platform  
@@ -770,7 +770,7 @@ D) On-premises only
 
 **Previous:** [Session 6 - Atomic Agents Modular Architecture](Session6_Atomic_Agents_Modular_Architecture.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced ADK Integration](Session7_ModuleA_Advanced_ADK_Integration.md)** - Advanced integration patterns
 - 🏭 **[Module B: Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md)** - Production systems

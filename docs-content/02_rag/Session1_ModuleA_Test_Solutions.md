@@ -4,7 +4,7 @@
 
 ### Question 1: Circuit Breaker Pattern
 
-**What is the primary purpose of a circuit breaker pattern in production RAG systems?**  
+### What is the primary purpose of a circuit breaker pattern in production RAG systems?
 A) To improve query performance  
 B) To prevent cascading failures when document processing fails ✅  
 C) To reduce memory usage  
@@ -16,7 +16,7 @@ D) To enable caching
 
 ### Question 2: Exponential Backoff Strategy
 
-**Why is exponential backoff with jitter important for retry logic?**  
+### Why is exponential backoff with jitter important for retry logic?
 A) It reduces computational costs  
 B) It prevents thundering herd problems and distributes retry attempts ✅  
 C) It improves accuracy  
@@ -28,7 +28,7 @@ D) It simplifies error handling
 
 ### Question 3: Production Monitoring
 
-**What metrics are most critical for monitoring production RAG systems?**  
+### What metrics are most critical for monitoring production RAG systems?
 A) Only response time  
 B) Response time, error rate, cache hit rate, and accuracy ✅  
 C) Only error count  
@@ -40,7 +40,7 @@ D) Only cache performance
 
 ### Question 4: Configuration Management
 
-**How should production RAG systems handle configuration management?**  
+### How should production RAG systems handle configuration management?
 A) Hard-code all values  
 B) Use only environment variables  
 C) Combine file-based config with environment variable overrides ✅  
@@ -52,7 +52,7 @@ D) Use only configuration files
 
 ### Question 5: Structured Logging
 
-**What is the benefit of structured logging in production RAG systems?**  
+### What is the benefit of structured logging in production RAG systems?
 A) Reduces log file size  
 B) Enables better debugging and monitoring with searchable, parseable logs ✅  
 C) Improves query performance  

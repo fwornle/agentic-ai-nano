@@ -859,9 +859,9 @@ D) To increase fault tolerance threshold
 
 ## 🧭 Navigation
 
-**Previous: [Session 9 Main](Session9_Advanced_Multi_Agent_Coordination.md)**
+### Previous: [Session 9 Main](Session9_Advanced_Multi_Agent_Coordination.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 - **[🔬 Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)**
 - **[📡 Module B: Agent Communication Protocols](Session9_ModuleB_Agent_Communication_Protocols.md)**
 

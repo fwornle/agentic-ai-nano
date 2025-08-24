@@ -32,7 +32,7 @@ The atomic approach transforms traditional agent development by emphasizing:
 
 Traditional agent frameworks often create monolithic systems where functionality is tightly coupled. Atomic agents embrace a different philosophy: building complex intelligence from simple, interoperable components.
 
-**The LEGO Metaphor**
+### The LEGO Metaphor
 
 Think of atomic agents like LEGO blocks:
 - Each block has a specific shape and purpose (single responsibility)

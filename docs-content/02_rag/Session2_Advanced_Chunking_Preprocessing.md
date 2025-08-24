@@ -34,7 +34,7 @@ Based on current industry trends, advanced chunking in 2025 employs:
 - **Research Paper Processing**: Preserving academic structure and citations
 
 ![RAG Problems Overview](images/RAG-overview-problems.png)
-*Figure 1: This diagram illustrates common problems with naive chunking approaches, including fragmented content, lost context, and structural information loss that advanced preprocessing solves.*
+### Figure 1: This diagram illustrates common problems with naive chunking approaches, including fragmented content, lost context, and structural information loss that advanced preprocessing solves.
 
 ### Learning Path Options
 
@@ -110,7 +110,7 @@ def detect_simple_content_type(text_line):
     return ContentType.PARAGRAPH
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - **Lines 12-14**: Detects markdown headings by looking for the '#' symbol
 - **Lines 16-18**: Identifies tables by counting pipe characters ('|') that separate columns
 - **Lines 20-22**: Recognizes code blocks by indentation patterns
@@ -146,7 +146,7 @@ class DocumentElement:
         return hierarchy_labels.get(self.level, f"Level {self.level}")
 ```
 
-**Implementation Benefits:**
+### Implementation Benefits:
 - **Structured representation**: Each element carries its content, type, and context
 - **Hierarchy tracking**: Level information enables structure-aware processing
 - **Rich metadata**: Position and additional context for enhanced chunking
@@ -255,7 +255,7 @@ This advanced analyzer adapts to different document domains and provides intelli
 
 Traditional chunking is like cutting a newspaper with a paper shredder - it destroys the logical structure authors carefully created. Hierarchical chunking cuts along natural boundaries, preserving meaning and relationships.
 
-**Performance Impact:**
+### Performance Impact:
 - **60-80% better context preservation** because chunks contain complete thoughts
 - **40-50% improved retrieval accuracy** because queries match naturally coherent content units
 - **Enhanced user experience** because retrieved content makes logical sense
@@ -303,7 +303,7 @@ def simple_hierarchical_chunk(elements: List[DocumentElement],
     return chunks
 ```
 
-**Key Benefits:**
+### Key Benefits:
 - **Natural boundaries**: Uses document structure instead of arbitrary splits
 - **Complete sections**: Keeps related content together
 - **Size management**: Respects maximum chunk size while preserving structure
@@ -525,7 +525,7 @@ def extract_simple_metadata(text: str) -> Dict[str, Any]:
     return metadata
 ```
 
-**Metadata Benefits:**
+### Metadata Benefits:
 - **Enhanced searchability**: Additional context for retrieval matching
 - **Content understanding**: Insight into chunk characteristics
 - **Quality assessment**: Metrics for evaluating chunk usefulness
@@ -761,7 +761,7 @@ def process_simple_table(table_text: str) -> Dict[str, Any]:
     }
 ```
 
-**Table Processing Benefits:**
+### Table Processing Benefits:
 - **Structure preservation**: Tables remain intact and meaningful
 - **Enhanced searchability**: Descriptive text makes tables discoverable
 - **Metadata enrichment**: Table characteristics available for retrieval
@@ -1036,7 +1036,7 @@ D) To determine the number of chunks to create
 
 **Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - **[Module A: Advanced Document Analytics](Session2_ModuleA_Document_Analytics.md)** - Deep analytics for document structure analysis
 - **[Module B: Enterprise Content Processing](Session2_ModuleB_Enterprise_Processing.md)** - Enterprise-scale content processing strategies

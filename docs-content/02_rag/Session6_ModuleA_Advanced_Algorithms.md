@@ -499,7 +499,7 @@ D) When memory is limited
 
 ## 🧭 Navigation
 
-**Related Modules:**
+### Related Modules:
 - **Core Session:** [Session 6 - Graph-Based RAG](Session6_Graph_Based_RAG.md)
 - **Related Module:** [Module B - Production Systems](Session6_ModuleB_Production_Systems.md)
 

@@ -47,14 +47,14 @@ By the end of this session, you will be able to:
 
 Traditional RAG systems are reactive - they retrieve and generate based on a single query pass. **Reasoning-Augmented RAG systems represent a paradigm shift from passive retrieval to proactive intelligent reasoning systems** that don't just find information, but actively reason about it to construct logically coherent, contextually aware responses.
 
-**The Cognitive Revolution in RAG:**
+### The Cognitive Revolution in RAG:
 
 - **From Information Retrieval → Knowledge Reasoning**: Transform scattered documents into structured logical reasoning
 - **From Static Pipelines → Dynamic Intelligence**: Systems that adapt their approach based on reasoning requirements
 - **From Reactive Responses → Proactive Analysis**: Anticipate information needs through logical deduction
 - **From Document Aggregation → Context Construction**: Build coherent logical frameworks from diverse sources
 
-**The Reasoning-RAG Transformation:**
+### The Reasoning-RAG Transformation:
 
 - **Reasoning-Guided Planning**: Analyze queries through logical reasoning frameworks to plan optimal strategies
 - **Chain-of-Thought Integration**: Implement structured reasoning paths that guide retrieval and synthesis
@@ -62,7 +62,7 @@ Traditional RAG systems are reactive - they retrieve and generate based on a sin
 - **Cognitive Validation**: Reason about response quality and logical consistency, not just factual accuracy
 - **Adaptive Reasoning Workflows**: Dynamic reasoning strategies that evolve based on query complexity and domain requirements
 
-**Advanced Reasoning-Powered Capabilities You'll Build:**
+### Advanced Reasoning-Powered Capabilities You'll Build:
 
 - **Reasoning-Guided Query Planning**: Strategic cognitive analysis that determines optimal reasoning approaches for complex information needs
 - **Chain-of-Thought RAG Systems**: Structured reasoning paths that guide both retrieval and synthesis processes
@@ -82,7 +82,7 @@ Reasoning-Augmented RAG systems demonstrate true cognitive intelligence through 
 - **Meta-Cognitive Validation**: Reason about the reasoning process itself - validate logical consistency, identify reasoning gaps, and strengthen logical connections
 - **Adaptive Reasoning Strategies**: Dynamically choose between different reasoning approaches (deductive, inductive, abductive) based on the cognitive requirements
 
-**Three Revolutionary Reasoning Integration Approaches:**
+### Three Revolutionary Reasoning Integration Approaches:
 
 1. **Prompt-Based Reasoning**: Integrate reasoning directly into prompts with structured thinking frameworks
 2. **Architecture-Based Reasoning**: Embed reasoning capabilities into the system architecture through specialized reasoning modules
@@ -100,13 +100,13 @@ Let's build RAG systems that don't just retrieve information - they **think, rea
 
 The integration of reasoning capabilities into RAG represents a fundamental cognitive evolution. Instead of treating RAG as an information retrieval problem, we approach it as a **knowledge construction and logical reasoning challenge**.
 
-**Traditional RAG Workflow:**
+### Traditional RAG Workflow:
 
 ```
 Query → Retrieve Documents → Generate Response
 ```
 
-**Reasoning-Augmented RAG Workflow:**
+### Reasoning-Augmented RAG Workflow:
 
 ```
 Query → Analyze Reasoning Requirements → Plan Cognitive Strategy →
@@ -118,9 +118,9 @@ Meta-Cognitive Validation → Logically Coherent Response
 
 #### **1. Reasoning-Augmented Retrieval (RAR)**
 
-*"Let reasoning guide what information to find and how to connect it"*
+### "Let reasoning guide what information to find and how to connect it"
 
-**Setting Up the Reasoning-Augmented Retrieval System**
+### Setting Up the Reasoning-Augmented Retrieval System
 
 This system uses different reasoning strategies to intelligently guide information retrieval:
 
@@ -154,7 +154,7 @@ Now we set up the reasoning strategy mapping, which connects each type of logica
         }
 ```
 
-**Main Reasoning-Guided Retrieval Method**
+### Main Reasoning-Guided Retrieval Method
 
 The core orchestration method that coordinates the entire reasoning-retrieval process:
 
@@ -203,7 +203,7 @@ Finally, we return the complete reasoning-guided retrieval results:
         }
 ```
 
-**Reasoning Requirements Analysis**
+### Reasoning Requirements Analysis
 
 This method determines what type of logical reasoning the query requires:
 
@@ -259,7 +259,7 @@ Finally, we execute the analysis with low temperature for consistency:
         return self._parse_json_response(response)
 ```
 
-**Reasoning Framework Construction**
+### Reasoning Framework Construction
 
 This method builds a structured framework to guide the retrieval process:
 
@@ -294,7 +294,7 @@ Now we generate the framework and add metadata for tracking and optimization:
         return framework
 ```
 
-**Framework Prompt Builder**
+### Framework Prompt Builder
 
 This helper method creates specialized prompts for different reasoning types:
 
@@ -349,7 +349,7 @@ The prompt defines the exact JSON structure needed for consistent framework gene
         """
 ```
 
-**Framework Metadata Addition**
+### Framework Metadata Addition
 
 Adds tracking information for performance optimization and framework reuse:
 
@@ -369,7 +369,7 @@ Adds tracking information for performance optimization and framework reuse:
         return framework
 ```
 
-**Deductive Reasoning Strategy Implementation**
+### Deductive Reasoning Strategy Implementation
 
 This method implements the deductive reasoning approach to information retrieval:
 
@@ -435,9 +435,9 @@ This method implements the deductive reasoning approach to information retrieval
 
 #### **2. Retrieval-Augmented Reasoning (RAR)**
 
-*"Let external knowledge fill logical reasoning gaps"*
+### "Let external knowledge fill logical reasoning gaps"
 
-**Setting Up Retrieval-Augmented Reasoning**
+### Setting Up Retrieval-Augmented Reasoning
 
 This system identifies where reasoning is weak and uses targeted retrieval to strengthen it:
 
@@ -455,7 +455,7 @@ class RetrievalAugmentedReasoning:
         self.knowledge_validator = knowledge_validator
 ```
 
-**Enhanced Reasoning with Strategic Information Retrieval**
+### Enhanced Reasoning with Strategic Information Retrieval
 
 The main method that coordinates gap identification and knowledge integration:
 
@@ -508,7 +508,7 @@ Finally, we return the complete enhanced reasoning results with quality metrics:
         }
 ```
 
-**Reasoning Gap Identification**
+### Reasoning Gap Identification
 
 This method analyzes reasoning to find where external knowledge would help:
 
@@ -567,9 +567,9 @@ Finally, we execute the gap analysis with consistent temperature settings:
 
 #### **3. Chain-of-Thought RAG Integration**
 
-*"Structured reasoning paths that guide both retrieval and synthesis"*
+### "Structured reasoning paths that guide both retrieval and synthesis"
 
-**Step 1: Initialize the Chain-of-Thought RAG System**
+### Step 1: Initialize the Chain-of-Thought RAG System
 
 First, let's set up the core system that manages different reasoning patterns:
 
@@ -596,7 +596,7 @@ class ChainOfThoughtRAG:
         }
 ```
 
-**Step 2: Main Chain-of-Thought Processing Method**
+### Step 2: Main Chain-of-Thought Processing Method
 
 Now let's implement the core method that orchestrates the entire reasoning process:
 
@@ -630,7 +630,7 @@ Next, we analyze the query requirements and build a structured reasoning plan:
         )
 ```
 
-**Execute and Synthesize Chain-of-Thought Response**
+### Execute and Synthesize Chain-of-Thought Response
 
 Now execute the reasoning plan and create the final response:
 
@@ -651,7 +651,7 @@ Now execute the reasoning plan and create the final response:
         )
 ```
 
-**Return Comprehensive Results**
+### Return Comprehensive Results
 
 Compile all results with metadata for analysis and debugging:
 
@@ -672,7 +672,7 @@ Compile all results with metadata for analysis and debugging:
         }
 ```
 
-**Step 3: Reasoning Chain Construction**
+### Step 3: Reasoning Chain Construction
 
 This method builds the structured plan for step-by-step reasoning:
 
@@ -699,7 +699,7 @@ This method builds the structured plan for step-by-step reasoning:
         return self._add_chain_metadata(chain, pattern, depth, query)
 ```
 
-**Reasoning Chain Prompt Builder**
+### Reasoning Chain Prompt Builder
 
 Helper method that constructs the detailed prompt for reasoning chain generation:
 
@@ -749,7 +749,7 @@ The prompt defines the specific JSON structure for systematic reasoning chain ge
         """
 ```
 
-**Chain Metadata Addition**
+### Chain Metadata Addition
 
 Utility method for adding tracking information to reasoning chains:
 
@@ -762,7 +762,7 @@ Utility method for adding tracking information to reasoning chains:
         return chain
 ```
 
-**Step 4: Chain Execution Framework**
+### Step 4: Chain Execution Framework
 
 The execution system manages the step-by-step processing:
 
@@ -789,7 +789,7 @@ The execution system manages the step-by-step processing:
         return self._compile_chain_execution_results(execution_context)
 ```
 
-**Step 5: Context Management Methods**
+### Step 5: Context Management Methods
 
 These helper methods manage the execution state throughout the reasoning process:
 
@@ -809,7 +809,7 @@ These helper methods manage the execution state throughout the reasoning process
         }
 ```
 
-**Step 6: Individual Step Processing**
+### Step 6: Individual Step Processing
 
 This method handles the execution of each reasoning step with integrated retrieval:
 
@@ -847,7 +847,7 @@ This method handles the execution of each reasoning step with integrated retriev
         }
 ```
 
-**Step 7: Retrieval and Validation Handlers**
+### Step 7: Retrieval and Validation Handlers
 
 Specialized methods for handling information gathering and step validation:
 
@@ -888,7 +888,7 @@ Specialized methods for handling information gathering and step validation:
         return await self._validate_reasoning_step(step_execution, step_data, query)
 ```
 
-**Step 8: Context Update and Result Compilation**
+### Step 8: Context Update and Result Compilation
 
 Final methods for managing execution state and compiling results:
 
@@ -928,7 +928,7 @@ Final methods for managing execution state and compiling results:
 
 ### **Bridging NodeRAG Structured Knowledge to Reasoning Capabilities**
 
-**From Graph Relationships to Logical Reasoning:**
+### From Graph Relationships to Logical Reasoning:
 The structured knowledge graphs from Session 6 (NodeRAG) provide the perfect foundation for sophisticated reasoning systems. Instead of just traversing relationships, we can now reason about them logically.
 
 ```python
@@ -1005,7 +1005,7 @@ class NodeRAGReasoningBridge:
         return premises
 ```
 
-**Educational Context: The Cognitive Leap**
+### Educational Context: The Cognitive Leap
 
 This integration represents a fundamental cognitive evolution:
 
@@ -1013,7 +1013,7 @@ This integration represents a fundamental cognitive evolution:
 2. **Session 7 Enhancement**: Logical reasoning that can analyze and deduce from those relationships
 3. **Cognitive Synergy**: The combination enables true knowledge construction, not just information retrieval
 
-**Example: From Graph Traversal to Logical Deduction**
+### Example: From Graph Traversal to Logical Deduction
 
 ```python
 
@@ -1047,7 +1047,7 @@ This integration represents a fundamental cognitive evolution:
 
 #### **Structured Reasoning Workflows**
 
-*Controlled, predictable reasoning patterns for well-defined domains*
+### Controlled, predictable reasoning patterns for well-defined domains
 
 ```python
 class StructuredReasoningWorkflow:
@@ -1085,7 +1085,7 @@ class StructuredReasoningWorkflow:
 
 #### **Dynamic Adaptive Reasoning Workflows**
 
-*Emergent reasoning patterns that adapt based on the cognitive requirements*
+### Emergent reasoning patterns that adapt based on the cognitive requirements
 
 ```python
 class DynamicReasoningWorkflow:
@@ -1231,16 +1231,16 @@ class DynamicReasoningWorkflow:
 
 ### **Building on Your Graph Knowledge Foundation**
 
-**What you mastered in Session 6:**
+### What you mastered in Session 6:
 
 - **Structured Knowledge Graphs**: Entities, relationships, and semantic connections
 - **Graph Traversal**: Finding related information through relationship paths
 - **Knowledge Graph Construction**: Building structured representations from unstructured data
 - **Graph-Based Retrieval**: Using relationships to improve retrieval relevance
 
-**What Session 7 adds - The Intelligence Layer:**
+### What Session 7 adds - The Intelligence Layer:
 
-**1. From Static Graphs to Dynamic Reasoning**
+### 1. From Static Graphs to Dynamic Reasoning
 
 ```python
 
@@ -1263,7 +1263,7 @@ reasoning_result = await reasoning_engine.reason_over_structured_knowledge(
 
 ```
 
-**2. From Information Retrieval to Autonomous Planning**
+### 2. From Information Retrieval to Autonomous Planning
 
 ```python
 
@@ -1292,7 +1292,7 @@ plan = await agent.reason_plan_and_execute(query)
 
 **WHY**: Production systems need to understand not just what information is requested, but what type of reasoning is required to construct a proper answer.
 
-**Evolution Path:**
+### Evolution Path:
 
 1. **Basic**: Match keywords and retrieve similar documents
 2. **Enhanced**: Understand semantic intent and retrieve relevant information
@@ -1302,7 +1302,7 @@ plan = await agent.reason_plan_and_execute(query)
 
 **WHY**: Production systems must be self-healing. They need to detect and fix their own mistakes without human intervention.
 
-**Enterprise Reality:**
+### Enterprise Reality:
 
 - **Traditional Systems**: Errors propagate and compound
 - **Agentic Systems**: Self-validate and auto-correct using multiple strategies
@@ -1312,7 +1312,7 @@ plan = await agent.reason_plan_and_execute(query)
 
 **WHY**: Real-world problems require more than document retrieval - they need calculations, real-time data, specialized databases.
 
-**Production Evolution:**
+### Production Evolution:
 
 ```python
 
@@ -1350,7 +1350,7 @@ plan = await agent.reason_plan_and_execute(query)
 
 Build agents that analyze queries through cognitive reasoning frameworks to plan optimal knowledge construction strategies.
 
-**The Cognitive Evolution of Query Planning:**
+### The Cognitive Evolution of Query Planning:
 
 - **Traditional Approach**: Analyze query → Plan retrieval → Execute
 - **Reasoning-Driven Approach**: Analyze reasoning requirements → Plan cognitive strategy → Execute reasoning-guided workflow → Validate logical coherence
@@ -1359,7 +1359,7 @@ Build agents that analyze queries through cognitive reasoning frameworks to plan
 
 #### **Level 1: Basic Reasoning Agent (Foundation)**
 
-*Start here if you're new to agentic systems*
+### Start here if you're new to agentic systems
 
 ```python
 class BasicReasoningAgent:
@@ -1409,7 +1409,7 @@ class BasicReasoningAgent:
 
 #### **Level 2: Enhanced Reasoning Agent (Skill Building)**
 
-*Add this once Level 1 is comfortable*
+### Add this once Level 1 is comfortable
 
 ```python
 class EnhancedReasoningAgent(BasicReasoningAgent):
@@ -1469,7 +1469,7 @@ class EnhancedReasoningAgent(BasicReasoningAgent):
 
 #### **Level 3: Production Reasoning Agent (Enterprise Ready)**
 
-*Full production capabilities with monitoring and optimization*
+### Full production capabilities with monitoring and optimization
 
 ```python
 
@@ -1586,7 +1586,7 @@ class ReasoningDrivenQueryPlanningAgent:
         }
 ```
 
-**Step 1: Reasoning Requirements Analysis**
+### Step 1: Reasoning Requirements Analysis
 
 ```python
     async def _analyze_reasoning_requirements(self, query: str) -> Dict[str, Any]:
@@ -1644,7 +1644,7 @@ class ReasoningDrivenQueryPlanningAgent:
             }
 ```
 
-**Step 2: Dynamic Plan Creation**
+### Step 2: Dynamic Plan Creation
 
 ```python
     async def _create_execution_plan(self, query: str, analysis: Dict,
@@ -1816,7 +1816,7 @@ class IterativeExecutionEngine:
         }
 ```
 
-**Step 3: Self-Correction Mechanisms**
+### Step 3: Self-Correction Mechanisms
 
 ```python
     async def _plan_refinement(self, execution_plan: QueryPlan,
@@ -1890,7 +1890,7 @@ class IterativeExecutionEngine:
 
 Build systems that validate logical consistency and correct reasoning flaws in their own responses:
 
-**Evolution from Error Correction to Reasoning Validation:**
+### Evolution from Error Correction to Reasoning Validation:
 
 - **Traditional Self-Correction**: Check factual accuracy and consistency
 - **Reasoning-Based Correction**: Validate logical coherence, identify reasoning gaps, strengthen logical connections, and ensure cognitive soundness
@@ -2026,7 +2026,7 @@ class ReasoningBasedSelfCorrectingRAG:
         }
 ```
 
-**Step 4: Comprehensive Validation Framework**
+### Step 4: Comprehensive Validation Framework
 
 ```python
     async def _comprehensive_validation(self, query: str, response: Dict,
@@ -2109,7 +2109,7 @@ class FactualConsistencyValidator:
         }
 ```
 
-**Step 5: Intelligent Correction Application**
+### Step 5: Intelligent Correction Application
 
 ```python
     async def _apply_corrections(self, query: str, response: Dict,
@@ -2447,7 +2447,7 @@ class MultiToolRAGAgent:
         }
 ```
 
-**Step 6: Intelligent Tool Selection**
+### Step 6: Intelligent Tool Selection
 
 ```python
     async def _analyze_tool_requirements(self, query: str,
@@ -2533,7 +2533,7 @@ class MultiToolRAGAgent:
         return tool_results
 ```
 
-**Step 7: Enhanced Response Synthesis**
+### Step 7: Enhanced Response Synthesis
 
 ```python
     async def _synthesize_enhanced_response(self, query: str,
@@ -2825,7 +2825,7 @@ class MultiAgentRAGOrchestrator:
         }
 ```
 
-**Step 8: Adaptive Collaboration Pattern**
+### Step 8: Adaptive Collaboration Pattern
 
 ```python
     async def _adaptive_collaboration(self, query: str, initial_tasks: Dict,
@@ -3129,7 +3129,7 @@ Test your understanding of agentic RAG systems and intelligent automation techni
 
 ### Question 1: Query Planning Advantage
 
-**What is the primary advantage of query planning in agentic RAG systems?**
+### What is the primary advantage of query planning in agentic RAG systems?
 
 A) Faster response times    
 B) Strategic analysis of queries to determine optimal retrieval and generation approaches    
@@ -3138,7 +3138,7 @@ D) Simpler system architecture
 
 ### Question 2: Self-Correction Error Detection
 
-**In self-correcting RAG systems, what is the most effective approach for error detection?**
+### In self-correcting RAG systems, what is the most effective approach for error detection?
 
 A) Random response sampling    
 B) LLM-as-a-judge evaluation with factual consistency checking    
@@ -3147,7 +3147,7 @@ D) Response length validation
 
 ### Question 3: External Tool Integration
 
-**When should agentic RAG systems use external tools rather than just document retrieval?**
+### When should agentic RAG systems use external tools rather than just document retrieval?
 
 A) Always, for every query    
 B) Never, document retrieval is always sufficient    
@@ -3156,7 +3156,7 @@ D) Only for simple questions
 
 ### Question 4: Multi-Agent Collaboration Benefit
 
-**What is the key benefit of multi-agent collaboration in RAG systems?**
+### What is the key benefit of multi-agent collaboration in RAG systems?
 
 A) Faster processing through parallel execution    
 B) Specialized expertise and comprehensive analysis through role-based collaboration    
@@ -3165,7 +3165,7 @@ D) Simpler error handling
 
 ### Question 5: Iterative Refinement Stopping Criterion
 
-**In iterative self-correction, what criterion should determine when to stop refinement?**
+### In iterative self-correction, what criterion should determine when to stop refinement?
 
 A) Fixed number of iterations regardless of quality    
 B) Quality threshold achievement or diminishing improvement returns    
@@ -3174,7 +3174,7 @@ D) User interruption
 
 ### Question 6: Critical Agent Role
 
-**Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?**
+### Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?
 
 A) Researcher agent    
 B) Synthesizer agent    
@@ -3183,7 +3183,7 @@ D) Coordinator agent
 
 ### Question 7: Production Deployment Challenge
 
-**What is the primary challenge in production deployment of agentic RAG systems?**
+### What is the primary challenge in production deployment of agentic RAG systems?
 
 A) High computational costs    
 B) Balancing system complexity with reliability and performance    
@@ -3192,7 +3192,7 @@ D) Limited use cases
 
 ### Question 8: Validation Assessment Priority
 
-**When designing agentic RAG validation, what aspect is most important to assess?**
+### When designing agentic RAG validation, what aspect is most important to assess?
 
 A) Response length    
 B) Processing speed    
@@ -3207,16 +3207,16 @@ D) Token usage
 
 ## ** Session 7 Reasoning-Augmented Intelligence Mastery**
 
-**Your Cognitive RAG Achievement:**
+### Your Cognitive RAG Achievement:
 You've transformed passive information retrieval into **intelligent reasoning systems** that don't just find information—they think about it, reason through it, and construct logically coherent knowledge. Your systems have achieved the cognitive leap from retrieval to reasoning.
 
-**Your Reasoning Evolution Complete:**
+### Your Reasoning Evolution Complete:
 
 - **Sessions 2-5**: Built high-performance, scientifically validated RAG foundation
 - **Session 6**: Added graph intelligence for structured relationship understanding
 - **Session 7**: Integrated logical reasoning capabilities that transform information into knowledge through cognitive processes ✅
 
-**The Paradigm Shift You've Achieved:**
+### The Paradigm Shift You've Achieved:
 
 - **From Reactive → Proactive**: Systems that anticipate reasoning requirements and plan cognitive strategies
 - **From Information Aggregation → Knowledge Construction**: Transform scattered information into logically coherent understanding
@@ -3225,21 +3225,21 @@ You've transformed passive information retrieval into **intelligent reasoning sy
 
 ## ** The Final Technical Frontier: Multi-Modal Intelligence**
 
-**Beyond Text: The Complete Knowledge Challenge**
+### Beyond Text: The Complete Knowledge Challenge
 
 Your agentic systems excel with text and graphs, but real-world knowledge spans multiple modalities - documents contain images, technical content includes videos, presentations have audio narration. Session 8 expands your agentic intelligence to handle the complete spectrum of human knowledge.
 
-**Session 8 Multi-Modal Preview: Unified Intelligence**
+### Session 8 Multi-Modal Preview: Unified Intelligence
 
 - **Multi-Modal Processing**: Apply your agentic planning to text, images, audio, and video
 - **RAG-Fusion Evolution**: Extend your query enhancement to cross-modal retrieval
 - **Advanced Ensembles**: Combine your agentic systems with cutting-edge research techniques
 - **Domain Specialization**: Adapt your autonomous agents for specific industries
 
-**Your Agentic Foundation Enables Multi-Modal Mastery:**
+### Your Agentic Foundation Enables Multi-Modal Mastery:
 The planning, validation, and iterative refinement capabilities you've mastered provide the autonomous intelligence framework that makes sophisticated multi-modal processing possible.
 
-**Looking Ahead - Your Complete RAG Mastery:**
+### Looking Ahead - Your Complete RAG Mastery:
 
 - **Session 8**: Expand agentic intelligence to multi-modal content and advanced fusion
 - **Session 9**: Deploy complete multi-modal agentic systems at enterprise scale
@@ -3259,7 +3259,7 @@ The planning, validation, and iterative refinement capabilities you've mastered 
 
 **Previous:** [Session 6 - Graph-Based RAG (GraphRAG)](Session6_Graph_Based_RAG.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced Agent Reasoning](Session7_ModuleA_Advanced_Reasoning.md)** - Deep dive into sophisticated reasoning algorithms and cognitive architectures
 - 🏭 **[Module B: Production Agent Deployment](Session7_ModuleB_Production_Agents.md)** - Enterprise-scale agent deployment patterns and monitoring systems

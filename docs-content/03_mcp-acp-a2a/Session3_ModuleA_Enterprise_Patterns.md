@@ -19,7 +19,7 @@ After completing this module, you will master:
 
 Based on current enterprise adoption patterns, organizations deploying LangChain MCP integrations at scale face specific challenges:
 
-**Enterprise Requirements:**
+### Enterprise Requirements:
 - **High availability**: 99.9% uptime requirements for customer-facing agents
 - **Scalability**: Handle 1000+ concurrent agent sessions
 - **Security compliance**: SOC 2, GDPR, and industry-specific regulations

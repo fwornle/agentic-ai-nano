@@ -44,13 +44,13 @@ By the end of this session, you will be able to:
 
 You've built an impressive RAG system through Sessions 2-4: sophisticated chunking, optimized vector search, and intelligent query enhancement. But here's the crucial question every production system must answer: **Do these enhancements actually improve user experience?**
 
-**The Enhancement Validation Challenge:**
+### The Enhancement Validation Challenge:
 - **Session 4's HyDE**: Does hypothetical document generation improve retrieval quality?
 - **Query Expansion**: Do expanded queries find better context than original queries?
 - **Context Optimization**: Does intelligent windowing create better responses?
 - **Combined Systems**: How do these enhancements perform together vs. individually?
 
-**Why Traditional Metrics Fail RAG:**
+### Why Traditional Metrics Fail RAG:
 Unlike traditional ML where accuracy on test sets suffices, RAG systems have multiple interconnected failure modes:
 - **Retrieval Failures**: Perfect search that finds irrelevant context
 - **Generation Hallucination**: Accurate retrieval with fabricated responses
@@ -59,7 +59,7 @@ Unlike traditional ML where accuracy on test sets suffices, RAG systems have mul
 
 ### **Comprehensive Solutions You'll Master**
 
-**Building on Your Enhancement Foundation:**
+### Building on Your Enhancement Foundation:
 - **Baseline Comparisons**: Measure Session 4 enhancements against vanilla RAG
 - **Multi-Dimensional Assessment**: Retrieval, generation, and user experience scoring
 - **Scientific A/B Testing**: Rigorous comparison of enhancement strategies
@@ -69,7 +69,7 @@ Unlike traditional ML where accuracy on test sets suffices, RAG systems have mul
 
 This session transforms your sophisticated RAG system from "feature-rich" to "proven-effective":
 
-**Your Journey So Far:**
+### Your Journey So Far:
 - **Sessions 2-3**: Built high-performance retrieval infrastructure
 - **Session 4**: Added intelligent query understanding
 - **Session 5 Goal**: Prove these enhancements create measurable value
@@ -85,11 +85,11 @@ Let's transform RAG quality from assumption to scientific measurement! 📊
 
 ### **Multi-Dimensional RAG Evaluation: Measuring Enhancement Impact**
 
-**Why RAG Evaluation Differs from Traditional ML Metrics**
+### Why RAG Evaluation Differs from Traditional ML Metrics
 
 Your Session 4 enhancements - HyDE, query expansion, context optimization - add complexity to RAG systems. Traditional accuracy metrics can't capture whether this complexity improves user experience. RAG evaluation must assess multiple interconnected dimensions:
 
-**The RAG Quality Matrix:**
+### The RAG Quality Matrix:
 1. **Retrieval Quality**: Do enhancements find better documents?
 2. **Generation Quality**: Do improved contexts create better responses?
 3. **End-to-End Utility**: Does the complete enhanced system serve users better?
@@ -219,7 +219,7 @@ Finally, we compute final metrics and return comprehensive evaluation results:
 
 RAGAS (RAG Assessment) provides standardized evaluation metrics:
 
-**RAGAS Integration**
+### RAGAS Integration
 
 RAGAS (RAG Assessment) provides standardized evaluation metrics. First, we import the necessary components:
 
@@ -305,7 +305,7 @@ We execute the RAGAS evaluation and return comprehensive results:
         }
 ```
 
-**Step 1: RAGAS Dataset Preparation**
+### Step 1: RAGAS Dataset Preparation
 
 This crucial method transforms your RAG results into the standardized RAGAS format:
 
@@ -366,7 +366,7 @@ We clean up the dataset structure and return the formatted data:
 
 Implement domain-specific and advanced evaluation metrics:
 
-**Custom Evaluation Metrics**
+### Custom Evaluation Metrics
 
 Implement domain-specific and advanced evaluation metrics. First, we establish the custom metrics class:
 
@@ -470,7 +470,7 @@ Finally, we calculate and return the overall citation quality score:
         return citation_quality
 ```
 
-**Step 2: Retrieval Quality Assessment**
+### Step 2: Retrieval Quality Assessment
 
 Specialized evaluator for analyzing retrieval performance. First, we establish the evaluator class:
 
@@ -575,7 +575,7 @@ Finally, we assess context diversity to ensure retrieved contexts provide varied
 
 Use LLMs to evaluate response quality automatically:
 
-**LLM-as-a-Judge Evaluation**
+### LLM-as-a-Judge Evaluation
 
 Use LLMs to evaluate response quality automatically. First, we establish the judge evaluator with aspect-specific prompts:
 
@@ -635,7 +635,7 @@ The main evaluation method processes multiple quality aspects and calculates com
         }
 ```
 
-**Step 3: Aspect-Specific Evaluation Prompts**
+### Step 3: Aspect-Specific Evaluation Prompts
 
 Here we implement detailed prompts for different evaluation dimensions. First, the relevance evaluation prompt:
 
@@ -729,7 +729,7 @@ SUGGESTIONS: [How accuracy could be improved]
 
 Create automated pipelines for continuous evaluation:
 
-**Automated Benchmark Testing**
+### Automated Benchmark Testing
 
 Create automated pipelines for continuous evaluation. First, we establish the benchmark testing framework:
 
@@ -798,7 +798,7 @@ Finally, we aggregate results and generate comprehensive performance reports:
         return benchmark_results
 ```
 
-**Step 4: Performance Tracking and Regression Detection**
+### Step 4: Performance Tracking and Regression Detection
 
 This critical method detects performance changes between benchmark runs. We start by checking historical data availability:
 
@@ -883,7 +883,7 @@ Finally, we calculate the overall performance trend and return the analysis:
 
 ### **Scientific Enhancement Comparison: Proving What Works**
 
-**The Enhancement Testing Challenge**
+### The Enhancement Testing Challenge
 
 You've implemented multiple Session 4 enhancements, but which ones actually improve RAG quality? A/B testing provides the scientific rigor to answer:
 
@@ -892,9 +892,9 @@ You've implemented multiple Session 4 enhancements, but which ones actually impr
 - **Context Window Optimization**: Do intelligent window sizes improve generation quality?
 - **Combined Enhancement Strategies**: How do enhancements perform together vs. individually?
 
-**A/B Testing for Enhancement Validation:**
+### A/B Testing for Enhancement Validation:
 
-**A/B Testing for Enhancement Validation:**
+### A/B Testing for Enhancement Validation:
 
 First, we establish the A/B testing framework for scientific RAG component comparison:
 
@@ -996,7 +996,7 @@ Finally, we analyze results and complete the test with comprehensive reporting:
         return test_result
 ```
 
-**Step 5: Statistical Significance Testing**
+### Step 5: Statistical Significance Testing
 
 This method provides rigorous statistical analysis of A/B test results. We begin by setting up the analysis structure:
 
@@ -1084,7 +1084,7 @@ Finally, we determine the overall winner and generate actionable recommendations
 
 Implement adaptive testing strategies:
 
-**Multi-Armed Bandit Testing**
+### Multi-Armed Bandit Testing
 
 Implement adaptive testing strategies that learn from user interactions. First, we initialize the bandit with exploration parameters:
 
@@ -1187,7 +1187,7 @@ Finally, we provide comprehensive performance summaries:
 
 Monitor RAG system performance in production:
 
-**Production RAG Monitoring**
+### Production RAG Monitoring
 
 Monitor RAG system performance in production. First, we establish the monitoring framework with all necessary components:
 
@@ -1264,7 +1264,7 @@ We detect anomalies and trigger alerts when quality thresholds are exceeded:
         return monitoring_result
 ```
 
-**Step 6: Quality Monitoring Implementation**
+### Step 6: Quality Monitoring Implementation
 
 Real-time quality assessment for production RAG responses. We start by establishing the quality monitoring framework:
 
@@ -1394,7 +1394,7 @@ Finally, we return the average utilization across all contexts:
 
 Implement alerting for quality degradation:
 
-**Alerting and Incident Response**
+### Alerting and Incident Response
 
 Implement alerting for quality degradation. First, we establish the alerting system with severity levels:
 
@@ -1536,7 +1536,7 @@ Create a production-ready RAG evaluation and monitoring system.
 
 ### **Implementation Framework:**
 
-**Implementation Framework:**
+### Implementation Framework:
 
 The complete RAG evaluation ecosystem brings together all components. We initialize the comprehensive system:
 
@@ -1700,7 +1700,7 @@ D) Random threshold selection
 
 ## ** Session 5 Mastery Summary**
 
-**What You've Proven:**
+### What You've Proven:
 You've transformed RAG evaluation from guesswork to science by mastering:
 
 ✅ **Multi-Dimensional Assessment**: Comprehensive retrieval, generation, and end-to-end quality measurement
@@ -1709,28 +1709,28 @@ You've transformed RAG evaluation from guesswork to science by mastering:
 ✅ **A/B Testing Mastery**: Rigorous experimental design for RAG optimization
 ✅ **Domain-Specific Benchmarks**: Custom evaluation frameworks tailored to your use case
 
-**Your Evidence-Based RAG Journey:**
+### Your Evidence-Based RAG Journey:
 - **Sessions 2-4**: Built sophisticated RAG enhancements (chunking, search, query intelligence)
 - **Session 5**: Proved these enhancements create measurable value ✅
 - **Sessions 6-9 Next**: Apply proven techniques to advanced RAG architectures
 
 ## ** Stepping Beyond Traditional RAG: The Graph Intelligence Frontier**
 
-**The Next Evolution Challenge:**
+### The Next Evolution Challenge:
 Your proven RAG system excels at finding similar content and generating contextual responses. But what happens when users need multi-hop reasoning, relationship understanding, or complex entity connections?
 
-**Session 6 GraphRAG Preview: Moving Beyond Similarity to Relationships**
+### Session 6 GraphRAG Preview: Moving Beyond Similarity to Relationships
 
 Traditional vector RAG: *"Find documents similar to this query"*
 GraphRAG: *"Find entities, follow relationships, understand complex connections"*
 
-**Why GraphRAG Represents the Next Frontier:**
+### Why GraphRAG Represents the Next Frontier:
 - **Multi-Hop Reasoning**: Questions requiring multiple relationship traversals
 - **Entity Understanding**: Queries about connections between people, companies, concepts
 - **Structural Intelligence**: Leveraging document hierarchies and dependencies
 - **Comprehensive Context**: Finding related information through graph traversal
 
-**Your Evaluation Foundation Enables GraphRAG Excellence:**
+### Your Evaluation Foundation Enables GraphRAG Excellence:
 The metrics and testing frameworks you've mastered will prove whether graph-based enhancements improve upon your optimized vector system, maintaining the scientific rigor you've established.
 
 ### **Preparation for Graph Intelligence**
@@ -1750,7 +1750,7 @@ Ready to build RAG systems that reason about connections, not just similarities?
 
 **Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Custom metrics and domain-specific evaluation
 - 🏭 **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production-scale monitoring and alerting

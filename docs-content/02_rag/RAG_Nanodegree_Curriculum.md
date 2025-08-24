@@ -5,7 +5,7 @@
 
 This self-paced 2-week module provides comprehensive instruction on building sophisticated Retrieval-Augmented Generation (RAG) systems, from basic document retrieval to cutting-edge autonomous intelligent systems. Through hands-on tutorials and progressive implementation, you'll develop skills to create next-generation RAG architectures that represent the 2024-2025 state-of-the-art in intelligent information retrieval and reasoning.
 
-**Featuring Latest Research Integration:**
+### Featuring Latest Research Integration:
 
 - **NodeRAG**: Structured brain architecture with heterogeneous graph approaches
 - **Reasoning-Augmented RAG**: Bidirectional synergy between reasoning and retrieval systems
@@ -66,7 +66,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** 15-question multiple choice quiz covering RAG fundamentals and evolution
 
-**Key Topics:**
+### Key Topics:
 
 - RAG architecture components (indexing, retrieval, generation)
 - Evolution timeline: Early QA → Modern GraphRAG & Agentic RAG
@@ -81,7 +81,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering document processing and vector search
 
-**Key Topics:**
+### Key Topics:
 
 - Document parsing and preprocessing
 - Chunking strategies and text splitting
@@ -96,7 +96,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering preprocessing techniques and optimization
 
-**Key Topics:**
+### Key Topics:
 
 - Hierarchical chunking strategies
 - Metadata extraction and enrichment
@@ -111,7 +111,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering vector databases and search strategies
 
-**Key Topics:**
+### Key Topics:
 
 - Vector database architectures (Pinecone, Chroma, Qdrant)
 - Hybrid search combining semantic and keyword
@@ -126,7 +126,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering query enhancement techniques
 
-**Key Topics:**
+### Key Topics:
 
 - HyDE (Hypothetical Document Embeddings)
 - Query expansion and reformulation
@@ -141,7 +141,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering evaluation methodologies and metrics
 
-**Key Topics:**
+### Key Topics:
 
 - RAG evaluation frameworks (RAGAS, LLamaIndex)
 - Faithfulness, answer relevance, and context precision
@@ -160,7 +160,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering graph-based retrieval, knowledge graphs, and NodeRAG architectures
 
-**Key Topics:**
+### Key Topics:
 
 - **NodeRAG**: Structured knowledge representation with specialized node types
 - **Heterogeneous Graph Processing**: Multi-type node architectures for complex knowledge structures
@@ -178,7 +178,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering reasoning-augmented patterns and cognitive frameworks
 
-**Key Topics:**
+### Key Topics:
 
 - **Reasoning-Augmented RAG**: Bidirectional synergy between reasoning and retrieval systems
 - **Chain-of-Thought Integration**: Structured reasoning paths that guide retrieval and synthesis
@@ -197,7 +197,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering MRAG evolution paradigms and autonomous intelligent systems
 
-**Key Topics:**
+### Key Topics:
 
 - **MRAG 1.0**: Pseudo-multimodal era with lossy translation understanding and limitations
 - **MRAG 2.0**: True multimodality breakthrough with Multimodal Large Language Models (MLLMs)
@@ -216,7 +216,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Self-Check:** Multiple choice quiz covering production deployment and enterprise concerns
 
-**Key Topics:**
+### Key Topics:
 
 - Containerized RAG deployment
 - Real-time indexing and incremental updates
@@ -227,7 +227,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 
 **Project Overview:** Build a cutting-edge cognitive RAG system demonstrating the latest 2024-2025 research breakthroughs in autonomous intelligent retrieval and reasoning
 
-**Advanced Requirements:**
+### Advanced Requirements:
 
 - Implement **NodeRAG** with heterogeneous graph architecture and specialized node types
 - Build **Reasoning-Augmented RAG** with bidirectional synergy and Chain-of-Thought integration
@@ -236,7 +236,7 @@ This curriculum has been extensively enhanced with cutting-edge research from th
 - Integrate **three-stage processing** (decomposition → augmentation → enrichment) with Personalized PageRank
 - Deploy to production with **cognitive monitoring** and autonomous quality assurance
 
-**Deliverables:**
+### Deliverables:
 
 - **NodeRAG system** with heterogeneous graph architecture and specialized node types
 - **Reasoning-Augmented RAG** with bidirectional synergy and cognitive frameworks

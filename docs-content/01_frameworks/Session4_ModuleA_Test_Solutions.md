@@ -3,7 +3,7 @@
 ## Advanced CrewAI Flows - Answer Key
 
 ### Question 1: CrewAI Flow State Management
-**Correct Answer: b) Project ID, phases, tasks, team assignments, resources, performance metrics, and checkpoints**
+### Correct Answer: b) Project ID, phases, tasks, team assignments, resources, performance metrics, and checkpoints
 
 **Explanation**: The FlowState class implements comprehensive state tracking:
 ```python
@@ -32,7 +32,7 @@ class FlowState(BaseModel):
 This comprehensive state management enables deterministic workflow execution with full traceability and recovery capabilities.
 
 ### Question 2: Flow Orchestration Phases
-**Correct Answer: b) Optimal teams are formed and tasks are assigned with workload balancing**
+### Correct Answer: b) Optimal teams are formed and tasks are assigned with workload balancing
 
 **Explanation**: The team orchestration phase performs sophisticated coordination:
 ```python
@@ -55,7 +55,7 @@ def orchestrate_research_teams(self, state: FlowState) -> FlowState:
 This phase bridges project initiation and execution by creating optimal team configurations and balanced task distribution.
 
 ### Question 3: Quality-Based Routing
-**Correct Answer: a) Average quality ≥0.8 → synthesis, ≥0.6 → enhancement, <0.6 → retry**
+### Correct Answer: a) Average quality ≥0.8 → synthesis, ≥0.6 → enhancement, <0.6 → retry
 
 **Explanation**: The router implements quality-based decision making:
 ```python
@@ -78,7 +78,7 @@ def route_based_on_quality(self, state: FlowState) -> str:
 This intelligent routing ensures quality standards while preventing endless retry loops.
 
 ### Question 4: Team Effectiveness Scoring
-**Correct Answer: b) Skill coverage (35%) + Performance (25%) + Collaboration (20%) + Availability (15%) + Size efficiency (5%)**
+### Correct Answer: b) Skill coverage (35%) + Performance (25%) + Collaboration (20%) + Availability (15%) + Size efficiency (5%)
 
 **Explanation**: The effectiveness evaluation uses weighted multi-criteria scoring:
 ```python
@@ -95,7 +95,7 @@ effectiveness_score = (
 This weighting prioritizes skill coverage and performance while considering team dynamics and resource efficiency.
 
 ### Question 5: Skill Level Assessment
-**Correct Answer: b) Primary skills first, secondary skills as supplement, with complexity-based level adjustment**
+### Correct Answer: b) Primary skills first, secondary skills as supplement, with complexity-based level adjustment
 
 **Explanation**: The skill assessment system implements hierarchical evaluation:
 ```python

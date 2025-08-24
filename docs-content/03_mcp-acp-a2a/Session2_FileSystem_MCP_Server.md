@@ -39,7 +39,7 @@ Real-world applications of secure MCP file system servers include:
 - **Development Workflows**: AI-powered code generation with access to existing project files and dependencies
 
 ![File System Security Architecture](images/filesystem-security-architecture.png)
-*Figure 1: Multi-layered security architecture showing path validation, sandboxing, permission checks, and audit logging working together to create a secure file access boundary for AI agents*
+### Figure 1: Multi-layered security architecture showing path validation, sandboxing, permission checks, and audit logging working together to create a secure file access boundary for AI agents
 
 ### Learning Path Options
 
@@ -63,13 +63,13 @@ Real-world applications of secure MCP file system servers include:
 
 File system access represents one of the highest-risk attack vectors in AI agent systems. Understanding these threats is essential for building secure MCP servers.
 
-**Common Attack Vectors:**
+### Common Attack Vectors:
 - **Path Traversal**: Malicious inputs like `../../../etc/passwd` can access sensitive system files
 - **System File Access**: Reading critical files like `/etc/passwd`, `C:\Windows\System32\config\SAM`
 - **Arbitrary Write Operations**: Creating malicious files in system directories
 - **Denial of Service**: Large file operations that exhaust system resources
 
-**Real-World Impact (2024-2025 Data):**
+### Real-World Impact (2024-2025 Data):
 According to CISA, 55 directory traversal vulnerabilities are currently in their Known Exploited Vulnerabilities catalog, with an 85% increase in path traversal attacks affecting critical infrastructure including hospitals and schools.
 
 ### Defense-in-Depth Strategy
@@ -83,7 +83,7 @@ Our server implements multiple security layers:
 
 ### **OBSERVER PATH**: Quick Project Setup Overview
 
-**Essential Project Structure:**
+### Essential Project Structure:
 We'll create a modular file system server with security-first architecture:
 
 ```bash
@@ -95,14 +95,14 @@ python -m venv venv && source venv/bin/activate
 pip install fastmcp aiofiles python-magic-bin
 ```
 
-**Key Dependencies for Security:**
+### Key Dependencies for Security:
 - `fastmcp`: MCP protocol framework with built-in security features
 - `aiofiles`: Async I/O prevents blocking operations that could cause DoS
 - `python-magic-bin`: Content-based file type detection (more secure than extensions)
 
 ### **PARTICIPANT PATH**: Complete Project Implementation
 
-**Step 1: Enhanced Security Setup**
+### Step 1: Enhanced Security Setup
 
 Implement the complete project structure with additional security dependencies:
 
@@ -121,11 +121,11 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install fastmcp aiofiles watchdog python-magic-bin cryptography
 ```
 
-**Production Dependencies Explained:**
+### Production Dependencies Explained:
 - `watchdog`: Real-time file system monitoring for security events
 - `cryptography`: File integrity verification and encryption support
 
-**Step 2: Security-First Directory Structure**
+### Step 2: Security-First Directory Structure
 
 Create a modular architecture that separates security concerns:
 
@@ -146,14 +146,14 @@ mcp-filesystem-server/
 └── requirements.txt       # Dependency list
 ```
 
-**Architecture Benefits:**
+### Architecture Benefits:
 - **Modular Security**: Each security concern is isolated
 - **Testable Components**: Individual security modules can be unit tested
 - **Maintainable Code**: Clear separation between business logic and security
 
 ### **OBSERVER PATH**: Configuration Essentials
 
-**Understanding Configuration Security:**
+### Understanding Configuration Security:
 The configuration module is our security control center - every security setting is defined here to prevent accidental security holes in the code.
 
 ```python
@@ -176,7 +176,7 @@ class FileSystemConfig:
 
 ### **PARTICIPANT PATH**: Complete Security Configuration
 
-**Step 1: Enhanced Configuration Setup**
+### Step 1: Enhanced Configuration Setup
 
 Implement comprehensive security settings with detailed explanations:
 
@@ -199,12 +199,12 @@ Implement comprehensive security settings with detailed explanations:
         }
 ```
 
-**Security Decision Rationale:**
+### Security Decision Rationale:
 - **Whitelist Approach**: Only explicitly safe file types are allowed (recommended by OWASP)
 - **Size Limits**: Prevent denial-of-service attacks through large file operations
 - **Common Extensions**: Covers typical enterprise file types without executable risks
 
-**Step 2: Path Traversal Defense Patterns**
+### Step 2: Path Traversal Defense Patterns
 
 Define patterns that indicate potential security threats:
 
@@ -224,7 +224,7 @@ Define patterns that indicate potential security threats:
 
 **Threat Intelligence Integration**: These patterns are based on real attack vectors documented by CISA in their 2024-2025 vulnerability assessments.
 
-**Step 3: Performance and DoS Protection**
+### Step 3: Performance and DoS Protection
 
 Implement resource limits to prevent system overload:
 
@@ -236,13 +236,13 @@ Implement resource limits to prevent system overload:
         self.rate_limit_per_minute = 100  # Operations per minute per client
 ```
 
-**Enterprise Performance Considerations:**
+### Enterprise Performance Considerations:
 - **Streaming Architecture**: Large files are processed in chunks to prevent memory exhaustion
 - **Search Limits**: Prevent resource exhaustion from broad search queries
 - **Concurrent Operations**: Limit parallel operations to maintain system stability
 - **Rate Limiting**: Prevent abuse while allowing normal operation patterns
 
-**Step 4: Audit and Compliance Settings**
+### Step 4: Audit and Compliance Settings
 
 ```python
         # Security monitoring and compliance
@@ -255,7 +255,7 @@ Implement resource limits to prevent system overload:
 
 ### **IMPLEMENTER PATH**: Advanced Configuration Features
 
-*Advanced enterprise configuration patterns including encryption, compliance settings, and advanced threat detection are covered in the production security section above.*
+### Advanced enterprise configuration patterns including encryption, compliance settings, and advanced threat detection are covered in the production security section above.
 
 ---
 
@@ -263,10 +263,10 @@ Implement resource limits to prevent system overload:
 
 ### **OBSERVER PATH**: Understanding Sandboxing Concepts
 
-**What is a Sandbox?**
+### What is a Sandbox?
 A sandbox is a security mechanism that creates an isolated environment where file operations can only occur within a designated directory tree. Think of it as a digital prison for file access - nothing gets in or out without permission.
 
-**Why Sandboxing is Critical:**
+### Why Sandboxing is Critical:
 Based on 2024 security research, 85% of file system vulnerabilities involve path traversal attacks. Sandboxing provides mathematical certainty that file operations cannot escape designated boundaries.
 
 ```python
@@ -291,11 +291,11 @@ class FileSystemSandbox:
 
 ### **PARTICIPANT PATH**: Implementing Robust Path Validation
 
-**Step 1: Complete Sandbox Architecture**
+### Step 1: Complete Sandbox Architecture
 
 Implement the full security validation system:
 
-**Step 2: Mathematical Path Validation**
+### Step 2: Mathematical Path Validation
 
 This function provides mathematical certainty that paths remain within the sandbox:
 
@@ -317,7 +317,7 @@ This function provides mathematical certainty that paths remain within the sandb
 
 **Technical Detail:** The `resolve()` method performs canonical path resolution, eliminating `..`, `.`, and symlink components that could be used to escape the sandbox.
 
-**Step 3: Mathematical Boundary Verification**
+### Step 3: Mathematical Boundary Verification
 
 The critical security check that provides absolute containment:
 
@@ -333,7 +333,7 @@ The critical security check that provides absolute containment:
 
 **Security Mathematics:** String prefix checking after path resolution provides mathematical certainty - if the resolved path doesn't start with our base path string, it's physically impossible for it to be within our sandbox.
 
-**Step 4: Fail-Safe Error Handling**
+### Step 4: Fail-Safe Error Handling
 
 Implement security-first error handling:
 
@@ -349,7 +349,7 @@ Implement security-first error handling:
 
 **Security Design:** We intentionally provide minimal error information to prevent attackers from learning about the file system structure through error messages.
 
-**Step 5: Filename Security Validation**
+### Step 5: Filename Security Validation
 
 Add comprehensive filename safety checking:
 
@@ -380,7 +380,7 @@ Add comprehensive filename safety checking:
 
 **Complete implementation:** [`src/session2/utils/sandbox.py`](src/session2/utils/sandbox.py)
 
-**Security Architecture Summary:**
+### Security Architecture Summary:
 - **Mathematical Validation**: `resolve()` provides cryptographic-level path certainty
 - **Boundary Enforcement**: String prefix checking ensures physical containment
 - **Injection Prevention**: Filename validation stops malicious name-based attacks
@@ -388,15 +388,15 @@ Add comprehensive filename safety checking:
 
 ### **OBSERVER PATH**: File Type Validation Concepts
 
-**Why File Validation Matters:**
+### Why File Validation Matters:
 File extensions can be easily faked - a malicious executable could be named `document.txt`. Content-based validation examines the actual file bytes to determine the true file type, preventing disguised malicious files.
 
-**Industry Standard: MIME Type Detection:**
+### Industry Standard: MIME Type Detection:
 Using libraries like `python-magic` (based on the Unix `file` command), we can detect file types by examining file headers and content patterns, not just extensions.
 
 ### **PARTICIPANT PATH**: Implementing Content-Based Validation
 
-**Step 1: Advanced File Type Detection**
+### Step 1: Advanced File Type Detection
 
 Implement security-focused file validation that examines actual content:
 
@@ -422,7 +422,7 @@ class FileValidator:
 
 **Security Enhancement:** Using both MIME type detection and file description provides double validation against disguised malicious files.
 
-**Step 2: Resource Protection Validation**
+### Step 2: Resource Protection Validation
 
 Implement comprehensive resource limit checking:
 
@@ -454,7 +454,7 @@ Implement comprehensive resource limit checking:
         return f"{size_bytes:.1f} TB"
 ```
 
-**Step 3: File Type Detection and Validation**
+### Step 3: File Type Detection and Validation
 
 Check both file extension and actual content for security:
 
@@ -474,7 +474,7 @@ Check both file extension and actual content for security:
         allowed = extension in self.config.allowed_extensions
 ```
 
-**Step 4: Text vs Binary Detection**
+### Step 4: Text vs Binary Detection
 
 Properly categorize files for appropriate handling:
 
@@ -493,7 +493,7 @@ Properly categorize files for appropriate handling:
         }
 ```
 
-**Step 5: Integrity Verification**
+### Step 5: Integrity Verification
 
 Add checksum calculation for file integrity:
 
@@ -526,7 +526,7 @@ Now let's build the main server with our security layers in place.
 
 We'll start by importing our security modules and initializing the server:
 
-**Step 1: Import Dependencies and Security Modules**
+### Step 1: Import Dependencies and Security Modules
 
 First, we import all necessary modules and our custom security components:
 
@@ -544,7 +544,7 @@ import base64
 import logging
 ```
 
-**Step 2: Import Security Components**
+### Step 2: Import Security Components
 
 Next, we import our custom security modules that provide sandboxing and validation:
 
@@ -554,7 +554,7 @@ from utils.sandbox import FileSystemSandbox, SandboxError
 from utils.validators import FileValidator
 ```
 
-**Step 3: Configure Logging for Security Auditing**
+### Step 3: Configure Logging for Security Auditing
 
 Set up comprehensive logging to track all operations for security monitoring:
 
@@ -569,7 +569,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 ```
 
-**Step 4: Initialize Server Components**
+### Step 4: Initialize Server Components
 
 Create the main server instance and initialize all security components:
 
@@ -595,7 +595,7 @@ logger.info(f"File System MCP Server initialized with sandbox at: {config.base_p
 
 Let's implement tools for safely browsing the file system:
 
-**Step 1: Directory Listing Tool Definition**
+### Step 1: Directory Listing Tool Definition
 
 First, let's define the main directory listing tool with proper documentation:
 
@@ -617,7 +617,7 @@ async def list_directory(path: str = ".", pattern: str = "*") -> Dict:
     """
 ```
 
-**Step 2: Path Validation and Directory Check**
+### Step 2: Path Validation and Directory Check
 
 Validate the path and ensure it's a directory:
 
@@ -631,7 +631,7 @@ Validate the path and ensure it's a directory:
             return {"error": f"'{path}' is not a directory"}
 ```
 
-**Step 3: Item Collection and Metadata**
+### Step 3: Item Collection and Metadata
 
 Gather information about each file and directory:
 
@@ -654,7 +654,7 @@ Gather information about each file and directory:
             })
 ```
 
-**Step 4: Response Formatting and Logging**
+### Step 4: Response Formatting and Logging
 
 Sort results and create the response:
 
@@ -672,7 +672,7 @@ Sort results and create the response:
         }
 ```
 
-**Step 5: Error Handling**
+### Step 5: Error Handling
 
 Handle security violations and other errors:
 
@@ -685,7 +685,7 @@ Handle security violations and other errors:
         return {"error": f"Failed to list directory: {str(e)}"}
 ```
 
-**Step 6: File Information Tool Definition**
+### Step 6: File Information Tool Definition
 
 Add a complementary tool for detailed file information:
 
@@ -700,7 +700,7 @@ async def get_file_info(path: str) -> Dict:
             return {"error": f"File '{path}' not found"}
 ```
 
-**Step 7: File Metadata Collection**
+### Step 7: File Metadata Collection
 
 Gather comprehensive file statistics and type information:
 
@@ -721,7 +721,7 @@ Gather comprehensive file statistics and type information:
         }
 ```
 
-**Step 8: Checksum and Final Processing**
+### Step 8: Checksum and Final Processing
 
 Add integrity verification and error handling:
 
@@ -744,7 +744,7 @@ Complete file listing implementation available in [`src/session2/filesystem_serv
 
 Now let's implement secure file reading that handles both text and binary files:
 
-**Step 1: File Reading Tool Definition**
+### Step 1: File Reading Tool Definition
 
 Define the main tool with comprehensive documentation:
 
@@ -770,7 +770,7 @@ async def read_file(path: str, encoding: str = "utf-8",
     """
 ```
 
-**Step 2: Path Validation and Security Checks**
+### Step 2: Path Validation and Security Checks
 
 Validate the file path and check file size limits:
 
@@ -789,7 +789,7 @@ Validate the file path and check file size limits:
         file_type = validator.validate_file_type(safe_path)
 ```
 
-**Step 3: Binary File Handling**
+### Step 3: Binary File Handling
 
 Handle binary files by encoding them as base64:
 
@@ -809,7 +809,7 @@ Handle binary files by encoding them as base64:
                 }
 ```
 
-**Step 4: Text File Processing**
+### Step 4: Text File Processing
 
 Handle text files with optional line selection for large files:
 
@@ -830,7 +830,7 @@ Handle text files with optional line selection for large files:
                 logger.info(f"Read text file: {path} ({len(content)} chars)")
 ```
 
-**Step 5: Response Generation and Error Handling**
+### Step 5: Response Generation and Error Handling
 
 Create the response and handle any errors that may occur:
 
@@ -858,7 +858,7 @@ Create the response and handle any errors that may occur:
 
 Writing files requires extra security checks to prevent malicious file creation:
 
-**Step 1: File Writing Tool Definition**
+### Step 1: File Writing Tool Definition
 
 Define the secure file writing tool with comprehensive validation:
 
@@ -892,7 +892,7 @@ Continue with the function parameters and return documentation:
     """
 ```
 
-**Step 2: Security Validation**
+### Step 2: Security Validation
 
 Perform comprehensive security checks on the target path and filename:
 
@@ -910,7 +910,7 @@ Perform comprehensive security checks on the target path and filename:
             return {"error": f"File type '{file_type['extension']}' not allowed"}
 ```
 
-**Step 3: Directory Management**
+### Step 3: Directory Management
 
 Handle directory creation and validation:
 
@@ -925,7 +925,7 @@ Handle directory creation and validation:
             return {"error": "Parent directory does not exist"}
 ```
 
-**Step 4: Binary Content Handling**
+### Step 4: Binary Content Handling
 
 Process base64-encoded binary content:
 
@@ -945,7 +945,7 @@ Process base64-encoded binary content:
                 return {"error": f"Invalid base64 content: {str(e)}"}
 ```
 
-**Step 5: Text Content and Response Generation**
+### Step 5: Text Content and Response Generation
 
 Handle text content and return success status:
 
@@ -960,7 +960,7 @@ Handle text content and return success status:
             logger.info(f"Wrote text file: {path} ({len(content)} chars, append={append})")
 ```
 
-**Step 6: Success Response and Error Handling**
+### Step 6: Success Response and Error Handling
 
 Generate the success response and handle any errors:
 
@@ -991,7 +991,7 @@ Generate the success response and handle any errors:
 
 Let's add a powerful search tool that can find files by name or content:
 
-**Step 1: Search Tool Definition**
+### Step 1: Search Tool Definition
 
 Define the search tool with comprehensive documentation:
 
@@ -1026,7 +1026,7 @@ Continue with the parameter documentation:
     """
 ```
 
-**Step 2: Path Validation and Search Setup**
+### Step 2: Path Validation and Search Setup
 
 Validate the search path and initialize result collection:
 
@@ -1041,7 +1041,7 @@ Validate the search path and initialize result collection:
         count = 0
 ```
 
-**Step 3: Filename-Based Search**
+### Step 3: Filename-Based Search
 
 Implement glob pattern matching for filename searches:
 
@@ -1062,7 +1062,7 @@ Implement glob pattern matching for filename searches:
                     count += 1
 ```
 
-**Step 4: Content-Based Search Implementation**
+### Step 4: Content-Based Search Implementation
 
 Search through file contents with safety checks:
 
@@ -1083,7 +1083,7 @@ Search through file contents with safety checks:
                                 content = await f.read()
 ```
 
-**Step 5: Match Processing and Context Generation**
+### Step 5: Match Processing and Context Generation
 
 Process matches and provide context for content searches:
 
@@ -1118,7 +1118,7 @@ Continue with result processing:
                             pass
 ```
 
-**Step 6: Result Processing and Error Handling**
+### Step 6: Result Processing and Error Handling
 
 Finalize results and handle any errors:
 
@@ -1148,7 +1148,7 @@ Finalize results and handle any errors:
 
 Finally, let's add resources and prompts to guide AI agents:
 
-**Step 1: Server Configuration Resource**
+### Step 1: Server Configuration Resource
 
 Expose server settings and capabilities as a resource:
 
@@ -1169,7 +1169,7 @@ def get_server_config() -> Dict:
     }
 ```
 
-**Step 2: Filesystem Statistics Resource**
+### Step 2: Filesystem Statistics Resource
 
 Provide real-time statistics about the sandbox:
 
@@ -1196,7 +1196,7 @@ def get_filesystem_stats() -> Dict:
     }
 ```
 
-**Step 3: Codebase Analysis Prompt**
+### Step 3: Codebase Analysis Prompt
 
 Generate structured prompts for code analysis tasks:
 
@@ -1218,7 +1218,7 @@ def analyze_codebase_prompt(language: str = "python") -> str:
 Start by listing the root directory and looking for documentation files."""
 ```
 
-**Step 4: Issue Resolution Prompt**
+### Step 4: Issue Resolution Prompt
 
 Create prompts for finding and fixing code issues:
 
@@ -1241,7 +1241,7 @@ Please be thorough in your search and analysis."""
 
 Finally, add the server startup code:
 
-**Step 1: Example Data Creation**
+### Step 1: Example Data Creation
 
 Set up sample files for testing the server functionality:
 
@@ -1255,7 +1255,7 @@ if __name__ == "__main__":
     (example_dir / "hello.txt").write_text("Hello from the secure file system server!")
 ```
 
-**Step 2: Sample JSON Data**
+### Step 2: Sample JSON Data
 
 Create structured data files for testing:
 
@@ -1267,7 +1267,7 @@ Create structured data files for testing:
     }, indent=2))
 ```
 
-**Step 3: Server Startup**
+### Step 3: Server Startup
 
 Display startup information and launch the server:
 
@@ -1318,7 +1318,7 @@ Congratulations! You've built a production-grade file system MCP server with com
 
 Extend the server with a tool that safely moves/renames files:
 
-**Step 1: Tool Definition and Documentation**
+### Step 1: Tool Definition and Documentation
 
 Define the file move/rename tool with proper parameters:
 
@@ -1338,7 +1338,7 @@ async def move_file(source: str, destination: str, overwrite: bool = False) -> D
     """
 ```
 
-**Step 2: Implementation Guidelines**
+### Step 2: Implementation Guidelines
 
 Implementation hints for the move operation:
 

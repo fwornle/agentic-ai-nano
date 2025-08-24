@@ -395,7 +395,7 @@ D) Reduces memory usage
 
 ## 🧭 Navigation
 
-**Related Modules:**
+### Related Modules:
 
 - **Core Session:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 - **Related Module:** [Module B - Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)

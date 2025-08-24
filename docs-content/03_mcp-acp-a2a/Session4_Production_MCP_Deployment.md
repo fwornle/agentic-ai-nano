@@ -43,7 +43,7 @@ Production MCP infrastructure supports:
 - **Compliance Requirements**: SOC2, ISO27001, and GDPR-compliant deployments with audit trails
 
 ![Production Deployment Architecture](images/production-deployment-architecture.png)
-*Figure 1: Enterprise MCP deployment architecture showing containerization, multi-AZ deployment, monitoring stack, and security layers working together to provide scalable, reliable AI infrastructure*
+### Figure 1: Enterprise MCP deployment architecture showing containerization, multi-AZ deployment, monitoring stack, and security layers working together to provide scalable, reliable AI infrastructure
 
 ### Learning Path Options
 
@@ -67,7 +67,7 @@ Production MCP infrastructure supports:
 
 Transforming development MCP servers into production-ready services requires addressing enterprise-grade operational concerns that don't exist in development environments.
 
-**Enterprise Production Requirements:**
+### Enterprise Production Requirements:
 1. **Observability**: Complete system visibility through metrics, logs, traces, and health checks
 2. **Scalability**: Automatic load handling with predictive scaling and resource optimization
 3. **Reliability**: Fault tolerance with circuit breakers, retries, and graceful degradation
@@ -75,12 +75,12 @@ Transforming development MCP servers into production-ready services requires add
 5. **Performance**: Caching strategies, connection pooling, and resource efficiency
 6. **Compliance**: Audit trails, data protection, and regulatory requirements
 
-**Industry Impact (2024-2025 Data):**
+### Industry Impact (2024-2025 Data):
 According to enterprise deployment studies, containerized MCP servers eliminate "it works on my machine" phenomena and reduce deployment-related issues by 60%, while advanced orchestration provides major efficiency gains in 80% of organizations.
 
 ### **OBSERVER PATH**: Production Architecture Patterns
 
-**Key Production Concepts:**
+### Key Production Concepts:
 
 1. **Containerization Benefits**: Docker encapsulation ensures consistent environments from development through production
 2. **Cloud-Native Deployment**: AWS/GCP patterns with private subnets and security groups
@@ -89,7 +89,7 @@ According to enterprise deployment studies, containerized MCP servers eliminate 
 
 ### **PARTICIPANT PATH**: Building Production-Ready Infrastructure
 
-**Step 1: Production Server Foundation**
+### Step 1: Production Server Foundation
 
 Implement enterprise-grade server architecture with observability:
 
@@ -110,13 +110,13 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 import time
 ```
 
-**Enterprise Dependencies Explained:**
+### Enterprise Dependencies Explained:
 - `structlog`: Advanced structured logging for enterprise observability
 - `prometheus_client`: Industry-standard metrics collection
 - `tenacity`: Production-grade retry policies with exponential backoff
 - `aioredis`: High-performance Redis integration for caching and session management
 
-**Step 2: Enterprise Logging Configuration**
+### Step 2: Enterprise Logging Configuration
 
 Implement structured logging following enterprise standards:
 
@@ -144,13 +144,13 @@ structlog.configure(
 logger = structlog.get_logger()
 ```
 
-**Enterprise Logging Benefits:**
+### Enterprise Logging Benefits:
 - **JSON Format**: Compatible with log aggregation systems (ELK, Splunk)
 - **Structured Fields**: Consistent logging format for automated analysis
 - **ISO Timestamps**: Standard time format for distributed systems
 - **Exception Handling**: Automatic stack trace capture and formatting
 
-**Step 3: Enterprise Metrics and Monitoring**
+### Step 3: Enterprise Metrics and Monitoring
 
 Implement comprehensive observability with Prometheus metrics:
 
@@ -190,13 +190,13 @@ start_http_server(9090)  # Metrics available at :9090/metrics
 logger.info("Prometheus metrics server started", port=9090)
 ```
 
-**Enterprise Metrics Categories:**
+### Enterprise Metrics Categories:
 - **SLI Metrics**: Request rate, latency, error rate for SLO tracking
 - **Resource Metrics**: CPU, memory, connections for capacity planning
 - **Business Metrics**: Tool usage patterns for product insights
 - **Security Metrics**: Rate limiting and abuse detection
 
-**Step 4: Health Check and Readiness Probes**
+### Step 4: Health Check and Readiness Probes
 
 Implement Kubernetes-compatible health checks:
 
@@ -225,7 +225,7 @@ async def readiness_check():
     }, status_code
 ```
 
-**Step 1.1.3: Initialize the Server Class**
+### Step 1.1.3: Initialize the Server Class
 
 Now let's create our production server class with configuration:
 
@@ -264,13 +264,13 @@ Next, we configure environment variables for cloud deployment compatibility:
         self._setup_monitoring()
 ```
 
-**Configuration strategy:**
+### Configuration strategy:
 
 - All settings from environment variables
 - Sensible defaults for development
 - Production overrides through deployment
 
-**Step 1.1.4: Async Resource Initialization**
+### Step 1.1.4: Async Resource Initialization
 
 Separate async initialization for expensive resources:
 
@@ -293,7 +293,7 @@ Separate async initialization for expensive resources:
             logger.warning(f"Redis connection failed: {e}. Running without cache.")
 ```
 
-**Step 1.1.5: Production Tools with Caching - Tool Setup**
+### Step 1.1.5: Production Tools with Caching - Tool Setup
 
 Set up the production tools infrastructure:
 
@@ -312,7 +312,7 @@ Set up the production tools infrastructure:
             """
 ```
 
-**Step 1.1.5.1: Cache Key Generation and Lookup**
+### Step 1.1.5.1: Cache Key Generation and Lookup
 
 Implement deterministic caching for consistent performance:
 
@@ -327,7 +327,7 @@ Implement deterministic caching for consistent performance:
                 return cached
 ```
 
-**Step 1.1.5.2: Data Processing and Cache Storage**
+### Step 1.1.5.2: Data Processing and Cache Storage
 
 Perform operations and cache results for future requests:
 
@@ -347,13 +347,13 @@ Perform operations and cache results for future requests:
             return result
 ```
 
-**Caching strategy:**
+### Caching strategy:
 
 - Deterministic cache keys ensure consistency
 - Cache misses trigger computation and storage
 - Cache hits dramatically improve response times
 
-**Step 1.1.6: Health Check Implementation**
+### Step 1.1.6: Health Check Implementation
 
 Essential for production deployment:
 
@@ -392,7 +392,7 @@ Essential for production deployment:
 
 *[Continue with remaining helper methods and server startup in the source files...]*
 
-**Key Production Features Explained:**
+### Key Production Features Explained:
 
 1. **Environment Configuration**: All settings come from environment variables, making the server configurable without code changes
 2. **Caching Strategy**: Redis caching with deterministic keys reduces database load and improves response times
@@ -404,7 +404,7 @@ Essential for production deployment:
 
 Containerize the MCP server for consistent deployment across environments. Let's build this step by step following Docker best practices.
 
-**Step 1.2.1: Base Image and System Dependencies**
+### Step 1.2.1: Base Image and System Dependencies
 
 Start with a secure, minimal base image:
 
@@ -421,7 +421,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 ```
 
-**Step 1.2.2: Security Configuration**
+### Step 1.2.2: Security Configuration
 
 Create a non-root user for security (principle of least privilege):
 
@@ -436,7 +436,7 @@ RUN useradd -m -u 1000 mcpuser
 WORKDIR /app
 ```
 
-**Step 1.2.3: Dependency Installation**
+### Step 1.2.3: Dependency Installation
 
 Optimize Docker layer caching by installing dependencies first:
 
@@ -450,7 +450,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 ```
 
-**Step 1.2.4: Application Code and Permissions**
+### Step 1.2.4: Application Code and Permissions
 
 Copy application code and set up proper permissions:
 
@@ -470,7 +470,7 @@ RUN mkdir -p /var/log/mcp && chown mcpuser:mcpuser /var/log/mcp
 USER mcpuser
 ```
 
-**Step 1.2.5: Health Checks and Runtime Configuration**
+### Step 1.2.5: Health Checks and Runtime Configuration
 
 Configure health checks and runtime environment:
 
@@ -495,14 +495,14 @@ EXPOSE 9090
 CMD ["python", "-m", "src.production_mcp_server"]
 ```
 
-**Container security features:**
+### Container security features:
 
 - **Minimal base image**: python:3.11-slim reduces attack surface
 - **Non-root execution**: Application runs as unprivileged user
 - **Layer optimization**: Dependencies cached separately from code
 - **Health monitoring**: Built-in health checks for orchestrators
 
-**Docker Best Practices Implemented:**
+### Docker Best Practices Implemented:
 
 1. **Multi-stage Build**: Separates build dependencies from runtime
 2. **Non-root User**: Runs application as unprivileged user for security
@@ -514,7 +514,7 @@ CMD ["python", "-m", "src.production_mcp_server"]
 
 Create a complete local development environment that mirrors production. Let's build this multi-service setup step by step.
 
-**Step 1.3.1: Compose File Header and MCP Server Service**
+### Step 1.3.1: Compose File Header and MCP Server Service
 
 Set up the main MCP server with proper configuration:
 
@@ -550,7 +550,7 @@ services:
       retries: 3
 ```
 
-**Step 1.3.2: Redis Caching Service**
+### Step 1.3.2: Redis Caching Service
 
 Configure Redis for production-like caching:
 
@@ -565,7 +565,7 @@ Configure Redis for production-like caching:
     command: redis-server --appendonly yes  # Enable persistence
 ```
 
-**Step 1.3.3: Monitoring Stack - Prometheus and Grafana**
+### Step 1.3.3: Monitoring Stack - Prometheus and Grafana
 
 Set up comprehensive monitoring infrastructure:
 
@@ -596,7 +596,7 @@ Set up comprehensive monitoring infrastructure:
       - prometheus
 ```
 
-**Step 1.3.4: Data Persistence Configuration**
+### Step 1.3.4: Data Persistence Configuration
 
 Define persistent volumes for data continuity:
 
@@ -607,7 +607,7 @@ volumes:
   grafana_data:
 ```
 
-**Development environment features:**
+### Development environment features:
 
 - **Service isolation**: Each component runs in its own container
 - **Dependency management**: Proper startup order with depends_on
@@ -615,7 +615,7 @@ volumes:
 - **Data persistence**: Volumes ensure data survives container restarts
 - **Production parity**: Same services and configurations as production
 
-**Development Environment Benefits:**
+### Development Environment Benefits:
 
 - Complete monitoring stack included
 - Persistent data volumes for development continuity
@@ -639,7 +639,7 @@ Google Cloud Run provides serverless container deployment with automatic scaling
 
 Cloud Run expects HTTP traffic, so we need an adapter to convert MCP JSON-RPC to HTTP. Let's build this step by step:
 
-**Step 2.1.1: FastAPI Application Setup**
+### Step 2.1.1: FastAPI Application Setup
 
 ```python
 
@@ -671,7 +671,7 @@ app = FastAPI(
 server = ProductionMCPServer()
 ```
 
-**Step 2.1.2: Application Lifecycle Events**
+### Step 2.1.2: Application Lifecycle Events
 
 ```python
 @app.on_event("startup")
@@ -699,7 +699,7 @@ async def shutdown_event():
         await server.redis_client.close()
 ```
 
-**Step 2.1.3: MCP Request Handler - Request Processing**
+### Step 2.1.3: MCP Request Handler - Request Processing
 
 Handle MCP requests over HTTP with proper JSON-RPC protocol support:
 
@@ -721,7 +721,7 @@ async def handle_mcp_request(request: Request):
         params = body.get("params", {})
 ```
 
-**Step 2.1.3.1: Tools List Handler**
+### Step 2.1.3.1: Tools List Handler
 
 Handle requests for available tools:
 
@@ -736,7 +736,7 @@ Handle requests for available tools:
             })
 ```
 
-**Step 2.1.3.2: Tool Execution Handler**
+### Step 2.1.3.2: Tool Execution Handler
 
 Execute specific tools with parameter validation:
 
@@ -766,7 +766,7 @@ Execute specific tools with parameter validation:
                 )
 ```
 
-**Step 2.1.3.3: Method Not Found Handler**
+### Step 2.1.3.3: Method Not Found Handler
 
 Handle unsupported MCP methods:
 
@@ -782,7 +782,7 @@ Handle unsupported MCP methods:
             )
 ```
 
-**Step 2.1.3.4: Exception Handling**
+### Step 2.1.3.4: Exception Handling
 
 Handle parsing errors and unexpected exceptions:
 
@@ -808,14 +808,14 @@ Handle parsing errors and unexpected exceptions:
         )
 ```
 
-**Handler features:**
+### Handler features:
 
 - **JSON-RPC compliance**: Proper error codes and response format
 - **Method routing**: Support for tools/list and tools/call operations
 - **Error handling**: Comprehensive exception catching and reporting
 - **Request logging**: All requests logged for debugging and monitoring
 
-**Step 2.1.4: Health Check and Metrics**
+### Step 2.1.4: Health Check and Metrics
 
 ```python
 @app.get("/health")
@@ -848,7 +848,7 @@ async def metrics():
 
 Automate the build and deployment process with Google Cloud Build. This creates a complete CI/CD pipeline for your MCP server.
 
-**Step 2.2.1: Container Build Process**
+### Step 2.2.1: Container Build Process
 
 Build and tag the container image with version control:
 
@@ -868,7 +868,7 @@ steps:
     ]
 ```
 
-**Step 2.2.2: Image Registry Push**
+### Step 2.2.2: Image Registry Push
 
 Push both versioned and latest tags to Container Registry:
 
@@ -881,7 +881,7 @@ Push both versioned and latest tags to Container Registry:
     args: ['push', 'gcr.io/$PROJECT_ID/mcp-server:latest']
 ```
 
-**Step 2.2.3: Cloud Run Deployment**
+### Step 2.2.3: Cloud Run Deployment
 
 Deploy the new image to Cloud Run with production configuration:
 
@@ -906,7 +906,7 @@ Deploy the new image to Cloud Run with production configuration:
       - '--min-instances=1'
 ```
 
-**Step 2.2.4: Build Configuration**
+### Step 2.2.4: Build Configuration
 
 Configure build parameters and substitutions:
 
@@ -924,14 +924,14 @@ options:
   machineType: 'E2_HIGHCPU_8'
 ```
 
-**CI/CD pipeline features:**
+### CI/CD pipeline features:
 
 - **Automatic triggers**: Builds triggered by git commits
 - **Version control**: Each deployment tagged with commit SHA
 - **Resource optimization**: High-CPU build machines for faster builds
 - **Environment promotion**: Configurable variables for different environments
 
-**Production Deployment Features:**
+### Production Deployment Features:
 
 - **Automatic scaling**: 1-50 instances based on demand  
 - **Resource limits**: 1GB memory, 2 CPU cores per instance
@@ -942,7 +942,7 @@ options:
 
 Terraform enables reproducible infrastructure deployments. Let's build the complete Cloud Run infrastructure step by step.
 
-**Step 2.3.1: Terraform Configuration and Provider**
+### Step 2.3.1: Terraform Configuration and Provider
 
 Set up Terraform with Google Cloud provider:
 
@@ -965,7 +965,7 @@ provider "google" {
 }
 ```
 
-**Step 2.3.2: Variable Definitions**
+### Step 2.3.2: Variable Definitions
 
 Define configurable parameters for flexible deployments:
 
@@ -985,7 +985,7 @@ variable "region" {
 }
 ```
 
-**Step 2.3.3: Cloud Run Service - Basic Configuration**
+### Step 2.3.3: Cloud Run Service - Basic Configuration
 
 Define the core Cloud Run service structure:
 
@@ -1011,7 +1011,7 @@ resource "google_cloud_run_service" "mcp_server" {
         }
 ```
 
-**Step 2.3.4: Environment Variables and Security**
+### Step 2.3.4: Environment Variables and Security
 
 Configure environment variables and secrets integration:
 
@@ -1043,7 +1043,7 @@ Configure environment variables and secrets integration:
     }
 ```
 
-**Step 2.3.5: Auto-scaling and Traffic Configuration**
+### Step 2.3.5: Auto-scaling and Traffic Configuration
 
 Configure scaling behavior and traffic routing:
 
@@ -1066,7 +1066,7 @@ Configure scaling behavior and traffic routing:
 }
 ```
 
-**Step 2.3.6: Service Account and IAM**
+### Step 2.3.6: Service Account and IAM
 
 Create service account and configure access permissions:
 
@@ -1090,7 +1090,7 @@ resource "google_cloud_run_service_iam_member" "public" {
 }
 ```
 
-**Step 2.3.7: Secret Management**
+### Step 2.3.7: Secret Management
 
 Configure secure storage for sensitive configuration:
 
@@ -1107,7 +1107,7 @@ resource "google_secret_manager_secret" "redis_url" {
 }
 ```
 
-**Step 2.3.8: Monitoring and Alerting**
+### Step 2.3.8: Monitoring and Alerting
 
 Set up automated monitoring and notification channels:
 
@@ -1149,7 +1149,7 @@ resource "google_monitoring_notification_channel" "email" {
 }
 ```
 
-**Step 2.3.9: Output Values**
+### Step 2.3.9: Output Values
 
 Export important infrastructure information:
 
@@ -1168,14 +1168,14 @@ output "service_account_email" {
 }
 ```
 
-**Terraform advantages:**
+### Terraform advantages:
 
 - **Infrastructure as Code**: Version-controlled, repeatable deployments
 - **State management**: Tracks resource changes and dependencies
 - **Plan before apply**: Preview changes before deployment
 - **Multi-cloud support**: Works across different cloud providers
 
-*Deploy with: `terraform init && terraform plan && terraform apply`*
+### Deploy with: `terraform init && terraform plan && terraform apply`
 
 ---
 
@@ -1194,7 +1194,7 @@ AWS Lambda offers a different serverless model compared to Cloud Run:
 
 AWS Lambda provides a different serverless model than Cloud Run. Let's implement both FastAPI-based and direct handlers for maximum flexibility.
 
-**Step 3.1.1: Lambda Dependencies and Setup**
+### Step 3.1.1: Lambda Dependencies and Setup
 
 Start with essential imports and logging configuration:
 
@@ -1219,13 +1219,13 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 ```
 
-**Lambda-specific considerations:**
+### Lambda-specific considerations:
 
 - **mangum**: Converts ASGI apps (FastAPI) to Lambda handlers
 - **Logging**: Use AWS CloudWatch-compatible logging
 - **Environment**: Cold starts require efficient initialization
 
-**Step 3.1.2: FastAPI to Lambda Adapter**
+### Step 3.1.2: FastAPI to Lambda Adapter
 
 Convert our existing FastAPI app for Lambda deployment:
 
@@ -1236,7 +1236,7 @@ Convert our existing FastAPI app for Lambda deployment:
 handler = Mangum(app, lifespan="off")
 ```
 
-**Step 3.1.3: Direct Lambda Handler - Request Processing**
+### Step 3.1.3: Direct Lambda Handler - Request Processing
 
 For maximum performance, implement a direct Lambda handler:
 
@@ -1264,7 +1264,7 @@ def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]
         method = body.get('method', '')
 ```
 
-**Step 3.1.4: Tools List Handler**
+### Step 3.1.4: Tools List Handler
 
 Handle MCP tools listing requests:
 
@@ -1305,7 +1305,7 @@ Handle MCP tools listing requests:
             }
 ```
 
-**Step 3.1.5: Tool Execution Handler**
+### Step 3.1.5: Tool Execution Handler
 
 Handle tool execution requests:
 
@@ -1334,7 +1334,7 @@ Handle tool execution requests:
             }
 ```
 
-**Step 3.1.6: Error Handling**
+### Step 3.1.6: Error Handling
 
 Implement comprehensive error handling for Lambda:
 
@@ -1360,7 +1360,7 @@ Implement comprehensive error handling for Lambda:
         }
 ```
 
-**Step 3.1.7: Tool Execution Implementation**
+### Step 3.1.7: Tool Execution Implementation
 
 Implement the actual tool logic for Lambda:
 
@@ -1417,14 +1417,14 @@ async def execute_tool(body: Dict[str, Any]) -> Dict[str, Any]:
         }
 ```
 
-**Lambda advantages:**
+### Lambda advantages:
 
 - **Fast cold starts**: Direct handler minimizes initialization time
 - **AWS integration**: Native access to AWS services and context
 - **Cost optimization**: Pay only for execution time
 - **Auto-scaling**: Scales to zero when not in use
 
-*For complete implementation details, see [`src/session4/lambda/lambda_handler.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/lambda/lambda_handler.py)*
+### For complete implementation details, see [`src/session4/lambda/lambda_handler.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/lambda/lambda_handler.py)
 
 ### Step 3.2: Lambda Container Image
 
@@ -1452,7 +1452,7 @@ CMD ["src.lambda_handler.handler"]
 
 AWS SAM (Serverless Application Model) provides Infrastructure as Code for serverless applications. Let's build this template step by step for production deployment.
 
-**Step 3.3.1: Template Header and Global Configuration**
+### Step 3.3.1: Template Header and Global Configuration
 
 Start with the SAM template structure and global settings:
 
@@ -1480,13 +1480,13 @@ Globals:
         LOG_LEVEL: INFO
 ```
 
-**Global configuration benefits:**
+### Global configuration benefits:
 
 - **Consistent settings**: All functions inherit the same baseline configuration
 - **Resource limits**: 5-minute timeout and 1GB memory for compute-intensive tasks
 - **Environment variables**: Production-ready logging and environment detection
 
-**Step 3.3.2: Parameters for Flexible Deployment**
+### Step 3.3.2: Parameters for Flexible Deployment
 
 Define configurable parameters for different environments:
 
@@ -1498,7 +1498,7 @@ Parameters:
     Description: Deployment stage
 ```
 
-**Step 3.3.3: Lambda Function Configuration**
+### Step 3.3.3: Lambda Function Configuration
 
 Define the core MCP server Lambda function:
 
@@ -1519,7 +1519,7 @@ Resources:
           REDIS_URL: !Sub '{{resolve:secretsmanager:redis-url:SecretString}}'
 ```
 
-**Step 3.3.4: API Gateway Events Configuration**
+### Step 3.3.4: API Gateway Events Configuration
 
 Configure API Gateway events for different endpoints:
 
@@ -1546,7 +1546,7 @@ Configure API Gateway events for different endpoints:
             RestApiId: !Ref MCPApi
 ```
 
-**Step 3.3.5: IAM Permissions and Container Metadata**
+### Step 3.3.5: IAM Permissions and Container Metadata
 
 Configure security permissions and container settings:
 
@@ -1571,7 +1571,7 @@ Configure security permissions and container settings:
       Dockerfile: deployments/Dockerfile.lambda
 ```
 
-**Step 3.3.6: API Gateway Configuration**
+### Step 3.3.6: API Gateway Configuration
 
 Configure API Gateway with CORS and logging:
 
@@ -1594,7 +1594,7 @@ Configure API Gateway with CORS and logging:
           MetricsEnabled: true
 ```
 
-**Step 3.3.7: Logging and Secret Management**
+### Step 3.3.7: Logging and Secret Management
 
 Configure CloudWatch logs and secure secret storage:
 
@@ -1618,7 +1618,7 @@ Configure CloudWatch logs and secure secret storage:
         }
 ```
 
-**Step 3.3.8: CloudWatch Alarms for Monitoring**
+### Step 3.3.8: CloudWatch Alarms for Monitoring
 
 Set up automated alerting for production issues:
 
@@ -1657,7 +1657,7 @@ Set up automated alerting for production issues:
           Value: !Ref MCPServerFunction
 ```
 
-**Step 3.3.9: Stack Outputs**
+### Step 3.3.9: Stack Outputs
 
 Export important values for other stacks and external systems:
 
@@ -1679,14 +1679,14 @@ Outputs:
       Name: !Sub '${AWS::StackName}-FunctionArn'
 ```
 
-**SAM template advantages:**
+### SAM template advantages:
 
 - **Simplified serverless**: Higher-level abstractions for Lambda and API Gateway
 - **Built-in best practices**: Automatic IAM roles and resource relationships
 - **Easy deployment**: Single command deployment with `sam deploy`
 - **Local testing**: Run and test functions locally with `sam local`
 
-*For complete deployment instructions, see [`deployments/aws-sam-deploy.md`](deployments/aws-sam-deploy.md)*
+### For complete deployment instructions, see [`deployments/aws-sam-deploy.md`](deployments/aws-sam-deploy.md)
 
 ---
 
@@ -1704,7 +1704,7 @@ Production systems require comprehensive observability through:
 
 Effective production monitoring requires multiple components working together. Let's build this system step by step, focusing on observability patterns that scale with your infrastructure.
 
-**Step 4.1.1: Core Dependencies and Data Structures**
+### Step 4.1.1: Core Dependencies and Data Structures
 
 First, we'll set up the foundation with proper imports and health status tracking:
 
@@ -1723,13 +1723,13 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 ```
 
-**Key libraries explained:**
+### Key libraries explained:
 
 - **prometheus_client**: Industry-standard metrics collection
 - **aiohttp**: Async HTTP client for efficient health checks
 - **dataclasses**: Type-safe data structures for better code quality
 
-**Step 4.1.2: Structured Logging Configuration**
+### Step 4.1.2: Structured Logging Configuration
 
 Production systems need consistent, parsable logs:
 
@@ -1744,7 +1744,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 ```
 
-**Step 4.1.3: Health Status Data Model**
+### Step 4.1.3: Health Status Data Model
 
 Define a clear contract for health check results:
 
@@ -1760,13 +1760,13 @@ class ServerHealthStatus:
     details: Optional[Dict] = None
 ```
 
-**Status categories:**
+### Status categories:
 
 - **healthy**: Server responding correctly
 - **unhealthy**: Server responding with errors
 - **error**: Server not reachable or timing out
 
-**Step 4.1.4: Monitor Class Initialization**
+### Step 4.1.4: Monitor Class Initialization
 
 Create the core monitoring class with essential configuration:
 
@@ -1789,7 +1789,7 @@ class MCPServerMonitor:
         self.failure_counts: Dict[str, int] = {url: 0 for url in server_urls}
 ```
 
-**Step 4.1.5: Prometheus Metrics Setup**
+### Step 4.1.5: Prometheus Metrics Setup
 
 Define comprehensive metrics for observability:
 
@@ -1821,13 +1821,13 @@ Define comprehensive metrics for observability:
         )
 ```
 
-**Metrics explained:**
+### Metrics explained:
 
 - **Counter**: Tracks total events (health checks)
 - **Histogram**: Measures distributions with buckets (response times)
 - **Gauge**: Tracks current values (availability, failure counts)
 
-**Step 4.1.6: Health Check Implementation - Setup**
+### Step 4.1.6: Health Check Implementation - Setup
 
 Implement robust health checking with proper error handling:
 
@@ -1845,7 +1845,7 @@ Implement robust health checking with proper error handling:
         start_time = time.time()
 ```
 
-**Step 4.1.7: Health Check - Success Path**
+### Step 4.1.7: Health Check - Success Path
 
 Handle successful health check responses:
 
@@ -1882,7 +1882,7 @@ Handle successful health check responses:
                         )
 ```
 
-**Step 4.1.8: Health Check - Error Handling**
+### Step 4.1.8: Health Check - Error Handling
 
 Handle various failure scenarios with appropriate metrics:
 
@@ -1911,7 +1911,7 @@ Handle various failure scenarios with appropriate metrics:
                     )
 ```
 
-**Step 4.1.9: Health Check - Exception Handling**
+### Step 4.1.9: Health Check - Exception Handling
 
 Handle network timeouts and unexpected errors:
 
@@ -1945,14 +1945,14 @@ Handle network timeouts and unexpected errors:
             )
 ```
 
-**Error handling strategy:**
+### Error handling strategy:
 
 - **Timeouts**: 10-second limit prevents hanging requests
 - **HTTP errors**: Distinguish between server errors and connectivity issues
 - **JSON parsing**: Handle malformed responses gracefully
 - **Metrics tracking**: Every failure type is tracked for analysis
 
-**Step 4.1.10: Concurrent Health Checking**
+### Step 4.1.10: Concurrent Health Checking
 
 Check multiple servers simultaneously for better performance:
 
@@ -1984,13 +1984,13 @@ Check multiple servers simultaneously for better performance:
         return health_statuses
 ```
 
-**Concurrency benefits:**
+### Concurrency benefits:
 
 - **Parallel execution**: All servers checked simultaneously
 - **Exception isolation**: One failed check doesn't break others
 - **Improved performance**: Total check time is limited by slowest server
 
-**Step 4.1.11: Health Analysis and Alerting**
+### Step 4.1.11: Health Analysis and Alerting
 
 Analyze trends and generate actionable insights:
 
@@ -2036,14 +2036,14 @@ Analyze trends and generate actionable insights:
         return analysis
 ```
 
-**Analysis features:**
+### Analysis features:
 
 - **Server categorization**: Healthy, unhealthy, and error states
 - **Alert triggers**: 3+ consecutive failures trigger alerts
 - **Performance metrics**: Average response time calculation
 - **Actionable data**: Specific error messages for debugging
 
-**Step 4.1.12: Continuous Monitoring Loop**
+### Step 4.1.12: Continuous Monitoring Loop
 
 Implement the main monitoring loop with comprehensive error handling:
 
@@ -2097,13 +2097,13 @@ Implement the main monitoring loop with comprehensive error handling:
                 await asyncio.sleep(self.check_interval)
 ```
 
-**Loop features:**
+### Loop features:
 
 - **Continuous operation**: Runs indefinitely with configurable intervals
 - **State management**: Updates internal tracking for all servers
 - **Progressive alerting**: Logs warnings for issues, errors for critical problems
 - **Exception isolation**: Loop continues even if individual checks fail
-**Step 4.1.13: Monitor Startup and Configuration**
+### Step 4.1.13: Monitor Startup and Configuration
 
 Start the monitoring system with both metrics server and health checking:
 
@@ -2123,7 +2123,7 @@ Start the monitoring system with both metrics server and health checking:
         asyncio.run(self.monitor_loop())
 ```
 
-**Step 4.1.14: Example Usage and Configuration**
+### Step 4.1.14: Example Usage and Configuration
 
 Configure and start the monitoring system:
 
@@ -2144,19 +2144,19 @@ if __name__ == "__main__":
     monitor.start()
 ```
 
-**Configuration options:**
+### Configuration options:
 
 - **servers**: List of MCP server URLs to monitor
 - **check_interval**: Health check frequency in seconds
 - **metrics_port**: Prometheus metrics exposure port
 
-*For complete implementation details, see [`src/session4/monitoring/monitor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/monitoring/monitor.py)*
+### For complete implementation details, see [`src/session4/monitoring/monitor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session4/monitoring/monitor.py)
 
 ### Step 4.2: Grafana Dashboard Configuration
 
 Grafana dashboards provide visual insights into your MCP server performance. Let's build a comprehensive dashboard step by step.
 
-**Step 4.2.1: Dashboard Header and Configuration**
+### Step 4.2.1: Dashboard Header and Configuration
 
 Set up the basic dashboard structure and metadata:
 
@@ -2178,13 +2178,13 @@ Set up the basic dashboard structure and metadata:
 }
 ```
 
-**Dashboard features:**
+### Dashboard features:
 
 - **Auto-refresh**: Updates every 30 seconds for real-time monitoring
 - **Dark theme**: Reduces eye strain during long monitoring sessions
 - **Flexible time range**: Default 1-hour view with customizable timeframes
 
-**Step 4.2.2: Server Availability Panel**
+### Step 4.2.2: Server Availability Panel
 
 Create a high-level availability indicator:
 
@@ -2217,7 +2217,7 @@ Create a high-level availability indicator:
     ]
 ```
 
-**Step 4.2.3: Request Rate and Error Rate Panels**
+### Step 4.2.3: Request Rate and Error Rate Panels
 
 Monitor traffic patterns and error frequencies:
 
@@ -2264,7 +2264,7 @@ Monitor traffic patterns and error frequencies:
       }
 ```
 
-**Step 4.2.4: Performance Monitoring Panels**
+### Step 4.2.4: Performance Monitoring Panels
 
 Track response times and connection metrics:
 
@@ -2309,7 +2309,7 @@ Track response times and connection metrics:
       }
 ```
 
-**Step 4.2.5: Health Status Table and Variables**
+### Step 4.2.5: Health Status Table and Variables
 
 Display detailed health information and server filtering:
 
@@ -2345,14 +2345,14 @@ Display detailed health information and server filtering:
     }
 ```
 
-**Dashboard benefits:**
+### Dashboard benefits:
 
 - **Comprehensive coverage**: Availability, performance, errors, and health status
 - **Real-time alerting**: Built-in alerts for critical thresholds
 - **Percentile tracking**: P50, P95, P99 response times for SLA monitoring
 - **Server filtering**: Dynamic server selection for focused analysis
 
-**Key metrics explained:**
+### Key metrics explained:
 
 - **Availability**: Percentage of time servers are responding correctly
 - **Request rate**: Traffic volume per second across all servers
@@ -2360,7 +2360,7 @@ Display detailed health information and server filtering:
 - **Response time percentiles**: Performance distribution analysis
 - **Active connections**: Current load on each server
 
-*For complete dashboard JSON and import instructions, see [`monitoring/grafana-dashboards/mcp-production.json`](monitoring/grafana-dashboards/mcp-production.json)*
+### For complete dashboard JSON and import instructions, see [`monitoring/grafana-dashboards/mcp-production.json`](monitoring/grafana-dashboards/mcp-production.json)
 
 ---
 

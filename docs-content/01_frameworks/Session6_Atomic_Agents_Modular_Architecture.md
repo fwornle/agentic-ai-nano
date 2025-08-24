@@ -2,19 +2,19 @@
 
 ## Chapter Overview: Atomic Agents' Breakthrough in Modular AI Architecture
 
-**Industry Context & Market Significance**
+### Industry Context & Market Significance
 
 Atomic Agents represents a revolutionary approach to AI development through extreme modularity and lightweight design. Built on Instructor and Pydantic foundations, the framework enables organizations to create AI applications using familiar software engineering principles. As 2025 marks the shift toward agentic AI as modular infrastructure layers, Atomic Agents provides the component-based architecture that enterprises need for scalable, maintainable AI systems.
 
-**What You'll Learn & Why It Matters**
+### What You'll Learn & Why It Matters
 
 You'll master component-based agent design, learn modular composition patterns that enable rapid system assembly, and understand atomic architecture principles for enterprise scalability. More importantly, you'll discover why component alignment and schema matching make Atomic Agents ideal for organizations requiring flexibility and reusability in their AI infrastructure.
 
-**How Atomic Agents Stands Out**
+### How Atomic Agents Stands Out
 
 Atomic Agents makes it easy to chain agents and tools together by aligning their input and output schemas, promoting modularity and reusability. This design allows effortless component swapping while maintaining enterprise-grade security, monitoring, and resource optimization capabilities. The framework's atomic approach means each component has single responsibility and minimal dependencies.
 
-**Real-World Applications & Production Evidence**
+### Real-World Applications & Production Evidence
 
 Atomic Agents excels in enterprise environments requiring modular AI solutions. Organizations use it for natural language interfaces, personalized content recommendation systems, and semantic search applications. The framework's seamless integration with deployment platforms enables instant agent pipeline deployment while maintaining granular control over individual components.
 
@@ -65,7 +65,7 @@ Atomic Agents excels in enterprise environments requiring modular AI solutions. 
 Atomic Agents transforms AI development through extreme modularity and component-based architecture:
 
 ![Atomic Agent Architecture](images/atomic-agent.png)
-*This diagram illustrates the core atomic agent structure with individual, focused components that can be composed together. Each agent is designed with single responsibility and minimal dependencies, making them lightweight and highly reusable building blocks.*
+### This diagram illustrates the core atomic agent structure with individual, focused components that can be composed together. Each agent is designed with single responsibility and minimal dependencies, making them lightweight and highly reusable building blocks.
 
 **File**: [`src/session6/atomic_foundation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/atomic_foundation.py) - Core atomic patterns
 
@@ -91,7 +91,7 @@ class AtomicTextAgent(BaseAgent):
         return self.run(f"Process this text: {text}")
 ```
 
-**Key Concepts:**
+### Key Concepts:
 1. **Single Responsibility**: Each component has one clear purpose
 2. **Composition over Inheritance**: Build systems by combining components
 3. **Lightweight by Design**: Minimal resource footprint per component
@@ -101,7 +101,7 @@ class AtomicTextAgent(BaseAgent):
 Building systems through component assembly:
 
 ![Atomic Agents System](images/atomic-agents.png)
-*This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle.*
+### This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle.
 
 **File**: [`src/session6/composition_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/composition_engine.py) - Component composition patterns
 
@@ -380,7 +380,7 @@ Assembling components into complete systems:
 
 ![Atomic Assembler](images/atomic-assembler.png)
 
-*The Atomic Assembler helps you integrate Atomic Agents.*
+### The Atomic Assembler helps you integrate Atomic Agents.
 
 **File**: [`src/session6/production_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/production_orchestrator.py) - Production integration patterns
 
@@ -628,7 +628,7 @@ Test your understanding of atomic agent architecture and modular composition.
 
 ### Question 1
 
-**What is the core principle behind Atomic Agents architecture?**
+### What is the core principle behind Atomic Agents architecture?
 
 A) Maximum performance optimization  
 B) Single-purpose, composable components with clear interfaces  
@@ -637,7 +637,7 @@ D) Complex integrated systems
 
 ### Question 2
 
-**How do atomic agents communicate with each other?**
+### How do atomic agents communicate with each other?
 
 A) Direct method calls  
 B) Standardized message protocols and context providers  
@@ -646,7 +646,7 @@ D) Database transactions
 
 ### Question 3
 
-**What makes an agent "atomic" in this architecture?**
+### What makes an agent "atomic" in this architecture?
 
 A) Small code size  
 B) Fast execution  
@@ -655,7 +655,7 @@ D) Low memory usage
 
 ### Question 4
 
-**What is the role of Context Providers in atomic agent systems?**
+### What is the role of Context Providers in atomic agent systems?
 
 A) Execute agent logic  
 B) Manage shared state and coordination between agents  
@@ -664,7 +664,7 @@ D) Store persistent data
 
 ### Question 5
 
-**How does the Composition Engine work in atomic systems?**
+### How does the Composition Engine work in atomic systems?
 
 A) Compiles agents into single executable  
 B) Dynamically assembles agents based on requirements  
@@ -673,7 +673,7 @@ D) Manages agent memory
 
 ### Question 6
 
-**What is the primary benefit of modular agent composition?**
+### What is the primary benefit of modular agent composition?
 
 A) Faster execution  
 B) Flexibility to assemble different workflows from same components  
@@ -682,7 +682,7 @@ D) Better user interface
 
 ### Question 7
 
-**How do atomic agents handle failure isolation?**
+### How do atomic agents handle failure isolation?
 
 A) Global error handling  
 B) Individual agent failures don't cascade to others  
@@ -691,7 +691,7 @@ D) Backup agent systems
 
 ### Question 8
 
-**What makes atomic agents suitable for microservices architectures?**
+### What makes atomic agents suitable for microservices architectures?
 
 A) Built-in API gateways  
 B) Single-responsibility principle and loose coupling  
@@ -700,7 +700,7 @@ D) Built-in monitoring
 
 ### Question 9
 
-**How do you scale atomic agent systems?**
+### How do you scale atomic agent systems?
 
 A) Vertical scaling only  
 B) Horizontal scaling by replicating individual agents  
@@ -709,7 +709,7 @@ D) Container orchestration required
 
 ### Question 10
 
-**What is the main advantage of the Coordinator Agent pattern?**
+### What is the main advantage of the Coordinator Agent pattern?
 
 A) Centralized control of agent interactions and workflow orchestration  
 B) Faster agent execution  
@@ -726,7 +726,7 @@ D) Better error handling
 
 **Previous:** [Session 5 - PydanticAI Type-Safe Agents](Session5_PydanticAI_Type_Safe_Agents.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Advanced patterns
 - 🏭 **[Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production systems

@@ -4,13 +4,13 @@
 
 ### Question 1: Zero-Trust Security
 
-**What is the core principle of zero-trust security for RAG systems?**
+### What is the core principle of zero-trust security for RAG systems?
 
 A) Never trust, always verify every component and user ✅  
 B) Use simple password authentication  
 C) Trust internal network components by default  
 D) Focus only on external threats  
-**Correct Answer: A) Never trust, always verify every component and user**
+### Correct Answer: A) Never trust, always verify every component and user
 
 **Explanation:** Zero-trust security operates on the principle of "never trust, always verify." Every component, user, and network connection must be continuously authenticated and authorized, regardless of their location within the network perimeter.
 
@@ -18,13 +18,13 @@ D) Focus only on external threats
 
 ### Question 2: Dynamic Access Control
 
-**Why is dynamic access control superior to static RBAC for enterprise RAG?**
+### Why is dynamic access control superior to static RBAC for enterprise RAG?
 
 A) It's compatible with legacy systems  
 B) It requires fewer resources  
 C) It's easier to configure  
 D) It adapts security measures based on real-time risk assessment ✅  
-**Correct Answer: D) It adapts security measures based on real-time risk assessment**
+### Correct Answer: D) It adapts security measures based on real-time risk assessment
 
 **Explanation:** Dynamic access control continuously evaluates risk factors including user behavior, device trust, location, time patterns, and context to adjust security measures in real-time. This provides both stronger security and better user experience compared to static role-based permissions.
 
@@ -32,13 +32,13 @@ D) It adapts security measures based on real-time risk assessment ✅
 
 ### Question 3: Data Governance
 
-**What is the most critical component of enterprise data governance for RAG?**
+### What is the most critical component of enterprise data governance for RAG?
 
 A) Automated classification and lineage tracking ✅  
 B) Network bandwidth management  
 C) Data storage optimization  
 D) User interface design  
-**Correct Answer: A) Automated classification and lineage tracking**
+### Correct Answer: A) Automated classification and lineage tracking
 
 **Explanation:** Automated data classification identifies sensitive information (PII, PHI, financial data) and lineage tracking ensures complete visibility of how data flows through the RAG system. This is essential for compliance, security, and quality management.
 
@@ -46,13 +46,13 @@ D) User interface design
 
 ### Question 4: CI/CD for RAG
 
-**Which testing stage is most unique to RAG CI/CD pipelines?**
+### Which testing stage is most unique to RAG CI/CD pipelines?
 
 A) Integration testing  
 B) Unit testing  
 C) Load testing  
 D) Model validation and embedding consistency testing ✅  
-**Correct Answer: D) Model validation and embedding consistency testing**
+### Correct Answer: D) Model validation and embedding consistency testing
 
 **Explanation:** RAG systems require specialized testing for model performance, embedding consistency, generation quality, and bias detection. These AI-specific validations are unique to RAG/ML systems and critical for maintaining system quality.
 
@@ -60,13 +60,13 @@ D) Model validation and embedding consistency testing ✅
 
 ### Question 5: Infrastructure as Code
 
-**What is the primary benefit of Infrastructure as Code for RAG deployments?**
+### What is the primary benefit of Infrastructure as Code for RAG deployments?
 
 A) Consistent, repeatable, and version-controlled deployments ✅  
 B) Lower infrastructure costs  
 C) Faster deployment speed  
 D) Simpler debugging  
-**Correct Answer: A) Consistent, repeatable, and version-controlled deployments**
+### Correct Answer: A) Consistent, repeatable, and version-controlled deployments
 
 **Explanation:** Infrastructure as Code ensures that RAG system deployments are consistent across environments, repeatable for scaling, and version-controlled for change management. This reduces configuration drift and deployment errors in complex enterprise environments.
 
@@ -74,13 +74,13 @@ D) Simpler debugging
 
 ### Question 6: Compliance Automation
 
-**Which approach is most effective for enterprise compliance in RAG systems?**
+### Which approach is most effective for enterprise compliance in RAG systems?
 
 A) Documentation-only compliance  
 B) Manual compliance checks  
 C) Annual compliance audits  
 D) Continuous automated monitoring with real-time remediation ✅  
-**Correct Answer: D) Continuous automated monitoring with real-time remediation**
+### Correct Answer: D) Continuous automated monitoring with real-time remediation
 
 **Explanation:** Continuous automated monitoring can detect compliance violations in real-time and trigger immediate remediation actions. This is far more effective than periodic manual checks for maintaining ongoing compliance with regulations like GDPR, HIPAA, and SOX.
 
@@ -88,13 +88,13 @@ D) Continuous automated monitoring with real-time remediation ✅
 
 ### Question 7: Enterprise Integration
 
-**What is the most challenging aspect of enterprise RAG integration?**
+### What is the most challenging aspect of enterprise RAG integration?
 
 A) User training requirements  
 B) Balancing security, compliance, and performance requirements ✅  
 C) Hardware compatibility  
 D) Software licensing costs  
-**Correct Answer: B) Balancing security, compliance, and performance requirements**
+### Correct Answer: B) Balancing security, compliance, and performance requirements
 
 **Explanation:** Enterprise RAG integration must simultaneously meet strict security requirements, regulatory compliance mandates, and high-performance expectations. Balancing these often competing requirements while maintaining system usability is the primary challenge.
 

@@ -46,7 +46,11 @@
       "Bash(git add:*)",
       "WebSearch",
       "Bash(rg:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebFetch(domain:coder.com)",
+      "WebFetch(domain:code.visualstudio.com)",
+      "Bash(npx markdownlint-cli:*)",
+      "Bash(npx markdownlint:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"

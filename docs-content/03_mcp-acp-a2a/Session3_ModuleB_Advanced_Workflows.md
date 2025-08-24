@@ -19,7 +19,7 @@ After completing this module, you will master:
 
 Enterprise workflow orchestration goes beyond simple sequential processing. Real-world applications require:
 
-**Complex Coordination Scenarios:**
+### Complex Coordination Scenarios:
 - **Financial processing**: Multi-step verification with compliance checkpoints
 - **Content moderation**: Parallel analysis across text, image, and metadata
 - **Customer onboarding**: Conditional flows based on customer type and region

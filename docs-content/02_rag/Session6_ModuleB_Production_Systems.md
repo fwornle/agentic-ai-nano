@@ -671,7 +671,7 @@ D) Network latency
 
 ## 🧭 Navigation
 
-**Related Modules:**
+### Related Modules:
 - **Core Session:** [Session 6 - Graph-Based RAG](Session6_Graph_Based_RAG.md)
 - **Related Module:** [Module A - Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)
 
