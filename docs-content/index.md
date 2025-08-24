@@ -9,7 +9,7 @@ Welcome to the comprehensive **Agentic AI Nano-Degree** program! This intensive 
 </div>
 
 <!-- BMW Corporate Network Content -->
-<div class="bmw-corporate-only" style="display: none;">
+<div class="bmw-corporate-only">
 
 **Important:** Access your pre-configured BMW cloud development environment for zero-friction learning!
 
@@ -45,7 +45,7 @@ Your BMW Coder workspace includes:
 </div>
 
 <!-- Public Network Alternative Content -->
-<div class="bmw-public-alternative" style="display: none;">
+<div class="bmw-public-alternative">
 
 **Important:** Set up your local development environment for hands-on learning!
 
@@ -219,7 +219,7 @@ Each session follows a consistent structure:
 Ready to begin your journey? **First, set up your environment, then choose your starting point:**
 
 <!-- BMW Corporate Network Quick Start -->
-<div class="bmw-corporate-only" style="display: none;">
+<div class="bmw-corporate-only">
 
 ### Step 1: BMW Cloud Environment Setup
 Access your [BMW cloud development environment](00_intro/coder.md) at `http://10.21.202.14/workspaces`
@@ -229,7 +229,7 @@ Access your [BMW cloud development environment](00_intro/coder.md) at `http://10
 </div>
 
 <!-- Public Network Quick Start -->
-<div class="bmw-public-alternative" style="display: none;">
+<div class="bmw-public-alternative">
 
 ### Step 1: Local Environment Setup
 Follow the [local setup guide](getting-started.md) to install Python, dependencies, and configure API keys

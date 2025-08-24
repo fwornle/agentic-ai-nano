@@ -1,7 +1,7 @@
 # Development Environment Setup
 
 <!-- BMW Corporate Network Content -->
-<div class="bmw-corporate-only" style="display: none;">
+<div class="bmw-corporate-only">
 
 ## BMW Cloud Development Environment with Coder
 
@@ -12,7 +12,7 @@ The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment 
 </div>
 
 <!-- Public Network Alternative Content -->
-<div class="bmw-public-alternative" style="display: none;">
+<div class="bmw-public-alternative">
 
 ## Local Development Environment Setup
 
@@ -53,7 +53,7 @@ export OPENAI_API_KEY="your-api-key-here"
 </div>
 
 <!-- BMW Corporate Network Content Continued -->
-<div class="bmw-corporate-only" style="display: none;">
+<div class="bmw-corporate-only">
 
 ![Coder Architecture](images/coder-architecture.png)
 *Figure 1: Coder's architecture enables secure, scalable cloud development environments accessible from any browser or IDE*
