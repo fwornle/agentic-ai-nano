@@ -5,6 +5,9 @@
 
 (function() {
     'use strict';
+    
+    // Global variable to track corporate network status
+    let isCorporateNetworkDetected = false;
 
     // BMW corporate network detection
     function isCorporateNetwork() {
@@ -138,15 +141,21 @@
         
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         console.log(`Found ${corporateElements.length} corporate elements to show`);
-        corporateElements.forEach(element => {
+        corporateElements.forEach((element, index) => {
+            console.log(`Corporate element ${index}:`, element.tagName, element.className);
             element.classList.add('show-corporate');
             element.classList.add('corporate-network-detected');
+            // Force display with inline style as backup
+            element.style.setProperty('display', 'block', 'important');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
         console.log(`Found ${publicElements.length} public elements to hide`);
-        publicElements.forEach(element => {
+        publicElements.forEach((element, index) => {
+            console.log(`Public element ${index}:`, element.tagName, element.className);
             element.classList.add('hide-public');
+            // Force hide with inline style as backup  
+            element.style.setProperty('display', 'none', 'important');
         });
 
         // Show BMW-specific navigation items in corporate mode
@@ -183,6 +192,8 @@
         corporateElements.forEach(element => {
             element.classList.remove('show-corporate');
             element.classList.remove('corporate-network-detected');
+            // Clear inline style and let default CSS take over
+            element.style.removeProperty('display');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
@@ -190,6 +201,8 @@
         publicElements.forEach(element => {
             element.classList.remove('hide-public');
             element.classList.add('public-network-detected');
+            // Clear inline style and let default CSS take over
+            element.style.removeProperty('display');
         });
 
         // Hide BMW-specific navigation items in public mode
@@ -448,15 +461,22 @@
         }
     }
 
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeNetworkDetection);
-    } else {
+    // Initialize when DOM is ready and on every page load
+    function runDetection() {
+        // Reset detection state for fresh detection on each page
+        isCorporateNetworkDetected = false;
+        console.log('🔄 Starting fresh network detection...');
         initializeNetworkDetection();
     }
-
-    // Global variable to track corporate network status
-    let isCorporateNetworkDetected = false;
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runDetection);
+    } else {
+        runDetection();
+    }
+    
+    // Also run detection on navigation changes (for SPA behavior)
+    window.addEventListener('popstate', runDetection);
 
     // Also observe for navigation changes (Material theme dynamic loading)
     const observer = new MutationObserver(() => {
