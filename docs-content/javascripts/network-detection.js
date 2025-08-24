@@ -228,7 +228,6 @@
                             'Workspace Lifecycle',
                             'Dev Containers: The Foundation',
                             'Nano-Degree Specific Setup',
-                            'Getting Started',
                             'Working with AI Assistants',
                             'When you are done'
                         ];
@@ -257,16 +256,54 @@
     }
 
     function showNavigationItemsReliably() {
-        // Show all navigation items in corporate mode
-        const navItems = document.querySelectorAll('.md-nav__item');
-        navItems.forEach(item => {
-            item.style.removeProperty('display');
-            item.style.removeProperty('visibility');
-            item.style.removeProperty('height');
-            item.style.removeProperty('margin');
-            item.style.removeProperty('padding');
-        });
-        console.log('✅ Showed all navigation items');
+        // Wait for MkDocs Material navigation to be fully loaded
+        const waitForNavigation = setInterval(() => {
+            const navItems = document.querySelectorAll('.md-nav__item');
+            if (navItems.length > 0) {
+                clearInterval(waitForNavigation);
+                
+                navItems.forEach(item => {
+                    const link = item.querySelector('.md-nav__link');
+                    if (link) {
+                        const linkText = link.textContent.trim();
+                        
+                        // Hide public/local setup items in corporate mode
+                        const publicItems = [
+                            'Local Development Environment Setup',
+                            'Local Setup Requirements',
+                            'Setup Steps',
+                            'API Configuration'
+                        ];
+                        
+                        const shouldHide = publicItems.some(publicItem => 
+                            linkText.includes(publicItem) || 
+                            linkText === publicItem ||
+                            linkText.toLowerCase().includes(publicItem.toLowerCase())
+                        );
+                        
+                        if (shouldHide) {
+                            item.style.setProperty('display', 'none', 'important');
+                            item.style.setProperty('visibility', 'hidden', 'important');
+                            item.style.setProperty('height', '0', 'important');
+                            item.style.setProperty('margin', '0', 'important');
+                            item.style.setProperty('padding', '0', 'important');
+                            console.log('🚫 Hidden public nav item:', linkText);
+                        } else {
+                            // Show BMW items and general items
+                            item.style.removeProperty('display');
+                            item.style.removeProperty('visibility');
+                            item.style.removeProperty('height');
+                            item.style.removeProperty('margin');
+                            item.style.removeProperty('padding');
+                        }
+                    }
+                });
+                console.log('✅ Corporate mode navigation configured');
+            }
+        }, 100);
+        
+        // Cleanup after 5 seconds if navigation never loads
+        setTimeout(() => clearInterval(waitForNavigation), 5000);
     }
 
     function updateNetworkSpecificContent(isCorporate) {
