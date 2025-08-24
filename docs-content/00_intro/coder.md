@@ -1,8 +1,59 @@
-# Cloud Development Environment with Coder
+# Development Environment Setup
 
-## Overview: Developing in the Cloud
+<!-- BMW Corporate Network Content -->
+<div class="bmw-corporate-only" style="display: none;">
 
-The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform, to provide instant, consistent, and secure development workspaces. This eliminates the traditional friction of local environment setup, dependency conflicts, and corporate network complexity - both technical and procedural - that often delay or derail learning initiatives.
+## BMW Cloud Development Environment with Coder
+
+### Overview: Developing in the BMW Cloud
+
+The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces. This eliminates the traditional friction of local environment setup, dependency conflicts, and corporate network complexity - both technical and procedural - that often delay or derail learning initiatives.
+
+</div>
+
+<!-- Public Network Alternative Content -->
+<div class="bmw-public-alternative" style="display: none;">
+
+## Local Development Environment Setup
+
+### Overview: Setting Up Your Local Environment
+
+For public access to the Agentic AI Nano-Degree, you'll need to set up your local development environment. While this requires more initial setup than a pre-configured cloud environment, it provides full control over your development setup and works with any LLM API provider.
+
+### Local Setup Requirements
+
+Before beginning the course modules, ensure you have:
+
+1. **Python 3.11+** installed with pip and virtual environment support
+2. **Git** for version control and cloning repositories  
+3. **Code editor** (VS Code recommended with Python extension)
+4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
+
+### Quick Local Setup
+
+```bash
+# Clone the course repository
+git clone <repository-url>
+cd nano-degree
+
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# or
+venv\Scripts\activate     # Windows
+
+# Install dependencies for Module 1
+pip install -r docs-content/01_frameworks/src/session1/requirements.txt
+
+# Set up your API keys
+export OPENAI_API_KEY="your-api-key-here"
+# or create a .env file with your keys
+```
+
+</div>
+
+<!-- BMW Corporate Network Content Continued -->
+<div class="bmw-corporate-only" style="display: none;">
 
 ![Coder Architecture](images/coder-architecture.png)
 *Figure 1: Coder's architecture enables secure, scalable cloud development environments accessible from any browser or IDE*
