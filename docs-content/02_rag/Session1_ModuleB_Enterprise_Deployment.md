@@ -17,7 +17,7 @@ After completing this module, you will master:
 
 ## 🧭 Navigation & Quick Start
 
-**Related Modules:**
+### Related Modules:
 
 - **Core Session:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 - **Related Module:** [Module A - Production Patterns](Session1_ModuleA_Production_Patterns.md)
@@ -567,7 +567,7 @@ D) Only resource utilization
 
 **Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 
-**Optional Deep Dive Modules:**
+### Optional Deep Dive Modules:
 
 - 🔧 **[Module A: Production Patterns](Session1_ModuleA_Production_Patterns.md)** - Production-ready RAG implementation patterns
 - 🏭 **[Module B: Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)** - Enterprise-scale deployment patterns

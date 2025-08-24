@@ -17,7 +17,7 @@ Retrieval-Augmented Generation (RAG) represents the most significant breakthroug
 
 ### Why it matters: Real-World Impact and Industry Adoption
 
-**RAG is revolutionizing industries across the board in 2024-2025:**
+### RAG is revolutionizing industries across the board in 2024-2025:
 
 - **Healthcare**: Major hospital networks report 30% reduction in misdiagnoses and 40% increase in early detection of rare diseases using RAG-powered clinical decision support
 - **Customer Support**: Companies like Shopify use RAG to deliver precise, contextually accurate responses from dynamic inventories and FAQs
@@ -26,7 +26,7 @@ Retrieval-Augmented Generation (RAG) represents the most significant breakthroug
 
 ### How it stands out: RAG vs. Alternatives
 
-**RAG's Competitive Advantages (2024 Analysis):**
+### RAG's Competitive Advantages (2024 Analysis):
 
 - **Dynamic Knowledge Access**: Unlike fine-tuning, RAG provides live information updates without expensive model retraining
 - **Transparency and Trust**: RAG shows source attribution, critical for healthcare, legal, and financial applications
@@ -35,14 +35,14 @@ Retrieval-Augmented Generation (RAG) represents the most significant breakthroug
 
 ### Where you'll apply it: Common Use Cases
 
-**High-Value RAG Applications:**
+### High-Value RAG Applications:
 - Customer support bots with continually-updated knowledge bases
 - Research assistants requiring real-time data (stocks, news, scientific papers)
 - Document intelligence systems for large repositories
 - Domain-specific expertise systems (medical, legal, technical documentation)
 
 ![RAG Architecture Overview](images/RAG-overview2.png)
-*Figure 1: The RAG architecture that revolutionized AI knowledge systems - combining the reasoning power of LLMs with precise information retrieval*
+### Figure 1: The RAG architecture that revolutionized AI knowledge systems - combining the reasoning power of LLMs with precise information retrieval
 
 ### Learning Path Options
 
@@ -64,10 +64,10 @@ Retrieval-Augmented Generation (RAG) represents the most significant breakthroug
 
 ### Understanding RAG Architecture
 
-**The Three-Stage RAG Pipeline:**
+### The Three-Stage RAG Pipeline:
 Every RAG system follows a consistent three-stage architecture that transforms static knowledge into dynamic, queryable intelligence:
 
-**1. Indexing Stage (Offline Preparation)**
+### 1. Indexing Stage (Offline Preparation)
 
 This is where we prepare knowledge for retrieval:
 
@@ -91,19 +91,19 @@ class RAGIndexer:
         self.vector_store.add(chunks, embeddings)
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - **Line 3-4**: Initialize with an embedding model (like OpenAI's text-embedding-ada-002) and vector database (like Pinecone or Chroma)
 - **Line 7**: Split documents into manageable chunks (typically 500-1000 tokens each)
 - **Line 10**: Convert text chunks into dense vector representations that capture semantic meaning
 - **Line 13**: Store vectors in a database optimized for similarity search
 
-**Key Indexing Operations:**
+### Key Indexing Operations:
 - **Document Parsing**: Extract text from PDFs, HTML, Word docs
 - **Text Chunking**: Split into retrievable segments while preserving context
 - **Vector Embedding**: Transform text into dense numerical representations
 - **Database Storage**: Index vectors for efficient similarity search
 
-**2. Retrieval Stage (Real-time Query Processing)**
+### 2. Retrieval Stage (Real-time Query Processing)
 
 When a user asks a question, we find the most relevant information:
 
@@ -130,19 +130,19 @@ class RAGRetriever:
         return self.rank_and_filter(relevant_chunks)
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - **Line 3-5**: Configure retriever with same embedding model as indexing (critical for compatibility)
 - **Line 9**: Convert user's natural language query into the same vector space as stored documents
 - **Line 12-15**: Search vector database for chunks with highest semantic similarity
 - **Line 18**: Apply additional ranking and quality filtering to improve results
 
-**Key Retrieval Operations:**
+### Key Retrieval Operations:
 - **Query Embedding**: Transform user questions into searchable vectors
 - **Similarity Search**: Find semantically related content using cosine similarity
 - **Relevance Ranking**: Order results by relevance scores
 - **Quality Filtering**: Remove low-quality or off-topic chunks
 
-**3. Generation Stage (Response Synthesis)**
+### 3. Generation Stage (Response Synthesis)
 
 Finally, we combine retrieved context with the LLM to generate accurate answers:
 
@@ -169,13 +169,13 @@ class RAGGenerator:
         return self.validate_response(response, context_chunks)
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - **Line 3**: Initialize with chosen LLM (GPT-4, Claude, Llama, etc.)
 - **Line 7-13**: Create prompt that combines user question with retrieved context
 - **Line 16**: Generate response using the enhanced prompt that grounds the LLM in factual content
 - **Line 17**: Validate that the response actually uses the provided context
 
-**Critical Generation Principles:**
+### Critical Generation Principles:
 - **Context Grounding**: LLM must base answers on retrieved information, not training data
 - **Prompt Engineering**: Well-designed prompts ensure focus on provided context
 - **Response Validation**: Check that outputs are actually grounded in retrieved content
@@ -183,7 +183,7 @@ class RAGGenerator:
 
 ### **PARTICIPANT PATH**: Implementing a Complete RAG Pipeline
 
-*Building on the basic architecture, let's see how these components work together in practice:*
+### Building on the basic architecture, let's see how these components work together in practice:
 
 ```python
 
@@ -210,14 +210,14 @@ class BasicRAGSystem:
 
 ### **IMPLEMENTER PATH**: Advanced Architecture Patterns
 
-*See optional modules below for enterprise-level architectures, multi-agent systems, and production optimizations*
+### See optional modules below for enterprise-level architectures, multi-agent systems, and production optimizations
 
 ---
 
 ## Part 2: RAG Evolution Timeline (2017-2025) (Observer: 10 min | Participant: 15 min)
 
 ![RAG Evolution Timeline](images/RAG-evolution.png)
-*Figure 2: The evolution of RAG from simple keyword search to sophisticated agentic systems*
+### Figure 2: The evolution of RAG from simple keyword search to sophisticated agentic systems
 
 ### Phase 1: Early Dense Retrieval (2017-2019) - The Foundation Era
 
@@ -225,14 +225,14 @@ class BasicRAGSystem:
 
 This era established that computers could understand meaning, not just match words. The key innovation was using dense vector embeddings to capture semantic relationships that keyword search missed.
 
-**Key Developments:**
+### Key Developments:
 - **DrQA (2017)**: First system to expose limitations of keyword-based search
 - **ORQA (2019)**: Proved dense retrieval could outperform traditional methods
 - **FAISS**: Facebook's vector search library made large-scale retrieval practical
 
 **Why It Mattered**: Dense embeddings could understand that "car" and "automobile" are related, while keyword search could not. This semantic understanding became the foundation for all modern RAG systems.
 
-**Technical Foundation:**
+### Technical Foundation:
 ```python
 
 # Early Dense Retrieval (2017-2019)
@@ -254,7 +254,7 @@ class EarlyDenseRetrieval:
 
 **The Game Changer**: 2020 established RAG as the gold standard for knowledge-grounded AI
 
-**Revolutionary Papers:**
+### Revolutionary Papers:
 - **DPR (Dense Passage Retrieval)**: Created the dual-encoder framework still used today
 - **RAG Paper**: Formalized the three-stage architecture (Index→Retrieve→Generate)
 - **REALM**: Showed retrieval could be integrated during model training, not just inference
@@ -280,7 +280,7 @@ class FoundationalRAG:
         return self.generator.fuse_and_generate(query, passages)
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - **Line 3-4**: Separate components for retrieval and generation, allowing optimization of each
 - **Line 8**: Retrieve multiple passages to get diverse perspectives on the question
 - **Line 11**: Fusion-in-Decoder approach combines information from all passages intelligently
@@ -291,7 +291,7 @@ class FoundationalRAG:
 
 **Major Industry Shift**: The release of GPT-3.5, GPT-4, and Claude democratized RAG development. Instead of training specialized models, developers could use general-purpose LLMs with RAG augmentation.
 
-**Key Innovations:**
+### Key Innovations:
 - **RAG-Fusion**: Generated multiple query variations to capture different perspectives
 - **HyDE (Hypothetical Document Embeddings)**: Created hypothetical answers to improve search
 - **Reciprocal Rank Fusion**: Combined results from multiple searches intelligently
@@ -299,7 +299,7 @@ class FoundationalRAG:
 
 **The Business Impact**: RAG became essential for any AI system requiring factual accuracy
 
-**Enhanced RAG Architecture:**
+### Enhanced RAG Architecture:
 ```python
 
 # Enhanced RAG (2021-2022)
@@ -336,7 +336,7 @@ class EnhancedRAG:
 
 **Self-Correcting Intelligence**: 2023 introduced RAG systems that could evaluate their own outputs, decide when to retrieve more information, and adapt their strategies based on context quality.
 
-**Game-Changing Concepts:**
+### Game-Changing Concepts:
 - **Self-RAG**: Systems that critique their own outputs and decide when to retrieve more
 - **Corrective RAG (CRAG)**: Quality assessment before using retrieved information
 - **Adaptive Retrieval**: Smart decisions about when retrieval is actually needed
@@ -344,7 +344,7 @@ class EnhancedRAG:
 
 **The Paradigm Shift**: From "always retrieve" to "intelligently decide when and how to retrieve"
 
-**Adaptive RAG Architecture:**
+### Adaptive RAG Architecture:
 ```python
 
 # Adaptive RAG (2023) - Self-Correcting Systems
@@ -383,7 +383,7 @@ class AdaptiveRAG:
 
 **The Current Frontier**: Multiple AI agents working together with knowledge graphs
 
-**Revolutionary Capabilities:**
+### Revolutionary Capabilities:
 - **Agent Orchestration**: Specialized agents for query planning, retrieval, reasoning, and synthesis
 - **Knowledge Graph Integration**: Relationship-aware retrieval that follows entity connections
 - **Multi-Hop Reasoning**: Systems that can connect information across multiple logical steps
@@ -395,7 +395,7 @@ class AdaptiveRAG:
 
 ### **PARTICIPANT PATH**: Understanding Agentic RAG Architecture
 
-**Next-Generation Multi-Agent System:**
+### Next-Generation Multi-Agent System:
 ```python
 
 # Agentic RAG (2024-2025) - Multi-Agent Coordination
@@ -438,7 +438,7 @@ class AgenticRAG:
         )
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - **Line 5-9**: Four specialized agents handle different aspects of complex reasoning
 - **Line 12**: Query planning breaks complex questions into manageable sub-questions
 - **Line 15-22**: Parallel retrieval from both vector databases and knowledge graphs
@@ -452,7 +452,7 @@ This represents the cutting edge of RAG technology, where systems can handle que
 ## Part 3: Common RAG Problems & Solutions (Observer: 8 min | Participant: 12 min)
 
 ![RAG Problems Overview](images/RAG-overview-problems.png)
-*Figure 3: The five most common RAG implementation problems and their proven solutions*
+### Figure 3: The five most common RAG implementation problems and their proven solutions
 
 ### Critical Reality Check: RAG Limitations in 2024
 
@@ -462,7 +462,7 @@ This represents the cutting edge of RAG technology, where systems can handle que
 
 **The Problem**: Poor chunking destroys document meaning and context
 
-**Common Issues:**
+### Common Issues:
 - Arbitrary character splitting cuts through sentences and paragraphs
 - Loss of document structure (headers, tables, lists)
 - Context boundaries broken across chunks
@@ -588,7 +588,7 @@ class QueryClarifier:
 
 **The Problem**: Flat, unorganized indexes make retrieval inefficient and imprecise
 
-**Issues:**
+### Issues:
 - No metadata filtering capabilities
 - Poor organization by document type, date, or category
 - Inefficient search algorithms
@@ -699,14 +699,14 @@ class ContextOptimizer:
 
 ### When to Choose RAG (2024 Decision Framework)
 
-**RAG Excels When:**
+### RAG Excels When:
 - Information changes frequently (daily/weekly updates)
 - You need source attribution and transparency
 - Working with large, diverse knowledge bases
 - Budget constraints prevent frequent model retraining
 - Accuracy and reducing hallucinations are priorities
 
-**Real-World RAG Success Stories (2024):**
+### Real-World RAG Success Stories (2024):
 - **Healthcare**: 30% reduction in misdiagnoses with clinical decision support
 - **Legal**: AI assistants retrieve relevant case law in real-time
 - **Customer Support**: Shopify's RAG-powered bots provide contextually accurate responses
@@ -741,18 +741,18 @@ class RAGDecisionHelper:
 
 ### Alternative Approaches: When NOT to Use RAG
 
-**Fine-Tuning vs. RAG (2024 Analysis):**
+### Fine-Tuning vs. RAG (2024 Analysis):
 
-**Choose Fine-Tuning When:**
+### Choose Fine-Tuning When:
 - Domain knowledge is relatively stable (changes yearly or less)
 - You need consistent output formatting and style
 - Low-latency responses are critical
 - Data privacy requires embedding knowledge in model weights
 - Working with smaller, specialized models
 
-**Function Calling vs. RAG:**
+### Function Calling vs. RAG:
 
-**Choose Function Calling When:**
+### Choose Function Calling When:
 - Need real-time data (weather, stock prices, live calculations)
 - Task automation and workflow execution required
 - Structured API interactions are primary need
@@ -781,7 +781,7 @@ class ApproachSelector:
             return "Start with RAG - Most flexible foundation"
 ```
 
-**Hybrid Approaches - The 2024 Trend:**
+### Hybrid Approaches - The 2024 Trend:
 Most production systems now combine multiple techniques. For example:
 - Fine-tuned model for domain expertise
 - RAG for dynamic knowledge updates
@@ -789,7 +789,7 @@ Most production systems now combine multiple techniques. For example:
 
 ### **PARTICIPANT PATH**: Building a Hybrid System
 
-*Real-world systems often combine RAG with other approaches:*
+### Real-world systems often combine RAG with other approaches:
 
 ```python
 
@@ -834,7 +834,7 @@ This intelligent routing ensures each query type gets handled by the most approp
 
 **Challenge**: Design a RAG system for lawyers to find relevant case law and statutes
 
-**Critical Requirements:**
+### Critical Requirements:
 - Extreme accuracy (legal consequences for errors)
 - Proper citation formatting
 - Multi-jurisdictional search capabilities
@@ -877,7 +877,7 @@ class LegalRAGSystem:
         return self.add_legal_disclaimers(response)
 ```
 
-**Key Design Decisions:**
+### Key Design Decisions:
 1. **Legal-specific embeddings** trained on case law and statutes
 2. **Citation-aware retrieval** that understands legal document references
 3. **Jurisdiction filtering** to ensure relevant legal authority

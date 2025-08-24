@@ -877,7 +877,7 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination:
 
 ## Module A Knowledge Check
 
-**Test your understanding of advanced CrewAI flows and dynamic team formation:**
+### Test your understanding of advanced CrewAI flows and dynamic team formation:
 
 1. **CrewAI Flow State Management**: What key elements are tracked in the FlowState for comprehensive workflow management?
    a) Only task queue and current phase

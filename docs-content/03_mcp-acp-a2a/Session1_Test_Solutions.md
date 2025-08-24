@@ -3,130 +3,130 @@
 ## 📝 Multiple Choice Test - Answer Key
 
 ### Question 1: MCP Capabilities
-**What are the three core capabilities that MCP servers can expose?**  
+### What are the three core capabilities that MCP servers can expose?
 
 A) APIs, Databases, and Services  
 B) Functions, Classes, and Modules  
 C) Tools, Resources, and Prompts ✅  
 D) Inputs, Outputs, and Errors  
-**Correct Answer: C) Tools, Resources, and Prompts**
+### Correct Answer: C) Tools, Resources, and Prompts
 
 **Explanation:** MCP servers expose three types of capabilities: Tools (executable functions that can be called), Resources (data sources that can be queried), and Prompts (reusable templates for common tasks).
 
 ---
 
 ### Question 2: Tool Decorator
-**Which decorator is used to expose a function as an MCP tool?**  
+### Which decorator is used to expose a function as an MCP tool?
 
 A) `@tool()`  
 B) `@mcp.tool()` ✅  
 C) `@server.tool()`  
 D) `@expose_tool()`  
-**Correct Answer: B) `@mcp.tool()`**
+### Correct Answer: B) `@mcp.tool()`
 
 **Explanation:** The `@mcp.tool()` decorator is the FastMCP framework's way to register a function as an MCP tool that can be called by AI agents.
 
 ---
 
 ### Question 3: MCP Inspector Purpose
-**What is the primary purpose of MCP Inspector?**  
+### What is the primary purpose of MCP Inspector?
 
 A) To deploy MCP servers to production  
 B) To test, debug, and validate MCP servers ✅  
 C) To monitor server performance  
 D) To manage server configurations  
-**Correct Answer: B) To test, debug, and validate MCP servers**
+### Correct Answer: B) To test, debug, and validate MCP servers
 
 **Explanation:** MCP Inspector is a developer tool (like Postman for MCP) that provides an interactive interface to explore MCP server capabilities, test tools, debug issues, and validate that servers follow the protocol correctly.
 
 ---
 
 ### Question 4: Transport Mechanism
-**Which transport mechanism is commonly used for local MCP server testing?**  
+### Which transport mechanism is commonly used for local MCP server testing?
 
 A) HTTP  
 B) WebSocket  
 C) stdio (standard input/output) ✅  
 D) TCP  
-**Correct Answer: C) stdio (standard input/output)**
+### Correct Answer: C) stdio (standard input/output)
 
 **Explanation:** MCP servers communicate over stdio (standard input/output) by default for local development, which allows them to work as subprocess-based tools.
 
 ---
 
 ### Question 5: Type Hints Importance
-**Why are type hints important in MCP server functions?**  
+### Why are type hints important in MCP server functions?
 
 A) They improve code readability only  
 B) They enable automatic schema generation for AI clients ✅  
 C) They are required by Python  
 D) They reduce memory usage  
-**Correct Answer: B) They enable automatic schema generation for AI clients**
+### Correct Answer: B) They enable automatic schema generation for AI clients
 
 **Explanation:** Type hints are used by the MCP framework to automatically generate JSON schemas that describe the tool's parameters and return values to AI clients, enabling proper validation and usage.
 
 ---
 
 ### Question 6: Error Handling
-**What should MCP tools return when encountering invalid input?**  
+### What should MCP tools return when encountering invalid input?
 
 A) Raise an exception  
 B) Return None  
 C) Return structured error messages with helpful information ✅  
 D) Log the error silently  
-**Correct Answer: C) Return structured error messages with helpful information**
+### Correct Answer: C) Return structured error messages with helpful information
 
 **Explanation:** MCP tools should return structured error messages with helpful information rather than raising exceptions, which provides better error handling for clients.
 
 ---
 
 ### Question 7: Resources vs Tools
-**How do MCP resources differ from tools?**  
+### How do MCP resources differ from tools?
 
 A) Resources are executable functions, tools are data sources  
 B) Resources provide read-only data access, tools are executable functions ✅  
 C) Resources are faster than tools  
 D) Resources require authentication, tools do not  
-**Correct Answer: B) Resources provide read-only data access, tools are executable functions**
+### Correct Answer: B) Resources provide read-only data access, tools are executable functions
 
 **Explanation:** Resources are read-only data endpoints that provide information (like file contents or database records), while tools are executable functions that can perform actions or computations.
 
 ---
 
 ### Question 8: MCP Inspector Command
-**What command is used to launch MCP Inspector?**  
+### What command is used to launch MCP Inspector?
 
 A) `mcp-inspector`  
 B) `npm start inspector`  
 C) `npx @modelcontextprotocol/inspector` ✅  
 D) `python -m mcp.inspector`  
-**Correct Answer: C) `npx @modelcontextprotocol/inspector`**
+### Correct Answer: C) `npx @modelcontextprotocol/inspector`
 
 **Explanation:** MCP Inspector can be launched using the `npx @modelcontextprotocol/inspector` command, which runs the inspector without requiring a global installation.
 
 ---
 
 ### Question 9: Industry Adoption
-**Which company reported 60% faster AI integration development using MCP?**  
+### Which company reported 60% faster AI integration development using MCP?
 
 A) Microsoft  
 B) Google  
 C) Block Inc. ✅  
 D) OpenAI  
-**Correct Answer: C) Block Inc.**
+### Correct Answer: C) Block Inc.
 
 **Explanation:** Block Inc. reported significant development speed improvements when using MCP for their AI integrations, demonstrating the protocol's real-world benefits in enterprise environments.
 
 ---
 
 ### Question 10: MCP Advantages
-**What is the main advantage of MCP over custom API integrations?**  
+### What is the main advantage of MCP over custom API integrations?
 
 A) Better performance  
 B) Standardized protocol with automatic schema validation ✅  
 C) Lower cost  
 D) Easier to learn  
-**Correct Answer: B) Standardized protocol with automatic schema validation**
+### Correct Answer: B) Standardized protocol with automatic schema validation
 
 **Explanation:** MCP provides a standardized protocol that includes automatic schema validation, discovery mechanisms, and consistent error handling, reducing the complexity of custom integrations.
 
@@ -252,22 +252,22 @@ Once you've mastered the basic solution, try these additional challenges:
 
 If you missed questions in these areas, review the corresponding sections:
 
-**MCP Architecture (Questions 1, 7, 10):**
+### MCP Architecture (Questions 1, 7, 10):
 - Review "MCP Server Capabilities" section
 - Focus on the difference between tools, resources, and prompts
 - Study the advantages of standardized protocols
 
-**Implementation Details (Questions 2, 5, 6):**
+### Implementation Details (Questions 2, 5, 6):
 - Review the FastMCP framework syntax
 - Focus on type hints and their importance
 - Study error handling best practices
 
-**Development Tools (Questions 3, 8):**
+### Development Tools (Questions 3, 8):
 - Review the MCP Inspector section
 - Practice using the inspector tool
 - Study debugging and validation workflows
 
-**Industry Context (Questions 4, 9):**
+### Industry Context (Questions 4, 9):
 - Review transport mechanisms
 - Study real-world adoption cases
 - Focus on enterprise benefits

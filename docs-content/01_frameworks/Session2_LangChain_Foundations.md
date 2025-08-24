@@ -11,23 +11,23 @@ By the end of this session, you will be able to:
 
 ## Chapter Overview: LangChain's 2025 Market Position
 
-**Industry Context & Market Leadership**
+### Industry Context & Market Leadership
 
 LangChain dominates the AI application framework space in 2025, powering 130K+ applications with 28 million monthly downloads and $25M Series A funding from Sequoia Capital. As the backbone of 60% of AI agent development workflows, LangChain processes millions of production requests across financial services, healthcare, and enterprise technology sectors.
 
-**Enterprise Adoption & Production Challenges**
+### Enterprise Adoption & Production Challenges
 
 99K GitHub stars and 250K+ LangSmith users demonstrate LangChain's market leadership, yet enterprise deployments reveal critical production challenges: 45.8% of teams cite performance quality concerns, while scalability limitations emerge in real-time and mission-critical workloads. Understanding these trade-offs enables strategic technology decisions.
 
-**What Students Will Master & Business Impact**
+### What Students Will Master & Business Impact
 
 You'll master LangChain's production-proven architecture: modular component systems, chain orchestration patterns, intelligent tool integration, and state management strategies. More critically, you'll understand when LangChain excels (rapid prototyping, MVP development, educational systems) versus when enterprise teams migrate to specialized alternatives.
 
-**Competitive Positioning vs 2025 Alternatives**
+### Competitive Positioning vs 2025 Alternatives
 
 LangChain pioneered modular AI development, establishing industry-standard concepts (chains, agents, memory) adopted across competing frameworks. While AutoGen provides structured multi-agent communication and CrewAI offers lean role-based workflows, LangChain's 600+ integrations and mature production tooling (LangServe, LangSmith) maintain its leadership for comprehensive AI application development.
 
-**Production Applications & Strategic Considerations**
+### Production Applications & Strategic Considerations
 
 Enterprise customers including Microsoft, Boston Consulting Group, and Morningstar leverage LangChain for customer support (35-45% resolution rate improvements), financial analysis, and document processing. However, teams targeting enterprise-scale, real-time systems often transition to specialized solutions after prototype validation.
 
@@ -83,7 +83,7 @@ LangChain has four essential building blocks that work together:
 
 **Reference Implementation**: [`src/session2/langchain_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_basics.py)
 
-**LangChain Architecture Foundation - Production Setup**
+### LangChain Architecture Foundation - Production Setup
 
 Installation and environment configuration for production-ready development:
 
@@ -95,9 +95,9 @@ pip install langchain==0.1.0 openai==1.0.0
 export OPENAI_API_KEY="your-production-key"
 ```
 
-**Essential Imports - Modular Component System**
+### Essential Imports - Modular Component System
 
-**Essential Import Structure**
+### Essential Import Structure
 
 ```python
 
@@ -115,7 +115,7 @@ from langchain.callbacks import StdOutCallbackHandler
 
 **Implementer Path**: Understanding these abstractions enables architectural decisions about when to use LangChain's built-in components versus building custom implementations for enterprise requirements.
 
-**LangChain's Four-Pillar Architecture**
+### LangChain's Four-Pillar Architecture
 
 This modular design separates concerns for maintainable production systems:
 
@@ -132,7 +132,7 @@ Quick LLM initialization for different providers:
 
 **Reference Implementation**: [`src/session2/llm_setup.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/llm_setup.py)
 
-**LLM Factory Pattern - Production Configuration**
+### LLM Factory Pattern - Production Configuration
 
 ```python
 def create_llm(provider="openai"):
@@ -181,7 +181,7 @@ Input → Agent → Tool Selection → LLM Reasoning → Output
 
 Basic chain for sequential processing:
 
-**LLMChain - Fundamental Building Block**
+### LLMChain - Fundamental Building Block
 
 ```python
 from langchain.chains import LLMChain
@@ -212,7 +212,7 @@ print(f"Analysis: {result}")
 
 Connecting multiple chains for complex workflows:
 
-**Sequential Chain - Pipeline Processing**
+### Sequential Chain - Pipeline Processing
 
 ```python
 from langchain.chains import SequentialChain
@@ -343,7 +343,7 @@ Three methods for creating tools:
 
 **Reference Implementation**: [`src/session2/langchain_tools.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_tools.py)
 
-**Observer Path - What Are Tools?**
+### Observer Path - What Are Tools?
 
 Tools give AI agents "superpowers" beyond just text:
 - Calculator tool: AI can do math
@@ -351,14 +351,14 @@ Tools give AI agents "superpowers" beyond just text:
 - Database tool: AI can look up information
 - Web search tool: AI can find recent information
 
-**Three Ways to Create Tools**:
+### Three Ways to Create Tools
 1. **Tool class**: Most control, more code
 2. **@tool decorator**: Clean and simple
 3. **Function wrapper**: Quickest for testing
 
 **Security Advisory**: Never use `eval()` in production - use secure math parsers like `sympy`.
 
-**Participant Path - Create Simple Tools**
+### Participant Path - Create Simple Tools
 
 ```python
 from langchain.agents import Tool
@@ -418,7 +418,7 @@ search_tool = Tool(
 
 #### Agent Initialization (7 minutes)
 
-**Observer Path - How Agents Work**
+### Observer Path - How Agents Work
 
 Agents follow the **ReAct pattern** (Reasoning + Acting):
 1. **Think**: "User wants weather AND math - I need 2 tools"
@@ -427,7 +427,7 @@ Agents follow the **ReAct pattern** (Reasoning + Acting):
 4. **Act**: Use calculator tool for "15 * 24"
 5. **Think**: "Now I'll combine both results into a nice response"
 
-**Participant Path - Agent Types**
+### Participant Path - Agent Types
 
 `CHAT_CONVERSATIONAL_REACT_DESCRIPTION` = Long name for:
 - Uses chat models (like GPT-4)
@@ -435,7 +435,7 @@ Agents follow the **ReAct pattern** (Reasoning + Acting):
 - Follows ReAct thinking pattern
 - Can use multiple tools intelligently
 
-**Build Your First Agent**
+### Build Your First Agent
 
 ```python
 from langchain.agents import initialize_agent, AgentType
@@ -472,7 +472,7 @@ agent = initialize_agent(
 
 #### Tool Calling Patterns (5 minutes)
 
-**See Your Agent Think and Act**
+### See Your Agent Think and Act
 
 ```python
 
@@ -505,7 +505,7 @@ Final Answer: The weather in New York is sunny and 72°F. 15 times 24 equals 360
 
 #### Basic Error Recovery (5 minutes)
 
-**Observer Path - Why Things Fail**
+### Observer Path - Why Things Fail
 
 Tools fail for common reasons:
 - Weather API is down
@@ -513,7 +513,7 @@ Tools fail for common reasons:
 - Network timeout
 - Rate limits exceeded
 
-**Participant Path - Graceful Error Handling**
+### Participant Path - Graceful Error Handling
 
 ```python
 def safe_agent_run(agent, user_question, backup_message=None):
@@ -551,18 +551,18 @@ result = safe_agent_run(
 
 #### Memory Types (5 minutes)
 
-**Observer Path - Memory Types Explained**
+### Observer Path - Memory Types Explained
 
 **Buffer Memory** = Keep everything (like a complete transcript)
 **Summary Memory** = Summarize old parts (like meeting minutes)
 **Window Memory** = Keep only recent messages (like short-term memory)
 
-**When to use which?**
+### When to use which?
 - **Buffer**: Short conversations, need exact history
 - **Summary**: Long conversations, want context but not details  
 - **Window**: Fixed memory size, only care about recent context
 
-**Participant Path - Configure Memory Types**
+### Participant Path - Configure Memory Types
 
 ```python
 from langchain.memory import (
@@ -597,11 +597,11 @@ recent_memory = ConversationBufferWindowMemory(
 
 #### State Persistence (5 minutes)
 
-**Observer Path - Why Save Memory?**
+### Observer Path - Why Save Memory?
 
 Imagine talking to a customer service agent who forgets everything each time you call. Saving memory lets your agent remember previous conversations.
 
-**Participant Path - Simple Persistence**
+### Participant Path - Simple Persistence
 
 ```python
 import json
@@ -642,14 +642,14 @@ load_conversation(memory, "customer_chat.json")
 
 #### Context Management (5 minutes)
 
-**Observer Path - Context = Personality + Knowledge**
+### Observer Path - Context = Personality + Knowledge
 
 Context gives your agent:
 - **Role**: "You're a medical assistant" vs "You're a coding tutor"
 - **Knowledge**: "You know about our company's products"
 - **Style**: "Be friendly and casual" vs "Be formal and professional"
 
-**Participant Path - Create Specialized Agents**
+### Participant Path - Create Specialized Agents
 
 ```python
 def create_specialized_agent(role_description, tools_list):
@@ -709,12 +709,12 @@ code_agent = create_specialized_agent(
 
 ### Professional Implementation Exercise
 
-**Exercise Files**:
+### Exercise Files
 
 - [`src/session2/langchain_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_basics.py) - Foundation patterns
 - [`src/session2/langchain_tool_use.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_tool_use.py) - Agent implementation
 
-**Validation Commands**:
+### Validation Commands
 ```bash
 cd src/session2
 python langchain_basics.py        # Architecture validation
@@ -805,7 +805,7 @@ D) REACT_DOCSTORE
 
 **Previous:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
 
-**Advanced Modules:**
+### Advanced Modules:
 - **[Module A: Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md)** - Complex workflows & optimization
 - **[Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)** - Enterprise deployment & monitoring
 - **[Module C: Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md)** - Building specialized tools

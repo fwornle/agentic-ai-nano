@@ -44,7 +44,7 @@ Secure MCP implementations are critical for:
 - **Enterprise SaaS**: Multi-tenant AI platforms with strict data isolation requirements
 
 ![MCP Security Architecture](images/mcp-security-architecture.png)
-*Figure 1: Enterprise MCP security architecture showing OAuth 2.1 authentication, Resource Indicators, rate limiting, and comprehensive monitoring layers working together to create a defense-in-depth security posture*
+### Figure 1: Enterprise MCP security architecture showing OAuth 2.1 authentication, Resource Indicators, rate limiting, and comprehensive monitoring layers working together to create a defense-in-depth security posture
 
 ### Learning Path Options
 
@@ -68,7 +68,7 @@ Secure MCP implementations are critical for:
 
 Based on security research and vulnerability disclosures, MCP faces sophisticated threats that require enterprise-grade countermeasures:
 
-**Critical Threat Vectors:**
+### Critical Threat Vectors:
 1. **Token Misuse Across Resources**: Malicious servers using stolen tokens to access unintended resources
 2. **Authorization Code Interception**: Man-in-the-middle attacks against OAuth flows without PKCE
 3. **Unintended LLM Actions**: AI models performing destructive operations without explicit user intent  
@@ -76,12 +76,12 @@ Based on security research and vulnerability disclosures, MCP faces sophisticate
 5. **Distributed Rate Limit Bypass**: Coordinated attacks from multiple IP addresses
 6. **Data Exfiltration**: Malicious extraction of sensitive data through seemingly legitimate tool calls
 
-**Industry Security Assessment:**
+### Industry Security Assessment:
 Security researchers have identified MCP as having "serious security problems" with every integration being "a potential backdoor" until proper controls are implemented. This has driven the rapid evolution of security standards in 2025.
 
 ### **OBSERVER PATH**: Understanding Modern MCP Security
 
-**Key Security Evolution (2024-2025):**
+### Key Security Evolution (2024-2025):
 
 1. **OAuth 2.1 with PKCE Mandate**: March 2025 specification requires PKCE for all clients, preventing authorization code attacks
 2. **Resource Indicators (RFC 8707)**: Tokens explicitly scoped to specific MCP servers prevent cross-resource abuse
@@ -90,7 +90,7 @@ Security researchers have identified MCP as having "serious security problems" w
 
 ### **PARTICIPANT PATH**: Implementing OAuth 2.1 with PKCE
 
-**Step 1: Modern OAuth 2.1 Implementation**
+### Step 1: Modern OAuth 2.1 Implementation
 
 Implement the 2025 MCP security standard with OAuth 2.1 and PKCE:
 
@@ -121,7 +121,7 @@ logger = structlog.get_logger()
 - `rfc7636`: PKCE (Proof Key for Code Exchange) implementation
 - `rfc8707`: Resource Indicators for token scoping
 
-**Step 2: PKCE Code Challenge Generation**
+### Step 2: PKCE Code Challenge Generation
 
 Implement secure PKCE challenge generation following RFC 7636:
 
@@ -159,12 +159,12 @@ class PKCEGenerator:
         return challenge, "S256"
 ```
 
-**PKCE Security Benefits:**
+### PKCE Security Benefits:
 - **Authorization Code Protection**: Prevents interception attacks
 - **Public Client Security**: Secure OAuth for mobile and SPA clients
 - **Cryptographic Proof**: Mathematical verification of client authenticity  
 
-**Step 3: Resource Indicators Implementation**
+### Step 3: Resource Indicators Implementation
 
 Implement RFC 8707 Resource Indicators to prevent token misuse:
 
@@ -243,13 +243,13 @@ class ResourceIndicatorManager:
         return token
 ```
 
-**Resource Indicator Security Benefits:**
+### Resource Indicator Security Benefits:
 - **Token Scoping**: Mathematically prevents cross-resource token usage
 - **Audience Validation**: Explicit resource targeting in JWT audience claim
 - **Scope Limitation**: Granular permission control per resource
 - **Audit Trail**: Complete tracking of token creation and usage
 
-**Step 4: Enhanced JWT Management with Security Controls**
+### Step 4: Enhanced JWT Management with Security Controls
 
 ```python
 class JWTManager:
@@ -267,13 +267,13 @@ class JWTManager:
         self._validate_secret_key()
 ```
 
-**Security design principles:**
+### Security design principles:
 
 - **Environment variables** prevent secrets in code  
 - **Short access tokens** (30 min) limit exposure window  
 - **Separate refresh tokens** (7 days) balance security and usability  
 
-**Step 1.1.3: Secret Key Validation**
+### Step 1.1.3: Secret Key Validation
 
 ```python
     def _validate_secret_key(self):
@@ -287,13 +287,13 @@ class JWTManager:
         logger.info("JWT Manager initialized with secure secret key")
 ```
 
-**Security considerations:**
+### Security considerations:
 
 - Secret key must be at least 32 characters for cryptographic security  
 - Environment variables keep secrets out of code  
 - Automatic secret generation for development environments  
 
-**Step 1.1.2: Secure Secret Generation**
+### Step 1.1.2: Secure Secret Generation
 
 ```python
     def _generate_secret(self) -> str:
@@ -301,13 +301,13 @@ class JWTManager:
         return secrets.token_urlsafe(64)
 ```
 
-**Why this matters:**
+### Why this matters:
 
 - `secrets.token_urlsafe()` uses cryptographically secure random generation  
 - 64-byte keys provide 512 bits of entropy  
 - URL-safe encoding prevents encoding issues  
 
-**Step 1.1.4: Access Token Payload Creation**
+### Step 1.1.4: Access Token Payload Creation
 
 Access tokens contain user identity and permissions for authorization:
 
@@ -328,13 +328,13 @@ Access tokens contain user identity and permissions for authorization:
         }
 ```
 
-**Access token security:**
+### Access token security:
 
 - **Short expiration** (30 minutes) limits damage from token theft  
 - **Comprehensive claims** enable fine-grained authorization  
 - **Type field** prevents token confusion attacks  
 
-**Step 1.1.5: Refresh Token Design**
+### Step 1.1.5: Refresh Token Design
 
 Refresh tokens use minimal claims to reduce information leakage:
 
@@ -348,13 +348,13 @@ Refresh tokens use minimal claims to reduce information leakage:
         }
 ```
 
-**Refresh token principles:**
+### Refresh token principles:
 
 - **Minimal data** reduces exposure risk if compromised  
 - **Longer lifespan** (7 days) for user convenience  
 - **Single purpose** - only for generating new access tokens  
 
-**Step 1.1.6: Token Generation and Response**
+### Step 1.1.6: Token Generation and Response
 
 ```python
         # Generate JWT tokens using secure algorithm
@@ -370,13 +370,13 @@ Refresh tokens use minimal claims to reduce information leakage:
         }
 ```
 
-**Token generation security:**
+### Token generation security:
 
 - **HS256 algorithm** provides strong cryptographic signatures  
 - **Standard OAuth 2.0 response** ensures client compatibility  
 - **Expires_in field** helps clients manage token lifecycle  
 
-**Step 1.1.7: Token Verification Process**
+### Step 1.1.7: Token Verification Process
 
 Token verification follows a multi-step security validation process:
 
@@ -398,7 +398,7 @@ Token verification follows a multi-step security validation process:
             return payload
 ```
 
-**Step 1.1.8: Error Handling for Token Verification**
+### Step 1.1.8: Error Handling for Token Verification
 
 ```python
         except jwt.ExpiredSignatureError:
@@ -410,13 +410,13 @@ Token verification follows a multi-step security validation process:
             raise HTTPException(status_code=401, detail="Authentication failed")
 ```
 
-**Verification security:**
+### Verification security:
 
 - **Blacklist check first** prevents using revoked tokens  
 - **Cryptographic validation** ensures token integrity  
 - **Type validation** prevents refresh tokens being used as access tokens  
 
-**Step 1.1.9: Blacklist Checking for Revoked Tokens**
+### Step 1.1.9: Blacklist Checking for Revoked Tokens
 
 Token blacklisting enables secure logout and revocation:
 
@@ -436,13 +436,13 @@ Token blacklisting enables secure logout and revocation:
             return False
 ```
 
-**Blacklist security:**
+### Blacklist security:
 
 - **Token hashing** prevents storing full tokens in Redis  
 - **Graceful degradation** when Redis is unavailable  
 - **Secure failure mode** allows access if blacklist check fails  
 
-**Step 1.1.10: Token Revocation Implementation**
+### Step 1.1.10: Token Revocation Implementation
 
 ```python
     def blacklist_token(self, token: str, ttl_seconds: int = None):
@@ -465,7 +465,7 @@ Token blacklisting enables secure logout and revocation:
             logger.error(f"Failed to blacklist token: {e}")
 ```
 
-**Step 1.1.11: TTL Calculation Helper**
+### Step 1.1.11: TTL Calculation Helper
 
 ```python
     def _calculate_token_ttl(self, token: str) -> int:
@@ -489,7 +489,7 @@ Token blacklisting enables secure logout and revocation:
 
 Now let's implement a flexible authorization system:
 
-**Step 1.2.1: Permission Enumeration Design**
+### Step 1.2.1: Permission Enumeration Design
 
 Permissions define specific actions users can perform:
 
@@ -516,13 +516,13 @@ class Permission(Enum):
     VIEW_METRICS = "metrics:view"
 ```
 
-**Permission design principles:**
+### Permission design principles:
 
 - **Namespace format** (resource:action) for clear organization  
 - **Granular permissions** enable precise access control  
 - **Enum-based** prevents typos and enables IDE autocomplete  
 
-**Step 1.2.2: Role Hierarchy Definition**
+### Step 1.2.2: Role Hierarchy Definition
 
 Roles group permissions into logical user categories:
 
@@ -535,7 +535,7 @@ class Role(Enum):
     ADMIN = "admin"        # Full system access
 ```
 
-**Step 1.2.3: Role-Permission Mapping**
+### Step 1.2.3: Role-Permission Mapping
 
 ```python
 
@@ -559,13 +559,13 @@ ROLE_PERMISSIONS: Dict[Role, Set[Permission]] = {
 }
 ```
 
-**Role hierarchy benefits:**
+### Role hierarchy benefits:
 
 - **Progressive permissions** from guest to admin  
 - **Clear separation** of capabilities  
 - **Easy to audit** and understand access levels  
 
-**Step 1.2.4: Permission Validation Helper**
+### Step 1.2.4: Permission Validation Helper
 
 ```python
 def has_permission(user_permissions: List[str], required_permission: Permission) -> bool:
@@ -584,7 +584,7 @@ def get_user_permissions(user_roles: List[str]) -> Set[Permission]:
     return permissions
 ```
 
-**Step 1.2.5: Permission Checking Decorator**
+### Step 1.2.5: Permission Checking Decorator
 
 ```python
 def require_permission(required_permission: Permission):
@@ -619,7 +619,7 @@ The decorator continues with error handling and security logging:
     return decorator
 ```
 
-**Authorization security:**
+### Authorization security:
 
 - **Fail-secure design** denies access by default  
 - **Audit logging** tracks permission violations  
@@ -629,7 +629,7 @@ The decorator continues with error handling and security logging:
 
 Let's integrate our authentication system with the MCP server:
 
-**Step 1.3.1: Middleware Class Setup**
+### Step 1.3.1: Middleware Class Setup
 
 Authentication middleware intercepts all MCP requests for security validation:
 
@@ -654,7 +654,7 @@ class MCPAuthMiddleware:
         self.excluded_paths = {"/health", "/metrics"}  # Skip auth for monitoring
 ```
 
-**Step 1.3.2: Header Extraction and Validation**
+### Step 1.3.2: Header Extraction and Validation
 
 ```python
     def _extract_bearer_token(self, request: Request) -> str:
@@ -688,7 +688,7 @@ Now we extract and validate the token format:
         return parts[1]
 ```
 
-**Step 1.3.3: Request Authentication Process**
+### Step 1.3.3: Request Authentication Process
 
 ```python
     async def authenticate_request(self, request: Request) -> Optional[Dict[str, Any]]:
@@ -720,7 +720,7 @@ The authentication continues with performance logging and success tracking:
             return payload
 ```
 
-**Step 1.3.4: Error Handling and Security Logging**
+### Step 1.3.4: Error Handling and Security Logging
 
 ```python
         except HTTPException:
@@ -738,14 +738,14 @@ The authentication continues with performance logging and success tracking:
             )
 ```
 
-**Middleware security features:**
+### Middleware security features:
 
 - **Path exclusions** for health checks and monitoring  
 - **Comprehensive error handling** with security logging  
 - **Performance monitoring** tracks authentication latency  
 - **IP and user agent logging** for security analysis  
 
-**Step 1.3.5: Server Class and Dependencies**
+### Step 1.3.5: Server Class and Dependencies
 
 ```python
 
@@ -778,7 +778,7 @@ class SecureMCPServer:
         self.setup_security_tools()
 ```
 
-**Step 1.3.6: Basic Security Tools**
+### Step 1.3.6: Basic Security Tools
 
 ```python
     def setup_security_tools(self):
@@ -801,7 +801,7 @@ class SecureMCPServer:
             }
 ```
 
-**Step 1.3.7: File Operations with Security**
+### Step 1.3.7: File Operations with Security
 
 ```python
         @self.mcp.tool()
@@ -819,7 +819,7 @@ class SecureMCPServer:
             return {"success": True, "path": path, "size": len(content)}
 ```
 
-**Step 1.3.8: Administrative Functions**
+### Step 1.3.8: Administrative Functions
 
 ```python
         @self.mcp.tool()
@@ -837,7 +837,7 @@ class SecureMCPServer:
         return any(re.match(pattern, path) for pattern in self.allowed_file_patterns)
 ```
 
-**Security integration benefits:**
+### Security integration benefits:
 
 - **Permission decorators** provide declarative access control  
 - **Input validation** prevents injection attacks  
@@ -854,7 +854,7 @@ class SecureMCPServer:
 
 In addition to JWT tokens, we'll implement API keys for machine-to-machine authentication:
 
-**Step 2.1.1: API Key Manager Setup**
+### Step 2.1.1: API Key Manager Setup
 
 API keys provide secure authentication for automated systems:
 
@@ -882,7 +882,7 @@ class APIKeyManager:
         self.key_length = 32  # 32 bytes = 256 bits of entropy
 ```
 
-**Step 2.1.2: Secure Key Generation**
+### Step 2.1.2: Secure Key Generation
 
 ```python
     def _generate_secure_key(self) -> tuple[str, str]:
@@ -897,13 +897,13 @@ class APIKeyManager:
         return hashlib.sha256(api_key.encode()).hexdigest()
 ```
 
-**API key security:**
+### API key security:
 
 - **UUID key IDs** provide collision-free identifiers  
 - **URL-safe encoding** prevents issues in HTTP headers  
 - **SHA256 hashing** protects stored keys from database breaches  
 
-**Step 2.1.3: Metadata Creation**
+### Step 2.1.3: Metadata Creation
 
 ```python
     def _create_key_metadata(self, key_id: str, user_id: str, name: str, 
@@ -924,7 +924,7 @@ class APIKeyManager:
         }
 ```
 
-**Step 2.1.4: Complete Key Generation**
+### Step 2.1.4: Complete Key Generation
 
 ```python
     def generate_api_key(self, user_id: str, name: str, permissions: List[str], 
@@ -960,7 +960,7 @@ Next, we create and store the key metadata securely:
         }
 ```
 
-**Step 2.1.5: Secure Storage Helper**
+### Step 2.1.5: Secure Storage Helper
 
 ```python
     def _store_key_metadata(self, key_hash: str, metadata: Dict, expiry_days: int):
@@ -977,14 +977,14 @@ Next, we create and store the key metadata securely:
             raise RuntimeError("Could not store API key")
 ```
 
-**API key generation security:**
+### API key generation security:
 
 - **Automatic expiration** reduces long-term exposure risk  
 - **Secure random generation** prevents key prediction  
 - **Metadata tracking** enables usage monitoring and auditing  
 - **Error handling** prevents partial key creation  
 
-**Step 2.1.6: Initial Key Validation**
+### Step 2.1.6: Initial Key Validation
 
 API key validation follows a multi-step security process:
 
@@ -1017,7 +1017,7 @@ Finally, we check the key status and update usage tracking:
             return None
 ```
 
-**Step 2.1.7: Format and Prefix Validation**
+### Step 2.1.7: Format and Prefix Validation
 
 ```python
     def _is_valid_key_format(self, api_key: str) -> bool:
@@ -1038,7 +1038,7 @@ Finally, we check the key status and update usage tracking:
         return True
 ```
 
-**Step 2.1.8: Metadata Retrieval**
+### Step 2.1.8: Metadata Retrieval
 
 ```python
     def _get_key_metadata(self, api_key: str) -> Optional[Dict]:
@@ -1062,7 +1062,7 @@ Finally, we check the key status and update usage tracking:
             return None
 ```
 
-**Step 2.1.9: Active Status Checking**
+### Step 2.1.9: Active Status Checking
 
 ```python
     def _is_key_active(self, metadata: Dict) -> bool:
@@ -1087,7 +1087,7 @@ Finally, we check the key status and update usage tracking:
         return True
 ```
 
-**Step 2.1.10: Usage Tracking Update**
+### Step 2.1.10: Usage Tracking Update
 
 ```python
     def _update_key_usage(self, api_key: str, metadata: Dict):
@@ -1122,7 +1122,7 @@ Usage tracking continues with fallback handling for expired TTL:
             logger.warning(f"Failed to update key usage statistics: {e}")
 ```
 
-**API key validation security:**
+### API key validation security:
 
 - **Multi-step validation** prevents bypassing security checks  
 - **Format validation** blocks malformed or malicious keys  
@@ -1138,7 +1138,7 @@ Usage tracking continues with fallback handling for expired TTL:
 
 ### Step 3.1: Implementing Rate Limiting
 
-**Step 3.1.1: Rate Limiter Class Setup**
+### Step 3.1.1: Rate Limiter Class Setup
 
 Token bucket algorithm provides smooth rate limiting with burst capability:
 
@@ -1166,13 +1166,13 @@ class TokenBucketRateLimiter:
         self.bucket_ttl = 3600  # 1 hour cleanup TTL
 ```
 
-**Token bucket principles:**
+### Token bucket principles:
 
 - **Capacity**: Maximum burst size allowed  
 - **Refill rate**: Steady-state requests per second  
 - **Distributed**: Redis enables rate limiting across multiple servers  
 
-**Step 3.1.2: Bucket State Retrieval**
+### Step 3.1.2: Bucket State Retrieval
 
 ```python
     def _get_bucket_state(self, bucket_key: str) -> tuple[float, float]:
@@ -1192,7 +1192,7 @@ class TokenBucketRateLimiter:
             return time.time(), float(self.default_capacity)
 ```
 
-**Step 3.1.3: Token Calculation Algorithm**
+### Step 3.1.3: Token Calculation Algorithm
 
 ```python
     def _calculate_tokens(self, last_refill: float, current_tokens: float, 
@@ -1210,7 +1210,7 @@ class TokenBucketRateLimiter:
         return new_tokens
 ```
 
-**Step 3.1.4: Request Authorization Check**
+### Step 3.1.4: Request Authorization Check
 
 ```python
     async def is_allowed(self, identifier: str, capacity: int = None, 
@@ -1252,7 +1252,7 @@ Now we determine if the request should be allowed and update bucket state:
             return allowed
 ```
 
-**Step 3.1.5: State Persistence**
+### Step 3.1.5: State Persistence
 
 ```python
     def _update_bucket_state(self, bucket_key: str, timestamp: float, tokens: float):
@@ -1277,14 +1277,14 @@ Now we determine if the request should be allowed and update bucket state:
             return True  # Fail open - availability over strict rate limiting
 ```
 
-**Rate limiting security:**
+### Rate limiting security:
 
 - **Fail-open design** maintains availability during Redis outages  
 - **TTL cleanup** prevents infinite bucket accumulation  
 - **Precise timing** ensures accurate rate calculations  
 - **Distributed consistency** works across multiple server instances  
 
-**Step 3.1.6: Middleware Class and Role-Based Limits**
+### Step 3.1.6: Middleware Class and Role-Based Limits
 
 Rate limiting middleware applies different limits based on user privileges:
 
@@ -1304,7 +1304,7 @@ class RateLimitMiddleware:
         }
 ```
 
-**Step 3.1.7: User Identification and Limit Selection**
+### Step 3.1.7: User Identification and Limit Selection
 
 ```python
     def _get_rate_limits(self, user_data: Dict) -> tuple[str, Dict]:
@@ -1323,7 +1323,7 @@ class RateLimitMiddleware:
         return identifier, limits
 ```
 
-**Step 3.1.8: Rate Limit Enforcement**
+### Step 3.1.8: Rate Limit Enforcement
 
 ```python
     async def check_rate_limit(self, request: Request, user_data: Dict) -> bool:
@@ -1355,7 +1355,7 @@ class RateLimitMiddleware:
         return True
 ```
 
-**Rate limiting middleware features:**
+### Rate limiting middleware features:
 
 - **Role-based limits** provide fair access based on user tier  
 - **Unique identifiers** prevent cross-user rate limit sharing  

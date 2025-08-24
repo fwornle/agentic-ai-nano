@@ -17,7 +17,7 @@ This session transforms RAG theory into working code. You'll build a complete, p
 
 ### Why it matters: Industry-Standard Tools and Frameworks
 
-**Your Implementation Stack (2024 Production Standards):**
+### Your Implementation Stack (2024 Production Standards):
 
 - **LangChain Framework**: The leading platform for building LLM applications, serving as the communication layer between your software and language models. LangChain provides building blocks for data management and RAG pipeline orchestration.
 
@@ -27,7 +27,7 @@ This session transforms RAG theory into working code. You'll build a complete, p
 
 ### How it stands out: 2024 Best Practices Integration
 
-**Modern RAG Implementation Features:**
+### Modern RAG Implementation Features:
 - **Context-Aware Chunking**: Advanced strategies that preserve semantic boundaries rather than arbitrary text splitting
 - **Hybrid Retrieval Systems**: Combining vector similarity with keyword matching for optimal recall
 - **Dynamic Optimization**: Adjustable chunk sizes and overlap strategies based on document types
@@ -35,14 +35,14 @@ This session transforms RAG theory into working code. You'll build a complete, p
 
 ### Where you'll apply it: Real-World Use Cases
 
-**Production RAG Applications:**
+### Production RAG Applications:
 - Document intelligence systems for large repositories
 - Customer support chatbots with dynamic knowledge updates
 - Legal research assistants with citation tracking
 - Technical documentation systems with version control
 
 ![RAG Architecture Overview](images/RAG-overview.png)
-*Figure 1: Production RAG architecture showing the complete pipeline from documents to intelligent responses*
+### Figure 1: Production RAG architecture showing the complete pipeline from documents to intelligent responses
 
 ### Learning Path Options
 
@@ -68,7 +68,7 @@ This session transforms RAG theory into working code. You'll build a complete, p
 
 Modern RAG systems must process diverse document formats, handle production-scale data volumes, and maintain performance under load. The toolchain you'll learn represents industry standards used by companies like Shopify for customer support and major hospital networks for clinical decision support.
 
-**Critical Design Principles:**
+### Critical Design Principles:
 - **Modularity**: Clean separation between components for maintainability
 - **Scalability**: Architecture that handles growing data and user volumes
 - **Observability**: Built-in monitoring and evaluation capabilities
@@ -93,7 +93,7 @@ numpy==1.24.3
 
 **Industry Context**: This dependency stack represents the current production standard. LangChain provides the orchestration framework, ChromaDB handles vector storage, and tiktoken ensures accurate token counting for LLM compatibility.
 
-**Project Structure Setup:**
+### Project Structure Setup:
 ```bash
 
 # Production-Ready Project Structure
@@ -104,7 +104,7 @@ mkdir data documents src tests config
 touch .env README.md requirements.txt
 ```
 
-**Configuration Management:**
+### Configuration Management:
 ```python
 
 # src/config.py - Production Configuration Pattern
@@ -132,7 +132,7 @@ class RAGConfig:
     LLM_MODEL = "gpt-3.5-turbo"
 ```
 
-**Code Explanation:**
+### Code Explanation:
 - **Line 6-7**: Environment variable loading for secure API key management
 - **Line 12-14**: Configurable chunking parameters based on 2024 research findings
 - **Line 16-18**: Persistent ChromaDB storage for production deployments
@@ -140,7 +140,7 @@ class RAGConfig:
 
 ### **PARTICIPANT PATH**: Environment Validation
 
-*Before proceeding, let's verify your setup works correctly:*
+### Before proceeding, let's verify your setup works correctly:
 
 ```python
 
@@ -185,7 +185,7 @@ if __name__ == "__main__":
 
 ### Building a Production Document Loader
 
-**Industry-Standard Architecture:**
+### Industry-Standard Architecture:
 
 The document loader must handle multiple formats, provide error resilience, and maintain metadata for source attribution - critical for applications in healthcare and legal services where source tracking is mandatory.
 
@@ -241,7 +241,7 @@ class ProductionDocumentLoader:
             return []
 ```
 
-**Production Features**:
+### Production Features
 
 - **Statistics Tracking**: Essential for monitoring system health
 - **Rich Metadata**: Character count and timestamps enable performance analysis
@@ -295,7 +295,7 @@ class ProductionDocumentLoader:
         )]
 ```
 
-**Advanced Cleaning Features**:
+### Advanced Cleaning Features
 
 - **User-Agent Header**: Prevents blocking by web servers
 - **Comprehensive Element Removal**: Eliminates all non-content HTML elements
@@ -303,7 +303,7 @@ class ProductionDocumentLoader:
 
 ### **PARTICIPANT PATH**: Intelligent Batch Processing
 
-*Building on the basic loader, let's implement production-grade batch processing:*
+### Building on the basic loader, let's implement production-grade batch processing:
 
 ```python
     def load_batch_with_monitoring(self, sources: List[str]) -> List[Document]:
@@ -351,7 +351,7 @@ class ProductionDocumentLoader:
         return all_documents
 ```
 
-**Production Monitoring Features**:
+### Production Monitoring Features
 
 - **Success Rate Calculation**: Critical metric for system health monitoring
 - **Detailed Error Reporting**: Enables quick identification of problematic sources
@@ -399,7 +399,7 @@ class AdvancedTextSplitter:
         return len(self.encoding.encode(text))
 ```
 
-**Code Explanation**:
+### Code Explanation
 
 - **Line 9-10**: Configurable chunking parameters based on 2024 research
 - **Line 11**: Token encoder ensures compatibility with target LLM
@@ -443,7 +443,7 @@ class AdvancedTextSplitter:
         return split_docs
 ```
 
-**Why This Works**:
+### Why This Works
 
 - **Hierarchical Separators**: Preserves paragraph and sentence boundaries
 - **Token-Based Length**: Ensures compatibility with LLM context limits
@@ -500,7 +500,7 @@ class AdvancedTextSplitter:
 
 ### **PARTICIPANT PATH**: Hybrid Chunking Strategy
 
-*Combining the best of both approaches for optimal performance:*
+### Combining the best of both approaches for optimal performance:
 
 ```python
     def hybrid_chunk(self, documents: List[Document]) -> List[Document]:
@@ -538,7 +538,7 @@ class AdvancedTextSplitter:
         )
 ```
 
-**Hybrid Strategy Benefits**:
+### Hybrid Strategy Benefits
 
 - **Adaptive Processing**: Chooses optimal method per document type
 - **Quality Validation**: Ensures chunks meet effectiveness standards
@@ -587,7 +587,7 @@ class ProductionVectorStore:
         self._initialize_store()
 ```
 
-**Production Features**:
+### Production Features
 
 - **Operation Statistics**: Track system usage for monitoring
 - **Configuration Management**: Centralized settings for maintainability
@@ -621,7 +621,7 @@ class ProductionVectorStore:
             print("New vector store initialized")
 ```
 
-**Why This Initialization Works**:
+### Why This Initialization Works
 
 - **Graceful Fallback**: Handles both new and existing databases
 - **Collection Validation**: Confirms database integrity on startup
@@ -675,7 +675,7 @@ class ProductionVectorStore:
         return results
 ```
 
-**Production Optimizations**:
+### Production Optimizations
 
 - **Batch Processing**: Reduces memory usage and improves performance
 - **Error Isolation**: Single batch failures don't stop entire operation
@@ -733,7 +733,7 @@ class ProductionVectorStore:
 
 ### **PARTICIPANT PATH**: Production Search Optimization
 
-*Advanced search patterns for enterprise RAG systems:*
+### Advanced search patterns for enterprise RAG systems:
 
 ```python
     def hybrid_search(self, query: str, alpha: float = 0.7) -> List[Dict]:
@@ -789,7 +789,7 @@ class ProductionVectorStore:
         } for result in sorted_results]
 ```
 
-**Hybrid Search Benefits**:
+### Hybrid Search Benefits
 
 - **Improved Recall**: Catches relevant documents missed by vector search alone
 - **Robustness**: Reduces dependency on embedding quality
@@ -803,7 +803,7 @@ class ProductionVectorStore:
 
 **The Integration Challenge**: Combining document loading, chunking, vector storage, and generation into a cohesive system that handles real-world complexity while maintaining performance and reliability.
 
-**Enterprise Requirements**:
+### Enterprise Requirements
 
 - **Error Resilience**: System continues operating despite component failures
 - **Performance Monitoring**: Real-time metrics for system health
@@ -844,7 +844,7 @@ class ProductionRAGSystem:
         self.query_stats = {'total_queries': 0, 'avg_response_time': 0, 'errors': 0}
 ```
 
-**Production Configuration Choices**:
+### Production Configuration Choices
 
 - **Low Temperature**: Ensures consistent, reliable responses
 - **Request Timeout**: Prevents hanging requests in production
@@ -881,7 +881,7 @@ Response:"""
         )
 ```
 
-**Prompt Engineering Best Practices**:
+### Prompt Engineering Best Practices
 
 - **Clear Instructions**: Explicit guidance prevents unwanted behavior
 - **Source Attribution**: Essential for production transparency
@@ -921,7 +921,7 @@ Source {i} (Relevance: {similarity_score}, Source: {source}, Chunk: {chunk_info}
         return "\n".join(context_parts) + confidence_note
 ```
 
-**Context Enhancement Features**:
+### Context Enhancement Features
 
 - **Source Attribution**: Full traceability for audit requirements
 - **Relevance Scoring**: Helps LLM weight information appropriately  
@@ -975,7 +975,7 @@ Source {i} (Relevance: {similarity_score}, Source: {source}, Chunk: {chunk_info}
             return self._create_error_response(f"Processing error: {str(e)}")
 ```
 
-**Production Pipeline Features**:
+### Production Pipeline Features
 
 - **Input Validation**: Prevents processing of invalid queries
 - **Quality Thresholds**: Filters low-relevance results
@@ -984,7 +984,7 @@ Source {i} (Relevance: {similarity_score}, Source: {source}, Chunk: {chunk_info}
 
 ### **PARTICIPANT PATH**: Advanced Response Processing
 
-*Building sophisticated response handling for production systems:*
+### Building sophisticated response handling for production systems:
 
 ```python
     def _create_success_response(self, question: str, response: str, 
@@ -1038,7 +1038,7 @@ Source {i} (Relevance: {similarity_score}, Source: {source}, Chunk: {chunk_info}
         return round(max(0.0, min(1.0, quality_score)), 3)
 ```
 
-**Quality Assessment Features**:
+### Quality Assessment Features
 
 - **Length Validation**: Ensures substantial responses
 - **Source Utilization**: Measures how well context is used
@@ -1101,7 +1101,7 @@ class ProductionRAGInterface:
 
 ### **PARTICIPANT PATH**: Advanced Chat Interface
 
-*Production-grade chat interface with session management and monitoring:*
+### Production-grade chat interface with session management and monitoring:
 
 ```python
     def start_enhanced_chat(self):
@@ -1369,7 +1369,7 @@ class RAGEvaluationFramework:
 
 ### **PARTICIPANT PATH**: Production Testing Suite
 
-*Complete testing framework for production deployment:*
+### Complete testing framework for production deployment:
 
 ```python
 def create_evaluation_test_cases() -> List[Dict]:
@@ -1448,7 +1448,7 @@ if __name__ == "__main__":
     results = run_production_evaluation()
 ```
 
-**Production Testing Benefits**:
+### Production Testing Benefits
 
 - **Comprehensive Coverage**: Tests all system aspects
 - **Automated Evaluation**: Consistent, repeatable testing
@@ -1479,13 +1479,13 @@ if __name__ == "__main__":
 
 ### Implementation Requirements
 
-**Core Features:**
+### Core Features:
 1. **Custom Chunking Strategy**: Optimize for your domain's document structure
 2. **Specialized Prompts**: Design prompts that understand domain terminology
 3. **Quality Metrics**: Implement domain-specific evaluation criteria
 4. **Production Monitoring**: Add logging and performance tracking
 
-**Advanced Features (Optional):**
+### Advanced Features (Optional):
 - **Hybrid Search**: Combine vector and keyword search
 - **Source Validation**: Verify source credibility and recency
 - **User Feedback Loop**: Collect and analyze user satisfaction
@@ -1525,7 +1525,7 @@ class DomainSpecificRAG(ProductionRAGSystem):
         pass
 ```
 
-**Success Criteria:**
+### Success Criteria:
 - System handles 10+ documents from your chosen domain
 - Achieves >80% retrieval precision on test queries
 - Response time <3 seconds for typical queries
@@ -1537,7 +1537,7 @@ class DomainSpecificRAG(ProductionRAGSystem):
 
 ### What You've Built
 
-**Production RAG System Components:**
+### Production RAG System Components:
 - ✅ Advanced document loader with web scraping and error handling
 - ✅ Intelligent chunking with semantic boundary awareness
 - ✅ Production ChromaDB integration with batch processing
@@ -1564,13 +1564,13 @@ class DomainSpecificRAG(ProductionRAGSystem):
 
 ### Production Optimization Guidelines
 
-**Performance Tuning:**
+### Performance Tuning:
 - **Chunk Size**: 500-1500 tokens optimal range based on 2024 research
 - **Overlap Strategy**: 10-20% overlap for context continuity
 - **Batch Size**: 100-document batches for optimal indexing performance
 - **Quality Thresholds**: 0.6+ similarity scores for production systems
 
-**Scalability Considerations:**
+### Scalability Considerations:
 - **Database Persistence**: ChromaDB for production durability
 - **Error Isolation**: Batch processing prevents cascading failures  
 - **Monitoring Integration**: Built-in metrics for production observability

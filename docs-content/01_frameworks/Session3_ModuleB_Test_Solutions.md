@@ -3,7 +3,7 @@
 ## Enterprise State Management - Answer Key
 
 ### Question 1: State Persistence Strategy
-**Correct Answer: c) PostgresSaver with primary and backup clusters**
+### Correct Answer: c) PostgresSaver with primary and backup clusters
 
 **Explanation**: The production environment configuration uses PostgreSQL with cluster redundancy:
 ```python
@@ -22,7 +22,7 @@ if self.environment == "production":
 PostgreSQL provides ACID compliance, enterprise-grade reliability, and backup cluster support for high availability production deployments.
 
 ### Question 2: Health Monitoring
-**Correct Answer: b) Error rate > 30%, integrity issues, or execution > 30 minutes**
+### Correct Answer: b) Error rate > 30%, integrity issues, or execution > 30 minutes
 
 **Explanation**: The automatic recovery system triggers on multiple conditions:
 ```python
@@ -40,7 +40,7 @@ if execution_duration > 1800:                   # 30 minutes (1800 seconds)
 This multi-factor approach ensures comprehensive system protection and proactive intervention.
 
 ### Question 3: Routing Decision Weights
-**Correct Answer: b) Quality (40%) + Performance (30%) + Error resistance (20%) + Resource efficiency (10%)**
+### Correct Answer: b) Quality (40%) + Performance (30%) + Error resistance (20%) + Resource efficiency (10%)
 
 **Explanation**: The high-quality path scoring algorithm uses weighted factors:
 ```python
@@ -55,7 +55,7 @@ high_quality_score = (
 This weighting prioritizes result quality while considering performance, reliability, and efficiency.
 
 ### Question 4: Business Constraints
-**Correct Answer: b) High-quality path +30%, escalation +20%, fallback -50%**
+### Correct Answer: b) High-quality path +30%, escalation +20%, fallback -50%
 
 **Explanation**: Critical priority tasks receive specific score adjustments:
 ```python
@@ -70,7 +70,7 @@ if context.business_priority == "critical":
 These adjustments ensure critical tasks receive premium processing with reduced fallback likelihood.
 
 ### Question 5: Quality Assessment
-**Correct Answer: b) Length (25%) + Keywords (35%) + Structure (25%) + Complexity (15%)**
+### Correct Answer: b) Length (25%) + Keywords (35%) + Structure (25%) + Complexity (15%)
 
 **Explanation**: The composite quality score combines multiple dimensions:
 ```python

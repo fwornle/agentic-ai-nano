@@ -4,7 +4,7 @@
 
 ### Question 1: Microservices Architecture
 
-**What is the primary benefit of microservices architecture for enterprise RAG systems?**  
+### What is the primary benefit of microservices architecture for enterprise RAG systems?
 A) Reduces development time  
 B) Enables independent scaling and deployment of components ✅  
 C) Simplifies codebase  
@@ -16,7 +16,7 @@ D) Reduces infrastructure costs
 
 ### Question 2: JWT Authentication
 
-**Why is JWT authentication important for enterprise RAG systems?**  
+### Why is JWT authentication important for enterprise RAG systems?
 A) It improves query performance  
 B) It provides stateless, secure authentication with role-based access ✅  
 C) It reduces memory usage  
@@ -28,7 +28,7 @@ D) It enables caching
 
 ### Question 3: Circuit Breaker Pattern
 
-**What is the purpose of circuit breaker pattern in high availability systems?**  
+### What is the purpose of circuit breaker pattern in high availability systems?
 A) To reduce costs  
 B) To prevent cascading failures by temporarily disabling failing services ✅  
 C) To improve accuracy  
@@ -40,7 +40,7 @@ D) To enable load balancing
 
 ### Question 4: Sensitive Data Handling
 
-**How should enterprise RAG systems handle sensitive data?**  
+### How should enterprise RAG systems handle sensitive data?
 A) Store in plain text for performance  
 B) Encrypt at rest and in transit, with audit logging ✅  
 C) Use only public data  
@@ -52,7 +52,7 @@ D) Store in separate databases only
 
 ### Question 5: Enterprise Monitoring
 
-**What metrics are most important for enterprise RAG monitoring?**  
+### What metrics are most important for enterprise RAG monitoring?
 A) Only response time  
 B) Response time, error rates, throughput, and business KPIs ✅  
 C) Only error counts  

@@ -7,7 +7,7 @@ A) Rolling updates with Kubernetes orchestration and canary deployment capabilit
 B) Single instance deployment  
 C) Manual server restart  
 D) Blue-green deployments with traffic switching  
-**Correct Answer: A) Rolling updates with Kubernetes orchestration and canary deployment capability**
+### Correct Answer: A) Rolling updates with Kubernetes orchestration and canary deployment capability
 
 
 **Explanation**: The enterprise system uses rolling updates with Kubernetes orchestration for zero-downtime deployments, combined with canary deployment capabilities that allow gradual traffic shifting and risk mitigation during updates.
@@ -16,7 +16,7 @@ D) Blue-green deployments with traffic switching
 A) First-available agent  
 B) Health-based routing with weighted distribution and canary traffic management ✅  
 C) Random distribution  
-**Correct Answer: B) Health-based routing with weighted distribution and canary traffic management**
+### Correct Answer: B) Health-based routing with weighted distribution and canary traffic management
 D) Round-robin only  
 **Explanation**: The load balancer implements intelligent traffic routing based on agent health status, supports weighted distribution for performance optimization, and provides canary traffic management for safe deployment rollouts.
 
@@ -24,7 +24,7 @@ D) Round-robin only
 A) Role-based access control, audit logging, and compliance policy enforcement ✅  
 B) No security controls  
 C) Basic authentication only  
-**Correct Answer: A) Role-based access control, audit logging, and compliance policy enforcement**
+### Correct Answer: A) Role-based access control, audit logging, and compliance policy enforcement
 D) Manual authorization  
 **Explanation**: The SecurityManager implements comprehensive enterprise security including role-based access control for granular permissions, audit logging for compliance tracking, and automated policy enforcement for security governance.
 
@@ -32,7 +32,7 @@ D) Manual authorization
 A) Manual monitoring  
 B) Basic logging only  
 C) Distributed tracing, structured logging, metrics collection, and SLO management ✅  
-**Correct Answer: C) Distributed tracing, structured logging, metrics collection, and SLO management**
+### Correct Answer: C) Distributed tracing, structured logging, metrics collection, and SLO management
 D) Error logs only  
 **Explanation**: The enterprise observability stack provides comprehensive monitoring with distributed tracing for request flow analysis, structured logging for searchable insights, metrics collection for performance tracking, and SLO management for service quality assurance.
 
@@ -40,7 +40,7 @@ D) Error logs only
 A) Manual scaling only  
 B) Fixed instance count  
 C) CPU and memory-based horizontal pod autoscaling with custom metrics ✅  
-**Correct Answer: C) CPU and memory-based horizontal pod autoscaling with custom metrics**
+### Correct Answer: C) CPU and memory-based horizontal pod autoscaling with custom metrics
 D) Manual load balancing  
 **Explanation**: The auto-scaling system responds to load changes through horizontal pod autoscaling based on CPU and memory utilization, enhanced with custom metrics for application-specific scaling decisions and optimal resource utilization.
 

@@ -48,7 +48,7 @@ python -c "from hybrid_search_engine import HybridSearchEngine; print('Advanced 
 
 HNSW (Hierarchical Navigable Small World) is a state-of-the-art approximate nearest neighbor search algorithm that builds a multi-layer graph structure. Unlike flat indices that search linearly through vectors, HNSW creates a hierarchical "highway system" where higher levels contain fewer, well-connected nodes that enable rapid navigation to relevant regions.
 
-**Why HNSW for RAG?**
+### Why HNSW for RAG?
 - **Logarithmic search complexity**: O(log n) average case performance
 - **High recall**: Maintains accuracy even with large datasets
 - **Memory efficiency**: Stores only necessary connections
@@ -83,7 +83,7 @@ class CustomHNSW:
         self.entry_point = None
 ```
 
-**Parameter Deep Dive:**
+### Parameter Deep Dive:
 - **`M` (Max Connections)**: Controls graph connectivity. Higher values (16-48) improve recall but increase memory usage and search time
 - **`ef_construction`**: Search depth during construction. Higher values (200-400) create better quality graphs but slower indexing
 - **`ml` (Level Multiplier)**: Controls level distribution. Default 1/ln(2) creates optimal skip-list-like structure
@@ -174,7 +174,7 @@ Finally, we establish the bidirectional links and update our entry point for opt
 
 Static index configurations work well for predictable workloads, but RAG systems face diverse, evolving query patterns. Dynamic optimization creates a feedback loop where the system learns from actual usage to self-improve.
 
-**The Adaptive Index Challenge:**
+### The Adaptive Index Challenge:
 - **Query Diversity**: Some users ask broad questions, others seek specific facts
 - **Temporal Patterns**: Usage patterns change over time and across user segments  
 - **Domain Shifts**: New content areas may require different retrieval strategies
@@ -192,7 +192,7 @@ class DynamicIndexOptimizer:
         self.optimization_history = []
 ```
 
-**Core Optimization Components:**
+### Core Optimization Components:
 - **Query Statistics**: Track patterns in vector norms, dimensional preferences, and query frequency
 - **Performance Metrics**: Monitor search latency, recall quality, and resource utilization
 - **Parameter History**: Remember what worked and what didn't for different query types
@@ -246,7 +246,7 @@ Let's dive into the analytical engine that powers these optimization decisions:
         return analysis
 ```
 
-**Query Pattern Analytics Explained:**
+### Query Pattern Analytics Explained:
 
 - **Average Query Norm**: Indicates if users are searching with long or short queries, affecting optimal similarity thresholds
 - **Query Diversity**: High diversity suggests need for broader search, low diversity enables focused optimization
@@ -290,7 +290,7 @@ This intelligent parameter adaptation transforms a static index into a learning 
 
 Generic vector databases optimize for similarity search, but RAG systems require a more nuanced approach. Retrieval for generation isn't just about finding similar content - it's about finding the **most useful** content for answering questions.
 
-**RAG-Specific Retrieval Challenges:**
+### RAG-Specific Retrieval Challenges:
 - **Semantic vs. Lexical**: Some queries need conceptual matches, others need exact terms
 - **Recency Sensitivity**: Fresh information often trumps perfect similarity
 - **Content Diversity**: Multiple perspectives on a topic improve generation quality
@@ -309,7 +309,7 @@ class RAGOptimizedIndex:
         self.temporal_index = {}
 ```
 
-**Multi-Index Architecture Benefits:**
+### Multi-Index Architecture Benefits:
 
 1. **Semantic Clusters**: Group conceptually related content for efficient topic-focused search
 2. **Keyword Index**: Enable precise term matching for technical queries and proper nouns  
@@ -342,7 +342,7 @@ Let's examine how documents are processed and stored across all three indexing d
             self.keyword_index[keyword].add(chunk_id)
 ```
 
-**Indexing Strategy Breakdown:**
+### Indexing Strategy Breakdown:
 
 - **Semantic Assignment**: Uses vector similarity to place content in topical clusters, reducing search space
 - **Keyword Extraction**: Identifies important terms for exact matching, crucial for technical content
@@ -382,14 +382,14 @@ Now let's examine the sophisticated search algorithm that orchestrates all three
         return final_results
 ```
 
-**Multi-Signal Fusion Explained:**
+### Multi-Signal Fusion Explained:
 
 1. **Semantic Foundation**: Vector similarity provides the baseline relevance ranking
 2. **Keyword Enhancement**: Exact term matches receive boosted scores, ensuring precision
 3. **Recency Integration**: Fresh content gets weighted advantage based on domain needs
 4. **Score Normalization**: All signals are combined using learned weights for optimal balance
 
-**Why This Approach Works:**
+### Why This Approach Works:
 - **Complementary Signals**: Each ranking factor captures different aspects of relevance
 - **Failure Tolerance**: If one signal fails (e.g., no keyword matches), others compensate
 - **Domain Adaptability**: Weights can be tuned for different content types and use cases
@@ -441,7 +441,7 @@ D) It's simpler to implement
 
 **Previous:** [Session 3 Core: Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)
 
-**Related Modules:**
+### Related Modules:
 - **[Core Session: Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)** - Foundation vector search concepts
 
 **Next:** [Session 4: Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
