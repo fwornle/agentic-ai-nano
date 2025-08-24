@@ -3,13 +3,13 @@
 <!-- BMW Corporate Network Content -->
 <div class="bmw-corporate-only" markdown="1">
 
-## BMW Gaia LLM API Configuration
+## BMW Gaia LLM API
 
-The [BMW Gaia LLM API](https://pages.atc-github.azure.cloud.bmw/Data-Transformation-AI/llm-api/getting_started/introduction/) is available automatically from the Coder AI nanodegree instances.
+The [BMW Gaia LLM API](https://pages.atc-github.azure.cloud.bmw/Data-Transformation-AI/llm-api/getting_started/introduction/) is available automatically from your Coder workspace.
 
-## Automatic Configuration
+### Quick Setup
 
-The following environment variables are automatically configured in your Coder workspace:
+Environment variables are pre-configured:
 
 ```bash
 $ env | grep OPENAI
@@ -17,124 +17,44 @@ OPENAI_BASE_URL=...
 OPENAI_API_KEY=...
 ```
 
-OpenAI-compatible tools and libraries work out of the box in this environment.
+### Testing Your Connection
 
-## Testing Your Connection
-
-To try it out you can run the [`llm`](https://llm.datasette.io/en/stable/index.html) command that is preinstalled:
+Test with the pre-installed `llm` command:
 
 ```bash
 llm -m "claude-sonnet-4" "How many r's in blueberry?"
-There are 2 r's in "blueberry".
+# Output: There are 2 r's in "blueberry".
 ```
 
-## Available Models
+### Available Models
 
-The BMW Gaia API provides access to multiple LLM models:
 - **Claude Sonnet 4**: High-quality reasoning and analysis
-- **GPT-4 variants**: OpenAI's latest models
-- **Other enterprise-approved models**: Additional models as they become available
+- **GPT-4 variants**: OpenAI's latest models  
+- **Other enterprise-approved models**: Additional models as available
 
-## Using in Your Code
-
-Since the environment variables are set, you can use OpenAI-compatible libraries directly:
+### Using in Code
 
 ```python
 from openai import OpenAI
 
-# Uses the pre-configured OPENAI_BASE_URL and OPENAI_API_KEY
+# Uses pre-configured environment variables
 client = OpenAI()
 
 response = client.chat.completions.create(
     model="claude-sonnet-4",
-    messages=[
-        {"role": "user", "content": "Explain agentic AI patterns"}
-    ]
-)
-
-print(response.choices[0].message.content)
-```
-
-## Preinstalled Tools
-
-Your Coder workspace includes several pre-configured AI coding assistants:
-
-### [`coding_assistant`](https://github.com/msc94/coding_assistant)
-
-A CLI-based open-source coding assistant developed by Marcel Schneider, available through our corporate network:
-
-```bash
-coding-assistant "Help me implement a basic agent"
-```
-
-### [`llm` CLI Tool](https://llm.datasette.io/)
-
-Direct access to LLM models from the command line:
-
-```bash
-# Quick queries
-llm "What are the key principles of RAG?"
-
-# Specific model selection
-llm -m "claude-sonnet-4" "Design a multi-agent system"
-
-# File processing
-llm "Summarize this code" < my_script.py
-```
-
-## Integration with Frameworks
-
-The pre-configured API works seamlessly with all course frameworks:
-
-### LangChain
-```python
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI()  # Uses environment variables automatically
-response = llm.invoke("Hello, how are you?")
-```
-
-### CrewAI
-```python
-from crewai import Agent, Task, Crew
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI()  # Pre-configured BMW Gaia API
-
-agent = Agent(
-    role='AI Assistant',
-    goal='Help with agentic AI development',
-    llm=llm
+    messages=[{"role": "user", "content": "Explain agentic AI"}]
 )
 ```
 
-## Rate Limits and Usage
+### Framework Integration
 
-The BMW Gaia API is configured for educational use within the nanodegree:
+Works seamlessly with LangChain, CrewAI, and other frameworks:
 
-- **Reasonable usage**: Designed to support all course activities
-- **Rate limiting**: Built-in protections to ensure fair access
-- **Monitoring**: Usage is monitored for optimization
+```python
+from langchain_openai import ChatOpenAI
 
-## Troubleshooting
-
-### Check Environment Variables
-```bash
-echo $OPENAI_BASE_URL
-echo $OPENAI_API_KEY
+llm = ChatOpenAI()  # Uses BMW Gaia API automatically
 ```
-
-### Test Connectivity
-```bash
-curl -H "Authorization: Bearer $OPENAI_API_KEY" \
-     -H "Content-Type: application/json" \
-     "$OPENAI_BASE_URL/v1/models"
-```
-
-### Common Issues
-- **Missing variables**: Restart your Coder workspace
-- **Permission denied**: Contact course administrators
-- **Rate limits**: Wait a moment and retry
 
 ---
 
