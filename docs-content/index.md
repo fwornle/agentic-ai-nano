@@ -2,6 +2,38 @@
 
 Welcome to the comprehensive **Agentic AI Nano-Degree** program! This intensive curriculum covers the complete landscape of modern AI agent development and Retrieval-Augmented Generation (RAG) systems.
 
+## 🚀 Before You Begin - Essential Setup
+
+**Important:** Start with your cloud development environment for zero-friction learning!
+
+<div class="grid cards" markdown>
+
+-   :material-cloud:{ .lg .middle } **Cloud Development Environment**
+
+    ---
+
+    Access your pre-configured Coder workspace with all tools ready
+
+    [:octicons-arrow-right-24: Setup Guide](00_intro/coder.md)
+
+-   :material-api:{ .lg .middle } **LLM API Configuration**
+
+    ---
+
+    Connect to the Gaia LLM API for agent development
+
+    [:octicons-arrow-right-24: API Setup](llmapi.md)
+
+</div>
+
+### Why Cloud Development?
+
+Your Coder workspace includes:
+- **Pre-installed frameworks** (LangChain, CrewAI, PydanticAI, etc.)
+- **GPU access** for AI model training and inference
+- **Integrated AI assistants** (GitHub Copilot, Coding-Assistant CLI)
+- **Zero local installation** requirements
+
 ## Program Overview
 
 This nano-degree consists of three comprehensive modules designed to take you from fundamentals to production-ready implementations:
@@ -139,7 +171,12 @@ Each session follows a consistent structure:
 
 ## Quick Start
 
-Ready to begin your journey? Choose your starting point:
+Ready to begin your journey? **First, set up your environment, then choose your starting point:**
+
+### Step 1: Environment Setup
+Access your [cloud development environment](00_intro/coder.md) at `http://10.21.202.14/workspaces`
+
+### Step 2: Choose Your Learning Path
 
 <div class="grid cards" markdown>
 
