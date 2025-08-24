@@ -253,8 +253,14 @@
                 if (link) {
                     const linkText = link.textContent.trim();
                     
-                    // BMW-specific items from the LLM API sidebar
+                    // ALL BMW-specific items from BOTH pages
                     const bmwItems = [
+                        // Development Environment BMW items
+                        'BMW Cloud Development Environment with Coder',
+                        'Why Cloud Development?',
+                        'AI Assistant Integration',
+                        
+                        // LLM API BMW items
                         'BMW Gaia LLM API',
                         'Quick Setup',
                         'Testing Your Connection',
