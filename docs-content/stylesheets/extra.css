@@ -9,6 +9,15 @@
     display: block;
 }
 
+/* Allow JavaScript to override with corporate network detection */
+.bmw-corporate-only.corporate-network-detected {
+    display: block !important;
+}
+
+.bmw-public-alternative.public-network-detected {
+    display: block !important;
+}
+
 /* Learning path badges */
 .learning-path {
     display: inline-block;
