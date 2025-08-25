@@ -339,24 +339,19 @@
     }
 
     function initializeNetworkDetection() {
-        // Add CSS for smooth transitions and loading state to prevent content flash
+        // Add CSS for smooth transitions and ensure BMW content is hidden by default on public sites
         const style = document.createElement('style');
         const hostname = window.location.hostname;
         const isPublicSite = hostname.includes('github.io') || hostname.includes('fwornle');
         
         style.textContent = `
-            /* Hide all content initially to prevent flash */
             .bmw-corporate-only, .bmw-public-alternative {
-                display: none !important;
                 transition: opacity 0.3s ease-in-out;
             }
-            /* Show content after detection completes */
             .bmw-corporate-only.corporate-network-detected {
-                display: block !important;
                 animation: fadeIn 0.5s ease-in-out;
             }
             .bmw-public-alternative.public-network-detected {
-                display: block !important;
                 animation: fadeIn 0.5s ease-in-out;
             }
             @keyframes fadeIn {
@@ -367,6 +362,8 @@
             .setup-instructions {
                 min-height: 100px;
             }
+            /* Default to public content on public sites */
+            ${isPublicSite ? '.bmw-corporate-only { display: none !important; } .bmw-public-alternative { display: block !important; }' : ''}
             /* Corporate override styles (must be more specific) */
             .bmw-corporate-only.show-corporate.corporate-network-detected { display: block !important; }
             .bmw-public-alternative.hide-public { display: none !important; }
