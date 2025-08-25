@@ -3,9 +3,9 @@
 <!-- BMW Corporate Network Content -->
 <div class="bmw-corporate-only" markdown="1">
 
-## CN Cloud Development Environment with Coder
+## BMW Cloud Development Environment with Coder
 
-The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform deployed within the corporate network, to provide instant, consistent, and secure development workspaces.
+The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces.
 
 ![Coder Architecture](images/coder-architecture.png)
 *Coder's architecture enables secure, scalable cloud development environments accessible from any browser or IDE*
@@ -13,7 +13,7 @@ The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment 
 ### Quick Setup
 
 1. **Access your workspace**: [http://10.21.202.14/workspaces](http://10.21.202.14/workspaces)
-2. **Log in** with your corporate credentials
+2. **Log in** with your BMW credentials
 3. **Select** the "Agentic AI Nanodegree" template
 4. **Launch** your pre-configured development environment
 
@@ -29,7 +29,7 @@ All tools, dependencies, and BMW Gaia LLM API access are pre-configured and read
 
 - **Zero Installation**: No local setup required
 - **Consistent Environment**: Identical setup for all participants  
-- **Corporate Integration**: Seamless access to corporate resources
+- **Corporate Integration**: Seamless access to BMW resources
 - **Scalable Resources**: Cloud computing power for AI workloads
 - **Pre-configured APIs**: BMW Gaia LLM API ready to use
 
