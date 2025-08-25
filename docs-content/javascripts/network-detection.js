@@ -512,7 +512,6 @@
     // Initialize when DOM is ready and on every page load
     function runDetection() {
         // Reset detection state for fresh detection on each page
-        isCorporateNetworkDetected = false;
         console.log('🔄 Starting fresh network detection...');
         initializeNetworkDetection();
     }
@@ -523,8 +522,31 @@
         runDetection();
     }
     
-    // Also run detection on navigation changes (for SPA behavior)
+    // Run detection on various navigation events
     window.addEventListener('popstate', runDetection);
+    
+    // MkDocs Material uses instant loading - listen for navigation
+    document.addEventListener('DOMContentLoaded', () => {
+        // Watch for URL changes
+        let lastUrl = location.href;
+        new MutationObserver(() => {
+            const url = location.href;
+            if (url !== lastUrl) {
+                lastUrl = url;
+                console.log('📍 URL changed, re-running detection');
+                setTimeout(runDetection, 100); // Small delay for DOM to update
+            }
+        }).observe(document, {subtree: true, childList: true});
+        
+        // Also listen for clicks on navigation links
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link && (link.classList.contains('md-nav__link') || link.classList.contains('md-tabs__link'))) {
+                console.log('🔗 Navigation link clicked, will re-run detection');
+                setTimeout(runDetection, 200); // Delay for page to load
+            }
+        });
+    });
 
     // REMOVED: MutationObserver navigation interference
     // Let MkDocs handle navigation structure completely
