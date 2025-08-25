@@ -267,10 +267,23 @@
     }
 
     function updateNetworkStatusIndicator(networkType) {
+        // Only show indicator on Setup & Environment pages
+        const currentPath = window.location.pathname;
+        const isSetupPage = currentPath.includes('00_intro') || 
+                           currentPath.includes('setup') || 
+                           currentPath.includes('environment') ||
+                           currentPath.includes('coder') ||
+                           currentPath.includes('llmapi');
+        
         // Remove any existing status indicator
         const existingIndicator = document.querySelector('.network-status-indicator');
         if (existingIndicator) {
             existingIndicator.remove();
+        }
+
+        // Don't show indicator if not on setup pages
+        if (!isSetupPage) {
+            return;
         }
 
         // Create new status indicator
@@ -499,12 +512,11 @@
         const navigationItems = document.querySelectorAll('.md-nav__link');
         navigationItems.forEach(link => {
             const linkText = link.textContent.trim();
-            // Hide items that contain public/local content indicators
+            // Hide items that contain public/local content indicators (but NOT main nav items)
             if (linkText.includes('Public LLM API Configuration') || 
                 linkText.includes('Local Development Environment Setup') ||
                 linkText.includes('Local Setup Requirements') ||
                 linkText.includes('Setup Steps') ||
-                linkText.includes('API Configuration') && !linkText.includes('BMW') ||
                 linkText.includes('OpenAI Setup') ||
                 linkText.includes('Anthropic Claude Setup') ||
                 linkText.includes('Testing Your Setup') ||
@@ -522,12 +534,11 @@
         const navigationItems = document.querySelectorAll('.md-nav__link');
         navigationItems.forEach(link => {
             const linkText = link.textContent.trim();
-            // Show items that contain public/local content indicators
+            // Show items that contain public/local content indicators (but NOT main nav items)
             if (linkText.includes('Public LLM API Configuration') || 
                 linkText.includes('Local Development Environment Setup') ||
                 linkText.includes('Local Setup Requirements') ||
                 linkText.includes('Setup Steps') ||
-                linkText.includes('API Configuration') && !linkText.includes('BMW') ||
                 linkText.includes('OpenAI Setup') ||
                 linkText.includes('Anthropic Claude Setup') ||
                 linkText.includes('Testing Your Setup') ||
