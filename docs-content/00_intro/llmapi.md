@@ -3,8 +3,6 @@
 <!-- BMW Corporate Network Content -->
 <div class="bmw-corporate-only" markdown="1">
 
-## BMW Gaia LLM API
-
 The [BMW Gaia LLM API](https://pages.atc-github.azure.cloud.bmw/Data-Transformation-AI/llm-api/getting_started/introduction/) is available automatically from your Coder workspace.
 
 ### Quick Setup
@@ -64,8 +62,6 @@ llm = ChatOpenAI()  # Uses BMW Gaia API automatically
 
 <!-- Public Network Alternative Content -->
 <div class="bmw-public-alternative" markdown="1">
-
-## Public LLM API Configuration
 
 For public access, you'll need to configure your own LLM API keys.
 
