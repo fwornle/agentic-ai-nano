@@ -303,54 +303,86 @@
     }
 
     function showNavigationItemsReliably() {
-        // Wait for MkDocs Material navigation to be fully loaded
-        const waitForNavigation = setInterval(() => {
+        console.log('🏢 Configuring navigation for corporate mode');
+        
+        // Function to configure corporate navigation
+        function doCorporateConfig() {
             const navItems = document.querySelectorAll('.md-nav__item');
-            if (navItems.length > 0) {
-                clearInterval(waitForNavigation);
-                
-                navItems.forEach(item => {
-                    const link = item.querySelector('.md-nav__link');
-                    if (link) {
-                        const linkText = link.textContent.trim();
-                        
-                        // Hide public/local setup items in corporate mode
-                        const publicItems = [
-                            'Local Development Environment Setup',
-                            'Local Setup Requirements',
-                            'Setup Steps',
-                            'API Configuration'
-                        ];
-                        
-                        const shouldHide = publicItems.some(publicItem => 
-                            linkText.includes(publicItem) || 
-                            linkText === publicItem ||
-                            linkText.toLowerCase().includes(publicItem.toLowerCase())
-                        );
-                        
-                        if (shouldHide) {
+            console.log(`📋 Found ${navItems.length} navigation items to configure for corporate`);
+            
+            navItems.forEach(item => {
+                const link = item.querySelector('.md-nav__link');
+                if (link) {
+                    const linkText = link.textContent.trim();
+                    
+                    // Hide public/local setup items in corporate mode
+                    const publicItems = [
+                        'Local Development Environment Setup',
+                        'Local Setup Requirements',
+                        'Setup Steps',
+                        'API Configuration',
+                        'OpenAI Setup',
+                        'Anthropic Claude Setup',
+                        'Testing Your Setup',
+                        'Local LLM Options',
+                        'Public LLM API Configuration'
+                    ];
+                    
+                    // Check if this item should be hidden
+                    publicItems.forEach(publicItem => {
+                        if (linkText === publicItem || linkText.includes(publicItem)) {
                             item.style.setProperty('display', 'none', 'important');
                             item.style.setProperty('visibility', 'hidden', 'important');
                             item.style.setProperty('height', '0', 'important');
                             item.style.setProperty('margin', '0', 'important');
                             item.style.setProperty('padding', '0', 'important');
+                            item.style.setProperty('overflow', 'hidden', 'important');
                             console.log('🚫 Hidden public nav item:', linkText);
-                        } else {
-                            // Show BMW items and general items
+                        }
+                    });
+                    
+                    // Make sure BMW items are visible
+                    const bmwItems = [
+                        'BMW Gaia LLM API',
+                        'Quick Setup',
+                        'Testing Your Connection',
+                        'Available Models',
+                        'Using in Code',
+                        'Framework Integration',
+                        'BMW Cloud Development Environment with Coder',
+                        'Why Cloud Development?',
+                        'AI Assistant Integration'
+                    ];
+                    
+                    bmwItems.forEach(bmwItem => {
+                        if (linkText === bmwItem || linkText.includes(bmwItem)) {
                             item.style.removeProperty('display');
                             item.style.removeProperty('visibility');
                             item.style.removeProperty('height');
                             item.style.removeProperty('margin');
                             item.style.removeProperty('padding');
+                            item.style.removeProperty('overflow');
+                            console.log('✅ Showing BMW nav item:', linkText);
                         }
-                    }
-                });
-                console.log('✅ Corporate mode navigation configured');
+                    });
+                }
+            });
+        }
+        
+        // Run immediately
+        doCorporateConfig();
+        
+        // Keep checking as MkDocs dynamically loads content
+        let attempts = 0;
+        const checkInterval = setInterval(() => {
+            attempts++;
+            doCorporateConfig();
+            
+            if (attempts > 20) { // Check for 2 seconds
+                clearInterval(checkInterval);
+                console.log('✅ Finished configuring corporate navigation');
             }
         }, 100);
-        
-        // Cleanup after 5 seconds if navigation never loads
-        setTimeout(() => clearInterval(waitForNavigation), 5000);
     }
 
     function updateNetworkSpecificContent(isCorporate) {
