@@ -1,16 +1,17 @@
 # Development Environment Setup
 
-<!-- BMW Corporate Network Content -->
-<div class="bmw-corporate-only" markdown="1">
-
 ## BMW Cloud Development Environment with Coder
+<div class="bmw-corporate-only" markdown="1">
 
 The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces.
 
 ![Coder Architecture](images/coder-architecture.png)
 *Coder's architecture enables secure, scalable cloud development environments accessible from any browser or IDE*
 
+</div>
+
 ### Quick Setup
+<div class="bmw-corporate-only" markdown="1">
 
 1. **Access your workspace**: [http://10.21.202.14/workspaces](http://10.21.202.14/workspaces)
 2. **Log in** with your BMW credentials
@@ -25,7 +26,10 @@ The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment 
 
 All tools, dependencies, and BMW Gaia LLM API access are pre-configured and ready to use.
 
+</div>
+
 ### Why Cloud Development?
+<div class="bmw-corporate-only" markdown="1">
 
 - **Zero Installation**: No local setup required
 - **Consistent Environment**: Identical setup for all participants  
@@ -36,7 +40,10 @@ All tools, dependencies, and BMW Gaia LLM API access are pre-configured and read
 ![VS Code Dev Container](images/vscode-dev-container.png)
 *VS Code seamlessly connecting to a dev container environment*
 
+</div>
+
 ### AI Assistant Integration
+<div class="bmw-corporate-only" markdown="1">
 
 Inside the corporate network, you have access to:
 - **GitHub Copilot**: Code completion and generation
@@ -52,14 +59,15 @@ Inside the corporate network, you have access to:
 
 </div>
 
-<!-- Public Network Alternative Content -->
-<div class="bmw-public-alternative" markdown="1">
-
 ## Local Development Environment Setup
+<div class="bmw-public-alternative" markdown="1">
 
 For public access, you'll need to set up your local development environment. While this requires more initial setup than a cloud environment, it provides full control over your development setup.
 
+</div>
+
 ### Local Setup Requirements
+<div class="bmw-public-alternative" markdown="1">
 
 Before beginning the course modules, ensure you have:
 
@@ -68,7 +76,10 @@ Before beginning the course modules, ensure you have:
 3. **Code editor** (VS Code recommended with Python extension)
 4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
 
+</div>
+
 ### Setup Steps
+<div class="bmw-public-alternative" markdown="1">
 
 ```bash
 # Create virtual environment
@@ -83,7 +94,10 @@ cd agentic-ai-nano
 pip install -r requirements.txt
 ```
 
+</div>
+
 ### API Configuration
+<div class="bmw-public-alternative" markdown="1">
 
 Create a `.env` file in the project root:
 
