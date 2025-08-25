@@ -345,31 +345,33 @@
         const isPublicSite = hostname.includes('github.io') || hostname.includes('fwornle');
         
         style.textContent = `
-            .bmw-corporate-only, .bmw-public-alternative {
+            /* Default: hide all conditional content until detection completes */
+            .bmw-corporate-only {
+                display: none;
                 transition: opacity 0.3s ease-in-out;
             }
+            .bmw-public-alternative {
+                display: none;
+                transition: opacity 0.3s ease-in-out;
+            }
+            /* Show corporate content when detected */
             .bmw-corporate-only.corporate-network-detected {
+                display: block;
                 animation: fadeIn 0.5s ease-in-out;
             }
+            /* Show public content when detected */
             .bmw-public-alternative.public-network-detected {
+                display: block;
                 animation: fadeIn 0.5s ease-in-out;
             }
             @keyframes fadeIn {
                 from { opacity: 0; }
                 to { opacity: 1; }
             }
-            /* Ensure setup instructions are visible */
+            /* Ensure setup instructions container is visible */
             .setup-instructions {
                 min-height: 100px;
             }
-            /* Default to public content on public sites */
-            ${isPublicSite ? '.bmw-corporate-only { display: none !important; } .bmw-public-alternative { display: block !important; }' : ''}
-            /* Corporate override styles (must be more specific) */
-            .bmw-corporate-only.show-corporate.corporate-network-detected { display: block !important; }
-            .bmw-public-alternative.hide-public { display: none !important; }
-            /* Ensure forced styles override defaults */
-            [style*="display: block"] { display: block !important; }
-            [style*="display: none"] { display: none !important; }
         `;
         document.head.appendChild(style);
 
