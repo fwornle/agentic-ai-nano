@@ -1,13 +1,9 @@
 # LLM API Configuration
 
-<!-- BMW Corporate Network Content -->
+## BMW Gaia LLM API
 <div class="bmw-corporate-only" markdown="1">
 
-## BMW Gaia LLM API
-
 The [BMW Gaia LLM API](https://pages.atc-github.azure.cloud.bmw/Data-Transformation-AI/llm-api/getting_started/introduction/) is available automatically from your Coder workspace.
-
-### Quick Setup
 
 Environment variables are pre-configured:
 
@@ -17,7 +13,17 @@ OPENAI_BASE_URL=...
 OPENAI_API_KEY=...
 ```
 
+</div>
+
+### Quick Setup
+<div class="bmw-corporate-only" markdown="1">
+
+See environment variables above.
+
+</div>
+
 ### Testing Your Connection
+<div class="bmw-corporate-only" markdown="1">
 
 Test with the pre-installed `llm` command:
 
@@ -26,13 +32,19 @@ llm -m "claude-sonnet-4" "How many r's in blueberry?"
 # Output: There are 2 r's in "blueberry".
 ```
 
+</div>
+
 ### Available Models
+<div class="bmw-corporate-only" markdown="1">
 
 - **Claude Sonnet 4**: High-quality reasoning and analysis
 - **GPT-4 variants**: OpenAI's latest models  
 - **Other enterprise-approved models**: Additional models as available
 
+</div>
+
 ### Using in Code
+<div class="bmw-corporate-only" markdown="1">
 
 ```python
 from openai import OpenAI
@@ -46,7 +58,10 @@ response = client.chat.completions.create(
 )
 ```
 
+</div>
+
 ### Framework Integration
+<div class="bmw-corporate-only" markdown="1">
 
 Works seamlessly with LangChain, CrewAI, and other frameworks:
 
@@ -62,14 +77,15 @@ llm = ChatOpenAI()  # Uses BMW Gaia API automatically
 
 </div>
 
-<!-- Public Network Alternative Content -->
-<div class="bmw-public-alternative" markdown="1">
-
 ## Public LLM API Configuration
+<div class="bmw-public-alternative" markdown="1">
 
 For public access, you'll need to configure your own LLM API keys.
 
+</div>
+
 ### OpenAI Setup
+<div class="bmw-public-alternative" markdown="1">
 
 1. Sign up at [OpenAI](https://platform.openai.com/)
 2. Create an API key in your dashboard
@@ -79,7 +95,10 @@ For public access, you'll need to configure your own LLM API keys.
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
+</div>
+
 ### Anthropic Claude Setup
+<div class="bmw-public-alternative" markdown="1">
 
 1. Sign up at [Anthropic](https://console.anthropic.com/)
 2. Create an API key in your console
@@ -89,7 +108,10 @@ OPENAI_API_KEY=your_openai_api_key_here
 ANTHROPIC_API_KEY=your_anthropic_key_here
 ```
 
+</div>
+
 ### Testing Your Setup
+<div class="bmw-public-alternative" markdown="1">
 
 ```python
 from openai import OpenAI
@@ -102,7 +124,10 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
+</div>
+
 ### Local LLM Options
+<div class="bmw-public-alternative" markdown="1">
 
 For development without API costs:
 
