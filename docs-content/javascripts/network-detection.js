@@ -453,9 +453,19 @@
         const navigationItems = document.querySelectorAll('.md-nav__link');
         navigationItems.forEach(link => {
             const linkText = link.textContent.trim();
-            if (linkText.includes('BMW') || linkText.includes('Gaia')) {
+            // Hide items that contain corporate/BMW content indicators
+            if (linkText.includes('BMW Gaia LLM API') || 
+                linkText.includes('BMW Cloud Development Environment with Coder') ||
+                linkText.includes('Quick Setup') ||
+                linkText.includes('Testing Your Connection') ||
+                linkText.includes('Available Models') ||
+                linkText.includes('Using in Code') ||
+                linkText.includes('Framework Integration') ||
+                linkText.includes('Why Cloud Development?') ||
+                linkText.includes('AI Assistant Integration')) {
                 const listItem = link.closest('.md-nav__item');
                 if (listItem) {
+                    console.log('Hiding corporate nav item:', linkText);
                     listItem.style.display = 'none';
                 }
             }
@@ -466,9 +476,19 @@
         const navigationItems = document.querySelectorAll('.md-nav__link');
         navigationItems.forEach(link => {
             const linkText = link.textContent.trim();
-            if (linkText.includes('BMW') || linkText.includes('Gaia')) {
+            // Show items that contain corporate/BMW content indicators
+            if (linkText.includes('BMW Gaia LLM API') || 
+                linkText.includes('BMW Cloud Development Environment with Coder') ||
+                linkText.includes('Quick Setup') ||
+                linkText.includes('Testing Your Connection') ||
+                linkText.includes('Available Models') ||
+                linkText.includes('Using in Code') ||
+                linkText.includes('Framework Integration') ||
+                linkText.includes('Why Cloud Development?') ||
+                linkText.includes('AI Assistant Integration')) {
                 const listItem = link.closest('.md-nav__item');
                 if (listItem) {
+                    console.log('Showing corporate nav item:', linkText);
                     listItem.style.display = '';
                 }
             }
@@ -479,9 +499,19 @@
         const navigationItems = document.querySelectorAll('.md-nav__link');
         navigationItems.forEach(link => {
             const linkText = link.textContent.trim();
-            if (linkText.includes('Public') && linkText.includes('LLM')) {
+            // Hide items that contain public/local content indicators
+            if (linkText.includes('Public LLM API Configuration') || 
+                linkText.includes('Local Development Environment Setup') ||
+                linkText.includes('Local Setup Requirements') ||
+                linkText.includes('Setup Steps') ||
+                linkText.includes('API Configuration') && !linkText.includes('BMW') ||
+                linkText.includes('OpenAI Setup') ||
+                linkText.includes('Anthropic Claude Setup') ||
+                linkText.includes('Testing Your Setup') ||
+                linkText.includes('Local LLM Options')) {
                 const listItem = link.closest('.md-nav__item');
                 if (listItem) {
+                    console.log('Hiding public nav item:', linkText);
                     listItem.style.display = 'none';
                 }
             }
@@ -492,9 +522,19 @@
         const navigationItems = document.querySelectorAll('.md-nav__link');
         navigationItems.forEach(link => {
             const linkText = link.textContent.trim();
-            if (linkText.includes('Public') && linkText.includes('LLM')) {
+            // Show items that contain public/local content indicators
+            if (linkText.includes('Public LLM API Configuration') || 
+                linkText.includes('Local Development Environment Setup') ||
+                linkText.includes('Local Setup Requirements') ||
+                linkText.includes('Setup Steps') ||
+                linkText.includes('API Configuration') && !linkText.includes('BMW') ||
+                linkText.includes('OpenAI Setup') ||
+                linkText.includes('Anthropic Claude Setup') ||
+                linkText.includes('Testing Your Setup') ||
+                linkText.includes('Local LLM Options')) {
                 const listItem = link.closest('.md-nav__item');
                 if (listItem) {
+                    console.log('Showing public nav item:', linkText);
                     listItem.style.display = '';
                 }
             }
