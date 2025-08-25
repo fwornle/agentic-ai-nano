@@ -192,9 +192,7 @@
             element.style.setProperty('display', 'none', 'important');
         });
 
-        // Corporate mode: Show all navigation items and BMW content
-        showNavigationItemsReliably();
-        console.log('🏢 Corporate mode: BMW content and navigation enabled');
+        console.log('🏢 Corporate mode: BMW content enabled');
         
 
         // Update any dynamic text content
@@ -228,9 +226,7 @@
             element.style.removeProperty('display');
         });
 
-        // Public mode: Hide BMW navigation items and show public content
-        hideNavigationItemsReliably();
-        console.log('📋 Public mode: BMW navigation hidden, public content visible');
+        console.log('📋 Public mode: public content visible');
         
 
         // Update any dynamic text content
