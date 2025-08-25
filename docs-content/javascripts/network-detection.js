@@ -270,9 +270,9 @@
                         'Framework Integration'
                     ];
                     
-                    // Check if this item should be hidden
+                    // Check if this item should be hidden (exact match only)
                     bmwItems.forEach(bmwItem => {
-                        if (linkText === bmwItem || linkText.includes(bmwItem)) {
+                        if (linkText === bmwItem) {
                             item.style.setProperty('display', 'none', 'important');
                             item.style.setProperty('visibility', 'hidden', 'important');
                             item.style.setProperty('height', '0', 'important');
@@ -328,9 +328,9 @@
                         'Public LLM API Configuration'
                     ];
                     
-                    // Check if this item should be hidden
+                    // Check if this item should be hidden (exact match only)
                     publicItems.forEach(publicItem => {
-                        if (linkText === publicItem || linkText.includes(publicItem)) {
+                        if (linkText === publicItem) {
                             item.style.setProperty('display', 'none', 'important');
                             item.style.setProperty('visibility', 'hidden', 'important');
                             item.style.setProperty('height', '0', 'important');
@@ -355,7 +355,7 @@
                     ];
                     
                     bmwItems.forEach(bmwItem => {
-                        if (linkText === bmwItem || linkText.includes(bmwItem)) {
+                        if (linkText === bmwItem) {
                             item.style.removeProperty('display');
                             item.style.removeProperty('visibility');
                             item.style.removeProperty('height');
