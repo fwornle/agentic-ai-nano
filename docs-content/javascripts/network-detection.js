@@ -179,8 +179,6 @@
             console.log(`Corporate element ${index}:`, element.tagName, element.className);
             element.classList.add('show-corporate');
             element.classList.add('corporate-network-detected');
-            // Force display with inline style as backup
-            element.style.setProperty('display', 'block', 'important');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
@@ -188,9 +186,11 @@
         publicElements.forEach((element, index) => {
             console.log(`Public element ${index}:`, element.tagName, element.className);
             element.classList.add('hide-public');
-            // Force hide with inline style as backup  
-            element.style.setProperty('display', 'none', 'important');
         });
+
+        // Hide public navigation items and show corporate ones
+        hidePublicNavigationItems();
+        showCorporateNavigationItems();
 
         console.log('🏢 Corporate mode: BMW content enabled');
         
@@ -213,8 +213,6 @@
         corporateElements.forEach(element => {
             element.classList.remove('show-corporate');
             element.classList.remove('corporate-network-detected');
-            // Clear inline style and let default CSS take over
-            element.style.removeProperty('display');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
@@ -222,9 +220,11 @@
         publicElements.forEach(element => {
             element.classList.remove('hide-public');
             element.classList.add('public-network-detected');
-            // Clear inline style and let default CSS take over
-            element.style.removeProperty('display');
         });
+
+        // Hide corporate navigation items and show public ones  
+        hideCorporateNavigationItems();
+        showPublicNavigationItems();
 
         console.log('📋 Public mode: public content visible');
         
@@ -447,6 +447,59 @@
         console.log('⬅️ Browser navigation detected');
         runDetection();
     });
+
+    // Navigation control functions
+    function hideCorporateNavigationItems() {
+        const navigationItems = document.querySelectorAll('.md-nav__link');
+        navigationItems.forEach(link => {
+            const linkText = link.textContent.trim();
+            if (linkText.includes('BMW') || linkText.includes('Gaia')) {
+                const listItem = link.closest('.md-nav__item');
+                if (listItem) {
+                    listItem.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    function showCorporateNavigationItems() {
+        const navigationItems = document.querySelectorAll('.md-nav__link');
+        navigationItems.forEach(link => {
+            const linkText = link.textContent.trim();
+            if (linkText.includes('BMW') || linkText.includes('Gaia')) {
+                const listItem = link.closest('.md-nav__item');
+                if (listItem) {
+                    listItem.style.display = '';
+                }
+            }
+        });
+    }
+
+    function hidePublicNavigationItems() {
+        const navigationItems = document.querySelectorAll('.md-nav__link');
+        navigationItems.forEach(link => {
+            const linkText = link.textContent.trim();
+            if (linkText.includes('Public') && linkText.includes('LLM')) {
+                const listItem = link.closest('.md-nav__item');
+                if (listItem) {
+                    listItem.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    function showPublicNavigationItems() {
+        const navigationItems = document.querySelectorAll('.md-nav__link');
+        navigationItems.forEach(link => {
+            const linkText = link.textContent.trim();
+            if (linkText.includes('Public') && linkText.includes('LLM')) {
+                const listItem = link.closest('.md-nav__item');
+                if (listItem) {
+                    listItem.style.display = '';
+                }
+            }
+        });
+    }
 
     // REMOVED: MutationObserver navigation interference
     // Let MkDocs handle navigation structure completely
