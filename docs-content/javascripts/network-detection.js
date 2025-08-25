@@ -516,36 +516,50 @@
         initializeNetworkDetection();
     }
     
+    // Initial run
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', runDetection);
     } else {
         runDetection();
     }
     
-    // Run detection on various navigation events
-    window.addEventListener('popstate', runDetection);
+    // Set up navigation listeners immediately (not waiting for DOMContentLoaded)
+    console.log('🎯 Setting up navigation listeners');
     
-    // MkDocs Material uses instant loading - listen for navigation
-    document.addEventListener('DOMContentLoaded', () => {
-        // Watch for URL changes
-        let lastUrl = location.href;
-        new MutationObserver(() => {
-            const url = location.href;
-            if (url !== lastUrl) {
-                lastUrl = url;
-                console.log('📍 URL changed, re-running detection');
-                setTimeout(runDetection, 100); // Small delay for DOM to update
+    // Watch for URL changes with MutationObserver
+    let lastUrl = location.href;
+    const observer = new MutationObserver(() => {
+        const url = location.href;
+        if (url !== lastUrl) {
+            lastUrl = url;
+            console.log('📍 URL changed to:', url);
+            setTimeout(runDetection, 100);
+        }
+    });
+    observer.observe(document.body || document.documentElement, {
+        subtree: true, 
+        childList: true
+    });
+    
+    // Listen for navigation link clicks (use capturing to catch all clicks)
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link) {
+            const href = link.getAttribute('href');
+            console.log('🔗 Link clicked:', href);
+            if (link.classList.contains('md-nav__link') || 
+                link.classList.contains('md-tabs__link') ||
+                href?.includes('/00_intro/')) {
+                console.log('🔗 Navigation link detected, will re-run detection');
+                setTimeout(runDetection, 500);
             }
-        }).observe(document, {subtree: true, childList: true});
-        
-        // Also listen for clicks on navigation links
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (link && (link.classList.contains('md-nav__link') || link.classList.contains('md-tabs__link'))) {
-                console.log('🔗 Navigation link clicked, will re-run detection');
-                setTimeout(runDetection, 200); // Delay for page to load
-            }
-        });
+        }
+    }, true); // Use capture phase
+    
+    // Also listen for popstate
+    window.addEventListener('popstate', () => {
+        console.log('⬅️ Browser navigation detected');
+        runDetection();
     });
 
     // REMOVED: MutationObserver navigation interference
