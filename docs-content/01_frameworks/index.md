@@ -100,44 +100,44 @@ Choose your engagement level for each session:
 === "👀 Observer (40-60 min)"
 
     **Perfect for:**
-    - Quick understanding of concepts
-    - Decision makers and managers
-    - Time-constrained learners
-    - Getting overview before deep dive
+    - Quick understanding of concepts  
+    - Decision makers and managers  
+    - Time-constrained learners  
+    - Getting overview before deep dive  
 
     **Activities:**
-    - Read core concepts and patterns
-    - Examine architectural diagrams
-    - Review code examples
-    - Understand framework comparisons
+    - Read core concepts and patterns  
+    - Examine architectural diagrams  
+    - Review code examples  
+    - Understand framework comparisons  
 
 === "🙋‍♂️ Participant (60-90 min)"
 
     **Perfect for:**
-    - Active learning approach
-    - Developers and technical leads
-    - Hands-on understanding
-    - Building practical knowledge
+    - Active learning approach  
+    - Developers and technical leads  
+    - Hands-on understanding  
+    - Building practical knowledge  
 
     **Activities:**
-    - Follow guided implementations
-    - Run provided examples
-    - Analyze code patterns
-    - Complete exercises
+    - Follow guided implementations  
+    - Run provided examples  
+    - Analyze code patterns  
+    - Complete exercises  
 
 === "🛠️ Implementer (120-180 min)"
 
     **Perfect for:**
-    - Deep technical expertise
-    - Engineers and architects
-    - Custom implementations
-    - Production considerations
+    - Deep technical expertise  
+    - Engineers and architects  
+    - Custom implementations  
+    - Production considerations  
 
     **Activities:**
-    - Build custom agent systems
-    - Explore advanced patterns
-    - Implement production features
-    - Create original solutions
+    - Build custom agent systems  
+    - Explore advanced patterns  
+    - Implement production features  
+    - Create original solutions  
 
 ## Technical Stack
 
