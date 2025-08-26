@@ -11,11 +11,13 @@
 This module dives deep into the technical implementation strategies behind the five core agentic patterns, explores how patterns combine for sophisticated behaviors, and examines emerging patterns being developed beyond the foundational five.
 
 ### Learning Objectives
+
 By the end of this module, you will:
-- Understand how each agentic pattern is technically implemented across different frameworks
-- Recognize how patterns combine to create sophisticated agent behaviors
-- Identify emerging patterns being developed beyond the core five
-- Make informed decisions about pattern selection and combination strategies
+
+- Understand how each agentic pattern is technically implemented across different frameworks  
+- Recognize how patterns combine to create sophisticated agent behaviors  
+- Identify emerging patterns being developed beyond the core five  
+- Make informed decisions about pattern selection and combination strategies  
 
 ---
 
@@ -27,7 +29,7 @@ Each framework implements the core patterns differently, with trade-offs in comp
 
 #### Reflection Pattern Implementations
 
-### Bare Metal Python Approach:
+### Bare Metal Python Approach
 
 The simplest approach implements reflection manually with basic iteration control. This gives you full control over the reflection process but requires handling all the logic yourself.
 
@@ -78,7 +80,7 @@ The critique phase analyzes the current response against the original task, look
 
 If the critique indicates satisfaction, the loop terminates early. Otherwise, an improvement prompt incorporates the critique to generate a better response, which becomes the input for the next iteration.
 
-### LangChain Framework Approach:
+### LangChain Framework Approach
 
 LangChain provides structured components that handle prompt templating and chain orchestration, reducing boilerplate code and enabling more maintainable reflection systems.
 
@@ -123,7 +125,7 @@ The improvement chain similarly uses a template that clearly defines its inputs.
 
 The main method becomes much simpler, focusing on the high-level flow rather than prompt construction details. Each chain handles its own complexity internally.
 
-### PydanticAI Type-Safe Approach:
+### PydanticAI Type-Safe Approach
 
 PydanticAI takes a different approach by enforcing type safety and structured outputs. This prevents common errors and makes agent behavior more predictable:
 
@@ -182,7 +184,7 @@ The type-safe approach enables intelligent decision-making based on structured s
 
 #### Tool Use Pattern Implementations
 
-### Dynamic Tool Discovery:
+### Dynamic Tool Discovery
 
 Advanced tool agents go beyond static tool sets by intelligently selecting and learning from tool usage. This approach combines task analysis with historical performance data.
 
@@ -401,7 +403,7 @@ After each phase, the system evaluates whether the original plan is still viable
 
 ### Pattern Synergy Effects
 
-### Compound Benefits of Pattern Combination:
+### Compound Benefits of Pattern Combination
 
 1. **ReAct + Reflection**: Robust reasoning with quality assurance
 2. **Planning + Tool Use**: Strategic tool deployment for complex workflows  
@@ -694,7 +696,7 @@ You've now mastered advanced pattern theory and implementation strategies:
 
 ## 🧭 Navigation
 
-### Related Modules:
+### Related Modules
 
 - **Core Session:** [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 - **Related Module:** [Module A - Historical Context & Evolution](Session0_ModuleA_Historical_Context_Evolution.md)
