@@ -51,12 +51,12 @@ These patterns power automated research pipelines, content generation systems, b
 
 ---
 
-### Part 1: From Prompts to Agents (10 minutes)
+### Part 1: From Prompts to Agents
 
 **Cognitive Load**: 2 new concepts
 **Learning Mode**: Conceptual Understanding
 
-#### The Evolution of AI Interaction (5 minutes)
+#### The Evolution of AI Interaction
 
 The journey from simple prompt-response to sophisticated agent systems:
 
@@ -79,7 +79,7 @@ response = agent.run("Plan my outdoor activities for this week")
 
 ```
 
-#### What Makes an Agent "Agentic"? (5 minutes)
+#### What Makes an Agent "Agentic"?
 
 Four key characteristics define agentic systems:
 
@@ -90,7 +90,7 @@ Four key characteristics define agentic systems:
 
 ---
 
-### Part 2: The Five Core Agentic Patterns (15 minutes)
+### Part 2: The Five Core Agentic Patterns
 
 **Cognitive Load**: 5 new concepts
 **Learning Mode**: Pattern Recognition
@@ -99,13 +99,14 @@ Every agent framework implements these fundamental patterns:
 
 ![Overview of LLM Patterns](images/agentic-5-patterns.png)
 
-#### Pattern 1: Reflection (3 minutes)
+#### Pattern 1: Reflection
 
 **Purpose**: Self-improvement through self-evaluation
 
 The Reflection pattern addresses a fundamental challenge: LLMs often produce outputs that "sound good" but may have subtle errors or miss important aspects. By implementing a self-review cycle, agents can catch and correct their own mistakes before finalizing responses.
 
 **How it works:**
+
 - Generate initial response
 - Critically evaluate the output ("Was that complete? Anything missing?")
 - Revise and improve based on self-critique
@@ -132,7 +133,7 @@ final = agent.revise(initial, critique)
 
 ![Reflection Pattern](images/reflection-pattern.png)
 
-#### Pattern 2: Tool Use (3 minutes)
+#### Pattern 2: Tool Use
 
 **Purpose**: Extending capabilities through external tools
 
@@ -141,6 +142,7 @@ LLMs have knowledge cutoffs and can't access your databases, files, or real-time
 **Key insight:** Your LLM doesn't need to know everything - it just needs to know how to fetch what it needs.
 
 **Common tool integrations:**
+
 - Vector databases for semantic search
 - APIs (Stripe, WolframAlpha, internal endpoints)
 - Code execution environments (REPL, sandboxes)
@@ -171,19 +173,21 @@ agent = Agent(tools=tools, function_calling=True)
 
 ![Tool Use Pattern](images/tool-use-pattern.png)
 
-#### Pattern 3: ReAct (Reasoning + Acting) (3 minutes)
+#### Pattern 3: ReAct (Reasoning + Acting)
 
 **Purpose**: Iterative reasoning and action cycles
 
 ReAct combines Reflection and Tool Use into a powerful loop where the agent thinks and acts iteratively. Instead of answering everything in one shot, the model reasons step-by-step and adjusts its actions as it learns more. This transforms agents from reactive responders to navigators that can adapt in real-time.
 
 **The ReAct Loop:**
+
 1. **Reason** about the current situation
 2. **Act** based on that reasoning
 3. **Observe** the results
 4. **Update** understanding and repeat
 
 **Real-world example:**
+
 - Goal: "Find the user's recent unpaid invoices"
 - Step 1: Query payments database
 - Step 2: Notice results are outdated
@@ -217,6 +221,7 @@ class ReActAgent:
 ```
 
 **Requirements for ReAct:**
+
 - Tools for taking action
 - Memory for keeping context
 - Reasoning loop to track progress
@@ -225,7 +230,7 @@ class ReActAgent:
 
 ![ReAct Pattern](images/react-pattern.png)
 
-#### Pattern 4: Planning (3 minutes)
+#### Pattern 4: Planning
 
 **Purpose**: Breaking complex tasks into manageable steps
 
@@ -234,6 +239,7 @@ LLMs excel at quick answers but struggle with multi-step tasks. The Planning pat
 **Key insight:** Intelligence isn't just about answers - it's about how those answers are formed. The process matters.
 
 **How Planning works:**
+
 1. Analyze the complex goal
 2. Decompose into logical sub-tasks
 3. Sequence steps appropriately
@@ -241,6 +247,7 @@ LLMs excel at quick answers but struggle with multi-step tasks. The Planning pat
 5. Track progress and adjust as needed
 
 **Real-world example:**
+
 - Request: "Help me launch a product"
 - Agent creates plan:
   1. Define target audience
@@ -281,6 +288,7 @@ class PlanningAgent:
 ```
 
 **Implementation approaches:**
+
 - Embed planning in prompts ("First, break this task into steps...")
 - Let the model generate its own plans dynamically
 - Store plans for persistence and resumability
@@ -290,7 +298,7 @@ class PlanningAgent:
 
 ![Planning Pattern](images/planning-pattern.png)
 
-#### Pattern 5: Multi-Agent Collaboration (3 minutes)
+#### Pattern 5: Multi-Agent Collaboration
 
 **Purpose**: Specialized agents working together
 
@@ -299,6 +307,7 @@ Why rely on one generalist agent when you can have a team of specialists? The Mu
 **Key insight:** The magic happens when agents disagree - that's when you get sharper insights and deeper thinking.
 
 **Typical multi-agent roles:**
+
 - **Researcher**: Gathers information and facts
 - **Planner**: Outlines steps and strategies
 - **Coder**: Writes implementation code
@@ -306,6 +315,7 @@ Why rely on one generalist agent when you can have a team of specialists? The Mu
 - **PM**: Keeps the team coordinated and on track
 
 **Collaboration dynamics:**
+
 - Agents communicate through a controller or message bus
 - Each agent has a specific role and expertise area
 - They can critique each other's work
@@ -352,11 +362,13 @@ class MultiAgentSystem:
 ```
 
 **Implementation approaches:**
+
 - Simple: Give each agent a name and job description
 - Intermediate: Let agents message each other through a controller
 - Advanced: Implement voting, consensus mechanisms, and conflict resolution
 
 **Benefits:**
+
 - Specialized expertise in each domain
 - Parallel processing of complex tasks
 - Higher quality through peer review
@@ -366,12 +378,12 @@ class MultiAgentSystem:
 
 ---
 
-### Part 3: Framework Landscape Overview (15 minutes)
+### Part 3: Framework Landscape Overview
 
 **Cognitive Load**: 3 new concepts  
 **Learning Mode**: Comparison & Selection
 
-#### Framework Categories (5 minutes)
+#### Framework Categories
 
 Modern agent frameworks fall into three main categories:
 
@@ -390,7 +402,9 @@ frameworks = ["PydanticAI", "Agno", "Google ADK"]
 frameworks = ["Atomic Agents", "CrewAI"]
 ```
 
-#### Framework Comparison Matrix (10 minutes)
+#### Framework Comparison Matrix
+
+The framework comparison matrix below illustrates how different agent frameworks stack up across key dimensions including production readiness, enterprise features, ease of use, and specialized capabilities. This visual guide helps you quickly identify which frameworks align with your specific project requirements and organizational constraints.
 
 ![Framework Comparison Matrix](images/framework-comparison-matrix.png)
 
@@ -431,7 +445,7 @@ elif use_case == "microservice_architecture":
 
 ---
 
-### Part 4: Module Learning Path (5 minutes)
+### Part 4: Module Learning Path
 
 **Cognitive Load**: 1 new concept
 **Learning Mode**: Planning
