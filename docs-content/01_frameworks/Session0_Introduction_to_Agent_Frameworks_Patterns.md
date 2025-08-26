@@ -371,8 +371,6 @@ class MultiAgentSystem:
 **Cognitive Load**: 3 new concepts  
 **Learning Mode**: Comparison & Selection
 
-![Overview of Agents](images/overview-agents.png)
-
 #### Framework Categories (5 minutes)
 
 Modern agent frameworks fall into three main categories:
