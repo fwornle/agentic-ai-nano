@@ -12,18 +12,21 @@ Welcome to the Agentic AI Nano-Degree! This guide will help you set up your envi
 ## Prerequisites
 
 ### Required Knowledge
+
 - **Python Programming**: Intermediate level (functions, classes, modules)
 - **Command Line**: Basic terminal/command prompt usage
 - **Git**: Basic version control operations
 - **APIs**: Understanding of REST APIs and HTTP
 
 ### Recommended Background
+
 - **Machine Learning**: Basic understanding of ML concepts
 - **Databases**: Familiarity with SQL and NoSQL databases
 - **Cloud Platforms**: Exposure to AWS, GCP, or Azure
 - **Docker**: Basic containerization concepts
 
 ### Hardware Requirements
+
 - **RAM**: Minimum 8GB, recommended 16GB+
 - **Storage**: 10GB free space for code examples and models
 - **Internet**: Stable connection for API calls and model downloads
@@ -34,17 +37,21 @@ Welcome to the Agentic AI Nano-Degree! This guide will help you set up your envi
 This nano-degree consists of three comprehensive modules:
 
 ### Module 1: Agent Frameworks (10 Sessions)
+
 Master the art of building intelligent agents using cutting-edge frameworks like LangChain, CrewAI, PydanticAI, and more.
 
 ### Module 2: RAG Architecture (10 Sessions)
+
 Build sophisticated Retrieval-Augmented Generation systems for enterprise applications with advanced chunking, vector databases, and evaluation techniques.
 
 ### Module 3: MCP, ACP & Agent-to-Agent Communication (10 Sessions)
+
 Master the Model Context Protocol, Agent Communication Protocol, and sophisticated multi-agent coordination patterns.
 
 ## Learning Paths Guide
 
 ### 👀 Observer Path (30-80 min/session)
+
 **Best for**: Quick understanding, decision makers, busy schedules
 
 **Activities:**
@@ -57,6 +64,7 @@ Master the Model Context Protocol, Agent Communication Protocol, and sophisticat
 **Setup**: Minimal - just read the materials
 
 ### 🙋‍♂️ Participant Path (50-110 min/session)
+
 **Best for**: Hands-on learners, developers, practical understanding
 
 **Activities:**
@@ -69,6 +77,7 @@ Master the Model Context Protocol, Agent Communication Protocol, and sophisticat
 **Setup**: Full environment with API keys
 
 ### 🛠️ Implementer Path (120-260 min/session)
+
 **Best for**: Deep expertise, architects, production focus
 
 **Activities:**
@@ -108,12 +117,14 @@ nano-degree/
 ## Study Recommendations
 
 ### Time Management
+
 - **Consistent Schedule**: Set aside dedicated learning time
 - **Session Completion**: Finish sessions completely before moving on
 - **Practice Time**: Allow extra time for hands-on practice
 - **Review Period**: Revisit complex concepts after a few days
 
 ### Learning Strategies
+
 1. **Start with Foundations**: Don't skip early sessions
 2. **Practice Immediately**: Run code examples as you learn
 3. **Take Notes**: Document insights and modifications
@@ -122,19 +133,19 @@ nano-degree/
 
 ### Common Schedules
 
-**Intensive (2-3 weeks)**
+#### Intensive (2-3 weeks)
 
 - 2 sessions per day (Observer path)
 - 1 session per day (Participant path)  
 - 1 session every 2 days (Implementer path)
 
-**Regular (4-6 weeks)**
+#### Regular (4-6 weeks)
 
 - 1 session per day (Observer path)
 - 1 session every 2 days (Participant path)
 - 2-3 sessions per week (Implementer path)
 
-**Extended (8-12 weeks)**
+#### Extended (8-12 weeks)
 
 - 3-4 sessions per week (any path)
 - More time for practice and projects
@@ -143,11 +154,13 @@ nano-degree/
 ## Development Tools
 
 ### Recommended IDEs
+
 - **VS Code**: Excellent Python support, extensions
 - **PyCharm**: Professional Python IDE
 - **Jupyter**: Great for experimentation and learning
 
 ### Useful Extensions/Plugins
+
 - Python syntax highlighting and linting
 - Git integration
 - Docker support
@@ -155,6 +168,7 @@ nano-degree/
 - Code formatting (Black, autopep8)
 
 ### Command Line Tools
+
 ```bash
 # Code formatting
 pip install black isort
@@ -187,14 +201,15 @@ pip install mkdocs mkdocs-material
 
 ### Troubleshooting
 
-**Common Issues**
+#### Common Issues
 
 - **API Rate Limits**: Use smaller examples, implement delays
 - **Memory Issues**: Close other applications, use smaller models
 - **Import Errors**: Check virtual environment activation
 - **Network Issues**: Verify API keys and internet connection
 
-**Debug Steps**
+#### Debug Steps
+
 1. Check error messages carefully
 2. Verify environment variables
 3. Test with minimal examples
@@ -203,7 +218,7 @@ pip install mkdocs mkdocs-material
 
 ## Progress Tracking
 
-**Session Completion**
+### Session Completion
 
 - [ ] Read all core content
 - [ ] Run code examples successfully  
@@ -211,14 +226,14 @@ pip install mkdocs mkdocs-material
 - [ ] Pass assessment quizzes
 - [ ] Understand key concepts
 
-**Module Milestones**
+### Module Milestones
 
 - [ ] **Session 0-2**: Foundations established
 - [ ] **Session 3-5**: Intermediate concepts mastered  
 - [ ] **Session 6-8**: Advanced patterns implemented
 - [ ] **Session 9**: Production deployment ready
 
-**Portfolio Projects**
+### Portfolio Projects
 
 Consider building these throughout your learning:
 
