@@ -143,10 +143,6 @@ Finally, we compute final metrics and return comprehensive evaluation results:
         }
 ```
 
-### **RAGAS Integration**
-
-RAGAS (RAG Assessment) provides standardized evaluation metrics:
-
 ### RAGAS Integration
 
 RAGAS (RAG Assessment) provides standardized evaluation metrics. First, we import the necessary components:
