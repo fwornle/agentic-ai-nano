@@ -1,76 +1,18 @@
 # Session 2: Building a Secure File System MCP Server
 
-## Learning Outcomes
-
-By the end of this session, you will be able to:
-- **Build** a production-grade file system MCP server with comprehensive security features
-- **Implement** sandboxing to prevent unauthorized file access and path traversal attacks
-- **Handle** both text and binary files with proper encoding and streaming
-- **Create** advanced search capabilities for finding files by content or metadata
-- **Apply** security best practices including input validation, audit logging, and permission checks
-
-## Chapter Overview
-
-### What You'll Learn: Secure File System Integration for AI Agents
-
-In this session, we'll build a file system MCP server that safely exposes file operations to AI agents. This represents one of the most critical and widely-adopted applications of the Model Context Protocol - enabling AI systems to read documentation, analyze codebases, and manage files while maintaining enterprise-grade security boundaries.
-
-### Why This Matters: Industry Context and Real-World Impact
-
-Based on 2024-2025 industry research, file system security has become increasingly critical:
-
-- **Growing Threat Landscape**: Path traversal vulnerabilities have increased by 85% in 2024, with CISA tracking 55 directory traversal vulnerabilities in their Known Exploited Vulnerabilities catalog
-- **Enterprise AI Adoption**: Major companies like Block, Apollo, Microsoft, and Google DeepMind are implementing MCP file system servers to connect AI agents with internal documentation and codebases
-- **Development Tool Integration**: Platforms like Replit, Codeium, Sourcegraph, and Zed use MCP file system servers to enhance AI-powered code assistance
-
-### How MCP File Systems Stand Out: The Industry Standard
-
-The Model Context Protocol has emerged as the universal standard for AI-file system integration:
-- **Standardized Security**: Unlike custom implementations, MCP provides proven security patterns adopted across the industry
-- **Cross-Platform Compatibility**: Works with Claude Desktop, ChatGPT, Microsoft Copilot Studio, and other AI platforms
-- **Production-Ready**: Used by enterprise systems including GitHub integrations, Azure services, and Microsoft 365
-
-### Where You'll Apply This: Common Use Cases
-
-Real-world applications of secure MCP file system servers include:
-- **Code Analysis**: AI agents reading and analyzing entire codebases for security audits and refactoring
-- **Documentation Management**: AI assistants accessing technical documentation and wiki systems
-- **Content Processing**: Automated processing of markdown files, configuration files, and structured data
-- **Development Workflows**: AI-powered code generation with access to existing project files and dependencies
+This session covers building a production-grade file system MCP server with comprehensive security features including sandboxing, path validation, input sanitization, and audit logging. You'll implement secure file operations that prevent directory traversal attacks while supporting both text and binary files.
 
 ![File System Security Architecture](images/filesystem-security-architecture.png)
-### Figure 1: Multi-layered security architecture showing path validation, sandboxing, permission checks, and audit logging working together to create a secure file access boundary for AI agents
+### Multi-layered security architecture showing path validation, sandboxing, permission checks, and audit logging
 
-### Learning Path Options
+## Part 1: Understanding File System Security
 
-**Observer Path (45 minutes)**: Understand file system security concepts and see practical examples
-- Focus: Quick insights into sandboxing, path validation, and security patterns
-- Best for: Getting oriented with security concepts and understanding the architecture
+File system access represents one of the highest-risk attack vectors in AI agent systems. Common threats include:
 
-**🙋‍♂️ Participant Path (75 minutes)**: Implement a working secure file system server  
-- Focus: Hands-on implementation of security layers and file operations
-- Best for: Building practical skills with guided development
-
-**🛠️ Implementer Path (120 minutes)**: Advanced security features and production deployment
-- Focus: Enterprise-level security, performance optimization, and monitoring
-- Best for: Production deployment and security architecture expertise
-
----
-
-## Part 1: Understanding File System Security (Observer: 10 min | Participant: 15 min)
-
-### The Critical Security Challenge
-
-File system access represents one of the highest-risk attack vectors in AI agent systems. Understanding these threats is essential for building secure MCP servers.
-
-### Common Attack Vectors:
-- **Path Traversal**: Malicious inputs like `../../../etc/passwd` can access sensitive system files
+- **Path Traversal**: Malicious inputs like `../../../etc/passwd` accessing sensitive system files
 - **System File Access**: Reading critical files like `/etc/passwd`, `C:\Windows\System32\config\SAM`
 - **Arbitrary Write Operations**: Creating malicious files in system directories
 - **Denial of Service**: Large file operations that exhaust system resources
-
-### Real-World Impact (2024-2025 Data):
-According to CISA, 55 directory traversal vulnerabilities are currently in their Known Exploited Vulnerabilities catalog, with an 85% increase in path traversal attacks affecting critical infrastructure including hospitals and schools.
 
 ### Defense-in-Depth Strategy
 
@@ -81,30 +23,9 @@ Our server implements multiple security layers:
 4. **Audit Logging**: Complete operation tracking
 5. **Resource Limits**: Prevention of resource exhaustion
 
-### **OBSERVER PATH**: Quick Project Setup Overview
+### Project Setup
 
-### Essential Project Structure:
-We'll create a modular file system server with security-first architecture:
-
-```bash
-
-# Basic setup (Observer - just understand the structure)
-
-mkdir mcp-filesystem-server && cd mcp-filesystem-server
-python -m venv venv && source venv/bin/activate
-pip install fastmcp aiofiles python-magic-bin
-```
-
-### Key Dependencies for Security:
-- `fastmcp`: MCP protocol framework with built-in security features
-- `aiofiles`: Async I/O prevents blocking operations that could cause DoS
-- `python-magic-bin`: Content-based file type detection (more secure than extensions)
-
-### **PARTICIPANT PATH**: Complete Project Implementation
-
-### Step 1: Enhanced Security Setup
-
-Implement the complete project structure with additional security dependencies:
+Create a modular file system server with security-first architecture:
 
 ```bash
 
@@ -121,7 +42,10 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install fastmcp aiofiles watchdog python-magic-bin cryptography
 ```
 
-### Production Dependencies Explained:
+### Dependencies:
+- `fastmcp`: MCP protocol framework with built-in security features
+- `aiofiles`: Async I/O prevents blocking operations that could cause DoS
+- `python-magic-bin`: Content-based file type detection (more secure than extensions)
 - `watchdog`: Real-time file system monitoring for security events
 - `cryptography`: File integrity verification and encryption support
 
@@ -146,18 +70,13 @@ mcp-filesystem-server/
 └── requirements.txt       # Dependency list
 ```
 
-### Architecture Benefits:
-- **Modular Security**: Each security concern is isolated
-- **Testable Components**: Individual security modules can be unit tested
-- **Maintainable Code**: Clear separation between business logic and security
+This modular architecture separates security concerns, enables unit testing, and maintains clear separation between business logic and security.
 
-### **OBSERVER PATH**: Configuration Essentials
+### Configuration Setup
 
-### Understanding Configuration Security:
-The configuration module is our security control center - every security setting is defined here to prevent accidental security holes in the code.
+The configuration module is the security control center where all security settings are defined:
 
 ```python
-
 # config.py - Security-first configuration
 
 from pathlib import Path
@@ -172,13 +91,7 @@ class FileSystemConfig:
         self.base_path.mkdir(exist_ok=True)  # Safe directory creation
 ```
 
-**Security Principle:** The sandbox path is the most critical security boundary - everything outside this directory is completely inaccessible to AI agents.
-
-### **PARTICIPANT PATH**: Complete Security Configuration
-
-### Step 1: Enhanced Configuration Setup
-
-Implement comprehensive security settings with detailed explanations:
+**Security Principle:** The sandbox path is the critical security boundary - everything outside this directory is inaccessible to AI agents.
 
 ```python
         # File size protection (prevents memory exhaustion attacks)
@@ -199,10 +112,7 @@ Implement comprehensive security settings with detailed explanations:
         }
 ```
 
-### Security Decision Rationale:
-- **Whitelist Approach**: Only explicitly safe file types are allowed (recommended by OWASP)
-- **Size Limits**: Prevent denial-of-service attacks through large file operations
-- **Common Extensions**: Covers typical enterprise file types without executable risks
+This uses a whitelist approach for security (OWASP recommended), prevents DoS attacks through size limits, and covers typical enterprise file types without executable risks.
 
 ### Step 2: Path Traversal Defense Patterns
 
@@ -222,7 +132,7 @@ Define patterns that indicate potential security threats:
         ]
 ```
 
-**Threat Intelligence Integration**: These patterns are based on real attack vectors documented by CISA in their 2024-2025 vulnerability assessments.
+These patterns defend against real attack vectors documented by security organizations.
 
 ### Step 3: Performance and DoS Protection
 
@@ -236,11 +146,7 @@ Implement resource limits to prevent system overload:
         self.rate_limit_per_minute = 100  # Operations per minute per client
 ```
 
-### Enterprise Performance Considerations:
-- **Streaming Architecture**: Large files are processed in chunks to prevent memory exhaustion
-- **Search Limits**: Prevent resource exhaustion from broad search queries
-- **Concurrent Operations**: Limit parallel operations to maintain system stability
-- **Rate Limiting**: Prevent abuse while allowing normal operation patterns
+Performance features prevent resource exhaustion through streaming, search limits, concurrent operation limits, and rate limiting.
 
 ### Step 4: Audit and Compliance Settings
 
@@ -253,21 +159,12 @@ Implement resource limits to prevent system overload:
 
 **Complete implementation available in:** [`src/session2/config.py`](src/session2/config.py)
 
-### **IMPLEMENTER PATH**: Advanced Configuration Features
 
-### Advanced enterprise configuration patterns including encryption, compliance settings, and advanced threat detection are covered in the production security section above.
+## Part 2: Implementing Security Boundaries
 
----
+### Understanding Sandboxing
 
-## Part 2: Implementing Security Boundaries (Observer: 15 min | Participant: 25 min)
-
-### **OBSERVER PATH**: Understanding Sandboxing Concepts
-
-### What is a Sandbox?
-A sandbox is a security mechanism that creates an isolated environment where file operations can only occur within a designated directory tree. Think of it as a digital prison for file access - nothing gets in or out without permission.
-
-### Why Sandboxing is Critical:
-Based on 2024 security research, 85% of file system vulnerabilities involve path traversal attacks. Sandboxing provides mathematical certainty that file operations cannot escape designated boundaries.
+A sandbox creates an isolated environment where file operations can only occur within a designated directory tree. Sandboxing provides mathematical certainty that file operations cannot escape designated boundaries.
 
 ```python
 
@@ -289,7 +186,7 @@ class FileSystemSandbox:
 
 **Key Security Principle:** Using `resolve()` eliminates relative path components and symlink tricks that attackers use to escape sandboxes.
 
-### **PARTICIPANT PATH**: Implementing Robust Path Validation
+### Implementing Path Validation
 
 ### Step 1: Complete Sandbox Architecture
 
@@ -386,15 +283,11 @@ Add comprehensive filename safety checking:
 - **Injection Prevention**: Filename validation stops malicious name-based attacks
 - **Fail-Safe Design**: All errors default to denying access
 
-### **OBSERVER PATH**: File Type Validation Concepts
+### File Type Validation
 
-### Why File Validation Matters:
-File extensions can be easily faked - a malicious executable could be named `document.txt`. Content-based validation examines the actual file bytes to determine the true file type, preventing disguised malicious files.
+File extensions can be easily faked - a malicious executable could be named `document.txt`. Content-based validation examines actual file bytes to determine the true file type, preventing disguised malicious files. Using `python-magic`, we detect file types by examining file headers and content patterns, not just extensions.
 
-### Industry Standard: MIME Type Detection:
-Using libraries like `python-magic` (based on the Unix `file` command), we can detect file types by examining file headers and content patterns, not just extensions.
-
-### **PARTICIPANT PATH**: Implementing Content-Based Validation
+### Implementing Content-Based Validation
 
 ### Step 1: Advanced File Type Detection
 
@@ -518,7 +411,7 @@ Complete validators implementation available in [`src/session2/utils/validators.
 
 ---
 
-## Part 3: Building the File System MCP Server (30 minutes)
+## Part 3: Building the File System MCP Server
 
 Now let's build the main server with our security layers in place.
 
@@ -985,7 +878,7 @@ Generate the success response and handle any errors:
 
 ---
 
-## Part 4: Advanced Features - Search and Resources (15 minutes)
+## Part 4: Advanced Features - Search and Resources
 
 ### Step 4.1: File Search Capability
 
@@ -1280,47 +1173,36 @@ Display startup information and launch the server:
     mcp.run()
 ```
 
----
+## Summary
 
-## Chapter Summary
+You've built a production-grade file system MCP server with:
 
-Congratulations! You've built a production-grade file system MCP server with comprehensive security features. Let's review what you've accomplished:
+**Security Features:**
+- Sandboxing restricts operations to designated directory
+- Path validation prevents directory traversal attacks
+- File type validation checks extensions and MIME types
+- Size limits prevent memory exhaustion
+- Input sanitization validates filenames and paths
+- Audit logging tracks all operations
 
-### Security Features Implemented:
+**Capabilities:**
+- Directory browsing with metadata and filtering
+- File reading with text and binary support
+- File writing with safety checks
+- Content search across multiple files
+- File information including checksums
+- Resources exposing configuration and statistics
+- Prompts for common file system tasks
 
-1. **Sandboxing**: All file operations are restricted to a designated directory
-2. **Path Validation**: Prevents directory traversal attacks with robust path resolution
-3. **File Type Validation**: Checks both extensions and MIME types for safety
-4. **Size Limits**: Prevents memory exhaustion from large files
-5. **Input Sanitization**: Validates filenames and paths for malicious patterns
-6. **Audit Logging**: Tracks all operations for security monitoring
+**Production Features:**
+- Async I/O for non-blocking operations
+- Limits on search results and file sizes
+- Comprehensive logging
+- Modular design for easy extensions
 
-### Capabilities Built:
-- **Directory browsing** with metadata and filtering
-- **File reading** with support for both text and binary files
-- **File writing** with safety checks and directory creation
-- **Content search** across multiple files with context
-- **File information** including checksums and permissions
-- **Resources** exposing configuration and statistics
-- **Prompts** for common file system tasks
+## Exercises
 
-### Production Considerations:
-- **Performance**: Async I/O for non-blocking operations
-- **Scalability**: Limits on search results and file sizes
-- **Monitoring**: Comprehensive logging for debugging
-- **Extensibility**: Modular design for easy feature additions
-
----
-
-## Testing Your Understanding
-
-### Practical Exercise
-
-Extend the server with a tool that safely moves/renames files:
-
-### Step 1: Tool Definition and Documentation
-
-Define the file move/rename tool with proper parameters:
+**Practical Exercise:** Extend the server with a tool that safely moves/renames files:
 
 ```python
 @mcp.tool()
@@ -1328,61 +1210,28 @@ async def move_file(source: str, destination: str, overwrite: bool = False) -> D
     """
     Move or rename a file within the sandbox.
     
-    Args:
-        source: Source file path
-        destination: Destination file path
-        overwrite: Allow overwriting existing files
-    
-    Returns:
-        Success status or error
+    Implementation hints:
+    1. Validate both source and destination paths
+    2. Check source exists and is a file
+    3. Check destination doesn't exist (unless overwrite=True)
+    4. Validate destination filename
+    5. Use Path.rename() for the operation
+    6. Log the operation
     """
-```
-
-### Step 2: Implementation Guidelines
-
-Implementation hints for the move operation:
-
-```python
-    # TODO: Implement this function
-    # Hints:
-    # 1. Validate both source and destination paths
-    # 2. Check source exists and is a file
-    # 3. Check destination doesn't exist (unless overwrite=True)
-    # 4. Validate destination filename
-    # 5. Use Path.rename() for the operation
-    # 6. Log the operation
     pass
 ```
 
----
+**Additional Challenges:**
+1. Add a compression tool that creates zip archives of directories
+2. Implement file permissions checking
+3. Create a file diff tool that compares two files
+4. Add rate limiting to prevent abuse of search operations
 
-## Next Session Preview
-
-In Session 3, we'll integrate MCP servers with **LangChain** to build intelligent agents that can:
-- Connect to multiple MCP servers simultaneously
-- Use ReAct patterns for complex reasoning
-- Implement conversation memory
-- Build autonomous file management workflows
-
-### Homework
-
-1. **Add a compression tool** that can create zip archives of directories
-2. **Implement file permissions** checking based on the sandbox configuration
-3. **Create a file diff tool** that compares two files and shows differences
-4. **Add rate limiting** to prevent abuse of search operations
-
-**Hint:** Check the [Session2_Test_Solutions.md](Session2_Test_Solutions.md) file for the complete solution and detailed explanations.
-
----
-
-## Additional Resources
-
+**Resources:**
 - [OWASP Path Traversal Prevention](https://owasp.org/www-community/attacks/Path_Traversal)
 - [Python AsyncIO Best Practices](https://docs.python.org/3/library/asyncio-best-practices.html)
 - [File Type Detection with python-magic](https://github.com/ahupp/python-magic)
 - [Secure Coding Guidelines](https://security.berkeley.edu/secure-coding-practice-guidelines)
-
-Remember: Security is not a feature, it's a requirement. Always validate input, limit access, and log operations! 🔒
 
 ---
 
@@ -1470,4 +1319,4 @@ D) Automatic file compression
 
 **Note:** Advanced security features and enterprise-scale file operations are covered in Sessions 4 and 5, which focus on production deployment and security hardening.
 
-**Next:** [Session 3 - LangChain MCP Integration](Session3_LangChain_MCP_Integration.md) →
+**Next:** [Session 3 - LangChain MCP Integration](Session3_LangChain_MCP_Integration.md)

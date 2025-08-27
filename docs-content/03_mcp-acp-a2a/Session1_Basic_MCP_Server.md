@@ -1,44 +1,13 @@
-# Session 1: Building Your First MCP Server - From Concept to Implementation
+# Session 1: Building Your First MCP Server
 
-## Learning Outcomes
-
-By the end of this session, you will be able to:
-- **Understand** MCP server architecture and the three core capabilities (tools, resources, prompts)
-- **Build** a functional weather MCP server with proper error handling
-- **Implement** input validation and structured responses for production use
-- **Test** your MCP server using stdio transport and MCP Inspector
-- **Apply** industry best practices for MCP server development
-
-## Chapter Overview
-
-**What you'll learn**: How to build production-ready MCP servers that solve real integration challenges
-
-**Why it matters**: MCP servers are the foundation of the modern AI ecosystem. Companies like Block Inc. report 60% faster AI integration development using standardized MCP servers instead of custom API wrappers.
-
-**How it stands out**: MCP servers provide automatic schema validation, standardized error handling, and protocol compliance that custom integrations often lack.
-
-**Where you'll apply it**: From simple weather services to complex enterprise data integrations - MCP servers power everything from development tools (Zed, Cursor) to enterprise platforms (Microsoft Azure, AWS).
+Build a production-ready MCP server that exposes tools, resources, and prompts to AI clients. This session covers MCP server architecture, implementation patterns, proper error handling, and testing with MCP Inspector.
 
 ![MCP Architecture](images/mcp-architecture.png)
-### Figure 1: MCP server architecture showing how a single server exposes tools, resources, and prompts to any MCP-compatible AI client
-
-### Learning Path Options
-
-**Observer Path (30 minutes)**: Understand MCP concepts and see a complete working example
-- Focus: Clear demonstrations of MCP server capabilities with simple examples
-- Best for: Understanding the fundamentals and business value
-
-**🙋‍♂️ Participant Path (60 minutes)**: Build your own weather MCP server step-by-step  
-- Focus: Hands-on implementation with practical examples and testing
-- Best for: Developers who want to create their own MCP servers
-
-**🛠️ Implementer Path (90 minutes)**: Production deployment patterns and advanced features
-- Focus: Enterprise-ready implementations with monitoring and security
-- Best for: Teams deploying MCP servers in production environments
+*MCP server architecture showing how a single server exposes tools, resources, and prompts to any MCP-compatible AI client*
 
 ---
 
-## Part 1: MCP Server Fundamentals (Observer: 8 min | Participant: 15 min)
+## Part 1: MCP Server Fundamentals
 
 ### Understanding the MCP Solution
 
@@ -78,7 +47,7 @@ def get_weather(city: str) -> dict:
 - **Type Safety**: Automatic validation of inputs and outputs
 - **Discoverability**: AI clients can automatically discover available tools
 
-### **PARTICIPANT PATH**: Environment Setup
+### Environment Setup
 
 ### Development Environment Requirements:
 - Python 3.8+ with virtual environment
@@ -100,13 +69,13 @@ mcp-weather-server/
 └── .env                  # Configuration
 ```
 
-### **IMPLEMENTER PATH**: Production Considerations
+### Production Considerations
 
-### Production deployment patterns and infrastructure setup covered in Session 4
+Production deployment patterns and infrastructure setup covered in Session 4
 
 ---
 
-## Part 2: Building the Weather MCP Server (Observer: 12 min | Participant: 30 min)
+## Part 2: Building the Weather MCP Server
 
 ### MCP Server Capabilities Overview
 
@@ -218,7 +187,7 @@ def weather_report_prompt(city: str) -> str:
 - Help standardize common queries across different AI agents
 - Can include dynamic parameters like city names
 
-### **PARTICIPANT PATH**: Complete Server Implementation
+### Complete Server Implementation
 
 ### Running the Server:
 
@@ -237,25 +206,24 @@ if __name__ == "__main__":
 3. Connect using: `stdio://python weather_server.py`
 4. Explore the tools, resources, and prompts in the Inspector interface
 
-### **IMPLEMENTER PATH**: Production Patterns
+### Production Patterns
 
-### Advanced error handling, logging, authentication, and deployment covered in Sessions 4-5
+Advanced error handling, logging, authentication, and deployment covered in Sessions 4-5
 
 ---
 
-## Part 3: Testing and Validation (Observer: 5 min | Participant: 15 min)
+## Part 3: Testing and Validation
 
 ### Testing with MCP Inspector
 
-### Observer Path - Watch the Demo:
-The MCP Inspector provides a user-friendly interface to test MCP servers without writing code:
+The MCP Inspector provides a user-friendly interface to test MCP servers:
 
 1. **Connection**: Inspector connects to your server via stdio transport
 2. **Discovery**: Automatically discovers all tools, resources, and prompts  
 3. **Testing**: Interactive forms for testing each capability
 4. **Debugging**: Real-time request/response logs for troubleshooting
 
-### **PARTICIPANT PATH**: Hands-On Testing
+### Hands-On Testing
 
 ### Step 1: Start Your Server
 ```bash
@@ -286,30 +254,19 @@ npx @modelcontextprotocol/inspector
 - Input validation shows helpful error messages
 - All capabilities are properly discoverable
 
-### **IMPLEMENTER PATH**: Production Testing
+### Production Testing
 
-### Automated testing suites, integration tests, and monitoring covered in Session 4
+Automated testing suites, integration tests, and monitoring covered in Session 4
 
 ---
 
 ## Key Takeaways
 
-### Observer Path Summary:
 - **MCP Architecture**: Single protocol connecting any AI to any data source
 - **Three Capabilities**: Tools (functions), Resources (data), Prompts (templates)
-- **Business Value**: 60% faster development than custom integrations
-- **Testing**: MCP Inspector provides intuitive testing interface
-
-### Participant Path Achievements:
-- Built complete weather MCP server with all three capabilities
-- Implemented proper input validation and error handling
-- Successfully tested server using MCP Inspector
-- Understood stdio transport mechanism
-
-### Implementer Path Next Steps:
-- Session 4: Production deployment with monitoring
-- Session 5: Security and authentication patterns
-- Advanced error handling and logging strategies
+- **Implementation**: Built complete weather MCP server with proper error handling
+- **Testing**: MCP Inspector provides intuitive testing and debugging interface
+- **Production**: Sessions 4-5 cover deployment, monitoring, and security patterns
 
 ### Industry Applications:
 - **Development Tools**: Zed, Cursor, Sourcegraph integrate MCP for AI assistance
@@ -318,11 +275,11 @@ npx @modelcontextprotocol/inspector
 
 ---
 
-## Practical Exercise: Advanced Weather Tool (20 minutes)
+## Practical Exercise: Advanced Weather Tool
 
 **Challenge:** Create a tool that finds the warmest city from a list.
 
-Now that you've built your basic weather MCP server, let's extend it with a more sophisticated tool that demonstrates proper error handling, data processing, and result aggregation.
+Extend your weather MCP server with a more sophisticated tool that demonstrates proper error handling, data processing, and result aggregation.
 
 ### Requirements:
 - Accept a list of city names as input
@@ -368,48 +325,6 @@ Try implementing this tool before looking at the solution! This exercise reinfor
 - [JSON Schema Guide](https://json-schema.org/learn/) - Understanding schema validation for MCP tools
 - [Python Type Hints](https://docs.python.org/3/library/typing.html) - Essential for automatic schema generation
 
----
-
-## Practical Exercise
-
-**Challenge:** Create a tool that finds the warmest city from a list.
-
-Build a more complex MCP tool that demonstrates data processing, error handling, and structured responses:
-
-### Your Task:
-
-```python
-@mcp.tool()
-def find_warmest_city(cities: List[str]) -> Dict:
-    """
-    Find the warmest city from a list.
-    
-    Args:
-        cities: List of city names to compare
-        
-    Returns:
-        Dictionary with the warmest city and its temperature,
-        or error information if the operation fails
-    """
-    # Your implementation here
-    pass
-```
-
-### Requirements:
-
-1. **Input validation**: Handle empty lists and invalid city names
-2. **Weather lookup**: Use the existing `get_current_weather` function
-3. **Comparison logic**: Find the city with highest temperature
-4. **Error handling**: Return structured error messages for failures
-5. **Rich responses**: Include temperature, condition, and metadata
-
-### Expected Features:
-- Handle cases where some cities have invalid weather data
-- Return the warmest city with complete weather information
-- Provide meaningful error messages for troubleshooting
-- Include comparison metadata (cities checked, temperature differences)
-
-**Hint:** Use the existing weather data structure and build comparison logic on top.
 
 ---
 
@@ -463,17 +378,17 @@ B) `npm start inspector`
 C) `npx @modelcontextprotocol/inspector`  
 D) `python -m mcp.inspector`  
 
-**Question 9:** Which company reported 60% faster AI integration development using MCP?
-A) Microsoft  
-B) Google  
-C) Block Inc.  
-D) OpenAI  
+**Question 9:** What is the main benefit of MCP servers over custom API integrations?
+A) Lower development cost  
+B) Better runtime performance  
+C) Standardized protocol with automatic validation  
+D) Easier deployment process  
 
-**Question 10:** What is the main advantage of MCP over custom API integrations?
-A) Better performance  
-B) Standardized protocol with automatic schema validation  
-C) Lower cost  
-D) Easier to learn  
+**Question 10:** What file extension is required for MCP server implementations?
+A) `.mcp`  
+B) `.py` (Python files)  
+C) `.json`  
+D) `.server`  
 
 [**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
 
