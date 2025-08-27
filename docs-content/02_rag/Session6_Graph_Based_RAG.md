@@ -1,223 +1,63 @@
 # Session 6: Graph-Based RAG (GraphRAG)
 
-## Learning Navigation Hub
+GraphRAG extends traditional RAG by building structured knowledge representations that capture entities, relationships, and hierarchies, enabling sophisticated multi-hop reasoning and comprehensive information retrieval.
 
-**Total Time Investment**: 100 minutes (Core) + 80 minutes (Optional)
-**Your Learning Path**: Choose your engagement level
-
-### Quick Start Guide
-- **Observer (100 min)**: Read concepts + examine graph patterns and reasoning techniques
-- **Participant (140 min)**: Follow exercises + implement basic GraphRAG systems
-- **Implementer (180 min)**: Build production GraphRAG + deploy reasoning-enhanced systems
-
-## Session Overview Dashboard
-
-### Core Learning Track (100 minutes) - REQUIRED
-
-| Section | Concept Load | Time | Skills |
-|---------|--------------|------|--------|
-| Knowledge Graph Fundamentals | 5 concepts | 25 min | Graph Theory |
-| Entity & Relationship Extraction | 4 concepts | 25 min | NLP Processing |
-| Graph Traversal & Reasoning | 4 concepts | 25 min | Algorithm Design |
-| Hybrid Graph-Vector Integration | 3 concepts | 25 min | System Integration |
-
-### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** (40 min)
-- 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** (40 min)
-
-## Core Section (Required - 100 minutes)
-
-## Learning Outcomes
-
-By the end of this session, you will be able to:
-- **Build** knowledge graphs from unstructured documents using entity extraction and relationship mapping
-- **Implement** Code GraphRAG systems for software repositories using AST parsing
-- **Design** graph traversal algorithms for multi-hop reasoning and comprehensive information retrieval
-- **Integrate** graph databases (Neo4j, Memgraph) with vector search for hybrid retrieval
-- **Deploy** production-ready GraphRAG systems with incremental graph updates
-
-## Chapter Introduction
-
-### **Beyond Vector Search: Knowledge Graphs Meet RAG**
+### Optional Deep Dive Modules
+- **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
+- **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise-ready GraphRAG implementation
 
 ![RAG Architecture Overview](images/RAG-overview.png)
 
-Traditional vector RAG excels at finding similar content but struggles with complex relationships and multi-hop reasoning. GraphRAG solves this by building structured knowledge representations that capture entities, relationships, and hierarchies. This enables sophisticated reasoning like "find all companies that partnered with Apple's suppliers in the automotive sector" - queries that require following multiple relationship chains.
+Traditional vector RAG finds similar content but struggles with complex relationships and multi-hop reasoning. GraphRAG builds structured knowledge representations that capture entities, relationships, and hierarchies, enabling queries like "find all companies that partnered with Apple's suppliers in the automotive sector."
 
-### The GraphRAG Evolution: From Simple Graphs to Reasoning-Enhanced Systems
+## NodeRAG Architecture
 
-Modern GraphRAG represents a paradigm shift from passive information retrieval to proactive knowledge reasoning. Recent advances have introduced heterogeneous graph architectures and reasoning integration that transform how we approach graph-based RAG systems.
-
-### The GraphRAG Advantage:
-- **Relationship Awareness**: Explicit modeling of entity connections
-- **Multi-Hop Reasoning**: Following chains of relationships for complex queries
-- **Structural Understanding**: Hierarchies, dependencies, and network effects
-- **Comprehensive Retrieval**: Finding related information through graph traversal
-- **Reasoning Integration**: Proactive reasoning that constructs logically coherent contexts
-- **Heterogeneous Processing**: Specialized node types for different knowledge structures
-
-### Advanced Implementations You'll Build:
-- **NodeRAG Architecture**: Heterogeneous graph systems with specialized node types
-- **Reasoning-Enhanced GraphRAG**: Bidirectional synergy between retrieval and reasoning
-- **Three-Stage Processing**: Decomposition → augmentation → enrichment workflows
-- **Document GraphRAG**: Extract entities and relationships from text
-- **Code GraphRAG**: Parse code repositories into executable knowledge graphs
-- **Hybrid Search**: Combine graph traversal with vector similarity and reasoning
-- **Production Systems**: Scalable graph databases with incremental updates
-
-### **The Future of Intelligent Retrieval**
-
-GraphRAG represents the evolution from simple similarity matching to intelligent relationship understanding and proactive reasoning:
-- Transform documents into heterogeneous knowledge networks with specialized node types
-- Enable reasoning that spans multiple information sources through graph-based logical reasoning
-- Build systems that construct logically coherent contexts rather than just aggregating information
-- Deploy production GraphRAG with reasoning capabilities that scales with your knowledge base
-- Implement bidirectional synergy where reasoning augments retrieval and retrieval enhances reasoning
-
-Let's build the next generation of reasoning-enhanced RAG systems! 🕸️🧠
+NodeRAG uses specialized node types and heterogeneous graph structures to enable sophisticated multi-hop reasoning and coherent knowledge retrieval.
 
 ---
 
-## **Research Integration: NodeRAG and Reasoning-Enhanced GraphRAG**
+## Part 1: NodeRAG - Structured Brain Architecture
 
-### **NodeRAG: Heterogeneous Graph Architecture**
-
-Traditional GraphRAG systems treat all nodes uniformly, leading to fragmented retrieval and limited reasoning capabilities. NodeRAG introduces a breakthrough approach with **heterogeneous graph structures** that use specialized node types and sophisticated traversal algorithms.
-
-### The NodeRAG Innovation:
-- **Specialized Node Types**: Different nodes for entities, concepts, documents, and relationships
-- **Three-Stage Processing**: Decomposition → Augmentation → Enrichment pipeline
-- **Personalized PageRank**: Semantic traversal that follows knowledge pathways
-- **HNSW Similarity Edges**: High-performance similarity connections in graph structures
-- **Graph-Centric Representation**: Core knowledge representation mechanism
-
-### NodeRAG vs Traditional GraphRAG:
-
-| Traditional GraphRAG | NodeRAG Architecture |
-|---------------------|---------------------|
-| Uniform node treatment | Specialized node types (Entity, Concept, Document) |
-| Simple entity-relationship pairs | Rich semantic hierarchies with typed connections |
-| Basic graph traversal | Personalized PageRank for semantic exploration |
-| Fragmented retrieval results | Coherent knowledge pathway construction |
-| Limited reasoning capability | Graph structure enables logical reasoning |
-
-### **Reasoning Integration: From Passive to Proactive RAG**
-
-The integration of reasoning capabilities transforms GraphRAG from passive information retrieval to proactive knowledge construction. This represents a fundamental paradigm shift in how RAG systems approach complex queries.
-
-### Three Reasoning Integration Approaches:
-
-1. **Prompt-Based Reasoning**: Enhanced prompts that guide reasoning through graph structures
-2. **Tuning-Based Integration**: Fine-tuned models that understand graph reasoning patterns
-3. **Reinforcement Learning**: Systems that learn optimal reasoning pathways through graph exploration
-
-### Bidirectional Synergy:
-- **Reasoning-Augmented Retrieval**: Reasoning processes improve retrieval quality
-- **Retrieval-Augmented Reasoning**: Graph context enhances reasoning capabilities
-
-### Workflow Architectures:
-- **Structured/Controlled Workflows**: Predefined reasoning patterns for consistent results
-- **Dynamic/Adaptive Workflows**: Flexible reasoning that adapts to query complexity
-
----
-
-## **Part 1: NodeRAG - Structured Brain Architecture (40 minutes)**
-
-### **NodeRAG: Revolutionizing Graph-Based Knowledge Representation**
-
-### The Fragmented Retrieval Problem
-
-Traditional RAG systems suffer from a fundamental limitation: **fragmented retrieval**. When you ask "What technologies do companies that Apple partners with use in automotive manufacturing?", traditional systems struggle because:
-
-1. **Vector RAG** finds semantically similar content but can't traverse relationships
-2. **Basic GraphRAG** treats all nodes uniformly, missing specialized knowledge patterns
-3. **Retrieval fragments** scatter across disconnected information islands
-4. **Context lacks coherence** - pieces don't form logical reasoning pathways
-
-### NodeRAG's Breakthrough Solution: Structured Brain Architecture
-
-NodeRAG introduces a revolutionary approach that mirrors how human knowledge is actually structured in the brain - through **heterogeneous, specialized networks** that process different types of information through distinct pathways.
+Traditional RAG systems suffer from fragmented retrieval when handling complex queries like "What technologies do companies that Apple partners with use in automotive manufacturing?" NodeRAG solves this with specialized node types and reasoning pathways.
 
 ```
 Traditional RAG: Document → Chunks → Uniform Embeddings → Similarity Search
 NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pathways
 ```
 
-### The NodeRAG Innovation Stack:
+### NodeRAG Key Features:
 
-1. **Heterogeneous Node Types**: Specialized processors for different knowledge structures
-2. **Three-Stage Processing Pipeline**: Systematic knowledge pathway construction
+1. **Specialized Node Types**: Six distinct node types for different knowledge structures
+2. **Three-Stage Processing**: Decomposition → Augmentation → Enrichment
 3. **Personalized PageRank**: Semantic traversal following knowledge relationships
-4. **HNSW Similarity Edges**: High-performance similarity connections within graph structure
-5. **Graph-Centric Knowledge Representation**: Core knowledge mechanism, not just search index
+4. **HNSW Integration**: Similarity edges within graph structure
+5. **Reasoning Pathways**: Multi-hop logical reasoning capabilities
 
-### **NodeRAG vs Traditional GraphRAG: Architectural Comparison**
+### NodeRAG's Six Specialized Node Types
 
-| **Aspect** | **Traditional GraphRAG** | **NodeRAG Architecture** |
-|------------|---------------------------|---------------------------|
-| **Node Treatment** | Uniform entity-relationship pairs | **6 Specialized Node Types**: Entities, Concepts, Documents, Relationships, Attributes, Summaries |
-| **Knowledge Representation** | Flat entity connections | **Hierarchical Semantic Networks** with typed relationships |
-| **Traversal Strategy** | Basic graph walking | **Personalized PageRank** for semantic pathway construction |
-| **Retrieval Process** | Fragmented entity matching | **Coherent Knowledge Pathway** construction |
-| **Reasoning Capability** | Limited to direct connections | **Multi-hop logical reasoning** through graph structure |
-| **Similarity Integration** | Separate vector and graph systems | **HNSW edges within graph** for unified retrieval |
-| **Context Generation** | Concatenated entity information | **Logically coherent narratives** from knowledge pathways |
+**1. Semantic Unit Nodes** - Abstract concepts and themes
+- Example: "Supply Chain Management" connecting related methodologies
 
-### **NodeRAG's Six Specialized Node Types**
+**2. Entity Nodes** - Concrete entities with rich metadata
+- Example: "Apple Inc." with subsidiaries and partnerships
 
-### The Human Brain Inspiration
+**3. Relationship Nodes** - Explicit connections with evidence
+- Example: "Partnership" linking Apple and Foxconn with details
 
-Just as the human brain has specialized regions (visual cortex, language centers, memory systems), NodeRAG employs **specialized node types** that process different aspects of knowledge:
+**4. Attribute Nodes** - Properties and characteristics
+- Example: "Revenue: $394.3B" with temporal information
 
-**1. Semantic Unit Nodes** - *The Concept Processors*
-- **Purpose**: Abstract concepts, themes, and semantic relationships
-- **Content**: Topic definitions, conceptual frameworks, thematic connections
-- **Example**: "Supply Chain Management" node connecting to related methodologies and principles
+**5. Document Nodes** - Original source segments
+- Example: SEC filing containing partnership disclosures
 
-**2. Entity Nodes** - *The Fact Repositories*
-- **Purpose**: Concrete entities like people, organizations, locations, products
-- **Content**: Rich metadata, canonical forms, entity attributes and relationships
-- **Example**: "Apple Inc." node with subsidiaries, partnerships, industry classifications
+**6. Summary Nodes** - Cross-document synthesis
+- Example: "Apple Automotive Strategy" synthesizing multiple sources
 
-**3. Relationship Nodes** - *The Connection Specialists*
-- **Purpose**: Explicit representation of connections between entities/concepts
-- **Content**: Relationship types, confidence scores, temporal information, evidence
-- **Example**: "Partnership" node linking Apple and Foxconn with contract details and timeline
+### The Three-Stage NodeRAG Processing Pipeline
 
-**4. Attribute Nodes** - *The Property Descriptors*
-- **Purpose**: Properties, characteristics, and descriptive information
-- **Content**: Quantitative measures, qualitative descriptions, metadata
-- **Example**: "Revenue: $394.3B" node linked to Apple with temporal and source information
+### Stage 1: Graph Decomposition
 
-**5. Document Nodes** - *The Source Anchors*
-- **Purpose**: Original document segments and contextual information
-- **Content**: Text chunks, document metadata, source attribution, extraction context
-- **Example**: SEC filing segment containing Apple's partnership disclosures
-
-**6. Summary Nodes** - *The Synthesis Hubs*
-- **Purpose**: Aggregated information and cross-document synthesis
-- **Content**: Multi-source summaries, analytical insights, pattern identification
-- **Example**: "Apple Automotive Strategy Summary" synthesizing multiple sources and partnerships
-
-### The Specialized Processing Advantage
-
-Each node type has **specialized processing algorithms** optimized for its knowledge structure:
-- **Semantic Units**: Conceptual clustering and thematic analysis
-- **Entities**: Canonicalization and disambiguation
-- **Relationships**: Temporal reasoning and confidence propagation
-- **Attributes**: Statistical analysis and property inheritance
-- **Documents**: Source tracking and provenance management
-- **Summaries**: Cross-reference validation and coherence checking
-
-### **The Three-Stage NodeRAG Processing Pipeline**
-
-### Stage 1: Graph Decomposition - Specialized Knowledge Extraction
-
-Traditional systems extract uniform entities and relationships. NodeRAG performs **multi-granularity decomposition** that creates specialized node types based on knowledge structure:
-
-**Understanding RAG Multi-Granularity Decomposition**: This NodeRAG decomposition breaks documents into specialized knowledge components instead of uniform chunks, enabling targeted extraction of semantic units, entities, relationships, and attributes that preserve knowledge structure.
-
-**Production Impact**: Multi-granularity decomposition improves RAG retrieval accuracy by 40-60% for complex queries because specialized node types maintain semantic coherence and enable sophisticated reasoning pathways that traditional flat chunking cannot achieve.
+NodeRAG performs multi-granularity decomposition that creates specialized node types based on knowledge structure:
 
 ```python
 def noderag_decomposition(document):
@@ -239,13 +79,9 @@ def noderag_decomposition(document):
     }
 ```
 
-### Stage 2: Graph Augmentation - Cross-Reference Integration
+### Stage 2: Graph Augmentation
 
-This stage builds the **heterogeneous graph structure** by creating specialized connections between different node types:
-
-**Understanding RAG Heterogeneous Graph Construction**: This augmentation stage creates typed connections between specialized node types and integrates HNSW similarity edges within the graph structure, enabling both relational traversal and semantic similarity search in a unified system.
-
-**Production Impact**: Heterogeneous graph construction with HNSW edges reduces retrieval latency by 50-70% while improving recall by 35-45% because it combines the precision of graph relationships with the coverage of vector similarity in a single optimized structure.
+This stage builds the heterogeneous graph structure by creating specialized connections between different node types:
 
 ```python
 def noderag_augmentation(decomposition_result):
@@ -282,13 +118,9 @@ Next, we integrate HNSW (Hierarchical Navigable Small World) similarity edges di
     )
 ```
 
-### Stage 3: Graph Enrichment - Reasoning Pathway Construction
+### Stage 3: Graph Enrichment
 
-The final stage builds **reasoning pathways** that enable coherent knowledge traversal:
-
-**Understanding RAG Reasoning Pathway Construction**: This enrichment stage applies Personalized PageRank to identify semantically important nodes and constructs logical reasoning pathways that enable coherent multi-hop traversal through the knowledge graph.
-
-**Production Impact**: Reasoning pathway construction improves complex query handling by 60-80% because weighted PageRank scores prioritize relevant knowledge paths while optimized graph structures enable efficient traversal for multi-step reasoning scenarios.
+The final stage builds reasoning pathways using Personalized PageRank to identify semantically important nodes and enable coherent multi-hop traversal:
 
 ```python
 def noderag_enrichment(heterogeneous_graph):
@@ -340,9 +172,6 @@ Next, we construct logical reasoning pathways using the PageRank scores to guide
 
 NodeRAG uses **Personalized PageRank** to identify the most important semantic pathways through the knowledge graph. Unlike standard PageRank, the personalized version emphasizes nodes relevant to specific query contexts:
 
-**Understanding RAG Personalized PageRank**: This specialized PageRank implementation creates query-aware semantic pathways by weighting different node types according to their relevance, enabling intelligent graph traversal that prioritizes the most valuable knowledge connections.
-
-**Production Impact**: Personalized PageRank reduces query response time by 45-60% and improves answer relevance by 35-50% because it efficiently identifies the most semantically important pathways through complex knowledge graphs without exhaustive traversal.
 
 ```python
 class NodeRAGPageRank:
@@ -446,25 +275,9 @@ For each anchor node, we use breadth-first search (BFS) to discover semantic pat
         return pathways[:max_pathways]
 ```
 
-### Educational Benefits: NodeRAG vs Traditional Vector RAG
-
-To understand NodeRAG's educational value, consider how it addresses traditional RAG limitations:
-
-| **Traditional Vector RAG Challenge** | **NodeRAG Solution** | **Educational Impact** |
-|-------------------------------------|---------------------|------------------------|
-| **Fragmented Retrieval**: Similar documents scattered | **Coherent Pathways**: Logical knowledge chains | Learn structured thinking patterns |
-| **No Relationship Understanding**: Can't connect concepts | **Explicit Relationships**: Clear entity connections | Understand knowledge interconnections |
-| **Limited Reasoning**: Single-hop similarity | **Multi-Hop Reasoning**: Follow logical chains | Develop analytical reasoning skills |
-| **Context Gaps**: Missing knowledge bridges | **Graph Structure**: Complete knowledge context | See comprehensive information landscapes |
-| **Static Similarity**: Fixed semantic matching | **Dynamic Traversal**: Query-adaptive exploration | Adaptive problem-solving approaches |
-
 ### HNSW Similarity Edges for High-Performance Retrieval
 
-NodeRAG integrates **Hierarchical Navigable Small World (HNSW)** similarity edges directly into the graph structure, enabling fast similarity-based navigation within the knowledge representation:
-
-**Understanding RAG HNSW Graph Integration**: This advanced implementation embeds HNSW similarity edges directly into the heterogeneous graph structure, combining the precision of graph relationships with the coverage of vector similarity in a unified high-performance system.
-
-**Production Impact**: HNSW graph integration achieves 70-90% faster similarity searches while maintaining 95%+ recall accuracy, enabling real-time hybrid retrieval that seamlessly combines structural relationships with semantic similarity for comprehensive knowledge access.
+NodeRAG integrates Hierarchical Navigable Small World (HNSW) similarity edges directly into the graph structure, combining graph relationships with vector similarity for fast hybrid retrieval.
 
 ```python
 class NodeRAGHNSW:
@@ -576,51 +389,15 @@ Finally, let's implement the type compatibility logic:
         return type2 in compatibility_matrix.get(type1, [])
 ```
 
-### **Bridge to Session 7: From NodeRAG Structure to Agentic Reasoning**
+### Bridge to Session 7: Agentic Reasoning
 
-### The Foundation for Reasoning Capabilities
-
-NodeRAG's heterogeneous graph architecture provides the **structured foundation** needed for the advanced reasoning capabilities you'll build in Session 7. The specialized node types and reasoning pathways become the building blocks for:
-
-### Session 7 Reasoning Integration Preview:
-
-1. **Planning with Graph Structure**: Agentic systems can use NodeRAG's relationship pathways to plan multi-step reasoning sequences
-```
-   Query: "Analyze Apple's supply chain risks in automotive"
-
-   Agent Planning with NodeRAG:
-   Step 1: Traverse Apple → Partnership nodes → Automotive entities
-   Step 2: Follow Entity → Attribute nodes → Risk factors
-   Step 3: Cross-reference Summary nodes → Risk assessments
-   Step 4: Synthesize coherent risk analysis
-```
-
-2. **Self-Correction through Graph Validation**: NodeRAG's coherence pathways enable agents to validate their reasoning
-   - **Pathway Coherence**: Check if reasoning chains make logical sense
-   - **Evidence Validation**: Verify claims against Relationship and Document nodes
-   - **Cross-Reference Checking**: Use multiple pathways to confirm conclusions
-
-3. **Adaptive Reasoning Strategies**: NodeRAG's specialized nodes inform reasoning approach selection
-   - **Concept-Heavy Queries** → Emphasize Semantic Unit and Summary nodes
-   - **Factual Queries** → Focus on Entity and Attribute nodes
-   - **Analytical Queries** → Leverage Relationship and cross-type connections
-
-4. **Iterative Refinement**: Graph structure enables systematic improvement
-   - **Pathway Expansion**: Discover additional relevant connections
-   - **Confidence Propagation**: Update reasoning based on evidence quality
-   - **Context Enhancement**: Add supporting information through graph traversal
-
-### NodeRAG as the Reasoning Foundation:
-
-The heterogeneous graph you've built provides the **structured knowledge representation** that makes sophisticated agent reasoning possible. Instead of reasoning over unstructured text, agents can follow logical pathways through your specialized node architecture.
-
-**Educational Transition**: You've moved from similarity-based retrieval to structured knowledge representation. Session 7 will teach you to build agents that **actively reason** through these knowledge structures, making decisions, forming hypotheses, and iteratively improving their understanding.
+NodeRAG's heterogeneous graph architecture provides the structured foundation for advanced reasoning capabilities. Session 7 will show how to build agents that actively reason through these graph structures.
 
 ---
 
-## **Part 2: Traditional GraphRAG Implementation (25 minutes)**
+## Part 2: Traditional GraphRAG Implementation
 
-### **Knowledge Graph Construction from Documents**
+### Knowledge Graph Construction from Documents
 
 Now let's implement traditional GraphRAG techniques alongside NodeRAG concepts. Understanding both approaches gives you flexibility in choosing the right method for different use cases.
 
@@ -638,9 +415,6 @@ While NodeRAG provides advanced heterogeneous architectures, traditional GraphRA
 3. **Graph Construction**: Build searchable knowledge graph
 4. **Query Processing**: Traverse graph for multi-hop reasoning
 
-**Understanding RAG Heterogeneous Node Architecture**: This advanced NodeRAG implementation creates specialized node types (Entity, Concept, Document, Relationship, Cluster) that enable sophisticated graph reasoning through three-stage processing: decomposition, augmentation, and enrichment.
-
-**Production Impact**: Heterogeneous node architecture improves complex query handling by 60-85% and reduces retrieval fragmentation by 70% because specialized processors optimize each knowledge type while Personalized PageRank and HNSW integration enable efficient reasoning pathways.
 
 ```python
 
@@ -958,9 +732,6 @@ Now let's implement the main extraction method:
 
 ### Step 2: Personalized PageRank for Semantic Traversal
 
-**Understanding RAG Semantic Traversal**: This PersonalizedPageRankProcessor creates weighted node importance scores that prioritize entities, concepts, and relationships based on their relevance to specific queries, enabling intelligent graph navigation that follows the most semantically meaningful pathways.
-
-**Production Impact**: Semantic traversal with personalized PageRank improves retrieval precision by 55-70% and reduces query processing time by 40-50% because it efficiently prioritizes relevant graph pathways without exhaustive exploration of all possible connections.
 
 ```python
 class PersonalizedPageRankProcessor:
@@ -1075,9 +846,6 @@ class PersonalizedPageRankProcessor:
 
 ### Step 3: HNSW Similarity Edges for High-Performance Retrieval
 
-**Understanding RAG Entity Consolidation**: This similarity-based entity merging uses embeddings and cosine similarity to identify and consolidate duplicate entities, creating canonical forms that reduce redundancy while preserving semantic variants and maintaining graph coherence.
-
-**Production Impact**: Entity consolidation improves graph quality by 40-60% and reduces storage requirements by 25-35% because canonical entities eliminate duplicates while merged metadata preserves comprehensive information across entity variants.
 
 ```python
     def _merge_similar_entities(self, entities: Dict[str, Any],
@@ -1173,9 +941,6 @@ The key to high-performance GraphRAG lies in thoughtful database design:
 
 Our Neo4j integration implements production best practices from day one, ensuring your GraphRAG system scales with your knowledge base.
 
-**Understanding RAG Production Graph Storage**: This Neo4j integration provides enterprise-grade graph persistence with strategic indexing, batch operations, connection pooling, and optimized Cypher queries that enable concurrent access and ACID transactions for reliable GraphRAG deployment.
-
-**Production Impact**: Production Neo4j integration supports 10,000+ entities/second ingestion and sub-100ms query responses for complex traversals, enabling enterprise GraphRAG systems that maintain performance and reliability at scale with millions of entities and relationships.
 
 ```python
 
@@ -1423,7 +1188,7 @@ class Neo4jGraphManager:
 
 ---
 
-## **Part 3: Code GraphRAG Implementation (25 minutes)**
+## Part 3: Code GraphRAG Implementation
 
 ### **AST-Based Code Analysis**
 
@@ -1698,7 +1463,7 @@ class CodeGraphRAG:
 
 ---
 
-## **Part 4: Graph Traversal and Multi-Hop Reasoning (20 minutes)**
+## Part 4: Graph Traversal and Multi-Hop Reasoning
 
 ### **Intelligent Graph Traversal**
 
@@ -2049,7 +1814,7 @@ class GraphTraversalEngine:
 
 ---
 
-## **Part 5: Hybrid Graph-Vector Search (25 minutes)**
+## Part 5: Hybrid Graph-Vector Search
 
 ### **Integrated Graph and Vector Retrieval**
 
@@ -2765,7 +2530,7 @@ class ProductionGraphRAG:
 
 ---
 
-## Multiple Choice Test - Session 6 (15 minutes)
+## Multiple Choice Test - Session 6
 
 Test your understanding of graph-based RAG systems and GraphRAG implementations.
 
@@ -2843,54 +2608,6 @@ D) Simplifying the codebase
 
 [**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
 
----
-
----
-
-## ** Session 6 Graph Intelligence Mastery**
-
-### Your Knowledge Reasoning Achievement:
-You've transcended traditional RAG by building systems that understand entities, relationships, and complex connections. Your RAG system now reasons about knowledge through **structured brain architecture** instead of just finding similar content.
-
-### **Your GraphRAG Transformation Complete**
-
-### From Vector Search to Structured Knowledge Reasoning:
-1. **Sessions 2-3 Foundation**: High-quality chunks and optimized vector search
-2. **Sessions 4-5 Enhancement**: Query intelligence and scientific evaluation
-3. **Session 6 Evolution**: NodeRAG structured brain architecture and traditional GraphRAG reasoning ✅
-
-**NodeRAG Breakthrough**: You've built systems with specialized node types that mirror human knowledge organization - **Semantic Units**, **Entities**, **Relationships**, **Attributes**, **Documents**, and **Summary** nodes that work together through **Personalized PageRank** and **HNSW similarity edges**.
-
-You now have RAG systems that construct **coherent knowledge pathways** for complex multi-hop queries like "companies partnering with Apple's suppliers in automotive and their environmental impact technologies" - queries that require structured reasoning across multiple specialized knowledge types.
-
-## ** The Next Frontier: Agentic Intelligence**
-
-### The Adaptive Challenge Ahead
-
-Your GraphRAG systems are powerful, but they're still reactive - they respond to queries but don't actively reason, plan, or improve. Session 7 transforms your graph-intelligent systems into autonomous agents that can:
-
-### Session 7 Agentic Preview: Active Intelligence
-- **Planning Integration**: Combine your graph traversal with multi-step reasoning strategies
-- **Self-Correction**: Use your evaluation frameworks to validate and improve responses
-- **Adaptive Retrieval**: Dynamically choose between vector, graph, and hybrid approaches
-- **Iterative Refinement**: Continuously improve responses through feedback loops
-
-### Your Graph Foundation Enables Agentic Excellence:
-The entity extraction, relationship mapping, and graph traversal capabilities you've mastered provide the structured reasoning foundation that makes sophisticated agent planning possible.
-
-### Looking Forward - Your Advanced RAG Journey:
-- **Session 7**: Transform your graph systems into autonomous reasoning agents
-- **Session 8**: Apply agentic intelligence to multi-modal content processing
-- **Session 9**: Deploy agentic GraphRAG systems at enterprise scale with monitoring
-
-### **Preparation for Agentic Mastery**
-
-1. **Document reasoning patterns**: Identify queries requiring multi-step planning
-2. **Test graph adaptability**: Create scenarios needing dynamic approach selection
-3. **Evaluate current performance**: Establish baselines for agentic enhancement
-4. **Plan iterative workflows**: Design feedback loops for continuous improvement
-
-**The Knowledge Foundation is Set:** Your graph intelligence provides the structured reasoning capabilities that enable autonomous agent behavior. Ready to build RAG systems that think and plan? 🤖
 
 ---
 

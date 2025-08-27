@@ -1,35 +1,22 @@
 # Session 4 - Module A: Advanced Query Understanding
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
-> **Prerequisites**: Complete Session 4 core content first.
-> **Time Investment**: 50 minutes
-> **Target Audience**: Implementer path students and NLP specialists
+> **Advanced Optional Module** - Prerequisites: Complete Session 4 core content first.
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Sophisticated query understanding and intent detection techniques
-- Multi-turn conversation context management for RAG systems
-- Advanced query expansion and refinement strategies
-- Semantic gap analysis and query-document alignment optimization
+Advanced query understanding techniques including intent detection, multi-turn conversation context management, query expansion strategies, and semantic gap analysis for optimal query-document alignment.
 
 ---
 
-## 🧭 Navigation & Quick Start
-
 ### Related Modules:
-
 - **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 - **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)
 
-**🗂️ Code Files:** All examples use files in `src/session4/`
-
+### Code Files: `src/session4/`
 - `comprehensive_enhancer.py` - Complete query processing pipeline
 - `semantic_gap_analyzer.py` - Query intent detection
 - `multi_query_generator.py` - Query expansion techniques
 - `demo_query_enhancement.py` - Query understanding showcase
 
-**🚀 Quick Start:** Run `cd src/session4 && python demo_query_enhancement.py` to see advanced query understanding
+**Quick Start:** `cd src/session4 && python demo_query_enhancement.py`
 
 ---
 
@@ -369,9 +356,7 @@ Multi-modal query processing enables RAG systems to handle rich user interaction
 
 ---
 
-## 📝 Multiple Choice Test - Module A
-
-Test your understanding of advanced query understanding:
+## Multiple Choice Test - Module A
 
 **Question 1:** What is the primary benefit of intent classification in query processing?  
 A) Reduces processing time    
@@ -405,12 +390,11 @@ D) It reduces memory usage
 
 [**🗂️ View Test Solutions →**](Session4_ModuleA_Test_Solutions.md)
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 
 ### Related Modules:
-
 - **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 - **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)
 

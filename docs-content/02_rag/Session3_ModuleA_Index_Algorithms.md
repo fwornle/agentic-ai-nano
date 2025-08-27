@@ -1,25 +1,12 @@
 # Session 3 - Module A: Advanced Index Algorithms
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
-> **Prerequisites**: Complete Session 3 core content first.
-> **Time Investment**: 45 minutes
-> **Target Audience**: Implementer path students and vector database specialists
+This module covers advanced vector indexing algorithms including custom HNSW implementations, dynamic index optimization, and RAG-specific indexing strategies.
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Advanced vector indexing algorithms (HNSW, IVF, Product Quantization)
-- Performance optimization techniques for large-scale vector operations
-- Custom index design for specialized retrieval patterns
-- Benchmarking and tuning strategies for production vector systems
-
----
-
-## 🧭 Navigation & Quick Start
+## Navigation & Quick Start
 
 ### Related Modules
-- **[📄 Session 3 Core: Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)** - Foundation vector search concepts
-- **[🔍 Session 4 Modules →](Session4_ModuleA_Query_Understanding.md)** - Query processing techniques
+- **[Session 3 Core: Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)** - Foundation vector search concepts
+- **[Session 4 Modules →](Session4_ModuleA_Query_Understanding.md)** - Query processing techniques
 
 ### Code Files
 - **Vector Index Engine**: [`src/session3/optimized_vector_index.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/optimized_vector_index.py) - Advanced indexing algorithms
@@ -39,8 +26,6 @@ python -c "from optimized_vector_index import OptimizedVectorIndex; OptimizedVec
 # Test hybrid search capabilities
 python -c "from hybrid_search_engine import HybridSearchEngine; print('Advanced indexing ready!')"
 ```
-
----
 
 ## Advanced Indexing Algorithms
 
@@ -401,7 +386,7 @@ This multi-signal fusion transforms simple vector search into an intelligent ret
 
 ---
 
-## 📝 Multiple Choice Test - Module A
+## Multiple Choice Test - Module A
 
 Test your understanding of advanced index algorithms:
 
@@ -437,7 +422,7 @@ D) It's simpler to implement
 
 [**🗂️ View Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
 
-## 🧭 Navigation
+## Navigation
 
 **Previous:** [Session 3 Core: Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)
 
@@ -445,5 +430,3 @@ D) It's simpler to implement
 - **[Core Session: Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)** - Foundation vector search concepts
 
 **Next:** [Session 4: Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
-
----

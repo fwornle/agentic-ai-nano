@@ -1,6 +1,6 @@
 # Session 2: Advanced Chunking & Preprocessing - Test Solutions
 
-## 📝 Multiple Choice Test
+## Multiple Choice Test
 
 ### Question 1: Document Structure Analysis
 

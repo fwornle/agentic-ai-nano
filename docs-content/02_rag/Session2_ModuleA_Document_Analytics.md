@@ -1,42 +1,15 @@
 # Session 2 - Module A: Advanced Document Analytics
 
 > **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
-> **Prerequisites**: Complete Session 2 core content first.
-> **Time Investment**: 40 minutes
-> **Target Audience**: Implementer path students specializing in document intelligence
+> Prerequisites: Complete Session 2 core content first.
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Document complexity scoring and structural analysis algorithms
-- Advanced metadata extraction techniques for enterprise environments
-- Quality assessment frameworks for automated document processing
-- Multi-domain content analysis and pattern recognition systems
-
-## Industry Context & Applications
-
-### Enterprise Document Analytics in 2025
-
-Based on current industry trends, advanced document analytics has become critical for enterprise RAG systems. Major platforms like IBM watsonx.ai and Databricks now provide sophisticated preprocessing capabilities that go far beyond simple text splitting.
-
-### Key Industry Applications:
-- **Legal Tech**: Automated contract analysis with clause extraction and risk assessment
-- **Healthcare**: Medical record processing with dosage validation and treatment correlation
-- **Financial Services**: Regulatory document analysis with compliance scoring
-- **Research & Development**: Academic paper processing with citation network analysis
-
-### Enterprise Performance Metrics:
-- Document complexity scoring achieves 85-90% accuracy in processing strategy selection
-- Quality assessment frameworks reduce manual review time by 60-70%
-- Domain-specific processing improves retrieval accuracy by 40-50%
+Advanced document analytics provides sophisticated preprocessing capabilities including complexity scoring, quality assessment frameworks, and domain-specific content analysis for enterprise RAG systems.
 
 ---
 
 ## Advanced Pattern 1: Document Complexity Scoring
 
 ### Enterprise Complexity Analysis Framework
-
-Real enterprise documents require sophisticated analysis to determine optimal processing strategies. Here's a production-ready complexity analyzer:
 
 ```python
 import numpy as np
@@ -324,8 +297,6 @@ class ProductionComplexityPipeline:
 
 ### Enterprise Quality Framework
 
-Production RAG systems require comprehensive quality assessment that goes beyond basic metrics:
-
 ```python
 class EnterpriseQualityFramework:
     """Comprehensive quality assessment for enterprise document processing."""
@@ -498,8 +469,6 @@ class EnterpriseQualityFramework:
 
 ## Advanced Pattern 3: Real-Time Quality Monitoring
 
-### Production Quality Monitoring System
-
 ```python
 class ProductionQualityMonitor:
     """Real-time quality monitoring for production RAG systems."""
@@ -596,9 +565,7 @@ class ProductionQualityMonitor:
 
 ---
 
-## 📝 Multiple Choice Test - Module A
-
-Test your understanding of advanced document analytics:
+## Multiple Choice Test - Module A
 
 **Question 1:** What is the primary benefit of document complexity scoring in enterprise RAG systems?  
 A) Reduces processing time for all documents  
