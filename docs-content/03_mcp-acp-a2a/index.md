@@ -2,7 +2,7 @@
 
 Welcome to **Module 3** of the Agentic AI Nano-Degree! This module covers the cutting-edge protocols that enable modern agent communication and coordination.
 
-![MCP overview](images/MCP-intro.png)
+![MCP overview](images/mcp-intro.png)
 
 ## Module Overview
 
