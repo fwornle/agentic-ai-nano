@@ -1,33 +1,14 @@
 # Session 5 - Module B: Enterprise Monitoring & Alerting
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
-> **Prerequisites**: Complete Session 5 core content first.
-> **Time Investment**: 30 minutes
-> **Target Audience**: Implementer path students and DevOps engineers
+> **Optional Advanced Module**  
+> Prerequisites: Complete Session 5 core content first.
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Enterprise-grade monitoring systems with real-time alerting capabilities
-- Advanced compliance tracking and audit trail management
-- Performance analytics and automated incident response
-- Integration with enterprise monitoring ecosystems (Prometheus, Grafana, etc.)
-
----
-
-## 🧭 Navigation & Quick Start
+This module covers enterprise-grade monitoring systems, compliance tracking, performance analytics, and anomaly detection for production RAG deployments.
 
 ### Related Modules
 
-- **[📊 Module A: Advanced Metrics →](Session5_ModuleA_Advanced_Metrics.md)** - Advanced evaluation metrics and neural scoring
-- **[📄 Session 5 Core: RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts
-
-### Code Files
-
-- **Production Monitor**: [`src/session5/production_monitor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/production_monitor.py) - Real-time monitoring system
-- **Alerting System**: [`src/session5/alerting_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/alerting_system.py) - Enterprise alerting and escalation
-- **A/B Testing**: [`src/session5/ab_testing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/ab_testing.py) - Performance comparison tools
-- **Demo Application**: [`src/session5/demo_evaluation_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/demo_evaluation_system.py) - Complete monitoring showcase
+- **[Module A: Advanced Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Advanced evaluation metrics and neural scoring
+- **[Session 5 Core: RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts
 
 ### Quick Start
 
@@ -286,9 +267,7 @@ Ensemble scoring reduces false positives by requiring consensus from multiple de
 
 ---
 
-## 📝 Multiple Choice Test - Module B
-
-Test your understanding of enterprise monitoring and alerting:
+## Multiple Choice Test - Module B
 
 **Question 1:** In enterprise RAG monitoring, which SLA metric should have the highest priority for alerts?  
 A) Storage usage    
@@ -324,17 +303,17 @@ D) Configuration changes only
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
-### Related Modules:
+### Related Modules
 - **Core Session:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
 - **Related Module:** [Module A - Advanced Metrics](Session5_ModuleA_Advanced_Metrics.md)
 
-**🗂️ Code Files:** All examples use files in `src/session5/`
+**Code Files:** All examples use files in `src/session5/`
 - `production_monitor.py` - Real-time monitoring system
 - `alerting_system.py` - Enterprise alerting and escalation
 - `ab_testing.py` - Performance comparison tools
 
-**🚀 Quick Start:** Run `cd src/session5 && python production_monitor.py` to see enterprise monitoring in action
+**Quick Start:** Run `cd src/session5 && python production_monitor.py` to see enterprise monitoring in action
 
 ---

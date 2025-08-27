@@ -1,34 +1,23 @@
 # Session 1 - Module B: Enterprise Deployment
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
 > **Prerequisites**: Complete Session 1 core content first.
-> **Time Investment**: 30 minutes
-> **Target Audience**: Implementer path students and enterprise engineers
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Enterprise-scale RAG deployment patterns and architectures
-- Container orchestration and microservices design for RAG systems
-- Production monitoring, logging, and observability strategies
-- Security and compliance considerations for enterprise environments
+Enterprise-scale RAG deployment patterns, microservices design, production monitoring, and security considerations for enterprise environments.
 
 ---
 
-## 🧭 Navigation & Quick Start
+## Quick Start
 
-### Related Modules:
+```bash
+# Deploy RAG system locally
+cd src/session1
+python main.py
+```
 
-- **Core Session:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
-- **Related Module:** [Module A - Production Patterns](Session1_ModuleA_Production_Patterns.md)
-
-**🗂️ Code Files:** All examples use files in `src/session1/`
-
-- `rag_system.py` - Main RAG implementation
-- `config.py` - Deployment configuration management
-- `test_rag_performance.py` - Load testing tools
-
-**🚀 Quick Start:** Run `cd src/session1 && python main.py` to deploy RAG system locally
+### Related Files:
+- `src/session1/rag_system.py` - Main RAG implementation
+- `src/session1/config.py` - Deployment configuration management
+- `src/session1/test_rag_performance.py` - Load testing tools
 
 ---
 
@@ -563,15 +552,10 @@ D) Only resource utilization
 
 [**🗂️ View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
 
-## 🧭 Navigation
+## Navigation
 
-**Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
-
-### Optional Deep Dive Modules:
-
-- 🔧 **[Module A: Production Patterns](Session1_ModuleA_Production_Patterns.md)** - Production-ready RAG implementation patterns
-- 🏭 **[Module B: Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)** - Enterprise-scale deployment patterns
-
-**Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
+- [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
+- [Module A - Production Patterns](Session1_ModuleA_Production_Patterns.md)
+- [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
 
 ---

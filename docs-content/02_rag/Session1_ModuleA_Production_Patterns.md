@@ -1,34 +1,12 @@
 # Session 1 - Module A: Production RAG Patterns
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
 > **Prerequisites**: Complete Session 1 core content first.
-> **Time Investment**: 30 minutes
-> **Target Audience**: Implementer path students and production engineers
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Production-grade error handling and resilience patterns
-- Circuit breaker implementation for document processing failures
-- Comprehensive monitoring and observability systems
-- Enterprise configuration management strategies
+Production-grade error handling, resilience patterns, monitoring systems, and enterprise configuration management for RAG systems.
 
 ---
 
-## 🧭 Navigation & Quick Start
-
-### Related Modules
-
-- **[🏢 Module B: Enterprise Deployment →](Session1_ModuleB_Enterprise_Deployment.md)** - Scaling RAG systems for enterprise environments
-- **[📄 Session 1 Core: Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)** - Foundation concepts
-
-### Code Files
-
-- **Production Examples**: [`src/session1/rag_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/rag_system.py) - Production RAG implementation
-- **Testing Framework**: [`src/session1/test_rag_performance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/test_rag_performance.py) - Performance testing tools
-- **Interactive Demo**: [`src/session1/interactive_rag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/interactive_rag.py) - Hands-on RAG exploration
-
-### Quick Start
+## Quick Start
 
 ```bash
 # Test production RAG patterns
@@ -41,6 +19,11 @@ python test_rag_performance.py
 # Interactive RAG exploration
 python interactive_rag.py
 ```
+
+### Related Files:
+- `src/session1/rag_system.py` - Production RAG implementation
+- `src/session1/test_rag_performance.py` - Performance testing tools
+- `src/session1/interactive_rag.py` - Interactive RAG exploration
 
 ---
 
@@ -393,19 +376,9 @@ D) Reduces memory usage
 
 [**🗂️ View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
 
-## 🧭 Navigation
+## Navigation
 
-### Related Modules:
-
-- **Core Session:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
-- **Related Module:** [Module B - Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)
-
-**🗂️ Code Files:** All examples use files in `src/session1/`
-
-- `rag_system.py` - Production RAG implementation with circuit breaker patterns
-- `test_rag_performance.py` - Performance testing and monitoring tools
-- `interactive_rag.py` - Hands-on RAG exploration framework
-
-**🚀 Quick Start:** Run `cd src/session1 && python rag_system.py` to see production patterns
+- [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
+- [Module B - Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)
 
 ---

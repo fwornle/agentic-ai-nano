@@ -1,17 +1,9 @@
 # Session 6 - Module A: Advanced Graph Algorithms
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
-> **Prerequisites**: Complete Session 6 core content first.
-> **Time Investment**: 40 minutes
-> **Target Audience**: Implementer path students and graph algorithm specialists
+> **ADVANCED OPTIONAL MODULE** 
+> Supplementary content for deeper specialization. Complete Session 6 core content first.
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Advanced graph traversal algorithms for complex knowledge networks
-- Optimization techniques for large-scale graph operations
-- Custom algorithm development for specialized graph patterns
-- Performance analysis and scaling strategies for graph-based RAG
+Advanced graph traversal algorithms for complex knowledge networks, optimization techniques for large-scale graph operations, and performance analysis for GraphRAG systems.
 
 ---
 
@@ -22,25 +14,11 @@ After completing this module, you will master:
 - **[🏗️ Module B: Production Systems →](Session6_ModuleB_Production_Systems.md)** - Production GraphRAG deployment patterns
 - **[📄 Session 6 Core: Graph-Based RAG →](Session6_Graph_Based_RAG.md)** - Foundation graph concepts
 
-### Code Files
-
-- **Graph Traversal**: [`src/session6/graph_traversal_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/graph_traversal_engine.py) - Advanced traversal algorithms
-- **Knowledge Extraction**: [`src/session6/knowledge_graph_extractor.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/knowledge_graph_extractor.py) - Graph construction and analysis
-- **Hybrid Graph-Vector**: [`src/session6/hybrid_graph_vector_rag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/hybrid_graph_vector_rag.py) - Combined graph and vector search
-- **Demo Application**: [`src/session6/demo_session6.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/demo_session6.py) - Complete GraphRAG showcase
-
 ### Quick Start
-
 ```bash
 # Test advanced graph algorithms
 cd src/session6
 python demo_session6.py
-
-# Test graph traversal engine
-python -c "from graph_traversal_engine import GraphTraversalEngine; print('Graph algorithms ready!')"
-
-# Test hybrid graph-vector system
-python -c "from hybrid_graph_vector_rag import HybridGraphVectorRAG; HybridGraphVectorRAG().test_system()"
 ```
 
 ---
@@ -497,17 +475,12 @@ D) When memory is limited
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 ### Related Modules:
 - **Core Session:** [Session 6 - Graph-Based RAG](Session6_Graph_Based_RAG.md)
 - **Related Module:** [Module B - Production Systems](Session6_ModuleB_Production_Systems.md)
 
-**🗂️ Code Files:** All examples use files in `src/session6/`
-- `graph_traversal_engine.py` - Advanced traversal algorithms
-- `knowledge_graph_extractor.py` - Graph construction and analysis
-- `hybrid_graph_vector_rag.py` - Combined graph and vector search
-
-**🚀 Quick Start:** Run `cd src/session6 && python demo_session6.py` to see advanced graph algorithms in action
+**Code Files:** All examples use files in `src/session6/`
 
 ---
