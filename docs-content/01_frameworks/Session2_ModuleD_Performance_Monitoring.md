@@ -1,25 +1,12 @@
-# Session 2 - Module D: Performance & Monitoring (50 minutes)
+# Session 2 - Module D: Performance & Monitoring
 
-**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)  
-**Target Audience**: Production-focused developers  
-**Cognitive Load**: 6 optimization concepts
-
----
-
-## Module Overview
+**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)
 
 This module focuses on performance benchmarking, monitoring, and cost optimization for production LangChain applications. You'll learn how to measure performance, implement comprehensive monitoring, and optimize resource usage for enterprise-scale deployments.
 
-### Learning Objectives
-By the end of this module, you will:
-- Implement performance benchmarking and optimization strategies for LangChain agents
-- Set up comprehensive monitoring and observability systems for production applications
-- Design cost optimization strategies for API usage and resource management
-- Create real-time performance dashboards and alerting systems
-
 ---
 
-## Part 1: Performance Benchmarking & Optimization (20 minutes)
+## Part 1: Performance Benchmarking & Optimization
 
 ### Comprehensive Performance Measurement
 

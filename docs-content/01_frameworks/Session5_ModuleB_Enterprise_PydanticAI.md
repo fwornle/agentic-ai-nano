@@ -1,26 +1,14 @@
-# Session 5 - Module B: Enterprise PydanticAI (70 minutes)
+# Session 5 - Module B: Enterprise PydanticAI
 
-**Prerequisites**: [Session 5 Core Section Complete](Session5_PydanticAI_Type_Safe_Agents.md)  
-**Target Audience**: Production system builders  
-**Cognitive Load**: 7 production concepts
-
----
+**Prerequisites**: [Session 5 Core Section Complete](Session5_PydanticAI_Type_Safe_Agents.md)
 
 ## Module Overview
 
-This module focuses on enterprise-grade PydanticAI deployment patterns, including dependency injection, scalable architectures, monitoring, and production deployment strategies. You'll learn to build robust, maintainable agent systems for enterprise environments.
-
-### Learning Objectives
-By the end of this module, you will:
-- Implement dependency injection for clean architecture
-- Build scalable agent systems with proper monitoring
-- Deploy production-ready PydanticAI applications
-- Create enterprise integration patterns
-- Monitor and optimize agent performance
+Enterprise-grade PydanticAI deployment patterns including dependency injection, scalable architectures, monitoring, and production deployment strategies. Build robust, maintainable agent systems for enterprise environments with proper monitoring and optimization.
 
 ---
 
-## Part 1: Dependency Injection & Architecture (25 minutes)
+## Part 1: Dependency Injection & Architecture
 
 ### Dependency Injection for Testing and Production
 
@@ -209,7 +197,7 @@ Now we implement the service resolution with proper lifecycle management:
 
 ---
 
-## Part 2: Scalability & Performance (25 minutes)
+## Part 2: Scalability & Performance
 
 ### Production Agent Architecture
 
@@ -391,7 +379,7 @@ Health monitoring and circuit breaker patterns prevent cascading failures in pro
 
 ---
 
-## Part 3: Security & Compliance (20 minutes)
+## Part 3: Security & Compliance
 
 ### Enterprise Security Patterns
 

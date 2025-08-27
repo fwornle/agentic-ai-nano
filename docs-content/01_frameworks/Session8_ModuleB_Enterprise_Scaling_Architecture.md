@@ -1,35 +1,22 @@
-# Session 8 - Module B: Enterprise Scaling & Architecture (70 minutes)
+# Session 8 - Module B: Enterprise Scaling & Architecture
 
-**Prerequisites**: [Session 8 Core Section Complete](Session8_Agno_Production_Ready_Agents.md)  
-**Target Audience**: Platform engineers and architects building scalable agent systems  
-**Cognitive Load**: 6 advanced concepts
-
----
+**Prerequisites**: [Session 8 Core Section Complete](Session8_Agno_Production_Ready_Agents.md)
 
 ## Module Overview
 
-This module explores enterprise-scale architecture patterns for Agno agent systems including Kubernetes orchestration, auto-scaling strategies, multi-tenant architectures, service mesh integration, and global deployment patterns. You'll learn to build massively scalable agent platforms that can handle enterprise workloads across multiple regions.
-
-### Learning Objectives
-
-By the end of this module, you will:
-
-- Design Kubernetes-native agent architectures with sophisticated auto-scaling
-- Implement multi-tenant agent platforms with resource isolation and fair scheduling
-- Create service mesh architectures for secure inter-agent communication
-- Build global deployment strategies with regional failover and data locality
+Enterprise-scale architecture patterns for Agno agent systems including Kubernetes orchestration, auto-scaling strategies, multi-tenant architectures, service mesh integration, and global deployment patterns.
 
 ---
 
-## Part 1: Kubernetes-Native Agent Architecture (25 minutes)
+## Part 1: Kubernetes-Native Agent Architecture
 
-### Step 1: Understanding Enterprise-Scale Challenges
+### Understanding Enterprise-Scale Challenges
 
-Before we dive into the code, let's understand what makes enterprise agent scaling different from simple deployments. We're dealing with thousands of agents, multi-tenancy, cost optimization, and strict SLAs.
+Enterprise agent scaling involves thousands of agents, multi-tenancy, cost optimization, and strict SLAs - different from simple deployments.
 
-🗂️ **File**: `src/session8/k8s_native_architecture.py` - Kubernetes-native agent systems
+**File**: `src/session8/k8s_native_architecture.py` - Kubernetes-native agent systems
 
-First, let's import our essential libraries for enterprise Kubernetes management:
+Import essential libraries for enterprise Kubernetes management:
 
 ```python
 from typing import Dict, List, Any, Optional
@@ -40,9 +27,9 @@ import yaml
 import json
 ```
 
-### Step 2: Designing the Cluster Configuration Schema
+### Designing the Cluster Configuration Schema
 
-Let's start by defining what makes up an enterprise agent cluster. This configuration will drive everything from resource allocation to security policies:
+Define what makes up an enterprise agent cluster - configuration drives resource allocation and security policies:
 
 ```python
 @dataclass
@@ -56,11 +43,11 @@ class K8sAgentCluster:
     network_policies: List[Dict[str, Any]] = field(default_factory=list)
 ```
 
-**Design philosophy**: We separate concerns into distinct configuration areas - compute (node pools), scaling, resources, and networking. This makes the system much easier to manage at scale.
+Separate concerns into distinct configuration areas - compute, scaling, resources, and networking for easier management at scale.
 
-### Step 3: Building the Kubernetes Orchestrator Foundation
+### Building the Kubernetes Orchestrator Foundation
 
-Next, we'll create the main orchestrator class that manages Kubernetes resources for our agent platform:
+Create the main orchestrator class to manage Kubernetes resources for the agent platform:
 
 ```python
 class KubernetesAgentOrchestrator:
@@ -72,11 +59,11 @@ class KubernetesAgentOrchestrator:
         self.operators = {}
 ```
 
-**Orchestrator design**: The orchestrator maintains references to cluster configuration and manages both custom resources and operators for comprehensive agent lifecycle management.
+The orchestrator maintains cluster configuration references and manages custom resources and operators for agent lifecycle management.
 
-### Step 4: Creating Custom Resource Definitions
+### Creating Custom Resource Definitions
 
-Custom Resource Definitions (CRDs) extend Kubernetes API to support agent-specific objects. Let's start with the basic CRD structure:
+Custom Resource Definitions (CRDs) extend Kubernetes API to support agent-specific objects:
 
 ```python
     def create_agent_custom_resource(self) -> Dict[str, Any]:
@@ -90,11 +77,11 @@ Custom Resource Definitions (CRDs) extend Kubernetes API to support agent-specif
             },
 ```
 
-**CRD foundation**: This establishes our custom API group and resource name that Kubernetes will recognize.
+This establishes the custom API group and resource name that Kubernetes will recognize.
 
-### Step 5: Defining Agent Specification Schema
+### Defining Agent Specification Schema
 
-Now we define what parameters our AgnoAgent custom resource accepts:
+Define parameters the AgnoAgent custom resource accepts:
 
 ```python
             "spec": {
@@ -119,11 +106,11 @@ Now we define what parameters our AgnoAgent custom resource accepts:
                                         },
 ```
 
-**Schema validation**: OpenAPI v3 schema ensures only valid agent configurations are accepted by Kubernetes.
+OpenAPI v3 schema ensures only valid agent configurations are accepted by Kubernetes.
 
-### Step 6: Resource Requirements Definition
+### Resource Requirements Definition
 
-Defining resource limits and requests is crucial for proper scheduling and resource management:
+Define resource limits and requests for proper scheduling and resource management:
 
 ```python
                                         "resources": {
@@ -147,11 +134,11 @@ Defining resource limits and requests is crucial for proper scheduling and resou
                                         },
 ```
 
-**Resource management**: Requests guarantee minimum resources while limits prevent resource abuse in multi-tenant environments.
+Requests guarantee minimum resources while limits prevent resource abuse in multi-tenant environments.
 
-### Step 7: Scaling Configuration Schema
+### Scaling Configuration Schema
 
-Autoscaling parameters need to be configurable per agent type:
+Autoscaling parameters configurable per agent type:
 
 ```python
                                         "scaling": {
@@ -175,9 +162,9 @@ Autoscaling parameters need to be configurable per agent type:
                                         }
 ```
 
-**Scaling flexibility**: Custom metrics allow scaling based on business metrics like queue depth or response time, not just CPU/memory.
+Custom metrics allow scaling based on business metrics like queue depth or response time, not just CPU/memory.
 
-### Step 8: Status Tracking Schema
+### Status Tracking Schema
 
 Every custom resource needs status tracking for operators and monitoring:
 
@@ -191,9 +178,9 @@ Every custom resource needs status tracking for operators and monitoring:
                                         "readyReplicas": {"type": "integer"},
 ```
 
-**Basic status fields**: Phase and replica count provide essential operational information.
+Phase and replica count provide essential operational information.
 
-### Step 8b: Detailed Condition Tracking
+### Detailed Condition Tracking
 
 ```python
                                         "conditions": {
@@ -212,11 +199,11 @@ Every custom resource needs status tracking for operators and monitoring:
                                 }
 ```
 
-**Status management**: Kubernetes operators use status fields to communicate resource state and health.
+Kubernetes operators use status fields to communicate resource state and health.
 
-### Step 9: CRD Metadata and Naming
+### CRD Metadata and Naming
 
-Finally, we define how the custom resource appears in Kubernetes:
+Define how the custom resource appears in Kubernetes:
 
 ```python
                             }
@@ -235,9 +222,9 @@ Finally, we define how the custom resource appears in Kubernetes:
         
         return agent_crd
 
-### Step 10: Advanced Horizontal Pod Autoscaler (HPA) Configuration
+### Advanced Horizontal Pod Autoscaler (HPA) Configuration
 
-Now let's implement intelligent autoscaling that responds to multiple metrics and handles scaling behavior intelligently:
+Implement intelligent autoscaling that responds to multiple metrics and handles scaling behavior intelligently:
 
 ```python
     def generate_advanced_hpa_configuration(self, agent_name: str) -> Dict[str, Any]:
@@ -252,9 +239,9 @@ Now let's implement intelligent autoscaling that responds to multiple metrics an
             },
 ```
 
-**HPA v2 features**: We use the latest autoscaling API for advanced metrics and behavioral controls.
+Use the latest autoscaling API for advanced metrics and behavioral controls.
 
-### Step 11: HPA Target Reference and Boundaries
+### HPA Target Reference and Boundaries
 
 ```python
             "spec": {
@@ -267,9 +254,9 @@ Now let's implement intelligent autoscaling that responds to multiple metrics an
                 "maxReplicas": 100,
 ```
 
-**Scaling boundaries**: Minimum 2 replicas ensures high availability, maximum 100 prevents runaway scaling.
+Minimum 2 replicas ensures high availability, maximum 100 prevents runaway scaling.
 
-### Step 12: Multi-Metric Scaling Configuration
+### Multi-Metric Scaling Configuration
 
 Advanced HPA uses multiple metrics for more intelligent scaling decisions:
 

@@ -1,45 +1,19 @@
 # Session 10: Enterprise Integration & Production Deployment
 
-## Learning Navigation Hub
+Enterprise agent systems require robust integration patterns, production-ready deployment strategies, security fundamentals, and basic monitoring. This session covers enterprise system integration, container deployment, security frameworks, and operational monitoring.
 
-**Total Time Investment**: 95 minutes (Core) + 50-160 minutes (Optional)
-**Your Learning Path**: Choose your engagement level
+### Optional Deep Dive Modules
+- **[Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)** - GDPR, RBAC, encryption
+- **[Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)** - Auto-scaling, performance optimization
 
-### Quick Start Guide
-- **Observer (55 min)**: Read enterprise concepts + examine deployment patterns
-- **Participant (95 min)**: Follow exercises + build production systems
-- **Implementer (160 min)**: Create enterprise solutions + explore advanced operations
-
----
-
-## Session Overview Dashboard
-
-### Core Learning Track (95 minutes) - REQUIRED
-
-| Section | Concept Load | Time | Skills |
-|---------|--------------|------|--------|
-| Enterprise Integration | 4 concepts | 30 min | Understanding |
-| Production Deployment | 4 concepts | 25 min | Implementation |
-| 🔒 Security Fundamentals | 3 concepts | 25 min | Application |
-| Basic Monitoring | 3 concepts | 15 min | Operations |
-
-### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **[Module A: Advanced Security & Compliance →](Session10_ModuleA_Advanced_Security_Compliance.md)** (80 min) - GDPR, RBAC, encryption
-- 🏭 **[Module B: Enterprise Operations & Scaling →](Session10_ModuleB_Enterprise_Operations_Scaling.md)** (80 min) - Auto-scaling, performance optimization
-
-**Code Files**: All examples use files in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
+**Code Files**: All examples use files in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)  
 **Quick Start**: Run `cd src/session10 && python enterprise_architecture.py` to see enterprise integration
 
 ---
 
-## Core Section (Required - 95 minutes)
+## Part 1: Enterprise Integration Fundamentals
 
-### Part 1: Enterprise Integration Fundamentals (30 minutes)
-
-**Cognitive Load**: 4 new concepts
-**Learning Mode**: Conceptual Understanding
-
-#### Understanding Enterprise Systems (8 minutes)
+### Understanding Enterprise Systems
 
 Enterprise environments are complex ecosystems of interconnected systems requiring robust integration patterns, authentication mechanisms, and fault tolerance. This foundation code demonstrates the protocols and configurations needed for reliable enterprise integration:
 
@@ -103,7 +77,7 @@ class EnterpriseSystemAdapter(Protocol):
 3. **Adapter Protocol**: Consistent interface for all enterprise system integrations
 4. **Health Monitoring**: Built-in health checks for system reliability
 
-#### ERP System Integration (12 minutes)
+### ERP System Integration
 
 Enterprise Resource Planning systems are the backbone of most organizations, requiring specialized adapters that handle authentication, session management, and data transformation. This SAP integration demonstrates OAuth 2.0 authentication, connection pooling, and proper error handling:
 
@@ -219,7 +193,7 @@ class SAPIntegrationAdapter:
         return True
 ```
 
-#### Database Integration Patterns (10 minutes)
+### Database Integration Patterns
 
 Enterprise agents often need to interact with multiple databases with different engines, connection requirements, and performance characteristics. This database manager handles connection pooling, transaction management, and multi-database coordination:
 
@@ -270,12 +244,9 @@ class EnterpriseDatabase:
 
 ---
 
-### Part 2: Production Deployment Essentials (25 minutes)
+## Part 2: Production Deployment Essentials
 
-**Cognitive Load**: 4 new concepts
-**Learning Mode**: Implementation & Practice
-
-#### Container Strategy (8 minutes)
+### Container Strategy
 
 Production containerization requires multi-stage builds and security hardening to minimize attack surface, reduce image size, and ensure secure runtime environments. This Dockerfile demonstrates security best practices including non-root users and minimal base images:
 
@@ -358,7 +329,7 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
 CMD ["python", "src/main.py"]
 ```
 
-#### Kubernetes Deployment (10 minutes)
+### Kubernetes Deployment
 
 Enterprise Kubernetes configuration with high availability requires proper resource management, health checks, and rolling update strategies. This configuration demonstrates production-ready Kubernetes deployment with security contexts and monitoring:
 
@@ -445,7 +416,7 @@ spec:
   type: ClusterIP
 ```
 
-#### CI/CD Pipeline (7 minutes)
+### CI/CD Pipeline
 
 Automated deployment with security scanning ensures code quality, vulnerability detection, and reliable deployments. This GitHub Actions pipeline demonstrates comprehensive CI/CD with security scanning, testing, and staged deployment:
 
@@ -543,12 +514,9 @@ jobs:
 
 ---
 
-### Part 3: Security Fundamentals (25 minutes)
+## Part 3: Security Fundamentals
 
-**Cognitive Load**: 3 new concepts
-**Learning Mode**: Application & Security
-
-#### Authentication & Authorization (10 minutes)
+### Authentication & Authorization
 
 Enterprise-grade security with multiple authentication methods:
 
@@ -626,7 +594,7 @@ class EnterpriseAuthManager:
         self.failed_attempts[username] = self.failed_attempts.get(username, 0) + 1
 ```
 
-#### Role-Based Access Control (8 minutes)
+### Role-Based Access Control
 
 Fine-grained permission management:
 
@@ -702,7 +670,7 @@ class RBACManager:
         )
 ```
 
-#### Data Encryption (7 minutes)
+### Data Encryption
 
 Classification-based data protection:
 
@@ -780,12 +748,9 @@ class EnterpriseEncryption:
 
 ---
 
-### Part 4: Basic Monitoring & Operations (15 minutes)
+## Part 4: Basic Monitoring & Operations
 
-**Cognitive Load**: 3 new concepts
-**Learning Mode**: Operations & Monitoring
-
-#### Basic Metrics Collection (6 minutes)
+### Basic Metrics Collection
 
 Essential monitoring for production systems:
 
@@ -844,7 +809,7 @@ class BasicMonitoring:
         }
 ```
 
-#### Health Checks (5 minutes)
+### Health Checks
 
 Production health monitoring:
 
@@ -895,7 +860,7 @@ class HealthChecker:
             return {"healthy": False, "error": str(e)}
 ```
 
-#### Basic Alerting (4 minutes)
+### Basic Alerting
 
 Simple alerting for critical conditions:
 
@@ -968,9 +933,7 @@ class BasicAlertManager:
 
 ---
 
-## Core Section Validation (5 minutes)
-
-### Quick Implementation Exercise
+## Implementation Exercise
 
 🗂️ **Exercise Files**:
 
@@ -1003,55 +966,25 @@ kubectl get pods -l app=enterprise-agent
 - [ ] I understand monitoring and health check requirements
 - [ ] I'm ready for advanced modules or production deployment
 
-**Session Complete**: ✅ You've mastered enterprise integration fundamentals
-**Ready for**: Advanced modules or real-world implementation
-
 ---
 
-# ️ OPTIONAL MODULES (Choose Your Adventure)
+## Optional Deep Dive Modules
 
-## Module A: Advanced Security & Compliance (80 minutes)
-
-**Prerequisites**: Core Section Complete
-**Target Audience**: Security engineers and compliance teams
-**Cognitive Load**: 6 advanced concepts
-
-### A1: GDPR & Compliance Frameworks (40 minutes)
+### Module A: Advanced Security & Compliance
 
 **Files**: Advanced compliance examples in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
 
 Comprehensive GDPR implementation, data retention policies, consent management, audit logging, and multi-framework compliance (HIPAA, SOC 2, PCI-DSS).
 
-### A2: Advanced Encryption & Key Management (40 minutes)
+**Topics**: GDPR compliance frameworks, advanced encryption & key management
 
-Asymmetric encryption, key rotation strategies, certificate management, data classification systems, and enterprise secret management.
-
----
-
-## Module B: Enterprise Operations & Scaling (80 minutes)
-
-**Prerequisites**: Core Section Complete
-**Target Audience**: DevOps engineers and platform architects
-**Cognitive Load**: 5 operational concepts
-
-### B1: Auto-Scaling & Performance Optimization (45 minutes)
+### Module B: Enterprise Operations & Scaling
 
 **Files**: Scaling examples in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
 
 Intelligent auto-scaling with multi-factor decision making, Redis caching strategies, connection pooling, and performance profiling.
 
-### B2: Advanced Monitoring & Troubleshooting (35 minutes)
-
-Distributed tracing with OpenTelemetry, comprehensive alerting systems, log aggregation, performance analysis, and incident response procedures.
-
----
-
-## Progress Tracking
-
-### Completion Status
-- [ ] Core Section (95 min) - Complete enterprise foundation
-- [ ] [Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md) (80 min)
-- [ ] [Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md) (80 min)
+**Topics**: Auto-scaling & performance optimization, advanced monitoring & troubleshooting
 
 **🗂️ All Code Examples**: Available in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10) - Complete enterprise implementation!
 
