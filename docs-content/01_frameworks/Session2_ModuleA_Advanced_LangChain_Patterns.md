@@ -1,25 +1,12 @@
-# Session 2 - Module A: Advanced LangChain Patterns (60 minutes)
+# Session 2 - Module A: Advanced LangChain Patterns
 
-**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)  
-**Target Audience**: Implementers seeking deeper LangChain understanding  
-**Cognitive Load**: 6 advanced concepts
-
----
-
-## Module Overview
+**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)
 
 This module explores sophisticated LangChain patterns including complex multi-agent workflows, custom chain development, and advanced tool patterns. You'll learn how to build production-ready systems with LangChain's most powerful features.
 
-### Learning Objectives
-By the end of this module, you will:
-- Build complex multi-agent workflows with specialized agents working together
-- Create custom chain classes with advanced logic and reusable components
-- Implement sophisticated tools with state management and error recovery
-- Design scalable LangChain architectures for enterprise applications
-
 ---
 
-## Part 1: Complex Multi-Agent Workflows (20 minutes)
+## Part 1: Complex Multi-Agent Workflows
 
 ### Advanced Orchestration Patterns
 

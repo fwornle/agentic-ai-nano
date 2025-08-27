@@ -1,26 +1,14 @@
-# Session 5 - Module A: Advanced Type Systems (60 minutes)
+# Session 5 - Module A: Advanced Type Systems
 
-**Prerequisites**: [Session 5 Core Section Complete](Session5_PydanticAI_Type_Safe_Agents.md)  
-**Target Audience**: Developers seeking sophisticated validation  
-**Cognitive Load**: 6 advanced concepts
-
----
+**Prerequisites**: [Session 5 Core Section Complete](Session5_PydanticAI_Type_Safe_Agents.md)
 
 ## Module Overview
 
-This module explores sophisticated validation patterns, complex field types, and advanced business rule enforcement in PydanticAI. You'll learn to build enterprise-grade validation systems that handle complex data relationships and business logic.
-
-### Learning Objectives
-By the end of this module, you will:
-- Build complex validation patterns with cross-field dependencies
-- Implement custom field types and validators
-- Create middleware systems for validation optimization
-- Handle streaming validation and real-time data validation
-- Design enterprise-grade error handling systems
+Advanced validation patterns, complex field types, and business rule enforcement in PydanticAI. Build enterprise-grade validation systems with cross-field dependencies, custom validators, middleware optimization, and comprehensive error handling.
 
 ---
 
-## Part 1: Complex Validation Patterns (25 minutes)
+## Part 1: Complex Validation Patterns
 
 ### Custom Validators and Constraints
 
@@ -199,7 +187,7 @@ Root validators examine the entire model after all field validators have run. Th
 
 ---
 
-## Part 2: Enterprise Task Validation (20 minutes)
+## Part 2: Enterprise Task Validation
 
 ### Complex Task Definition with Comprehensive Validation
 
@@ -313,7 +301,7 @@ Now we perform cross-validation with estimated work hours to prevent unrealistic
 
 ---
 
-## Part 3: Advanced Error Handling & Middleware (15 minutes)
+## Part 3: Advanced Error Handling & Middleware
 
 ### Comprehensive Validation Error Management
 

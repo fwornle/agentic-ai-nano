@@ -1,45 +1,21 @@
 # Session 9: Multi-Agent Patterns & Coordination
 
-## Learning Navigation Hub
-
-**Total Time Investment**: 90 minutes (Core) + 45-140 minutes (Optional)
-**Your Learning Path**: Choose your engagement level
-
-### Quick Start Guide
-- **Observer (50 min)**: Read coordination concepts + examine multi-agent patterns
-- **Participant (90 min)**: Follow exercises + build coordination systems
-- **Implementer (150 min)**: Create advanced patterns + explore production systems
+Multi-agent systems enable sophisticated coordination patterns through transparent reasoning, consensus mechanisms, and hierarchical planning. This session covers the ReAct pattern for transparent reasoning, communication protocols for agent coordination, hierarchical task networks for complex planning, and basic production deployment patterns.
 
 ---
 
-## Session Overview Dashboard
-
-### Core Learning Track (90 minutes) - REQUIRED
-
-| Section | Concept Load | Time | Skills |
-|---------|--------------|------|--------|
-| ReAct Pattern Foundation | 3 concepts | 25 min | Understanding |
-| Multi-Agent Coordination | 4 concepts | 30 min | Implementation |
-| 🧠 Planning & Reflection | 3 concepts | 25 min | Application |
-| ✅ Basic Production Patterns | 2 concepts | 10 min | Deployment |
-
-### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** (70 min) - Byzantine fault tolerance & game theory
-- 🏭 **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** (70 min) - Enterprise deployment & monitoring
+### Optional Deep Dive Modules
+- **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Byzantine fault tolerance & game theory
+- **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise deployment & monitoring
 
 **Code Files**: All examples use files in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9)
 **Quick Start**: Run `cd src/session9 && python react_agent.py` to see multi-agent coordination
 
 ---
 
-## Core Section (Required - 90 minutes)
+## Part 1: ReAct Pattern Foundation
 
-### Part 1: ReAct Pattern Foundation (25 minutes)
-
-**Cognitive Load**: 3 new concepts
-**Learning Mode**: Conceptual Understanding
-
-#### Understanding ReAct (8 minutes)
+### Understanding ReAct
 
 The ReAct pattern (Reasoning + Acting) makes agent thinking transparent and iterative:
 
@@ -104,7 +80,7 @@ class BasicReActAgent:
 2. **Iterative Problem Solving**: Thoughts, actions, and observations cycle
 3. **Confidence Tracking**: Each step includes confidence assessment
 
-#### ReAct Execution Flow (10 minutes)
+### ReAct Execution Flow
 
 Implementing the reasoning-action loop:
 
@@ -158,7 +134,7 @@ def _generate_structured_thought(self, context: str) -> str:
     return await self.llm.generate(prompt)
 ```
 
-#### Meta-Reasoning Quality Assessment (7 minutes)
+### Meta-Reasoning Quality Assessment
 
 Evaluating reasoning quality:
 
@@ -218,12 +194,9 @@ class MetaReActAnalyzer:
 
 ---
 
-### Part 2: Multi-Agent Coordination (30 minutes)
+## Part 2: Multi-Agent Coordination
 
-**Cognitive Load**: 4 new concepts
-**Learning Mode**: Implementation & Practice
-
-#### Agent Communication Patterns (10 minutes)
+### Agent Communication Patterns
 
 Structured communication for multi-agent systems:
 
@@ -293,7 +266,7 @@ class CommunicationHub:
         return success
 ```
 
-#### Basic Consensus Mechanisms (8 minutes)
+### Basic Consensus Mechanisms
 
 Simple voting and agreement patterns:
 
@@ -363,7 +336,7 @@ class SimpleConsensusManager:
         return valid_proposals
 ```
 
-#### Hierarchical Coordination (7 minutes)
+### Hierarchical Coordination
 
 Coordinator-worker patterns:
 
@@ -429,7 +402,7 @@ class HierarchicalCoordinator:
         }
 ```
 
-#### Auction-Based Coordination (5 minutes)
+### Auction-Based Coordination
 
 Market-based task allocation:
 
@@ -481,12 +454,9 @@ class SimpleAuctionCoordinator:
 
 ---
 
-### Part 3: Planning & Reflection (25 minutes)
+## Part 3: Planning & Reflection
 
-**Cognitive Load**: 3 new concepts  
-**Learning Mode**: Application & Strategy
-
-#### Hierarchical Task Network Planning (10 minutes)
+### Hierarchical Task Network Planning
 
 Breaking complex tasks into manageable hierarchies:
 
@@ -568,7 +538,7 @@ class HTNPlanner:
         }
 ```
 
-#### Dynamic Replanning (8 minutes)
+### Dynamic Replanning
 
 Adaptive planning during execution:
 
@@ -660,7 +630,7 @@ class DynamicReplanner:
         }
 ```
 
-#### Reflection and Learning (7 minutes)
+### Reflection and Learning
 
 Continuous improvement through experience:
 
@@ -736,12 +706,9 @@ class ReflectionEngine:
 
 ---
 
-### Part 4: Basic Production Patterns (10 minutes)
+## Part 4: Basic Production Patterns
 
-**Cognitive Load**: 2 new concepts
-**Learning Mode**: Deployment Ready
-
-#### Production Configuration (5 minutes)
+### Production Configuration
 
 Basic production setup for multi-agent systems:
 
@@ -821,7 +788,7 @@ class BasicProductionSystem:
             }
 ```
 
-#### Basic Monitoring (5 minutes)
+### Basic Monitoring
 
 Essential monitoring for multi-agent systems:
 
@@ -870,9 +837,7 @@ System Health: {metrics['system_health']:.2%}
 
 ---
 
-## Core Section Validation (5 minutes)
-
-### Quick Implementation Exercise
+## Quick Implementation Exercise
 
 🗂️ **Exercise Files**:
 
@@ -901,32 +866,16 @@ python planning_systems.py               # HTN planning
 
 ---
 
-# ️ OPTIONAL MODULES (Choose Your Adventure)
+# Optional Deep Dive Modules
 
-**🧭 Choose Your Learning Path:**
-- **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** (70 min) - Byzantine fault tolerance & game theory
-- **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** (70 min) - Enterprise deployment & monitoring
+- **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Byzantine fault tolerance & game theory
+- **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise deployment & monitoring
 
-### Complete Learning Path Options
-
-**Research Focus**: Core → Module A (for advanced algorithms)  
-**Production Focus**: Core → Module B (for enterprise deployment)  
-**Comprehensive**: Core → Module A → Module B
+**Code Examples**: Available in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9) - 12 Python files with complete multi-agent implementations
 
 ---
 
-## Progress Tracking
-
-### Completion Status
-- [ ] Core Section (90 min) - Essential for next session
-- [ ] [Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md) (70 min)
-- [ ] [Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md) (70 min)
-
-**🗂️ All Code Examples**: Available in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9) - 12 Python files with complete multi-agent implementations!
-
----
-
-## Multiple Choice Test - Session 9 (15 minutes)
+## Multiple Choice Test - Session 9
 
 Test your understanding of multi-agent patterns and coordination strategies.
 

@@ -1,25 +1,12 @@
-# Session 2 - Module C: Custom Tool Development (45 minutes)
+# Session 2 - Module C: Custom Tool Development
 
-**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)  
-**Target Audience**: Developers wanting customization  
-**Cognitive Load**: 5 specialized concepts
-
----
-
-## Module Overview
+**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)
 
 This module focuses on building sophisticated custom tools for LangChain agents with advanced patterns including Pydantic validation, API integration, database connectivity, and external system integration with proper error handling and performance optimization.
 
-### Learning Objectives
-By the end of this module, you will:
-- Create advanced tools using Pydantic models for structured inputs and outputs
-- Build tools that integrate with external APIs with authentication and rate limiting
-- Implement database and file system tools with proper connection management
-- Design tools with comprehensive error recovery and performance monitoring
-
 ---
 
-## Part 1: Advanced Tool Creation Patterns (15 minutes)
+## Part 1: Advanced Tool Creation Patterns
 
 ### Pydantic-Based Tool Architecture
 

@@ -1,25 +1,12 @@
-# Session 4 - Module B: Enterprise Team Patterns (40 minutes)
+# Session 4 - Module B: Enterprise Team Patterns
 
-**Prerequisites**: [Session 4 Core Section Complete](Session4_CrewAI_Team_Orchestration.md)  
-**Target Audience**: Enterprise system architects  
-**Cognitive Load**: 4 enterprise concepts
-
----
-
-## Module Overview
+**Prerequisites**: [Session 4 Core Section Complete](Session4_CrewAI_Team_Orchestration.md)
 
 This module explores production-ready CrewAI team architectures including custom tool development, hierarchical delegation strategies, enterprise monitoring systems, and performance optimization patterns. You'll learn to build scalable agent teams that can handle enterprise workloads with sophisticated coordination and monitoring.
 
-### Learning Objectives
-By the end of this module, you will:
-- Create custom tools that enable specialized agent capabilities
-- Implement hierarchical delegation with autonomous peer inquiry
-- Build enterprise monitoring and performance tracking systems
-- Design production-ready team architectures with scaling strategies
-
 ---
 
-## Part 1: Custom Tools and Agent Capabilities (20 minutes)
+## Part 1: Custom Tools and Agent Capabilities
 
 ### Advanced Tool Architecture
 

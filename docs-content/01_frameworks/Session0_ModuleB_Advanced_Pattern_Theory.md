@@ -1,27 +1,12 @@
-# Session 0 - Module B: Advanced Pattern Theory (25 minutes)
+# Session 0 - Module B: Advanced Pattern Theory
 
-**Prerequisites**: [Session 0 Core Section Complete](Session0_Introduction_to_Agent_Frameworks_Patterns.md)  
-**Target Audience**: Developers wanting deeper pattern understanding  
-**Cognitive Load**: 4 advanced concepts
+**Prerequisites**: [Session 0 Core Section Complete](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 
----
-
-## Module Overview
-
-This module dives deep into the technical implementation strategies behind the five core agentic patterns, explores how patterns combine for sophisticated behaviors, and examines emerging patterns being developed beyond the foundational five.
-
-### Learning Objectives
-
-By the end of this module, you will:
-
-- Understand how each agentic pattern is technically implemented across different frameworks  
-- Recognize how patterns combine to create sophisticated agent behaviors  
-- Identify emerging patterns being developed beyond the core five  
-- Make informed decisions about pattern selection and combination strategies  
+This module dives deep into the technical implementation strategies behind the five core agentic patterns, explores how patterns combine for sophisticated behaviors, and examines emerging patterns being developed beyond the foundational five.  
 
 ---
 
-## Part 1: Pattern Implementation Strategies (10 minutes)
+## Part 1: Pattern Implementation Strategies
 
 ### Framework-Specific Pattern Implementations
 
@@ -254,7 +239,7 @@ When tools fail, the system automatically tries fallback alternatives. Both fail
 
 ---
 
-## Part 2: Pattern Combinations (8 minutes)
+## Part 2: Pattern Combinations
 
 ### Sophisticated Pattern Orchestration
 
@@ -413,7 +398,7 @@ After each phase, the system evaluates whether the original plan is still viable
 
 ---
 
-## Part 3: Emerging Patterns (7 minutes)
+## Part 3: Emerging Patterns
 
 ### Next-Generation Agentic Patterns
 
