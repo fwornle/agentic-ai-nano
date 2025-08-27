@@ -22,9 +22,10 @@ Build your understanding of agent fundamentals and core patterns.
 - Historical context and evolution
 
 ### Session 1: Bare Metal Agents
-- Building agents from scratch
-- Understanding agent internals
-- Tool integration patterns
+- Building agents from scratch with real LLM integration
+- Understanding agent internals and architecture patterns
+- Tool integration and dependency injection
+- Production case study: The Coding Assistant
 - Error handling and resilience
 
 ### Session 2: LangChain Foundations
