@@ -44,9 +44,9 @@ graph TD
     SRC --> UI[ui.py]
     SRC --> UTILS[Utilities]
     
-    style ROOT fill:#e1f5fe
-    style SRC fill:#f3e5f5
-    style CONFIG fill:#fff3e0
+    style ROOT fill:#2196F3,color:#ffffff
+    style SRC fill:#4CAF50,color:#ffffff
+    style CONFIG fill:#FF9800,color:#ffffff
 ```
 
 ### Core Architecture Modules
@@ -76,10 +76,10 @@ graph TB
     TOOLS --> T1[mcp.py<br/>Tool protocol]
     TOOLS --> T2[tools.py<br/>Tool definitions]
     
-    style LLM fill:#e8f5e8
-    style AGENTS fill:#fff3e0
-    style TOOLS fill:#f3e5f5
-    style ROOT fill:#e1f5fe
+    style LLM fill:#4CAF50,color:#ffffff
+    style AGENTS fill:#FF9800,color:#ffffff
+    style TOOLS fill:#9C27B0,color:#ffffff
+    style ROOT fill:#2196F3,color:#ffffff
 ```
 
 ### Detailed File Map: Where to Find Each Concept
@@ -173,9 +173,9 @@ graph TD
     LLM --> CL[Anthropic Claude]
     LLM --> LO[Local Models]
     
-    style O fill:#e1f5fe
-    style LLM fill:#f3e5f5
-    style MCP fill:#e8f5e8
+    style O fill:#2196F3,color:#ffffff
+    style LLM fill:#9C27B0,color:#ffffff
+    style MCP fill:#4CAF50,color:#ffffff
 ```
 
 This architecture solves the problems we identified in the main session:
@@ -328,10 +328,10 @@ graph TD
     
     O -->|Synthesized Response| U
     
-    style O fill:#e1f5fe
-    style A1 fill:#f3e5f5
-    style A2 fill:#f3e5f5 
-    style A3 fill:#f3e5f5
+    style O fill:#2196F3,color:#ffffff
+    style A1 fill:#4CAF50,color:#ffffff
+    style A2 fill:#4CAF50,color:#ffffff 
+    style A3 fill:#4CAF50,color:#ffffff
 ```
 
 ### Agent Initialization - Role-Based Prompting
@@ -490,11 +490,11 @@ graph TD
     MCP --> T3[Code Server] 
     MCP --> T4[DB Server]
     
-    style MCP fill:#e8f5e8
-    style T1 fill:#f3e5f5
-    style T2 fill:#f3e5f5
-    style T3 fill:#f3e5f5
-    style T4 fill:#f3e5f5
+    style MCP fill:#4CAF50,color:#ffffff
+    style T1 fill:#9C27B0,color:#ffffff
+    style T2 fill:#9C27B0,color:#ffffff
+    style T3 fill:#9C27B0,color:#ffffff
+    style T4 fill:#9C27B0,color:#ffffff
 ```
 
 **Solution**: All tools speak the same MCP protocol. Agents learn one interface, use any tool.
@@ -603,9 +603,9 @@ graph TD
     RESUME --> LOAD[Load from JSON]
     LOAD --> CONTINUE[Continue Where Left Off]
     
-    style SAVE fill:#e8f5e8
-    style STORAGE fill:#fff3e0
-    style CONTINUE fill:#e1f5fe
+    style SAVE fill:#4CAF50,color:#ffffff
+    style STORAGE fill:#FF9800,color:#ffffff
+    style CONTINUE fill:#2196F3,color:#ffffff
 ```
 
 Here's the actual persistence implementation:
@@ -656,9 +656,9 @@ graph LR
     SPANS --> TOOL[Tool Execution Time]
     SPANS --> AGENT[Agent Reasoning Time]
     
-    style T fill:#e8f5e8
-    style J fill:#f3e5f5
-    style P fill:#fff3e0
+    style T fill:#4CAF50,color:#ffffff
+    style J fill:#9C27B0,color:#ffffff
+    style P fill:#FF9800,color:#ffffff
 ```
 
 The tracing setup gives you unprecedented visibility:
@@ -707,9 +707,9 @@ graph TD
     NET --> WHITELIST[Whitelisted Endpoints]
     PROC --> TIMEOUT[Execution Timeouts]
     
-    style SANDBOX fill:#e8f5e8
-    style CONFIRM fill:#fff3e0
-    style REJECT fill:#ffebee
+    style SANDBOX fill:#4CAF50,color:#ffffff
+    style CONFIRM fill:#FF9800,color:#ffffff
+    style REJECT fill:#F44336,color:#ffffff
 ```
 
 The security implementation uses Linux's Landlock LSM:
@@ -793,9 +793,9 @@ graph TD
     
     WAIT --> PAUSE
     
-    style INT fill:#fff3e0
-    style PAUSE fill:#e8f5e8
-    style ASK fill:#f3e5f5
+    style INT fill:#FF9800,color:#ffffff
+    style PAUSE fill:#4CAF50,color:#ffffff
+    style ASK fill:#9C27B0,color:#ffffff
 ```
 
 The implementation uses Python's context manager pattern for safe interruption:
@@ -859,9 +859,9 @@ graph TD
     REPLACE --> NEW[Shortened Conversation]
     NEW --> CONTINUE
     
-    style CHECK fill:#fff3e0
-    style PRESERVE fill:#e8f5e8
-    style SUMMARY fill:#f3e5f5
+    style CHECK fill:#FF9800,color:#ffffff
+    style PRESERVE fill:#4CAF50,color:#ffffff
+    style SUMMARY fill:#9C27B0,color:#ffffff
 ```
 
 Here's how the system intelligently shortens conversations:
@@ -953,9 +953,9 @@ graph TD
     SUCCESS -->|Yes| CONTINUE[Continue Task]
     SUCCESS -->|No| ESCALATE[Escalate to User]
     
-    style ERROR fill:#ffebee
-    style SUCCESS fill:#e8f5e8
-    style ESCALATE fill:#fff3e0
+    style ERROR fill:#F44336,color:#ffffff
+    style SUCCESS fill:#4CAF50,color:#ffffff
+    style ESCALATE fill:#FF9800,color:#ffffff
 ```
 
 **Why These Patterns Matter:**
@@ -1007,12 +1007,12 @@ graph TD
     SCALE3 --> P3
     SCALE4 --> P4
     
-    style SIMPLE fill:#ffebee
-    style PROD fill:#e8f5e8
-    style SCALE1 fill:#fff3e0
-    style SCALE2 fill:#fff3e0
-    style SCALE3 fill:#fff3e0
-    style SCALE4 fill:#fff3e0
+    style SIMPLE fill:#F44336,color:#ffffff
+    style PROD fill:#4CAF50,color:#ffffff
+    style SCALE1 fill:#FF9800,color:#ffffff
+    style SCALE2 fill:#FF9800,color:#ffffff
+    style SCALE3 fill:#FF9800,color:#ffffff
+    style SCALE4 fill:#FF9800,color:#ffffff
 ```
 
 ### The Dependency Injection Evolution
@@ -1088,11 +1088,11 @@ graph LR
     LOOSE --> SOLUTION2[Easy Testing]
     AUTO --> SOLUTION3[Plug & Play]
     
-    style OUR fill:#ffebee
-    style MCP fill:#e8f5e8
-    style PROBLEM1 fill:#fff3e0
-    style PROBLEM2 fill:#fff3e0
-    style PROBLEM3 fill:#fff3e0
+    style OUR fill:#F44336,color:#ffffff
+    style MCP fill:#4CAF50,color:#ffffff
+    style PROBLEM1 fill:#FF9800,color:#ffffff
+    style PROBLEM2 fill:#FF9800,color:#ffffff
+    style PROBLEM3 fill:#FF9800,color:#ffffff
 ```
 
 **The MCP Evolution Solves:**
