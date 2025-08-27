@@ -1,27 +1,12 @@
-# Session 1 - Module A: Advanced Agent Patterns (40 minutes)
+# Session 1 - Module A: Advanced Agent Patterns
 
-**Prerequisites**: [Session 1 Core Section Complete](Session1_Bare_Metal_Agents.md)  
-**Target Audience**: Implementers seeking sophisticated patterns  
-**Cognitive Load**: 6 advanced concepts
-
----
-
-## Module Overview
+**Prerequisites**: [Session 1 Core Section Complete](Session1_Bare_Metal_Agents.md)
 
 This module explores sophisticated agent patterns including reflection-based self-improvement, multi-step planning systems, and collaborative multi-agent architectures. You'll implement advanced reasoning loops that form the foundation of professional agent frameworks.
 
-### Learning Objectives
-
-By the end of this module, you will:
-
-- Build reflection agents that improve their own outputs through self-critique
-- Implement multi-step planning systems for complex task decomposition
-- Create multi-agent orchestration systems with specialized roles
-- Design self-improvement mechanisms that enhance agent performance over time
-
 ---
 
-## Part 1: Sophisticated Reasoning Loops (15 minutes)
+## Part 1: Sophisticated Reasoning Loops
 
 ### The Reflection Pattern Implementation
 
@@ -167,7 +152,7 @@ async def _improve_response(self, message: str, current_response: str, critique:
 
 ---
 
-## Part 2: Multi-Step Planning (15 minutes)
+## Part 2: Multi-Step Planning
 
 ### Planning Agent Architecture
 
@@ -375,7 +360,7 @@ Individual step execution uses focused prompts that clearly specify what needs t
 
 ---
 
-## Part 3: Multi-Agent Orchestration (10 minutes)
+## Part 3: Multi-Agent Orchestration
 
 ### Agent Coordinator Architecture
 

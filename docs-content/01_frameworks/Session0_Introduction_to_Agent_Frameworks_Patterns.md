@@ -1,60 +1,12 @@
 # Session 0: Introduction to Agent Frameworks & Patterns
 
-## Learning Outcomes
-
-By the end of this session, you will be able to:
-
-- **Understand** the evolution from simple prompt-response to sophisticated agent systems
-- **Identify** the five core agentic patterns that power all production systems
-- **Compare** seven leading frameworks and their enterprise adoption patterns
-- **Evaluate** framework selection criteria for different production scenarios
-- **Apply** pattern recognition skills to classify agent behaviors and capabilities
-
-## Chapter Overview: The Agent Revolution Transforming Enterprise Software
-
-### Industry Context & Market Significance
-
-The AI agent landscape is experiencing unprecedented growth. Gartner forecasts that by 2028, 33% of enterprise software applications will incorporate agentic AI - a dramatic leap from less than 1% in 2024. This session introduces you to the frameworks driving this transformation and the fundamental patterns that power autonomous AI systems.
-
-### What You'll Learn & Why It Matters
-
-You'll master the five core agentic patterns that every production system implements, compare seven leading frameworks used by companies like Microsoft, Google, and emerging startups, and understand why enterprises are moving from simple prompt-response to sophisticated agent orchestration. This foundation enables you to make informed technology choices and build systems that scale from prototype to production.
-
-### How These Frameworks Stand Out
-
-Modern agent frameworks like LangChain, CrewAI, and PydanticAI represent a paradigm shift from handcrafted logic to framework-driven engineering. Each addresses different production challenges: LangChain excels at modular orchestration, CrewAI specializes in role-based collaboration, and PydanticAI brings type safety to AI development.
-
-### Real-World Applications
-
-These patterns power automated research pipelines, content generation systems, business intelligence platforms, and decision automation tools across industries. You'll see how companies implement these patterns in production environments with monitoring, error handling, and enterprise integration.
+Modern AI development has evolved from simple prompt-response interactions to sophisticated agent systems that can reason, use tools, and collaborate. This session covers the five core patterns that power every production agent system and compares the leading frameworks used to implement them.
 
 ![Agent Evolution Overview](images/agent-evolution-overview.png)
 
-### Figure 1: The evolution of agent frameworks from simple tools to sophisticated autonomous systems
-
-### Learning Path Options
-
-**Observer Path (30 minutes)**: Research-backed conceptual understanding of agent evolution and framework landscape
-
-- Focus: Quick insights with industry context and pattern recognition
-- Best for: Getting oriented and understanding the business value
-
-**🙋‍♂️ Participant Path (45 minutes)**: Hands-on pattern recognition and framework comparison exercises  
-
-- Focus: Interactive examples and framework evaluation exercises
-- Best for: Learning through practical analysis
-
-**🛠️ Implementer Path (65 minutes)**: Deep dive into code examples with optional advanced modules
-
-- Focus: Technical implementation details and enterprise patterns
-- Best for: Technical teams planning real-world deployments
-
 ---
 
-### Part 1: From Prompts to Agents
-
-**Cognitive Load**: 2 new concepts  
-**Learning Mode**: Conceptual Understanding
+## Part 1: From Prompts to Agents
 
 #### The Evolution of AI Interaction
 
@@ -90,10 +42,7 @@ Four key characteristics define agentic systems:
 
 ---
 
-### Part 2: The Five Core Agentic Patterns
-
-**Cognitive Load**: 5 new concepts
-**Learning Mode**: Pattern Recognition
+## Part 2: The Five Core Agentic Patterns
 
 Every agent framework implements these fundamental patterns:
 
@@ -380,8 +329,6 @@ class MultiAgentSystem:
 
 ### Part 3: Framework Landscape Overview
 
-**Cognitive Load**: 3 new concepts  
-**Learning Mode**: Comparison & Selection
 
 #### Framework Categories
 
@@ -403,8 +350,6 @@ frameworks = ["Atomic Agents", "CrewAI"]
 ```
 
 #### Framework Comparison Matrix
-
-The framework comparison matrix below illustrates how different agent frameworks stack up across key dimensions including production readiness, enterprise features, ease of use, and specialized capabilities. This visual guide helps you quickly identify which frameworks align with your specific project requirements and organizational constraints.
 
 ![Framework Comparison Matrix](images/framework-comparison-matrix.png)
 
@@ -445,10 +390,7 @@ elif use_case == "microservice_architecture":
 
 ---
 
-### Part 4: Module Learning Path
-
-**Cognitive Load**: 1 new concept
-**Learning Mode**: Planning
+## Part 4: Next Steps
 
 #### Your Learning Journey
 
@@ -466,14 +408,6 @@ Session 10: Enterprise Integration
 Capstone: Multi-Framework Agent Ecosystem
 ```
 
-### Key Learning Outcomes
-
-- Master all 5 agentic patterns with hands-on implementation
-- Build agents using 7+ different frameworks
-- Deploy production-ready systems with monitoring
-- Create multi-agent systems with enterprise patterns
-
----
 
 ## Chapter Summary
 
