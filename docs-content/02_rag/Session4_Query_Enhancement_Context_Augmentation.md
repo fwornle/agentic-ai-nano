@@ -1,100 +1,26 @@
-# Session 4: Query Enhancement & Context Augmentation - Bridging the Semantic Gap
+# Session 4: Query Enhancement & Context Augmentation
 
-## Learning Outcomes
+Query enhancement addresses the semantic gap between user questions and document content - the primary cause of poor RAG performance. This session covers proven techniques that improve retrieval accuracy: HyDE (Hypothetical Document Embeddings), multi-query generation, context optimization, and advanced prompt engineering.
 
-By the end of this session, you will be able to:
-- **Implement** advanced query enhancement techniques including HyDE and multi-query generation
-- **Build** context augmentation systems that improve retrieval accuracy by 30-50%
-- **Apply** semantic gap bridging strategies for better query-document matching
-- **Design** query intelligence pipelines with automatic optimization and feedback loops
-- **Evaluate** and optimize query enhancement systems for production environments
-
-## Chapter Overview
-
-**What you'll learn**: Advanced techniques for improving query understanding and context retrieval in RAG systems
-
-**Why it matters**: The semantic gap between user queries and document content is the #1 cause of poor RAG performance. This session teaches proven techniques that improve retrieval accuracy by 30-50% in production systems.
-
-**How it stands out**: Unlike basic similarity search, these advanced query enhancement methods bridge the gap between natural language questions and technical document content through intelligent query expansion and context augmentation.
-
-**Where you'll apply it**: Customer support systems, technical documentation search, enterprise knowledge bases, and any RAG application requiring high precision retrieval.
-
-### Learning Path Options
-
-**Observer Path (65 minutes)**: Understand concepts and examine query intelligence patterns
-- Focus: Conceptual understanding with practical examples
-- Best for: Getting oriented and understanding the business value
-
-**🙋‍♂️ Participant Path (130 minutes)**: Follow exercises and implement HyDE and context optimization
-- Focus: Hands-on implementation with guided examples
-- Best for: Learning through practical implementation
-
-**🛠️ Implementer Path (230 minutes)**: Build custom enhancement systems and explore production patterns
-- Focus: Advanced techniques and production deployment
-- Best for: Technical teams planning real-world deployments
-
----
-
-### Core Learning Track (130 minutes) - REQUIRED
-
-| Section | Concept Load | Time | Skills |
-|---------|--------------|------|--------|
-| HyDE Implementation | 8 concepts | 25 min | Semantic Gap Bridging |
-| Query Enhancement | 9 concepts | 25 min | Multi-Strategy Expansion |
-| Context Optimization | 6 concepts | 20 min | Window Management |
-| Prompt Engineering | 10 concepts | 30 min | Generation Quality |
-| Integration Pipeline | 7 concepts | 30 min | System Architecture |
-
-### Optional Deep Dive Modules (Choose Your Adventure)
-- 🔬 **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** (50 min)
-- 🏭 **[Module B: Enterprise Context Systems](Session4_ModuleB_Enterprise_Context.md)** (50 min)
-
-## Core Section (Required - 130 minutes)
-
-### Learning Outcomes
-
-By the end of this session, you will be able to:
-- **Implement** HyDE (Hypothetical Document Embeddings) for semantic gap bridging
-- **Design** query expansion and reformulation strategies using LLMs
-- **Build** multi-query generation systems for comprehensive retrieval
-- **Optimize** context windows and chunking for better generation quality
-- **Engineer** advanced prompts that maximize retrieval-augmented generation effectiveness
-
-## Chapter Introduction
-
-### **Building on Vector Search Mastery: The Query Intelligence Layer**
+### Optional Deep Dive Modules
+- **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Intent classification, multi-modal queries, context awareness
 
 ![Agentic RAG](images/AgenticRAG.png)
 
-In Session 3, you mastered vector databases and hybrid search optimization - now we tackle the next critical challenge: the query-document semantic gap. Even the most sophisticated vector search fails when user queries don't linguistically match document content. This session transforms your optimized retrieval system into an intelligent query interpreter that understands intent and bridges semantic mismatches.
+## Query Enhancement Challenges
 
-### The Query Enhancement Challenge:
-- **Semantic Mismatch**: User questions vs. document language styles create embedding distance
-- **Vector Search Limitations**: Perfect similarity doesn't guarantee relevant context
-- **Incomplete Queries**: Users provide minimal context, defeating your optimized indices
-- **Domain-Specific Language**: Technical documents use terms users don't know to query
+- **Semantic Mismatch**: User questions use different language than document content
+- **Incomplete Queries**: Users provide minimal context  
+- **Domain-Specific Language**: Technical documents use terminology users don't know
 
-### Advanced Solutions Building on Your Vector Expertise:
-- **HyDE Integration**: Generate hypothetical documents that match your vector space
-- **Query Decomposition**: Break complex questions into your optimized retrieval patterns
-- **Multi-Query Generation**: Leverage multiple search perspectives across your hybrid system
-- **Context Optimization**: Intelligent window sizing that maximizes your retrieval quality
+## Enhancement Solutions
 
-### **The Evolution from Search to Understanding**
+- **HyDE**: Generate hypothetical documents that match vector space
+- **Query Decomposition**: Break complex questions into focused retrieval tasks
+- **Multi-Query Generation**: Use multiple search perspectives
+- **Context Optimization**: Intelligent window sizing for better generation
 
-This session represents a fundamental shift in RAG thinking - from "find similar content" to "understand user intent":
-
-**Session 3 Achievement**: Fast, accurate vector similarity search
-**Session 4 Goal**: Intelligent query understanding that maximizes retrieval success
-**Session 5 Preview**: Evaluating whether our query enhancements actually improve RAG quality
-
-Your journey from basic chunking (Session 2) → optimized search (Session 3) → query intelligence (Session 4) → quality measurement (Session 5) forms the complete foundation for advanced RAG patterns you'll explore in Sessions 6-9.
-
-Let's transform your high-performance vector system into a true query understanding engine! 🎯
-
----
-
-## **Part 1: HyDE - Hypothetical Document Embeddings (25 minutes)**
+## Part 1: HyDE - Hypothetical Document Embeddings
 
 ### **Understanding the Semantic Gap Problem**
 
@@ -509,9 +435,7 @@ Calculate document importance based on quality scores:
 
 ---
 
-## **Part 2: Query Expansion and Reformulation (25 minutes)**
-
-### **Beyond HyDE: Multi-Strategy Query Intelligence**
+## Part 2: Query Expansion and Reformulation
 
 Building on HyDE's hypothetical document generation, query expansion tackles the problem from a different angle - instead of creating new content, it enriches the original query with related terms and concepts that increase the likelihood of matching relevant documents in your vector database.
 
@@ -886,9 +810,7 @@ Package all generated query variants with metadata:
 
 ---
 
-## **Part 3: Context Window Optimization (20 minutes)**
-
-### **Smart Context Assembly**
+## Part 3: Context Window Optimization
 
 Optimize context windows for maximum information density:
 
@@ -1102,9 +1024,7 @@ class ContextWindowOptimizer:
 
 ---
 
-## **Part 4: Advanced Prompt Engineering for RAG (30 minutes)**
-
-### **Context-Aware Prompt Templates**
+## Part 4: Advanced Prompt Engineering for RAG
 
 Design prompts that maximize the effectiveness of retrieved context:
 
@@ -1520,23 +1440,9 @@ Now implement the supporting methods:
 
 ---
 
-## **Hands-On Exercise: Build Query Enhancement Pipeline**
-
-### **Your Mission**
+## Hands-On Exercise: Build Query Enhancement Pipeline
 
 Create a comprehensive query enhancement system that combines HyDE, multi-query generation, and context optimization.
-
-### **Requirements:**
-
-1. **HyDE Implementation**: Generate hypothetical documents for semantic gap bridging
-2. **Query Expansion**: Multi-strategy query expansion and reformulation
-3. **Multi-Query System**: Generate query variants from multiple perspectives
-4. **Context Optimization**: Smart context window management with token budgeting
-5. **Prompt Engineering**: Dynamic prompt adaptation based on context quality
-
-### **Implementation Framework:**
-
-The comprehensive system integrates all enhancement techniques into a unified pipeline:
 
 ```python
 
@@ -1643,30 +1549,15 @@ Now implement the enhancement phases:
 
 ---
 
-## ** Chapter Summary**
+## Chapter Summary
 
-### **What You've Built**
+You've built a complete query enhancement system including:
 
-- ✅ HyDE system for semantic gap bridging with multiple hypothetical document strategies
-- ✅ Multi-strategy query expansion using semantic, contextual, and domain-specific techniques
-- ✅ Multi-query generation from different perspectives and specificity levels
-- ✅ Context window optimization with relevance ranking and hierarchical summarization
-- ✅ Advanced prompt engineering with dynamic adaptation and confidence calibration
-
-### **Key Technical Skills Learned**
-
-1. **Query Enhancement**: HyDE, expansion strategies, and multi-query generation
-2. **Context Optimization**: Token budgeting, relevance ranking, and smart summarization
-3. **Prompt Engineering**: Template design, chain-of-thought, and confidence calibration
-4. **Dynamic Adaptation**: Context-aware prompt selection and quality assessment
-5. **Pipeline Integration**: Combining multiple enhancement techniques effectively
-
-### **Performance Improvements**
-
-- **Retrieval Relevance**: 25-35% improvement with HyDE and query expansion
-- **Context Utilization**: 40-50% better information density in optimized contexts
-- **Answer Quality**: 20-30% improvement with engineered prompts and confidence calibration
-- **User Satisfaction**: Significant improvement in handling ambiguous and complex queries
+- HyDE system for semantic gap bridging
+- Multi-strategy query expansion using semantic, contextual, and domain techniques
+- Multi-query generation from different perspectives
+- Context window optimization with relevance ranking
+- Advanced prompt engineering with confidence calibration
 
 ---
 
@@ -1708,45 +1599,11 @@ D) Keyword-heavy prompts
 
 ---
 
-## Session 4 Mastery Summary
+## Session Summary
 
-### What You've Accomplished:
-You've transformed your RAG system from simple similarity search to intelligent query understanding by mastering:
+You've transformed your RAG system from simple similarity search to intelligent query understanding through HyDE implementation, multi-strategy query expansion, query decomposition, and context optimization.
 
-✅ **HyDE Implementation**: Bridging semantic gaps through hypothetical document generation
-✅ **Multi-Strategy Query Expansion**: Enriching queries with semantic, contextual, and domain-specific terms
-✅ **Query Decomposition**: Breaking complex questions into manageable retrieval tasks
-✅ **Context Optimization**: Intelligent window sizing and prompt engineering for better generation
-✅ **Integration Mastery**: Combining query enhancement with your Session 3 vector optimization
-
-### Your RAG Evolution Journey So Far:
-- **Session 2**: Smart document preprocessing and hierarchical chunking
-- **Session 3**: High-performance vector databases and hybrid search optimization
-- **Session 4**: Intelligent query understanding and semantic gap bridging ✅
-- **Session 5 Next**: Measuring and validating these enhancements actually work
-
-## Critical Bridge to Session 5: Proving Enhancement Value
-
-**The Essential Question:** Do your query enhancements actually improve RAG quality?
-
-You've built sophisticated query intelligence - HyDE, expansion, decomposition, and context optimization. But without proper evaluation, you can't know if these techniques truly enhance user experience or just add complexity.
-
-### Session 5 Will Answer:
-- **Which enhancements** provide measurable quality improvements?
-- **How to quantify** the impact of HyDE vs. query expansion vs. context optimization?
-- **What metrics** reveal true RAG performance beyond simple accuracy?
-- **How to set up** A/B tests that prove your enhancements work in production?
-
-### Preparation for Evaluation Excellence
-
-1. **Document your baseline**: RAG performance before query enhancements
-2. **Create test query sets**: Challenging questions that test each enhancement technique
-3. **Track enhancement metrics**: Response quality, retrieval success, user satisfaction
-4. **Prepare comparison scenarios**: Original queries vs. enhanced queries across diverse topics
-
-**The Next Challenge:** Transform your sophisticated query enhancement system into a measurably superior RAG experience through rigorous evaluation and quality assessment.
-
-Ready to prove your enhancements deliver real value? Let's master RAG evaluation! 📊
+**Next**: Session 5 covers measuring and validating whether these enhancements actually improve RAG quality through proper evaluation metrics and A/B testing.
 
 ---
 
@@ -1756,6 +1613,6 @@ Ready to prove your enhancements deliver real value? Let's master RAG evaluation
 
 ### Optional Deep Dive Modules:
 
-- 🔬 **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Deep dive into query analysis and understanding systems
+- **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Deep dive into query analysis and understanding systems
 
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)

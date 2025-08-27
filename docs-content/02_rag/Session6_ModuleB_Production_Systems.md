@@ -1,46 +1,19 @@
 # Session 6 - Module B: Production GraphRAG Systems
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
-> **Prerequisites**: Complete Session 6 core content first.
-> **Time Investment**: 40 minutes
-> **Target Audience**: Implementer path students and production engineers
+> **ADVANCED OPTIONAL MODULE** 
+> Supplementary content for deeper specialization. Complete Session 6 core content first.
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Enterprise-grade GraphRAG deployment with advanced scalability patterns
-- Production monitoring and performance optimization for graph systems
-- High-availability architecture design for mission-critical GraphRAG
-- Integration strategies with enterprise data and security infrastructure
-
----
-
-## 🧭 Navigation & Quick Start
+Enterprise-grade GraphRAG deployment with scalability patterns, production monitoring, high-availability architecture design, and enterprise integration strategies.
 
 ### Related Modules
-
-- **[🔬 Module A: Advanced Algorithms →](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
-- **[📄 Session 6 Core: Graph-Based RAG →](Session6_Graph_Based_RAG.md)** - Foundation graph concepts
-
-### Code Files
-
-- **Production GraphRAG**: [`src/session6/production_graphrag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/production_graphrag.py) - Enterprise-ready GraphRAG implementation
-- **Neo4j Manager**: [`src/session6/neo4j_manager.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/neo4j_manager.py) - Production graph database management
-- **CodeGraphRAG**: [`src/session6/code_graphrag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/code_graphrag.py) - Specialized code analysis GraphRAG
-- **Demo Application**: [`src/session6/demo_session6.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session6/demo_session6.py) - Production GraphRAG showcase
+- **[Module A: Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
+- **[Session 6 Core: Graph-Based RAG](Session6_Graph_Based_RAG.md)** - Foundation graph concepts
 
 ### Quick Start
-
 ```bash
 # Test production GraphRAG system
 cd src/session6
 python production_graphrag.py
-
-# Test Neo4j integration
-python -c "from neo4j_manager import Neo4jManager; print('Production GraphRAG ready!')"
-
-# Test CodeGraphRAG capabilities
-python -c "from code_graphrag import CodeGraphRAG; CodeGraphRAG().test_system()"
 ```
 
 ---
@@ -669,17 +642,12 @@ D) Network latency
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
 ### Related Modules:
 - **Core Session:** [Session 6 - Graph-Based RAG](Session6_Graph_Based_RAG.md)
 - **Related Module:** [Module A - Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)
 
-**🗂️ Code Files:** All examples use files in `src/session6/`
-- `production_graphrag.py` - Enterprise-ready GraphRAG implementation
-- `neo4j_manager.py` - Production graph database management
-- `code_graphrag.py` - Specialized code analysis GraphRAG
-
-**🚀 Quick Start:** Run `cd src/session6 && python production_graphrag.py` to see production GraphRAG systems in action
+**Code Files:** All examples use files in `src/session6/`
 
 ---

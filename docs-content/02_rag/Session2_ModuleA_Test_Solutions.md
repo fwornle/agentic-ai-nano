@@ -1,6 +1,6 @@
 # Session 2: Advanced Document Analytics - Test Solutions
 
-## 📝 Multiple Choice Test
+## Multiple Choice Test
 
 ### Question 1: Document Complexity Scoring
 

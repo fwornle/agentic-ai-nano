@@ -1,6 +1,6 @@
 # Session 4: Advanced Query Understanding - Test Solutions
 
-## 📝 Multiple Choice Test
+## Multiple Choice Test
 
 ### Question 1: Intent Classification Benefits
 

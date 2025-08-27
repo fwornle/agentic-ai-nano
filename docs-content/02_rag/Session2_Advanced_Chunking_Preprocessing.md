@@ -1,76 +1,16 @@
 # Session 2: Advanced Chunking & Preprocessing
 
-## Learning Outcomes
-
-By the end of this session, you will be able to:
-- **Design** hierarchical chunking strategies that preserve document structure and meaning
-- **Extract** and utilize rich metadata to enhance retrieval quality and context
-- **Process** multi-modal content including tables, images, and structured data effectively
-- **Implement** intelligent preprocessing pipelines that adapt to document complexity
-- **Evaluate** chunk quality using comprehensive metrics and assessment frameworks
-
-## Chapter Overview
-
-### What You'll Learn: Enterprise-Grade Document Understanding
-
-Advanced chunking transforms RAG systems from simple text splitters into intelligent document understanding engines. Unlike naive approaches that arbitrarily split text, enterprise systems preserve document structure, extract rich metadata, and handle complex content types that include tables, images, and domain-specific formatting.
-
-### Why It Matters: Real-World Document Complexity
-
-Enterprise documents contain structured relationships that naive chunking destroys. Tables split across chunks lose meaning, hierarchical information gets fragmented, and rich contextual metadata is discarded. Advanced preprocessing preserves these relationships, leading to 50-70% better context preservation and 30-40% improvement in retrieval relevance.
-
-### How It Stands Out: 2025 Enterprise Standards
-
-Based on current industry trends, advanced chunking in 2025 employs:
-- **Neural boundary detection** that learns optimal split points
-- **Context-aware processing** that adapts to document types
-- **Multi-modal understanding** for mixed content formats
-- **Dynamic window summarization** for enhanced context
-
-### Where You'll Apply It: Critical Enterprise Use Cases
-- **Legal Document Processing**: Preserving citations and statutory references
-- **Medical Record Analysis**: Maintaining dosage and treatment relationships
-- **Technical Documentation**: Keeping code blocks and API references intact
-- **Research Paper Processing**: Preserving academic structure and citations
+Advanced chunking transforms RAG systems from simple text splitters into intelligent document understanding engines that preserve document structure, extract rich metadata, and handle complex content types including tables, images, and domain-specific formatting.
 
 ![RAG Problems Overview](images/RAG-overview-problems.png)
-### Figure 1: This diagram illustrates common problems with naive chunking approaches, including fragmented content, lost context, and structural information loss that advanced preprocessing solves.
 
-### Learning Path Options
-
-**Observer Path (30 minutes)**: Understand concepts with simple examples
-- Focus: Core concepts and practical applications with clear demonstrations
-- Best for: Getting oriented with intelligent document processing fundamentals
-
-**🙋‍♂️ Participant Path (65 minutes)**: Implement structure-aware chunking
-- Focus: Hands-on implementation of hierarchical and metadata-enhanced chunking
-- Best for: Building practical preprocessing pipelines with real-world applications
-
-**🛠️ Implementer Path (105 minutes)**: Advanced patterns and enterprise deployment
-- Focus: Domain-specific processors and enterprise-scale optimization
-- Best for: Deep technical mastery with production-ready implementations
+*Figure 1: Common problems with naive chunking approaches that advanced preprocessing solves.*
 
 ---
 
-## Part 1: Document Structure Analysis (Observer: 8 min | Participant: 15 min)
+## Part 1: Document Structure Analysis
 
-### Understanding the Enterprise Challenge
-
-Enterprise documents contain complex structures that naive chunking destroys. Consider a typical enterprise scenario:
-
-**The Problem:** A legal contract with multiple sections, numbered clauses, and cross-references gets processed by simple text splitting. The result? Clause numbers are separated from their content, cross-references become meaningless, and the hierarchical structure that legal professionals rely on is completely lost.
-
-**The Solution:** Structure-aware document analysis that preserves these critical relationships.
-
-### Why Document Structure Analysis Matters
-
-Intelligent document analysis provides several critical capabilities:
-- **Preserves semantic relationships**: Keeps related content together
-- **Maintains hierarchy**: Uses document structure as natural boundaries
-- **Enables specialized processing**: Different content types get appropriate handling
-- **Enhances retrieval quality**: Includes structural metadata for better matching
-
-### Simple Content Type Detection (Observer Focus)
+### Content Type Detection
 
 Here's a straightforward example of how we can detect different content types in documents:
 
@@ -118,9 +58,7 @@ def detect_simple_content_type(text_line):
 
 This classification enables our system to make intelligent decisions about how to process each type of content.
 
-### **PARTICIPANT PATH**: Building Document Elements
-
-For hands-on implementation, let's create a more sophisticated structure to represent document elements:
+### Building Document Elements
 
 ```python
 from dataclasses import dataclass
@@ -200,9 +138,7 @@ class DocumentStructureAnalyzer:
 
 This analyzer creates a structured representation of the document that preserves hierarchy and content relationships.
 
-### **IMPLEMENTER PATH**: Advanced Pattern Recognition
-
-For enterprise applications, implement sophisticated pattern recognition:
+### Advanced Pattern Recognition
 
 ```python
 import re
@@ -249,18 +185,11 @@ This advanced analyzer adapts to different document domains and provides intelli
 
 ---
 
-## Part 2: Hierarchical Chunking Implementation (Observer: 8 min | Participant: 20 min)
+## Part 2: Hierarchical Chunking Implementation
 
-### Why Hierarchical Chunking Transforms RAG Performance
+Hierarchical chunking cuts along natural boundaries, preserving meaning and relationships instead of arbitrary splits.
 
-Traditional chunking is like cutting a newspaper with a paper shredder - it destroys the logical structure authors carefully created. Hierarchical chunking cuts along natural boundaries, preserving meaning and relationships.
-
-### Performance Impact:
-- **60-80% better context preservation** because chunks contain complete thoughts
-- **40-50% improved retrieval accuracy** because queries match naturally coherent content units
-- **Enhanced user experience** because retrieved content makes logical sense
-
-### Simple Hierarchical Chunking (Observer Focus)
+### Simple Hierarchical Chunking
 
 Here's a basic example of how hierarchical chunking works:
 
@@ -308,9 +237,7 @@ def simple_hierarchical_chunk(elements: List[DocumentElement],
 - **Complete sections**: Keeps related content together
 - **Size management**: Respects maximum chunk size while preserving structure
 
-### **PARTICIPANT PATH**: Advanced Hierarchical Chunker
-
-Let's implement a production-ready hierarchical chunker with overlap and metadata:
+### Advanced Hierarchical Chunker
 
 ```python
 from langchain.schema import Document
@@ -437,9 +364,7 @@ class HierarchicalChunker:
 
 This implementation provides intelligent section grouping, size management, and context preservation through overlap.
 
-### **IMPLEMENTER PATH**: Enterprise Chunking Pipeline
-
-For production environments, implement a comprehensive pipeline with quality assessment:
+### Enterprise Chunking Pipeline
 
 ```python
 class EnterpriseChunkingPipeline:
@@ -482,13 +407,11 @@ This enterprise pipeline includes quality control and optimization feedback loop
 
 ---
 
-## Part 3: Metadata Extraction & Enhancement (Observer: 6 min | Participant: 15 min)
+## Part 3: Metadata Extraction & Enhancement
 
-### The Power of Rich Metadata
+Metadata improves retrieval quality by creating additional searchable context beyond original text.
 
-Metadata significantly improves retrieval quality by creating additional searchable context. When users search for concepts, the system can match not just original text but also extracted entities, keywords, and inferred topics.
-
-### Simple Metadata Extraction (Observer Focus)
+### Simple Metadata Extraction
 
 Here's a basic example of extracting useful metadata from document chunks:
 
@@ -530,9 +453,7 @@ def extract_simple_metadata(text: str) -> Dict[str, Any]:
 - **Content understanding**: Insight into chunk characteristics
 - **Quality assessment**: Metrics for evaluating chunk usefulness
 
-### **PARTICIPANT PATH**: Advanced Metadata Extractor
-
-For production systems, implement comprehensive metadata extraction:
+### Advanced Metadata Extractor
 
 ```python
 from dataclasses import dataclass
@@ -719,15 +640,11 @@ class MetadataEnhancedChunker:
 
 ---
 
-## Part 4: Multi-Modal & Quality Assessment (Observer: 8 min | Participant: 15 min)
+## Part 4: Multi-Modal & Quality Assessment
 
-### Handling Complex Document Types
+### Table-Aware Processing
 
-Real-world documents often contain tables, images, and mixed content that require specialized processing to maintain their meaning and relationships.
-
-### Table-Aware Processing (Observer Focus)
-
-Tables are particularly challenging because they contain structured relationships that must be preserved:
+Tables contain structured relationships that must be preserved during processing:
 
 ```python
 def process_simple_table(table_text: str) -> Dict[str, Any]:
@@ -801,9 +718,7 @@ def assess_basic_quality(chunks: List[str]) -> Dict[str, float]:
     }
 ```
 
-### **PARTICIPANT PATH**: Complete Processing Pipeline
-
-Let's build a comprehensive pipeline that combines all our advanced techniques:
+### Complete Processing Pipeline
 
 ```python
 class AdvancedProcessingPipeline:
@@ -890,9 +805,7 @@ class AdvancedProcessingPipeline:
         }
 ```
 
-### **IMPLEMENTER PATH**: Enterprise Quality Control
-
-For production systems, implement comprehensive quality assessment:
+### Enterprise Quality Control
 
 ```python
 class ChunkQualityAssessor:

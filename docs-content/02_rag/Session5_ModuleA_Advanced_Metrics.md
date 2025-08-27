@@ -1,33 +1,14 @@
 # Session 5 - Module A: Advanced Evaluation Metrics
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
-> **Prerequisites**: Complete Session 5 core content first.
-> **Time Investment**: 30 minutes
-> **Target Audience**: Implementer path students and research professionals
+> **Optional Advanced Module**  
+> Prerequisites: Complete Session 5 core content first.
 
-## Module Learning Outcomes
-After completing this module, you will master:
-- Advanced domain-specific evaluation metrics beyond basic accuracy
-- Research-level evaluation frameworks for RAG systems
-- Custom metric development for specialized use cases
-- Performance benchmarking and comparative analysis techniques
-
----
-
-## 🧭 Navigation & Quick Start
+This module covers advanced domain-specific evaluation metrics, neural-based assessment techniques, custom metric development, and explainability evaluation for RAG systems.
 
 ### Related Modules
 
-- **[🔬 Module B: Enterprise Monitoring →](Session5_ModuleB_Enterprise_Monitoring.md)** - Production monitoring and alerting systems
-- **[📄 Session 5 Core: RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts
-
-### Code Files
-
-- **Evaluation Framework**: [`src/session5/evaluation_framework.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/evaluation_framework.py) - Advanced metrics implementation
-- **Custom Metrics**: [`src/session5/custom_metrics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/custom_metrics.py) - Domain-specific evaluation metrics
-- **Benchmark System**: [`src/session5/benchmark_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/benchmark_system.py) - Performance benchmarking tools
-- **Demo Application**: [`src/session5/demo_evaluation_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session5/demo_evaluation_system.py) - Complete evaluation showcase
+- **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production monitoring and alerting systems
+- **[Session 5 Core: RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts
 
 ### Quick Start
 
@@ -164,9 +145,7 @@ The attribution calculation uses a leave-one-out approach: by removing each docu
 
 ---
 
-## 📝 Multiple Choice Test - Module A
-
-Test your understanding of advanced evaluation metrics:
+## Multiple Choice Test - Module A
 
 **Question 1:** What is the main advantage of BERTScore over traditional BLEU scores?  
 A) Faster computation    
@@ -202,17 +181,17 @@ D) User interface quality
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
-### Related Modules:
+### Related Modules
 - **Core Session:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
 - **Related Module:** [Module B - Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)
 
-**🗂️ Code Files:** All examples use files in `src/session5/`
+**Code Files:** All examples use files in `src/session5/`
 - `evaluation_framework.py` - Advanced metrics implementation
 - `custom_metrics.py` - Domain-specific evaluation metrics
 - `benchmark_system.py` - Performance benchmarking tools
 
-**🚀 Quick Start:** Run `cd src/session5 && python demo_evaluation_system.py` to see advanced metrics in action
+**Quick Start:** Run `cd src/session5 && python demo_evaluation_system.py` to see advanced metrics in action
 
 ---

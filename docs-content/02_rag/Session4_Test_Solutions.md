@@ -1,6 +1,6 @@
 # Session 4: Query Enhancement & Context Augmentation - Test Solutions
 
-## 📝 Multiple Choice Test
+## Multiple Choice Test
 
 ### Question 1: HyDE Purpose
 
@@ -65,11 +65,11 @@ D) Keyword-heavy prompts
 
 ## Performance Scoring
 
-- **5/5 Correct**: Excellent mastery of query enhancement techniques
-- **4/5 Correct**: Strong understanding with minor gaps  
-- **3/5 Correct**: Good grasp of concepts, review HyDE and context optimization
-- **2/5 Correct**: Adequate knowledge, focus on prompt engineering strategies
-- **1/5 or below**: Recommend hands-on practice with query enhancement pipelines
+- **5/5**: Excellent mastery of query enhancement techniques
+- **4/5**: Strong understanding with minor gaps  
+- **3/5**: Good grasp, review HyDE and context optimization
+- **2/5**: Focus on prompt engineering strategies
+- **1/5 or below**: Practice with query enhancement pipelines
 
 ---
 
