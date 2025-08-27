@@ -52,7 +52,8 @@
       "Bash(npx markdownlint-cli:*)",
       "Bash(npx markdownlint:*)",
       "Bash(mkdocs build:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Read(//tmp/coding_assistant/**)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits"
