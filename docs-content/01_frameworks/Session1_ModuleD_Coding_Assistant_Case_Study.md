@@ -54,29 +54,32 @@ graph TD
 The source code is organized into logical modules, each handling a specific aspect of agent functionality:
 
 ```mermaid
-graph TD
-    A[src/coding_assistant/] --> B[main.py - Entry point & config]
-    A --> C[llm/ - LLM abstraction layer]
-    A --> D[agents/ - Agent orchestration]
-    A --> E[tools/ - MCP tool integration]
-    A --> F[ui.py - User interface]
-    A --> G[sandbox.py - Security]
-    A --> H[history.py - Conversation persistence]
+graph TB
+    ROOT[src/coding_assistant/]
     
-    C --> C1[model.py - Real LLM calls]
-    C --> C2[adapters.py - Provider abstraction]
+    ROOT --> MAIN[main.py<br/>Entry point & config]
+    ROOT --> UI[ui.py<br/>User interface]
+    ROOT --> SAND[sandbox.py<br/>Security]
+    ROOT --> HIST[history.py<br/>Conversation persistence]
     
-    D --> D1[execution.py - Agent lifecycle]
-    D --> D2[callbacks.py - Event handling]
-    D --> D3[interrupts.py - User control]
-    D --> D4[history.py - Memory management]
+    ROOT --> LLM[llm/<br/>LLM abstraction layer]
+    LLM --> LLM1[model.py<br/>Real LLM calls]
+    LLM --> LLM2[adapters.py<br/>Provider abstraction]
     
-    E --> E1[mcp.py - Tool protocol]
-    E --> E2[tools.py - Tool definitions]
+    ROOT --> AGENTS[agents/<br/>Agent orchestration]
+    AGENTS --> AG1[execution.py<br/>Agent lifecycle]
+    AGENTS --> AG2[callbacks.py<br/>Event handling]
+    AGENTS --> AG3[interrupts.py<br/>User control]
+    AGENTS --> AG4[history.py<br/>Memory management]
     
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#f3e5f5
+    ROOT --> TOOLS[tools/<br/>MCP tool integration]
+    TOOLS --> T1[mcp.py<br/>Tool protocol]
+    TOOLS --> T2[tools.py<br/>Tool definitions]
+    
+    style LLM fill:#e8f5e8
+    style AGENTS fill:#fff3e0
+    style TOOLS fill:#f3e5f5
+    style ROOT fill:#e1f5fe
 ```
 
 ### Detailed File Map: Where to Find Each Concept
@@ -313,11 +316,11 @@ Here's the conceptual flow:
 
 ```mermaid
 graph TD
-    U[User: "Refactor this function"] --> O[Orchestrator Agent]
+    U[User: Refactor this function] --> O[Orchestrator Agent]
     
-    O -->|"Analyze code structure"| A1[Code Analysis Agent]
-    O -->|"Find better patterns"| A2[Best Practices Agent] 
-    O -->|"Generate tests"| A3[Testing Agent]
+    O -->|Analyze code structure| A1[Code Analysis Agent]
+    O -->|Find better patterns| A2[Best Practices Agent] 
+    O -->|Generate tests| A3[Testing Agent]
     
     A1 -->|Analysis Report| O
     A2 -->|Recommendations| O
