@@ -7,6 +7,8 @@
 
 The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces.
 
+> **Want more details?** See the [detailed Coder setup guide](coder-detailed.md) for comprehensive information about cloud development environments, infrastructure architecture, and advanced configuration options.
+
 ![Coder Architecture](images/coder-architecture.png)
 *Coder's architecture enables secure, scalable cloud development environments accessible from any browser or IDE*
 

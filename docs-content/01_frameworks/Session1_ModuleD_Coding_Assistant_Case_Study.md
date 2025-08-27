@@ -692,10 +692,10 @@ async with InterruptibleSection():
     # User can interrupt this safely
 ```
 
-**Why This Matters:**
-- **User Control**: Stop runaway operations without losing work
-- **Resource Management**: Don't waste tokens on unwanted completions
-- **Better UX**: Users feel in control, not trapped by their agents
+**Why This Matters:**  
+- **User Control**: Stop runaway operations without losing work  
+- **Resource Management**: Don't waste tokens on unwanted completions  
+- **Better UX**: Users feel in control, not trapped by their agents  
 
 **Connection to Our Session**: Remember how our simple agent just ran until done? This shows how production agents must respect user agency and provide escape hatches.
 
@@ -772,8 +772,8 @@ class ShortenConversationResult:
 
 **Example Transformation:**
 
-```
 Before (2000 tokens):
+```
 User: "Analyze this file..."
 Assistant: "I'll read the file..." [reads file]
 Assistant: "The file contains..." [long analysis]
@@ -782,8 +782,9 @@ Assistant: "Looking at tests..." [examines tests]
 Assistant: "The tests show..." [detailed findings]
 User: "What about performance?"
 [...many more exchanges...]
-
+```
 After (400 tokens):
+```
 Summary: "User requested analysis of file X for code quality and testing. 
 Found 3 main issues: naming conventions, missing error handling, 
 and incomplete test coverage. Currently investigating performance 
