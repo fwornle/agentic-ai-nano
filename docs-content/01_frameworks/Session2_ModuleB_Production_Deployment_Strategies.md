@@ -1,25 +1,12 @@
-# Session 2 - Module B: Production Deployment Strategies (70 minutes)
+# Session 2 - Module B: Production Deployment Strategies
 
-**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)  
-**Target Audience**: Those building real systems  
-**Cognitive Load**: 7 production concepts
-
----
-
-## Module Overview
+**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)
 
 This module focuses on deploying LangChain agents to production environments with enterprise-grade reliability, monitoring, and performance. You'll learn cloud deployment patterns, performance optimization, and comprehensive monitoring strategies.
 
-### Learning Objectives
-By the end of this module, you will:
-- Deploy LangChain agents to cloud platforms with automated infrastructure
-- Implement performance optimization and caching strategies for production workloads
-- Set up comprehensive monitoring and observability for agent systems
-- Design enterprise deployment architectures with high availability and scaling
-
 ---
 
-## Part 1: LangGraph Integration & Production Patterns (25 minutes)
+## Part 1: LangGraph Integration & Production Patterns
 
 ### Cloud Deployment Architecture
 

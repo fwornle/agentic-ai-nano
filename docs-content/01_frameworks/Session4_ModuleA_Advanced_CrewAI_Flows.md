@@ -1,25 +1,12 @@
-# Session 4 - Module A: Advanced CrewAI Flows (45 minutes)
+# Session 4 - Module A: Advanced CrewAI Flows
 
-**Prerequisites**: [Session 4 Core Section Complete](Session4_CrewAI_Team_Orchestration.md)  
-**Target Audience**: Implementers building sophisticated workflow systems  
-**Cognitive Load**: 5 advanced concepts
-
----
-
-## Module Overview
+**Prerequisites**: [Session 4 Core Section Complete](Session4_CrewAI_Team_Orchestration.md)
 
 This module explores CrewAI's most advanced workflow patterns including deterministic CrewAI Flows, dynamic team formation, sophisticated delegation strategies, and production-ready orchestration patterns. You'll learn to build enterprise-grade agent systems that can handle complex multi-step workflows with guaranteed execution order and state management.
 
-### Learning Objectives
-By the end of this module, you will:
-- Implement CrewAI Flows for deterministic production workflows
-- Design dynamic team formation systems that adapt to task requirements
-- Create sophisticated delegation patterns with peer inquiry and workload balancing
-- Build enterprise monitoring and performance optimization systems
-
 ---
 
-## Part 1: CrewAI Flows - Production Orchestration (25 minutes)
+## Part 1: CrewAI Flows - Production Orchestration
 
 ### Deterministic Workflow Patterns
 

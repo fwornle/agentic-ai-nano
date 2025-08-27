@@ -306,142 +306,7 @@ This is the evolution of our simple `return ai_response` pattern into production
 
 ---
 
-## Part 3: Orchestration - Beyond Single Agents
-
-### From SimpleAgent to Agent Teams
-
-In our main session, we built a `SimpleAgent` that could handle one conversation. But real-world tasks often require multiple types of expertise. The Coding Assistant solves this through orchestration - coordinating multiple specialized agents.
-
-Here's the conceptual flow:
-
-```mermaid
-graph TD
-    U[User: Refactor this function] --> O[Orchestrator Agent]
-    
-    O -->|Analyze code structure| A1[Code Analysis Agent]
-    O -->|Find better patterns| A2[Best Practices Agent] 
-    O -->|Generate tests| A3[Testing Agent]
-    
-    A1 -->|Analysis Report| O
-    A2 -->|Recommendations| O
-    A3 -->|Test Cases| O
-    
-    O -->|Synthesized Response| U
-    
-    style O fill:#2196F3,color:#ffffff
-    style A1 fill:#4CAF50,color:#ffffff
-    style A2 fill:#4CAF50,color:#ffffff 
-    style A3 fill:#4CAF50,color:#ffffff
-```
-
-### Agent Initialization - Role-Based Prompting
-
-The system starts each agent with a clear role definition in `agents/execution.py`:
-
-```python
-# Lines 30-44: How agents receive tasks
-START_MESSAGE_TEMPLATE = """
-You are an agent named `{name}`.
-
-## Task
-Your client has been given the following description 
-of your work and capabilities: 
-{description}
-
-## Parameters
-Your client has provided the following parameters:
-{parameters}
-""".strip()
-```
-
-This pattern extends our simple `system_message` approach into professional prompt engineering:
-
-**From Our Examples → Production:**
-```python
-# Our simple approach:
-messages = [
-    {"role": "system", "content": "You are a helpful AI assistant"},
-    {"role": "user", "content": input_text}
-]
-
-# Production approach:
-messages = [
-    {"role": "system", "content": f"You are {agent.name}, specialized in {agent.description}"},
-    {"role": "user", "content": structured_task_with_parameters}
-]
-```
-
-### The Execution Loop - ReAct Pattern in Action
-
-The core execution loop implements the ReAct pattern (Reasoning + Acting) we discussed, but with production error handling and tool integration:
-
-```python
-# Simplified from the actual implementation
-async def run_agent(agent: Agent):
-    """Core execution loop - ReAct pattern with production features"""
-    
-    # 1. Initialize with clear role and task
-    start_message = _create_start_message(agent)
-    append_user_message(agent.history, start_message)
-    
-    # 2. Main ReAct loop
-    while not agent.output:
-        # REASONING: Get LLM response with full context
-        response = await complete(
-            messages=agent.history,
-            model=agent.model,
-            tools=agent.tools
-        )
-        
-        # ACTING: Process tool calls if the agent wants to take action
-        if response.message.tool_calls:
-            for tool_call in response.message.tool_calls:
-                result = await execute_tool_call(tool_call)
-                append_tool_message(agent.history, result)
-        
-        # Check if task complete (agent signals it's done)
-        if is_finish_task(response):
-            agent.output = extract_output(response)
-            break
-```
-
-**This implements the patterns from our session:**
-
-- **Memory Management**: `agent.history` maintains conversation context (like our `self.memory`)
-- **Tool Integration**: `execute_tool_call()` gives agents capabilities beyond LLM knowledge
-- **Completion Detection**: Agents decide when they're finished (autonomous behavior)
-- **Error Recovery**: Production error handling and retries (missing from our examples)
-
-### Multi-Agent Coordination
-
-The real power comes from coordinating multiple agents. Here's how task delegation works:
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant O as Orchestrator
-    participant CA as Code Agent  
-    participant TA as Test Agent
-    
-    U->>O: "Improve this function"
-    
-    O->>CA: Delegate: "Analyze code quality"
-    CA->>CA: Uses file system tools
-    CA->>O: "Found 3 issues: complexity, naming, no tests"
-    
-    O->>TA: Delegate: "Generate tests for improved function"  
-    TA->>TA: Uses code execution tools
-    TA->>O: "Created 5 test cases"
-    
-    O->>O: Synthesize results
-    O->>U: "Here's the refactored function with tests"
-```
-
-This is the natural evolution of our single-agent examples into systems that can handle complex, multi-step tasks requiring different types of expertise.
-
----
-
-## Part 4: Tool Integration - The MCP Evolution
+## Part 3: Tool Integration - The MCP Evolution
 
 ### From Simple Tools to Protocol Standards
 
@@ -578,7 +443,7 @@ sequenceDiagram
 
 ---
 
-## Part 5: Production Features - What Makes It Enterprise-Ready
+## Part 4: Production Features - What Makes It Enterprise-Ready
 
 ### The Production Reality Check
 
@@ -762,7 +627,7 @@ The Coding Assistant answers all these questions, showing how bare metal develop
 
 ---
 
-## Part 6: Advanced Patterns - Solving Real User Experience Challenges
+## Part 5: Advanced Patterns - Solving Real User Experience Challenges
 
 ### The User Experience Problem
 
@@ -977,7 +842,7 @@ The Coding Assistant shows how "bare metal" development can implement sophistica
 
 ---
 
-## Part 7: Connecting Back to Your Learning Journey
+## Part 6: Connecting Back to Your Learning Journey
 
 ### From SimpleAgent to Production System
 

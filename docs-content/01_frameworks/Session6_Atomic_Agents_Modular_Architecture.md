@@ -1,66 +1,27 @@
-# Session 6: Atomic Agents Modular Architecture - Enterprise-Grade Component Systems
+# Session 6: Atomic Agents Modular Architecture
 
-## Chapter Overview: Atomic Agents' Breakthrough in Modular AI Architecture
+Atomic Agents provides a component-based architecture for building modular AI systems. Built on Instructor and Pydantic foundations, the framework enables rapid system assembly through schema alignment and lightweight components. Each atomic agent has single responsibility and minimal dependencies, making them highly reusable building blocks.
 
-### Industry Context & Market Significance
+### What You'll Learn
 
-Atomic Agents represents a revolutionary approach to AI development through extreme modularity and lightweight design. Built on Instructor and Pydantic foundations, the framework enables organizations to create AI applications using familiar software engineering principles. As 2025 marks the shift toward agentic AI as modular infrastructure layers, Atomic Agents provides the component-based architecture that enterprises need for scalable, maintainable AI systems.
+- Component-based agent design and modular composition patterns
+- Atomic architecture principles for enterprise scalability
+- Schema matching and component alignment for seamless chaining
+- Production deployment strategies for atomic agent systems
 
-### What You'll Learn & Why It Matters
+### Advanced Modules
 
-You'll master component-based agent design, learn modular composition patterns that enable rapid system assembly, and understand atomic architecture principles for enterprise scalability. More importantly, you'll discover why component alignment and schema matching make Atomic Agents ideal for organizations requiring flexibility and reusability in their AI infrastructure.
+- **[Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Pipeline orchestration & dynamic assembly
+- **[Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production-scale atomic systems & multi-tenant architectures
 
-### How Atomic Agents Stands Out
-
-Atomic Agents makes it easy to chain agents and tools together by aligning their input and output schemas, promoting modularity and reusability. This design allows effortless component swapping while maintaining enterprise-grade security, monitoring, and resource optimization capabilities. The framework's atomic approach means each component has single responsibility and minimal dependencies.
-
-### Real-World Applications & Production Evidence
-
-Atomic Agents excels in enterprise environments requiring modular AI solutions. Organizations use it for natural language interfaces, personalized content recommendation systems, and semantic search applications. The framework's seamless integration with deployment platforms enables instant agent pipeline deployment while maintaining granular control over individual components.
-
-## Learning Navigation Hub
-
-**Total Time Investment**: 80 minutes (Core) + 65 minutes (Optional)
-
-### Learning Path Options
-
-- **Observer (45 min)**: Modular architecture analysis with component design insights  
-- **Participant (80 min)**: Hands-on atomic agent building with composition patterns
-- **Implementer (115 min)**: Advanced component systems with enterprise orchestration
+**Code Files**: [`src/session6/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session6)
+**Quick Start**: `cd src/session6 && python example_usage.py`
 
 ---
 
-## Session Overview Dashboard
+## Part 1: Atomic Architecture Principles
 
-### Core Learning Track (80 minutes) - REQUIRED
-
-| Section | Concept Load | Time | Skills |
-|---------|--------------|------|--------|
-| Atomic Architecture Principles | 3 concepts | 25 min | Understanding |
-| Component-Based Design | 4 concepts | 30 min | Implementation |
-| Modular System Assembly | 3 concepts | 20 min | Integration |
-| Production Deployment | 2 concepts | 5 min | Production |
-
-### Optional Advanced Modules
-
-**Advanced Content**: These modules contain enterprise production material and complex component orchestration
-
-- **[Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)** (35 min) - Sophisticated pipeline orchestration & dynamic assembly
-- **[Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)** (30 min) - Production-scale atomic systems & multi-tenant architectures
-
-**Code Files**: All examples use files in [`src/session6/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session6)
-**Quick Start**: Run `cd src/session6 && python example_usage.py` to see atomic agents in action
-
----
-
-## Core Section (Required - 80 minutes)
-
-### Part 1: Atomic Architecture Principles (25 minutes)
-
-**Cognitive Load**: 3 new concepts  
-**Learning Mode**: Conceptual Understanding
-
-#### Enterprise Modular Design Philosophy (12 minutes)
+### Modular Design Philosophy
 
 Atomic Agents transforms AI development through extreme modularity and component-based architecture:
 
@@ -96,7 +57,7 @@ class AtomicTextAgent(BaseAgent):
 2. **Composition over Inheritance**: Build systems by combining components
 3. **Lightweight by Design**: Minimal resource footprint per component
 
-#### Component Composition (7 minutes)
+### Component Composition
 
 Building systems through component assembly:
 
@@ -138,7 +99,7 @@ class ComponentComposer:
         )
 ```
 
-#### Lightweight Patterns (5 minutes)
+### Lightweight Patterns
 
 Optimizing for efficiency and modularity:
 
@@ -172,12 +133,9 @@ def create_specialized_agent(role: str, tools: list = None):
 
 ---
 
-### Part 2: Building Atomic Components (25 minutes)
+## Part 2: Building Atomic Components
 
-**Cognitive Load**: 4 new concepts
-**Learning Mode**: Implementation & Practice
-
-#### Component Creation (8 minutes)
+### Component Creation
 
 Building reusable atomic components:
 
@@ -221,7 +179,7 @@ text_agent = TextProcessorAgent()
 summary = text_agent.summarize("Long article text here...")
 ```
 
-#### Interface Design (6 minutes)
+### Interface Design
 
 Creating clean, composable interfaces:
 
@@ -268,7 +226,7 @@ class AtomicDataAgent(BaseAgent, DataProcessor):
         return self.process_data(combined)
 ```
 
-#### Basic Composition (6 minutes)
+### Basic Composition
 
 Combining components into systems:
 
@@ -323,7 +281,7 @@ result = coordinator.process_mixed_content(
 )
 ```
 
-#### Testing Strategies (5 minutes)
+### Testing Strategies
 
 Validating atomic components:
 
@@ -369,12 +327,9 @@ def test_coordination():
 
 ---
 
-### Part 3: System Assembly & Integration (20 minutes)
+## Part 3: System Assembly & Integration
 
-**Cognitive Load**: 3 new concepts
-**Learning Mode**: Integration & Orchestration
-
-#### Component Integration (8 minutes)
+### Component Integration
 
 Assembling components into complete systems:
 
@@ -441,7 +396,7 @@ class AtomicOrchestrator:
         return workflow_state
 ```
 
-#### System Coordination (7 minutes)
+### System Coordination
 
 Managing complex multi-agent systems:
 
@@ -500,7 +455,7 @@ class SystemCoordinator:
         ]
 ```
 
-#### Testing Integration (5 minutes)
+### Testing Integration
 
 Validating integrated systems:
 
@@ -534,12 +489,9 @@ def test_system_integration():
 
 ---
 
-### Part 4: Deployment & Scaling (5 minutes)
+## Part 4: Deployment & Scaling
 
-**Cognitive Load**: 2 new concepts
-**Learning Mode**: Production Readiness
-
-#### Deployment Patterns (3 minutes)
+### Deployment Patterns
 
 **File**: [`src/session6/bootstrap.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/bootstrap.py) - Deployment configuration
 
@@ -561,7 +513,7 @@ def deploy_atomic_system():
 system = deploy_atomic_system()
 ```
 
-#### Scaling Considerations (2 minutes)
+### Scaling Considerations
 
 ```python
 
@@ -577,9 +529,7 @@ scaling_config = {
 
 ---
 
-## Core Section Validation (5 minutes)
-
-### Quick Implementation Exercise
+## Quick Implementation Exercise
 
 🗂️ **Exercise Files**:
 
