@@ -1,75 +1,30 @@
-# Session 4: CrewAI Team Orchestration - Enterprise Multi-Agent Collaboration
+# Session 4: CrewAI Team Orchestration
 
 ## Learning Outcomes
 
-By the end of this session, you will be able to:
-- **Design** role-based multi-agent teams with defined responsibilities and collaboration patterns
-- **Implement** CrewAI workflows that mirror successful human team structures
-- **Build** agents with personalities, backstories, and specialized capabilities for team synergy
-- **Orchestrate** complex business processes using hierarchical and sequential execution patterns
-- **Deploy** production-ready CrewAI systems with monitoring and performance optimization
+- Design role-based multi-agent teams with defined responsibilities
+- Implement CrewAI workflows using sequential and hierarchical patterns
+- Build agents with specialized capabilities and collaborative behaviors
+- Orchestrate complex processes using task delegation and coordination
+- Optimize crew performance with caching and monitoring
 
-## Chapter Overview: CrewAI's Breakthrough in Team-Based AI Systems
+## Overview
 
-### Industry Context & Market Significance
+CrewAI enables multi-agent collaboration through role-based team structures. Unlike single-agent systems, CrewAI agents work together with defined roles, goals, and backstories to create natural team dynamics. This approach is effective for business processes that require multiple specialized roles working in coordination.
 
-CrewAI has emerged as the leading framework for team-based AI automation in 2025, with over 100,000 developers certified and 25,000 GitHub stars. Enterprise surveys reveal that 4,500+ professionals are actively deploying CrewAI in production, with larger enterprises showing 23% more production deployments than smaller organizations. The framework's team-centric approach mirrors human organizational structures, making it intuitive for enterprise adoption.
+**Key Concepts**:
+- Role specialization with clear responsibilities
+- Sequential and hierarchical workflow patterns
+- Task delegation and result aggregation
+- Memory sharing and communication between agents
+- Performance optimization through caching and rate limiting
 
-### What You'll Learn & Why It Matters
+**Code Files**: Examples use files in `src/session4/`  
+**Quick Start**: `cd src/session4 && python crewai_basics.py`
 
-You'll master role-based agent design, learn collaborative workflow patterns that mirror successful human teams, and understand task orchestration for complex business processes. Most importantly, you'll discover why companies report jumping from 10% to 70%+ accuracy in automated processes using CrewAI's team-based approach.
+## Team Architecture Foundations
 
-### How CrewAI Stands Out
-
-CrewAI's role-playing autonomous agents foster collaborative intelligence by design. Unlike single-agent or chain-based systems, CrewAI agents work together seamlessly with defined roles, goals, and backstories that create natural team dynamics. This approach has proven particularly effective for enterprises migrating from human-led processes to AI automation.
-
-### Real-World Applications & Production Evidence
-
-CrewAI excels in business process automation where multiple specialized roles collaborate. Financial services clients report reducing quarterly reporting from 2 weeks to 2 days with 35% improved accuracy. Marketing automation teams achieve 40% efficiency improvements within three months, while customer support operations see 75% reduction in processing time through automated workflow orchestration.
-
-## Learning Navigation Hub
-
-**Total Time Investment**: 90 minutes (Core) + 85 minutes (Optional)
-
-### Learning Path Options
-
-- **Observer (50 min)**: Team architecture analysis with enterprise deployment insights  
-- **Participant (90 min)**: Hands-on crew building with role specialization
-- **Implementer (135 min)**: Advanced team patterns with custom workflow orchestration
-
----
-
-## Session Overview Dashboard
-
-### Core Learning Track (90 minutes) - REQUIRED
-
-| Section | Concept Load | Time | Skills |
-|---------|--------------|------|--------|
-| Team Architecture Foundations | 3 concepts | 25 min | Understanding |
-| Role-Based Agent Design | 4 concepts | 30 min | Implementation |
-| Workflow Orchestration | 3 concepts | 25 min | Application |
-| Performance & Optimization | 3 concepts | 10 min | Optimization |
-
-### Optional Advanced Modules
-
-**Advanced Content**: These modules contain enterprise production material and complex team coordination patterns
-
-- **[Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)** (45 min) - Sophisticated workflow patterns & dynamic team formation
-- **[Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)** (40 min) - Production team architectures & custom tools
-
-**Code Files**: All examples use files in [`src/session4/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session4)  
-**Quick Start**: Run `cd src/session4 && python crewai_basics.py` to see CrewAI teams in action
-
----
-
-## Core Section (Required - 90 minutes)
-
-### Part 1: Team Architecture Foundations (25 minutes)
-
-**Cognitive Load**: 3 new concepts  
-**Learning Mode**: Conceptual Understanding
-
-#### Enterprise Team-Based Approach (12 minutes)
+### Basic CrewAI Setup
 
 CrewAI revolutionizes AI automation by modeling agent systems like proven human organizational structures:
 
@@ -133,7 +88,7 @@ editor = Agent(
 2. **Goal-Oriented Design**: Agents work toward clear, defined objectives
 3. **Collaborative Workflow**: Agents hand off work in structured sequences
 
-#### Role Definitions (7 minutes)
+### Role Definitions
 
 Creating effective agent roles:
 
@@ -155,7 +110,7 @@ data_analyst = Agent(
 )
 ```
 
-#### Collaboration Patterns (5 minutes)
+### Collaboration Patterns
 
 How agents work together effectively:
 
@@ -202,12 +157,9 @@ Finally, we assemble the hierarchical crew with the manager in control:
 
 ---
 
-### Part 2: Building Your First Crew (25 minutes)
+## Building Your First Crew
 
-**Cognitive Load**: 4 new concepts
-**Learning Mode**: Hands-on Implementation
-
-#### Agent Role Creation (8 minutes)
+### Agent Role Creation
 
 **File**: [`src/session4/multi_agent_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/multi_agent_crew.py) - Complete team implementations
 
@@ -258,7 +210,7 @@ Finally, we include a synthesizer to combine findings into coherent insights:
     return [lead_researcher, fact_checker, synthesizer]
 ```
 
-#### Task Definition (7 minutes)
+### Task Definition
 
 Creating clear, actionable tasks:
 
@@ -324,7 +276,7 @@ Finally, the synthesis task combines everything into a final report:
     return [research_task, verification_task, synthesis_task]
 ```
 
-#### Crew Assembly (5 minutes)
+### Crew Assembly
 
 Putting the team together:
 
@@ -368,7 +320,7 @@ research_crew = assemble_research_crew(topic)
 result = research_crew.kickoff()
 ```
 
-#### Basic Testing (5 minutes)
+### Basic Testing
 
 Validating crew functionality:
 
@@ -399,12 +351,9 @@ def test_crew_execution():
 
 ---
 
-### Part 3: Task Orchestration & Delegation (20 minutes)
+## Task Orchestration & Delegation
 
-**Cognitive Load**: 3 new concepts
-**Learning Mode**: Application & Coordination
-
-#### Workflow Coordination (8 minutes)
+### Workflow Coordination
 
 Managing task dependencies and handoffs:
 
@@ -481,7 +430,7 @@ Finally, we assemble the hierarchical crew with the manager in control:
     )
 ```
 
-#### Result Aggregation (7 minutes)
+### Result Aggregation
 
 Collecting and combining agent outputs:
 
@@ -525,7 +474,7 @@ analysis = process_crew_results(result)
 print(f"Result Analysis: {analysis}")
 ```
 
-#### Communication Patterns (5 minutes)
+### Communication Patterns
 
 How agents share information:
 
@@ -576,12 +525,9 @@ task_with_context = Task(
 
 ---
 
-### Part 4: Performance & Optimization (10 minutes)
+## Performance & Optimization
 
-**Cognitive Load**: 3 new concepts
-**Learning Mode**: Optimization
-
-#### 5.76x Performance Improvements (4 minutes)
+### Performance Optimizations
 
 CrewAI's performance enhancements:
 
@@ -620,7 +566,7 @@ Add efficient embeddings and resource management:
     return crew
 ```
 
-#### Basic Monitoring (3 minutes)
+### Basic Monitoring
 
 Tracking crew performance:
 
@@ -645,7 +591,7 @@ def monitor_crew_execution(crew, task_description):
     return result
 ```
 
-#### Optimization Techniques (3 minutes)
+### Optimization Techniques
 
 Best practices for crew performance:
 
@@ -674,58 +620,23 @@ optimization_tips = {
 }
 ```
 
----
+## Quick Start Examples
 
-## Core Section Validation (5 minutes)
-
-### Quick Implementation Exercise
-
-🗂️ **Exercise Files**:
-
-- [`src/session4/crewai_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/crewai_basics.py) - Basic crew setup
-- [`src/session4/multi_agent_crew.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/multi_agent_crew.py) - Complete team example
+Try these examples to see CrewAI in action:
 
 ```bash
-
-# Try the examples:
-
 cd src/session4
-python crewai_basics.py              # Basic crew functionality
-python multi_agent_crew.py           # Multi-agent coordination
-python hierarchical_crew.py          # Team management
+python crewai_basics.py              # Basic crew setup
+python multi_agent_crew.py           # Research team example
+python hierarchical_crew.py          # Manager delegation
+python performance_optimization.py   # Optimized crews
 ```
 
-### Self-Assessment Checklist
-
-- [ ] I understand CrewAI's team-based approach
-- [ ] I can create agents with specialized roles
-- [ ] I can design tasks and coordinate workflows
-- [ ] I understand performance optimization techniques
-- [ ] I'm ready for advanced modules or next session
-
-**Next Session Prerequisites**: ✅ Core Section Complete  
-**Ready for**: Session 6: Agent Communication Protocols
-
 ---
 
-### **Choose Your Next Path:**
+## 📝 Multiple Choice Test - Session 4
 
-- **[Module A: Advanced CrewAI Flows →](Session4_ModuleA_Advanced_CrewAI_Flows.md)** - Sophisticated workflow patterns & dynamic team formation
-- **[Module B: Enterprise Team Patterns →](Session4_ModuleB_Enterprise_Team_Patterns.md)** - Production team architectures & custom tools
-- **[📝 Test Your Knowledge →](Session4_Test_Solutions.md)** - Comprehensive quiz
-- **[📖 Next Session: Agent Communication Protocols →](Session6_Agent_Communication_Protocols.md)** - Message passing and coordination
-
-### Complete Learning Path Options
-
-**Sequential Learning**: Core → Module A → Module B  
-**Production Focus**: Core → Module B  
-**Advanced Flows**: Core → Module A
-
----
-
-## Multiple Choice Test - Session 4 (15 minutes)
-
-Test your understanding of CrewAI team orchestration and collaborative patterns.
+Test your understanding of CrewAI team orchestration:
 
 **Question 1:** What is CrewAI's primary strength compared to other agent frameworks?  
 A) Fastest execution speed  
@@ -757,49 +668,19 @@ B) They provide structured workflow control with conditional logic
 C) They run faster  
 D) They require fewer resources  
 
-**Question 6:** In hierarchical process, what role does the manager agent play?  
-A) Executes all tasks  
-B) Delegates tasks and coordinates team activities  
-C) Stores team memory  
-D) Handles user interface  
-
-**Question 7:** What is the main advantage of using custom tools in CrewAI?  
-A) Better performance  
-B) Extending agent capabilities for specific business needs  
-C) Lower costs  
-D) Simpler implementation  
-
-**Question 8:** How does CrewAI handle memory sharing between agents?  
-A) Global variables  
-B) Shared crew memory and individual agent memories  
-C) Database storage  
-D) File-based sharing  
-
-**Question 9:** What is the purpose of the backstory in a CrewAI agent?  
-A) Performance tracking  
-B) Providing context and personality for better role performance  
-C) Error handling  
-D) Task scheduling  
-
-**Question 10:** Which feature makes CrewAI particularly suitable for business workflows?  
-A) Technical complexity  
-B) Role-based specialization mimicking human team structures  
-C) Programming language flexibility  
-D) Cloud integration  
-
 ---
 
 [**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
 
----
-
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 3 - LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)
 
-### Optional Deep Dive Modules:
+**Optional Deep Dive Modules:**
 
-- 🔬 **[Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)** - Advanced workflow patterns
-- 🏭 **[Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)** - Production team coordination
+- 🔬 **[Module A: Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)** - Sophisticated workflow patterns & dynamic team formation
+- 🏭 **[Module B: Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md)** - Production team architectures & custom tools
 
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+
+---

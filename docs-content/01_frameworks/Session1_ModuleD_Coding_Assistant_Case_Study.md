@@ -22,7 +22,7 @@ You're not just learning theory - you're examining a system you already use.
 
 ## Repository Structure: Finding Your Way Around
 
-Before diving into architecture, let's understand how this professional codebase is organized. This structure represents years of production evolution and mirrors what you'll want in your own bare metal agents.
+Before diving into architecture, let's understand how this professional codebase is organized. This structure mirrors what you'll want in your own bare metal agents.
 
 ### High-Level Organization
 
