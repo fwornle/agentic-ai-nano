@@ -3,7 +3,7 @@
 This session covers building a production-grade file system MCP server with comprehensive security features including sandboxing, path validation, input sanitization, and audit logging. You'll implement secure file operations that prevent directory traversal attacks while supporting both text and binary files.
 
 ![File System Security Architecture](images/filesystem-security-architecture.png)
-### Multi-layered security architecture showing path validation, sandboxing, permission checks, and audit logging
+*Multi-layered security architecture showing path validation, sandboxing, permission checks, and audit logging*
 
 ## Part 1: Understanding File System Security
 
