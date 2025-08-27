@@ -23,9 +23,9 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 **Self-Check:** 15-question multiple choice quiz covering agentic patterns and framework concepts
 
 ### **Session 1: Bare Metal Agents (Pure Python Implementation)**
-**Content:** Building agents from scratch using pure Python, understanding core agent mechanics
-**Materials:** Session1_Bare_Metal_Agents.md + Session1_Bare_Metal_Agents-solution.md
-**Self-Check:** Multiple choice quiz covering agent fundamentals and implementation patterns
+**Content:** Building agents from scratch using pure Python, understanding core agent mechanics, real LLM integration, dependency injection patterns, and production case study analysis
+**Materials:** Session1_Bare_Metal_Agents.md + Session1_Bare_Metal_Agents-solution.md + Session1_ModuleD_Coding_Assistant_Case_Study.md
+**Self-Check:** Multiple choice quiz covering agent fundamentals, LLM integration, and implementation patterns
 
 ### **Session 2: LangChain Foundations & Tool Integration**
 **Content:** LangChain architecture, agent types, tool ecosystem integration, LangGraph integration patterns, and production deployment strategies

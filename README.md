@@ -92,7 +92,8 @@ Master production-ready AI agents using 2025 state-of-the-art frameworks and the
 <td><strong>Python implementation</strong><br>
 <a href="docs-content/01_frameworks/Session1_ModuleA_Advanced_Agent_Patterns.md">A: Advanced Patterns</a><br>
 <a href="docs-content/01_frameworks/Session1_ModuleB_Performance_Optimization.md">B: Performance</a><br>
-<a href="docs-content/01_frameworks/Session1_ModuleC_Complex_State_Management.md">C: State Management</a></td>
+<a href="docs-content/01_frameworks/Session1_ModuleC_Complex_State_Management.md">C: State Management</a><br>
+<a href="docs-content/01_frameworks/Session1_ModuleD_Coding_Assistant_Case_Study.md">D: Real-World Case Study</a></td>
 <td><a href="docs-content/01_frameworks/Session1_Test_Solutions.md">Solutions</a></td>
 </tr>
 <tr>

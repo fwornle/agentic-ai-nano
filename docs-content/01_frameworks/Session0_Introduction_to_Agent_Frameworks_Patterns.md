@@ -53,7 +53,7 @@ These patterns power automated research pipelines, content generation systems, b
 
 ### Part 1: From Prompts to Agents
 
-**Cognitive Load**: 2 new concepts
+**Cognitive Load**: 2 new concepts  
 **Learning Mode**: Conceptual Understanding
 
 #### The Evolution of AI Interaction
