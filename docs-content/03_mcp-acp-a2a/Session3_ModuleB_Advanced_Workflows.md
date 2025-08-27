@@ -1,32 +1,8 @@
 # Session 3 - Module B: Advanced Workflow Orchestration
 
-> **ADVANCED OPTIONAL MODULE** 
-> This is supplementary content for deeper specialization.  
-> **Prerequisites**: Complete Session 3 core content first.
-> **Time Investment**: 50 minutes
-> **Target Audience**: Implementer path students and workflow architects
+> **ADVANCED OPTIONAL MODULE** - Complete Session 3 core content first.
 
-## Module Learning Outcomes
-
-After completing this module, you will master:
-- Parallel processing and concurrent workflow execution patterns
-- Conditional branching and dynamic workflow routing
-- Advanced state management and data flow optimization
-- Distributed workflow coordination across multiple systems
-- Error recovery and compensation patterns for complex workflows
-
-## Industry Context & Applications
-
-Enterprise workflow orchestration goes beyond simple sequential processing. Real-world applications require:
-
-### Complex Coordination Scenarios:
-- **Financial processing**: Multi-step verification with compliance checkpoints
-- **Content moderation**: Parallel analysis across text, image, and metadata
-- **Customer onboarding**: Conditional flows based on customer type and region
-- **Data pipeline orchestration**: Processing millions of records with fault tolerance
-- **Multi-system integration**: Coordinating APIs, databases, and external services
-
-Modern organizations using LangGraph report **60% faster processing times** and **40% fewer errors** when implementing advanced orchestration patterns compared to sequential agent approaches.
+Advanced workflow orchestration patterns enable parallel processing, conditional routing, state management, and error recovery for complex enterprise agent systems.
 
 ## Advanced Orchestration Patterns
 
@@ -1372,7 +1348,7 @@ class CompensationWorkflowHandler:
             }
 ```
 
-## Module Assessment (10 minutes)
+## Module Assessment
 
 **Question 1:** What is the primary advantage of parallel processing in workflows?
 

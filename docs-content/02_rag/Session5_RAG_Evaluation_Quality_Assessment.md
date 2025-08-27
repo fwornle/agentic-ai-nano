@@ -286,10 +286,6 @@ We clean up the dataset structure and return the formatted data:
         return dataset_dict
 ```
 
-### **Custom Evaluation Metrics**
-
-Implement domain-specific and advanced evaluation metrics:
-
 ### Custom Evaluation Metrics
 
 Implement domain-specific and advanced evaluation metrics. First, we establish the custom metrics class:
@@ -497,8 +493,6 @@ Finally, we assess context diversity to ensure retrieved contexts provide varied
 
 ### LLM-as-a-Judge Evaluation
 
-### LLM-as-a-Judge Evaluation
-
 Use LLMs to evaluate response quality automatically. First, we establish the judge evaluator with aspect-specific prompts:
 
 ```python
@@ -646,8 +640,6 @@ INACCURACIES: [List any factual errors or unsupported claims]
 SUGGESTIONS: [How accuracy could be improved]
 """
 ```
-
-### Automated Benchmark Testing
 
 ### Automated Benchmark Testing
 
@@ -997,8 +989,6 @@ Finally, we determine the overall winner and generate actionable recommendations
 
 ### Multi-Armed Bandit Testing
 
-### Multi-Armed Bandit Testing
-
 Implement adaptive testing strategies that learn from user interactions. First, we initialize the bandit with exploration parameters:
 
 ```python
@@ -1095,8 +1085,6 @@ Finally, we provide comprehensive performance summaries:
 ---
 
 ## Part 4: Continuous Monitoring and Quality Assurance
-
-### Production RAG Monitoring
 
 ### Production RAG Monitoring
 
@@ -1300,8 +1288,6 @@ Finally, we return the average utilization across all contexts:
         # Return average utilization across all contexts
         return np.mean(utilization_scores) if utilization_scores else 0.0
 ```
-
-### Alerting and Incident Response
 
 ### Alerting and Incident Response
 
