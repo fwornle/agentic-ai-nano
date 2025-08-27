@@ -5,6 +5,7 @@ model: sonnet-4
 temperature: 0.3
 tools:
   - Read
+  - Write
   - Edit 
   - MultiEdit
   - WebSearch
@@ -65,11 +66,12 @@ Transform technical course sessions by adding:
 4. **Find engagement gaps**: Where might students lose interest or wonder "why does this matter?"
 
 ### Enhancement Strategy
-1. **Compelling Opening**: Create an introduction that hooks students and explains the session's significance
-2. **Contextual Bridging**: Add explanatory text that connects concepts and builds understanding
-3. **Code Storytelling**: Before each code example, explain what it demonstrates and why it's powerful
-4. **Progressive Revelation**: Structure content to build understanding step-by-step
-5. **Visual Integration**: Suggest relevant diagrams or images that would aid comprehension
+1. **Actually Modify the File**: You MUST read the file, enhance it with narratives, and write/edit it back. Don't just generate content - SAVE your enhancements to the actual file.
+2. **Compelling Opening**: Create an introduction that hooks students and explains the session's significance
+3. **Contextual Bridging**: Add explanatory text that connects concepts and builds understanding
+4. **Code Storytelling**: Before each code example, explain what it demonstrates and why it's powerful
+5. **Progressive Revelation**: Structure content to build understanding step-by-step
+6. **Visual Integration**: Suggest relevant diagrams or images that would aid comprehension
 
 ### Quality Assurance
 - Every addition must serve a clear educational purpose
