@@ -9,67 +9,19 @@ By the end of this session, you will be able to:
 - **Implement** production-grade tracing and observability for multi-agent workflows
 - **Evaluate** when to choose graph-based architectures over simple chain-based systems
 
-## Chapter Overview: LangGraph's Rise in Enterprise Multi-Agent Systems
+## Overview
 
-### Industry Context & Market Significance
+LangGraph enables graph-based workflow orchestration for multi-agent systems. Unlike sequential chains, LangGraph uses directed graphs with nodes (specialized agents) connected by conditional edges (intelligent routing). This architecture provides stateful coordination, dynamic decision-making, and production-grade observability for complex agent workflows.
 
-LangGraph has emerged as the leading platform for production-grade multi-agent systems in 2025. With enterprises reporting a 35-45% increase in resolution rates using multi-agent designs over single-agent bots, LangGraph powers mission-critical systems at Replit, Uber, LinkedIn, and GitLab. The platform went Generally Available in May 2025, marking its transition from experimental to enterprise-ready infrastructure.
+## Quick Start
 
-### What You'll Learn & Why It Matters
+Run `cd src/session3 && python simple_workflow.py` to see LangGraph in action.
 
-You'll master graph-based workflow orchestration, learn the state management patterns that enable complex agent coordination, and understand conditional routing for dynamic decision-making. More importantly, you'll discover why 51% of teams already run agents in production choose graph-based architectures for reliability and observability.
+Code files are located in [`src/session3/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session3).
 
-### How LangGraph Stands Out
+## Part 1: Graph Architecture Overview
 
-LangGraph's stateful, graph-driven reasoning engines with first-class tracing represent a major advancement over simple chain-based systems. Its sophisticated orchestration layer acts as a conductor, coordinating how agents interact, sequence tasks, share context, and respond to failures within a structured but flexible framework.
-
-### Real-World Applications & Production Evidence
-
-LangGraph excels in complex workflows requiring coordination between multiple specialized agents. Klarna's deployment serves 85 million users with 80% faster resolution times, while AppFolio's implementation improved response accuracy by 200%. These production deployments demonstrate LangGraph's capability to handle enterprise-scale multi-agent coordination.
-
-## Learning Navigation Hub
-
-**Total Time Investment**: 85 minutes (Core) + 75 minutes (Optional)
-
-### Learning Path Options
-
-- **Observer (45 min)**: Graph architecture analysis with production deployment insights  
-- **Participant (85 min)**: Hands-on multi-agent implementation with state management
-- **Implementer (125 min)**: Advanced orchestration patterns with enterprise routing
-
----
-
-## Session Overview Dashboard
-
-### Core Learning Track (85 minutes) - REQUIRED
-
-| Section | Concept Load | Time | Skills |
-|---------|--------------|------|--------|
-| Graph Architecture Overview | 3 concepts | 25 min | Understanding |
-| Multi-Agent Coordination | 4 concepts | 30 min | Implementation |
-| State Management & Routing | 3 concepts | 25 min | Application |
-| Integration & Validation | 2 concepts | 5 min | Verification |
-
-### Optional Advanced Modules
-
-**Advanced Content**: These modules contain enterprise production material and complex orchestration patterns
-
-- **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** (40 min) - Complex workflow coordination & dynamic agent generation
-- **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** (35 min) - Production state handling & sophisticated routing
-
-**Code Files**: All examples use files in [`src/session3/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session3)
-**Quick Start**: Run `cd src/session3 && python simple_workflow.py` to see LangGraph in action
-
----
-
-## Core Section (Required - 85 minutes)
-
-### Part 1: Graph Architecture Overview (25 minutes)
-
-**Cognitive Load**: 3 new concepts  
-**Learning Mode**: Conceptual Understanding
-
-#### Graph-Based Workflow Foundation (10 minutes)
+### Graph-Based Workflow Foundation
 
 LangGraph transforms multi-agent systems from linear chains into sophisticated graph structures that mirror real-world decision processes:
 
@@ -109,7 +61,7 @@ workflow = StateGraph(WorkflowState)
 2. **Immutable State Flow**: State evolves through nodes without mutation, ensuring traceability
 3. **Conditional Decision Points**: Dynamic routing based on state content and external conditions
 
-#### Nodes and Edges (7 minutes)
+### Nodes and Edges
 
 Building blocks of LangGraph workflows:
 
@@ -151,7 +103,7 @@ workflow.add_node("analysis", analysis_node)
 workflow.add_edge("research", "analysis")
 ```
 
-#### Basic Graph Creation (5 minutes)
+### Basic Graph Creation
 
 Putting it all together:
 
@@ -177,12 +129,9 @@ result = app.invoke({
 
 ---
 
-### Part 2: Multi-Agent Orchestration (25 minutes)
+## Part 2: Multi-Agent Orchestration
 
-**Cognitive Load**: 4 new concepts
-**Learning Mode**: Implementation & Coordination
-
-#### Agent Node Creation (8 minutes)
+### Agent Node Creation
 
 Creating specialized agent nodes:
 
@@ -202,7 +151,7 @@ class ResearchAgent:
 
 Specialized agents encapsulate specific capabilities and LLM configurations. Higher temperature for creative research:
 
-```python        
+```python
     def research_node(self, state: WorkflowState):
         """Specialized research agent"""
         query = state.get("query", "")
@@ -234,7 +183,7 @@ class AnalysisAgent:
         }
 ```
 
-#### Message Passing (7 minutes)
+### Message Passing
 
 Communication between agents:
 
@@ -268,7 +217,7 @@ workflow.add_edge("analysis", "coordinator")
 workflow.add_edge("coordinator", END)
 ```
 
-#### Simple Workflow Patterns (6 minutes)
+### Simple Workflow Patterns
 
 Common orchestration patterns:
 
@@ -291,7 +240,7 @@ def create_research_workflow():
 
 Defining the workflow structure with entry point and edges:
 
-```python    
+```python
     # Define flow
     workflow.set_entry_point("research")
     workflow.add_edge("research", "analysis")
@@ -316,7 +265,7 @@ result = app.invoke({
 })
 ```
 
-#### Error Handling (4 minutes)
+### Error Handling
 
 Robust workflow execution:
 
@@ -341,12 +290,9 @@ workflow.add_node("research", safe_node_execution(research_agent.research_node))
 
 ---
 
-### Part 3: State Management & Flow Control (20 minutes)
+## Part 3: State Management & Flow Control
 
-**Cognitive Load**: 3 new concepts
-**Learning Mode**: Application & Control
-
-#### State Schemas (8 minutes)
+### State Schemas
 
 Defining and managing workflow state:
 
@@ -369,7 +315,7 @@ class AdvancedWorkflowState(TypedDict):
 
 Advanced state includes control flow tracking for robust execution:
 
-```python    
+```python
     # Control flow
     completed_tasks: List[str]
     failed_tasks: List[str]
@@ -393,7 +339,7 @@ def update_state_metadata(state: AdvancedWorkflowState) -> AdvancedWorkflowState
     }
 ```
 
-#### Conditional Routing (7 minutes)
+### Conditional Routing
 
 Dynamic workflow decisions:
 
@@ -446,7 +392,7 @@ workflow.add_conditional_edges(
 )
 ```
 
-#### Error Recovery (5 minutes)
+### Error Recovery
 
 Handling failures gracefully:
 
@@ -478,12 +424,9 @@ Graceful failure handling with maximum retry limits:
 
 ---
 
-### Part 4: Integration & Testing (5 minutes)
+## Part 4: Integration & Testing
 
-**Cognitive Load**: 2 new concepts
-**Learning Mode**: Verification
-
-#### Workflow Validation (3 minutes)
+### Workflow Validation
 
 **File**: [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Complete test suite
 
@@ -514,7 +457,7 @@ Executing the test to verify workflow functionality:
 test_simple_workflow()
 ```
 
-#### Basic Testing Patterns (2 minutes)
+### Basic Testing Patterns
 
 ```bash
 
@@ -528,7 +471,7 @@ python -m pytest test_workflows.py
 
 ---
 
-## Core Section Validation (5 minutes)
+## Validation
 
 ### Quick Implementation Exercise
 
@@ -546,80 +489,38 @@ python simple_workflow.py          # Basic workflow
 python hierarchical_team.py        # Multi-agent coordination
 ```
 
-### Self-Assessment Checklist
-
-- [ ] I understand LangGraph's graph-based approach
-- [ ] I can create nodes and connect them with edges
-- [ ] I can implement multi-agent coordination
-- [ ] I understand state management and conditional routing
-- [ ] I'm ready to explore optional modules or move to next session
-
-**Next Session Prerequisites**: ✅ Core Section Complete
-**Ready for**: Session 4: CrewAI Team Orchestration (team-based agents)
 
 ---
 
-### **Choose Your Next Path:**
-
-- **[Module A: Advanced Orchestration Patterns →](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
-- **[Module B: Enterprise State Management →](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
-- **[📝 Test Your Knowledge →](Session3_Test_Solutions.md)** - Comprehensive quiz
-- **[📖 Next Session: CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)** - Team-based agent frameworks
-
-### Complete Learning Path Options
-
-**Sequential Learning**: Core → Module A → Module B  
-**Production Focus**: Core → Module B  
-**Advanced Patterns**: Core → Module A
-
----
-
-## Progress Tracking
-
-### Completion Status
-
-- [ ] Core Section (70 min) - Essential for next session
-- [ ] Module A: Advanced Orchestration (40 min)
-- [ ] Module B: Enterprise State Management (35 min)
-
-**🗂️ All Code Examples**: Available in [`src/session3/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session3) - 15 Python files with complete implementations!
-
----
-
-## Multiple Choice Test - Session 3
+## 📝 Multiple Choice Test - Session 3
 
 Test your understanding of LangGraph workflows and multi-agent coordination:
 
 **Question 1:** What is the primary advantage of LangGraph over sequential LangChain agents?  
-
 A) Better performance  
 B) Lower cost  
 C) Graph-based workflows with conditional routing and parallel execution  
 D) Simpler implementation  
 
 **Question 2:** In LangGraph, what component defines the data that flows between nodes?  
-
 A) State (TypedDict)  
 B) Edges  
 C) Memory  
 D) Tools  
 
 **Question 3:** What determines the flow between nodes in a LangGraph workflow?  
-
 A) Random selection  
 B) User input  
 C) Sequential execution only  
 D) Conditional edges and decision functions  
 
 **Question 4:** How does LangGraph handle parallel agent execution?  
-
 A) Through parallel nodes with state merging  
 B) It doesn't support parallel execution  
 C) Through external orchestration  
 D) Using threading only  
 
 **Question 5:** What happens when a LangGraph node updates state?  
-
 A) State is reset to default  
 B) The entire state is replaced  
 C) Previous state is archived  
@@ -629,13 +530,15 @@ D) Only specified fields are updated/merged
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md)
 
-### Optional Deep Dive Modules:
+**Optional Deep Dive Modules:**
 
 - 🔬 **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
 - 🏭 **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
 
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+
+---
