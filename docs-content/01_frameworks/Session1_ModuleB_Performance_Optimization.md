@@ -1,25 +1,12 @@
-# Session 1 - Module B: Performance Optimization (35 minutes)
+# Session 1 - Module B: Performance Optimization
 
-**Prerequisites**: [Session 1 Core Section Complete](Session1_Bare_Metal_Agents.md)  
-**Target Audience**: Performance-focused developers  
-**Cognitive Load**: 5 optimization concepts
-
----
-
-## Module Overview
+**Prerequisites**: [Session 1 Core Section Complete](Session1_Bare_Metal_Agents.md)
 
 This module focuses on optimizing bare metal agents for performance, memory efficiency, and speed. You'll learn memory management patterns, tool execution optimization, and response time improvement strategies essential for production agent systems.
 
-### Learning Objectives
-By the end of this module, you will:
-- Implement efficient memory usage patterns and conversation history optimization
-- Optimize tool execution speed through caching and parallel execution
-- Design strategies for faster agent responses and improved user experience
-- Build performance monitoring and analytics systems for continuous optimization
-
 ---
 
-## Part 1: Memory Management (15 minutes)
+## Part 1: Memory Management
 
 ### Efficient Memory Usage Patterns
 
@@ -262,7 +249,7 @@ The recency scoring normalizes timestamps to a 0-1 scale relative to the convers
 
 ---
 
-## Part 2: Tool Execution Speed (10 minutes)
+## Part 2: Tool Execution Speed
 
 ### Caching and Parallel Execution
 
@@ -468,7 +455,7 @@ def get_performance_stats(self) -> Dict[str, Any]:
 
 ---
 
-## Part 3: Response Time Optimization (10 minutes)
+## Part 3: Response Time Optimization
 
 ### Faster Agent Responses
 
