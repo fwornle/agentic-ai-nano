@@ -473,10 +473,10 @@ graph TD
     T3 --> F3[Custom Interface 3]
     T4 --> F4[Custom Interface 4]
     
-    style F1 fill:#ffebee
-    style F2 fill:#ffebee
-    style F3 fill:#ffebee
-    style F4 fill:#ffebee
+    style F1 fill:#F44336,color:#ffffff
+    style F2 fill:#F44336,color:#ffffff
+    style F3 fill:#F44336,color:#ffffff
+    style F4 fill:#F44336,color:#ffffff
 ```
 
 **Problem**: Every tool has a different interface. Agents need custom code for each one.
@@ -1093,6 +1093,9 @@ graph LR
     style PROBLEM1 fill:#FF9800,color:#ffffff
     style PROBLEM2 fill:#FF9800,color:#ffffff
     style PROBLEM3 fill:#FF9800,color:#ffffff
+    style SOLUTION1 fill:#4CAF50,color:#ffffff
+    style SOLUTION2 fill:#4CAF50,color:#ffffff
+    style SOLUTION3 fill:#4CAF50,color:#ffffff
 ```
 
 **The MCP Evolution Solves:**
