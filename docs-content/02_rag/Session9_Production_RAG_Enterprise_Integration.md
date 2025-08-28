@@ -1352,7 +1352,7 @@ Implement comprehensive GDPR compliance validation:
 
         return compliance_result
 
-### Step 6: GDPR Data Subject Rights
+#### Step 6: GDPR Data Subject Rights
 
 Handle individual rights requests under GDPR:
 
@@ -1382,7 +1382,7 @@ This privacy and compliance framework ensures your RAG system handles sensitive 
 
 ### Change Detection and Incremental Processing
 
-### Step 1: Initialize Incremental Indexing System
+#### Step 1: Initialize Incremental Indexing System
 
 First, let's set up the core infrastructure for real-time indexing:
 
@@ -1413,7 +1413,7 @@ class IncrementalIndexingSystem:
         self.change_tracker = ChangeTracker()
 ```
 
-### Step 2: Configure Processing Queues and Background Processors
+#### Step 2: Configure Processing Queues and Background Processors
 
 Set up asynchronous queues and background processors for handling updates:
 
@@ -1428,7 +1428,7 @@ Set up asynchronous queues and background processors for handling updates:
             processor = asyncio.create_task(self._incremental_update_processor(f"proc_{i}"))
             self.processors.append(processor)
 
-### Step 3: Set Up Change Detection for Data Sources
+#### Step 3: Set Up Change Detection for Data Sources
 
 Configure monitoring for multiple data sources:
 
@@ -1474,7 +1474,7 @@ Configure monitoring for multiple data sources:
             'processors_active': len(self.processors)
         }
 
-### Step 4: Handle Change Events
+#### Step 4: Handle Change Events
 
 Route different types of changes to appropriate processing queues:
 
@@ -1490,7 +1490,7 @@ Route different types of changes to appropriate processing queues:
         else:
             await self.update_queue.put(change_event)
 
-### Step 5: Background Update Processor
+#### Step 5: Background Update Processor
 
 Implement the background processor that handles queued updates:
 
@@ -1519,7 +1519,7 @@ Implement the background processor that handles queued updates:
                 self.logger.error(f"Processor {processor_id} error: {e}")
                 await asyncio.sleep(1)
 
-### Step 6: Process Individual Updates
+#### Step 6: Process Individual Updates
 
 Handle the processing of individual document changes:
 
@@ -1577,7 +1577,7 @@ Handle the processing of individual document changes:
             if 'tracking_id' in locals():
                 await self.change_tracker.fail_tracking(tracking_id, str(e))
 
-### Step 7: File System Change Detection
+#### Step 7: File System Change Detection
 
 Implement file system monitoring using OS-level change detection:
 
@@ -1589,7 +1589,7 @@ class FileSystemChangeDetector:
         self.watchers = {}  # Track active file system watchers
         self.change_callbacks = []  # Registered callback functions
 
-### Step 8: Set Up File System Monitoring
+#### Step 8: Set Up File System Monitoring
 
 Configure file system watchers for specified directories:
 
@@ -1644,7 +1644,7 @@ Configure file system watchers for specified directories:
             'watcher_active': True
         }
 
-### Step 9: Handle File System Changes
+#### Step 9: Handle File System Changes
 
 Process detected file system changes and create change events:
 
@@ -1691,7 +1691,7 @@ This incremental indexing system enables real-time updates to your RAG knowledge
 
 ### Comprehensive Monitoring and Alerting
 
-### Step 1: Initialize Monitoring System
+#### Step 1: Initialize Monitoring System
 
 First, let's set up the basic monitoring infrastructure with Prometheus metrics and structured logging:
 
@@ -1720,7 +1720,7 @@ class RAGMonitoringSystem:
         self.health_checker = RAGHealthChecker()
 ```
 
-### Step 2: Set Up Prometheus Metrics
+#### Step 2: Set Up Prometheus Metrics
 
 Now let's configure the metrics that will track our RAG system's performance:
 
@@ -1742,7 +1742,7 @@ Now let's configure the metrics that will track our RAG system's performance:
         )
 ```
 
-### Step 3: Configure System and Quality Metrics
+#### Step 3: Configure System and Quality Metrics
 
 Add metrics for system health and response quality monitoring:
 
@@ -1784,7 +1784,7 @@ Add metrics for system health and response quality monitoring:
         metrics_port = self.config.get('metrics_port', 8000)
         start_http_server(metrics_port)
 
-### Step 4: Request Tracking and Monitoring
+#### Step 4: Request Tracking and Monitoring
 
 Implement comprehensive request tracking with success/error monitoring:
 
@@ -1826,7 +1826,7 @@ Implement comprehensive request tracking with success/error monitoring:
                 return result
 ```
 
-### Step 5: Error Handling and Alerting
+#### Step 5: Error Handling and Alerting
 
 Handle request failures with comprehensive error tracking:
 
@@ -1858,7 +1858,7 @@ Handle request failures with comprehensive error tracking:
                 # Re-raise the exception for proper error handling
                 raise
 
-### Step 6: Analytics System for Performance Analysis
+#### Step 6: Analytics System for Performance Analysis
 
 Create an analytics system to analyze system performance patterns:
 
@@ -1875,7 +1875,7 @@ class RAGAnalytics:
         self.query_analyzer = QueryPatternAnalyzer()
         self.performance_predictor = PerformancePredictor()
 
-### Step 7: Performance Analysis Engine
+#### Step 7: Performance Analysis Engine
 
 Implement comprehensive system performance analysis:
 
@@ -1912,7 +1912,7 @@ Implement comprehensive system performance analysis:
             'overall_health_score': self._calculate_health_score(performance_analysis)
         }
 
-### Step 8: Request Volume Analysis
+#### Step 8: Request Volume Analysis
 
 Analyze request patterns and volume trends:
 
@@ -1953,7 +1953,7 @@ Analyze request patterns and volume trends:
             }
         }
 
-### Step 9: Performance Recommendations Generator
+#### Step 9: Performance Recommendations Generator
 
 Generate actionable recommendations based on performance analysis:
 
@@ -1985,7 +1985,7 @@ Generate actionable recommendations based on performance analysis:
             })
 ```
 
-### Step 10: Resource and Error Rate Recommendations
+#### Step 10: Resource and Error Rate Recommendations
 
 Add recommendations for resource usage and error handling:
 
@@ -2012,7 +2012,7 @@ Add recommendations for resource usage and error handling:
 
         return recommendations
 
-### Step 11: Health Checking System
+#### Step 11: Health Checking System
 
 Implement comprehensive health monitoring for all system components:
 
@@ -2032,7 +2032,7 @@ class RAGHealthChecker:
             'memory_usage': self._check_memory_usage
         }
 
-### Step 12: Comprehensive Health Check Execution
+#### Step 12: Comprehensive Health Check Execution
 
 Run health checks across all system components:
 
@@ -2075,7 +2075,7 @@ Run health checks across all system components:
             'timestamp': time.time()
         }
 
-### Step 13: Vector Store Health Check Implementation
+#### Step 13: Vector Store Health Check Implementation
 
 Implement specific health checks for critical components:
 
