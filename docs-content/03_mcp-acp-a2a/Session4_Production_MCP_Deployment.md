@@ -30,21 +30,27 @@ When developers talk about "production," they often think it means "the place wh
 Building production-ready MCP servers means mastering six fundamental pillars that separate hobby projects from enterprise systems:
 
 #### 1. **Observability**: Your Digital Nervous System
+
 Without comprehensive observability, you're flying blind in production. Every request, every error, every performance hiccup needs to be captured, analyzed, and acted upon.
 
 #### 2. **Scalability**: Growing Without Breaking  
+
 Your system must gracefully handle 10x, 100x, or 1000x more load than you initially planned for - and do it automatically.
 
 #### 3. **Reliability**: The Foundation of Trust
+
 Fault tolerance, circuit breakers, and graceful degradation aren't luxury features - they're survival mechanisms.
 
 #### 4. **Security**: Your Defense Against the Dark Arts
+
 Every production system is under constant attack. Your security posture determines whether you're a fortress or a glass house.
 
 #### 5. **Performance**: Speed as a Feature
+
 In production, performance isn't just about user experience - it's about operational costs and system stability.
 
 #### 6. **Compliance**: Playing by the Rules
+
 Audit trails, data protection, and regulatory compliance aren't just checkboxes - they're business imperatives.
 
 ### Building Your Production-Ready Foundation
@@ -485,6 +491,7 @@ This development setup gives you production-like observability and monitoring ca
 Google Cloud Run represents a fundamental shift in how we think about production deployment. Instead of managing servers, you manage services. Instead of scaling infrastructure, you scale functions. This is containerized serverless computing at its finest.
 
 **Cloud Run Benefits:**
+
 - **Serverless container deployment**: You provide the container, Google manages everything else
 - **Automatic scaling**: From zero to thousands of instances based on demand
 - **Pay-per-use billing**: Only pay for the compute time you actually use
@@ -887,12 +894,14 @@ output "service_account_email" {
 AWS Lambda represents a fundamentally different approach to production deployment. Instead of running persistent servers, you run functions that execute on-demand. This paradigm shift brings unique advantages and challenges:
 
 **Lambda Advantages:**
+
 - **Function-based execution**: Pay only for actual compute time, down to the millisecond
 - **Event-driven responses**: Integrate with AWS services for trigger-based execution
 - **Zero server management**: AWS handles all infrastructure concerns
 - **Automatic scaling**: From zero to thousands of concurrent executions instantly
 
 **Lambda Considerations:**
+
 - **Cold start latency**: First invocation after idle time includes initialization overhead
 - **15-minute execution limit**: Long-running processes need different architectural approaches
 - **Stateless execution**: Each invocation starts fresh - no persistent state between calls
@@ -1823,29 +1832,35 @@ class ProductionCircuitBreaker:
 Your circuit breaker must demonstrate these production capabilities:
 
 #### 1. **Intelligent State Management**
+
 Implement the three-state circuit breaker pattern:
+
 - **CLOSED**: Normal operation, monitoring for failures
 - **OPEN**: Blocking requests, returning fallback responses  
 - **HALF_OPEN**: Testing recovery with limited request sampling
 
 #### 2. **Advanced Failure Detection**
+
 - Track failure rates over sliding time windows
 - Distinguish between different types of failures
 - Implement timeout-based failure detection
 - Support configurable failure criteria
 
 #### 3. **Automatic Recovery Logic**
+
 - Exponential backoff for recovery attempts
 - Success threshold before fully closing circuit
 - Partial recovery testing without full load
 
 #### 4. **Production Monitoring Integration**
+
 - Expose circuit breaker metrics via Prometheus
 - Integration with alerting systems
 - Detailed logging for debugging
 - Performance impact measurement
 
 #### 5. **Graceful Degradation**
+
 - Intelligent fallback response generation
 - Cached response serving when available
 - User-friendly error messaging
@@ -1856,6 +1871,7 @@ Implement the three-state circuit breaker pattern:
 Once you've mastered the basic circuit breaker, extend your production skills with these advanced challenges:
 
 #### **Challenge 1: Distributed Tracing Implementation**
+
 Implement OpenTelemetry distributed tracing to track requests across your entire MCP server ecosystem:
 
 ```python
@@ -1865,6 +1881,7 @@ Implement OpenTelemetry distributed tracing to track requests across your entire
 ```
 
 #### **Challenge 2: Blue-Green Deployment Strategy**  
+
 Design and implement a zero-downtime deployment system:
 
 ```python
@@ -1875,6 +1892,7 @@ Design and implement a zero-downtime deployment system:
 ```
 
 #### **Challenge 3: Production Load Testing Framework**
+
 Build a comprehensive load testing system that validates production readiness:
 
 ```python
@@ -1885,6 +1903,7 @@ Build a comprehensive load testing system that validates production readiness:
 ```
 
 #### **Challenge 4: Multi-Region Failover System**
+
 Implement automatic failover between multiple regions for high availability:
 
 ```python
@@ -1978,70 +1997,60 @@ Welcome to the ranks of production engineers - the people who keep the internet 
 Test your mastery of Production MCP Deployment:
 
 **Question 1:** What is the fundamental difference between development and production MCP servers?  
-
 A) Production servers use different programming languages  
 B) Production servers are slower to ensure stability  
 C) Production servers require observability, scalability, security, and reliability features  
 D) Production servers only work with enterprise LLM models  
 
 **Question 2:** Which Prometheus metric type is most appropriate for tracking response time distributions?  
-
 A) Counter - for counting events over time  
 B) Gauge - for current state values  
 C) Histogram - for timing and size distributions  
 D) Summary - for client-side percentile calculations  
 
 **Question 3:** What is the primary purpose of health check endpoints in production systems?  
-
 A) To test network connectivity only  
 B) To provide load balancers with service readiness information  
 C) To monitor CPU usage exclusively  
 D) To check database connection strings  
 
 **Question 4:** In a circuit breaker pattern, when should the circuit transition to "OPEN" state?  
-
 A) When the server starts up  
 B) When memory usage exceeds 80%  
 C) When the failure rate exceeds the configured threshold  
 D) When response times are slightly elevated  
 
 **Question 5:** What is the key advantage of using Docker containers for MCP server deployment?  
-
 A) Automatic performance improvements  
 B) Built-in security features  
 C) Consistent runtime environments across development and production  
 D) Reduced memory usage compared to native applications  
 
 **Question 6:** Which caching strategy is most effective for production MCP servers?  
-
 A) File-based caching with manual invalidation  
 B) In-memory caching only  
 C) Redis distributed caching with TTL-based expiration  
 D) Database-level query caching exclusively  
 
 **Question 7:** What information should comprehensive structured logging include in production?  
-
 A) Only error messages and stack traces  
 B) Timestamp, log level, and basic message  
 C) JSON-formatted logs with correlation IDs, context, and structured fields  
 D) Plain text logs for human readability  
 
 **Question 8:** Which deployment strategy provides zero-downtime updates?  
-
 A) Direct deployment to production servers  
 B) Blue-green deployment with health checks and traffic switching  
 C) Rolling deployment without validation  
 D) Manual deployment during maintenance windows  
 
 **Question 9:** What security practice is essential for production container deployment?  
-
 A) Running all containers as root for maximum functionality  
 B) Using non-root users, resource limits, and minimal base images  
 C) Disabling all logging to prevent information leakage  
 D) Allowing unlimited resource consumption for performance  
 
 **Question 10:** Why is observability critical for production MCP servers?  
-
 A) To reduce infrastructure costs  
 B) To improve code readability for developers  
 C) To enable rapid incident detection, debugging, and resolution  

@@ -257,6 +257,7 @@ The MCP Inspector isn't just a testing tool - it's your development companion th
 ### Hands-On Testing
 
 ### Step 1: Start Your Server
+
 ```bash
 
 # Save your code as weather_server.py and run
@@ -265,6 +266,7 @@ python weather_server.py
 ```
 
 ### Step 2: Test with Inspector
+
 ```bash
 
 # Launch MCP Inspector
@@ -276,6 +278,7 @@ npx @modelcontextprotocol/inspector
 ```
 
 ### Step 3: Validate Functionality
+
 - **Tools Tab**: Test `get_current_weather` with different cities
 - **Resources Tab**: Access `weather://cities` resource
 - **Prompts Tab**: Try the weather report prompt template
@@ -320,21 +323,23 @@ You didn't just write a weather server. You've created a bridge between isolated
 
 Extend your weather MCP server with a more sophisticated tool that demonstrates proper error handling, data processing, and result aggregation.
 
-### Requirements:
+### Requirements
+
 - Accept a list of city names as input
 - Query weather data for each city using your existing `get_current_weather` tool
 - Return the city with the highest temperature
 - Handle errors gracefully (invalid cities, network issues, etc.)
 - Include comparison metadata in the response
 
-### Implementation Tips:
+### Implementation Tips
+
 - Use proper type hints for function parameters and return values
 - Validate input parameters (empty lists, invalid data types)
 - Implement comprehensive error handling for each weather API call
 - Return structured data with both the result and metadata about the comparison
 - Use logging to track the comparison process
 
-### Expected Function Signature:
+### Expected Function Signature
 
 ```python
 @mcp.tool()
@@ -363,7 +368,6 @@ Try implementing this tool before looking at the solution! This exercise reinfor
 - [MCP Inspector GitHub](https://github.com/modelcontextprotocol/inspector) - Essential debugging and testing tool
 - [JSON Schema Guide](https://json-schema.org/learn/) - Understanding schema validation for MCP tools
 - [Python Type Hints](https://docs.python.org/3/library/typing.html) - Essential for automatic schema generation
-
 
 ---
 
@@ -437,4 +441,3 @@ D) `.server`
 
 **Previous:** [Session 0 - Introduction to MCP, ACP, and A2A ←](Session0_Introduction_to_MCP_ACP_A2A.md)  
 **Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)
-

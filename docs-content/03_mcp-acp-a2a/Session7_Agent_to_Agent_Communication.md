@@ -944,71 +944,61 @@ This isn't science fiction—it's the natural evolution of AI systems from isola
 
 Before we venture into advanced workflows, let's ensure you've mastered the art of agent diplomacy:
 
-**Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?
-
+**Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?  
 A) To reduce computational costs  
 B) To improve individual agent performance  
 C) To enable multiple agents to collaborate and coordinate actions  
 D) To replace human operators  
 
-**Question 2:** Which message type is used for finding agents with specific capabilities?
-
+**Question 2:** Which message type is used for finding agents with specific capabilities?  
 A) RESPONSE  
 B) HEARTBEAT  
 C) DISCOVERY  
 D) REQUEST  
 
-**Question 3:** What information is essential for proper A2A message routing?
-
+**Question 3:** What information is essential for proper A2A message routing?  
 A) Just the timestamp  
 B) Only the priority level  
 C) Only the message content  
 D) Sender ID, recipient ID, and message type  
 
-**Question 4:** What is the difference between orchestration and choreography in multi-agent systems?
-
+**Question 4:** What is the difference between orchestration and choreography in multi-agent systems?  
 A) Orchestration uses centralized control, choreography uses distributed coordination  
 B) Choreography requires more memory  
 C) There is no difference  
 D) Orchestration is faster than choreography  
 
-**Question 5:** How do agents announce their capabilities in an A2A system?
-
+**Question 5:** How do agents announce their capabilities in an A2A system?  
 A) Using ANNOUNCEMENT messages with capability metadata  
 B) Through manual configuration  
 C) Via external databases only  
 D) Through file-based configurations  
 
-**Question 6:** What mechanism ensures A2A communication reliability when agents become unavailable?
-
+**Question 6:** What mechanism ensures A2A communication reliability when agents become unavailable?  
 A) Faster processing  
 B) Increased memory allocation  
 C) Message queuing with retry logic and timeouts  
 D) Multiple network interfaces  
 
-**Question 7:** What is the purpose of capability negotiation in A2A systems?
-
+**Question 7:** What is the purpose of capability negotiation in A2A systems?  
 A) To improve performance  
 B) To match agent capabilities with task requirements  
 C) To simplify configuration  
 D) To reduce costs  
 
-**Question 8:** When should URGENT priority be used for A2A messages?
-
+**Question 8:** When should URGENT priority be used for A2A messages?  
 A) For time-critical operations requiring immediate attention  
 B) For data backup operations  
 C) For routine status updates  
 D) For all important messages  
 
-**Question 9:** What is the purpose of correlation IDs in A2A messaging?
-
+**Question 9:** What is the purpose of correlation IDs in A2A messaging?  
 A) To validate message integrity  
 B) To encrypt messages  
 C) To compress message content  
 D) To link related messages in multi-step workflows  
 
-**Question 10:** What is a key benefit of collaborative agent teams in A2A systems?
-
+**Question 10:** What is a key benefit of collaborative agent teams in A2A systems?  
 A) Diverse expertise and parallel problem-solving capabilities  
 B) Lower computational requirements  
 C) Reduced network traffic  

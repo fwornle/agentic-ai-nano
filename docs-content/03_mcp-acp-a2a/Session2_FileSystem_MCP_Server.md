@@ -17,6 +17,7 @@ File system access represents one of the highest-risk attack vectors in AI agent
 ### Defense-in-Depth Strategy
 
 Our server implements multiple security layers:
+
 1. **Sandboxing**: Physical isolation to designated directories
 2. **Path Validation**: Mathematical verification of file paths
 3. **Input Sanitization**: Content filtering and validation
@@ -42,7 +43,8 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install fastmcp aiofiles watchdog python-magic-bin cryptography
 ```
 
-### Dependencies:
+### Dependencies
+
 - `fastmcp`: MCP protocol framework with built-in security features
 - `aiofiles`: Async I/O prevents blocking operations that could cause DoS
 - `python-magic-bin`: Content-based file type detection (more secure than extensions)
@@ -158,7 +160,6 @@ Performance features prevent resource exhaustion through streaming, search limit
 ```
 
 **Complete implementation available in:** [`src/session2/config.py`](src/session2/config.py)
-
 
 ## Part 2: Implementing Security Boundaries
 
@@ -277,7 +278,8 @@ Add comprehensive filename safety checking:
 
 **Complete implementation:** [`src/session2/utils/sandbox.py`](src/session2/utils/sandbox.py)
 
-### Security Architecture Summary:
+### Security Architecture Summary
+
 - **Mathematical Validation**: `resolve()` provides cryptographic-level path certainty
 - **Boundary Enforcement**: String prefix checking ensures physical containment
 - **Injection Prevention**: Filename validation stops malicious name-based attacks
@@ -1178,6 +1180,7 @@ Display startup information and launch the server:
 You've built a production-grade file system MCP server with:
 
 **Security Features:**
+
 - Sandboxing restricts operations to designated directory
 - Path validation prevents directory traversal attacks
 - File type validation checks extensions and MIME types
@@ -1186,6 +1189,7 @@ You've built a production-grade file system MCP server with:
 - Audit logging tracks all operations
 
 **Capabilities:**
+
 - Directory browsing with metadata and filtering
 - File reading with text and binary support
 - File writing with safety checks
@@ -1195,6 +1199,7 @@ You've built a production-grade file system MCP server with:
 - Prompts for common file system tasks
 
 **Production Features:**
+
 - Async I/O for non-blocking operations
 - Limits on search results and file sizes
 - Comprehensive logging
@@ -1222,12 +1227,14 @@ async def move_file(source: str, destination: str, overwrite: bool = False) -> D
 ```
 
 **Additional Challenges:**
+
 1. Add a compression tool that creates zip archives of directories
 2. Implement file permissions checking
 3. Create a file diff tool that compares two files
 4. Add rate limiting to prevent abuse of search operations
 
 **Resources:**
+
 - [OWASP Path Traversal Prevention](https://owasp.org/www-community/attacks/Path_Traversal)
 - [Python AsyncIO Best Practices](https://docs.python.org/3/library/asyncio-best-practices.html)
 - [File Type Detection with python-magic](https://github.com/ahupp/python-magic)
@@ -1239,71 +1246,61 @@ async def move_file(source: str, destination: str, overwrite: bool = False) -> D
 
 Test your understanding of secure file system implementation and MCP security best practices with this comprehensive assessment covering sandboxing, validation, and production security considerations.
 
-**1. What is the primary purpose of the sandbox in our file system server?**  
-
+**Question 1:** What is the primary purpose of the sandbox in our file system server?  
 A) To improve performance  
 B) To prevent unauthorized file access  
 C) To compress files  
 D) To cache file contents  
 
-**2. Which method is used to safely resolve file paths and prevent directory traversal attacks?**  
-
+**Question 2:** Which method is used to safely resolve file paths and prevent directory traversal attacks?  
 A) `os.path.join()`  
 B) `Path.resolve()`  
 C) `str.replace()`  
 D) `Path.absolute()`  
 
-**3. How are binary files handled in the read_file tool?**  
-
+**Question 3:** How are binary files handled in the read_file tool?  
 A) Rejected with an error  
 B) Converted to hexadecimal  
 C) Encoded as base64  
 D) Read as UTF-8  
 
-**4. What type of validation is performed on file types for security?**  
-
+**Question 4:** What type of validation is performed on file types for security?  
 A) Extension only  
 B) MIME type only  
 C) Both extension and MIME type  
 D) File size only  
 
-**5. Which logging level is used for security violations in the file system server?**  
-
+**Question 5:** Which logging level is used for security violations in the file system server?  
 A) DEBUG  
 B) INFO  
 C) WARNING  
 D) ERROR  
 
-**6. What happens when a file path attempts to escape the sandbox?**  
-
+**Question 6:** What happens when a file path attempts to escape the sandbox?  
 A) The server crashes  
 B) A SandboxError is raised  
 C) The path is automatically corrected  
 D) Access is granted with a warning  
 
-**7. Why does the server implement file size limits?**  
-
+**Question 7:** Why does the server implement file size limits?  
 A) To save disk space  
 B) To prevent denial of service attacks  
 C) To improve search performance  
 D) To maintain file quality  
 
-**8. What approach does the server use for file type restrictions?**  
-
+**Question 8:** What approach does the server use for file type restrictions?  
 A) Blacklist dangerous extensions  
 B) Whitelist safe extensions  
 C) Allow all extensions  
 D) Check file signatures only  
 
-**9. How does the search_files tool prevent performance issues?**  
-
+**Question 9:** How does the search_files tool prevent performance issues?  
 A) By caching all file content  
 B) By limiting maximum results returned  
 C) By using external search engines  
 D) By compressing search results  
 
-**10. What is the primary benefit of using `aiofiles` for file operations?**  
-
+**Question 10:** What is the primary benefit of using `aiofiles` for file operations?  
 A) Faster disk access  
 B) Better error handling  
 C) Non-blocking operations  
