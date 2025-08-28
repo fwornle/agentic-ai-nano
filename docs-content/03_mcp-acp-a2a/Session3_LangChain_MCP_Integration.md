@@ -9,8 +9,7 @@ This is the story of integration - not just connecting two technologies, but cre
 By the end of this session, you'll have built something remarkable: an AI agent that doesn't just think and reason, but can actually reach out and interact with any digital system through standardized protocols. This is where theoretical AI meets practical, real-world impact.
 
 ![LangChain MCP Architecture](images/langchain-mcp-architecture.png)
-
-### Figure 1: The Bridge That Changes Everything - LangChain agents seamlessly integrate with multiple MCP servers, creating a unified interface for complex reasoning and tool execution workflows
+*Figure 1: The Bridge That Changes Everything - LangChain agents seamlessly integrate with multiple MCP servers, creating a unified interface for complex reasoning and tool execution workflows*
 
 ---
 
