@@ -369,7 +369,7 @@ This method implements the deductive reasoning approach to information retrieval
         }
 ```
 
-#### **2. Retrieval-Augmented Reasoning (RAR)**
+#### 2. Retrieval-Augmented Reasoning (RAR)
 
 ### "Let external knowledge fill logical reasoning gaps"
 
@@ -501,7 +501,7 @@ Finally, we execute the gap analysis with consistent temperature settings:
         return self._parse_json_response(response)
 ```
 
-#### **3. Chain-of-Thought RAG Integration**
+#### 3. Chain-of-Thought RAG Integration
 
 ### "Structured reasoning paths that guide both retrieval and synthesis"
 
@@ -862,7 +862,7 @@ Final methods for managing execution state and compiling results:
             }
         }
 
-### **Bridging NodeRAG Structured Knowledge to Reasoning Capabilities**
+### Bridging NodeRAG Structured Knowledge to Reasoning Capabilities
 
 ### From Graph Relationships to Logical Reasoning:
 The structured knowledge graphs from Session 6 (NodeRAG) provide the perfect foundation for sophisticated reasoning systems. Instead of just traversing relationships, we can now reason about them logically.
@@ -979,9 +979,9 @@ This integration represents a fundamental cognitive evolution:
 
 ```
 
-### **Workflow Architecture: Structured vs. Dynamic Reasoning**
+### Workflow Architecture: Structured vs. Dynamic Reasoning
 
-#### **Structured Reasoning Workflows**
+#### Structured Reasoning Workflows
 
 ### Controlled, predictable reasoning patterns for well-defined domains
 
@@ -1019,7 +1019,7 @@ class StructuredReasoningWorkflow:
         }
 ```
 
-#### **Dynamic Adaptive Reasoning Workflows**
+#### Dynamic Adaptive Reasoning Workflows
 
 ### Emergent reasoning patterns that adapt based on the cognitive requirements
 
@@ -1240,7 +1240,7 @@ class BasicReasoningAgent:
             return "analytical"
 ```
 
-#### **Level 2: Enhanced Reasoning Agent (Skill Building)**
+#### Level 2: Enhanced Reasoning Agent (Skill Building)
 
 ### Enhanced Reasoning Agent
 
@@ -1300,7 +1300,7 @@ class EnhancedReasoningAgent(BasicReasoningAgent):
         return self._parse_json_response(response)
 ```
 
-#### **Level 3: Production Reasoning Agent (Enterprise Ready)**
+#### Level 3: Production Reasoning Agent (Enterprise Ready)
 
 ### Production Reasoning Agent
 
@@ -2764,7 +2764,7 @@ class MultiAgentRAGOrchestrator:
 
 ---
 
-## **Hands-On Exercise: Build Production Reasoning-Augmented RAG**
+## Hands-On Exercise: Build Production Reasoning-Augmented RAG
 
 ### Your Mission
 
