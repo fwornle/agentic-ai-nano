@@ -58,7 +58,7 @@ class VectorDatabaseInterface:
         pass
 ```
 
-### Key Design Decisions:
+**Key Design Decisions:**
 - **Cosine similarity**: Best for text embeddings because it handles document length naturally
 - **Metadata storage**: Enables filtering by document type, date, or user permissions
 - **Batch operations**: Essential for efficient data loading and updates
@@ -407,7 +407,7 @@ class OptimizedHNSWIndex:
             print(f"Updated ef_search to {ef_search}")
 ```
 
-### HNSW Parameter Impact:
+**HNSW Parameter Impact:**
 - **M (connectivity)**: Higher values improve recall but increase memory usage
 - **ef_construction**: Controls build quality - higher values create better graphs
 - **ef_search**: Runtime parameter for speed/accuracy trade-off
@@ -674,7 +674,7 @@ class ProductionHybridSearch:
         return sorted_results
 ```
 
-### Why RRF Outperforms Score Fusion:
+**Why RRF Outperforms Score Fusion:**
 - **No normalization needed**: RRF works with rankings, not raw scores
 - **Robust to outliers**: Extreme scores don't dominate the fusion
 - **Mathematically principled**: Based on probability theory for rank aggregation
@@ -840,7 +840,7 @@ class OptimizedSearchEngine:
         return self.performance_stats['cache_hits'] / total
 ```
 
-### Performance Impact of Optimizations:
+**Performance Impact of Optimizations:**
 - **Query caching**: 70-80% hit rate for common queries saves significant compute
 - **Batch processing**: 3-5x improvement for bulk operations
 - **Index optimization**: HNSW tuning can improve speed by 2-3x
@@ -1067,7 +1067,7 @@ class AdaptivePerformanceTuner:
 
 ---
 
-## Optional Deep-Dive Modules
+## Optional Deep Dive Modules
 
 **⚠️ OPTIONAL CONTENT - Choose based on your goals:**
 
