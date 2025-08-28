@@ -69,7 +69,7 @@ ADK excels in enterprise environments requiring Google Cloud integration and adv
 Google's Agent Development Kit represents a paradigm shift in enterprise AI development, providing the same foundation that powers Google Agentspace and Customer Engagement Suite. The framework's strategic advantage lies in its native Google Cloud integration and enterprise-grade security controls:
 
 ![ADK Architecture Overview](images/adk-architecture-overview.png)
-### This comprehensive architectural diagram illustrates Google's ADK framework structure, showing the integration layers between the agent development environment, Vertex AI services, VPC Service Controls, and enterprise security components. The ADK provides a direct pathway from development to enterprise-grade production deployment with built-in governance and compliance controls.
+*This comprehensive architectural diagram illustrates Google's ADK framework structure, showing the integration layers between the agent development environment, Vertex AI services, VPC Service Controls, and enterprise security components. The ADK provides a direct pathway from development to enterprise-grade production deployment with built-in governance and compliance controls.*
 
 **File**: [`src/session7/basic_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session7/basic_agent.py) - ADK setup and initialization
 

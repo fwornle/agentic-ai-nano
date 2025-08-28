@@ -4,7 +4,7 @@ In Sessions 1-8, you built a comprehensive RAG system: intelligent chunking, opt
 
 This final session transforms your RAG system from sophisticated prototype to enterprise-grade production system. You'll implement containerized microservices architecture, security frameworks that meet enterprise standards, monitoring systems that prevent issues before they impact users, and integration patterns that work with existing organizational infrastructure. The goal is RAG systems that don't just work – they work reliably at enterprise scale.
 
-### Optional Deep Dive Modules:
+## Optional Deep Dive Modules
 - 🔬 **[Module A: Advanced Production Patterns](Session9_ModuleA_Advanced_Production.md)** - Multi-cluster deployments, ML-based scaling, advanced monitoring
 - 🏭 **[Module B: Enterprise Integration Architectures](Session9_ModuleB_Enterprise_Architecture.md)** - Zero-trust security, governance, CI/CD
 
@@ -44,7 +44,7 @@ Each service encapsulates the intelligence you built while providing production-
 
 **Production RAG Orchestrator:**
 
-### Step 1: Define Core Service Infrastructure
+#### Step 1: Define Core Service Infrastructure
 
 First, let's establish the foundation with our core imports and health monitoring infrastructure:
 
@@ -81,7 +81,7 @@ class ServiceHealth:
 ```
 
 
-### Step 2: Initialize Production Orchestrator
+#### Step 2: Initialize Production Orchestrator
 
 Now we create the central orchestrator that manages all RAG microservices and their interactions:
 
@@ -119,7 +119,7 @@ Finally, we initialize the critical production infrastructure components:
 ```
 
 
-### Step 3: Implement Service Startup with Dependency Management
+#### Step 3: Implement Service Startup with Dependency Management
 
 The service startup process follows a carefully orchestrated dependency sequence to ensure each service has the infrastructure it needs:
 
@@ -177,7 +177,7 @@ After all services are started, we configure the load balancer and return compre
 ```
 
 
-### Step 4: Individual Service Initialization
+#### Step 4: Individual Service Initialization
 
 ```python
     async def _start_service(self, service_name: str) -> Any:
@@ -200,7 +200,7 @@ After all services are started, we configure the load balancer and return compre
 
 Let's build a production-grade document processing service that can handle high throughput with worker pools and queue management:
 
-### Step 1: Initialize Processing Infrastructure
+#### Step 1: Initialize Processing Infrastructure
 
 Let's build a production-grade document processing service with worker pool architecture for high-throughput document handling:
 
@@ -229,7 +229,7 @@ The service maintains comprehensive statistics for monitoring and performance op
 ```
 
 
-### Step 2: Service Initialization with Worker Pool
+#### Step 2: Service Initialization with Worker Pool
 
 The initialization process creates worker processes and starts background monitoring:
 
@@ -250,7 +250,7 @@ The initialization process creates worker processes and starts background monito
 ```
 
 
-### Step 3: Document Batch Processing
+#### Step 3: Document Batch Processing
 
 The document processing interface accepts multiple documents and creates trackable processing jobs:
 
@@ -288,7 +288,7 @@ The system returns comprehensive job tracking information for client monitoring:
 ```
 
 
-### Step 4: Worker Process Implementation
+#### Step 4: Worker Process Implementation
 
 Each worker continuously processes documents from the queue, providing fault tolerance:
 
@@ -326,7 +326,7 @@ Workers update statistics and handle errors gracefully to maintain system stabil
 ```
 
 
-### Step 5: Document Processing Pipeline
+#### Step 5: Document Processing Pipeline
 
 The document processing pipeline handles each document through multiple stages with comprehensive error handling:
 
@@ -368,7 +368,7 @@ Successful processing returns comprehensive results, while errors are handled gr
 ```
 
 
-### Step 2: Embedding Service with Caching
+#### Step 2: Embedding Service with Caching
 
 Now let's build a high-performance embedding service that uses caching and batching to optimize embedding generation:
 
@@ -557,7 +557,7 @@ Cache storage handles capacity limits with intelligent eviction policies:
 
 Implement intelligent load distribution and scaling to handle varying workloads efficiently. We'll create a comprehensive load balancing system with multiple strategies and auto-scaling capabilities.
 
-### Step 1: Initialize Load Balancer
+#### Step 1: Initialize Load Balancer
 
 Set up the load balancer with configurable strategies:
 
@@ -593,7 +593,7 @@ The system supports multiple load balancing algorithms optimized for different s
         self.current_strategy = self.config.get('strategy', 'response_time')
 ```
 
-### Step 2: Configure Service Instances
+#### Step 2: Configure Service Instances
 
 Register and initialize tracking for all service instances:
 
@@ -627,7 +627,7 @@ Register and initialize tracking for all service instances:
                 for instance in service_instances
             }
 
-### Step 3: Select Optimal Service Instance
+#### Step 3: Select Optimal Service Instance
 
 Choose the best available instance using the configured strategy:
 
@@ -659,7 +659,7 @@ Choose the best available instance using the configured strategy:
 
         return selected_instance
 
-### Step 4: Implement Response Time Strategy
+#### Step 4: Implement Response Time Strategy
 
 Select instances based on performance and current load:
 
@@ -685,7 +685,7 @@ Select instances based on performance and current load:
 
         return best_instance
 
-### Step 5: Auto-Scaling System
+#### Step 5: Auto-Scaling System
 
 Implement automatic scaling based on performance metrics:
 
@@ -719,7 +719,7 @@ class RAGAutoScaler:
         # Start continuous monitoring
         self.monitoring_task = asyncio.create_task(self._continuous_monitoring())
 
-### Step 6: Register Services for Auto-Scaling
+#### Step 6: Register Services for Auto-Scaling
 
 Configure scaling policies for individual services:
 
@@ -738,7 +738,7 @@ Configure scaling policies for individual services:
             'custom_thresholds': scaling_config.get('thresholds', {}) # Service-specific thresholds
         }
 
-### Step 7: Continuous Monitoring Loop
+#### Step 7: Continuous Monitoring Loop
 
 Implement the main monitoring loop for scaling decisions:
 
@@ -769,7 +769,7 @@ Implement the main monitoring loop for scaling decisions:
                 self.logger.error(f"Auto-scaling monitoring error: {e}")
                 await asyncio.sleep(self.monitoring_interval)
 
-### Step 8: Scaling Decision Evaluation
+#### Step 8: Scaling Decision Evaluation
 
 Determine when and how to scale services:
 
@@ -806,7 +806,7 @@ Determine when and how to scale services:
                 'metrics': metrics
             }
 
-### Step 9: Scale-Down Decision Logic
+#### Step 9: Scale-Down Decision Logic
 
 Implement conservative scale-down with stability requirements:
 
@@ -1047,7 +1047,7 @@ class SharePointConnector:
             return []
 ```
 
-### Step 3: Secure Authentication and Authorization
+#### Step 3: Secure Authentication and Authorization
 ```python
 class EnterpriseAuthManager:
     """Enterprise authentication and authorization manager."""
@@ -1192,7 +1192,7 @@ class RBACManager:
 
 Implement comprehensive privacy and compliance frameworks to ensure your RAG system meets regulatory requirements across different jurisdictions and industries.
 
-### Step 1: Initialize Privacy Compliance Manager
+#### Step 1: Initialize Privacy Compliance Manager
 
 Set up the comprehensive compliance framework:
 
@@ -1222,7 +1222,7 @@ class PrivacyComplianceManager:
         # Initialize compliance audit system
         self.audit_logger = ComplianceAuditLogger(compliance_config.get('audit', {}))
 
-### Step 2: Data Processing with Compliance Checks
+#### Step 2: Data Processing with Compliance Checks
 
 Process data through comprehensive compliance validation:
 
@@ -1248,7 +1248,7 @@ Process data through comprehensive compliance validation:
         processing_result['sensitive_data_detected'] = pii_detection
 ```
 
-### Step 3: Apply Compliance Framework Checks
+#### Step 3: Apply Compliance Framework Checks
 
 Run data through each required compliance framework:
 
@@ -1286,7 +1286,7 @@ Run data through each required compliance framework:
             )
         }
 
-### Step 4: GDPR Compliance Handler
+#### Step 4: GDPR Compliance Handler
 
 Implement specific GDPR requirements for European data protection:
 
@@ -1299,7 +1299,7 @@ class GDPRComplianceHandler:
         self.lawful_basis = gdpr_config.get('lawful_basis', 'legitimate_interest')
         self.data_retention_days = gdpr_config.get('retention_days', 365)
 
-### Step 5: GDPR Data Processing Checks
+#### Step 5: GDPR Data Processing Checks
 
 Implement comprehensive GDPR compliance validation:
 
