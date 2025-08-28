@@ -2,9 +2,7 @@
 
 ## Multiple Choice Test
 
-### Question 1: Intent Classification Benefits
-
-### What is the primary benefit of intent classification in query processing?
+**Question 1:** What is the primary benefit of intent classification in query processing?  
 A) Reduces processing time  
 B) Enables specialized processing strategies tailored to query types ✅  
 C) Reduces memory usage  
@@ -14,9 +12,7 @@ D) Simplifies implementation
 
 ---
 
-### Question 2: Context-Aware Query Enhancement
-
-### Why is context-aware query enhancement important?
+**Question 2:** Why is context-aware query enhancement important?  
 A) It reduces computational costs  
 B) It resolves ambiguities and adds implicit context from conversation history ✅  
 C) It speeds up retrieval  
@@ -26,9 +22,7 @@ D) It reduces storage requirements
 
 ---
 
-### Question 3: Multi-Modal Query Processing
-
-### How does multi-modal query processing improve RAG systems?
+**Question 3:** How does multi-modal query processing improve RAG systems?  
 A) It reduces complexity  
 B) It enables processing of queries with images, documents, and other media types ✅  
 C) It reduces memory usage  
@@ -38,9 +32,7 @@ D) It simplifies deployment
 
 ---
 
-### Question 4: Reference Resolution Value
-
-### What is the value of reference resolution in conversational RAG?
+**Question 4:** What is the value of reference resolution in conversational RAG?  
 A) It improves speed  
 B) It resolves pronouns and references using conversation context for clarity ✅  
 C) It reduces costs  
@@ -50,9 +42,7 @@ D) It simplifies architecture
 
 ---
 
-### Question 5: Query Complexity Assessment
-
-### Why should query complexity assessment guide processing strategy?
+**Question 5:** Why should query complexity assessment guide processing strategy?  
 A) It reduces infrastructure costs  
 B) It allows allocation of appropriate computational resources and techniques ✅  
 C) It speeds up all queries  

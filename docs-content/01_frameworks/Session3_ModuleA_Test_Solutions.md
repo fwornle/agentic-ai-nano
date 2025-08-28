@@ -2,8 +2,7 @@
 
 ## Advanced Orchestration Patterns - Answer Key
 
-### Question 1: Parallel Execution Strategy
-### Correct Answer: c) Task complexity, resource availability, and interdependency scores
+**Question 1:** Correct Answer: c) Task complexity, resource availability, and interdependency scores  
 
 **Explanation**: The workflow mode selection algorithm evaluates multiple factors:
 - **Task complexity score > 0.8** AND **CPU > 0.7** → parallel mode
@@ -12,8 +11,7 @@
 
 This multi-factor approach ensures optimal resource utilization while respecting task dependencies.
 
-### Question 2: Synchronization Points
-### Correct Answer: b) Conditional proceed with timeout protection
+**Question 2:** Correct Answer: b) Conditional proceed with timeout protection  
 
 **Explanation**: The adaptive synchronization policy handles different completion levels:
 - **100% completion** → immediate progression ("proceed_to_merge")
@@ -22,8 +20,7 @@ This multi-factor approach ensures optimal resource utilization while respecting
 
 The 75% threshold balances completion requirements with practical timeout considerations.
 
-### Question 3: Dynamic Agent Generation
-### Correct Answer: a) Capability match (40%) + Performance score (40%) + Resource efficiency (20%)
+**Question 3:** Correct Answer: a) Capability match (40%) + Performance score (40%) + Resource efficiency (20%)  
 
 **Explanation**: The composite scoring algorithm weights three factors:
 ```python
@@ -36,8 +33,7 @@ composite_score = (
 
 This weighting prioritizes capability alignment and proven performance while considering resource optimization.
 
-### Question 4: Branch Merging Strategy
-### Correct Answer: b) Quality score (70%) + Time factor (30%)
+**Question 4:** Correct Answer: b) Quality score (70%) + Time factor (30%)  
 
 **Explanation**: The intelligent research merging uses quality-weighted integration:
 ```python
@@ -47,8 +43,7 @@ weight = quality_score * 0.7 + time_factor * 0.3
 
 This approach prioritizes result quality while rewarding efficient execution, creating balanced weighting for synthesis.
 
-### Question 5: Agent Specialization
-### Correct Answer: c) Research focus, depth level, data sources, and fact checking
+**Question 5:** Correct Answer: c) Research focus, depth level, data sources, and fact checking  
 
 **Explanation**: Research specialist agents receive domain-specific configuration:
 - **research_focus**: Target domain (technical, market, competitive)

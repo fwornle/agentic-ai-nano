@@ -2,8 +2,7 @@
 
 ## Enterprise Team Patterns - Answer Key
 
-### Question 1: Enterprise Search Tool Architecture
-### Correct Answer: b) Knowledge base (1.2 weight) and databases (1.3 weight)
+**Question 1:** Correct Answer: b) Knowledge base (1.2 weight) and databases (1.3 weight)  
 
 **Explanation**: The source weighting system prioritizes trusted enterprise data sources:
 ```python
@@ -17,8 +16,7 @@ source_weights = {
 
 This weighting ensures that internal documentation and database content receive priority over external web sources, maintaining enterprise data quality standards.
 
-### Question 2: Delegation Authority Hierarchy
-### Correct Answer: d) ENTERPRISE_LEAD
+**Question 2:** Correct Answer: d) ENTERPRISE_LEAD  
 
 **Explanation**: The delegation rules define strategic planning as an enterprise-level responsibility:
 ```python
@@ -35,8 +33,7 @@ DelegationRule(
 
 Only enterprise leaders have the authority to delegate strategic planning tasks, ensuring appropriate organizational oversight.
 
-### Question 3: Workload Validation
-### Correct Answer: b) Alternative agents are suggested without escalation required
+**Question 3:** Correct Answer: b) Alternative agents are suggested without escalation required  
 
 **Explanation**: The capacity validation system provides alternatives when agents are overloaded:
 ```python
@@ -51,8 +48,7 @@ if not workload_check["has_capacity"]:
 
 This approach maintains workflow efficiency by suggesting viable alternatives rather than blocking delegation entirely.
 
-### Question 4: Resource Limit Validation
-### Correct Answer: c) Any resource limit violation according to delegation rules
+**Question 4:** Correct Answer: c) Any resource limit violation according to delegation rules  
 
 **Explanation**: Resource validation checks all limits defined in delegation rules:
 ```python
@@ -69,8 +65,7 @@ if not resource_check["within_limits"]:
 
 Any violation of defined resource limits (budget, personnel, time) triggers escalation through the appropriate hierarchy.
 
-### Question 5: Performance Monitoring
-### Correct Answer: b) Every 5 minutes with 1-minute retry on errors
+**Question 5:** Correct Answer: b) Every 5 minutes with 1-minute retry on errors  
 
 **Explanation**: The background monitoring system uses structured intervals:
 ```python

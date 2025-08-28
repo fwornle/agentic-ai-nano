@@ -2,9 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-### Question 1: Vector Database Metrics
-
-### Which vector database metric is most suitable for RAG applications using cosine similarity?
+**Question 1:** Which vector database metric is most suitable for RAG applications using cosine similarity?  
 A) Euclidean distance  
 B) Manhattan distance  
 C) Cosine similarity ✅  
@@ -14,9 +12,7 @@ D) Hamming distance
 
 ---
 
-### Question 2: HNSW vs IVF Indexing
-
-### What is the primary advantage of HNSW indexing over IVF indexing?
+**Question 2:** What is the primary advantage of HNSW indexing over IVF indexing?  
 A) Lower memory usage  
 B) Better compression ratios  
 C) Faster query performance with high recall ✅  
@@ -26,9 +22,7 @@ D) Simpler configuration
 
 ---
 
-### Question 3: Reciprocal Rank Fusion Parameter
-
-### In Reciprocal Rank Fusion (RRF), what does the 'k' parameter control?
+**Question 3:** In Reciprocal Rank Fusion (RRF), what does the 'k' parameter control?  
 A) Number of results to return  
 B) Weight balance between semantic and lexical scores  
 C) The smoothing factor in rank combination ✅  
@@ -38,9 +32,7 @@ D) Maximum number of query variants
 
 ---
 
-### Question 4: Cross-Encoder Benefits
-
-### What is the key benefit of cross-encoder reranking compared to bi-encoder similarity?
+**Question 4:** What is the key benefit of cross-encoder reranking compared to bi-encoder similarity?  
 A) Faster inference speed  
 B) Lower computational requirements  
 C) Joint processing of query-document pairs for better accuracy ✅  
@@ -50,9 +42,7 @@ D) Simpler model architecture
 
 ---
 
-### Question 5: IVF vs HNSW Choice
-
-### When should you choose IVF indexing over HNSW for vector search?
+**Question 5:** When should you choose IVF indexing over HNSW for vector search?  
 A) When you need the fastest possible queries  
 B) When you have limited memory and large datasets ✅  
 C) When accuracy is more important than speed  
@@ -62,9 +52,7 @@ D) When you need real-time updates
 
 ---
 
-### Question 6: HNSW ef_construction Parameter
-
-### What is the purpose of the 'ef_construction' parameter in HNSW?
+**Question 6:** What is the purpose of the 'ef_construction' parameter in HNSW?  
 A) Controls memory usage during search  
 B) Determines the number of connections per node  
 C) Sets the dynamic candidate list size during index building ✅  
@@ -74,9 +62,7 @@ D) Defines the maximum number of layers
 
 ---
 
-### Question 7: BM25 in Hybrid Search
-
-### In hybrid search, what does BM25 provide that semantic search lacks?
+**Question 7:** In hybrid search, what does BM25 provide that semantic search lacks?  
 A) Better understanding of context  
 B) Exact term matching and frequency analysis ✅  
 C) Handling of synonyms and related concepts  
@@ -86,9 +72,7 @@ D) Multi-language support
 
 ---
 
-### Question 8: Query Caching Effectiveness
-
-### Why is query caching particularly effective in RAG systems?
+**Question 8:** Why is query caching particularly effective in RAG systems?  
 A) Vector embeddings are expensive to compute  
 B) Users often ask similar or repeated questions  
 C) Database queries are the main bottleneck  

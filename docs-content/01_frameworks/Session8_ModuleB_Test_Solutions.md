@@ -2,13 +2,11 @@
 
 ## Enterprise Scaling & Architecture - Answer Key
 
-### Question 1: Custom Resource Definitions (CRDs)
-### Correct Answer: B) They extend the Kubernetes API to support agent-specific configurations
+**Question 1:** Custom Resource Definitions (CRDs)  
 
 **Explanation**: Custom Resource Definitions (CRDs) allow you to create new resource types in Kubernetes beyond the built-in ones like Pods and Services. In our agent platform, CRDs enable us to define AgnoAgent resources with specific fields for agent configuration, scaling policies, and business logic that Kubernetes operators can then manage automatically.
 
-### Question 2: ResourceQuota Purpose
-### Correct Answer: B) To prevent any single tenant from consuming excessive cluster resources
+**Question 2:** ResourceQuota Purpose  
 
 **Explanation**: ResourceQuota objects are Kubernetes' way of implementing resource governance in multi-tenant environments. They set hard limits on CPU, memory, storage, and object counts per namespace, ensuring fair resource distribution and preventing any tenant from monopolizing cluster resources or causing denial-of-service to other tenants.
 
@@ -21,8 +19,7 @@
 }
 ```
 
-### Question 3: Canary Traffic Distribution
-### Correct Answer: C) 90% stable, 10% canary
+**Question 3:** Canary Traffic Distribution  
 
 **Explanation**: The canary deployment configuration implements a conservative 90/10 traffic split by default. This allows gradual rollout of new agent versions while minimizing risk. The small 10% canary traffic provides real user feedback while maintaining service stability for the majority of requests through the proven stable version.
 
@@ -33,13 +30,11 @@
 ]
 ```
 
-### Question 4: Disaster Recovery Objectives
-### Correct Answer: B) RPO: 1h, RTO: 30m
+**Question 4:** Disaster Recovery Objectives  
 
 **Explanation**: The disaster recovery plan sets aggressive targets: Recovery Point Objective (RPO) of 1 hour means maximum 1 hour of data loss, while Recovery Time Objective (RTO) of 30 minutes means service restoration within 30 minutes. These targets reflect enterprise requirements for high availability and business continuity in agent platforms.
 
-### Question 5: Emergency Cost Management
-### Correct Answer: C) Scaling factor reduces to 0.5 with 100% spot instances
+**Question 5:** Emergency Cost Management  
 
 **Explanation**: When budget remaining drops to 20% or below, the cost-aware scaling policy enters "emergency cost saving" mode. This dramatically reduces scaling capacity to 50% of normal levels and switches to 100% spot instances (cheapest option) to preserve remaining budget while maintaining minimal service levels.
 
