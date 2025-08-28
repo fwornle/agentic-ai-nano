@@ -94,9 +94,9 @@ Master the Model Context Protocol, Agent Communication Protocol, and sophisticat
 ```text
 nano-degree/
 ├── 00_intro/               # Course introduction and setup
-│   ├── coder.md           # Development environment setup
-│   ├── llmapi.md          # LLM API configuration
-│   └── coder-detailed.md  # Detailed development setup
+│   ├── coder.md            # Development environment setup
+│   ├── llmapi.md           # LLM API configuration
+│   └── coder-detailed.md   # Detailed development setup
 ├── 01_frameworks/          # Agent Frameworks Module
 │   ├── Session0_Introduction/
 │   ├── Session1_Bare_Metal/
@@ -115,7 +115,7 @@ nano-degree/
 ├── docs/                   # Documentation and guides
 ├── tests/                  # Test suites
 ├── requirements.txt        # Core dependencies
-└── README.md              # Project overview
+└── README.md               # Project overview
 ```
 
 ## Study Recommendations
