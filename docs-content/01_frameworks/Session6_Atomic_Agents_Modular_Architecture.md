@@ -30,7 +30,7 @@ Atomic Agents provides a component-based architecture for building modular AI sy
 Atomic Agents transforms AI development through extreme modularity and component-based architecture:
 
 ![Atomic Agent Architecture](images/atomic-agent.png)
-### This diagram illustrates the core atomic agent structure with individual, focused components that can be composed together. Each agent is designed with single responsibility and minimal dependencies, making them lightweight and highly reusable building blocks.
+*This diagram illustrates the core atomic agent structure with individual, focused components that can be composed together. Each agent is designed with single responsibility and minimal dependencies, making them lightweight and highly reusable building blocks.*
 
 **File**: [`src/session6/atomic_foundation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/atomic_foundation.py) - Core atomic patterns
 
@@ -56,7 +56,8 @@ class AtomicTextAgent(BaseAgent):
         return self.run(f"Process this text: {text}")
 ```
 
-### Key Concepts:
+### Key Concepts
+
 1. **Single Responsibility**: Each component has one clear purpose
 2. **Composition over Inheritance**: Build systems by combining components
 3. **Lightweight by Design**: Minimal resource footprint per component
@@ -66,7 +67,8 @@ class AtomicTextAgent(BaseAgent):
 Building systems through component assembly:
 
 ![Atomic Agents System](images/atomic-agents.png)
-### This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle.
+
+### This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle
 
 **File**: [`src/session6/composition_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/composition_engine.py) - Component composition patterns
 
@@ -339,7 +341,7 @@ Assembling components into complete systems:
 
 ![Atomic Assembler](images/atomic-assembler.png)
 
-### The Atomic Assembler helps you integrate Atomic Agents.
+### The Atomic Assembler helps you integrate Atomic Agents
 
 **File**: [`src/session6/production_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/production_orchestrator.py) - Production integration patterns
 
@@ -551,6 +553,7 @@ python -m pytest test_client.py  # Validate your understanding
 ```
 
 ### Self-Assessment Checklist
+
 - [ ] I understand atomic agent architecture principles
 - [ ] I can build modular, composable components
 - [ ] I can assemble components into integrated systems
@@ -563,6 +566,7 @@ python -m pytest test_client.py  # Validate your understanding
 ---
 
 ### **Choose Your Next Path:**
+
 - **[Module A: Advanced Composition Patterns →](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Sophisticated pipeline orchestration & dynamic assembly
 - **[Module B: Enterprise Modular Systems →](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production-scale atomic systems & multi-tenant architectures
 - **[📝 Test Your Knowledge →](Session6_Test_Solutions.md)** - Comprehensive quiz
@@ -680,7 +684,7 @@ D) Better error handling
 
 **Previous:** [Session 5 - PydanticAI Type-Safe Agents](Session5_PydanticAI_Type_Safe_Agents.md)
 
-### Optional Deep Dive Modules:
+### Optional Deep Dive Modules
 
 - 🔬 **[Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Advanced patterns
 - 🏭 **[Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production systems
