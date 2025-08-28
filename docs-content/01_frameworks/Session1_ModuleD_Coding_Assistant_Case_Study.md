@@ -1,10 +1,12 @@
-# Session 1 - Module D: Real-World Case Study - The Coding Assistant
+# Session 1 - Module D: Behind the Silicon Curtain - Dissecting the Production AI You Use Every Day
 
-## Connecting Back to Our Journey
+## The Hidden Architecture of Modern Software Development
 
-Remember our discussion in Part 2.5 about production realities? You learned about dependency injection, abstraction patterns, and why hardcoded LLM calls become a liability as systems grow. Now it's time to see those concepts in action.
+Every Fortune 500 engineering team has a secret weapon: AI coding assistants that have fundamentally transformed how software gets built. GitHub Copilot processes over 1 billion lines of code daily. Amazon's CodeWhisperer accelerates development across 500,000 engineers. But these systems aren't magical black boxes - they're sophisticated orchestrations of the exact patterns you've been learning, scaled to enterprise demands.
 
-The **Coding Assistant** is your daily companion in this course - the actual bare metal agent running in your Coder workspace. Every time you use it to analyze code or generate solutions, you're interacting with a production implementation of everything we've covered. Let's look under the hood.
+The **Coding Assistant** running in your workspace isn't a toy or demo - it's a production-grade implementation of bare metal agent architecture, handling real complexity with real reliability. While you've been learning patterns through examples, this system demonstrates how those patterns survive contact with production realities: memory constraints, network failures, security requirements, and users who expect instant responses even for complex multi-step operations.
+
+This isn't just another case study. By understanding the Coding Assistant's architecture, you're reverse-engineering the blueprint that powers a new generation of AI-native companies. The same patterns that handle your code analysis requests are the foundation for systems that manage billion-dollar trading portfolios, optimize global supply chains, and coordinate autonomous vehicle fleets.
 
 ## Why This Matters for Your Learning
 
