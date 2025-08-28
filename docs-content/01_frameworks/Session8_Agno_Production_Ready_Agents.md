@@ -42,7 +42,7 @@ When Netflix serves 200 million users simultaneously, when Uber coordinates mill
 That's the Agno philosophy: production-grade by design, not by accident.
 
 ![Agno Agent Architecture](images/agno-agent.png)
-This diagram reveals Agno's secret weapon: every component is designed with the assumption that something will go wrong. Monitoring isn't an afterthought - it's the nervous system. Storage isn't just persistence - it's your lifeline when everything else fails.
+*This diagram reveals Agno's secret weapon: every component is designed with the assumption that something will go wrong. Monitoring isn't an afterthought - it's the nervous system. Storage isn't just persistence - it's your lifeline when everything else fails.*
 
 Here's how Agno turns development prototypes into production powerhouses:
 
@@ -139,7 +139,7 @@ In 2008, a single unmonitored database query brought down an entire airline rese
 Today's production systems don't just need monitoring - they need prophecy. They need to predict failure before it happens and heal themselves before you even know there's a problem:
 
 ![Agno Telemetry & Debugging](images/agno-telemetry-debugging.png)
-This diagram shows Agno's telemetry and debugging capabilities with real-time metrics, distributed tracing, and performance monitoring.
+*This diagram shows Agno's telemetry and debugging capabilities with real-time metrics, distributed tracing, and performance monitoring.*
 
 Set up comprehensive monitoring with structured logging, Prometheus metrics, and agent-level monitoring:
 
