@@ -1,9 +1,7 @@
 # Session 6 - Module A: Advanced Composition Patterns
-## *How Amazon Revolutionized Global Logistics with $5.7B Savings Through Intelligent Agent Orchestration*
 
-**Prerequisites**: [Session 6 Core Section Complete](Session6_Atomic_Agents_Modular_Architecture.md)
-
----
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 6 core content first.
 
 ## The Amazon Supply Chain Transformation
 
