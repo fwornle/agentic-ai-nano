@@ -9,7 +9,6 @@ A) Read and Act
 B) Retrieve and Act  
 C) Reflect and Act  
 D) Reasoning and Acting ✅  
-### Correct Answer: D) Reasoning and Acting
 
 **Explanation:** ReAct stands for Reasoning and Acting, representing the iterative cycle of thinking about what to do and then taking action.
 
@@ -20,7 +19,6 @@ A) Faster execution
 B) Simpler implementation  
 C) Transparent reasoning with step-by-step thought processes ✅  
 D) Lower cost  
-### Correct Answer: C) Transparent reasoning with step-by-step thought processes
 
 **Explanation:** ReAct provides transparency by showing the agent's reasoning process step-by-step, making it easier to understand and debug agent behavior.
 
@@ -31,7 +29,6 @@ A) Execute agent logic
 B) Manage user interface  
 C) Store data  
 D) Coordinate message passing between agents ✅  
-### Correct Answer: D) Coordinate message passing between agents
 
 **Explanation:** The Communication Hub manages message routing and coordination between agents, enabling structured multi-agent communication.
 
@@ -42,7 +39,6 @@ A) User intervention
 B) Fixed number of steps  
 C) When final_answer action is reached or max steps exceeded ✅  
 D) Random timing  
-### Correct Answer: C) When final_answer action is reached or max steps exceeded
 
 **Explanation:** The ReAct loop terminates when the agent reaches a final_answer action or when the maximum number of reasoning steps is exceeded.
 
@@ -53,7 +49,6 @@ A) Random selection
 B) Voting mechanisms and consensus algorithms ✅  
 C) Manager override  
 D) First agent decides  
-### Correct Answer: B) Voting mechanisms and consensus algorithms
 
 **Explanation:** Multi-agent consensus is achieved through structured voting mechanisms and consensus algorithms that aggregate agent opinions.
 
@@ -64,7 +59,6 @@ A) Faster execution
 B) Lower resource usage  
 C) Simpler implementation  
 D) Clear command structure with specialized delegation ✅  
-### Correct Answer: D) Clear command structure with specialized delegation
 
 **Explanation:** Hierarchical patterns provide clear command structures with specialized agents handling specific tasks under coordinator oversight.
 
@@ -75,7 +69,6 @@ A) Random assignment
 B) Manager assignment  
 C) Based on agent capabilities and bid evaluation ✅  
 D) First-come first-served  
-### Correct Answer: C) Based on agent capabilities and bid evaluation
 
 **Explanation:** Auction-based coordination allocates tasks by evaluating agent capabilities and bids, ensuring optimal task-agent matching.
 
@@ -86,7 +79,6 @@ A) Simple task execution
 B) Error handling  
 C) Breaking complex tasks into manageable hierarchies ✅  
 D) Agent communication  
-### Correct Answer: C) Breaking complex tasks into manageable hierarchies
 
 **Explanation:** HTN planning decomposes complex tasks into hierarchical subtasks, making them more manageable and executable by specialized agents.
 
@@ -97,7 +89,6 @@ A) Uses different algorithms
 B) Plans are created faster  
 C) No difference  
 D) Adapts plans during execution based on changing conditions ✅  
-### Correct Answer: D) Adapts plans during execution based on changing conditions
 
 **Explanation:** Dynamic replanning continuously adapts the plan during execution based on changing conditions and feedback, unlike static planning.
 
@@ -108,7 +99,6 @@ A) Continuous learning and improvement from experience ✅
 B) Simpler deployment  
 C) Faster execution  
 D) Lower costs  
-### Correct Answer: A) Continuous learning and improvement from experience
 
 **Explanation:** Reflection patterns enable agents to learn from their experiences and continuously improve their performance over time.
 

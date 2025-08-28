@@ -9,8 +9,7 @@ Imagine a world where every AI agent speaks the same language. Where your Claude
 **What you'll master:** By the end of this session, you'll understand how these protocols eliminate the integration nightmare that has plagued AI development, and why they represent the foundation of truly scalable AI ecosystems.
 
 ![MCP Architecture Overview](images/mcp-overview.png)
-
-### Figure 1: Model Context Protocol ecosystem showing how MCP standardizes the connection between AI models and external data sources, eliminating the need for custom integrations
+*Figure 1: Model Context Protocol ecosystem showing how MCP standardizes the connection between AI models and external data sources, eliminating the need for custom integrations*
 
 ---
 
@@ -63,8 +62,7 @@ async def query_database(query: str) -> dict:
 - Authentication and transport handled by MCP protocol
 
 ![M×N Problem vs MCP Solution](images/mcp-solution.png)
-
-### Figure 2: MCP transforms the M×N integration problem into a manageable M+N pattern
+*Figure 2: MCP transforms the M×N integration problem into a manageable M+N pattern*
 
 ### MCP Adoption
 
@@ -107,8 +105,7 @@ class ProcessingAgent:
 - Local-first design enables offline operation
 
 ![ACP Architecture Overview](images/acp-architecture-overview.png)
-
-### Figure 3: ACP enables local-first agent communication without cloud dependencies
+*Figure 3: ACP enables local-first agent communication without cloud dependencies*
 
 ### ACP vs Other Protocols
 
@@ -163,8 +160,7 @@ The magic of A2A lies in its simplicity. Here's how an agent from Company A can 
 - Cross-organizational communication via HTTPS with authentication
 
 ![A2A Communication Architecture](images/a2a-communication-architecture.png)
-
-### Figure 4: A2A enables secure agent collaboration across organizational boundaries
+*Figure 4: A2A enables secure agent collaboration across organizational boundaries*
 
 ### Enterprise A2A Workflows
 
@@ -264,8 +260,7 @@ stdio://python weather_server.py
 - View real-time responses with syntax highlighting
 
 ![MCP Inspector Interface](images/mcp-inspector-interface.png)
-
-### Figure 5: MCP Inspector provides interactive testing with auto-generated forms and real-time feedback
+*Figure 5: MCP Inspector provides interactive testing with auto-generated forms and real-time feedback*
 
 ### Production Testing Pattern
 
