@@ -655,8 +655,7 @@ Michael Jordan didn't become the greatest basketball player by accident. After e
 AI agents can follow the same path from competence to excellence through systematic reflection:
 
 ![Reflection Pattern](images/reflection-pattern.png)
-
-### This visualization shows the reflection and learning cycle where agents analyze their execution experiences, identify patterns, assess performance trends, and adapt their strategies. The diagram demonstrates how continuous learning improves agent performance over time
+*shows the reflection and learning cycle where agents analyze their execution experiences, identify patterns, assess performance trends, and adapt their strategies. The diagram demonstrates how continuous learning improves agent performance over time*
 
 **File**: [`src/session9/reflection_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reflection_engine.py) - Learning from execution
 
