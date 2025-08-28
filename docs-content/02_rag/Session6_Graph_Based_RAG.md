@@ -4,7 +4,7 @@ In Sessions 1-5, you built sophisticated vector-based RAG systems with intellige
 
 This session transforms your RAG system from similarity matching to knowledge reasoning. You'll build graph-based architectures that capture entities, relationships, and hierarchical knowledge structures, enabling multi-hop reasoning that connects disparate information through logical pathways. The goal is moving from "find similar documents" to "understand and traverse knowledge relationships."
 
-### Optional Deep Dive Modules
+## Optional Deep Dive Modules
 - **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
 - **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise-ready GraphRAG implementation
 
@@ -61,7 +61,7 @@ NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pa
 
 ### The Three-Stage NodeRAG Processing Pipeline
 
-### Stage 1: Graph Decomposition
+#### Stage 1: Graph Decomposition
 
 NodeRAG performs multi-granularity decomposition that creates specialized node types based on knowledge structure:
 
@@ -85,7 +85,7 @@ def noderag_decomposition(document):
     }
 ```
 
-### Stage 2: Graph Augmentation
+#### Stage 2: Graph Augmentation
 
 This stage builds the heterogeneous graph structure by creating specialized connections between different node types:
 
@@ -124,7 +124,7 @@ Next, we integrate HNSW (Hierarchical Navigable Small World) similarity edges di
     )
 ```
 
-### Stage 3: Graph Enrichment
+#### Stage 3: Graph Enrichment
 
 The final stage builds reasoning pathways using Personalized PageRank to identify semantically important nodes and enable coherent multi-hop traversal:
 
@@ -172,7 +172,7 @@ Next, we construct logical reasoning pathways using the PageRank scores to guide
     }
 ```
 
-### Technical Algorithms: Personalized PageRank and HNSW Integration
+## Technical Algorithms: Personalized PageRank and HNSW Integration
 
 ### Personalized PageRank for Semantic Traversal
 
@@ -395,7 +395,7 @@ Finally, let's implement the type compatibility logic:
         return type2 in compatibility_matrix.get(type1, [])
 ```
 
-### Bridge to Session 7: Agentic Reasoning
+## Bridge to Session 7: Agentic Reasoning
 
 NodeRAG's heterogeneous graph architecture provides the structured foundation for advanced reasoning capabilities. Session 7 will show how to build agents that actively reason through these graph structures.
 
@@ -639,7 +639,7 @@ Now let's implement the main extraction method:
         }
 ```
 
-### Step 1: Three-Stage Processing Implementation
+#### Step 1: Three-Stage Processing Implementation
 ```python
     def _decomposition_stage(self, documents: List[str], config: Dict) -> Dict[str, Any]:
         """Stage 1: Multi-granularity decomposition with specialized node creation."""
@@ -738,7 +738,7 @@ Now let's implement the main extraction method:
         }
 ```
 
-### Step 2: Personalized PageRank for Semantic Traversal
+#### Step 2: Personalized PageRank for Semantic Traversal
 
 
 ```python
@@ -852,7 +852,7 @@ class PersonalizedPageRankProcessor:
         return pathway
 ```
 
-### Step 3: HNSW Similarity Edges for High-Performance Retrieval
+#### Step 3: HNSW Similarity Edges for High-Performance Retrieval
 
 
 ```python
@@ -1067,7 +1067,7 @@ class Neo4jGraphManager:
         return storage_result
 ```
 
-### Step 4: Batch Entity Storage
+#### Step 4: Batch Entity Storage
 ```python
     def _store_entities_batch(self, session, entities: Dict[str, Any],
                              batch_size: int = 1000) -> int:
@@ -1298,7 +1298,7 @@ class CodeGraphRAG:
         }
 ```
 
-### Step 5: Python AST Analysis
+#### Step 5: Python AST Analysis
 ```python
     def _analyze_python_file(self, file_path: str, config: Dict) -> Dict[str, Any]:
         """Analyze Python file using AST parsing."""
@@ -1396,7 +1396,7 @@ class CodeGraphRAG:
         }
 ```
 
-### Step 6: Call Graph Construction
+#### Step 6: Call Graph Construction
 ```python
     def _build_call_graph(self, entities: Dict[str, Any],
                          relationships: List[Dict]) -> nx.DiGraph:
@@ -1634,7 +1634,7 @@ class GraphTraversalEngine:
         }
 ```
 
-### Step 7: Semantic-Guided Traversal
+#### Step 7: Semantic-Guided Traversal
 ```python
     def _semantic_guided_traversal(self, start_entity: str, query: str,
                                   config: Dict) -> List[List[str]]:
@@ -1736,7 +1736,7 @@ class GraphTraversalEngine:
             return semantic_paths
 ```
 
-### Step 8: Path Context Synthesis
+#### Step 8: Path Context Synthesis
 ```python
     def _extract_path_contexts(self, paths: List[Dict], query: str) -> List[Dict]:
         """Extract rich context from graph paths."""
@@ -2035,7 +2035,7 @@ class HybridGraphVectorRAG:
         }
 ```
 
-### Step 9: Adaptive Fusion Strategy
+#### Step 9: Adaptive Fusion Strategy
 
 ### Understanding Adaptive Selection
 
@@ -2629,7 +2629,7 @@ D) Simplifying the codebase
 
 **Previous:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
 
-### Optional Deep Dive Modules:
+## Optional Deep Dive Modules:
 - 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Complex graph traversal and reasoning patterns
 - 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise graph database deployment
 

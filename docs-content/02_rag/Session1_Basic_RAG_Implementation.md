@@ -31,7 +31,6 @@ The configuration patterns we establish here directly address the architectural 
 ### Production Environment Configuration
 
 ```python
-
 # requirements.txt - 2024 Production Stack
 
 langchain==0.1.0
@@ -48,7 +47,6 @@ numpy==1.24.3
 
 ### Project Structure Setup:
 ```bash
-
 # Production-Ready Project Structure
 
 mkdir production-rag-system
@@ -59,7 +57,6 @@ touch .env README.md requirements.txt
 
 ### Configuration Management:
 ```python
-
 # src/config.py - Production Configuration Pattern
 
 import os
@@ -85,7 +82,7 @@ class RAGConfig:
     LLM_MODEL = "gpt-3.5-turbo"
 ```
 
-### Code Explanation:
+##### Code Explanation:
 - **Line 6-7**: Environment variable loading for secure API key management
 - **Line 12-14**: Configurable chunking parameters based on 2024 research findings
 - **Line 16-18**: Persistent ChromaDB storage for production deployments
@@ -96,7 +93,6 @@ class RAGConfig:
 Before proceeding, verify your setup works correctly:
 
 ```python
-
 # tests/test_setup.py - Environment Validation
 
 from src.config import RAGConfig
@@ -139,7 +135,6 @@ The document loader you're about to build addresses every major ingestion challe
 The document loader handles multiple formats with error resilience and metadata tracking for source attribution.
 
 ```python
-
 # src/document_loader.py - Production Document Loader
 
 from typing import List, Dict, Any
@@ -323,7 +318,6 @@ This isn't just about splitting text. The chunking strategies you implement here
 LLMs operate on tokens, not characters. Accurate token measurement ensures chunks fit within context windows:
 
 ```python
-
 # src/text_splitter.py - Advanced Chunking System
 
 from typing import List
@@ -345,7 +339,7 @@ class AdvancedTextSplitter:
         return len(self.encoding.encode(text))
 ```
 
-### Code Explanation
+#### Code Explanation
 
 - **Line 9-10**: Configurable chunking parameters based on 2024 research
 - **Line 11**: Token encoder ensures compatibility with target LLM
@@ -507,7 +501,6 @@ ChromaDB integration isn't just about storing embeddings - it's about creating a
 ### Production Vector Store Architecture
 
 ```python
-
 # src/vector_store.py - Enterprise Vector Storage
 
 from typing import List, Optional, Dict, Any
@@ -757,7 +750,6 @@ This integration represents the culmination of everything you learned in Session
 ### Core RAG System Implementation
 
 ```python
-
 # src/rag_system.py - Production RAG System
 
 from typing import List, Dict, Any, Optional
@@ -991,7 +983,6 @@ Sophisticated response handling for production systems:
 ### Interactive RAG Interface with Monitoring
 
 ```python
-
 # src/interactive_rag.py - Production Interface
 
 from src.rag_system import ProductionRAGSystem
@@ -1133,7 +1124,6 @@ This isn't academic testing - it's production validation that answers the critic
 ### Comprehensive Evaluation Framework
 
 ```python
-
 # tests/evaluation_framework.py - Production Testing
 
 import time
@@ -1436,7 +1426,6 @@ if __name__ == "__main__":
 ### Implementation Guide
 
 ```python
-
 # Your Implementation Template
 
 class DomainSpecificRAG(ProductionRAGSystem):
