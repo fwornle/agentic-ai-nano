@@ -6,7 +6,7 @@ Today's AI agents are closing million-dollar deals, debugging production systems
 
 Modern AI development has evolved from simple prompt-response interactions to sophisticated agent systems that can reason, use tools, and collaborate. This session covers the five core patterns that power every production agent system and compares the leading frameworks used to implement them.
 
-![Agent Evolution Overview](images/agent-evolution-overview.png)
+![Agent Evolution Overview](images/overview-llm-patterns.png)
 
 ---
 
