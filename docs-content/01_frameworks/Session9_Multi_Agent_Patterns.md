@@ -27,8 +27,7 @@ Remember the last time you watched a master chess player think through a complex
 The ReAct pattern brings this same transparent thinking to AI agents. Instead of mysterious black-box decisions, you get to see inside the mind of artificial intelligence as it works through problems step by step:
 
 ![ReAct Pattern](images/react-pattern.png)
-
-### This diagram illustrates the ReAct (Reasoning + Acting) pattern flow, showing the iterative cycle of thought, action, and observation that enables transparent reasoning. The pattern demonstrates how agents can break down complex problems into manageable steps with clear decision points
+*This diagram illustrates the ReAct (Reasoning + Acting) pattern flow, showing the iterative cycle of thought, action, and observation that enables transparent reasoning. The pattern demonstrates how agents can break down complex problems into manageable steps with clear decision points*
 
 **File**: [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - Core ReAct implementation
 
@@ -212,8 +211,7 @@ When the International Space Station needs to dock with a supply ship, mission c
 Multi-agent systems face the same challenge on a digital scale - how do you get multiple intelligent agents to work together flawlessly without stepping on each other's toes?
 
 ![Multi-Agent Pattern](images/multi-agent-pattern.png)
-
-### This diagram depicts various multi-agent coordination patterns including hierarchical delegation, consensus voting, and peer-to-peer communication. The visualization shows how agents collaborate through structured message passing and coordination protocols
+*This diagram depicts various multi-agent coordination patterns including hierarchical delegation, consensus voting, and peer-to-peer communication. The visualization shows how agents collaborate through structured message passing and coordination protocols*
 
 **File**: [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Communication framework
 
@@ -479,8 +477,7 @@ How do you eat an elephant? One bite at a time. How do you build a skyscraper? O
 The greatest achievements in human history succeeded through hierarchical decomposition - breaking massive, seemingly impossible goals into manageable, achievable steps. HTN planning brings this same strategic thinking to AI agents:
 
 ![Planning Pattern](images/planning-pattern.png)
-
-### This diagram illustrates Hierarchical Task Network (HTN) planning methodology, showing how complex tasks are decomposed into smaller, manageable subtasks. The visualization demonstrates the hierarchical breakdown from abstract goals to concrete, executable actions
+*This diagram illustrates Hierarchical Task Network (HTN) planning methodology, showing how complex tasks are decomposed into smaller, manageable subtasks. The visualization demonstrates the hierarchical breakdown from abstract goals to concrete, executable actions*
 
 **File**: [`src/session9/planning_systems.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/planning_systems.py) - HTN planning implementation
 
