@@ -1,6 +1,8 @@
 # Session 6: Graph-Based RAG (GraphRAG)
 
-GraphRAG extends traditional RAG by building structured knowledge representations that capture entities, relationships, and hierarchies, enabling sophisticated multi-hop reasoning and comprehensive information retrieval.
+In Sessions 1-5, you built sophisticated vector-based RAG systems with intelligent chunking, optimized search, query enhancement, and comprehensive evaluation. But when users ask complex questions like "What technologies do companies that partner with Apple use in automotive manufacturing?", you discover vector RAG's fundamental limitation: it finds similar content, but can't reason about relationships between entities.
+
+This session transforms your RAG system from similarity matching to knowledge reasoning. You'll build graph-based architectures that capture entities, relationships, and hierarchical knowledge structures, enabling multi-hop reasoning that connects disparate information through logical pathways. The goal is moving from "find similar documents" to "understand and traverse knowledge relationships."
 
 ### Optional Deep Dive Modules
 - **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
@@ -8,7 +10,9 @@ GraphRAG extends traditional RAG by building structured knowledge representation
 
 ![RAG Architecture Overview](images/RAG-overview.png)
 
-Traditional vector RAG finds similar content but struggles with complex relationships and multi-hop reasoning. GraphRAG builds structured knowledge representations that capture entities, relationships, and hierarchies, enabling queries like "find all companies that partnered with Apple's suppliers in the automotive sector."
+The key insight is that knowledge isn't just about content similarity – it's about the relationships between concepts, entities, and facts. A question about Apple's automotive partnerships requires understanding: (1) who Apple partners with, (2) which of those partners work in automotive, (3) what technologies those automotive partners use. Vector RAG can find documents about each piece, but can't connect them logically.
+
+GraphRAG solves this by representing knowledge as a graph where nodes are entities/concepts and edges are relationships, enabling traversal through logical reasoning pathways.
 
 ## NodeRAG Architecture
 
@@ -18,7 +22,9 @@ NodeRAG uses specialized node types and heterogeneous graph structures to enable
 
 ## Part 1: NodeRAG - Structured Brain Architecture
 
-Traditional RAG systems suffer from fragmented retrieval when handling complex queries like "What technologies do companies that Apple partners with use in automotive manufacturing?" NodeRAG solves this with specialized node types and reasoning pathways.
+The challenge with vector RAG is that it treats all content uniformly – a company name gets the same representation type as a concept or relationship. But knowledge has inherent structure: entities have attributes, relationships have directionality, and concepts have hierarchies. NodeRAG addresses this by creating specialized node types that preserve the semantic structure of different knowledge components.
+
+This isn't just theoretical improvement – it enables reasoning capabilities that are impossible with flat vector representations.
 
 ```
 Traditional RAG: Document → Chunks → Uniform Embeddings → Similarity Search
@@ -395,11 +401,13 @@ NodeRAG's heterogeneous graph architecture provides the structured foundation fo
 
 ---
 
-## Part 2: Traditional GraphRAG Implementation
+## Part 2: Traditional GraphRAG Implementation - Building the Foundation
 
 ### Knowledge Graph Construction from Documents
 
-Now let's implement traditional GraphRAG techniques alongside NodeRAG concepts. Understanding both approaches gives you flexibility in choosing the right method for different use cases.
+Before implementing advanced NodeRAG architectures, it's essential to understand traditional GraphRAG approaches. Think of traditional GraphRAG as the foundation upon which more sophisticated graph reasoning is built. While NodeRAG provides specialized node types for complex reasoning, traditional GraphRAG establishes the core entity-relationship extraction and graph construction techniques that power all graph-based knowledge systems.
+
+Understanding both approaches gives you the flexibility to choose the right level of complexity for your specific use case.
 
 ### Traditional GraphRAG: Foundational Entity-Relationship Extraction
 
@@ -1188,11 +1196,13 @@ class Neo4jGraphManager:
 
 ---
 
-## Part 3: Code GraphRAG Implementation
+## Part 3: Code GraphRAG Implementation - Understanding Software Knowledge
 
 ### **AST-Based Code Analysis**
 
-Build specialized GraphRAG systems for code repositories:
+Traditional GraphRAG works well for general documents, but code repositories require specialized understanding. Code has unique relationship patterns: functions call other functions, classes inherit from base classes, modules import dependencies, and variables have scope relationships. A code-specific GraphRAG system needs to understand these programming language semantics to enable queries like "show me all functions that depend on this deprecated API" or "what would break if I modify this class interface?"
+
+This specialized approach transforms code repositories from file collections into navigable knowledge graphs that understand software architecture.
 
 ```python
 
@@ -1463,11 +1473,15 @@ class CodeGraphRAG:
 
 ---
 
-## Part 4: Graph Traversal and Multi-Hop Reasoning
+## Part 4: Graph Traversal and Multi-Hop Reasoning - Connecting the Dots
 
 ### **Intelligent Graph Traversal**
 
+Building knowledge graphs is only half the challenge – the real power emerges in traversal algorithms that can follow logical reasoning pathways to connect disparate information. While vector RAG performs one-hop similarity searches, graph traversal enables multi-hop reasoning that answers complex questions by following relationship chains through the knowledge structure.
+
 ### The Power of Multi-Hop Reasoning
+
+Consider the query "What security vulnerabilities affect systems used by Apple's automotive partners?" This requires: (1) finding Apple's partners, (2) identifying which work in automotive, (3) determining their technology systems, (4) checking for security vulnerabilities. Graph traversal makes this reasoning path explicit and traceable.
 
 This is where GraphRAG truly shines compared to vector search. Consider the query: "What technologies do Apple's automotive partners use?" Traditional RAG would search for:
 1. Documents about Apple
