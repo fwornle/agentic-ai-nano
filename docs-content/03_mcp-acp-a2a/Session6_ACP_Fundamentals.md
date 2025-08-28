@@ -717,7 +717,7 @@ D) To reduce development costs
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 5 - Secure MCP Server](Session5_Secure_MCP_Server.md)
 

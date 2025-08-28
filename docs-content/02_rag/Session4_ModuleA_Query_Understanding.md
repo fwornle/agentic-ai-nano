@@ -397,7 +397,7 @@ D) It reduces memory usage
 
 [**🗂️ View Test Solutions →**](Session4_ModuleA_Test_Solutions.md)
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 

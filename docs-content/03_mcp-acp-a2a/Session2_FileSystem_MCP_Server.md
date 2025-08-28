@@ -1242,7 +1242,7 @@ async def move_file(source: str, destination: str, overwrite: bool = False) -> D
 
 ---
 
-## Multiple Choice Test - Session 2
+## 📝 Multiple Choice Test - Session 2
 
 Test your understanding of secure file system implementation and MCP security best practices with this comprehensive assessment covering sandboxing, validation, and production security considerations.
 
@@ -1310,7 +1310,7 @@ D) Automatic file compression
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 1 - Basic MCP Server](Session1_Basic_MCP_Server.md)
 

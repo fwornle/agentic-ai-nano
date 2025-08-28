@@ -667,7 +667,7 @@ python integration_patterns.py     # Cloud integration
 
 ---
 
-## Multiple Choice Test - Session 7
+## 📝 Multiple Choice Test - Session 7
 
 Test your understanding of Google's ADK enterprise agent development.
 
@@ -737,7 +737,7 @@ D) On-premises only
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 6 - Atomic Agents Modular Architecture](Session6_Atomic_Agents_Modular_Architecture.md)
 

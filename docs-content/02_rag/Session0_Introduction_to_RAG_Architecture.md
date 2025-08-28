@@ -935,7 +935,7 @@ The next session builds on these foundations with hands-on implementation of a c
 
 ---
 
-## Multiple Choice Test - Session 0
+## 📝 Multiple Choice Test - Session 0
 
 Test your understanding of RAG architecture fundamentals:
 
@@ -1003,7 +1003,7 @@ D) Basic similarity matching with cosine distance
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Module 2: RAG Architecture](index.md) (Introduction)  
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)

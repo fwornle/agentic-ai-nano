@@ -1,6 +1,6 @@
 # Session 3: LangChain MCP Integration - Test Solutions
 
-## Multiple Choice Test
+## 📝 Multiple Choice Test
 
 **Question 1:** What is the primary advantage of using LangChain MCP adapters?  
 

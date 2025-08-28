@@ -1079,7 +1079,7 @@ D) System shutdown
 
 [**🗂️ View Test Solutions →**](Session10_Test_Solutions.md)
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 9 - Multi-Agent Patterns](Session9_Multi_Agent_Patterns.md)
 

@@ -898,7 +898,7 @@ python planning_systems.py               # HTN planning
 
 ---
 
-## Multiple Choice Test - Session 9
+## 📝 Multiple Choice Test - Session 9
 
 Test your understanding of multi-agent patterns and coordination strategies.
 
@@ -966,7 +966,7 @@ D) Simpler deployment
 
 [**🗂️ View Test Solutions →**](Session9_Test_Solutions.md)
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 8 - Agno Production Ready Agents](Session8_Agno_Production_Ready_Agents.md)
 

@@ -9,7 +9,7 @@ This final session transforms your RAG system from sophisticated prototype to en
 - 🔬 **[Module A: Advanced Production Patterns](Session9_ModuleA_Advanced_Production.md)** - Multi-cluster deployments, ML-based scaling, advanced monitoring
 - 🏭 **[Module B: Enterprise Integration Architectures](Session9_ModuleB_Enterprise_Architecture.md)** - Zero-trust security, governance, CI/CD
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 8 - MultiModal Advanced RAG](Session8_MultiModal_Advanced_RAG.md)  
 **Next:** [Module 3 - MCP, ACP & A2A →](../03_mcp-acp-a2a/index.md)
@@ -2260,7 +2260,7 @@ Congratulations on mastering production RAG systems! You're now equipped to buil
 
 ---
 
-## Multiple Choice Test - Session 9
+## 📝 Multiple Choice Test - Session 9
 
 Test your understanding of production RAG deployment and enterprise integration:
 

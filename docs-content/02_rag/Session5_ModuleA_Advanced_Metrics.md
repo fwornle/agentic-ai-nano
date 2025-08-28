@@ -185,7 +185,7 @@ D) User interface quality
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 ### Related Modules
 

@@ -389,7 +389,7 @@ stdio://python weather_server.py
 
 ---
 
-## Multiple Choice Test - Session 0
+## 📝 Multiple Choice Test - Session 0
 
 **Question 1:** What is the primary purpose of the Model Context Protocol (MCP)?  
 A) To enable direct communication between AI agents  
@@ -455,7 +455,7 @@ D) Only cloud service providers
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Module 3: MCP, ACP & A2A](index.md) (Introduction)  
 **Next:** [Session 1 - Building Your First MCP Server →](Session1_Basic_MCP_Server.md)

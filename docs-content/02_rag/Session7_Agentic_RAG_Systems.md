@@ -2950,7 +2950,7 @@ class ProductionReasoningAugmentedRAG:
 4. **Tool Integration**: External API and database integration
 5. **Multi-Agent Orchestration**: Collaborative agent patterns
 
-## Multiple Choice Test - Session 7
+## 📝 Multiple Choice Test - Session 7
 
 Test your understanding of agentic RAG systems and intelligent automation techniques.
 
@@ -3018,7 +3018,7 @@ Session 8 expands agentic intelligence to handle multiple modalities - text, ima
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 6 - Graph-Based RAG (GraphRAG)](Session6_Graph_Based_RAG.md)
 

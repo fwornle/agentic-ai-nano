@@ -611,7 +611,7 @@ D) Processing time and resource utilization
 
 [**🗂️ View Test Solutions →**](Session2_ModuleA_Test_Solutions.md)
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
 

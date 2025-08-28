@@ -380,7 +380,7 @@ D) Reduces memory usage
 
 [**🗂️ View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
 
-## Navigation
+## 🧭 Navigation
 
 - [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 - [Module B - Enterprise Deployment](Session1_ModuleB_Enterprise_Deployment.md)
