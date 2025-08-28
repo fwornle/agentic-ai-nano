@@ -1,6 +1,6 @@
-# Session 5 - Module A: Advanced Evaluation Metrics - Beyond Standard Benchmarks
+# Session 5 - Module A: Advanced Metrics
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
+> **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 5 core content first.
 
 You've implemented comprehensive RAG evaluation with RAGAS metrics, A/B testing, and production monitoring in Session 5. But when you deploy to specialized domains like healthcare, finance, or scientific research, you discover that generic evaluation metrics miss domain-critical quality factors that matter for real-world adoption.

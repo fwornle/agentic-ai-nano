@@ -1,7 +1,9 @@
 # Session 5 - Module B: Enterprise PydanticAI
-## *How Microsoft Achieved 10X Performance Gains and $2.1B Cost Savings Through Strategic AI Architecture*
 
-**Prerequisites**: [Session 5 Core Section Complete](Session5_PydanticAI_Type_Safe_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 5 core content first.
+
+## Microsoft Performance Success
 
 ---
 

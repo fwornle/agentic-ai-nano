@@ -1,7 +1,9 @@
-# The Security Fortress: Enterprise Security & Compliance
-## *How JPMorgan Chase Prevented $2.8B in Cyber Losses Through Zero-Trust Mastery*
+# Session 8 - Module D: Security & Compliance
 
-**Prerequisites**: [Session 8 Core Section Complete](Session8_Agno_Production_Ready_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 8 core content first.
+
+## JPMorgan Zero-Trust Security
 
 ### The Cyber Attack That Shook Wall Street
 

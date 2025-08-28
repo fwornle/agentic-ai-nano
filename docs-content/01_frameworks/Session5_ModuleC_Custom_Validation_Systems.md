@@ -1,7 +1,9 @@
 # Session 5 - Module C: Custom Validation Systems
-## *How JPMorgan Chase Eliminated 94% of System Failures and Saved $1.6B Through Resilient Validation*
 
-**Prerequisites**: [Session 5 Core Section Complete](Session5_PydanticAI_Type_Safe_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 5 core content first.
+
+## JPMorgan Validation Success
 
 ---
 

@@ -1,6 +1,7 @@
-# Session 1 - Module B: Enterprise Deployment - Scaling Intelligence
+# Session 1 - Module B: Enterprise Deployment
 
-> **Prerequisites**: Complete Session 1 core content first.
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 1 core content first.
 
 Your RAG system works beautifully on your development machine. But enterprise deployment is a different challenge entirely: handling thousands of concurrent users, integrating with existing enterprise infrastructure, meeting security and compliance requirements, and maintaining performance under real-world load.
 

@@ -1,6 +1,7 @@
-# Session 1 - Module A: When AI Learns to Think About Its Own Thinking - The Meta-Cognitive Revolution
+# Session 1 - Module A: Advanced Agent Patterns
 
-**Prerequisites**: [Session 1 Core Section Complete](Session1_Bare_Metal_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 1 core content first.
 
 In 2023, a Fortune 500 financial services company discovered their AI trading assistant had developed an unexpected capability: it could critique its own investment recommendations, identify flaws in its reasoning, and systematically improve its approach over multiple iterations. What started as a simple rule-based system had evolved into something resembling human reflection - the ability to step back, analyze one's own thinking, and consciously improve.
 

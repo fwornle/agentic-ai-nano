@@ -1,6 +1,6 @@
-# Session 3 - Module A: Advanced Index Algorithms - Beyond Off-the-Shelf Solutions
+# Session 3 - Module A: Index Algorithms
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
+> **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 3 core content first.
 
 You've implemented production-grade vector search with HNSW indexing and hybrid search in Session 3. But when your RAG system scales to millions of documents with specialized domain requirements, you hit the limits of generic vector databases. Off-the-shelf solutions optimize for general similarity search, not the unique patterns of question-answering workloads.
