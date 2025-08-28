@@ -1584,36 +1584,31 @@ Node tolerations allow pods to remain on failing nodes for five minutes before e
 
 Test your understanding of production deployment strategies:
 
-**Question 1:** What components are included in the complete Kubernetes manifest package?
-
+**Question 1:** What components are included in the complete Kubernetes manifest package?  
 A) Only deployment and service  
 B) Deployment, service, configmap, ingress, HPA, and PDB  
 C) Just deployment and configmap  
 D) Only ingress and service  
 
-**Question 2:** What is the systematic approach followed in the deployment process?
-
+**Question 2:** What is the systematic approach followed in the deployment process?  
 A) Single-step deployment only  
 B) Manifest generation, cloud provisioning, Kubernetes deployment, monitoring, auto-scaling  
 C) Just resource creation and deployment  
 D) Only monitoring and scaling setup  
 
-**Question 3:** What happens when a deployment fails according to the error handling strategy?
-
+**Question 3:** What happens when a deployment fails according to the error handling strategy?  
 A) Manual intervention required  
 B) Automatic rollback is initiated to maintain system stability  
 C) System continues with partial deployment  
 D) Deployment is retried indefinitely  
 
-**Question 4:** What information is returned upon successful deployment?
-
+**Question 4:** What information is returned upon successful deployment?  
 A) Only the deployment status  
 B) Deployment ID, status, cloud resources, endpoints, and health check URLs  
 C) Just the service endpoint  
 D) Only monitoring configuration  
 
-**Question 5:** What is the purpose of Pod Disruption Budgets (PDB) in the deployment architecture?
-
+**Question 5:** What is the purpose of Pod Disruption Budgets (PDB) in the deployment architecture?  
 A) Increase deployment speed  
 B) Ensure production resilience during maintenance operations  
 C) Reduce resource usage  

@@ -278,12 +278,14 @@ The alert rule checking system evaluates each metric against configured alert co
                 await self._trigger_alert(rule, metric)
 ```
 
+```python
     async def _check_alert_rules(self, metric: AgentMetric):
         """Check if metric triggers any alert rules"""
         
         for rule in self.alert_rules:
             if await self._evaluate_alert_rule(rule, metric):
                 await self._trigger_alert(rule, metric)
+```
 
 Alert rule evaluation supports multiple condition types including threshold-based and rate-of-change detection:
 
@@ -1537,50 +1539,43 @@ You've now mastered production deployment patterns for multi-agent systems:
 
 Test your understanding of production multi-agent systems deployment and monitoring:
 
-**Question 1:** Which component in the DistributedMetricsCollector is responsible for storing recently collected metrics for quick access?
-
+**Question 1:** Which component in the DistributedMetricsCollector is responsible for storing recently collected metrics for quick access?  
 A) agent_registry  
 B) metrics_buffer  
 C) alert_handlers  
 D) collection_tasks
 
-**Question 2:** In Kubernetes deployment for multi-agent systems, what is the primary purpose of the HorizontalPodAutoscaler (HPA)?
-
+**Question 2:** In Kubernetes deployment for multi-agent systems, what is the primary purpose of the HorizontalPodAutoscaler (HPA)?  
 A) To manage network routing between agents  
 B) To automatically scale agent replicas based on resource utilization  
 C) To provide service discovery for agents  
 D) To handle agent authentication
 
-**Question 3:** What is the purpose of Istio's PeerAuthentication with STRICT mTLS mode in multi-agent systems?
-
+**Question 3:** What is the purpose of Istio's PeerAuthentication with STRICT mTLS mode in multi-agent systems?  
 A) To provide load balancing between agents  
 B) To enable automatic scaling of services  
 C) To enforce encrypted communication between all agent services  
 D) To monitor agent performance metrics
 
-**Question 4:** In the distributed tracing system, what does a "span" represent?
-
+**Question 4:** In the distributed tracing system, what does a "span" represent?  
 A) The total time for a complete multi-agent workflow  
 B) A single operation or task performed by an individual agent  
 C) The network bandwidth used between agents  
 D) The error rate of agent communications
 
-**Question 5:** Which Kubernetes resource type is used to expose agent pods to other services within the cluster?
-
+**Question 5:** Which Kubernetes resource type is used to expose agent pods to other services within the cluster?  
 A) Deployment  
 B) ConfigMap  
 C) Service  
 D) Secret
 
-**Question 6:** What is the primary benefit of using Istio's DestinationRule with outlier detection in multi-agent systems?
-
+**Question 6:** What is the primary benefit of using Istio's DestinationRule with outlier detection in multi-agent systems?  
 A) To encrypt data between agents  
 B) To automatically remove unhealthy agent instances from load balancing  
 C) To scale agent replicas automatically  
 D) To provide service discovery capabilities
 
-**Question 7:** In the agent health scoring algorithm, what happens when an agent has more than 85% memory usage?
-
+**Question 7:** In the agent health scoring algorithm, what happens when an agent has more than 85% memory usage?  
 A) The health score is reduced by 10 points  
 B) The health score is reduced by 25 points  
 C) The agent is automatically restarted  
@@ -1594,9 +1589,9 @@ D) An emergency alert is triggered
 
 ### Previous: [Session 9 Main](Session9_Multi_Agent_Patterns.md)
 
-### Optional Deep Dive Modules:
+### Optional Deep Dive Modules
+
 - **[🔬 Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)**
 - **[📡 Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)**
-
 
 **[Next: Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)**

@@ -126,7 +126,7 @@ This starts our agent with the essential configuration elements - the model sett
 
 Next, let's initialize the Vertex AI connection:
 
-```python        
+```python
         # Initialize Vertex AI
         vertexai.init(project=project_id, location=location)
 ```
@@ -135,7 +135,7 @@ This single line establishes our connection to Google's Vertex AI platform, enab
 
 Now let's set up the model and session management components:
 
-```python        
+```python
         # Model and session management
         self.model: Optional[GenerativeModel] = None
         self.chat_session: Optional[ChatSession] = None
@@ -147,7 +147,7 @@ These attributes create the foundation for our agent's conversational abilities.
 
 Finally, let's add comprehensive performance tracking:
 
-```python        
+```python
         # Performance tracking
         self.request_metrics = {
             "total_requests": 0,
@@ -295,7 +295,7 @@ This setup allows flexible streaming control - you can override the default conf
 
 Now let's add the request tracking and context enhancement:
 
-```python        
+```python
         try:
             self.request_metrics["total_requests"] += 1
             
@@ -307,7 +307,7 @@ We increment our request counter immediately and enhance the prompt with any pro
 
 Next, let's implement the dual response generation paths:
 
-```python            
+```python
             if use_streaming:
                 response = await self._generate_streaming_response(enhanced_prompt)
             else:
@@ -318,7 +318,7 @@ This branching logic allows the same method to handle both real-time streaming r
 
 Finally, let's add comprehensive metrics tracking and error handling:
 
-```python            
+```python
             # Update metrics
             response_time = (datetime.now() - start_time).total_seconds()
             self._update_metrics(response_time, success=True)
@@ -396,7 +396,7 @@ This method processes the list of function calls that Gemini wants to execute an
 
 Now let's iterate through each function call and extract the details:
 
-```python        
+```python
         for function_call in function_calls:
             function_name = function_call.name
             function_args = function_call.args
@@ -408,7 +408,7 @@ For each function call, we extract the function name and arguments, while tracki
 
 Let's implement the function execution with robust error handling:
 
-```python            
+```python
             if function_name in self.function_registry:
                 try:
                     # Execute registered function
@@ -424,7 +424,7 @@ This code checks if the function exists in our registry and handles both synchro
 
 Now let's create successful function responses:
 
-```python                    
+```python
                     # Create function response
                     function_response = Part.from_function_response(
                         name=function_name,
@@ -437,7 +437,7 @@ When function execution succeeds, we package the result in the format Gemini exp
 
 Finally, let's handle errors and unknown functions:
 
-```python                    
+```python
                 except Exception as e:
                     self.logger.error(f"Function {function_name} execution failed: {e}")
                     error_response = Part.from_function_response(
@@ -471,7 +471,7 @@ This setup ensures we handle cases where no context is provided gracefully while
 
 Let's add user identification context:
 
-```python        
+```python
         # Add user context
         if "user_id" in context:
             context_parts.append(f"User ID: {context['user_id']}")
@@ -481,7 +481,7 @@ User identification helps personalize responses and enables user-specific behavi
 
 Now let's include conversation history for continuity:
 
-```python        
+```python
         # Add conversation context
         if "conversation_history" in context:
             history = context["conversation_history"]
@@ -497,7 +497,7 @@ This conversation history provides continuity by including the last few exchange
 
 Let's add business-specific context:
 
-```python        
+```python
         # Add business context
         if "business_context" in context:
             business_ctx = context["business_context"]
@@ -511,7 +511,7 @@ Business context enables domain-specific responses, while temporal context helps
 
 Finally, let's format the enhanced prompt:
 
-```python        
+```python
         if context_parts:
             enhanced_prompt = f"""Context:
 {chr(10).join(context_parts)}
@@ -602,7 +602,7 @@ This setup creates unique function names by combining the service name with each
 
 Next, let's define the function parameter schema:
 
-```python            
+```python
             # Create function declaration
             parameters = {
                 "type": "object",
@@ -624,7 +624,7 @@ This parameter schema follows the OpenAPI specification, defining a flexible int
 
 Now let's create the wrapper function that bridges Gemini and the MCP service:
 
-```python            
+```python
             # Create wrapper function
             async def service_function(query: str, parameters: Dict[str, Any] = None):
                 return await self._call_mcp_service(service_name, capability, query, parameters or {})
@@ -634,7 +634,7 @@ This wrapper function encapsulates the service call logic, providing a clean int
 
 Finally, let's register the function with our Gemini agent:
 
-```python            
+```python
             self.gemini_agent.register_function(
                 name=function_name,
                 description=f"Use {service_name} service for {capability}",
@@ -665,7 +665,7 @@ This initial validation ensures we have a valid service client before attempting
 
 Now let's set up comprehensive orchestration tracking:
 
-```python        
+```python
         try:
             # Record orchestration attempt
             orchestration_record = {
@@ -681,7 +681,7 @@ This tracking record captures all the essential information about each service c
 
 Let's implement the actual service call:
 
-```python            
+```python
             # Call MCP service
             result = await service_client.call_tool(capability, {
                 "query": query,
@@ -693,7 +693,7 @@ This call combines the query with any additional parameters and invokes the spec
 
 Now let's handle successful execution:
 
-```python            
+```python
             orchestration_record["result"] = result
             orchestration_record["status"] = "success"
             
@@ -705,7 +705,7 @@ When the service call succeeds, we record the result and status, add the complet
 
 Finally, let's add robust error handling:
 
-```python            
+```python
         except Exception as e:
             error_result = {"error": str(e)}
             orchestration_record["result"] = error_result
@@ -745,7 +745,7 @@ This analysis prompt provides Gemini with clear instructions to analyze the user
 
 Next, let's get Gemini's service selection analysis:
 
-```python        
+```python
         service_plan = await self.gemini_agent.generate_response(analysis_prompt)
 ```
 
@@ -753,7 +753,7 @@ Gemini analyzes the user query against available service capabilities and return
 
 Now let's parse and execute the service plan:
 
-```python        
+```python
         try:
             # Parse service execution plan
             plan = json.loads(service_plan)
@@ -764,7 +764,7 @@ We parse the JSON response from Gemini and prepare to collect results from each 
 
 Let's implement the step-by-step execution:
 
-```python            
+```python
             # Execute services according to plan
             for step in plan.get("steps", []):
                 service_name = step.get("service")
@@ -785,7 +785,7 @@ This execution loop follows Gemini's plan precisely, calling each service with t
 
 Finally, let's return comprehensive results with fallback handling:
 
-```python            
+```python
             return {
                 "plan": plan,
                 "execution_results": execution_results,
@@ -880,7 +880,7 @@ This structure captures all essential information about a memory: the content it
 
 Next, let's add serialization capability for database storage:
 
-```python    
+```python
     def to_dict(self) -> Dict[str, Any]:
         return {
             "content": self.content,
@@ -897,7 +897,7 @@ This method converts the memory entry to a dictionary format suitable for JSON s
 
 Finally, let's add deserialization for loading from storage:
 
-```python    
+```python
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'MemoryEntry':
         return cls(
@@ -917,9 +917,10 @@ This class method reconstructs MemoryEntry objects from stored dictionary data, 
 
 Let's create the main memory management class:
 
+```python
 class AdvancedConversationMemory:
     """Advanced memory system with multiple memory types and persistence"""
-    
+
     def __init__(self, user_id: str, db_path: str = "agent_memory.db"):
         self.user_id = user_id
         self.db_path = db_path
@@ -1160,7 +1161,7 @@ This setup normalizes text to lowercase and creates word sets for comparison. Th
 
 Next, let's calculate the basic keyword overlap:
 
-```python        
+```python
         # Calculate word overlap
         overlap = len(query_words.intersection(content_words))
         relevance = overlap / len(query_words)
@@ -1170,7 +1171,7 @@ This calculates what percentage of query words appear in the memory content, pro
 
 Now let's add importance-based boosting:
 
-```python        
+```python
         # Boost relevance based on importance and recency
         importance_boost = memory.importance * 0.2
 ```
@@ -1179,7 +1180,7 @@ More important memories get a relevance boost, ensuring crucial information is p
 
 Let's add recency boosting for recent memories:
 
-```python        
+```python
         # Recency boost (memories from last 24 hours get boost)
         if datetime.now() - memory.timestamp < timedelta(hours=24):
             recency_boost = 0.1
@@ -1191,7 +1192,7 @@ Recent memories get a small boost since they're likely more relevant to current 
 
 Finally, let's combine all factors and ensure the score stays within bounds:
 
-```python        
+```python
         return min(relevance + importance_boost + recency_boost, 1.0)
 ```
 
@@ -1330,6 +1331,7 @@ D) Single-user support
 [**🗂️ View Test Solutions →**](Session7_ModuleA_Test_Solutions.md)
 
 ### Next Steps
+
 - **Continue to Module B**: [Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md) for production deployment patterns
 - **Return to Core**: [Session 7 Main](Session7_First_ADK_Agent.md)
 - **Advance to Session 8**: [Agno Production Ready Agents](Session8_Agno_Production_Ready_Agents.md)
@@ -1337,6 +1339,7 @@ D) Single-user support
 ---
 
 **🗂️ Source Files for Module A:**
+
 - `src/session7/advanced_gemini.py` - Sophisticated Gemini model integration
 - `src/session7/advanced_memory.py` - Production memory systems
 - `src/session7/mcp_orchestration.py` - Multi-service coordination patterns

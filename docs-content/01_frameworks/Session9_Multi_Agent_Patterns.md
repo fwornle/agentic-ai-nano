@@ -9,6 +9,7 @@ Welcome to the future of AI: where individual intelligence becomes collective ge
 ---
 
 ### Optional Deep Dive Modules
+
 - **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Byzantine fault tolerance & game theory
 - **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise deployment & monitoring
 
@@ -21,12 +22,13 @@ Welcome to the future of AI: where individual intelligence becomes collective ge
 
 ### Understanding ReAct - Making Intelligence Visible
 
-Remember the last time you watched a master chess player think through a complex position? They don't just move pieces - they narrate their reasoning, explore possibilities, test theories, and adjust their strategy based on what they discover. 
+Remember the last time you watched a master chess player think through a complex position? They don't just move pieces - they narrate their reasoning, explore possibilities, test theories, and adjust their strategy based on what they discover.
 
 The ReAct pattern brings this same transparent thinking to AI agents. Instead of mysterious black-box decisions, you get to see inside the mind of artificial intelligence as it works through problems step by step:
 
 ![ReAct Pattern](images/react-pattern.png)
-### This diagram illustrates the ReAct (Reasoning + Acting) pattern flow, showing the iterative cycle of thought, action, and observation that enables transparent reasoning. The pattern demonstrates how agents can break down complex problems into manageable steps with clear decision points.
+
+### This diagram illustrates the ReAct (Reasoning + Acting) pattern flow, showing the iterative cycle of thought, action, and observation that enables transparent reasoning. The pattern demonstrates how agents can break down complex problems into manageable steps with clear decision points
 
 **File**: [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - Core ReAct implementation
 
@@ -81,7 +83,8 @@ class BasicReActAgent:
         return self._format_solution()
 ```
 
-### Key Breakthrough Concepts:
+### Key Breakthrough Concepts
+
 1. **X-Ray Vision for AI**: Every thought step becomes visible and traceable - no more black boxes
 2. **The Scientific Method for Agents**: Hypothesize, test, observe, adjust, repeat
 3. **Self-Aware Intelligence**: Agents that know what they know and what they don't
@@ -209,7 +212,8 @@ When the International Space Station needs to dock with a supply ship, mission c
 Multi-agent systems face the same challenge on a digital scale - how do you get multiple intelligent agents to work together flawlessly without stepping on each other's toes?
 
 ![Multi-Agent Pattern](images/multi-agent-pattern.png)
-### This diagram depicts various multi-agent coordination patterns including hierarchical delegation, consensus voting, and peer-to-peer communication. The visualization shows how agents collaborate through structured message passing and coordination protocols.
+
+### This diagram depicts various multi-agent coordination patterns including hierarchical delegation, consensus voting, and peer-to-peer communication. The visualization shows how agents collaborate through structured message passing and coordination protocols
 
 **File**: [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Communication framework
 
@@ -475,7 +479,8 @@ How do you eat an elephant? One bite at a time. How do you build a skyscraper? O
 The greatest achievements in human history succeeded through hierarchical decomposition - breaking massive, seemingly impossible goals into manageable, achievable steps. HTN planning brings this same strategic thinking to AI agents:
 
 ![Planning Pattern](images/planning-pattern.png)
-### This diagram illustrates Hierarchical Task Network (HTN) planning methodology, showing how complex tasks are decomposed into smaller, manageable subtasks. The visualization demonstrates the hierarchical breakdown from abstract goals to concrete, executable actions.
+
+### This diagram illustrates Hierarchical Task Network (HTN) planning methodology, showing how complex tasks are decomposed into smaller, manageable subtasks. The visualization demonstrates the hierarchical breakdown from abstract goals to concrete, executable actions
 
 **File**: [`src/session9/planning_systems.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/planning_systems.py) - HTN planning implementation
 
@@ -653,7 +658,8 @@ Michael Jordan didn't become the greatest basketball player by accident. After e
 AI agents can follow the same path from competence to excellence through systematic reflection:
 
 ![Reflection Pattern](images/reflection-pattern.png)
-### This visualization shows the reflection and learning cycle where agents analyze their execution experiences, identify patterns, assess performance trends, and adapt their strategies. The diagram demonstrates how continuous learning improves agent performance over time.
+
+### This visualization shows the reflection and learning cycle where agents analyze their execution experiences, identify patterns, assess performance trends, and adapt their strategies. The diagram demonstrates how continuous learning improves agent performance over time
 
 **File**: [`src/session9/reflection_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reflection_engine.py) - Learning from execution
 
@@ -875,6 +881,7 @@ python planning_systems.py               # HTN planning
 ```
 
 ### Self-Assessment Checklist
+
 - [ ] I understand the ReAct pattern and transparent reasoning
 - [ ] I can implement basic multi-agent communication
 - [ ] I understand hierarchical planning concepts
@@ -899,91 +906,61 @@ python planning_systems.py               # HTN planning
 
 Test your understanding of multi-agent patterns and coordination strategies.
 
-### Question 1
-
-### What does "ReAct" stand for in the ReAct pattern?
-
+**Question 1:** What does "ReAct" stand for in the ReAct pattern?  
 A) Read and Act  
 B) Reasoning and Acting  
 C) Reflect and Act  
 D) Retrieve and Act  
 
-### Question 2
-
-### What is the primary benefit of the ReAct pattern over direct prompting?
-
+**Question 2:** What is the primary benefit of the ReAct pattern over direct prompting?  
 A) Faster execution  
 B) Transparent reasoning with step-by-step thought processes  
 C) Lower cost  
 D) Simpler implementation  
 
-### Question 3
-
-### In multi-agent systems, what is the purpose of a Communication Hub?
-
+**Question 3:** In multi-agent systems, what is the purpose of a Communication Hub?  
 A) Store data  
 B) Coordinate message passing between agents  
 C) Execute agent logic  
 D) Manage user interface  
 
-### Question 4
-
-### What determines when the ReAct reasoning loop terminates?
-
+**Question 4:** What determines when the ReAct reasoning loop terminates?  
 A) Fixed number of steps  
 B) When final_answer action is reached or max steps exceeded  
 C) User intervention  
 D) Random timing  
 
-### Question 5
-
-### How do agents typically reach consensus in multi-agent systems?
-
+**Question 5:** How do agents typically reach consensus in multi-agent systems?  
 A) First agent decides  
 B) Voting mechanisms and consensus algorithms  
 C) Random selection  
 D) Manager override  
 
-### Question 6
-
-### What is the main advantage of hierarchical coordination patterns?
-
+**Question 6:** What is the main advantage of hierarchical coordination patterns?  
 A) Faster execution  
 B) Clear command structure with specialized delegation  
 C) Lower resource usage  
 D) Simpler implementation  
 
-### Question 7
-
-### In auction-based coordination, how are tasks typically allocated?
-
+**Question 7:** In auction-based coordination, how are tasks typically allocated?  
 A) Random assignment  
 B) Based on agent capabilities and bid evaluation  
 C) First-come first-served  
 D) Manager assignment  
 
-### Question 8
-
-### What is the purpose of Hierarchical Task Network (HTN) planning?
-
+**Question 8:** What is the purpose of Hierarchical Task Network (HTN) planning?  
 A) Simple task execution  
 B) Breaking complex tasks into manageable hierarchies  
 C) Agent communication  
 D) Error handling  
 
-### Question 9
-
-### How does dynamic replanning differ from static planning?
-
+**Question 9:** How does dynamic replanning differ from static planning?  
 A) No difference  
 B) Adapts plans during execution based on changing conditions  
 C) Plans are created faster  
 D) Uses different algorithms  
 
-### Question 10
-
-### What is the main benefit of reflection patterns in multi-agent systems?
-
+**Question 10:** What is the main benefit of reflection patterns in multi-agent systems?  
 A) Faster execution  
 B) Continuous learning and improvement from experience  
 C) Lower costs  
@@ -997,7 +974,7 @@ D) Simpler deployment
 
 **Previous:** [Session 8 - Agno Production Ready Agents](Session8_Agno_Production_Ready_Agents.md)
 
-### Optional Deep Dive Modules:
+### Optional Deep Dive Modules
 
 - 🔬 **[Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Advanced coordination patterns
 - 🏭 **[Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise deployment
