@@ -21,6 +21,7 @@ CrewAI enables multi-agent collaboration through role-based team structures, sol
 Think of it as the difference between having one incredibly smart generalist versus assembling a specialized team where each member brings deep expertise to the table. This approach mirrors how the most effective business processes actually work - through multiple specialized roles working in coordination.
 
 **Key Concepts**:
+
 - Role specialization with clear responsibilities - like having dedicated experts rather than generalists
 - Sequential and hierarchical workflow patterns - structured collaboration that scales
 - Task delegation and result aggregation - intelligent work distribution
@@ -90,7 +91,7 @@ editor = Agent(
 )
 ```
 
-### Key Concepts:
+### Key Concepts
 
 These principles mirror what makes human teams effective:
 
