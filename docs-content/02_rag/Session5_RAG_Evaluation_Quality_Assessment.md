@@ -4,7 +4,7 @@ In Sessions 1-4, you built sophisticated RAG systems with intelligent chunking, 
 
 This session transforms RAG development from intuition-driven to evidence-driven. You'll implement multi-dimensional evaluation frameworks that measure retrieval precision, generation quality, and end-to-end utility. You'll design A/B testing that scientifically validates enhancement effectiveness and production monitoring that maintains quality at scale. The goal is replacing "it seems better" with "it performs 23% better on factual accuracy with 95% confidence."
 
-### Optional Deep Dive Modules
+## Optional Deep Dive Modules
 - **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Custom metrics and domain-specific evaluation
 - **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production-scale monitoring and alerting
 
@@ -235,7 +235,7 @@ We execute the RAGAS evaluation and return comprehensive results:
         }
 ```
 
-### Step 1: RAGAS Dataset Preparation
+#### Step 1: RAGAS Dataset Preparation
 
 This crucial method transforms your RAG results into the standardized RAGAS format:
 
@@ -396,7 +396,7 @@ Finally, we calculate and return the overall citation quality score:
         return citation_quality
 ```
 
-### Step 2: Retrieval Quality Assessment
+#### Step 2: Retrieval Quality Assessment
 
 Specialized evaluator for analyzing retrieval performance. First, we establish the evaluator class:
 
@@ -559,7 +559,7 @@ The main evaluation method processes multiple quality aspects and calculates com
         }
 ```
 
-### Step 3: Aspect-Specific Evaluation Prompts
+#### Step 3: Aspect-Specific Evaluation Prompts
 
 Here we implement detailed prompts for different evaluation dimensions. First, the relevance evaluation prompt:
 
@@ -718,7 +718,7 @@ Finally, we aggregate results and generate comprehensive performance reports:
         return benchmark_results
 ```
 
-### Step 4: Performance Tracking and Regression Detection
+#### Step 4: Performance Tracking and Regression Detection
 
 This critical method detects performance changes between benchmark runs. We start by checking historical data availability:
 
@@ -807,7 +807,7 @@ The enhancement techniques from Session 4 (HyDE, query expansion, context optimi
 
 This isn't just academic exercise – A/B testing reveals which enhancements deliver real value versus which are just engineering complexity without corresponding benefit.
 
-### A/B Testing for Enhancement Validation:
+#### A/B Testing for Enhancement Validation
 
 First, we establish the A/B testing framework for scientific RAG component comparison:
 
@@ -909,7 +909,7 @@ Finally, we analyze results and complete the test with comprehensive reporting:
         return test_result
 ```
 
-### Step 5: Statistical Significance Testing
+#### Step 5: Statistical Significance Testing
 
 This method provides rigorous statistical analysis of A/B test results. We begin by setting up the analysis structure:
 
@@ -1171,7 +1171,7 @@ We detect anomalies and trigger alerts when quality thresholds are exceeded:
         return monitoring_result
 ```
 
-### Step 6: Quality Monitoring Implementation
+#### Step 6: Quality Monitoring Implementation
 
 Real-time quality assessment for production RAG responses. We start by establishing the quality monitoring framework:
 
@@ -1435,7 +1435,7 @@ Finally, we check individual quality metrics against their specific thresholds:
 
 ### Implementation Framework
 
-### Implementation Framework:
+#### Implementation Framework
 
 The complete RAG evaluation ecosystem brings together all components. We initialize the comprehensive system:
 
@@ -1524,7 +1524,7 @@ Finally, we generate comprehensive evaluation reports:
 - Production monitoring with real-time quality assessment
 - Alerting system for quality degradation and anomaly detection
 
-### Key Technical Skills Learned
+**Key Technical Skills Learned:**
 
 1. Multi-dimensional evaluation (retrieval, generation, end-to-end performance)
 2. Automated assessment (LLM-as-a-judge, statistical testing, benchmark automation)
@@ -1532,7 +1532,7 @@ Finally, we generate comprehensive evaluation reports:
 4. Production monitoring (real-time quality tracking, alerting, incident response)
 5. Quality assurance (continuous improvement, regression detection, performance optimization)
 
-### Evaluation Metrics Mastered
+**Evaluation Metrics Mastered:**
 
 - **Retrieval**: Precision@K, Recall@K, MRR, NDCG, semantic relevance
 - **Generation**: Faithfulness, relevance, completeness, coherence, citation quality
@@ -1599,7 +1599,7 @@ D) Random threshold selection
 
 ## Session 5 Mastery Summary
 
-### What You've Built
+**What You've Built:**
 
 You've transformed RAG evaluation from guesswork to science:
 
@@ -1609,11 +1609,11 @@ You've transformed RAG evaluation from guesswork to science:
 - A/B testing frameworks for rigorous optimization
 - Domain-specific benchmarks tailored to your use case
 
-### Stepping Beyond Traditional RAG
+**Stepping Beyond Traditional RAG:**
 
 Traditional vector RAG finds documents similar to queries. GraphRAG enables multi-hop reasoning, entity understanding, and complex relationship traversal. The evaluation frameworks you've mastered will prove whether graph-based enhancements improve upon your optimized vector system.
 
-### Preparation for Graph Intelligence
+**Preparation for Graph Intelligence:**
 
 1. Establish GraphRAG baselines using your evaluation framework
 2. Design relationship-aware test cases requiring multi-hop reasoning
