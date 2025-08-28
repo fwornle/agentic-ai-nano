@@ -3,7 +3,8 @@
     "allow": [
       "Bash(find:*)",
       "Bash(grep:*)",
-      "Bash(markdownlint:*)"
+      "Bash(markdownlint:*)",
+      "Bash(python3:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",

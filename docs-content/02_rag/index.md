@@ -219,10 +219,9 @@ Each session follows a learner-optimized structure:
 5. **Real-World Application**: Apply concepts to actual business problems
 
 ### Recommended Schedule
-
-- **Observer Path**: 2-3 sessions per week
-- **Participant Path**: 1-2 sessions per week
-- **Implementer Path**: 1 session per week with practice time
+- **👀 Observer Path**: 2-3 sessions per week
+- **🙋‍♂️ Participant Path**: 1-2 sessions per week
+- **🛠️ Implementer Path**: 1 session per week with practice time
 - **Hybrid Approach**: Adjust based on session complexity and available time
 
 ## Learning Outcomes

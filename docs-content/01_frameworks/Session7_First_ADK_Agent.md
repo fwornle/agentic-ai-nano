@@ -27,10 +27,9 @@ ADK excels in enterprise environments requiring Google Cloud integration and adv
 **Total Time Investment**: 95 minutes (Core) + 65 minutes (Optional)
 
 ### Learning Path Options
-
-- **Observer (55 min)**: Enterprise architecture analysis with Google Cloud integration insights  
-- **Participant (95 min)**: Hands-on ADK agent building with Vertex AI deployment
-- **Implementer (135 min)**: Advanced enterprise systems with MCP orchestration
+- **👀 Observer (55 min)**: Enterprise architecture analysis with Google Cloud integration insights  
+- **🙋‍♂️ Participant (95 min)**: Hands-on ADK agent building with Vertex AI deployment
+- **🛠️ Implementer (135 min)**: Advanced enterprise systems with MCP orchestration
 
 ---
 
