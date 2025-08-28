@@ -2,9 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-### Question 1: Microservices Architecture Benefits
-
-### What is the primary advantage of microservices architecture for production RAG systems?
+**Question 1:** What is the primary advantage of microservices architecture for production RAG systems?  
 A) Simpler deployment process  
 B) Lower development costs  
 C) Independent scaling and fault isolation of components ✅  
@@ -14,9 +12,7 @@ D) Reduced system complexity
 
 ---
 
-### Question 2: Load Balancing Strategy Selection
-
-### When should you choose response-time-based load balancing over round-robin?
+**Question 2:** When should you choose response-time-based load balancing over round-robin?  
 A) When all service instances have identical performance  
 B) When service instances have varying performance characteristics ✅  
 C) When implementing simple systems only  
@@ -26,9 +22,7 @@ D) When minimizing configuration complexity
 
 ---
 
-### Question 3: Enterprise Authentication
-
-### What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?
+**Question 3:** What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?  
 A) Faster authentication speed  
 B) Reduced server load  
 C) Granular permission management and security policy enforcement ✅  
@@ -38,71 +32,56 @@ D) Simpler user interface design
 
 ---
 
-### Question 4: GDPR Compliance
-
-### Which GDPR principle is most critical for RAG systems processing personal data?
+**Question 4:** Which GDPR principle is most critical for RAG systems processing personal data?  
 
 A) Data portability  
 B) Right to be forgotten only  
 C) Consent form design  
 D) Data minimization and lawful basis for processing ✅  
-### Correct Answer: D) Data minimization and lawful basis for processing
 
 **Explanation:** Data minimization (processing only necessary personal data) and having a lawful basis for processing are fundamental GDPR principles. RAG systems must ensure they only process personal data that's necessary for their purpose and have valid legal grounds (consent, legitimate interest, etc.) for processing.
 
 ---
 
-### Question 5: Incremental Indexing
-
-### What is the primary challenge in real-time incremental indexing for RAG systems?
+**Question 5:** What is the primary challenge in real-time incremental indexing for RAG systems?  
 
 A) Network bandwidth constraints  
 B) Storage capacity limitations  
 C) User interface complexity  
 D) Managing change detection and maintaining index consistency during updates ✅  
-### Correct Answer: D) Managing change detection and maintaining index consistency during updates
 
 **Explanation:** The key challenge is detecting changes across multiple data sources and updating vector indices and knowledge graphs while maintaining consistency. This involves handling concurrent updates, managing index versions, and ensuring search quality doesn't degrade during updates.
 
 ---
 
-### Question 6: Production Monitoring
-
-### Which metric is most critical for production RAG system health monitoring?
+**Question 6:** Which metric is most critical for production RAG system health monitoring?  
 
 A) CPU usage only  
 B) Network traffic volume  
 C) Memory consumption only  
 D) Response quality scores combined with system performance metrics ✅  
-### Correct Answer: D) Response quality scores combined with system performance metrics
 
 **Explanation:** Production RAG monitoring requires both technical performance metrics (CPU, memory, response time) AND quality metrics (response accuracy, retrieval relevance) since a system can be technically healthy but producing poor-quality responses, or vice versa.
 
 ---
 
-### Question 7: Auto-Scaling Decisions
-
-### What should trigger scale-up actions in production RAG systems?
+**Question 7:** What should trigger scale-up actions in production RAG systems?  
 
 A) CPU threshold, response time, queue size, and error rate exceeding thresholds ✅  
 B) Random intervals for load testing  
 C) Time of day only  
 D) Manual administrator requests only  
-### Correct Answer: A) CPU threshold, response time, queue size, and error rate exceeding thresholds
 
 **Explanation:** Effective auto-scaling considers multiple indicators: high CPU/memory usage, increasing response times, growing processing queues, and rising error rates. This multi-dimensional approach prevents both under-scaling (performance degradation) and over-scaling (unnecessary costs).
 
 ---
 
-### Question 8: Enterprise Data Integration
-
-### What is the most important consideration when integrating RAG with SharePoint/Confluence?
+**Question 8:** What is the most important consideration when integrating RAG with SharePoint/Confluence?  
 
 A) File size limitations  
 B) Color scheme compatibility  
 C) Font rendering capabilities  
 D) Authentication, permissions, and change detection for real-time updates ✅  
-### Correct Answer: D) Authentication, permissions, and change detection for real-time updates
 
 **Explanation:** Enterprise integration requires proper authentication (OAuth/SAML), respecting existing permissions (users should only see documents they're authorized to access), and implementing change detection to keep the RAG system synchronized with updates to enterprise content.
 

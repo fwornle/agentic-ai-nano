@@ -2,9 +2,7 @@
 
 ## Multiple Choice Test
 
-### Question 1: HyDE Purpose
-
-### What is the primary purpose of HyDE (Hypothetical Document Embeddings)?
+**Question 1:** What is the primary purpose of HyDE (Hypothetical Document Embeddings)?  
 A) To generate multiple query variations  
 B) To bridge the semantic gap between queries and documents ✅  
 C) To compress document embeddings  
@@ -14,9 +12,7 @@ D) To speed up retrieval performance
 
 ---
 
-### Question 2: Query Decomposition Approach
-
-### When implementing query decomposition, which approach is most effective for complex questions?
+**Question 2:** When implementing query decomposition, which approach is most effective for complex questions?  
 A) Random sentence splitting  
 B) Breaking questions into answerable sub-questions using LLMs ✅  
 C) Fixed-length query segments  
@@ -26,9 +22,7 @@ D) Keyword-based fragmentation
 
 ---
 
-### Question 3: Multi-Query Generation Advantage
-
-### What is the key advantage of multi-query generation in RAG systems?
+**Question 3:** What is the key advantage of multi-query generation in RAG systems?  
 A) Reduced computational cost  
 B) Faster query processing  
 C) Comprehensive coverage of different query perspectives ✅  
@@ -38,9 +32,7 @@ D) Simplified system architecture
 
 ---
 
-### Question 4: Context Window Optimization
-
-### In context window optimization, what factor is most important for maintaining quality?
+**Question 4:** In context window optimization, what factor is most important for maintaining quality?  
 A) Maximum token count  
 B) Processing speed  
 C) Balance between relevance and information density ✅  
@@ -50,9 +42,7 @@ D) Number of source documents
 
 ---
 
-### Question 5: Prompt Engineering Technique
-
-### Which prompt engineering technique is most effective for improving RAG response quality?
+**Question 5:** Which prompt engineering technique is most effective for improving RAG response quality?  
 A) Longer prompts with more examples  
 B) Chain-of-thought reasoning with context integration ✅  
 C) Simple template-based prompts  

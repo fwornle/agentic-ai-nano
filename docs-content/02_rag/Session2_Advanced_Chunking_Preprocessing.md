@@ -5,7 +5,6 @@ In Session 1, you implemented a working RAG system that splits documents into ma
 This session transforms your RAG system from simple text splitters into intelligent document understanding engines. You'll implement structure-aware chunking that preserves document hierarchy, extract rich metadata that enhances retrieval precision, and handle complex content types including tables, code blocks, and domain-specific formatting. The goal is to ensure that every chunk carries not just content, but context.
 
 ![RAG Problems Overview](images/RAG-overview-problems.png)
-
 *Figure 1: Common problems with naive chunking approaches that advanced preprocessing solves.*
 
 ---
