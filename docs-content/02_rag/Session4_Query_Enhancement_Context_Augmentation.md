@@ -4,7 +4,7 @@ In Sessions 1-3, you built a sophisticated RAG system with intelligent chunking,
 
 This is the semantic gap – the mismatch between how users express their needs and how information is stored in documents. This session bridges that gap with proven enhancement techniques: HyDE (Hypothetical Document Embeddings) that generates better search vectors, multi-query strategies that cast wider nets, and context optimization that maximizes the value of retrieved information. The goal is search that understands intent, not just similarity.
 
-### Optional Deep Dive Modules
+## Optional Deep Dive Modules
 - **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Intent classification, multi-modal queries, context awareness
 
 ![Agentic RAG](images/AgenticRAG.png)
@@ -91,7 +91,7 @@ Remember from Session 3 how your optimized HNSW indexing and hybrid search creat
 
 HyDE transforms semantic gaps into vector space advantages:
 
-### Step 1: Initialize the HyDE Query Enhancer
+#### Step 1: Initialize the HyDE Query Enhancer
 
 **Understanding HyDE (Hypothetical Document Embeddings)**: HyDE solves a fundamental RAG problem - the semantic gap between how users ask questions and how information is stored in documents. Instead of searching with the query directly, HyDE generates hypothetical answers and searches with those.
 
@@ -121,7 +121,7 @@ class HyDEQueryEnhancer:
 
 **Temperature Parameter**: The 0.7 temperature balances creativity and accuracy in hypothetical document generation, ensuring diverse but relevant hypothetical answers.
 
-### Step 2: Configure Query Type Templates
+#### Step 2: Configure Query Type Templates
 
 Next, set up templates for different types of queries:
 
@@ -135,7 +135,7 @@ Next, set up templates for different types of queries:
         }
 ```
 
-### Step 3: Core Enhancement Method
+#### Step 3: Core Enhancement Method
 
 Now implement the main query enhancement workflow:
 
@@ -161,7 +161,7 @@ Now implement the main query enhancement workflow:
         )
 ```
 
-### Step 4: Create Enhanced Embeddings
+#### Step 4: Create Enhanced Embeddings
 
 Finally, combine the generated hypothetical documents into enhanced embeddings:
 
@@ -198,7 +198,7 @@ This implementation demonstrates query enhancement working in harmony with your 
 
 The result bridges the semantic gap between user intent and document content, dramatically improving retrieval success in your hybrid search systems.
 
-### Step 1: Query Type Classification - Tailoring HyDE to Query Nature
+#### Step 1: Query Type Classification - Tailoring HyDE to Query Nature
 
 ```python
     def _classify_query_type(self, query: str) -> str:
@@ -231,7 +231,7 @@ The result bridges the semantic gap between user intent and document content, dr
         return 'factual'
 ```
 
-### Step 2A: Factual Query Template
+#### Step 2A: Factual Query Template
 
 Create templates that generate different document types. Start with factual queries:
 
@@ -252,7 +252,7 @@ Create templates that generate different document types. Start with factual quer
         """
 ```
 
-### Step 2B: Procedural Query Template
+#### Step 2B: Procedural Query Template
 
 Handle step-by-step and how-to queries:
 
@@ -273,7 +273,7 @@ Handle step-by-step and how-to queries:
         """
 ```
 
-### Step 2C: Analytical Query Template
+#### Step 2C: Analytical Query Template
 
 Support analytical and comparative queries:
 
@@ -294,7 +294,7 @@ Support analytical and comparative queries:
         """
 ```
 
-### Step 3A: Document Generation Setup
+#### Step 3A: Document Generation Setup
 
 Generate multiple hypothetical documents with variations for better coverage:
 
@@ -317,7 +317,7 @@ Generate multiple hypothetical documents with variations for better coverage:
             varied_temperature = min(varied_temperature, 1.0)
 ```
 
-### Step 3B: Document Generation Loop
+#### Step 3B: Document Generation Loop
 
 Generate each hypothetical document with error handling:
 
@@ -355,7 +355,7 @@ Generate each hypothetical document with error handling:
                 continue
 ```
 
-### Step 3C: Quality Ranking
+#### Step 3C: Quality Ranking
 
 Sort generated documents by quality for best results:
 
@@ -366,7 +366,7 @@ Sort generated documents by quality for best results:
         return hypothetical_docs
 ```
 
-### Step 4A: Create Base Embeddings
+#### Step 4A: Create Base Embeddings
 
 Convert query and hypothetical documents into embedding vectors:
 
@@ -383,7 +383,7 @@ Convert query and hypothetical documents into embedding vectors:
         hyde_embeddings = self.embedding_model.encode(hyde_texts)
 ```
 
-### Step 4B: Weight and Combine Embeddings
+#### Step 4B: Weight and Combine Embeddings
 
 Create quality-weighted combination of hypothetical documents:
 
@@ -407,7 +407,7 @@ Create quality-weighted combination of hypothetical documents:
         combined_embedding = combined_embedding / np.linalg.norm(combined_embedding)
 ```
 
-### Step 4C: Return Comprehensive Results
+#### Step 4C: Return Comprehensive Results
 
 Provide all embedding variations for analysis and debugging:
 
@@ -421,7 +421,7 @@ Provide all embedding variations for analysis and debugging:
         }
 ```
 
-### Step 4D: Quality-Based Weighting
+#### Step 4D: Quality-Based Weighting
 
 Calculate document importance based on quality scores:
 
@@ -453,7 +453,7 @@ The two approaches are complementary: HyDE bridges semantic gaps, while expansio
 
 This multi-layered approach ensures your optimized vector search from Session 3 captures content through multiple semantic pathways:
 
-### **Step 5A: Query Expansion Setup**
+#### **Step 5A: Query Expansion Setup**
 
 Set up the intelligent query expansion system with multiple strategies:
 
@@ -479,7 +479,7 @@ class IntelligentQueryExpander:
         self.domain_corpus = domain_corpus
 ```
 
-### **Step 5B: Configure Expansion Strategies**
+#### **Step 5B: Configure Expansion Strategies**
 
 Set up different approaches to query expansion:
 
@@ -506,7 +506,7 @@ Set up different approaches to query expansion:
             self.domain_tfidf.fit(domain_corpus)
 ```
 
-### **Step 5C: Core Expansion Method**
+#### **Step 5C: Core Expansion Method**
 
 Implement the main query expansion workflow:
 
@@ -533,7 +533,7 @@ Implement the main query expansion workflow:
                 combined_expansions.update(expansions)
 ```
 
-### **Step 5D: Combine and Return Results**
+#### **Step 5D: Combine and Return Results**
 
 Create the final expanded query with comprehensive results:
 
@@ -552,7 +552,7 @@ Create the final expanded query with comprehensive results:
         }
 ```
 
-### Step 5: Semantic Expansion Using LLM
+#### Step 5: Semantic Expansion Using LLM
 
 ```python
     def _semantic_expansion(self, query: str, max_expansions: int) -> List[str]:
@@ -594,7 +594,7 @@ Create the final expanded query with comprehensive results:
             return []
 ```
 
-### Step 6: Contextual Query Reformulation
+#### Step 6: Contextual Query Reformulation
 
 ```python
     def _contextual_expansion(self, query: str, max_expansions: int) -> List[str]:
@@ -636,7 +636,7 @@ Create the final expanded query with comprehensive results:
             return []
 ```
 
-### **Step 6A: Multi-Query Generator Setup**
+#### **Step 6A: Multi-Query Generator Setup**
 
 Set up the multi-query generation system with different perspectives:
 
@@ -663,7 +663,7 @@ class MultiQueryGenerator:
         }
 ```
 
-### **Step 6B: Multi-Query Generation Workflow**
+#### **Step 6B: Multi-Query Generation Workflow**
 
 Coordinate multiple perspective generation strategies:
 
@@ -688,7 +688,7 @@ Coordinate multiple perspective generation strategies:
         remaining_queries = total_queries % len(perspectives)
 ```
 
-### **Step 6C: Generate Perspective Variants**
+#### **Step 6C: Generate Perspective Variants**
 
 Create queries from each perspective and collect metadata:
 
@@ -714,7 +714,7 @@ Create queries from each perspective and collect metadata:
         flattened_queries = self._flatten_and_deduplicate(all_queries)
 ```
 
-### **Step 6D: Return Comprehensive Query Set**
+#### **Step 6D: Return Comprehensive Query Set**
 
 Package all generated query variants with metadata:
 
@@ -728,7 +728,7 @@ Package all generated query variants with metadata:
         }
 ```
 
-### Step 7: Complex Query Decomposition
+#### Step 7: Complex Query Decomposition
 
 ```python
     def _decompose_complex_query(self, query: str, num_queries: int) -> List[str]:
@@ -777,7 +777,7 @@ Package all generated query variants with metadata:
             return []
 ```
 
-### Step 8: Specificity Level Variants
+#### Step 8: Specificity Level Variants
 
 ```python
     def _generate_specificity_variants(self, query: str, num_queries: int) -> List[str]:
@@ -878,7 +878,7 @@ class ContextWindowOptimizer:
         }
 ```
 
-### Step 9: Relevance-Based Context Selection
+#### Step 9: Relevance-Based Context Selection
 
 ```python
     def _relevance_based_selection(self, query: str, chunks: List[Dict],
@@ -946,7 +946,7 @@ class ContextWindowOptimizer:
         }
 ```
 
-### Step 10: Hierarchical Context Summarization
+#### Step 10: Hierarchical Context Summarization
 
 ```python
     def _hierarchical_summarization(self, query: str, chunks: List[Dict],
@@ -1114,7 +1114,7 @@ class RAGPromptEngineer:
         }
 ```
 
-### Step 11: Factual QA Template with Source Attribution
+#### Step 11: Factual QA Template with Source Attribution
 
 ```python
     def _factual_qa_template(self, query: str, context: str) -> str:
@@ -1152,7 +1152,7 @@ ANSWER STRUCTURE:
 ANSWER:"""
 ```
 
-### Step 12: Chain-of-Thought Enhancement
+#### Step 12: Chain-of-Thought Enhancement
 
 ```python
     def _add_chain_of_thought(self, base_prompt: str, query: str,
@@ -1205,7 +1205,7 @@ FINAL ANSWER:
         }
 ```
 
-### Step 13: Confidence Calibration
+#### Step 13: Confidence Calibration
 
 Confidence calibration helps RAG systems provide transparent reliability assessments:
 
@@ -1343,7 +1343,7 @@ class DynamicPromptAdapter:
         }
 ```
 
-### Step 14: Context Quality Assessment
+#### Step 14: Context Quality Assessment
 
 Context quality analysis involves multiple dimensions to determine optimal prompt strategies:
 
@@ -1620,7 +1620,7 @@ You've transformed your RAG system from simple similarity search to intelligent 
 
 **Previous:** [Session 3 - Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)
 
-### Optional Deep Dive Modules:
+## Optional Deep Dive Modules:
 
 - **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Deep dive into query analysis and understanding systems
 

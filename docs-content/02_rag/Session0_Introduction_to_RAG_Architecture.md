@@ -22,7 +22,6 @@ Every RAG system follows a consistent three-stage architecture that transforms s
 The indexing stage determines the quality ceiling of your entire RAG system. Poor indexing creates problems that no amount of sophisticated retrieval can fix:
 
 ```python
-
 # RAG Indexer - Simple Implementation
 
 class RAGIndexer:
@@ -43,7 +42,7 @@ class RAGIndexer:
 
 This implementation handles the critical transformation from unstructured documents to searchable vectors. The embedding model choice determines semantic understanding quality - models trained on domain-specific data perform significantly better than general-purpose embeddings.
 
-### Code Explanation
+#### Code Explanation
 
 - **Line 3-4**: Initialize with an embedding model (like OpenAI's text-embedding-ada-002) and vector database (like Pinecone or Chroma)
 - **Line 7**: Split documents into manageable chunks (typically 500-1000 tokens each)
@@ -62,7 +61,6 @@ This implementation handles the critical transformation from unstructured docume
 The retrieval stage must balance speed and accuracy - returning relevant context quickly enough for real-time applications:
 
 ```python
-
 # RAG Retriever - Query Processing
 
 class RAGRetriever:
@@ -86,7 +84,7 @@ class RAGRetriever:
 
 Critical design decision: using the same embedding model for both indexing and retrieval ensures vector compatibility. Different models create incompatible vector spaces, leading to poor retrieval performance.
 
-### Code Explanation
+#### Code Explanation
 
 - **Line 3-5**: Configure retriever with same embedding model as indexing (critical for compatibility)
 - **Line 9**: Convert user's natural language query into the same vector space as stored documents
@@ -105,7 +103,6 @@ Critical design decision: using the same embedding model for both indexing and r
 The generation stage requires careful prompt engineering to ensure LLMs stay grounded in retrieved context rather than relying on potentially outdated training data:
 
 ```python
-
 # RAG Generator - Response Synthesis
 
 class RAGGenerator:
@@ -129,7 +126,7 @@ class RAGGenerator:
 
 The prompt structure is crucial - explicitly instructing the LLM to base answers on provided context prevents it from hallucinating information from training data that may be incorrect or outdated.
 
-### Code Explanation
+#### Code Explanation
 
 - **Line 3**: Initialize with chosen LLM (GPT-4, Claude, Llama, etc.)
 - **Line 7-13**: Create prompt that combines user question with retrieved context
@@ -148,7 +145,6 @@ The prompt structure is crucial - explicitly instructing the LLM to base answers
 Building on the three-stage foundation, here's how these components integrate into a functioning system:
 
 ```python
-
 # Complete RAG System Integration
 
 class BasicRAGSystem:
@@ -201,7 +197,6 @@ Dense embeddings solved the vocabulary mismatch problem - understanding that "ca
 ### Technical Foundation
 
 ```python
-
 # Early Dense Retrieval (2017-2019)
 
 class EarlyDenseRetrieval:
@@ -235,7 +230,6 @@ This phase proved that RAG-enhanced models could match larger model performance 
 **2020 RAG Architecture:**
 
 ```python
-
 # Foundational RAG (2020)
 
 class FoundationalRAG:
@@ -253,7 +247,7 @@ class FoundationalRAG:
 
 The separation of retrieval and generation components allowed independent optimization of each stage, setting the architectural pattern still used in modern systems.
 
-### Code Explanation
+#### Code Explanation
 
 - **Line 3-4**: Separate components for retrieval and generation, allowing optimization of each
 - **Line 8**: Retrieve multiple passages to get diverse perspectives on the question
@@ -273,7 +267,6 @@ RAG transitioned from research to production with the widespread availability of
 ### Enhanced RAG Architecture
 
 ```python
-
 # Enhanced RAG (2021-2022)
 
 class EnhancedRAG:
@@ -320,7 +313,6 @@ The paradigm shifted from "always retrieve" to "intelligently decide when and ho
 ### Adaptive RAG Architecture
 
 ```python
-
 # Adaptive RAG (2023) - Self-Correcting Systems
 
 class AdaptiveRAG:
@@ -373,7 +365,6 @@ Systems like Microsoft's GraphRAG demonstrate how complex questions requiring mu
 Modern multi-agent systems represent the current frontier in RAG development:
 
 ```python
-
 # Agentic RAG (2024-2025) - Multi-Agent Coordination
 
 class AgenticRAG:
@@ -416,7 +407,7 @@ class AgenticRAG:
 
 This architecture handles complex queries that require understanding relationships between entities, temporal reasoning, and multi-step logical inference.
 
-### Code Explanation
+#### Code Explanation
 
 - **Line 5-9**: Four specialized agents handle different aspects of complex reasoning
 - **Line 12**: Query planning breaks complex questions into manageable sub-questions
@@ -456,7 +447,6 @@ Poor chunking strategies undermine the entire RAG pipeline by destroying documen
 **The Solution**: Structure-aware chunking that preserves semantic boundaries and document hierarchy:
 
 ```python
-
 # Intelligent Chunking Solution
 
 class SmartChunker:
@@ -501,7 +491,6 @@ Users and document authors express the same concepts differently, creating a sem
 **The Solution**: Query enhancement techniques that transform user queries into forms more likely to match document content:
 
 ```python
-
 # Query Enhancement Solution
 
 class QueryEnhancer:
@@ -547,7 +536,6 @@ Users often ask vague questions that could have multiple valid interpretations, 
 **The Solution**: Intelligent query analysis and clarification before attempting retrieval:
 
 ```python
-
 # Query Clarification Solution
 
 class QueryClarifier:
@@ -596,7 +584,6 @@ Flat, unorganized indexes make retrieval inefficient and fail to leverage docume
 **The Solution**: Hierarchical indexing with rich metadata that enables sophisticated filtering and ranking:
 
 ```python
-
 # Optimized Index Solution
 
 class HierarchicalIndex:
@@ -647,7 +634,6 @@ Vector similarity doesn't guarantee relevance or completeness - retrieved chunks
 **The Solution**: Multi-stage context optimization that validates and improves retrieved content quality:
 
 ```python
-
 # Context Quality Optimization Solution
 
 class ContextOptimizer:
@@ -724,7 +710,6 @@ RAG excels in specific scenarios where its strengths align with system requireme
 - Enterprise document intelligence for internal knowledge bases
 
 ```python
-
 # RAG Decision Framework
 
 class RAGDecisionHelper:
@@ -778,7 +763,6 @@ Understanding RAG limitations helps identify scenarios where other approaches ar
 **Cost-Benefit Analysis Framework:**
 
 ```python
-
 # Cost-Benefit Decision Framework
 
 class ApproachSelector:
@@ -814,7 +798,6 @@ Production systems increasingly combine multiple techniques to leverage the stre
 Real-world enterprise systems often combine RAG with complementary approaches:
 
 ```python
-
 # Hybrid System Architecture
 
 class IntelligentHybridSystem:
@@ -869,7 +852,6 @@ Engineering judgment develops through applying architectural principles to concr
 ### **PARTICIPANT PATH**: Legal RAG Solution Design
 
 ```python
-
 # Legal RAG - Specialized System
 
 class LegalRAGSystem:
