@@ -1,6 +1,6 @@
-# Session 6 - Module A: Advanced Graph Algorithms - Optimizing Graph Intelligence
+# Session 6 - Module A: Advanced Algorithms
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
+> **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 6 core content first.
 
 You've implemented GraphRAG systems with entity extraction, relationship mapping, and basic traversal algorithms in Session 6. But when your knowledge graphs scale to millions of nodes or require specialized reasoning patterns like temporal analysis or domain-specific ranking, standard graph algorithms become insufficient for production performance and sophisticated reasoning requirements.

@@ -1,6 +1,7 @@
 # Session 10 - Module B: Enterprise Operations & Scaling
 
-**Prerequisites**: [Session 10 Core Section Complete](Session10_Enterprise_Integration_Production_Deployment.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 10 core content first.
 
 This module covers comprehensive enterprise operations and scaling strategies for agent systems including advanced auto-scaling, performance optimization, operational excellence practices, SRE principles, chaos engineering, and enterprise monitoring.
 

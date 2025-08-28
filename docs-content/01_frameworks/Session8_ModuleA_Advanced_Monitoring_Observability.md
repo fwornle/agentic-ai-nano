@@ -1,7 +1,9 @@
-# The Observatory of Excellence: Advanced Monitoring & Observability
-## *How Netflix Saved $2.7B Annually Through Elite Agent System Intelligence*
+# Session 8 - Module A: Advanced Monitoring & Observability
 
-**Prerequisites**: [Session 8 Core Section Complete](Session8_Agno_Production_Ready_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 8 core content first.
+
+## Netflix System Intelligence
 
 ### The Crisis That Changed Everything
 

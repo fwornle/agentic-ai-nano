@@ -1,7 +1,9 @@
 # Session 5 - Module D: Testing & Benchmarking
-## *How Netflix Achieved 15X Performance Gains and $3.2B Revenue Growth Through Strategic Testing Excellence*
 
-**Prerequisites**: [Session 5 Core Section Complete](Session5_PydanticAI_Type_Safe_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 5 core content first.
+
+## Netflix Testing Excellence
 
 ---
 

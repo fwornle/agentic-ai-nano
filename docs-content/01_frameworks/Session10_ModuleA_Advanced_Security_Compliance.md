@@ -1,6 +1,7 @@
 # Session 10 - Module A: Advanced Security & Compliance
 
-**Prerequisites**: [Session 10 Core Section Complete](Session10_Enterprise_Integration_Production_Deployment.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 10 core content first.
 
 This module covers comprehensive security and compliance frameworks for enterprise agent systems including GDPR compliance, RBAC implementation, advanced encryption strategies, audit logging, zero-trust architecture, and regulatory compliance patterns.
 

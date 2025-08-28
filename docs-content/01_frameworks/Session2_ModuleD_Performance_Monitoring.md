@@ -1,6 +1,7 @@
-# Session 2 - Module D: The Intelligence Observatory - When AI Performance Metrics Determine Market Survival
+# Session 2 - Module D: Performance Monitoring
 
-**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 2 core content first.
 
 At 4:32 AM on a Monday in November 2023, Airbnb's AI-powered dynamic pricing system detected a subtle 0.3% degradation in response latency across their European markets. By 6:15 AM, before human operators even arrived at work, the system had automatically rebalanced computational loads, optimized model inference paths, and prevented what post-incident analysis revealed would have been $4.2 million in lost bookings over the following week. The early warning system wasn't magic - it was precision performance monitoring that treated every millisecond as revenue.
 

@@ -1236,7 +1236,7 @@ Visual content search with text queries demonstrates true cross-modal capabiliti
 
 ---
 
-## **Part 2: Advanced Multimodal RAG-Fusion with MRAG Integration (35 minutes)**
+## Part 2: Advanced Multimodal RAG-Fusion with MRAG Integration (35 minutes)
 
 ### Multimodal RAG-Fusion
 
@@ -1773,7 +1773,7 @@ Robust error handling ensures graceful fallback to the best available response:
 
 ---
 
-## **Part 3: Domain-Specific RAG Optimizations (20 minutes)**
+## Part 3: Domain-Specific RAG Optimizations (20 minutes)
 
 ### Legal Domain RAG
 
@@ -1941,7 +1941,7 @@ class MedicalRAGSystem:
 
 ---
 
-## **Part 4: Cutting-Edge RAG Research Implementation (20 minutes)**
+## Part 4: Cutting-Edge RAG Research Implementation (20 minutes)
 
 ### Neural Reranking and Dense-Sparse Hybrids
 
@@ -2204,7 +2204,7 @@ class SelfImprovingRAGSystem:
 
 ---
 
-## **Hands-On Exercise: Build MRAG 3.0 Autonomous System**
+## Hands-On Exercise: Build MRAG 3.0 Autonomous System
 
 ### Implementation Requirements
 
@@ -2372,7 +2372,7 @@ class MRAGEvolutionSystem:
 
 ---
 
-## ** Chapter Summary**
+## Chapter Summary
 
 ## Next Session Preview
 

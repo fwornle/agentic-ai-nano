@@ -1,6 +1,6 @@
-# Session 6 - Module B: Production GraphRAG Systems - Enterprise-Scale Knowledge
+# Session 6 - Module B: Production Systems
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
+> **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 6 core content first.
 
 You've implemented GraphRAG systems with knowledge graph construction, entity extraction, and multi-hop reasoning in Session 6. But when you need to deploy GraphRAG at enterprise scale with millions of entities, strict uptime requirements, and integration with existing enterprise systems, development-grade implementations become insufficient for mission-critical operations.

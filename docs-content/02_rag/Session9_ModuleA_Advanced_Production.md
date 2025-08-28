@@ -1,4 +1,4 @@
-# Session 9 - Module A: Advanced Production Patterns - Beyond Standard Deployment
+# Session 9 - Module A: Advanced Production
 
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 9 core content first.

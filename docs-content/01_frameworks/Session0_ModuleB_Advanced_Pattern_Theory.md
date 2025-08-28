@@ -1,6 +1,7 @@
-# Session 0 - Module B: Advanced Pattern Theory - The Architecture of Digital Minds
+# Session 0 - Module B: Advanced Pattern Theory
 
-**Prerequisites**: [Session 0 Core Section Complete](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 0 core content first.
 
 You've learned the five patterns that make AI agents intelligent. Now it's time to learn the secret that separates average developers from the architects of the future: how to combine these patterns into symphony orchestras of intelligence.
 
@@ -8,9 +9,9 @@ This is where computer science becomes art, where frameworks become instruments,
 
 ---
 
-## Part 1: Pattern Implementation Strategies - Crafting Intelligence
+## Part 1: Pattern Implementation Strategies
 
-### Framework-Specific Pattern Implementations - The Tools of Masters
+### Framework-Specific Pattern Implementations
 
 A violin sounds different in the hands of a street musician versus Itzhak Perlman. The same melody, the same instrument - but the technique, the understanding, the craftsmanship makes all the difference.
 

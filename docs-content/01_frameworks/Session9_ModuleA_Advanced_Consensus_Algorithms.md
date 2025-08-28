@@ -1,7 +1,9 @@
-# The Consensus Supremacy: Advanced Consensus Algorithms
-## *How Ethereum Secured $400B Through Byzantine Fault Tolerance Excellence*
+# Session 9 - Module A: Advanced Consensus Algorithms
 
-**Prerequisites**: [Session 9 Core Section Complete](Session9_Multi_Agent_Patterns.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 9 core content first.
+
+## Ethereum Byzantine Fault Tolerance
 
 ### The Blockchain Crisis That Nearly Collapsed Global Finance
 

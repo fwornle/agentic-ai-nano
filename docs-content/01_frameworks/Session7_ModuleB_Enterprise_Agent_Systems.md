@@ -1,7 +1,9 @@
 # Session 7 - Module B: Enterprise Agent Systems
-## *How Tesla Automated $47B Manufacturing Empire Through Production-Scale AI Agent Deployment*
 
-**Prerequisites**: [Session 7 Core Section Complete](Session7_First_ADK_Agent.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 7 core content first.
+
+## Tesla Manufacturing Automation
 
 ---
 

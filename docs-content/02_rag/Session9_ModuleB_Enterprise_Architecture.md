@@ -1,4 +1,4 @@
-# Session 9 - Module B: Enterprise Integration Architectures - Organizational Intelligence
+# Session 9 - Module B: Enterprise Architecture
 
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 9 core content first.

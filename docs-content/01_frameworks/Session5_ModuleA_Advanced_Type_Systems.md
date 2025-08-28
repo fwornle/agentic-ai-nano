@@ -1,7 +1,9 @@
 # Session 5 - Module A: Advanced Type Systems
-## *How Goldman Sachs Achieved 99.97% Data Accuracy and Saved $847M Through Intelligent Validation*
 
-**Prerequisites**: [Session 5 Core Section Complete](Session5_PydanticAI_Type_Safe_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 5 core content first.
+
+## Goldman Sachs Data Validation Success
 
 ---
 

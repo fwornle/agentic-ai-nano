@@ -1,6 +1,7 @@
-# Session 4 - Module A: The Precision Engine - When Deterministic AI Flows Become Mission-Critical Infrastructure
+# Session 4 - Module A: Advanced CrewAI Flows
 
-**Prerequisites**: [Session 4 Core Section Complete](Session4_CrewAI_Team_Orchestration.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 4 core content first.
 
 On March 8th, 2024, SpaceX's Falcon Heavy executed a flawless triple-booster landing sequence, coordinating 127 independent systems across three rocket cores in precise 0.3-second intervals. The mission's success depended on deterministic execution where every step was guaranteed, every decision was predictable, and every failure had a predetermined recovery path. This wasn't improvisation - it was CrewAI Flows at their most sophisticated, where complex multi-agent workflows execute with the reliability of military precision.
 

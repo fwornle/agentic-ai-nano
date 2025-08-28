@@ -1,6 +1,7 @@
-# Session 0 - Module A: Historical Context & Evolution - The Rise of Digital Intelligence
+# Session 0 - Module A: Historical Context & Evolution
 
-**Prerequisites**: [Session 0 Core Section Complete](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 0 core content first.
 
 In 1966, ELIZA convinced people they were talking to a therapist by simply reflecting their words back with therapeutic phrases. In 2024, Claude runs businesses, writes code, and solves complex problems that stump PhD researchers.
 

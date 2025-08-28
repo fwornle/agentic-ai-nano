@@ -1,6 +1,7 @@
-# Session 1 - Module A: Production RAG Patterns - When Implementation Meets Reality
+# Session 1 - Module A: Production Patterns
 
-> **Prerequisites**: Complete Session 1 core content first.
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 1 core content first.
 
 You've built a working RAG system in the main session. Now you'll learn what happens when that system faces production realities: unexpected errors, scaling demands, performance requirements, and the operational challenges that separate prototype demos from mission-critical infrastructure.
 

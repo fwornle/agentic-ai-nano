@@ -1,6 +1,7 @@
-# Session 1 - Module B: The Millisecond Advantage - Engineering AI That Scales at Enterprise Speed
+# Session 1 - Module B: Performance Optimization
 
-**Prerequisites**: [Session 1 Core Section Complete](Session1_Bare_Metal_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 1 core content first.
 
 At 3:47 AM, Microsoft's AI-powered Azure infrastructure agent detected an anomalous traffic spike that could have cascaded into a $2.3 million outage. Within 127 milliseconds, it had analyzed 15,000 server metrics, executed corrective actions across 200 data centers, and prevented what would have been a catastrophic service disruption. The difference between success and failure? Performance optimization patterns that most AI developers never learn.
 

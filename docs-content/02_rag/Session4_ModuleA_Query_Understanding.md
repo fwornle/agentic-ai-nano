@@ -1,6 +1,6 @@
-# Session 4 - Module A: Advanced Query Understanding - Reading Between the Lines
+# Session 4 - Module A: Query Understanding
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
+> **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 4 core content first.
 
 You've implemented HyDE, query expansion, and context optimization in Session 4. But when you deploy to real users in conversational interfaces, you discover new challenges: users say "it" without referencing what they mean, attach images expecting visual understanding, and express the same need in dramatically different ways depending on their expertise level.

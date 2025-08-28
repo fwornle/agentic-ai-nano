@@ -1,7 +1,9 @@
-# The Performance Domination: Advanced Optimization Mastery
-## *How Amazon Saved $3.9B Through Intelligent Performance Optimization*
+# Session 8 - Module C: Performance Optimization
 
-**Prerequisites**: [Session 8 Core Section Complete](Session8_Agno_Production_Ready_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 8 core content first.
+
+## Amazon Performance Optimization
 
 ### The Performance Crisis That Shook The Digital World
 
