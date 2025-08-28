@@ -222,10 +222,9 @@ Each session follows a consistent, learner-friendly structure:
 5. **Regular Practice**: Apply concepts to real projects and use cases
 
 ### Time Management Tips
-
-- **Observer Path**: 1-2 sessions per day
-- **Participant Path**: 1 session per day
-- **Implementer Path**: 1 session every 2-3 days
+- **👀 Observer Path**: 1-2 sessions per day
+- **🙋‍♂️ Participant Path**: 1 session per day
+- **🛠️ Implementer Path**: 1 session every 2-3 days
 - **Mixed Approach**: Adapt path based on session complexity and available time
 
 ## Learning Outcomes
