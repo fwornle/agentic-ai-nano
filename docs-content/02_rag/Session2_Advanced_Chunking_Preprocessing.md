@@ -55,6 +55,7 @@ def detect_simple_content_type(text_line):
 ```
 
 **Code Explanation:**
+
 - **Lines 12-14**: Detects markdown headings by looking for the '#' symbol
 - **Lines 16-18**: Identifies tables by counting pipe characters ('|') that separate columns
 - **Lines 20-22**: Recognizes code blocks by indentation patterns
@@ -91,6 +92,7 @@ class DocumentElement:
 ```
 
 **Implementation Benefits:**
+
 - **Structured representation**: Each element carries its content, type, and context
 - **Hierarchy tracking**: Level information enables structure-aware processing
 - **Rich metadata**: Position and additional context for enhanced chunking
@@ -243,6 +245,7 @@ def simple_hierarchical_chunk(elements: List[DocumentElement],
 ```
 
 **Key Benefits:**
+
 - **Natural boundaries**: Uses document structure instead of arbitrary splits
 - **Complete sections**: Keeps related content together
 - **Size management**: Respects maximum chunk size while preserving structure
@@ -463,6 +466,7 @@ def extract_simple_metadata(text: str) -> Dict[str, Any]:
 ```
 
 **Metadata Benefits:**
+
 - **Enhanced searchability**: Additional context for retrieval matching
 - **Content understanding**: Insight into chunk characteristics
 - **Quality assessment**: Metrics for evaluating chunk usefulness
@@ -697,6 +701,7 @@ def process_simple_table(table_text: str) -> Dict[str, Any]:
 ```
 
 **Table Processing Benefits:**
+
 - **Structure preservation**: Tables remain intact and meaningful
 - **Enhanced searchability**: Descriptive text makes tables discoverable
 - **Metadata enrichment**: Table characteristics available for retrieval
@@ -916,51 +921,51 @@ class ChunkQualityAssessor:
 Test your understanding of advanced chunking and preprocessing concepts:
 
 **Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?  
-A) Reduces processing time    
-B) Enables structure-aware chunking that preserves meaning    
-C) Reduces storage requirements    
+A) Reduces processing time
+B) Enables structure-aware chunking that preserves meaning
+C) Reduces storage requirements
 D) Improves embedding quality  
 
 **Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?  
-A) To reduce memory usage    
-B) To simplify the codebase    
-C) To improve processing speed    
+A) To reduce memory usage
+B) To simplify the codebase
+C) To improve processing speed
 D) To preserve document structure and create meaningful chunk boundaries  
 
 **Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?  
-A) Reduces chunk size    
-B) Enables more precise retrieval through enriched context    
-C) Simplifies the chunking process    
+A) Reduces chunk size
+B) Enables more precise retrieval through enriched context
+C) Simplifies the chunking process
 D) Improves computational efficiency  
 
 **Question 4:** Why do tables require specialized processing in RAG systems?  
-A) Tables use different encoding formats    
-B) Tables contain more text than paragraphs    
-C) Tables are always larger than the chunk size    
+A) Tables use different encoding formats
+B) Tables contain more text than paragraphs
+C) Tables are always larger than the chunk size
 D) Tables have structured relationships that are lost in naive chunking  
 
 **Question 5:** When processing documents with images, what is the best practice for RAG systems?  
-A) Store images as binary data in chunks    
-B) Create separate chunks for each image    
-C) Replace image references with descriptive text    
+A) Store images as binary data in chunks
+B) Create separate chunks for each image
+C) Replace image references with descriptive text
 D) Ignore images completely  
 
 **Question 6:** Which metric is most important for measuring chunk coherence in hierarchical chunking?  
-A) Topic consistency between related chunks    
-B) Number of chunks created    
-C) Average chunk size    
+A) Topic consistency between related chunks
+B) Number of chunks created
+C) Average chunk size
 D) Processing speed  
 
 **Question 7:** What is the optimal overlap ratio for hierarchical chunks?  
-A) 100% - complete duplication    
-B) 0% - no overlap needed    
-C) 10-20% - balanced context and efficiency    
+A) 100% - complete duplication
+B) 0% - no overlap needed
+C) 10-20% - balanced context and efficiency
 D) 50% - maximum context preservation  
 
 **Question 8:** Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?  
-A) To select the most appropriate processing approach for the content type    
-B) To set the embedding model parameters    
-C) To reduce computational costs    
+A) To select the most appropriate processing approach for the content type
+B) To set the embedding model parameters
+C) To reduce computational costs
 D) To determine the number of chunks to create  
 
 [**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
@@ -971,7 +976,7 @@ D) To determine the number of chunks to create
 
 **Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 
-### Optional Deep Dive Modules:
+### Optional Deep Dive Modules
 
 - **[Module A: Advanced Document Analytics](Session2_ModuleA_Document_Analytics.md)** - Deep analytics for document structure analysis
 - **[Module B: Enterprise Content Processing](Session2_ModuleB_Enterprise_Processing.md)** - Enterprise-scale content processing strategies

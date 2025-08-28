@@ -41,6 +41,7 @@ All tools, dependencies, and BMW Gaia LLM API access are pre-configured and read
 ### AI Assistant Integration
 
 Inside the corporate network, you have access to:
+
 - **GitHub Copilot**: Code completion and generation
 - **BMW Gaia LLM API**: Enterprise-approved AI models
 - **Coding-Assistant**: Open-source CLI coding assistant

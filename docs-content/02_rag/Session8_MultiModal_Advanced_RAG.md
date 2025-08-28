@@ -5,6 +5,7 @@ In Sessions 1-7, you built sophisticated RAG systems that can process text intel
 This session transforms your RAG system from text-only to truly multi-modal intelligence. You'll implement systems that can understand images directly, process audio content without lossy transcription, analyze video for temporal patterns, and most importantly, reason across multiple modalities simultaneously. The goal is moving from "read and understand text" to "perceive and understand any form of human communication."
 
 ## Optional Deep Dive Modules
+
 - **[Module A: Research-Grade Techniques](Session8_ModuleA_Research_Techniques.md)**
 - **[Module B: Enterprise Multi-Modal](Session8_ModuleB_Enterprise_MultiModal.md)**
 
@@ -18,9 +19,10 @@ The challenge isn't just technical – it's cognitive. Human knowledge isn't pur
 
 The evolution from text-only to truly multi-modal RAG represents three distinct paradigm shifts, each addressing fundamental limitations of the previous approach:
 
-### The Three Evolutionary Paradigms of Multimodal RAG (MRAG):
+### The Three Evolutionary Paradigms of Multimodal RAG (MRAG)
 
-#### MRAG 1.0 - Pseudo-Multimodal Era (Lossy Translation):
+#### MRAG 1.0 - Pseudo-Multimodal Era (Lossy Translation)
+
 - **Approach**: Force everything through text by converting multimodal content to text descriptions
 - **Fatal Flaw**: Massive information loss during translation
 
@@ -28,7 +30,8 @@ The first attempt at "multimodal" RAG simply converted everything to text: image
 
 - **Use Case**: Image captioning → text embedding → traditional RAG (missing 90% of visual information)
 
-#### MRAG 2.0 - True Multimodality (Breakthrough Era):
+#### MRAG 2.0 - True Multimodality (Breakthrough Era)
+
 - **Approach**: Preserve original modalities using Multimodal Large Language Models
 - **Breakthrough**: Process images as images, audio as audio, maintaining semantic integrity
 
@@ -36,7 +39,8 @@ MRAG 2.0 solves the information loss problem by using models that can understand
 
 - **Breakthrough**: A technical diagram remains a spatial-visual object; a video retains its temporal sequences; audio keeps its acoustic characteristics
 
-#### MRAG 3.0 - Intelligent Autonomous Control (Current Frontier):
+#### MRAG 3.0 - Intelligent Autonomous Control (Current Frontier)
+
 - **Approach**: Combine Session 7's agentic reasoning with multi-modal perception
 - **Revolution**: Systems that think across modalities with autonomous intelligence
 
@@ -44,7 +48,8 @@ MRAG 3.0 merges the agentic reasoning capabilities from Session 7 with true mult
 
 - **Intelligence**: "This question about architectural design needs visual examples, but my initial search found only text. Let me search specifically for architectural diagrams and cross-reference them with the textual principles."
 
-#### Evolution Timeline and Technical Progression:
+#### Evolution Timeline and Technical Progression
+
 ```
 MRAG 1.0 → MRAG 2.0 → MRAG 3.0
 
@@ -62,16 +67,16 @@ Loss         Integrity      Intelligence
 
 ![RAG Reasoning Advanced](images/RAG-reasoning-3.webp)
 
-#### MRAG 3.0 Architectural Intelligence:
+#### MRAG 3.0 Architectural Intelligence
+
 MRAG 3.0 represents the convergence of:
+
 - **Multimodal Reasoning**: Cognitive analysis across text, image, audio, and video
 - **Autonomous Search Planning**: Intelligent strategy selection for complex multimodal queries
 - **Dynamic Modality Integration**: Real-time adaptation of processing strategies based on content analysis
 - **Self-Improving Multimodal Intelligence**: Systems that learn optimal multimodal processing patterns
 
 #### From Single-Modal to MRAG 3.0
-
-
 
 ## Part 1: MRAG Evolution - Learning from Failure
 
@@ -83,7 +88,7 @@ Starting with MRAG 1.0 isn't about implementing an inferior approach – it's ab
 
 By implementing MRAG 1.0, you'll see firsthand how information degrades during modality conversion, making this experiential learning that guides better architectural decisions.
 
-#### MRAG 1.0 Architecture and Limitations:
+#### MRAG 1.0 Architecture and Limitations
 
 ```python
 
@@ -285,27 +290,29 @@ MRAG 2.0 represents a paradigm shift from lossy translation to semantic preserva
 
 Building on your Session 2-7 foundation, MRAG 2.0 preserves semantic integrity by maintaining original multimodal data throughout the processing pipeline:
 
-#### MRAG 2.0 Architecture Pattern:
+#### MRAG 2.0 Architecture Pattern
+
 - **Session 2 Chunking Logic** → Applied to multimodal segments with preserved native format
 - **Session 3 Vector Storage** → True multimodal embeddings in unified vector spaces
 - **Session 4 Query Enhancement** → Native cross-modal query processing (image queries, audio queries)
 - **Session 5 Evaluation** → Multimodal semantic integrity assessment
 - **Session 7 Reasoning Integration** → Cognitive reasoning across multiple modalities
 
-#### MRAG 2.0 Semantic Preservation Pipeline:
+#### MRAG 2.0 Semantic Preservation Pipeline
 
 #### MRAG 2.0: Foundation for True Multimodal Intelligence
 
 Building on your Session 2-7 foundation, MRAG 2.0 preserves semantic integrity by maintaining original multimodal data throughout the processing pipeline:
 
-#### MRAG 2.0 Architecture Pattern:
+#### MRAG 2.0 Architecture Pattern
+
 - **Session 2 Chunking Logic** → Applied to multimodal segments with preserved native format
 - **Session 3 Vector Storage** → True multimodal embeddings in unified vector spaces
 - **Session 4 Query Enhancement** → Native cross-modal query processing (image queries, audio queries)
 - **Session 5 Evaluation** → Multimodal semantic integrity assessment
 - **Session 7 Reasoning Integration** → Cognitive reasoning across multiple modalities
 
-#### MRAG 2.0 Semantic Preservation Pipeline:
+#### MRAG 2.0 Semantic Preservation Pipeline
 
 ```python
 
@@ -1244,19 +1251,21 @@ Visual content search with text queries demonstrates true cross-modal capabiliti
 
 Multimodal RAG-Fusion represents the next generation of query enhancement that works across multiple modalities while preserving semantic integrity.
 
-### Multimodal RAG-Fusion Evolution:
+### Multimodal RAG-Fusion Evolution
+
 - **Session 4 HyDE**: Generate hypothetical documents → embed → search (text-only)
 - **Session 4 Query Expansion**: Add related terms to original query (text-only)
 - **Session 8 MRAG 1.0**: Convert multimodal to text → apply traditional RAG-Fusion (lossy)
 - **Session 8 MRAG 2.0**: Native multimodal query variants → true multimodal search → semantic fusion
 - **Session 8 MRAG 3.0**: Autonomous multimodal query planning → intelligent fusion → self-correcting results
 
-### Multimodal RAG-Fusion Advantage:
+### Multimodal RAG-Fusion Advantage
+
 Instead of text-only query enhancement, Multimodal RAG-Fusion generates query perspectives across multiple modalities (text, image, audio concepts) while preserving semantic integrity. MRAG 3.0 autonomously determines the optimal multimodal query strategy and intelligently fuses results.
 
-### MRAG 3.0 Autonomous Fusion Architecture:
+### MRAG 3.0 Autonomous Fusion Architecture
 
-### MRAG 3.0 Autonomous Fusion Architecture:
+### MRAG 3.0 Autonomous Fusion Architecture
 
 MRAG 3.0 autonomous fusion represents the pinnacle of multimodal RAG technology, combining intelligent query planning with semantic-preserving fusion:
 
@@ -2044,6 +2053,7 @@ class AdvancedRAGResearchSystem:
 ```
 
 ### Learned Sparse Retrieval
+
 ```python
     async def _learned_sparse_retrieval(self, query: str) -> Dict[str, Any]:
         """Implement learned sparse retrieval (e.g., SPLADE-style)."""
@@ -2210,19 +2220,21 @@ class SelfImprovingRAGSystem:
 
 Create a comprehensive MRAG system that demonstrates the complete evolution from MRAG 1.0 (lossy) through MRAG 2.0 (semantic integrity) to MRAG 3.0 (autonomous intelligence).
 
-
 ### Phase 1: MRAG 1.0 Analysis
+
 1. **Demonstrate Limitations**: Build a MRAG 1.0 system to show information loss
 2. **Quantify Information Loss**: Measure semantic degradation in text conversion
 3. **Document Failure Cases**: Identify scenarios where MRAG 1.0 fails completely
 
 ### Phase 2: MRAG 2.0 Implementation
+
 1. **True Multimodal Processing**: Preserve semantic integrity across all modalities
 2. **Native Multimodal Embeddings**: Implement unified vector spaces for cross-modal search
 3. **Cross-Modal Understanding**: Enable image queries, audio queries, and mixed-modal queries
 4. **Semantic Preservation Validation**: Measure and verify semantic integrity preservation
 
 ### Phase 3: MRAG 3.0 Autonomous Intelligence
+
 1. **Autonomous Query Planning**: Intelligent parsing and strategy selection
 2. **Dynamic Reasoning**: Integration with Session 7's cognitive reasoning capabilities
 3. **Self-Correcting Systems**: Autonomous validation and improvement mechanisms
@@ -2377,6 +2389,7 @@ class MRAGEvolutionSystem:
 ## Next Session Preview
 
 In **Session 9: Production RAG & Enterprise Integration**, we'll explore:
+
 - **Scalable RAG deployment** with containerization, load balancing, and auto-scaling
 - **Enterprise integration patterns** for existing systems, data pipelines, and workflows
 - **Security and compliance** implementation for regulated industries and data protection
@@ -2390,7 +2403,6 @@ In **Session 9: Production RAG & Enterprise Integration**, we'll explore:
 3. **Benchmark MRAG Evolution**: Document performance improvements across all three paradigms
 4. **Prepare Enterprise Integration**: Map MRAG 3.0 capabilities to production requirements
 
-
 ---
 
 ## Multiple Choice Test - Session 8
@@ -2398,51 +2410,51 @@ In **Session 9: Production RAG & Enterprise Integration**, we'll explore:
 Test your understanding of Multi-Modal & Advanced RAG Variants:
 
 **Question 1:** What is the fundamental difference between MRAG 1.0 and MRAG 2.0 systems?  
-A) MRAG 2.0 processes data faster than MRAG 1.0    
-B) MRAG 1.0 uses lossy translation while MRAG 2.0 preserves semantic integrity    
-C) MRAG 2.0 requires less computational resources    
+A) MRAG 2.0 processes data faster than MRAG 1.0
+B) MRAG 1.0 uses lossy translation while MRAG 2.0 preserves semantic integrity
+C) MRAG 2.0 requires less computational resources
 D) MRAG 1.0 handles more modalities than MRAG 2.0  
 
 **Question 2:** What distinguishes MRAG 3.0 from MRAG 2.0 systems?  
-A) Better storage efficiency    
-B) Autonomous decision-making and dynamic reasoning capabilities    
-C) Support for more file formats    
+A) Better storage efficiency
+B) Autonomous decision-making and dynamic reasoning capabilities
+C) Support for more file formats
 D) Faster processing speed  
 
 **Question 3:** In RRF, what does the parameter 'k' control?  
-A) The number of query variants generated    
-B) The smoothing factor that reduces the impact of rank position    
-C) The maximum number of results to return    
+A) The number of query variants generated
+B) The smoothing factor that reduces the impact of rank position
+C) The maximum number of results to return
 D) The similarity threshold for documents  
 
 **Question 4:** What is the key benefit of weighted ensemble approaches over simple voting?  
-A) Faster computation    
-B) Lower memory usage    
-C) Better handling of system reliability differences    
+A) Faster computation
+B) Lower memory usage
+C) Better handling of system reliability differences
 D) Simpler implementation  
 
 **Question 5:** What is the most critical requirement for legal RAG systems?  
-A) Fast response time    
-B) Accurate citation validation and precedent analysis    
-C) Large knowledge base size    
+A) Fast response time
+B) Accurate citation validation and precedent analysis
+C) Large knowledge base size
 D) Simple user interface  
 
 **Question 6:** Why do medical RAG systems require safety pre-screening?  
-A) To improve response speed    
-B) To prevent potential harm from medical misinformation    
-C) To reduce computational costs    
+A) To improve response speed
+B) To prevent potential harm from medical misinformation
+C) To reduce computational costs
 D) To simplify the user interface  
 
 **Question 7:** How does ColBERT's late interaction differ from traditional dense retrieval?  
-A) It uses sparse embeddings instead of dense ones    
-B) It computes token-level interactions between queries and documents    
-C) It requires less computational power    
+A) It uses sparse embeddings instead of dense ones
+B) It computes token-level interactions between queries and documents
+C) It requires less computational power
 D) It only works with short documents  
 
 **Question 8:** What is the primary benefit of progressing from MRAG 1.0 through MRAG 3.0?  
-A) Reduced computational costs    
-B) Simpler implementation requirements    
-C) Elimination of information loss and addition of autonomous intelligence    
+A) Reduced computational costs
+B) Simpler implementation requirements
+C) Elimination of information loss and addition of autonomous intelligence
 D) Compatibility with legacy systems  
 
 ---
@@ -2451,14 +2463,13 @@ D) Compatibility with legacy systems
 
 ---
 
-
 ---
 
 ## Navigation
 
 **Previous:** [Session 7 - Agentic RAG Systems](Session7_Agentic_RAG_Systems.md)
 
-## Optional Deep Dive Modules:
+## Optional Deep Dive Modules
 
 - **[Module A: Research-Grade Techniques](Session8_ModuleA_Research_Techniques.md)** - Advanced research implementations
 - **[Module B: Enterprise Multi-Modal](Session8_ModuleB_Enterprise_MultiModal.md)** - Enterprise multimodal systems

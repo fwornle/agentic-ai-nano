@@ -62,7 +62,6 @@ class MultiClusterRAGOrchestrator:
             self.clusters[region] = KubernetesClusterManager(region, config)
 ```
 
-
 ```python
         # Cross-cluster networking and service mesh
         self.service_mesh = IstioServiceMesh()
@@ -71,7 +70,6 @@ class MultiClusterRAGOrchestrator:
         # Data synchronization between clusters
         self.data_replicator = CrossClusterDataReplicator()
 ```
-
 
 ### Step 2: Cross-Cluster Service Discovery
 
@@ -92,7 +90,6 @@ class MultiClusterRAGOrchestrator:
                 })
 ```
 
-
 ```python
                 # Configure service mesh for cross-cluster communication
                 mesh_config = await self.service_mesh.configure_cluster(
@@ -104,7 +101,6 @@ class MultiClusterRAGOrchestrator:
                     region, service_deployment['vector_store_endpoints']
                 )
 ```
-
 
 ```python
                 deployment_results[region] = {
@@ -121,7 +117,6 @@ class MultiClusterRAGOrchestrator:
                 }
 ```
 
-
 ```python
         # Configure global load balancer
         await self.global_load_balancer.configure_clusters(
@@ -137,7 +132,6 @@ class MultiClusterRAGOrchestrator:
             'global_load_balancer_configured': True
         }
 ```
-
 
 #### **Advanced Auto-Scaling with Machine Learning**
 
@@ -218,7 +212,6 @@ Each model generates predictions with confidence intervals, enabling the system 
         }
 ```
 
-
 ### Advanced Monitoring and Observability
 
 #### **Distributed Tracing for RAG Pipelines**
@@ -275,7 +268,7 @@ The trace context mapping provides standardized span names for different RAG ope
 ```
 
 Each RAG request gets a parent span that tracks the entire operation lifecycle. The span includes metadata like request ID and operation type for correlation across distributed components.
-    
+
     async def trace_component_operation(self, parent_span, component: str, 
                                       operation_details: Dict[str, Any]) -> ContextManager:
         """Trace individual component operations within RAG pipeline."""
@@ -292,6 +285,7 @@ Each RAG request gets a parent span that tracks the entire operation lifecycle. 
         )
         
         return child_span
+
 ```
 
 Child spans track individual component operations within the larger RAG request, creating a hierarchical view of the entire pipeline execution. This enables precise performance bottleneck identification.
@@ -352,7 +346,7 @@ The analysis begins by collecting comprehensive performance data from the specif
 ```
 
 Each specialized analyzer processes its relevant data subset concurrently. This parallel analysis approach reduces overall processing time while providing deep insights into different system aspects.
-        
+
         # Generate optimization recommendations using ML
         optimization_recommendations = await self.ml_engine.generate_optimizations(
             analyses, performance_data
@@ -360,6 +354,7 @@ Each specialized analyzer processes its relevant data subset concurrently. This 
         
         # Calculate performance scores
         performance_scores = self._calculate_performance_scores(analyses)
+
 ```
 
 The ML engine correlates findings across all analyzers to generate actionable optimization recommendations. Performance scores are calculated to provide quantitative metrics for system health assessment.
@@ -418,7 +413,6 @@ Retrieval quality prioritizes precision and recall equally (40% each), with spee
         
         return scores
 ```
-
 
 ### Enterprise Compliance and Governance
 
@@ -484,7 +478,7 @@ The monitoring system checks multiple compliance dimensions simultaneously. Data
 
 Data retention monitoring ensures proper lifecycle management, while transfer monitoring tracks cross-border data movements for regulatory compliance.
 
-```python        
+```python
         # Generate compliance score and recommendations
         compliance_score = self._calculate_compliance_score(monitoring_results)
         
@@ -507,39 +501,38 @@ When compliance scores fall below the threshold (default 90%), automated remedia
         }
 ```
 
-
 ## 📝 Multiple Choice Test - Module A
 
 Test your understanding of advanced production patterns:
 
 **Question 1:** What is the primary benefit of deploying RAG across multiple Kubernetes clusters?  
-A) Reduced deployment complexity    
-B) Lower operational costs    
-C) Geographic distribution and disaster recovery    
+A) Reduced deployment complexity
+B) Lower operational costs
+C) Geographic distribution and disaster recovery
 D) Simplified monitoring  
 
 **Question 2:** Why is machine learning-based scaling superior to threshold-based scaling?  
-A) It requires less configuration    
-B) It predicts future load patterns and scales proactively    
-C) It uses fewer computational resources    
+A) It requires less configuration
+B) It predicts future load patterns and scales proactively
+C) It uses fewer computational resources
 D) It's easier to debug  
 
 **Question 3:** What is the key advantage of distributed tracing in RAG systems?  
-A) Reduced system complexity    
-B) Lower storage requirements    
-C) End-to-end visibility across all pipeline components    
+A) Reduced system complexity
+B) Lower storage requirements
+C) End-to-end visibility across all pipeline components
 D) Faster query processing  
 
 **Question 4:** Which metric combination is most important for RAG system optimization?  
-A) CPU usage only    
-B) Memory consumption and network traffic    
-C) Query efficiency, retrieval quality, response quality, and resource efficiency    
+A) CPU usage only
+B) Memory consumption and network traffic
+C) Query efficiency, retrieval quality, response quality, and resource efficiency
 D) Disk space and bandwidth  
 
 **Question 5:** What is the primary advantage of automated compliance monitoring?  
-A) Reduced compliance costs    
-B) Simplified audit processes    
-C) Continuous adherence without manual oversight    
+A) Reduced compliance costs
+B) Simplified audit processes
+C) Continuous adherence without manual oversight
 D) Faster system performance  
 
 [**🗂️ View Test Solutions →**](Session9_ModuleA_Test_Solutions.md)
@@ -548,11 +541,13 @@ D) Faster system performance
 
 ## 🧭 Navigation
 
-### Related Modules:
+### Related Modules
+
 - **Core Session:** [Session 9 - Production RAG & Enterprise Integration](Session9_Production_RAG_Enterprise_Integration.md)
 - **Related Module:** [Module B - Enterprise Architecture](Session9_ModuleB_Enterprise_Architecture.md)
 
 **🗂️ Code Files:** All examples use files in `src/session9/`
+
 - `production_deployment.py` - Advanced deployment orchestration
 - `load_balancer_autoscaler.py` - Intelligent load balancing and scaling
 - `monitoring_analytics.py` - Comprehensive production monitoring

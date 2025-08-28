@@ -5,6 +5,7 @@ In Sessions 1-4, you built sophisticated RAG systems with intelligent chunking, 
 This session transforms RAG development from intuition-driven to evidence-driven. You'll implement multi-dimensional evaluation frameworks that measure retrieval precision, generation quality, and end-to-end utility. You'll design A/B testing that scientifically validates enhancement effectiveness and production monitoring that maintains quality at scale. The goal is replacing "it seems better" with "it performs 23% better on factual accuracy with 95% confidence."
 
 ## Optional Deep Dive Modules
+
 - **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Custom metrics and domain-specific evaluation
 - **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production-scale monitoring and alerting
 
@@ -1546,51 +1547,51 @@ Finally, we generate comprehensive evaluation reports:
 Test your understanding of RAG evaluation and quality assessment techniques:
 
 **Question 1:** Which metric is most important for evaluating retrieval quality in RAG systems?  
-A) Response time    
-B) Recall@K (how many relevant documents are in top-K results)    
-C) Token count    
+A) Response time
+B) Recall@K (how many relevant documents are in top-K results)
+C) Token count
 D) Database size  
 
 **Question 2:** What does the RAGAS faithfulness metric measure?  
-A) How fast the system responds    
-B) How well retrieved documents match the query    
-C) How factually accurate the generated response is relative to retrieved context    
+A) How fast the system responds
+B) How well retrieved documents match the query
+C) How factually accurate the generated response is relative to retrieved context
 D) How many sources are cited  
 
 **Question 3:** In A/B testing for RAG systems, what is the most reliable success metric?  
-A) System latency    
-B) Cost per query    
-C) User satisfaction and task completion rates    
+A) System latency
+B) Cost per query
+C) User satisfaction and task completion rates
 D) Number of retrieved documents  
 
 **Question 4:** When should you use automated LLM-as-a-judge evaluation over human evaluation?  
-A) When you need perfect accuracy    
-B) When you need to evaluate at scale with consistent criteria    
-C) When the stakes are very high    
+A) When you need perfect accuracy
+B) When you need to evaluate at scale with consistent criteria
+C) When the stakes are very high
 D) Never, human evaluation is always better  
 
 **Question 5:** What is the primary purpose of regression testing in RAG evaluation?  
-A) To test system speed    
-B) To ensure new changes don't decrease quality on established benchmarks    
-C) To measure user satisfaction    
+A) To test system speed
+B) To ensure new changes don't decrease quality on established benchmarks
+C) To measure user satisfaction
 D) To optimize costs  
 
 **Question 6:** Which RAG component failure mode is hardest to detect with automated metrics?  
-A) Slow retrieval speed    
-B) Empty results from vector search    
-C) Subtle hallucinations in generated responses    
+A) Slow retrieval speed
+B) Empty results from vector search
+C) Subtle hallucinations in generated responses
 D) Database connection errors  
 
 **Question 7:** What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?  
-A) Faster evaluation    
-B) Lower computational cost    
-C) Captures different failure modes that single metrics might miss    
+A) Faster evaluation
+B) Lower computational cost
+C) Captures different failure modes that single metrics might miss
 D) Easier to implement  
 
 **Question 8:** In production RAG monitoring, what threshold approach is most effective for quality alerts?  
-A) Fixed absolute thresholds for all metrics    
-B) Adaptive thresholds based on historical performance patterns    
-C) No thresholds, manual monitoring only    
+A) Fixed absolute thresholds for all metrics
+B) Adaptive thresholds based on historical performance patterns
+C) No thresholds, manual monitoring only
 D) Random threshold selection  
 
 [**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
@@ -1626,7 +1627,7 @@ Traditional vector RAG finds documents similar to queries. GraphRAG enables mult
 
 **Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 
-### Optional Deep Dive Modules:
+### Optional Deep Dive Modules
 
 - 🔬 **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Custom metrics and domain-specific evaluation
 - 🏭 **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production-scale monitoring and alerting

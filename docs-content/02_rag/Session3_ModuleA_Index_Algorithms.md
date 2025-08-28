@@ -10,16 +10,19 @@ This module teaches you to implement custom indexing algorithms that understand 
 ## Navigation & Quick Start
 
 ### Related Modules
+
 - **[Session 3 Core: Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)** - Foundation vector search concepts
 - **[Session 4 Modules →](Session4_ModuleA_Query_Understanding.md)** - Query processing techniques
 
 ### Code Files
+
 - **Vector Index Engine**: [`src/session3/optimized_vector_index.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/optimized_vector_index.py) - Advanced indexing algorithms
 - **Search Optimization**: [`src/session3/optimized_search_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/optimized_search_engine.py) - Search performance optimization
 - **Hybrid Search**: [`src/session3/hybrid_search_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/hybrid_search_engine.py) - Combined vector/keyword search
 - **Demo Application**: [`src/session3/demo_vector_search.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session3/demo_vector_search.py) - Index algorithms showcase
 
 ### Quick Start
+
 ```bash
 # Test advanced indexing algorithms
 cd src/session3
@@ -41,6 +44,7 @@ HNSW (Hierarchical Navigable Small World) is a state-of-the-art approximate near
 When you control the implementation, you can add RAG-specific optimizations: query-aware routing, content-type specialized parameters, and generation-focused similarity metrics that generic libraries don't support.
 
 ### Why HNSW for RAG?
+
 - **Logarithmic search complexity**: O(log n) average case performance
 - **High recall**: Maintains accuracy even with large datasets
 - **Memory efficiency**: Stores only necessary connections
@@ -75,7 +79,8 @@ class CustomHNSW:
         self.entry_point = None
 ```
 
-### Parameter Deep Dive:
+### Parameter Deep Dive
+
 - **`M` (Max Connections)**: Controls graph connectivity. Higher values (16-48) improve recall but increase memory usage and search time
 - **`ef_construction`**: Search depth during construction. Higher values (200-400) create better quality graphs but slower indexing
 - **`ml` (Level Multiplier)**: Controls level distribution. Default 1/ln(2) creates optimal skip-list-like structure
@@ -102,6 +107,7 @@ Now let's implement the vector addition method, which orchestrates the entire HN
 ```
 
 **Level Assignment Strategy**: Each node is randomly assigned to levels 0 through L, where higher levels are exponentially less probable. This creates a natural hierarchy where:
+
 - **Level 0**: Contains all nodes (dense connectivity)
 - **Higher levels**: Contain progressively fewer nodes (sparse, long-range connections)
 
@@ -135,6 +141,7 @@ Now we implement the connection phase, where we build the graph edges that enabl
 ```
 
 **Connection Heuristic Philosophy**: Simply connecting to the closest neighbors creates "hub" nodes that degrade performance. Instead, we use a heuristic that balances:
+
 - **Distance**: Prefer closer neighbors for accuracy
 - **Diversity**: Avoid clustering around hubs
 - **Connectivity**: Ensure graph remains navigable
@@ -168,7 +175,8 @@ Static index configurations work well for predictable workloads, but RAG systems
 
 This isn't just theoretical – it's the difference between a system that performs consistently well versus one that excels at the queries your users actually ask.
 
-### The Adaptive Index Challenge:
+### The Adaptive Index Challenge
+
 - **Query Diversity**: Some users ask broad questions, others seek specific facts
 - **Temporal Patterns**: Usage patterns change over time and across user segments  
 - **Domain Shifts**: New content areas may require different retrieval strategies
@@ -186,7 +194,8 @@ class DynamicIndexOptimizer:
         self.optimization_history = []
 ```
 
-### Core Optimization Components:
+### Core Optimization Components
+
 - **Query Statistics**: Track patterns in vector norms, dimensional preferences, and query frequency
 - **Performance Metrics**: Monitor search latency, recall quality, and resource utilization
 - **Parameter History**: Remember what worked and what didn't for different query types
@@ -240,7 +249,7 @@ Let's dive into the analytical engine that powers these optimization decisions:
         return analysis
 ```
 
-### Query Pattern Analytics Explained:
+### Query Pattern Analytics Explained
 
 - **Average Query Norm**: Indicates if users are searching with long or short queries, affecting optimal similarity thresholds
 - **Query Diversity**: High diversity suggests need for broader search, low diversity enables focused optimization
@@ -286,7 +295,8 @@ Generic vector databases optimize for similarity search, but RAG systems require
 
 This distinction drives the design of specialized RAG indices that optimize for generation quality rather than just vector similarity.
 
-### RAG-Specific Retrieval Challenges:
+### RAG-Specific Retrieval Challenges
+
 - **Semantic vs. Lexical**: Some queries need conceptual matches, others need exact terms
 - **Recency Sensitivity**: Fresh information often trumps perfect similarity
 - **Content Diversity**: Multiple perspectives on a topic improve generation quality
@@ -305,7 +315,7 @@ class RAGOptimizedIndex:
         self.temporal_index = {}
 ```
 
-### Multi-Index Architecture Benefits:
+### Multi-Index Architecture Benefits
 
 1. **Semantic Clusters**: Group conceptually related content for efficient topic-focused search
 2. **Keyword Index**: Enable precise term matching for technical queries and proper nouns  
@@ -338,7 +348,7 @@ Let's examine how documents are processed and stored across all three indexing d
             self.keyword_index[keyword].add(chunk_id)
 ```
 
-### Indexing Strategy Breakdown:
+### Indexing Strategy Breakdown
 
 - **Semantic Assignment**: Uses vector similarity to place content in topical clusters, reducing search space
 - **Keyword Extraction**: Identifies important terms for exact matching, crucial for technical content
@@ -378,14 +388,15 @@ Now let's examine the sophisticated search algorithm that orchestrates all three
         return final_results
 ```
 
-### Multi-Signal Fusion Explained:
+### Multi-Signal Fusion Explained
 
 1. **Semantic Foundation**: Vector similarity provides the baseline relevance ranking
 2. **Keyword Enhancement**: Exact term matches receive boosted scores, ensuring precision
 3. **Recency Integration**: Fresh content gets weighted advantage based on domain needs
 4. **Score Normalization**: All signals are combined using learned weights for optimal balance
 
-### Why This Approach Works:
+### Why This Approach Works
+
 - **Complementary Signals**: Each ranking factor captures different aspects of relevance
 - **Failure Tolerance**: If one signal fails (e.g., no keyword matches), others compensate
 - **Domain Adaptability**: Weights can be tuned for different content types and use cases
@@ -402,33 +413,33 @@ This multi-signal fusion transforms simple vector search into an intelligent ret
 Test your understanding of advanced index algorithms:
 
 **Question 1:** What is the key advantage of custom HNSW implementation for RAG?  
-A) Reduced memory usage    
-B) RAG-specific optimizations like semantic clustering and keyword integration    
-C) Faster build times    
+A) Reduced memory usage
+B) RAG-specific optimizations like semantic clustering and keyword integration
+C) Faster build times
 D) Simpler configuration  
 
 **Question 2:** Why is dynamic index optimization important?  
-A) It reduces storage costs    
-B) It adapts index parameters based on actual query patterns for better performance    
-C) It simplifies maintenance    
+A) It reduces storage costs
+B) It adapts index parameters based on actual query patterns for better performance
+C) It simplifies maintenance
 D) It reduces memory usage  
 
 **Question 3:** How does semantic clustering improve RAG performance?  
-A) It reduces index size    
-B) It groups similar content for more efficient search within relevant topics    
-C) It speeds up indexing    
+A) It reduces index size
+B) It groups similar content for more efficient search within relevant topics
+C) It speeds up indexing
 D) It reduces computational requirements  
 
 **Question 4:** What is the benefit of hybrid indexing (vector + keyword + temporal)?  
-A) Reduces complexity    
-B) Enables multi-dimensional optimization for semantic, exact match, and recency needs    
-C) Reduces memory usage    
+A) Reduces complexity
+B) Enables multi-dimensional optimization for semantic, exact match, and recency needs
+C) Reduces memory usage
 D) Simplifies implementation  
 
 **Question 5:** Why is RAG-optimized search different from general vector search?  
-A) It's always faster    
-B) It combines semantic similarity with domain-specific factors like keywords and recency    
-C) It uses less memory    
+A) It's always faster
+B) It combines semantic similarity with domain-specific factors like keywords and recency
+C) It uses less memory
 D) It's simpler to implement  
 
 [**🗂️ View Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
@@ -437,7 +448,8 @@ D) It's simpler to implement
 
 **Previous:** [Session 3 Core: Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)
 
-### Related Modules:
+### Related Modules
+
 - **[Core Session: Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)** - Foundation vector search concepts
 
 **Next:** [Session 4: Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)

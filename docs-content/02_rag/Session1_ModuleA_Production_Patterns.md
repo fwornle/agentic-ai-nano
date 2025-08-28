@@ -23,7 +23,8 @@ python test_rag_performance.py
 python interactive_rag.py
 ```
 
-### Related Files:
+### Related Files
+
 - `src/session1/rag_system.py` - Production RAG implementation
 - `src/session1/test_rag_performance.py` - Performance testing tools
 - `src/session1/interactive_rag.py` - Interactive RAG exploration
@@ -348,33 +349,33 @@ Configuration validation ensures the system has all required settings before sta
 Test your understanding of production RAG patterns:
 
 **Question 1:** What is the primary purpose of a circuit breaker pattern in production RAG systems?  
-A) To improve query performance    
-B) To prevent cascading failures when document processing fails    
-C) To reduce memory usage    
+A) To improve query performance
+B) To prevent cascading failures when document processing fails
+C) To reduce memory usage
 D) To enable caching  
 
 **Question 2:** Why is exponential backoff with jitter important for retry logic?  
-A) It reduces computational costs    
-B) It prevents thundering herd problems and distributes retry attempts    
-C) It improves accuracy    
+A) It reduces computational costs
+B) It prevents thundering herd problems and distributes retry attempts
+C) It improves accuracy
 D) It simplifies error handling  
 
 **Question 3:** What metrics are most critical for monitoring production RAG systems?  
-A) Only response time    
-B) Response time, error rate, cache hit rate, and accuracy    
-C) Only error count    
+A) Only response time
+B) Response time, error rate, cache hit rate, and accuracy
+C) Only error count
 D) Only cache performance  
 
 **Question 4:** How should production RAG systems handle configuration management?  
-A) Hard-code all values    
-B) Use only environment variables    
-C) Combine file-based config with environment variable overrides    
+A) Hard-code all values
+B) Use only environment variables
+C) Combine file-based config with environment variable overrides
 D) Use only configuration files  
 
 **Question 5:** What is the benefit of structured logging in production RAG systems?  
-A) Reduces log file size    
-B) Enables better debugging and monitoring with searchable, parseable logs    
-C) Improves query performance    
+A) Reduces log file size
+B) Enables better debugging and monitoring with searchable, parseable logs
+C) Improves query performance
 D) Reduces memory usage  
 
 [**🗂️ View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
