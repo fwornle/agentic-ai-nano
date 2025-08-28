@@ -13,75 +13,90 @@ This module provides complete coverage of Retrieval-Augmented Generation (RAG) s
 ## Learning Journey
 
 ### Foundation (Sessions 0-2)
+
 Establish your understanding of RAG fundamentals and core implementation patterns.
 
 ### Session 0: Introduction to RAG Architecture
+
 - RAG evolution from 2017 to 2025
 - Fundamental architecture components
 - Problem-solving approaches and alternatives
 - Real-world use cases and applications
 
 ### Session 1: Basic RAG Implementation
+
 - Core RAG pipeline development
 - Document indexing and retrieval
 - Generation and response synthesis
 - End-to-end system integration
 
 ### Session 2: Advanced Chunking & Preprocessing
+
 - Intelligent document segmentation
 - Structure-aware chunking strategies
 - Metadata extraction and enrichment
 - Quality assessment and optimization
 
 ### Search & Enhancement (Sessions 3-4)
+
 Master sophisticated retrieval and query optimization techniques.
 
 ### Session 3: Vector Databases & Search Optimization
+
 - Vector database selection and configuration
 - Hybrid search implementations
 - Index optimization strategies
 - Performance tuning and scaling
 
 ### Session 4: Query Enhancement & Context Augmentation
+
 - Query understanding and expansion
 - Context-aware retrieval strategies
 - Multi-step reasoning approaches
 - Intent classification and routing
 
 ### Evaluation & Quality (Session 5)
+
 Learn to measure, monitor, and improve RAG system performance.
 
 ### Session 5: RAG Evaluation & Quality Assessment
+
 - Comprehensive evaluation frameworks
 - Automated quality metrics
 - Human evaluation strategies
 - Continuous improvement processes
 
 ### Advanced Architectures (Sessions 6-8)
+
 Explore cutting-edge RAG implementations and specialized approaches.
 
 ### Session 6: Graph-Based RAG
+
 - Knowledge graph integration
 - Entity relationship modeling
 - Graph traversal algorithms
 - Multi-hop reasoning systems
 
 ### Session 7: Agentic RAG Systems
+
 - Agent-driven retrieval strategies
 - Self-improving RAG systems
 - Multi-agent RAG coordination
 - Autonomous quality control
 
 ### Session 8: Multi-Modal Advanced RAG
+
 - Text, image, and audio integration
 - Cross-modal retrieval strategies
 - Multi-modal embedding techniques
 - Complex media processing
 
 ### Production & Enterprise (Session 9)
+
 Deploy and maintain enterprise-grade RAG systems.
 
 ### Session 9: Production RAG & Enterprise Integration
+
 - Scalable deployment architectures
 - Security and compliance frameworks
 - Monitoring and observability
@@ -135,21 +150,24 @@ Select your engagement level for optimal learning:
 
 ## Technical Stack
 
-### Core Technologies:
+### Core Technologies
+
 - **Vector Databases**: Chroma, Pinecone, Weaviate, Qdrant
 - **Embedding Models**: OpenAI, Sentence Transformers, Cohere
 - **LLMs**: GPT-4, Claude, Llama, Gemini
 - **Search Engines**: Elasticsearch, OpenSearch
 - **Graph Databases**: Neo4j, Amazon Neptune
 
-### RAG Frameworks:
+### RAG Frameworks
+
 - **LangChain**: RAG pipeline orchestration
 - **LlamaIndex**: Advanced indexing and retrieval
 - **Haystack**: Production RAG systems
 - **ChromaDB**: Vector storage and retrieval
 - **FAISS**: High-performance similarity search
 
-### Infrastructure:
+### Infrastructure
+
 - **Docker & Kubernetes**: Containerization and orchestration
 - **Apache Kafka**: Real-time data streaming
 - **Redis**: Caching and session management
@@ -192,7 +210,7 @@ Each session follows a learner-optimized structure:
 
 ## Success Strategies
 
-### For Maximum Learning Impact:
+### For Maximum Learning Impact
 
 1. **Progressive Mastery**: Build on each session's concepts sequentially
 2. **Practical Implementation**: Deploy examples in your own environment
@@ -200,7 +218,7 @@ Each session follows a learner-optimized structure:
 4. **Iterative Refinement**: Revisit complex concepts with fresh perspective
 5. **Real-World Application**: Apply concepts to actual business problems
 
-### Recommended Schedule:
+### Recommended Schedule
 
 - **Observer Path**: 2-3 sessions per week
 - **Participant Path**: 1-2 sessions per week
@@ -211,22 +229,26 @@ Each session follows a learner-optimized structure:
 
 Upon completion of this module, you will master:
 
-### RAG System Design:
+### RAG System Design
+
 - Architect comprehensive RAG systems from requirements to deployment
 - Select optimal components for specific use cases and constraints
 - Design scalable, maintainable RAG architectures
 
-### Advanced Implementation:
+### Advanced Implementation
+
 - Implement sophisticated retrieval strategies and query optimization
 - Build multi-modal RAG systems handling diverse content types
 - Create agentic RAG systems with self-improvement capabilities
 
-### Production Excellence:
+### Production Excellence
+
 - Deploy enterprise-grade RAG systems with proper security and compliance
 - Implement comprehensive monitoring, evaluation, and optimization workflows
 - Integrate RAG systems into existing enterprise infrastructure
 
-### Quality & Evaluation:
+### Quality & Evaluation
+
 - Design and implement robust evaluation frameworks
 - Monitor and improve system performance continuously
 - Balance accuracy, latency, and cost considerations
@@ -235,7 +257,7 @@ Upon completion of this module, you will master:
 
 <div class="grid cards" markdown>
 
--   :material-rocket-launch:{ .lg .middle } **Start Learning**
+- :material-rocket-launch:{ .lg .middle } **Start Learning**
 
     ---
 
@@ -243,7 +265,7 @@ Upon completion of this module, you will master:
 
     [:octicons-arrow-right-24: Session 0 - RAG Introduction](Session0_Introduction_to_RAG_Architecture.md)
 
--   :material-file-document:{ .lg .middle } **Course Curriculum**
+- :material-file-document:{ .lg .middle } **Course Curriculum**
 
     ---
 
@@ -251,7 +273,7 @@ Upon completion of this module, you will master:
 
     [:octicons-arrow-right-24: View Curriculum](RAG_Nanodegree_Curriculum.md)
 
--   :material-code-braces:{ .lg .middle } **Source Code**
+- :material-code-braces:{ .lg .middle } **Source Code**
 
     ---
 
@@ -259,7 +281,7 @@ Upon completion of this module, you will master:
 
     [:octicons-arrow-right-24: Browse Code](src/)
 
--   :material-compass:{ .lg .middle } **Getting Started**
+- :material-compass:{ .lg .middle } **Getting Started**
 
     ---
 
@@ -271,16 +293,20 @@ Upon completion of this module, you will master:
 
 ## Special Features
 
-### Three-Path Learning System:
+### Three-Path Learning System
+
 Each session accommodates different learning styles and time constraints while maintaining educational rigor and practical applicability.
 
-### Progressive Complexity:
+### Progressive Complexity
+
 From basic RAG implementations to advanced multi-modal and agentic systems, building expertise systematically.
 
-### Enterprise Focus:
+### Enterprise Focus
+
 Real-world considerations including security, compliance, monitoring, and integration with existing enterprise systems.
 
-### Cutting-Edge Content:
+### Cutting-Edge Content
+
 Latest RAG techniques including graph-based approaches, agentic systems, and multi-modal implementations.
 
 ---

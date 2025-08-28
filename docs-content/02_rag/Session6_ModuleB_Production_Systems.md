@@ -8,10 +8,12 @@ You've implemented GraphRAG systems with knowledge graph construction, entity ex
 This module teaches you to build production-ready GraphRAG systems that meet enterprise demands. You'll implement distributed graph processing that scales horizontally, high-availability architectures that maintain service continuity, and enterprise integration patterns that work with existing organizational infrastructure. The goal is GraphRAG systems that operate reliably at the scale and standards that enterprises require.
 
 ### Related Modules
+
 - **[Module A: Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
 - **[Session 6 Core: Graph-Based RAG](Session6_Graph_Based_RAG.md)** - Foundation graph concepts
 
 ### Quick Start
+
 ```bash
 # Test production GraphRAG system
 cd src/session6
@@ -611,33 +613,33 @@ Scaling logic requires multiple scale-up conditions (≥2) to prevent unnecessar
 Test your understanding of production GraphRAG systems:
 
 **Question 1:** What is the primary benefit of distributed GraphRAG over single-node deployments?  
-A) Simpler implementation    
-B) Lower costs    
-C) Horizontal scalability for large knowledge graphs and high query loads    
+A) Simpler implementation
+B) Lower costs
+C) Horizontal scalability for large knowledge graphs and high query loads
 D) Better accuracy  
 
 **Question 2:** What is the main challenge in implementing real-time graph updates?  
-A) Storage space    
-B) Maintaining consistency while providing low-latency access    
-C) User interface complexity    
+A) Storage space
+B) Maintaining consistency while providing low-latency access
+C) User interface complexity
 D) Network bandwidth  
 
 **Question 3:** Which sharding strategy is most effective for GraphRAG systems?  
-A) Random distribution    
-B) Size-based partitioning    
-C) Entity-hash based sharding to maintain relationship locality    
+A) Random distribution
+B) Size-based partitioning
+C) Entity-hash based sharding to maintain relationship locality
 D) Time-based sharding  
 
 **Question 4:** Which metrics are most important for GraphRAG auto-scaling decisions?  
-A) Storage size only    
-B) Query latency, CPU usage, memory usage, and queue length    
-C) Number of users only    
+A) Storage size only
+B) Query latency, CPU usage, memory usage, and queue length
+C) Number of users only
 D) Network traffic only  
 
 **Question 5:** In production GraphRAG monitoring, what should be the highest priority alert?  
-A) High storage usage    
-B) Query failures or response time degradation affecting user experience    
-C) High CPU usage    
+A) High storage usage
+B) Query failures or response time degradation affecting user experience
+C) High CPU usage
 D) Network latency  
 
 [**🗂️ View Test Solutions →**](Session6_ModuleB_Test_Solutions.md)
@@ -646,7 +648,8 @@ D) Network latency
 
 ## Navigation
 
-### Related Modules:
+### Related Modules
+
 - **Core Session:** [Session 6 - Graph-Based RAG](Session6_Graph_Based_RAG.md)
 - **Related Module:** [Module A - Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)
 

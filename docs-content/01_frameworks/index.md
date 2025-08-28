@@ -13,15 +13,18 @@ This module covers the complete landscape of modern AI agent development, focusi
 ## Learning Journey
 
 ### Foundation (Sessions 0-2)
+
 Build your understanding of agent fundamentals and core patterns.
 
 ### Session 0: Introduction to Agent Frameworks & Patterns
+
 - Agent architecture fundamentals
 - Framework comparison and selection
 - Core patterns: ReAct, Reflection, Planning
 - Historical context and evolution
 
 ### Session 1: Bare Metal Agents
+
 - Building agents from scratch with real LLM integration
 - Understanding agent internals and architecture patterns
 - Tool integration and dependency injection
@@ -29,66 +32,79 @@ Build your understanding of agent fundamentals and core patterns.
 - Error handling and resilience
 
 ### Session 2: LangChain Foundations
+
 - LangChain ecosystem overview
 - Chain composition and orchestration
 - Memory management strategies
 - Production deployment patterns
 
 ### Advanced Orchestration (Sessions 3-4)
+
 Master sophisticated agent coordination and team-based approaches.
 
 ### Session 3: LangGraph Multi-Agent Workflows
+
 - Graph-based agent orchestration
 - Complex workflow management
 - State management and routing
 - Parallel execution patterns
 
 ### Session 4: CrewAI Team Orchestration
+
 - Team-based agent coordination
 - Role-based agent specialization
 - Hierarchical agent structures
 - Collaborative problem solving
 
 ### Type Safety & Architecture (Sessions 5-6)
+
 Learn modern approaches to robust agent development.
 
 ### Session 5: PydanticAI Type-Safe Agents
+
 - Type-safe agent development
 - Validation and error handling
 - Schema-driven agent design
 - Testing and quality assurance
 
 ### Session 6: Atomic Agents Modular Architecture
+
 - Modular agent design principles
 - Component composition patterns
 - Reusable agent building blocks
 - Scalable architecture patterns
 
 ### Specialized Frameworks (Sessions 7-8)
+
 Explore cutting-edge agent development tools and production systems.
 
 ### Session 7: First ADK Agent
+
 - Agent Development Kit introduction
 - Rapid agent prototyping
 - Integration with existing systems
 - Development workflow optimization
 
 ### Session 8: Agno Production-Ready Agents
+
 - Production deployment strategies
 - Monitoring and observability
 - Performance optimization
 - Scaling and reliability patterns
 
 ### Advanced Patterns (Sessions 9-10)
+
 Master complex multi-agent systems and enterprise integration.
 
 ### Session 9: Multi-Agent Patterns
+
 - Advanced coordination mechanisms
 - Consensus and conflict resolution
 - Distributed agent architectures
 - Communication protocols
 
 ### Session 10: Enterprise Integration & Production Deployment
+
 - Enterprise architecture integration
 - Security and compliance
 - Monitoring and operations
@@ -142,7 +158,8 @@ Choose your engagement level for each session:
 
 ## Technical Stack
 
-### Core Frameworks:
+### Core Frameworks
+
 - **LangChain**: Foundation for agent development
 - **LangGraph**: Advanced workflow orchestration
 - **CrewAI**: Team-based agent coordination
@@ -151,7 +168,8 @@ Choose your engagement level for each session:
 - **ADK**: Agent Development Kit
 - **Agno**: Production deployment platform
 
-### Supporting Technologies:
+### Supporting Technologies
+
 - **Python 3.9+**: Primary development language
 - **Docker**: Containerization and deployment
 - **FastAPI**: API development and integration
@@ -195,7 +213,7 @@ Each session follows a consistent, learner-friendly structure:
 
 ## Success Strategies
 
-### For Optimal Learning:
+### For Optimal Learning
 
 1. **Sequential Progression**: Complete sessions in order for best comprehension
 2. **Practical Application**: Implement examples in your own environment
@@ -203,7 +221,7 @@ Each session follows a consistent, learner-friendly structure:
 4. **Community Engagement**: Participate in discussions and share insights
 5. **Regular Practice**: Apply concepts to real projects and use cases
 
-### Time Management Tips:
+### Time Management Tips
 
 - **Observer Path**: 1-2 sessions per day
 - **Participant Path**: 1 session per day
@@ -214,22 +232,26 @@ Each session follows a consistent, learner-friendly structure:
 
 By completing this module, you will be able to:
 
-### Framework Mastery:
+### Framework Mastery
+
 - Choose and implement appropriate agent frameworks for specific use cases
 - Build agents using LangChain, LangGraph, CrewAI, PydanticAI, and other modern frameworks
 - Understand trade-offs between different architectural approaches
 
-### Production Deployment:
+### Production Deployment
+
 - Deploy agents to production environments with proper monitoring
 - Implement security, scaling, and reliability patterns
 - Integrate agents into existing enterprise systems
 
-### Advanced Patterns:
+### Advanced Patterns
+
 - Design and implement multi-agent coordination systems
 - Create sophisticated workflows with conditional logic and parallel execution
 - Build type-safe, maintainable agent architectures
 
-### Enterprise Integration:
+### Enterprise Integration
+
 - Understand compliance and security requirements
 - Implement proper monitoring and observability
 - Design scalable agent architectures for enterprise use
@@ -238,7 +260,7 @@ By completing this module, you will be able to:
 
 <div class="grid cards" markdown>
 
--   :material-play-circle:{ .lg .middle } **Start Learning**
+- :material-play-circle:{ .lg .middle } **Start Learning**
 
     ---
 
@@ -246,7 +268,7 @@ By completing this module, you will be able to:
 
     [:octicons-arrow-right-24: Session 0 - Introduction](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 
--   :material-book-open:{ .lg .middle } **Course Curriculum**
+- :material-book-open:{ .lg .middle } **Course Curriculum**
 
     ---
 
@@ -254,7 +276,7 @@ By completing this module, you will be able to:
 
     [:octicons-arrow-right-24: View Curriculum](Agent_Frameworks_Nanodegree_Curriculum.md)
 
--   :material-code-tags:{ .lg .middle } **Code Examples**
+- :material-code-tags:{ .lg .middle } **Code Examples**
 
     ---
 
@@ -262,7 +284,7 @@ By completing this module, you will be able to:
 
     [:octicons-arrow-right-24: Browse Code](src/)
 
--   :material-help-circle:{ .lg .middle } **Getting Help**
+- :material-help-circle:{ .lg .middle } **Getting Help**
 
     ---
 

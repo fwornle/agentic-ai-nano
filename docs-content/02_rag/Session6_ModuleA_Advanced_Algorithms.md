@@ -17,6 +17,7 @@ This module teaches you advanced graph algorithms optimized for large-scale Grap
 - **[📄 Session 6 Core: Graph-Based RAG →](Session6_Graph_Based_RAG.md)** - Foundation graph concepts
 
 ### Quick Start
+
 ```bash
 # Test advanced graph algorithms
 cd src/session6
@@ -444,33 +445,33 @@ The trained GAT model produces enhanced node embeddings that incorporate learned
 Test your understanding of advanced graph algorithms:
 
 **Question 1:** What is the main advantage of temporal PageRank over standard PageRank in GraphRAG?  
-A) Faster computation    
-B) Considers information freshness and time-based relationships    
-C) Requires less memory    
+A) Faster computation
+B) Considers information freshness and time-based relationships
+C) Requires less memory
 D) Simpler implementation  
 
 **Question 2:** In Node2Vec embeddings, what do the parameters p and q control?  
-A) Embedding dimensions and learning rate    
-B) Walk length and number of walks    
-C) Return probability and in-out bias for walk exploration    
+A) Embedding dimensions and learning rate
+B) Walk length and number of walks
+C) Return probability and in-out bias for walk exploration
 D) Training epochs and batch size  
 
 **Question 3:** Why is community detection important for large-scale GraphRAG systems?  
-A) It reduces storage requirements    
-B) It organizes knowledge into coherent clusters for better retrieval    
-C) It speeds up all queries equally    
+A) It reduces storage requirements
+B) It organizes knowledge into coherent clusters for better retrieval
+C) It speeds up all queries equally
 D) It simplifies graph construction  
 
 **Question 4:** What advantage do Graph Attention Networks provide for GraphRAG?  
-A) Faster training than traditional neural networks    
-B) Learn adaptive importance weights for different relationships and neighbors    
-C) Require less data for training    
+A) Faster training than traditional neural networks
+B) Learn adaptive importance weights for different relationships and neighbors
+C) Require less data for training
 D) Work only with directed graphs  
 
 **Question 5:** In GraphRAG applications, when would you use biased random walks over uniform walks?  
-A) When you want faster computation    
-B) When you need to explore specific regions or relationship types more thoroughly    
-C) When the graph is very small    
+A) When you want faster computation
+B) When you need to explore specific regions or relationship types more thoroughly
+C) When the graph is very small
 D) When memory is limited  
 
 [**🗂️ View Test Solutions →**](Session6_ModuleA_Test_Solutions.md)
@@ -479,7 +480,8 @@ D) When memory is limited
 
 ## Navigation
 
-### Related Modules:
+### Related Modules
+
 - **Core Session:** [Session 6 - Graph-Based RAG](Session6_Graph_Based_RAG.md)
 - **Related Module:** [Module B - Production Systems](Session6_ModuleB_Production_Systems.md)
 
