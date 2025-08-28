@@ -1,6 +1,9 @@
-# Session 1 - Module D: Behind the Silicon Curtain - Dissecting the Production AI You Use Every Day
+# Session 1 - Module D: Coding Assistant Case Study
 
-## The Hidden Architecture of Modern Software Development
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 1 core content first.
+
+## Modern Software Development Architecture
 
 Every Fortune 500 engineering team has a secret weapon: AI coding assistants that have fundamentally transformed how software gets built. GitHub Copilot processes over 1 billion lines of code daily. Amazon's CodeWhisperer accelerates development across 500,000 engineers. But these systems aren't magical black boxes - they're sophisticated orchestrations of the exact patterns you've been learning, scaled to enterprise demands.
 

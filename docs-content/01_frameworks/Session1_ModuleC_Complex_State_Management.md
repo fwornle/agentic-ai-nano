@@ -1,6 +1,7 @@
-# Session 1 - Module C: The Memory Palace - Building AI That Never Forgets What Matters
+# Session 1 - Module C: Complex State Management
 
-**Prerequisites**: [Session 1 Core Section Complete](Session1_Bare_Metal_Agents.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 1 core content first.
 
 When JPMorgan Chase's AI compliance officer analyzed a suspicious trading pattern, it instantly recalled a similar case from 18 months prior, cross-referenced it with regulatory changes from the past quarter, and connected seemingly unrelated transactions across multiple client accounts. The analysis that would have taken human investigators weeks was completed in minutes - not because the AI was faster at calculation, but because it possessed something far more powerful: perfect institutional memory combined with intelligent forgetting.
 

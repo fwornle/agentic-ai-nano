@@ -1,6 +1,7 @@
 # Session 3 - Module A: Enterprise Agent Patterns
 
-> **ADVANCED OPTIONAL MODULE** - Complete Session 3 core content first.
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 3 core content first.
 
 Enterprise MCP agent deployments require sophisticated patterns for production reliability, including circuit breakers, connection pooling, security controls, and comprehensive monitoring.
 

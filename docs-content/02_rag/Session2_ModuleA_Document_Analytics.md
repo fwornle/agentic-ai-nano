@@ -1,4 +1,4 @@
-# Session 2 - Module A: Advanced Document Analytics - When Standard Processing Isn't Enough
+# Session 2 - Module A: Document Analytics
 
 > **⚠️ ADVANCED OPTIONAL MODULE** 
 > Prerequisites: Complete Session 2 core content first.

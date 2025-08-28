@@ -1,6 +1,7 @@
 # Session 3 - Module B: Advanced Workflow Orchestration
 
-> **ADVANCED OPTIONAL MODULE** - Complete Session 3 core content first.
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 3 core content first.
 
 Advanced workflow orchestration patterns enable parallel processing, conditional routing, state management, and error recovery for complex enterprise agent systems.
 

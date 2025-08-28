@@ -1,6 +1,7 @@
 # Session 9 - Module B: Production Multi-Agent Systems
 
-**Prerequisites**: [Session 9 Core Section Complete](Session9_Multi_Agent_Patterns.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 9 core content first.
 
 This module explores enterprise-grade production deployment patterns for multi-agent systems including distributed monitoring, scalable orchestration, container-based deployment, service mesh integration, and operational excellence practices. You'll implement comprehensive monitoring and observability, design scalable deployment patterns with container orchestration, and build operational excellence practices.
 

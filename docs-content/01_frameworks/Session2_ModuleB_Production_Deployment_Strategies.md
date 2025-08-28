@@ -1,6 +1,7 @@
-# Session 2 - Module B: Battle-Tested Deployment - When $100M Businesses Depend on Your AI Staying Online
+# Session 2 - Module B: Production Deployment Strategies
 
-**Prerequisites**: [Session 2 Core Section Complete](Session2_LangChain_Foundations.md)
+> **⚠️ ADVANCED OPTIONAL MODULE**  
+> Prerequisites: Complete Session 2 core content first.
 
 At 2:14 PM EST on Black Friday 2023, Shopify's AI-powered inventory management system faced its ultimate test: processing 11.5 million transactions per hour while coordinating stock levels across 2.1 million merchants worldwide. As the system scaled to handle 3,200% normal traffic, not a single customer experienced delays or stock discrepancies. The secret wasn't luck - it was bulletproof deployment architecture designed to handle enterprise-scale chaos.
 
