@@ -68,7 +68,7 @@ Building systems through component assembly:
 
 ![Atomic Agents System](images/atomic-agents.png)
 
-### This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle
+*This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle*
 
 **File**: [`src/session6/composition_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/composition_engine.py) - Component composition patterns
 
@@ -341,7 +341,7 @@ Assembling components into complete systems:
 
 ![Atomic Assembler](images/atomic-assembler.png)
 
-### The Atomic Assembler helps you integrate Atomic Agents
+*The Atomic Assembler helps you integrate Atomic Agents*
 
 **File**: [`src/session6/production_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/production_orchestrator.py) - Production integration patterns
 
