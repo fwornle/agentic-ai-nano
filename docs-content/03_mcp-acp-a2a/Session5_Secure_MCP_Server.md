@@ -70,6 +70,7 @@ logger = structlog.get_logger()
 ```
 
 **Our Arsenal of Security Dependencies:**
+
 - `authlib`: Your OAuth 2.1 Swiss Army knife with PKCE support
 - `cryptography`: FIPS-compliant crypto operations that even government agencies trust
 - `rfc7636`: PKCE implementation that makes authorization codes useless to eavesdroppers
@@ -1064,6 +1065,7 @@ class RateLimitMiddleware:
 Congratulations! You've just built a comprehensive security system that would make even the most paranoid security expert proud. Let's admire what we've accomplished:
 
 **Your Digital Fortress Now Includes:**
+
 - **OAuth 2.1 with PKCE authentication and Resource Indicators (RFC 8707)**: Like having quantum-encrypted keys that only work for specific doors
 - **JWT token system with access/refresh tokens and blacklisting**: A sophisticated ID system with instant revocation capabilities
 - **API key management with automatic expiration and usage tracking**: Diplomatic passports for your machines, complete with audit trails

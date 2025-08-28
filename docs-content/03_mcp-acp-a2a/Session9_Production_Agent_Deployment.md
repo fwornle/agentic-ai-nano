@@ -102,6 +102,7 @@ spec:
 ```
 
 This governance model gives us:
+
 - **Resource Boundaries**: Like city budgets, preventing any single application from consuming excessive resources
 - **Compliance Labeling**: Automated policy enforcement based on regulatory requirements
 - **Cost Tracking**: Clear attribution of cloud spending to business units
@@ -228,6 +229,7 @@ spec:
 ```
 
 This security architecture provides:
+
 - **Automated Rotation**: Labeled secrets enable scheduled rotation without downtime
 - **GitOps Security**: Sealed secrets allow encrypted secrets in version control
 - **Service Account Integration**: Secure access through Kubernetes identity system
@@ -461,6 +463,7 @@ spec:
 ```
 
 This sophisticated scaling system provides:
+
 - **Multi-Metric Scaling**: Considers CPU, memory, and custom business metrics
 - **Smooth Scaling**: Prevents thrashing with stabilization windows
 - **Business Logic**: Scales based on active workflows, not just infrastructure metrics
@@ -524,6 +527,7 @@ spec:
 ```
 
 This creates an intelligent networking layer that:
+
 - **Optimizes Load Distribution**: Uses connection-based load balancing for better performance
 - **Prevents Cascade Failures**: Circuit breakers isolate failing services
 - **Enables Chaos Engineering**: Fault injection for reliability testing
@@ -844,71 +848,61 @@ We've built more than a deployment system—we've created the infrastructure for
 
 Before you launch your first production AI system, let's ensure you've mastered these critical concepts:
 
-**Question 1:** What is the primary benefit of using Kubernetes for production agent deployment?
-
+**Question 1:** What is the primary benefit of using Kubernetes for production agent deployment?  
 A) Better security by default  
 B) Auto-scaling, service discovery, and resource management  
 C) Lower costs  
 D) Simpler development  
 
-**Question 2:** What uptime target is typically expected for production agent systems?
-
+**Question 2:** What uptime target is typically expected for production agent systems?  
 A) 99.9%+  
 B) 98%  
 C) 90%  
 D) 95%  
 
-**Question 3:** What primary benefit does Istio provide in production agent deployments?
-
+**Question 3:** What primary benefit does Istio provide in production agent deployments?  
 A) Simpler configuration  
 B) Lower resource usage  
 C) Faster execution  
 D) Secure service-to-service communication with traffic management  
 
-**Question 4:** Why is centralized configuration management important for production agent systems?
-
+**Question 4:** Why is centralized configuration management important for production agent systems?  
 A) Enables consistent configuration across environments and version control  
 B) Improves performance  
 C) Simplifies testing  
 D) Reduces development time  
 
-**Question 5:** What metrics should trigger auto-scaling in production agent systems?
-
+**Question 5:** What metrics should trigger auto-scaling in production agent systems?  
 A) Network bandwidth only  
 B) Memory usage only  
 C) CPU usage, memory usage, queue depth, and response time  
 D) CPU usage only  
 
-**Question 6:** What are the three pillars of observability for production agent systems?
-
+**Question 6:** What are the three pillars of observability for production agent systems?  
 A) Metrics, logs, and distributed tracing  
 B) Alerts, dashboards, reports  
 C) Monitoring, testing, deployment  
 D) CPU, Memory, Disk  
 
-**Question 7:** How should sensitive information be handled in Kubernetes agent deployments?
-
+**Question 7:** How should sensitive information be handled in Kubernetes agent deployments?  
 A) Environment variables in deployment files  
 B) Configuration files in containers  
 C) Hard-coded in application code  
 D) Kubernetes Secrets with encryption at rest  
 
-**Question 8:** What testing approach is recommended for production agent deployments?
-
+**Question 8:** What testing approach is recommended for production agent deployments?  
 A) No testing required  
 B) Manual testing only  
 C) Production testing only  
 D) Automated testing with staging environment validation  
 
-**Question 9:** What Kubernetes feature helps optimize resource utilization in agent deployments?
-
+**Question 9:** What Kubernetes feature helps optimize resource utilization in agent deployments?  
 A) No resource management  
 B) Resource requests and limits with horizontal pod autoscaling  
 C) Manual resource allocation  
 D) Fixed resource assignments  
 
-**Question 10:** What is essential for disaster recovery in production agent systems?
-
+**Question 10:** What is essential for disaster recovery in production agent systems?  
 A) Single data center with backups  
 B) Multi-region deployment with automated failover  
 C) Daily backups only  
