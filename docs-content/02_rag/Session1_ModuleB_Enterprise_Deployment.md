@@ -1,8 +1,10 @@
-# Session 1 - Module B: Enterprise Deployment
+# Session 1 - Module B: Enterprise Deployment - Scaling Intelligence
 
 > **Prerequisites**: Complete Session 1 core content first.
 
-Enterprise-scale RAG deployment patterns, microservices design, production monitoring, and security considerations for enterprise environments.
+Your RAG system works beautifully on your development machine. But enterprise deployment is a different challenge entirely: handling thousands of concurrent users, integrating with existing enterprise infrastructure, meeting security and compliance requirements, and maintaining performance under real-world load.
+
+This module bridges the gap between working prototype and enterprise-grade deployment, teaching you the architectural patterns, security considerations, and scaling strategies that enterprise RAG systems demand.
 
 ---
 
