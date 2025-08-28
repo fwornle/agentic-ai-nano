@@ -1,9 +1,11 @@
-# Session 6 - Module A: Advanced Graph Algorithms
+# Session 6 - Module A: Advanced Graph Algorithms - Optimizing Graph Intelligence
 
-> **ADVANCED OPTIONAL MODULE** 
-> Supplementary content for deeper specialization. Complete Session 6 core content first.
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> Prerequisites: Complete Session 6 core content first.
 
-Advanced graph traversal algorithms for complex knowledge networks, optimization techniques for large-scale graph operations, and performance analysis for GraphRAG systems.
+You've implemented GraphRAG systems with entity extraction, relationship mapping, and basic traversal algorithms in Session 6. But when your knowledge graphs scale to millions of nodes or require specialized reasoning patterns like temporal analysis or domain-specific ranking, standard graph algorithms become insufficient for production performance and sophisticated reasoning requirements.
+
+This module teaches you advanced graph algorithms optimized for large-scale GraphRAG systems. You'll implement specialized PageRank variants for different knowledge domains, optimization techniques that maintain performance at massive scale, and algorithmic enhancements that enable complex reasoning patterns impossible with basic traversal. The goal is graph intelligence that scales with your knowledge complexity.
 
 ---
 
@@ -25,9 +27,9 @@ python demo_session6.py
 
 ## Advanced Algorithms Content
 
-### PageRank Variants for Knowledge Graphs
+### PageRank Variants for Knowledge Graphs - Beyond Basic Node Ranking
 
-Advanced PageRank implementations for different GraphRAG scenarios:
+Standard PageRank treats all relationships equally and assumes static importance. But knowledge graphs have nuanced requirements: recent information may be more valuable than historical data, domain-specific entities need specialized ranking criteria, and different relationship types carry varying levels of authority. Advanced PageRank variants address these sophisticated requirements.
 
 ```python
 class AdvancedPageRankAlgorithms:
