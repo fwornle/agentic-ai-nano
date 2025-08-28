@@ -1123,25 +1123,65 @@ async def get_security_audit(time_range: str = "24h") -> Dict:
 
 ## Test Your Fortress: Multiple Choice Challenge
 
-**Question 1:** What's the best security approach for MCP servers? - C) Defense-in-depth with multiple security layers
+**Question 1:** What security approach does the session recommend for MCP servers?  
+A) Client-side security only  
+B) Single-layer authentication only  
+C) Defense-in-depth with multiple security layers  
+D) Network security only  
 
-**Question 2:** What's the minimum JWT secret key length? - C) 32 characters
+**Question 2:** What is the minimum recommended length for JWT secret keys?  
+A) 16 characters  
+B) 64 characters  
+C) 32 characters  
+D) 24 characters  
 
-**Question 3:** How should refresh tokens be handled? - D) Use Redis with automatic expiration and blacklisting
+**Question 3:** How should refresh tokens be handled for maximum security?  
+A) Include them in URL parameters  
+B) Store them in localStorage  
+C) Store them in browser cookies only  
+D) Use Redis with automatic expiration and blacklisting  
 
-**Question 4:** What's the best rate limiting algorithm for MCP servers? - D) Token bucket
+**Question 4:** Which rate limiting algorithm provides the best balance of fairness and burst handling?  
+A) Fixed window  
+B) Sliding window  
+C) Leaky bucket  
+D) Token bucket  
 
-**Question 5:** What's the main advantage of role-based permissions? - C) Easier management and scalability
+**Question 5:** What is the advantage of role-based permissions over user-specific permissions?  
+A) Higher security  
+B) Better performance  
+C) Easier management and scalability  
+D) Simpler implementation  
 
-**Question 6:** How should MCP tool input validation be implemented? - A) Server-side validation using Pydantic models
+**Question 6:** What is the recommended approach for validating MCP tool inputs?  
+A) Server-side validation using Pydantic models  
+B) Database constraints only  
+C) Client-side validation only  
+D) No validation needed  
 
-**Question 7:** What's the minimum TLS version for production MCP servers? - D) TLS 1.2
+**Question 7:** What TLS version should be the minimum requirement for production MCP servers?  
+A) SSL 3.0  
+B) TLS 1.1  
+C) TLS 1.0  
+D) TLS 1.2  
 
-**Question 8:** How should API key rotation be handled? - B) Automatic rotation with overlap periods
+**Question 8:** How should API keys be rotated securely in production?  
+A) Rotate only when compromised  
+B) Automatic rotation with overlap periods  
+C) Never rotate keys  
+D) Manual rotation monthly  
 
-**Question 9:** What should be logged in security audit trails? - D) Authentication events and permission changes
+**Question 9:** What information is most critical to include in security audit logs?  
+A) System performance metrics  
+B) Only successful operations  
+C) Debug information only  
+D) Authentication events and permission changes  
 
-**Question 10:** What's the best DDoS protection technique? - C) Implementing multiple rate limiting layers
+**Question 10:** Which technique is most effective for protecting MCP servers from DDoS attacks?  
+A) Blocking all international traffic  
+B) Using only strong authentication  
+C) Implementing multiple rate limiting layers  
+D) Increasing server capacity
 
 [**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
 
