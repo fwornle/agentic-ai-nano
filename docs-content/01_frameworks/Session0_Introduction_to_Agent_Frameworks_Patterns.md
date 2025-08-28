@@ -12,7 +12,7 @@ Modern AI development has evolved from simple prompt-response interactions to so
 
 ## Part 1: From Prompts to Agents - The Transformation That Changes Everything
 
-#### The Evolution of AI Interaction
+### The Evolution of AI Interaction
 
 The journey from simple prompt-response to sophisticated agent systems mirrors humanity's evolution from reactive survival to proactive civilization-building:
 
@@ -37,7 +37,7 @@ response = agent.run("Plan my outdoor activities for this week")
 
 ```
 
-#### What Makes an Agent "Agentic"?
+### What Makes an Agent "Agentic"?
 
 Four key characteristics define agentic systems - the same traits that separate a junior employee who needs constant supervision from a senior executive who drives initiatives independently:
 
@@ -54,7 +54,7 @@ Every agent framework implements these fundamental patterns - they're like the f
 
 ![Overview of LLM Patterns](images/agentic-5-patterns.png)
 
-#### Pattern 1: Reflection - The Power of Second Thoughts
+### Pattern 1: Reflection - The Power of Second Thoughts
 
 **Purpose**: Self-improvement through self-evaluation
 
@@ -90,7 +90,7 @@ final = agent.revise(initial, critique)
 
 ![Reflection Pattern](images/reflection-pattern.png)
 
-#### Pattern 2: Tool Use - Breaking Free from the Knowledge Prison
+### Pattern 2: Tool Use - Breaking Free from the Knowledge Prison
 
 **Purpose**: Extending capabilities through external tools
 
@@ -132,7 +132,7 @@ agent = Agent(tools=tools, function_calling=True)
 
 ![Tool Use Pattern](images/tool-use-pattern.png)
 
-#### Pattern 3: ReAct (Reasoning + Acting) - Thinking While Doing
+### Pattern 3: ReAct (Reasoning + Acting) - Thinking While Doing
 
 **Purpose**: Iterative reasoning and action cycles
 
@@ -191,7 +191,7 @@ class ReActAgent:
 
 ![ReAct Pattern](images/react-pattern.png)
 
-#### Pattern 4: Planning - From Reactive to Strategic
+### Pattern 4: Planning - From Reactive to Strategic
 
 **Purpose**: Breaking complex tasks into manageable steps
 
@@ -261,7 +261,7 @@ class PlanningAgent:
 
 ![Planning Pattern](images/planning-pattern.png)
 
-#### Pattern 5: Multi-Agent Collaboration - The Power of Specialized Teams
+### Pattern 5: Multi-Agent Collaboration - The Power of Specialized Teams
 
 **Purpose**: Specialized agents working together
 
@@ -343,9 +343,9 @@ class MultiAgentSystem:
 
 ---
 
-### Part 3: Framework Landscape Overview - Choosing Your Weapons
+## Part 3: Framework Landscape Overview - Choosing Your Weapons
 
-#### Framework Categories
+### Framework Categories
 
 Modern agent frameworks fall into three main categories, each optimized for different stages of the journey from idea to production:
 
@@ -364,7 +364,7 @@ frameworks = ["PydanticAI", "Agno", "Google ADK"]
 frameworks = ["Atomic Agents", "CrewAI"]
 ```
 
-#### Framework Comparison Matrix
+### Framework Comparison Matrix
 
 ![Framework Comparison Matrix](images/framework-comparison-matrix.png)
 
@@ -411,7 +411,7 @@ The hidden realities that only emerge when you scale from demo to production:
 
 ## Part 4: Next Steps - Your Journey to Mastery
 
-#### Your Learning Journey
+### Your Learning Journey
 
 This module follows a progressive skill-building path designed to take you from curiosity to competence:
 
