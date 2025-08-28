@@ -73,7 +73,6 @@ class HierarchicalMemoryAgent(BaseAgent):
 ```
 
 The agent initialization sets up both semantic embeddings (via SentenceTransformer) and persistent storage (via SQLite database), creating a dual-layer memory system.
-```
 
 ### Semantic Memory Retrieval
 
