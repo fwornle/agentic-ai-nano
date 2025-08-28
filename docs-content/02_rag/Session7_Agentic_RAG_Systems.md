@@ -4,7 +4,7 @@ In Sessions 1-6, you built sophisticated RAG systems that can chunk intelligentl
 
 This session transforms your RAG system from passive responder to active reasoner. You'll implement agentic architectures that can plan multi-step research strategies, execute complex information-gathering workflows, validate their own responses, and self-correct when initial approaches fail. The goal is evolving from "retrieve and generate" to "reason, research, and validate" – RAG systems that think.
 
-### Optional Deep Dive Modules
+## Optional Deep Dive Modules
 - [Module A: Advanced Agent Reasoning](Session7_ModuleA_Advanced_Reasoning.md)
 - [Module B: Production Agent Deployment](Session7_ModuleB_Production_Agents.md)
 
@@ -54,14 +54,13 @@ Meta-Cognitive Validation → Logically Coherent Response
 
 #### 1. Reasoning-Augmented Retrieval (RAR)
 
-### "Let reasoning guide what information to find and how to connect it"
+#### "Let reasoning guide what information to find and how to connect it"
 
-### Setting Up the Reasoning-Augmented Retrieval System
+#### Setting Up the Reasoning-Augmented Retrieval System
 
 This system uses different reasoning strategies to intelligently guide information retrieval:
 
 ```python
-
 # Reasoning-guided retrieval system
 
 class ReasoningAugmentedRetrieval:
@@ -90,7 +89,7 @@ Now we set up the reasoning strategy mapping, which connects each type of logica
         }
 ```
 
-### Main Reasoning-Guided Retrieval Method
+#### Main Reasoning-Guided Retrieval Method
 
 The core orchestration method that coordinates the entire reasoning-retrieval process:
 
@@ -139,7 +138,7 @@ Finally, we return the complete reasoning-guided retrieval results:
         }
 ```
 
-### Reasoning Requirements Analysis
+#### Reasoning Requirements Analysis
 
 This method determines what type of logical reasoning the query requires:
 
@@ -195,7 +194,7 @@ Finally, we execute the analysis with low temperature for consistency:
         return self._parse_json_response(response)
 ```
 
-### Reasoning Framework Construction
+#### Reasoning Framework Construction
 
 This method builds a structured framework to guide the retrieval process:
 
@@ -230,7 +229,7 @@ Now we generate the framework and add metadata for tracking and optimization:
         return framework
 ```
 
-### Framework Prompt Builder
+#### Framework Prompt Builder
 
 This helper method creates specialized prompts for different reasoning types:
 
@@ -285,7 +284,7 @@ The prompt defines the exact JSON structure needed for consistent framework gene
         """
 ```
 
-### Framework Metadata Addition
+#### Framework Metadata Addition
 
 Adds tracking information for performance optimization and framework reuse:
 
@@ -305,7 +304,7 @@ Adds tracking information for performance optimization and framework reuse:
         return framework
 ```
 
-### Deductive Reasoning Strategy Implementation
+#### Deductive Reasoning Strategy Implementation
 
 This method implements the deductive reasoning approach to information retrieval:
 
@@ -371,9 +370,9 @@ This method implements the deductive reasoning approach to information retrieval
 
 #### 2. Retrieval-Augmented Reasoning (RAR)
 
-### "Let external knowledge fill logical reasoning gaps"
+#### "Let external knowledge fill logical reasoning gaps"
 
-### Setting Up Retrieval-Augmented Reasoning
+#### Setting Up Retrieval-Augmented Reasoning
 
 This system identifies where reasoning is weak and uses targeted retrieval to strengthen it:
 
@@ -391,7 +390,7 @@ class RetrievalAugmentedReasoning:
         self.knowledge_validator = knowledge_validator
 ```
 
-### Enhanced Reasoning with Strategic Information Retrieval
+#### Enhanced Reasoning with Strategic Information Retrieval
 
 The main method that coordinates gap identification and knowledge integration:
 
@@ -444,7 +443,7 @@ Finally, we return the complete enhanced reasoning results with quality metrics:
         }
 ```
 
-### Reasoning Gap Identification
+#### Reasoning Gap Identification
 
 This method analyzes reasoning to find where external knowledge would help:
 
@@ -503,9 +502,9 @@ Finally, we execute the gap analysis with consistent temperature settings:
 
 #### 3. Chain-of-Thought RAG Integration
 
-### "Structured reasoning paths that guide both retrieval and synthesis"
+#### "Structured reasoning paths that guide both retrieval and synthesis"
 
-### Step 1: Initialize the Chain-of-Thought RAG System
+#### Step 1: Initialize the Chain-of-Thought RAG System
 
 First, let's set up the core system that manages different reasoning patterns:
 
@@ -532,7 +531,7 @@ class ChainOfThoughtRAG:
         }
 ```
 
-### Step 2: Main Chain-of-Thought Processing Method
+#### Step 2: Main Chain-of-Thought Processing Method
 
 Now let's implement the core method that orchestrates the entire reasoning process:
 
@@ -566,7 +565,7 @@ Next, we analyze the query requirements and build a structured reasoning plan:
         )
 ```
 
-### Execute and Synthesize Chain-of-Thought Response
+##### Execute and Synthesize Chain-of-Thought Response
 
 Now execute the reasoning plan and create the final response:
 
@@ -587,7 +586,7 @@ Now execute the reasoning plan and create the final response:
         )
 ```
 
-### Return Comprehensive Results
+##### Return Comprehensive Results
 
 Compile all results with metadata for analysis and debugging:
 
@@ -608,7 +607,7 @@ Compile all results with metadata for analysis and debugging:
         }
 ```
 
-### Step 3: Reasoning Chain Construction
+#### Step 3: Reasoning Chain Construction
 
 This method builds the structured plan for step-by-step reasoning:
 
@@ -635,7 +634,7 @@ This method builds the structured plan for step-by-step reasoning:
         return self._add_chain_metadata(chain, pattern, depth, query)
 ```
 
-### Reasoning Chain Prompt Builder
+##### Reasoning Chain Prompt Builder
 
 Helper method that constructs the detailed prompt for reasoning chain generation:
 
@@ -685,7 +684,7 @@ The prompt defines the specific JSON structure for systematic reasoning chain ge
         """
 ```
 
-### Chain Metadata Addition
+##### Chain Metadata Addition
 
 Utility method for adding tracking information to reasoning chains:
 
@@ -698,7 +697,7 @@ Utility method for adding tracking information to reasoning chains:
         return chain
 ```
 
-### Step 4: Chain Execution Framework
+#### Step 4: Chain Execution Framework
 
 The execution system manages the step-by-step processing:
 
@@ -725,7 +724,7 @@ The execution system manages the step-by-step processing:
         return self._compile_chain_execution_results(execution_context)
 ```
 
-### Step 5: Context Management Methods
+#### Step 5: Context Management Methods
 
 These helper methods manage the execution state throughout the reasoning process:
 
@@ -745,7 +744,7 @@ These helper methods manage the execution state throughout the reasoning process
         }
 ```
 
-### Step 6: Individual Step Processing
+#### Step 6: Individual Step Processing
 
 This method handles the execution of each reasoning step with integrated retrieval:
 
@@ -783,7 +782,7 @@ This method handles the execution of each reasoning step with integrated retriev
         }
 ```
 
-### Step 7: Retrieval and Validation Handlers
+#### Step 7: Retrieval and Validation Handlers
 
 Specialized methods for handling information gathering and step validation:
 
@@ -824,7 +823,7 @@ Specialized methods for handling information gathering and step validation:
         return await self._validate_reasoning_step(step_execution, step_data, query)
 ```
 
-### Step 8: Context Update and Result Compilation
+#### Step 8: Context Update and Result Compilation
 
 Final methods for managing execution state and compiling results:
 
@@ -3050,7 +3049,7 @@ Session 8 expands agentic intelligence to handle multiple modalities - text, ima
 
 **Previous:** [Session 6 - Graph-Based RAG (GraphRAG)](Session6_Graph_Based_RAG.md)
 
-### Optional Deep Dive Modules:
+## Optional Deep Dive Modules:
 
 - 🔬 **[Module A: Advanced Agent Reasoning](Session7_ModuleA_Advanced_Reasoning.md)** - Deep dive into sophisticated reasoning algorithms and cognitive architectures
 - 🏭 **[Module B: Production Agent Deployment](Session7_ModuleB_Production_Agents.md)** - Enterprise-scale agent deployment patterns and monitoring systems
