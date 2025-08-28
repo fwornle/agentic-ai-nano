@@ -9,11 +9,13 @@ This module teaches you to build query understanding systems that read between t
 
 ---
 
-### Related Modules:
+### Related Modules
+
 - **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 - **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)
 
 ### Code Files: `src/session4/`
+
 - `comprehensive_enhancer.py` - Complete query processing pipeline
 - `semantic_gap_analyzer.py` - Query intent detection
 - `multi_query_generator.py` - Query expansion techniques
@@ -27,7 +29,7 @@ This module teaches you to build query understanding systems that read between t
 
 ### **Pattern 1: Intent Classification and Query Routing** - Understanding What Users Really Want
 
-The fundamental challenge in query understanding is that identical questions can require completely different processing strategies depending on user intent. "How do I deploy?" could mean "show me the deployment checklist" (procedural), "what are my deployment options?" (comparative), or "why is my deployment failing?" (troubleshooting). 
+The fundamental challenge in query understanding is that identical questions can require completely different processing strategies depending on user intent. "How do I deploy?" could mean "show me the deployment checklist" (procedural), "what are my deployment options?" (comparative), or "why is my deployment failing?" (troubleshooting).
 
 Intent classification routes queries to specialized processing pipelines that match the user's actual information need, not just their surface language.
 
@@ -364,33 +366,33 @@ Multi-modal query processing enables RAG systems to handle rich user interaction
 ## Multiple Choice Test - Module A
 
 **Question 1:** What is the primary benefit of intent classification in query processing?  
-A) Reduces processing time    
-B) Enables specialized processing strategies tailored to query types    
-C) Reduces memory usage    
+A) Reduces processing time
+B) Enables specialized processing strategies tailored to query types
+C) Reduces memory usage
 D) Simplifies implementation  
 
 **Question 2:** Why is context-aware query enhancement important?  
-A) It reduces computational costs    
-B) It resolves ambiguities and adds implicit context from conversation history    
-C) It speeds up retrieval    
+A) It reduces computational costs
+B) It resolves ambiguities and adds implicit context from conversation history
+C) It speeds up retrieval
 D) It reduces storage requirements  
 
 **Question 3:** How does multi-modal query processing improve RAG systems?  
-A) It reduces complexity    
-B) It enables processing of queries with images, documents, and other media types    
-C) It reduces memory usage    
+A) It reduces complexity
+B) It enables processing of queries with images, documents, and other media types
+C) It reduces memory usage
 D) It simplifies deployment  
 
 **Question 4:** What is the value of reference resolution in conversational RAG?  
-A) It improves speed    
-B) It resolves pronouns and references using conversation context for clarity    
-C) It reduces costs    
+A) It improves speed
+B) It resolves pronouns and references using conversation context for clarity
+C) It reduces costs
 D) It simplifies architecture  
 
 **Question 5:** Why should query complexity assessment guide processing strategy?  
-A) It reduces infrastructure costs    
-B) It allows allocation of appropriate computational resources and techniques    
-C) It speeds up all queries    
+A) It reduces infrastructure costs
+B) It allows allocation of appropriate computational resources and techniques
+C) It speeds up all queries
 D) It reduces memory usage  
 
 [**🗂️ View Test Solutions →**](Session4_ModuleA_Test_Solutions.md)
@@ -399,7 +401,8 @@ D) It reduces memory usage
 
 **Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 
-### Related Modules:
+### Related Modules
+
 - **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 - **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)
 

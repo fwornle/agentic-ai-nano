@@ -5,6 +5,7 @@ In Sessions 1-3, you built a sophisticated RAG system with intelligent chunking,
 This is the semantic gap – the mismatch between how users express their needs and how information is stored in documents. This session bridges that gap with proven enhancement techniques: HyDE (Hypothetical Document Embeddings) that generates better search vectors, multi-query strategies that cast wider nets, and context optimization that maximizes the value of retrieved information. The goal is search that understands intent, not just similarity.
 
 ## Optional Deep Dive Modules
+
 - **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Intent classification, multi-modal queries, context awareness
 
 ![Agentic RAG](images/AgenticRAG.png)
@@ -83,7 +84,8 @@ class SemanticGapAnalyzer:
 
 Remember from Session 3 how your optimized HNSW indexing and hybrid search create efficient similarity matching? HyDE leverages this infrastructure by solving the input problem. Instead of searching with questions (which live in problem-space), HyDE generates hypothetical answers (which live in solution-space), then searches with those. Your vector database suddenly becomes exponentially more effective because you're finally searching in the same semantic neighborhood as your stored content.
 
-### The HyDE Process:
+### The HyDE Process
+
 1. **Query Analysis**: Understand the semantic intent of the user question
 2. **Hypothetical Generation**: Create documents that would naturally contain the answer
 3. **Vector Integration**: Embed these hypothetical documents using your embedding models
@@ -192,6 +194,7 @@ Finally, combine the generated hypothetical documents into enhanced embeddings:
 ### Educational Context: Understanding HyDE's Impact
 
 This implementation demonstrates query enhancement working in harmony with your vector infrastructure from Session 3. Notice how:
+
 - **Enhanced embeddings** leverage your optimized embedding models
 - **Confidence scoring** helps evaluate query improvement quality
 - **Query classification** enables template-based document generation
@@ -446,7 +449,8 @@ Building on HyDE's solution-space approach, query expansion tackles the problem 
 
 The two approaches are complementary: HyDE bridges semantic gaps, while expansion ensures comprehensive coverage of the search space.
 
-### The Expansion Strategy:
+### The Expansion Strategy
+
 - **HyDE (Part 1)**: Generate hypothetical documents → embed → search
 - **Query Expansion (Part 2)**: Enrich original query → search with expanded terms
 - **Combined Power**: Use both approaches for maximum retrieval success
@@ -1495,7 +1499,7 @@ class ComprehensiveQueryEnhancer:
 
 **Pipeline Coordination**: The enhancement pipeline processes queries through multiple phases for comprehensive improvement.
 
-```python        
+```python
         # Phase 2: Enhanced Retrieval
         enhanced_retrieval = await self._perform_enhanced_retrieval(
             results, vector_store, enhancement_config
@@ -1575,33 +1579,33 @@ You've built a complete query enhancement system including:
 Test your understanding of query enhancement and context augmentation:
 
 **Question 1:** What is the primary purpose of HyDE (Hypothetical Document Embeddings)?  
-A) To generate multiple query variations    
-B) To bridge the semantic gap between queries and documents    
-C) To compress document embeddings    
+A) To generate multiple query variations
+B) To bridge the semantic gap between queries and documents
+C) To compress document embeddings
 D) To speed up retrieval performance  
 
 **Question 2:** When implementing query decomposition, which approach is most effective for complex questions?  
-A) Random sentence splitting    
-B) Breaking questions into answerable sub-questions using LLMs    
-C) Fixed-length query segments    
+A) Random sentence splitting
+B) Breaking questions into answerable sub-questions using LLMs
+C) Fixed-length query segments
 D) Keyword-based fragmentation  
 
 **Question 3:** What is the key advantage of multi-query generation in RAG systems?  
-A) Reduced computational cost    
-B) Faster query processing    
-C) Comprehensive coverage of different query perspectives    
+A) Reduced computational cost
+B) Faster query processing
+C) Comprehensive coverage of different query perspectives
 D) Simplified system architecture  
 
 **Question 4:** In context window optimization, what factor is most important for maintaining quality?  
-A) Maximum token count    
-B) Processing speed    
-C) Balance between relevance and information density    
+A) Maximum token count
+B) Processing speed
+C) Balance between relevance and information density
 D) Number of source documents  
 
 **Question 5:** Which prompt engineering technique is most effective for improving RAG response quality?  
-A) Longer prompts with more examples    
-B) Chain-of-thought reasoning with context integration    
-C) Simple template-based prompts    
+A) Longer prompts with more examples
+B) Chain-of-thought reasoning with context integration
+C) Simple template-based prompts
 D) Keyword-heavy prompts  
 
 [**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
@@ -1620,7 +1624,7 @@ You've transformed your RAG system from simple similarity search to intelligent 
 
 **Previous:** [Session 3 - Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)
 
-## Optional Deep Dive Modules:
+## Optional Deep Dive Modules
 
 - **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Deep dive into query analysis and understanding systems
 

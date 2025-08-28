@@ -9,7 +9,8 @@ This session guides you through building a complete RAG system that embodies the
 ![RAG Architecture Overview](images/RAG-overview.png)
 *Figure 1: Production RAG architecture showing the complete pipeline from documents to intelligent responses*
 
-## Implementation Stack:
+## Implementation Stack
+
 - **LangChain Framework**: Component orchestration and LLM integration
 - **ChromaDB**: Persistent vector database for embeddings
 - **Production Architecture**: Modular design for component swapping
@@ -22,7 +23,8 @@ Remember from Session 0 how poor architecture choices compound into system failu
 
 The configuration patterns we establish here directly address the architectural problems you learned about: modular design prevents the vendor lock-in issues you saw in the evolution timeline, built-in monitoring catches the quality problems we discussed in Part 3, and flexible component architecture enables the hybrid approaches we explored in Part 4.
 
-### Critical Design Principles:
+### Critical Design Principles
+
 - **Modularity**: Clean separation between components
 - **Scalability**: Handle growing data and user volumes
 - **Observability**: Built-in monitoring and evaluation
@@ -44,8 +46,8 @@ requests==2.31.0
 numpy==1.24.3
 ```
 
+### Project Structure Setup
 
-### Project Structure Setup:
 ```bash
 # Production-Ready Project Structure
 
@@ -55,7 +57,8 @@ mkdir data documents src tests config
 touch .env README.md requirements.txt
 ```
 
-### Configuration Management:
+### Configuration Management
+
 ```python
 # src/config.py - Production Configuration Pattern
 
@@ -82,7 +85,8 @@ class RAGConfig:
     LLM_MODEL = "gpt-3.5-turbo"
 ```
 
-##### Code Explanation:
+##### Code Explanation
+
 - **Line 6-7**: Environment variable loading for secure API key management
 - **Line 12-14**: Configurable chunking parameters based on 2024 research findings
 - **Line 16-18**: Persistent ChromaDB storage for production deployments
@@ -151,7 +155,6 @@ class ProductionDocumentLoader:
         self.load_stats = {'success': 0, 'errors': 0}
         print(f"Loader initialized for formats: {self.supported_formats}")
 ```
-
 
 ### Advanced File Loading with Resilience
 
@@ -308,7 +311,8 @@ In Session 0, you learned that ineffective chunking was the #1 RAG problem - arb
 
 This isn't just about splitting text. The chunking strategies you implement here directly determine whether your system can understand document structure, preserve meaningful context across chunk boundaries, and provide the rich metadata that makes retrieval debugging possible. Every line of chunking code either preserves or destroys the semantic relationships that make RAG systems intelligent.
 
-### Key Findings:
+### Key Findings
+
 - Optimal chunk sizes: 500-1500 tokens
 - Semantic boundaries outperform arbitrary splits
 - Context-aware chunking adapts to document structure
@@ -492,7 +496,8 @@ Session 0 showed you how vector databases transformed RAG from keyword matching 
 
 ChromaDB integration isn't just about storing embeddings - it's about creating a searchable knowledge foundation that preserves document relationships, enables sophisticated filtering, and scales with your growing knowledge base. The patterns you implement here directly address the indexing organization problems we explored in Session 0's problem-solving section.
 
-### Production Requirements:
+### Production Requirements
+
 - Persistent storage across restarts
 - Scalable architecture for growing collections
 - Efficient similarity search
@@ -741,7 +746,8 @@ You've built the components. Now comes the critical integration challenge: orche
 
 This integration represents the culmination of everything you learned in Session 0: the three-stage RAG architecture becomes a working pipeline, the quality solutions you studied become error handling and monitoring code, and the production principles we explored become the reliability features that make systems trustworthy in real-world deployments.
 
-### Enterprise Requirements:
+### Enterprise Requirements
+
 - Error resilience with graceful failure handling
 - Real-time performance monitoring
 - Consistent, accurate responses with source attribution
@@ -1115,7 +1121,8 @@ Building a RAG system is one challenge. Proving it works reliably is another. Th
 
 This isn't academic testing - it's production validation that answers the critical business questions: Does your system retrieve relevant information consistently? Do responses use retrieved context effectively? Can the system handle real-world query volumes? The metrics you implement here provide objective evidence that your RAG system is ready for production deployment.
 
-### Evaluation Dimensions:
+### Evaluation Dimensions
+
 - **Retrieval Metrics**: Precision, recall, relevance scoring
 - **Generation Quality**: Factual accuracy, coherence, source utilization
 - **System Performance**: Response time, throughput, error rates
@@ -1412,13 +1419,15 @@ if __name__ == "__main__":
 
 ### Implementation Requirements
 
-### Core Features:
+### Core Features
+
 1. **Custom Chunking Strategy**: Optimize for your domain's document structure
 2. **Specialized Prompts**: Design prompts that understand domain terminology
 3. **Quality Metrics**: Implement domain-specific evaluation criteria
 4. **Production Monitoring**: Add logging and performance tracking
 
-### Advanced Features (Optional):
+### Advanced Features (Optional)
+
 - **Hybrid Search**: Combine vector and keyword search
 - **Source Validation**: Verify source credibility and recency
 - **User Feedback Loop**: Collect and analyze user satisfaction
@@ -1457,7 +1466,8 @@ class DomainSpecificRAG(ProductionRAGSystem):
         pass
 ```
 
-### Success Criteria:
+### Success Criteria
+
 - System handles 10+ documents from your chosen domain
 - Achieves >80% retrieval precision on test queries
 - Response time <3 seconds for typical queries
@@ -1469,17 +1479,20 @@ class DomainSpecificRAG(ProductionRAGSystem):
 
 You started this session with architectural knowledge from Session 0. You're ending it with a complete, production-ready RAG system that addresses every major challenge we identified in the theoretical foundation.
 
-### What You've Built:
+### What You've Built
+
 The three-stage RAG architecture from Session 0 is now working code. The quality problems you studied (chunking failures, semantic gaps, poor context) are now solved with engineering solutions. The production principles we explored are now implemented as monitoring, error handling, and performance optimization.
 
-### Production RAG System Components:
+### Production RAG System Components
+
 - **Advanced Document Loader**: Handles the ingestion challenges that destroy RAG quality at the source
 - **Intelligent Chunking**: Preserves semantic boundaries using the strategies that solve the #1 RAG problem
 - **Production Vector Database**: Implements the searchable knowledge foundation that makes semantic understanding possible
 - **Complete RAG Pipeline**: Orchestrates all components with the monitoring and error handling that production demands
 - **Evaluation Framework**: Provides the quantitative validation that proves your system works reliably
 
-### Key Technical Skills:
+### Key Technical Skills
+
 1. **Enterprise Document Processing**: Web scraping, multi-format support, error resilience
 2. **Advanced Chunking Strategies**: Token-aware splitting, semantic boundaries, hybrid approaches
 3. **Vector Database Operations**: ChromaDB persistence, batch indexing, similarity search optimization
@@ -1487,7 +1500,8 @@ The three-stage RAG architecture from Session 0 is now working code. The quality
 5. **System Integration**: Component orchestration, monitoring, performance optimization
 6. **Evaluation Frameworks**: Automated testing, quality metrics, performance benchmarking
 
-### Production Optimization:
+### Production Optimization
+
 - **Chunk Size**: 500-1500 tokens optimal range
 - **Overlap Strategy**: 10-20% overlap for context continuity
 - **Batch Size**: 100-document batches for optimal indexing

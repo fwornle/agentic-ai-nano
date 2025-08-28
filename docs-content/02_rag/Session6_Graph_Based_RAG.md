@@ -5,6 +5,7 @@ In Sessions 1-5, you built sophisticated vector-based RAG systems with intellige
 This session transforms your RAG system from similarity matching to knowledge reasoning. You'll build graph-based architectures that capture entities, relationships, and hierarchical knowledge structures, enabling multi-hop reasoning that connects disparate information through logical pathways. The goal is moving from "find similar documents" to "understand and traverse knowledge relationships."
 
 ## Optional Deep Dive Modules
+
 - **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
 - **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise-ready GraphRAG implementation
 
@@ -31,7 +32,7 @@ Traditional RAG: Document → Chunks → Uniform Embeddings → Similarity Searc
 NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pathways
 ```
 
-### NodeRAG Key Features:
+### NodeRAG Key Features
 
 1. **Specialized Node Types**: Six distinct node types for different knowledge structures
 2. **Three-Stage Processing**: Decomposition → Augmentation → Enrichment
@@ -42,21 +43,27 @@ NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pa
 ### NodeRAG's Six Specialized Node Types
 
 **1. Semantic Unit Nodes** - Abstract concepts and themes
+
 - Example: "Supply Chain Management" connecting related methodologies
 
 **2. Entity Nodes** - Concrete entities with rich metadata
+
 - Example: "Apple Inc." with subsidiaries and partnerships
 
 **3. Relationship Nodes** - Explicit connections with evidence
+
 - Example: "Partnership" linking Apple and Foxconn with details
 
 **4. Attribute Nodes** - Properties and characteristics
+
 - Example: "Revenue: $394.3B" with temporal information
 
 **5. Document Nodes** - Original source segments
+
 - Example: SEC filing containing partnership disclosures
 
 **6. Summary Nodes** - Cross-document synthesis
+
 - Example: "Apple Automotive Strategy" synthesizing multiple sources
 
 ### The Three-Stage NodeRAG Processing Pipeline
@@ -177,7 +184,6 @@ Next, we construct logical reasoning pathways using the PageRank scores to guide
 ### Personalized PageRank for Semantic Traversal
 
 NodeRAG uses **Personalized PageRank** to identify the most important semantic pathways through the knowledge graph. Unlike standard PageRank, the personalized version emphasizes nodes relevant to specific query contexts:
-
 
 ```python
 class NodeRAGPageRank:
@@ -412,17 +418,18 @@ Understanding both approaches gives you the flexibility to choose the right leve
 ### Traditional GraphRAG: Foundational Entity-Relationship Extraction
 
 While NodeRAG provides advanced heterogeneous architectures, traditional GraphRAG remains valuable for:
+
 - **Simpler Use Cases**: When specialized node types aren't needed
 - **Resource Constraints**: Lower computational requirements
 - **Rapid Prototyping**: Faster implementation and iteration
 - **Legacy Integration**: Working with existing graph systems
 
-### Core Traditional GraphRAG Components:
+### Core Traditional GraphRAG Components
+
 1. **Entity Extraction**: Identify people, organizations, locations, concepts
 2. **Relationship Mapping**: Connect entities through typed relationships
 3. **Graph Construction**: Build searchable knowledge graph
 4. **Query Processing**: Traverse graph for multi-hop reasoning
-
 
 ```python
 
@@ -640,6 +647,7 @@ Now let's implement the main extraction method:
 ```
 
 #### Step 1: Three-Stage Processing Implementation
+
 ```python
     def _decomposition_stage(self, documents: List[str], config: Dict) -> Dict[str, Any]:
         """Stage 1: Multi-granularity decomposition with specialized node creation."""
@@ -739,7 +747,6 @@ Now let's implement the main extraction method:
 ```
 
 #### Step 2: Personalized PageRank for Semantic Traversal
-
 
 ```python
 class PersonalizedPageRankProcessor:
@@ -854,7 +861,6 @@ class PersonalizedPageRankProcessor:
 
 #### Step 3: HNSW Similarity Edges for High-Performance Retrieval
 
-
 ```python
     def _merge_similar_entities(self, entities: Dict[str, Any],
                                similarity_threshold: float = 0.85) -> Dict[str, Any]:
@@ -948,7 +954,6 @@ The key to high-performance GraphRAG lies in thoughtful database design:
 4. **Memory Management**: Proper configuration for large graph traversals
 
 Our Neo4j integration implements production best practices from day one, ensuring your GraphRAG system scales with your knowledge base.
-
 
 ```python
 
@@ -1068,6 +1073,7 @@ class Neo4jGraphManager:
 ```
 
 #### Step 4: Batch Entity Storage
+
 ```python
     def _store_entities_batch(self, session, entities: Dict[str, Any],
                              batch_size: int = 1000) -> int:
@@ -1299,6 +1305,7 @@ class CodeGraphRAG:
 ```
 
 #### Step 5: Python AST Analysis
+
 ```python
     def _analyze_python_file(self, file_path: str, config: Dict) -> Dict[str, Any]:
         """Analyze Python file using AST parsing."""
@@ -1397,6 +1404,7 @@ class CodeGraphRAG:
 ```
 
 #### Step 6: Call Graph Construction
+
 ```python
     def _build_call_graph(self, entities: Dict[str, Any],
                          relationships: List[Dict]) -> nx.DiGraph:
@@ -1484,6 +1492,7 @@ Building knowledge graphs is only half the challenge – the real power emerges 
 Consider the query "What security vulnerabilities affect systems used by Apple's automotive partners?" This requires: (1) finding Apple's partners, (2) identifying which work in automotive, (3) determining their technology systems, (4) checking for security vulnerabilities. Graph traversal makes this reasoning path explicit and traceable.
 
 This is where GraphRAG truly shines compared to vector search. Consider the query: "What technologies do Apple's automotive partners use?" Traditional RAG would search for:
+
 1. Documents about Apple
 2. Documents about automotive partners
 3. Documents about technologies
@@ -1635,6 +1644,7 @@ class GraphTraversalEngine:
 ```
 
 #### Step 7: Semantic-Guided Traversal
+
 ```python
     def _semantic_guided_traversal(self, start_entity: str, query: str,
                                   config: Dict) -> List[List[str]]:
@@ -1737,6 +1747,7 @@ class GraphTraversalEngine:
 ```
 
 #### Step 8: Path Context Synthesis
+
 ```python
     def _extract_path_contexts(self, paths: List[Dict], query: str) -> List[Dict]:
         """Extract rich context from graph paths."""
@@ -1836,25 +1847,29 @@ class GraphTraversalEngine:
 
 Neither graph-only nor vector-only search is optimal for all scenarios:
 
-### Vector Search Strengths:
+### Vector Search Strengths
+
 - Excellent semantic similarity matching
 - Handles synonyms and paraphrasing naturally
 - Fast retrieval for well-defined concepts
 - Works well with isolated facts
 
-### Graph Search Strengths:
+### Graph Search Strengths
+
 - Discovers implicit connections through relationships
 - Enables multi-hop reasoning and inference
 - Understands structural importance and centrality
 - Reveals information not in any single document
 
-### Vector Search Limitations:
+### Vector Search Limitations
+
 - Cannot traverse relationships between concepts
 - Misses connections requiring multi-step reasoning
 - Struggles with queries requiring synthesis across sources
 - Limited understanding of entity relationships
 
-### Graph Search Limitations:
+### Graph Search Limitations
+
 - Depends on explicit relationship extraction quality
 - May miss semantically similar but unconnected information
 - Can be computationally expensive for large traversals
@@ -1863,6 +1878,7 @@ Neither graph-only nor vector-only search is optimal for all scenarios:
 ### The Hybrid Advantage
 
 Hybrid search combines both approaches strategically:
+
 1. **Vector search** identifies semantically relevant content
 2. **Graph traversal** discovers related information through relationships
 3. **Intelligent fusion** combines results based on query characteristics
@@ -2047,6 +2063,7 @@ This sophisticated fusion strategy implements query-aware combination of results
 - **Complex synthesis** ("Analyze X's impact on Y through Z") → Dynamic weighting
 
 The fusion process implements key innovations:
+
 1. **Query Analysis**: LLM-based understanding of query intent and complexity
 2. **Dynamic Weighting**: Adaptive weights based on query characteristics  
 3. **Diversity Selection**: Ensures varied perspectives in final context
@@ -2302,6 +2319,7 @@ Process graph contexts with relationship-aware scoring:
 ```
 
 ### Step 10: Comprehensive Response Generation
+
 ```python
     def _generate_hybrid_response(self, query: str, fused_results: Dict,
                                  config: Dict) -> Dict[str, Any]:
@@ -2492,28 +2510,32 @@ class ProductionGraphRAG:
 
 ### When to Choose NodeRAG, GraphRAG, or Vector RAG
 
-### Use NodeRAG when:
+### Use NodeRAG when
+
 - **Complex reasoning** requires understanding different knowledge types (concepts, entities, relationships)
 - **Coherent narratives** needed from fragmented information sources
 - **Educational applications** where understanding knowledge structure is important
 - **Multi-domain knowledge** needs specialized processing (technical + business + regulatory)
 - **Advanced query types** requiring synthesis across different knowledge structures
 
-### Use Traditional GraphRAG when:
+### Use Traditional GraphRAG when
+
 - **Multi-hop reasoning** is required ("What technologies do Apple's partners' suppliers use?")
 - **Relationship discovery** is key ("How are these companies connected?")
 - **Comprehensive exploration** needed ("Find all related information")
 - **Complex analytical queries** ("Analyze the supply chain impact of X on Y")
 - **Domain has rich entity relationships** (business networks, scientific literature, code repositories)
 
-### Use Vector RAG when:
+### Use Vector RAG when
+
 - **Direct factual lookup** ("What is quantum computing?")
 - **Semantic similarity** is primary concern ("Find similar concepts")
 - **Simple Q&A** scenarios ("When was X founded?")
 - **Limited relationship structure** in domain
 - **Fast response time** is critical
 
-### Use Hybrid GraphRAG when:
+### Use Hybrid GraphRAG when
+
 - **Query types vary** (production systems with diverse users)
 - **Maximum coverage** is needed (research and analysis scenarios)
 - **Both factual accuracy and insight discovery** are important
@@ -2523,20 +2545,23 @@ class ProductionGraphRAG:
 
 **Example Query**: "What are the environmental impacts of technologies used by Apple's automotive partners?"
 
-### Vector RAG Approach:
+### Vector RAG Approach
+
 1. Search for "environmental impacts technologies"
 2. Search for "Apple automotive partners"
 3. Try to connect results manually
 4. **Result**: Finds documents about each topic separately, but struggles to connect them
 
-### GraphRAG Approach:
+### GraphRAG Approach
+
 1. Find Apple entity in knowledge graph
 2. Traverse: Apple → partners_with → [Automotive Companies]
 3. Traverse: [Automotive Companies] → uses_technology → [Technologies]
 4. Traverse: [Technologies] → has_environmental_impact → [Impacts]
 5. **Result**: Discovers specific impact chains that no single document contains
 
-### Hybrid Approach:
+### Hybrid Approach
+
 1. Uses vector search to understand "environmental impacts" semantically
 2. Uses graph traversal to follow the relationship chain
 3. Combines both to provide comprehensive, accurate answers
@@ -2548,80 +2573,55 @@ class ProductionGraphRAG:
 
 Test your understanding of graph-based RAG systems and GraphRAG implementations.
 
-### Question 1: GraphRAG Primary Advantage
-
-### What is the primary advantage of GraphRAG over traditional vector-based RAG?
-
-A) Faster query processing    
-B) Lower computational requirements    
-C) Multi-hop reasoning through explicit relationship modeling    
+**Question 1:** What is the primary advantage of GraphRAG over traditional vector-based RAG?  
+A) Faster query processing
+B) Lower computational requirements
+C) Multi-hop reasoning through explicit relationship modeling
 D) Simpler system architecture  
 
-### Question 2: Entity Standardization Purpose
-
-### In knowledge graph construction, what is the purpose of entity standardization?
-
-A) To reduce memory usage    
-B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")    
-C) To improve query speed    
+**Question 2:** In knowledge graph construction, what is the purpose of entity standardization?  
+A) To reduce memory usage
+B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")
+C) To improve query speed
 D) To compress graph storage  
 
-### Question 3: Graph Traversal Algorithm Selection
-
-### Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?
-
-A) Depth-First Search (DFS)    
-B) Breadth-First Search (BFS)    
-C) Dijkstra's algorithm    
+**Question 3:** Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?  
+A) Depth-First Search (DFS)
+B) Breadth-First Search (BFS)
+C) Dijkstra's algorithm
 D) A* search  
 
-### Question 4: Code GraphRAG AST Information
-
-### In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?
-
-A) Only function definitions    
-B) Function calls, imports, class hierarchies, and variable dependencies    
-C) Only variable names    
+**Question 4:** In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?  
+A) Only function definitions
+B) Function calls, imports, class hierarchies, and variable dependencies
+C) Only variable names
 D) Just file names and sizes  
 
-### Question 5: Hybrid Graph-Vector Search Benefit
-
-### What is the key benefit of hybrid graph-vector search?
-
-A) Reduced computational cost    
-B) Combining structural relationships with semantic similarity    
-C) Simpler implementation    
+**Question 5:** What is the key benefit of hybrid graph-vector search?  
+A) Reduced computational cost
+B) Combining structural relationships with semantic similarity
+C) Simpler implementation
 D) Faster indexing  
 
-### Question 6: Neo4j vs Simple Graph Structures
-
-### When should you choose Neo4j over a simple graph data structure for GraphRAG?
-
-A) Always, regardless of scale    
-B) When you need persistent storage and complex queries at scale    
-C) Only for small datasets    
+**Question 6:** When should you choose Neo4j over a simple graph data structure for GraphRAG?  
+A) Always, regardless of scale
+B) When you need persistent storage and complex queries at scale
+C) Only for small datasets
 D) Never, simple structures are always better  
 
-### Question 7: Multi-Hop Traversal Challenge
-
-### What is the primary challenge in multi-hop graph traversal for RAG?
-
-A) Memory limitations    
-B) Balancing comprehensiveness with relevance and avoiding information explosion    
-C) Slow database queries    
+**Question 7:** What is the primary challenge in multi-hop graph traversal for RAG?  
+A) Memory limitations
+B) Balancing comprehensiveness with relevance and avoiding information explosion
+C) Slow database queries
 D) Complex code implementation  
 
-### Question 8: Production GraphRAG Update Considerations
-
-### In production GraphRAG systems, what is the most important consideration for incremental updates?
-
-A) Minimizing downtime while maintaining graph consistency    
-B) Reducing storage costs    
-C) Maximizing query speed    
+**Question 8:** In production GraphRAG systems, what is the most important consideration for incremental updates?  
+A) Minimizing downtime while maintaining graph consistency
+B) Reducing storage costs
+C) Maximizing query speed
 D) Simplifying the codebase  
 
 [**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
-
 
 ---
 
@@ -2629,7 +2629,8 @@ D) Simplifying the codebase
 
 **Previous:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
 
-## Optional Deep Dive Modules:
+## Optional Deep Dive Modules
+
 - 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Complex graph traversal and reasoning patterns
 - 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise graph database deployment
 

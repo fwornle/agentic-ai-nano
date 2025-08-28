@@ -1,6 +1,6 @@
 # Session 2 - Module A: Document Analytics
 
-> **⚠️ ADVANCED OPTIONAL MODULE** 
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 2 core content first.
 
 You've implemented structure-aware chunking and metadata extraction in Session 2. But when you deploy to production, you discover that some documents process beautifully while others create fragmented, low-quality chunks that hurt retrieval performance. The difference isn't random – it's complexity.
@@ -13,7 +13,7 @@ A simple technical memo needs different processing than a complex legal contract
 
 ### Enterprise Complexity Analysis Framework
 
-The key insight is that document complexity isn't just about length – it's about structural intricacy, semantic density, and processing difficulty. A 100-page contract with standardized clauses might be easier to process than a 10-page research paper with dense technical terminology and complex cross-references. 
+The key insight is that document complexity isn't just about length – it's about structural intricacy, semantic density, and processing difficulty. A 100-page contract with standardized clauses might be easier to process than a 10-page research paper with dense technical terminology and complex cross-references.
 
 Our complexity framework evaluates documents across multiple dimensions to select optimal processing strategies:
 
@@ -615,7 +615,7 @@ D) Processing time and resource utilization
 
 **Previous:** [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
 
-### Related Modules:
+### Related Modules
 
 - **[Core Session: Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)** - Foundation chunking concepts
 - **[Session 1 Module A: Production Patterns](Session1_ModuleA_Production_Patterns.md)** - Production patterns reference

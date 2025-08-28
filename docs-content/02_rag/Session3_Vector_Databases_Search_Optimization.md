@@ -7,7 +7,6 @@ This session transforms your RAG system from basic vector matching into a high-p
 ![RAG Architecture Overview](images/RAG-overview.png)
 *Figure 1: This diagram shows how vector databases serve as the central search engine in RAG architectures, handling both semantic similarity and hybrid search patterns that enable sophisticated information retrieval.*
 
-
 ## Part 1: Vector Database Architecture - The Search Engine at Scale
 
 ### Understanding Vector Database Design Principles
@@ -19,6 +18,7 @@ Vector databases solve this by intelligently organizing the space to avoid exhau
 ### The Core Challenge: Similarity at Scale
 
 Consider searching through 1 million documents for "machine learning techniques." A naive approach would:
+
 1. Calculate similarity between your query vector and each document vector
 2. Sort all 1 million results by similarity score
 3. Return the top matches
@@ -59,6 +59,7 @@ class VectorDatabaseInterface:
 ```
 
 **Key Design Decisions:**
+
 - **Cosine similarity**: Best for text embeddings because it handles document length naturally
 - **Metadata storage**: Enables filtering by document type, date, or user permissions
 - **Batch operations**: Essential for efficient data loading and updates
@@ -161,7 +162,7 @@ class ProductionVectorStore:
         return formatted
 ```
 
-### ChromaDB vs Enterprise Alternatives:
+### ChromaDB vs Enterprise Alternatives
 
 | Database | Best For | Strengths | Limitations |
 |----------|----------|-----------|-------------|
@@ -408,6 +409,7 @@ class OptimizedHNSWIndex:
 ```
 
 **HNSW Parameter Impact:**
+
 - **M (connectivity)**: Higher values improve recall but increase memory usage
 - **ef_construction**: Controls build quality - higher values create better graphs
 - **ef_search**: Runtime parameter for speed/accuracy trade-off
@@ -493,6 +495,7 @@ By combining vector similarity with keyword matching, production systems achieve
 ### The Hybrid Search Philosophy
 
 Consider this example:
+
 - **User Query**: "What's the company's policy on remote work?"
 - **Document Text**: "Employees may work from home up to 3 days per week..."
 
@@ -675,6 +678,7 @@ class ProductionHybridSearch:
 ```
 
 **Why RRF Outperforms Score Fusion:**
+
 - **No normalization needed**: RRF works with rankings, not raw scores
 - **Robust to outliers**: Extreme scores don't dominate the fusion
 - **Mathematically principled**: Based on probability theory for rank aggregation
@@ -841,6 +845,7 @@ class OptimizedSearchEngine:
 ```
 
 **Performance Impact of Optimizations:**
+
 - **Query caching**: 70-80% hit rate for common queries saves significant compute
 - **Batch processing**: 3-5x improvement for bulk operations
 - **Index optimization**: HNSW tuning can improve speed by 2-3x
@@ -1135,7 +1140,7 @@ D) All of the above
 
 **Previous:** [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
 
-### Optional Deep Dive Modules:
+### Optional Deep Dive Modules
 
 - **[Module A: Advanced Index Algorithms](Session3_ModuleA_Index_Algorithms.md)** - Deep dive into FAISS optimization and enterprise indexing strategies
 
