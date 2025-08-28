@@ -427,7 +427,6 @@ Session 10: Enterprise Integration
 Capstone: Multi-Framework Agent Ecosystem
 ```
 
-
 ## Chapter Summary
 
 ### Key Takeaways
@@ -515,4 +514,4 @@ D) Agno
 **Previous:** [Module 1: Agent Frameworks](index.md) (Introduction)  
 **Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
 
----
+--
