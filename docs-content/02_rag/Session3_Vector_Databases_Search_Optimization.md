@@ -5,7 +5,7 @@ In Sessions 1-2, you built a RAG system that chunks documents intelligently and 
 This session transforms your RAG system from basic vector matching into a high-performance search engine. You'll implement production-grade indexing strategies, hybrid search that combines semantic and lexical matching, and optimization techniques that maintain sub-100ms response times even with millions of vectors. The goal is search performance that scales with your data, not against it.
 
 ![RAG Architecture Overview](images/RAG-overview.png)
-### Figure 1: This diagram shows how vector databases serve as the central search engine in RAG architectures, handling both semantic similarity and hybrid search patterns that enable sophisticated information retrieval.
+*Figure 1: This diagram shows how vector databases serve as the central search engine in RAG architectures, handling both semantic similarity and hybrid search patterns that enable sophisticated information retrieval.*
 
 
 ## Part 1: Vector Database Architecture - The Search Engine at Scale

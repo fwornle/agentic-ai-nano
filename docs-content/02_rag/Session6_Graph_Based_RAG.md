@@ -172,7 +172,7 @@ Next, we construct logical reasoning pathways using the PageRank scores to guide
     }
 ```
 
-### **Technical Algorithms: Personalized PageRank and HNSW Integration**
+### Technical Algorithms: Personalized PageRank and HNSW Integration
 
 ### Personalized PageRank for Semantic Traversal
 
@@ -926,7 +926,7 @@ class PersonalizedPageRankProcessor:
         return merged_entities
 ```
 
-### **Graph Database Integration**
+### Graph Database Integration
 
 ### Why Neo4j for Production GraphRAG Systems
 
@@ -1198,7 +1198,7 @@ class Neo4jGraphManager:
 
 ## Part 3: Code GraphRAG Implementation - Understanding Software Knowledge
 
-### **AST-Based Code Analysis**
+### AST-Based Code Analysis
 
 Traditional GraphRAG works well for general documents, but code repositories require specialized understanding. Code has unique relationship patterns: functions call other functions, classes inherit from base classes, modules import dependencies, and variables have scope relationships. A code-specific GraphRAG system needs to understand these programming language semantics to enable queries like "show me all functions that depend on this deprecated API" or "what would break if I modify this class interface?"
 
@@ -1475,7 +1475,7 @@ class CodeGraphRAG:
 
 ## Part 4: Graph Traversal and Multi-Hop Reasoning - Connecting the Dots
 
-### **Intelligent Graph Traversal**
+### Intelligent Graph Traversal
 
 Building knowledge graphs is only half the challenge – the real power emerges in traversal algorithms that can follow logical reasoning pathways to connect disparate information. While vector RAG performs one-hop similarity searches, graph traversal enables multi-hop reasoning that answers complex questions by following relationship chains through the knowledge structure.
 
@@ -1830,7 +1830,7 @@ class GraphTraversalEngine:
 
 ## Part 5: Hybrid Graph-Vector Search
 
-### **Integrated Graph and Vector Retrieval**
+### Integrated Graph and Vector Retrieval
 
 ### Why Hybrid Search Outperforms Pure Approaches
 
@@ -2366,13 +2366,13 @@ Process graph contexts with relationship-aware scoring:
 
 ---
 
-## **Hands-On Exercise: Build Production GraphRAG System**
+## Hands-On Exercise: Build Production GraphRAG System
 
-### **Your Mission**
+### Your Mission
 
 Create a production-ready GraphRAG system that combines document analysis with code repository understanding.
 
-### **Requirements:**
+### Requirements
 
 1. **Knowledge Graph Construction**: Build KG from documents with entity/relationship extraction
 2. **Code Analysis**: Implement AST-based analysis for software repositories
@@ -2380,7 +2380,7 @@ Create a production-ready GraphRAG system that combines document analysis with c
 4. **Multi-Hop Retrieval**: Implement semantic-guided graph traversal
 5. **Hybrid Search**: Combine graph and vector search with adaptive fusion
 
-### **Implementation Architecture:**
+### Implementation Architecture
 
 ```python
 
@@ -2457,9 +2457,9 @@ class ProductionGraphRAG:
 
 ---
 
-## ** Chapter Summary**
+## Chapter Summary
 
-### **What You've Built**
+### What You've Built
 
 - ✅ **NodeRAG Architecture**: Heterogeneous graph system with specialized node types and three-stage processing
 - ✅ **Structured Brain Architecture**: Six specialized node types mimicking human knowledge organization
@@ -2470,7 +2470,7 @@ class ProductionGraphRAG:
 - ✅ **Multi-hop Graph Traversal**: Semantic guidance, path ranking, and coherent reasoning pathways
 - ✅ **Hybrid Graph-Vector Search**: Adaptive fusion strategies combining graph reasoning with vector similarity
 
-### **Key Technical Skills Learned**
+### Key Technical Skills Learned
 
 1. **NodeRAG Architecture**: Heterogeneous graph design, specialized node processing, three-stage pipeline implementation
 2. **Advanced Graph Algorithms**: Personalized PageRank implementation, HNSW integration, semantic pathway construction
@@ -2480,7 +2480,7 @@ class ProductionGraphRAG:
 6. **Graph Traversal**: Multi-hop reasoning, semantic-guided exploration, coherent path synthesis
 7. **Hybrid Retrieval**: Graph-vector fusion, adaptive weighting, comprehensive response generation
 
-### **Performance Characteristics**
+### Performance Characteristics
 
 - **NodeRAG Processing**: 3-stage pipeline processes 10K+ documents with 85-95% pathway coherence
 - **Personalized PageRank**: Sub-100ms semantic pathway computation on 100K+ heterogeneous graphs
@@ -2490,7 +2490,7 @@ class ProductionGraphRAG:
 - **Hybrid Search**: 30-40% improvement in complex query answering over pure vector search
 - **Code Analysis**: Comprehensive repository analysis with relationship extraction
 
-### **When to Choose NodeRAG, GraphRAG, or Vector RAG**
+### When to Choose NodeRAG, GraphRAG, or Vector RAG
 
 ### Use NodeRAG when:
 - **Complex reasoning** requires understanding different knowledge types (concepts, entities, relationships)
@@ -2519,7 +2519,7 @@ class ProductionGraphRAG:
 - **Both factual accuracy and insight discovery** are important
 - **You want the best of both worlds** (most real-world applications)
 
-### **GraphRAG vs Vector RAG: Concrete Examples**
+### GraphRAG vs Vector RAG: Concrete Examples
 
 **Example Query**: "What are the environmental impacts of technologies used by Apple's automotive partners?"
 
