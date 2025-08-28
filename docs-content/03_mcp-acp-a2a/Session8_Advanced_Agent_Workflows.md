@@ -21,7 +21,7 @@ Before we dive into the technical implementation, let's understand the five fund
 **1. Sequential Orchestration: The Musical Narrative**
 Like a story told through music, each movement builds upon the previous one. In our digital world, this means each agent's output becomes the next agent's input, creating a chain of intelligence where context deepens and understanding grows with each step. Perfect for customer support scenarios where the conversation history must be preserved and built upon.
 
-**2. Parallel Processing: The Harmonic Chorus** 
+**2. Parallel Processing: The Harmonic Chorus**
 Imagine a choir where different sections sing their parts simultaneously, creating rich harmonies. Our parallel processing splits large tasks into independent sub-tasks that execute concurrently, dramatically reducing time to resolution. Think of code reviews where multiple agents analyze different aspects of the same codebase simultaneously.
 
 **3. Orchestrator-Worker Pattern: The Conductor's Vision**
@@ -80,7 +80,8 @@ import structlog
 logger = structlog.get_logger()
 ```
 
-### The Arsenal of Enterprise Tools:
+### The Arsenal of Enterprise Tools
+
 - **LangGraph**: Our state machine conductor, handling complex conditional logic
 - **Circuit Breaker**: The safety net that prevents cascade failures across our agent network
 - **MetricsCollector**: Our performance analytics engine, tracking SLA adherence in real-time
@@ -160,6 +161,7 @@ class EnterpriseWorkflowState:
 ```
 
 This comprehensive state management gives us:
+
 - **Complete Auditability**: Every decision and action is recorded for compliance
 - **Performance Monitoring**: Real-time tracking of timing and resource usage
 - **Error Recovery**: Rollback points and retry management for fault tolerance  
@@ -329,6 +331,7 @@ class WorkflowStep:
 ```
 
 This sophisticated step definition enables:
+
 - **Data Flow Management**: Input/output mapping ensures data flows correctly between steps
 - **Dependency Tracking**: Complex workflows can express sophisticated prerequisite relationships
 - **Error Recovery**: Comprehensive retry policies and rollback actions maintain data consistency
@@ -642,6 +645,7 @@ class PerformanceMetrics:
 ```
 
 The performance metrics structure captures everything we need to understand how our digital orchestra is performing:
+
 - **execution_time**: How long each performance takes on average
 - **resource_usage**: How much computational "energy" each section consumes
 - **success_rate/error_rate**: The reliability of our performances
@@ -788,6 +792,7 @@ Like identifying which instrument is slightly out of tune in a full orchestra, o
 ```
 
 This sophisticated detection system identifies two types of problems:
+
 - **Statistical outliers**: Steps that take significantly longer than average
 - **Inconsistent performers**: Steps with high performance variance that would benefit from caching or optimization
 
@@ -818,6 +823,7 @@ The optimizer doesn't just identify problems—it provides specific, actionable 
 ```
 
 This recommendation system provides:
+
 - **Quantified improvements**: Expected 35% performance boost
 - **Implementation guidance**: Medium effort, low risk assessment
 - **Specific actions**: Exact steps to implement the optimization
@@ -864,71 +870,61 @@ This isn't just about making existing processes faster—it's about enabling ent
 
 Before we move to production deployment, let's ensure you've mastered these advanced concepts:
 
-**Question 1:** Which workflow pattern enables multiple tasks to execute simultaneously?
-
+**Question 1:** Which workflow pattern enables multiple tasks to execute simultaneously?  
 A) Loop workflows  
 B) Parallel workflows  
 C) Sequential workflows  
 D) Conditional workflows  
 
-**Question 2:** What triggers dynamic branching in conditional workflows?
-
+**Question 2:** What triggers dynamic branching in conditional workflows?  
 A) Random selection  
 B) Agent availability  
 C) Time-based schedules  
 D) Data values and context evaluation  
 
-**Question 3:** What is the most comprehensive approach to workflow fault recovery?
-
+**Question 3:** What is the most comprehensive approach to workflow fault recovery?  
 A) Restarting the entire workflow  
 B) Simple retry mechanisms  
 C) Ignoring errors and continuing  
 D) Rollback and retry with compensation actions  
 
-**Question 4:** How do adaptive workflows improve their performance over time?
-
+**Question 4:** How do adaptive workflows improve their performance over time?  
 A) By running more frequently  
 B) By reducing the number of steps  
 C) By analyzing performance metrics and adjusting execution strategies  
 D) By using faster hardware  
 
-**Question 5:** What information does the workflow execution context typically maintain?
-
+**Question 5:** What information does the workflow execution context typically maintain?  
 A) Only the current step  
 B) Just error messages  
 C) State data, execution history, and resource allocations  
 D) Only timing information  
 
-**Question 6:** How are dependencies between workflow steps managed?
-
+**Question 6:** How are dependencies between workflow steps managed?  
 A) Using dependency graphs and prerequisite checking  
 B) By alphabetical ordering  
 C) Through timing delays only  
 D) Through random execution  
 
-**Question 7:** What is the purpose of resource allocation in advanced workflows?
-
+**Question 7:** What is the purpose of resource allocation in advanced workflows?  
 A) To reduce costs  
 B) To improve security  
 C) To simplify configuration  
 D) To prevent resource contention and ensure optimal performance  
 
-**Question 8:** What metrics are most important for workflow observability?
-
+**Question 8:** What metrics are most important for workflow observability?  
 A) Only network traffic  
 B) Only execution time  
 C) Execution time, success rates, resource utilization, and error patterns  
 D) Just memory usage  
 
-**Question 9:** What mechanisms prevent infinite loops in workflow systems?
-
+**Question 9:** What mechanisms prevent infinite loops in workflow systems?  
 A) Time-based termination only  
 B) Manual intervention  
 C) Maximum iteration limits and conditional exit criteria  
 D) Random termination  
 
-**Question 10:** What advantage do hybrid workflows provide over simple workflow patterns?
-
+**Question 10:** What advantage do hybrid workflows provide over simple workflow patterns?  
 A) Lower resource usage  
 B) Faster execution  
 C) Easier implementation  

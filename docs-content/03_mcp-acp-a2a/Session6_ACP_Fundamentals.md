@@ -21,6 +21,7 @@ Before we dive deep into the code, let's understand why ACP represents a fundame
 In the traditional approach, every agent interaction becomes a complex dance through the cloud:
 
 **Traditional Cloud-Centric:**
+
 ```
 Agent A → Cloud API Gateway → Message Queue → Agent B
    ↓         (requires internet)         (high latency)     ↓
@@ -34,6 +35,7 @@ Every message bounces through external servers, adding latency, cost, and potent
 ACP flips this model on its head with elegant simplicity:
 
 **ACP Local-First:**
+
 ```
 Agent A ←→ Local Event Bus ←→ Agent B
    ↓      (IPC/local network)     ↓
@@ -50,7 +52,7 @@ ACP defines three core layers based on the IBM BeeAI standard, each solving a sp
 2. **Communication Layer**: Pure RESTful interfaces that any system can understand, creating universal compatibility
 3. **Coordination Layer**: Event-driven patterns that orchestrate complex workflows faster than human thought
 
-### Why This Matters in the Real World:
+### Why This Matters in the Real World
 
 - **Decentralized Discovery**: Agents find each other naturally, like neighbors introducing themselves
 - **RESTful Communication**: No proprietary protocols—if it speaks HTTP, it can join the conversation
@@ -186,7 +188,8 @@ Now comes the exciting part—building specialized agents that excel at specific
 
 Our first specialist is a master of data analysis, capable of turning raw CSV files into meaningful insights:
 
-### Declaring Its Expertise:
+### Declaring Its Expertise
+
 ```python
 
 # From [`src/session6/data_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/data_agent.py)
@@ -206,7 +209,8 @@ capabilities = [
 ]
 ```
 
-### The Intelligence Behind the Interface:
+### The Intelligence Behind the Interface
+
 ```python
 async def execute_capability(self, capability_name: str, payload: dict) -> dict:
     """Route capability requests to specific handlers"""
@@ -217,7 +221,8 @@ async def execute_capability(self, capability_name: str, payload: dict) -> dict:
         return {"error": f"Unknown capability: {capability_name}"}
 ```
 
-### Watching It Work Its Magic:
+### Watching It Work Its Magic
+
 ```python
 async def _process_csv(self, payload: dict) -> dict:
     data_str = payload["data"]
@@ -238,6 +243,7 @@ async def _process_csv(self, payload: dict) -> dict:
 ```
 
 **See It in Action:** Start the data agent and give it a test:
+
 ```bash
 curl -X POST http://localhost:8001/communicate \
   -H "Content-Type: application/json" \
@@ -256,7 +262,8 @@ curl -X POST http://localhost:8001/communicate \
 
 Our second specialist excels at understanding and manipulating human language:
 
-### Its Natural Language Arsenal:
+### Its Natural Language Arsenal
+
 ```python
 
 # From [`src/session6/text_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/text_agent.py)
@@ -279,7 +286,8 @@ capabilities = [
 ]
 ```
 
-### The Art of Summarization:
+### The Art of Summarization
+
 ```python
 async def _summarize_text(self, payload: dict) -> dict:
     text = payload["text"]
@@ -308,6 +316,7 @@ Here's where the magic of ACP really shines. The coordinator agent doesn't proce
 ACP coordination follows a carefully choreographed dance. Let's break down each movement:
 
 ### Movement 1: The Great Discovery
+
 ```python
 
 # From [`src/session6/coordinator_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/coordinator_agent.py) - Discovery phase
@@ -328,6 +337,7 @@ async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
 Like a detective searching for the right experts, the coordinator first identifies which agents are available and capable of handling specific tasks.
 
 ### Movement 2: The Data Symphony
+
 ```python
     # Step 2: Coordinate data processing with the discovered agent
     print("📊 Processing data...")
@@ -344,6 +354,7 @@ Like a detective searching for the right experts, the coordinator first identifi
 Now the coordinator directs the data agent to analyze the information, like a conductor cueing the strings section.
 
 ### Movement 3: The Final Harmony
+
 ```python
     # Step 3: Generate summary using processed data
     print("📝 Generating summary...")
@@ -366,7 +377,7 @@ Now the coordinator directs the data agent to analyze the information, like a co
 
 The grand finale combines all the work into a coherent result, demonstrating how multiple specialists can collaborate seamlessly.
 
-### The Philosophy of Coordination:
+### The Philosophy of Coordination
 
 1. **Discovery Before Action**: Like checking who's available before planning a meeting
 2. **Error Handling**: Always have a backup plan when required expertise isn't available
@@ -415,6 +426,7 @@ Imagine agents as new neighbors moving into a digital neighborhood:
 ```
 
 ### Making Introductions: Discovery in Action
+
 ```python
 
 # Find all agents that can process CSV
@@ -450,14 +462,16 @@ for agent in agents:
     time.sleep(2)  # Let each agent start
 ```
 
-### Awakening the Network:
+### Awakening the Network
+
 ```bash
 cd [`src/session6`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6)
 pip install -r requirements.txt
 python bootstrap.py
 ```
 
-### The City Comes Alive:
+### The City Comes Alive
+
 ```
 Starting ACP Agent Network...
    🔧 Starting DataProcessor on port 8001...
@@ -482,7 +496,8 @@ python test_client.py
 
 This test client acts like a quality inspector, verifying that all the social interactions work perfectly.
 
-### Watching Excellence in Motion:
+### Watching Excellence in Motion
+
 ```
 🧪 ACP Agent Network Test Suite
 🔍 Testing Agent Discovery...
@@ -527,6 +542,7 @@ class ACPMessage(BaseModel):
 Let's eavesdrop on a complete workflow execution and see how these digital minds collaborate:
 
 **1. The Client's Request (like placing an order):**
+
 ```json
 {
   "id": "workflow-123",
@@ -540,6 +556,7 @@ Let's eavesdrop on a complete workflow execution and see how these digital minds
 ```
 
 **2. The Coordinator's Intelligence Gathering:**
+
 ```bash
 GET http://localhost:8000/discover?capability=process_csv
 
@@ -548,6 +565,7 @@ GET http://localhost:8000/discover?capability=process_csv
 ```
 
 **3. The Coordinator's Task Assignment:**
+
 ```json
 {
   "id": "msg-789", 
@@ -562,6 +580,7 @@ GET http://localhost:8000/discover?capability=process_csv
 ```
 
 **4. The Data Agent's Professional Response:**
+
 ```json
 {
   "id": "response-101",
@@ -576,6 +595,7 @@ GET http://localhost:8000/discover?capability=process_csv
 ```
 
 **5. The Coordinator's Second Assignment:**
+
 ```json
 {
   "capability": "summarize_text",
@@ -587,6 +607,7 @@ GET http://localhost:8000/discover?capability=process_csv
 ```
 
 **6. The Final Masterpiece Delivered:**
+
 ```json
 {
   "result": {
@@ -632,71 +653,61 @@ But that's a story for another session. For now, take pride in what you've built
 
 Before we venture into the wider world of agent collaboration, let's ensure you've mastered the fundamentals:
 
-**Question 1:** What is the primary purpose of the Agent Communication Protocol (ACP)?
-
+**Question 1:** What is the primary purpose of the Agent Communication Protocol (ACP)?  
 A) To provide internet-dependent agent communication  
 B) To replace REST APIs entirely  
 C) To facilitate local-first agent coordination with minimal overhead  
 D) To enable cloud-based agent coordination  
 
-**Question 2:** What is the main advantage of ACP over traditional cloud-dependent agent protocols?
-
+**Question 2:** What is the main advantage of ACP over traditional cloud-dependent agent protocols?  
 A) Higher performance  
 B) Easier implementation  
 C) Better security  
 D) Offline capability and low latency  
 
-**Question 3:** What information must an ACP agent capability declaration include?
-
+**Question 3:** What information must an ACP agent capability declaration include?  
 A) Only the agent ID  
 B) Only the capability name  
 C) Just the input parameters  
 D) Name, description, input schema, and output schema  
 
-**Question 4:** How do ACP agents discover each other's capabilities?
-
+**Question 4:** How do ACP agents discover each other's capabilities?  
 A) Via embedded metadata and local REST endpoints  
 B) Through a centralized cloud registry  
 C) Through manual configuration files  
 D) Using UDP broadcasts only  
 
-**Question 5:** What communication protocol does ACP use for agent interactions?
-
+**Question 5:** What communication protocol does ACP use for agent interactions?  
 A) WebSocket  
 B) gRPC  
 C) Custom binary protocol  
 D) Standard HTTP/REST  
 
-**Question 6:** What role does the coordinator agent play in ACP architectures?
-
+**Question 6:** What role does the coordinator agent play in ACP architectures?  
 A) Provides security authentication  
 B) Orchestrates multi-agent workflows and manages task distribution  
 C) Stores all data permanently  
 D) Acts as a backup for other agents  
 
-**Question 7:** Why are specialized agents (like data agents and text agents) beneficial in ACP systems?
-
+**Question 7:** Why are specialized agents (like data agents and text agents) beneficial in ACP systems?  
 A) They cost less to deploy  
 B) They require less memory  
 C) They provide focused expertise and better task delegation  
 D) They are faster than general-purpose agents  
 
-**Question 8:** How do agents register their services in an ACP system?
-
+**Question 8:** How do agents register their services in an ACP system?  
 A) Through manual configuration  
 B) Using external service registries only  
 C) Through database entries  
 D) By exposing standardized metadata endpoints  
 
-**Question 9:** What is the purpose of the local registry in ACP systems?
-
+**Question 9:** What is the purpose of the local registry in ACP systems?  
 A) To store all agent data  
 B) To provide internet connectivity  
 C) To facilitate agent discovery and capability lookup  
 D) To handle authentication  
 
-**Question 10:** Why is ACP designed to be framework-agnostic?
-
+**Question 10:** Why is ACP designed to be framework-agnostic?  
 A) To improve performance  
 B) To simplify testing  
 C) To enable integration with any agent implementation  
