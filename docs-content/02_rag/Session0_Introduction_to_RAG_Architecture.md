@@ -184,7 +184,7 @@ Understanding RAG's evolution helps engineers appreciate why current architectur
 
 ![RAG Evolution Timeline](images/RAG-evolution.png)
 
-### Figure 2: The evolution of RAG from simple keyword search to sophisticated agentic systems
+*Figure 2: The evolution of RAG from simple keyword search to sophisticated agentic systems*
 
 ### Phase 1: Early Dense Retrieval (2017-2019)
 
@@ -434,7 +434,7 @@ Even well-implemented RAG systems face predictable challenges. Understanding the
 
 ![RAG Problems Overview](images/RAG-overview-problems.png)
 
-### Figure 3: The five most common RAG implementation problems and their proven solutions
+*Figure 3: The five most common RAG implementation problems and their proven solutions*
 
 ### RAG Limitations in 2024
 

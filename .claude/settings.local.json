@@ -3,6 +3,9 @@
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
       "/Users/q284340"
+    ],
+    "allow": [
+      "Bash(find:*)"
     ]
   }
 }
