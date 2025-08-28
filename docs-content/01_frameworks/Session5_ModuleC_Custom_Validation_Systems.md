@@ -598,6 +598,7 @@ D) 1 minute exactly
 [**🗂️ View Test Solutions →**](Session5_ModuleC_Test_Solutions.md)
 
 ### Next Steps
+
 - **Continue to Module D**: [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md) for comprehensive testing strategies
 - **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)
 - **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)
@@ -605,6 +606,7 @@ D) 1 minute exactly
 ---
 
 **🗂️ Source Files for Module C:**
+
 - `src/session5/error_management.py` - Complete error handling system
 - `src/session5/retry_strategies.py` - Intelligent retry implementations
 - `src/session5/circuit_breaker.py` - Circuit breaker for service resilience

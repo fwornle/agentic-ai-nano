@@ -1790,50 +1790,43 @@ You've now mastered advanced security and compliance for enterprise agent system
 
 Test your understanding of advanced security and compliance for enterprise agent systems:
 
-**Question 1:** Under GDPR, which legal basis requires the most complex implementation due to withdrawal requirements and proof of consent?
-
+**Question 1:** Under GDPR, which legal basis requires the most complex implementation due to withdrawal requirements and proof of consent?  
 A) Contract  
 B) Legal obligation  
 C) Consent  
 D) Legitimate interests  
 
-**Question 2:** In zero-trust architecture, what principle governs every access request?
-
+**Question 2:** In zero-trust architecture, what principle governs every access request?  
 A) Trust but verify  
 B) Never trust, always verify  
 C) Verify once, trust always  
 D) Trust by default  
 
-**Question 3:** What is the primary purpose of k-anonymity in data anonymization?
-
+**Question 3:** What is the primary purpose of k-anonymity in data anonymization?  
 A) To encrypt sensitive data  
 B) To ensure each individual cannot be distinguished from at least k-1 others  
 C) To hash personal identifiers  
 D) To compress large datasets  
 
-**Question 4:** In ABAC (Attribute-Based Access Control), which attributes are NOT typically evaluated?
-
+**Question 4:** In ABAC (Attribute-Based Access Control), which attributes are NOT typically evaluated?  
 A) Subject attributes  
 B) Object attributes  
 C) Environment attributes  
 D) Network attributes  
 
-**Question 5:** What is the recommended approach for key rotation in enterprise encryption systems?
-
+**Question 5:** What is the recommended approach for key rotation in enterprise encryption systems?  
 A) Immediate replacement without grace period  
 B) Rotate keys only when compromised  
 C) Generate new key and provide grace period for old key  
 D) Never rotate keys to avoid data loss  
 
-**Question 6:** Which GDPR article mandates Data Protection Impact Assessments (DPIA) for high-risk processing?
-
+**Question 6:** Which GDPR article mandates Data Protection Impact Assessments (DPIA) for high-risk processing?  
 A) Article 15  
 B) Article 17  
 C) Article 20  
 D) Article 35  
 
-**Question 7:** In field-level encryption, what is the primary advantage over full-record encryption?
-
+**Question 7:** In field-level encryption, what is the primary advantage over full-record encryption?  
 A) Faster encryption performance  
 B) Granular protection allowing different encryption policies per field  
 C) Smaller storage requirements  
@@ -1847,10 +1840,9 @@ D) Simplified key management
 
 ### Previous: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)
 
-### Optional Deep Dive Modules:
+### Optional Deep Dive Modules
 
 - **[🔒 Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)**
 - **[⚙️ Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)**
-
 
 **[Next: Session 11 (Coming Soon) →](Session11_Advanced_Production_Patterns.md)**
