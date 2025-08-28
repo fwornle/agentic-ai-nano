@@ -738,6 +738,8 @@ def assess_basic_quality(chunks: List[str]) -> Dict[str, float]:
 
 ### Complete Processing Pipeline
 
+Now we bring everything together into a comprehensive processing pipeline that analyzes document characteristics, chooses appropriate strategies, and applies quality controls:
+
 ```python
 class AdvancedProcessingPipeline:
     """Complete advanced document processing pipeline."""
@@ -824,6 +826,8 @@ class AdvancedProcessingPipeline:
 ```
 
 ### Enterprise Quality Control
+
+The final component is comprehensive quality assessment that evaluates chunks across multiple dimensions. This enables automated quality control and optimization feedback:
 
 ```python
 class ChunkQualityAssessor:
