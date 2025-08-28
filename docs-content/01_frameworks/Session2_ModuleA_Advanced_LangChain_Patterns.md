@@ -1198,36 +1198,31 @@ Action step execution supports dynamic parameter substitution. Template variable
 
 Test your understanding of advanced LangChain patterns:
 
-**Question 1:** What components are defined in the `AgentRole` dataclass for agent specialization?
-
+**Question 1:** What components are defined in the `AgentRole` dataclass for agent specialization?  
 A) Only name and description  
 B) Name, description, tools, specialization, and expertise_areas  
 C) Just tools and memory configuration  
 D) Only specialization and tools  
 
-**Question 2:** What is the primary purpose of the `MultiAgentOrchestrator` class?
-
+**Question 2:** What is the primary purpose of the `MultiAgentOrchestrator` class?  
 A) Create individual agents  
 B) Coordinate complex workflows across multiple specialized agents  
 C) Store conversation memory  
 D) Execute single-agent tasks  
 
-**Question 3:** How does the workflow coordination engine track execution progress?
-
+**Question 3:** How does the workflow coordination engine track execution progress?  
 A) Only stores final results  
 B) Uses workflow_context with phases, intermediate_results, and agent_interactions  
 C) Relies on agent memory alone  
 D) Tracks only error states  
 
-**Question 4:** What differentiates a research agent from an analysis agent in the multi-agent system?
-
+**Question 4:** What differentiates a research agent from an analysis agent in the multi-agent system?  
 A) Different LLM models  
 B) Specialized tools and system messages focused on their domain  
 C) Memory configuration only  
 D) Agent type parameter  
 
-**Question 5:** What happens in the synthesis phase of the complex workflow?
-
+**Question 5:** What happens in the synthesis phase of the complex workflow?  
 A) Initial data gathering  
 B) Pattern recognition only  
 C) Combines research and analysis results into comprehensive output  

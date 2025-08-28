@@ -67,7 +67,6 @@ class AtomicTextAgent(BaseAgent):
 Building systems through component assembly:
 
 ![Atomic Agents System](images/atomic-agents.png)
-
 *This visualization shows how multiple atomic agents work together in a coordinated system. Each agent maintains its specialized role while contributing to the overall workflow, demonstrating the composition-over-inheritance principle*
 
 **File**: [`src/session6/composition_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/composition_engine.py) - Component composition patterns
@@ -340,7 +339,6 @@ def test_coordination():
 Assembling components into complete systems:
 
 ![Atomic Assembler](images/atomic-assembler.png)
-
 *The Atomic Assembler helps you integrate Atomic Agents*
 
 **File**: [`src/session6/production_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session6/production_orchestrator.py) - Production integration patterns
@@ -584,91 +582,61 @@ python -m pytest test_client.py  # Validate your understanding
 
 Test your understanding of atomic agent architecture and modular composition.
 
-### Question 1
-
-### What is the core principle behind Atomic Agents architecture?
-
+**Question 1:** What is the core principle behind Atomic Agents architecture?  
 A) Maximum performance optimization  
 B) Single-purpose, composable components with clear interfaces  
 C) Minimal resource usage  
 D) Complex integrated systems  
 
-### Question 2
-
-### How do atomic agents communicate with each other?
-
+**Question 2:** How do atomic agents communicate with each other?  
 A) Direct method calls  
 B) Standardized message protocols and context providers  
 C) Shared global variables  
 D) Database transactions  
 
-### Question 3
-
-### What makes an agent "atomic" in this architecture?
-
+**Question 3:** What makes an agent "atomic" in this architecture?  
 A) Small code size  
 B) Fast execution  
 C) Single, focused responsibility with well-defined interfaces  
 D) Low memory usage  
 
-### Question 4
-
-### What is the role of Context Providers in atomic agent systems?
-
+**Question 4:** What is the role of Context Providers in atomic agent systems?  
 A) Execute agent logic  
 B) Manage shared state and coordination between agents  
 C) Handle user interface  
 D) Store persistent data  
 
-### Question 5
-
-### How does the Composition Engine work in atomic systems?
-
+**Question 5:** How does the Composition Engine work in atomic systems?  
 A) Compiles agents into single executable  
 B) Dynamically assembles agents based on requirements  
 C) Optimizes agent performance  
 D) Manages agent memory  
 
-### Question 6
-
-### What is the primary benefit of modular agent composition?
-
+**Question 6:** What is the primary benefit of modular agent composition?  
 A) Faster execution  
 B) Flexibility to assemble different workflows from same components  
 C) Lower development costs  
 D) Better user interface  
 
-### Question 7
-
-### How do atomic agents handle failure isolation?
-
+**Question 7:** How do atomic agents handle failure isolation?  
 A) Global error handling  
 B) Individual agent failures don't cascade to others  
 C) Automatic restart mechanisms  
 D) Backup agent systems  
 
-### Question 8
-
-### What makes atomic agents suitable for microservices architectures?
-
+**Question 8:** What makes atomic agents suitable for microservices architectures?  
 A) Built-in API gateways  
 B) Single-responsibility principle and loose coupling  
 C) Automatic scaling features  
 D) Built-in monitoring  
 
-### Question 9
-
-### How do you scale atomic agent systems?
-
+**Question 9:** How do you scale atomic agent systems?  
 A) Vertical scaling only  
 B) Horizontal scaling by replicating individual agents  
 C) Cloud deployment only  
 D) Container orchestration required  
 
-### Question 10
-
-### What is the main advantage of the Coordinator Agent pattern?
-
+**Question 10:** What is the main advantage of the Coordinator Agent pattern?  
 A) Centralized control of agent interactions and workflow orchestration  
 B) Faster agent execution  
 C) Lower resource usage  

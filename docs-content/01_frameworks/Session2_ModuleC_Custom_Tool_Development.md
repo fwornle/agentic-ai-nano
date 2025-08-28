@@ -1582,36 +1582,31 @@ Comprehensive metrics dictionary provides complete operational visibility. Round
 
 Test your understanding of custom tool development:
 
-**Question 1:** What benefits do Pydantic models provide for LangChain tool development?
-
+**Question 1:** What benefits do Pydantic models provide for LangChain tool development?  
 A) Faster execution only  
 B) Type safety, automatic validation, and documentation generation  
 C) Reduced memory usage  
 D) Simplified deployment  
 
-**Question 2:** What configuration options are set in the `AdvancedToolInput` Config class?
-
+**Question 2:** What configuration options are set in the `AdvancedToolInput` Config class?  
 A) Only field validation  
 B) Extra fields forbidden, validate on assignment, use enum values  
 C) Just type checking  
 D) Only serialization settings  
 
-**Question 3:** What does the `@validator('filters')` decorator ensure?
-
+**Question 3:** What does the `@validator('filters')` decorator ensure?  
 A) Filters are not empty  
 B) Filters contain JSON-serializable values  
 C) Filters are unique  
 D) Filters are properly formatted  
 
-**Question 4:** What performance metrics are tracked in the `AdvancedDataAnalysisTool`?
-
+**Question 4:** What performance metrics are tracked in the `AdvancedDataAnalysisTool`?  
 A) Only execution time  
 B) Total analyses, average execution time, success rate, and cache hit rate  
 C) Just error counts  
 D) Only cache statistics  
 
-**Question 5:** What is the purpose of the `args_schema` attribute in the tool class?
-
+**Question 5:** What is the purpose of the `args_schema` attribute in the tool class?  
 A) Define tool name only  
 B) Enable automatic validation and documentation generation  
 C) Set execution timeout  

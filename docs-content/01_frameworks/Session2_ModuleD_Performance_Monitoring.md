@@ -1779,36 +1779,31 @@ Dashboard data structure organizes cost information into logical categories for 
 
 Test your understanding of performance monitoring and optimization:
 
-**Question 1:** What categories of metrics are tracked in the `PerformanceMetrics` dataclass?
-
+**Question 1:** What categories of metrics are tracked in the `PerformanceMetrics` dataclass?  
 A) Only response times  
 B) Response time, resource usage, LLM-specific, tool usage, error, quality, and operational metrics  
 C) Just error rates and memory usage  
 D) Only API latency measurements  
 
-**Question 2:** What does the benchmark suite initialization include?
-
+**Question 2:** What does the benchmark suite initialization include?  
 A) Only basic configuration  
 B) Agent factory, configuration, performance history, logger, and memory tracing  
 C) Just test scenarios  
 D) Only result storage  
 
-**Question 3:** How are benchmark results organized for analysis?
-
+**Question 3:** How are benchmark results organized for analysis?  
 A) Single flat structure  
 B) By scenario with unique benchmark IDs, timestamps, and recommendations  
 C) Only by execution time  
 D) Just error logs  
 
-**Question 4:** What metrics are particularly important for cost optimization?
-
+**Question 4:** What metrics are particularly important for cost optimization?  
 A) Only response times  
 B) Token processing rates, API latency, and resource consumption  
 C) Just error rates  
 D) Only cache hit rates  
 
-**Question 5:** What is the purpose of tracking percentile metrics (p50, p90) rather than just averages?
-
+**Question 5:** What is the purpose of tracking percentile metrics (p50, p90) rather than just averages?  
 A) Reduce storage requirements  
 B) Understand user experience under different load conditions and identify outliers  
 C) Simplify calculations  
