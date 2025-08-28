@@ -1,9 +1,11 @@
-# Session 6 - Module B: Production GraphRAG Systems
+# Session 6 - Module B: Production GraphRAG Systems - Enterprise-Scale Knowledge
 
-> **ADVANCED OPTIONAL MODULE** 
-> Supplementary content for deeper specialization. Complete Session 6 core content first.
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> Prerequisites: Complete Session 6 core content first.
 
-Enterprise-grade GraphRAG deployment with scalability patterns, production monitoring, high-availability architecture design, and enterprise integration strategies.
+You've implemented GraphRAG systems with knowledge graph construction, entity extraction, and multi-hop reasoning in Session 6. But when you need to deploy GraphRAG at enterprise scale with millions of entities, strict uptime requirements, and integration with existing enterprise systems, development-grade implementations become insufficient for mission-critical operations.
+
+This module teaches you to build production-ready GraphRAG systems that meet enterprise demands. You'll implement distributed graph processing that scales horizontally, high-availability architectures that maintain service continuity, and enterprise integration patterns that work with existing organizational infrastructure. The goal is GraphRAG systems that operate reliably at the scale and standards that enterprises require.
 
 ### Related Modules
 - **[Module A: Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
@@ -20,9 +22,9 @@ python production_graphrag.py
 
 ## Production Systems Content
 
-### Distributed Graph Processing
+### Distributed Graph Processing - Scaling Beyond Single Machines
 
-Scale GraphRAG across multiple machines for enterprise workloads:
+Knowledge graphs in enterprise environments quickly outgrow single-machine capabilities. A comprehensive organizational knowledge base might contain millions of entities (employees, products, customers, documents) with complex relationship webs that require distributed processing for acceptable query performance and system reliability.
 
 ```python
 class DistributedGraphRAG:
