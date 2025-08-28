@@ -371,7 +371,7 @@ Try implementing this tool before looking at the solution! This exercise reinfor
 
 ---
 
-## Multiple Choice Test - Session 1
+## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What are the three core capabilities that MCP servers can expose?
 A) APIs, Databases, and Services  
@@ -437,7 +437,7 @@ D) `.server`
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 0 - Introduction to MCP, ACP, and A2A ←](Session0_Introduction_to_MCP_ACP_A2A.md)  
 **Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)

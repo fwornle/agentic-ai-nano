@@ -646,7 +646,7 @@ D) Network latency
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 ### Related Modules
 

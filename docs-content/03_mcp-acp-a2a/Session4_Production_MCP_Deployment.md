@@ -1992,7 +1992,7 @@ Welcome to the ranks of production engineers - the people who keep the internet 
 
 ---
 
-## Multiple Choice Test - Session 4
+## 📝 Multiple Choice Test - Session 4
 
 Test your mastery of Production MCP Deployment:
 
@@ -2060,7 +2060,7 @@ D) To meet regulatory compliance requirements only
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 3 - LangChain MCP Integration](Session3_LangChain_MCP_Integration.md)
 

@@ -924,7 +924,7 @@ Your digital empire awaits. What will you create?
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 8 - Advanced Agent Workflows](Session8_Advanced_Agent_Workflows.md)
 

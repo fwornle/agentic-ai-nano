@@ -1080,7 +1080,7 @@ class AdaptivePerformanceTuner:
 
 ---
 
-## Multiple Choice Test - Session 3
+## 📝 Multiple Choice Test - Session 3
 
 Test your understanding of vector databases and search optimization:
 
@@ -1136,7 +1136,7 @@ D) All of the above
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
 

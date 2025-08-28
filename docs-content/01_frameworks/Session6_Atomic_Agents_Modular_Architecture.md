@@ -648,7 +648,7 @@ D) Better error handling
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 5 - PydanticAI Type-Safe Agents](Session5_PydanticAI_Type_Safe_Agents.md)
 

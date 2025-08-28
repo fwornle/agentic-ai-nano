@@ -2569,7 +2569,7 @@ class ProductionGraphRAG:
 
 ---
 
-## Multiple Choice Test - Session 6
+## 📝 Multiple Choice Test - Session 6
 
 Test your understanding of graph-based RAG systems and GraphRAG implementations.
 
@@ -2625,7 +2625,7 @@ D) Simplifying the codebase
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
 

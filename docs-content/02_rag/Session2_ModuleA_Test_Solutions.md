@@ -1,6 +1,6 @@
 # Session 2: Advanced Document Analytics - Test Solutions
 
-## Multiple Choice Test
+## 📝 Multiple Choice Test
 
 **Question 1:** What is the primary benefit of document complexity scoring in RAG systems?  
 A) It reduces processing time for all documents  
