@@ -1051,7 +1051,7 @@ all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_
 
 ---
 
-## Multiple Choice Test - Session 3
+## 📝 Multiple Choice Test - Session 3
 
 Test your understanding of LangChain MCP Integration mastery:
 
@@ -1119,7 +1119,7 @@ D) Manual intervention is required
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - FileSystem MCP Server](Session2_FileSystem_MCP_Server.md)
 

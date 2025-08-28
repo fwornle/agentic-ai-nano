@@ -915,7 +915,7 @@ class ChunkQualityAssessor:
 
 ---
 
-## Multiple Choice Test - Session 2
+## 📝 Multiple Choice Test - Session 2
 
 Test your understanding of advanced chunking and preprocessing concepts:
 
@@ -971,7 +971,7 @@ D) To determine the number of chunks to create
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 

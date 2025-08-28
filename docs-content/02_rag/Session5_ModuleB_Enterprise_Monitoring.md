@@ -309,7 +309,7 @@ D) Configuration changes only
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 ### Related Modules
 

@@ -1542,7 +1542,7 @@ Finally, we generate comprehensive evaluation reports:
 
 ---
 
-## Multiple Choice Test - Session 5
+## 📝 Multiple Choice Test - Session 5
 
 Test your understanding of RAG evaluation and quality assessment techniques:
 
@@ -1623,7 +1623,7 @@ Traditional vector RAG finds documents similar to queries. GraphRAG enables mult
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
 

@@ -782,7 +782,7 @@ python test_agents.py
 
 ---
 
-## Multiple Choice Test - Session 1
+## 📝 Multiple Choice Test - Session 1
 
 Test your understanding of bare metal agent implementation and core patterns:
 
@@ -818,7 +818,7 @@ D) Observer Pattern
 
 [**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 

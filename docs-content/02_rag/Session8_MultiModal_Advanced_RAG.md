@@ -2405,7 +2405,7 @@ In **Session 9: Production RAG & Enterprise Integration**, we'll explore:
 
 ---
 
-## Multiple Choice Test - Session 8
+## 📝 Multiple Choice Test - Session 8
 
 Test your understanding of Multi-Modal & Advanced RAG Variants:
 
@@ -2465,7 +2465,7 @@ D) Compatibility with legacy systems
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 7 - Agentic RAG Systems](Session7_Agentic_RAG_Systems.md)
 

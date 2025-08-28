@@ -1,6 +1,6 @@
 # Session 2: Advanced Chunking & Preprocessing - Test Solutions
 
-## Multiple Choice Test
+## 📝 Multiple Choice Test
 
 **Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?  
 

@@ -471,7 +471,7 @@ Capstone: Multi-Framework Agent Ecosystem
 
 ---
 
-## Multiple Choice Test - Session 0
+## 📝 Multiple Choice Test - Session 0
 
 Test your understanding of agent frameworks and patterns:
 
@@ -509,7 +509,7 @@ D) Agno
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Module 1: Agent Frameworks](index.md) (Introduction)  
 **Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)

@@ -444,7 +444,7 @@ D) It's simpler to implement
 
 [**🗂️ View Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 3 Core: Vector Databases & Search Optimization](Session3_Vector_Databases_Search_Optimization.md)
 

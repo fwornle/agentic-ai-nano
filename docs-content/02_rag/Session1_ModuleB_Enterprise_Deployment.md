@@ -556,7 +556,7 @@ D) Only resource utilization
 
 [**🗂️ View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
 
-## Navigation
+## 🧭 Navigation
 
 - [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
 - [Module A - Production Patterns](Session1_ModuleA_Production_Patterns.md)
