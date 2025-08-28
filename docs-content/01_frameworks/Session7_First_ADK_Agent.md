@@ -452,7 +452,7 @@ result = cloud_agent.analyze_stored_data("sales_data")
 Enterprise security with ADK:
 
 ![ADK Authentication](images/adk-authentication.svg)
-### This flowchart demonstrates ADK's enterprise authentication mechanisms, including service account authentication, IAM integration, and audit logging flows. The diagram shows how ADK securely handles authentication and authorization in enterprise environments.
+*This flowchart demonstrates ADK's enterprise authentication mechanisms, including service account authentication, IAM integration, and audit logging flows. The diagram shows how ADK securely handles authentication and authorization in enterprise environments.*
 
 **File**: `src/session7/enterprise_security.py` - Security implementations
 
