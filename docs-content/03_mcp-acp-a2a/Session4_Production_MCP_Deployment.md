@@ -193,7 +193,9 @@ async def readiness_check():
 
 ### The Production Server Architecture
 
-Now let's build the production server class that brings all these concepts together. This isn't just a wrapper around your development code - it's a complete reimagining designed for production realities:
+Now let's build the production server class that brings all these concepts together. This isn't just a wrapper around your development code - it's a complete reimagining designed for production realities.
+
+We'll start by defining the class structure and its core mission:
 
 ```python
 class ProductionMCPServer:
@@ -207,13 +209,21 @@ class ProductionMCPServer:
     - Health checks for load balancer integration
     - Environment-based configuration for different deployment stages
     """
-    
+```
+
+Next, we implement the initialization logic that sets up the core server infrastructure:
+
+```python
     def __init__(self, name: str = "Production MCP Server"):
         self.mcp = FastMCP(name)
         self.redis_client: Optional[aioredis.Redis] = None
         self.cache_ttl = int(os.getenv('CACHE_TTL', '300'))  # 5 minutes default
         self.start_time = time.time()
-        
+```
+
+The configuration system demonstrates how production servers handle different deployment environments. This environment-based configuration is essential for promoting code through dev/staging/production without modifications:
+
+```python
         # Configuration from environment - The key to deployment flexibility
         self.config = {
             'redis_url': os.getenv('REDIS_URL', 'redis://localhost:6379'),
@@ -228,7 +238,9 @@ class ProductionMCPServer:
 
 ### Async Resource Initialization: The Right Way
 
-Production systems need to handle expensive resource initialization gracefully. Here's how to separate synchronous startup from async resource management:
+Production systems need to handle expensive resource initialization gracefully. Here's how to separate synchronous startup from async resource management.
+
+The initialization method demonstrates a critical production pattern - graceful degradation when dependencies are unavailable:
 
 ```python
     async def initialize(self):
@@ -239,6 +251,11 @@ Production systems need to handle expensive resource initialization gracefully. 
         initialize expensive resources (like Redis connections) asynchronously.
         This pattern is essential for containerized deployments.
         """
+```
+
+Here's the Redis connection logic that handles both success and failure scenarios gracefully:
+
+```python
         try:
             self.redis_client = await aioredis.from_url(
                 self.config['redis_url'],
@@ -250,9 +267,13 @@ Production systems need to handle expensive resource initialization gracefully. 
             logger.warning(f"Redis connection failed: {e}. Running without cache - Degraded performance expected")
 ```
 
+**Key Production Pattern:** Notice how the system doesn't crash when Redis is unavailable. Instead, it logs a warning and continues operating in degraded mode. This is the difference between development and production thinking.
+
 ### Production Tools with Intelligent Caching
 
-Let's implement a production tool that demonstrates sophisticated caching patterns. This isn't just "add Redis and hope for the best" - this is intelligent, deterministic caching that can dramatically improve performance:
+Let's implement a production tool that demonstrates sophisticated caching patterns. This isn't just "add Redis and hope for the best" - this is intelligent, deterministic caching that can dramatically improve performance.
+
+We start with the tool setup method that applies production-grade decorators for monitoring:
 
 ```python
     def _setup_tools(self):
@@ -261,6 +282,11 @@ Let's implement a production tool that demonstrates sophisticated caching patter
         @self.mcp.tool()
         @self._monitor_tool
         async def process_data(data: Dict[str, Any], operation: str = "transform") -> Dict:
+```
+
+The tool documentation explains the advanced caching strategies being implemented:
+
+```python
             """
             Production Data Processing with Intelligent Caching
             
@@ -270,7 +296,11 @@ Let's implement a production tool that demonstrates sophisticated caching patter
             - Comprehensive result metadata
             - Performance monitoring integration
             """
-            
+```
+
+Here's the cache key generation logic that ensures consistency across server restarts and load-balanced deployments:
+
+```python
             # Generate deterministic cache key - Consistency is critical
             cache_key = f"process:{operation}:{hash(json.dumps(data, sort_keys=True))}"
             
@@ -279,7 +309,11 @@ Let's implement a production tool that demonstrates sophisticated caching patter
             if cached:
                 logger.info(f"Cache hit for operation: {operation}", cache_key=cache_key)
                 return cached
-            
+```
+
+When there's a cache miss, we perform the actual processing while collecting comprehensive metadata:
+
+```python
             # Cache miss - Perform actual processing
             logger.info(f"Processing data with operation: {operation}", input_size=len(json.dumps(data)))
             result = {
@@ -296,9 +330,13 @@ Let's implement a production tool that demonstrates sophisticated caching patter
             return result
 ```
 
+**Production Insight:** The deterministic cache key uses `hash(json.dumps(data, sort_keys=True))` to ensure that identical data always generates the same cache key, regardless of the order in which dictionary keys were inserted.
+
 ### Comprehensive Health Monitoring
 
-Here's how to implement health checks that actually provide useful information to your monitoring systems:
+Here's how to implement health checks that actually provide useful information to your monitoring systems.
+
+First, we define the health check tool with comprehensive documentation about its purpose:
 
 ```python
         @self.mcp.tool()
@@ -313,6 +351,11 @@ Here's how to implement health checks that actually provide useful information t
             - Capacity planning analysis
             - Debugging support
             """
+```
+
+Next, we build the basic health status information that every production system should provide:
+
+```python
             checks = {
                 "status": "healthy",
                 "timestamp": datetime.now().isoformat(),
@@ -320,7 +363,11 @@ Here's how to implement health checks that actually provide useful information t
                 "environment": self.config['environment'],
                 "version": "1.0.0"
             }
-            
+```
+
+The most critical part is validating external dependencies. Here we check Redis connectivity and adjust the overall health status accordingly:
+
+```python
             # External dependency health validation
             if self.redis_client:
                 try:
@@ -336,6 +383,8 @@ Here's how to implement health checks that actually provide useful information t
             return checks
 ```
 
+**Production Best Practice:** Notice how the health check distinguishes between "healthy", "degraded", and "unhealthy" states. A degraded system can still serve traffic but with reduced performance - this allows load balancers to make intelligent routing decisions.
+
 ### The Power of Production Features
 
 This production server includes capabilities that make the difference between a toy and a tool:
@@ -350,7 +399,9 @@ This production server includes capabilities that make the difference between a 
 
 ### The Docker Foundation
 
-Containerization isn't just about packaging - it's about creating consistent, secure, and scalable deployment artifacts. Here's how to build production-grade containers:
+Containerization isn't just about packaging - it's about creating consistent, secure, and scalable deployment artifacts. Here's how to build production-grade containers.
+
+We start with a minimal, security-focused base image and essential system dependencies:
 
 ```dockerfile
 # deployments/Dockerfile - Your production deployment package
@@ -361,17 +412,29 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install -y \
     gcc \
     && rm -rf /var/lib/apt/lists/*
+```
 
+Next, we implement security hardening by creating a dedicated non-root user for running our application:
+
+```dockerfile
 # Security hardening - Run as non-root user
 RUN useradd -m -u 1000 mcpuser
 
 # Working directory setup
 WORKDIR /app
+```
 
+The dependency installation layer is optimized for Docker's layer caching mechanism to speed up builds:
+
+```dockerfile
 # Dependency installation - Optimize for Docker layer caching
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+```
 
+Now we copy our application code and set up the runtime environment with proper permissions:
+
+```dockerfile
 # Application code
 COPY src/ ./src/
 COPY scripts/ ./scripts/
@@ -381,7 +444,11 @@ RUN mkdir -p /var/log/mcp && chown mcpuser:mcpuser /var/log/mcp
 
 # Switch to non-root user - Security best practice
 USER mcpuser
+```
 
+Finally, we configure health monitoring, environment variables, and startup commands for production deployment:
+
+```dockerfile
 # Health check configuration for container orchestrators
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD python scripts/health_check.py || exit 1
@@ -408,7 +475,9 @@ This Dockerfile implements several critical production security practices:
 
 ### Local Development with Docker Compose
 
-For development environments that mirror production, here's a complete Docker Compose setup:
+For development environments that mirror production, here's a complete Docker Compose setup that demonstrates the full production stack.
+
+We start with the version declaration and the main MCP server configuration:
 
 ```yaml
 # deployments/docker-compose.yml - Production-like development environment
@@ -424,6 +493,11 @@ services:
     ports:
       - "8080:8080"  # MCP server
       - "9090:9090"  # Prometheus metrics
+```
+
+The environment configuration shows how to connect services and configure caching behavior:
+
+```yaml
     environment:
       - REDIS_URL=redis://redis:6379
       - ENVIRONMENT=development
@@ -439,7 +513,11 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+```
 
+The Redis caching layer provides high-performance data storage with persistence:
+
+```yaml
   # Redis caching layer
   redis:
     image: redis:7-alpine
@@ -448,7 +526,11 @@ services:
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes  # Data persistence
+```
 
+The monitoring stack includes Prometheus for metrics collection and Grafana for visualization:
+
+```yaml
   # Prometheus monitoring
   prometheus:
     image: prom/prometheus:latest
@@ -500,7 +582,9 @@ Google Cloud Run represents a fundamental shift in how we think about production
 
 ### Building the Cloud Run HTTP Adapter
 
-Cloud Run expects HTTP traffic, but your MCP server speaks JSON-RPC. Here's how to bridge that gap elegantly:
+Cloud Run expects HTTP traffic, but your MCP server speaks JSON-RPC. Here's how to bridge that gap elegantly.
+
+We start with the essential imports and Cloud Run optimized logging configuration:
 
 ```python
 # src/cloud_run_adapter.py - Bridging MCP and HTTP
@@ -518,7 +602,11 @@ from src.production_mcp_server import ProductionMCPServer
 # Cloud Run optimized logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+```
 
+Next, we create the FastAPI application with production-grade metadata and initialize our MCP server:
+
+```python
 app = FastAPI(
     title="MCP Server on Cloud Run",
     description="Production MCP server deployed on Google Cloud Run",
@@ -529,9 +617,13 @@ app = FastAPI(
 server = ProductionMCPServer()
 ```
 
+**Cloud Run Architecture Pattern:** The FastAPI application acts as an HTTP gateway that translates incoming HTTP requests into MCP JSON-RPC calls and returns the responses in HTTP format. This adapter pattern is essential for serverless deployments.
+
 ### Application Lifecycle Management
 
-Cloud Run containers have a specific lifecycle. Here's how to manage it properly:
+Cloud Run containers have a specific lifecycle. Here's how to manage it properly.
+
+The startup event handler initializes all resources and dependencies when the container starts:
 
 ```python
 @app.on_event("startup")
@@ -545,7 +637,11 @@ async def startup_event():
     logger.info("Initializing MCP server for Cloud Run deployment...")
     await server.initialize()
     logger.info("MCP server ready to handle production traffic")
+```
 
+The shutdown event handler ensures graceful resource cleanup during container termination:
+
+```python
 @app.on_event("shutdown")
 async def shutdown_event():
     """
@@ -559,9 +655,13 @@ async def shutdown_event():
         await server.redis_client.close()
 ```
 
+**Production Pattern:** These lifecycle events are critical for serverless environments where containers can be terminated at any time. Proper initialization and cleanup prevent resource leaks and ensure consistent behavior.
+
 ### The HTTP-to-MCP Request Handler
 
-This is where the magic happens - converting HTTP requests into MCP JSON-RPC calls:
+This is where the magic happens - converting HTTP requests into MCP JSON-RPC calls. This complex handler needs to be broken down into manageable pieces.
+
+We start with the endpoint definition and request parsing logic:
 
 ```python
 @app.post("/mcp")
@@ -580,7 +680,11 @@ async def handle_mcp_request(request: Request):
         # Route based on MCP method
         method = body.get("method", "")
         params = body.get("params", {})
+```
 
+The tool discovery method handles requests for available MCP tools:
+
+```python
         if method == "tools/list":
             # Tool discovery
             tools = server.mcp.list_tools()
@@ -589,7 +693,11 @@ async def handle_mcp_request(request: Request):
                 "result": tools,
                 "id": body.get("id")
             })
+```
 
+Tool execution is more complex, requiring parameter validation and error handling:
+
+```python
         elif method.startswith("tools/call"):
             # Tool execution
             tool_name = params.get("name")
@@ -603,6 +711,11 @@ async def handle_mcp_request(request: Request):
                     "result": result,
                     "id": body.get("id")
                 })
+```
+
+When tools aren't found, we return proper JSON-RPC error responses:
+
+```python
             else:
                 return JSONResponse(
                     content={
@@ -621,7 +734,11 @@ async def handle_mcp_request(request: Request):
                 },
                 status_code=404
             )
+```
 
+Comprehensive error handling ensures the system degrades gracefully under all failure conditions:
+
+```python
     except json.JSONDecodeError:
         return JSONResponse(
             content={
@@ -642,6 +759,8 @@ async def handle_mcp_request(request: Request):
             status_code=500
         )
 ```
+
+**Production Architecture Insight:** This handler demonstrates the adapter pattern in action - it translates between HTTP (Cloud Run's native protocol) and JSON-RPC (MCP's native protocol) while maintaining full error semantics for both protocols.
 
 ### Health Checks and Metrics for Cloud Run
 
@@ -674,7 +793,9 @@ async def metrics():
 
 ### Automated Cloud Build Configuration
 
-Here's how to automate your deployment with Google Cloud Build:
+Here's how to automate your deployment with Google Cloud Build using a comprehensive CI/CD pipeline.
+
+We start with the container image build steps that create tagged versions for deployment tracking:
 
 ```yaml
 # deployments/cloudbuild.yaml - Automated deployment pipeline
@@ -689,14 +810,22 @@ steps:
       '-f', 'deployments/Dockerfile',
       '.'
     ]
+```
 
+Next, we push the built images to Google Container Registry for deployment:
+
+```yaml
   # Push to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/mcp-server:$COMMIT_SHA']
   
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/mcp-server:latest']
+```
 
+The deployment step configures Cloud Run with production-ready settings including scaling, resource limits, and environment variables:
+
+```yaml
   # Deploy to Cloud Run with production configuration
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
@@ -723,6 +852,8 @@ options:
   logging: CLOUD_LOGGING_ONLY
   machineType: 'E2_HIGHCPU_8'
 ```
+
+**Production CI/CD Pattern:** This pipeline demonstrates immutable deployments using commit SHAs for traceability, automated testing integration points, and production-grade resource allocation.
 
 ### Infrastructure as Code with Terraform
 

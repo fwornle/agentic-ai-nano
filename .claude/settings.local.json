@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(find:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(markdownlint:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
