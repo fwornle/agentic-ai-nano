@@ -148,29 +148,88 @@ nav:
   - Agent Frameworks:
     - 01_frameworks/index.md
     - Session 0 - Introduction: 01_frameworks/Session0_Introduction_to_Agent_Frameworks_Patterns.md
+    - Session 0 Advanced Modules:
+      - Historical Context: 01_frameworks/Session0_ModuleA_Historical_Context_Evolution.md
+      - Pattern Theory: 01_frameworks/Session0_ModuleB_Advanced_Pattern_Theory.md
     - Session 1 - Bare Metal Agents: 01_frameworks/Session1_Bare_Metal_Agents.md
+    - Session 1 Advanced Modules:
+      - Agent Patterns: 01_frameworks/Session1_ModuleA_Advanced_Agent_Patterns.md
+      - Performance: 01_frameworks/Session1_ModuleB_Performance_Optimization.md
+      - State Management: 01_frameworks/Session1_ModuleC_Complex_State_Management.md
+      - Case Study: 01_frameworks/Session1_ModuleD_Coding_Assistant_Case_Study.md
     - Session 2 - LangChain Foundations: 01_frameworks/Session2_LangChain_Foundations.md
+    - Session 2 Advanced Modules:
+      - LangChain Patterns: 01_frameworks/Session2_ModuleA_Advanced_LangChain_Patterns.md
+      - Deployment: 01_frameworks/Session2_ModuleB_Production_Deployment_Strategies.md
+      - Tool Development: 01_frameworks/Session2_ModuleC_Custom_Tool_Development.md
+      - Monitoring: 01_frameworks/Session2_ModuleD_Performance_Monitoring.md
     - Session 3 - LangGraph Workflows: 01_frameworks/Session3_LangGraph_Multi_Agent_Workflows.md
+    - Session 3 Advanced Modules:
+      - Orchestration: 01_frameworks/Session3_ModuleA_Advanced_Orchestration_Patterns.md
+      - State Management: 01_frameworks/Session3_ModuleB_Enterprise_State_Management.md
     - Session 4 - CrewAI Orchestration: 01_frameworks/Session4_CrewAI_Team_Orchestration.md
+    - Session 4 Advanced Modules:
+      - CrewAI Flows: 01_frameworks/Session4_ModuleA_Advanced_CrewAI_Flows.md
+      - Team Patterns: 01_frameworks/Session4_ModuleB_Enterprise_Team_Patterns.md
     - Session 5 - PydanticAI Type Safety: 01_frameworks/Session5_PydanticAI_Type_Safe_Agents.md
+    - Session 5 Advanced Modules:
+      - Type Systems: 01_frameworks/Session5_ModuleA_Advanced_Type_Systems.md
+      - Enterprise PydanticAI: 01_frameworks/Session5_ModuleB_Enterprise_PydanticAI.md
+      - Validation Systems: 01_frameworks/Session5_ModuleC_Custom_Validation_Systems.md
+      - Testing & Benchmarks: 01_frameworks/Session5_ModuleD_Testing_Benchmarking.md
     - Session 6 - Atomic Agents: 01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md
+    - Session 6 Advanced Modules:
+      - Composition Patterns: 01_frameworks/Session6_ModuleA_Advanced_Composition_Patterns.md
+      - Modular Systems: 01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md
     - Session 7 - First ADK Agent: 01_frameworks/Session7_First_ADK_Agent.md
+    - Session 7 Advanced Modules:
+      - ADK Integration: 01_frameworks/Session7_ModuleA_Advanced_ADK_Integration.md
+      - Agent Systems: 01_frameworks/Session7_ModuleB_Enterprise_Agent_Systems.md
     - Session 8 - Agno Production: 01_frameworks/Session8_Agno_Production_Ready_Agents.md
+    - Session 8 Advanced Modules:
+      - Monitoring: 01_frameworks/Session8_ModuleA_Advanced_Monitoring_Observability.md
+      - Scaling Architecture: 01_frameworks/Session8_ModuleB_Enterprise_Scaling_Architecture.md
+      - Performance Optimization: 01_frameworks/Session8_ModuleC_Performance_Optimization.md
+      - Security & Compliance: 01_frameworks/Session8_ModuleD_Security_Compliance.md
     - Session 9 - Multi-Agent Patterns: 01_frameworks/Session9_Multi_Agent_Patterns.md
+    - Session 9 Advanced Modules:
+      - Consensus Algorithms: 01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md
+      - Multi-Agent Systems: 01_frameworks/Session9_ModuleB_Production_Multi_Agent_Systems.md
     - Session 10 - Enterprise Integration: 01_frameworks/Session10_Enterprise_Integration_Production_Deployment.md
+    - Session 10 Advanced Modules:
+      - Security & Compliance: 01_frameworks/Session10_ModuleA_Advanced_Security_Compliance.md
+      - Operations & Scaling: 01_frameworks/Session10_ModuleB_Enterprise_Operations_Scaling.md
 
   - RAG Architecture:
     - 02_rag/index.md
     - Session 0 - RAG Introduction: 02_rag/Session0_Introduction_to_RAG_Architecture.md
     - Session 1 - Basic RAG: 02_rag/Session1_Basic_RAG_Implementation.md
+    - Session 1 Advanced Modules:
+      - Production Patterns: 02_rag/Session1_ModuleA_Production_Patterns.md
+      - Enterprise Deployment: 02_rag/Session1_ModuleB_Enterprise_Deployment.md
     - Session 2 - Advanced Chunking: 02_rag/Session2_Advanced_Chunking_Preprocessing.md
+    - Session 2 Advanced Modules:
+      - Document Analytics: 02_rag/Session2_ModuleA_Document_Analytics.md
     - Session 3 - Vector Databases: 02_rag/Session3_Vector_Databases_Search_Optimization.md
+    - Session 3 Advanced Modules:
+      - Index Algorithms: 02_rag/Session3_ModuleA_Index_Algorithms.md
     - Session 4 - Query Enhancement: 02_rag/Session4_Query_Enhancement_Context_Augmentation.md
+    - Session 4 Advanced Modules:
+      - Query Understanding: 02_rag/Session4_ModuleA_Query_Understanding.md
     - Session 5 - RAG Evaluation: 02_rag/Session5_RAG_Evaluation_Quality_Assessment.md
+    - Session 5 Advanced Modules:
+      - Advanced Metrics: 02_rag/Session5_ModuleA_Advanced_Metrics.md
+      - Enterprise Monitoring: 02_rag/Session5_ModuleB_Enterprise_Monitoring.md
     - Session 6 - Graph-Based RAG: 02_rag/Session6_Graph_Based_RAG.md
+    - Session 6 Advanced Modules:
+      - Advanced Algorithms: 02_rag/Session6_ModuleA_Advanced_Algorithms.md
+      - Production Systems: 02_rag/Session6_ModuleB_Production_Systems.md
     - Session 7 - Agentic RAG: 02_rag/Session7_Agentic_RAG_Systems.md
     - Session 8 - MultiModal RAG: 02_rag/Session8_MultiModal_Advanced_RAG.md
     - Session 9 - Production RAG: 02_rag/Session9_Production_RAG_Enterprise_Integration.md
+    - Session 9 Advanced Modules:
+      - Advanced Production: 02_rag/Session9_ModuleA_Advanced_Production.md
+      - Enterprise Architecture: 02_rag/Session9_ModuleB_Enterprise_Architecture.md
 
   - MCP, ACP & A2A Communication:
     - 03_mcp-acp-a2a/index.md
@@ -178,6 +237,9 @@ nav:
     - Session 1 - Basic MCP Server: 03_mcp-acp-a2a/Session1_Basic_MCP_Server.md
     - Session 2 - FileSystem MCP: 03_mcp-acp-a2a/Session2_FileSystem_MCP_Server.md
     - Session 3 - LangChain Integration: 03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md
+    - Session 3 Advanced Modules:
+      - Enterprise Patterns: 03_mcp-acp-a2a/Session3_ModuleA_Enterprise_Patterns.md
+      - Advanced Workflows: 03_mcp-acp-a2a/Session3_ModuleB_Advanced_Workflows.md
     - Session 4 - Production MCP: 03_mcp-acp-a2a/Session4_Production_MCP_Deployment.md
     - Session 5 - Secure MCP: 03_mcp-acp-a2a/Session5_Secure_MCP_Server.md
     - Session 6 - ACP Fundamentals: 03_mcp-acp-a2a/Session6_ACP_Fundamentals.md
