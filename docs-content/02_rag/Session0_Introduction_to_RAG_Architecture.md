@@ -179,7 +179,6 @@ Enterprise RAG systems require additional considerations around scalability, mon
 Understanding RAG's evolution helps engineers appreciate why current architectures exist and where the field is heading. Each phase solved specific technical limitations of the previous generation.
 
 ![RAG Evolution Timeline](images/RAG-evolution.png)
-
 *Figure 2: The evolution of RAG from simple keyword search to sophisticated agentic systems*
 
 ### Phase 1: Early Dense Retrieval (2017-2019)
@@ -424,7 +423,6 @@ This represents the cutting edge of RAG technology, enabling systems to handle q
 Even well-implemented RAG systems face predictable challenges. Understanding these problems and their engineering solutions is crucial for building production-ready systems.
 
 ![RAG Problems Overview](images/RAG-overview-problems.png)
-
 *Figure 3: The five most common RAG implementation problems and their proven solutions*
 
 ### RAG Limitations in 2024
