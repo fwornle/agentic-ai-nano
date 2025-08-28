@@ -1,8 +1,11 @@
-# Session 4 - Module A: Advanced Query Understanding
+# Session 4 - Module A: Advanced Query Understanding - Reading Between the Lines
 
-> **Advanced Optional Module** - Prerequisites: Complete Session 4 core content first.
+> **⚠️ ADVANCED OPTIONAL MODULE** 
+> Prerequisites: Complete Session 4 core content first.
 
-Advanced query understanding techniques including intent detection, multi-turn conversation context management, query expansion strategies, and semantic gap analysis for optimal query-document alignment.
+You've implemented HyDE, query expansion, and context optimization in Session 4. But when you deploy to real users in conversational interfaces, you discover new challenges: users say "it" without referencing what they mean, attach images expecting visual understanding, and express the same need in dramatically different ways depending on their expertise level.
+
+This module teaches you to build query understanding systems that read between the lines of user intent. You'll implement intent classification that routes queries to specialized processing strategies, context-aware enhancement that maintains conversational memory, and multi-modal processing that handles images and documents alongside text. The goal is transforming ambiguous, incomplete user input into precise, complete information requests.
 
 ---
 
@@ -22,9 +25,11 @@ Advanced query understanding techniques including intent detection, multi-turn c
 
 ## Advanced Query Understanding Patterns
 
-### **Pattern 1: Intent Classification and Query Routing**
+### **Pattern 1: Intent Classification and Query Routing** - Understanding What Users Really Want
 
-Let's start by establishing the foundation for sophisticated query understanding. Query understanding goes beyond simple keyword extraction to comprehend user intent, context, and the type of response needed. This involves defining query types and the data structures needed to capture comprehensive query analysis.
+The fundamental challenge in query understanding is that identical questions can require completely different processing strategies depending on user intent. "How do I deploy?" could mean "show me the deployment checklist" (procedural), "what are my deployment options?" (comparative), or "why is my deployment failing?" (troubleshooting). 
+
+Intent classification routes queries to specialized processing pipelines that match the user's actual information need, not just their surface language.
 
 First, we define the fundamental intent categories that represent different types of information needs:
 
@@ -171,9 +176,11 @@ Finally, we handle the LLM response with error handling:
 
 Intent classification combines fast pattern matching for common query types with sophisticated LLM analysis for complex cases. This hybrid approach provides both speed and accuracy in understanding user intent.
 
-### **Pattern 2: Context-Aware Query Enhancement**
+### **Pattern 2: Context-Aware Query Enhancement** - Remembering the Conversation
 
-Conversational RAG systems need to understand queries in the context of ongoing conversations. This requires resolving references, maintaining conversation state, and incorporating user preferences:
+The second major challenge emerges in conversational interfaces: users don't repeat context from earlier in the conversation. They say "How do I fix it?" expecting the system to remember that they were discussing database connection errors three messages ago. Or they ask "What about the Python version?" without specifying which Python deployment or configuration they're referencing.
+
+Context-aware enhancement transforms incomplete, reference-heavy queries into complete, self-contained information requests by maintaining conversational memory and resolving implicit references.
 
 ```python
 class ContextAwareQueryEnhancer:
@@ -259,13 +266,11 @@ We process the LLM response with error handling:
             return query
 ```
 
-### **Pattern 3: Multi-Modal Query Processing**
+### **Pattern 3: Multi-Modal Query Processing** - Beyond Text-Only Interaction
 
-Reference resolution is critical for conversational RAG systems where users often refer to previous topics using pronouns like "it," "that," or "the previous approach." By maintaining conversation context, we can resolve these references to specific entities and concepts.
+The third frontier in query understanding is handling rich media interactions. Users increasingly expect to upload screenshots of error messages, attach configuration files, or reference diagrams when asking questions. A user might upload an architecture diagram and ask "How do I implement this pattern?" expecting the system to understand both the visual content and the technical implementation question.
 
-### **Pattern 3: Multi-Modal Query Processing**
-
-Modern RAG systems often need to process queries that reference images, documents, or other media types. This requires integrating vision models and document analysis capabilities:
+Multi-modal query processing analyzes images, documents, and other media to extract meaningful context that can be integrated with text-based retrieval, enabling comprehensive understanding of complex user interactions.
 
 ```python
 class MultiModalQueryProcessor:
