@@ -135,15 +135,15 @@ nano-degree/
 
 #### Intensive (2-3 weeks)
 
-- 2 sessions per day (Observer path)
-- 1 session per day (Participant path)  
-- 1 session every 2 days (Implementer path)
+- 1 session every 2 days (👀 Observer path)
+- 1 session per day (🙋‍♂️ Participant path)  
+- 2 sessions per day (🛠️ Implementer path)
 
 #### Regular (4-6 weeks)
 
-- 1 session per day (Observer path)
-- 1 session every 2 days (Participant path)
-- 2-3 sessions per week (Implementer path)
+- 2-3 sessions per week (👀 Observer path)
+- 1 session every 2 days (🙋‍♂️ Participant path)
+- 1 session per day (🛠️ Implementer path)
 
 #### Extended (8-12 weeks)
 
