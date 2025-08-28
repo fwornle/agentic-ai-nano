@@ -1,24 +1,34 @@
 # Session 7: Agent-to-Agent Communication
 
-A2A enables multiple AI agents to communicate, coordinate, and share information across different platforms using JSON-RPC 2.0 based communication, agent discovery systems, and multi-agent orchestration patterns.
+## The Grand Alliance: When Digital Minds Must Unite
+
+Picture this: You're witnessing the formation of the United Nations, but instead of human diplomats around a conference table, you're watching AI agents from different organizations, platforms, and purposes coming together for the first time. Each agent speaks its own technical dialect, operates under different protocols, and serves different masters—yet they must find a way to collaborate on challenges too complex for any single mind to solve.
+
+This is the reality of modern AI systems. Your weather prediction agent in the cloud needs to coordinate with a logistics agent on a factory floor. Your data analysis agent running in a hospital must collaborate with research agents in laboratories across the world. Your financial trading agent has to work with risk assessment agents, market data agents, and compliance agents in real-time harmony.
+
+*Welcome to Agent-to-Agent (A2A) Communication—where artificial minds learn the art of diplomacy, cooperation, and collective intelligence.*
 
 ![A2A Communication Architecture](images/a2a-communication-architecture.png)
 
 ---
 
-## Part 1: A2A Protocol Architecture
+## Part 1: The Universal Language of Digital Diplomacy
 
-### Core Protocol Components
+Before agents can collaborate, they need to establish diplomatic protocols—a universal language that transcends the boundaries of individual platforms, organizations, and technical implementations.
 
-1. **Agent Cards**: JSON documents advertising agent capabilities, endpoints, and requirements
-2. **Task Management**: Formal task lifecycle with states (pending, working, completed, failed)
-3. **Message Exchange**: JSON-RPC 2.0 over HTTP(S) with streaming support via Server-Sent Events
-4. **Authentication**: Enterprise-grade security with OpenAPI authentication scheme parity
-5. **Distributed Coordination**: Cross-platform task coordination with unique tracking identifiers
+### The Five Pillars of A2A Civilization
 
-### A2A Message Structure
+Think of A2A as the constitution for a society of digital minds:
 
-JSON-RPC 2.0 based A2A protocol implementation:
+1. **Agent Cards**: Like diplomatic credentials, these JSON documents announce what each agent can do, where to find them, and how to work with them
+2. **Task Management**: A formal lifecycle that tracks every collaboration from initial request to final resolution
+3. **Message Exchange**: JSON-RPC 2.0 over HTTP(S)—the diplomatic language that any agent can speak and understand
+4. **Authentication**: Enterprise-grade security that ensures only authorized agents can participate in sensitive collaborations
+5. **Distributed Coordination**: The ability to track complex, multi-step collaborations across organizational boundaries
+
+### The DNA of Agent Diplomacy: Message Structure
+
+Every conversation between agents follows a carefully designed diplomatic protocol. Like formal diplomatic correspondence, each message contains essential metadata for proper routing, processing, and response:
 
 ```python
 
@@ -88,11 +98,11 @@ class A2ATask:
             self.artifacts = []
 ```
 
-This implementation provides task tracking with unique identifiers, formal lifecycle management, and structured artifact storage.
+This implementation provides task tracking with unique identifiers, formal lifecycle management, and structured artifact storage—everything needed for enterprise-scale collaboration.
 
-### Agent Card Implementation
+### Digital Passports: Agent Card Implementation
 
-Agent Cards for capability discovery:
+Each agent in the A2A ecosystem carries a digital passport—an Agent Card that serves as both identification and capability advertisement:
 
 ```python
 @dataclass
@@ -128,103 +138,16 @@ class AgentCard:
         """Export Agent Card as JSON for A2A discovery."""
         return json.dumps(asdict(self), indent=2, default=str)
 ```
-    
-    # Message metadata
-    timestamp: str = None
-    priority: Priority = Priority.NORMAL
-    ttl: int = 300             # Time to live in seconds
-    
-    # Content
-    action: str = None          # What action to perform
-    payload: Dict[str, Any] = None
-    capabilities_required: List[str] = None
-    
-    # Response handling
-    requires_response: bool = False
-    timeout: int = 30          # Response timeout in seconds
-    
-    def __post_init__(self):
-        if self.message_id is None:
-            self.message_id = str(uuid.uuid4())
-        if self.timestamp is None:
-            self.timestamp = datetime.now().isoformat()
-        if self.payload is None:
-            self.payload = {}
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert message to dictionary for serialization."""
-        data = asdict(self)
-        # Convert enums to their values
-        data['message_type'] = self.message_type.value
-        data['priority'] = self.priority.value
-        return data
-    
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'A2AMessage':
-        """Create message from dictionary."""
-        # Convert enum values back to enums
-        if 'message_type' in data:
-            data['message_type'] = MessageType(data['message_type'])
-        if 'priority' in data:
-            data['priority'] = Priority(data['priority'])
-        
-        return cls(**data)
-    
-    def to_json(self) -> str:
-        """Serialize message to JSON."""
-        return json.dumps(self.to_dict())
-    
-    @classmethod
-    def from_json(cls, json_str: str) -> 'A2AMessage':
-        """Deserialize message from JSON."""
-        return cls.from_dict(json.loads(json_str))
 
-@dataclass
-class AgentCapability:
-    """Describes an agent's capability."""
-    
-    name: str
-    description: str
-    input_schema: Dict[str, Any]
-    output_schema: Dict[str, Any]
-    cost: float = 0.0           # Resource cost
-    latency: float = 1.0        # Expected latency in seconds
-    reliability: float = 0.95   # Reliability score (0-1)
-    
-    def to_dict(self) -> Dict[str, Any]:
-        return asdict(self)
+This Agent Card is like a business card, resume, and service contract all rolled into one. Other agents can examine it to understand not just what this agent can do, but how to work with it professionally.
 
-@dataclass
-class AgentProfile:
-    """Agent profile for discovery and coordination."""
-    
-    agent_id: str
-    name: str
-    description: str
-    capabilities: List[AgentCapability]
-    endpoint: str               # How to reach this agent
-    status: str = "active"      # active, busy, maintenance, offline
-    load: float = 0.0          # Current load (0-1)  
-    last_heartbeat: str = None
-    metadata: Dict[str, Any] = None
-    
-    def __post_init__(self):
-        if self.last_heartbeat is None:
-            self.last_heartbeat = datetime.now().isoformat()
-        if self.metadata is None:
-            self.metadata = {}
-    
-    def to_dict(self) -> Dict[str, Any]:
-        data = asdict(self)
-        data['capabilities'] = [cap.to_dict() for cap in self.capabilities]
-        return data
-```
+---
 
-### Agent Registry and Discovery
+## Part 2: The Embassy System: Agent Registry and Discovery
 
-Dynamic service discovery, health monitoring, and intelligent agent selection based on capabilities and availability.
+Imagine a world where every embassy maintains a comprehensive directory of all diplomatic personnel from every nation. That's exactly what the Agent Registry provides—a living, breathing directory where agents announce their presence, capabilities, and availability.
 
-#### Registry Infrastructure
+### The Heart of Digital Diplomacy
 
 ```python
 
@@ -241,9 +164,9 @@ from a2a.protocol import AgentProfile, AgentCapability, A2AMessage, MessageType
 logger = logging.getLogger(__name__)
 ```
 
-Redis provides fast, distributed storage for agent profiles and capability indices, supporting both single-node and clustered deployments.
+Redis provides the backbone of our embassy system—fast, distributed storage that can scale from a single server to a global network of interconnected registries.
 
-#### Registry Class and Configuration Management
+### The Registry Architecture: Managing Digital Citizens
 
 ```python
 class AgentRegistry:
@@ -261,9 +184,11 @@ class AgentRegistry:
         self._cleanup_task = None
 ```
 
-The registry uses prefixed keys for organization and capability indices for fast lookup. Heartbeat configuration ensures timely detection of agent failures.
+The registry uses a sophisticated indexing system. Not only does it store complete agent profiles, but it also maintains capability indices—think of them as specialized phone books where you can look up "who can analyze financial data" or "which agents speak multiple languages."
 
-#### Agent Registration
+### The Registration Ceremony: Joining the Digital Society
+
+When an agent joins the A2A network, it goes through a formal registration process, much like a diplomat presenting credentials at a new embassy:
 
 ```python
     async def register_agent(self, profile: AgentProfile) -> bool:
@@ -290,7 +215,9 @@ The registry uses prefixed keys for organization and capability indices for fast
             return False
 ```
 
-#### Agent Unregistration
+### Graceful Departures: The Unregistration Process
+
+When an agent needs to leave the network—whether for maintenance, shutdown, or migration—it can formally announce its departure:
 
 ```python
     async def unregister_agent(self, agent_id: str) -> bool:
@@ -317,7 +244,9 @@ The registry uses prefixed keys for organization and capability indices for fast
             return False
 ```
 
-#### Heartbeat Updates
+### The Pulse of Digital Life: Heartbeat Management
+
+Like embassies maintaining contact with their home countries, agents must regularly send heartbeats to prove they're still operational:
 
 ```python
     async def update_heartbeat(self, agent_id: str, load: float = None, 
@@ -349,7 +278,9 @@ The registry uses prefixed keys for organization and capability indices for fast
             return False
 ```
 
-#### Agent Discovery
+### Intelligent Discovery: Finding the Right Partner
+
+The discovery process is like having a master diplomat who knows exactly which expert to call for any given challenge:
 
 ```python
     async def discover_agents(self, required_capabilities: List[str] = None,
@@ -375,11 +306,7 @@ The registry uses prefixed keys for organization and capability indices for fast
                 pattern = f"{self.registry_prefix}*"
                 keys = self.redis_client.keys(pattern)
                 candidate_agents = {key.decode().split(':')[-1] for key in keys}
-```
 
-#### Agent Filtering
-
-```python
             # Filter by status and load
             matching_agents = []
             for agent_id in candidate_agents:
@@ -402,34 +329,9 @@ The registry uses prefixed keys for organization and capability indices for fast
             return []
 ```
 
-#### Profile Retrieval
+### Maintaining the Digital Census
 
-```python
-    async def get_agent_profile(self, agent_id: str) -> Optional[AgentProfile]:
-        """Get detailed profile for a specific agent."""
-        try:
-            profile_key = f"{self.registry_prefix}{agent_id}"
-            profile_data = self.redis_client.get(profile_key)
-            
-            if profile_data:
-                data = json.loads(profile_data)
-                
-                # Reconstruct AgentCapability objects
-                capabilities = []
-                for cap_data in data['capabilities']:
-                    capabilities.append(AgentCapability(**cap_data))
-                
-                data['capabilities'] = capabilities
-                return AgentProfile(**data)
-            
-            return None
-            
-        except Exception as e:
-            logger.error(f"Failed to get profile for agent {agent_id}: {e}")
-            return None
-```
-
-#### Liveness Detection
+The registry automatically maintains its accuracy by detecting and removing agents that have gone silent:
 
 ```python
     def _is_agent_alive(self, profile: AgentProfile) -> bool:
@@ -442,11 +344,7 @@ The registry uses prefixed keys for organization and capability indices for fast
             
         except Exception:
             return False
-```
 
-#### Dead Agent Cleanup
-
-```python
     async def cleanup_dead_agents(self):
         """Remove agents that haven't sent heartbeats."""
         try:
@@ -465,12 +363,13 @@ The registry uses prefixed keys for organization and capability indices for fast
             logger.error(f"Error during cleanup: {e}")
 ```
 
+---
 
-Complete implementation: [`src/session7/registry.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/registry.py)
+## Part 3: The Message Routing Network: Digital Post Office
 
-### Message Router
+Think of the Message Router as the world's most sophisticated post office, capable of routing millions of messages between agents while ensuring perfect delivery, handling timeouts, and managing responses.
 
-#### Router Foundation
+### The Foundation of Digital Communication
 
 ```python
 
@@ -489,7 +388,7 @@ from a2a.registry import AgentRegistry
 logger = logging.getLogger(__name__)
 ```
 
-#### Router Class Structure
+### The Router's Brain: Message Management
 
 ```python
 class MessageRouter:
@@ -504,36 +403,11 @@ class MessageRouter:
         self._processor_task = None
 ```
 
-#### Lifecycle Management
+The router maintains several critical data structures: a registry for finding agents, handlers for processing different message types, pending requests for tracking responses, and a queue for managing message flow.
 
-```python
-    async def start(self):
-        """Start the message router."""
-        self.session = aiohttp.ClientSession()
-        self._processor_task = asyncio.create_task(self._process_messages())
-        logger.info("Message router started")
-    
-    async def stop(self):
-        """Stop the message router."""
-        if self._processor_task:
-            self._processor_task.cancel()
-        
-        if self.session:
-            await self.session.close()
-        
-        logger.info("Message router stopped")
-```
+### The Art of Message Sending
 
-#### Handler Registration
-
-```python
-    def register_handler(self, action: str, handler: Callable):
-        """Register a message handler for a specific action."""
-        self.message_handlers[action] = handler
-        logger.info(f"Registered handler for action: {action}")
-```
-
-#### Message Sending
+Sending a message in the A2A world is like sending a diplomatic cable—it must be properly formatted, routed through the correct channels, and tracked until completion:
 
 ```python
     async def send_message(self, message: A2AMessage, 
@@ -568,7 +442,9 @@ class MessageRouter:
             return None
 ```
 
-#### Broadcast Messaging
+### Broadcasting: Speaking to the Masses
+
+Sometimes, an agent needs to communicate with multiple agents simultaneously—like a UN secretary-general addressing all member nations:
 
 ```python
     async def broadcast_message(self, message: A2AMessage, 
@@ -602,24 +478,9 @@ class MessageRouter:
         return sent_count
 ```
 
-#### Message Processing Queue
+### The Message Processing Engine
 
-```python
-    async def _process_messages(self):
-        """Process messages from the queue."""
-        while True:
-            try:
-                message = await self.message_queue.get()
-                await self._route_message(message)
-                self.message_queue.task_done()
-                
-            except asyncio.CancelledError:
-                break
-            except Exception as e:
-                logger.error(f"Error processing message: {e}")
-```
-
-#### Message Routing Logic
+Behind the scenes, a dedicated task continuously processes the message queue, ensuring that every message reaches its intended destination:
 
 ```python
     async def _route_message(self, message: A2AMessage):
@@ -639,11 +500,7 @@ class MessageRouter:
                 await self._send_to_agent(message, agents[0].agent_id)
             else:
                 logger.warning(f"No suitable agents found for message {message.message_id}")
-```
 
-#### Agent Communication
-
-```python
     async def _send_to_agent(self, message: A2AMessage, agent_id: str):
         """Send message to a specific agent."""
         
@@ -675,74 +532,13 @@ class MessageRouter:
             logger.error(f"Error sending message to {agent_id}: {e}")
 ```
 
-#### Response Correlation
-
-```python
-    async def _handle_response(self, response: A2AMessage):
-        """Handle a response message."""
-        
-        # Check if we have a pending request for this response
-        correlation_id = response.correlation_id
-        
-        if correlation_id in self.pending_requests:
-            future = self.pending_requests[correlation_id]
-            if not future.done():
-                future.set_result(response)
-```
-
-#### Incoming Message Processing
-
-```python
-    async def handle_incoming_message(self, message_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Handle an incoming message from another agent."""
-        
-        try:
-            message = A2AMessage.from_dict(message_data)
-            
-            # Check if this is a response to our request
-            if message.message_type == MessageType.RESPONSE:
-                await self._handle_response(message)
-                return {"status": "response_processed"}
-            
-            # Handle the message using registered handlers
-            if message.action in self.message_handlers:
-                handler = self.message_handlers[message.action]
-                result = await handler(message)
-                
-                # Send response if required
-                if message.requires_response:
-                    response = A2AMessage(
-                        message_type=MessageType.RESPONSE,
-                        correlation_id=message.message_id,
-                        sender_id=message.recipient_id,
-                        recipient_id=message.sender_id,
-                        payload=result
-                    )
-                    
-                    return response.to_dict()
-                
-                return {"status": "message_processed"}
-            else:
-                logger.warning(f"No handler for action: {message.action}")
-                return {"error": f"No handler for action: {message.action}"}
-                
-        except Exception as e:
-            logger.error(f"Error handling incoming message: {e}")
-            return {"error": str(e)}
-```
-
-
-Complete implementation: [`src/session7/router.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/router.py)
-
 ---
 
-## Part 2: Multi-Agent Coordination Patterns
+## Part 4: The Art of Orchestration - Conducting Digital Symphonies
 
-### Orchestration Pattern
+Orchestration in A2A systems is like conducting a symphony orchestra where each musician is an AI agent with unique capabilities. The conductor doesn't play any instruments but ensures that all parts come together to create something beautiful.
 
-Centralized control over multi-agent workflows with a central orchestrator managing execution sequence, dependencies, and data flow.
-
-#### Workflow Data Structures
+### The Symphony Framework
 
 ```python
 
@@ -761,7 +557,9 @@ from a2a.registry import AgentRegistry
 logger = logging.getLogger(__name__)
 ```
 
-#### Workflow Step Definition
+### Defining Musical Movements: Workflow Steps
+
+Each step in a workflow is like a movement in a symphony—it has specific requirements, depends on what came before, and contributes to the overall composition:
 
 ```python
 @dataclass
@@ -779,11 +577,7 @@ class WorkflowStep:
     def __post_init__(self):
         if self.dependencies is None:
             self.dependencies = []
-```
 
-#### Workflow Definition Structure
-
-```python
 @dataclass
 class Workflow:
     """Defines a multi-agent workflow."""
@@ -798,7 +592,9 @@ class Workflow:
             self.initial_data = {}
 ```
 
-#### Orchestrator Class Initialization
+### The Master Conductor: Workflow Orchestrator
+
+The orchestrator manages the entire performance, ensuring each agent enters at the right time with the right information:
 
 ```python
 class WorkflowOrchestrator:
@@ -808,11 +604,7 @@ class WorkflowOrchestrator:
         self.router = router
         self.registry = registry
         self.active_workflows: Dict[str, Dict] = {}
-```
 
-#### Workflow State Initialization
-
-```python
     async def execute_workflow(self, workflow: Workflow) -> Dict[str, Any]:
         """Execute a multi-agent workflow."""
         
@@ -829,7 +621,9 @@ class WorkflowOrchestrator:
         self.active_workflows[workflow.workflow_id] = workflow_state
 ```
 
-#### Dependency Resolution and Step Selection
+### The Performance: Dependency Resolution and Execution
+
+The orchestrator carefully manages which steps can run in parallel and which must wait for others to complete:
 
 ```python
         try:
@@ -853,11 +647,7 @@ class WorkflowOrchestrator:
                     # Wait for more steps to complete
                     await asyncio.sleep(1)
                     continue
-```
 
-#### Parallel Step Execution and Result Gathering
-
-```python
                 # Execute ready steps in parallel
                 tasks = []
                 for step in ready_steps:
@@ -868,11 +658,7 @@ class WorkflowOrchestrator:
                 
                 # Wait for all ready steps to complete
                 results = await asyncio.gather(*tasks, return_exceptions=True)
-```
 
-#### Result Processing and State Management
-
-```python
                 # Process results
                 for i, result in enumerate(results):
                     step = ready_steps[i]
@@ -895,47 +681,9 @@ class WorkflowOrchestrator:
                 ]
 ```
 
-#### Workflow Completion and Status Determination
+### Individual Performance: Step Execution
 
-```python
-            # Determine final status
-            if workflow_state["failed_steps"]:
-                workflow_state["status"] = "failed"
-            else:
-                workflow_state["status"] = "completed"
-            
-            workflow_state["completed_at"] = datetime.now().isoformat()
-            
-            return {
-                "workflow_id": workflow.workflow_id,
-                "status": workflow_state["status"],
-                "data": workflow_state["data"],
-                "execution_time": workflow_state["completed_at"],
-                "completed_steps": len(workflow_state["completed_steps"]),
-                "failed_steps": len(workflow_state["failed_steps"])
-            }
-```
-
-#### Error Handling and Workflow Cleanup
-
-```python
-        except Exception as e:
-            logger.error(f"Workflow {workflow.workflow_id} execution failed: {e}")
-            workflow_state["status"] = "error"
-            workflow_state["error"] = str(e)
-            
-            return {
-                "workflow_id": workflow.workflow_id,
-                "status": "error",
-                "error": str(e)
-            }
-        
-        finally:
-            # Cleanup
-            self.active_workflows.pop(workflow.workflow_id, None)
-```
-
-#### Individual Step Execution with Agent Discovery
+Each step is executed with careful attention to failure handling, retries, and agent selection:
 
 ```python
     async def _execute_step(self, workflow: Workflow, step: WorkflowStep, 
@@ -952,11 +700,7 @@ class WorkflowOrchestrator:
         
         if not agents:
             raise Exception(f"No agents found with capability: {step.agent_capability}")
-```
 
-#### Step Execution with Retry Logic and Fault Tolerance
-
-```python
         # Try executing with retries
         last_error = None
         for attempt in range(step.retry_count + 1):
@@ -994,36 +738,13 @@ class WorkflowOrchestrator:
         raise last_error
 ```
 
-#### Data Mapping and Transformation Utilities
+---
 
-```python
-    def _prepare_step_input(self, step: WorkflowStep, workflow_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Prepare input data for a workflow step."""
-        step_input = {}
-        
-        for step_param, workflow_key in step.input_mapping.items():
-            if workflow_key in workflow_data:
-                step_input[step_param] = workflow_data[workflow_key]
-        
-        return step_input
-    
-    def _apply_output_mapping(self, step: WorkflowStep, step_output: Dict[str, Any], 
-                            workflow_data: Dict[str, Any]):
-        """Apply step output to workflow data."""
-        
-        for workflow_key, step_param in step.output_mapping.items():
-            if step_param in step_output:
-                workflow_data[workflow_key] = step_output[step_param]
-```
+## Part 5: The Dance of Autonomy - Choreography Patterns
 
+While orchestration is like conducting a symphony, choreography is like a perfectly synchronized dance where each performer knows their role and responds to the movements of others without a central conductor.
 
-Complete implementation: [`src/session7/orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/orchestrator.py)
-
-### Choreography Pattern
-
-Decentralized agent coordination through event-driven patterns where agents react to events autonomously without central control.
-
-#### Choreography Foundation
+### The Philosophy of Distributed Harmony
 
 ```python
 
@@ -1041,7 +762,9 @@ from a2a.router import MessageRouter
 logger = logging.getLogger(__name__)
 ```
 
-#### Event Pattern Definition
+### Defining Dance Steps: Event Patterns
+
+Each event pattern is like a dance move that triggers when specific conditions are met:
 
 ```python
 @dataclass
@@ -1054,7 +777,9 @@ class EventPattern:
     priority: int = 1           # Pattern priority (higher = more important)
 ```
 
-#### Choreography Engine Initialization
+### The Dance Studio: Choreography Engine
+
+The choreography engine watches for events and triggers appropriate responses, like a dance instructor who recognizes when it's time for the next movement:
 
 ```python
 class ChoreographyEngine:
@@ -1071,23 +796,9 @@ class ChoreographyEngine:
         self.router.register_handler("choreography_event", self._handle_choreography_event)
 ```
 
-#### Event Pattern Registration and Management
+### Publishing Events: Broadcasting Dance Cues
 
-```python
-    def register_event_pattern(self, pattern: EventPattern):
-        """Register an event pattern for choreography."""
-        self.event_patterns.append(pattern)
-        # Sort by priority (higher priority first)
-        self.event_patterns.sort(key=lambda x: x.priority, reverse=True)
-        logger.info(f"Registered event pattern: {pattern.event_type}")
-    
-    def register_event_handler(self, event_type: str, handler: Callable):
-        """Register a handler for specific event types."""
-        self.event_handlers[event_type] = handler
-        logger.info(f"Registered event handler: {event_type}")
-```
-
-#### Event Publishing and History Management
+When something significant happens, agents can publish events that may trigger coordinated responses from other agents:
 
 ```python
     async def publish_event(self, event_type: str, event_data: Dict[str, Any], 
@@ -1113,26 +824,9 @@ class ChoreographyEngine:
         await self._process_event_patterns(event)
 ```
 
-#### Event Pattern Processing and Matching
+### The Intelligence of Pattern Recognition
 
-```python
-    async def _process_event_patterns(self, event: Dict[str, Any]):
-        """Process event against registered patterns."""
-        
-        triggered_actions = []
-        
-        for pattern in self.event_patterns:
-            if pattern.event_type == event["event_type"] or pattern.event_type == "*":
-                # Evaluate condition
-                if self._evaluate_condition(pattern.condition, event):
-                    triggered_actions.append(pattern)
-        
-        # Execute triggered actions
-        for pattern in triggered_actions:
-            await self._execute_choreography_action(pattern, event)
-```
-
-#### Conditional Logic Evaluation
+The engine evaluates complex conditions to determine when patterns should trigger:
 
 ```python
     def _evaluate_condition(self, condition: str, event: Dict[str, Any]) -> bool:
@@ -1159,56 +853,9 @@ class ChoreographyEngine:
             return False
 ```
 
-#### Choreography Action Execution
+### A Real-World Dance: Travel Planning Choreography
 
-```python
-    async def _execute_choreography_action(self, pattern: EventPattern, event: Dict[str, Any]):
-        """Execute a choreography action triggered by an event pattern."""
-        
-        try:
-            # Create action message
-            action_message = A2AMessage(
-                sender_id="choreography_engine",
-                action=pattern.action,
-                payload={
-                    "trigger_event": event,
-                    "pattern": {
-                        "event_type": pattern.event_type,
-                        "action": pattern.action
-                    }
-                },
-                capabilities_required=[pattern.target_capability],
-                requires_response=False  # Fire and forget for choreography
-            )
-            
-            # Send to appropriate agent(s)
-            await self.router.send_message(action_message)
-            
-            logger.info(f"Executed choreography action: {pattern.action}")
-            
-        except Exception as e:
-            logger.error(f"Failed to execute choreography action {pattern.action}: {e}")
-```
-
-#### Incoming Event Message Handling
-
-```python
-    async def _handle_choreography_event(self, message: A2AMessage) -> Dict[str, Any]:
-        """Handle incoming choreography event messages."""
-        
-        event_type = message.payload.get("event_type")
-        event_data = message.payload.get("event_data", {})
-        
-        if event_type and event_type in self.event_handlers:
-            handler = self.event_handlers[event_type]
-            result = await handler(message)
-            return result
-        
-        # Default handling - just acknowledge
-        return {"status": "event_received", "event_type": event_type}
-```
-
-#### Practical Choreography Example
+Here's how choreography works in practice—imagine a travel planning system where different agents respond to events in sequence:
 
 ```python
 
@@ -1256,14 +903,46 @@ def create_travel_planning_choreography() -> List[EventPattern]:
     ]
 ```
 
-
-Complete implementation: [`src/session7/choreography.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session7/choreography.py)
+This creates a beautiful chain reaction: when someone requests a trip, it triggers weather forecasting, which enables accommodation search, which enables transportation booking, which enables itinerary creation, which triggers confirmation—all without any central coordinator managing the process.
 
 ---
 
-This session covered A2A communication system implementation including standardized messaging, message routing, orchestration patterns, choreography patterns, and distributed architecture components.
+## The Future of Digital Collaboration
 
-## Multiple Choice Test - Session 7
+As we conclude this exploration of Agent-to-Agent communication, let's reflect on what we've built and why it matters for the future of AI.
+
+### What We've Accomplished
+
+We've created a comprehensive framework for digital minds to collaborate across any boundary:
+
+- **Universal Communication**: A standardized protocol that works regardless of platform, language, or implementation
+- **Intelligent Discovery**: Agents can find each other based on capabilities rather than hardcoded connections
+- **Flexible Coordination**: Both centralized orchestration and distributed choreography patterns
+- **Enterprise Reliability**: Task tracking, retry logic, heartbeat monitoring, and graceful failure handling
+- **Scalable Architecture**: From local networks to global enterprise deployments
+
+### The Transformation of AI Systems
+
+We've moved from isolated, single-purpose AI systems to collaborative networks of specialized agents that can:
+
+- **Self-Organize**: Agents discover and coordinate with each other automatically
+- **Adapt to Failure**: When agents go offline, others can pick up their responsibilities
+- **Scale Dynamically**: New capabilities can be added by simply introducing new agents
+- **Work Across Boundaries**: Organizational, technical, and geographical barriers become irrelevant
+
+### The Promise of Tomorrow
+
+The A2A framework we've built opens the door to AI systems that truly reflect the collaborative nature of human intelligence. Just as humans accomplish great things by working together, AI agents can now form dynamic teams that are greater than the sum of their parts.
+
+Imagine emergency response systems where medical AI agents automatically coordinate with logistics agents, weather agents, and resource management agents during disasters. Picture research environments where data analysis agents from different institutions collaborate in real-time to accelerate scientific discoveries. Envision business systems where agents from different companies can negotiate, collaborate, and execute complex transactions autonomously.
+
+This isn't science fiction—it's the natural evolution of AI systems from isolated tools to collaborative partners.
+
+---
+
+## Test Your Diplomatic Skills
+
+Before we venture into advanced workflows, let's ensure you've mastered the art of agent diplomacy:
 
 **Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?
 

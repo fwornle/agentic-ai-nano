@@ -1,29 +1,52 @@
 # Session 5: Secure MCP Servers
 
-Implementing enterprise-grade security for MCP servers with OAuth 2.1 PKCE authentication, Resource Indicators (RFC 8707), rate limiting, and security monitoring.
+## The Digital Fort Knox: Building Impenetrable MCP Servers
+
+Picture this: You've just built the most sophisticated MCP server the world has ever seen. It can manage files, query databases, call APIs, and orchestrate complex workflows with surgical precision. But then, at 3 AM on a Tuesday, your phone buzzes with an urgent alert. Someone has breached your server, stolen sensitive data, and is using your AI agent to wreak havoc across your entire infrastructure.
+
+This nightmare scenario is exactly why security isn't just an afterthought in MCP development—it's the foundation upon which everything else stands. Today, we're going to transform your MCP server from a sitting duck into a digital fortress that would make even the most determined attackers think twice.
+
+*Welcome to the world of enterprise-grade MCP security, where every line of code is a guardian at the gate.*
 
 ![MCP Security Architecture](images/mcp-security-architecture.png)
 
 ---
 
-## Part 1: MCP Security Fundamentals
+## Part 1: The Anatomy of Digital Threats
 
-### Critical Threat Vectors
-1. **Token Misuse Across Resources**: Stolen tokens accessing unintended resources
-2. **Authorization Code Interception**: Man-in-the-middle attacks without PKCE
-3. **Unintended LLM Actions**: AI models performing destructive operations  
-4. **Privilege Escalation**: Accessing resources beyond intended permissions
-5. **Distributed Rate Limit Bypass**: Coordinated attacks from multiple IPs
-6. **Data Exfiltration**: Malicious extraction through legitimate-looking tool calls
+Before we build our defenses, we need to understand our enemies. In the world of MCP servers, threats don't just knock politely at your front door—they probe every weakness, exploit every vulnerability, and strike when you least expect it.
 
-### Key Security Standards
-1. **OAuth 2.1 with PKCE**: Required for all clients, prevents authorization code attacks
-2. **Resource Indicators (RFC 8707)**: Tokens scoped to specific MCP servers prevent cross-resource abuse
-3. **Sandbox Isolation**: Local MCP servers run in restricted execution environments
+### The Six Horsemen of the MCP Apocalypse
 
-### Step 1: Modern OAuth 2.1 Implementation
+Imagine your MCP server as a medieval castle. These are the siege engines that attackers will use to breach your walls:
 
-Implement the 2025 MCP security standard with OAuth 2.1 and PKCE:
+1. **Token Misuse Across Resources**: Like a master key falling into the wrong hands, a stolen token can unlock doors you never intended to open. One compromised token suddenly grants access to your entire digital kingdom.
+
+2. **Authorization Code Interception**: Picture a messenger carrying secret scrolls being ambushed on the road. Without PKCE protection, attackers can intercept authorization codes and masquerade as legitimate users.
+
+3. **Unintended LLM Actions**: Your AI agent receives what looks like an innocent request: "Delete some old files." But those "old files" happen to be your entire database backup. The AI, trusting by nature, complies without question.
+
+4. **Privilege Escalation**: A humble user account somehow gains administrator privileges, like a janitor mysteriously acquiring master keys to every room in a building. Small permissions snowball into system-wide control.
+
+5. **Distributed Rate Limit Bypass**: Attackers coordinate like a swarm of locusts, each request appearing innocent, but together overwhelming your defenses faster than you can count.
+
+6. **Data Exfiltration**: Through carefully crafted queries that look perfectly legitimate, attackers slowly siphon your most sensitive data, one seemingly innocent API call at a time.
+
+### The Security Standards That Stand Guard
+
+Our fortress needs more than just thick walls—it needs a comprehensive defense system:
+
+1. **OAuth 2.1 with PKCE**: The modern standard that treats every authorization request like a secret handshake with cryptographic verification
+2. **Resource Indicators (RFC 8707)**: Tokens that can only unlock specific doors, preventing the skeleton key problem
+3. **Sandbox Isolation**: Running your MCP servers in protected bubbles, where even a breach can't spread beyond its boundaries
+
+---
+
+## Part 1: The OAuth 2.1 Fortress
+
+### Step 1: Building the Foundation
+
+Let's start by implementing the 2025 MCP security standard. Think of this as laying the cornerstone of our digital fortress:
 
 ```python
 
@@ -46,15 +69,15 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 logger = structlog.get_logger()
 ```
 
-**Security Dependencies:**
-- `authlib`: OAuth 2.1 implementation with PKCE support
-- `cryptography`: FIPS-compliant cryptographic operations
-- `rfc7636`: PKCE (Proof Key for Code Exchange) implementation
-- `rfc8707`: Resource Indicators for token scoping
+**Our Arsenal of Security Dependencies:**
+- `authlib`: Your OAuth 2.1 Swiss Army knife with PKCE support
+- `cryptography`: FIPS-compliant crypto operations that even government agencies trust
+- `rfc7636`: PKCE implementation that makes authorization codes useless to eavesdroppers
+- `rfc8707`: Resource Indicators that create token-specific access boundaries
 
-### Step 2: PKCE Code Challenge Generation
+### Step 2: The PKCE Guardian
 
-Implement secure PKCE challenge generation following RFC 7636:
+PKCE (Proof Key for Code Exchange) is like having a unique puzzle piece that only you can solve. Even if someone intercepts your authorization code, they can't use it without the matching piece:
 
 ```python
 class PKCEGenerator:
@@ -90,11 +113,9 @@ class PKCEGenerator:
         return challenge, "S256"
 ```
 
-  
+### Step 3: The Resource Sentinel
 
-### Step 3: Resource Indicators Implementation
-
-Implement RFC 8707 Resource Indicators to prevent token misuse:
+Imagine having magical keys that can only open specific doors. That's exactly what Resource Indicators accomplish—they ensure tokens can't be misused across different resources:
 
 ```python
 class ResourceIndicatorManager:
@@ -171,8 +192,9 @@ class ResourceIndicatorManager:
         return token
 ```
 
+### Step 4: The JWT Vault
 
-### Step 4: Enhanced JWT Management with Security Controls
+Your JWT manager is like the most sophisticated bank vault ever built. It not only creates and validates tokens but also maintains a blacklist of revoked tokens, ensuring that even legitimate tokens can be instantly invalidated when compromised:
 
 ```python
 class JWTManager:
@@ -190,9 +212,7 @@ class JWTManager:
         self._validate_secret_key()
 ```
 
-  
-
-### Step 1.1.3: Secret Key Validation
+The secret key validation is like checking that your vault combination is actually secure:
 
 ```python
     def _validate_secret_key(self):
@@ -204,14 +224,13 @@ class JWTManager:
             raise ValueError("JWT secret key cannot be a common word")
             
         logger.info("JWT Manager initialized with secure secret key")
-```
 
     def _generate_secret(self) -> str:
         """Generate a secure random secret key."""
         return secrets.token_urlsafe(64)
 ```  
 
-### Step 1.1.4: Access Token Creation
+When creating tokens, we craft them like carefully designed identification cards, containing just enough information to verify identity without revealing sensitive details:
 
 ```python
     def create_tokens(self, user_data: Dict[str, Any]) -> Dict[str, str]:
@@ -228,13 +247,7 @@ class JWTManager:
             "exp": now + timedelta(minutes=self.access_token_expire_minutes),
             "type": "access"                       # Token type for validation
         }
-```
 
-```
-
-### Step 1.1.5: Refresh Token Creation
-
-```python
         # Refresh token (minimal claims for security)
         refresh_payload = {
             "sub": user_data["user_id"],          # Only user ID needed
@@ -242,13 +255,7 @@ class JWTManager:
             "exp": now + timedelta(days=self.refresh_token_expire_days),
             "type": "refresh"                     # Clearly mark as refresh token
         }
-```
 
-```
-
-### Step 1.1.6: Token Generation
-
-```python
         # Generate JWT tokens using secure algorithm
         access_token = jwt.encode(access_payload, self.secret_key, algorithm=self.algorithm)
         refresh_token = jwt.encode(refresh_payload, self.secret_key, algorithm=self.algorithm)
@@ -262,9 +269,7 @@ class JWTManager:
         }
 ```
 
-```
-
-### Step 1.1.7: Token Verification
+Token verification is like having a security guard with perfect memory who never lets a fake ID slip by:
 
 ```python
     def verify_token(self, token: str) -> Dict[str, Any]:
@@ -282,11 +287,7 @@ class JWTManager:
                 raise HTTPException(status_code=401, detail="Invalid token type")
             
             return payload
-```
 
-### Step 1.1.8: Error Handling for Token Verification
-
-```python
         except jwt.ExpiredSignatureError:
             raise HTTPException(status_code=401, detail="Token has expired")
         except jwt.InvalidTokenError:
@@ -296,9 +297,7 @@ class JWTManager:
             raise HTTPException(status_code=401, detail="Authentication failed")
 ```
 
-  
-
-### Step 1.1.9: Token Blacklist Management
+The blacklist system works like a master "do not admit" list that security guards check before allowing anyone through:
 
 ```python
     def _is_token_blacklisted(self, token: str) -> bool:
@@ -314,13 +313,7 @@ class JWTManager:
             # Fail securely - log warning but allow access
             logger.warning("Could not check token blacklist")
             return False
-```
 
-```
-
-### Step 1.1.10: Token Revocation
-
-```python
     def blacklist_token(self, token: str, ttl_seconds: int = None):
         """Add token to blacklist for secure revocation."""
         if not self.redis_client:
@@ -339,11 +332,7 @@ class JWTManager:
             
         except Exception as e:
             logger.error(f"Failed to blacklist token: {e}")
-```
 
-### Step 1.1.11: TTL Calculation Helper
-
-```python
     def _calculate_token_ttl(self, token: str) -> int:
         """Calculate remaining TTL for token based on expiry."""
         try:
@@ -361,9 +350,9 @@ class JWTManager:
             return self.access_token_expire_minutes * 60
 ```
 
-### Step 1.2: Role-Based Access Control (RBAC)
+### The Permission Kingdom: Role-Based Access Control (RBAC)
 
-### Step 1.2.1: Permission System
+Imagine your MCP server as a vast kingdom with different areas requiring different levels of access. RBAC is like having a sophisticated court system where each person's role determines exactly which doors they can open and which actions they can perform.
 
 ```python
 
@@ -388,9 +377,7 @@ class Permission(Enum):
     VIEW_METRICS = "metrics:view"
 ```
 
-```
-
-### Step 1.2.2: Role Hierarchy
+The role hierarchy works like a medieval court structure, where each level inherits the privileges of those below:
 
 ```python
 class Role(Enum):
@@ -399,11 +386,6 @@ class Role(Enum):
     USER = "user"          # Standard user capabilities  
     PREMIUM = "premium"    # Enhanced features
     ADMIN = "admin"        # Full system access
-```
-
-### Step 1.2.3: Role-Permission Mapping
-
-```python
 
 # Progressive permission assignment by role
 
@@ -425,9 +407,7 @@ ROLE_PERMISSIONS: Dict[Role, Set[Permission]] = {
 }
 ```
 
-```
-
-### Step 1.2.4: Permission Validation
+The permission validation system is like having a perfectly organized access control list:
 
 ```python
 def has_permission(user_permissions: List[str], required_permission: Permission) -> bool:
@@ -446,7 +426,7 @@ def get_user_permissions(user_roles: List[str]) -> Set[Permission]:
     return permissions
 ```
 
-### Step 1.2.5: Permission Checking Decorator
+The permission decorator acts like a security checkpoint that verifies credentials before allowing access to protected resources:
 
 ```python
 def require_permission(required_permission: Permission):
@@ -466,11 +446,7 @@ def require_permission(required_permission: Permission):
                     f"Permission denied: User {current_user.get('username')} "
                     f"attempted {required_permission.value}"
                 )
-```
 
-The decorator continues with error handling and security logging:
-
-```python
                 raise HTTPException(
                     status_code=403, 
                     detail=f"Permission '{required_permission.value}' required"
@@ -481,11 +457,9 @@ The decorator continues with error handling and security logging:
     return decorator
 ```
 
-```
+### The Security Middleware: Your Digital Bouncer
 
-### Step 1.3: Secure MCP Server Integration
-
-### Step 1.3.1: Authentication Middleware
+Think of the authentication middleware as the most vigilant bouncer at the most exclusive club. They check every person at the door, verify their credentials, and ensure only authorized individuals gain entry:
 
 ```python
 
@@ -508,7 +482,7 @@ class MCPAuthMiddleware:
         self.excluded_paths = {"/health", "/metrics"}  # Skip auth for monitoring
 ```
 
-### Step 1.3.2: Header Extraction and Validation
+The header extraction process is like carefully examining each visitor's identification:
 
 ```python
     def _extract_bearer_token(self, request: Request) -> str:
@@ -526,9 +500,7 @@ class MCPAuthMiddleware:
                 status_code=401, 
                 detail="Bearer token format required"
             )
-```
 
-```python
         # Extract token (handle malformed headers safely)
         parts = auth_header.split(" ")
         if len(parts) != 2:
@@ -540,7 +512,7 @@ class MCPAuthMiddleware:
         return parts[1]
 ```
 
-### Step 1.3.3: Request Authentication Process
+The authentication process combines all security checks into one comprehensive verification:
 
 ```python
     async def authenticate_request(self, request: Request) -> Optional[Dict[str, Any]]:
@@ -557,9 +529,7 @@ class MCPAuthMiddleware:
             
             # Step 2: Verify token cryptographically
             payload = self.jwt_manager.verify_token(token)
-```
 
-```python
             # Step 3: Log successful authentication
             auth_duration = (time.time() - start_time) * 1000
             logger.info(
@@ -568,11 +538,7 @@ class MCPAuthMiddleware:
             )
             
             return payload
-```
 
-### Step 1.3.4: Error Handling and Security Logging
-
-```python
         except HTTPException:
             # Re-raise HTTP exceptions (already properly formatted)
             raise
@@ -588,9 +554,9 @@ class MCPAuthMiddleware:
             )
 ```
 
-```
+### The Secure MCP Server: Bringing It All Together
 
-### Step 1.3.5: Secure MCP Server Class
+Now we combine all our security components into a fortress-like MCP server that can withstand the most determined attacks:
 
 ```python
 
@@ -604,9 +570,7 @@ from typing import Dict, List
 import re
 import os
 from pathlib import Path
-```
 
-```python
 class SecureMCPServer:
     """Production-ready MCP server with comprehensive security."""
     
@@ -621,7 +585,7 @@ class SecureMCPServer:
         self.setup_security_tools()
 ```
 
-### Step 1.3.6: Basic Security Tools
+Each MCP tool becomes a secured endpoint with appropriate permission checks:
 
 ```python
     def setup_security_tools(self):
@@ -642,11 +606,7 @@ class SecureMCPServer:
                 "condition": "Sunny",
                 "timestamp": datetime.now().isoformat()
             }
-```
 
-### Step 1.3.7: File Operations with Security
-
-```python
         @self.mcp.tool()
         @require_permission(Permission.WRITE_FILES)
         async def write_file(path: str, content: str) -> Dict:
@@ -660,11 +620,7 @@ class SecureMCPServer:
             
             # Secure file writing logic would go here
             return {"success": True, "path": path, "size": len(content)}
-```
 
-### Step 1.3.8: Administrative Functions
-
-```python
         @self.mcp.tool()
         @require_permission(Permission.ADMIN_USERS)
         async def list_users() -> List[Dict]:
@@ -680,15 +636,15 @@ class SecureMCPServer:
         return any(re.match(pattern, path) for pattern in self.allowed_file_patterns)
 ```
 
-```
-
 ---
 
-## Part 2: API Key Management
+## Part 2: The API Key Arsenal
 
-API keys enable secure authentication for machine-to-machine scenarios.
+In the world of machine-to-machine communication, API keys are like diplomatic passports—they need to be secure, verifiable, and easily revocable when compromised. Let's build a system that treats each API key like a precious artifact.
 
-### Step 2.1.1: API Key Manager Setup
+### The API Key Vault
+
+Our API key manager is like having a high-security vault that can generate, store, and validate millions of unique keys while maintaining perfect security:
 
 ```python
 
@@ -714,7 +670,7 @@ class APIKeyManager:
         self.key_length = 32  # 32 bytes = 256 bits of entropy
 ```
 
-### Step 2.1.2: Secure Key Generation
+The key generation process is like minting a new currency—each key must be absolutely unique and impossible to predict:
 
 ```python
     def _generate_secure_key(self) -> tuple[str, str]:
@@ -729,9 +685,7 @@ class APIKeyManager:
         return hashlib.sha256(api_key.encode()).hexdigest()
 ```
 
-```
-
-### Step 2.1.3: Key Metadata
+Each API key comes with comprehensive metadata, like a detailed passport with all necessary information:
 
 ```python
     def _create_key_metadata(self, key_id: str, user_id: str, name: str, 
@@ -752,7 +706,7 @@ class APIKeyManager:
         }
 ```
 
-### Step 2.1.4: Complete Key Generation
+The complete key generation process combines security with usability:
 
 ```python
     def generate_api_key(self, user_id: str, name: str, permissions: List[str], 
@@ -768,9 +722,7 @@ class APIKeyManager:
         # Generate secure key components
         key_id, api_key = self._generate_secure_key()
         key_hash = self._hash_api_key(api_key)
-```
 
-```python
         # Create metadata and store securely
         expiry_days = expires_in_days or self.default_expiry_days
         metadata = self._create_key_metadata(key_id, user_id, name, permissions, expiry_days)
@@ -784,11 +736,7 @@ class APIKeyManager:
             "key_id": key_id,
             "expires_at": metadata["expires_at"]
         }
-```
 
-### Step 2.1.5: Secure Storage Helper
-
-```python
     def _store_key_metadata(self, key_hash: str, metadata: Dict, expiry_days: int):
         """Securely store key metadata in Redis with TTL."""
         try:
@@ -803,9 +751,7 @@ class APIKeyManager:
             raise RuntimeError("Could not store API key")
 ```
 
-```
-
-### Step 2.1.6: Key Validation
+The validation system works like having a security expert examine each key for authenticity and freshness:
 
 ```python
     def validate_api_key(self, api_key: str) -> Optional[Dict]:
@@ -819,9 +765,7 @@ class APIKeyManager:
             metadata = self._get_key_metadata(api_key)
             if not metadata:
                 return None
-```
 
-```python
             # Step 3: Check key status and update usage
             if self._is_key_active(metadata):
                 self._update_key_usage(api_key, metadata)
@@ -832,11 +776,7 @@ class APIKeyManager:
         except Exception as e:
             logger.error(f"API key validation error: {e}")
             return None
-```
 
-### Step 2.1.7: Format and Prefix Validation
-
-```python
     def _is_valid_key_format(self, api_key: str) -> bool:
         """Validate API key format and structure."""
         if not api_key or not isinstance(api_key, str):
@@ -853,11 +793,7 @@ class APIKeyManager:
             return False
         
         return True
-```
 
-### Step 2.1.8: Metadata Retrieval
-
-```python
     def _get_key_metadata(self, api_key: str) -> Optional[Dict]:
         """Securely retrieve key metadata from storage."""
         key_hash = self._hash_api_key(api_key)
@@ -877,11 +813,7 @@ class APIKeyManager:
         except Exception as e:
             logger.error(f"Failed to retrieve API key metadata: {e}")
             return None
-```
 
-### Step 2.1.9: Active Status Checking
-
-```python
     def _is_key_active(self, metadata: Dict) -> bool:
         """Check if API key is still active and valid."""
         # Check active flag
@@ -902,11 +834,7 @@ class APIKeyManager:
                 return False
         
         return True
-```
 
-### Step 2.1.10: Usage Tracking Update
-
-```python
     def _update_key_usage(self, api_key: str, metadata: Dict):
         """Update key usage statistics atomically."""
         try:
@@ -921,9 +849,7 @@ class APIKeyManager:
             ttl = self.redis_client.ttl(redis_key)
             if ttl > 0:
                 self.redis_client.setex(redis_key, ttl, json.dumps(metadata))
-```
 
-```python
             else:
                 # Fallback: use default expiry
                 self.redis_client.setex(
@@ -937,15 +863,15 @@ class APIKeyManager:
             logger.warning(f"Failed to update key usage statistics: {e}")
 ```
 
-```
-
 ---
 
-## Part 3: Rate Limiting and DDoS Protection
+## Part 3: The Rate Limiting Shield
 
-Rate limiting controls request frequency to prevent abuse and DDoS attacks.
+Imagine your MCP server is a popular restaurant during rush hour. Without proper crowd control, you'd be overwhelmed by orders faster than you could process them. Rate limiting is your digital bouncer, ensuring everyone gets served fairly while preventing any single customer from monopolizing the kitchen.
 
-### Step 3.1.1: Token Bucket Rate Limiter
+### The Token Bucket: Nature's Perfect Algorithm
+
+The token bucket algorithm mimics how nature handles resource distribution. Think of it as a magical bucket that fills with tokens at a steady rate. Each request needs a token to proceed, and when the bucket empties, requests must wait for new tokens to arrive.
 
 ```python
 
@@ -971,9 +897,7 @@ class TokenBucketRateLimiter:
         self.bucket_ttl = 3600  # 1 hour cleanup TTL
 ```
 
-```
-
-### Step 3.1.2: Bucket State Management
+The bucket state management is like checking how much water is currently in a bucket and when it was last filled:
 
 ```python
     def _get_bucket_state(self, bucket_key: str) -> tuple[float, float]:
@@ -993,7 +917,7 @@ class TokenBucketRateLimiter:
             return time.time(), float(self.default_capacity)
 ```
 
-### Step 3.1.3: Token Calculation Algorithm
+The token calculation algorithm is the heart of the system—it determines exactly how many tokens should be available at any moment:
 
 ```python
     def _calculate_tokens(self, last_refill: float, current_tokens: float, 
@@ -1011,7 +935,7 @@ class TokenBucketRateLimiter:
         return new_tokens
 ```
 
-### Step 3.1.4: Request Authorization Check
+The authorization check is where the magic happens—deciding whether to grant or deny each request:
 
 ```python
     async def is_allowed(self, identifier: str, capacity: int = None, 
@@ -1032,9 +956,7 @@ class TokenBucketRateLimiter:
             available_tokens = self._calculate_tokens(
                 last_refill, current_tokens, current_time, capacity, refill_rate
             )
-```
 
-```python
             # Step 3: Check if request can be allowed
             if available_tokens >= 1.0:
                 # Allow request and consume token
@@ -1049,11 +971,11 @@ class TokenBucketRateLimiter:
             self._update_bucket_state(bucket_key, current_time, remaining_tokens)
             
             return allowed
-```
 
-### Step 3.1.5: State Persistence
+        except Exception as e:
+            logger.error(f"Rate limiting error for {identifier}: {e}")
+            return True  # Fail open - availability over strict rate limiting
 
-```python
     def _update_bucket_state(self, bucket_key: str, timestamp: float, tokens: float):
         """Update bucket state in Redis with TTL."""
         try:
@@ -1070,15 +992,11 @@ class TokenBucketRateLimiter:
             
         except Exception as e:
             logger.error(f"Failed to update bucket state for {bucket_key}: {e}")
-            
-        except Exception as e:
-            logger.error(f"Rate limiting error for {identifier}: {e}")
-            return True  # Fail open - availability over strict rate limiting
 ```
 
-```
+### The Hierarchical Rate Limiting System
 
-### Step 3.1.6: Role-Based Rate Limiting
+Different users deserve different levels of service. Think of it like airline seating—economy, business, and first class all get to the same destination, but with very different experiences along the way:
 
 ```python
 class RateLimitMiddleware:
@@ -1094,11 +1012,7 @@ class RateLimitMiddleware:
             "premium": {"capacity": 1000, "refill_rate": 20}, # Enhanced limits
             "admin": {"capacity": 5000, "refill_rate": 100}   # High limits
         }
-```
 
-### Step 3.1.7: User Identification and Limit Selection
-
-```python
     def _get_rate_limits(self, user_data: Dict) -> tuple[str, Dict]:
         """Determine user identifier and appropriate rate limits."""
         # Extract primary role (use first role if multiple)
@@ -1113,11 +1027,7 @@ class RateLimitMiddleware:
         limits = self.limits.get(primary_role, self.limits["guest"])
         
         return identifier, limits
-```
 
-### Step 3.1.8: Rate Limit Enforcement
-
-```python
     async def check_rate_limit(self, request: Request, user_data: Dict) -> bool:
         """Enforce rate limits and block excessive requests."""
         # Determine user limits
@@ -1147,36 +1057,38 @@ class RateLimitMiddleware:
         return True
 ```
 
-```
+---
+
+## The Security Arsenal: Summary of Your Digital Fortress
+
+Congratulations! You've just built a comprehensive security system that would make even the most paranoid security expert proud. Let's admire what we've accomplished:
+
+**Your Digital Fortress Now Includes:**
+- **OAuth 2.1 with PKCE authentication and Resource Indicators (RFC 8707)**: Like having quantum-encrypted keys that only work for specific doors
+- **JWT token system with access/refresh tokens and blacklisting**: A sophisticated ID system with instant revocation capabilities
+- **API key management with automatic expiration and usage tracking**: Diplomatic passports for your machines, complete with audit trails
+- **Role-based access control (RBAC) with fine-grained permissions**: A royal court system where everyone knows their place and privileges
+- **Rate limiting using token bucket algorithm with role-based limits**: Fair resource distribution that prevents any single user from overwhelming the system
+- **Input validation and secure error handling**: Careful examination of everything that enters your fortress
+- **Comprehensive audit logging and security monitoring**: A security team that never sleeps and remembers everything
 
 ---
 
-## Implementation Summary
+## Testing Your Security Knowledge
 
-**Security Components Implemented:**
-- OAuth 2.1 with PKCE authentication and Resource Indicators (RFC 8707)
-- JWT token system with access/refresh tokens and blacklisting
-- API key management with automatic expiration and usage tracking
-- Role-based access control (RBAC) with fine-grained permissions
-- Rate limiting using token bucket algorithm with role-based limits
-- Input validation and secure error handling
-- Comprehensive audit logging and security monitoring
-
----
-
-## Testing Your Understanding
+Before we move on, let's make sure you understand the critical concepts that keep your MCP server safe:
 
 ### Security Concepts Check
 
-1. **Short-lived access tokens (30 minutes)** - B) Limit exposure if compromised
-2. **Token blacklisting purpose** - B) Enable secure logout and token revocation  
-3. **Token bucket algorithm** - C) Allows bursts but limits average rate
-4. **Hashing API keys** - C) Prevent key theft from database breaches
-5. **Fail-secure design** - B) Always deny access when systems fail  
+1. **Why use short-lived access tokens (30 minutes)?** - B) Limit exposure if compromised
+2. **What's the purpose of token blacklisting?** - B) Enable secure logout and token revocation  
+3. **How does the token bucket algorithm work?** - C) Allows bursts but limits average rate
+4. **Why hash API keys in storage?** - C) Prevent key theft from database breaches
+5. **What is fail-secure design?** - B) Always deny access when systems fail  
 
-### Practical Exercise
+### Your Security Challenge
 
-Implement a security audit system that tracks suspicious activity:
+Now it's your turn to add to the fortress. Implement a security audit system that tracks suspicious activity patterns and alerts administrators to potential threats:
 
 ```python
 @mcp.tool()
@@ -1207,27 +1119,27 @@ async def get_security_audit(time_range: str = "24h") -> Dict:
 
 ---
 
-## Multiple Choice Test - Session 5
+## Test Your Fortress: Multiple Choice Challenge
 
-**Question 1:** Security approach for MCP servers - C) Defense-in-depth with multiple security layers
+**Question 1:** What's the best security approach for MCP servers? - C) Defense-in-depth with multiple security layers
 
-**Question 2:** JWT secret key minimum length - C) 32 characters
+**Question 2:** What's the minimum JWT secret key length? - C) 32 characters
 
-**Question 3:** Refresh token handling - D) Use Redis with automatic expiration and blacklisting
+**Question 3:** How should refresh tokens be handled? - D) Use Redis with automatic expiration and blacklisting
 
-**Question 4:** Best rate limiting algorithm - D) Token bucket
+**Question 4:** What's the best rate limiting algorithm for MCP servers? - D) Token bucket
 
-**Question 5:** Role-based permissions advantage - C) Easier management and scalability
+**Question 5:** What's the main advantage of role-based permissions? - C) Easier management and scalability
 
-**Question 6:** MCP tool input validation - A) Server-side validation using Pydantic models
+**Question 6:** How should MCP tool input validation be implemented? - A) Server-side validation using Pydantic models
 
-**Question 7:** Minimum TLS version - D) TLS 1.2
+**Question 7:** What's the minimum TLS version for production MCP servers? - D) TLS 1.2
 
-**Question 8:** API key rotation - B) Automatic rotation with overlap periods
+**Question 8:** How should API key rotation be handled? - B) Automatic rotation with overlap periods
 
-**Question 9:** Critical audit log information - D) Authentication events and permission changes
+**Question 9:** What should be logged in security audit trails? - D) Authentication events and permission changes
 
-**Question 10:** DDoS protection technique - C) Implementing multiple rate limiting layers
+**Question 10:** What's the best DDoS protection technique? - C) Implementing multiple rate limiting layers
 
 [**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
 
