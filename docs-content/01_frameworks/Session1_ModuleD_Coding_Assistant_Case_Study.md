@@ -14,6 +14,7 @@ This isn't just another case study. By understanding the Coding Assistant's arch
 ## Why This Matters for Your Learning
 
 This isn't just another tutorial. By understanding the Coding Assistant's architecture, you'll see how:
+
 - **Real dependency injection** works at scale (like swapping data sources in production)
 - **Professional agents** handle data pipeline complexity beyond simple examples
 - **Production patterns** solve problems like schema drift, backfill orchestration, and data quality monitoring
@@ -91,30 +92,35 @@ graph TB
 
 This maps directly to concepts from our main session:
 
-**🧠 LLM Integration (Part 2 concepts)**
+#### 🧠 LLM Integration (Part 2 concepts)
+
 - `src/coding_assistant/llm/model.py` - Core LLM calls (like our `SimpleAgent.think()`)
 - `src/coding_assistant/llm/adapters.py` - Provider abstraction (our LLMClient interface)
 - Line 22-47: Async completion with streaming
 - Line 156: LiteLLM dependency injection pattern
 
-**🎭 Agent Orchestration (Multi-agent patterns)**
+#### 🎭 Agent Orchestration (Multi-agent patterns)
+
 - `src/coding_assistant/agents/execution.py` - Main agent loop (ReAct pattern)
 - `src/coding_assistant/agents/callbacks.py` - Event handling and UI updates
 - `src/coding_assistant/agents/interrupts.py` - User control and cancellation
 - `src/coding_assistant/agents/history.py` - Conversation memory management
 
-**🔧 Tool Integration (External capabilities)**
+#### 🔧 Tool Integration (External capabilities)
+
 - `src/coding_assistant/tools/mcp.py` - MCP protocol implementation
 - `src/coding_assistant/tools/tools.py` - Tool definitions and wrapping
 - `mcp_servers_config.json` - Available tool servers configuration
 
-**⚙️ System Infrastructure**
+#### ⚙️ System Infrastructure
+
 - `src/coding_assistant/main.py` - Entry point, config, and CLI setup
 - `src/coding_assistant/ui.py` - Terminal interface and streaming display
 - `src/coding_assistant/sandbox.py` - Security and filesystem isolation
 - `src/coding_assistant/history.py` - Session persistence
 
-**📦 Configuration & Dependencies**
+#### 📦 Configuration & Dependencies
+
 - `pyproject.toml` - Python dependencies and project metadata
 - `uv.lock` - Locked dependency versions for reproducible builds
 - `mcp_servers_config.json` - Tool server configurations
@@ -130,6 +136,7 @@ Notice how this differs from our educational examples:
 5. **Observability**: Tracing and logging built-in, not added later
 
 This structure allows the system to:
+
 - **Scale** - Add new agents without touching existing code
 - **Debug** - Clear module boundaries for issue isolation  
 - **Deploy** - Configuration-driven setup for different environments
@@ -184,6 +191,7 @@ graph TD
 ```
 
 This architecture solves the problems we identified in the main session:
+
 - **Separation of Concerns**: Each agent has a specific role
 - **Tool Abstraction**: MCP protocol standardizes tool access
 - **Provider Flexibility**: LiteLLM enables the dependency injection pattern
@@ -203,6 +211,7 @@ dependencies = [
 ```
 
 **Why These Choices?**
+
 - **LiteLLM**: Abstracts away LLM provider differences (exactly our pattern!)
 - **Async Everything**: Handles concurrent operations efficiently
 - **MCP Protocol**: Standardized tool integration
@@ -301,11 +310,12 @@ async for chunk in response:
 completion = litellm.stream_chunk_builder(chunks)
 ```
 
-**Why Streaming Matters:**
-- **User Experience**: See responses as they generate (like ChatGPT)
-- **Interruptibility**: Users can stop mid-generation if not helpful
-- **Memory Efficiency**: Don't hold entire response in memory
-- **Feedback Loop**: Users can react to partial responses
+**Why Streaming Matters:**  
+
+- **User Experience**: See responses as they generate (like ChatGPT)  
+- **Interruptibility**: Users can stop mid-generation if not helpful  
+- **Memory Efficiency**: Don't hold entire response in memory  
+- **Feedback Loop**: Users can react to partial responses  
 
 This is the evolution of our simple `return ai_response` pattern into production-grade interaction.
 
@@ -442,7 +452,7 @@ sequenceDiagram
 **Benefits of This Architecture:**
 
 - **Standardization**: Same interface for all tools (like our LLMClient pattern)
-- **Isolation**: Tools run in separate processes (security and stability) 
+- **Isolation**: Tools run in separate processes (security and stability)
 - **Extensibility**: Add new capabilities by adding new MCP servers
 - **Reusability**: Tools can be shared across different agent systems
 
@@ -504,6 +514,7 @@ def save_orchestrator_history(
 **Beyond Our Simple Examples:**
 
 Our `SimpleAgent` had a basic `self.memory = []` list that disappeared when the program ended. The production version:
+
 - **Persists across restarts** - No lost work
 - **Includes rich metadata** - Task context, progress markers, user preferences
 - **Handles corruption** - Validates saved state before loading
@@ -547,6 +558,7 @@ if args.otlp_endpoint:
 ```
 
 **What Gets Measured:**
+
 - **LLM call latencies** - Which models are slow?
 - **Tool execution times** - Are file operations the bottleneck?
 - **Total task completion time** - How long do users wait?
@@ -698,6 +710,7 @@ async with InterruptibleSection():
 ```
 
 **Why This Matters:**  
+
 - **Data Engineer Control**: Stop runaway operations without losing work  
 - **Resource Management**: Don't waste compute on unwanted data scans  
 - **Better DX**: Data engineers feel in control, not trapped by their automation tools  
@@ -778,6 +791,7 @@ class ShortenConversationResult:
 **Example Transformation:**
 
 Before (2000 tokens):
+
 ```
 User: "Analyze this file..."
 Assistant: "I'll read the file..." [reads file]
@@ -788,7 +802,9 @@ Assistant: "The tests show..." [detailed findings]
 User: "What about performance?"
 [...many more exchanges...]
 ```
+
 After (400 tokens):
+
 ```
 Summary: "User requested analysis of file X for code quality and testing. 
 Found 3 main issues: naming conventions, missing error handling, 
@@ -840,6 +856,7 @@ These aren't academic patterns - they solve real problems data engineers encount
 **Connecting Back to Our Data Engineering Session:**
 
 Remember our discussion about production realities in data pipelines? These patterns address exactly those concerns:
+
 - **Scalability**: Context management handles growing data lineage and metadata
 - **Reliability**: Error recovery and interrupts handle real-world data pipeline failures
 - **Data Engineer Experience**: Interrupts and summaries respect the need for control in data operations
@@ -890,7 +907,8 @@ graph TD
 
 Remember our Part 2.5 discussion about the problems with hardcoded LLM providers? Let's trace how this evolved:
 
-**Stage 1: Our Educational Example**
+#### Stage 1: Our Educational Example
+
 ```python
 # Hardcoded, single provider
 def think(self, input_text: str) -> str:
@@ -901,7 +919,8 @@ def think(self, input_text: str) -> str:
     return response.choices[0].message.content
 ```
 
-**Stage 2: Abstract Interface (Part 2.5)**
+#### Stage 2: Abstract Interface (Part 2.5)
+
 ```python
 # Abstract but still manual
 class LLMClient(ABC):
@@ -915,7 +934,8 @@ class OpenAIClient(LLMClient):
         pass
 ```
 
-**Stage 3: Production Implementation (Coding Assistant)**
+#### Stage 3: Production Implementation (Coding Assistant)
+
 ```python
 # Industrial-strength abstraction
 async def complete(messages, model, tools):
@@ -970,6 +990,7 @@ graph LR
 ```
 
 **The MCP Evolution Solves:**
+
 - **Tool Proliferation**: As we add more tools, complexity grows exponentially without standards
 - **Testing Difficulty**: Each custom interface needs custom mocks
 - **Maintenance Overhead**: Tools break differently, requiring specific expertise
@@ -996,6 +1017,7 @@ class ConversationManager:
 ### 1. Start Simple, Evolve Systematically
 
 **Our Examples → Production Path:**
+
 - ✅ **Learn patterns** with simple, clear examples (SimpleAgent)
 - ✅ **Understand abstractions** through dependency injection (LLMClient)  
 - ✅ **See production evolution** through real-world case study (Coding Assistant)
@@ -1005,6 +1027,7 @@ The concepts remain the same - the implementation grows more sophisticated.
 ### 2. Production is About Handling Reality
 
 **Educational Code:**
+
 ```python
 # Assumes everything works
 response = llm.complete(prompt)
@@ -1012,6 +1035,7 @@ return response.content
 ```
 
 **Production Code:**
+
 ```python
 # Handles the real world
 try:
@@ -1040,6 +1064,7 @@ The Coding Assistant's architecture isn't arbitrary - it solves specific problem
 ### 4. Bare Metal ≠ Reinventing Everything
 
 **Smart Production Approach:**
+
 - **Use proven libraries** (LiteLLM, OpenTelemetry, MCP)
 - **Focus on unique value** (orchestration, UX, domain logic)
 - **Build abstractions** where you need flexibility
@@ -1093,6 +1118,7 @@ coding-assistant --task "Test task" \
 ### 4. Explore the Code
 
 Key files to examine:
+
 - `src/coding_assistant/llm/model.py` - Real LLM calls
 - `src/coding_assistant/agents/execution.py` - Orchestration logic
 - `src/coding_assistant/tools/mcp.py` - Tool integration
