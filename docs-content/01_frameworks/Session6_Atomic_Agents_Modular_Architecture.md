@@ -9,7 +9,7 @@ Atomic Agents provides a component-based architecture for building modular AI sy
 ### What You'll Learn
 
 - Component-based agent design and modular composition patterns
-- Atomic architecture principles for enterprise scalability
+- Atomic architecture principles for distributed system scalability
 - Schema matching and component alignment for seamless chaining
 - Production deployment strategies for atomic agent systems
 

@@ -1,10 +1,10 @@
-# Session 5: PydanticAI Type-Safe Agents - Building Bulletproof AI Systems
+# Session 5: PydanticAI Type-Safe Agents - Building Reliable Data Processing Systems
 
-Imagine deploying an AI agent to production, only to discover it sometimes returns malformed data that crashes your billing system. Or worse, it occasionally returns the wrong data structure, causing silent failures that corrupt customer records. These are the kinds of production nightmares that keep CTOs awake at night.
+Imagine deploying an AI agent to production, only to discover it sometimes returns malformed data that crashes your ML pipeline. Or worse, it occasionally returns the wrong sensor data structure, causing silent failures that corrupt automotive model training. These are the kinds of production nightmares that keep data engineering leads awake at night.
 
-PydanticAI eliminates these risks entirely by bringing production-grade type safety and validation to AI agent development. Unlike traditional frameworks that work with unpredictable text responses, PydanticAI guarantees your agents return exactly the data structures you define, with automatic validation and clear error messages - or they fail fast with detailed diagnostics.
+PydanticAI eliminates these risks entirely by bringing production-grade type safety and validation to automotive data processing agent development. Unlike traditional frameworks that work with unpredictable text responses, PydanticAI guarantees your agents return exactly the sensor data structures you define, with automatic validation and clear error messages - or they fail fast with detailed diagnostics.
 
-In this session, you'll learn to build AI agents that are as reliable and predictable as the rest of your production infrastructure.
+In this session, you'll learn to build AI agents that are as reliable and predictable as the rest of your distributed data processing infrastructure.
 
 ## Overview
 
@@ -154,7 +154,7 @@ async def plan_task(description: str) -> TaskResponse:
 
 ### Agent with Dependencies
 
-Real applications need access to external services - databases, APIs, file systems. PydanticAI provides dependency injection for clean, testable architecture that scales to enterprise needs.
+Real applications need access to external services - databases, APIs, file systems. PydanticAI provides dependency injection for clean, testable architecture that scales to production needs.
 
 Define your dependencies - encapsulating external service access:
 
@@ -194,7 +194,7 @@ result = await task_agent_with_db.run(
 
 ### Custom Result Validation
 
-Beyond basic types, you can add business logic validation - ensuring outputs meet your specific business requirements. Pydantic validators implement complex rules that reflect real-world constraints.
+Beyond basic types, you can add data processing validation - ensuring outputs meet your specific automotive data requirements. Pydantic validators implement complex rules that reflect real-world sensor constraints and processing requirements.
 
 ```python
 from pydantic import validator, root_validator
@@ -206,7 +206,7 @@ class ValidatedTaskResponse(BaseModel):
     complexity: str = Field(..., regex=r'^(simple|moderate|complex)$')
 ```
 
-Add custom validation logic - business rules that ensure data quality:
+Add custom validation logic - data processing rules that ensure automotive data quality:
 
 ```python
     @validator('task_id')
@@ -216,7 +216,7 @@ Add custom validation logic - business rules that ensure data quality:
         return v
 ```
 
-Add cross-field validation - ensuring relationships between fields make business sense:
+Add cross-field validation - ensuring relationships between fields make automotive data processing sense:
 
 ```python
     @root_validator
@@ -232,7 +232,7 @@ Add cross-field validation - ensuring relationships between fields make business
         return values
 ```
 
-Create agent with enhanced validation - business logic baked into the data structures:
+Create agent with enhanced validation - data processing logic baked into the automotive data structures:
 
 ```python
 validated_agent = Agent(

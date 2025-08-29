@@ -117,9 +117,9 @@ The configuration class establishes database and monitoring settings:
 Finally, we create the production-ready agent using these configurations:
 
 ```python
-def create_enterprise_agent():
+def create_production_agent():
     return Agent(
-        name="EnterpriseAgent",
+        name="DataProcessingAgent",
         model=ProductionConfig.PRIMARY_MODEL,
         storage=PostgresStorage(ProductionConfig.DATABASE_URL),
         tools=[DuckDuckGo(), FileTools()],

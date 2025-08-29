@@ -1,17 +1,17 @@
-# Session 3: LangGraph Multi-Agent Workflows - Orchestrating Digital Teams Like a Conductor
+# Session 3: LangGraph Multi-Agent Workflows - Orchestrating Distributed Data Processing
 
-Imagine trying to coordinate a Fortune 500 merger with a phone tree - each decision maker can only talk to the next person in line, no one has the big picture, and critical decisions get lost in translation. This is exactly what happens when you use simple agent chains for complex business problems that require multiple specialists working together.
+Imagine processing terabytes of automotive sensor data through a rigid pipeline - camera data must wait for lidar processing to complete, radar analysis can't start until CAN bus parsing finishes, and critical anomalies get lost in sequential bottlenecks. This is exactly what happens when you use simple agent chains for complex data processing workflows that require multiple specialized processors working in parallel.
 
-LangGraph changes everything by transforming your AI agents from a rigid assembly line into a dynamic, intelligent organization where the right experts collaborate at the right moments, making decisions based on real-time conditions and shared understanding.
+LangGraph transforms your data processing agents from rigid sequential pipelines into dynamic, intelligent workflows where the right processors collaborate based on data characteristics, resource availability, and processing priorities in real-time.
 
-In this session, you'll build sophisticated multi-agent systems that mirror how high-performing teams actually work - with coordination, specialization, and adaptive decision-making.
+In this session, you'll build sophisticated multi-agent systems that mirror distributed data processing architectures - with parallel execution, conditional routing, and adaptive resource allocation.
 
 ## Learning Outcomes
 
 By the end of this session, you will be able to:
 - **Design** and implement graph-based workflow orchestration using LangGraph
 - **Build** complex multi-agent systems with stateful coordination and conditional routing
-- **Apply** state management patterns for enterprise-scale agent coordination
+- **Apply** state management patterns for distributed data processing coordination
 - **Implement** production-grade tracing and observability for multi-agent workflows
 - **Evaluate** when to choose graph-based architectures over simple chain-based systems
 
@@ -19,7 +19,7 @@ By the end of this session, you will be able to:
 
 Unlike sequential chains where Agent A always talks to Agent B who always talks to Agent C, LangGraph uses directed graphs with nodes (specialized agents) connected by conditional edges (intelligent routing). This architecture provides stateful coordination, dynamic decision-making, and production-grade observability for complex agent workflows.
 
-Think of it as the difference between a factory assembly line and a modern consulting firm - sometimes the financial analyst needs to talk directly to the technical expert, sometimes the project manager needs input from multiple specialists simultaneously, and sometimes you need to route back to earlier steps when new information emerges.
+Think of it as the difference between sequential data processing and a modern distributed system - sometimes camera processing needs direct input from calibration data, sometimes ML model inference requires simultaneous input from multiple sensor streams, and sometimes you need to route back to data validation when quality issues are detected.
 
 ## Quick Start
 
@@ -37,39 +37,41 @@ Building on our LangChain foundations, LangGraph transforms multi-agent systems 
 
 ### Production-Grade State Management
 
-LangGraph's StateGraph provides the foundation for enterprise multi-agent coordination, solving the critical challenge of how multiple AI agents can work together while maintaining consistency and observability:
+LangGraph's StateGraph provides the foundation for distributed data processing coordination, solving the critical challenge of how multiple processing agents can work together while maintaining data consistency and pipeline observability:
 
 ```python
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
 from typing import TypedDict, List, Optional
 
-# Enterprise workflow state with comprehensive tracking
+# Data processing workflow state with comprehensive tracking
 
 class WorkflowState(TypedDict):
-    messages: List[str]           # Communication history
-    current_step: str            # Active workflow stage  
-    completed_tasks: List[str]   # Audit trail
-    agent_context: dict         # Shared knowledge base
-    error_state: Optional[str]  # Failure handling
+    messages: List[str]           # Processing status updates
+    current_step: str            # Active processing stage  
+    completed_tasks: List[str]   # Processing audit trail
+    data_context: dict          # Shared processing metadata
+    error_state: Optional[str]  # Processing failure handling
+    batch_id: str               # Current data batch identifier
+    resource_usage: dict        # Kubernetes resource tracking
 ```
 
-This state structure provides the observability and error handling required for production deployments - think of it as the shared whiteboard that all team members can see and update. Each field serves a specific purpose in maintaining workflow integrity and enabling debugging when things go wrong.
+This state structure provides the observability and error handling required for production data processing - think of it as the shared processing context that all agents can access and update. Each field serves a specific purpose in maintaining pipeline integrity and enabling debugging when processing issues occur.
 
 ```python
 
-# Initialize the enterprise workflow graph
+# Initialize the data processing workflow graph
 
 workflow = StateGraph(WorkflowState)
 ```
 
 ### Core Architecture Principles:
 
-Understanding these principles is like grasping the fundamental laws that govern effective teamwork:
+Understanding these principles is like grasping the fundamental laws that govern distributed data processing:
 
-1. **Directed Graph Structure**: Nodes (specialized agents) connected by conditional edges (intelligent routing) - like having clear roles and communication paths in an organization
-2. **Immutable State Flow**: State evolves through nodes without mutation, ensuring traceability - every decision is recorded and auditable
-3. **Conditional Decision Points**: Dynamic routing based on state content and external conditions - like having smart coordinators who route work to the right specialists
+1. **Directed Graph Structure**: Nodes (specialized processors) connected by conditional edges (intelligent routing) - like having clear data flow paths and processing responsibilities
+2. **Immutable State Flow**: State evolves through nodes without mutation, ensuring traceability - every processing step is recorded and auditable for compliance
+3. **Conditional Decision Points**: Dynamic routing based on data characteristics and resource availability - like having intelligent load balancers that route work to optimal processors
 
 ### Nodes and Edges
 
@@ -78,10 +80,10 @@ Building blocks of LangGraph workflows - the agents (nodes) and their communicat
 **File**: [`src/session3/workflow_nodes.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/workflow_nodes.py) - Node implementations
 
 ```python
-def research_node(state: WorkflowState):
-    """Research phase of the workflow"""
-    print(f"🔍 Research: {state['current_step']}")
-    # Add research logic here
+def data_validation_node(state: WorkflowState):
+    """Data validation phase of the processing workflow"""
+    print(f"🔍 Validating: {state['current_step']} for batch {state['batch_id']}")
+    # Add data validation logic here
     return {
         **state,
         "messages": state["messages"] + ["Research completed"],
@@ -308,7 +310,7 @@ Moving beyond simple handoffs to sophisticated coordination patterns that adapt 
 
 ### State Schemas
 
-Defining and managing workflow state with the sophistication needed for enterprise applications:
+Defining and managing workflow state with the sophistication needed for production applications:
 
 **File**: [`src/session3/advanced_routing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing.py) - State management examples
 

@@ -4,7 +4,7 @@
 
 ### **Module Overview**
 
-This self-paced 2-week module provides comprehensive instruction on building production-ready AI agents using 2025 state-of-the-art frameworks and implementing the five core agentic patterns: Reflection, Tool Use, ReAct, Planning, and Multi-Agent Collaboration. Through hands-on tutorials and progressive implementation, you'll master cutting-edge agent development with performance breakthroughs (CrewAI 5.76x faster execution), enterprise production capabilities, and modern protocol standardization (MCP, A2A, ACP, ANP). You'll develop skills to create intelligent, adaptable agents using both bare-metal approaches and established frameworks optimized for 2025 production environments.
+This self-paced 2-week module provides comprehensive instruction on building production-ready AI agents using 2025 state-of-the-art frameworks and implementing the five core agentic patterns: Reflection, Tool Use, ReAct, Planning, and Multi-Agent Collaboration. Through hands-on tutorials and progressive implementation, you'll master cutting-edge agent development with performance breakthroughs (CrewAI 5.76x faster execution), distributed system production capabilities, and modern protocol standardization (MCP, A2A, ACP, ANP). You'll develop skills to create intelligent, adaptable agents using both bare-metal approaches and established frameworks optimized for 2025 production environments.
 
 ![Agent Frameworks Architecture](images/agent-frameworks-overview.png)
 
@@ -40,9 +40,9 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ### **Session 3: LangGraph Multi-Agent Workflows**
 
-**Content:** Building complex workflows with LangGraph, state management, agent orchestration, orchestrator-worker patterns, and enterprise-grade features for production systems
+**Content:** Building complex workflows with LangGraph, state management, agent orchestration, orchestrator-worker patterns, and production-grade features for distributed systems
 **Materials:** Session3_LangGraph_Multi_Agent_Workflows.md + Session3_LangGraph_Multi_Agent_Workflows-solution.md
-**Self-Check:** Multiple choice quiz covering workflow patterns, orchestrator-worker architectures, and enterprise state management
+**Self-Check:** Multiple choice quiz covering workflow patterns, orchestrator-worker architectures, and production state management
 
 ### **Session 4: CrewAI Team Orchestration**
 
@@ -52,43 +52,43 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ### **Session 5: PydanticAI Type-Safe Agents**
 
-**Content:** Type-safe agent development, structured outputs, validation patterns, streaming validation capabilities, and multi-provider support for enterprise deployments
+**Content:** Type-safe agent development, structured outputs, validation patterns, streaming validation capabilities, and multi-provider support for production deployments
 **Materials:** Session5_PydanticAI_Type_Safe_Agents.md + Session5_PydanticAI_Type_Safe_Agents-solution.md
 **Self-Check:** Multiple choice quiz covering type safety, streaming validation, and multi-provider agent architectures
 
 ### **Session 6: Atomic Agents Modular Architecture**
 
-**Content:** Modular, composable agent architecture with atomic components, lightweight patterns, composable tool systems, and modular multi-agent coordination bridging individual frameworks and enterprise patterns
+**Content:** Modular, composable agent architecture with atomic components, lightweight patterns, composable tool systems, and modular multi-agent coordination bridging individual frameworks and production patterns
 **Materials:** Session6_Atomic_Agents_Modular_Architecture.md + Session6_Atomic_Agents_Modular_Architecture-solution.md
 **Self-Check:** Multiple choice quiz covering atomic patterns, component composition, and modular architecture design
 
 ---
 
-## **Week 2: Production Frameworks & Enterprise Integration**
+## **Week 2: Production Frameworks & System Integration**
 
-### **Session 7: ADK Enterprise Agent Development**
+### **Session 7: ADK Production Agent Development**
 
 **Content:** Google's Agent Development Kit for production-ready agent systems
 **Materials:** Session7_First_ADK_Agent.md + Session7_First_ADK_Agent-solution.md
-**Self-Check:** Multiple choice quiz covering ADK architecture and enterprise patterns
+**Self-Check:** Multiple choice quiz covering ADK architecture and production patterns
 
 ### **Session 8: Agno Production-Ready Agents**
 
-**Content:** Agno framework for scalable agent deployment, advanced monitoring, enterprise integration patterns, and production-grade observability systems
+**Content:** Agno framework for scalable agent deployment, advanced monitoring, production integration patterns, and production-grade observability systems
 **Materials:** Session8_Agno_Production_Ready_Agents.md + Session8_Agno_Production_Ready_Agents-solution.md
-**Self-Check:** Multiple choice quiz covering enterprise deployment, advanced monitoring, and production observability
+**Self-Check:** Multiple choice quiz covering production deployment, advanced monitoring, and production observability
 
 ### **Session 9: Multi-Agent Patterns & ReAct Implementation**
 
-**Content:** Advanced multi-agent architectures, ReAct reasoning patterns, coordination strategies, enterprise communication protocols, and production-grade pattern implementations
+**Content:** Advanced multi-agent architectures, ReAct reasoning patterns, coordination strategies, production communication protocols, and production-grade pattern implementations
 **Materials:** Session9_Multi_Agent_Patterns_ReAct.md + Session9_Multi_Agent_Patterns_ReAct-solution.md
-**Self-Check:** Multiple choice quiz covering enterprise patterns, advanced reasoning, and production coordination strategies
+**Self-Check:** Multiple choice quiz covering production patterns, advanced reasoning, and production coordination strategies
 
-### **Session 10: Enterprise Integration & Production Deployment**
+### **Session 10: Production Integration & Deployment**
 
-**Content:** Advanced containerization, cloud deployment, enterprise monitoring, modern protocol integration (MCP, A2A, ACP, ANP), performance benchmarking, and production-grade scaling strategies
+**Content:** Advanced containerization, cloud deployment, production monitoring, modern protocol integration (MCP, A2A, ACP, ANP), performance benchmarking, and production-grade scaling strategies
 **Materials:** Session10_Enterprise_Integration_Production_Deployment.md + Session10_Enterprise_Integration_Production_Deployment-solution.md
-**Self-Check:** Multiple choice quiz covering advanced deployment, protocol integration, and enterprise scaling patterns
+**Self-Check:** Multiple choice quiz covering advanced deployment, protocol integration, and production scaling patterns
 
 ## **Capstone Project: Multi-Framework Agent Ecosystem**
 
@@ -96,14 +96,14 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 ### Requirements
 
-- Implement Reflection pattern for self-improvement with enterprise observability
+- Implement Reflection pattern for self-improvement with production observability
 - Create Tool Use agents with external API integration and MCP protocol support
 - Build ReAct agents for complex reasoning chains with performance optimization
 - Develop Planning agents for multi-step task execution using orchestrator-worker patterns
 - Deploy Multi-Agent systems with hierarchical coordination and A2A/ACP protocols
 - Design atomic agent components using modular architecture patterns
 - Implement composable tool systems with plug-and-play component integration
-- Integrate with enterprise systems using modern monitoring and protocol standards
+- Integrate with production systems using modern monitoring and protocol standards
 - Demonstrate performance improvements (measure against CrewAI's 5.76x benchmark)
 - Implement streaming validation and multi-provider support
 
@@ -113,7 +113,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 - Working deployment with advanced monitoring, observability, and protocol integration
 - Architecture documentation and 2025 framework comparison analysis
 - Performance benchmarks demonstrating 2025 optimizations and improvements
-- Enterprise integration patterns with modern protocol implementations
+- Production integration patterns with modern protocol implementations
 - Production-ready deployment with container orchestration and scaling strategies
 
 ---
@@ -124,7 +124,7 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 
 - **Model Context Protocol (MCP)**: Standardized LLM-application integration
 - **Agent-to-Agent (A2A)**: Direct inter-agent communication protocols  
-- **Agent Communication Protocol (ACP)**: Enterprise agent coordination
+- **Agent Communication Protocol (ACP)**: Production agent coordination
 - **Agent Network Protocol (ANP)**: Multi-system agent federation
 
 ### **Performance Breakthroughs**
@@ -132,21 +132,21 @@ This self-paced 2-week module provides comprehensive instruction on building pro
 - **CrewAI Performance**: 5.76x faster execution with new flow architecture
 - **LangGraph Optimizations**: Enhanced state management and parallel processing
 - **PydanticAI Streaming**: Real-time validation with multi-provider support
-- **Enterprise Observability**: Advanced monitoring with OpenTelemetry integration
+- **Production Observability**: Advanced monitoring with OpenTelemetry integration
 
 ### **2025 Framework Comparison Matrix**
 
-| Framework | Performance | Enterprise Ready | Learning Curve | Production Focus | 2025 Features |
+| Framework | Performance | Production Ready | Learning Curve | Production Focus | 2025 Features |
 |-----------|-------------|------------------|----------------|------------------|---------------|
 | **LangChain** | Good | ⭐⭐⭐ | Moderate | High | LangGraph integration, enhanced tools |
-| **LangGraph** | Excellent | ⭐⭐⭐⭐ | Moderate | Very High | Orchestrator patterns, enterprise state |
+| **LangGraph** | Excellent | ⭐⭐⭐⭐ | Moderate | Very High | Orchestrator patterns, production state |
 | **CrewAI** | Outstanding | ⭐⭐⭐⭐ | Easy | Very High | 5.76x speed, Flows architecture |
 | **PydanticAI** | Very Good | ⭐⭐⭐⭐⭐ | Easy | Very High | Streaming validation, multi-provider |
 | **Atomic Agents** | Excellent | ⭐⭐⭐⭐ | Easy | High | Modular components, lightweight patterns |
-| **Google ADK** | Excellent | ⭐⭐⭐⭐⭐ | Moderate | Extreme | Enterprise integration, Google Cloud |
+| **Google ADK** | Excellent | ⭐⭐⭐⭐⭐ | Moderate | Extreme | Production integration, Google Cloud |
 | **Agno** | Good | ⭐⭐⭐⭐ | Moderate | High | Production monitoring, observability |
 
-### **Enterprise Integration Technologies**
+### **Production Integration Technologies**
 
 - **Container Orchestration**: Kubernetes with Helm charts
 - **Monitoring Stack**: Prometheus, Grafana, OpenTelemetry, Jaeger
