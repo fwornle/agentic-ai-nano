@@ -1076,26 +1076,30 @@ def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]
     - Direct control over execution flow
     - Maximum performance for simple operations
     - Full access to Lambda runtime context
-    
-    Args:
-        event: Lambda event containing the HTTP request data
-        context: Lambda runtime context with execution information
-        
-    Returns:
-        HTTP response in Lambda proxy integration format
     """
+```
+
+The handler function begins with comprehensive request logging and parsing to extract the MCP method:
+
+```python
     try:
         # Request logging for debugging and monitoring
         logger.info(f"Lambda invoked", request_id=context.aws_request_id, 
                    remaining_time=context.get_remaining_time_in_millis())
         
-        # Parse HTTP request body
+        # Parse HTTP request body to extract MCP JSON-RPC data
         body = json.loads(event.get('body', '{}'))
         method = body.get('method', '')
+```
 
-        # Handle MCP protocol methods
+**Production Pattern:** The logging includes both the AWS request ID for correlation and remaining execution time for performance monitoring. This information is critical for debugging timeout issues in production.
+
+Next, we handle the MCP tools discovery request by returning a comprehensive tool catalog:
+
+```python
+        # Handle MCP protocol methods - Tools discovery
         if method == 'tools/list':
-            # Return comprehensive tool catalog
+            # Return comprehensive tool catalog with schemas
             tools = [
                 {
                     "name": "process_data",
@@ -1114,22 +1118,32 @@ def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]
                     "inputSchema": {"type": "object"}
                 }
             ]
-            
+```
+
+**Key Implementation Detail:** The tool schema includes validation constraints (enum values) that help clients understand the expected parameters. This schema-driven approach prevents runtime errors.
+
+When clients discover tools, we return them in the proper JSON-RPC format with CORS headers:
+
+```python
             return {
                 'statusCode': 200,
                 'headers': {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Origin': '*'  # Enable browser access
                 },
                 'body': json.dumps({
                     'jsonrpc': '2.0',
                     'result': {"tools": tools},
-                    'id': body.get('id')
+                    'id': body.get('id')  # Echo request ID for correlation
                 })
             }
+```
 
+For tool execution requests, we delegate to the async tool handler and return the results:
+
+```python
         elif method.startswith('tools/call'):
-            # Execute requested tool
+            # Execute requested tool through async handler
             result = asyncio.run(execute_tool(body, context))
             return {
                 'statusCode': 200,
@@ -1139,8 +1153,15 @@ def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]
                 },
                 'body': json.dumps(result)
             }
-        
+```
+
+**Lambda Architecture Note:** We use `asyncio.run()` to bridge the synchronous Lambda handler with our asynchronous tool execution. This pattern maintains performance while supporting async operations.
+
+For unrecognized methods, we return proper JSON-RPC error responses:
+
+```python
         else:
+            # Unknown method - return JSON-RPC error
             return {
                 'statusCode': 404,
                 'headers': {'Content-Type': 'application/json'},
@@ -1150,8 +1171,13 @@ def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]
                     'id': body.get('id')
                 })
             }
+```
 
+Comprehensive error handling ensures graceful failure under all conditions:
+
+```python
     except json.JSONDecodeError:
+        # Malformed JSON request
         return {
             'statusCode': 400,
             'headers': {'Content-Type': 'application/json'},
@@ -1161,6 +1187,7 @@ def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]
             })
         }
     except Exception as e:
+        # Unexpected errors with detailed logging
         logger.error(f"Lambda handler error", error=str(e), request_id=context.aws_request_id)
         return {
             'statusCode': 500,
@@ -1171,6 +1198,8 @@ def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]
             })
         }
 ```
+
+**Production Error Handling:** Notice how we use standard JSON-RPC error codes (-32700 for parse errors, -32601 for method not found, -32603 for internal errors). This consistency helps clients handle errors predictably.
 
 ### Lambda Tool Execution Implementation
 
@@ -1262,7 +1291,9 @@ CMD ["src.lambda_handler.handler"]
 
 ### SAM Template for Complete Infrastructure
 
-AWS SAM (Serverless Application Model) provides comprehensive Lambda infrastructure management:
+AWS SAM (Serverless Application Model) provides comprehensive Lambda infrastructure management. Let's build this infrastructure step by step.
+
+First, we establish the template foundation with version information and global settings:
 
 ```yaml
 # deployments/template.yaml - Complete Lambda Infrastructure
@@ -1275,7 +1306,7 @@ Description: >
   Serverless MCP server with API Gateway, monitoring,
   alerting, and comprehensive observability.
 
-# Global configuration for all functions
+# Global configuration applied to all Lambda functions
 Globals:
   Function:
     Timeout: 300
@@ -1290,7 +1321,13 @@ Parameters:
     Type: String
     Default: prod
     Description: Deployment stage (dev, staging, prod)
+```
 
+**Template Foundation:** The global settings ensure consistent timeout and memory allocation across all functions. The parameterized stage enables multi-environment deployments from the same template.
+
+Next, we define the core Lambda function with container image deployment:
+
+```yaml
 Resources:
   # Main MCP Server Lambda Function
   MCPServerFunction:
@@ -1305,8 +1342,14 @@ Resources:
       Environment:
         Variables:
           REDIS_URL: !Sub '{{resolve:secretsmanager:redis-url:SecretString}}'
+```
 
-      # API Gateway integration
+**Container-Based Deployment:** Using container images provides flexibility for complex dependencies while maintaining serverless benefits. The secrets manager integration secures sensitive configuration.
+
+API Gateway integration provides HTTP endpoints for the Lambda function:
+
+```yaml
+      # API Gateway event triggers
       Events:
         MCPApi:
           Type: Api
@@ -1320,8 +1363,14 @@ Resources:
             Path: /health
             Method: GET
             RestApiId: !Ref MCPApi
+```
 
-      # IAM permissions for production operation
+**Event-Driven Architecture:** SAM automatically creates the necessary IAM roles and permissions for API Gateway to invoke the Lambda function.
+
+Production security requires proper IAM permissions and access controls:
+
+```yaml
+      # IAM permissions with least-privilege access
       Policies:
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: !Ref RedisUrlSecret
@@ -1334,13 +1383,19 @@ Resources:
                 - logs:PutLogEvents
               Resource: '*'
     
-    # Container image metadata
+    # Container deployment configuration
     Metadata:
       DockerTag: latest
       DockerContext: ../
       Dockerfile: deployments/Dockerfile.lambda
+```
 
-  # API Gateway with production configuration
+**Security Best Practices:** The function only receives the minimum permissions required - secrets access for configuration and CloudWatch Logs for monitoring.
+
+The API Gateway configuration enables CORS and comprehensive logging:
+
+```yaml
+  # API Gateway with production settings
   MCPApi:
     Type: AWS::Serverless::Api
     Properties:
@@ -1349,22 +1404,28 @@ Resources:
         AllowMethods: "'GET,POST,OPTIONS'"
         AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
         AllowOrigin: "'*'"
-      # Enable comprehensive logging
+      # Production logging and metrics
       MethodSettings:
         - ResourcePath: "/*"
           HttpMethod: "*"
           LoggingLevel: INFO
           DataTraceEnabled: true
           MetricsEnabled: true
+```
 
-  # CloudWatch Log Group with retention
+**Production API Gateway:** Comprehensive logging and metrics collection provide visibility into API performance and usage patterns.
+
+Log management and secret storage complete the core infrastructure:
+
+```yaml
+  # Structured log management
   MCPServerLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub '/aws/lambda/mcp-server-${Stage}'
       RetentionInDays: 30
 
-  # Secret management for sensitive configuration
+  # Secure secret management
   RedisUrlSecret:
     Type: AWS::SecretsManager::Secret
     Properties:
@@ -1374,8 +1435,14 @@ Resources:
         {
           "url": "redis://your-redis-cluster.cache.amazonaws.com:6379"
         }
+```
 
-  # CloudWatch Alarms for production monitoring
+**Operational Considerations:** 30-day log retention balances debugging capability with cost management. Secrets Manager provides secure configuration storage.
+
+Production monitoring requires comprehensive alerting on key metrics:
+
+```yaml
+  # Production error rate monitoring
   HighErrorRateAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
@@ -1388,10 +1455,8 @@ Resources:
       EvaluationPeriods: 2
       Threshold: 10
       ComparisonOperator: GreaterThanThreshold
-      Dimensions:
-        - Name: FunctionName
-          Value: !Ref MCPServerFunction
 
+  # Response time monitoring
   HighLatencyAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
@@ -1404,11 +1469,14 @@ Resources:
       EvaluationPeriods: 2
       Threshold: 10000  # 10 seconds
       ComparisonOperator: GreaterThanThreshold
-      Dimensions:
-        - Name: FunctionName
-          Value: !Ref MCPServerFunction
+```
 
-# Stack outputs for integration with other systems
+**Alert Configuration:** The 5-minute evaluation periods with 2-period requirements prevent false alarms while ensuring rapid detection of real issues.
+
+Stack outputs enable integration with other AWS services and systems:
+
+```yaml
+# Integration outputs for other systems
 Outputs:
   MCPServerApi:
     Description: API Gateway endpoint URL for MCP Server
@@ -1422,6 +1490,8 @@ Outputs:
     Export:
       Name: !Sub '${AWS::StackName}-FunctionArn'
 ```
+
+**Infrastructure Integration:** Exported outputs allow other CloudFormation stacks to reference this MCP server, enabling complex multi-service architectures.
 
 ---
 
@@ -1535,36 +1605,57 @@ Here's how to implement health checks that provide actionable information:
         - Performance baseline establishment
         """
         start_time = time.time()
+```
 
+The health check begins by making an HTTP request with appropriate timeout settings:
+
+```python
         try:
-            # Health check with appropriate timeout
+            # Health check with production-appropriate timeout
             async with session.get(
                 f"{url}/health", 
                 timeout=aiohttp.ClientTimeout(total=10)
             ) as response:
                 
                 response_time = time.time() - start_time
-                
+```
+
+**Performance Monitoring:** We measure response time from the start of the request to handle both successful and failed responses. This timing data is crucial for detecting performance degradation.
+
+When the health endpoint responds successfully, we process the health data and update metrics:
+
+```python
                 if response.status == 200:
                     try:
                         health_data = await response.json()
                         
-                        # Success - Reset failure tracking
+                        # Success - Reset failure tracking for reliability
                         self.failure_counts[url] = 0
                         
-                        # Update all relevant metrics
+                        # Update all relevant Prometheus metrics
                         self.health_check_total.labels(server=url, status='success').inc()
                         self.server_availability.labels(server=url).set(1)
                         self.response_time.labels(server=url, method='health').observe(response_time)
                         self.consecutive_failures.labels(server=url).set(0)
-                        
+```
+
+**Metrics Strategy:** We update multiple metrics simultaneously - success counters, availability gauges, response time histograms, and failure reset counters. This comprehensive approach enables rich monitoring dashboards.
+
+For successful health checks, we return detailed status information:
+
+```python
                         return ServerHealthStatus(
                             url=url,
                             status='healthy',
                             response_time=response_time,
                             last_check=datetime.now(),
-                            details=health_data
+                            details=health_data  # Include server-provided health details
                         )
+```
+
+When health endpoints return malformed JSON, we detect and categorize this specific failure:
+
+```python
                     except json.JSONDecodeError:
                         return ServerHealthStatus(
                             url=url,
@@ -1573,8 +1664,15 @@ Here's how to implement health checks that provide actionable information:
                             last_check=datetime.now(),
                             error_message="Invalid JSON response from health endpoint"
                         )
+```
+
+**Error Categorization:** Different types of failures require different responses. A malformed JSON response indicates application-level issues, while HTTP errors suggest infrastructure problems.
+
+HTTP error responses trigger failure counting and metric updates:
+
+```python
                 else:
-                    # HTTP error status
+                    # HTTP error status - increment failure tracking
                     self.failure_counts[url] += 1
                     self.health_check_total.labels(server=url, status='error').inc()
                     self.server_availability.labels(server=url).set(0)
@@ -1587,7 +1685,11 @@ Here's how to implement health checks that provide actionable information:
                         last_check=datetime.now(),
                         error_message=f"HTTP {response.status} from health endpoint"
                     )
+```
 
+Timeout errors require special handling as they indicate connectivity or performance issues:
+
+```python
         except asyncio.TimeoutError:
             self.failure_counts[url] += 1
             self.health_check_total.labels(server=url, status='timeout').inc()
@@ -1601,7 +1703,13 @@ Here's how to implement health checks that provide actionable information:
                 last_check=datetime.now(),
                 error_message="Health check timeout - server not responding"
             )
-            
+```
+
+**Timeout Handling:** Even failed requests provide useful data - the timeout duration indicates how long the server took to fail, which helps diagnose whether it's completely down or just slow.
+
+All other connection errors are caught and categorized for comprehensive monitoring:
+
+```python
         except Exception as e:
             self.failure_counts[url] += 1
             self.health_check_total.labels(server=url, status='error').inc()
@@ -1617,7 +1725,11 @@ Here's how to implement health checks that provide actionable information:
             )
 ```
 
+**Comprehensive Error Handling:** The catch-all exception handler ensures that network failures, DNS resolution issues, and other connectivity problems are properly tracked and reported.
+
 ### Trend Analysis and Intelligent Alerting
+
+The trend analysis system processes health data to identify patterns and trigger alerts:
 
 ```python
     def analyze_health_trends(self) -> Dict[str, Any]:
@@ -1630,6 +1742,11 @@ Here's how to implement health checks that provide actionable information:
         - Alert condition detection
         - Capacity planning insights
         """
+```
+
+We initialize the analysis structure with counters for different server states:
+
+```python
         analysis = {
             "total_servers": len(self.server_urls),
             "healthy_servers": 0,
@@ -1641,7 +1758,13 @@ Here's how to implement health checks that provide actionable information:
         }
         
         response_times = []
-        
+```
+
+**Analysis Structure:** This dictionary provides a comprehensive view of system health that can be used for dashboards, alerts, and capacity planning decisions.
+
+Next, we iterate through all server statuses to categorize health states and collect performance data:
+
+```python
         for status in self.server_status.values():
             if status.status == 'healthy':
                 analysis["healthy_servers"] += 1
@@ -1651,8 +1774,14 @@ Here's how to implement health checks that provide actionable information:
                 analysis["unhealthy_servers"] += 1
             else:
                 analysis["error_servers"] += 1
-            
-            # Alert condition detection
+```
+
+**Performance Data Collection:** We only collect response times from healthy servers to avoid skewing performance metrics with timeout values from failed requests.
+
+The alert detection logic identifies servers that require immediate attention:
+
+```python
+            # Alert condition detection - servers needing attention
             if self.failure_counts.get(status.url, 0) >= 3:
                 analysis["servers_with_alerts"].append({
                     "url": status.url,
@@ -1660,7 +1789,13 @@ Here's how to implement health checks that provide actionable information:
                     "last_error": status.error_message,
                     "alert_severity": "high" if self.failure_counts[status.url] >= 5 else "medium"
                 })
-        
+```
+
+**Alert Severity Logic:** We use a simple but effective threshold system - 3+ failures trigger medium alerts, 5+ failures trigger high alerts. This prevents alert fatigue while ensuring critical issues are escalated.
+
+Finally, we calculate summary metrics that provide overall system health visibility:
+
+```python
         # Calculate health score and average response time
         if len(self.server_status) > 0:
             analysis["health_score"] = analysis["healthy_servers"] / len(self.server_status)
@@ -1671,7 +1806,11 @@ Here's how to implement health checks that provide actionable information:
         return analysis
 ```
 
+**Health Score Calculation:** The health score (0.0 to 1.0) provides a single metric for overall system health that can be used in SLA calculations and executive dashboards.
+
 ### Continuous Monitoring Loop
+
+The heart of the production monitoring system is a continuous loop that orchestrates all health checking activities:
 
 ```python
     async def monitor_loop(self):
@@ -1686,18 +1825,28 @@ Here's how to implement health checks that provide actionable information:
         5. Provides comprehensive status reporting
         """
         logger.info(f"Starting production monitoring for {len(self.server_urls)} MCP servers")
-        
+```
+
+The monitoring system uses a persistent HTTP session for efficiency and processes all servers concurrently:
+
+```python
         async with aiohttp.ClientSession() as session:
             while True:
                 try:
-                    # Concurrent health checking for efficiency
+                    # Concurrent health checking for maximum efficiency
                     health_statuses = await self.check_all_servers(session)
                     
-                    # Update system state
+                    # Update internal system state with latest results
                     for status in health_statuses:
                         self.server_status[status.url] = status
-                    
-                    # Log critical issues immediately
+```
+
+**Concurrency Strategy:** Using `aiohttp.ClientSession` with concurrent requests dramatically improves monitoring efficiency. Instead of checking servers sequentially, we can monitor dozens of servers simultaneously.
+
+Immediate health issue detection ensures critical problems are logged as they occur:
+
+```python
+                    # Immediate logging of critical health issues
                     unhealthy_servers = [s for s in health_statuses if s.status != 'healthy']
                     if unhealthy_servers:
                         for server in unhealthy_servers:
@@ -1708,11 +1857,17 @@ Here's how to implement health checks that provide actionable information:
                                 error=server.error_message,
                                 consecutive_failures=self.failure_counts[server.url]
                             )
-                    
-                    # Comprehensive trend analysis
+```
+
+**Immediate Issue Detection:** We don't wait for trend analysis to log problems. Critical issues are logged immediately with structured data that enables rapid debugging.
+
+Trend analysis and alert management provide higher-level system insights:
+
+```python
+                    # Comprehensive trend analysis and alerting
                     analysis = self.analyze_health_trends()
                     
-                    # Alert management
+                    # Alert management with escalation
                     if analysis["servers_with_alerts"]:
                         alert_count = len(analysis["servers_with_alerts"])
                         logger.error(f"PRODUCTION ALERT: {alert_count} servers require immediate attention")
@@ -1724,8 +1879,14 @@ Here's how to implement health checks that provide actionable information:
                                 failures=alert['consecutive_failures'],
                                 severity=alert['alert_severity']
                             )
-                    
-                    # Regular status summary
+```
+
+**Alert Escalation:** Production alerts are logged at ERROR level to ensure they trigger notification systems. Each alert includes severity levels to enable appropriate response prioritization.
+
+Regular status summaries provide operational visibility for normal conditions:
+
+```python
+                    # Regular operational status summary
                     healthy_count = analysis["healthy_servers"]
                     total_count = analysis["total_servers"]
                     health_score = analysis["health_score"] * 100
@@ -1736,13 +1897,25 @@ Here's how to implement health checks that provide actionable information:
                         health_score=f"{health_score:.1f}%",
                         avg_response_time=f"{analysis.get('average_response_time', 0):.3f}s"
                     )
-                    
+```
+
+**Operational Visibility:** Regular status summaries use INFO level logging to provide operational visibility without flooding alert channels. This data is perfect for dashboards and capacity planning.
+
+Robust error handling ensures the monitoring system itself doesn't become a point of failure:
+
+```python
                 except Exception as e:
                     logger.error(f"Monitoring loop error", error=str(e))
                 
-                # Wait for next monitoring cycle
+                # Configurable monitoring interval
                 await asyncio.sleep(self.check_interval)
+```
 
+**Monitoring System Resilience:** The monitoring system must never crash due to individual server failures. This catch-all exception handler ensures continuous operation even when unexpected errors occur.
+
+The monitoring system startup method coordinates all components:
+
+```python
     def start(self, metrics_port: int = 9092):
         """
         Start the Production Monitoring System
@@ -1750,18 +1923,22 @@ Here's how to implement health checks that provide actionable information:
         Initializes both the Prometheus metrics server and
         the continuous monitoring loop.
         """
-        # Start Prometheus metrics server
+        # Start Prometheus metrics server for external monitoring
         start_http_server(metrics_port)
         logger.info(f"Prometheus metrics server started", port=metrics_port)
         
-        # Begin continuous monitoring
+        # Begin continuous monitoring operation
         logger.info("Production monitoring system activated")
         asyncio.run(self.monitor_loop())
 ```
 
+**System Coordination:** The startup method ensures that metrics collection is available before beginning health checks, providing complete observability from the moment monitoring begins.
+
 ### Production-Grade Grafana Dashboard
 
-Here's a comprehensive Grafana dashboard configuration for production monitoring:
+Here's a comprehensive Grafana dashboard configuration for production monitoring. We'll build this dashboard panel by panel to understand each component.
+
+First, we establish the dashboard foundation with metadata and global settings:
 
 ```json
 {
@@ -1776,8 +1953,14 @@ Here's a comprehensive Grafana dashboard configuration for production monitoring
     "time": {
       "from": "now-1h",
       "to": "now"
-    },
-    
+    }
+```
+
+**Dashboard Foundation:** The 30-second refresh rate balances real-time visibility with system performance. The 1-hour time window provides sufficient context for troubleshooting.
+
+The System Health Score panel provides an at-a-glance view of overall system status:
+
+```json
     "panels": [
       {
         "id": 1,
@@ -1802,8 +1985,14 @@ Here's a comprehensive Grafana dashboard configuration for production monitoring
             }
           }
         }
-      },
-      
+      }
+```
+
+**Health Score Visualization:** Color thresholds provide immediate visual feedback - green above 99% availability, yellow for degraded performance, red for critical issues.
+
+The Request Rate panel tracks system throughput and load patterns:
+
+```json
       {
         "id": 2,
         "title": "Request Rate (RPS)",
@@ -1817,8 +2006,14 @@ Here's a comprehensive Grafana dashboard configuration for production monitoring
           "label": "Requests/Second",
           "min": 0
         }]
-      },
-      
+      }
+```
+
+**Throughput Monitoring:** The 5-minute rate calculation smooths out short-term spikes while preserving trend visibility. Per-server breakdown helps identify load distribution issues.
+
+Error rate analysis with integrated alerting ensures quality monitoring:
+
+```json
       {
         "id": 3,
         "title": "Error Rate Analysis",
@@ -1828,25 +2023,23 @@ Here's a comprehensive Grafana dashboard configuration for production monitoring
           "expr": "(sum(rate(mcp_errors_total[5m])) by (server) / sum(rate(mcp_requests_total[5m])) by (server)) * 100",
           "legendFormat": "{{server}} Error Rate %"
         }],
-        "yAxes": [{
-          "label": "Error Rate %",
-          "min": 0,
-          "max": 100
-        }],
         "alert": {
           "conditions": [{
             "query": {"queryType": "", "refId": "A"},
             "reducer": {"type": "avg", "params": []},
             "evaluator": {"params": [5.0], "type": "gt"}
           }],
-          "executionErrorState": "alerting",
-          "frequency": "30s",
-          "handler": 1,
           "name": "High Error Rate Alert - Production Critical",
-          "noDataState": "no_data"
+          "frequency": "30s"
         }
-      },
-      
+      }
+```
+
+**Error Rate Alerting:** The 5% error rate threshold triggers production-critical alerts. This metric is calculated as a percentage to provide intuitive visibility into service quality.
+
+Response time percentiles provide comprehensive performance visibility:
+
+```json
       {
         "id": 4,
         "title": "Response Time Percentiles",
@@ -1865,13 +2058,15 @@ Here's a comprehensive Grafana dashboard configuration for production monitoring
             "expr": "histogram_quantile(0.99, sum(rate(mcp_request_duration_seconds_bucket[5m])) by (le, server))",
             "legendFormat": "{{server}} - p99 (worst case)"
           }
-        ],
-        "yAxes": [{
-          "label": "Response Time (seconds)",
-          "min": 0
-        }]
-      },
-      
+        ]
+      }
+```
+
+**Performance Percentiles:** P50 shows typical performance, P95 shows performance under load, P99 identifies worst-case scenarios. This three-tier view enables comprehensive SLA monitoring.
+
+The server status table provides detailed operational information:
+
+```json
       {
         "id": 5,
         "title": "Server Status Table",
@@ -1889,16 +2084,6 @@ Here's a comprehensive Grafana dashboard configuration for production monitoring
         "transformations": [{
           "id": "merge",
           "options": {}
-        }, {
-          "id": "organize",
-          "options": {
-            "excludeByName": {"Time": true, "__name__": true},
-            "renameByName": {
-              "server": "Server URL", 
-              "Value #A": "Available", 
-              "Value #B": "Consecutive Failures"
-            }
-          }
         }]
       }
     ],
@@ -1916,6 +2101,10 @@ Here's a comprehensive Grafana dashboard configuration for production monitoring
   }
 }
 ```
+
+**Table Format Benefits:** The tabular view enables quick scanning of individual server status and provides detailed failure counts for troubleshooting specific issues.
+
+**Dynamic Server Selection:** The templating system automatically discovers available servers from Prometheus metrics, enabling dynamic dashboard scaling as your infrastructure grows.
 
 ---
 
