@@ -15,12 +15,12 @@ This isn't just another case study. By understanding the Coding Assistant's arch
 
 This isn't just another tutorial. By understanding the Coding Assistant's architecture, you'll see how:
 
-- **Real dependency injection** works at scale (like swapping data sources in production)
-- **Professional agents** handle data pipeline complexity beyond simple examples
-- **Production patterns** solve problems like schema drift, backfill orchestration, and data quality monitoring
-- **Modern tooling** (LiteLLM, MCP) makes bare metal development viable for data platforms
+- **Real dependency injection** works at scale (like swapping LLM providers in production)
+- **Professional agents** handle software engineering complexity beyond simple examples
+- **Production patterns** solve problems like context management, error recovery, and tool orchestration
+- **Modern tooling** (LiteLLM, MCP) makes bare metal development viable for software engineering tools
 
-You're not just learning theory - you're examining a system that handles the same orchestration challenges as your data pipelines.
+You're not just learning theory - you're examining a system that handles the same orchestration challenges as professional development environments.
 
 **Repository**: [github.com/msc94/coding_assistant](https://github.com/msc94/coding_assistant)
 
@@ -50,9 +50,9 @@ graph TD
     SRC --> UI[ui.py]
     SRC --> UTILS[Utilities]
     
-    style ROOT fill:#2196F3,color:#ffffff
-    style SRC fill:#4CAF50,color:#ffffff
-    style CONFIG fill:#FF9800,color:#ffffff
+    style ROOT fill:#1976D2,color:#ffffff
+    style SRC fill:#388E3C,color:#ffffff
+    style CONFIG fill:#F57C00,color:#000000
 ```
 
 ### Core Architecture Modules
@@ -82,10 +82,10 @@ graph TB
     TOOLS --> T1[mcp.py<br/>Tool protocol]
     TOOLS --> T2[tools.py<br/>Tool definitions]
     
-    style LLM fill:#4CAF50,color:#ffffff
-    style AGENTS fill:#FF9800,color:#ffffff
-    style TOOLS fill:#9C27B0,color:#ffffff
-    style ROOT fill:#2196F3,color:#ffffff
+    style LLM fill:#388E3C,color:#ffffff
+    style AGENTS fill:#F57C00,color:#000000
+    style TOOLS fill:#7B1FA2,color:#ffffff
+    style ROOT fill:#1976D2,color:#ffffff
 ```
 
 ### Detailed File Map: Where to Find Each Concept
@@ -185,9 +185,9 @@ graph TD
     LLM --> CL[Anthropic Claude]
     LLM --> LO[Local Models]
     
-    style O fill:#2196F3,color:#ffffff
-    style LLM fill:#9C27B0,color:#ffffff
-    style MCP fill:#4CAF50,color:#ffffff
+    style O fill:#1976D2,color:#ffffff
+    style LLM fill:#7B1FA2,color:#ffffff
+    style MCP fill:#388E3C,color:#ffffff
 ```
 
 This architecture solves the problems we identified in the main session:
@@ -353,10 +353,10 @@ graph TD
     T3 --> F3[Custom Interface 3]
     T4 --> F4[Custom Interface 4]
     
-    style F1 fill:#F44336,color:#ffffff
-    style F2 fill:#F44336,color:#ffffff
-    style F3 fill:#F44336,color:#ffffff
-    style F4 fill:#F44336,color:#ffffff
+    style F1 fill:#D32F2F,color:#ffffff
+    style F2 fill:#D32F2F,color:#ffffff
+    style F3 fill:#D32F2F,color:#ffffff
+    style F4 fill:#D32F2F,color:#ffffff
 ```
 
 **Problem**: Every tool has a different interface. Agents need custom code for each one.
@@ -370,11 +370,11 @@ graph TD
     MCP --> T3[Code Server] 
     MCP --> T4[DB Server]
     
-    style MCP fill:#4CAF50,color:#ffffff
-    style T1 fill:#9C27B0,color:#ffffff
-    style T2 fill:#9C27B0,color:#ffffff
-    style T3 fill:#9C27B0,color:#ffffff
-    style T4 fill:#9C27B0,color:#ffffff
+    style MCP fill:#388E3C,color:#ffffff
+    style T1 fill:#7B1FA2,color:#ffffff
+    style T2 fill:#7B1FA2,color:#ffffff
+    style T3 fill:#7B1FA2,color:#ffffff
+    style T4 fill:#7B1FA2,color:#ffffff
 ```
 
 **Solution**: All tools speak the same MCP protocol. Agents learn one interface, use any tool.
@@ -460,13 +460,13 @@ sequenceDiagram
 
 ## Part 4: Production Features - What Makes It Enterprise-Ready
 
-### The Data Engineering Reality Check
+### The Software Engineering Reality Check
 
-Our educational examples were great for learning, but real data systems need to handle the messiness of production. Data pipelines fail mid-transformation, upstream APIs change schemas without notice, and debugging mysterious data quality issues becomes crucial. The Coding Assistant addresses these through three core production features that transform it from a prototype into a reliable data platform tool.
+Our educational examples were great for learning, but real software systems need to handle the messiness of production. Applications crash mid-execution, APIs change without notice, and debugging mysterious performance issues becomes crucial. The Coding Assistant addresses these through three core production features that transform it from a prototype into a reliable development tool.
 
 ### State Management and Persistence
 
-Imagine you're orchestrating a complex data migration that takes 2 hours. Your laptop battery dies halfway through the ETL process. In our simple examples, you'd lose everything and restart the entire pipeline. The Coding Assistant solves this with sophisticated state management:
+Imagine you're working on a complex refactoring task that takes 2 hours. Your laptop battery dies halfway through the process. In our simple examples, you'd lose everything and restart the entire operation. The Coding Assistant solves this with sophisticated state management:
 
 ```mermaid
 graph TD
@@ -483,9 +483,9 @@ graph TD
     RESUME --> LOAD[Load from JSON]
     LOAD --> CONTINUE[Continue Where Left Off]
     
-    style SAVE fill:#4CAF50,color:#ffffff
-    style STORAGE fill:#FF9800,color:#ffffff
-    style CONTINUE fill:#2196F3,color:#ffffff
+    style SAVE fill:#388E3C,color:#ffffff
+    style STORAGE fill:#F57C00,color:#000000
+    style CONTINUE fill:#1976D2,color:#ffffff
 ```
 
 Here's the actual persistence implementation:
@@ -537,9 +537,9 @@ graph LR
     SPANS --> TOOL[Tool Execution Time]
     SPANS --> AGENT[Agent Reasoning Time]
     
-    style T fill:#4CAF50,color:#ffffff
-    style J fill:#9C27B0,color:#ffffff
-    style P fill:#FF9800,color:#ffffff
+    style T fill:#388E3C,color:#ffffff
+    style J fill:#7B1FA2,color:#ffffff
+    style P fill:#F57C00,color:#000000
 ```
 
 The tracing setup gives you unprecedented visibility:
@@ -589,9 +589,9 @@ graph TD
     NET --> WHITELIST[Whitelisted Endpoints]
     PROC --> TIMEOUT[Execution Timeouts]
     
-    style SANDBOX fill:#4CAF50,color:#ffffff
-    style CONFIRM fill:#FF9800,color:#ffffff
-    style REJECT fill:#F44336,color:#ffffff
+    style SANDBOX fill:#388E3C,color:#ffffff
+    style CONFIRM fill:#F57C00,color:#000000
+    style REJECT fill:#D32F2F,color:#ffffff
 ```
 
 The security implementation uses Linux's Landlock LSM:
@@ -619,7 +619,7 @@ def sandbox(allowed_dirs: list[Path]):
 4. **Process Limits**: Operations timeout if they run too long
 5. **Network Filtering**: Control which external services agents can access
 
-**Real-World Data Engineering Example**: If you ask the agent to "analyze all data pipeline files," it can only access your project directory, not your entire data lake. If you ask it to "connect to production database," it asks permission first.
+**Real-World Software Engineering Example**: If you ask the agent to "analyze all Python files," it can only access your project directory, not your entire filesystem. If you ask it to "install a new dependency," it asks permission first.
 
 ### Production vs. Learning: The Evolution
 
@@ -636,9 +636,9 @@ def sandbox(allowed_dirs: list[Path]):
 These aren't just nice-to-have features - they're what separates educational code from systems users trust with important work. When you're building agents for real use, ask:
 
 1. **What happens when the pipeline breaks?** (Observability and error handling)
-2. **What happens when the data engineer leaves mid-process?** (State persistence)
+2. **What happens when the developer leaves mid-process?** (State persistence)
 3. **What happens if it's misused with sensitive data?** (Security and sandboxing)
-4. **How do I know the data quality is maintained?** (Metrics and monitoring)
+4. **How do I know the system is working correctly?** (Metrics and monitoring)
 
 The Coding Assistant answers all these questions, showing how bare metal development can be both powerful and production-ready.
 
@@ -652,7 +652,7 @@ Our simple educational agents had a major flaw: once started, they ran until com
 
 ### Pattern 1: Interruptible Operations
 
-Imagine asking an agent to analyze a large data warehouse schema, then realizing you asked for the wrong database. In our simple examples, you'd wait for completion or kill the entire process. The Coding Assistant lets you gracefully interrupt and redirect:
+Imagine asking an agent to analyze a large codebase, then realizing you asked for the wrong directory. In our simple examples, you'd wait for completion or kill the entire process. The Coding Assistant lets you gracefully interrupt and redirect:
 
 ```mermaid
 graph TD
@@ -675,9 +675,9 @@ graph TD
     
     WAIT --> PAUSE
     
-    style INT fill:#FF9800,color:#ffffff
-    style PAUSE fill:#4CAF50,color:#ffffff
-    style ASK fill:#9C27B0,color:#ffffff
+    style INT fill:#F57C00,color:#000000
+    style PAUSE fill:#388E3C,color:#ffffff
+    style ASK fill:#7B1FA2,color:#ffffff
 ```
 
 The implementation uses Python's context manager pattern for safe interruption:
@@ -715,7 +715,7 @@ async with InterruptibleSection():
 - **Resource Management**: Don't waste compute on unwanted data scans  
 - **Better DX**: Data engineers feel in control, not trapped by their automation tools  
 
-**Connection to Our Session**: Remember how our simple agent just ran until done? This shows how production data agents must respect data engineer agency and provide escape hatches for long-running pipeline operations.
+**Connection to Our Session**: Remember how our simple agent just ran until done? This shows how production agents must respect developer agency and provide escape hatches for long-running operations.
 
 ### Pattern 2: Intelligent Conversation Shortening
 
@@ -742,9 +742,9 @@ graph TD
     REPLACE --> NEW[Shortened Conversation]
     NEW --> CONTINUE
     
-    style CHECK fill:#FF9800,color:#ffffff
-    style PRESERVE fill:#4CAF50,color:#ffffff
-    style SUMMARY fill:#9C27B0,color:#ffffff
+    style CHECK fill:#F57C00,color:#000000
+    style PRESERVE fill:#388E3C,color:#ffffff
+    style SUMMARY fill:#7B1FA2,color:#ffffff
 ```
 
 Here's how the system intelligently shortens conversations:
@@ -840,28 +840,28 @@ graph TD
     SUCCESS -->|Yes| CONTINUE[Continue Task]
     SUCCESS -->|No| ESCALATE[Escalate to User]
     
-    style ERROR fill:#F44336,color:#ffffff
-    style SUCCESS fill:#4CAF50,color:#ffffff
-    style ESCALATE fill:#FF9800,color:#ffffff
+    style ERROR fill:#D32F2F,color:#ffffff
+    style SUCCESS fill:#388E3C,color:#ffffff
+    style ESCALATE fill:#F57C00,color:#000000
 ```
 
 **Why These Patterns Matter for Data Engineering:**
 
-These aren't academic patterns - they solve real problems data engineers encounter when stakeholders rely on your systems for critical insights:
+These aren't academic patterns - they solve real problems software engineers encounter when teams rely on your tools for critical development work:
 
-1. **Interruptible Operations**: Data engineers need control, especially for long-running ETL jobs
+1. **Interruptible Operations**: Developers need control, especially for long-running operations
 2. **Context Management**: Pipeline logs and metadata grow beyond manageable limits
 3. **Error Recovery**: Data sources fail, APIs have outages, downstream consumers break
 
-**Connecting Back to Our Data Engineering Session:**
+**Connecting Back to Our Software Engineering Session:**
 
-Remember our discussion about production realities in data pipelines? These patterns address exactly those concerns:
+Remember our discussion about production realities in software development? These patterns address exactly those concerns:
 
-- **Scalability**: Context management handles growing data lineage and metadata
-- **Reliability**: Error recovery and interrupts handle real-world data pipeline failures
-- **Data Engineer Experience**: Interrupts and summaries respect the need for control in data operations
+- **Scalability**: Context management handles growing conversation history and complexity
+- **Reliability**: Error recovery and interrupts handle real-world software engineering failures
+- **Developer Experience**: Interrupts and summaries respect the need for control in development workflows
 
-The Coding Assistant shows how "bare metal" development can implement sophisticated operational patterns that rival commercial data platform tools.
+The Coding Assistant shows how "bare metal" development can implement sophisticated operational patterns that rival commercial development tools.
 
 ---
 
@@ -895,12 +895,12 @@ graph TD
     SCALE3 --> P3
     SCALE4 --> P4
     
-    style SIMPLE fill:#F44336,color:#ffffff
-    style PROD fill:#4CAF50,color:#ffffff
-    style SCALE1 fill:#FF9800,color:#ffffff
-    style SCALE2 fill:#FF9800,color:#ffffff
-    style SCALE3 fill:#FF9800,color:#ffffff
-    style SCALE4 fill:#FF9800,color:#ffffff
+    style SIMPLE fill:#D32F2F,color:#ffffff
+    style PROD fill:#388E3C,color:#ffffff
+    style SCALE1 fill:#F57C00,color:#000000
+    style SCALE2 fill:#F57C00,color:#000000
+    style SCALE3 fill:#F57C00,color:#000000
+    style SCALE4 fill:#F57C00,color:#000000
 ```
 
 ### The Dependency Injection Evolution
@@ -979,14 +979,14 @@ graph LR
     LOOSE --> SOLUTION2[Easy Testing]
     AUTO --> SOLUTION3[Plug & Play]
     
-    style OUR fill:#F44336,color:#ffffff
-    style MCP fill:#4CAF50,color:#ffffff
-    style PROBLEM1 fill:#FF9800,color:#ffffff
-    style PROBLEM2 fill:#FF9800,color:#ffffff
-    style PROBLEM3 fill:#FF9800,color:#ffffff
-    style SOLUTION1 fill:#4CAF50,color:#ffffff
-    style SOLUTION2 fill:#4CAF50,color:#ffffff
-    style SOLUTION3 fill:#4CAF50,color:#ffffff
+    style OUR fill:#D32F2F,color:#ffffff
+    style MCP fill:#388E3C,color:#ffffff
+    style PROBLEM1 fill:#F57C00,color:#000000
+    style PROBLEM2 fill:#F57C00,color:#000000
+    style PROBLEM3 fill:#F57C00,color:#000000
+    style SOLUTION1 fill:#388E3C,color:#ffffff
+    style SOLUTION2 fill:#388E3C,color:#ffffff
+    style SOLUTION3 fill:#388E3C,color:#ffffff
 ```
 
 **The MCP Evolution Solves:**
