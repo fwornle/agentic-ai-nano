@@ -3,23 +3,23 @@
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 1 core content first.
 
-## Modern Software Development Architecture
+## Data Engineering Development Architecture
 
-Every Fortune 500 engineering team has a secret weapon: AI coding assistants that have fundamentally transformed how software gets built. GitHub Copilot processes over 1 billion lines of code daily. Amazon's CodeWhisperer accelerates development across 500,000 engineers. But these systems aren't magical black boxes - they're sophisticated orchestrations of the exact patterns you've been learning, scaled to enterprise demands.
+Every major data platform - from Netflix's recommendation systems to Spotify's real-time analytics - relies on AI coding assistants to manage the complexity of modern data pipelines. These systems process terabytes daily, transforming raw data into actionable insights through sophisticated orchestrations of the exact agent patterns you've been learning.
 
-The **Coding Assistant** running in your workspace isn't a toy or demo - it's a production-grade implementation of bare metal agent architecture, handling real complexity with real reliability. While you've been learning patterns through examples, this system demonstrates how those patterns survive contact with production realities: memory constraints, network failures, security requirements, and users who expect instant responses even for complex multi-step operations.
+The **Coding Assistant** running in your workspace isn't a toy or demo - it's a production-grade implementation of bare metal agent architecture, handling the kind of complexity data engineers face daily: streaming data ingestion, schema evolution, pipeline failures, and stakeholders who expect real-time dashboards even when your Kafka clusters are struggling.
 
-This isn't just another case study. By understanding the Coding Assistant's architecture, you're reverse-engineering the blueprint that powers a new generation of AI-native companies. The same patterns that handle your code analysis requests are the foundation for systems that manage billion-dollar trading portfolios, optimize global supply chains, and coordinate autonomous vehicle fleets.
+This isn't just another case study. By understanding the Coding Assistant's architecture, you're reverse-engineering the blueprint that powers modern data platforms. The same patterns that handle your code analysis requests are the foundation for systems that process streaming events from millions of IoT devices, orchestrate complex ETL workflows across distributed clusters, and maintain data quality at petabyte scale.
 
 ## Why This Matters for Your Learning
 
 This isn't just another tutorial. By understanding the Coding Assistant's architecture, you'll see how:
-- **Real dependency injection** works at scale (Part 2.5 concepts in practice)
-- **Professional agents** handle complexity beyond simple examples
-- **Production patterns** solve problems you haven't encountered yet
-- **Modern tooling** (LiteLLM, MCP) makes bare metal development viable
+- **Real dependency injection** works at scale (like swapping data sources in production)
+- **Professional agents** handle data pipeline complexity beyond simple examples
+- **Production patterns** solve problems like schema drift, backfill orchestration, and data quality monitoring
+- **Modern tooling** (LiteLLM, MCP) makes bare metal development viable for data platforms
 
-You're not just learning theory - you're examining a system you already use.
+You're not just learning theory - you're examining a system that handles the same orchestration challenges as your data pipelines.
 
 **Repository**: [github.com/msc94/coding_assistant](https://github.com/msc94/coding_assistant)
 
@@ -450,13 +450,13 @@ sequenceDiagram
 
 ## Part 4: Production Features - What Makes It Enterprise-Ready
 
-### The Production Reality Check
+### The Data Engineering Reality Check
 
-Our educational examples were great for learning, but real systems need to handle the messiness of production. Users close laptops mid-conversation, networks fail during LLM calls, and debugging mysterious behaviors becomes crucial. The Coding Assistant addresses these through three core production features that transform it from a prototype into a reliable tool.
+Our educational examples were great for learning, but real data systems need to handle the messiness of production. Data pipelines fail mid-transformation, upstream APIs change schemas without notice, and debugging mysterious data quality issues becomes crucial. The Coding Assistant addresses these through three core production features that transform it from a prototype into a reliable data platform tool.
 
 ### State Management and Persistence
 
-Imagine you're working on a complex refactoring task that takes 30 minutes. Your laptop battery dies halfway through. In our simple examples, you'd lose everything and start over. The Coding Assistant solves this with sophisticated state management:
+Imagine you're orchestrating a complex data migration that takes 2 hours. Your laptop battery dies halfway through the ETL process. In our simple examples, you'd lose everything and restart the entire pipeline. The Coding Assistant solves this with sophisticated state management:
 
 ```mermaid
 graph TD
@@ -607,7 +607,7 @@ def sandbox(allowed_dirs: list[Path]):
 4. **Process Limits**: Operations timeout if they run too long
 5. **Network Filtering**: Control which external services agents can access
 
-**Real-World Example**: If you ask the agent to "analyze all Python files," it can only access your project directory, not your entire system. If you ask it to "download a library," it asks permission first.
+**Real-World Data Engineering Example**: If you ask the agent to "analyze all data pipeline files," it can only access your project directory, not your entire data lake. If you ask it to "connect to production database," it asks permission first.
 
 ### Production vs. Learning: The Evolution
 
@@ -623,10 +623,10 @@ def sandbox(allowed_dirs: list[Path]):
 
 These aren't just nice-to-have features - they're what separates educational code from systems users trust with important work. When you're building agents for real use, ask:
 
-1. **What happens when it breaks?** (Observability and error handling)
-2. **What happens when the user leaves?** (State persistence)
-3. **What happens if it's misused?** (Security and sandboxing)
-4. **How do I know it's working?** (Metrics and monitoring)
+1. **What happens when the pipeline breaks?** (Observability and error handling)
+2. **What happens when the data engineer leaves mid-process?** (State persistence)
+3. **What happens if it's misused with sensitive data?** (Security and sandboxing)
+4. **How do I know the data quality is maintained?** (Metrics and monitoring)
 
 The Coding Assistant answers all these questions, showing how bare metal development can be both powerful and production-ready.
 
@@ -640,7 +640,7 @@ Our simple educational agents had a major flaw: once started, they ran until com
 
 ### Pattern 1: Interruptible Operations
 
-Imagine asking an agent to analyze a large codebase, then realizing you asked for the wrong directory. In our simple examples, you'd wait for completion or kill the entire process. The Coding Assistant lets you gracefully interrupt and redirect:
+Imagine asking an agent to analyze a large data warehouse schema, then realizing you asked for the wrong database. In our simple examples, you'd wait for completion or kill the entire process. The Coding Assistant lets you gracefully interrupt and redirect:
 
 ```mermaid
 graph TD
@@ -698,11 +698,11 @@ async with InterruptibleSection():
 ```
 
 **Why This Matters:**  
-- **User Control**: Stop runaway operations without losing work  
-- **Resource Management**: Don't waste tokens on unwanted completions  
-- **Better UX**: Users feel in control, not trapped by their agents  
+- **Data Engineer Control**: Stop runaway operations without losing work  
+- **Resource Management**: Don't waste compute on unwanted data scans  
+- **Better DX**: Data engineers feel in control, not trapped by their automation tools  
 
-**Connection to Our Session**: Remember how our simple agent just ran until done? This shows how production agents must respect user agency and provide escape hatches.
+**Connection to Our Session**: Remember how our simple agent just ran until done? This shows how production data agents must respect data engineer agency and provide escape hatches for long-running pipeline operations.
 
 ### Pattern 2: Intelligent Conversation Shortening
 
@@ -829,22 +829,22 @@ graph TD
     style ESCALATE fill:#FF9800,color:#ffffff
 ```
 
-**Why These Patterns Matter:**
+**Why These Patterns Matter for Data Engineering:**
 
-These aren't academic patterns - they solve real problems you encounter when users rely on your agents for important work:
+These aren't academic patterns - they solve real problems data engineers encounter when stakeholders rely on your systems for critical insights:
 
-1. **Interruptible Operations**: Users need control, especially for long-running tasks
-2. **Context Management**: Conversations grow beyond LLM limits
-3. **Error Recovery**: Networks fail, APIs have outages, tools break
+1. **Interruptible Operations**: Data engineers need control, especially for long-running ETL jobs
+2. **Context Management**: Pipeline logs and metadata grow beyond manageable limits
+3. **Error Recovery**: Data sources fail, APIs have outages, downstream consumers break
 
-**Connecting Back to Our Session:**
+**Connecting Back to Our Data Engineering Session:**
 
-Remember our discussion about production realities in Part 2.5? These patterns address exactly those concerns:
-- **Scalability**: Context management handles growing conversations
-- **Reliability**: Error recovery and interrupts handle real-world failures
-- **User Experience**: Interrupts and summaries respect user agency
+Remember our discussion about production realities in data pipelines? These patterns address exactly those concerns:
+- **Scalability**: Context management handles growing data lineage and metadata
+- **Reliability**: Error recovery and interrupts handle real-world data pipeline failures
+- **Data Engineer Experience**: Interrupts and summaries respect the need for control in data operations
 
-The Coding Assistant shows how "bare metal" development can implement sophisticated UX patterns that rival commercial AI assistants.
+The Coding Assistant shows how "bare metal" development can implement sophisticated operational patterns that rival commercial data platform tools.
 
 ---
 
