@@ -1,30 +1,30 @@
-# Session 10: Enterprise Integration & Production Deployment - Welcome to the Big Leagues
+# Session 10: Production System Integration & Deployment - Welcome to the Big Leagues
 
-Your AI agent prototype just got acquired by Fortune 500. The demo that impressed investors now needs to integrate with SAP systems, handle 10,000 concurrent users, meet SOC 2 compliance, and run 24/7 without ever going down.
+Your AI agent prototype just got deployed to production data processing infrastructure. The proof-of-concept that processed sample datasets now needs to integrate with distributed data systems, handle petabyte-scale sensor streams, meet automotive compliance standards, and run 24/7 without ever going down.
 
-Welcome to enterprise reality - where "it works on my laptop" becomes "it powers critical business operations." This is where academic concepts meet boardroom accountability, where elegant code meets regulatory audits, and where your AI agent either becomes mission-critical infrastructure or an expensive lesson in enterprise failure.
+Welcome to production reality - where "it works on my laptop" becomes "it powers critical data processing operations." This is where academic concepts meet operational accountability, where elegant code meets compliance audits, and where your AI agent either becomes mission-critical infrastructure or an expensive lesson in production failure.
 
-The difference between a promising demo and enterprise success isn't just scale - it's architecture that thinks like a business.
+The difference between a promising demo and production success isn't just scale - it's architecture that thinks like a distributed system.
 
 ### Optional Deep Dive Modules
 
 - **[Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)** - GDPR, RBAC, encryption
-- **[Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)** - Auto-scaling, performance optimization
+- **[Module B: Production Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)** - Auto-scaling, performance optimization
 
 **Code Files**: All examples use files in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)  
-**Quick Start**: Run `cd src/session10 && python enterprise_architecture.py` to see enterprise integration
+**Quick Start**: Run `cd src/session10 && python production_architecture.py` to see production integration
 
 ---
 
-## Part 1: Enterprise Integration Fundamentals - Navigating the Corporate Labyrinth
+## Part 1: Production Integration Fundamentals - Navigating the Data Infrastructure
 
-### Understanding Enterprise Systems - Your Agent Meets The Matrix
+### Understanding Production Systems - Your Agent Meets The Data Infrastructure
 
-Picture the most complex machine ever built: not a spaceship or a particle accelerator, but a Fortune 500 company. Thousands of interconnected systems, decades of legacy code, mission-critical databases that can't go down for even a second, and security requirements that make Fort Knox look relaxed.
+Picture the most complex data processing machine ever built: not a spaceship or a particle accelerator, but a distributed automotive data infrastructure. Thousands of interconnected processing nodes, decades of sensor protocols, mission-critical databases that can't go down for even a second, and security requirements that protect sensitive vehicle data.
 
-Your AI agent isn't just joining this ecosystem - it's becoming part of the life support system that keeps billion-dollar operations running:
+Your AI agent isn't just joining this ecosystem - it's becoming part of the critical infrastructure that keeps automotive data processing pipelines running:
 
-**File**: [`src/session10/enterprise_architecture.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/enterprise_architecture.py) - Enterprise integration patterns
+**File**: [`src/session10/production_architecture.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/production_architecture.py) - Production integration patterns
 
 ```python
 from typing import Dict, Any, List, Protocol
@@ -36,7 +36,7 @@ import logging
 from datetime import datetime, timedelta
 
 class IntegrationPattern(Enum):
-    """Common enterprise integration patterns."""
+    """Common production integration patterns."""
     REQUEST_REPLY = "request_reply"
     PUBLISH_SUBSCRIBE = "publish_subscribe" 
     MESSAGE_QUEUE = "message_queue"
@@ -45,7 +45,7 @@ class IntegrationPattern(Enum):
 
 @dataclass
 class SystemConnection:
-    """Configuration for enterprise system connections."""
+    """Configuration for production system connections."""
     system_name: str
     endpoint: str
     auth_method: str
@@ -55,22 +55,22 @@ class SystemConnection:
     timeout_seconds: int = 30
     rate_limit: Optional[int] = None
 
-# Standard adapter interface for enterprise systems
+# Standard adapter interface for production systems
 
-class EnterpriseSystemAdapter(Protocol):
-    """Protocol for enterprise system adapters."""
+class ProductionSystemAdapter(Protocol):
+    """Protocol for production system adapters."""
     
     async def connect(self) -> bool:
-        """Establish connection to enterprise system."""
+        """Establish connection to production system."""
         ...
     
     async def authenticate(self, credentials: Dict[str, Any]) -> bool:
-        """Authenticate with enterprise system."""
+        """Authenticate with production system."""
         ...
     
     async def execute_operation(self, operation: str, 
                                params: Dict[str, Any]) -> Any:
-        """Execute operation on enterprise system."""
+        """Execute operation on production system."""
         ...
     
     async def health_check(self) -> bool:
@@ -78,24 +78,24 @@ class EnterpriseSystemAdapter(Protocol):
         ...
 ```
 
-### Enterprise Survival Skills
+### Production Survival Skills
 
-1. **Digital Diplomacy**: Navigate enterprise protocols like a seasoned ambassador
+1. **Protocol Management**: Navigate data stream protocols like a seasoned engineer
 2. **Bulletproof Connections**: Build systems that survive network storms and server crashes
 3. **Universal Translation**: Speak the language of every legacy system ever built
 4. **Corporate Vital Signs**: Monitor enterprise health like a digital doctor
 
-### ERP System Integration - Connecting to the Corporate Brain
+### Data System Integration - Connecting to the Processing Infrastructure
 
-SAP systems run 77% of the world's transactions. They control the financial lifeline of multinational corporations, track inventory worth billions, and manage the paychecks of millions of employees. When your AI agent connects to SAP, it's not just accessing data - it's plugging into the central nervous system of global commerce.
+Distributed data systems process 77% of the world's automotive sensor data. They control the data lifeline of autonomous vehicle fleets, track sensor readings worth millions of processing hours, and manage the data flows of thousands of vehicles. When your AI agent connects to these systems, it's not just accessing data - it's plugging into the central nervous system of automotive data processing.
 
-One mistake, one timeout, one authentication failure could impact business operations that measure success in minutes and losses in millions:
+One mistake, one timeout, one authentication failure could impact data processing operations that measure success in milliseconds and losses in processing capacity:
 
-**File**: [`src/session10/erp_integration.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/erp_integration.py) - SAP/ERP integration patterns
+**File**: [`src/session10/data_integration.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/data_integration.py) - Data system integration patterns
 
 ```python
-class SAPIntegrationAdapter:
-    """Adapter for SAP ERP system integration."""
+class DataSystemIntegrationAdapter:
+    """Adapter for distributed data system integration."""
     
     def __init__(self, base_url: str, credentials: Dict[str, Any]):
         self.base_url = base_url.rstrip('/')
