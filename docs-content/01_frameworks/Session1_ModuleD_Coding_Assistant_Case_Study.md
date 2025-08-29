@@ -52,7 +52,7 @@ graph TD
     
     style ROOT fill:#1976D2,color:#ffffff
     style SRC fill:#388E3C,color:#ffffff
-    style CONFIG fill:#F57C00,color:#000000
+    style CONFIG fill:#E65100,color:#ffffff
 ```
 
 ### Core Architecture Modules
@@ -83,7 +83,7 @@ graph TB
     TOOLS --> T2[tools.py<br/>Tool definitions]
     
     style LLM fill:#388E3C,color:#ffffff
-    style AGENTS fill:#F57C00,color:#000000
+    style AGENTS fill:#E65100,color:#ffffff
     style TOOLS fill:#7B1FA2,color:#ffffff
     style ROOT fill:#1976D2,color:#ffffff
 ```
@@ -484,7 +484,7 @@ graph TD
     LOAD --> CONTINUE[Continue Where Left Off]
     
     style SAVE fill:#388E3C,color:#ffffff
-    style STORAGE fill:#F57C00,color:#000000
+    style STORAGE fill:#E65100,color:#ffffff
     style CONTINUE fill:#1976D2,color:#ffffff
 ```
 
@@ -539,7 +539,7 @@ graph LR
     
     style T fill:#388E3C,color:#ffffff
     style J fill:#7B1FA2,color:#ffffff
-    style P fill:#F57C00,color:#000000
+    style P fill:#E65100,color:#ffffff
 ```
 
 The tracing setup gives you unprecedented visibility:
@@ -590,7 +590,7 @@ graph TD
     PROC --> TIMEOUT[Execution Timeouts]
     
     style SANDBOX fill:#388E3C,color:#ffffff
-    style CONFIRM fill:#F57C00,color:#000000
+    style CONFIRM fill:#E65100,color:#ffffff
     style REJECT fill:#D32F2F,color:#ffffff
 ```
 
@@ -675,7 +675,7 @@ graph TD
     
     WAIT --> PAUSE
     
-    style INT fill:#F57C00,color:#000000
+    style INT fill:#E65100,color:#ffffff
     style PAUSE fill:#388E3C,color:#ffffff
     style ASK fill:#7B1FA2,color:#ffffff
 ```
@@ -742,7 +742,7 @@ graph TD
     REPLACE --> NEW[Shortened Conversation]
     NEW --> CONTINUE
     
-    style CHECK fill:#F57C00,color:#000000
+    style CHECK fill:#E65100,color:#ffffff
     style PRESERVE fill:#388E3C,color:#ffffff
     style SUMMARY fill:#7B1FA2,color:#ffffff
 ```
@@ -842,7 +842,7 @@ graph TD
     
     style ERROR fill:#D32F2F,color:#ffffff
     style SUCCESS fill:#388E3C,color:#ffffff
-    style ESCALATE fill:#F57C00,color:#000000
+    style ESCALATE fill:#E65100,color:#ffffff
 ```
 
 **Why These Patterns Matter for Data Engineering:**
@@ -897,10 +897,10 @@ graph TD
     
     style SIMPLE fill:#D32F2F,color:#ffffff
     style PROD fill:#388E3C,color:#ffffff
-    style SCALE1 fill:#F57C00,color:#000000
-    style SCALE2 fill:#F57C00,color:#000000
-    style SCALE3 fill:#F57C00,color:#000000
-    style SCALE4 fill:#F57C00,color:#000000
+    style SCALE1 fill:#E65100,color:#ffffff
+    style SCALE2 fill:#E65100,color:#ffffff
+    style SCALE3 fill:#E65100,color:#ffffff
+    style SCALE4 fill:#E65100,color:#ffffff
 ```
 
 ### The Dependency Injection Evolution
@@ -981,9 +981,9 @@ graph LR
     
     style OUR fill:#D32F2F,color:#ffffff
     style MCP fill:#388E3C,color:#ffffff
-    style PROBLEM1 fill:#F57C00,color:#000000
-    style PROBLEM2 fill:#F57C00,color:#000000
-    style PROBLEM3 fill:#F57C00,color:#000000
+    style PROBLEM1 fill:#E65100,color:#ffffff
+    style PROBLEM2 fill:#E65100,color:#ffffff
+    style PROBLEM3 fill:#E65100,color:#ffffff
     style SOLUTION1 fill:#388E3C,color:#ffffff
     style SOLUTION2 fill:#388E3C,color:#ffffff
     style SOLUTION3 fill:#388E3C,color:#ffffff
