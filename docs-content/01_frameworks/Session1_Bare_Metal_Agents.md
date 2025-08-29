@@ -1,42 +1,42 @@
-# Session 1: Bare Metal Agents - The Foundation of All AI Intelligence
+# Session 1: Bare Metal Agents - Building from First Principles
 
-Picture this: You're working at a Fortune 500 company where every AI framework feels like a black box. When production systems fail, you can't see inside to debug them. When clients demand custom integrations with legacy mainframes, frameworks don't fit. When security auditors ask "How does this actually work?", you have no clear answer. This is the reality that drives the smartest teams to master bare metal agent implementation first.
+When processing terabytes of automotive test data across distributed cloud systems, you need complete control over agent behavior. Kubernetes orchestration requires precise resource management. Argo workflows demand deterministic execution patterns. Data pipeline reliability needs full transparency into every decision point. Compliance with GDPR and data protection laws requires auditable processing paths. This session teaches you to build AI agents from fundamental components - pure Python and direct LLM API calls - giving you the control needed for production data systems.
 
-Today, we're going back to fundamentals - building AI agents from pure Python and raw LLM APIs. By the end of this session, you'll possess the deep architectural knowledge that separates true AI engineers from framework users.
+Understanding bare metal implementation is essential for engineers who orchestrate complex data pipelines, manage cloud costs, ensure data compliance, and maintain high-throughput processing systems that handle millions of sensor recordings daily.
 
 ## Learning Outcomes
 
 By the end of this session, you will be able to:
 
-- **Implement** the core agent architecture patterns using only Python and LLM APIs
-- **Build** functional agents that demonstrate all five agentic patterns (Reflection, Tool Use, ReAct, Planning, Multi-Agent)
+- **Implement** core agent architectures using only Python and LLM APIs
+- **Build** functional agents demonstrating all five agentic patterns (Reflection, Tool Use, ReAct, Planning, Multi-Agent)
 - **Understand** the separation between model layer (LLM) and application layer (Python logic)
-- **Create** agents that integrate with existing enterprise APIs and legacy systems
-- **Debug** and customize agent behavior with complete transparency and control
+- **Create** agents that integrate with Kubernetes, Argo Workflows, and cloud data services
+- **Debug** and optimize agent behavior for cost-effective cloud processing
 
-## The Bare Metal Advantage: Why Building from Scratch Changes Everything
+## The Bare Metal Approach: Essential for Data Pipeline Control
 
-### Industry Context & Market Significance
+### Technical Context & Requirements
 
-While frameworks dominate headlines, enterprise teams increasingly need bare metal implementations for production control. IBM experts note that "most organizations aren't agent-ready" and require custom solutions that integrate with legacy APIs.
+Modern automotive data processing operates at massive scale. Consider a fleet validation system processing petabytes of sensor data: camera feeds, lidar point clouds, data stream recordings, all flowing through complex ML pipelines. Framework abstractions often hide critical details about resource consumption, API costs, and processing bottlenecks that directly impact your cloud budget and SLA compliance.
 
-Think of bare metal agents as the difference between driving an automatic car and understanding how the engine actually works. When the automatic transmission breaks down on a deserted highway, you need someone who knows what's happening under the hood.
+The bare metal approach provides the control needed for production data systems: predictable resource allocation in Kubernetes pods, transparent cost tracking for LLM API calls, and complete observability through Grafana dashboards - all essential for maintaining efficient data processing pipelines.
 
-### What You'll Learn & Why It Matters
+### Core Knowledge & Applications
 
-You'll master the core architecture patterns that power every agent framework, implement the five fundamental agentic patterns in pure Python, and understand the separation between model layers and application logic. This knowledge transforms you from a framework user into an AI systems architect - someone who can debug any framework issue, build custom enterprise solutions, and make informed architectural decisions for production systems.
+You'll master fundamental patterns that power intelligent data orchestration, understand how to implement them within cloud resource constraints, and learn to integrate with existing data infrastructure like Apache Kafka, PostgreSQL, S3, and Elasticsearch. This knowledge enables you to build agents that intelligently route data through processing pipelines, optimize batch sizes for cost efficiency, and automatically handle failures in distributed systems.
 
-### How Bare Metal Agents Stand Out
+### Architectural Separation
 
-Unlike frameworks that abstract implementation details, bare metal agents offer complete transparency and control. You'll see exactly how "model layer (LLM) → understand natural language and route intent" while "application layer (Python code) → execute tools, manage flow, send responses." 
+The separation between model and application layers becomes critical in data processing contexts. The model layer handles intelligent decision-making about data routing and processing strategies, while the application layer manages concrete execution through Kubernetes jobs, database transactions, and API integrations. This separation allows you to swap LLM providers based on cost/performance trade-offs without touching your pipeline logic.
 
-This separation is like understanding the division between hardware and software in computer architecture - it allows swapping tools, prompts, or models easily without framework constraints.
+### Real-World Data Processing Applications
 
-### Real-World Applications
-
-Companies use bare metal agents for enterprise API integration, legacy system connectivity, and custom security implementations. Financial firms build trading agents that integrate directly with proprietary systems. Healthcare companies create HIPAA-compliant agents with custom audit trails. Manufacturing companies build agents that communicate with decades-old machinery.
-
-You'll build agents that can integrate with any existing infrastructure while maintaining full control over data flow and processing logic.
+Engineering teams use bare metal agents for:
+- **Pipeline Orchestration**: Agents that dynamically route test data through appropriate ML models based on content analysis
+- **Quality Assurance**: Systems that detect anomalies in sensor data and trigger reprocessing workflows
+- **Cost Optimization**: Agents that analyze processing patterns and optimize resource allocation
+- **Compliance Monitoring**: Systems that ensure data handling meets GDPR and automotive standards
 
 ## Core Implementation: Building Intelligence from First Principles
 
@@ -44,791 +44,466 @@ You'll build agents that can integrate with any existing infrastructure while ma
 
 #### Basic Agent Structure
 
-Every agent needs these core components, just like every living organism needs basic life support systems:
+Every data processing agent requires these core components, designed for cloud-native deployment:
 
 ![Agent Pattern Control](images/agent-core-components.png)
 
 **File**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py)
 
-This is the foundation class for all agents - think of it as the DNA that defines what capabilities every agent should have. The memory list stores past interactions like a human's working memory, while the tools dictionary holds functions the agent can call like a craftsman's toolbox.
+This foundation class defines essential capabilities while respecting cloud resource limits. The memory management considers pod memory limits in Kubernetes, while the tool registry integrates with cloud services like S3, RDS, and message queues.
 
 ### Agent Architecture Foundation - BaseAgent Class
 
-The BaseAgent class serves as the architectural blueprint for all agent implementations, solving the fundamental challenge of how to make software behave intelligently. This design follows the separation of concerns principle, where each component has a specific responsibility - just like how your brain separates memory storage from decision-making from motor control:
+The BaseAgent class provides the architectural blueprint for data processing agents, addressing the challenge of intelligent orchestration within cloud infrastructure:
 
 ```python
 class BaseAgent:
-    """Foundation class for all agent implementations"""
-    def __init__(self, model_name="gpt-4"):
-        self.model_name = model_name      # LLM endpoint
-        self.memory = []                  # Conversation context
-        self.tools = {}                   # Available functions
+    """Foundation class for data pipeline agent implementations"""
+    def __init__(self, model_name="gpt-4", max_memory_mb=512):
+        self.model_name = model_name      # LLM endpoint configuration
+        self.memory = []                  # Processing context
+        self.tools = {}                   # Cloud service integrations
+        self.max_memory_mb = max_memory_mb  # Pod memory limit
+        self.metrics_client = self._init_metrics()  # Prometheus metrics
 ```
 
-**Memory System Design**: The memory list acts as a sliding window of recent interactions, enabling context-aware responses just like how humans maintain working memory during conversations. In production systems, this would implement sophisticated memory management with compression and relevance scoring to handle thousands of interactions efficiently.
+**Memory System Design**: The memory list maintains processing context within Kubernetes pod limits. In production, this includes caching strategies for frequently accessed metadata, recent processing decisions, and error patterns - similar to how a data engineer tracks pipeline state across multiple workflow runs.
 
-**Tool Registry Pattern**: The tools dictionary uses a registry pattern, allowing dynamic addition and removal of capabilities without modifying core agent logic. Each tool follows a standard interface contract - this is how agents can learn new skills at runtime without recompilation.
+**Tool Registry Pattern**: The tools dictionary registers integrations with cloud services - S3 for data storage, PostgreSQL for metadata, Kafka for event streaming, and Argo for workflow orchestration. Each tool includes retry logic and circuit breakers for resilient cloud operations.
 
-### Agent Execution Loop - The Heart of Agency
+### Agent Execution Loop - Cloud-Native Processing Pipeline
 
-This is where raw computational power becomes intelligent behavior - the four-step cycle that transforms input into meaningful action:
+The execution loop implements a robust processing pipeline suitable for distributed systems:
 
 ```python
-    def run(self, user_input: str) -> str:
-        """Main execution cycle: Input → Reasoning → Action → Response"""
-        processed_input = self.process_input(user_input)
-        action_plan = self.decide_action(processed_input)
-        result = self.execute_action(action_plan)
-        return self.format_response(result)
+    def run(self, input_data: dict, timeout_seconds: int = 30) -> dict:
+        """Processing cycle with cloud resource management"""
+        try:
+            # Track API costs and latency
+            with self.metrics_client.timer('agent_processing_time'):
+                processed_input = self.process_input(input_data)
+                action_plan = self.decide_action(processed_input)
+                result = self.execute_action(action_plan)
+                
+                # Track LLM API costs
+                self.metrics_client.increment('llm_api_calls', 
+                    tags=['model:' + self.model_name])
+                
+                return self.format_response(result)
+        except TimeoutError:
+            return self.handle_timeout(input_data)
 ```
 
-**Execution Flow Explanation**: This four-step process mirrors human decision-making - understand the request, plan the response, take action, and communicate results. It's the same pattern whether you're ordering coffee or solving complex engineering problems. Each step can be enhanced with logging, error handling, and performance monitoring for production deployments.
+**Execution Flow Explanation**: Each step includes comprehensive monitoring for cloud cost optimization. The metrics integration enables real-time tracking through Grafana dashboards, allowing teams to balance processing speed against API costs.
 
 ### Key Concepts
 
-Understanding these concepts is like understanding the fundamental forces in physics - they govern everything that follows:
+Understanding these concepts is essential for cloud-based data processing:
 
-1. **Model Interface**: How agents talk to LLMs  
-2. **Memory Management**: Keeping track of context  
-3. **Tool Registry**: Available actions the agent can take
+1. **Model Interface**: Managing LLM API calls with rate limiting and cost tracking
+2. **Memory Management**: Efficient caching within pod memory constraints
+3. **Tool Registry**: Integration points for cloud services and data stores
 
 #### Input/Output Handling
 
-### Input Processing Pipeline - Structured Data Transformation
+### Input Processing Pipeline - Multi-Format Data Handling
 
-Production agents require consistent data structures for reliable processing, just like how airports need standardized protocols to handle flights from different airlines safely:
+Data processing agents must handle diverse automotive data formats:
 
 ```python
-def process_input(self, user_input: str) -> dict:
-    """Transform user input into structured agent format"""
-    return {
-        "message": user_input,
-        "timestamp": datetime.now(),
-        "session_id": self.session_id
-    }
+    def process_input(self, data: Union[str, dict, bytes, pd.DataFrame]) -> dict:
+        """Standardize input from various data sources"""
+        if isinstance(data, bytes):  # Binary sensor data
+            return self.parse_rosbag_data(data)
+        elif isinstance(data, pd.DataFrame):  # Structured test results
+            return self.extract_dataframe_features(data)
+        elif isinstance(data, dict) and 'stream_protocol' in data:  # Data stream messages
+            return self.convert_stream_format(data)
+        else:  # Natural language queries from engineers
+            return {"type": "nl_query", "content": data}
 ```
 
-**Structured Input Benefits**: Converting strings to dictionaries enables metadata tracking, audit logging, and complex routing logic. It's like transforming raw voice into structured medical records - the same information becomes much more useful for systematic processing. Production systems expand this with user authentication, request validation, and security scanning.
+### Pattern Implementation - Resilient Cloud Processing
 
-### Response Formatting System - Consistent Output Interface
-
-This method ensures every agent response follows the same format, creating predictable interfaces that other systems can reliably process:
+Each pattern implementation considers distributed system challenges:
 
 ```python
-def format_output(self, agent_response: str) -> str:
-    """Standard response formatting for user display"""
-    return f"Agent: {agent_response}"
-```
-
-**Enterprise Output Considerations**: In production, response formatting handles multiple output channels (web, API, mobile), adds response metadata, implements content filtering, and formats structured data for downstream systems. Think of it as the agent's "public speaking" training - the same intelligence can be presented appropriately for different audiences.
-
-#### State Management
-
-### State Management Architecture - Agent Memory System
-
-The AgentState class implements a comprehensive memory system that enables contextual decision-making across conversation turns. This solves the challenge of how software can maintain coherent behavior over extended interactions:
-
-```python
-class AgentState:
-    """Comprehensive agent state management system"""
-    def __init__(self):
-        self.current_task = None          # Active task context
-        self.conversation_history = []    # Interaction timeline
-        self.available_tools = []         # Dynamic tool registry
-        self.confidence_level = 0.0       # Decision confidence
-```
-
-**State Design Patterns**: This structure follows the State pattern from software engineering, enabling different memory strategies (short-term, long-term, episodic) without changing core agent logic. It's like how humans can switch between focused attention and broader contextual awareness seamlessly.
-
-### Dynamic State Updates - Learning from Actions
-
-This is how agents build understanding over time - each interaction becomes part of the agent's growing knowledge about the current situation:
-
-```python
-    def update_state(self, action: str, result: str):
-        """Track actions and results for context building"""
-        self.conversation_history.append({
-            "action": action, "result": result,
-            "timestamp": datetime.now()
-        })
-```
-
-**Production State Considerations**: Enterprise systems extend this with state persistence, distributed memory, conflict resolution, and state compression for long-running conversations. It's the difference between remembering a single conversation and maintaining institutional knowledge across thousands of interactions.
-
----
-
-### Part 2: Building Your First Agent
-
-#### Simple Agent Implementation
-
-Now we move from theory to practice - building an agent that actually works and demonstrates these principles in action.
-
-### Building Your First Production-Ready Agent
-
-**File Reference**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py) - Complete SimpleAgent implementation
-
-### Agent Initialization - Memory Foundation
-
-The SimpleAgent demonstrates minimal viable architecture for production systems. Think of this as building the smallest possible house that still has all essential utilities - you can live in it while planning your mansion:
-
-```python
-class SimpleAgent:
-    """Minimal viable agent with memory persistence"""
-    def __init__(self):
-        self.memory = []  # Conversation state storage
-```
-
-**Architecture Decision**: This minimal design enables rapid prototyping while maintaining production upgrade paths. Every complex system started as a simple working version. Enterprise versions would add configuration management, logging, and health checks at initialization.
-
-### Core Reasoning Engine
-
-This is where the magic happens - connecting human language to AI intelligence through code that transforms requests into responses:
-
-```python
-import openai
-
-class SimpleAgent:
-    """Basic agent with LLM integration"""
-    
-    def __init__(self, api_key: str):
-        self.client = openai.OpenAI(api_key=api_key)
-        self.memory = []
-    
-    def think(self, input_text: str) -> str:
-        """Generate response using LLM"""
-        # Build conversation context
-        messages = [
-            {"role": "system", "content": "You are a helpful AI assistant"},
-            *self.memory,  # Include conversation history
-            {"role": "user", "content": input_text}
-        ]
+    def decide_action(self, input_data: dict) -> dict:
+        """Decision making with cost optimization"""
+        # Estimate processing cost
+        estimated_cost = self.estimate_processing_cost(input_data)
         
-        # LLM API call
-        response = self.client.chat.completions.create(
-            model="gpt-4",
-            messages=messages,
-            temperature=0.7
-        )
-        
-        # Extract and store the response
-        ai_response = response.choices[0].message.content
-        
-        # Update memory for context
-        self.memory.append({"role": "user", "content": input_text})
-        self.memory.append({"role": "assistant", "content": ai_response})
-        
-        return ai_response
-```
-
-**Memory Management Strategy**: Each interaction updates the conversation history, enabling context-aware responses in multi-turn conversations. This is like how therapists maintain session notes - each interaction builds on previous understanding. Enterprise implementations would add memory compression, relevance scoring, and persistence layers.
-
-### Agent Execution Interface - Public API Design
-
-The run method provides a clean public interface that abstracts internal complexity from users, solving the fundamental challenge of making complex systems simple to use:
-
-```python
-    def run(self, input_text: str) -> str:
-        """Public interface for agent interaction"""
-        return self.think(input_text)
-```
-
-**Interface Design Pattern**: This method acts as a facade, hiding implementation details while providing a stable API. It's like how car controls (steering wheel, pedals) stay consistent even as engines become more complex. Production systems would add input validation, error handling, rate limiting, and response caching at this layer.
-
-### Agent Testing and Validation
-
-Testing ensures our agent works correctly before deploying it in real situations where failures have consequences:
-
-```python
-
-# Production-ready testing pattern
-
-agent = SimpleAgent()
-response = agent.run("What is machine learning?")
-print(f"Agent Response: {response}")
-```
-
-**Testing Strategy**: This demonstrates basic functional testing - ensuring the agent can receive input and produce reasonable output. Enterprise testing would include unit tests, integration tests, performance benchmarks, and automated regression testing for different input types and edge cases.
-
-#### Basic Reasoning Loop
-
-Now we'll implement the core agent thinking process - the cycle that turns reactive responses into proactive problem-solving.
-
-### Advanced Reasoning Engine - ReAct Pattern Implementation
-
-**File Reference**: [`src/session1/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/react_agent.py) - Complete ReAct implementation
-
-The ReAct (Reasoning + Acting) pattern forms the backbone of modern agent systems, implementing an iterative cycle of thought, action, and observation that mirrors human problem-solving. This is how agents move beyond simple question-answering to actually solving complex, multi-step problems.
-
-### ReAct Loop Initialization - Bounded Reasoning Control
-
-This method implements controlled reasoning that prevents the common problem of agents getting stuck in infinite loops:
-
-```python
-def reasoning_loop(self, task: str) -> str:
-    """Production ReAct implementation with safety bounds"""
-    max_steps = 5  # Prevent infinite loops
-    
-    for step in range(max_steps):
-        # Generate contextual reasoning
-        thought = self.generate_thought(task, step)
-        print(f"Step {step + 1} - Thought: {thought}")
-```
-
-**Bounded Reasoning Strategy**: The max_steps parameter prevents infinite loops in production, a critical safety feature. It's like having circuit breakers in electrical systems - they prevent cascading failures. Enterprise systems would implement dynamic step limits based on task complexity, user permissions, and resource constraints.
-
-### Decision Logic and Termination Control
-
-This is where agents learn to recognize when they've solved a problem versus when they need to keep working:
-
-```python
-        # Intelligent termination check
-        if self.is_task_complete(thought):
-            return self.generate_final_answer(thought)
-            
-        # Action planning and execution
-        action = self.decide_action(thought)
-        print(f"Step {step + 1} - Action: {action}")
-```
-
-**Termination Strategy**: The completion check prevents unnecessary processing while ensuring task resolution. It's the difference between a novice who keeps working even after solving the problem and an expert who recognizes completion. Production systems would implement sophisticated completion detection using confidence scoring, goal achievement metrics, and resource optimization.
-
-Finally, the agent observes the results and updates its memory for the next iteration - creating a learning loop that improves performance over time:
-
-```python
-        # Observe: See results
-        observation = self.execute_action(action)
-        print(f"Step {step + 1} - Observation: {observation}")
-        
-        # Update state for next iteration
-        self.update_memory(thought, action, observation)
-    
-    return "Task completed after maximum steps"
-```
-
-#### Error Handling Patterns
-
-Real-world agents must handle failures gracefully - the difference between research demos and production systems.
-
-This wrapper method ensures agents handle errors gracefully, preventing crashes and providing user-friendly error messages when something goes wrong:
-
-```python
-def safe_agent_execution(self, user_input: str) -> str:
-    """Execute agent with proper error handling"""
-    try:
-        return self.run(user_input)
-    except Exception as e:
-        error_msg = f"Agent encountered an error: {e}"
-        self.memory.append(f"Error: {error_msg}")
-        return "I apologize, but I encountered an issue. Could you try rephrasing your request?"
-```
-
-#### Testing Your Agent
-
-**File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
-
-Testing validates that your agent behaves correctly across different scenarios - essential for building confidence before deployment:
-
-```python
-def test_simple_agent():
-    """Test basic agent functionality"""
-    agent = SimpleAgent()
-    
-    # Test question handling
-    response = agent.run("What is AI?")
-    assert "asking" in response.lower()
-    
-    # Test statement handling  
-    response = agent.run("I like programming")
-    assert "acknowledge" in response.lower()
-    
-    # Test memory
-    assert len(agent.memory) == 4  # 2 user inputs + 2 agent responses
-    
-    print("✅ All tests passed!")
-
-# Run the test
-
-test_simple_agent()
-```
-
----
-
-### Part 2.5: Understanding the Abstraction Pattern
-
-#### The Production Reality
-
-Imagine you've built your first agent with OpenAI's API hardcoded inside. Everything works great... until your startup grows and you need to:
-
-- **Test without burning cash**: Your CI/CD pipeline can't call GPT-4 on every commit
-- **Support multiple models**: Marketing wants Claude for creative tasks, engineering prefers GPT for code
-- **Handle regional requirements**: European users need EU-hosted models for compliance
-- **Scale costs intelligently**: Development can use cheaper models, production gets the premium ones
-
-Suddenly, your hardcoded `openai.OpenAI()` calls become a liability. You need abstraction.
-
-This scenario plays out at every growing tech company - what works for prototypes breaks at scale.
-
-#### The Abstraction Solution
-
-The solution is to treat your LLM like any other external service - database, payment processor, email provider. You create an interface that defines *what* the service does, then implement *how* different providers do it:
-
-```python
-from abc import ABC, abstractmethod
-
-class LLMClient(ABC):
-    """Abstract interface - defines WHAT an LLM service should do"""
-    
-    @abstractmethod
-    async def chat(self, prompt: str) -> str:
-        """Generate response from LLM - every provider must implement this"""
-        pass
-```
-
-Now you can create specific implementations for each provider. Notice how they all follow the same interface but handle the provider-specific details internally:
-
-```python
-class OpenAIClient(LLMClient):
-    """OpenAI implementation - handles OpenAI's specific API format"""
-    def __init__(self, api_key: str):
-        self.client = openai.OpenAI(api_key=api_key)
-    
-    async def chat(self, prompt: str) -> str:
-        # OpenAI uses "messages" format with roles
-        response = await self.client.chat.completions.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": prompt}]
-        )
-        return response.choices[0].message.content
-
-class AnthropicClient(LLMClient):
-    """Anthropic implementation - completely different API, same interface"""
-    def __init__(self, api_key: str):
-        self.client = anthropic.Anthropic(api_key=api_key)
-    
-    async def chat(self, prompt: str) -> str:
-        # Anthropic uses different API structure, but we hide that complexity
-        response = await self.client.messages.create(
-            model="claude-3-opus-20240229",
-            messages=[{"role": "user", "content": prompt}]
-        )
-        return response.content[0].text
-```
-
-#### Dependency Injection in Action
-
-Now your agent doesn't know or care which LLM it's using. It just knows "I have something that can generate text from prompts" - this flexibility is transformative for production systems:
-
-```python
-class FlexibleAgent:
-    """Agent that works with ANY LLM provider"""
-    
-    def __init__(self, llm_client: LLMClient):
-        self.llm = llm_client  # "Give me any LLM, I'll make it work"
-        self.memory = []
-    
-    async def process(self, input_text: str) -> str:
-        # Agent logic stays the same regardless of LLM provider
-        response = await self.llm.chat(input_text)
-        return response
-
-# Same agent code, different providers:
-marketing_agent = FlexibleAgent(AnthropicClient(api_key="..."))  # Claude for creativity
-dev_agent = FlexibleAgent(OpenAIClient(api_key="..."))          # GPT for coding
-test_agent = FlexibleAgent(MockLLMClient())                     # Mock for testing
-```
-
-The power is in the flexibility - you write your agent logic once, and it works with any LLM provider. This is how professional software scales.
-
-#### The Testing Story
-
-Here's where abstraction really pays off. You can create a mock LLM that gives predictable responses without any API calls:
-
-```python
-class MockLLMClient(LLMClient):
-    """Test double - no real LLM calls, predictable responses"""
-    
-    async def chat(self, prompt: str) -> str:
-        # Smart responses based on prompt content
-        if "calculate" in prompt.lower():
-            return "I'll help you calculate that. The result is 42."
-        elif "error" in prompt.lower():
-            raise Exception("Simulated error for testing")
+        if estimated_cost > self.cost_threshold:
+            # Use cheaper model for simple tasks
+            decision = self.llm_inference(input_data, model="gpt-3.5-turbo")
         else:
-            return "Mock response for testing purposes"
-```
-
-**When you'd use each approach:**
-
-**Mocks for Speed & Control:**
-
-- **Unit testing**: Test your agent logic without LLM costs or latency
-- **CI/CD pipelines**: Thousands of test runs can't all hit GPT-4
-- **Development**: Iterate on agent behavior without waiting for API responses
-- **Demos**: Predictable responses for presentations and documentation
-
-**Real LLMs for Accuracy:**
-
-- **Integration testing**: Verify your prompts actually work with real models
-- **Production**: Users need actual intelligence, not mock responses
-- **Performance testing**: Measure real-world response times and error rates
-- **Prompt engineering**: Optimize prompts against actual model behavior
-
-#### Environment-Based Configuration
-
-In practice, you'll want your agents to automatically choose the right LLM based on context:
-
-```python
-import os
-
-def create_agent():
-    """Smart agent creation based on environment"""
-    
-    if os.getenv("ENVIRONMENT") == "test":
-        # Testing: fast, predictable, no costs
-        llm = MockLLMClient()
-    elif os.getenv("ENVIRONMENT") == "development":  
-        # Development: cheaper models, faster iteration
-        llm = OpenAIClient(api_key=os.getenv("OPENAI_API_KEY"))
-        llm.model = "gpt-3.5-turbo"  # Cheaper than GPT-4
-    else:
-        # Production: best quality available
-        llm = OpenAIClient(api_key=os.getenv("OPENAI_API_KEY")) 
-        llm.model = "gpt-4"  # Premium model for users
-    
-    return FlexibleAgent(llm)
-```
-
-This pattern - interface abstraction with dependency injection - is how professional software handles external services. Your agents become testable, flexible, and maintainable instead of brittle and hardcoded.
-
----
-
-### Part 3: Tool Integration
-
-#### Simple Tool Creation
-
-Now we teach our agents how to take action in the world beyond generating text - the crucial step that transforms chatbots into useful systems.
-
-![Agent Pattern Tool Integration](images/agent-pattern-tool-integration.png)
-
-**File**: [`src/session1/tools.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tools.py) - Complete tool implementations
-
-This SimpleTool base class solves the fundamental challenge of how to make different capabilities available to agents in a consistent way:
-
-**⚠️ Security Warning**: The calculator example uses `eval()` which is dangerous! This implementation includes basic safety checks, but in production you should use a proper math expression parser like sympy or numexpr instead.
-
-```python
-class SimpleTool:
-    def __init__(self, name: str, description: str):
-        self.name = name
-        self.description = description
-    
-    def execute(self, input_data: str) -> str:
-        """Override this method in specific tools"""
-        raise NotImplementedError
-```
-
-This base class defines the interface that all tools must follow - just like how electrical appliances all use the same plug format. Each tool needs a name and description, plus an execute method.
-
-Now let's implement a specific calculator tool with safety checks:
-
-```python
-class CalculatorTool(SimpleTool):
-    def __init__(self):
-        super().__init__("calculator", "Performs basic math calculations")
-    
-    def execute(self, expression: str) -> str:
-        """Safely evaluate math expressions"""
-        try:
-            # Basic safety check
-            if any(char in expression for char in ['import', 'exec', 'eval', '__']):
-                return "Invalid expression for security reasons"
+            # Use advanced model for complex analysis
+            decision = self.llm_inference(input_data, model=self.model_name)
+        
+        # Validate against data processing rules
+        if not self.validate_compliance(decision):
+            decision = self.get_compliant_alternative()
             
-            result = eval(expression)
-            return f"Calculation result: {result}"
-        except Exception as e:
-            return f"Math error: {e}"
+        return decision
 ```
 
-Here's how to use the calculator tool:
+---
+
+## Part 2: The Five Fundamental Agentic Patterns
+
+### Agentic Patterns Overview
+
+These five patterns form the foundation of intelligent data processing:
+
+![Agentic Patterns](images/5-agent-patterns.png)
+
+1. **Reflection**: Self-monitoring for pipeline optimization
+2. **Tool Use**: Integration with cloud services and databases
+3. **Planning**: Workflow orchestration and resource allocation
+4. **ReAct**: Dynamic response to data anomalies
+5. **Multi-Agent**: Coordination across distributed processing nodes
+
+### Pattern 1: Reflection - Pipeline Performance Optimization
+
+#### Concept
+
+In data processing contexts, reflection enables agents to analyze their own performance and optimize pipeline efficiency:
 
 ```python
-
-# Usage example
-
-calc = CalculatorTool()
-result = calc.execute("2 + 3 * 4")
-print(result)  # "Calculation result: 14"
+class ReflectiveAgent(BaseAgent):
+    """Agent with self-monitoring for pipeline optimization"""
+    
+    def __init__(self, model_name="gpt-4"):
+        super().__init__(model_name)
+        self.performance_history = []
+        self.cost_tracker = CostTracker()
+        self.optimization_threshold = 0.8
 ```
 
-#### Tool Calling Mechanisms
+#### Implementation
 
-Now we solve the challenge of how agents decide when and how to use tools - the difference between having tools and knowing when to use them.
-
-**File**: [`src/session1/tool_use_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tool_use_agent.py) - See the `ToolUseAgent` class
+The reflection mechanism monitors processing efficiency and triggers optimizations:
 
 ```python
-class ToolUseAgent:
+    def reflect_on_performance(self, metrics: dict) -> dict:
+        """Analyze pipeline performance and suggest optimizations"""
+        reflection_prompt = f"""
+        Analyze this data processing performance:
+        - Throughput: {metrics['throughput_gb_per_hour']} GB/hour
+        - Cost: ${metrics['cost_per_gb']} per GB
+        - Error rate: {metrics['error_rate']}%
+        - Queue depth: {metrics['queue_depth']} jobs
+        
+        Identify bottlenecks and suggest optimizations for:
+        1. Resource allocation (CPU/memory)
+        2. Batch size configuration
+        3. Parallel processing strategy
+        """
+        
+        optimization = self.llm_call(reflection_prompt)
+        
+        # Apply learnings to future processing
+        self.update_processing_strategy(optimization)
+        
+        return optimization
+```
+
+### Pattern 2: Tool Use - Cloud Service Integration
+
+#### Concept
+
+Tool use in data processing means seamless integration with cloud infrastructure:
+
+```python
+class ToolUseAgent(BaseAgent):
+    """Agent with cloud service integration capabilities"""
+    
     def __init__(self):
-        self.tools = {}
-        self.memory = []
-        
-    def register_tool(self, tool: SimpleTool):
-        """Add a tool to the agent's toolkit"""
-        self.tools[tool.name] = tool
+        super().__init__()
+        self.register_cloud_tools()
 ```
 
-The ToolUseAgent starts with basic setup, maintaining a registry of available tools and conversation memory - like a craftsman organizing their workshop.
+#### Tool Registration
 
-Now let's add the decision logic for when to use tools:
+Register tools for common data operations:
 
 ```python
-    def should_use_tool(self, user_input: str) -> tuple[bool, str]:
-        """Decide if we need a tool for this input"""
-        # Simple keyword-based tool selection
-        if any(word in user_input.lower() for word in ['calculate', 'math', '+', '-', '*', '/']):
-            return True, 'calculator'
-        return False, None
+    def register_cloud_tools(self):
+        """Register cloud service interfaces"""
+        self.tools = {
+            "query_s3": self.query_s3_bucket,
+            "execute_sql": self.execute_postgres_query,
+            "trigger_argo": self.trigger_argo_workflow,
+            "publish_kafka": self.publish_to_kafka,
+            "search_elastic": self.search_elasticsearch,
+            "update_grafana": self.update_grafana_annotation
+        }
 ```
 
-Finally, the main execution method that ties everything together:
+### Pattern 3: Planning - Workflow Orchestration
+
+#### Concept
+
+Planning agents orchestrate complex data processing workflows:
 
 ```python
-    def run(self, user_input: str) -> str:
-        """Execute with tool usage"""
-        needs_tool, tool_name = self.should_use_tool(user_input)
+class PlanningAgent(BaseAgent):
+    """Agent for workflow orchestration"""
+    
+    def create_processing_plan(self, data_batch: dict) -> list:
+        """Generate optimal processing plan for data batch"""
+        planning_prompt = f"""
+        Create processing plan for:
+        - Data size: {data_batch['size_gb']} GB
+        - Data types: {data_batch['sensor_types']}
+        - Priority: {data_batch['priority']}
+        - SLA: {data_batch['sla_hours']} hours
         
-        if needs_tool and tool_name in self.tools:
-            # Extract the calculation from the input
-            # (In real implementation, use better parsing)
-            tool_result = self.tools[tool_name].execute(user_input)
-            return f"Using {tool_name}: {tool_result}"
+        Consider:
+        - Available Kubernetes nodes: {self.get_available_nodes()}
+        - Current queue depth: {self.get_queue_status()}
+        - Cost budget: ${data_batch['budget']}
+        
+        Generate step-by-step workflow with resource allocation.
+        """
+        
+        plan = self.llm_call(planning_prompt)
+        return self.validate_resource_availability(plan)
+```
+
+### Pattern 4: ReAct - Adaptive Data Processing
+
+#### Concept
+
+ReAct pattern for dynamic response to data processing challenges:
+
+```python
+class ReActAgent(BaseAgent):
+    """Agent implementing adaptive processing loop"""
+    
+    def process_with_reasoning(self, data_batch: dict, max_retries: int = 3):
+        """Process data with reasoning and adaptation"""
+        for attempt in range(max_retries):
+            thought = self.analyze_data_characteristics(data_batch)
+            action = self.determine_processing_strategy(thought)
+            observation = self.execute_processing(action)
+            
+            if self.processing_successful(observation):
+                break
+            
+            # Adapt strategy based on failure
+            data_batch = self.adjust_processing_params(observation)
+        
+        return self.get_processing_result()
+```
+
+### Pattern 5: Multi-Agent - Distributed Processing Coordination
+
+#### Concept
+
+Coordinate multiple specialized agents across the data pipeline:
+
+```python
+class DataPipelineCoordinator:
+    """Coordinator for distributed processing agents"""
+    
+    def __init__(self):
+        self.agents = {
+            "ingestion": DataIngestionAgent(),
+            "validation": QualityValidationAgent(),
+            "transformation": DataTransformationAgent(),
+            "ml_processing": MLProcessingAgent(),
+            "storage": StorageOptimizationAgent()
+        }
+```
+
+#### Coordination Protocol
+
+Implement coordination across distributed processing:
+
+```python
+    def orchestrate_pipeline(self, data_batch: dict) -> dict:
+        """Coordinate multi-agent data processing"""
+        # Ingestion agent handles data intake
+        ingested = self.agents["ingestion"].ingest_batch(data_batch)
+        
+        # Validation agent checks data quality
+        validated = self.agents["validation"].validate_quality(ingested)
+        
+        # Transformation agent prepares for ML
+        if validated["quality_score"] > 0.8:
+            transformed = self.agents["transformation"].transform(validated)
         else:
-            return f"I understand your request: {user_input}"
-```
-
-#### Basic Validation
-
-Agents need quality control systems to ensure tool outputs are useful and reliable:
-
-```python
-def validate_tool_output(self, tool_name: str, output: str) -> bool:
-    """Check if tool output looks reasonable"""
-    if "error" in output.lower():
-        return False
-    if output.strip() == "":
-        return False
-    return True
-```
-
-This validation method helps agents determine if a tool executed successfully. It's part of the agent's quality control system, checking for common failure indicators like error messages or empty responses.
-
-#### Integration Testing
-
-Testing agents with tools verifies that the complete system works together correctly:
-
-```python
-def test_tool_integration():
-    """Test agent + tool integration"""
-    agent = ToolUseAgent()
-    calc_tool = CalculatorTool()
-    agent.register_tool(calc_tool)
-    
-    # Test tool usage
-    response = agent.run("Calculate 15 + 27")
-    assert "42" in response
-    
-    # Test non-tool usage
-    response = agent.run("Hello there")
-    assert "understand" in response
-    
-    print("✅ Tool integration tests passed!")
-```
-
-This integration test verifies that agents and tools work together correctly, testing the complete flow from user input through tool execution to final response.
-
----
-
-### Part 4: Testing & Validation
-
-#### Unit Testing Approaches
-
-Testing is what separates hobby projects from production systems - it's how you build confidence that your agent will work correctly when it matters.
-
-**File**: [`src/session1/test_agents.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/test_agents.py) - Complete test suite
-
-```python
-import unittest
-
-class TestAgentFunctionality(unittest.TestCase):
-    def setUp(self):
-        """Set up test fixtures"""
-        self.agent = SimpleAgent()
-        self.tool_agent = ToolUseAgent()
-        self.tool_agent.register_tool(CalculatorTool())
-```
-
-The test class starts with setup, creating agent instances and registering tools for consistent testing. This ensures each test starts with a clean, known state.
-
-Now let's add the individual test methods:
-
-```python
-    def test_basic_responses(self):
-        """Test basic agent responses"""
-        response = self.agent.run("Hello")
-        self.assertIsInstance(response, str)
-        self.assertGreater(len(response), 0)
-    
-    def test_tool_integration(self):
-        """Test tool usage"""
-        response = self.tool_agent.run("What is 5 * 6?")
-        self.assertIn("30", response)
-```
-
-Finally, the test runner:
-
-```python
-
-# Run tests
-
-if __name__ == "__main__":
-    unittest.main()
-```
-
-#### Common Troubleshooting
-
-When agents don't work as expected, systematic debugging helps identify and fix issues quickly:
-
-```python
-def debug_agent_issues(agent, user_input):
-    """Helper function to debug agent problems"""
-    print(f"Input: {user_input}")
-    print(f"Memory state: {len(agent.memory)} items")
-    print(f"Available tools: {list(agent.tools.keys())}")
-    
-    try:
-        response = agent.run(user_input)
-        print(f"Response: {response}")
-    except Exception as e:
-        print(f"❌ Error: {e}")
-        print("Check input format and agent state")
-```
-
-#### Running Everything
-
-Let's bring everything together in a comprehensive demonstration that showcases all the agent capabilities we've built:
-
-**File**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py) - Complete demonstration
-
-```python
-def run_agent_demo():
-    """Demonstrate all agent capabilities"""
-    print("=== Bare Metal Agent Demo ===")
-    
-    # 1. Simple agent
-    simple_agent = SimpleAgent()
-    print("Simple Agent Response:", simple_agent.run("What is AI?"))
-```
-
-The demo starts by testing our basic SimpleAgent with a question to see how it responds.
-
-Next, we test tool integration capabilities:
-
-```python
-    # 2. Tool-enabled agent
-    tool_agent = ToolUseAgent()
-    tool_agent.register_tool(CalculatorTool())
-    print("Tool Agent Response:", tool_agent.run("Calculate 12 * 8"))
-```
-
-Finally, we demonstrate the advanced ReAct reasoning pattern:
-
-```python
-    # 3. ReAct agent
-    react_agent = ReActAgent()  # From react_agent.py
-    print("ReAct Agent working on complex task...")
-    response = react_agent.run("Plan a simple Python project")
-    print("ReAct Response:", response)
-
-if __name__ == "__main__":
-    run_agent_demo()
+            transformed = self.agents["transformation"].clean_and_transform(validated)
+        
+        # ML processing based on data type
+        processed = self.agents["ml_processing"].process(transformed)
+        
+        # Storage optimization
+        self.agents["storage"].store_optimized(processed)
+        
+        return processed
 ```
 
 ---
 
-## Core Section Validation
+## Part 3: Production Considerations
 
-### Quick Implementation Exercise
+### Cost Optimization for Cloud Deployment
 
-Test your understanding by running the complete implementations we've built:
+Agents must operate within cloud budget constraints:
 
-**Files to Run**: [`src/session1/demo_runner.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner.py)
-
-```bash
-cd src/session1
-python demo_runner.py
-python test_agents.py
+```python
+class CostOptimizedAgent(BaseAgent):
+    """Agent optimized for cloud cost management"""
+    
+    def __init__(self, monthly_budget: float = 10000):
+        super().__init__()
+        self.budget_tracker = BudgetTracker(monthly_budget)
+        self.cost_per_token = 0.00002  # GPT-4 pricing
 ```
 
-### Self-Assessment Checklist
+### Kubernetes Integration
 
-- [ ] I understand basic agent architecture (input/output, memory, tools)
-- [ ] I can implement a simple reasoning loop
-- [ ] I can create and integrate basic tools
-- [ ] I can test agent functionality
-- [ ] I'm ready to explore framework implementations
+Deploy agents as Kubernetes operators:
 
-**Next Session Prerequisites**: ✅ Core Section Complete
-**Ready for**: Session 2: LangChain Foundations (framework implementation)
+```python
+    def deploy_as_k8s_operator(self):
+        """Deploy agent as Kubernetes operator"""
+        return {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {"name": "data-agent"},
+            "spec": {
+                "replicas": 3,
+                "template": {
+                    "spec": {
+                        "containers": [{
+                            "name": "agent",
+                            "image": "data-agent:latest",
+                            "resources": {
+                                "requests": {"memory": "512Mi", "cpu": "500m"},
+                                "limits": {"memory": "1Gi", "cpu": "1000m"}
+                            }
+                        }]
+                    }
+                }
+            }
+        }
+```
+
+### Monitoring and Observability
+
+Implement comprehensive monitoring for production:
+
+```python
+    def setup_monitoring(self):
+        """Configure Prometheus metrics and Grafana dashboards"""
+        self.metrics = {
+            "processing_throughput": Gauge('data_throughput_gbps'),
+            "api_latency": Histogram('llm_api_latency_seconds'),
+            "error_rate": Counter('processing_errors_total'),
+            "cost_per_gb": Gauge('processing_cost_per_gb_dollars')
+        }
+```
+
+---
+
+## Practical Exercise: Building a Data Quality Agent
+
+Let's build a complete agent for automotive data quality assurance:
+
+```python
+class DataQualityAgent(BaseAgent):
+    """Production-ready agent for data quality monitoring"""
+    
+    def __init__(self):
+        super().__init__(model_name="gpt-4")
+        self.quality_rules = self.load_quality_rules()
+        self.anomaly_detector = AnomalyDetector()
+    
+    def analyze_data_batch(self, batch_metadata: dict) -> dict:
+        """Analyze data batch for quality issues"""
+        # Check completeness
+        completeness = self.check_data_completeness(batch_metadata)
+        
+        # Detect anomalies
+        anomalies = self.anomaly_detector.detect(batch_metadata)
+        
+        # Generate quality report using LLM
+        quality_prompt = self.build_quality_prompt(
+            batch_metadata, completeness, anomalies
+        )
+        
+        analysis = self.llm_call(quality_prompt)
+        
+        # Determine processing action
+        action = self.determine_quality_action(analysis)
+        
+        return {
+            "quality_score": self.calculate_quality_score(analysis),
+            "issues_found": self.extract_issues(analysis),
+            "recommended_action": action,
+            "reprocessing_required": action in ["clean", "reject"],
+            "cost_impact": self.estimate_reprocessing_cost(action)
+        }
+```
 
 ---
 
-## 📝 Multiple Choice Test - Session 1
+## Multiple Choice Test - Session 1
 
-Test your understanding of bare metal agent implementation and core patterns:
+Test your understanding of bare metal agents in cloud data processing:
 
-**Question 1:** What is the primary benefit of implementing agents from scratch before using frameworks?  
-A) Lower resource usage  
-B) Easier deployment  
-C) Better performance  
-D) Deeper understanding of agent mechanics  
+**Question 1:** Why is bare metal agent implementation critical for data pipeline systems?  
+A) It's required by Kubernetes  
+B) It provides full control over resource usage and API costs  
+C) It's easier to deploy  
+D) It uses less storage  
 
-**Question 2:** In the BaseAgent class, what is the purpose of the conversation_history attribute?  
-A) Maintaining context across interactions  
-B) Error tracking  
-C) Performance monitoring  
-D) Tool execution logs  
+**Question 2:** What is the primary purpose of the reflection pattern in data processing agents?  
+A) To generate better LLM responses  
+B) To analyze performance and optimize pipeline efficiency  
+C) To reduce memory usage  
+D) To improve security  
 
-**Question 3:** Which method must be implemented by all subclasses of BaseAgent?  
-A) get_available_tools()  
-B) process_message()  
-C) add_tool()  
-D) _generate_response()  
+**Question 3:** How do agents manage cloud processing costs?  
+A) By using only free services  
+B) Through model selection based on task complexity and budget tracking  
+C) By caching everything  
+D) Through compression only  
 
-**Question 4:** How does the Tool abstract base class ensure consistency across different tool implementations?  
-A) By handling errors automatically  
-B) By providing default implementations  
-C) By requiring execute() and _get_parameters() methods  
-D) By managing tool state  
+**Question 4:** What is the key consideration for memory management in Kubernetes-deployed agents?  
+A) Unlimited memory allocation  
+B) Respecting pod memory limits with efficient caching  
+C) Using only disk storage  
+D) Memory is not a concern  
 
-**Question 5:** What design pattern is demonstrated by the BaseAgent and its subclasses?  
-A) Strategy Pattern  
-B) Factory Pattern  
-C) Template Method Pattern  
-D) Observer Pattern  
+**Question 5:** Why is tool registration important for data processing agents?  
+A) It looks professional  
+B) To integrate with cloud services like S3, Kafka, and Argo  
+C) It's required by Python  
+D) To reduce code size  
 
-[**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
+## Solutions
 
-## 🧭 Navigation
-
-**Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
-
-### Optional Advanced Modules
-
-- **[Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)** - ⚠️ Advanced: Sophisticated reasoning loops & error recovery  
-- **[Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md)** - ⚠️ Advanced: Production-grade speed & efficiency patterns  
-- **[Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md)** - ⚠️ Advanced: Enterprise memory & persistence systems
-- **[Module D: Real-World Case Study - Coding Assistant](Session1_ModuleD_Coding_Assistant_Case_Study.md)** - 🎯 **Highly Recommended**: Deep dive into production bare metal agent used in this course!
-
-**Next:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md) →
+[Click here for solutions](Session1_Test_Solutions.md)
 
 ---
+
+## Optional Modules
+
+Advanced patterns for specialized data processing applications:
+
+- [Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md) - Hierarchical agents for complex pipelines
+- [Module B: Memory Optimization](Session1_ModuleB_Memory_Optimization.md) - Techniques for high-throughput processing
+- [Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md) - Managing state across distributed systems
+- [Module D: Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md) - Building ML pipeline development tools
+
+---
+
+## Navigation
+
+- [← Previous: Session 0 - Introduction to Agentic AI](Session0_Introduction_to_Agentic_AI.md)
+- [↑ Return to Framework Module Overview](index.md)
+- [→ Next: Session 2 - LangChain Agents](Session2_LangChain_Agents.md)

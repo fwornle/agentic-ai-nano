@@ -1,6 +1,6 @@
 # Session 7: ADK Enterprise Agent Development - Google's Production-Grade AI Platform
 
-When Google needed to build the AI foundation for their own enterprise products - Google Agentspace, Customer Engagement Suite, and the systems that serve millions of business users daily - they didn't use LangChain or CrewAI. They built ADK (Agent Development Kit), a production-first framework designed for enterprise scale, security, and reliability.
+When Google needed to build the AI foundation for their cloud data processing infrastructure - systems that handle massive datasets, coordinate distributed workloads, and manage petabyte-scale automotive sensor data flows - they didn't use LangChain or CrewAI. They built ADK (Agent Development Kit), a production-first framework designed for distributed scale, security, and reliability.
 
 Now you can build on the same foundation that powers Google's own agent infrastructure.
 
@@ -8,19 +8,19 @@ Now you can build on the same foundation that powers Google's own agent infrastr
 
 ### Industry Context & Market Significance
 
-Google's Agent Development Kit (ADK) emerged in August 2025 as the enterprise-grade foundation powering Google Agentspace and Customer Engagement Suite, establishing it as a critical production platform for enterprise AI agents. With Python ADK v1.0.0 reaching stable release status, the framework delivers production-ready capabilities for confidently deploying agents in live environments. Major enterprises including Renault Group, Box, and Revionics have adopted ADK, demonstrating its enterprise reliability and scalability.
+Google's Agent Development Kit (ADK) emerged in August 2025 as the cloud-native foundation powering Google's distributed data processing systems, establishing it as a critical production platform for large-scale AI agents. With Python ADK v1.0.0 reaching stable release status, the framework delivers production-ready capabilities for confidently deploying agents in live data processing environments. Major automotive data processing teams including those at Renault Group have adopted ADK, demonstrating its distributed system reliability and scalability.
 
 ### What You'll Learn & Why It Matters
 
-You'll master Google Cloud-native agent development, learn enterprise integration patterns with VPC Service Controls and IAM authentication, and understand the Model Context Protocol (MCP) for standardized data movement. Most importantly, you'll discover why ADK's bidirectional audio/video streaming and native Vertex AI deployment provide competitive advantages over framework-agnostic solutions, with direct pathways to enterprise-grade runtime and security.
+You'll master Google Cloud-native agent development, learn distributed system integration patterns with VPC Service Controls and IAM authentication, and understand the Model Context Protocol (MCP) for standardized data movement. Most importantly, you'll discover why ADK's bidirectional data streaming and native Vertex AI deployment provide performance advantages over framework-agnostic solutions, with direct pathways to production-grade runtime and security.
 
 ### How ADK Stands Out
 
-ADK's tight integration with Google Cloud provides unique capabilities including native Vertex AI deployment, VPC Service Controls for data security, and over 100 pre-built enterprise connectors. Unlike framework-agnostic solutions, ADK offers "build an AI agent in under 100 lines of intuitive code" while maintaining enterprise-grade controls including output moderation, identity permissions, input screening, and comprehensive behavior monitoring.
+ADK's tight integration with Google Cloud provides unique capabilities including native Vertex AI deployment, VPC Service Controls for data security, and over 100 pre-built data processing connectors. Unlike framework-agnostic solutions, ADK offers "build an AI agent in under 100 lines of intuitive code" while maintaining production-grade controls including output validation, access permissions, input filtering, and comprehensive behavior monitoring.
 
 ### Real-World Applications & Production Evidence
 
-ADK excels in enterprise environments requiring Google Cloud integration and advanced multimedia capabilities. The framework's bidirectional audio/video streaming enables natural interactions that move beyond text-based interfaces, while its support for 200+ models from providers like Anthropic, Meta, and Mistral AI ensures flexibility. Production deployments demonstrate ADK's effectiveness in customer engagement, workflow automation, and multi-system agent orchestration.
+ADK excels in cloud data processing environments requiring Google Cloud integration and advanced data stream capabilities. The framework's bidirectional data streaming enables efficient processing that moves beyond batch-only interfaces, while its support for 200+ models from providers like Anthropic, Meta, and Mistral AI ensures flexibility. Production deployments demonstrate ADK's effectiveness in data quality monitoring, workflow automation, and multi-system processing orchestration.
 
 ## Learning Navigation Hub
 
@@ -29,7 +29,7 @@ ADK excels in enterprise environments requiring Google Cloud integration and adv
 ### Learning Path Options
 - **👀 Observer (55 min)**: Enterprise architecture analysis with Google Cloud integration insights  
 - **🙋‍♂️ Participant (95 min)**: Hands-on ADK agent building with Vertex AI deployment
-- **🛠️ Implementer (135 min)**: Advanced enterprise systems with MCP orchestration
+- **🛠️ Implementer (135 min)**: Advanced distributed systems with MCP orchestration
 
 ---
 
@@ -46,10 +46,10 @@ ADK excels in enterprise environments requiring Google Cloud integration and adv
 
 ### Optional Advanced Modules
 
-**Advanced Content**: These modules contain enterprise production material and complex integration orchestration
+**Advanced Content**: These modules contain production material and complex integration orchestration
 
 - **[Module A: Advanced ADK Integration](Session7_ModuleA_Advanced_ADK_Integration.md)** (35 min) - Sophisticated Gemini integration & MCP orchestration
-- **[Module B: Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md)** (30 min) - Production deployment & enterprise monitoring
+- **[Module B: Distributed Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md)** (30 min) - Production deployment & distributed monitoring
 
 **Code Files**: All examples use files in [`src/session7/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session7)
 **Quick Start**: Run `cd src/session7 && python basic_agent.py` to see ADK in action
@@ -65,31 +65,31 @@ ADK excels in enterprise environments requiring Google Cloud integration and adv
 
 #### Enterprise ADK Foundation & Architecture (15 minutes)
 
-Google's Agent Development Kit represents a paradigm shift in enterprise AI development, providing the same foundation that powers Google Agentspace and Customer Engagement Suite. The framework's strategic advantage lies in its native Google Cloud integration and enterprise-grade security controls:
+Google's Agent Development Kit represents a paradigm shift in distributed AI processing, providing the same foundation that powers Google's distributed data processing infrastructure. The framework's strategic advantage lies in its native Google Cloud integration and production-grade security controls:
 
 ![ADK Architecture Overview](images/adk-architecture-overview.png)
-*This comprehensive architectural diagram illustrates Google's ADK framework structure, showing the integration layers between the agent development environment, Vertex AI services, VPC Service Controls, and enterprise security components. The ADK provides a direct pathway from development to enterprise-grade production deployment with built-in governance and compliance controls.*
+*This comprehensive architectural diagram illustrates Google's ADK framework structure, showing the integration layers between the agent development environment, Vertex AI services, VPC Service Controls, and production security components. The ADK provides a direct pathway from development to production-grade distributed deployment with built-in governance and compliance controls.*
 
 **File**: [`src/session7/basic_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session7/basic_agent.py) - ADK setup and initialization
 
 ### The ADK Enterprise Value Proposition
 
-ADK addresses critical enterprise needs that traditional agent frameworks struggle to provide. Unlike framework-agnostic solutions, ADK delivers native Google Cloud integration with enterprise-grade controls from the ground up:
+ADK addresses critical distributed processing needs that traditional agent frameworks struggle to provide. Unlike framework-agnostic solutions, ADK delivers native Google Cloud integration with production-grade controls from the ground up:
 
 ```python
 from google_adk import Agent, Tool, Memory
 from google_adk.models import VertexAI
 from google_adk.integrations import CloudStorage, BigQuery
 
-# Enterprise-grade agent setup
+# Production-grade agent setup
 
-class EnterpriseAgent:
+class DataProcessingAgent:
     def __init__(self, project_id: str):
         self.project_id = project_id
         
         # Initialize with Google Cloud integration
         self.agent = Agent(
-            name="enterprise_assistant",
+            name="data_processing_assistant",
             model=VertexAI(
                 model_name="gemini-pro",
                 project_id=project_id

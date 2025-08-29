@@ -2,7 +2,7 @@
 
 Remember when ChatGPT first launched and everyone thought AI was just about clever chatbots? That was like discovering fire and thinking it was only good for staying warm. The real revolution happened when engineers realized they could give AI the ability to think, use tools, plan complex operations, and even work in teams.
 
-Today's AI agents are closing million-dollar deals, debugging production systems at 3 AM, and orchestrating supply chains across continents. They're not just answering questions - they're taking actions that impact real business outcomes. And the difference between a simple chatbot and a production agent? It's these five fundamental patterns you're about to master.
+Today's AI agents are processing terabytes of sensor data, optimizing ML pipeline resource allocation, and coordinating distributed validation workflows across cloud regions. They're not just analyzing data - they're making operational decisions that maintain pipeline efficiency and data quality. The difference between a simple data query and a production agent? It's these five fundamental patterns you're about to master.
 
 Modern AI development has evolved from simple prompt-response interactions to sophisticated agent systems that can reason, use tools, and collaborate. This session covers the five core patterns that power every production agent system and compares the leading frameworks used to implement them.
 
@@ -18,7 +18,7 @@ The journey from simple prompt-response to sophisticated agent systems mirrors h
 
 ![Agent Evolution Overview](images/agent-evolution-overview.png)
 
-Think of traditional AI like a brilliant consultant locked in a room with no phone, no internet, and no ability to take action. They can give advice based on what they learned years ago, but that's it. Now imagine giving that consultant access to your entire company's systems, real-time data, and the ability to execute decisions. That's the leap from prompts to agents.
+Think of traditional AI like a data analyst locked in a room with no access to live data streams, Kubernetes metrics, or processing pipelines. They can analyze static datasets from years ago, but that's it. Now imagine giving that analyst access to your entire data infrastructure - S3 buckets, PostgreSQL databases, Kafka streams, and Grafana dashboards - with the ability to trigger processing workflows. That's the leap from prompts to agents.
 
 ```python
 
@@ -94,7 +94,7 @@ final = agent.revise(initial, critique)
 
 **Purpose**: Extending capabilities through external tools
 
-Imagine hiring the world's smartest analyst who has memorized every book ever written... but they finished reading in 2023 and can't access your company data. They're brilliant but useless for real-time decisions. The Tool Use pattern breaks this limitation.
+Imagine having the world's smartest data engineer who knows every processing technique ever developed... but they finished learning in 2023 and can't access your live data streams or pipeline metrics. They're brilliant but useless for real-time processing decisions. The Tool Use pattern breaks this limitation.
 
 LLMs have knowledge cutoffs and can't access your databases, files, or real-time data. The Tool Use pattern solves this by connecting models to external resources, transforming them from isolated text generators into systems that can fetch real data and perform actual operations.
 
@@ -105,7 +105,7 @@ LLMs have knowledge cutoffs and can't access your databases, files, or real-time
 - Vector databases for semantic search - finding relevant knowledge
 - APIs (Stripe, WolframAlpha, internal endpoints) - accessing live services
 - Code execution environments (REPL, sandboxes) - running actual computations
-- File systems and databases - reading real company data
+- Data lakes and processing databases - reading real sensor data streams
 - Web search and scraping tools - getting current information
 
 ```python
@@ -255,7 +255,7 @@ class PlanningAgent:
 - Embed planning in prompts ("First, break this task into steps...") - simple but effective
 - Let the model generate its own plans dynamically - more flexible
 - Store plans for persistence and resumability - production-ready
-- Use hierarchical planning for complex projects - enterprise scale
+- Use hierarchical planning for complex data processing workflows - distributed scale
 
 **Result:** Agents move from reactive to proactive, handling workflows and multi-step tasks with systematic precision - the difference between a todo list and a project plan.
 
@@ -378,7 +378,7 @@ Understanding which framework to choose is like selecting the right tool for con
 | **LangGraph** | ⭐⭐⭐⭐ | Complex state workflows | Advanced automation pipelines |
 | **CrewAI** | ⭐⭐⭐⭐ | Role-based multi-agent systems | Content creation, research automation |
 | **PydanticAI** | ⭐⭐⭐⭐⭐ | Type-safe, FastAPI-style development | Production APIs, structured outputs |
-| **Atomic Agents** | ⭐⭐⭐⭐ | Microservice architectures | Modular enterprise systems |
+| **Atomic Agents** | ⭐⭐⭐⭐ | Microservice architectures | Modular data processing systems |
 | **Google ADK** | ⭐⭐⭐⭐⭐ | Google Cloud native | Enterprise Google Workspace integration |
 | **Agno** | ⭐⭐⭐⭐ | Production monitoring focus | Deployed agent oversight |
 
@@ -390,7 +390,7 @@ Understanding which framework to choose is like selecting the right tool for con
 
 if use_case == "learning_prototyping":
     choose(LangChain, CrewAI)  # Fastest onboarding
-elif use_case == "enterprise_production":
+elif use_case == "distributed_production":
     choose(PydanticAI, Google_ADK)  # Type safety + monitoring
 elif use_case == "complex_workflows":
     choose(LangGraph)  # Advanced state management
@@ -405,7 +405,7 @@ The hidden realities that only emerge when you scale from demo to production:
 - **Hidden Costs**: LangChain's modularity can create configuration complexity in production - flexibility has a price
 - **Type Safety**: PydanticAI reduces runtime errors through schema validation - catch bugs at compile time
 - **Monitoring**: Agno and ADK provide built-in observability for production systems - visibility is critical
-- **Vendor Lock-in**: Consider framework dependencies before committing to enterprise deployment - exit strategies matter
+- **Vendor Lock-in**: Consider framework dependencies before committing to production deployment - migration strategies matter
 
 ---
 

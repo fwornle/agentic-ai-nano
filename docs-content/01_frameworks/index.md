@@ -1,6 +1,6 @@
 # Agent Frameworks Module
 
-Welcome to the **Agent Frameworks** module of the Agentic AI Nano-Degree! This comprehensive 10-session journey takes you from basic agent concepts to production-ready enterprise implementations.
+Welcome to the **Agent Frameworks** module of the Agentic AI Nano-Degree! This comprehensive 10-session journey takes you from basic agent concepts to production-ready distributed system implementations.
 
 ## Module Overview
 
@@ -94,7 +94,7 @@ Explore cutting-edge agent development tools and production systems.
 
 ### Advanced Patterns (Sessions 9-10)
 
-Master complex multi-agent systems and enterprise integration.
+Master complex multi-agent systems and production system integration.
 
 ### Session 9: Multi-Agent Patterns
 
@@ -217,7 +217,7 @@ By completing this module, you will be able to:
 
 - Deploy agents to production environments with proper monitoring
 - Implement security, scaling, and reliability patterns
-- Integrate agents into existing enterprise systems
+- Integrate agents into existing production systems
 
 ### Advanced Patterns
 
@@ -225,11 +225,11 @@ By completing this module, you will be able to:
 - Create sophisticated workflows with conditional logic and parallel execution
 - Build type-safe, maintainable agent architectures
 
-### Enterprise Integration
+### Production Integration
 
 - Understand compliance and security requirements
 - Implement proper monitoring and observability
-- Design scalable agent architectures for enterprise use
+- Design scalable agent architectures for distributed systems
 
 ## 🔗 Quick Navigation
 
