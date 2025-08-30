@@ -1,0 +1,16 @@
+{
+  "summary": {
+    "total_files": 1,
+    "successful_files": 0,
+    "total_formatting_fixes": 0
+  },
+  "files": [
+    {
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session10_ModuleA_Advanced_Security_Compliance.md",
+      "iterations": 1,
+      "large_blocks_eliminated": 0,
+      "formatting_issues_fixed": 0,
+      "success": false
+    }
+  ]
+}

@@ -194,29 +194,31 @@ Your refactoring achieves its goal when:
 
 ## MANDATORY Quality Verification Process
 
-**Before declaring success, you MUST:**
+**CRITICAL: Use iterative refactoring cycle to prevent orphaned ``` markers:**
 
-1. **Run the comprehensive analysis script** to verify ALL issues are resolved:
+1. **Run the iterative refactoring cycle** which handles formatting issues automatically:
+   ```bash
+   python3 /Users/q284340/Agentic/nano-degree/scripts/iterative-refactoring-cycle.py [target_files]
+   ```
+
+2. **For each file, follow the iterative process:**
+   - Detect orphaned ``` markers (closing blocks followed by regular text)
+   - Fix formatting issues automatically
+   - Verify large code blocks are broken down
+   - Repeat until 100% compliant
+
+3. **Final comprehensive verification** after iterative cycle completes:
    ```bash
    python3 /Users/q284340/Agentic/nano-degree/scripts/comprehensive-course-analysis.py [target_files]
    ```
 
-2. **Fix any markdown formatting issues** found:
-   ```bash  
-   python3 /Users/q284340/Agentic/nano-degree/scripts/check-markdown-formatting.py [files] --fix
-   ```
+**COMMON MISTAKE TO AVOID:** Never add ``` markers before regular explanatory text. Only use ``` to close actual code blocks that will be followed by more code.
 
-3. **Verify no large code blocks remain** using the detector:
-   ```bash
-   python3 /Users/q284340/Agentic/nano-degree/scripts/detect-large-code-blocks.py [files]
-   ```
+**Pattern Recognition:**
+- ❌ WRONG: ```python\ncode here\n```\nThis explanation text...
+- ✅ CORRECT: ```python\ncode here\n```\n\nThis explanation text...
 
-4. **Check explanation quality** for insufficient explanations:
-   ```bash
-   python3 /Users/q284340/Agentic/nano-degree/scripts/detect-insufficient-explanations.py [files]
-   ```
-
-**NEVER report success without running these verification scripts and achieving 100% compliance.**
+**NEVER report success without running the iterative verification cycle and achieving 100% compliance.**
 
 ## Remember Your Core Mission
 
