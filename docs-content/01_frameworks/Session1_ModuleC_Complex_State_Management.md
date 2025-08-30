@@ -88,7 +88,11 @@ The memory storage system combines semantic embeddings with operational metadata
         """Initialize SQLite database with data processing schema"""
         conn = sqlite3.connect(self.memory_db_path)
         cursor = conn.cursor()
-        
+```
+
+The initialization method establishes a database connection using SQLite, which provides ACID transactions and efficient querying for memory management without requiring external dependencies.
+
+```python
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS data_processing_memories (
                 id TEXT PRIMARY KEY,
@@ -100,6 +104,11 @@ The memory storage system combines semantic embeddings with operational metadata
                 access_count INTEGER DEFAULT 0,
                 last_accessed REAL,
                 related_memories TEXT,
+```
+
+The core schema establishes essential fields for memory management: unique identifiers, content storage, temporal tracking, and priority systems. The embedding field stores vector representations for semantic search capabilities.
+
+```python
                 cluster_state TEXT,  -- K8s cluster at time of memory
                 pipeline_context TEXT,  -- Active pipelines when memory was created
                 cost_attribution TEXT,  -- Project/team for cost tracking
@@ -164,7 +173,11 @@ Advanced memory systems track data lineage to support governance and debugging:
         
         # Generate semantic embedding for data processing context
         embedding = self.embedder.encode(content)
-        
+```
+
+The memory storage process begins by generating a unique identifier using timestamp-based naming and creating a semantic embedding. This embedding enables similarity search and context-aware memory retrieval for data processing operations.
+
+```python
         # Create memory with data lineage
         memory = DataProcessingMemory(
             id=memory_id,
@@ -175,7 +188,11 @@ Advanced memory systems track data lineage to support governance and debugging:
             data_lineage_refs=upstream_data or [],
             context_tags=self._extract_data_context_tags(content)
         )
-        
+```
+
+The DataProcessingMemory object encapsulates all memory attributes including lineage references that track data flow relationships. Context tags are automatically extracted to enable efficient filtering and categorization of data processing memories.
+
+```python
         # Update data lineage graph
         if upstream_data:
             for upstream in upstream_data:
@@ -262,14 +279,22 @@ Cloud data systems must handle state migration across software updates and schem
             ("2.0.0", "2.1.0"): self._migrate_add_multi_region_data_processing,
             ("2.1.0", "2.2.0"): self._migrate_add_streaming_state_management
         }
-        
+```
+
+The migration system uses a lookup table to map version pairs to specific migration functions. This pattern enables systematic state upgrades across deployment cycles, ensuring data processing agents can handle schema evolution gracefully without losing historical context.
+
+```python
         migration_func = migration_map.get((old_version, new_version))
         if migration_func:
             self.state = migration_func(self.state)
             self.state["schema_version"] = new_version
             self.state["migration_timestamp"] = datetime.now().isoformat()
             self.dirty = True
-            
+```
+
+When a migration path exists, the system applies the transformation function and updates metadata to track the migration event. The `dirty` flag ensures the migrated state will be persisted during the next save cycle.
+
+```python
     def _migrate_add_data_lineage_tracking(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """Add data lineage tracking to existing state"""
         state["data_lineage"] = {
@@ -279,13 +304,22 @@ Cloud data systems must handle state migration across software updates and schem
             "data_quality_metrics": {}
         }
         return state
-            
+```
+
+The lineage tracking migration adds comprehensive data flow structures to the state. This enables data processing agents to understand how data moves through pipeline stages and track quality metrics across transformations.
+
+```python
     def _backup_data_processing_state_to_s3(self):
         """Backup data processing state to S3 for disaster recovery"""
         if self.s3_client and self.dirty:
             # Create partitioned backup for large data processing states
             if self.state_partitioning:
                 self._backup_partitioned_state()
+```
+
+The backup system checks for available S3 connectivity and dirty state flags before initiating backup operations. For large data processing states, partitioning strategies distribute the backup across multiple S3 objects to optimize storage and retrieval performance.
+
+```python
             else:
                 backup_key = f"data-agent-state/{datetime.utcnow().isoformat()}.json"
                 self.s3_client.put_object(
@@ -501,7 +535,11 @@ The tenant system ensures fair resource allocation while maintaining system stab
         
         if allocated + quota_mb > available:
             raise ResourceError(f"Cannot allocate {quota_mb}MB for data processing tenant {tenant_id}")
-        
+```
+
+Tenant allocation begins by calculating available memory after reserving space for global priorities and compliance requirements. This ensures that high-priority data processing operations and regulatory compliance data retention always have guaranteed resources.
+
+```python
         self.tenant_quotas[tenant_id] = quota_mb
         self.tenant_usage[tenant_id] = 0
         self.tenant_data_contexts[tenant_id] = {
@@ -511,7 +549,11 @@ The tenant system ensures fair resource allocation while maintaining system stab
             "data_lineage_entries": [],
             "quality_metrics": {}
         }
-        
+```
+
+Once allocation succeeds, the system initializes tenant-specific tracking structures. The data context includes retention policies, compliance classifications, and containers for processing history and quality metrics - essential for data governance in multi-tenant data processing environments.
+
+```python
     def store_tenant_data_processing_memory(self, tenant_id: str, 
                                           memory: DataProcessingMemory,
                                           data_classification: str = "internal"):
@@ -519,13 +561,21 @@ The tenant system ensures fair resource allocation while maintaining system stab
         estimated_size = self._estimate_data_processing_memory_size(memory)
         current_usage = self.tenant_usage.get(tenant_id, 0)
         quota = self.tenant_quotas.get(tenant_id, 0)
-        
+```
+
+Memory storage starts with size estimation and quota validation. This upfront check prevents memory allocation failures that could disrupt data processing pipelines, while providing predictable resource management for multi-tenant data environments.
+
+```python
         # Apply data classification policies
         if data_classification == "sensitive":
             memory.ttl_seconds = min(memory.ttl_seconds or 7776000, 7776000)  # Max 90 days for sensitive data
         elif data_classification == "public":
             memory.ttl_seconds = memory.ttl_seconds or 31536000  # 1 year default for public data
-        
+```
+
+Data classification policies automatically enforce retention limits based on sensitivity levels. Sensitive data is capped at 90 days to meet compliance requirements, while public data defaults to longer retention for analytics purposes.
+
+```python
         if current_usage + estimated_size > quota:
             # Apply tenant-specific data processing memory pruning
             self._prune_tenant_data_processing_memory(tenant_id, estimated_size)
@@ -533,7 +583,11 @@ The tenant system ensures fair resource allocation while maintaining system stab
         # Store with data governance metadata
         self._store_data_processing_memory_with_governance(tenant_id, memory, data_classification)
         self.tenant_usage[tenant_id] += estimated_size
-        
+```
+
+When quota limits are exceeded, tenant-specific pruning removes lower-priority memories to make space. The governance-aware storage process includes metadata tracking for audit trails and compliance reporting.
+
+```python
         # Update tenant data context
         self.tenant_data_contexts[tenant_id]["processing_contexts"].append({
             "memory_id": memory.id,
