@@ -638,17 +638,25 @@ The compliance scoring algorithm provides quantitative assessment of GDPR adhere
     def _calculate_compliance_score(self) -> float:
         """Calculate overall GDPR compliance score"""
         
-        # Simplified scoring algorithm
+        # Initialize perfect compliance score
         score = 100.0
-        
-        # Deduct for missing consent records
+```
+
+Compliance scoring begins with perfect compliance assumption, then applies deductions based on identified compliance gaps. This approach ensures conservative scoring that highlights areas needing attention rather than providing false confidence in compliance status.
+
+```python
+        # Calculate consent coverage for data requiring explicit consent
         consent_coverage = len([
             elem for elem in self.personal_data_registry.values()
             if elem.legal_basis != LegalBasisType.CONSENT or elem.consent_id
         ]) / max(1, len(self.personal_data_registry))
         
         score *= consent_coverage
-        
+```
+
+Consent coverage calculation ensures all data processed under consent legal basis has valid consent records. Missing consent constitutes a direct GDPR violation with potential regulatory fines, so this metric directly impacts compliance scoring. The division by max(1, total_elements) prevents division by zero while maintaining proportional scoring.
+
+```python
         # Deduct for delayed rights responses
         # (In production, would calculate actual response times)
         
@@ -656,8 +664,9 @@ The compliance scoring algorithm provides quantitative assessment of GDPR adhere
         # (In production, would analyze actual risk levels)
         
         return round(score, 1)
-
 ```
+
+Future scoring enhancements will include response time analysis and Privacy Impact Assessment coverage validation. GDPR requires rights request responses within one month, and high-risk processing requires mandatory PIAs. The rounded score provides clear compliance percentage for executive reporting and regulatory documentation.
 
 Advanced data anonymization techniques protect against re-identification while preserving data utility. K-anonymity ensures each individual cannot be distinguished from at least k-1 others:
 
@@ -744,12 +753,20 @@ Differential privacy provides mathematically rigorous privacy guarantees by addi
         
         import random
         import math
-        
-        # Laplace mechanism for differential privacy
+```
+
+Differential privacy imports and parameter validation establish the foundation for mathematically rigorous privacy protection. The epsilon parameter controls the privacy-utility tradeoff: smaller values provide stronger privacy but add more noise to results. The sensitivity parameter reflects the maximum impact any single individual can have on the query result.
+
+```python
+        # Apply Laplace mechanism for differential privacy
         scale = sensitivity / epsilon
         noise = random.laplace(0, scale)
         noisy_result = query_result + noise
-        
+```
+
+The Laplace mechanism adds calibrated random noise proportional to sensitivity divided by epsilon, ensuring the probability of any specific output is similar regardless of whether any individual's data is included. This mathematical guarantee prevents adversaries from detecting individual participation in datasets, even with auxiliary information.
+
+```python
         return {
             'original_result': query_result,
             'noisy_result': noisy_result,
@@ -827,20 +844,32 @@ Audit report generation provides comprehensive analysis of all logged activities
             start_date = datetime.now() - timedelta(days=30)
         if not end_date:
             end_date = datetime.now()
-        
-        # Filter logs by date range
+```
+
+Date range validation establishes the audit report scope with sensible defaults for operational reporting. The 30-day default period balances comprehensive coverage with report manageability, while custom date ranges support specific compliance investigations or regulatory reporting requirements that may require longer historical periods.
+
+```python
+        # Filter logs by date range for focused analysis
         filtered_logs = [
             log for log in self.audit_logs
             if start_date <= datetime.fromisoformat(log['timestamp']) <= end_date
         ]
-        
-        # Analyze access patterns
+```
+
+Log filtering by timestamp ensures audit reports contain only relevant activities within the specified timeframe. This filtering supports both routine operational reporting and targeted investigations by limiting analysis to specific periods when security incidents or compliance reviews require detailed examination.
+
+```python
+        # Calculate access pattern statistics for compliance monitoring
         access_stats = {
             'total_access_events': len([log for log in filtered_logs if log['event_type'] == 'data_access']),
             'unique_data_subjects': len(set(log.get('data_subject_id') for log in filtered_logs if log.get('data_subject_id'))),
             'unique_accessors': len(set(log.get('accessor_id') for log in filtered_logs if log.get('accessor_id')))
         }
-        
+```
+
+Access pattern analysis provides critical security intelligence by counting total access events, unique individuals whose data was accessed, and unique system users who performed access operations. These metrics enable detection of unusual access patterns that might indicate security breaches or inappropriate data usage requiring investigation.
+
+```python
         return {
             'report_period': {
                 'start': start_date.isoformat(),
@@ -1073,13 +1102,17 @@ Multi-factor authentication adds critical security layers for users with elevate
 Successful authentication creates a comprehensive security context and generates secure session tokens for subsequent authorization decisions:
 
 ```python
-        # Create security context
+        # Create comprehensive security context for zero-trust evaluation
         security_context = await self._create_security_context(user)
         
-        # Generate session token
+        # Generate cryptographically secure session token
         session_token = await self._generate_session_token(user, security_context)
-        
-        # Update user login time
+```
+
+Security context and token generation establish the foundation for subsequent zero-trust authorization decisions. The security context includes risk assessment, permissions, and environmental attributes that inform dynamic access policies. Session tokens use cryptographic signatures to prevent tampering and include expiration timestamps for automatic security boundary enforcement.
+
+```python
+        # Update user login tracking and audit trail
         user.last_login = datetime.now()
         
         await self._log_security_event("authentication_success", {
@@ -1087,7 +1120,11 @@ Successful authentication creates a comprehensive security context and generates
             'username': username,
             'session_token_id': session_token['token_id']
         })
-        
+```
+
+Login time tracking and security event logging create essential audit trails for compliance and threat detection. The login timestamp enables risk assessment based on user activity patterns, while security event logging provides real-time monitoring capabilities for detecting suspicious authentication patterns or potential account compromise attempts.
+
+```python
         return {
             'success': True,
             'user': {
@@ -1110,14 +1147,18 @@ Zero-trust authorization validates every request, regardless of the user's authe
                               resource_context: Dict[str, Any] = None) -> Dict[str, Any]:
         """Zero-trust authorization for every request"""
         
-        # Validate session token
+        # Validate session token cryptographically
         token_validation = await self._validate_session_token(session_token)
         if not token_validation['valid']:
             return {'authorized': False, 'error': 'Invalid session token'}
         
         user = token_validation['user']
-        
-        # Check if user has required permission
+```
+
+Token validation implements the first security gate in zero-trust authorization, verifying both token authenticity and expiration status. Invalid tokens immediately terminate the authorization process, implementing fail-secure principles that prevent unauthorized access even when authentication tokens are compromised or expired.
+
+```python
+        # Check role-based permissions against required access level
         user_permissions = await self._get_user_permissions(user.user_id)
         if required_permission not in user_permissions:
             await self._log_security_event("authorization_denied", {
@@ -1131,7 +1172,7 @@ Zero-trust authorization validates every request, regardless of the user's authe
 Contextual access policies add dynamic authorization layers based on environmental factors, time, location, and data sensitivity:
 
 ```python
-        # Apply contextual access policies
+        # Evaluate dynamic contextual access policies
         policy_result = await self._evaluate_access_policies(
             user, required_permission, resource_context or {}
         )
@@ -1144,8 +1185,12 @@ Contextual access policies add dynamic authorization layers based on environment
                 'policy_reason': policy_result['reason']
             })
             return {'authorized': False, 'error': policy_result['reason']}
-        
-        # Success - log access
+```
+
+Dynamic policy evaluation forms the third security gate by assessing environmental factors like time, location, data sensitivity, and user risk profile. Policy failures are logged with specific reasons to enable security team analysis of access patterns and potential policy refinements to balance security with operational effectiveness.
+
+```python
+        # Log successful authorization for audit trail
         await self._log_security_event("authorization_granted", {
             'user_id': user.user_id,
             'required_permission': required_permission.value,
@@ -1171,20 +1216,27 @@ Security context creation establishes comprehensive user context including permi
     async def _create_security_context(self, user: User) -> Dict[str, Any]:
         """Create comprehensive security context for user"""
         
-        # Get user permissions
+        # Gather user permissions and risk assessment
         permissions = await self._get_user_permissions(user.user_id)
-        
-        # Calculate risk score
         risk_score = await self._calculate_user_risk_score(user)
-        
-        # Get attribute-based access control attributes
+```
+
+Permission resolution and risk assessment form the foundational security intelligence for context-aware authorization decisions. The permissions collection aggregates role-based and direct permissions, while risk scoring evaluates user behavior patterns, authentication history, and environmental factors to determine appropriate security boundaries.
+
+```python
+        # Extract attribute-based access control (ABAC) attributes
         abac_attributes = {
             'department': user.attributes.get('department'),
             'clearance_level': user.attributes.get('clearance_level', 'standard'),
             'location': user.attributes.get('location'),
             'employment_type': user.attributes.get('employment_type', 'employee')
         }
-        
+```
+
+ABAC attribute extraction enables fine-grained access control decisions based on user characteristics beyond simple roles. Department affiliation controls cross-organizational data access, clearance levels govern sensitive information access, location attributes support geographic restrictions, and employment type enables contractor versus employee access differentiation.
+
+```python
+        # Assemble comprehensive security context
         security_context = {
             'user_id': user.user_id,
             'username': user.username,
@@ -1195,8 +1247,12 @@ Security context creation establishes comprehensive user context including permi
             'context_created_at': datetime.now().isoformat(),
             'session_constraints': await self._calculate_session_constraints(user, risk_score)
         }
-        
-        # Cache security context
+```
+
+Security context assembly creates a comprehensive authorization package that includes identity, permissions, risk assessment, and ABAC attributes. Session constraints implement risk-based security controls like reduced session timeouts for high-risk users or mandatory re-authentication for sensitive operations.
+
+```python
+        # Cache security context for performance optimization
         self.security_context_cache[user.user_id] = security_context
         
         return security_context
@@ -1210,7 +1266,7 @@ Dynamic access policy evaluation implements contextual security controls that ad
                                       resource_context: Dict[str, Any]) -> Dict[str, Any]:
         """Evaluate dynamic access policies"""
         
-        # Time-based access control
+        # Time-based access control for high-risk operations
         current_hour = datetime.now().hour
         if current_hour < 6 or current_hour > 22:  # Outside business hours
             if permission in [Permission.DELETE_PERSONAL_DATA, Permission.SYSTEM_ADMIN]:
@@ -1218,8 +1274,12 @@ Dynamic access policy evaluation implements contextual security controls that ad
                     'allowed': False,
                     'reason': 'High-risk operations not allowed outside business hours'
                 }
-        
-        # Location-based access control
+```
+
+Time-based access control implements temporal security boundaries that restrict high-risk operations to supervised business hours. Data deletion and system administration activities are limited to 6 AM - 10 PM when security staff are available to monitor and respond to potential incidents, reducing the risk of unsupervised destructive operations.
+
+```python
+        # Location-based access control for sensitive data
         user_location = user.attributes.get('location')
         if resource_context.get('sensitive_data') and user_location == 'remote':
             return {
@@ -1231,7 +1291,7 @@ Dynamic access policy evaluation implements contextual security controls that ad
 Data classification and clearance level policies ensure only authorized personnel can access highly sensitive information:
 
 ```python
-        # Data sensitivity-based access
+        # Data classification and clearance level enforcement
         data_classification = resource_context.get('data_classification')
         if data_classification == 'highly_confidential':
             required_clearance = user.attributes.get('clearance_level')
@@ -1240,8 +1300,12 @@ Data classification and clearance level policies ensure only authorized personne
                     'allowed': False,
                     'reason': 'Insufficient clearance level for highly confidential data'
                 }
-        
-        # Concurrent session limits
+```
+
+Data classification enforcement implements hierarchical access controls based on information sensitivity levels. Highly confidential data requires high-level security clearance, preventing unauthorized exposure of trade secrets, personal data, or regulatory-controlled information to users without appropriate background verification and training.
+
+```python
+        # Concurrent session limits for security control
         active_sessions = len([
             s for s in self.active_sessions.values()
             if s['user_id'] == user.user_id
@@ -1252,7 +1316,11 @@ Data classification and clearance level policies ensure only authorized personne
                 'allowed': False,
                 'reason': 'Maximum concurrent sessions exceeded'
             }
-        
+```
+
+Session limits prevent credential sharing and reduce the attack surface by limiting the number of simultaneous user sessions. The 3-session limit balances operational flexibility with security control, allowing legitimate multi-device usage while preventing excessive concurrent access that might indicate compromised credentials or policy violations.
+
+```python
         return {
             'allowed': True,
             'constraints': {
@@ -1279,7 +1347,7 @@ Attribute-Based Access Control (ABAC) provides fine-grained authorization decisi
 The ABAC policy engine evaluates complex rules using lambda functions for flexible, runtime-configurable authorization policies:
 
 ```python
-        # ABAC policy engine
+        # Define ABAC policy rules with lambda-based conditions
         policy_rules = [
             {
                 'rule_id': 'sensitive_data_access',
@@ -1289,7 +1357,14 @@ The ABAC policy engine evaluates complex rules using lambda functions for flexib
                 ),
                 'effect': 'deny',
                 'reason': 'Insufficient clearance for sensitive data'
-            },
+            }
+        ]
+```
+
+Sensitive data access rules implement clearance-level enforcement for classified information. Lambda functions enable complex conditional logic evaluation at runtime, while the deny effect prevents access when users lack appropriate security clearance. This rule protects confidential data from unauthorized exposure based on user security verification status.
+
+```python
+        policy_rules.extend([
             {
                 'rule_id': 'time_restricted_operations',
                 'condition': lambda s, o, e, a: (
@@ -1309,13 +1384,13 @@ The ABAC policy engine evaluates complex rules using lambda functions for flexib
                 'effect': 'deny',
                 'reason': 'Cross-department data access requires admin role'
             }
-        ]
+        ])
 ```
 
 Policy evaluation follows a deny-by-default approach, with explicit allow decisions only when no restrictive policies match:
 
 ```python
-        # Evaluate policies
+        # Evaluate policies using deny-by-default approach
         for rule in policy_rules:
             if rule['condition'](subject_attrs, object_attrs, environment_attrs, action):
                 return {
@@ -1323,8 +1398,12 @@ Policy evaluation follows a deny-by-default approach, with explicit allow decisi
                     'rule_applied': rule['rule_id'],
                     'reason': rule['reason']
                 }
-        
-        # Default allow if no deny rules match
+```
+
+Policy evaluation iterates through all rules using fail-secure principles where any matching deny rule immediately terminates evaluation with access denial. The rule condition function receives all four ABAC attribute categories, enabling complex multi-dimensional authorization decisions that consider user identity, resource characteristics, environmental context, and requested actions.
+
+```python
+        # Default allow when no restrictive policies match
         return {
             'decision': 'allow',
             'rule_applied': 'default_allow',
@@ -1341,28 +1420,36 @@ Dynamic risk scoring evaluates multiple factors to adjust security controls base
         
         risk_factors = []
         
-        # Time since last login
+        # Assess login activity patterns for risk indicators
         if user.last_login:
             days_since_login = (datetime.now() - user.last_login).days
             if days_since_login > 30:
                 risk_factors.append(('inactive_user', 0.3))
-        
-        # Role-based risk
+```
+
+Login activity analysis identifies dormant accounts that may have been compromised without detection. Extended inactivity periods (over 30 days) increase security risk because compromised credentials may go unnoticed, and returning users may have weaker security awareness. This factor contributes 0.3 to the risk score, representing moderate security concern requiring enhanced monitoring.
+
+```python
+        # Evaluate privilege-based risk factors
         admin_roles = {'system_admin', 'security_admin'}
         if any(role in admin_roles for role in user.roles):
             risk_factors.append(('admin_privileges', 0.4))
         
-        # MFA status
+        # Multi-factor authentication status assessment
         if not user.mfa_enabled:
             risk_factors.append(('no_mfa', 0.5))
-        
-        # Location risk
+```
+
+Administrative privilege assessment recognizes that elevated access levels inherently increase security risk due to potential damage from compromised accounts. The 0.4 risk factor reflects the higher threat impact of administrative access. MFA absence represents the highest individual risk factor (0.5) because single-factor authentication provides inadequate protection against credential-based attacks.
+
+```python
+        # Environmental and location-based risk evaluation
         location = user.attributes.get('location', 'unknown')
         if location == 'remote':
             risk_factors.append(('remote_access', 0.2))
         
-        # Calculate composite risk score (0-1 scale)
-        base_risk = 0.1  # Everyone has some base risk
+        # Calculate composite risk score with base risk assumption
+        base_risk = 0.1  # Universal baseline risk
         additional_risk = sum(factor[1] for factor in risk_factors)
         
         return min(1.0, base_risk + additional_risk)
@@ -1411,19 +1498,26 @@ Severity calculation enables prioritized security response and automated alertin
     def _calculate_event_severity(self, event_type: str, details: Dict[str, Any]) -> str:
         """Calculate event severity for security monitoring"""
         
+        # Critical security events requiring immediate attention
         high_severity_events = {
             'authentication_failed',
             'authorization_denied',
             'privilege_escalation_attempt',
             'data_breach_detected'
         }
-        
+```
+
+High-severity event classification identifies critical security incidents requiring immediate response from security teams. Authentication failures, authorization denials, privilege escalation attempts, and data breaches represent direct threats to system security that could indicate active attacks or serious security misconfigurations requiring urgent investigation and remediation.
+
+```python
+        # Moderate security events requiring monitoring and analysis
         medium_severity_events = {
             'unusual_access_pattern',
             'session_timeout',
             'mfa_failure'
         }
         
+        # Determine severity based on event type classification
         if event_type in high_severity_events:
             return 'high'
         elif event_type in medium_severity_events:
@@ -1462,8 +1556,12 @@ Security reporting provides executive-level dashboards and operational intellige
             event for event in self.security_events
             if datetime.fromisoformat(event['timestamp']) >= cutoff_time
         ]
-        
-        # Security metrics
+```
+
+Report time window filtering establishes the analysis scope for security metrics calculation. The 24-hour default provides comprehensive daily security posture assessment, while custom timeframes support incident investigation and compliance reporting requiring different temporal perspectives for threat analysis.
+
+```python
+        # Calculate comprehensive security metrics for executive reporting
         metrics = {
             'total_events': len(recent_events),
             'high_severity_events': len([e for e in recent_events if e['severity'] == 'high']),
@@ -1471,7 +1569,11 @@ Security reporting provides executive-level dashboards and operational intellige
             'authorization_denials': len([e for e in recent_events if e['event_type'] == 'authorization_denied']),
             'unique_users_with_events': len(set(e['details'].get('user_id') for e in recent_events if e['details'].get('user_id')))
         }
-        
+```
+
+Security metrics aggregation provides quantitative intelligence for threat assessment and operational decision-making. High-severity event counts indicate critical security incidents requiring immediate attention, while authentication and authorization failure counts reveal potential attack patterns. Unique user tracking identifies the scope of security events across the user population.
+
+```python
         return {
             'report_period_hours': hours,
             'report_timestamp': datetime.now().isoformat(),
@@ -1581,6 +1683,7 @@ RSA key pair generation provides secure key exchange capabilities with enterpris
 Key object creation and storage with rotation scheduling ensures proper key lifecycle management:
 
 ```python
+        # Create asymmetric key pair objects with proper metadata
         public_key_obj = EncryptionKey(
             key_id=f"{key_set_id}_public",
             key_type="asymmetric_public",
@@ -1598,13 +1701,17 @@ Key object creation and storage with rotation scheduling ensures proper key life
             algorithm="RSA-4096",
             purpose="key_exchange"
         )
-        
-        # Store keys
+```
+
+Asymmetric key object creation wraps the cryptographic keys with essential metadata for enterprise key management. The RSA-4096 algorithm provides strong security appropriate for enterprise key exchange scenarios, while unique key IDs enable precise key tracking and management. Purpose classification supports key usage policy enforcement and compliance auditing.
+
+```python
+        # Store keys in enterprise key management system
         self.encryption_keys[symmetric_key.key_id] = symmetric_key
         self.encryption_keys[public_key_obj.key_id] = public_key_obj
         self.encryption_keys[private_key_obj.key_id] = private_key_obj
         
-        # Set rotation schedule
+        # Establish rotation schedules for cryptographic hygiene
         self.key_rotation_schedule[symmetric_key.key_id] = timedelta(days=90)
         self.key_rotation_schedule[public_key_obj.key_id] = timedelta(days=730)
         
@@ -1769,8 +1876,12 @@ Key rotation is essential for maintaining cryptographic security over time, requ
             return {'success': False, 'error': 'Key not found'}
         
         old_key = self.encryption_keys[key_id]
-        
-        # Generate new key of same type
+```
+
+Key validation ensures rotation requests target existing keys in the management system. Failed lookups prevent rotation attempts on non-existent keys, maintaining system integrity and providing clear error feedback for operational troubleshooting and automated key management processes.
+
+```python
+        # Generate replacement key matching original specifications
         if old_key.key_type == "symmetric":
             new_key_data = Fernet.generate_key()
             new_key = EncryptionKey(
@@ -1784,11 +1895,13 @@ Key rotation is essential for maintaining cryptographic security over time, requ
             )
         else:
             return {'success': False, 'error': 'Key rotation not implemented for this key type'}
-        
-        # Store new key
+```
+
+New key generation maintains identical cryptographic specifications to ensure seamless replacement without compatibility issues. The timestamp-based key ID prevents collisions while providing clear lineage tracking. Currently supporting symmetric key rotation with extensibility for asymmetric keys as operational requirements evolve.
+
+```python
+        # Store new key and deprecate old key with grace period
         self.encryption_keys[new_key.key_id] = new_key
-        
-        # Mark old key for deprecation
         old_key.expires_at = datetime.now() + timedelta(days=30)  # Grace period
         
         return {
