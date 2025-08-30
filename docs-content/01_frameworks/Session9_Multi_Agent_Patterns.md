@@ -300,6 +300,7 @@ class DataAgentMessage:
 
 DataAgentMessage structures provide comprehensive metadata for inter-agent communication. Each message includes unique identifiers for tracking, payload data for processing, and schema information for validation. The conversation_id enables multi-step workflows between agents, essential for complex data processing tasks.
 
+```python
 class DataCommunicationHub:
     """Central coordination hub for multi-agent data processing communication"""
 
@@ -308,8 +309,8 @@ class DataCommunicationHub:
         self.message_queue: List[DataAgentMessage] = []
         self.active_data_conversations: Dict[str, List[DataAgentMessage]] = {}
         self.data_lineage_tracking: Dict[str, Dict[str, Any]] = {}
-
 ```
+
 The communication hub serves as the central nervous system for multi-agent data processing. It maintains agent registries, message queues, conversation threads, and data lineage tracking. This centralized approach ensures reliable message delivery and comprehensive audit trails for complex data workflows.
 
 ```python
@@ -346,8 +347,6 @@ Agent registration establishes bidirectional communication channels. Once regist
 ```
 
 Message delivery implements comprehensive validation, tracking, and delivery confirmation. Data lineage tracking maintains provenance records essential for data governance, while conversation threading enables complex multi-step workflows. Delivery confirmation ensures reliable communication even in distributed environments.
-
-```
 
 ### Basic Consensus Mechanisms - Democracy in Data Processing
 
@@ -965,7 +964,6 @@ Average Processing Latency: {metrics['average_processing_latency_ms']}ms
 - [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Multi-agent data coordination
 
 ```bash
-
 # Try the data processing examples:
 
 cd src/session9
