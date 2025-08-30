@@ -24,20 +24,33 @@ Custom data processing tools transform agents from conversational interfaces int
 First, we establish the foundational imports for enterprise data processing tool development:
 
 ```python
+# Core framework imports for tool development
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
 from typing import Type, Dict, List, Any, Optional
+```
+
+This first group imports the essential CrewAI framework components: `BaseTool` provides the foundation for custom tool creation, while Pydantic's `BaseModel` and `Field` enable robust data validation and schema definition. The typing imports give us comprehensive type hints for better code reliability and IDE support.
+
+```python
+# Async operations and data processing
 import asyncio
 import aiohttp
 import json
 import logging
 from datetime import datetime, timedelta
 from dataclasses import dataclass
+```
+
+The async imports (`asyncio`, `aiohttp`) enable concurrent data processing operations essential for enterprise-scale workflows. JSON handling, logging infrastructure, and datetime utilities support data serialization, monitoring, and temporal operations crucial for data pipeline management.
+
+```python
+# Enterprise data processing libraries
 import pandas as pd
 import numpy as np
 ```
 
-These imports provide tool base classes, data validation, type hints, async capabilities, and utilities for enterprise-grade data processing tool implementation, including pandas and numpy for data manipulation.
+The final imports bring in the powerhouse libraries for data manipulation: pandas for structured DataFrame operations and numpy for numerical computing. These libraries are fundamental to enterprise data processing, enabling efficient handling of large datasets and complex mathematical operations.
 
 ### Data Processing Tool Execution Context
 
@@ -69,15 +82,29 @@ class DataDiscoveryInput(BaseModel):
     max_results: int = Field(default=10, description="Maximum datasets to return")
     source_types: List[str] = Field(default=["data_lake", "data_warehouse", "streaming"], description="Types of data sources to search")
     quality_threshold: float = Field(default=0.8, description="Minimum data quality score for results")
+```
+
+The DataDiscoveryInput schema defines the core parameters for data discovery operations. The required `query` field accepts natural language descriptions with schema and domain keywords, while `max_results` prevents overwhelming responses. The `source_types` list defaults to the most common enterprise data storage patterns, and `quality_threshold` ensures only reliable datasets are returned.
+
+```python
     data_domains: List[str] = Field(default=["customer", "product", "transaction"], description="Business domains to focus on")
     freshness_requirement: Optional[str] = Field(default=None, description="Data freshness filter (e.g., 'last_24_hours')")
+```
 
+Business domain filtering focuses searches on relevant data categories, defaulting to the three most common enterprise domains. The optional freshness requirement enables time-sensitive data discovery, crucial for real-time analytics and regulatory compliance scenarios.
+
+```python
 class DataTransformationInput(BaseModel):
     """Input schema for data transformation tool"""
     source_dataset_path: str = Field(..., description="Path to source dataset")
     transformation_type: str = Field(..., description="Type of transformation (etl, aggregation, join, enrichment)")
     target_schema: Dict[str, Any] = Field(..., description="Target data schema specification")
     transformation_rules: List[Dict[str, Any]] = Field(..., description="Specific transformation rules to apply")
+```
+
+The DataTransformationInput schema captures essential transformation parameters: the source path specifies the input dataset, while transformation type categorizes the operation for proper processing engine selection. Target schema and rules provide the blueprint and logic for the transformation, ensuring predictable output structure.
+
+```python
     output_format: str = Field(default="parquet", description="Output format preference (parquet, json, csv)")
     partition_strategy: Optional[Dict[str, Any]] = Field(default=None, description="Data partitioning strategy")
     quality_checks: bool = Field(default=True, description="Enable data quality validation")
@@ -167,7 +194,11 @@ Cache optimization reduces redundant data catalog queries and improves response 
                     source_datasets = self.data_source_adapters[source_type](
                         query, max_results, data_domains, freshness_requirement
                     )
-                    
+```
+
+This discovery loop iterates through each specified source type, using the adapter pattern to handle different data storage systems. Each adapter handles source-specific connection protocols, metadata extraction, and result formatting, providing a uniform interface despite underlying system differences.
+
+```python
                     # Filter by data quality threshold
                     quality_filtered_datasets = [
                         dataset for dataset in source_datasets
@@ -178,7 +209,7 @@ Cache optimization reduces redundant data catalog queries and improves response 
                     total_datasets_found += len(quality_filtered_datasets)
 ```
 
-Multi-source data discovery execution utilizes adapter pattern for different data storage systems. Quality filtering ensures only datasets meeting threshold standards are included, maintaining result relevance and data reliability.
+Quality filtering applies the threshold to eliminate unreliable datasets, ensuring only trustworthy data sources are included in results. The aggregated count tracks total findings across all sources, providing valuable metrics for discovery effectiveness and data landscape assessment.
 
 ```python
                 except Exception as e:
@@ -417,7 +448,11 @@ Composite scoring prioritizes data quality (50%) and relevance (30%) while incor
         
         # Limit results and generate domain distribution
         top_datasets = ranked_datasets[:max_results]
-        
+```
+
+Dataset ranking applies the composite scores to prioritize the most relevant and highest-quality datasets. The sorting uses descending order to place the best matches first, while result limiting ensures manageable response sizes while maintaining quality standards.
+
+```python
         # Generate aggregation metadata for data engineering insights
         domain_distribution = {}
         source_distribution = {}
@@ -427,7 +462,11 @@ Composite scoring prioritizes data quality (50%) and relevance (30%) while incor
             # Domain tracking
             domain = dataset["metadata"].get("domain", "unknown")
             domain_distribution[domain] = domain_distribution.get(domain, 0) + 1
-            
+```
+
+Metadata aggregation creates distribution analysis essential for data engineering planning. Domain tracking reveals business area coverage, helping data engineers understand the breadth and focus areas of available datasets for project planning.
+
+```python
             # Source tracking
             source = dataset["source"]
             source_distribution[source] = source_distribution.get(source, 0) + 1
@@ -440,7 +479,11 @@ Composite scoring prioritizes data quality (50%) and relevance (30%) while incor
                 quality_distribution["medium"] += 1
             else:
                 quality_distribution["low"] += 1
-        
+```
+
+Source and quality distribution tracking provides insights into data landscape characteristics. Source distribution reveals whether results span multiple storage systems, while quality distribution indicates the reliability level of available datasets, informing processing strategy decisions.
+
+```python
         return {
             "ranked_datasets": top_datasets,
             "aggregation_metadata": {
@@ -453,6 +496,7 @@ Composite scoring prioritizes data quality (50%) and relevance (30%) while incor
                 "data_governance_compliance": self._assess_governance_compliance(top_datasets)
             }
         }
+```
 ```
 
 Distribution analysis provides insights into data domain coverage, source diversity, and quality distribution essential for data engineering project planning.
@@ -646,6 +690,11 @@ Comprehensive monitoring setup enables enterprise-grade data pipeline tracking:
                 "enabled": True,
                 "metrics": ["throughput", "latency", "data_quality", "resource_usage", "error_rate"],
                 "alerts": ["pipeline_failure", "quality_degradation", "sla_breach", "resource_exhaustion"],
+```
+
+The monitoring configuration enables comprehensive pipeline observability with key performance metrics essential for data processing operations. The alert system covers critical failure scenarios - pipeline failures for operational issues, quality degradation for data integrity problems, SLA breaches for performance issues, and resource exhaustion for capacity management.
+
+```python
                 "quality_thresholds": {
                     "completeness": 0.95,
                     "consistency": 0.98,
@@ -657,6 +706,11 @@ Comprehensive monitoring setup enables enterprise-grade data pipeline tracking:
                     "max_error_rate": "0.1_percent"
                 }
             },
+```
+
+Quality thresholds define enterprise-grade data standards with strict requirements for completeness (95%), consistency (98%), and accuracy (97%). Performance SLAs establish operational requirements including maximum 5-minute latency for real-time processing, minimum 10K records/hour throughput, and sub-0.1% error rates.
+
+```python
             "data_governance": {
                 "lineage_tracking": True,
                 "audit_logging": True,
@@ -664,13 +718,22 @@ Comprehensive monitoring setup enables enterprise-grade data pipeline tracking:
                 "retention_policy": config.get("retention_policy", "default"),
                 "compliance_requirements": config.get("compliance_requirements", [])
             },
+```
+
+Data governance configuration ensures regulatory compliance and enterprise data management. Lineage tracking provides end-to-end data flow visibility, while audit logging maintains complete operational records. Classification and retention policies support automated governance workflows.
+
+```python
             "created_at": datetime.now(),
             "status": "created",
             "execution_history": []
         }
         
         self.active_pipelines[pipeline_id] = pipeline_config
-        
+```
+
+Pipeline lifecycle tracking begins with creation timestamp and initial status. The execution history list will accumulate all pipeline runs, status changes, and operational events for comprehensive audit trails and performance analysis.
+
+```python
         # Initialize data lineage tracking
         self.data_lineage_tracker[pipeline_id] = {
             "sources": config.get("data_sources", []),
@@ -684,6 +747,7 @@ Comprehensive monitoring setup enables enterprise-grade data pipeline tracking:
             "status": "created",
             "configuration": pipeline_config
         }, indent=2, default=str)
+```
 ```
 
 Monitoring configuration includes data quality thresholds, performance SLAs, comprehensive alerting, and data governance compliance tracking essential for enterprise data operations.
