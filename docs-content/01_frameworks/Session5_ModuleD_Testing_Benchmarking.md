@@ -202,7 +202,7 @@ Comprehensive error scenario testing validates that data processing agents handl
     async def test_data_processing_error_handling(self, agent: ProductionDataAgentBase) -> Dict[str, Any]:
         """Test data processing agent error handling capabilities."""
         
-        # Define various error scenarios to test data processing agent resilience
+        # Define timeout and connection failure scenarios for data processing
         error_scenarios = [
             {
                 'name': 'data_warehouse_timeout',
@@ -213,7 +213,12 @@ Comprehensive error scenario testing validates that data processing agents handl
                 'name': 'schema_validation_error',
                 'setup': lambda: self._simulate_schema_validation_error(),
                 'expected_category': DataProcessingErrorCategory.SCHEMA_MISMATCH
-            },
+            }
+```
+
+The error handling test framework begins by defining critical failure scenarios that commonly occur in production data processing systems. Timeout scenarios test resilience against database and warehouse connectivity issues, while schema validation tests ensure the system properly handles data structure changes that frequently occur in evolving data environments.
+
+```python
             {
                 'name': 'data_quality_error',
                 'setup': lambda: self._simulate_data_quality_error(),
@@ -237,11 +242,16 @@ Now we execute each error scenario and verify proper error handling for data pro
 ```python
         results = []
         
+        # Execute each error scenario with controlled testing environment
         for scenario in error_scenarios:
             try:
                 with patch.object(agent, '_process_core_request', side_effect=scenario['setup']()):
                     result = await agent.process_data_request("test data processing request")
-                    
+```
+
+Error scenario execution uses dependency injection through patching to simulate various failure conditions without affecting production systems. The controlled testing environment ensures that failures are simulated safely while maintaining isolation from actual data processing operations.
+
+```python
                     test_result = {
                         'scenario_name': scenario['name'],
                         'error_handled': not result.get('success', True),
@@ -257,7 +267,11 @@ Error scenario execution uses dependency injection through patching to simulate 
                 # Verify the error is properly categorized for data processing
                 error_category = getattr(e, 'context', {}).get('category', 'unknown')
                 expected_category = scenario.get('expected_category', 'unknown')
-                
+```
+
+Exception handling validation ensures that data processing errors are properly categorized and contain sufficient context for debugging and monitoring. The category extraction from error context enables automated error routing and appropriate alerting in production systems.
+
+```python
                 test_result = {
                     'scenario_name': scenario['name'],
                     'error_handled': True,
@@ -708,14 +722,22 @@ Finally, we handle custom metrics and structured logging for data processing:
             for metric_name, metric_value in custom_metrics.items():
                 if metric_name not in self.custom_metrics:
                     self.custom_metrics[metric_name] = []
-                
+```
+
+Custom metrics support enables domain-specific monitoring that extends beyond standard performance metrics. Each custom metric is timestamped and associated with specific agents and pipeline stages, allowing detailed analysis of specialized data processing operations and business-specific performance indicators.
+
+```python
                 self.custom_metrics[metric_name].append({
                     'timestamp': time.time(),
                     'agent_id': agent_id,
                     'value': metric_value,
                     'pipeline_stage': pipeline_stage
                 })
-        
+```
+
+Structured logging provides comprehensive request tracking with all essential context for debugging and audit trails. The structured format enables efficient log parsing and analysis while maintaining human readability for troubleshooting data processing issues.
+
+```python
         # Structured logging for data processing
         self.logger.info(
             "Data processing request recorded",
@@ -752,7 +774,11 @@ Integration with Prometheus provides industry-standard metrics collection and al
             f"",
             f"# HELP pydantic_ai_data_success_rate Current data processing success rate",
             f"# TYPE pydantic_ai_data_success_rate gauge", 
-            f"pydantic_ai_data_success_rate {global_summary['global_success_rate']}",
+            f"pydantic_ai_data_success_rate {global_summary['global_success_rate']}"
+
+Prometheus metrics export provides industry-standard monitoring integration with proper metric types and labeling. Counter metrics track cumulative request counts and row processing totals, while gauge metrics provide current state indicators like success rates and data quality scores essential for real-time monitoring and alerting.
+
+        metrics_output.extend([
             f"",
             f"# HELP pydantic_ai_data_quality_score Current data quality score",
             f"# TYPE pydantic_ai_data_quality_score gauge",
@@ -776,7 +802,12 @@ Now we add per-agent metrics to the Prometheus export for data processing:
             if summary:
                 metrics_output.extend([
                     f"pydantic_ai_data_agent_requests_total{{agent=\"{agent_id}\"}} {summary['total_requests']}",
-                    f"pydantic_ai_data_agent_success_rate{{agent=\"{agent_id}\"}} {summary['success_rate']}",
+                    f"pydantic_ai_data_agent_success_rate{{agent=\"{agent_id}\"}} {summary['success_rate']}"
+```
+
+Per-agent metrics enable detailed performance analysis and capacity planning by individual agent. Agent-specific labeling allows monitoring systems to create targeted alerts and dashboards for specific data processing workflows, enabling precise performance optimization and resource allocation.
+
+```python
                     f"pydantic_ai_data_agent_response_time{{agent=\"{agent_id}\"}} {summary['avg_response_time']}",
                     f"pydantic_ai_data_agent_rows_processed{{agent=\"{agent_id}\"}} {summary['total_rows_processed']}",
                     f"pydantic_ai_data_agent_quality_score{{agent=\"{agent_id}\"}} {summary['data_quality_score']}"
@@ -902,7 +933,11 @@ Now we implement the intelligent cache retrieval method with data processing acc
             if not entry:
                 self._stats['misses'] += 1
                 return None
-            
+```
+
+Cache retrieval begins with intelligent cleanup management to maintain performance without impacting response times. Periodic cleanup prevents unbounded memory growth while ensuring cache efficiency, and immediate miss tracking provides accurate hit rate calculations essential for cache performance analysis.
+
+```python
             if entry.is_expired():
                 self._cache.pop(key)
                 self._total_size_bytes -= entry.size_bytes
@@ -914,7 +949,11 @@ Now we implement the intelligent cache retrieval method with data processing acc
             entry.update_access()
             self._cache.move_to_end(key)
             self._stats['hits'] += 1
-            
+```
+
+Expiration handling ensures cache consistency by removing stale data while maintaining accurate memory usage tracking. Access pattern updates support LRU eviction strategy, while hit/miss statistics provide performance insights essential for cache tuning and capacity planning.
+
+```python
             # Track data processing specific metrics
             if entry.data_quality_score > 0.8:
                 self._stats['data_quality_hits'] += 1
