@@ -106,7 +106,11 @@ The data registration method implements the core principle of lawful processing.
                 'success': False,
                 'error': 'Invalid or insufficient legal basis for processing'
             }
-        
+```
+
+The registration process begins with legal basis validation, which is fundamental to GDPR compliance. Article 6 requires that all personal data processing must have a lawful basis, and this validation ensures we don't process data illegally. The method returns early with a clear error if the legal basis is insufficient, implementing fail-safe processing principles.
+
+```python
         # Check for consent if required
         if data_element.legal_basis == LegalBasisType.CONSENT:
             consent_valid = await self._validate_consent(data_element.consent_id, data_subject_id)
@@ -116,6 +120,8 @@ The data registration method implements the core principle of lawful processing.
                     'error': 'Valid consent required for processing'
                 }
 ```
+
+Consent validation implements GDPR Article 7 requirements for valid consent. When processing relies on consent as the legal basis, we must verify that consent is freely given, specific, informed, and unambiguous. This check prevents processing data without proper consent, which would constitute a GDPR violation with potential fines up to 4% of annual revenue.
 
 After validation, we register the data element and perform necessary compliance actions including logging and privacy impact assessment triggers:
 
@@ -131,7 +137,11 @@ After validation, we register the data element and perform necessary compliance 
             'legal_basis': data_element.legal_basis.value,
             'purpose': data_element.purpose
         })
-        
+```
+
+Data registration creates a unique registry key combining the data subject ID and element ID, ensuring we can efficiently track and locate all personal data. The activity logging fulfills GDPR Article 30 requirements for records of processing activities, creating an audit trail that demonstrates accountability and helps with compliance verification.
+
+```python
         # Check if Privacy Impact Assessment is needed
         if data_element.is_sensitive or data_element.category == "biometric":
             await self._trigger_pia_assessment(data_element, data_subject_id)
@@ -141,8 +151,9 @@ After validation, we register the data element and perform necessary compliance 
             'registry_key': registry_key,
             'retention_until': datetime.now() + timedelta(days=data_element.retention_period_days)
         }
-    
 ```
+
+Privacy Impact Assessment (PIA) triggering implements GDPR Article 35, which mandates PIAs for high-risk processing activities. Sensitive personal data and biometric data always require assessment due to their potential impact on individuals' rights and freedoms. The return value includes the registry key for future data operations and calculated retention date, ensuring data doesn't stay longer than legally justified.
 
 The data subject request handler is the cornerstone of GDPR compliance, implementing all the rights guaranteed to individuals under Articles 15-22:
 
@@ -173,6 +184,11 @@ The routing logic directs requests to specialized handlers, each implementing sp
             result = await self._handle_rectification_request(data_subject_id, request_details)
         elif request_type == DataSubjectRights.ERASURE:
             result = await self._handle_erasure_request(data_subject_id, request_details)
+```
+
+The request routing system implements all GDPR Chapter III rights. Access requests (Article 15) provide transparency, rectification (Article 16) ensures accuracy, and erasure (Article 17) enables the "right to be forgotten." Each right has specific legal requirements and implementation challenges that require specialized handlers.
+
+```python
         elif request_type == DataSubjectRights.DATA_PORTABILITY:
             result = await self._handle_portability_request(data_subject_id)
         elif request_type == DataSubjectRights.RESTRICT_PROCESSING:
@@ -184,6 +200,8 @@ The routing logic directs requests to specialized handlers, each implementing sp
         else:
             result = {'success': False, 'error': 'Unsupported request type'}
 ```
+
+Data portability (Article 20) enables user empowerment by providing machine-readable data exports. Processing restrictions (Article 18) allow temporary processing suspension, while objection rights (Article 21) enable opt-outs from certain processing. Consent withdrawal (Article 7) must be as easy as giving consent, with immediate cascade effects to stop dependent processing.
 
 Comprehensive audit trails ensure accountability and transparency:
 
@@ -197,7 +215,11 @@ Comprehensive audit trails ensure accountability and transparency:
             'status': 'completed' if result['success'] else 'failed',
             'result': result
         }
-        
+```
+
+Request record storage creates a permanent audit trail for all data subject rights exercises. This fulfills GDPR accountability requirements by documenting when requests were made, how they were processed, and what outcomes were achieved. These records are essential for demonstrating compliance during regulatory audits.
+
+```python
         # Log activity
         await self._log_processing_activity("data_subject_request", {
             'request_id': request_id,
@@ -207,8 +229,9 @@ Comprehensive audit trails ensure accountability and transparency:
         })
         
         return {**result, 'request_id': request_id}
-    
 ```
+
+Activity logging provides the operational intelligence needed to monitor compliance performance and identify potential issues. The structured log format enables automated analysis of request patterns, response times, and success rates. The return value combines the specific request result with the unique request ID for tracking.
 
 The access request handler implements Article 15 (Right of access), which requires providing comprehensive information about all data processing. This is often the most complex right to implement:
 
@@ -232,6 +255,8 @@ The access request handler implements Article 15 (Right of access), which requir
                 }
 ```
 
+Data collection for access requests demonstrates complete transparency as required by GDPR Article 15. The comprehensive data structure includes not just the personal data categories and types, but also the processing metadata like legal basis, purpose, and retention periods. This enables individuals to understand exactly how their data is being processed and make informed decisions about their privacy.
+
 We must also include processing activities and third-party sharing information to provide complete transparency as required by Article 15:
 
 ```python
@@ -240,7 +265,11 @@ We must also include processing activities and third-party sharing information t
             activity for activity in self.processing_activities
             if activity.get('data_subject_id') == data_subject_id
         ]
-        
+```
+
+Processing activities inclusion provides the complete operational context required by Article 15(1)(c), showing not just what data we hold, but what we've done with it. This transparency builds trust and enables individuals to identify any processing they disagree with or find concerning.
+
+```python
         access_report = {
             'data_subject_id': data_subject_id,
             'personal_data': subject_data,
@@ -255,8 +284,9 @@ We must also include processing activities and third-party sharing information t
             'access_report': access_report,
             'format': 'structured_json'
         }
-    
 ```
+
+The comprehensive access report fulfills all Article 15 requirements by including retention policies (how long we keep data), third-party sharing information (who else receives the data), and processing activities. The structured JSON format ensures machine readability while maintaining human comprehensibility, supporting both individual rights and potential data portability requests.
 
 The erasure request handler implements Article 17 (Right to be forgotten), one of the most challenging rights to implement as it requires careful legal analysis and comprehensive data removal:
 
@@ -276,6 +306,8 @@ The erasure request handler implements Article 17 (Right to be forgotten), one o
             }
 ```
 
+Erasure permission checking implements the complex legal analysis required by Article 17. The right to be forgotten is not absolute - processing may continue when needed for freedom of expression, legal compliance, public health, or archiving purposes. This validation prevents inappropriate erasure that could violate other legal obligations.
+
 When erasure is permitted, we must systematically remove all traces of the individual's data from our systems:
 
 ```python
@@ -287,7 +319,11 @@ When erasure is permitted, we must systematically remove all traces of the indiv
             key for key in self.personal_data_registry.keys()
             if key.startswith(f"{data_subject_id}:")
         ]
-        
+```
+
+Erasure execution begins with comprehensive identification of all data elements belonging to the data subject. The systematic approach ensures complete removal by first collecting all relevant registry keys, preventing partial erasure that could leave residual personal data and create compliance gaps.
+
+```python
         for key in keys_to_remove:
             data_element = self.personal_data_registry[key]
             erased_elements.append({
@@ -298,6 +334,8 @@ When erasure is permitted, we must systematically remove all traces of the indiv
             del self.personal_data_registry[key]
 ```
 
+Actual erasure operations maintain detailed audit trails by logging exactly what data was removed and when. This documentation is crucial for demonstrating compliance effectiveness and providing evidence that erasure requests were properly fulfilled, addressing potential regulatory scrutiny or data subject concerns about incomplete erasure.
+
 Critically, we must also handle cascade effects including consent record removal and third-party notifications as required by Article 17(2):
 
 ```python
@@ -307,15 +345,20 @@ Critically, we must also handle cascade effects including consent record removal
         
         # Notify third parties if necessary
         third_party_notifications = await self._notify_third_parties_of_erasure(data_subject_id)
-        
+```
+
+Consent record removal ensures that withdrawn consent cannot be accidentally relied upon for future processing. Third-party notification implements Article 17(2) requirements, where data controllers must inform recipients about erasure requests when technically feasible and proportionate to the processing costs.
+
+```python
         return {
             'success': True,
             'erased_elements': erased_elements,
             'erasure_timestamp': datetime.now().isoformat(),
             'third_party_notifications': third_party_notifications
         }
-    
 ```
+
+The comprehensive erasure response provides complete documentation of the erasure action, enabling the data subject to verify that their request was properly fulfilled. This transparency builds trust and provides evidence of GDPR compliance for both internal audit processes and potential regulatory investigations.
 
 The data portability handler implements Article 20, which applies only to data processed under consent or contract legal bases. This creates a machine-readable export for data subject empowerment:
 
@@ -338,6 +381,8 @@ The data portability handler implements Article 20, which applies only to data p
                 }
 ```
 
+Data portability collection implements Article 20's specific scope limitations - only data processed under consent or contract legal bases is portable. This restriction prevents misuse of portability rights for data processed under other legal bases like legal obligations, where portability wouldn't be appropriate or legally sound.
+
 The export package includes comprehensive metadata and integrity verification to ensure the portability package meets technical and security requirements:
 
 ```python
@@ -355,15 +400,20 @@ The export package includes comprehensive metadata and integrity verification to
                 ).hexdigest()
             }
         }
-        
+```
+
+The portable package creation follows Article 20 requirements for structured, commonly used, and machine-readable formats. The JSON format is widely supported across systems, enabling true data portability. The integrity hash ensures data hasn't been tampered with during transfer, maintaining trust in the portability process.
+
+```python
         return {
             'success': True,
             'portable_data': portable_package,
             'format': 'structured_json',
             'encryption_available': True
         }
-    
 ```
+
+The response indicates encryption availability for secure transfer, addressing privacy concerns when sensitive personal data is exported. This optional encryption layer provides additional protection during data movement between data controllers, supporting the individual's right to data security even during portability exercises.
 
 The consent management system is fundamental to GDPR compliance, implementing the requirements for valid, specific, informed, and freely given consent under Article 7:
 
@@ -386,6 +436,8 @@ The consent management system is fundamental to GDPR compliance, implementing th
         }
 ```
 
+Consent record creation implements Article 7 requirements for demonstrable consent. The comprehensive structure captures not just whether consent was given, but when, for what purpose, and any additional context. The withdrawal timestamp and active status enable proper consent lifecycle management, supporting the requirement that consent withdrawal be as easy as giving consent.
+
 Consent storage and withdrawal handling must implement cascade effects as required by Article 7(3) - consent withdrawal must be as easy as giving consent:
 
 ```python
@@ -394,7 +446,11 @@ Consent storage and withdrawal handling must implement cascade effects as requir
             self.consent_records[data_subject_id] = {}
         
         self.consent_records[data_subject_id][consent_id] = consent_record
-        
+```
+
+Consent storage implements granular consent management by organizing records per data subject and purpose. This structure supports the GDPR principle of specific consent - individuals can give separate consent for different purposes and withdraw them independently, providing fine-grained control over their personal data processing.
+
+```python
         # If consent is withdrawn, update related data processing
         if not consent_given:
             await self._handle_consent_withdrawal_cascade(data_subject_id, purpose)
@@ -411,8 +467,9 @@ Consent storage and withdrawal handling must implement cascade effects as requir
             'consent_id': consent_id,
             'status': 'active' if consent_given else 'withdrawn'
         }
-    
 ```
+
+Consent withdrawal cascade handling implements Article 7(3) requirements by immediately stopping processing based on withdrawn consent. The activity logging creates audit trails for consent management decisions, supporting accountability and compliance verification. The return status clearly communicates the consent state for operational decision-making.
 
 The Privacy Impact Assessment (PIA) implementation follows Article 35 requirements, mandating systematic privacy risk evaluation for high-risk processing:
 
@@ -433,6 +490,8 @@ The Privacy Impact Assessment (PIA) implementation follows Article 35 requiremen
         safeguards_assessment = await self._assess_safeguards(processing_activity)
 ```
 
+Privacy Impact Assessment (PIA) follows the Article 35 three-pillar approach: necessity assessment ensures processing is actually needed and proportionate to the objective; risk assessment identifies potential harms to individuals' rights and freedoms; safeguards assessment evaluates technical and organizational measures that mitigate identified risks. This systematic approach ensures comprehensive privacy protection evaluation.
+
 The comprehensive risk analysis combines necessity, risk, and safeguards assessments to determine if supervisory authority consultation is required:
 
 ```python
@@ -440,7 +499,11 @@ The comprehensive risk analysis combines necessity, risk, and safeguards assessm
         overall_risk = await self._determine_overall_risk(
             necessity_assessment, risk_assessment, safeguards_assessment
         )
-        
+```
+
+Overall risk determination synthesizes all assessment components into a final risk classification. This holistic analysis considers how necessity, identified risks, and existing safeguards interact to determine if processing can proceed safely or requires additional measures or supervisory authority consultation.
+
+```python
         pia_report = {
             'pia_id': pia_id,
             'processing_activity': processing_activity,
@@ -453,7 +516,11 @@ The comprehensive risk analysis combines necessity, risk, and safeguards assessm
             'requires_consultation': overall_risk['level'] == 'high',
             'review_date': (datetime.now() + timedelta(days=365)).isoformat()
         }
-        
+```
+
+The comprehensive PIA report documents all assessment components and decisions, creating an audit trail for compliance verification. The automatic consultation flag triggers Article 36 supervisory authority consultation when high risks remain after safeguards implementation. The annual review date ensures ongoing privacy protection evaluation.
+
+```python
         self.privacy_impact_assessments[pia_id] = pia_report
         
         return {
@@ -463,8 +530,9 @@ The comprehensive risk analysis combines necessity, risk, and safeguards assessm
             'requires_consultation': pia_report['requires_consultation'],
             'recommendations': overall_risk['recommendations']
         }
-    
 ```
+
+PIA storage and response provide operational intelligence for privacy and compliance teams. The return value enables immediate decision-making about whether processing can proceed, needs additional safeguards, or requires supervisory authority consultation, supporting privacy-by-design principles in system development.
 
 The compliance reporting system provides comprehensive oversight and demonstrates accountability as required by Article 5(2). This generates executive-level compliance dashboards:
 
@@ -489,6 +557,8 @@ The compliance reporting system provides comprehensive oversight and demonstrate
         }
 ```
 
+Processing statistics provide executive-level visibility into data protection scope and compliance posture. Tracking total data subjects and elements demonstrates scale, while consent-based and sensitive data metrics highlight high-risk processing that requires enhanced protection measures. These metrics support strategic privacy program decisions and regulatory reporting requirements.
+
 Rights request metrics demonstrate our responsiveness to data subject exercises, which is critical for regulatory audits:
 
 ```python
@@ -508,6 +578,8 @@ Rights request metrics demonstrate our responsiveness to data subject exercises,
         }
 ```
 
+Rights request statistics demonstrate operational excellence in data subject service delivery. Access and erasure request volumes indicate individual privacy engagement levels, while response time and compliance rate metrics show organizational effectiveness in fulfilling GDPR obligations. These metrics are crucial for demonstrating accountability to regulators and identifying operational improvement opportunities.
+
 The comprehensive report combines all compliance dimensions into a single accountability document:
 
 ```python
@@ -521,7 +593,11 @@ The comprehensive report combines all compliance dimensions into a single accoun
             ),
             'consent_withdrawal_rate': 5.2  # Percentage
         }
-        
+```
+
+Consent management statistics track the health of consent-based processing operations. Total and active consent counts show the scope of consent-dependent activities, while withdrawal rates indicate user satisfaction and trust levels. High withdrawal rates may signal consent fatigue or overly broad consent requests that need refinement.
+
+```python
         # Security and breach information
         security_status = {
             'encryption_compliance': 100.0,  # Percentage of data encrypted
@@ -530,7 +606,11 @@ The comprehensive report combines all compliance dimensions into a single accoun
             'data_breaches_ytd': 0,
             'last_security_assessment': datetime.now().isoformat()
         }
-        
+```
+
+Security status metrics demonstrate technical and organizational measures implementation effectiveness. Encryption and access control compliance rates show protection coverage, while breach tracking and audit logging status indicate security monitoring capabilities. These metrics support Article 32 security obligations and breach notification requirements.
+
+```python
         compliance_report = {
             'report_id': f"compliance_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
             'report_date': datetime.now().isoformat(),
@@ -549,6 +629,8 @@ The comprehensive report combines all compliance dimensions into a single accoun
         
         return compliance_report
 ```
+
+The comprehensive compliance report consolidates all privacy program dimensions into executive-ready documentation. The structured format supports regulatory reporting, board presentations, and continuous improvement planning. The compliance score and recommendations provide actionable intelligence for strengthening data protection practices.
 
 The compliance scoring algorithm provides quantitative assessment of GDPR adherence for management oversight:
 
@@ -608,6 +690,8 @@ K-anonymity implementation groups records by quasi-identifiers and applies gener
             groups[qi_signature].append(record)
 ```
 
+Record grouping by quasi-identifiers creates the foundation for k-anonymity analysis. Quasi-identifiers are attributes that, when combined, might enable re-identification even when direct identifiers are removed. This grouping reveals which individuals share the same quasi-identifier combinations and therefore cannot be distinguished from each other.
+
 Records that don't meet the k-anonymity threshold are either generalized (reducing precision) or suppressed (removed) to prevent re-identification:
 
 ```python
@@ -617,7 +701,11 @@ Records that don't meet the k-anonymity threshold are either generalized (reduci
         # Apply generalization/suppression
         anonymized_dataset = []
         suppressed_records = 0
-        
+```
+
+Small group identification finds records that don't meet the k-anonymity threshold. These groups pose re-identification risks because they contain fewer than k individuals sharing the same quasi-identifier combination. The anonymization process must address these groups through generalization or suppression to achieve the desired privacy level.
+
+```python
         for signature, records in groups.items():
             if len(records) >= k_value:
                 # Group meets k-anonymity requirement
@@ -629,7 +717,11 @@ Records that don't meet the k-anonymity threshold are either generalized (reduci
                     anonymized_dataset.extend(generalized_records)
                 else:
                     suppressed_records += len(records)
-        
+```
+
+Generalization versus suppression represents the core privacy-utility tradeoff in k-anonymity. Generalization reduces data precision (e.g., exact age becomes age range) while preserving records for analysis. Suppression removes records entirely when generalization isn't sufficient, providing stronger privacy protection but reducing dataset utility.
+
+```python
         return {
             'anonymized_dataset': anonymized_dataset,
             'k_value': k_value,
@@ -638,8 +730,9 @@ Records that don't meet the k-anonymity threshold are either generalized (reduci
             'suppressed_records': suppressed_records,
             'privacy_level': f"{k_value}-anonymous"
         }
-    
 ```
+
+The comprehensive anonymization result provides complete transparency about privacy protection effectiveness and data utility impact. Size comparisons show how much data was preserved, suppression counts indicate privacy enforcement strictness, and the privacy level certification confirms the achieved anonymity guarantee.
 
 Differential privacy provides mathematically rigorous privacy guarantees by adding calibrated noise to query results, ensuring individual contributions cannot be detected:
 
@@ -869,7 +962,11 @@ Default role initialization establishes enterprise-standard roles that align wit
             },
             description="GDPR Data Protection Officer role"
         )
-        
+```
+
+The Data Protection Officer role implements GDPR Article 39 requirements with carefully scoped permissions. DPOs need read access to personal data for compliance monitoring, audit log access for oversight activities, and compliance view capabilities for reporting. This role separation ensures independent privacy oversight as mandated by regulatory requirements.
+
+```python
         # System Administrator
         admin_role = Role(
             role_id="system_admin",
@@ -884,6 +981,8 @@ Default role initialization establishes enterprise-standard roles that align wit
         )
 ```
 
+System administrator roles provide comprehensive system management capabilities while maintaining clear boundaries around data access. The permission set includes user and role management for access control administration, plus system-level privileges for operational management. Audit log access enables security monitoring and compliance support.
+
 We also define operational roles that provide least-privilege access for day-to-day business functions:
 
 ```python
@@ -894,7 +993,11 @@ We also define operational roles that provide least-privilege access for day-to-
             permissions={Permission.READ_PERSONAL_DATA},
             description="Read-only access to anonymized data"
         )
-        
+```
+
+Data analyst roles implement the principle of least privilege with read-only access to personal data, typically in anonymized form. This permission structure supports legitimate business intelligence activities while minimizing privacy risks. The restricted access prevents unauthorized data modification that could compromise data integrity or privacy protections.
+
+```python
         # Customer Service Representative
         csr_role = Role(
             role_id="customer_service",
@@ -912,7 +1015,10 @@ We also define operational roles that provide least-privilege access for day-to-
             "data_analyst": analyst_role,
             "customer_service": csr_role
         })
-    
+```
+
+Customer service roles balance operational needs with privacy protection by providing limited read/write access for legitimate support activities. This permission set enables representatives to update customer information and resolve issues while preventing access to highly sensitive data or system administration functions. The role registration creates the foundation for enterprise RBAC implementation.
+
 ```
 
 Multi-factor authentication with zero-trust verification ensures that every authentication attempt is thoroughly validated before granting access:
@@ -948,12 +1054,20 @@ Password verification and multi-factor authentication create multiple security l
                 'reason': 'invalid_password'
             })
             return {'success': False, 'error': 'Authentication failed'}
-        
+```
+
+Password verification implements the first authentication factor with comprehensive failure logging. Failed authentication attempts are logged with specific reasons to enable security monitoring and threat detection. The generic error message prevents information disclosure while detailed logging provides operational intelligence for security teams.
+
+```python
         # Multi-factor authentication
         if user.mfa_enabled:
             mfa_result = await self._verify_mfa(user, additional_factors or {})
             if not mfa_result['success']:
                 return mfa_result
+```
+
+Multi-factor authentication adds critical security layers for users with elevated privileges or accessing sensitive data. MFA verification failures immediately terminate the authentication process, implementing fail-secure principles. This approach significantly reduces account compromise risks from password-based attacks like credential stuffing or brute force attempts.
+
 ```
 
 Successful authentication creates a comprehensive security context and generates secure session tokens for subsequent authorization decisions:
