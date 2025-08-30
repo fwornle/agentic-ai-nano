@@ -9,6 +9,7 @@ In this session, you'll build sophisticated multi-agent data processing systems 
 ## Learning Outcomes
 
 By the end of this session, you will be able to:
+
 - **Design** and implement graph-based data pipeline orchestration using LangGraph
 - **Build** complex multi-agent systems with stateful coordination for data processing workflows
 - **Apply** state management patterns for distributed data streaming coordination
@@ -65,7 +66,7 @@ This state structure provides the observability and error handling required for 
 workflow = StateGraph(WorkflowState)
 ```
 
-### Core Architecture Principles:
+### Core Architecture Principles
 
 Understanding these principles is like grasping the fundamental laws that govern distributed data processing systems:
 
@@ -510,7 +511,6 @@ cd src/session3
 python simple_workflow.py          # Basic data workflow
 python hierarchical_team.py        # Multi-agent data coordination
 ```
-
 
 ---
 
