@@ -1285,7 +1285,10 @@ Comprehensive cost calculation includes compute, memory, and query processing co
         daily_metrics.total_compute_cost += compute_cost + memory_cost
         daily_metrics.total_queries_executed += queries_executed
         daily_metrics.total_query_cost += query_cost
-        
+```
+Daily cost tracking initialization creates metrics containers for each day with service-specific breakdown. Compute hours, costs, and query tracking enable detailed expense analysis and trend monitoring.
+
+```python        
         # Track by service type
         if service_type not in daily_metrics.cost_by_service:
             daily_metrics.cost_by_service[service_type] = 0.0
@@ -1296,6 +1299,7 @@ Comprehensive cost calculation includes compute, memory, and query processing co
         
         return total_cost
 ```
+Service-specific cost tracking enables targeted optimization while budget alert checking provides proactive cost management. Total cost return enables immediate cost visibility for operational decisions.
 
 Daily cost tracking organizes expenses by date and service for budget management and trend analysis. Service-specific cost breakdown enables optimization decisions.
 
@@ -1384,7 +1388,10 @@ Workload-specific weighting adapts optimization priorities. Analytics workloads 
             cost_score = 1 - (specs["cost_per_gb"] / max(s["cost_per_gb"] for s in suitable_services.values()))
             latency_score = 1 - (specs["latency"] / max(s["latency"] for s in suitable_services.values()))
             throughput_score = specs["max_throughput_gb_hour"] / max(s["max_throughput_gb_hour"] for s in suitable_services.values())
-            
+```
+Service scoring evaluation normalizes metrics for fair comparison across different service capabilities. Cost and latency scores are inverted (lower values get higher scores) while throughput scores favor higher values.
+
+```python            
             total_score = (
                 cost_score * weights["cost"] +
                 latency_score * weights["latency"] +
@@ -1396,6 +1403,8 @@ Workload-specific weighting adapts optimization priorities. Analytics workloads 
                 best_service = service
         
         return best_service or "batch_processing"
+```
+Weighted scoring combines normalized metrics using workload-specific priorities for optimal service selection. Best service tracking ensures consistent optimization decisions with fallback to batch processing for reliability.
 ```
 
 Weighted scoring combines normalized cost, latency, and throughput metrics for optimal service selection. Score-based ranking ensures consistent optimization decisions.
