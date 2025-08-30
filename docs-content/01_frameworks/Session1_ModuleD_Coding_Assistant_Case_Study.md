@@ -516,13 +516,22 @@ def save_data_processing_session(
     """Save data processing session for resumption"""
     session_dir = Path(".data_processing_assistant/sessions")
     session_dir.mkdir(parents=True, exist_ok=True)
-    
+```
+
+The session persistence system creates a dedicated directory structure for storing data processing sessions. This approach ensures session files are organized and easily discoverable, while the `parents=True` parameter handles nested directory creation for complex session hierarchies.
+
+```python
     file_path = session_dir / f"{session_id}.json"
     with open(file_path, "w") as f:
         json.dump({
             "processing_history": processing_history,    # Full data processing context
             "metadata": metadata,                        # Data sources, processing parameters
             "intermediate_results": intermediate_results, # Cached processing outputs
+```
+
+The core session data includes the complete conversation history, processing metadata (data sources, parameters), and cached intermediate results. This comprehensive approach enables true session resumption where data analysts can continue complex analysis workflows exactly where they left off.
+
+```python
             "timestamp": datetime.now().isoformat(),
             "agent_state": current_processing_state,     # Where each data agent left off
             "data_lineage": data_lineage_graph          # Track data transformations
@@ -719,7 +728,11 @@ class InterruptibleDataProcessing:
             self._handle_data_processing_interrupt
         )
         return self
-    
+```
+
+The context manager pattern enables safe interrupt handling for long-running data processing operations. By capturing the original signal handler, the system ensures it can restore normal interrupt behavior after the data processing completes, preventing interference with other system operations.
+
+```python
     async def __aexit__(self, *args):
         # Restore original handler
         signal.signal(signal.SIGINT, self.original_handler)
@@ -727,7 +740,11 @@ class InterruptibleDataProcessing:
     def _handle_data_processing_interrupt(self, signum, frame):
         # Don't just crash - raise controlled exception for data processing
         raise DataProcessingInterrupt("Data analysis cancelled by user")
+```
 
+The interrupt handler raises a controlled exception instead of allowing the system to crash. This approach enables graceful cleanup of data processing resources, proper session state persistence, and user-friendly error messages when data analysts need to halt long-running analyses.
+
+```python
 # Usage in data processing agent execution
 async with InterruptibleDataProcessing():
     response = await llm_call_with_data_tools(messages, data_tools)
@@ -789,6 +806,11 @@ class ShortenDataProcessingConversationResult:
         3. Current data analysis progress and state
         4. Important data context for continuing the analysis
         5. Any data constraints or quality requirements mentioned
+```
+
+The intelligent summarization system uses structured prompts to preserve critical data processing context. Rather than simple truncation that loses important analysis progress, this approach maintains continuity of complex data analysis workflows while dramatically reducing token consumption.
+
+```python
         6. Data sources and schemas referenced
         7. Key insights and findings discovered so far
         
@@ -800,7 +822,11 @@ class ShortenDataProcessingConversationResult:
         """
         
         return await llm.complete(summary_prompt)
-    
+```
+
+The prompt emphasizes data-specific elements like sources, schemas, and insights that are essential for analysts to continue their work effectively. By formatting the history strategically, the summary preserves analytical momentum while fitting within token limits.
+
+```python
     def _format_data_history_for_summary(self, history: list) -> str:
         """Structure the data processing history for optimal summarization"""
         # Group related data messages, identify analysis decision points,
