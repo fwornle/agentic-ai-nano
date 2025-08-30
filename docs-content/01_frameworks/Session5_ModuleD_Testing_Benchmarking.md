@@ -480,7 +480,12 @@ Percentile calculations provide detailed performance distribution insights beyon
             'successful_requests': len(successful_requests),
             'failed_requests': len(failed_requests),
             'success_rate': len(successful_requests) / total_requests if total_requests > 0 else 0,
-            'avg_response_time': sum(response_times) / len(response_times) if response_times else 0,
+            'avg_response_time': sum(response_times) / len(response_times) if response_times else 0
+```
+
+Load test result metrics provide comprehensive performance analysis including request counts, success rates, and response time statistics. These foundational metrics enable capacity planning and performance regression detection essential for production data processing system monitoring.
+
+```python
             'min_response_time': min(response_times) if response_times else 0,
             'max_response_time': max(response_times) if response_times else 0,
             'percentiles': percentiles,
@@ -530,14 +535,18 @@ class DataProcessingAgentMetrics:
     max_response_time: float = 0.0
     total_tokens_used: int = 0
     total_cost: float = 0.0
-    
+
+The metrics data structure captures comprehensive performance indicators for data processing agents. Standard metrics include request counts, success rates, and response times that provide fundamental performance visibility, while cost tracking enables budget monitoring and optimization for AI-powered data processing operations.
+
     # Data processing specific metrics
     datasets_processed: int = 0
     total_rows_processed: int = 0
     data_quality_score: float = 1.0
     pipeline_failures: int = 0
     schema_validation_errors: int = 0
-    
+
+Data processing specific metrics extend standard agent monitoring with domain-specific insights essential for data engineering operations. Row processing counts enable throughput analysis, while quality scores and error categorization support data pipeline reliability monitoring and optimization.
+
     # Response time percentiles
     response_times: List[float] = field(default_factory=list)
     
@@ -566,7 +575,11 @@ Next, we implement intelligent response time tracking with memory management for
         self.avg_response_time = sum(self.response_times) / len(self.response_times)
         self.min_response_time = min(self.min_response_time, response_time)
         self.max_response_time = max(self.max_response_time, response_time)
-    
+```
+
+Response time tracking implements intelligent memory management to prevent unbounded growth while maintaining statistical accuracy. The circular buffer approach keeps recent performance data for trend analysis while discarding older measurements, enabling long-running production systems to maintain consistent memory usage.
+
+```python
     def update_data_processing_metrics(self, rows_processed: int, data_quality: float = 1.0) -> None:
         """Update data processing specific metrics."""
         self.datasets_processed += 1
@@ -624,7 +637,11 @@ class EnterpriseDataProcessingMetricsCollector:
         self.agent_metrics: Dict[str, DataProcessingAgentMetrics] = {}
         self.global_metrics = DataProcessingAgentMetrics("global")
         self.custom_metrics: Dict[str, List[Dict[str, Any]]] = {}
-        
+```
+
+The enterprise metrics collector provides centralized monitoring for multiple data processing agents with configurable export intervals and data retention policies. The dual-level metrics tracking enables both agent-specific performance analysis and global system monitoring essential for production operations.
+
+```python
         # External integrations for data processing
         self.prometheus_enabled = False
         self.datadog_enabled = False
@@ -990,7 +1007,12 @@ Next, we create the new cache entry with proper data processing metadata:
                 last_accessed=datetime.now(timezone.utc),
                 access_count=1,
                 ttl_seconds=ttl,
-                size_bytes=size_bytes,
+                size_bytes=size_bytes
+```
+
+Cache entry creation initializes comprehensive metadata for intelligent cache management. The timestamp tracking enables LRU eviction strategies, while size tracking supports memory limit enforcement essential for production data processing environments with large dataset caching requirements.
+
+```python
                 dataset_id=dataset_id,
                 data_quality_score=data_quality_score,
                 processing_cost=processing_cost,
@@ -1031,7 +1053,9 @@ Finally, we add helper methods for size calculation, intelligent eviction, and d
             # Find entry with lowest priority score
             lowest_priority_key = None
             lowest_priority_score = float('inf')
-            
+
+Intelligent eviction algorithm scans all cache entries to find the lowest priority candidate for removal. The algorithm considers multiple factors including data quality, processing cost, and access patterns to optimize cache retention and maximize the value of cached data processing results.
+
             for key, entry in self._cache.items():
                 priority_score = entry.get_priority_score()
                 if priority_score < lowest_priority_score:
@@ -1059,7 +1083,11 @@ Finally, we provide comprehensive cache performance statistics for data processi
                 sum(entry.data_quality_score for entry in self._cache.values()) / 
                 len(self._cache) if self._cache else 0.0
             )
-            
+```
+
+Comprehensive statistics provide detailed cache performance insights essential for optimization and capacity planning. Hit rate calculations enable cache tuning decisions, while data-specific metrics like cached row counts and quality scores help understand the business impact of caching strategies.
+
+```python
             return {
                 'size': len(self._cache),
                 'max_size': self.max_size,
@@ -1086,7 +1114,9 @@ def cached_data_processing_method(
     processing_cost_estimator: Optional[Callable] = None
 ):
     """Decorator for caching data processing agent method results."""
-    
+
+The cache decorator enables transparent caching of data processing agent method results with configurable TTL and intelligent metadata extraction. The decorator supports custom key generation strategies and cost estimation functions, making it suitable for diverse data processing workflows with varying performance characteristics.
+
     def decorator(func: Callable) -> Callable:
         @wraps(func)
         async def wrapper(*args, **kwargs):
@@ -1109,7 +1139,11 @@ Now we handle cache lookup and function execution for data processing:
             
             # Execute function and cache result with data processing metadata
             result = await func(*args, **kwargs)
-            
+```
+
+Cache-first lookup strategy maximizes performance by avoiding expensive data processing operations when results are already cached. The async function execution maintains compatibility with data processing workflows while enabling transparent caching without modifying agent method signatures.
+
+```python
             # Extract data processing metadata if available
             dataset_id = kwargs.get('dataset_id') or getattr(result, 'dataset_id', None)
             rows_count = getattr(result, 'rows_processed', 0)
