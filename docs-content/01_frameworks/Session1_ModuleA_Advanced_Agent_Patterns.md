@@ -49,6 +49,8 @@ class ReflectionAgent(BaseAgent):
         self.reflection_history = []          # Track data processing improvements
 ```
 
+The ReflectionAgent demonstrates the foundational pattern of iterative self-improvement for data processing. By limiting iterations to 3, it prevents the agent from getting stuck in endless optimization cycles that could consume excessive compute resources in production environments.
+
 **Why Limit Iterations?** Without a maximum, the agent could get stuck in endless data processing optimization loops, consuming excessive compute resources in production pipelines.
 
 ### The Core Reflection Loop
@@ -71,7 +73,7 @@ async def _generate_response(self, message: str, context: Dict = None) -> str:
             break
 ```
 
-The loop continues with optimization and tracking phases:
+The core reflection loop orchestrates iterative improvement. Each iteration evaluates the current approach and determines whether optimization is needed. The satisfaction check prevents unnecessary processing when the solution is already adequate for data engineering requirements.
 
 ```python
         # Step 3: Optimize processing based on critique
@@ -86,6 +88,8 @@ The loop continues with optimization and tracking phases:
     
     return current_response
 ```
+
+The optimization phase generates improved processing strategies based on the critique, while tracking captures the entire improvement process for performance analysis. This creates a detailed audit trail of how the agent's data processing approach evolved.
 
 ### Reflection Methods Implementation
 
@@ -105,6 +109,8 @@ async def _initial_data_processing(self, message: str, context: Dict = None) -> 
     response = await self._call_llm(prompt)
     return response
 ```
+
+The initial processing method generates the first approach without reflection, focusing on key data engineering concerns: throughput optimization for high-volume processing, data quality assurance for reliable analytics, and cost efficiency for sustainable operations. This establishes the baseline that reflection will iteratively improve.
 
 ### Self-Critique Implementation:
 
@@ -126,7 +132,11 @@ async def _reflect_on_processing(self, original_message: str, response: str) -> 
     4. Data quality: Are validation and error handling comprehensive?
     5. Reliability: Will this maintain SLAs under high load?
     6. Monitoring: Can pipeline health be effectively tracked?
-    
+```
+
+The reflection method analyzes the processing approach using six critical data engineering evaluation criteria. Each criterion addresses a specific aspect of production-scale data processing: scalability for growth, performance for efficiency, cost control for sustainability, quality for reliability, SLA compliance for business requirements, and monitoring for operational visibility.
+
+```python
     Provide specific suggestions for improvement based on production data engineering best practices.
     If the approach is already optimal for enterprise scale, say "SATISFACTORY".
     """
@@ -134,6 +144,8 @@ async def _reflect_on_processing(self, original_message: str, response: str) -> 
     critique = await self._call_llm(critique_prompt)
     return critique
 ```
+
+The critique focuses on actionable improvements based on proven data engineering practices. The "SATISFACTORY" keyword provides a clear stopping condition that prevents endless optimization when the approach already meets enterprise-scale requirements.
 
 The "SATISFACTORY" keyword provides a clear stopping condition, preventing endless optimization cycles when the processing approach is already production-ready.
 
@@ -162,6 +174,8 @@ async def _improve_processing(self, message: str, current_response: str, critiqu
     return improved
 ```
 
+The improvement process generates enhanced processing strategies that specifically address critique points while preserving essential data engineering principles. This targeted optimization ensures that reflection doesn't just change the approach randomly but systematically addresses identified weaknesses while maintaining proven strengths.
+
 ---
 
 ## Part 2: Multi-Step Planning
@@ -184,7 +198,7 @@ class DataProcessingStatus(Enum):
     FAILED = "failed"
 ```
 
-The `DataProcessingStatus` enum provides clear tracking of each pipeline step's execution state, enabling proper workflow management and error handling throughout the data processing lifecycle.
+The status enumeration provides clear state tracking for each pipeline step, enabling proper workflow management and error handling. This structured approach prevents ambiguous states and enables automated workflow orchestration based on step completion status.
 
 ```python
 @dataclass
@@ -198,6 +212,8 @@ class DataPipelineStep:
     result: Optional[str] = None
 ```
 
+The DataPipelineStep dataclass captures comprehensive information for each processing stage: unique identification, clear description of the operation, dependency relationships for proper sequencing, time estimates for resource planning, resource requirements for cloud deployment, execution status for tracking, and result storage for downstream steps.
+
 The `DataPipelineStep` dataclass captures all essential information for data pipeline execution: what to process (description), when to process it (dependencies), resource requirements for cloud deployment, and execution outcomes (status and result).
 
 ```python
@@ -210,6 +226,8 @@ class DataPipelinePlanningAgent(BaseAgent):
         self.execution_history: List[Dict] = []
         self.resource_tracker = DataResourceTracker()  # Track cloud resource usage
 ```
+
+The planning agent specializes in decomposing complex data workflows into executable steps with proper dependency management. The resource tracker monitors cloud service consumption, enabling cost optimization and capacity planning across distributed processing environments.
 
 ### Pipeline Plan Generation
 
@@ -242,7 +260,7 @@ async def create_data_pipeline_plan(self, complex_data_task: str) -> List[DataPi
     """
 ```
 
-After generating the plan text, it's parsed into structured objects for execution:
+The planning prompt guides the LLM to consider essential data engineering factors when decomposing complex tasks. Each consideration addresses a critical aspect of production data processing: batch sizing for performance, parallelization for scale, partitioning for efficiency, error handling for reliability, and cost optimization for sustainability.
 
 ```python
     plan_text = await self._call_llm(planning_prompt)
@@ -253,6 +271,8 @@ After generating the plan text, it's parsed into structured objects for executio
     
     return steps
 ```
+
+The LLM-generated plan text is parsed into structured DataPipelineStep objects that can be programmatically executed. This transformation enables the agent to move from natural language planning to executable workflow orchestration in cloud environments.
 
 The LLM generates a text-based data processing plan which is then parsed into structured objects for programmatic execution in cloud environments.
 
@@ -269,7 +289,7 @@ def _parse_data_pipeline_plan(self, plan_text: str) -> List[DataPipelineStep]:
             description = line.split('.', 1)[1].strip() if '.' in line else line.strip()
 ```
 
-The parser identifies numbered steps and extracts their descriptions, focusing on data processing operations and requirements.
+The parser identifies numbered steps from the LLM output and extracts meaningful descriptions. This text-to-structure conversion enables programmatic execution of naturally expressed data processing workflows.
 
 ```python
             # Extract data processing dependencies and resource requirements
@@ -286,6 +306,8 @@ The parser identifies numbered steps and extracts their descriptions, focusing o
     
     return steps
 ```
+
+Dependency and resource extraction creates the metadata necessary for intelligent pipeline orchestration. Each step includes dependency relationships for proper sequencing and resource requirements for optimal cloud deployment and cost management.
 
 Dependency and resource extraction ensures proper pipeline orchestration with appropriate cloud resource allocation for each data processing step.
 
@@ -311,7 +333,7 @@ async def execute_data_pipeline(self) -> Dict[str, any]:
             return {"error": "No executable steps found - check dependencies or resource constraints"}
 ```
 
-The main loop continues until all data processing steps are completed, finding the next executable step while considering both dependencies and resource availability.
+The execution engine orchestrates pipeline steps while respecting both logical dependencies and resource constraints. This dual consideration ensures steps execute in the correct order while maintaining optimal resource utilization across the cloud infrastructure.
 
 ```python
         # Allocate resources and execute the data processing step
@@ -328,7 +350,11 @@ The main loop continues until all data processing steps are completed, finding t
             next_step.result = result
             next_step.status = DataProcessingStatus.COMPLETED
             completed_steps.add(next_step.id)
-            
+```
+
+Resource allocation and execution tracking provide comprehensive visibility into processing performance. Each step transitions through clear status states while resource allocation ensures optimal cloud resource utilization and cost control.
+
+```python
             # Update resource usage tracking
             resource_usage = self.resource_tracker.update_usage(
                 allocated_resources, result.get('metrics', {})
@@ -343,7 +369,7 @@ The main loop continues until all data processing steps are completed, finding t
             })
 ```
 
-Each data processing step execution includes comprehensive resource tracking and performance metrics collection for cost optimization and pipeline monitoring.
+Comprehensive logging captures both functional results and operational metrics, enabling post-execution analysis, cost optimization, and performance tuning for future data processing workflows.
 
 ```python
         except Exception as e:
@@ -371,6 +397,8 @@ Each data processing step execution includes comprehensive resource tracking and
     }
 ```
 
+Robust error handling ensures proper resource cleanup even when steps fail, preventing resource leaks in cloud environments. The comprehensive return structure provides complete visibility into execution results, resource utilization, and cost implications for operational analysis.
+
 Comprehensive resource management ensures proper cleanup and provides detailed cost analysis for data processing operations.
 
 ```python
@@ -395,6 +423,8 @@ async def _execute_data_step(self, step: DataPipelineStep, resources: Dict) -> s
     result = await self._call_llm(execution_prompt)
     return result
 ```
+
+Individual step execution uses focused prompts that emphasize operational metrics essential for data engineering: processing completion status, throughput performance, quality validation outcomes, resource efficiency, and anomaly detection. These metrics enable comprehensive pipeline monitoring and optimization.
 
 Individual step execution uses focused prompts that emphasize data engineering metrics and quality outcomes essential for production pipeline monitoring.
 
@@ -421,7 +451,11 @@ class DataProcessingCoordinator:
         self.message_history = []               # All inter-agent data processing messages
         self.communication_patterns = {}       # Track data flow patterns
         self.pipeline_metrics = {}            # Track processing performance metrics
-    
+```
+
+The coordinator manages multiple specialized agents working together on complex data processing workflows. It maintains comprehensive tracking of agent communications, data flow patterns, and performance metrics essential for optimizing distributed data processing operations.
+
+```python
     def register_data_agent(self, agent: BaseAgent):
         """Register a specialized data processing agent with the coordinator"""
         self.agents[agent.name] = agent
@@ -429,6 +463,8 @@ class DataProcessingCoordinator:
         self.pipeline_metrics[agent.name] = {"processed_data_gb": 0, "processing_time": 0}
         print(f"✓ Registered data processing agent: {agent.name} ({agent.description})")
 ```
+
+Agent registration establishes the coordination infrastructure, initializing communication tracking and performance metrics for each specialized agent. This setup enables comprehensive monitoring and optimization of multi-agent data processing workflows.
 
 ### Message Routing System
 
@@ -449,7 +485,7 @@ async def route_data_message(self, message: str, to_agent: str, from_agent: str 
     })
 ```
 
-Communication patterns are tracked with data processing context, allowing analysis of data flow patterns and agent interaction efficiency in distributed processing systems.
+Message routing includes comprehensive communication tracking that captures sender, message classification, content summary, and timing. This data enables analysis of communication efficiency and optimization of agent coordination patterns in distributed data processing environments.
 
 ```python
     # Process message with target data processing agent
@@ -464,10 +500,12 @@ Communication patterns are tracked with data processing context, allowing analys
         "response": response,
         "processing_metrics": self._extract_processing_metrics(response),
         "timestamp": datetime.now()
-    })
+    )
     
     return response
 ```
+
+Complete conversation history maintains full context of inter-agent communications with extracted processing metrics. This comprehensive logging enables debugging, performance analysis, and optimization of multi-agent data processing workflows.
 
 The complete message history stores full conversations with extracted processing metrics for debugging, performance analysis, and data pipeline audit purposes.
 
@@ -488,7 +526,7 @@ async def delegate_data_processing_task(self, task: str) -> Dict[str, Any]:
     # Step 3: Execute delegation plan with resource coordination
 ```
 
-The three-phase approach ensures systematic data workflow decomposition: first understanding what data processing capabilities are needed, then planning how to use available specialized agents, and finally executing the coordinated data processing effort.
+The three-phase delegation approach ensures systematic task decomposition and agent assignment. Task analysis identifies required capabilities, delegation planning maps work to appropriate specialists, and coordinated execution maintains workflow integrity across distributed agents.
 
 ```python
     results = {}
@@ -507,7 +545,7 @@ The three-phase approach ensures systematic data workflow decomposition: first u
             }
 ```
 
-The execution phase iterates through the delegation plan, routing each data processing subtask to the appropriate specialized agent and collecting both results and performance metrics.
+Execution tracking captures both functional results and operational metrics for each agent's contribution. This comprehensive monitoring enables performance optimization and resource allocation improvements for future multi-agent data processing workflows.
 
 ```python
     # Step 4: Integrate data processing results
@@ -523,6 +561,8 @@ The execution phase iterates through the delegation plan, routing each data proc
         "pipeline_efficiency": self._calculate_pipeline_efficiency(processing_metrics)
     }
 ```
+
+Result integration combines individual agent outputs into cohesive data processing outcomes. The comprehensive return structure provides complete visibility into task delegation, execution results, performance metrics, and overall pipeline efficiency for operational analysis and optimization.
 
 The final integration step combines individual agent results into a cohesive data processing outcome with comprehensive metrics for pipeline monitoring and optimization.
 
@@ -556,6 +596,8 @@ async def _analyze_data_task_requirements(self, task: str) -> Dict[str, Any]:
     # This would use an LLM to analyze - simplified for example
     return {"required_agents": list(self.agents.keys())[:2]}  # Simplified
 ```
+
+Task analysis uses structured evaluation criteria to identify the specialized capabilities needed for complex data processing workflows. The analysis considers the complete data processing pipeline from ingestion through analytics, ensuring comprehensive coverage of all required capabilities and optimal agent selection for the specific task requirements.
 
 The analysis provides context about available specialized data processing agents and requests specific justifications for agent selection, ensuring intelligent task distribution optimized for data engineering workflows rather than random assignment.
 
