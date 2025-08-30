@@ -181,7 +181,7 @@ python /Users/q284340/Agentic/nano-degree/scripts/detect-large-code-blocks.py [t
 3. **Progressive complexity** - Build understanding step by step
 4. **Practical insights** - Share real-world implications and gotchas
 
-## Success Criteria
+## Success Criteria & Quality Verification
 
 Your refactoring achieves its goal when:
 
@@ -191,6 +191,32 @@ Your refactoring achieves its goal when:
 4. **Code remains functional** - All segments can be reassembled into working code
 5. **Learning is progressive** - Concepts build naturally from simple to complex
 6. **Students can follow along** - Explanations are clear enough for first-time learners
+
+## MANDATORY Quality Verification Process
+
+**Before declaring success, you MUST:**
+
+1. **Run the comprehensive analysis script** to verify ALL issues are resolved:
+   ```bash
+   python3 /Users/q284340/Agentic/nano-degree/scripts/comprehensive-course-analysis.py [target_files]
+   ```
+
+2. **Fix any markdown formatting issues** found:
+   ```bash  
+   python3 /Users/q284340/Agentic/nano-degree/scripts/check-markdown-formatting.py [files] --fix
+   ```
+
+3. **Verify no large code blocks remain** using the detector:
+   ```bash
+   python3 /Users/q284340/Agentic/nano-degree/scripts/detect-large-code-blocks.py [files]
+   ```
+
+4. **Check explanation quality** for insufficient explanations:
+   ```bash
+   python3 /Users/q284340/Agentic/nano-degree/scripts/detect-insufficient-explanations.py [files]
+   ```
+
+**NEVER report success without running these verification scripts and achieving 100% compliance.**
 
 ## Remember Your Core Mission
 

@@ -11,7 +11,8 @@
       "Bash(for:*)",
       "Bash(do)",
       "Bash(done)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(chmod:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
