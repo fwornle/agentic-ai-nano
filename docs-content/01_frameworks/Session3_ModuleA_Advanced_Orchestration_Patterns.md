@@ -698,12 +698,20 @@ Adaptive synchronization handling provides multiple response strategies for data
 
 🗂️ **File**: [`src/session3/dynamic_agent_generation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/dynamic_agent_generation.py) - Dynamic agent creation systems
 
+### Dynamic Agent Generation Infrastructure
+
+First, we establish the core imports and type definitions for building sophisticated agent generation systems:
+
 ```python
 from typing import Type, Callable, Dict, Any, List
 import inspect
 from dataclasses import dataclass
 from enum import Enum
+```
 
+These imports provide the foundation for dynamic agent creation. The `typing` module enables robust type hints for complex data structures, `inspect` allows runtime analysis of agent capabilities, and `dataclasses` provide efficient specifications for agent parameters.
+
+```python
 class DataProcessingCapability(Enum):
     """Enumeration of data processing agent capabilities for dynamic matching"""
     DATA_INGESTION = "data_ingestion"
@@ -712,17 +720,30 @@ class DataProcessingCapability(Enum):
     DATA_AGGREGATION = "data_aggregation"
     QUALITY_MONITORING = "quality_monitoring"
     PIPELINE_COORDINATION = "pipeline_coordination"
+```
 
+This enumeration defines the specialized capabilities that data processing agents can possess. Each capability represents a distinct aspect of data engineering - from raw data ingestion through transformation to quality monitoring. This structure enables the factory system to match specific agent types to the requirements of complex data processing tasks.
+
+### Agent Specification Schema
+
+Next, we define the comprehensive specification structure for dynamically generated data processing agents:
+
+```python
 @dataclass
 class AgentSpecification:
     """Specification for dynamically generated data processing agents"""
     
+    # Core agent configuration
     agent_type: str
     capabilities: List[DataProcessingCapability]
     resource_requirements: Dict[str, Any]
     performance_targets: Dict[str, float]
     specialization_parameters: Dict[str, Any]
-    
+```
+
+The core agent configuration establishes the fundamental identity and capabilities of each generated agent. The `agent_type` provides a unique identifier, `capabilities` lists the specific data processing functions this agent can perform, and `resource_requirements` specifies computational needs for optimal performance.
+
+```python
     # Runtime configuration for data processing
     max_concurrent_batches: int = 3
     timeout_seconds: int = 300
@@ -731,7 +752,15 @@ class AgentSpecification:
     # Quality and monitoring for data processing
     quality_thresholds: Dict[str, float] = None
     monitoring_enabled: bool = True
+```
 
+Runtime configuration parameters control how the agent behaves during data processing operations. Batch limits prevent resource overwhelm, timeouts ensure responsiveness in distributed systems, and retry attempts provide resilience against transient failures. Quality thresholds and monitoring enable production-grade observability.
+
+### Dynamic Agent Factory Foundation
+
+Now we implement the factory class that orchestrates dynamic agent creation based on processing requirements:
+
+```python
 class DynamicDataProcessingAgentFactory:
     """Factory for creating data processing agents based on runtime requirements"""
     
@@ -740,7 +769,15 @@ class DynamicDataProcessingAgentFactory:
         self.capability_mappings = {}
         self.performance_history = {}
         self.resource_pool = DataProcessingResourcePool()
-        
+```
+
+The factory initialization creates the infrastructure for agent generation and management. Agent templates store reusable agent patterns, capability mappings enable quick lookups for required functionality, performance history guides optimization decisions, and the resource pool manages computational allocation across generated agents.
+
+### Agent Template Registration
+
+The template registration system enables the factory to learn about available agent types and their capabilities:
+
+```python        
     def register_agent_template(self, agent_type: str, template_class: Type, 
                               capabilities: List[DataProcessingCapability]):
         """Register a data processing agent template for dynamic instantiation"""
