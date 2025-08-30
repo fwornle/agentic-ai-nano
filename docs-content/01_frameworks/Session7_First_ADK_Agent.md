@@ -218,7 +218,8 @@ Data lake connection setup uses enterprise-grade configuration with 50 connectio
 ```
 
 Connection establishment includes comprehensive monitoring integration. Successful connections are tracked with metadata for operational insights, while failures are logged for troubleshooting and alerting. The error handling ensures connection issues don't cascade through the system.
-    
+
+```python
     async def setup_streaming_data_connection(self, stream_config: dict) -> StreamingDataConnector:
         """Setup streaming data connection for real-time data processing"""
         
@@ -253,7 +254,8 @@ Streaming connector configuration enables real-time data processing with enterpr
 ```
 
 Streaming connection initialization includes comprehensive monitoring setup. Topic and partition information enables scaling decisions, while tenant tracking supports multi-tenant environments with proper isolation and billing.
-    
+
+```python
     async def execute_data_processing_query(self, connection_id: str, query: dict) -> dict:
         """Execute data processing query with enterprise monitoring and error handling"""
         
@@ -300,7 +302,8 @@ Successful query execution captures comprehensive performance metrics including 
 ```
 
 Query failure handling captures detailed error information including exception types, error messages, and timing data. This information enables quick troubleshooting and helps identify patterns in query failures for system improvement.
-            
+
+```python
             raise DataProcessingException(f"Query execution failed: {str(e)}")
 ```
 
@@ -315,7 +318,11 @@ Coordinating multiple agents for complex data processing workflows:
 ```python
 from adk.orchestration import EnterpriseDataOrchestrator, DataPipelineWorkflow
 from adk.monitoring import WorkflowTracker, DataQualityMonitor
+```
 
+These ADK orchestration imports provide enterprise-grade workflow management for complex data processing pipelines. The orchestrator handles resource allocation while monitoring components track performance and data quality.
+
+```python
 class DataProcessingWorkflowOrchestrator:
     """Enterprise orchestration for complex data processing workflows"""
     
@@ -329,7 +336,11 @@ class DataProcessingWorkflowOrchestrator:
         
         self.workflow_tracker = WorkflowTracker()
         self.quality_monitor = DataQualityMonitor()
-        
+```
+
+The orchestrator initializes with enterprise capabilities including support for 100 concurrent workflows, automatic resource management, tenant isolation for multi-tenant environments, and comprehensive monitoring integration.
+
+```python
     async def orchestrate_data_pipeline(self, pipeline_config: dict) -> dict:
         """Orchestrate complex data processing pipeline with enterprise monitoring"""
         
@@ -343,7 +354,11 @@ class DataProcessingWorkflowOrchestrator:
             quality_checks=pipeline_config.get("quality_checks", True),
             tenant_id=pipeline_config.get("tenant_id")
         )
-        
+```
+
+Pipeline orchestration begins with workflow creation that includes configurable stages, error handling strategies (retry by default), quality checks, and tenant isolation. Each workflow receives a unique identifier for tracking purposes.
+
+```python
         # Track workflow execution for enterprise monitoring
         with self.workflow_tracker.track_workflow(workflow_id):
             try:
@@ -352,7 +367,11 @@ class DataProcessingWorkflowOrchestrator:
                 
                 # Monitor data quality throughout pipeline
                 quality_score = await self.quality_monitor.assess_workflow_quality(workflow_result)
-                
+```
+
+Workflow execution uses context management for comprehensive tracking. The orchestrator processes all workflow stages while quality monitoring provides continuous assessment of data integrity throughout the pipeline.
+
+```python
                 # Record successful workflow completion
                 self.workflow_tracker.record_success(workflow_id, {
                     "stages_completed": len(workflow.stages),
@@ -366,7 +385,11 @@ class DataProcessingWorkflowOrchestrator:
                 workflow_result["data_quality_score"] = quality_score
                 
                 return workflow_result
-                
+```
+
+Successful workflow completion is recorded with comprehensive metrics including stage counts, record processing volumes, quality scores, and timing information. These metrics enable performance analysis and capacity planning for data processing operations.
+
+```python
             except Exception as e:
                 # Record workflow failure with detailed error information
                 self.workflow_tracker.record_failure(workflow_id, {
@@ -377,7 +400,11 @@ class DataProcessingWorkflowOrchestrator:
                 })
                 
                 raise WorkflowExecutionException(f"Data processing workflow failed: {str(e)}")
-    
+```
+
+Error handling captures detailed failure information including exception types, error messages, and the specific stage where failure occurred. This information enables rapid troubleshooting and systematic improvement of data processing workflows.
+
+```python
     async def execute_parallel_data_processing(self, processing_tasks: list) -> list:
         """Execute multiple data processing tasks in parallel with load balancing"""
         
@@ -401,6 +428,8 @@ class DataProcessingWorkflowOrchestrator:
         return results
 ```
 
+Parallel data processing distributes tasks optimally across available agents with load balancing and resource awareness. Task batching with asyncio.gather enables efficient concurrent execution while maintaining tenant isolation and comprehensive monitoring.
+
 ---
 
 ## Part 2: Production ADK Agent Development for Data Processing
@@ -412,6 +441,7 @@ Let's create sophisticated ADK agents optimized for enterprise data processing w
 **File**: [`src/session7/production_data_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session7/production_data_agent.py) - Production ADK data processing agent
 
 ```python
+# Core ADK imports for production data processing
 from adk import ProductionADKAgent, DataProcessingCapability
 from adk.monitoring import RealTimeMetrics, AlertingSystem
 from adk.security import EnterpriseSecurityContext, DataEncryption
@@ -419,7 +449,11 @@ import asyncio
 import json
 from datetime import datetime
 from typing import Dict, List, Any
+```
 
+These production-grade ADK imports provide the enterprise infrastructure needed for large-scale data processing. ProductionADKAgent extends basic ADK functionality with enterprise features like resource limits, tenant isolation, and comprehensive monitoring. The security imports enable data encryption and audit logging required for production data environments.
+
+```python
 class ProductionDataProcessingAgent(ProductionADKAgent):
     """Production-grade ADK agent for enterprise data processing workloads"""
     
@@ -433,7 +467,11 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                 DataProcessingCapability.DATA_VALIDATION,
                 DataProcessingCapability.DATA_QUALITY_MONITORING
             ],
-            
+```
+
+The ProductionDataProcessingAgent inherits from ProductionADKAgent to leverage enterprise capabilities. The five core capabilities enable comprehensive data processing workflows: real-time streaming for live data ingestion, batch processing for large-scale analytics, data transformation for pipeline processing, validation for data integrity, and quality monitoring for operational excellence. This capability stack supports complex enterprise data processing scenarios from streaming analytics to ETL pipelines.
+
+```python
             # Enterprise production configuration
             production_config={
                 "environment": "production",
@@ -442,7 +480,11 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                 "monitoring_level": "comprehensive",
                 "security_level": "enterprise"
             },
-            
+```
+
+Production configuration establishes enterprise-grade operational parameters. Tenant isolation ensures complete data segregation in multi-tenant environments, preventing cross-tenant data leakage. Resource limits from tenant_config enable fine-grained control over CPU, memory, and I/O usage per tenant. Comprehensive monitoring captures detailed metrics for performance analysis, while enterprise security enables advanced features like encryption, audit logging, and access controls.
+
+```python
             # Advanced monitoring and alerting for data processing
             monitoring=RealTimeMetrics(
                 metric_retention_days=30,
@@ -453,7 +495,11 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                     "throughput_records_per_sec_min": 100
                 }
             ),
-            
+```
+
+Advanced monitoring configuration sets enterprise-appropriate thresholds for data processing operations. The 30-day retention enables trend analysis and capacity planning. Alert thresholds are calibrated for production data processing: 1000ms latency prevents performance degradation, 1% error rate maintains reliability, 0.95 data quality score ensures data integrity, and 100 records/second minimum throughput catches performance issues. These thresholds balance operational alerting with noise reduction.
+
+```python
             # Enterprise security for data processing
             security_context=EnterpriseSecurityContext(
                 tenant_id=tenant_config.get("tenant_id"),
@@ -466,26 +512,42 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
         self.tenant_config = tenant_config
         self.data_encryption = DataEncryption() if tenant_config.get("encryption_required", True) else None
         self.alerting_system = AlertingSystem(tenant_config.get("alert_endpoints", []))
-    
+```
+
+Enterprise security configuration implements comprehensive data protection. The security context includes tenant identification for proper isolation, mandatory encryption for data at rest and in transit, and audit logging for compliance requirements. Access controls from tenant configuration enable fine-grained permissions. The conditional data encryption and alerting system initialization provide flexibility while maintaining security defaults appropriate for enterprise data processing environments.
+
+```python
     async def process_streaming_data(self, stream_metadata: dict, data_batch: list) -> dict:
         """Process streaming data batch with comprehensive monitoring and quality checks"""
         
         processing_start_time = datetime.now()
         stream_id = stream_metadata.get("stream_id", "unknown")
         tenant_id = self.tenant_config.get("tenant_id")
-        
+```
+
+Streaming data processing begins with comprehensive context setup including precise timing for performance measurement, stream identification for monitoring and debugging, and tenant identification for multi-tenant isolation. This initialization ensures all subsequent processing steps have the metadata needed for enterprise-grade monitoring and troubleshooting.
+
+```python
         try:
             # Validate incoming data batch for quality
             validation_result = await self._validate_data_batch(data_batch, stream_metadata)
             if not validation_result["is_valid"]:
                 await self._handle_data_quality_issue(stream_id, validation_result)
-            
+```
+
+Data quality validation occurs before any processing to prevent corrupted data from propagating through the pipeline. The validation result includes detailed quality metrics and error information. When validation fails, the quality issue handler can implement various remediation strategies like alerting, quarantining bad data, or applying automated corrections based on enterprise data governance policies.
+
+```python
             # Process data batch with transformation and enrichment
             processed_batch = await self._transform_data_batch(
                 data_batch, 
                 stream_metadata.get("transformation_rules", {})
             )
-            
+```
+
+Data transformation applies business logic and enrichment rules to the validated data batch. Transformation rules from stream metadata enable dynamic processing logic configuration without code changes. This approach supports complex enterprise scenarios like schema evolution, data standardization, and regulatory compliance transformations that vary by tenant or data source.
+
+```python
             # Apply data encryption if required
             if self.data_encryption:
                 processed_batch = await self.data_encryption.encrypt_data_batch(processed_batch, {
@@ -493,11 +555,19 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                     "tenant_id": tenant_id,
                     "processing_timestamp": processing_start_time.isoformat()
                 })
-            
+```
+
+Conditional data encryption provides enterprise-grade data protection when required by security policies. The encryption includes contextual metadata like stream ID, tenant ID, and processing timestamp for audit trails and key management. This design enables encryption policies to be configured per tenant or data stream while maintaining performance when encryption isn't required.
+
+```python
             # Calculate processing metrics
             processing_time_ms = (datetime.now() - processing_start_time).total_seconds() * 1000
             throughput = len(data_batch) / (processing_time_ms / 1000) if processing_time_ms > 0 else 0
-            
+```
+
+Performance metrics calculation provides real-time visibility into processing efficiency. Processing time in milliseconds enables precise latency tracking, while throughput calculation (records per second) provides capacity planning insights. The zero-division protection ensures robust metrics even during very fast processing scenarios.
+
+```python
             # Record comprehensive processing metrics
             await self.metrics.record_streaming_processing({
                 "stream_id": stream_id,
@@ -509,10 +579,18 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                 "transformation_applied": bool(stream_metadata.get("transformation_rules")),
                 "encryption_applied": bool(self.data_encryption)
             })
-            
+```
+
+Comprehensive metrics recording captures multi-dimensional performance data essential for enterprise monitoring. Stream and tenant IDs enable segmented analysis, while processing volume and timing metrics support capacity planning. Data quality scores track data integrity over time, and transformation/encryption flags provide operational insight into processing complexity and security posture.
+
+```python
             # Check for alerting thresholds
             await self._check_processing_alerts(stream_id, processing_time_ms, throughput, validation_result.get("quality_score", 1.0))
-            
+```
+
+Proactive alerting evaluation prevents performance degradation and data quality issues from impacting downstream systems. The alert checker compares current metrics against configured thresholds for latency, throughput, and quality, enabling rapid response to operational issues before they become critical problems.
+
+```python
             return {
                 "stream_id": stream_id,
                 "processed_records": len(processed_batch),
@@ -529,7 +607,11 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                     "encryption_applied": bool(self.data_encryption)
                 }
             }
-            
+```
+
+The return structure provides comprehensive processing results with both data and metadata. Performance metrics enable downstream monitoring, while processing metadata creates an audit trail of processing decisions. This rich result structure supports enterprise requirements for traceability, performance monitoring, and debugging complex data processing workflows.
+
+```python
         except Exception as e:
             # Record processing failure with comprehensive error information
             await self.metrics.record_processing_error({
@@ -550,14 +632,22 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
             )
             
             raise DataProcessingException(f"Streaming data processing failed: {str(e)}")
-    
+```
+
+Error handling captures detailed failure information for enterprise troubleshooting including exception types, error messages, attempted record counts, and timing data. High-severity alerts enable immediate response to processing failures, while comprehensive error metrics support root cause analysis and system reliability improvements. The re-raised exception with context enables proper error propagation through the processing pipeline.
+
+```python
     async def execute_batch_processing_job(self, job_config: dict) -> dict:
         """Execute large-scale batch processing job with enterprise monitoring"""
         
         job_start_time = datetime.now()
         job_id = job_config.get("job_id", "batch_" + str(uuid.uuid4()))
         tenant_id = self.tenant_config.get("tenant_id")
-        
+```
+
+Batch processing initialization establishes comprehensive tracking context for enterprise-scale data processing jobs. The job timing enables end-to-end performance monitoring, while job ID provides unique identification for tracking across distributed systems. Tenant identification ensures proper multi-tenant isolation and resource accounting for large-scale batch operations.
+
+```python
         try:
             # Initialize batch processing with resource allocation
             batch_processor = await self._initialize_batch_processor(job_config)
@@ -565,7 +655,11 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
             # Execute batch processing stages with monitoring
             processing_stages = job_config.get("processing_stages", [])
             stage_results = []
-            
+```
+
+Batch processor initialization configures enterprise-grade resource allocation based on job requirements including CPU cores, memory limits, and I/O throughput. The staged processing approach enables complex data transformation pipelines where each stage can have different resource requirements and processing logic. Stage results collection enables detailed monitoring and rollback capabilities.
+
+```python
             for stage_index, stage_config in enumerate(processing_stages):
                 stage_start_time = datetime.now()
                 
@@ -574,7 +668,11 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                     stage_index=stage_index,
                     monitoring=True
                 )
-                
+```
+
+Stage-by-stage execution provides granular control and monitoring for complex batch processing workflows. Each stage receives its specific configuration and index for proper sequencing. Monitoring integration captures detailed performance metrics at the stage level, enabling identification of bottlenecks and optimization opportunities in multi-stage data processing pipelines.
+
+```python
                 # Track stage completion metrics
                 stage_processing_time = (datetime.now() - stage_start_time).total_seconds() * 1000
                 
@@ -589,12 +687,20 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                 })
                 
                 stage_results.append(stage_result)
-            
+```
+
+Stage completion tracking captures comprehensive performance metrics for each processing phase. The metrics include timing, volume, and success indicators that enable detailed performance analysis and capacity planning. Stage names provide human-readable identification while indexes ensure proper sequencing. This granular tracking supports identifying performance bottlenecks and optimizing complex data transformation workflows.
+
+```python
             # Calculate final batch processing metrics
             total_processing_time = (datetime.now() - job_start_time).total_seconds() * 1000
             total_records = sum(stage.get("records_processed", 0) for stage in stage_results)
             overall_success = all(stage.get("success", False) for stage in stage_results)
-            
+```
+
+Final metrics calculation provides comprehensive job-level performance indicators. Total processing time enables end-to-end performance monitoring, while record aggregation across all stages provides volume-based throughput analysis. Overall success determination based on all stage results ensures data integrity throughout the entire processing pipeline.
+
+```python
             # Record comprehensive batch job completion
             await self.metrics.record_batch_job_completion({
                 "job_id": job_id,
@@ -605,7 +711,11 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                 "job_success": overall_success,
                 "stages_completed": len(stage_results)
             })
-            
+```
+
+Job completion metrics recording provides enterprise-grade visibility into batch processing performance. The comprehensive metrics support capacity planning, SLA monitoring, and performance optimization. Stage counting enables validation of pipeline completeness, while success tracking supports reliability monitoring and alerting for production data processing operations.
+
+```python
             return {
                 "job_id": job_id,
                 "job_success": overall_success,
@@ -621,7 +731,11 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
                     "resource_utilization": batch_processor.get_resource_utilization() if hasattr(batch_processor, 'get_resource_utilization') else {}
                 }
             }
-            
+```
+
+The comprehensive return structure provides complete job execution results with performance metrics, stage details, and processing metadata. This rich result structure supports enterprise requirements for audit trails, performance monitoring, and downstream system integration. Resource utilization data enables capacity planning and cost optimization for large-scale batch processing operations.
+
+```python
         except Exception as e:
             # Record batch processing failure
             total_processing_time = (datetime.now() - job_start_time).total_seconds() * 1000
@@ -646,6 +760,8 @@ class ProductionDataProcessingAgent(ProductionADKAgent):
             raise BatchProcessingException(f"Batch processing job failed: {str(e)}")
 ```
 
+Error handling captures detailed failure information essential for enterprise troubleshooting. Failure metrics include timing data, error classification, and stage information that supports root cause analysis. Critical alerting ensures immediate response to batch processing failures that could impact downstream systems or SLAs. The contextual exception re-raising enables proper error propagation while maintaining detailed error telemetry.
+
 ### Advanced Data Processing Capabilities
 
 Implementing sophisticated data processing operations:
@@ -665,14 +781,22 @@ Implementing sophisticated data processing operations:
                 "empty_records": 0
             }
         }
-        
+```
+
+Batch validation initialization establishes comprehensive tracking structure for data quality assessment. The validation results include overall validity, quality scores, detailed error information, and statistics for different record types. This structure enables detailed quality reporting and decision-making about whether to proceed with processing or implement remediation steps.
+
+```python
         expected_schema = metadata.get("schema", {})
         quality_thresholds = metadata.get("quality_thresholds", {})
         
         for record_index, record in enumerate(data_batch):
             # Validate individual record schema and quality
             record_validation = await self._validate_single_record(record, expected_schema, quality_thresholds)
-            
+```
+
+Schema and quality threshold extraction enables configurable validation rules that can vary by data source or tenant. Record-by-record validation with indexing provides precise error location information essential for data quality troubleshooting. The single record validation approach enables detailed per-record analysis while maintaining batch-level processing efficiency.
+
+```python
             if record_validation["is_valid"]:
                 validation_results["record_validation_stats"]["valid_records"] += 1
             else:
@@ -684,7 +808,11 @@ Implementing sophisticated data processing operations:
             
             if not record or len(str(record).strip()) == 0:
                 validation_results["record_validation_stats"]["empty_records"] += 1
-        
+```
+
+Record validation results processing accumulates statistical information and captures detailed error information for invalid records. Empty record detection identifies data completeness issues that could affect downstream processing. The indexed error collection enables precise identification of problematic records for debugging and data quality improvement.
+
+```python
         # Calculate overall quality score
         total_records = len(data_batch)
         valid_records = validation_results["record_validation_stats"]["valid_records"]
@@ -695,13 +823,21 @@ Implementing sophisticated data processing operations:
         validation_results["is_valid"] = validation_results["quality_score"] >= min_quality_score
         
         return validation_results
-    
+```
+
+Quality score calculation provides a standardized metric (0.0-1.0) for data quality assessment that enables consistent threshold-based decision making. The 0.95 default threshold maintains high quality standards appropriate for enterprise data processing. The overall validity determination based on quality thresholds enables automated quality gate enforcement for data processing pipelines.
+
+```python
     async def _transform_data_batch(self, data_batch: list, transformation_rules: dict) -> list:
         """Transform data batch according to specified rules"""
         
         if not transformation_rules:
             return data_batch
-        
+```
+
+Batch transformation begins with early return optimization for scenarios without transformation requirements, preserving processing efficiency when transformations aren't needed. This approach minimizes processing overhead while maintaining consistent interface behavior.
+
+```python
         transformed_batch = []
         
         for record in data_batch:
@@ -709,18 +845,30 @@ Implementing sophisticated data processing operations:
             transformed_batch.append(transformed_record)
         
         return transformed_batch
-    
+```
+
+Record-by-record transformation processing ensures each data record receives appropriate transformation while maintaining batch processing efficiency. The async transformation approach enables complex transformation logic including external service calls for data enrichment without blocking the entire batch processing pipeline.
+
+```python
     async def _apply_transformation_rules(self, record: dict, rules: dict) -> dict:
         """Apply transformation rules to individual record"""
         
         transformed_record = record.copy()
-        
+```
+
+Record transformation begins with defensive copying to prevent unintended modification of original data. This approach ensures data integrity throughout the transformation pipeline while enabling safe manipulation of record fields.
+
+```python
         # Apply field mapping transformations
         field_mappings = rules.get("field_mappings", {})
         for source_field, target_field in field_mappings.items():
             if source_field in transformed_record:
                 transformed_record[target_field] = transformed_record.pop(source_field)
-        
+```
+
+Field mapping transformations enable schema evolution and standardization by renaming fields according to target schema requirements. The pop operation ensures clean field renaming without duplicate fields. This transformation supports integration scenarios where different data sources use different field names for the same concepts.
+
+```python
         # Apply data type conversions
         type_conversions = rules.get("type_conversions", {})
         for field, target_type in type_conversions.items():
@@ -737,7 +885,11 @@ Implementing sophisticated data processing operations:
                 except (ValueError, TypeError) as e:
                     # Log transformation error but continue processing
                     self.logger.warning(f"Type conversion failed for field {field}: {str(e)}")
-        
+```
+
+Data type conversion enables schema standardization and downstream system compatibility by converting fields to required data types. The comprehensive type support (int, float, string, datetime) covers most enterprise data processing scenarios. Error handling with warning logging ensures transformation failures don't halt processing while maintaining visibility into data quality issues.
+
+```python
         # Apply data enrichment rules
         enrichment_rules = rules.get("enrichment", {})
         for enrichment_type, enrichment_config in enrichment_rules.items():
@@ -747,14 +899,21 @@ Implementing sophisticated data processing operations:
                 transformed_record["tenant_id"] = self.tenant_config.get("tenant_id")
         
         return transformed_record
-    
+```
+
+Data enrichment adds valuable metadata to records including processing timestamps for audit trails and tenant identification for multi-tenant environments. The configurable field names enable flexible enrichment strategies while maintaining consistent metadata availability for downstream processing and analytics.
+
+```python
     async def _check_processing_alerts(self, stream_id: str, processing_time_ms: float, throughput: float, quality_score: float):
         """Check processing metrics against alert thresholds"""
         
         alert_thresholds = self.monitoring.alert_thresholds
-        
         alerts_to_send = []
-        
+```
+
+Processing alert evaluation systematically checks key performance metrics against enterprise-defined thresholds. The batch alert collection approach enables efficient notification management while ensuring comprehensive coverage of processing performance issues.
+
+```python
         # Check processing latency
         if processing_time_ms > alert_thresholds.get("processing_latency_ms", 1000):
             alerts_to_send.append({
@@ -763,7 +922,11 @@ Implementing sophisticated data processing operations:
                 "severity": "warning",
                 "metadata": {"stream_id": stream_id, "processing_time_ms": processing_time_ms}
             })
-        
+```
+
+Latency monitoring with 1-second default threshold prevents performance degradation that could impact real-time processing requirements. Warning-level severity enables proactive response before latency issues affect user experience or downstream systems.
+
+```python
         # Check throughput
         min_throughput = alert_thresholds.get("throughput_records_per_sec_min", 100)
         if throughput < min_throughput:
@@ -773,7 +936,11 @@ Implementing sophisticated data processing operations:
                 "severity": "warning",
                 "metadata": {"stream_id": stream_id, "throughput_records_per_sec": throughput}
             })
-        
+```
+
+Throughput monitoring with 100 records/second default threshold identifies capacity or performance issues before they impact data processing SLAs. The throughput metric provides insights into processing efficiency and scaling needs.
+
+```python
         # Check data quality
         min_quality_score = alert_thresholds.get("data_quality_score_min", 0.95)
         if quality_score < min_quality_score:
@@ -789,6 +956,8 @@ Implementing sophisticated data processing operations:
             await self.alerting_system.send_alert(**alert)
 ```
 
+Data quality monitoring with 0.95 threshold ensures high data integrity standards appropriate for enterprise operations. High-severity alerting enables immediate response to quality issues that could compromise downstream analytics or business intelligence systems. Batch alert sending ensures efficient notification delivery while maintaining comprehensive performance monitoring.
+
 ---
 
 ## Part 3: Enterprise Integration & Monitoring for Data Processing
@@ -798,6 +967,8 @@ Implementing sophisticated data processing operations:
 Implementing comprehensive monitoring for data processing agents:
 
 **File**: [`src/session7/adk_data_monitoring.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session7/adk_data_monitoring.py) - Enterprise monitoring for data processing
+
+# Enterprise monitoring imports for comprehensive data processing visibility
 
 ```python
 from adk.monitoring import (
@@ -812,7 +983,11 @@ import asyncio
 import json
 from datetime import datetime, timedelta
 from typing import Dict, List, Any
+```
 
+These enterprise monitoring imports provide comprehensive observability for production data processing systems. EnterpriseMetricsCollector handles large-scale metrics aggregation and export, while PerformanceTracker captures detailed execution metrics. DataQualityMonitor enables automated data quality assessment, and AlertingSystem provides multi-channel alerting with escalation rules. DataProcessingAnalytics delivers advanced analytics for capacity planning and performance optimization.
+
+```python
 class DataProcessingMonitoringSystem:
     """Comprehensive monitoring system for enterprise data processing agents"""
     
@@ -822,7 +997,11 @@ class DataProcessingMonitoringSystem:
             aggregation_intervals=["1m", "5m", "15m", "1h", "1d"],
             export_formats=["prometheus", "datadog", "cloudwatch"]
         )
-        
+```
+
+The metrics collector initialization establishes enterprise-grade time-series data management with 30-day retention for trend analysis. Multiple aggregation intervals enable both real-time monitoring (1-minute) and long-term capacity planning (daily). Support for Prometheus, Datadog, and CloudWatch ensures integration with existing enterprise monitoring infrastructure regardless of platform choice.
+
+```python
         self.performance_tracker = PerformanceTracker(
             sampling_rate=monitoring_config.get("sampling_rate", 1.0),
             detailed_tracking=True
@@ -832,19 +1011,31 @@ class DataProcessingMonitoringSystem:
             quality_thresholds=monitoring_config.get("quality_thresholds", {}),
             automated_remediation=monitoring_config.get("auto_remediation", False)
         )
-        
+```
+
+Performance tracker configuration with 100% sampling rate ensures complete visibility into processing performance, essential for enterprise data processing where every operation matters. Detailed tracking captures granular execution metrics for troubleshooting. Quality monitor configuration with customizable thresholds enables data governance policies, while optional automated remediation provides self-healing capabilities for common data quality issues.
+
+```python
         self.alerting_system = AlertingSystem(
             alert_channels=monitoring_config.get("alert_channels", []),
             escalation_rules=monitoring_config.get("escalation_rules", {})
         )
         
         self.analytics = DataProcessingAnalytics()
-        
+```
+
+Alerting system configuration supports multiple notification channels (email, Slack, PagerDuty) with escalation rules that ensure critical issues reach the appropriate team members. DataProcessingAnalytics provides advanced capabilities for trend analysis, capacity planning, and performance optimization essential for managing large-scale data processing operations.
+
+```python
     async def monitor_data_processing_agent(self, agent_id: str, agent_metrics: dict):
         """Monitor data processing agent performance and health"""
         
         monitoring_timestamp = datetime.now()
-        
+```
+
+Agent monitoring begins with precise timestamp recording for accurate time-series data collection. This timestamp anchors all subsequent metrics to a specific point in time, enabling accurate trend analysis and correlation across multiple agents and data processing operations.
+
+```python
         # Collect comprehensive performance metrics
         performance_metrics = await self.performance_tracker.collect_agent_metrics(agent_id, {
             "cpu_utilization_percent": agent_metrics.get("cpu_usage", 0),
@@ -857,7 +1048,11 @@ class DataProcessingMonitoringSystem:
             "data_throughput_records_per_sec": agent_metrics.get("throughput", 0),
             "tenant_id": agent_metrics.get("tenant_id")
         })
-        
+```
+
+Comprehensive performance metrics collection captures multi-dimensional agent health indicators. CPU and memory utilization provide resource health insights, while active streams and queue size indicate processing load. Success/failure operation counts enable reliability monitoring, and latency/throughput metrics provide performance visibility. Tenant ID inclusion enables multi-tenant performance analysis and resource allocation optimization.
+
+```python
         # Store metrics in time-series database for enterprise monitoring
         await self.metrics_collector.store_agent_metrics(agent_id, performance_metrics, monitoring_timestamp)
         
@@ -867,7 +1062,11 @@ class DataProcessingMonitoringSystem:
             metrics=performance_metrics,
             historical_window_hours=24
         )
-        
+```
+
+Metrics storage in enterprise time-series database enables historical trend analysis and long-term capacity planning. Performance analysis with 24-hour historical context identifies trends, anomalies, and patterns that inform optimization decisions. This approach enables predictive insights that help prevent performance issues before they impact production operations.
+
+```python
         # Check for performance alerts and anomalies
         await self._evaluate_performance_alerts(agent_id, performance_metrics, performance_analysis)
         
@@ -878,12 +1077,20 @@ class DataProcessingMonitoringSystem:
             "performance_analysis": performance_analysis,
             "alert_status": "ok"  # Will be updated if alerts are triggered
         }
-    
+```
+
+Proactive alert evaluation prevents performance issues from escalating to critical failures. The comprehensive return structure provides complete monitoring results including current metrics, trend analysis, and alert status. This rich monitoring data supports both real-time operational decision-making and longer-term performance optimization planning.
+
+```python
     async def monitor_data_quality_metrics(self, processing_results: dict):
         """Monitor data quality metrics across data processing operations"""
         
         quality_assessment = await self.quality_monitor.assess_data_quality(processing_results)
-        
+```
+
+Data quality monitoring performs comprehensive assessment of processing results using enterprise-grade quality metrics. The assessment evaluates multiple dimensions of data quality including completeness, accuracy, consistency, and timeliness, providing a holistic view of data integrity throughout the processing pipeline.
+
+```python
         # Track data quality trends over time
         await self.metrics_collector.store_data_quality_metrics({
             "processing_job_id": processing_results.get("job_id"),
@@ -897,12 +1104,20 @@ class DataProcessingMonitoringSystem:
             "records_processed": processing_results.get("records_processed", 0),
             "invalid_records_count": quality_assessment.get("invalid_records", 0)
         })
-        
+```
+
+Quality metrics storage captures multi-dimensional data quality indicators essential for enterprise data governance. The comprehensive metrics include overall quality scores, specific dimension assessments (completeness, accuracy, consistency, timeliness), and operational metrics (record counts, invalid records). Job and tenant identification enables segmented quality analysis and accountability in multi-tenant environments.
+
+```python
         # Check for data quality alerts
         await self._evaluate_data_quality_alerts(processing_results.get("job_id"), quality_assessment)
         
         return quality_assessment
-    
+```
+
+Proactive quality alerting prevents poor data quality from propagating to downstream systems. The quality assessment return enables immediate decision-making about whether to proceed with processing or implement remediation steps based on current data quality metrics.
+
+```python
     async def generate_data_processing_dashboard(self, tenant_id: str = None, time_range_hours: int = 24) -> dict:
         """Generate comprehensive data processing dashboard for enterprise monitoring"""
         
@@ -911,7 +1126,11 @@ class DataProcessingMonitoringSystem:
         # Get time range for dashboard data
         end_time = datetime.now()
         start_time = end_time - timedelta(hours=time_range_hours)
-        
+```
+
+Dashboard generation establishes the temporal scope for comprehensive enterprise monitoring. The 24-hour default provides balanced visibility between current operations and recent trends. The time range calculation enables flexible reporting periods for different stakeholder needs, from real-time operations monitoring to strategic capacity planning.
+
+```python
         # Collect agent performance summaries
         dashboard_data["agent_performance"] = await self.analytics.get_agent_performance_summary(
             tenant_id=tenant_id,
@@ -926,7 +1145,11 @@ class DataProcessingMonitoringSystem:
             end_time=end_time,
             aggregation_interval="5m"
         )
-        
+```
+
+Agent performance summaries provide high-level health indicators across all processing agents, enabling quick identification of performance issues or capacity constraints. Throughput metrics with 5-minute aggregation deliver granular visibility into processing performance trends, essential for identifying traffic patterns and capacity planning needs.
+
+```python
         # Collect data quality trends
         dashboard_data["data_quality_trends"] = await self.analytics.get_data_quality_trends(
             tenant_id=tenant_id,
@@ -940,7 +1163,11 @@ class DataProcessingMonitoringSystem:
             start_time=start_time,
             end_time=end_time
         )
-        
+```
+
+Data quality trends provide essential visibility into data integrity over time, enabling proactive identification of quality degradation before it impacts downstream systems. Error analysis delivers comprehensive failure pattern insights, supporting root cause analysis and systematic reliability improvements.
+
+```python
         # Collect resource utilization trends
         dashboard_data["resource_utilization"] = await self.analytics.get_resource_utilization_trends(
             tenant_id=tenant_id,
@@ -950,19 +1177,31 @@ class DataProcessingMonitoringSystem:
         
         # Include current system health status
         dashboard_data["system_health"] = await self.analytics.get_system_health_status(tenant_id=tenant_id)
-        
+```
+
+Resource utilization trends enable capacity planning and cost optimization by revealing usage patterns and identifying scaling opportunities. Current system health status provides immediate operational insight into the overall data processing system state, essential for real-time decision making.
+
+```python
         return {
             "dashboard_generated_at": end_time.isoformat(),
             "time_range_hours": time_range_hours,
             "tenant_id": tenant_id,
             "dashboard_data": dashboard_data
         }
-    
+```
+
+The comprehensive dashboard return structure provides complete monitoring visibility with metadata about generation time and scope. This rich dashboard data supports enterprise requirements for operational monitoring, performance analysis, and strategic planning across data processing operations.
+
+```python
     async def _evaluate_performance_alerts(self, agent_id: str, metrics: dict, analysis: dict):
         """Evaluate performance metrics against alert thresholds"""
         
         alerts_to_trigger = []
-        
+```
+
+Performance alert evaluation systematically checks key metrics against enterprise-appropriate thresholds. The alert collection approach enables batch processing of multiple alerts, reducing notification overhead while ensuring comprehensive coverage of performance issues.
+
+```python
         # Check CPU utilization
         cpu_usage = metrics.get("cpu_utilization_percent", 0)
         if cpu_usage > 80:
@@ -972,7 +1211,11 @@ class DataProcessingMonitoringSystem:
                 "message": f"Agent {agent_id} CPU utilization is {cpu_usage}%",
                 "metadata": {"agent_id": agent_id, "cpu_usage": cpu_usage}
             })
-        
+```
+
+CPU utilization monitoring with dual-threshold alerting provides early warning at 80% usage and critical alerts at 90% usage. This approach enables proactive response before performance degrades while escalating severity for immediate attention when agent performance becomes critical.
+
+```python
         # Check memory utilization
         memory_usage = metrics.get("memory_utilization_percent", 0)
         if memory_usage > 85:
@@ -982,7 +1225,11 @@ class DataProcessingMonitoringSystem:
                 "message": f"Agent {agent_id} memory utilization is {memory_usage}%",
                 "metadata": {"agent_id": agent_id, "memory_usage": memory_usage}
             })
-        
+```
+
+Memory utilization monitoring with 85% warning and 95% critical thresholds prevents out-of-memory conditions that could crash data processing agents. The progressive severity levels enable appropriate response based on urgency while maintaining operational stability.
+
+```python
         # Check processing latency
         avg_latency = metrics.get("average_processing_latency_ms", 0)
         if avg_latency > 1000:  # 1 second threshold
@@ -992,7 +1239,11 @@ class DataProcessingMonitoringSystem:
                 "message": f"Agent {agent_id} average processing latency is {avg_latency}ms",
                 "metadata": {"agent_id": agent_id, "avg_latency_ms": avg_latency}
             })
-        
+```
+
+Processing latency monitoring with 1-second threshold prevents performance degradation that could impact real-time processing requirements. Latency alerts enable proactive optimization before processing delays affect downstream systems or user experience.
+
+```python
         # Check error rates
         total_ops = metrics.get("successful_operations_count", 0) + metrics.get("failed_operations_count", 0)
         if total_ops > 0:
@@ -1004,16 +1255,28 @@ class DataProcessingMonitoringSystem:
                     "message": f"Agent {agent_id} error rate is {error_rate:.2f}%",
                     "metadata": {"agent_id": agent_id, "error_rate": error_rate}
                 })
-        
+```
+
+Error rate monitoring with 5% threshold identifies reliability issues before they significantly impact data processing operations. The high severity level ensures rapid response to error conditions that could indicate systematic problems requiring immediate attention.
+
+```python
         # Send all triggered alerts
         for alert in alerts_to_trigger:
             await self.alerting_system.trigger_alert(**alert)
-    
+```
+
+Batch alert triggering ensures efficient notification delivery while maintaining comprehensive coverage of all performance issues. The alert system handles routing, escalation, and deduplication based on configured enterprise alerting policies.
+
+```python
     async def _evaluate_data_quality_alerts(self, job_id: str, quality_assessment: dict):
         """Evaluate data quality metrics against alert thresholds"""
         
         quality_alerts = []
-        
+```
+
+Data quality alert evaluation systematically assesses quality metrics against enterprise-appropriate thresholds. The alert collection approach enables comprehensive quality monitoring while providing structured notification management for data governance teams.
+
+```python
         # Check overall data quality score
         overall_score = quality_assessment.get("overall_score", 1.0)
         if overall_score < 0.9:  # 90% quality threshold
@@ -1023,7 +1286,11 @@ class DataProcessingMonitoringSystem:
                 "message": f"Data quality score ({overall_score:.2f}) below threshold for job {job_id}",
                 "metadata": {"job_id": job_id, "quality_score": overall_score}
             })
-        
+```
+
+Overall data quality monitoring with 90% threshold ensures high-quality data standards appropriate for enterprise operations. High severity alerting enables immediate response to quality issues that could compromise downstream analytics or business intelligence systems.
+
+```python
         # Check schema compliance
         schema_compliance = quality_assessment.get("schema_compliance", 1.0)
         if schema_compliance < 0.95:  # 95% schema compliance threshold
@@ -1033,11 +1300,17 @@ class DataProcessingMonitoringSystem:
                 "message": f"Schema compliance ({schema_compliance:.2f}) below threshold for job {job_id}",
                 "metadata": {"job_id": job_id, "schema_compliance": schema_compliance}
             })
-        
+```
+
+Schema compliance monitoring with 95% threshold maintains data structure integrity essential for consistent processing and analytics. Warning-level alerts enable proactive schema issue resolution before they escalate to processing failures or data corruption.
+
+```python
         # Send quality alerts
         for alert in quality_alerts:
             await self.alerting_system.trigger_alert(**alert)
 ```
+
+Quality alert triggering ensures data governance teams receive immediate notification of quality issues. The enterprise alerting system handles routing to appropriate teams and escalation based on severity levels and quality policies.
 
 ### Enterprise Deployment Integration
 
@@ -1051,18 +1324,30 @@ class EnterpriseDataDeploymentIntegration:
         self.deployment_config = deployment_config
         self.kubernetes_integration = deployment_config.get("kubernetes", {})
         self.monitoring_integration = deployment_config.get("monitoring", {})
-        
+```
+
+The EnterpriseDataDeploymentIntegration provides sophisticated deployment capabilities for production data processing environments. Configuration separation for Kubernetes and monitoring enables flexible deployment scenarios while maintaining integration with existing enterprise infrastructure. This modular approach supports various deployment patterns from single-cluster to multi-region deployments.
+
+```python
     async def deploy_data_processing_agent_cluster(self, cluster_config: dict) -> dict:
         """Deploy data processing agent cluster to enterprise environment"""
         
         deployment_id = f"data-cluster-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
-        
+```
+
+Cluster deployment begins with unique deployment identification using timestamp-based naming. This approach ensures traceability across multiple deployment environments and provides clear deployment history for enterprise change management and rollback scenarios.
+
+```python
         # Generate Kubernetes deployment manifests for data processing
         k8s_manifests = await self._generate_k8s_manifests_for_data_processing(cluster_config)
         
         # Deploy to Kubernetes cluster with monitoring
         deployment_result = await self._deploy_to_kubernetes(k8s_manifests, deployment_id)
-        
+```
+
+Kubernetes manifest generation creates production-optimized configurations tailored for data processing workloads with appropriate resource limits, scaling policies, and networking configuration. The deployment process integrates monitoring setup to ensure comprehensive observability from the moment agents become operational.
+
+```python
         # Configure enterprise monitoring for data processing agents
         monitoring_result = await self._setup_enterprise_monitoring(deployment_id, cluster_config)
         
@@ -1074,12 +1359,20 @@ class EnterpriseDataDeploymentIntegration:
             "agent_endpoints": deployment_result.get("service_endpoints", []),
             "deployment_timestamp": datetime.now().isoformat()
         }
-    
+```
+
+Enterprise monitoring configuration ensures comprehensive observability including metrics collection, alerting, and dashboard setup. The comprehensive return structure provides complete deployment information including status, endpoints, and metadata essential for enterprise deployment tracking and operational management.
+
+```python
     async def _generate_k8s_manifests_for_data_processing(self, cluster_config: dict) -> dict:
         """Generate Kubernetes manifests optimized for data processing workloads"""
         
         manifests = {}
-        
+```
+
+Kubernetes manifest generation creates production-optimized configurations specifically tuned for enterprise data processing workloads. The manifest structure enables comprehensive container orchestration with appropriate resource allocation, monitoring integration, and operational health checks.
+
+```python
         # Generate deployment manifest with data processing optimizations
         manifests["deployment"] = {
             "apiVersion": "apps/v1",
@@ -1093,6 +1386,11 @@ class EnterpriseDataDeploymentIntegration:
                     "environment": cluster_config.get("environment", "prod")
                 }
             },
+```
+
+Deployment metadata configuration establishes enterprise-appropriate naming conventions and labeling strategies. Environment-specific naming prevents deployment conflicts across development, staging, and production environments. Consistent labeling enables sophisticated deployment management, monitoring queries, and policy enforcement.
+
+```python
             "spec": {
                 "replicas": cluster_config.get("replica_count", 3),
                 "selector": {
@@ -1113,6 +1411,11 @@ class EnterpriseDataDeploymentIntegration:
                             "prometheus.io/path": "/metrics"
                         }
                     },
+```
+
+Deployment specification with 3 replica default provides high availability for data processing operations. Prometheus annotations enable automatic metrics collection integration with enterprise monitoring systems. The consistent labeling strategy ensures proper service mesh integration and network policy enforcement.
+
+```python
                     "spec": {
                         "containers": [{
                             "name": "adk-data-agent",
@@ -1121,6 +1424,11 @@ class EnterpriseDataDeploymentIntegration:
                                 {"containerPort": 8080, "name": "http"},
                                 {"containerPort": 9090, "name": "metrics"}
                             ],
+```
+
+Container specification defines the core data processing agent configuration with separate ports for HTTP traffic and metrics collection. Named ports enable service discovery and load balancer configuration. The configurable container image supports enterprise deployment practices with version pinning and registry management.
+
+```python
                             "resources": {
                                 "requests": {
                                     "cpu": cluster_config.get("cpu_request", "2"),
@@ -1133,6 +1441,11 @@ class EnterpriseDataDeploymentIntegration:
                                     "ephemeral-storage": cluster_config.get("storage_limit", "20Gi")
                                 }
                             },
+```
+
+Resource configuration provides comprehensive resource management with requests ensuring guaranteed allocation and limits preventing resource contention. The default allocation (2-4 CPU, 4-8GB memory, 10-20GB storage) is calibrated for typical data processing workloads while remaining configurable for specific deployment requirements.
+
+```python
                             "env": [
                                 {"name": "ADK_ENVIRONMENT", "value": cluster_config.get("environment", "prod")},
                                 {"name": "ADK_MONITORING_ENABLED", "value": "true"},
@@ -1153,7 +1466,11 @@ class EnterpriseDataDeploymentIntegration:
                 }
             }
         }
-        
+```
+
+Environment configuration enables runtime behavior customization while health probes ensure reliable container lifecycle management. Liveness probes restart unresponsive containers while readiness probes manage traffic routing to healthy instances. The probe timing is optimized for data processing agents with adequate startup time and responsive health checking.
+
+```python
         # Generate service manifest for data processing agents
         manifests["service"] = {
             "apiVersion": "v1",
@@ -1174,7 +1491,11 @@ class EnterpriseDataDeploymentIntegration:
                 "type": "LoadBalancer" if cluster_config.get("external_access", False) else "ClusterIP"
             }
         }
-        
+```
+
+Service configuration provides network access to data processing agents with appropriate load balancing and port mapping. The conditional LoadBalancer type enables external access when required while defaulting to ClusterIP for internal-only deployments. Named ports enable service mesh integration and monitoring system discovery.
+
+```python
         # Generate horizontal pod autoscaler for data processing workloads
         manifests["hpa"] = {
             "apiVersion": "autoscaling/v2",
@@ -1191,6 +1512,11 @@ class EnterpriseDataDeploymentIntegration:
                 },
                 "minReplicas": cluster_config.get("min_replicas", 3),
                 "maxReplicas": cluster_config.get("max_replicas", 20),
+```
+
+Horizontal Pod Autoscaler configuration enables automatic scaling based on resource utilization and processing load. The 3-20 replica range provides adequate scaling capacity for varying data processing workloads while preventing resource exhaustion. Environment-specific naming ensures proper targeting of the associated deployment.
+
+```python
                 "metrics": [
                     {
                         "type": "Resource",
@@ -1212,6 +1538,8 @@ class EnterpriseDataDeploymentIntegration:
         
         return manifests
 ```
+
+Autoscaling metrics configuration uses CPU (70%) and memory (80%) thresholds optimized for data processing workloads. CPU scaling prevents processing delays under load while memory scaling prevents out-of-memory conditions. The dual-metric approach provides comprehensive scaling responsiveness to different types of processing load patterns. This comprehensive Kubernetes manifest generation provides production-ready deployment configurations optimized for enterprise data processing workloads.
 
 ---
 
