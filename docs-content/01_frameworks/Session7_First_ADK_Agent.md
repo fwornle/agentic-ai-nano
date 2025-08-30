@@ -160,7 +160,11 @@ ADK's MCP integration provides enterprise-grade connectivity to data processing 
 from adk.mcp import EnterpriseDataMCPClient, DataSourceConnector, StreamingDataConnector
 from adk.monitoring import MCPConnectionTracker
 import asyncio
+```
 
+These imports provide the enterprise MCP framework components needed for production data processing. The EnterpriseDataMCPClient handles secure, monitored connections while the MCPConnectionTracker provides operational visibility.
+
+```python
 class EnterpriseDataMCPManager:
     """Enterprise MCP management for data processing systems"""
     
@@ -168,7 +172,11 @@ class EnterpriseDataMCPManager:
         self.data_connections = {}
         self.connection_pools = {}
         self.connection_tracker = MCPConnectionTracker()
-        
+```
+
+The EnterpriseDataMCPManager centralizes MCP connections for enterprise environments. Connection pooling and tracking enable efficient resource management and operational monitoring across multiple data sources.
+
+```python
     async def connect_to_data_lake(self, config: dict) -> DataSourceConnector:
         """Connect to enterprise data lake with connection pooling and monitoring"""
         
@@ -184,7 +192,11 @@ class EnterpriseDataMCPManager:
                 retry_attempts=3,
                 monitoring=True
             )
-            
+```
+
+Data lake connection setup uses enterprise-grade configuration with 50 connection pooling, 30-second timeouts, and 3 retry attempts. These parameters are calibrated for production data processing workloads that require both performance and reliability.
+
+```python
             # Establish connection with comprehensive error handling
             try:
                 await data_lake_client.connect()
@@ -203,6 +215,9 @@ class EnterpriseDataMCPManager:
                 raise ConnectionException(f"Failed to connect to data lake: {str(e)}")
         
         return self.data_connections[connection_id]
+```
+
+Connection establishment includes comprehensive monitoring integration. Successful connections are tracked with metadata for operational insights, while failures are logged for troubleshooting and alerting. The error handling ensures connection issues don't cascade through the system.
     
     async def setup_streaming_data_connection(self, stream_config: dict) -> StreamingDataConnector:
         """Setup streaming data connection for real-time data processing"""
@@ -218,7 +233,11 @@ class EnterpriseDataMCPManager:
             backpressure_handling=True,
             monitoring_enabled=True
         )
-        
+```
+
+Streaming connector configuration enables real-time data processing with enterprise features. The 1000-record buffer size balances memory usage with throughput, while backpressure handling prevents system overload during traffic spikes.
+
+```python
         # Initialize streaming connection with monitoring
         await streaming_connector.initialize()
         
@@ -231,6 +250,9 @@ class EnterpriseDataMCPManager:
         })
         
         return streaming_connector
+```
+
+Streaming connection initialization includes comprehensive monitoring setup. Topic and partition information enables scaling decisions, while tenant tracking supports multi-tenant environments with proper isolation and billing.
     
     async def execute_data_processing_query(self, connection_id: str, query: dict) -> dict:
         """Execute data processing query with enterprise monitoring and error handling"""
@@ -239,7 +261,11 @@ class EnterpriseDataMCPManager:
             raise ValueError(f"Data connection not established: {connection_id}")
         
         connection = self.data_connections[connection_id]
-        
+```
+
+Query execution begins with connection validation to ensure the target data source is available. This prevents query attempts on non-existent connections that would result in unclear error messages.
+
+```python
         # Execute query with performance tracking
         start_time = time.time()
         
@@ -256,7 +282,11 @@ class EnterpriseDataMCPManager:
             })
             
             return result
-            
+```
+
+Successful query execution captures comprehensive performance metrics including processing time, record counts, and tenant information. These metrics enable performance monitoring, capacity planning, and multi-tenant billing.
+
+```python
         except Exception as e:
             processing_time = (time.time() - start_time) * 1000
             
@@ -267,6 +297,9 @@ class EnterpriseDataMCPManager:
                 "processing_time_ms": processing_time,
                 "tenant_id": query.get("tenant_id")
             })
+```
+
+Query failure handling captures detailed error information including exception types, error messages, and timing data. This information enables quick troubleshooting and helps identify patterns in query failures for system improvement.
             
             raise DataProcessingException(f"Query execution failed: {str(e)}")
 ```

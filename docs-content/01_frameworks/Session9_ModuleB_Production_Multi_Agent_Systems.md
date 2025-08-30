@@ -1363,7 +1363,11 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
     
     async def _setup_default_alert_rules(self):
         """Setup default alerting rules for data processing systems"""
-        
+```
+
+Default alert rules establish comprehensive monitoring coverage for data processing systems with carefully calibrated thresholds based on enterprise operational requirements.
+
+```python
         default_rules = {
             'high_data_processing_latency': {
                 'metric': 'average_processing_latency_ms',
@@ -1379,6 +1383,11 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
                 'severity': DataProcessingAlertSeverity.CRITICAL,
                 'description': 'Data processing latency is critically high'
             },
+```
+
+Latency alert rules use two-tier thresholds: 5 seconds for warnings and 15 seconds for critical alerts. This approach provides early warning of performance degradation while reserving critical alerts for severe conditions requiring immediate intervention.
+
+```python
             'high_error_rate': {
                 'metric': 'error_rate_percent',
                 'operator': 'greater_than',
@@ -1393,6 +1402,11 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
                 'severity': DataProcessingAlertSeverity.CRITICAL,
                 'description': 'Input queue depth is critically high, data processing falling behind'
             },
+```
+
+Error rate and queue depth alerts protect against data processing degradation. The 5% error threshold balances sensitivity with noise reduction, while 50,000 queue depth indicates significant processing bottlenecks requiring immediate scaling or intervention.
+
+```python
             'low_data_quality': {
                 'metric': 'data_quality_score',
                 'operator': 'less_than',
@@ -1407,6 +1421,11 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
                 'severity': DataProcessingAlertSeverity.ERROR,
                 'description': 'Data processing throughput has dropped significantly'
             },
+```
+
+Data quality and throughput alerts ensure data integrity and processing performance. The 95% quality threshold maintains high data standards, while 50% throughput decrease from baseline indicates significant system degradation.
+
+```python
             'agent_health_degraded': {
                 'metric': 'health_check_status',
                 'operator': 'equals',
@@ -1427,6 +1446,9 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
             self.alert_rules[rule_id] = rule_config
             
         self.logger.info(f"Setup {len(default_rules)} default alert rules for data processing monitoring")
+```
+
+Health status alerts provide agent availability monitoring with degraded status triggering warnings and unhealthy status requiring critical response. The alert rule registration makes these rules active for continuous monitoring evaluation.
     
     async def _process_metrics_for_alerts(self, agent_metrics: Dict[str, Dict[str, Any]]):
         """Process collected metrics against alert rules"""
@@ -1441,7 +1463,11 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
                 metric_value = metrics[metric_name]
                 threshold = rule_config['threshold']
                 operator = rule_config['operator']
-                
+```
+
+Alert processing evaluates each collected metric against all configured alert rules. This comprehensive evaluation ensures no performance degradation or system issues are missed during monitoring cycles.
+
+```python
                 # Evaluate alert condition
                 alert_triggered = await self._evaluate_alert_condition(
                     metric_value, operator, threshold, agent_id, metric_name
@@ -1463,7 +1489,11 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
                             timestamp=datetime.now(),
                             tags={'rule_id': rule_id, 'metric': metric_name}
                         )
-                        
+```
+
+New alert creation captures complete context including the triggering metric value, threshold, and timestamp. The alert key combines agent ID and rule ID to ensure unique alert tracking across the cluster.
+
+```python
                         self.active_alerts[alert_key] = alert
                         
                         # Send alert notification
@@ -1484,6 +1514,9 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
                         del self.active_alerts[alert_key]
                         
                         self.logger.info(f"Alert resolved: {alert.message} (Agent: {agent_id})")
+```
+
+Alert lifecycle management includes both triggering new alerts and resolving existing ones when conditions normalize. Resolution notifications and logging provide complete operational visibility into alert state changes.
     
     async def create_data_processing_dashboard(self, dashboard_name: str, 
                                              config: Dict[str, Any]) -> Dict[str, Any]:
@@ -1497,7 +1530,11 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
                     'success': False,
                     'error': f'Missing required field: {field}'
                 }
-        
+```
+
+Dashboard creation begins with configuration validation to ensure required fields are present. This prevents incomplete dashboard configurations that would fail at runtime.
+
+```python
         # Setup dashboard configuration
         dashboard_config = {
             'name': dashboard_name,
@@ -1520,10 +1557,17 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
             'dashboard_url': f"/dashboards/{dashboard_name}",
             'panels_count': len(config['panels'])
         }
+```
+
+Dashboard configuration includes sensible defaults: 30-second refresh interval and 24-hour time range. The configuration is stored for runtime dashboard generation and includes creation timestamps for audit purposes.
     
     async def get_monitoring_status(self) -> Dict[str, Any]:
         """Get comprehensive monitoring system status"""
-        
+```
+
+This method provides complete visibility into the monitoring system's operational state including alerts, metrics, and agent health.
+
+```python
         # Active alerts summary
         alerts_by_severity = defaultdict(int)
         for alert in self.active_alerts.values():
@@ -1536,7 +1580,11 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
             'metrics_buffer_size': sum(len(buffer) for buffer in self.metrics_buffer.values()),
             'average_collection_latency_ms': await self._calculate_collection_latency()
         }
-        
+```
+
+Alert and metrics statistics provide operational insights into monitoring system performance. Alert severity distribution helps prioritize response efforts, while metrics collection statistics indicate monitoring system health and capacity.
+
+```python
         # Health status summary
         health_summary = {
             'healthy_agents': len([h for h in self.health_status.values() if h.status == 'healthy']),
@@ -1556,6 +1604,10 @@ Resource utilization tracking covers CPU, memory, disk, and network I/O for capa
             'dashboards_configured': len(self.dashboard_configs),
             'alert_rules_active': len(self.alert_rules),
             'anomaly_detection_enabled': self.anomaly_detection_enabled
+        }
+```
+
+The comprehensive monitoring status return aggregates system health metrics, active alerts, agent status distributions, and configuration details. This single view enables operators to quickly assess the health and configuration of the entire data processing monitoring system.
         }
 ```
 
