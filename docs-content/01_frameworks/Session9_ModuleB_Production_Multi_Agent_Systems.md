@@ -164,13 +164,21 @@ Exception handling ensures that unexpected errors during agent deployment don't 
         coordination_setup = await self._setup_agent_coordination(
             [r for r in deployment_results if r['success']]
         )
-        
+```
+
+Phase 4 establishes communication channels between successfully deployed agents. Only agents that passed health checks participate in coordination setup, ensuring reliable inter-agent communication for data processing workflows. This coordination layer enables distributed processing patterns like scatter-gather and pipeline orchestration.
+
+```python        
         # Phase 5: Start comprehensive production monitoring for data processing
         monitoring_setup = await self._start_production_data_monitoring()
         
         successful_deployments = [r for r in deployment_results if r['success']]
         deployment_duration = datetime.now() - deployment_start_time
-        
+```
+
+Phase 5 activates monitoring systems for the deployed cluster including metrics collection, alerting, and health checks. The deployment timing helps operators understand cluster provisioning performance and plan for scaling operations.
+
+```python
         return {
             'success': len(successful_deployments) > 0,
             'deployed_agents': len(successful_deployments),
@@ -183,7 +191,7 @@ Exception handling ensures that unexpected errors during agent deployment don't 
         }
 ```
 
-Phases 4 and 5 complete the cluster setup by establishing agent coordination and starting monitoring. The coordination setup only includes successfully deployed agents, ensuring proper communication channels. The final return provides comprehensive deployment status including success/failure counts, timing, and cluster health assessment.
+The deployment result provides comprehensive status including success metrics, detailed results for each agent, and operational status of coordination and monitoring systems. The cluster health assessment gives operators immediate insight into the deployed system's readiness for production data processing workloads.
 
 ```python
     async def _deploy_single_data_agent(self, agent_config: DataAgentDeploymentConfig) -> Dict[str, Any]:
@@ -330,7 +338,7 @@ GPU resources are added when ML-powered data processing is required. Unlike CPU 
 Environment variables configure the agent's runtime behavior. Core variables include agent identification, performance targets, and monitoring settings. Dynamic variables from the data processing config are prefixed with 'DATA_CONFIG_' to namespace them clearly.
 
 ```python
-        # Production health checks for data processing
+        # Production liveness probe configuration
         liveness_probe = {
             'httpGet': {
                 'path': '/health/liveness',
@@ -341,7 +349,11 @@ Environment variables configure the agent's runtime behavior. Core variables inc
             'timeoutSeconds': 5,
             'failureThreshold': 3
         }
-        
+```
+
+The liveness probe monitors if the agent container is still running and responsive. It waits 30 seconds after startup before beginning checks, then polls every 10 seconds. If three consecutive 5-second checks fail, Kubernetes restarts the container. This aggressive restart policy ensures failed agents don't consume resources.
+
+```python
         readiness_probe = {
             'httpGet': {
                 'path': '/health/readiness', 
@@ -354,7 +366,7 @@ Environment variables configure the agent's runtime behavior. Core variables inc
         }
 ```
 
-Health probes ensure reliable data processing operations. The liveness probe restarts containers that become unresponsive, while the readiness probe controls traffic routing to ensure only healthy agents receive data. Different timing parameters optimize for startup time versus responsiveness.
+The readiness probe determines when the agent is ready to receive data processing traffic. It starts checking just 5 seconds after startup with more frequent 5-second intervals and faster 3-second timeouts. When readiness fails, Kubernetes stops routing traffic but doesn't restart the container, allowing time for recovery.
 
 ```python
         # Complete Kubernetes deployment manifest
@@ -385,6 +397,11 @@ The deployment metadata includes comprehensive labeling for service discovery, m
                         'agent-id': agent_config.agent_id
                     }
                 },
+```
+
+The deployment spec defines the desired state for the agent deployment. It starts with a single replica by default, using label selectors to identify which pods belong to this deployment. The selector must match the labels applied to pod templates.
+
+```python
                 'template': {
                     'metadata': {
                         'labels': {
@@ -393,6 +410,11 @@ The deployment metadata includes comprehensive labeling for service discovery, m
                             'environment': agent_config.environment,
                             'version': agent_config.version
                         },
+```
+
+Pod template labels enable service discovery and operational grouping. These labels allow operators to query agents by environment, version, or individual ID for targeted operations and monitoring.
+
+```python
                         'annotations': {
                             'prometheus.io/scrape': 'true',
                             'prometheus.io/path': '/metrics',
@@ -401,7 +423,7 @@ The deployment metadata includes comprehensive labeling for service discovery, m
                     },
 ```
 
-The deployment spec defines replica count, pod selection criteria, and monitoring annotations. Prometheus annotations enable automatic metrics discovery and collection, essential for production monitoring and alerting.
+Prometheus annotations enable automatic metrics discovery and collection. The scrape annotation tells Prometheus to collect metrics from this pod, while the path and port annotations specify where to find the metrics endpoint - essential for production monitoring and alerting.
 
 ```python
                     'spec': {
@@ -436,6 +458,11 @@ The container specification defines the application image, exposed ports for dif
                                 }
                             ]
                         }],
+```
+
+Volume mounts attach storage to the container filesystem at specific paths. The configuration volume provides runtime settings at `/etc/agent/config`, while the data volume offers persistent storage at `/data` for processing state and temporary files.
+
+```python
                         'volumes': [
                             {
                                 'name': 'data-processing-config',
@@ -443,6 +470,11 @@ The container specification defines the application image, exposed ports for dif
                                     'name': f"data-agent-{agent_config.agent_id}-config"
                                 }
                             },
+```
+
+The configuration volume uses a ConfigMap to provide agent-specific settings. ConfigMaps enable configuration changes without rebuilding container images and support configuration injection through environment variables or mounted files.
+
+```python
                             {
                                 'name': 'data-storage',
                                 'persistentVolumeClaim': {
@@ -458,7 +490,7 @@ The container specification defines the application image, exposed ports for dif
         return manifest
 ```
 
-Volume configuration provides persistent storage and configuration management. The ConfigMap contains agent-specific settings, while the PersistentVolumeClaim ensures data survives container restarts. This design separates configuration, application code, and data for optimal maintainability.
+The data storage volume uses a PersistentVolumeClaim to provide durable storage that survives container restarts and pod rescheduling. This ensures data processing state and buffered data persist through system maintenance and failures, maintaining processing continuity in production deployments.
 
 ```python
     async def scale_data_processing_agent(self, agent_id: str, 
@@ -533,6 +565,11 @@ Successful scaling operations update the internal deployment tracking and log de
                     'new_replicas': target_replicas,
                     'scaling_duration_seconds': scaling_result['duration_seconds']
                 }
+```
+
+Successful scaling returns comprehensive status including the agent ID, replica count changes, and timing information. This detailed response enables monitoring systems to track scaling performance and validate that operations completed as expected.
+
+```python
             else:
                 return {
                     'success': False,
@@ -548,7 +585,7 @@ Successful scaling operations update the internal deployment tracking and log de
             }
 ```
 
-The return values provide comprehensive status information including success/failure, replica counts, and timing details. Error handling ensures that scaling failures are properly logged and reported with detailed context for debugging.
+Error handling provides detailed failure information for troubleshooting. Kubernetes scaling failures include the full scaling result for debugging, while unexpected exceptions are logged and reported with complete error context to support rapid incident resolution.
 
 ```python
     async def get_cluster_status(self) -> Dict[str, Any]:
@@ -1307,7 +1344,11 @@ Error handling ensures metrics collection continues even when individual collect
         
         # Get list of active agents from orchestrator
         active_agents = await self._get_active_agent_list()
-        
+```
+
+Cluster metrics collection begins by identifying all currently active data processing agents from the orchestrator. This ensures we only attempt to collect metrics from agents that are actually deployed and running, preventing unnecessary failures.
+
+```python        
         # Collect metrics from each agent
         for agent_id in active_agents:
             try:
@@ -1320,14 +1361,18 @@ Error handling ensures metrics collection continues even when individual collect
                         'agent_id': agent_id,
                         **agent_metrics
                     }
-                    
+```
+
+Individual agent metrics collection attempts to gather comprehensive performance data from each agent. Successfully collected metrics are timestamped and organized by agent ID for time-series analysis and alerting evaluation.
+
+```python                    
             except Exception as e:
                 self.logger.warning(f"Failed to collect metrics from agent {agent_id}: {e}")
         
         return cluster_metrics
 ```
 
-Cluster metrics collection iterates through all active agents, gathering individual metrics and timestamping each collection. Failed collections are logged but don't stop the overall process, ensuring monitoring continuity even when some agents are unreachable.
+Failed metrics collection from individual agents doesn't stop the overall cluster collection process. This resilient approach ensures monitoring continues even when some agents are temporarily unreachable, maintaining visibility into the healthy portions of the cluster.
 
 ```python
     async def _collect_single_agent_metrics(self, agent_id: str) -> Optional[Dict[str, Any]]:

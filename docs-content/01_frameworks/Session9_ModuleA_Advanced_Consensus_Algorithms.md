@@ -498,12 +498,20 @@ The comprehensive status interface provides complete visibility into the consens
         time_since_heartbeat = time.time() - self.last_heartbeat
         heartbeat_health = max(0.0, 1.0 - (time_since_heartbeat / (self.election_timeout * 2)))
         health_factors.append(heartbeat_health)
-        
+```
+
+Consensus health calculation provides quantitative assessment of distributed system vitality through multiple metrics. Heartbeat recency is the primary indicator of cluster communication health - nodes that haven't received recent heartbeats may be experiencing network partitions or leader failures. The calculation normalizes against the election timeout, providing a score from 0.0 (no communication) to 1.0 (healthy communication).
+
+```python        
         # Data operation application lag
         application_lag = self.commit_index - self.last_applied
         application_health = max(0.0, 1.0 - (application_lag / max(1, len(self.data_log))))
         health_factors.append(application_health)
-        
+```
+
+Application lag monitoring reveals whether the node is keeping up with committed operations. The difference between `commit_index` and `last_applied` shows how many consensus-approved operations are waiting for local application. High application lag indicates potential performance issues, resource constraints, or data store problems that could degrade system responsiveness.
+
+```python        
         # Overall cluster participation (if leader)
         if self.node_state == DataNodeState.LEADER:
             responding_followers = sum(1 for idx in self.match_index.values() if idx >= 0)
@@ -512,6 +520,8 @@ The comprehensive status interface provides complete visibility into the consens
         
         return sum(health_factors) / len(health_factors) if health_factors else 0.0
 ```
+
+Leader nodes additionally assess cluster participation by tracking responsive followers through their `match_index` values. A positive match_index indicates the follower is actively participating in consensus, while negative values suggest communication failures. The final health score averages all factors, providing operators with a single metric (0.0 to 1.0) that represents overall consensus system health for monitoring and alerting.
 
 Health scoring provides quantitative assessment of consensus system vitality. Heartbeat recency indicates cluster communication health, while application lag reveals whether the node is keeping up with committed operations. Leader nodes additionally track follower participation to identify network partitions or node failures. This multi-dimensional health metric enables proactive system management.
 
@@ -1148,7 +1158,11 @@ Enterprise PBFT follows the standard three-phase protocol but adds sophisticated
             
             # Update enterprise metrics
             await self.metrics_collector.record_batch_completion(batch_metrics)
-            
+```
+
+Successful execution completion triggers comprehensive metrics finalization and enterprise-wide metrics collection. The batch_metrics object captures detailed performance data including phase timings, throughput measurements, and resource utilization. This metrics collection enables enterprise teams to monitor consensus performance, identify optimization opportunities, and ensure SLA compliance across distributed data processing workloads.
+
+```python            
             return {
                 'success': execution_result['success'],
                 'batch_id': batch_id,
@@ -1157,7 +1171,11 @@ Enterprise PBFT follows the standard three-phase protocol but adds sophisticated
                 'performance_metrics': batch_metrics.get_summary(),
                 'consensus_verified': True
             }
-            
+```
+
+The comprehensive success response provides complete visibility into batch processing results for enterprise monitoring and audit systems. The batch_id enables end-to-end operation tracking, while performance_metrics support capacity planning and optimization. The consensus_verified flag confirms that all Byzantine consensus requirements were satisfied, providing regulatory compliance assurance.
+
+```python            
         except Exception as e:
             batch_metrics.record_error(str(e))
             await self.metrics_collector.record_batch_error(batch_id, str(e))
@@ -1169,6 +1187,8 @@ Enterprise PBFT follows the standard three-phase protocol but adds sophisticated
                 'batch_id': batch_id
             }
 ```
+
+Comprehensive error handling ensures complete failure tracking and enterprise-grade error reporting. Error metrics collection provides statistical analysis of failure patterns, supporting system reliability improvements. Detailed error responses include batch identifiers and specific error descriptions, enabling operations teams to quickly diagnose and resolve distributed system issues.
 
 Successful batch completion triggers comprehensive metrics collection and result aggregation. The detailed response includes performance metrics that help operations teams optimize system performance. Error handling ensures that even catastrophic failures are properly logged and reported for investigation.
 
