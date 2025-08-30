@@ -197,24 +197,35 @@ Enterprise component registration includes security and compliance validation:
                               authorized_tenants: List[TenantId] = None):
         """Register enterprise data processing component with tenant authorization"""
         
-        # Validate component for enterprise data processing standards
+        # Enterprise validation and component storage
         self._validate_enterprise_data_component(component)
         
         component_key = f"{component.component_id}-{component.component_version}"
         self.data_components[component_key] = component
-        
-        # Track data component versions
+```
+
+The component registration method enforces enterprise security standards before allowing data processing components into the system. The validation step ensures components meet security clearance, compliance, and functional requirements. The unique component key combines ID and version to enable sophisticated version management in enterprise environments where multiple component versions may coexist.
+
+```python
+        # Component version tracking for enterprise lifecycle management
         if component.component_id not in self.component_versions:
             self.component_versions[component.component_id] = []
         self.component_versions[component.component_id].append(component.component_version)
-        
-        # Grant data processing access to authorized tenants
+```
+
+Version tracking maintains complete component lifecycle history, enabling enterprise administrators to understand component evolution and plan upgrades or rollbacks. This versioning system is crucial for data processing environments where component compatibility affects entire analytical workflows and business processes.
+
+```python
+        # Tenant authorization and access control management
         if authorized_tenants:
             for tenant_id in authorized_tenants:
                 if tenant_id in self.tenant_configurations:
                     self.tenant_component_access[tenant_id].append(component_key)
         
         self.logger.info(f"Registered enterprise data component: {component.component_name} v{component.component_version}")
+```
+
+Tenant-specific authorization ensures components are accessible only to explicitly authorized customers, maintaining strict data processing isolation. The double-validation (checking both authorized_tenants list and tenant_configurations) prevents unauthorized access even if tenant IDs are compromised. Comprehensive logging creates audit trails for component access patterns, essential for compliance and security monitoring in enterprise environments.
 ```
 
 This registration process ensures all enterprise data processing components meet security and compliance requirements.
@@ -262,7 +273,12 @@ Enterprise systems need sophisticated discovery for data processing components:
         
         available_components = []
         tenant_access = self.tenant_component_access.get(tenant_id, [])
-        
+```
+
+The component discovery method provides enterprise-grade service discovery for data processing workloads with strict tenant isolation. By validating tenant registration and accessing only tenant-authorized components, the system ensures complete data processing isolation in multi-tenant environments. This security-first approach prevents unauthorized access to data processing capabilities that could compromise customer data or violate compliance requirements.
+
+```python
+        # Secure component enumeration with tenant access controls
         for component_key in tenant_access:
             if component_key in self.data_components:
                 component = self.data_components[component_key]
@@ -272,7 +288,11 @@ Enterprise systems need sophisticated discovery for data processing components:
                     available_components.append(component)
         
         return available_components
-    
+```
+
+The discovery process iterates only through tenant-authorized components, applying sophisticated filtering criteria to match specific data processing requirements. This design enables intelligent component selection where applications can discover components based on processing capabilities, supported data formats, or security clearance levels. The filtered approach reduces complexity for developers while maintaining enterprise security boundaries.
+
+```python
     def _matches_data_criteria(self, component: EnterpriseDataComponent, 
                               criteria: Dict[str, Any]) -> bool:
         """Check if data processing component matches discovery criteria"""
@@ -283,14 +303,22 @@ Enterprise systems need sophisticated discovery for data processing components:
             component_caps = set(component.data_processing_capabilities)
             if not required_caps.issubset(component_caps):
                 return False
-        
+```
+
+Capability-based filtering ensures applications discover only components that can handle their specific data processing requirements. The subset matching logic means components must possess all required capabilities, preventing runtime failures from capability mismatches. This is particularly important for data processing pipelines where missing capabilities like "stream_processing" or "batch_analytics" could cause entire workflows to fail.
+
+```python
         # Filter by supported data formats
         if 'data_formats' in criteria:
             required_formats = set(criteria['data_formats'])
             supported_formats = set(component.supported_data_formats)
             if not required_formats.intersection(supported_formats):
                 return False
-        
+```
+
+Data format filtering ensures discovered components can process the application's input data types. Using intersection logic means components need to support at least one required format, enabling flexible data processing architectures where different components might specialize in different formats (JSON, Parquet, Avro, etc.) while still participating in the same processing pipeline.
+
+```python
         # Filter by security clearance level for data processing
         if 'min_clearance' in criteria:
             clearance_hierarchy = {'public': 0, 'internal': 1, 'confidential': 2, 'restricted': 3}
@@ -300,6 +328,9 @@ Enterprise systems need sophisticated discovery for data processing components:
                 return False
         
         return True
+```
+
+Security clearance filtering implements enterprise-grade access control for sensitive data processing operations. The hierarchical clearance model ensures only appropriately secured components can process confidential or restricted data. This is essential in regulated industries where data processing components must meet specific security certifications, and mixing clearance levels could result in compliance violations or data breaches.
 ```
 
 This discovery system provides secure, filtered access to data processing components based on tenant permissions and requirements.
@@ -333,16 +364,24 @@ Enterprise data processing requires zero-downtime deployments:
         """Deploy data processing system using blue-green deployment pattern"""
         
         deployment_id = str(uuid.uuid4())
-        
-        # Validate tenant data processing authorization
+```
+
+The blue-green deployment method initiates enterprise-grade zero-downtime deployments for data processing systems. By generating a unique deployment ID, the system can track, audit, and potentially rollback specific deployment operations. This is crucial in enterprise environments where data processing deployments must be fully traceable for compliance and operational excellence.
+
+```python
+        # Enterprise tenant authorization validation
         if tenant_id not in self.registry.tenant_configurations:
             raise ValueError(f"Data processing tenant not authorized: {tenant_id}")
         
         tenant_config = self.registry.tenant_configurations[tenant_id]
         if environment not in tenant_config.allowed_data_environments:
             raise ValueError(f"Tenant not authorized for environment: {environment.value}")
-        
-        # Create deployment record for data processing
+```
+
+Strict authorization validation ensures only properly configured tenants can deploy data processing systems to authorized environments. This multi-layered security check prevents unauthorized deployments that could compromise data isolation or violate compliance requirements. The environment restriction is particularly important for ensuring development workloads never accidentally deploy to production data processing environments.
+
+```python
+        # Enterprise deployment tracking and audit trail
         deployment_record = {
             "deployment_id": deployment_id,
             "tenant_id": tenant_id,
@@ -352,14 +391,22 @@ Enterprise data processing requires zero-downtime deployments:
             "config": deployment_config,
             "deployment_type": "blue_green_data_processing"
         }
-        
+```
+
+The deployment record creates a comprehensive audit trail capturing all essential deployment metadata. This structured logging enables enterprise operations teams to track deployment frequency, identify problematic configurations, and maintain compliance with regulatory requirements. The standardized format facilitates automated monitoring and alerting based on deployment patterns and success rates.
+
+```python
         try:
             # Phase 1: Deploy to green environment for data processing
             await self._deploy_green_data_environment(deployment_config, tenant_id, environment)
             
             # Phase 2: Validate green data processing deployment
             validation_result = await self._validate_data_deployment(deployment_id, tenant_id)
-            
+```
+
+The first two phases of blue-green deployment ensure new data processing systems are fully operational before receiving production traffic. Phase 1 provisions the green environment with identical configuration to the current blue environment, while Phase 2 runs comprehensive validation tests including health checks, data connectivity verification, and performance benchmarking to ensure the new deployment meets SLA requirements.
+
+```python
             if validation_result["success"]:
                 # Phase 3: Switch traffic to green data processing environment
                 await self._switch_traffic_to_green_data(deployment_id, tenant_id)
@@ -371,6 +418,11 @@ Enterprise data processing requires zero-downtime deployments:
                 deployment_record["end_time"] = datetime.now().isoformat()
                 
                 self.logger.info(f"Successfully deployed data processing system: {deployment_id}")
+```
+
+Phases 3 and 4 complete the blue-green transition by atomically switching traffic to the validated green environment and cleaning up the old blue environment. The traffic switch typically involves updating load balancer configurations or DNS records, ensuring zero-downtime for data processing operations. The cleanup phase reclaims resources while maintaining rollback capability for a configurable period.
+
+```python
             else:
                 deployment_record["status"] = "failed"
                 deployment_record["error"] = validation_result.get("error", "Validation failed")
@@ -381,12 +433,19 @@ Enterprise data processing requires zero-downtime deployments:
             deployment_record["error"] = str(e)
             self.logger.error(f"Data processing deployment failed: {deployment_id} - {str(e)}")
             raise
-        
+```
+
+Robust error handling captures both validation failures and unexpected exceptions, ensuring deployment status is always accurately recorded. Failed deployments trigger automatic cleanup of partially provisioned resources and send alerts to operations teams. The preserved error context enables rapid troubleshooting and prevents resource leaks in enterprise environments.
+
+```python
         finally:
             self.active_deployments[deployment_id] = deployment_record
             self.deployment_history.append(deployment_record.copy())
         
         return deployment_id
+```
+
+The finally block guarantees deployment records are persisted regardless of success or failure, maintaining complete audit trails required for enterprise governance. Active deployments enable real-time monitoring dashboards, while deployment history supports trend analysis, capacity planning, and compliance reporting. The returned deployment ID allows calling systems to track deployment progress and coordinate dependent operations.
 ```
 
 This blue-green deployment system ensures zero-downtime deployments for enterprise data processing systems.
@@ -442,8 +501,12 @@ Enterprise data processing requires comprehensive data protection:
             "encryption_method": "fernet_symmetric",
             "context": context or {}
         }
-        
-        # Log data encryption event for audit trail
+```
+
+The data encryption method provides enterprise-grade payload protection using Fernet symmetric encryption with comprehensive metadata tracking. The encryption metadata includes timestamps for audit compliance and context information for data lineage tracking. This approach ensures encrypted data processing payloads can be tracked through complex enterprise workflows while maintaining security and regulatory compliance.
+
+```python
+        # Enterprise audit logging for encryption operations
         self._log_security_event("data_encryption", {
             "data_size": len(data),
             "context": context or {},
@@ -451,7 +514,11 @@ Enterprise data processing requires comprehensive data protection:
         })
         
         return encryption_metadata
-    
+```
+
+Comprehensive audit logging captures every encryption operation with payload size and context information, creating an immutable trail for regulatory compliance. The security event logging enables enterprise security teams to monitor data encryption patterns, detect anomalies, and demonstrate compliance with data protection regulations like GDPR and HIPAA.
+
+```python
     def decrypt_data_payload(self, encrypted_metadata: Dict[str, str]) -> str:
         """Decrypt data processing payload and verify integrity"""
         
@@ -459,7 +526,7 @@ Enterprise data processing requires comprehensive data protection:
             encrypted_data = base64.b64decode(encrypted_metadata["encrypted_payload"])
             decrypted_data = self.encryption_suite.decrypt(encrypted_data)
             
-            # Log data decryption event for audit trail
+            # Log successful decryption for audit compliance
             self._log_security_event("data_decryption", {
                 "success": True,
                 "encryption_timestamp": encrypted_metadata.get("encryption_timestamp"),
@@ -467,7 +534,11 @@ Enterprise data processing requires comprehensive data protection:
             })
             
             return decrypted_data.decode()
-            
+```
+
+The decryption process validates payload integrity while maintaining comprehensive audit logs of successful operations. The try-catch structure ensures both successful and failed decryption attempts are logged, enabling security teams to detect potential attacks or system issues. The encryption timestamp tracking allows correlation of encryption and decryption events across distributed data processing workflows.
+
+```python
         except Exception as e:
             self._log_security_event("data_decryption", {
                 "success": False,
@@ -475,6 +546,9 @@ Enterprise data processing requires comprehensive data protection:
                 "context": encrypted_metadata.get("context", {})
             })
             raise SecurityException(f"Data decryption failed: {str(e)}")
+```
+
+Robust error handling captures decryption failures with detailed error information while maintaining security through proper exception handling. Failed decryption attempts are logged as security events, enabling detection of potential attacks or data corruption issues. The SecurityException provides clear error messaging for troubleshooting while preventing information leakage that could compromise security.
 ```
 
 This encryption system provides enterprise-grade data protection with comprehensive audit logging for data processing operations.
@@ -496,8 +570,12 @@ Enterprise data processing must comply with multiple regulatory frameworks:
         
         if framework not in supported_frameworks:
             raise ValueError(f"Unsupported compliance framework for data processing: {framework}")
-        
-        # Configure framework-specific requirements for data processing
+```
+
+The compliance framework configuration method provides enterprise-grade support for major regulatory standards including SOC 2, GDPR, HIPAA, and PCI-DSS. Each framework has specialized configuration handlers that translate business requirements into technical security controls. This abstraction allows enterprises to easily adapt their data processing systems to different regulatory environments without modifying core processing logic.
+
+```python
+        # Dynamic framework configuration for enterprise compliance
         framework_config = supported_frameworks[framework](requirements)
         self.security_policies[framework] = framework_config
         
@@ -508,7 +586,11 @@ Enterprise data processing must comply with multiple regulatory frameworks:
             "framework": framework,
             "requirements": requirements
         })
-    
+```
+
+The dynamic configuration system enables multiple compliance frameworks to operate simultaneously within the same data processing environment. Framework configurations are stored as security policies that can be queried during data operations to ensure compliance. The comprehensive audit logging creates an immutable trail of compliance configurations, essential for regulatory audits and demonstrating due diligence in data protection.
+
+```python
     def _configure_gdpr_compliance(self, requirements: Dict[str, Any]) -> Dict[str, Any]:
         """Configure GDPR compliance for data processing operations"""
         
@@ -521,7 +603,11 @@ Enterprise data processing must comply with multiple regulatory frameworks:
             "data_processor_agreements": requirements.get("processor_agreements", []),
             "cross_border_transfer_mechanisms": requirements.get("transfer_mechanisms", "adequacy_decision")
         }
-    
+```
+
+GDPR compliance configuration establishes the legal and technical foundation for processing personal data in European markets. The lawful basis defines the legal justification for data processing, while retention periods ensure data isn't kept longer than necessary. The configuration enables data subject rights like access, rectification, and erasure, which are fundamental GDPR requirements. Cross-border transfer mechanisms ensure data can flow internationally while maintaining GDPR protection levels.
+
+```python
     def _configure_soc2_compliance(self, requirements: Dict[str, Any]) -> Dict[str, Any]:
         """Configure SOC 2 compliance for data processing systems"""
         
@@ -534,6 +620,9 @@ Enterprise data processing must comply with multiple regulatory frameworks:
             "audit_logging_retention_months": requirements.get("audit_retention_months", 12),
             "access_control_review_frequency_days": requirements.get("access_review_days", 90)
         }
+```
+
+SOC 2 compliance configuration implements the five trust service criteria that enterprise customers expect from data processing vendors. Security is always required as the foundational principle, while availability, processing integrity, and confidentiality are typically enabled for mission-critical data processing systems. The audit logging retention and access control review frequencies ensure ongoing compliance monitoring and demonstrate continuous control effectiveness to auditors and enterprise customers.
 ```
 
 This compliance management system ensures enterprise data processing meets regulatory requirements across multiple frameworks.
@@ -648,14 +737,23 @@ class DataProcessingKubernetesOrchestrator:
         self.services: Dict[str, Dict] = {}
         self.data_processing_jobs: Dict[str, Dict] = {}
         self.logger = logging.getLogger(__name__)
-    
+```
+
+The Kubernetes orchestrator provides the foundation for managing enterprise data processing workloads across multi-tenant environments. It maintains separate dictionaries for deployments, services, and processing jobs, enabling sophisticated workload isolation and resource management. This architecture supports enterprise-scale data processing with per-tenant resource allocation and comprehensive logging for audit trails.
+
+```python
     def generate_data_processing_deployment(self, 
                                           config: DataProcessingContainerConfig,
                                           tenant_id: TenantId) -> Dict[str, Any]:
         """Generate Kubernetes deployment for data processing workload"""
         
         deployment_name = f"data-processing-{tenant_id}-{config.container_name}"
-        
+```
+
+The deployment generation method creates tenant-specific deployment names to ensure complete isolation between different customer environments. This naming convention enables enterprise administrators to quickly identify which tenant owns each data processing workload, crucial for troubleshooting, billing, and compliance auditing in multi-tenant SaaS environments.
+
+```python
+        # Core Kubernetes deployment structure for data processing
         deployment_manifest = {
             "apiVersion": "apps/v1",
             "kind": "Deployment",
@@ -669,6 +767,11 @@ class DataProcessingKubernetesOrchestrator:
                     "data-workload": "true"
                 }
             },
+```
+
+The deployment metadata establishes enterprise-grade namespace isolation by placing each tenant's workloads in separate Kubernetes namespaces. The comprehensive labeling strategy enables sophisticated workload management - operators can query for all data processing workloads, filter by specific tenants, or identify particular components. This labeling pattern is essential for monitoring, alerting, and automated scaling policies in production environments.
+
+```python
             "spec": {
                 "replicas": config.min_replicas,
                 "selector": {
@@ -678,6 +781,11 @@ class DataProcessingKubernetesOrchestrator:
                         "component": config.container_name
                     }
                 },
+```
+
+The deployment specification defines replica count and pod selection criteria that ensure high availability for data processing operations. The selector's matchLabels provide strict tenant isolation - Kubernetes will only manage pods that match the exact tenant and component labels, preventing cross-tenant interference that could compromise data security or processing integrity in enterprise environments.
+
+```python
                 "template": {
                     "metadata": {
                         "labels": {
@@ -691,6 +799,11 @@ class DataProcessingKubernetesOrchestrator:
                             "data-processing.io/tenant": tenant_id
                         }
                     },
+```
+
+The pod template metadata integrates enterprise monitoring capabilities through Prometheus annotations, enabling automatic metrics collection from data processing workloads. The custom tenant annotation allows monitoring systems to aggregate metrics by customer, crucial for SLA reporting and billing. This observability pattern ensures enterprise operators can track data processing performance, identify bottlenecks, and maintain service level agreements across all tenants.
+
+```python
                     "spec": {
                         "containers": [{
                             "name": config.container_name,
@@ -707,6 +820,11 @@ class DataProcessingKubernetesOrchestrator:
                                     "ephemeral-storage": f"{config.storage_gb}Gi"
                                 }
                             },
+```
+
+The container resource configuration implements enterprise-grade resource management with both requests and limits. The requests guarantee minimum resources for reliable data processing, while limits prevent runaway processes from affecting other tenants. The 1.5x CPU and 1.2x memory limit multipliers provide burst capacity for handling peak data processing loads while maintaining system stability across the entire cluster.
+
+```python
                             "env": [
                                 {"name": key, "value": value} 
                                 for key, value in config.environment_variables.items()
@@ -714,6 +832,11 @@ class DataProcessingKubernetesOrchestrator:
                                 {"name": "TENANT_ID", "value": tenant_id},
                                 {"name": "DATA_PROCESSING_MODE", "value": "production"}
                             ],
+```
+
+The environment variable configuration merges tenant-specific settings with enterprise-standard variables. The automatic injection of TENANT_ID ensures every data processing container knows its tenant context for logging, metrics, and data routing. The DATA_PROCESSING_MODE variable enables containers to apply production-specific configurations like enhanced security, optimized performance settings, and comprehensive audit logging.
+
+```python
                             "volumeMounts": [
                                 {
                                     "name": volume["name"],
@@ -722,6 +845,11 @@ class DataProcessingKubernetesOrchestrator:
                                 }
                                 for volume in config.data_volumes
                             ],
+```
+
+The volume mount configuration provides flexible storage options for data processing workloads, supporting both read-only reference data and read-write processing volumes. This pattern enables enterprise data architectures where processing containers can access shared datasets while maintaining isolated working storage, essential for compliance and data lineage tracking in regulated industries.
+
+```python
                             "ports": [{
                                 "containerPort": 8080,
                                 "name": "data-api"
@@ -729,6 +857,11 @@ class DataProcessingKubernetesOrchestrator:
                                 "containerPort": 9090,
                                 "name": "metrics"
                             }],
+```
+
+The port configuration exposes standardized endpoints for data processing operations and monitoring. Port 8080 serves the data processing API for external integrations, while port 9090 provides Prometheus metrics for observability. This dual-port pattern is essential for enterprise environments where operational monitoring must be separated from business API traffic for security and performance reasons.
+
+```python
                             "livenessProbe": {
                                 "httpGet": {
                                     "path": "/health",
@@ -745,6 +878,11 @@ class DataProcessingKubernetesOrchestrator:
                                 "initialDelaySeconds": 10,
                                 "periodSeconds": 5
                             }
+```
+
+The health probe configuration ensures robust data processing service reliability through Kubernetes automated health management. The liveness probe terminates unhealthy containers that might be stuck in infinite loops or deadlocked states, while the readiness probe prevents traffic routing to containers that haven't finished initialization. The different timing parameters (30s vs 10s initial delay) account for data processing workloads that may need time to load large datasets or establish database connections.
+
+```python
                         }],
                         "volumes": [
                             {
@@ -766,6 +904,8 @@ class DataProcessingKubernetesOrchestrator:
         return deployment_manifest
 ```
 
+The final deployment configuration elements provide enterprise-grade security and storage management. Persistent volume claims enable data processing workloads to maintain state across container restarts, crucial for long-running analytics jobs. The tenant-specific service account ensures each data processing workload has appropriate RBAC permissions for accessing only its authorized resources, while the security context applies pod-level security policies like running as non-root users and enforcing read-only root filesystems for compliance requirements.
+
 This Kubernetes orchestration provides enterprise-grade deployment with security, monitoring, and resource management for data processing workloads.
 
 ### Step 18: Horizontal Pod Autoscaling for Data Processing
@@ -779,7 +919,12 @@ Data processing workloads require intelligent auto-scaling based on processing m
         """Generate HPA for data processing workload with custom metrics"""
         
         hpa_name = f"data-processing-{tenant_id}-{config.container_name}-hpa"
-        
+```
+
+The HPA (Horizontal Pod Autoscaler) generation method creates intelligent auto-scaling policies specifically designed for data processing workloads. The tenant-specific naming convention ensures each customer's autoscaling policies are isolated and easily identifiable in enterprise environments. This is crucial for debugging performance issues and ensuring billing accuracy when customers have different scaling behaviors.
+
+```python
+        # Enterprise HPA foundation for data processing workloads
         hpa_manifest = {
             "apiVersion": "autoscaling/v2",
             "kind": "HorizontalPodAutoscaler",
@@ -792,6 +937,11 @@ Data processing workloads require intelligent auto-scaling based on processing m
                     "component": config.container_name
                 }
             },
+```
+
+The HPA metadata structure establishes enterprise-grade autoscaling with proper namespace isolation and comprehensive labeling. Using the autoscaling/v2 API enables sophisticated scaling decisions based on multiple metrics simultaneously, essential for data processing workloads that may be CPU-bound during computations, memory-bound during large dataset operations, or throughput-bound during streaming scenarios.
+
+```python
             "spec": {
                 "scaleTargetRef": {
                     "apiVersion": "apps/v1",
@@ -803,8 +953,12 @@ Data processing workloads require intelligent auto-scaling based on processing m
                 "metrics": []
             }
         }
-        
-        # Add CPU-based scaling for data processing
+```
+
+The HPA specification defines the scaling target and boundaries for enterprise data processing workloads. The scaleTargetRef precisely identifies which deployment to scale, while min/max replica limits prevent both under-provisioning (which could cause SLA violations) and over-provisioning (which increases costs). The empty metrics array will be populated dynamically based on the configured scaling criteria.
+
+```python
+        # CPU-based scaling configuration for data processing
         if "cpu" in config.scaling_metrics:
             hpa_manifest["spec"]["metrics"].append({
                 "type": "Resource",
@@ -816,8 +970,12 @@ Data processing workloads require intelligent auto-scaling based on processing m
                     }
                 }
             })
-        
-        # Add memory-based scaling for data processing
+```
+
+CPU-based scaling targets 70% average utilization, providing optimal balance for data processing workloads. This threshold leaves 30% headroom for traffic spikes while ensuring efficient resource utilization. CPU scaling is particularly effective for compute-intensive data processing tasks like ETL transformations, statistical calculations, and machine learning inference where processing power directly correlates with throughput.
+
+```python
+        # Memory-based scaling configuration for data processing  
         if "memory" in config.scaling_metrics:
             hpa_manifest["spec"]["metrics"].append({
                 "type": "Resource",
@@ -829,8 +987,12 @@ Data processing workloads require intelligent auto-scaling based on processing m
                     }
                 }
             })
-        
-        # Add custom data throughput metric for data processing
+```
+
+Memory-based scaling uses an 80% threshold, recognizing that data processing applications often have more predictable memory usage patterns than CPU. This higher threshold maximizes memory efficiency while preventing out-of-memory crashes that would disrupt data processing pipelines. Memory scaling is crucial for applications processing large datasets, maintaining in-memory caches, or performing memory-intensive operations like sorting and aggregation.
+
+```python
+        # Custom data throughput metric for intelligent scaling
         if "data_throughput" in config.scaling_metrics:
             hpa_manifest["spec"]["metrics"].append({
                 "type": "Pods",
@@ -846,6 +1008,9 @@ Data processing workloads require intelligent auto-scaling based on processing m
             })
         
         return hpa_manifest
+```
+
+The custom throughput metric provides business-logic-aware scaling that directly responds to data processing demand rather than just infrastructure utilization. When any pod processes more than 100 records per second, the system automatically scales out to maintain processing latency SLAs. This metric requires the application to expose Prometheus metrics, creating a sophisticated feedback loop where scaling decisions are based on actual business processing requirements rather than just CPU or memory usage.
 ```
 
 This HPA configuration provides intelligent auto-scaling for data processing workloads based on multiple metrics including custom data throughput metrics.

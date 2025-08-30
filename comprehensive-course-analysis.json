@@ -1,14 +1,14 @@
 {
   "analysis_timestamp": "1756565301.7451673",
-  "target": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
+  "target": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md",
   "overall_metrics": {
     "total_files": 1,
     "code_block_score": 100.0,
     "formatting_score": 100.0,
-    "explanation_score": 95.74468085106383,
-    "overall_score": 98.29787234042553,
+    "explanation_score": 81.48148148148148,
+    "overall_score": 92.5925925925926,
     "critical_issues": 0,
-    "total_issues": 4
+    "total_issues": 10
   },
   "detailed_results": {
     "detect_large_code_blocks": {
@@ -21,1727 +21,821 @@
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
-            "total_code_blocks": 94,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md",
+            "total_code_blocks": 54,
             "large_blocks_count": 0,
             "code_blocks": [
               {
-                "start_line": 22,
-                "end_line": 32,
+                "start_line": 42,
+                "end_line": 60,
                 "language": "python",
                 "content": [
-                  "# Essential imports for distributed data consensus",
-                  "from typing import Dict, List, Any, Optional, Set, Tuple",
+                  "from typing import Dict, List, Any, Optional, Type, Union, Protocol, TypeVar",
                   "from dataclasses import dataclass, field",
+                  "from abc import ABC, abstractmethod",
                   "from enum import Enum",
                   "import asyncio",
-                  "import random",
-                  "import time",
                   "import logging",
-                  "from datetime import datetime, timedelta"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 36,
-                "end_line": 42,
-                "language": "python",
-                "content": [
-                  "class DataNodeState(Enum):",
-                  "    \"\"\"Data processing node states in Raft consensus\"\"\"",
-                  "    FOLLOWER = \"follower\"",
-                  "    CANDIDATE = \"candidate\"  ",
-                  "    LEADER = \"leader\""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 46,
-                "end_line": 56,
-                "language": "python",
-                "content": [
-                  "@dataclass",
-                  "class DataLogEntry:",
-                  "    \"\"\"Individual data operation log entry for consensus\"\"\"",
-                  "    term: int",
-                  "    index: int",
-                  "    data_operation: Dict[str, Any]  # Data transformation/update",
-                  "    schema_version: str",
-                  "    timestamp: datetime",
-                  "    checksum: str  # Data integrity verification"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 60,
-                "end_line": 77,
-                "language": "python",
-                "content": [
-                  "@dataclass",
-                  "class DataVoteRequest:",
-                  "    \"\"\"Request for leadership vote in data consensus\"\"\"",
-                  "    candidate_term: int",
-                  "    candidate_id: str",
-                  "    last_log_index: int",
-                  "    last_log_term: int",
-                  "    data_version: str  # Current data version candidate has",
+                  "import json",
+                  "import uuid",
+                  "from datetime import datetime, timedelta",
+                  "import hashlib",
+                  "from pathlib import Path",
                   "",
-                  "@dataclass",
-                  "class DataVoteResponse:",
-                  "    \"\"\"Response to leadership vote request\"\"\"",
-                  "    term: int",
-                  "    vote_granted: bool",
-                  "    voter_id: str",
-                  "    data_consistency_check: bool  # Voter confirms data consistency"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 81,
-                "end_line": 91,
-                "language": "python",
-                "content": [
-                  "class RaftDataConsensusNode:",
-                  "    \"\"\"Advanced Raft consensus implementation for distributed data processing\"\"\"",
-                  "    ",
-                  "    def __init__(self, node_id: str, cluster_nodes: List[str], ",
-                  "                 data_store: 'DataStore'):",
-                  "        # Node identification and cluster configuration",
-                  "        self.node_id = node_id",
-                  "        self.cluster_nodes = cluster_nodes",
-                  "        self.data_store = data_store"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 95,
-                "end_line": 101,
-                "language": "python",
-                "content": [
-                  "        # Raft state management for data processing",
-                  "        self.current_term = 0",
-                  "        self.voted_for: Optional[str] = None",
-                  "        self.data_log: List[DataLogEntry] = []",
-                  "        self.node_state = DataNodeState.FOLLOWER"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 105,
-                "end_line": 114,
-                "language": "python",
-                "content": [
-                  "        # Data processing specific state",
-                  "        self.commit_index = 0  # Last committed data operation",
-                  "        self.last_applied = 0  # Last applied data transformation",
-                  "        self.data_schema_version = \"1.0\"",
-                  "        ",
-                  "        # Leader-specific volatile state for data coordination",
-                  "        self.next_index: Dict[str, int] = {}  # Next data log index for each follower",
-                  "        self.match_index: Dict[str, int] = {}  # Highest replicated data log index per follower"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 118,
-                "end_line": 125,
-                "language": "python",
-                "content": [
-                  "        # Timing and network management",
-                  "        self.last_heartbeat = time.time()",
-                  "        self.election_timeout = random.uniform(5.0, 10.0)  # Randomized for split-vote avoidance",
-                  "        self.heartbeat_interval = 2.0",
-                  "        ",
-                  "        self.logger = logging.getLogger(f\"RaftDataNode-{node_id}\")"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 129,
-                "end_line": 141,
-                "language": "python",
-                "content": [
-                  "    async def start_data_consensus_node(self):",
-                  "        \"\"\"Start the Raft consensus node for data processing coordination\"\"\"",
-                  "        self.logger.info(f\"Starting Raft data consensus node {self.node_id}\")",
-                  "        ",
-                  "        # Initialize data processing state",
-                  "        await self._initialize_data_state()",
-                  "        ",
-                  "        # Start main consensus loop",
-                  "        asyncio.create_task(self._run_consensus_loop())",
-                  "        ",
-                  "        self.logger.info(f\"Raft data node {self.node_id} started in {self.node_state.value} state\")"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 145,
-                "end_line": 163,
-                "language": "python",
-                "content": [
-                  "    async def _run_consensus_loop(self):",
-                  "        \"\"\"Main consensus event loop for data processing coordination\"\"\"",
-                  "        ",
-                  "        while True:",
-                  "            try:",
-                  "                if self.node_state == DataNodeState.FOLLOWER:",
-                  "                    await self._handle_follower_state()",
-                  "                elif self.node_state == DataNodeState.CANDIDATE:",
-                  "                    await self._handle_candidate_state()",
-                  "                elif self.node_state == DataNodeState.LEADER:",
-                  "                    await self._handle_leader_state()",
-                  "                    ",
-                  "                await asyncio.sleep(0.1)  # Prevent busy waiting",
-                  "                ",
-                  "            except Exception as e:",
-                  "                self.logger.error(f\"Error in consensus loop: {e}\")",
-                  "                await asyncio.sleep(1.0)"
+                  "# Core enterprise types for data processing",
+                  "TenantId = str",
+                  "ComponentVersion = str",
+                  "DeploymentEnvironment = str",
+                  "DataProcessingJob = TypeVar('DataProcessingJob')"
                 ],
                 "line_count": 17
               },
               {
-                "start_line": 167,
-                "end_line": 179,
+                "start_line": 68,
+                "end_line": 89,
                 "language": "python",
                 "content": [
-                  "    async def _handle_follower_state(self):",
-                  "        \"\"\"Handle follower state logic for data consensus\"\"\"",
-                  "        ",
-                  "        # Check for election timeout - no data updates received",
-                  "        if time.time() - self.last_heartbeat > self.election_timeout:",
-                  "            self.logger.info(f\"Election timeout reached, becoming candidate for data leadership\")",
-                  "            await self._become_candidate()",
-                  "            return",
-                  "            ",
-                  "        # Apply committed data operations to local data store",
-                  "        await self._apply_committed_data_operations()"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 183,
-                "end_line": 193,
-                "language": "python",
-                "content": [
-                  "    async def _handle_candidate_state(self):",
-                  "        \"\"\"Handle candidate state logic for data leadership election\"\"\"",
-                  "        ",
-                  "        # Start new election term",
-                  "        self.current_term += 1",
-                  "        self.voted_for = self.node_id",
-                  "        self.last_heartbeat = time.time()",
-                  "        ",
-                  "        self.logger.info(f\"Starting election for term {self.current_term}\")"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 197,
-                "end_line": 216,
-                "language": "python",
-                "content": [
-                  "        # Send vote requests to all data processing nodes",
-                  "        vote_responses = await self._request_votes_from_data_nodes()",
-                  "        ",
-                  "        # Count votes for data leadership",
-                  "        votes_received = 1  # Vote for self",
-                  "        for response in vote_responses:",
-                  "            if response and response.vote_granted and response.term == self.current_term:",
-                  "                votes_received += 1",
-                  "        ",
-                  "        # Check if majority achieved for data consensus leadership",
-                  "        majority_threshold = (len(self.cluster_nodes) + 1) // 2 + 1",
-                  "        ",
-                  "        if votes_received >= majority_threshold:",
-                  "            self.logger.info(f\"Won election with {votes_received} votes, becoming data leader\")",
-                  "            await self._become_leader()",
-                  "        else:",
-                  "            self.logger.info(f\"Lost election with {votes_received} votes, reverting to follower\")",
-                  "            await self._become_follower()"
-                ],
-                "line_count": 18
-              },
-              {
-                "start_line": 220,
-                "end_line": 234,
-                "language": "python",
-                "content": [
-                  "    async def _handle_leader_state(self):",
-                  "        \"\"\"Handle leader state logic for data processing coordination\"\"\"",
-                  "        ",
-                  "        # Send heartbeats to maintain data processing leadership",
-                  "        await self._send_heartbeats_to_followers()",
-                  "        ",
-                  "        # Replicate any pending data operations to followers",
-                  "        await self._replicate_data_operations_to_followers()",
-                  "        ",
-                  "        # Apply committed data operations",
-                  "        await self._apply_committed_data_operations()",
-                  "        ",
-                  "        await asyncio.sleep(self.heartbeat_interval)"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 238,
-                "end_line": 252,
-                "language": "python",
-                "content": [
-                  "    async def _request_votes_from_data_nodes(self) -> List[Optional[DataVoteResponse]]:",
-                  "        \"\"\"Request votes from all data processing nodes in cluster\"\"\"",
-                  "        ",
-                  "        last_log_index = len(self.data_log) - 1 if self.data_log else -1",
-                  "        last_log_term = self.data_log[-1].term if self.data_log else 0",
-                  "        ",
-                  "        vote_request = DataVoteRequest(",
-                  "            candidate_term=self.current_term,",
-                  "            candidate_id=self.node_id,",
-                  "            last_log_index=last_log_index,",
-                  "            last_log_term=last_log_term,",
-                  "            data_version=self.data_schema_version",
-                  "        )"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 256,
-                "end_line": 275,
-                "language": "python",
-                "content": [
-                  "        # Send vote requests in parallel to all cluster nodes",
-                  "        vote_tasks = []",
-                  "        for node_id in self.cluster_nodes:",
-                  "            if node_id != self.node_id:",
-                  "                task = self._send_vote_request(node_id, vote_request)",
-                  "                vote_tasks.append(task)",
-                  "        ",
-                  "        responses = await asyncio.gather(*vote_tasks, return_exceptions=True)",
-                  "        ",
-                  "        # Filter out exceptions and return valid responses",
-                  "        valid_responses = []",
-                  "        for response in responses:",
-                  "            if isinstance(response, DataVoteResponse):",
-                  "                valid_responses.append(response)",
-                  "            else:",
-                  "                valid_responses.append(None)",
-                  "                ",
-                  "        return valid_responses"
-                ],
-                "line_count": 18
-              },
-              {
-                "start_line": 279,
-                "end_line": 289,
-                "language": "python",
-                "content": [
-                  "    async def append_data_operation(self, data_operation: Dict[str, Any]) -> Dict[str, Any]:",
-                  "        \"\"\"Append new data operation to consensus log (leader only)\"\"\"",
-                  "        ",
-                  "        if self.node_state != DataNodeState.LEADER:",
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': 'Only data processing leader can append operations',",
-                  "                'leader_hint': self._get_current_leader_hint()",
-                  "            }"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 293,
-                "end_line": 308,
-                "language": "python",
-                "content": [
-                  "        # Create data log entry with integrity verification",
-                  "        log_entry = DataLogEntry(",
-                  "            term=self.current_term,",
-                  "            index=len(self.data_log),",
-                  "            data_operation=data_operation,",
-                  "            schema_version=self.data_schema_version,",
-                  "            timestamp=datetime.now(),",
-                  "            checksum=self._calculate_data_checksum(data_operation)",
-                  "        )",
-                  "        ",
-                  "        # Append to local data log",
-                  "        self.data_log.append(log_entry)",
-                  "        ",
-                  "        self.logger.info(f\"Appended data operation at index {log_entry.index}, term {log_entry.term}\")"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 312,
-                "end_line": 322,
-                "language": "python",
-                "content": [
-                  "        # Start replication to followers (non-blocking for performance)",
-                  "        asyncio.create_task(self._replicate_data_operations_to_followers())",
-                  "        ",
-                  "        return {",
-                  "            'success': True,",
-                  "            'data_log_index': log_entry.index,",
-                  "            'data_term': log_entry.term,",
-                  "            'checksum': log_entry.checksum",
-                  "        }"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 326,
-                "end_line": 341,
-                "language": "python",
-                "content": [
-                  "    async def _replicate_data_operations_to_followers(self):",
-                  "        \"\"\"Replicate data operations to follower nodes for consensus\"\"\"",
-                  "        ",
-                  "        if self.node_state != DataNodeState.LEADER:",
-                  "            return",
-                  "            ",
-                  "        # Replicate to each follower in parallel",
-                  "        replication_tasks = []",
-                  "        for node_id in self.cluster_nodes:",
-                  "            if node_id != self.node_id:",
-                  "                task = self._replicate_to_specific_follower(node_id)",
-                  "                replication_tasks.append(task)",
-                  "        ",
-                  "        await asyncio.gather(*replication_tasks, return_exceptions=True)"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 345,
-                "end_line": 358,
-                "language": "python",
-                "content": [
-                  "    async def _replicate_to_specific_follower(self, follower_id: str):",
-                  "        \"\"\"Replicate data operations to a specific follower node\"\"\"",
-                  "        ",
-                  "        # Determine what data operations to send to this follower",
-                  "        next_idx = self.next_index.get(follower_id, len(self.data_log))",
-                  "        ",
-                  "        if next_idx <= len(self.data_log) - 1:",
-                  "            # Need to send data operations starting from next_idx",
-                  "            entries_to_send = self.data_log[next_idx:]",
-                  "            ",
-                  "            prev_log_index = next_idx - 1",
-                  "            prev_log_term = self.data_log[prev_log_index].term if prev_log_index >= 0 else 0"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 362,
-                "end_line": 374,
-                "language": "python",
-                "content": [
-                  "            append_request = {",
-                  "                'leader_term': self.current_term,",
-                  "                'leader_id': self.node_id,",
-                  "                'prev_log_index': prev_log_index,",
-                  "                'prev_log_term': prev_log_term,",
-                  "                'data_entries': [self._serialize_log_entry(entry) for entry in entries_to_send],",
-                  "                'leader_commit': self.commit_index,",
-                  "                'data_schema_version': self.data_schema_version",
-                  "            }",
-                  "            ",
-                  "            response = await self._send_append_request(follower_id, append_request)"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 378,
-                "end_line": 389,
-                "language": "python",
-                "content": [
-                  "            if response and response.get('success'):",
-                  "                # Update follower progress tracking",
-                  "                self.next_index[follower_id] = len(self.data_log)",
-                  "                self.match_index[follower_id] = len(self.data_log) - 1",
-                  "                ",
-                  "                # Check if we can advance commit index for data operations",
-                  "                await self._update_data_commit_index()",
-                  "            else:",
-                  "                # Decrement next_index and retry (data log inconsistency)",
-                  "                self.next_index[follower_id] = max(0, self.next_index.get(follower_id, 0) - 1)"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 393,
-                "end_line": 404,
-                "language": "python",
-                "content": [
-                  "    async def _update_data_commit_index(self):",
-                  "        \"\"\"Update commit index based on majority replication of data operations\"\"\"",
-                  "        ",
-                  "        if self.node_state != DataNodeState.LEADER:",
-                  "            return",
-                  "            ",
-                  "        # Find highest index replicated on majority of data processing nodes",
-                  "        for n in range(len(self.data_log) - 1, self.commit_index, -1):",
-                  "            if n < 0:",
-                  "                continue"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 408,
-                "end_line": 415,
-                "language": "python",
-                "content": [
-                  "            # Count nodes that have replicated this data operation",
-                  "            replication_count = 1  # Leader always has it",
-                  "            for node_id in self.cluster_nodes:",
-                  "                if node_id != self.node_id:",
-                  "                    if self.match_index.get(node_id, -1) >= n:",
-                  "                        replication_count += 1"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 419,
-                "end_line": 427,
-                "language": "python",
-                "content": [
-                  "            # Check for majority consensus on data operation",
-                  "            majority_threshold = (len(self.cluster_nodes) + 1) // 2 + 1",
-                  "            ",
-                  "            if replication_count >= majority_threshold and self.data_log[n].term == self.current_term:",
-                  "                self.commit_index = n",
-                  "                self.logger.info(f\"Advanced data commit index to {n}\")",
-                  "                break"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 433,
-                "end_line": 448,
-                "language": "python",
-                "content": [
-                  "    async def _apply_committed_data_operations(self):",
-                  "        \"\"\"Apply committed data operations to local data store\"\"\"",
-                  "        ",
-                  "        while self.last_applied < self.commit_index:",
-                  "            self.last_applied += 1",
-                  "            log_entry = self.data_log[self.last_applied]",
-                  "            ",
-                  "            # Apply data operation to local store with integrity verification",
-                  "            if self._verify_data_integrity(log_entry):",
-                  "                await self.data_store.apply_operation(log_entry.data_operation)",
-                  "                self.logger.debug(f\"Applied data operation at index {self.last_applied}\")",
-                  "            else:",
-                  "                self.logger.error(f\"Data integrity check failed for operation at index {self.last_applied}\")",
-                  "                # In production, this would trigger data recovery procedures"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 452,
-                "end_line": 466,
-                "language": "python",
-                "content": [
-                  "    def _verify_data_integrity(self, log_entry: DataLogEntry) -> bool:",
-                  "        \"\"\"Verify data integrity using checksums\"\"\"",
-                  "        expected_checksum = self._calculate_data_checksum(log_entry.data_operation)",
-                  "        return expected_checksum == log_entry.checksum",
-                  "    ",
-                  "    def _calculate_data_checksum(self, data_operation: Dict[str, Any]) -> str:",
-                  "        \"\"\"Calculate checksum for data integrity verification\"\"\"",
-                  "        import hashlib",
-                  "        import json",
-                  "        ",
-                  "        # Create deterministic string representation for checksum",
-                  "        operation_str = json.dumps(data_operation, sort_keys=True)",
-                  "        return hashlib.sha256(operation_str.encode()).hexdigest()[:16]"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 470,
-                "end_line": 487,
-                "language": "python",
-                "content": [
-                  "    async def get_data_consensus_status(self) -> Dict[str, Any]:",
-                  "        \"\"\"Get comprehensive status of data consensus node\"\"\"",
-                  "        ",
-                  "        return {",
-                  "            'node_id': self.node_id,",
-                  "            'node_state': self.node_state.value,",
-                  "            'current_term': self.current_term,",
-                  "            'data_log_length': len(self.data_log),",
-                  "            'commit_index': self.commit_index,",
-                  "            'last_applied': self.last_applied,",
-                  "            'data_schema_version': self.data_schema_version,",
-                  "            'cluster_size': len(self.cluster_nodes),",
-                  "            'is_leader': self.node_state == DataNodeState.LEADER,",
-                  "            'data_store_size': await self.data_store.get_size() if self.data_store else 0,",
-                  "            'consensus_health': self._calculate_consensus_health()",
-                  "        }"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 491,
-                "end_line": 501,
-                "language": "python",
-                "content": [
-                  "    def _calculate_consensus_health(self) -> float:",
-                  "        \"\"\"Calculate health score of data consensus system\"\"\"",
-                  "        ",
-                  "        health_factors = []",
-                  "        ",
-                  "        # Recent heartbeat indicates healthy cluster communication",
-                  "        time_since_heartbeat = time.time() - self.last_heartbeat",
-                  "        heartbeat_health = max(0.0, 1.0 - (time_since_heartbeat / (self.election_timeout * 2)))",
-                  "        health_factors.append(heartbeat_health)"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 505,
-                "end_line": 510,
-                "language": "python",
-                "content": [
-                  "        # Data operation application lag",
-                  "        application_lag = self.commit_index - self.last_applied",
-                  "        application_health = max(0.0, 1.0 - (application_lag / max(1, len(self.data_log))))",
-                  "        health_factors.append(application_health)"
-                ],
-                "line_count": 4
-              },
-              {
-                "start_line": 514,
-                "end_line": 522,
-                "language": "python",
-                "content": [
-                  "        # Overall cluster participation (if leader)",
-                  "        if self.node_state == DataNodeState.LEADER:",
-                  "            responding_followers = sum(1 for idx in self.match_index.values() if idx >= 0)",
-                  "            participation_health = responding_followers / max(1, len(self.cluster_nodes) - 1)",
-                  "            health_factors.append(participation_health)",
-                  "        ",
-                  "        return sum(health_factors) / len(health_factors) if health_factors else 0.0"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 534,
-                "end_line": 544,
-                "language": "python",
-                "content": [
-                  "# Core imports for Byzantine fault tolerance",
-                  "from typing import Dict, List, Any, Optional, Set, Tuple",
-                  "from dataclasses import dataclass, field",
-                  "from enum import Enum",
-                  "import hashlib",
-                  "import json",
-                  "from datetime import datetime",
-                  "import asyncio",
-                  "import logging"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 548,
-                "end_line": 555,
-                "language": "python",
-                "content": [
-                  "class DataConsensusPhase(Enum):",
-                  "    \"\"\"Phases in Byzantine consensus for data operations\"\"\"",
-                  "    PRE_PREPARE = \"pre_prepare\"",
-                  "    PREPARE = \"prepare\" ",
-                  "    COMMIT = \"commit\"",
-                  "    REPLY = \"reply\""
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 559,
-                "end_line": 571,
-                "language": "python",
-                "content": [
-                  "@dataclass",
-                  "class DataConsensusMessage:",
-                  "    \"\"\"Byzantine consensus message for data processing operations\"\"\"",
-                  "    message_type: DataConsensusPhase",
-                  "    view_number: int  # Current consensus view",
-                  "    sequence_number: int  # Operation sequence number",
-                  "    data_operation: Dict[str, Any]  # The data operation being agreed upon",
-                  "    node_id: str",
-                  "    timestamp: datetime",
-                  "    digital_signature: str  # Cryptographic signature for authenticity",
-                  "    data_hash: str  # Hash of data operation for integrity"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 575,
-                "end_line": 584,
-                "language": "python",
-                "content": [
-                  "@dataclass ",
-                  "class DataOperationDigest:",
-                  "    \"\"\"Digest of data operation for Byzantine consensus verification\"\"\"",
-                  "    operation_hash: str",
-                  "    sequence_number: int",
-                  "    view_number: int",
-                  "    timestamp: datetime",
-                  "    node_signatures: Set[str] = field(default_factory=set)"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 588,
-                "end_line": 600,
-                "language": "python",
-                "content": [
-                  "class ByzantineDataConsensusNode:",
-                  "    \"\"\"Byzantine fault-tolerant consensus for critical data processing systems\"\"\"",
-                  "    ",
-                  "    def __init__(self, node_id: str, cluster_nodes: List[str], ",
-                  "                 fault_tolerance_threshold: int,",
-                  "                 data_store: 'SecureDataStore'):",
-                  "        # Node identity and cluster configuration",
-                  "        self.node_id = node_id",
-                  "        self.cluster_nodes = cluster_nodes  ",
-                  "        self.f = fault_tolerance_threshold  # Max Byzantine faults tolerated",
-                  "        self.data_store = data_store"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 604,
-                "end_line": 614,
-                "language": "python",
-                "content": [
-                  "        # Byzantine consensus state for data processing",
-                  "        self.view_number = 0",
-                  "        self.sequence_number = 0",
-                  "        self.is_primary = self._calculate_primary_status()",
-                  "        ",
-                  "        # Message storage for consensus phases",
-                  "        self.pre_prepare_messages: Dict[Tuple[int, int], DataConsensusMessage] = {}",
-                  "        self.prepare_messages: Dict[Tuple[int, int], List[DataConsensusMessage]] = {}",
-                  "        self.commit_messages: Dict[Tuple[int, int], List[DataConsensusMessage]] = {}"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 618,
-                "end_line": 628,
-                "language": "python",
-                "content": [
-                  "        # Data operation tracking",
-                  "        self.executed_operations: Set[Tuple[int, int]] = set()  # (view, sequence) pairs",
-                  "        self.pending_data_operations: Dict[str, Dict[str, Any]] = {}",
-                  "        ",
-                  "        # Security and integrity management",
-                  "        self.node_public_keys: Dict[str, str] = {}  # Public keys for signature verification",
-                  "        self.private_key = self._generate_node_private_key()",
-                  "        ",
-                  "        self.logger = logging.getLogger(f\"ByzantineDataNode-{node_id}\")"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 632,
-                "end_line": 638,
-                "language": "python",
-                "content": [
-                  "    def _calculate_primary_status(self) -> bool:",
-                  "        \"\"\"Determine if this node is the current primary for data consensus\"\"\"",
-                  "        # Simple primary selection - in production use more sophisticated methods",
-                  "        primary_index = self.view_number % len(self.cluster_nodes)",
-                  "        return self.cluster_nodes[primary_index] == self.node_id"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 642,
-                "end_line": 652,
-                "language": "python",
-                "content": [
-                  "    async def propose_data_operation(self, data_operation: Dict[str, Any]) -> Dict[str, Any]:",
-                  "        \"\"\"Propose new data operation for Byzantine consensus (primary only)\"\"\"",
-                  "        ",
-                  "        if not self.is_primary:",
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': 'Only primary node can propose data operations',",
-                  "                'current_primary': self._get_current_primary()",
-                  "            }"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 656,
-                "end_line": 671,
-                "language": "python",
-                "content": [
-                  "        # Create operation digest for consensus",
-                  "        operation_digest = self._create_data_operation_digest(data_operation)",
-                  "        ",
-                  "        # Phase 1: Pre-prepare - primary proposes data operation",
-                  "        pre_prepare_msg = DataConsensusMessage(",
-                  "            message_type=DataConsensusPhase.PRE_PREPARE,",
-                  "            view_number=self.view_number,",
-                  "            sequence_number=self.sequence_number,",
-                  "            data_operation=data_operation,",
-                  "            node_id=self.node_id,",
-                  "            timestamp=datetime.now(),",
-                  "            digital_signature=self._sign_message(operation_digest),",
-                  "            data_hash=operation_digest.operation_hash",
-                  "        )"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 675,
-                "end_line": 682,
-                "language": "python",
-                "content": [
-                  "        # Store our pre-prepare message",
-                  "        key = (self.view_number, self.sequence_number)",
-                  "        self.pre_prepare_messages[key] = pre_prepare_msg",
-                  "        ",
-                  "        # Broadcast pre-prepare to all backup nodes",
-                  "        await self._broadcast_to_backups(pre_prepare_msg)"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 686,
-                "end_line": 694,
-                "language": "python",
-                "content": [
-                  "        # Track the pending operation",
-                  "        operation_id = f\"{self.view_number}:{self.sequence_number}\"",
-                  "        self.pending_data_operations[operation_id] = {",
-                  "            'operation': data_operation,",
-                  "            'phase': DataConsensusPhase.PRE_PREPARE,",
-                  "            'start_time': datetime.now()",
-                  "        }"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 698,
-                "end_line": 710,
-                "language": "python",
-                "content": [
-                  "        # Increment sequence number for next operation",
-                  "        self.sequence_number += 1",
-                  "        ",
-                  "        self.logger.info(f\"Proposed data operation with sequence {self.sequence_number - 1}\")",
-                  "        ",
-                  "        return {",
-                  "            'success': True,",
-                  "            'operation_id': operation_id,",
-                  "            'sequence_number': self.sequence_number - 1,",
-                  "            'data_hash': operation_digest.operation_hash",
-                  "        }"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 716,
-                "end_line": 723,
-                "language": "python",
-                "content": [
-                  "    async def handle_consensus_message(self, message: DataConsensusMessage) -> Dict[str, Any]:",
-                  "        \"\"\"Handle incoming Byzantine consensus messages for data operations\"\"\"",
-                  "        ",
-                  "        # Verify message authenticity and integrity",
-                  "        if not await self._verify_message_authenticity(message):",
-                  "            return {'success': False, 'error': 'Message authentication failed'}"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 727,
-                "end_line": 737,
-                "language": "python",
-                "content": [
-                  "        # Process based on consensus phase",
-                  "        if message.message_type == DataConsensusPhase.PRE_PREPARE:",
-                  "            return await self._handle_pre_prepare(message)",
-                  "        elif message.message_type == DataConsensusPhase.PREPARE:",
-                  "            return await self._handle_prepare(message) ",
-                  "        elif message.message_type == DataConsensusPhase.COMMIT:",
-                  "            return await self._handle_commit(message)",
-                  "        else:",
-                  "            return {'success': False, 'error': f'Unknown message type: {message.message_type}'}"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 741,
-                "end_line": 753,
-                "language": "python",
-                "content": [
-                  "    async def _handle_pre_prepare(self, message: DataConsensusMessage) -> Dict[str, Any]:",
-                  "        \"\"\"Handle pre-prepare phase of Byzantine consensus for data operations\"\"\"",
-                  "        ",
-                  "        # Validate pre-prepare message",
-                  "        validation_result = await self._validate_pre_prepare(message)",
-                  "        if not validation_result['valid']:",
-                  "            return {'success': False, 'error': validation_result['reason']}",
-                  "        ",
-                  "        # Store pre-prepare message",
-                  "        key = (message.view_number, message.sequence_number)",
-                  "        self.pre_prepare_messages[key] = message"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 757,
-                "end_line": 769,
-                "language": "python",
-                "content": [
-                  "        # Create prepare message with our agreement",
-                  "        prepare_msg = DataConsensusMessage(",
-                  "            message_type=DataConsensusPhase.PREPARE,",
-                  "            view_number=message.view_number,",
-                  "            sequence_number=message.sequence_number,",
-                  "            data_operation=message.data_operation,",
-                  "            node_id=self.node_id,",
-                  "            timestamp=datetime.now(),",
-                  "            digital_signature=self._sign_message(message.data_hash),",
-                  "            data_hash=message.data_hash",
-                  "        )"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 773,
-                "end_line": 781,
-                "language": "python",
-                "content": [
-                  "        # Store our prepare message",
-                  "        if key not in self.prepare_messages:",
-                  "            self.prepare_messages[key] = []",
-                  "        self.prepare_messages[key].append(prepare_msg)",
-                  "        ",
-                  "        # Broadcast prepare message to all nodes",
-                  "        await self._broadcast_to_all_nodes(prepare_msg)"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 785,
-                "end_line": 789,
-                "language": "python",
-                "content": [
-                  "        self.logger.info(f\"Sent prepare for operation {message.sequence_number}\")",
-                  "        ",
-                  "        return {'success': True, 'phase': 'prepare'}"
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 795,
-                "end_line": 816,
-                "language": "python",
-                "content": [
-                  "    async def _handle_prepare(self, message: DataConsensusMessage) -> Dict[str, Any]:",
-                  "        \"\"\"Handle prepare phase of Byzantine consensus for data operations\"\"\"",
-                  "        ",
-                  "        key = (message.view_number, message.sequence_number)",
-                  "        ",
-                  "        # Store prepare message",
-                  "        if key not in self.prepare_messages:",
-                  "            self.prepare_messages[key] = []",
-                  "        self.prepare_messages[key].append(message)",
-                  "        ",
-                  "        # Check if we have enough prepare messages (2f + 1 total including pre-prepare)",
-                  "        required_prepares = 2 * self.f",
-                  "        ",
-                  "        if len(self.prepare_messages[key]) >= required_prepares:",
-                  "            # We have enough prepare messages - move to commit phase",
-                  "            ",
-                  "            # Get the original data operation from pre-prepare",
-                  "            pre_prepare = self.pre_prepare_messages.get(key)",
-                  "            if not pre_prepare:",
-                  "                return {'success': False, 'error': 'Pre-prepare message not found'}"
+                  "class DataProcessingTier(Enum):",
+                  "    \"\"\"Data processing service tiers for multi-tenant environments\"\"\"",
+                  "    BASIC = \"basic\"              # Basic data processing capabilities",
+                  "    PROFESSIONAL = \"professional\"  # Enhanced data processing with SLA",
+                  "    ENTERPRISE = \"enterprise\"     # Premium data processing with dedicated resources",
+                  "    CUSTOM = \"custom\"            # Custom data processing tier with negotiated terms",
+                  "",
+                  "class DataDeploymentEnvironment(Enum):",
+                  "    \"\"\"Data processing deployment environments\"\"\"",
+                  "    DEVELOPMENT = \"development\"   # Development data processing environment",
+                  "    STAGING = \"staging\"          # Staging data processing environment  ",
+                  "    PRODUCTION = \"production\"    # Production data processing environment",
+                  "    DISASTER_RECOVERY = \"disaster_recovery\"  # DR data processing environment",
+                  "",
+                  "class DataComponentStatus(Enum):",
+                  "    \"\"\"Data processing component lifecycle status\"\"\"",
+                  "    ACTIVE = \"active\"            # Component actively processing data",
+                  "    DEPRECATED = \"deprecated\"    # Component marked for replacement",
+                  "    SUNSET = \"sunset\"           # Component being phased out",
+                  "    ARCHIVED = \"archived\"       # Component archived but available"
                 ],
                 "line_count": 20
               },
               {
-                "start_line": 820,
-                "end_line": 832,
+                "start_line": 97,
+                "end_line": 115,
                 "language": "python",
                 "content": [
-                  "            # Create commit message",
-                  "            commit_msg = DataConsensusMessage(",
-                  "                message_type=DataConsensusPhase.COMMIT,",
-                  "                view_number=message.view_number,",
-                  "                sequence_number=message.sequence_number,",
-                  "                data_operation=pre_prepare.data_operation,",
-                  "                node_id=self.node_id,",
-                  "                timestamp=datetime.now(),",
-                  "                digital_signature=self._sign_message(message.data_hash),",
-                  "                data_hash=message.data_hash",
-                  "            )"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 836,
-                "end_line": 844,
-                "language": "python",
-                "content": [
-                  "            # Store our commit message",
-                  "            if key not in self.commit_messages:",
-                  "                self.commit_messages[key] = []",
-                  "            self.commit_messages[key].append(commit_msg)",
-                  "            ",
-                  "            # Broadcast commit message",
-                  "            await self._broadcast_to_all_nodes(commit_msg)"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 848,
-                "end_line": 854,
-                "language": "python",
-                "content": [
-                  "            self.logger.info(f\"Sent commit for operation {message.sequence_number}\")",
-                  "            ",
-                  "            return {'success': True, 'phase': 'commit'}",
-                  "        ",
-                  "        return {'success': True, 'phase': 'prepare', 'status': 'waiting_for_more_prepares'}"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 860,
-                "end_line": 865,
-                "language": "python",
-                "content": [
-                  "    async def _handle_commit(self, message: DataConsensusMessage) -> Dict[str, Any]:",
-                  "        \"\"\"Handle commit phase of Byzantine consensus for data operations\"\"\"",
-                  "        ",
-                  "        key = (message.view_number, message.sequence_number)"
-                ],
-                "line_count": 4
-              },
-              {
-                "start_line": 869,
-                "end_line": 874,
-                "language": "python",
-                "content": [
-                  "        # Store commit message",
-                  "        if key not in self.commit_messages:",
-                  "            self.commit_messages[key] = []",
-                  "        self.commit_messages[key].append(message)"
-                ],
-                "line_count": 4
-              },
-              {
-                "start_line": 878,
-                "end_line": 884,
-                "language": "python",
-                "content": [
-                  "        # Check if we have enough commit messages (2f + 1 total)",
-                  "        required_commits = 2 * self.f + 1",
-                  "        ",
-                  "        if len(self.commit_messages[key]) >= required_commits:",
-                  "            # We have consensus - execute the data operation"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 888,
-                "end_line": 896,
-                "language": "python",
-                "content": [
-                  "            if key not in self.executed_operations:",
-                  "                pre_prepare = self.pre_prepare_messages.get(key)",
-                  "                if pre_prepare:",
-                  "                    # Execute the data operation with full Byzantine fault tolerance",
-                  "                    execution_result = await self._execute_data_operation_safely(",
-                  "                        pre_prepare.data_operation, key",
-                  "                    )"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 900,
-                "end_line": 913,
-                "language": "python",
-                "content": [
-                  "                    # Mark as executed",
-                  "                    self.executed_operations.add(key)",
-                  "                    ",
-                  "                    self.logger.info(f\"Executed data operation {message.sequence_number} with Byzantine consensus\")",
-                  "                    ",
-                  "                    return {",
-                  "                        'success': True,",
-                  "                        'phase': 'executed',",
-                  "                        'execution_result': execution_result",
-                  "                    }",
-                  "        ",
-                  "        return {'success': True, 'phase': 'commit', 'status': 'waiting_for_more_commits'}"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 919,
-                "end_line": 939,
-                "language": "python",
-                "content": [
-                  "    async def _execute_data_operation_safely(self, data_operation: Dict[str, Any], ",
-                  "                                           consensus_key: Tuple[int, int]) -> Dict[str, Any]:",
-                  "        \"\"\"Execute data operation with full integrity verification\"\"\"",
-                  "        ",
-                  "        try:",
-                  "            # Pre-execution data integrity verification",
-                  "            integrity_check = await self._verify_data_operation_integrity(data_operation)",
-                  "            if not integrity_check['valid']:",
-                  "                return {'success': False, 'error': 'Data integrity verification failed'}",
-                  "            ",
-                  "            # Execute operation in the secure data store",
-                  "            execution_result = await self.data_store.execute_operation(",
-                  "                data_operation, ",
-                  "                consensus_metadata={",
-                  "                    'view': consensus_key[0],",
-                  "                    'sequence': consensus_key[1],",
-                  "                    'consensus_type': 'byzantine'",
-                  "                }",
-                  "            )"
-                ],
-                "line_count": 19
-              },
-              {
-                "start_line": 943,
-                "end_line": 960,
-                "language": "python",
-                "content": [
-                  "            # Post-execution verification",
-                  "            post_check = await self._verify_execution_result(execution_result, data_operation)",
-                  "            if not post_check['valid']:",
-                  "                # Rollback if execution verification fails",
-                  "                await self.data_store.rollback_operation(consensus_key)",
-                  "                return {'success': False, 'error': 'Post-execution verification failed'}",
-                  "            ",
-                  "            return {",
-                  "                'success': True,",
-                  "                'operation_result': execution_result,",
-                  "                'integrity_verified': True",
-                  "            }",
-                  "            ",
-                  "        except Exception as e:",
-                  "            self.logger.error(f\"Error executing data operation: {e}\")",
-                  "            return {'success': False, 'error': str(e)}"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 964,
-                "end_line": 978,
-                "language": "python",
-                "content": [
-                  "    def _create_data_operation_digest(self, data_operation: Dict[str, Any]) -> DataOperationDigest:",
-                  "        \"\"\"Create cryptographic digest of data operation for consensus\"\"\"",
-                  "        ",
-                  "        # Create deterministic hash of the data operation",
-                  "        operation_str = json.dumps(data_operation, sort_keys=True)",
-                  "        operation_hash = hashlib.sha256(operation_str.encode()).hexdigest()",
-                  "        ",
-                  "        return DataOperationDigest(",
-                  "            operation_hash=operation_hash,",
-                  "            sequence_number=self.sequence_number,",
-                  "            view_number=self.view_number,",
-                  "            timestamp=datetime.now()",
-                  "        )"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 982,
-                "end_line": 992,
-                "language": "python",
-                "content": [
-                  "    async def get_consensus_status(self) -> Dict[str, Any]:",
-                  "        \"\"\"Get comprehensive Byzantine consensus status for data processing\"\"\"",
-                  "        ",
-                  "        # Count pending operations by phase",
-                  "        pending_by_phase = {",
-                  "            'pre_prepare': len(self.pre_prepare_messages),",
-                  "            'prepare': len(self.prepare_messages), ",
-                  "            'commit': len(self.commit_messages)",
-                  "        }"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 996,
-                "end_line": 1000,
-                "language": "python",
-                "content": [
-                  "        # Calculate consensus health metrics",
-                  "        total_operations = len(self.executed_operations)",
-                  "        recent_throughput = await self._calculate_recent_throughput()"
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1004,
-                "end_line": 1018,
-                "language": "python",
-                "content": [
-                  "        return {",
-                  "            'node_id': self.node_id,",
-                  "            'is_primary': self.is_primary,",
-                  "            'view_number': self.view_number,",
-                  "            'sequence_number': self.sequence_number,",
-                  "            'executed_operations': total_operations,",
-                  "            'pending_operations': pending_by_phase,",
-                  "            'fault_tolerance': f\"Up to {self.f} Byzantine faults\",",
-                  "            'cluster_size': len(self.cluster_nodes),",
-                  "            'consensus_health': await self._calculate_byzantine_health(),",
-                  "            'recent_throughput_ops_per_sec': recent_throughput,",
-                  "            'data_store_integrity': await self.data_store.verify_integrity()",
-                  "        }"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 1034,
-                "end_line": 1044,
-                "language": "python",
-                "content": [
-                  "class EnterprisePBFTDataConsensus:",
-                  "    \"\"\"Production-ready PBFT implementation for enterprise data processing systems\"\"\"",
+                  "@dataclass",
+                  "class DataTenantConfiguration:",
+                  "    \"\"\"Multi-tenant data processing configuration\"\"\"",
+                  "    tenant_id: TenantId",
+                  "    tenant_name: str",
+                  "    data_processing_tier: DataProcessingTier",
+                  "    max_concurrent_jobs: int",
+                  "    max_monthly_processing_hours: Optional[int]  # None for unlimited",
+                  "    allowed_data_environments: List[DataDeploymentEnvironment]",
+                  "    data_storage_quota_gb: Optional[int]  # None for unlimited",
+                  "    custom_data_processing_limits: Dict[str, Any] = field(default_factory=dict)",
                   "    ",
-                  "    def __init__(self, node_id: str, cluster_config: Dict[str, Any],",
-                  "                 enterprise_data_store: 'EnterpriseDataStore'):",
-                  "        # Core enterprise configuration",
-                  "        self.node_id = node_id",
-                  "        self.cluster_config = cluster_config",
-                  "        self.data_store = enterprise_data_store"
+                  "    def __post_init__(self):",
+                  "        if self.max_concurrent_jobs <= 0:",
+                  "            raise ValueError(\"max_concurrent_jobs must be positive\")",
+                  "        if self.max_monthly_processing_hours is not None and self.max_monthly_processing_hours <= 0:",
+                  "            raise ValueError(\"max_monthly_processing_hours must be positive when set\")"
                 ],
-                "line_count": 9
+                "line_count": 17
               },
               {
-                "start_line": 1048,
-                "end_line": 1063,
+                "start_line": 123,
+                "end_line": 142,
                 "language": "python",
                 "content": [
-                  "        # Enterprise-grade configuration",
-                  "        self.max_batch_size = cluster_config.get('max_batch_size', 100)",
-                  "        self.timeout_intervals = cluster_config.get('timeouts', {",
-                  "            'request': 5.0,",
-                  "            'pre_prepare': 3.0, ",
-                  "            'prepare': 2.0,",
-                  "            'commit': 2.0,",
-                  "            'view_change': 10.0",
-                  "        })",
-                  "        ",
-                  "        # Performance optimization for enterprise workloads",
-                  "        self.message_batching_enabled = True",
-                  "        self.async_execution_enabled = True",
-                  "        self.checkpoint_frequency = 100  # Operations per checkpoint"
+                  "@dataclass",
+                  "class EnterpriseDataComponent:",
+                  "    \"\"\"Enterprise data processing component definition\"\"\"",
+                  "    component_id: str",
+                  "    component_name: str",
+                  "    component_version: ComponentVersion",
+                  "    data_processing_capabilities: List[str]",
+                  "    supported_data_formats: List[str]  # JSON, CSV, Parquet, Avro, etc.",
+                  "    resource_requirements: Dict[str, Any]",
+                  "    security_clearance_level: str",
+                  "    compliance_certifications: List[str]  # SOC2, GDPR, HIPAA, etc.",
+                  "    dependencies: List[str] = field(default_factory=list)",
+                  "    data_lineage_tracking: bool = True",
+                  "    ",
+                  "    def get_data_component_hash(self) -> str:",
+                  "        \"\"\"Generate hash for data component versioning\"\"\"",
+                  "        content = f\"{self.component_id}-{self.component_version}-{self.data_processing_capabilities}\"",
+                  "        return hashlib.sha256(content.encode()).hexdigest()[:16]"
                 ],
-                "line_count": 14
+                "line_count": 18
               },
               {
-                "start_line": 1067,
-                "end_line": 1083,
+                "start_line": 150,
+                "end_line": 161,
                 "language": "python",
                 "content": [
-                  "        # Enterprise monitoring and observability",
-                  "        self.metrics_collector = EnterpriseMetricsCollector(node_id)",
-                  "        self.performance_monitor = PBFTPerformanceMonitor()",
-                  "        ",
-                  "        # Security enhancements for enterprise environments",
-                  "        self.encryption_enabled = True",
-                  "        self.access_control_enabled = True",
-                  "        self.audit_logging_enabled = True",
-                  "        ",
-                  "        # State management",
-                  "        self.operation_batch: List[Dict[str, Any]] = []",
-                  "        self.last_checkpoint_sequence = 0",
-                  "        self.stable_checkpoint = None",
-                  "        ",
-                  "        self.logger = logging.getLogger(f\"EnterprisePBFT-{node_id}\")"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 1087,
-                "end_line": 1102,
-                "language": "python",
-                "content": [
-                  "    async def process_data_operation_batch(self, operations: List[Dict[str, Any]]) -> Dict[str, Any]:",
-                  "        \"\"\"Process batch of data operations with enterprise-grade PBFT consensus\"\"\"",
-                  "        ",
-                  "        if not operations:",
-                  "            return {'success': False, 'error': 'Empty operation batch'}",
-                  "        ",
-                  "        # Enterprise validation of operation batch",
-                  "        validation_result = await self._validate_operation_batch_enterprise(operations)",
-                  "        if not validation_result['valid']:",
-                  "            return {",
-                  "                'success': False, ",
-                  "                'error': validation_result['error'],",
-                  "                'invalid_operations': validation_result['invalid_operations']",
-                  "            }"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 1106,
-                "end_line": 1120,
-                "language": "python",
-                "content": [
-                  "        # Create batch identifier for tracking",
-                  "        batch_id = self._generate_batch_id(operations)",
-                  "        ",
-                  "        # Start performance monitoring for this batch",
-                  "        batch_metrics = self.performance_monitor.start_batch_tracking(batch_id, len(operations))",
-                  "        ",
-                  "        try:",
-                  "            # Phase 1: Pre-prepare with enterprise security",
-                  "            pre_prepare_result = await self._enterprise_pre_prepare_phase(operations, batch_id)",
-                  "            if not pre_prepare_result['success']:",
-                  "                return pre_prepare_result",
-                  "                ",
-                  "            batch_metrics.record_phase_completion('pre_prepare')"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 1124,
-                "end_line": 1131,
-                "language": "python",
-                "content": [
-                  "            # Phase 2: Prepare with fault detection",
-                  "            prepare_result = await self._enterprise_prepare_phase(batch_id, operations)",
-                  "            if not prepare_result['success']:",
-                  "                return prepare_result",
-                  "                ",
-                  "            batch_metrics.record_phase_completion('prepare')"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 1135,
-                "end_line": 1142,
-                "language": "python",
-                "content": [
-                  "            # Phase 3: Commit with integrity verification",
-                  "            commit_result = await self._enterprise_commit_phase(batch_id, operations)",
-                  "            if not commit_result['success']:",
-                  "                return commit_result",
-                  "                ",
-                  "            batch_metrics.record_phase_completion('commit')"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 1146,
-                "end_line": 1149,
-                "language": "python",
-                "content": [
-                  "            # Phase 4: Execution with rollback capability",
-                  "            execution_result = await self._enterprise_execute_batch(batch_id, operations)"
-                ],
-                "line_count": 2
-              },
-              {
-                "start_line": 1155,
-                "end_line": 1161,
-                "language": "python",
-                "content": [
-                  "            batch_metrics.record_phase_completion('execute')",
-                  "            batch_metrics.finalize_batch(execution_result['success'])",
-                  "            ",
-                  "            # Update enterprise metrics",
-                  "            await self.metrics_collector.record_batch_completion(batch_metrics)"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1165,
-                "end_line": 1174,
-                "language": "python",
-                "content": [
-                  "            return {",
-                  "                'success': execution_result['success'],",
-                  "                'batch_id': batch_id,",
-                  "                'operations_count': len(operations),",
-                  "                'execution_results': execution_result['results'],",
-                  "                'performance_metrics': batch_metrics.get_summary(),",
-                  "                'consensus_verified': True",
-                  "            }"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 1178,
-                "end_line": 1189,
-                "language": "python",
-                "content": [
-                  "        except Exception as e:",
-                  "            batch_metrics.record_error(str(e))",
-                  "            await self.metrics_collector.record_batch_error(batch_id, str(e))",
-                  "            ",
-                  "            self.logger.error(f\"Enterprise PBFT batch processing failed: {e}\")",
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': f'Enterprise PBFT processing failed: {str(e)}',",
-                  "                'batch_id': batch_id",
-                  "            }"
+                  "class EnterpriseDataProcessingRegistry:",
+                  "    \"\"\"Enterprise registry for data processing components with multi-tenant support\"\"\"",
+                  "    ",
+                  "    def __init__(self):",
+                  "        self.data_components: Dict[str, EnterpriseDataComponent] = {}",
+                  "        self.tenant_configurations: Dict[TenantId, DataTenantConfiguration] = {}",
+                  "        self.component_versions: Dict[str, List[ComponentVersion]] = {}",
+                  "        self.tenant_component_access: Dict[TenantId, List[str]] = {}",
+                  "        self.data_processing_metrics: Dict[str, Dict] = {}",
+                  "        self.logger = logging.getLogger(__name__)"
                 ],
                 "line_count": 10
               },
               {
-                "start_line": 1195,
-                "end_line": 1202,
+                "start_line": 169,
+                "end_line": 187,
                 "language": "python",
                 "content": [
-                  "    async def _enterprise_pre_prepare_phase(self, operations: List[Dict[str, Any]], ",
-                  "                                          batch_id: str) -> Dict[str, Any]:",
-                  "        \"\"\"Enterprise-grade pre-prepare phase with enhanced security\"\"\"",
+                  "    def register_data_tenant(self, config: DataTenantConfiguration):",
+                  "        \"\"\"Register a data processing tenant with configuration\"\"\"",
                   "        ",
-                  "        # Create cryptographically secure batch digest",
-                  "        batch_digest = await self._create_secure_batch_digest(operations, batch_id)"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 1206,
-                "end_line": 1224,
-                "language": "python",
-                "content": [
-                  "        # Enterprise pre-prepare message with enhanced metadata",
-                  "        pre_prepare_message = {",
-                  "            'message_type': 'enterprise_pre_prepare',",
-                  "            'view_number': self.view_number,",
-                  "            'sequence_number': self.sequence_number,",
-                  "            'batch_id': batch_id,",
-                  "            'operations_count': len(operations),",
-                  "            'batch_digest': batch_digest,",
-                  "            'node_id': self.node_id,",
-                  "            'timestamp': datetime.now().isoformat(),",
-                  "            'enterprise_metadata': {",
-                  "                'security_level': 'high',",
-                  "                'compliance_tags': await self._extract_compliance_tags(operations),",
-                  "                'data_classification': await self._classify_data_sensitivity(operations),",
-                  "                'access_requirements': await self._determine_access_requirements(operations)",
-                  "            }",
-                  "        }"
+                  "        self.tenant_configurations[config.tenant_id] = config",
+                  "        self.tenant_component_access[config.tenant_id] = []",
+                  "        ",
+                  "        # Initialize data processing metrics for tenant",
+                  "        self.data_processing_metrics[config.tenant_id] = {",
+                  "            \"total_processing_hours\": 0,",
+                  "            \"active_jobs\": 0,",
+                  "            \"data_processed_gb\": 0,",
+                  "            \"jobs_completed\": 0,",
+                  "            \"jobs_failed\": 0,",
+                  "            \"last_activity\": None",
+                  "        }",
+                  "        ",
+                  "        self.logger.info(f\"Registered data processing tenant: {config.tenant_name} ({config.tenant_id})\")"
                 ],
                 "line_count": 17
               },
               {
-                "start_line": 1228,
-                "end_line": 1246,
+                "start_line": 195,
+                "end_line": 205,
                 "language": "python",
                 "content": [
-                  "        # Enterprise cryptographic signature with hardware security module (HSM) support",
-                  "        if self.encryption_enabled:",
-                  "            pre_prepare_message['digital_signature'] = await self._sign_with_enterprise_hsm(",
-                  "                json.dumps(pre_prepare_message, sort_keys=True)",
-                  "            )",
+                  "    def register_data_component(self, component: EnterpriseDataComponent, ",
+                  "                              authorized_tenants: List[TenantId] = None):",
+                  "        \"\"\"Register enterprise data processing component with tenant authorization\"\"\"",
                   "        ",
-                  "        # Broadcast with enterprise-grade reliable multicast",
-                  "        broadcast_result = await self._enterprise_reliable_broadcast(pre_prepare_message)",
+                  "        # Enterprise validation and component storage",
+                  "        self._validate_enterprise_data_component(component)",
                   "        ",
-                  "        if broadcast_result['success']:",
-                  "            # Store in enterprise persistent storage",
-                  "            await self._store_consensus_message_enterprise(pre_prepare_message)",
-                  "            ",
-                  "            self.logger.info(f\"Enterprise pre-prepare sent for batch {batch_id}\")",
-                  "            return {'success': True, 'message_id': pre_prepare_message.get('message_id')}",
-                  "        else:",
-                  "            return {'success': False, 'error': broadcast_result['error']}"
-                ],
-                "line_count": 17
-              },
-              {
-                "start_line": 1250,
-                "end_line": 1267,
-                "language": "python",
-                "content": [
-                  "    async def _enterprise_prepare_phase(self, batch_id: str, ",
-                  "                                       operations: List[Dict[str, Any]]) -> Dict[str, Any]:",
-                  "        \"\"\"Enterprise prepare phase with advanced fault detection\"\"\"",
-                  "        ",
-                  "        # Wait for prepare responses with enterprise timeout handling",
-                  "        prepare_responses = await self._collect_enterprise_prepare_responses(",
-                  "            batch_id, ",
-                  "            timeout=self.timeout_intervals['prepare'],",
-                  "            required_responses=2 * self.f + 1",
-                  "        )",
-                  "        ",
-                  "        # Enterprise-grade response validation",
-                  "        validation_results = await asyncio.gather(*[",
-                  "            self._validate_prepare_response_enterprise(response) ",
-                  "            for response in prepare_responses",
-                  "        ])"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 1271,
-                "end_line": 1285,
-                "language": "python",
-                "content": [
-                  "        valid_responses = [",
-                  "            resp for resp, valid in zip(prepare_responses, validation_results)",
-                  "            if valid['valid']",
-                  "        ]",
-                  "        ",
-                  "        # Check for Byzantine behavior detection",
-                  "        byzantine_detection = await self._detect_byzantine_behavior_in_responses(",
-                  "            prepare_responses, valid_responses",
-                  "        )",
-                  "        ",
-                  "        if byzantine_detection['detected']:",
-                  "            self.logger.warning(f\"Byzantine behavior detected in prepare phase: {byzantine_detection}\")",
-                  "            await self._handle_byzantine_detection(byzantine_detection)"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 1289,
-                "end_line": 1306,
-                "language": "python",
-                "content": [
-                  "        # Require enterprise consensus threshold",
-                  "        required_valid_responses = 2 * self.f + 1",
-                  "        ",
-                  "        if len(valid_responses) >= required_valid_responses:",
-                  "            self.logger.info(f\"Enterprise prepare phase successful for batch {batch_id}\")",
-                  "            return {",
-                  "                'success': True,",
-                  "                'valid_responses': len(valid_responses),",
-                  "                'byzantine_detected': byzantine_detection['detected']",
-                  "            }",
-                  "        else:",
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': f'Insufficient valid prepare responses: {len(valid_responses)}/{required_valid_responses}',",
-                  "                'byzantine_detected': byzantine_detection['detected']",
-                  "            }"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 1310,
-                "end_line": 1326,
-                "language": "python",
-                "content": [
-                  "    async def _enterprise_execute_batch(self, batch_id: str, ",
-                  "                                       operations: List[Dict[str, Any]]) -> Dict[str, Any]:",
-                  "        \"\"\"Execute operation batch with enterprise-grade guarantees\"\"\"",
-                  "        ",
-                  "        # Create enterprise execution context",
-                  "        execution_context = await self._create_enterprise_execution_context(batch_id)",
-                  "        ",
-                  "        # Pre-execution enterprise validation",
-                  "        pre_exec_validation = await self._pre_execution_validation_enterprise(operations)",
-                  "        if not pre_exec_validation['valid']:",
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': 'Pre-execution validation failed',",
-                  "                'validation_details': pre_exec_validation",
-                  "            }"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 1330,
-                "end_line": 1337,
-                "language": "python",
-                "content": [
-                  "        execution_results = []",
-                  "        rollback_stack = []",
-                  "        ",
-                  "        try:",
-                  "            # Execute operations with enterprise transaction management",
-                  "            async with self.data_store.enterprise_transaction() as tx:"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 1341,
-                "end_line": 1348,
-                "language": "python",
-                "content": [
-                  "                for i, operation in enumerate(operations):",
-                  "                    try:",
-                  "                        # Execute single operation with full audit trail",
-                  "                        result = await self._execute_single_operation_enterprise(",
-                  "                            operation, execution_context, tx",
-                  "                        )"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 1352,
-                "end_line": 1366,
-                "language": "python",
-                "content": [
-                  "                        execution_results.append({",
-                  "                            'operation_index': i,",
-                  "                            'success': result['success'],",
-                  "                            'result': result['result'] if result['success'] else None,",
-                  "                            'error': result.get('error'),",
-                  "                            'audit_trail': result['audit_trail']",
-                  "                        })",
-                  "                        ",
-                  "                        if result['success']:",
-                  "                            rollback_stack.append(result['rollback_info'])",
-                  "                        else:",
-                  "                            # Single operation failed - rollback entire batch",
-                  "                            raise Exception(f\"Operation {i} failed: {result.get('error')}\")"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 1372,
-                "end_line": 1388,
-                "language": "python",
-                "content": [
-                  "                # All operations succeeded - commit enterprise transaction",
-                  "                await tx.commit_with_enterprise_verification()",
-                  "                ",
-                  "        except Exception as batch_error:",
-                  "            # Batch execution failed - perform enterprise rollback",
-                  "            self.logger.error(f\"Batch execution failed, performing rollback: {batch_error}\")",
-                  "            ",
-                  "            rollback_result = await self._enterprise_rollback(rollback_stack, execution_context)",
-                  "            ",
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': str(batch_error),",
-                  "                'partial_results': execution_results,",
-                  "                'rollback_performed': rollback_result['success']",
-                  "            }"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 1392,
-                "end_line": 1401,
-                "language": "python",
-                "content": [
-                  "        # Post-execution enterprise verification",
-                  "        post_exec_verification = await self._post_execution_verification_enterprise(",
-                  "            execution_results, execution_context",
-                  "        )",
-                  "        ",
-                  "        if not post_exec_verification['valid']:",
-                  "            # Post-execution verification failed - emergency rollback",
-                  "            await self._emergency_rollback_enterprise(rollback_stack, execution_context)"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 1405,
-                "end_line": 1415,
-                "language": "python",
-                "content": [
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': 'Post-execution verification failed',",
-                  "                'verification_details': post_exec_verification",
-                  "            }",
-                  "        ",
-                  "        # Update enterprise checkpoint if needed",
-                  "        if self.sequence_number - self.last_checkpoint_sequence >= self.checkpoint_frequency:",
-                  "            await self._create_enterprise_checkpoint()"
+                  "        component_key = f\"{component.component_id}-{component.component_version}\"",
+                  "        self.data_components[component_key] = component"
                 ],
                 "line_count": 9
               },
               {
-                "start_line": 1419,
-                "end_line": 1428,
+                "start_line": 209,
+                "end_line": 214,
                 "language": "python",
                 "content": [
-                  "        self.logger.info(f\"Enterprise batch {batch_id} executed successfully\")",
+                  "        # Component version tracking for enterprise lifecycle management",
+                  "        if component.component_id not in self.component_versions:",
+                  "            self.component_versions[component.component_id] = []",
+                  "        self.component_versions[component.component_id].append(component.component_version)"
+                ],
+                "line_count": 4
+              },
+              {
+                "start_line": 218,
+                "end_line": 226,
+                "language": "python",
+                "content": [
+                  "        # Tenant authorization and access control management",
+                  "        if authorized_tenants:",
+                  "            for tenant_id in authorized_tenants:",
+                  "                if tenant_id in self.tenant_configurations:",
+                  "                    self.tenant_component_access[tenant_id].append(component_key)",
                   "        ",
-                  "        return {",
-                  "            'success': True,",
-                  "            'results': execution_results,",
-                  "            'execution_context': execution_context['context_id'],",
-                  "            'verification_passed': True",
-                  "        }"
+                  "        self.logger.info(f\"Registered enterprise data component: {component.component_name} v{component.component_version}\")"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 229,
+                "end_line": 237,
+                "language": "",
+                "content": [
+                  "",
+                  "This registration process ensures all enterprise data processing components meet security and compliance requirements.",
+                  "",
+                  "### Step 8: Enterprise Data Processing Validation",
+                  "",
+                  "Components undergo rigorous validation for enterprise data processing environments:",
+                  ""
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 258,
+                "end_line": 266,
+                "language": "",
+                "content": [
+                  "",
+                  "This validation ensures enterprise data processing components meet all security and functional requirements.",
+                  "",
+                  "### Step 9: Advanced Data Processing Component Discovery",
+                  "",
+                  "Enterprise systems need sophisticated discovery for data processing components:",
+                  ""
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 276,
+                "end_line": 280,
+                "language": "",
+                "content": [
+                  "",
+                  "The component discovery method provides enterprise-grade service discovery for data processing workloads with strict tenant isolation. By validating tenant registration and accessing only tenant-authorized components, the system ensures complete data processing isolation in multi-tenant environments. This security-first approach prevents unauthorized access to data processing capabilities that could compromise customer data or violate compliance requirements.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 291,
+                "end_line": 295,
+                "language": "",
+                "content": [
+                  "",
+                  "The discovery process iterates only through tenant-authorized components, applying sophisticated filtering criteria to match specific data processing requirements. This design enables intelligent component selection where applications can discover components based on processing capabilities, supported data formats, or security clearance levels. The filtered approach reduces complexity for developers while maintaining enterprise security boundaries.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 306,
+                "end_line": 310,
+                "language": "",
+                "content": [
+                  "",
+                  "Capability-based filtering ensures applications discover only components that can handle their specific data processing requirements. The subset matching logic means components must possess all required capabilities, preventing runtime failures from capability mismatches. This is particularly important for data processing pipelines where missing capabilities like \"stream_processing\" or \"batch_analytics\" could cause entire workflows to fail.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 317,
+                "end_line": 321,
+                "language": "",
+                "content": [
+                  "",
+                  "Data format filtering ensures discovered components can process the application's input data types. Using intersection logic means components need to support at least one required format, enabling flexible data processing architectures where different components might specialize in different formats (JSON, Parquet, Avro, etc.) while still participating in the same processing pipeline.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 331,
+                "end_line": 334,
+                "language": "",
+                "content": [
+                  "",
+                  "Security clearance filtering implements enterprise-grade access control for sensitive data processing operations. The hierarchical clearance model ensures only appropriately secured components can process confidential or restricted data. This is essential in regulated industries where data processing components must meet specific security certifications, and mixing clearance levels could result in compliance violations or data breaches."
+                ],
+                "line_count": 2
+              },
+              {
+                "start_line": 342,
+                "end_line": 351,
+                "language": "python",
+                "content": [
+                  "class EnterpriseDataDeploymentManager:",
+                  "    \"\"\"Manages enterprise deployments of data processing systems\"\"\"",
+                  "    ",
+                  "    def __init__(self, registry: EnterpriseDataProcessingRegistry):",
+                  "        self.registry = registry",
+                  "        self.active_deployments: Dict[str, Dict] = {}",
+                  "        self.deployment_history: List[Dict] = []",
+                  "        self.logger = logging.getLogger(__name__)"
                 ],
                 "line_count": 8
               },
               {
-                "start_line": 1434,
-                "end_line": 1452,
+                "start_line": 359,
+                "end_line": 367,
                 "language": "python",
                 "content": [
-                  "    async def get_enterprise_consensus_metrics(self) -> Dict[str, Any]:",
-                  "        \"\"\"Get comprehensive enterprise consensus performance and health metrics\"\"\"",
+                  "    async def deploy_data_processing_system(self, ",
+                  "                                          deployment_config: Dict[str, Any],",
+                  "                                          tenant_id: TenantId,",
+                  "                                          environment: DataDeploymentEnvironment) -> str:",
+                  "        \"\"\"Deploy data processing system using blue-green deployment pattern\"\"\"",
                   "        ",
-                  "        current_time = datetime.now()",
+                  "        deployment_id = str(uuid.uuid4())"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 371,
+                "end_line": 379,
+                "language": "python",
+                "content": [
+                  "        # Enterprise tenant authorization validation",
+                  "        if tenant_id not in self.registry.tenant_configurations:",
+                  "            raise ValueError(f\"Data processing tenant not authorized: {tenant_id}\")",
                   "        ",
-                  "        # Performance metrics",
-                  "        performance_metrics = await self.performance_monitor.get_comprehensive_metrics()",
-                  "        ",
-                  "        # Health and availability metrics",
-                  "        health_metrics = {",
-                  "            'consensus_health_score': await self._calculate_enterprise_health_score(),",
-                  "            'node_availability_percent': await self._calculate_node_availability(),",
-                  "            'byzantine_faults_detected': await self.metrics_collector.get_byzantine_fault_count(),",
-                  "            'last_successful_consensus': await self._get_last_successful_consensus_time(),",
-                  "            'average_consensus_latency_ms': performance_metrics['avg_consensus_latency_ms'],",
-                  "            'throughput_ops_per_second': performance_metrics['throughput_ops_per_sec']",
+                  "        tenant_config = self.registry.tenant_configurations[tenant_id]",
+                  "        if environment not in tenant_config.allowed_data_environments:",
+                  "            raise ValueError(f\"Tenant not authorized for environment: {environment.value}\")"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 383,
+                "end_line": 394,
+                "language": "python",
+                "content": [
+                  "        # Enterprise deployment tracking and audit trail",
+                  "        deployment_record = {",
+                  "            \"deployment_id\": deployment_id,",
+                  "            \"tenant_id\": tenant_id,",
+                  "            \"environment\": environment.value,",
+                  "            \"status\": \"deploying\",",
+                  "            \"start_time\": datetime.now().isoformat(),",
+                  "            \"config\": deployment_config,",
+                  "            \"deployment_type\": \"blue_green_data_processing\"",
                   "        }"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 398,
+                "end_line": 405,
+                "language": "python",
+                "content": [
+                  "        try:",
+                  "            # Phase 1: Deploy to green environment for data processing",
+                  "            await self._deploy_green_data_environment(deployment_config, tenant_id, environment)",
+                  "            ",
+                  "            # Phase 2: Validate green data processing deployment",
+                  "            validation_result = await self._validate_data_deployment(deployment_id, tenant_id)"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 409,
+                "end_line": 421,
+                "language": "python",
+                "content": [
+                  "            if validation_result[\"success\"]:",
+                  "                # Phase 3: Switch traffic to green data processing environment",
+                  "                await self._switch_traffic_to_green_data(deployment_id, tenant_id)",
+                  "                ",
+                  "                # Phase 4: Cleanup blue data processing environment",
+                  "                await self._cleanup_blue_data_environment(deployment_id, tenant_id)",
+                  "                ",
+                  "                deployment_record[\"status\"] = \"deployed\"",
+                  "                deployment_record[\"end_time\"] = datetime.now().isoformat()",
+                  "                ",
+                  "                self.logger.info(f\"Successfully deployed data processing system: {deployment_id}\")"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 425,
+                "end_line": 436,
+                "language": "python",
+                "content": [
+                  "            else:",
+                  "                deployment_record[\"status\"] = \"failed\"",
+                  "                deployment_record[\"error\"] = validation_result.get(\"error\", \"Validation failed\")",
+                  "                raise Exception(f\"Data processing deployment validation failed: {validation_result}\")",
+                  "        ",
+                  "        except Exception as e:",
+                  "            deployment_record[\"status\"] = \"failed\"",
+                  "            deployment_record[\"error\"] = str(e)",
+                  "            self.logger.error(f\"Data processing deployment failed: {deployment_id} - {str(e)}\")",
+                  "            raise"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 440,
+                "end_line": 446,
+                "language": "python",
+                "content": [
+                  "        finally:",
+                  "            self.active_deployments[deployment_id] = deployment_record",
+                  "            self.deployment_history.append(deployment_record.copy())",
+                  "        ",
+                  "        return deployment_id"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 449,
+                "end_line": 467,
+                "language": "",
+                "content": [
+                  "",
+                  "This blue-green deployment system ensures zero-downtime deployments for enterprise data processing systems.",
+                  "",
+                  "---",
+                  "",
+                  "## Part 2: Advanced Data Processing Security and Compliance",
+                  "",
+                  "### Security Framework for Data Processing",
+                  "",
+                  "\ud83d\uddc2\ufe0f **File**: `src/session6/enterprise_data_security.py` - Enterprise security patterns for data processing",
+                  "",
+                  "Enterprise data processing systems require comprehensive security frameworks with encryption, audit trails, and compliance management. Let's build this security infrastructure step by step.",
+                  "",
+                  "### Step 12: Data Processing Security Manager Foundation",
+                  "",
+                  "We start with the enterprise security manager for data processing operations:",
+                  ""
                 ],
                 "line_count": 17
               },
               {
-                "start_line": 1456,
-                "end_line": 1473,
-                "language": "python",
+                "start_line": 485,
+                "end_line": 493,
+                "language": "",
                 "content": [
-                  "        # Security and compliance metrics",
-                  "        security_metrics = {",
-                  "            'cryptographic_operations_per_second': await self._get_crypto_ops_per_sec(),",
-                  "            'access_control_violations': await self.metrics_collector.get_access_violations(),",
-                  "            'audit_log_integrity_verified': await self._verify_audit_log_integrity(),",
-                  "            'compliance_violations': await self.metrics_collector.get_compliance_violations()",
-                  "        }",
-                  "        ",
-                  "        # Operational metrics",
-                  "        operational_metrics = {",
-                  "            'total_operations_processed': self.sequence_number,",
-                  "            'active_consensus_rounds': await self._count_active_consensus_rounds(),",
-                  "            'pending_checkpoints': await self._count_pending_checkpoints(),",
-                  "            'storage_utilization_percent': await self.data_store.get_storage_utilization(),",
-                  "            'network_partition_events': await self.metrics_collector.get_partition_events()",
-                  "        }"
+                  "",
+                  "This security manager provides enterprise-grade encryption and audit capabilities for data processing systems.",
+                  "",
+                  "### Step 13: Data Encryption and Protection",
+                  "",
+                  "Enterprise data processing requires comprehensive data protection:",
+                  ""
                 ],
-                "line_count": 16
+                "line_count": 7
               },
               {
-                "start_line": 1477,
-                "end_line": 1492,
+                "start_line": 504,
+                "end_line": 508,
+                "language": "",
+                "content": [
+                  "",
+                  "The data encryption method provides enterprise-grade payload protection using Fernet symmetric encryption with comprehensive metadata tracking. The encryption metadata includes timestamps for audit compliance and context information for data lineage tracking. This approach ensures encrypted data processing payloads can be tracked through complex enterprise workflows while maintaining security and regulatory compliance.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 517,
+                "end_line": 521,
+                "language": "",
+                "content": [
+                  "",
+                  "Comprehensive audit logging captures every encryption operation with payload size and context information, creating an immutable trail for regulatory compliance. The security event logging enables enterprise security teams to monitor data encryption patterns, detect anomalies, and demonstrate compliance with data protection regulations like GDPR and HIPAA.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 537,
+                "end_line": 541,
+                "language": "",
+                "content": [
+                  "",
+                  "The decryption process validates payload integrity while maintaining comprehensive audit logs of successful operations. The try-catch structure ensures both successful and failed decryption attempts are logged, enabling security teams to detect potential attacks or system issues. The encryption timestamp tracking allows correlation of encryption and decryption events across distributed data processing workflows.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 549,
+                "end_line": 552,
+                "language": "",
+                "content": [
+                  "",
+                  "Robust error handling captures decryption failures with detailed error information while maintaining security through proper exception handling. Failed decryption attempts are logged as security events, enabling detection of potential attacks or data corruption issues. The SecurityException provides clear error messaging for troubleshooting while preventing information leakage that could compromise security."
+                ],
+                "line_count": 2
+              },
+              {
+                "start_line": 560,
+                "end_line": 573,
                 "language": "python",
                 "content": [
+                  "    def configure_compliance_framework(self, framework: str, requirements: Dict[str, Any]):",
+                  "        \"\"\"Configure compliance requirements for data processing operations\"\"\"",
+                  "        ",
+                  "        supported_frameworks = {",
+                  "            \"SOC2\": self._configure_soc2_compliance,",
+                  "            \"GDPR\": self._configure_gdpr_compliance,",
+                  "            \"HIPAA\": self._configure_hipaa_compliance,",
+                  "            \"PCI_DSS\": self._configure_pci_compliance",
+                  "        }",
+                  "        ",
+                  "        if framework not in supported_frameworks:",
+                  "            raise ValueError(f\"Unsupported compliance framework for data processing: {framework}\")"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 577,
+                "end_line": 589,
+                "language": "python",
+                "content": [
+                  "        # Dynamic framework configuration for enterprise compliance",
+                  "        framework_config = supported_frameworks[framework](requirements)",
+                  "        self.security_policies[framework] = framework_config",
+                  "        ",
+                  "        if framework not in self.compliance_frameworks:",
+                  "            self.compliance_frameworks.append(framework)",
+                  "        ",
+                  "        self._log_security_event(\"compliance_configuration\", {",
+                  "            \"framework\": framework,",
+                  "            \"requirements\": requirements",
+                  "        })"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 593,
+                "end_line": 606,
+                "language": "python",
+                "content": [
+                  "    def _configure_gdpr_compliance(self, requirements: Dict[str, Any]) -> Dict[str, Any]:",
+                  "        \"\"\"Configure GDPR compliance for data processing operations\"\"\"",
+                  "        ",
                   "        return {",
-                  "            'timestamp': current_time.isoformat(),",
-                  "            'node_id': self.node_id,",
-                  "            'consensus_algorithm': 'Enterprise PBFT',",
-                  "            'performance': performance_metrics,",
-                  "            'health': health_metrics,",
-                  "            'security': security_metrics,",
-                  "            'operational': operational_metrics,",
-                  "            'cluster_status': {",
-                  "                'total_nodes': len(self.cluster_config['nodes']),",
-                  "                'active_nodes': await self._count_active_nodes(),",
-                  "                'fault_tolerance': f\"Up to {self.f} Byzantine faults\"",
-                  "            }",
+                  "            \"data_processing_lawful_basis\": requirements.get(\"lawful_basis\", \"legitimate_interest\"),",
+                  "            \"data_retention_period_days\": requirements.get(\"retention_days\", 365),",
+                  "            \"data_subject_rights_enabled\": True,",
+                  "            \"data_breach_notification_required\": True,",
+                  "            \"data_protection_impact_assessment\": requirements.get(\"dpia_required\", False),",
+                  "            \"data_processor_agreements\": requirements.get(\"processor_agreements\", []),",
+                  "            \"cross_border_transfer_mechanisms\": requirements.get(\"transfer_mechanisms\", \"adequacy_decision\")",
                   "        }"
                 ],
-                "line_count": 14
+                "line_count": 12
+              },
+              {
+                "start_line": 610,
+                "end_line": 623,
+                "language": "python",
+                "content": [
+                  "    def _configure_soc2_compliance(self, requirements: Dict[str, Any]) -> Dict[str, Any]:",
+                  "        \"\"\"Configure SOC 2 compliance for data processing systems\"\"\"",
+                  "        ",
+                  "        return {",
+                  "            \"security_principle\": \"always_required\",",
+                  "            \"availability_principle\": requirements.get(\"availability_required\", True),",
+                  "            \"processing_integrity\": requirements.get(\"processing_integrity\", True),",
+                  "            \"confidentiality_principle\": requirements.get(\"confidentiality_required\", True),",
+                  "            \"privacy_principle\": requirements.get(\"privacy_required\", False),",
+                  "            \"audit_logging_retention_months\": requirements.get(\"audit_retention_months\", 12),",
+                  "            \"access_control_review_frequency_days\": requirements.get(\"access_review_days\", 90)",
+                  "        }"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 626,
+                "end_line": 634,
+                "language": "",
+                "content": [
+                  "",
+                  "This compliance management system ensures enterprise data processing meets regulatory requirements across multiple frameworks.",
+                  "",
+                  "### Step 15: Advanced Data Processing Security Policies",
+                  "",
+                  "Enterprise systems require sophisticated security policy management:",
+                  ""
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 668,
+                "end_line": 686,
+                "language": "",
+                "content": [
+                  "",
+                  "This policy system provides granular control over data processing security with classification and encryption requirements.",
+                  "",
+                  "---",
+                  "",
+                  "## Part 3: Container Orchestration for Data Processing",
+                  "",
+                  "### Production Containerization Patterns",
+                  "",
+                  "\ud83d\uddc2\ufe0f **File**: `src/session6/data_container_orchestration.py` - Container orchestration for data processing systems",
+                  "",
+                  "Enterprise data processing systems require sophisticated containerization and orchestration patterns for scalability and reliability. Let's build this infrastructure step by step.",
+                  "",
+                  "### Step 16: Container Configuration for Data Processing",
+                  "",
+                  "We start with comprehensive container configuration optimized for data processing workloads:",
+                  ""
+                ],
+                "line_count": 17
+              },
+              {
+                "start_line": 722,
+                "end_line": 730,
+                "language": "",
+                "content": [
+                  "",
+                  "This configuration provides comprehensive container setup optimized for data processing with security and scalability features.",
+                  "",
+                  "### Step 17: Kubernetes Orchestration for Data Processing",
+                  "",
+                  "Enterprise data processing requires sophisticated Kubernetes orchestration:",
+                  ""
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 740,
+                "end_line": 744,
+                "language": "",
+                "content": [
+                  "",
+                  "The Kubernetes orchestrator provides the foundation for managing enterprise data processing workloads across multi-tenant environments. It maintains separate dictionaries for deployments, services, and processing jobs, enabling sophisticated workload isolation and resource management. This architecture supports enterprise-scale data processing with per-tenant resource allocation and comprehensive logging for audit trails.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 751,
+                "end_line": 755,
+                "language": "",
+                "content": [
+                  "",
+                  "The deployment generation method creates tenant-specific deployment names to ensure complete isolation between different customer environments. This naming convention enables enterprise administrators to quickly identify which tenant owns each data processing workload, crucial for troubleshooting, billing, and compliance auditing in multi-tenant SaaS environments.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 770,
+                "end_line": 774,
+                "language": "",
+                "content": [
+                  "",
+                  "The deployment metadata establishes enterprise-grade namespace isolation by placing each tenant's workloads in separate Kubernetes namespaces. The comprehensive labeling strategy enables sophisticated workload management - operators can query for all data processing workloads, filter by specific tenants, or identify particular components. This labeling pattern is essential for monitoring, alerting, and automated scaling policies in production environments.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 784,
+                "end_line": 788,
+                "language": "",
+                "content": [
+                  "",
+                  "The deployment specification defines replica count and pod selection criteria that ensure high availability for data processing operations. The selector's matchLabels provide strict tenant isolation - Kubernetes will only manage pods that match the exact tenant and component labels, preventing cross-tenant interference that could compromise data security or processing integrity in enterprise environments.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 802,
+                "end_line": 806,
+                "language": "",
+                "content": [
+                  "",
+                  "The pod template metadata integrates enterprise monitoring capabilities through Prometheus annotations, enabling automatic metrics collection from data processing workloads. The custom tenant annotation allows monitoring systems to aggregate metrics by customer, crucial for SLA reporting and billing. This observability pattern ensures enterprise operators can track data processing performance, identify bottlenecks, and maintain service level agreements across all tenants.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 823,
+                "end_line": 827,
+                "language": "",
+                "content": [
+                  "",
+                  "The container resource configuration implements enterprise-grade resource management with both requests and limits. The requests guarantee minimum resources for reliable data processing, while limits prevent runaway processes from affecting other tenants. The 1.5x CPU and 1.2x memory limit multipliers provide burst capacity for handling peak data processing loads while maintaining system stability across the entire cluster.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 835,
+                "end_line": 839,
+                "language": "",
+                "content": [
+                  "",
+                  "The environment variable configuration merges tenant-specific settings with enterprise-standard variables. The automatic injection of TENANT_ID ensures every data processing container knows its tenant context for logging, metrics, and data routing. The DATA_PROCESSING_MODE variable enables containers to apply production-specific configurations like enhanced security, optimized performance settings, and comprehensive audit logging.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 848,
+                "end_line": 852,
+                "language": "",
+                "content": [
+                  "",
+                  "The volume mount configuration provides flexible storage options for data processing workloads, supporting both read-only reference data and read-write processing volumes. This pattern enables enterprise data architectures where processing containers can access shared datasets while maintaining isolated working storage, essential for compliance and data lineage tracking in regulated industries.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 860,
+                "end_line": 864,
+                "language": "",
+                "content": [
+                  "",
+                  "The port configuration exposes standardized endpoints for data processing operations and monitoring. Port 8080 serves the data processing API for external integrations, while port 9090 provides Prometheus metrics for observability. This dual-port pattern is essential for enterprise environments where operational monitoring must be separated from business API traffic for security and performance reasons.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 881,
+                "end_line": 885,
+                "language": "",
+                "content": [
+                  "",
+                  "The health probe configuration ensures robust data processing service reliability through Kubernetes automated health management. The liveness probe terminates unhealthy containers that might be stuck in infinite loops or deadlocked states, while the readiness probe prevents traffic routing to containers that haven't finished initialization. The different timing parameters (30s vs 10s initial delay) account for data processing workloads that may need time to load large datasets or establish database connections.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 905,
+                "end_line": 915,
+                "language": "",
+                "content": [
+                  "",
+                  "The final deployment configuration elements provide enterprise-grade security and storage management. Persistent volume claims enable data processing workloads to maintain state across container restarts, crucial for long-running analytics jobs. The tenant-specific service account ensures each data processing workload has appropriate RBAC permissions for accessing only its authorized resources, while the security context applies pod-level security policies like running as non-root users and enforcing read-only root filesystems for compliance requirements.",
+                  "",
+                  "This Kubernetes orchestration provides enterprise-grade deployment with security, monitoring, and resource management for data processing workloads.",
+                  "",
+                  "### Step 18: Horizontal Pod Autoscaling for Data Processing",
+                  "",
+                  "Data processing workloads require intelligent auto-scaling based on processing metrics:",
+                  ""
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 922,
+                "end_line": 926,
+                "language": "",
+                "content": [
+                  "",
+                  "The HPA (Horizontal Pod Autoscaler) generation method creates intelligent auto-scaling policies specifically designed for data processing workloads. The tenant-specific naming convention ensures each customer's autoscaling policies are isolated and easily identifiable in enterprise environments. This is crucial for debugging performance issues and ensuring billing accuracy when customers have different scaling behaviors.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 940,
+                "end_line": 944,
+                "language": "",
+                "content": [
+                  "",
+                  "The HPA metadata structure establishes enterprise-grade autoscaling with proper namespace isolation and comprehensive labeling. Using the autoscaling/v2 API enables sophisticated scaling decisions based on multiple metrics simultaneously, essential for data processing workloads that may be CPU-bound during computations, memory-bound during large dataset operations, or throughput-bound during streaming scenarios.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 956,
+                "end_line": 960,
+                "language": "",
+                "content": [
+                  "",
+                  "The HPA specification defines the scaling target and boundaries for enterprise data processing workloads. The scaleTargetRef precisely identifies which deployment to scale, while min/max replica limits prevent both under-provisioning (which could cause SLA violations) and over-provisioning (which increases costs). The empty metrics array will be populated dynamically based on the configured scaling criteria.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 973,
+                "end_line": 977,
+                "language": "",
+                "content": [
+                  "",
+                  "CPU-based scaling targets 70% average utilization, providing optimal balance for data processing workloads. This threshold leaves 30% headroom for traffic spikes while ensuring efficient resource utilization. CPU scaling is particularly effective for compute-intensive data processing tasks like ETL transformations, statistical calculations, and machine learning inference where processing power directly correlates with throughput.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 990,
+                "end_line": 994,
+                "language": "",
+                "content": [
+                  "",
+                  "Memory-based scaling uses an 80% threshold, recognizing that data processing applications often have more predictable memory usage patterns than CPU. This higher threshold maximizes memory efficiency while preventing out-of-memory crashes that would disrupt data processing pipelines. Memory scaling is crucial for applications processing large datasets, maintaining in-memory caches, or performing memory-intensive operations like sorting and aggregation.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 1011,
+                "end_line": 1014,
+                "language": "",
+                "content": [
+                  "",
+                  "The custom throughput metric provides business-logic-aware scaling that directly responds to data processing demand rather than just infrastructure utilization. When any pod processes more than 100 records per second, the system automatically scales out to maintain processing latency SLAs. This metric requires the application to expose Prometheus metrics, creating a sophisticated feedback loop where scaling decisions are based on actual business processing requirements rather than just CPU or memory usage."
+                ],
+                "line_count": 2
               }
             ],
             "large_blocks": [],
@@ -1761,7 +855,7 @@
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md",
             "total_issues": 0,
             "issues": [],
             "needs_fixing": false
@@ -1776,50 +870,99 @@
         "summary": {
           "total_files": 1,
           "files_needing_improvement": 1,
-          "total_issues": 4,
-          "average_quality_score": 95.74468085106383
+          "total_issues": 10,
+          "average_quality_score": 81.48148148148148
         },
         "files": [
           {
-            "total_code_blocks": 94,
-            "total_issues": 4,
+            "total_code_blocks": 54,
+            "total_issues": 10,
             "issues": [
               {
+                "type": "inadequate_explanation_for_size",
+                "severity": "medium",
+                "line": 90,
+                "code_block_size": 18,
+                "word_count": 22,
+                "message": "Large code block (18 lines) at line 68 has minimal explanation (22 words)",
+                "suggestion": "Provide more detailed explanation proportional to code complexity"
+              },
+              {
+                "type": "inadequate_explanation_for_size",
+                "severity": "medium",
+                "line": 116,
+                "code_block_size": 16,
+                "word_count": 24,
+                "message": "Large code block (16 lines) at line 97 has minimal explanation (24 words)",
+                "suggestion": "Provide more detailed explanation proportional to code complexity"
+              },
+              {
+                "type": "inadequate_explanation_for_size",
+                "severity": "medium",
+                "line": 143,
+                "code_block_size": 17,
+                "word_count": 22,
+                "message": "Large code block (17 lines) at line 123 has minimal explanation (22 words)",
+                "suggestion": "Provide more detailed explanation proportional to code complexity"
+              },
+              {
+                "type": "inadequate_explanation_for_size",
+                "severity": "medium",
+                "line": 188,
+                "code_block_size": 14,
+                "word_count": 21,
+                "message": "Large code block (14 lines) at line 169 has minimal explanation (21 words)",
+                "suggestion": "Provide more detailed explanation proportional to code complexity"
+              },
+              {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 57,
-                "code_block_size": 9,
-                "message": "Code block at line 46 explanation lacks educational context",
+                "line": 238,
+                "code_block_size": 3,
+                "message": "Code block at line 229 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 92,
-                "code_block_size": 8,
-                "message": "Code block at line 81 explanation lacks educational context",
+                "line": 267,
+                "code_block_size": 3,
+                "message": "Code block at line 258 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 375,
-                "code_block_size": 10,
-                "message": "Code block at line 362 explanation lacks educational context",
+                "line": 916,
+                "code_block_size": 4,
+                "message": "Code block at line 905 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
-                "type": "generic_explanation",
+                "type": "consecutive_code_blocks",
                 "severity": "medium",
-                "line": 1045,
-                "code_block_size": 8,
-                "message": "Code block at line 1034 has generic/lazy explanation",
-                "suggestion": "Replace generic phrases with specific, educational explanations"
+                "line": 226,
+                "message": "Consecutive code blocks at lines 218 and 229 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 446,
+                "message": "Consecutive code blocks at lines 440 and 449 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 623,
+                "message": "Consecutive code blocks at lines 610 and 626 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               }
             ],
             "needs_improvement": true,
-            "quality_score": 95.74468085106383,
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md"
+            "quality_score": 81.48148148148148,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md"
           }
         ]
       },
@@ -1828,11 +971,11 @@
   },
   "priority_files": [
     {
-      "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md",
-      "file_name": "Session9_ModuleA_Advanced_Consensus_Algorithms.md",
-      "priority_score": 0.8510638297872333,
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md",
+      "file_name": "Session6_ModuleB_Enterprise_Modular_Systems.md",
+      "priority_score": 3.7037037037037037,
       "issues": [
-        "95.7% explanation quality"
+        "81.5% explanation quality"
       ]
     }
   ]
