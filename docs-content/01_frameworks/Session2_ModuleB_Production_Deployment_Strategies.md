@@ -276,7 +276,10 @@ async def monitor_and_scale_services(self):
             for service_name, service_info in self.deployed_services.items():
                 # Get current resource utilization for data service
                 resource_stats = await self._get_service_resource_stats(service_name)
-                
+```
+Auto-scaling monitor continuously evaluates resource utilization across deployed data processing services. Service iteration ensures all active services receive scaling evaluation while resource statistics collection provides utilization metrics.
+
+```python
                 if resource_stats:
                     scaling_decision = self._evaluate_scaling_decision(service_name, resource_stats)
                     
@@ -285,6 +288,7 @@ async def monitor_and_scale_services(self):
                     elif scaling_decision["action"] == "scale_down":
                         await self._scale_down_service(service_name, scaling_decision["target_instances"])
 ```
+Scaling decision evaluation determines optimal capacity adjustments based on resource utilization patterns. Scale-up and scale-down operations maintain service performance while optimizing resource costs for data processing workloads.
 
 Scaling monitor continuously evaluates resource utilization across deployed data processing services. Resource statistics collection and scaling decision evaluation ensure optimal capacity management for varying data processing workloads.
 
@@ -294,14 +298,20 @@ Scaling monitor continuously evaluates resource utilization across deployed data
         except Exception as e:
             self.logger.error(f"Auto-scaling monitor error: {str(e)}")
             await asyncio.sleep(60)  # Wait before retry on error
+```
+Cooldown periods prevent scaling thrashing while error handling ensures monitor resilience during transient failures. Extended retry intervals allow system recovery before resuming scaling operations.
 
+```python
 def _evaluate_scaling_decision(self, service_name: str, resource_stats: Dict[str, Any]) -> Dict[str, Any]:
     """Evaluate if data service needs scaling based on resource utilization"""
     
     cpu_usage = resource_stats.get("cpu_percent", 0)
     memory_usage = resource_stats.get("memory_percent", 0)
     current_instances = resource_stats.get("instance_count", 1)
-    
+```
+Scaling evaluation extracts resource utilization metrics from service statistics for decision making. CPU and memory usage provide capacity indicators while instance counts enable scaling boundary enforcement.
+
+```python
     # Check for scale up conditions
     if (cpu_usage > self.scaling_config["cpu_threshold"] or 
         memory_usage > self.scaling_config["memory_threshold"]):
@@ -314,6 +324,7 @@ def _evaluate_scaling_decision(self, service_name: str, resource_stats: Dict[str
                 "reason": f"High resource usage - CPU: {cpu_usage}%, Memory: {memory_usage}%"
             }
 ```
+Scale-up evaluation compares resource utilization against configured thresholds for data processing services. Instance limit enforcement prevents runaway scaling while detailed reasoning supports scaling decision audit trails.
 
 Scaling decision evaluation compares resource utilization against configured thresholds for data processing services. Scale-up decisions consider both CPU and memory usage while respecting maximum instance limits.
 
@@ -329,9 +340,13 @@ Scaling decision evaluation compares resource utilization against configured thr
                 "target_instances": target_instances,
                 "reason": f"Low resource usage - CPU: {cpu_usage}%, Memory: {memory_usage}%"
             }
-    
+```
+Scale-down evaluation uses conservative thresholds (50% of scale-up limits) to prevent capacity oscillation during data processing workloads. Minimum instance enforcement ensures service availability while gradual capacity reduction optimizes costs.
+
+```python
     return {"action": "no_change", "reason": "Resource usage within normal ranges"}
 ```
+Default no-change response maintains current capacity when resource utilization falls within acceptable operational ranges. This conservative approach ensures service stability during normal operating conditions.
 
 Scale-down evaluation uses conservative thresholds to prevent capacity thrashing during data processing workloads. Minimum instance limits ensure service availability while low resource usage triggers gradual capacity reduction.
 
@@ -556,7 +571,10 @@ class CircuitBreaker:
         # Track circuit state per data service endpoint
         self.circuit_states: Dict[str, Dict[str, Any]] = {}
         self.logger = logging.getLogger(__name__)
-    
+```
+CircuitBreaker initialization establishes failure thresholds and recovery timeouts for data service protection. Circuit state tracking maintains individual service status while configurable thresholds adapt to service characteristics.
+
+```python
     def is_open(self, service_endpoint: str) -> bool:
         """Check if circuit is open (blocking requests) for data service"""
         
@@ -566,7 +584,10 @@ class CircuitBreaker:
             "last_failure_time": None,
             "success_count": 0
         })
-        
+```
+Circuit state checking initializes default closed state for new services with zero failure counts. State management per endpoint enables granular circuit breaker protection across distributed data processing services.
+
+```python
         if state["status"] == "open":
             # Check if recovery timeout has passed for data service
             if (datetime.now() - state["last_failure_time"]).total_seconds() > self.recovery_timeout:
@@ -577,6 +598,7 @@ class CircuitBreaker:
                 
         return state["status"] == "open"
 ```
+Recovery timeout evaluation transitions open circuits to half-open state for recovery testing. Half-open circuits allow limited traffic to determine service recovery while maintaining protection against continuous failures.
 
 Circuit breaker state management tracks failure counts and recovery timeouts per data service. Open circuits block requests while half-open circuits allow limited traffic for recovery testing.
 
@@ -590,7 +612,10 @@ Circuit breaker state management tracks failure counts and recovery timeouts per
             "last_failure_time": None,
             "success_count": 0
         })
-        
+```
+Success recording initializes circuit state for new services with default healthy status. State management ensures consistent tracking across all data processing services.
+
+```python
         if state["status"] == "half_open":
             state["success_count"] += 1
             if state["success_count"] >= self.success_threshold:
@@ -602,6 +627,7 @@ Circuit breaker state management tracks failure counts and recovery timeouts per
         
         self.circuit_states[service_endpoint] = state
 ```
+Half-open circuit success counting enables recovery confirmation with configurable success thresholds. Closed circuits receive gradual failure count reduction while successful recovery transitions circuits to fully operational status.
 
 Success recording implements recovery logic for data services with graduated failure count reduction. Half-open circuits transition to closed after sufficient successful requests indicating service recovery.
 
@@ -618,7 +644,10 @@ Success recording implements recovery logic for data services with graduated fai
         
         state["failure_count"] += 1
         state["last_failure_time"] = datetime.now()
-        
+```
+Failure recording increments failure counts and timestamps the latest failure for recovery timeout calculation. This information enables precise circuit breaker state transitions based on failure patterns.
+
+```python
         if state["failure_count"] >= self.failure_threshold:
             if state["status"] != "open":
                 state["status"] = "open"
@@ -626,6 +655,7 @@ Success recording implements recovery logic for data services with graduated fai
         
         self.circuit_states[service_endpoint] = state
 ```
+Threshold evaluation triggers circuit opening when failure counts exceed configured limits. Circuit opening protects data processing infrastructure by preventing continued requests to failing services while maintaining detailed failure tracking.
 
 Failure recording increments failure counts and opens circuits when thresholds are exceeded. Circuit opening protects data processing infrastructure from repeatedly attempting to use failing services.
 
@@ -638,19 +668,28 @@ Failure recording increments failure counts and opens circuits when thresholds a
 🗂️ **File**: `src/session2/monitoring_deployment.py` - Production monitoring systems
 
 ```python
+# Prometheus monitoring imports
 import prometheus_client
 from prometheus_client import Counter, Histogram, Gauge, Summary, CollectorRegistry
 import logging
 import asyncio
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
+```
+Prometheus integration provides industry-standard metrics collection for data processing services. Counter, Histogram, and Gauge metrics enable comprehensive performance monitoring while asyncio supports concurrent metrics collection.
+
+```python
+# Additional monitoring infrastructure imports
 from datetime import datetime, timedelta
 import json
 import aiohttp
 import time
 from concurrent.futures import ThreadPoolExecutor
 import threading
+```
+Supporting imports enable metrics collection infrastructure with datetime for temporal tracking, aiohttp for service communication, and threading for concurrent monitoring operations.
 
+```python
 @dataclass
 class DataServiceMetrics:
     """Comprehensive metrics for data processing services"""
@@ -668,7 +707,10 @@ class DataServiceMetrics:
         ['service_name', 'endpoint', 'method'],
         buckets=[0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 30.0, 60.0, 120.0]
     ))
-    
+```
+Request metrics track total requests and response times across data processing services. Label dimensions enable detailed analysis by service, endpoint, and method while histogram buckets capture response time distributions for performance analysis.
+
+```python
     # Data processing metrics
     data_processing_throughput: Counter = field(default_factory=lambda: Counter(
         'data_processing_records_total',
@@ -683,6 +725,7 @@ class DataServiceMetrics:
         buckets=[0.01, 0.1, 0.5, 1.0, 5.0, 10.0, 30.0]
     ))
 ```
+Data processing metrics capture throughput and latency for comprehensive performance monitoring. Record counting enables capacity planning while latency histograms identify processing bottlenecks across different operation types.
 
 DataServiceMetrics class defines comprehensive Prometheus metrics for data processing services. Request tracking, processing throughput, and latency histograms provide complete visibility into data service performance.
 
@@ -699,7 +742,10 @@ DataServiceMetrics class defines comprehensive Prometheus metrics for data proce
         'Memory usage in bytes for data services',
         ['service_name', 'container_id']
     ))
-    
+```
+Resource utilization metrics track CPU and memory usage for capacity management and auto-scaling decisions. Per-container tracking enables detailed resource analysis while percentage and byte measurements provide comprehensive resource visibility.
+
+```python
     # Data quality metrics
     data_quality_score: Gauge = field(default_factory=lambda: Gauge(
         'data_quality_score',
@@ -713,6 +759,7 @@ DataServiceMetrics class defines comprehensive Prometheus metrics for data proce
         ['service_name', 'error_type', 'severity']
     ))
 ```
+Data quality metrics ensure processing accuracy with quality scores per dataset and quality dimension. Error counting tracks processing failures with categorization by type and severity for comprehensive issue analysis.
 
 Resource and data quality metrics provide operational insights into service health and data processing reliability. CPU and memory tracking enable capacity planning while data quality metrics ensure processing accuracy.
 
@@ -728,7 +775,10 @@ class DataServiceMonitor:
         # Service discovery and health checking
         self.monitored_services: Dict[str, Dict[str, Any]] = {}
         self.health_check_interval = monitoring_config.get("health_check_interval", 30)
-        
+```
+DataServiceMonitor initializes comprehensive service monitoring with metrics collection and alert management. Service registry tracking and configurable health check intervals enable continuous monitoring without overwhelming data processing services.
+
+```python
         # Performance baselines for anomaly detection
         self.performance_baselines = {}
         self.anomaly_detector = AnomalyDetector()
@@ -740,6 +790,7 @@ class DataServiceMonitor:
         asyncio.create_task(self._performance_monitoring_loop())
         asyncio.create_task(self._metrics_collection_loop())
 ```
+Performance baseline tracking and anomaly detection enable proactive issue identification. Background monitoring tasks provide continuous service visibility while maintaining separation between health checks, performance monitoring, and metrics collection.
 
 DataServiceMonitor initializes comprehensive service monitoring with health checking, performance baselining, and anomaly detection. Background monitoring tasks provide continuous service visibility without impacting data processing performance.
 
@@ -757,7 +808,10 @@ async def collect_service_metrics(self, service_name: str, service_endpoint: str
         "endpoint": service_endpoint,
         "metrics": {}
     }
-    
+```
+Metrics collection initialization creates structured data container with service identification and timestamp for temporal tracking. The metrics dictionary will contain categorized performance data from multiple endpoints.
+
+```python
     try:
         # Collect application metrics from service endpoint
         async with aiohttp.ClientSession() as session:
@@ -768,11 +822,15 @@ async def collect_service_metrics(self, service_name: str, service_endpoint: str
             # Performance metrics endpoint
             perf_response = await self._fetch_performance_metrics(session, service_endpoint)
             metrics_data["metrics"]["performance"] = perf_response
-            
+```
+Application-level metrics collection orchestrates multiple endpoint calls for comprehensive service statistics. Health and performance endpoint calls gather operational data while HTTP session reuse optimizes connection overhead.
+
+```python
             # Data processing metrics endpoint
             data_response = await self._fetch_data_processing_metrics(session, service_endpoint)
             metrics_data["metrics"]["data_processing"] = data_response
 ```
+Data processing metrics capture throughput, latency, and error rates specific to data operations. These metrics provide insights into processing pipeline performance and capacity utilization.
 
 Metrics collection orchestrates multiple endpoint calls to gather comprehensive service statistics. Health, performance, and data processing metrics provide complete operational visibility for data services.
 
@@ -785,7 +843,10 @@ Metrics collection orchestrates multiple endpoint calls to gather comprehensive 
         self._update_prometheus_metrics(service_name, metrics_data["metrics"])
         
         return metrics_data
-        
+```
+System-level resource metrics complement application metrics with CPU, memory, and network utilization data. Prometheus metrics updates ensure time-series data availability for alerting and dashboards.
+
+```python        
     except Exception as e:
         self.logger.error(f"Failed to collect metrics for {service_name}: {str(e)}")
         
@@ -798,6 +859,7 @@ Metrics collection orchestrates multiple endpoint calls to gather comprehensive 
         
         return {"error": str(e), "service_name": service_name}
 ```
+Error handling ensures metrics collection failures don't impact monitoring system reliability. Failed collection attempts are tracked as metrics themselves while detailed error responses support troubleshooting.
 
 Resource metrics collection and Prometheus integration provide comprehensive monitoring data. Error handling ensures metric collection failures don't impact service monitoring while failure tracking enables monitoring system debugging.
 
@@ -820,7 +882,10 @@ class AlertManager:
         self.grouping_rules = alert_config.get("grouping_rules", {})
         
         self.logger = logging.getLogger(__name__)
-    
+```
+AlertManager initialization configures rule-based alerting with notification channels for data processing services. Alert suppression and grouping prevent notification spam while rule-based evaluation enables flexible alerting conditions.
+
+```python
     async def evaluate_alerts(self, service_metrics: Dict[str, Any]):
         """Evaluate alert rules against current service metrics"""
         
@@ -830,7 +895,10 @@ class AlertManager:
         for rule_name, rule_config in self.alert_rules.items():
             try:
                 alert_triggered = self._evaluate_alert_rule(rule_config, metrics)
-                
+```
+Alert evaluation processes service metrics against configured rules for proactive issue detection. Rule iteration enables multiple alert conditions per service while exception handling ensures evaluation continues despite rule failures.
+
+```python
                 if alert_triggered:
                     alert_data = {
                         "rule_name": rule_name,
@@ -844,6 +912,7 @@ class AlertManager:
                     
                     await self._process_alert(alert_data)
 ```
+Triggered alert processing creates comprehensive alert data with severity classification and metric context. Alert data includes threshold details and timestamps for troubleshooting while alert processing handles notification routing and suppression.
 
 Alert evaluation processes service metrics against configured rules for data processing services. Rule evaluation and alert processing enable proactive issue detection and notification for operational teams.
 
@@ -859,13 +928,17 @@ Alert evaluation processes service metrics against configured rules for data pro
         operator = condition.get("operator", ">")
         threshold = condition.get("threshold", 0)
         duration = condition.get("duration", 0)  # seconds
-        
+```
+Alert rule evaluation extracts condition parameters for threshold comparison against metrics data. Configurable operators and thresholds enable flexible alerting logic while duration requirements prevent false alerts from transient spikes.
+
+```python
         # Extract metric value from nested metrics data
         metric_value = self._extract_metric_value(metrics, metric_path)
         
         if metric_value is None:
             return None
 ```
+Metric value extraction navigates nested metrics data structure to locate specific monitoring values. Missing metrics return None to prevent false alerts while maintaining evaluation robustness.
 
 Alert rule evaluation extracts metric values and applies threshold comparisons for data processing services. Configurable operators and thresholds enable flexible alerting conditions while duration requirements prevent false alerts.
 
@@ -880,6 +953,10 @@ Alert rule evaluation extracts metric values and applies threshold comparisons f
             condition_met = metric_value >= threshold
         elif operator == "<=":
             condition_met = metric_value <= threshold
+```
+Threshold evaluation supports comprehensive comparison operations for flexible alerting logic. Greater than and less than comparisons handle most alerting scenarios while inclusive comparisons enable boundary condition alerts.
+
+```python
         elif operator == "==":
             condition_met = metric_value == threshold
         elif operator == "!=":
@@ -896,6 +973,7 @@ Alert rule evaluation extracts metric values and applies threshold comparisons f
         
         return None
 ```
+Equality and inequality operators enable specific value matching for categorical metrics and error conditions. Condition results include comprehensive context for alert notifications while failed conditions return None to indicate no alerting required.
 
 Threshold evaluation supports comprehensive comparison operations for flexible alerting logic. Condition results include detailed context for alert notifications and troubleshooting data processing issues.
 
@@ -917,7 +995,10 @@ class AnomalyDetector:
         }
         
         self.logger = logging.getLogger(__name__)
-    
+```
+AnomalyDetector initialization establishes statistical thresholds and historical data windows for performance baseline tracking. Configurable deviation thresholds enable tuning for different service characteristics and operational requirements.
+
+```python
     def update_baseline(self, service_name: str, metrics: Dict[str, Any]):
         """Update performance baseline with new metrics data"""
         
@@ -930,7 +1011,10 @@ class AnomalyDetector:
             }
         
         baseline = self.baseline_windows[service_name]
-        
+```
+Baseline updating initializes service-specific performance windows for new services while maintaining existing historical data. Performance categories track different operational dimensions for comprehensive anomaly detection.
+
+```python
         # Update rolling windows (keep last 1000 data points)
         if "performance" in metrics:
             perf = metrics["performance"]
@@ -938,6 +1022,7 @@ class AnomalyDetector:
                 baseline["response_times"].append(perf["avg_response_time"])
                 baseline["response_times"] = baseline["response_times"][-1000:]
 ```
+Rolling window updates maintain fixed-size performance histories for statistical analysis. The 1000-point limit balances historical context with memory usage while recent data provides accurate performance baselines.
 
 Anomaly detection maintains rolling performance baselines for data processing services. Historical data windows enable statistical comparison while configurable thresholds adapt to service characteristics.
 
@@ -956,7 +1041,10 @@ Anomaly detection maintains rolling performance baselines for data processing se
                 combined_usage = (resources["cpu_usage"] + resources["memory_usage"]) / 2
                 baseline["resource_usage"].append(combined_usage)
                 baseline["resource_usage"] = baseline["resource_usage"][-1000:]
-    
+```
+Throughput, error rate, and resource utilization updates complete the performance baseline maintenance. Combined CPU and memory usage provides overall resource health indicators while rolling window limits ensure consistent memory footprint.
+
+```python
     def detect_anomalies(self, service_name: str, current_metrics: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Detect performance anomalies in current metrics compared to baseline"""
         
@@ -966,6 +1054,7 @@ Anomaly detection maintains rolling performance baselines for data processing se
         baseline = self.baseline_windows[service_name]
         anomalies = []
 ```
+Anomaly detection compares current metrics against established baselines for data processing services. Missing baselines return empty results gracefully while established services undergo comprehensive statistical analysis.
 
 Anomaly detection compares current metrics against established baselines for data processing services. Statistical analysis identifies performance deviations while empty baselines are handled gracefully during service initialization.
 
@@ -975,7 +1064,10 @@ Anomaly detection compares current metrics against established baselines for dat
             current_response_time = current_metrics.get("performance", {}).get("avg_response_time", 0)
             baseline_mean = statistics.mean(baseline["response_times"])
             baseline_std = statistics.stdev(baseline["response_times"])
-            
+```
+Response time anomaly detection requires sufficient baseline data (minimum 10 points) for statistical analysis. Mean and standard deviation calculation from historical data enables z-score computation for deviation assessment.
+
+```python
             if baseline_std > 0:  # Avoid division by zero
                 z_score = abs(current_response_time - baseline_mean) / baseline_std
                 if z_score > self.anomaly_thresholds["response_time_deviation"]:
@@ -988,6 +1080,7 @@ Anomaly detection compares current metrics against established baselines for dat
                         "description": f"Response time significantly higher than baseline"
                     })
 ```
+Z-score calculation identifies statistically significant deviations from performance baselines. Severity classification and comprehensive anomaly details enable appropriate alerting and troubleshooting for data processing service performance issues.
 
 Response time anomaly detection uses statistical analysis to identify performance degradation in data processing services. Z-score calculation and severity classification enable appropriate alerting and escalation.
 

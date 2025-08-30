@@ -590,14 +590,22 @@ class ConditionalDataProcessingChain(Chain):
     condition_chains: Dict[str, Chain]
     default_chain: Chain
     output_key: str = "conditional_processing_result"
-    
+```
+
+The ConditionalDataProcessingChain implements branching logic for different data processing workflows. By maintaining a dictionary of condition-specific chains and a default fallback, it enables intelligent routing based on data characteristics like volume, format, or processing requirements.
+
+```python
     def __init__(self, llm, condition_chains: Dict[str, Chain], 
                  default_chain: Chain, **kwargs):
         super().__init__(**kwargs)
         self.llm = llm
         self.condition_chains = condition_chains
         self.default_chain = default_chain
-    
+```
+
+The initialization establishes the LLM instance for decision-making and stores both conditional chains and a default chain. This architecture ensures that every data processing scenario has a viable execution path, preventing workflow failures when conditions don't match predefined patterns.
+
+```python
     @property
     def input_keys(self) -> List[str]:
         return ["dataset_info", "processing_type"]
@@ -623,7 +631,11 @@ The ConditionalDataProcessingChain class enables dynamic chain selection based o
             selected_chain = self.condition_chains[processing_type]
         else:
             selected_chain = self.default_chain
-        
+```
+
+The chain selection logic first extracts the processing type from inputs, then looks up the appropriate chain in the condition dictionary. If no specific chain exists for the processing type, the system falls back to the default chain, ensuring robust operation across diverse data processing scenarios.
+
+```python
         # Execute selected chain for data processing
         result = selected_chain.run(inputs["dataset_info"])
         
@@ -657,7 +669,11 @@ class DataPipelineChain(Chain):
     pipeline_steps: List[Dict[str, Any]]
     state_management: bool
     output_key: str = "pipeline_result"
-    
+```
+
+The DataPipelineChain orchestrates complex multi-step data processing workflows. It maintains a list of pipeline steps as configuration objects and includes optional state management for tracking intermediate results and enabling pipeline recovery scenarios.
+
+```python
     def __init__(self, llm, pipeline_steps: List[Dict[str, Any]], 
                  state_management: bool = True, **kwargs):
         super().__init__(**kwargs)
@@ -665,7 +681,11 @@ class DataPipelineChain(Chain):
         self.pipeline_steps = pipeline_steps
         self.state_management = state_management
         self.pipeline_state = {}
-    
+```
+
+The initialization configures the pipeline with an LLM instance, step definitions, and state management options. The pipeline_state dictionary tracks intermediate results when state management is enabled, supporting pipeline recovery and debugging capabilities.
+
+```python
     @property
     def input_keys(self) -> List[str]:
         return ["input_data"]

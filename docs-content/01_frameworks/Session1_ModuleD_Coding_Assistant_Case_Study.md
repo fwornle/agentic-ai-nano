@@ -1194,4 +1194,4 @@ The Data Processing Assistant demonstrates that "bare metal" doesn't mean "simpl
 ## 🧭 Navigation
 
 **Previous:** [Session 1 - Main Content](Session1_Bare_Metal_Agents.md)  
-**Next:** [Session 2 - Introduction to LangChain →](Session2_LangChain_Foundations.md)
+**Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
