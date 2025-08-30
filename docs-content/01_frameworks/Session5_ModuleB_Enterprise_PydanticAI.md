@@ -124,7 +124,11 @@ Now we implement the core data warehouse operations with proper error handling:
             "bytes_processed": 45000000,
             "cache_hit": False
         }
-    
+```
+
+Query execution provides the core interface for data warehouse operations with comprehensive result metadata. The unique query ID enables request tracing and monitoring, while metrics like row count and bytes processed support performance optimization and cost tracking essential for enterprise data operations.
+
+```python
     async def save_dataset(self, dataset_name: str, data: Dict[str, Any]) -> str:
         """Save dataset to data warehouse with proper partitioning."""
         dataset_id = f"ds_{hash(dataset_name) % 100000}"
@@ -135,6 +139,8 @@ Now we implement the core data warehouse operations with proper error handling:
         """Monitor data warehouse connection health for production systems."""
         return self._connection_pool is not None
 ```
+
+Dataset persistence and health monitoring provide essential production capabilities for data warehouse operations. The hash-based dataset ID ensures consistent naming while the health check enables monitoring systems to detect connection issues before they impact data processing operations.
 
 ### Test Data Service Implementations
 
@@ -153,7 +159,11 @@ class TestDataWarehouseService:
     async def initialize(self):
         """Initialize test data warehouse - always succeeds for testing."""
         logging.info("Test data warehouse service initialized")
-    
+```
+
+Test service initialization provides predictable, isolated testing environments without external dependencies. In-memory storage enables fast test execution while call logging supports comprehensive verification of service interactions during integration testing.
+
+```python
     async def execute_query(self, query: str, params: Dict[str, Any] = None) -> Dict[str, Any]:
         """Execute query against in-memory test data with predictable results."""
         query_id = f"test_query_{len(self.query_store)}"
@@ -168,6 +178,8 @@ class TestDataWarehouseService:
         self.call_log.append(("execute_query", query, params, result))
         return result
 ```
+
+Test query execution returns consistent, predictable results that enable reliable automated testing. The deterministic response structure with fixed metrics supports test assertions, while call logging provides verification capabilities for complex integration test scenarios.
 
 Now we add dataset storage and health check methods with call tracking:
 
@@ -204,7 +216,11 @@ class DataServiceContainer:
         self.scoped_services = {}          # Scoped service definitions
         self.initialization_order = []     # Service initialization sequence
         self.health_checks = {}            # Health check functions per service
-    
+```
+
+The dependency injection container provides comprehensive service lifecycle management for enterprise data processing systems. Multiple storage dictionaries support different service patterns - singletons for shared resources, scoped services for request-specific instances, and factories for on-demand creation with proper initialization ordering.
+
+```python
     def register_data_service(
         self, 
         interface: Type, 
@@ -220,6 +236,8 @@ class DataServiceContainer:
         if hasattr(implementation, 'health_check'):
             self.health_checks[interface] = implementation.health_check
 ```
+
+Service registration uses lambda factories to defer instantiation until resolution time, enabling proper dependency ordering and initialization sequencing. Health check registration provides automatic monitoring capabilities for all services that support health verification, essential for production data system reliability.
 
 Now we implement the service resolution with proper lifecycle management:
 
@@ -241,7 +259,11 @@ Now we implement the service resolution with proper lifecycle management:
             return instance
         
         raise ValueError(f"No registration found for data service: {interface}")
-    
+```
+
+Service resolution implements lazy initialization with singleton caching for optimal performance in production environments. The async initialization pattern supports services requiring asynchronous setup like database connections, while error handling ensures clear diagnostics when dependencies are misconfigured.
+
+```python
     async def health_check_all(self) -> Dict[str, bool]:
         """Check health of all registered data services."""
         health_status = {}
@@ -257,6 +279,8 @@ Now we implement the service resolution with proper lifecycle management:
         
         return health_status
 ```
+
+Comprehensive health monitoring provides operational visibility across all registered services in the data processing system. The exception handling ensures health check failures don't crash the monitoring system, while detailed logging enables troubleshooting of specific service issues that could impact data pipeline operations.
 
 ---
 
