@@ -4,7 +4,10 @@
       "Bash(find:*)",
       "Bash(grep:*)",
       "Bash(markdownlint:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "mcp__archon__health_check",
+      "mcp__archon__list_tasks",
+      "mcp__archon__get_project"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
