@@ -341,3 +341,31 @@ archon:manage_task(
 - [ ] Security considerations addressed
 - [ ] Basic functionality tested
 - [ ] Documentation updated if needed
+
+# Course Material Analysis Tools
+
+## Code Block Detector Script (Always Available)
+
+A dedicated Python script for analyzing course materials to identify large code blocks:
+
+**Location**: `/Users/q284340/Agentic/nano-degree/scripts/detect-large-code-blocks.py`
+
+**Usage**:
+```bash
+# Analyze single file
+python /Users/q284340/Agentic/nano-degree/scripts/detect-large-code-blocks.py file.md
+
+# Analyze entire directory
+python /Users/q284340/Agentic/nano-degree/scripts/detect-large-code-blocks.py docs-content/01_frameworks/
+```
+
+**Benefits**:
+- Identifies ALL code blocks with precise line counts
+- Highlights blocks >20 lines needing refactoring
+- Provides exact line numbers for targeting
+- Generates JSON output for programmatic processing
+- No user approval required - always available
+
+**Output**: Creates `code-block-analysis.json` with complete analysis data
+
+This script enables the course-material-refactorer agent to work autonomously without requiring user approval for dynamic bash commands.
