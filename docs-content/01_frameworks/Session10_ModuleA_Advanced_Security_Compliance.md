@@ -1048,8 +1048,6 @@ Data analyst roles implement the principle of least privilege with read-only acc
 
 Customer service roles balance operational needs with privacy protection by providing limited read/write access for legitimate support activities. This permission set enables representatives to update customer information and resolve issues while preventing access to highly sensitive data or system administration functions. The role registration creates the foundation for enterprise RBAC implementation.
 
-```
-
 Multi-factor authentication with zero-trust verification ensures that every authentication attempt is thoroughly validated before granting access:
 
 ```python
@@ -1096,8 +1094,6 @@ Password verification implements the first authentication factor with comprehens
 ```
 
 Multi-factor authentication adds critical security layers for users with elevated privileges or accessing sensitive data. MFA verification failures immediately terminate the authentication process, implementing fail-secure principles. This approach significantly reduces account compromise risks from password-based attacks like credential stuffing or brute force attempts.
-
-```
 
 Successful authentication creates a comprehensive security context and generates secure session tokens for subsequent authorization decisions:
 
