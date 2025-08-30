@@ -20,6 +20,7 @@ The answer lies in battle-tested consensus algorithms that have powered mission-
 🗂️ **File**: `src/session9/advanced/raft_consensus.py` - Production-ready Raft implementation for data systems
 
 ```python
+# Essential imports for distributed data consensus
 from typing import Dict, List, Any, Optional, Set, Tuple
 from dataclasses import dataclass, field
 from enum import Enum
@@ -28,13 +29,19 @@ import random
 import time
 import logging
 from datetime import datetime, timedelta
+```
+These imports establish the foundation for our Raft consensus implementation. The `typing` module provides type hints that make our distributed system code self-documenting and IDE-friendly. `dataclasses` gives us efficient data structures for consensus messages, while `asyncio` enables the concurrent processing essential for handling multiple data nodes simultaneously.
 
+```python
 class DataNodeState(Enum):
     """Data processing node states in Raft consensus"""
     FOLLOWER = "follower"
     CANDIDATE = "candidate"  
     LEADER = "leader"
+```
+Raft consensus operates on a simple but powerful state machine. Every data processing node exists in one of these three states: followers accept data operations from leaders, candidates compete for leadership during elections, and leaders coordinate data replication across the cluster. This state-based approach eliminates the complexity of other consensus algorithms.
 
+```python
 @dataclass
 class DataLogEntry:
     """Individual data operation log entry for consensus"""
@@ -44,7 +51,10 @@ class DataLogEntry:
     schema_version: str
     timestamp: datetime
     checksum: str  # Data integrity verification
-    
+```
+Each data operation in our system becomes a log entry that must achieve consensus. The `term` and `index` provide ordering guarantees - critical for maintaining consistency across distributed nodes. The `checksum` field implements data integrity verification, ensuring corrupted operations are detected before they propagate through the cluster.
+
+```python
 @dataclass
 class DataVoteRequest:
     """Request for leadership vote in data consensus"""
@@ -61,22 +71,32 @@ class DataVoteResponse:
     vote_granted: bool
     voter_id: str
     data_consistency_check: bool  # Voter confirms data consistency
+```
+Leader election requires sophisticated coordination messages. The vote request includes the candidate's log state (`last_log_index` and `last_log_term`) so voters can ensure they only elect leaders with the most up-to-date data. The `data_version` field adds an extra consistency check specific to our data processing use case.
 
+```python
 class RaftDataConsensusNode:
     """Advanced Raft consensus implementation for distributed data processing"""
     
     def __init__(self, node_id: str, cluster_nodes: List[str], 
                  data_store: 'DataStore'):
+        # Node identification and cluster configuration
         self.node_id = node_id
         self.cluster_nodes = cluster_nodes
         self.data_store = data_store
-        
+```
+The `RaftDataConsensusNode` initialization establishes our node's identity within the cluster. Each node needs to know about all other nodes in the cluster to coordinate consensus decisions. The `data_store` interface abstracts the actual data storage mechanism, allowing our consensus layer to work with different storage backends.
+
+```python
         # Raft state management for data processing
         self.current_term = 0
         self.voted_for: Optional[str] = None
         self.data_log: List[DataLogEntry] = []
         self.node_state = DataNodeState.FOLLOWER
-        
+```
+These fields implement Raft's core state machine. `current_term` provides logical time ordering across the distributed system - it's like a version number that increases with each leader election. `voted_for` prevents nodes from voting twice in the same term, eliminating split-vote scenarios that could block progress.
+
+```python
         # Data processing specific state
         self.commit_index = 0  # Last committed data operation
         self.last_applied = 0  # Last applied data transformation
@@ -85,14 +105,20 @@ class RaftDataConsensusNode:
         # Leader-specific volatile state for data coordination
         self.next_index: Dict[str, int] = {}  # Next data log index for each follower
         self.match_index: Dict[str, int] = {}  # Highest replicated data log index per follower
-        
+```
+These indices track data operation progress across the cluster. `commit_index` marks operations that have achieved consensus and are safe to apply, while `last_applied` tracks what we've actually executed locally. The leader uses `next_index` and `match_index` to efficiently manage replication to each follower.
+
+```python
         # Timing and network management
         self.last_heartbeat = time.time()
         self.election_timeout = random.uniform(5.0, 10.0)  # Randomized for split-vote avoidance
         self.heartbeat_interval = 2.0
         
         self.logger = logging.getLogger(f"RaftDataNode-{node_id}")
-        
+```
+Timing is crucial in distributed consensus. The randomized `election_timeout` prevents multiple nodes from simultaneously starting elections, which would create split votes and delay progress. The shorter `heartbeat_interval` ensures followers quickly detect leader failures.
+
+```python
     async def start_data_consensus_node(self):
         """Start the Raft consensus node for data processing coordination"""
         self.logger.info(f"Starting Raft data consensus node {self.node_id}")
@@ -104,7 +130,10 @@ class RaftDataConsensusNode:
         asyncio.create_task(self._run_consensus_loop())
         
         self.logger.info(f"Raft data node {self.node_id} started in {self.node_state.value} state")
-    
+```
+Node startup follows a careful initialization sequence. We first initialize our data processing state to ensure consistency, then launch the main consensus loop as a background task. This asynchronous approach allows the node to handle multiple concurrent operations while maintaining consensus coordination.
+
+```python
     async def _run_consensus_loop(self):
         """Main consensus event loop for data processing coordination"""
         
@@ -122,7 +151,10 @@ class RaftDataConsensusNode:
             except Exception as e:
                 self.logger.error(f"Error in consensus loop: {e}")
                 await asyncio.sleep(1.0)
-    
+```
+The consensus loop implements Raft's state machine pattern. Each state has specific responsibilities: followers wait for leader communications and detect leader failures, candidates coordinate elections, and leaders manage data replication. The small sleep prevents excessive CPU usage while maintaining responsiveness.
+
+```python
     async def _handle_follower_state(self):
         """Handle follower state logic for data consensus"""
         
@@ -134,7 +166,10 @@ class RaftDataConsensusNode:
             
         # Apply committed data operations to local data store
         await self._apply_committed_data_operations()
-    
+```
+Follower nodes have two primary responsibilities: detecting leader failures and applying committed data operations. The election timeout mechanism ensures the cluster can recover from leader failures - if too much time passes without heartbeats, followers assume the leader has failed and trigger new elections.
+
+```python
     async def _handle_candidate_state(self):
         """Handle candidate state logic for data leadership election"""
         
@@ -144,7 +179,10 @@ class RaftDataConsensusNode:
         self.last_heartbeat = time.time()
         
         self.logger.info(f"Starting election for term {self.current_term}")
-        
+```
+When a node becomes a candidate, it immediately increments the term number and votes for itself. This term increment ensures that even if multiple nodes become candidates simultaneously, their elections occur in distinct terms, preventing ambiguity about which operations belong to which leadership period.
+
+```python
         # Send vote requests to all data processing nodes
         vote_responses = await self._request_votes_from_data_nodes()
         
@@ -163,7 +201,10 @@ class RaftDataConsensusNode:
         else:
             self.logger.info(f"Lost election with {votes_received} votes, reverting to follower")
             await self._become_follower()
-    
+```
+The election process implements Raft's majority rule. Candidates need more than half the votes to become leader, ensuring that at most one leader can exist in any term. This prevents split-brain scenarios that could compromise data consistency. Failed candidates gracefully return to follower state to await the next election.
+
+```python
     async def _handle_leader_state(self):
         """Handle leader state logic for data processing coordination"""
         
@@ -177,7 +218,10 @@ class RaftDataConsensusNode:
         await self._apply_committed_data_operations()
         
         await asyncio.sleep(self.heartbeat_interval)
-    
+```
+Leader nodes coordinate the entire cluster's data processing. They send regular heartbeats to prevent unnecessary elections, replicate new data operations to followers, and apply committed operations locally. This regular cycle ensures data consistency across all nodes while maintaining cluster stability.
+
+```python
     async def _request_votes_from_data_nodes(self) -> List[Optional[DataVoteResponse]]:
         """Request votes from all data processing nodes in cluster"""
         
@@ -191,7 +235,10 @@ class RaftDataConsensusNode:
             last_log_term=last_log_term,
             data_version=self.data_schema_version
         )
-        
+```
+Vote requests include critical information about the candidate's log state. This allows voters to implement Raft's "election restriction" - they only vote for candidates whose logs are at least as up-to-date as their own. This ensures that new leaders always have the most recent committed data operations.
+
+```python
         # Send vote requests in parallel to all cluster nodes
         vote_tasks = []
         for node_id in self.cluster_nodes:
@@ -210,7 +257,10 @@ class RaftDataConsensusNode:
                 valid_responses.append(None)
                 
         return valid_responses
-    
+```
+Parallel vote collection optimizes election performance - instead of contacting nodes sequentially, we send all requests simultaneously. The exception handling ensures that network failures or node crashes don't crash the election process. This robust approach helps maintain cluster availability even during partial failures.
+
+```python
     async def append_data_operation(self, data_operation: Dict[str, Any]) -> Dict[str, Any]:
         """Append new data operation to consensus log (leader only)"""
         
@@ -220,7 +270,10 @@ class RaftDataConsensusNode:
                 'error': 'Only data processing leader can append operations',
                 'leader_hint': self._get_current_leader_hint()
             }
-        
+```
+Data operations can only be initiated by the current leader. This constraint maintains consistency - having multiple nodes simultaneously append operations would create conflicts and data races. The leader hint helps clients redirect their requests to the current leader.
+
+```python
         # Create data log entry with integrity verification
         log_entry = DataLogEntry(
             term=self.current_term,
@@ -235,7 +288,10 @@ class RaftDataConsensusNode:
         self.data_log.append(log_entry)
         
         self.logger.info(f"Appended data operation at index {log_entry.index}, term {log_entry.term}")
-        
+```
+Each data operation becomes a structured log entry with complete metadata. The checksum provides immediate integrity verification, while the term and index create a totally ordered sequence of operations. This structure ensures that all nodes can deterministically apply the same operations in the same order.
+
+```python
         # Start replication to followers (non-blocking for performance)
         asyncio.create_task(self._replicate_data_operations_to_followers())
         
@@ -245,7 +301,10 @@ class RaftDataConsensusNode:
             'data_term': log_entry.term,
             'checksum': log_entry.checksum
         }
-    
+```
+Replication starts immediately but runs asynchronously to maintain performance. The leader doesn't wait for follower acknowledgments before returning to the client - this optimistic approach reduces latency while the background replication process ensures consistency. The return metadata allows clients to track their operations through the consensus process.
+
+```python
     async def _replicate_data_operations_to_followers(self):
         """Replicate data operations to follower nodes for consensus"""
         
@@ -260,7 +319,10 @@ class RaftDataConsensusNode:
                 replication_tasks.append(task)
         
         await asyncio.gather(*replication_tasks, return_exceptions=True)
-    
+```
+Replication occurs in parallel across all followers for optimal performance. This concurrent approach significantly reduces the time required to achieve consensus, especially in larger clusters. Exception handling ensures that failures with individual followers don't interrupt replication to other nodes.
+
+```python
     async def _replicate_to_specific_follower(self, follower_id: str):
         """Replicate data operations to a specific follower node"""
         
@@ -273,7 +335,10 @@ class RaftDataConsensusNode:
             
             prev_log_index = next_idx - 1
             prev_log_term = self.data_log[prev_log_index].term if prev_log_index >= 0 else 0
-            
+```
+Each follower maintains individual replication state through the `next_index` tracking. This allows the leader to efficiently handle followers at different synchronization levels - some might be completely up-to-date while others are catching up from network partitions or restarts. The `prev_log_index` and `prev_log_term` implement Raft's consistency check.
+
+```python
             append_request = {
                 'leader_term': self.current_term,
                 'leader_id': self.node_id,
@@ -285,7 +350,10 @@ class RaftDataConsensusNode:
             }
             
             response = await self._send_append_request(follower_id, append_request)
-            
+```
+The append request contains all information needed for the follower to maintain consistency. The `prev_log_index` and `prev_log_term` allow followers to verify log consistency before accepting new entries. The `leader_commit` tells followers which operations are safe to apply locally.
+
+```python
             if response and response.get('success'):
                 # Update follower progress tracking
                 self.next_index[follower_id] = len(self.data_log)
@@ -296,7 +364,10 @@ class RaftDataConsensusNode:
             else:
                 # Decrement next_index and retry (data log inconsistency)
                 self.next_index[follower_id] = max(0, self.next_index.get(follower_id, 0) - 1)
-    
+```
+Successful replication updates the follower's progress indices, enabling the leader to track consensus progress. Failed replication triggers Raft's consistency repair mechanism - the leader decrements `next_index` and retries with earlier log entries until consistency is restored. This process handles network partitions and follower crashes gracefully.
+
+```python
     async def _update_data_commit_index(self):
         """Update commit index based on majority replication of data operations"""
         
@@ -322,7 +393,10 @@ class RaftDataConsensusNode:
                 self.commit_index = n
                 self.logger.info(f"Advanced data commit index to {n}")
                 break
-    
+```
+Commit index advancement implements Raft's safety guarantee - operations only become committed when replicated to a majority of nodes. The algorithm works backwards from the latest log entry to find the highest index that has achieved majority replication. The term check ensures we only commit operations from our current term, preventing safety violations.
+
+```python
     async def _apply_committed_data_operations(self):
         """Apply committed data operations to local data store"""
         
@@ -337,7 +411,10 @@ class RaftDataConsensusNode:
             else:
                 self.logger.error(f"Data integrity check failed for operation at index {self.last_applied}")
                 # In production, this would trigger data recovery procedures
-    
+```
+Application of committed operations ensures eventual consistency across all nodes. Each operation undergoes integrity verification before being applied to the local data store. This two-phase approach - first achieve consensus, then apply locally - guarantees that all nodes apply the same operations in the same order, maintaining perfect consistency.
+
+```python
     def _verify_data_integrity(self, log_entry: DataLogEntry) -> bool:
         """Verify data integrity using checksums"""
         expected_checksum = self._calculate_data_checksum(log_entry.data_operation)
@@ -351,7 +428,10 @@ class RaftDataConsensusNode:
         # Create deterministic string representation for checksum
         operation_str = json.dumps(data_operation, sort_keys=True)
         return hashlib.sha256(operation_str.encode()).hexdigest()[:16]
-    
+```
+Data integrity verification uses cryptographic checksums to detect corruption during replication. The deterministic JSON serialization ensures that identical operations always produce identical checksums, regardless of the order of dictionary keys. This protection is crucial for distributed data systems where network errors or storage failures could corrupt operations.
+
+```python
     async def get_data_consensus_status(self) -> Dict[str, Any]:
         """Get comprehensive status of data consensus node"""
         
@@ -368,7 +448,10 @@ class RaftDataConsensusNode:
             'data_store_size': await self.data_store.get_size() if self.data_store else 0,
             'consensus_health': self._calculate_consensus_health()
         }
-    
+```
+The comprehensive status interface provides complete visibility into the consensus node's state. This information is essential for monitoring distributed data systems - operators can track consensus health, identify replication lag, and detect potential issues before they impact system availability.
+
+```python
     def _calculate_consensus_health(self) -> float:
         """Calculate health score of data consensus system"""
         
@@ -392,6 +475,7 @@ class RaftDataConsensusNode:
         
         return sum(health_factors) / len(health_factors) if health_factors else 0.0
 ```
+Health scoring provides quantitative assessment of consensus system vitality. Heartbeat recency indicates cluster communication health, while application lag reveals whether the node is keeping up with committed operations. Leader nodes additionally track follower participation to identify network partitions or node failures. This multi-dimensional health metric enables proactive system management.
 
 ### Byzantine Fault Tolerance for Mission-Critical Data
 
@@ -400,6 +484,7 @@ When your data processing system handles financial transactions worth billions, 
 🗂️ **File**: `src/session9/advanced/byzantine_consensus.py` - Byzantine fault-tolerant data consensus
 
 ```python
+# Core imports for Byzantine fault tolerance
 from typing import Dict, List, Any, Optional, Set, Tuple
 from dataclasses import dataclass, field
 from enum import Enum
@@ -408,14 +493,20 @@ import json
 from datetime import datetime
 import asyncio
 import logging
+```
+Byzantine consensus requires additional cryptographic and message handling capabilities beyond simple crash fault tolerance. The `hashlib` library enables cryptographic verification of message integrity, while the sophisticated typing support helps manage the complex message flows between nodes.
 
+```python
 class DataConsensusPhase(Enum):
     """Phases in Byzantine consensus for data operations"""
     PRE_PREPARE = "pre_prepare"
     PREPARE = "prepare" 
     COMMIT = "commit"
     REPLY = "reply"
+```
+Byzantine consensus operates through a structured three-phase protocol. Pre-prepare phase allows the primary to propose operations, prepare phase enables nodes to agree on the proposal, and commit phase finalizes the decision. This multi-phase approach ensures safety even when up to f nodes exhibit arbitrary (malicious) behavior.
 
+```python
 @dataclass
 class DataConsensusMessage:
     """Byzantine consensus message for data processing operations"""
@@ -427,7 +518,10 @@ class DataConsensusMessage:
     timestamp: datetime
     digital_signature: str  # Cryptographic signature for authenticity
     data_hash: str  # Hash of data operation for integrity
+```
+Byzantine consensus messages carry extensive metadata for security verification. The `digital_signature` field enables authentication - nodes can verify that messages actually came from their claimed senders. The `data_hash` provides integrity checking, ensuring operations haven't been tampered with during transmission.
 
+```python
 @dataclass 
 class DataOperationDigest:
     """Digest of data operation for Byzantine consensus verification"""
@@ -436,18 +530,25 @@ class DataOperationDigest:
     view_number: int
     timestamp: datetime
     node_signatures: Set[str] = field(default_factory=set)
+```
+Operation digests track the consensus progress for each data operation. The `node_signatures` set accumulates cryptographic signatures from participating nodes, enabling verification that sufficient nodes have agreed to the operation. This digest mechanism is crucial for proving consensus completion.
 
+```python
 class ByzantineDataConsensusNode:
     """Byzantine fault-tolerant consensus for critical data processing systems"""
     
     def __init__(self, node_id: str, cluster_nodes: List[str], 
                  fault_tolerance_threshold: int,
                  data_store: 'SecureDataStore'):
+        # Node identity and cluster configuration
         self.node_id = node_id
         self.cluster_nodes = cluster_nodes  
         self.f = fault_tolerance_threshold  # Max Byzantine faults tolerated
         self.data_store = data_store
-        
+```
+Byzantine consensus initialization requires careful security configuration. The `fault_tolerance_threshold` (f) determines how many nodes can exhibit malicious behavior while maintaining system correctness. For Byzantine systems, you need at least 3f+1 total nodes to tolerate f Byzantine faults.
+
+```python
         # Byzantine consensus state for data processing
         self.view_number = 0
         self.sequence_number = 0
@@ -457,7 +558,10 @@ class ByzantineDataConsensusNode:
         self.pre_prepare_messages: Dict[Tuple[int, int], DataConsensusMessage] = {}
         self.prepare_messages: Dict[Tuple[int, int], List[DataConsensusMessage]] = {}
         self.commit_messages: Dict[Tuple[int, int], List[DataConsensusMessage]] = {}
-        
+```
+Byzantine consensus maintains detailed message history for each operation. Unlike Raft, Byzantine systems must store and verify multiple messages for each consensus round. The tuple keys (view, sequence) provide unique identification for each operation across view changes and primary failures.
+
+```python
         # Data operation tracking
         self.executed_operations: Set[Tuple[int, int]] = set()  # (view, sequence) pairs
         self.pending_data_operations: Dict[str, Dict[str, Any]] = {}
@@ -467,13 +571,19 @@ class ByzantineDataConsensusNode:
         self.private_key = self._generate_node_private_key()
         
         self.logger = logging.getLogger(f"ByzantineDataNode-{node_id}")
-        
+```
+Cryptographic key management is essential for Byzantine fault tolerance. Each node maintains public keys for all other nodes to verify message signatures. The private key enables signing outgoing messages. This public-key infrastructure prevents Byzantine nodes from impersonating legitimate nodes.
+
+```python
     def _calculate_primary_status(self) -> bool:
         """Determine if this node is the current primary for data consensus"""
         # Simple primary selection - in production use more sophisticated methods
         primary_index = self.view_number % len(self.cluster_nodes)
         return self.cluster_nodes[primary_index] == self.node_id
-    
+```
+Primary selection in Byzantine consensus uses deterministic rotation based on view numbers. This ensures all honest nodes agree on who the current primary is. In production systems, more sophisticated primary selection mechanisms consider node performance and availability metrics.
+
+```python
     async def propose_data_operation(self, data_operation: Dict[str, Any]) -> Dict[str, Any]:
         """Propose new data operation for Byzantine consensus (primary only)"""
         
@@ -483,7 +593,10 @@ class ByzantineDataConsensusNode:
                 'error': 'Only primary node can propose data operations',
                 'current_primary': self._get_current_primary()
             }
-            
+```
+Only the current primary can propose new data operations. This constraint prevents conflicting proposals and maintains order in the consensus process. Clients that contact non-primary nodes receive redirection information to the current primary.
+
+```python
         # Create operation digest for consensus
         operation_digest = self._create_data_operation_digest(data_operation)
         
@@ -498,7 +611,10 @@ class ByzantineDataConsensusNode:
             digital_signature=self._sign_message(operation_digest),
             data_hash=operation_digest.operation_hash
         )
-        
+```
+The pre-prepare message initiates Byzantine consensus with complete cryptographic protection. Every field is essential: the digital signature proves authenticity, the data hash ensures integrity, and the view/sequence numbers provide ordering. This comprehensive metadata enables detection of any Byzantine behavior.
+
+```python
         # Store our pre-prepare message
         key = (self.view_number, self.sequence_number)
         self.pre_prepare_messages[key] = pre_prepare_msg
@@ -525,14 +641,20 @@ class ByzantineDataConsensusNode:
             'sequence_number': self.sequence_number - 1,
             'data_hash': operation_digest.operation_hash
         }
-    
+```
+Operation proposal includes comprehensive tracking and state management. The pending operations dictionary tracks consensus progress, enabling timeout detection and recovery procedures. The operation_id provides clients with a reference to track their requests through the consensus process.
+
+```python
     async def handle_consensus_message(self, message: DataConsensusMessage) -> Dict[str, Any]:
         """Handle incoming Byzantine consensus messages for data operations"""
         
         # Verify message authenticity and integrity
         if not await self._verify_message_authenticity(message):
             return {'success': False, 'error': 'Message authentication failed'}
-            
+```
+Message authentication is the first line of defense against Byzantine attacks. Every incoming message undergoes cryptographic verification to ensure it came from a legitimate cluster node and hasn't been tampered with. Messages that fail authentication are immediately rejected.
+
+```python
         # Process based on consensus phase
         if message.message_type == DataConsensusPhase.PRE_PREPARE:
             return await self._handle_pre_prepare(message)
@@ -542,7 +664,10 @@ class ByzantineDataConsensusNode:
             return await self._handle_commit(message)
         else:
             return {'success': False, 'error': f'Unknown message type: {message.message_type}'}
-    
+```
+Consensus message processing follows a strict phase-based protocol. Each phase has specific validation rules and state transitions. Invalid message types are rejected immediately, preventing Byzantine nodes from disrupting the consensus process with malformed messages.
+
+```python
     async def _handle_pre_prepare(self, message: DataConsensusMessage) -> Dict[str, Any]:
         """Handle pre-prepare phase of Byzantine consensus for data operations"""
         
@@ -554,7 +679,10 @@ class ByzantineDataConsensusNode:
         # Store pre-prepare message
         key = (message.view_number, message.sequence_number)
         self.pre_prepare_messages[key] = message
-        
+```
+Pre-prepare message validation performs comprehensive checks including signature verification, sequence number validation, and view consistency. Only messages that pass all validation criteria are accepted and stored. This rigorous validation prevents Byzantine primaries from corrupting the consensus process.
+
+```python
         # Create prepare message with our agreement
         prepare_msg = DataConsensusMessage(
             message_type=DataConsensusPhase.PREPARE,
@@ -578,7 +706,10 @@ class ByzantineDataConsensusNode:
         self.logger.info(f"Sent prepare for operation {message.sequence_number}")
         
         return {'success': True, 'phase': 'prepare'}
-    
+```
+Accepting a pre-prepare triggers the prepare phase where nodes signal their agreement with the proposed operation. The prepare message includes our own digital signature, contributing to the cryptographic proof that sufficient nodes have agreed to the operation. This signature collection is essential for Byzantine fault tolerance.
+
+```python
     async def _handle_prepare(self, message: DataConsensusMessage) -> Dict[str, Any]:
         """Handle prepare phase of Byzantine consensus for data operations"""
         
@@ -599,7 +730,10 @@ class ByzantineDataConsensusNode:
             pre_prepare = self.pre_prepare_messages.get(key)
             if not pre_prepare:
                 return {'success': False, 'error': 'Pre-prepare message not found'}
-            
+```
+The prepare phase implements Byzantine consensus's safety mechanism. Nodes collect prepare messages from at least 2f other nodes (plus the original pre-prepare) before proceeding. This threshold ensures that even if f nodes are Byzantine, enough honest nodes have agreed to the operation to proceed safely.
+
+```python
             # Create commit message
             commit_msg = DataConsensusMessage(
                 message_type=DataConsensusPhase.COMMIT,
@@ -625,7 +759,10 @@ class ByzantineDataConsensusNode:
             return {'success': True, 'phase': 'commit'}
         
         return {'success': True, 'phase': 'prepare', 'status': 'waiting_for_more_prepares'}
-    
+```
+Successful prepare phase completion triggers the commit phase. The commit message signals that this node has observed sufficient prepare messages and is ready to execute the operation. This two-phase approach (prepare then commit) ensures that even if some nodes are slow or Byzantine, the operation can still complete successfully.
+
+```python
     async def _handle_commit(self, message: DataConsensusMessage) -> Dict[str, Any]:
         """Handle commit phase of Byzantine consensus for data operations"""
         
@@ -662,7 +799,10 @@ class ByzantineDataConsensusNode:
                     }
         
         return {'success': True, 'phase': 'commit', 'status': 'waiting_for_more_commits'}
-    
+```
+The commit phase finalizes Byzantine consensus by collecting commit messages from 2f+1 nodes. This threshold guarantees that at least f+1 honest nodes have committed to the operation, making it safe to execute. The duplicate execution protection ensures operations are only executed once, even if commit messages arrive out of order.
+
+```python
     async def _execute_data_operation_safely(self, data_operation: Dict[str, Any], 
                                            consensus_key: Tuple[int, int]) -> Dict[str, Any]:
         """Execute data operation with full integrity verification"""
@@ -682,7 +822,10 @@ class ByzantineDataConsensusNode:
                     'consensus_type': 'byzantine'
                 }
             )
-            
+```
+Safe execution in Byzantine systems requires multiple layers of verification. Pre-execution integrity checks ensure the operation hasn't been corrupted during consensus. The consensus metadata enables audit trails and helps with debugging distributed system issues.
+
+```python
             # Post-execution verification
             post_check = await self._verify_execution_result(execution_result, data_operation)
             if not post_check['valid']:
@@ -699,7 +842,10 @@ class ByzantineDataConsensusNode:
         except Exception as e:
             self.logger.error(f"Error executing data operation: {e}")
             return {'success': False, 'error': str(e)}
-    
+```
+Post-execution verification provides an additional safety net against Byzantine attacks or implementation bugs. If verification fails, the operation is rolled back to maintain data consistency. This comprehensive verification approach ensures that even if Byzantine nodes reach consensus on invalid operations, they won't corrupt the data store.
+
+```python
     def _create_data_operation_digest(self, data_operation: Dict[str, Any]) -> DataOperationDigest:
         """Create cryptographic digest of data operation for consensus"""
         
@@ -713,7 +859,10 @@ class ByzantineDataConsensusNode:
             view_number=self.view_number,
             timestamp=datetime.now()
         )
-    
+```
+Cryptographic digests provide tamper-evident operation identification. The deterministic JSON serialization ensures that identical operations always produce identical hashes, regardless of internal dictionary ordering. SHA-256 hashing provides cryptographic strength against collision attacks.
+
+```python
     async def get_consensus_status(self) -> Dict[str, Any]:
         """Get comprehensive Byzantine consensus status for data processing"""
         
@@ -742,6 +891,7 @@ class ByzantineDataConsensusNode:
             'data_store_integrity': await self.data_store.verify_integrity()
         }
 ```
+Byzantine consensus status provides comprehensive visibility into system health and progress. The phase-by-phase pending operation counts help identify bottlenecks or Byzantine behavior. Data store integrity verification ensures the underlying storage remains consistent despite potential Byzantine attacks.
 
 ---
 
@@ -759,10 +909,14 @@ class EnterprisePBFTDataConsensus:
     
     def __init__(self, node_id: str, cluster_config: Dict[str, Any],
                  enterprise_data_store: 'EnterpriseDataStore'):
+        # Core enterprise configuration
         self.node_id = node_id
         self.cluster_config = cluster_config
         self.data_store = enterprise_data_store
-        
+```
+Enterprise PBFT builds upon basic Byzantine consensus with production-grade enhancements for scalability, performance, and security. This implementation handles real-world requirements like batching, checkpointing, and comprehensive monitoring that production data systems demand.
+
+```python
         # Enterprise-grade configuration
         self.max_batch_size = cluster_config.get('max_batch_size', 100)
         self.timeout_intervals = cluster_config.get('timeouts', {
@@ -777,7 +931,10 @@ class EnterprisePBFTDataConsensus:
         self.message_batching_enabled = True
         self.async_execution_enabled = True
         self.checkpoint_frequency = 100  # Operations per checkpoint
-        
+```
+Enterprise configuration enables fine-tuning for different deployment scenarios. Batch processing dramatically improves throughput by amortizing consensus overhead across multiple operations. The timeout intervals are optimized for enterprise network conditions, balancing responsiveness with stability.
+
+```python
         # Enterprise monitoring and observability
         self.metrics_collector = EnterpriseMetricsCollector(node_id)
         self.performance_monitor = PBFTPerformanceMonitor()
@@ -793,7 +950,10 @@ class EnterprisePBFTDataConsensus:
         self.stable_checkpoint = None
         
         self.logger = logging.getLogger(f"EnterprisePBFT-{node_id}")
-    
+```
+Comprehensive monitoring and security features meet enterprise compliance requirements. The metrics collector provides detailed performance analytics, while audit logging creates immutable records of all consensus decisions. Checkpointing enables efficient state management for long-running systems.
+
+```python
     async def process_data_operation_batch(self, operations: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Process batch of data operations with enterprise-grade PBFT consensus"""
         
@@ -808,7 +968,10 @@ class EnterprisePBFTDataConsensus:
                 'error': validation_result['error'],
                 'invalid_operations': validation_result['invalid_operations']
             }
-        
+```
+Batch processing is the key to enterprise PBFT performance. Instead of running consensus for each individual operation, we group operations into batches and run consensus once per batch. This approach can improve throughput by 10-100x in high-load scenarios. Enterprise validation ensures all operations meet security and compliance requirements before processing.
+
+```python
         # Create batch identifier for tracking
         batch_id = self._generate_batch_id(operations)
         
@@ -822,7 +985,10 @@ class EnterprisePBFTDataConsensus:
                 return pre_prepare_result
                 
             batch_metrics.record_phase_completion('pre_prepare')
-            
+```
+Comprehensive batch tracking enables detailed performance analysis and debugging. Each batch gets a unique identifier that flows through all consensus phases, allowing operators to trace issues and measure performance at granular levels. Phase-by-phase metrics help identify bottlenecks in the consensus pipeline.
+
+```python
             # Phase 2: Prepare with fault detection
             prepare_result = await self._enterprise_prepare_phase(batch_id, operations)
             if not prepare_result['success']:
@@ -839,7 +1005,10 @@ class EnterprisePBFTDataConsensus:
             
             # Phase 4: Execution with rollback capability
             execution_result = await self._enterprise_execute_batch(batch_id, operations)
-            
+```
+Enterprise PBFT follows the standard three-phase protocol but adds sophisticated error handling and monitoring at each phase. Each phase can fail independently, and the system provides detailed failure information for debugging and recovery. This robust error handling is essential for production deployment.
+
+```python
             batch_metrics.record_phase_completion('execute')
             batch_metrics.finalize_batch(execution_result['success'])
             
@@ -865,14 +1034,20 @@ class EnterprisePBFTDataConsensus:
                 'error': f'Enterprise PBFT processing failed: {str(e)}',
                 'batch_id': batch_id
             }
-    
+```
+Successful batch completion triggers comprehensive metrics collection and result aggregation. The detailed response includes performance metrics that help operations teams optimize system performance. Error handling ensures that even catastrophic failures are properly logged and reported for investigation.
+
+```python
     async def _enterprise_pre_prepare_phase(self, operations: List[Dict[str, Any]], 
                                           batch_id: str) -> Dict[str, Any]:
         """Enterprise-grade pre-prepare phase with enhanced security"""
         
         # Create cryptographically secure batch digest
         batch_digest = await self._create_secure_batch_digest(operations, batch_id)
-        
+```
+Enterprise pre-prepare phase incorporates advanced cryptographic protection for the entire operation batch. Secure batch digests use enterprise-grade hashing algorithms and include tamper detection mechanisms. This approach prevents Byzantine nodes from corrupting batch contents during consensus.
+
+```python
         # Enterprise pre-prepare message with enhanced metadata
         pre_prepare_message = {
             'message_type': 'enterprise_pre_prepare',
@@ -890,7 +1065,10 @@ class EnterprisePBFTDataConsensus:
                 'access_requirements': await self._determine_access_requirements(operations)
             }
         }
-        
+```
+Enterprise metadata enables sophisticated access control and compliance enforcement. Data classification automatically categorizes operations by sensitivity level, while compliance tags ensure regulatory requirements are tracked throughout the consensus process. This metadata-driven approach supports complex enterprise security policies.
+
+```python
         # Enterprise cryptographic signature with hardware security module (HSM) support
         if self.encryption_enabled:
             pre_prepare_message['digital_signature'] = await self._sign_with_enterprise_hsm(
@@ -908,7 +1086,10 @@ class EnterprisePBFTDataConsensus:
             return {'success': True, 'message_id': pre_prepare_message.get('message_id')}
         else:
             return {'success': False, 'error': broadcast_result['error']}
-    
+```
+Hardware Security Module (HSM) integration provides the highest level of cryptographic protection for consensus messages. Enterprise reliable multicast ensures message delivery even in challenging network conditions. Persistent message storage enables audit trails and system recovery after failures.
+
+```python
     async def _enterprise_prepare_phase(self, batch_id: str, 
                                        operations: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Enterprise prepare phase with advanced fault detection"""
@@ -925,7 +1106,10 @@ class EnterprisePBFTDataConsensus:
             self._validate_prepare_response_enterprise(response) 
             for response in prepare_responses
         ])
-        
+```
+Enterprise prepare phase uses advanced timeout handling and parallel response validation. The timeout intervals are configurable for different network conditions, while parallel validation maximizes performance. This approach ensures enterprise systems can handle high-latency or unreliable network conditions gracefully.
+
+```python
         valid_responses = [
             resp for resp, valid in zip(prepare_responses, validation_results)
             if valid['valid']
@@ -939,7 +1123,10 @@ class EnterprisePBFTDataConsensus:
         if byzantine_detection['detected']:
             self.logger.warning(f"Byzantine behavior detected in prepare phase: {byzantine_detection}")
             await self._handle_byzantine_detection(byzantine_detection)
-        
+```
+Advanced Byzantine behavior detection analyzes response patterns to identify potentially malicious nodes. This goes beyond simple message validation to detect subtle attacks like selective message dropping or timing manipulation. Early detection enables proactive defense measures to maintain system security.
+
+```python
         # Require enterprise consensus threshold
         required_valid_responses = 2 * self.f + 1
         
@@ -956,7 +1143,10 @@ class EnterprisePBFTDataConsensus:
                 'error': f'Insufficient valid prepare responses: {len(valid_responses)}/{required_valid_responses}',
                 'byzantine_detected': byzantine_detection['detected']
             }
-    
+```
+Enterprise consensus requires strict adherence to the 2f+1 threshold while providing detailed diagnostic information. The response includes Byzantine detection results to help operators understand system health and identify potential security threats. This transparency is crucial for enterprise monitoring and incident response.
+
+```python
     async def _enterprise_execute_batch(self, batch_id: str, 
                                        operations: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Execute operation batch with enterprise-grade guarantees"""
@@ -972,7 +1162,10 @@ class EnterprisePBFTDataConsensus:
                 'error': 'Pre-execution validation failed',
                 'validation_details': pre_exec_validation
             }
-        
+```
+Enterprise batch execution implements multiple validation layers and comprehensive context tracking. The execution context provides audit trails, security context, and rollback information throughout the batch processing. Pre-execution validation ensures all operations meet enterprise security and compliance requirements before any execution begins.
+
+```python
         execution_results = []
         rollback_stack = []
         
@@ -999,11 +1192,10 @@ class EnterprisePBFTDataConsensus:
                         else:
                             # Single operation failed - rollback entire batch
                             raise Exception(f"Operation {i} failed: {result.get('error')}")
-                            
-                    except Exception as op_error:
-                        self.logger.error(f"Operation {i} execution failed: {op_error}")
-                        raise
-                
+```
+Enterprise transaction management ensures atomicity across the entire batch - either all operations succeed or none are applied. The rollback stack maintains precise rollback information for each successful operation, enabling complete recovery even from partial batch failures. Full audit trails meet compliance requirements for financial and regulated industries.
+
+```python
                 # All operations succeeded - commit enterprise transaction
                 await tx.commit_with_enterprise_verification()
                 
@@ -1019,7 +1211,10 @@ class EnterprisePBFTDataConsensus:
                 'partial_results': execution_results,
                 'rollback_performed': rollback_result['success']
             }
-        
+```
+Robust error handling ensures system consistency even during failures. Enterprise rollback procedures include verification steps and consistency checks to ensure the system returns to a valid state. Partial results are preserved for debugging and analysis, helping operators understand exactly what went wrong.
+
+```python
         # Post-execution enterprise verification
         post_exec_verification = await self._post_execution_verification_enterprise(
             execution_results, execution_context
@@ -1046,7 +1241,10 @@ class EnterprisePBFTDataConsensus:
             'execution_context': execution_context['context_id'],
             'verification_passed': True
         }
-    
+```
+Post-execution verification provides a final safety check against Byzantine attacks or implementation bugs. Emergency rollback procedures handle cases where verification fails after successful execution. Regular checkpointing enables efficient recovery and reduces memory usage in long-running systems. The comprehensive success response provides complete visibility into batch execution results.
+
+```python
     async def get_enterprise_consensus_metrics(self) -> Dict[str, Any]:
         """Get comprehensive enterprise consensus performance and health metrics"""
         
@@ -1064,7 +1262,10 @@ class EnterprisePBFTDataConsensus:
             'average_consensus_latency_ms': performance_metrics['avg_consensus_latency_ms'],
             'throughput_ops_per_second': performance_metrics['throughput_ops_per_sec']
         }
-        
+```
+Enterprise metrics provide comprehensive visibility into system performance, health, and security. Performance metrics track consensus latency and throughput, enabling capacity planning and performance optimization. Health metrics monitor system availability and fault detection, crucial for maintaining enterprise SLAs.
+
+```python
         # Security and compliance metrics
         security_metrics = {
             'cryptographic_operations_per_second': await self._get_crypto_ops_per_sec(),
@@ -1081,7 +1282,10 @@ class EnterprisePBFTDataConsensus:
             'storage_utilization_percent': await self.data_store.get_storage_utilization(),
             'network_partition_events': await self.metrics_collector.get_partition_events()
         }
-        
+```
+Security metrics track cryptographic performance and detect policy violations, essential for enterprise security monitoring. Audit log integrity verification ensures compliance with regulatory requirements. Operational metrics monitor system resource usage and network events that could impact performance or availability.
+
+```python
         return {
             'timestamp': current_time.isoformat(),
             'node_id': self.node_id,
@@ -1097,6 +1301,7 @@ class EnterprisePBFTDataConsensus:
             }
         }
 ```
+The comprehensive metrics response provides a complete snapshot of enterprise consensus system status. This structured data integrates easily with enterprise monitoring platforms like Prometheus, Grafana, or DataDog. The cluster status section gives operators immediate visibility into system capacity and fault tolerance levels.
 
 ---
 
