@@ -1409,12 +1409,20 @@ Latency metrics include percentiles (P95, P99) to capture tail latency character
                 'memory_utilization_percent': await self._get_agent_metric(agent_id, 'memory_percent'),
                 'disk_utilization_percent': await self._get_agent_metric(agent_id, 'disk_percent'),
                 'network_io_mbps': await self._get_agent_metric(agent_id, 'network_io_mbps'),
-                
+```
+
+Resource utilization metrics cover the four primary system resources: CPU, memory, storage, and network I/O. These metrics are essential for capacity planning, auto-scaling decisions, and identifying resource bottlenecks that could impact data processing performance.
+
+```python                
                 # Queue and buffer metrics
                 'input_queue_depth': await self._get_agent_metric(agent_id, 'input_queue_depth'),
                 'output_queue_depth': await self._get_agent_metric(agent_id, 'output_queue_depth'),
                 'buffer_utilization_percent': await self._get_agent_metric(agent_id, 'buffer_utilization'),
-                
+```
+
+Queue and buffer metrics indicate processing bottlenecks and flow control issues. High input queue depth suggests the agent is receiving data faster than it can process, while high output queue depth indicates downstream systems may be slow to consume processed data.
+
+```python                
                 # Error and health metrics
                 'error_rate_percent': await self._get_agent_metric(agent_id, 'error_rate_percent'),
                 'health_check_status': await self._get_agent_health_status(agent_id),
@@ -1428,7 +1436,7 @@ Latency metrics include percentiles (P95, P99) to capture tail latency character
             return None
 ```
 
-Resource utilization tracking covers CPU, memory, disk, and network I/O for capacity planning. Queue depths indicate processing bottlenecks, while error rates and health status provide operational health visibility.
+Error and health metrics provide operational status visibility. Error rate percentage indicates data processing reliability, health check status shows agent availability, and uptime tracks system stability - all crucial for production monitoring and SLA compliance.
 
 ```python
     async def _setup_default_alert_rules(self):
@@ -1545,7 +1553,11 @@ Alert processing evaluates each collected metric against all configured alert ru
                 )
                 
                 alert_key = f"{agent_id}:{rule_id}"
-                
+```
+
+Alert condition evaluation determines if the current metric value violates the configured threshold using the specified operator (greater_than, less_than, etc.). The alert key uniquely identifies each agent-rule combination to prevent duplicate alerts and enable proper state tracking.
+
+```python                
                 if alert_triggered:
                     if alert_key not in self.active_alerts:
                         # New alert
@@ -1562,7 +1574,7 @@ Alert processing evaluates each collected metric against all configured alert ru
                         )
 ```
 
-New alert creation captures complete context including the triggering metric value, threshold, and timestamp. The alert key combines agent ID and rule ID to ensure unique alert tracking across the cluster.
+New alert instantiation occurs only when the condition is triggered and no active alert exists for this agent-rule combination. The alert captures comprehensive context including severity level, descriptive message, actual and threshold values, and metadata tags for filtering and analysis.
 
 ```python
                         self.active_alerts[alert_key] = alert
@@ -1571,6 +1583,11 @@ New alert creation captures complete context including the triggering metric val
                         await self._send_alert_notification(alert)
                         
                         self.logger.warning(f"Alert triggered: {alert.message} (Agent: {agent_id}, Value: {metric_value})")
+```
+
+New alert activation involves storing the alert in active alerts, sending notifications to configured channels (email, Slack, PagerDuty), and logging the trigger event with context. This multi-channel approach ensures rapid response to data processing issues.
+
+```python
                 else:
                     # Check if we should resolve an existing alert
                     if alert_key in self.active_alerts:
@@ -1587,7 +1604,7 @@ New alert creation captures complete context including the triggering metric val
                         self.logger.info(f"Alert resolved: {alert.message} (Agent: {agent_id})")
 ```
 
-Alert lifecycle management includes both triggering new alerts and resolving existing ones when conditions normalize. Resolution notifications and logging provide complete operational visibility into alert state changes.
+Alert resolution occurs when conditions return to normal thresholds. The alert is marked resolved with a timestamp, resolution notifications are sent to inform teams that the issue has cleared, and the alert is removed from active tracking to prevent notification spam.
 
 ```python
     async def create_data_processing_dashboard(self, dashboard_name: str, 
@@ -1618,7 +1635,11 @@ Dashboard creation begins with configuration validation to ensure required field
             'created_at': datetime.now(),
             'auto_refresh': config.get('auto_refresh', True)
         }
-        
+```
+
+Dashboard configuration combines required fields (name, title, panels) with optional settings that have sensible defaults. The 30-second refresh interval balances real-time visibility with system load, while the 24-hour time range provides sufficient historical context for trend analysis.
+
+```python        
         self.dashboard_configs[dashboard_name] = dashboard_config
         
         self.logger.info(f"Created data processing dashboard: {dashboard_name}")
@@ -1631,7 +1652,7 @@ Dashboard creation begins with configuration validation to ensure required field
         }
 ```
 
-Dashboard configuration includes sensible defaults: 30-second refresh interval and 24-hour time range. The configuration is stored for runtime dashboard generation and includes creation timestamps for audit purposes.
+Dashboard storage and response provide immediate access to the created configuration and return the URL for dashboard access. The panels count helps validate that all expected visualizations were included in the dashboard creation.
 
 ```python
     async def get_monitoring_status(self) -> Dict[str, Any]:
@@ -1664,7 +1685,11 @@ Alert and metrics statistics provide operational insights into monitoring system
             'degraded_agents': len([h for h in self.health_status.values() if h.status == 'degraded']),
             'unhealthy_agents': len([h for h in self.health_status.values() if h.status == 'unhealthy'])
         }
-        
+```
+
+Health status summary aggregates agent health across the cluster by counting agents in each health state. This high-level view enables operators to quickly assess cluster health and identify agents requiring attention or intervention.
+
+```python        
         return {
             'monitoring_timestamp': datetime.now().isoformat(),
             'monitoring_health': 'healthy',
@@ -1681,7 +1706,7 @@ Alert and metrics statistics provide operational insights into monitoring system
     }
 ```
 
-The comprehensive monitoring status return aggregates system health metrics, active alerts, agent status distributions, and configuration details. This single view enables operators to quickly assess the health and configuration of the entire data processing monitoring system.
+The comprehensive monitoring status combines current alert states, metrics collection performance, agent health distributions, and system configuration. This unified view provides operators with complete visibility into monitoring system performance and data processing cluster health for rapid operational decision-making.
 
 ---
 
