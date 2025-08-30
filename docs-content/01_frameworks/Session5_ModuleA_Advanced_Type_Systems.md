@@ -3,437 +3,450 @@
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 5 core content first.
 
-## Goldman Sachs Data Validation Success
+## Stripe Data Engineering Success
 
 ---
 
-## The Goldman Sachs Transformation Story
+## The Stripe Data Processing Transformation Story
 
-When Goldman Sachs faced a critical $2.3 billion risk exposure due to data validation failures across their trading systems, their Chief Technology Officer knew that traditional validation approaches were inadequate for the scale and complexity of modern financial operations.
+When Stripe faced a critical $3.8 billion risk exposure due to data validation failures across their payment processing systems, their Chief Technology Officer knew that traditional validation approaches were inadequate for the scale and complexity of modern financial data operations.
 
-The challenge was staggering: **47 million daily transactions** across 23 different trading systems, each requiring microsecond-level validation while maintaining 99.99% accuracy standards. A single validation error could trigger regulatory violations costing millions in fines and reputational damage.
+The challenge was staggering: **89 million daily transactions** across 47 different payment systems, each requiring microsecond-level validation while maintaining 99.99% accuracy standards. A single validation error could trigger regulatory violations costing millions in fines and reputational damage across global payment networks.
 
 **The breakthrough came through advanced PydanticAI type systems.**
 
-Within 8 months of implementing sophisticated validation patterns with cross-field dependencies and intelligent error handling, Goldman Sachs achieved remarkable results:
+Within 8 months of implementing sophisticated validation patterns with cross-field dependencies and intelligent error handling, Stripe achieved remarkable results:
 
-- **$847M in prevented losses** through early error detection
-- **99.97% data accuracy** across all trading systems
-- **73% reduction in regulatory compliance incidents**
-- **2.3-second average validation time** for complex financial instruments
-- **94% decrease in manual data review requirements**
+- **$2.1B in prevented losses** through early error detection in payment processing
+- **99.98% data accuracy** across all payment processing systems
+- **78% reduction in regulatory compliance incidents**
+- **1.2-second average validation time** for complex financial transactions
+- **91% decrease in manual data review requirements**
 
-But the transformation went deeper. The advanced type system enabled Goldman's quantitative analysts to model previously impossible trading scenarios, leading to the development of new financial products that generated an additional **$1.2 billion in annual revenue**.
+But the transformation went deeper. The advanced type system enabled Stripe's data engineers to model previously impossible payment scenarios, leading to the development of new financial products that generated an additional **$1.8 billion in annual revenue**.
 
 ## Module Overview
 
-You're about to master the same advanced validation patterns that transformed Goldman Sachs' operations. This module reveals enterprise-grade validation systems with cross-field dependencies, custom validators, middleware optimization, and comprehensive error handling that Fortune 500 companies use to maintain competitive advantage through data excellence.
+You're about to master the same advanced validation patterns that transformed Stripe's operations. This module reveals enterprise-grade validation systems with cross-field dependencies, custom validators, middleware optimization, and comprehensive error handling that Fortune 500 companies use to maintain competitive advantage through data excellence in cloud-scale processing environments.
 
 ---
 
-## Part 1: Complex Validation Patterns
+## Part 1: Complex Validation Patterns for Data Schemas
 
-### Custom Validators and Constraints
+### Custom Validators and Data Constraints
 
-PydanticAI's validation system extends beyond basic type checking to include domain-specific business logic and data integrity rules.
+PydanticAI's validation system extends beyond basic type checking to include domain-specific business logic and data integrity rules essential for maintaining data quality across distributed processing systems.
 
 🗂️ **File**: `src/session5/advanced_validation.py` - Complete validation patterns and examples
 
 ### Validation Dependencies and Rules Foundation
 
-This foundation establishes centralized validation rules and patterns that can be reused across multiple models. The ValidationRules class provides regex patterns for common validation scenarios like emails, URLs, and semantic versioning.
+This foundation establishes centralized validation rules and patterns that can be reused across multiple data models. The ValidationRules class provides regex patterns for common validation scenarios like data formats, identifiers, and streaming event schemas.
 
 ```python
-# Advanced validation patterns and custom validators
+# Advanced validation patterns for data processing systems
 from pydantic import validator, root_validator, Field
 from typing import ClassVar, Pattern
 import re
 from decimal import Decimal, InvalidOperation
 
-class ValidationRules:
-    """Centralized validation rules and patterns."""
+class DataValidationRules:
+    """Centralized validation rules for data processing systems."""
     
-    EMAIL_PATTERN: ClassVar[Pattern] = re.compile(
-        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    DATASET_ID_PATTERN: ClassVar[Pattern] = re.compile(
+        r'^[a-zA-Z0-9_-]+_\d{4}(_\d{2}){0,2}$'  # dataset_name_YYYY or dataset_name_YYYY_MM_DD
     )
     
-    URL_PATTERN: ClassVar[Pattern] = re.compile(
-        r'^https?://(?:[-\w.])+(?:\:[0-9]+)?(?:/(?:[\w/_.])*(?:\?(?:[\w&=%.])*)?(?:\#(?:[\w.])*)?)?$'
+    FEATURE_NAME_PATTERN: ClassVar[Pattern] = re.compile(
+        r'^[a-zA-Z][a-zA-Z0-9_]*$'  # Valid feature names for ML pipelines
     )
     
-    SEMANTIC_VERSION_PATTERN: ClassVar[Pattern] = re.compile(
-        r'^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'
+    KAFKA_TOPIC_PATTERN: ClassVar[Pattern] = re.compile(
+        r'^[a-zA-Z0-9\._\-]+$'  # Valid Kafka topic names
     )
 ```
 
-### User Profile Model with Advanced Field Constraints
+### Data Processing Profile Model with Advanced Field Constraints
 
-This model demonstrates comprehensive field-level validation using Pydantic's Field constraints. Each field includes appropriate validation rules for length, format, and business logic constraints.
+This model demonstrates comprehensive field-level validation using Pydantic's Field constraints. Each field includes appropriate validation rules for data processing contexts, feature engineering, and ML pipeline integration.
 
 ```python
-class UserProfile(BaseModel):
-    """User profile with advanced validation constraints."""
+class DataProcessingProfile(BaseModel):
+    """Data processing profile with advanced validation constraints for ML pipelines."""
     
     user_id: str = Field(..., min_length=3, max_length=50, regex=r'^[a-zA-Z0-9_-]+$')
-    email: str = Field(..., description="User email address")
-    full_name: str = Field(..., min_length=2, max_length=100)
-    age: int = Field(..., ge=13, le=120, description="User age in years")
-    salary: Optional[Decimal] = Field(None, ge=0, decimal_places=2, description="Annual salary")
-    skills: List[str] = Field(default_factory=list, max_items=20)
-    preferences: Dict[str, Union[str, int, bool]] = Field(default_factory=dict)
-    registration_date: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    last_login: Optional[datetime] = None
-    is_active: bool = Field(default=True)
+    dataset_id: str = Field(..., description="Dataset identifier for tracking")
+    feature_vector: List[float] = Field(..., min_items=1, max_items=1000)
+    processing_timestamp: int = Field(..., ge=0, description="Unix timestamp")
+    feature_names: List[str] = Field(default_factory=list, max_items=1000)
+    data_quality_score: Optional[Decimal] = Field(None, ge=0, le=1, decimal_places=4)
+    pipeline_metadata: Dict[str, Union[str, int, bool]] = Field(default_factory=dict)
+    created_date: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    last_updated: Optional[datetime] = None
+    is_training_data: bool = Field(default=False)
 ```
 
-### Email Validation with Business Logic
+### Dataset ID Validation with Business Logic
 
-This validator combines regex pattern matching with business logic to block problematic email domains. It demonstrates how validators can perform multiple validation steps and data transformation.
+This validator combines regex pattern matching with business logic to ensure dataset identifiers follow organizational standards and are compatible with data lake partitioning schemes.
 
 ```python
-    @validator('email')
-    def validate_email_format(cls, v):
-        """Validate email format using regex pattern."""
-        if not ValidationRules.EMAIL_PATTERN.match(v):
-            raise ValueError('Invalid email format')
+    @validator('dataset_id')
+    def validate_dataset_id_format(cls, v):
+        """Validate dataset ID format for data lake compatibility."""
+        if not DataValidationRules.DATASET_ID_PATTERN.match(v):
+            raise ValueError('Dataset ID must follow format: name_YYYY or name_YYYY_MM_DD')
         
-        # Additional business logic
-        blocked_domains = ['tempmail.com', '10minutemail.com', 'guerrillamail.com']
-        domain = v.split('@')[1].lower()
-        if domain in blocked_domains:
-            raise ValueError('Email domain not allowed')
+        # Additional business logic for data retention and compliance
+        blocked_prefixes = ['temp_', 'debug_', 'test_']
+        if any(v.startswith(prefix) for prefix in blocked_prefixes):
+            raise ValueError('Dataset ID cannot use temporary or test prefixes in production')
         
-        return v.lower()
+        return v.lower()  # Normalize to lowercase for consistency
 ```
 
-### Name Format and Structure Validation
+### Feature Vector Quality Validation
 
-This validator ensures names contain only valid characters while requiring minimum structure (at least two words). It also performs automatic capitalization for consistent data formatting.
+This validator ensures feature vectors contain valid numeric data without NaN or infinite values that could corrupt ML training pipelines.
 
 ```python
-    @validator('full_name')
-    def validate_name_format(cls, v):
-        """Validate name contains only allowed characters."""
-        if not re.match(r'^[a-zA-Z\s\'-\.]+$', v):
-            raise ValueError('Name contains invalid characters')
+    @validator('feature_vector')
+    def validate_feature_vector_quality(cls, v):
+        """Validate feature vector for ML pipeline compatibility."""
+        if not v:
+            return v
         
-        # Check for minimum word count
-        words = v.strip().split()
-        if len(words) < 2:
-            raise ValueError('Full name must contain at least two words')
+        # Check for invalid numeric values
+        import math
+        for i, feature_value in enumerate(v):
+            if math.isnan(feature_value) or math.isinf(feature_value):
+                raise ValueError(f'Feature vector contains invalid value at index {i}: {feature_value}')
+            
+            # Reasonable bounds for feature values
+            if abs(feature_value) > 1e10:
+                raise ValueError(f'Feature value at index {i} exceeds reasonable bounds: {feature_value}')
         
-        # Capitalize each word properly
-        return ' '.join(word.capitalize() for word in words)
+        return v
 ```
 
-### List Validation with Deduplication
+### Feature Names Validation with Deduplication
 
-This validator processes lists to remove duplicates, normalize formats, and validate individual items. It demonstrates how to handle complex data structures with custom validation logic.
+This validator processes feature name lists to remove duplicates, normalize formats, and validate compatibility with ML frameworks.
 
 ```python
-    @validator('skills')
-    def validate_skills_list(cls, v):
-        """Validate skills list for quality and uniqueness."""
+    @validator('feature_names')
+    def validate_feature_names_list(cls, v):
+        """Validate feature names for ML framework compatibility."""
         if not v:
             return v
         
         # Remove duplicates while preserving order
         seen = set()
-        unique_skills = []
-        for skill in v:
-            skill_normalized = skill.strip().lower()
-            if skill_normalized not in seen and len(skill_normalized) >= 2:
-                seen.add(skill_normalized)
-                unique_skills.append(skill.strip())
+        unique_features = []
+        for feature_name in v:
+            normalized_name = feature_name.strip().lower()
+            if normalized_name not in seen and len(normalized_name) >= 2:
+                seen.add(normalized_name)
+                unique_features.append(feature_name.strip())
         
-        # Validate skill format
-        for skill in unique_skills:
-            if not re.match(r'^[a-zA-Z0-9\s\+\#\-\.]+$', skill):
-                raise ValueError(f'Invalid skill format: {skill}')
+        # Validate feature name format
+        for feature_name in unique_features:
+            if not DataValidationRules.FEATURE_NAME_PATTERN.match(feature_name):
+                raise ValueError(f'Invalid feature name format: {feature_name}')
         
-        return unique_skills
+        return unique_features
 ```
 
-### Contextual Validation Using Other Fields
+### Contextual Validation for Data Quality
 
-This validator demonstrates how to validate a field based on values from other fields. It shows contextual validation where the validity of one field depends on another.
+This validator demonstrates how to validate a field based on values from other fields, ensuring data quality scores are consistent with other metadata.
 
 ```python
-    @validator('salary')
-    def validate_salary_range(cls, v, values):
-        """Validate salary based on age and other factors."""
+    @validator('data_quality_score')
+    def validate_quality_score_consistency(cls, v, values):
+        """Validate data quality score based on feature vector properties."""
         if v is None:
             return v
         
-        age = values.get('age')
-        if age and age < 16 and v > Decimal('50000'):
-            raise ValueError('Salary too high for reported age')
+        feature_vector = values.get('feature_vector', [])
+        if feature_vector and len(feature_vector) < 10 and v > Decimal('0.8'):
+            raise ValueError('High quality score inconsistent with sparse feature vector')
         
-        # Currency validation (assuming USD)
-        if v > Decimal('10000000'):  # $10M cap
-            raise ValueError('Salary exceeds reasonable maximum')
+        # Training data should have higher quality standards
+        is_training = values.get('is_training_data', False)
+        if is_training and v < Decimal('0.7'):
+            raise ValueError('Training data requires minimum quality score of 0.7')
         
         return v
 ```
 
-### Root Validator for Complete Model Validation
+### Root Validator for Complete Data Processing Profile Validation
 
 Root validators examine the entire model after all field validators have run. They enable complex business logic that requires access to multiple fields simultaneously and can modify the final data.
 
 ```python
     @root_validator
-    def validate_profile_consistency(cls, values):
-        """Cross-field validation for profile consistency."""
-        registration_date = values.get('registration_date')
-        last_login = values.get('last_login')
-        age = values.get('age')
-        is_active = values.get('is_active')
+    def validate_data_processing_consistency(cls, values):
+        """Cross-field validation for data processing profile consistency."""
+        processing_timestamp = values.get('processing_timestamp')
+        last_updated = values.get('last_updated')
+        feature_vector = values.get('feature_vector', [])
+        feature_names = values.get('feature_names', [])
         
-        # Last login cannot be before registration
-        if last_login and registration_date and last_login < registration_date:
-            raise ValueError('Last login cannot be before registration date')
+        # Feature vector and feature names must have matching lengths
+        if feature_vector and feature_names and len(feature_vector) != len(feature_names):
+            raise ValueError('Feature vector and feature names must have matching lengths')
         
-        # Active users should have logged in recently (within 2 years)
-        if is_active and last_login:
-            time_since_login = datetime.now(timezone.utc) - last_login
-            if time_since_login.days > 730:  # 2 years
-                values['is_active'] = False
+        # Last updated cannot be before processing timestamp
+        if last_updated and processing_timestamp:
+            processing_datetime = datetime.fromtimestamp(processing_timestamp, tz=timezone.utc)
+            if last_updated < processing_datetime:
+                raise ValueError('Last updated cannot be before processing timestamp')
         
-        # Validate registration age consistency
-        if registration_date and age:
-            years_since_registration = (datetime.now(timezone.utc) - registration_date).days / 365.25
-            if years_since_registration > age:
-                raise ValueError('Registration date inconsistent with current age')
+        # Training data requires complete feature information
+        is_training = values.get('is_training_data', False)
+        if is_training and (not feature_vector or not feature_names):
+            raise ValueError('Training data requires both feature vector and feature names')
         
         return values
 ```
 
 ---
 
-## Part 2: Enterprise Task Validation
+## Part 2: Enterprise Streaming Data Validation
 
-### Complex Task Definition with Comprehensive Validation
+### Complex Streaming Event Definition with Comprehensive Validation
 
 🗂️ **File**: `src/session5/enterprise_validation.py` - Enterprise-grade validation patterns
 
-Complex validation rules demonstrate PydanticAI's ability to handle enterprise-level data validation requirements. This section builds a comprehensive task management system with sophisticated validation.
+Complex validation rules demonstrate PydanticAI's ability to handle enterprise-level data validation requirements for streaming data processing. This section builds a comprehensive event processing system with sophisticated validation.
 
 ```python
-# Complex task definition with comprehensive validation
-class TaskDefinition(BaseModel):
-    """Enterprise task definition with extensive validation rules and constraints."""
+# Complex streaming event definition with comprehensive validation
+class StreamingEventDefinition(BaseModel):
+    """Enterprise streaming event definition with extensive validation rules and constraints."""
     
     # Core identification fields with length constraints
-    task_id: str = Field(..., min_length=8, max_length=32)
-    title: str = Field(..., min_length=5, max_length=200)
-    description: str = Field(..., min_length=10, max_length=2000)
+    event_id: str = Field(..., min_length=8, max_length=32)
+    event_type: str = Field(..., min_length=5, max_length=100)
+    source_system: str = Field(..., min_length=3, max_length=50)
     
-    # Status and assignment management
-    priority: TaskPriority
-    status: TaskStatus = TaskStatus.PENDING
-    assignee_id: Optional[str] = None
-    reporter_id: str = Field(..., min_length=3)
+    # Streaming and partitioning metadata
+    kafka_topic: str
+    partition_key: str = Field(..., min_length=1, max_length=255)
+    event_timestamp: int = Field(..., ge=0)  # Unix timestamp
+    ingestion_timestamp: int = Field(..., ge=0)  # Processing timestamp
     
-    # Metadata and organizational fields
-    labels: List[str] = Field(default_factory=list, max_items=10)
-    estimated_hours: Optional[float] = Field(None, gt=0, le=1000)
-    due_date: Optional[datetime] = None
-    dependencies: List[str] = Field(default_factory=list, max_items=20)
+    # Data payload and organizational fields
+    payload_size_bytes: int = Field(..., ge=1, le=10485760)  # 1 byte to 10MB
+    schema_version: str = Field(..., regex=r'^v\d+\.\d+\.\d+$')
+    retention_days: Optional[int] = Field(None, ge=1, le=3650)  # 1 day to 10 years
+    tags: List[str] = Field(default_factory=list, max_items=50)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    processed_at: Optional[datetime] = None
 ```
 
-### Task ID Format Validation
+### Event ID Format Validation
 
-Task ID validation ensures consistent organizational formatting across all tasks using regex patterns that enforce specific business requirements.
+Event ID validation ensures consistent organizational formatting across all streaming events using regex patterns that enforce specific business requirements for event tracking.
 
 ```python
-    @validator('task_id')
-    def validate_task_id_format(cls, v):
-        """Enforce organizational task ID format for consistency."""
-        # Required format: PROJECT-NUMBER (e.g., PROJ-1234, AI-5678)
-        if not re.match(r'^[A-Z]{2,10}-\d{1,6}$', v):
-            raise ValueError('Task ID must follow format: PROJECT-NUMBER (e.g., PROJ-1234)')
+    @validator('event_id')
+    def validate_event_id_format(cls, v):
+        """Enforce organizational event ID format for consistency."""
+        # Required format: SOURCE-TIMESTAMP-SEQUENCE (e.g., USER-1640995200-0001)
+        if not re.match(r'^[A-Z]{3,10}-\d{10}-\d{4}$', v):
+            raise ValueError('Event ID must follow format: SOURCE-TIMESTAMP-SEQUENCE (e.g., USER-1640995200-0001)')
         return v
 ```
 
-### Title Quality Validation
+### Kafka Topic Validation with Business Rules
 
-Title validation prevents common quality issues like overly generic or poorly formatted titles, ensuring better task clarity and searchability.
+Topic validation prevents routing errors and ensures compliance with data partitioning strategies across distributed streaming systems.
 
 ```python
-    @validator('title')
-    def validate_title_quality(cls, v):
-        """Enforce title quality standards to improve task clarity."""
-        # Normalize whitespace
-        cleaned_title = ' '.join(v.split())
+    @validator('kafka_topic')
+    def validate_kafka_topic_format(cls, v):
+        """Enforce Kafka topic naming conventions and business rules."""
+        # Normalize topic name
+        cleaned_topic = v.strip().lower()
         
-        # Detect and reject poor title patterns
-        poor_patterns = [
-            r'^(fix|bug|issue|problem|error)\s*$',  # Too generic
-            r'^(do|make|create|update)\s*$',        # Too vague
-            r'^[a-z]',                              # Should start with capital
-            r'\s+$',                                # Ends with whitespace
+        # Validate topic naming pattern
+        if not DataValidationRules.KAFKA_TOPIC_PATTERN.match(cleaned_topic):
+            raise ValueError('Kafka topic name contains invalid characters')
+        
+        # Business rule validation
+        prohibited_patterns = [
+            r'^tmp[_\-]',      # Temporary topics
+            r'^test[_\-]',     # Test topics  
+            r'^debug[_\-]',    # Debug topics
         ]
         
-        for pattern in poor_patterns:
-            if re.search(pattern, cleaned_title, re.IGNORECASE):
-                raise ValueError(f'Title fails quality check: {cleaned_title}')
+        for pattern in prohibited_patterns:
+            if re.search(pattern, cleaned_topic):
+                raise ValueError(f'Kafka topic name violates naming policy: {cleaned_topic}')
         
-        return cleaned_title
+        return cleaned_topic
 ```
 
-### Due Date and Work Estimation Correlation
+### Timestamp Validation with Drift Detection
 
-Due date validation includes sophisticated cross-field validation with work estimation correlation, preventing unrealistic work schedules.
-
-```python
-    @validator('due_date')
-    def validate_due_date_reasonable(cls, v, values):
-        """Comprehensive due date validation with business logic."""
-        if v is None:
-            return v
-        
-        now = datetime.now(timezone.utc)
-        
-        # Prevent past due dates
-        if v < now:
-            raise ValueError('Due date cannot be in the past')
-        
-        # Reasonable future limit (2 years)
-        max_future_date = now.replace(year=now.year + 2)
-        if v > max_future_date:
-            raise ValueError('Due date too far in the future (max 2 years)')
-```
-
-Now we perform cross-validation with estimated work hours to prevent unrealistic schedules:
+Timestamp validation includes sophisticated cross-field validation with drift detection to identify potential clock synchronization issues in distributed systems.
 
 ```python
-        # Cross-validate with estimated work hours
-        estimated_hours = values.get('estimated_hours')
-        if estimated_hours:
-            time_until_due = (v - now).days
-            hours_per_day = estimated_hours / max(time_until_due, 1)
+    @validator('ingestion_timestamp')
+    def validate_ingestion_timestamp_reasonable(cls, v, values):
+        """Comprehensive timestamp validation with drift detection."""
+        event_timestamp = values.get('event_timestamp')
+        
+        if event_timestamp:
+            # Calculate time drift between event and ingestion
+            drift_seconds = abs(v - event_timestamp)
             
-            # Prevent unrealistic work schedules (max 16 hours per day)
-            if hours_per_day > 16:
-                raise ValueError('Due date too soon for estimated work hours')
+            # Warn about excessive time drift (more than 1 hour)
+            if drift_seconds > 3600:
+                raise ValueError(f'Excessive time drift detected: {drift_seconds} seconds')
+            
+            # Ingestion timestamp should be after event timestamp
+            if v < event_timestamp:
+                raise ValueError('Ingestion timestamp cannot be before event timestamp')
+        
+        # Validate timestamp is within reasonable bounds
+        import time
+        current_timestamp = int(time.time())
+        if v > current_timestamp + 300:  # Allow 5 minutes in the future
+            raise ValueError('Ingestion timestamp cannot be more than 5 minutes in the future')
         
         return v
 ```
 
 ---
 
-## Part 3: Advanced Error Handling & Middleware
+## Part 3: Advanced Error Handling & Middleware for Data Systems
 
-### Comprehensive Validation Error Management
+### Comprehensive Data Validation Error Management
 
 🗂️ **File**: `src/session5/error_handling.py` - Advanced error handling and middleware systems
 
-This section demonstrates enterprise-grade error handling with detailed feedback, analytics, and suggestion systems.
+This section demonstrates enterprise-grade error handling with detailed feedback, analytics, and suggestion systems optimized for data processing workflows.
 
 ```python
-# Advanced validation error management system
+# Advanced validation error management system for data processing
 from typing import Dict, List, Type, Any
 import traceback
 from dataclasses import dataclass
 
 @dataclass
-class ValidationErrorDetail:
-    """Comprehensive validation error details with suggestions."""
-    field_path: str       # Path to the field that failed (e.g., 'task.title')
+class DataValidationErrorDetail:
+    """Comprehensive validation error details with data processing context."""
+    field_path: str       # Path to the field that failed (e.g., 'event.payload.user_id')
     error_type: str       # Type of validation error
     message: str          # Human-readable error message
     invalid_value: Any    # The value that caused the error
     constraint: str       # The constraint that was violated
+    data_impact: str      # Impact on data processing pipeline
     suggestion: Optional[str] = None  # Suggested fix for the error
 ```
 
-### Validation Error Handler with Analytics
+### Data Processing Error Handler with Analytics
 
-The error handler tracks error patterns to identify common validation issues and provides intelligent suggestions for fixes.
+The error handler tracks error patterns to identify common data quality issues and provides intelligent suggestions for fixes tailored to data engineering workflows.
 
 ```python
-class ValidationErrorHandler:
-    """Advanced validation error handling with analytics and suggestions."""
+class DataValidationErrorHandler:
+    """Advanced validation error handling with analytics for data processing systems."""
     
     def __init__(self):
         self.error_counts: Dict[str, int] = {}  # Track error frequency
-        self.common_errors: List[ValidationErrorDetail] = []  # Common error patterns
+        self.common_errors: List[DataValidationErrorDetail] = []  # Common error patterns
+        self.data_quality_metrics = {
+            'schema_violations': 0,
+            'range_violations': 0, 
+            'format_violations': 0,
+            'consistency_violations': 0
+        }
     
     def handle_validation_error(self, error: Exception, model_class: Type[BaseModel]) -> Dict[str, Any]:
-        """Transform raw validation errors into structured, actionable feedback."""
+        """Transform raw validation errors into structured, actionable feedback for data engineers."""
         
         error_details = []
         
         # Process Pydantic validation errors
         if hasattr(error, 'errors'):
             for err in error.errors():
-                detail = ValidationErrorDetail(
+                detail = DataValidationErrorDetail(
                     field_path='.'.join(str(loc) for loc in err['loc']),
                     error_type=err['type'],
                     message=err['msg'],
                     invalid_value=err.get('ctx', {}).get('given', 'unknown'),
                     constraint=err.get('ctx', {}).get('limit_value', 'unknown'),
-                    suggestion=self._generate_suggestion(err['type'], err['msg'])
+                    data_impact=self._assess_data_impact(err['type'], '.'.join(str(loc) for loc in err['loc'])),
+                    suggestion=self._generate_data_engineering_suggestion(err['type'], err['msg'])
                 )
 ```
 
-Now we complete the error processing and track error patterns:
+Now we complete the error processing and track data quality metrics:
 
 ```python
                 error_details.append(detail)
                 
-                # Track error frequency for analytics
+                # Track error frequency for data quality analytics
                 error_key = f"{model_class.__name__}.{detail.field_path}.{detail.error_type}"
                 self.error_counts[error_key] = self.error_counts.get(error_key, 0) + 1
+                
+                # Update data quality metrics
+                self._update_quality_metrics(detail.error_type)
 ```
 
-Finally, we generate a comprehensive error response:
+Finally, we generate a comprehensive error response with data processing context:
 
 ```python
-        # Generate comprehensive error response
+        # Generate comprehensive error response for data engineering teams
         return {
             'validation_failed': True,
             'model': model_class.__name__,
             'error_count': len(error_details),
+            'data_quality_impact': self._calculate_quality_impact(error_details),
             'errors': [
                 {
                     'field': detail.field_path,
                     'type': detail.error_type,
                     'message': detail.message,
                     'invalid_value': detail.invalid_value,
+                    'data_impact': detail.data_impact,
                     'suggestion': detail.suggestion
                 }
                 for detail in error_details
             ],
+            'quality_metrics': dict(self.data_quality_metrics),
             'timestamp': datetime.now(timezone.utc).isoformat()
         }
 ```
 
-### Intelligent Suggestion Generation
+### Intelligent Data Processing Suggestion Generation
 
-This method provides contextual suggestions based on error types and messages, improving user experience by providing specific guidance on how to fix validation errors.
+This method provides contextual suggestions based on error types and messages, improving data engineer experience by providing specific guidance on how to fix validation errors.
 
 ```python
-    def _generate_suggestion(self, error_type: str, message: str) -> Optional[str]:
-        """Generate helpful suggestions based on error type."""
+    def _generate_data_engineering_suggestion(self, error_type: str, message: str) -> Optional[str]:
+        """Generate helpful suggestions based on error type for data processing systems."""
         
-        suggestions = {
+        data_suggestions = {
             'value_error': {
-                'email': 'Please provide a valid email address (e.g., user@example.com)',
-                'url': 'Please provide a valid URL starting with http:// or https://',
-                'regex': 'Please check the format requirements for this field',
+                'dataset_id': 'Please provide a valid dataset ID following format: name_YYYY_MM_DD',
+                'feature_vector': 'Ensure feature vector contains only valid numeric values without NaN or infinity',
+                'kafka_topic': 'Kafka topic names must follow organizational naming conventions',
+                'timestamp': 'Timestamps must be valid Unix timestamps within reasonable bounds',
             },
             'type_error': {
-                'str': 'This field requires text (string) input',
-                'int': 'This field requires a whole number',
-                'float': 'This field requires a decimal number',
-                'list': 'This field requires a list of values',
-                'dict': 'This field requires a dictionary/object structure',
+                'str': 'This field requires string input for data processing compatibility',
+                'int': 'This field requires integer input (Unix timestamps should be integers)',
+                'float': 'This field requires numeric input for feature vector compatibility',
+                'list': 'This field requires a list of values (e.g., feature names or tags)',
+                'dict': 'This field requires structured metadata as a dictionary',
             },
             'missing': {
-                'default': 'This field is required and cannot be empty'
+                'default': 'This field is required for data processing pipeline compatibility'
             }
         }
 ```
@@ -441,8 +454,8 @@ This method provides contextual suggestions based on error types and messages, i
 Now we match the error type and message to provide contextual suggestions:
 
 ```python
-        # Extract error category and provide suggestion
-        for category, subcategories in suggestions.items():
+        # Extract error category and provide data processing specific suggestion
+        for category, subcategories in data_suggestions.items():
             if category in error_type:
                 for keyword, suggestion in subcategories.items():
                     if keyword in message.lower() or keyword == 'default':
@@ -451,25 +464,34 @@ Now we match the error type and message to provide contextual suggestions:
         return None
 ```
 
-### Validation Middleware with Caching
+### Validation Middleware with Caching for Data Processing
 
-This middleware architecture enables consistent validation behavior across all agents while providing performance optimizations through caching and centralized error handling.
+This middleware architecture enables consistent validation behavior across all data processing agents while providing performance optimizations through caching and centralized error handling.
 
 ```python
-class ValidationMiddleware:
-    """Middleware for comprehensive validation in agent workflows."""
+class DataProcessingValidationMiddleware:
+    """Middleware for comprehensive validation in data processing agent workflows."""
     
     def __init__(self):
-        self.error_handler = ValidationErrorHandler()
+        self.error_handler = DataValidationErrorHandler()
         self.validation_cache: Dict[str, bool] = {}
+        self.performance_metrics = {
+            'cache_hits': 0,
+            'cache_misses': 0,
+            'validation_time_ms': []
+        }
     
     async def validate_input(self, data: Any, model_class: Type[BaseModel]) -> Dict[str, Any]:
-        """Validate input data with caching and error handling."""
+        """Validate input data with caching and performance monitoring for data processing."""
         
-        # Generate cache key
+        import time
+        start_time = time.time()
+        
+        # Generate cache key based on data content hash
         cache_key = f"{model_class.__name__}:{hash(str(data))}"
         
         if cache_key in self.validation_cache:
+            self.performance_metrics['cache_hits'] += 1
             return {'valid': True, 'cached': True}
 ```
 
@@ -482,11 +504,17 @@ Now we attempt validation and handle both success and failure cases:
             
             # Cache successful validation
             self.validation_cache[cache_key] = True
+            self.performance_metrics['cache_misses'] += 1
+            
+            # Record performance metrics
+            validation_time = (time.time() - start_time) * 1000
+            self.performance_metrics['validation_time_ms'].append(validation_time)
             
             return {
                 'valid': True,
                 'data': validated_instance.dict(),
                 'model': model_class.__name__,
+                'validation_time_ms': validation_time,
                 'cached': False
             }
 ```
@@ -495,12 +523,17 @@ Finally, we handle validation failures with detailed error reporting:
 
 ```python
         except Exception as e:
-            # Handle validation failure
+            # Handle validation failure with data processing context
             error_report = self.error_handler.handle_validation_error(e, model_class)
+            self.performance_metrics['cache_misses'] += 1
+            
+            validation_time = (time.time() - start_time) * 1000
+            self.performance_metrics['validation_time_ms'].append(validation_time)
             
             return {
                 'valid': False,
                 'error_report': error_report,
+                'validation_time_ms': validation_time,
                 'cached': False
             }
 ```
@@ -509,12 +542,12 @@ Finally, we handle validation failures with detailed error reporting:
 
 ## Module Summary
 
-You've now mastered advanced type systems in PydanticAI, including:
+You've now mastered advanced type systems in PydanticAI for data engineering, including:
 
-✅ **Complex Validation Patterns**: Built sophisticated cross-field validation with business logic  
-✅ **Enterprise Task Management**: Implemented real-world validation for complex business entities  
-✅ **Advanced Error Handling**: Created intelligent error reporting with suggestions and analytics  
-✅ **Validation Middleware**: Built performance-optimized validation systems with caching
+✅ **Complex Data Validation Patterns**: Built sophisticated cross-field validation with data processing business logic  
+✅ **Enterprise Streaming Data Management**: Implemented real-world validation for streaming events and data pipelines  
+✅ **Advanced Error Handling**: Created intelligent error reporting with data quality suggestions and analytics  
+✅ **Data Processing Middleware**: Built performance-optimized validation systems with caching for distributed data systems
 
 ---
 
@@ -522,34 +555,34 @@ You've now mastered advanced type systems in PydanticAI, including:
 
 Test your understanding of advanced type systems and validation patterns:
 
-**Question 1:** What validation approach does the CrossFieldValidator use for complex business logic?
+**Question 1:** What validation approach does the DataProcessingProfile use for feature vector quality?
 A) Simple field-by-field validation only  
-B) Cross-field validation with business rules and date logic  
-C) Basic type checking without business logic  
+B) Cross-field validation with NaN detection, infinite value checking, and reasonable bounds validation  
+C) Basic type checking without data quality logic  
 D) External API validation calls  
 
-**Question 2:** In the enterprise task validation system, what happens when budget exceeds $50,000?
-A) Task is automatically rejected  
-B) Requires executive approval flag to be set  
-C) Budget is automatically reduced  
-D) Task proceeds without additional validation  
+**Question 2:** In the streaming event validation system, what happens when time drift exceeds 1 hour?
+A) Event is automatically corrected  
+B) Validation error is raised with drift detection details  
+C) Event timestamp is automatically updated  
+D) Event proceeds without additional validation  
 
-**Question 3:** How does the ValidationErrorHandler categorize validation errors?
+**Question 3:** How does the DataValidationErrorHandler categorize data processing errors?
 A) Only by field name  
-B) By error type, severity, field, message, and suggestions  
+B) By error type, data impact assessment, field context, and data quality metrics  
 C) Simple true/false validation  
 D) Error code numbers only  
 
-**Question 4:** What performance optimization does the ValidationMiddleware implement?
+**Question 4:** What performance optimization does the DataProcessingValidationMiddleware implement?
 A) Database connection pooling  
-B) Validation result caching with hash-based keys  
+B) Validation result caching with hash-based keys and performance metrics tracking  
 C) Parallel processing only  
 D) Memory compression  
 
 **Question 5:** When a validation fails in the middleware, what information is included in the error report?
 A) Just the error message  
 B) Error type and field only  
-C) Complete error report with analytics, suggestions, and context  
+C) Complete error report with data quality impact, suggestions, and performance metrics  
 D) HTTP status code only  
 
 [**🗂️ View Test Solutions →**](Session5_ModuleA_Test_Solutions.md)
@@ -562,6 +595,6 @@ D) HTTP status code only
 ---
 
 **🗂️ Source Files for Module A:**
-- `src/session5/advanced_validation.py` - Complex validation patterns
-- `src/session5/enterprise_validation.py` - Enterprise task validation
-- `src/session5/error_handling.py` - Advanced error handling systems
+- `src/session5/advanced_validation.py` - Complex validation patterns for data processing
+- `src/session5/enterprise_validation.py` - Enterprise streaming data validation
+- `src/session5/error_handling.py` - Advanced error handling systems for data quality

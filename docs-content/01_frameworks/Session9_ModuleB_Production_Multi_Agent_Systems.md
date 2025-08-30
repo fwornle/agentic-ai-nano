@@ -1,21 +1,21 @@
-# Session 9 - Module B: Production Multi-Agent Systems
+# Session 9 - Module B: Production Multi-Agent Data Systems
 
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 9 core content first.
 
-This module explores enterprise-grade production deployment patterns for multi-agent systems including distributed monitoring, scalable orchestration, container-based deployment, service mesh integration, and operational excellence practices. You'll implement comprehensive monitoring and observability, design scalable deployment patterns with container orchestration, and build operational excellence practices.
+When Uber's data platform processes 100+ billion events daily through hundreds of specialized data processing agents, when Netflix's recommendation system coordinates 1000+ ML models across global data centers, when Amazon's supply chain optimizes through millions of distributed data agents - these aren't laboratory experiments. They're production systems that handle the world's most demanding real-time data processing workloads with perfect reliability.
+
+This module reveals the production patterns, deployment strategies, and operational practices that transform multi-agent data processing prototypes into mission-critical enterprise data infrastructure.
 
 ---
 
-## Part 1: Enterprise Monitoring & Observability
+## Part 1: Enterprise Deployment Patterns for Data Systems
 
-### Distributed Multi-Agent Monitoring
+### Containerized Data Processing Agents
 
-Production multi-agent systems require comprehensive monitoring to track performance, health, and inter-agent communication patterns. We'll build a distributed monitoring system that can handle metrics collection, alerting, and performance analysis across multiple agents.
+Modern data processing systems deploy agents as lightweight, scalable containers that can handle massive data throughput while maintaining perfect isolation and resource management. Here's how enterprise data teams build production-ready multi-agent data processing systems:
 
-🗂️ **File**: `src/session9/distributed_monitoring.py` - Comprehensive monitoring for multi-agent systems
-
-First, let's establish the foundational imports and data structures for our monitoring system:
+🗂️ **File**: `src/session9/production/containerized_deployment.py` - Enterprise container orchestration for data agents
 
 ```python
 from typing import Dict, List, Any, Optional
@@ -24,1487 +24,1237 @@ from datetime import datetime, timedelta
 import asyncio
 import json
 import logging
-from enum import Enum
-from collections import defaultdict, deque
-import time
-import psutil
-import aiohttp
-```
+import yaml
+from pathlib import Path
 
-Next, we define the core enumerations that categorize our monitoring data. These types help us organize metrics and alerts systematically:
-
-```python
-class MetricType(Enum):
-    """Types of metrics for multi-agent systems"""
-    COUNTER = "counter"      # Cumulative values (requests, errors)
-    GAUGE = "gauge"          # Point-in-time values (CPU, memory)
-    HISTOGRAM = "histogram"   # Distribution of values
-    SUMMARY = "summary"      # Quantile calculations
-
-class AlertSeverity(Enum):
-    """Alert severity levels for escalation"""
-    INFO = "info"            # Informational notices
-    WARNING = "warning"      # Potential issues
-    CRITICAL = "critical"    # Service affecting
-    EMERGENCY = "emergency"  # System-wide failure
-```
-
-Now we define the data structures that represent individual metrics and system alerts. These form the foundation of our monitoring data model:
-
-```python
 @dataclass
-class AgentMetric:
-    """Individual agent metric with metadata"""
+class DataProcessingResourceRequirements:
+    """Resource requirements for data processing agents in production"""
+    cpu_cores: float = 2.0
+    memory_gb: float = 4.0
+    storage_gb: float = 100.0
+    network_bandwidth_mbps: float = 1000.0
+    gpu_count: int = 0
+    data_throughput_rps: int = 10000  # Records per second
+    max_concurrent_streams: int = 16
+
+@dataclass 
+class DataAgentDeploymentConfig:
+    """Comprehensive deployment configuration for data processing agents"""
     agent_id: str
-    metric_name: str
-    metric_type: MetricType
-    value: float
-    timestamp: datetime = field(default_factory=datetime.now)
-    labels: Dict[str, str] = field(default_factory=dict)
-```
+    image: str
+    version: str
+    environment: str  # dev, staging, production
+    data_processing_config: Dict[str, Any] = field(default_factory=dict)
+    resource_requirements: DataProcessingResourceRequirements = field(default_factory=DataProcessingResourceRequirements)
+    scaling_config: Dict[str, Any] = field(default_factory=dict)
+    monitoring_config: Dict[str, Any] = field(default_factory=dict)
+    security_config: Dict[str, Any] = field(default_factory=dict)
+    data_compliance_tags: List[str] = field(default_factory=list)
 
-The SystemAlert class captures alert information with all necessary metadata for tracking and resolution:
-
-```python
-@dataclass
-class SystemAlert:
-    """System alert with tracking and resolution information"""
-    alert_id: str
-    alert_name: str
-    severity: AlertSeverity
-    description: str
-    affected_agents: List[str] = field(default_factory=list)
-    timestamp: datetime = field(default_factory=datetime.now)
-    resolved: bool = False
-    resolution_timestamp: Optional[datetime] = None
-```
-
-The DistributedMetricsCollector is the core component that orchestrates monitoring across multiple agents. It manages metric collection, aggregation, and alerting in a scalable, distributed manner.
-
-```python
-class DistributedMetricsCollector:
-    """Centralized metrics collection for multi-agent systems"""
+class EnterpriseDataAgentOrchestrator:
+    """Production orchestration system for multi-agent data processing deployments"""
     
-    def __init__(self, collection_interval: float = 30.0):
-        # Core collection settings
-        self.collection_interval = collection_interval
-        self.metrics_buffer: deque = deque(maxlen=10000)
-        self.agent_registry: Dict[str, Dict[str, Any]] = {}
-        self.metric_aggregations: Dict[str, List[float]] = defaultdict(list)
-        self.collection_tasks: Dict[str, asyncio.Task] = {}
-        self.logger = logging.getLogger(__name__)
-        
-        # Alerting system components
-        self.active_alerts: Dict[str, SystemAlert] = {}
-        self.alert_rules: List[Dict[str, Any]] = []
-        self.alert_handlers = []
-```
-
-The agent registration method allows new agents to join the monitoring system dynamically. This supports the elastic nature of production multi-agent systems:
-
-```python
-    async def register_agent(self, agent_id: str, agent_info: Dict[str, Any]):
-        """Register agent for monitoring with health tracking"""
-        
-        self.agent_registry[agent_id] = {
-            'agent_info': agent_info,
-            'registration_time': datetime.now(),
-            'last_heartbeat': datetime.now(),
-            'status': 'active',
-            'metrics_endpoint': agent_info.get('metrics_endpoint'),
-            'health_endpoint': agent_info.get('health_endpoint')
+    def __init__(self, cluster_config: Dict[str, Any]):
+        self.cluster_config = cluster_config
+        self.deployed_agents: Dict[str, DataAgentDeploymentConfig] = {}
+        self.resource_pool: Dict[str, Any] = {
+            'available_cpu': cluster_config.get('total_cpu_cores', 1000),
+            'available_memory_gb': cluster_config.get('total_memory_gb', 2000),
+            'available_storage_gb': cluster_config.get('total_storage_gb', 50000),
+            'available_gpu': cluster_config.get('total_gpu_count', 0)
         }
         
-        # Start asynchronous metric collection for this agent
-        if agent_id not in self.collection_tasks:
-            task = asyncio.create_task(self._collect_agent_metrics(agent_id))
-            self.collection_tasks[agent_id] = task
+        # Production monitoring and logging
+        self.deployment_metrics: Dict[str, Any] = {}
+        self.health_checks_active = True
         
-        self.logger.info(f"Registered agent {agent_id} for monitoring")
-```
-
-The metric collection loop runs continuously for each registered agent, gathering both custom metrics from agent endpoints and system-level performance data:
-
-```python
-    async def _collect_agent_metrics(self, agent_id: str):
-        """Continuous metric collection loop for individual agent"""
+        self.logger = logging.getLogger("EnterpriseDataOrchestrator")
         
-        while agent_id in self.agent_registry:
+    async def deploy_data_processing_cluster(self, 
+                                           agents_config: List[DataAgentDeploymentConfig]) -> Dict[str, Any]:
+        """Deploy complete multi-agent data processing cluster to production"""
+        
+        deployment_start_time = datetime.now()
+        deployment_results = []
+        
+        # Phase 1: Validate cluster-wide resource requirements for data processing
+        resource_validation = await self._validate_cluster_resources(agents_config)
+        if not resource_validation['sufficient']:
+            return {
+                'success': False,
+                'error': 'Insufficient cluster resources for data processing deployment',
+                'resource_gap': resource_validation['resource_gap']
+            }
+        
+        # Phase 2: Create production data processing network infrastructure
+        network_setup = await self._setup_production_data_network(agents_config)
+        if not network_setup['success']:
+            return {
+                'success': False,
+                'error': 'Failed to setup production data processing network',
+                'details': network_setup
+            }
+        
+        # Phase 3: Deploy data processing agents with dependency resolution
+        for agent_config in agents_config:
             try:
-                agent_info = self.agent_registry[agent_id]
-                metrics_endpoint = agent_info.get('metrics_endpoint')
+                # Deploy individual data processing agent
+                deployment_result = await self._deploy_single_data_agent(agent_config)
+                deployment_results.append(deployment_result)
                 
-                # Collect custom application metrics from agent
-                if metrics_endpoint:
-                    custom_metrics = await self._fetch_agent_metrics(agent_id, metrics_endpoint)
-                    for metric in custom_metrics:
-                        await self._process_metric(metric)
-                
-                # Collect system-level performance metrics
-                system_metrics = await self._collect_system_metrics(agent_id)
-                for metric in system_metrics:
-                    await self._process_metric(metric)
-                
-                # Update agent heartbeat and status
-                self.agent_registry[agent_id]['last_heartbeat'] = datetime.now()
-                self.agent_registry[agent_id]['status'] = 'active'
-                
+                if deployment_result['success']:
+                    # Update resource tracking for data processing capacity
+                    await self._update_resource_allocation(agent_config)
+                    self.deployed_agents[agent_config.agent_id] = agent_config
+                    
+                    self.logger.info(f"Successfully deployed data processing agent {agent_config.agent_id}")
+                else:
+                    self.logger.error(f"Failed to deploy data processing agent {agent_config.agent_id}: {deployment_result['error']}")
+                    # Continue with other agents instead of failing entire deployment
+                    
             except Exception as e:
-                self.logger.error(f"Failed to collect metrics from agent {agent_id}: {e}")
-                self.agent_registry[agent_id]['status'] = 'unhealthy'
-                await self._generate_agent_health_alert(agent_id, str(e))
-            
-            await asyncio.sleep(self.collection_interval)
-```
-
-The HTTP-based metric fetching method communicates with individual agents to collect their custom application metrics:
-
-```python
-    async def _fetch_agent_metrics(self, agent_id: str, endpoint: str) -> List[AgentMetric]:
-        """Fetch custom metrics from agent HTTP endpoint"""
+                self.logger.error(f"Exception deploying agent {agent_config.agent_id}: {e}")
+                deployment_results.append({
+                    'agent_id': agent_config.agent_id,
+                    'success': False,
+                    'error': str(e)
+                })
         
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(endpoint, timeout=10) as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        
-                        # Parse metrics from agent response
-                        metrics = []
-                        for metric_data in data.get('metrics', []):
-                            metric = AgentMetric(
-                                agent_id=agent_id,
-                                metric_name=metric_data['name'],
-                                metric_type=MetricType(metric_data.get('type', 'gauge')),
-                                value=float(metric_data['value']),
-                                labels=metric_data.get('labels', {})
-                            )
-                            metrics.append(metric)
-                        
-                        return metrics
-                        
-        except Exception as e:
-            self.logger.warning(f"Failed to fetch metrics from {endpoint}: {e}")
-            
-        return []  # Return empty list on failure
-```
-
-For system-level monitoring, we collect infrastructure metrics like CPU, memory, and network usage that apply to all agents:
-
-```python
-    async def _collect_system_metrics(self, agent_id: str) -> List[AgentMetric]:
-        """Collect system-level performance metrics"""
-        
-        # Note: In production, this would collect from the specific agent process
-        # Here we demonstrate with local system metrics as an example
-        
-        metrics = []
-        
-        # CPU usage monitoring
-        cpu_usage = psutil.cpu_percent()
-        metrics.append(AgentMetric(
-            agent_id=agent_id,
-            metric_name="system_cpu_usage",
-            metric_type=MetricType.GAUGE,
-            value=cpu_usage,
-            labels={"unit": "percent"}
-        ))
-        
-        # Memory usage tracking
-        memory = psutil.virtual_memory()
-        metrics.append(AgentMetric(
-            agent_id=agent_id,
-            metric_name="system_memory_usage",
-            metric_type=MetricType.GAUGE,
-            value=memory.percent,
-            labels={"unit": "percent"}
-        ))
-```
-
-Network I/O metrics help track inter-agent communication patterns and potential bottlenecks:
-
-```python
-        # Network I/O monitoring for communication patterns
-        network = psutil.net_io_counters()
-        metrics.append(AgentMetric(
-            agent_id=agent_id,
-            metric_name="network_bytes_sent",
-            metric_type=MetricType.COUNTER,
-            value=float(network.bytes_sent),
-            labels={"direction": "sent"}
-        ))
-        
-        metrics.append(AgentMetric(
-            agent_id=agent_id,
-            metric_name="network_bytes_recv",
-            metric_type=MetricType.COUNTER,
-            value=float(network.bytes_recv),
-            labels={"direction": "received"}
-        ))
-        
-        return metrics
-```
-
-The metric processing pipeline handles storage, aggregation, and real-time alert evaluation for each incoming metric:
-
-```python
-    async def _process_metric(self, metric: AgentMetric):
-        """Process, store, and evaluate metric for alerts"""
-        
-        # Store in circular buffer for recent access
-        self.metrics_buffer.append(metric)
-        
-        # Update rolling aggregations for trend analysis
-        metric_key = f"{metric.agent_id}:{metric.metric_name}"
-        self.metric_aggregations[metric_key].append(metric.value)
-        
-        # Maintain sliding window of recent values
-        if len(self.metric_aggregations[metric_key]) > 100:
-            self.metric_aggregations[metric_key] = \
-                self.metric_aggregations[metric_key][-50:]
-        
-        # Real-time alert rule evaluation
-        await self._check_alert_rules(metric)
-```
-
-The alert rule checking system evaluates each metric against configured alert conditions:
-
-```python
-    async def _check_alert_rules(self, metric: AgentMetric):
-        """Evaluate metric against all configured alert rules"""
-        
-        for rule in self.alert_rules:
-            if await self._evaluate_alert_rule(rule, metric):
-                await self._trigger_alert(rule, metric)
-```
-
-```python
-    async def _check_alert_rules(self, metric: AgentMetric):
-        """Check if metric triggers any alert rules"""
-        
-        for rule in self.alert_rules:
-            if await self._evaluate_alert_rule(rule, metric):
-                await self._trigger_alert(rule, metric)
-```
-
-Alert rule evaluation supports multiple condition types including threshold-based and rate-of-change detection:
-
-```python
-    async def _evaluate_alert_rule(self, rule: Dict[str, Any], metric: AgentMetric) -> bool:
-        """Evaluate if metric satisfies alert rule condition"""
-        
-        # Filter rules by metric name and agent
-        if rule.get('metric_name') and rule['metric_name'] != metric.metric_name:
-            return False
-        
-        if rule.get('agent_id') and rule['agent_id'] != metric.agent_id:
-            return False
-        
-        # Evaluate different condition types
-        condition_type = rule.get('condition_type', 'threshold')
-        
-        if condition_type == 'threshold':
-            return self._evaluate_threshold_condition(rule, metric)
-        elif condition_type == 'rate_of_change':
-            return self._evaluate_rate_condition(rule, metric)
-        
-        return False
-```
-
-Threshold evaluation handles various comparison operators:
-
-```python
-    def _evaluate_threshold_condition(self, rule: Dict[str, Any], metric: AgentMetric) -> bool:
-        """Evaluate threshold-based alert conditions"""
-        operator = rule.get('operator', '>')
-        threshold = rule.get('threshold', 0)
-        
-        if operator == '>':
-            return metric.value > threshold
-        elif operator == '<':
-            return metric.value < threshold
-        elif operator == '>=':
-            return metric.value >= threshold
-        elif operator == '<=':
-            return metric.value <= threshold
-        elif operator == '==':
-            return metric.value == threshold
-        elif operator == '!=':
-            return metric.value != threshold
-        
-        return False
-```
-
-Rate-of-change detection identifies trends in metric values:
-
-```python
-    def _evaluate_rate_condition(self, rule: Dict[str, Any], metric: AgentMetric) -> bool:
-        """Evaluate rate-of-change alert conditions"""
-        metric_key = f"{metric.agent_id}:{metric.metric_name}"
-        recent_values = self.metric_aggregations.get(metric_key, [])
-        
-        if len(recent_values) >= 2:
-            rate = (recent_values[-1] - recent_values[-2]) / self.collection_interval
-            return rate > rule.get('rate_threshold', 0)
-        
-        return False
-```
-
-When an alert condition is met, the system creates and distributes alert notifications to all registered handlers:
-
-```python
-    async def _trigger_alert(self, rule: Dict[str, Any], metric: AgentMetric):
-        """Create and distribute alert notifications"""
-        
-        alert_id = f"{rule['name']}:{metric.agent_id}:{metric.metric_name}"
-        
-        # Prevent duplicate alerts for the same condition
-        if alert_id in self.active_alerts and not self.active_alerts[alert_id].resolved:
-            return  # Alert already active
-        
-        # Create alert with contextual information
-        alert = SystemAlert(
-            alert_id=alert_id,
-            alert_name=rule['name'],
-            severity=AlertSeverity(rule.get('severity', 'warning')),
-            description=rule['description'].format(
-                agent_id=metric.agent_id,
-                metric_name=metric.metric_name,
-                value=metric.value
-            ),
-            affected_agents=[metric.agent_id]
+        # Phase 4: Establish data processing coordination and communication
+        coordination_setup = await self._setup_agent_coordination(
+            [r for r in deployment_results if r['success']]
         )
         
-        self.active_alerts[alert_id] = alert
+        # Phase 5: Start comprehensive production monitoring for data processing
+        monitoring_setup = await self._start_production_data_monitoring()
         
-        # Distribute to all registered alert handlers
-        for handler in self.alert_handlers:
-            try:
-                await handler(alert)
-            except Exception as e:
-                self.logger.error(f"Alert handler failed: {e}")
-        
-        self.logger.warning(f"Alert triggered: {alert.alert_name} for agent {metric.agent_id}")
-```
-
-Special health monitoring generates alerts when agents become unresponsive or experience critical errors:
-
-```python
-    async def _generate_agent_health_alert(self, agent_id: str, error: str):
-        """Generate critical health alerts for agent failures"""
-        
-        alert_id = f"agent_health:{agent_id}"
-        
-        # Only create new alert if not already active
-        if alert_id not in self.active_alerts or self.active_alerts[alert_id].resolved:
-            alert = SystemAlert(
-                alert_id=alert_id,
-                alert_name="Agent Health Issue",
-                severity=AlertSeverity.CRITICAL,
-                description=f"Agent {agent_id} is experiencing health issues: {error}",
-                affected_agents=[agent_id]
-            )
-            
-            self.active_alerts[alert_id] = alert
-            
-            # Notify all handlers of critical health issue
-            for handler in self.alert_handlers:
-                try:
-                    await handler(alert)
-                except Exception as e:
-                    self.logger.error(f"Alert handler failed: {e}")
-```
-
-The management interface allows dynamic configuration of alert rules and handlers:
-
-```python
-    def add_alert_rule(self, rule: Dict[str, Any]):
-        """Add new alert rule with validation"""
-        
-        required_fields = ['name', 'description', 'condition_type']
-        if not all(field in rule for field in required_fields):
-            raise ValueError(f"Alert rule must contain: {required_fields}")
-        
-        self.alert_rules.append(rule)
-        self.logger.info(f"Added alert rule: {rule['name']}")
-    
-    def add_alert_handler(self, handler: callable):
-        """Register new alert handler function"""
-        
-        self.alert_handlers.append(handler)
-```
-
-The system overview provides a comprehensive dashboard view of the entire multi-agent system health:
-
-```python
-    def get_system_overview(self) -> Dict[str, Any]:
-        """Generate comprehensive system health dashboard"""
-        
-        now = datetime.now()
-        
-        # Calculate agent status distribution
-        agent_status = {
-            'total_agents': len(self.agent_registry),
-            'active_agents': sum(1 for info in self.agent_registry.values() 
-                               if info['status'] == 'active'),
-            'unhealthy_agents': sum(1 for info in self.agent_registry.values() 
-                                  if info['status'] == 'unhealthy'),
-            'agents_detail': {}
-        }
-```
-
-Detailed agent information includes heartbeat tracking for availability monitoring:
-
-```python
-        # Build detailed agent status with heartbeat info
-        for agent_id, info in self.agent_registry.items():
-            last_heartbeat = info['last_heartbeat']
-            heartbeat_age = (now - last_heartbeat).total_seconds()
-            
-            agent_status['agents_detail'][agent_id] = {
-                'status': info['status'],
-                'last_heartbeat_seconds_ago': heartbeat_age,
-                'registration_time': info['registration_time'].isoformat()
-            }
-```
-
-Alert summary provides operational visibility into system issues:
-
-```python
-        # Categorize alerts by severity for operational priorities
-        alert_summary = {
-            'total_alerts': len(self.active_alerts),
-            'active_alerts': sum(1 for alert in self.active_alerts.values() 
-                               if not alert.resolved),
-            'critical_alerts': sum(1 for alert in self.active_alerts.values() 
-                                 if alert.severity == AlertSeverity.CRITICAL and not alert.resolved),
-            'warning_alerts': sum(1 for alert in self.active_alerts.values() 
-                                if alert.severity == AlertSeverity.WARNING and not alert.resolved)
-        }
-        
-        # Metrics collection statistics
-        metrics_summary = {
-            'total_metrics_collected': len(self.metrics_buffer),
-            'unique_metric_types': len(set(f"{metric.agent_id}:{metric.metric_name}" 
-                                         for metric in self.metrics_buffer)),
-            'collection_interval_seconds': self.collection_interval
-        }
+        successful_deployments = [r for r in deployment_results if r['success']]
+        deployment_duration = datetime.now() - deployment_start_time
         
         return {
-            'system_overview': {
-                'timestamp': now.isoformat(),
-                'agents': agent_status,
-                'alerts': alert_summary,
-                'metrics': metrics_summary
-            }
-        }
-```
-
-Performance reporting provides historical analysis and trend identification for capacity planning:
-
-```python
-    async def generate_performance_report(self, time_window_hours: int = 24) -> Dict[str, Any]:
-        """Generate comprehensive performance analysis report"""
-        
-        cutoff_time = datetime.now() - timedelta(hours=time_window_hours)
-        
-        # Filter metrics to analysis time window
-        recent_metrics = [metric for metric in self.metrics_buffer 
-                         if metric.timestamp >= cutoff_time]
-        
-        # Calculate per-agent performance metrics
-        agent_performance = {}
-        for agent_id in self.agent_registry.keys():
-            agent_metrics = [m for m in recent_metrics if m.agent_id == agent_id]
-            
-            if agent_metrics:
-                agent_performance[agent_id] = self._analyze_agent_performance(agent_id, agent_metrics)
-```
-
-The agent performance analysis calculates key performance indicators for operational insight:
-
-```python
-    def _analyze_agent_performance(self, agent_id: str, agent_metrics: List[AgentMetric]) -> Dict[str, Any]:
-        """Analyze individual agent performance metrics"""
-        
-        # Extract performance metrics by type
-        cpu_metrics = [m.value for m in agent_metrics if m.metric_name == 'system_cpu_usage']
-        memory_metrics = [m.value for m in agent_metrics if m.metric_name == 'system_memory_usage']
-        
-        return {
-            'total_metrics': len(agent_metrics),
-            'avg_cpu_usage': sum(cpu_metrics) / len(cpu_metrics) if cpu_metrics else 0,
-            'max_cpu_usage': max(cpu_metrics) if cpu_metrics else 0,
-            'avg_memory_usage': sum(memory_metrics) / len(memory_metrics) if memory_metrics else 0,
-            'max_memory_usage': max(memory_metrics) if memory_metrics else 0,
-            'health_score': self._calculate_agent_health_score(agent_id, agent_metrics)
-        }
-```
-
-System-wide trend analysis identifies patterns across the entire multi-agent system:
-
-```python
-        # Calculate system-wide performance trends
-        system_trends = {
-            'total_metrics_in_window': len(recent_metrics),
-            'average_system_cpu': self._calculate_average_metric(recent_metrics, 'system_cpu_usage'),
-            'average_system_memory': self._calculate_average_metric(recent_metrics, 'system_memory_usage')
-        }
-        
-        return {
-            'performance_report': {
-                'time_window_hours': time_window_hours,
-                'report_timestamp': datetime.now().isoformat(),
-                'agent_performance': agent_performance,
-                'system_trends': system_trends,
-                'recommendations': self._generate_performance_recommendations(agent_performance)
-            }
+            'success': len(successful_deployments) > 0,
+            'deployed_agents': len(successful_deployments),
+            'failed_agents': len(deployment_results) - len(successful_deployments),
+            'deployment_results': deployment_results,
+            'coordination_established': coordination_setup['success'],
+            'monitoring_active': monitoring_setup['success'],
+            'deployment_duration_seconds': deployment_duration.total_seconds(),
+            'cluster_health': await self._assess_cluster_health()
         }
     
-    def _calculate_average_metric(self, metrics: List[AgentMetric], metric_name: str) -> float:
-        """Calculate average value for specific metric type"""
-        values = [m.value for m in metrics if m.metric_name == metric_name]
-        return sum(values) / len(values) if values else 0
-```
-
-The health scoring algorithm provides a composite view of agent wellness based on multiple factors:
-
-```python
-    def _calculate_agent_health_score(self, agent_id: str, 
-                                    recent_metrics: List[AgentMetric]) -> float:
-        """Calculate composite health score (0-100) for agent"""
+    async def _deploy_single_data_agent(self, agent_config: DataAgentDeploymentConfig) -> Dict[str, Any]:
+        """Deploy individual data processing agent with production configuration"""
         
-        if not recent_metrics:
-            return 0.0
+        # Generate production-grade Kubernetes deployment manifest
+        k8s_manifest = await self._generate_kubernetes_manifest(agent_config)
         
-        # Start with perfect health score
-        health_score = 100.0
+        # Apply security configurations for data processing
+        security_manifest = await self._apply_security_configurations(agent_config)
         
-        # Factor 1: CPU utilization impact
-        cpu_metrics = [m.value for m in recent_metrics if m.metric_name == 'system_cpu_usage']
-        if cpu_metrics:
-            avg_cpu = sum(cpu_metrics) / len(cpu_metrics)
-            if avg_cpu > 80:
-                health_score -= 30  # Critical CPU usage
-            elif avg_cpu > 60:
-                health_score -= 15  # High CPU usage
+        # Setup data processing specific configurations
+        data_config_manifest = await self._setup_data_processing_config(agent_config)
         
-        # Factor 2: Memory utilization impact
-        memory_metrics = [m.value for m in recent_metrics if m.metric_name == 'system_memory_usage']
-        if memory_metrics:
-            avg_memory = sum(memory_metrics) / len(memory_metrics)
-            if avg_memory > 85:
-                health_score -= 25  # Critical memory usage
-            elif avg_memory > 70:
-                health_score -= 10  # High memory usage
-```
-
-Additional health factors include agent status and active alerts:
-
-```python
-        # Factor 3: Agent operational status
-        agent_info = self.agent_registry.get(agent_id, {})
-        if agent_info.get('status') != 'active':
-            health_score -= 50  # Major penalty for non-active agents
+        # Deploy to Kubernetes cluster
+        deployment_command = [
+            'kubectl', 'apply', '-f', '-'
+        ]
         
-        # Factor 4: Active alert impact
-        agent_alerts = [alert for alert in self.active_alerts.values() 
-                       if agent_id in alert.affected_agents and not alert.resolved]
-        health_score -= len(agent_alerts) * 10  # 10 points per active alert
-        
-        return max(0.0, min(100.0, health_score))  # Clamp to 0-100 range
-```
-
-Performance recommendations provide actionable insights for system optimization:
-
-```python
-    def _generate_performance_recommendations(self, 
-                                           agent_performance: Dict[str, Any]) -> List[str]:
-        """Generate actionable performance optimization recommendations"""
-        
-        recommendations = []
-        
-        # Analyze each agent's performance patterns
-        for agent_id, perf in agent_performance.items():
-            if perf['health_score'] < 70:
-                recommendations.append(
-                    f"Agent {agent_id} has low health score ({perf['health_score']:.1f}), investigate resource usage"
-                )
-            
-            if perf['avg_cpu_usage'] > 70:
-                recommendations.append(
-                    f"Agent {agent_id} showing high CPU usage ({perf['avg_cpu_usage']:.1f}%), consider scaling"
-                )
-            
-            if perf['avg_memory_usage'] > 80:
-                recommendations.append(
-                    f"Agent {agent_id} showing high memory usage ({perf['avg_memory_usage']:.1f}%), check for memory leaks"
-                )
-        
-        # System-wide health analysis
-        unhealthy_count = sum(1 for perf in agent_performance.values() if perf['health_score'] < 70)
-        if unhealthy_count > len(agent_performance) * 0.3:
-            recommendations.append(
-                "More than 30% of agents are unhealthy, investigate system-wide issues"
-            )
-        
-        return recommendations
-```
-
-Distributed tracing tracks request flows and interactions across multiple agents, enabling performance analysis and debugging of complex multi-agent workflows.
-
-```python
-class DistributedTracing:
-    """Distributed tracing for multi-agent interaction analysis"""
-    
-    def __init__(self):
-        self.traces: Dict[str, Dict[str, Any]] = {}  # Active traces
-        self.span_buffer: deque = deque(maxlen=10000)  # Recent spans
-```
-
-Starting a new trace creates a unique identifier that follows a request through multiple agents:
-
-```python
-    async def start_trace(self, trace_id: str, operation: str, 
-                         agent_id: str, metadata: Dict[str, Any] = None) -> str:
-        """Start a new distributed trace span"""
-        
-        # Generate unique span identifier
-        span_id = f"{trace_id}:{agent_id}:{int(time.time() * 1000)}"
-        
-        # Create span with timing and context information
-        span = {
-            'trace_id': trace_id,
-            'span_id': span_id,
-            'parent_span_id': None,
-            'operation': operation,
-            'agent_id': agent_id,
-            'start_time': datetime.now(),
-            'end_time': None,
-            'duration_ms': None,
-            'status': 'active',
-            'metadata': metadata or {},
-            'logs': []
+        full_manifest = {
+            **k8s_manifest,
+            **security_manifest,
+            **data_config_manifest
         }
         
-        # Initialize trace if not exists
-        if trace_id not in self.traces:
-            self.traces[trace_id] = {
-                'trace_id': trace_id,
-                'start_time': datetime.now(),
-                'spans': {}
-            }
-        
-        # Store span in trace and buffer
-        self.traces[trace_id]['spans'][span_id] = span
-        self.span_buffer.append(span)
-        
-        return span_id
-```
-
-Span completion records timing and outcome information for performance analysis:
-
-```python
-    async def finish_span(self, span_id: str, status: str = 'completed', 
-                         metadata: Dict[str, Any] = None):
-        """Complete a trace span with timing and status"""
-        
-        # Locate span across all active traces
-        span = None
-        for trace in self.traces.values():
-            if span_id in trace['spans']:
-                span = trace['spans'][span_id]
-                break
-        
-        if span:
-            # Record completion timing
-            span['end_time'] = datetime.now()
-            span['duration_ms'] = (span['end_time'] - span['start_time']).total_seconds() * 1000
-            span['status'] = status
+        try:
+            # In production, would use kubectl or K8s Python client
+            deployment_result = await self._execute_kubectl_deployment(full_manifest)
             
-            # Merge additional metadata
-            if metadata:
-                span['metadata'].update(metadata)
-```
-
-Trace analysis provides insights into multi-agent workflow performance and bottlenecks:
-
-```python
-    def get_trace_analysis(self, trace_id: str) -> Dict[str, Any]:
-        """Analyze trace for performance insights and bottlenecks"""
-        
-        if trace_id not in self.traces:
-            return {'error': 'Trace not found'}
-        
-        trace = self.traces[trace_id]
-        spans = trace['spans']
-        
-        # Filter to completed spans for analysis
-        completed_spans = [s for s in spans.values() if s['status'] == 'completed']
-        
-        if not completed_spans:
-            return {'error': 'No completed spans in trace'}
-        
-        # Calculate timing statistics
-        total_duration = max(s['duration_ms'] for s in completed_spans)
-        avg_duration = sum(s['duration_ms'] for s in completed_spans) / len(completed_spans)
-```
-
-Agent participation analysis shows how work is distributed across the multi-agent system:
-
-```python
-        # Analyze agent participation patterns
-        agent_participation = {}
-        for span in completed_spans:
-            agent_id = span['agent_id']
-            if agent_id not in agent_participation:
-                agent_participation[agent_id] = {
-                    'span_count': 0,
-                    'total_duration_ms': 0,
-                    'operations': []
+            if deployment_result['success']:
+                # Wait for data processing agent to be ready
+                readiness_check = await self._wait_for_agent_readiness(
+                    agent_config.agent_id, timeout_seconds=300
+                )
+                
+                if readiness_check['ready']:
+                    # Run data processing health checks
+                    health_check = await self._run_data_processing_health_checks(agent_config)
+                    
+                    return {
+                        'success': health_check['healthy'],
+                        'agent_id': agent_config.agent_id,
+                        'deployment_details': deployment_result,
+                        'health_status': health_check,
+                        'ready_time_seconds': readiness_check['ready_time_seconds']
+                    }
+                else:
+                    return {
+                        'success': False,
+                        'error': 'Data processing agent failed readiness check',
+                        'readiness_details': readiness_check
+                    }
+            else:
+                return {
+                    'success': False,
+                    'error': 'Kubernetes deployment failed for data processing agent',
+                    'deployment_details': deployment_result
                 }
+                
+        except Exception as e:
+            return {
+                'success': False,
+                'error': f'Exception during data processing agent deployment: {str(e)}'
+            }
+    
+    async def _generate_kubernetes_manifest(self, agent_config: DataAgentDeploymentConfig) -> Dict[str, Any]:
+        """Generate production Kubernetes manifest for data processing agent"""
+        
+        # Resource specifications optimized for data processing workloads
+        resource_limits = {
+            'cpu': f"{agent_config.resource_requirements.cpu_cores}",
+            'memory': f"{agent_config.resource_requirements.memory_gb}Gi",
+            'ephemeral-storage': f"{agent_config.resource_requirements.storage_gb}Gi"
+        }
+        
+        resource_requests = {
+            'cpu': f"{agent_config.resource_requirements.cpu_cores * 0.5}",
+            'memory': f"{agent_config.resource_requirements.memory_gb * 0.8}Gi",
+            'ephemeral-storage': f"{agent_config.resource_requirements.storage_gb * 0.5}Gi"
+        }
+        
+        # Add GPU resources if needed for ML data processing
+        if agent_config.resource_requirements.gpu_count > 0:
+            resource_limits['nvidia.com/gpu'] = str(agent_config.resource_requirements.gpu_count)
+            resource_requests['nvidia.com/gpu'] = str(agent_config.resource_requirements.gpu_count)
+        
+        # Environment variables for data processing configuration
+        env_vars = [
+            {'name': 'AGENT_ID', 'value': agent_config.agent_id},
+            {'name': 'ENVIRONMENT', 'value': agent_config.environment},
+            {'name': 'DATA_THROUGHPUT_TARGET', 'value': str(agent_config.resource_requirements.data_throughput_rps)},
+            {'name': 'MAX_CONCURRENT_STREAMS', 'value': str(agent_config.resource_requirements.max_concurrent_streams)},
+            {'name': 'LOG_LEVEL', 'value': 'INFO'},
+            {'name': 'METRICS_ENABLED', 'value': 'true'},
+        ]
+        
+        # Add data processing specific environment variables
+        for key, value in agent_config.data_processing_config.items():
+            env_vars.append({
+                'name': f'DATA_CONFIG_{key.upper()}',
+                'value': str(value)
+            })
+        
+        # Production health checks for data processing
+        liveness_probe = {
+            'httpGet': {
+                'path': '/health/liveness',
+                'port': 8080
+            },
+            'initialDelaySeconds': 30,
+            'periodSeconds': 10,
+            'timeoutSeconds': 5,
+            'failureThreshold': 3
+        }
+        
+        readiness_probe = {
+            'httpGet': {
+                'path': '/health/readiness', 
+                'port': 8080
+            },
+            'initialDelaySeconds': 5,
+            'periodSeconds': 5,
+            'timeoutSeconds': 3,
+            'failureThreshold': 3
+        }
+        
+        # Complete Kubernetes deployment manifest
+        manifest = {
+            'apiVersion': 'apps/v1',
+            'kind': 'Deployment',
+            'metadata': {
+                'name': f"data-agent-{agent_config.agent_id}",
+                'namespace': 'data-processing',
+                'labels': {
+                    'app': 'data-agent',
+                    'agent-id': agent_config.agent_id,
+                    'environment': agent_config.environment,
+                    'version': agent_config.version,
+                    'data-processing': 'true'
+                }
+            },
+            'spec': {
+                'replicas': agent_config.scaling_config.get('initial_replicas', 1),
+                'selector': {
+                    'matchLabels': {
+                        'app': 'data-agent',
+                        'agent-id': agent_config.agent_id
+                    }
+                },
+                'template': {
+                    'metadata': {
+                        'labels': {
+                            'app': 'data-agent',
+                            'agent-id': agent_config.agent_id,
+                            'environment': agent_config.environment,
+                            'version': agent_config.version
+                        },
+                        'annotations': {
+                            'prometheus.io/scrape': 'true',
+                            'prometheus.io/path': '/metrics',
+                            'prometheus.io/port': '8080'
+                        }
+                    },
+                    'spec': {
+                        'containers': [{
+                            'name': 'data-agent',
+                            'image': f"{agent_config.image}:{agent_config.version}",
+                            'ports': [
+                                {'containerPort': 8080, 'name': 'http-metrics'},
+                                {'containerPort': 8081, 'name': 'grpc-data'},
+                                {'containerPort': 8082, 'name': 'http-admin'}
+                            ],
+                            'env': env_vars,
+                            'resources': {
+                                'limits': resource_limits,
+                                'requests': resource_requests
+                            },
+                            'livenessProbe': liveness_probe,
+                            'readinessProbe': readiness_probe,
+                            'volumeMounts': [
+                                {
+                                    'name': 'data-processing-config',
+                                    'mountPath': '/etc/agent/config'
+                                },
+                                {
+                                    'name': 'data-storage',
+                                    'mountPath': '/data'
+                                }
+                            ]
+                        }],
+                        'volumes': [
+                            {
+                                'name': 'data-processing-config',
+                                'configMap': {
+                                    'name': f"data-agent-{agent_config.agent_id}-config"
+                                }
+                            },
+                            {
+                                'name': 'data-storage',
+                                'persistentVolumeClaim': {
+                                    'claimName': f"data-agent-{agent_config.agent_id}-storage"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+        
+        return manifest
+    
+    async def scale_data_processing_agent(self, agent_id: str, 
+                                        target_replicas: int,
+                                        scaling_reason: str = "manual") -> Dict[str, Any]:
+        """Scale data processing agent replicas based on load or manual intervention"""
+        
+        if agent_id not in self.deployed_agents:
+            return {
+                'success': False,
+                'error': f'Data processing agent {agent_id} not found in deployment registry'
+            }
+        
+        agent_config = self.deployed_agents[agent_id]
+        current_replicas = await self._get_current_replica_count(agent_id)
+        
+        # Validate scaling constraints for data processing workloads
+        scaling_validation = await self._validate_scaling_request(
+            agent_config, current_replicas, target_replicas
+        )
+        
+        if not scaling_validation['valid']:
+            return {
+                'success': False,
+                'error': scaling_validation['reason'],
+                'current_replicas': current_replicas,
+                'requested_replicas': target_replicas
+            }
+        
+        try:
+            # Execute Kubernetes scaling for data processing
+            scaling_result = await self._execute_kubernetes_scaling(
+                agent_id, target_replicas
+            )
             
-            # Aggregate agent statistics
-            agent_participation[agent_id]['span_count'] += 1
-            agent_participation[agent_id]['total_duration_ms'] += span['duration_ms']
-            agent_participation[agent_id]['operations'].append(span['operation'])
+            if scaling_result['success']:
+                # Update deployment tracking
+                agent_config.scaling_config['current_replicas'] = target_replicas
+                
+                # Log scaling event for data processing monitoring
+                await self._log_scaling_event({
+                    'agent_id': agent_id,
+                    'from_replicas': current_replicas,
+                    'to_replicas': target_replicas,
+                    'reason': scaling_reason,
+                    'timestamp': datetime.now(),
+                    'scaling_duration_seconds': scaling_result['duration_seconds']
+                })
+                
+                self.logger.info(f"Scaled data processing agent {agent_id} from {current_replicas} to {target_replicas} replicas")
+                
+                return {
+                    'success': True,
+                    'agent_id': agent_id,
+                    'previous_replicas': current_replicas,
+                    'new_replicas': target_replicas,
+                    'scaling_duration_seconds': scaling_result['duration_seconds']
+                }
+            else:
+                return {
+                    'success': False,
+                    'error': 'Kubernetes scaling operation failed for data processing agent',
+                    'scaling_details': scaling_result
+                }
+                
+        except Exception as e:
+            self.logger.error(f"Exception during data processing agent scaling: {e}")
+            return {
+                'success': False,
+                'error': f'Exception during scaling: {str(e)}'
+            }
+    
+    async def get_cluster_status(self) -> Dict[str, Any]:
+        """Get comprehensive status of data processing cluster"""
+        
+        cluster_metrics = {
+            'deployed_agents': len(self.deployed_agents),
+            'total_resource_utilization': await self._calculate_resource_utilization(),
+            'cluster_health_score': await self._assess_cluster_health(),
+            'data_processing_throughput': await self._calculate_cluster_throughput(),
+            'active_data_streams': await self._count_active_data_streams()
+        }
+        
+        # Agent-specific status for data processing
+        agent_status = {}
+        for agent_id, config in self.deployed_agents.items():
+            agent_status[agent_id] = await self._get_agent_detailed_status(agent_id)
+        
+        # Resource pool status for data processing capacity planning
+        resource_status = {
+            'cpu_utilization_percent': (
+                (self.cluster_config['total_cpu_cores'] - self.resource_pool['available_cpu']) /
+                self.cluster_config['total_cpu_cores'] * 100
+            ),
+            'memory_utilization_percent': (
+                (self.cluster_config['total_memory_gb'] - self.resource_pool['available_memory_gb']) /
+                self.cluster_config['total_memory_gb'] * 100
+            ),
+            'storage_utilization_percent': (
+                (self.cluster_config['total_storage_gb'] - self.resource_pool['available_storage_gb']) /
+                self.cluster_config['total_storage_gb'] * 100
+            )
+        }
         
         return {
-            'trace_id': trace_id,
-            'total_spans': len(spans),
-            'completed_spans': len(completed_spans),
-            'total_duration_ms': total_duration,
-            'average_span_duration_ms': avg_duration,
-            'agent_participation': agent_participation,
-            'critical_path': self._find_critical_path(completed_spans)
+            'timestamp': datetime.now().isoformat(),
+            'cluster_metrics': cluster_metrics,
+            'agent_status': agent_status,
+            'resource_status': resource_status,
+            'deployment_history': await self._get_recent_deployment_history(),
+            'scaling_events': await self._get_recent_scaling_events()
         }
 ```
 
-Critical path analysis identifies the longest-running operations that determine overall trace duration:
+### Auto-scaling and Load Balancing for Data Processing Workloads
+
+Enterprise data processing systems must handle massive traffic spikes - from daily batch processing peaks to real-time stream processing surges. Here's how production systems implement intelligent auto-scaling that maintains perfect performance while optimizing costs:
+
+🗂️ **File**: `src/session9/production/autoscaling_system.py` - Intelligent auto-scaling for data processing agents
 
 ```python
-    def _find_critical_path(self, spans: List[Dict[str, Any]]) -> List[str]:
-        """Identify critical path through trace spans"""
+from typing import Dict, List, Any, Optional, Tuple
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta
+from enum import Enum
+import asyncio
+import statistics
+import logging
+
+class DataProcessingScalingTrigger(Enum):
+    """Triggers that initiate scaling for data processing workloads"""
+    DATA_THROUGHPUT_HIGH = "data_throughput_high"
+    DATA_THROUGHPUT_LOW = "data_throughput_low"
+    QUEUE_DEPTH_HIGH = "queue_depth_high"
+    CPU_UTILIZATION_HIGH = "cpu_utilization_high"
+    MEMORY_UTILIZATION_HIGH = "memory_utilization_high"
+    PROCESSING_LATENCY_HIGH = "processing_latency_high"
+    PREDICTIVE_SCALE_UP = "predictive_scale_up"
+    PREDICTIVE_SCALE_DOWN = "predictive_scale_down"
+    MANUAL_OVERRIDE = "manual_override"
+
+@dataclass
+class DataProcessingMetrics:
+    """Real-time metrics for data processing agent performance"""
+    agent_id: str
+    timestamp: datetime
+    
+    # Data processing throughput metrics
+    records_processed_per_second: float
+    data_bytes_processed_per_second: float
+    active_data_streams: int
+    
+    # Resource utilization metrics
+    cpu_utilization_percent: float
+    memory_utilization_percent: float
+    storage_utilization_percent: float
+    
+    # Data processing quality metrics
+    average_processing_latency_ms: float
+    error_rate_percent: float
+    data_quality_score: float
+    
+    # Queue and buffer metrics
+    input_queue_depth: int
+    output_queue_depth: int
+    buffer_utilization_percent: float
+
+@dataclass
+class DataProcessingScalingPolicy:
+    """Scaling policy configuration for data processing agents"""
+    policy_id: str
+    agent_id: str
+    
+    # Scaling thresholds for data processing
+    scale_up_cpu_threshold: float = 75.0
+    scale_down_cpu_threshold: float = 25.0
+    scale_up_throughput_threshold: float = 80.0  # Percentage of max throughput
+    scale_down_throughput_threshold: float = 20.0
+    scale_up_latency_threshold_ms: float = 1000.0
+    scale_up_queue_depth_threshold: int = 10000
+    
+    # Scaling constraints
+    min_replicas: int = 1
+    max_replicas: int = 50
+    scale_up_increment: int = 2
+    scale_down_increment: int = 1
+    cooldown_period_minutes: int = 5
+    
+    # Advanced policies for data processing
+    predictive_scaling_enabled: bool = True
+    batch_processing_aware: bool = True
+    data_locality_optimization: bool = True
+    cost_optimization_enabled: bool = True
+
+class DataProcessingAutoScaler:
+    """Intelligent auto-scaling system for data processing agents"""
+    
+    def __init__(self, orchestrator: 'EnterpriseDataAgentOrchestrator'):
+        self.orchestrator = orchestrator
+        self.scaling_policies: Dict[str, DataProcessingScalingPolicy] = {}
+        self.metrics_history: Dict[str, List[DataProcessingMetrics]] = {}
+        self.scaling_events: List[Dict[str, Any]] = []
         
-        # Simplified critical path - longest duration spans
-        sorted_spans = sorted(spans, key=lambda s: s['duration_ms'], reverse=True)
+        # Auto-scaling engine state
+        self.monitoring_active = False
+        self.scaling_in_progress: Dict[str, bool] = {}
         
-        # Return top 3 longest operations as critical path indicators
-        return [f"{s['agent_id']}:{s['operation']}" for s in sorted_spans[:3]]
+        # Predictive scaling model
+        self.prediction_model = DataProcessingPredictionModel()
+        
+        self.logger = logging.getLogger("DataProcessingAutoScaler")
+        
+    async def register_scaling_policy(self, policy: DataProcessingScalingPolicy) -> Dict[str, Any]:
+        """Register auto-scaling policy for data processing agent"""
+        
+        # Validate policy configuration
+        validation_result = await self._validate_scaling_policy(policy)
+        if not validation_result['valid']:
+            return {
+                'success': False,
+                'error': validation_result['error']
+            }
+        
+        # Store policy and initialize metrics tracking
+        self.scaling_policies[policy.agent_id] = policy
+        self.metrics_history[policy.agent_id] = []
+        self.scaling_in_progress[policy.agent_id] = False
+        
+        self.logger.info(f"Registered auto-scaling policy for data processing agent {policy.agent_id}")
+        
+        return {
+            'success': True,
+            'policy_id': policy.policy_id,
+            'agent_id': policy.agent_id
+        }
+    
+    async def start_monitoring(self) -> Dict[str, Any]:
+        """Start continuous monitoring and auto-scaling for data processing agents"""
+        
+        if self.monitoring_active:
+            return {'success': False, 'error': 'Auto-scaling monitoring already active'}
+        
+        self.monitoring_active = True
+        
+        # Start monitoring loop
+        asyncio.create_task(self._monitoring_loop())
+        
+        self.logger.info("Started auto-scaling monitoring for data processing agents")
+        
+        return {
+            'success': True,
+            'monitored_agents': len(self.scaling_policies),
+            'monitoring_start_time': datetime.now().isoformat()
+        }
+    
+    async def _monitoring_loop(self):
+        """Main monitoring loop for auto-scaling decisions"""
+        
+        while self.monitoring_active:
+            try:
+                # Collect metrics from all data processing agents
+                current_metrics = await self._collect_agent_metrics()
+                
+                # Process scaling decisions for each agent
+                for agent_id in self.scaling_policies.keys():
+                    if agent_id in current_metrics:
+                        await self._process_agent_scaling(agent_id, current_metrics[agent_id])
+                
+                # Predictive scaling analysis
+                await self._run_predictive_scaling_analysis()
+                
+                # Wait before next monitoring cycle
+                await asyncio.sleep(30)  # Monitor every 30 seconds
+                
+            except Exception as e:
+                self.logger.error(f"Error in auto-scaling monitoring loop: {e}")
+                await asyncio.sleep(60)  # Wait longer if there's an error
+    
+    async def _process_agent_scaling(self, agent_id: str, metrics: DataProcessingMetrics):
+        """Process scaling decisions for individual data processing agent"""
+        
+        if self.scaling_in_progress.get(agent_id, False):
+            return  # Skip if scaling operation already in progress
+        
+        policy = self.scaling_policies[agent_id]
+        
+        # Store metrics in history for trend analysis
+        self.metrics_history[agent_id].append(metrics)
+        
+        # Keep only recent metrics (last 24 hours)
+        cutoff_time = datetime.now() - timedelta(hours=24)
+        self.metrics_history[agent_id] = [
+            m for m in self.metrics_history[agent_id] 
+            if m.timestamp >= cutoff_time
+        ]
+        
+        # Analyze scaling triggers for data processing
+        scaling_decision = await self._analyze_scaling_triggers(agent_id, metrics, policy)
+        
+        if scaling_decision['action'] != 'no_action':
+            await self._execute_scaling_decision(agent_id, scaling_decision)
+    
+    async def _analyze_scaling_triggers(self, 
+                                      agent_id: str,
+                                      current_metrics: DataProcessingMetrics,
+                                      policy: DataProcessingScalingPolicy) -> Dict[str, Any]:
+        """Analyze current metrics against scaling triggers for data processing"""
+        
+        # Get current replica count
+        current_replicas = await self.orchestrator._get_current_replica_count(agent_id)
+        
+        # Check cooldown period
+        if not await self._check_cooldown_period(agent_id, policy.cooldown_period_minutes):
+            return {'action': 'no_action', 'reason': 'cooldown_period_active'}
+        
+        # Scale up triggers for data processing workloads
+        scale_up_triggers = []
+        
+        # CPU utilization trigger
+        if current_metrics.cpu_utilization_percent > policy.scale_up_cpu_threshold:
+            scale_up_triggers.append({
+                'trigger': DataProcessingScalingTrigger.CPU_UTILIZATION_HIGH,
+                'value': current_metrics.cpu_utilization_percent,
+                'threshold': policy.scale_up_cpu_threshold,
+                'priority': 3
+            })
+        
+        # Memory utilization trigger
+        if current_metrics.memory_utilization_percent > policy.scale_up_cpu_threshold:  # Use same threshold
+            scale_up_triggers.append({
+                'trigger': DataProcessingScalingTrigger.MEMORY_UTILIZATION_HIGH,
+                'value': current_metrics.memory_utilization_percent,
+                'threshold': policy.scale_up_cpu_threshold,
+                'priority': 3
+            })
+        
+        # Data throughput trigger
+        max_throughput = await self._estimate_max_throughput(agent_id)
+        throughput_utilization = (current_metrics.records_processed_per_second / max_throughput) * 100
+        
+        if throughput_utilization > policy.scale_up_throughput_threshold:
+            scale_up_triggers.append({
+                'trigger': DataProcessingScalingTrigger.DATA_THROUGHPUT_HIGH,
+                'value': throughput_utilization,
+                'threshold': policy.scale_up_throughput_threshold,
+                'priority': 4  # Higher priority for data processing
+            })
+        
+        # Processing latency trigger
+        if current_metrics.average_processing_latency_ms > policy.scale_up_latency_threshold_ms:
+            scale_up_triggers.append({
+                'trigger': DataProcessingScalingTrigger.PROCESSING_LATENCY_HIGH,
+                'value': current_metrics.average_processing_latency_ms,
+                'threshold': policy.scale_up_latency_threshold_ms,
+                'priority': 4
+            })
+        
+        # Queue depth trigger
+        if current_metrics.input_queue_depth > policy.scale_up_queue_depth_threshold:
+            scale_up_triggers.append({
+                'trigger': DataProcessingScalingTrigger.QUEUE_DEPTH_HIGH,
+                'value': current_metrics.input_queue_depth,
+                'threshold': policy.scale_up_queue_depth_threshold,
+                'priority': 5  # Highest priority - queue buildup is critical
+            })
+        
+        # Scale down triggers for data processing cost optimization
+        scale_down_triggers = []
+        
+        # Check if we can scale down based on low utilization
+        if (current_metrics.cpu_utilization_percent < policy.scale_down_cpu_threshold and
+            throughput_utilization < policy.scale_down_throughput_threshold and
+            current_metrics.input_queue_depth < 100 and  # Very low queue
+            current_replicas > policy.min_replicas):
+            
+            # Additional check: ensure sustained low utilization
+            if await self._check_sustained_low_utilization(agent_id, minutes=10):
+                scale_down_triggers.append({
+                    'trigger': DataProcessingScalingTrigger.DATA_THROUGHPUT_LOW,
+                    'value': throughput_utilization,
+                    'threshold': policy.scale_down_throughput_threshold,
+                    'priority': 1
+                })
+        
+        # Determine scaling action based on triggers
+        if scale_up_triggers and current_replicas < policy.max_replicas:
+            # Scale up - choose trigger with highest priority
+            primary_trigger = max(scale_up_triggers, key=lambda x: x['priority'])
+            target_replicas = min(
+                policy.max_replicas,
+                current_replicas + policy.scale_up_increment
+            )
+            
+            return {
+                'action': 'scale_up',
+                'current_replicas': current_replicas,
+                'target_replicas': target_replicas,
+                'primary_trigger': primary_trigger,
+                'all_triggers': scale_up_triggers
+            }
+            
+        elif scale_down_triggers and current_replicas > policy.min_replicas:
+            # Scale down
+            primary_trigger = scale_down_triggers[0]  # Only one scale-down trigger type
+            target_replicas = max(
+                policy.min_replicas,
+                current_replicas - policy.scale_down_increment
+            )
+            
+            return {
+                'action': 'scale_down',
+                'current_replicas': current_replicas,
+                'target_replicas': target_replicas,
+                'primary_trigger': primary_trigger,
+                'all_triggers': scale_down_triggers
+            }
+        
+        return {'action': 'no_action', 'reason': 'no_scaling_triggers_met'}
+    
+    async def _execute_scaling_decision(self, agent_id: str, scaling_decision: Dict[str, Any]):
+        """Execute scaling decision for data processing agent"""
+        
+        self.scaling_in_progress[agent_id] = True
+        scaling_start_time = datetime.now()
+        
+        try:
+            # Execute scaling through orchestrator
+            scaling_result = await self.orchestrator.scale_data_processing_agent(
+                agent_id=agent_id,
+                target_replicas=scaling_decision['target_replicas'],
+                scaling_reason=f"auto_scale_{scaling_decision['action']}"
+            )
+            
+            scaling_duration = datetime.now() - scaling_start_time
+            
+            # Record scaling event
+            scaling_event = {
+                'timestamp': scaling_start_time,
+                'agent_id': agent_id,
+                'action': scaling_decision['action'],
+                'from_replicas': scaling_decision['current_replicas'],
+                'to_replicas': scaling_decision['target_replicas'],
+                'trigger': scaling_decision['primary_trigger'],
+                'success': scaling_result['success'],
+                'duration_seconds': scaling_duration.total_seconds(),
+                'error': scaling_result.get('error') if not scaling_result['success'] else None
+            }
+            
+            self.scaling_events.append(scaling_event)
+            
+            if scaling_result['success']:
+                self.logger.info(f"Successfully {scaling_decision['action']} data processing agent {agent_id} "
+                               f"from {scaling_decision['current_replicas']} to {scaling_decision['target_replicas']} replicas")
+            else:
+                self.logger.error(f"Failed to {scaling_decision['action']} data processing agent {agent_id}: {scaling_result['error']}")
+            
+        except Exception as e:
+            self.logger.error(f"Exception during scaling execution for {agent_id}: {e}")
+            
+        finally:
+            self.scaling_in_progress[agent_id] = False
+    
+    async def get_scaling_status(self) -> Dict[str, Any]:
+        """Get comprehensive auto-scaling status for data processing cluster"""
+        
+        # Current scaling state
+        scaling_state = {}
+        for agent_id in self.scaling_policies.keys():
+            current_replicas = await self.orchestrator._get_current_replica_count(agent_id)
+            policy = self.scaling_policies[agent_id]
+            
+            scaling_state[agent_id] = {
+                'current_replicas': current_replicas,
+                'min_replicas': policy.min_replicas,
+                'max_replicas': policy.max_replicas,
+                'scaling_in_progress': self.scaling_in_progress.get(agent_id, False),
+                'last_scaling_event': await self._get_last_scaling_event(agent_id)
+            }
+        
+        # Recent scaling activity
+        recent_events = [
+            event for event in self.scaling_events[-100:]  # Last 100 events
+            if (datetime.now() - event['timestamp']).days <= 7  # Last 7 days
+        ]
+        
+        # Scaling statistics
+        scaling_stats = {
+            'total_scaling_events_7d': len(recent_events),
+            'scale_up_events_7d': len([e for e in recent_events if e['action'] == 'scale_up']),
+            'scale_down_events_7d': len([e for e in recent_events if e['action'] == 'scale_down']),
+            'failed_scaling_events_7d': len([e for e in recent_events if not e['success']]),
+            'average_scaling_duration_seconds': statistics.mean([e['duration_seconds'] for e in recent_events]) if recent_events else 0
+        }
+        
+        return {
+            'monitoring_active': self.monitoring_active,
+            'monitored_agents': len(self.scaling_policies),
+            'scaling_state': scaling_state,
+            'scaling_statistics': scaling_stats,
+            'recent_events': recent_events[-20:],  # Last 20 events for details
+            'predictive_scaling_active': any(p.predictive_scaling_enabled for p in self.scaling_policies.values())
+        }
 ```
 
 ---
 
-## Part 2: Scalable Deployment Patterns
+## Part 2: Monitoring and Observability for Data Processing Systems
 
-### Container Orchestration and Service Mesh
+### Production Monitoring Stack
 
-Production multi-agent systems require sophisticated deployment orchestration to handle scaling, service discovery, and inter-agent communication. We'll implement Kubernetes-native deployment patterns with service mesh integration.
+Enterprise data processing systems require comprehensive observability that provides real-time insights into data flow, processing performance, and system health. Here's how to build production-grade monitoring for multi-agent data processing systems:
 
-🗂️ **File**: `src/session9/scalable_deployment.py` - Production deployment patterns
-
-First, we establish the imports and configuration structures for container orchestration:
+🗂️ **File**: `src/session9/production/monitoring_system.py` - Comprehensive monitoring for data processing agents
 
 ```python
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Set
 from dataclasses import dataclass, field
-import yaml
-import json
+from datetime import datetime, timedelta
+from enum import Enum
 import asyncio
-from datetime import datetime
-```
+import json
+import logging
+from collections import defaultdict, deque
+import statistics
 
-The ContainerConfig dataclass defines the deployment parameters for individual agents:
+class DataProcessingAlertSeverity(Enum):
+    """Alert severity levels for data processing systems"""
+    INFO = "info"
+    WARNING = "warning"
+    ERROR = "error"
+    CRITICAL = "critical"
 
-```python
+class DataProcessingMetricType(Enum):
+    """Types of metrics collected from data processing agents"""
+    THROUGHPUT = "throughput"
+    LATENCY = "latency"
+    ERROR_RATE = "error_rate"
+    RESOURCE_UTILIZATION = "resource_utilization"
+    DATA_QUALITY = "data_quality"
+    QUEUE_DEPTH = "queue_depth"
+    PROCESSING_TIME = "processing_time"
+
 @dataclass
-class ContainerConfig:
-    """Container configuration for agent deployment"""
-    image: str                                          # Container image name
-    tag: str = "latest"                                # Image tag/version
-    resources: Dict[str, str] = field(default_factory=dict)  # CPU/memory limits
-    environment: Dict[str, str] = field(default_factory=dict)  # Environment variables
-    ports: List[int] = field(default_factory=list)     # Exposed ports
-    health_check: Dict[str, Any] = field(default_factory=dict)  # Health check config
-```
+class DataProcessingAlert:
+    """Alert for data processing system anomalies"""
+    alert_id: str
+    agent_id: str
+    severity: DataProcessingAlertSeverity
+    alert_type: str
+    message: str
+    metric_value: float
+    threshold_value: float
+    timestamp: datetime
+    resolved: bool = False
+    resolution_timestamp: Optional[datetime] = None
+    tags: Dict[str, str] = field(default_factory=dict)
 
-The KubernetesDeploymentManager generates production-ready Kubernetes manifests for multi-agent systems:
+@dataclass
+class DataProcessingHealthCheck:
+    """Health check result for data processing agent"""
+    agent_id: str
+    check_name: str
+    status: str  # healthy, degraded, unhealthy
+    response_time_ms: float
+    details: Dict[str, Any]
+    timestamp: datetime
 
-```python
-class KubernetesDeploymentManager:
-    """Kubernetes deployment manager for multi-agent systems"""
+class EnterpriseDataProcessingMonitor:
+    """Comprehensive monitoring system for data processing agents"""
     
-    def __init__(self, namespace: str = "multi-agents"):
-        self.namespace = namespace
-        self.deployment_templates = {}
-```
-
-Agent deployment generation creates complete Kubernetes Deployment manifests with all necessary configurations:
-
-```python
-    def generate_agent_deployment(self, agent_id: str, 
-                                config: ContainerConfig,
-                                replicas: int = 3) -> Dict[str, Any]:
-        """Generate complete Kubernetes Deployment for agent"""
+    def __init__(self, cluster_config: Dict[str, Any]):
+        self.cluster_config = cluster_config
         
-        # Base deployment structure
-        deployment = {
-            'apiVersion': 'apps/v1',
-            'kind': 'Deployment',
-            'metadata': self._build_metadata(agent_id),
-            'spec': self._build_deployment_spec(agent_id, config, replicas)
-        }
+        # Monitoring configuration
+        self.metrics_retention_hours = 168  # 7 days
+        self.alert_rules: Dict[str, Dict[str, Any]] = {}
+        self.health_check_interval = 30  # seconds
         
-        return deployment
-    
-    def _build_metadata(self, agent_id: str) -> Dict[str, Any]:
-        """Build deployment metadata with proper labeling"""
+        # Real-time data storage
+        self.metrics_buffer: Dict[str, deque] = defaultdict(lambda: deque(maxlen=10000))
+        self.active_alerts: Dict[str, DataProcessingAlert] = {}
+        self.health_status: Dict[str, DataProcessingHealthCheck] = {}
+        
+        # Performance tracking
+        self.performance_baselines: Dict[str, Dict[str, float]] = {}
+        self.anomaly_detection_enabled = True
+        
+        # Dashboards and reporting
+        self.dashboard_configs: Dict[str, Dict[str, Any]] = {}
+        
+        self.logger = logging.getLogger("EnterpriseDataProcessingMonitor")
+        
+    async def start_monitoring(self) -> Dict[str, Any]:
+        """Start comprehensive monitoring for data processing cluster"""
+        
+        # Initialize monitoring components
+        await self._setup_default_alert_rules()
+        await self._setup_default_dashboards()
+        await self._initialize_performance_baselines()
+        
+        # Start monitoring tasks
+        asyncio.create_task(self._metrics_collection_loop())
+        asyncio.create_task(self._health_check_loop())
+        asyncio.create_task(self._alert_processing_loop())
+        asyncio.create_task(self._anomaly_detection_loop())
+        
+        self.logger.info("Started comprehensive data processing monitoring")
+        
         return {
-            'name': f'agent-{agent_id}',
-            'namespace': self.namespace,
-            'labels': {
-                'app': 'multi-agent-system',
-                'agent-id': agent_id,
-                'component': 'agent'
-            }
-        }
-```
-
-The deployment specification includes replica management and pod template configuration:
-
-```python
-    def _build_deployment_spec(self, agent_id: str, config: ContainerConfig, replicas: int) -> Dict[str, Any]:
-        """Build deployment specification with scaling and pod template"""
-        return {
-            'replicas': replicas,
-            'selector': {
-                'matchLabels': {
-                    'app': 'multi-agent-system',
-                    'agent-id': agent_id
-                }
-            },
-            'template': {
-                'metadata': {
-                    'labels': {
-                        'app': 'multi-agent-system',
-                        'agent-id': agent_id,
-                        'component': 'agent'
-                    }
-                },
-                'spec': self._build_pod_spec(agent_id, config)
-            }
-        }
-```
-
-The pod specification defines container configuration with resource limits and health checks:
-
-```python
-    def _build_pod_spec(self, agent_id: str, config: ContainerConfig) -> Dict[str, Any]:
-        """Build pod specification with container and resource configuration"""
-        return {
-            'containers': [{
-                'name': f'agent-{agent_id}',
-                'image': f'{config.image}:{config.tag}',
-                'ports': [{'containerPort': port} for port in config.ports],
-                'env': self._build_environment_vars(agent_id, config),
-                'resources': self._build_resource_spec(config),
-                'livenessProbe': self._build_liveness_probe(config),
-                'readinessProbe': self._build_readiness_probe(config)
-            }],
-            'serviceAccountName': 'multi-agent-service-account'
-        }
-```
-
-Environment variables provide runtime configuration and service discovery information:
-
-```python
-    def _build_environment_vars(self, agent_id: str, config: ContainerConfig) -> List[Dict[str, str]]:
-        """Build environment variables for agent runtime configuration"""
-        base_env = [
-            {'name': 'AGENT_ID', 'value': agent_id},
-            {'name': 'NAMESPACE', 'value': self.namespace}
-        ]
-        
-        # Add custom environment variables
-        custom_env = [{'name': k, 'value': v} for k, v in config.environment.items()]
-        
-        return base_env + custom_env
-    
-    def _build_resource_spec(self, config: ContainerConfig) -> Dict[str, Any]:
-        """Build resource requests and limits for proper scheduling"""
-        return {
-            'requests': {
-                'cpu': config.resources.get('cpu_request', '100m'),
-                'memory': config.resources.get('memory_request', '256Mi')
-            },
-            'limits': {
-                'cpu': config.resources.get('cpu_limit', '500m'),
-                'memory': config.resources.get('memory_limit', '1Gi')
-            }
-        }
-```
-
-Health check configuration ensures reliable service operation and automatic recovery:
-
-```python
-    def _build_liveness_probe(self, config: ContainerConfig) -> Dict[str, Any]:
-        """Build liveness probe for automatic restart on failure"""
-        return {
-            'httpGet': {
-                'path': config.health_check.get('path', '/health'),
-                'port': config.health_check.get('port', 8080)
-            },
-            'initialDelaySeconds': 30,
-            'periodSeconds': 10
-        }
-    
-    def _build_readiness_probe(self, config: ContainerConfig) -> Dict[str, Any]:
-        """Build readiness probe for traffic routing control"""
-        return {
-            'httpGet': {
-                'path': config.health_check.get('readiness_path', '/ready'),
-                'port': config.health_check.get('port', 8080)
-            },
-            'initialDelaySeconds': 5,
-            'periodSeconds': 5
-        }
-```
-
-Service configuration enables network access and load balancing for agent pods:
-
-```python
-    def generate_service_configuration(self, agent_id: str, 
-                                     ports: List[int]) -> Dict[str, Any]:
-        """Generate Kubernetes Service for agent network access"""
-        
-        service = {
-            'apiVersion': 'v1',
-            'kind': 'Service',
-            'metadata': {
-                'name': f'agent-{agent_id}-service',
-                'namespace': self.namespace,
-                'labels': {
-                    'app': 'multi-agent-system',
-                    'agent-id': agent_id
-                }
-            },
-            'spec': {
-                'selector': {
-                    'app': 'multi-agent-system',
-                    'agent-id': agent_id
-                },
-                'ports': [
-                    {
-                        'name': f'port-{port}',
-                        'port': port,
-                        'targetPort': port,
-                        'protocol': 'TCP'
-                    }
-                    for port in ports
-                ],
-                'type': 'ClusterIP'  # Internal cluster access only
-            }
-        }
-        
-        return service
-```
-
-Horizontal Pod Autoscaler (HPA) enables automatic scaling based on resource utilization:
-
-```python
-    def generate_hpa_configuration(self, agent_id: str,
-                                 min_replicas: int = 2,
-                                 max_replicas: int = 10,
-                                 target_cpu: int = 70) -> Dict[str, Any]:
-        """Generate HPA for automatic agent scaling based on metrics"""
-        
-        hpa = {
-            'apiVersion': 'autoscaling/v2',
-            'kind': 'HorizontalPodAutoscaler',
-            'metadata': {
-                'name': f'agent-{agent_id}-hpa',
-                'namespace': self.namespace
-            },
-            'spec': {
-                'scaleTargetRef': {
-                    'apiVersion': 'apps/v1',
-                    'kind': 'Deployment',
-                    'name': f'agent-{agent_id}'
-                },
-                'minReplicas': min_replicas,
-                'maxReplicas': max_replicas,
-                'metrics': self._build_scaling_metrics(target_cpu)
-            }
-        }
-        
-        return hpa
-    
-    def _build_scaling_metrics(self, target_cpu: int) -> List[Dict[str, Any]]:
-        """Build scaling metrics for CPU and memory utilization"""
-        return [
-            {
-                'type': 'Resource',
-                'resource': {
-                    'name': 'cpu',
-                    'target': {
-                        'type': 'Utilization',
-                        'averageUtilization': target_cpu
-                    }
-                }
-            },
-            {
-                'type': 'Resource',
-                'resource': {
-                    'name': 'memory',
-                    'target': {
-                        'type': 'Utilization',
-                        'averageUtilization': 80
-                    }
-                }
-            }
-        ]
-```
-
-The complete manifest generation combines all components into deployable YAML:
-
-```python
-    def generate_complete_agent_manifests(self, agent_id: str,
-                                        config: ContainerConfig,
-                                        scaling_config: Dict[str, Any] = None) -> str:
-        """Generate complete Kubernetes manifests for production deployment"""
-        
-        scaling_config = scaling_config or {}
-        
-        # Generate all required Kubernetes resources
-        deployment = self.generate_agent_deployment(
-            agent_id, config, 
-            scaling_config.get('initial_replicas', 3)
-        )
-        
-        service = self.generate_service_configuration(agent_id, config.ports)
-        
-        hpa = self.generate_hpa_configuration(
-            agent_id,
-            scaling_config.get('min_replicas', 2),
-            scaling_config.get('max_replicas', 10),
-            scaling_config.get('target_cpu', 70)
-        )
-        
-        # Combine all manifests into single deployable YAML
-        manifests = [deployment, service, hpa]
-        yaml_output = '\n---\n'.join(yaml.dump(manifest) for manifest in manifests)
-        
-        return yaml_output
-```
-
-Service mesh integration provides advanced traffic management, security, and observability for multi-agent communication.
-
-```python
-class ServiceMeshIntegration:
-    """Service mesh integration for advanced multi-agent networking"""
-    
-    def __init__(self, mesh_type: str = "istio"):
-        self.mesh_type = mesh_type
-```
-
-Virtual Services define advanced routing rules for inter-agent communication:
-
-```python
-    def generate_virtual_service(self, agent_id: str,
-                               routing_rules: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Generate Istio VirtualService for advanced routing"""
-        
-        virtual_service = {
-            'apiVersion': 'networking.istio.io/v1beta1',
-            'kind': 'VirtualService',
-            'metadata': {
-                'name': f'agent-{agent_id}-vs',
-                'namespace': 'multi-agents'
-            },
-            'spec': {
-                'hosts': [f'agent-{agent_id}-service'],
-                'http': self._build_http_routes(agent_id, routing_rules)
-            }
-        }
-        
-        return virtual_service
-```
-
-HTTP routing rules enable sophisticated traffic patterns including fault injection and retry policies:
-
-```python
-    def _build_http_routes(self, agent_id: str, routing_rules: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Build HTTP routing rules with fault tolerance"""
-        http_routes = []
-        
-        for rule in routing_rules:
-            http_rule = {
-                'match': [
-                    {
-                        'headers': rule.get('headers', {}),
-                        'uri': {
-                            'prefix': rule.get('path_prefix', '/')
-                        }
-                    }
-                ],
-                'route': [
-                    {
-                        'destination': {
-                            'host': f'agent-{agent_id}-service',
-                            'port': {
-                                'number': rule.get('port', 8080)
-                            }
-                        },
-                        'weight': rule.get('weight', 100)
-                    }
-                ]
-            }
-            
-            # Add fault injection for chaos engineering
-            if rule.get('fault_injection'):
-                http_rule['fault'] = rule['fault_injection']
-            
-            # Add retry policy for resilience
-            if rule.get('retry_policy'):
-                http_rule['retries'] = rule['retry_policy']
-            
-            http_routes.append(http_rule)
-        
-        return http_routes
-```
-
-Destination Rules define traffic policies including load balancing and circuit breaking:
-
-```python
-    def generate_destination_rule(self, agent_id: str,
-                                load_balancer_policy: str = "ROUND_ROBIN") -> Dict[str, Any]:
-        """Generate DestinationRule for traffic policy and resilience"""
-        
-        destination_rule = {
-            'apiVersion': 'networking.istio.io/v1beta1',
-            'kind': 'DestinationRule',
-            'metadata': {
-                'name': f'agent-{agent_id}-dr',
-                'namespace': 'multi-agents'
-            },
-            'spec': {
-                'host': f'agent-{agent_id}-service',
-                'trafficPolicy': self._build_traffic_policy(load_balancer_policy)
-            }
-        }
-        
-        return destination_rule
-    
-    def _build_traffic_policy(self, load_balancer_policy: str) -> Dict[str, Any]:
-        """Build comprehensive traffic policy with resilience patterns"""
-        return {
-            'loadBalancer': {
-                'simple': load_balancer_policy
-            },
-            'connectionPool': {
-                'tcp': {
-                    'maxConnections': 100
-                },
-                'http': {
-                    'http1MaxPendingRequests': 50,
-                    'maxRequestsPerConnection': 10
-                }
-            },
-            'outlierDetection': {
-                'consecutiveErrors': 5,
-                'interval': '30s',
-                'baseEjectionTime': '30s',
-                'maxEjectionPercent': 50,
-                'minHealthPercent': 30
-            }
-        }
-```
-
-Peer Authentication enforces mutual TLS for secure inter-agent communication:
-
-```python
-    def generate_peer_authentication(self, namespace: str = "multi-agents") -> Dict[str, Any]:
-        """Generate PeerAuthentication for mandatory mutual TLS"""
-        
-        peer_auth = {
-            'apiVersion': 'security.istio.io/v1beta1',
-            'kind': 'PeerAuthentication',
-            'metadata': {
-                'name': 'multi-agent-mtls',
-                'namespace': namespace
-            },
-            'spec': {
-                'mtls': {
-                    'mode': 'STRICT'  # Enforce mTLS for all communication
-                }
-            }
-        }
-        
-        return peer_auth
-```
-
-The MultiAgentOrchestrator provides a high-level interface for deploying complete multi-agent systems with all necessary infrastructure:
-
-```python
-class MultiAgentOrchestrator:
-    """High-level orchestrator for complete multi-agent system deployment"""
-    
-    def __init__(self):
-        self.k8s_manager = KubernetesDeploymentManager()
-        self.service_mesh = ServiceMeshIntegration()
-        self.deployed_agents: Dict[str, Dict[str, Any]] = {}
-```
-
-The system deployment orchestrates all components for a production-ready multi-agent system:
-
-```python
-    async def deploy_multi_agent_system(self, system_config: Dict[str, Any]) -> Dict[str, Any]:
-        """Deploy complete multi-agent system with all infrastructure"""
-        
-        # Initialize deployment tracking
-        deployment_results = {
-            'deployment_id': f"deploy-{datetime.now().strftime('%Y%m%d-%H%M%S')}",
-            'agents': {},
-            'service_mesh_configs': {},
-            'monitoring_setup': {},
             'success': True,
-            'errors': []
+            'monitoring_start_time': datetime.now().isoformat(),
+            'components_started': [
+                'metrics_collection',
+                'health_checks', 
+                'alert_processing',
+                'anomaly_detection'
+            ]
         }
+    
+    async def _metrics_collection_loop(self):
+        """Continuously collect metrics from data processing agents"""
+        
+        while True:
+            try:
+                # Collect metrics from all active data processing agents
+                agent_metrics = await self._collect_cluster_metrics()
+                
+                # Store metrics in time-series buffer
+                for agent_id, metrics in agent_metrics.items():
+                    await self._store_agent_metrics(agent_id, metrics)
+                
+                # Process metrics for alerting
+                await self._process_metrics_for_alerts(agent_metrics)
+                
+                await asyncio.sleep(10)  # Collect every 10 seconds
+                
+            except Exception as e:
+                self.logger.error(f"Error in metrics collection: {e}")
+                await asyncio.sleep(30)
+    
+    async def _collect_cluster_metrics(self) -> Dict[str, Dict[str, Any]]:
+        """Collect comprehensive metrics from all data processing agents"""
+        
+        cluster_metrics = {}
+        
+        # Get list of active agents from orchestrator
+        active_agents = await self._get_active_agent_list()
+        
+        # Collect metrics from each agent
+        for agent_id in active_agents:
+            try:
+                # Collect agent-specific metrics
+                agent_metrics = await self._collect_single_agent_metrics(agent_id)
+                
+                if agent_metrics:
+                    cluster_metrics[agent_id] = {
+                        'timestamp': datetime.now(),
+                        'agent_id': agent_id,
+                        **agent_metrics
+                    }
+                    
+            except Exception as e:
+                self.logger.warning(f"Failed to collect metrics from agent {agent_id}: {e}")
+        
+        return cluster_metrics
+    
+    async def _collect_single_agent_metrics(self, agent_id: str) -> Optional[Dict[str, Any]]:
+        """Collect detailed metrics from individual data processing agent"""
         
         try:
-            # Deploy individual agents
-            await self._deploy_agents(system_config, deployment_results)
+            # In production, these would be HTTP/gRPC calls to agent metrics endpoints
+            metrics = {
+                # Data processing throughput metrics
+                'records_processed_per_second': await self._get_agent_metric(agent_id, 'throughput_rps'),
+                'bytes_processed_per_second': await self._get_agent_metric(agent_id, 'throughput_bps'),
+                'active_data_streams': await self._get_agent_metric(agent_id, 'active_streams'),
+                
+                # Processing performance metrics
+                'average_processing_latency_ms': await self._get_agent_metric(agent_id, 'avg_latency_ms'),
+                'p95_processing_latency_ms': await self._get_agent_metric(agent_id, 'p95_latency_ms'),
+                'p99_processing_latency_ms': await self._get_agent_metric(agent_id, 'p99_latency_ms'),
+                
+                # Data quality metrics
+                'data_quality_score': await self._get_agent_metric(agent_id, 'data_quality_score'),
+                'schema_validation_errors_per_minute': await self._get_agent_metric(agent_id, 'schema_errors_pm'),
+                'data_transformation_errors_per_minute': await self._get_agent_metric(agent_id, 'transform_errors_pm'),
+                
+                # Resource utilization metrics
+                'cpu_utilization_percent': await self._get_agent_metric(agent_id, 'cpu_percent'),
+                'memory_utilization_percent': await self._get_agent_metric(agent_id, 'memory_percent'),
+                'disk_utilization_percent': await self._get_agent_metric(agent_id, 'disk_percent'),
+                'network_io_mbps': await self._get_agent_metric(agent_id, 'network_io_mbps'),
+                
+                # Queue and buffer metrics
+                'input_queue_depth': await self._get_agent_metric(agent_id, 'input_queue_depth'),
+                'output_queue_depth': await self._get_agent_metric(agent_id, 'output_queue_depth'),
+                'buffer_utilization_percent': await self._get_agent_metric(agent_id, 'buffer_utilization'),
+                
+                # Error and health metrics
+                'error_rate_percent': await self._get_agent_metric(agent_id, 'error_rate_percent'),
+                'health_check_status': await self._get_agent_health_status(agent_id),
+                'uptime_seconds': await self._get_agent_metric(agent_id, 'uptime_seconds')
+            }
             
-            # Configure service mesh
-            await self._configure_service_mesh(system_config, deployment_results)
-            
-            # Setup monitoring infrastructure
-            monitoring_config = await self._setup_system_monitoring(system_config)
-            deployment_results['monitoring_setup'] = monitoring_config
+            return metrics
             
         except Exception as e:
-            deployment_results['success'] = False
-            deployment_results['errors'].append(str(e))
+            self.logger.error(f"Error collecting metrics from agent {agent_id}: {e}")
+            return None
+    
+    async def _setup_default_alert_rules(self):
+        """Setup default alerting rules for data processing systems"""
         
-        return deployment_results
-```
-
-Agent deployment processes each agent configuration and generates the necessary Kubernetes resources:
-
-```python
-    async def _deploy_agents(self, system_config: Dict[str, Any], deployment_results: Dict[str, Any]):
-        """Deploy individual agents with Kubernetes manifests"""
-        
-        for agent_config in system_config.get('agents', []):
-            agent_id = agent_config['agent_id']
-            
-            # Build container configuration
-            container_config = ContainerConfig(
-                image=agent_config['image'],
-                tag=agent_config.get('tag', 'latest'),
-                resources=agent_config.get('resources', {}),
-                environment=agent_config.get('environment', {}),
-                ports=agent_config.get('ports', [8080]),
-                health_check=agent_config.get('health_check', {})
-            )
-            
-            # Generate complete Kubernetes manifests
-            manifests = self.k8s_manager.generate_complete_agent_manifests(
-                agent_id, container_config, agent_config.get('scaling', {})
-            )
-            
-            deployment_results['agents'][agent_id] = {
-                'manifests': manifests,
-                'status': 'deployed',
-                'replicas': agent_config.get('scaling', {}).get('initial_replicas', 3)
+        default_rules = {
+            'high_data_processing_latency': {
+                'metric': 'average_processing_latency_ms',
+                'operator': 'greater_than',
+                'threshold': 5000.0,  # 5 seconds
+                'severity': DataProcessingAlertSeverity.WARNING,
+                'description': 'Data processing latency is higher than acceptable levels'
+            },
+            'critical_data_processing_latency': {
+                'metric': 'average_processing_latency_ms', 
+                'operator': 'greater_than',
+                'threshold': 15000.0,  # 15 seconds
+                'severity': DataProcessingAlertSeverity.CRITICAL,
+                'description': 'Data processing latency is critically high'
+            },
+            'high_error_rate': {
+                'metric': 'error_rate_percent',
+                'operator': 'greater_than',
+                'threshold': 5.0,  # 5% error rate
+                'severity': DataProcessingAlertSeverity.ERROR,
+                'description': 'Data processing error rate exceeded acceptable threshold'
+            },
+            'queue_depth_critical': {
+                'metric': 'input_queue_depth',
+                'operator': 'greater_than', 
+                'threshold': 50000,
+                'severity': DataProcessingAlertSeverity.CRITICAL,
+                'description': 'Input queue depth is critically high, data processing falling behind'
+            },
+            'low_data_quality': {
+                'metric': 'data_quality_score',
+                'operator': 'less_than',
+                'threshold': 0.95,  # Below 95% quality
+                'severity': DataProcessingAlertSeverity.WARNING,
+                'description': 'Data quality score has dropped below acceptable levels'
+            },
+            'data_processing_throughput_drop': {
+                'metric': 'records_processed_per_second',
+                'operator': 'percentage_decrease',
+                'threshold': 50.0,  # 50% drop from baseline
+                'severity': DataProcessingAlertSeverity.ERROR,
+                'description': 'Data processing throughput has dropped significantly'
+            },
+            'agent_health_degraded': {
+                'metric': 'health_check_status',
+                'operator': 'equals',
+                'threshold': 'degraded',
+                'severity': DataProcessingAlertSeverity.WARNING,
+                'description': 'Data processing agent health is degraded'
+            },
+            'agent_health_unhealthy': {
+                'metric': 'health_check_status',
+                'operator': 'equals', 
+                'threshold': 'unhealthy',
+                'severity': DataProcessingAlertSeverity.CRITICAL,
+                'description': 'Data processing agent is unhealthy'
             }
-```
-
-Service mesh configuration enables advanced networking and security features:
-
-```python
-    async def _configure_service_mesh(self, system_config: Dict[str, Any], deployment_results: Dict[str, Any]):
-        """Configure service mesh for inter-agent communication"""
+        }
         
-        # Configure per-agent service mesh policies
-        for agent_config in system_config.get('agents', []):
-            agent_id = agent_config['agent_id']
-            routing_rules = agent_config.get('routing_rules', [])
+        for rule_id, rule_config in default_rules.items():
+            self.alert_rules[rule_id] = rule_config
             
-            if routing_rules:
-                virtual_service = self.service_mesh.generate_virtual_service(
-                    agent_id, routing_rules
-                )
-                destination_rule = self.service_mesh.generate_destination_rule(
-                    agent_id, agent_config.get('load_balancer', 'ROUND_ROBIN')
+        self.logger.info(f"Setup {len(default_rules)} default alert rules for data processing monitoring")
+    
+    async def _process_metrics_for_alerts(self, agent_metrics: Dict[str, Dict[str, Any]]):
+        """Process collected metrics against alert rules"""
+        
+        for agent_id, metrics in agent_metrics.items():
+            for rule_id, rule_config in self.alert_rules.items():
+                
+                metric_name = rule_config['metric']
+                if metric_name not in metrics:
+                    continue
+                
+                metric_value = metrics[metric_name]
+                threshold = rule_config['threshold']
+                operator = rule_config['operator']
+                
+                # Evaluate alert condition
+                alert_triggered = await self._evaluate_alert_condition(
+                    metric_value, operator, threshold, agent_id, metric_name
                 )
                 
-                deployment_results['service_mesh_configs'][agent_id] = {
-                    'virtual_service': virtual_service,
-                    'destination_rule': destination_rule
-                }
-        
-        # Configure global security policies
-        peer_auth = self.service_mesh.generate_peer_authentication()
-        deployment_results['service_mesh_configs']['global'] = {
-            'peer_authentication': peer_auth
-        }
-```
-
-Monitoring setup establishes comprehensive observability for the multi-agent system:
-
-```python
-    async def _setup_system_monitoring(self, system_config: Dict[str, Any]) -> Dict[str, Any]:
-        """Setup comprehensive monitoring and observability stack"""
-        
-        monitoring_setup = {
-            'prometheus_config': self._generate_prometheus_config(),
-            'grafana_dashboards': self._generate_grafana_dashboards(),
-            'alert_rules': self._generate_alert_rules(),
-            'service_monitor': self._generate_service_monitor()
-        }
-        
-        return monitoring_setup
-```
-
-Prometheus configuration enables automatic discovery and scraping of agent metrics:
-
-```python
-    def _generate_prometheus_config(self) -> Dict[str, Any]:
-        """Generate Prometheus configuration for automatic metrics collection"""
-        
-        return {
-            'scrape_configs': [
-                {
-                    'job_name': 'multi-agent-system',
-                    'kubernetes_sd_configs': [
-                        {
-                            'role': 'pod',
-                            'namespaces': {
-                                'names': ['multi-agents']
-                            }
-                        }
-                    ],
-                    'relabel_configs': [
-                        {
-                            'source_labels': ['__meta_kubernetes_pod_label_app'],
-                            'action': 'keep',
-                            'regex': 'multi-agent-system'
-                        }
-                    ]
-                }
-            ]
-        }
-```
-
-Grafana dashboards provide visual monitoring and operational insights:
-
-```python
-    def _generate_grafana_dashboards(self) -> List[Dict[str, Any]]:
-        """Generate comprehensive Grafana dashboards for operational visibility"""
-        
-        dashboard = {
-            'dashboard': {
-                'title': 'Multi-Agent System Overview',
-                'panels': [
-                    self._build_health_panel(),
-                    self._build_cpu_panel(),
-                    self._build_memory_panel(),
-                    self._build_communication_panel()
-                ]
-            }
-        }
-        
-        return [dashboard]
+                alert_key = f"{agent_id}:{rule_id}"
+                
+                if alert_triggered:
+                    if alert_key not in self.active_alerts:
+                        # New alert
+                        alert = DataProcessingAlert(
+                            alert_id=f"alert_{int(datetime.now().timestamp())}",
+                            agent_id=agent_id,
+                            severity=rule_config['severity'],
+                            alert_type=rule_id,
+                            message=rule_config['description'],
+                            metric_value=metric_value,
+                            threshold_value=threshold,
+                            timestamp=datetime.now(),
+                            tags={'rule_id': rule_id, 'metric': metric_name}
+                        )
+                        
+                        self.active_alerts[alert_key] = alert
+                        
+                        # Send alert notification
+                        await self._send_alert_notification(alert)
+                        
+                        self.logger.warning(f"Alert triggered: {alert.message} (Agent: {agent_id}, Value: {metric_value})")
+                else:
+                    # Check if we should resolve an existing alert
+                    if alert_key in self.active_alerts:
+                        alert = self.active_alerts[alert_key]
+                        alert.resolved = True
+                        alert.resolution_timestamp = datetime.now()
+                        
+                        # Send resolution notification
+                        await self._send_alert_resolution_notification(alert)
+                        
+                        # Remove from active alerts
+                        del self.active_alerts[alert_key]
+                        
+                        self.logger.info(f"Alert resolved: {alert.message} (Agent: {agent_id})")
     
-    def _build_health_panel(self) -> Dict[str, Any]:
-        """Build agent health status panel"""
-        return {
-            'title': 'Agent Health Status',
-            'type': 'stat',
-            'targets': [
-                {
-                    'expr': 'up{job="multi-agent-system"}',
-                    'legendFormat': '{{agent_id}}'
+    async def create_data_processing_dashboard(self, dashboard_name: str, 
+                                             config: Dict[str, Any]) -> Dict[str, Any]:
+        """Create custom dashboard for data processing monitoring"""
+        
+        # Validate dashboard configuration
+        required_fields = ['title', 'panels']
+        for field in required_fields:
+            if field not in config:
+                return {
+                    'success': False,
+                    'error': f'Missing required field: {field}'
                 }
-            ]
+        
+        # Setup dashboard configuration
+        dashboard_config = {
+            'name': dashboard_name,
+            'title': config['title'],
+            'description': config.get('description', ''),
+            'panels': config['panels'],
+            'refresh_interval_seconds': config.get('refresh_interval', 30),
+            'time_range_hours': config.get('time_range', 24),
+            'created_at': datetime.now(),
+            'auto_refresh': config.get('auto_refresh', True)
+        }
+        
+        self.dashboard_configs[dashboard_name] = dashboard_config
+        
+        self.logger.info(f"Created data processing dashboard: {dashboard_name}")
+        
+        return {
+            'success': True,
+            'dashboard_name': dashboard_name,
+            'dashboard_url': f"/dashboards/{dashboard_name}",
+            'panels_count': len(config['panels'])
         }
     
-    def _build_communication_panel(self) -> Dict[str, Any]:
-        """Build inter-agent communication monitoring panel"""
-        return {
-            'title': 'Inter-Agent Communication',
-            'type': 'graph',
-            'targets': [
-                {
-                    'expr': 'rate(agent_messages_sent_total{job="multi-agent-system"}[5m])',
-                    'legendFormat': '{{agent_id}} sent'
-                },
-                {
-                    'expr': 'rate(agent_messages_received_total{job="multi-agent-system"}[5m])',
-                    'legendFormat': '{{agent_id}} received'
-                }
-            ]
+    async def get_monitoring_status(self) -> Dict[str, Any]:
+        """Get comprehensive monitoring system status"""
+        
+        # Active alerts summary
+        alerts_by_severity = defaultdict(int)
+        for alert in self.active_alerts.values():
+            alerts_by_severity[alert.severity.value] += 1
+        
+        # Metrics collection statistics
+        metrics_stats = {
+            'total_metrics_collected_24h': await self._count_metrics_collected(hours=24),
+            'active_agent_count': len(await self._get_active_agent_list()),
+            'metrics_buffer_size': sum(len(buffer) for buffer in self.metrics_buffer.values()),
+            'average_collection_latency_ms': await self._calculate_collection_latency()
         }
-```
-
-Alert rules provide proactive notification of system issues:
-
-```python
-    def _generate_alert_rules(self) -> List[Dict[str, Any]]:
-        """Generate comprehensive alerting rules for system health"""
         
-        return [
-            {
-                'alert': 'AgentDown',
-                'expr': 'up{job="multi-agent-system"} == 0',
-                'for': '1m',
-                'labels': {'severity': 'critical'},
-                'annotations': {
-                    'summary': 'Agent {{$labels.agent_id}} is down',
-                    'description': 'Agent {{$labels.agent_id}} has been down for more than 1 minute'
-                }
-            },
-            {
-                'alert': 'HighCpuUsage',
-                'expr': 'system_cpu_usage{job="multi-agent-system"} > 85',
-                'for': '5m',
-                'labels': {'severity': 'warning'},
-                'annotations': {
-                    'summary': 'High CPU usage on agent {{$labels.agent_id}}',
-                    'description': 'Agent {{$labels.agent_id}} CPU usage is {{$value}}%'
-                }
-            }
-        ]
-```
-
-ServiceMonitor enables automatic Prometheus scraping configuration:
-
-```python
-    def _generate_service_monitor(self) -> Dict[str, Any]:
-        """Generate ServiceMonitor for automatic Prometheus discovery"""
+        # Health status summary
+        health_summary = {
+            'healthy_agents': len([h for h in self.health_status.values() if h.status == 'healthy']),
+            'degraded_agents': len([h for h in self.health_status.values() if h.status == 'degraded']),
+            'unhealthy_agents': len([h for h in self.health_status.values() if h.status == 'unhealthy'])
+        }
         
         return {
-            'apiVersion': 'monitoring.coreos.com/v1',
-            'kind': 'ServiceMonitor',
-            'metadata': {
-                'name': 'multi-agent-system',
-                'namespace': 'multi-agents'
+            'monitoring_timestamp': datetime.now().isoformat(),
+            'monitoring_health': 'healthy',
+            'active_alerts': {
+                'total': len(self.active_alerts),
+                'by_severity': dict(alerts_by_severity)
             },
-            'spec': {
-                'selector': {
-                    'matchLabels': {
-                        'app': 'multi-agent-system'
-                    }
-                },
-                'endpoints': [
-                    {
-                        'port': 'metrics',
-                        'interval': '30s',
-                        'path': '/metrics'
-                    }
-                ]
-            }
+            'metrics_collection': metrics_stats,
+            'agent_health': health_summary,
+            'dashboards_configured': len(self.dashboard_configs),
+            'alert_rules_active': len(self.alert_rules),
+            'anomaly_detection_enabled': self.anomaly_detection_enabled
         }
 ```
 
@@ -1512,74 +1262,75 @@ ServiceMonitor enables automatic Prometheus scraping configuration:
 
 ## Module Summary
 
-You've now mastered production deployment patterns for multi-agent systems:
+You've now mastered production multi-agent data processing systems:
 
-✅ **Distributed Monitoring**: Implemented comprehensive monitoring with metrics, alerts, and tracing  
-✅ **Container Orchestration**: Built Kubernetes deployment patterns with auto-scaling  
-✅ **Service Mesh Integration**: Created Istio configurations for secure inter-agent communication  
-✅ **Operational Excellence**: Designed monitoring dashboards and alerting systems  
-✅ **Production Readiness**: Built complete deployment orchestration with fault tolerance
+✅ **Enterprise Deployment**: Built containerized orchestration with Kubernetes for scalable data processing  
+✅ **Auto-scaling Systems**: Implemented intelligent scaling based on data throughput, latency, and queue depth  
+✅ **Production Monitoring**: Created comprehensive observability with real-time metrics and alerting  
+✅ **Load Balancing**: Designed traffic distribution for optimal data processing performance  
+✅ **Health Management**: Built automated health checks and recovery mechanisms for data agents
 
 ### Next Steps
 
 - **Return to Core**: [Session 9 Main](Session9_Multi_Agent_Patterns.md)
-- **Continue to Module A**: [Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)
-- **Next Session**: [Session 10 - Enterprise Integration](Session10_Enterprise_Integration_Production_Deployment.md)
+- **Continue to Session 10**: [Enterprise Integration & Production Deployment](Session10_Enterprise_Integration_Production_Deployment.md)
+- **Portfolio Project**: Deploy a production multi-agent data processing system with full monitoring
 
 ---
 
 **🗂️ Source Files for Module B:**
 
-- `src/session9/distributed_monitoring.py` - Enterprise monitoring and observability
-- `src/session9/scalable_deployment.py` - Container orchestration and service mesh patterns
+- `src/session9/production/containerized_deployment.py` - Enterprise Kubernetes orchestration for data agents
+- `src/session9/production/autoscaling_system.py` - Intelligent auto-scaling for data processing workloads
+- `src/session9/production/monitoring_system.py` - Comprehensive monitoring and observability stack
 
 ---
 
-## Multiple Choice Test - Module B
+## 📝 Multiple Choice Test - Module B
 
-Test your understanding of production multi-agent systems deployment and monitoring:
+Test your understanding of production multi-agent data processing systems:
 
-**Question 1:** Which component in the DistributedMetricsCollector is responsible for storing recently collected metrics for quick access?  
-A) agent_registry  
-B) metrics_buffer  
-C) alert_handlers  
-D) collection_tasks
+**Question 1:** What is the primary benefit of containerizing data processing agents for production deployment?  
+A) Easier development  
+B) Isolation, scalability, and resource management for data workloads  
+C) Lower storage costs  
+D) Simpler user interface  
 
-**Question 2:** In Kubernetes deployment for multi-agent systems, what is the primary purpose of the HorizontalPodAutoscaler (HPA)?  
-A) To manage network routing between agents  
-B) To automatically scale agent replicas based on resource utilization  
-C) To provide service discovery for agents  
-D) To handle agent authentication
+**Question 2:** Which metrics are most critical for auto-scaling data processing agents?  
+A) Only CPU utilization  
+B) Data throughput, processing latency, queue depth, and resource utilization  
+C) Network bandwidth only  
+D) Memory usage only  
 
-**Question 3:** What is the purpose of Istio's PeerAuthentication with STRICT mTLS mode in multi-agent systems?  
-A) To provide load balancing between agents  
-B) To enable automatic scaling of services  
-C) To enforce encrypted communication between all agent services  
-D) To monitor agent performance metrics
+**Question 3:** What triggers should initiate scale-up for data processing workloads?  
+A) Manual intervention only  
+B) High data throughput, processing latency, queue depth, or resource utilization  
+C) Time-based schedules  
+D) Random intervals  
 
-**Question 4:** In the distributed tracing system, what does a "span" represent?  
-A) The total time for a complete multi-agent workflow  
-B) A single operation or task performed by an individual agent  
-C) The network bandwidth used between agents  
-D) The error rate of agent communications
+**Question 4:** How should production data processing systems handle scaling cooldown periods?  
+A) No cooldown needed  
+B) Prevent rapid scaling oscillations while allowing critical scaling events  
+C) Fixed 1-hour cooldown  
+D) Scale immediately always  
 
-**Question 5:** Which Kubernetes resource type is used to expose agent pods to other services within the cluster?  
-A) Deployment  
-B) ConfigMap  
-C) Service  
-D) Secret
+**Question 5:** What are essential components of data processing system monitoring?  
+A) CPU metrics only  
+B) Throughput, latency, error rates, data quality, and resource utilization metrics  
+C) Storage metrics only  
+D) Network metrics only  
 
-**Question 6:** What is the primary benefit of using Istio's DestinationRule with outlier detection in multi-agent systems?  
-A) To encrypt data between agents  
-B) To automatically remove unhealthy agent instances from load balancing  
-C) To scale agent replicas automatically  
-D) To provide service discovery capabilities
+**Question 6:** How should alert severity be determined for data processing systems?  
+A) All alerts are critical  
+B) Based on business impact: data quality, processing latency, and system availability  
+C) Random assignment  
+D) User preference  
 
-**Question 7:** In the agent health scoring algorithm, what happens when an agent has more than 85% memory usage?  
-A) The health score is reduced by 10 points  
-B) The health score is reduced by 25 points  
-C) The agent is automatically restarted  
-D) An emergency alert is triggered  
+**Question 7:** What is the purpose of health checks in containerized data processing agents?  
+A) Monitor application logs  
+B) Verify agent readiness and liveness for data processing workloads  
+C) Check network connectivity only  
+D) Measure CPU temperature  
 
 [**🗂️ View Test Solutions →**](Session9B_Test_Solutions.md)
 
@@ -1592,6 +1343,6 @@ D) An emergency alert is triggered
 ### Optional Deep Dive Modules
 
 - **[🔬 Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)**
-- **[📡 Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)**
+- **[🏭 Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)**
 
 **[Next: Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)**

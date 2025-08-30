@@ -1,33 +1,33 @@
-# Session 9: Multi-Agent Patterns & Coordination - When Intelligence Multiplies
+# Session 9: Multi-Agent Patterns & Coordination - When Data Intelligence Multiplies
 
-Imagine watching a championship basketball team execute the perfect play. Five players moving as one mind, each understanding their role, each predicting what the others will do, each adapting in real-time to create something greater than the sum of their parts.
+Picture the world's largest data processing operation: thousands of distributed agents working across cloud regions, each handling streams of petabyte-scale data, coordinating real-time analytics pipelines, and orchestrating complex data transformations. Every second, these agents process millions of records, route data streams between processing nodes, and maintain consistency across geographically distributed data lakes.
 
-This is the promise of multi-agent systems - not just one intelligent agent working alone, but multiple agents orchestrating solutions that no single mind could achieve. When Google's AlphaGo defeated the world champion, it wasn't just one algorithm working in isolation - it was multiple neural networks collaborating, reasoning, and coordinating in ways that redefined what artificial intelligence could accomplish.
+This is the reality of modern data engineering at scale - not just one data processing agent working in isolation, but coordinated networks of intelligent agents that transform raw data into actionable insights. When Netflix processes 450TB of daily viewing data, when Uber analyzes location streams from 100 million trips, when LinkedIn processes 20 billion user interactions - these systems succeed through multi-agent orchestration that makes individual data processing look primitive.
 
-Welcome to the future of AI: where individual intelligence becomes collective genius.
+Welcome to the future of data engineering: where individual processing becomes collective intelligence that scales across continents and processes data at speeds that redefine what's possible.
 
 ---
 
 ### Optional Deep Dive Modules
 
-- **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Byzantine fault tolerance & game theory
-- **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise deployment & monitoring
+- **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Distributed consensus for data consistency
+- **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise data pipeline deployment & monitoring
 
 **Code Files**: All examples use files in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9)
-**Quick Start**: Run `cd src/session9 && python react_agent.py` to see multi-agent coordination
+**Quick Start**: Run `cd src/session9 && python react_agent.py` to see multi-agent data processing coordination
 
 ---
 
-## Part 1: ReAct Pattern Foundation - The Art of Thinking Out Loud
+## Part 1: ReAct Pattern Foundation - The Art of Reasoning Through Data
 
-### Understanding ReAct - Making Intelligence Visible
+### Understanding ReAct - Making Data Processing Intelligence Visible
 
-Remember the last time you watched a master chess player think through a complex position? They don't just move pieces - they narrate their reasoning, explore possibilities, test theories, and adjust their strategy based on what they discover.
+Remember watching a senior data engineer debug a complex ETL pipeline failure? They don't just fix the problem - they narrate their reasoning, explore data quality issues, test hypotheses about upstream dependencies, and adjust their strategy based on what they discover in the logs.
 
-The ReAct pattern brings this same transparent thinking to AI agents. Instead of mysterious black-box decisions, you get to see inside the mind of artificial intelligence as it works through problems step by step:
+The ReAct pattern brings this same transparent thinking to data processing agents. Instead of mysterious black-box transformations, you get to see inside the mind of artificial intelligence as it reasons through data pipeline decisions step by step:
 
 ![ReAct Pattern](images/react-pattern.png)
-*This diagram illustrates the ReAct (Reasoning + Acting) pattern flow, showing the iterative cycle of thought, action, and observation that enables transparent reasoning. The pattern demonstrates how agents can break down complex problems into manageable steps with clear decision points*
+*This diagram illustrates the ReAct (Reasoning + Acting) pattern flow for data processing, showing the iterative cycle of data analysis, pipeline actions, and validation that enables transparent reasoning through complex data transformations*
 
 **File**: [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - Core ReAct implementation
 
@@ -38,81 +38,82 @@ from enum import Enum
 from datetime import datetime
 
 class ActionType(Enum):
-    SEARCH = "search"
-    CALCULATE = "calculate" 
-    REASON = "reason"
-    FINAL_ANSWER = "final_answer"
+    ANALYZE_SCHEMA = "analyze_schema"
+    VALIDATE_DATA = "validate_data" 
+    TRANSFORM_DATA = "transform_data"
+    ROUTE_PIPELINE = "route_pipeline"
+    FINAL_RESULT = "final_result"
 
 @dataclass
 class ReActStep:
-    """Individual step in ReAct reasoning chain"""
+    """Individual step in data processing reasoning chain"""
     step_number: int
     thought: str
     action: ActionType
     action_input: str
     observation: str
-    confidence: float
+    data_quality_score: float
     timestamp: datetime = field(default_factory=datetime.now)
 
-class BasicReActAgent:
-    """Foundation ReAct agent with transparent reasoning"""
+class DataProcessingReActAgent:
+    """Foundation ReAct agent for data processing with transparent reasoning"""
     
-    def __init__(self, llm_client, tools: Dict[str, Any], max_steps: int = 6):
+    def __init__(self, llm_client, data_tools: Dict[str, Any], max_steps: int = 8):
         self.llm = llm_client
-        self.tools = tools
+        self.data_tools = data_tools
         self.max_steps = max_steps
         self.reasoning_history: List[ReActStep] = []
     
-    async def solve(self, problem: str) -> Dict[str, Any]:
-        """Main problem-solving method using ReAct pattern"""
+    async def process_data_pipeline(self, pipeline_request: str) -> Dict[str, Any]:
+        """Main data processing method using ReAct pattern"""
         self.reasoning_history = []
         current_step = 1
         
         while current_step <= self.max_steps:
-            # Generate reasoning step
-            step = await self._execute_reasoning_step(problem, current_step)
+            # Generate reasoning step for data processing
+            step = await self._execute_data_reasoning_step(pipeline_request, current_step)
             self.reasoning_history.append(step)
             
             # Check for completion
-            if step.action == ActionType.FINAL_ANSWER:
+            if step.action == ActionType.FINAL_RESULT:
                 break
             
             current_step += 1
         
-        return self._format_solution()
+        return self._format_pipeline_solution()
 ```
 
-### Key Breakthrough Concepts
+### Key Data Engineering Breakthrough Concepts
 
-1. **X-Ray Vision for AI**: Every thought step becomes visible and traceable - no more black boxes
-2. **The Scientific Method for Agents**: Hypothesize, test, observe, adjust, repeat
-3. **Self-Aware Intelligence**: Agents that know what they know and what they don't
+1. **X-Ray Vision for Data Pipelines**: Every data transformation decision becomes visible and traceable - no more black-box ETL processes
+2. **The Scientific Method for Data Processing**: Hypothesize about data quality, test transformations, observe results, adjust pipeline logic
+3. **Self-Aware Data Intelligence**: Agents that understand data lineage and can explain their processing decisions
 
-### ReAct Execution Flow
+### ReAct Execution Flow for Data Processing
 
-Implementing the reasoning-action loop:
+Implementing the reasoning-action loop for data pipeline orchestration:
 
-**File**: [`src/session9/reasoning_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reasoning_engine.py) - Advanced reasoning patterns
+**File**: [`src/session9/reasoning_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reasoning_engine.py) - Advanced data processing reasoning patterns
 
 ```python
-async def _execute_reasoning_step(
+async def _execute_data_reasoning_step(
     self, context: str, step_num: int
 ) -> ReActStep:
-    """Execute a single ReAct reasoning step"""
+    """Execute a single ReAct reasoning step for data processing"""
     
-    # Generate thought based on current context
-    thought = await self._generate_structured_thought(context)
+    # Generate thought based on current data context
+    thought = await self._generate_data_processing_thought(context)
     
-    # Determine action based on thought
-    action_decision = await self._decide_next_action(thought, context)
+    # Determine action based on data pipeline requirements
+    action_decision = await self._decide_next_data_action(thought, context)
     action_type = ActionType(action_decision['action'])
     action_input = action_decision['input']
     
-    # Execute action and get observation
-    observation = await self._execute_action(action_type, action_input)
+    # Execute data action and get observation
+    observation = await self._execute_data_action(action_type, action_input)
     
-    # Calculate confidence in this step
-    confidence = await self._calculate_step_confidence(
+    # Calculate data quality confidence for this step
+    data_quality_score = await self._calculate_data_quality_confidence(
         thought, action_type, observation
     )
     
@@ -122,98 +123,98 @@ async def _execute_reasoning_step(
         action=action_type,
         action_input=action_input,
         observation=observation,
-        confidence=confidence
+        data_quality_score=data_quality_score
     )
 
-def _generate_structured_thought(self, context: str) -> str:
-    """Generate systematic thought with reasoning framework"""
+def _generate_data_processing_thought(self, context: str) -> str:
+    """Generate systematic thought with data processing framework"""
     prompt = f"""
-    Current context: {context}
-    Recent history: {self._get_recent_history_summary()}
+    Current data context: {context}
+    Recent processing history: {self._get_recent_data_history_summary()}
     
-    Think systematically:
-    1. What do I understand so far?
-    2. What information gaps remain?
-    3. What's the most productive next action?
-    4. What risks should I consider?
+    Think systematically about data processing:
+    1. What do I understand about this data schema and quality?
+    2. What data transformation gaps remain?
+    3. What's the most productive next processing action?
+    4. What data consistency risks should I consider?
     
-    Provide clear reasoning for the next step:
+    Provide clear reasoning for the next data processing step:
     """
     return await self.llm.generate(prompt)
 ```
 
-### Meta-Reasoning Quality Assessment
+### Meta-Reasoning Quality Assessment for Data Processing
 
-Evaluating reasoning quality:
+Evaluating data processing reasoning quality:
 
 ```python
-class MetaReActAnalyzer:
-    """Analyzes and improves ReAct reasoning quality"""
+class MetaDataReActAnalyzer:
+    """Analyzes and improves data processing ReAct reasoning quality"""
     
     def __init__(self, llm_client):
         self.llm = llm_client
     
-    async def analyze_reasoning_quality(
+    async def analyze_data_reasoning_quality(
         self, reasoning_history: List[ReActStep]
     ) -> Dict[str, Any]:
-        """Analyze reasoning chain quality"""
+        """Analyze data processing reasoning chain quality"""
         
         if len(reasoning_history) < 2:
             return {'quality_score': 0.5, 'issues': []}
         
-        # Detect circular reasoning
-        circular_analysis = await self._detect_circular_reasoning(reasoning_history)
+        # Detect circular data processing patterns
+        circular_analysis = await self._detect_circular_data_processing(reasoning_history)
         
-        # Assess progress quality
-        progress_analysis = await self._assess_progress_quality(reasoning_history)
+        # Assess data transformation progress quality
+        progress_analysis = await self._assess_data_progress_quality(reasoning_history)
         
-        # Evaluate confidence patterns
-        confidence_analysis = await self._analyze_confidence_patterns(reasoning_history)
+        # Evaluate data quality confidence patterns
+        quality_analysis = await self._analyze_data_quality_patterns(reasoning_history)
         
         return {
-            'quality_score': self._calculate_overall_quality(
-                circular_analysis, progress_analysis, confidence_analysis
+            'quality_score': self._calculate_overall_data_quality(
+                circular_analysis, progress_analysis, quality_analysis
             ),
-            'circular_reasoning': circular_analysis,
+            'circular_processing': circular_analysis,
             'progress_quality': progress_analysis,
-            'confidence_patterns': confidence_analysis,
-            'recommendations': await self._generate_improvement_recommendations(
+            'data_quality_patterns': quality_analysis,
+            'recommendations': await self._generate_data_improvement_recommendations(
                 reasoning_history
             )
         }
     
-    async def _detect_circular_reasoning(
+    async def _detect_circular_data_processing(
         self, history: List[ReActStep]
     ) -> Dict[str, Any]:
-        """Detect if agent is stuck in reasoning loops"""
+        """Detect if agent is stuck in data processing loops"""
         recent_steps = history[-4:]  # Examine last 4 steps
         action_sequence = [step.action for step in recent_steps]
         
-        # Check for repeated action patterns
+        # Check for repeated data processing action patterns
         if len(set(action_sequence)) <= 2 and len(action_sequence) >= 3:
             return {
-                'has_circular_reasoning': True,
+                'has_circular_processing': True,
                 'pattern': action_sequence,
                 'severity': 'high'
             }
         
-        return {'has_circular_reasoning': False}
+        return {'has_circular_processing': False}
 ```
 
 ---
 
-## Part 2: Multi-Agent Coordination - The Orchestra of Intelligence
+## Part 2: Multi-Agent Coordination - The Orchestra of Data Intelligence
 
-### Agent Communication Patterns - Digital Diplomacy
+### Agent Communication Patterns - Digital Data Flow Management
 
-When the International Space Station needs to dock with a supply ship, mission control doesn't just hope the two systems will figure it out. They use precise protocols, redundant communication channels, and fail-safe mechanisms to ensure perfect coordination.
+When a petabyte-scale data lake needs to coordinate ingestion from thousands of data sources simultaneously, the system doesn't just hope the various data processing agents will figure it out. They use precise data flow protocols, redundant validation channels, and fail-safe mechanisms to ensure perfect coordination across distributed processing nodes.
 
-Multi-agent systems face the same challenge on a digital scale - how do you get multiple intelligent agents to work together flawlessly without stepping on each other's toes?
+Multi-agent data systems face this challenge continuously - how do you get multiple intelligent data processing agents to work together flawlessly without creating data inconsistencies or processing bottlenecks?
 
 ![Multi-Agent Pattern](images/multi-agent-pattern.png)
-*This diagram depicts various multi-agent coordination patterns including hierarchical delegation, consensus voting, and peer-to-peer communication. The visualization shows how agents collaborate through structured message passing and coordination protocols*
+*This diagram depicts various multi-agent coordination patterns for data processing including hierarchical data routing, consensus validation, and peer-to-peer data streaming. The visualization shows how data agents collaborate through structured message passing and data flow coordination protocols*
 
-**File**: [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Communication framework
+**File**: [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Data flow communication framework
 
 ```python
 from typing import Dict, List, Any, Optional, Set
@@ -223,263 +224,270 @@ import asyncio
 import uuid
 from datetime import datetime
 
-class MessageType(Enum):
-    REQUEST = "request"
-    RESPONSE = "response"
-    PROPOSAL = "proposal"
-    VOTE = "vote"
-    CONSENSUS = "consensus"
-    STATUS_UPDATE = "status_update"
+class DataMessageType(Enum):
+    DATA_REQUEST = "data_request"
+    DATA_RESPONSE = "data_response"
+    SCHEMA_PROPOSAL = "schema_proposal"
+    VALIDATION_VOTE = "validation_vote"
+    CONSENSUS_RESULT = "consensus_result"
+    PIPELINE_STATUS = "pipeline_status"
 
 @dataclass
-class AgentMessage:
-    """Structured message for inter-agent communication"""
+class DataAgentMessage:
+    """Structured message for inter-agent data processing communication"""
     message_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     sender_id: str = ""
     recipient_id: str = ""
-    message_type: MessageType = MessageType.REQUEST
-    content: Dict[str, Any] = field(default_factory=dict)
+    message_type: DataMessageType = DataMessageType.DATA_REQUEST
+    data_payload: Dict[str, Any] = field(default_factory=dict)
+    schema_info: Dict[str, Any] = field(default_factory=dict)
     timestamp: datetime = field(default_factory=datetime.now)
-    requires_response: bool = True
+    requires_validation: bool = True
     conversation_id: Optional[str] = None
 
-class CommunicationHub:
-    """Central coordination hub for multi-agent communication"""
+class DataCommunicationHub:
+    """Central coordination hub for multi-agent data processing communication"""
     
     def __init__(self):
-        self.agents: Dict[str, 'BaseAgent'] = {}
-        self.message_queue: List[AgentMessage] = []
-        self.active_conversations: Dict[str, List[AgentMessage]] = {}
+        self.data_agents: Dict[str, 'BaseDataAgent'] = {}
+        self.message_queue: List[DataAgentMessage] = []
+        self.active_data_conversations: Dict[str, List[DataAgentMessage]] = {}
+        self.data_lineage_tracking: Dict[str, Dict[str, Any]] = {}
         
-    async def register_agent(self, agent: 'BaseAgent'):
-        """Register agent with communication hub"""
-        self.agents[agent.agent_id] = agent
-        await agent.set_communication_hub(self)
+    async def register_data_agent(self, agent: 'BaseDataAgent'):
+        """Register data processing agent with communication hub"""
+        self.data_agents[agent.agent_id] = agent
+        await agent.set_data_communication_hub(self)
     
-    async def send_message(self, message: AgentMessage) -> bool:
-        """Send message with delivery confirmation"""
+    async def send_data_message(self, message: DataAgentMessage) -> bool:
+        """Send data processing message with delivery confirmation and lineage tracking"""
         
         # Validate recipient exists
-        if message.recipient_id not in self.agents:
+        if message.recipient_id not in self.data_agents:
             return False
+        
+        # Track data lineage for this message
+        await self._track_data_lineage(message)
         
         # Add to conversation thread
         if message.conversation_id:
-            if message.conversation_id not in self.active_conversations:
-                self.active_conversations[message.conversation_id] = []
-            self.active_conversations[message.conversation_id].append(message)
+            if message.conversation_id not in self.active_data_conversations:
+                self.active_data_conversations[message.conversation_id] = []
+            self.active_data_conversations[message.conversation_id].append(message)
         
         # Deliver message
-        recipient = self.agents[message.recipient_id]
-        success = await recipient.receive_message(message)
+        recipient = self.data_agents[message.recipient_id]
+        success = await recipient.receive_data_message(message)
         
         return success
 ```
 
-### Basic Consensus Mechanisms - Democracy in the Digital Age
+### Basic Consensus Mechanisms - Democracy in Data Processing
 
-How does a group of AI agents decide what to do when they disagree? The same way democratic societies have solved collective decision-making for millennia - through structured consensus mechanisms that balance individual intelligence with collective wisdom:
+How does a group of data processing AI agents decide what to do when they disagree about schema changes or data quality thresholds? The same way distributed data systems have solved collective decision-making - through structured consensus mechanisms that balance individual processing intelligence with collective data integrity:
 
-**File**: [`src/session9/consensus_algorithms.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/consensus_algorithms.py) - Basic consensus implementation
+**File**: [`src/session9/consensus_algorithms.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/consensus_algorithms.py) - Basic data consensus implementation
 
 ```python
-class SimpleConsensusManager:
-    """Basic consensus mechanisms for multi-agent decisions"""
+class DataConsensusManager:
+    """Basic consensus mechanisms for multi-agent data processing decisions"""
     
-    def __init__(self, agents: List['BaseAgent'], threshold: float = 0.67):
-        self.agents = agents
+    def __init__(self, agents: List['BaseDataAgent'], threshold: float = 0.67):
+        self.data_agents = agents
         self.consensus_threshold = threshold
-        self.voting_history: List[Dict[str, Any]] = []
+        self.data_voting_history: List[Dict[str, Any]] = []
     
-    async def simple_majority_consensus(
-        self, decision_point: str, context: Dict[str, Any]
+    async def data_schema_consensus(
+        self, schema_proposal: str, data_context: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """Simple majority voting consensus"""
+        """Schema validation consensus across data processing agents"""
         
-        # Collect proposals from all agents
-        proposals = await self._collect_agent_proposals(decision_point, context)
+        # Collect schema validation proposals from all agents
+        proposals = await self._collect_schema_proposals(schema_proposal, data_context)
         
-        # Conduct voting round
-        votes = await self._conduct_voting_round(proposals, context)
+        # Conduct data validation voting round
+        votes = await self._conduct_schema_voting_round(proposals, data_context)
         
-        # Count votes and determine winner
-        vote_counts = self._count_votes(votes)
+        # Count votes and determine schema acceptance
+        vote_counts = self._count_schema_votes(votes)
         winner = max(vote_counts.items(), key=lambda x: x[1])
         
-        # Check if threshold met
+        # Check if data consensus threshold met
         total_votes = sum(vote_counts.values())
         if winner[1] / total_votes >= self.consensus_threshold:
             return {
                 'consensus_reached': True,
-                'decision': winner[0],
+                'schema_decision': winner[0],
                 'vote_counts': vote_counts,
-                'confidence': winner[1] / total_votes
+                'data_confidence': winner[1] / total_votes
             }
         else:
             return {
                 'consensus_reached': False,
                 'vote_counts': vote_counts,
-                'reason': 'Threshold not met'
+                'reason': 'Data validation threshold not met'
             }
     
-    async def _collect_agent_proposals(
-        self, decision_point: str, context: Dict[str, Any]
+    async def _collect_schema_proposals(
+        self, schema_proposal: str, data_context: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
-        """Collect initial proposals from all agents"""
+        """Collect initial schema proposals from all data agents"""
         proposal_tasks = []
-        for agent in self.agents:
-            task = self._get_agent_proposal(agent, decision_point, context)
+        for agent in self.data_agents:
+            task = self._get_agent_schema_proposal(agent, schema_proposal, data_context)
             proposal_tasks.append(task)
         
         proposals = await asyncio.gather(*proposal_tasks, return_exceptions=True)
         
-        # Filter out failed proposals
+        # Filter out failed schema proposals
         valid_proposals = []
         for i, proposal in enumerate(proposals):
             if not isinstance(proposal, Exception):
                 valid_proposals.append({
-                    'agent_id': self.agents[i].agent_id,
-                    'proposal': proposal,
+                    'agent_id': self.data_agents[i].agent_id,
+                    'schema_proposal': proposal,
+                    'data_quality_score': proposal.get('data_quality_score', 0.5),
                     'timestamp': datetime.now()
                 })
         
         return valid_proposals
 ```
 
-### Hierarchical Coordination - The Chain of Command
+### Hierarchical Coordination - The Data Processing Chain of Command
 
-Military operations succeed through clear chains of command. CEOs run corporations through structured hierarchies. Even ant colonies coordinate complex tasks through hierarchical organization patterns.
+Large-scale data operations succeed through clear processing hierarchies. Netflix runs data pipelines through structured data engineering teams. Uber coordinates location data through hierarchical geo-processing systems. Even Amazon's recommendation engine processes customer data through hierarchical ML pipelines.
 
-The same principles that govern human organizations can transform chaos into coordination in multi-agent systems:
+The same principles that govern enterprise data architectures can transform chaos into coordination in multi-agent data processing systems:
 
 ```python
-class HierarchicalCoordinator:
-    """Implements hierarchical multi-agent coordination patterns"""
+class HierarchicalDataCoordinator:
+    """Implements hierarchical multi-agent coordination patterns for data processing"""
     
     def __init__(self):
-        self.coordinator_agents: Dict[str, 'CoordinatorAgent'] = {}
-        self.worker_agents: Dict[str, 'WorkerAgent'] = {}
-        self.delegation_rules: Dict[str, List[str]] = {}
+        self.coordinator_agents: Dict[str, 'DataCoordinatorAgent'] = {}
+        self.worker_agents: Dict[str, 'DataWorkerAgent'] = {}
+        self.data_delegation_rules: Dict[str, List[str]] = {}
     
-    async def create_coordination_hierarchy(
-        self, task: str, complexity_analysis: Dict[str, Any]
+    async def create_data_coordination_hierarchy(
+        self, data_task: str, complexity_analysis: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """Create hierarchical coordination structure"""
+        """Create hierarchical data processing coordination structure"""
         
-        # Analyze task decomposition requirements
-        decomposition = await self._analyze_task_decomposition(task, complexity_analysis)
+        # Analyze data processing decomposition requirements
+        decomposition = await self._analyze_data_task_decomposition(data_task, complexity_analysis)
         
-        # Create coordinator for high-level planning
-        coordinator = await self._create_task_coordinator(decomposition)
+        # Create coordinator for high-level data pipeline planning
+        coordinator = await self._create_data_task_coordinator(decomposition)
         
-        # Create workers for execution
-        workers = await self._create_worker_agents(decomposition)
+        # Create workers for data processing execution
+        workers = await self._create_data_worker_agents(decomposition)
         
-        # Establish delegation relationships
-        delegation_map = await self._establish_delegation_hierarchy(
+        # Establish data processing delegation relationships
+        delegation_map = await self._establish_data_delegation_hierarchy(
             coordinator, workers, decomposition
         )
         
         return {
-            'coordinator': coordinator,
-            'workers': workers,
+            'data_coordinator': coordinator,
+            'data_workers': workers,
             'delegation_map': delegation_map,
-            'hierarchy_depth': decomposition['required_levels']
+            'processing_depth': decomposition['required_levels']
         }
     
-    async def execute_hierarchical_task(
-        self, task: str, hierarchy: Dict[str, Any]
+    async def execute_hierarchical_data_task(
+        self, data_task: str, hierarchy: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """Execute task using hierarchical coordination"""
+        """Execute data processing task using hierarchical coordination"""
         
-        # Phase 1: High-level planning
-        high_level_plan = await self._create_high_level_plan(
-            task, hierarchy['coordinator']
+        # Phase 1: High-level data pipeline planning
+        high_level_plan = await self._create_data_pipeline_plan(
+            data_task, hierarchy['data_coordinator']
         )
         
-        # Phase 2: Task delegation and parallel execution
-        delegation_results = await self._execute_delegated_tasks(
+        # Phase 2: Data processing delegation and parallel execution
+        delegation_results = await self._execute_delegated_data_tasks(
             high_level_plan, hierarchy['delegation_map']
         )
         
-        # Phase 3: Result aggregation
-        final_result = await self._aggregate_hierarchical_results(
-            delegation_results, hierarchy['coordinator']
+        # Phase 3: Data result aggregation and validation
+        final_result = await self._aggregate_hierarchical_data_results(
+            delegation_results, hierarchy['data_coordinator']
         )
         
         return {
-            'task': task,
-            'result': final_result,
+            'data_task': data_task,
+            'processing_result': final_result,
             'execution_success': True
         }
 ```
 
-### Auction-Based Coordination - Let the Market Decide
+### Auction-Based Coordination - Let the Data Market Decide
 
-The New York Stock Exchange processes 6.5 billion shares daily through competitive bidding. eBay connects buyers and sellers across the globe through auction mechanisms. Even your electricity provider may use real-time auctions to balance supply and demand.
+The Chicago Mercantile Exchange processes 3.2 billion contracts annually through competitive bidding. Cloud computing markets allocate petabytes of storage through real-time auctions. Even your data warehouse provider uses auction mechanisms to balance compute and storage demand.
 
-Markets excel at efficient resource allocation - and the same principles can coordinate AI agents with stunning effectiveness:
+Markets excel at efficient resource allocation - and the same principles can coordinate data processing agents with stunning effectiveness:
 
-**File**: [`src/session9/auction_mechanisms.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/auction_mechanisms.py) - Competitive coordination
+**File**: [`src/session9/auction_mechanisms.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/auction_mechanisms.py) - Competitive data processing coordination
 
 ```python
-class SimpleAuctionCoordinator:
-    """Basic auction-based task allocation"""
+class DataProcessingAuctionCoordinator:
+    """Basic auction-based data processing task allocation"""
     
-    def __init__(self, agents: List['BaseAgent']):
-        self.agents = agents
-        self.auction_history: List[Dict[str, Any]] = []
+    def __init__(self, agents: List['BaseDataAgent']):
+        self.data_agents = agents
+        self.data_auction_history: List[Dict[str, Any]] = []
     
-    async def conduct_simple_auction(
-        self, task: str, requirements: Dict[str, Any]
+    async def conduct_data_processing_auction(
+        self, data_task: str, processing_requirements: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """Conduct sealed-bid auction for task allocation"""
+        """Conduct sealed-bid auction for data processing task allocation"""
         
-        # Phase 1: Assess agent capabilities
-        capability_assessments = await self._assess_agent_capabilities(
-            task, requirements
+        # Phase 1: Assess agent data processing capabilities
+        capability_assessments = await self._assess_data_processing_capabilities(
+            data_task, processing_requirements
         )
         
-        # Filter eligible agents
+        # Filter eligible data processing agents
         eligible_agents = [
             agent for agent, assessment in capability_assessments.items()
-            if assessment['meets_requirements']
+            if assessment['meets_data_requirements']
         ]
         
         if not eligible_agents:
-            return {'success': False, 'reason': 'No eligible agents'}
+            return {'success': False, 'reason': 'No eligible data processing agents'}
         
-        # Phase 2: Collect bids
-        bids = await self._collect_sealed_bids(task, eligible_agents, requirements)
+        # Phase 2: Collect data processing bids
+        bids = await self._collect_data_processing_bids(data_task, eligible_agents, processing_requirements)
         
-        # Phase 3: Select winner (lowest cost, highest capability)
-        winner = await self._select_auction_winner(bids, requirements)
+        # Phase 3: Select winner (best cost/performance ratio for data processing)
+        winner = await self._select_data_auction_winner(bids, processing_requirements)
         
         if winner:
             return {
                 'success': True,
                 'winner': winner['agent_id'],
                 'winning_bid': winner['bid'],
-                'task': task
+                'data_task': data_task,
+                'expected_processing_time': winner['bid']['estimated_processing_time']
             }
         else:
-            return {'success': False, 'reason': 'No valid bids received'}
+            return {'success': False, 'reason': 'No valid data processing bids received'}
 ```
 
 ---
 
-## Part 3: Planning & Reflection - The Art of Strategic Thinking
+## Part 3: Planning & Reflection - The Art of Strategic Data Processing
 
-### Hierarchical Task Network Planning - Breaking Down the Impossible
+### Hierarchical Task Network Planning - Breaking Down the Impossible Data Challenge
 
-How do you eat an elephant? One bite at a time. How do you build a skyscraper? One floor at a time. How do you put a human on Mars? One mission at a time.
+How do you process a petabyte of data? One chunk at a time. How do you build a real-time analytics platform? One pipeline at a time. How do you create a global data mesh? One domain at a time.
 
-The greatest achievements in human history succeeded through hierarchical decomposition - breaking massive, seemingly impossible goals into manageable, achievable steps. HTN planning brings this same strategic thinking to AI agents:
+The greatest achievements in data engineering history succeeded through hierarchical decomposition - breaking massive, seemingly impossible data processing goals into manageable, achievable pipeline steps. HTN planning brings this same strategic thinking to data processing agents:
 
 ![Planning Pattern](images/planning-pattern.png)
-*This diagram illustrates Hierarchical Task Network (HTN) planning methodology, showing how complex tasks are decomposed into smaller, manageable subtasks. The visualization demonstrates the hierarchical breakdown from abstract goals to concrete, executable actions*
+*This diagram illustrates Hierarchical Task Network (HTN) planning methodology for data processing, showing how complex data pipelines are decomposed into smaller, manageable processing tasks. The visualization demonstrates the hierarchical breakdown from abstract data goals to concrete, executable data transformations*
 
-**File**: [`src/session9/planning_systems.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/planning_systems.py) - HTN planning implementation
+**File**: [`src/session9/planning_systems.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/planning_systems.py) - HTN planning for data processing implementation
 
 ```python
 from typing import Dict, List, Any, Optional, Tuple
@@ -487,97 +495,99 @@ from dataclasses import dataclass, field
 from enum import Enum
 from datetime import datetime, timedelta
 
-class TaskType(Enum):
-    PRIMITIVE = "primitive"      # Directly executable
-    COMPOUND = "compound"        # Requires decomposition
-    ABSTRACT = "abstract"        # High-level goal
+class DataTaskType(Enum):
+    PRIMITIVE = "primitive"      # Directly executable (single transformation)
+    COMPOUND = "compound"        # Requires decomposition (complex ETL)
+    ABSTRACT = "abstract"        # High-level goal (build analytics platform)
 
 @dataclass
-class Task:
-    """Represents a task in the HTN hierarchy"""
+class DataTask:
+    """Represents a data processing task in the HTN hierarchy"""
     task_id: str
     name: str
-    task_type: TaskType
-    parameters: Dict[str, Any] = field(default_factory=dict)
-    preconditions: List[str] = field(default_factory=list)
-    effects: List[str] = field(default_factory=list)
+    task_type: DataTaskType
+    data_inputs: Dict[str, Any] = field(default_factory=dict)
+    data_outputs: Dict[str, Any] = field(default_factory=dict)
+    data_dependencies: List[str] = field(default_factory=list)
+    processing_effects: List[str] = field(default_factory=list)
     estimated_duration: Optional[timedelta] = None
     priority: int = 1
+    compute_requirements: Dict[str, Any] = field(default_factory=dict)
 
 @dataclass
-class TaskDecomposition:
-    """Represents a way to decompose a compound task"""
+class DataTaskDecomposition:
+    """Represents a way to decompose a compound data processing task"""
     decomposition_id: str
-    subtasks: List[Task]
-    ordering_constraints: List[Tuple[str, str]] = field(default_factory=list)
-    success_probability: float = 1.0
+    subtasks: List[DataTask]
+    data_flow_constraints: List[Tuple[str, str]] = field(default_factory=list)
+    processing_success_probability: float = 1.0
 
-class HTNPlanner:
-    """Hierarchical Task Network planner"""
+class DataHTNPlanner:
+    """Hierarchical Task Network planner for data processing"""
     
-    def __init__(self, agent, domain_knowledge: Dict[str, Any]):
+    def __init__(self, agent, data_domain_knowledge: Dict[str, Any]):
         self.agent = agent
-        self.domain = domain_knowledge
-        self.current_plan: Optional[List[Task]] = None
-        self.planning_history: List[Dict[str, Any]] = []
+        self.data_domain = data_domain_knowledge
+        self.current_pipeline_plan: Optional[List[DataTask]] = None
+        self.data_planning_history: List[Dict[str, Any]] = []
     
-    async def create_hierarchical_plan(
-        self, goal: str, initial_state: Dict[str, Any]
+    async def create_hierarchical_data_plan(
+        self, data_goal: str, initial_data_state: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """Create hierarchical plan using HTN methodology"""
+        """Create hierarchical data processing plan using HTN methodology"""
         
-        # Phase 1: Goal analysis and task creation
-        root_task = await self._create_root_task(goal, initial_state)
+        # Phase 1: Data goal analysis and task creation
+        root_task = await self._create_root_data_task(data_goal, initial_data_state)
         
-        # Phase 2: Hierarchical decomposition
-        decomposition_result = await self._decompose_task_hierarchy(
-            root_task, initial_state
+        # Phase 2: Hierarchical data processing decomposition
+        decomposition_result = await self._decompose_data_task_hierarchy(
+            root_task, initial_data_state
         )
         
-        # Phase 3: Plan optimization
-        optimized_plan = await self._optimize_plan(
-            decomposition_result['plan'], initial_state
+        # Phase 3: Data pipeline optimization
+        optimized_plan = await self._optimize_data_plan(
+            decomposition_result['plan'], initial_data_state
         )
         
-        # Phase 4: Risk assessment
-        risk_analysis = await self._analyze_plan_risks(
-            optimized_plan, initial_state
+        # Phase 4: Data quality and consistency risk assessment
+        risk_analysis = await self._analyze_data_plan_risks(
+            optimized_plan, initial_data_state
         )
         
         return {
-            'plan': optimized_plan,
+            'data_plan': optimized_plan,
             'risk_analysis': risk_analysis,
             'confidence': decomposition_result['confidence'],
-            'estimated_duration': sum(
+            'estimated_processing_duration': sum(
                 t.estimated_duration or timedelta(0) for t in optimized_plan
             )
         }
 ```
 
-### Dynamic Replanning - When Plans Meet Reality
+### Dynamic Replanning - When Data Plans Meet Reality
 
-"No battle plan survives contact with the enemy." - Helmuth von Moltke
+"No data pipeline survives contact with production data." - Every Senior Data Engineer Ever
 
-Every great military strategist knows that the perfect plan becomes useless the moment circumstances change. The same truth applies to AI agents operating in dynamic environments - the ability to adapt isn't just helpful, it's essential for survival:
+Every experienced data engineering team knows that the perfect ETL design becomes useless the moment you encounter schema drift, data quality issues, or upstream source changes. The same truth applies to AI agents operating in dynamic data environments - the ability to adapt processing strategies isn't just helpful, it's essential for data pipeline survival:
 
-**File**: [`src/session9/dynamic_planning.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/dynamic_planning.py) - Adaptive replanning systems
+**File**: [`src/session9/dynamic_planning.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/dynamic_planning.py) - Adaptive data processing replanning systems
 
 ```python
-class DynamicReplanner:
-    """Handles dynamic replanning during plan execution"""
+class DynamicDataReplanner:
+    """Handles dynamic replanning during data pipeline execution"""
     
-    def __init__(self, htn_planner: HTNPlanner):
-        self.planner = htn_planner
+    def __init__(self, htn_planner: DataHTNPlanner):
+        self.data_planner = htn_planner
         self.monitoring_active = False
-        self.replanning_history: List[Dict[str, Any]] = []
+        self.data_replanning_history: List[Dict[str, Any]] = []
     
-    async def execute_with_replanning(
-        self, plan: List[Task], initial_state: Dict[str, Any]
+    async def execute_with_data_replanning(
+        self, data_plan: List[DataTask], initial_data_state: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """Execute plan with continuous monitoring and replanning"""
+        """Execute data plan with continuous monitoring and replanning"""
         
-        current_state = initial_state.copy()
-        remaining_tasks = plan.copy()
+        current_data_state = initial_data_state.copy()
+        remaining_tasks = data_plan.copy()
         completed_tasks = []
         execution_trace = []
         
@@ -586,138 +596,138 @@ class DynamicReplanner:
         while remaining_tasks and self.monitoring_active:
             current_task = remaining_tasks[0]
             
-            # Pre-execution validation
-            validation_result = await self._validate_task_execution(
-                current_task, current_state
+            # Pre-execution data validation
+            validation_result = await self._validate_data_task_execution(
+                current_task, current_data_state
             )
             
             if not validation_result['can_execute']:
-                # Trigger replanning
-                replanning_result = await self._trigger_replanning(
-                    current_task, remaining_tasks, current_state,
+                # Trigger data processing replanning
+                replanning_result = await self._trigger_data_replanning(
+                    current_task, remaining_tasks, current_data_state,
                     validation_result['reason']
                 )
                 
                 if replanning_result['success']:
-                    remaining_tasks = replanning_result['new_plan']
-                    execution_trace.append(('replan', replanning_result))
+                    remaining_tasks = replanning_result['new_data_plan']
+                    execution_trace.append(('data_replan', replanning_result))
                     continue
                 else:
-                    execution_trace.append(('failure', replanning_result))
+                    execution_trace.append(('data_failure', replanning_result))
                     break
             
-            # Execute task
-            execution_result = await self._execute_monitored_task(
-                current_task, current_state
+            # Execute data processing task
+            execution_result = await self._execute_monitored_data_task(
+                current_task, current_data_state
             )
             
-            execution_trace.append(('execute', execution_result))
+            execution_trace.append(('data_execute', execution_result))
             
             if execution_result['success']:
-                # Update state and continue
-                current_state = self._apply_task_effects(
-                    current_task, current_state, execution_result
+                # Update data state and continue
+                current_data_state = self._apply_data_task_effects(
+                    current_task, current_data_state, execution_result
                 )
                 completed_tasks.append(current_task)
                 remaining_tasks.pop(0)
             else:
-                # Handle execution failure
-                failure_analysis = await self._analyze_execution_failure(
+                # Handle data processing failure
+                failure_analysis = await self._analyze_data_execution_failure(
                     current_task, execution_result
                 )
                 
                 if failure_analysis['should_replan']:
-                    replanning_result = await self._trigger_replanning(
-                        current_task, remaining_tasks, current_state,
+                    replanning_result = await self._trigger_data_replanning(
+                        current_task, remaining_tasks, current_data_state,
                         execution_result['error']
                     )
                     
                     if replanning_result['success']:
-                        remaining_tasks = replanning_result['new_plan']
+                        remaining_tasks = replanning_result['new_data_plan']
                         continue
                 
-                execution_trace.append(('abort', failure_analysis))
+                execution_trace.append(('data_abort', failure_analysis))
                 break
         
         return {
-            'completed_tasks': completed_tasks,
-            'remaining_tasks': remaining_tasks,
-            'final_state': current_state,
-            'execution_trace': execution_trace,
+            'completed_data_tasks': completed_tasks,
+            'remaining_data_tasks': remaining_tasks,
+            'final_data_state': current_data_state,
+            'data_execution_trace': execution_trace,
             'success': len(remaining_tasks) == 0
         }
 ```
 
-### Reflection and Learning - The Wisdom of Experience
+### Reflection and Learning - The Wisdom of Data Processing Experience
 
-Michael Jordan didn't become the greatest basketball player by accident. After every game, every practice, every shot, he analyzed what worked and what didn't. This continuous reflection and adaptation transformed natural talent into legendary mastery.
+Netflix doesn't become the world's leading streaming platform by accident. After every data pipeline deployment, every schema change, every processing optimization, they analyze what worked and what didn't. This continuous reflection and adaptation transforms raw data processing capability into legendary data engineering mastery.
 
-AI agents can follow the same path from competence to excellence through systematic reflection:
+Data processing AI agents can follow the same path from competence to excellence through systematic reflection on data operations:
 
 ![Reflection Pattern](images/reflection-pattern.png)
-*shows the reflection and learning cycle where agents analyze their execution experiences, identify patterns, assess performance trends, and adapt their strategies. The diagram demonstrates how continuous learning improves agent performance over time*
+*Shows the reflection and learning cycle where data processing agents analyze their execution experiences, identify data patterns, assess pipeline performance trends, and adapt their processing strategies. The diagram demonstrates how continuous learning improves data agent performance over time*
 
-**File**: [`src/session9/reflection_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reflection_engine.py) - Learning from execution
+**File**: [`src/session9/reflection_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reflection_engine.py) - Learning from data processing execution
 
 ```python
-class ReflectionEngine:
-    """Implements reflection patterns for continuous improvement"""
+class DataReflectionEngine:
+    """Implements reflection patterns for continuous data processing improvement"""
     
     def __init__(self, agent):
         self.agent = agent
-        self.experience_buffer: List[Dict[str, Any]] = []
-        self.learned_patterns: Dict[str, Any] = {}
-        self.performance_metrics: Dict[str, List[float]] = {}
+        self.data_experience_buffer: List[Dict[str, Any]] = []
+        self.learned_data_patterns: Dict[str, Any] = {}
+        self.data_performance_metrics: Dict[str, List[float]] = {}
     
-    async def reflect_on_execution(
+    async def reflect_on_data_execution(
         self, execution_result: Dict[str, Any]
     ) -> Dict[str, Any]:
-        """Conduct comprehensive reflection on execution experience"""
+        """Conduct comprehensive reflection on data processing execution experience"""
         
-        # Phase 1: Experience analysis
-        experience_analysis = await self._analyze_execution_experience(
+        # Phase 1: Data processing experience analysis
+        experience_analysis = await self._analyze_data_execution_experience(
             execution_result
         )
         
-        # Phase 2: Pattern identification
-        patterns = await self._identify_learning_patterns(
-            experience_analysis, self.experience_buffer
+        # Phase 2: Data pattern identification
+        patterns = await self._identify_data_learning_patterns(
+            experience_analysis, self.data_experience_buffer
         )
         
-        # Phase 3: Performance assessment
-        performance_assessment = await self._assess_performance_trends(
+        # Phase 3: Data pipeline performance assessment
+        performance_assessment = await self._assess_data_performance_trends(
             execution_result, patterns
         )
         
-        # Phase 4: Strategy adaptation
-        adaptations = await self._generate_strategy_adaptations(
+        # Phase 4: Data processing strategy adaptation
+        adaptations = await self._generate_data_strategy_adaptations(
             patterns, performance_assessment
         )
         
-        # Phase 5: Knowledge integration
-        integration_result = await self._integrate_learned_knowledge(
+        # Phase 5: Data knowledge integration
+        integration_result = await self._integrate_learned_data_knowledge(
             patterns, adaptations
         )
         
-        # Store experience for future learning
-        self.experience_buffer.append({
-            'execution_result': execution_result,
+        # Store data processing experience for future learning
+        self.data_experience_buffer.append({
+            'data_execution_result': execution_result,
             'reflection': {
                 'analysis': experience_analysis,
-                'patterns': patterns,
+                'data_patterns': patterns,
                 'performance': performance_assessment,
                 'adaptations': adaptations
             },
             'timestamp': datetime.now()
         })
         
-        # Prune old experiences if buffer is too large
-        if len(self.experience_buffer) > 500:
-            self.experience_buffer = self.experience_buffer[-400:]
+        # Prune old data experiences if buffer is too large
+        if len(self.data_experience_buffer) > 500:
+            self.data_experience_buffer = self.data_experience_buffer[-400:]
         
         return {
-            'reflection_summary': experience_analysis['summary'],
-            'identified_patterns': patterns,
+            'data_reflection_summary': experience_analysis['summary'],
+            'identified_data_patterns': patterns,
             'performance_insights': performance_assessment,
             'recommended_adaptations': adaptations,
             'integration_success': integration_result
@@ -726,15 +736,15 @@ class ReflectionEngine:
 
 ---
 
-## Part 4: Basic Production Patterns - From Lab to Real World
+## Part 4: Basic Production Patterns - From Lab to Real-World Data Processing
 
-### Production Configuration - Making It Live
+### Production Configuration - Making Data Intelligence Live
 
-The difference between a research demo and a production system isn't just scale - it's reliability, monitoring, and the hundred little details that determine whether your multi-agent system becomes a valuable tool or an expensive mistake.
+The difference between a research data processing demo and a production data system isn't just scale - it's reliability, monitoring, and the hundred little details that determine whether your multi-agent data system becomes mission-critical infrastructure or an expensive lesson in production failure.
 
-Here's how to deploy intelligence that works in the real world:
+Here's how to deploy data processing intelligence that works in the real world of petabyte-scale operations:
 
-**File**: [`src/session9/production_deployment.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/production_deployment.py) - Production patterns
+**File**: [`src/session9/production_deployment.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/production_deployment.py) - Production data processing patterns
 
 ```python
 from dataclasses import dataclass
@@ -743,49 +753,51 @@ from datetime import timedelta
 import logging
 
 @dataclass
-class BasicProductionConfig:
-    """Basic configuration for production multi-agent systems"""
-    max_agents: int = 20
-    consensus_timeout: timedelta = timedelta(seconds=15)
-    health_check_interval: timedelta = timedelta(seconds=5)
-    enable_monitoring: bool = True
+class BasicDataProductionConfig:
+    """Basic configuration for production multi-agent data processing systems"""
+    max_data_agents: int = 50
+    consensus_timeout: timedelta = timedelta(seconds=30)
+    data_health_check_interval: timedelta = timedelta(seconds=10)
+    enable_data_monitoring: bool = True
     log_level: str = "INFO"
+    data_processing_batch_size: int = 10000
+    max_parallel_streams: int = 8
 
-class BasicProductionSystem:
-    """Basic production multi-agent system"""
+class BasicDataProductionSystem:
+    """Basic production multi-agent data processing system"""
     
-    def __init__(self, config: BasicProductionConfig):
+    def __init__(self, config: BasicDataProductionConfig):
         self.config = config
-        self.agents: Dict[str, 'BaseAgent'] = {}
-        self._setup_logging()
+        self.data_agents: Dict[str, 'BaseDataAgent'] = {}
+        self._setup_data_logging()
     
-    def _setup_logging(self):
-        """Setup production logging"""
+    def _setup_data_logging(self):
+        """Setup production data processing logging"""
         logging.basicConfig(
             level=getattr(logging, self.config.log_level),
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            format='%(asctime)s - %(name)s - %(levelname)s - [DATA] %(message)s'
         )
     
-    async def deploy_agent(self, agent: 'BaseAgent') -> Dict[str, Any]:
-        """Deploy agent with basic validation"""
+    async def deploy_data_agent(self, agent: 'BaseDataAgent') -> Dict[str, Any]:
+        """Deploy data processing agent with validation"""
         
-        # Basic validation
-        if len(self.agents) >= self.config.max_agents:
-            return {'success': False, 'error': 'Maximum agents reached'}
+        # Basic data processing validation
+        if len(self.data_agents) >= self.config.max_data_agents:
+            return {'success': False, 'error': 'Maximum data processing agents reached'}
         
-        if agent.agent_id in self.agents:
-            return {'success': False, 'error': 'Agent ID already exists'}
+        if agent.agent_id in self.data_agents:
+            return {'success': False, 'error': 'Data agent ID already exists'}
         
-        # Register agent
-        self.agents[agent.agent_id] = agent
+        # Register data processing agent
+        self.data_agents[agent.agent_id] = agent
         
-        # Basic health check
-        health = await self._basic_health_check(agent)
+        # Basic data processing health check
+        health = await self._basic_data_health_check(agent)
         if not health['healthy']:
-            del self.agents[agent.agent_id]
-            return {'success': False, 'error': 'Agent failed health check'}
+            del self.data_agents[agent.agent_id]
+            return {'success': False, 'error': 'Data agent failed health check'}
         
-        logging.info(f"Agent {agent.agent_id} deployed successfully")
+        logging.info(f"Data processing agent {agent.agent_id} deployed successfully")
         
         return {
             'success': True,
@@ -793,15 +805,16 @@ class BasicProductionSystem:
             'deployment_time': datetime.now()
         }
     
-    async def _basic_health_check(self, agent: 'BaseAgent') -> Dict[str, Any]:
-        """Perform basic agent health check"""
+    async def _basic_data_health_check(self, agent: 'BaseDataAgent') -> Dict[str, Any]:
+        """Perform basic data processing agent health check"""
         try:
-            # Test basic functionality
-            test_response = await agent.process_simple_request("health check")
+            # Test basic data processing functionality
+            test_response = await agent.process_data_sample("health check data")
             
             return {
                 'healthy': bool(test_response),
-                'response_time': 'measured_time_here'
+                'response_time': 'measured_time_here',
+                'data_processing_capability': test_response.get('processing_success', False)
             }
         except Exception as e:
             return {
@@ -810,50 +823,60 @@ class BasicProductionSystem:
             }
 ```
 
-### Basic Monitoring
+### Basic Data Processing Monitoring
 
-Essential monitoring for multi-agent systems:
+Essential monitoring for multi-agent data processing systems:
 
 ```python
-class BasicSystemMonitor:
-    """Basic monitoring for multi-agent systems"""
+class BasicDataSystemMonitor:
+    """Basic monitoring for multi-agent data processing systems"""
     
-    def __init__(self, system: BasicProductionSystem):
+    def __init__(self, system: BasicDataProductionSystem):
         self.system = system
-        self.metrics: Dict[str, List[Any]] = {
+        self.data_metrics: Dict[str, List[Any]] = {
             'agent_health': [],
-            'message_count': [],
+            'data_throughput': [],
+            'processing_latency': [],
+            'data_quality_score': [],
             'error_count': []
         }
     
-    async def collect_basic_metrics(self) -> Dict[str, Any]:
-        """Collect basic system metrics"""
+    async def collect_basic_data_metrics(self) -> Dict[str, Any]:
+        """Collect basic data processing system metrics"""
         
-        # Agent health metrics
-        healthy_agents = 0
-        for agent_id, agent in self.system.agents.items():
-            health = await self.system._basic_health_check(agent)
+        # Data processing agent health metrics
+        healthy_data_agents = 0
+        total_throughput = 0
+        
+        for agent_id, agent in self.system.data_agents.items():
+            health = await self.system._basic_data_health_check(agent)
             if health['healthy']:
-                healthy_agents += 1
+                healthy_data_agents += 1
+                # Simulate throughput metrics
+                total_throughput += getattr(agent, 'current_throughput', 1000)
         
         return {
             'timestamp': datetime.now(),
-            'total_agents': len(self.system.agents),
-            'healthy_agents': healthy_agents,
-            'system_health': healthy_agents / len(self.system.agents) if self.system.agents else 0
+            'total_data_agents': len(self.system.data_agents),
+            'healthy_data_agents': healthy_data_agents,
+            'total_data_throughput_rps': total_throughput,
+            'system_health': healthy_data_agents / len(self.system.data_agents) if self.system.data_agents else 0,
+            'average_processing_latency_ms': 150  # Would be measured in production
         }
     
-    async def generate_basic_report(self) -> str:
-        """Generate basic system status report"""
-        metrics = await self.collect_basic_metrics()
+    async def generate_basic_data_report(self) -> str:
+        """Generate basic data processing system status report"""
+        metrics = await self.collect_basic_data_metrics()
         
         return f"""
-Basic Multi-Agent System Report
-================================
+Basic Multi-Agent Data Processing System Report
+===============================================
 Time: {metrics['timestamp']}
-Total Agents: {metrics['total_agents']}
-Healthy Agents: {metrics['healthy_agents']}
+Total Data Processing Agents: {metrics['total_data_agents']}
+Healthy Data Agents: {metrics['healthy_data_agents']}
+Total Data Throughput: {metrics['total_data_throughput_rps']} records/sec
 System Health: {metrics['system_health']:.2%}
+Average Processing Latency: {metrics['average_processing_latency_ms']}ms
 """
 ```
 
@@ -863,25 +886,25 @@ System Health: {metrics['system_health']:.2%}
 
 🗂️ **Exercise Files**:
 
-- [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - ReAct pattern implementation
-- [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Multi-agent coordination
+- [`src/session9/react_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/react_agent.py) - ReAct pattern for data processing
+- [`src/session9/multi_agent_coordination.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/multi_agent_coordination.py) - Multi-agent data coordination
 
 ```bash
 
-# Try the examples:
+# Try the data processing examples:
 
 cd src/session9
-python react_agent.py                    # ReAct reasoning
-python multi_agent_coordination.py       # Agent coordination
-python planning_systems.py               # HTN planning
+python react_agent.py                    # ReAct reasoning for data pipelines
+python multi_agent_coordination.py       # Data agent coordination
+python planning_systems.py               # HTN planning for data processing
 ```
 
 ### Self-Assessment Checklist
 
-- [ ] I understand the ReAct pattern and transparent reasoning
-- [ ] I can implement basic multi-agent communication
-- [ ] I understand hierarchical planning concepts
-- [ ] I know basic production patterns for multi-agent systems
+- [ ] I understand the ReAct pattern for transparent data processing reasoning
+- [ ] I can implement basic multi-agent data communication protocols
+- [ ] I understand hierarchical planning concepts for data pipeline orchestration
+- [ ] I know basic production patterns for multi-agent data processing systems
 - [ ] I'm ready for advanced modules or next session
 
 **Next Session Prerequisites**: ✅ Core Section Complete
@@ -891,74 +914,74 @@ python planning_systems.py               # HTN planning
 
 # Optional Deep Dive Modules
 
-- **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Byzantine fault tolerance & game theory
-- **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise deployment & monitoring
+- **[Module A: Advanced Consensus Algorithms →](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Distributed consensus for data consistency & fault tolerance
+- **[Module B: Production Multi-Agent Systems →](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise data pipeline deployment & monitoring
 
-**Code Examples**: Available in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9) - 12 Python files with complete multi-agent implementations
+**Code Examples**: Available in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9) - 12 Python files with complete multi-agent data processing implementations
 
 ---
 
 ## 📝 Multiple Choice Test - Session 9
 
-Test your understanding of multi-agent patterns and coordination strategies.
+Test your understanding of multi-agent patterns and coordination strategies for data processing.
 
-**Question 1:** What does "ReAct" stand for in the ReAct pattern?  
+**Question 1:** What does "ReAct" stand for in the ReAct pattern for data processing?  
 A) Read and Act  
 B) Reasoning and Acting  
 C) Reflect and Act  
 D) Retrieve and Act  
 
-**Question 2:** What is the primary benefit of the ReAct pattern over direct prompting?  
+**Question 2:** What is the primary benefit of the ReAct pattern over direct data processing?  
 A) Faster execution  
-B) Transparent reasoning with step-by-step thought processes  
-C) Lower cost  
+B) Transparent reasoning with step-by-step data processing thought processes  
+C) Lower computational cost  
 D) Simpler implementation  
 
-**Question 3:** In multi-agent systems, what is the purpose of a Communication Hub?  
-A) Store data  
-B) Coordinate message passing between agents  
-C) Execute agent logic  
+**Question 3:** In multi-agent data systems, what is the purpose of a Data Communication Hub?  
+A) Store processed data  
+B) Coordinate message passing between data processing agents  
+C) Execute data transformation logic  
 D) Manage user interface  
 
-**Question 4:** What determines when the ReAct reasoning loop terminates?  
+**Question 4:** What determines when the ReAct reasoning loop terminates in data processing?  
 A) Fixed number of steps  
-B) When final_answer action is reached or max steps exceeded  
+B) When final_result action is reached or max steps exceeded  
 C) User intervention  
-D) Random timing  
+D) Data processing completion timeout  
 
-**Question 5:** How do agents typically reach consensus in multi-agent systems?  
+**Question 5:** How do data processing agents typically reach consensus in multi-agent systems?  
 A) First agent decides  
-B) Voting mechanisms and consensus algorithms  
+B) Voting mechanisms and data validation consensus algorithms  
 C) Random selection  
-D) Manager override  
+D) Data engineer override  
 
-**Question 6:** What is the main advantage of hierarchical coordination patterns?  
+**Question 6:** What is the main advantage of hierarchical coordination patterns in data processing?  
 A) Faster execution  
-B) Clear command structure with specialized delegation  
+B) Clear command structure with specialized data processing delegation  
 C) Lower resource usage  
 D) Simpler implementation  
 
-**Question 7:** In auction-based coordination, how are tasks typically allocated?  
+**Question 7:** In auction-based coordination for data processing, how are tasks typically allocated?  
 A) Random assignment  
-B) Based on agent capabilities and bid evaluation  
+B) Based on agent data processing capabilities and bid evaluation  
 C) First-come first-served  
 D) Manager assignment  
 
-**Question 8:** What is the purpose of Hierarchical Task Network (HTN) planning?  
+**Question 8:** What is the purpose of Hierarchical Task Network (HTN) planning in data processing?  
 A) Simple task execution  
-B) Breaking complex tasks into manageable hierarchies  
+B) Breaking complex data processing tasks into manageable hierarchies  
 C) Agent communication  
 D) Error handling  
 
-**Question 9:** How does dynamic replanning differ from static planning?  
+**Question 9:** How does dynamic replanning differ from static planning in data pipelines?  
 A) No difference  
-B) Adapts plans during execution based on changing conditions  
+B) Adapts data processing plans during execution based on changing conditions  
 C) Plans are created faster  
 D) Uses different algorithms  
 
-**Question 10:** What is the main benefit of reflection patterns in multi-agent systems?  
+**Question 10:** What is the main benefit of reflection patterns in multi-agent data processing systems?  
 A) Faster execution  
-B) Continuous learning and improvement from experience  
+B) Continuous learning and improvement from data processing experience  
 C) Lower costs  
 D) Simpler deployment  
 
@@ -972,7 +995,7 @@ D) Simpler deployment
 
 ### Optional Deep Dive Modules
 
-- 🔬 **[Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Advanced coordination patterns
-- 🏭 **[Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise deployment
+- 🔬 **[Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)** - Advanced coordination patterns for data systems
+- 🏭 **[Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)** - Enterprise data processing deployment
 
 **Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)
