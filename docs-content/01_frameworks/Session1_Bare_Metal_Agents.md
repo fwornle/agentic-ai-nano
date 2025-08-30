@@ -39,6 +39,7 @@ The model-application layer separation becomes critical when managing costs acro
 ### Real-World Data Processing Applications
 
 Engineering teams leverage bare metal agents for:
+
 - **Pipeline Orchestration**: Agents that analyze incoming data characteristics and route processing through optimal transformation workflows
 - **Quality Assurance**: Systems that detect data anomalies in streaming pipelines and trigger automated data cleansing workflows
 - **Cost Optimization**: Agents that monitor processing patterns and dynamically adjust resource allocation to meet budget constraints

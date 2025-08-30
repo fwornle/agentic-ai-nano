@@ -104,7 +104,7 @@ The orchestrator initialization sets up enterprise-grade data processing infrast
 
 Now we'll build the workflow graph with its various node types. Let's start with the core data processing orchestration infrastructure:
 
-```python        
+```python
     def create_advanced_parallel_workflow(self) -> StateGraph:
         """Create sophisticated parallel workflow with multiple synchronization patterns"""
         
@@ -123,7 +123,7 @@ Core orchestration nodes provide the foundation for sophisticated data processin
 
 Next, we add the specialized execution branches that handle different types of parallel data work:
 
-```python        
+```python
         # Specialized parallel data processing execution branches
         workflow.add_node("data_ingestion_branch_alpha", self._data_ingestion_branch_alpha)
         workflow.add_node("data_validation_branch_beta", self._data_validation_branch_beta)
@@ -138,7 +138,7 @@ Specialized execution branches handle different types of data processing work. M
 
 Finally, we add the nodes responsible for merging processing results and ensuring data quality standards:
 
-```python        
+```python
         # Convergence and integration nodes for data consistency
         workflow.add_node("branch_merger", self._intelligent_branch_merger)
         workflow.add_node("quality_validator", self._data_quality_validation_node)
@@ -174,7 +174,7 @@ Data batch analysis begins by evaluating complexity and available cluster resour
 
 Based on the complexity analysis, we determine the optimal data processing execution strategy:
 
-```python        
+```python
         # Determine optimal workflow mode based on analysis
         if batch_complexity["complexity_score"] > 0.8 and resource_availability["cluster_cpu"] > 0.7:
             workflow_mode = "parallel"
@@ -193,7 +193,7 @@ Workflow mode selection balances data complexity with available cluster resource
 
 Finally, we create the allocation strategy and update the workflow state with our analysis results:
 
-```python        
+```python
         # Create branch allocation strategy for data processing
         branch_allocation = self._create_branch_allocation_strategy(
             state["data_batch_queue"], 
@@ -241,7 +241,7 @@ Parallel coordination dynamically creates worker branches based on the allocatio
 
 Data processing tasks are distributed across specialized branches based on processing type and data characteristics:
 
-```python        
+```python
         # Create dynamic workers based on branch allocation
         for branch_id, branch_config in active_branches.items():
             branch_type = branch_config["type"]
@@ -292,7 +292,7 @@ Different data source types are routed to specialized branches: batch processing
 
 Data processing tasks are routed based on priority levels to ensure critical data gets optimal cluster resources:
 
-```python            
+```python
             elif branch_type == "data_aggregation":
                 if priority == "high":
                     coordination_commands.append(
@@ -337,7 +337,7 @@ Synchronization management tracks branch completion status against defined sync 
 
 We calculate completion progress to determine if synchronization requirements are met for data consistency:
 
-```python        
+```python
         if current_sync_point:
             required_branches = sync_points[current_sync_point]
             completed_required = [
@@ -354,7 +354,7 @@ Progress calculation determines how many required processing branches have compl
 
 Based on completion progress, we determine the appropriate coordination action:
 
-```python            
+```python
             # Check if synchronization point is satisfied for data consistency
             if sync_progress >= 1.0:
                 # All required branches completed - proceed with data merge
@@ -376,7 +376,7 @@ Adaptive synchronization policies balance completion requirements with timeout c
 
 Finally, we collect comprehensive metrics and update the workflow state:
 
-```python            
+```python
             # Update synchronization metrics for data processing
             sync_metrics = {
                 "sync_point": current_sync_point,
@@ -393,7 +393,7 @@ Finally, we collect comprehensive metrics and update the workflow state:
 
 Synchronization metrics collection creates comprehensive tracking information for coordination decisions. Progress ratios, completion status, and remaining branch lists provide detailed visibility into workflow state for optimization and debugging purposes.
 
-```python            
+```python
             return {
                 **state,
                 "synchronization_status": sync_metrics,
@@ -418,7 +418,7 @@ State updates preserve synchronization status and coordination actions for downs
 
 The Alpha branch handles streaming data ingestion with resource-aware processing and performance tracking:
 
-```python    
+```python
     def _data_ingestion_branch_alpha(self, state: Dict[str, Any]) -> Dict[str, Any]:
         """Specialized data ingestion branch for streaming data sources"""
         
@@ -432,7 +432,7 @@ The Alpha branch handles streaming data ingestion with resource-aware processing
 
 Branch initialization extracts processing parameters and begins timing measurement. Resource allocation awareness ensures efficient utilization of distributed cluster capacity while start time tracking enables performance monitoring for SLA compliance.
 
-```python        
+```python
         try:
             # Resource-intensive streaming data ingestion
             ingestion_results = self._perform_streaming_ingestion(
@@ -445,7 +445,7 @@ Branch initialization extracts processing parameters and begins timing measureme
 
 Streaming data ingestion execution tracks timing and cluster resource utilization. The start time enables performance measurement, while resource-aware processing optimizes computational efficiency based on allocated cluster capacity.
 
-```python            
+```python
             # Track performance metrics for data processing
             performance_metrics = {
                 "execution_time": execution_time,
@@ -457,7 +457,7 @@ Streaming data ingestion execution tracks timing and cluster resource utilizatio
 
 Performance metrics capture execution efficiency and quality indicators. Execution time measures processing speed, cluster utilization tracks efficiency, quality scoring evaluates data accuracy, and throughput calculates processing velocity for SLA monitoring.
 
-```python            
+```python
             return {
                 "completed_processing_branches": {
                     branch_id: {
@@ -477,7 +477,7 @@ Performance metrics capture execution efficiency and quality indicators. Executi
 
 Successful completion returns comprehensive branch data including processing results, performance metrics, and completion status. This information enables intelligent merging and quality assessment in downstream workflow nodes.
 
-```python            
+```python
         except Exception as e:
             self.logger.error(f"Data ingestion branch {branch_id} failed: {str(e)}")
             
@@ -500,7 +500,7 @@ Error handling for failed data ingestion branches ensures graceful degradation. 
 
 The branch merger coordinates results from parallel data processing streams using sophisticated integration algorithms:
 
-```python    
+```python
     def _intelligent_branch_merger(self, state: AdvancedWorkflowState) -> AdvancedWorkflowState:
         """Intelligently merge results from multiple parallel data processing branches"""
         
@@ -510,7 +510,7 @@ The branch merger coordinates results from parallel data processing streams usin
 
 Branch merging initialization extracts completed processing results and performance metrics from workflow state. This information provides the foundation for intelligent integration decisions based on quality, performance, and reliability indicators.
 
-```python        
+```python
         # Categorize results by type and quality for data consistency
         ingestion_results = {}
         validation_results = {}
@@ -531,7 +531,7 @@ Branch merging initialization extracts completed processing results and performa
 
 Result categorization separates successful branches by data processing type and isolates failures. This classification enables type-specific merging strategies that optimize for different data characteristics and processing requirements.
 
-```python        
+```python
         # Intelligent merging strategy based on quality and performance
         merged_ingestion = self._merge_ingestion_intelligently(ingestion_results, branch_performance)
         merged_validation = self._merge_validation_intelligently(validation_results, branch_performance)
@@ -540,7 +540,7 @@ Result categorization separates successful branches by data processing type and 
 
 Intelligent merging applies specialized algorithms for each data processing type. Ingestion merging emphasizes data completeness and freshness, validation merging focuses on quality assurance and consistency, while transformation merging prioritizes schema compliance and accuracy.
 
-```python        
+```python
         # Create comprehensive integration result for data processing
         integration_result = {
             "ingestion_synthesis": merged_ingestion,
@@ -567,7 +567,7 @@ Intelligent merging applies specialized algorithms for each data processing type
 
 Integration results combine synthesized data with comprehensive metadata. Quality metrics provide confidence indicators for data reliability, while metadata tracks processing statistics for audit and optimization purposes in enterprise data environments.
 
-```python        
+```python
         return {
             **state,
             "integration_result": integration_result,
@@ -595,7 +595,7 @@ The final state return combines integration results with comprehensive performan
 
 The ingestion merger applies quality-weighted algorithms to combine results from multiple data processing branches:
 
-```python    
+```python
     def _merge_ingestion_intelligently(self, ingestion_results: Dict[str, Any], 
                                     performance_metrics: Dict[str, Any]) -> Dict[str, Any]:
         """Merge data ingestion results using quality-weighted integration"""
@@ -606,7 +606,7 @@ The ingestion merger applies quality-weighted algorithms to combine results from
 
 Quality-weighted merging handles edge cases and empty result sets gracefully. When no ingestion data is available, the system returns appropriate status indicators rather than failing, ensuring workflow continuity in distributed data processing environments.
 
-```python        
+```python
         # Weight results by quality and performance for data processing
         weighted_results = []
         total_weight = 0
@@ -619,7 +619,7 @@ Quality-weighted merging handles edge cases and empty result sets gracefully. Wh
 
 Weight calculation preparation extracts quality and performance metrics from each processing branch. Default values (0.5 quality, infinite time) ensure robust handling when metrics are missing while maintaining system stability.
 
-```python            
+```python
             # Calculate composite weight (quality vs speed trade-off)
             time_factor = 1.0 / (1.0 + execution_time / 60)  # Prefer faster data processing
             weight = quality_score * 0.7 + time_factor * 0.3
@@ -627,7 +627,7 @@ Weight calculation preparation extracts quality and performance metrics from eac
 
 Weight calculation balances data quality and processing performance factors. Quality scores receive 70% weighting while execution speed contributes 30%, creating composite weights that favor accurate, efficient data processing results.
 
-```python            
+```python
             weighted_results.append({
                 "data": result["results"],
                 "weight": weight,
@@ -639,7 +639,7 @@ Weight calculation balances data quality and processing performance factors. Qua
 
 Weighted result collection preserves source attribution and quality metrics. Each result maintains its calculated weight, enabling proportional contribution to the final data synthesis based on reliability and processing performance.
 
-```python        
+```python
         # Create synthesized data ingestion result
         synthesis = {
             "primary_data": self._extract_primary_data(weighted_results),
@@ -671,7 +671,7 @@ Weighted result collection preserves source attribution and quality metrics. Eac
 
 Basic workflow flow establishes entry point and initial sequential processing. Data batch analysis must complete before parallel coordination begins, ensuring proper resource allocation and strategy determination for optimal data processing.
 
-```python        
+```python
         # Parallel coordination spawns workers dynamically via Send commands
         workflow.add_conditional_edges(
             "parallel_coordinator",
@@ -689,7 +689,7 @@ Basic workflow flow establishes entry point and initial sequential processing. D
 
 Dynamic coordination routing enables flexible worker dispatch for data processing. The conditional edges allow runtime decisions about which processing branches to activate based on data characteristics and cluster resource availability.
 
-```python        
+```python
         # All branches converge at synchronization point for data consistency
         workflow.add_edge("data_ingestion_branch_alpha", "sync_point_manager")
         workflow.add_edge("data_validation_branch_beta", "sync_point_manager")
@@ -700,7 +700,7 @@ Dynamic coordination routing enables flexible worker dispatch for data processin
 
 Branch convergence creates synchronization points where parallel data processing streams reunite. This pattern enables coordination and prevents downstream processing from beginning until sufficient branch completion ensures data consistency.
 
-```python        
+```python
         # Conditional flow from synchronization for data processing
         workflow.add_conditional_edges(
             "sync_point_manager",
@@ -716,7 +716,7 @@ Branch convergence creates synchronization points where parallel data processing
 
 Adaptive synchronization handling provides multiple response strategies for data processing. Complete synchronization proceeds to merging, partial completion triggers conditional advancement, insufficient progress continues waiting, and timeouts initiate recovery procedures to prevent data staleness.
 
-```python        
+```python
         # Quality validation and final integration for data processing
         workflow.add_edge("branch_merger", "quality_validator")
         
@@ -821,7 +821,7 @@ The factory initialization creates the infrastructure for agent generation and m
 
 The template registration system enables the factory to learn about available agent types and their capabilities:
 
-```python        
+```python
     def register_agent_template(self, agent_type: str, template_class: Type, 
                               capabilities: List[DataProcessingCapability]):
         """Register a data processing agent template for dynamic instantiation"""
@@ -837,7 +837,7 @@ The template registration system enables the factory to learn about available ag
 
 Template registration stores data processing agent specifications for future instantiation. Each template tracks its class definition, supported capabilities, usage statistics, and performance history for optimization in distributed data environments.
 
-```python        
+```python
         # Map capabilities to agent types for data processing
         for capability in capabilities:
             if capability not in self.capability_mappings:
@@ -856,7 +856,7 @@ Template registration stores data processing agent specifications for future ins
 
 Data processing task analysis extracts essential requirements from the provided specifications. Capability analysis identifies needed agent functions for data operations, resource estimation calculates computational needs for data volume, and performance targets establish success criteria for throughput and latency.
 
-```python        
+```python
         # Find best agent type for data processing capabilities
         optimal_agent_type = self._select_optimal_data_processing_agent_type(
             required_capabilities, 
@@ -874,7 +874,7 @@ Data processing task analysis extracts essential requirements from the provided 
 
 Agent selection and specialization optimize for data processing task requirements. Type selection matches capabilities to available templates, while specialization parameters customize the agent configuration for specific data processing characteristics like volume, velocity, and variety.
 
-```python        
+```python
         return AgentSpecification(
             agent_type=optimal_agent_type,
             capabilities=required_capabilities,
@@ -906,7 +906,7 @@ Agent selection and specialization optimize for data processing task requirement
 
 Resource management ensures system stability during data processing agent creation. Availability checking prevents overallocation, while resource allocation provides dedicated computational capacity for the new agent instance across distributed clusters.
 
-```python        
+```python
         try:
             # Create data processing agent instance with specialization
             agent_class = template_info["class"]
@@ -919,7 +919,7 @@ Resource management ensures system stability during data processing agent creati
 
 Agent instantiation applies specialization parameters to the template class. This creates a customized data processing agent instance configured for specific task requirements with dedicated resource allocation in the distributed processing environment.
 
-```python            
+```python
             # Configure monitoring if enabled for data processing
             if specification.monitoring_enabled:
                 agent_instance = self._wrap_with_data_processing_monitoring(
@@ -935,7 +935,7 @@ Agent instantiation applies specialization parameters to the template class. Thi
 
 Agent finalization includes optional monitoring configuration and statistics tracking. Monitoring wrapping provides observability for data processing operations, while creation count tracking enables template usage analysis and optimization decisions.
 
-```python            
+```python
         except Exception as e:
             # Release resources on failure
             self.resource_pool.release(resource_allocation)
@@ -948,7 +948,7 @@ Error handling ensures resource cleanup when agent creation fails. Resource allo
 
 Agent type selection employs sophisticated algorithms to match capabilities with task requirements:
 
-```python    
+```python
     def _select_optimal_data_processing_agent_type(self, capabilities: List[DataProcessingCapability],
                                  resource_needs: Dict[str, Any],
                                  context: Dict[str, Any]) -> str:
@@ -966,7 +966,7 @@ Agent type selection employs sophisticated algorithms to match capabilities with
 
 Capability matching uses set intersection to identify agent types that support all required data processing functions. This ensures selected agents have complete capability coverage rather than partial functionality that could lead to processing failures.
 
-```python        
+```python
         if not candidates:
             raise NoSuitableAgentError(
                 f"No agent type supports all required data processing capabilities: {capabilities}"
@@ -975,7 +975,7 @@ Capability matching uses set intersection to identify agent types that support a
 
 Candidate agent selection identifies types that support all required data processing capabilities. Set intersection ensures only agents with complete capability coverage are considered for the data processing task.
 
-```python        
+```python
         # Score candidates based on multiple factors for data processing
         candidate_scores = {}
         for agent_type in candidates:
@@ -991,7 +991,7 @@ Candidate agent selection identifies types that support all required data proces
 
 Composite scoring evaluates candidates across multiple dimensions for data processing optimization. Capability match measures specialization alignment, performance score reflects historical success, and resource efficiency considers computational cost-effectiveness in distributed environments.
 
-```python            
+```python
             # Weight the factors for data processing optimization
             composite_score = (
                 capability_match * 0.4 +
@@ -1018,7 +1018,7 @@ Composite scoring evaluates candidates across multiple dimensions for data proce
 
 Base parameter creation establishes data processing agent identity and context. The unique agent ID enables tracking across distributed systems, creation timestamp provides audit trails, and task context preserves execution environment information.
 
-```python        
+```python
         # Agent-type specific specialization for data processing
         if agent_type == "data_ingestion_specialist":
             base_params.update({
@@ -1031,7 +1031,7 @@ Base parameter creation establishes data processing agent identity and context. 
 
 Data ingestion specialist configuration optimizes for data source handling. Source type directs ingestion strategies, batch size controls throughput, data format guides parsing logic, and schema validation ensures data quality at entry points.
 
-```python        
+```python
         elif agent_type == "data_validation_specialist":
             base_params.update({
                 "validation_rules": task_requirements.get("rules", "comprehensive"),
@@ -1043,7 +1043,7 @@ Data ingestion specialist configuration optimizes for data source handling. Sour
 
 Data validation specialist configuration emphasizes quality assurance and anomaly detection. Validation rules guide quality checks, thresholds define acceptable quality levels, anomaly detection identifies outliers, while confidence intervals provide statistical reliability measures.
 
-```python        
+```python
         elif agent_type == "data_transformation_specialist":
             base_params.update({
                 "transformation_type": task_requirements.get("output_format", "parquet"),
@@ -1055,7 +1055,7 @@ Data validation specialist configuration emphasizes quality assurance and anomal
 
 Data transformation specialist configuration adapts processing logic for target outputs. Transformation type controls output format, schema mapping handles structure changes, aggregation rules define summary calculations, and partitioning strategy optimizes storage and query performance.
 
-```python        
+```python
         # Add performance and quality parameters for data processing
         base_params.update({
             "quality_threshold": task_requirements.get("quality_requirement", 0.8),
@@ -1089,7 +1089,7 @@ Orchestrator initialization establishes the infrastructure for dynamic agent man
 
 The adaptive workflow node analyzes runtime requirements and creates specialized agents on-demand:
 
-```python        
+```python
     def create_adaptive_workflow_node(self, state: AdvancedWorkflowState) -> AdvancedWorkflowState:
         """Workflow node that creates data processing agents dynamically based on current needs"""
         
@@ -1102,7 +1102,7 @@ The adaptive workflow node analyzes runtime requirements and creates specialized
 
 Workflow node initialization extracts current task context and analyzes state to determine agent requirements. This runtime analysis enables intelligent agent creation that adapts to actual data processing demands rather than static configurations.
 
-```python        
+```python
         created_agents = []
         for requirement in agent_requirements:
             try:
@@ -1118,7 +1118,7 @@ Workflow node initialization extracts current task context and analyzes state to
 
 Dynamic data processing agent creation responds to runtime workflow requirements. Specification generation optimizes agent configuration for detected needs, while instantiation creates operational agents ready for data processing task execution.
 
-```python                
+```python
                 # Register with workflow for data processing
                 agent_id = agent_spec.specialization_parameters["agent_id"]
                 self.active_agents[agent_id] = {
@@ -1138,7 +1138,7 @@ Dynamic data processing agent creation responds to runtime workflow requirements
 
 Agent registration maintains workflow state consistency for data processing. Active agent tracking enables lifecycle management, while created agent metadata provides transparency into dynamic resource allocation decisions.
 
-```python                
+```python
             except Exception as e:
                 self.logger.error(f"Failed to create data processing agent for requirement {requirement}: {str(e)}")
                 created_agents.append({
@@ -1150,7 +1150,7 @@ Agent registration maintains workflow state consistency for data processing. Act
 
 Error handling ensures system resilience when data processing agent creation fails. Failed attempts are logged with detailed error information and tracked in the created agents list, providing comprehensive audit trails for troubleshooting and capacity planning.
 
-```python        
+```python
         return {
             **state,
             "dynamic_agents": created_agents,
@@ -1173,7 +1173,7 @@ State updates preserve workflow continuity and provide comprehensive tracking of
 
 The requirement analysis system evaluates workflow state to determine what types of data processing agents should be dynamically created:
 
-```python    
+```python
     def _analyze_data_processing_agent_requirements(self, state: AdvancedWorkflowState) -> List[Dict[str, Any]]:
         """Analyze workflow state to determine what data processing agents are needed"""
         
@@ -1185,7 +1185,7 @@ The requirement analysis system evaluates workflow state to determine what types
 
 Requirement analysis begins by examining the data batch queue to identify work characteristics that require specialized agent capabilities. This analysis drives intelligent agent selection based on actual data processing demands rather than predetermined configurations.
 
-```python        
+```python
         for batch in data_batch_queue:
             batch_type = batch.get("type", "general")
             complexity = batch.get("complexity", "medium")
@@ -1202,7 +1202,7 @@ Requirement analysis begins by examining the data batch queue to identify work c
 
 Streaming data processing requirements are identified based on batch type and complexity characteristics. High-complexity streaming data triggers data ingestion specialist creation with specific source configurations, batch sizes, and SLA requirements for optimal real-time processing performance.
 
-```python            
+```python
             elif batch_type == "validation":
                 requirements.append({
                     "task_description": batch.get("description", ""),
@@ -1215,7 +1215,7 @@ Streaming data processing requirements are identified based on batch type and co
 
 Data validation requirements are configured with specific validation rules and quality thresholds. Comprehensive validation with high quality requirements (95% accuracy) ensures data integrity while meeting aggressive SLA targets for enterprise data processing pipelines.
 
-```python        
+```python
         # Check for coordination needs in data processing
         if len(requirements) > 2:
             requirements.append({
@@ -1242,6 +1242,7 @@ You've now mastered advanced orchestration patterns for LangGraph workflows opti
 ✅ **Intelligent Data Routing**: Designed conditional workflow execution with quality-based decision making for data processing pipelines
 
 ### Next Steps
+
 - **Continue to Module B**: [Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md) for production data pipeline state handling
 - **Return to Core**: [Session 3 Main](Session3_LangGraph_Multi_Agent_Workflows.md)
 - **Advance to Session 4**: [CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)
@@ -1287,6 +1288,7 @@ D) Quality threshold and response time target
 ---
 
 **🗂️ Source Files for Module A:**
+
 - [`src/session3/parallel_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/parallel_workflow.py) - Advanced parallel execution patterns
 - [`src/session3/dynamic_agent_generation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/dynamic_agent_generation.py) - Runtime agent creation systems
 - [`src/session3/orchestration_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/orchestration_patterns.py) - Sophisticated coordination strategies
