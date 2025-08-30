@@ -854,16 +854,28 @@ Task requirement construction includes data-specific parameters like volume expe
 
 Optimal team formation includes data processing-specific optimization criteria and throughput capacity estimation for performance prediction.
 
+### Data Processing Skill Extraction Infrastructure
+
+The skill extraction system analyzes task descriptions to identify required data engineering capabilities. First, we define the core skill mapping structure:
+
 ```python    
     def _extract_required_data_processing_skills(self, task_description: str) -> Dict[str, DataProcessingSkillLevel]:
         """Extract required data processing skills from task description"""
         
-        # Data processing skill keyword mapping for analysis
-        data_skill_keywords = {
+        # Core data ingestion and extraction skills
+        data_ingestion_skills = {
             "data_ingestion": {
                 "keywords": ["ingest", "extract", "collect", "stream", "api"], 
                 "level": DataProcessingSkillLevel.ADVANCED
-            },
+            }
+        }
+```
+
+Data ingestion skills focus on the critical first stage of data processing - bringing data into the system from various sources including APIs, streaming platforms, and batch files.
+
+```python
+        # Data transformation and processing skills
+        data_processing_skills = {
             "data_transformation": {
                 "keywords": ["transform", "clean", "normalize", "etl", "pipeline"], 
                 "level": DataProcessingSkillLevel.EXPERT
@@ -871,7 +883,15 @@ Optimal team formation includes data processing-specific optimization criteria a
             "data_analysis": {
                 "keywords": ["analyze", "statistical", "ml", "model", "insight"], 
                 "level": DataProcessingSkillLevel.ADVANCED
-            },
+            }
+        }
+```
+
+Data processing skills encompass the core transformation and analysis capabilities. ETL pipeline expertise requires the highest skill level due to complexity, while analytical skills handle statistical modeling and machine learning applications.
+
+```python
+        # Data quality and visualization skills
+        data_quality_skills = {
             "data_quality": {
                 "keywords": ["validate", "quality", "profile", "monitor", "audit"], 
                 "level": DataProcessingSkillLevel.INTERMEDIATE
@@ -879,25 +899,51 @@ Optimal team formation includes data processing-specific optimization criteria a
             "data_visualization": {
                 "keywords": ["visualize", "dashboard", "chart", "report", "bi"], 
                 "level": DataProcessingSkillLevel.INTERMEDIATE
-            },
+            }
+        }
+```
+
+Quality and visualization skills support data validation and business intelligence. These skills typically require intermediate expertise since they focus on presentation and validation rather than complex processing algorithms.
+
+```python
+        # Data storage and infrastructure skills
+        data_storage_skills = {
             "data_storage": {
                 "keywords": ["store", "database", "warehouse", "lake", "persist"], 
                 "level": DataProcessingSkillLevel.ADVANCED
             }
         }
+        
+        # Combine all skill categories for comprehensive mapping
+        data_skill_keywords = {
+            **data_ingestion_skills,
+            **data_processing_skills,
+            **data_quality_skills,
+            **data_storage_skills
+        }
 ```
 
-Data processing skill keyword mapping enables natural language processing of task descriptions with domain-specific terminology. Each skill domain maps to relevant data engineering keywords and appropriate skill levels.
+Storage skills require advanced expertise for designing data lakes, warehouses, and distributed storage systems. The combined skill mapping provides comprehensive coverage of data engineering domains.
+
+### Skill Level Analysis and Adjustment
+
+Now we analyze the task description and adjust skill requirements based on complexity indicators:
 
 ```python
         required_data_skills = {}
         task_lower = task_description.lower()
         
+        # Extract base skills from keyword analysis
         for skill, config in data_skill_keywords.items():
             for keyword in config["keywords"]:
                 if keyword in task_lower:
-                    # Adjust skill level based on data complexity indicators
                     base_level = config["level"]
+```
+
+The base skill extraction identifies which data processing capabilities are needed by scanning for relevant keywords in the task description. This provides the foundation for skill requirement assessment.
+
+```python
+                    # Adjust skill level based on data complexity indicators
                     if any(indicator in task_lower for indicator in ["petabyte", "real-time", "distributed", "enterprise"]):
                         required_data_skills[skill] = DataProcessingSkillLevel.MASTER
                     elif any(indicator in task_lower for indicator in ["terabyte", "batch", "scalable", "production"]):
