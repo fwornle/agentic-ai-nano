@@ -37,10 +37,14 @@ ADK transforms enterprise data processing development through sophisticated agen
 **File**: [`src/session7/adk_data_foundation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session7/adk_data_foundation.py) - Enterprise ADK patterns for data processing
 
 ```python
+# Essential ADK imports for enterprise data processing
 from adk import ADKAgent, ADKSystem, DataProcessingCapability
 from adk.monitoring import EnterpriseMetrics, DataPipelineTracker
 from adk.deployment import ProductionDeployment, MultiTenantIsolation
+```
+ADK's enterprise imports provide sophisticated data processing capabilities designed for production environments. Unlike development frameworks, ADK includes built-in monitoring, deployment patterns, and multi-tenant isolation essential for enterprise data processing systems operating at petabyte scale.
 
+```python
 # Enterprise data processing agent with production-grade capabilities
 
 class EnterpriseDataProcessingAgent(ADKAgent):
@@ -57,17 +61,26 @@ class EnterpriseDataProcessingAgent(ADKAgent):
                 "concurrent_streams": 100
             }
         )
-        
+```
+Enterprise ADK agent initialization showcases production-ready configuration with sophisticated resource management. The dual processing capabilities enable both batch and streaming data workflows, while enterprise metrics provide 30-day retention for performance analysis. Resource limits ensure predictable performance under varying data processing loads.
+
+```python
         self.data_processing_tier = data_processing_tier
         self.pipeline_tracker = DataPipelineTracker()
-    
+```
+The data processing tier enables configuration-based resource allocation, while the pipeline tracker provides real-time performance monitoring for data workflows. This combination allows dynamic optimization based on processing complexity and enterprise performance requirements.
+
+```python
     async def process_data_stream(self, stream_data: dict) -> dict:
         """Process streaming data with enterprise monitoring and tracking"""
         
         # Track data processing pipeline performance
         with self.pipeline_tracker.track_processing("stream_processing", stream_data.get("stream_id")):
             processed_data = await self._execute_stream_processing(stream_data)
-            
+```
+Streaming data processing integrates comprehensive performance tracking from the start. The context manager pattern automatically captures processing metrics including execution time, resource utilization, and data throughput. This approach provides detailed visibility into streaming pipeline performance without impacting processing speed.
+
+```python
             # Log data processing metrics for enterprise monitoring
             self.metrics.record_data_processing_event({
                 "processing_type": "stream",
@@ -78,7 +91,10 @@ class EnterpriseDataProcessingAgent(ADKAgent):
             })
             
             return processed_data
-    
+```
+Enterprise metrics collection captures multi-dimensional performance data essential for production monitoring. The tenant_id enables multi-tenant performance analysis, while data quality scores track processing effectiveness. This rich telemetry supports sophisticated alerting, capacity planning, and performance optimization in production environments.
+
+```python
     async def process_batch_data(self, batch_config: dict) -> dict:
         """Process batch data with enterprise-grade error handling and monitoring"""
         
@@ -87,7 +103,10 @@ class EnterpriseDataProcessingAgent(ADKAgent):
         with self.pipeline_tracker.track_processing("batch_processing", batch_id):
             try:
                 batch_result = await self._execute_batch_processing(batch_config)
-                
+```
+Batch processing implements enterprise-grade error handling with comprehensive tracking. The batch_id provides unique identification for monitoring and debugging, while the tracking context captures detailed performance metrics. This approach enables precise troubleshooting and performance analysis for complex batch processing workflows.
+
+```python
                 self.metrics.record_batch_processing_success({
                     "batch_id": batch_id,
                     "records_processed": batch_result.get("record_count", 0),
@@ -96,7 +115,10 @@ class EnterpriseDataProcessingAgent(ADKAgent):
                 })
                 
                 return batch_result
-                
+```
+Successful batch processing triggers detailed success metrics collection. Record counts enable throughput analysis, processing duration supports performance optimization, and tenant identification ensures proper multi-tenant accounting. This comprehensive metrics approach supports sophisticated production monitoring and capacity planning.
+
+```python
             except Exception as e:
                 self.metrics.record_batch_processing_failure({
                     "batch_id": batch_id,
@@ -106,6 +128,7 @@ class EnterpriseDataProcessingAgent(ADKAgent):
                 })
                 raise
 ```
+Error handling captures detailed failure information for production troubleshooting. Exception types and messages enable precise error categorization, while batch and tenant identification support focused debugging. The re-raise pattern ensures upstream error handling while maintaining comprehensive error telemetry for enterprise monitoring systems.
 
 This enterprise data processing agent demonstrates ADK's production-ready capabilities with comprehensive monitoring, multi-tenant support, and sophisticated resource management optimized for data processing workloads at scale.
 

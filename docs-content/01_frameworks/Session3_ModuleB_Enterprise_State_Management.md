@@ -168,23 +168,37 @@ The production workflow integrates comprehensive state management with monitorin
         """Create workflow with enterprise state management for data processing"""
         
         workflow = StateGraph(EnterpriseDataProcessingState)
-        
+```
+
+The workflow foundation uses the enterprise state schema to enable comprehensive tracking. This establishes the data processing infrastructure with built-in monitoring, recovery, and persistence capabilities essential for production environments.
+
+```python
         # Add production nodes with state tracking for data processing
         workflow.add_node("state_initializer", self._initialize_enterprise_data_processing_state)
         workflow.add_node("data_orchestrator", self._orchestrator_with_state_tracking)
         workflow.add_node("state_monitor", self._monitor_state_health)
         workflow.add_node("checkpoint_manager", self._manage_checkpoints)
         workflow.add_node("recovery_handler", self._handle_state_recovery)
-        
+```
+
+Production nodes implement enterprise-grade data processing capabilities. The state initializer establishes tracking infrastructure, the orchestrator manages distributed workers, the monitor ensures health, checkpoints preserve progress, and recovery handles failures - forming a complete enterprise data processing pipeline.
+
+```python
         # Configure enterprise edges with state validation for data processing
         self._configure_enterprise_edges(workflow)
-        
+```
+
+Enterprise edge configuration establishes data processing workflow routing with validation at each transition. This ensures state consistency, enables conditional routing based on data processing health, and provides interrupt points for manual intervention in critical data processing scenarios.
+
+```python        
         return workflow.compile(
             checkpointer=self.persistence_config["primary"],
             interrupt_before=["checkpoint_manager"],  # Manual intervention points
             debug=True  # Comprehensive logging for data processing
         )
 ```
+
+Workflow compilation integrates persistence, interrupts, and debugging for production data processing. The primary checkpointer ensures state durability, manual intervention points enable human oversight at critical moments, and debug mode provides comprehensive logging for troubleshooting distributed data processing issues.
     
 ### Enterprise State Initialization
 
@@ -251,12 +265,24 @@ Finally, we establish enterprise-grade checkpoint and recovery capabilities for 
             "rollback_points": [],
             "state_integrity_hash": self._calculate_state_hash(state)
         }
-        
+```
+
+Checkpoint and recovery infrastructure ensures data processing resilience. Automatic checkpointing every 30 seconds preserves progress, rollback points enable state recovery, and integrity hashes detect corruption - providing comprehensive protection against failures in long-running data processing workflows.
+
+```python        
         return {
             **state,
             **enterprise_metadata
         }
+```
 
+State merge combines original workflow state with enterprise metadata using dictionary unpacking. This preserves all existing data processing state while adding comprehensive tracking capabilities, ensuring backward compatibility with existing data processing workflows.
+
+### Data Processing Orchestrator Implementation
+
+The orchestrator coordinates distributed data processing workers based on complexity analysis and resource requirements:
+
+```python
     def _orchestrator_with_state_tracking(self, state: EnterpriseDataProcessingState) -> List[Send]:
         """Orchestrator with comprehensive state tracking and data processing worker management"""
         
@@ -266,10 +292,16 @@ Finally, we establish enterprise-grade checkpoint and recovery capabilities for 
         updated_metrics = state["execution_metrics"].copy()
         updated_metrics["state_update_count"] += 1
         updated_metrics["last_orchestrator_call"] = datetime.now().timestamp()
-        
+```
+
+Orchestrator initialization extracts current processing context and updates execution tracking. State update counting enables change frequency analysis while timestamp tracking supports performance monitoring and timeout detection in distributed data processing environments.
+
+```python        
         # Analyze processing step complexity for worker allocation
         processing_complexity = self._analyze_processing_step_complexity(current_step, state)
 ```
+
+Complexity analysis determines data processing resource requirements and worker allocation strategy. The analysis considers data volume, transformation requirements, and processing deadlines to optimize worker distribution across available cluster resources for maximum data processing throughput.
 
 ### Processing Complexity Analysis and Worker Allocation
 
@@ -307,7 +339,11 @@ Finally, we log the orchestration decision and update the workflow state with tr
             "worker_types": [cmd.node for cmd in worker_commands],
             "reasoning": f"Processing analysis indicated {processing_complexity['complexity_score']} complexity"
         }
-        
+```
+
+Command logging captures orchestration decisions for data processing analysis. Timestamp enables temporal correlation, complexity scores support resource planning, worker type tracking aids debugging, and reasoning provides audit trails for optimization and troubleshooting in distributed data processing systems.
+
+```python        
         return {
             **state,
             "active_data_workers": active_workers,
@@ -317,7 +353,15 @@ Finally, we log the orchestration decision and update the workflow state with tr
             "state_version": state["state_version"] + 1,
             "worker_spawn_commands": worker_commands
         }
-    
+```
+
+State update integration preserves orchestration decisions and worker coordination data. Active worker tracking enables health monitoring, command history supports replay and analysis, metrics updates maintain performance visibility, and version incrementing ensures consistency in distributed data processing coordination.
+
+### Specialized Data Ingestion Worker Creation
+
+Data ingestion workers are created based on processing complexity analysis and data source requirements:
+
+```python    
     def _create_data_ingestion_workers(self, processing_complexity: Dict[str, Any], 
                                state: EnterpriseDataProcessingState) -> List[Send]:
         """Create specialized data ingestion workers based on processing analysis"""
@@ -332,7 +376,11 @@ Finally, we log the orchestration decision and update the workflow state with tr
                 "allocated_time": 300,
                 "quality_threshold": 0.8
             }))
-        
+```
+
+Streaming worker allocation handles high-volume data processing pipelines. The worker focuses on continuous data ingestion, optimizes for volume throughput, receives unique task identifiers, gets 300 seconds processing time, and maintains 80% quality thresholds for streaming data processing scenarios.
+
+```python        
         if processing_complexity["data_source_batch"]:
             workers.append(Send("batch_ingestion_worker", {
                 "focus": "batch_data_ingestion",
@@ -350,8 +398,15 @@ Finally, we log the orchestration decision and update the workflow state with tr
                 "allocated_time": 360,
                 "quality_threshold": 0.75
             }))
-        
+```
+
+Batch and real-time workers handle different data processing patterns. Batch workers prioritize reliability with 240-second processing windows and 70% quality thresholds, while real-time workers optimize for low latency with 360-second allocation and 75% quality requirements.
+
+```python        
         return workers
+```
+
+Worker list return provides the orchestrator with configured data processing workers. Each worker receives specialized configuration matching processing complexity requirements, enabling optimized distributed data processing based on workload characteristics and performance objectives.
     
     def _monitor_state_health(self, state: EnterpriseDataProcessingState) -> EnterpriseDataProcessingState:
         """Continuous state health monitoring with automatic recovery for data processing"""
@@ -426,14 +481,24 @@ State health integration preserves monitoring data for downstream analysis. Perf
             "state_integrity_hash": self._calculate_state_hash(state),
             "last_updated": datetime.now()
         }
-    
+```
+
+### Checkpoint Management for Data Processing Resilience
+
+The checkpoint manager provides intelligent state preservation and rollback capabilities for long-running data processing workflows:
+
+```python    
     def _manage_checkpoints(self, state: EnterpriseDataProcessingState) -> EnterpriseDataProcessingState:
         """Intelligent checkpoint management with automatic rollback capabilities for data processing"""
         
         checkpoint_metadata = state["checkpoint_metadata"]
         last_checkpoint = checkpoint_metadata["last_checkpoint"]
         frequency = checkpoint_metadata["checkpoint_frequency"]
-        
+```
+
+Checkpoint initialization extracts configuration and timing data from data processing state. Frequency-based scheduling ensures regular progress preservation while metadata tracking provides context for checkpoint decision-making in distributed data processing environments.
+
+```python        
         # Determine if checkpoint is needed for data processing
         time_since_last = (datetime.now() - last_checkpoint).total_seconds()
         checkpoint_needed = (
@@ -441,7 +506,11 @@ State health integration preserves monitoring data for downstream analysis. Perf
             state["execution_metrics"]["error_count"] > 0 or
             len(state["active_data_workers"]) != len(state["worker_processing_results"])
         )
-        
+```
+
+Checkpoint triggers evaluate multiple data processing conditions. Time-based scheduling ensures regular snapshots, error detection triggers immediate preservation, and worker synchronization issues indicate potential data processing state inconsistencies requiring immediate checkpoint creation.
+
+```python        
         if checkpoint_needed:
             # Create rollback point for data processing
             rollback_point = {
@@ -454,6 +523,8 @@ State health integration preserves monitoring data for downstream analysis. Perf
                     "worker_processing_results": state["worker_processing_results"].copy()
                 },
 ```
+
+Rollback point creation captures complete data processing workflow state. Timestamp enables temporal recovery, version tracking provides consistency, reason documentation aids debugging, and state snapshots preserve critical data processing results for restoration after failures.
 
 Rollback point creation captures complete data processing workflow state. Timestamp enables temporal recovery, version tracking provides consistency, reason documentation aids debugging, and state snapshots preserve critical data processing results.
 
@@ -473,7 +544,11 @@ Recovery metadata supports checkpoint management decisions for data processing. 
             updated_checkpoint_metadata = checkpoint_metadata.copy()
             updated_checkpoint_metadata["last_checkpoint"] = datetime.now()
             updated_checkpoint_metadata["total_checkpoints"] = checkpoint_metadata.get("total_checkpoints", 0) + 1
-            
+```
+
+Metadata updates track checkpoint frequency and history for data processing workflows. Last checkpoint timestamps enable interval calculations while checkpoint counting supports retention policies and storage management in distributed data processing environments.
+
+```python            
             return {
                 **state,
                 "rollback_points": state["rollback_points"] + [rollback_point],
@@ -483,6 +558,9 @@ Recovery metadata supports checkpoint management decisions for data processing. 
             }
         
         return state
+```
+
+State integration preserves checkpoint data and updates version tracking. Rollback points accumulate for recovery options, metadata updates maintain scheduling, version increments ensure consistency, and timestamps support audit trails in data processing checkpoint management.
     
     def _calculate_state_hash(self, state: EnterpriseDataProcessingState) -> str:
         """Calculate integrity hash for data processing state validation"""
@@ -583,18 +661,28 @@ The core routing decision process integrates multiple analysis stages to determi
         
         # Multi-dimensional scoring system for data processing
         decision_scores = self._calculate_data_processing_decision_scores(context, state)
-        
+```
+
+Routing decision initialization extracts contextual data and calculates preliminary scores. Context extraction gathers performance metrics, business constraints, and resource utilization while scoring evaluates each routing option's suitability for current data processing conditions.
+
+```python        
         # Apply business rules and constraints for data processing
         constrained_decisions = self._apply_data_processing_business_constraints(decision_scores, context)
         
         # Select optimal routing decision for data processing
         optimal_decision = self._select_optimal_data_processing_decision(constrained_decisions, context)
-        
+```
+
+Business constraint application and decision optimization ensure data processing routing aligns with organizational requirements. Constraints modify scores based on priority levels, cost budgets, and deadlines while selection chooses the highest-scoring viable option for optimal data processing outcomes.
+
+```python        
         # Log decision for analysis and improvement in data processing
         self._log_data_processing_routing_decision(optimal_decision, context, decision_scores, state)
         
         return optimal_decision.value
 ```
+
+Decision logging and result return complete the routing process. Logging captures decision rationale, context factors, and scores for continuous improvement while value return provides the routing decision string for data processing workflow execution.
     
 ### Routing Context Extraction
 
@@ -727,7 +815,15 @@ Fallback scoring responds to degraded data processing conditions. Poor data qual
         scores[DataProcessingRoutingDecision.ESCALATION_REQUIRED] = escalation_score
         
         return scores
-    
+```
+
+Escalation scoring triggers human intervention for critical data processing failures. High escalation scores (0.9) activate when critical priority tasks experience quality degradation below 60% or error rates exceeding 40%, ensuring urgent attention for mission-critical data processing issues.
+
+### Business Constraint Application
+
+Business constraints adjust routing scores to align data processing decisions with organizational priorities and resource limitations:
+
+```python    
     def _apply_data_processing_business_constraints(self, decision_scores: Dict[DataProcessingRoutingDecision, float],
                                   context: DataProcessingRoutingContext) -> Dict[DataProcessingRoutingDecision, float]:
         """Apply business rules and constraints to data processing routing decisions"""
@@ -743,6 +839,8 @@ Fallback scoring responds to degraded data processing conditions. Poor data qual
             constrained_scores[DataProcessingRoutingDecision.FALLBACK_PROCESSING] *= 0.5
 ```
 
+Critical priority adjustments ensure high-stakes data processing tasks receive premium processing. High-throughput paths gain 30% boost, escalation gets 20% increase, while fallback processing is reduced by 50% to maintain data processing standards for mission-critical workflows.
+
 Critical priority adjustments ensure high-stakes data processing tasks receive premium processing. High-throughput paths gain 30% boost, escalation gets 20% increase, while fallback processing is reduced by 50% to maintain data processing standards.
 
 ```python
@@ -755,9 +853,9 @@ Critical priority adjustments ensure high-stakes data processing tasks receive p
                 constrained_scores[DataProcessingRoutingDecision.RETRY_WITH_OPTIMIZATIONS] *= 0.3
 ```
 
-Deadline pressure optimization balances speed with quality for data processing. Under 10-minute deadlines, standard processing paths receive 20% boost while retry attempts are reduced 70% to ensure timely completion of data processing tasks.
+Deadline pressure optimization balances speed with quality for data processing. Under 10-minute deadlines, standard processing paths receive 20% boost while retry attempts are reduced 70% to ensure timely completion of data processing tasks without sacrificing essential functionality.
 
-```python
+```python        
         # Cost constraint considerations for data processing
         max_cost = context.cost_constraints.get("max_cost", float('inf'))
         if max_cost < 50.0:  # Low cost budget for data processing
@@ -766,23 +864,21 @@ Deadline pressure optimization balances speed with quality for data processing. 
             constrained_scores[DataProcessingRoutingDecision.FALLBACK_PROCESSING] *= 1.2
         
         return constrained_scores
-    
-    def _select_optimal_data_processing_decision(self, decision_scores: Dict[DataProcessingRoutingDecision, float],
-                               context: DataProcessingRoutingContext) -> DataProcessingRoutingDecision:
-        """Select the optimal data processing routing decision based on scores and thresholds"""
-        
-        # Apply threshold-based filters for data processing
-        viable_decisions = {}
-        
-        for decision, score in decision_scores.items():
-            if decision == DataProcessingRoutingDecision.HIGH_THROUGHPUT_PATH:
-                if (context.data_quality_score >= self.performance_thresholds["high_throughput"]["data_quality"] and
-                    context.processing_performance_score >= self.performance_thresholds["high_throughput"]["performance"] and
-                    context.error_rate <= self.performance_thresholds["high_throughput"]["error_rate"]):
-                    viable_decisions[decision] = score
 ```
 
-High throughput path validation ensures strict threshold compliance for data processing. Data quality ≥0.9, performance ≥0.8, and error rate ≤0.05 requirements maintain premium processing standards for optimal data processing outcomes.
+Cost constraint enforcement adapts data processing routing to budget limitations. Low-budget scenarios reduce premium high-throughput options by 30% while boosting cost-efficient fallback processing by 20%, ensuring data processing continues within financial boundaries while maintaining acceptable service levels.
+
+### Optimal Decision Selection
+
+The decision selector evaluates threshold compliance and chooses the highest-scoring viable routing option for data processing:
+
+```python    
+    def _select_optimal_data_processing_decision(self, decision_scores: Dict[DataProcessingRoutingDecision, float],
+                               context: DataProcessingRoutingContext) -> DataProcessingRoutingDecision:
+        """Select the optimal data processing routing decision based on scores and thresholds\""""
+```
+
+Deadline pressure optimization balances speed with quality for data processing. Under 10-minute deadlines, standard processing paths receive 20% boost while retry attempts are reduced 70% to ensure timely completion of data processing tasks without sacrificing essential functionality.
 
 ```python
             elif decision == DataProcessingRoutingDecision.STANDARD_PROCESSING_PATH:
@@ -812,7 +908,10 @@ High throughput path validation ensures strict threshold compliance for data pro
         
         if not processing_result:
             return 0.0
-        
+
+Data quality assessment begins with basic validation for data processing workflows. Empty results return zero score, ensuring downstream routing decisions properly handle missing or incomplete data processing outputs.
+
+```python        
         # Multi-dimensional data quality assessment
         completeness_score = min(len(processing_result) / 500, 1.0)  # Optimal length: 500 chars
         
@@ -820,7 +919,11 @@ High throughput path validation ensures strict threshold compliance for data pro
         quality_keywords = ["validated", "cleaned", "transformed", "aggregated", "enriched"]
         keyword_score = sum(1 for keyword in quality_keywords 
                           if keyword in processing_result.lower()) / len(quality_keywords)
-        
+```
+
+Completeness and keyword analysis form the foundation of data processing quality assessment. Length scoring assumes 500-character optimal results while keyword scoring identifies data processing activities like validation, cleaning, and enrichment to measure processing thoroughness.
+
+```python        
         # Data structure and organization indicators
         structure_indicators = ['\n', '.', ':', '-', '•']
         structure_score = min(sum(processing_result.count(indicator) for indicator in structure_indicators) / 10, 1.0)
@@ -829,7 +932,11 @@ High throughput path validation ensures strict threshold compliance for data pro
         complexity_words = ["however", "therefore", "furthermore", "consequently", "moreover"]
         complexity_score = min(sum(1 for word in complexity_words 
                                  if word in processing_result.lower()) / 3, 1.0)
-        
+```
+
+Structure and complexity analysis evaluate data processing output sophistication. Structure indicators measure organization and readability while complexity words identify analytical depth and reasoning - both critical for determining data processing quality and downstream routing decisions.
+
+```python        
         # Weighted composite score for data quality
         composite_score = (
             completeness_score * 0.25 +
@@ -839,6 +946,9 @@ High throughput path validation ensures strict threshold compliance for data pro
         )
         
         return min(composite_score, 1.0)
+```
+
+Weighted composite scoring combines all data processing quality dimensions. Keywords receive highest weight (35%) for processing activity identification, completeness and structure share equal importance (25% each), while complexity adds refinement (15%) - creating balanced quality assessment for data processing routing.
     
     def create_contextual_data_processing_workflow(self) -> StateGraph:
         """Create workflow with continuous contextual processing and adaptive routing for data processing"""
