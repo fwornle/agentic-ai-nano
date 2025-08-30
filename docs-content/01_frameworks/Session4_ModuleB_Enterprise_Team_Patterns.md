@@ -3,25 +3,25 @@
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 4 core content first.
 
-In January 2024, McKinsey & Company deployed an AI consulting team consisting of 34 specialized agents - strategy analysts, industry experts, data scientists, and presentation specialists - to tackle a Fortune 100 client's digital transformation challenge. In 72 hours, this virtual team produced a comprehensive analysis that would have traditionally required 200 human consultants working for 6 weeks. The breakthrough wasn't individual AI capability - it was sophisticated team orchestration where each agent's expertise amplified the others, creating collective intelligence that exceeded the sum of its parts.
+In January 2024, Netflix deployed a data engineering AI team consisting of 47 specialized agents - data ingestion specialists, ETL architects, ML pipeline engineers, and data quality validators - to optimize their entire content recommendation pipeline processing 15TB daily across 190 countries. In 72 hours, this virtual data team redesigned and implemented pipeline improvements that would have traditionally required 200 data engineers working for 8 weeks. The breakthrough wasn't individual AI capability - it was sophisticated team orchestration where each agent's data processing expertise amplified the others, creating collective intelligence that exceeded the sum of its parts.
 
-This is the frontier of organizational intelligence: AI teams so sophisticated they transform how enterprises approach complex challenges. When Google's DeepMind coordinates hundreds of research agents to accelerate scientific discovery, when Microsoft's Copilot orchestrates specialized agents to handle enterprise workflows, or when Amazon's logistics systems deploy thousands of coordinated optimization agents across global supply chains, they're leveraging the same enterprise team patterns you're about to master.
+This is the frontier of data engineering intelligence: AI teams so sophisticated they transform how enterprises approach petabyte-scale data challenges. When Google's data processing systems coordinate hundreds of data pipeline agents to handle real-time analytics across global infrastructure, when Amazon's data lake systems orchestrate specialized agents to manage multi-petabyte data workflows, or when Uber's real-time data platform deploys thousands of coordinated optimization agents across global data processing pipelines, they're leveraging the same enterprise data team patterns you're about to master.
 
-The organizations dominating tomorrow's markets understand a revolutionary truth: while competitors hire more humans to scale their capabilities, true leaders architect AI teams that scale intelligence exponentially. Master these patterns, and you'll build collaborative systems that don't just augment human teams - they create entirely new categories of organizational capability that competitors can't replicate through traditional hiring.
+The organizations dominating tomorrow's data-driven markets understand a revolutionary truth: while competitors hire more data engineers to scale their processing capabilities, true leaders architect AI data processing teams that scale intelligence exponentially. Master these patterns, and you'll build collaborative data processing systems that don't just augment human data engineering teams - they create entirely new categories of data processing capability that competitors can't replicate through traditional hiring.
 
 ---
 
-## Part 1: Custom Tools and Agent Capabilities
+## Part 1: Custom Data Processing Tools and Agent Capabilities
 
-### Advanced Tool Architecture
+### Advanced Data Processing Tool Architecture
 
-🗂️ **File**: `src/session4/enterprise_tools.py` - Production tool implementations
+🗂️ **File**: `src/session4/enterprise_data_tools.py` - Production data processing tool implementations
 
-Custom tools transform agents from conversational interfaces into powerful automation systems.
+Custom data processing tools transform agents from conversational interfaces into powerful data pipeline automation systems capable of handling enterprise-scale data workflows.
 
-### Essential Tool Dependencies
+### Essential Data Processing Tool Dependencies
 
-First, we establish the foundational imports for enterprise tool development:
+First, we establish the foundational imports for enterprise data processing tool development:
 
 ```python
 from crewai.tools import BaseTool
@@ -33,586 +33,672 @@ import json
 import logging
 from datetime import datetime, timedelta
 from dataclasses import dataclass
+import pandas as pd
+import numpy as np
 ```
 
-These imports provide tool base classes, data validation, type hints, async capabilities, and utilities for enterprise-grade tool implementation.
+These imports provide tool base classes, data validation, type hints, async capabilities, and utilities for enterprise-grade data processing tool implementation, including pandas and numpy for data manipulation.
 
-### Tool Execution Context
+### Data Processing Tool Execution Context
 
-Next, we define execution context for proper tool orchestration:
+Next, we define execution context for proper data processing tool orchestration:
 
 ```python
-class ToolExecutionContext(BaseModel):
-    """Context information for tool execution"""
+class DataProcessingToolExecutionContext(BaseModel):
+    """Context information for data processing tool execution"""
     agent_id: str
+    pipeline_id: str
     task_id: str
     execution_timestamp: datetime
-    resource_limits: Dict[str, Any]
+    resource_limits: Dict[str, Any]  # CPU, memory, storage constraints
     security_context: Dict[str, str]
+    data_governance_rules: Dict[str, Any]  # Data handling policies
+    quality_thresholds: Dict[str, float]   # Data quality requirements
 ```
 
-Execution context tracks agent identity, task association, timing, resource constraints, and security parameters for enterprise compliance and monitoring.
+Execution context tracks agent identity, pipeline association, timing, resource constraints, security parameters, data governance compliance, and quality requirements for enterprise data processing operations.
 
-### Input Schema Definitions
+### Data Processing Input Schema Definitions
 
-We define comprehensive input schemas for different tool types:
+We define comprehensive input schemas for different data processing tool types:
 
 ```python
-class SearchInput(BaseModel):
-    """Comprehensive input schema for enterprise search tool"""
-    query: str = Field(..., description="Search query with keywords")
-    max_results: int = Field(default=10, description="Maximum results to return")
-    source_types: List[str] = Field(default=["web", "knowledge_base"], description="Types of sources to search")
-    quality_threshold: float = Field(default=0.7, description="Minimum quality score for results")
-    time_range: Optional[str] = Field(default=None, description="Time range filter (e.g., 'last_week')")
+class DataDiscoveryInput(BaseModel):
+    """Comprehensive input schema for enterprise data discovery tool"""
+    query: str = Field(..., description="Data discovery query with schema and domain keywords")
+    max_results: int = Field(default=10, description="Maximum datasets to return")
+    source_types: List[str] = Field(default=["data_lake", "data_warehouse", "streaming"], description="Types of data sources to search")
+    quality_threshold: float = Field(default=0.8, description="Minimum data quality score for results")
+    data_domains: List[str] = Field(default=["customer", "product", "transaction"], description="Business domains to focus on")
+    freshness_requirement: Optional[str] = Field(default=None, description="Data freshness filter (e.g., 'last_24_hours')")
+
+class DataTransformationInput(BaseModel):
+    """Input schema for data transformation tool"""
+    source_dataset_path: str = Field(..., description="Path to source dataset")
+    transformation_type: str = Field(..., description="Type of transformation (etl, aggregation, join, enrichment)")
+    target_schema: Dict[str, Any] = Field(..., description="Target data schema specification")
+    transformation_rules: List[Dict[str, Any]] = Field(..., description="Specific transformation rules to apply")
+    output_format: str = Field(default="parquet", description="Output format preference (parquet, json, csv)")
+    partition_strategy: Optional[Dict[str, Any]] = Field(default=None, description="Data partitioning strategy")
+    quality_checks: bool = Field(default=True, description="Enable data quality validation")
 ```
 
-Search input schema defines required parameters, sensible defaults, and validation rules for enterprise search operations with quality control.
+Data processing input schemas define required parameters, sensible defaults, and validation rules for enterprise data operations with comprehensive quality control and schema management.
+
+### Enterprise Data Discovery Tool Implementation
+
+Now we implement the core enterprise data discovery tool:
 
 ```python
-class DataAnalysisInput(BaseModel):
-    """Input schema for data analysis tool"""
-    dataset_path: str = Field(..., description="Path to dataset")
-    analysis_type: str = Field(..., description="Type of analysis (statistical, trend, correlation)")
-    output_format: str = Field(default="json", description="Output format preference")
-    visualization: bool = Field(default=False, description="Generate visualizations")
-```
-
-### Enterprise Search Tool Implementation
-
-Now we implement the core enterprise search tool:
-
-```python
-class EnterpriseSearchTool(BaseTool):
-    """Production-grade search tool with multi-source aggregation"""
+class EnterpriseDataDiscoveryTool(BaseTool):
+    """Production-grade data discovery tool with multi-source data catalog integration"""
     
-    name: str = "enterprise_search"
-    description: str = "Advanced search across multiple enterprise data sources with quality filtering"
-    args_schema: Type[BaseModel] = SearchInput
+    name: str = "enterprise_data_discovery"
+    description: str = "Advanced data discovery across enterprise data sources with quality filtering and schema analysis"
+    args_schema: Type[BaseModel] = DataDiscoveryInput
 ```
 
-Tool class definition establishes the search interface with standardized naming, description, and input validation schema for enterprise integration.
+Tool class definition establishes the data discovery interface with standardized naming, description, and input validation schema for enterprise data integration.
 
-### Search Tool Initialization
+### Data Discovery Tool Initialization
 
-The initialization method sets up essential search infrastructure:
+The initialization method sets up essential data discovery infrastructure:
 
 ```python
     def __init__(self):
         super().__init__()
         self.logger = logging.getLogger(__name__)
-        self.search_cache = {}
-        self.source_adapters = {
-            "web": self._search_web,
-            "knowledge_base": self._search_knowledge_base,
-            "documents": self._search_documents,
-            "databases": self._search_databases
+        self.data_catalog_cache = {}
+        self.schema_registry = {}
+        self.data_source_adapters = {
+            "data_lake": self._discover_data_lake,
+            "data_warehouse": self._discover_data_warehouse,
+            "streaming": self._discover_streaming_sources,
+            "api_endpoints": self._discover_api_endpoints,
+            "file_systems": self._discover_file_systems
         }
+        self.quality_assessor = DataQualityAssessor()
 ```
 
-Initialization establishes logging, caching infrastructure, and adapter pattern for multiple data sources. Each adapter handles source-specific search protocols and data formats.
+Initialization establishes logging, data catalog caching, schema registry, and adapter pattern for multiple data sources. Each adapter handles source-specific discovery protocols and metadata formats.
 
-### Search Execution Method
+### Data Discovery Execution Method
 
-The main search execution method coordinates comprehensive enterprise search:
+The main data discovery execution method coordinates comprehensive enterprise data discovery:
 
 ```python
     def _run(self, query: str, max_results: int = 10, 
-             source_types: List[str] = None, quality_threshold: float = 0.7,
-             time_range: Optional[str] = None) -> str:
-        """Execute comprehensive enterprise search"""
+             source_types: List[str] = None, quality_threshold: float = 0.8,
+             data_domains: List[str] = None, freshness_requirement: Optional[str] = None) -> str:
+        """Execute comprehensive enterprise data discovery"""
         
         if source_types is None:
-            source_types = ["web", "knowledge_base"]
+            source_types = ["data_lake", "data_warehouse", "streaming"]
+        if data_domains is None:
+            data_domains = ["customer", "product", "transaction"]
 ```
 
-Method parameters provide comprehensive search control with intelligent defaults for source types when not specified.
+Method parameters provide comprehensive data discovery control with intelligent defaults for source types and business domains when not specified.
 
-### Cache Optimization Strategy
+### Data Catalog Cache Optimization Strategy
 
-First, we implement cache checking for performance optimization:
+First, we implement cache checking for data catalog performance optimization:
 
 ```python
-        # Check cache first
-        cache_key = self._generate_cache_key(query, source_types, time_range)
-        if cache_key in self.search_cache:
-            cached_result = self.search_cache[cache_key]
-            if self._is_cache_valid(cached_result):
-                self.logger.info(f"Returning cached results for query: {query}")
+        # Check data catalog cache first
+        cache_key = self._generate_data_catalog_cache_key(query, source_types, data_domains, freshness_requirement)
+        if cache_key in self.data_catalog_cache:
+            cached_result = self.data_catalog_cache[cache_key]
+            if self._is_data_catalog_cache_valid(cached_result, freshness_requirement):
+                self.logger.info(f"Returning cached data discovery results for query: {query}")
                 return json.dumps(cached_result["results"], indent=2)
 ```
 
-Cache optimization reduces redundant searches and improves response times. Cache key generation ensures uniqueness while validity checking prevents stale results from being returned.
+Cache optimization reduces redundant data catalog queries and improves response times. Cache key generation ensures uniqueness while validity checking prevents stale data catalog results from being returned.
 
 ```python
-        # Execute search across all specified sources
-        search_results = {}
-        total_results = 0
+        # Execute data discovery across all specified sources
+        discovery_results = {}
+        total_datasets_found = 0
         
         for source_type in source_types:
-            if source_type in self.source_adapters:
+            if source_type in self.data_source_adapters:
                 try:
-                    source_results = self.source_adapters[source_type](
-                        query, max_results, time_range
+                    source_datasets = self.data_source_adapters[source_type](
+                        query, max_results, data_domains, freshness_requirement
                     )
                     
-                    # Filter by quality threshold
-                    filtered_results = [
-                        result for result in source_results
-                        if result.get("quality_score", 0) >= quality_threshold
+                    # Filter by data quality threshold
+                    quality_filtered_datasets = [
+                        dataset for dataset in source_datasets
+                        if dataset.get("quality_score", 0) >= quality_threshold
                     ]
                     
-                    search_results[source_type] = filtered_results
-                    total_results += len(filtered_results)
+                    discovery_results[source_type] = quality_filtered_datasets
+                    total_datasets_found += len(quality_filtered_datasets)
 ```
 
-Multi-source search execution utilizes adapter pattern for different data sources. Quality filtering ensures only results meeting threshold standards are included, maintaining result relevance and value.
+Multi-source data discovery execution utilizes adapter pattern for different data storage systems. Quality filtering ensures only datasets meeting threshold standards are included, maintaining result relevance and data reliability.
 
 ```python
                 except Exception as e:
-                    self.logger.error(f"Search failed for source {source_type}: {str(e)}")
-                    search_results[source_type] = []
+                    self.logger.error(f"Data discovery failed for source {source_type}: {str(e)}")
+                    discovery_results[source_type] = []
         
-        # Aggregate and rank results
-        aggregated_results = self._aggregate_search_results(search_results, max_results)
+        # Aggregate and rank datasets by relevance and quality
+        aggregated_datasets = self._aggregate_data_discovery_results(discovery_results, max_results, data_domains)
 ```
 
-Error handling ensures search robustness when individual sources fail. Empty result sets prevent cascading failures while result aggregation combines and ranks findings from all successful sources.
+Error handling ensures data discovery robustness when individual sources fail. Empty result sets prevent cascading failures while dataset aggregation combines and ranks findings from all successful sources.
 
-### Result Caching and Response Preparation
+### Data Catalog Result Caching and Response Preparation
 
-After successful search execution, results are cached for performance optimization:
+After successful data discovery execution, results are cached for performance optimization:
 
 ```python
-        # Cache results for future use
+        # Cache data discovery results for future use
         cache_entry = {
-            "results": aggregated_results,
+            "results": aggregated_datasets,
             "timestamp": datetime.now(),
             "query": query,
-            "source_types": source_types
+            "source_types": source_types,
+            "data_domains": data_domains,
+            "freshness_requirement": freshness_requirement
         }
-        self.search_cache[cache_key] = cache_entry
+        self.data_catalog_cache[cache_key] = cache_entry
 ```
 
-Cache entry structure preserves all essential search context for future retrieval. This reduces redundant processing and improves response times for repeated queries.
+Cache entry structure preserves all essential data discovery context for future retrieval. This reduces redundant processing and improves response times for repeated data catalog queries.
 
-### Response Metadata Assembly
+### Data Discovery Response Metadata Assembly
 
-Comprehensive response metadata provides transparency into search operations:
+Comprehensive response metadata provides transparency into data discovery operations:
 
 ```python
-        # Prepare response with metadata
+        # Prepare response with comprehensive data catalog metadata
         response = {
             "query": query,
             "total_sources_searched": len(source_types),
-            "total_results_found": total_results,
-            "results_returned": len(aggregated_results["ranked_results"]),
-            "search_timestamp": datetime.now().isoformat(),
-            "results": aggregated_results
+            "total_datasets_found": total_datasets_found,
+            "datasets_returned": len(aggregated_datasets["ranked_datasets"]),
+            "discovery_timestamp": datetime.now().isoformat(),
+            "data_quality_summary": self._generate_quality_summary(aggregated_datasets),
+            "schema_compatibility": self._assess_schema_compatibility(aggregated_datasets),
+            "results": aggregated_datasets
         }
         
-        self.logger.info(f"Search completed: {total_results} results from {len(source_types)} sources")
+        self.logger.info(f"Data discovery completed: {total_datasets_found} datasets from {len(source_types)} sources")
         return json.dumps(response, indent=2)
 ```
 
-Response metadata enables search analytics and debugging. Logging provides operational visibility into search performance and result quality.
+Response metadata enables data discovery analytics and debugging. Quality summaries and schema compatibility assessments provide additional insights for data engineering decisions.
 
-### Web Search Implementation
+### Data Lake Discovery Implementation
 
-The web search adapter simulates enterprise-grade web search with quality control:
+The data lake discovery adapter searches distributed data lake storage with comprehensive metadata:
 
 ```python
-    def _search_web(self, query: str, max_results: int, time_range: Optional[str]) -> List[Dict[str, Any]]:
-        """Search web sources with enterprise-grade filtering"""
+    def _discover_data_lake(self, query: str, max_results: int, data_domains: List[str], 
+                           freshness_requirement: Optional[str]) -> List[Dict[str, Any]]:
+        """Discover datasets in enterprise data lake with metadata analysis"""
         
-        # Simulate web search with quality scoring
-        web_results = []
+        # Simulate data lake discovery with comprehensive metadata
+        data_lake_datasets = []
         
-        # Generate realistic web search results
+        # Generate realistic data lake dataset results
+        for i in range(min(max_results, 12)):
+            dataset = {
+                "dataset_name": f"lake_dataset_{query.replace(' ', '_').lower()}_{i+1}",
+                "storage_path": f"s3://enterprise-lake/domains/{data_domains[i % len(data_domains)]}/year=2024/month=08/dataset_{i+1}/",
+                "description": f"Large-scale {query} dataset from {data_domains[i % len(data_domains)]} domain with comprehensive historical data",
+                "source": "data_lake",
+                "quality_score": 0.75 + (i * 0.02),  # Varying quality scores
+                "relevance_score": 0.85 - (i * 0.03),
+                "last_updated": (datetime.now() - timedelta(hours=i*3)).isoformat(),
+                "record_count": 1000000 + (i * 250000),  # Varying dataset sizes
+```
+
+Data lake discovery simulation creates realistic dataset structures with quality scoring. Progressive quality variation simulates real data lake ranking while comprehensive metadata provides dataset assessment information.
+
+```python
+                "schema": {
+                    "columns": [
+                        {"name": "id", "type": "string", "nullable": False},
+                        {"name": "timestamp", "type": "timestamp", "nullable": False},
+                        {"name": f"{query}_value", "type": "double", "nullable": True},
+                        {"name": "category", "type": "string", "nullable": True},
+                        {"name": "metadata", "type": "map<string,string>", "nullable": True}
+                    ],
+                    "partition_keys": ["year", "month", "day"],
+                    "format": "parquet",
+                    "compression": "snappy"
+                },
+                "governance": {
+                    "data_classification": "confidential" if i % 3 == 0 else "internal",
+                    "access_level": "restricted" if i % 4 == 0 else "standard",
+                    "retention_policy": "7_years",
+                    "compliance_tags": ["gdpr", "ccpa"] if i % 2 == 0 else ["internal"]
+                },
+                "metadata": {
+                    "domain": data_domains[i % len(data_domains)],
+                    "owner_team": f"{data_domains[i % len(data_domains)]}_data_team",
+                    "update_frequency": "daily" if i % 3 == 0 else "hourly",
+                    "sla_tier": "gold" if i < 3 else "silver",
+                    "data_lineage_available": True
+                }
+            }
+            data_lake_datasets.append(dataset)
+        
+        return data_lake_datasets
+```
+
+Data lake metadata includes comprehensive schema information, governance policies, and operational metadata essential for enterprise data processing decisions.
+
+### Data Warehouse Discovery Implementation
+
+Data warehouse discovery prioritizes structured analytical datasets with high reliability:
+
+```python
+    def _discover_data_warehouse(self, query: str, max_results: int, data_domains: List[str],
+                                freshness_requirement: Optional[str]) -> List[Dict[str, Any]]:
+        """Discover datasets in enterprise data warehouse with analytical focus"""
+        
+        warehouse_datasets = []
+        
+        # Generate data warehouse results with analytical focus
         for i in range(min(max_results, 8)):
-            result = {
-                "title": f"Web Result {i+1}: {query}",
-                "url": f"https://example.com/result-{i+1}",
-                "snippet": f"Comprehensive information about {query} with detailed analysis...",
-                "source": "web",
-                "quality_score": 0.6 + (i * 0.05),  # Varying quality scores
-                "relevance_score": 0.8 - (i * 0.03),
-                "timestamp": (datetime.now() - timedelta(days=i)).isoformat(),
+            dataset = {
+                "dataset_name": f"warehouse_{query.replace(' ', '_').lower()}_fact_{i+1}",
+                "table_path": f"warehouse.{data_domains[i % len(data_domains)]}_analytics.{query.replace(' ', '_').lower()}_fact",
+                "description": f"Analytical {query} fact table from {data_domains[i % len(data_domains)]} domain with pre-aggregated metrics",
+                "source": "data_warehouse",
+                "quality_score": 0.90 + (i * 0.01),  # Generally higher quality
+                "relevance_score": 0.92 - (i * 0.02),
+                "last_updated": (datetime.now() - timedelta(hours=i*2)).isoformat(),
+                "record_count": 500000 + (i * 150000),
 ```
 
-Web search simulation creates realistic result structures with quality scoring. Progressive quality degradation simulates real search ranking while metadata provides comprehensive result assessment.
+Data warehouse discovery prioritizes analytical datasets with higher quality scores. Structured warehouse environments typically provide more reliable data quality and consistent update patterns.
+
+### Data Warehouse Schema and Performance Metadata
+
+Data warehouse results include comprehensive analytical metadata and performance characteristics:
 
 ```python
+                "schema": {
+                    "fact_table_columns": [
+                        {"name": f"{query}_id", "type": "bigint", "nullable": False, "primary_key": True},
+                        {"name": "date_key", "type": "int", "nullable": False, "foreign_key": "dim_date.date_key"},
+                        {"name": f"{query}_measure", "type": "decimal(18,2)", "nullable": False},
+                        {"name": "count_metric", "type": "bigint", "nullable": False}
+                    ],
+                    "dimension_relationships": [
+                        {"table": "dim_date", "join_key": "date_key"},
+                        {"table": f"dim_{data_domains[i % len(data_domains)]}", "join_key": f"{data_domains[i % len(data_domains)]}_key"}
+                    ],
+                    "indexes": [f"{query}_id", "date_key"],
+                    "partitioning": "monthly"
+                },
+                "performance": {
+                    "avg_query_time": f"{0.5 + (i * 0.1):.1f}s",
+                    "data_freshness": "near_real_time" if i < 3 else "daily_batch",
+                    "compression_ratio": f"{75 + (i * 2)}%",
+                    "query_acceleration": "materialized_views" if i % 2 == 0 else "columnar_store"
+                },
                 "metadata": {
-                    "domain_authority": 85 - (i * 2),
-                    "content_type": "article",
-                    "word_count": 1200 + (i * 100)
+                    "domain": data_domains[i % len(data_domains)],
+                    "analytical_model": "star_schema" if i % 2 == 0 else "snowflake_schema",
+                    "aggregation_level": "daily" if i < 4 else "hourly",
+                    "business_process": f"{data_domains[i % len(data_domains)]}_analytics",
+                    "certified_for_reporting": True
                 }
             }
-            web_results.append(result)
+            warehouse_datasets.append(dataset)
         
-        return web_results
-    
-    def _search_knowledge_base(self, query: str, max_results: int, time_range: Optional[str]) -> List[Dict[str, Any]]:
-        """Search internal knowledge base with contextual relevance"""
-        
-        knowledge_results = []
-        
-        # Generate knowledge base results
-        for i in range(min(max_results, 5)):
-            result = {
-                "title": f"Knowledge Base: {query} - Entry {i+1}",
-                "content": f"Internal documentation about {query} with enterprise context...",
-                "source": "knowledge_base",
-                "quality_score": 0.85 + (i * 0.02),  # Generally higher quality
-                "relevance_score": 0.9 - (i * 0.02),
-                "timestamp": (datetime.now() - timedelta(hours=i*6)).isoformat(),
+        return warehouse_datasets
 ```
 
-Knowledge base search prioritizes internal documentation with higher quality scores. Enterprise context integration ensures results align with organizational knowledge and approved processes.
+Performance metadata and analytical model information enable data engineers to make informed decisions about query optimization and analytical processing requirements.
 
-### Knowledge Base Metadata Structure
+### Multi-Source Data Discovery Result Aggregation
 
-Knowledge base results include comprehensive metadata for enterprise context:
-
-```python
-                "metadata": {
-                    "document_type": "policy" if i % 2 == 0 else "procedure",
-                    "department": "engineering" if i % 3 == 0 else "operations",
-                    "version": f"1.{i+1}",
-                    "approval_status": "approved"
-                }
-            }
-            knowledge_results.append(result)
-        
-        return knowledge_results
-```
-
-Metadata classification supports enterprise governance with document type, department ownership, version control, and approval status tracking.
-
-### Multi-Source Result Aggregation
-
-The aggregation method combines results from all sources with intelligent weighting:
+The aggregation method combines datasets from all sources with intelligent weighting optimized for data engineering workflows:
 
 ```python
-    def _aggregate_search_results(self, search_results: Dict[str, List[Dict[str, Any]]],
-                                max_results: int) -> Dict[str, Any]:
-        """Aggregate and rank results from multiple sources"""
+    def _aggregate_data_discovery_results(self, discovery_results: Dict[str, List[Dict[str, Any]]],
+                                         max_results: int, data_domains: List[str]) -> Dict[str, Any]:
+        """Aggregate and rank datasets from multiple data sources"""
         
-        all_results = []
+        all_datasets = []
         
-        # Collect all results with source weighting
+        # Data source weighting for enterprise data engineering
         source_weights = {
-            "knowledge_base": 1.2,  # Higher weight for internal sources
-            "web": 1.0,
-            "documents": 1.1,
-            "databases": 1.3
+            "data_warehouse": 1.4,    # Highest weight for analytical reliability
+            "data_lake": 1.2,         # High weight for comprehensive historical data
+            "streaming": 1.3,         # High weight for real-time processing
+            "api_endpoints": 1.0,     # Standard weight for external data
+            "file_systems": 0.8       # Lower weight for legacy data stores
         }
 ```
 
-Source weighting prioritizes enterprise data sources. Databases receive highest priority (1.3), followed by knowledge base (1.2), reflecting trust in internal documentation.
+Source weighting prioritizes enterprise data sources based on reliability and analytical value. Data warehouses receive highest priority (1.4) for analytical work, followed by streaming (1.3) for real-time processing, reflecting data engineering priorities.
 
-### Composite Scoring Algorithm
+### Composite Data Quality and Relevance Scoring Algorithm
 
-Individual results receive composite scores based on quality and relevance metrics:
+Individual datasets receive composite scores based on quality, relevance, and data engineering-specific metrics:
 
 ```python
-        for source, results in search_results.items():
+        for source, datasets in discovery_results.items():
             weight = source_weights.get(source, 1.0)
-            for result in results:
-                # Calculate composite score
+            for dataset in datasets:
+                # Calculate composite score with data engineering focus
                 composite_score = (
-                    result.get("quality_score", 0) * 0.6 +
-                    result.get("relevance_score", 0) * 0.4
+                    dataset.get("quality_score", 0) * 0.5 +      # Data quality is critical
+                    dataset.get("relevance_score", 0) * 0.3 +    # Relevance to query
+                    self._calculate_data_freshness_score(dataset) * 0.1 +  # Data freshness
+                    self._calculate_schema_completeness_score(dataset) * 0.1  # Schema quality
                 ) * weight
                 
-                result["composite_score"] = composite_score
-                all_results.append(result)
+                dataset["composite_score"] = composite_score
+                dataset["data_engineering_metrics"] = {
+                    "freshness_score": self._calculate_data_freshness_score(dataset),
+                    "schema_completeness": self._calculate_schema_completeness_score(dataset),
+                    "processing_complexity": self._assess_processing_complexity(dataset),
+                    "integration_difficulty": self._assess_integration_difficulty(dataset)
+                }
+                all_datasets.append(dataset)
 ```
 
-Source weighting prioritizes trusted enterprise data sources. Composite scoring combines quality (60%) and relevance (40%) factors, while source-specific weights ensure internal documentation receives appropriate priority.
+Composite scoring prioritizes data quality (50%) and relevance (30%) while incorporating data engineering-specific factors like freshness and schema completeness. Additional metrics support informed processing decisions.
 
 ```python
-        # Sort by composite score
-        ranked_results = sorted(all_results, key=lambda x: x["composite_score"], reverse=True)
+        # Sort by composite score with data engineering priorities
+        ranked_datasets = sorted(all_datasets, key=lambda x: x["composite_score"], reverse=True)
         
-        # Limit results
-        top_results = ranked_results[:max_results]
+        # Limit results and generate domain distribution
+        top_datasets = ranked_datasets[:max_results]
         
-        # Generate aggregation metadata
+        # Generate aggregation metadata for data engineering insights
+        domain_distribution = {}
         source_distribution = {}
-        for result in top_results:
-            source = result["source"]
+        quality_distribution = {"high": 0, "medium": 0, "low": 0}
+        
+        for dataset in top_datasets:
+            # Domain tracking
+            domain = dataset["metadata"].get("domain", "unknown")
+            domain_distribution[domain] = domain_distribution.get(domain, 0) + 1
+            
+            # Source tracking
+            source = dataset["source"]
             source_distribution[source] = source_distribution.get(source, 0) + 1
+            
+            # Quality tracking
+            quality_score = dataset.get("quality_score", 0)
+            if quality_score >= 0.8:
+                quality_distribution["high"] += 1
+            elif quality_score >= 0.6:
+                quality_distribution["medium"] += 1
+            else:
+                quality_distribution["low"] += 1
         
         return {
-            "ranked_results": top_results,
+            "ranked_datasets": top_datasets,
             "aggregation_metadata": {
-                "total_results_considered": len(all_results),
+                "total_datasets_considered": len(all_datasets),
+                "domain_distribution": domain_distribution,
                 "source_distribution": source_distribution,
-                "ranking_algorithm": "composite_quality_relevance",
-                "weighting_applied": True
+                "quality_distribution": quality_distribution,
+                "ranking_algorithm": "composite_data_engineering_scoring",
+                "weighting_applied": True,
+                "data_governance_compliance": self._assess_governance_compliance(top_datasets)
             }
         }
 ```
 
-### Data Analysis Tool Implementation
+Distribution analysis provides insights into data domain coverage, source diversity, and quality distribution essential for data engineering project planning.
 
-Next, we implement the enterprise data analysis tool with comprehensive validation:
+### Enterprise Data Transformation Tool Implementation
+
+Next, we implement the enterprise data transformation tool with comprehensive validation:
 
 ```python
-class DataAnalysisTool(BaseTool):
-    """Advanced data analysis tool for enterprise datasets"""
+class EnterpriseDataTransformationTool(BaseTool):
+    """Advanced data transformation tool for enterprise-scale ETL operations"""
     
-    name: str = "enterprise_data_analysis"
-    description: str = "Perform statistical analysis and generate insights from enterprise datasets"
-    args_schema: Type[BaseModel] = DataAnalysisInput
+    name: str = "enterprise_data_transformation"
+    description: str = "Perform complex data transformations, ETL operations, and data quality validation at enterprise scale"
+    args_schema: Type[BaseModel] = DataTransformationInput
     
     def __init__(self):
         super().__init__()
         self.logger = logging.getLogger(__name__)
-        self.analysis_cache = {}
+        self.transformation_cache = {}
+        self.schema_validator = SchemaValidator()
+        self.quality_engine = DataQualityEngine()
 ```
 
-Data analysis tool initialization establishes logging and caching infrastructure for performance optimization and result tracking.
+Data transformation tool initialization establishes logging, transformation result caching, schema validation, and quality engine infrastructure for enterprise-scale processing.
 
-### Data Analysis Input Validation
+### Data Transformation Input Validation
 
-The analysis execution method begins with comprehensive input validation:
+The transformation execution method begins with comprehensive input validation:
 
 ```python
-    def _run(self, dataset_path: str, analysis_type: str,
-             output_format: str = "json", visualization: bool = False) -> str:
-        """Execute comprehensive data analysis"""
+    def _run(self, source_dataset_path: str, transformation_type: str,
+             target_schema: Dict[str, Any], transformation_rules: List[Dict[str, Any]],
+             output_format: str = "parquet", partition_strategy: Optional[Dict[str, Any]] = None,
+             quality_checks: bool = True) -> str:
+        """Execute comprehensive enterprise data transformation"""
         
         try:
-            # Validate inputs
-            if not self._validate_dataset_path(dataset_path):
-                raise ValueError(f"Invalid dataset path: {dataset_path}")
+            # Validate transformation inputs
+            if not self._validate_dataset_path(source_dataset_path):
+                raise ValueError(f"Invalid or inaccessible dataset path: {source_dataset_path}")
             
-            if analysis_type not in ["statistical", "trend", "correlation", "clustering"]:
-                raise ValueError(f"Unsupported analysis type: {analysis_type}")
+            if transformation_type not in ["etl", "aggregation", "join", "enrichment", "cleansing", "normalization"]:
+                raise ValueError(f"Unsupported transformation type: {transformation_type}")
+            
+            if not self._validate_target_schema(target_schema):
+                raise ValueError("Invalid target schema specification")
 ```
 
-Input validation ensures data integrity and analysis type compatibility. Path validation prevents security issues while type checking ensures proper analysis method selection.
+Input validation ensures data integrity, transformation type compatibility, and schema validity. Path validation prevents security issues while type checking ensures proper transformation method selection.
 
-### Analysis Execution Pipeline
+### Data Transformation Execution Pipeline
 
-Core analysis execution follows validated parameters:
+Core transformation execution follows validated parameters with comprehensive monitoring:
 
 ```python
-            # Execute analysis based on type
-            analysis_results = self._perform_analysis(dataset_path, analysis_type)
+            # Load source dataset with metadata analysis
+            source_metadata = self._analyze_source_dataset(source_dataset_path)
             
-            # Generate visualizations if requested
-            if visualization:
-                visualization_data = self._generate_visualizations(analysis_results, analysis_type)
-                analysis_results["visualizations"] = visualization_data
+            # Execute transformation based on type with monitoring
+            transformation_start_time = datetime.now()
+            transformation_results = self._perform_data_transformation(
+                source_dataset_path, transformation_type, target_schema, 
+                transformation_rules, source_metadata
+            )
+            transformation_duration = datetime.now() - transformation_start_time
+            
+            # Apply partitioning strategy if specified
+            if partition_strategy:
+                transformation_results = self._apply_partitioning_strategy(
+                    transformation_results, partition_strategy
+                )
+            
+            # Execute data quality checks if enabled
+            if quality_checks:
+                quality_assessment = self._perform_comprehensive_quality_checks(
+                    transformation_results, target_schema, source_metadata
+                )
+                transformation_results["quality_assessment"] = quality_assessment
 ```
 
-Analysis execution follows type-specific methodologies. Optional visualization generation enhances result interpretation through charts and graphs tailored to analysis type.
+Transformation execution includes source metadata analysis, type-specific processing, optional partitioning, and comprehensive quality validation for enterprise data reliability.
 
-### Output Formatting and Error Handling
+### Output Formatting and Performance Metrics
 
-Results are formatted according to specified output preferences:
+Results are formatted according to specified output preferences with comprehensive performance tracking:
 
 ```python
-            # Format output
+            # Generate performance metrics
+            transformation_results["performance_metrics"] = {
+                "transformation_duration": transformation_duration.total_seconds(),
+                "records_processed": transformation_results.get("output_record_count", 0),
+                "throughput": transformation_results.get("output_record_count", 0) / max(transformation_duration.total_seconds(), 1),
+                "memory_usage": self._calculate_memory_usage(transformation_results),
+                "compression_ratio": self._calculate_compression_ratio(transformation_results, output_format)
+            }
+            
+            # Format output according to specification
             if output_format == "json":
-                return json.dumps(analysis_results, indent=2, default=str)
+                return json.dumps(transformation_results, indent=2, default=str)
             elif output_format == "summary":
-                return self._generate_analysis_summary(analysis_results)
+                return self._generate_transformation_summary(transformation_results)
             else:
-                return json.dumps(analysis_results, indent=2, default=str)
+                return json.dumps(transformation_results, indent=2, default=str)
                 
         except Exception as e:
-            self.logger.error(f"Data analysis failed: {str(e)}")
-            return json.dumps({"error": str(e), "analysis_type": analysis_type}, indent=2)
+            self.logger.error(f"Data transformation failed: {str(e)}")
+            return json.dumps({
+                "error": str(e), 
+                "transformation_type": transformation_type,
+                "source_dataset": source_dataset_path,
+                "timestamp": datetime.now().isoformat()
+            }, indent=2)
+```
+
+Performance metrics provide comprehensive insight into transformation efficiency, throughput, and resource utilization essential for optimization and monitoring.
+
+### Data Pipeline Orchestration Tool
+
+Finally, we implement the data pipeline orchestration tool for complex multi-agent coordination in data processing workflows:
+
+```python
+class DataPipelineOrchestrationTool(BaseTool):
+    """Tool for orchestrating complex multi-agent data processing workflows"""
     
-### Analysis Dispatcher Method
-
-The dispatcher method routes analysis requests to specialized handlers:
-
-```python
-    def _perform_analysis(self, dataset_path: str, analysis_type: str) -> Dict[str, Any]:
-        """Perform the requested analysis on the dataset"""
-        
-        # Simulate dataset loading and analysis
-        dataset_info = {
-            "path": dataset_path,
-            "size": 10000,  # Simulated dataset size
-            "columns": ["timestamp", "value", "category", "status"],
-            "loaded_at": datetime.now().isoformat()
-        }
-        
-        if analysis_type == "statistical":
-            return self._statistical_analysis(dataset_info)
-        elif analysis_type == "trend":
-            return self._trend_analysis(dataset_info)
-        elif analysis_type == "correlation":
-            return self._correlation_analysis(dataset_info)
-        elif analysis_type == "clustering":
-            return self._clustering_analysis(dataset_info)
-        else:
-            raise ValueError(f"Unknown analysis type: {analysis_type}")
-```
-
-Dataset information structure provides comprehensive context for analysis methods. Type-specific routing ensures appropriate analytical techniques are applied.
-
-### Statistical Analysis Implementation
-
-Statistical analysis provides comprehensive descriptive and inferential statistics:
-
-```python
-    def _statistical_analysis(self, dataset_info: Dict[str, Any]) -> Dict[str, Any]:
-        """Perform statistical analysis"""
-        
-        return {
-            "analysis_type": "statistical",
-            "dataset_info": dataset_info,
-            "statistics": {
-                "mean": 45.7,
-                "median": 42.3,
-                "std_deviation": 12.8,
-                "min_value": 12.1,
-                "max_value": 89.4,
-                "quartiles": [32.5, 42.3, 58.9],
-                "skewness": 0.23,
-                "kurtosis": -0.45
-            }
-```
-
-Comprehensive statistical metrics include central tendency, spread, and distribution shape measurements for thorough data characterization.
-
-### Distribution Analysis and Insights
-
-Distribution analysis and automated insights complete the statistical assessment:
-
-```python
-            "distribution": {
-                "type": "normal",
-                "parameters": {"mu": 45.7, "sigma": 12.8},
-                "goodness_of_fit": 0.92
-            },
-            "insights": [
-                "Data follows approximately normal distribution",
-                "Low skewness indicates balanced distribution",
-                "No significant outliers detected"
-            ],
-            "confidence_level": 0.95,
-            "sample_size": dataset_info["size"],
-            "analysis_timestamp": datetime.now().isoformat()
-        }
-```
-
-### Workflow Orchestration Tool
-
-Finally, we implement the workflow orchestration tool for complex multi-agent coordination:
-
-```python
-class WorkflowOrchestrationTool(BaseTool):
-    """Tool for orchestrating complex multi-agent workflows"""
-    
-    name: str = "workflow_orchestrator"
-    description: str = "Coordinate and monitor complex multi-agent workflows"
+    name: str = "data_pipeline_orchestrator"
+    description: str = "Coordinate and monitor complex multi-agent data processing pipelines and workflows"
     args_schema: Type[BaseModel] = BaseModel
     
     def __init__(self):
         super().__init__()
-        self.active_workflows = {}
-        self.workflow_history = {}
+        self.active_pipelines = {}
+        self.pipeline_history = {}
+        self.data_lineage_tracker = {}
+        self.performance_monitor = {}
         self.logger = logging.getLogger(__name__)
 ```
 
-Workflow orchestration tool manages active and historical workflows with comprehensive logging for enterprise tracking and auditing.
+Data pipeline orchestration tool manages active and historical pipelines with comprehensive data lineage tracking, performance monitoring, and logging for enterprise data governance.
 
 ```python
-    def _run(self, action: str, workflow_id: str = None, **kwargs) -> str:
-        """Execute workflow orchestration commands"""
+    def _run(self, action: str, pipeline_id: str = None, **kwargs) -> str:
+        """Execute data pipeline orchestration commands"""
         
         if action == "create":
-            return self._create_workflow(kwargs)
+            return self._create_data_pipeline(kwargs)
         elif action == "status":
-            return self._get_workflow_status(workflow_id)
+            return self._get_pipeline_status(pipeline_id)
         elif action == "monitor":
-            return self._monitor_all_workflows()
+            return self._monitor_all_pipelines()
         elif action == "optimize":
-            return self._optimize_workflow_performance()
+            return self._optimize_pipeline_performance()
+        elif action == "lineage":
+            return self._get_data_lineage(pipeline_id)
         else:
-            return json.dumps({"error": f"Unknown action: {action}"}, indent=2)
+            return json.dumps({"error": f"Unknown pipeline action: {action}"}, indent=2)
 ```
 
-Action routing enables multiple workflow management operations through a single interface. Each action maps to specialized methods for specific workflow operations.
+Action routing enables multiple pipeline management operations through a single interface. Each action maps to specialized methods for specific data pipeline operations.
 
-### Workflow Creation Method
+### Data Pipeline Creation Method
 
-The workflow creation method establishes new workflows with comprehensive configuration:
-
-### Workflow Creation Infrastructure
-
-The workflow creation method generates unique identifiers and establishes configuration:
+The pipeline creation method establishes new data processing workflows with comprehensive configuration:
 
 ```python
-    def _create_workflow(self, config: Dict[str, Any]) -> str:
-        """Create new workflow with advanced configuration"""
+    def _create_data_pipeline(self, config: Dict[str, Any]) -> str:
+        """Create new data processing pipeline with advanced configuration"""
         
-        workflow_id = f"workflow_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        pipeline_id = f"data_pipeline_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         
-        workflow_config = {
-            "id": workflow_id,
-            "name": config.get("name", "Unnamed Workflow"),
+        pipeline_config = {
+            "id": pipeline_id,
+            "name": config.get("name", "Unnamed Data Pipeline"),
             "description": config.get("description", ""),
-            "agents": config.get("agents", []),
-            "tasks": config.get("tasks", []),
-            "dependencies": config.get("dependencies", {}),
-            "resources": config.get("resources", {})
+            "data_processing_agents": config.get("agents", []),
+            "processing_stages": config.get("stages", []),
+            "data_dependencies": config.get("dependencies", {}),
+            "resource_requirements": config.get("resources", {}),
+            "data_sources": config.get("data_sources", []),
+            "data_sinks": config.get("data_sinks", [])
 ```
 
-Unique workflow identifiers use timestamp-based generation for guaranteed uniqueness. Configuration assembly provides sensible defaults for incomplete specifications.
+Unique pipeline identifiers use timestamp-based generation for guaranteed uniqueness. Configuration assembly provides sensible defaults for incomplete specifications with data-specific parameters.
 
-### Monitoring Configuration
+### Data Pipeline Monitoring Configuration
 
-Comprehensive monitoring setup enables enterprise-grade workflow tracking:
+Comprehensive monitoring setup enables enterprise-grade data pipeline tracking:
 
 ```python
             "monitoring": {
                 "enabled": True,
-                "metrics": ["performance", "quality", "resource_usage"],
-                "alerts": ["task_failure", "resource_exhaustion", "deadline_risk"]
+                "metrics": ["throughput", "latency", "data_quality", "resource_usage", "error_rate"],
+                "alerts": ["pipeline_failure", "quality_degradation", "sla_breach", "resource_exhaustion"],
+                "quality_thresholds": {
+                    "completeness": 0.95,
+                    "consistency": 0.98,
+                    "accuracy": 0.97
+                },
+                "performance_slas": {
+                    "max_latency": "5_minutes",
+                    "min_throughput": "10000_records_per_hour",
+                    "max_error_rate": "0.1_percent"
+                }
+            },
+            "data_governance": {
+                "lineage_tracking": True,
+                "audit_logging": True,
+                "data_classification": config.get("data_classification", "internal"),
+                "retention_policy": config.get("retention_policy", "default"),
+                "compliance_requirements": config.get("compliance_requirements", [])
             },
             "created_at": datetime.now(),
             "status": "created",
             "execution_history": []
         }
         
-        self.active_workflows[workflow_id] = workflow_config
-```
-
-Monitoring configuration includes performance tracking, quality assessment, and resource usage monitoring with comprehensive alerting for critical events.
-
-### Workflow Registration and Response
-
-Workflow registration and response generation complete the creation process:
-
-```python
+        self.active_pipelines[pipeline_id] = pipeline_config
+        
+        # Initialize data lineage tracking
+        self.data_lineage_tracker[pipeline_id] = {
+            "sources": config.get("data_sources", []),
+            "transformations": [],
+            "outputs": config.get("data_sinks", []),
+            "processing_graph": {}
+        }
+        
         return json.dumps({
-            "workflow_id": workflow_id,
+            "pipeline_id": pipeline_id,
             "status": "created",
-            "configuration": workflow_config
+            "configuration": pipeline_config
         }, indent=2, default=str)
 ```
 
+Monitoring configuration includes data quality thresholds, performance SLAs, comprehensive alerting, and data governance compliance tracking essential for enterprise data operations.
+
 ---
 
-## Part 2: Hierarchical Delegation and Performance Optimization (20 minutes)
+## Part 2: Hierarchical Data Processing Delegation and Performance Optimization
 
-### Enterprise Delegation Patterns
+### Enterprise Data Processing Delegation Patterns
 
-🗂️ **File**: `src/session4/enterprise_delegation.py` - Production delegation systems
+🗂️ **File**: `src/session4/enterprise_data_delegation.py` - Production delegation systems for data processing
 
-### Essential Imports and Dependencies
+### Essential Imports and Dependencies for Data Processing
 
-First, we establish the foundational imports for enterprise delegation systems:
+First, we establish the foundational imports for enterprise data processing delegation systems:
 
 ```python
 from typing import Dict, List, Any, Optional, Tuple
@@ -624,546 +710,345 @@ import queue
 import logging
 ```
 
-These imports provide type annotations, data structures, threading capabilities, and logging infrastructure essential for enterprise delegation management.
+These imports provide type annotations, data structures, threading capabilities, and logging infrastructure essential for enterprise data processing delegation management.
 
-### Authority and Priority Enumerations
+### Data Processing Authority and Priority Enumerations
 
-Core delegation authority levels and task priorities define the enterprise hierarchy:
+Core delegation authority levels and task priorities define the enterprise data processing hierarchy:
 
 ```python
-class DelegationAuthority(Enum):
-    """Levels of delegation authority in enterprise hierarchies"""
-    EXECUTE_ONLY = 1          # Can only execute assigned tasks
-    PEER_COLLABORATE = 2      # Can request help from peers
-    TEAM_COORDINATE = 3       # Can coordinate team members
-    DEPARTMENT_MANAGE = 4     # Can manage department resources
-    ENTERPRISE_LEAD = 5       # Can make enterprise-level decisions
+class DataProcessingAuthority(Enum):
+    """Levels of delegation authority in enterprise data processing hierarchies"""
+    DATA_PROCESSOR = 1          # Can only execute assigned data processing tasks
+    PIPELINE_COLLABORATOR = 2   # Can request help from peer data processing agents
+    STAGE_COORDINATOR = 3       # Can coordinate data processing stage members
+    PIPELINE_MANAGER = 4        # Can manage entire data pipeline resources
+    DATA_ARCHITECT = 5          # Can make enterprise-level data architecture decisions
 
-class TaskPriority(Enum):
-    """Task priority levels for enterprise workload management"""
-    LOW = 1
-    MEDIUM = 2
-    HIGH = 3
-    CRITICAL = 4
-    EMERGENCY = 5
+class DataTaskPriority(Enum):
+    """Data processing task priority levels for enterprise workload management"""
+    LOW = 1        # Background data processing
+    MEDIUM = 2     # Standard ETL operations
+    HIGH = 3       # Business-critical analytics
+    CRITICAL = 4   # Real-time processing requirements
+    EMERGENCY = 5  # Data quality incidents or system failures
 ```
 
-Authority levels establish clear delegation hierarchies from individual execution to enterprise leadership. Priority levels enable workload management based on task importance and urgency.
+Authority levels establish clear delegation hierarchies from individual data processing execution to enterprise data architecture leadership. Priority levels enable workload management based on business impact and data processing urgency.
 
-### Data Structures for Delegation Rules
+### Data Processing Delegation Rules and Workload Tracking
 
-Comprehensive data structures define delegation rules and workload tracking:
+Comprehensive data structures define delegation rules and workload tracking optimized for data processing workflows:
 
 ```python
 @dataclass
-class DelegationRule:
-    """Comprehensive delegation rule specification"""
-    from_authority: DelegationAuthority
-    to_authority: DelegationAuthority
-    task_types: List[str]
+class DataProcessingDelegationRule:
+    """Comprehensive delegation rule specification for data processing workflows"""
+    from_authority: DataProcessingAuthority
+    to_authority: DataProcessingAuthority
+    task_types: List[str]  # e.g., ["etl", "data_quality", "analytics", "streaming"]
     conditions: Dict[str, Any]
-    resource_limits: Dict[str, float]
+    resource_limits: Dict[str, float]  # CPU, memory, storage, bandwidth
     approval_required: bool = False
     escalation_path: Optional[List[str]] = None
+    data_governance_required: bool = True
+    quality_validation_required: bool = True
 
 @dataclass
-class WorkloadMetrics:
-    """Comprehensive workload tracking for agents"""
+class DataProcessingWorkloadMetrics:
+    """Comprehensive workload tracking for data processing agents"""
     agent_id: str
-    current_tasks: int = 0
-    total_capacity: int = 10
+    current_data_tasks: int = 0
+    total_processing_capacity: int = 10
     complexity_score: float = 0.0
-    performance_rating: float = 0.8
+    throughput_performance: float = 0.8  # Records processed per unit time
     last_updated: datetime = field(default_factory=datetime.now)
-    specialization_bonus: Dict[str, float] = field(default_factory=dict)
+    data_specialization_bonus: Dict[str, float] = field(default_factory=dict)  # ETL, ML, Analytics bonuses
+    current_data_volume: int = 0  # GB currently being processed
+    pipeline_stage_assignments: List[str] = field(default_factory=list)
 ```
 
-Delegation rules specify authority transitions, task types, conditions, and resource constraints. Workload metrics track agent capacity, performance, and specialization bonuses.
+Data processing delegation rules specify authority transitions, data task types, conditions, and resource constraints specific to data engineering workflows. Workload metrics track agent processing capacity, throughput performance, and data volume handling.
 
-### Enterprise Delegation Class Infrastructure
+### Enterprise Data Processing Delegation Class Infrastructure
 
-The main delegation class initializes comprehensive management infrastructure:
+The main delegation class initializes comprehensive management infrastructure optimized for data processing:
 
 ```python
-class EnterpriseHierarchicalDelegation:
-    """Production-grade hierarchical delegation with enterprise features"""
+class EnterpriseDataProcessingDelegation:
+    """Production-grade hierarchical delegation for enterprise data processing workflows"""
     
     def __init__(self):
-        self.delegation_rules: List[DelegationRule] = []
-        self.authority_matrix: Dict[str, DelegationAuthority] = {}
-        self.workload_tracker: Dict[str, WorkloadMetrics] = {}
-        self.delegation_history: List[Dict[str, Any]] = []
-        self.peer_networks: Dict[str, List[str]] = {}
-        self.performance_monitor = threading.Thread(target=self._monitor_performance, daemon=True)
-        self.alert_queue = queue.Queue()
+        self.data_delegation_rules: List[DataProcessingDelegationRule] = []
+        self.data_processing_authority_matrix: Dict[str, DataProcessingAuthority] = {}
+        self.data_workload_tracker: Dict[str, DataProcessingWorkloadMetrics] = {}
+        self.data_delegation_history: List[Dict[str, Any]] = []
+        self.data_processing_peer_networks: Dict[str, List[str]] = {}
+        self.data_quality_monitor = threading.Thread(target=self._monitor_data_quality, daemon=True)
+        self.pipeline_alert_queue = queue.Queue()
+        self.data_lineage_tracker: Dict[str, List[Dict[str, Any]]] = {}
         self.logger = logging.getLogger(__name__)
         
-        # Initialize enterprise delegation rules
-        self._initialize_enterprise_rules()
+        # Initialize enterprise data processing delegation rules
+        self._initialize_data_processing_rules()
         
-        # Start performance monitoring
-        self.performance_monitor.start()
+        # Start data quality and performance monitoring
+        self.data_quality_monitor.start()
 ```
 
-Class initialization establishes tracking systems for rules, authority, workload, history, and peer networks. Background performance monitoring provides continuous system health assessment.
+Class initialization establishes tracking systems for rules, authority, workload, history, peer networks, and data lineage specific to data processing workflows. Background monitoring provides continuous data quality and pipeline health assessment.
 
-### Enterprise Rule Initialization
+### Enterprise Data Processing Rule Initialization
 
-Comprehensive enterprise delegation rules define organizational hierarchy:
+Comprehensive enterprise delegation rules define data processing organizational hierarchy:
 
 ```python
-    def _initialize_enterprise_rules(self):
-        """Initialize comprehensive enterprise delegation rules"""
+    def _initialize_data_processing_rules(self):
+        """Initialize comprehensive enterprise data processing delegation rules"""
         
-        # Executive level delegation rules
-        self.delegation_rules.extend([
-            DelegationRule(
-                from_authority=DelegationAuthority.ENTERPRISE_LEAD,
-                to_authority=DelegationAuthority.DEPARTMENT_MANAGE,
-                task_types=["strategic_planning", "resource_allocation", "policy_creation"],
-                conditions={"complexity": ">= 0.8", "impact": "enterprise"},
-                resource_limits={"budget": 1000000, "personnel": 50},
+        # Data architecture level delegation rules
+        self.data_delegation_rules.extend([
+            DataProcessingDelegationRule(
+                from_authority=DataProcessingAuthority.DATA_ARCHITECT,
+                to_authority=DataProcessingAuthority.PIPELINE_MANAGER,
+                task_types=["data_strategy", "architecture_design", "pipeline_optimization", "data_governance"],
+                conditions={"data_complexity": ">= 0.8", "business_impact": "enterprise"},
+                resource_limits={"cpu": 100, "memory": 500, "storage": 10000, "bandwidth": 1000},
                 approval_required=False,
-                escalation_path=["board_approval"]
+                escalation_path=["chief_data_officer"],
+                data_governance_required=True,
+                quality_validation_required=True
             ),
 ```
 
-Enterprise-level delegation establishes top-tier authority rules. Strategic planning, resource allocation, and policy creation require high complexity thresholds and significant resource limits.
+Data architecture-level delegation establishes top-tier authority rules for strategic data initiatives. Complex data processing tasks with enterprise impact require significant resource allocations and governance oversight.
 
 ```python
-            DelegationRule(
-                from_authority=DelegationAuthority.DEPARTMENT_MANAGE,
-                to_authority=DelegationAuthority.TEAM_COORDINATE,
-                task_types=["project_management", "team_coordination", "quality_assurance"],
-                conditions={"department_scope": True, "deadline": "<= 30_days"},
-                resource_limits={"budget": 100000, "personnel": 10},
+            DataProcessingDelegationRule(
+                from_authority=DataProcessingAuthority.PIPELINE_MANAGER,
+                to_authority=DataProcessingAuthority.STAGE_COORDINATOR,
+                task_types=["etl_orchestration", "data_quality_management", "pipeline_monitoring", "performance_tuning"],
+                conditions={"pipeline_scope": True, "sla_deadline": "<= 24_hours"},
+                resource_limits={"cpu": 50, "memory": 200, "storage": 5000, "bandwidth": 500},
                 approval_required=True,
-                escalation_path=["department_head", "enterprise_lead"]
+                escalation_path=["data_engineering_lead", "data_architect"],
+                data_governance_required=True,
+                quality_validation_required=True
             ),
 ```
 
-Department management delegation enables project coordination within defined scopes. Approval requirements and escalation paths ensure appropriate oversight for significant resource commitments.
+Pipeline management delegation enables orchestration coordination within defined scopes. Approval requirements and escalation paths ensure appropriate oversight for significant data processing commitments.
 
 ```python
-            DelegationRule(
-                from_authority=DelegationAuthority.TEAM_COORDINATE,
-                to_authority=DelegationAuthority.PEER_COLLABORATE,
-                task_types=["implementation", "research", "analysis", "testing"],
-                conditions={"team_scope": True, "skill_match": ">= 0.7"},
-                resource_limits={"budget": 10000, "time": "7_days"},
+            DataProcessingDelegationRule(
+                from_authority=DataProcessingAuthority.STAGE_COORDINATOR,
+                to_authority=DataProcessingAuthority.PIPELINE_COLLABORATOR,
+                task_types=["data_transformation", "data_validation", "schema_mapping", "data_profiling"],
+                conditions={"stage_scope": True, "data_quality_threshold": ">= 0.85"},
+                resource_limits={"cpu": 20, "memory": 100, "storage": 2000, "bandwidth": 200},
                 approval_required=False,
-                escalation_path=["team_lead", "department_manager"]
+                escalation_path=["pipeline_manager", "data_architect"],
+                data_governance_required=True,
+                quality_validation_required=True
             )
         ])
 ```
 
-Team coordination rules enable task delegation within teams with skill matching requirements and defined resource limits.
+Stage coordination rules enable task delegation within data processing stages with quality thresholds and defined resource limits for efficient operation.
 
-### Peer Collaboration Rules
+### Data Processing Peer Collaboration Rules
 
-Peer-to-peer delegation supports knowledge sharing and collaborative development:
+Peer-to-peer delegation supports knowledge sharing and collaborative data processing development:
 
 ```python
-        # Peer collaboration rules
-        self.delegation_rules.append(
-            DelegationRule(
-                from_authority=DelegationAuthority.PEER_COLLABORATE,
-                to_authority=DelegationAuthority.PEER_COLLABORATE,
-                task_types=["consultation", "code_review", "knowledge_sharing"],
-                conditions={"peer_level": True, "workload": "<= 0.8"},
-                resource_limits={"time": "2_hours"},
+        # Data processing peer collaboration rules
+        self.data_delegation_rules.append(
+            DataProcessingDelegationRule(
+                from_authority=DataProcessingAuthority.PIPELINE_COLLABORATOR,
+                to_authority=DataProcessingAuthority.PIPELINE_COLLABORATOR,
+                task_types=["code_review", "schema_consultation", "quality_validation", "troubleshooting"],
+                conditions={"peer_level": True, "data_workload": "<= 0.8", "expertise_match": ">= 0.7"},
+                resource_limits={"cpu": 5, "memory": 20, "time": "2_hours"},
                 approval_required=False,
-                escalation_path=["team_coordinator"]
+                escalation_path=["stage_coordinator"],
+                data_governance_required=False,
+                quality_validation_required=False
             )
         )
 ```
 
-### Agent Authority Registration
+Peer collaboration rules facilitate knowledge sharing and quality assurance between data processing agents with minimal resource overhead and governance requirements.
 
-Agents must be registered with specific delegation authorities before participating in the delegation system:
+### Data Processing Agent Authority Registration
+
+Agents must be registered with specific data processing delegation authorities before participating in data workflows:
 
 ```python
-    def register_agent_authority(self, agent_id: str, authority: DelegationAuthority,
-                               specializations: Dict[str, float] = None):
-        """Register agent with delegation authority and specializations"""
+    def register_data_agent_authority(self, agent_id: str, authority: DataProcessingAuthority,
+                                    data_specializations: Dict[str, float] = None,
+                                    processing_capacity: int = 10):
+        """Register data processing agent with delegation authority and specializations"""
         
-        self.authority_matrix[agent_id] = authority
+        self.data_processing_authority_matrix[agent_id] = authority
         
-        # Initialize workload tracking
-        self.workload_tracker[agent_id] = WorkloadMetrics(
+        # Initialize data processing workload tracking
+        self.data_workload_tracker[agent_id] = DataProcessingWorkloadMetrics(
             agent_id=agent_id,
-            specialization_bonus=specializations or {}
+            total_processing_capacity=processing_capacity,
+            data_specialization_bonus=data_specializations or {}
         )
         
-        self.logger.info(f"Agent {agent_id} registered with authority: {authority.name}")
+        self.logger.info(f"Data processing agent {agent_id} registered with authority: {authority.name}")
 ```
 
-Registration establishes agent authority levels and initializes workload tracking for capacity management.
+Registration establishes agent authority levels and initializes workload tracking for data processing capacity management with specialization bonuses for domain expertise.
 
-### Delegation Validation Process
+### Data Processing Delegation Validation Process
 
-Comprehensive validation ensures all delegation requests comply with enterprise policies:
+Comprehensive validation ensures all delegation requests comply with enterprise data processing policies:
 
 ```python
-    def can_delegate_task(self, from_agent: str, to_agent: str, 
-                         task_type: str, task_context: Dict[str, Any]) -> Dict[str, Any]:
-        """Comprehensive delegation validation with enterprise rules"""
+    def can_delegate_data_task(self, from_agent: str, to_agent: str, 
+                              task_type: str, data_context: Dict[str, Any]) -> Dict[str, Any]:
+        """Comprehensive data processing delegation validation with enterprise rules"""
         
-        # Get agent authorities
-        from_authority = self.authority_matrix.get(from_agent)
-        to_authority = self.authority_matrix.get(to_agent)
+        # Get data processing agent authorities
+        from_authority = self.data_processing_authority_matrix.get(from_agent)
+        to_authority = self.data_processing_authority_matrix.get(to_agent)
         
         if not from_authority or not to_authority:
             return {
                 "can_delegate": False,
-                "reason": "Agent authority not found",
+                "reason": "Data processing agent authority not found",
                 "requires_escalation": True
             }
 ```
 
-Authority validation ensures both agents exist in the delegation matrix. Missing authority information triggers immediate escalation to prevent unauthorized task delegation.
+Authority validation ensures both agents exist in the data processing delegation matrix. Missing authority information triggers immediate escalation to prevent unauthorized data task delegation.
 
 ```python
-        # Check delegation rules
-        applicable_rules = self._find_applicable_rules(
-            from_authority, to_authority, task_type, task_context
+        # Check data processing delegation rules
+        applicable_rules = self._find_applicable_data_processing_rules(
+            from_authority, to_authority, task_type, data_context
         )
         
         if not applicable_rules:
             return {
                 "can_delegate": False,
-                "reason": "No applicable delegation rules",
+                "reason": "No applicable data processing delegation rules",
                 "requires_escalation": True,
-                "escalation_path": ["team_coordinator", "department_manager"]
+                "escalation_path": ["stage_coordinator", "pipeline_manager"]
             }
 ```
 
-Rule matching identifies valid delegation paths based on authority levels and task types. Missing rules indicate policy gaps requiring escalation to appropriate management levels.
+Rule matching identifies valid delegation paths based on authority levels and data processing task types. Missing rules indicate policy gaps requiring escalation to appropriate data engineering management levels.
 
 ```python
-        # Validate workload capacity
-        workload_check = self._validate_workload_capacity(to_agent, task_context)
+        # Validate data processing workload capacity
+        workload_check = self._validate_data_processing_capacity(to_agent, data_context)
         
         if not workload_check["has_capacity"]:
             return {
                 "can_delegate": False,
-                "reason": f"Target agent overloaded: {workload_check['reason']}",
+                "reason": f"Target data processing agent overloaded: {workload_check['reason']}",
                 "alternative_agents": workload_check.get("alternatives", []),
                 "requires_escalation": False
             }
 ```
 
-Capacity validation prevents agent overload by checking current workload against limits. Alternative agents are suggested when primary targets lack capacity.
+Capacity validation prevents agent overload by checking current data processing workload against limits. Alternative agents are suggested when primary targets lack processing capacity.
 
 ```python
-        # Check resource limits
-        resource_check = self._validate_resource_limits(applicable_rules[0], task_context)
+        # Check data processing resource limits
+        resource_check = self._validate_data_processing_resource_limits(applicable_rules[0], data_context)
         
         if not resource_check["within_limits"]:
             return {
                 "can_delegate": False,
-                "reason": f"Resource limits exceeded: {resource_check['violations']}",
+                "reason": f"Data processing resource limits exceeded: {resource_check['violations']}",
                 "requires_escalation": True,
                 "escalation_path": applicable_rules[0].escalation_path
             }
+        
+        # Validate data governance requirements
+        governance_check = self._validate_data_governance_requirements(applicable_rules[0], data_context)
         
         # All checks passed
         return {
             "can_delegate": True,
             "rule_applied": applicable_rules[0].__dict__,
             "workload_impact": workload_check,
+            "governance_compliance": governance_check,
             "approval_required": applicable_rules[0].approval_required,
-            "monitoring_required": True
+            "monitoring_required": True,
+            "quality_validation_required": applicable_rules[0].quality_validation_required
         }
 ```
 
-Resource limit validation ensures agents don't exceed capacity constraints. When limits are breached, escalation paths provide alternative delegation routes.
+Resource limit and governance validation ensures agents don't exceed capacity constraints and maintain data compliance. Quality validation requirements ensure data integrity throughout delegation chains.
 
-### Delegation Execution
+### AI-Powered Data Processing Workload Optimization
 
-Once validation passes, we execute the delegation with comprehensive tracking:
-
-```python
-    def execute_delegation(self, from_agent: str, to_agent: str,
-                          task_description: str, task_context: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute delegation with comprehensive tracking and monitoring"""
-        
-        # Validate delegation
-        validation_result = self.can_delegate_task(from_agent, to_agent, 
-                                                 task_context.get("type", "general"), 
-                                                 task_context)
-        
-        if not validation_result["can_delegate"]:
-            return {
-                "success": False,
-                "delegation_id": None,
-                "validation_result": validation_result
-            }
-```
-
-Delegation execution begins with validation to ensure all prerequisites are met. Failed validations return detailed error information for debugging.
-
-### Delegation Record Creation
-
-Successful validations proceed to create comprehensive delegation records:
+Advanced optimization algorithms distribute data processing workload for maximum efficiency:
 
 ```python
-        # Create delegation record
-        delegation_id = f"del_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{from_agent}_{to_agent}"
+    def optimize_data_processing_workload(self, available_agents: List[str],
+                                        pending_data_tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """AI-powered data processing workload optimization across agent teams"""
         
-        delegation_record = {
-            "delegation_id": delegation_id,
-            "from_agent": from_agent,
-            "to_agent": to_agent,
-            "task_description": task_description,
-            "task_context": task_context,
-            "validation_result": validation_result,
-            "status": "active",
-            "created_at": datetime.now(),
-            "estimated_completion": datetime.now() + timedelta(
-                hours=task_context.get("estimated_hours", 4)
-            ),
-            "priority": TaskPriority(task_context.get("priority", 2)),
-            "monitoring": {
-                "enabled": True,
-                "check_interval": 3600,  # 1 hour
-                "alerts_enabled": True
-            }
-        }
-```
-
-Delegation records capture all essential information for tracking, including timeline estimates and monitoring configuration.
-
-### Workload and Monitoring Setup
-
-The final execution phase updates workload tracking and establishes monitoring:
-
-```python
-        # Update workload tracking
-        self._update_workload(to_agent, task_context)
+        # Analyze current data processing workload distribution
+        workload_analysis = self._analyze_current_data_processing_workloads(available_agents)
         
-        # Log delegation
-        self.delegation_history.append(delegation_record)
-        
-        # Set up monitoring if required
-        if validation_result.get("monitoring_required", False):
-            self._setup_delegation_monitoring(delegation_record)
-        
-        self.logger.info(f"Delegation executed: {delegation_id}")
-        
-        return {
-            "success": True,
-            "delegation_id": delegation_id,
-            "delegation_record": delegation_record,
-            "monitoring_setup": validation_result.get("monitoring_required", False)
-        }
-```
-
-Workload updates prevent overallocation while monitoring setup enables proactive management of delegated tasks.
-
-### AI-Powered Workload Optimization
-
-Advanced optimization algorithms distribute workload for maximum efficiency:
-
-```python
-    def optimize_workload_distribution(self, available_agents: List[str],
-                                     pending_tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """AI-powered workload optimization across agent teams"""
-        
-        # Analyze current workload distribution
-        workload_analysis = self._analyze_current_workloads(available_agents)
-        
-        # Generate optimal task assignments
-        optimization_result = self._generate_optimal_assignments(
-            pending_tasks, 
+        # Generate optimal data processing task assignments
+        optimization_result = self._generate_optimal_data_processing_assignments(
+            pending_data_tasks, 
             workload_analysis
         )
         
-        # Calculate performance improvements
-        performance_impact = self._calculate_optimization_impact(
+        # Calculate data processing performance improvements
+        performance_impact = self._calculate_data_processing_optimization_impact(
             optimization_result,
             workload_analysis
         )
 ```
 
-Workload optimization analyzes current distribution patterns and generates optimal assignments based on agent capabilities and capacity.
+Data processing workload optimization analyzes current distribution patterns and generates optimal assignments based on agent data processing capabilities, throughput capacity, and specialization areas.
 
-### Optimization Results Assembly
+### Data Processing Optimization Results Assembly
 
-The optimization process returns comprehensive recommendations and performance projections:
+The optimization process returns comprehensive recommendations and performance projections specific to data processing workflows:
 
 ```python
         return {
-            "optimization_id": f"opt_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
-            "current_workload_analysis": workload_analysis,
-            "recommended_assignments": optimization_result["assignments"],
-            "performance_improvements": {
-                "efficiency_gain": performance_impact["efficiency_gain"],
-                "load_balance_improvement": performance_impact["balance_improvement"],
-                "estimated_completion_speedup": performance_impact["speedup"],
-                "resource_utilization_improvement": performance_impact["resource_optimization"]
+            "optimization_id": f"data_opt_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            "current_data_workload_analysis": workload_analysis,
+            "recommended_data_assignments": optimization_result["assignments"],
+            "data_processing_improvements": {
+                "throughput_gain": performance_impact["throughput_gain"],
+                "latency_reduction": performance_impact["latency_reduction"],
+                "data_quality_improvement": performance_impact["quality_improvement"],
+                "resource_utilization_improvement": performance_impact["resource_optimization"],
+                "pipeline_efficiency_gain": performance_impact["pipeline_efficiency"]
             },
             "implementation_steps": optimization_result["implementation_steps"],
+            "data_governance_impact": optimization_result["governance_assessment"],
             "risk_assessment": optimization_result["risks"],
             "monitoring_recommendations": optimization_result["monitoring"]
         }
 ```
 
-Optimization results include performance projections, implementation guidance, and risk assessments for informed decision-making.
-
-### Rule Processing Infrastructure
-
-The delegation system relies on sophisticated rule matching and evaluation:
-
-```python
-    def _find_applicable_rules(self, from_authority: DelegationAuthority,
-                              to_authority: DelegationAuthority,
-                              task_type: str, task_context: Dict[str, Any]) -> List[DelegationRule]:
-        """Find delegation rules applicable to the given context"""
-        
-        applicable_rules = []
-        
-        for rule in self.delegation_rules:
-            # Check authority levels
-            if (rule.from_authority == from_authority and 
-                rule.to_authority == to_authority):
-                
-                # Check task type
-                if task_type in rule.task_types or "any" in rule.task_types:
-                    
-                    # Check conditions
-                    if self._evaluate_rule_conditions(rule.conditions, task_context):
-                        applicable_rules.append(rule)
-        
-        return applicable_rules
-```
-
-Rule matching ensures delegation requests comply with organizational hierarchy and task type restrictions.
-
-### Condition Evaluation Logic
-
-Complex condition evaluation supports flexible delegation policies:
-
-### Condition Evaluation Method Foundation
-
-The condition evaluation method processes delegation rule conditions systematically:
-
-```python
-    def _evaluate_rule_conditions(self, conditions: Dict[str, Any],
-                                 task_context: Dict[str, Any]) -> bool:
-        """Evaluate whether task context meets rule conditions"""
-        
-        for condition, requirement in conditions.items():
-            if condition not in task_context:
-                continue
-                
-            context_value = task_context[condition]
-```
-
-Method foundation establishes condition-requirement pairs and safely handles missing context values by skipping evaluation.
-
-### String-Based Comparison Operations
-
-Numeric comparison operators support flexible threshold evaluation:
-
-```python
-            if isinstance(requirement, str):
-                # Handle comparison operators
-                if requirement.startswith(">="):
-                    if not (context_value >= float(requirement[2:].strip())):
-                        return False
-                elif requirement.startswith("<="):
-                    if not (context_value <= float(requirement[2:].strip())):
-                        return False
-                elif requirement.startswith(">"):
-                    if not (context_value > float(requirement[1:].strip())):
-                        return False
-                elif requirement.startswith("<"):
-                    if not (context_value < float(requirement[1:].strip())):
-                        return False
-                else:
-                    if context_value != requirement:
-                        return False
-```
-
-Comparison operators enable threshold-based conditions for numeric values. String parsing extracts numeric thresholds for mathematical evaluation.
-
-### Exact Matching and Return Logic
-
-Non-string requirements and final evaluation complete the condition assessment:
-
-```python
-            else:
-                if context_value != requirement:
-                    return False
-        
-        return True
-```
-
-Condition evaluation supports comparison operators for numeric thresholds and exact matching for categorical requirements.
-
-### Performance Monitoring Infrastructure
-
-Continuous monitoring ensures delegated tasks progress as expected:
-
-```python
-    def _monitor_performance(self):
-        """Background performance monitoring for delegated tasks"""
-        
-        while True:
-            try:
-                # Check active delegations
-                active_delegations = [
-                    record for record in self.delegation_history
-                    if record["status"] == "active"
-                ]
-                
-                for delegation in active_delegations:
-                    # Check for deadline risks
-                    if self._is_deadline_at_risk(delegation):
-                        self.alert_queue.put({
-                            "type": "deadline_risk",
-                            "delegation_id": delegation["delegation_id"],
-                            "message": "Task may miss deadline",
-                            "severity": "warning"
-                        })
-```
-
-Deadline monitoring identifies tasks at risk of missing completion targets. Alert generation enables proactive intervention before deadlines are breached.
-
-```python
-                    # Check for workload issues
-                    workload_issues = self._check_workload_health(delegation["to_agent"])
-                    if workload_issues:
-                        self.alert_queue.put({
-                            "type": "workload_issue",
-                            "agent_id": delegation["to_agent"],
-                            "issues": workload_issues,
-                            "severity": "warning"
-                        })
-                
-                # Sleep for monitoring interval
-                threading.Event().wait(300)  # Check every 5 minutes
-```
-
-Continuous monitoring maintains system health through regular checks. Five-minute intervals balance responsiveness with resource efficiency for production environments.
-
-```python
-            except Exception as e:
-                self.logger.error(f"Performance monitoring error: {str(e)}")
-                threading.Event().wait(60)  # Retry after 1 minute
-```
+Optimization results include data processing-specific performance projections, governance impact assessment, implementation guidance, and risk assessments for informed decision-making in data engineering contexts.
 
 ---
 
 ## Module Summary
 
-You've now mastered enterprise CrewAI team patterns and production architectures:
+You've now mastered enterprise CrewAI team patterns and production architectures specifically for data processing environments:
 
-✅ **Custom Tool Development**: Created sophisticated tools that enable specialized agent capabilities  
-✅ **Hierarchical Delegation**: Implemented enterprise delegation patterns with authority matrices and peer inquiry  
-✅ **Performance Optimization**: Built workload balancing and optimization systems for team efficiency  
-✅ **Enterprise Monitoring**: Designed comprehensive monitoring and alerting systems for production teams
+✅ **Custom Data Processing Tool Development**: Created sophisticated tools that enable specialized data processing agent capabilities including data discovery, transformation, and pipeline orchestration  
+✅ **Hierarchical Data Processing Delegation**: Implemented enterprise delegation patterns with data processing authority matrices and peer collaboration for data engineering workflows  
+✅ **Data Processing Performance Optimization**: Built workload balancing and optimization systems for data processing team efficiency and throughput  
+✅ **Enterprise Data Processing Monitoring**: Designed comprehensive monitoring and alerting systems for production data processing teams with data quality and governance compliance
 
 ### Next Steps
 - **Return to Core**: [Session 4 Main](Session4_CrewAI_Team_Orchestration.md)
@@ -1174,43 +1059,43 @@ You've now mastered enterprise CrewAI team patterns and production architectures
 
 ## Module B Knowledge Check
 
-### Test your understanding of enterprise team patterns and delegation systems:
+### Test your understanding of enterprise team patterns and delegation systems for data processing:
 
-**Question 1:** What sources receive the highest weighting in the search result aggregation?
-A) Web sources (1.0 weight)  
-B) Knowledge base (1.2 weight) and databases (1.3 weight)  
-C) Documents only (1.1 weight)  
-D) All sources receive equal weighting  
+**Question 1:** What data sources receive the highest weighting in the data discovery result aggregation?
+A) Data lake sources (1.2 weight)  
+B) Data warehouse (1.4 weight) and streaming sources (1.3 weight)  
+C) API endpoints only (1.0 weight)  
+D) All data sources receive equal weighting  
 
-**Question 2:** Which authority level can delegate strategic planning tasks?
-A) PEER_COLLABORATE  
-B) TEAM_COORDINATE  
-C) DEPARTMENT_MANAGE  
-D) ENTERPRISE_LEAD  
+**Question 2:** Which authority level can delegate data architecture design tasks in data processing workflows?
+A) PIPELINE_COLLABORATOR  
+B) STAGE_COORDINATOR  
+C) PIPELINE_MANAGER  
+D) DATA_ARCHITECT  
 
-**Question 3:** What happens when an agent's workload capacity is exceeded during delegation?
-A) Task is automatically rejected  
-B) Alternative agents are suggested without escalation required  
-C) Immediate escalation to enterprise level  
-D) Task is queued for later execution  
+**Question 3:** What happens when a data processing agent's workload capacity is exceeded during delegation?
+A) Data processing task is automatically rejected  
+B) Alternative data processing agents are suggested without escalation required  
+C) Immediate escalation to data architecture level  
+D) Data processing task is queued for later execution  
 
-**Question 4:** What triggers escalation when resource limits are exceeded?
-A) Budget constraints only  
-B) Personnel limits only  
-C) Any resource limit violation according to delegation rules  
-D) Time constraints only  
+**Question 4:** What triggers escalation when data processing resource limits are exceeded?
+A) CPU constraints only  
+B) Memory limits only  
+C) Any data processing resource limit violation according to delegation rules  
+D) Storage constraints only  
 
-**Question 5:** How frequently does the background performance monitor check for issues?
+**Question 5:** How frequently does the background data quality monitor check for issues in data processing workflows?
 A) Every minute  
 B) Every 5 minutes with 1-minute retry on errors  
 C) Every 10 minutes  
-D) Only when alerts are triggered  
+D) Only when data quality alerts are triggered  
 
 [**🗂️ View Test Solutions →**](Session4_ModuleB_Test_Solutions.md)
 
 ---
 
 **🗂️ Source Files for Module B:**
-- `src/session4/enterprise_tools.py` - Production tool implementations
-- `src/session4/enterprise_delegation.py` - Hierarchical delegation systems
-- `src/session4/performance_optimization.py` - Team performance monitoring
+- `src/session4/enterprise_data_tools.py` - Production data processing tool implementations
+- `src/session4/enterprise_data_delegation.py` - Hierarchical delegation systems for data processing
+- `src/session4/data_performance_optimization.py` - Data processing team performance monitoring
