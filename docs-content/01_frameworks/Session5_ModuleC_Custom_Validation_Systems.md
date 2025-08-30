@@ -296,7 +296,11 @@ Next, we implement intelligent retry decision logic for data processing:
         
         if error_context.severity == DataProcessingErrorSeverity.CRITICAL:
             return False
-        
+```
+
+Retry decision logic begins with fundamental safety checks: maximum retry limit enforcement prevents infinite loops, recoverability assessment avoids futile attempts, and critical severity blocking prevents system damage from cascading failures in data processing pipelines.
+
+```python
         # Never retry schema or validation errors - they need manual fix
         if error_context.category in self.non_retryable_categories:
             return False
@@ -304,13 +308,21 @@ Next, we implement intelligent retry decision logic for data processing:
         # Always retry retryable categories unless at max attempts
         if error_context.category in self.retryable_categories:
             return True
-        
+```
+
+Category-based retry decisions differentiate between error types that benefit from retries versus those requiring immediate intervention. Schema and validation errors need manual fixes and won't resolve through retry attempts, while network timeouts and temporary resource issues often resolve automatically.
+
+```python
         # For data quality issues, retry only if impact is low
         if error_context.category == DataProcessingErrorCategory.DATA_QUALITY:
             return error_context.data_quality_impact < 0.5  # Less than 50% impact
         
         return False
-    
+```
+
+Data quality error handling applies impact-based retry logic - low-impact quality issues may be transient and worth retrying, while high-impact issues likely indicate systematic problems requiring human intervention to prevent data corruption.
+
+```python
     def calculate_delay(self, retry_count: int, error_category: DataProcessingErrorCategory = None) -> float:
         """Calculate delay before next retry attempt using exponential backoff with data processing optimizations."""
         base_delay = self.base_delay
@@ -324,8 +336,11 @@ Next, we implement intelligent retry decision logic for data processing:
         
         return base_delay * (self.backoff_multiplier ** retry_count)
 ```
+```
 
 ### Retry Execution Framework for Data Processing
+
+Delay calculation implements category-specific exponential backoff optimized for different error types. Streaming lag errors use shorter delays (0.5s) for rapid recovery, while resource exhaustion uses longer delays (5s) to allow system recovery. The exponential backoff prevents system overwhelm during widespread failures.
 
 The core retry execution engine attempts function calls, classifies errors, makes retry decisions, and implements backoff delays for resilient data processing operations.
 
@@ -605,6 +620,8 @@ class DataServiceIntegration:
         self.logger = logging.getLogger(f"DataServiceIntegration.{service_name}")
 ```
 
+Data quality errors include dataset context and quantified quality scores (0.3 indicating poor quality), while resource exhaustion errors represent capacity limitations. This comprehensive error simulation ensures robust testing of all error handling pathways in data processing workflows.
+
 Now we implement the HTTP request method with comprehensive error handling for data services:
 
 ```python
@@ -622,13 +639,22 @@ Now we implement the HTTP request method with comprehensive error handling for d
         dataset_id: str = None
     ) -> Dict[str, Any]:
         """Make HTTP request with comprehensive error handling for data processing."""
-        
+```
+
+The make_request method demonstrates comprehensive decorator-based error handling for data service integrations. The decorator automatically categorizes errors as data warehouse issues with high severity, providing consistent error classification across the data processing system.
+
+```python
         async def _make_http_request():
             url = f"{self.base_url}/{endpoint.lstrip('/')}"
             
             # Simulate various data processing failure scenarios for testing
             import random
             failure_chance = 0.05  # 5% chance of failure for data services
+```
+
+The internal HTTP request function constructs proper URLs by combining base URL with endpoint paths. The simulation logic introduces controlled failure scenarios (5% failure rate) essential for testing error handling, circuit breaker, and retry mechanisms in data processing environments.
+
+```python
             if random.random() < failure_chance:
                 failure_type = random.choice([
                     'timeout', 'schema_error', 'data_quality', 'resource_exhaustion'
@@ -638,10 +664,16 @@ Now we implement the HTTP request method with comprehensive error handling for d
                     raise StreamingLagError(f"Timeout connecting to {self.service_name}", lag_seconds=30, topic=endpoint)
                 elif failure_type == 'schema_error':
                     raise SchemaValidationError(f"Schema mismatch in {self.service_name}", expected_schema="v1.0", actual_schema="v0.9")
+```
+
+Failure simulation covers the most common data processing error scenarios. Timeout errors simulate network latency issues with streaming lag details, while schema errors represent version mismatch problems with specific schema version information for debugging.
+
+```python
                 elif failure_type == 'data_quality':
                     raise DataQualityError(f"Data quality issues in {self.service_name}", dataset_id=dataset_id, quality_score=0.3)
                 else:
                     raise DataProcessingAgentError(f"Resource exhaustion in {self.service_name}")
+```
 ```
 
 Finally, we return the successful response through the circuit breaker:

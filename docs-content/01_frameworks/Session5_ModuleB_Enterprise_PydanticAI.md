@@ -709,7 +709,11 @@ Now we implement the core audit logging functionality for data processing:
         """Log data processing request for comprehensive audit trail."""
         if not self.config.enable_audit_logging:
             return
-        
+```
+
+The audit logging method accepts comprehensive parameters for data processing request tracking. Each parameter captures essential audit information: user identity, agent identification, dataset references, processing type classification, request payload, optional results, error states, and sensitivity classification for compliance monitoring.
+
+```python
         audit_entry = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "event_type": "data_processing_request",
@@ -717,6 +721,11 @@ Now we implement the core audit logging functionality for data processing:
             "agent_name": agent_name,
             "dataset_id": dataset_id,
             "processing_type": processing_type,
+```
+
+The audit entry structure captures temporal, identity, and operational context essential for regulatory compliance. UTC timestamps ensure consistent timezone handling across distributed systems, while event type classification enables efficient log filtering and analysis for compliance reporting.
+
+```python
             "data_size_bytes": len(str(request_data)),
             "data_sensitivity_level": data_sensitivity_level,
             "success": error is None,
@@ -725,7 +734,11 @@ Now we implement the core audit logging functionality for data processing:
         }
         
         self.audit_logger.info(f"DATA_PROCESSING: {audit_entry}")
-    
+```
+
+Data size tracking monitors processing volume for capacity planning and cost attribution. Success determination and error capture provide comprehensive operational visibility, while compliance flags enable automated policy enforcement and regulatory report generation.
+
+```python
     def _assess_compliance_flags(self, data: Dict[str, Any]) -> List[str]:
         """Assess compliance flags for data processing requests."""
         flags = []
@@ -734,13 +747,19 @@ Now we implement the core audit logging functionality for data processing:
         privacy_service = DataPrivacyService("dummy_key")  # Would use real key
         if privacy_service.detect_pii_in_dataset(data):
             flags.append("pii_detected")
-        
+```
+
+Compliance assessment begins with PII detection using specialized privacy services. Automated PII detection protects against inadvertent personal data processing violations, flagging requests that require additional privacy controls or consent verification.
+
+```python
         # Check for large data processing
         if len(str(data)) > 1000000:  # 1MB threshold
             flags.append("large_dataset")
         
         return flags
 ```
+
+Large dataset detection identifies processing requests exceeding size thresholds that may require special handling, resource allocation, or approval workflows. The 1MB threshold represents a configurable boundary for automated versus supervised data processing operations.
 
 ---
 

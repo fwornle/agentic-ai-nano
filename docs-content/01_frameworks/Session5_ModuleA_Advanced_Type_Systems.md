@@ -359,13 +359,22 @@ class DataValidationErrorHandler:
     def __init__(self):
         self.error_counts: Dict[str, int] = {}  # Track error frequency
         self.common_errors: List[DataValidationErrorDetail] = []  # Common error patterns
+```
+
+The DataValidationErrorHandler initializes with error tracking infrastructure essential for data quality monitoring. Error counts track frequency patterns to identify systemic data issues, while common errors list stores recurring validation failures for pattern analysis and automated remediation.
+
+```python
         self.data_quality_metrics = {
             'schema_violations': 0,
             'range_violations': 0, 
             'format_violations': 0,
             'consistency_violations': 0
         }
-    
+```
+
+Data quality metrics categorize validation failures into specific types crucial for data engineering analytics. Schema violations indicate structural problems, range violations show value boundary issues, format violations reveal data type problems, and consistency violations identify logical relationship errors.
+
+```python
     def handle_validation_error(self, error: Exception, model_class: Type[BaseModel]) -> Dict[str, Any]:
         """Transform raw validation errors into structured, actionable feedback for data engineers."""
         
@@ -374,6 +383,11 @@ class DataValidationErrorHandler:
         # Process Pydantic validation errors
         if hasattr(error, 'errors'):
             for err in error.errors():
+```
+
+Error processing begins by checking for Pydantic validation errors structure and iterating through individual error details. Each error contains location information, error type classification, and contextual details necessary for generating actionable feedback for data engineering teams.
+
+```python
                 detail = DataValidationErrorDetail(
                     field_path='.'.join(str(loc) for loc in err['loc']),
                     error_type=err['type'],
