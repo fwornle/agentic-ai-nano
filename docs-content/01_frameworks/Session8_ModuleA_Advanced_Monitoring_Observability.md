@@ -1675,31 +1675,31 @@ You've now mastered advanced monitoring and observability systems that power the
 
 Test your understanding of advanced monitoring and observability systems for data processing:
 
-**Question 1:** What visualization capabilities does the advanced data processing metrics dashboard provide for production monitoring?
+**Question 1:** What visualization capabilities does the advanced data processing metrics dashboard provide for production monitoring?  
 A) Basic charts only  
 B) Real-time dashboards with custom queries, data quality alerting integration, and performance analytics for data pipelines  
 C) Static reports only  
 D) Manual data entry  
 
-**Question 2:** How does the distributed tracing system track data processing requests across microservices?
+**Question 2:** How does the distributed tracing system track data processing requests across microservices?  
 A) Single service tracking  
 B) End-to-end trace correlation with span relationships and data transformation performance analysis  
 C) Manual logging only  
 D) Basic error tracking  
 
-**Question 3:** What health check capabilities does the advanced monitoring provide for data processing systems?
+**Question 3:** What health check capabilities does the advanced monitoring provide for data processing systems?  
 A) Simple ping tests  
 B) Multi-level health checks including service, database, data quality, and dependency status  
 C) Manual status updates  
 D) Binary health indicators  
 
-**Question 4:** How does the alerting system determine notification severity and routing for data processing alerts?
+**Question 4:** How does the alerting system determine notification severity and routing for data processing alerts?  
 A) All alerts are the same priority  
 B) Configurable severity levels with intelligent routing and escalation policies specific to data processing  
 C) Manual alert management  
 D) Email-only notifications  
 
-**Question 5:** What performance analytics does the observability stack provide for data processing optimization?
+**Question 5:** What performance analytics does the observability stack provide for data processing optimization?  
 A) Basic counters only  
 B) Comprehensive metrics including data processing times, data quality scores, throughput trends, and cost per GB  
 C) Manual performance tracking  
