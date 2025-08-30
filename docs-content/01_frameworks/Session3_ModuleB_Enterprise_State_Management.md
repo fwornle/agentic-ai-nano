@@ -158,7 +158,7 @@ Different environments use optimized backends suited to their specific data proc
                 "type": "memory"
             }
 ```
-    
+
 ### Production Workflow Construction
 
 The production workflow integrates comprehensive state management with monitoring and recovery capabilities for data processing:
@@ -190,7 +190,7 @@ Production nodes implement enterprise-grade data processing capabilities. The st
 
 Enterprise edge configuration establishes data processing workflow routing with validation at each transition. This ensures state consistency, enables conditional routing based on data processing health, and provides interrupt points for manual intervention in critical data processing scenarios.
 
-```python        
+```python
         return workflow.compile(
             checkpointer=self.persistence_config["primary"],
             interrupt_before=["checkpoint_manager"],  # Manual intervention points
@@ -199,7 +199,7 @@ Enterprise edge configuration establishes data processing workflow routing with 
 ```
 
 Workflow compilation integrates persistence, interrupts, and debugging for production data processing. The primary checkpointer ensures state durability, manual intervention points enable human oversight at critical moments, and debug mode provides comprehensive logging for troubleshooting distributed data processing issues.
-    
+
 ### Enterprise State Initialization
 
 State initialization establishes comprehensive tracking infrastructure for enterprise data processing workflows:
@@ -269,7 +269,7 @@ Finally, we establish enterprise-grade checkpoint and recovery capabilities for 
 
 Checkpoint and recovery infrastructure ensures data processing resilience. Automatic checkpointing every 30 seconds preserves progress, rollback points enable state recovery, and integrity hashes detect corruption - providing comprehensive protection against failures in long-running data processing workflows.
 
-```python        
+```python
         return {
             **state,
             **enterprise_metadata
@@ -296,7 +296,7 @@ The orchestrator coordinates distributed data processing workers based on comple
 
 Orchestrator initialization extracts current processing context and updates execution tracking. State update counting enables change frequency analysis while timestamp tracking supports performance monitoring and timeout detection in distributed data processing environments.
 
-```python        
+```python
         # Analyze processing step complexity for worker allocation
         processing_complexity = self._analyze_processing_step_complexity(current_step, state)
 ```
@@ -343,7 +343,7 @@ Finally, we log the orchestration decision and update the workflow state with tr
 
 Command logging captures orchestration decisions for data processing analysis. Timestamp enables temporal correlation, complexity scores support resource planning, worker type tracking aids debugging, and reasoning provides audit trails for optimization and troubleshooting in distributed data processing systems.
 
-```python        
+```python
         return {
             **state,
             "active_data_workers": active_workers,
@@ -361,7 +361,7 @@ State update integration preserves orchestration decisions and worker coordinati
 
 Data ingestion workers are created based on processing complexity analysis and data source requirements:
 
-```python    
+```python
     def _create_data_ingestion_workers(self, processing_complexity: Dict[str, Any], 
                                state: EnterpriseDataProcessingState) -> List[Send]:
         """Create specialized data ingestion workers based on processing analysis"""
@@ -380,7 +380,7 @@ Data ingestion workers are created based on processing complexity analysis and d
 
 Streaming worker allocation handles high-volume data processing pipelines. The worker focuses on continuous data ingestion, optimizes for volume throughput, receives unique task identifiers, gets 300 seconds processing time, and maintains 80% quality thresholds for streaming data processing scenarios.
 
-```python        
+```python
         if processing_complexity["data_source_batch"]:
             workers.append(Send("batch_ingestion_worker", {
                 "focus": "batch_data_ingestion",
@@ -402,12 +402,12 @@ Streaming worker allocation handles high-volume data processing pipelines. The w
 
 Batch and real-time workers handle different data processing patterns. Batch workers prioritize reliability with 240-second processing windows and 70% quality thresholds, while real-time workers optimize for low latency with 360-second allocation and 75% quality requirements.
 
-```python        
+```python
         return workers
 ```
 
 Worker list return provides the orchestrator with configured data processing workers. Each worker receives specialized configuration matching processing complexity requirements, enabling optimized distributed data processing based on workload characteristics and performance objectives.
-    
+
     def _monitor_state_health(self, state: EnterpriseDataProcessingState) -> EnterpriseDataProcessingState:
         """Continuous state health monitoring with automatic recovery for data processing"""
         
@@ -419,6 +419,7 @@ Worker list return provides the orchestrator with configured data processing wor
         execution_metrics = state["execution_metrics"]
         current_time = datetime.now().timestamp()
         execution_duration = current_time - execution_metrics["start_time"]
+
 ```
 
 State integrity validation ensures data consistency while performance monitoring tracks execution efficiency and resource utilization for health assessment in data processing workflows.
@@ -487,7 +488,7 @@ State health integration preserves monitoring data for downstream analysis. Perf
 
 The checkpoint manager provides intelligent state preservation and rollback capabilities for long-running data processing workflows:
 
-```python    
+```python
     def _manage_checkpoints(self, state: EnterpriseDataProcessingState) -> EnterpriseDataProcessingState:
         """Intelligent checkpoint management with automatic rollback capabilities for data processing"""
         
@@ -498,7 +499,7 @@ The checkpoint manager provides intelligent state preservation and rollback capa
 
 Checkpoint initialization extracts configuration and timing data from data processing state. Frequency-based scheduling ensures regular progress preservation while metadata tracking provides context for checkpoint decision-making in distributed data processing environments.
 
-```python        
+```python
         # Determine if checkpoint is needed for data processing
         time_since_last = (datetime.now() - last_checkpoint).total_seconds()
         checkpoint_needed = (
@@ -510,7 +511,7 @@ Checkpoint initialization extracts configuration and timing data from data proce
 
 Checkpoint triggers evaluate multiple data processing conditions. Time-based scheduling ensures regular snapshots, error detection triggers immediate preservation, and worker synchronization issues indicate potential data processing state inconsistencies requiring immediate checkpoint creation.
 
-```python        
+```python
         if checkpoint_needed:
             # Create rollback point for data processing
             rollback_point = {
@@ -548,7 +549,7 @@ Recovery metadata supports checkpoint management decisions for data processing. 
 
 Metadata updates track checkpoint frequency and history for data processing workflows. Last checkpoint timestamps enable interval calculations while checkpoint counting supports retention policies and storage management in distributed data processing environments.
 
-```python            
+```python
             return {
                 **state,
                 "rollback_points": state["rollback_points"] + [rollback_point],
@@ -561,7 +562,7 @@ Metadata updates track checkpoint frequency and history for data processing work
 ```
 
 State integration preserves checkpoint data and updates version tracking. Rollback points accumulate for recovery options, metadata updates maintain scheduling, version increments ensure consistency, and timestamps support audit trails in data processing checkpoint management.
-    
+
     def _calculate_state_hash(self, state: EnterpriseDataProcessingState) -> str:
         """Calculate integrity hash for data processing state validation"""
         import hashlib
@@ -577,6 +578,7 @@ State integration preserves checkpoint data and updates version tracking. Rollba
         
         hash_string = json.dumps(hash_data, sort_keys=True)
         return hashlib.sha256(hash_string.encode()).hexdigest()
+
 ```
 
 ---
@@ -647,7 +649,7 @@ class EnterpriseDataProcessingRoutingEngine:
         }
         self.logger = logging.getLogger(__name__)
 ```
-    
+
 ### Advanced Multi-Factor Decision Process
 
 The core routing decision process integrates multiple analysis stages to determine optimal data processing workflow paths:
@@ -665,7 +667,7 @@ The core routing decision process integrates multiple analysis stages to determi
 
 Routing decision initialization extracts contextual data and calculates preliminary scores. Context extraction gathers performance metrics, business constraints, and resource utilization while scoring evaluates each routing option's suitability for current data processing conditions.
 
-```python        
+```python
         # Apply business rules and constraints for data processing
         constrained_decisions = self._apply_data_processing_business_constraints(decision_scores, context)
         
@@ -675,7 +677,7 @@ Routing decision initialization extracts contextual data and calculates prelimin
 
 Business constraint application and decision optimization ensure data processing routing aligns with organizational requirements. Constraints modify scores based on priority levels, cost budgets, and deadlines while selection chooses the highest-scoring viable option for optimal data processing outcomes.
 
-```python        
+```python
         # Log decision for analysis and improvement in data processing
         self._log_data_processing_routing_decision(optimal_decision, context, decision_scores, state)
         
@@ -683,7 +685,7 @@ Business constraint application and decision optimization ensure data processing
 ```
 
 Decision logging and result return complete the routing process. Logging captures decision rationale, context factors, and scores for continuous improvement while value return provides the routing decision string for data processing workflow execution.
-    
+
 ### Routing Context Extraction
 
 Context extraction analyzes data processing workflow state to gather all factors influencing routing decisions:
@@ -823,7 +825,7 @@ Escalation scoring triggers human intervention for critical data processing fail
 
 Business constraints adjust routing scores to align data processing decisions with organizational priorities and resource limitations:
 
-```python    
+```python
     def _apply_data_processing_business_constraints(self, decision_scores: Dict[DataProcessingRoutingDecision, float],
                                   context: DataProcessingRoutingContext) -> Dict[DataProcessingRoutingDecision, float]:
         """Apply business rules and constraints to data processing routing decisions"""
@@ -855,7 +857,7 @@ Critical priority adjustments ensure high-stakes data processing tasks receive p
 
 Deadline pressure optimization balances speed with quality for data processing. Under 10-minute deadlines, standard processing paths receive 20% boost while retry attempts are reduced 70% to ensure timely completion of data processing tasks without sacrificing essential functionality.
 
-```python        
+```python
         # Cost constraint considerations for data processing
         max_cost = context.cost_constraints.get("max_cost", float('inf'))
         if max_cost < 50.0:  # Low cost budget for data processing
@@ -872,7 +874,7 @@ Cost constraint enforcement adapts data processing routing to budget limitations
 
 The decision selector evaluates threshold compliance and chooses the highest-scoring viable routing option for data processing:
 
-```python    
+```python
     def _select_optimal_data_processing_decision(self, decision_scores: Dict[DataProcessingRoutingDecision, float],
                                context: DataProcessingRoutingContext) -> DataProcessingRoutingDecision:
         """Select the optimal data processing routing decision based on scores and thresholds\""""
@@ -923,7 +925,7 @@ Data quality assessment begins with basic validation for data processing workflo
 
 Completeness and keyword analysis form the foundation of data processing quality assessment. Length scoring assumes 500-character optimal results while keyword scoring identifies data processing activities like validation, cleaning, and enrichment to measure processing thoroughness.
 
-```python        
+```python
         # Data structure and organization indicators
         structure_indicators = ['\n', '.', ':', '-', '•']
         structure_score = min(sum(processing_result.count(indicator) for indicator in structure_indicators) / 10, 1.0)
@@ -936,7 +938,7 @@ Completeness and keyword analysis form the foundation of data processing quality
 
 Structure and complexity analysis evaluate data processing output sophistication. Structure indicators measure organization and readability while complexity words identify analytical depth and reasoning - both critical for determining data processing quality and downstream routing decisions.
 
-```python        
+```python
         # Weighted composite score for data quality
         composite_score = (
             completeness_score * 0.25 +
@@ -949,7 +951,7 @@ Structure and complexity analysis evaluate data processing output sophistication
 ```
 
 Weighted composite scoring combines all data processing quality dimensions. Keywords receive highest weight (35%) for processing activity identification, completeness and structure share equal importance (25% each), while complexity adds refinement (15%) - creating balanced quality assessment for data processing routing.
-    
+
     def create_contextual_data_processing_workflow(self) -> StateGraph:
         """Create workflow with continuous contextual processing and adaptive routing for data processing"""
         
@@ -961,6 +963,7 @@ Weighted composite scoring combines all data processing quality dimensions. Keyw
         workflow.add_node("context_updater", self._update_data_contextual_understanding)
         workflow.add_node("continuous_monitor", self._monitor_data_context_evolution)
         workflow.add_node("decision_engine", self._make_data_contextual_decisions)
+
 ```
 
 Each node specializes in a specific aspect of contextual data processing: analysis, adaptation, updating, monitoring, and decision-making. This separation enables precise control over context evolution in data processing workflows.
@@ -1014,6 +1017,7 @@ You've now mastered enterprise-grade state management for LangGraph workflows op
 ✅ **Contextual Processing**: Designed adaptive workflows that evolve with changing data processing context and requirements
 
 ### Next Steps
+
 - **Return to Core**: [Session 3 Main](Session3_LangGraph_Multi_Agent_Workflows.md)
 - **Advance to Session 4**: [CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)
 - **Compare with Module A**: [Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)
@@ -1059,6 +1063,7 @@ D) Completeness (50%) + Keywords (50%)
 ---
 
 **🗂️ Source Files for Module B:**
+
 - [`src/session3/enterprise_state_management.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/enterprise_state_management.py) - Production state systems
 - [`src/session3/advanced_routing_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing_patterns.py) - Complex decision engines
 - [`src/session3/contextual_processing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/contextual_processing.py) - Adaptive workflow patterns

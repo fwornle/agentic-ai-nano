@@ -38,6 +38,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from datetime import datetime
 ```
+
 These imports establish the foundation for our ReAct (Reasoning + Acting) pattern implementation. The `dataclasses` module provides efficient structures for representing reasoning steps, while `enum` creates type-safe action categories. This combination enables structured, traceable data processing workflows.
 
 ```python
@@ -48,6 +49,7 @@ class ActionType(Enum):
     ROUTE_PIPELINE = "route_pipeline"
     FINAL_RESULT = "final_result"
 ```
+
 Action types define the vocabulary of data processing operations our ReAct agent can perform. Each action represents a specific category of data engineering task - from schema analysis to pipeline routing. This structured approach ensures that every reasoning step has a clear, actionable outcome.
 
 ```python
@@ -62,6 +64,7 @@ class ReActStep:
     data_quality_score: float
     timestamp: datetime = field(default_factory=datetime.now)
 ```
+
 The ReActStep structure captures the complete reasoning-action cycle for each data processing decision. The `thought` field contains the agent's reasoning, `action` defines what it will do, and `observation` records the results. The `data_quality_score` provides quantitative feedback on decision confidence.
 
 ```python
@@ -74,6 +77,7 @@ class DataProcessingReActAgent:
         self.max_steps = max_steps
         self.reasoning_history: List[ReActStep] = []
 ```
+
 The ReAct agent initialization combines language model capabilities with data processing tools. The `max_steps` parameter prevents infinite reasoning loops, while `reasoning_history` maintains a complete audit trail of all processing decisions. This design enables both performance and explainability.
 
 ```python
@@ -95,6 +99,7 @@ The ReAct agent initialization combines language model capabilities with data pr
         
         return self._format_pipeline_solution()
 ```
+
 The main processing loop implements the iterative reasoning pattern that makes ReAct powerful. Each iteration generates a thought, executes an action, observes the result, and decides whether to continue. This approach mirrors how experienced data engineers solve complex problems - through systematic reasoning and incremental progress.
 
 ### Key Data Engineering Breakthrough Concepts
@@ -123,6 +128,7 @@ async def _execute_data_reasoning_step(
     action_type = ActionType(action_decision['action'])
     action_input = action_decision['input']
 ```
+
 The reasoning step execution begins with thought generation followed by action planning. This two-phase approach mirrors human problem-solving - first understanding the situation, then deciding what to do about it. The separation ensures that actions are grounded in clear reasoning rather than reactive responses.
 
 ```python
@@ -143,6 +149,7 @@ The reasoning step execution begins with thought generation followed by action p
         data_quality_score=data_quality_score
     )
 ```
+
 Action execution and quality assessment complete the reasoning cycle. The observation captures what actually happened when the action was performed, while the quality score provides confidence assessment. This feedback mechanism enables the agent to learn and improve its reasoning over successive steps.
 
 ```python
@@ -162,6 +169,7 @@ def _generate_data_processing_thought(self, context: str) -> str:
     """
     return await self.llm.generate(prompt)
 ```
+
 Systematic thought generation uses structured prompts to guide reasoning quality. The framework questions ensure the agent considers data schema, transformation requirements, next actions, and consistency risks. This disciplined approach prevents the agent from making impulsive decisions and ensures thorough analysis of each step.
 
 ### Meta-Reasoning Quality Assessment for Data Processing
@@ -175,6 +183,7 @@ class MetaDataReActAnalyzer:
     def __init__(self, llm_client):
         self.llm = llm_client
 ```
+
 Meta-analysis provides quality assurance for ReAct reasoning chains. This analyzer examines completed reasoning sequences to identify patterns, inefficiencies, and areas for improvement. It's like having a senior data engineer review the reasoning process and suggest optimizations.
 
 ```python
@@ -195,6 +204,7 @@ Meta-analysis provides quality assurance for ReAct reasoning chains. This analyz
         # Evaluate data quality confidence patterns
         quality_analysis = await self._analyze_data_quality_patterns(reasoning_history)
 ```
+
 Multi-dimensional quality assessment examines different aspects of reasoning effectiveness. Circular pattern detection identifies when agents get stuck in loops, progress analysis measures forward momentum toward goals, and quality patterns reveal confidence trends. This comprehensive analysis provides actionable insights for improvement.
 
 ```python
@@ -210,6 +220,7 @@ Multi-dimensional quality assessment examines different aspects of reasoning eff
             )
         }
 ```
+
 The comprehensive quality report combines multiple analysis dimensions into actionable feedback. The overall quality score provides a quick assessment, while detailed breakdowns help identify specific improvement opportunities. Automated recommendations accelerate the optimization process for data processing workflows.
 
 ```python
@@ -230,6 +241,7 @@ The comprehensive quality report combines multiple analysis dimensions into acti
         
         return {'has_circular_processing': False}
 ```
+
 Circular pattern detection prevents agents from wasting time in unproductive loops. By examining recent action sequences, the analyzer identifies when agents repeat the same actions without making progress. This early warning system enables intervention before significant computational resources are wasted.
 
 ---
@@ -256,6 +268,7 @@ import asyncio
 import uuid
 from datetime import datetime
 ```
+
 Multi-agent coordination requires sophisticated message passing and state management capabilities. The `asyncio` library enables concurrent communication between agents, while `uuid` provides unique identifiers for tracking data flows across distributed systems. These imports establish the foundation for scalable agent coordination.
 
 ```python
@@ -267,6 +280,7 @@ class DataMessageType(Enum):
     CONSENSUS_RESULT = "consensus_result"
     PIPELINE_STATUS = "pipeline_status"
 ```
+
 Message type enumeration creates a standardized vocabulary for inter-agent communication. Clear message types prevent confusion and enable systematic message routing. This structured approach scales from simple two-agent interactions to complex networks of hundreds of coordinating data processing agents.
 
 ```python
@@ -283,16 +297,18 @@ class DataAgentMessage:
     requires_validation: bool = True
     conversation_id: Optional[str] = None
 ```
+
 DataAgentMessage structures provide comprehensive metadata for inter-agent communication. Each message includes unique identifiers for tracking, payload data for processing, and schema information for validation. The conversation_id enables multi-step workflows between agents, essential for complex data processing tasks.
 
 class DataCommunicationHub:
     """Central coordination hub for multi-agent data processing communication"""
-    
+
     def __init__(self):
         self.data_agents: Dict[str, 'BaseDataAgent'] = {}
         self.message_queue: List[DataAgentMessage] = []
         self.active_data_conversations: Dict[str, List[DataAgentMessage]] = {}
         self.data_lineage_tracking: Dict[str, Dict[str, Any]] = {}
+
 ```
 The communication hub serves as the central nervous system for multi-agent data processing. It maintains agent registries, message queues, conversation threads, and data lineage tracking. This centralized approach ensures reliable message delivery and comprehensive audit trails for complex data workflows.
 
@@ -302,6 +318,7 @@ The communication hub serves as the central nervous system for multi-agent data 
         self.data_agents[agent.agent_id] = agent
         await agent.set_data_communication_hub(self)
 ```
+
 Agent registration establishes bidirectional communication channels. Once registered, agents can send and receive messages through the hub while maintaining their individual processing capabilities. This pattern enables dynamic agent networks that can scale up or down based on processing demands.
 
 ```python
@@ -327,7 +344,9 @@ Agent registration establishes bidirectional communication channels. Once regist
         
         return success
 ```
+
 Message delivery implements comprehensive validation, tracking, and delivery confirmation. Data lineage tracking maintains provenance records essential for data governance, while conversation threading enables complex multi-step workflows. Delivery confirmation ensures reliable communication even in distributed environments.
+
 ```
 
 ### Basic Consensus Mechanisms - Democracy in Data Processing
@@ -345,6 +364,7 @@ class DataConsensusManager:
         self.consensus_threshold = threshold
         self.data_voting_history: List[Dict[str, Any]] = []
 ```
+
 The consensus manager orchestrates democratic decision-making among data processing agents. The configurable threshold (default 67%) balances decision speed with validation rigor. Lower thresholds enable faster decisions, while higher thresholds ensure greater agreement on critical data processing changes.
 
 ```python
@@ -356,6 +376,7 @@ The consensus manager orchestrates democratic decision-making among data process
         # Collect schema validation proposals from all agents
         proposals = await self._collect_schema_proposals(schema_proposal, data_context)
 ```
+
 Schema consensus prevents data processing errors by validating proposed changes across all agents. Each agent evaluates schema proposals based on their processing experience and data quality standards. This collective validation catches issues that individual agents might miss.
 
 ```python

@@ -141,7 +141,7 @@ The analytics agent receives different specialized tools focused on query optimi
 
 Each agent type gets a tailored system message that defines its specific responsibilities and approach to data problem-solving with focus on analytical rigor.
 
-```python    
+```python
 def create_ml_pipeline_agent(self) -> Any:
     """Create agent specialized in ML pipeline management and model operations"""
     
@@ -159,7 +159,7 @@ def create_ml_pipeline_agent(self) -> Any:
 
 The ML pipeline agent specializes in machine learning operations including model training, feature engineering, and monitoring. Specialized tools for ML workflow management enable comprehensive model lifecycle support.
 
-```python    
+```python
     ml_agent = initialize_agent(
         tools=ml_tools,
         llm=self.llm,
@@ -245,7 +245,7 @@ The ML pipeline phase leverages both ingestion and analytics results to create c
 
 Workflow finalization captures completion metadata and optimization results. Success tracking enables proper data workflow conclusion while completion timestamps provide audit trails for data processing performance analysis.
 
-```python        
+```python
     except Exception as e:
         workflow_context["error"] = str(e)
         workflow_context["success"] = False
@@ -269,7 +269,7 @@ Data ingestion phase initialization creates or retrieves specialized data ingest
 
 Next, we create a structured data ingestion prompt that guides the agent's data validation investigation:
 
-```python    
+```python
     ingestion_prompt = f"""
     Conduct comprehensive data ingestion analysis for the following task:
     {task}
@@ -290,7 +290,7 @@ Structured data ingestion prompts guide agent behavior and ensure comprehensive 
 
 Finally, we track the interaction and return structured data results:
 
-```python    
+```python
     context["agent_interactions"].append({
         "agent": "data_ingestion",
         "phase": "ingestion",
@@ -320,7 +320,7 @@ Analytics agent initialization retrieves existing agents or creates new speciali
 
 We create a structured analytics prompt that focuses on different analytical dimensions:
 
-```python    
+```python
     analytics_prompt = f"""
     Analyze the following data ingestion findings:
     {ingestion_data['data_findings']}
@@ -341,7 +341,7 @@ Structured analytics prompts guide comprehensive data investigation. The four-st
 
 We track the analytics interaction and return enriched data insights:
 
-```python    
+```python
     context["agent_interactions"].append({
         "agent": "analytics",
         "phase": "analytics",
@@ -373,7 +373,7 @@ ML pipeline agent preparation ensures appropriate machine learning capabilities.
 
 We create a comprehensive ML pipeline prompt that integrates all previous data findings:
 
-```python    
+```python
     ml_prompt = f"""
     Design ML pipeline optimization based on data ingestion and analytics:
     
@@ -400,7 +400,7 @@ Comprehensive ML pipeline prompts integrate ingestion and analytics findings. Th
 
 Finally, we track the ML pipeline interaction and extract structured ML outputs:
 
-```python    
+```python
     context["agent_interactions"].append({
         "agent": "ml_pipeline",
         "phase": "ml_processing",
@@ -453,7 +453,7 @@ class CustomDataAnalysisChain(Chain):
 
 CustomDataAnalysisChain establishes the foundation for sophisticated data processing workflows with built-in validation. The class structure separates analysis and validation prompts for data quality assurance.
 
-```python        
+```python
         self.analysis_prompt = PromptTemplate(
             template="""
             Perform comprehensive data analysis on the following dataset:
@@ -474,7 +474,7 @@ CustomDataAnalysisChain establishes the foundation for sophisticated data proces
 
 Structured data analysis prompt defines a comprehensive framework for dataset analysis. The five-step approach ensures thorough examination while confidence scoring and lineage tracking provide quality indicators for downstream processing.
 
-```python        
+```python
         self.validation_prompt = PromptTemplate(
             template="""
             Validate the following data analysis for accuracy and completeness:
@@ -494,7 +494,7 @@ Structured data analysis prompt defines a comprehensive framework for dataset an
 
 Validation prompt configuration ensures data analysis quality control through systematic review. The four-point validation checklist covers statistical accuracy, data quality, business relevance, and integrity assessment for comprehensive data analysis assurance.
 
-```python    
+```python
     @property
     def input_keys(self) -> List[str]:
         return ["dataset_info"]
@@ -523,7 +523,7 @@ Validation prompt configuration ensures data analysis quality control through sy
 
 Two-phase data analysis execution ensures quality through validation. Initial analysis processes the dataset information, while validation assessment evaluates result quality and completeness for data reliability.
 
-```python        
+```python
         # Step 3: Determine if re-analysis is needed for data quality
         validation_score = self._extract_validation_score(validation_result.content)
         
@@ -541,7 +541,7 @@ Two-phase data analysis execution ensures quality through validation. Initial an
 
 Adaptive re-analysis improves data analysis quality when validation scores fall below threshold. Scores under 7 trigger improvement cycles, while higher scores proceed with original analysis results for data processing efficiency.
 
-```python        
+```python
         return {
             self.output_key: {
                 "analysis": final_analysis,
@@ -572,7 +572,7 @@ Adaptive re-analysis improves data analysis quality when validation scores fall 
 
 Iterative improvement functionality enables data analysis refinement through feedback incorporation. The prompt combines original dataset, initial analysis, and validation feedback to guide targeted data analysis improvements.
 
-```python    
+```python
     def _extract_validation_score(self, validation_text: str) -> int:
         """Extract numerical validation score from text"""
         import re
@@ -716,7 +716,7 @@ DataPipelineChain enables sequential data transformation through multiple proces
 
 Pipeline execution iterates through configured data processing steps sequentially. Each step receives the output from the previous step, enabling data transformation chains with progressive refinement.
 
-```python            
+```python
             # Execute data processing step
             if step_prompt:
                 prompt = step_prompt.format(
@@ -729,7 +729,7 @@ Pipeline execution iterates through configured data processing steps sequentiall
 
 Step execution applies templates with current data and state context. State management enables cross-step information sharing while template formatting provides consistent prompt structure for data processing.
 
-```python            
+```python
             step_results.append({
                 "step_name": step_name,
                 "result": current_data,
@@ -743,7 +743,7 @@ Step execution applies templates with current data and state context. State mana
 
 Step result tracking and state updates maintain data pipeline execution history. Result collection enables debugging and audit trails while state updates provide context for subsequent data processing steps.
 
-```python        
+```python
         return {
             self.output_key: {
                 "final_result": current_data,
@@ -801,7 +801,7 @@ class AdvancedDataWarehouseTool(BaseTool):
 
 AdvancedDataWarehouseTool initialization establishes robust data warehouse interaction capabilities with query caching and retry mechanisms. Configuration-based setup enables flexible warehouse endpoint management while built-in retry logic ensures reliable data access communication.
 
-```python        
+```python
     class ToolInput(BaseModel):
         sql_query: str = Field(description="SQL query to execute against data warehouse")
         database: str = Field(default="main", description="Target database name")
@@ -814,7 +814,7 @@ AdvancedDataWarehouseTool initialization establishes robust data warehouse inter
 
 Structured input validation ensures proper data warehouse query configuration. The schema defines required SQL query and optional parameters while providing sensible defaults for database targeting and caching behavior.
 
-```python    
+```python
     def _run(self, sql_query: str, database: str = "main", 
              query_params: Dict[str, Any] = None, timeout_seconds: int = 300,
              use_cache: bool = True) -> str:
@@ -832,7 +832,7 @@ Structured input validation ensures proper data warehouse query configuration. T
 
 Cache optimization reduces redundant data warehouse queries and improves response times. Cache keys ensure uniqueness while TTL validation prevents stale data from being returned to users.
 
-```python        
+```python
         # Execute data warehouse query with retry logic
         for attempt in range(self.max_retries):
             try:
@@ -847,7 +847,7 @@ Cache optimization reduces redundant data warehouse queries and improves respons
 
 Retry logic with exponential backoff ensures robust data warehouse interaction. Successful results are cached for future use, while failures trigger progressive delays to avoid overwhelming data warehouse services.
 
-```python                
+```python
             except Exception as e:
                 if attempt == self.max_retries - 1:
                     return f"Data warehouse query failed after {self.max_retries} attempts: {str(e)}"
@@ -866,7 +866,7 @@ Retry logic with exponential backoff ensures robust data warehouse interaction. 
 
 Connection string construction and authentication preparation ensure proper data warehouse request setup. Connection URL combination with database creates complete connection targets while maintaining secure data warehouse access.
 
-```python        
+```python
         # Add authentication headers for data warehouse access
         auth_config = {}
         if 'username' in self.warehouse_config and 'password' in self.warehouse_config:
@@ -878,7 +878,7 @@ Connection string construction and authentication preparation ensure proper data
 
 Authentication configuration secures data warehouse requests. Username and password injection follows standard database authentication while parameter initialization prevents null reference errors during authentication setup.
 
-```python        
+```python
         try:
             # Execute query against data warehouse
             df_result = pd.read_sql(
@@ -896,7 +896,7 @@ Authentication configuration secures data warehouse requests. Username and passw
 
 Data warehouse query execution with proper parameter handling and timeout configuration. Pandas integration enables flexible query execution while JSON conversion ensures standardized data output format.
 
-```python    
+```python
     def _create_query_cache_key(self, sql_query: str, database: str, params: Dict[str, Any]) -> str:
         """Create cache key for data warehouse query"""
         import hashlib
@@ -922,7 +922,7 @@ class StatefulDataPipelineTool(BaseTool):
 
 StatefulDataPipelineTool provides robust data pipeline interaction with state management and execution monitoring. The execution history tracks pipeline runs while state management optimizes resource utilization for data processing workflows.
 
-```python        
+```python
     class ToolInput(BaseModel):
         pipeline_id: str = Field(description="Data pipeline identifier")
         operation: str = Field(description="Pipeline operation: start, stop, monitor, configure")
@@ -934,7 +934,7 @@ StatefulDataPipelineTool provides robust data pipeline interaction with state ma
 
 Structured input validation ensures proper data pipeline operation configuration. Parameters support different operations while async execution enables non-blocking pipeline operations for large-scale data processing.
 
-```python    
+```python
     def _run(self, pipeline_id: str, operation: str, 
              config_params: Dict[str, Any] = None, async_execution: bool = False) -> str:
         """Execute data pipeline operation with state management"""
@@ -954,7 +954,7 @@ Structured input validation ensures proper data pipeline operation configuration
 
 Pipeline state management tracks execution history and performance metrics. State initialization ensures consistent tracking while performance metrics enable optimization and monitoring capabilities.
 
-```python            
+```python
             # Execute pipeline operation based on type
             if operation == "start":
                 result = self._start_pipeline(pipeline_id, config_params or {})
@@ -970,7 +970,7 @@ Pipeline state management tracks execution history and performance metrics. Stat
 
 Operation routing enables different pipeline management functions. Start, stop, monitor, and configure operations provide comprehensive pipeline lifecycle management with state tracking.
 
-```python            
+```python
             # Update pipeline state and execution history
             pipeline_state["last_run"] = datetime.now()
             pipeline_state["execution_count"] += 1
@@ -990,7 +990,7 @@ Operation routing enables different pipeline management functions. Start, stop, 
 
 State updates and execution history tracking provide comprehensive pipeline operation monitoring. Execution counting and timestamping enable performance analysis and operational insights.
 
-```python    
+```python
     def _start_pipeline(self, pipeline_id: str, config_params: Dict[str, Any]) -> str:
         """Start data pipeline execution"""
         self.pipeline_states[pipeline_id]["status"] = "running"
@@ -1026,7 +1026,7 @@ class DataQualityTool(BaseTool):
 
 Data quality tool initialization establishes comprehensive quality assessment capabilities. Quality profiles track dataset characteristics while anomaly thresholds enable automated quality monitoring and alerting.
 
-```python        
+```python
     class ToolInput(BaseModel):
         dataset_path: str = Field(description="Path or identifier for dataset to analyze")
         quality_checks: List[str] = Field(description="List of quality checks to perform")
@@ -1064,7 +1064,7 @@ Input schema definition provides comprehensive data quality assessment parameter
 
 Quality check execution iterates through specified validation types. Completeness, accuracy, consistency, and timeliness checks provide comprehensive data quality coverage with structured result tracking.
 
-```python            
+```python
             # Calculate overall quality score
             scores = [result.get("score", 0) for result in quality_results["results"].values()]
             overall_score = sum(scores) / len(scores) if scores else 0
@@ -1082,7 +1082,7 @@ Quality check execution iterates through specified validation types. Completenes
 
 Overall quality scoring aggregates individual check results for comprehensive assessment. Report generation provides detailed analysis while JSON formatting ensures standardized output structure.
 
-```python    
+```python
     def _check_completeness(self, dataset_path: str) -> Dict[str, Any]:
         """Check data completeness metrics"""
         # Simulate completeness analysis
@@ -1158,6 +1158,7 @@ You've now mastered advanced LangChain patterns for production data systems:
 ✅ **Enterprise Data Architecture**: Designed scalable patterns for complex data processing applications
 
 ### Next Steps
+
 - **Continue to Module B**: [Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md) for enterprise data system deployment
 - **Continue to Module C**: [Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md) for specialized data processing tools
 - **Return to Core**: [Session 2 Main](Session2_LangChain_Foundations.md)
@@ -1166,6 +1167,7 @@ You've now mastered advanced LangChain patterns for production data systems:
 ---
 
 **🗂️ Source Files for Module A:**
+
 - `src/session2/multi_agent_workflows.py` - Complex data agent coordination systems
 - `src/session2/custom_chains.py` - Custom chain implementations for data processing
 - `src/session2/advanced_tools.py` - Production-ready data tool patterns
