@@ -379,7 +379,7 @@ Create the pipeline status API tool - validated external service interaction:
 async def create_pipeline_status_tool() -> Tool:
     async def get_pipeline_status(input_data: DataPipelineStatusInput) -> DataPipelineStatusOutput:
         async with httpx.AsyncClient() as client:
-            # Integration with Kafka, Airflow, or similar data orchestration systems
+            # Integration with Kafka, Argo Workflows, or similar data orchestration systems
             return DataPipelineStatusOutput(
                 pipeline_id=input_data.pipeline_id,
                 status="running",

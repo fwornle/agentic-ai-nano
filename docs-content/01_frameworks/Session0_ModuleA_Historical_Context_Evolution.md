@@ -87,7 +87,7 @@ Imagine an AI that doesn't just theorize about why your ETL job is failing - it 
 
 ### Toolformer: Language Models Can Teach Themselves to Use Tools (2023) - The Digital Infrastructure Engineer
 
-Picture giving a brilliant data architect access to every tool in your infrastructure - Kubernetes dashboards, SQL databases, Airflow DAGs, Grafana metrics, Apache Spark clusters - and watching them figure out which tool to use for each problem. Toolformer didn't just use tools; it learned to choose the right monitoring dashboard for performance issues, the right database for schema validation, and the right orchestration tool for workflow optimization.
+Picture giving a brilliant data architect access to every tool in your infrastructure - Kubernetes dashboards, SQL databases, Argo Workflows, Grafana metrics, Apache Spark clusters - and watching them figure out which tool to use for each problem. Toolformer didn't just use tools; it learned to choose the right monitoring dashboard for performance issues, the right database for schema validation, and the right orchestration tool for workflow optimization.
 
 ### Reflexion: Language Agents with Verbal Reinforcement Learning (2023) - The Self-Optimizing System
 

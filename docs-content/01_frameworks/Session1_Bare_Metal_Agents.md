@@ -13,7 +13,7 @@ By the end of this session, you will be able to:
 - **Implement** core agent architectures using only Python and LLM APIs for maximum control
 - **Build** functional agents demonstrating all five agentic patterns (Reflection, Tool Use, ReAct, Planning, Multi-Agent)
 - **Understand** the separation between model layer (LLM) and application layer (Python logic)
-- **Create** agents that integrate seamlessly with Kubernetes, Apache Airflow, and cloud data services
+- **Create** agents that integrate seamlessly with Kubernetes, Argo Workflows, and cloud data services
 - **Debug** and optimize agent behavior for cost-effective petabyte-scale processing
 
 ## The Bare Metal Approach: Essential for Data Pipeline Control
@@ -75,7 +75,7 @@ class BaseAgent:
 
 **Memory System Design**: The memory system maintains processing context within Kubernetes pod constraints while caching critical metadata about data characteristics, recent processing decisions, and error patterns. This approach mirrors how experienced data engineers mentally track pipeline state across multiple concurrent workflow executions, enabling the agent to make informed decisions based on historical processing patterns.
 
-**Tool Registry Pattern**: The tools registry connects your agent with essential cloud services - S3 for raw data storage, PostgreSQL for metadata and processing results, Kafka for real-time data streaming, and Apache Airflow for complex processing orchestration. Each integration includes comprehensive retry logic and circuit breaker patterns essential for maintaining reliability in distributed data systems.
+**Tool Registry Pattern**: The tools registry connects your agent with essential cloud services - S3 for raw data storage, PostgreSQL for metadata and processing results, Kafka for real-time data streaming, and Argo Workflows for complex processing orchestration. Each integration includes comprehensive retry logic and circuit breaker patterns essential for maintaining reliability in distributed data systems.
 
 ### Agent Execution Loop - Cloud-Native Processing Pipeline
 
@@ -493,7 +493,7 @@ D) Memory is not a concern
 
 **Question 5:** Why is tool registration important for data processing agents?  
 A) It looks professional  
-B) To integrate with specialized cloud services like S3 for data storage, Kafka for streaming, and Airflow for workflows  
+B) To integrate with specialized cloud services like S3 for data storage, Kafka for streaming, and Argo Workflows for workflows  
 C) It's required by Python  
 D) To reduce code size  
 

@@ -15,7 +15,7 @@ This is where computer science becomes art, where frameworks become instruments,
 
 ### Framework-Specific Pattern Implementations
 
-Think of a data pipeline that can be built with raw Python scripts, Apache Airflow, or cloud-native solutions like Google Dataflow. The same data transformation, the same business logic - but the architecture, reliability, and scalability differ dramatically based on your implementation choice.
+Think of a data pipeline that can be built with raw Python scripts, Argo Workflows, or cloud-native solutions like Google Dataflow. The same data transformation, the same business logic - but the architecture, reliability, and scalability differ dramatically based on your implementation choice.
 
 A violin sounds different in the hands of a street musician versus Itzhak Perlman. The same melody, the same instrument - but the technique, the understanding, the craftsmanship makes all the difference.
 
@@ -76,7 +76,7 @@ If the critique indicates satisfaction, the loop terminates early. Otherwise, an
 
 ### LangChain Framework Approach
 
-LangChain provides structured components that handle prompt templating and chain orchestration, reducing boilerplate code and enabling more maintainable reflection systems - like using Apache Airflow instead of cron jobs for data pipeline orchestration.
+LangChain provides structured components that handle prompt templating and chain orchestration, reducing boilerplate code and enabling more maintainable reflection systems - like using Argo Workflows instead of cron jobs for data pipeline orchestration.
 
 ```python
 from langchain.chains import LLMChain
