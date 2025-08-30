@@ -1,29 +1,29 @@
 # Session 3: LangGraph Multi-Agent Workflows - Orchestrating Distributed Data Processing
 
-Imagine processing terabytes of automotive sensor data through a rigid pipeline - camera data must wait for lidar processing to complete, radar analysis can't start until CAN bus parsing finishes, and critical anomalies get lost in sequential bottlenecks. This is exactly what happens when you use simple agent chains for complex data processing workflows that require multiple specialized processors working in parallel.
+When your petabyte-scale data lake spans multiple clouds and processing terabytes of streaming data requires coordinated work from validation agents, transformation engines, and quality monitors - rigid sequential pipelines become the bottleneck that kills performance. A single delayed data validation step can cascade through your entire pipeline, blocking critical downstream analytics and causing SLA violations that impact business decisions.
 
-LangGraph transforms your data processing agents from rigid sequential pipelines into dynamic, intelligent workflows where the right processors collaborate based on data characteristics, resource availability, and processing priorities in real-time.
+LangGraph transforms your data processing agents from sequential bottlenecks into intelligent orchestration networks where data validation, transformation, aggregation, and quality assurance work in parallel based on data characteristics, resource availability, and processing priorities in real-time.
 
-In this session, you'll build sophisticated multi-agent systems that mirror distributed data processing architectures - with parallel execution, conditional routing, and adaptive resource allocation.
+In this session, you'll build sophisticated multi-agent data processing systems that mirror modern distributed streaming architectures - with parallel execution, conditional routing, and adaptive resource allocation optimized for large-scale data workflows.
 
 ## Learning Outcomes
 
 By the end of this session, you will be able to:
-- **Design** and implement graph-based workflow orchestration using LangGraph
-- **Build** complex multi-agent systems with stateful coordination and conditional routing
-- **Apply** state management patterns for distributed data processing coordination
-- **Implement** production-grade tracing and observability for multi-agent workflows
-- **Evaluate** when to choose graph-based architectures over simple chain-based systems
+- **Design** and implement graph-based data pipeline orchestration using LangGraph
+- **Build** complex multi-agent systems with stateful coordination for data processing workflows
+- **Apply** state management patterns for distributed data streaming coordination
+- **Implement** production-grade tracing and observability for multi-agent data pipelines
+- **Evaluate** when to choose graph-based architectures over simple chain-based data flows
 
-## The Graph Revolution: Beyond Linear Thinking
+## The Graph Revolution: Beyond Linear Data Pipelines
 
-Unlike sequential chains where Agent A always talks to Agent B who always talks to Agent C, LangGraph uses directed graphs with nodes (specialized agents) connected by conditional edges (intelligent routing). This architecture provides stateful coordination, dynamic decision-making, and production-grade observability for complex agent workflows.
+Unlike sequential data pipelines where validation always precedes transformation which always precedes aggregation, LangGraph uses directed graphs with nodes (specialized processors) connected by conditional edges (intelligent routing). This architecture provides stateful coordination, dynamic decision-making, and production-grade observability for complex data processing workflows.
 
-Think of it as the difference between sequential data processing and a modern distributed system - sometimes camera processing needs direct input from calibration data, sometimes ML model inference requires simultaneous input from multiple sensor streams, and sometimes you need to route back to data validation when quality issues are detected.
+Think of it as the difference between traditional ETL pipelines and modern stream processing architectures - sometimes data quality validation needs direct input from schema inference, sometimes ML feature engineering requires simultaneous input from multiple data sources, and sometimes you need to route back to data ingestion when quality thresholds aren't met.
 
 ## Quick Start
 
-Run `cd src/session3 && python simple_workflow.py` to see LangGraph orchestrating multiple agents like a conductor leading a symphony.
+Run `cd src/session3 && python simple_workflow.py` to see LangGraph orchestrating multiple data processing agents like a conductor leading a data orchestra.
 
 Code files are located in [`src/session3/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session3).
 
@@ -31,13 +31,13 @@ Code files are located in [`src/session3/`](https://github.com/fwornle/agentic-a
 
 ### Graph-Based Workflow Foundation
 
-Building on our LangChain foundations, LangGraph transforms multi-agent systems from linear chains into sophisticated graph structures that mirror real-world decision processes:
+Building on our LangChain foundations, LangGraph transforms multi-agent data systems from linear pipelines into sophisticated graph structures that mirror real-world distributed data processing:
 
 **File**: [`src/session3/langgraph_basics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/langgraph_basics.py) - Core workflow setup
 
 ### Production-Grade State Management
 
-LangGraph's StateGraph provides the foundation for distributed data processing coordination, solving the critical challenge of how multiple processing agents can work together while maintaining data consistency and pipeline observability:
+LangGraph's StateGraph provides the foundation for distributed data processing coordination, solving the critical challenge of how multiple processing agents can work together while maintaining data lineage and pipeline observability:
 
 ```python
 from langgraph.graph import StateGraph, END
@@ -53,10 +53,10 @@ class WorkflowState(TypedDict):
     data_context: dict          # Shared processing metadata
     error_state: Optional[str]  # Processing failure handling
     batch_id: str               # Current data batch identifier
-    resource_usage: dict        # Kubernetes resource tracking
+    resource_usage: dict        # Cluster resource tracking
 ```
 
-This state structure provides the observability and error handling required for production data processing - think of it as the shared processing context that all agents can access and update. Each field serves a specific purpose in maintaining pipeline integrity and enabling debugging when processing issues occur.
+This state structure provides the observability and error handling required for production data processing - think of it as the shared processing context that all data agents can access and update. Each field serves a specific purpose in maintaining pipeline integrity and enabling debugging when data processing issues occur in your distributed system.
 
 ```python
 
@@ -67,64 +67,64 @@ workflow = StateGraph(WorkflowState)
 
 ### Core Architecture Principles:
 
-Understanding these principles is like grasping the fundamental laws that govern distributed data processing:
+Understanding these principles is like grasping the fundamental laws that govern distributed data processing systems:
 
-1. **Directed Graph Structure**: Nodes (specialized processors) connected by conditional edges (intelligent routing) - like having clear data flow paths and processing responsibilities
-2. **Immutable State Flow**: State evolves through nodes without mutation, ensuring traceability - every processing step is recorded and auditable for compliance
-3. **Conditional Decision Points**: Dynamic routing based on data characteristics and resource availability - like having intelligent load balancers that route work to optimal processors
+1. **Directed Graph Structure**: Nodes (specialized processors) connected by conditional edges (intelligent routing) - like having clear data flow paths between ingestion, validation, transformation, and storage layers
+2. **Immutable State Flow**: State evolves through nodes without mutation, ensuring data lineage traceability - every processing step is recorded and auditable for compliance and debugging
+3. **Conditional Decision Points**: Dynamic routing based on data characteristics and resource availability - like having intelligent load balancers that route data batches to optimal processing clusters
 
 ### Nodes and Edges
 
-Building blocks of LangGraph workflows - the agents (nodes) and their communication patterns (edges):
+Building blocks of LangGraph workflows - the data processing agents (nodes) and their coordination patterns (edges):
 
 **File**: [`src/session3/workflow_nodes.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/workflow_nodes.py) - Node implementations
 
 ```python
 def data_validation_node(state: WorkflowState):
-    """Data validation phase of the processing workflow"""
+    """Data quality validation phase of the processing workflow"""
     print(f"🔍 Validating: {state['current_step']} for batch {state['batch_id']}")
     # Add data validation logic here
     return {
         **state,
-        "messages": state["messages"] + ["Research completed"],
-        "completed_tasks": state["completed_tasks"] + ["research"]
+        "messages": state["messages"] + ["Data validation completed"],
+        "completed_tasks": state["completed_tasks"] + ["validation"]
     }
 ```
 
-Each node function receives the current state and returns an updated state - like a team member receiving a briefing, doing their work, and updating the project status. The `**state` syntax preserves existing state while updating specific fields, ensuring nothing gets lost in the handoff.
+Each node function receives the current processing state and returns an updated state - like a specialized data processing service receiving a data batch, performing its transformation, and updating the pipeline status. The `**state` syntax preserves existing processing context while updating specific fields, ensuring data lineage is never lost in the handoff.
 
 ```python
-def analysis_node(state: WorkflowState):
-    """Analysis phase of the workflow"""
-    print(f"📊 Analysis: Processing research results")
+def transformation_node(state: WorkflowState):
+    """Data transformation phase of the workflow"""
+    print(f"📊 Transforming: Processing validated data batch")
     return {
         **state,
-        "messages": state["messages"] + ["Analysis completed"],
-        "completed_tasks": state["completed_tasks"] + ["analysis"]
+        "messages": state["messages"] + ["Data transformation completed"],
+        "completed_tasks": state["completed_tasks"] + ["transformation"]
     }
 ```
 
-Now we connect these nodes to create our workflow structure - establishing the communication patterns that enable effective collaboration:
+Now we connect these nodes to create our data processing structure - establishing the coordination patterns that enable effective data pipeline orchestration:
 
 ```python
 
 # Add nodes to workflow
 
-workflow.add_node("research", research_node)
-workflow.add_node("analysis", analysis_node)
-workflow.add_edge("research", "analysis")
+workflow.add_node("validation", data_validation_node)
+workflow.add_node("transformation", transformation_node)
+workflow.add_edge("validation", "transformation")
 ```
 
 ### Basic Graph Creation
 
-Putting it all together into a functioning multi-agent system:
+Putting it all together into a functioning multi-agent data processing system:
 
 ```python
 
 # Set entry point and compile
 
-workflow.set_entry_point("research")
-workflow.add_edge("analysis", END)
+workflow.set_entry_point("validation")
+workflow.add_edge("transformation", END)
 
 # Compile the workflow
 
@@ -141,13 +141,13 @@ result = app.invoke({
 
 ---
 
-## Part 2: Multi-Agent Orchestration - Building Specialized Teams
+## Part 2: Multi-Agent Orchestration - Building Specialized Data Processing Teams
 
-Moving from simple workflows to sophisticated agent teams, we now create specialists who can work together on complex problems requiring multiple types of expertise.
+Moving from simple workflows to sophisticated data processing teams, we now create specialists who can work together on complex data problems requiring multiple types of processing expertise.
 
 ### Agent Node Creation
 
-Creating specialized agent nodes that encapsulate specific capabilities and expertise:
+Creating specialized agent nodes that encapsulate specific data processing capabilities and domain expertise:
 
 **File**: [`src/session3/hierarchical_team.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/hierarchical_team.py) - Multi-agent team setup
 
@@ -158,60 +158,60 @@ from langchain.tools import tool
 
 # Create specialized agents
 
-class ResearchAgent:
+class DataProfilingAgent:
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-4", temperature=0.7)
 ```
 
-Specialized agents encapsulate specific capabilities and LLM configurations - like hiring a creative researcher who excels at generating novel insights. Higher temperature for creative research:
+Specialized data agents encapsulate specific capabilities and LLM configurations - like hiring a creative data analyst who excels at generating insights from complex datasets. Higher temperature for exploratory data analysis:
 
 ```python
-    def research_node(self, state: WorkflowState):
-        """Specialized research agent"""
-        query = state.get("query", "")
-        research_result = self.llm.invoke(f"Research this topic: {query}")
+    def profiling_node(self, state: WorkflowState):
+        """Specialized data profiling agent"""
+        data_batch = state.get("data_batch", "")
+        profiling_result = self.llm.invoke(f"Profile this data batch: {data_batch}")
         
         return {
             **state,
-            "research_results": research_result.content,
-            "messages": state["messages"] + [f"Research: {research_result.content[:100]}..."]
+            "profiling_results": profiling_result.content,
+            "messages": state["messages"] + [f"Data profiling: {profiling_result.content[:100]}..."]
         }
 ```
 
-Analysis agents use lower temperature for focused, analytical output - like having a different specialist who excels at systematic evaluation and logical reasoning:
+Data quality agents use lower temperature for focused, systematic validation - like having a different specialist who excels at methodical data quality assessment and anomaly detection:
 
 ```python
-class AnalysisAgent:
+class DataQualityAgent:
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-4", temperature=0.3)
         
-    def analysis_node(self, state: WorkflowState):
-        """Specialized analysis agent"""
-        data = state.get("research_results", "")
-        analysis = self.llm.invoke(f"Analyze this data: {data}")
+    def quality_check_node(self, state: WorkflowState):
+        """Specialized data quality assessment agent"""
+        data = state.get("profiling_results", "")
+        quality_check = self.llm.invoke(f"Assess data quality for: {data}")
         
         return {
             **state,
-            "analysis_results": analysis.content,
-            "messages": state["messages"] + [f"Analysis: {analysis.content[:100]}..."]
+            "quality_results": quality_check.content,
+            "messages": state["messages"] + [f"Quality check: {quality_check.content[:100]}..."]
         }
 ```
 
 ### Message Passing
 
-Communication between agents - enabling sophisticated coordination patterns that mirror how high-performing teams share information:
+Communication between data agents - enabling sophisticated coordination patterns that mirror how high-performing data engineering teams share processing state and results:
 
 **File**: [`src/session3/state_merging.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/state_merging.py) - State management patterns
 
 ```python
-def coordinator_node(state: WorkflowState):
-    """Coordinates between different agents"""
+def pipeline_coordinator_node(state: WorkflowState):
+    """Coordinates between different data processing agents"""
     # Collect results from previous agents
-    research_data = state.get("research_results", "")
-    analysis_data = state.get("analysis_results", "")
+    profiling_data = state.get("profiling_results", "")
+    quality_data = state.get("quality_results", "")
     
     # Merge and coordinate
-    coordination_result = f"Coordination: Research={len(research_data)} chars, Analysis={len(analysis_data)} chars"
+    coordination_result = f"Pipeline coordination: Profiling={len(profiling_data)} chars, Quality={len(quality_data)} chars"
     
     return {
         **state,
@@ -220,68 +220,68 @@ def coordinator_node(state: WorkflowState):
     }
 ```
 
-The coordinator aggregates results from multiple agents and provides final synthesis - like a project manager who brings together insights from different team members into a coherent final deliverable:
+The pipeline coordinator aggregates results from multiple data processing agents and provides final synthesis - like a data pipeline orchestrator who brings together insights from different processing stages into a coherent final data product:
 
 ```python
 
 # Enhanced workflow with coordination
 
-workflow.add_node("coordinator", coordinator_node)
-workflow.add_edge("analysis", "coordinator")
+workflow.add_node("coordinator", pipeline_coordinator_node)
+workflow.add_edge("quality_check", "coordinator")
 workflow.add_edge("coordinator", END)
 ```
 
 ### Simple Workflow Patterns
 
-Common orchestration patterns that solve real-world collaboration challenges:
+Common orchestration patterns that solve real-world data processing collaboration challenges:
 
 **File**: [`src/session3/simple_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/simple_workflow.py) - Complete workflow example
 
 ```python
-def create_research_workflow():
-    """Create a simple research workflow"""
+def create_data_processing_workflow():
+    """Create a simple data processing workflow"""
     workflow = StateGraph(WorkflowState)
     
     # Initialize agents
-    research_agent = ResearchAgent()
-    analysis_agent = AnalysisAgent()
+    profiling_agent = DataProfilingAgent()
+    quality_agent = DataQualityAgent()
     
     # Add agent nodes
-    workflow.add_node("research", research_agent.research_node)
-    workflow.add_node("analysis", analysis_agent.analysis_node)
-    workflow.add_node("coordinator", coordinator_node)
+    workflow.add_node("profiling", profiling_agent.profiling_node)
+    workflow.add_node("quality_check", quality_agent.quality_check_node)
+    workflow.add_node("coordinator", pipeline_coordinator_node)
 ```
 
-Defining the workflow structure with entry point and edges - creating clear communication paths that enable effective collaboration:
+Defining the data workflow structure with entry point and edges - creating clear data flow paths that enable effective processing coordination:
 
 ```python
     # Define flow
-    workflow.set_entry_point("research")
-    workflow.add_edge("research", "analysis")
-    workflow.add_edge("analysis", "coordinator")
+    workflow.set_entry_point("profiling")
+    workflow.add_edge("profiling", "quality_check")
+    workflow.add_edge("quality_check", "coordinator")
     workflow.add_edge("coordinator", END)
     
     return workflow.compile()
 ```
 
-Running the compiled workflow with initial state - launching your AI team to work on a complex problem:
+Running the compiled workflow with initial state - launching your AI data processing team to work on a complex data pipeline task:
 
 ```python
 
 # Usage
 
-app = create_research_workflow()
+app = create_data_processing_workflow()
 result = app.invoke({
-    "query": "Benefits of renewable energy",
+    "data_batch": "customer_events_2024_Q1.parquet",
     "messages": [],
-    "current_step": "research",
+    "current_step": "profiling",
     "completed_tasks": []
 })
 ```
 
 ### Error Handling
 
-Robust workflow execution that handles the inevitable failures and complications of complex teamwork:
+Robust workflow execution that handles the inevitable failures and complications of complex data processing teamwork:
 
 ```python
 def safe_node_execution(node_func):
@@ -292,25 +292,25 @@ def safe_node_execution(node_func):
         except Exception as e:
             return {
                 **state,
-                "error": f"Node failed: {e}",
+                "error": f"Data processing node failed: {e}",
                 "messages": state["messages"] + [f"Error: {e}"]
             }
     return wrapper
 
 # Apply to nodes
 
-workflow.add_node("research", safe_node_execution(research_agent.research_node))
+workflow.add_node("profiling", safe_node_execution(profiling_agent.profiling_node))
 ```
 
 ---
 
-## Part 3: State Management & Flow Control - The Intelligence Behind the Workflow
+## Part 3: State Management & Flow Control - The Intelligence Behind Data Pipeline Orchestration
 
-Moving beyond simple handoffs to sophisticated coordination patterns that adapt to real-time conditions and handle complex decision trees.
+Moving beyond simple data handoffs to sophisticated coordination patterns that adapt to real-time data characteristics and handle complex decision trees in streaming environments.
 
 ### State Schemas
 
-Defining and managing workflow state with the sophistication needed for production applications:
+Defining and managing workflow state with the sophistication needed for production data processing applications:
 
 **File**: [`src/session3/advanced_routing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing.py) - State management examples
 
@@ -324,12 +324,12 @@ class AdvancedWorkflowState(TypedDict):
     
     # Data flow
     input_data: Optional[Dict[str, Any]]
-    research_results: Optional[str]
-    analysis_results: Optional[str]
+    profiling_results: Optional[str]
+    quality_results: Optional[str]
     final_output: Optional[str]
 ```
 
-Advanced state includes control flow tracking for robust execution - like maintaining detailed project records that enable sophisticated project management:
+Advanced state includes data flow tracking for robust execution - like maintaining detailed data lineage records that enable sophisticated pipeline management and debugging:
 
 ```python
     # Control flow
@@ -343,7 +343,7 @@ Advanced state includes control flow tracking for robust execution - like mainta
     last_updated: str
 ```
 
-Utility function for maintaining state metadata throughout execution - ensuring complete auditability and debugging capability:
+Utility function for maintaining state metadata throughout data processing execution - ensuring complete auditability and debugging capability for compliance requirements:
 
 ```python
 def update_state_metadata(state: AdvancedWorkflowState) -> AdvancedWorkflowState:
@@ -357,39 +357,39 @@ def update_state_metadata(state: AdvancedWorkflowState) -> AdvancedWorkflowState
 
 ### Conditional Routing
 
-Dynamic workflow decisions that mirror how human teams adapt their approach based on intermediate results:
+Dynamic workflow decisions that mirror how data engineering teams adapt their processing approach based on intermediate data characteristics and quality metrics:
 
 **File**: [`src/session3/decision_logic.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/decision_logic.py) - Decision-making logic
 
 ```python
-def route_after_research(state: AdvancedWorkflowState) -> str:
-    """Decide next step after research"""
-    research_quality = len(state.get("research_results", ""))
+def route_after_profiling(state: AdvancedWorkflowState) -> str:
+    """Decide next step after data profiling"""
+    profiling_quality = len(state.get("profiling_results", ""))
     
-    if research_quality < 100:
-        return "retry_research"
-    elif research_quality > 1000:
-        return "detailed_analysis"
+    if profiling_quality < 100:
+        return "retry_profiling"
+    elif profiling_quality > 1000:
+        return "detailed_quality_check"
     else:
-        return "standard_analysis"
+        return "standard_quality_check"
 ```
 
-Conditional routing enables dynamic workflow decisions based on intermediate results - like having an intelligent project manager who adjusts the approach based on what the team discovers:
+Conditional routing enables dynamic workflow decisions based on intermediate data processing results - like having an intelligent pipeline manager who adjusts the data processing approach based on what the profiling discovers about data characteristics:
 
 ```python
-def route_after_analysis(state: AdvancedWorkflowState) -> str:
-    """Decide if workflow is complete"""
-    analysis_results = state.get("analysis_results", "")
+def route_after_quality_check(state: AdvancedWorkflowState) -> str:
+    """Decide if data pipeline processing is complete"""
+    quality_results = state.get("quality_results", "")
     
-    if "insufficient data" in analysis_results.lower():
-        return "additional_research"
-    elif "complete" in analysis_results.lower():
+    if "data quality issues" in quality_results.lower():
+        return "additional_cleansing"
+    elif "quality approved" in quality_results.lower():
         return END
     else:
-        return "review"
+        return "manual_review"
 ```
 
-Implementing conditional routing in the workflow - creating intelligent coordination that adapts to circumstances:
+Implementing conditional routing in the workflow - creating intelligent coordination that adapts to data quality conditions:
 
 ```python
 
@@ -398,23 +398,23 @@ Implementing conditional routing in the workflow - creating intelligent coordina
 from langgraph.graph import Condition
 
 workflow.add_conditional_edges(
-    "research",
-    route_after_research,
+    "profiling",
+    route_after_profiling,
     {
-        "retry_research": "research",
-        "detailed_analysis": "detailed_analysis", 
-        "standard_analysis": "analysis"
+        "retry_profiling": "profiling",
+        "detailed_quality_check": "detailed_quality_check", 
+        "standard_quality_check": "quality_check"
     }
 )
 ```
 
 ### Error Recovery
 
-Handling failures gracefully - the difference between brittle systems that break and resilient systems that adapt:
+Handling data processing failures gracefully - the difference between brittle data pipelines that break and resilient systems that adapt to data anomalies:
 
 ```python
 def error_recovery_node(state: AdvancedWorkflowState):
-    """Handle workflow errors"""
+    """Handle data processing workflow errors"""
     error_count = state.get("retry_count", 0)
     
     if error_count < 3:
@@ -422,62 +422,62 @@ def error_recovery_node(state: AdvancedWorkflowState):
             **state,
             "retry_count": error_count + 1,
             "current_step": "retry",
-            "messages": state["messages"] + [f"Retrying (attempt {error_count + 1})"]
+            "messages": state["messages"] + [f"Retrying data processing (attempt {error_count + 1})"]
         }
 ```
 
-Graceful failure handling with maximum retry limits - preventing infinite loops while maximizing the chance of success:
+Graceful failure handling with maximum retry limits - preventing infinite loops while maximizing the chance of data processing success:
 
 ```python
     else:
         return {
             **state,
             "current_step": "failed",
-            "final_output": "Workflow failed after maximum retries",
-            "messages": state["messages"] + ["Workflow failed - maximum retries exceeded"]
+            "final_output": "Data processing workflow failed after maximum retries",
+            "messages": state["messages"] + ["Data workflow failed - maximum retries exceeded"]
         }
 ```
 
 ---
 
-## Part 4: Integration & Testing - Validating Your Intelligent Team
+## Part 4: Integration & Testing - Validating Your Intelligent Data Processing Team
 
-Now we verify that our multi-agent systems work correctly in the real world, with comprehensive testing that ensures reliability under various conditions.
+Now we verify that our multi-agent data processing systems work correctly in the real world, with comprehensive testing that ensures reliability under various data conditions.
 
 ### Workflow Validation
 
 **File**: [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Complete test suite
 
 ```python
-def test_simple_workflow():
-    """Test basic workflow functionality"""
-    app = create_research_workflow()
+def test_simple_data_workflow():
+    """Test basic data processing workflow functionality"""
+    app = create_data_processing_workflow()
     
     result = app.invoke({
-        "query": "Test query",
+        "data_batch": "test_dataset.parquet",
         "messages": [],
         "current_step": "test",
         "completed_tasks": []
     })
     
-    assert "research_results" in result
-    assert "analysis_results" in result
+    assert "profiling_results" in result
+    assert "quality_results" in result
     assert len(result["messages"]) > 0
-    print("✅ Workflow test passed!")
+    print("✅ Data processing workflow test passed!")
 ```
 
-Executing the test to verify workflow functionality - ensuring your AI team actually works together as designed:
+Executing the test to verify data workflow functionality - ensuring your AI data processing team actually works together as designed:
 
 ```python
 
 # Run test
 
-test_simple_workflow()
+test_simple_data_workflow()
 ```
 
 ### Basic Testing Patterns
 
-Comprehensive validation approaches that ensure your multi-agent systems work reliably:
+Comprehensive validation approaches that ensure your multi-agent data processing systems work reliably:
 
 ```bash
 
@@ -507,8 +507,8 @@ Test your understanding with these complete working examples:
 # Try the examples:
 
 cd src/session3
-python simple_workflow.py          # Basic workflow
-python hierarchical_team.py        # Multi-agent coordination
+python simple_workflow.py          # Basic data workflow
+python hierarchical_team.py        # Multi-agent data coordination
 ```
 
 
@@ -518,7 +518,7 @@ python hierarchical_team.py        # Multi-agent coordination
 
 Test your understanding of LangGraph workflows and multi-agent coordination:
 
-**Question 1:** What is the primary advantage of LangGraph over sequential LangChain agents?  
+**Question 1:** What is the primary advantage of LangGraph over sequential data pipeline agents?  
 A) Better performance  
 B) Lower cost  
 C) Graph-based workflows with conditional routing and parallel execution  
@@ -558,8 +558,8 @@ D) Only specified fields are updated/merged
 
 **Optional Deep Dive Modules:**
 
-- 🔬 **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation
-- 🏭 **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing
+- 🔬 **[Module A: Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)** - Complex workflow coordination & dynamic agent generation for large-scale data processing
+- 🏭 **[Module B: Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)** - Production state handling & sophisticated routing for enterprise data pipelines
 
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
 

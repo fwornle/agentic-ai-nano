@@ -1,6 +1,6 @@
 # Session 7: ADK Enterprise Agent Development - Google's Production-Grade AI Platform
 
-When Google needed to build the AI foundation for their cloud data processing infrastructure - systems that handle massive datasets, coordinate distributed workloads, and manage petabyte-scale automotive sensor data flows - they didn't use LangChain or CrewAI. They built ADK (Agent Development Kit), a production-first framework designed for distributed scale, security, and reliability.
+When Google needed to build the AI foundation for their cloud data processing infrastructure - systems that handle massive datasets, coordinate distributed workloads, and manage petabyte-scale streaming data flows - they didn't use LangChain or CrewAI. They built ADK (Agent Development Kit), a production-first framework designed for distributed scale, security, and reliability.
 
 Now you can build on the same foundation that powers Google's own agent infrastructure.
 
@@ -8,7 +8,7 @@ Now you can build on the same foundation that powers Google's own agent infrastr
 
 ### Industry Context & Market Significance
 
-Google's Agent Development Kit (ADK) emerged in August 2025 as the cloud-native foundation powering Google's distributed data processing systems, establishing it as a critical production platform for large-scale AI agents. With Python ADK v1.0.0 reaching stable release status, the framework delivers production-ready capabilities for confidently deploying agents in live data processing environments. Major automotive data processing teams including those at Renault Group have adopted ADK, demonstrating its distributed system reliability and scalability.
+Google's Agent Development Kit (ADK) emerged in August 2025 as the cloud-native foundation powering Google's distributed data processing systems, establishing it as a critical production platform for large-scale AI agents. With Python ADK v1.0.0 reaching stable release status, the framework delivers production-ready capabilities for confidently deploying agents in live data processing environments. Major enterprise data teams including those at streaming analytics companies have adopted ADK, demonstrating its distributed system reliability and scalability.
 
 ### What You'll Learn & Why It Matters
 
@@ -211,7 +211,7 @@ class ReasoningAgent:
             
             # System configuration
             system_prompt="""You are an enterprise reasoning agent.
-            Break down complex problems step-by-step.
+            Break down complex data problems step-by-step.
             Use available tools to gather information.
             Provide clear, actionable insights."""
         )
@@ -235,7 +235,7 @@ class ReasoningAgent:
 # Usage
 
 agent = ReasoningAgent("your-project-id")
-result = agent.solve_problem("Calculate the ROI of implementing AI agents")
+result = agent.solve_problem("Calculate the ROI of implementing ML pipelines")
 ```
 
 #### Implementation Details (7 minutes)
@@ -286,8 +286,8 @@ class MultiModalAssistant:
 
 assistant = MultiModalAssistant("your-project-id")
 result = assistant.process_mixed_input([
-    {"type": "text", "content": "Analyze this image"},
-    {"type": "image", "path": "path/to/image.jpg"}
+    {"type": "text", "content": "Analyze this data visualization"},
+    {"type": "image", "path": "path/to/chart.jpg"}
 ])
 ```
 

@@ -1,23 +1,23 @@
-# Session 2 - Module D: Performance Monitoring
+# Session 2 - Module D: Performance Monitoring & Optimization
 
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 2 core content first.
 
-At 4:32 AM on a Monday in November 2023, Airbnb's AI-powered dynamic pricing system detected a subtle 0.3% degradation in response latency across their European markets. By 6:15 AM, before human operators even arrived at work, the system had automatically rebalanced computational loads, optimized model inference paths, and prevented what post-incident analysis revealed would have been $4.2 million in lost bookings over the following week. The early warning system wasn't magic - it was precision performance monitoring that treated every millisecond as revenue.
+At 4:32 AM on a Monday in November 2023, Netflix's data analytics infrastructure detected a subtle 0.3% degradation in query response times across their petabyte-scale data warehouse. By 6:15 AM, before human operators even arrived at work, the system had automatically rebalanced query workloads, optimized data partition strategies, and prevented what post-incident analysis revealed would have been $4.2 million in lost business intelligence capabilities over the following week. The early warning system wasn't magic - it was precision performance monitoring that treated every millisecond of data processing latency as competitive advantage.
 
-This is the invisible war being fought by every enterprise AI system: the battle against performance degradation, cost bloat, and operational chaos. When Microsoft's Copilot serves 100 million queries daily, when OpenAI's ChatGPT handles global scale conversations, or when Amazon's recommendation engines process billions of customer interactions, they're winning because of obsessive attention to performance metrics that most systems never even measure.
+This is the invisible war being fought by every enterprise data system: the battle against processing degradation, resource bloat, and analytical chaos. When Snowflake serves 100 million queries daily, when Databricks processes petabyte-scale machine learning workloads, or when BigQuery handles global data analytics across billions of records, they're winning because of obsessive attention to performance metrics that most data systems never even measure.
 
-The brutal truth of production AI: you can't optimize what you can't observe, and you can't compete with what you can't control. Master the art of comprehensive performance monitoring and cost optimization, and you'll build systems that don't just survive at scale - they dominate through operational excellence that competitors can't match.
+The brutal truth of production data engineering: you can't optimize what you can't observe, and you can't compete with what you can't control. Master the art of comprehensive performance monitoring and cost optimization, and you'll build data systems that don't just survive at enterprise scale - they dominate through operational excellence that competitors can't match.
 
 ---
 
-## Part 1: Performance Benchmarking & Optimization
+## Part 1: Performance Benchmarking & Optimization for Data Systems
 
-### Comprehensive Performance Measurement
+### Comprehensive Data Processing Performance Measurement
 
-🗂️ **File**: `src/session2/performance_benchmarking.py` - Performance measurement and optimization
+🗂️ **File**: `src/session2/performance_benchmarking.py` - Performance measurement and optimization for data processing
 
-Production LangChain applications require systematic performance measurement across multiple dimensions to ensure optimal user experience and resource utilization. The foundation includes comprehensive imports and metrics structure:
+Production data processing applications require systematic performance measurement across multiple dimensions to ensure optimal analytical throughput and resource utilization. The foundation includes comprehensive imports and metrics structure:
 
 ```python
 import time
@@ -33,92 +33,92 @@ import json
 import logging
 
 @dataclass
-class PerformanceMetrics:
-    """Comprehensive performance metrics for LangChain agents"""
+class DataProcessingMetrics:
+    """Comprehensive performance metrics for data processing systems"""
     
-    # Response Time Metrics
+    # Query and Processing Response Time Metrics
     avg_response_time: float = 0.0
     p50_response_time: float = 0.0
     p90_response_time: float = 0.0
 ```
 
-The metrics dataclass captures response time percentiles essential for understanding user experience under different load conditions.
+The metrics dataclass captures response time percentiles essential for understanding data processing performance under different analytical workloads and query complexities.
 
 ```python
     p95_response_time: float = 0.0
     p99_response_time: float = 0.0
     
-    # Throughput Metrics
-    requests_per_second: float = 0.0
-    concurrent_requests_handled: int = 0
+    # Data Throughput Metrics
+    records_per_second: float = 0.0
+    concurrent_queries_handled: int = 0
     max_concurrent_capacity: int = 0
     
-    # Resource Utilization
+    # Resource Utilization for Data Processing
     memory_usage_mb: float = 0.0
     cpu_usage_percent: float = 0.0
     memory_peak_mb: float = 0.0
     
-    # LLM-Specific Metrics
-    tokens_per_second: float = 0.0
-    avg_prompt_tokens: float = 0.0
-    avg_completion_tokens: float = 0.0
-    llm_api_latency: float = 0.0
+    # Data-Specific Processing Metrics
+    data_transfer_rate_mbps: float = 0.0
+    avg_query_complexity_score: float = 0.0
+    avg_dataset_size_mb: float = 0.0
+    data_processing_latency: float = 0.0
 ```
 
-Resource and LLM-specific metrics track memory consumption, CPU usage, and token processing rates essential for cost optimization and capacity planning.
+Resource and data-specific metrics track memory consumption, CPU usage, and data transfer rates essential for cost optimization and capacity planning in data processing environments.
 
 ```python
-    # Tool Usage Metrics
-    tool_execution_time: float = 0.0
-    tool_success_rate: float = 0.0
+    # Data Quality and Validation Metrics
+    data_validation_time: float = 0.0
+    data_quality_score: float = 0.0
     cache_hit_rate: float = 0.0
     
-    # Error Metrics
+    # Error and Reliability Metrics
     error_rate: float = 0.0
     timeout_rate: float = 0.0
     retry_rate: float = 0.0
 ```
 
-Tool and error metrics provide insights into system reliability and performance bottlenecks across different components.
+Data quality and error metrics provide insights into system reliability and data processing accuracy across different analytical operations and datasets.
 
 ```python
-    # Quality Metrics
-    response_quality_score: float = 0.0
+    # Business Impact Metrics
+    analytical_accuracy_score: float = 0.0
     user_satisfaction_score: float = 0.0
     
-    # Operational Metrics
+    # Operational Excellence Metrics
     uptime_percentage: float = 0.0
     deployment_frequency: float = 0.0
     
     timestamp: datetime = field(default_factory=datetime.now)
 ```
 
-Quality and operational metrics ensure the system maintains high standards for user experience and operational excellence.
+Business impact and operational metrics ensure the data processing system maintains high standards for analytical quality and operational excellence.
 
-The benchmark suite orchestrates comprehensive performance testing across multiple scenarios:
+The benchmark suite orchestrates comprehensive performance testing across multiple data processing scenarios:
 
 ```python
-class PerformanceBenchmarkSuite:
-    """Comprehensive performance benchmarking for LangChain agents"""
+class DataProcessingBenchmarkSuite:
+    """Comprehensive performance benchmarking for data processing systems"""
     
-    def __init__(self, agent_factory: Callable, config: Dict[str, Any]):
-        self.agent_factory = agent_factory
+    def __init__(self, data_agent_factory: Callable, config: Dict[str, Any]):
+        self.data_agent_factory = data_agent_factory
         self.config = config
-        self.performance_history: List[PerformanceMetrics] = []
+        self.performance_history: List[DataProcessingMetrics] = []
         self.logger = logging.getLogger(__name__)
         
-        # Initialize monitoring
+        # Initialize monitoring for data processing
         tracemalloc.start()
 ```
 
-The suite initializes with an agent factory for creating test instances and starts memory tracing to capture detailed performance data.
+The suite initializes with a data agent factory for creating test instances and starts memory tracing to capture detailed performance data during analytical workloads.
 
 ```python
     async def run_comprehensive_benchmark(self, test_scenarios: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Execute comprehensive performance benchmark across multiple scenarios"""
+        """Execute comprehensive performance benchmark across multiple data processing scenarios"""
         
         benchmark_results = {
-            "benchmark_id": f"benchmark_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            "benchmark_id": f"data_benchmark_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
             "start_time": datetime.now(),
             "config": self.config,
             "scenarios": {},
@@ -127,19 +127,19 @@ The suite initializes with an agent factory for creating test instances and star
         }
         
         try:
-            # Run each test scenario
+            # Run each data processing test scenario
             for scenario in test_scenarios:
                 scenario_name = scenario["name"]
-                self.logger.info(f"Running benchmark scenario: {scenario_name}")
+                self.logger.info(f"Running data processing benchmark scenario: {scenario_name}")
                 scenario_results = await self._run_scenario_benchmark(scenario)
                 benchmark_results["scenarios"][scenario_name] = scenario_results
             
 ```
 
-Benchmark execution creates unique IDs for tracking and organizes results by scenario, enabling comprehensive performance analysis across different use cases.
+Benchmark execution creates unique IDs for tracking and organizes results by scenario, enabling comprehensive performance analysis across different data processing use cases.
 
 ```python
-            # Generate summary and recommendations
+            # Generate summary and recommendations for data processing optimization
             benchmark_results["summary"] = self._generate_benchmark_summary(benchmark_results["scenarios"])
             benchmark_results["recommendations"] = self._generate_optimization_recommendations(benchmark_results["summary"])
             
@@ -149,7 +149,7 @@ Benchmark execution creates unique IDs for tracking and organizes results by sce
             return benchmark_results
             
         except Exception as e:
-            self.logger.error(f"Benchmark failed: {str(e)}")
+            self.logger.error(f"Data processing benchmark failed: {str(e)}")
             benchmark_results["error"] = str(e)
             return benchmark_results
 ```
@@ -158,20 +158,20 @@ Benchmark finalization includes summary generation and optimization recommendati
 
 ```python    
     async def _run_scenario_benchmark(self, scenario: Dict[str, Any]) -> Dict[str, Any]:
-        """Run performance benchmark for a specific scenario with comprehensive monitoring"""
+        """Run performance benchmark for a specific data processing scenario with comprehensive monitoring"""
         
         scenario_config = {
             "name": scenario["name"],
             "description": scenario.get("description", ""),
             "concurrent_users": scenario.get("concurrent_users", 1),
-            "requests_per_user": scenario.get("requests_per_user", 10),
+            "queries_per_user": scenario.get("queries_per_user", 10),
             "test_duration_seconds": scenario.get("test_duration_seconds", 60),
-            "warmup_requests": scenario.get("warmup_requests", 5),
+            "warmup_queries": scenario.get("warmup_queries", 5),
             "test_data": scenario.get("test_data", [])
         }
 ```
 
-Scenario configuration extraction normalizes benchmark parameters with sensible defaults. Each parameter controls different aspects of load testing including concurrency, volume, and duration.
+Scenario configuration extraction normalizes benchmark parameters with sensible defaults. Each parameter controls different aspects of data processing load testing including concurrency, volume, and duration.
 
 ```python        
         # Start resource monitoring with baseline measurements
@@ -179,13 +179,13 @@ Scenario configuration extraction normalizes benchmark parameters with sensible 
         start_cpu = psutil.cpu_percent()
 ```
 
-Baseline resource monitoring captures initial system state before load testing. Memory and CPU measurements provide reference points for resource usage analysis.
+Baseline resource monitoring captures initial system state before load testing. Memory and CPU measurements provide reference points for resource usage analysis during data processing.
 
 ```python        
         # Warmup phase to stabilize performance metrics
         await self._run_warmup_phase(scenario_config)
         
-        # Main benchmark phase with full load testing
+        # Main benchmark phase with full data processing load testing
         performance_data = await self._run_load_test(scenario_config)
 ```
 
@@ -221,39 +221,39 @@ Post-test resource measurement captures system state changes during load testing
 
 Structured result packaging includes configuration, computed metrics, raw performance data, and resource usage analysis for comprehensive benchmark reporting.
     
-### Concurrent Load Testing Implementation
+### Concurrent Load Testing Implementation for Data Processing
 
 The load testing system executes comprehensive performance analysis with concurrent user simulation and real-time monitoring.
 
 ```python
     async def _run_load_test(self, config: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute concurrent load test with comprehensive monitoring"""
+        """Execute concurrent load test with comprehensive monitoring for data processing"""
         
         concurrent_users = config["concurrent_users"]
-        requests_per_user = config["requests_per_user"]
+        queries_per_user = config["queries_per_user"]
         test_data = config["test_data"]
 ```
 
-Load test parameter extraction from configuration enables flexible test scenarios. Concurrent users control parallelism while requests per user determines total load volume.
+Load test parameter extraction from configuration enables flexible test scenarios. Concurrent users control parallelism while queries per user determines total analytical workload volume.
 
 ```python        
-        # Prepare test data for load testing
+        # Prepare test data for data processing load testing
         if not test_data:
-            test_data = self._generate_test_data(requests_per_user * concurrent_users)
+            test_data = self._generate_test_data(queries_per_user * concurrent_users)
 ```
 
-Test data generation creates sufficient inputs for the complete load test. Auto-generation ensures adequate test coverage when specific test data isn't provided.
+Test data generation creates sufficient analytical inputs for the complete load test. Auto-generation ensures adequate test coverage when specific datasets aren't provided.
 
 ```python        
         # Track all performance data during execution
         all_response_times = []
-        all_token_counts = []
+        all_data_transfer_sizes = []
         error_count = 0
         timeout_count = 0
         memory_samples = []
 ```
 
-Performance tracking variables collect comprehensive metrics during load testing. Response times, token usage, errors, and memory usage provide complete performance visibility.
+Performance tracking variables collect comprehensive metrics during load testing. Response times, data transfer sizes, errors, and memory usage provide complete performance visibility.
 
 ```python        
         # Create semaphore for concurrency control
@@ -262,35 +262,35 @@ Performance tracking variables collect comprehensive metrics during load testing
 
 Semaphore implementation controls concurrent request execution to match specified user count. Proper concurrency control prevents resource exhaustion while maintaining realistic load patterns.
 
-### Individual Request Execution and Monitoring
+### Individual Query Execution and Monitoring
 
-Each request execution includes comprehensive monitoring and error handling to capture complete performance characteristics.
+Each query execution includes comprehensive monitoring and error handling to capture complete data processing performance characteristics.
 
 ```python        
-        async def run_single_request(test_input: str) -> Dict[str, Any]:
-            """Execute single request with comprehensive monitoring"""
+        async def run_single_query(test_query: str) -> Dict[str, Any]:
+            """Execute single data processing query with comprehensive monitoring"""
             async with semaphore:
                 start_time = time.time()
 ```
 
-Request execution begins with semaphore acquisition and timing start. Semaphore ensures concurrency limits while timing captures complete request lifecycle.
+Query execution begins with semaphore acquisition and timing start. Semaphore ensures concurrency limits while timing captures complete query lifecycle.
 
 ```python                
                 try:
-                    # Create agent instance for request
-                    agent = self.agent_factory()
+                    # Create data agent instance for query processing
+                    agent = self.data_agent_factory()
                     
-                    # Monitor memory before request execution
+                    # Monitor memory before query execution
                     current_memory = psutil.Process().memory_info().rss / 1024 / 1024
                     memory_samples.append(current_memory)
 ```
 
-Agent instantiation and memory monitoring prepare for request execution. Memory sampling enables resource usage tracking across concurrent requests.
+Agent instantiation and memory monitoring prepare for query execution. Memory sampling enables resource usage tracking across concurrent data processing operations.
 
 ```python                    
-                    # Execute request with timeout protection
+                    # Execute query with timeout protection for data processing
                     response = await asyncio.wait_for(
-                        agent.arun(test_input),
+                        agent.arun(test_query),
                         timeout=self.config.get("request_timeout", 30)
                     )
                     
@@ -298,24 +298,24 @@ Agent instantiation and memory monitoring prepare for request execution. Memory 
                     response_time = end_time - start_time
 ```
 
-Request execution with timeout protection prevents hanging requests from skewing performance measurements. Response time calculation provides core performance metrics.
+Query execution with timeout protection prevents hanging queries from skewing performance measurements. Response time calculation provides core performance metrics for data processing.
 
 ```python                    
-                    # Extract token information for cost analysis
-                    prompt_tokens = getattr(agent, 'last_prompt_tokens', 0)
-                    completion_tokens = getattr(agent, 'last_completion_tokens', 0)
+                    # Extract data processing information for analytics
+                    data_size = len(response) if response else 0
+                    query_complexity = self._calculate_query_complexity(test_query)
                     
                     return {
                         "success": True,
                         "response_time": response_time,
-                        "prompt_tokens": prompt_tokens,
-                        "completion_tokens": completion_tokens,
+                        "data_size": data_size,
+                        "query_complexity": query_complexity,
                         "response_length": len(response) if response else 0,
                         "memory_usage": current_memory
                     }
 ```
 
-Successful request processing captures comprehensive metrics including timing, token usage, response characteristics, and resource consumption for detailed analysis.
+Successful query processing captures comprehensive metrics including timing, data transfer sizes, query complexity, and resource consumption for detailed analysis.
 
 ```python                    
                 except asyncio.TimeoutError:
@@ -328,7 +328,7 @@ Successful request processing captures comprehensive metrics including timing, t
                     }
 ```
 
-Timeout handling tracks requests that exceed time limits while capturing partial timing data. Timeout counting enables reliability analysis.
+Timeout handling tracks queries that exceed time limits while capturing partial timing data. Timeout counting enables reliability analysis.
 
 ```python                    
                 except Exception as e:
@@ -346,19 +346,19 @@ General exception handling captures all other errors with detailed error informa
 
 ### Concurrent Execution and Result Processing
 
-All requests execute concurrently with comprehensive result aggregation for complete performance analysis.
+All queries execute concurrently with comprehensive result aggregation for complete performance analysis.
 
-Now we execute all requests concurrently and process the results:
+Now we execute all queries concurrently and process the results:
 
 ```python
-        # Execute all requests concurrently with exception handling
-        tasks = [run_single_request(data) for data in test_data]
+        # Execute all queries concurrently with exception handling
+        tasks = [run_single_query(data) for data in test_data]
         results = await asyncio.gather(*tasks, return_exceptions=True)
 ```
 
 Concurrent task execution uses asyncio.gather for maximum parallelism. Exception handling ensures partial failures don't abort the entire load test.
 
-Next, we process and aggregate the performance data from all requests:
+Next, we process and aggregate the performance data from all queries:
 
 ```python
         # Process results and aggregate performance data
@@ -367,19 +367,19 @@ Next, we process and aggregate the performance data from all requests:
             if isinstance(result, dict) and result.get("success"):
                 successful_results.append(result)
                 all_response_times.append(result["response_time"])
-                all_token_counts.append(result.get("prompt_tokens", 0) + result.get("completion_tokens", 0))
+                all_data_transfer_sizes.append(result.get("data_size", 0))
 ```
 
-Result processing filters successful requests and aggregates performance metrics. Response time and token count aggregation enables statistical analysis.
+Result processing filters successful queries and aggregates performance metrics. Response time and data transfer size aggregation enables statistical analysis.
 
 Finally, we return comprehensive test results for analysis:
 
 ```python
         return {
             "response_times": all_response_times,
-            "token_counts": all_token_counts,
-            "successful_requests": len(successful_results),
-            "total_requests": len(results),
+            "data_transfer_sizes": all_data_transfer_sizes,
+            "successful_queries": len(successful_results),
+            "total_queries": len(results),
             "error_count": error_count,
             "timeout_count": timeout_count,
             "memory_samples": memory_samples,
@@ -396,23 +396,23 @@ Comprehensive performance metrics calculation transforms raw load test data into
 ```python
     def _calculate_performance_metrics(self, performance_data: Dict[str, Any], 
                                      start_memory: float, end_memory: float,
-                                     start_cpu: float, end_cpu: float) -> PerformanceMetrics:
+                                     start_cpu: float, end_cpu: float) -> DataProcessingMetrics:
         """Calculate comprehensive performance metrics from load test data"""
         
         response_times = performance_data["response_times"]
-        total_requests = performance_data["total_requests"]
-        successful_requests = performance_data["successful_requests"]
-        token_counts = performance_data["token_counts"]
+        total_queries = performance_data["total_queries"]
+        successful_queries = performance_data["successful_queries"]
+        data_transfer_sizes = performance_data["data_transfer_sizes"]
 ```
 
-Performance data extraction prepares metrics calculation from load test results. Response times, request counts, and token usage provide comprehensive analysis foundation.
+Performance data extraction prepares metrics calculation from load test results. Response times, query counts, and data transfer sizes provide comprehensive analysis foundation.
 
 ```python        
         if not response_times:
-            return PerformanceMetrics()  # Return empty metrics if no successful requests
+            return DataProcessingMetrics()  # Return empty metrics if no successful queries
 ```
 
-Empty response validation prevents calculation errors when all requests fail. Default empty metrics provide consistent interface for failed load tests.
+Empty response validation prevents calculation errors when all queries fail. Default empty metrics provide consistent interface for failed load tests.
 
 Let's calculate performance metrics step by step. First, we analyze response time patterns:
 
@@ -431,29 +431,29 @@ Response time analysis includes mean and percentile calculations. Percentiles (p
 Next, we calculate throughput metrics for capacity planning:
 
 ```python        
-        # Throughput metrics for capacity planning
+        # Throughput metrics for data processing capacity planning
         total_test_time = max(response_times) if response_times else 1
-        requests_per_second = successful_requests / total_test_time
+        records_per_second = successful_queries / total_test_time
 ```
 
-Throughput calculation measures system capacity under load. Requests per second provides key scaling metric for capacity planning and performance optimization.
+Throughput calculation measures system capacity under load. Records per second provides key scaling metric for capacity planning and performance optimization.
 
-We analyze token usage for cost estimation:
+We analyze data transfer performance for network and I/O optimization:
 
 ```python        
-        # Token metrics for cost analysis
-        avg_tokens = statistics.mean(token_counts) if token_counts else 0
-        tokens_per_second = sum(token_counts) / total_test_time if token_counts else 0
+        # Data transfer metrics for network and I/O analysis
+        avg_data_transfer = statistics.mean(data_transfer_sizes) if data_transfer_sizes else 0
+        data_transfer_rate_mbps = (sum(data_transfer_sizes) / 1024 / 1024) / total_test_time if data_transfer_sizes else 0
 ```
 
-Token usage analysis enables cost estimation and resource planning. Average tokens and tokens per second help optimize AI model usage and predict operational costs.
+Data transfer analysis enables network optimization and I/O bottleneck identification. Transfer rates help optimize data pipeline performance and identify bandwidth constraints.
 
 Error metrics help assess system reliability:
 
 ```python
         # Error metrics for reliability analysis
-        error_rate = (total_requests - successful_requests) / total_requests if total_requests > 0 else 0
-        timeout_rate = performance_data["timeout_count"] / total_requests if total_requests > 0 else 0
+        error_rate = (total_queries - successful_queries) / total_queries if total_queries > 0 else 0
+        timeout_rate = performance_data["timeout_count"] / total_queries if total_queries > 0 else 0
 ```
 
 Error rate calculation measures system reliability under load. Error and timeout rates help identify stability issues and capacity limits.
@@ -472,20 +472,19 @@ Memory analysis tracks resource utilization during load testing. Peak and averag
 Finally, we assemble the comprehensive performance metrics:
 
 ```python        
-        return PerformanceMetrics(
+        return DataProcessingMetrics(
             avg_response_time=avg_response_time,
             p50_response_time=p50,
             p90_response_time=p90,
             p95_response_time=p95,
             p99_response_time=p99,
-            requests_per_second=requests_per_second,
-            concurrent_requests_handled=successful_requests,
+            records_per_second=records_per_second,
+            concurrent_queries_handled=successful_queries,
             memory_usage_mb=avg_memory,
             memory_peak_mb=peak_memory,
             cpu_usage_percent=end_cpu,
-            tokens_per_second=tokens_per_second,
-            avg_prompt_tokens=avg_tokens / 2,  # Rough estimation
-            avg_completion_tokens=avg_tokens / 2,
+            data_transfer_rate_mbps=data_transfer_rate_mbps,
+            avg_dataset_size_mb=avg_data_transfer / 1024 / 1024 if avg_data_transfer else 0,
             error_rate=error_rate * 100,  # Convert to percentage
             timeout_rate=timeout_rate * 100
         )
@@ -495,7 +494,7 @@ Comprehensive metrics packaging includes timing, throughput, resource usage, and
     
 ### Optimization Recommendations Generation
 
-Intelligent recommendation system analyzes performance data to suggest specific optimization strategies for improved system performance.
+Intelligent recommendation system analyzes performance data to suggest specific optimization strategies for improved data processing system performance.
 
 ```python
     def _generate_optimization_recommendations(self, summary: Dict[str, Any]) -> List[str]:
@@ -510,33 +509,33 @@ Recommendation system initialization prepares actionable optimization suggestion
         # Response time recommendations for latency optimization
         avg_response_time = summary.get("avg_response_time", 0)
         if avg_response_time > 5.0:
-            recommendations.append("Response times are high (>5s). Consider implementing caching or optimizing prompts.")
+            recommendations.append("Query response times are high (>5s). Consider implementing result caching or optimizing data warehouse queries.")
 ```
 
-Response time analysis identifies latency issues and suggests caching strategies. High response times indicate need for prompt optimization or caching implementation.
+Response time analysis identifies latency issues and suggests caching strategies. High response times indicate need for query optimization or caching implementation.
 
 ```python        
         p95_response_time = summary.get("p95_response_time", 0)
         if p95_response_time > avg_response_time * 2:
-            recommendations.append("High response time variance detected. Investigate outliers and implement timeout handling.")
+            recommendations.append("High response time variance detected. Investigate query outliers and implement timeout handling.")
 ```
 
 Variance analysis detects inconsistent performance patterns. High p95 variance suggests outlier investigation and timeout handling implementation.
 
 ```python        
         # Throughput recommendations for capacity optimization
-        requests_per_second = summary.get("requests_per_second", 0)
-        if requests_per_second < 1.0:
-            recommendations.append("Low throughput detected. Consider implementing connection pooling or async processing.")
+        records_per_second = summary.get("records_per_second", 0)
+        if records_per_second < 10:
+            recommendations.append("Low data processing throughput detected. Consider implementing connection pooling or query parallelization.")
 ```
 
-Throughput analysis identifies capacity limitations and suggests scaling strategies. Low throughput indicates need for connection pooling or async processing.
+Throughput analysis identifies capacity limitations and suggests scaling strategies. Low throughput indicates need for connection pooling or parallel processing.
 
 ```python        
         # Error rate recommendations for reliability improvement
         error_rate = summary.get("error_rate", 0)
         if error_rate > 5.0:
-            recommendations.append("High error rate (>5%). Implement better error handling and retry mechanisms.")
+            recommendations.append("High error rate (>5%). Implement better error handling and query retry mechanisms.")
 ```
 
 Error rate analysis identifies reliability issues and suggests resilience improvements. High error rates indicate need for better error handling and retry mechanisms.
@@ -545,19 +544,19 @@ Error rate analysis identifies reliability issues and suggests resilience improv
         # Memory recommendations for resource optimization
         memory_usage = summary.get("memory_usage_mb", 0)
         if memory_usage > 1000:
-            recommendations.append("High memory usage detected. Consider implementing memory optimization strategies.")
+            recommendations.append("High memory usage detected. Consider implementing data streaming or result set pagination.")
 ```
 
-Memory usage analysis identifies resource consumption issues. High memory usage suggests need for optimization strategies or increased resource allocation.
+Memory usage analysis identifies resource consumption issues. High memory usage suggests need for streaming strategies or result pagination for large datasets.
 
 ```python        
-        # Token optimization for cost and efficiency
-        tokens_per_second = summary.get("tokens_per_second", 0)
-        if tokens_per_second < 10:
-            recommendations.append("Low token throughput. Consider optimizing prompt engineering or using faster models.")
+        # Data transfer optimization for network efficiency
+        data_transfer_rate = summary.get("data_transfer_rate_mbps", 0)
+        if data_transfer_rate < 10:
+            recommendations.append("Low data transfer throughput. Consider optimizing serialization or using columnar data formats.")
 ```
 
-Token throughput analysis identifies efficiency opportunities. Low token throughput suggests prompt engineering improvements or faster model selection.
+Data transfer analysis identifies network efficiency opportunities. Low transfer rates suggest serialization improvements or columnar format adoption.
 
 ```python        
         # CPU recommendations for compute optimization
@@ -570,7 +569,7 @@ CPU usage analysis identifies compute bottlenecks. High CPU usage suggests horiz
 
 ```python        
         if not recommendations:
-            recommendations.append("Performance metrics are within acceptable ranges. Continue monitoring for trends.")
+            recommendations.append("Performance metrics are within acceptable ranges. Continue monitoring for trends and implement predictive scaling.")
         
         return recommendations
 ```
@@ -579,106 +578,106 @@ Default recommendation ensures actionable feedback even for well-performing syst
 
 ---
 
-## Part 3: Continuous Monitoring Systems (15 minutes)
+## Part 2: Continuous Monitoring Systems for Data Processing
 
 ### Production Performance Monitoring
 
-Real-time performance monitoring provides continuous visibility into agent performance for production systems with automated alerting and analysis.
+Real-time performance monitoring provides continuous visibility into data processing performance for production systems with automated alerting and analysis.
 
 ```python
-class ContinuousPerformanceMonitor:
-    """Continuous performance monitoring for production systems with real-time analysis"""
+class ContinuousDataProcessingMonitor:
+    """Continuous performance monitoring for production data processing systems with real-time analysis"""
     
     def __init__(self, monitoring_config: Dict[str, Any]):
         self.config = monitoring_config
-        self.metrics_buffer: List[PerformanceMetrics] = []
+        self.metrics_buffer: List[DataProcessingMetrics] = []
         self.alert_thresholds = monitoring_config.get("alert_thresholds", {})
         self.monitoring_active = False
         self.logger = logging.getLogger(__name__)
 ```
 
-Continuous monitoring initialization establishes configuration, metrics buffering, alert thresholds, and logging infrastructure for production monitoring.
+Continuous monitoring initialization establishes configuration, metrics buffering, alert thresholds, and logging infrastructure for production data processing monitoring.
 
 ```python        
-    async def start_monitoring(self, agent_instance):
-        """Start continuous performance monitoring with multiple concurrent tasks"""
+    async def start_monitoring(self, data_agent_instance):
+        """Start continuous performance monitoring with multiple concurrent tasks for data processing"""
         
         self.monitoring_active = True
-        self.logger.info("Starting continuous performance monitoring")
+        self.logger.info("Starting continuous data processing performance monitoring")
 ```
 
-Monitoring activation begins comprehensive real-time analysis. Multiple concurrent tasks provide complete system visibility across different performance dimensions.
+Monitoring activation begins comprehensive real-time analysis. Multiple concurrent tasks provide complete system visibility across different data processing performance dimensions.
 
 ```python        
         # Start monitoring tasks for comprehensive system analysis
         monitoring_tasks = [
-            asyncio.create_task(self._monitor_response_times(agent_instance)),
+            asyncio.create_task(self._monitor_query_response_times(data_agent_instance)),
             asyncio.create_task(self._monitor_resource_usage()),
-            asyncio.create_task(self._monitor_error_rates(agent_instance)),
+            asyncio.create_task(self._monitor_data_processing_errors(data_agent_instance)),
             asyncio.create_task(self._process_metrics_buffer())
         ]
 ```
 
-Concurrent monitoring tasks track response times, resource usage, error rates, and metrics processing. Parallel execution ensures comprehensive monitoring without performance impact.
+Concurrent monitoring tasks track query response times, resource usage, error rates, and metrics processing. Parallel execution ensures comprehensive monitoring without performance impact.
 
 ```python        
         try:
             await asyncio.gather(*monitoring_tasks)
         except Exception as e:
-            self.logger.error(f"Monitoring error: {str(e)}")
+            self.logger.error(f"Data processing monitoring error: {str(e)}")
         finally:
             self.monitoring_active = False
 ```
 
 Task coordination with exception handling ensures monitoring resilience. Cleanup ensures proper monitoring state management and resource release.
 
-### Response Time Monitoring Implementation
+### Query Response Time Monitoring Implementation
 
-Continuous response time monitoring uses method injection to track agent performance without modifying agent code.
+Continuous response time monitoring uses method injection to track data processing performance without modifying agent code.
 
 ```python
-    async def _monitor_response_times(self, agent_instance):
-        """Monitor agent response times continuously with method injection"""
+    async def _monitor_query_response_times(self, data_agent_instance):
+        """Monitor data processing query response times continuously with method injection"""
         
         while self.monitoring_active:
             try:
-                # Inject monitoring into agent calls using method wrapping
-                original_run = agent_instance.run
+                # Inject monitoring into data agent calls using method wrapping
+                original_run = data_agent_instance.run
 ```
 
-Method injection preserves original agent functionality while adding monitoring capabilities. Original method reference enables seamless monitoring integration.
+Method injection preserves original data agent functionality while adding monitoring capabilities. Original method reference enables seamless monitoring integration.
 
 ```python                
-                def monitored_run(input_text):
+                def monitored_run(input_query):
                     start_time = time.time()
                     try:
-                        result = original_run(input_text)
+                        result = original_run(input_query)
                         response_time = time.time() - start_time
                         
-                        # Record successful request metric
-                        self._record_response_time_metric(response_time, True)
+                        # Record successful query metric
+                        self._record_query_response_time_metric(response_time, True)
                         
                         return result
 ```
 
-Successful request monitoring captures timing and records metrics. Response time measurement includes complete request lifecycle for accurate performance analysis.
+Successful query monitoring captures timing and records metrics. Response time measurement includes complete query lifecycle for accurate performance analysis.
 
 ```python                    
                     except Exception as e:
                         response_time = time.time() - start_time
-                        self._record_response_time_metric(response_time, False)
+                        self._record_query_response_time_metric(response_time, False)
                         raise e
 ```
 
-Exception handling maintains timing accuracy even for failed requests. Error metrics provide complete performance picture including failure response times.
+Exception handling maintains timing accuracy even for failed queries. Error metrics provide complete performance picture including failure response times.
 
 ```python                
-                agent_instance.run = monitored_run
+                data_agent_instance.run = monitored_run
                 
                 await asyncio.sleep(1)  # Check every second
                 
             except Exception as e:
-                self.logger.error(f"Response time monitoring error: {str(e)}")
+                self.logger.error(f"Query response time monitoring error: {str(e)}")
                 await asyncio.sleep(5)
 ```
 
@@ -686,11 +685,11 @@ Method replacement enables monitoring activation with minimal agent modification
     
 ### Resource Usage Monitoring
 
-Continuous system resource monitoring tracks memory and CPU usage with configurable alerting thresholds for proactive system management.
+Continuous system resource monitoring tracks memory and CPU usage with configurable alerting thresholds for proactive data processing system management.
 
 ```python
     async def _monitor_resource_usage(self):
-        """Monitor system resource usage with threshold-based alerting"""
+        """Monitor system resource usage with threshold-based alerting for data processing"""
         
         while self.monitoring_active:
             try:
@@ -703,7 +702,7 @@ Continuous system resource monitoring tracks memory and CPU usage with configura
 Resource monitoring captures real-time system utilization using psutil. Memory and CPU measurements provide essential operational visibility for capacity planning.
 
 ```python                
-                # Check against configurable thresholds
+                # Check against configurable thresholds for data processing
                 if memory_mb > self.alert_thresholds.get("memory_mb", 1000):
                     await self._send_alert("HIGH_MEMORY_USAGE", f"Memory usage: {memory_mb:.1f}MB")
                 
@@ -728,15 +727,15 @@ Resource metric recording enables trend analysis and historical comparison. Conf
 
 ### Metrics Recording and Real-time Alerting
 
-Performance metrics recording supports both batch analysis and real-time alerting for comprehensive monitoring coverage.
+Performance metrics recording supports both batch analysis and real-time alerting for comprehensive data processing monitoring coverage.
 
 ```python
-    def _record_response_time_metric(self, response_time: float, success: bool):
-        """Record response time metric with real-time alerting"""
+    def _record_query_response_time_metric(self, response_time: float, success: bool):
+        """Record query response time metric with real-time alerting for data processing"""
         
         # Add to metrics buffer for batch processing
         metric = {
-            "type": "response_time",
+            "type": "query_response_time",
             "value": response_time,
             "success": success,
             "timestamp": datetime.now()
@@ -751,8 +750,8 @@ Metric buffering enables batch processing for statistical analysis. Structured m
         # Check real-time alerts for immediate response
         if response_time > self.alert_thresholds.get("response_time_seconds", 10):
             asyncio.create_task(self._send_alert(
-                "SLOW_RESPONSE", 
-                f"Response time: {response_time:.2f}s"
+                "SLOW_QUERY", 
+                f"Query response time: {response_time:.2f}s"
             ))
 ```
 
@@ -764,7 +763,7 @@ Comprehensive alert system provides structured notifications with severity class
 
 ```python
     async def _send_alert(self, alert_type: str, message: str):
-        """Send performance alert with severity classification"""
+        """Send performance alert with severity classification for data processing systems"""
         
         alert = {
             "type": alert_type,
@@ -773,7 +772,7 @@ Comprehensive alert system provides structured notifications with severity class
             "severity": self._determine_alert_severity(alert_type)
         }
         
-        self.logger.warning(f"Performance Alert [{alert_type}]: {message}")
+        self.logger.warning(f"Data Processing Alert [{alert_type}]: {message}")
 ```
 
 Alert structure includes type classification, severity levels, and timestamps for comprehensive incident tracking. Structured format enables integration with monitoring systems.
@@ -787,11 +786,11 @@ External alert dispatch enables integration with enterprise monitoring platforms
 
 ### Real-time Metrics Access
 
-Real-time metrics provide immediate visibility into current system performance for operational dashboards and monitoring interfaces.
+Real-time metrics provide immediate visibility into current data processing system performance for operational dashboards and monitoring interfaces.
 
 ```python
     def get_real_time_metrics(self) -> Dict[str, Any]:
-        """Get current real-time performance metrics for dashboards"""
+        """Get current real-time performance metrics for data processing dashboards"""
         
         if not self.metrics_buffer:
             return {"status": "no_data"}
@@ -811,14 +810,14 @@ Metrics availability check prevents empty data responses. No-data status enables
 Recent metrics filtering provides relevant performance data for current system state. Five-minute window balances real-time accuracy with statistical significance.
 
 ```python        
-        response_times = [m["value"] for m in recent_metrics if m["type"] == "response_time"]
+        response_times = [m["value"] for m in recent_metrics if m["type"] == "query_response_time"]
         
         if response_times:
             return {
                 "avg_response_time": statistics.mean(response_times),
                 "max_response_time": max(response_times),
                 "min_response_time": min(response_times),
-                "total_requests": len(response_times),
+                "total_queries": len(response_times),
                 "success_rate": sum(1 for m in recent_metrics if m.get("success")) / len(recent_metrics) * 100,
                 "timestamp": datetime.now()
             }
@@ -826,17 +825,17 @@ Recent metrics filtering provides relevant performance data for current system s
         return {"status": "no_response_data"}
 ```
 
-Comprehensive metrics calculation provides statistical summary of recent performance. Average, max, min response times, request counts, and success rates give complete operational visibility.
+Comprehensive metrics calculation provides statistical summary of recent performance. Average, max, min response times, query counts, and success rates give complete operational visibility.
 
 ---
 
-## Part 2: Advanced Monitoring & Observability (20 minutes)
+## Part 3: Advanced Monitoring & Observability for Data Systems
 
-### Comprehensive Monitoring Architecture
+### Comprehensive Data Processing Monitoring Architecture
 
-🗂️ **File**: `src/session2/monitoring_observability.py` - Production monitoring systems
+🗂️ **File**: `src/session2/monitoring_observability.py` - Production monitoring systems for data processing
 
-Production monitoring architecture integrates Prometheus metrics, OpenTelemetry tracing, and structured logging for comprehensive observability.
+Production monitoring architecture integrates Prometheus metrics, OpenTelemetry tracing, and structured logging for comprehensive observability across data processing systems.
 
 ```python
 import prometheus_client
@@ -846,21 +845,24 @@ from opentelemetry import trace, metrics
 from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from typing import Dict, Any, Optional
+from typing import Dict, List, Any, Optional
 import json
 from datetime import datetime
 import asyncio
+import time
+from concurrent.futures import ThreadPoolExecutor
+import threading
 ```
 
 Enterprise monitoring imports provide comprehensive observability tools. Prometheus for metrics, OpenTelemetry for tracing, and structured logging enable complete system visibility.
 
-### Prometheus Metrics Implementation
+### Prometheus Metrics Implementation for Data Processing
 
-Prometheus metrics provide time-series data collection for operational monitoring and alerting in production LangChain applications.
+Prometheus metrics provide time-series data collection for operational monitoring and alerting in production data processing applications.
 
 ```python
-class LangChainPrometheusMetrics:
-    """Prometheus metrics for LangChain applications with comprehensive coverage"""
+class DataProcessingPrometheusMetrics:
+    """Prometheus metrics for data processing applications with comprehensive coverage"""
     
     def __init__(self, service_name: str):
         self.service_name = service_name
@@ -869,175 +871,149 @@ class LangChainPrometheusMetrics:
 Metrics initialization establishes service identification for multi-service monitoring environments. Service name enables proper metric attribution and aggregation.
 
 ```python        
-        # Request metrics for operational monitoring
+        # Query and request metrics for operational monitoring
         self.request_count = Counter(
-            'langchain_requests_total',
-            'Total number of requests to LangChain agents',
-            ['agent_type', 'status']
+            'data_processing_queries_total',
+            'Total number of queries to data processing systems',
+            ['service_type', 'query_type', 'status']
         )
         
         self.request_duration = Histogram(
-            'langchain_request_duration_seconds',
-            'Time spent processing LangChain requests',
-            ['agent_type', 'operation'],
-            buckets=[0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 30.0, 60.0]
+            'data_processing_query_duration_seconds',
+            'Time spent processing data queries',
+            ['service_type', 'operation'],
+            buckets=[0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 30.0, 60.0, 300.0]
         )
 ```
 
-Request metrics track volume and timing for capacity planning. Counter tracks total requests by type and status while histogram captures latency distribution with appropriate buckets.
+Query metrics track volume and timing for capacity planning. Counter tracks total queries by type and status while histogram captures latency distribution with appropriate buckets for data processing operations.
 
 ```python        
-        # LLM metrics for cost and performance analysis
-        self.llm_tokens = Counter(
-            'langchain_llm_tokens_total',
-            'Total tokens processed by LLM',
-            ['model', 'token_type']  # token_type: prompt, completion
+        # Data processing specific metrics for analytics and cost optimization
+        self.data_records_processed = Counter(
+            'data_processing_records_total',
+            'Total data records processed',
+            ['service_name', 'dataset_type', 'processing_stage']
         )
         
-        self.llm_api_calls = Counter(
-            'langchain_llm_api_calls_total',
-            'Total API calls to LLM providers',
-            ['provider', 'model', 'status']
+        self.data_processing_latency = Histogram(
+            'data_processing_operation_latency_seconds',
+            'Data processing operation latency by type',
+            ['service_name', 'operation_type'],
+            buckets=[0.01, 0.1, 0.5, 1.0, 5.0, 10.0, 60.0]
         )
 ```
 
-LLM metrics enable cost optimization and performance analysis. Token tracking supports cost estimation while API call metrics monitor provider reliability and usage patterns.
+Data processing metrics enable cost optimization and performance analysis. Record tracking supports throughput monitoring while latency metrics monitor processing efficiency across different data operations.
 
 ```python        
-        self.llm_latency = Histogram(
-            'langchain_llm_latency_seconds',
-            'LLM API call latency',
-            ['provider', 'model'],
-            buckets=[0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0]
-        )
-```
-
-LLM latency metrics track API response times by provider and model. Fine-grained buckets enable SLA monitoring and performance comparison across different LLM providers.
-
-```python        
-        # Tool metrics for execution monitoring
-        self.tool_executions = Counter(
-            'langchain_tool_executions_total',
-            'Total tool executions',
-            ['tool_name', 'status']
+        self.data_transfer_bytes = Counter(
+            'data_processing_transfer_bytes_total',
+            'Total bytes transferred during data processing',
+            ['service_name', 'direction', 'data_source']
         )
         
-        self.tool_duration = Histogram(
-            'langchain_tool_duration_seconds',
-            'Tool execution duration',
-            ['tool_name'],
-            buckets=[0.01, 0.05, 0.1, 0.5, 1.0, 5.0, 10.0]
-        )
-```
-
-Tool metrics monitor custom tool performance and reliability. Execution counts and duration histograms help identify bottlenecks and optimize tool implementations.
-
-```python        
-        # Memory and caching metrics for resource optimization
-        self.cache_operations = Counter(
-            'langchain_cache_operations_total',
-            'Cache operations',
-            ['operation', 'result']  # operation: get, set; result: hit, miss
+        # Resource utilization metrics for capacity planning
+        self.cpu_usage = Gauge(
+            'data_processing_cpu_usage_percent',
+            'CPU usage percentage for data processing services',
+            ['service_name', 'container_id']
         )
         
         self.memory_usage = Gauge(
-            'langchain_memory_usage_bytes',
-            'Current memory usage',
-            ['component']
+            'data_processing_memory_usage_bytes',
+            'Memory usage in bytes for data processing services',
+            ['service_name', 'container_id']
         )
 ```
 
-Resource metrics track cache effectiveness and memory utilization. Cache hit/miss ratios guide cache optimization while memory gauges enable capacity planning.
+Data transfer and resource metrics track bandwidth utilization and system capacity. Transfer metrics enable network optimization while resource gauges support capacity planning and auto-scaling decisions.
 
 ```python        
-        # Error metrics for reliability monitoring
-        self.error_count = Counter(
-            'langchain_errors_total',
-            'Total errors in LangChain application',
-            ['error_type', 'component']
+        # Data quality and reliability metrics
+        self.data_quality_score = Gauge(
+            'data_quality_score',
+            'Data quality score for processed datasets',
+            ['service_name', 'dataset_id', 'quality_dimension']
         )
         
-        # Quality metrics for response assessment
-        self.response_quality = Histogram(
-            'langchain_response_quality_score',
-            'Response quality scores',
-            ['agent_type', 'metric_type'],
-            buckets=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        self.processing_errors = Counter(
+            'data_processing_errors_total',
+            'Total data processing errors by type',
+            ['service_name', 'error_type', 'severity', 'dataset_type']
         )
 ```
 
-Error and quality metrics provide comprehensive reliability and performance assessment. Error categorization helps identify failure patterns while quality scores enable response evaluation.
+Quality and error metrics provide operational insights into data processing reliability and accuracy. Quality scores track data integrity while error categorization enables targeted improvements.
 
-### Metrics Recording Methods
+### Metrics Recording Methods for Data Processing
 
-Dedicated recording methods provide convenient interfaces for capturing different types of performance data throughout the application lifecycle.
-
-```python
-    def record_request(self, agent_type: str, status: str, duration: float, operation: str = "run"):
-        """Record request metrics with type and operation context"""
-        self.request_count.labels(agent_type=agent_type, status=status).inc()
-        self.request_duration.labels(agent_type=agent_type, operation=operation).observe(duration)
-```
-
-Request recording captures both volume and timing metrics. Labels enable filtering and aggregation by agent type, status, and operation for detailed analysis.
-
-```python    
-    def record_llm_call(self, provider: str, model: str, status: str, latency: float,
-                       prompt_tokens: int, completion_tokens: int):
-        """Record comprehensive LLM metrics for cost and performance analysis"""
-        self.llm_api_calls.labels(provider=provider, model=model, status=status).inc()
-        self.llm_latency.labels(provider=provider, model=model).observe(latency)
-        self.llm_tokens.labels(model=model, token_type="prompt").inc(prompt_tokens)
-        self.llm_tokens.labels(model=model, token_type="completion").inc(completion_tokens)
-```
-
-LLM recording captures comprehensive metrics for cost optimization. Provider, model, and token type labels enable detailed analysis of API usage patterns and costs.
-
-```python    
-    def record_tool_execution(self, tool_name: str, status: str, duration: float):
-        """Record tool execution metrics for performance monitoring"""
-        self.tool_executions.labels(tool_name=tool_name, status=status).inc()
-        self.tool_duration.labels(tool_name=tool_name).observe(duration)
-    
-    def record_cache_operation(self, operation: str, result: str):
-        """Record cache operation metrics for optimization analysis"""
-        self.cache_operations.labels(operation=operation, result=result).inc()
-```
-
-Tool and cache metrics enable performance optimization. Tool execution tracking identifies bottlenecks while cache metrics guide optimization strategies.
-
-```python    
-    def record_error(self, error_type: str, component: str):
-        """Record error metrics for reliability monitoring"""
-        self.error_count.labels(error_type=error_type, component=component).inc()
-    
-    def update_memory_usage(self, component: str, bytes_used: float):
-        """Update memory usage metrics for resource monitoring"""
-        self.memory_usage.labels(component=component).set(bytes_used)
-    
-    def record_quality_score(self, agent_type: str, metric_type: str, score: float):
-        """Record response quality metrics for performance assessment"""
-        self.response_quality.labels(agent_type=agent_type, metric_type=metric_type).observe(score)
-```
-
-Error, memory, and quality recording provide comprehensive system health monitoring. Categorized tracking enables targeted optimization and reliability improvements.
-
-### Structured Logging Implementation
-
-Structured logging provides machine-readable log format with consistent metadata for comprehensive application observability and troubleshooting.
+Dedicated recording methods provide convenient interfaces for capturing different types of performance data throughout the data processing application lifecycle.
 
 ```python
-class StructuredLogging:
-    """Structured logging for LangChain applications with comprehensive context"""
+    def record_query(self, service_type: str, query_type: str, status: str, duration: float, operation: str = "query"):
+        """Record data processing query metrics with type and operation context"""
+        self.request_count.labels(service_type=service_type, query_type=query_type, status=status).inc()
+        self.request_duration.labels(service_type=service_type, operation=operation).observe(duration)
+```
+
+Query recording captures both volume and timing metrics. Labels enable filtering and aggregation by service type, query type, and status for detailed analysis.
+
+```python    
+    def record_data_processing(self, service_name: str, dataset_type: str, processing_stage: str,
+                              records_processed: int, operation_latency: float, operation_type: str):
+        """Record comprehensive data processing metrics for analytics and optimization"""
+        self.data_records_processed.labels(
+            service_name=service_name, 
+            dataset_type=dataset_type, 
+            processing_stage=processing_stage
+        ).inc(records_processed)
+        
+        self.data_processing_latency.labels(
+            service_name=service_name, 
+            operation_type=operation_type
+        ).observe(operation_latency)
+```
+
+Data processing recording captures comprehensive metrics for optimization. Record counts and latency tracking enable detailed analysis of processing patterns and performance bottlenecks.
+
+```python    
+    def record_data_transfer(self, service_name: str, direction: str, data_source: str, bytes_transferred: int):
+        """Record data transfer metrics for bandwidth and cost analysis"""
+        self.data_transfer_bytes.labels(
+            service_name=service_name, 
+            direction=direction, 
+            data_source=data_source
+        ).inc(bytes_transferred)
+    
+    def record_error(self, service_name: str, error_type: str, severity: str, dataset_type: str):
+        """Record data processing error metrics for reliability monitoring"""
+        self.processing_errors.labels(
+            service_name=service_name, 
+            error_type=error_type, 
+            severity=severity, 
+            dataset_type=dataset_type
+        ).inc()
+```
+
+Transfer and error metrics enable operational optimization. Data transfer tracking supports cost analysis while error categorization enables targeted reliability improvements.
+
+### Structured Logging Implementation for Data Processing
+
+Structured logging provides machine-readable log format with consistent metadata for comprehensive data processing application observability and troubleshooting.
+
+```python
+class DataProcessingStructuredLogging:
+    """Structured logging for data processing applications with comprehensive context"""
     
     def __init__(self, service_name: str, log_level: str = "INFO"):
         self.service_name = service_name
 ```
 
-Structured logging initialization establishes service context and configuration. Service name provides consistent identification across distributed logging systems.
+Structured logging initialization establishes service context and configuration. Service name provides consistent identification across distributed data processing systems.
 
 ```python        
-        # Configure structured logging with processors
+        # Configure structured logging with processors for data processing
         structlog.configure(
             processors=[
                 structlog.stdlib.filter_by_level,
@@ -1066,21 +1042,21 @@ Processor configuration creates consistent log structure. Level filtering, logge
 
 Advanced processors handle stack traces, exception formatting, unicode encoding, and JSON rendering. Factory and wrapper configuration integrates with standard Python logging.
 
-### Structured Logging Methods
+### Specialized Data Processing Logging Methods
 
-Specialized logging methods capture different types of events with appropriate structured context for comprehensive traceability.
+Specialized logging methods capture different types of events with appropriate structured context for comprehensive traceability in data processing systems.
 
 ```python
-    def log_request(self, request_id: str, agent_type: str, input_text: str, 
-                   response: str, duration: float, status: str, **kwargs):
-        """Log request with comprehensive structured context"""
+    def log_query_execution(self, query_id: str, dataset_type: str, query_text: str, 
+                           result_size: int, duration: float, status: str, **kwargs):
+        """Log data processing query execution with comprehensive structured context"""
         
         self.logger.info(
-            "agent_request_completed",
-            request_id=request_id,
-            agent_type=agent_type,
-            input_length=len(input_text),
-            response_length=len(response) if response else 0,
+            "data_query_executed",
+            query_id=query_id,
+            dataset_type=dataset_type,
+            query_length=len(query_text),
+            result_size=result_size,
             duration_seconds=duration,
             status=status,
             service=self.service_name,
@@ -1088,316 +1064,109 @@ Specialized logging methods capture different types of events with appropriate s
         )
 ```
 
-Request logging captures complete request lifecycle with structured metadata. Request ID enables tracing while metrics provide performance context.
+Query logging captures complete query lifecycle with structured metadata. Query ID enables tracing while metrics provide performance context.
 
 ```python    
-    def log_llm_call(self, request_id: str, provider: str, model: str, 
-                    prompt_tokens: int, completion_tokens: int, latency: float, **kwargs):
-        """Log LLM call with cost and performance context"""
+    def log_data_processing_operation(self, operation_id: str, operation_type: str, dataset_id: str,
+                                    records_processed: int, processing_time: float, 
+                                    data_quality_score: float, **kwargs):
+        """Log data processing operations with quality and performance context"""
         
         self.logger.info(
-            "llm_api_call",
-            request_id=request_id,
-            provider=provider,
-            model=model,
-            prompt_tokens=prompt_tokens,
-            completion_tokens=completion_tokens,
-            total_tokens=prompt_tokens + completion_tokens,
-            latency_seconds=latency,
-            cost_estimate=self._calculate_cost_estimate(model, prompt_tokens, completion_tokens),
+            "data_processing_operation",
+            operation_id=operation_id,
+            operation_type=operation_type,
+            dataset_id=dataset_id,
+            records_processed=records_processed,
+            processing_time_seconds=processing_time,
+            data_quality_score=data_quality_score,
+            throughput_records_per_second=records_processed / processing_time if processing_time > 0 else 0,
             service=self.service_name,
             **kwargs
         )
 ```
 
-LLM call logging includes cost estimation and performance metrics. Token tracking and cost calculation enable operational cost analysis and optimization.
+Processing operation logging includes quality metrics and performance data. Throughput calculation and quality scoring enable comprehensive operational analysis.
 
-### Tool Execution and Error Logging
+### Data Quality and Error Logging
 
-Tool execution logging captures comprehensive execution data including input parameters, result metadata, and performance timings. This enables detailed analysis of tool performance and resource utilization patterns.
+Data quality logging captures comprehensive validation and error information essential for maintaining data processing reliability and accuracy.
 
 ```python
-    def log_tool_execution(self, request_id: str, tool_name: str, 
-                          input_params: Dict[str, Any], result: Any, 
-                          duration: float, status: str, **kwargs):
-        """Log tool execution with structured data"""
+    def log_data_quality_check(self, dataset_id: str, quality_checks: List[str], 
+                              quality_results: Dict[str, Any], overall_score: float, **kwargs):
+        """Log data quality assessment with detailed results"""
         
         self.logger.info(
-            "tool_execution",
-            request_id=request_id,
-            tool_name=tool_name,
-            input_params=input_params,
-            result_type=type(result).__name__,
-            result_size=len(str(result)) if result else 0,
-            duration_seconds=duration,
-            status=status,
+            "data_quality_assessment",
+            dataset_id=dataset_id,
+            quality_checks=quality_checks,
+            quality_results=quality_results,
+            overall_quality_score=overall_score,
+            checks_passed=sum(1 for result in quality_results.values() if result.get("passed", False)),
+            total_checks=len(quality_checks),
             service=self.service_name,
             **kwargs
         )
 ```
 
-Error logging provides structured error tracking with component identification and stack trace information. This enables rapid debugging and issue resolution in production environments.
+Quality check logging provides detailed assessment results and scoring. Check pass rates and overall scores enable quality trend analysis.
 
 ```python
-    def log_error(self, request_id: str, error_type: str, error_message: str, 
-                 component: str, stack_trace: str = None, **kwargs):
-        """Log error with structured data"""
+    def log_processing_error(self, error_id: str, error_type: str, error_message: str, 
+                            dataset_id: str, operation_context: Dict[str, Any], 
+                            stack_trace: str = None, **kwargs):
+        """Log data processing errors with comprehensive context"""
         
         self.logger.error(
-            "application_error",
-            request_id=request_id,
+            "data_processing_error",
+            error_id=error_id,
             error_type=error_type,
             error_message=error_message,
-            component=component,
+            dataset_id=dataset_id,
+            operation_context=operation_context,
             stack_trace=stack_trace,
             service=self.service_name,
             **kwargs
         )
 ```
 
-### Performance Alert and Cost Calculation
+Error logging provides structured error tracking with comprehensive context. Operation context and stack traces enable rapid debugging and issue resolution.
 
-Performance alert logging enables proactive monitoring by capturing threshold violations and performance degradations. Alert data includes metric values and thresholds for analysis.
+### Performance Alert and Cost Monitoring
+
+Performance alert logging enables proactive monitoring by capturing threshold violations and performance degradations in data processing operations.
 
 ```python
     def log_performance_alert(self, alert_type: str, metric_name: str, 
-                            current_value: float, threshold: float, **kwargs):
-        """Log performance alert"""
+                            current_value: float, threshold: float, 
+                            dataset_context: Dict[str, Any] = None, **kwargs):
+        """Log performance alert with data processing context"""
         
         self.logger.warning(
-            "performance_alert",
+            "data_processing_performance_alert",
             alert_type=alert_type,
             metric_name=metric_name,
             current_value=current_value,
             threshold=threshold,
+            threshold_exceeded_by=current_value - threshold,
+            dataset_context=dataset_context or {},
             service=self.service_name,
             **kwargs
         )
 ```
 
-Cost estimation provides real-time cost tracking for LLM API usage. Token-based pricing models enable accurate cost projection and budget management across different LLM providers.
-
-```python
-    def _calculate_cost_estimate(self, model: str, prompt_tokens: int, completion_tokens: int) -> float:
-        """Calculate estimated cost for LLM call"""
-        
-        # Simplified cost calculation - update with actual pricing
-        cost_per_1k_tokens = {
-            "gpt-4": 0.03,
-            "gpt-3.5-turbo": 0.002,
-            "claude-3-sonnet": 0.015,
-            "claude-3-haiku": 0.0025
-        }
-        
-        rate = cost_per_1k_tokens.get(model, 0.01)  # Default rate
-        total_tokens = prompt_tokens + completion_tokens
-        return (total_tokens / 1000) * rate
-```
-
-### Distributed Tracing System
-
-Distributed tracing enables end-to-end observability across complex LangChain applications. This system provides request correlation, performance bottleneck identification, and dependency mapping.
-
-```python
-class DistributedTracing:
-    """Distributed tracing for LangChain applications"""
-
-    def __init__(self, service_name: str, jaeger_endpoint: str = None):
-        self.service_name = service_name
-        
-        # Initialize tracing
-        trace.set_tracer_provider(TracerProvider())
-        tracer = trace.get_tracer(__name__)
-        
-        # Configure Jaeger exporter if endpoint provided
-        if jaeger_endpoint:
-            jaeger_exporter = JaegerExporter(
-                agent_host_name="localhost",
-                agent_port=6831,
-            )
-            span_processor = BatchSpanProcessor(jaeger_exporter)
-            trace.get_tracer_provider().add_span_processor(span_processor)
-        
-        self.tracer = tracer
-```
-
-### Request and Component Tracing
-
-Agent request tracing creates root spans for entire workflow execution. Request correlation enables tracking complex multi-agent interactions and identifying performance bottlenecks.
-
-```python
-    def trace_agent_request(self, request_id: str, agent_type: str):
-        """Create trace span for agent request"""
-        
-        return self.tracer.start_span(
-            f"agent_request:{agent_type}",
-            attributes={
-                "service.name": self.service_name,
-                "request.id": request_id,
-                "agent.type": agent_type
-            }
-        )
-```
-
-LLM call tracing captures provider-specific performance characteristics. Model and provider tracking enables optimization decisions and cost analysis across different LLM services.
-
-```python
-    def trace_llm_call(self, request_id: str, provider: str, model: str):
-        """Create trace span for LLM call"""
-        
-        return self.tracer.start_span(
-            f"llm_call:{provider}",
-            attributes={
-                "service.name": self.service_name,
-                "request.id": request_id,
-                "llm.provider": provider,
-                "llm.model": model
-            }
-        )
-```
-
-Tool execution tracing monitors individual tool performance and resource usage. Tool-specific spans enable detailed analysis of workflow execution patterns and optimization opportunities.
-
-```python
-    def trace_tool_execution(self, request_id: str, tool_name: str):
-        """Create trace span for tool execution"""
-        
-        return self.tracer.start_span(
-            f"tool_execution:{tool_name}",
-            attributes={
-                "service.name": self.service_name,
-                "request.id": request_id,
-                "tool.name": tool_name
-            }
-        )
-```
-
-### Real-time Monitoring Dashboard
-
-The monitoring dashboard aggregates metrics from multiple sources to provide comprehensive system visibility. Dashboard data includes health indicators, performance metrics, and operational insights.
-
-```python
-class MonitoringDashboard:
-    """Real-time monitoring dashboard for LangChain applications"""
-    
-    def __init__(self, metrics: LangChainPrometheusMetrics, 
-                 logging: StructuredLogging):
-        self.metrics = metrics
-        self.logging = logging
-        self.dashboard_data = {}
-```
-
-### Comprehensive Dashboard Data Generation
-
-Dashboard data generation collects metrics from all monitoring systems and aggregates them into a unified view. This enables real-time system health assessment and performance analysis.
-
-```python
-    async def generate_dashboard_data(self) -> Dict[str, Any]:
-        """Generate comprehensive dashboard data"""
-        
-        current_time = datetime.now()
-        
-        # Collect metrics from Prometheus
-        dashboard_data = {
-            "timestamp": current_time.isoformat(),
-            "service_health": await self._get_service_health(),
-            "request_metrics": await self._get_request_metrics(),
-            "llm_metrics": await self._get_llm_metrics(),
-            "tool_metrics": await self._get_tool_metrics(),
-            "performance_metrics": await self._get_performance_metrics(),
-            "error_metrics": await self._get_error_metrics(),
-            "resource_usage": await self._get_resource_usage(),
-            "alerts": await self._get_active_alerts()
-        }
-        
-        return dashboard_data
-```
-    
-### Service Health Assessment
-
-Service health assessment analyzes error rates and response times to determine overall system status. Health categorization enables rapid identification of service degradation and system issues.
-
-```python
-    async def _get_service_health(self) -> Dict[str, Any]:
-        """Get overall service health status"""
-        
-        # Calculate health based on error rates and response times
-        recent_errors = 0  # Would query from Prometheus
-        recent_requests = 100  # Would query from Prometheus
-        avg_response_time = 1.5  # Would query from Prometheus
-        
-        error_rate = recent_errors / recent_requests if recent_requests > 0 else 0
-        
-        if error_rate > 0.1 or avg_response_time > 10:
-            health_status = "unhealthy"
-        elif error_rate > 0.05 or avg_response_time > 5:
-            health_status = "degraded"
-        else:
-            health_status = "healthy"
-        
-        return {
-            "status": health_status,
-            "error_rate": error_rate,
-            "avg_response_time": avg_response_time,
-            "uptime_percentage": 99.5  # Would calculate from actual data
-        }
-```
-    
-### Request and LLM Metrics Collection
-
-Request metrics provide throughput and performance indicators for system capacity planning. Response time percentiles and success rates enable SLA monitoring and performance optimization.
-
-```python
-    async def _get_request_metrics(self) -> Dict[str, Any]:
-        """Get request-related metrics"""
-        
-        return {
-            "requests_per_minute": 45,  # Would query from Prometheus
-            "avg_response_time": 2.1,
-            "p95_response_time": 4.5,
-            "success_rate": 98.2,
-            "concurrent_requests": 12
-        }
-```
-
-LLM metrics track token usage, API latency, and cost performance across different models. Model distribution analysis enables optimization decisions and cost management strategies.
-
-```python
-    async def _get_llm_metrics(self) -> Dict[str, Any]:
-        """Get LLM-specific metrics"""
-        
-        return {
-            "total_tokens_processed": 125000,  # Would query from Prometheus
-            "tokens_per_minute": 2500,
-            "avg_llm_latency": 1.8,
-            "api_calls_per_minute": 50,
-            "cost_per_hour": 12.50,
-            "model_distribution": {
-                "gpt-4": 60,
-                "gpt-3.5-turbo": 40
-            }
-        }
-    
-    async def _get_performance_metrics(self) -> Dict[str, Any]:
-        """Get performance metrics"""
-        
-        return {
-            "cpu_usage_percent": 45.2,
-            "memory_usage_mb": 512.8,
-            "cache_hit_rate": 78.5,
-            "throughput_requests_per_second": 0.75
-        }
-```
+Performance alert logging includes threshold comparisons and dataset context. Exceeded amounts and context enable targeted performance optimization.
 
 ---
 
-## Part 3: Cost Optimization & Resource Management (10 minutes)
+## Part 4: Cost Optimization & Resource Management for Data Processing
 
-### Intelligent Cost Management
+### Intelligent Cost Management for Data Systems
 
-🗂️ **File**: `src/session2/cost_optimization.py` - Cost optimization strategies
+🗂️ **File**: `src/session2/cost_optimization.py` - Cost optimization strategies for data processing
 
-Cost optimization requires comprehensive tracking and intelligent management of LLM and resource costs. This system provides real-time cost monitoring, budget management, and optimization recommendations.
+Cost optimization requires comprehensive tracking and intelligent management of data processing and infrastructure costs. This system provides real-time cost monitoring, budget management, and optimization recommendations.
 
 ```python
 from typing import Dict, List, Any, Optional
@@ -1407,51 +1176,53 @@ import asyncio
 import json
 ```
 
-### Cost Metrics Data Structure
+### Cost Metrics Data Structure for Data Processing
 
-Cost metrics capture comprehensive cost data across multiple dimensions including token usage, API calls, resource consumption, and optimization savings. This enables detailed cost analysis and optimization.
+Cost metrics capture comprehensive cost data across multiple dimensions including compute usage, data transfer, storage consumption, and optimization savings for data processing systems.
 
 ```python
 @dataclass
-class CostMetrics:
-    """Cost tracking metrics for LangChain applications"""
+class DataProcessingCostMetrics:
+    """Cost tracking metrics for data processing applications"""
     
-    # Token costs
-    total_prompt_tokens: int = 0
-    total_completion_tokens: int = 0
-    total_token_cost: float = 0.0
+    # Compute costs for data processing
+    total_compute_hours: float = 0.0
+    total_compute_cost: float = 0.0
     
-    # API call costs
-    total_api_calls: int = 0
-    total_api_cost: float = 0.0
+    # Data transfer and storage costs
+    total_data_transfer_gb: float = 0.0
+    total_data_transfer_cost: float = 0.0
+    total_storage_gb: float = 0.0
+    total_storage_cost: float = 0.0
     
-    # Resource costs
-    compute_cost_per_hour: float = 0.0
-    storage_cost_per_hour: float = 0.0
+    # Query and processing costs
+    total_queries_executed: int = 0
+    total_query_cost: float = 0.0
 ```
 
-CostMetrics dataclass captures token usage and API costs for comprehensive expense tracking. Token costs include both prompt and completion charges while API costs track overall usage patterns.
+DataProcessingCostMetrics captures compute, storage, and query costs essential for comprehensive expense tracking. Cost breakdown enables detailed analysis and optimization targeting.
 
 ```python    
-    # Time period
+    # Time period for cost tracking
     period_start: datetime = None
     period_end: datetime = None
     
-    # Cost breakdown by model
-    cost_by_model: Dict[str, float] = None
+    # Cost breakdown by data processing service
+    cost_by_service: Dict[str, float] = None
     
-    # Optimization metrics
+    # Optimization and efficiency metrics
     cache_savings: float = 0.0
     optimization_savings: float = 0.0
+    efficiency_score: float = 0.0
 ```
 
-### Cost Optimization Manager
+### Data Processing Cost Optimization Manager
 
-The cost optimization manager provides intelligent cost tracking, budget management, and optimization recommendations. It monitors spending patterns and suggests cost-saving strategies.
+The cost optimization manager provides intelligent cost tracking, budget management, and optimization recommendations for data processing systems.
 
 ```python
-class CostOptimizationManager:
-    """Intelligent cost optimization for LangChain applications"""
+class DataProcessingCostOptimizer:
+    """Intelligent cost optimization for data processing applications"""
     
     def __init__(self, cost_config: Dict[str, Any]):
         self.cost_config = cost_config
@@ -1459,74 +1230,86 @@ class CostOptimizationManager:
         self.optimization_rules = []
         self.cost_alerts = []
         
-        # Initialize cost rates
-        self.token_costs = cost_config.get("token_costs", {
-            "gpt-4": {"prompt": 0.03, "completion": 0.06},
-            "gpt-3.5-turbo": {"prompt": 0.0015, "completion": 0.002},
-            "claude-3-sonnet": {"prompt": 0.015, "completion": 0.015}
+        # Initialize cost rates for data processing services
+        self.compute_costs = cost_config.get("compute_costs", {
+            "data_warehouse": {"cpu_hour": 0.50, "memory_gb_hour": 0.10},
+            "stream_processing": {"cpu_hour": 0.30, "memory_gb_hour": 0.08},
+            "batch_processing": {"cpu_hour": 0.25, "memory_gb_hour": 0.06}
         })
         
-        self.daily_budget = cost_config.get("daily_budget", 100.0)
-        self.monthly_budget = cost_config.get("monthly_budget", 3000.0)
-```
-    
-### LLM Cost Tracking and Budget Management
-
-LLM cost tracking provides real-time cost calculation and budget monitoring. Cost accumulation by model enables detailed analysis and optimization opportunities.
-
-```python
-    def track_llm_cost(self, model: str, prompt_tokens: int, completion_tokens: int,
-                      provider: str = "openai") -> float:
-        """Track cost for LLM usage"""
+        self.data_costs = cost_config.get("data_costs", {
+            "storage_gb_month": 0.023,
+            "data_transfer_gb": 0.09,
+            "query_per_gb": 0.005
+        })
         
-        if model not in self.token_costs:
-            model = "gpt-3.5-turbo"  # Default fallback
-        
-        rates = self.token_costs[model]
-        prompt_cost = (prompt_tokens / 1000) * rates["prompt"]
-        completion_cost = (completion_tokens / 1000) * rates["completion"]
-        total_cost = prompt_cost + completion_cost
+        self.daily_budget = cost_config.get("daily_budget", 500.0)
+        self.monthly_budget = cost_config.get("monthly_budget", 15000.0)
 ```
 
-Daily cost tracking organizes expenses by date for budget management and trend analysis. Model-specific cost breakdown enables optimization decisions and provider comparisons.
+Cost optimization manager initialization with data processing specific cost structures. Compute, storage, and data transfer rates enable accurate cost tracking and budgeting.
+
+### Data Processing Cost Tracking and Budget Management
+
+Data processing cost tracking provides real-time cost calculation and budget monitoring with detailed service-level cost breakdown.
 
 ```python
-        # Track in daily/monthly buckets
+    def track_data_processing_cost(self, service_type: str, compute_hours: float, 
+                                 memory_gb_hours: float, data_processed_gb: float,
+                                 queries_executed: int = 0) -> float:
+        """Track comprehensive data processing costs"""
+        
+        if service_type not in self.compute_costs:
+            service_type = "batch_processing"  # Default fallback
+        
+        rates = self.compute_costs[service_type]
+        compute_cost = compute_hours * rates["cpu_hour"]
+        memory_cost = memory_gb_hours * rates["memory_gb_hour"]
+        query_cost = queries_executed * self.data_costs["query_per_gb"] * data_processed_gb
+        total_cost = compute_cost + memory_cost + query_cost
+```
+
+Comprehensive cost calculation includes compute, memory, and query processing costs. Service-specific rates enable accurate cost attribution and optimization targeting.
+
+```python        
+        # Track costs in daily/monthly buckets
         today = datetime.now().date()
         if today not in self.cost_tracking:
-            self.cost_tracking[today] = CostMetrics(
+            self.cost_tracking[today] = DataProcessingCostMetrics(
                 period_start=datetime.combine(today, datetime.min.time()),
-                cost_by_model={}
+                cost_by_service={}
             )
         
         daily_metrics = self.cost_tracking[today]
-        daily_metrics.total_prompt_tokens += prompt_tokens
-        daily_metrics.total_completion_tokens += completion_tokens
-        daily_metrics.total_token_cost += total_cost
-        daily_metrics.total_api_calls += 1
+        daily_metrics.total_compute_hours += compute_hours
+        daily_metrics.total_compute_cost += compute_cost + memory_cost
+        daily_metrics.total_queries_executed += queries_executed
+        daily_metrics.total_query_cost += query_cost
         
-        # Track by model
-        if model not in daily_metrics.cost_by_model:
-            daily_metrics.cost_by_model[model] = 0.0
-        daily_metrics.cost_by_model[model] += total_cost
+        # Track by service type
+        if service_type not in daily_metrics.cost_by_service:
+            daily_metrics.cost_by_service[service_type] = 0.0
+        daily_metrics.cost_by_service[service_type] += total_cost
         
-        # Check budget alerts
+        # Check budget alerts for data processing costs
         self._check_budget_alerts(daily_metrics, total_cost)
         
         return total_cost
 ```
-    
-### Budget Alert System
 
-Budget alert checking monitors daily and monthly spending against configured thresholds. Proactive alerts enable cost control and prevent budget overruns.
+Daily cost tracking organizes expenses by date and service for budget management and trend analysis. Service-specific cost breakdown enables optimization decisions.
+
+### Budget Alert System for Data Processing
+
+Budget alert checking monitors daily and monthly spending against configured thresholds with data processing context.
 
 ```python
-    def _check_budget_alerts(self, daily_metrics: CostMetrics, new_cost: float):
-        """Check if budget thresholds are exceeded"""
+    def _check_budget_alerts(self, daily_metrics: DataProcessingCostMetrics, new_cost: float):
+        """Check if data processing budget thresholds are exceeded"""
         
-        daily_total = daily_metrics.total_token_cost
+        daily_total = daily_metrics.total_compute_cost + daily_metrics.total_query_cost
         
-        # Daily budget alerts
+        # Daily budget alerts for data processing
         if daily_total > self.daily_budget * 0.8:  # 80% threshold
             self._create_budget_alert("DAILY_BUDGET_WARNING", daily_total, self.daily_budget)
         
@@ -1534,13 +1317,13 @@ Budget alert checking monitors daily and monthly spending against configured thr
             self._create_budget_alert("DAILY_BUDGET_EXCEEDED", daily_total, self.daily_budget)
 ```
 
-Monthly budget tracking aggregates costs across the current month and compares against monthly limits. Early warning thresholds enable proactive budget management.
+Daily budget monitoring with early warning thresholds enables proactive cost management. Separate tracking for compute and query costs provides detailed cost visibility.
 
 ```python
-        # Monthly budget calculation
+        # Monthly budget calculation for data processing
         month_start = datetime.now().replace(day=1).date()
         monthly_total = sum(
-            metrics.total_token_cost 
+            (metrics.total_compute_cost + metrics.total_query_cost)
             for date, metrics in self.cost_tracking.items()
             if date >= month_start
         )
@@ -1548,77 +1331,82 @@ Monthly budget tracking aggregates costs across the current month and compares a
         if monthly_total > self.monthly_budget * 0.8:
             self._create_budget_alert("MONTHLY_BUDGET_WARNING", monthly_total, self.monthly_budget)
 ```
-    
-### Intelligent Model Selection
 
-Model selection optimization chooses the most cost-effective model that meets quality requirements. Multi-criteria optimization balances cost, speed, and quality factors.
+Monthly budget tracking aggregates costs across the current month and compares against monthly limits for comprehensive budget management.
+
+### Intelligent Service Selection for Cost Optimization
+
+Service selection optimization chooses the most cost-effective data processing approach that meets performance and quality requirements.
 
 ```python
-    def optimize_model_selection(self, task_complexity: str, required_quality: float) -> str:
-        """Suggest optimal model based on task requirements and cost"""
+    def optimize_service_selection(self, workload_type: str, data_size_gb: float, 
+                                 required_latency_seconds: float) -> str:
+        """Suggest optimal data processing service based on workload requirements and cost"""
         
-        model_capabilities = {
-            "gpt-4": {"quality": 0.95, "cost_per_1k": 0.045, "speed": 0.7},
-            "gpt-3.5-turbo": {"quality": 0.85, "cost_per_1k": 0.002, "speed": 0.9},
-            "claude-3-sonnet": {"quality": 0.90, "cost_per_1k": 0.015, "speed": 0.8}
+        service_capabilities = {
+            "data_warehouse": {"latency": 2.0, "cost_per_gb": 0.015, "max_throughput_gb_hour": 1000},
+            "stream_processing": {"latency": 0.1, "cost_per_gb": 0.025, "max_throughput_gb_hour": 500},
+            "batch_processing": {"latency": 30.0, "cost_per_gb": 0.008, "max_throughput_gb_hour": 2000}
         }
         
-        # Filter models that meet quality requirements
-        suitable_models = {
-            model: specs for model, specs in model_capabilities.items()
-            if specs["quality"] >= required_quality
+        # Filter services that meet latency requirements
+        suitable_services = {
+            service: specs for service, specs in service_capabilities.items()
+            if specs["latency"] <= required_latency_seconds
         }
         
-        if not suitable_models:
-            return "gpt-4"  # Fallback to highest quality
+        if not suitable_services:
+            return "data_warehouse"  # Fallback to most capable service
 ```
 
-Task complexity weighting adjusts optimization priorities based on task requirements. Simple tasks prioritize cost savings while complex tasks emphasize quality and capability.
+Service selection considers latency requirements, cost efficiency, and throughput capabilities. Requirement filtering ensures only suitable services are considered for optimization.
 
 ```python
-        # Simple task complexity scoring
-        complexity_weights = {
-            "simple": {"cost": 0.7, "speed": 0.3, "quality": 0.0},
-            "medium": {"cost": 0.5, "speed": 0.2, "quality": 0.3},
-            "complex": {"cost": 0.2, "speed": 0.1, "quality": 0.7}
+        # Workload-based scoring for data processing optimization
+        workload_weights = {
+            "analytics": {"cost": 0.6, "latency": 0.2, "throughput": 0.2},
+            "real_time": {"cost": 0.2, "latency": 0.7, "throughput": 0.1},
+            "batch": {"cost": 0.8, "latency": 0.1, "throughput": 0.1}
         }
         
-        weights = complexity_weights.get(task_complexity, complexity_weights["medium"])
+        weights = workload_weights.get(workload_type, workload_weights["analytics"])
 ```
 
-Weighted scoring combines normalized metrics to find the optimal model. Cost normalization ensures fair comparison while quality and speed factors influence final selection.
+Workload-specific weighting adapts optimization priorities. Analytics workloads prioritize cost while real-time workloads emphasize latency performance.
 
 ```python
-        # Calculate weighted scores
-        best_model = None
+        # Calculate weighted scores for cost optimization
+        best_service = None
         best_score = -1
         
-        for model, specs in suitable_models.items():
-            # Normalize metrics (lower cost is better, higher speed/quality is better)
-            cost_score = 1 - (specs["cost_per_1k"] / max(s["cost_per_1k"] for s in suitable_models.values()))
-            speed_score = specs["speed"]
-            quality_score = specs["quality"]
+        for service, specs in suitable_services.items():
+            # Normalize metrics for fair comparison
+            cost_score = 1 - (specs["cost_per_gb"] / max(s["cost_per_gb"] for s in suitable_services.values()))
+            latency_score = 1 - (specs["latency"] / max(s["latency"] for s in suitable_services.values()))
+            throughput_score = specs["max_throughput_gb_hour"] / max(s["max_throughput_gb_hour"] for s in suitable_services.values())
             
             total_score = (
                 cost_score * weights["cost"] +
-                speed_score * weights["speed"] +
-                quality_score * weights["quality"]
+                latency_score * weights["latency"] +
+                throughput_score * weights["throughput"]
             )
             
             if total_score > best_score:
                 best_score = total_score
-                best_model = model
+                best_service = service
         
-        return best_model or "gpt-3.5-turbo"
+        return best_service or "batch_processing"
 ```
-    
-### Cost Optimization Recommendations
 
-Recommendation generation analyzes cost patterns and suggests specific optimization strategies. Prioritized recommendations enable focused cost reduction efforts with quantified savings potential.
+Weighted scoring combines normalized cost, latency, and throughput metrics for optimal service selection. Score-based ranking ensures consistent optimization decisions.
+
+### Cost Optimization Recommendations for Data Processing
+
+Recommendation generation analyzes cost patterns and suggests specific optimization strategies for data processing systems.
 
 ```python
     def get_cost_optimization_recommendations(self) -> List[Dict[str, Any]]:
-        """Generate cost optimization recommendations"""
+        """Generate cost optimization recommendations for data processing systems"""
         
         recommendations = []
         
@@ -1626,186 +1414,90 @@ Recommendation generation analyzes cost patterns and suggests specific optimizat
         recent_costs = self._get_recent_cost_analysis()
 ```
 
-Model optimization recommendations identify opportunities to use more cost-effective models. High GPT-4 usage triggers suggestions for task complexity analysis and model selection optimization.
+Recommendation system analyzes historical cost patterns to identify optimization opportunities specific to data processing workloads.
 
 ```python
-        # High-cost model recommendations
-        if recent_costs.get("gpt-4_percentage", 0) > 60:
+        # High-cost service recommendations for data processing
+        if recent_costs.get("data_warehouse_percentage", 0) > 70:
             recommendations.append({
-                "type": "model_optimization",
+                "type": "service_optimization",
                 "priority": "high",
-                "title": "Reduce GPT-4 Usage",
-                "description": "Consider using GPT-3.5-turbo for simpler tasks",
-                "potential_savings": recent_costs.get("gpt-4_cost", 0) * 0.3,
-                "implementation": "Implement task complexity analysis"
+                "title": "Optimize Data Warehouse Usage",
+                "description": "Consider batch processing for non-time-sensitive analytics workloads",
+                "potential_savings": recent_costs.get("data_warehouse_cost", 0) * 0.4,
+                "implementation": "Implement workload classification and service routing"
             })
 ```
 
-Prompt optimization recommendations address excessive token usage through length reduction and compression strategies. Token efficiency improvements directly impact operational costs.
+Service optimization recommendations identify opportunities to use more cost-effective processing approaches. High warehouse usage triggers suggestions for batch processing alternatives.
 
 ```python
-        # Token optimization recommendations
-        avg_tokens = recent_costs.get("avg_tokens_per_request", 0)
-        if avg_tokens > 2000:
+        # Data transfer optimization recommendations
+        data_transfer_cost = recent_costs.get("data_transfer_cost", 0)
+        if data_transfer_cost > recent_costs.get("daily_cost", 0) * 0.3:
             recommendations.append({
-                "type": "prompt_optimization",
-                "priority": "medium", 
-                "title": "Optimize Prompt Length",
-                "description": "Reduce average prompt length to decrease token costs",
-                "potential_savings": recent_costs.get("daily_cost", 0) * 0.15,
-                "implementation": "Implement prompt compression and caching"
+                "type": "data_transfer_optimization",
+                "priority": "medium",
+                "title": "Reduce Data Transfer Costs",
+                "description": "Implement data locality strategies and result caching",
+                "potential_savings": data_transfer_cost * 0.25,
+                "implementation": "Add regional data caching and optimize query result sizes"
             })
 ```
 
-Caching optimization recommendations focus on reducing redundant API calls through improved caching strategies. Higher cache hit rates directly translate to cost savings and performance improvements.
+Data transfer optimization addresses network costs through locality strategies and caching. High transfer costs trigger recommendations for regional optimization.
 
 ```python
-        # Caching recommendations
-        cache_hit_rate = recent_costs.get("cache_hit_rate", 0)
-        if cache_hit_rate < 30:
+        # Query optimization recommendations for cost efficiency
+        avg_query_cost = recent_costs.get("avg_query_cost", 0)
+        if avg_query_cost > 0.5:  # High per-query cost
             recommendations.append({
-                "type": "caching_optimization",
+                "type": "query_optimization",
                 "priority": "high",
-                "title": "Improve Caching Strategy", 
-                "description": "Implement better caching to reduce redundant API calls",
-                "potential_savings": recent_costs.get("daily_cost", 0) * 0.25,
-                "implementation": "Add semantic caching and increase cache TTL"
+                "title": "Optimize Query Efficiency",
+                "description": "Implement query result caching and optimize data scanning",
+                "potential_savings": recent_costs.get("query_cost", 0) * 0.3,
+                "implementation": "Add intelligent caching and query optimization engine"
             })
         
         return recommendations
 ```
-    
-### Recent Cost Analysis
 
-Cost pattern analysis aggregates recent spending data to identify trends and optimization opportunities. Seven-day rolling analysis provides balanced insights for recommendation generation.
-
-```python
-    def _get_recent_cost_analysis(self) -> Dict[str, Any]:
-        """Analyze recent cost patterns"""
-        
-        # Get last 7 days of data
-        end_date = datetime.now().date()
-        start_date = end_date - timedelta(days=7)
-        
-        total_cost = 0
-        total_tokens = 0
-        total_calls = 0
-        model_costs = {}
-```
-
-Recent cost analysis preparation establishes seven-day analysis window. Cost aggregation variables track total expenses, token usage, API calls, and model-specific spending patterns.
-
-```python        
-        for date in [start_date + timedelta(days=x) for x in range(8)]:
-            if date in self.cost_tracking:
-                metrics = self.cost_tracking[date]
-                total_cost += metrics.total_token_cost
-                total_tokens += metrics.total_prompt_tokens + metrics.total_completion_tokens
-                total_calls += metrics.total_api_calls
-                
-                for model, cost in (metrics.cost_by_model or {}).items():
-                    model_costs[model] = model_costs.get(model, 0) + cost
-```
-
-Cost aggregation loops through tracked dates and accumulates metrics. Total cost, token usage, and model-specific expenses enable comprehensive pattern analysis for optimization recommendations.
-
-```python        
-        return {
-            "daily_cost": total_cost / 7,
-            "avg_tokens_per_request": total_tokens / total_calls if total_calls > 0 else 0,
-            "gpt-4_cost": model_costs.get("gpt-4", 0),
-            "gpt-4_percentage": (model_costs.get("gpt-4", 0) / total_cost * 100) if total_cost > 0 else 0,
-            "cache_hit_rate": 25  # Would get from actual metrics
-        }
-```
-    
-### Cost Dashboard Data Generation
-
-Cost dashboard generation provides comprehensive cost visibility including current spending, budget utilization, usage breakdowns, and optimization metrics. Monthly projection calculations enable proactive budget management.
-
-```python
-    def get_cost_dashboard_data(self) -> Dict[str, Any]:
-        """Generate cost dashboard data"""
-        
-        today = datetime.now().date()
-        month_start = today.replace(day=1)
-        
-        # Daily costs
-        daily_metrics = self.cost_tracking.get(today, CostMetrics())
-        
-        # Monthly costs
-        monthly_cost = sum(
-            metrics.total_token_cost 
-            for date, metrics in self.cost_tracking.items()
-            if date >= month_start
-        )
-        
-        # Cost projections
-        days_in_month = (today.replace(month=today.month + 1) - month_start).days
-        days_elapsed = (today - month_start).days + 1
-        projected_monthly = (monthly_cost / days_elapsed) * days_in_month if days_elapsed > 0 else 0
-```
-
-Dashboard data structure organizes cost information into logical categories for presentation. Budget utilization percentages enable quick assessment of spending patterns and budget health.
-
-```python
-        return {
-            "current_costs": {
-                "daily": daily_metrics.total_token_cost,
-                "monthly": monthly_cost,
-                "projected_monthly": projected_monthly
-            },
-            "budget_status": {
-                "daily_budget": self.daily_budget,
-                "monthly_budget": self.monthly_budget,
-                "daily_utilization": (daily_metrics.total_token_cost / self.daily_budget * 100),
-                "monthly_utilization": (monthly_cost / self.monthly_budget * 100)
-            },
-            "usage_breakdown": {
-                "total_tokens": daily_metrics.total_prompt_tokens + daily_metrics.total_completion_tokens,
-                "api_calls": daily_metrics.total_api_calls,
-                "cost_by_model": daily_metrics.cost_by_model or {}
-            },
-            "optimization_metrics": {
-                "cache_savings": daily_metrics.cache_savings,
-                "total_savings": daily_metrics.optimization_savings
-            }
-        }
-```
+Query optimization recommendations focus on reducing per-query costs through caching and scanning optimization. High query costs trigger efficiency improvement suggestions.
 
 ---
 
 ## 📝 Multiple Choice Test - Module D
 
-Test your understanding of performance monitoring and optimization:
+Test your understanding of performance monitoring and optimization for data engineering systems:
 
-**Question 1:** What categories of metrics are tracked in the `PerformanceMetrics` dataclass?  
+**Question 1:** What categories of metrics are tracked in the `DataProcessingMetrics` dataclass?  
 A) Only response times  
-B) Response time, resource usage, LLM-specific, tool usage, error, quality, and operational metrics  
+B) Response time, data throughput, resource usage, data-specific processing, data quality, error, and business impact metrics  
 C) Just error rates and memory usage  
-D) Only API latency measurements  
+D) Only query latency measurements  
 
-**Question 2:** What does the benchmark suite initialization include?  
+**Question 2:** What does the benchmark suite initialization include for data processing?  
 A) Only basic configuration  
-B) Agent factory, configuration, performance history, logger, and memory tracing  
+B) Data agent factory, configuration, performance history, logger, and memory tracing  
 C) Just test scenarios  
 D) Only result storage  
 
-**Question 3:** How are benchmark results organized for analysis?  
+**Question 3:** How are benchmark results organized for analysis in data processing systems?  
 A) Single flat structure  
-B) By scenario with unique benchmark IDs, timestamps, and recommendations  
+B) By scenario with unique benchmark IDs, timestamps, and optimization recommendations  
 C) Only by execution time  
 D) Just error logs  
 
-**Question 4:** What metrics are particularly important for cost optimization?  
+**Question 4:** What metrics are particularly important for data processing cost optimization?  
 A) Only response times  
-B) Token processing rates, API latency, and resource consumption  
+B) Data transfer rates, query processing costs, and resource consumption  
 C) Just error rates  
 D) Only cache hit rates  
 
-**Question 5:** What is the purpose of tracking percentile metrics (p50, p90) rather than just averages?  
+**Question 5:** What is the purpose of tracking percentile metrics (p50, p90) rather than just averages in data processing?  
 A) Reduce storage requirements  
-B) Understand user experience under different load conditions and identify outliers  
+B) Understand data processing performance under different analytical workloads and identify query outliers  
 C) Simplify calculations  
 D) Improve execution speed  
 
@@ -1815,12 +1507,12 @@ D) Improve execution speed
 
 ## Module Summary
 
-You've now mastered performance optimization and monitoring for production LangChain systems:
+You've now mastered performance optimization and monitoring for production data processing systems:
 
-✅ **Performance Benchmarking & Optimization**: Implemented comprehensive performance measurement and optimization strategies  
-✅ **Advanced Monitoring & Observability**: Set up Prometheus metrics, structured logging, and distributed tracing  
-✅ **Cost Optimization & Resource Management**: Created intelligent cost tracking and optimization systems  
-✅ **Real-time Dashboards**: Built monitoring dashboards with alerting and performance analytics
+✅ **Performance Benchmarking & Optimization**: Implemented comprehensive performance measurement and optimization strategies for data processing  
+✅ **Advanced Monitoring & Observability**: Set up Prometheus metrics, structured logging, and distributed tracing for data systems  
+✅ **Cost Optimization & Resource Management**: Created intelligent cost tracking and optimization systems for data processing workloads  
+✅ **Real-time Dashboards**: Built monitoring dashboards with alerting and performance analytics tailored for data engineering
 
 ### Next Steps
 - **Return to Core**: [Session 2 Main](Session2_LangChain_Foundations.md)
@@ -1830,6 +1522,6 @@ You've now mastered performance optimization and monitoring for production LangC
 ---
 
 **🗂️ Source Files for Module D:**
-- `src/session2/performance_benchmarking.py` - Performance measurement and optimization
-- `src/session2/monitoring_observability.py` - Comprehensive monitoring systems
-- `src/session2/cost_optimization.py` - Cost tracking and optimization strategies
+- `src/session2/performance_benchmarking.py` - Performance measurement and optimization for data processing
+- `src/session2/monitoring_observability.py` - Comprehensive monitoring systems for data processing
+- `src/session2/cost_optimization.py` - Cost tracking and optimization strategies for data systems

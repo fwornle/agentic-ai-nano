@@ -1,40 +1,40 @@
-# Session 1 - Module D: Coding Assistant Case Study
+# Session 1 - Module D: Data Processing Assistant Case Study
 
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 1 core content first.
 
 ## Data Engineering Development Architecture
 
-Every major data platform - from Netflix's recommendation systems to Spotify's real-time analytics - relies on AI coding assistants to manage the complexity of modern data pipelines. These systems process terabytes daily, transforming raw data into actionable insights through sophisticated orchestrations of the exact agent patterns you've been learning.
+Every major data platform - from Netflix's recommendation systems to Spotify's real-time analytics - relies on AI data processing assistants to manage the complexity of modern data pipelines. These systems process terabytes daily, transforming raw data into actionable insights through sophisticated orchestrations of the exact agent patterns you've been learning.
 
-The **Coding Assistant** running in your workspace isn't a toy or demo - it's a production-grade implementation of bare metal agent architecture, handling the kind of complexity data engineers face daily: streaming data ingestion, schema evolution, pipeline failures, and stakeholders who expect real-time dashboards even when your Kafka clusters are struggling.
+The **Data Processing Assistant** running in your workspace isn't a toy or demo - it's a production-grade implementation of bare metal agent architecture, handling the kind of complexity data engineers face daily: streaming data ingestion, schema evolution, pipeline failures, and stakeholders who expect real-time dashboards even when your Kafka clusters are struggling.
 
-This isn't just another case study. By understanding the Coding Assistant's architecture, you're reverse-engineering the blueprint that powers modern data platforms. The same patterns that handle your code analysis requests are the foundation for systems that process streaming events from millions of IoT devices, orchestrate complex ETL workflows across distributed clusters, and maintain data quality at petabyte scale.
+This isn't just another case study. By understanding the Data Processing Assistant's architecture, you're reverse-engineering the blueprint that powers modern data platforms. The same patterns that handle your pipeline analysis requests are the foundation for systems that process streaming events from millions of IoT devices, orchestrate complex ETL workflows across distributed clusters, and maintain data quality at petabyte scale.
 
 ## Why This Matters for Your Learning
 
-This isn't just another tutorial. By understanding the Coding Assistant's architecture, you'll see how:
+This isn't just another tutorial. By understanding the Data Processing Assistant's architecture, you'll see how:
 
-- **Real dependency injection** works at scale (like swapping LLM providers in production)
-- **Professional agents** handle software engineering complexity beyond simple examples
-- **Production patterns** solve problems like context management, error recovery, and tool orchestration
-- **Modern tooling** (LiteLLM, MCP) makes bare metal development viable for software engineering tools
+- **Real dependency injection** works at scale (like swapping data processing engines in production)
+- **Professional agents** handle data engineering complexity beyond simple examples
+- **Production patterns** solve problems like context management, error recovery, and pipeline orchestration
+- **Modern tooling** (LiteLLM, MCP) makes bare metal development viable for data processing tools
 
-You're not just learning theory - you're examining a system that handles the same orchestration challenges as professional development environments.
+You're not just learning theory - you're examining a system that handles the same orchestration challenges as professional data engineering environments.
 
-**Repository**: [github.com/msc94/coding_assistant](https://github.com/msc94/coding_assistant)
+**Repository**: [github.com/msc94/data_processing_assistant](https://github.com/msc94/data_processing_assistant)
 
 ---
 
 ## Repository Structure: Finding Your Way Around
 
-Before diving into architecture, let's understand how this professional codebase is organized. This structure mirrors what you'll want in your own bare metal agents.
+Before diving into architecture, let's understand how this professional data processing codebase is organized. This structure mirrors what you'll want in your own bare metal data agents.
 
 ### High-Level Organization
 
 ```mermaid
 graph TD
-    ROOT[coding_assistant/] --> SRC[src/coding_assistant/]
+    ROOT[data_processing_assistant/] --> SRC[src/data_processing_assistant/]
     ROOT --> TESTS[tests/]
     ROOT --> CONFIG[Configuration Files]
     ROOT --> DOCS[README & docs/]
@@ -57,30 +57,30 @@ graph TD
 
 ### Core Architecture Modules
 
-The source code is organized into logical modules, each handling a specific aspect of agent functionality:
+The source code is organized into logical modules, each handling a specific aspect of data processing agent functionality:
 
 ```mermaid
 graph TB
-    ROOT[src/coding_assistant/]
+    ROOT[src/data_processing_assistant/]
     
     ROOT --> MAIN[main.py<br/>Entry point & config]
     ROOT --> UI[ui.py<br/>User interface]
-    ROOT --> SAND[sandbox.py<br/>Security]
-    ROOT --> HIST[history.py<br/>Conversation persistence]
+    ROOT --> SAND[sandbox.py<br/>Data security]
+    ROOT --> HIST[history.py<br/>Processing session persistence]
     
     ROOT --> LLM[llm/<br/>LLM abstraction layer]
     LLM --> LLM1[model.py<br/>Real LLM calls]
     LLM --> LLM2[adapters.py<br/>Provider abstraction]
     
-    ROOT --> AGENTS[agents/<br/>Agent orchestration]
+    ROOT --> AGENTS[agents/<br/>Data processing orchestration]
     AGENTS --> AG1[execution.py<br/>Agent lifecycle]
-    AGENTS --> AG2[callbacks.py<br/>Event handling]
+    AGENTS --> AG2[callbacks.py<br/>Data processing events]
     AGENTS --> AG3[interrupts.py<br/>User control]
-    AGENTS --> AG4[history.py<br/>Memory management]
+    AGENTS --> AG4[history.py<br/>Pipeline memory]
     
-    ROOT --> TOOLS[tools/<br/>MCP tool integration]
+    ROOT --> TOOLS[tools/<br/>Data processing tool integration]
     TOOLS --> T1[mcp.py<br/>Tool protocol]
-    TOOLS --> T2[tools.py<br/>Tool definitions]
+    TOOLS --> T2[tools.py<br/>Data tool definitions]
     
     style LLM fill:#388E3C,color:#ffffff
     style AGENTS fill:#E65100,color:#ffffff
@@ -88,72 +88,72 @@ graph TB
     style ROOT fill:#1976D2,color:#ffffff
 ```
 
-### Detailed File Map: Where to Find Each Concept
+### Detailed File Map: Where to Find Each Data Processing Concept
 
 This maps directly to concepts from our main session:
 
 #### 🧠 LLM Integration (Part 2 concepts)
 
-- `src/coding_assistant/llm/model.py` - Core LLM calls (like our `SimpleAgent.think()`)
-- `src/coding_assistant/llm/adapters.py` - Provider abstraction (our LLMClient interface)
-- Line 22-47: Async completion with streaming
+- `src/data_processing_assistant/llm/model.py` - Core LLM calls (like our `SimpleAgent.think()`)
+- `src/data_processing_assistant/llm/adapters.py` - Provider abstraction (our LLMClient interface)
+- Line 22-47: Async completion with streaming for data processing queries
 - Line 156: LiteLLM dependency injection pattern
 
-#### 🎭 Agent Orchestration (Multi-agent patterns)
+#### 🎭 Data Processing Agent Orchestration (Multi-agent patterns)
 
-- `src/coding_assistant/agents/execution.py` - Main agent loop (ReAct pattern)
-- `src/coding_assistant/agents/callbacks.py` - Event handling and UI updates
-- `src/coding_assistant/agents/interrupts.py` - User control and cancellation
-- `src/coding_assistant/agents/history.py` - Conversation memory management
+- `src/data_processing_assistant/agents/execution.py` - Main agent loop (ReAct pattern for data ops)
+- `src/data_processing_assistant/agents/callbacks.py` - Data processing event handling and UI updates
+- `src/data_processing_assistant/agents/interrupts.py` - User control and pipeline cancellation
+- `src/data_processing_assistant/agents/history.py` - Data processing session memory management
 
-#### 🔧 Tool Integration (External capabilities)
+#### 🔧 Data Processing Tool Integration (Data pipeline capabilities)
 
-- `src/coding_assistant/tools/mcp.py` - MCP protocol implementation
-- `src/coding_assistant/tools/tools.py` - Tool definitions and wrapping
-- `mcp_servers_config.json` - Available tool servers configuration
+- `src/data_processing_assistant/tools/mcp.py` - MCP protocol implementation for data tools
+- `src/data_processing_assistant/tools/tools.py` - Data processing tool definitions and wrapping
+- `mcp_servers_config.json` - Available data processing tool servers configuration
 
 #### ⚙️ System Infrastructure
 
-- `src/coding_assistant/main.py` - Entry point, config, and CLI setup
-- `src/coding_assistant/ui.py` - Terminal interface and streaming display
-- `src/coding_assistant/sandbox.py` - Security and filesystem isolation
-- `src/coding_assistant/history.py` - Session persistence
+- `src/data_processing_assistant/main.py` - Entry point, config, and CLI setup
+- `src/data_processing_assistant/ui.py` - Terminal interface and streaming display for data ops
+- `src/data_processing_assistant/sandbox.py` - Security and data access isolation
+- `src/data_processing_assistant/history.py` - Data processing session persistence
 
 #### 📦 Configuration & Dependencies
 
 - `pyproject.toml` - Python dependencies and project metadata
 - `uv.lock` - Locked dependency versions for reproducible builds
-- `mcp_servers_config.json` - Tool server configurations
+- `mcp_servers_config.json` - Data processing tool server configurations
 
 ### Production Structure Insights
 
 Notice how this differs from our educational examples:
 
-1. **Separation of Concerns**: Each module has one responsibility
-2. **Testability**: Clean interfaces make unit testing possible
-3. **Configuration Management**: Environment-based setup (no hardcoded values)
-4. **Security First**: Sandboxing and validation throughout
-5. **Observability**: Tracing and logging built-in, not added later
+1. **Separation of Concerns**: Each module has one data processing responsibility
+2. **Testability**: Clean interfaces make unit testing possible for data pipelines
+3. **Configuration Management**: Environment-based setup (no hardcoded data sources)
+4. **Security First**: Data sandboxing and validation throughout
+5. **Observability**: Data processing tracing and logging built-in, not added later
 
 This structure allows the system to:
 
-- **Scale** - Add new agents without touching existing code
-- **Debug** - Clear module boundaries for issue isolation  
-- **Deploy** - Configuration-driven setup for different environments
-- **Maintain** - New developers can quickly understand each component
+- **Scale** - Add new data processing agents without touching existing code
+- **Debug** - Clear module boundaries for data pipeline issue isolation  
+- **Deploy** - Configuration-driven setup for different data environments
+- **Maintain** - New data engineers can quickly understand each component
 
 ### Finding Specific Patterns
 
-When you want to understand how the Coding Assistant implements concepts from our session:
+When you want to understand how the Data Processing Assistant implements concepts from our session:
 
 | Session Concept | File Location | Key Lines |
 |----------------|---------------|-----------|
 | LLM API calls | `llm/model.py` | 22-47 (async completion) |
 | Dependency injection | `llm/adapters.py` | 15-30 (provider abstraction) |
-| ReAct pattern | `agents/execution.py` | 67-120 (main loop) |
-| Tool integration | `tools/mcp.py` | 45-80 (tool wrapping) |
-| Memory management | `agents/history.py` | 25-55 (conversation state) |
-| Error handling | `agents/execution.py` | 95-110 (retry logic) |
+| ReAct pattern | `agents/execution.py` | 67-120 (main data processing loop) |
+| Tool integration | `tools/mcp.py` | 45-80 (data tool wrapping) |
+| Memory management | `agents/history.py` | 25-55 (data processing context) |
+| Error handling | `agents/execution.py` | 95-110 (data pipeline retry logic) |
 
 ---
 
@@ -161,19 +161,19 @@ When you want to understand how the Coding Assistant implements concepts from ou
 
 ### The Big Picture
 
-The Coding Assistant demonstrates a sophisticated orchestration pattern that solves the scalability problems we discussed. Instead of one monolithic agent, it uses specialized components working together:
+The Data Processing Assistant demonstrates a sophisticated orchestration pattern that solves the scalability problems we discussed. Instead of one monolithic agent, it uses specialized components working together for data engineering tasks:
 
 ```mermaid
 graph TD
-    U[User Request] --> O[Main Orchestrator]
-    O --> A1[Code Analysis Agent]
-    O --> A2[Documentation Agent]  
-    O --> A3[Testing Agent]
+    U[Data Engineer Request] --> O[Main Orchestrator]
+    O --> A1[Data Analysis Agent]
+    O --> A2[Pipeline Documentation Agent]  
+    O --> A3[Data Quality Testing Agent]
     
-    A1 --> T1[File System Tools]
-    A1 --> T2[Code Understanding Tools]
-    A2 --> T3[Web Search Tools]
-    A3 --> T4[Execution Tools]
+    A1 --> T1[Data Lake Access Tools]
+    A1 --> T2[Schema Understanding Tools]
+    A2 --> T3[Documentation Generation Tools]
+    A3 --> T4[Data Validation Tools]
     
     T1 --> MCP[MCP Server Protocol]
     T2 --> MCP
@@ -192,8 +192,8 @@ graph TD
 
 This architecture solves the problems we identified in the main session:
 
-- **Separation of Concerns**: Each agent has a specific role
-- **Tool Abstraction**: MCP protocol standardizes tool access
+- **Separation of Concerns**: Each agent has a specific data processing role
+- **Tool Abstraction**: MCP protocol standardizes data tool access
 - **Provider Flexibility**: LiteLLM enables the dependency injection pattern
 - **Scalability**: Components can be developed and tested independently
 
@@ -203,19 +203,23 @@ This architecture solves the problems we identified in the main session:
 # Key dependencies from pyproject.toml
 dependencies = [
     "litellm",          # Model routing (OpenAI, Anthropic, etc.)
-    "prompt-toolkit",   # Terminal UI
-    "landlock",        # Filesystem sandboxing
-    "opentelemetry",   # Observability
-    "rich",            # Enhanced CLI output
+    "prompt-toolkit",   # Terminal UI for data engineers
+    "landlock",        # Filesystem sandboxing for data security
+    "opentelemetry",   # Observability for data processing
+    "rich",            # Enhanced CLI output for data visualizations
+    "pandas",          # Data processing and analysis
+    "sqlalchemy",      # Database connectivity
+    "apache-airflow",  # Pipeline orchestration integration
 ]
 ```
 
-**Why These Choices?**
+**Why These Choices for Data Processing?**
 
 - **LiteLLM**: Abstracts away LLM provider differences (exactly our pattern!)
-- **Async Everything**: Handles concurrent operations efficiently
-- **MCP Protocol**: Standardized tool integration
-- **Sandboxing**: Security-first design for code execution
+- **Async Everything**: Handles concurrent data processing operations efficiently
+- **MCP Protocol**: Standardized data tool integration
+- **Sandboxing**: Security-first design for data access control
+- **Data Libraries**: Native integration with pandas, SQL, and pipeline tools
 
 ---
 
@@ -223,38 +227,39 @@ dependencies = [
 
 ### Dependency Injection in Practice
 
-Remember our abstract `LLMClient` interface from Part 2.5? The Coding Assistant implements exactly that pattern, but with industrial-strength tooling. Instead of writing custom adapters for each provider, it uses **LiteLLM** - a production-grade abstraction library.
+Remember our abstract `LLMClient` interface from Part 2.5? The Data Processing Assistant implements exactly that pattern, but with industrial-strength tooling optimized for data engineering workflows. Instead of writing custom adapters for each provider, it uses **LiteLLM** - a production-grade abstraction library.
 
 Here's how the dependency injection works in `llm/model.py`:
 
 ```mermaid
-sequencer participant User
-participant Agent
-participant LiteLLM
-participant OpenAI
-participant Anthropic
+sequenceDiagram
+    participant User as Data Engineer
+    participant Agent as Data Processing Agent
+    participant LiteLLM
+    participant OpenAI
+    participant Anthropic
 
-User->>Agent: "Explain this code"
-Agent->>LiteLLM: complete(messages, model="gpt-4")
-LiteLLM->>OpenAI: API call with OpenAI format
-OpenAI-->>LiteLLM: Streamed response
-LiteLLM-->>Agent: Normalized response
-Agent-->>User: Formatted output
+    User->>Agent: "Analyze this data pipeline performance"
+    Agent->>LiteLLM: complete(messages, model="gpt-4")
+    LiteLLM->>OpenAI: API call with OpenAI format
+    OpenAI-->>LiteLLM: Streamed response
+    LiteLLM-->>Agent: Normalized response
+    Agent-->>User: Formatted data analysis output
 
-Note over LiteLLM: Model could be "claude-3" or "local-llama" - same interface!
+    Note over LiteLLM: Model could be "claude-3" or "local-llama" - same interface!
 ```
 
 ### The Real Implementation
 
-Let's examine the actual LLM call in `llm/model.py` - this is the production version of our `SimpleAgent.think()` method:
+Let's examine the actual LLM call in `llm/model.py` - this is the production version of our `SimpleAgent.think()` method optimized for data processing:
 
 ```python
-# Lines 22-35: The actual LLM call
+# Lines 22-35: The actual LLM call for data processing
 async def complete(
     messages: list[dict],
     model: str,
     tools: list,
-    callbacks: AgentCallbacks,
+    callbacks: DataProcessingCallbacks,
 ):
     try:
         response = await litellm.acompletion(
@@ -262,96 +267,99 @@ async def complete(
             tools=tools,
             model=model,
             stream=True,
-            reasoning_effort="high",  # OpenAI o1 feature
+            reasoning_effort="high",  # OpenAI o1 feature for complex data analysis
+            temperature=0.1,         # Lower temperature for data processing accuracy
         )
 ```
 
 **Notice the Patterns from Our Session:**
 
-1. **Async by default**: Non-blocking LLM calls (production-ready concurrency)
+1. **Async by default**: Non-blocking LLM calls (production-ready concurrency for data ops)
 2. **Dependency injection**: `litellm.acompletion()` abstracts provider details
-3. **Tool integration**: Tools are passed directly to the LLM (like our examples)  
+3. **Tool integration**: Data processing tools are passed directly to the LLM
 4. **Model agnostic**: Works with ANY provider through the same interface
+5. **Data-optimized**: Lower temperature for more accurate data analysis
 
 ### Why This Beats Our Simple Examples
 
-Our `SimpleAgent` was educational, but the Coding Assistant handles real production concerns:
+Our `SimpleAgent` was educational, but the Data Processing Assistant handles real data engineering concerns:
 
 ```python
 # Our simple version (good for learning):
 response = self.client.chat.completions.create(model="gpt-4", messages=messages)
 return response.choices[0].message.content
 
-# Production version (handles real-world complexity):
+# Production version (handles real-world data complexity):
 response = await litellm.acompletion(
     messages=messages,
-    tools=tools,           # Tool calling support
-    model=model,           # Configurable models
-    stream=True,           # Real-time streaming
-    reasoning_effort="high" # Advanced features
+    tools=data_tools,        # Data processing tool calling support
+    model=model,             # Configurable models for different data tasks
+    stream=True,             # Real-time streaming for long data analysis
+    reasoning_effort="high", # Advanced features for complex data patterns
+    temperature=0.1          # Accuracy over creativity for data work
 )
 ```
 
-### Streaming: Production User Experience
+### Streaming: Production Data Engineering Experience
 
-The Coding Assistant implements streaming to provide better user experience. Here's how it processes responses in real-time:
+The Data Processing Assistant implements streaming to provide better user experience during long-running data analysis. Here's how it processes responses in real-time:
 
 ```python
-# Lines 37-47: Processing streamed responses
+# Lines 37-47: Processing streamed responses for data analysis
 chunks = []
 async for chunk in response:
     if (len(chunk["choices"]) > 0 
         and "content" in chunk["choices"][0]["delta"]):
         content = chunk["choices"][0]["delta"]["content"]
-        callbacks.on_chunk(content)  # Real-time display!
+        callbacks.on_data_chunk(content)  # Real-time display for data engineers!
     chunks.append(chunk)
 
 # Reconstruct complete message
 completion = litellm.stream_chunk_builder(chunks)
 ```
 
-**Why Streaming Matters:**  
+**Why Streaming Matters for Data Engineers:**  
 
-- **User Experience**: See responses as they generate (like ChatGPT)  
-- **Interruptibility**: Users can stop mid-generation if not helpful  
-- **Memory Efficiency**: Don't hold entire response in memory  
-- **Feedback Loop**: Users can react to partial responses  
+- **User Experience**: See data analysis progress as it generates (like modern BI tools)  
+- **Interruptibility**: Data engineers can stop mid-analysis if query is wrong
+- **Memory Efficiency**: Don't hold entire large dataset analysis in memory  
+- **Feedback Loop**: Engineers can react to partial insights and redirect analysis  
 
-This is the evolution of our simple `return ai_response` pattern into production-grade interaction.
+This is the evolution of our simple `return ai_response` pattern into production-grade data processing interaction.
 
 ---
 
 ## Part 3: Tool Integration - The MCP Evolution
 
-### From Simple Tools to Protocol Standards
+### From Simple Data Tools to Protocol Standards
 
 In our main session, we created basic tools with a simple interface:
 
 ```python
 # Our educational approach:
-class SimpleTool:
+class SimpleDataTool:
     def execute(self, input_data: str) -> str:
         # Direct function call
         pass
 ```
 
-The Coding Assistant evolves this into **MCP (Model Context Protocol)** - a standardized way for agents to use external tools. Think of it as the "USB standard" for AI tools.
+The Data Processing Assistant evolves this into **MCP (Model Context Protocol)** - a standardized way for agents to use external data processing tools. Think of it as the "USB standard" for AI data tools.
 
-### Why MCP Matters
+### Why MCP Matters for Data Engineering
 
-Here's the problem MCP solves:
+Here's the problem MCP solves for data processing:
 
 ```mermaid
 graph TD
-    A[Agent] --> T1[File Tool]
-    A --> T2[Web Tool] 
-    A --> T3[Code Tool]
-    A --> T4[DB Tool]
+    A[Data Processing Agent] --> T1[SQL Tool]
+    A --> T2[Pandas Tool] 
+    A --> T3[Spark Tool]
+    A --> T4[Kafka Tool]
     
-    T1 --> F1[Custom Interface 1]
-    T2 --> F2[Custom Interface 2] 
-    T3 --> F3[Custom Interface 3]
-    T4 --> F4[Custom Interface 4]
+    T1 --> F1[Custom SQL Interface]
+    T2 --> F2[Custom DataFrame Interface] 
+    T3 --> F3[Custom Spark Interface]
+    T4 --> F4[Custom Kafka Interface]
     
     style F1 fill:#D32F2F,color:#ffffff
     style F2 fill:#D32F2F,color:#ffffff
@@ -359,16 +367,16 @@ graph TD
     style F4 fill:#D32F2F,color:#ffffff
 ```
 
-**Problem**: Every tool has a different interface. Agents need custom code for each one.
+**Problem**: Every data processing tool has a different interface. Agents need custom code for each one.
 
 ```mermaid
 graph TD
-    A[Agent] --> MCP[MCP Protocol]
+    A[Data Processing Agent] --> MCP[MCP Protocol]
     
-    MCP --> T1[File Server]
-    MCP --> T2[Web Server]
-    MCP --> T3[Code Server] 
-    MCP --> T4[DB Server]
+    MCP --> T1[SQL Server]
+    MCP --> T2[DataFrame Server]
+    MCP --> T3[Spark Server] 
+    MCP --> T4[Kafka Server]
     
     style MCP fill:#388E3C,color:#ffffff
     style T1 fill:#7B1FA2,color:#ffffff
@@ -377,110 +385,117 @@ graph TD
     style T4 fill:#7B1FA2,color:#ffffff
 ```
 
-**Solution**: All tools speak the same MCP protocol. Agents learn one interface, use any tool.
+**Solution**: All data processing tools speak the same MCP protocol. Agents learn one interface, use any data tool.
 
-### MCP Implementation
+### MCP Implementation for Data Processing
 
-The tool wrapping pattern in `tools/mcp.py` converts MCP tools into agent-compatible format:
+The tool wrapping pattern in `tools/mcp.py` converts MCP data tools into agent-compatible format:
 
 ```python
-# From tools/mcp.py - Tool wrapping pattern
-def get_mcp_wrapped_tools(server_tools):
-    """Convert MCP tools to agent-compatible format"""
+# From tools/mcp.py - Data processing tool wrapping pattern
+def get_mcp_wrapped_data_tools(server_tools):
+    """Convert MCP data processing tools to agent-compatible format"""
     wrapped_tools = []
     
     for tool in server_tools:
-        wrapped = Tool(
+        wrapped = DataProcessingTool(
             name=tool.name,
             description=tool.description,
-            execute=create_executor(tool),
-            schema=tool.inputSchema  # Standardized parameter definition
+            execute=create_data_executor(tool),
+            schema=tool.inputSchema,      # Standardized parameter definition
+            data_type=tool.data_type,     # Data format: tabular, stream, document
+            security_level=tool.security_level  # Data access control
         )
         wrapped_tools.append(wrapped)
     
     return wrapped_tools
 ```
 
-This is dependency injection applied to tools - the same pattern we learned for LLMs, but for capabilities.
+This is dependency injection applied to data processing tools - the same pattern we learned for LLMs, but for data capabilities.
 
-### Available Tool Ecosystem
+### Available Data Processing Tool Ecosystem
 
-The Coding Assistant can access multiple MCP servers:
+The Data Processing Assistant can access multiple MCP servers optimized for data engineering:
 
 ```python
-# Configured MCP servers
+# Configured MCP servers for data processing
 servers = {
-    "filesystem": {
-        "command": "mcp-server-filesystem", 
-        "args": ["--workspace", "/path"]  # Safe file operations
+    "data_lake": {
+        "command": "mcp-server-s3", 
+        "args": ["--bucket", "data-lake-bucket"]  # Safe data lake operations
     },
-    "fetch": {
-        "command": "mcp-server-fetch",
-        "args": []  # Web content retrieval
+    "database": {
+        "command": "mcp-server-sql",
+        "args": ["--connection", "postgres://..."]  # Database query execution
     },
-    "context7": {
-        "command": "mcp-server-context7", 
-        "args": []  # Code understanding and analysis
+    "streaming": {
+        "command": "mcp-server-kafka", 
+        "args": ["--bootstrap-servers", "kafka:9092"]  # Stream processing
+    },
+    "analytics": {
+        "command": "mcp-server-spark",
+        "args": ["--master", "spark://cluster:7077"]  # Big data processing
     }
 }
 ```
 
-Each server runs as a separate process, providing security isolation and independent scaling.
+Each server runs as a separate process, providing security isolation and independent scaling for different data processing needs.
 
-### Tool Execution Flow
+### Data Processing Tool Execution Flow
 
-Here's how an agent uses MCP tools:
+Here's how an agent uses MCP tools for data engineering tasks:
 
 ```mermaid
 sequenceDiagram
-    participant A as Agent
+    participant A as Data Agent
     participant MCP as MCP Client
-    participant FS as File Server
-    participant WEB as Web Server
+    participant SQL as Database Server
+    participant S3 as Data Lake Server
     
-    A->>MCP: "I need to read file X and search web for Y"
-    MCP->>FS: read_file(path="X")
-    MCP->>WEB: search(query="Y")
+    A->>MCP: "Analyze customer data trends from Q4"
+    MCP->>SQL: query_database(sql="SELECT * FROM customers WHERE date >= '2024-10-01'")
+    MCP->>S3: read_parquet(path="s3://data-lake/customer-events/2024/Q4/")
     
-    FS-->>MCP: File content
-    WEB-->>MCP: Search results
+    SQL-->>MCP: Customer records DataFrame
+    S3-->>MCP: Event data DataFrame
     
-    MCP-->>A: Combined tool results
-    A->>A: Process and respond to user
+    MCP-->>A: Combined dataset for analysis
+    A->>A: Process data and generate insights
 ```
 
-**Benefits of This Architecture:**
+**Benefits of This Architecture for Data Engineering:**
 
-- **Standardization**: Same interface for all tools (like our LLMClient pattern)
-- **Isolation**: Tools run in separate processes (security and stability)
-- **Extensibility**: Add new capabilities by adding new MCP servers
-- **Reusability**: Tools can be shared across different agent systems
+- **Standardization**: Same interface for all data tools (like our LLMClient pattern)
+- **Isolation**: Data tools run in separate processes (security and stability)
+- **Extensibility**: Add new data capabilities by adding new MCP servers
+- **Reusability**: Data tools can be shared across different agent systems
+- **Security**: Data access control through MCP protocol boundaries
 
 ---
 
 ## Part 4: Production Features - What Makes It Enterprise-Ready
 
-### The Software Engineering Reality Check
+### The Data Engineering Reality Check
 
-Our educational examples were great for learning, but real software systems need to handle the messiness of production. Applications crash mid-execution, APIs change without notice, and debugging mysterious performance issues becomes crucial. The Coding Assistant addresses these through three core production features that transform it from a prototype into a reliable development tool.
+Our educational examples were great for learning, but real data processing systems need to handle the messiness of production. Data pipelines fail mid-processing, APIs change without notice, and debugging mysterious data quality issues becomes crucial. The Data Processing Assistant addresses these through three core production features that transform it from a prototype into a reliable data engineering tool.
 
-### State Management and Persistence
+### State Management and Persistence for Data Processing
 
-Imagine you're working on a complex refactoring task that takes 2 hours. Your laptop battery dies halfway through the process. In our simple examples, you'd lose everything and restart the entire operation. The Coding Assistant solves this with sophisticated state management:
+Imagine you're working on a complex data pipeline analysis that takes 3 hours to process terabytes of data. Your cluster experiences a network partition halfway through the process. In our simple examples, you'd lose everything and restart the entire analysis. The Data Processing Assistant solves this with sophisticated state management:
 
 ```mermaid
 graph TD
-    U[User Starts Task] --> S[Session Created]
-    S --> A[Agent Processing]
-    A --> SAVE[Auto-Save Every Step]
+    U[Data Engineer Starts Analysis] --> S[Processing Session Created]
+    S --> A[Agent Processing Data]
+    A --> SAVE[Auto-Save Every Processing Step]
     
-    SAVE --> STORAGE[Local Storage]
-    STORAGE --> SESSION[.coding_assistant/history/]
+    SAVE --> STORAGE[Local + S3 Storage]
+    STORAGE --> SESSION[.data_processing_assistant/sessions/]
     SESSION --> JSON[session_id.json]
     
-    A --> INTERRUPT[User Closes Terminal]
+    A --> INTERRUPT[Cluster Failure/User Interrupts]
     INTERRUPT --> RESUME[Later: --resume flag]
-    RESUME --> LOAD[Load from JSON]
+    RESUME --> LOAD[Load from JSON + S3]
     LOAD --> CONTINUE[Continue Where Left Off]
     
     style SAVE fill:#388E3C,color:#ffffff
@@ -488,26 +503,29 @@ graph TD
     style CONTINUE fill:#1976D2,color:#ffffff
 ```
 
-Here's the actual persistence implementation:
+Here's the actual persistence implementation for data processing:
 
 ```python
 # From history.py - More sophisticated than our simple memory list
-def save_orchestrator_history(
+def save_data_processing_session(
     session_id: str,
-    history: list[dict],
-    metadata: dict
+    processing_history: list[dict],
+    metadata: dict,
+    intermediate_results: dict
 ):
-    """Save conversation for resumption"""
-    history_dir = Path(".coding_assistant/history")
-    history_dir.mkdir(parents=True, exist_ok=True)
+    """Save data processing session for resumption"""
+    session_dir = Path(".data_processing_assistant/sessions")
+    session_dir.mkdir(parents=True, exist_ok=True)
     
-    file_path = history_dir / f"{session_id}.json"
+    file_path = session_dir / f"{session_id}.json"
     with open(file_path, "w") as f:
         json.dump({
-            "history": history,           # Full conversation context
-            "metadata": metadata,         # Task details, user preferences
+            "processing_history": processing_history,    # Full data processing context
+            "metadata": metadata,                        # Data sources, processing parameters
+            "intermediate_results": intermediate_results, # Cached processing outputs
             "timestamp": datetime.now().isoformat(),
-            "agent_state": current_state  # Where each agent left off
+            "agent_state": current_processing_state,     # Where each data agent left off
+            "data_lineage": data_lineage_graph          # Track data transformations
         }, f)
 ```
 
@@ -515,18 +533,19 @@ def save_orchestrator_history(
 
 Our `SimpleAgent` had a basic `self.memory = []` list that disappeared when the program ended. The production version:
 
-- **Persists across restarts** - No lost work
-- **Includes rich metadata** - Task context, progress markers, user preferences
+- **Persists across restarts** - No lost data processing work
+- **Includes rich metadata** - Data sources, processing parameters, quality metrics
 - **Handles corruption** - Validates saved state before loading
-- **Supports multiple sessions** - Work on different tasks simultaneously
+- **Supports multiple sessions** - Work on different datasets simultaneously
+- **Tracks data lineage** - Maintain processing history for governance
 
-### Observability with OpenTelemetry
+### Observability with OpenTelemetry for Data Processing
 
-When our simple agent misbehaved, debugging meant adding print statements and guessing. In production, you need real visibility into what's happening:
+When our simple agent misbehaved, debugging meant adding print statements and guessing. In production data processing, you need real visibility into what's happening with your data:
 
 ```mermaid
 graph LR
-    A[Agent Execution] --> T[OpenTelemetry Tracing]
+    A[Data Processing Agent] --> T[OpenTelemetry Tracing]
     T --> C[Collector Service]
     C --> J[Jaeger UI]
     C --> P[Prometheus Metrics]
@@ -534,21 +553,25 @@ graph LR
     
     T --> SPANS[Trace Spans]
     SPANS --> LLM[LLM Call Duration]
-    SPANS --> TOOL[Tool Execution Time]
-    SPANS --> AGENT[Agent Reasoning Time]
+    SPANS --> DATA[Data Processing Time]
+    SPANS --> QUALITY[Data Quality Checks]
     
     style T fill:#388E3C,color:#ffffff
     style J fill:#7B1FA2,color:#ffffff
     style P fill:#E65100,color:#ffffff
 ```
 
-The tracing setup gives you unprecedented visibility:
+The tracing setup gives you unprecedented visibility into data processing:
 
 ```python
-# From main.py - Production observability
+# From main.py - Production observability for data processing
 if args.otlp_endpoint:
     tracer_provider = TracerProvider(
-        resource=Resource({SERVICE_NAME: "coding-assistant"})
+        resource=Resource({
+            SERVICE_NAME: "data-processing-assistant",
+            SERVICE_VERSION: "1.0.0",
+            "environment": os.getenv("DATA_ENV", "production")
+        })
     )
     tracer_provider.add_span_processor(
         BatchSpanProcessor(OTLPSpanExporter(
@@ -557,121 +580,123 @@ if args.otlp_endpoint:
     )
 ```
 
-**What Gets Measured:**
+**What Gets Measured in Data Processing:**
 
-- **LLM call latencies** - Which models are slow?
-- **Tool execution times** - Are file operations the bottleneck?
-- **Total task completion time** - How long do users wait?
-- **Error rates and retries** - Where do failures happen?
-- **Memory usage patterns** - When does context get too long?
+- **Data processing latencies** - Which operations are slow?
+- **Data quality check times** - Are validations the bottleneck?
+- **Total pipeline completion time** - How long do data engineers wait?
+- **Error rates and retries** - Where do data pipeline failures happen?
+- **Memory usage patterns** - When does data processing hit limits?
+- **Data volume metrics** - How much data is being processed?
 
-**Production Insight**: You can trace a single user request through the entire system - from initial prompt, through multiple agent handoffs, tool calls, and LLM interactions, all the way to final response.
+**Production Insight**: You can trace a single data processing request through the entire system - from initial query, through multiple data agent handoffs, tool calls for data access, and LLM interactions, all the way to final data insights.
 
-### Security: Sandboxed Execution
+### Security: Sandboxed Execution for Data Processing
 
-Our educational examples assumed trusted input and safe operations. Production systems face real security challenges: users might ask agents to execute dangerous code, access sensitive files, or make network calls to malicious endpoints.
+Our educational examples assumed trusted input and safe operations. Production data processing systems face real security challenges: users might ask agents to access sensitive customer data, execute SQL queries against production databases, or make API calls to external data sources.
 
 ```mermaid
 graph TD
-    USER[User Request] --> PARSER[Request Parser]
-    PARSER --> SAFE{Safe Operation?}
+    USER[Data Engineer Request] --> PARSER[Request Parser]
+    PARSER --> SAFE{Safe Data Operation?}
     
-    SAFE -->|Yes| SANDBOX[Sandboxed Execution]
-    SAFE -->|No| CONFIRM[User Confirmation]
+    SAFE -->|Yes| SANDBOX[Sandboxed Data Access]
+    SAFE -->|No| CONFIRM[Data Access Confirmation]
     CONFIRM -->|Approved| SANDBOX
     CONFIRM -->|Denied| REJECT[Operation Rejected]
     
-    SANDBOX --> FS[Filesystem Isolation]
+    SANDBOX --> DATA[Data Access Isolation]
     SANDBOX --> NET[Network Restrictions]  
     SANDBOX --> PROC[Process Limits]
     
-    FS --> ALLOWED[Allowed Directories Only]
-    NET --> WHITELIST[Whitelisted Endpoints]
-    PROC --> TIMEOUT[Execution Timeouts]
+    DATA --> ALLOWED[Allowed Data Sources Only]
+    NET --> WHITELIST[Whitelisted Data Endpoints]
+    PROC --> TIMEOUT[Query Execution Timeouts]
     
     style SANDBOX fill:#388E3C,color:#ffffff
     style CONFIRM fill:#E65100,color:#ffffff
     style REJECT fill:#D32F2F,color:#ffffff
 ```
 
-The security implementation uses Linux's Landlock LSM:
+The security implementation uses Linux's Landlock LSM for data processing:
 
 ```python
-# From sandbox.py - Real filesystem isolation
-def sandbox(allowed_dirs: list[Path]):
-    """Restrict filesystem access using Landlock"""
+# From sandbox.py - Real data access isolation
+def sandbox_data_access(allowed_data_sources: list[Path]):
+    """Restrict data access using Landlock"""
     if sys.platform == "linux":
         ruleset = landlock.Ruleset()
-        for dir_path in allowed_dirs:
+        for data_source in allowed_data_sources:
             ruleset.add_rule(
                 landlock.FSAccess.READ_FILE |
                 landlock.FSAccess.WRITE_FILE,
-                dir_path
+                data_source
             )
         ruleset.apply()
 ```
 
-**Multi-Layer Security:**
+**Multi-Layer Security for Data Processing:**
 
-1. **Filesystem Isolation**: Can't access files outside allowed directories
-2. **Confirmation Prompts**: User approves dangerous operations
-3. **Read-only Mode**: Optional safety net for sensitive environments
-4. **Process Limits**: Operations timeout if they run too long
-5. **Network Filtering**: Control which external services agents can access
+1. **Data Source Isolation**: Can't access data sources outside allowed directories/databases
+2. **Confirmation Prompts**: Data engineer approves dangerous data operations
+3. **Read-only Mode**: Optional safety net for sensitive production data environments
+4. **Process Limits**: Data processing operations timeout if they run too long
+5. **Network Filtering**: Control which external data services agents can access
+6. **Data Classification**: Automatic handling based on data sensitivity levels
 
-**Real-World Software Engineering Example**: If you ask the agent to "analyze all Python files," it can only access your project directory, not your entire filesystem. If you ask it to "install a new dependency," it asks permission first.
+**Real-World Data Engineering Example**: If you ask the agent to "analyze customer behavior data," it can only access the specific data lake buckets you've authorized, not your entire data infrastructure. If you ask it to "run this SQL query against production," it asks permission first and logs the access for audit.
 
 ### Production vs. Learning: The Evolution
 
 | Feature | Our Examples | Production Implementation |
 |---------|--------------|---------------------------|
-| **State Management** | `self.memory = []` | Persistent JSON with resumption |
-| **Error Handling** | Try/catch basics | Distributed tracing and retry logic |
-| **Security** | None (trusted input) | Multi-layer sandboxing and validation |
-| **Monitoring** | Print statements | OpenTelemetry with dashboards |
-| **Configuration** | Hardcoded values | Environment-based with validation |
+| **State Management** | `self.memory = []` | Persistent JSON with data lineage tracking |
+| **Error Handling** | Try/catch basics | Distributed tracing and data pipeline retry logic |
+| **Security** | None (trusted input) | Multi-layer data access sandboxing and validation |
+| **Monitoring** | Print statements | OpenTelemetry with data processing dashboards |
+| **Configuration** | Hardcoded values | Environment-based with data source validation |
 
-### The Production Mindset
+### The Production Mindset for Data Processing
 
-These aren't just nice-to-have features - they're what separates educational code from systems users trust with important work. When you're building agents for real use, ask:
+These aren't just nice-to-have features - they're what separates educational code from systems data engineers trust with important analytics work. When you're building agents for real data processing use, ask:
 
-1. **What happens when the pipeline breaks?** (Observability and error handling)
-2. **What happens when the developer leaves mid-process?** (State persistence)
-3. **What happens if it's misused with sensitive data?** (Security and sandboxing)
-4. **How do I know the system is working correctly?** (Metrics and monitoring)
+1. **What happens when the data pipeline breaks?** (Observability and error handling)
+2. **What happens when the data engineer leaves mid-analysis?** (State persistence)
+3. **What happens if it's misused with sensitive customer data?** (Security and sandboxing)
+4. **How do I know the data processing is working correctly?** (Metrics and monitoring)
 
-The Coding Assistant answers all these questions, showing how bare metal development can be both powerful and production-ready.
+The Data Processing Assistant answers all these questions, showing how bare metal development can be both powerful and production-ready for data engineering workflows.
 
 ---
 
-## Part 5: Advanced Patterns - Solving Real User Experience Challenges
+## Part 5: Advanced Patterns - Solving Real Data Engineering Challenges
 
-### The User Experience Problem
+### The Data Engineering User Experience Problem
 
-Our simple educational agents had a major flaw: once started, they ran until completion. Users couldn't stop them, redirect them, or manage memory when conversations got too long. The Coding Assistant implements sophisticated patterns that give users real control and handle the practical limits of LLM context windows.
+Our simple educational agents had a major flaw: once started, they ran until completion. Data engineers couldn't stop them, redirect them, or manage memory when data processing conversations got too long. The Data Processing Assistant implements sophisticated patterns that give data engineers real control and handle the practical limits of LLM context windows in data-heavy scenarios.
 
-### Pattern 1: Interruptible Operations
+### Pattern 1: Interruptible Data Processing Operations
 
-Imagine asking an agent to analyze a large codebase, then realizing you asked for the wrong directory. In our simple examples, you'd wait for completion or kill the entire process. The Coding Assistant lets you gracefully interrupt and redirect:
+Imagine asking an agent to analyze a petabyte-scale dataset across multiple partitions, then realizing you asked for the wrong time range. In our simple examples, you'd wait hours for completion or kill the entire process. The Data Processing Assistant lets you gracefully interrupt and redirect:
 
 ```mermaid
 graph TD
-    U[User Starts Task] --> A[Agent Processing]
-    A --> LLM[LLM Call in Progress]
-    A --> TOOL[Tool Execution]
+    U[Data Engineer Starts Analysis] --> A[Agent Processing Data]
+    A --> LLM[LLM Analysis in Progress]
+    A --> TOOL[Data Tool Execution]
     
     U -->|Ctrl+C| INT[Interrupt Signal]
-    INT --> CHECK{Safe Point?}
+    INT --> CHECK{Safe Data Processing Point?}
     
     CHECK -->|Yes| PAUSE[Graceful Pause]
     CHECK -->|No| WAIT[Wait for Safe Point]
     
-    PAUSE --> SAVE[Save Current State]
-    SAVE --> ASK[Ask User Next Action]
+    PAUSE --> SAVE[Save Current Data State]
+    SAVE --> ASK[Ask Data Engineer Next Action]
     
-    ASK -->|Continue| RESUME[Resume from State]
-    ASK -->|Redirect| NEW[New Task with Context]
-    ASK -->|Stop| CLEAN[Clean Shutdown]
+    ASK -->|Continue| RESUME[Resume from Data State]
+    ASK -->|Redirect| NEW[New Analysis with Context]
+    ASK -->|Stop| CLEAN[Clean Data Processing Shutdown]
     
     WAIT --> PAUSE
     
@@ -684,14 +709,14 @@ The implementation uses Python's context manager pattern for safe interruption:
 
 ```python
 # From agents/interrupts.py - More sophisticated than simple error handling
-class InterruptibleSection:
-    """Allow user to interrupt long operations safely"""
+class InterruptibleDataProcessing:
+    """Allow data engineer to interrupt long data processing operations safely"""
     
     async def __aenter__(self):
-        # Set up custom interrupt handler
+        # Set up custom interrupt handler for data processing
         self.original_handler = signal.signal(
             signal.SIGINT, 
-            self._handle_interrupt
+            self._handle_data_processing_interrupt
         )
         return self
     
@@ -699,47 +724,47 @@ class InterruptibleSection:
         # Restore original handler
         signal.signal(signal.SIGINT, self.original_handler)
     
-    def _handle_interrupt(self, signum, frame):
-        # Don't just crash - raise controlled exception
-        raise UserInterrupt("Operation cancelled by user")
+    def _handle_data_processing_interrupt(self, signum, frame):
+        # Don't just crash - raise controlled exception for data processing
+        raise DataProcessingInterrupt("Data analysis cancelled by user")
 
-# Usage in agent execution
-async with InterruptibleSection():
-    response = await llm_call_with_tools(messages, tools)
-    # User can interrupt this safely
+# Usage in data processing agent execution
+async with InterruptibleDataProcessing():
+    response = await llm_call_with_data_tools(messages, data_tools)
+    # Data engineer can interrupt this safely
 ```
 
-**Why This Matters:**  
+**Why This Matters for Data Engineers:**  
 
-- **Data Engineer Control**: Stop runaway operations without losing work  
-- **Resource Management**: Don't waste compute on unwanted data scans  
-- **Better DX**: Data engineers feel in control, not trapped by their automation tools  
+- **Data Engineer Control**: Stop runaway data processing operations without losing work  
+- **Resource Management**: Don't waste compute on unwanted petabyte-scale scans  
+- **Better DX**: Data engineers feel in control, not trapped by their data processing automation tools  
 
-**Connection to Our Session**: Remember how our simple agent just ran until done? This shows how production agents must respect developer agency and provide escape hatches for long-running operations.
+**Connection to Our Session**: Remember how our simple agent just ran until done? This shows how production agents must respect data engineer agency and provide escape hatches for long-running data processing operations.
 
-### Pattern 2: Intelligent Conversation Shortening
+### Pattern 2: Intelligent Data Processing Conversation Shortening
 
-LLMs have context limits (typically 128K tokens). Long conversations eventually hit this wall, causing failures or degraded performance. Our simple `self.memory.append()` approach would eventually break. The Coding Assistant implements intelligent context management:
+LLMs have context limits (typically 128K tokens). Long data processing conversations with large dataset analysis eventually hit this wall, causing failures or degraded performance. Our simple `self.memory.append()` approach would eventually break with data processing context. The Data Processing Assistant implements intelligent context management:
 
 ```mermaid
 graph TD
-    CONV[Growing Conversation] --> CHECK{Token Count > Threshold?}
+    CONV[Growing Data Processing Conversation] --> CHECK{Token Count > Threshold?}
     
-    CHECK -->|No| CONTINUE[Continue Normal]
-    CHECK -->|Yes| ANALYZE[Analyze Conversation Structure]
+    CHECK -->|No| CONTINUE[Continue Normal Data Processing]
+    CHECK -->|Yes| ANALYZE[Analyze Data Processing Conversation Structure]
     
-    ANALYZE --> IDENTIFY[Identify Key Segments]
-    IDENTIFY --> PRESERVE[Preserve Essential Context]
-    IDENTIFY --> COMPRESS[Compress Older Messages]
+    ANALYZE --> IDENTIFY[Identify Key Data Segments]
+    IDENTIFY --> PRESERVE[Preserve Essential Data Context]
+    IDENTIFY --> COMPRESS[Compress Older Data Messages]
     
-    PRESERVE --> TASK[Original Task/Goal]
-    PRESERVE --> PROGRESS[Current Progress]
-    PRESERVE --> RECENT[Recent Context]
+    PRESERVE --> TASK[Original Data Analysis Task/Goal]
+    PRESERVE --> PROGRESS[Current Data Processing Progress]
+    PRESERVE --> RECENT[Recent Data Context]
     
-    COMPRESS --> SUMMARY[LLM-Generated Summary]
-    SUMMARY --> REPLACE[Replace Old Messages]
+    COMPRESS --> SUMMARY[LLM-Generated Data Summary]
+    SUMMARY --> REPLACE[Replace Old Data Messages]
     
-    REPLACE --> NEW[Shortened Conversation]
+    REPLACE --> NEW[Shortened Data Processing Conversation]
     NEW --> CONTINUE
     
     style CHECK fill:#E65100,color:#ffffff
@@ -747,98 +772,102 @@ graph TD
     style SUMMARY fill:#7B1FA2,color:#ffffff
 ```
 
-Here's how the system intelligently shortens conversations:
+Here's how the system intelligently shortens data processing conversations:
 
 ```python
 # From agents/history.py - Much smarter than simple truncation
-class ShortenConversationResult:
-    """Compress conversation while preserving intent and progress"""
+class ShortenDataProcessingConversationResult:
+    """Compress data processing conversation while preserving intent and progress"""
     
-    def create_summary(self, history: list[dict]) -> str:
-        """Use LLM to create intelligent summary"""
+    def create_data_processing_summary(self, history: list[dict]) -> str:
+        """Use LLM to create intelligent data processing summary"""
         summary_prompt = f"""
-        Analyze this conversation and create a concise summary that preserves:
+        Analyze this data processing conversation and create a concise summary that preserves:
         
-        1. The original task and user goals
-        2. Key decisions and approaches taken  
-        3. Current progress and state
-        4. Important context for continuing the work
-        5. Any constraints or preferences mentioned
+        1. The original data analysis task and goals
+        2. Key data processing decisions and approaches taken  
+        3. Current data analysis progress and state
+        4. Important data context for continuing the analysis
+        5. Any data constraints or quality requirements mentioned
+        6. Data sources and schemas referenced
+        7. Key insights and findings discovered so far
         
-        Conversation to summarize:
-        {self._format_history_for_summary(history)}
+        Data processing conversation to summarize:
+        {self._format_data_history_for_summary(history)}
         
-        Create a summary that allows the conversation to continue 
+        Create a summary that allows the data processing conversation to continue 
         naturally while drastically reducing token count.
         """
         
         return await llm.complete(summary_prompt)
     
-    def _format_history_for_summary(self, history: list) -> str:
-        """Structure the history for optimal summarization"""
-        # Group related messages, identify decision points,
-        # highlight tool usage patterns, etc.
+    def _format_data_history_for_summary(self, history: list) -> str:
+        """Structure the data processing history for optimal summarization"""
+        # Group related data messages, identify analysis decision points,
+        # highlight data tool usage patterns, preserve data quality metrics, etc.
         pass
 ```
 
-**Advanced Features:**
+**Advanced Features for Data Processing:**
 
-1. **Selective Preservation**: Keeps recent messages intact, summarizes older ones
-2. **Tool Context**: Preserves results of important tool calls
-3. **Decision History**: Maintains record of key choices made
-4. **User Preferences**: Remembers how the user likes to work
+1. **Selective Preservation**: Keeps recent data processing messages intact, summarizes older ones
+2. **Data Tool Context**: Preserves results of important data processing tool calls
+3. **Decision History**: Maintains record of key data analysis choices made
+4. **Data Engineer Preferences**: Remembers how the data engineer likes to work with data
+5. **Data Lineage**: Preserves data transformation and processing history
 
-**Example Transformation:**
+**Example Data Processing Transformation:**
 
-Before (2000 tokens):
-
-```
-User: "Analyze this file..."
-Assistant: "I'll read the file..." [reads file]
-Assistant: "The file contains..." [long analysis]
-User: "Now check the tests..."
-Assistant: "Looking at tests..." [examines tests]
-Assistant: "The tests show..." [detailed findings]
-User: "What about performance?"
-[...many more exchanges...]
-```
-
-After (400 tokens):
+Before (3000 tokens):
 
 ```
-Summary: "User requested analysis of file X for code quality and testing. 
-Found 3 main issues: naming conventions, missing error handling, 
-and incomplete test coverage. Currently investigating performance 
-characteristics. User prefers detailed explanations with examples."
+Data Engineer: "Analyze customer churn patterns in Q4 data..."
+Assistant: "I'll access the data lake..." [reads customer data]
+Assistant: "The customer data contains..." [long analysis]
+Data Engineer: "Now check the feature correlations..."
+Assistant: "Looking at feature correlations..." [examines correlations]
+Assistant: "The correlation analysis shows..." [detailed findings]
+Data Engineer: "What about seasonal trends?"
+[...many more data processing exchanges...]
+```
+
+After (600 tokens):
+
+```
+Summary: "Data engineer requested churn analysis for Q4 customer data from data lake. 
+Found key patterns: 30% higher churn in Dec, strong correlation with support tickets, 
+seasonal trends in subscription cancellations. Currently investigating feature correlations 
+and building predictive model. Data quality good (98% completeness). Engineer prefers 
+statistical analysis with visualizations."
 
 [Recent 5 messages preserved exactly]
 ```
 
-### Pattern 3: Adaptive Error Recovery
+### Pattern 3: Adaptive Data Processing Error Recovery
 
-Our simple examples had basic try/catch blocks. Production systems need sophisticated error recovery that learns from failures:
+Our simple examples had basic try/catch blocks. Production data processing systems need sophisticated error recovery that learns from data pipeline failures:
 
 ```mermaid
 graph TD
-    ERROR[Operation Failed] --> CLASSIFY[Classify Error Type]
+    ERROR[Data Processing Failed] --> CLASSIFY[Classify Error Type]
     
-    CLASSIFY --> NETWORK[Network Error]
+    CLASSIFY --> NETWORK[Data Source Connection Error]
     CLASSIFY --> LLM[LLM API Error] 
-    CLASSIFY --> TOOL[Tool Error]
-    CLASSIFY --> LOGIC[Logic Error]
+    CLASSIFY --> TOOL[Data Tool Error]
+    CLASSIFY --> QUALITY[Data Quality Error]
     
     NETWORK --> RETRY[Exponential Backoff Retry]
     LLM --> SWITCH[Switch LLM Provider]
-    TOOL --> FALLBACK[Use Fallback Tool]
-    LOGIC --> REPLAN[Re-plan Approach]
+    TOOL --> FALLBACK[Use Fallback Data Tool]
+    QUALITY --> CLEAN[Apply Data Cleansing]
     
     RETRY --> SUCCESS{Succeeded?}
     SWITCH --> SUCCESS
     FALLBACK --> SUCCESS
-    REPLAN --> SUCCESS
+    CLEAN --> SUCCESS
     
-    SUCCESS -->|Yes| CONTINUE[Continue Task]
-    SUCCESS -->|No| ESCALATE[Escalate to User]
+    SUCCESS -->|Yes| CONTINUE[Continue Data Processing]
+    SUCCESS -->|No| ESCALATE[Escalate to Data Engineer]
     
     style ERROR fill:#D32F2F,color:#ffffff
     style SUCCESS fill:#388E3C,color:#ffffff
@@ -847,48 +876,48 @@ graph TD
 
 **Why These Patterns Matter for Data Engineering:**
 
-These aren't academic patterns - they solve real problems software engineers encounter when teams rely on your tools for critical development work:
+These aren't academic patterns - they solve real problems data engineers encounter when teams rely on your tools for critical data processing work:
 
-1. **Interruptible Operations**: Developers need control, especially for long-running operations
-2. **Context Management**: Pipeline logs and metadata grow beyond manageable limits
-3. **Error Recovery**: Data sources fail, APIs have outages, downstream consumers break
+1. **Interruptible Operations**: Data engineers need control, especially for long-running data processing operations
+2. **Context Management**: Data processing logs and metadata grow beyond manageable limits
+3. **Error Recovery**: Data sources fail, APIs have outages, data quality issues occur
 
-**Connecting Back to Our Software Engineering Session:**
+**Connecting Back to Our Data Engineering Session:**
 
-Remember our discussion about production realities in software development? These patterns address exactly those concerns:
+Remember our discussion about production realities in data engineering? These patterns address exactly those concerns:
 
-- **Scalability**: Context management handles growing conversation history and complexity
-- **Reliability**: Error recovery and interrupts handle real-world software engineering failures
-- **Developer Experience**: Interrupts and summaries respect the need for control in development workflows
+- **Scalability**: Context management handles growing data processing conversation history and complexity
+- **Reliability**: Error recovery and interrupts handle real-world data pipeline failures
+- **Developer Experience**: Interrupts and summaries respect the need for control in data processing workflows
 
-The Coding Assistant shows how "bare metal" development can implement sophisticated operational patterns that rival commercial development tools.
+The Data Processing Assistant shows how "bare metal" development can implement sophisticated operational patterns that rival commercial data engineering tools.
 
 ---
 
 ## Part 6: Connecting Back to Your Learning Journey
 
-### From SimpleAgent to Production System
+### From SimpleAgent to Production Data Processing System
 
-Let's trace the evolution from our educational examples to the Coding Assistant's production implementation. This isn't just about adding features - it's about understanding how fundamental concepts scale to real-world systems.
+Let's trace the evolution from our educational examples to the Data Processing Assistant's production implementation. This isn't just about adding features - it's about understanding how fundamental concepts scale to real-world data processing systems.
 
 ```mermaid
 graph TD
-    SIMPLE[Our SimpleAgent] --> PROD[Coding Assistant]
+    SIMPLE[Our SimpleAgent] --> PROD[Data Processing Assistant]
     
     SIMPLE --> S1[Direct LLM calls]
     SIMPLE --> S2[Simple memory list]
     SIMPLE --> S3[Basic tools]
     SIMPLE --> S4[Single agent]
     
-    PROD --> P1[Async + streaming]
-    PROD --> P2[Persistent sessions]  
-    PROD --> P3[MCP protocol]
-    PROD --> P4[Multi-agent orchestration]
+    PROD --> P1[Async + streaming for data processing]
+    PROD --> P2[Persistent data processing sessions]  
+    PROD --> P3[MCP protocol for data tools]
+    PROD --> P4[Multi-agent data processing orchestration]
     
-    S1 --> SCALE1[Scalability Issues]
-    S2 --> SCALE2[Memory Limits]
-    S3 --> SCALE3[Tool Proliferation]
-    S4 --> SCALE4[Complexity Ceiling]
+    S1 --> SCALE1[Data Processing Scalability Issues]
+    S2 --> SCALE2[Data Context Memory Limits]
+    S3 --> SCALE3[Data Tool Proliferation]
+    S4 --> SCALE4[Data Processing Complexity Ceiling]
     
     SCALE1 --> P1
     SCALE2 --> P2
@@ -905,16 +934,16 @@ graph TD
 
 ### The Dependency Injection Evolution
 
-Remember our Part 2.5 discussion about the problems with hardcoded LLM providers? Let's trace how this evolved:
+Remember our Part 2.5 discussion about the problems with hardcoded LLM providers? Let's trace how this evolved for data processing:
 
 #### Stage 1: Our Educational Example
 
 ```python
 # Hardcoded, single provider
-def think(self, input_text: str) -> str:
+def analyze_data(self, data_query: str) -> str:
     response = openai.ChatCompletion.create(
         model="gpt-4",
-        messages=[{"role": "user", "content": input_text}]
+        messages=[{"role": "user", "content": data_query}]
     )
     return response.choices[0].message.content
 ```
@@ -923,61 +952,63 @@ def think(self, input_text: str) -> str:
 
 ```python
 # Abstract but still manual
-class LLMClient(ABC):
+class DataProcessingLLMClient(ABC):
     @abstractmethod
-    def complete(self, messages: list) -> str:
+    def analyze_data(self, messages: list) -> str:
         pass
 
-class OpenAIClient(LLMClient):
-    def complete(self, messages: list) -> str:
-        # OpenAI-specific implementation
+class OpenAIDataClient(DataProcessingLLMClient):
+    def analyze_data(self, messages: list) -> str:
+        # OpenAI-specific data processing implementation
         pass
 ```
 
-#### Stage 3: Production Implementation (Coding Assistant)
+#### Stage 3: Production Implementation (Data Processing Assistant)
 
 ```python
-# Industrial-strength abstraction
-async def complete(messages, model, tools):
+# Industrial-strength abstraction for data processing
+async def analyze_data(messages, model, data_tools):
     response = await litellm.acompletion(
         messages=messages,
         model=model,        # "gpt-4", "claude-3", "local-model"
-        tools=tools,        # Standardized tool interface
-        stream=True,        # Real-time responses
+        tools=data_tools,   # Standardized data tool interface
+        stream=True,        # Real-time data processing feedback
+        temperature=0.1,    # Lower temp for data accuracy
     )
     # Handles: retries, rate limits, provider fallback
 ```
 
-**Key Evolution Points:**
+**Key Evolution Points for Data Processing:**
 
-1. **Async by Default**: Production systems can't block on I/O
-2. **Streaming**: Users expect real-time feedback
-3. **Tool Integration**: Agents need more than just LLM reasoning
+1. **Async by Default**: Production data processing systems can't block on I/O
+2. **Streaming**: Data engineers expect real-time feedback during long analyses
+3. **Tool Integration**: Data agents need more than just LLM reasoning
 4. **Provider Abstraction**: LiteLLM handles all the complexity we discussed
+5. **Data-Optimized**: Lower temperature, specialized prompting for accuracy
 
-### The Tool Integration Journey
+### The Data Tool Integration Journey
 
-Our session showed simple tool patterns. The Coding Assistant evolves this through MCP:
+Our session showed simple tool patterns. The Data Processing Assistant evolves this through MCP for data processing:
 
 ```mermaid
 graph LR
-    OUR[Our Simple Tools] --> MCP[MCP Protocol]
+    OUR[Our Simple Data Tools] --> MCP[MCP Protocol for Data]
     
-    OUR --> CUSTOM[Custom Interfaces]
-    OUR --> TIGHT[Tight Coupling]
-    OUR --> MANUAL[Manual Integration]
+    OUR --> CUSTOM[Custom Data Interfaces]
+    OUR --> TIGHT[Tight Data Coupling]
+    OUR --> MANUAL[Manual Data Integration]
     
-    MCP --> STANDARD[Standard Interface] 
-    MCP --> LOOSE[Loose Coupling]
-    MCP --> AUTO[Auto Discovery]
+    MCP --> STANDARD[Standard Data Interface] 
+    MCP --> LOOSE[Loose Data Coupling]
+    MCP --> AUTO[Auto Data Discovery]
     
-    CUSTOM --> PROBLEM1[Each Tool Different]
-    TIGHT --> PROBLEM2[Hard to Test]
-    MANUAL --> PROBLEM3[Integration Work]
+    CUSTOM --> PROBLEM1[Each Data Tool Different]
+    TIGHT --> PROBLEM2[Hard to Test Data Tools]
+    MANUAL --> PROBLEM3[Data Integration Work]
     
-    STANDARD --> SOLUTION1[Same Interface]
-    LOOSE --> SOLUTION2[Easy Testing]
-    AUTO --> SOLUTION3[Plug & Play]
+    STANDARD --> SOLUTION1[Same Data Interface]
+    LOOSE --> SOLUTION2[Easy Data Testing]
+    AUTO --> SOLUTION3[Plug & Play Data Tools]
     
     style OUR fill:#D32F2F,color:#ffffff
     style MCP fill:#388E3C,color:#ffffff
@@ -989,148 +1020,148 @@ graph LR
     style SOLUTION3 fill:#388E3C,color:#ffffff
 ```
 
-**The MCP Evolution Solves:**
+**The MCP Evolution Solves for Data Processing:**
 
-- **Tool Proliferation**: As we add more tools, complexity grows exponentially without standards
-- **Testing Difficulty**: Each custom interface needs custom mocks
-- **Maintenance Overhead**: Tools break differently, requiring specific expertise
+- **Data Tool Proliferation**: As we add more data processing tools, complexity grows exponentially without standards
+- **Testing Difficulty**: Each custom data interface needs custom mocks
+- **Maintenance Overhead**: Data tools break differently, requiring specific data engineering expertise
 
-### Memory Management Maturation
+### Memory Management Maturation for Data Processing
 
 ```python
 # Our simple approach (Session examples)
-self.memory = []  # Works until it doesn't
+self.memory = []  # Works until data processing context gets too large
 
-# Production approach (Coding Assistant)  
-class ConversationManager:
-    def manage_context(self):
+# Production approach (Data Processing Assistant)  
+class DataProcessingConversationManager:
+    def manage_data_context(self):
         if self.token_count > THRESHOLD:
-            self.intelligent_summarize()  # Preserve key context
+            self.intelligent_data_summarize()  # Preserve key data context
         if user_interrupted:
-            self.save_state()            # Resume later
+            self.save_data_state()            # Resume data processing later
         if error_occurred:
-            self.rollback_context()      # Consistent state
+            self.rollback_data_context()      # Consistent data processing state
 ```
 
-### Key Takeaways: From Learning to Building
+### Key Takeaways: From Learning to Building Data Processing Systems
 
 ### 1. Start Simple, Evolve Systematically
 
-**Our Examples → Production Path:**
+**Our Examples → Production Data Processing Path:**
 
 - ✅ **Learn patterns** with simple, clear examples (SimpleAgent)
 - ✅ **Understand abstractions** through dependency injection (LLMClient)  
-- ✅ **See production evolution** through real-world case study (Coding Assistant)
+- ✅ **See production evolution** through real-world case study (Data Processing Assistant)
 
-The concepts remain the same - the implementation grows more sophisticated.
+The concepts remain the same - the implementation grows more sophisticated for data processing needs.
 
-### 2. Production is About Handling Reality
+### 2. Production is About Handling Data Processing Reality
 
 **Educational Code:**
 
 ```python
-# Assumes everything works
-response = llm.complete(prompt)
+# Assumes data processing always works
+response = llm.analyze_data(data_query)
 return response.content
 ```
 
 **Production Code:**
 
 ```python
-# Handles the real world
+# Handles the real data processing world
 try:
-    async with timeout(30):
-        response = await llm.complete_with_retries(prompt)
+    async with timeout(300):  # Longer timeout for data processing
+        response = await llm.analyze_data_with_retries(data_query)
         if response.interrupted:
-            await save_state()
-        return stream_to_user(response)
+            await save_data_processing_state()
+        return stream_to_data_engineer(response)
 except TimeoutError:
-    return fallback_response()
+    return fallback_data_analysis()
 ```
 
-### 3. Architecture Emerges from Constraints
+### 3. Architecture Emerges from Data Processing Constraints
 
-The Coding Assistant's architecture isn't arbitrary - it solves specific problems:
+The Data Processing Assistant's architecture isn't arbitrary - it solves specific data engineering problems:
 
 | Problem | Architectural Solution |
 |---------|----------------------|
-| Context limits | Intelligent conversation shortening |
-| User control | Interruptible operations with state saving |
+| Data context limits | Intelligent data processing conversation shortening |
+| Data engineer control | Interruptible operations with data state saving |
 | Provider reliability | LiteLLM abstraction with fallbacks |
-| Tool complexity | MCP protocol standardization |
-| Debugging difficulty | OpenTelemetry observability |
-| Security risks | Sandboxed execution with permission model |
+| Data tool complexity | MCP protocol standardization for data tools |
+| Debugging difficulty | OpenTelemetry observability for data processing |
+| Data security risks | Sandboxed execution with data access permission model |
 
 ### 4. Bare Metal ≠ Reinventing Everything
 
-**Smart Production Approach:**
+**Smart Production Approach for Data Processing:**
 
 - **Use proven libraries** (LiteLLM, OpenTelemetry, MCP)
-- **Focus on unique value** (orchestration, UX, domain logic)
-- **Build abstractions** where you need flexibility
-- **Adopt standards** where they exist
+- **Focus on unique value** (data orchestration, UX, domain logic)
+- **Build abstractions** where you need flexibility for data processing
+- **Adopt standards** where they exist for data tools
 
-The Coding Assistant is "bare metal" because it controls the architecture and orchestration, not because it implements HTTP clients from scratch.
+The Data Processing Assistant is "bare metal" because it controls the architecture and orchestration, not because it implements data connectors from scratch.
 
 ### Your Next Steps
 
-Understanding the Coding Assistant gives you a roadmap:
+Understanding the Data Processing Assistant gives you a roadmap:
 
-1. **Master the Patterns**: Dependency injection, async operations, error handling
-2. **Choose Your Abstractions**: When to build vs. when to adopt
-3. **Plan for Scale**: Start simple, but architect for growth  
-4. **User Experience First**: Production systems serve users, not just LLMs
+1. **Master the Patterns**: Dependency injection, async operations, error handling for data processing
+2. **Choose Your Abstractions**: When to build vs. when to adopt for data tools
+3. **Plan for Scale**: Start simple, but architect for growth in data processing  
+4. **User Experience First**: Production systems serve data engineers, not just LLMs
 
-**Most Important Insight**: The gap between our educational examples and the Coding Assistant isn't magic - it's the systematic application of production engineering principles to LLM-based systems.
+**Most Important Insight**: The gap between our educational examples and the Data Processing Assistant isn't magic - it's the systematic application of production engineering principles to LLM-based data processing systems.
 
 ---
 
-## Practical Exercise: Run the Coding Assistant
+## Practical Exercise: Run the Data Processing Assistant
 
 ### 1. Installation (Already done in Coder workspace!)
 
 ```bash
-# The coding assistant is pre-installed
-coding-assistant --help
+# The data processing assistant is pre-installed
+data-processing-assistant --help
 ```
 
 ### 2. Basic Usage
 
 ```bash
-# Simple task
-coding-assistant --task "Explain the code in main.py"
+# Simple data analysis task
+data-processing-assistant --task "Analyze customer churn patterns in the sales database"
 
-# With planning mode
-coding-assistant --task "Refactor this function" --plan
+# With planning mode for complex data processing
+data-processing-assistant --task "Build a data quality report for Q4 data" --plan
 
-# Resume previous session
-coding-assistant --resume
+# Resume previous data processing session
+data-processing-assistant --resume
 ```
 
-### 3. Examine the Traces
+### 3. Examine the Data Processing Traces
 
 ```bash
-# If OTLP endpoint configured
-coding-assistant --task "Test task" \
+# If OTLP endpoint configured for data processing monitoring
+data-processing-assistant --task "Test data processing task" \
     --otlp-endpoint http://localhost:4318
 ```
 
-### 4. Explore the Code
+### 4. Explore the Data Processing Code
 
-Key files to examine:
+Key files to examine for data processing patterns:
 
-- `src/coding_assistant/llm/model.py` - Real LLM calls
-- `src/coding_assistant/agents/execution.py` - Orchestration logic
-- `src/coding_assistant/tools/mcp.py` - Tool integration
-- `src/coding_assistant/main.py` - Entry point and configuration
+- `src/data_processing_assistant/llm/model.py` - Real LLM calls for data analysis
+- `src/data_processing_assistant/agents/execution.py` - Data processing orchestration logic
+- `src/data_processing_assistant/tools/mcp.py` - Data tool integration
+- `src/data_processing_assistant/main.py` - Entry point and data processing configuration
 
 ---
 
 ## Summary
 
-The Coding Assistant demonstrates that "bare metal" doesn't mean "simple" - it means **direct control** over a sophisticated system. By studying this production implementation, you can see how all the patterns we've discussed come together in a real-world agent system.
+The Data Processing Assistant demonstrates that "bare metal" doesn't mean "simple" - it means **direct control** over a sophisticated data processing system. By studying this production implementation, you can see how all the patterns we've discussed come together in a real-world data engineering agent system.
 
-**Key Insight**: The abstraction patterns (LLMClient interface), dependency injection (LiteLLM), and separation of concerns (agents vs tools) make this system flexible, testable, and production-ready.
+**Key Insight**: The abstraction patterns (LLMClient interface), dependency injection (LiteLLM), and separation of concerns (agents vs data tools) make this system flexible, testable, and production-ready for data engineering workflows.
 
 ---
 
