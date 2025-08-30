@@ -87,7 +87,12 @@ Next, we implement the core validation testing method that tests data processing
                 'input': 'Process real-time user events from Kafka topic user-interactions',
                 'should_pass': True,
                 'expected_rows': 50000
-            },
+            }
+```
+
+These test cases establish the foundation for comprehensive data processing validation by covering typical production scenarios. The feature extraction test validates machine learning pipeline integration with large datasets, while the streaming data test ensures real-time processing capabilities. Each test case includes expected row counts for throughput validation and success criteria for automated pass/fail determination.
+
+```python
             # Edge cases for data processing
             {
                 'name': 'empty_request',
@@ -108,7 +113,12 @@ We continue defining edge cases that test data processing agent boundary conditi
                 'input': 'Process petabyte-scale dataset with 10 billion rows for analytics',
                 'should_pass': True,
                 'expected_rows': 10000000000  # 10 billion
-            },
+            }
+```
+
+Extreme scale testing validates that data processing agents can handle enterprise-level workloads without performance degradation or memory issues. The petabyte-scale test ensures the system can process massive datasets typical in large organizations, validating both computational capacity and memory management under heavy loads.
+
+```python
             {
                 'name': 'data_quality_validation_request',
                 'input': 'Validate schema and data quality for customer_profiles_2024 dataset',
@@ -124,6 +134,8 @@ We continue defining edge cases that test data processing agent boundary conditi
         ])
 ```
 
+Data quality validation testing ensures agents can detect and handle schema mismatches, data corruption, and quality issues that commonly occur in production environments. The streaming lag scenario tests resilience under network delays and system backpressure, validating that agents maintain processing accuracy even when upstream systems experience latency.
+
 Now we execute each test case and collect detailed results for data processing analysis:
 
 ```python
@@ -134,7 +146,11 @@ Now we execute each test case and collect detailed results for data processing a
                 start_time = time.time()
                 result = await agent.process_data_request(test_case['input'])
                 processing_time = time.time() - start_time
-                
+```
+
+Test execution begins with precise timing measurement to capture performance metrics essential for data processing benchmarking. The async execution model ensures proper handling of concurrent operations typical in production data pipelines, while timing measurement provides throughput calculations for performance analysis.
+
+```python
                 test_result = {
                     'test_name': test_case['name'],
                     'expected_pass': test_case['should_pass'],
@@ -147,6 +163,11 @@ Now we execute each test case and collect detailed results for data processing a
                 }
                 
             except Exception as e:
+```
+
+Comprehensive test result structure captures both functional correctness and performance metrics critical for data processing optimization. Throughput calculations in rows per second enable capacity planning and performance regression detection, while the status field enables automated test result analysis and continuous integration workflows.
+
+```python
                 test_result = {
                     'test_name': test_case['name'],
                     'expected_pass': test_case['should_pass'],
@@ -227,7 +248,11 @@ Now we execute each error scenario and verify proper error handling for data pro
                         'result': result,
                         'status': 'pass' if not result.get('success', True) else 'fail'
                     }
-                    
+```
+
+Error scenario execution uses dependency injection through patching to simulate various failure conditions without affecting production systems. Each test validates that the agent correctly identifies failures and returns appropriate error states rather than succeeding when it should fail, ensuring robust error handling in production environments.
+
+```python
             except Exception as e:
                 # Verify the error is properly categorized for data processing
                 error_category = getattr(e, 'context', {}).get('category', 'unknown')
@@ -242,7 +267,11 @@ Now we execute each error scenario and verify proper error handling for data pro
                     'category_match': str(error_category) == str(expected_category),
                     'status': 'pass'
                 }
-            
+```
+
+Exception handling validation ensures that data processing errors are properly categorized and contain sufficient context for debugging and monitoring. Category matching verification confirms that the error classification system works correctly, enabling automated error routing and appropriate alerting in production systems.
+
+```python
             results.append(test_result)
             self.data_quality_metrics['error_handling_tests'] += 1
 ```
@@ -279,7 +308,11 @@ These helper methods simulate different types of errors for comprehensive data p
             expected_schema="v2.0",
             actual_schema="v1.5"
         )
-    
+```
+
+Error simulation methods create realistic failure scenarios that mirror production issues. The data warehouse timeout simulates network latency or database overload conditions that are common in enterprise environments, while schema validation errors test the system's ability to handle data structure changes that frequently occur in evolving data systems.
+
+```python
     def _simulate_data_quality_error(self) -> Exception:
         """Simulate a data quality error for testing."""
         return DataQualityError(
@@ -295,7 +328,11 @@ These helper methods simulate different types of errors for comprehensive data p
             lag_seconds=400,
             topic="user-interactions"
         )
-    
+```
+
+Data quality and streaming lag errors represent operational challenges in real-time data processing systems. Quality threshold violations test the system's ability to detect and reject corrupted or incomplete data, while streaming lag simulation validates backpressure handling when upstream systems experience delays or failures.
+
+```python
     def _simulate_resource_exhaustion_error(self) -> Exception:
         """Simulate a resource exhaustion error for testing."""
         return DataProcessingAgentError(
@@ -306,6 +343,8 @@ These helper methods simulate different types of errors for comprehensive data p
             )
         )
 ```
+
+Resource exhaustion simulation tests the system's behavior under memory pressure conditions common when processing large datasets. This critical severity error validates that the system fails gracefully rather than crashing, enabling proper resource cleanup and error reporting to maintain system stability.
 
 ### Load Testing Framework for Data Processing
 
@@ -332,7 +371,11 @@ Load testing validates data processing agent performance under concurrent usage 
                     "Transform and aggregate financial transaction data",
                     "Generate real-time recommendation features"
                 ]
-                
+```
+
+Load testing simulation creates realistic data processing scenarios that represent typical enterprise workloads. The variety of request types ensures comprehensive testing across different processing patterns - from batch analytics to real-time feature generation, validating system performance across diverse operational requirements.
+
+```python
                 request_text = random.choice(request_types)
                 result = await agent.process_data_request(f"{request_text} - Request {request_id}")
                 
@@ -345,6 +388,8 @@ Load testing validates data processing agent performance under concurrent usage 
                     'result': result
                 }
 ```
+
+Request execution captures comprehensive performance metrics including response times and estimated throughput in rows processed. This data enables capacity planning and performance regression detection, while the unique request ID allows correlation of performance metrics with specific request types for optimization targeting.
 
 We handle exceptions and track failed requests for comprehensive data processing analysis:
 
@@ -369,7 +414,11 @@ Next, we set up concurrent execution using semaphores to control data processing
         async def execute_with_semaphore(request_id: int):
             async with semaphore:
                 return await single_data_processing_request(request_id)
-        
+```
+
+Concurrency control through semaphores prevents resource exhaustion during load testing while ensuring realistic concurrent usage patterns. The controlled concurrency simulates production traffic patterns where multiple users or systems simultaneously request data processing services, validating system behavior under realistic load conditions.
+
+```python
         # Run all requests concurrently
         start_time = time.time()
         tasks = [execute_with_semaphore(i) for i in range(total_requests)]
@@ -377,6 +426,8 @@ Next, we set up concurrent execution using semaphores to control data processing
         total_execution_time = time.time() - start_time
         results.extend(batch_results)
 ```
+
+Concurrent execution using asyncio.gather enables parallel request processing to stress-test the system under realistic load conditions. Total execution time measurement provides throughput calculations essential for capacity planning, while the gather operation ensures all requests complete before analyzing results, maintaining test result accuracy.
 
 Finally, we analyze the load test results and calculate performance metrics for data processing:
 
@@ -386,7 +437,11 @@ Finally, we analyze the load test results and calculate performance metrics for 
         failed_requests = [r for r in results if not r['success']]
         response_times = [r['response_time'] for r in successful_requests]
         total_rows_processed = sum(r.get('estimated_rows_processed', 0) for r in successful_requests)
-        
+```
+
+Performance analysis begins by categorizing results into successful and failed requests to calculate accurate success rates and response time statistics. Row processing aggregation provides throughput measurements essential for capacity planning and performance optimization in data processing systems.
+
+```python
         # Calculate percentiles
         if response_times:
             sorted_times = sorted(response_times)
@@ -399,7 +454,11 @@ Finally, we analyze the load test results and calculate performance metrics for 
             }
         else:
             percentiles = {}
-        
+```
+
+Percentile calculations provide detailed performance distribution insights beyond simple averages. The 50th percentile shows typical performance, while 90th, 95th, and 99th percentiles reveal tail latency behavior critical for understanding system performance under load and identifying optimization opportunities.
+
+```python
         return {
             'test_type': 'data_processing_load_testing',
             'total_requests': total_requests,
@@ -417,6 +476,8 @@ Finally, we analyze the load test results and calculate performance metrics for 
             'average_throughput_rows_per_second': total_rows_processed / total_execution_time if total_execution_time > 0 else 0
         }
 ```
+
+Comprehensive performance reporting provides all metrics necessary for capacity planning, SLA monitoring, and performance regression detection. Request throughput and row processing rates enable accurate scaling decisions, while success rates and response time distributions guide optimization priorities for data processing systems.
 
 ---
 
@@ -576,7 +637,11 @@ Now we implement the core method for recording data processing agent request met
         custom_metrics: Optional[Dict[str, Any]] = None
     ) -> None:
         """Record data processing agent request metrics with comprehensive tracking."""
-        
+```
+
+The comprehensive request recording method captures all essential metrics for data processing operations. Parameters include both standard agent metrics like response time and success status, plus data-specific metrics like row counts, quality scores, and pipeline stage information essential for data engineering monitoring.
+
+```python
         # Ensure agent is registered
         if agent_id not in self.agent_metrics:
             self.agent_metrics[agent_id] = DataProcessingAgentMetrics(agent_id)
@@ -585,6 +650,8 @@ Now we implement the core method for recording data processing agent request met
         agent_metrics.request_count += 1
         self.global_metrics.request_count += 1
 ```
+
+Agent registration and request counting provide foundational metrics tracking with both per-agent and global visibility. This dual-level tracking enables both detailed agent performance analysis and system-wide capacity monitoring essential for production data processing operations.
 
 Next, we record success or error metrics and update global statistics:
 
@@ -597,7 +664,11 @@ Next, we record success or error metrics and update global statistics:
             self.global_metrics.success_count += 1
             self.global_metrics.update_response_time(response_time)
             self.global_metrics.update_data_processing_metrics(rows_processed, data_quality_score)
-            
+```
+
+Success path metrics update both agent-specific and global counters to provide comprehensive performance visibility. The data processing metrics update includes row counts and quality scores that are essential for understanding data pipeline efficiency and output quality in production environments.
+
+```python
             # Record throughput metrics
             if response_time > 0:
                 throughput = rows_processed / response_time
@@ -609,6 +680,11 @@ Next, we record success or error metrics and update global statistics:
                 # Keep only last 1000 throughput measurements
                 if len(agent_metrics.throughput_history) > 1000:
                     agent_metrics.throughput_history = agent_metrics.throughput_history[-1000:]
+```
+
+Throughput tracking provides real-time performance visibility with memory management to prevent unbounded growth. The pipeline stage annotation enables performance analysis by processing stage, critical for identifying bottlenecks in complex data transformation workflows.
+
+```python
         else:
             agent_metrics.error_count += 1
             self.global_metrics.error_count += 1
@@ -621,6 +697,8 @@ Next, we record success or error metrics and update global statistics:
                 elif 'pipeline' in error_type.lower():
                     agent_metrics.pipeline_failures += 1
 ```
+
+Error tracking provides detailed categorization of failure types common in data processing systems. Schema validation and pipeline failure tracking enable targeted troubleshooting and help identify systemic issues that require infrastructure or code changes rather than transient error handling.
 
 Finally, we handle custom metrics and structured logging for data processing:
 
