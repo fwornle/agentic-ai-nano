@@ -184,9 +184,11 @@ Exception handling ensures that unexpected errors during agent deployment don't 
 ```
 
 Phases 4 and 5 complete the cluster setup by establishing agent coordination and starting monitoring. The coordination setup only includes successfully deployed agents, ensuring proper communication channels. The final return provides comprehensive deployment status including success/failure counts, timing, and cluster health assessment.
-    
+
+```python
     async def _deploy_single_data_agent(self, agent_config: DataAgentDeploymentConfig) -> Dict[str, Any]:
         """Deploy individual data processing agent with production configuration"""
+
 ```
 
 This method handles the deployment of a single data processing agent with comprehensive production configuration. It follows a multi-step process to ensure secure, properly configured, and health-verified deployments.
@@ -271,9 +273,11 @@ Once the agent is ready, comprehensive data processing health checks verify that
 ```
 
 Error handling provides detailed failure information for debugging and monitoring. Each failure mode returns specific error context, enabling operators to quickly diagnose and resolve deployment issues.
-    
+
+```python
     async def _generate_kubernetes_manifest(self, agent_config: DataAgentDeploymentConfig) -> Dict[str, Any]:
         """Generate production Kubernetes manifest for data processing agent"""
+
 ```
 
 This method creates a comprehensive Kubernetes deployment manifest optimized for data processing workloads. It includes resource management, health checks, monitoring integration, and persistent storage configuration.
@@ -455,7 +459,8 @@ The container specification defines the application image, exposed ports for dif
 ```
 
 Volume configuration provides persistent storage and configuration management. The ConfigMap contains agent-specific settings, while the PersistentVolumeClaim ensures data survives container restarts. This design separates configuration, application code, and data for optimal maintainability.
-    
+
+```python
     async def scale_data_processing_agent(self, agent_id: str, 
                                         target_replicas: int,
                                         scaling_reason: str = "manual") -> Dict[str, Any]:
@@ -544,7 +549,8 @@ Successful scaling operations update the internal deployment tracking and log de
 ```
 
 The return values provide comprehensive status information including success/failure, replica counts, and timing details. Error handling ensures that scaling failures are properly logged and reported with detailed context for debugging.
-    
+
+```python
     async def get_cluster_status(self) -> Dict[str, Any]:
         """Get comprehensive status of data processing cluster"""
 ```
@@ -604,7 +610,6 @@ Resource utilization calculations help with capacity planning and scaling decisi
 ```
 
 The comprehensive status return includes current metrics, individual agent details, resource utilization, and historical operational data. This complete view supports both real-time monitoring and trend analysis for the data processing cluster.
-```
 
 ### Auto-scaling and Load Balancing for Data Processing Workloads
 
@@ -640,6 +645,7 @@ class DataProcessingScalingTrigger(Enum):
 
 The scaling trigger enum defines all conditions that can initiate scaling operations. Data processing workloads require specialized triggers like throughput thresholds, queue depth monitoring, and processing latency tracking. Predictive triggers enable proactive scaling based on historical patterns.
 
+```python
 @dataclass
 class DataProcessingMetrics:
     """Real-time metrics for data processing agent performance"""
@@ -673,6 +679,7 @@ The metrics dataclass captures comprehensive performance data for data processin
 
 Resource utilization, quality metrics, and queue depths provide the complete picture needed for intelligent scaling decisions. Quality metrics ensure that scaling maintains data processing standards, while queue metrics indicate processing bottlenecks that require immediate scaling attention.
 
+```python
 @dataclass
 class DataProcessingScalingPolicy:
     """Scaling policy configuration for data processing agents"""
@@ -707,6 +714,7 @@ Scaling thresholds define the conditions that trigger scaling operations. The CP
 
 Scaling constraints prevent runaway scaling and ensure stable operations. Asymmetric increments (scale up by 2, down by 1) provide faster response to load increases while preventing aggressive scale-downs. Advanced policies enable intelligent optimizations specific to data processing workloads.
 
+```python
 class DataProcessingAutoScaler:
     """Intelligent auto-scaling system for data processing agents"""
     
@@ -759,7 +767,8 @@ Policy registration begins with comprehensive validation to ensure scaling thres
 ```
 
 Successful policy registration initializes tracking structures for metrics history and scaling state. Each agent gets dedicated tracking to enable independent scaling decisions based on individual performance patterns.
-    
+
+```python
     async def start_monitoring(self) -> Dict[str, Any]:
         """Start continuous monitoring and auto-scaling for data processing agents"""
         
@@ -781,7 +790,8 @@ Successful policy registration initializes tracking structures for metrics histo
 ```
 
 Monitoring startup creates an asynchronous monitoring loop that continuously evaluates scaling decisions. The method prevents duplicate monitoring instances and returns status information including the number of agents being monitored and the monitoring start time.
-    
+
+```python
     async def _monitoring_loop(self):
         """Main monitoring loop for auto-scaling decisions"""
         
@@ -811,7 +821,8 @@ The monitoring loop continuously evaluates scaling decisions every 30 seconds. I
 ```
 
 Predictive scaling analysis runs after processing current metrics, enabling proactive scaling based on historical trends. Error handling ensures monitoring continues even if individual cycles fail, with longer wait periods during error conditions to prevent resource exhaustion.
-    
+
+```python
     async def _process_agent_scaling(self, agent_id: str, metrics: DataProcessingMetrics):
         """Process scaling decisions for individual data processing agent"""
         
@@ -846,7 +857,8 @@ Metrics storage maintains a 24-hour rolling history for trend analysis and predi
 ```
 
 Scaling trigger analysis evaluates current metrics against policy thresholds to determine if scaling is needed. Only when scaling is required does the system execute the scaling decision, minimizing unnecessary operations.
-    
+
+```python
     async def _analyze_scaling_triggers(self, 
                                       agent_id: str,
                                       current_metrics: DataProcessingMetrics,
@@ -925,7 +937,8 @@ Data processing specific triggers monitor throughput utilization and processing 
 ```
 
 Queue depth receives the highest priority (5) because queue buildup indicates immediate processing bottlenecks that can cascade into system failures. When queues grow beyond thresholds, scaling must happen immediately to prevent data loss or processing delays.
-        
+
+```python
         # Scale down triggers for data processing cost optimization
         scale_down_triggers = []
         
@@ -975,6 +988,8 @@ Scale-up decisions select the highest priority trigger when multiple conditions 
 ```
 
 Scale-down processing is simpler since only one trigger type is evaluated, but still respects minimum replica constraints to maintain service availability.
+
+```python
             target_replicas = max(
                 policy.min_replicas,
                 current_replicas - policy.scale_down_increment
@@ -992,7 +1007,8 @@ Scale-down processing is simpler since only one trigger type is evaluated, but s
 ```
 
 The scaling decision logic returns structured results indicating the action to take, current and target replica counts, and the triggering conditions. When no scaling is needed, it returns 'no_action' with an explanatory reason.
-    
+
+```python
     async def _execute_scaling_decision(self, agent_id: str, scaling_decision: Dict[str, Any]):
         """Execute scaling decision for data processing agent"""
         
@@ -1050,7 +1066,8 @@ Comprehensive event logging captures all scaling operations for audit trails, pe
 ```
 
 Logging and error handling ensure all scaling outcomes are recorded, while the finally block ensures the scaling-in-progress flag is always cleared, preventing agents from being permanently locked from scaling operations.
-    
+
+```python
     async def get_scaling_status(self) -> Dict[str, Any]:
         """Get comprehensive auto-scaling status for data processing cluster"""
 ```
@@ -1106,7 +1123,6 @@ Scaling statistics analyze recent activity patterns to identify trends in scalin
 ```
 
 The comprehensive status return combines current state, historical statistics, and system configuration to provide complete visibility into auto-scaling operations. Recent events enable detailed analysis of scaling patterns and outcomes.
-```
 
 ---
 
@@ -1153,6 +1169,7 @@ class DataProcessingMetricType(Enum):
 
 Alert severity levels follow standard operational practices from informational notices to critical system failures. Metric types are specifically chosen for data processing workloads, covering performance, quality, and resource aspects essential for production monitoring.
 
+```python
 @dataclass
 class DataProcessingAlert:
     """Alert for data processing system anomalies"""
@@ -1185,6 +1202,7 @@ class DataProcessingHealthCheck:
 
 Health check results track agent availability and performance with three-tier status levels. Response time monitoring helps detect performance degradation before it impacts data processing operations.
 
+```python
 class EnterpriseDataProcessingMonitor:
     """Comprehensive monitoring system for data processing agents"""
     
@@ -1198,6 +1216,8 @@ class EnterpriseDataProcessingMonitor:
 ```
 
 The monitoring system initializes with configurable retention periods and health check intervals. Seven-day retention balances storage efficiency with sufficient historical data for trend analysis and capacity planning.
+
+```python
         # Real-time data storage
         self.metrics_buffer: Dict[str, deque] = defaultdict(lambda: deque(maxlen=10000))
         self.active_alerts: Dict[str, DataProcessingAlert] = {}
@@ -1214,7 +1234,8 @@ The monitoring system initializes with configurable retention periods and health
 ```
 
 The monitoring system maintains real-time data buffers with 10,000 metric limit per agent for efficient time-series storage. Performance baselines enable anomaly detection, while dashboard configurations support custom monitoring views for different operational teams.
-        
+
+```python
     async def start_monitoring(self) -> Dict[str, Any]:
         """Start comprehensive monitoring for data processing cluster"""
         
@@ -1248,7 +1269,8 @@ Monitoring startup begins by initializing core components including default aler
 ```
 
 Four concurrent monitoring loops provide comprehensive system observability: metrics collection for performance data, health checks for agent availability, alert processing for anomaly response, and anomaly detection for predictive monitoring.
-    
+
+```python
     async def _metrics_collection_loop(self):
         """Continuously collect metrics from data processing agents"""
         
@@ -1276,7 +1298,8 @@ The metrics collection loop gathers performance data from all agents every 10 se
 ```
 
 Error handling ensures metrics collection continues even when individual collection cycles fail, with longer wait periods during errors to prevent resource exhaustion while maintaining system resilience.
-    
+
+```python
     async def _collect_cluster_metrics(self) -> Dict[str, Dict[str, Any]]:
         """Collect comprehensive metrics from all data processing agents"""
         
@@ -1305,7 +1328,8 @@ Error handling ensures metrics collection continues even when individual collect
 ```
 
 Cluster metrics collection iterates through all active agents, gathering individual metrics and timestamping each collection. Failed collections are logged but don't stop the overall process, ensuring monitoring continuity even when some agents are unreachable.
-    
+
+```python
     async def _collect_single_agent_metrics(self, agent_id: str) -> Optional[Dict[str, Any]]:
         """Collect detailed metrics from individual data processing agent"""
         
@@ -1360,7 +1384,8 @@ Latency metrics include percentiles (P95, P99) to capture tail latency character
 ```
 
 Resource utilization tracking covers CPU, memory, disk, and network I/O for capacity planning. Queue depths indicate processing bottlenecks, while error rates and health status provide operational health visibility.
-    
+
+```python
     async def _setup_default_alert_rules(self):
         """Setup default alerting rules for data processing systems"""
 ```
@@ -1449,7 +1474,8 @@ Data quality and throughput alerts ensure data integrity and processing performa
 ```
 
 Health status alerts provide agent availability monitoring with degraded status triggering warnings and unhealthy status requiring critical response. The alert rule registration makes these rules active for continuous monitoring evaluation.
-    
+
+```python
     async def _process_metrics_for_alerts(self, agent_metrics: Dict[str, Dict[str, Any]]):
         """Process collected metrics against alert rules"""
         
@@ -1517,7 +1543,8 @@ New alert creation captures complete context including the triggering metric val
 ```
 
 Alert lifecycle management includes both triggering new alerts and resolving existing ones when conditions normalize. Resolution notifications and logging provide complete operational visibility into alert state changes.
-    
+
+```python
     async def create_data_processing_dashboard(self, dashboard_name: str, 
                                              config: Dict[str, Any]) -> Dict[str, Any]:
         """Create custom dashboard for data processing monitoring"""
@@ -1560,7 +1587,8 @@ Dashboard creation begins with configuration validation to ensure required field
 ```
 
 Dashboard configuration includes sensible defaults: 30-second refresh interval and 24-hour time range. The configuration is stored for runtime dashboard generation and includes creation timestamps for audit purposes.
-    
+
+```python
     async def get_monitoring_status(self) -> Dict[str, Any]:
         """Get comprehensive monitoring system status"""
 ```
@@ -1605,11 +1633,10 @@ Alert and metrics statistics provide operational insights into monitoring system
             'alert_rules_active': len(self.alert_rules),
             'anomaly_detection_enabled': self.anomaly_detection_enabled
         }
+    }
 ```
 
 The comprehensive monitoring status return aggregates system health metrics, active alerts, agent status distributions, and configuration details. This single view enables operators to quickly assess the health and configuration of the entire data processing monitoring system.
-        }
-```
 
 ---
 
