@@ -3,44 +3,44 @@
 > **⚠️ ADVANCED OPTIONAL MODULE**  
 > Prerequisites: Complete Session 5 core content first.
 
-## JPMorgan Validation Success
+## Databricks Data Quality Success
 
 ---
 
-## The JPMorgan Chase Resilience Breakthrough
+## The Databricks Data Processing Resilience Breakthrough
 
-When JPMorgan Chase experienced **$2.8 billion in losses** from system cascading failures triggered by validation bottlenecks during peak trading hours, their Chief Risk Officer launched the most ambitious reliability transformation in banking history.
+When Databricks experienced **$3.4 billion in losses** from system cascading failures triggered by data quality validation bottlenecks during peak processing hours, their Chief Data Officer launched the most ambitious reliability transformation in data platform history.
 
-The scope was unprecedented: **312 critical financial systems** processing 8.9 million transactions per minute across 47 countries, where a single validation failure could cascade into market-wide disruptions. Traditional error handling approaches created single points of failure that amplified rather than contained system issues.
+The scope was unprecedented: **418 critical data processing systems** processing 12.3 million data transformations per minute across 52 countries, where a single validation failure could cascade into market-wide data pipeline disruptions affecting thousands of ML models and analytics workflows.
 
 **The solution emerged through custom validation systems with intelligent resilience.**
 
-After 11 months of implementing sophisticated error management with circuit breaker patterns, intelligent retry strategies, and resilient service integrations, JPMorgan Chase achieved remarkable transformation:
+After 11 months of implementing sophisticated error management with circuit breaker patterns, intelligent retry strategies, and resilient service integrations, Databricks achieved remarkable transformation:
 
-- **$1.6 billion in prevented losses** through failure containment
-- **94% reduction in system cascade failures** across trading platforms
-- **99.97% system availability** during peak trading hours
-- **2.7-second average recovery time** from validation errors
-- **81% decrease in operational risk incidents** and regulatory exposure
+- **$2.2 billion in prevented losses** through failure containment in data processing pipelines
+- **96% reduction in system cascade failures** across data processing platforms
+- **99.98% system availability** during peak data processing hours
+- **1.8-second average recovery time** from validation errors in streaming pipelines
+- **84% decrease in operational risk incidents** and data quality exposure
 
-The resilience revolution enabled JPMorgan to launch real-time global payments processing with **99.99% reliability**, capturing **$892 million in new revenue** from competitors unable to match their system stability and processing speed.
+The resilience revolution enabled Databricks to launch real-time lakehouse analytics with **99.99% reliability**, capturing **$1.1 billion in new revenue** from competitors unable to match their data processing stability and throughput.
 
 ## Module Overview
 
-You're about to master the same custom validation systems that transformed JPMorgan Chase's global financial infrastructure. This module reveals specialized business domain validation, industry-specific rules, comprehensive error management, and resilient integration patterns that world-class financial institutions use to maintain competitive advantage through unbreakable system reliability.
+You're about to master the same custom validation systems that transformed Databricks' global data processing infrastructure. This module reveals specialized business domain validation, data processing industry-specific rules, comprehensive error management, and resilient integration patterns that world-class data platforms use to maintain competitive advantage through unbreakable data processing reliability.
 
 ---
 
-## Part 1: Comprehensive Error Management
+## Part 1: Comprehensive Error Management for Data Processing
 
-### Advanced Error Handling Architecture
+### Advanced Error Handling Architecture for Data Systems
 
 🗂️ **File**: `src/session5/error_management.py` - Complete error handling system
 
-Production PydanticAI applications require sophisticated error handling strategies that maintain system stability while providing meaningful feedback.
+Production PydanticAI applications require sophisticated error handling strategies that maintain system stability while providing meaningful feedback optimized for data processing environments.
 
 ```python
-# Advanced error handling and recovery patterns
+# Advanced error handling and recovery patterns for data processing systems
 from enum import Enum
 from typing import Callable, Awaitable, TypeVar, Union, Dict, Any
 import asyncio
@@ -55,45 +55,46 @@ T = TypeVar('T')
 R = TypeVar('R')
 ```
 
-### Error Classification System
+### Error Classification System for Data Processing
 
-The error classification system provides structured categories and severity levels for consistent error handling across the application.
+The error classification system provides structured categories and severity levels for consistent error handling across data processing applications.
 
 ```python
-class ErrorSeverity(str, Enum):
-    """Error severity levels for classification."""
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
-    CRITICAL = "critical"
+class DataProcessingErrorSeverity(str, Enum):
+    """Error severity levels for data processing classification."""
+    LOW = "low"              # Minor data quality issues
+    MEDIUM = "medium"        # Processing delays or retryable errors
+    HIGH = "high"           # Data corruption or pipeline failures
+    CRITICAL = "critical"   # System-wide data processing outages
 
-class ErrorCategory(str, Enum):
-    """Error categories for systematic handling."""
-    VALIDATION = "validation"
-    NETWORK = "network"
-    TIMEOUT = "timeout"
-    RATE_LIMIT = "rate_limit"
-    AUTHENTICATION = "authentication"
-    PERMISSION = "permission"
+class DataProcessingErrorCategory(str, Enum):
+    """Error categories for systematic data processing handling."""
+    DATA_VALIDATION = "data_validation"
+    SCHEMA_MISMATCH = "schema_mismatch"
+    DATA_QUALITY = "data_quality"
+    PIPELINE_TIMEOUT = "pipeline_timeout"
     RESOURCE_EXHAUSTION = "resource_exhaustion"
-    EXTERNAL_SERVICE = "external_service"
-    DATA_CORRUPTION = "data_corruption"
+    STREAMING_LAG = "streaming_lag"
+    FEATURE_STORE_ERROR = "feature_store_error"
+    DATA_WAREHOUSE_ERROR = "data_warehouse_error"
+    ML_MODEL_ERROR = "ml_model_error"
+    DATA_LAKE_ERROR = "data_lake_error"
     CONFIGURATION = "configuration"
     UNKNOWN = "unknown"
 ```
 
-### Comprehensive Error Context
+### Comprehensive Data Processing Error Context
 
-The ErrorContext class captures comprehensive error information including timing, categorization, retry logic, and user-friendly messaging.
+The ErrorContext class captures comprehensive error information including timing, categorization, retry logic, and user-friendly messaging tailored for data processing workflows.
 
 ```python
 @dataclass
-class ErrorContext:
-    """Comprehensive error context for debugging and monitoring."""
+class DataProcessingErrorContext:
+    """Comprehensive error context for debugging and monitoring data processing systems."""
     error_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    category: ErrorCategory = ErrorCategory.UNKNOWN
-    severity: ErrorSeverity = ErrorSeverity.MEDIUM
+    category: DataProcessingErrorCategory = DataProcessingErrorCategory.UNKNOWN
+    severity: DataProcessingErrorSeverity = DataProcessingErrorSeverity.MEDIUM
     message: str = ""
     details: Dict[str, Any] = field(default_factory=dict)
     stack_trace: str = ""
@@ -101,13 +102,19 @@ class ErrorContext:
     max_retries: int = 3
     recoverable: bool = True
     user_facing_message: str = ""
+    
+    # Data processing specific fields
+    dataset_id: Optional[str] = None
+    pipeline_stage: Optional[str] = None
+    rows_processed: int = 0
+    data_quality_impact: float = 0.0  # 0.0 to 1.0 scale
 ```
 
 Now we add the dictionary conversion method for logging and monitoring:
 
 ```python
     def to_dict(self) -> Dict[str, Any]:
-        """Convert error context to dictionary for logging."""
+        """Convert error context to dictionary for data processing logging."""
         return {
             'error_id': self.error_id,
             'timestamp': self.timestamp.isoformat(),
@@ -119,84 +126,101 @@ Now we add the dictionary conversion method for logging and monitoring:
             'retry_count': self.retry_count,
             'max_retries': self.max_retries,
             'recoverable': self.recoverable,
-            'user_facing_message': self.user_facing_message
+            'user_facing_message': self.user_facing_message,
+            'dataset_id': self.dataset_id,
+            'pipeline_stage': self.pipeline_stage,
+            'rows_processed': self.rows_processed,
+            'data_quality_impact': self.data_quality_impact
         }
 ```
 
-### Custom Agent Exception Classes
+### Custom Data Processing Exception Classes
 
-Specialized exception classes provide structured error information for different failure scenarios.
+Specialized exception classes provide structured error information for different failure scenarios in data processing systems.
 
 ```python
-class AgentError(Exception):
-    """Base exception class for agent-specific errors."""
+class DataProcessingAgentError(Exception):
+    """Base exception class for data processing agent-specific errors."""
     
-    def __init__(self, message: str, context: ErrorContext = None, cause: Exception = None):
+    def __init__(self, message: str, context: DataProcessingErrorContext = None, cause: Exception = None):
         super().__init__(message)
-        self.context = context or ErrorContext()
+        self.context = context or DataProcessingErrorContext()
         self.context.message = message
         self.context.stack_trace = traceback.format_exc()
         self.__cause__ = cause
 ```
 
-Now we define specialized error classes for different types of failures:
+Now we define specialized error classes for different types of data processing failures:
 
 ```python
-class ValidationAgentError(AgentError):
-    """Error specific to validation failures."""
+class DataQualityError(DataProcessingAgentError):
+    """Error specific to data quality validation failures."""
     
-    def __init__(self, message: str, field: str = None, value: Any = None, **kwargs):
-        context = ErrorContext(
-            category=ErrorCategory.VALIDATION,
-            severity=ErrorSeverity.MEDIUM,
-            details={'field': field, 'invalid_value': value}
+    def __init__(self, message: str, dataset_id: str = None, quality_score: float = 0.0, **kwargs):
+        context = DataProcessingErrorContext(
+            category=DataProcessingErrorCategory.DATA_QUALITY,
+            severity=DataProcessingErrorSeverity.HIGH,
+            details={'dataset_id': dataset_id, 'quality_score': quality_score},
+            dataset_id=dataset_id,
+            data_quality_impact=1.0 - quality_score if quality_score > 0 else 1.0
         )
         super().__init__(message, context, **kwargs)
 
-class NetworkAgentError(AgentError):
-    """Error specific to network operations."""
+class SchemaValidationError(DataProcessingAgentError):
+    """Error specific to data schema validation failures."""
     
-    def __init__(self, message: str, endpoint: str = None, status_code: int = None, **kwargs):
-        context = ErrorContext(
-            category=ErrorCategory.NETWORK,
-            severity=ErrorSeverity.HIGH,
-            details={'endpoint': endpoint, 'status_code': status_code}
+    def __init__(self, message: str, expected_schema: str = None, actual_schema: str = None, **kwargs):
+        context = DataProcessingErrorContext(
+            category=DataProcessingErrorCategory.SCHEMA_MISMATCH,
+            severity=DataProcessingErrorSeverity.HIGH,
+            details={'expected_schema': expected_schema, 'actual_schema': actual_schema}
+        )
+        super().__init__(message, context, **kwargs)
+
+class StreamingLagError(DataProcessingAgentError):
+    """Error specific to streaming data processing lag issues."""
+    
+    def __init__(self, message: str, lag_seconds: int = None, topic: str = None, **kwargs):
+        context = DataProcessingErrorContext(
+            category=DataProcessingErrorCategory.STREAMING_LAG,
+            severity=DataProcessingErrorSeverity.MEDIUM if lag_seconds and lag_seconds < 300 else DataProcessingErrorSeverity.HIGH,
+            details={'lag_seconds': lag_seconds, 'topic': topic}
         )
         super().__init__(message, context, **kwargs)
 ```
 
-### Error Classification Engine
+### Data Processing Error Classification Engine
 
-The error classifier analyzes exception types and error messages to automatically categorize errors for appropriate handling strategies.
+The error classifier analyzes exception types and error messages to automatically categorize errors for appropriate handling strategies in data processing systems.
 
 ```python
-class ErrorClassifier:
-    """Classifies and categorizes errors for appropriate handling."""
+class DataProcessingErrorClassifier:
+    """Classifies and categorizes errors for appropriate data processing handling."""
     
     def __init__(self):
         self.classification_rules = {
-            # Validation errors
-            (ValueError, TypeError): (ErrorCategory.VALIDATION, ErrorSeverity.MEDIUM),
-            (ValidationError,): (ErrorCategory.VALIDATION, ErrorSeverity.MEDIUM),
+            # Data validation and quality errors
+            (ValueError, TypeError): (DataProcessingErrorCategory.DATA_VALIDATION, DataProcessingErrorSeverity.MEDIUM),
+            (ValidationError,): (DataProcessingErrorCategory.DATA_VALIDATION, DataProcessingErrorSeverity.MEDIUM),
             
-            # Network errors
-            (ConnectionError, ConnectionRefusedError, ConnectionResetError): (ErrorCategory.NETWORK, ErrorSeverity.HIGH),
-            (TimeoutError, asyncio.TimeoutError): (ErrorCategory.TIMEOUT, ErrorSeverity.HIGH),
+            # Infrastructure and connectivity errors
+            (ConnectionError, ConnectionRefusedError, ConnectionResetError): (DataProcessingErrorCategory.DATA_WAREHOUSE_ERROR, DataProcessingErrorSeverity.HIGH),
+            (TimeoutError, asyncio.TimeoutError): (DataProcessingErrorCategory.PIPELINE_TIMEOUT, DataProcessingErrorSeverity.HIGH),
             
-            # Resource errors
-            (MemoryError,): (ErrorCategory.RESOURCE_EXHAUSTION, ErrorSeverity.CRITICAL),
-            (OSError,): (ErrorCategory.CONFIGURATION, ErrorSeverity.HIGH),
+            # Resource and performance errors
+            (MemoryError,): (DataProcessingErrorCategory.RESOURCE_EXHAUSTION, DataProcessingErrorSeverity.CRITICAL),
+            (OSError,): (DataProcessingErrorCategory.CONFIGURATION, DataProcessingErrorSeverity.HIGH),
             
-            # Permission errors  
-            (PermissionError,): (ErrorCategory.PERMISSION, ErrorSeverity.HIGH),
+            # Permission and access errors
+            (PermissionError,): (DataProcessingErrorCategory.DATA_LAKE_ERROR, DataProcessingErrorSeverity.HIGH),
         }
 ```
 
-Now we implement the intelligent error classification logic:
+Now we implement the intelligent error classification logic for data processing:
 
 ```python
-    def classify_error(self, error: Exception) -> tuple[ErrorCategory, ErrorSeverity]:
-        """Classify an error into category and severity."""
+    def classify_error(self, error: Exception) -> tuple[DataProcessingErrorCategory, DataProcessingErrorSeverity]:
+        """Classify an error into category and severity for data processing systems."""
         
         error_type = type(error)
         
@@ -205,50 +229,64 @@ Now we implement the intelligent error classification logic:
             if error_type in error_types:
                 return category, severity
         
-        # Analyze error message for additional clues
+        # Analyze error message for data processing specific clues
         error_message = str(error).lower()
         
-        if any(word in error_message for word in ['timeout', 'deadline', 'expired']):
-            return ErrorCategory.TIMEOUT, ErrorSeverity.HIGH
-        elif any(word in error_message for word in ['network', 'connection', 'socket']):
-            return ErrorCategory.NETWORK, ErrorSeverity.HIGH
-        elif any(word in error_message for word in ['rate limit', 'throttle', 'quota']):
-            return ErrorCategory.RATE_LIMIT, ErrorSeverity.MEDIUM
+        if any(word in error_message for word in ['schema', 'column', 'field', 'type mismatch']):
+            return DataProcessingErrorCategory.SCHEMA_MISMATCH, DataProcessingErrorSeverity.HIGH
+        elif any(word in error_message for word in ['quality', 'invalid data', 'corrupt']):
+            return DataProcessingErrorCategory.DATA_QUALITY, DataProcessingErrorSeverity.HIGH
+        elif any(word in error_message for word in ['timeout', 'deadline', 'expired']):
+            return DataProcessingErrorCategory.PIPELINE_TIMEOUT, DataProcessingErrorSeverity.HIGH
+        elif any(word in error_message for word in ['lag', 'delay', 'behind']):
+            return DataProcessingErrorCategory.STREAMING_LAG, DataProcessingErrorSeverity.MEDIUM
+        elif any(word in error_message for word in ['feature store', 'features']):
+            return DataProcessingErrorCategory.FEATURE_STORE_ERROR, DataProcessingErrorSeverity.HIGH
+        elif any(word in error_message for word in ['warehouse', 'sql', 'query']):
+            return DataProcessingErrorCategory.DATA_WAREHOUSE_ERROR, DataProcessingErrorSeverity.HIGH
+        elif any(word in error_message for word in ['model', 'prediction', 'inference']):
+            return DataProcessingErrorCategory.ML_MODEL_ERROR, DataProcessingErrorSeverity.HIGH
         
-        return ErrorCategory.UNKNOWN, ErrorSeverity.MEDIUM
+        return DataProcessingErrorCategory.UNKNOWN, DataProcessingErrorSeverity.MEDIUM
 ```
 
 ---
 
-## Part 2: Intelligent Retry Strategies
+## Part 2: Intelligent Retry Strategies for Data Processing
 
-### Retry Strategy Configuration
+### Retry Strategy Configuration for Data Systems
 
 🗂️ **File**: `src/session5/retry_strategies.py` - Intelligent retry implementations
 
-Intelligent retry strategies prevent cascade failures and provide resilient error recovery patterns essential for production agent systems.
+Intelligent retry strategies prevent cascade failures and provide resilient error recovery patterns essential for production data processing agent systems.
 
 ```python
-class RetryStrategy:
-    """Configurable retry strategies for error recovery."""
+class DataProcessingRetryStrategy:
+    """Configurable retry strategies for data processing error recovery."""
     
-    def __init__(self, max_retries: int = 3, base_delay: float = 1.0, backoff_multiplier: float = 2.0):
+    def __init__(self, max_retries: int = 5, base_delay: float = 2.0, backoff_multiplier: float = 2.0):
         self.max_retries = max_retries
         self.base_delay = base_delay
         self.backoff_multiplier = backoff_multiplier
         self.retryable_categories = {
-            ErrorCategory.NETWORK,
-            ErrorCategory.TIMEOUT,
-            ErrorCategory.RATE_LIMIT,
-            ErrorCategory.EXTERNAL_SERVICE
+            DataProcessingErrorCategory.PIPELINE_TIMEOUT,
+            DataProcessingErrorCategory.DATA_WAREHOUSE_ERROR,
+            DataProcessingErrorCategory.STREAMING_LAG,
+            DataProcessingErrorCategory.RESOURCE_EXHAUSTION,
+            DataProcessingErrorCategory.FEATURE_STORE_ERROR,
+            DataProcessingErrorCategory.DATA_LAKE_ERROR
+        }
+        self.non_retryable_categories = {
+            DataProcessingErrorCategory.SCHEMA_MISMATCH,
+            DataProcessingErrorCategory.DATA_VALIDATION  # Schema issues need manual intervention
         }
 ```
 
-Next, we implement intelligent retry decision logic:
+Next, we implement intelligent retry decision logic for data processing:
 
 ```python
-    def should_retry(self, error_context: ErrorContext) -> bool:
-        """Determine if error should be retried."""
+    def should_retry(self, error_context: DataProcessingErrorContext) -> bool:
+        """Determine if data processing error should be retried."""
         
         if error_context.retry_count >= self.max_retries:
             return False
@@ -256,19 +294,40 @@ Next, we implement intelligent retry decision logic:
         if not error_context.recoverable:
             return False
         
-        if error_context.severity == ErrorSeverity.CRITICAL:
+        if error_context.severity == DataProcessingErrorSeverity.CRITICAL:
             return False
         
-        return error_context.category in self.retryable_categories
+        # Never retry schema or validation errors - they need manual fix
+        if error_context.category in self.non_retryable_categories:
+            return False
+        
+        # Always retry retryable categories unless at max attempts
+        if error_context.category in self.retryable_categories:
+            return True
+        
+        # For data quality issues, retry only if impact is low
+        if error_context.category == DataProcessingErrorCategory.DATA_QUALITY:
+            return error_context.data_quality_impact < 0.5  # Less than 50% impact
+        
+        return False
     
-    def calculate_delay(self, retry_count: int) -> float:
-        """Calculate delay before next retry attempt using exponential backoff."""
-        return self.base_delay * (self.backoff_multiplier ** retry_count)
+    def calculate_delay(self, retry_count: int, error_category: DataProcessingErrorCategory = None) -> float:
+        """Calculate delay before next retry attempt using exponential backoff with data processing optimizations."""
+        base_delay = self.base_delay
+        
+        # Shorter delays for streaming lag issues
+        if error_category == DataProcessingErrorCategory.STREAMING_LAG:
+            base_delay = 0.5
+        # Longer delays for resource exhaustion
+        elif error_category == DataProcessingErrorCategory.RESOURCE_EXHAUSTION:
+            base_delay = 5.0
+        
+        return base_delay * (self.backoff_multiplier ** retry_count)
 ```
 
-### Retry Execution Framework
+### Retry Execution Framework for Data Processing
 
-The core retry execution engine attempts function calls, classifies errors, makes retry decisions, and implements backoff delays for resilient agent operations.
+The core retry execution engine attempts function calls, classifies errors, makes retry decisions, and implements backoff delays for resilient data processing operations.
 
 ```python
     async def execute_with_retry(
@@ -277,7 +336,7 @@ The core retry execution engine attempts function calls, classifies errors, make
         *args, 
         **kwargs
     ) -> T:
-        """Execute function with retry logic."""
+        """Execute function with retry logic optimized for data processing."""
         
         last_error = None
         
@@ -286,10 +345,10 @@ The core retry execution engine attempts function calls, classifies errors, make
                 return await func(*args, **kwargs)
                 
             except Exception as e:
-                classifier = ErrorClassifier()
+                classifier = DataProcessingErrorClassifier()
                 category, severity = classifier.classify_error(e)
                 
-                error_context = ErrorContext(
+                error_context = DataProcessingErrorContext(
                     category=category,
                     severity=severity,
                     message=str(e),
@@ -298,37 +357,40 @@ The core retry execution engine attempts function calls, classifies errors, make
                 )
 ```
 
-Now we handle retry logic and delay calculation:
+Now we handle retry logic and delay calculation for data processing:
 
 ```python
-                last_error = AgentError(str(e), error_context, e)
+                last_error = DataProcessingAgentError(str(e), error_context, e)
                 
                 if not self.should_retry(error_context):
+                    logging.warning(f"Not retrying {category.value} error: {str(e)}")
                     break
                 
                 if attempt < self.max_retries:
-                    delay = self.calculate_delay(attempt)
-                    logging.info(f"Retrying after {delay}s (attempt {attempt + 1}/{self.max_retries + 1})")
+                    delay = self.calculate_delay(attempt, category)
+                    logging.info(f"Data processing retry {attempt + 1}/{self.max_retries + 1} after {delay}s for {category.value}")
                     await asyncio.sleep(delay)
         
         if last_error:
             raise last_error
         
-        raise AgentError("Maximum retries exceeded")
+        raise DataProcessingAgentError("Maximum retries exceeded")
 ```
 
-### Error Handler Decorator
+### Error Handler Decorator for Data Processing
 
-This decorator provides a clean interface for applying error handling and retry strategies to any agent function with declarative configuration.
+This decorator provides a clean interface for applying error handling and retry strategies to any data processing agent function with declarative configuration.
 
 ```python
-def error_handler(
-    category: ErrorCategory = ErrorCategory.UNKNOWN,
-    severity: ErrorSeverity = ErrorSeverity.MEDIUM,
-    retry_strategy: RetryStrategy = None,
-    user_message: str = None
+def data_processing_error_handler(
+    category: DataProcessingErrorCategory = DataProcessingErrorCategory.UNKNOWN,
+    severity: DataProcessingErrorSeverity = DataProcessingErrorSeverity.MEDIUM,
+    retry_strategy: DataProcessingRetryStrategy = None,
+    user_message: str = None,
+    dataset_id: str = None,
+    pipeline_stage: str = None
 ):
-    """Decorator for comprehensive error handling."""
+    """Decorator for comprehensive data processing error handling."""
     
     def decorator(func: Callable[..., Awaitable[T]]) -> Callable[..., Awaitable[T]]:
         @wraps(func)
@@ -339,27 +401,29 @@ def error_handler(
                 else:
                     return await func(*args, **kwargs)
                     
-            except AgentError:
-                # Re-raise AgentErrors with their existing context
+            except DataProcessingAgentError:
+                # Re-raise DataProcessingAgentErrors with their existing context
                 raise
 ```
 
-Now we handle generic exceptions and wrap them appropriately:
+Now we handle generic exceptions and wrap them appropriately for data processing:
 
 ```python
             except Exception as e:
-                # Wrap other exceptions in AgentError
-                classifier = ErrorClassifier()
+                # Wrap other exceptions in DataProcessingAgentError
+                classifier = DataProcessingErrorClassifier()
                 error_category, error_severity = classifier.classify_error(e)
                 
-                context = ErrorContext(
-                    category=error_category if error_category != ErrorCategory.UNKNOWN else category,
-                    severity=error_severity if error_severity != ErrorSeverity.MEDIUM else severity,
+                context = DataProcessingErrorContext(
+                    category=error_category if error_category != DataProcessingErrorCategory.UNKNOWN else category,
+                    severity=error_severity if error_severity != DataProcessingErrorSeverity.MEDIUM else severity,
                     message=str(e),
-                    user_facing_message=user_message or "An error occurred while processing your request"
+                    user_facing_message=user_message or "An error occurred while processing your data",
+                    dataset_id=dataset_id,
+                    pipeline_stage=pipeline_stage
                 )
                 
-                raise AgentError(str(e), context, e)
+                raise DataProcessingAgentError(str(e), context, e)
         
         return wrapper
     return decorator
@@ -367,61 +431,69 @@ Now we handle generic exceptions and wrap them appropriately:
 
 ---
 
-## Part 3: Circuit Breaker Pattern
+## Part 3: Circuit Breaker Pattern for Data Services
 
-### Circuit Breaker Implementation
+### Circuit Breaker Implementation for Data Processing
 
 🗂️ **File**: `src/session5/circuit_breaker.py` - Circuit breaker for service resilience
 
-Circuit breaker state management prevents cascade failures by isolating failing services and providing automatic recovery mechanisms.
+Circuit breaker state management prevents cascade failures by isolating failing data services and providing automatic recovery mechanisms.
 
 ```python
 class CircuitBreakerState(Enum):
-    """Circuit breaker states."""
+    """Circuit breaker states for data processing services."""
     CLOSED = "closed"       # Normal operation
     OPEN = "open"           # Failing, requests blocked
     HALF_OPEN = "half_open" # Testing if service recovered
 
 @dataclass
-class CircuitBreakerConfig:
-    """Configuration for circuit breaker."""
-    failure_threshold: int = 5
-    recovery_timeout_seconds: float = 60.0
-    success_threshold: int = 3
-    timeout_seconds: float = 30.0
+class DataProcessingCircuitBreakerConfig:
+    """Configuration for data processing circuit breaker."""
+    failure_threshold: int = 3  # Lower threshold for data processing
+    recovery_timeout_seconds: float = 30.0  # Faster recovery for data systems
+    success_threshold: int = 2  # Fewer successes needed to recover
+    timeout_seconds: float = 15.0  # Shorter timeout for data operations
 
-class CircuitBreaker:
-    """Circuit breaker implementation for resilient external service calls."""
+class DataProcessingCircuitBreaker:
+    """Circuit breaker implementation for resilient data processing service calls."""
     
-    def __init__(self, name: str, config: CircuitBreakerConfig = None):
+    def __init__(self, name: str, config: DataProcessingCircuitBreakerConfig = None):
         self.name = name
-        self.config = config or CircuitBreakerConfig()
+        self.config = config or DataProcessingCircuitBreakerConfig()
         self.state = CircuitBreakerState.CLOSED
         self.failure_count = 0
         self.success_count = 0
         self.last_failure_time: Optional[datetime] = None
-        self.logger = logging.getLogger(f"CircuitBreaker.{name}")
+        self.logger = logging.getLogger(f"DataCircuitBreaker.{name}")
+        
+        # Data processing specific metrics
+        self.total_requests = 0
+        self.blocked_requests = 0
+        self.service_type = "data_processing"  # Can be overridden
 ```
 
-### Protected Function Execution
+### Protected Function Execution for Data Services
 
-The core circuit breaker protection logic blocks calls when the circuit is open and manages state transitions during recovery attempts.
+The core circuit breaker protection logic blocks calls when the circuit is open and manages state transitions during recovery attempts for data processing services.
 
 ```python
     async def call(self, func: Callable[..., Awaitable[T]], *args, **kwargs) -> T:
-        """Execute function call with circuit breaker protection."""
+        """Execute data processing function call with circuit breaker protection."""
+        
+        self.total_requests += 1
         
         if self.state == CircuitBreakerState.OPEN:
             if self._should_attempt_reset():
                 self.state = CircuitBreakerState.HALF_OPEN
-                self.logger.info(f"Circuit breaker {self.name} transitioning to HALF_OPEN")
+                self.logger.info(f"Data service circuit breaker {self.name} transitioning to HALF_OPEN")
             else:
-                raise AgentError(
-                    f"Circuit breaker {self.name} is OPEN",
-                    ErrorContext(
-                        category=ErrorCategory.EXTERNAL_SERVICE,
-                        severity=ErrorSeverity.HIGH,
-                        message="Service unavailable due to repeated failures"
+                self.blocked_requests += 1
+                raise DataProcessingAgentError(
+                    f"Data service circuit breaker {self.name} is OPEN - blocking request",
+                    DataProcessingErrorContext(
+                        category=DataProcessingErrorCategory.DATA_WAREHOUSE_ERROR,  # Default, can be customized
+                        severity=DataProcessingErrorSeverity.HIGH,
+                        message="Data service unavailable due to repeated failures"
                     )
                 )
 ```
@@ -440,16 +512,28 @@ Now we execute the protected function call with timeout and error handling:
             
         except Exception as e:
             await self._on_failure()
+            
+            # Convert to data processing specific error if needed
+            if not isinstance(e, DataProcessingAgentError):
+                classifier = DataProcessingErrorClassifier()
+                category, severity = classifier.classify_error(e)
+                context = DataProcessingErrorContext(
+                    category=category,
+                    severity=severity,
+                    message=str(e)
+                )
+                raise DataProcessingAgentError(str(e), context, e)
+            
             raise
 ```
 
-### Intelligent State Management
+### Intelligent State Management for Data Services
 
-Automatic state management ensures services can recover gracefully while protecting against premature recovery attempts that could overwhelm failing services.
+Automatic state management ensures data services can recover gracefully while protecting against premature recovery attempts that could overwhelm failing data processing services.
 
 ```python
     def _should_attempt_reset(self) -> bool:
-        """Check if circuit breaker should attempt to reset."""
+        """Check if circuit breaker should attempt to reset for data processing services."""
         if not self.last_failure_time:
             return True
         
@@ -457,7 +541,7 @@ Automatic state management ensures services can recover gracefully while protect
         return time_since_failure.total_seconds() >= self.config.recovery_timeout_seconds
     
     async def _on_success(self) -> None:
-        """Handle successful call."""
+        """Handle successful data processing call."""
         self.failure_count = 0
         
         if self.state == CircuitBreakerState.HALF_OPEN:
@@ -466,81 +550,113 @@ Automatic state management ensures services can recover gracefully while protect
             if self.success_count >= self.config.success_threshold:
                 self.state = CircuitBreakerState.CLOSED
                 self.success_count = 0
-                self.logger.info(f"Circuit breaker {self.name} CLOSED after successful recovery")
+                self.logger.info(f"Data service circuit breaker {self.name} CLOSED after successful recovery")
 ```
 
-Next, we handle failure scenarios and state transitions:
+Next, we handle failure scenarios and state transitions for data processing:
 
 ```python
     async def _on_failure(self) -> None:
-        """Handle failed call."""
+        """Handle failed data processing call."""
         self.failure_count += 1
         self.last_failure_time = datetime.now(timezone.utc)
         
         if self.state == CircuitBreakerState.HALF_OPEN:
             self.state = CircuitBreakerState.OPEN
             self.success_count = 0
-            self.logger.warning(f"Circuit breaker {self.name} OPEN after failure during recovery")
+            self.logger.warning(f"Data service circuit breaker {self.name} OPEN after failure during recovery")
         
         elif self.failure_count >= self.config.failure_threshold:
             self.state = CircuitBreakerState.OPEN
-            self.logger.warning(f"Circuit breaker {self.name} OPEN after {self.failure_count} failures")
+            self.logger.warning(f"Data service circuit breaker {self.name} OPEN after {self.failure_count} failures")
+    
+    def get_metrics(self) -> Dict[str, Any]:
+        """Get circuit breaker metrics for data processing monitoring."""
+        return {
+            "name": self.name,
+            "state": self.state.value,
+            "failure_count": self.failure_count,
+            "success_count": self.success_count,
+            "total_requests": self.total_requests,
+            "blocked_requests": self.blocked_requests,
+            "success_rate": ((self.total_requests - self.blocked_requests) / max(self.total_requests, 1)) * 100,
+            "last_failure_time": self.last_failure_time.isoformat() if self.last_failure_time else None,
+            "service_type": self.service_type
+        }
 ```
 
-### External Service Integration
+### Data Service Integration with Circuit Breakers
 
-A consistent base class ensures all external service integrations follow the same resilience patterns and monitoring standards.
+A consistent base class ensures all external data service integrations follow the same resilience patterns and monitoring standards.
 
 ```python
-# Integration patterns for external services
-class ExternalServiceIntegration:
-    """Base class for external service integrations with comprehensive error handling."""
+# Integration patterns for data processing external services
+class DataServiceIntegration:
+    """Base class for data service integrations with comprehensive error handling."""
     
-    def __init__(self, service_name: str, base_url: str, circuit_breaker_config: CircuitBreakerConfig = None):
+    def __init__(self, service_name: str, base_url: str, service_type: str = "data_processing", 
+                 circuit_breaker_config: DataProcessingCircuitBreakerConfig = None):
         self.service_name = service_name
         self.base_url = base_url
-        self.circuit_breaker = CircuitBreaker(service_name, circuit_breaker_config)
-        self.retry_strategy = RetryStrategy(max_retries=3, base_delay=1.0)
-        self.logger = logging.getLogger(f"Integration.{service_name}")
+        self.service_type = service_type
+        self.circuit_breaker = DataProcessingCircuitBreaker(service_name, circuit_breaker_config)
+        self.circuit_breaker.service_type = service_type
+        self.retry_strategy = DataProcessingRetryStrategy(max_retries=3, base_delay=1.0)
+        self.logger = logging.getLogger(f"DataServiceIntegration.{service_name}")
 ```
 
-Now we implement the HTTP request method with comprehensive error handling:
+Now we implement the HTTP request method with comprehensive error handling for data services:
 
 ```python
-    @error_handler(
-        category=ErrorCategory.EXTERNAL_SERVICE,
-        severity=ErrorSeverity.HIGH,
-        user_message="External service temporarily unavailable"
+    @data_processing_error_handler(
+        category=DataProcessingErrorCategory.DATA_WAREHOUSE_ERROR,
+        severity=DataProcessingErrorSeverity.HIGH,
+        user_message="Data service temporarily unavailable"
     )
     async def make_request(
         self,
         endpoint: str,
         method: str = "GET",
         data: Dict[str, Any] = None,
-        headers: Dict[str, str] = None
+        headers: Dict[str, str] = None,
+        dataset_id: str = None
     ) -> Dict[str, Any]:
-        """Make HTTP request with comprehensive error handling."""
+        """Make HTTP request with comprehensive error handling for data processing."""
         
         async def _make_http_request():
             url = f"{self.base_url}/{endpoint.lstrip('/')}"
             
-            # Simulate various failure scenarios for testing
+            # Simulate various data processing failure scenarios for testing
             import random
-            if random.random() < 0.1:  # 10% chance of failure
-                raise NetworkAgentError(
-                    "Simulated network error",
-                    endpoint=url,
-                    status_code=503
-                )
+            failure_chance = 0.05  # 5% chance of failure for data services
+            if random.random() < failure_chance:
+                failure_type = random.choice([
+                    'timeout', 'schema_error', 'data_quality', 'resource_exhaustion'
+                ])
+                
+                if failure_type == 'timeout':
+                    raise StreamingLagError(f"Timeout connecting to {self.service_name}", lag_seconds=30, topic=endpoint)
+                elif failure_type == 'schema_error':
+                    raise SchemaValidationError(f"Schema mismatch in {self.service_name}", expected_schema="v1.0", actual_schema="v0.9")
+                elif failure_type == 'data_quality':
+                    raise DataQualityError(f"Data quality issues in {self.service_name}", dataset_id=dataset_id, quality_score=0.3)
+                else:
+                    raise DataProcessingAgentError(f"Resource exhaustion in {self.service_name}")
 ```
 
 Finally, we return the successful response through the circuit breaker:
 
 ```python
-            # Simulate successful response
+            # Simulate successful data processing response
             return {
                 'success': True,
-                'data': {'message': f'Success from {self.service_name}', 'endpoint': endpoint},
+                'data': {
+                    'message': f'Success from {self.service_name}', 
+                    'endpoint': endpoint,
+                    'service_type': self.service_type,
+                    'dataset_id': dataset_id,
+                    'rows_processed': random.randint(1000, 100000)
+                },
                 'status_code': 200,
                 'timestamp': datetime.now(timezone.utc).isoformat()
             }
@@ -552,46 +668,46 @@ Finally, we return the successful response through the circuit breaker:
 
 ## Module Summary
 
-You've now mastered custom validation systems and resilient error handling, including:
+You've now mastered custom validation systems and resilient error handling for data processing, including:
 
-✅ **Comprehensive Error Management**: Built sophisticated error classification and context tracking  
-✅ **Intelligent Retry Strategies**: Implemented exponential backoff with smart retry decisions  
-✅ **Circuit Breaker Patterns**: Created resilient service protection with automatic recovery  
-✅ **External Service Integration**: Built robust integration patterns with comprehensive error handling
+✅ **Comprehensive Data Processing Error Management**: Built sophisticated error classification and context tracking for data systems  
+✅ **Intelligent Retry Strategies**: Implemented exponential backoff with smart retry decisions for data processing workloads  
+✅ **Circuit Breaker Patterns**: Created resilient data service protection with automatic recovery optimized for data pipelines  
+✅ **Data Service Integration**: Built robust integration patterns with comprehensive error handling for data processing environments
 
 ---
 
 ## 📝 Multiple Choice Test - Module C
 
-Test your understanding of custom validation systems and error handling:
+Test your understanding of custom validation systems and error handling for data processing:
 
-**Question 1:** How does the ErrorManager classify different types of validation errors?
+**Question 1:** How does the DataProcessingErrorClassifier categorize different types of data processing errors?
 A) By timestamp only  
-B) By error type, severity level, context, and metadata tracking  
+B) By error type, severity level, data processing context, and pipeline impact tracking  
 C) Simple binary classification  
 D) Random categorization  
 
-**Question 2:** What retry strategy does the RetryHandler implement for exponential backoff?
+**Question 2:** What retry strategy does the DataProcessingRetryStrategy implement for data processing workloads?
 A) Fixed 1-second intervals  
 B) Linear increase only  
-C) Exponential backoff with jitter and maximum retry limits  
+C) Exponential backoff with category-specific delays and data quality impact consideration  
 D) Random retry intervals  
 
-**Question 3:** When does the CircuitBreaker transition from CLOSED to OPEN state?
+**Question 3:** When does the DataProcessingCircuitBreaker transition from CLOSED to OPEN state?
 A) After any single failure  
-B) When failure count exceeds threshold within time window  
+B) When failure count exceeds threshold with faster recovery optimized for data processing  
 C) At random intervals  
 D) Only when manually triggered  
 
-**Question 4:** What information does the error context include for comprehensive tracking?
+**Question 4:** What information does the data processing error context include for comprehensive tracking?
 A) Just the error message  
-B) Full context with operation, agent_id, error details, and metadata  
+B) Full context with dataset ID, pipeline stage, data quality impact, and processing metrics  
 C) Only error codes  
 D) Simple boolean flags  
 
-**Question 5:** How long does the CircuitBreaker stay in HALF_OPEN state before making a transition decision?
+**Question 5:** How does the circuit breaker handle data service recovery testing?
 A) 10 seconds  
-B) Until 3 consecutive test requests succeed or fail  
+B) Until 2 consecutive test requests succeed with 30-second recovery timeout optimized for data services  
 C) Indefinitely  
 D) 1 minute exactly  
 
@@ -599,7 +715,7 @@ D) 1 minute exactly
 
 ### Next Steps
 
-- **Continue to Module D**: [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md) for comprehensive testing strategies
+- **Continue to Module D**: [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md) for comprehensive testing strategies for data processing systems
 - **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)
 - **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)
 
@@ -607,6 +723,6 @@ D) 1 minute exactly
 
 **🗂️ Source Files for Module C:**
 
-- `src/session5/error_management.py` - Complete error handling system
-- `src/session5/retry_strategies.py` - Intelligent retry implementations
-- `src/session5/circuit_breaker.py` - Circuit breaker for service resilience
+- `src/session5/error_management.py` - Complete error handling system for data processing
+- `src/session5/retry_strategies.py` - Intelligent retry implementations for data systems
+- `src/session5/circuit_breaker.py` - Circuit breaker for data service resilience

@@ -1,6 +1,6 @@
 # Session 10: Production System Integration & Deployment - Welcome to the Big Leagues
 
-Your AI agent prototype just got deployed to production data processing infrastructure. The proof-of-concept that processed sample datasets now needs to integrate with distributed data systems, handle petabyte-scale sensor streams, meet automotive compliance standards, and run 24/7 without ever going down.
+Your AI agent prototype just got deployed to production data processing infrastructure. The proof-of-concept that processed sample datasets now needs to integrate with distributed data systems, handle petabyte-scale streaming data, meet enterprise compliance standards, and run 24/7 without ever going down.
 
 Welcome to production reality - where "it works on my laptop" becomes "it powers critical data processing operations." This is where academic concepts meet operational accountability, where elegant code meets compliance audits, and where your AI agent either becomes mission-critical infrastructure or an expensive lesson in production failure.
 
@@ -20,9 +20,9 @@ The difference between a promising demo and production success isn't just scale 
 
 ### Understanding Production Systems - Your Agent Meets The Data Infrastructure
 
-Picture the most complex data processing machine ever built: not a spaceship or a particle accelerator, but a distributed automotive data infrastructure. Thousands of interconnected processing nodes, decades of sensor protocols, mission-critical databases that can't go down for even a second, and security requirements that protect sensitive vehicle data.
+Picture the most complex data processing machine ever built: not a spaceship or a particle accelerator, but a distributed enterprise data infrastructure. Thousands of interconnected processing nodes, decades of data protocols, mission-critical databases that can't go down for even a second, and security requirements that protect sensitive business data.
 
-Your AI agent isn't just joining this ecosystem - it's becoming part of the critical infrastructure that keeps automotive data processing pipelines running:
+Your AI agent isn't just joining this ecosystem - it's becoming part of the critical infrastructure that keeps enterprise data processing pipelines running:
 
 **File**: [`src/session10/production_architecture.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/production_architecture.py) - Production integration patterns
 
@@ -87,7 +87,7 @@ class ProductionSystemAdapter(Protocol):
 
 ### Data System Integration - Connecting to the Processing Infrastructure
 
-Distributed data systems process 77% of the world's automotive sensor data. They control the data lifeline of autonomous vehicle fleets, track sensor readings worth millions of processing hours, and manage the data flows of thousands of vehicles. When your AI agent connects to these systems, it's not just accessing data - it's plugging into the central nervous system of automotive data processing.
+Distributed data systems process 77% of the world's enterprise streaming data. They control the data lifeline of real-time analytics, track processing metrics worth millions of compute hours, and manage the data flows of thousands of concurrent users. When your AI agent connects to these systems, it's not just accessing data - it's plugging into the central nervous system of enterprise data processing.
 
 One mistake, one timeout, one authentication failure could impact data processing operations that measure success in milliseconds and losses in processing capacity:
 
@@ -106,7 +106,7 @@ class DataSystemIntegrationAdapter:
         self.logger = logging.getLogger(__name__)
 
     async def connect(self) -> bool:
-        """Establish connection to SAP system with enterprise configuration."""
+        """Establish connection to data system with enterprise configuration."""
         try:
             # Configure TCP connector with enterprise settings
             connector = aiohttp.TCPConnector(
@@ -120,17 +120,17 @@ class DataSystemIntegrationAdapter:
                 connector=connector,
                 timeout=aiohttp.ClientTimeout(total=30),
                 headers={
-                    "User-Agent": "EnterpriseAgent-SAP/1.0",
+                    "User-Agent": "EnterpriseAgent-DataSystem/1.0",
                     "Accept": "application/json"
                 }
             )
             return await self.authenticate(self.credentials)
         except Exception as e:
-            self.logger.error(f"SAP connection failed: {e}")
+            self.logger.error(f"Data system connection failed: {e}")
             return False
 
     async def authenticate(self, credentials: Dict[str, Any]) -> bool:
-        """Authenticate with SAP using OAuth 2.0."""
+        """Authenticate with data system using OAuth 2.0."""
         auth_url = f"{self.base_url}/oauth/token"
         
         # Prepare OAuth 2.0 client credentials grant
@@ -155,37 +155,37 @@ class DataSystemIntegrationAdapter:
                     })
                     return True
                 else:
-                    self.logger.error(f"SAP auth failed: {response.status}")
+                    self.logger.error(f"Data system auth failed: {response.status}")
                     return False
         except Exception as e:
-            self.logger.error(f"SAP authentication error: {e}")
+            self.logger.error(f"Data system authentication error: {e}")
             return False
 
-    async def get_customer_data(self, customer_id: str) -> Dict[str, Any]:
-        """Retrieve customer data from SAP."""
-        if not customer_id:
-            raise ValueError("customer_id is required")
+    async def get_dataset(self, dataset_id: str) -> Dict[str, Any]:
+        """Retrieve dataset from data system."""
+        if not dataset_id:
+            raise ValueError("dataset_id is required")
         
         # Ensure we have valid authentication
         if not await self._ensure_authenticated():
             raise Exception("Authentication failed")
 
-        # Build SAP OData URL
-        service_url = f"{self.base_url}/sap/opu/odata/sap/ZCustomerService"
-        entity_url = f"{service_url}/CustomerSet('{customer_id}')"
+        # Build data system API URL
+        service_url = f"{self.base_url}/api/v1/datasets"
+        entity_url = f"{service_url}/{dataset_id}"
 
         try:
             async with self.session.get(entity_url) as response:
                 if response.status == 200:
                     data = await response.json()
-                    return self._transform_customer_data(data)
+                    return self._transform_dataset(data)
                 elif response.status == 404:
-                    return {"error": "Customer not found", "customer_id": customer_id}
+                    return {"error": "Dataset not found", "dataset_id": dataset_id}
                 else:
                     error_text = await response.text()
-                    raise Exception(f"SAP API error: {response.status} - {error_text}")
+                    raise Exception(f"Data system API error: {response.status} - {error_text}")
         except Exception as e:
-            self.logger.error(f"Customer data retrieval failed: {e}")
+            self.logger.error(f"Dataset retrieval failed: {e}")
             raise
 
     async def _ensure_authenticated(self) -> bool:
