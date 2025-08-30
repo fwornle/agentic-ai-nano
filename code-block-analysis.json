@@ -8407,14 +8407,15 @@
     },
     {
       "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_ModuleB_Production_Multi_Agent_Systems.md",
-      "total_code_blocks": 3,
+      "total_code_blocks": 7,
       "large_blocks_count": 3,
       "code_blocks": [
         {
           "start_line": 20,
-          "end_line": 465,
+          "end_line": 30,
           "language": "python",
           "content": [
+            "# Essential imports for enterprise data agent deployment",
             "from typing import Dict, List, Any, Optional",
             "from dataclasses import dataclass, field",
             "from datetime import datetime, timedelta",
@@ -8422,8 +8423,15 @@
             "import json",
             "import logging",
             "import yaml",
-            "from pathlib import Path",
-            "",
+            "from pathlib import Path"
+          ],
+          "line_count": 9
+        },
+        {
+          "start_line": 34,
+          "end_line": 45,
+          "language": "python",
+          "content": [
             "@dataclass",
             "class DataProcessingResourceRequirements:",
             "    \"\"\"Resource requirements for data processing agents in production\"\"\"",
@@ -8433,8 +8441,15 @@
             "    network_bandwidth_mbps: float = 1000.0",
             "    gpu_count: int = 0",
             "    data_throughput_rps: int = 10000  # Records per second",
-            "    max_concurrent_streams: int = 16",
-            "",
+            "    max_concurrent_streams: int = 16"
+          ],
+          "line_count": 10
+        },
+        {
+          "start_line": 49,
+          "end_line": 63,
+          "language": "python",
+          "content": [
             "@dataclass ",
             "class DataAgentDeploymentConfig:",
             "    \"\"\"Comprehensive deployment configuration for data processing agents\"\"\"",
@@ -8447,8 +8462,15 @@
             "    scaling_config: Dict[str, Any] = field(default_factory=dict)",
             "    monitoring_config: Dict[str, Any] = field(default_factory=dict)",
             "    security_config: Dict[str, Any] = field(default_factory=dict)",
-            "    data_compliance_tags: List[str] = field(default_factory=list)",
-            "",
+            "    data_compliance_tags: List[str] = field(default_factory=list)"
+          ],
+          "line_count": 13
+        },
+        {
+          "start_line": 69,
+          "end_line": 88,
+          "language": "python",
+          "content": [
             "class EnterpriseDataAgentOrchestrator:",
             "    \"\"\"Production orchestration system for multi-agent data processing deployments\"\"\"",
             "    ",
@@ -8466,8 +8488,15 @@
             "        self.deployment_metrics: Dict[str, Any] = {}",
             "        self.health_checks_active = True",
             "        ",
-            "        self.logger = logging.getLogger(\"EnterpriseDataOrchestrator\")",
-            "        ",
+            "        self.logger = logging.getLogger(\"EnterpriseDataOrchestrator\")"
+          ],
+          "line_count": 18
+        },
+        {
+          "start_line": 92,
+          "end_line": 484,
+          "language": "python",
+          "content": [
             "    async def deploy_data_processing_cluster(self, ",
             "                                           agents_config: List[DataAgentDeploymentConfig]) -> Dict[str, Any]:",
             "        \"\"\"Deploy complete multi-agent data processing cluster to production\"\"\"",
@@ -8860,11 +8889,11 @@
             "            'scaling_events': await self._get_recent_scaling_events()",
             "        }"
           ],
-          "line_count": 444
+          "line_count": 391
         },
         {
-          "start_line": 473,
-          "end_line": 855,
+          "start_line": 492,
+          "end_line": 874,
           "language": "python",
           "content": [
             "from typing import Dict, List, Any, Optional, Tuple",
@@ -9252,8 +9281,8 @@
           "line_count": 381
         },
         {
-          "start_line": 867,
-          "end_line": 1259,
+          "start_line": 886,
+          "end_line": 1278,
           "language": "python",
           "content": [
             "from typing import Dict, List, Any, Optional, Set",
@@ -9653,63 +9682,10 @@
       ],
       "large_blocks": [
         {
-          "start_line": 20,
-          "end_line": 465,
+          "start_line": 92,
+          "end_line": 484,
           "language": "python",
           "content": [
-            "from typing import Dict, List, Any, Optional",
-            "from dataclasses import dataclass, field",
-            "from datetime import datetime, timedelta",
-            "import asyncio",
-            "import json",
-            "import logging",
-            "import yaml",
-            "from pathlib import Path",
-            "",
-            "@dataclass",
-            "class DataProcessingResourceRequirements:",
-            "    \"\"\"Resource requirements for data processing agents in production\"\"\"",
-            "    cpu_cores: float = 2.0",
-            "    memory_gb: float = 4.0",
-            "    storage_gb: float = 100.0",
-            "    network_bandwidth_mbps: float = 1000.0",
-            "    gpu_count: int = 0",
-            "    data_throughput_rps: int = 10000  # Records per second",
-            "    max_concurrent_streams: int = 16",
-            "",
-            "@dataclass ",
-            "class DataAgentDeploymentConfig:",
-            "    \"\"\"Comprehensive deployment configuration for data processing agents\"\"\"",
-            "    agent_id: str",
-            "    image: str",
-            "    version: str",
-            "    environment: str  # dev, staging, production",
-            "    data_processing_config: Dict[str, Any] = field(default_factory=dict)",
-            "    resource_requirements: DataProcessingResourceRequirements = field(default_factory=DataProcessingResourceRequirements)",
-            "    scaling_config: Dict[str, Any] = field(default_factory=dict)",
-            "    monitoring_config: Dict[str, Any] = field(default_factory=dict)",
-            "    security_config: Dict[str, Any] = field(default_factory=dict)",
-            "    data_compliance_tags: List[str] = field(default_factory=list)",
-            "",
-            "class EnterpriseDataAgentOrchestrator:",
-            "    \"\"\"Production orchestration system for multi-agent data processing deployments\"\"\"",
-            "    ",
-            "    def __init__(self, cluster_config: Dict[str, Any]):",
-            "        self.cluster_config = cluster_config",
-            "        self.deployed_agents: Dict[str, DataAgentDeploymentConfig] = {}",
-            "        self.resource_pool: Dict[str, Any] = {",
-            "            'available_cpu': cluster_config.get('total_cpu_cores', 1000),",
-            "            'available_memory_gb': cluster_config.get('total_memory_gb', 2000),",
-            "            'available_storage_gb': cluster_config.get('total_storage_gb', 50000),",
-            "            'available_gpu': cluster_config.get('total_gpu_count', 0)",
-            "        }",
-            "        ",
-            "        # Production monitoring and logging",
-            "        self.deployment_metrics: Dict[str, Any] = {}",
-            "        self.health_checks_active = True",
-            "        ",
-            "        self.logger = logging.getLogger(\"EnterpriseDataOrchestrator\")",
-            "        ",
             "    async def deploy_data_processing_cluster(self, ",
             "                                           agents_config: List[DataAgentDeploymentConfig]) -> Dict[str, Any]:",
             "        \"\"\"Deploy complete multi-agent data processing cluster to production\"\"\"",
@@ -10102,11 +10078,11 @@
             "            'scaling_events': await self._get_recent_scaling_events()",
             "        }"
           ],
-          "line_count": 444
+          "line_count": 391
         },
         {
-          "start_line": 473,
-          "end_line": 855,
+          "start_line": 492,
+          "end_line": 874,
           "language": "python",
           "content": [
             "from typing import Dict, List, Any, Optional, Tuple",
@@ -10494,8 +10470,8 @@
           "line_count": 381
         },
         {
-          "start_line": 867,
-          "end_line": 1259,
+          "start_line": 886,
+          "end_line": 1278,
           "language": "python",
           "content": [
             "from typing import Dict, List, Any, Optional, Set",

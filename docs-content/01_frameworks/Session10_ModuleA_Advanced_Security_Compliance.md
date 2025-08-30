@@ -2061,11 +2061,11 @@ D) Simplified key management
 
 ## 🧭 Navigation
 
-### Previous: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)
+**Previous:** [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)
 
 ### Optional Deep Dive Modules
 
 - **[🔒 Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)**
 - **[⚙️ Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)**
 
-**[Next: Session 11 (Coming Soon) →](Session11_Advanced_Production_Patterns.md)**
+**Next:** [Module 2 - RAG Architecture →](../02_rag/index.md)
