@@ -401,14 +401,22 @@ Successful replication updates the follower's progress indices, enabling the lea
         for n in range(len(self.data_log) - 1, self.commit_index, -1):
             if n < 0:
                 continue
-                
+```
+
+Commit index advancement in Raft consensus implements the critical safety guarantee that operations only become committed when replicated to a majority of nodes. Only the leader can advance the commit index, as followers rely on leader notifications about commit progress. The backward iteration starts from the newest log entries and works toward older ones, finding the highest index that has achieved majority replication.
+
+```python                
             # Count nodes that have replicated this data operation
             replication_count = 1  # Leader always has it
             for node_id in self.cluster_nodes:
                 if node_id != self.node_id:
                     if self.match_index.get(node_id, -1) >= n:
                         replication_count += 1
-            
+```
+
+Replication counting tracks which followers have successfully replicated each log entry. The leader automatically counts itself (since it always has every entry), then checks each follower's `match_index` to determine their replication progress. The `match_index` represents the highest log entry confirmed as replicated on each follower, enabling precise tracking of consensus progress across the distributed system.
+
+```python            
             # Check for majority consensus on data operation
             majority_threshold = (len(self.cluster_nodes) + 1) // 2 + 1
             
@@ -417,6 +425,8 @@ Successful replication updates the follower's progress indices, enabling the lea
                 self.logger.info(f"Advanced data commit index to {n}")
                 break
 ```
+
+Majority threshold calculation and term verification ensure Raft's safety properties. The majority requirement guarantees that at least one node in any future leader election will have the committed entry, preventing data loss. The term check is crucial - leaders only commit entries from their current term, preventing safety violations from previous terms. This conservative approach ensures that once an entry is committed, it will never be lost.
 
 Commit index advancement implements Raft's safety guarantee - operations only become committed when replicated to a majority of nodes. The algorithm works backwards from the latest log entry to find the highest index that has achieved majority replication. The term check ensures we only commit operations from our current term, preventing safety violations.
 
@@ -659,7 +669,11 @@ The pre-prepare message initiates Byzantine consensus with complete cryptographi
         
         # Broadcast pre-prepare to all backup nodes
         await self._broadcast_to_backups(pre_prepare_msg)
-        
+```
+
+Pre-prepare message storage and broadcast implements the first phase of Byzantine consensus. Storing the message locally enables consistency checks during later phases, while the broadcast to backup nodes initiates the distributed agreement process. The primary node must broadcast to all backup nodes simultaneously to prevent Byzantine nodes from receiving different proposals, which could compromise safety.
+
+```python        
         # Track the pending operation
         operation_id = f"{self.view_number}:{self.sequence_number}"
         self.pending_data_operations[operation_id] = {
@@ -667,7 +681,11 @@ The pre-prepare message initiates Byzantine consensus with complete cryptographi
             'phase': DataConsensusPhase.PRE_PREPARE,
             'start_time': datetime.now()
         }
-        
+```
+
+Pending operation tracking provides comprehensive state management for Byzantine consensus rounds. The operation_id creates a human-readable identifier combining view and sequence numbers, enabling easy operation tracking across the multi-phase protocol. The metadata includes the current consensus phase and start time, supporting timeout detection and performance monitoring essential for production systems.
+
+```python        
         # Increment sequence number for next operation
         self.sequence_number += 1
         
@@ -680,6 +698,8 @@ The pre-prepare message initiates Byzantine consensus with complete cryptographi
             'data_hash': operation_digest.operation_hash
         }
 ```
+
+Sequence number increment and response generation complete the proposal phase with comprehensive result metadata. The sequence number provides total ordering of operations across the distributed system, while detailed logging creates audit trails required for compliance. The return payload includes the operation_id for client tracking, the assigned sequence number for ordering verification, and the cryptographic hash for integrity checking throughout the consensus process.
 
 Operation proposal includes comprehensive tracking and state management. The pending operations dictionary tracks consensus progress, enabling timeout detection and recovery procedures. The operation_id provides clients with a reference to track their requests through the consensus process.
 
@@ -736,7 +756,11 @@ Pre-prepare message validation performs comprehensive checks including signature
             digital_signature=self._sign_message(message.data_hash),
             data_hash=message.data_hash
         )
-        
+```
+
+Prepare message creation signals this node's agreement with the primary's proposed operation. The message preserves all critical consensus identifiers while adding this node's cryptographic signature as proof of participation. The timestamp creates a verifiable audit trail, while the data_hash ensures the operation content remains unchanged throughout the consensus process.
+
+```python        
         # Store our prepare message
         if key not in self.prepare_messages:
             self.prepare_messages[key] = []
@@ -744,11 +768,17 @@ Pre-prepare message validation performs comprehensive checks including signature
         
         # Broadcast prepare message to all nodes
         await self._broadcast_to_all_nodes(prepare_msg)
-        
+```
+
+Local storage and network broadcast implement the distributed agreement mechanism of Byzantine consensus. Storing the prepare message locally creates a permanent record of this node's commitment, essential for consistency verification in later phases. Broadcasting to all nodes enables every participant to observe the consensus progress and contribute their own prepare messages.
+
+```python        
         self.logger.info(f"Sent prepare for operation {message.sequence_number}")
         
         return {'success': True, 'phase': 'prepare'}
 ```
+
+Comprehensive logging and status reporting provide visibility into Byzantine consensus progress. The sequence number in the log message enables correlation with other consensus events, supporting debugging and audit requirements. The phase indicator allows callers to understand exactly where in the Byzantine consensus protocol this operation currently stands.
 
 Accepting a pre-prepare triggers the prepare phase where nodes signal their agreement with the proposed operation. The prepare message includes our own digital signature, contributing to the cryptographic proof that sufficient nodes have agreed to the operation. This signature collection is essential for Byzantine fault tolerance.
 
@@ -789,7 +819,11 @@ The prepare phase implements Byzantine consensus's safety mechanism. Nodes colle
                 digital_signature=self._sign_message(message.data_hash),
                 data_hash=message.data_hash
             )
-            
+```
+
+Commit message creation transitions Byzantine consensus from the prepare phase to the final commit phase. The message preserves all critical identifiers (view_number, sequence_number) from the original pre-prepare, ensuring consistency across phases. The digital signature proves this node's commitment to executing the operation, while the data_hash maintains integrity verification throughout the protocol.
+
+```python            
             # Store our commit message
             if key not in self.commit_messages:
                 self.commit_messages[key] = []
@@ -797,13 +831,19 @@ The prepare phase implements Byzantine consensus's safety mechanism. Nodes colle
             
             # Broadcast commit message
             await self._broadcast_to_all_nodes(commit_msg)
-            
+```
+
+Local storage and broadcast of the commit message ensures both persistence and network propagation. Storing locally enables verification that this node committed to the operation, while broadcasting to all nodes (not just backups) ensures every participant can observe the commit decision. This all-to-all communication pattern is essential for Byzantine fault tolerance.
+
+```python            
             self.logger.info(f"Sent commit for operation {message.sequence_number}")
             
             return {'success': True, 'phase': 'commit'}
         
         return {'success': True, 'phase': 'prepare', 'status': 'waiting_for_more_prepares'}
 ```
+
+Phase completion handling provides clear status reporting for Byzantine consensus progress tracking. Success with 'commit' phase indicates this node has moved to the final consensus phase, while 'waiting_for_more_prepares' status shows the operation remains in the prepare phase. This detailed status reporting enables clients and monitoring systems to track consensus progress and detect potential issues.
 
 Successful prepare phase completion triggers the commit phase. The commit message signals that this node has observed sufficient prepare messages and is ready to execute the operation. This two-phase approach (prepare then commit) ensures that even if some nodes are slow or Byzantine, the operation can still complete successfully.
 
@@ -812,18 +852,30 @@ Successful prepare phase completion triggers the commit phase. The commit messag
         """Handle commit phase of Byzantine consensus for data operations"""
         
         key = (message.view_number, message.sequence_number)
-        
+```
+
+The commit phase handler begins by creating a unique key from the view number and sequence number. This key serves as the consensus round identifier - every Byzantine consensus operation must be uniquely identified across the distributed system. The view number tracks leadership epochs, while the sequence number ensures total ordering of operations. This composite key prevents confusion between different consensus rounds, even during view changes or network partitions.
+
+```python
         # Store commit message
         if key not in self.commit_messages:
             self.commit_messages[key] = []
         self.commit_messages[key].append(message)
-        
+```
+
+Commit message storage implements the Byzantine consensus protocol's requirement to collect multiple confirmations for each operation. Unlike simple majority voting, Byzantine consensus requires tracking messages from multiple phases (pre-prepare, prepare, commit) to ensure safety against malicious nodes. The list structure allows storing commit messages from multiple nodes for the same operation, enabling verification that sufficient honest nodes agree on execution.
+
+```python
         # Check if we have enough commit messages (2f + 1 total)
         required_commits = 2 * self.f + 1
         
         if len(self.commit_messages[key]) >= required_commits:
             # We have consensus - execute the data operation
-            
+```
+
+The Byzantine fault tolerance threshold of 2f+1 commit messages guarantees safety even when f nodes exhibit arbitrary malicious behavior. This mathematical foundation ensures that at least f+1 honest nodes have committed to the operation. Since at most f nodes can be Byzantine, having 2f+1 total commits means that at least f+1 are from honest nodes, providing sufficient confirmation for safe execution.
+
+```python            
             if key not in self.executed_operations:
                 pre_prepare = self.pre_prepare_messages.get(key)
                 if pre_prepare:
@@ -831,7 +883,11 @@ Successful prepare phase completion triggers the commit phase. The commit messag
                     execution_result = await self._execute_data_operation_safely(
                         pre_prepare.data_operation, key
                     )
-                    
+```
+
+Execution safety checks prevent duplicate operation execution and ensure data integrity. The `executed_operations` set provides idempotency protection - operations execute exactly once regardless of message reordering or network delays. Retrieving the original operation from the pre-prepare message ensures we execute exactly what was originally proposed, preventing Byzantine nodes from substituting different operations during the commit phase.
+
+```python
                     # Mark as executed
                     self.executed_operations.add(key)
                     
@@ -845,6 +901,8 @@ Successful prepare phase completion triggers the commit phase. The commit messag
         
         return {'success': True, 'phase': 'commit', 'status': 'waiting_for_more_commits'}
 ```
+
+Successful execution completes the Byzantine consensus protocol with comprehensive result reporting. Marking the operation as executed prevents future duplicate executions, while detailed logging provides audit trails essential for enterprise compliance. The return value differentiates between completed execution and partial consensus progress, enabling clients to track their operations through the multi-phase Byzantine protocol. Operations that haven't reached the commit threshold remain pending until sufficient commit messages arrive.
 
 The commit phase finalizes Byzantine consensus by collecting commit messages from 2f+1 nodes. This threshold guarantees that at least f+1 honest nodes have committed to the operation, making it safe to execute. The duplicate execution protection ensures operations are only executed once, even if commit messages arrive out of order.
 
@@ -921,11 +979,19 @@ Cryptographic digests provide tamper-evident operation identification. The deter
             'prepare': len(self.prepare_messages), 
             'commit': len(self.commit_messages)
         }
-        
+```
+
+Byzantine consensus status monitoring begins by analyzing the consensus pipeline across all three phases. This phase-by-phase breakdown reveals system bottlenecks and potential Byzantine behavior patterns. For example, a high ratio of pre-prepare to prepare messages might indicate network issues or slow nodes, while an unusual accumulation in any phase could signal malicious node behavior or system degradation.
+
+```python        
         # Calculate consensus health metrics
         total_operations = len(self.executed_operations)
         recent_throughput = await self._calculate_recent_throughput()
-        
+```
+
+Core performance metrics provide quantitative system health assessment. Total executed operations tracks cumulative system progress, while recent throughput measurements reveal current processing capacity. These metrics are essential for capacity planning and performance optimization in production Byzantine consensus systems - they help operators understand whether the system is meeting SLA requirements.
+
+```python        
         return {
             'node_id': self.node_id,
             'is_primary': self.is_primary,
@@ -940,6 +1006,8 @@ Cryptographic digests provide tamper-evident operation identification. The deter
             'data_store_integrity': await self.data_store.verify_integrity()
         }
 ```
+
+The comprehensive status response provides complete system visibility for monitoring and debugging Byzantine consensus systems. Node identity and leadership status enable operators to understand cluster topology, while view and sequence numbers track consensus progress. The fault tolerance specification clarifies system resilience limits, and data store integrity verification ensures the underlying data remains consistent despite potential Byzantine attacks. This structured monitoring data integrates seamlessly with enterprise monitoring platforms.
 
 Byzantine consensus status provides comprehensive visibility into system health and progress. The phase-by-phase pending operation counts help identify bottlenecks or Byzantine behavior. Data store integrity verification ensures the underlying storage remains consistent despite potential Byzantine attacks.
 
@@ -1049,18 +1117,28 @@ Comprehensive batch tracking enables detailed performance analysis and debugging
             if not prepare_result['success']:
                 return prepare_result
                 
-            batch_metrics.record_phase_completion('prepare') 
-            
+            batch_metrics.record_phase_completion('prepare')
+```
+
+The prepare phase implements Byzantine consensus safety with advanced fault detection capabilities. Enterprise PBFT enhances standard PBFT with sophisticated monitoring that can detect Byzantine behavior patterns, network anomalies, and performance degradation. Immediate failure handling prevents cascading errors and provides detailed diagnostic information for troubleshooting distributed system issues.
+
+```python             
             # Phase 3: Commit with integrity verification
             commit_result = await self._enterprise_commit_phase(batch_id, operations)
             if not commit_result['success']:
                 return commit_result
                 
             batch_metrics.record_phase_completion('commit')
-            
+```
+
+The commit phase provides the final safety checkpoint before operation execution, with enhanced integrity verification for enterprise requirements. Each phase completion is meticulously tracked for performance analysis and SLA monitoring. This granular metrics collection enables operators to identify bottlenecks, optimize performance, and ensure the system meets enterprise reliability standards.
+
+```python            
             # Phase 4: Execution with rollback capability
             execution_result = await self._enterprise_execute_batch(batch_id, operations)
 ```
+
+The execution phase implements enterprise-grade atomicity and rollback capabilities that go beyond standard PBFT. While traditional PBFT focuses on consensus agreement, enterprise PBFT adds comprehensive transaction management, compliance verification, and sophisticated rollback mechanisms. This ensures that even after achieving consensus, operations can be safely reverted if post-execution verification fails.
 
 Enterprise PBFT follows the standard three-phase protocol but adds sophisticated error handling and monitoring at each phase. Each phase can fail independently, and the system provides detailed failure information for debugging and recovery. This robust error handling is essential for production deployment.
 
@@ -1236,13 +1314,22 @@ Enterprise batch execution implements multiple validation layers and comprehensi
         try:
             # Execute operations with enterprise transaction management
             async with self.data_store.enterprise_transaction() as tx:
+```
+
+Enterprise batch execution begins with comprehensive transaction management and error tracking infrastructure. The results list accumulates detailed execution metadata for each operation, while the rollback stack maintains recovery information. The enterprise transaction context provides ACID guarantees across the entire batch, ensuring that partial failures don't leave the data store in an inconsistent state.
+
+```python
                 for i, operation in enumerate(operations):
                     try:
                         # Execute single operation with full audit trail
                         result = await self._execute_single_operation_enterprise(
                             operation, execution_context, tx
                         )
-                        
+```
+
+Each operation executes within the enterprise framework with complete audit trail generation. The execution context provides security credentials, compliance metadata, and transaction boundaries for the operation. This enterprise-grade execution ensures that every operation meets regulatory requirements and can be fully traced for compliance auditing.
+
+```python                        
                         execution_results.append({
                             'operation_index': i,
                             'success': result['success'],
@@ -1257,6 +1344,8 @@ Enterprise batch execution implements multiple validation layers and comprehensi
                             # Single operation failed - rollback entire batch
                             raise Exception(f"Operation {i} failed: {result.get('error')}")
 ```
+
+Detailed result tracking and rollback management implement all-or-nothing batch semantics. Each operation result includes comprehensive metadata for debugging and compliance reporting. Successful operations contribute their rollback information to the recovery stack, while any single failure immediately triggers batch-wide rollback. This strict failure handling ensures data consistency even in complex enterprise environments with interdependent operations.
 
 Enterprise transaction management ensures atomicity across the entire batch - either all operations succeed or none are applied. The rollback stack maintains precise rollback information for each successful operation, enabling complete recovery even from partial batch failures. Full audit trails meet compliance requirements for financial and regulated industries.
 
@@ -1289,6 +1378,11 @@ Robust error handling ensures system consistency even during failures. Enterpris
         if not post_exec_verification['valid']:
             # Post-execution verification failed - emergency rollback
             await self._emergency_rollback_enterprise(rollback_stack, execution_context)
+```
+
+Post-execution verification provides a final safety layer against Byzantine attacks and implementation bugs. This verification step checks data integrity, validates business logic constraints, and ensures compliance requirements are met after operations complete. If verification fails, emergency rollback procedures restore the system to a consistent state, preventing corrupted data from persisting in enterprise systems.
+
+```python
             return {
                 'success': False,
                 'error': 'Post-execution verification failed',
@@ -1298,7 +1392,11 @@ Robust error handling ensures system consistency even during failures. Enterpris
         # Update enterprise checkpoint if needed
         if self.sequence_number - self.last_checkpoint_sequence >= self.checkpoint_frequency:
             await self._create_enterprise_checkpoint()
-        
+```
+
+Verification failure response includes detailed diagnostic information to help operators understand what went wrong and take corrective action. Enterprise checkpointing implements efficient state management for long-running consensus systems. Checkpoints occur at regular intervals to reduce memory usage, enable faster recovery after failures, and provide stable recovery points for system maintenance.
+
+```python        
         self.logger.info(f"Enterprise batch {batch_id} executed successfully")
         
         return {
@@ -1308,6 +1406,8 @@ Robust error handling ensures system consistency even during failures. Enterpris
             'verification_passed': True
         }
 ```
+
+Successful batch completion generates comprehensive result metadata for monitoring and audit purposes. The execution context ID enables tracing operations through enterprise systems, while the verification_passed flag confirms that all safety checks succeeded. This detailed response supports enterprise requirements for complete visibility into consensus system operations and regulatory compliance tracking.
 
 Post-execution verification provides a final safety check against Byzantine attacks or implementation bugs. Emergency rollback procedures handle cases where verification fails after successful execution. Regular checkpointing enables efficient recovery and reduces memory usage in long-running systems. The comprehensive success response provides complete visibility into batch execution results.
 

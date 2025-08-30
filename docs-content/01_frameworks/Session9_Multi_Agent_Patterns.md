@@ -332,7 +332,11 @@ Agent registration establishes bidirectional communication channels. Once regist
         
         # Track data lineage for this message
         await self._track_data_lineage(message)
-        
+```
+
+Message validation and lineage tracking form the foundation of reliable multi-agent communication. Recipient validation prevents message loss, while data lineage tracking maintains complete audit trails essential for regulatory compliance and debugging. This pattern ensures that every data processing decision can be traced back to its origins, critical for enterprise data governance.
+
+```python
         # Add to conversation thread
         if message.conversation_id:
             if message.conversation_id not in self.active_data_conversations:
@@ -345,6 +349,8 @@ Agent registration establishes bidirectional communication channels. Once regist
         
         return success
 ```
+
+Conversation threading and reliable delivery complete the communication protocol. Threading enables complex multi-step coordination workflows where agents collaborate over multiple message exchanges to complete sophisticated data processing tasks. The delivery confirmation mechanism ensures message receipt even in distributed environments with network partitions or agent failures.
 
 Message delivery implements comprehensive validation, tracking, and delivery confirmation. Data lineage tracking maintains provenance records essential for data governance, while conversation threading enables complex multi-step workflows. Delivery confirmation ensures reliable communication even in distributed environments.
 
@@ -385,7 +391,11 @@ Schema consensus prevents data processing errors by validating proposed changes 
         # Count votes and determine schema acceptance
         vote_counts = self._count_schema_votes(votes)
         winner = max(vote_counts.items(), key=lambda x: x[1])
-        
+```
+
+The voting and counting process implements transparent democratic decision-making for multi-agent data processing coordination. Vote collection happens asynchronously to maximize efficiency, while the counting mechanism identifies the most popular schema proposal. The winner selection uses simple majority logic that can be extended to more sophisticated voting algorithms like ranked choice or weighted voting.
+
+```python
         # Check if data consensus threshold met
         total_votes = sum(vote_counts.values())
         if winner[1] / total_votes >= self.consensus_threshold:
@@ -401,7 +411,13 @@ Schema consensus prevents data processing errors by validating proposed changes 
                 'vote_counts': vote_counts,
                 'reason': 'Data validation threshold not met'
             }
-    
+```
+
+Threshold-based consensus validation ensures that schema changes have sufficient multi-agent support before implementation. The confidence score provides quantitative measurement of agreement strength, while detailed vote counts enable post-decision analysis. Failed consensus scenarios provide clear feedback about why coordination failed, enabling system operators to adjust thresholds or coordination strategies.
+
+Democratic voting mechanisms ensure that schema changes have broad multi-agent agreement before implementation. The threshold-based consensus prevents minority agent opinions from blocking necessary changes while ensuring sufficient validation. This approach mirrors enterprise change management processes where schema modifications require approval from multiple data engineering teams before deployment to production systems.
+
+```python
     async def _collect_schema_proposals(
         self, schema_proposal: str, data_context: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
@@ -412,7 +428,11 @@ Schema consensus prevents data processing errors by validating proposed changes 
             proposal_tasks.append(task)
         
         proposals = await asyncio.gather(*proposal_tasks, return_exceptions=True)
-        
+```
+
+Parallel proposal collection maximizes coordination efficiency by gathering agent input simultaneously rather than sequentially. The asyncio.gather pattern enables scalable coordination even with hundreds of participating agents. Exception handling ensures that network failures or agent timeouts don't block the entire consensus process - essential for production multi-agent systems operating across distributed infrastructures.
+
+```python
         # Filter out failed schema proposals
         valid_proposals = []
         for i, proposal in enumerate(proposals):
@@ -426,6 +446,8 @@ Schema consensus prevents data processing errors by validating proposed changes 
         
         return valid_proposals
 ```
+
+Robust error handling ensures that coordination continues even when individual agents experience failures. The quality score inclusion enables weighted consensus decisions where agents with better data processing track records have greater influence. Timestamp tracking provides audit trails essential for debugging coordination issues in production environments.
 
 ### Hierarchical Coordination - The Data Processing Chain of Command
 
@@ -441,7 +463,11 @@ class HierarchicalDataCoordinator:
         self.coordinator_agents: Dict[str, 'DataCoordinatorAgent'] = {}
         self.worker_agents: Dict[str, 'DataWorkerAgent'] = {}
         self.data_delegation_rules: Dict[str, List[str]] = {}
-    
+```
+
+Hierarchical coordination mirrors enterprise organizational structures applied to multi-agent data processing. Coordinator agents handle strategic planning and resource allocation, while worker agents execute specific data transformations. The delegation rules define clear command structures that scale from simple two-level hierarchies to complex multi-tier organizations managing thousands of coordinated data processing agents.
+
+```python
     async def create_data_coordination_hierarchy(
         self, data_task: str, complexity_analysis: Dict[str, Any]
     ) -> Dict[str, Any]:
@@ -455,7 +481,11 @@ class HierarchicalDataCoordinator:
         
         # Create workers for data processing execution
         workers = await self._create_data_worker_agents(decomposition)
-        
+```
+
+Dynamic hierarchy creation adapts organizational structure to task complexity - simple transformations use flat structures, while complex analytical workflows create deep hierarchies. Task decomposition analysis determines the optimal coordination depth, coordinator capabilities, and worker specializations. This adaptive approach ensures efficient resource utilization without coordination overhead.
+
+```python
         # Establish data processing delegation relationships
         delegation_map = await self._establish_data_delegation_hierarchy(
             coordinator, workers, decomposition
@@ -467,7 +497,11 @@ class HierarchicalDataCoordinator:
             'delegation_map': delegation_map,
             'processing_depth': decomposition['required_levels']
         }
-    
+```
+
+Delegation relationship mapping creates clear command and control structures for multi-agent coordination. The delegation map defines which coordinators manage which workers, enabling parallel execution while maintaining coordination coherence. Processing depth metrics help monitor coordination efficiency and identify opportunities for hierarchy optimization.
+
+```python
     async def execute_hierarchical_data_task(
         self, data_task: str, hierarchy: Dict[str, Any]
     ) -> Dict[str, Any]:
@@ -482,7 +516,11 @@ class HierarchicalDataCoordinator:
         delegation_results = await self._execute_delegated_data_tasks(
             high_level_plan, hierarchy['delegation_map']
         )
-        
+```
+
+Three-phase hierarchical execution balances strategic coordination with parallel processing efficiency. High-level planning creates optimal execution strategies, while delegated execution enables massive parallelization. This pattern scales from local multi-core processing to distributed multi-datacenter workflows where coordination spans continents.
+
+```python
         # Phase 3: Data result aggregation and validation
         final_result = await self._aggregate_hierarchical_data_results(
             delegation_results, hierarchy['data_coordinator']
@@ -494,6 +532,8 @@ class HierarchicalDataCoordinator:
             'execution_success': True
         }
 ```
+
+Result aggregation and validation complete the hierarchical coordination cycle. Coordinator agents synthesize distributed worker results into coherent outputs, applying validation rules to ensure data quality and consistency. The success flag enables monitoring systems to track coordination effectiveness across complex multi-agent processing pipelines.
 
 ### Auction-Based Coordination - Let the Data Market Decide
 
@@ -510,7 +550,11 @@ class DataProcessingAuctionCoordinator:
     def __init__(self, agents: List['BaseDataAgent']):
         self.data_agents = agents
         self.data_auction_history: List[Dict[str, Any]] = []
-    
+```
+
+Auction-based coordination applies market mechanisms to multi-agent task allocation, enabling optimal resource utilization through competitive bidding. This approach automatically balances workload across agents while ensuring that tasks are assigned to the most capable and available agents. The auction history provides data for optimizing future coordination decisions.
+
+```python
     async def conduct_data_processing_auction(
         self, data_task: str, processing_requirements: Dict[str, Any]
     ) -> Dict[str, Any]:
@@ -529,7 +573,11 @@ class DataProcessingAuctionCoordinator:
         
         if not eligible_agents:
             return {'success': False, 'reason': 'No eligible data processing agents'}
-        
+```
+
+Three-phase auction implementation ensures fair and efficient task allocation. Capability assessment prevents unqualified agents from participating, while eligibility filtering creates a qualified bidder pool. This pre-qualification process mirrors enterprise procurement practices where only qualified vendors can bid on specialized data processing projects.
+
+```python
         # Phase 2: Collect data processing bids
         bids = await self._collect_data_processing_bids(data_task, eligible_agents, processing_requirements)
         
@@ -548,6 +596,8 @@ class DataProcessingAuctionCoordinator:
             return {'success': False, 'reason': 'No valid data processing bids received'}
 ```
 
+Competitive bidding and winner selection optimize task allocation based on multiple criteria including cost, performance, and processing time. The sealed-bid approach prevents bid manipulation while the multi-criteria winner selection ensures optimal task assignment. This pattern scales from simple single-task auctions to complex multi-task allocation scenarios where hundreds of agents compete for processing workloads.
+
 ---
 
 ## Part 3: Planning & Reflection - The Art of Strategic Data Processing
@@ -564,16 +614,25 @@ The greatest achievements in data engineering history succeeded through hierarch
 **File**: [`src/session9/planning_systems.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/planning_systems.py) - HTN planning for data processing implementation
 
 ```python
+# Comprehensive imports for hierarchical task planning
 from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass, field
 from enum import Enum
 from datetime import datetime, timedelta
+```
 
+The HTN (Hierarchical Task Network) planning system requires rich type definitions and temporal controls for managing complex data processing workflows. The `Tuple` type enables data flow constraint modeling, while `Optional` handles uncertain planning elements. These imports establish the foundation for enterprise-grade multi-agent task coordination.
+
+```python
 class DataTaskType(Enum):
     PRIMITIVE = "primitive"      # Directly executable (single transformation)
     COMPOUND = "compound"        # Requires decomposition (complex ETL)
     ABSTRACT = "abstract"        # High-level goal (build analytics platform)
+```
 
+The task type hierarchy mirrors how data engineers think about processing complexity. PRIMITIVE tasks execute directly (like parsing a CSV), COMPOUND tasks require decomposition (like building an ETL pipeline), and ABSTRACT tasks represent strategic goals (like creating a recommendation engine). This classification enables multi-agent systems to make intelligent coordination decisions based on task complexity.
+
+```python
 @dataclass
 class DataTask:
     """Represents a data processing task in the HTN hierarchy"""
@@ -587,7 +646,11 @@ class DataTask:
     estimated_duration: Optional[timedelta] = None
     priority: int = 1
     compute_requirements: Dict[str, Any] = field(default_factory=dict)
+```
 
+The DataTask structure captures comprehensive metadata essential for multi-agent coordination. Data inputs and outputs enable dependency tracking across distributed agents, while processing effects document state changes. Duration estimates support resource planning, and compute requirements ensure proper agent assignment based on capabilities - critical for heterogeneous multi-agent environments.
+
+```python
 @dataclass
 class DataTaskDecomposition:
     """Represents a way to decompose a compound data processing task"""
@@ -595,7 +658,11 @@ class DataTaskDecomposition:
     subtasks: List[DataTask]
     data_flow_constraints: List[Tuple[str, str]] = field(default_factory=list)
     processing_success_probability: float = 1.0
+```
 
+Task decomposition structures enable sophisticated multi-agent coordination strategies. Each decomposition represents a different way to break down complex tasks into manageable components. Data flow constraints prevent invalid execution orders, while success probability estimates enable risk-based coordination decisions. Multiple decompositions allow agents to adapt strategies based on changing conditions.
+
+```python
 class DataHTNPlanner:
     """Hierarchical Task Network planner for data processing"""
     
@@ -604,7 +671,11 @@ class DataHTNPlanner:
         self.data_domain = data_domain_knowledge
         self.current_pipeline_plan: Optional[List[DataTask]] = None
         self.data_planning_history: List[Dict[str, Any]] = []
-    
+```
+
+The HTN planner serves as the strategic brain for multi-agent data processing coordination. Domain knowledge guides decomposition decisions, while planning history enables learning from past coordination successes and failures. This pattern scales from simple task assignment to sophisticated multi-datacenter workflow orchestration where hundreds of agents coordinate complex processing pipelines.
+
+```python
     async def create_hierarchical_data_plan(
         self, data_goal: str, initial_data_state: Dict[str, Any]
     ) -> Dict[str, Any]:
@@ -617,7 +688,11 @@ class DataHTNPlanner:
         decomposition_result = await self._decompose_data_task_hierarchy(
             root_task, initial_data_state
         )
-        
+```
+
+The four-phase planning process mirrors enterprise data engineering workflows. Goal analysis translates business requirements into executable tasks, while hierarchical decomposition breaks down complex objectives into manageable components. This systematic approach ensures that multi-agent coordination handles both simple processing tasks and complex analytical workflows that span multiple data sources and processing stages.
+
+```python
         # Phase 3: Data pipeline optimization
         optimized_plan = await self._optimize_data_plan(
             decomposition_result['plan'], initial_data_state
@@ -638,6 +713,8 @@ class DataHTNPlanner:
         }
 ```
 
+Pipeline optimization and risk assessment complete the strategic planning phase before multi-agent execution begins. Optimization considers resource constraints, parallelization opportunities, and agent capabilities to create efficient execution plans. Risk analysis identifies potential failure points and enables proactive coordination strategies. The comprehensive return structure provides everything needed for informed multi-agent coordination decisions.
+
 ### Dynamic Replanning - When Data Plans Meet Reality
 
 "No data pipeline survives contact with production data." - Every Senior Data Engineer Ever
@@ -654,7 +731,11 @@ class DynamicDataReplanner:
         self.data_planner = htn_planner
         self.monitoring_active = False
         self.data_replanning_history: List[Dict[str, Any]] = []
-    
+```
+
+The DynamicDataReplanner class implements adaptive multi-agent coordination for data processing workflows. This pattern is essential for enterprise data pipelines where conditions change constantly - schema drift in upstream systems, varying data quality, or network partition failures. The monitoring_active flag enables graceful shutdown, while the replanning history provides audit trails for debugging and optimization.
+
+```python
     async def execute_with_data_replanning(
         self, data_plan: List[DataTask], initial_data_state: Dict[str, Any]
     ) -> Dict[str, Any]:
@@ -666,7 +747,11 @@ class DynamicDataReplanner:
         execution_trace = []
         
         self.monitoring_active = True
-        
+```
+
+The execution method sets up a comprehensive tracking system for adaptive data processing. The state copies prevent accidental mutations during replanning, while the execution trace creates a complete audit trail. This pattern enables forensic analysis when data processing fails and provides the foundation for continuous improvement in multi-agent coordination systems.
+
+```python
         while remaining_tasks and self.monitoring_active:
             current_task = remaining_tasks[0]
             
@@ -681,7 +766,11 @@ class DynamicDataReplanner:
                     current_task, remaining_tasks, current_data_state,
                     validation_result['reason']
                 )
-                
+```
+
+The validation-before-execution pattern prevents cascading failures in multi-agent data systems. When agents detect precondition failures - like missing data dependencies or insufficient compute resources - they trigger collaborative replanning rather than blindly executing tasks. This proactive approach reduces system downtime and maintains data consistency across distributed agent networks.
+
+```python
                 if replanning_result['success']:
                     remaining_tasks = replanning_result['new_data_plan']
                     execution_trace.append(('data_replan', replanning_result))
@@ -689,7 +778,11 @@ class DynamicDataReplanner:
                 else:
                     execution_trace.append(('data_failure', replanning_result))
                     break
-            
+```
+
+Successful replanning demonstrates multi-agent system resilience - when one execution path fails, agents collaboratively find alternative approaches. The execution trace captures both success and failure modes, enabling pattern recognition for future optimization. This graceful degradation approach ensures that transient failures don't bring down entire data processing workflows.
+
+```python
             # Execute data processing task
             execution_result = await self._execute_monitored_data_task(
                 current_task, current_data_state
@@ -704,6 +797,11 @@ class DynamicDataReplanner:
                 )
                 completed_tasks.append(current_task)
                 remaining_tasks.pop(0)
+```
+
+Successful task execution updates the global data state in a controlled manner, ensuring consistency across the multi-agent system. The state update mechanism prevents race conditions while enabling parallel processing. This pattern scales from simple sequential execution to complex distributed processing where multiple agents coordinate state changes across data centers.
+
+```python
             else:
                 # Handle data processing failure
                 failure_analysis = await self._analyze_data_execution_failure(
@@ -722,7 +820,11 @@ class DynamicDataReplanner:
                 
                 execution_trace.append(('data_abort', failure_analysis))
                 break
-        
+```
+
+Failure handling demonstrates sophisticated multi-agent decision-making. Not all failures justify replanning - transient network issues might require simple retries, while fundamental data quality problems need complete strategy revision. The failure analysis step enables agents to make intelligent decisions about recovery strategies, preventing both unnecessary replanning and catastrophic failures.
+
+```python
         return {
             'completed_data_tasks': completed_tasks,
             'remaining_data_tasks': remaining_tasks,
@@ -731,6 +833,8 @@ class DynamicDataReplanner:
             'success': len(remaining_tasks) == 0
         }
 ```
+
+The comprehensive return structure provides complete visibility into multi-agent execution outcomes. Operations teams can analyze which tasks completed successfully, understand what work remains, and examine the execution trace for optimization opportunities. This transparency is crucial for production multi-agent systems where debugging and performance analysis drive system improvements.
 
 ### Reflection and Learning - The Wisdom of Data Processing Experience
 
@@ -752,7 +856,11 @@ class DataReflectionEngine:
         self.data_experience_buffer: List[Dict[str, Any]] = []
         self.learned_data_patterns: Dict[str, Any] = {}
         self.data_performance_metrics: Dict[str, List[float]] = {}
-    
+```
+
+The DataReflectionEngine implements continuous learning capabilities essential for sophisticated multi-agent systems. The experience buffer maintains historical execution data for pattern recognition, while learned patterns guide future coordination decisions. Performance metrics tracking enables quantitative assessment of multi-agent coordination effectiveness over time - critical for systems processing petabytes of data across distributed infrastructures.
+
+```python
     async def reflect_on_data_execution(
         self, execution_result: Dict[str, Any]
     ) -> Dict[str, Any]:
@@ -767,7 +875,11 @@ class DataReflectionEngine:
         patterns = await self._identify_data_learning_patterns(
             experience_analysis, self.data_experience_buffer
         )
-        
+```
+
+The five-phase reflection process transforms raw execution data into actionable insights for multi-agent coordination improvement. Experience analysis identifies what happened during execution, while pattern identification recognizes recurring coordination challenges and successes. This systematic approach enables multi-agent systems to learn from both individual agent experiences and collective coordination patterns.
+
+```python
         # Phase 3: Data pipeline performance assessment
         performance_assessment = await self._assess_data_performance_trends(
             execution_result, patterns
@@ -782,7 +894,11 @@ class DataReflectionEngine:
         integration_result = await self._integrate_learned_data_knowledge(
             patterns, adaptations
         )
-        
+```
+
+Performance trend analysis and strategy adaptation enable multi-agent systems to evolve coordination strategies based on real-world outcomes. Rather than static coordination rules, this approach creates dynamic multi-agent systems that improve coordination efficiency over time. Knowledge integration ensures that insights from individual executions benefit the entire multi-agent network, creating collective intelligence that exceeds individual agent capabilities.
+
+```python
         # Store data processing experience for future learning
         self.data_experience_buffer.append({
             'data_execution_result': execution_result,
@@ -794,7 +910,11 @@ class DataReflectionEngine:
             },
             'timestamp': datetime.now()
         })
-        
+```
+
+Experience storage creates a comprehensive learning database for multi-agent system optimization. Each execution contributes to the collective knowledge base, enabling sophisticated pattern recognition across thousands of coordination events. The structured storage format supports both immediate reflection and long-term trend analysis essential for enterprise multi-agent system evolution.
+
+```python
         # Prune old data experiences if buffer is too large
         if len(self.data_experience_buffer) > 500:
             self.data_experience_buffer = self.data_experience_buffer[-400:]
@@ -807,6 +927,8 @@ class DataReflectionEngine:
             'integration_success': integration_result
         }
 ```
+
+Buffer management prevents memory exhaustion while maintaining learning capability for production multi-agent systems. The 500-experience limit with 400-experience retention provides sufficient historical context for pattern recognition without overwhelming system resources. The comprehensive return structure enables both immediate coordination adjustments and strategic multi-agent system planning based on learned insights.
 
 ---
 
@@ -821,11 +943,16 @@ Here's how to deploy data processing intelligence that works in the real world o
 **File**: [`src/session9/production_deployment.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/production_deployment.py) - Production data processing patterns
 
 ```python
+# Essential imports for production multi-agent systems
 from dataclasses import dataclass
 from typing import Dict, List, Any
 from datetime import timedelta
 import logging
+```
 
+These imports establish the foundation for production-grade multi-agent data processing systems. The `dataclasses` module enables clean configuration management, while `timedelta` provides precise timeout and interval controls essential for distributed system coordination. The `logging` module ensures comprehensive observability in production environments.
+
+```python
 @dataclass
 class BasicDataProductionConfig:
     """Basic configuration for production multi-agent data processing systems"""
@@ -836,7 +963,11 @@ class BasicDataProductionConfig:
     log_level: str = "INFO"
     data_processing_batch_size: int = 10000
     max_parallel_streams: int = 8
+```
 
+The production configuration dataclass encapsulates critical operational parameters for enterprise multi-agent systems. The 50-agent limit prevents resource exhaustion, while 30-second consensus timeouts balance reliability with responsiveness. The 10-second health check interval enables rapid failure detection, essential when processing millions of records per second across distributed data centers.
+
+```python
 class BasicDataProductionSystem:
     """Basic production multi-agent data processing system"""
     
@@ -851,7 +982,11 @@ class BasicDataProductionSystem:
             level=getattr(logging, self.config.log_level),
             format='%(asctime)s - %(name)s - %(levelname)s - [DATA] %(message)s'
         )
-    
+```
+
+Production system initialization emphasizes observability and structured agent management. The logging setup includes a [DATA] prefix to distinguish multi-agent system events from other application logs. This structured approach enables operations teams to quickly filter and analyze multi-agent coordination issues in production environments with thousands of concurrent processes.
+
+```python
     async def deploy_data_agent(self, agent: 'BaseDataAgent') -> Dict[str, Any]:
         """Deploy data processing agent with validation"""
         
@@ -864,7 +999,11 @@ class BasicDataProductionSystem:
         
         # Register data processing agent
         self.data_agents[agent.agent_id] = agent
-        
+```
+
+Agent deployment implements essential production safety checks that prevent system overload and conflicts. The max_agents limit protects against resource exhaustion scenarios where runaway agent creation could crash the entire system. Duplicate ID prevention ensures reliable agent communication and prevents message routing failures that could corrupt data processing workflows.
+
+```python
         # Basic data processing health check
         health = await self._basic_data_health_check(agent)
         if not health['healthy']:
@@ -878,7 +1017,11 @@ class BasicDataProductionSystem:
             'agent_id': agent.agent_id,
             'deployment_time': datetime.now()
         }
-    
+```
+
+Pre-deployment health validation ensures that only functioning agents join the multi-agent network. This proactive approach prevents deployment of broken agents that could cause cascading failures across the entire data processing system. The rollback mechanism (deleting failed agents) maintains system integrity while the deployment timestamp enables performance analysis and capacity planning.
+
+```python
     async def _basic_data_health_check(self, agent: 'BaseDataAgent') -> Dict[str, Any]:
         """Perform basic data processing agent health check"""
         try:
@@ -897,6 +1040,8 @@ class BasicDataProductionSystem:
             }
 ```
 
+The health check implementation validates core agent functionality before production deployment. By testing actual data processing capabilities rather than just connectivity, this pattern catches configuration errors, missing dependencies, and resource constraints that could cause runtime failures. The structured response format enables automated monitoring systems to track agent performance trends and predict potential issues.
+
 ### Basic Data Processing Monitoring
 
 Essential monitoring for multi-agent data processing systems:
@@ -914,7 +1059,11 @@ class BasicDataSystemMonitor:
             'data_quality_score': [],
             'error_count': []
         }
-    
+```
+
+The monitoring system provides essential observability for production multi-agent data processing systems. The metrics dictionary tracks critical performance indicators across all agent coordination patterns - health monitoring detects coordination failures, throughput tracking measures system capacity, and latency measurement identifies coordination bottlenecks. This structured approach enables proactive system management and performance optimization.
+
+```python
     async def collect_basic_data_metrics(self) -> Dict[str, Any]:
         """Collect basic data processing system metrics"""
         
@@ -928,7 +1077,11 @@ class BasicDataSystemMonitor:
                 healthy_data_agents += 1
                 # Simulate throughput metrics
                 total_throughput += getattr(agent, 'current_throughput', 1000)
-        
+```
+
+Real-time metrics collection provides immediate visibility into multi-agent system performance. The health check iteration validates each agent's processing capability, while throughput aggregation measures collective system capacity. This pattern scales from monitoring a few agents on a single machine to tracking thousands of agents across distributed data centers.
+
+```python
         return {
             'timestamp': datetime.now(),
             'total_data_agents': len(self.system.data_agents),
@@ -937,7 +1090,11 @@ class BasicDataSystemMonitor:
             'system_health': healthy_data_agents / len(self.system.data_agents) if self.system.data_agents else 0,
             'average_processing_latency_ms': 150  # Would be measured in production
         }
-    
+```
+
+Comprehensive metrics aggregation creates actionable insights for multi-agent system operations. The health percentage provides a single system-wide indicator, while throughput measurements enable capacity planning. Timestamp inclusion supports time-series analysis essential for identifying coordination performance trends and predicting system scaling requirements.
+
+```python
     async def generate_basic_data_report(self) -> str:
         """Generate basic data processing system status report"""
         metrics = await self.collect_basic_data_metrics()
@@ -953,6 +1110,8 @@ System Health: {metrics['system_health']:.2%}
 Average Processing Latency: {metrics['average_processing_latency_ms']}ms
 """
 ```
+
+Automated reporting transforms raw metrics into executive-ready system status summaries. The formatted report structure enables both technical teams monitoring system performance and business stakeholders tracking processing capacity. This pattern supports integration with enterprise monitoring dashboards and alerting systems that ensure multi-agent systems meet SLA requirements.
 
 ---
 

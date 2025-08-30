@@ -1,14 +1,14 @@
 {
   "analysis_timestamp": "1756565301.7451673",
-  "target": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session7_First_ADK_Agent.md",
+  "target": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
   "overall_metrics": {
     "total_files": 1,
-    "code_block_score": 90.0,
-    "formatting_score": 80.0,
-    "explanation_score": 84.375,
-    "overall_score": 85.75,
-    "critical_issues": 2,
-    "total_issues": 16
+    "code_block_score": 100.0,
+    "formatting_score": 100.0,
+    "explanation_score": 95.23809523809523,
+    "overall_score": 98.0952380952381,
+    "critical_issues": 0,
+    "total_issues": 3
   },
   "detailed_results": {
     "detect_large_code_blocks": {
@@ -16,1540 +16,1195 @@
       "data": {
         "summary": {
           "total_files": 1,
-          "files_needing_refactoring": 1,
-          "total_large_blocks": 2
+          "files_needing_refactoring": 0,
+          "total_large_blocks": 0
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session7_First_ADK_Agent.md",
-            "total_code_blocks": 96,
-            "large_blocks_count": 2,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+            "total_code_blocks": 63,
+            "large_blocks_count": 0,
             "code_blocks": [
               {
-                "start_line": 39,
-                "end_line": 44,
+                "start_line": 34,
+                "end_line": 40,
                 "language": "python",
                 "content": [
-                  "# Essential ADK imports for enterprise data processing",
-                  "from adk import ADKAgent, ADKSystem, DataProcessingCapability",
-                  "from adk.monitoring import EnterpriseMetrics, DataPipelineTracker",
-                  "from adk.deployment import ProductionDeployment, MultiTenantIsolation"
-                ],
-                "line_count": 4
-              },
-              {
-                "start_line": 48,
-                "end_line": 65,
-                "language": "python",
-                "content": [
-                  "# Enterprise data processing agent with production-grade capabilities",
-                  "",
-                  "class EnterpriseDataProcessingAgent(ADKAgent):",
-                  "    def __init__(self, agent_name: str, data_processing_tier: str = \"enterprise\"):",
-                  "        super().__init__(",
-                  "            name=agent_name,",
-                  "            capabilities=[DataProcessingCapability.BATCH_PROCESSING, DataProcessingCapability.STREAM_PROCESSING],",
-                  "            monitoring=EnterpriseMetrics(retention_days=30),",
-                  "            isolation_level=\"tenant\",",
-                  "            resource_limits={",
-                  "                \"cpu_cores\": 8,",
-                  "                \"memory_gb\": 32,",
-                  "                \"storage_gb\": 500,",
-                  "                \"concurrent_streams\": 100",
-                  "            }",
-                  "        )"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 69,
-                "end_line": 72,
-                "language": "python",
-                "content": [
-                  "        self.data_processing_tier = data_processing_tier",
-                  "        self.pipeline_tracker = DataPipelineTracker()"
-                ],
-                "line_count": 2
-              },
-              {
-                "start_line": 76,
-                "end_line": 83,
-                "language": "python",
-                "content": [
-                  "    async def process_data_stream(self, stream_data: dict) -> dict:",
-                  "        \"\"\"Process streaming data with enterprise monitoring and tracking\"\"\"",
-                  "        ",
-                  "        # Track data processing pipeline performance",
-                  "        with self.pipeline_tracker.track_processing(\"stream_processing\", stream_data.get(\"stream_id\")):",
-                  "            processed_data = await self._execute_stream_processing(stream_data)"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 87,
-                "end_line": 98,
-                "language": "python",
-                "content": [
-                  "            # Log data processing metrics for enterprise monitoring",
-                  "            self.metrics.record_data_processing_event({",
-                  "                \"processing_type\": \"stream\",",
-                  "                \"data_volume_mb\": stream_data.get(\"size_mb\", 0),",
-                  "                \"processing_time_ms\": self.pipeline_tracker.get_last_processing_time(),",
-                  "                \"tenant_id\": stream_data.get(\"tenant_id\"),",
-                  "                \"data_quality_score\": processed_data.get(\"quality_score\", 1.0)",
-                  "            })",
-                  "            ",
-                  "            return processed_data"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 102,
-                "end_line": 111,
-                "language": "python",
-                "content": [
-                  "    async def process_batch_data(self, batch_config: dict) -> dict:",
-                  "        \"\"\"Process batch data with enterprise-grade error handling and monitoring\"\"\"",
-                  "        ",
-                  "        batch_id = batch_config.get(\"batch_id\", \"unknown\")",
-                  "        ",
-                  "        with self.pipeline_tracker.track_processing(\"batch_processing\", batch_id):",
-                  "            try:",
-                  "                batch_result = await self._execute_batch_processing(batch_config)"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 115,
-                "end_line": 124,
-                "language": "python",
-                "content": [
-                  "                self.metrics.record_batch_processing_success({",
-                  "                    \"batch_id\": batch_id,",
-                  "                    \"records_processed\": batch_result.get(\"record_count\", 0),",
-                  "                    \"processing_duration\": self.pipeline_tracker.get_last_processing_time(),",
-                  "                    \"tenant_id\": batch_config.get(\"tenant_id\")",
-                  "                })",
-                  "                ",
-                  "                return batch_result"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 128,
-                "end_line": 137,
-                "language": "python",
-                "content": [
-                  "            except Exception as e:",
-                  "                self.metrics.record_batch_processing_failure({",
-                  "                    \"batch_id\": batch_id,",
-                  "                    \"error_type\": type(e).__name__,",
-                  "                    \"error_message\": str(e),",
-                  "                    \"tenant_id\": batch_config.get(\"tenant_id\")",
-                  "                })",
-                  "                raise"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 159,
-                "end_line": 163,
-                "language": "python",
-                "content": [
-                  "from adk.mcp import EnterpriseDataMCPClient, DataSourceConnector, StreamingDataConnector",
-                  "from adk.monitoring import MCPConnectionTracker",
-                  "import asyncio"
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 167,
-                "end_line": 175,
-                "language": "python",
-                "content": [
-                  "class EnterpriseDataMCPManager:",
-                  "    \"\"\"Enterprise MCP management for data processing systems\"\"\"",
-                  "    ",
-                  "    def __init__(self):",
-                  "        self.data_connections = {}",
-                  "        self.connection_pools = {}",
-                  "        self.connection_tracker = MCPConnectionTracker()"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 179,
-                "end_line": 195,
-                "language": "python",
-                "content": [
-                  "    async def connect_to_data_lake(self, config: dict) -> DataSourceConnector:",
-                  "        \"\"\"Connect to enterprise data lake with connection pooling and monitoring\"\"\"",
-                  "        ",
-                  "        connection_id = config.get(\"connection_id\", \"data_lake_default\")",
-                  "        ",
-                  "        if connection_id not in self.data_connections:",
-                  "            # Create enterprise data lake connection with monitoring",
-                  "            data_lake_client = EnterpriseDataMCPClient(",
-                  "                connection_config=config,",
-                  "                connection_pooling=True,",
-                  "                max_connections=50,",
-                  "                connection_timeout=30,",
-                  "                retry_attempts=3,",
-                  "                monitoring=True",
-                  "            )"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 199,
-                "end_line": 218,
-                "language": "python",
-                "content": [
-                  "            # Establish connection with comprehensive error handling",
-                  "            try:",
-                  "                await data_lake_client.connect()",
-                  "                self.data_connections[connection_id] = data_lake_client",
-                  "                ",
-                  "                # Track connection for enterprise monitoring",
-                  "                self.connection_tracker.register_connection(connection_id, {",
-                  "                    \"connection_type\": \"data_lake\",",
-                  "                    \"endpoint\": config.get(\"endpoint\"),",
-                  "                    \"tenant_id\": config.get(\"tenant_id\"),",
-                  "                    \"established_at\": \"timestamp_here\"",
-                  "                })",
-                  "                ",
-                  "            except Exception as e:",
-                  "                self.connection_tracker.record_connection_failure(connection_id, str(e))",
-                  "                raise ConnectionException(f\"Failed to connect to data lake: {str(e)}\")",
-                  "        ",
-                  "        return self.data_connections[connection_id]"
-                ],
-                "line_count": 18
-              },
-              {
-                "start_line": 222,
-                "end_line": 237,
-                "language": "python",
-                "content": [
-                  "    async def setup_streaming_data_connection(self, stream_config: dict) -> StreamingDataConnector:",
-                  "        \"\"\"Setup streaming data connection for real-time data processing\"\"\"",
-                  "        ",
-                  "        stream_id = stream_config.get(\"stream_id\", \"stream_default\")",
-                  "        ",
-                  "        # Create streaming data connector with enterprise features",
-                  "        streaming_connector = StreamingDataConnector(",
-                  "            stream_config=stream_config,",
-                  "            buffer_size=stream_config.get(\"buffer_size\", 1000),",
-                  "            batch_processing=True,",
-                  "            auto_retry=True,",
-                  "            backpressure_handling=True,",
-                  "            monitoring_enabled=True",
-                  "        )"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 241,
-                "end_line": 254,
-                "language": "python",
-                "content": [
-                  "        # Initialize streaming connection with monitoring",
-                  "        await streaming_connector.initialize()",
-                  "        ",
-                  "        # Track streaming connection metrics",
-                  "        self.connection_tracker.register_streaming_connection(stream_id, {",
-                  "            \"stream_type\": stream_config.get(\"stream_type\", \"kafka\"),",
-                  "            \"topic\": stream_config.get(\"topic\"),",
-                  "            \"partition_count\": stream_config.get(\"partition_count\", 1),",
-                  "            \"tenant_id\": stream_config.get(\"tenant_id\")",
-                  "        })",
-                  "        ",
-                  "        return streaming_connector"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 258,
-                "end_line": 266,
-                "language": "python",
-                "content": [
-                  "    async def execute_data_processing_query(self, connection_id: str, query: dict) -> dict:",
-                  "        \"\"\"Execute data processing query with enterprise monitoring and error handling\"\"\"",
-                  "        ",
-                  "        if connection_id not in self.data_connections:",
-                  "            raise ValueError(f\"Data connection not established: {connection_id}\")",
-                  "        ",
-                  "        connection = self.data_connections[connection_id]"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 270,
-                "end_line": 287,
-                "language": "python",
-                "content": [
-                  "        # Execute query with performance tracking",
-                  "        start_time = time.time()",
-                  "        ",
-                  "        try:",
-                  "            result = await connection.execute_data_query(query)",
-                  "            processing_time = (time.time() - start_time) * 1000  # Convert to milliseconds",
-                  "            ",
-                  "            # Record successful query execution for monitoring",
-                  "            self.connection_tracker.record_query_success(connection_id, {",
-                  "                \"query_type\": query.get(\"type\", \"unknown\"),",
-                  "                \"processing_time_ms\": processing_time,",
-                  "                \"records_processed\": result.get(\"record_count\", 0),",
-                  "                \"tenant_id\": query.get(\"tenant_id\")",
-                  "            })",
-                  "            ",
-                  "            return result"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 291,
-                "end_line": 302,
-                "language": "python",
-                "content": [
-                  "        except Exception as e:",
-                  "            processing_time = (time.time() - start_time) * 1000",
-                  "            ",
-                  "            self.connection_tracker.record_query_failure(connection_id, {",
-                  "                \"query_type\": query.get(\"type\", \"unknown\"),",
-                  "                \"error_type\": type(e).__name__,",
-                  "                \"error_message\": str(e),",
-                  "                \"processing_time_ms\": processing_time,",
-                  "                \"tenant_id\": query.get(\"tenant_id\")",
-                  "            })"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 306,
-                "end_line": 308,
-                "language": "python",
-                "content": [
-                  "            raise DataProcessingException(f\"Query execution failed: {str(e)}\")"
-                ],
-                "line_count": 1
-              },
-              {
-                "start_line": 318,
-                "end_line": 321,
-                "language": "python",
-                "content": [
-                  "from adk.orchestration import EnterpriseDataOrchestrator, DataPipelineWorkflow",
-                  "from adk.monitoring import WorkflowTracker, DataQualityMonitor"
-                ],
-                "line_count": 2
-              },
-              {
-                "start_line": 325,
-                "end_line": 339,
-                "language": "python",
-                "content": [
-                  "class DataProcessingWorkflowOrchestrator:",
-                  "    \"\"\"Enterprise orchestration for complex data processing workflows\"\"\"",
-                  "    ",
-                  "    def __init__(self):",
-                  "        self.orchestrator = EnterpriseDataOrchestrator(",
-                  "            max_concurrent_workflows=100,",
-                  "            resource_management=True,",
-                  "            tenant_isolation=True,",
-                  "            monitoring_enabled=True",
-                  "        )",
-                  "        ",
-                  "        self.workflow_tracker = WorkflowTracker()",
-                  "        self.quality_monitor = DataQualityMonitor()"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 343,
-                "end_line": 357,
-                "language": "python",
-                "content": [
-                  "    async def orchestrate_data_pipeline(self, pipeline_config: dict) -> dict:",
-                  "        \"\"\"Orchestrate complex data processing pipeline with enterprise monitoring\"\"\"",
-                  "        ",
-                  "        workflow_id = pipeline_config.get(\"workflow_id\", \"workflow_\" + str(uuid.uuid4()))",
-                  "        ",
-                  "        # Create data processing workflow with monitoring",
-                  "        workflow = DataPipelineWorkflow(",
-                  "            workflow_id=workflow_id,",
-                  "            stages=pipeline_config.get(\"stages\", []),",
-                  "            error_handling=pipeline_config.get(\"error_handling\", \"retry\"),",
-                  "            quality_checks=pipeline_config.get(\"quality_checks\", True),",
-                  "            tenant_id=pipeline_config.get(\"tenant_id\")",
-                  "        )"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 361,
-                "end_line": 370,
-                "language": "python",
-                "content": [
-                  "        # Track workflow execution for enterprise monitoring",
-                  "        with self.workflow_tracker.track_workflow(workflow_id):",
-                  "            try:",
-                  "                # Execute data processing workflow stages",
-                  "                workflow_result = await self.orchestrator.execute_workflow(workflow)",
-                  "                ",
-                  "                # Monitor data quality throughout pipeline",
-                  "                quality_score = await self.quality_monitor.assess_workflow_quality(workflow_result)"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 374,
-                "end_line": 388,
-                "language": "python",
-                "content": [
-                  "                # Record successful workflow completion",
-                  "                self.workflow_tracker.record_success(workflow_id, {",
-                  "                    \"stages_completed\": len(workflow.stages),",
-                  "                    \"total_records_processed\": workflow_result.get(\"total_records\", 0),",
-                  "                    \"data_quality_score\": quality_score,",
-                  "                    \"processing_time_ms\": self.workflow_tracker.get_processing_time(workflow_id),",
-                  "                    \"tenant_id\": pipeline_config.get(\"tenant_id\")",
-                  "                })",
-                  "                ",
-                  "                # Add quality score to result",
-                  "                workflow_result[\"data_quality_score\"] = quality_score",
-                  "                ",
-                  "                return workflow_result"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 392,
-                "end_line": 403,
-                "language": "python",
-                "content": [
-                  "            except Exception as e:",
-                  "                # Record workflow failure with detailed error information",
-                  "                self.workflow_tracker.record_failure(workflow_id, {",
-                  "                    \"error_type\": type(e).__name__,",
-                  "                    \"error_message\": str(e),",
-                  "                    \"failed_stage\": workflow.current_stage if hasattr(workflow, 'current_stage') else \"unknown\",",
-                  "                    \"tenant_id\": pipeline_config.get(\"tenant_id\")",
-                  "                })",
-                  "                ",
-                  "                raise WorkflowExecutionException(f\"Data processing workflow failed: {str(e)}\")"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 407,
-                "end_line": 429,
-                "language": "python",
-                "content": [
-                  "    async def execute_parallel_data_processing(self, processing_tasks: list) -> list:",
-                  "        \"\"\"Execute multiple data processing tasks in parallel with load balancing\"\"\"",
-                  "        ",
-                  "        # Distribute tasks across available agents for optimal data processing performance",
-                  "        task_batches = self.orchestrator.distribute_tasks(",
-                  "            tasks=processing_tasks,",
-                  "            load_balancing=True,",
-                  "            resource_awareness=True,",
-                  "            tenant_isolation=True",
-                  "        )",
-                  "        ",
-                  "        # Execute task batches in parallel with comprehensive monitoring",
-                  "        results = []",
-                  "        for batch in task_batches:",
-                  "            batch_results = await asyncio.gather(*[",
-                  "                self.orchestrator.execute_data_processing_task(task) ",
-                  "                for task in batch",
-                  "            ])",
-                  "            results.extend(batch_results)",
-                  "        ",
-                  "        return results"
-                ],
-                "line_count": 21
-              },
-              {
-                "start_line": 443,
-                "end_line": 452,
-                "language": "python",
-                "content": [
-                  "# Core ADK imports for production data processing",
-                  "from adk import ProductionADKAgent, DataProcessingCapability",
-                  "from adk.monitoring import RealTimeMetrics, AlertingSystem",
-                  "from adk.security import EnterpriseSecurityContext, DataEncryption",
-                  "import asyncio",
-                  "import json",
-                  "from datetime import datetime",
-                  "from typing import Dict, List, Any"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 456,
-                "end_line": 470,
-                "language": "python",
-                "content": [
-                  "class ProductionDataProcessingAgent(ProductionADKAgent):",
-                  "    \"\"\"Production-grade ADK agent for enterprise data processing workloads\"\"\"",
-                  "    ",
-                  "    def __init__(self, agent_name: str, tenant_config: dict):",
-                  "        super().__init__(",
-                  "            name=agent_name,",
-                  "            capabilities=[",
-                  "                DataProcessingCapability.REAL_TIME_STREAMING,",
-                  "                DataProcessingCapability.BATCH_PROCESSING,",
-                  "                DataProcessingCapability.DATA_TRANSFORMATION,",
-                  "                DataProcessingCapability.DATA_VALIDATION,",
-                  "                DataProcessingCapability.DATA_QUALITY_MONITORING",
-                  "            ],"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 474,
-                "end_line": 483,
-                "language": "python",
-                "content": [
-                  "            # Enterprise production configuration",
-                  "            production_config={",
-                  "                \"environment\": \"production\",",
-                  "                \"tenant_isolation\": True,",
-                  "                \"resource_limits\": tenant_config.get(\"resource_limits\", {}),",
-                  "                \"monitoring_level\": \"comprehensive\",",
-                  "                \"security_level\": \"enterprise\"",
-                  "            },"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 487,
-                "end_line": 498,
-                "language": "python",
-                "content": [
-                  "            # Advanced monitoring and alerting for data processing",
-                  "            monitoring=RealTimeMetrics(",
-                  "                metric_retention_days=30,",
-                  "                alert_thresholds={",
-                  "                    \"processing_latency_ms\": 1000,",
-                  "                    \"error_rate_percent\": 1.0,",
-                  "                    \"data_quality_score_min\": 0.95,",
-                  "                    \"throughput_records_per_sec_min\": 100",
-                  "                }",
-                  "            ),"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 502,
-                "end_line": 515,
-                "language": "python",
-                "content": [
-                  "            # Enterprise security for data processing",
-                  "            security_context=EnterpriseSecurityContext(",
-                  "                tenant_id=tenant_config.get(\"tenant_id\"),",
-                  "                encryption_required=True,",
-                  "                audit_logging=True,",
-                  "                access_control=tenant_config.get(\"access_control\", {})",
-                  "            )",
-                  "        )",
-                  "        ",
-                  "        self.tenant_config = tenant_config",
-                  "        self.data_encryption = DataEncryption() if tenant_config.get(\"encryption_required\", True) else None",
-                  "        self.alerting_system = AlertingSystem(tenant_config.get(\"alert_endpoints\", []))"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 525,
-                "end_line": 529,
-                "language": "",
-                "content": [
-                  "",
-                  "Streaming data processing begins with comprehensive context setup including precise timing for performance measurement, stream identification for monitoring and debugging, and tenant identification for multi-tenant isolation. This initialization ensures all subsequent processing steps have the metadata needed for enterprise-grade monitoring and troubleshooting.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 535,
-                "end_line": 539,
-                "language": "",
-                "content": [
-                  "",
-                  "Data quality validation occurs before any processing to prevent corrupted data from propagating through the pipeline. The validation result includes detailed quality metrics and error information. When validation fails, the quality issue handler can implement various remediation strategies like alerting, quarantining bad data, or applying automated corrections based on enterprise data governance policies.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 545,
-                "end_line": 549,
-                "language": "",
-                "content": [
-                  "",
-                  "Data transformation applies business logic and enrichment rules to the validated data batch. Transformation rules from stream metadata enable dynamic processing logic configuration without code changes. This approach supports complex enterprise scenarios like schema evolution, data standardization, and regulatory compliance transformations that vary by tenant or data source.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 557,
-                "end_line": 561,
-                "language": "",
-                "content": [
-                  "",
-                  "Conditional data encryption provides enterprise-grade data protection when required by security policies. The encryption includes contextual metadata like stream ID, tenant ID, and processing timestamp for audit trails and key management. This design enables encryption policies to be configured per tenant or data stream while maintaining performance when encryption isn't required.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 565,
-                "end_line": 569,
-                "language": "",
-                "content": [
-                  "",
-                  "Performance metrics calculation provides real-time visibility into processing efficiency. Processing time in milliseconds enables precise latency tracking, while throughput calculation (records per second) provides capacity planning insights. The zero-division protection ensures robust metrics even during very fast processing scenarios.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 581,
-                "end_line": 585,
-                "language": "",
-                "content": [
-                  "",
-                  "Comprehensive metrics recording captures multi-dimensional performance data essential for enterprise monitoring. Stream and tenant IDs enable segmented analysis, while processing volume and timing metrics support capacity planning. Data quality scores track data integrity over time, and transformation/encryption flags provide operational insight into processing complexity and security posture.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 588,
-                "end_line": 592,
-                "language": "",
-                "content": [
-                  "",
-                  "Proactive alerting evaluation prevents performance degradation and data quality issues from impacting downstream systems. The alert checker compares current metrics against configured thresholds for latency, throughput, and quality, enabling rapid response to operational issues before they become critical problems.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 609,
-                "end_line": 613,
-                "language": "",
-                "content": [
-                  "",
-                  "The return structure provides comprehensive processing results with both data and metadata. Performance metrics enable downstream monitoring, while processing metadata creates an audit trail of processing decisions. This rich result structure supports enterprise requirements for traceability, performance monitoring, and debugging complex data processing workflows.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 634,
-                "end_line": 638,
-                "language": "",
-                "content": [
-                  "",
-                  "Error handling captures detailed failure information for enterprise troubleshooting including exception types, error messages, attempted record counts, and timing data. High-severity alerts enable immediate response to processing failures, while comprehensive error metrics support root cause analysis and system reliability improvements. The re-raised exception with context enables proper error propagation through the processing pipeline.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 645,
-                "end_line": 649,
-                "language": "",
-                "content": [
-                  "",
-                  "Batch processing initialization establishes comprehensive tracking context for enterprise-scale data processing jobs. The job timing enables end-to-end performance monitoring, while job ID provides unique identification for tracking across distributed systems. Tenant identification ensures proper multi-tenant isolation and resource accounting for large-scale batch operations.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 657,
-                "end_line": 661,
-                "language": "",
-                "content": [
-                  "",
-                  "Batch processor initialization configures enterprise-grade resource allocation based on job requirements including CPU cores, memory limits, and I/O throughput. The staged processing approach enables complex data transformation pipelines where each stage can have different resource requirements and processing logic. Stage results collection enables detailed monitoring and rollback capabilities.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 670,
-                "end_line": 674,
-                "language": "",
-                "content": [
-                  "",
-                  "Stage-by-stage execution provides granular control and monitoring for complex batch processing workflows. Each stage receives its specific configuration and index for proper sequencing. Monitoring integration captures detailed performance metrics at the stage level, enabling identification of bottlenecks and optimization opportunities in multi-stage data processing pipelines.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 689,
-                "end_line": 693,
-                "language": "",
-                "content": [
-                  "",
-                  "Stage completion tracking captures comprehensive performance metrics for each processing phase. The metrics include timing, volume, and success indicators that enable detailed performance analysis and capacity planning. Stage names provide human-readable identification while indexes ensure proper sequencing. This granular tracking supports identifying performance bottlenecks and optimizing complex data transformation workflows.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 698,
-                "end_line": 702,
-                "language": "",
-                "content": [
-                  "",
-                  "Final metrics calculation provides comprehensive job-level performance indicators. Total processing time enables end-to-end performance monitoring, while record aggregation across all stages provides volume-based throughput analysis. Overall success determination based on all stage results ensures data integrity throughout the entire processing pipeline.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 713,
-                "end_line": 717,
-                "language": "",
-                "content": [
-                  "",
-                  "Job completion metrics recording provides enterprise-grade visibility into batch processing performance. The comprehensive metrics support capacity planning, SLA monitoring, and performance optimization. Stage counting enables validation of pipeline completeness, while success tracking supports reliability monitoring and alerting for production data processing operations.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 733,
-                "end_line": 737,
-                "language": "",
-                "content": [
-                  "",
-                  "The comprehensive return structure provides complete job execution results with performance metrics, stage details, and processing metadata. This rich result structure supports enterprise requirements for audit trails, performance monitoring, and downstream system integration. Resource utilization data enables capacity planning and cost optimization for large-scale batch processing operations.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 760,
-                "end_line": 768,
-                "language": "",
-                "content": [
-                  "",
-                  "Error handling captures detailed failure information essential for enterprise troubleshooting. Failure metrics include timing data, error classification, and stage information that supports root cause analysis. Critical alerting ensures immediate response to batch processing failures that could impact downstream systems or SLAs. The contextual exception re-raising enables proper error propagation while maintaining detailed error telemetry.",
-                  "",
-                  "### Advanced Data Processing Capabilities",
-                  "",
-                  "Implementing sophisticated data processing operations:",
-                  ""
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 783,
-                "end_line": 787,
-                "language": "",
-                "content": [
-                  "",
-                  "Batch validation initialization establishes comprehensive tracking structure for data quality assessment. The validation results include overall validity, quality scores, detailed error information, and statistics for different record types. This structure enables detailed quality reporting and decision-making about whether to proceed with processing or implement remediation steps.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 794,
-                "end_line": 798,
-                "language": "",
-                "content": [
-                  "",
-                  "Schema and quality threshold extraction enables configurable validation rules that can vary by data source or tenant. Record-by-record validation with indexing provides precise error location information essential for data quality troubleshooting. The single record validation approach enables detailed per-record analysis while maintaining batch-level processing efficiency.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 810,
-                "end_line": 814,
-                "language": "",
-                "content": [
-                  "",
-                  "Record validation results processing accumulates statistical information and captures detailed error information for invalid records. Empty record detection identifies data completeness issues that could affect downstream processing. The indexed error collection enables precise identification of problematic records for debugging and data quality improvement.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 825,
-                "end_line": 834,
-                "language": "",
-                "content": [
-                  "",
-                  "Quality score calculation provides a standardized metric (0.0-1.0) for data quality assessment that enables consistent threshold-based decision making. The 0.95 default threshold maintains high quality standards appropriate for enterprise data processing. The overall validity determination based on quality thresholds enables automated quality gate enforcement for data processing pipelines.",
-                  "    ",
-                  "    async def _transform_data_batch(self, data_batch: list, transformation_rules: dict) -> list:",
-                  "        \"\"\"Transform data batch according to specified rules\"\"\"",
-                  "        ",
-                  "        if not transformation_rules:",
-                  "            return data_batch"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 838,
-                "end_line": 846,
-                "language": "python",
-                "content": [
-                  "        transformed_batch = []",
-                  "        ",
-                  "        for record in data_batch:",
-                  "            transformed_record = await self._apply_transformation_rules(record, transformation_rules)",
-                  "            transformed_batch.append(transformed_record)",
-                  "        ",
-                  "        return transformed_batch"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 854,
-                "end_line": 858,
-                "language": "",
-                "content": [
-                  "",
-                  "Record transformation begins with defensive copying to prevent unintended modification of original data. This approach ensures data integrity throughout the transformation pipeline while enabling safe manipulation of record fields.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 864,
-                "end_line": 868,
-                "language": "",
-                "content": [
-                  "",
-                  "Field mapping transformations enable schema evolution and standardization by renaming fields according to target schema requirements. The pop operation ensures clean field renaming without duplicate fields. This transformation supports integration scenarios where different data sources use different field names for the same concepts.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 885,
-                "end_line": 889,
-                "language": "",
-                "content": [
-                  "",
-                  "Data type conversion enables schema standardization and downstream system compatibility by converting fields to required data types. The comprehensive type support (int, float, string, datetime) covers most enterprise data processing scenarios. Error handling with warning logging ensures transformation failures don't halt processing while maintaining visibility into data quality issues.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 899,
-                "end_line": 908,
-                "language": "",
-                "content": [
-                  "",
-                  "Data enrichment adds valuable metadata to records including processing timestamps for audit trails and tenant identification for multi-tenant environments. The configurable field names enable flexible enrichment strategies while maintaining consistent metadata availability for downstream processing and analytics.",
-                  "    ",
-                  "    async def _check_processing_alerts(self, stream_id: str, processing_time_ms: float, throughput: float, quality_score: float):",
-                  "        \"\"\"Check processing metrics against alert thresholds\"\"\"",
-                  "        ",
-                  "        alert_thresholds = self.monitoring.alert_thresholds",
-                  "        alerts_to_send = []"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 912,
-                "end_line": 921,
-                "language": "python",
-                "content": [
-                  "        # Check processing latency",
-                  "        if processing_time_ms > alert_thresholds.get(\"processing_latency_ms\", 1000):",
-                  "            alerts_to_send.append({",
-                  "                \"alert_type\": \"high_processing_latency\",",
-                  "                \"message\": f\"Processing latency ({processing_time_ms:.2f}ms) exceeds threshold for stream {stream_id}\",",
-                  "                \"severity\": \"warning\",",
-                  "                \"metadata\": {\"stream_id\": stream_id, \"processing_time_ms\": processing_time_ms}",
-                  "            })"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 925,
-                "end_line": 935,
-                "language": "python",
-                "content": [
-                  "        # Check throughput",
-                  "        min_throughput = alert_thresholds.get(\"throughput_records_per_sec_min\", 100)",
-                  "        if throughput < min_throughput:",
-                  "            alerts_to_send.append({",
-                  "                \"alert_type\": \"low_throughput\",",
-                  "                \"message\": f\"Processing throughput ({throughput:.2f} records/sec) below threshold for stream {stream_id}\",",
-                  "                \"severity\": \"warning\",",
-                  "                \"metadata\": {\"stream_id\": stream_id, \"throughput_records_per_sec\": throughput}",
-                  "            })"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 939,
-                "end_line": 953,
-                "language": "python",
-                "content": [
-                  "        # Check data quality",
-                  "        min_quality_score = alert_thresholds.get(\"data_quality_score_min\", 0.95)",
-                  "        if quality_score < min_quality_score:",
-                  "            alerts_to_send.append({",
-                  "                \"alert_type\": \"low_data_quality\",",
-                  "                \"message\": f\"Data quality score ({quality_score:.2f}) below threshold for stream {stream_id}\",",
-                  "                \"severity\": \"high\",",
-                  "                \"metadata\": {\"stream_id\": stream_id, \"data_quality_score\": quality_score}",
-                  "            })",
-                  "        ",
-                  "        # Send all triggered alerts",
-                  "        for alert in alerts_to_send:",
-                  "            await self.alerting_system.send_alert(**alert)"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 956,
-                "end_line": 968,
-                "language": "",
-                "content": [
-                  "",
-                  "---",
-                  "",
-                  "## Part 3: Enterprise Integration & Monitoring for Data Processing",
-                  "",
-                  "### Production Monitoring and Observability",
-                  "",
-                  "Implementing comprehensive monitoring for data processing agents:",
-                  "",
-                  "**File**: [`src/session7/adk_data_monitoring.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session7/adk_data_monitoring.py) - Enterprise monitoring for data processing",
-                  ""
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 982,
-                "end_line": 986,
-                "language": "",
-                "content": [
-                  "",
-                  "These enterprise monitoring imports provide comprehensive observability for production data processing systems. EnterpriseMetricsCollector handles large-scale metrics aggregation and export, while PerformanceTracker captures detailed execution metrics. DataQualityMonitor enables automated data quality assessment, and AlertingSystem provides multi-channel alerting with escalation rules. DataProcessingAnalytics delivers advanced analytics for capacity planning and performance optimization.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 996,
-                "end_line": 1000,
-                "language": "",
-                "content": [
-                  "",
-                  "The metrics collector initialization establishes enterprise-grade time-series data management with 30-day retention for trend analysis. Multiple aggregation intervals enable both real-time monitoring (1-minute) and long-term capacity planning (daily). Support for Prometheus, Datadog, and CloudWatch ensures integration with existing enterprise monitoring infrastructure regardless of platform choice.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1010,
-                "end_line": 1014,
-                "language": "",
-                "content": [
-                  "",
-                  "Performance tracker configuration with 100% sampling rate ensures complete visibility into processing performance, essential for enterprise data processing where every operation matters. Detailed tracking captures granular execution metrics for troubleshooting. Quality monitor configuration with customizable thresholds enables data governance policies, while optional automated remediation provides self-healing capabilities for common data quality issues.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1021,
-                "end_line": 1029,
-                "language": "",
-                "content": [
-                  "",
-                  "Alerting system configuration supports multiple notification channels (email, Slack, PagerDuty) with escalation rules that ensure critical issues reach the appropriate team members. DataProcessingAnalytics provides advanced capabilities for trend analysis, capacity planning, and performance optimization essential for managing large-scale data processing operations.",
-                  "        ",
-                  "    async def monitor_data_processing_agent(self, agent_id: str, agent_metrics: dict):",
-                  "        \"\"\"Monitor data processing agent performance and health\"\"\"",
-                  "        ",
-                  "        monitoring_timestamp = datetime.now()"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 1033,
-                "end_line": 1046,
-                "language": "python",
-                "content": [
-                  "        # Collect comprehensive performance metrics",
-                  "        performance_metrics = await self.performance_tracker.collect_agent_metrics(agent_id, {",
-                  "            \"cpu_utilization_percent\": agent_metrics.get(\"cpu_usage\", 0),",
-                  "            \"memory_utilization_percent\": agent_metrics.get(\"memory_usage\", 0),",
-                  "            \"active_data_streams\": agent_metrics.get(\"active_streams\", 0),",
-                  "            \"processing_queue_size\": agent_metrics.get(\"queue_size\", 0),",
-                  "            \"successful_operations_count\": agent_metrics.get(\"successful_ops\", 0),",
-                  "            \"failed_operations_count\": agent_metrics.get(\"failed_ops\", 0),",
-                  "            \"average_processing_latency_ms\": agent_metrics.get(\"avg_latency_ms\", 0),",
-                  "            \"data_throughput_records_per_sec\": agent_metrics.get(\"throughput\", 0),",
-                  "            \"tenant_id\": agent_metrics.get(\"tenant_id\")",
-                  "        })"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 1050,
-                "end_line": 1060,
-                "language": "python",
-                "content": [
-                  "        # Store metrics in time-series database for enterprise monitoring",
-                  "        await self.metrics_collector.store_agent_metrics(agent_id, performance_metrics, monitoring_timestamp)",
-                  "        ",
-                  "        # Analyze performance trends and patterns",
-                  "        performance_analysis = await self.analytics.analyze_agent_performance(",
-                  "            agent_id=agent_id,",
-                  "            metrics=performance_metrics,",
-                  "            historical_window_hours=24",
-                  "        )"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 1064,
-                "end_line": 1075,
-                "language": "python",
-                "content": [
-                  "        # Check for performance alerts and anomalies",
-                  "        await self._evaluate_performance_alerts(agent_id, performance_metrics, performance_analysis)",
-                  "        ",
-                  "        return {",
-                  "            \"agent_id\": agent_id,",
-                  "            \"monitoring_timestamp\": monitoring_timestamp.isoformat(),",
-                  "            \"performance_metrics\": performance_metrics,",
-                  "            \"performance_analysis\": performance_analysis,",
-                  "            \"alert_status\": \"ok\"  # Will be updated if alerts are triggered",
-                  "        }"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 1083,
-                "end_line": 1087,
-                "language": "",
-                "content": [
-                  "",
-                  "Data quality monitoring performs comprehensive assessment of processing results using enterprise-grade quality metrics. The assessment evaluates multiple dimensions of data quality including completeness, accuracy, consistency, and timeliness, providing a holistic view of data integrity throughout the processing pipeline.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1101,
-                "end_line": 1105,
-                "language": "",
-                "content": [
-                  "",
-                  "Quality metrics storage captures multi-dimensional data quality indicators essential for enterprise data governance. The comprehensive metrics include overall quality scores, specific dimension assessments (completeness, accuracy, consistency, timeliness), and operational metrics (record counts, invalid records). Job and tenant identification enables segmented quality analysis and accountability in multi-tenant environments.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1110,
-                "end_line": 1122,
-                "language": "",
-                "content": [
-                  "",
-                  "Proactive quality alerting prevents poor data quality from propagating to downstream systems. The quality assessment return enables immediate decision-making about whether to proceed with processing or implement remediation steps based on current data quality metrics.",
-                  "    ",
-                  "    async def generate_data_processing_dashboard(self, tenant_id: str = None, time_range_hours: int = 24) -> dict:",
-                  "        \"\"\"Generate comprehensive data processing dashboard for enterprise monitoring\"\"\"",
-                  "        ",
-                  "        dashboard_data = {}",
-                  "        ",
-                  "        # Get time range for dashboard data",
-                  "        end_time = datetime.now()",
-                  "        start_time = end_time - timedelta(hours=time_range_hours)"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 1126,
-                "end_line": 1141,
-                "language": "python",
-                "content": [
-                  "        # Collect agent performance summaries",
-                  "        dashboard_data[\"agent_performance\"] = await self.analytics.get_agent_performance_summary(",
-                  "            tenant_id=tenant_id,",
-                  "            start_time=start_time,",
-                  "            end_time=end_time",
-                  "        )",
-                  "        ",
-                  "        # Collect data processing throughput metrics",
-                  "        dashboard_data[\"throughput_metrics\"] = await self.analytics.get_throughput_metrics(",
-                  "            tenant_id=tenant_id,",
-                  "            start_time=start_time,",
-                  "            end_time=end_time,",
-                  "            aggregation_interval=\"5m\"",
-                  "        )"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 1145,
-                "end_line": 1159,
-                "language": "python",
-                "content": [
-                  "        # Collect data quality trends",
-                  "        dashboard_data[\"data_quality_trends\"] = await self.analytics.get_data_quality_trends(",
-                  "            tenant_id=tenant_id,",
-                  "            start_time=start_time,",
-                  "            end_time=end_time",
-                  "        )",
-                  "        ",
-                  "        # Collect error rates and failure analysis",
-                  "        dashboard_data[\"error_analysis\"] = await self.analytics.get_error_analysis(",
-                  "            tenant_id=tenant_id,",
-                  "            start_time=start_time,",
-                  "            end_time=end_time",
-                  "        )"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 1163,
-                "end_line": 1173,
-                "language": "python",
-                "content": [
-                  "        # Collect resource utilization trends",
-                  "        dashboard_data[\"resource_utilization\"] = await self.analytics.get_resource_utilization_trends(",
-                  "            tenant_id=tenant_id,",
-                  "            start_time=start_time,",
-                  "            end_time=end_time",
-                  "        )",
-                  "        ",
-                  "        # Include current system health status",
-                  "        dashboard_data[\"system_health\"] = await self.analytics.get_system_health_status(tenant_id=tenant_id)"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 1177,
-                "end_line": 1184,
-                "language": "python",
-                "content": [
-                  "        return {",
-                  "            \"dashboard_generated_at\": end_time.isoformat(),",
-                  "            \"time_range_hours\": time_range_hours,",
-                  "            \"tenant_id\": tenant_id,",
-                  "            \"dashboard_data\": dashboard_data",
-                  "        }"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 1192,
-                "end_line": 1196,
-                "language": "",
-                "content": [
-                  "",
-                  "Performance alert evaluation systematically checks key metrics against enterprise-appropriate thresholds. The alert collection approach enables batch processing of multiple alerts, reducing notification overhead while ensuring comprehensive coverage of performance issues.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1206,
-                "end_line": 1210,
-                "language": "",
-                "content": [
-                  "",
-                  "CPU utilization monitoring with dual-threshold alerting provides early warning at 80% usage and critical alerts at 90% usage. This approach enables proactive response before performance degrades while escalating severity for immediate attention when agent performance becomes critical.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1220,
-                "end_line": 1224,
-                "language": "",
-                "content": [
-                  "",
-                  "Memory utilization monitoring with 85% warning and 95% critical thresholds prevents out-of-memory conditions that could crash data processing agents. The progressive severity levels enable appropriate response based on urgency while maintaining operational stability.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1234,
-                "end_line": 1238,
-                "language": "",
-                "content": [
-                  "",
-                  "Processing latency monitoring with 1-second threshold prevents performance degradation that could impact real-time processing requirements. Latency alerts enable proactive optimization before processing delays affect downstream systems or user experience.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1250,
-                "end_line": 1254,
-                "language": "",
-                "content": [
-                  "",
-                  "Error rate monitoring with 5% threshold identifies reliability issues before they significantly impact data processing operations. The high severity level ensures rapid response to error conditions that could indicate systematic problems requiring immediate attention.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1258,
-                "end_line": 1266,
-                "language": "",
-                "content": [
-                  "",
-                  "Batch alert triggering ensures efficient notification delivery while maintaining comprehensive coverage of all performance issues. The alert system handles routing, escalation, and deduplication based on configured enterprise alerting policies.",
-                  "    ",
-                  "    async def _evaluate_data_quality_alerts(self, job_id: str, quality_assessment: dict):",
-                  "        \"\"\"Evaluate data quality metrics against alert thresholds\"\"\"",
-                  "        ",
-                  "        quality_alerts = []"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 1270,
-                "end_line": 1280,
-                "language": "python",
-                "content": [
-                  "        # Check overall data quality score",
-                  "        overall_score = quality_assessment.get(\"overall_score\", 1.0)",
-                  "        if overall_score < 0.9:  # 90% quality threshold",
-                  "            quality_alerts.append({",
-                  "                \"alert_type\": \"low_data_quality\",",
-                  "                \"severity\": \"high\",",
-                  "                \"message\": f\"Data quality score ({overall_score:.2f}) below threshold for job {job_id}\",",
-                  "                \"metadata\": {\"job_id\": job_id, \"quality_score\": overall_score}",
-                  "            })"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 1284,
-                "end_line": 1294,
-                "language": "python",
-                "content": [
-                  "        # Check schema compliance",
-                  "        schema_compliance = quality_assessment.get(\"schema_compliance\", 1.0)",
-                  "        if schema_compliance < 0.95:  # 95% schema compliance threshold",
-                  "            quality_alerts.append({",
-                  "                \"alert_type\": \"schema_compliance_issue\",",
-                  "                \"severity\": \"warning\",",
-                  "                \"message\": f\"Schema compliance ({schema_compliance:.2f}) below threshold for job {job_id}\",",
-                  "                \"metadata\": {\"job_id\": job_id, \"schema_compliance\": schema_compliance}",
-                  "            })"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 1298,
-                "end_line": 1302,
-                "language": "python",
-                "content": [
-                  "        # Send quality alerts",
-                  "        for alert in quality_alerts:",
-                  "            await self.alerting_system.trigger_alert(**alert)"
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1310,
-                "end_line": 1318,
-                "language": "python",
-                "content": [
-                  "class EnterpriseDataDeploymentIntegration:",
-                  "    \"\"\"Integration with enterprise deployment systems for data processing agents\"\"\"",
-                  "    ",
-                  "    def __init__(self, deployment_config: dict):",
-                  "        self.deployment_config = deployment_config",
-                  "        self.kubernetes_integration = deployment_config.get(\"kubernetes\", {})",
-                  "        self.monitoring_integration = deployment_config.get(\"monitoring\", {})"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 1322,
-                "end_line": 1327,
-                "language": "python",
-                "content": [
-                  "    async def deploy_data_processing_agent_cluster(self, cluster_config: dict) -> dict:",
-                  "        \"\"\"Deploy data processing agent cluster to enterprise environment\"\"\"",
-                  "        ",
-                  "        deployment_id = f\"data-cluster-{datetime.now().strftime('%Y%m%d-%H%M%S')}\""
-                ],
-                "line_count": 4
-              },
-              {
-                "start_line": 1331,
-                "end_line": 1337,
-                "language": "python",
-                "content": [
-                  "        # Generate Kubernetes deployment manifests for data processing",
-                  "        k8s_manifests = await self._generate_k8s_manifests_for_data_processing(cluster_config)",
-                  "        ",
-                  "        # Deploy to Kubernetes cluster with monitoring",
-                  "        deployment_result = await self._deploy_to_kubernetes(k8s_manifests, deployment_id)"
+                  "# Core imports for ReAct data processing",
+                  "from typing import Dict, List, Any, Optional",
+                  "from dataclasses import dataclass, field",
+                  "from enum import Enum",
+                  "from datetime import datetime"
                 ],
                 "line_count": 5
               },
               {
-                "start_line": 1341,
-                "end_line": 1353,
+                "start_line": 44,
+                "end_line": 51,
                 "language": "python",
                 "content": [
-                  "        # Configure enterprise monitoring for data processing agents",
-                  "        monitoring_result = await self._setup_enterprise_monitoring(deployment_id, cluster_config)",
+                  "class ActionType(Enum):",
+                  "    ANALYZE_SCHEMA = \"analyze_schema\"",
+                  "    VALIDATE_DATA = \"validate_data\" ",
+                  "    TRANSFORM_DATA = \"transform_data\"",
+                  "    ROUTE_PIPELINE = \"route_pipeline\"",
+                  "    FINAL_RESULT = \"final_result\""
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 55,
+                "end_line": 66,
+                "language": "python",
+                "content": [
+                  "@dataclass",
+                  "class ReActStep:",
+                  "    \"\"\"Individual step in data processing reasoning chain\"\"\"",
+                  "    step_number: int",
+                  "    thought: str",
+                  "    action: ActionType",
+                  "    action_input: str",
+                  "    observation: str",
+                  "    data_quality_score: float",
+                  "    timestamp: datetime = field(default_factory=datetime.now)"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 70,
+                "end_line": 79,
+                "language": "python",
+                "content": [
+                  "class DataProcessingReActAgent:",
+                  "    \"\"\"Foundation ReAct agent for data processing with transparent reasoning\"\"\"",
+                  "    ",
+                  "    def __init__(self, llm_client, data_tools: Dict[str, Any], max_steps: int = 8):",
+                  "        self.llm = llm_client",
+                  "        self.data_tools = data_tools",
+                  "        self.max_steps = max_steps",
+                  "        self.reasoning_history: List[ReActStep] = []"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 83,
+                "end_line": 101,
+                "language": "python",
+                "content": [
+                  "    async def process_data_pipeline(self, pipeline_request: str) -> Dict[str, Any]:",
+                  "        \"\"\"Main data processing method using ReAct pattern\"\"\"",
+                  "        self.reasoning_history = []",
+                  "        current_step = 1",
                   "        ",
+                  "        while current_step <= self.max_steps:",
+                  "            # Generate reasoning step for data processing",
+                  "            step = await self._execute_data_reasoning_step(pipeline_request, current_step)",
+                  "            self.reasoning_history.append(step)",
+                  "            ",
+                  "            # Check for completion",
+                  "            if step.action == ActionType.FINAL_RESULT:",
+                  "                break",
+                  "            ",
+                  "            current_step += 1",
+                  "        ",
+                  "        return self._format_pipeline_solution()"
+                ],
+                "line_count": 17
+              },
+              {
+                "start_line": 117,
+                "end_line": 130,
+                "language": "python",
+                "content": [
+                  "async def _execute_data_reasoning_step(",
+                  "    self, context: str, step_num: int",
+                  ") -> ReActStep:",
+                  "    \"\"\"Execute a single ReAct reasoning step for data processing\"\"\"",
+                  "    ",
+                  "    # Generate thought based on current data context",
+                  "    thought = await self._generate_data_processing_thought(context)",
+                  "    ",
+                  "    # Determine action based on data pipeline requirements",
+                  "    action_decision = await self._decide_next_data_action(thought, context)",
+                  "    action_type = ActionType(action_decision['action'])",
+                  "    action_input = action_decision['input']"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 134,
+                "end_line": 151,
+                "language": "python",
+                "content": [
+                  "    # Execute data action and get observation",
+                  "    observation = await self._execute_data_action(action_type, action_input)",
+                  "    ",
+                  "    # Calculate data quality confidence for this step",
+                  "    data_quality_score = await self._calculate_data_quality_confidence(",
+                  "        thought, action_type, observation",
+                  "    )",
+                  "    ",
+                  "    return ReActStep(",
+                  "        step_number=step_num,",
+                  "        thought=thought,",
+                  "        action=action_type,",
+                  "        action_input=action_input,",
+                  "        observation=observation,",
+                  "        data_quality_score=data_quality_score",
+                  "    )"
+                ],
+                "line_count": 16
+              },
+              {
+                "start_line": 155,
+                "end_line": 171,
+                "language": "python",
+                "content": [
+                  "def _generate_data_processing_thought(self, context: str) -> str:",
+                  "    \"\"\"Generate systematic thought with data processing framework\"\"\"",
+                  "    prompt = f\"\"\"",
+                  "    Current data context: {context}",
+                  "    Recent processing history: {self._get_recent_data_history_summary()}",
+                  "    ",
+                  "    Think systematically about data processing:",
+                  "    1. What do I understand about this data schema and quality?",
+                  "    2. What data transformation gaps remain?",
+                  "    3. What's the most productive next processing action?",
+                  "    4. What data consistency risks should I consider?",
+                  "    ",
+                  "    Provide clear reasoning for the next data processing step:",
+                  "    \"\"\"",
+                  "    return await self.llm.generate(prompt)"
+                ],
+                "line_count": 15
+              },
+              {
+                "start_line": 179,
+                "end_line": 185,
+                "language": "python",
+                "content": [
+                  "class MetaDataReActAnalyzer:",
+                  "    \"\"\"Analyzes and improves data processing ReAct reasoning quality\"\"\"",
+                  "    ",
+                  "    def __init__(self, llm_client):",
+                  "        self.llm = llm_client"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 189,
+                "end_line": 206,
+                "language": "python",
+                "content": [
+                  "    async def analyze_data_reasoning_quality(",
+                  "        self, reasoning_history: List[ReActStep]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Analyze data processing reasoning chain quality\"\"\"",
+                  "        ",
+                  "        if len(reasoning_history) < 2:",
+                  "            return {'quality_score': 0.5, 'issues': []}",
+                  "        ",
+                  "        # Detect circular data processing patterns",
+                  "        circular_analysis = await self._detect_circular_data_processing(reasoning_history)",
+                  "        ",
+                  "        # Assess data transformation progress quality",
+                  "        progress_analysis = await self._assess_data_progress_quality(reasoning_history)",
+                  "        ",
+                  "        # Evaluate data quality confidence patterns",
+                  "        quality_analysis = await self._analyze_data_quality_patterns(reasoning_history)"
+                ],
+                "line_count": 16
+              },
+              {
+                "start_line": 210,
+                "end_line": 222,
+                "language": "python",
+                "content": [
                   "        return {",
-                  "            \"deployment_id\": deployment_id,",
-                  "            \"deployment_status\": deployment_result.get(\"status\", \"unknown\"),",
-                  "            \"kubernetes_deployment\": deployment_result,",
-                  "            \"monitoring_setup\": monitoring_result,",
-                  "            \"agent_endpoints\": deployment_result.get(\"service_endpoints\", []),",
-                  "            \"deployment_timestamp\": datetime.now().isoformat()",
+                  "            'quality_score': self._calculate_overall_data_quality(",
+                  "                circular_analysis, progress_analysis, quality_analysis",
+                  "            ),",
+                  "            'circular_processing': circular_analysis,",
+                  "            'progress_quality': progress_analysis,",
+                  "            'data_quality_patterns': quality_analysis,",
+                  "            'recommendations': await self._generate_data_improvement_recommendations(",
+                  "                reasoning_history",
+                  "            )",
                   "        }"
                 ],
                 "line_count": 11
               },
               {
-                "start_line": 1361,
-                "end_line": 1365,
-                "language": "",
-                "content": [
-                  "",
-                  "Kubernetes manifest generation creates production-optimized configurations specifically tuned for enterprise data processing workloads. The manifest structure enables comprehensive container orchestration with appropriate resource allocation, monitoring integration, and operational health checks.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1379,
-                "end_line": 1383,
-                "language": "",
-                "content": [
-                  "",
-                  "Deployment metadata configuration establishes enterprise-appropriate naming conventions and labeling strategies. Environment-specific naming prevents deployment conflicts across development, staging, and production environments. Consistent labeling enables sophisticated deployment management, monitoring queries, and policy enforcement.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1404,
-                "end_line": 1408,
-                "language": "",
-                "content": [
-                  "",
-                  "Deployment specification with 3 replica default provides high availability for data processing operations. Prometheus annotations enable automatic metrics collection integration with enterprise monitoring systems. The consistent labeling strategy ensures proper service mesh integration and network policy enforcement.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1417,
-                "end_line": 1421,
-                "language": "",
-                "content": [
-                  "",
-                  "Container specification defines the core data processing agent configuration with separate ports for HTTP traffic and metrics collection. Named ports enable service discovery and load balancer configuration. The configurable container image supports enterprise deployment practices with version pinning and registry management.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1434,
-                "end_line": 1438,
-                "language": "",
-                "content": [
-                  "",
-                  "Resource configuration provides comprehensive resource management with requests ensuring guaranteed allocation and limits preventing resource contention. The default allocation (2-4 CPU, 4-8GB memory, 10-20GB storage) is calibrated for typical data processing workloads while remaining configurable for specific deployment requirements.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1459,
-                "end_line": 1483,
-                "language": "",
-                "content": [
-                  "",
-                  "Environment configuration enables runtime behavior customization while health probes ensure reliable container lifecycle management. Liveness probes restart unresponsive containers while readiness probes manage traffic routing to healthy instances. The probe timing is optimized for data processing agents with adequate startup time and responsive health checking.",
-                  "        ",
-                  "        # Generate service manifest for data processing agents",
-                  "        manifests[\"service\"] = {",
-                  "            \"apiVersion\": \"v1\",",
-                  "            \"kind\": \"Service\",",
-                  "            \"metadata\": {",
-                  "                \"name\": f\"adk-data-agents-service-{cluster_config.get('environment', 'prod')}\",",
-                  "                \"namespace\": cluster_config.get(\"namespace\", \"adk-data-processing\")",
-                  "            },",
-                  "            \"spec\": {",
-                  "                \"selector\": {",
-                  "                    \"app\": \"adk-data-agent\",",
-                  "                    \"component\": \"data-processing\"",
-                  "                },",
-                  "                \"ports\": [",
-                  "                    {\"name\": \"http\", \"port\": 80, \"targetPort\": 8080},",
-                  "                    {\"name\": \"metrics\", \"port\": 9090, \"targetPort\": 9090}",
-                  "                ],",
-                  "                \"type\": \"LoadBalancer\" if cluster_config.get(\"external_access\", False) else \"ClusterIP\"",
-                  "            }",
-                  "        }"
-                ],
-                "line_count": 23
-              },
-              {
-                "start_line": 1487,
-                "end_line": 1504,
+                "start_line": 226,
+                "end_line": 243,
                 "language": "python",
                 "content": [
-                  "        # Generate horizontal pod autoscaler for data processing workloads",
-                  "        manifests[\"hpa\"] = {",
-                  "            \"apiVersion\": \"autoscaling/v2\",",
-                  "            \"kind\": \"HorizontalPodAutoscaler\",",
-                  "            \"metadata\": {",
-                  "                \"name\": f\"adk-data-agents-hpa-{cluster_config.get('environment', 'prod')}\",",
-                  "                \"namespace\": cluster_config.get(\"namespace\", \"adk-data-processing\")",
-                  "            },",
-                  "            \"spec\": {",
-                  "                \"scaleTargetRef\": {",
-                  "                    \"apiVersion\": \"apps/v1\",",
-                  "                    \"kind\": \"Deployment\",",
-                  "                    \"name\": f\"adk-data-agents-{cluster_config.get('environment', 'prod')}\"",
-                  "                },",
-                  "                \"minReplicas\": cluster_config.get(\"min_replicas\", 3),",
-                  "                \"maxReplicas\": cluster_config.get(\"max_replicas\", 20),"
+                  "    async def _detect_circular_data_processing(",
+                  "        self, history: List[ReActStep]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Detect if agent is stuck in data processing loops\"\"\"",
+                  "        recent_steps = history[-4:]  # Examine last 4 steps",
+                  "        action_sequence = [step.action for step in recent_steps]",
+                  "        ",
+                  "        # Check for repeated data processing action patterns",
+                  "        if len(set(action_sequence)) <= 2 and len(action_sequence) >= 3:",
+                  "            return {",
+                  "                'has_circular_processing': True,",
+                  "                'pattern': action_sequence,",
+                  "                'severity': 'high'",
+                  "            }",
+                  "        ",
+                  "        return {'has_circular_processing': False}"
                 ],
                 "line_count": 16
               },
               {
-                "start_line": 1508,
-                "end_line": 1529,
+                "start_line": 262,
+                "end_line": 270,
                 "language": "python",
                 "content": [
-                  "                \"metrics\": [",
-                  "                    {",
-                  "                        \"type\": \"Resource\",",
-                  "                        \"resource\": {",
-                  "                            \"name\": \"cpu\",",
-                  "                            \"target\": {\"type\": \"Utilization\", \"averageUtilization\": 70}",
-                  "                        }",
-                  "                    },",
-                  "                    {",
-                  "                        \"type\": \"Resource\",",
-                  "                        \"resource\": {",
-                  "                            \"name\": \"memory\", ",
-                  "                            \"target\": {\"type\": \"Utilization\", \"averageUtilization\": 80}",
-                  "                        }",
-                  "                    }",
-                  "                ]",
-                  "            }",
-                  "        }",
-                  "        ",
-                  "        return manifests"
+                  "# Essential imports for multi-agent coordination",
+                  "from typing import Dict, List, Any, Optional, Set",
+                  "from dataclasses import dataclass, field",
+                  "from enum import Enum",
+                  "import asyncio",
+                  "import uuid",
+                  "from datetime import datetime"
                 ],
-                "line_count": 20
+                "line_count": 7
               },
               {
-                "start_line": 1532,
-                "end_line": 1543,
-                "language": "",
+                "start_line": 274,
+                "end_line": 282,
+                "language": "python",
                 "content": [
+                  "class DataMessageType(Enum):",
+                  "    DATA_REQUEST = \"data_request\"",
+                  "    DATA_RESPONSE = \"data_response\"",
+                  "    SCHEMA_PROPOSAL = \"schema_proposal\"",
+                  "    VALIDATION_VOTE = \"validation_vote\"",
+                  "    CONSENSUS_RESULT = \"consensus_result\"",
+                  "    PIPELINE_STATUS = \"pipeline_status\""
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 286,
+                "end_line": 299,
+                "language": "python",
+                "content": [
+                  "@dataclass",
+                  "class DataAgentMessage:",
+                  "    \"\"\"Structured message for inter-agent data processing communication\"\"\"",
+                  "    message_id: str = field(default_factory=lambda: str(uuid.uuid4()))",
+                  "    sender_id: str = \"\"",
+                  "    recipient_id: str = \"\"",
+                  "    message_type: DataMessageType = DataMessageType.DATA_REQUEST",
+                  "    data_payload: Dict[str, Any] = field(default_factory=dict)",
+                  "    schema_info: Dict[str, Any] = field(default_factory=dict)",
+                  "    timestamp: datetime = field(default_factory=datetime.now)",
+                  "    requires_validation: bool = True",
+                  "    conversation_id: Optional[str] = None"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 303,
+                "end_line": 312,
+                "language": "python",
+                "content": [
+                  "class DataCommunicationHub:",
+                  "    \"\"\"Central coordination hub for multi-agent data processing communication\"\"\"",
                   "",
-                  "---",
-                  "",
-                  "## Quick Implementation Exercise for Data Processing",
-                  "",
-                  "\ud83d\uddc2\ufe0f **Exercise Files**:",
-                  "",
-                  "- `src/session7/first_adk_data_agent.py` - Complete working data processing example",
-                  "- `src/session7/adk_data_test_suite.py` - Test your data processing understanding",
-                  ""
+                  "    def __init__(self):",
+                  "        self.data_agents: Dict[str, 'BaseDataAgent'] = {}",
+                  "        self.message_queue: List[DataAgentMessage] = []",
+                  "        self.active_data_conversations: Dict[str, List[DataAgentMessage]] = {}",
+                  "        self.data_lineage_tracking: Dict[str, Dict[str, Any]] = {}"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 316,
+                "end_line": 321,
+                "language": "python",
+                "content": [
+                  "    async def register_data_agent(self, agent: 'BaseDataAgent'):",
+                  "        \"\"\"Register data processing agent with communication hub\"\"\"",
+                  "        self.data_agents[agent.agent_id] = agent",
+                  "        await agent.set_data_communication_hub(self)"
+                ],
+                "line_count": 4
+              },
+              {
+                "start_line": 325,
+                "end_line": 335,
+                "language": "python",
+                "content": [
+                  "    async def send_data_message(self, message: DataAgentMessage) -> bool:",
+                  "        \"\"\"Send data processing message with delivery confirmation and lineage tracking\"\"\"",
+                  "        ",
+                  "        # Validate recipient exists",
+                  "        if message.recipient_id not in self.data_agents:",
+                  "            return False",
+                  "        ",
+                  "        # Track data lineage for this message",
+                  "        await self._track_data_lineage(message)"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 339,
+                "end_line": 351,
+                "language": "python",
+                "content": [
+                  "        # Add to conversation thread",
+                  "        if message.conversation_id:",
+                  "            if message.conversation_id not in self.active_data_conversations:",
+                  "                self.active_data_conversations[message.conversation_id] = []",
+                  "            self.active_data_conversations[message.conversation_id].append(message)",
+                  "        ",
+                  "        # Deliver message",
+                  "        recipient = self.data_agents[message.recipient_id]",
+                  "        success = await recipient.receive_data_message(message)",
+                  "        ",
+                  "        return success"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 363,
+                "end_line": 371,
+                "language": "python",
+                "content": [
+                  "class DataConsensusManager:",
+                  "    \"\"\"Basic consensus mechanisms for multi-agent data processing decisions\"\"\"",
+                  "    ",
+                  "    def __init__(self, agents: List['BaseDataAgent'], threshold: float = 0.67):",
+                  "        self.data_agents = agents",
+                  "        self.consensus_threshold = threshold",
+                  "        self.data_voting_history: List[Dict[str, Any]] = []"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 375,
+                "end_line": 383,
+                "language": "python",
+                "content": [
+                  "    async def data_schema_consensus(",
+                  "        self, schema_proposal: str, data_context: Dict[str, Any]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Schema validation consensus across data processing agents\"\"\"",
+                  "        ",
+                  "        # Collect schema validation proposals from all agents",
+                  "        proposals = await self._collect_schema_proposals(schema_proposal, data_context)"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 387,
+                "end_line": 394,
+                "language": "python",
+                "content": [
+                  "        # Conduct data validation voting round",
+                  "        votes = await self._conduct_schema_voting_round(proposals, data_context)",
+                  "        ",
+                  "        # Count votes and determine schema acceptance",
+                  "        vote_counts = self._count_schema_votes(votes)",
+                  "        winner = max(vote_counts.items(), key=lambda x: x[1])"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 398,
+                "end_line": 414,
+                "language": "python",
+                "content": [
+                  "        # Check if data consensus threshold met",
+                  "        total_votes = sum(vote_counts.values())",
+                  "        if winner[1] / total_votes >= self.consensus_threshold:",
+                  "            return {",
+                  "                'consensus_reached': True,",
+                  "                'schema_decision': winner[0],",
+                  "                'vote_counts': vote_counts,",
+                  "                'data_confidence': winner[1] / total_votes",
+                  "            }",
+                  "        else:",
+                  "            return {",
+                  "                'consensus_reached': False,",
+                  "                'vote_counts': vote_counts,",
+                  "                'reason': 'Data validation threshold not met'",
+                  "            }"
+                ],
+                "line_count": 15
+              },
+              {
+                "start_line": 420,
+                "end_line": 431,
+                "language": "python",
+                "content": [
+                  "    async def _collect_schema_proposals(",
+                  "        self, schema_proposal: str, data_context: Dict[str, Any]",
+                  "    ) -> List[Dict[str, Any]]:",
+                  "        \"\"\"Collect initial schema proposals from all data agents\"\"\"",
+                  "        proposal_tasks = []",
+                  "        for agent in self.data_agents:",
+                  "            task = self._get_agent_schema_proposal(agent, schema_proposal, data_context)",
+                  "            proposal_tasks.append(task)",
+                  "        ",
+                  "        proposals = await asyncio.gather(*proposal_tasks, return_exceptions=True)"
                 ],
                 "line_count": 10
-              }
-            ],
-            "large_blocks": [
-              {
-                "start_line": 407,
-                "end_line": 429,
-                "language": "python",
-                "content": [
-                  "    async def execute_parallel_data_processing(self, processing_tasks: list) -> list:",
-                  "        \"\"\"Execute multiple data processing tasks in parallel with load balancing\"\"\"",
-                  "        ",
-                  "        # Distribute tasks across available agents for optimal data processing performance",
-                  "        task_batches = self.orchestrator.distribute_tasks(",
-                  "            tasks=processing_tasks,",
-                  "            load_balancing=True,",
-                  "            resource_awareness=True,",
-                  "            tenant_isolation=True",
-                  "        )",
-                  "        ",
-                  "        # Execute task batches in parallel with comprehensive monitoring",
-                  "        results = []",
-                  "        for batch in task_batches:",
-                  "            batch_results = await asyncio.gather(*[",
-                  "                self.orchestrator.execute_data_processing_task(task) ",
-                  "                for task in batch",
-                  "            ])",
-                  "            results.extend(batch_results)",
-                  "        ",
-                  "        return results"
-                ],
-                "line_count": 21
               },
               {
-                "start_line": 1459,
-                "end_line": 1483,
-                "language": "",
+                "start_line": 435,
+                "end_line": 448,
+                "language": "python",
                 "content": [
-                  "",
-                  "Environment configuration enables runtime behavior customization while health probes ensure reliable container lifecycle management. Liveness probes restart unresponsive containers while readiness probes manage traffic routing to healthy instances. The probe timing is optimized for data processing agents with adequate startup time and responsive health checking.",
+                  "        # Filter out failed schema proposals",
+                  "        valid_proposals = []",
+                  "        for i, proposal in enumerate(proposals):",
+                  "            if not isinstance(proposal, Exception):",
+                  "                valid_proposals.append({",
+                  "                    'agent_id': self.data_agents[i].agent_id,",
+                  "                    'schema_proposal': proposal,",
+                  "                    'data_quality_score': proposal.get('data_quality_score', 0.5),",
+                  "                    'timestamp': datetime.now()",
+                  "                })",
                   "        ",
-                  "        # Generate service manifest for data processing agents",
-                  "        manifests[\"service\"] = {",
-                  "            \"apiVersion\": \"v1\",",
-                  "            \"kind\": \"Service\",",
-                  "            \"metadata\": {",
-                  "                \"name\": f\"adk-data-agents-service-{cluster_config.get('environment', 'prod')}\",",
-                  "                \"namespace\": cluster_config.get(\"namespace\", \"adk-data-processing\")",
-                  "            },",
-                  "            \"spec\": {",
-                  "                \"selector\": {",
-                  "                    \"app\": \"adk-data-agent\",",
-                  "                    \"component\": \"data-processing\"",
-                  "                },",
-                  "                \"ports\": [",
-                  "                    {\"name\": \"http\", \"port\": 80, \"targetPort\": 8080},",
-                  "                    {\"name\": \"metrics\", \"port\": 9090, \"targetPort\": 9090}",
-                  "                ],",
-                  "                \"type\": \"LoadBalancer\" if cluster_config.get(\"external_access\", False) else \"ClusterIP\"",
-                  "            }",
+                  "        return valid_proposals"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 458,
+                "end_line": 466,
+                "language": "python",
+                "content": [
+                  "class HierarchicalDataCoordinator:",
+                  "    \"\"\"Implements hierarchical multi-agent coordination patterns for data processing\"\"\"",
+                  "    ",
+                  "    def __init__(self):",
+                  "        self.coordinator_agents: Dict[str, 'DataCoordinatorAgent'] = {}",
+                  "        self.worker_agents: Dict[str, 'DataWorkerAgent'] = {}",
+                  "        self.data_delegation_rules: Dict[str, List[str]] = {}"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 470,
+                "end_line": 484,
+                "language": "python",
+                "content": [
+                  "    async def create_data_coordination_hierarchy(",
+                  "        self, data_task: str, complexity_analysis: Dict[str, Any]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Create hierarchical data processing coordination structure\"\"\"",
+                  "        ",
+                  "        # Analyze data processing decomposition requirements",
+                  "        decomposition = await self._analyze_data_task_decomposition(data_task, complexity_analysis)",
+                  "        ",
+                  "        # Create coordinator for high-level data pipeline planning",
+                  "        coordinator = await self._create_data_task_coordinator(decomposition)",
+                  "        ",
+                  "        # Create workers for data processing execution",
+                  "        workers = await self._create_data_worker_agents(decomposition)"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 488,
+                "end_line": 500,
+                "language": "python",
+                "content": [
+                  "        # Establish data processing delegation relationships",
+                  "        delegation_map = await self._establish_data_delegation_hierarchy(",
+                  "            coordinator, workers, decomposition",
+                  "        )",
+                  "        ",
+                  "        return {",
+                  "            'data_coordinator': coordinator,",
+                  "            'data_workers': workers,",
+                  "            'delegation_map': delegation_map,",
+                  "            'processing_depth': decomposition['required_levels']",
                   "        }"
                 ],
-                "line_count": 23
+                "line_count": 11
+              },
+              {
+                "start_line": 504,
+                "end_line": 519,
+                "language": "python",
+                "content": [
+                  "    async def execute_hierarchical_data_task(",
+                  "        self, data_task: str, hierarchy: Dict[str, Any]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Execute data processing task using hierarchical coordination\"\"\"",
+                  "        ",
+                  "        # Phase 1: High-level data pipeline planning",
+                  "        high_level_plan = await self._create_data_pipeline_plan(",
+                  "            data_task, hierarchy['data_coordinator']",
+                  "        )",
+                  "        ",
+                  "        # Phase 2: Data processing delegation and parallel execution",
+                  "        delegation_results = await self._execute_delegated_data_tasks(",
+                  "            high_level_plan, hierarchy['delegation_map']",
+                  "        )"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 523,
+                "end_line": 534,
+                "language": "python",
+                "content": [
+                  "        # Phase 3: Data result aggregation and validation",
+                  "        final_result = await self._aggregate_hierarchical_data_results(",
+                  "            delegation_results, hierarchy['data_coordinator']",
+                  "        )",
+                  "        ",
+                  "        return {",
+                  "            'data_task': data_task,",
+                  "            'processing_result': final_result,",
+                  "            'execution_success': True",
+                  "        }"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 546,
+                "end_line": 553,
+                "language": "python",
+                "content": [
+                  "class DataProcessingAuctionCoordinator:",
+                  "    \"\"\"Basic auction-based data processing task allocation\"\"\"",
+                  "    ",
+                  "    def __init__(self, agents: List['BaseDataAgent']):",
+                  "        self.data_agents = agents",
+                  "        self.data_auction_history: List[Dict[str, Any]] = []"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 557,
+                "end_line": 576,
+                "language": "python",
+                "content": [
+                  "    async def conduct_data_processing_auction(",
+                  "        self, data_task: str, processing_requirements: Dict[str, Any]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Conduct sealed-bid auction for data processing task allocation\"\"\"",
+                  "        ",
+                  "        # Phase 1: Assess agent data processing capabilities",
+                  "        capability_assessments = await self._assess_data_processing_capabilities(",
+                  "            data_task, processing_requirements",
+                  "        )",
+                  "        ",
+                  "        # Filter eligible data processing agents",
+                  "        eligible_agents = [",
+                  "            agent for agent, assessment in capability_assessments.items()",
+                  "            if assessment['meets_data_requirements']",
+                  "        ]",
+                  "        ",
+                  "        if not eligible_agents:",
+                  "            return {'success': False, 'reason': 'No eligible data processing agents'}"
+                ],
+                "line_count": 18
+              },
+              {
+                "start_line": 580,
+                "end_line": 597,
+                "language": "python",
+                "content": [
+                  "        # Phase 2: Collect data processing bids",
+                  "        bids = await self._collect_data_processing_bids(data_task, eligible_agents, processing_requirements)",
+                  "        ",
+                  "        # Phase 3: Select winner (best cost/performance ratio for data processing)",
+                  "        winner = await self._select_data_auction_winner(bids, processing_requirements)",
+                  "        ",
+                  "        if winner:",
+                  "            return {",
+                  "                'success': True,",
+                  "                'winner': winner['agent_id'],",
+                  "                'winning_bid': winner['bid'],",
+                  "                'data_task': data_task,",
+                  "                'expected_processing_time': winner['bid']['estimated_processing_time']",
+                  "            }",
+                  "        else:",
+                  "            return {'success': False, 'reason': 'No valid data processing bids received'}"
+                ],
+                "line_count": 16
+              },
+              {
+                "start_line": 616,
+                "end_line": 622,
+                "language": "python",
+                "content": [
+                  "# Comprehensive imports for hierarchical task planning",
+                  "from typing import Dict, List, Any, Optional, Tuple",
+                  "from dataclasses import dataclass, field",
+                  "from enum import Enum",
+                  "from datetime import datetime, timedelta"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 626,
+                "end_line": 631,
+                "language": "python",
+                "content": [
+                  "class DataTaskType(Enum):",
+                  "    PRIMITIVE = \"primitive\"      # Directly executable (single transformation)",
+                  "    COMPOUND = \"compound\"        # Requires decomposition (complex ETL)",
+                  "    ABSTRACT = \"abstract\"        # High-level goal (build analytics platform)"
+                ],
+                "line_count": 4
+              },
+              {
+                "start_line": 635,
+                "end_line": 649,
+                "language": "python",
+                "content": [
+                  "@dataclass",
+                  "class DataTask:",
+                  "    \"\"\"Represents a data processing task in the HTN hierarchy\"\"\"",
+                  "    task_id: str",
+                  "    name: str",
+                  "    task_type: DataTaskType",
+                  "    data_inputs: Dict[str, Any] = field(default_factory=dict)",
+                  "    data_outputs: Dict[str, Any] = field(default_factory=dict)",
+                  "    data_dependencies: List[str] = field(default_factory=list)",
+                  "    processing_effects: List[str] = field(default_factory=list)",
+                  "    estimated_duration: Optional[timedelta] = None",
+                  "    priority: int = 1",
+                  "    compute_requirements: Dict[str, Any] = field(default_factory=dict)"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 653,
+                "end_line": 661,
+                "language": "python",
+                "content": [
+                  "@dataclass",
+                  "class DataTaskDecomposition:",
+                  "    \"\"\"Represents a way to decompose a compound data processing task\"\"\"",
+                  "    decomposition_id: str",
+                  "    subtasks: List[DataTask]",
+                  "    data_flow_constraints: List[Tuple[str, str]] = field(default_factory=list)",
+                  "    processing_success_probability: float = 1.0"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 665,
+                "end_line": 674,
+                "language": "python",
+                "content": [
+                  "class DataHTNPlanner:",
+                  "    \"\"\"Hierarchical Task Network planner for data processing\"\"\"",
+                  "    ",
+                  "    def __init__(self, agent, data_domain_knowledge: Dict[str, Any]):",
+                  "        self.agent = agent",
+                  "        self.data_domain = data_domain_knowledge",
+                  "        self.current_pipeline_plan: Optional[List[DataTask]] = None",
+                  "        self.data_planning_history: List[Dict[str, Any]] = []"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 678,
+                "end_line": 691,
+                "language": "python",
+                "content": [
+                  "    async def create_hierarchical_data_plan(",
+                  "        self, data_goal: str, initial_data_state: Dict[str, Any]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Create hierarchical data processing plan using HTN methodology\"\"\"",
+                  "        ",
+                  "        # Phase 1: Data goal analysis and task creation",
+                  "        root_task = await self._create_root_data_task(data_goal, initial_data_state)",
+                  "        ",
+                  "        # Phase 2: Hierarchical data processing decomposition",
+                  "        decomposition_result = await self._decompose_data_task_hierarchy(",
+                  "            root_task, initial_data_state",
+                  "        )"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 695,
+                "end_line": 714,
+                "language": "python",
+                "content": [
+                  "        # Phase 3: Data pipeline optimization",
+                  "        optimized_plan = await self._optimize_data_plan(",
+                  "            decomposition_result['plan'], initial_data_state",
+                  "        )",
+                  "        ",
+                  "        # Phase 4: Data quality and consistency risk assessment",
+                  "        risk_analysis = await self._analyze_data_plan_risks(",
+                  "            optimized_plan, initial_data_state",
+                  "        )",
+                  "        ",
+                  "        return {",
+                  "            'data_plan': optimized_plan,",
+                  "            'risk_analysis': risk_analysis,",
+                  "            'confidence': decomposition_result['confidence'],",
+                  "            'estimated_processing_duration': sum(",
+                  "                t.estimated_duration or timedelta(0) for t in optimized_plan",
+                  "            )",
+                  "        }"
+                ],
+                "line_count": 18
+              },
+              {
+                "start_line": 726,
+                "end_line": 734,
+                "language": "python",
+                "content": [
+                  "class DynamicDataReplanner:",
+                  "    \"\"\"Handles dynamic replanning during data pipeline execution\"\"\"",
+                  "    ",
+                  "    def __init__(self, htn_planner: DataHTNPlanner):",
+                  "        self.data_planner = htn_planner",
+                  "        self.monitoring_active = False",
+                  "        self.data_replanning_history: List[Dict[str, Any]] = []"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 738,
+                "end_line": 750,
+                "language": "python",
+                "content": [
+                  "    async def execute_with_data_replanning(",
+                  "        self, data_plan: List[DataTask], initial_data_state: Dict[str, Any]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Execute data plan with continuous monitoring and replanning\"\"\"",
+                  "        ",
+                  "        current_data_state = initial_data_state.copy()",
+                  "        remaining_tasks = data_plan.copy()",
+                  "        completed_tasks = []",
+                  "        execution_trace = []",
+                  "        ",
+                  "        self.monitoring_active = True"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 754,
+                "end_line": 769,
+                "language": "python",
+                "content": [
+                  "        while remaining_tasks and self.monitoring_active:",
+                  "            current_task = remaining_tasks[0]",
+                  "            ",
+                  "            # Pre-execution data validation",
+                  "            validation_result = await self._validate_data_task_execution(",
+                  "                current_task, current_data_state",
+                  "            )",
+                  "            ",
+                  "            if not validation_result['can_execute']:",
+                  "                # Trigger data processing replanning",
+                  "                replanning_result = await self._trigger_data_replanning(",
+                  "                    current_task, remaining_tasks, current_data_state,",
+                  "                    validation_result['reason']",
+                  "                )"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 773,
+                "end_line": 781,
+                "language": "python",
+                "content": [
+                  "                if replanning_result['success']:",
+                  "                    remaining_tasks = replanning_result['new_data_plan']",
+                  "                    execution_trace.append(('data_replan', replanning_result))",
+                  "                    continue",
+                  "                else:",
+                  "                    execution_trace.append(('data_failure', replanning_result))",
+                  "                    break"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 785,
+                "end_line": 800,
+                "language": "python",
+                "content": [
+                  "            # Execute data processing task",
+                  "            execution_result = await self._execute_monitored_data_task(",
+                  "                current_task, current_data_state",
+                  "            )",
+                  "            ",
+                  "            execution_trace.append(('data_execute', execution_result))",
+                  "            ",
+                  "            if execution_result['success']:",
+                  "                # Update data state and continue",
+                  "                current_data_state = self._apply_data_task_effects(",
+                  "                    current_task, current_data_state, execution_result",
+                  "                )",
+                  "                completed_tasks.append(current_task)",
+                  "                remaining_tasks.pop(0)"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 804,
+                "end_line": 823,
+                "language": "python",
+                "content": [
+                  "            else:",
+                  "                # Handle data processing failure",
+                  "                failure_analysis = await self._analyze_data_execution_failure(",
+                  "                    current_task, execution_result",
+                  "                )",
+                  "                ",
+                  "                if failure_analysis['should_replan']:",
+                  "                    replanning_result = await self._trigger_data_replanning(",
+                  "                        current_task, remaining_tasks, current_data_state,",
+                  "                        execution_result['error']",
+                  "                    )",
+                  "                    ",
+                  "                    if replanning_result['success']:",
+                  "                        remaining_tasks = replanning_result['new_data_plan']",
+                  "                        continue",
+                  "                ",
+                  "                execution_trace.append(('data_abort', failure_analysis))",
+                  "                break"
+                ],
+                "line_count": 18
+              },
+              {
+                "start_line": 827,
+                "end_line": 835,
+                "language": "python",
+                "content": [
+                  "        return {",
+                  "            'completed_data_tasks': completed_tasks,",
+                  "            'remaining_data_tasks': remaining_tasks,",
+                  "            'final_data_state': current_data_state,",
+                  "            'data_execution_trace': execution_trace,",
+                  "            'success': len(remaining_tasks) == 0",
+                  "        }"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 850,
+                "end_line": 859,
+                "language": "python",
+                "content": [
+                  "class DataReflectionEngine:",
+                  "    \"\"\"Implements reflection patterns for continuous data processing improvement\"\"\"",
+                  "    ",
+                  "    def __init__(self, agent):",
+                  "        self.agent = agent",
+                  "        self.data_experience_buffer: List[Dict[str, Any]] = []",
+                  "        self.learned_data_patterns: Dict[str, Any] = {}",
+                  "        self.data_performance_metrics: Dict[str, List[float]] = {}"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 863,
+                "end_line": 878,
+                "language": "python",
+                "content": [
+                  "    async def reflect_on_data_execution(",
+                  "        self, execution_result: Dict[str, Any]",
+                  "    ) -> Dict[str, Any]:",
+                  "        \"\"\"Conduct comprehensive reflection on data processing execution experience\"\"\"",
+                  "        ",
+                  "        # Phase 1: Data processing experience analysis",
+                  "        experience_analysis = await self._analyze_data_execution_experience(",
+                  "            execution_result",
+                  "        )",
+                  "        ",
+                  "        # Phase 2: Data pattern identification",
+                  "        patterns = await self._identify_data_learning_patterns(",
+                  "            experience_analysis, self.data_experience_buffer",
+                  "        )"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 882,
+                "end_line": 897,
+                "language": "python",
+                "content": [
+                  "        # Phase 3: Data pipeline performance assessment",
+                  "        performance_assessment = await self._assess_data_performance_trends(",
+                  "            execution_result, patterns",
+                  "        )",
+                  "        ",
+                  "        # Phase 4: Data processing strategy adaptation",
+                  "        adaptations = await self._generate_data_strategy_adaptations(",
+                  "            patterns, performance_assessment",
+                  "        )",
+                  "        ",
+                  "        # Phase 5: Data knowledge integration",
+                  "        integration_result = await self._integrate_learned_data_knowledge(",
+                  "            patterns, adaptations",
+                  "        )"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 901,
+                "end_line": 913,
+                "language": "python",
+                "content": [
+                  "        # Store data processing experience for future learning",
+                  "        self.data_experience_buffer.append({",
+                  "            'data_execution_result': execution_result,",
+                  "            'reflection': {",
+                  "                'analysis': experience_analysis,",
+                  "                'data_patterns': patterns,",
+                  "                'performance': performance_assessment,",
+                  "                'adaptations': adaptations",
+                  "            },",
+                  "            'timestamp': datetime.now()",
+                  "        })"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 917,
+                "end_line": 929,
+                "language": "python",
+                "content": [
+                  "        # Prune old data experiences if buffer is too large",
+                  "        if len(self.data_experience_buffer) > 500:",
+                  "            self.data_experience_buffer = self.data_experience_buffer[-400:]",
+                  "        ",
+                  "        return {",
+                  "            'data_reflection_summary': experience_analysis['summary'],",
+                  "            'identified_data_patterns': patterns,",
+                  "            'performance_insights': performance_assessment,",
+                  "            'recommended_adaptations': adaptations,",
+                  "            'integration_success': integration_result",
+                  "        }"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 945,
+                "end_line": 951,
+                "language": "python",
+                "content": [
+                  "# Essential imports for production multi-agent systems",
+                  "from dataclasses import dataclass",
+                  "from typing import Dict, List, Any",
+                  "from datetime import timedelta",
+                  "import logging"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 955,
+                "end_line": 966,
+                "language": "python",
+                "content": [
+                  "@dataclass",
+                  "class BasicDataProductionConfig:",
+                  "    \"\"\"Basic configuration for production multi-agent data processing systems\"\"\"",
+                  "    max_data_agents: int = 50",
+                  "    consensus_timeout: timedelta = timedelta(seconds=30)",
+                  "    data_health_check_interval: timedelta = timedelta(seconds=10)",
+                  "    enable_data_monitoring: bool = True",
+                  "    log_level: str = \"INFO\"",
+                  "    data_processing_batch_size: int = 10000",
+                  "    max_parallel_streams: int = 8"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 970,
+                "end_line": 985,
+                "language": "python",
+                "content": [
+                  "class BasicDataProductionSystem:",
+                  "    \"\"\"Basic production multi-agent data processing system\"\"\"",
+                  "    ",
+                  "    def __init__(self, config: BasicDataProductionConfig):",
+                  "        self.config = config",
+                  "        self.data_agents: Dict[str, 'BaseDataAgent'] = {}",
+                  "        self._setup_data_logging()",
+                  "    ",
+                  "    def _setup_data_logging(self):",
+                  "        \"\"\"Setup production data processing logging\"\"\"",
+                  "        logging.basicConfig(",
+                  "            level=getattr(logging, self.config.log_level),",
+                  "            format='%(asctime)s - %(name)s - %(levelname)s - [DATA] %(message)s'",
+                  "        )"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 989,
+                "end_line": 1002,
+                "language": "python",
+                "content": [
+                  "    async def deploy_data_agent(self, agent: 'BaseDataAgent') -> Dict[str, Any]:",
+                  "        \"\"\"Deploy data processing agent with validation\"\"\"",
+                  "        ",
+                  "        # Basic data processing validation",
+                  "        if len(self.data_agents) >= self.config.max_data_agents:",
+                  "            return {'success': False, 'error': 'Maximum data processing agents reached'}",
+                  "        ",
+                  "        if agent.agent_id in self.data_agents:",
+                  "            return {'success': False, 'error': 'Data agent ID already exists'}",
+                  "        ",
+                  "        # Register data processing agent",
+                  "        self.data_agents[agent.agent_id] = agent"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 1006,
+                "end_line": 1020,
+                "language": "python",
+                "content": [
+                  "        # Basic data processing health check",
+                  "        health = await self._basic_data_health_check(agent)",
+                  "        if not health['healthy']:",
+                  "            del self.data_agents[agent.agent_id]",
+                  "            return {'success': False, 'error': 'Data agent failed health check'}",
+                  "        ",
+                  "        logging.info(f\"Data processing agent {agent.agent_id} deployed successfully\")",
+                  "        ",
+                  "        return {",
+                  "            'success': True,",
+                  "            'agent_id': agent.agent_id,",
+                  "            'deployment_time': datetime.now()",
+                  "        }"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 1024,
+                "end_line": 1041,
+                "language": "python",
+                "content": [
+                  "    async def _basic_data_health_check(self, agent: 'BaseDataAgent') -> Dict[str, Any]:",
+                  "        \"\"\"Perform basic data processing agent health check\"\"\"",
+                  "        try:",
+                  "            # Test basic data processing functionality",
+                  "            test_response = await agent.process_data_sample(\"health check data\")",
+                  "            ",
+                  "            return {",
+                  "                'healthy': bool(test_response),",
+                  "                'response_time': 'measured_time_here',",
+                  "                'data_processing_capability': test_response.get('processing_success', False)",
+                  "            }",
+                  "        except Exception as e:",
+                  "            return {",
+                  "                'healthy': False,",
+                  "                'error': str(e)",
+                  "            }"
+                ],
+                "line_count": 16
+              },
+              {
+                "start_line": 1049,
+                "end_line": 1062,
+                "language": "python",
+                "content": [
+                  "class BasicDataSystemMonitor:",
+                  "    \"\"\"Basic monitoring for multi-agent data processing systems\"\"\"",
+                  "    ",
+                  "    def __init__(self, system: BasicDataProductionSystem):",
+                  "        self.system = system",
+                  "        self.data_metrics: Dict[str, List[Any]] = {",
+                  "            'agent_health': [],",
+                  "            'data_throughput': [],",
+                  "            'processing_latency': [],",
+                  "            'data_quality_score': [],",
+                  "            'error_count': []",
+                  "        }"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 1066,
+                "end_line": 1080,
+                "language": "python",
+                "content": [
+                  "    async def collect_basic_data_metrics(self) -> Dict[str, Any]:",
+                  "        \"\"\"Collect basic data processing system metrics\"\"\"",
+                  "        ",
+                  "        # Data processing agent health metrics",
+                  "        healthy_data_agents = 0",
+                  "        total_throughput = 0",
+                  "        ",
+                  "        for agent_id, agent in self.system.data_agents.items():",
+                  "            health = await self.system._basic_data_health_check(agent)",
+                  "            if health['healthy']:",
+                  "                healthy_data_agents += 1",
+                  "                # Simulate throughput metrics",
+                  "                total_throughput += getattr(agent, 'current_throughput', 1000)"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 1084,
+                "end_line": 1093,
+                "language": "python",
+                "content": [
+                  "        return {",
+                  "            'timestamp': datetime.now(),",
+                  "            'total_data_agents': len(self.system.data_agents),",
+                  "            'healthy_data_agents': healthy_data_agents,",
+                  "            'total_data_throughput_rps': total_throughput,",
+                  "            'system_health': healthy_data_agents / len(self.system.data_agents) if self.system.data_agents else 0,",
+                  "            'average_processing_latency_ms': 150  # Would be measured in production",
+                  "        }"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 1097,
+                "end_line": 1112,
+                "language": "python",
+                "content": [
+                  "    async def generate_basic_data_report(self) -> str:",
+                  "        \"\"\"Generate basic data processing system status report\"\"\"",
+                  "        metrics = await self.collect_basic_data_metrics()",
+                  "        ",
+                  "        return f\"\"\"",
+                  "Basic Multi-Agent Data Processing System Report",
+                  "===============================================",
+                  "Time: {metrics['timestamp']}",
+                  "Total Data Processing Agents: {metrics['total_data_agents']}",
+                  "Healthy Data Agents: {metrics['healthy_data_agents']}",
+                  "Total Data Throughput: {metrics['total_data_throughput_rps']} records/sec",
+                  "System Health: {metrics['system_health']:.2%}",
+                  "Average Processing Latency: {metrics['average_processing_latency_ms']}ms",
+                  "\"\"\""
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 1125,
+                "end_line": 1132,
+                "language": "bash",
+                "content": [
+                  "# Try the data processing examples:",
+                  "",
+                  "cd src/session9",
+                  "python react_agent.py                    # ReAct reasoning for data pipelines",
+                  "python multi_agent_coordination.py       # Data agent coordination",
+                  "python planning_systems.py               # HTN planning for data processing"
+                ],
+                "line_count": 6
               }
             ],
-            "needs_refactoring": true
+            "large_blocks": [],
+            "needs_refactoring": false
           }
         ]
       },
@@ -1560,22 +1215,15 @@
       "data": {
         "summary": {
           "total_files": 1,
-          "files_with_issues": 1,
-          "total_issues": 1
+          "files_with_issues": 0,
+          "total_issues": 0
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session7_First_ADK_Agent.md",
-            "total_issues": 1,
-            "issues": [
-              {
-                "type": "unclosed_code_block",
-                "line": 1550,
-                "message": "Code block starting at line 1550 is never closed",
-                "suggestion": "Add closing ``` marker"
-              }
-            ],
-            "needs_fixing": true
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+            "total_issues": 0,
+            "issues": [],
+            "needs_fixing": false
           }
         ]
       },
@@ -1587,140 +1235,43 @@
         "summary": {
           "total_files": 1,
           "files_needing_improvement": 1,
-          "total_issues": 15,
-          "average_quality_score": 84.375
+          "total_issues": 3,
+          "average_quality_score": 95.23809523809523
         },
         "files": [
           {
-            "total_code_blocks": 96,
-            "total_issues": 15,
+            "total_code_blocks": 63,
+            "total_issues": 3,
             "issues": [
               {
-                "type": "lacks_educational_context",
+                "type": "generic_explanation",
                 "severity": "medium",
-                "line": 176,
-                "code_block_size": 6,
-                "message": "Code block at line 167 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "inadequate_explanation_for_size",
-                "severity": "medium",
-                "line": 238,
-                "code_block_size": 12,
-                "word_count": 29,
-                "message": "Large code block (12 lines) at line 222 has minimal explanation (29 words)",
-                "suggestion": "Provide more detailed explanation proportional to code complexity"
-              },
-              {
-                "type": "inadequate_explanation_for_size",
-                "severity": "medium",
-                "line": 288,
-                "code_block_size": 13,
-                "word_count": 26,
-                "message": "Large code block (13 lines) at line 270 has minimal explanation (26 words)",
-                "suggestion": "Provide more detailed explanation proportional to code complexity"
-              },
-              {
-                "type": "inadequate_explanation_for_size",
-                "severity": "medium",
-                "line": 340,
-                "code_block_size": 11,
-                "word_count": 25,
-                "message": "Large code block (11 lines) at line 325 has minimal explanation (25 words)",
-                "suggestion": "Provide more detailed explanation proportional to code complexity"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 340,
-                "code_block_size": 11,
-                "message": "Code block at line 325 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 358,
-                "code_block_size": 11,
-                "message": "Code block at line 343 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 969,
-                "code_block_size": 5,
-                "word_count": 9,
-                "message": "Code block (5 lines) at line 956 has insufficient explanation (9 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 969,
-                "code_block_size": 5,
-                "message": "Code block at line 956 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+                "line": 283,
+                "code_block_size": 7,
+                "message": "Code block at line 274 has generic/lazy explanation",
+                "suggestion": "Replace generic phrases with specific, educational explanations"
               },
               {
                 "type": "generic_explanation",
                 "severity": "medium",
-                "line": 1281,
-                "code_block_size": 9,
-                "message": "Code block at line 1270 has generic/lazy explanation",
+                "line": 384,
+                "code_block_size": 6,
+                "message": "Code block at line 375 has generic/lazy explanation",
                 "suggestion": "Replace generic phrases with specific, educational explanations"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1338,
-                "code_block_size": 4,
-                "message": "Code block at line 1331 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 1544,
+                "line": 1133,
                 "code_block_size": 5,
-                "word_count": 6,
-                "message": "Code block (5 lines) at line 1532 has insufficient explanation (6 words)",
+                "word_count": 3,
+                "message": "Code block (5 lines) at line 1125 has insufficient explanation (3 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1544,
-                "code_block_size": 5,
-                "message": "Code block at line 1532 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "consecutive_code_blocks",
-                "severity": "medium",
-                "line": 585,
-                "message": "Consecutive code blocks at lines 581 and 588 without intermediate explanation",
-                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
-              },
-              {
-                "type": "consecutive_code_blocks",
-                "severity": "medium",
-                "line": 953,
-                "message": "Consecutive code blocks at lines 939 and 956 without intermediate explanation",
-                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
-              },
-              {
-                "type": "consecutive_code_blocks",
-                "severity": "medium",
-                "line": 1529,
-                "message": "Consecutive code blocks at lines 1508 and 1532 without intermediate explanation",
-                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               }
             ],
             "needs_improvement": true,
-            "quality_score": 84.375,
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session7_First_ADK_Agent.md"
+            "quality_score": 95.23809523809523,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md"
           }
         ]
       },
@@ -1729,12 +1280,11 @@
   },
   "priority_files": [
     {
-      "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session7_First_ADK_Agent.md",
-      "file_name": "Session7_First_ADK_Agent.md",
-      "priority_score": 23.125,
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/Session9_Multi_Agent_Patterns.md",
+      "file_name": "Session9_Multi_Agent_Patterns.md",
+      "priority_score": 0.9523809523809547,
       "issues": [
-        "2 large code blocks",
-        "84.4% explanation quality"
+        "95.2% explanation quality"
       ]
     }
   ]
