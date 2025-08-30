@@ -12,7 +12,8 @@
       "Bash(do)",
       "Bash(done)",
       "Bash(sed:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(python:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",

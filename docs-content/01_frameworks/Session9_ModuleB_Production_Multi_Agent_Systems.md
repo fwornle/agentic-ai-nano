@@ -18,6 +18,7 @@ Modern data processing systems deploy agents as lightweight, scalable containers
 🗂️ **File**: `src/session9/production/containerized_deployment.py` - Enterprise container orchestration for data agents
 
 ```python
+# Essential imports for enterprise data agent deployment
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
@@ -26,7 +27,11 @@ import json
 import logging
 import yaml
 from pathlib import Path
+```
 
+These imports establish our enterprise deployment framework. We use dataclasses for clean configuration objects, asyncio for concurrent operations handling thousands of agents, and logging for production monitoring. The datetime imports support deployment tracking and resource scheduling.
+
+```python
 @dataclass
 class DataProcessingResourceRequirements:
     """Resource requirements for data processing agents in production"""
@@ -37,7 +42,11 @@ class DataProcessingResourceRequirements:
     gpu_count: int = 0
     data_throughput_rps: int = 10000  # Records per second
     max_concurrent_streams: int = 16
+```
 
+The resource requirements class defines compute, memory, and networking needs for data processing at scale. The `data_throughput_rps` of 10,000 records per second and `max_concurrent_streams` of 16 are calibrated for enterprise data workloads. The GPU count remains optional but enables ML-powered data processing when needed.
+
+```python
 @dataclass 
 class DataAgentDeploymentConfig:
     """Comprehensive deployment configuration for data processing agents"""
@@ -51,7 +60,13 @@ class DataAgentDeploymentConfig:
     monitoring_config: Dict[str, Any] = field(default_factory=dict)
     security_config: Dict[str, Any] = field(default_factory=dict)
     data_compliance_tags: List[str] = field(default_factory=list)
+```
 
+This deployment configuration encapsulates everything needed to deploy a data processing agent in production. The separate configs for scaling, monitoring, and security allow fine-tuned control over each aspect. The `data_compliance_tags` support regulatory requirements like GDPR or HIPAA for data processing workflows.
+
+The orchestrator class forms the heart of enterprise data agent deployment, managing thousands of agents across cluster resources.
+
+```python
 class EnterpriseDataAgentOrchestrator:
     """Production orchestration system for multi-agent data processing deployments"""
     
@@ -70,14 +85,22 @@ class EnterpriseDataAgentOrchestrator:
         self.health_checks_active = True
         
         self.logger = logging.getLogger("EnterpriseDataOrchestrator")
-        
+```
+
+The orchestrator initializes with enterprise-scale resource pools: 1000 CPU cores, 2TB memory, and 50TB storage by default. This supports hundreds of data processing agents simultaneously. The resource tracking enables intelligent placement decisions and prevents over-allocation that could crash the cluster.
+
+```python
     async def deploy_data_processing_cluster(self, 
                                            agents_config: List[DataAgentDeploymentConfig]) -> Dict[str, Any]:
         """Deploy complete multi-agent data processing cluster to production"""
         
         deployment_start_time = datetime.now()
         deployment_results = []
-        
+```
+
+This method orchestrates the complete deployment of a multi-agent data processing cluster. It tracks the start time and maintains a list of deployment results for each agent. The method follows a structured five-phase approach to ensure reliable enterprise deployments.
+
+```python
         # Phase 1: Validate cluster-wide resource requirements for data processing
         resource_validation = await self._validate_cluster_resources(agents_config)
         if not resource_validation['sufficient']:
@@ -86,7 +109,11 @@ class EnterpriseDataAgentOrchestrator:
                 'error': 'Insufficient cluster resources for data processing deployment',
                 'resource_gap': resource_validation['resource_gap']
             }
-        
+```
+
+Phase 1 performs comprehensive resource validation before starting any deployments. This prevents partial deployments that would fail mid-process due to resource constraints. The validation checks CPU, memory, storage, and network capacity against the total requirements of all agents to be deployed.
+
+```python
         # Phase 2: Create production data processing network infrastructure
         network_setup = await self._setup_production_data_network(agents_config)
         if not network_setup['success']:
@@ -95,7 +122,11 @@ class EnterpriseDataAgentOrchestrator:
                 'error': 'Failed to setup production data processing network',
                 'details': network_setup
             }
-        
+```
+
+Phase 2 establishes the network infrastructure required for agent communication. This includes setting up service discovery, load balancers, and inter-agent communication channels. Network setup must complete successfully before individual agent deployment begins to ensure connectivity.
+
+```python
         # Phase 3: Deploy data processing agents with dependency resolution
         for agent_config in agents_config:
             try:
@@ -112,7 +143,11 @@ class EnterpriseDataAgentOrchestrator:
                 else:
                     self.logger.error(f"Failed to deploy data processing agent {agent_config.agent_id}: {deployment_result['error']}")
                     # Continue with other agents instead of failing entire deployment
-                    
+```
+
+Phase 3 deploys each data processing agent individually with proper error handling. The deployment continues even if individual agents fail, allowing partial cluster deployment. Resource allocation tracking ensures accurate capacity management, and successful deployments are registered in the orchestrator's state.
+
+```python
             except Exception as e:
                 self.logger.error(f"Exception deploying agent {agent_config.agent_id}: {e}")
                 deployment_results.append({
@@ -120,7 +155,11 @@ class EnterpriseDataAgentOrchestrator:
                     'success': False,
                     'error': str(e)
                 })
-        
+```
+
+Exception handling ensures that unexpected errors during agent deployment don't crash the entire deployment process. Each failure is logged and recorded in the results, providing complete visibility into deployment success and failure patterns.
+
+```python
         # Phase 4: Establish data processing coordination and communication
         coordination_setup = await self._setup_agent_coordination(
             [r for r in deployment_results if r['success']]
@@ -142,10 +181,17 @@ class EnterpriseDataAgentOrchestrator:
             'deployment_duration_seconds': deployment_duration.total_seconds(),
             'cluster_health': await self._assess_cluster_health()
         }
+```
+
+Phases 4 and 5 complete the cluster setup by establishing agent coordination and starting monitoring. The coordination setup only includes successfully deployed agents, ensuring proper communication channels. The final return provides comprehensive deployment status including success/failure counts, timing, and cluster health assessment.
     
     async def _deploy_single_data_agent(self, agent_config: DataAgentDeploymentConfig) -> Dict[str, Any]:
         """Deploy individual data processing agent with production configuration"""
-        
+```
+
+This method handles the deployment of a single data processing agent with comprehensive production configuration. It follows a multi-step process to ensure secure, properly configured, and health-verified deployments.
+
+```python
         # Generate production-grade Kubernetes deployment manifest
         k8s_manifest = await self._generate_kubernetes_manifest(agent_config)
         
@@ -154,7 +200,11 @@ class EnterpriseDataAgentOrchestrator:
         
         # Setup data processing specific configurations
         data_config_manifest = await self._setup_data_processing_config(agent_config)
-        
+```
+
+The deployment preparation creates three critical manifest components: the Kubernetes deployment specification with resource requirements and health checks, security configurations including RBAC and network policies, and data processing specific configurations for throughput and quality settings.
+
+```python
         # Deploy to Kubernetes cluster
         deployment_command = [
             'kubectl', 'apply', '-f', '-'
@@ -165,7 +215,11 @@ class EnterpriseDataAgentOrchestrator:
             **security_manifest,
             **data_config_manifest
         }
-        
+```
+
+The three manifest components are merged into a complete deployment specification. This unified approach ensures all configuration aspects are applied atomically to prevent inconsistent deployment states.
+
+```python
         try:
             # In production, would use kubectl or K8s Python client
             deployment_result = await self._execute_kubectl_deployment(full_manifest)
@@ -175,7 +229,11 @@ class EnterpriseDataAgentOrchestrator:
                 readiness_check = await self._wait_for_agent_readiness(
                     agent_config.agent_id, timeout_seconds=300
                 )
-                
+```
+
+The deployment execution uses Kubernetes APIs to apply the manifest. After successful deployment, the system waits up to 5 minutes for the agent to become ready. This readiness check verifies that the container has started and is responding to health checks.
+
+```python
                 if readiness_check['ready']:
                     # Run data processing health checks
                     health_check = await self._run_data_processing_health_checks(agent_config)
@@ -187,6 +245,11 @@ class EnterpriseDataAgentOrchestrator:
                         'health_status': health_check,
                         'ready_time_seconds': readiness_check['ready_time_seconds']
                     }
+```
+
+Once the agent is ready, comprehensive data processing health checks verify that the agent can handle data workloads properly. The success of the entire deployment depends on passing these health checks, ensuring only fully functional agents are considered successfully deployed.
+
+```python
                 else:
                     return {
                         'success': False,
@@ -205,10 +268,17 @@ class EnterpriseDataAgentOrchestrator:
                 'success': False,
                 'error': f'Exception during data processing agent deployment: {str(e)}'
             }
+```
+
+Error handling provides detailed failure information for debugging and monitoring. Each failure mode returns specific error context, enabling operators to quickly diagnose and resolve deployment issues.
     
     async def _generate_kubernetes_manifest(self, agent_config: DataAgentDeploymentConfig) -> Dict[str, Any]:
         """Generate production Kubernetes manifest for data processing agent"""
-        
+```
+
+This method creates a comprehensive Kubernetes deployment manifest optimized for data processing workloads. It includes resource management, health checks, monitoring integration, and persistent storage configuration.
+
+```python
         # Resource specifications optimized for data processing workloads
         resource_limits = {
             'cpu': f"{agent_config.resource_requirements.cpu_cores}",
@@ -221,12 +291,20 @@ class EnterpriseDataAgentOrchestrator:
             'memory': f"{agent_config.resource_requirements.memory_gb * 0.8}Gi",
             'ephemeral-storage': f"{agent_config.resource_requirements.storage_gb * 0.5}Gi"
         }
-        
+```
+
+Resource specifications define both limits (maximum allowed) and requests (guaranteed allocation). Requests are set lower than limits to allow burst capacity - CPU at 50% and memory at 80% of limits. This approach optimizes cluster resource utilization while ensuring performance guarantees for data processing.
+
+```python
         # Add GPU resources if needed for ML data processing
         if agent_config.resource_requirements.gpu_count > 0:
             resource_limits['nvidia.com/gpu'] = str(agent_config.resource_requirements.gpu_count)
             resource_requests['nvidia.com/gpu'] = str(agent_config.resource_requirements.gpu_count)
-        
+```
+
+GPU resources are added when ML-powered data processing is required. Unlike CPU and memory, GPU requests and limits are identical since GPUs cannot be shared or overcommitted in Kubernetes.
+
+```python
         # Environment variables for data processing configuration
         env_vars = [
             {'name': 'AGENT_ID', 'value': agent_config.agent_id},
@@ -243,7 +321,11 @@ class EnterpriseDataAgentOrchestrator:
                 'name': f'DATA_CONFIG_{key.upper()}',
                 'value': str(value)
             })
-        
+```
+
+Environment variables configure the agent's runtime behavior. Core variables include agent identification, performance targets, and monitoring settings. Dynamic variables from the data processing config are prefixed with 'DATA_CONFIG_' to namespace them clearly.
+
+```python
         # Production health checks for data processing
         liveness_probe = {
             'httpGet': {
@@ -266,7 +348,11 @@ class EnterpriseDataAgentOrchestrator:
             'timeoutSeconds': 3,
             'failureThreshold': 3
         }
-        
+```
+
+Health probes ensure reliable data processing operations. The liveness probe restarts containers that become unresponsive, while the readiness probe controls traffic routing to ensure only healthy agents receive data. Different timing parameters optimize for startup time versus responsiveness.
+
+```python
         # Complete Kubernetes deployment manifest
         manifest = {
             'apiVersion': 'apps/v1',
@@ -282,6 +368,11 @@ class EnterpriseDataAgentOrchestrator:
                     'data-processing': 'true'
                 }
             },
+```
+
+The deployment metadata includes comprehensive labeling for service discovery, monitoring, and operational management. Labels enable efficient querying and grouping of agents by environment, version, and functionality.
+
+```python
             'spec': {
                 'replicas': agent_config.scaling_config.get('initial_replicas', 1),
                 'selector': {
@@ -304,6 +395,11 @@ class EnterpriseDataAgentOrchestrator:
                             'prometheus.io/port': '8080'
                         }
                     },
+```
+
+The deployment spec defines replica count, pod selection criteria, and monitoring annotations. Prometheus annotations enable automatic metrics discovery and collection, essential for production monitoring and alerting.
+
+```python
                     'spec': {
                         'containers': [{
                             'name': 'data-agent',
@@ -320,6 +416,11 @@ class EnterpriseDataAgentOrchestrator:
                             },
                             'livenessProbe': liveness_probe,
                             'readinessProbe': readiness_probe,
+```
+
+The container specification defines the application image, exposed ports for different protocols, and integrates all previously configured elements. Three ports support metrics collection (HTTP), data processing (gRPC), and administrative operations (HTTP).
+
+```python
                             'volumeMounts': [
                                 {
                                     'name': 'data-processing-config',
@@ -351,12 +452,19 @@ class EnterpriseDataAgentOrchestrator:
         }
         
         return manifest
+```
+
+Volume configuration provides persistent storage and configuration management. The ConfigMap contains agent-specific settings, while the PersistentVolumeClaim ensures data survives container restarts. This design separates configuration, application code, and data for optimal maintainability.
     
     async def scale_data_processing_agent(self, agent_id: str, 
                                         target_replicas: int,
                                         scaling_reason: str = "manual") -> Dict[str, Any]:
         """Scale data processing agent replicas based on load or manual intervention"""
-        
+```
+
+This method handles horizontal scaling of data processing agents by adjusting replica counts. It includes comprehensive validation, execution, and monitoring to ensure safe scaling operations.
+
+```python
         if agent_id not in self.deployed_agents:
             return {
                 'success': False,
@@ -365,7 +473,11 @@ class EnterpriseDataAgentOrchestrator:
         
         agent_config = self.deployed_agents[agent_id]
         current_replicas = await self._get_current_replica_count(agent_id)
-        
+```
+
+The method first validates that the agent exists in the deployment registry and retrieves its current configuration and replica count. This ensures we're scaling a valid, managed agent.
+
+```python
         # Validate scaling constraints for data processing workloads
         scaling_validation = await self._validate_scaling_request(
             agent_config, current_replicas, target_replicas
@@ -378,7 +490,11 @@ class EnterpriseDataAgentOrchestrator:
                 'current_replicas': current_replicas,
                 'requested_replicas': target_replicas
             }
-        
+```
+
+Scaling validation checks constraints like minimum/maximum replica limits, resource availability, and data processing requirements. This prevents scaling operations that would violate constraints or cause system instability.
+
+```python
         try:
             # Execute Kubernetes scaling for data processing
             scaling_result = await self._execute_kubernetes_scaling(
@@ -398,7 +514,11 @@ class EnterpriseDataAgentOrchestrator:
                     'timestamp': datetime.now(),
                     'scaling_duration_seconds': scaling_result['duration_seconds']
                 })
-                
+```
+
+Successful scaling operations update the internal deployment tracking and log detailed events for monitoring and analytics. This audit trail helps with capacity planning and troubleshooting scaling issues.
+
+```python
                 self.logger.info(f"Scaled data processing agent {agent_id} from {current_replicas} to {target_replicas} replicas")
                 
                 return {
@@ -421,10 +541,17 @@ class EnterpriseDataAgentOrchestrator:
                 'success': False,
                 'error': f'Exception during scaling: {str(e)}'
             }
+```
+
+The return values provide comprehensive status information including success/failure, replica counts, and timing details. Error handling ensures that scaling failures are properly logged and reported with detailed context for debugging.
     
     async def get_cluster_status(self) -> Dict[str, Any]:
         """Get comprehensive status of data processing cluster"""
-        
+```
+
+This method provides a complete view of the data processing cluster status including metrics, resource utilization, and operational history.
+
+```python
         cluster_metrics = {
             'deployed_agents': len(self.deployed_agents),
             'total_resource_utilization': await self._calculate_resource_utilization(),
@@ -432,12 +559,20 @@ class EnterpriseDataAgentOrchestrator:
             'data_processing_throughput': await self._calculate_cluster_throughput(),
             'active_data_streams': await self._count_active_data_streams()
         }
-        
+```
+
+Cluster-level metrics provide high-level insights into system performance and health. These metrics aggregate across all deployed agents to show overall cluster capability and current utilization.
+
+```python
         # Agent-specific status for data processing
         agent_status = {}
         for agent_id, config in self.deployed_agents.items():
             agent_status[agent_id] = await self._get_agent_detailed_status(agent_id)
-        
+```
+
+Agent-specific status collection provides detailed insights into individual agent performance, enabling identification of problematic agents or optimization opportunities within the cluster.
+
+```python
         # Resource pool status for data processing capacity planning
         resource_status = {
             'cpu_utilization_percent': (
@@ -453,7 +588,11 @@ class EnterpriseDataAgentOrchestrator:
                 self.cluster_config['total_storage_gb'] * 100
             )
         }
-        
+```
+
+Resource utilization calculations help with capacity planning and scaling decisions. By tracking CPU, memory, and storage utilization percentages, operators can identify when cluster expansion or optimization is needed.
+
+```python
         return {
             'timestamp': datetime.now().isoformat(),
             'cluster_metrics': cluster_metrics,
@@ -462,6 +601,9 @@ class EnterpriseDataAgentOrchestrator:
             'deployment_history': await self._get_recent_deployment_history(),
             'scaling_events': await self._get_recent_scaling_events()
         }
+```
+
+The comprehensive status return includes current metrics, individual agent details, resource utilization, and historical operational data. This complete view supports both real-time monitoring and trend analysis for the data processing cluster.
 ```
 
 ### Auto-scaling and Load Balancing for Data Processing Workloads
@@ -478,7 +620,11 @@ from enum import Enum
 import asyncio
 import statistics
 import logging
+```
 
+These imports establish the foundation for intelligent auto-scaling. We use dataclasses for clean configuration objects, asyncio for concurrent monitoring, statistics for trend analysis, and datetime for time-based scaling decisions.
+
+```python
 class DataProcessingScalingTrigger(Enum):
     """Triggers that initiate scaling for data processing workloads"""
     DATA_THROUGHPUT_HIGH = "data_throughput_high"
@@ -490,6 +636,9 @@ class DataProcessingScalingTrigger(Enum):
     PREDICTIVE_SCALE_UP = "predictive_scale_up"
     PREDICTIVE_SCALE_DOWN = "predictive_scale_down"
     MANUAL_OVERRIDE = "manual_override"
+```
+
+The scaling trigger enum defines all conditions that can initiate scaling operations. Data processing workloads require specialized triggers like throughput thresholds, queue depth monitoring, and processing latency tracking. Predictive triggers enable proactive scaling based on historical patterns.
 
 @dataclass
 class DataProcessingMetrics:
@@ -501,7 +650,11 @@ class DataProcessingMetrics:
     records_processed_per_second: float
     data_bytes_processed_per_second: float
     active_data_streams: int
-    
+```
+
+The metrics dataclass captures comprehensive performance data for data processing agents. Throughput metrics track processing capacity in both record count and data volume, while active streams indicate concurrent workload complexity.
+
+```python
     # Resource utilization metrics
     cpu_utilization_percent: float
     memory_utilization_percent: float
@@ -516,6 +669,9 @@ class DataProcessingMetrics:
     input_queue_depth: int
     output_queue_depth: int
     buffer_utilization_percent: float
+```
+
+Resource utilization, quality metrics, and queue depths provide the complete picture needed for intelligent scaling decisions. Quality metrics ensure that scaling maintains data processing standards, while queue metrics indicate processing bottlenecks that require immediate scaling attention.
 
 @dataclass
 class DataProcessingScalingPolicy:
@@ -530,7 +686,11 @@ class DataProcessingScalingPolicy:
     scale_down_throughput_threshold: float = 20.0
     scale_up_latency_threshold_ms: float = 1000.0
     scale_up_queue_depth_threshold: int = 10000
-    
+```
+
+Scaling thresholds define the conditions that trigger scaling operations. The CPU thresholds (75% up, 25% down) provide safe buffer zones, while throughput thresholds at 80% and 20% ensure optimal data processing performance. The 1-second latency threshold and 10,000 record queue depth protect against data processing bottlenecks.
+
+```python
     # Scaling constraints
     min_replicas: int = 1
     max_replicas: int = 50
@@ -543,6 +703,9 @@ class DataProcessingScalingPolicy:
     batch_processing_aware: bool = True
     data_locality_optimization: bool = True
     cost_optimization_enabled: bool = True
+```
+
+Scaling constraints prevent runaway scaling and ensure stable operations. Asymmetric increments (scale up by 2, down by 1) provide faster response to load increases while preventing aggressive scale-downs. Advanced policies enable intelligent optimizations specific to data processing workloads.
 
 class DataProcessingAutoScaler:
     """Intelligent auto-scaling system for data processing agents"""
@@ -561,7 +724,11 @@ class DataProcessingAutoScaler:
         self.prediction_model = DataProcessingPredictionModel()
         
         self.logger = logging.getLogger("DataProcessingAutoScaler")
-        
+```
+
+The DataProcessingAutoScaler initializes with comprehensive state management for intelligent scaling decisions. It maintains scaling policies per agent, historical metrics for trend analysis, and scaling events for operational insights. The predictive model enables proactive scaling based on historical patterns.
+
+```python
     async def register_scaling_policy(self, policy: DataProcessingScalingPolicy) -> Dict[str, Any]:
         """Register auto-scaling policy for data processing agent"""
         
@@ -572,7 +739,11 @@ class DataProcessingAutoScaler:
                 'success': False,
                 'error': validation_result['error']
             }
-        
+```
+
+Policy registration begins with comprehensive validation to ensure scaling thresholds are logical and constraints are achievable. This prevents configuration errors that could cause scaling instability or resource exhaustion.
+
+```python
         # Store policy and initialize metrics tracking
         self.scaling_policies[policy.agent_id] = policy
         self.metrics_history[policy.agent_id] = []
@@ -585,6 +756,9 @@ class DataProcessingAutoScaler:
             'policy_id': policy.policy_id,
             'agent_id': policy.agent_id
         }
+```
+
+Successful policy registration initializes tracking structures for metrics history and scaling state. Each agent gets dedicated tracking to enable independent scaling decisions based on individual performance patterns.
     
     async def start_monitoring(self) -> Dict[str, Any]:
         """Start continuous monitoring and auto-scaling for data processing agents"""
@@ -604,6 +778,9 @@ class DataProcessingAutoScaler:
             'monitored_agents': len(self.scaling_policies),
             'monitoring_start_time': datetime.now().isoformat()
         }
+```
+
+Monitoring startup creates an asynchronous monitoring loop that continuously evaluates scaling decisions. The method prevents duplicate monitoring instances and returns status information including the number of agents being monitored and the monitoring start time.
     
     async def _monitoring_loop(self):
         """Main monitoring loop for auto-scaling decisions"""
@@ -617,7 +794,11 @@ class DataProcessingAutoScaler:
                 for agent_id in self.scaling_policies.keys():
                     if agent_id in current_metrics:
                         await self._process_agent_scaling(agent_id, current_metrics[agent_id])
-                
+```
+
+The monitoring loop continuously evaluates scaling decisions every 30 seconds. It collects real-time metrics from all managed agents and processes scaling decisions independently for each agent, enabling fine-grained control based on individual performance characteristics.
+
+```python
                 # Predictive scaling analysis
                 await self._run_predictive_scaling_analysis()
                 
@@ -627,6 +808,9 @@ class DataProcessingAutoScaler:
             except Exception as e:
                 self.logger.error(f"Error in auto-scaling monitoring loop: {e}")
                 await asyncio.sleep(60)  # Wait longer if there's an error
+```
+
+Predictive scaling analysis runs after processing current metrics, enabling proactive scaling based on historical trends. Error handling ensures monitoring continues even if individual cycles fail, with longer wait periods during error conditions to prevent resource exhaustion.
     
     async def _process_agent_scaling(self, agent_id: str, metrics: DataProcessingMetrics):
         """Process scaling decisions for individual data processing agent"""
@@ -635,7 +819,11 @@ class DataProcessingAutoScaler:
             return  # Skip if scaling operation already in progress
         
         policy = self.scaling_policies[agent_id]
-        
+```
+
+Agent scaling processing begins by checking if scaling is already in progress to prevent concurrent operations. This ensures stable scaling behavior and prevents resource conflicts during scaling operations.
+
+```python
         # Store metrics in history for trend analysis
         self.metrics_history[agent_id].append(metrics)
         
@@ -645,12 +833,19 @@ class DataProcessingAutoScaler:
             m for m in self.metrics_history[agent_id] 
             if m.timestamp >= cutoff_time
         ]
-        
+```
+
+Metrics storage maintains a 24-hour rolling history for trend analysis and predictive scaling. This historical data enables detection of patterns like daily traffic peaks and gradual performance degradation that require proactive scaling.
+
+```python
         # Analyze scaling triggers for data processing
         scaling_decision = await self._analyze_scaling_triggers(agent_id, metrics, policy)
         
         if scaling_decision['action'] != 'no_action':
             await self._execute_scaling_decision(agent_id, scaling_decision)
+```
+
+Scaling trigger analysis evaluates current metrics against policy thresholds to determine if scaling is needed. Only when scaling is required does the system execute the scaling decision, minimizing unnecessary operations.
     
     async def _analyze_scaling_triggers(self, 
                                       agent_id: str,
@@ -664,7 +859,11 @@ class DataProcessingAutoScaler:
         # Check cooldown period
         if not await self._check_cooldown_period(agent_id, policy.cooldown_period_minutes):
             return {'action': 'no_action', 'reason': 'cooldown_period_active'}
-        
+```
+
+Scaling trigger analysis begins by checking the current deployment state and cooldown status. The cooldown period prevents rapid scaling oscillations that could destabilize the system or waste resources through frequent scaling operations.
+
+```python
         # Scale up triggers for data processing workloads
         scale_up_triggers = []
         
@@ -685,7 +884,11 @@ class DataProcessingAutoScaler:
                 'threshold': policy.scale_up_cpu_threshold,
                 'priority': 3
             })
-        
+```
+
+Resource utilization triggers monitor CPU and memory consumption. Each trigger includes the current value, threshold, and priority level for decision making. Priority 3 indicates moderate importance - these are foundational metrics but not the most critical for data processing workloads.
+
+```python
         # Data throughput trigger
         max_throughput = await self._estimate_max_throughput(agent_id)
         throughput_utilization = (current_metrics.records_processed_per_second / max_throughput) * 100
@@ -706,7 +909,11 @@ class DataProcessingAutoScaler:
                 'threshold': policy.scale_up_latency_threshold_ms,
                 'priority': 4
             })
-        
+```
+
+Data processing specific triggers monitor throughput utilization and processing latency. These receive higher priority (4) because they directly impact data processing performance and user experience. Throughput utilization is calculated as a percentage of estimated maximum capacity.
+
+```python
         # Queue depth trigger
         if current_metrics.input_queue_depth > policy.scale_up_queue_depth_threshold:
             scale_up_triggers.append({
@@ -715,6 +922,9 @@ class DataProcessingAutoScaler:
                 'threshold': policy.scale_up_queue_depth_threshold,
                 'priority': 5  # Highest priority - queue buildup is critical
             })
+```
+
+Queue depth receives the highest priority (5) because queue buildup indicates immediate processing bottlenecks that can cascade into system failures. When queues grow beyond thresholds, scaling must happen immediately to prevent data loss or processing delays.
         
         # Scale down triggers for data processing cost optimization
         scale_down_triggers = []
@@ -733,7 +943,11 @@ class DataProcessingAutoScaler:
                     'threshold': policy.scale_down_throughput_threshold,
                     'priority': 1
                 })
-        
+```
+
+Scale-down triggers are more conservative, requiring multiple conditions: low CPU utilization, low throughput, minimal queue depth, and sustained low utilization over 10 minutes. This prevents premature scale-downs that could cause performance issues during temporary traffic lulls.
+
+```python
         # Determine scaling action based on triggers
         if scale_up_triggers and current_replicas < policy.max_replicas:
             # Scale up - choose trigger with highest priority
@@ -750,10 +964,17 @@ class DataProcessingAutoScaler:
                 'primary_trigger': primary_trigger,
                 'all_triggers': scale_up_triggers
             }
-            
+```
+
+Scale-up decisions select the highest priority trigger when multiple conditions are met. The target replica count respects maximum limits and uses configured increment sizes. The return includes both the primary trigger and all contributing triggers for comprehensive monitoring.
+
+```python
         elif scale_down_triggers and current_replicas > policy.min_replicas:
             # Scale down
             primary_trigger = scale_down_triggers[0]  # Only one scale-down trigger type
+```
+
+Scale-down processing is simpler since only one trigger type is evaluated, but still respects minimum replica constraints to maintain service availability.
             target_replicas = max(
                 policy.min_replicas,
                 current_replicas - policy.scale_down_increment
@@ -768,13 +989,20 @@ class DataProcessingAutoScaler:
             }
         
         return {'action': 'no_action', 'reason': 'no_scaling_triggers_met'}
+```
+
+The scaling decision logic returns structured results indicating the action to take, current and target replica counts, and the triggering conditions. When no scaling is needed, it returns 'no_action' with an explanatory reason.
     
     async def _execute_scaling_decision(self, agent_id: str, scaling_decision: Dict[str, Any]):
         """Execute scaling decision for data processing agent"""
         
         self.scaling_in_progress[agent_id] = True
         scaling_start_time = datetime.now()
-        
+```
+
+Scaling execution begins by marking the agent as having scaling in progress and recording the start time for performance tracking.
+
+```python
         try:
             # Execute scaling through orchestrator
             scaling_result = await self.orchestrator.scale_data_processing_agent(
@@ -784,7 +1012,11 @@ class DataProcessingAutoScaler:
             )
             
             scaling_duration = datetime.now() - scaling_start_time
-            
+```
+
+The actual scaling operation delegates to the orchestrator, which handles Kubernetes operations, resource allocation, and deployment management. Timing information helps monitor scaling performance and identify bottlenecks.
+
+```python
             # Record scaling event
             scaling_event = {
                 'timestamp': scaling_start_time,
@@ -799,7 +1031,11 @@ class DataProcessingAutoScaler:
             }
             
             self.scaling_events.append(scaling_event)
-            
+```
+
+Comprehensive event logging captures all scaling operations for audit trails, performance analysis, and troubleshooting. Each event includes the complete context of the scaling decision and its outcome.
+
+```python
             if scaling_result['success']:
                 self.logger.info(f"Successfully {scaling_decision['action']} data processing agent {agent_id} "
                                f"from {scaling_decision['current_replicas']} to {scaling_decision['target_replicas']} replicas")
@@ -811,10 +1047,17 @@ class DataProcessingAutoScaler:
             
         finally:
             self.scaling_in_progress[agent_id] = False
+```
+
+Logging and error handling ensure all scaling outcomes are recorded, while the finally block ensures the scaling-in-progress flag is always cleared, preventing agents from being permanently locked from scaling operations.
     
     async def get_scaling_status(self) -> Dict[str, Any]:
         """Get comprehensive auto-scaling status for data processing cluster"""
-        
+```
+
+This method provides complete visibility into the auto-scaling system's current state and historical performance.
+
+```python
         # Current scaling state
         scaling_state = {}
         for agent_id in self.scaling_policies.keys():
@@ -828,7 +1071,11 @@ class DataProcessingAutoScaler:
                 'scaling_in_progress': self.scaling_in_progress.get(agent_id, False),
                 'last_scaling_event': await self._get_last_scaling_event(agent_id)
             }
-        
+```
+
+Current scaling state collection provides real-time status for each managed agent including current deployment size, scaling constraints, and active scaling operations. This information enables operators to understand cluster capacity and scaling boundaries.
+
+```python
         # Recent scaling activity
         recent_events = [
             event for event in self.scaling_events[-100:]  # Last 100 events
@@ -843,7 +1090,11 @@ class DataProcessingAutoScaler:
             'failed_scaling_events_7d': len([e for e in recent_events if not e['success']]),
             'average_scaling_duration_seconds': statistics.mean([e['duration_seconds'] for e in recent_events]) if recent_events else 0
         }
-        
+```
+
+Scaling statistics analyze recent activity patterns to identify trends in scaling frequency, direction, and performance. These metrics help evaluate auto-scaling effectiveness and tune scaling policies for optimal performance.
+
+```python
         return {
             'monitoring_active': self.monitoring_active,
             'monitored_agents': len(self.scaling_policies),
@@ -852,6 +1103,9 @@ class DataProcessingAutoScaler:
             'recent_events': recent_events[-20:],  # Last 20 events for details
             'predictive_scaling_active': any(p.predictive_scaling_enabled for p in self.scaling_policies.values())
         }
+```
+
+The comprehensive status return combines current state, historical statistics, and system configuration to provide complete visibility into auto-scaling operations. Recent events enable detailed analysis of scaling patterns and outcomes.
 ```
 
 ---
@@ -874,7 +1128,11 @@ import json
 import logging
 from collections import defaultdict, deque
 import statistics
+```
 
+These imports establish the foundation for comprehensive monitoring and observability. The collections module provides efficient data structures for metrics buffering, while statistics enables trend analysis and anomaly detection.
+
+```python
 class DataProcessingAlertSeverity(Enum):
     """Alert severity levels for data processing systems"""
     INFO = "info"
@@ -891,6 +1149,9 @@ class DataProcessingMetricType(Enum):
     DATA_QUALITY = "data_quality"
     QUEUE_DEPTH = "queue_depth"
     PROCESSING_TIME = "processing_time"
+```
+
+Alert severity levels follow standard operational practices from informational notices to critical system failures. Metric types are specifically chosen for data processing workloads, covering performance, quality, and resource aspects essential for production monitoring.
 
 @dataclass
 class DataProcessingAlert:
@@ -906,7 +1167,11 @@ class DataProcessingAlert:
     resolved: bool = False
     resolution_timestamp: Optional[datetime] = None
     tags: Dict[str, str] = field(default_factory=dict)
+```
 
+The alert dataclass captures complete context for data processing anomalies including severity, triggering metrics, and resolution tracking. Tags enable flexible categorization and filtering for alert management systems.
+
+```python
 @dataclass
 class DataProcessingHealthCheck:
     """Health check result for data processing agent"""
@@ -916,6 +1181,9 @@ class DataProcessingHealthCheck:
     response_time_ms: float
     details: Dict[str, Any]
     timestamp: datetime
+```
+
+Health check results track agent availability and performance with three-tier status levels. Response time monitoring helps detect performance degradation before it impacts data processing operations.
 
 class EnterpriseDataProcessingMonitor:
     """Comprehensive monitoring system for data processing agents"""
@@ -927,7 +1195,9 @@ class EnterpriseDataProcessingMonitor:
         self.metrics_retention_hours = 168  # 7 days
         self.alert_rules: Dict[str, Dict[str, Any]] = {}
         self.health_check_interval = 30  # seconds
-        
+```
+
+The monitoring system initializes with configurable retention periods and health check intervals. Seven-day retention balances storage efficiency with sufficient historical data for trend analysis and capacity planning.
         # Real-time data storage
         self.metrics_buffer: Dict[str, deque] = defaultdict(lambda: deque(maxlen=10000))
         self.active_alerts: Dict[str, DataProcessingAlert] = {}
@@ -941,6 +1211,9 @@ class EnterpriseDataProcessingMonitor:
         self.dashboard_configs: Dict[str, Dict[str, Any]] = {}
         
         self.logger = logging.getLogger("EnterpriseDataProcessingMonitor")
+```
+
+The monitoring system maintains real-time data buffers with 10,000 metric limit per agent for efficient time-series storage. Performance baselines enable anomaly detection, while dashboard configurations support custom monitoring views for different operational teams.
         
     async def start_monitoring(self) -> Dict[str, Any]:
         """Start comprehensive monitoring for data processing cluster"""
@@ -949,7 +1222,11 @@ class EnterpriseDataProcessingMonitor:
         await self._setup_default_alert_rules()
         await self._setup_default_dashboards()
         await self._initialize_performance_baselines()
-        
+```
+
+Monitoring startup begins by initializing core components including default alert rules for common data processing issues, operational dashboards for different user roles, and performance baselines for anomaly detection.
+
+```python
         # Start monitoring tasks
         asyncio.create_task(self._metrics_collection_loop())
         asyncio.create_task(self._health_check_loop())
@@ -968,6 +1245,9 @@ class EnterpriseDataProcessingMonitor:
                 'anomaly_detection'
             ]
         }
+```
+
+Four concurrent monitoring loops provide comprehensive system observability: metrics collection for performance data, health checks for agent availability, alert processing for anomaly response, and anomaly detection for predictive monitoring.
     
     async def _metrics_collection_loop(self):
         """Continuously collect metrics from data processing agents"""
@@ -985,10 +1265,17 @@ class EnterpriseDataProcessingMonitor:
                 await self._process_metrics_for_alerts(agent_metrics)
                 
                 await asyncio.sleep(10)  # Collect every 10 seconds
-                
+```
+
+The metrics collection loop gathers performance data from all agents every 10 seconds, storing it in time-series buffers and immediately evaluating against alert rules. This high-frequency collection enables rapid detection of performance issues.
+
+```python
             except Exception as e:
                 self.logger.error(f"Error in metrics collection: {e}")
                 await asyncio.sleep(30)
+```
+
+Error handling ensures metrics collection continues even when individual collection cycles fail, with longer wait periods during errors to prevent resource exhaustion while maintaining system resilience.
     
     async def _collect_cluster_metrics(self) -> Dict[str, Dict[str, Any]]:
         """Collect comprehensive metrics from all data processing agents"""
@@ -1015,6 +1302,9 @@ class EnterpriseDataProcessingMonitor:
                 self.logger.warning(f"Failed to collect metrics from agent {agent_id}: {e}")
         
         return cluster_metrics
+```
+
+Cluster metrics collection iterates through all active agents, gathering individual metrics and timestamping each collection. Failed collections are logged but don't stop the overall process, ensuring monitoring continuity even when some agents are unreachable.
     
     async def _collect_single_agent_metrics(self, agent_id: str) -> Optional[Dict[str, Any]]:
         """Collect detailed metrics from individual data processing agent"""
@@ -1026,7 +1316,11 @@ class EnterpriseDataProcessingMonitor:
                 'records_processed_per_second': await self._get_agent_metric(agent_id, 'throughput_rps'),
                 'bytes_processed_per_second': await self._get_agent_metric(agent_id, 'throughput_bps'),
                 'active_data_streams': await self._get_agent_metric(agent_id, 'active_streams'),
-                
+```
+
+Single agent metrics collection gathers comprehensive performance data across multiple dimensions. Throughput metrics in both records and bytes provide complete visibility into data processing capacity and current utilization.
+
+```python
                 # Processing performance metrics
                 'average_processing_latency_ms': await self._get_agent_metric(agent_id, 'avg_latency_ms'),
                 'p95_processing_latency_ms': await self._get_agent_metric(agent_id, 'p95_latency_ms'),
@@ -1036,7 +1330,11 @@ class EnterpriseDataProcessingMonitor:
                 'data_quality_score': await self._get_agent_metric(agent_id, 'data_quality_score'),
                 'schema_validation_errors_per_minute': await self._get_agent_metric(agent_id, 'schema_errors_pm'),
                 'data_transformation_errors_per_minute': await self._get_agent_metric(agent_id, 'transform_errors_pm'),
-                
+```
+
+Latency metrics include percentiles (P95, P99) to capture tail latency characteristics that affect user experience. Data quality metrics track schema validation and transformation errors, essential for maintaining data integrity in processing pipelines.
+
+```python
                 # Resource utilization metrics
                 'cpu_utilization_percent': await self._get_agent_metric(agent_id, 'cpu_percent'),
                 'memory_utilization_percent': await self._get_agent_metric(agent_id, 'memory_percent'),
@@ -1059,6 +1357,9 @@ class EnterpriseDataProcessingMonitor:
         except Exception as e:
             self.logger.error(f"Error collecting metrics from agent {agent_id}: {e}")
             return None
+```
+
+Resource utilization tracking covers CPU, memory, disk, and network I/O for capacity planning. Queue depths indicate processing bottlenecks, while error rates and health status provide operational health visibility.
     
     async def _setup_default_alert_rules(self):
         """Setup default alerting rules for data processing systems"""
@@ -1338,11 +1639,11 @@ D) Measure CPU temperature
 
 ## 🧭 Navigation
 
-### Previous: [Session 9 Main](Session9_Multi_Agent_Patterns.md)
+**Previous:** [Session 9 Main](Session9_Multi_Agent_Patterns.md)
 
 ### Optional Deep Dive Modules
 
 - **[🔬 Module A: Advanced Consensus Algorithms](Session9_ModuleA_Advanced_Consensus_Algorithms.md)**
 - **[🏭 Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)**
 
-**[Next: Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)**
+**Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)**
