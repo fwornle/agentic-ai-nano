@@ -1,16 +1,15 @@
 {
   "summary": {
     "total_files": 1,
-    "successful_files": 0,
-    "total_formatting_fixes": 0
+    "files_with_issues": 0,
+    "total_issues": 0
   },
   "files": [
     {
       "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session7_Agentic_RAG_Systems.md",
-      "iterations": 1,
-      "large_blocks_eliminated": 0,
-      "formatting_issues_fixed": 0,
-      "success": false
+      "total_issues": 0,
+      "issues": [],
+      "needs_fixing": false
     }
   ]
 }
