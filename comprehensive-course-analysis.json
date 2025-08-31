@@ -1,14 +1,14 @@
 {
   "analysis_timestamp": "1756565301.7451673",
-  "target": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_ModuleA_Enterprise_Patterns.md",
+  "target": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md",
   "overall_metrics": {
     "total_files": 1,
     "code_block_score": 100.0,
     "formatting_score": 100.0,
-    "explanation_score": 94.73684210526315,
-    "overall_score": 97.89473684210526,
+    "explanation_score": 73.21428571428571,
+    "overall_score": 89.28571428571428,
     "critical_issues": 0,
-    "total_issues": 3
+    "total_issues": 15
   },
   "detailed_results": {
     "detect_large_code_blocks": {
@@ -21,1051 +21,1018 @@
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_ModuleA_Enterprise_Patterns.md",
-            "total_code_blocks": 57,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md",
+            "total_code_blocks": 56,
             "large_blocks_count": 0,
             "code_blocks": [
               {
-                "start_line": 14,
-                "end_line": 24,
+                "start_line": 46,
+                "end_line": 52,
                 "language": "python",
                 "content": [
-                  "# utils/circuit_breaker.py - Essential imports for fault tolerance",
-                  "import asyncio",
-                  "import time",
-                  "from enum import Enum",
-                  "from typing import Dict, Any, Callable, Optional",
-                  "from dataclasses import dataclass",
-                  "import logging",
+                  "# Basic MCP-LangChain integration - The moment two worlds become one",
                   "",
-                  "logger = logging.getLogger(__name__)"
+                  "from langchain_mcp_adapters import MultiServerMCPClient",
+                  "from langchain.agents import create_react_agent",
+                  "from langchain_openai import ChatOpenAI"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 56,
+                "end_line": 62,
+                "language": "python",
+                "content": [
+                  "# Connect to multiple MCP servers - Building your digital ecosystem",
+                  "client = MultiServerMCPClient({",
+                  "    \"weather\": {\"command\": \"python\", \"args\": [\"weather_server.py\"]},",
+                  "    \"files\": {\"command\": \"python\", \"args\": [\"file_server.py\"]}",
+                  "})"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 66,
+                "end_line": 76,
+                "language": "python",
+                "content": [
+                  "# Get tools from all servers - Your agent's superpowers",
+                  "tools = client.list_tools()",
+                  "",
+                  "# Create intelligent agent - The mind that connects it all",
+                  "agent = create_react_agent(",
+                  "    llm=ChatOpenAI(model=\"gpt-4\"),",
+                  "    tools=tools,",
+                  "    prompt=\"You are a helpful assistant with access to multiple tools.\"",
+                  ")"
                 ],
                 "line_count": 9
               },
               {
-                "start_line": 28,
-                "end_line": 33,
-                "language": "python",
+                "start_line": 95,
+                "end_line": 107,
+                "language": "bash",
                 "content": [
-                  "class CircuitState(Enum):",
-                  "    CLOSED = \"closed\"      # Normal operation",
-                  "    OPEN = \"open\"          # Failure state - reject requests",
-                  "    HALF_OPEN = \"half_open\" # Testing if service recovered"
+                  "# Create your integration workspace",
+                  "mkdir langchain-mcp-integration",
+                  "cd langchain-mcp-integration",
+                  "",
+                  "# Create isolated environment - Clean slate for innovation",
+                  "python -m venv venv",
+                  "source venv/bin/activate  # On Windows: venv\\Scripts\\activate",
+                  "",
+                  "# Install the integration toolkit - Your bridge-building tools",
+                  "pip install langchain-mcp-adapters langgraph langchain-openai \\",
+                  "            langchain-anthropic python-dotenv colorama rich"
                 ],
-                "line_count": 4
+                "line_count": 11
               },
               {
-                "start_line": 37,
-                "end_line": 44,
+                "start_line": 122,
+                "end_line": 141,
+                "language": "",
+                "content": [
+                  "langchain-mcp-integration/",
+                  "\u251c\u2500\u2500 mcp_servers/           # Your digital workforce",
+                  "\u2502   \u251c\u2500\u2500 weather_server.py",
+                  "\u2502   \u251c\u2500\u2500 filesystem_server.py",
+                  "\u2502   \u2514\u2500\u2500 database_server.py",
+                  "\u251c\u2500\u2500 agents/                # Your intelligent coordinators",
+                  "\u2502   \u251c\u2500\u2500 basic_agent.py     # Single-tool demonstration",
+                  "\u2502   \u251c\u2500\u2500 multi_tool_agent.py # Multi-server ReAct agent",
+                  "\u2502   \u2514\u2500\u2500 workflow_agent.py  # LangGraph workflow agent",
+                  "\u251c\u2500\u2500 workflows/             # Your orchestration patterns",
+                  "\u2502   \u251c\u2500\u2500 research_workflow.py",
+                  "\u2502   \u2514\u2500\u2500 data_analysis_workflow.py",
+                  "\u251c\u2500\u2500 utils/                 # Your integration utilities",
+                  "\u2502   \u251c\u2500\u2500 mcp_manager.py     # MCP server management",
+                  "\u2502   \u2514\u2500\u2500 logging_config.py  # Structured logging",
+                  "\u251c\u2500\u2500 config.py              # Your system configuration",
+                  "\u251c\u2500\u2500 main.py               # Your application entry point",
+                  "\u2514\u2500\u2500 .env                  # Your secrets and settings"
+                ],
+                "line_count": 18
+              },
+              {
+                "start_line": 155,
+                "end_line": 164,
+                "language": "python",
+                "content": [
+                  "# config.py - Your integration command center",
+                  "",
+                  "import os",
+                  "from typing import Dict, Any, List",
+                  "from dataclasses import dataclass",
+                  "from dotenv import load_dotenv",
+                  "",
+                  "load_dotenv()"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 168,
+                "end_line": 179,
                 "language": "python",
                 "content": [
                   "@dataclass",
-                  "class CircuitBreakerConfig:",
-                  "    failure_threshold: int = 5      # Failures before opening",
-                  "    recovery_timeout: int = 60      # Seconds before trying again",
-                  "    success_threshold: int = 3      # Successes needed to close",
-                  "    timeout: int = 30              # Request timeout"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 48,
-                "end_line": 59,
-                "language": "python",
-                "content": [
-                  "class CircuitBreaker:",
-                  "    \"\"\"Circuit breaker for MCP server calls with enterprise reliability.\"\"\"",
-                  "    ",
-                  "    def __init__(self, name: str, config: CircuitBreakerConfig):",
-                  "        self.name = name",
-                  "        self.config = config",
-                  "        self.state = CircuitState.CLOSED",
-                  "        self.failure_count = 0",
-                  "        self.success_count = 0",
-                  "        self.last_failure_time = 0"
+                  "class MCPServerConfig:",
+                  "    \"\"\"Configuration for a single MCP server - Your digital specialist definition.\"\"\"",
+                  "    name: str",
+                  "    command: str",
+                  "    args: List[str]",
+                  "    transport: str = \"stdio\"",
+                  "    description: str = \"\"",
+                  "    timeout: int = 30",
+                  "    retry_attempts: int = 3"
                 ],
                 "line_count": 10
               },
               {
-                "start_line": 63,
-                "end_line": 70,
+                "start_line": 183,
+                "end_line": 192,
                 "language": "python",
                 "content": [
-                  "        self.metrics = {",
-                  "            \"total_requests\": 0,",
-                  "            \"successful_requests\": 0,",
-                  "            \"failed_requests\": 0,",
-                  "            \"circuit_opens\": 0",
-                  "        }"
+                  "@dataclass ",
+                  "class LLMConfig:",
+                  "    \"\"\"Configuration for language models - Your intelligence settings.\"\"\"",
+                  "    provider: str = \"openai\"",
+                  "    model: str = \"gpt-4\"",
+                  "    temperature: float = 0.7",
+                  "    max_tokens: int = 2000",
+                  "    timeout: int = 60"
                 ],
-                "line_count": 6
+                "line_count": 8
               },
               {
-                "start_line": 74,
-                "end_line": 86,
+                "start_line": 207,
+                "end_line": 216,
                 "language": "python",
                 "content": [
-                  "    async def call(self, func: Callable, *args, **kwargs) -> Any:",
-                  "        \"\"\"Execute function with circuit breaker protection.\"\"\"",
-                  "        self.metrics[\"total_requests\"] += 1",
-                  "        ",
-                  "        if self.state == CircuitState.OPEN:",
-                  "            if time.time() - self.last_failure_time > self.config.recovery_timeout:",
-                  "                self.state = CircuitState.HALF_OPEN",
-                  "                self.success_count = 0",
-                  "                logger.info(f\"Circuit breaker {self.name} entering HALF_OPEN state\")",
-                  "            else:",
-                  "                raise CircuitBreakerOpenError(f\"Circuit breaker {self.name} is OPEN\")"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 90,
-                "end_line": 104,
-                "language": "python",
-                "content": [
-                  "        try:",
-                  "            # Execute with timeout",
-                  "            result = await asyncio.wait_for(",
-                  "                func(*args, **kwargs),",
-                  "                timeout=self.config.timeout",
-                  "            )",
-                  "            ",
-                  "            await self._on_success()",
-                  "            return result",
-                  "            ",
-                  "        except Exception as e:",
-                  "            await self._on_failure()",
-                  "            raise e"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 108,
-                "end_line": 121,
-                "language": "python",
-                "content": [
-                  "    async def _on_success(self):",
-                  "        \"\"\"Handle successful operation.\"\"\"",
-                  "        self.metrics[\"successful_requests\"] += 1",
-                  "        ",
-                  "        if self.state == CircuitState.HALF_OPEN:",
-                  "            self.success_count += 1",
-                  "            if self.success_count >= self.config.success_threshold:",
-                  "                self.state = CircuitState.CLOSED",
-                  "                self.failure_count = 0",
-                  "                logger.info(f\"Circuit breaker {self.name} CLOSED - service recovered\")",
-                  "        else:",
-                  "            self.failure_count = 0  # Reset failure count on success"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 125,
-                "end_line": 141,
-                "language": "python",
-                "content": [
-                  "    async def _on_failure(self):",
-                  "        \"\"\"Handle failed operation.\"\"\"",
-                  "        self.metrics[\"failed_requests\"] += 1",
-                  "        self.failure_count += 1",
-                  "        self.last_failure_time = time.time()",
-                  "        ",
-                  "        if (self.state == CircuitState.CLOSED and ",
-                  "            self.failure_count >= self.config.failure_threshold):",
-                  "            self.state = CircuitState.OPEN",
-                  "            self.metrics[\"circuit_opens\"] += 1",
-                  "            logger.error(f\"Circuit breaker {self.name} OPENED - service failing\")",
-                  "        ",
-                  "        elif self.state == CircuitState.HALF_OPEN:",
-                  "            self.state = CircuitState.OPEN",
-                  "            logger.warning(f\"Circuit breaker {self.name} back to OPEN - service still failing\")"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 145,
-                "end_line": 149,
-                "language": "python",
-                "content": [
-                  "class CircuitBreakerOpenError(Exception):",
-                  "    \"\"\"Raised when circuit breaker is open.\"\"\"",
-                  "    pass"
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 157,
-                "end_line": 168,
-                "language": "python",
-                "content": [
-                  "# utils/enterprise_mcp_manager.py - Essential imports for enterprise patterns",
-                  "import asyncio",
-                  "import time",
-                  "from typing import Dict, List, Optional, Any",
-                  "from contextlib import asynccontextmanager",
-                  "from langchain_mcp_adapters import MCPAdapter",
-                  "from config import Config, MCPServerConfig",
-                  "from .circuit_breaker import CircuitBreaker, CircuitBreakerConfig",
+                  "# Your main configuration orchestrator",
                   "",
-                  "logger = logging.getLogger(__name__)"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 172,
-                "end_line": 181,
-                "language": "python",
-                "content": [
-                  "class ConnectionPool:",
-                  "    \"\"\"Manages a pool of MCP adapter connections for high concurrency.\"\"\"",
+                  "class Config:",
+                  "    \"\"\"Main configuration class for LangChain MCP integration.\"\"\"",
                   "    ",
-                  "    def __init__(self, server_config: MCPServerConfig, pool_size: int = 5):",
-                  "        self.server_config = server_config",
-                  "        self.pool_size = pool_size",
-                  "        self.available_connections: asyncio.Queue = asyncio.Queue(maxsize=pool_size)",
-                  "        self.total_connections = 0"
+                  "    # API Keys from environment variables - Security first",
+                  "    OPENAI_API_KEY = os.getenv(\"OPENAI_API_KEY\")",
+                  "    ANTHROPIC_API_KEY = os.getenv(\"ANTHROPIC_API_KEY\")"
                 ],
                 "line_count": 8
               },
               {
-                "start_line": 185,
-                "end_line": 198,
+                "start_line": 220,
+                "end_line": 227,
                 "language": "python",
                 "content": [
-                  "        self.metrics = {",
-                  "            \"connections_created\": 0,",
-                  "            \"connections_reused\": 0,",
-                  "            \"pool_exhausted_count\": 0",
-                  "        }",
+                  "    # LLM Configuration with environment overrides - Flexibility with defaults",
+                  "    LLM = LLMConfig(",
+                  "        provider=os.getenv(\"LLM_PROVIDER\", \"openai\"),",
+                  "        model=os.getenv(\"LLM_MODEL\", \"gpt-4\"),",
+                  "        temperature=float(os.getenv(\"LLM_TEMPERATURE\", \"0.7\")),",
+                  "    )"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 231,
+                "end_line": 246,
+                "language": "python",
+                "content": [
+                  "    # MCP Server Registry - Your digital workforce roster",
+                  "    MCP_SERVERS = [",
+                  "        MCPServerConfig(",
+                  "            name=\"weather\",",
+                  "            command=\"python\",",
+                  "            args=[\"mcp_servers/weather_server.py\"],",
+                  "            description=\"Weather information and forecasts\"",
+                  "        ),",
+                  "        MCPServerConfig(",
+                  "            name=\"filesystem\", ",
+                  "            command=\"python\",",
+                  "            args=[\"mcp_servers/filesystem_server.py\"],",
+                  "            description=\"Secure file system operations\"",
+                  "        ),"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 250,
+                "end_line": 258,
+                "language": "python",
+                "content": [
+                  "        MCPServerConfig(",
+                  "            name=\"database\",",
+                  "            command=\"python\", ",
+                  "            args=[\"mcp_servers/database_server.py\"],",
+                  "            description=\"Database query and manipulation\"",
+                  "        )",
+                  "    ]"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 262,
+                "end_line": 274,
+                "language": "python",
+                "content": [
+                  "    # Agent Configuration - Intelligence parameters",
+                  "    AGENT_CONFIG = {",
+                  "        \"max_iterations\": int(os.getenv(\"MAX_ITERATIONS\", \"10\")),",
+                  "        \"verbose\": os.getenv(\"VERBOSE\", \"true\").lower() == \"true\",",
+                  "        \"temperature\": float(os.getenv(\"AGENT_TEMPERATURE\", \"0.7\")),",
+                  "        \"timeout\": int(os.getenv(\"AGENT_TIMEOUT\", \"300\"))  # 5 minutes",
+                  "    }",
                   "    ",
-                  "    async def initialize(self):",
-                  "        \"\"\"Pre-populate connection pool.\"\"\"",
-                  "        for _ in range(self.pool_size):",
-                  "            adapter = await self._create_connection()",
-                  "            if adapter:",
-                  "                await self.available_connections.put(adapter)"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 202,
-                "end_line": 218,
-                "language": "python",
-                "content": [
-                  "    async def _create_connection(self) -> Optional[MCPAdapter]:",
-                  "        \"\"\"Create a new MCP adapter connection.\"\"\"",
-                  "        try:",
-                  "            adapter = MCPAdapter(",
-                  "                command=self.server_config.command,",
-                  "                args=self.server_config.args,",
-                  "                timeout=self.server_config.timeout",
-                  "            )",
-                  "            await adapter.start()",
-                  "            self.total_connections += 1",
-                  "            self.metrics[\"connections_created\"] += 1",
-                  "            return adapter",
-                  "        except Exception as e:",
-                  "            logger.error(f\"Failed to create connection for {self.server_config.name}: {e}\")",
-                  "            return None"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 222,
-                "end_line": 238,
-                "language": "python",
-                "content": [
-                  "    @asynccontextmanager",
-                  "    async def get_connection(self):",
-                  "        \"\"\"Get connection from pool with automatic return.\"\"\"",
-                  "        adapter = None",
-                  "        try:",
-                  "            # Try to get existing connection",
-                  "            try:",
-                  "                adapter = self.available_connections.get_nowait()",
-                  "                self.metrics[\"connections_reused\"] += 1",
-                  "            except asyncio.QueueEmpty:",
-                  "                # Pool exhausted, create new connection",
-                  "                self.metrics[\"pool_exhausted_count\"] += 1",
-                  "                adapter = await self._create_connection()",
-                  "                if not adapter:",
-                  "                    raise ConnectionError(f\"Failed to create connection for {self.server_config.name}\")"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 242,
-                "end_line": 254,
-                "language": "python",
-                "content": [
-                  "            yield adapter",
-                  "            ",
-                  "        finally:",
-                  "            # Return connection to pool if still valid",
-                  "            if adapter:",
-                  "                try:",
-                  "                    self.available_connections.put_nowait(adapter)",
-                  "                except asyncio.QueueFull:",
-                  "                    # Pool full, close excess connection",
-                  "                    await adapter.stop()",
-                  "                    self.total_connections -= 1"
+                  "    # Logging Configuration - Observability settings",
+                  "    LOG_LEVEL = os.getenv(\"LOG_LEVEL\", \"INFO\")",
+                  "    LOG_FORMAT = \"%(asctime)s - %(name)s - %(levelname)s - %(message)s\""
                 ],
                 "line_count": 11
               },
               {
-                "start_line": 258,
-                "end_line": 267,
-                "language": "python",
-                "content": [
-                  "class EnterpriseMCPManager:",
-                  "    \"\"\"Production-grade MCP server manager with advanced patterns.\"\"\"",
-                  "    ",
-                  "    def __init__(self, server_configs: List[MCPServerConfig]):",
-                  "        self.server_configs = {config.name: config for config in server_configs}",
-                  "        self.connection_pools: Dict[str, ConnectionPool] = {}",
-                  "        self.circuit_breakers: Dict[str, CircuitBreaker] = {}",
-                  "        self.health_status: Dict[str, bool] = {}"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 271,
-                "end_line": 279,
-                "language": "python",
-                "content": [
-                  "        self.metrics = {",
-                  "            \"total_requests\": 0,",
-                  "            \"successful_requests\": 0,",
-                  "            \"failed_requests\": 0,",
-                  "            \"average_response_time\": 0.0",
-                  "        }",
-                  "        self._monitoring_task: Optional[asyncio.Task] = None"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 283,
-                "end_line": 291,
-                "language": "python",
-                "content": [
-                  "    async def initialize(self):",
-                  "        \"\"\"Initialize all connection pools and circuit breakers.\"\"\"",
-                  "        for name, config in self.server_configs.items():",
-                  "            # Create connection pool",
-                  "            pool = ConnectionPool(config, pool_size=5)",
-                  "            await pool.initialize()",
-                  "            self.connection_pools[name] = pool"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 295,
+                "start_line": 297,
                 "end_line": 307,
                 "language": "python",
                 "content": [
-                  "            # Create circuit breaker",
-                  "            cb_config = CircuitBreakerConfig(",
-                  "                failure_threshold=5,",
-                  "                recovery_timeout=60,",
-                  "                success_threshold=3,",
-                  "                timeout=config.timeout",
-                  "            )",
-                  "            self.circuit_breakers[name] = CircuitBreaker(name, cb_config)",
-                  "            ",
-                  "            self.health_status[name] = True",
-                  "            logger.info(f\"Initialized enterprise MCP manager for {name}\")"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 311,
-                "end_line": 322,
-                "language": "python",
-                "content": [
-                  "        # Start monitoring task",
-                  "        self._monitoring_task = asyncio.create_task(self._monitoring_loop())",
-                  "    ",
-                  "    async def call_tool(self, server_name: str, tool_name: str, args: Dict[str, Any]) -> Any:",
-                  "        \"\"\"Call tool with enterprise patterns: pooling, circuit breaker, metrics.\"\"\"",
-                  "        start_time = time.time()",
-                  "        self.metrics[\"total_requests\"] += 1",
-                  "        ",
-                  "        if server_name not in self.connection_pools:",
-                  "            raise ValueError(f\"Server {server_name} not configured\")"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 326,
-                "end_line": 337,
-                "language": "python",
-                "content": [
-                  "        pool = self.connection_pools[server_name]",
-                  "        circuit_breaker = self.circuit_breakers[server_name]",
-                  "        ",
-                  "        try:",
-                  "            async def _call_with_pool():",
-                  "                async with pool.get_connection() as adapter:",
-                  "                    return await adapter.call_tool(tool_name, args)",
-                  "            ",
-                  "            # Execute with circuit breaker protection",
-                  "            result = await circuit_breaker.call(_call_with_pool)"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 341,
-                "end_line": 354,
-                "language": "python",
-                "content": [
-                  "            # Update metrics",
-                  "            response_time = time.time() - start_time",
-                  "            self.metrics[\"successful_requests\"] += 1",
-                  "            self._update_average_response_time(response_time)",
-                  "            ",
-                  "            return result",
-                  "            ",
-                  "        except Exception as e:",
-                  "            self.metrics[\"failed_requests\"] += 1",
-                  "            self.health_status[server_name] = False",
-                  "            logger.error(f\"Tool call failed for {server_name}.{tool_name}: {e}\")",
-                  "            raise"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 358,
-                "end_line": 368,
-                "language": "python",
-                "content": [
-                  "    def _update_average_response_time(self, response_time: float):",
-                  "        \"\"\"Update rolling average response time.\"\"\"",
-                  "        current_avg = self.metrics[\"average_response_time\"]",
-                  "        total_requests = self.metrics[\"successful_requests\"]",
-                  "        ",
-                  "        # Calculate rolling average",
-                  "        self.metrics[\"average_response_time\"] = (",
-                  "            (current_avg * (total_requests - 1) + response_time) / total_requests",
-                  "        )"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 372,
-                "end_line": 385,
-                "language": "python",
-                "content": [
-                  "    async def _monitoring_loop(self):",
-                  "        \"\"\"Continuous monitoring and health checks.\"\"\"",
-                  "        while True:",
-                  "            try:",
-                  "                for name in self.server_configs.keys():",
-                  "                    await self._health_check(name)",
-                  "                await asyncio.sleep(30)  # Check every 30 seconds",
-                  "            except asyncio.CancelledError:",
-                  "                break",
-                  "            except Exception as e:",
-                  "                logger.error(f\"Monitoring loop error: {e}\")",
-                  "                await asyncio.sleep(5)"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 389,
-                "end_line": 403,
-                "language": "python",
-                "content": [
-                  "    async def _health_check(self, server_name: str):",
-                  "        \"\"\"Perform health check on server.\"\"\"",
-                  "        try:",
-                  "            # Simple health check by listing tools",
-                  "            pool = self.connection_pools[server_name]",
-                  "            async with pool.get_connection() as adapter:",
-                  "                await adapter.list_tools()",
-                  "            ",
-                  "            self.health_status[server_name] = True",
-                  "            ",
-                  "        except Exception as e:",
-                  "            self.health_status[server_name] = False",
-                  "            logger.warning(f\"Health check failed for {server_name}: {e}\")"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 407,
-                "end_line": 423,
-                "language": "python",
-                "content": [
-                  "    def get_metrics(self) -> Dict[str, Any]:",
-                  "        \"\"\"Get comprehensive metrics for monitoring.\"\"\"",
-                  "        server_metrics = {}",
-                  "        for name, cb in self.circuit_breakers.items():",
-                  "            server_metrics[name] = {",
-                  "                \"circuit_breaker_state\": cb.state.value,",
-                  "                \"circuit_breaker_metrics\": cb.metrics,",
-                  "                \"connection_pool_metrics\": self.connection_pools[name].metrics,",
-                  "                \"health_status\": self.health_status[name]",
-                  "            }",
-                  "        ",
-                  "        return {",
-                  "            \"global_metrics\": self.metrics,",
-                  "            \"server_metrics\": server_metrics",
-                  "        }"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 427,
-                "end_line": 446,
-                "language": "python",
-                "content": [
-                  "    async def cleanup(self):",
-                  "        \"\"\"Clean up resources.\"\"\"",
-                  "        if self._monitoring_task:",
-                  "            self._monitoring_task.cancel()",
-                  "            try:",
-                  "                await self._monitoring_task",
-                  "            except asyncio.CancelledError:",
-                  "                pass",
-                  "        ",
-                  "        # Close all connections",
-                  "        for pool in self.connection_pools.values():",
-                  "            while pool.total_connections > 0:",
-                  "                try:",
-                  "                    adapter = pool.available_connections.get_nowait()",
-                  "                    await adapter.stop()",
-                  "                    pool.total_connections -= 1",
-                  "                except asyncio.QueueEmpty:",
-                  "                    break"
-                ],
-                "line_count": 18
-              },
-              {
-                "start_line": 454,
-                "end_line": 464,
-                "language": "python",
-                "content": [
-                  "# security/enterprise_auth.py - Enterprise security imports",
-                  "import jwt",
-                  "import time",
-                  "from typing import Dict, List, Optional, Set",
-                  "from dataclasses import dataclass",
-                  "from enum import Enum",
-                  "import logging",
+                  "# The hidden complexity behind a simple question",
                   "",
-                  "logger = logging.getLogger(__name__)"
+                  "# Customer inquiry: \"What's the weather like for my shipment to London?\"",
+                  "",
+                  "# Agent needs to orchestrate multiple systems:",
+                  "# 1. Query customer database for shipment details",
+                  "# 2. Get weather data for London",
+                  "# 3. Check file system for shipping policies",
+                  "# 4. Combine information into helpful response"
                 ],
                 "line_count": 9
               },
               {
-                "start_line": 468,
-                "end_line": 476,
+                "start_line": 320,
+                "end_line": 338,
                 "language": "python",
                 "content": [
-                  "class Permission(Enum):",
-                  "    READ_WEATHER = \"weather:read\"",
-                  "    READ_FILES = \"files:read\"",
-                  "    WRITE_FILES = \"files:write\"",
-                  "    QUERY_DATABASE = \"database:query\"",
-                  "    MODIFY_DATABASE = \"database:modify\"",
-                  "    ADMIN_TOOLS = \"admin:*\""
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 480,
-                "end_line": 489,
-                "language": "python",
-                "content": [
-                  "@dataclass",
-                  "class UserContext:",
-                  "    user_id: str",
-                  "    roles: Set[str]",
-                  "    permissions: Set[Permission]",
-                  "    session_id: str",
-                  "    expires_at: float",
-                  "    organization_id: str"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 493,
-                "end_line": 502,
-                "language": "python",
-                "content": [
-                  "class EnterpriseAuthenticator:",
-                  "    \"\"\"Enterprise authentication and authorization for MCP agents.\"\"\"",
+                  "# utils/mcp_manager.py - Your integration command center",
+                  "",
+                  "import asyncio",
+                  "import logging",
+                  "from typing import Dict, List, Optional",
+                  "from langchain_mcp_adapters import MCPAdapter",
+                  "from config import Config, MCPServerConfig",
+                  "",
+                  "logger = logging.getLogger(__name__)",
+                  "",
+                  "class MCPServerManager:",
+                  "    \"\"\"The nerve center that manages multiple MCP servers with health monitoring.\"\"\"",
                   "    ",
-                  "    def __init__(self, jwt_secret: str, default_permissions: Dict[str, List[Permission]]):",
-                  "        self.jwt_secret = jwt_secret",
-                  "        self.default_permissions = default_permissions",
-                  "        self.active_sessions: Dict[str, UserContext] = {}",
-                  "        self.audit_log: List[Dict] = []"
+                  "    def __init__(self, server_configs: List[MCPServerConfig]):",
+                  "        self.server_configs = {config.name: config for config in server_configs}",
+                  "        self.adapters: Dict[str, MCPAdapter] = {}",
+                  "        self.health_status: Dict[str, bool] = {}"
                 ],
-                "line_count": 8
+                "line_count": 17
               },
               {
-                "start_line": 506,
-                "end_line": 517,
+                "start_line": 348,
+                "end_line": 358,
                 "language": "python",
                 "content": [
-                  "    def authenticate_token(self, token: str) -> Optional[UserContext]:",
-                  "        \"\"\"Authenticate JWT token and return user context.\"\"\"",
-                  "        try:",
-                  "            payload = jwt.decode(token, self.jwt_secret, algorithms=[\"HS256\"])",
-                  "            ",
-                  "            user_id = payload.get(\"user_id\")",
-                  "            roles = set(payload.get(\"roles\", []))",
-                  "            session_id = payload.get(\"session_id\")",
-                  "            expires_at = payload.get(\"exp\", 0)",
-                  "            organization_id = payload.get(\"org_id\")"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 521,
-                "end_line": 530,
-                "language": "python",
-                "content": [
-                  "            if time.time() > expires_at:",
-                  "                self._audit(\"TOKEN_EXPIRED\", {\"user_id\": user_id})",
-                  "                return None",
-                  "            ",
-                  "            # Calculate permissions from roles",
-                  "            permissions = set()",
-                  "            for role in roles:",
-                  "                permissions.update(self.default_permissions.get(role, []))"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 534,
-                "end_line": 548,
-                "language": "python",
-                "content": [
-                  "            user_context = UserContext(",
-                  "                user_id=user_id,",
-                  "                roles=roles,",
-                  "                permissions=permissions,",
-                  "                session_id=session_id,",
-                  "                expires_at=expires_at,",
-                  "                organization_id=organization_id",
-                  "            )",
-                  "            ",
-                  "            self.active_sessions[session_id] = user_context",
-                  "            self._audit(\"USER_AUTHENTICATED\", {\"user_id\": user_id, \"roles\": list(roles)})",
-                  "            ",
-                  "            return user_context"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 552,
-                "end_line": 556,
-                "language": "python",
-                "content": [
-                  "        except jwt.InvalidTokenError as e:",
-                  "            self._audit(\"INVALID_TOKEN\", {\"error\": str(e)})",
-                  "            return None"
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 560,
-                "end_line": 572,
-                "language": "python",
-                "content": [
-                  "    def authorize_tool_access(self, user_context: UserContext, server_name: str, tool_name: str) -> bool:",
-                  "        \"\"\"Check if user has permission to access specific tool.\"\"\"",
-                  "        required_permission = self._get_required_permission(server_name, tool_name)",
+                  "    async def start_all_servers(self) -> Dict[str, bool]:",
+                  "        \"\"\"The startup orchestration - Bringing your digital workforce online.\"\"\"",
+                  "        results = {}",
                   "        ",
-                  "        if required_permission in user_context.permissions:",
-                  "            self._audit(\"TOOL_ACCESS_GRANTED\", {",
-                  "                \"user_id\": user_context.user_id,",
-                  "                \"server\": server_name,",
-                  "                \"tool\": tool_name",
-                  "            })",
+                  "        for name, config in self.server_configs.items():",
+                  "            result = await self._start_single_server(name, config)",
+                  "            results[name] = result",
+                  "        ",
+                  "        return results"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 362,
+                "end_line": 372,
+                "language": "python",
+                "content": [
+                  "    async def _start_single_server(self, name: str, config: MCPServerConfig) -> bool:",
+                  "        \"\"\"Individual server startup with comprehensive validation.\"\"\"",
+                  "        try:",
+                  "            logger.info(f\"Starting MCP server: {name}\")",
+                  "            adapter = MCPAdapter(",
+                  "                command=config.command,",
+                  "                args=config.args,",
+                  "                timeout=config.timeout",
+                  "            )"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 376,
+                "end_line": 387,
+                "language": "python",
+                "content": [
+                  "            # The critical handshake - Test connection and discover tools",
+                  "            await adapter.start()",
+                  "            tools = await adapter.list_tools()",
+                  "            ",
+                  "            # Success - Store adapter and update status",
+                  "            self.adapters[name] = adapter",
+                  "            self.health_status[name] = True",
+                  "            ",
+                  "            logger.info(f\"Server '{name}' started with {len(tools)} tools\")",
                   "            return True"
                 ],
-                "line_count": 11
-              },
-              {
-                "start_line": 576,
-                "end_line": 584,
-                "language": "python",
-                "content": [
-                  "        self._audit(\"TOOL_ACCESS_DENIED\", {",
-                  "            \"user_id\": user_context.user_id,",
-                  "            \"server\": server_name,",
-                  "            \"tool\": tool_name,",
-                  "            \"required_permission\": required_permission.value",
-                  "        })",
-                  "        return False"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 588,
-                "end_line": 603,
-                "language": "python",
-                "content": [
-                  "    def _get_required_permission(self, server_name: str, tool_name: str) -> Permission:",
-                  "        \"\"\"Map server/tool combinations to required permissions.\"\"\"",
-                  "        permission_map = {",
-                  "            (\"weather\", \"get_current_weather\"): Permission.READ_WEATHER,",
-                  "            (\"weather\", \"get_forecast\"): Permission.READ_WEATHER,",
-                  "            (\"filesystem\", \"read_file\"): Permission.READ_FILES,",
-                  "            (\"filesystem\", \"write_file\"): Permission.WRITE_FILES,",
-                  "            (\"filesystem\", \"list_files\"): Permission.READ_FILES,",
-                  "            (\"database\", \"query\"): Permission.QUERY_DATABASE,",
-                  "            (\"database\", \"insert\"): Permission.MODIFY_DATABASE,",
-                  "            (\"database\", \"update\"): Permission.MODIFY_DATABASE,",
-                  "        }",
-                  "        ",
-                  "        return permission_map.get((server_name, tool_name), Permission.ADMIN_TOOLS)"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 607,
-                "end_line": 622,
-                "language": "python",
-                "content": [
-                  "    def _audit(self, action: str, details: Dict):",
-                  "        \"\"\"Log security events for audit trail.\"\"\"",
-                  "        audit_entry = {",
-                  "            \"timestamp\": time.time(),",
-                  "            \"action\": action,",
-                  "            \"details\": details",
-                  "        }",
-                  "        ",
-                  "        self.audit_log.append(audit_entry)",
-                  "        logger.info(f\"SECURITY_AUDIT: {action} - {details}\")",
-                  "        ",
-                  "        # Keep only last 1000 entries in memory",
-                  "        if len(self.audit_log) > 1000:",
-                  "            self.audit_log = self.audit_log[-1000:]"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 626,
-                "end_line": 638,
-                "language": "python",
-                "content": [
-                  "    def get_audit_log(self, user_id: Optional[str] = None, limit: int = 100) -> List[Dict]:",
-                  "        \"\"\"Retrieve audit log entries.\"\"\"",
-                  "        if user_id:",
-                  "            filtered_log = [",
-                  "                entry for entry in self.audit_log ",
-                  "                if entry[\"details\"].get(\"user_id\") == user_id",
-                  "            ]",
-                  "        else:",
-                  "            filtered_log = self.audit_log",
-                  "        ",
-                  "        return filtered_log[-limit:]"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 646,
-                "end_line": 657,
-                "language": "python",
-                "content": [
-                  "# monitoring/enterprise_monitoring.py - Comprehensive monitoring imports",
-                  "import time",
-                  "import asyncio",
-                  "from typing import Dict, List, Any, Optional",
-                  "from dataclasses import dataclass, asdict",
-                  "from collections import defaultdict, deque",
-                  "import statistics",
-                  "import logging",
-                  "",
-                  "logger = logging.getLogger(__name__)"
-                ],
                 "line_count": 10
               },
               {
-                "start_line": 661,
-                "end_line": 671,
+                "start_line": 391,
+                "end_line": 396,
                 "language": "python",
                 "content": [
-                  "@dataclass",
-                  "class PerformanceMetrics:",
-                  "    timestamp: float",
-                  "    server_name: str",
-                  "    tool_name: str",
-                  "    response_time: float",
-                  "    success: bool",
-                  "    error_type: Optional[str] = None",
-                  "    user_id: Optional[str] = None"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 675,
-                "end_line": 688,
-                "language": "python",
-                "content": [
-                  "class PerformanceTracker:",
-                  "    \"\"\"Enterprise-grade performance monitoring for MCP agents.\"\"\"",
-                  "    ",
-                  "    def __init__(self, retention_hours: int = 24):",
-                  "        self.retention_hours = retention_hours",
-                  "        self.metrics: deque = deque(maxlen=10000)  # Keep last 10k metrics",
-                  "        self.alert_thresholds = {",
-                  "            \"response_time_p95\": 5.0,      # 95th percentile response time",
-                  "            \"error_rate\": 0.05,            # 5% error rate",
-                  "            \"availability\": 0.99           # 99% availability",
-                  "        }",
-                  "        self.alerts: List[Dict] = []"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 692,
-                "end_line": 697,
-                "language": "python",
-                "content": [
-                  "    def record_metric(self, metric: PerformanceMetrics):",
-                  "        \"\"\"Record a performance metric.\"\"\"",
-                  "        self.metrics.append(metric)",
-                  "        self._check_alerts()"
+                  "        except Exception as e:",
+                  "            logger.error(f\"Failed to start server '{name}': {e}\")",
+                  "            self.health_status[name] = False",
+                  "            return False"
                 ],
                 "line_count": 4
               },
               {
-                "start_line": 701,
-                "end_line": 712,
+                "start_line": 400,
+                "end_line": 419,
                 "language": "python",
                 "content": [
-                  "    def get_server_stats(self, server_name: str, hours: int = 1) -> Dict[str, Any]:",
-                  "        \"\"\"Get comprehensive statistics for a server.\"\"\"",
-                  "        cutoff_time = time.time() - (hours * 3600)",
-                  "        server_metrics = [",
-                  "            m for m in self.metrics ",
-                  "            if m.server_name == server_name and m.timestamp >= cutoff_time",
-                  "        ]",
+                  "    async def get_adapter(self, server_name: str) -> Optional[MCPAdapter]:",
+                  "        \"\"\"Smart adapter access with automatic health checking.\"\"\"",
+                  "        if server_name not in self.adapters:",
+                  "            logger.warning(f\"Server '{server_name}' not found\")",
+                  "            return None",
                   "        ",
-                  "        if not server_metrics:",
-                  "            return {\"error\": \"No metrics found for server\"}"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 716,
-                "end_line": 729,
-                "language": "python",
-                "content": [
-                  "        successful_metrics = [m for m in server_metrics if m.success]",
-                  "        failed_metrics = [m for m in server_metrics if not m.success]",
+                  "        if not self.health_status.get(server_name, False):",
+                  "            logger.warning(f\"Server '{server_name}' is unhealthy\")",
+                  "            # The resilience factor - Attempt automatic restart",
+                  "            await self._restart_server(server_name)",
                   "        ",
-                  "        response_times = [m.response_time for m in successful_metrics]",
-                  "        ",
-                  "        stats = {",
-                  "            \"total_requests\": len(server_metrics),",
-                  "            \"successful_requests\": len(successful_metrics),",
-                  "            \"failed_requests\": len(failed_metrics),",
-                  "            \"error_rate\": len(failed_metrics) / len(server_metrics) if server_metrics else 0,",
-                  "            \"availability\": len(successful_metrics) / len(server_metrics) if server_metrics else 0,",
-                  "        }"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 733,
-                "end_line": 743,
-                "language": "python",
-                "content": [
-                  "        if response_times:",
-                  "            stats.update({",
-                  "                \"avg_response_time\": statistics.mean(response_times),",
-                  "                \"min_response_time\": min(response_times),",
-                  "                \"max_response_time\": max(response_times),",
-                  "                \"p50_response_time\": statistics.median(response_times),",
-                  "                \"p95_response_time\": self._percentile(response_times, 0.95),",
-                  "                \"p99_response_time\": self._percentile(response_times, 0.99),",
-                  "            })"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 747,
-                "end_line": 755,
-                "language": "python",
-                "content": [
-                  "        # Error breakdown",
-                  "        error_counts = defaultdict(int)",
-                  "        for metric in failed_metrics:",
-                  "            error_counts[metric.error_type or \"unknown\"] += 1",
-                  "        stats[\"error_breakdown\"] = dict(error_counts)",
-                  "        ",
-                  "        return stats"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 759,
-                "end_line": 770,
-                "language": "python",
-                "content": [
-                  "    def get_tool_stats(self, tool_name: str, hours: int = 1) -> Dict[str, Any]:",
-                  "        \"\"\"Get statistics for a specific tool across all servers.\"\"\"",
-                  "        cutoff_time = time.time() - (hours * 3600)",
-                  "        tool_metrics = [",
-                  "            m for m in self.metrics ",
-                  "            if m.tool_name == tool_name and m.timestamp >= cutoff_time",
-                  "        ]",
-                  "        ",
-                  "        if not tool_metrics:",
-                  "            return {\"error\": \"No metrics found for tool\"}"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 774,
-                "end_line": 793,
-                "language": "python",
-                "content": [
-                  "        # Group by server",
-                  "        server_stats = defaultdict(list)",
-                  "        for metric in tool_metrics:",
-                  "            server_stats[metric.server_name].append(metric)",
-                  "        ",
-                  "        result = {",
-                  "            \"total_requests\": len(tool_metrics),",
-                  "            \"servers_used\": list(server_stats.keys()),",
-                  "            \"per_server_stats\": {}",
-                  "        }",
-                  "        ",
-                  "        for server, metrics in server_stats.items():",
-                  "            successful = [m for m in metrics if m.success]",
-                  "            result[\"per_server_stats\"][server] = {",
-                  "                \"requests\": len(metrics),",
-                  "                \"success_rate\": len(successful) / len(metrics),",
-                  "                \"avg_response_time\": statistics.mean([m.response_time for m in successful]) if successful else 0",
-                  "            }"
+                  "        return self.adapters.get(server_name)",
+                  "    ",
+                  "    async def _restart_server(self, name: str):",
+                  "        \"\"\"Automatic recovery - Attempt to restart a failed server.\"\"\"",
+                  "        config = self.server_configs.get(name)",
+                  "        if config:",
+                  "            await self._start_single_server(name, config)"
                 ],
                 "line_count": 18
               },
               {
-                "start_line": 797,
-                "end_line": 805,
+                "start_line": 436,
+                "end_line": 442,
                 "language": "python",
                 "content": [
-                  "    def _percentile(self, data: List[float], percentile: float) -> float:",
-                  "        \"\"\"Calculate percentile of data.\"\"\"",
-                  "        if not data:",
-                  "            return 0.0",
-                  "        sorted_data = sorted(data)",
-                  "        index = int(percentile * len(sorted_data))",
-                  "        return sorted_data[min(index, len(sorted_data) - 1)]"
+                  "# The ReAct pattern in action - How agents think and act",
+                  "",
+                  "from langchain.agents import create_react_agent, AgentExecutor",
+                  "from langchain_core.prompts import PromptTemplate",
+                  "from langchain_openai import ChatOpenAI"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 446,
+                "end_line": 459,
+                "language": "python",
+                "content": [
+                  "# The thinking framework - ReAct prompt template",
+                  "react_prompt = PromptTemplate.from_template(\"\"\"",
+                  "You have access to multiple tools. Use this format:",
+                  "",
+                  "Question: {input}",
+                  "Thought: I need to think about which tools to use",
+                  "Action: [tool_name]",
+                  "Action Input: [input_for_tool]",
+                  "Observation: [result_from_tool]",
+                  "... (repeat Thought/Action as needed)",
+                  "Thought: I now have enough information",
+                  "Final Answer: [comprehensive_response]"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 463,
+                "end_line": 468,
+                "language": "python",
+                "content": [
+                  "Available tools: {tools}",
+                  "Question: {input}",
+                  "{agent_scratchpad}",
+                  "\"\"\")"
+                ],
+                "line_count": 4
+              },
+              {
+                "start_line": 487,
+                "end_line": 495,
+                "language": "python",
+                "content": [
+                  "# mcp_servers/weather_server.py - Your meteorological consultant",
+                  "",
+                  "from mcp.server.fastmcp import FastMCP",
+                  "from datetime import datetime",
+                  "from typing import Dict",
+                  "",
+                  "mcp = FastMCP(\"Weather Server\")"
                 ],
                 "line_count": 7
               },
               {
-                "start_line": 809,
-                "end_line": 820,
+                "start_line": 499,
+                "end_line": 506,
                 "language": "python",
                 "content": [
-                  "    def _check_alerts(self):",
-                  "        \"\"\"Check for alert conditions.\"\"\"",
-                  "        # Only check alerts every 100 metrics to avoid overhead",
-                  "        if len(self.metrics) % 100 != 0:",
-                  "            return",
-                  "        ",
-                  "        # Check last hour of data",
-                  "        recent_stats = self.get_server_stats(\"all\", hours=1)",
-                  "        if \"error\" in recent_stats:",
-                  "            return"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 824,
-                "end_line": 838,
-                "language": "python",
-                "content": [
-                  "        # Check response time P95",
-                  "        if recent_stats.get(\"p95_response_time\", 0) > self.alert_thresholds[\"response_time_p95\"]:",
-                  "            self._trigger_alert(\"HIGH_RESPONSE_TIME\", {",
-                  "                \"p95_response_time\": recent_stats[\"p95_response_time\"],",
-                  "                \"threshold\": self.alert_thresholds[\"response_time_p95\"]",
-                  "            })",
-                  "        ",
-                  "        # Check error rate",
-                  "        if recent_stats.get(\"error_rate\", 0) > self.alert_thresholds[\"error_rate\"]:",
-                  "            self._trigger_alert(\"HIGH_ERROR_RATE\", {",
-                  "                \"error_rate\": recent_stats[\"error_rate\"],",
-                  "                \"threshold\": self.alert_thresholds[\"error_rate\"]",
-                  "            })"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 842,
-                "end_line": 849,
-                "language": "python",
-                "content": [
-                  "        # Check availability",
-                  "        if recent_stats.get(\"availability\", 1) < self.alert_thresholds[\"availability\"]:",
-                  "            self._trigger_alert(\"LOW_AVAILABILITY\", {",
-                  "                \"availability\": recent_stats[\"availability\"],",
-                  "                \"threshold\": self.alert_thresholds[\"availability\"]",
-                  "            })"
+                  "# Realistic weather simulation - Your data foundation",
+                  "WEATHER_DATA = {",
+                  "    \"London\": {\"temp\": 15, \"condition\": \"Cloudy\", \"humidity\": 75},",
+                  "    \"New York\": {\"temp\": 22, \"condition\": \"Sunny\", \"humidity\": 60},",
+                  "    \"Tokyo\": {\"temp\": 18, \"condition\": \"Rainy\", \"humidity\": 85},",
+                  "}"
                 ],
                 "line_count": 6
               },
               {
-                "start_line": 853,
-                "end_line": 869,
+                "start_line": 510,
+                "end_line": 523,
                 "language": "python",
                 "content": [
-                  "    def _trigger_alert(self, alert_type: str, details: Dict):",
-                  "        \"\"\"Trigger an alert.\"\"\"",
-                  "        alert = {",
-                  "            \"timestamp\": time.time(),",
-                  "            \"type\": alert_type,",
-                  "            \"details\": details,",
-                  "            \"resolved\": False",
-                  "        }",
-                  "        ",
-                  "        self.alerts.append(alert)",
-                  "        logger.warning(f\"ALERT: {alert_type} - {details}\")",
-                  "        ",
-                  "        # Keep only last 100 alerts",
-                  "        if len(self.alerts) > 100:",
-                  "            self.alerts = self.alerts[-100:]"
+                  "@mcp.tool()",
+                  "def get_current_weather(city: str, units: str = \"celsius\") -> Dict:",
+                  "    \"\"\"Get current weather for a city - Your meteorological intelligence.\"\"\"",
+                  "    if city not in WEATHER_DATA:",
+                  "        return {\"error\": f\"Weather data not available for {city}\"}",
+                  "    ",
+                  "    data = WEATHER_DATA[city].copy()",
+                  "    if units == \"fahrenheit\":",
+                  "        data[\"temp\"] = (data[\"temp\"] * 9/5) + 32",
+                  "        data[\"units\"] = \"\u00b0F\"",
+                  "    else:",
+                  "        data[\"units\"] = \"\u00b0C\""
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 527,
+                "end_line": 534,
+                "language": "python",
+                "content": [
+                  "    data[\"city\"] = city",
+                  "    data[\"timestamp\"] = datetime.now().isoformat()",
+                  "    return data",
+                  "",
+                  "if __name__ == \"__main__\":",
+                  "    mcp.run()"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 582,
+                "end_line": 589,
+                "language": "",
+                "content": [
+                  "User: \"What's the weather in London and do I have any files about UK shipping?\"",
+                  "",
+                  "Agent reasoning process:",
+                  "\u251c\u2500\u2500 Weather query detected \u2192 Use weather tool",
+                  "\u251c\u2500\u2500 File search detected \u2192 Use filesystem tool  ",
+                  "\u2514\u2500\u2500 Coordination needed \u2192 Use both tools, then synthesize results"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 595,
+                "end_line": 605,
+                "language": "python",
+                "content": [
+                  "# agents/basic_agent.py - Your foundation integration pattern",
+                  "",
+                  "import asyncio",
+                  "import logging",
+                  "from typing import Optional",
+                  "from langchain.agents import create_react_agent, AgentExecutor",
+                  "from langchain_core.prompts import PromptTemplate",
+                  "from langchain_openai import ChatOpenAI",
+                  "from langchain_core.tools import Tool"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 609,
+                "end_line": 623,
+                "language": "python",
+                "content": [
+                  "from utils.mcp_manager import MCPServerManager",
+                  "from config import Config",
+                  "",
+                  "logger = logging.getLogger(__name__)",
+                  "",
+                  "class BasicMCPAgent:",
+                  "    \"\"\"A focused ReAct agent using a single MCP server - Your integration foundation.\"\"\"",
+                  "    ",
+                  "    def __init__(self, server_name: str, mcp_manager: MCPServerManager):",
+                  "        self.server_name = server_name",
+                  "        self.mcp_manager = mcp_manager",
+                  "        self.llm = None",
+                  "        self.agent_executor = None"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 627,
+                "end_line": 643,
+                "language": "python",
+                "content": [
+                  "    async def initialize(self) -> bool:",
+                  "        \"\"\"The initialization sequence - Setting up your agent's capabilities.\"\"\"",
+                  "        try:",
+                  "            # Intelligence layer - Initialize LLM",
+                  "            self.llm = ChatOpenAI(",
+                  "                model=Config.LLM.model,",
+                  "                temperature=Config.LLM.temperature,",
+                  "                api_key=Config.OPENAI_API_KEY",
+                  "            )",
+                  "            ",
+                  "            # Tool layer - Get MCP adapter and tools",
+                  "            adapter = await self.mcp_manager.get_adapter(self.server_name)",
+                  "            if not adapter:",
+                  "                logger.error(f\"Failed to get adapter: {self.server_name}\")",
+                  "                return False"
                 ],
                 "line_count": 15
               },
               {
-                "start_line": 873,
-                "end_line": 893,
+                "start_line": 647,
+                "end_line": 661,
                 "language": "python",
                 "content": [
-                  "    def get_health_status(self) -> Dict[str, Any]:",
-                  "        \"\"\"Get overall system health status.\"\"\"",
-                  "        recent_time = time.time() - 300  # Last 5 minutes",
-                  "        recent_metrics = [m for m in self.metrics if m.timestamp >= recent_time]",
+                  "            # Integration layer - Convert MCP tools to LangChain tools",
+                  "            mcp_tools = await adapter.list_tools()",
+                  "            langchain_tools = self._create_langchain_tools(mcp_tools, adapter)",
+                  "            ",
+                  "            # Execution layer - Create the agent executor",
+                  "            self.agent_executor = self._create_agent_executor(langchain_tools)",
+                  "            ",
+                  "            logger.info(f\"Agent initialized with {len(langchain_tools)} tools\")",
+                  "            return True",
+                  "            ",
+                  "        except Exception as e:",
+                  "            logger.error(f\"Failed to initialize agent: {e}\")",
+                  "            return False"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 665,
+                "end_line": 679,
+                "language": "python",
+                "content": [
+                  "    def _create_langchain_tools(self, mcp_tools, adapter):",
+                  "        \"\"\"The translation layer - Converting MCP tools to LangChain format.\"\"\"",
+                  "        langchain_tools = []",
                   "        ",
-                  "        if not recent_metrics:",
-                  "            return {\"status\": \"UNKNOWN\", \"reason\": \"No recent metrics\"}",
+                  "        for mcp_tool in mcp_tools:",
+                  "            # The bridge function - Wrapper for MCP tool execution",
+                  "            async def tool_wrapper(tool_input: str, tool_name=mcp_tool.name):",
+                  "                \"\"\"Wrapper to call MCP tool from LangChain context.\"\"\"",
+                  "                try:",
+                  "                    result = await adapter.call_tool(tool_name, {\"input\": tool_input})",
+                  "                    return str(result)",
+                  "                except Exception as e:",
+                  "                    return f\"Error calling tool {tool_name}: {str(e)}\""
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 683,
+                "end_line": 704,
+                "language": "python",
+                "content": [
+                  "            # The LangChain interface - Create compatible tool",
+                  "            langchain_tool = Tool(",
+                  "                name=mcp_tool.name,",
+                  "                description=mcp_tool.description or f\"Tool from {self.server_name}\",",
+                  "                func=lambda x, tn=mcp_tool.name: asyncio.create_task(tool_wrapper(x, tn))",
+                  "            )",
+                  "            langchain_tools.append(langchain_tool)",
                   "        ",
-                  "        error_rate = len([m for m in recent_metrics if not m.success]) / len(recent_metrics)",
-                  "        avg_response_time = statistics.mean([m.response_time for m in recent_metrics if m.success])",
+                  "        return langchain_tools",
+                  "    ",
+                  "    async def run(self, query: str) -> str:",
+                  "        \"\"\"Execute the agent with a query - Your intelligence in action.\"\"\"",
+                  "        if not self.agent_executor:",
+                  "            return \"Agent not initialized. Call initialize() first.\"",
                   "        ",
-                  "        if error_rate > 0.1:  # 10% error rate",
-                  "            return {\"status\": \"CRITICAL\", \"reason\": \"High error rate\", \"error_rate\": error_rate}",
-                  "        elif error_rate > 0.05:  # 5% error rate",
-                  "            return {\"status\": \"WARNING\", \"reason\": \"Elevated error rate\", \"error_rate\": error_rate}",
-                  "        elif avg_response_time > 3.0:  # 3 second average",
-                  "            return {\"status\": \"WARNING\", \"reason\": \"Slow response times\", \"avg_response_time\": avg_response_time}",
-                  "        else:",
-                  "            return {\"status\": \"HEALTHY\", \"error_rate\": error_rate, \"avg_response_time\": avg_response_time}"
+                  "        try:",
+                  "            result = await self.agent_executor.ainvoke({\"input\": query})",
+                  "            return result[\"output\"]",
+                  "        except Exception as e:",
+                  "            return f\"Error processing request: {str(e)}\""
+                ],
+                "line_count": 20
+              },
+              {
+                "start_line": 748,
+                "end_line": 758,
+                "language": "python",
+                "content": [
+                  "# agents/multi_tool_agent.py - Your orchestration masterpiece",
+                  "",
+                  "import asyncio",
+                  "import logging",
+                  "from typing import Dict, List, Any, Optional",
+                  "from langchain.agents import create_react_agent, AgentExecutor",
+                  "from langchain_core.prompts import PromptTemplate",
+                  "from langchain_openai import ChatOpenAI",
+                  "from langchain_core.tools import Tool"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 762,
+                "end_line": 769,
+                "language": "python",
+                "content": [
+                  "from langchain.memory import ConversationBufferWindowMemory",
+                  "",
+                  "from utils.mcp_manager import MCPServerManager",
+                  "from config import Config",
+                  "",
+                  "logger = logging.getLogger(__name__)"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 773,
+                "end_line": 783,
+                "language": "python",
+                "content": [
+                  "class MultiToolMCPAgent:",
+                  "    \"\"\"Advanced ReAct agent using multiple MCP servers - Your coordination engine.\"\"\"",
+                  "    ",
+                  "    def __init__(self, mcp_manager: MCPServerManager):",
+                  "        self.mcp_manager = mcp_manager",
+                  "        self.llm = None",
+                  "        self.agent_executor = None",
+                  "        self.memory = None",
+                  "        self.available_tools = {}"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 787,
+                "end_line": 797,
+                "language": "python",
+                "content": [
+                  "    async def initialize(self) -> bool:",
+                  "        \"\"\"The comprehensive initialization - Building your multi-tool intelligence.\"\"\"",
+                  "        try:",
+                  "            # Intelligence foundation - Initialize LLM",
+                  "            self.llm = ChatOpenAI(",
+                  "                model=Config.LLM.model,",
+                  "                temperature=Config.LLM.temperature,",
+                  "                api_key=Config.OPENAI_API_KEY",
+                  "            )"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 801,
+                "end_line": 808,
+                "language": "python",
+                "content": [
+                  "            # Memory system - Initialize conversation memory",
+                  "            self.memory = ConversationBufferWindowMemory(",
+                  "                k=10,  # Remember last 10 exchanges",
+                  "                memory_key=\"chat_history\",",
+                  "                return_messages=True",
+                  "            )"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 812,
+                "end_line": 819,
+                "language": "python",
+                "content": [
+                  "            # Tool ecosystem - Collect tools from all available servers",
+                  "            langchain_tools = await self._collect_all_tools()",
+                  "            ",
+                  "            if not langchain_tools:",
+                  "                logger.error(\"No tools available from MCP servers\")",
+                  "                return False"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 823,
+                "end_line": 836,
+                "language": "python",
+                "content": [
+                  "            # Agent creation - Create enhanced agent executor",
+                  "            self.agent_executor = self._create_enhanced_agent(langchain_tools)",
+                  "            ",
+                  "            tool_count = len(langchain_tools)",
+                  "            server_count = len(self.available_tools)",
+                  "            logger.info(f\"Multi-tool agent: {tool_count} tools from {server_count} servers\")",
+                  "            ",
+                  "            return True",
+                  "            ",
+                  "        except Exception as e:",
+                  "            logger.error(f\"Failed to initialize multi-tool agent: {e}\")",
+                  "            return False"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 840,
+                "end_line": 853,
+                "language": "python",
+                "content": [
+                  "    def _create_enhanced_agent(self, langchain_tools):",
+                  "        \"\"\"The intelligence amplifier - Create enhanced ReAct agent with sophisticated prompting.\"\"\"",
+                  "        react_prompt = PromptTemplate.from_template(\"\"\"",
+                  "You are an intelligent AI assistant with access to multiple specialized tools.",
+                  "You can use weather information, file system operations, and database queries.",
+                  "",
+                  "STRATEGIC APPROACH:",
+                  "1. Analyze the user's request carefully",
+                  "2. Identify which tools might be helpful",
+                  "3. Use tools in logical sequence",
+                  "4. Provide comprehensive, helpful responses",
+                  "5. If a tool fails, try alternative approaches"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 857,
+                "end_line": 874,
+                "language": "python",
+                "content": [
+                  "Available tools: {tools}",
+                  "",
+                  "Use this format:",
+                  "Question: {input}",
+                  "Thought: Let me analyze what tools I need",
+                  "Action: [tool_name]",
+                  "Action Input: [input_for_tool]",
+                  "Observation: [result_from_tool]",
+                  "... (repeat as needed)",
+                  "Thought: I have enough information",
+                  "Final Answer: [comprehensive_response]",
+                  "",
+                  "Conversation history: {chat_history}",
+                  "Question: {input}",
+                  "{agent_scratchpad}",
+                  "\"\"\")"
+                ],
+                "line_count": 16
+              },
+              {
+                "start_line": 878,
+                "end_line": 894,
+                "language": "python",
+                "content": [
+                  "        agent = create_react_agent(",
+                  "            llm=self.llm,",
+                  "            tools=langchain_tools,",
+                  "            prompt=react_prompt",
+                  "        )",
+                  "        ",
+                  "        return AgentExecutor(",
+                  "            agent=agent,",
+                  "            tools=langchain_tools,",
+                  "            memory=self.memory,",
+                  "            verbose=Config.AGENT_CONFIG[\"verbose\"],",
+                  "            max_iterations=Config.AGENT_CONFIG[\"max_iterations\"],",
+                  "            handle_parsing_errors=True,",
+                  "            return_intermediate_steps=True",
+                  "        )"
+                ],
+                "line_count": 15
+              },
+              {
+                "start_line": 946,
+                "end_line": 954,
+                "language": "python",
+                "content": [
+                  "# workflows/research_workflow.py - Your orchestration masterpiece",
+                  "",
+                  "import asyncio",
+                  "from typing import Dict, Any, List",
+                  "from langchain_core.messages import HumanMessage, AIMessage",
+                  "from langgraph.graph import StateGraph, END",
+                  "from dataclasses import dataclass"
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 958,
+                "end_line": 973,
+                "language": "python",
+                "content": [
+                  "from utils.mcp_manager import MCPServerManager",
+                  "from config import Config",
+                  "",
+                  "@dataclass",
+                  "class ResearchState:",
+                  "    \"\"\"State tracking data through workflow steps - Your information backbone.\"\"\"",
+                  "    query: str",
+                  "    messages: List[Any] ",
+                  "    research_plan: str = \"\"",
+                  "    weather_data: Dict = None",
+                  "    file_data: Dict = None",
+                  "    database_data: Dict = None",
+                  "    final_report: str = \"\"",
+                  "    step_count: int = 0"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 988,
+                "end_line": 995,
+                "language": "python",
+                "content": [
+                  "class ResearchWorkflow:",
+                  "    \"\"\"Advanced research workflow using LangGraph and multiple MCP servers.\"\"\"",
+                  "    ",
+                  "    def __init__(self, mcp_manager: MCPServerManager):",
+                  "        self.mcp_manager = mcp_manager",
+                  "        self.workflow = None"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 999,
+                "end_line": 1010,
+                "language": "python",
+                "content": [
+                  "    async def build_workflow(self) -> StateGraph:",
+                  "        \"\"\"The workflow architect - Build the LangGraph workflow graph.\"\"\"",
+                  "        workflow = StateGraph(ResearchState)",
+                  "        ",
+                  "        # Processing nodes - Your specialized workforce",
+                  "        workflow.add_node(\"planner\", self._planning_node)",
+                  "        workflow.add_node(\"weather_researcher\", self._weather_research_node)",
+                  "        workflow.add_node(\"file_researcher\", self._file_research_node)",
+                  "        workflow.add_node(\"database_researcher\", self._database_research_node)",
+                  "        workflow.add_node(\"synthesizer\", self._synthesis_node)"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 1014,
+                "end_line": 1025,
+                "language": "python",
+                "content": [
+                  "        # Execution flow - Your process choreography",
+                  "        workflow.set_entry_point(\"planner\")",
+                  "        workflow.add_edge(\"planner\", \"weather_researcher\")",
+                  "        workflow.add_edge(\"weather_researcher\", \"file_researcher\")",
+                  "        workflow.add_edge(\"file_researcher\", \"database_researcher\")",
+                  "        workflow.add_edge(\"database_researcher\", \"synthesizer\")",
+                  "        workflow.add_edge(\"synthesizer\", END)",
+                  "        ",
+                  "        self.workflow = workflow.compile()",
+                  "        return self.workflow"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 1040,
+                "end_line": 1060,
+                "language": "python",
+                "content": [
+                  "    async def _planning_node(self, state: ResearchState) -> ResearchState:",
+                  "        \"\"\"The strategic planner - Plan research approach based on query analysis.\"\"\"",
+                  "        query_lower = state.query.lower()",
+                  "        plan_elements = []",
+                  "        ",
+                  "        # Intelligent analysis - Query analysis for different research domains",
+                  "        if any(word in query_lower for word in [\"weather\", \"climate\", \"temperature\"]):",
+                  "            plan_elements.append(\"- Gather weather information\")",
+                  "        ",
+                  "        if any(word in query_lower for word in [\"file\", \"document\", \"data\"]):",
+                  "            plan_elements.append(\"- Search relevant files\")",
+                  "        ",
+                  "        if any(word in query_lower for word in [\"database\", \"record\", \"history\"]):",
+                  "            plan_elements.append(\"- Query database for information\")",
+                  "        ",
+                  "        # Strategic documentation - Build research plan",
+                  "        state.research_plan = \"Research Plan:\\n\" + \"\\n\".join(plan_elements) if plan_elements else \"General research\"",
+                  "        state.step_count += 1",
+                  "        return state"
                 ],
                 "line_count": 19
+              },
+              {
+                "start_line": 1071,
+                "end_line": 1083,
+                "language": "python",
+                "content": [
+                  "    async def _weather_research_node(self, state: ResearchState) -> ResearchState:",
+                  "        \"\"\"The meteorological specialist - Research weather information if relevant.\"\"\"",
+                  "        if \"weather\" not in state.query.lower():",
+                  "            state.weather_data = {\"skipped\": True}",
+                  "            return state",
+                  "        ",
+                  "        try:",
+                  "            adapter = await self.mcp_manager.get_adapter(\"weather\")",
+                  "            if adapter:",
+                  "                cities = self._extract_cities_from_query(state.query)",
+                  "                weather_results = {}"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 1087,
+                "end_line": 1098,
+                "language": "python",
+                "content": [
+                  "                for city in cities:",
+                  "                    try:",
+                  "                        result = await adapter.call_tool(\"get_current_weather\", {\"city\": city})",
+                  "                        weather_results[city] = result",
+                  "                    except:",
+                  "                        continue  # Resilient processing - Try other cities",
+                  "                ",
+                  "                state.weather_data = weather_results or {\"error\": \"No weather data\"}",
+                  "            else:",
+                  "                state.weather_data = {\"error\": \"Weather server unavailable\"}"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 1102,
+                "end_line": 1108,
+                "language": "python",
+                "content": [
+                  "        except Exception as e:",
+                  "            state.weather_data = {\"error\": str(e)}",
+                  "        ",
+                  "        state.step_count += 1",
+                  "        return state"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 1112,
+                "end_line": 1119,
+                "language": "python",
+                "content": [
+                  "    async def run_research(self, query: str) -> Dict[str, Any]:",
+                  "        \"\"\"The workflow executor - Execute the complete research workflow.\"\"\"",
+                  "        if not self.workflow:",
+                  "            await self.build_workflow()",
+                  "        ",
+                  "        initial_state = ResearchState(query=query, messages=[HumanMessage(content=query)])"
+                ],
+                "line_count": 6
+              },
+              {
+                "start_line": 1123,
+                "end_line": 1139,
+                "language": "python",
+                "content": [
+                  "        try:",
+                  "            final_state = await self.workflow.ainvoke(initial_state)",
+                  "            return {",
+                  "                \"success\": True,",
+                  "                \"query\": query,",
+                  "                \"report\": final_state.final_report,",
+                  "                \"steps\": final_state.step_count",
+                  "            }",
+                  "        except Exception as e:",
+                  "            return {",
+                  "                \"success\": False,",
+                  "                \"query\": query,",
+                  "                \"error\": str(e),",
+                  "                \"report\": f\"Research workflow failed: {str(e)}\"",
+                  "            }"
+                ],
+                "line_count": 15
+              },
+              {
+                "start_line": 1221,
+                "end_line": 1233,
+                "language": "python",
+                "content": [
+                  "from langchain_mcp import MCPToolkit",
+                  "from langchain.agents import initialize_agent, AgentType",
+                  "from langchain.llm import OpenAI",
+                  "",
+                  "# Your multi-server agent setup - Building your digital travel consultant",
+                  "weather_toolkit = MCPToolkit.from_server(\"weather-server\")",
+                  "file_toolkit = MCPToolkit.from_server(\"filesystem-server\") ",
+                  "preference_toolkit = MCPToolkit.from_server(\"preference-server\")",
+                  "",
+                  "# Integration mastery - Combine toolkits and create agent",
+                  "all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_toolkit.get_tools()"
+                ],
+                "line_count": 11
               }
             ],
             "large_blocks": [],
@@ -1085,7 +1052,7 @@
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_ModuleA_Enterprise_Patterns.md",
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md",
             "total_issues": 0,
             "issues": [],
             "needs_fixing": false
@@ -1100,42 +1067,145 @@
         "summary": {
           "total_files": 1,
           "files_needing_improvement": 1,
-          "total_issues": 3,
-          "average_quality_score": 94.73684210526315
+          "total_issues": 15,
+          "average_quality_score": 73.21428571428571
         },
         "files": [
           {
-            "total_code_blocks": 57,
-            "total_issues": 3,
+            "total_code_blocks": 56,
+            "total_issues": 15,
             "issues": [
               {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 355,
-                "code_block_size": 10,
-                "message": "Code block at line 341 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 108,
+                "code_block_size": 9,
+                "word_count": 5,
+                "message": "Code block (9 lines) at line 95 has insufficient explanation (5 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 573,
-                "code_block_size": 10,
-                "message": "Code block at line 560 explanation lacks educational context",
+                "line": 108,
+                "code_block_size": 9,
+                "message": "Code block at line 95 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 142,
+                "code_block_size": 18,
+                "word_count": 6,
+                "message": "Code block (18 lines) at line 122 has insufficient explanation (6 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 794,
-                "code_block_size": 16,
-                "message": "Code block at line 774 explanation lacks educational context",
+                "line": 142,
+                "code_block_size": 18,
+                "message": "Code block at line 122 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "generic_explanation",
+                "severity": "medium",
+                "line": 259,
+                "code_block_size": 7,
+                "message": "Code block at line 250 has generic/lazy explanation",
+                "suggestion": "Replace generic phrases with specific, educational explanations"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 339,
+                "code_block_size": 13,
+                "word_count": 6,
+                "message": "Code block (13 lines) at line 320 has insufficient explanation (6 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 339,
+                "code_block_size": 13,
+                "message": "Code block at line 320 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 420,
+                "code_block_size": 15,
+                "word_count": 5,
+                "message": "Code block (15 lines) at line 400 has insufficient explanation (5 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 420,
+                "code_block_size": 15,
+                "message": "Code block at line 400 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 590,
+                "code_block_size": 5,
+                "word_count": 6,
+                "message": "Code block (5 lines) at line 582 has insufficient explanation (6 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 590,
+                "code_block_size": 5,
+                "message": "Code block at line 582 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 1061,
+                "code_block_size": 15,
+                "word_count": 6,
+                "message": "Code block (15 lines) at line 1040 has insufficient explanation (6 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 1061,
+                "code_block_size": 15,
+                "message": "Code block at line 1040 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 1234,
+                "code_block_size": 9,
+                "word_count": 3,
+                "message": "Code block (9 lines) at line 1221 has insufficient explanation (3 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 1234,
+                "code_block_size": 9,
+                "message": "Code block at line 1221 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               }
             ],
             "needs_improvement": true,
-            "quality_score": 94.73684210526315,
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_ModuleA_Enterprise_Patterns.md"
+            "quality_score": 73.21428571428571,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md"
           }
         ]
       },
@@ -1144,11 +1214,11 @@
   },
   "priority_files": [
     {
-      "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_ModuleA_Enterprise_Patterns.md",
-      "file_name": "Session3_ModuleA_Enterprise_Patterns.md",
-      "priority_score": 1.05263157894737,
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md",
+      "file_name": "Session3_LangChain_MCP_Integration.md",
+      "priority_score": 5.3571428571428585,
       "issues": [
-        "94.7% explanation quality"
+        "73.2% explanation quality"
       ]
     }
   ]
