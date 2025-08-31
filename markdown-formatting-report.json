@@ -1,0 +1,15 @@
+{
+  "summary": {
+    "total_files": 1,
+    "files_with_issues": 0,
+    "total_issues": 0
+  },
+  "files": [
+    {
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session6_Graph_Based_RAG.md",
+      "total_issues": 0,
+      "issues": [],
+      "needs_fixing": false
+    }
+  ]
+}
