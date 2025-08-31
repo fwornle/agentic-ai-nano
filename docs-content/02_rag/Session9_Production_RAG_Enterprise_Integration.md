@@ -601,13 +601,21 @@ Register and initialize tracking for all service instances:
 
             # Register service instances
             self.service_instances[service_name] = service_instances
-            
+```
+
+This initial configuration phase handles service registration for enterprise RAG load balancing. The method accepts a flexible services dictionary that can contain single instances or lists of instances per service. This normalization step is crucial in enterprise environments where services might be dynamically provisioned and the configuration format can vary depending on the deployment system (Kubernetes, Docker Swarm, or manual deployments).
+
+```python
             # Initialize health status for all instances
             self.health_status[service_name] = {
                 instance: ServiceStatus.HEALTHY
                 for instance in service_instances
             }
-            
+```
+
+The health status initialization assumes all instances start healthy, which is appropriate for production systems that have passed deployment checks. In enterprise RAG systems, this optimistic initialization prevents cold-start delays while the health monitoring system begins its continuous assessment. The ServiceStatus enum provides standardized states (HEALTHY, UNHEALTHY, MAINTENANCE) that integrate with enterprise monitoring tools.
+
+```python
             # Initialize performance metrics tracking
             self.load_metrics[service_name] = {
                 instance: {
@@ -619,6 +627,9 @@ Register and initialize tracking for all service instances:
                 }
                 for instance in service_instances
             }
+```
+
+Performance metrics initialization creates comprehensive tracking for each RAG service instance. These metrics are essential for enterprise-grade load balancing decisions - active connections prevent overloading, response time enables performance-based routing, and resource usage metrics (CPU/memory) support capacity-aware load distribution. The error_rate metric is particularly important for RAG systems where embedding quality can degrade under load.
 
 #### Step 3: Select Optimal Service Instance
 
