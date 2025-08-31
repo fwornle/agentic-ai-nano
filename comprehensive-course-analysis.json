@@ -1,14 +1,14 @@
 {
   "analysis_timestamp": "1756565301.7451673",
-  "target": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session2_Advanced_Chunking_Preprocessing.md",
+  "target": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
   "overall_metrics": {
     "total_files": 1,
-    "code_block_score": 45.0,
-    "formatting_score": 100.0,
-    "explanation_score": 90.9090909090909,
-    "overall_score": 74.36363636363637,
-    "critical_issues": 11,
-    "total_issues": 4
+    "code_block_score": 100.0,
+    "formatting_score": 60.0,
+    "explanation_score": 36.95652173913043,
+    "overall_score": 66.78260869565217,
+    "critical_issues": 0,
+    "total_issues": 31
   },
   "detailed_results": {
     "detect_large_code_blocks": {
@@ -16,1445 +16,632 @@
       "data": {
         "summary": {
           "total_files": 1,
-          "files_needing_refactoring": 1,
-          "total_large_blocks": 11
+          "files_needing_refactoring": 0,
+          "total_large_blocks": 0
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session2_Advanced_Chunking_Preprocessing.md",
-            "total_code_blocks": 44,
-            "large_blocks_count": 11,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
+            "total_code_blocks": 46,
+            "large_blocks_count": 0,
             "code_blocks": [
               {
-                "start_line": 20,
-                "end_line": 54,
-                "language": "python",
+                "start_line": 28,
+                "end_line": 38,
+                "language": "bash",
                 "content": [
+                  "# Test enterprise integration patterns",
+                  "cd src/session9",
+                  "python enterprise_integration.py",
                   "",
-                  "# Simple content type detection",
+                  "# Test privacy and compliance systems",
+                  "python -c \"from privacy_compliance import PrivacyCompliance; print('Enterprise architecture ready!')\"",
                   "",
-                  "from enum import Enum",
-                  "",
-                  "class ContentType(Enum):",
-                  "    HEADING = \"heading\"",
-                  "    PARAGRAPH = \"paragraph\" ",
-                  "    TABLE = \"table\"",
-                  "    CODE = \"code\"",
-                  "    LIST = \"list\"",
-                  "",
-                  "def detect_simple_content_type(text_line):",
-                  "    \"\"\"Detect content type from a single line of text.\"\"\"",
-                  "    text = text_line.strip()",
-                  "    ",
-                  "    # Check for markdown heading",
-                  "    if text.startswith('#'):",
-                  "        return ContentType.HEADING",
-                  "    ",
-                  "    # Check for table (pipe-separated)",
-                  "    if '|' in text and text.count('|') >= 2:",
-                  "        return ContentType.TABLE",
-                  "        ",
-                  "    # Check for code (starts with 4 spaces or tab)",
-                  "    if text.startswith('    ') or text.startswith('\\t'):",
-                  "        return ContentType.CODE",
-                  "        ",
-                  "    # Check for list item",
-                  "    if text.startswith('- ') or text.startswith('* '):",
-                  "        return ContentType.LIST",
-                  "        ",
-                  "    return ContentType.PARAGRAPH"
-                ],
-                "line_count": 33
-              },
-              {
-                "start_line": 69,
-                "end_line": 91,
-                "language": "python",
-                "content": [
-                  "from dataclasses import dataclass",
-                  "from typing import Dict, Any",
-                  "",
-                  "@dataclass",
-                  "class DocumentElement:",
-                  "    \"\"\"Represents a structured document element with metadata.\"\"\"",
-                  "    content: str",
-                  "    element_type: ContentType",
-                  "    level: int  # Hierarchy level (0=top, 1=section, 2=subsection)",
-                  "    metadata: Dict[str, Any]",
-                  "    position: int  # Position in document",
-                  "    ",
-                  "    def get_hierarchy_context(self):",
-                  "        \"\"\"Get human-readable hierarchy information.\"\"\"",
-                  "        hierarchy_labels = {",
-                  "            0: \"Document Root\",",
-                  "            1: \"Major Section\", ",
-                  "            2: \"Subsection\",",
-                  "            3: \"Minor Section\"",
-                  "        }",
-                  "        return hierarchy_labels.get(self.level, f\"Level {self.level}\")"
-                ],
-                "line_count": 21
-              },
-              {
-                "start_line": 104,
-                "end_line": 114,
-                "language": "python",
-                "content": [
-                  "class DocumentStructureAnalyzer:",
-                  "    \"\"\"Analyzes document structure and content types.\"\"\"",
-                  "",
-                  "    def __init__(self):",
-                  "        self.heading_patterns = [",
-                  "            r'^#{1,6}\\s+(.+)$',      # Markdown headers",
-                  "            r'^([A-Z][^a-z]*)\\s*$',  # ALL CAPS headers",
-                  "            r'^\\d+\\.\\s+(.+)$',       # Numbered headers",
-                  "        ]"
+                  "# Test production orchestrator",
+                  "python -c \"from production_rag_orchestrator import ProductionRAGOrchestrator; ProductionRAGOrchestrator().test_system()\""
                 ],
                 "line_count": 9
               },
               {
-                "start_line": 120,
-                "end_line": 134,
+                "start_line": 54,
+                "end_line": 65,
                 "language": "python",
                 "content": [
-                  "    def analyze_structure(self, document_text: str) -> List[DocumentElement]:",
-                  "        \"\"\"Analyze document structure and create structured elements.\"\"\"",
-                  "        lines = document_text.split('\\n')",
-                  "        elements = []",
-                  "        current_level = 0",
-                  "        position = 0",
-                  "",
-                  "        for i, line in enumerate(lines):",
-                  "            if not line.strip():",
-                  "                continue",
-                  "",
-                  "            content_type = detect_simple_content_type(line)",
-                  "            level = self._determine_level(line, current_level, content_type)"
+                  "class ZeroTrustRAGSecurity:",
+                  "    \"\"\"Zero-trust security framework for enterprise RAG systems.\"\"\"",
+                  "    ",
+                  "    def __init__(self, security_config: Dict[str, Any]):",
+                  "        self.config = security_config",
+                  "        ",
+                  "        # Core zero-trust components",
+                  "        self.identity_provider = EnterpriseIdentityProvider()",
+                  "        self.policy_engine = SecurityPolicyEngine()",
+                  "        self.threat_detector = ThreatDetectionEngine()"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 67,
+                "end_line": 72,
+                "language": "python",
+                "content": [
+                  "        # Network security components",
+                  "        self.network_segmenter = NetworkSegmentation()",
+                  "        self.traffic_inspector = NetworkTrafficInspector()",
+                  "        self.encryption_manager = EncryptionManager()"
+                ],
+                "line_count": 4
+              },
+              {
+                "start_line": 76,
+                "end_line": 81,
+                "language": "python",
+                "content": [
+                  "        # Data protection components",
+                  "        self.data_classifier = DataSecurityClassifier()",
+                  "        self.access_controller = DynamicAccessController()",
+                  "        self.audit_engine = SecurityAuditEngine()"
+                ],
+                "line_count": 4
+              },
+              {
+                "start_line": 85,
+                "end_line": 99,
+                "language": "python",
+                "content": [
+                  "    async def implement_zero_trust_architecture(self) -> Dict[str, Any]:",
+                  "        \"\"\"Implement comprehensive zero-trust security for RAG system.\"\"\"",
+                  "        ",
+                  "        implementation_results = {}",
+                  "        ",
+                  "        # 1. Network Segmentation Implementation",
+                  "        network_setup = await self.network_segmenter.create_security_zones({",
+                  "            'dmz': {'components': ['api_gateway', 'load_balancer']},",
+                  "            'application': {'components': ['rag_services', 'orchestrator']},",
+                  "            'data': {'components': ['vector_store', 'knowledge_graph']},",
+                  "            'management': {'components': ['monitoring', 'logging']}",
+                  "        })",
+                  "        implementation_results['network_segmentation'] = network_setup"
                 ],
                 "line_count": 13
               },
               {
-                "start_line": 140,
-                "end_line": 158,
+                "start_line": 103,
+                "end_line": 112,
                 "language": "python",
                 "content": [
-                  "            element = DocumentElement(",
-                  "                content=line.strip(),",
-                  "                element_type=content_type,",
-                  "                level=level,",
-                  "                metadata={",
-                  "                    \"line_number\": i + 1,",
-                  "                    \"char_count\": len(line),",
-                  "                    \"word_count\": len(line.split())",
-                  "                },",
-                  "                position=position",
-                  "            )",
-                  "            ",
-                  "            elements.append(element)",
-                  "            position += 1",
-                  "            current_level = level",
-                  "",
-                  "        return elements"
+                  "        # 2. Identity and Access Management",
+                  "        iam_setup = await self.identity_provider.configure_zero_trust_iam({",
+                  "            'multi_factor_authentication': True,",
+                  "            'continuous_verification': True,",
+                  "            'risk_based_authentication': True,",
+                  "            'privileged_access_management': True",
+                  "        })",
+                  "        implementation_results['identity_management'] = iam_setup"
                 ],
-                "line_count": 17
+                "line_count": 8
               },
               {
-                "start_line": 170,
-                "end_line": 192,
+                "start_line": 114,
+                "end_line": 123,
                 "language": "python",
                 "content": [
-                  "import re",
-                  "from typing import List, Tuple",
-                  "",
-                  "class AdvancedDocumentAnalyzer:",
-                  "    \"\"\"Enterprise-grade document analysis with domain-specific patterns.\"\"\"",
-                  "    ",
-                  "    def __init__(self):",
-                  "        self.domain_patterns = {",
-                  "            \"legal\": {",
-                  "                \"section_markers\": [r\"\u00a7\\s*\\d+\", r\"Article\\s+[IVX]+\", r\"Section\\s+\\d+\"],",
-                  "                \"citations\": [r\"\\d+\\s+U\\.S\\.C\\.\\s+\u00a7\\s+\\d+\", r\"\\d+\\s+F\\.\\d+d\\s+\\d+\"]",
-                  "            },",
-                  "            \"medical\": {",
-                  "                \"dosages\": [r\"\\d+\\s*mg\", r\"\\d+\\s*ml\", r\"\\d+\\s*cc\"],",
-                  "                \"medications\": [r\"[A-Z][a-z]+(?:in|ol|ide|ine)\"]",
-                  "            },",
-                  "            \"technical\": {",
-                  "                \"apis\": [r\"[A-Z][a-zA-Z]+\\.[a-zA-Z]+\\(\\)\", r\"HTTP[S]?\\://\"],",
-                  "                \"versions\": [r\"v?\\d+\\.\\d+\\.\\d+\", r\"version\\s+\\d+\"]",
-                  "            }",
+                  "        # 3. Data Protection",
+                  "        data_protection = await self.data_classifier.implement_data_protection({",
+                  "            'classification_levels': ['public', 'internal', 'confidential', 'restricted'],",
+                  "            'encryption_at_rest': True,",
+                  "            'encryption_in_transit': True,",
+                  "            'data_loss_prevention': True",
+                  "        })",
+                  "        implementation_results['data_protection'] = data_protection"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 125,
+                "end_line": 140,
+                "language": "python",
+                "content": [
+                  "        # 4. Threat Detection",
+                  "        threat_detection = await self.threat_detector.deploy_detection_systems({",
+                  "            'behavioral_analytics': True,",
+                  "            'anomaly_detection': True,",
+                  "            'threat_intelligence_integration': True,",
+                  "            'real_time_monitoring': True",
+                  "        })",
+                  "        implementation_results['threat_detection'] = threat_detection",
+                  "        ",
+                  "        return {",
+                  "            'zero_trust_implementation': implementation_results,",
+                  "            'security_posture': await self._assess_security_posture(),",
+                  "            'compliance_status': await self._check_compliance_status()",
                   "        }"
                 ],
-                "line_count": 21
+                "line_count": 14
               },
               {
-                "start_line": 198,
-                "end_line": 215,
+                "start_line": 144,
+                "end_line": 155,
                 "language": "python",
                 "content": [
-                  "    def analyze_with_domain_knowledge(self, document_text: str, ",
-                  "                                    domain: str = \"general\") -> Dict[str, Any]:",
-                  "        \"\"\"Analyze document with domain-specific intelligence.\"\"\"",
-                  "        analysis = {",
-                  "            \"domain\": domain,",
-                  "            \"structure\": self._analyze_structure(document_text),",
-                  "            \"complexity_score\": self._calculate_complexity_score(document_text),",
-                  "            \"processing_strategy\": \"standard\"",
-                  "        }",
-                  "        ",
-                  "        if domain in self.domain_patterns:",
-                  "            domain_features = self._extract_domain_features(document_text, domain)",
-                  "            analysis[\"domain_features\"] = domain_features",
-                  "            analysis[\"processing_strategy\"] = self._recommend_strategy(domain_features)",
-                  "            ",
-                  "        return analysis"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 235,
-                "end_line": 255,
-                "language": "python",
-                "content": [
-                  "def simple_hierarchical_chunk(elements: List[DocumentElement], ",
-                  "                            max_chunk_size: int = 500) -> List[str]:",
-                  "    \"\"\"Create simple hierarchical chunks based on document structure.\"\"\"",
-                  "    chunks = []",
-                  "    current_chunk = []",
-                  "    current_size = 0",
+                  "class DynamicAccessController:",
+                  "    \"\"\"Dynamic access control with real-time risk assessment.\"\"\"",
                   "    ",
-                  "    for element in elements:",
-                  "        element_size = len(element.content)",
+                  "    def __init__(self, config: Dict[str, Any]):",
+                  "        self.config = config",
                   "        ",
-                  "        # Start new chunk on major headings if current chunk has content",
-                  "        if (element.element_type == ContentType.HEADING and ",
-                  "            element.level <= 1 and current_chunk):",
-                  "            ",
-                  "            # Save current chunk",
-                  "            if current_chunk:",
-                  "                chunks.append('\\n'.join(current_chunk))",
-                  "                current_chunk = []",
-                  "                current_size = 0"
+                  "        # Risk assessment components",
+                  "        self.risk_analyzer = RiskAnalyzer()",
+                  "        self.context_analyzer = ContextAnalyzer()",
+                  "        self.behavior_analyzer = BehaviorAnalyzer()"
                 ],
-                "line_count": 19
+                "line_count": 10
               },
               {
-                "start_line": 261,
-                "end_line": 278,
+                "start_line": 157,
+                "end_line": 173,
                 "language": "python",
                 "content": [
-                  "        # Add element to current chunk if size permits",
-                  "        if current_size + element_size <= max_chunk_size:",
-                  "            current_chunk.append(element.content)",
-                  "            current_size += element_size",
-                  "        else:",
-                  "            # Save current chunk and start new one",
-                  "            if current_chunk:",
-                  "                chunks.append('\\n'.join(current_chunk))",
-                  "            current_chunk = [element.content]",
-                  "            current_size = element_size",
-                  "    ",
-                  "    # Save final chunk",
-                  "    if current_chunk:",
-                  "        chunks.append('\\n'.join(current_chunk))",
-                  "    ",
-                  "    return chunks"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 296,
-                "end_line": 306,
-                "language": "python",
-                "content": [
-                  "from langchain.schema import Document",
-                  "",
-                  "class HierarchicalChunker:",
-                  "    \"\"\"Creates intelligent chunks based on document hierarchy.\"\"\"",
-                  "",
-                  "    def __init__(self, max_chunk_size: int = 1000, overlap_ratio: float = 0.1):",
-                  "        self.max_chunk_size = max_chunk_size",
-                  "        self.overlap_ratio = overlap_ratio",
-                  "        self.analyzer = DocumentStructureAnalyzer()"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 310,
-                "end_line": 326,
-                "language": "python",
-                "content": [
-                  "    def create_hierarchical_chunks(self, document: Document) -> List[Document]:",
-                  "        \"\"\"Create chunks that preserve document hierarchy.\"\"\"",
-                  "        # Analyze document structure",
-                  "        elements = self.analyzer.analyze_structure(document.page_content)",
+                  "        # Access decision components",
+                  "        self.policy_evaluator = PolicyEvaluator()",
+                  "        self.access_decision_engine = AccessDecisionEngine()",
                   "        ",
-                  "        # Group elements into logical sections",
-                  "        sections = self._group_elements_by_hierarchy(elements)",
+                  "    async def evaluate_access_request(self, request: Dict[str, Any]) -> Dict[str, Any]:",
+                  "        \"\"\"Evaluate access request with dynamic risk assessment.\"\"\"",
                   "        ",
-                  "        # Create chunks from sections",
-                  "        chunks = []",
-                  "        for section in sections:",
-                  "            section_chunks = self._chunk_section(section, document.metadata)",
-                  "            chunks.extend(section_chunks)",
-                  "        ",
-                  "        return chunks"
+                  "        # Extract request context",
+                  "        user_context = {",
+                  "            'user_id': request['user_id'],",
+                  "            'location': request.get('location'),",
+                  "            'device': request.get('device_info'),",
+                  "            'time': request['timestamp'],",
+                  "            'ip_address': request.get('ip_address')",
+                  "        }"
                 ],
                 "line_count": 15
               },
               {
-                "start_line": 334,
-                "end_line": 348,
+                "start_line": 175,
+                "end_line": 185,
                 "language": "python",
                 "content": [
-                  "    def _group_elements_by_hierarchy(self, elements: List[DocumentElement]) -> List[List[DocumentElement]]:",
-                  "        \"\"\"Group elements into hierarchical sections.\"\"\"",
-                  "        sections = []",
-                  "        current_section = []",
-                  "        current_level = -1",
-                  "",
-                  "        for element in elements:",
-                  "            # Start new section on same or higher level heading",
-                  "            if (element.element_type == ContentType.HEADING and",
-                  "                element.level <= current_level and current_section):",
-                  "                sections.append(current_section)",
-                  "                current_section = [element]",
-                  "                current_level = element.level"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 352,
-                "end_line": 364,
-                "language": "python",
-                "content": [
-                  "            elif element.element_type == ContentType.HEADING and not current_section:",
-                  "                current_section = [element]",
-                  "                current_level = element.level",
-                  "            else:",
-                  "                current_section.append(element)",
-                  "",
-                  "        # Add final section",
-                  "        if current_section:",
-                  "            sections.append(current_section)",
-                  "",
-                  "        return sections"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 372,
-                "end_line": 387,
-                "language": "python",
-                "content": [
-                  "    def _chunk_section(self, section: List[DocumentElement], ",
-                  "                      base_metadata: Dict) -> List[Document]:",
-                  "        \"\"\"Create chunks from a document section with intelligent overlap.\"\"\"",
-                  "        chunks = []",
-                  "        current_chunk_elements = []",
-                  "        current_size = 0",
-                  "        ",
-                  "        section_title = self._extract_section_title(section)",
-                  "",
-                  "        for element in section:",
-                  "            element_size = len(element.content)",
-                  "",
-                  "            # Check if adding this element would exceed size limit",
-                  "            if current_size + element_size > self.max_chunk_size and current_chunk_elements:"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 391,
-                "end_line": 402,
-                "language": "python",
-                "content": [
-                  "                # Create chunk from current elements",
-                  "                chunk = self._create_chunk_from_elements(",
-                  "                    current_chunk_elements, base_metadata, section_title",
-                  "                )",
-                  "                chunks.append(chunk)",
-                  "",
-                  "                # Start new chunk with overlap for continuity",
-                  "                overlap_elements = self._get_overlap_elements(current_chunk_elements)",
-                  "                current_chunk_elements = overlap_elements + [element]",
-                  "                current_size = sum(len(e.content) for e in current_chunk_elements)"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 406,
-                "end_line": 419,
-                "language": "python",
-                "content": [
-                  "            else:",
-                  "                current_chunk_elements.append(element)",
-                  "                current_size += element_size",
-                  "",
-                  "        # Create final chunk",
-                  "        if current_chunk_elements:",
-                  "            chunk = self._create_chunk_from_elements(",
-                  "                current_chunk_elements, base_metadata, section_title",
+                  "        # Perform risk analysis",
+                  "        risk_assessment = await self.risk_analyzer.assess_risk({",
+                  "            'user_context': user_context,",
+                  "            'requested_resource': request['resource'],",
+                  "            'requested_action': request['action'],",
+                  "            'historical_behavior': await self.behavior_analyzer.get_user_behavior_profile(",
+                  "                request['user_id']",
                   "            )",
-                  "            chunks.append(chunk)",
-                  "",
-                  "        return chunks"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 427,
-                "end_line": 440,
-                "language": "python",
-                "content": [
-                  "    def _create_chunk_from_elements(self, elements: List[DocumentElement],",
-                  "                                  base_metadata: Dict, section_title: str) -> Document:",
-                  "        \"\"\"Create a document chunk with rich metadata.\"\"\"",
-                  "        # Combine element content with proper formatting",
-                  "        content_parts = []",
-                  "        for element in elements:",
-                  "            if element.element_type == ContentType.HEADING:",
-                  "                content_parts.append(f\"\\n{element.content}\\n\")",
-                  "            else:",
-                  "                content_parts.append(element.content)",
-                  "",
-                  "        content = \"\\n\".join(content_parts).strip()"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 444,
-                "end_line": 464,
-                "language": "python",
-                "content": [
-                  "        # Build enhanced metadata",
-                  "        content_types = [e.element_type.value for e in elements]",
-                  "        hierarchy_levels = [e.level for e in elements]",
-                  "",
-                  "        enhanced_metadata = {",
-                  "            **base_metadata,",
-                  "            \"section_title\": section_title,",
-                  "            \"chunk_type\": \"hierarchical\",",
-                  "            \"content_types\": list(set(content_types)),",
-                  "            \"hierarchy_levels\": hierarchy_levels,",
-                  "            \"element_count\": len(elements),",
-                  "            \"has_heading\": ContentType.HEADING.value in content_types,",
-                  "            \"has_table\": ContentType.TABLE.value in content_types,",
-                  "            \"has_code\": ContentType.CODE.value in content_types,",
-                  "            \"min_hierarchy_level\": min(hierarchy_levels),",
-                  "            \"max_hierarchy_level\": max(hierarchy_levels)",
-                  "        }",
-                  "",
-                  "        return Document(page_content=content, metadata=enhanced_metadata)"
-                ],
-                "line_count": 19
-              },
-              {
-                "start_line": 476,
-                "end_line": 487,
-                "language": "python",
-                "content": [
-                  "class EnterpriseChunkingPipeline:",
-                  "    \"\"\"Enterprise-grade chunking pipeline with quality assessment.\"\"\"",
-                  "    ",
-                  "    def __init__(self, config: Dict[str, Any]):",
-                  "        self.config = config",
-                  "        self.chunker = HierarchicalChunker(",
-                  "            max_chunk_size=config.get(\"max_chunk_size\", 1000),",
-                  "            overlap_ratio=config.get(\"overlap_ratio\", 0.1)",
-                  "        )",
-                  "        self.quality_assessor = ChunkQualityAssessor()"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 493,
-                "end_line": 506,
-                "language": "python",
-                "content": [
-                  "    def process_document_with_quality_control(self, document: Document) -> Dict[str, Any]:",
-                  "        \"\"\"Process document with comprehensive quality assessment.\"\"\"",
-                  "        # Create initial chunks",
-                  "        chunks = self.chunker.create_hierarchical_chunks(document)",
-                  "        ",
-                  "        # Assess chunk quality",
-                  "        quality_metrics = self.quality_assessor.assess_chunk_quality(chunks)",
-                  "        ",
-                  "        # Apply quality-based optimization if needed",
-                  "        if quality_metrics[\"overall_quality\"] < self.config.get(\"min_quality_threshold\", 0.7):",
-                  "            chunks = self._optimize_chunks(chunks, quality_metrics)",
-                  "            quality_metrics = self.quality_assessor.assess_chunk_quality(chunks)"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 512,
-                "end_line": 523,
-                "language": "python",
-                "content": [
-                  "        return {",
-                  "            \"chunks\": chunks,",
-                  "            \"quality_metrics\": quality_metrics,",
-                  "            \"processing_stats\": {",
-                  "                \"original_length\": len(document.page_content),",
-                  "                \"chunk_count\": len(chunks),",
-                  "                \"avg_chunk_size\": sum(len(c.page_content) for c in chunks) / len(chunks),",
-                  "                \"quality_score\": quality_metrics[\"overall_quality\"]",
-                  "            }",
-                  "        }"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 539,
-                "end_line": 570,
-                "language": "python",
-                "content": [
-                  "import re",
-                  "from typing import List, Dict",
-                  "",
-                  "def extract_simple_metadata(text: str) -> Dict[str, Any]:",
-                  "    \"\"\"Extract basic metadata from text content.\"\"\"",
-                  "    words = text.split()",
-                  "    ",
-                  "    # Basic statistics",
-                  "    metadata = {",
-                  "        \"word_count\": len(words),",
-                  "        \"char_count\": len(text),",
-                  "        \"sentence_count\": len(text.split('.')),",
-                  "    }",
-                  "    ",
-                  "    # Extract capitalized words (potential entities)",
-                  "    capitalized_words = re.findall(r'\\b[A-Z][a-z]+\\b', text)",
-                  "    metadata[\"potential_entities\"] = list(set(capitalized_words))[:5]",
-                  "    ",
-                  "    # Extract numbers and dates",
-                  "    numbers = re.findall(r'\\b\\d+(?:\\.\\d+)?\\b', text)",
-                  "    metadata[\"numbers\"] = [float(n) for n in numbers[:5]]",
-                  "    ",
-                  "    dates = re.findall(r'\\b\\d{1,2}[/-]\\d{1,2}[/-]\\d{4}\\b', text)",
-                  "    metadata[\"dates\"] = dates",
-                  "    ",
-                  "    # Assess content difficulty",
-                  "    long_words = [w for w in words if len(w) > 6]",
-                  "    metadata[\"difficulty_level\"] = \"advanced\" if len(long_words) / len(words) > 0.3 else \"intermediate\"",
-                  "    ",
-                  "    return metadata"
-                ],
-                "line_count": 30
-              },
-              {
-                "start_line": 584,
-                "end_line": 599,
-                "language": "python",
-                "content": [
-                  "from dataclasses import dataclass",
-                  "from datetime import datetime",
-                  "",
-                  "@dataclass",
-                  "class ExtractedMetadata:",
-                  "    \"\"\"Container for extracted metadata.\"\"\"",
-                  "    entities: List[str]",
-                  "    keywords: List[str]",
-                  "    topics: List[str]",
-                  "    dates: List[str]",
-                  "    numbers: List[float]",
-                  "    technical_terms: List[str]",
-                  "    difficulty_level: str",
-                  "    content_summary: str"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 607,
-                "end_line": 625,
-                "language": "python",
-                "content": [
-                  "class MetadataExtractor:",
-                  "    \"\"\"Extracts rich metadata from document content.\"\"\"",
-                  "",
-                  "    def __init__(self):",
-                  "        self.technical_patterns = [",
-                  "            r'\\b[A-Z]{2,}\\b',                    # Acronyms",
-                  "            r'\\b\\w+\\(\\)\\b',                      # Function calls",
-                  "            r'\\b[a-zA-Z_]\\w*\\.[a-zA-Z_]\\w*\\b',   # Object notation",
-                  "            r'\\b\\d+\\.\\d+\\.\\d+\\b',                # Version numbers",
-                  "        ]",
-                  "",
-                  "        self.topic_keywords = {",
-                  "            \"technology\": [\"software\", \"computer\", \"digital\", \"algorithm\", \"data\", \"system\"],",
-                  "            \"business\": [\"market\", \"customer\", \"revenue\", \"strategy\", \"company\", \"industry\"],",
-                  "            \"legal\": [\"contract\", \"agreement\", \"clause\", \"statute\", \"regulation\", \"compliance\"],",
-                  "            \"medical\": [\"patient\", \"treatment\", \"diagnosis\", \"medication\", \"therapy\", \"clinical\"]",
-                  "        }"
-                ],
-                "line_count": 17
-              },
-              {
-                "start_line": 633,
-                "end_line": 657,
-                "language": "python",
-                "content": [
-                  "    def extract_enhanced_metadata(self, text: str) -> ExtractedMetadata:",
-                  "        \"\"\"Extract comprehensive metadata from text.\"\"\"",
-                  "        ",
-                  "        # Extract different types of information",
-                  "        entities = self._extract_entities(text)",
-                  "        keywords = self._extract_keywords(text)",
-                  "        topics = self._infer_topics(text)",
-                  "        dates = self._extract_dates(text)",
-                  "        numbers = self._extract_numbers(text)",
-                  "        technical_terms = self._extract_technical_terms(text)",
-                  "        difficulty_level = self._assess_difficulty(text)",
-                  "        content_summary = self._generate_summary(text)",
-                  "",
-                  "        return ExtractedMetadata(",
-                  "            entities=entities,",
-                  "            keywords=keywords,",
-                  "            topics=topics,",
-                  "            dates=dates,",
-                  "            numbers=numbers,",
-                  "            technical_terms=technical_terms,",
-                  "            difficulty_level=difficulty_level,",
-                  "            content_summary=content_summary",
-                  "        )"
-                ],
-                "line_count": 23
-              },
-              {
-                "start_line": 665,
-                "end_line": 682,
-                "language": "python",
-                "content": [
-                  "    def _extract_entities(self, text: str) -> List[str]:",
-                  "        \"\"\"Extract named entities using pattern matching.\"\"\"",
-                  "        entities = []",
-                  "",
-                  "        # Extract capitalized words (potential proper nouns)",
-                  "        capitalized_words = re.findall(r'\\b[A-Z][a-z]+(?:\\s+[A-Z][a-z]+)*\\b', text)",
-                  "        entities.extend(capitalized_words)",
-                  "",
-                  "        # Extract quoted terms",
-                  "        quoted_terms = re.findall(r'\"([^\"]*)\"', text)",
-                  "        entities.extend(quoted_terms)",
-                  "",
-                  "        # Remove duplicates and filter by length",
-                  "        entities = list(set([e for e in entities if 2 < len(e) < 50]))",
-                  "",
-                  "        return entities[:10]  # Limit to top 10"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 688,
-                "end_line": 701,
-                "language": "python",
-                "content": [
-                  "    def _infer_topics(self, text: str) -> List[str]:",
-                  "        \"\"\"Infer topics from content using keyword analysis.\"\"\"",
-                  "        text_lower = text.lower()",
-                  "        topic_scores = {}",
-                  "",
-                  "        for topic, keywords in self.topic_keywords.items():",
-                  "            score = sum(text_lower.count(keyword) for keyword in keywords)",
-                  "            if score > 0:",
-                  "                topic_scores[topic] = score",
-                  "",
-                  "        # Return topics sorted by relevance",
-                  "        return sorted(topic_scores.keys(), key=lambda x: topic_scores[x], reverse=True)[:3]"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 707,
-                "end_line": 732,
-                "language": "python",
-                "content": [
-                  "    def _assess_difficulty(self, text: str) -> str:",
-                  "        \"\"\"Assess content difficulty level.\"\"\"",
-                  "        words = text.split()",
-                  "        sentences = text.split('.')",
-                  "",
-                  "        if not words or not sentences:",
-                  "            return \"unknown\"",
-                  "",
-                  "        # Calculate readability metrics",
-                  "        avg_words_per_sentence = len(words) / len(sentences)",
-                  "        long_words = len([w for w in words if len(w) > 6])",
-                  "        long_word_ratio = long_words / len(words) if words else 0",
-                  "",
-                  "        # Technical term density",
-                  "        technical_terms = len(self._extract_technical_terms(text))",
-                  "        technical_density = technical_terms / len(words) if words else 0",
-                  "",
-                  "        # Determine difficulty",
-                  "        if avg_words_per_sentence > 20 or long_word_ratio > 0.3 or technical_density > 0.1:",
-                  "            return \"advanced\"",
-                  "        elif avg_words_per_sentence > 15 or long_word_ratio > 0.2:",
-                  "            return \"intermediate\"",
-                  "        else:",
-                  "            return \"beginner\""
-                ],
-                "line_count": 24
-              },
-              {
-                "start_line": 742,
-                "end_line": 749,
-                "language": "python",
-                "content": [
-                  "class MetadataEnhancedChunker:",
-                  "    \"\"\"Chunker that enriches chunks with extracted metadata.\"\"\"",
-                  "",
-                  "    def __init__(self, max_chunk_size: int = 1000):",
-                  "        self.hierarchical_chunker = HierarchicalChunker(max_chunk_size=max_chunk_size)",
-                  "        self.metadata_extractor = MetadataExtractor()"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 755,
-                "end_line": 768,
-                "language": "python",
-                "content": [
-                  "    def create_enhanced_chunks(self, document: Document) -> List[Document]:",
-                  "        \"\"\"Create chunks with rich metadata.\"\"\"",
-                  "        # First, create hierarchical chunks",
-                  "        chunks = self.hierarchical_chunker.create_hierarchical_chunks(document)",
-                  "",
-                  "        # Enhance each chunk with extracted metadata",
-                  "        enhanced_chunks = []",
-                  "        for chunk in chunks:",
-                  "            enhanced_chunk = self._enhance_chunk_metadata(chunk)",
-                  "            enhanced_chunks.append(enhanced_chunk)",
-                  "",
-                  "        return enhanced_chunks"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 774,
-                "end_line": 791,
-                "language": "python",
-                "content": [
-                  "    def _enhance_chunk_metadata(self, chunk: Document) -> Document:",
-                  "        \"\"\"Enhance chunk with extracted metadata.\"\"\"",
-                  "        # Extract metadata from chunk content",
-                  "        extracted_metadata = self.metadata_extractor.extract_enhanced_metadata(chunk.page_content)",
-                  "",
-                  "        # Merge extracted metadata with existing metadata",
-                  "        enhanced_metadata = {",
-                  "            **chunk.metadata,",
-                  "            \"entities\": extracted_metadata.entities,",
-                  "            \"keywords\": extracted_metadata.keywords,",
-                  "            \"topics\": extracted_metadata.topics,",
-                  "            \"technical_terms\": extracted_metadata.technical_terms,",
-                  "            \"difficulty_level\": extracted_metadata.difficulty_level,",
-                  "            \"content_summary\": extracted_metadata.content_summary,",
-                  "            \"enhanced_at\": datetime.now().isoformat()",
-                  "        }"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 797,
-                "end_line": 823,
-                "language": "python",
-                "content": [
-                  "        # Create searchable content that includes metadata",
-                  "        searchable_content = self._create_searchable_content(chunk.page_content, extracted_metadata)",
-                  "",
-                  "        return Document(page_content=searchable_content, metadata=enhanced_metadata)",
-                  "",
-                  "    def _create_searchable_content(self, original_content: str, metadata: ExtractedMetadata) -> str:",
-                  "        \"\"\"Create enhanced searchable content.\"\"\"",
-                  "        metadata_text_parts = []",
-                  "",
-                  "        if metadata.keywords:",
-                  "            metadata_text_parts.append(f\"Keywords: {', '.join(metadata.keywords)}\")",
-                  "",
-                  "        if metadata.topics:",
-                  "            metadata_text_parts.append(f\"Topics: {', '.join(metadata.topics)}\")",
-                  "",
-                  "        if metadata.entities:",
-                  "            metadata_text_parts.append(f\"Entities: {', '.join(metadata.entities[:5])}\")",
-                  "",
-                  "        metadata_text = \"\\n\".join(metadata_text_parts)",
-                  "",
-                  "        # Combine original content with metadata",
-                  "        if metadata_text:",
-                  "            return f\"{original_content}\\n\\n--- Metadata ---\\n{metadata_text}\"",
-                  "        else:",
-                  "            return original_content"
-                ],
-                "line_count": 25
-              },
-              {
-                "start_line": 837,
-                "end_line": 867,
-                "language": "python",
-                "content": [
-                  "def process_simple_table(table_text: str) -> Dict[str, Any]:",
-                  "    \"\"\"Process table content while preserving structure.\"\"\"",
-                  "    lines = table_text.strip().split('\\n')",
-                  "    table_lines = [line for line in lines if '|' in line]",
-                  "    ",
-                  "    if not table_lines:",
-                  "        return {\"error\": \"No table structure found\"}",
-                  "    ",
-                  "    # Extract headers from first row",
-                  "    header_row = table_lines[0]",
-                  "    headers = [cell.strip() for cell in header_row.split('|') if cell.strip()]",
-                  "    ",
-                  "    # Count data rows (excluding header and separator)",
-                  "    data_rows = len(table_lines) - 2 if len(table_lines) > 2 else 0",
-                  "    ",
-                  "    # Create enhanced description",
-                  "    description = f\"Table with {data_rows} rows and {len(headers)} columns\"",
-                  "    if headers:",
-                  "        description += f\" containing data about: {', '.join(headers)}\"",
-                  "    ",
-                  "    return {",
-                  "        \"enhanced_content\": f\"{description}\\n\\n{table_text}\",",
-                  "        \"metadata\": {",
-                  "            \"content_type\": \"table\",",
-                  "            \"row_count\": data_rows,",
-                  "            \"column_count\": len(headers),",
-                  "            \"headers\": headers",
-                  "        }",
-                  "    }"
-                ],
-                "line_count": 29
-              },
-              {
-                "start_line": 879,
-                "end_line": 908,
-                "language": "python",
-                "content": [
-                  "def assess_basic_quality(chunks: List[str]) -> Dict[str, float]:",
-                  "    \"\"\"Assess basic quality metrics for chunks.\"\"\"",
-                  "    if not chunks:",
-                  "        return {\"error\": \"No chunks to assess\"}",
-                  "    ",
-                  "    # Calculate size consistency",
-                  "    chunk_sizes = [len(chunk) for chunk in chunks]",
-                  "    avg_size = sum(chunk_sizes) / len(chunk_sizes)",
-                  "    size_variance = sum((size - avg_size) ** 2 for size in chunk_sizes) / len(chunk_sizes)",
-                  "    size_consistency = 1.0 / (1.0 + size_variance / (avg_size ** 2))",
-                  "    ",
-                  "    # Calculate information density",
-                  "    densities = []",
-                  "    for chunk in chunks:",
-                  "        words = chunk.split()",
-                  "        unique_words = set(words)",
-                  "        if words:",
-                  "            density = len(unique_words) / len(words)",
-                  "            densities.append(density)",
-                  "    ",
-                  "    avg_density = sum(densities) / len(densities) if densities else 0",
-                  "    ",
-                  "    return {",
-                  "        \"size_consistency\": size_consistency,",
-                  "        \"avg_information_density\": avg_density,",
-                  "        \"chunk_count\": len(chunks),",
-                  "        \"avg_chunk_size\": avg_size",
-                  "    }"
-                ],
-                "line_count": 28
-              },
-              {
-                "start_line": 914,
-                "end_line": 925,
-                "language": "python",
-                "content": [
-                  "class AdvancedProcessingPipeline:",
-                  "    \"\"\"Complete advanced document processing pipeline.\"\"\"",
-                  "",
-                  "    def __init__(self, max_chunk_size: int = 1000, enable_quality_assessment: bool = True):",
-                  "        self.max_chunk_size = max_chunk_size",
-                  "        self.enable_quality_assessment = enable_quality_assessment",
-                  "        ",
-                  "        # Initialize processors",
-                  "        self.metadata_chunker = MetadataEnhancedChunker(max_chunk_size=max_chunk_size)",
-                  "        self.quality_assessor = ChunkQualityAssessor() if enable_quality_assessment else None"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 933,
-                "end_line": 947,
-                "language": "python",
-                "content": [
-                  "    def process_document(self, document: Document) -> Dict[str, Any]:",
-                  "        \"\"\"Process document using the most appropriate strategy.\"\"\"",
-                  "        ",
-                  "        # Analyze document characteristics",
-                  "        doc_analysis = self._analyze_document_complexity(document)",
-                  "        ",
-                  "        # Choose processing strategy",
-                  "        if doc_analysis[\"has_tables\"]:",
-                  "            print(\"Detected tables - using table-aware processing...\")",
-                  "            processed_chunks = self._process_with_table_awareness(document)",
-                  "        else:",
-                  "            print(\"Using standard hierarchical processing...\")",
-                  "            processed_chunks = self.metadata_chunker.create_enhanced_chunks(document)"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 953,
-                "end_line": 966,
-                "language": "python",
-                "content": [
-                  "        # Assess quality if enabled",
-                  "        quality_metrics = {}",
-                  "        if self.enable_quality_assessment and self.quality_assessor:",
-                  "            quality_metrics = self.quality_assessor.assess_chunk_quality(processed_chunks)",
-                  "        ",
-                  "        # Add processing metadata",
-                  "        for chunk in processed_chunks:",
-                  "            chunk.metadata.update({",
-                  "                \"processing_strategy\": doc_analysis[\"recommended_strategy\"],",
-                  "                \"document_complexity\": doc_analysis[\"complexity_score\"],",
-                  "                \"processing_pipeline\": \"advanced_v2\"",
-                  "            })"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 972,
-                "end_line": 983,
-                "language": "python",
-                "content": [
-                  "        return {",
-                  "            \"chunks\": processed_chunks,",
-                  "            \"document_analysis\": doc_analysis,",
-                  "            \"quality_metrics\": quality_metrics,",
-                  "            \"processing_stats\": {",
-                  "                \"chunk_count\": len(processed_chunks),",
-                  "                \"total_processed_chars\": sum(len(c.page_content) for c in processed_chunks),",
-                  "                \"avg_chunk_size\": sum(len(c.page_content) for c in processed_chunks) / len(processed_chunks)",
-                  "            }",
-                  "        }"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 989,
-                "end_line": 999,
-                "language": "python",
-                "content": [
-                  "    def _analyze_document_complexity(self, document: Document) -> Dict[str, Any]:",
-                  "        \"\"\"Analyze document to determine optimal processing strategy.\"\"\"",
-                  "        content = document.page_content",
-                  "",
-                  "        # Detect various content types",
-                  "        has_tables = \"|\" in content and content.count(\"|\") > 5",
-                  "        has_code = \"```\" in content or content.count(\"    \") > 3",
-                  "        has_lists = content.count(\"- \") > 3 or content.count(\"* \") > 3",
-                  "        has_headings = content.count(\"#\") > 2"
+                  "        })"
                 ],
                 "line_count": 9
               },
               {
-                "start_line": 1005,
-                "end_line": 1029,
+                "start_line": 187,
+                "end_line": 196,
                 "language": "python",
                 "content": [
-                  "        # Calculate complexity score",
-                  "        complexity_score = 0",
-                  "        if has_tables: complexity_score += 3",
-                  "        if has_code: complexity_score += 2",
-                  "        if has_lists: complexity_score += 1",
-                  "        if has_headings: complexity_score += 2",
-                  "",
-                  "        # Determine strategy",
-                  "        if has_tables:",
-                  "            strategy = \"table_aware\"",
-                  "        elif complexity_score > 4:",
-                  "            strategy = \"hierarchical\"",
-                  "        else:",
-                  "            strategy = \"standard\"",
-                  "",
-                  "        return {",
-                  "            \"has_tables\": has_tables,",
-                  "            \"has_code\": has_code,",
-                  "            \"has_lists\": has_lists,",
-                  "            \"has_headings\": has_headings,",
-                  "            \"complexity_score\": complexity_score,",
-                  "            \"recommended_strategy\": strategy",
-                  "        }"
+                  "        # Analyze current context",
+                  "        context_analysis = await self.context_analyzer.analyze_context({",
+                  "            'device_trust_level': await self._assess_device_trust(user_context['device']),",
+                  "            'network_trust_level': await self._assess_network_trust(user_context['ip_address']),",
+                  "            'time_anomaly': await self._check_time_anomaly(user_context),",
+                  "            'location_anomaly': await self._check_location_anomaly(user_context)",
+                  "        })",
+                  ""
                 ],
-                "line_count": 23
+                "line_count": 8
               },
               {
-                "start_line": 1037,
-                "end_line": 1061,
+                "start_line": 199,
+                "end_line": 209,
                 "language": "python",
                 "content": [
-                  "class ChunkQualityAssessor:",
-                  "    \"\"\"Comprehensive chunk quality assessment.\"\"\"",
-                  "",
-                  "    def assess_chunk_quality(self, chunks: List[Document]) -> Dict[str, float]:",
-                  "        \"\"\"Multi-dimensional quality assessment.\"\"\"",
-                  "        if not chunks:",
-                  "            return {metric: 0.0 for metric in [\"coherence\", \"density\", \"consistency\", \"overall\"]}",
-                  "",
-                  "        # Calculate individual metrics",
-                  "        coherence = self._calculate_coherence_score(chunks)",
-                  "        density = self._calculate_information_density(chunks)",
-                  "        consistency = self._calculate_size_consistency(chunks)",
-                  "        metadata_richness = self._calculate_metadata_richness(chunks)",
-                  "",
-                  "        overall_quality = (coherence + density + consistency + metadata_richness) / 4",
-                  "",
-                  "        return {",
-                  "            \"coherence_score\": coherence,",
-                  "            \"information_density\": density,",
-                  "            \"size_consistency\": consistency,",
-                  "            \"metadata_richness\": metadata_richness,",
-                  "            \"overall_quality\": overall_quality",
-                  "        }"
+                  "        # Make access decision",
+                  "        access_decision = await self.access_decision_engine.make_decision({",
+                  "            'risk_score': risk_assessment['risk_score'],",
+                  "            'context_score': context_analysis['context_score'],",
+                  "            'policy_requirements': await self.policy_evaluator.get_applicable_policies(",
+                  "                request['resource'], request['action']",
+                  "            ),",
+                  "            'trust_level': risk_assessment['trust_level']",
+                  "        })"
                 ],
-                "line_count": 23
+                "line_count": 9
               },
               {
-                "start_line": 1067,
-                "end_line": 1085,
-                "language": "python",
+                "start_line": 225,
+                "end_line": 234,
+                "language": "",
                 "content": [
-                  "    def _calculate_coherence_score(self, chunks: List[Document]) -> float:",
-                  "        \"\"\"Calculate topic coherence between adjacent chunks.\"\"\"",
-                  "        if len(chunks) < 2:",
-                  "            return 1.0",
                   "",
-                  "        coherence_scores = []",
-                  "        for i in range(len(chunks) - 1):",
-                  "            current_topics = set(chunks[i].metadata.get(\"topics\", []))",
-                  "            next_topics = set(chunks[i + 1].metadata.get(\"topics\", []))",
-                  "            ",
-                  "            if current_topics and next_topics:",
-                  "                overlap = len(current_topics & next_topics)",
-                  "                union = len(current_topics | next_topics)",
-                  "                score = overlap / union if union > 0 else 0",
-                  "                coherence_scores.append(score)",
                   "",
-                  "        return sum(coherence_scores) / len(coherence_scores) if coherence_scores else 0.0"
+                  "#### **Data Governance and Classification**",
+                  "",
+                  "Implement comprehensive data governance for enterprise RAG systems:",
+                  "",
+                  "### Step 3: Enterprise Data Governance Framework",
+                  ""
                 ],
-                "line_count": 17
+                "line_count": 8
               },
               {
-                "start_line": 1091,
-                "end_line": 1105,
-                "language": "python",
+                "start_line": 245,
+                "end_line": 249,
+                "language": "",
                 "content": [
-                  "    def _calculate_information_density(self, chunks: List[Document]) -> float:",
-                  "        \"\"\"Calculate average information density across chunks.\"\"\"",
-                  "        densities = []",
-                  "        ",
-                  "        for chunk in chunks:",
-                  "            words = chunk.page_content.split()",
-                  "            unique_words = set(words)",
-                  "            ",
-                  "            if words:",
-                  "                density = len(unique_words) / len(words)",
-                  "                densities.append(density)",
-                  "        ",
-                  "        return sum(densities) / len(densities) if densities else 0.0"
+                  "",
+                  "The data governance framework initializes with components for comprehensive data management. Data cataloging provides visibility, lineage tracking enables impact analysis, and quality monitoring ensures data integrity throughout the RAG pipeline.",
+                  ""
                 ],
-                "line_count": 13
+                "line_count": 3
               },
               {
-                "start_line": 1111,
-                "end_line": 1124,
-                "language": "python",
-                "content": [
-                  "    def _calculate_metadata_richness(self, chunks: List[Document]) -> float:",
-                  "        \"\"\"Assess metadata completeness across chunks.\"\"\"",
-                  "        expected_fields = [\"topics\", \"entities\", \"keywords\", \"difficulty_level\"]",
-                  "        ",
-                  "        richness_scores = []",
-                  "        for chunk in chunks:",
-                  "            present_fields = sum(1 for field in expected_fields ",
-                  "                               if field in chunk.metadata and chunk.metadata[field])",
-                  "            score = present_fields / len(expected_fields)",
-                  "            richness_scores.append(score)",
-                  "        ",
-                  "        return sum(richness_scores) / len(richness_scores) if richness_scores else 0.0"
-                ],
-                "line_count": 12
-              }
-            ],
-            "large_blocks": [
-              {
-                "start_line": 20,
-                "end_line": 54,
-                "language": "python",
+                "start_line": 278,
+                "end_line": 282,
+                "language": "",
                 "content": [
                   "",
-                  "# Simple content type detection",
-                  "",
-                  "from enum import Enum",
-                  "",
-                  "class ContentType(Enum):",
-                  "    HEADING = \"heading\"",
-                  "    PARAGRAPH = \"paragraph\" ",
-                  "    TABLE = \"table\"",
-                  "    CODE = \"code\"",
-                  "    LIST = \"list\"",
-                  "",
-                  "def detect_simple_content_type(text_line):",
-                  "    \"\"\"Detect content type from a single line of text.\"\"\"",
-                  "    text = text_line.strip()",
-                  "    ",
-                  "    # Check for markdown heading",
-                  "    if text.startswith('#'):",
-                  "        return ContentType.HEADING",
-                  "    ",
-                  "    # Check for table (pipe-separated)",
-                  "    if '|' in text and text.count('|') >= 2:",
-                  "        return ContentType.TABLE",
-                  "        ",
-                  "    # Check for code (starts with 4 spaces or tab)",
-                  "    if text.startswith('    ') or text.startswith('\\t'):",
-                  "        return ContentType.CODE",
-                  "        ",
-                  "    # Check for list item",
-                  "    if text.startswith('- ') or text.startswith('* '):",
-                  "        return ContentType.LIST",
-                  "        ",
-                  "    return ContentType.PARAGRAPH"
+                  "Data discovery performs comprehensive analysis of each source, including deep scanning for schema understanding, sample analysis for content patterns, and automatic sensitivity detection for privacy and security concerns.",
+                  ""
                 ],
-                "line_count": 33
+                "line_count": 3
               },
               {
-                "start_line": 69,
-                "end_line": 91,
-                "language": "python",
+                "start_line": 290,
+                "end_line": 296,
+                "language": "",
                 "content": [
-                  "from dataclasses import dataclass",
-                  "from typing import Dict, Any",
                   "",
-                  "@dataclass",
-                  "class DocumentElement:",
-                  "    \"\"\"Represents a structured document element with metadata.\"\"\"",
-                  "    content: str",
-                  "    element_type: ContentType",
-                  "    level: int  # Hierarchy level (0=top, 1=section, 2=subsection)",
-                  "    metadata: Dict[str, Any]",
-                  "    position: int  # Position in document",
-                  "    ",
-                  "    def get_hierarchy_context(self):",
-                  "        \"\"\"Get human-readable hierarchy information.\"\"\"",
-                  "        hierarchy_labels = {",
-                  "            0: \"Document Root\",",
-                  "            1: \"Major Section\", ",
-                  "            2: \"Subsection\",",
-                  "            3: \"Minor Section\"",
-                  "        }",
-                  "        return hierarchy_labels.get(self.level, f\"Level {self.level}\")"
+                  "Automated classification applies multiple frameworks to identify personally identifiable information (PII), protected health information (PHI), financial data, and proprietary content with high confidence thresholds.",
+                  "",
+                  "Next, we establish data lineage tracking to map data flow and transformations:",
+                  ""
                 ],
-                "line_count": 21
+                "line_count": 5
               },
               {
-                "start_line": 170,
-                "end_line": 192,
-                "language": "python",
+                "start_line": 304,
+                "end_line": 308,
+                "language": "",
                 "content": [
-                  "import re",
-                  "from typing import List, Tuple",
                   "",
-                  "class AdvancedDocumentAnalyzer:",
-                  "    \"\"\"Enterprise-grade document analysis with domain-specific patterns.\"\"\"",
-                  "    ",
-                  "    def __init__(self):",
-                  "        self.domain_patterns = {",
-                  "            \"legal\": {",
-                  "                \"section_markers\": [r\"\u00a7\\s*\\d+\", r\"Article\\s+[IVX]+\", r\"Section\\s+\\d+\"],",
-                  "                \"citations\": [r\"\\d+\\s+U\\.S\\.C\\.\\s+\u00a7\\s+\\d+\", r\"\\d+\\s+F\\.\\d+d\\s+\\d+\"]",
-                  "            },",
-                  "            \"medical\": {",
-                  "                \"dosages\": [r\"\\d+\\s*mg\", r\"\\d+\\s*ml\", r\"\\d+\\s*cc\"],",
-                  "                \"medications\": [r\"[A-Z][a-z]+(?:in|ol|ide|ine)\"]",
-                  "            },",
-                  "            \"technical\": {",
-                  "                \"apis\": [r\"[A-Z][a-zA-Z]+\\.[a-zA-Z]+\\(\\)\", r\"HTTP[S]?\\://\"],",
-                  "                \"versions\": [r\"v?\\d+\\.\\d+\\.\\d+\", r\"version\\s+\\d+\"]",
-                  "            }",
-                  "        }"
+                  "Lineage tracking maps data flow from sources through transformations to downstream systems. This enables impact analysis for changes and supports compliance requirements for data provenance.",
+                  ""
                 ],
-                "line_count": 21
+                "line_count": 3
               },
               {
-                "start_line": 539,
+                "start_line": 316,
+                "end_line": 320,
+                "language": "",
+                "content": [
+                  "",
+                  "Quality monitoring tracks four critical dimensions continuously. Real-time monitoring enables immediate detection of data quality issues that could impact RAG system performance or accuracy.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 346,
+                "end_line": 356,
+                "language": "",
+                "content": [
+                  "",
+                  "### CI/CD and DevOps for RAG Systems",
+                  "",
+                  "#### **Advanced CI/CD Pipeline for RAG**",
+                  "",
+                  "Implement sophisticated CI/CD pipeline specifically designed for RAG systems:",
+                  "",
+                  "### Step 1: RAG-Specific CI/CD Pipeline",
+                  ""
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 368,
+                "end_line": 372,
+                "language": "",
+                "content": [
+                  "",
+                  "The RAG CI/CD pipeline initializes with specialized validators for code, models, and data. Unlike traditional CI/CD, RAG systems require validation of ML models, data quality, and RAG-specific integration patterns.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 406,
+                "end_line": 410,
+                "language": "",
+                "content": [
+                  "",
+                  "The pipeline begins with comprehensive code validation including RAG-specific patterns. Unlike standard CI/CD, this validates retrieval algorithms, embedding models, and generation components for enterprise requirements.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 421,
+                "end_line": 425,
+                "language": "",
+                "content": [
+                  "",
+                  "Model validation ensures embedding consistency across updates, maintains generation quality standards, meets performance benchmarks, and detects potential bias issues in model outputs.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 434,
+                "end_line": 438,
+                "language": "",
+                "content": [
+                  "",
+                  "Data validation verifies schema compatibility, maintains quality standards, ensures privacy compliance, and preserves lineage integrity throughout the data processing pipeline.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 523,
+                "end_line": 532,
+                "language": "",
+                "content": [
+                  "",
+                  "",
+                  "#### **Infrastructure as Code for RAG**",
+                  "",
+                  "Implement infrastructure as code specifically for RAG deployments:",
+                  "",
+                  "### Step 2: RAG Infrastructure as Code",
+                  ""
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 544,
+                "end_line": 548,
+                "language": "",
+                "content": [
+                  "",
+                  "The RAGInfrastructureAsCode class serves as the central orchestrator for deploying enterprise RAG systems using Infrastructure as Code principles. The three core managers handle different layers of the deployment stack: Terraform provisions cloud infrastructure, Kubernetes manages container orchestration, and Helm handles application deployments. This separation of concerns allows for modular, maintainable infrastructure management.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 553,
+                "end_line": 557,
+                "language": "",
+                "content": [
+                  "",
+                  "Environment management components handle the critical operational aspects of RAG deployments. The EnvironmentManager ensures consistent configuration across development, staging, and production environments. SecretManager handles sensitive data like API keys and database passwords using enterprise-grade secret management practices. ConfigurationManager maintains environment-specific settings that control RAG system behavior.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 566,
                 "end_line": 570,
-                "language": "python",
+                "language": "",
                 "content": [
-                  "import re",
-                  "from typing import List, Dict",
                   "",
-                  "def extract_simple_metadata(text: str) -> Dict[str, Any]:",
-                  "    \"\"\"Extract basic metadata from text content.\"\"\"",
-                  "    words = text.split()",
-                  "    ",
-                  "    # Basic statistics",
-                  "    metadata = {",
-                  "        \"word_count\": len(words),",
-                  "        \"char_count\": len(text),",
-                  "        \"sentence_count\": len(text.split('.')),",
-                  "    }",
-                  "    ",
-                  "    # Extract capitalized words (potential entities)",
-                  "    capitalized_words = re.findall(r'\\b[A-Z][a-z]+\\b', text)",
-                  "    metadata[\"potential_entities\"] = list(set(capitalized_words))[:5]",
-                  "    ",
-                  "    # Extract numbers and dates",
-                  "    numbers = re.findall(r'\\b\\d+(?:\\.\\d+)?\\b', text)",
-                  "    metadata[\"numbers\"] = [float(n) for n in numbers[:5]]",
-                  "    ",
-                  "    dates = re.findall(r'\\b\\d{1,2}[/-]\\d{1,2}[/-]\\d{4}\\b', text)",
-                  "    metadata[\"dates\"] = dates",
-                  "    ",
-                  "    # Assess content difficulty",
-                  "    long_words = [w for w in words if len(w) > 6]",
-                  "    metadata[\"difficulty_level\"] = \"advanced\" if len(long_words) / len(words) > 0.3 else \"intermediate\"",
-                  "    ",
-                  "    return metadata"
+                  "The deployment method begins by creating a unique deployment tracking structure. The deployment_id includes a timestamp to ensure uniqueness and enable rollback capabilities. The components dictionary will collect results from each deployment stage, providing comprehensive visibility into the infrastructure provisioning process.",
+                  ""
                 ],
-                "line_count": 30
+                "line_count": 3
               },
               {
-                "start_line": 633,
-                "end_line": 657,
-                "language": "python",
+                "start_line": 582,
+                "end_line": 586,
+                "language": "",
                 "content": [
-                  "    def extract_enhanced_metadata(self, text: str) -> ExtractedMetadata:",
-                  "        \"\"\"Extract comprehensive metadata from text.\"\"\"",
-                  "        ",
-                  "        # Extract different types of information",
-                  "        entities = self._extract_entities(text)",
-                  "        keywords = self._extract_keywords(text)",
-                  "        topics = self._infer_topics(text)",
-                  "        dates = self._extract_dates(text)",
-                  "        numbers = self._extract_numbers(text)",
-                  "        technical_terms = self._extract_technical_terms(text)",
-                  "        difficulty_level = self._assess_difficulty(text)",
-                  "        content_summary = self._generate_summary(text)",
                   "",
-                  "        return ExtractedMetadata(",
-                  "            entities=entities,",
-                  "            keywords=keywords,",
-                  "            topics=topics,",
-                  "            dates=dates,",
-                  "            numbers=numbers,",
-                  "            technical_terms=technical_terms,",
-                  "            difficulty_level=difficulty_level,",
-                  "            content_summary=content_summary",
-                  "        )"
+                  "Cloud infrastructure provisioning is the foundation layer that creates all the cloud resources needed for RAG systems. The Terraform modules follow a modular approach: networking establishes VPCs and subnets, security groups define access rules, load balancers distribute traffic, storage provides persistent data volumes, and monitoring sets up observability infrastructure. This modular approach allows for independent updates and maintenance of different infrastructure components.",
+                  ""
                 ],
-                "line_count": 23
+                "line_count": 3
               },
               {
-                "start_line": 707,
-                "end_line": 732,
-                "language": "python",
+                "start_line": 598,
+                "end_line": 602,
+                "language": "",
                 "content": [
-                  "    def _assess_difficulty(self, text: str) -> str:",
-                  "        \"\"\"Assess content difficulty level.\"\"\"",
-                  "        words = text.split()",
-                  "        sentences = text.split('.')",
                   "",
-                  "        if not words or not sentences:",
-                  "            return \"unknown\"",
-                  "",
-                  "        # Calculate readability metrics",
-                  "        avg_words_per_sentence = len(words) / len(sentences)",
-                  "        long_words = len([w for w in words if len(w) > 6])",
-                  "        long_word_ratio = long_words / len(words) if words else 0",
-                  "",
-                  "        # Technical term density",
-                  "        technical_terms = len(self._extract_technical_terms(text))",
-                  "        technical_density = technical_terms / len(words) if words else 0",
-                  "",
-                  "        # Determine difficulty",
-                  "        if avg_words_per_sentence > 20 or long_word_ratio > 0.3 or technical_density > 0.1:",
-                  "            return \"advanced\"",
-                  "        elif avg_words_per_sentence > 15 or long_word_ratio > 0.2:",
-                  "            return \"intermediate\"",
-                  "        else:",
-                  "            return \"beginner\""
+                  "Kubernetes resource deployment creates the container orchestration layer with proper namespace isolation. The three namespaces separate concerns: rag-system contains core RAG components, rag-monitoring isolates observability tools, and rag-data handles data processing components. The apply_order ensures dependencies are created first - namespaces before everything else, secrets and configmaps before applications that need them, and services before deployments that expose them.",
+                  ""
                 ],
-                "line_count": 24
+                "line_count": 3
               },
               {
-                "start_line": 797,
-                "end_line": 823,
-                "language": "python",
+                "start_line": 625,
+                "end_line": 629,
+                "language": "",
                 "content": [
-                  "        # Create searchable content that includes metadata",
-                  "        searchable_content = self._create_searchable_content(chunk.page_content, extracted_metadata)",
                   "",
-                  "        return Document(page_content=searchable_content, metadata=enhanced_metadata)",
-                  "",
-                  "    def _create_searchable_content(self, original_content: str, metadata: ExtractedMetadata) -> str:",
-                  "        \"\"\"Create enhanced searchable content.\"\"\"",
-                  "        metadata_text_parts = []",
-                  "",
-                  "        if metadata.keywords:",
-                  "            metadata_text_parts.append(f\"Keywords: {', '.join(metadata.keywords)}\")",
-                  "",
-                  "        if metadata.topics:",
-                  "            metadata_text_parts.append(f\"Topics: {', '.join(metadata.topics)}\")",
-                  "",
-                  "        if metadata.entities:",
-                  "            metadata_text_parts.append(f\"Entities: {', '.join(metadata.entities[:5])}\")",
-                  "",
-                  "        metadata_text = \"\\n\".join(metadata_text_parts)",
-                  "",
-                  "        # Combine original content with metadata",
-                  "        if metadata_text:",
-                  "            return f\"{original_content}\\n\\n--- Metadata ---\\n{metadata_text}\"",
-                  "        else:",
-                  "            return original_content"
+                  "Helm chart deployment handles the application layer with sophisticated package management. Each chart represents a complete RAG subsystem: rag-core contains the main retrieval and generation services, vector-store manages embeddings and similarity search, and monitoring provides observability. Helm's templating system allows the same charts to be deployed across different environments with environment-specific values, ensuring consistency while supporting customization.",
+                  ""
                 ],
-                "line_count": 25
+                "line_count": 3
               },
               {
-                "start_line": 837,
-                "end_line": 867,
-                "language": "python",
+                "start_line": 639,
+                "end_line": 643,
+                "language": "",
                 "content": [
-                  "def process_simple_table(table_text: str) -> Dict[str, Any]:",
-                  "    \"\"\"Process table content while preserving structure.\"\"\"",
-                  "    lines = table_text.strip().split('\\n')",
-                  "    table_lines = [line for line in lines if '|' in line]",
-                  "    ",
-                  "    if not table_lines:",
-                  "        return {\"error\": \"No table structure found\"}",
-                  "    ",
-                  "    # Extract headers from first row",
-                  "    header_row = table_lines[0]",
-                  "    headers = [cell.strip() for cell in header_row.split('|') if cell.strip()]",
-                  "    ",
-                  "    # Count data rows (excluding header and separator)",
-                  "    data_rows = len(table_lines) - 2 if len(table_lines) > 2 else 0",
-                  "    ",
-                  "    # Create enhanced description",
-                  "    description = f\"Table with {data_rows} rows and {len(headers)} columns\"",
-                  "    if headers:",
-                  "        description += f\" containing data about: {', '.join(headers)}\"",
-                  "    ",
-                  "    return {",
-                  "        \"enhanced_content\": f\"{description}\\n\\n{table_text}\",",
-                  "        \"metadata\": {",
-                  "            \"content_type\": \"table\",",
-                  "            \"row_count\": data_rows,",
-                  "            \"column_count\": len(headers),",
-                  "            \"headers\": headers",
-                  "        }",
-                  "    }"
+                  "",
+                  "Environment configuration management ensures that all RAG components receive the correct settings for their target environment. The three configuration sources follow Kubernetes best practices: environment variables for simple settings, ConfigMaps for complex configuration files, and Secrets for sensitive data. Validation ensures that required configuration is present and properly formatted before applications start.",
+                  ""
                 ],
-                "line_count": 29
+                "line_count": 3
               },
               {
-                "start_line": 879,
-                "end_line": 908,
-                "language": "python",
+                "start_line": 651,
+                "end_line": 655,
+                "language": "",
                 "content": [
-                  "def assess_basic_quality(chunks: List[str]) -> Dict[str, float]:",
-                  "    \"\"\"Assess basic quality metrics for chunks.\"\"\"",
-                  "    if not chunks:",
-                  "        return {\"error\": \"No chunks to assess\"}",
-                  "    ",
-                  "    # Calculate size consistency",
-                  "    chunk_sizes = [len(chunk) for chunk in chunks]",
-                  "    avg_size = sum(chunk_sizes) / len(chunk_sizes)",
-                  "    size_variance = sum((size - avg_size) ** 2 for size in chunk_sizes) / len(chunk_sizes)",
-                  "    size_consistency = 1.0 / (1.0 + size_variance / (avg_size ** 2))",
-                  "    ",
-                  "    # Calculate information density",
-                  "    densities = []",
-                  "    for chunk in chunks:",
-                  "        words = chunk.split()",
-                  "        unique_words = set(words)",
-                  "        if words:",
-                  "            density = len(unique_words) / len(words)",
-                  "            densities.append(density)",
-                  "    ",
-                  "    avg_density = sum(densities) / len(densities) if densities else 0",
-                  "    ",
-                  "    return {",
-                  "        \"size_consistency\": size_consistency,",
-                  "        \"avg_information_density\": avg_density,",
-                  "        \"chunk_count\": len(chunks),",
-                  "        \"avg_chunk_size\": avg_size",
-                  "    }"
+                  "",
+                  "The final deployment stages establish enterprise-grade monitoring and validate the entire system. Monitoring setup deploys metrics collection, logging aggregation, distributed tracing, and alerting systems specifically tuned for RAG workloads. Deployment validation runs comprehensive health checks to ensure all components are functioning correctly before marking the deployment as successful.",
+                  ""
                 ],
-                "line_count": 28
+                "line_count": 3
               },
               {
-                "start_line": 1005,
-                "end_line": 1029,
-                "language": "python",
+                "start_line": 665,
+                "end_line": 669,
+                "language": "",
                 "content": [
-                  "        # Calculate complexity score",
-                  "        complexity_score = 0",
-                  "        if has_tables: complexity_score += 3",
-                  "        if has_code: complexity_score += 2",
-                  "        if has_lists: complexity_score += 1",
-                  "        if has_headings: complexity_score += 2",
                   "",
-                  "        # Determine strategy",
-                  "        if has_tables:",
-                  "            strategy = \"table_aware\"",
-                  "        elif complexity_score > 4:",
-                  "            strategy = \"hierarchical\"",
-                  "        else:",
-                  "            strategy = \"standard\"",
-                  "",
-                  "        return {",
-                  "            \"has_tables\": has_tables,",
-                  "            \"has_code\": has_code,",
-                  "            \"has_lists\": has_lists,",
-                  "            \"has_headings\": has_headings,",
-                  "            \"complexity_score\": complexity_score,",
-                  "            \"recommended_strategy\": strategy",
-                  "        }"
+                  "Error handling and result reporting provide critical visibility into deployment outcomes. Successful deployments record completion time for performance tracking and audit trails. Failed deployments capture detailed error information and failure timestamps to support rapid troubleshooting and rollback procedures.",
+                  ""
                 ],
-                "line_count": 23
+                "line_count": 3
               },
               {
-                "start_line": 1037,
-                "end_line": 1061,
-                "language": "python",
+                "start_line": 686,
+                "end_line": 690,
+                "language": "",
                 "content": [
-                  "class ChunkQualityAssessor:",
-                  "    \"\"\"Comprehensive chunk quality assessment.\"\"\"",
                   "",
-                  "    def assess_chunk_quality(self, chunks: List[Document]) -> Dict[str, float]:",
-                  "        \"\"\"Multi-dimensional quality assessment.\"\"\"",
-                  "        if not chunks:",
-                  "            return {metric: 0.0 for metric in [\"coherence\", \"density\", \"consistency\", \"overall\"]}",
-                  "",
-                  "        # Calculate individual metrics",
-                  "        coherence = self._calculate_coherence_score(chunks)",
-                  "        density = self._calculate_information_density(chunks)",
-                  "        consistency = self._calculate_size_consistency(chunks)",
-                  "        metadata_richness = self._calculate_metadata_richness(chunks)",
-                  "",
-                  "        overall_quality = (coherence + density + consistency + metadata_richness) / 4",
-                  "",
-                  "        return {",
-                  "            \"coherence_score\": coherence,",
-                  "            \"information_density\": density,",
-                  "            \"size_consistency\": consistency,",
-                  "            \"metadata_richness\": metadata_richness,",
-                  "            \"overall_quality\": overall_quality",
-                  "        }"
+                  "The Kubernetes resource generation method creates deployment definitions programmatically. The RAG orchestrator deployment uses a three-replica default for high availability, with environment-specific overrides possible. The selector establishes the connection between the Deployment and its managed Pods using label matching.",
+                  ""
                 ],
-                "line_count": 23
+                "line_count": 3
+              },
+              {
+                "start_line": 708,
+                "end_line": 714,
+                "language": "",
+                "content": [
+                  "",
+                  "The container specification defines resource requirements and runtime configuration for the RAG orchestrator. Resource requests guarantee minimum CPU and memory allocation, while limits prevent any single container from consuming excessive resources. The resource allocation (500m CPU, 1Gi memory requests with 2 CPU, 4Gi limits) provides room for RAG workloads to scale while protecting cluster stability. Environment variables pass deployment context to the application.",
+                  "",
+                  "Next, we define the orchestrator service for internal communication:",
+                  ""
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 734,
+                "end_line": 744,
+                "language": "",
+                "content": [
+                  "",
+                  "### Enterprise Governance and Compliance",
+                  "",
+                  "#### **Advanced Compliance Automation**",
+                  "",
+                  "Implement comprehensive compliance automation for enterprise RAG systems:",
+                  "",
+                  "### Step 3: Compliance Automation Framework",
+                  ""
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 760,
+                "end_line": 764,
+                "language": "",
+                "content": [
+                  "",
+                  "The EnterpriseComplianceFramework manages multiple regulatory compliance requirements simultaneously. Each compliance engine specializes in a specific regulatory framework: SOX for financial reporting controls, GDPR for data privacy, HIPAA for healthcare data, PCI DSS for payment card security, and ISO 27001 for information security management. This multi-engine approach allows RAG systems to meet diverse enterprise compliance requirements without code duplication.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 773,
+                "end_line": 777,
+                "language": "",
+                "content": [
+                  "",
+                  "The automation components handle the operational aspects of compliance management. The PolicyEngine translates regulatory requirements into executable policies, AuditAutomation manages continuous compliance verification, and RiskAssessment evaluates ongoing compliance posture. The reporter and evidence collector ensure that compliance activities are properly documented and auditable, critical for regulatory examinations and internal governance.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 788,
+                "end_line": 792,
+                "language": "",
+                "content": [
+                  "",
+                  "The main compliance implementation method processes each requested framework independently. This design allows organizations to implement only the compliance frameworks they need, reducing overhead and complexity. Each framework gets its own dedicated engine instance to handle framework-specific requirements and nuances.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 800,
+                "end_line": 804,
+                "language": "",
+                "content": [
+                  "",
+                  "Compliance control implementation begins with comprehensive system analysis. The RAG architecture analysis identifies all components and their compliance implications, data flow mapping traces information through the system for privacy and security controls, and security control inventory ensures all protective measures are documented and functional. Automated enforcement ensures controls are actively maintained rather than just documented.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 812,
+                "end_line": 816,
+                "language": "",
+                "content": [
+                  "",
+                  "Continuous monitoring establishes real-time compliance verification across the entire RAG system. Comprehensive scope ensures no compliance-relevant activities escape monitoring, real-time alerts enable immediate response to compliance violations, dashboards provide visibility for compliance teams, and automated remediation handles routine compliance issues without human intervention.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 823,
+                "end_line": 827,
+                "language": "",
+                "content": [
+                  "",
+                  "Compliance documentation generation creates the comprehensive records required for regulatory audits. The documentation includes not just policy statements but actual evidence of compliance implementation and ongoing adherence. Automated updates ensure documentation stays current with system changes, critical for maintaining audit readiness.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 834,
+                "end_line": 838,
+                "language": "",
+                "content": [
+                  "",
+                  "Audit automation handles the ongoing verification of compliance controls. Quarterly frequency provides regular verification while balancing operational overhead, though this can be customized per framework. Automated evidence collection ensures audit readiness without manual effort, while audit trail integrity protects the evidence from tampering or accidental modification.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 847,
+                "end_line": 851,
+                "language": "",
+                "content": [
+                  "",
+                  "Framework results aggregation collects all compliance activities for each regulatory framework. This structured result format enables cross-framework analysis and provides clear visibility into the compliance status of each framework. The compliance status assessment provides a real-time evaluation of adherence levels.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 857,
+                "end_line": 861,
+                "language": "",
+                "content": [
+                  "",
+                  "Overall compliance analysis creates enterprise-wide visibility into compliance posture. The dashboard aggregates information across all frameworks to provide executive-level compliance status reporting. Risk assessment evaluates the combined compliance risk profile, identifying areas where multiple framework requirements create elevated risk exposure.",
+                  ""
+                ],
+                "line_count": 3
               }
             ],
-            "needs_refactoring": true
+            "large_blocks": [],
+            "needs_refactoring": false
           }
         ]
       },
@@ -1465,15 +652,28 @@
       "data": {
         "summary": {
           "total_files": 1,
-          "files_with_issues": 0,
-          "total_issues": 0
+          "files_with_issues": 1,
+          "total_issues": 2
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session2_Advanced_Chunking_Preprocessing.md",
-            "total_issues": 0,
-            "issues": [],
-            "needs_fixing": false
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
+            "total_issues": 2,
+            "issues": [
+              {
+                "type": "missing_language_specifier",
+                "line": 544,
+                "message": "Code block at line 544 appears to be Python but lacks language specifier",
+                "suggestion": "Change \"```\" to \"```python\""
+              },
+              {
+                "type": "unclosed_code_block",
+                "line": 873,
+                "message": "Code block starting at line 873 is never closed",
+                "suggestion": "Add closing ``` marker"
+              }
+            ],
+            "needs_fixing": true
           }
         ]
       },
@@ -1485,51 +685,255 @@
         "summary": {
           "total_files": 1,
           "files_needing_improvement": 1,
-          "total_issues": 4,
-          "average_quality_score": 90.9090909090909
+          "total_issues": 29,
+          "average_quality_score": 36.95652173913043
         },
         "files": [
           {
-            "total_code_blocks": 44,
-            "total_issues": 4,
+            "total_code_blocks": 46,
+            "total_issues": 29,
             "issues": [
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 750,
-                "code_block_size": 5,
-                "message": "Code block at line 742 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "generic_explanation",
-                "severity": "medium",
-                "line": 868,
-                "code_block_size": 24,
-                "message": "Code block at line 837 has generic/lazy explanation",
-                "suggestion": "Replace generic phrases with specific, educational explanations"
-              },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 909,
-                "code_block_size": 24,
-                "word_count": 8,
-                "message": "Code block (24 lines) at line 879 has insufficient explanation (8 words)",
+                "line": 39,
+                "code_block_size": 7,
+                "word_count": 4,
+                "message": "Code block (7 lines) at line 28 has insufficient explanation (4 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 909,
-                "code_block_size": 24,
-                "message": "Code block at line 879 explanation lacks educational context",
+                "line": 39,
+                "code_block_size": 7,
+                "message": "Code block at line 28 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 66,
+                "code_block_size": 8,
+                "word_count": 1,
+                "message": "Code block (8 lines) at line 54 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 66,
+                "code_block_size": 8,
+                "message": "Code block at line 54 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 113,
+                "code_block_size": 8,
+                "word_count": 1,
+                "message": "Code block (8 lines) at line 103 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 113,
+                "code_block_size": 8,
+                "message": "Code block at line 103 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 124,
+                "code_block_size": 8,
+                "word_count": 1,
+                "message": "Code block (8 lines) at line 114 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 124,
+                "code_block_size": 8,
+                "message": "Code block at line 114 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 141,
+                "code_block_size": 13,
+                "word_count": 7,
+                "message": "Code block (13 lines) at line 125 has insufficient explanation (7 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 141,
+                "code_block_size": 13,
+                "message": "Code block at line 125 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 156,
+                "code_block_size": 8,
+                "word_count": 1,
+                "message": "Code block (8 lines) at line 144 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 156,
+                "code_block_size": 8,
+                "message": "Code block at line 144 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 174,
+                "code_block_size": 13,
+                "word_count": 1,
+                "message": "Code block (13 lines) at line 157 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 174,
+                "code_block_size": 13,
+                "message": "Code block at line 157 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 186,
+                "code_block_size": 9,
+                "word_count": 1,
+                "message": "Code block (9 lines) at line 175 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 186,
+                "code_block_size": 9,
+                "message": "Code block at line 175 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 197,
+                "code_block_size": 7,
+                "word_count": 1,
+                "message": "Code block (7 lines) at line 187 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 197,
+                "code_block_size": 7,
+                "message": "Code block at line 187 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 210,
+                "code_block_size": 9,
+                "word_count": 7,
+                "message": "Code block (9 lines) at line 199 has insufficient explanation (7 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 533,
+                "code_block_size": 3,
+                "word_count": 6,
+                "message": "Code block (3 lines) at line 523 has insufficient explanation (6 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 745,
+                "code_block_size": 4,
+                "word_count": 5,
+                "message": "Code block (4 lines) at line 734 has insufficient explanation (5 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 745,
+                "code_block_size": 4,
+                "message": "Code block at line 734 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 65,
+                "message": "Consecutive code blocks at lines 54 and 67 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 112,
+                "message": "Consecutive code blocks at lines 103 and 114 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 123,
+                "message": "Consecutive code blocks at lines 114 and 125 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 155,
+                "message": "Consecutive code blocks at lines 144 and 157 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 173,
+                "message": "Consecutive code blocks at lines 157 and 175 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 185,
+                "message": "Consecutive code blocks at lines 175 and 187 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 196,
+                "message": "Consecutive code blocks at lines 187 and 199 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               }
             ],
             "needs_improvement": true,
-            "quality_score": 90.9090909090909,
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session2_Advanced_Chunking_Preprocessing.md"
+            "quality_score": 36.95652173913043,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md"
           }
         ]
       },
@@ -1538,12 +942,11 @@
   },
   "priority_files": [
     {
-      "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session2_Advanced_Chunking_Preprocessing.md",
-      "file_name": "Session2_Advanced_Chunking_Preprocessing.md",
-      "priority_score": 111.81818181818181,
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
+      "file_name": "Session9_ModuleB_Enterprise_Architecture.md",
+      "priority_score": 12.608695652173914,
       "issues": [
-        "11 large code blocks",
-        "90.9% explanation quality"
+        "37.0% explanation quality"
       ]
     }
   ]
