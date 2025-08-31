@@ -543,31 +543,18 @@ Now let's implement the main extraction method:
                                extraction_config: Dict = None) -> Dict[str, Any]:
         """Extract NodeRAG heterogeneous graph using three-stage processing.
 
-    def extract_noderag_graph(self, documents: List[str],
-                               extraction_config: Dict = None) -> Dict[str, Any]:
-        """Extract NodeRAG heterogeneous graph using three-stage processing.
-
         The NodeRAG extraction process follows the breakthrough three-stage approach:
 
         **Stage 1 - Decomposition:**
         1. Multi-granularity analysis to extract different knowledge structures
         2. Specialized node creation for entities, concepts, documents, and relationships
         3. Hierarchical structuring at multiple abstraction levels
-
-        **Stage 2 - Augmentation:**
-        4. Cross-reference integration linking related nodes across types
-        5. HNSW similarity edges for high-performance retrieval
-        6. Semantic enrichment with contextual metadata
-
-        **Stage 3 - Enrichment:**
-        7. Personalized PageRank integration for semantic traversal
-        8. Reasoning pathway construction for logically coherent contexts
-        9. Graph-centric optimization for sophisticated reasoning tasks
-
-        This three-stage approach transforms fragmented retrieval into coherent
-        knowledge pathway construction, enabling advanced reasoning capabilities.
         """
+```
 
+The `extract_noderag_graph` method implements NodeRAG's revolutionary three-stage processing pipeline. Unlike traditional GraphRAG that treats all nodes uniformly, this method orchestrates the creation of specialized heterogeneous node types that preserve the semantic structure of knowledge. The three-stage approach transforms raw document content into a reasoning-capable knowledge graph.
+
+```python
         config = extraction_config or {
             'node_types': ['entity', 'concept', 'document', 'relationship'],  # Heterogeneous node types
             'enable_pagerank': True,                     # Personalized PageRank traversal
@@ -576,24 +563,45 @@ Now let's implement the main extraction method:
             'confidence_threshold': 0.75,                # Higher threshold for NodeRAG quality
             'max_pathway_depth': 5                       # Maximum reasoning pathway depth
         }
+```
 
+The configuration dictionary defines NodeRAG's architectural features. The `node_types` list specifies the four heterogeneous node types that enable sophisticated reasoning. The higher `confidence_threshold` (0.75) ensures quality over quantity, while `max_pathway_depth` of 5 enables complex multi-hop reasoning without computational explosion. The combination of PageRank and HNSW creates a hybrid graph that supports both structured traversal and semantic similarity.
+
+```python
         print(f"Extracting NodeRAG heterogeneous graph from {len(documents)} documents...")
         print(f"Node types: {config['node_types']}, Reasoning integration: {config['reasoning_integration']}")
 
-        # NodeRAG three-stage processing
+        # NodeRAG three-stage processing pipeline
         print("\n=== STAGE 1: DECOMPOSITION ===")
         decomposition_result = self.processing_stages['decomposition'](documents, config)
+```
 
+**Stage 1: Decomposition** breaks down documents into specialized knowledge components. This stage extracts entities (Apple, Google), concepts (artificial intelligence, supply chain), relationships (partnerships, acquisitions), and document segments. The multi-granularity approach creates node types that preserve the inherent structure of knowledge rather than flattening everything into uniform chunks.
+
+```python
         print("=== STAGE 2: AUGMENTATION ===")
         augmentation_result = self.processing_stages['augmentation'](decomposition_result, config)
+```
 
+**Stage 2: Augmentation** builds the heterogeneous graph structure by creating typed connections between specialized nodes. This stage links abstract concepts to concrete entities, integrates HNSW similarity edges for fast retrieval, and performs cross-reference integration. The result is a hybrid graph that combines explicit relationships with semantic similarity connections.
+
+```python
         print("=== STAGE 3: ENRICHMENT ===")
         enrichment_result = self.processing_stages['enrichment'](augmentation_result, config)
 
+```
+
+**Stage 3: Enrichment** constructs reasoning pathways using Personalized PageRank to identify semantically important nodes and enable coherent multi-hop traversal. This final stage transforms the graph from a collection of connected nodes into a reasoning-capable knowledge system with logical pathways for complex query answering.
+
+```python
         # Build heterogeneous graph structure
         print("Constructing heterogeneous graph with specialized node types...")
         self._build_heterogeneous_graph(enrichment_result)
+```
 
+The heterogeneous graph construction integrates all three processing stages into a unified graph structure. Unlike traditional graphs with uniform nodes, this creates a multi-layered architecture where each node type (entity, concept, relationship, document) has specialized properties and connection patterns optimized for different reasoning tasks.
+
+```python
         # Apply Personalized PageRank for semantic traversal
         if config.get('enable_pagerank', True):
             print("Computing Personalized PageRank for semantic traversal...")
@@ -603,6 +611,11 @@ Now let's implement the main extraction method:
         else:
             pagerank_scores = {}
 
+```
+
+Personalized PageRank computation identifies the most semantically important nodes across our heterogeneous graph. Unlike standard PageRank, the personalized version emphasizes nodes relevant to specific query contexts, creating query-aware importance scores that guide intelligent traversal through the knowledge graph for optimal reasoning pathway construction.
+
+```python
         # Build HNSW similarity edges for high-performance retrieval
         if config.get('enable_hnsw_similarity', True):
             print("Constructing HNSW similarity edges...")
@@ -611,7 +624,11 @@ Now let's implement the main extraction method:
             )
         else:
             similarity_edges = {}
+```
 
+HNSW (Hierarchical Navigable Small World) similarity edges create high-performance retrieval capabilities within the graph structure. This integration combines the precision of explicit relationships with the coverage of semantic similarity, enabling both structured traversal and similarity-based discovery within a single unified system for comprehensive knowledge retrieval.
+
+```python
         # Construct reasoning pathways if enabled
         reasoning_pathways = {}
         if config.get('reasoning_integration', True):
@@ -620,6 +637,11 @@ Now let's implement the main extraction method:
                 enrichment_result, config
             )
 
+```
+
+Reasoning pathway construction transforms the graph from a static knowledge repository into a dynamic reasoning system. These pathways represent coherent chains of knowledge that can answer complex queries requiring multiple logical steps, such as "What technologies do Apple's automotive partners use?" by traversing through Apple → partnerships → automotive companies → technologies.
+
+```python
         # Calculate comprehensive NodeRAG statistics
         noderag_stats = self._calculate_noderag_statistics()
 
@@ -630,6 +652,11 @@ Now let's implement the main extraction method:
             'similarity_edges': similarity_edges,
             'heterogeneous_graph': self.heterogeneous_graph,
             'noderag_stats': noderag_stats,
+```
+
+The method returns a comprehensive NodeRAG system with all components integrated. The `heterogeneous_nodes` contain specialized node types, `reasoning_pathways` enable multi-hop queries, `pagerank_scores` guide intelligent traversal, and `similarity_edges` provide semantic connections. This creates a complete knowledge reasoning system.
+
+```python
             'extraction_metadata': {
                 'document_count': len(documents),
                 'total_nodes': len(self.node_registry),
@@ -1218,7 +1245,7 @@ class Neo4jGraphManager:
                     'extraction_method': rel.get('extraction_method', ''),
                     'creation_timestamp': time.time()
                 })
-```
+```python
 
 **Relationship validation and normalization** ensures data quality before expensive graph operations. The validation step prevents database errors that could occur from malformed relationships, while normalization adds essential metadata like confidence scores and evidence trails that enable relationship quality assessment.
 
@@ -1643,7 +1670,7 @@ class GraphTraversalEngine:
             'relevance_ranked': self._relevance_ranked_traversal, # High-quality relationships
             'community_focused': self._community_focused_traversal # Dense clusters
         }
-```
+```python
 
 **Multiple traversal strategies** address the reality that different query types benefit from different exploration approaches. Breadth-first works well for finding nearby related concepts, while depth-first excels at following causal chains. Semantic guidance is optimal when query relevance is paramount, while community-focused traversal discovers tightly interconnected concept clusters.
 
@@ -1704,7 +1731,7 @@ class GraphTraversalEngine:
             entity_paths = self._find_entity_paths(start_entity, query, config)
             all_paths.extend(entity_paths)
             print(f"Found {len(entity_paths)} paths from {start_entity}")
-```
+```python
 
 **Systematic path discovery from multiple seed entities** ensures comprehensive exploration of the knowledge space. By exploring from each seed entity independently, the system captures different perspectives and relationship angles, preventing single-entity bias from limiting the breadth of discovered insights.
 
@@ -2031,7 +2058,7 @@ class HybridGraphVectorRAG:
 
     # 4. **Performance Optimization**: Parallel execution and result caching
     #    minimize latency while maximizing coverage
-```
+```python
 
 **Adaptive fusion strategy** represents a major architectural innovation. Rather than static weighting, the system analyzes each query to determine the optimal combination of retrieval methods. Factual queries like "What is Tesla's market cap?" benefit from vector similarity, while analytical queries like "How do Tesla's partnerships affect their supply chain?" require graph traversal to understand multi-entity relationships.
 
@@ -2074,7 +2101,7 @@ class HybridGraphVectorRAG:
             'fusion_time': [],
             'total_query_time': []
         }
-```
+```python
 
 **Production-ready performance monitoring** tracks key metrics across the hybrid pipeline. This enables performance optimization, bottleneck identification, and SLA monitoring in enterprise deployments. Tracking each component's latency separately helps identify whether performance issues stem from vector search, graph traversal, or fusion logic.
 
@@ -2151,7 +2178,7 @@ class HybridGraphVectorRAG:
         # relevant entities in the knowledge graph
         seed_entities = self._identify_seed_entities(query, vector_results)
         print(f"Identified {len(seed_entities)} seed entities for graph traversal")
-```
+```python
 
 **Step 2: Entity bridging innovation** represents a key breakthrough in hybrid RAG architecture. Rather than running graph and vector search independently, this approach uses vector results to identify relevant entities in the knowledge graph. This ensures graph traversal starts from contextually relevant nodes, dramatically improving the quality and relevance of discovered relationships.
 
@@ -2162,7 +2189,7 @@ class HybridGraphVectorRAG:
         graph_results = self._perform_graph_retrieval(query, seed_entities, config)
         graph_time = time.time() - graph_start
         print(f"Graph traversal complete: {len(graph_results.get('top_paths', []))} paths in {graph_time:.2f}s")
-```
+```python
 
 **Step 3: Relationship discovery through graph traversal** explores multi-hop connections from the seed entities identified in step 2. This stage discovers insights that semantic similarity alone cannot find - causal relationships, hierarchical structures, and complex interdependencies. The timing metrics reveal graph traversal is typically 2-3x slower than vector search but provides uniquely valuable relationship insights.
 
@@ -2189,7 +2216,7 @@ class HybridGraphVectorRAG:
         response_time = time.time() - response_start
 
         total_time = time.time() - start_time
-```
+```python
 
 **Step 5: Comprehensive response synthesis** generates the final answer using the expertly fused context from both vector and graph sources. This stage leverages an LLM to synthesize insights from semantic matches and relationship discoveries into a coherent, comprehensive response that addresses the query's complexity.
 
@@ -2438,7 +2465,7 @@ This section demonstrates **relationship-aware scoring**, a key advancement in g
             "multi_entity": true/false,
             "explanation": "Brief explanation of the classification"
         }}
-```
+```python
 
 **LLM-powered query analysis** represents a paradigm shift from rule-based query classification to intelligent, context-aware analysis. Traditional RAG systems use brittle pattern matching, while this approach leverages large language models to understand query intent, complexity, and optimal retrieval strategy. The structured JSON output ensures consistent classification across diverse query types.
 
@@ -2859,3 +2886,5 @@ D) Simplifying the codebase
 - 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise graph database deployment
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+
+```

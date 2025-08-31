@@ -291,7 +291,6 @@ Each RAG request gets a parent span that tracks the entire operation lifecycle. 
 
 Child spans track individual component operations within the larger RAG request, creating a hierarchical view of the entire pipeline execution. This enables precise performance bottleneck identification.
 
-
 #### **Advanced Performance Analytics**
 
 Create sophisticated analytics for RAG system optimization:
