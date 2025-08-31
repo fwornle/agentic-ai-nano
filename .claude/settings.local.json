@@ -13,7 +13,11 @@
       "Bash(done)",
       "Bash(sed:*)",
       "Bash(chmod:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Read(/tmp/**)",
+      "Read(/tmp/**)",
+      "Read(/tmp/**)",
+      "Read(/private/tmp/**)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
