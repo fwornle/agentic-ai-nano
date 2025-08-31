@@ -641,7 +641,11 @@ Choose the best available instance using the configured strategy:
 
         if service_name not in self.service_instances:
             return None
+```
 
+The service selection method begins by validating the requested service exists in our registry. This early validation prevents runtime errors and provides clear feedback when services are requested before registration. In enterprise RAG deployments, services might be added dynamically, making this validation crucial.
+
+```python
         # Filter to only healthy instances
         healthy_instances = [
             instance for instance in self.service_instances[service_name]
@@ -651,7 +655,11 @@ Choose the best available instance using the configured strategy:
         if not healthy_instances:
             self.logger.warning(f"No healthy instances available for {service_name}")
             return None
+```
 
+Health-based filtering ensures requests only go to operational instances. This is critical in production RAG systems where unhealthy vector stores or embedding services can cause query failures. The warning log helps operations teams identify when services are experiencing widespread health issues requiring intervention.
+
+```python
         # Apply the configured load balancing strategy
         selected_instance = await self.strategies[self.current_strategy](
             service_name, healthy_instances
@@ -664,6 +672,8 @@ Choose the best available instance using the configured strategy:
         return selected_instance
 ```
 
+Strategy-based selection applies the configured load balancing algorithm (response time, least connections, etc.) to choose the optimal instance. Connection tracking updates metrics used for future load balancing decisions and monitoring dashboards, creating a feedback loop that improves distribution over time.
+
 #### Step 4: Implement Response Time Strategy
 
 Select instances based on performance and current load:
@@ -675,7 +685,11 @@ Select instances based on performance and current load:
 
         best_instance = None
         best_response_time = float('inf')
+```
 
+Response time-based selection initializes tracking variables to find the fastest available instance. This strategy is particularly effective for RAG systems where embedding services and vector databases may have highly variable performance characteristics based on query complexity and current load.
+
+```python
         for instance in healthy_instances:
             metrics = self.load_metrics[service_name][instance]
             avg_response_time = metrics['avg_response_time']
@@ -683,13 +697,19 @@ Select instances based on performance and current load:
             # Adjust response time based on current load
             # Higher active connections increase the adjusted time
             adjusted_time = avg_response_time * (1 + metrics['active_connections'] * 0.1)
+```
 
+The load balancer evaluates each instance's historical response time while accounting for current connections. The 10% penalty per active connection prevents overloading fast instances. This is crucial for RAG services where response time can degrade exponentially under high concurrent load.
+
+```python
             if adjusted_time < best_response_time:
                 best_response_time = adjusted_time
                 best_instance = instance
 
         return best_instance
 ```
+
+The algorithm selects the instance with the lowest adjusted response time, balancing historical performance with current load. This approach ensures optimal query distribution across RAG services while preventing hotspotting on the fastest instances.
 
 #### Step 5: Auto-Scaling System
 
@@ -703,7 +723,11 @@ class RAGAutoScaler:
         self.config = config
         self.scaling_policies = {}  # Per-service scaling configurations
         self.monitoring_interval = config.get('monitoring_interval', 30)  # seconds
+```
 
+The RAG Auto-Scaler initializes with configurable monitoring intervals, typically 30 seconds for production systems. This balance provides responsive scaling without creating thrashing from rapid metric fluctuations. The scaling policies dictionary tracks individual service configurations, enabling different scaling behavior for vector stores versus embedding services.
+
+```python
         # Define scale-up thresholds
         self.scale_up_thresholds = config.get('scale_up', {
             'cpu_threshold': 70.0,          # CPU usage percentage
@@ -712,7 +736,11 @@ class RAGAutoScaler:
             'queue_size_threshold': 100,    # Queue backlog size
             'error_rate_threshold': 5.0     # Error rate percentage
         })
+```
 
+Scale-up thresholds define trigger points for adding service instances. The 70% CPU and 80% memory thresholds provide headroom before resource exhaustion. The 2-second response time threshold ensures RAG systems maintain acceptable query latency, while queue size and error rate thresholds catch capacity issues before they impact users.
+
+```python
         # Define scale-down thresholds (more conservative)
         self.scale_down_thresholds = config.get('scale_down', {
             'cpu_threshold': 30.0,
@@ -725,6 +753,8 @@ class RAGAutoScaler:
         # Start continuous monitoring
         self.monitoring_task = asyncio.create_task(self._continuous_monitoring())
 ```
+
+Scale-down thresholds are intentionally conservative to prevent oscillation. The 5-minute stability requirement ensures genuine low usage before removing instances. This is crucial for RAG systems where query patterns can be bursty and premature scale-down could cause performance degradation during unexpected load spikes.
 
 #### Step 6: Register Services for Auto-Scaling
 
@@ -739,12 +769,19 @@ Configure scaling policies for individual services:
             'min_instances': scaling_config.get('min_instances', 1),
             'max_instances': scaling_config.get('max_instances', 10),
             'current_instances': scaling_config.get('current_instances', 1),
+```
+
+Service registration establishes scaling boundaries for each RAG component. The minimum of 1 instance ensures service availability, while the maximum of 10 provides reasonable resource limits. Different RAG services may need different limits - embedding services might scale higher than vector stores due to their stateless nature.
+
+```python
             'scaling_cooldown': scaling_config.get('cooldown', 300),  # Prevent rapid scaling
             'last_scaling_action': 0,                                 # Track last action time
             'stability_window': [],                                   # Track stability for scale-down
             'custom_thresholds': scaling_config.get('thresholds', {}) # Service-specific thresholds
         }
 ```
+
+The 5-minute cooldown prevents scaling oscillation that could destabilize the system. The stability window tracks historical performance for intelligent scale-down decisions. Custom thresholds allow fine-tuning per service - vector stores might have different CPU thresholds than embedding services due to their different computational characteristics.
 
 #### Step 7: Continuous Monitoring Loop
 
@@ -760,7 +797,11 @@ Implement the main monitoring loop for scaling decisions:
                 for service_name in self.scaling_policies.keys():
                     # Collect current performance metrics
                     current_metrics = await self._collect_service_metrics(service_name)
+```
 
+The continuous monitoring loop forms the heart of the auto-scaling system, running perpetually to assess RAG service health. Metrics collection gathers CPU, memory, response times, queue sizes, and error rates from each service instance. This comprehensive data collection enables informed scaling decisions based on actual system behavior.
+
+```python
                     # Evaluate if scaling action is needed
                     scaling_decision = await self._evaluate_scaling_decision(
                         service_name, current_metrics
@@ -769,7 +810,11 @@ Implement the main monitoring loop for scaling decisions:
                     # Execute scaling action if required
                     if scaling_decision['action'] != 'none':
                         await self._execute_scaling_action(service_name, scaling_decision)
+```
 
+Scaling decisions are based on threshold evaluation and historical patterns. The system only acts when clear scale-up or scale-down conditions are met, preventing unnecessary resource churn. Execution involves orchestrating container creation/destruction and load balancer reconfiguration.
+
+```python
                 # Wait before next monitoring cycle
                 await asyncio.sleep(self.monitoring_interval)
 
@@ -777,6 +822,8 @@ Implement the main monitoring loop for scaling decisions:
                 self.logger.error(f"Auto-scaling monitoring error: {e}")
                 await asyncio.sleep(self.monitoring_interval)
 ```
+
+The monitoring interval provides regular assessment without overwhelming the system with constant checks. Error handling ensures monitoring continues even if individual metric collection fails, maintaining system resilience during partial outages or network issues.
 
 #### Step 8: Scaling Decision Evaluation
 
