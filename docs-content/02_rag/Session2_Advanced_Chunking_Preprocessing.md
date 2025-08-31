@@ -99,6 +99,8 @@ class DocumentElement:
 
 With our document element structure defined, we can now implement the analyzer that transforms raw text into structured document understanding. This analyzer will be the foundation for all subsequent intelligent processing:
 
+### Document Structure Analyzer - Pattern Recognition
+
 ```python
 class DocumentStructureAnalyzer:
     """Analyzes document structure and content types."""
@@ -109,7 +111,13 @@ class DocumentStructureAnalyzer:
             r'^([A-Z][^a-z]*)\s*$',  # ALL CAPS headers
             r'^\d+\.\s+(.+)$',       # Numbered headers
         ]
+```
 
+The analyzer initializes with patterns that recognize different heading styles. Markdown headers (# ## ###) are most common, but ALL CAPS and numbered headings appear in formal documents. These patterns enable the system to understand document hierarchy regardless of formatting conventions.
+
+### Line-by-Line Document Analysis
+
+```python
     def analyze_structure(self, document_text: str) -> List[DocumentElement]:
         """Analyze document structure and create structured elements."""
         lines = document_text.split('\n')
@@ -123,7 +131,13 @@ class DocumentStructureAnalyzer:
 
             content_type = detect_simple_content_type(line)
             level = self._determine_level(line, current_level, content_type)
-            
+```
+
+The analysis process examines each non-empty line, classifying its content type and determining its hierarchical level. The level tracking enables understanding of document structure - when a heading appears, we know whether it's a section, subsection, or peer to the previous content.
+
+### Element Creation with Rich Metadata
+
+```python
             element = DocumentElement(
                 content=line.strip(),
                 element_type=content_type,
@@ -143,11 +157,15 @@ class DocumentStructureAnalyzer:
         return elements
 ```
 
+Each document element captures not just content and type, but also position information and basic statistics. The line number enables precise error reporting, while character and word counts support size-based chunking decisions. This rich representation forms the foundation for intelligent chunking.
+
 This analyzer creates a structured representation of the document that preserves hierarchy and content relationships. Notice how we're not just splitting text – we're understanding it.
 
 ### Advanced Pattern Recognition
 
 For enterprise applications, you often encounter domain-specific documents with specialized formatting conventions. Legal documents have section markers and citations, medical documents have dosages and medications, and technical documents have API references and version numbers. Generic pattern matching isn't sufficient:
+
+### Advanced Document Analyzer - Domain-Specific Intelligence
 
 ```python
 import re
@@ -171,7 +189,13 @@ class AdvancedDocumentAnalyzer:
                 "versions": [r"v?\d+\.\d+\.\d+", r"version\s+\d+"]
             }
         }
-    
+```
+
+The advanced analyzer includes domain-specific pattern libraries that recognize specialized terminology and formatting. Legal patterns detect section references and case citations, medical patterns identify dosages and medication names, and technical patterns recognize API calls and version numbers. This domain knowledge enables intelligent processing decisions.
+
+### Intelligent Analysis with Domain Context
+
+```python
     def analyze_with_domain_knowledge(self, document_text: str, 
                                     domain: str = "general") -> Dict[str, Any]:
         """Analyze document with domain-specific intelligence."""
@@ -190,6 +214,8 @@ class AdvancedDocumentAnalyzer:
         return analysis
 ```
 
+Domain-aware analysis combines general document structure understanding with specialized feature detection. When domain patterns match content, the system extracts domain-specific features and recommends appropriate processing strategies. This enables optimal handling of specialized documents without manual configuration.
+
 This advanced analyzer adapts to different document domains and provides intelligent processing recommendations. The domain-specific patterns enable the system to recognize specialized content and adjust processing accordingly.
 
 ---
@@ -203,6 +229,8 @@ This isn't just about better boundaries – it's about preserving the logical fl
 ### Simple Hierarchical Chunking
 
 Here's a basic example of how hierarchical chunking works:
+
+### Hierarchical Chunking Logic - Boundary Detection
 
 ```python
 def simple_hierarchical_chunk(elements: List[DocumentElement], 
@@ -224,7 +252,13 @@ def simple_hierarchical_chunk(elements: List[DocumentElement],
                 chunks.append('\n'.join(current_chunk))
                 current_chunk = []
                 current_size = 0
-        
+```
+
+The hierarchical boundary detection identifies natural breakpoints in documents. Major headings (level 0-1) signal topic transitions, making them ideal chunk boundaries. This preserves logical content groupings unlike arbitrary character-based splitting.
+
+### Size Management with Structure Respect
+
+```python
         # Add element to current chunk if size permits
         if current_size + element_size <= max_chunk_size:
             current_chunk.append(element.content)
@@ -242,6 +276,8 @@ def simple_hierarchical_chunk(elements: List[DocumentElement],
     
     return chunks
 ```
+
+Size management balances structure respect with practical constraints. Elements are accumulated until size limits are reached, then chunks are finalized. The approach prefers structural boundaries but respects size constraints when necessary, ensuring chunks remain manageable for processing and retrieval.
 
 **Key Benefits:**
 
@@ -435,6 +471,8 @@ This implementation provides intelligent section grouping, size management, and 
 
 For production deployments, you need more than just good chunking – you need quality assessment, optimization feedback loops, and the ability to adjust processing based on document characteristics:
 
+### Enterprise Pipeline - Configuration and Quality Control
+
 ```python
 class EnterpriseChunkingPipeline:
     """Enterprise-grade chunking pipeline with quality assessment."""
@@ -446,7 +484,13 @@ class EnterpriseChunkingPipeline:
             overlap_ratio=config.get("overlap_ratio", 0.1)
         )
         self.quality_assessor = ChunkQualityAssessor()
-        
+```
+
+The enterprise pipeline uses configuration-driven initialization, enabling different setups for various document types and quality requirements. The quality assessor integration provides automated quality control throughout the processing pipeline.
+
+### Quality-Controlled Document Processing
+
+```python        
     def process_document_with_quality_control(self, document: Document) -> Dict[str, Any]:
         """Process document with comprehensive quality assessment."""
         # Create initial chunks
@@ -459,7 +503,13 @@ class EnterpriseChunkingPipeline:
         if quality_metrics["overall_quality"] < self.config.get("min_quality_threshold", 0.7):
             chunks = self._optimize_chunks(chunks, quality_metrics)
             quality_metrics = self.quality_assessor.assess_chunk_quality(chunks)
-        
+```
+
+The quality control loop enables automatic optimization when quality falls below acceptable thresholds. This ensures consistent output quality while providing insight into document processing challenges through the metrics feedback.
+
+### Comprehensive Result Package
+
+```python        
         return {
             "chunks": chunks,
             "quality_metrics": quality_metrics,
@@ -471,6 +521,8 @@ class EnterpriseChunkingPipeline:
             }
         }
 ```
+
+The return package provides everything needed for downstream processing: optimized chunks, quality insights, and processing statistics. This comprehensive approach supports both automated pipelines and manual quality inspection workflows.
 
 This enterprise pipeline includes quality control and optimization feedback loops. The quality threshold approach ensures you catch and fix problematic chunks before they affect retrieval quality.
 
@@ -523,9 +575,11 @@ def extract_simple_metadata(text: str) -> Dict[str, Any]:
 - **Content understanding**: Insight into chunk characteristics
 - **Quality assessment**: Metrics for evaluating chunk usefulness
 
-### Advanced Metadata Extractor
+### Advanced Metadata Extractor - Data Structure & Initialization
 
-The simple approach gives you basic insights, but production systems need more sophisticated extraction that can handle technical content, domain-specific terminology, and complex relationships within text:
+The simple approach gives you basic insights, but production systems need more sophisticated extraction that can handle technical content, domain-specific terminology, and complex relationships within text.
+
+First, let's define the data structure for our extracted metadata:
 
 ```python
 from dataclasses import dataclass
@@ -542,7 +596,15 @@ class ExtractedMetadata:
     technical_terms: List[str]
     difficulty_level: str
     content_summary: str
+```
 
+The ExtractedMetadata dataclass provides a structured container for all the different types of metadata we'll extract. This structured approach makes the metadata easy to work with and ensures consistent data types across the system.
+
+### Pattern Definitions and Domain Knowledge
+
+Now let's initialize the extractor with domain-specific patterns and knowledge:
+
+```python
 class MetadataExtractor:
     """Extracts rich metadata from document content."""
 
@@ -560,7 +622,15 @@ class MetadataExtractor:
             "legal": ["contract", "agreement", "clause", "statute", "regulation", "compliance"],
             "medical": ["patient", "treatment", "diagnosis", "medication", "therapy", "clinical"]
         }
+```
 
+The patterns and keywords define domain expertise that enables intelligent content analysis. Technical patterns capture programming constructs and technical terminology, while topic keywords enable automatic domain classification. This knowledge base can be expanded for specific domains or applications.
+
+### Main Extraction Orchestration
+
+The main extraction method coordinates all the different extraction techniques:
+
+```python
     def extract_enhanced_metadata(self, text: str) -> ExtractedMetadata:
         """Extract comprehensive metadata from text."""
         
@@ -584,7 +654,15 @@ class MetadataExtractor:
             difficulty_level=difficulty_level,
             content_summary=content_summary
         )
+```
 
+This orchestration method calls specialized extractors for each metadata type. The modular approach allows for easy testing and improvement of individual extraction techniques while maintaining a consistent interface.
+
+### Entity Extraction with Pattern Matching
+
+Entity extraction identifies names, terms, and concepts that are likely to be important:
+
+```python
     def _extract_entities(self, text: str) -> List[str]:
         """Extract named entities using pattern matching."""
         entities = []
@@ -601,7 +679,13 @@ class MetadataExtractor:
         entities = list(set([e for e in entities if 2 < len(e) < 50]))
 
         return entities[:10]  # Limit to top 10
+```
 
+Entity extraction combines multiple heuristics: capitalized words often represent proper nouns (names, places, technologies), while quoted terms typically indicate important concepts or technical terms. The filtering removes noise (very short or very long matches) and limits results to prevent overwhelming the metadata.
+
+### Topic Inference Through Keyword Analysis
+
+```python
     def _infer_topics(self, text: str) -> List[str]:
         """Infer topics from content using keyword analysis."""
         text_lower = text.lower()
@@ -614,7 +698,13 @@ class MetadataExtractor:
 
         # Return topics sorted by relevance
         return sorted(topic_scores.keys(), key=lambda x: topic_scores[x], reverse=True)[:3]
+```
 
+Topic inference uses keyword frequency to classify content. Each domain gets a relevance score based on how many domain-specific keywords appear in the text. This enables automatic tagging that helps with retrieval filtering ("show me all technology-related chunks") and content organization.
+
+### Difficulty Assessment Through Multiple Metrics
+
+```python
     def _assess_difficulty(self, text: str) -> str:
         """Assess content difficulty level."""
         words = text.split()
@@ -641,9 +731,13 @@ class MetadataExtractor:
             return "beginner"
 ```
 
+Difficulty assessment combines multiple readability indicators: sentence length (complex ideas often need longer sentences), vocabulary complexity (longer words typically indicate more advanced concepts), and technical density (specialized terminology suggests expert content). This classification helps users find content appropriate to their level and enables difficulty-based filtering.
+
 ### Metadata-Enhanced Chunking Integration
 
 The real power emerges when you combine hierarchical chunking with metadata extraction. This creates chunks that are both structurally coherent and contextually rich – the foundation of high-precision retrieval:
+
+### MetadataEnhancedChunker - Initialization and Core Processing
 
 ```python
 class MetadataEnhancedChunker:
@@ -652,7 +746,13 @@ class MetadataEnhancedChunker:
     def __init__(self, max_chunk_size: int = 1000):
         self.hierarchical_chunker = HierarchicalChunker(max_chunk_size=max_chunk_size)
         self.metadata_extractor = MetadataExtractor()
+```
 
+The MetadataEnhancedChunker combines hierarchical chunking with metadata extraction, creating a two-stage process that first respects document structure, then enriches each chunk with contextual information.
+
+### Two-Stage Enhancement Process
+
+```python
     def create_enhanced_chunks(self, document: Document) -> List[Document]:
         """Create chunks with rich metadata."""
         # First, create hierarchical chunks
@@ -665,7 +765,13 @@ class MetadataEnhancedChunker:
             enhanced_chunks.append(enhanced_chunk)
 
         return enhanced_chunks
+```
 
+This two-stage approach ensures optimal chunking boundaries (via hierarchical chunking) before adding metadata enrichment. The separation of concerns makes the system modular - you can swap chunking strategies or metadata extraction techniques independently.
+
+### Metadata Integration and Enhancement
+
+```python
     def _enhance_chunk_metadata(self, chunk: Document) -> Document:
         """Enhance chunk with extracted metadata."""
         # Extract metadata from chunk content
@@ -682,7 +788,13 @@ class MetadataEnhancedChunker:
             "content_summary": extracted_metadata.content_summary,
             "enhanced_at": datetime.now().isoformat()
         }
+```
 
+Metadata merging preserves existing chunk metadata (section titles, hierarchy levels) while adding extracted information. The timestamp tracks when enhancement occurred, enabling cache invalidation and processing pipeline monitoring.
+
+### Searchable Content Creation
+
+```python
         # Create searchable content that includes metadata
         searchable_content = self._create_searchable_content(chunk.page_content, extracted_metadata)
 
@@ -709,6 +821,8 @@ class MetadataEnhancedChunker:
         else:
             return original_content
 ```
+
+The searchable content enhancement embeds metadata directly into the chunk text, making it discoverable during vector similarity search. This approach enables queries like "find database optimization" to match chunks containing those keywords even if they weren't in the original text but were inferred from context.
 
 ---
 
@@ -793,9 +907,9 @@ def assess_basic_quality(chunks: List[str]) -> Dict[str, float]:
     }
 ```
 
-### Complete Processing Pipeline
+### Complete Processing Pipeline - Initialization & Strategy
 
-Now we bring everything together into a comprehensive processing pipeline that analyzes document characteristics, chooses appropriate strategies, and applies quality controls:
+Now we bring everything together into a comprehensive processing pipeline that analyzes document characteristics, chooses appropriate strategies, and applies quality controls.
 
 ```python
 class AdvancedProcessingPipeline:
@@ -808,7 +922,15 @@ class AdvancedProcessingPipeline:
         # Initialize processors
         self.metadata_chunker = MetadataEnhancedChunker(max_chunk_size=max_chunk_size)
         self.quality_assessor = ChunkQualityAssessor() if enable_quality_assessment else None
+```
 
+The pipeline initialization sets up all the necessary components with configurable parameters. The enable_quality_assessment flag allows you to disable expensive quality checks in time-sensitive scenarios while maintaining the option for thorough analysis when needed.
+
+### Document Processing with Adaptive Strategy Selection
+
+The main processing method orchestrates document analysis, strategy selection, and quality control:
+
+```python
     def process_document(self, document: Document) -> Dict[str, Any]:
         """Process document using the most appropriate strategy."""
         
@@ -822,7 +944,13 @@ class AdvancedProcessingPipeline:
         else:
             print("Using standard hierarchical processing...")
             processed_chunks = self.metadata_chunker.create_enhanced_chunks(document)
-        
+```
+
+Strategy selection based on content analysis ensures optimal processing. Table-aware processing preserves table structure and relationships, while hierarchical processing respects document organization. This adaptive approach handles diverse document types without manual configuration.
+
+### Quality Assessment and Metadata Enhancement
+
+```python
         # Assess quality if enabled
         quality_metrics = {}
         if self.enable_quality_assessment and self.quality_assessor:
@@ -835,7 +963,13 @@ class AdvancedProcessingPipeline:
                 "document_complexity": doc_analysis["complexity_score"],
                 "processing_pipeline": "advanced_v2"
             })
-        
+```
+
+Quality assessment provides feedback on chunking effectiveness, enabling monitoring and optimization. The metadata enhancement adds processing context to each chunk, supporting debugging, analytics, and processing pipeline versioning.
+
+### Results Assembly with Comprehensive Statistics
+
+```python
         return {
             "chunks": processed_chunks,
             "document_analysis": doc_analysis,
@@ -846,7 +980,13 @@ class AdvancedProcessingPipeline:
                 "avg_chunk_size": sum(len(c.page_content) for c in processed_chunks) / len(processed_chunks)
             }
         }
+```
 
+The comprehensive return structure provides everything needed for downstream processing: the processed chunks, analysis insights, quality metrics, and processing statistics. This rich output supports both automated pipelines and manual quality inspection.
+
+### Document Complexity Analysis
+
+```python
     def _analyze_document_complexity(self, document: Document) -> Dict[str, Any]:
         """Analyze document to determine optimal processing strategy."""
         content = document.page_content
@@ -856,7 +996,13 @@ class AdvancedProcessingPipeline:
         has_code = "```" in content or content.count("    ") > 3
         has_lists = content.count("- ") > 3 or content.count("* ") > 3
         has_headings = content.count("#") > 2
-        
+```
+
+Content type detection uses simple but effective heuristics: pipe characters suggest tables, code blocks indicate technical content, list markers show structured information, and hash symbols reveal hierarchical organization. These patterns guide processing strategy selection.
+
+### Complexity Scoring and Strategy Recommendation
+
+```python
         # Calculate complexity score
         complexity_score = 0
         if has_tables: complexity_score += 3
@@ -882,9 +1028,11 @@ class AdvancedProcessingPipeline:
         }
 ```
 
-### Enterprise Quality Control
+The scoring system weights different content types by their processing complexity and importance: tables (3 points) require the most sophisticated handling, code blocks (2 points) and headings (2 points) benefit from structure-aware processing, while lists (1 point) add moderate complexity. The strategy recommendation ensures documents get appropriate processing without over-engineering simple content.
 
-The final component is comprehensive quality assessment that evaluates chunks across multiple dimensions. This enables automated quality control and optimization feedback:
+### Enterprise Quality Control - Multi-Dimensional Assessment
+
+The final component is comprehensive quality assessment that evaluates chunks across multiple dimensions. This enables automated quality control and optimization feedback.
 
 ```python
 class ChunkQualityAssessor:
@@ -910,7 +1058,13 @@ class ChunkQualityAssessor:
             "metadata_richness": metadata_richness,
             "overall_quality": overall_quality
         }
+```
 
+The main assessment method coordinates four quality dimensions: coherence (topic consistency between adjacent chunks), density (information richness), consistency (size uniformity), and metadata richness (completeness of extracted metadata). The overall quality score provides a single metric for automated quality control decisions.
+
+### Topic Coherence Analysis
+
+```python
     def _calculate_coherence_score(self, chunks: List[Document]) -> float:
         """Calculate topic coherence between adjacent chunks."""
         if len(chunks) < 2:
@@ -928,7 +1082,13 @@ class ChunkQualityAssessor:
                 coherence_scores.append(score)
 
         return sum(coherence_scores) / len(coherence_scores) if coherence_scores else 0.0
+```
 
+Coherence assessment measures how well adjacent chunks relate to each other thematically. Using Jaccard similarity (intersection over union) on topic sets, we identify cases where chunking boundaries break logical topic flow. High coherence suggests good boundary detection, while low coherence indicates potential over-segmentation.
+
+### Information Density Measurement
+
+```python
     def _calculate_information_density(self, chunks: List[Document]) -> float:
         """Calculate average information density across chunks."""
         densities = []
@@ -942,7 +1102,13 @@ class ChunkQualityAssessor:
                 densities.append(density)
         
         return sum(densities) / len(densities) if densities else 0.0
+```
 
+Information density measures vocabulary richness within chunks. High density indicates diverse, information-rich content, while low density suggests repetitive or filler text. This metric helps identify chunks that may be too large (combining disparate content) or too small (fragmenting coherent ideas).
+
+### Metadata Completeness Assessment
+
+```python
     def _calculate_metadata_richness(self, chunks: List[Document]) -> float:
         """Assess metadata completeness across chunks."""
         expected_fields = ["topics", "entities", "keywords", "difficulty_level"]
@@ -956,6 +1122,8 @@ class ChunkQualityAssessor:
         
         return sum(richness_scores) / len(richness_scores) if richness_scores else 0.0
 ```
+
+Metadata richness evaluates how well the extraction pipeline populated chunk metadata. Complete metadata enables better retrieval filtering and content understanding. Low richness scores indicate either extraction failures or content that lacks extractable features, both valuable signals for pipeline optimization.
 
 ---
 
