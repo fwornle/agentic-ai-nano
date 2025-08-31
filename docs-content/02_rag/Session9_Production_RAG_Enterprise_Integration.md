@@ -1241,6 +1241,7 @@ Permission checking evaluates user roles against requested resource actions usin
 
 Error handling ensures authorization failures default to denial, maintaining security in edge cases. Exception details are logged for debugging while avoiding exposure of sensitive authorization logic to clients.
 
+```python
 class RBACManager:
     """Role-Based Access Control manager for RAG systems."""
 
@@ -1254,13 +1255,20 @@ class RBACManager:
             'user': ['rag:query'],
             'readonly': ['rag:query:readonly']
         })
+```
 
+The RBAC Manager implements hierarchical role-based access control for enterprise RAG systems. Role definitions provide graduated access levels from read-only users to full administrators. The wildcard permission (*) grants complete system access to administrators, while specific permissions enable fine-grained control for other roles.
+
+```python
         # Resource-based permissions
         self.resources = rbac_config.get('resources', {
             'documents': ['read', 'write', 'delete'],
             'queries': ['execute', 'view_history'],
             'system': ['configure', 'monitor', 'admin']
         })
+```
+
+Resource-based permission mapping defines available actions for each RAG system component. Document permissions control content access, query permissions manage search capabilities, and system permissions govern administrative functions. This structure supports enterprise security policies requiring separation of concerns.
 
     async def get_user_permissions(self, user_info: Dict[str, Any]) -> List[str]:
         """Get all permissions for a user based on their roles."""
@@ -1274,6 +1282,9 @@ class RBACManager:
                 permissions.update(role_permissions)
 
         return list(permissions)
+```
+
+Permission aggregation combines all permissions from a user's assigned roles, using set operations to avoid duplicates. This approach supports users with multiple roles while maintaining efficient permission lookups. The system returns a deduplicated list of all permissions available to the user across their various roles.
 
     async def check_permission(self, user_info: Dict[str, Any],
                              resource: str, action: str) -> bool:
@@ -1284,7 +1295,11 @@ class RBACManager:
         # Check for wildcard permission
         if '*' in user_permissions:
             return True
+```
 
+Permission checking implements a hierarchical evaluation system, starting with wildcard permissions that grant universal access. This approach prioritizes broad permissions before checking specific ones, optimizing for administrator access patterns while supporting detailed permission structures.
+
+```python
         # Check specific permission
         required_permission = f"{resource}:{action}"
         if required_permission in user_permissions:
@@ -1296,6 +1311,9 @@ class RBACManager:
             return True
 
         return False
+```
+
+Permission evaluation proceeds from specific to general, checking exact resource:action combinations before resource-level wildcards. This graduated approach supports both fine-grained permissions (documents:read) and broader access patterns (documents:*). Default denial ensures secure-by-default behavior when no permissions match.
 ```
 
 ### **Data Privacy and Compliance**
