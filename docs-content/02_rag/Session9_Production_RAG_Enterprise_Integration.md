@@ -2265,51 +2265,51 @@ Congratulations on mastering production RAG systems! You're now equipped to buil
 Test your understanding of production RAG deployment and enterprise integration:
 
 **Question 1:** What is the primary advantage of microservices architecture for production RAG systems?  
-A) Simpler deployment process
-B) Lower development costs
-C) Independent scaling and fault isolation of components
+A) Simpler deployment process  
+B) Lower development costs  
+C) Independent scaling and fault isolation of components  
 D) Reduced system complexity  
 
 **Question 2:** When should you choose response-time-based load balancing over round-robin?  
-A) When all service instances have identical performance
-B) When service instances have varying performance characteristics
-C) When implementing simple systems only
+A) When all service instances have identical performance  
+B) When service instances have varying performance characteristics  
+C) When implementing simple systems only  
 D) When minimizing configuration complexity  
 
 **Question 3:** What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?  
-A) Faster authentication speed
-B) Reduced server load
-C) Granular permission management and security policy enforcement
+A) Faster authentication speed  
+B) Reduced server load  
+C) Granular permission management and security policy enforcement  
 D) Simpler user interface design  
 
 **Question 4:** Which GDPR principle is most critical for RAG systems processing personal data?  
-A) Data portability
-B) Data minimization and lawful basis for processing
-C) Right to be forgotten only
+A) Data portability  
+B) Data minimization and lawful basis for processing  
+C) Right to be forgotten only  
 D) Consent form design  
 
 **Question 5:** What is the primary challenge in real-time incremental indexing for RAG systems?  
-A) Storage capacity limitations
-B) Managing change detection and maintaining index consistency during updates
-C) Network bandwidth constraints
+A) Storage capacity limitations  
+B) Managing change detection and maintaining index consistency during updates  
+C) Network bandwidth constraints  
 D) User interface complexity  
 
 **Question 6:** Which metric is most critical for production RAG system health monitoring?  
-A) CPU usage only
-B) Memory consumption only
-C) Response quality scores combined with system performance metrics
+A) CPU usage only  
+B) Memory consumption only  
+C) Response quality scores combined with system performance metrics  
 D) Network traffic volume  
 
 **Question 7:** What should trigger scale-up actions in production RAG systems?  
-A) Time of day only
-B) CPU threshold, response time, queue size, and error rate exceeding thresholds
-C) Manual administrator requests only
+A) Time of day only  
+B) CPU threshold, response time, queue size, and error rate exceeding thresholds  
+C) Manual administrator requests only  
 D) Random intervals for load testing  
 
 **Question 8:** What is the most important consideration when integrating RAG with SharePoint/Confluence?  
-A) File size limitations
-B) Authentication, permissions, and change detection for real-time updates
-C) Color scheme compatibility
+A) File size limitations  
+B) Authentication, permissions, and change detection for real-time updates  
+C) Color scheme compatibility  
 D) Font rendering capabilities  
 
 ---

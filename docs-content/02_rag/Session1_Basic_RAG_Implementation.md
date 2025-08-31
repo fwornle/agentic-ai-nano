@@ -1878,65 +1878,65 @@ The three-stage RAG architecture from Session 0 is now working code. The quality
 
 ## Multiple Choice Test - Session 1 (15 minutes)
 
-**Question 1:** What is the primary advantage of using token-aware chunking over character-based splitting?
-A) Faster processing speed
-B) Ensures chunks fit within LLM context limits
-C) Reduces memory usage
-D) Simplifies implementation
+**Question 1:** What is the primary advantage of using token-aware chunking over character-based splitting?  
+A) Faster processing speed  
+B) Ensures chunks fit within LLM context limits  
+C) Reduces memory usage  
+D) Simplifies implementation  
 
-**Question 2:** In ChromaDB initialization, what is the purpose of the `persist_directory` parameter?
-A) Speeds up similarity searches
-B) Enables persistent storage between sessions
-C) Improves embedding accuracy
-D) Reduces memory consumption
+**Question 2:** In ChromaDB initialization, what is the purpose of the `persist_directory` parameter?  
+A) Speeds up similarity searches  
+B) Enables persistent storage between sessions  
+C) Improves embedding accuracy  
+D) Reduces memory consumption  
 
-**Question 3:** Why does production RAG use batch processing for document indexing?
-A) To improve embedding quality
-B) To reduce API costs
-C) To prevent memory overflow and enable error isolation
-D) To simplify code structure
+**Question 3:** Why does production RAG use batch processing for document indexing?  
+A) To improve embedding quality  
+B) To reduce API costs  
+C) To prevent memory overflow and enable error isolation  
+D) To simplify code structure  
 
-**Question 4:** What is the key benefit of hybrid search in RAG systems?
-A) Faster query processing
-B) Lower computational costs
-C) Improved recall by combining vector and keyword search
-D) Simpler system architecture
+**Question 4:** What is the key benefit of hybrid search in RAG systems?  
+A) Faster query processing  
+B) Lower computational costs  
+C) Improved recall by combining vector and keyword search  
+D) Simpler system architecture  
 
-**Question 5:** Which chunking strategy preserves semantic coherence best according to 2024 research?
-A) Fixed character length splitting
-B) Random boundary splitting
-C) Semantic paragraph-based splitting
-D) Token-count only splitting
+**Question 5:** Which chunking strategy preserves semantic coherence best according to 2024 research?  
+A) Fixed character length splitting  
+B) Random boundary splitting  
+C) Semantic paragraph-based splitting  
+D) Token-count only splitting  
 
-**Question 6:** What is the primary purpose of confidence scores in RAG responses?
-A) To speed up retrieval
-B) To provide transparency about answer reliability
-C) To reduce LLM generation costs
-D) To improve embedding quality
+**Question 6:** What is the primary purpose of confidence scores in RAG responses?  
+A) To speed up retrieval  
+B) To provide transparency about answer reliability  
+C) To reduce LLM generation costs  
+D) To improve embedding quality  
 
-**Question 7:** Why is metadata tracking essential in production RAG systems?
-A) Improves chunking speed
-B) Enables source attribution and audit trails
-C) Reduces storage requirements
-D) Simplifies vector database operations
+**Question 7:** Why is metadata tracking essential in production RAG systems?  
+A) Improves chunking speed  
+B) Enables source attribution and audit trails  
+C) Reduces storage requirements  
+D) Simplifies vector database operations  
 
-**Question 8:** What characterizes a production-grade RAG prompt template?
-A) Complex technical language
-B) Clear instructions, error handling, and source attribution guidance
-C) Minimal context requirements
-D) Maximum token utilization
+**Question 8:** What characterizes a production-grade RAG prompt template?  
+A) Complex technical language  
+B) Clear instructions, error handling, and source attribution guidance  
+C) Minimal context requirements  
+D) Maximum token utilization  
 
-**Question 9:** According to 2024 best practices, what is the optimal chunk size range?
-A) 100-300 tokens
-B) 500-1500 tokens
-C) 2000-3000 tokens
-D) 4000+ tokens
+**Question 9:** According to 2024 best practices, what is the optimal chunk size range?  
+A) 100-300 tokens  
+B) 500-1500 tokens  
+C) 2000-3000 tokens  
+D) 4000+ tokens  
 
-**Question 10:** What is the key advantage of separating RAG into modular components?
-A) Faster development time
-B) Lower memory usage
-C) Independent optimization and component swapping
-D) Reduced code complexity
+**Question 10:** What is the key advantage of separating RAG into modular components?  
+A) Faster development time  
+B) Lower memory usage  
+C) Independent optimization and component swapping  
+D) Reduced code complexity  
 
 [**View Test Solutions**](Session1_Test_Solutions.md)
 
