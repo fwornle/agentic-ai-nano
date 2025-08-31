@@ -50,7 +50,7 @@ theme:
     - content.tabs.link
     - content.tooltips
     - header.autohide
-    # Removed navigation.expand to allow manual toggle
+    - navigation.expand
     - navigation.footer
     - navigation.indexes
     - navigation.instant
@@ -302,4 +302,3 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/network-detection.js
-  - javascripts/nav-toggle.js
