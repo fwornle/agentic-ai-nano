@@ -2389,7 +2389,7 @@ class HybridGraphVectorRAG:
 
     # 4. **Performance Optimization**: Parallel execution and result caching
     #    minimize latency while maximizing coverage
-```python
+```
 
 **Adaptive fusion strategy** represents a major architectural innovation. Rather than static weighting, the system analyzes each query to determine the optimal combination of retrieval methods. Factual queries like "What is Tesla's market cap?" benefit from vector similarity, while analytical queries like "How do Tesla's partnerships affect their supply chain?" require graph traversal to understand multi-entity relationships.
 
