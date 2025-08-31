@@ -759,7 +759,13 @@ This method handles the execution of each reasoning step with integrated retriev
         """
         step_num = step_data['step']
         print(f"Executing reasoning step {step_num}: {step_data['thinking']}")
+```
 
+This step execution method embodies the core principle of **agentic reasoning chains** - breaking complex problems into discrete, manageable steps that each contribute to the final solution. The logging output provides transparency into the reasoning process, allowing developers and users to understand exactly what logical operations the system is performing.
+
+Unlike traditional RAG's single-shot approach, this method coordinates three distinct phases for each reasoning step, creating a mini-pipeline that ensures quality and completeness at every stage of the reasoning process.
+
+```python
         # Phase 1: Gather external information if this step needs it
         retrieved_info = await self._handle_step_retrieval(step_data, config, context)
 
@@ -767,7 +773,16 @@ This method handles the execution of each reasoning step with integrated retriev
         step_execution = await self._execute_single_reasoning_step(
             step_data, retrieved_info, context['accumulated_knowledge'], query
         )
+```
 
+This three-phase execution pattern demonstrates **coordinated multi-agent behavior** within each reasoning step. Phase 1 (retrieval) acts like a research agent, gathering specific information needed for this logical step. Phase 2 (reasoning) acts like an analysis agent, processing both retrieved information and accumulated knowledge to advance the logical argument.
+
+The key innovation here is that `context['accumulated_knowledge']` provides each step with access to all previous discoveries, enabling sophisticated reasoning patterns like:
+- **Building on previous conclusions**: Later steps can reference and extend earlier findings  
+- **Cross-referencing information**: Multiple retrieval results can be synthesized across steps
+- **Maintaining logical consistency**: Each step operates with full context of the reasoning chain
+
+```python
         # Phase 3: Validate the step's logical consistency if enabled
         step_validation = await self._handle_step_validation(
             step_execution, step_data, query, config
@@ -783,12 +798,15 @@ This method handles the execution of each reasoning step with integrated retriev
         }
 ```
 
+Phase 3 introduces a **quality assurance agent** that validates each reasoning step before allowing the chain to continue. This validation prevents logical errors from propagating through subsequent steps - a critical capability for maintaining reasoning quality in complex chains.
+
+The return structure provides complete **step execution transparency**, capturing not just the reasoning result but also the retrieval information, validation scores, and logical consistency metrics. This comprehensive logging enables sophisticated debugging and optimization of agentic RAG systems, allowing developers to understand exactly how the system reached its conclusions and where improvements might be needed.
+
 #### Step 7: Retrieval and Validation Handlers
 
 Specialized methods for handling information gathering and step validation:
 
 ```python
-
     async def _handle_step_retrieval(self, step_data: Dict, config: Dict,
                                    context: Dict) -> Optional[Dict]:
         """Handle information retrieval for a reasoning step.
@@ -804,13 +822,30 @@ Specialized methods for handling information gathering and step validation:
         retrieved_info = await self.retrieval_system.retrieve(
             step_data['retrieval_query']
         )
+```
 
+This retrieval handler demonstrates **selective information gathering in agentic RAG**. Unlike traditional RAG systems that retrieve once at the beginning, agentic systems can perform targeted retrieval at any step in the reasoning process. This step-wise retrieval approach is crucial for complex queries where:
+
+- **Early steps identify information gaps**: Initial reasoning reveals what additional context is needed
+- **Dynamic query refinement**: Retrieval queries become more specific as understanding develops  
+- **Conditional retrieval**: Only retrieves when the current step actually requires external information
+- **Resource efficiency**: Avoids unnecessary retrievals for steps that can use accumulated knowledge
+
+The conditional logic (`if not step_data.get('retrieval_query')`) ensures retrieval only occurs when explicitly needed, making the system more efficient than blanket retrieval approaches.
+
+```python
         # Update tracking metrics and accumulated knowledge
         context['retrieval_count'] += 1
         context['accumulated_knowledge'][f'step_{step_data["step"]}_retrieval'] = retrieved_info
 
         return retrieved_info
+```
 
+The context updating mechanism showcases **knowledge accumulation patterns** in agentic systems. Each retrieval operation becomes part of the permanent execution context, accessible to all subsequent reasoning steps. This creates a growing knowledge base that spans the entire reasoning chain, enabling sophisticated cross-step reasoning that traditional RAG cannot achieve.
+
+The retrieval tracking (`retrieval_count`) provides valuable metrics for understanding system behavior and optimizing performance across different query types.
+
+```python
     async def _handle_step_validation(self, step_execution: Dict, step_data: Dict,
                                     query: str, config: Dict) -> Optional[Dict]:
         """Handle validation for a reasoning step.
@@ -823,6 +858,15 @@ Specialized methods for handling information gathering and step validation:
 
         return await self._validate_reasoning_step(step_execution, step_data, query)
 ```
+
+This validation handler implements **quality control at every reasoning step**. This represents a fundamental difference from traditional RAG systems - rather than validating only the final output, agentic systems validate logical consistency throughout the reasoning process. This step-by-step validation:
+
+- **Prevents error propagation**: Catches logical inconsistencies before they affect subsequent steps
+- **Maintains reasoning quality**: Ensures each step meets logical standards before proceeding
+- **Enables early error detection**: Identifies problems when they're easier to diagnose and fix
+- **Builds confidence measures**: Accumulates validation scores for overall result confidence
+
+The optional validation (`if not config.get('validate_each_step')`) allows systems to balance thoroughness with performance based on use case requirements.
 
 #### Step 8: Context Update and Result Compilation
 
@@ -837,11 +881,23 @@ Final methods for managing execution state and compiling results:
         """
         context['executed_steps'].append(step_result)
         context['accumulated_knowledge'][f'step_{step_result["step_number"]}_result'] = step_result['execution_result']
-
+        
         if step_result['validation_result']:
             context['step_validations'].append(step_result['validation_result'])
-
+        
         return context
+```
+
+This context update method demonstrates a key principle of agentic RAG systems: **state management across reasoning steps**. Unlike traditional RAG that processes queries in isolation, agentic systems maintain a persistent execution context that accumulates knowledge from each reasoning step. This allows later steps to build upon earlier discoveries, creating a progressive understanding that resembles human reasoning patterns.
+
+The method tracks three critical elements:
+- **Executed steps**: Complete history of reasoning operations
+- **Accumulated knowledge**: Consolidated information gathered throughout the process  
+- **Step validations**: Quality control measures that prevent error propagation
+
+This state persistence is what enables agents to perform complex multi-step reasoning over retrieved information, rather than just simple query-response patterns.
+
+```python
 
     def _compile_chain_execution_results(self, context: Dict) -> Dict[str, Any]:
         """Compile final results from chain execution context.
@@ -852,7 +908,18 @@ Final methods for managing execution state and compiling results:
         return {
             'executed_steps': context['executed_steps'],
             'accumulated_knowledge': context['accumulated_knowledge'],
-            'retrieval_count': context['retrieval_count'],
+            'retrieval_count': context['retrieval_count']
+        }
+```
+
+The result compilation phase showcases how agentic RAG systems provide **comprehensive execution transparency**. Traditional RAG systems typically return only the final generated response, but agentic systems expose the entire reasoning process. This transparency is crucial for:
+
+- **Debugging complex queries**: Understanding where reasoning might have gone wrong
+- **Building trust**: Users can verify the logic behind conclusions
+- **System optimization**: Identifying bottlenecks in the reasoning chain
+- **Knowledge validation**: Ensuring each step contributes meaningfully to the final answer
+
+```python
             'overall_coherence': self._calculate_chain_coherence(context['executed_steps']),
             'validation_summary': {
                 'steps_validated': len(context['step_validations']),
@@ -861,6 +928,11 @@ Final methods for managing execution state and compiling results:
                 ]) if context['step_validations'] else 0.8
             }
         }
+```
+
+This final section demonstrates **quality assurance in agentic reasoning**. The system calculates coherence metrics across the entire reasoning chain and provides validation summaries. This represents a major advancement over traditional RAG - instead of hoping the retrieval and generation are aligned, agentic systems actively monitor and validate the logical consistency of their reasoning process.
+
+The coherence calculation ensures that each step builds logically on previous steps, while the validation summary provides statistical confidence in the reasoning quality. This enables agentic RAG systems to self-assess their performance and flag potential issues before presenting results to users.
 
 ### Bridging NodeRAG Structured Knowledge to Reasoning Capabilities
 

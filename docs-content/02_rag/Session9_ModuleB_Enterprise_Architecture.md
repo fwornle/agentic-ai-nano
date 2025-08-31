@@ -69,18 +69,26 @@ class ZeroTrustRAGSecurity:
         self.network_segmenter = NetworkSegmentation()
         self.traffic_inspector = NetworkTrafficInspector()
         self.encryption_manager = EncryptionManager()
-        
+```
+
+The network security layer provides the foundation for zero-trust architecture. NetworkSegmentation creates isolated security zones for different RAG components, NetworkTrafficInspector monitors all traffic patterns for anomalies and threats, and EncryptionManager ensures all data is encrypted both at rest and in transit. This three-component approach secures the network infrastructure that RAG systems depend on.
+
+```python
         # Data protection components
         self.data_classifier = DataSecurityClassifier()
         self.access_controller = DynamicAccessController()
         self.audit_engine = SecurityAuditEngine()
-    
+```
+
+The data protection layer focuses on securing the information that flows through RAG systems. DataSecurityClassifier automatically categorizes data sensitivity levels, DynamicAccessController enforces real-time access decisions based on user risk profiles, and SecurityAuditEngine logs all security-relevant events for compliance and threat analysis. These components ensure that sensitive data in RAG systems receives appropriate protection.
+
+```python
     async def implement_zero_trust_architecture(self) -> Dict[str, Any]:
         """Implement comprehensive zero-trust security for RAG system."""
         
         implementation_results = {}
         
-        # 1. Network Segmentation
+        # 1. Network Segmentation Implementation
         network_setup = await self.network_segmenter.create_security_zones({
             'dmz': {'components': ['api_gateway', 'load_balancer']},
             'application': {'components': ['rag_services', 'orchestrator']},
@@ -89,6 +97,8 @@ class ZeroTrustRAGSecurity:
         })
         implementation_results['network_segmentation'] = network_setup
 ```
+
+Zero-trust implementation begins with network segmentation that creates four distinct security zones. The DMZ zone exposes only essential public-facing components, the application zone isolates core RAG services, the data zone protects sensitive storage systems, and the management zone secures operational tools. This segmentation ensures that a breach in one zone cannot automatically compromise other zones, limiting attack surface and enabling targeted security controls for each component type.
 
 ```python
         # 2. Identity and Access Management
@@ -174,6 +184,7 @@ class DynamicAccessController:
         })
 ```
 
+```python
         # Analyze current context
         context_analysis = await self.context_analyzer.analyze_context({
             'device_trust_level': await self._assess_device_trust(user_context['device']),
@@ -183,7 +194,6 @@ class DynamicAccessController:
         })
 
 ```
-
 
 ```python
         # Make access decision
@@ -195,7 +205,7 @@ class DynamicAccessController:
             ),
             'trust_level': risk_assessment['trust_level']
         })
-```
+```python
 
         # Apply additional security measures if needed
         security_measures = await self._determine_security_measures(
@@ -212,7 +222,6 @@ class DynamicAccessController:
         }
 
 ```
-
 
 #### **Data Governance and Classification**
 
@@ -396,6 +405,7 @@ The RAG CI/CD pipeline initializes with specialized validators for code, models,
 
 The pipeline begins with comprehensive code validation including RAG-specific patterns. Unlike standard CI/CD, this validates retrieval algorithms, embedding models, and generation components for enterprise requirements.
 
+```python
             # Stage 2: Model and Data Validation
             model_validation = await self.model_validator.validate_models({
                 'model_changes': pipeline_trigger.get('model_changes', []),
@@ -423,6 +433,7 @@ Model validation ensures embedding consistency across updates, maintains generat
 
 Data validation verifies schema compatibility, maintains quality standards, ensures privacy compliance, and preserves lineage integrity throughout the data processing pipeline.
 
+```python
             # Stage 3: Integration Testing
             integration_testing = await self.integration_tester.run_integration_tests({
                 'test_environment': 'staging',
@@ -509,7 +520,6 @@ Data validation verifies schema compatibility, maintains quality standards, ensu
 
 ```
 
-
 #### **Infrastructure as Code for RAG**
 
 Implement infrastructure as code specifically for RAG deployments:
@@ -517,22 +527,31 @@ Implement infrastructure as code specifically for RAG deployments:
 ### Step 2: RAG Infrastructure as Code
 
 ```python
+# Infrastructure as Code class initialization
 class RAGInfrastructureAsCode:
     """Infrastructure as Code manager for RAG systems."""
     
     def __init__(self, iac_config: Dict[str, Any]):
         self.config = iac_config
         
-        # Infrastructure provisioning
+        # Infrastructure provisioning managers
         self.terraform_manager = TerraformManager()
         self.kubernetes_manager = KubernetesManager()
         self.helm_manager = HelmManager()
-        
-        # Environment management
+```
+
+The RAGInfrastructureAsCode class serves as the central orchestrator for deploying enterprise RAG systems using Infrastructure as Code principles. The three core managers handle different layers of the deployment stack: Terraform provisions cloud infrastructure, Kubernetes manages container orchestration, and Helm handles application deployments. This separation of concerns allows for modular, maintainable infrastructure management.
+
+```python
+        # Environment and configuration management
         self.environment_manager = EnvironmentManager()
         self.secret_manager = SecretManager()
         self.config_manager = ConfigurationManager()
-        
+```
+
+Environment management components handle the critical operational aspects of RAG deployments. The EnvironmentManager ensures consistent configuration across development, staging, and production environments. SecretManager handles sensitive data like API keys and database passwords using enterprise-grade secret management practices. ConfigurationManager maintains environment-specific settings that control RAG system behavior.
+
+```python
     async def deploy_rag_infrastructure(self, environment: str) -> Dict[str, Any]:
         """Deploy complete RAG infrastructure using Infrastructure as Code."""
         
@@ -541,9 +560,13 @@ class RAGInfrastructureAsCode:
             'deployment_id': f"rag_infra_{environment}_{int(time.time())}",
             'components': {}
         }
-        
+```
+
+The deployment method begins by creating a unique deployment tracking structure. The deployment_id includes a timestamp to ensure uniqueness and enable rollback capabilities. The components dictionary will collect results from each deployment stage, providing comprehensive visibility into the infrastructure provisioning process.
+
+```python
         try:
-            # 1. Provision cloud infrastructure
+            # 1. Cloud Infrastructure Provisioning
             cloud_infrastructure = await self.terraform_manager.apply_infrastructure({
                 'environment': environment,
                 'terraform_modules': [
@@ -553,8 +576,12 @@ class RAGInfrastructureAsCode:
                 'variables': self.config.get('terraform_variables', {})
             })
             deployment_result['components']['cloud_infrastructure'] = cloud_infrastructure
-            
-            # 2. Deploy Kubernetes resources
+```
+
+Cloud infrastructure provisioning is the foundation layer that creates all the cloud resources needed for RAG systems. The Terraform modules follow a modular approach: networking establishes VPCs and subnets, security groups define access rules, load balancers distribute traffic, storage provides persistent data volumes, and monitoring sets up observability infrastructure. This modular approach allows for independent updates and maintenance of different infrastructure components.
+
+```python
+            # 2. Kubernetes Resource Deployment
             kubernetes_resources = await self.kubernetes_manager.deploy_resources({
                 'environment': environment,
                 'namespaces': ['rag-system', 'rag-monitoring', 'rag-data'],
@@ -565,8 +592,12 @@ class RAGInfrastructureAsCode:
                 ]
             })
             deployment_result['components']['kubernetes_resources'] = kubernetes_resources
-            
-            # 3. Deploy RAG applications using Helm
+```
+
+Kubernetes resource deployment creates the container orchestration layer with proper namespace isolation. The three namespaces separate concerns: rag-system contains core RAG components, rag-monitoring isolates observability tools, and rag-data handles data processing components. The apply_order ensures dependencies are created first - namespaces before everything else, secrets and configmaps before applications that need them, and services before deployments that expose them.
+
+```python
+            # 3. RAG Application Deployment via Helm
             helm_deployments = await self.helm_manager.deploy_charts({
                 'environment': environment,
                 'charts': [
@@ -588,8 +619,12 @@ class RAGInfrastructureAsCode:
                 ]
             })
             deployment_result['components']['helm_deployments'] = helm_deployments
-            
-            # 4. Configure environment-specific settings
+```
+
+Helm chart deployment handles the application layer with sophisticated package management. Each chart represents a complete RAG subsystem: rag-core contains the main retrieval and generation services, vector-store manages embeddings and similarity search, and monitoring provides observability. Helm's templating system allows the same charts to be deployed across different environments with environment-specific values, ensuring consistency while supporting customization.
+
+```python
+            # 4. Environment Configuration Management
             environment_config = await self.environment_manager.configure_environment({
                 'environment': environment,
                 'configuration_sources': [
@@ -598,15 +633,23 @@ class RAGInfrastructureAsCode:
                 'validation': True
             })
             deployment_result['components']['environment_config'] = environment_config
-            
-            # 5. Setup monitoring and observability
+```
+
+Environment configuration management ensures that all RAG components receive the correct settings for their target environment. The three configuration sources follow Kubernetes best practices: environment variables for simple settings, ConfigMaps for complex configuration files, and Secrets for sensitive data. Validation ensures that required configuration is present and properly formatted before applications start.
+
+```python
+            # 5. Monitoring and Observability Setup
             monitoring_setup = await self._setup_monitoring_stack(environment)
             deployment_result['components']['monitoring'] = monitoring_setup
             
-            # 6. Validate deployment
+            # 6. Deployment Validation
             validation_result = await self._validate_deployment(environment)
             deployment_result['validation'] = validation_result
-            
+```
+
+The final deployment stages establish enterprise-grade monitoring and validate the entire system. Monitoring setup deploys metrics collection, logging aggregation, distributed tracing, and alerting systems specifically tuned for RAG workloads. Deployment validation runs comprehensive health checks to ensure all components are functioning correctly before marking the deployment as successful.
+
+```python
             deployment_result['status'] = 'success'
             deployment_result['deployment_time'] = time.time()
             
@@ -616,11 +659,15 @@ class RAGInfrastructureAsCode:
             deployment_result['failure_time'] = time.time()
         
         return deployment_result
-    
+```
+
+Error handling and result reporting provide critical visibility into deployment outcomes. Successful deployments record completion time for performance tracking and audit trails. Failed deployments capture detailed error information and failure timestamps to support rapid troubleshooting and rollback procedures.
+
+```python
     def _get_kubernetes_resources(self, environment: str) -> Dict[str, List[Dict]]:
         """Generate Kubernetes resource definitions for RAG system."""
         
-        # Define RAG orchestrator deployment
+        # RAG Orchestrator Deployment Configuration
         orchestrator_deployment = {
             'apiVersion': 'apps/v1',
             'kind': 'Deployment',
@@ -630,7 +677,14 @@ class RAGInfrastructureAsCode:
             },
             'spec': {
                 'replicas': self.config.get(f'{environment}.orchestrator.replicas', 3),
-                'selector': {'matchLabels': {'app': 'rag-orchestrator'}},
+                'selector': {'matchLabels': {'app': 'rag-orchestrator'}}
+            }
+        }
+```
+
+The Kubernetes resource generation method creates deployment definitions programmatically. The RAG orchestrator deployment uses a three-replica default for high availability, with environment-specific overrides possible. The selector establishes the connection between the Deployment and its managed Pods using label matching.
+
+```python
                 'template': {
                     'metadata': {'labels': {'app': 'rag-orchestrator'}},
                     'spec': {
@@ -648,9 +702,9 @@ class RAGInfrastructureAsCode:
                         }]
                     }
                 }
-            }
-        }
 ```
+
+The container specification defines resource requirements and runtime configuration for the RAG orchestrator. Resource requests guarantee minimum CPU and memory allocation, while limits prevent any single container from consuming excessive resources. The resource allocation (500m CPU, 1Gi memory requests with 2 CPU, 4Gi limits) provides room for RAG workloads to scale while protecting cluster stability. Environment variables pass deployment context to the application.
 
 Next, we define the orchestrator service for internal communication:
 
@@ -685,13 +739,14 @@ Implement comprehensive compliance automation for enterprise RAG systems:
 ### Step 3: Compliance Automation Framework
 
 ```python
+# Enterprise Compliance Framework Initialization
 class EnterpriseComplianceFramework:
     """Comprehensive enterprise compliance framework for RAG systems."""
     
     def __init__(self, compliance_config: Dict[str, Any]):
         self.config = compliance_config
         
-        # Compliance frameworks
+        # Multi-framework compliance engines
         self.compliance_engines = {
             'sox': SOXComplianceEngine(),
             'gdpr': GDPRComplianceEngine(),
@@ -699,56 +754,86 @@ class EnterpriseComplianceFramework:
             'pci_dss': PCIDSSComplianceEngine(),
             'iso27001': ISO27001ComplianceEngine()
         }
-        
-        # Automated compliance components
+```
+
+The EnterpriseComplianceFramework manages multiple regulatory compliance requirements simultaneously. Each compliance engine specializes in a specific regulatory framework: SOX for financial reporting controls, GDPR for data privacy, HIPAA for healthcare data, PCI DSS for payment card security, and ISO 27001 for information security management. This multi-engine approach allows RAG systems to meet diverse enterprise compliance requirements without code duplication.
+
+```python
+        # Core compliance automation components
         self.policy_engine = CompliancePolicyEngine()
         self.audit_automation = AuditAutomation()
         self.risk_assessor = RiskAssessment()
         
-        # Reporting and documentation
+        # Documentation and evidence management
         self.compliance_reporter = ComplianceReporter()
         self.evidence_collector = EvidenceCollector()
-        
+```
+
+The automation components handle the operational aspects of compliance management. The PolicyEngine translates regulatory requirements into executable policies, AuditAutomation manages continuous compliance verification, and RiskAssessment evaluates ongoing compliance posture. The reporter and evidence collector ensure that compliance activities are properly documented and auditable, critical for regulatory examinations and internal governance.
+
+```python
     async def implement_compliance_automation(self, 
                                             frameworks: List[str]) -> Dict[str, Any]:
         """Implement automated compliance for specified frameworks."""
         
         compliance_results = {}
         
+        # Process each requested compliance framework
         for framework in frameworks:
             if framework in self.compliance_engines:
                 engine = self.compliance_engines[framework]
-                
-                # 1. Implement compliance controls
+```
+
+The main compliance implementation method processes each requested framework independently. This design allows organizations to implement only the compliance frameworks they need, reducing overhead and complexity. Each framework gets its own dedicated engine instance to handle framework-specific requirements and nuances.
+
+```python
+                # Step 1: Implement Compliance Controls
                 controls_implementation = await engine.implement_controls({
                     'rag_system_architecture': await self._analyze_rag_architecture(),
                     'data_flows': await self._map_data_flows(),
                     'security_controls': await self._inventory_security_controls(),
                     'automated_enforcement': True
                 })
-                
-                # 2. Setup continuous monitoring
+```
+
+Compliance control implementation begins with comprehensive system analysis. The RAG architecture analysis identifies all components and their compliance implications, data flow mapping traces information through the system for privacy and security controls, and security control inventory ensures all protective measures are documented and functional. Automated enforcement ensures controls are actively maintained rather than just documented.
+
+```python
+                # Step 2: Continuous Monitoring Setup
                 monitoring_setup = await engine.setup_continuous_monitoring({
                     'monitoring_scope': 'comprehensive',
                     'real_time_alerts': True,
                     'compliance_dashboards': True,
                     'automated_remediation': True
                 })
-                
-                # 3. Generate compliance documentation
+```
+
+Continuous monitoring establishes real-time compliance verification across the entire RAG system. Comprehensive scope ensures no compliance-relevant activities escape monitoring, real-time alerts enable immediate response to compliance violations, dashboards provide visibility for compliance teams, and automated remediation handles routine compliance issues without human intervention.
+
+```python
+                # Step 3: Documentation Generation
                 documentation = await engine.generate_compliance_documentation({
                     'documentation_type': 'comprehensive',
                     'include_evidence': True,
                     'automated_updates': True
                 })
-                
-                # 4. Setup audit automation
+```
+
+Compliance documentation generation creates the comprehensive records required for regulatory audits. The documentation includes not just policy statements but actual evidence of compliance implementation and ongoing adherence. Automated updates ensure documentation stays current with system changes, critical for maintaining audit readiness.
+
+```python
+                # Step 4: Audit Automation Configuration
                 audit_automation = await engine.setup_audit_automation({
                     'audit_frequency': self.config.get(f'{framework}.audit_frequency', 'quarterly'),
                     'evidence_collection': 'automated',
                     'audit_trail_integrity': True
                 })
-                
+```
+
+Audit automation handles the ongoing verification of compliance controls. Quarterly frequency provides regular verification while balancing operational overhead, though this can be customized per framework. Automated evidence collection ensures audit readiness without manual effort, while audit trail integrity protects the evidence from tampering or accidental modification.
+
+```python
+                # Store framework-specific results
                 compliance_results[framework] = {
                     'controls_implemented': controls_implementation,
                     'monitoring_active': monitoring_setup,
@@ -756,13 +841,21 @@ class EnterpriseComplianceFramework:
                     'audit_automation_configured': audit_automation,
                     'compliance_status': await engine.assess_compliance_status()
                 }
-        
-        # Generate overall compliance dashboard
+```
+
+Framework results aggregation collects all compliance activities for each regulatory framework. This structured result format enables cross-framework analysis and provides clear visibility into the compliance status of each framework. The compliance status assessment provides a real-time evaluation of adherence levels.
+
+```python
+        # Generate comprehensive compliance dashboard
         compliance_dashboard = await self._generate_compliance_dashboard(compliance_results)
         
-        # Calculate compliance risk score
+        # Assess overall compliance risk
         risk_assessment = await self.risk_assessor.assess_compliance_risk(compliance_results)
-        
+```
+
+Overall compliance analysis creates enterprise-wide visibility into compliance posture. The dashboard aggregates information across all frameworks to provide executive-level compliance status reporting. Risk assessment evaluates the combined compliance risk profile, identifying areas where multiple framework requirements create elevated risk exposure.
+
+```python
         return {
             'framework_compliance': compliance_results,
             'overall_compliance_score': await self._calculate_overall_compliance_score(
@@ -775,6 +868,8 @@ class EnterpriseComplianceFramework:
             )
         }
 ```
+
+The comprehensive compliance result package provides everything needed for enterprise compliance management. Framework-specific results enable detailed compliance work, the overall score provides a single metric for compliance health, the dashboard enables operational monitoring, risk assessment guides prioritization, and the remediation plan provides actionable steps to address any compliance gaps.
 
 ## 📝 Multiple Choice Test - Module B
 
