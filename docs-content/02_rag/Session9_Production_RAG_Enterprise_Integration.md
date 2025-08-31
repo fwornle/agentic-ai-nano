@@ -1230,6 +1230,7 @@ Successful authentication triggers immediate permission retrieval, creating a co
 
 Session token creation enables stateless authentication across RAG services. Tokens typically include user identity, permissions, and expiration information, supporting distributed service architectures. Error handling provides secure failure reporting without exposing sensitive authentication details.
 
+```python
     async def authorize_request(self, session_token: str,
                               resource: str, action: str) -> Dict[str, Any]:
         """Authorize user request for specific resource and action."""
@@ -1300,6 +1301,7 @@ The RBAC Manager implements hierarchical role-based access control for enterpris
 
 Resource-based permission mapping defines available actions for each RAG system component. Document permissions control content access, query permissions manage search capabilities, and system permissions govern administrative functions. This structure supports enterprise security policies requiring separation of concerns.
 
+```python
     async def get_user_permissions(self, user_info: Dict[str, Any]) -> List[str]:
         """Get all permissions for a user based on their roles."""
 
@@ -1316,6 +1318,7 @@ Resource-based permission mapping defines available actions for each RAG system 
 
 Permission aggregation combines all permissions from a user's assigned roles, using set operations to avoid duplicates. This approach supports users with multiple roles while maintaining efficient permission lookups. The system returns a deduplicated list of all permissions available to the user across their various roles.
 
+```python
     async def check_permission(self, user_info: Dict[str, Any],
                              resource: str, action: str) -> bool:
         """Check if user has permission for specific resource and action."""
@@ -1344,7 +1347,6 @@ Permission checking implements a hierarchical evaluation system, starting with w
 ```
 
 Permission evaluation proceeds from specific to general, checking exact resource:action combinations before resource-level wildcards. This graduated approach supports both fine-grained permissions (documents:read) and broader access patterns (documents:*). Default denial ensures secure-by-default behavior when no permissions match.
-```
 
 ### **Data Privacy and Compliance**
 
@@ -1355,7 +1357,6 @@ Implement comprehensive privacy and compliance frameworks to ensure your RAG sys
 Set up the comprehensive compliance framework:
 
 ```python
-
 # Privacy and compliance framework
 
 class PrivacyComplianceManager:
