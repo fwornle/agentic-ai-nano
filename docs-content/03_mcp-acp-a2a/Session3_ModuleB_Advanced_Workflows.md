@@ -12,7 +12,7 @@ Advanced workflow orchestration patterns enable parallel processing, conditional
 When multiple independent operations can run simultaneously, parallel processing dramatically improves performance.
 
 ```python
-# workflows/parallel_processor.py
+# workflows/parallel_processor.py - Core imports and state definition
 import asyncio
 from typing import Dict, List, Any, Optional, Set
 from dataclasses import dataclass, field
@@ -20,7 +20,11 @@ from langchain_core.messages import HumanMessage
 from langgraph.graph import StateGraph, END
 import time
 import logging
+```
 
+These imports establish the foundation for our parallel processing workflow system. We use `asyncio` for concurrent execution across multiple data sources, `dataclasses` for clean state management, and `langgraph` for building the sophisticated workflow orchestration. This combination enables enterprise-scale parallel processing with proper error handling and result aggregation.
+
+```python
 logger = logging.getLogger(__name__)
 
 @dataclass
@@ -33,7 +37,11 @@ class ParallelWorkflowState:
     weather_result: Optional[Dict] = None
     file_result: Optional[Dict] = None
     database_result: Optional[Dict] = None
-    
+```
+
+The `ParallelWorkflowState` captures results from three independent data sources that can be processed simultaneously. Each result field stores the outcome from weather APIs, file systems, and database queries. This parallel architecture dramatically improves performance by eliminating sequential waiting - instead of processing data sources one-by-one, the system processes all three concurrently.
+
+```python
     # Processing status tracking
     completed_tasks: Set[str] = field(default_factory=set)
     failed_tasks: Set[str] = field(default_factory=set)
@@ -42,14 +50,22 @@ class ParallelWorkflowState:
     # Final aggregated result
     aggregated_result: Optional[Dict] = None
     processing_time: Optional[float] = None
+```
 
+Status tracking enables sophisticated parallel coordination. The `completed_tasks` and `failed_tasks` sets track which operations finish successfully or encounter errors. The `start_time` enables precise performance measurement, while `aggregated_result` combines all parallel results into a unified response. This design ensures that partial failures don't prevent successful results from being returned.
+
+```python
 class ParallelWorkflowOrchestrator:
     """Advanced parallel workflow with intelligent task coordination."""
     
     def __init__(self, mcp_manager):
         self.mcp_manager = mcp_manager
         self.workflow = None
-        
+```
+
+The orchestrator manages the entire parallel workflow lifecycle. The MCP manager provides access to various data adapters (weather, filesystem, database), while the workflow graph coordinates parallel execution. This separation of concerns enables the orchestrator to focus on coordination logic while adapters handle domain-specific operations.
+
+```python
     async def build_workflow(self) -> StateGraph:
         """Build parallel processing workflow graph."""
         workflow = StateGraph(ParallelWorkflowState)
@@ -61,7 +77,11 @@ class ParallelWorkflowOrchestrator:
         workflow.add_node("database_processor", self._process_database)
         workflow.add_node("aggregator", self._aggregate_results)
         workflow.add_node("error_handler", self._handle_errors)
-        
+```
+
+The workflow architecture separates initialization, parallel processing, result aggregation, and error handling into distinct nodes. The initializer sets up tracking state, the three processor nodes execute concurrently, and the aggregator combines results. This modular design enables independent scaling and optimization of each processing domain.
+
+```python
         # Define parallel execution flow
         workflow.set_entry_point("initializer")
         
@@ -69,7 +89,11 @@ class ParallelWorkflowOrchestrator:
         workflow.add_edge("initializer", "weather_processor")
         workflow.add_edge("initializer", "file_processor")  
         workflow.add_edge("initializer", "database_processor")
-        
+```
+
+The fan-out pattern creates three parallel execution paths from the initializer. Unlike sequential processing, these edges enable simultaneous execution of weather, file, and database operations. This parallel fan-out is the key to achieving significant performance improvements in data-intensive workflows.
+
+```python
         # Conditional aggregation based on completion
         workflow.add_conditional_edges(
             "weather_processor",
@@ -100,13 +124,21 @@ class ParallelWorkflowOrchestrator:
                 "error": "error_handler"
             }
         )
-        
+```
+
+Conditional aggregation implements intelligent coordination logic. Each processor checks whether all parallel tasks are complete before proceeding to aggregation. The "wait" option allows other processors to continue running, while "aggregate" triggers result combination, and "error" handles failures gracefully. This coordination ensures optimal resource utilization and proper error handling.
+
+```python
         workflow.add_edge("aggregator", END)
         workflow.add_edge("error_handler", END)
         
         self.workflow = workflow.compile()
         return self.workflow
-    
+```
+
+Workflow compilation creates the executable state machine that orchestrates parallel processing. The compiled workflow optimizes the execution graph and validates the routing logic, ensuring reliable parallel coordination in production environments.
+
+```python
     async def _initialize_processing(self, state: ParallelWorkflowState) -> ParallelWorkflowState:
         """Initialize parallel processing state."""
         state.start_time = time.time()
@@ -114,7 +146,11 @@ class ParallelWorkflowOrchestrator:
         state.failed_tasks = set()
         logger.info(f"Starting parallel processing for query: {state.query}")
         return state
-    
+```
+
+Initialization establishes the coordination infrastructure needed for parallel processing. The timestamp enables precise performance measurement, while the task sets track completion status across concurrent operations. This setup phase is crucial for monitoring parallel execution and ensuring reliable result aggregation.
+
+```python
     async def _process_weather(self, state: ParallelWorkflowState) -> ParallelWorkflowState:
         """Process weather data in parallel."""
         try:
@@ -130,7 +166,11 @@ class ParallelWorkflowOrchestrator:
                         for city in cities
                     ]
                     results = await asyncio.gather(*tasks, return_exceptions=True)
-                    
+```
+
+The weather processor demonstrates nested parallelization - processing multiple cities concurrently within the larger parallel workflow. The `asyncio.gather()` function executes all city weather requests simultaneously, with `return_exceptions=True` ensuring that failures in one city don't prevent processing of others. This approach maximizes throughput while maintaining resilience.
+
+```python
                     for city, result in zip(cities, results):
                         if not isinstance(result, Exception):
                             weather_data[city] = result
@@ -143,14 +183,22 @@ class ParallelWorkflowOrchestrator:
             
             state.completed_tasks.add("weather")
             logger.info("Weather processing completed")
-            
+```
+
+Result aggregation and status tracking ensure that successful city weather data is preserved even when some cities fail. The completion tracking enables the coordination logic to determine when all parallel tasks are finished. This robust error handling prevents partial failures from blocking the entire workflow.
+
+```python
         except Exception as e:
             state.failed_tasks.add("weather")
             state.weather_result = {"error": str(e)}
             logger.error(f"Weather processing failed: {e}")
         
         return state
-    
+```
+
+Comprehensive error handling ensures that weather processing failures are captured and reported without crashing the entire parallel workflow. The failed task tracking enables intelligent decision-making about whether to proceed with partial results or trigger error handling workflows.
+
+```python
     async def _get_weather_for_city(self, adapter, city: str) -> Dict:
         """Get weather for a single city with timeout."""
         try:
@@ -162,7 +210,11 @@ class ParallelWorkflowOrchestrator:
             return {"error": f"Timeout getting weather for {city}"}
         except Exception as e:
             return {"error": str(e)}
-    
+```
+
+Timeout handling prevents slow weather API calls from blocking the entire parallel workflow. The 5-second timeout provides reasonable response time expectations while ensuring that unresponsive services don't degrade overall system performance. This pattern is essential in production systems where external service reliability varies.
+
+```python
     async def _process_files(self, state: ParallelWorkflowState) -> ParallelWorkflowState:
         """Process file operations in parallel."""
         try:
@@ -177,7 +229,11 @@ class ParallelWorkflowOrchestrator:
                 ]
                 
                 results = await asyncio.gather(*search_tasks, return_exceptions=True)
-                
+```
+
+File processing demonstrates another level of parallelization - searching for multiple terms simultaneously across the filesystem. This approach dramatically improves search performance by leveraging concurrent I/O operations. The parallel search pattern is particularly effective for large codebases or document repositories.
+
+```python
                 file_data = {}
                 for term, result in zip(search_terms, results):
                     if not isinstance(result, Exception):
@@ -189,14 +245,22 @@ class ParallelWorkflowOrchestrator:
             
             state.completed_tasks.add("files")
             logger.info("File processing completed")
-            
+```
+
+Result organization creates structured output where each search term's results are clearly identified. This organization enables downstream processing to understand which files relate to specific search criteria, improving the utility of aggregated results.
+
+```python
         except Exception as e:
             state.failed_tasks.add("files")
             state.file_result = {"error": str(e)}
             logger.error(f"File processing failed: {e}")
         
         return state
-    
+```
+
+File processing error handling ensures that filesystem failures don't prevent weather and database processing from completing successfully. This resilience is crucial in distributed systems where different data sources have varying reliability characteristics.
+
+```python
     async def _search_files_for_term(self, adapter, term: str) -> Dict:
         """Search files for a specific term with timeout."""
         try:
@@ -211,7 +275,11 @@ class ParallelWorkflowOrchestrator:
             return {"error": f"Timeout searching files for {term}"}
         except Exception as e:
             return {"error": str(e)}
-    
+```
+
+File search timeout handling uses a longer 10-second limit to account for filesystem I/O latency. The pattern matching enables flexible filename searches, while the timeout prevents hanging on unresponsive filesystem operations. This balance between thoroughness and responsiveness is essential for user-facing applications.
+
+```python
     async def _process_database(self, state: ParallelWorkflowState) -> ParallelWorkflowState:
         """Process database operations in parallel."""
         try:
@@ -225,7 +293,11 @@ class ParallelWorkflowOrchestrator:
                 ]
                 
                 results = await asyncio.gather(*query_tasks, return_exceptions=True)
-                
+```
+
+Database processing executes multiple queries in parallel across different data tables or schemas. This approach is particularly effective when queries target different database partitions or when using connection pooling. The parallel query execution can significantly reduce overall database interaction time.
+
+```python
                 database_data = {}
                 query_types = ["user_data", "historical_data", "metadata"]
                 for query_type, result in zip(query_types, results):
@@ -238,14 +310,22 @@ class ParallelWorkflowOrchestrator:
             
             state.completed_tasks.add("database")
             logger.info("Database processing completed")
-            
+```
+
+Database result organization maintains clear relationships between query types and their results. This structure enables downstream processing to understand the context and relevance of different data sets, improving the quality of aggregated insights.
+
+```python
         except Exception as e:
             state.failed_tasks.add("database")
             state.database_result = {"error": str(e)}
             logger.error(f"Database processing failed: {e}")
         
         return state
-    
+```
+
+Database error handling ensures that query failures are contained and don't impact other parallel processing streams. This isolation is crucial in enterprise environments where database availability may vary independently from other services.
+
+```python
     async def _execute_database_query(self, adapter, query_type: str, query: str) -> Dict:
         """Execute a database query with timeout."""
         try:
@@ -260,7 +340,11 @@ class ParallelWorkflowOrchestrator:
             return {"error": f"Timeout executing {query_type} query"}
         except Exception as e:
             return {"error": str(e)}
-    
+```
+
+Database query timeout uses a longer 15-second limit to accommodate complex analytical queries while preventing indefinite blocking. This timeout strategy recognizes that database operations often require more processing time than API calls or file operations, but still need bounded execution time for system reliability.
+
+```python
     def _check_completion_status(self, state: ParallelWorkflowState) -> str:
         """Check if all parallel tasks are complete."""
         expected_tasks = {"weather", "files", "database"}
@@ -273,7 +357,11 @@ class ParallelWorkflowOrchestrator:
                 return "aggregate"
         
         return "wait"
-    
+```
+
+Completion status checking implements the coordination logic that determines when all parallel processing is finished. The set operation `all_tasks >= expected_tasks` efficiently checks whether all three processing streams have completed (either successfully or with failures). This logic enables intelligent workflow routing based on actual execution state.
+
+```python
     async def _aggregate_results(self, state: ParallelWorkflowState) -> ParallelWorkflowState:
         """Aggregate results from all parallel processors."""
         processing_time = time.time() - state.start_time if state.start_time else 0
@@ -287,7 +375,11 @@ class ParallelWorkflowOrchestrator:
             "failed_tasks": list(state.failed_tasks),
             "results": {}
         }
-        
+```
+
+Result aggregation combines outcomes from all parallel processing streams into a unified response structure. The processing time measurement demonstrates the performance benefits of parallel execution - the total time reflects the longest individual operation rather than the sum of all operations. This aggregation provides comprehensive visibility into both successful results and processing metadata.
+
+```python
         if state.weather_result:
             aggregated["results"]["weather"] = state.weather_result
         
@@ -296,7 +388,11 @@ class ParallelWorkflowOrchestrator:
         
         if state.database_result:
             aggregated["results"]["database"] = state.database_result
-        
+```
+
+Selective result inclusion ensures that only available results are included in the final response. This approach handles partial success scenarios gracefully, providing value even when some parallel operations fail. The conditional inclusion prevents null or undefined values from cluttering the response.
+
+```python
         # Generate summary
         summary_parts = []
         if state.weather_result and "error" not in state.weather_result:
@@ -316,7 +412,11 @@ class ParallelWorkflowOrchestrator:
         logger.info(f"Completed: {state.completed_tasks}, Failed: {state.failed_tasks}")
         
         return state
-    
+```
+
+Summary generation provides human-readable insights into parallel processing outcomes. The summary creation logic intelligently describes what was accomplished, helping users understand the scope and success of their query. The comprehensive logging enables performance monitoring and troubleshooting in production environments.
+
+```python
     async def _handle_errors(self, state: ParallelWorkflowState) -> ParallelWorkflowState:
         """Handle errors in parallel processing."""
         processing_time = time.time() - state.start_time if state.start_time else 0
@@ -329,7 +429,11 @@ class ParallelWorkflowOrchestrator:
             "partial_results": {},
             "errors": {}
         }
-        
+```
+
+Error handling creates structured output that separates successful partial results from specific error details. This organization enables client applications to extract value from partial success while understanding exactly what failed and why. The separation of concerns improves error reporting and debugging capabilities.
+
+```python
         # Collect partial results and errors
         if state.weather_result:
             if "error" in state.weather_result:
@@ -354,7 +458,11 @@ class ParallelWorkflowOrchestrator:
         logger.warning(f"Parallel processing completed with errors after {processing_time:.2f} seconds")
         
         return state
-    
+```
+
+Error categorization enables intelligent handling of partial success scenarios. By separating successful results from error details, the system can provide maximum value even when some operations fail. This approach is essential in distributed systems where component failures are expected and must be handled gracefully.
+
+```python
     def _extract_cities(self, query: str) -> List[str]:
         """Extract city names from query."""
         cities = ["London", "New York", "Tokyo", "Sydney", "Paris"]
@@ -366,7 +474,11 @@ class ParallelWorkflowOrchestrator:
         stop_words = {"the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for"}
         words = [word for word in query.lower().split() if len(word) > 3 and word not in stop_words]
         return words[:3]
-    
+```
+
+Helper methods demonstrate intelligent query parsing that extracts meaningful parameters for parallel processing. The city extraction enables geographic weather queries, while search term extraction creates focused file searches. These parsing functions convert natural language queries into structured parameters for parallel execution.
+
+```python
     async def run_parallel_workflow(self, query: str) -> Dict[str, Any]:
         """Execute parallel workflow."""
         if not self.workflow:
@@ -391,6 +503,8 @@ class ParallelWorkflowOrchestrator:
                 "query": query
             }
 ```
+
+The workflow execution method provides the main interface for running parallel processing workflows. The lazy workflow compilation optimizes startup time, while the comprehensive error handling ensures graceful failure modes. The structured return format enables client applications to easily distinguish between successful and failed executions while accessing all available results and metadata.
 
 ### Pattern 2: Conditional Workflow Routing
 

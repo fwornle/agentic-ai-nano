@@ -1,14 +1,14 @@
 {
   "analysis_timestamp": "1756565301.7451673",
-  "target": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md",
+  "target": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md",
   "overall_metrics": {
     "total_files": 1,
     "code_block_score": 100.0,
     "formatting_score": 100.0,
-    "explanation_score": 73.21428571428571,
-    "overall_score": 89.28571428571428,
+    "explanation_score": 96.29629629629629,
+    "overall_score": 98.51851851851852,
     "critical_issues": 0,
-    "total_issues": 15
+    "total_issues": 2
   },
   "detailed_results": {
     "detect_large_code_blocks": {
@@ -21,1018 +21,1045 @@
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md",
-            "total_code_blocks": 56,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md",
+            "total_code_blocks": 54,
             "large_blocks_count": 0,
             "code_blocks": [
               {
-                "start_line": 46,
-                "end_line": 52,
-                "language": "python",
-                "content": [
-                  "# Basic MCP-LangChain integration - The moment two worlds become one",
-                  "",
-                  "from langchain_mcp_adapters import MultiServerMCPClient",
-                  "from langchain.agents import create_react_agent",
-                  "from langchain_openai import ChatOpenAI"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 56,
-                "end_line": 62,
-                "language": "python",
-                "content": [
-                  "# Connect to multiple MCP servers - Building your digital ecosystem",
-                  "client = MultiServerMCPClient({",
-                  "    \"weather\": {\"command\": \"python\", \"args\": [\"weather_server.py\"]},",
-                  "    \"files\": {\"command\": \"python\", \"args\": [\"file_server.py\"]}",
-                  "})"
-                ],
-                "line_count": 5
-              },
-              {
                 "start_line": 66,
-                "end_line": 76,
-                "language": "python",
+                "end_line": 82,
+                "language": "yaml",
                 "content": [
-                  "# Get tools from all servers - Your agent's superpowers",
-                  "tools = client.list_tools()",
+                  "# k8s/namespace-production.yaml - Enterprise namespace with governance",
                   "",
-                  "# Create intelligent agent - The mind that connects it all",
-                  "agent = create_react_agent(",
-                  "    llm=ChatOpenAI(model=\"gpt-4\"),",
-                  "    tools=tools,",
-                  "    prompt=\"You are a helpful assistant with access to multiple tools.\"",
-                  ")"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 95,
-                "end_line": 107,
-                "language": "bash",
-                "content": [
-                  "# Create your integration workspace",
-                  "mkdir langchain-mcp-integration",
-                  "cd langchain-mcp-integration",
-                  "",
-                  "# Create isolated environment - Clean slate for innovation",
-                  "python -m venv venv",
-                  "source venv/bin/activate  # On Windows: venv\\Scripts\\activate",
-                  "",
-                  "# Install the integration toolkit - Your bridge-building tools",
-                  "pip install langchain-mcp-adapters langgraph langchain-openai \\",
-                  "            langchain-anthropic python-dotenv colorama rich"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 122,
-                "end_line": 141,
-                "language": "",
-                "content": [
-                  "langchain-mcp-integration/",
-                  "\u251c\u2500\u2500 mcp_servers/           # Your digital workforce",
-                  "\u2502   \u251c\u2500\u2500 weather_server.py",
-                  "\u2502   \u251c\u2500\u2500 filesystem_server.py",
-                  "\u2502   \u2514\u2500\u2500 database_server.py",
-                  "\u251c\u2500\u2500 agents/                # Your intelligent coordinators",
-                  "\u2502   \u251c\u2500\u2500 basic_agent.py     # Single-tool demonstration",
-                  "\u2502   \u251c\u2500\u2500 multi_tool_agent.py # Multi-server ReAct agent",
-                  "\u2502   \u2514\u2500\u2500 workflow_agent.py  # LangGraph workflow agent",
-                  "\u251c\u2500\u2500 workflows/             # Your orchestration patterns",
-                  "\u2502   \u251c\u2500\u2500 research_workflow.py",
-                  "\u2502   \u2514\u2500\u2500 data_analysis_workflow.py",
-                  "\u251c\u2500\u2500 utils/                 # Your integration utilities",
-                  "\u2502   \u251c\u2500\u2500 mcp_manager.py     # MCP server management",
-                  "\u2502   \u2514\u2500\u2500 logging_config.py  # Structured logging",
-                  "\u251c\u2500\u2500 config.py              # Your system configuration",
-                  "\u251c\u2500\u2500 main.py               # Your application entry point",
-                  "\u2514\u2500\u2500 .env                  # Your secrets and settings"
-                ],
-                "line_count": 18
-              },
-              {
-                "start_line": 155,
-                "end_line": 164,
-                "language": "python",
-                "content": [
-                  "# config.py - Your integration command center",
-                  "",
-                  "import os",
-                  "from typing import Dict, Any, List",
-                  "from dataclasses import dataclass",
-                  "from dotenv import load_dotenv",
-                  "",
-                  "load_dotenv()"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 168,
-                "end_line": 179,
-                "language": "python",
-                "content": [
-                  "@dataclass",
-                  "class MCPServerConfig:",
-                  "    \"\"\"Configuration for a single MCP server - Your digital specialist definition.\"\"\"",
-                  "    name: str",
-                  "    command: str",
-                  "    args: List[str]",
-                  "    transport: str = \"stdio\"",
-                  "    description: str = \"\"",
-                  "    timeout: int = 30",
-                  "    retry_attempts: int = 3"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 183,
-                "end_line": 192,
-                "language": "python",
-                "content": [
-                  "@dataclass ",
-                  "class LLMConfig:",
-                  "    \"\"\"Configuration for language models - Your intelligence settings.\"\"\"",
-                  "    provider: str = \"openai\"",
-                  "    model: str = \"gpt-4\"",
-                  "    temperature: float = 0.7",
-                  "    max_tokens: int = 2000",
-                  "    timeout: int = 60"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 207,
-                "end_line": 216,
-                "language": "python",
-                "content": [
-                  "# Your main configuration orchestrator",
-                  "",
-                  "class Config:",
-                  "    \"\"\"Main configuration class for LangChain MCP integration.\"\"\"",
-                  "    ",
-                  "    # API Keys from environment variables - Security first",
-                  "    OPENAI_API_KEY = os.getenv(\"OPENAI_API_KEY\")",
-                  "    ANTHROPIC_API_KEY = os.getenv(\"ANTHROPIC_API_KEY\")"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 220,
-                "end_line": 227,
-                "language": "python",
-                "content": [
-                  "    # LLM Configuration with environment overrides - Flexibility with defaults",
-                  "    LLM = LLMConfig(",
-                  "        provider=os.getenv(\"LLM_PROVIDER\", \"openai\"),",
-                  "        model=os.getenv(\"LLM_MODEL\", \"gpt-4\"),",
-                  "        temperature=float(os.getenv(\"LLM_TEMPERATURE\", \"0.7\")),",
-                  "    )"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 231,
-                "end_line": 246,
-                "language": "python",
-                "content": [
-                  "    # MCP Server Registry - Your digital workforce roster",
-                  "    MCP_SERVERS = [",
-                  "        MCPServerConfig(",
-                  "            name=\"weather\",",
-                  "            command=\"python\",",
-                  "            args=[\"mcp_servers/weather_server.py\"],",
-                  "            description=\"Weather information and forecasts\"",
-                  "        ),",
-                  "        MCPServerConfig(",
-                  "            name=\"filesystem\", ",
-                  "            command=\"python\",",
-                  "            args=[\"mcp_servers/filesystem_server.py\"],",
-                  "            description=\"Secure file system operations\"",
-                  "        ),"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 250,
-                "end_line": 258,
-                "language": "python",
-                "content": [
-                  "        MCPServerConfig(",
-                  "            name=\"database\",",
-                  "            command=\"python\", ",
-                  "            args=[\"mcp_servers/database_server.py\"],",
-                  "            description=\"Database query and manipulation\"",
-                  "        )",
-                  "    ]"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 262,
-                "end_line": 274,
-                "language": "python",
-                "content": [
-                  "    # Agent Configuration - Intelligence parameters",
-                  "    AGENT_CONFIG = {",
-                  "        \"max_iterations\": int(os.getenv(\"MAX_ITERATIONS\", \"10\")),",
-                  "        \"verbose\": os.getenv(\"VERBOSE\", \"true\").lower() == \"true\",",
-                  "        \"temperature\": float(os.getenv(\"AGENT_TEMPERATURE\", \"0.7\")),",
-                  "        \"timeout\": int(os.getenv(\"AGENT_TIMEOUT\", \"300\"))  # 5 minutes",
-                  "    }",
-                  "    ",
-                  "    # Logging Configuration - Observability settings",
-                  "    LOG_LEVEL = os.getenv(\"LOG_LEVEL\", \"INFO\")",
-                  "    LOG_FORMAT = \"%(asctime)s - %(name)s - %(levelname)s - %(message)s\""
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 297,
-                "end_line": 307,
-                "language": "python",
-                "content": [
-                  "# The hidden complexity behind a simple question",
-                  "",
-                  "# Customer inquiry: \"What's the weather like for my shipment to London?\"",
-                  "",
-                  "# Agent needs to orchestrate multiple systems:",
-                  "# 1. Query customer database for shipment details",
-                  "# 2. Get weather data for London",
-                  "# 3. Check file system for shipping policies",
-                  "# 4. Combine information into helpful response"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 320,
-                "end_line": 338,
-                "language": "python",
-                "content": [
-                  "# utils/mcp_manager.py - Your integration command center",
-                  "",
-                  "import asyncio",
-                  "import logging",
-                  "from typing import Dict, List, Optional",
-                  "from langchain_mcp_adapters import MCPAdapter",
-                  "from config import Config, MCPServerConfig",
-                  "",
-                  "logger = logging.getLogger(__name__)",
-                  "",
-                  "class MCPServerManager:",
-                  "    \"\"\"The nerve center that manages multiple MCP servers with health monitoring.\"\"\"",
-                  "    ",
-                  "    def __init__(self, server_configs: List[MCPServerConfig]):",
-                  "        self.server_configs = {config.name: config for config in server_configs}",
-                  "        self.adapters: Dict[str, MCPAdapter] = {}",
-                  "        self.health_status: Dict[str, bool] = {}"
-                ],
-                "line_count": 17
-              },
-              {
-                "start_line": 348,
-                "end_line": 358,
-                "language": "python",
-                "content": [
-                  "    async def start_all_servers(self) -> Dict[str, bool]:",
-                  "        \"\"\"The startup orchestration - Bringing your digital workforce online.\"\"\"",
-                  "        results = {}",
-                  "        ",
-                  "        for name, config in self.server_configs.items():",
-                  "            result = await self._start_single_server(name, config)",
-                  "            results[name] = result",
-                  "        ",
-                  "        return results"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 362,
-                "end_line": 372,
-                "language": "python",
-                "content": [
-                  "    async def _start_single_server(self, name: str, config: MCPServerConfig) -> bool:",
-                  "        \"\"\"Individual server startup with comprehensive validation.\"\"\"",
-                  "        try:",
-                  "            logger.info(f\"Starting MCP server: {name}\")",
-                  "            adapter = MCPAdapter(",
-                  "                command=config.command,",
-                  "                args=config.args,",
-                  "                timeout=config.timeout",
-                  "            )"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 376,
-                "end_line": 387,
-                "language": "python",
-                "content": [
-                  "            # The critical handshake - Test connection and discover tools",
-                  "            await adapter.start()",
-                  "            tools = await adapter.list_tools()",
-                  "            ",
-                  "            # Success - Store adapter and update status",
-                  "            self.adapters[name] = adapter",
-                  "            self.health_status[name] = True",
-                  "            ",
-                  "            logger.info(f\"Server '{name}' started with {len(tools)} tools\")",
-                  "            return True"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 391,
-                "end_line": 396,
-                "language": "python",
-                "content": [
-                  "        except Exception as e:",
-                  "            logger.error(f\"Failed to start server '{name}': {e}\")",
-                  "            self.health_status[name] = False",
-                  "            return False"
-                ],
-                "line_count": 4
-              },
-              {
-                "start_line": 400,
-                "end_line": 419,
-                "language": "python",
-                "content": [
-                  "    async def get_adapter(self, server_name: str) -> Optional[MCPAdapter]:",
-                  "        \"\"\"Smart adapter access with automatic health checking.\"\"\"",
-                  "        if server_name not in self.adapters:",
-                  "            logger.warning(f\"Server '{server_name}' not found\")",
-                  "            return None",
-                  "        ",
-                  "        if not self.health_status.get(server_name, False):",
-                  "            logger.warning(f\"Server '{server_name}' is unhealthy\")",
-                  "            # The resilience factor - Attempt automatic restart",
-                  "            await self._restart_server(server_name)",
-                  "        ",
-                  "        return self.adapters.get(server_name)",
-                  "    ",
-                  "    async def _restart_server(self, name: str):",
-                  "        \"\"\"Automatic recovery - Attempt to restart a failed server.\"\"\"",
-                  "        config = self.server_configs.get(name)",
-                  "        if config:",
-                  "            await self._start_single_server(name, config)"
-                ],
-                "line_count": 18
-              },
-              {
-                "start_line": 436,
-                "end_line": 442,
-                "language": "python",
-                "content": [
-                  "# The ReAct pattern in action - How agents think and act",
-                  "",
-                  "from langchain.agents import create_react_agent, AgentExecutor",
-                  "from langchain_core.prompts import PromptTemplate",
-                  "from langchain_openai import ChatOpenAI"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 446,
-                "end_line": 459,
-                "language": "python",
-                "content": [
-                  "# The thinking framework - ReAct prompt template",
-                  "react_prompt = PromptTemplate.from_template(\"\"\"",
-                  "You have access to multiple tools. Use this format:",
-                  "",
-                  "Question: {input}",
-                  "Thought: I need to think about which tools to use",
-                  "Action: [tool_name]",
-                  "Action Input: [input_for_tool]",
-                  "Observation: [result_from_tool]",
-                  "... (repeat Thought/Action as needed)",
-                  "Thought: I now have enough information",
-                  "Final Answer: [comprehensive_response]"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 463,
-                "end_line": 468,
-                "language": "python",
-                "content": [
-                  "Available tools: {tools}",
-                  "Question: {input}",
-                  "{agent_scratchpad}",
-                  "\"\"\")"
-                ],
-                "line_count": 4
-              },
-              {
-                "start_line": 487,
-                "end_line": 495,
-                "language": "python",
-                "content": [
-                  "# mcp_servers/weather_server.py - Your meteorological consultant",
-                  "",
-                  "from mcp.server.fastmcp import FastMCP",
-                  "from datetime import datetime",
-                  "from typing import Dict",
-                  "",
-                  "mcp = FastMCP(\"Weather Server\")"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 499,
-                "end_line": 506,
-                "language": "python",
-                "content": [
-                  "# Realistic weather simulation - Your data foundation",
-                  "WEATHER_DATA = {",
-                  "    \"London\": {\"temp\": 15, \"condition\": \"Cloudy\", \"humidity\": 75},",
-                  "    \"New York\": {\"temp\": 22, \"condition\": \"Sunny\", \"humidity\": 60},",
-                  "    \"Tokyo\": {\"temp\": 18, \"condition\": \"Rainy\", \"humidity\": 85},",
-                  "}"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 510,
-                "end_line": 523,
-                "language": "python",
-                "content": [
-                  "@mcp.tool()",
-                  "def get_current_weather(city: str, units: str = \"celsius\") -> Dict:",
-                  "    \"\"\"Get current weather for a city - Your meteorological intelligence.\"\"\"",
-                  "    if city not in WEATHER_DATA:",
-                  "        return {\"error\": f\"Weather data not available for {city}\"}",
-                  "    ",
-                  "    data = WEATHER_DATA[city].copy()",
-                  "    if units == \"fahrenheit\":",
-                  "        data[\"temp\"] = (data[\"temp\"] * 9/5) + 32",
-                  "        data[\"units\"] = \"\u00b0F\"",
-                  "    else:",
-                  "        data[\"units\"] = \"\u00b0C\""
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 527,
-                "end_line": 534,
-                "language": "python",
-                "content": [
-                  "    data[\"city\"] = city",
-                  "    data[\"timestamp\"] = datetime.now().isoformat()",
-                  "    return data",
-                  "",
-                  "if __name__ == \"__main__\":",
-                  "    mcp.run()"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 582,
-                "end_line": 589,
-                "language": "",
-                "content": [
-                  "User: \"What's the weather in London and do I have any files about UK shipping?\"",
-                  "",
-                  "Agent reasoning process:",
-                  "\u251c\u2500\u2500 Weather query detected \u2192 Use weather tool",
-                  "\u251c\u2500\u2500 File search detected \u2192 Use filesystem tool  ",
-                  "\u2514\u2500\u2500 Coordination needed \u2192 Use both tools, then synthesize results"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 595,
-                "end_line": 605,
-                "language": "python",
-                "content": [
-                  "# agents/basic_agent.py - Your foundation integration pattern",
-                  "",
-                  "import asyncio",
-                  "import logging",
-                  "from typing import Optional",
-                  "from langchain.agents import create_react_agent, AgentExecutor",
-                  "from langchain_core.prompts import PromptTemplate",
-                  "from langchain_openai import ChatOpenAI",
-                  "from langchain_core.tools import Tool"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 609,
-                "end_line": 623,
-                "language": "python",
-                "content": [
-                  "from utils.mcp_manager import MCPServerManager",
-                  "from config import Config",
-                  "",
-                  "logger = logging.getLogger(__name__)",
-                  "",
-                  "class BasicMCPAgent:",
-                  "    \"\"\"A focused ReAct agent using a single MCP server - Your integration foundation.\"\"\"",
-                  "    ",
-                  "    def __init__(self, server_name: str, mcp_manager: MCPServerManager):",
-                  "        self.server_name = server_name",
-                  "        self.mcp_manager = mcp_manager",
-                  "        self.llm = None",
-                  "        self.agent_executor = None"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 627,
-                "end_line": 643,
-                "language": "python",
-                "content": [
-                  "    async def initialize(self) -> bool:",
-                  "        \"\"\"The initialization sequence - Setting up your agent's capabilities.\"\"\"",
-                  "        try:",
-                  "            # Intelligence layer - Initialize LLM",
-                  "            self.llm = ChatOpenAI(",
-                  "                model=Config.LLM.model,",
-                  "                temperature=Config.LLM.temperature,",
-                  "                api_key=Config.OPENAI_API_KEY",
-                  "            )",
-                  "            ",
-                  "            # Tool layer - Get MCP adapter and tools",
-                  "            adapter = await self.mcp_manager.get_adapter(self.server_name)",
-                  "            if not adapter:",
-                  "                logger.error(f\"Failed to get adapter: {self.server_name}\")",
-                  "                return False"
+                  "apiVersion: v1",
+                  "kind: Namespace",
+                  "metadata:",
+                  "  name: agentic-ai-prod",
+                  "  labels:",
+                  "    name: agentic-ai-prod",
+                  "    environment: production",
+                  "    compliance: \"gdpr-hipaa\"",
+                  "    cost-center: \"ai-operations\"",
+                  "    owner: \"ai-platform-team\"",
+                  "  annotations:",
+                  "    scheduler.alpha.kubernetes.io/node-selector: \"workload=ai-agents\"",
+                  "    kubernetes.io/managed-by: \"enterprise-platform\""
                 ],
                 "line_count": 15
               },
               {
-                "start_line": 647,
-                "end_line": 661,
-                "language": "python",
+                "start_line": 86,
+                "end_line": 106,
+                "language": "yaml",
                 "content": [
-                  "            # Integration layer - Convert MCP tools to LangChain tools",
-                  "            mcp_tools = await adapter.list_tools()",
-                  "            langchain_tools = self._create_langchain_tools(mcp_tools, adapter)",
-                  "            ",
-                  "            # Execution layer - Create the agent executor",
-                  "            self.agent_executor = self._create_agent_executor(langchain_tools)",
-                  "            ",
-                  "            logger.info(f\"Agent initialized with {len(langchain_tools)} tools\")",
-                  "            return True",
-                  "            ",
-                  "        except Exception as e:",
-                  "            logger.error(f\"Failed to initialize agent: {e}\")",
-                  "            return False"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 665,
-                "end_line": 679,
-                "language": "python",
-                "content": [
-                  "    def _create_langchain_tools(self, mcp_tools, adapter):",
-                  "        \"\"\"The translation layer - Converting MCP tools to LangChain format.\"\"\"",
-                  "        langchain_tools = []",
-                  "        ",
-                  "        for mcp_tool in mcp_tools:",
-                  "            # The bridge function - Wrapper for MCP tool execution",
-                  "            async def tool_wrapper(tool_input: str, tool_name=mcp_tool.name):",
-                  "                \"\"\"Wrapper to call MCP tool from LangChain context.\"\"\"",
-                  "                try:",
-                  "                    result = await adapter.call_tool(tool_name, {\"input\": tool_input})",
-                  "                    return str(result)",
-                  "                except Exception as e:",
-                  "                    return f\"Error calling tool {tool_name}: {str(e)}\""
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 683,
-                "end_line": 704,
-                "language": "python",
-                "content": [
-                  "            # The LangChain interface - Create compatible tool",
-                  "            langchain_tool = Tool(",
-                  "                name=mcp_tool.name,",
-                  "                description=mcp_tool.description or f\"Tool from {self.server_name}\",",
-                  "                func=lambda x, tn=mcp_tool.name: asyncio.create_task(tool_wrapper(x, tn))",
-                  "            )",
-                  "            langchain_tools.append(langchain_tool)",
-                  "        ",
-                  "        return langchain_tools",
-                  "    ",
-                  "    async def run(self, query: str) -> str:",
-                  "        \"\"\"Execute the agent with a query - Your intelligence in action.\"\"\"",
-                  "        if not self.agent_executor:",
-                  "            return \"Agent not initialized. Call initialize() first.\"",
-                  "        ",
-                  "        try:",
-                  "            result = await self.agent_executor.ainvoke({\"input\": query})",
-                  "            return result[\"output\"]",
-                  "        except Exception as e:",
-                  "            return f\"Error processing request: {str(e)}\""
-                ],
-                "line_count": 20
-              },
-              {
-                "start_line": 748,
-                "end_line": 758,
-                "language": "python",
-                "content": [
-                  "# agents/multi_tool_agent.py - Your orchestration masterpiece",
+                  "---",
                   "",
-                  "import asyncio",
-                  "import logging",
-                  "from typing import Dict, List, Any, Optional",
-                  "from langchain.agents import create_react_agent, AgentExecutor",
-                  "from langchain_core.prompts import PromptTemplate",
-                  "from langchain_openai import ChatOpenAI",
-                  "from langchain_core.tools import Tool"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 762,
-                "end_line": 769,
-                "language": "python",
-                "content": [
-                  "from langchain.memory import ConversationBufferWindowMemory",
+                  "# Resource Quota for enterprise resource management",
                   "",
-                  "from utils.mcp_manager import MCPServerManager",
-                  "from config import Config",
-                  "",
-                  "logger = logging.getLogger(__name__)"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 773,
-                "end_line": 783,
-                "language": "python",
-                "content": [
-                  "class MultiToolMCPAgent:",
-                  "    \"\"\"Advanced ReAct agent using multiple MCP servers - Your coordination engine.\"\"\"",
-                  "    ",
-                  "    def __init__(self, mcp_manager: MCPServerManager):",
-                  "        self.mcp_manager = mcp_manager",
-                  "        self.llm = None",
-                  "        self.agent_executor = None",
-                  "        self.memory = None",
-                  "        self.available_tools = {}"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 787,
-                "end_line": 797,
-                "language": "python",
-                "content": [
-                  "    async def initialize(self) -> bool:",
-                  "        \"\"\"The comprehensive initialization - Building your multi-tool intelligence.\"\"\"",
-                  "        try:",
-                  "            # Intelligence foundation - Initialize LLM",
-                  "            self.llm = ChatOpenAI(",
-                  "                model=Config.LLM.model,",
-                  "                temperature=Config.LLM.temperature,",
-                  "                api_key=Config.OPENAI_API_KEY",
-                  "            )"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 801,
-                "end_line": 808,
-                "language": "python",
-                "content": [
-                  "            # Memory system - Initialize conversation memory",
-                  "            self.memory = ConversationBufferWindowMemory(",
-                  "                k=10,  # Remember last 10 exchanges",
-                  "                memory_key=\"chat_history\",",
-                  "                return_messages=True",
-                  "            )"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 812,
-                "end_line": 819,
-                "language": "python",
-                "content": [
-                  "            # Tool ecosystem - Collect tools from all available servers",
-                  "            langchain_tools = await self._collect_all_tools()",
-                  "            ",
-                  "            if not langchain_tools:",
-                  "                logger.error(\"No tools available from MCP servers\")",
-                  "                return False"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 823,
-                "end_line": 836,
-                "language": "python",
-                "content": [
-                  "            # Agent creation - Create enhanced agent executor",
-                  "            self.agent_executor = self._create_enhanced_agent(langchain_tools)",
-                  "            ",
-                  "            tool_count = len(langchain_tools)",
-                  "            server_count = len(self.available_tools)",
-                  "            logger.info(f\"Multi-tool agent: {tool_count} tools from {server_count} servers\")",
-                  "            ",
-                  "            return True",
-                  "            ",
-                  "        except Exception as e:",
-                  "            logger.error(f\"Failed to initialize multi-tool agent: {e}\")",
-                  "            return False"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 840,
-                "end_line": 853,
-                "language": "python",
-                "content": [
-                  "    def _create_enhanced_agent(self, langchain_tools):",
-                  "        \"\"\"The intelligence amplifier - Create enhanced ReAct agent with sophisticated prompting.\"\"\"",
-                  "        react_prompt = PromptTemplate.from_template(\"\"\"",
-                  "You are an intelligent AI assistant with access to multiple specialized tools.",
-                  "You can use weather information, file system operations, and database queries.",
-                  "",
-                  "STRATEGIC APPROACH:",
-                  "1. Analyze the user's request carefully",
-                  "2. Identify which tools might be helpful",
-                  "3. Use tools in logical sequence",
-                  "4. Provide comprehensive, helpful responses",
-                  "5. If a tool fails, try alternative approaches"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 857,
-                "end_line": 874,
-                "language": "python",
-                "content": [
-                  "Available tools: {tools}",
-                  "",
-                  "Use this format:",
-                  "Question: {input}",
-                  "Thought: Let me analyze what tools I need",
-                  "Action: [tool_name]",
-                  "Action Input: [input_for_tool]",
-                  "Observation: [result_from_tool]",
-                  "... (repeat as needed)",
-                  "Thought: I have enough information",
-                  "Final Answer: [comprehensive_response]",
-                  "",
-                  "Conversation history: {chat_history}",
-                  "Question: {input}",
-                  "{agent_scratchpad}",
-                  "\"\"\")"
-                ],
-                "line_count": 16
-              },
-              {
-                "start_line": 878,
-                "end_line": 894,
-                "language": "python",
-                "content": [
-                  "        agent = create_react_agent(",
-                  "            llm=self.llm,",
-                  "            tools=langchain_tools,",
-                  "            prompt=react_prompt",
-                  "        )",
-                  "        ",
-                  "        return AgentExecutor(",
-                  "            agent=agent,",
-                  "            tools=langchain_tools,",
-                  "            memory=self.memory,",
-                  "            verbose=Config.AGENT_CONFIG[\"verbose\"],",
-                  "            max_iterations=Config.AGENT_CONFIG[\"max_iterations\"],",
-                  "            handle_parsing_errors=True,",
-                  "            return_intermediate_steps=True",
-                  "        )"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 946,
-                "end_line": 954,
-                "language": "python",
-                "content": [
-                  "# workflows/research_workflow.py - Your orchestration masterpiece",
-                  "",
-                  "import asyncio",
-                  "from typing import Dict, Any, List",
-                  "from langchain_core.messages import HumanMessage, AIMessage",
-                  "from langgraph.graph import StateGraph, END",
-                  "from dataclasses import dataclass"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 958,
-                "end_line": 973,
-                "language": "python",
-                "content": [
-                  "from utils.mcp_manager import MCPServerManager",
-                  "from config import Config",
-                  "",
-                  "@dataclass",
-                  "class ResearchState:",
-                  "    \"\"\"State tracking data through workflow steps - Your information backbone.\"\"\"",
-                  "    query: str",
-                  "    messages: List[Any] ",
-                  "    research_plan: str = \"\"",
-                  "    weather_data: Dict = None",
-                  "    file_data: Dict = None",
-                  "    database_data: Dict = None",
-                  "    final_report: str = \"\"",
-                  "    step_count: int = 0"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 988,
-                "end_line": 995,
-                "language": "python",
-                "content": [
-                  "class ResearchWorkflow:",
-                  "    \"\"\"Advanced research workflow using LangGraph and multiple MCP servers.\"\"\"",
-                  "    ",
-                  "    def __init__(self, mcp_manager: MCPServerManager):",
-                  "        self.mcp_manager = mcp_manager",
-                  "        self.workflow = None"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 999,
-                "end_line": 1010,
-                "language": "python",
-                "content": [
-                  "    async def build_workflow(self) -> StateGraph:",
-                  "        \"\"\"The workflow architect - Build the LangGraph workflow graph.\"\"\"",
-                  "        workflow = StateGraph(ResearchState)",
-                  "        ",
-                  "        # Processing nodes - Your specialized workforce",
-                  "        workflow.add_node(\"planner\", self._planning_node)",
-                  "        workflow.add_node(\"weather_researcher\", self._weather_research_node)",
-                  "        workflow.add_node(\"file_researcher\", self._file_research_node)",
-                  "        workflow.add_node(\"database_researcher\", self._database_research_node)",
-                  "        workflow.add_node(\"synthesizer\", self._synthesis_node)"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 1014,
-                "end_line": 1025,
-                "language": "python",
-                "content": [
-                  "        # Execution flow - Your process choreography",
-                  "        workflow.set_entry_point(\"planner\")",
-                  "        workflow.add_edge(\"planner\", \"weather_researcher\")",
-                  "        workflow.add_edge(\"weather_researcher\", \"file_researcher\")",
-                  "        workflow.add_edge(\"file_researcher\", \"database_researcher\")",
-                  "        workflow.add_edge(\"database_researcher\", \"synthesizer\")",
-                  "        workflow.add_edge(\"synthesizer\", END)",
-                  "        ",
-                  "        self.workflow = workflow.compile()",
-                  "        return self.workflow"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 1040,
-                "end_line": 1060,
-                "language": "python",
-                "content": [
-                  "    async def _planning_node(self, state: ResearchState) -> ResearchState:",
-                  "        \"\"\"The strategic planner - Plan research approach based on query analysis.\"\"\"",
-                  "        query_lower = state.query.lower()",
-                  "        plan_elements = []",
-                  "        ",
-                  "        # Intelligent analysis - Query analysis for different research domains",
-                  "        if any(word in query_lower for word in [\"weather\", \"climate\", \"temperature\"]):",
-                  "            plan_elements.append(\"- Gather weather information\")",
-                  "        ",
-                  "        if any(word in query_lower for word in [\"file\", \"document\", \"data\"]):",
-                  "            plan_elements.append(\"- Search relevant files\")",
-                  "        ",
-                  "        if any(word in query_lower for word in [\"database\", \"record\", \"history\"]):",
-                  "            plan_elements.append(\"- Query database for information\")",
-                  "        ",
-                  "        # Strategic documentation - Build research plan",
-                  "        state.research_plan = \"Research Plan:\\n\" + \"\\n\".join(plan_elements) if plan_elements else \"General research\"",
-                  "        state.step_count += 1",
-                  "        return state"
+                  "apiVersion: v1",
+                  "kind: ResourceQuota",
+                  "metadata:",
+                  "  name: agentic-ai-quota",
+                  "  namespace: agentic-ai-prod",
+                  "spec:",
+                  "  hard:",
+                  "    requests.cpu: \"100\"      # 100 CPU cores",
+                  "    requests.memory: \"400Gi\"  # 400GB RAM",
+                  "    requests.nvidia.com/gpu: \"20\"  # 20 GPUs",
+                  "    limits.cpu: \"200\"",
+                  "    limits.memory: \"800Gi\"",
+                  "    limits.nvidia.com/gpu: \"20\"",
+                  "    persistentvolumeclaims: \"50\"",
+                  "    services.loadbalancers: \"5\""
                 ],
                 "line_count": 19
               },
               {
-                "start_line": 1071,
-                "end_line": 1083,
-                "language": "python",
+                "start_line": 121,
+                "end_line": 132,
+                "language": "yaml",
                 "content": [
-                  "    async def _weather_research_node(self, state: ResearchState) -> ResearchState:",
-                  "        \"\"\"The meteorological specialist - Research weather information if relevant.\"\"\"",
-                  "        if \"weather\" not in state.query.lower():",
-                  "            state.weather_data = {\"skipped\": True}",
-                  "            return state",
-                  "        ",
-                  "        try:",
-                  "            adapter = await self.mcp_manager.get_adapter(\"weather\")",
-                  "            if adapter:",
-                  "                cities = self._extract_cities_from_query(state.query)",
-                  "                weather_results = {}"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 1087,
-                "end_line": 1098,
-                "language": "python",
-                "content": [
-                  "                for city in cities:",
-                  "                    try:",
-                  "                        result = await adapter.call_tool(\"get_current_weather\", {\"city\": city})",
-                  "                        weather_results[city] = result",
-                  "                    except:",
-                  "                        continue  # Resilient processing - Try other cities",
-                  "                ",
-                  "                state.weather_data = weather_results or {\"error\": \"No weather data\"}",
-                  "            else:",
-                  "                state.weather_data = {\"error\": \"Weather server unavailable\"}"
+                  "# k8s/enterprise-configmap.yaml - Production configuration",
+                  "",
+                  "apiVersion: v1",
+                  "kind: ConfigMap",
+                  "metadata:",
+                  "  name: agentic-ai-config",
+                  "  namespace: agentic-ai-prod",
+                  "  labels:",
+                  "    config-version: \"v2.1.0\"",
+                  "    environment: production"
                 ],
                 "line_count": 10
               },
               {
-                "start_line": 1102,
-                "end_line": 1108,
-                "language": "python",
+                "start_line": 136,
+                "end_line": 143,
+                "language": "yaml",
                 "content": [
-                  "        except Exception as e:",
-                  "            state.weather_data = {\"error\": str(e)}",
-                  "        ",
-                  "        state.step_count += 1",
-                  "        return state"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1112,
-                "end_line": 1119,
-                "language": "python",
-                "content": [
-                  "    async def run_research(self, query: str) -> Dict[str, Any]:",
-                  "        \"\"\"The workflow executor - Execute the complete research workflow.\"\"\"",
-                  "        if not self.workflow:",
-                  "            await self.build_workflow()",
-                  "        ",
-                  "        initial_state = ResearchState(query=query, messages=[HumanMessage(content=query)])"
+                  "data:",
+                  "  # Redis Configuration",
+                  "  redis.host: \"redis-ha-service.agentic-ai-prod.svc.cluster.local\"",
+                  "  redis.port: \"6379\"",
+                  "  redis.ssl.enabled: \"true\"",
+                  "  redis.cluster.enabled: \"true\""
                 ],
                 "line_count": 6
               },
               {
-                "start_line": 1123,
-                "end_line": 1139,
-                "language": "python",
+                "start_line": 147,
+                "end_line": 153,
+                "language": "yaml",
                 "content": [
-                  "        try:",
-                  "            final_state = await self.workflow.ainvoke(initial_state)",
-                  "            return {",
-                  "                \"success\": True,",
-                  "                \"query\": query,",
-                  "                \"report\": final_state.final_report,",
-                  "                \"steps\": final_state.step_count",
-                  "            }",
-                  "        except Exception as e:",
-                  "            return {",
-                  "                \"success\": False,",
-                  "                \"query\": query,",
-                  "                \"error\": str(e),",
-                  "                \"report\": f\"Research workflow failed: {str(e)}\"",
-                  "            }"
+                  "  # Monitoring and Observability",
+                  "  prometheus.enabled: \"true\"",
+                  "  prometheus.port: \"9090\"",
+                  "  jaeger.enabled: \"true\"",
+                  "  jaeger.endpoint: \"http://jaeger-collector.monitoring:14268/api/traces\""
                 ],
-                "line_count": 15
+                "line_count": 5
               },
               {
-                "start_line": 1221,
-                "end_line": 1233,
-                "language": "python",
+                "start_line": 157,
+                "end_line": 163,
+                "language": "yaml",
                 "content": [
-                  "from langchain_mcp import MCPToolkit",
-                  "from langchain.agents import initialize_agent, AgentType",
-                  "from langchain.llm import OpenAI",
+                  "  # Agent Performance Configuration",
+                  "  agent.max_concurrent_workflows: \"100\"",
+                  "  agent.heartbeat_interval: \"15\"",
+                  "  agent.health_check_timeout: \"5\"",
+                  "  agent.graceful_shutdown_timeout: \"60\""
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 167,
+                "end_line": 173,
+                "language": "yaml",
+                "content": [
+                  "  # MCP and Protocol Configuration",
+                  "  mcp.server.timeout: \"120\"",
+                  "  mcp.connection_pool_size: \"50\"",
+                  "  a2a.discovery.enabled: \"true\"",
+                  "  acp.local_registry.enabled: \"true\""
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 177,
+                "end_line": 183,
+                "language": "yaml",
+                "content": [
+                  "  # Performance and Optimization",
+                  "  optimization.enabled: \"true\"",
+                  "  optimization.gpu_memory_fraction: \"0.8\"",
+                  "  optimization.batch_size: \"32\"",
+                  "  optimization.model_parallelism: \"true\""
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 187,
+                "end_line": 200,
+                "language": "yaml",
+                "content": [
+                  "  # Compliance and Security",
+                  "  audit.enabled: \"true\"",
+                  "  audit.log_level: \"INFO\"",
+                  "  encryption.at_rest: \"true\"",
+                  "  encryption.in_transit: \"true\"",
+                  "  ",
+                  "  # Scaling Configuration",
+                  "  scaling.min_replicas: \"3\"",
+                  "  scaling.max_replicas: \"50\"",
+                  "  scaling.target_cpu_utilization: \"70\"",
+                  "  scaling.target_memory_utilization: \"80\"",
+                  "  scaling.gpu_utilization_threshold: \"75\""
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 208,
+                "end_line": 222,
+                "language": "yaml",
+                "content": [
+                  "# k8s/enterprise-secrets.yaml - Encrypted secrets management",
                   "",
-                  "# Your multi-server agent setup - Building your digital travel consultant",
-                  "weather_toolkit = MCPToolkit.from_server(\"weather-server\")",
-                  "file_toolkit = MCPToolkit.from_server(\"filesystem-server\") ",
-                  "preference_toolkit = MCPToolkit.from_server(\"preference-server\")",
+                  "apiVersion: v1",
+                  "kind: Secret",
+                  "metadata:",
+                  "  name: agentic-ai-secrets",
+                  "  namespace: agentic-ai-prod",
+                  "  labels:",
+                  "    security-tier: \"high\"",
+                  "    rotation-schedule: \"monthly\"",
+                  "  annotations:",
+                  "    kubernetes.io/service-account.name: \"agentic-ai-service\"",
+                  "type: Opaque"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 226,
+                "end_line": 237,
+                "language": "yaml",
+                "content": [
+                  "data:",
+                  "  # API Keys (base64 encoded)",
+                  "  openai-api-key: <base64-encoded-key>",
+                  "  anthropic-api-key: <base64-encoded-key>",
+                  "  azure-openai-key: <base64-encoded-key>",
+                  "  ",
+                  "  # Database Credentials",
+                  "  postgres-username: <base64-encoded-username>",
+                  "  postgres-password: <base64-encoded-password>",
+                  "  redis-password: <base64-encoded-password>"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 241,
+                "end_line": 250,
+                "language": "yaml",
+                "content": [
+                  "  # TLS Certificates",
+                  "  tls.crt: <base64-encoded-certificate>",
+                  "  tls.key: <base64-encoded-private-key>",
+                  "  ca.crt: <base64-encoded-ca-certificate>",
+                  "  ",
+                  "  # JWT Signing Keys",
+                  "  jwt-private-key: <base64-encoded-jwt-key>",
+                  "  jwt-public-key: <base64-encoded-public-key>"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 254,
+                "end_line": 260,
+                "language": "yaml",
+                "content": [
+                  "  # External Service Credentials",
+                  "  aws-access-key-id: <base64-encoded-access-key>",
+                  "  aws-secret-access-key: <base64-encoded-secret>",
+                  "  gcp-service-account: <base64-encoded-json-key>",
+                  "---"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 264,
+                "end_line": 277,
+                "language": "yaml",
+                "content": [
+                  "# Sealed Secrets for GitOps (production security)",
                   "",
-                  "# Integration mastery - Combine toolkits and create agent",
-                  "all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_toolkit.get_tools()"
+                  "apiVersion: bitnami.com/v1alpha1",
+                  "kind: SealedSecret",
+                  "metadata:",
+                  "  name: agentic-ai-sealed-secrets",
+                  "  namespace: agentic-ai-prod",
+                  "spec:",
+                  "  encryptedData:",
+                  "    production-db-url: <sealed-encrypted-data>",
+                  "    monitoring-api-key: <sealed-encrypted-data>",
+                  "    compliance-webhook-secret: <sealed-encrypted-data>"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 292,
+                "end_line": 304,
+                "language": "yaml",
+                "content": [
+                  "# k8s/redis-deployment.yaml - Deployment foundation",
+                  "",
+                  "apiVersion: apps/v1",
+                  "kind: Deployment",
+                  "metadata:",
+                  "  name: redis",
+                  "  namespace: agent-system",
+                  "  labels:",
+                  "    app: redis",
+                  "    component: message-queue",
+                  "    tier: data"
                 ],
                 "line_count": 11
+              },
+              {
+                "start_line": 308,
+                "end_line": 319,
+                "language": "yaml",
+                "content": [
+                  "spec:",
+                  "  replicas: 1                    # Single instance for simplicity",
+                  "  selector:",
+                  "    matchLabels:",
+                  "      app: redis",
+                  "  template:",
+                  "    metadata:",
+                  "      labels:",
+                  "        app: redis",
+                  "        component: message-queue"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 323,
+                "end_line": 336,
+                "language": "yaml",
+                "content": [
+                  "    spec:",
+                  "      containers:",
+                  "      - name: redis",
+                  "        image: redis:7-alpine     # Latest stable Redis",
+                  "        ports:",
+                  "        - containerPort: 6379",
+                  "        env:",
+                  "        - name: REDIS_PASSWORD    # Secure password from secrets",
+                  "          valueFrom:",
+                  "            secretKeyRef:",
+                  "              name: agent-secrets",
+                  "              key: redis-password"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 340,
+                "end_line": 352,
+                "language": "yaml",
+                "content": [
+                  "        command:",
+                  "        - redis-server",
+                  "        - --requirepass",
+                  "        - $(REDIS_PASSWORD)        # Secure Redis with password",
+                  "        resources:",
+                  "          requests:                # Minimum guaranteed resources",
+                  "            memory: \"256Mi\"",
+                  "            cpu: \"250m\"",
+                  "          limits:                  # Maximum allowed resources",
+                  "            memory: \"512Mi\"",
+                  "            cpu: \"500m\""
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 356,
+                "end_line": 370,
+                "language": "yaml",
+                "content": [
+                  "        volumeMounts:",
+                  "        - name: redis-data",
+                  "          mountPath: /data         # Redis data directory for persistence",
+                  "        livenessProbe:",
+                  "          exec:",
+                  "            command:",
+                  "            - redis-cli",
+                  "            - --no-auth-warning",
+                  "            - -a",
+                  "            - $(REDIS_PASSWORD)",
+                  "            - ping",
+                  "          initialDelaySeconds: 30     # Wait for Redis startup",
+                  "          periodSeconds: 10           # Check every 10 seconds"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 374,
+                "end_line": 389,
+                "language": "yaml",
+                "content": [
+                  "        readinessProbe:",
+                  "          exec:",
+                  "            command:",
+                  "            - redis-cli",
+                  "            - --no-auth-warning  ",
+                  "            - -a",
+                  "            - $(REDIS_PASSWORD)",
+                  "            - ping",
+                  "          initialDelaySeconds: 5      # Quick readiness check",
+                  "          periodSeconds: 5            # Frequent ready checks",
+                  "      volumes:",
+                  "      - name: redis-data",
+                  "        persistentVolumeClaim:",
+                  "          claimName: redis-pvc      # Link to persistent volume"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 397,
+                "end_line": 408,
+                "language": "yaml",
+                "content": [
+                  "# k8s/agent-deployment.yaml",
+                  "",
+                  "apiVersion: apps/v1",
+                  "kind: Deployment",
+                  "metadata:",
+                  "  name: mcp-agent",
+                  "  namespace: agent-system",
+                  "  labels:",
+                  "    app: mcp-agent",
+                  "    version: v1.0.0"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 412,
+                "end_line": 427,
+                "language": "yaml",
+                "content": [
+                  "spec:",
+                  "  replicas: 3",
+                  "  selector:",
+                  "    matchLabels:",
+                  "      app: mcp-agent",
+                  "  template:",
+                  "    metadata:",
+                  "      labels:",
+                  "        app: mcp-agent",
+                  "        version: v1.0.0",
+                  "      annotations:",
+                  "        prometheus.io/scrape: \"true\"",
+                  "        prometheus.io/port: \"8080\"",
+                  "        prometheus.io/path: \"/metrics\""
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 431,
+                "end_line": 444,
+                "language": "yaml",
+                "content": [
+                  "    spec:",
+                  "      serviceAccountName: agent-service-account",
+                  "      containers:",
+                  "      - name: mcp-agent",
+                  "        image: agent-registry/mcp-agent:v1.0.0",
+                  "        ports:",
+                  "        - containerPort: 8080",
+                  "          name: http              # REST API for agent communication",
+                  "        - containerPort: 8081",
+                  "          name: grpc              # gRPC for high-performance calls  ",
+                  "        - containerPort: 9090",
+                  "          name: metrics           # Prometheus metrics endpoint"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 448,
+                "end_line": 465,
+                "language": "yaml",
+                "content": [
+                  "        env:",
+                  "        - name: REDIS_HOST",
+                  "          valueFrom:",
+                  "            configMapKeyRef:",
+                  "              name: agent-config",
+                  "              key: redis.host     # Dynamic Redis host configuration",
+                  "        - name: REDIS_PASSWORD",
+                  "          valueFrom:",
+                  "            secretKeyRef:",
+                  "              name: agent-secrets # Secure password management",
+                  "              key: redis-password",
+                  "        - name: API_KEY",
+                  "          valueFrom:",
+                  "            secretKeyRef:",
+                  "              name: agent-secrets",
+                  "              key: api-key        # External API authentication"
+                ],
+                "line_count": 16
+              },
+              {
+                "start_line": 469,
+                "end_line": 477,
+                "language": "yaml",
+                "content": [
+                  "        resources:",
+                  "          requests:",
+                  "            memory: \"512Mi\"",
+                  "            cpu: \"500m\"",
+                  "          limits:",
+                  "            memory: \"1Gi\"",
+                  "            cpu: \"1000m\""
+                ],
+                "line_count": 7
+              },
+              {
+                "start_line": 481,
+                "end_line": 490,
+                "language": "yaml",
+                "content": [
+                  "        startupProbe:",
+                  "          httpGet:",
+                  "            path: /health",
+                  "            port: 8080",
+                  "          initialDelaySeconds: 30    # Wait for agent initialization",
+                  "          periodSeconds: 10          # Check every 10 seconds",
+                  "          timeoutSeconds: 5          # 5-second timeout",
+                  "          failureThreshold: 10       # Allow up to 100 seconds startup"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 494,
+                "end_line": 511,
+                "language": "yaml",
+                "content": [
+                  "        livenessProbe:",
+                  "          httpGet:",
+                  "            path: /health",
+                  "            port: 8080",
+                  "          initialDelaySeconds: 60    # Start after startup completes",
+                  "          periodSeconds: 30          # Check every 30 seconds",
+                  "          timeoutSeconds: 10         # Longer timeout for busy agents",
+                  "          failureThreshold: 3        # Restart after 3 failures",
+                  "        readinessProbe:",
+                  "          httpGet:",
+                  "            path: /ready             # Different endpoint for readiness",
+                  "            port: 8080",
+                  "          initialDelaySeconds: 30",
+                  "          periodSeconds: 10          # Frequent readiness checks",
+                  "          timeoutSeconds: 5",
+                  "          failureThreshold: 3        # Quick traffic removal"
+                ],
+                "line_count": 16
+              },
+              {
+                "start_line": 519,
+                "end_line": 533,
+                "language": "yaml",
+                "content": [
+                  "---",
+                  "apiVersion: autoscaling/v2",
+                  "kind: HorizontalPodAutoscaler",
+                  "metadata:",
+                  "  name: mcp-agent-hpa",
+                  "  namespace: agent-system",
+                  "spec:",
+                  "  scaleTargetRef:",
+                  "    apiVersion: apps/v1",
+                  "    kind: Deployment",
+                  "    name: mcp-agent",
+                  "  minReplicas: 3",
+                  "  maxReplicas: 20"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 537,
+                "end_line": 558,
+                "language": "yaml",
+                "content": [
+                  "  metrics:",
+                  "  - type: Resource",
+                  "    resource:",
+                  "      name: cpu",
+                  "      target:",
+                  "        type: Utilization",
+                  "        averageUtilization: 70",
+                  "  - type: Resource",
+                  "    resource:",
+                  "      name: memory",
+                  "      target:",
+                  "        type: Utilization",
+                  "        averageUtilization: 80",
+                  "  - type: Pods",
+                  "    pods:",
+                  "      metric:",
+                  "        name: active_workflows",
+                  "      target:",
+                  "        type: AverageValue",
+                  "        averageValue: \"10\""
+                ],
+                "line_count": 20
+              },
+              {
+                "start_line": 562,
+                "end_line": 580,
+                "language": "yaml",
+                "content": [
+                  "  behavior:",
+                  "    scaleDown:",
+                  "      stabilizationWindowSeconds: 300",
+                  "      policies:",
+                  "      - type: Percent",
+                  "        value: 10",
+                  "        periodSeconds: 60",
+                  "    scaleUp:",
+                  "      stabilizationWindowSeconds: 60",
+                  "      policies:",
+                  "      - type: Percent",
+                  "        value: 50",
+                  "        periodSeconds: 60",
+                  "      - type: Pods",
+                  "        value: 2",
+                  "        periodSeconds: 60",
+                  "      selectPolicy: Max"
+                ],
+                "line_count": 17
+              },
+              {
+                "start_line": 595,
+                "end_line": 610,
+                "language": "yaml",
+                "content": [
+                  "# k8s/istio-config.yaml",
+                  "",
+                  "apiVersion: networking.istio.io/v1beta1",
+                  "kind: VirtualService",
+                  "metadata:",
+                  "  name: mcp-agent-vs",
+                  "  namespace: agent-system",
+                  "spec:",
+                  "  hosts:",
+                  "  - mcp-agent-service",
+                  "  http:",
+                  "  - match:",
+                  "    - uri:",
+                  "        prefix: /api/v1"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 614,
+                "end_line": 626,
+                "language": "yaml",
+                "content": [
+                  "    route:",
+                  "    - destination:",
+                  "        host: mcp-agent-service",
+                  "        port:",
+                  "          number: 80",
+                  "      weight: 100",
+                  "    fault:",
+                  "      delay:",
+                  "        percentage:",
+                  "          value: 0.1",
+                  "        fixedDelay: 5s"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 632,
+                "end_line": 652,
+                "language": "yaml",
+                "content": [
+                  "---",
+                  "apiVersion: networking.istio.io/v1beta1",
+                  "kind: DestinationRule",
+                  "metadata:",
+                  "  name: mcp-agent-dr",
+                  "  namespace: agent-system",
+                  "spec:",
+                  "  host: mcp-agent-service",
+                  "  trafficPolicy:",
+                  "    loadBalancer:",
+                  "      simple: LEAST_CONN",
+                  "    connectionPool:",
+                  "      tcp:",
+                  "        maxConnections: 100",
+                  "      http:",
+                  "        http1MaxPendingRequests: 50",
+                  "        http2MaxRequests: 100",
+                  "        maxRequestsPerConnection: 10",
+                  "        maxRetries: 3"
+                ],
+                "line_count": 19
+              },
+              {
+                "start_line": 656,
+                "end_line": 662,
+                "language": "yaml",
+                "content": [
+                  "    circuitBreaker:",
+                  "      consecutiveErrors: 5",
+                  "      interval: 30s",
+                  "      baseEjectionTime: 30s",
+                  "      maxEjectionPercent: 50"
+                ],
+                "line_count": 5
+              },
+              {
+                "start_line": 681,
+                "end_line": 692,
+                "language": "python",
+                "content": [
+                  "# monitoring/agent_metrics.py - Production monitoring foundation",
+                  "",
+                  "import time                                                    # For timing measurements",
+                  "import asyncio                                                # Async monitoring operations",
+                  "from typing import Dict, Any, Optional                        # Type hints for clarity",
+                  "from prometheus_client import Counter, Histogram, Gauge, Info, start_http_server  # Prometheus metrics",
+                  "import logging                                                # Structured logging",
+                  "from datetime import datetime, timedelta                      # Time-based calculations",
+                  "",
+                  "logger = logging.getLogger(__name__)                          # Component-specific logging"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 696,
+                "end_line": 710,
+                "language": "python",
+                "content": [
+                  "class AgentMetrics:",
+                  "    \"\"\"Comprehensive metrics collection for production agent systems.\"\"\"",
+                  "    ",
+                  "    def __init__(self, service_name: str = \"mcp-agent\", metrics_port: int = 9090):",
+                  "        self.service_name = service_name              # Service identifier for metric labeling",
+                  "        self.metrics_port = metrics_port              # Prometheus scraping endpoint port",
+                  "        ",
+                  "        # Initialize Prometheus metrics registry",
+                  "        self._initialize_metrics()",
+                  "        ",
+                  "        # Start HTTP server for Prometheus metrics scraping",
+                  "        start_http_server(metrics_port)",
+                  "        logger.info(f\"Metrics server started on port {metrics_port}\")"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 714,
+                "end_line": 725,
+                "language": "python",
+                "content": [
+                  "    def _initialize_metrics(self):",
+                  "        \"\"\"Initialize comprehensive Prometheus metrics for production monitoring.\"\"\"",
+                  "        ",
+                  "        # System identification and metadata",
+                  "        self.info = Info('agent_info', 'Agent system information and metadata')",
+                  "        self.info.info({",
+                  "            'service': self.service_name,      # Service identifier for routing alerts",
+                  "            'version': '1.0.0',               # Version for change correlation  ",
+                  "            'environment': 'production'       # Environment for alert scoping",
+                  "        })"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 729,
+                "end_line": 744,
+                "language": "python",
+                "content": [
+                  "        # HTTP request tracking for API performance",
+                  "        self.request_count = Counter(",
+                  "            'http_requests_total',            # Standard metric name for dashboards",
+                  "            'Total HTTP requests received',",
+                  "            ['method', 'endpoint', 'status_code']  # Labels for detailed analysis",
+                  "        )",
+                  "        ",
+                  "        # Request latency distribution for SLA monitoring",
+                  "        self.request_duration = Histogram(",
+                  "            'http_request_duration_seconds',   # Duration in seconds (Prometheus standard)",
+                  "            'HTTP request duration distribution',",
+                  "            ['method', 'endpoint'],",
+                  "            buckets=[0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0]  # SLA-aligned buckets",
+                  "        )"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 748,
+                "end_line": 761,
+                "language": "python",
+                "content": [
+                  "        # Real-time workflow monitoring for capacity planning",
+                  "        self.active_workflows = Gauge(",
+                  "            'active_workflows',                         # Current workflow load",
+                  "            'Number of currently active workflows'     # For auto-scaling decisions",
+                  "        )",
+                  "        ",
+                  "        # Workflow success tracking for reliability metrics",
+                  "        self.workflow_executions = Counter(",
+                  "            'workflow_executions_total',               # Total executions over time",
+                  "            'Total workflow executions by type and outcome',",
+                  "            ['workflow_type', 'status']                # Success/failure breakdown",
+                  "        )"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 765,
+                "end_line": 779,
+                "language": "python",
+                "content": [
+                  "        # MCP tool interactions",
+                  "        self.mcp_tool_calls = Counter(",
+                  "            'mcp_tool_calls_total',",
+                  "            'Total MCP tool calls',",
+                  "            ['server', 'tool', 'status']",
+                  "        )",
+                  "        ",
+                  "        self.mcp_tool_duration = Histogram(",
+                  "            'mcp_tool_duration_seconds',",
+                  "            'MCP tool call duration in seconds',",
+                  "            ['server', 'tool'],",
+                  "            buckets=[0.1, 0.5, 1.0, 2.0, 5.0, 10.0]",
+                  "        )"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 783,
+                "end_line": 802,
+                "language": "python",
+                "content": [
+                  "        # A2A communication metrics",
+                  "        self.a2a_messages_sent = Counter(",
+                  "            'a2a_messages_sent_total',",
+                  "            'Total A2A messages sent',",
+                  "            ['message_type', 'recipient']",
+                  "        )",
+                  "        ",
+                  "        # Resource and error tracking",
+                  "        self.memory_usage = Gauge(",
+                  "            'memory_usage_bytes',",
+                  "            'Current memory usage in bytes'",
+                  "        )",
+                  "        ",
+                  "        self.error_count = Counter(",
+                  "            'errors_total',",
+                  "            'Total errors',",
+                  "            ['error_type', 'component']",
+                  "        )"
+                ],
+                "line_count": 18
+              },
+              {
+                "start_line": 810,
+                "end_line": 823,
+                "language": "python",
+                "content": [
+                  "    def record_request(self, method: str, endpoint: str, status_code: int, duration: float):",
+                  "        \"\"\"Record HTTP request metrics.\"\"\"",
+                  "        self.request_count.labels(",
+                  "            method=method,",
+                  "            endpoint=endpoint,",
+                  "            status_code=str(status_code)",
+                  "        ).inc()",
+                  "        ",
+                  "        self.request_duration.labels(",
+                  "            method=method,",
+                  "            endpoint=endpoint",
+                  "        ).observe(duration)"
+                ],
+                "line_count": 12
+              },
+              {
+                "start_line": 827,
+                "end_line": 839,
+                "language": "python",
+                "content": [
+                  "    def record_workflow_execution(self, workflow_type: str, status: str, duration: float):",
+                  "        \"\"\"Record workflow execution metrics.\"\"\"",
+                  "        self.workflow_executions.labels(",
+                  "            workflow_type=workflow_type,",
+                  "            status=status",
+                  "        ).inc()",
+                  "        ",
+                  "        if status == \"completed\" or status == \"failed\":",
+                  "            self.workflow_duration.labels(",
+                  "                workflow_type=workflow_type",
+                  "            ).observe(duration)"
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 843,
+                "end_line": 857,
+                "language": "python",
+                "content": [
+                  "    def record_mcp_tool_call(self, server: str, tool: str, status: str, duration: float):",
+                  "        \"\"\"Record MCP tool call metrics.\"\"\"",
+                  "        self.mcp_tool_calls.labels(",
+                  "            server=server,",
+                  "            tool=tool,",
+                  "            status=status",
+                  "        ).inc()",
+                  "        ",
+                  "        if status == \"success\":",
+                  "            self.mcp_tool_duration.labels(",
+                  "                server=server,",
+                  "                tool=tool",
+                  "            ).observe(duration)"
+                ],
+                "line_count": 13
+              },
+              {
+                "start_line": 865,
+                "end_line": 875,
+                "language": "python",
+                "content": [
+                  "# monitoring/health_checker.py",
+                  "",
+                  "import asyncio",
+                  "import time",
+                  "from typing import Dict, Any, List, Callable",
+                  "from datetime import datetime, timedelta",
+                  "import logging",
+                  "",
+                  "logger = logging.getLogger(__name__)"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 879,
+                "end_line": 890,
+                "language": "python",
+                "content": [
+                  "class HealthChecker:",
+                  "    \"\"\"Comprehensive health checking system for agent services.\"\"\"",
+                  "    ",
+                  "    def __init__(self):",
+                  "        self.liveness_checks: Dict[str, Callable] = {}",
+                  "        self.readiness_checks: Dict[str, Callable] = {}",
+                  "        self.startup_checks: Dict[str, Callable] = {}",
+                  "        ",
+                  "        self.check_results: Dict[str, Dict[str, Any]] = {}",
+                  "        self.last_check_time = {}"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 894,
+                "end_line": 899,
+                "language": "python",
+                "content": [
+                  "    def register_liveness_check(self, name: str, check_func: Callable):",
+                  "        \"\"\"Register a liveness check function.\"\"\"",
+                  "        self.liveness_checks[name] = check_func",
+                  "        logger.info(f\"Registered liveness check: {name}\")"
+                ],
+                "line_count": 4
+              },
+              {
+                "start_line": 903,
+                "end_line": 914,
+                "language": "python",
+                "content": [
+                  "    async def check_health(self) -> Dict[str, Any]:",
+                  "        \"\"\"Execute all health checks and return results.\"\"\"",
+                  "        ",
+                  "        start_time = time.time()",
+                  "        health_status = {",
+                  "            \"status\": \"healthy\",",
+                  "            \"timestamp\": datetime.now().isoformat(),",
+                  "            \"checks\": {},",
+                  "            \"duration_ms\": 0",
+                  "        }"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 918,
+                "end_line": 930,
+                "language": "python",
+                "content": [
+                  "        # Run liveness checks",
+                  "        for check_name, check_func in self.liveness_checks.items():",
+                  "            try:",
+                  "                result = await self._execute_check(check_func)",
+                  "                health_status[\"checks\"][check_name] = {",
+                  "                    \"status\": \"pass\" if result else \"fail\",",
+                  "                    \"checked_at\": datetime.now().isoformat()",
+                  "                }",
+                  "                ",
+                  "                if not result:",
+                  "                    health_status[\"status\"] = \"unhealthy\""
+                ],
+                "line_count": 11
+              },
+              {
+                "start_line": 934,
+                "end_line": 945,
+                "language": "python",
+                "content": [
+                  "            except Exception as e:",
+                  "                health_status[\"checks\"][check_name] = {",
+                  "                    \"status\": \"fail\",",
+                  "                    \"error\": str(e),",
+                  "                    \"checked_at\": datetime.now().isoformat()",
+                  "                }",
+                  "                health_status[\"status\"] = \"unhealthy\"",
+                  "        ",
+                  "        health_status[\"duration_ms\"] = int((time.time() - start_time) * 1000)",
+                  "        return health_status"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 953,
+                "end_line": 968,
+                "language": "yaml",
+                "content": [
+                  "# monitoring/alerts/system.yml",
+                  "",
+                  "groups:",
+                  "- name: system",
+                  "  rules:",
+                  "  - alert: HighCPUUsage",
+                  "    expr: cpu_usage_percent > 80",
+                  "    for: 5m",
+                  "    labels:",
+                  "      severity: warning",
+                  "      component: system",
+                  "    annotations:",
+                  "      summary: \"High CPU usage detected\"",
+                  "      description: \"CPU usage is {{ $value }}% for more than 5 minutes\""
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 972,
+                "end_line": 982,
+                "language": "yaml",
+                "content": [
+                  "  - alert: HighMemoryUsage",
+                  "    expr: (memory_usage_bytes / (1024*1024*1024)) > 0.8",
+                  "    for: 5m",
+                  "    labels:",
+                  "      severity: warning",
+                  "      component: system",
+                  "    annotations:",
+                  "      summary: \"High memory usage detected\"",
+                  "      description: \"Memory usage is {{ $value }}GB\""
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 986,
+                "end_line": 996,
+                "language": "yaml",
+                "content": [
+                  "  - alert: WorkflowFailureRate",
+                  "    expr: (rate(workflow_executions_total{status=\"failed\"}[5m]) / rate(workflow_executions_total[5m])) > 0.1",
+                  "    for: 3m",
+                  "    labels:",
+                  "      severity: critical",
+                  "      component: workflow",
+                  "    annotations:",
+                  "      summary: \"High workflow failure rate\"",
+                  "      description: \"Workflow failure rate is {{ $value | humanizePercentage }}\""
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 1000,
+                "end_line": 1010,
+                "language": "yaml",
+                "content": [
+                  "  - alert: MCPToolCallLatency",
+                  "    expr: histogram_quantile(0.95, rate(mcp_tool_duration_seconds_bucket[5m])) > 10",
+                  "    for: 2m",
+                  "    labels:",
+                  "      severity: warning",
+                  "      component: mcp",
+                  "    annotations:",
+                  "      summary: \"High MCP tool call latency\"",
+                  "      description: \"95th percentile latency is {{ $value }}s\""
+                ],
+                "line_count": 9
               }
             ],
             "large_blocks": [],
@@ -1052,7 +1079,7 @@
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md",
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md",
             "total_issues": 0,
             "issues": [],
             "needs_fixing": false
@@ -1067,145 +1094,34 @@
         "summary": {
           "total_files": 1,
           "files_needing_improvement": 1,
-          "total_issues": 15,
-          "average_quality_score": 73.21428571428571
+          "total_issues": 2,
+          "average_quality_score": 96.29629629629629
         },
         "files": [
           {
-            "total_code_blocks": 56,
-            "total_issues": 15,
+            "total_code_blocks": 54,
+            "total_issues": 2,
             "issues": [
               {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 108,
-                "code_block_size": 9,
-                "word_count": 5,
-                "message": "Code block (9 lines) at line 95 has insufficient explanation (5 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 108,
-                "code_block_size": 9,
-                "message": "Code block at line 95 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 142,
-                "code_block_size": 18,
-                "word_count": 6,
-                "message": "Code block (18 lines) at line 122 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 142,
-                "code_block_size": 18,
-                "message": "Code block at line 122 explanation lacks educational context",
+                "line": 390,
+                "code_block_size": 14,
+                "message": "Code block at line 374 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "generic_explanation",
                 "severity": "medium",
-                "line": 259,
-                "code_block_size": 7,
-                "message": "Code block at line 250 has generic/lazy explanation",
+                "line": 611,
+                "code_block_size": 13,
+                "message": "Code block at line 595 has generic/lazy explanation",
                 "suggestion": "Replace generic phrases with specific, educational explanations"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 339,
-                "code_block_size": 13,
-                "word_count": 6,
-                "message": "Code block (13 lines) at line 320 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 339,
-                "code_block_size": 13,
-                "message": "Code block at line 320 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 420,
-                "code_block_size": 15,
-                "word_count": 5,
-                "message": "Code block (15 lines) at line 400 has insufficient explanation (5 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 420,
-                "code_block_size": 15,
-                "message": "Code block at line 400 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 590,
-                "code_block_size": 5,
-                "word_count": 6,
-                "message": "Code block (5 lines) at line 582 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 590,
-                "code_block_size": 5,
-                "message": "Code block at line 582 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 1061,
-                "code_block_size": 15,
-                "word_count": 6,
-                "message": "Code block (15 lines) at line 1040 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1061,
-                "code_block_size": 15,
-                "message": "Code block at line 1040 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 1234,
-                "code_block_size": 9,
-                "word_count": 3,
-                "message": "Code block (9 lines) at line 1221 has insufficient explanation (3 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1234,
-                "code_block_size": 9,
-                "message": "Code block at line 1221 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               }
             ],
             "needs_improvement": true,
-            "quality_score": 73.21428571428571,
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md"
+            "quality_score": 96.29629629629629,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md"
           }
         ]
       },
@@ -1214,11 +1130,11 @@
   },
   "priority_files": [
     {
-      "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md",
-      "file_name": "Session3_LangChain_MCP_Integration.md",
-      "priority_score": 5.3571428571428585,
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md",
+      "file_name": "Session9_Production_Agent_Deployment.md",
+      "priority_score": 0.7407407407407419,
       "issues": [
-        "73.2% explanation quality"
+        "96.3% explanation quality"
       ]
     }
   ]
