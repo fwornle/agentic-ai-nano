@@ -1588,45 +1588,49 @@ Building knowledge graphs is only half the challenge – the real power emerges 
 
 ### The Power of Multi-Hop Reasoning
 
-Consider the query "What security vulnerabilities affect systems used by Apple's automotive partners?" This requires: (1) finding Apple's partners, (2) identifying which work in automotive, (3) determining their technology systems, (4) checking for security vulnerabilities. Graph traversal makes this reasoning path explicit and traceable.
+Consider the query "What security vulnerabilities affect systems used by Apple's automotive partners?" This requires four logical steps: (1) finding Apple's partners, (2) identifying which work in automotive, (3) determining their technology systems, (4) checking for security vulnerabilities. Graph traversal makes this reasoning path explicit and traceable, enabling answers that no single document could provide.
 
-This is where GraphRAG truly shines compared to vector search. Consider the query: "What technologies do Apple's automotive partners use?" Traditional RAG would search for:
+### GraphRAG vs Vector RAG: The Multi-Hop Advantage
 
-1. Documents about Apple
-2. Documents about automotive partners
-3. Documents about technologies
+This is where GraphRAG truly shines compared to vector search. Traditional RAG would search for separate document collections about Apple, automotive partners, and technologies, but struggles to connect these concepts logically. GraphRAG follows explicit relationship chains:
 
-But it struggles to connect these concepts. GraphRAG follows explicit relationship chains:
+```
 Apple → partners_with → Company X → operates_in → Automotive → uses_technology → Technology Y
+```
 
-This multi-hop traversal discovers information that no single document contains, synthesizing knowledge from the relationship structure itself.
+This multi-hop traversal discovers information that no single document contains, synthesizing knowledge from the relationship structure itself. The graph becomes a reasoning engine, not just a retrieval system.
 
 ### Graph Traversal Strategies for Different Query Types
 
-Different queries require different traversal approaches:
+Different queries require different traversal approaches, each optimized for specific reasoning patterns:
 
-- **Breadth-First**: Best for finding nearby relationships ("Who works with Apple?")
-- **Depth-First**: Useful for exploring deep relationship chains ("What's the connection between Apple and Tesla?")
-- **Semantic-Guided**: Follows paths most relevant to the query semantics
-- **Relevance-Ranked**: Prioritizes high-confidence, important relationships
-- **Community-Focused**: Explores dense clusters of related entities
+**Direct Relationship Queries** use **Breadth-First Traversal** to find immediate connections ("Who works with Apple?"). This strategy explores all first-hop neighbors before moving to second-hop, ensuring comprehensive coverage of direct relationships.
+
+**Connection Discovery Queries** use **Depth-First Traversal** to explore deep relationship chains ("What's the connection between Apple and Tesla?"). This strategy follows paths to their conclusion, ideal for finding indirect connections through multiple intermediaries.
+
+**Semantic Reasoning Queries** use **Semantic-Guided Traversal** that follows paths most relevant to query semantics, filtering relationships based on their relevance to the question context. This enables focused exploration of semantically coherent pathways.
+
+### Advanced Traversal Strategies
+
+**Relevance-Ranked Traversal** prioritizes high-confidence, important relationships using PageRank scores and relationship confidence levels. This strategy ensures that the most reliable knowledge pathways are explored first, improving answer quality.
+
+**Community-Focused Traversal** explores dense clusters of related entities, useful for questions about industry sectors or technology ecosystems. This approach leverages graph community structure to find comprehensive related information.
 
 Our traversal engine adaptively selects strategies based on query characteristics, ensuring optimal exploration for each use case.
 
 ### Performance vs Completeness Trade-offs
 
-Graph traversal faces the "explosion problem" - the number of possible paths grows exponentially with hop count. Our engine implements sophisticated pruning:
+Graph traversal faces the "explosion problem" - the number of possible paths grows exponentially with hop count. Our engine implements sophisticated pruning strategies to manage this complexity:
 
-- **Semantic Filtering**: Only follows paths semantically related to the query
-- **Confidence Thresholding**: Ignores low-quality relationships
-- **Path Length Limits**: Prevents infinite traversal
-- **Relevance Scoring**: Ranks paths by likely usefulness
+**Semantic Filtering** ensures only paths semantically related to the query are explored, dramatically reducing the search space while maintaining relevance. **Confidence Thresholding** ignores low-quality relationships, focusing computational resources on reliable knowledge connections.
 
-This ensures comprehensive coverage while maintaining reasonable response times.
+**Path Length Limits** prevent infinite traversal while enabling meaningful multi-hop reasoning. **Relevance Scoring** ranks paths by likely usefulness, ensuring the most promising reasoning pathways are explored first.
+
+This multi-layered approach ensures comprehensive coverage while maintaining reasonable response times, making GraphRAG practical for real-time applications.
 
 ### Advanced Graph Traversal Engine
 
-The heart of GraphRAG's multi-hop reasoning capability:
+The heart of GraphRAG's multi-hop reasoning capability lies in intelligent traversal algorithms that can navigate complex knowledge graphs to answer sophisticated queries. Our traversal engine combines multiple strategies and implements sophisticated pruning to balance comprehensiveness with performance.
 
 ```python
 # Advanced graph traversal for GraphRAG
@@ -1983,50 +1987,37 @@ class GraphTraversalEngine:
 
 ### Why Hybrid Search Outperforms Pure Approaches
 
-Neither graph-only nor vector-only search is optimal for all scenarios:
+Neither graph-only nor vector-only search is optimal for all scenarios. Each approach has distinct strengths and limitations that make hybrid systems significantly more powerful than either approach alone.
 
-### Vector Search Strengths
+### Vector Search: Semantic Similarity Powerhouse
 
-- Excellent semantic similarity matching
-- Handles synonyms and paraphrasing naturally
-- Fast retrieval for well-defined concepts
-- Works well with isolated facts
+**Vector search excels at semantic understanding:** It provides excellent semantic similarity matching, naturally handles synonyms and paraphrasing, enables fast retrieval for well-defined concepts, and works effectively with isolated facts. For queries like "What is machine learning?", vector search quickly finds relevant content based on semantic similarity.
 
-### Graph Search Strengths
+**However, vector search has critical limitations:** It cannot traverse relationships between concepts, misses connections requiring multi-step reasoning, struggles with queries requiring synthesis across sources, and has limited understanding of entity relationships. Vector search treats knowledge as isolated fragments rather than connected information.
 
-- Discovers implicit connections through relationships
-- Enables multi-hop reasoning and inference
-- Understands structural importance and centrality
-- Reveals information not in any single document
+### Graph Search: Relationship and Reasoning Excellence
 
-### Vector Search Limitations
+**Graph search enables sophisticated reasoning:** It discovers implicit connections through relationships, enables multi-hop reasoning and inference, understands structural importance and centrality, and reveals information not contained in any single document. For queries requiring connection discovery, graph search is unmatched.
 
-- Cannot traverse relationships between concepts
-- Misses connections requiring multi-step reasoning
-- Struggles with queries requiring synthesis across sources
-- Limited understanding of entity relationships
+**But graph search also has limitations:** It depends heavily on explicit relationship extraction quality, may miss semantically similar but unconnected information, can be computationally expensive for large traversals, and requires comprehensive entity recognition. Graph search can miss obvious semantic connections if relationships weren't explicitly extracted.
 
-### Graph Search Limitations
+### The Hybrid Advantage: Best of Both Worlds
 
-- Depends on explicit relationship extraction quality
-- May miss semantically similar but unconnected information
-- Can be computationally expensive for large traversals
-- Requires comprehensive entity recognition
+Hybrid search combines both approaches strategically to overcome individual limitations:
 
-### The Hybrid Advantage
+**Stage 1: Vector Search** identifies semantically relevant content using embedding similarity, capturing documents and entities that match the query's semantic intent. This provides comprehensive coverage of directly relevant information.
 
-Hybrid search combines both approaches strategically:
+**Stage 2: Graph Traversal** discovers related information through relationships, following logical pathways to find connected knowledge that vector search might miss. This adds multi-hop reasoning capabilities.
 
-1. **Vector search** identifies semantically relevant content
-2. **Graph traversal** discovers related information through relationships
-3. **Intelligent fusion** combines results based on query characteristics
-4. **Adaptive weighting** emphasizes the most effective approach for each query
+**Stage 3: Intelligent Fusion** combines results based on query characteristics, balancing vector similarity scores with graph centrality and relationship confidence. The fusion process ensures optimal result ranking.
+
+**Stage 4: Adaptive Weighting** emphasizes the most effective approach for each query type - vector search for semantic queries, graph traversal for relationship queries, balanced weighting for complex analytical queries.
 
 This results in 30-40% improvement in answer quality over pure approaches, especially for complex queries requiring both semantic understanding and relational reasoning.
 
 ### Hybrid Graph-Vector RAG Architecture
 
-The state-of-the-art approach combines the complementary strengths of graph and vector search:
+The state-of-the-art approach combines the complementary strengths of graph and vector search into a unified system that adaptively leverages both methods based on query characteristics and content structure.
 
 ```python
 # Hybrid graph-vector search system
@@ -2728,25 +2719,35 @@ class ProductionGraphRAG:
 
 ## Chapter Summary
 
-### What You've Built
+### What You've Built: Complete GraphRAG System
 
+**Advanced Graph Architectures:**
 - ✅ **NodeRAG Architecture**: Heterogeneous graph system with specialized node types and three-stage processing
 - ✅ **Structured Brain Architecture**: Six specialized node types mimicking human knowledge organization
 - ✅ **Advanced Graph Algorithms**: Personalized PageRank and HNSW similarity integration
+
+**Graph Construction Systems:**
 - ✅ **Traditional GraphRAG**: Knowledge graph construction from unstructured documents with LLM-enhanced extraction
 - ✅ **Code GraphRAG**: AST parsing and call graph analysis for software repositories
 - ✅ **Production Neo4j Integration**: Optimized batch operations and performance-critical indexing
+
+**Intelligent Retrieval Systems:**
 - ✅ **Multi-hop Graph Traversal**: Semantic guidance, path ranking, and coherent reasoning pathways
 - ✅ **Hybrid Graph-Vector Search**: Adaptive fusion strategies combining graph reasoning with vector similarity
 
 ### Key Technical Skills Learned
 
+**Graph Architecture & Algorithms:**
 1. **NodeRAG Architecture**: Heterogeneous graph design, specialized node processing, three-stage pipeline implementation
 2. **Advanced Graph Algorithms**: Personalized PageRank implementation, HNSW integration, semantic pathway construction
-3. **Knowledge Graph Engineering**: Traditional entity extraction, relationship mapping, graph construction
-4. **Code Analysis**: AST parsing, dependency analysis, call graph construction
-5. **Graph Databases**: Neo4j schema design, performance optimization, batch operations
-6. **Graph Traversal**: Multi-hop reasoning, semantic-guided exploration, coherent path synthesis
+3. **Graph Traversal**: Multi-hop reasoning, semantic-guided exploration, coherent path synthesis
+
+**Knowledge Engineering & Analysis:**
+4. **Knowledge Graph Engineering**: Traditional entity extraction, relationship mapping, graph construction
+5. **Code Analysis**: AST parsing, dependency analysis, call graph construction
+6. **Graph Databases**: Neo4j schema design, performance optimization, batch operations
+
+**Hybrid Retrieval Systems:**
 7. **Hybrid Retrieval**: Graph-vector fusion, adaptive weighting, comprehensive response generation
 
 ### Performance Characteristics
