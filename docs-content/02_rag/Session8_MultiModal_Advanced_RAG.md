@@ -231,18 +231,23 @@ The documentation of MRAG 1.0 limitations provides critical insights for underst
 To understand why MRAG 1.0 fails in critical applications, let's examine a concrete medical imaging scenario:
 
 ```python
-
-# Demonstration of MRAG 1.0 limitations with concrete example
-
+# Concrete demonstration of MRAG 1.0 failure in critical applications
 def demonstrate_mrag_1_limitations():
     """Show concrete example of information loss in MRAG 1.0."""
-
     # Example: Medical X-ray analysis
     original_image_content = {
         'type': 'medical_xray',
         'visual_information': {
             'bone_density_variations': 'Subtle gradients indicating osteoporosis risk',
-            'spatial_relationships': 'Precise positioning of fracture relative to joint',
+            'spatial_relationships': 'Precise positioning of fracture relative to joint'
+        }
+    }
+```
+
+This medical imaging example demonstrates why MRAG 1.0 fails in critical applications. Medical X-rays contain life-critical information encoded in visual features that human language simply cannot capture precisely. Bone density variations appear as subtle grayscale gradients that indicate osteoporosis risk - a caption like "bones visible" loses this completely. Spatial relationships between fractures and joints require millimeter precision for surgical planning, but text descriptions reduce this to approximate language like "near the joint."
+
+```python
+        'visual_information': {
             'texture_patterns': 'Specific trabecular patterns indicating bone health',
             'contrast_differences': 'Minute variations critical for diagnosis',
             'measurement_precision': 'Exact angles and distances for surgical planning'
@@ -251,17 +256,27 @@ def demonstrate_mrag_1_limitations():
     }
 ```
 
+Trabecular patterns in bone tissue appear as specific textures visible only in the original image - these patterns indicate bone health conditions that cannot be described textually with diagnostic precision. Contrast differences measured in precise grayscale values become critical for diagnosis, but text conversion reduces these to subjective terms like "darker" or "lighter." The measurement precision required for surgical planning (exact angles, distances, alignments) disappears entirely in text conversion, making MRAG 1.0 unsuitable for any high-stakes visual analysis.
+
 The MRAG 1.0 conversion drastically reduces this rich visual information:
 
 ```python
-    # MRAG 1.0 conversion result
+    # MRAG 1.0 conversion result - demonstrates catastrophic information loss
     mrag_1_caption = "X-ray image showing bone structure with some irregularities"
-
+    
     information_loss_analysis = {
         'lost_diagnostic_info': [
             'Precise bone density measurements',
             'Exact fracture positioning and angles',
-            'Subtle texture patterns indicating pathology',
+            'Subtle texture patterns indicating pathology'
+        ]
+    }
+```
+
+The MRAG 1.0 conversion result reveals the catastrophic information loss: rich diagnostic data becomes "some irregularities." This generic caption loses precise bone density measurements needed for osteoporosis assessment, exact fracture positioning required for surgical planning, and subtle texture patterns that indicate specific pathologies. The phrase "some irregularities" could apply to hundreds of different conditions, making the converted data clinically useless.
+
+```python
+        'lost_diagnostic_info': [
             'Quantitative measurements for surgical planning',
             'Fine-grained contrast variations'
         ],
@@ -269,7 +284,11 @@ The MRAG 1.0 conversion drastically reduces this rich visual information:
         'loss_percentage': 0.85,  # 85% of diagnostic information lost
         'consequence': 'MRAG 1.0 system cannot support clinical decision-making'
     }
+```
 
+Quantitative measurements critical for surgical planning disappear completely - angles, distances, and alignments become unmeasurable from text descriptions. Fine-grained contrast variations that distinguish healthy tissue from pathology are reduced to subjective language. The 85% information loss figure represents the clinical reality: MRAG 1.0 systems cannot support medical decision-making because they destroy the very information that makes medical imaging valuable.
+
+```python
     return {
         'original_content': original_image_content,
         'mrag_1_result': mrag_1_caption,
@@ -277,6 +296,8 @@ The MRAG 1.0 conversion drastically reduces this rich visual information:
         'lesson': 'MRAG 1.0 cannot preserve critical multimodal information'
     }
 ```
+
+The return structure clearly demonstrates the MRAG 1.0 failure pattern: rich multimodal content gets reduced to impoverished text representations that cannot support the original content's intended use cases. This lesson drives the evolution to MRAG 2.0, which preserves semantic integrity by maintaining content in its native format rather than forcing lossy conversion to text.
 
 ### MRAG 2.0: True Multimodality with Semantic Integrity
 
@@ -362,62 +383,75 @@ class MultiModalProcessor:
 
     def __init__(self, config: Dict[str, Any]):
         self.config = config
-
-        # Initialize specialized models
+        # Initialize specialized models for different modalities
         self.vision_model = self._initialize_vision_model(config)
         self.audio_model = self._initialize_audio_model(config)
+```
+
+The MultiModalProcessor represents the core architecture of MRAG 2.0, designed to preserve semantic integrity across all modalities. Unlike MRAG 1.0's single text-processing pipeline, this system maintains specialized models for each content type. The vision model handles visual content directly (images, video frames) using vision-language models like CLIP or BLIP, while the audio model processes acoustic content natively without lossy transcription-only approaches.
+
+```python
         self.text_embedding_model = self._initialize_text_embeddings(config)
         self.vision_embedding_model = self._initialize_vision_embeddings(config)
-
-        # Content processors
+        
+        # Content processors mapped to specific content types
         self.processors = {
             ContentType.TEXT: self._process_text_content,
             ContentType.IMAGE: self._process_image_content,
             ContentType.AUDIO: self._process_audio_content,
-            ContentType.VIDEO: self._process_video_content,
-            ContentType.DOCUMENT: self._process_document_content,
-            ContentType.TABLE: self._process_table_content
+            ContentType.VIDEO: self._process_video_content
         }
 ```
+
+The dual embedding approach creates unified vector spaces for cross-modal search - text embeddings enable traditional semantic search while vision embeddings enable image-to-image similarity and cross-modal retrieval (finding images with text queries). The processor mapping ensures each content type gets specialized handling: images maintain visual features, audio preserves acoustic characteristics, and video retains temporal dynamics. This architectural pattern eliminates MRAG 1.0's information loss by processing content in its native format.
 
 The core processing pipeline maintains semantic integrity across all modalities:
 
 ```python
     def process_multi_modal_content(self, content_items: List[Dict]) -> List[MultiModalContent]:
         """Process multiple content items of different types."""
-
         processed_items = []
-
+        
         for item in content_items:
             try:
                 content_type = ContentType(item['type'])
-
-                # Process using appropriate processor
+                # Process using appropriate specialized processor
                 if content_type in self.processors:
                     processed_item = self.processors[content_type](item)
                     processed_items.append(processed_item)
+```
+
+The core processing pipeline demonstrates MRAG 2.0's semantic preservation approach. Each content item gets routed to its specialized processor rather than forced through text conversion. This routing preserves the native characteristics of each modality: images maintain visual features and spatial relationships, audio keeps acoustic properties and temporal patterns, and video retains both visual sequences and audio tracks. The processed_item maintains all original information while adding searchable representations.
+
+```python
                 else:
                     print(f"Unsupported content type: {content_type}")
-
             except Exception as e:
                 print(f"Error processing content item: {e}")
                 continue
-
+                
         return processed_items
 ```
+
+Error handling ensures robust processing even with mixed content types or corrupted files. Unlike MRAG 1.0 which would attempt to convert unsupported content to text (creating meaningless results), MRAG 2.0 gracefully handles unsupported types without information loss. The system continues processing other items rather than failing completely, making it suitable for production environments with diverse, real-world content.
 
 The advantages of MRAG 2.0 over MRAG 1.0 are measurable and significant:
 
 ```python
     def demonstrate_mrag_2_0_advantages(self) -> Dict[str, Any]:
         """Demonstrate MRAG 2.0 advantages over MRAG 1.0."""
-
         return {
             'semantic_preservation': {
                 'mrag_1_0': 'Lossy text conversion, 60-90% information loss',
                 'mrag_2_0': 'Native multimodal processing, <5% information loss',
                 'improvement': 'Preserves visual, audio, and contextual semantics'
-            },
+            }
+        }
+```
+
+Semantic preservation represents the fundamental breakthrough of MRAG 2.0. While MRAG 1.0 loses 60-90% of information through forced text conversion, MRAG 2.0 maintains over 95% semantic integrity by processing content in native formats. This isn't just a quantitative improvement - it's qualitative transformation. Visual semantics (spatial relationships, colors, textures), audio semantics (tone, rhythm, acoustic patterns), and contextual semantics (environmental cues, cultural context) remain intact and searchable.
+
+```python
             'query_capabilities': {
                 'mrag_1_0': 'Text queries only, limited to caption matching',
                 'mrag_2_0': 'Native multimodal queries (image+text, audio+text)',
@@ -430,6 +464,8 @@ The advantages of MRAG 2.0 over MRAG 1.0 are measurable and significant:
             }
         }
 ```
+
+Query capabilities expand dramatically in MRAG 2.0. Instead of text-only queries that match degraded captions, users can query with images ("find similar diagrams"), combine text with images ("show me X-rays like this but with different pathology"), or use audio queries. Cross-modal understanding enables finding visual content with text descriptions or textual content that explains visual phenomena. Response quality improves because the system can reference actual visual details, spatial relationships, and multimodal context rather than generic text approximations.
 
 ### MRAG 3.0: Autonomous Multimodal Intelligence
 
@@ -778,17 +814,22 @@ The image processing pipeline demonstrates MRAG 2.0's semantic preservation appr
 ```python
     def _process_image_content(self, item: Dict) -> MultiModalContent:
         """Process image content with comprehensive analysis."""
-
         image_path = item['path']
         content_id = item.get('id', f"img_{hash(image_path)}")
-
-        # Load and preprocess image
+        
+        # Load and preprocess image while preserving original data
         image = Image.open(image_path)
         image_array = np.array(image)
+```
 
-        # Extract visual features and descriptions
+Image processing in MRAG 2.0 maintains the original visual data while extracting multiple types of information for searchability. Unlike MRAG 1.0's single caption approach, this system preserves the raw image data (image_array) as the primary content while generating supplementary representations. The preprocessing maintains image integrity - no compression, resizing, or format changes that would lose visual information critical for applications like medical imaging or technical documentation.
+
+```python
+        # Extract comprehensive visual features and descriptions
         visual_analysis = self._analyze_image_content(image)
 ```
+
+Comprehensive visual analysis extracts multiple layers of information without replacing the original image. This analysis identifies objects, scenes, spatial relationships, color patterns, and textual content within images using vision-language models. The key difference from MRAG 1.0: this analysis supplements rather than replaces the original visual content, enabling both human interpretation of the original image and machine processing of extracted features.
 
 Generate both textual and visual embeddings to enable cross-modal search:
 
@@ -808,11 +849,19 @@ Create the structured multimodal content representation that preserves all visua
         return MultiModalContent(
             content_id=content_id,
             content_type=ContentType.IMAGE,
-            raw_content=image_array,
+            raw_content=image_array,  # Preserves original visual data
             visual_description=visual_analysis['description'],
             structured_data={
                 'objects_detected': visual_analysis['objects'],
-                'scene_type': visual_analysis['scene'],
+                'scene_type': visual_analysis['scene']
+            }
+        )
+```
+
+The MultiModalContent structure demonstrates MRAG 2.0's semantic preservation approach. The raw_content maintains the original image array - preserving every pixel's color values, spatial relationships, and visual details that text descriptions cannot capture. The visual_description provides human-readable context, while structured_data enables machine processing through object detection and scene classification. This dual representation enables both semantic search and precise visual analysis.
+
+```python
+            structured_data={
                 'colors': visual_analysis['colors'],
                 'text_in_image': visual_analysis.get('ocr_text', '')
             },
@@ -820,64 +869,66 @@ Create the structured multimodal content representation that preserves all visua
                 'text': text_embedding,
                 'vision': vision_embedding
             },
-            metadata={
-                'image_size': image.size,
-                'format': image.format,
-                'path': image_path,
-                'analysis_confidence': visual_analysis.get('confidence', 0.8)
-            }
+            metadata={'image_size': image.size, 'format': image.format}
         )
 ```
+
+Color analysis preserves aesthetic and categorical information (dominant colors, color harmony patterns) while OCR text extraction enables searching images by textual content within them. The dual embedding system creates the foundation for cross-modal search: text_embedding enables finding images through text queries, while vision_embedding enables image-to-image similarity search and visual clustering. Metadata preservation maintains technical specifications needed for proper display and processing without losing format or resolution information.
 
 Comprehensive image analysis extracts multiple types of visual information:
 
 ```python
     def _analyze_image_content(self, image: Image.Image) -> Dict[str, Any]:
         """Comprehensive image analysis including objects, scenes, and text."""
-
-        # Vision-language model analysis
+        # Vision-language model analysis using multimodal understanding
         if self.vision_model:
-            # Generate detailed description
+            # Generate detailed description preserving spatial and contextual information
             description_prompt = "Describe this image in detail, including objects, people, setting, actions, and any visible text."
             description = self._vision_model_query(image, description_prompt)
+```
 
-            # Object detection
+Comprehensive image analysis leverages vision-language models (like GPT-4V, CLIP, or BLIP) to extract rich semantic information while maintaining visual fidelity. The detailed description prompt captures multiple information layers: object identification, human subjects and activities, environmental context, temporal actions, and textual content. This multi-faceted approach ensures that the extracted information supports diverse query types and use cases without losing the nuanced understanding that makes images valuable.
+
+```python
+            # Object detection for structured search and filtering
             objects_prompt = "List all objects visible in this image."
             objects_text = self._vision_model_query(image, objects_prompt)
             objects = [obj.strip() for obj in objects_text.split(',') if obj.strip()]
-
-            # Scene classification
+            
+            # Scene classification for contextual understanding
             scene_prompt = "What type of scene or environment is this? (indoor/outdoor, specific location type)"
             scene = self._vision_model_query(image, scene_prompt)
 ```
 
+Structured object detection enables precise filtering and search - users can find "all images containing microscopes" or "images with both computers and books." The object list format facilitates programmatic processing while maintaining semantic accuracy. Scene classification provides contextual framework for understanding image content: medical scenes require different interpretation than artistic or industrial contexts. This contextual awareness helps MRAG 2.0 provide more relevant and appropriate responses based on environmental understanding.
+
 Multiple analysis techniques ensure comprehensive visual understanding:
 
 ```python
-            # Color analysis
+            # Color analysis for aesthetic and categorical search
             colors = self._extract_dominant_colors(image)
-
-            # OCR for text in images
+            # OCR for text-within-image search capabilities
             ocr_text = self._extract_text_from_image(image)
-
+            
             return {
-                'description': description,
-                'objects': objects,
-                'scene': scene,
-                'colors': colors,
-                'ocr_text': ocr_text,
-                'confidence': 0.85
-            }
-        else:
-            # Fallback analysis without vision model
-            return {
-                'description': "Image content (vision model not available)",
-                'objects': [],
-                'scene': 'unknown',
-                'colors': self._extract_dominant_colors(image),
-                'confidence': 0.3
+                'description': description, 'objects': objects, 'scene': scene,
+                'colors': colors, 'ocr_text': ocr_text, 'confidence': 0.85
             }
 ```
+
+Color analysis enables aesthetic search and categorical filtering - finding images with similar color palettes, seasonal themes, or brand consistency. This capability supports design workflows, visual brand management, and aesthetic similarity search that text descriptions cannot capture. OCR text extraction creates a powerful hybrid capability: images containing text become searchable by that textual content, enabling retrieval of diagrams, screenshots, documents, and signage based on embedded text.
+
+```python
+        else:
+            # Graceful fallback analysis without vision model
+            return {
+                'description': "Image content (vision model not available)",
+                'objects': [], 'scene': 'unknown',
+                'colors': self._extract_dominant_colors(image), 'confidence': 0.3
+            }
+```
+
+Fallback analysis ensures system robustness when advanced vision-language models aren't available. Even without AI-powered analysis, the system maintains color extraction and basic metadata processing, enabling limited search functionality. The low confidence score (0.3) signals to downstream processes that this analysis has limited reliability, allowing the system to adapt its behavior appropriately while still providing some functionality rather than complete failure.
 
 Vision model querying enables detailed multimodal analysis:
 
@@ -1001,12 +1052,20 @@ The final video content structure captures temporal, visual, and audio dimension
         return MultiModalContent(
             content_id=content_id,
             content_type=ContentType.VIDEO,
-            raw_content=video_path,
+            raw_content=video_path,  # Maintains access to full video file
             audio_transcript=audio_transcript,
             visual_description=combined_description,
             structured_data={
                 'frame_count': len(key_frames),
-                'duration': self._get_video_duration(video_path),
+                'duration': self._get_video_duration(video_path)
+            }
+        )
+```
+
+Video content processing in MRAG 2.0 represents the most complex multimodal challenge, combining temporal visual sequences with audio tracks and preserving their synchronized relationship. The raw_content maintains the path to the full video file rather than storing massive binary data, enabling access to complete temporal information when needed. The audio_transcript preserves spoken content while the visual_description combines frame analyses into a coherent narrative that captures temporal progression and visual storytelling.
+
+```python
+            structured_data={
                 'frame_descriptions': visual_descriptions,
                 'has_audio': bool(audio_transcript)
             },
@@ -1014,12 +1073,11 @@ The final video content structure captures temporal, visual, and audio dimension
                 'text': text_embedding,
                 'vision': avg_visual_embedding
             },
-            metadata={
-                'file_path': video_path,
-                'key_frames_extracted': len(key_frames)
-            }
+            metadata={'file_path': video_path, 'key_frames_extracted': len(key_frames)}
         )
 ```
+
+Frame descriptions maintain temporal understanding by preserving individual frame analyses as a sequence, enabling queries about video progression, scene changes, and temporal relationships. The dual embedding approach creates searchable representations: text_embedding enables finding videos by spoken content or visual descriptions, while avg_visual_embedding represents the video's overall visual characteristics for similarity matching. This structure enables complex queries like "find videos similar to this one but with different audio" or "videos showing similar visual progressions."
 
 ### Multi-Modal Vector Storage and Retrieval
 
@@ -1030,21 +1088,22 @@ Implement sophisticated storage and retrieval for multi-modal content:
 Implement sophisticated storage and retrieval for multi-modal content:
 
 ```python
-
-# Multi-modal vector storage and retrieval system
-
+# Multimodal vector storage architecture for MRAG 2.0 semantic preservation
 class MultiModalVectorStore:
     """Advanced vector store for multi-modal content."""
 
     def __init__(self, config: Dict[str, Any]):
         self.config = config
-
-        # Separate vector stores for different embedding types
+        # Specialized vector stores for different embedding spaces
         self.text_store = self._initialize_text_vector_store(config)
         self.vision_store = self._initialize_vision_vector_store(config)
         self.hybrid_store = self._initialize_hybrid_vector_store(config)
+```
 
-        # Multi-modal fusion strategies
+MultiModal vector storage represents the foundation of MRAG 2.0's semantic preservation capability. Unlike traditional RAG systems with single text-based vector stores, this architecture maintains separate vector spaces for different modalities while enabling cross-modal search. The text_store handles traditional semantic search, the vision_store enables visual similarity and image-to-image retrieval, and the hybrid_store manages cross-modal relationships where text and visual information are intrinsically linked.
+
+```python
+        # Advanced fusion strategies for cross-modal retrieval
         self.fusion_strategies = {
             'early_fusion': self._early_fusion_search,
             'late_fusion': self._late_fusion_search,
@@ -1053,26 +1112,43 @@ class MultiModalVectorStore:
         }
 ```
 
+Fusion strategies define how different modal information combines during search. Early fusion combines embeddings before search (creating unified representations), late fusion searches each modality separately then combines results, cross-modal enables finding content in one modality using queries from another, and adaptive fusion intelligently selects the optimal approach based on query characteristics. This flexibility enables MRAG 2.0 to handle diverse query types while maintaining semantic integrity across all modalities.
+
 Storage orchestration handles multiple embedding types with proper indexing:
 
 ```python
     def store_multi_modal_content(self, content_items: List[MultiModalContent]) -> Dict[str, Any]:
         """Store multi-modal content with appropriate indexing."""
-
         storage_results = {
-            'text_stored': 0,
-            'vision_stored': 0,
-            'hybrid_stored': 0,
+            'text_stored': 0, 'vision_stored': 0, 'hybrid_stored': 0,
             'total_items': len(content_items)
         }
-
+        
         for item in content_items:
-            # Store text embeddings
+            # Store text embeddings for semantic search
             if item.embeddings and 'text' in item.embeddings:
                 text_doc = self._create_text_document(item)
                 self.text_store.add_documents([text_doc])
                 storage_results['text_stored'] += 1
 ```
+
+Multimodal content storage orchestrates the preservation of semantic integrity across all modalities. Each content item gets indexed in multiple vector spaces based on its available embeddings, creating a comprehensive searchable representation. Text embeddings enable traditional semantic search and cross-modal text-to-visual retrieval, while vision embeddings support visual similarity search and image-based queries. The storage_results tracking ensures visibility into indexing coverage and helps identify content that might benefit from additional processing.
+
+```python
+            # Store vision embeddings for visual similarity search
+            if item.embeddings and 'vision' in item.embeddings:
+                vision_doc = self._create_vision_document(item)
+                self.vision_store.add_documents([vision_doc])
+                storage_results['vision_stored'] += 1
+                
+            # Store hybrid representations for cross-modal relationships
+            if self._should_create_hybrid_representation(item):
+                hybrid_doc = self._create_hybrid_document(item)
+                self.hybrid_store.add_documents([hybrid_doc])
+                storage_results['hybrid_stored'] += 1
+```
+
+Vision embedding storage enables advanced visual search capabilities: finding visually similar images, clustering content by visual characteristics, and supporting image-to-image queries. Hybrid representation storage captures intrinsic relationships between text and visual content - like captions with images, transcripts with videos, or text within images. This hybrid storage enables sophisticated queries that require understanding both textual and visual context simultaneously, supporting use cases like "find technical diagrams that explain this concept" or "locate images with text containing these keywords."
 
 Vision and hybrid embeddings enable cross-modal search capabilities:
 
@@ -1098,42 +1174,47 @@ Multi-modal search intelligently handles different query types and fusion strate
     async def multi_modal_search(self, query: str, query_image: Optional[Image.Image] = None,
                                 search_config: Dict = None) -> Dict[str, Any]:
         """Perform multi-modal search across content types."""
-
         config = search_config or {
             'fusion_strategy': 'adaptive_fusion',
             'content_types': [ContentType.TEXT, ContentType.IMAGE, ContentType.VIDEO],
-            'top_k': 10,
-            'rerank_results': True
+            'top_k': 10, 'rerank_results': True
         }
+```
 
-        # Determine search strategy based on query inputs
+Multimodal search represents the core capability that distinguishes MRAG 2.0 from traditional text-only RAG systems. The search function accepts both textual queries and visual queries (images), enabling natural multimodal interactions. Users can search with text ("find medical X-rays showing fractures"), with images (upload an image to find similar ones), or with combined inputs ("find images like this but showing different pathology"). The adaptive fusion strategy automatically selects the optimal search approach based on query characteristics.
+
+```python
+        # Intelligent search type detection based on input modalities
         if query and query_image:
-            search_type = 'multi_modal_query'
+            search_type = 'multi_modal_query'  # Text + image input
         elif query_image:
-            search_type = 'visual_query'
+            search_type = 'visual_query'       # Image-only input
         else:
-            search_type = 'text_query'
-
+            search_type = 'text_query'         # Traditional text search
+            
         print(f"Performing {search_type} search...")
 ```
+
+Intelligent search type detection automatically adapts the system's behavior to match user intent. Multi-modal queries leverage both text and visual information to find content that matches both criteria, visual queries enable reverse image search and visual similarity matching, while text queries can find content across all modalities using semantic understanding. This flexibility enables natural interactions without requiring users to understand underlying technical distinctions between search types.
 
 Fusion strategy execution and result processing ensure optimal multi-modal retrieval:
 
 ```python
-        # Execute search using configured fusion strategy
+        # Execute search using intelligent fusion strategy
         fusion_strategy = config.get('fusion_strategy', 'adaptive_fusion')
         search_results = await self.fusion_strategies[fusion_strategy](
             query, query_image, config
         )
+        
+        # Post-process and enhance results
+        processed_results = self._post_process_search_results(search_results, config)
+```
 
-        # Post-process results
-        processed_results = self._post_process_search_results(
-            search_results, config
-        )
+Fusion strategy execution represents the sophisticated intelligence of MRAG 2.0's search capabilities. The adaptive fusion strategy analyzes query characteristics, content distribution, and semantic requirements to select the optimal combination approach. This might involve early fusion for tightly integrated multimodal content, late fusion for diverse content types, or cross-modal search when finding content across different modalities. The strategy selection happens transparently, ensuring optimal results without requiring user expertise in multimodal retrieval techniques.
 
+```python
         return {
-            'search_type': search_type,
-            'fusion_strategy': fusion_strategy,
+            'search_type': search_type, 'fusion_strategy': fusion_strategy,
             'results': processed_results,
             'metadata': {
                 'total_results': len(processed_results),
@@ -1143,6 +1224,8 @@ Fusion strategy execution and result processing ensure optimal multi-modal retri
         }
 ```
 
+Comprehensive result metadata provides transparency into the multimodal search process. Content types found reveals the diversity of retrieved content (text, images, videos, audio), enabling users to understand result composition. Search time metrics help optimize performance for production deployments. This metadata also enables intelligent result presentation - grouping by content type, highlighting cross-modal matches, or explaining why certain results were selected by the fusion strategy.
+
 ### Advanced Fusion Strategies
 
 Adaptive fusion intelligently selects the optimal strategy based on query characteristics:
@@ -1151,25 +1234,30 @@ Adaptive fusion intelligently selects the optimal strategy based on query charac
     async def _adaptive_fusion_search(self, query: str, query_image: Optional[Image.Image],
                                     config: Dict) -> Dict[str, Any]:
         """Adaptive fusion that selects optimal strategy based on query characteristics."""
-
         import time
         start_time = time.time()
-
-        # Analyze query characteristics to select fusion approach
+        
+        # Intelligent analysis of query requirements for optimal fusion strategy
         fusion_analysis = self._analyze_fusion_requirements(query, query_image)
+```
 
+Adaptive fusion represents MRAG 2.0's intelligent approach to multimodal search optimization. Unlike fixed fusion strategies, adaptive fusion analyzes each query's specific characteristics - modality mix, semantic complexity, content type preferences, and performance requirements - to dynamically select the most effective search approach. This analysis considers factors like whether the query benefits from cross-modal understanding, requires precise visual matching, or needs broad semantic coverage across multiple content types.
+
+```python
+        # Dynamic strategy selection based on intelligent analysis
         if fusion_analysis['preferred_strategy'] == 'cross_modal':
             results = await self._cross_modal_search(query, query_image, config)
         elif fusion_analysis['preferred_strategy'] == 'late_fusion':
             results = await self._late_fusion_search(query, query_image, config)
         else:
             results = await self._early_fusion_search(query, query_image, config)
-
+            
         results['search_time'] = time.time() - start_time
         results['fusion_analysis'] = fusion_analysis
-
         return results
 ```
+
+Dynamic strategy selection optimizes search performance by matching algorithmic approach to query characteristics. Cross-modal search excels when finding content in one modality using another (text-to-image, image-to-text), late fusion works best for diverse content types with independent relevance scoring, while early fusion succeeds with tightly integrated multimodal content. The fusion_analysis inclusion provides transparency into decision-making, enabling system optimization and user understanding of result quality.
 
 Cross-modal search enables finding content across different modalities:
 
@@ -1177,34 +1265,41 @@ Cross-modal search enables finding content across different modalities:
     async def _cross_modal_search(self, query: str, query_image: Optional[Image.Image],
                                 config: Dict) -> Dict[str, Any]:
         """Cross-modal search that finds content across different modalities."""
-
         cross_modal_results = []
-
-        # Text query to find relevant visual content
+        
+        # Text-to-visual search: find images/videos using text descriptions
         if query:
             visual_results = self._search_visual_content_with_text(query, config)
             cross_modal_results.extend(visual_results)
+```
 
-        # Visual query to find relevant text content
+Cross-modal search represents one of MRAG 2.0's most powerful capabilities - finding content in one modality using queries from another modality. Text-to-visual search enables natural language queries to find relevant images, diagrams, or videos: "find technical diagrams explaining neural networks" or "show X-rays with fractures." This capability requires sophisticated embedding alignment between text and visual spaces, often achieved through vision-language models trained on paired text-image data.
+
+```python
+        # Visual-to-text search: find documents/explanations using image queries
         if query_image:
             text_results = self._search_text_content_with_image(query_image, config)
             cross_modal_results.extend(text_results)
 ```
 
+Visual-to-text search enables reverse queries where users upload images to find related textual content: explanatory documents, matching descriptions, or relevant discussions. This capability is particularly valuable for educational content ("find explanations for what's shown in this diagram"), medical applications ("find case studies similar to this X-ray"), or research workflows ("locate papers discussing this type of visualization"). The bidirectional cross-modal capability makes MRAG 2.0 systems truly multimodal rather than just multi-format.
+
 Multi-modal matching and result ranking ensure optimal cross-modal retrieval:
 
 ```python
-        # Multi-modal to multi-modal matching
+        # Hybrid multimodal matching: both text and visual constraints
         if query and query_image:
             hybrid_results = self._search_hybrid_content(query, query_image, config)
             cross_modal_results.extend(hybrid_results)
-
-        # Remove duplicates and rank
+            
+        # Intelligent deduplication and cross-modal ranking
         unique_results = self._deduplicate_cross_modal_results(cross_modal_results)
-        ranked_results = self._rank_cross_modal_results(
-            unique_results, query, query_image
-        )
+        ranked_results = self._rank_cross_modal_results(unique_results, query, query_image)
+```
 
+Hybrid multimodal matching handles the most sophisticated query type - simultaneous text and visual constraints. Users might upload a medical image while asking "find similar cases but with different symptoms" or provide a diagram while querying "show implementations of this architecture pattern." This requires the system to understand both visual similarity and semantic text matching, then find content satisfying both constraints. The complexity lies in balancing visual and textual relevance appropriately.
+
+```python
         return {
             'results': ranked_results,
             'cross_modal_matches': len(cross_modal_results),
@@ -1212,34 +1307,38 @@ Multi-modal matching and result ranking ensure optimal cross-modal retrieval:
         }
 ```
 
+Intelligent deduplication prevents the same content from appearing multiple times through different search paths (text-to-visual and visual-to-text might find the same items). Cross-modal ranking considers both semantic relevance and cross-modal alignment strength, ensuring that results genuinely satisfy the multimodal query rather than just one aspect. The result metadata helps users understand the breadth of cross-modal matching and the effectiveness of deduplication processes.
+
 Visual content search with text queries demonstrates true cross-modal capabilities:
 
 ```python
     def _search_visual_content_with_text(self, query: str, config: Dict) -> List[Dict]:
-        """Search visual content using text query."""
-
-        # Generate text embedding for query
+        """Search visual content using text query - cross-modal retrieval."""
+        # Generate text embedding in shared semantic space
         query_embedding = self.text_embedding_model.encode([query])[0]
-
-        # Search vision store using text embedding similarity
-        # This requires cross-modal embedding space or learned mapping
+        
+        # Cross-modal search: text embedding to find similar visual content
         vision_results = self.vision_store.similarity_search_by_vector(
             query_embedding, k=config.get('top_k', 10)
         )
+```
 
-        # Convert to standardized format
+Text-to-visual search leverages shared embedding spaces or learned cross-modal mappings to find visual content using natural language queries. The text embedding must be compatible with the vision store's vector space, typically achieved through models like CLIP that create aligned text-vision representations. This enables queries like "find architectural blueprints" or "show medical imaging examples" to return relevant images without requiring exact textual matches in captions or descriptions.
+
+```python
+        # Format results with cross-modal metadata
         formatted_results = []
         for result in vision_results:
             formatted_results.append({
                 'content_id': result.metadata['content_id'],
                 'content_type': ContentType(result.metadata['content_type']),
-                'content': result.page_content,
-                'similarity_score': result.metadata.get('similarity_score', 0.0),
-                'cross_modal_type': 'text_to_visual'
+                'content': result.page_content, 'similarity_score': result.metadata.get('similarity_score', 0.0),
+                'cross_modal_type': 'text_to_visual'  # Identifies cross-modal search type
             })
-
         return formatted_results
 ```
+
+Result formatting includes cross-modal metadata that identifies the search type and provides transparency into the retrieval process. The 'text_to_visual' marker helps downstream processing understand that these results come from cross-modal matching rather than traditional text-based search, enabling appropriate confidence weighting and result presentation. Similarity scores help rank results and filter low-confidence cross-modal matches that might be semantically distant from the original query.
 
 ---
 
