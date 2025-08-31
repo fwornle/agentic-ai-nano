@@ -253,6 +253,10 @@ def simple_hierarchical_chunk(elements: List[DocumentElement],
 
 The simple approach demonstrates the concept, but production systems need more sophisticated handling of edge cases, overlap management, and metadata preservation. Our advanced chunker addresses these requirements:
 
+### Hierarchical Chunker - Core Initialization
+
+Let's start with the chunker's initialization and main entry point:
+
 ```python
 from langchain.schema import Document
 
@@ -263,7 +267,11 @@ class HierarchicalChunker:
         self.max_chunk_size = max_chunk_size
         self.overlap_ratio = overlap_ratio
         self.analyzer = DocumentStructureAnalyzer()
+```
 
+The hierarchical chunker initializes with configurable parameters for chunk size and overlap. The overlap_ratio (typically 0.1 = 10%) ensures continuity between chunks by including some content from the previous chunk in the next one. This prevents context loss at chunk boundaries, which is crucial for maintaining semantic coherence.
+
+```python
     def create_hierarchical_chunks(self, document: Document) -> List[Document]:
         """Create chunks that preserve document hierarchy."""
         # Analyze document structure
@@ -279,7 +287,15 @@ class HierarchicalChunker:
             chunks.extend(section_chunks)
         
         return chunks
+```
 
+This main method orchestrates the three-step chunking process: analyze structure, group by hierarchy, and create chunks. Notice how we preserve the original document metadata throughout the process - this ensures each chunk maintains its provenance and context information.
+
+### Section Grouping Logic
+
+The heart of hierarchical chunking is understanding document structure:
+
+```python
     def _group_elements_by_hierarchy(self, elements: List[DocumentElement]) -> List[List[DocumentElement]]:
         """Group elements into hierarchical sections."""
         sections = []
@@ -293,6 +309,11 @@ class HierarchicalChunker:
                 sections.append(current_section)
                 current_section = [element]
                 current_level = element.level
+```
+
+This logic implements the core hierarchical principle: start a new section when you encounter a heading at the same level or higher (closer to root) than the current section. This respects document hierarchy - a new "## Introduction" section should close any previous "### Details" subsection.
+
+```python
             elif element.element_type == ContentType.HEADING and not current_section:
                 current_section = [element]
                 current_level = element.level
@@ -304,7 +325,15 @@ class HierarchicalChunker:
             sections.append(current_section)
 
         return sections
+```
 
+The grouping logic handles edge cases: the first heading initializes the first section, and we ensure the final section isn't lost. This creates logical document sections that can be processed independently while maintaining their internal structure.
+
+### Intelligent Section Chunking
+
+Once sections are identified, we chunk them with size management and overlap:
+
+```python
     def _chunk_section(self, section: List[DocumentElement], 
                       base_metadata: Dict) -> List[Document]:
         """Create chunks from a document section with intelligent overlap."""
@@ -319,6 +348,11 @@ class HierarchicalChunker:
 
             # Check if adding this element would exceed size limit
             if current_size + element_size > self.max_chunk_size and current_chunk_elements:
+```
+
+This method balances structure preservation with size constraints. We track both the elements and their cumulative size, making decisions based on content boundaries rather than arbitrary character counts. The section title extraction provides context for each chunk.
+
+```python
                 # Create chunk from current elements
                 chunk = self._create_chunk_from_elements(
                     current_chunk_elements, base_metadata, section_title
@@ -329,6 +363,11 @@ class HierarchicalChunker:
                 overlap_elements = self._get_overlap_elements(current_chunk_elements)
                 current_chunk_elements = overlap_elements + [element]
                 current_size = sum(len(e.content) for e in current_chunk_elements)
+```
+
+When a size limit is reached, we create a chunk and start the next one with intelligent overlap. The overlap elements typically include the last few sentences or the section heading, ensuring context continuity. This prevents information loss at chunk boundaries.
+
+```python
             else:
                 current_chunk_elements.append(element)
                 current_size += element_size
@@ -341,7 +380,15 @@ class HierarchicalChunker:
             chunks.append(chunk)
 
         return chunks
+```
 
+The method handles the accumulation case (element fits in current chunk) and ensures the final chunk is created. This systematic approach ensures no content is lost while respecting both structural and size constraints.
+
+### Rich Chunk Creation with Metadata
+
+The final step creates chunks with comprehensive metadata for enhanced retrieval:
+
+```python
     def _create_chunk_from_elements(self, elements: List[DocumentElement],
                                   base_metadata: Dict, section_title: str) -> Document:
         """Create a document chunk with rich metadata."""
@@ -354,7 +401,11 @@ class HierarchicalChunker:
                 content_parts.append(element.content)
 
         content = "\n".join(content_parts).strip()
+```
 
+Content assembly preserves formatting by treating headings specially - they get extra spacing to maintain their visual prominence. This formatting preservation helps both human readers and embedding models understand the content structure.
+
+```python
         # Build enhanced metadata
         content_types = [e.element_type.value for e in elements]
         hierarchy_levels = [e.level for e in elements]
@@ -375,6 +426,8 @@ class HierarchicalChunker:
 
         return Document(page_content=content, metadata=enhanced_metadata)
 ```
+
+The metadata enhancement provides multiple search dimensions: content types enable filtering ("find chunks with code"), hierarchy levels support structure-aware retrieval, and boolean flags enable quick filtering. This rich metadata transforms simple text chunks into searchable, contextual knowledge units.
 
 This implementation provides intelligent section grouping, size management, and context preservation through overlap. Notice how we maintain rich metadata throughout the process – this metadata becomes crucial for retrieval quality and debugging.
 
