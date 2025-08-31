@@ -651,6 +651,7 @@ Choose the best available instance using the configured strategy:
             self.load_metrics[service_name][selected_instance]['active_connections'] += 1
 
         return selected_instance
+```
 
 #### Step 4: Implement Response Time Strategy
 
@@ -677,6 +678,7 @@ Select instances based on performance and current load:
                 best_instance = instance
 
         return best_instance
+```
 
 #### Step 5: Auto-Scaling System
 
@@ -711,6 +713,7 @@ class RAGAutoScaler:
 
         # Start continuous monitoring
         self.monitoring_task = asyncio.create_task(self._continuous_monitoring())
+```
 
 #### Step 6: Register Services for Auto-Scaling
 
@@ -730,6 +733,7 @@ Configure scaling policies for individual services:
             'stability_window': [],                                   # Track stability for scale-down
             'custom_thresholds': scaling_config.get('thresholds', {}) # Service-specific thresholds
         }
+```
 
 #### Step 7: Continuous Monitoring Loop
 
@@ -761,6 +765,7 @@ Implement the main monitoring loop for scaling decisions:
             except Exception as e:
                 self.logger.error(f"Auto-scaling monitoring error: {e}")
                 await asyncio.sleep(self.monitoring_interval)
+```
 
 #### Step 8: Scaling Decision Evaluation
 
@@ -798,6 +803,7 @@ Determine when and how to scale services:
                 'reason': 'high_load_detected',
                 'metrics': metrics
             }
+```
 
 #### Step 9: Scale-Down Decision Logic
 
@@ -963,6 +969,7 @@ class SharePointConnector:
         self.sp_client = None
 ```
 
+```python
     async def initialize_connection(self) -> Dict[str, Any]:
         """Initialize SharePoint connection with authentication."""
 
@@ -1041,6 +1048,7 @@ class SharePointConnector:
 ```
 
 #### Step 3: Secure Authentication and Authorization
+
 ```python
 class EnterpriseAuthManager:
     """Enterprise authentication and authorization manager."""
@@ -1214,6 +1222,7 @@ class PrivacyComplianceManager:
 
         # Initialize compliance audit system
         self.audit_logger = ComplianceAuditLogger(compliance_config.get('audit', {}))
+```
 
 #### Step 2: Data Processing with Compliance Checks
 
@@ -1278,6 +1287,7 @@ Run data through each required compliance framework:
                 check['compliant'] for check in processing_result['compliance_checks'].values()
             )
         }
+```
 
 #### Step 4: GDPR Compliance Handler
 
@@ -1291,6 +1301,7 @@ class GDPRComplianceHandler:
         self.config = gdpr_config
         self.lawful_basis = gdpr_config.get('lawful_basis', 'legitimate_interest')
         self.data_retention_days = gdpr_config.get('retention_days', 365)
+```
 
 #### Step 5: GDPR Data Processing Checks
 
@@ -1344,6 +1355,7 @@ Implement comprehensive GDPR compliance validation:
                 })
 
         return compliance_result
+```
 
 #### Step 6: GDPR Data Subject Rights
 
@@ -1420,6 +1432,7 @@ Set up asynchronous queues and background processors for handling updates:
         for i in range(config.get('num_processors', 3)):
             processor = asyncio.create_task(self._incremental_update_processor(f"proc_{i}"))
             self.processors.append(processor)
+```
 
 #### Step 3: Set Up Change Detection for Data Sources
 
@@ -1466,6 +1479,7 @@ Configure monitoring for multiple data sources:
                                      if r['status'] == 'monitoring']),
             'processors_active': len(self.processors)
         }
+```
 
 #### Step 4: Handle Change Events
 
@@ -1482,6 +1496,7 @@ Route different types of changes to appropriate processing queues:
             await self.deletion_queue.put(change_event)
         else:
             await self.update_queue.put(change_event)
+```
 
 #### Step 5: Background Update Processor
 
@@ -1511,6 +1526,7 @@ Implement the background processor that handles queued updates:
             except Exception as e:
                 self.logger.error(f"Processor {processor_id} error: {e}")
                 await asyncio.sleep(1)
+```
 
 #### Step 6: Process Individual Updates
 
@@ -1569,6 +1585,7 @@ Handle the processing of individual document changes:
             self.logger.error(f"Incremental update error: {e}")
             if 'tracking_id' in locals():
                 await self.change_tracker.fail_tracking(tracking_id, str(e))
+```
 
 #### Step 7: File System Change Detection
 
@@ -1581,6 +1598,7 @@ class FileSystemChangeDetector:
     def __init__(self):
         self.watchers = {}  # Track active file system watchers
         self.change_callbacks = []  # Registered callback functions
+```
 
 #### Step 8: Set Up File System Monitoring
 
@@ -1636,6 +1654,7 @@ Configure file system watchers for specified directories:
             'file_patterns': file_patterns,
             'watcher_active': True
         }
+```
 
 #### Step 9: Handle File System Changes
 
@@ -1776,6 +1795,7 @@ Add metrics for system health and response quality monitoring:
         # Start the Prometheus metrics server
         metrics_port = self.config.get('metrics_port', 8000)
         start_http_server(metrics_port)
+```
 
 #### Step 4: Request Tracking and Monitoring
 
@@ -1850,6 +1870,7 @@ Handle request failures with comprehensive error tracking:
 
                 # Re-raise the exception for proper error handling
                 raise
+```
 
 #### Step 6: Analytics System for Performance Analysis
 
@@ -1867,6 +1888,7 @@ class RAGAnalytics:
         self.metrics_store = MetricsTimeSeriesStore()
         self.query_analyzer = QueryPatternAnalyzer()
         self.performance_predictor = PerformancePredictor()
+```
 
 #### Step 7: Performance Analysis Engine
 
@@ -1904,6 +1926,7 @@ Implement comprehensive system performance analysis:
             'recommendations': recommendations,
             'overall_health_score': self._calculate_health_score(performance_analysis)
         }
+```
 
 #### Step 8: Request Volume Analysis
 
@@ -1945,6 +1968,7 @@ Analyze request patterns and volume trends:
                 'p99': np.percentile(request_counts, 99)
             }
         }
+```
 
 #### Step 9: Performance Recommendations Generator
 
@@ -2004,6 +2028,7 @@ Add recommendations for resource usage and error handling:
             })
 
         return recommendations
+```
 
 #### Step 11: Health Checking System
 
@@ -2024,6 +2049,7 @@ class RAGHealthChecker:
             'disk_space': self._check_disk_space,
             'memory_usage': self._check_memory_usage
         }
+```
 
 #### Step 12: Comprehensive Health Check Execution
 
@@ -2067,6 +2093,7 @@ Run health checks across all system components:
             ],
             'timestamp': time.time()
         }
+```
 
 #### Step 13: Vector Store Health Check Implementation
 

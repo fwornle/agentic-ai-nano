@@ -30,18 +30,24 @@ This approach requires 1 million similarity calculations per query - far too slo
 Here's a simple interface that shows the essential operations every vector database must support:
 
 ```python
-
-# Simple vector database interface
-
+# Essential imports for vector database operations
 from typing import List, Dict, Any
+```
 
+These imports provide the foundation for vector database type annotations. The typing module ensures our interface is self-documenting and IDE-friendly, which becomes critical when integrating vector databases into larger production systems.
+
+```python
 class VectorDatabaseInterface:
     """Essential operations for vector similarity search."""
     
     def __init__(self, dimension: int, metric: str = "cosine"):
         self.dimension = dimension  # Vector size (e.g., 1536 for OpenAI embeddings)
         self.metric = metric       # cosine, euclidean, or dot_product
-    
+```
+
+The interface constructor defines two critical configuration parameters. The dimension must match your embedding model exactly - OpenAI's text-embedding-ada-002 produces 1536-dimensional vectors, while sentence-transformers models vary from 384 to 768 dimensions. The metric choice significantly impacts search quality: cosine similarity normalizes for document length and is ideal for text embeddings, while euclidean distance preserves magnitude information better for some specialized use cases.
+
+```python
     def add_vectors(self, vectors: List[List[float]], 
                    metadata: List[Dict], ids: List[str]):
         """Store vectors with associated metadata and unique IDs."""
@@ -51,12 +57,18 @@ class VectorDatabaseInterface:
               top_k: int = 10, filters: Dict = None):
         """Find most similar vectors with optional metadata filtering."""
         pass
-    
+```
+
+These core operations define the minimal interface every vector database must support. The add_vectors method uses batch operations for efficiency - inserting vectors one-by-one is 10-50x slower than batch insertion. The search method includes metadata filtering, which enables powerful use cases like "find similar documents from the last 30 days" or "search only user-accessible content."
+
+```python
     def update_vector(self, vector_id: str, 
                      new_vector: List[float], new_metadata: Dict):
         """Update existing vector and its metadata."""
         pass
 ```
+
+Vector updates are essential for production systems where document content changes over time. However, most vector databases handle updates as delete-and-insert operations, which can be expensive. Consider versioning strategies or separate "hot" and "cold" indexes for frequently updated content.
 
 **Key Design Decisions:**
 
@@ -69,11 +81,16 @@ class VectorDatabaseInterface:
 Moving from development to production requires careful consideration of index algorithms, persistence, and performance optimization. ChromaDB provides a good balance of ease-of-use and performance for most applications:
 
 ```python
+# Production ChromaDB imports and configuration
 import chromadb
 from chromadb.config import Settings
 import numpy as np
 from typing import List, Dict, Optional
+```
 
+These imports establish the foundation for production ChromaDB deployment. ChromaDB provides excellent performance for datasets up to 1M vectors with minimal configuration overhead. The Settings import enables production-grade configuration that disables potentially dangerous development features.
+
+```python
 class ProductionVectorStore:
     """Production-ready ChromaDB implementation with optimization."""
     
@@ -89,7 +106,11 @@ class ProductionVectorStore:
                 anonymized_telemetry=False  # Avoid external dependencies
             )
         )
-        
+```
+
+The client initialization includes critical production settings. Setting `allow_reset=False` prevents accidental data deletion in production environments - a safety measure that prevents catastrophic mistakes. Disabling anonymized telemetry eliminates external network dependencies that could cause deployment issues in restricted environments or add latency to operations.
+
+```python
         # Create optimized collection
         self.collection = self._initialize_collection()
         
@@ -111,7 +132,11 @@ class ProductionVectorStore:
                 }
             )
             print(f"Created optimized collection: {self.collection_name}")
-        
+```
+
+The collection initialization demonstrates proper HNSW parameter tuning for production workloads. The `construction_ef=200` parameter controls index building quality - higher values create better search graphs but take longer to build. The `M=16` parameter sets node connectivity, balancing memory usage with search accuracy. The `search_ef=100` parameter can be adjusted dynamically to trade query speed for accuracy.
+
+```python
         return collection
     
     def add_documents_batch(self, documents: List[str], 
@@ -134,7 +159,11 @@ class ProductionVectorStore:
             
             print(f"Added batch {i//batch_size + 1} "
                   f"({batch_end - i} documents)")
-    
+```
+
+Batch insertion is critical for performance - inserting documents one-by-one can be 50x slower than batch operations. The 1000-document batch size balances memory usage with insertion speed. Larger batches use more memory but reduce the overhead of multiple database transactions. The progress tracking helps monitor large data loading operations.
+
+```python
     def similarity_search(self, query: str, top_k: int = 10, 
                          filters: Optional[Dict] = None):
         """Perform optimized similarity search."""
@@ -162,6 +191,8 @@ class ProductionVectorStore:
         return formatted
 ```
 
+The search and formatting methods demonstrate proper abstraction of database-specific result formats. ChromaDB returns nested arrays that need flattening for easy consumption. The consistent result format enables easy switching between different vector database backends without changing downstream code. Metadata filtering enables powerful queries like "find similar documents created after 2023" or "search only publicly accessible content."
+
 ### ChromaDB vs Enterprise Alternatives
 
 | Database | Best For | Strengths | Limitations |
@@ -176,9 +207,14 @@ class ProductionVectorStore:
 Production environments often require flexibility to switch between vector databases based on performance requirements, cost considerations, or technical constraints. The strategy pattern enables this flexibility:
 
 ```python
+# Strategy pattern imports for multi-database architecture
 from abc import ABC, abstractmethod
 import time
+```
 
+The ABC (Abstract Base Class) module enables the strategy pattern, which is essential for enterprise vector database deployments. This pattern allows seamless switching between different vector database backends (ChromaDB, Pinecone, Qdrant) without changing application logic - critical for avoiding vendor lock-in and optimizing for different workload characteristics.
+
+```python
 class VectorDatabaseStrategy(ABC):
     """Abstract strategy for vector database implementations."""
     
@@ -193,7 +229,11 @@ class VectorDatabaseStrategy(ABC):
     @abstractmethod
     def get_performance_metrics(self):
         pass
+```
 
+The strategy interface defines the minimum contract every vector database implementation must fulfill. This abstraction enables A/B testing different vector databases, gradual migrations between providers, and intelligent routing based on query characteristics. Each implementation handles vendor-specific optimizations while presenting a consistent interface.
+
+```python
 class EnterpriseVectorManager:
     """Multi-database vector manager with intelligent routing."""
     
@@ -210,7 +250,11 @@ class EnterpriseVectorManager:
         
         if is_default or not self.default_database:
             self.default_database = name
-    
+```
+
+The enterprise manager maintains multiple database connections with performance tracking for each. This enables sophisticated routing strategies - you might use ChromaDB for development queries, Pinecone for high-accuracy production searches, and a specialized in-memory index for ultra-low latency requirements. The performance history enables data-driven routing decisions.
+
+```python
     def intelligent_search(self, query_vector: List[float], 
                           top_k: int = 10, 
                           performance_priority: str = "balanced"):
@@ -223,7 +267,11 @@ class EnterpriseVectorManager:
             database_name = self._select_most_accurate_database()
         else:
             database_name = self.default_database
-        
+```
+
+Intelligent routing enables query-specific optimization. Speed-priority queries route to the fastest available database (often in-memory indexes), while accuracy-priority queries route to databases with optimal indexing parameters. This architectural pattern enables 90th percentile latency improvements while maintaining accuracy for critical queries.
+
+```python
         # Execute search with performance tracking
         start_time = time.time()
         results = self.databases[database_name].search(
@@ -237,7 +285,11 @@ class EnterpriseVectorManager:
             'result_count': len(results),
             'timestamp': time.time()
         })
-        
+```
+
+Performance tracking on every query enables continuous optimization. The system learns which databases perform best for different query patterns and automatically adapts routing decisions. This data also enables capacity planning and identifies performance degradation before it affects users.
+
+```python
         return {
             'results': results,
             'database_used': database_name,
@@ -258,6 +310,8 @@ class EnterpriseVectorManager:
         
         return best_db
 ```
+
+The database selection algorithm uses rolling averages of the last 10 queries to make routing decisions. This approach balances recency (responding to current performance) with stability (avoiding rapid switching due to temporary performance fluctuations). Production systems often extend this with more sophisticated metrics like percentile latencies and error rates.
 
 ---
 
@@ -288,9 +342,7 @@ Each algorithm embodies a different philosophy for organizing high-dimensional s
 Here's a simple comparison of their characteristics:
 
 ```python
-
-# Index performance comparison
-
+# Index algorithm performance characteristics
 index_comparison = {
     "HNSW": {
         "query_latency": "0.1-1ms",
@@ -307,7 +359,11 @@ index_comparison = {
         "best_for": "Large-scale, memory-constrained"
     }
 }
+```
 
+This comparison table encapsulates the fundamental trade-offs between the two most important vector indexing algorithms in production systems. HNSW's superior query latency (sub-millisecond) comes at the cost of higher memory usage - approximately 50-100% more memory than IVF. The recall_at_10 metric measures how often the top 10 results include the true nearest neighbors, which directly impacts search quality in RAG applications.
+
+```python
 def recommend_index(dataset_size, memory_limit, latency_requirement):
     """Simple index recommendation logic."""
     if latency_requirement < 100 and memory_limit > 8:
@@ -318,15 +374,22 @@ def recommend_index(dataset_size, memory_limit, latency_requirement):
         return "HNSW"  # Default for balanced requirements
 ```
 
+This recommendation function demonstrates a practical decision tree for index selection. The 100ms latency threshold represents the boundary where users notice search delays, while the 8GB memory limit reflects typical production server constraints. Datasets exceeding 10 million vectors often require IVF's memory efficiency unless you have substantial memory resources - a single HNSW index with 10M 1536-dimensional vectors can consume 60-100GB of RAM.
+
 ### HNSW Index Implementation
 
 HNSW's performance comes from intelligent parameter tuning that balances memory usage, search quality, and query speed. The key is understanding how M, ef_construction, and ef_search interact:
 
 ```python
+# FAISS imports for high-performance vector indexing
 import faiss
 import numpy as np
 from typing import List, Dict, Any
+```
 
+FAISS (Facebook AI Similarity Search) provides industry-leading performance for vector similarity search. It offers highly optimized implementations of both HNSW and IVF algorithms with GPU acceleration support. For production RAG systems handling millions of vectors, FAISS typically outperforms pure-Python implementations by 10-100x.
+
+```python
 class OptimizedHNSWIndex:
     """Production HNSW implementation with intelligent parameter selection."""
     
@@ -335,7 +398,11 @@ class OptimizedHNSWIndex:
         self.performance_target = performance_target
         self.index = None
         self.id_mapping = {}
-        
+```
+
+The HNSW index constructor establishes the foundation for parameter optimization. The performance_target approach recognizes that different applications have different priorities - a customer service chatbot needs sub-50ms latency, while a research application might prioritize 99%+ recall over speed.
+
+```python
         # Parameter selection based on target
         if performance_target == "speed":
             self.M = 16              # Lower connectivity for speed
@@ -349,7 +416,11 @@ class OptimizedHNSWIndex:
             self.M = 32              # Balanced connectivity
             self.ef_construction = 200   # Good graph quality
             self.ef_search = 128        # Balanced search
-    
+```
+
+These parameter profiles represent years of empirical optimization across different workloads. The "speed" profile sacrifices some accuracy for 3-5x faster queries, while the "accuracy" profile achieves 98%+ recall at the cost of 2-3x higher memory usage and slower queries. The M parameter has the most dramatic impact - doubling M roughly doubles memory usage but can improve recall by 5-10%.
+
+```python
     def build_index(self, vectors: np.ndarray, external_ids: List[str]):
         """Build optimized HNSW index."""
         print(f"Building HNSW index with M={self.M}, "
@@ -362,7 +433,11 @@ class OptimizedHNSWIndex:
         # Build the graph
         print("Building HNSW graph structure...")
         self.index.add(vectors)
-        
+```
+
+Index construction is the most computationally expensive operation in HNSW deployment. The efConstruction parameter must be set before adding vectors - it controls how thoroughly the algorithm explores candidate connections during graph building. Higher values create better-connected graphs that enable faster, more accurate searches at the cost of longer build times.
+
+```python
         # Set search parameter
         self.index.hnsw.efSearch = self.ef_search
         
@@ -376,7 +451,11 @@ class OptimizedHNSWIndex:
         
         print(f"HNSW index ready: {len(vectors):,} vectors, "
               f"~{total_memory_mb:.1f}MB memory")
-    
+```
+
+Memory calculation helps with capacity planning in production deployments. The formula accounts for vector storage (dimension × 4 bytes for float32) plus graph connectivity (M × 4 bytes for neighbor indices). Real memory usage is typically 10-20% higher due to metadata and fragmentation, so plan accordingly when deploying to memory-constrained environments.
+
+```python
     def search(self, query_vector: np.ndarray, top_k: int = 10):
         """Search with current ef_search parameter."""
         if self.index is None:
@@ -388,7 +467,11 @@ class OptimizedHNSWIndex:
         
         # Perform search
         distances, indices = self.index.search(query_vector, top_k)
-        
+```
+
+The search method handles FAISS's requirement for 2D query arrays - a common source of runtime errors in production systems. FAISS search returns distances and indices separately, enabling efficient batch processing when searching with multiple query vectors simultaneously.
+
+```python
         # Format results
         results = []
         for i, (distance, idx) in enumerate(zip(distances[0], indices[0])):
@@ -407,6 +490,8 @@ class OptimizedHNSWIndex:
             self.index.hnsw.efSearch = ef_search
             print(f"Updated ef_search to {ef_search}")
 ```
+
+Result formatting includes conversion from FAISS's cosine distances to intuitive similarity scores. The idx != -1 check handles cases where fewer than top_k vectors exist in the index. The dynamic ef_search tuning enables runtime optimization - you can increase ef_search during off-peak hours for better accuracy, then decrease it during high-traffic periods for faster responses.
 
 **HNSW Parameter Impact:**
 
@@ -430,7 +515,11 @@ class IntelligentIndexSelector:
             "large_memory": {"max_vectors": float('inf'), "index": "IVF_PQ"},
             "large_speed": {"max_vectors": float('inf'), "index": "HNSW", "M": 16}
         }
-    
+```
+
+The performance profiles capture common deployment scenarios based on real-world production experience. Small datasets (<50k vectors) benefit from exact search since the computational overhead of approximate algorithms exceeds their benefits. Medium datasets favor HNSW with different parameter tuning, while large datasets often require memory-efficient approaches like IVF with product quantization (PQ).
+
+```python
     def select_optimal_index(self, dataset_info: Dict) -> Dict:
         """Select best index configuration for dataset."""
         n_vectors = dataset_info.get('vector_count', 0)
@@ -441,7 +530,11 @@ class IntelligentIndexSelector:
         # Small dataset: use exact search
         if n_vectors < 50000:
             return {"algorithm": "Flat", "rationale": "Small dataset, exact search optimal"}
-        
+```
+
+The decision tree starts with dataset size analysis. For collections under 50,000 vectors, exact search (FAISS IndexFlatL2 or IndexFlatIP) provides perfect recall with acceptable latency. The computational cost of building and querying approximate indexes exceeds the brute-force approach at this scale, making exact search both simpler and faster.
+
+```python
         # Memory-constrained or very large
         memory_usage_gb = n_vectors * dataset_info.get('dimension', 1536) * 4 / (1024**3)
         if memory_usage_gb > memory_limit_gb or n_vectors > 10000000:
@@ -451,7 +544,11 @@ class IntelligentIndexSelector:
                 "pq_segments": 16,
                 "rationale": "Memory constraints or large scale require compression"
             }
-        
+```
+
+Memory calculation drives the choice between HNSW and compressed indexes. IVF with Product Quantization (IVF_PQ) can reduce memory usage by 8-32x compared to HNSW, enabling deployment of large vector collections on memory-constrained infrastructure. The 8% centroid ratio provides good clustering quality while maintaining reasonable search performance.
+
+```python
         # High accuracy requirement
         if accuracy_requirement > 0.95:
             return {
@@ -471,7 +568,11 @@ class IntelligentIndexSelector:
                 "ef_search": 64,
                 "rationale": "Ultra-low latency requirement"
             }
-        
+```
+
+The accuracy vs. speed trade-off demonstrates HNSW's flexibility. High-accuracy configurations with M=64 and ef_construction=512 achieve 98%+ recall but consume significantly more memory and CPU. Ultra-low latency configurations sacrifice some accuracy for sub-50ms query times, ideal for interactive applications where response time trumps perfect results.
+
+```python
         # Balanced default
         return {
             "algorithm": "HNSW",
@@ -481,6 +582,8 @@ class IntelligentIndexSelector:
             "rationale": "Balanced performance for typical RAG workload"
         }
 ```
+
+The balanced default configuration represents the sweet spot for most RAG applications. With M=32 and ef_construction=200, this configuration typically achieves 95%+ recall with reasonable memory usage and query latencies under 100ms. These parameters work well for document collections from 50k to 1M vectors, covering the majority of production RAG deployments.
 
 ---
 
@@ -504,9 +607,7 @@ Pure semantic search might miss this match because "remote work" and "work from 
 Here's a simple hybrid search approach:
 
 ```python
-
 # Simple hybrid search concept
-
 def simple_hybrid_search(query, vector_store, documents, top_k=10):
     """Combine semantic and keyword search results."""
     
@@ -516,7 +617,11 @@ def simple_hybrid_search(query, vector_store, documents, top_k=10):
     # Keyword search (simplified)
     keyword_results = []
     query_words = query.lower().split()
-    
+```
+
+The hybrid search concept addresses the fundamental limitation of pure semantic search: missing exact terminology matches. By retrieving top_k*2 semantic results, we create space for reranking based on the combination of semantic similarity and keyword relevance. This oversampling approach is crucial for effective fusion.
+
+```python
     for i, doc in enumerate(documents):
         score = sum(1 for word in query_words if word in doc.lower())
         if score > 0:
@@ -525,7 +630,11 @@ def simple_hybrid_search(query, vector_store, documents, top_k=10):
                 'keyword_score': score / len(query_words),
                 'index': i
             })
-    
+```
+
+This simplified keyword scoring demonstrates the core principle but lacks sophistication. The score represents the fraction of query words found in each document. Production systems replace this with TF-IDF or BM25 scoring that accounts for term frequency, inverse document frequency, and document length normalization - factors that dramatically improve keyword search quality.
+
+```python
     # Simple combination: average the scores
     combined_results = []
     for semantic_result in semantic_results:
@@ -541,23 +650,34 @@ def simple_hybrid_search(query, vector_store, documents, top_k=10):
             'document': semantic_result,
             'combined_score': combined_score
         })
-    
+```
+
+The naive score averaging approach has significant limitations: semantic similarity scores and keyword scores operate on different scales and distributions. A document might have high semantic similarity (0.85) but low keyword overlap (0.2), making the average (0.525) misleading. Production systems use more sophisticated fusion methods like Reciprocal Rank Fusion (RRF) that work with rankings rather than raw scores.
+
+```python
     # Sort by combined score
     combined_results.sort(key=lambda x: x['combined_score'], reverse=True)
     return combined_results[:top_k]
 ```
+
+This final sorting and truncation step demonstrates why hybrid search often outperforms individual search methods. Documents that score well on both semantic similarity and keyword matching tend to be the most relevant to user queries, combining conceptual understanding with precise terminology matching.
 
 ### Production Hybrid Search Engine
 
 The key to effective hybrid search is sophisticated result fusion. Simple score averaging doesn't work well because semantic similarity scores and keyword scores operate on different scales. Reciprocal Rank Fusion (RRF) solves this elegantly by working with rankings rather than raw scores:
 
 ```python
+# Production-grade hybrid search imports
 import re
 import numpy as np
 from collections import Counter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from typing import List, Dict, Tuple
+```
 
+These imports provide the foundation for sophisticated hybrid search. The sklearn TfidfVectorizer offers optimized text preprocessing and sparse matrix operations essential for efficient BM25 computation on large document collections. Regular expressions and collections support advanced text processing patterns.
+
+```python
 class ProductionHybridSearch:
     """Production hybrid search with BM25 and RRF fusion."""
     
@@ -576,7 +696,11 @@ class ProductionHybridSearch:
         # Fit on document corpus
         self.tfidf_matrix = self.tfidf_vectorizer.fit_transform(documents)
         print(f"Built TF-IDF index for {len(documents)} documents")
-    
+```
+
+The TF-IDF initialization is crucial for BM25 performance. The max_features=10000 limit prevents memory explosion while covering the most important terms. Including bigrams (ngram_range=(1, 2)) captures phrases like "machine learning" that are more informative than individual words. The sparse matrix representation enables efficient operations on large document collections.
+
+```python
     def hybrid_search(self, query: str, top_k: int = 10, 
                      semantic_weight: float = 0.7) -> List[Dict]:
         """Execute hybrid search with RRF fusion."""
@@ -595,7 +719,11 @@ class ProductionHybridSearch:
         )
         
         return fused_results[:top_k]
-    
+```
+
+The three-step hybrid search process maximizes result quality through oversampling and fusion. Retrieving top_k*3 semantic results provides candidate diversity for effective reranking. The k=60 parameter in RRF controls the smoothing - lower values emphasize top-ranked results more heavily, while higher values give more weight to lower-ranked matches.
+
+```python
     def _compute_bm25_scores(self, query: str, k1: float = 1.2, 
                            b: float = 0.75) -> np.ndarray:
         """Compute BM25 scores for all documents."""
@@ -607,7 +735,11 @@ class ProductionHybridSearch:
         doc_lengths = np.array([len(doc.split()) for doc in self.documents])
         avg_doc_length = np.mean(doc_lengths)
         scores = np.zeros(len(self.documents))
-        
+```
+
+BM25 implementation begins with proper tokenization using the same analyzer as the TF-IDF vectorizer, ensuring consistency in text processing. Document length statistics are essential for BM25's length normalization, which prevents short documents from dominating search results simply due to having fewer words.
+
+```python
         # Process each query term
         for token in query_tokens:
             if token in self.tfidf_vectorizer.vocabulary_:
@@ -622,14 +754,22 @@ class ProductionHybridSearch:
                 if df > 0:
                     # IDF calculation
                     idf = np.log((len(self.documents) - df + 0.5) / (df + 0.5))
-                    
+```
+
+The BM25 calculation processes each query term independently, accumulating scores across terms. The IDF (Inverse Document Frequency) formula includes the +0.5 smoothing terms to prevent mathematical issues with very rare or very common terms. This formulation ensures that terms appearing in most documents receive lower weights, while distinctive terms get higher emphasis.
+
+```python
                     # BM25 formula
                     numerator = tf * (k1 + 1)
                     denominator = tf + k1 * (1 - b + b * doc_lengths / avg_doc_length)
                     scores += idf * (numerator / denominator)
         
         return scores
-    
+```
+
+The core BM25 formula balances term frequency (tf) against document length normalization. The k1 parameter (typically 1.2) controls term frequency saturation - higher values give more weight to repeated term occurrences. The b parameter (typically 0.75) controls length normalization strength, with 0 meaning no length normalization and 1 meaning full normalization.
+
+```python
     def _reciprocal_rank_fusion(self, semantic_results: List, 
                                bm25_scores: np.ndarray, k: int = 60) -> List[Dict]:
         """Fuse semantic and lexical results using RRF."""
@@ -644,7 +784,11 @@ class ProductionHybridSearch:
                 'semantic_rrf': 1 / (k + rank + 1),
                 'lexical_rrf': 0
             }
-        
+```
+
+Reciprocal Rank Fusion (RRF) elegantly solves the score normalization problem by working with rankings rather than raw scores. The RRF score 1/(k + rank + 1) gives exponentially decreasing weight to lower-ranked results. This approach is robust to outliers and doesn't require calibrating different scoring systems.
+
+```python
         # Add BM25 scores (convert to RRF)
         bm25_rankings = np.argsort(-bm25_scores)  # Descending order
         
@@ -660,7 +804,11 @@ class ProductionHybridSearch:
                     'semantic_rrf': 0,
                     'lexical_rrf': 1 / (k + rank + 1)
                 }
-        
+```
+
+The BM25 ranking conversion maintains the same RRF formula for consistency. Documents appearing in both semantic and lexical results get scores from both systems, while documents unique to each system receive single-source scores. This approach ensures no potentially relevant documents are overlooked.
+
+```python
         # Calculate final RRF scores
         for doc_id in doc_scores:
             semantic_rrf = doc_scores[doc_id]['semantic_rrf']
@@ -676,6 +824,8 @@ class ProductionHybridSearch:
         
         return sorted_results
 ```
+
+The final fusion step simply adds the RRF scores from both systems, creating a natural balance between semantic and lexical evidence. This additive approach means documents that rank well in both systems receive the highest final scores, while documents strong in only one system still contribute to results. The mathematical properties of RRF ensure this combination is statistically sound.
 
 **Why RRF Outperforms Score Fusion:**
 
@@ -698,7 +848,11 @@ class QueryEnhancementEngine:
             'question_decomposition', 
             'hypothetical_document_generation'
         ]
-    
+```
+
+Query enhancement addresses the fundamental challenge that users often express complex information needs in simple, ambiguous queries. These three core strategies—synonym expansion, question decomposition, and hypothetical document generation—tackle different aspects of this problem, each improving retrieval effectiveness in distinct ways.
+
+```python
     async def enhance_query(self, query: str, strategy: str = "comprehensive") -> Dict:
         """Generate enhanced queries for comprehensive search."""
         
@@ -714,7 +868,11 @@ class QueryEnhancementEngine:
                 'query': expanded,
                 'weight': 0.8
             })
-        
+```
+
+The enhancement orchestration creates multiple query variants with different weights reflecting their expected relevance. Synonym expansion gets a weight of 0.8 because it closely preserves the original intent while broadening terminology coverage. This approach enables parallel search execution across all variants, with results later fused based on these confidence weights.
+
+```python
         if strategy in ["comprehensive", "question_decomposition"]:
             sub_queries = await self._decompose_question(query)
             for i, sub_q in enumerate(sub_queries):
@@ -732,7 +890,11 @@ class QueryEnhancementEngine:
                 'query': hyde_doc,
                 'weight': 0.9
             })
-        
+```
+
+Sub-queries receive lower weights (0.6) because they represent partial aspects of the original question, while hypothetical documents get the highest weight (0.9) since they represent ideal answer content. This weighting scheme enables sophisticated result aggregation where complete, well-matched documents are prioritized over partial matches.
+
+```python
         return enhanced_queries
     
     async def _expand_with_synonyms(self, query: str) -> str:
@@ -748,7 +910,11 @@ class QueryEnhancementEngine:
         
         response = await self.llm_model.apredict(expansion_prompt)
         return response.strip()
-    
+```
+
+Synonym expansion leverages language models' understanding of semantic relationships to broaden query terminology. This technique is particularly effective for domain-specific queries where users might employ different terminology than authors. For example, "car accident" might expand to include "vehicle collision," "automobile crash," and "traffic incident," significantly improving recall.
+
+```python
     async def _generate_hypothetical_document(self, query: str) -> str:
         """Generate hypothetical document that would answer the query."""
         hyde_prompt = f"""
@@ -765,6 +931,8 @@ class QueryEnhancementEngine:
         return response.strip()
 ```
 
+Hypothetical Document Embeddings (HyDE) represents one of the most powerful query enhancement techniques. Instead of searching with the question, you search with what the answer should look like. This approach dramatically improves semantic matching because the generated text closely resembles actual document content, creating better vector space alignment than question-based queries. Studies show HyDE can improve retrieval accuracy by 20-30% for complex queries.
+
 ---
 
 ## Part 4: Performance Optimization & Evaluation - Making it Production-Ready
@@ -780,13 +948,15 @@ The optimization strategy combines multiple techniques: caching frequent queries
 Here are the key optimization strategies that provide the most impact:
 
 ```python
-
-# Essential performance optimizations
-
+# Performance optimization imports
 from functools import lru_cache
 import hashlib
 import time
+```
 
+These imports establish the foundation for production-grade search optimization. The hashlib module enables consistent cache key generation, while time provides precision timing for performance monitoring. The lru_cache decorator, though not used directly here, is available for method-level caching optimizations.
+
+```python
 class OptimizedSearchEngine:
     """Search engine with essential performance optimizations."""
     
@@ -800,7 +970,11 @@ class OptimizedSearchEngine:
             'total_searches': 0,
             'avg_search_time': 0
         }
-    
+```
+
+The optimized search engine initialization establishes caching infrastructure and performance tracking. The 1000-query cache size balances memory usage with hit rate optimization—larger caches improve hit rates but consume more memory. Performance statistics enable data-driven optimization decisions and SLA monitoring.
+
+```python
     def optimized_search(self, query: str, top_k: int = 10, 
                         use_cache: bool = True) -> Dict:
         """Search with caching and performance tracking."""
@@ -812,7 +986,11 @@ class OptimizedSearchEngine:
         if use_cache and cache_key in self.query_cache:
             self.performance_stats['cache_hits'] += 1
             return self.query_cache[cache_key]
-        
+```
+
+Cache key generation includes both query text and result count (top_k) to ensure result consistency. The MD5 hash creates fixed-length keys that prevent memory issues with very long queries. Cache-first lookup can reduce query latency by 95%+ for repeated queries, which are common in production RAG systems due to user behavior patterns.
+
+```python
         # Perform search
         start_time = time.time()
         results = self.vector_store.similarity_search(query, k=top_k)
@@ -824,7 +1002,11 @@ class OptimizedSearchEngine:
             'search_time': search_time,
             'cached': False
         }
-        
+```
+
+Precision timing measurement enables latency monitoring and performance regression detection. The standardized response format includes metadata about search performance and caching status, enabling downstream systems to make informed decisions about result freshness versus performance.
+
+```python
         # Cache result
         if use_cache and len(self.query_cache) < self.cache_size:
             self.query_cache[cache_key] = response
@@ -844,6 +1026,8 @@ class OptimizedSearchEngine:
         return self.performance_stats['cache_hits'] / total
 ```
 
+Cache management includes size limits to prevent unbounded memory growth. The cache hit rate calculation provides a key performance metric—production RAG systems typically achieve 60-80% hit rates, translating to substantial latency improvements. Monitoring these metrics enables capacity planning and cache tuning decisions.
+
 **Performance Impact of Optimizations:**
 
 - **Query caching**: 70-80% hit rate for common queries saves significant compute
@@ -855,12 +1039,17 @@ class OptimizedSearchEngine:
 Performance optimization is impossible without measurement. Production systems need continuous monitoring that tracks not just averages, but percentiles, error rates, and degradation patterns:
 
 ```python
+# Advanced monitoring and benchmarking imports
 import asyncio
 import concurrent.futures
 from dataclasses import dataclass
 from typing import List, Dict, Any
 import statistics
+```
 
+These imports enable sophisticated production monitoring capabilities. The asyncio module supports concurrent query execution for realistic load testing, while dataclasses provide clean metric containers. The statistics module offers robust percentile calculations essential for SLA monitoring.
+
+```python
 @dataclass
 class SearchMetrics:
     """Container for search performance metrics."""
@@ -870,7 +1059,11 @@ class SearchMetrics:
     cache_hit_rate: float
     error_rate: float
     throughput_qps: float
+```
 
+The metrics dataclass captures the key performance indicators for production search systems. P50 latency represents typical user experience, while P95 and P99 latencies reveal tail performance critical for SLA compliance. These percentile measurements are far more informative than simple averages, which can hide performance issues affecting significant portions of users.
+
+```python
 class ProductionSearchMonitor:
     """Comprehensive search performance monitoring."""
     
@@ -879,7 +1072,11 @@ class ProductionSearchMonitor:
         self.metrics_history = []
         self.current_window = []
         self.window_size = 1000  # Number of queries to track
-        
+```
+
+The sliding window approach maintains recent performance history while controlling memory usage. The 1000-query window provides statistical significance for percentile calculations while remaining responsive to performance changes. This design enables real-time monitoring without unbounded memory growth.
+
+```python
     async def monitored_search(self, query: str, **kwargs) -> Dict:
         """Execute search with comprehensive monitoring."""
         
@@ -896,7 +1093,11 @@ class ProductionSearchMonitor:
         except Exception as e:
             error_occurred = True
             result = {'error': str(e), 'results': []}
-        
+```
+
+The monitored search wrapper captures both successful operations and errors for comprehensive performance analysis. The asyncio.to_thread wrapper enables concurrent execution of synchronous search operations, essential for realistic load testing. Error capture prevents exceptions from disrupting monitoring while providing failure rate metrics.
+
+```python
         # Record metrics
         end_time = time.time()
         search_metrics = {
@@ -911,7 +1112,11 @@ class ProductionSearchMonitor:
         self._record_metrics(search_metrics)
         
         return result
-    
+```
+
+Comprehensive metric collection captures all aspects of search performance: latency for speed analysis, caching status for optimization insights, result counts for quality monitoring, and timestamps for throughput calculations. This rich data set enables deep performance analysis and optimization opportunities identification.
+
+```python
     def _record_metrics(self, metrics: Dict):
         """Record metrics in sliding window."""
         self.current_window.append(metrics)
@@ -930,7 +1135,11 @@ class ProductionSearchMonitor:
         
         if not latencies:
             return SearchMetrics(0, 0, 0, 0, 1.0, 0)
-        
+```
+
+The sliding window maintenance and metric extraction prepare data for statistical analysis. Separating successful queries from errors ensures latency percentiles reflect actual search performance rather than error handling overhead. This approach provides clean performance signals for optimization decisions.
+
+```python
         # Calculate percentiles
         latencies.sort()
         p50 = statistics.median(latencies)
@@ -943,7 +1152,11 @@ class ProductionSearchMonitor:
         
         errors = sum(1 for m in self.current_window if m['error'])
         error_rate = errors / len(self.current_window)
-        
+```
+
+Percentile calculation provides the foundation for SLA monitoring and performance optimization. The P95 latency represents the experience of the slowest 5% of queries, while P99 captures worst-case performance. Cache hit rates and error rates provide operational health indicators essential for production monitoring.
+
+```python
         # Calculate throughput (queries per second)
         time_span = self.current_window[-1]['timestamp'] - self.current_window[0]['timestamp']
         throughput = len(self.current_window) / time_span if time_span > 0 else 0
@@ -956,7 +1169,11 @@ class ProductionSearchMonitor:
             error_rate=error_rate,
             throughput_qps=throughput
         )
-    
+```
+
+Throughput calculation provides capacity planning insights by measuring sustained query load handling. The queries-per-second metric enables resource utilization analysis and scaling decisions. Combined with latency percentiles, these metrics provide complete performance visibility.
+
+```python
     async def performance_benchmark(self, test_queries: List[str], 
                                   concurrent_requests: int = 10) -> Dict:
         """Run comprehensive performance benchmark."""
@@ -970,7 +1187,11 @@ class ProductionSearchMonitor:
         async def bounded_search(query):
             async with semaphore:
                 return await self.monitored_search(query)
-        
+```
+
+The benchmarking framework simulates realistic production load through controlled concurrency. The semaphore mechanism prevents overwhelming the system while maintaining consistent load characteristics. This approach enables accurate performance testing under conditions similar to production traffic patterns.
+
+```python
         # Execute all queries concurrently
         start_time = time.time()
         tasks = [bounded_search(query) for query in test_queries]
@@ -994,6 +1215,8 @@ class ProductionSearchMonitor:
         }
 ```
 
+The benchmark result analysis provides comprehensive performance insights including success rates, throughput capabilities, and detailed latency characteristics. This data enables informed decisions about index optimization, caching strategies, and infrastructure scaling. The return_exceptions=True approach ensures benchmark completion even with partial failures, providing realistic performance data.
+
 ### Advanced Performance Tuning
 
 The final optimization layer is adaptive tuning – systems that automatically adjust parameters based on observed performance patterns. This enables systems to self-optimize as usage patterns and data characteristics evolve:
@@ -1011,7 +1234,11 @@ class AdaptivePerformanceTuner:
             'ef_search': 128,  # For HNSW
             'timeout_ms': 1000
         }
-    
+```
+
+Adaptive performance tuning represents the pinnacle of production search optimization - systems that automatically optimize themselves based on observed performance patterns. This approach is essential for maintaining optimal performance as data characteristics, query patterns, and usage loads evolve over time.
+
+```python
     async def adaptive_tuning_cycle(self):
         """Run one cycle of adaptive performance tuning."""
         
@@ -1032,7 +1259,11 @@ class AdaptivePerformanceTuner:
             if self._is_improvement(current_metrics, test_metrics):
                 self._apply_configuration(new_config)
                 print(f"Applied performance tuning: {new_config}")
-            
+```
+
+The tuning cycle follows a conservative test-and-apply approach that prevents performance degradation from experimental parameter changes. By testing candidate configurations before applying them, the system ensures that adaptations improve rather than harm performance. This methodology is crucial for autonomous systems that operate without human intervention.
+
+```python
             # Record tuning attempt
             self.tuning_history.append({
                 'timestamp': time.time(),
@@ -1042,14 +1273,22 @@ class AdaptivePerformanceTuner:
                 'new_metrics': test_metrics,
                 'applied': self._is_improvement(current_metrics, test_metrics)
             })
-    
+```
+
+Tuning history provides valuable insights into system optimization patterns and enables machine learning approaches to parameter tuning. This historical data can reveal seasonal performance patterns, identify optimal parameter ranges, and guide future optimization strategies. The comprehensive logging supports both debugging and advanced optimization algorithms.
+
+```python
     def _should_tune(self, metrics: SearchMetrics) -> bool:
         """Determine if performance tuning is warranted."""
         # Tune if latency is high or cache hit rate is low
         return (metrics.query_latency_p95 > 200 or  # >200ms p95 latency
                 metrics.cache_hit_rate < 0.6 or     # <60% cache hit rate
                 metrics.error_rate > 0.05)          # >5% error rate
-    
+```
+
+The tuning triggers are based on production SLA thresholds that indicate suboptimal performance. The 200ms P95 latency threshold represents the boundary where users begin noticing response delays. Cache hit rates below 60% suggest inefficient caching strategies, while error rates above 5% indicate system stress or configuration issues.
+
+```python
     def _generate_tuning_candidate(self, metrics: SearchMetrics) -> Dict:
         """Generate candidate configuration for testing."""
         new_config = self.current_config.copy()
@@ -1069,6 +1308,8 @@ class AdaptivePerformanceTuner:
         
         return new_config
 ```
+
+The parameter adjustment logic implements domain-specific optimization heuristics. Reducing ef_search trades some accuracy for significant speed improvements when latency is excessive. Increasing cache size addresses low hit rates, while timeout increases help with error rates caused by system overload. The bounded adjustments (max/min limits) prevent extreme parameter changes that could destabilize the system.
 
 ---
 

@@ -269,6 +269,7 @@ The trace context mapping provides standardized span names for different RAG ope
 
 Each RAG request gets a parent span that tracks the entire operation lifecycle. The span includes metadata like request ID and operation type for correlation across distributed components.
 
+```python
     async def trace_component_operation(self, parent_span, component: str, 
                                       operation_details: Dict[str, Any]) -> ContextManager:
         """Trace individual component operations within RAG pipeline."""
@@ -347,6 +348,7 @@ The analysis begins by collecting comprehensive performance data from the specif
 
 Each specialized analyzer processes its relevant data subset concurrently. This parallel analysis approach reduces overall processing time while providing deep insights into different system aspects.
 
+```python
         # Generate optimization recommendations using ML
         optimization_recommendations = await self.ml_engine.generate_optimizations(
             analyses, performance_data
