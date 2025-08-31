@@ -1,0 +1,630 @@
+{
+  "summary": {
+    "total_files": 1,
+    "files_needing_refactoring": 0,
+    "total_large_blocks": 0
+  },
+  "files": [
+    {
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
+      "total_code_blocks": 46,
+      "large_blocks_count": 0,
+      "code_blocks": [
+        {
+          "start_line": 28,
+          "end_line": 38,
+          "language": "bash",
+          "content": [
+            "# Test enterprise integration patterns",
+            "cd src/session9",
+            "python enterprise_integration.py",
+            "",
+            "# Test privacy and compliance systems",
+            "python -c \"from privacy_compliance import PrivacyCompliance; print('Enterprise architecture ready!')\"",
+            "",
+            "# Test production orchestrator",
+            "python -c \"from production_rag_orchestrator import ProductionRAGOrchestrator; ProductionRAGOrchestrator().test_system()\""
+          ],
+          "line_count": 9
+        },
+        {
+          "start_line": 54,
+          "end_line": 65,
+          "language": "python",
+          "content": [
+            "class ZeroTrustRAGSecurity:",
+            "    \"\"\"Zero-trust security framework for enterprise RAG systems.\"\"\"",
+            "    ",
+            "    def __init__(self, security_config: Dict[str, Any]):",
+            "        self.config = security_config",
+            "        ",
+            "        # Core zero-trust components",
+            "        self.identity_provider = EnterpriseIdentityProvider()",
+            "        self.policy_engine = SecurityPolicyEngine()",
+            "        self.threat_detector = ThreatDetectionEngine()"
+          ],
+          "line_count": 10
+        },
+        {
+          "start_line": 67,
+          "end_line": 72,
+          "language": "python",
+          "content": [
+            "        # Network security components",
+            "        self.network_segmenter = NetworkSegmentation()",
+            "        self.traffic_inspector = NetworkTrafficInspector()",
+            "        self.encryption_manager = EncryptionManager()"
+          ],
+          "line_count": 4
+        },
+        {
+          "start_line": 76,
+          "end_line": 81,
+          "language": "python",
+          "content": [
+            "        # Data protection components",
+            "        self.data_classifier = DataSecurityClassifier()",
+            "        self.access_controller = DynamicAccessController()",
+            "        self.audit_engine = SecurityAuditEngine()"
+          ],
+          "line_count": 4
+        },
+        {
+          "start_line": 85,
+          "end_line": 99,
+          "language": "python",
+          "content": [
+            "    async def implement_zero_trust_architecture(self) -> Dict[str, Any]:",
+            "        \"\"\"Implement comprehensive zero-trust security for RAG system.\"\"\"",
+            "        ",
+            "        implementation_results = {}",
+            "        ",
+            "        # 1. Network Segmentation Implementation",
+            "        network_setup = await self.network_segmenter.create_security_zones({",
+            "            'dmz': {'components': ['api_gateway', 'load_balancer']},",
+            "            'application': {'components': ['rag_services', 'orchestrator']},",
+            "            'data': {'components': ['vector_store', 'knowledge_graph']},",
+            "            'management': {'components': ['monitoring', 'logging']}",
+            "        })",
+            "        implementation_results['network_segmentation'] = network_setup"
+          ],
+          "line_count": 13
+        },
+        {
+          "start_line": 103,
+          "end_line": 112,
+          "language": "python",
+          "content": [
+            "        # 2. Identity and Access Management",
+            "        iam_setup = await self.identity_provider.configure_zero_trust_iam({",
+            "            'multi_factor_authentication': True,",
+            "            'continuous_verification': True,",
+            "            'risk_based_authentication': True,",
+            "            'privileged_access_management': True",
+            "        })",
+            "        implementation_results['identity_management'] = iam_setup"
+          ],
+          "line_count": 8
+        },
+        {
+          "start_line": 114,
+          "end_line": 123,
+          "language": "python",
+          "content": [
+            "        # 3. Data Protection",
+            "        data_protection = await self.data_classifier.implement_data_protection({",
+            "            'classification_levels': ['public', 'internal', 'confidential', 'restricted'],",
+            "            'encryption_at_rest': True,",
+            "            'encryption_in_transit': True,",
+            "            'data_loss_prevention': True",
+            "        })",
+            "        implementation_results['data_protection'] = data_protection"
+          ],
+          "line_count": 8
+        },
+        {
+          "start_line": 125,
+          "end_line": 140,
+          "language": "python",
+          "content": [
+            "        # 4. Threat Detection",
+            "        threat_detection = await self.threat_detector.deploy_detection_systems({",
+            "            'behavioral_analytics': True,",
+            "            'anomaly_detection': True,",
+            "            'threat_intelligence_integration': True,",
+            "            'real_time_monitoring': True",
+            "        })",
+            "        implementation_results['threat_detection'] = threat_detection",
+            "        ",
+            "        return {",
+            "            'zero_trust_implementation': implementation_results,",
+            "            'security_posture': await self._assess_security_posture(),",
+            "            'compliance_status': await self._check_compliance_status()",
+            "        }"
+          ],
+          "line_count": 14
+        },
+        {
+          "start_line": 144,
+          "end_line": 155,
+          "language": "python",
+          "content": [
+            "class DynamicAccessController:",
+            "    \"\"\"Dynamic access control with real-time risk assessment.\"\"\"",
+            "    ",
+            "    def __init__(self, config: Dict[str, Any]):",
+            "        self.config = config",
+            "        ",
+            "        # Risk assessment components",
+            "        self.risk_analyzer = RiskAnalyzer()",
+            "        self.context_analyzer = ContextAnalyzer()",
+            "        self.behavior_analyzer = BehaviorAnalyzer()"
+          ],
+          "line_count": 10
+        },
+        {
+          "start_line": 157,
+          "end_line": 173,
+          "language": "python",
+          "content": [
+            "        # Access decision components",
+            "        self.policy_evaluator = PolicyEvaluator()",
+            "        self.access_decision_engine = AccessDecisionEngine()",
+            "        ",
+            "    async def evaluate_access_request(self, request: Dict[str, Any]) -> Dict[str, Any]:",
+            "        \"\"\"Evaluate access request with dynamic risk assessment.\"\"\"",
+            "        ",
+            "        # Extract request context",
+            "        user_context = {",
+            "            'user_id': request['user_id'],",
+            "            'location': request.get('location'),",
+            "            'device': request.get('device_info'),",
+            "            'time': request['timestamp'],",
+            "            'ip_address': request.get('ip_address')",
+            "        }"
+          ],
+          "line_count": 15
+        },
+        {
+          "start_line": 175,
+          "end_line": 185,
+          "language": "python",
+          "content": [
+            "        # Perform risk analysis",
+            "        risk_assessment = await self.risk_analyzer.assess_risk({",
+            "            'user_context': user_context,",
+            "            'requested_resource': request['resource'],",
+            "            'requested_action': request['action'],",
+            "            'historical_behavior': await self.behavior_analyzer.get_user_behavior_profile(",
+            "                request['user_id']",
+            "            )",
+            "        })"
+          ],
+          "line_count": 9
+        },
+        {
+          "start_line": 187,
+          "end_line": 196,
+          "language": "python",
+          "content": [
+            "        # Analyze current context",
+            "        context_analysis = await self.context_analyzer.analyze_context({",
+            "            'device_trust_level': await self._assess_device_trust(user_context['device']),",
+            "            'network_trust_level': await self._assess_network_trust(user_context['ip_address']),",
+            "            'time_anomaly': await self._check_time_anomaly(user_context),",
+            "            'location_anomaly': await self._check_location_anomaly(user_context)",
+            "        })",
+            ""
+          ],
+          "line_count": 8
+        },
+        {
+          "start_line": 198,
+          "end_line": 208,
+          "language": "python",
+          "content": [
+            "        # Make access decision",
+            "        access_decision = await self.access_decision_engine.make_decision({",
+            "            'risk_score': risk_assessment['risk_score'],",
+            "            'context_score': context_analysis['context_score'],",
+            "            'policy_requirements': await self.policy_evaluator.get_applicable_policies(",
+            "                request['resource'], request['action']",
+            "            ),",
+            "            'trust_level': risk_assessment['trust_level']",
+            "        })"
+          ],
+          "line_count": 9
+        },
+        {
+          "start_line": 224,
+          "end_line": 232,
+          "language": "",
+          "content": [
+            "",
+            "#### **Data Governance and Classification**",
+            "",
+            "Implement comprehensive data governance for enterprise RAG systems:",
+            "",
+            "### Step 3: Enterprise Data Governance Framework",
+            ""
+          ],
+          "line_count": 7
+        },
+        {
+          "start_line": 243,
+          "end_line": 247,
+          "language": "",
+          "content": [
+            "",
+            "The data governance framework initializes with components for comprehensive data management. Data cataloging provides visibility, lineage tracking enables impact analysis, and quality monitoring ensures data integrity throughout the RAG pipeline.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 276,
+          "end_line": 280,
+          "language": "",
+          "content": [
+            "",
+            "Data discovery performs comprehensive analysis of each source, including deep scanning for schema understanding, sample analysis for content patterns, and automatic sensitivity detection for privacy and security concerns.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 288,
+          "end_line": 294,
+          "language": "",
+          "content": [
+            "",
+            "Automated classification applies multiple frameworks to identify personally identifiable information (PII), protected health information (PHI), financial data, and proprietary content with high confidence thresholds.",
+            "",
+            "Next, we establish data lineage tracking to map data flow and transformations:",
+            ""
+          ],
+          "line_count": 5
+        },
+        {
+          "start_line": 302,
+          "end_line": 306,
+          "language": "",
+          "content": [
+            "",
+            "Lineage tracking maps data flow from sources through transformations to downstream systems. This enables impact analysis for changes and supports compliance requirements for data provenance.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 314,
+          "end_line": 318,
+          "language": "",
+          "content": [
+            "",
+            "Quality monitoring tracks four critical dimensions continuously. Real-time monitoring enables immediate detection of data quality issues that could impact RAG system performance or accuracy.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 344,
+          "end_line": 354,
+          "language": "",
+          "content": [
+            "",
+            "### CI/CD and DevOps for RAG Systems",
+            "",
+            "#### **Advanced CI/CD Pipeline for RAG**",
+            "",
+            "Implement sophisticated CI/CD pipeline specifically designed for RAG systems:",
+            "",
+            "### Step 1: RAG-Specific CI/CD Pipeline",
+            ""
+          ],
+          "line_count": 9
+        },
+        {
+          "start_line": 366,
+          "end_line": 370,
+          "language": "",
+          "content": [
+            "",
+            "The RAG CI/CD pipeline initializes with specialized validators for code, models, and data. Unlike traditional CI/CD, RAG systems require validation of ML models, data quality, and RAG-specific integration patterns.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 404,
+          "end_line": 408,
+          "language": "",
+          "content": [
+            "",
+            "The pipeline begins with comprehensive code validation including RAG-specific patterns. Unlike standard CI/CD, this validates retrieval algorithms, embedding models, and generation components for enterprise requirements.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 419,
+          "end_line": 423,
+          "language": "",
+          "content": [
+            "",
+            "Model validation ensures embedding consistency across updates, maintains generation quality standards, meets performance benchmarks, and detects potential bias issues in model outputs.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 432,
+          "end_line": 436,
+          "language": "",
+          "content": [
+            "",
+            "Data validation verifies schema compatibility, maintains quality standards, ensures privacy compliance, and preserves lineage integrity throughout the data processing pipeline.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 521,
+          "end_line": 529,
+          "language": "",
+          "content": [
+            "",
+            "#### **Infrastructure as Code for RAG**",
+            "",
+            "Implement infrastructure as code specifically for RAG deployments:",
+            "",
+            "### Step 2: RAG Infrastructure as Code",
+            ""
+          ],
+          "line_count": 7
+        },
+        {
+          "start_line": 541,
+          "end_line": 545,
+          "language": "",
+          "content": [
+            "",
+            "The RAGInfrastructureAsCode class serves as the central orchestrator for deploying enterprise RAG systems using Infrastructure as Code principles. The three core managers handle different layers of the deployment stack: Terraform provisions cloud infrastructure, Kubernetes manages container orchestration, and Helm handles application deployments. This separation of concerns allows for modular, maintainable infrastructure management.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 550,
+          "end_line": 554,
+          "language": "",
+          "content": [
+            "",
+            "Environment management components handle the critical operational aspects of RAG deployments. The EnvironmentManager ensures consistent configuration across development, staging, and production environments. SecretManager handles sensitive data like API keys and database passwords using enterprise-grade secret management practices. ConfigurationManager maintains environment-specific settings that control RAG system behavior.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 563,
+          "end_line": 567,
+          "language": "",
+          "content": [
+            "",
+            "The deployment method begins by creating a unique deployment tracking structure. The deployment_id includes a timestamp to ensure uniqueness and enable rollback capabilities. The components dictionary will collect results from each deployment stage, providing comprehensive visibility into the infrastructure provisioning process.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 579,
+          "end_line": 583,
+          "language": "",
+          "content": [
+            "",
+            "Cloud infrastructure provisioning is the foundation layer that creates all the cloud resources needed for RAG systems. The Terraform modules follow a modular approach: networking establishes VPCs and subnets, security groups define access rules, load balancers distribute traffic, storage provides persistent data volumes, and monitoring sets up observability infrastructure. This modular approach allows for independent updates and maintenance of different infrastructure components.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 595,
+          "end_line": 599,
+          "language": "",
+          "content": [
+            "",
+            "Kubernetes resource deployment creates the container orchestration layer with proper namespace isolation. The three namespaces separate concerns: rag-system contains core RAG components, rag-monitoring isolates observability tools, and rag-data handles data processing components. The apply_order ensures dependencies are created first - namespaces before everything else, secrets and configmaps before applications that need them, and services before deployments that expose them.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 622,
+          "end_line": 626,
+          "language": "",
+          "content": [
+            "",
+            "Helm chart deployment handles the application layer with sophisticated package management. Each chart represents a complete RAG subsystem: rag-core contains the main retrieval and generation services, vector-store manages embeddings and similarity search, and monitoring provides observability. Helm's templating system allows the same charts to be deployed across different environments with environment-specific values, ensuring consistency while supporting customization.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 636,
+          "end_line": 640,
+          "language": "",
+          "content": [
+            "",
+            "Environment configuration management ensures that all RAG components receive the correct settings for their target environment. The three configuration sources follow Kubernetes best practices: environment variables for simple settings, ConfigMaps for complex configuration files, and Secrets for sensitive data. Validation ensures that required configuration is present and properly formatted before applications start.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 648,
+          "end_line": 652,
+          "language": "",
+          "content": [
+            "",
+            "The final deployment stages establish enterprise-grade monitoring and validate the entire system. Monitoring setup deploys metrics collection, logging aggregation, distributed tracing, and alerting systems specifically tuned for RAG workloads. Deployment validation runs comprehensive health checks to ensure all components are functioning correctly before marking the deployment as successful.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 662,
+          "end_line": 666,
+          "language": "",
+          "content": [
+            "",
+            "Error handling and result reporting provide critical visibility into deployment outcomes. Successful deployments record completion time for performance tracking and audit trails. Failed deployments capture detailed error information and failure timestamps to support rapid troubleshooting and rollback procedures.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 683,
+          "end_line": 687,
+          "language": "",
+          "content": [
+            "",
+            "The Kubernetes resource generation method creates deployment definitions programmatically. The RAG orchestrator deployment uses a three-replica default for high availability, with environment-specific overrides possible. The selector establishes the connection between the Deployment and its managed Pods using label matching.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 705,
+          "end_line": 711,
+          "language": "",
+          "content": [
+            "",
+            "The container specification defines resource requirements and runtime configuration for the RAG orchestrator. Resource requests guarantee minimum CPU and memory allocation, while limits prevent any single container from consuming excessive resources. The resource allocation (500m CPU, 1Gi memory requests with 2 CPU, 4Gi limits) provides room for RAG workloads to scale while protecting cluster stability. Environment variables pass deployment context to the application.",
+            "",
+            "Next, we define the orchestrator service for internal communication:",
+            ""
+          ],
+          "line_count": 5
+        },
+        {
+          "start_line": 731,
+          "end_line": 741,
+          "language": "",
+          "content": [
+            "",
+            "### Enterprise Governance and Compliance",
+            "",
+            "#### **Advanced Compliance Automation**",
+            "",
+            "Implement comprehensive compliance automation for enterprise RAG systems:",
+            "",
+            "### Step 3: Compliance Automation Framework",
+            ""
+          ],
+          "line_count": 9
+        },
+        {
+          "start_line": 757,
+          "end_line": 761,
+          "language": "",
+          "content": [
+            "",
+            "The EnterpriseComplianceFramework manages multiple regulatory compliance requirements simultaneously. Each compliance engine specializes in a specific regulatory framework: SOX for financial reporting controls, GDPR for data privacy, HIPAA for healthcare data, PCI DSS for payment card security, and ISO 27001 for information security management. This multi-engine approach allows RAG systems to meet diverse enterprise compliance requirements without code duplication.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 770,
+          "end_line": 774,
+          "language": "",
+          "content": [
+            "",
+            "The automation components handle the operational aspects of compliance management. The PolicyEngine translates regulatory requirements into executable policies, AuditAutomation manages continuous compliance verification, and RiskAssessment evaluates ongoing compliance posture. The reporter and evidence collector ensure that compliance activities are properly documented and auditable, critical for regulatory examinations and internal governance.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 785,
+          "end_line": 789,
+          "language": "",
+          "content": [
+            "",
+            "The main compliance implementation method processes each requested framework independently. This design allows organizations to implement only the compliance frameworks they need, reducing overhead and complexity. Each framework gets its own dedicated engine instance to handle framework-specific requirements and nuances.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 797,
+          "end_line": 801,
+          "language": "",
+          "content": [
+            "",
+            "Compliance control implementation begins with comprehensive system analysis. The RAG architecture analysis identifies all components and their compliance implications, data flow mapping traces information through the system for privacy and security controls, and security control inventory ensures all protective measures are documented and functional. Automated enforcement ensures controls are actively maintained rather than just documented.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 809,
+          "end_line": 813,
+          "language": "",
+          "content": [
+            "",
+            "Continuous monitoring establishes real-time compliance verification across the entire RAG system. Comprehensive scope ensures no compliance-relevant activities escape monitoring, real-time alerts enable immediate response to compliance violations, dashboards provide visibility for compliance teams, and automated remediation handles routine compliance issues without human intervention.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 820,
+          "end_line": 824,
+          "language": "",
+          "content": [
+            "",
+            "Compliance documentation generation creates the comprehensive records required for regulatory audits. The documentation includes not just policy statements but actual evidence of compliance implementation and ongoing adherence. Automated updates ensure documentation stays current with system changes, critical for maintaining audit readiness.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 831,
+          "end_line": 835,
+          "language": "",
+          "content": [
+            "",
+            "Audit automation handles the ongoing verification of compliance controls. Quarterly frequency provides regular verification while balancing operational overhead, though this can be customized per framework. Automated evidence collection ensures audit readiness without manual effort, while audit trail integrity protects the evidence from tampering or accidental modification.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 844,
+          "end_line": 848,
+          "language": "",
+          "content": [
+            "",
+            "Framework results aggregation collects all compliance activities for each regulatory framework. This structured result format enables cross-framework analysis and provides clear visibility into the compliance status of each framework. The compliance status assessment provides a real-time evaluation of adherence levels.",
+            ""
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 854,
+          "end_line": 858,
+          "language": "",
+          "content": [
+            "",
+            "Overall compliance analysis creates enterprise-wide visibility into compliance posture. The dashboard aggregates information across all frameworks to provide executive-level compliance status reporting. Risk assessment evaluates the combined compliance risk profile, identifying areas where multiple framework requirements create elevated risk exposure.",
+            ""
+          ],
+          "line_count": 3
+        }
+      ],
+      "large_blocks": [],
+      "needs_refactoring": false
+    }
+  ]
+}
