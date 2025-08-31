@@ -514,7 +514,11 @@ from langchain.agents import create_react_agent, AgentExecutor
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import Tool
+```
 
+This import section establishes the foundation for MCP-LangChain integration. The key insight here is that we're bridging two different paradigms: LangChain's agent framework and MCP's standardized tool protocol. The `Tool` class is particularly important as it's how we translate MCP tools into LangChain-compatible interfaces.
+
+```python
 from utils.mcp_manager import MCPServerManager
 from config import Config
 
@@ -528,7 +532,11 @@ class BasicMCPAgent:
         self.mcp_manager = mcp_manager
         self.llm = None
         self.agent_executor = None
+```
 
+This agent design focuses on single-server integration first. By mastering the connection to one MCP server, we build the foundation for multi-server coordination. Notice how the agent doesn't create or manage the MCP connection directly - it uses the `MCPServerManager` for that. This separation of concerns makes the code more maintainable and testable.
+
+```python
     async def initialize(self) -> bool:
         """The initialization sequence - Setting up your agent's capabilities."""
         try:
@@ -544,7 +552,11 @@ class BasicMCPAgent:
             if not adapter:
                 logger.error(f"Failed to get adapter: {self.server_name}")
                 return False
-            
+```
+
+The initialization follows a layered approach. First, we establish the intelligence layer with our LLM, then connect to the specific MCP server. The configuration-driven approach is crucial for production systems - you can switch between different models, adjust temperature for different use cases, or use different API keys for different environments. The graceful failure handling ensures the agent fails fast if the MCP server isn't available.
+
+```python            
             # Integration layer - Convert MCP tools to LangChain tools
             mcp_tools = await adapter.list_tools()
             langchain_tools = self._create_langchain_tools(mcp_tools, adapter)
@@ -558,7 +570,11 @@ class BasicMCPAgent:
         except Exception as e:
             logger.error(f"Failed to initialize agent: {e}")
             return False
+```
 
+This is where the magic happens - the integration layer discovers what tools the MCP server offers and translates them into LangChain's tool format. This dynamic discovery means new tools added to the MCP server automatically become available to the agent. The execution layer wraps everything in a ReAct agent executor with comprehensive error handling.
+
+```python
     def _create_langchain_tools(self, mcp_tools, adapter):
         """The translation layer - Converting MCP tools to LangChain format."""
         langchain_tools = []
@@ -572,7 +588,11 @@ class BasicMCPAgent:
                     return str(result)
                 except Exception as e:
                     return f"Error calling tool {tool_name}: {str(e)}"
-            
+```
+
+This tool wrapper is the critical bridge between LangChain and MCP. It handles the protocol translation - LangChain expects string inputs and outputs, while MCP uses structured JSON. The error handling ensures individual tool failures don't crash the entire agent - instead, they return informative error messages that the agent can reason about.
+
+```python            
             # The LangChain interface - Create compatible tool
             langchain_tool = Tool(
                 name=mcp_tool.name,
@@ -595,14 +615,18 @@ class BasicMCPAgent:
             return f"Error processing request: {str(e)}"
 ```
 
+The LangChain tool creation preserves the MCP tool's identity while wrapping its execution in async task handling. The description is crucial - this is what the LLM uses to decide when to use each tool. The run method showcases the ReAct pattern in action, where the agent receives a natural language query, reasons about which tools to use, executes them, and synthesizes results with graceful error handling.
+
 ### Key Integration Concepts Demonstrated
 
-This basic agent demonstrates several crucial integration concepts:
+This basic agent demonstrates several crucial integration concepts that form the foundation of enterprise LangChain-MCP integration:
 
-- **Tool wrapping**: MCP tools become LangChain-compatible through elegant translation
-- **Error handling**: Graceful degradation when tools fail - user experience preservation
-- **Async support**: Non-blocking execution for better performance - scalability foundation
-- **ReAct pattern**: Transparent reasoning process - debugging and understanding
+- **Tool wrapping**: MCP tools become LangChain-compatible through elegant translation - bridging protocol differences
+- **Error handling**: Graceful degradation when tools fail - user experience preservation in production environments
+- **Async support**: Non-blocking execution for better performance - scalability foundation for high-throughput applications
+- **ReAct pattern**: Transparent reasoning process - debugging and understanding agent decision-making
+- **Dynamic discovery**: Tools are discovered at runtime - enabling flexible, configuration-driven agent capabilities
+- **Protocol abstraction**: Agents work with tools regardless of their underlying MCP server implementation
 
 ### Scaling to Multi-Tool Intelligence
 
@@ -643,13 +667,22 @@ from langchain.agents import create_react_agent, AgentExecutor
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import Tool
+```
+
+This import section establishes the foundation for our sophisticated multi-tool agent. We're importing everything needed for intelligent coordination across multiple MCP servers. The key imports here are `AgentExecutor` for ReAct pattern execution and the core LangChain components for tool management.
+
+```python
 from langchain.memory import ConversationBufferWindowMemory
 
 from utils.mcp_manager import MCPServerManager
 from config import Config
 
 logger = logging.getLogger(__name__)
+```
 
+The memory import brings conversation awareness - this agent remembers previous interactions, making it perfect for complex, multi-turn conversations where context matters. Our custom `MCPServerManager` handles the bridge to all MCP servers.
+
+```python
 class MultiToolMCPAgent:
     """Advanced ReAct agent using multiple MCP servers - Your coordination engine."""
     
@@ -659,7 +692,11 @@ class MultiToolMCPAgent:
         self.agent_executor = None
         self.memory = None
         self.available_tools = {}
+```
 
+This class design embodies the separation of concerns principle. The agent doesn't manage MCP servers directly - it delegates that responsibility to the `MCPServerManager`. This makes the agent focused on coordination and reasoning, while the manager handles server lifecycle and health.
+
+```python
     async def initialize(self) -> bool:
         """The comprehensive initialization - Building your multi-tool intelligence."""
         try:
@@ -669,21 +706,33 @@ class MultiToolMCPAgent:
                 temperature=Config.LLM.temperature,
                 api_key=Config.OPENAI_API_KEY
             )
-            
+```
+
+The intelligence layer initialization creates our LLM interface. Notice how we use configuration-driven parameters - this allows easy switching between different models (GPT-4, Claude, local models) without code changes. The temperature setting controls creativity vs consistency in tool selection.
+
+```python
             # Memory system - Initialize conversation memory
             self.memory = ConversationBufferWindowMemory(
                 k=10,  # Remember last 10 exchanges
                 memory_key="chat_history",
                 return_messages=True
             )
-            
+```
+
+The memory system is crucial for sophisticated agent behavior. With `k=10`, the agent remembers the last 10 conversation exchanges, allowing it to maintain context across tool calls. This is essential for scenarios like "Can you also check yesterday's data?" where the agent needs to remember what data was previously discussed.
+
+```python
             # Tool ecosystem - Collect tools from all available servers
             langchain_tools = await self._collect_all_tools()
             
             if not langchain_tools:
                 logger.error("No tools available from MCP servers")
                 return False
-            
+```
+
+This tool collection step is where the magic happens. The agent automatically discovers all tools from all connected MCP servers. This dynamic discovery means adding new MCP servers instantly expands the agent's capabilities without code changes. The graceful failure handling ensures the agent fails fast if no tools are available.
+
+```python
             # Agent creation - Create enhanced agent executor
             self.agent_executor = self._create_enhanced_agent(langchain_tools)
             
@@ -696,7 +745,11 @@ class MultiToolMCPAgent:
         except Exception as e:
             logger.error(f"Failed to initialize multi-tool agent: {e}")
             return False
+```
 
+The final initialization phase creates the agent executor with comprehensive logging. This logging is crucial for production debugging - you'll know exactly how many tools the agent has access to from how many servers. The try-catch ensures initialization failures are handled gracefully.
+
+```python
     def _create_enhanced_agent(self, langchain_tools):
         """The intelligence amplifier - Create enhanced ReAct agent with sophisticated prompting."""
         react_prompt = PromptTemplate.from_template("""
@@ -709,7 +762,11 @@ STRATEGIC APPROACH:
 3. Use tools in logical sequence
 4. Provide comprehensive, helpful responses
 5. If a tool fails, try alternative approaches
+```
 
+This prompt engineering is where agent intelligence really shines. The strategic approach gives the agent a clear decision-making framework. Notice how we explicitly mention the types of tools available - this helps the LLM understand its capabilities and make better tool selection decisions.
+
+```python
 Available tools: {tools}
 
 Use this format:
@@ -726,7 +783,11 @@ Conversation history: {chat_history}
 Question: {input}
 {agent_scratchpad}
 """)
-        
+```
+
+The ReAct format with conversation history creates powerful context-aware reasoning. The agent can see previous tool calls and their results, enabling sophisticated multi-step workflows. The `agent_scratchpad` maintains the running thought process, making agent reasoning completely transparent.
+
+```python
         agent = create_react_agent(
             llm=self.llm,
             tools=langchain_tools,
@@ -743,6 +804,8 @@ Question: {input}
             return_intermediate_steps=True
         )
 ```
+
+The final agent executor configuration includes production-ready features. `handle_parsing_errors=True` means the agent gracefully handles malformed tool calls. `return_intermediate_steps=True` gives you complete visibility into the agent's reasoning process. The configurable `max_iterations` prevents infinite loops while allowing complex multi-step reasoning.
 
 ### Enhanced Prompting: The Intelligence Multiplier
 
