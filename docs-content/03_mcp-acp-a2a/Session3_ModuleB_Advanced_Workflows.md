@@ -394,16 +394,20 @@ class ParallelWorkflowOrchestrator:
 
 ### Pattern 2: Conditional Workflow Routing
 
-Dynamic workflows adapt their execution path based on runtime conditions and intermediate results.
+Dynamic workflows adapt their execution path based on runtime conditions and intermediate results. This pattern implements intelligent content analysis and routing to ensure queries reach the most appropriate processing pipeline.
 
 ```python
-# workflows/conditional_router.py
+# workflows/conditional_router.py - Imports and classification enums
 from typing import Dict, List, Any, Optional, Callable
 from dataclasses import dataclass
 from enum import Enum
 import re
 import logging
+```
 
+These imports establish the foundation for intelligent workflow routing. The `re` module enables sophisticated pattern matching for content analysis, while the typing imports ensure robust type checking for complex routing logic. This approach enables enterprise-grade content classification and routing decisions.
+
+```python
 logger = logging.getLogger(__name__)
 
 class WorkflowType(Enum):
@@ -412,13 +416,21 @@ class WorkflowType(Enum):
     SALES_INQUIRY = "sales_inquiry"
     DATA_ANALYSIS = "data_analysis"
     GENERAL_QUERY = "general_query"
+```
 
+The `WorkflowType` enum defines the major business domains that require different processing approaches. Each workflow type corresponds to specialized handling logic, routing requests to appropriate teams or systems. This classification enables organizations to automate initial query routing, reducing response times and improving customer experience.
+
+```python
 class Priority(Enum):
     LOW = 1
     MEDIUM = 2
     HIGH = 3
     CRITICAL = 4
+```
 
+Priority levels create a numerical hierarchy enabling automated SLA management and resource allocation. Higher priority requests receive expedited processing and may trigger escalation workflows. This systematic approach ensures critical issues receive immediate attention while maintaining efficient resource utilization.
+
+```python
 @dataclass
 class ConditionalWorkflowState:
     """State for conditional workflow routing."""
@@ -430,7 +442,11 @@ class ConditionalWorkflowState:
     priority: Optional[Priority] = None
     customer_tier: Optional[str] = None
     urgency_keywords: List[str] = None
-    
+```
+
+The workflow state captures comprehensive classification metadata extracted from the incoming query. `workflow_type` determines the processing pipeline, `priority` influences resource allocation, and `customer_tier` enables personalized service levels. The `urgency_keywords` provide audit trails for classification decisions, supporting continuous improvement of routing accuracy.
+
+```python
     # Processing results
     primary_result: Optional[Dict] = None
     escalation_result: Optional[Dict] = None
@@ -438,7 +454,11 @@ class ConditionalWorkflowState:
     # Routing decisions
     routing_path: List[str] = None
     escalated: bool = False
+```
 
+The state design separates classification results from processing outcomes, enabling clear audit trails and debugging capabilities. The `routing_path` tracks the complete workflow journey, while the `escalated` flag triggers specialized handling for high-priority or sensitive issues.
+
+```python
 class ConditionalWorkflowRouter:
     """Intelligent workflow routing based on content analysis."""
     
@@ -453,6 +473,11 @@ class ConditionalWorkflowRouter:
                 r"order|shipping|delivery|tracking|return",
                 r"login|password|access|locked"
             ],
+```
+
+The router initialization establishes pattern-based classification rules using regular expressions. Customer service patterns capture common account management, order management, and access-related queries. This rule-based approach enables precise routing while remaining maintainable and auditable.
+
+```python
             WorkflowType.TECHNICAL_SUPPORT: [
                 r"error|bug|crash|broken|not working|issue",
                 r"api|integration|connection|timeout",
@@ -469,19 +494,31 @@ class ConditionalWorkflowRouter:
                 r"dashboard|visualization|chart"
             ]
         }
-        
+```
+
+Technical support patterns identify system issues, API problems, and performance concerns, routing them to specialized technical teams. Sales inquiry patterns detect commercial interest, triggering sales-optimized workflows. Data analysis patterns route analytical requests to appropriate data processing pipelines. This comprehensive pattern library enables accurate domain classification.
+
+```python
         self.urgency_patterns = [
             (r"urgent|emergency|critical|asap|immediately", Priority.CRITICAL),
             (r"important|priority|soon|quickly", Priority.HIGH),
             (r"please|when possible|sometime", Priority.MEDIUM)
         ]
-        
+```
+
+Urgency pattern detection enables automatic priority classification based on customer language. Critical keywords trigger immediate escalation, high priority patterns ensure faster response times, and polite language patterns indicate standard priority levels. This linguistic analysis automates triage decisions that traditionally required human judgment.
+
+```python
         self.escalation_triggers = [
             r"complaint|frustrated|angry|disappointed",
             r"manager|supervisor|escalate",
             r"unacceptable|terrible|worst"
         ]
-    
+```
+
+Escalation triggers detect emotionally charged language and explicit escalation requests, automatically routing these queries to senior staff or specialized escalation workflows. This proactive approach prevents customer dissatisfaction from escalating while ensuring appropriate resources handle sensitive situations.
+
+```python
     async def build_workflow(self) -> StateGraph:
         """Build conditional routing workflow."""
         workflow = StateGraph(ConditionalWorkflowState)
@@ -495,10 +532,18 @@ class ConditionalWorkflowRouter:
         workflow.add_node("general_handler", self._handle_general_query)
         workflow.add_node("escalation_handler", self._handle_escalation)
         workflow.add_node("priority_processor", self._process_priority)
-        
+```
+
+The workflow architecture separates classification from specialized processing, creating a modular design that's easy to maintain and extend. Each handler node specializes in processing specific query types, while the classifier acts as an intelligent routing gateway. This separation of concerns enables teams to independently optimize their domain-specific processing logic.
+
+```python
         # Set entry point
         workflow.set_entry_point("classifier")
-        
+```
+
+The classifier serves as the single entry point, ensuring all queries undergo consistent analysis and routing. This centralized approach enables comprehensive logging, metrics collection, and routing rule management across the entire system.
+
+```python
         # Conditional routing based on classification
         workflow.add_conditional_edges(
             "classifier",
@@ -512,14 +557,22 @@ class ConditionalWorkflowRouter:
                 "escalation": "escalation_handler"
             }
         )
-        
+```
+
+Conditional routing creates dynamic execution paths based on classification results. The `_route_workflow` function determines the appropriate handler based on query analysis, enabling sophisticated decision-making about processing approaches. This flexibility allows the system to adapt to different query types while maintaining consistent handling patterns.
+
+```python
         # Priority processing after main handling
         workflow.add_edge("customer_service_handler", "priority_processor")
         workflow.add_edge("technical_support_handler", "priority_processor")
         workflow.add_edge("sales_handler", "priority_processor")
         workflow.add_edge("data_analysis_handler", "priority_processor")
         workflow.add_edge("general_handler", "priority_processor")
-        
+```
+
+Priority processing creates a common post-processing stage where priority-specific handling occurs. This design ensures consistent priority-based resource allocation and SLA management across all query types, while allowing domain-specific handlers to focus on their specialized processing logic.
+
+```python
         # Escalation handling
         workflow.add_conditional_edges(
             "priority_processor",
@@ -534,7 +587,11 @@ class ConditionalWorkflowRouter:
         
         self.workflow = workflow.compile()
         return self.workflow
-    
+```
+
+Escalation handling provides a safety net for high-priority or sensitive queries that require specialized attention. The conditional logic determines whether escalation is needed based on priority levels, customer tiers, or explicit escalation triggers, ensuring appropriate resource allocation for critical issues.
+
+```python
     async def _classify_query(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Classify query type and extract metadata."""
         query_lower = state.query.lower()
@@ -547,13 +604,21 @@ class ConditionalWorkflowRouter:
                 matches = len(re.findall(pattern, query_lower))
                 score += matches
             workflow_scores[workflow_type] = score
-        
+```
+
+Query classification uses scoring-based pattern matching to determine the most appropriate workflow type. Each pattern match increases the score for that workflow category, enabling accurate classification even when queries contain mixed content. This approach handles ambiguous queries gracefully while maintaining high classification accuracy.
+
+```python
         # Select highest scoring workflow type
         if max(workflow_scores.values()) > 0:
             state.workflow_type = max(workflow_scores, key=workflow_scores.get)
         else:
             state.workflow_type = WorkflowType.GENERAL_QUERY
-        
+```
+
+The scoring mechanism handles edge cases gracefully, defaulting to general query processing when no specific patterns match. This ensures that the system can process any input, even queries that don't fit established categories, maintaining robustness and preventing system failures.
+
+```python
         # Determine priority
         state.priority = Priority.LOW  # Default
         for pattern, priority in self.urgency_patterns:
@@ -565,7 +630,11 @@ class ConditionalWorkflowRouter:
         state.urgency_keywords = []
         for pattern, _ in self.urgency_patterns:
             state.urgency_keywords.extend(re.findall(pattern, query_lower))
-        
+```
+
+Priority determination uses hierarchical matching, selecting the highest priority level found in the query. The urgency keywords extraction provides transparency into classification decisions, enabling audit trails and continuous improvement of pattern recognition accuracy.
+
+```python
         # Check for escalation triggers
         for pattern in self.escalation_triggers:
             if re.search(pattern, query_lower):
@@ -578,14 +647,22 @@ class ConditionalWorkflowRouter:
         logger.info(f"Classified query as {state.workflow_type.value} with priority {state.priority.value}")
         
         return state
-    
+```
+
+Escalation trigger detection and routing path tracking complete the classification process. The comprehensive logging provides visibility into classification decisions, enabling monitoring and optimization of routing accuracy over time.
+
+```python
     def _route_workflow(self, state: ConditionalWorkflowState) -> str:
         """Route workflow based on classification."""
         if state.escalated:
             return "escalation"
         
         return state.workflow_type.value
-    
+```
+
+The routing decision prioritizes escalation over normal workflow routing, ensuring that sensitive or high-priority queries receive immediate attention. This simple but effective logic prevents escalation-worthy queries from getting lost in standard processing pipelines.
+
+```python
     async def _handle_customer_service(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle customer service workflow."""
         state.routing_path.append("customer_service")
@@ -603,7 +680,11 @@ class ConditionalWorkflowRouter:
                 # Check account status
                 if customer_data:
                     state.customer_tier = self._determine_customer_tier(customer_data)
-            
+```
+
+Customer service handling demonstrates personalized processing based on customer data. The customer tier determination enables differentiated service levels, ensuring premium customers receive enhanced support while maintaining efficient service for all customers. This approach balances resource allocation with customer satisfaction objectives.
+
+```python
             state.primary_result = {
                 "type": "customer_service",
                 "action": "Account inquiry processed",
@@ -619,7 +700,11 @@ class ConditionalWorkflowRouter:
             }
         
         return state
-    
+```
+
+Customer service processing includes comprehensive error handling with fallback responses, ensuring that system failures don't leave customers without support. The personalized recommendations based on customer tier and query content demonstrate how AI can enhance traditional customer service operations.
+
+```python
     async def _handle_technical_support(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle technical support workflow."""
         state.routing_path.append("technical_support")
@@ -632,7 +717,11 @@ class ConditionalWorkflowRouter:
                     "pattern": "*.log",
                     "search_type": "name"
                 })
-            
+```
+
+Technical support handling integrates with system monitoring capabilities, automatically checking logs and system status to provide context-aware support. This approach enables proactive issue identification and more accurate problem diagnosis, reducing resolution times and improving customer experience.
+
+```python
             state.primary_result = {
                 "type": "technical_support",
                 "action": "Technical analysis completed",
@@ -648,7 +737,11 @@ class ConditionalWorkflowRouter:
             }
         
         return state
-    
+```
+
+Technical support combines automated analysis with severity assessment, enabling intelligent triage and resource allocation. The technical recommendations provide actionable next steps, helping both support agents and customers resolve issues efficiently.
+
+```python
     async def _handle_sales_inquiry(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle sales inquiry workflow."""
         state.routing_path.append("sales")
@@ -661,7 +754,11 @@ class ConditionalWorkflowRouter:
                     "table": "products",
                     "query": state.query
                 })
-            
+```
+
+Sales inquiry handling integrates with product databases to provide accurate, up-to-date pricing and feature information. This automated approach ensures consistent sales messaging while enabling rapid response to customer inquiries.
+
+```python
             state.primary_result = {
                 "type": "sales_inquiry",
                 "action": "Sales information provided",
@@ -677,7 +774,11 @@ class ConditionalWorkflowRouter:
             }
         
         return state
-    
+```
+
+Sales processing includes lead quality assessment, enabling prioritization of high-value prospects and appropriate resource allocation. The automated recommendations help sales teams focus their efforts on the most promising opportunities while ensuring all inquiries receive appropriate attention.
+
+```python
     async def _handle_data_analysis(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle data analysis workflow."""
         state.routing_path.append("data_analysis")
@@ -690,7 +791,11 @@ class ConditionalWorkflowRouter:
                     "table": "analytics",
                     "query": state.query
                 })
-            
+```
+
+Data analysis handling connects to analytical databases and systems to provide data-driven insights. This automated approach enables rapid response to analytical requests while ensuring data accuracy and consistency across different analysis scenarios.
+
+```python
             state.primary_result = {
                 "type": "data_analysis",
                 "action": "Data analysis completed",
@@ -706,7 +811,11 @@ class ConditionalWorkflowRouter:
             }
         
         return state
-    
+```
+
+Data analysis processing generates actionable insights and visualizations, transforming raw analytical requests into meaningful business intelligence. The automated insight generation helps users understand complex data patterns without requiring deep analytical expertise.
+
+```python
     async def _handle_general_query(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle general query workflow."""
         state.routing_path.append("general")
@@ -718,7 +827,11 @@ class ConditionalWorkflowRouter:
         }
         
         return state
-    
+```
+
+General query handling provides a catch-all processor for queries that don't fit specific categories. This ensures system robustness and prevents query rejection, while maintaining consistent response patterns across all query types.
+
+```python
     async def _process_priority(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Process based on priority level."""
         state.routing_path.append("priority_processor")
@@ -733,7 +846,11 @@ class ConditionalWorkflowRouter:
                 }
         
         return state
-    
+```
+
+Priority processing applies consistent SLA management across all query types, ensuring high-priority queries receive expedited handling regardless of their domain classification. The priority flags enable downstream systems to appropriately allocate resources and track SLA compliance.
+
+```python
     def _check_escalation_needed(self, state: ConditionalWorkflowState) -> str:
         """Check if escalation is needed."""
         if (state.escalated or 
@@ -742,7 +859,11 @@ class ConditionalWorkflowRouter:
             return "escalate"
         
         return "complete"
-    
+```
+
+Escalation logic combines multiple factors including explicit escalation flags, critical priority levels, and customer tier considerations. This multi-dimensional approach ensures that escalation decisions account for both technical priority and business importance.
+
+```python
     async def _handle_escalation(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle escalation workflow."""
         state.routing_path.append("escalation")
@@ -758,7 +879,11 @@ class ConditionalWorkflowRouter:
         logger.warning(f"Query escalated: {state.query[:50]}...")
         
         return state
-    
+```
+
+Escalation handling preserves the original processing results while adding escalation metadata, enabling senior staff to understand both the customer's issue and the initial processing attempts. This comprehensive context improves escalation efficiency and customer satisfaction.
+
+```python
     # Helper methods for assessment and recommendations
     def _determine_customer_tier(self, customer_data: Dict) -> str:
         """Determine customer tier from data."""
@@ -773,7 +898,11 @@ class ConditionalWorkflowRouter:
             return "high"
         else:
             return "medium"
-    
+```
+
+Helper methods implement business logic for customer tier determination and severity assessment. These functions encapsulate domain expertise, enabling consistent evaluation criteria across different processing scenarios while maintaining flexibility for business rule evolution.
+
+```python
     def _assess_lead_quality(self, state: ConditionalWorkflowState) -> str:
         """Assess sales lead quality."""
         if any(word in state.query.lower() for word in ["demo", "trial", "purchase", "buy"]):
@@ -782,7 +911,11 @@ class ConditionalWorkflowRouter:
             return "warm"
         else:
             return "cold"
-    
+```
+
+Lead quality assessment provides automated sales qualification, helping prioritize follow-up efforts and resource allocation. The scoring system identifies prospects likely to convert, enabling sales teams to focus on high-value opportunities.
+
+```python
     def _get_customer_service_recommendations(self, state: ConditionalWorkflowState) -> List[str]:
         """Get customer service recommendations."""
         return [
@@ -798,7 +931,11 @@ class ConditionalWorkflowRouter:
             "Verify configuration settings",
             "Test connectivity"
         ]
-    
+```
+
+Domain-specific recommendations provide actionable next steps tailored to each workflow type. Customer service recommendations focus on account verification and documentation, while technical recommendations emphasize diagnostic procedures. This specialization ensures appropriate guidance for different issue types.
+
+```python
     def _get_sales_recommendations(self, state: ConditionalWorkflowState) -> List[str]:
         """Get sales recommendations."""
         return [
@@ -814,7 +951,11 @@ class ConditionalWorkflowRouter:
             "Key metrics identified",
             "Recommendations generated"
         ]
-    
+```
+
+Sales and analytics recommendations provide specific, actionable guidance tailored to each domain's needs. Sales recommendations focus on conversion activities, while analytics recommendations emphasize insight delivery and visualization. This specialization ensures appropriate outcomes for different query types.
+
+```python
     async def run_conditional_workflow(self, query: str) -> Dict[str, Any]:
         """Execute conditional workflow."""
         if not self.workflow:
@@ -824,7 +965,11 @@ class ConditionalWorkflowRouter:
             query=query,
             messages=[HumanMessage(content=query)]
         )
-        
+```
+
+The workflow execution method provides the primary interface for conditional routing. State initialization creates a clean processing context, while the workflow compilation ensures all routing logic is properly configured before execution begins.
+
+```python
         try:
             final_state = await self.workflow.ainvoke(initial_state)
             
@@ -851,10 +996,10 @@ class ConditionalWorkflowRouter:
 
 ### Pattern 3: State Recovery and Compensation
 
-Advanced workflows implement compensation patterns to handle failures and maintain data consistency.
+Advanced workflows implement compensation patterns to handle failures and maintain data consistency. The Saga pattern ensures that when complex multi-step transactions fail, all completed steps are properly rolled back to maintain system integrity.
 
 ```python
-# workflows/compensation_handler.py
+# workflows/compensation_handler.py - Core imports and data structures
 import asyncio
 from typing import Dict, List, Any, Optional, Callable
 from dataclasses import dataclass, field
@@ -862,7 +1007,11 @@ from enum import Enum
 import json
 import time
 import logging
+```
 
+These imports establish the foundation for our compensation workflow system. We use `asyncio` for handling concurrent operations during rollback, `dataclasses` for clean state management, and `Enum` for type-safe transaction status tracking. The compensation pattern is crucial in distributed systems where partial failures must not leave the system in an inconsistent state.
+
+```python
 logger = logging.getLogger(__name__)
 
 class TransactionStatus(Enum):
@@ -870,7 +1019,11 @@ class TransactionStatus(Enum):
     COMPLETED = "completed"
     FAILED = "failed"
     COMPENSATED = "compensated"
+```
 
+The `TransactionStatus` enum defines the lifecycle states of our distributed transaction. This follows the Saga pattern where transactions can either complete successfully, fail and require compensation, or be fully compensated back to the original state. This enum provides type safety and clear status tracking throughout the complex workflow.
+
+```python
 @dataclass
 class CompensationAction:
     """Represents a compensation action for failed operations."""
@@ -879,7 +1032,11 @@ class CompensationAction:
     compensation_args: Dict[str, Any]
     executed: bool = False
     execution_time: Optional[float] = None
+```
 
+The `CompensationAction` dataclass encapsulates everything needed to undo a completed operation. Each successful workflow step registers its corresponding undo action. The `step_name` links to the original operation, `compensation_function` specifies the rollback method, and `compensation_args` contains the data needed for rollback. This design enables precise, trackable compensation of any failed transaction.
+
+```python
 @dataclass
 class CompensationWorkflowState:
     """State for workflow with compensation handling."""
@@ -891,7 +1048,11 @@ class CompensationWorkflowState:
     executed_steps: List[str] = field(default_factory=list)
     failed_steps: List[str] = field(default_factory=list)
     compensation_actions: List[CompensationAction] = field(default_factory=list)
-    
+```
+
+The workflow state tracks the complete transaction lifecycle. `executed_steps` and `failed_steps` provide audit trails for debugging and compliance. `compensation_actions` accumulates the undo operations as each step completes, creating a complete rollback plan. This comprehensive state tracking enables sophisticated error recovery and system reliability.
+
+```python
     # Results tracking
     step_results: Dict[str, Any] = field(default_factory=dict)
     final_status: TransactionStatus = TransactionStatus.PENDING
@@ -900,7 +1061,11 @@ class CompensationWorkflowState:
     checkpoint_data: Dict[str, Any] = field(default_factory=dict)
     recovery_attempts: int = 0
     max_recovery_attempts: int = 3
+```
 
+The results tracking captures outcomes from each workflow step, enabling partial success reporting and detailed failure analysis. `checkpoint_data` stores intermediate state for recovery scenarios, while `recovery_attempts` implements exponential backoff and circuit breaker patterns. This design supports both immediate retry logic and long-term system resilience.
+
+```python
 class CompensationWorkflowHandler:
     """Workflow handler with advanced compensation and recovery patterns."""
     
@@ -916,7 +1081,13 @@ class CompensationWorkflowHandler:
             "update_inventory": self._compensate_inventory,
             "create_shipping_label": self._compensate_shipping
         }
-    
+```
+
+The `CompensationWorkflowHandler` implements the Saga orchestrator pattern. The `compensation_map` creates a registry of undo operations for each workflow step. This mapping enables the system to automatically determine and execute the correct rollback sequence when failures occur. The pattern ensures that complex business processes can be safely reversed, maintaining data consistency across distributed systems.
+
+This establishes the core compensation workflow infrastructure. Let's examine how the workflow graph is constructed with sophisticated error handling:
+
+```python
     async def build_workflow(self) -> StateGraph:
         """Build workflow with compensation handling."""
         workflow = StateGraph(CompensationWorkflowState)
@@ -931,11 +1102,19 @@ class CompensationWorkflowHandler:
         workflow.add_node("finalize_transaction", self._finalize_transaction)
         workflow.add_node("compensation_handler", self._execute_compensation)
         workflow.add_node("recovery_handler", self._handle_recovery)
-        
+```
+
+This workflow architecture implements a sophisticated e-commerce transaction pipeline with built-in compensation capabilities. Each node represents a critical business step: user account creation, payment processing, notification sending, inventory management, and shipping label generation. The compensation and recovery handlers ensure that any failure triggers appropriate rollback procedures, maintaining system consistency.
+
+```python
         # Define execution flow
         workflow.set_entry_point("initialize_transaction")
         workflow.add_edge("initialize_transaction", "step_1_user_account")
-        
+```
+
+The execution flow starts with transaction initialization and proceeds through each business step. Now let's examine the sophisticated conditional routing that handles failures:
+
+```python
         # Conditional flows with error handling
         workflow.add_conditional_edges(
             "step_1_user_account",
@@ -956,7 +1135,11 @@ class CompensationWorkflowHandler:
                 "compensate": "compensation_handler"
             }
         )
-        
+```
+
+These conditional edges implement sophisticated error handling at each workflow step. When a step completes, `_check_step_status` determines the next action: continue to the next step on success, attempt recovery on transient failures, or execute compensation on permanent failures. This pattern ensures that the system gracefully handles various failure modes while maintaining transaction integrity.
+
+```python
         workflow.add_conditional_edges(
             "step_3_notification",
             self._check_step_status,
@@ -986,7 +1169,11 @@ class CompensationWorkflowHandler:
                 "compensate": "compensation_handler"
             }
         )
-        
+```
+
+The conditional routing pattern ensures consistent error handling across all workflow steps. This design enables automated decision-making about whether to proceed, retry, or compensate based on the specific failure characteristics.
+
+```python
         # Recovery and compensation flows
         workflow.add_conditional_edges(
             "recovery_handler",
@@ -1001,13 +1188,21 @@ class CompensationWorkflowHandler:
                 "abort": END
             }
         )
-        
+```
+
+The recovery handler implements intelligent retry routing, directing flow back to the specific failed step rather than restarting the entire workflow. This optimization reduces processing time and resource usage while maintaining transaction safety. When retry limits are exceeded, the system automatically triggers compensation to ensure data consistency.
+
+```python
         workflow.add_edge("compensation_handler", END)
         workflow.add_edge("finalize_transaction", END)
         
         self.workflow = workflow.compile()
         return self.workflow
-    
+```
+
+These final edges complete the workflow graph by defining termination points and compiling the state machine. The compiled workflow becomes an executable graph that can handle complex transaction flows with sophisticated error recovery.
+
+```python
     async def _initialize_transaction(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Initialize transaction with compensation tracking."""
         state.transaction_id = f"txn_{int(time.time())}"
@@ -1019,7 +1214,11 @@ class CompensationWorkflowHandler:
         
         logger.info(f"Initialized transaction {state.transaction_id}")
         return state
-    
+```
+
+Transaction initialization establishes the tracking infrastructure needed for compensation. The unique transaction ID enables correlation across distributed systems, while the checkpoint data provides recovery points. This setup phase is critical for maintaining transaction integrity throughout the workflow execution.
+
+```python
     async def _create_user_account(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 1: Create user account with compensation tracking."""
         step_name = "create_user_account"
@@ -1035,7 +1234,11 @@ class CompensationWorkflowHandler:
                     "table": "users",
                     "data": {"query": state.query, "transaction_id": state.transaction_id}
                 })
-                
+```
+
+The user account creation step demonstrates the compensation pattern's core principle: every operation that modifies system state must be paired with an undo operation. The checkpoint data captures the execution state, enabling recovery if the step partially completes. This approach ensures atomicity in distributed transactions.
+
+```python
                 state.step_results[step_name] = result
                 state.executed_steps.append(step_name)
                 
@@ -1057,7 +1260,11 @@ class CompensationWorkflowHandler:
             logger.error(f"Failed to execute {step_name}: {e}")
         
         return state
-    
+```
+
+Each successful step registers its corresponding compensation action, building a complete rollback plan. The compensation action captures all necessary data for undo operations, including the user ID needed for account deletion. This pattern ensures that failures at any point can trigger appropriate cleanup.
+
+```python
     async def _charge_payment(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 2: Charge payment with compensation tracking."""
         step_name = "charge_payment"
@@ -1073,7 +1280,11 @@ class CompensationWorkflowHandler:
                 "status": "charged",
                 "transaction_id": state.transaction_id
             }
-            
+```
+
+Payment processing represents the most critical step in e-commerce workflows. The checkpoint ensures we can track partial payment states, while the result captures essential payment metadata. In production systems, this would integrate with payment processors like Stripe or PayPal, handling complex payment states and potential authorization vs. capture scenarios.
+
+```python
             state.step_results[step_name] = result
             state.executed_steps.append(step_name)
             
@@ -1093,7 +1304,11 @@ class CompensationWorkflowHandler:
             logger.error(f"Failed to execute {step_name}: {e}")
         
         return state
-    
+```
+
+Payment processing exemplifies the critical nature of compensation patterns. The refund compensation action captures the exact payment details needed for reversal. This ensures that failed transactions don't leave customers charged for incomplete orders, maintaining both data integrity and customer trust.
+
+```python
     async def _send_notification(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 3: Send notification with compensation tracking."""
         step_name = "send_notification"
@@ -1108,7 +1323,11 @@ class CompensationWorkflowHandler:
                 "status": "sent",
                 "transaction_id": state.transaction_id
             }
-            
+```
+
+Notification sending demonstrates compensation for communication operations. While you can't "unsend" an email, you can send corrective communications. The compensation action would send a cancellation notice, informing the customer that their order was cancelled due to processing issues. This maintains customer communication integrity throughout the transaction lifecycle.
+
+```python
             state.step_results[step_name] = result
             state.executed_steps.append(step_name)
             
@@ -1128,7 +1347,11 @@ class CompensationWorkflowHandler:
             logger.error(f"Failed to execute {step_name}: {e}")
         
         return state
-    
+```
+
+Notification compensation ensures customers receive appropriate communication about transaction failures. This pattern maintains transparency and trust by keeping customers informed about order status changes, even when technical failures occur.
+
+```python
     async def _update_inventory(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 4: Update inventory with compensation tracking."""
         step_name = "update_inventory"
@@ -1143,7 +1366,11 @@ class CompensationWorkflowHandler:
                     "table": "inventory",
                     "data": {"quantity": -1, "transaction_id": state.transaction_id}
                 })
-                
+```
+
+Inventory management requires precise compensation to prevent overselling and stock discrepancies. The inventory decrement operation must be exactly reversible to maintain accurate stock levels. This is crucial in e-commerce systems where inventory consistency directly impacts customer satisfaction and business operations.
+
+```python
                 state.step_results[step_name] = result
                 state.executed_steps.append(step_name)
                 
@@ -1165,7 +1392,11 @@ class CompensationWorkflowHandler:
             logger.error(f"Failed to execute {step_name}: {e}")
         
         return state
-    
+```
+
+Inventory compensation demonstrates the importance of exact reversal operations. The compensation action restores the exact quantity that was decremented, ensuring inventory accuracy. This pattern prevents stock discrepancies that could lead to overselling or customer disappointment.
+
+```python
     async def _create_shipping_label(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 5: Create shipping label with compensation tracking."""
         step_name = "create_shipping_label"
@@ -1180,7 +1411,11 @@ class CompensationWorkflowHandler:
                 "status": "created",
                 "transaction_id": state.transaction_id
             }
-            
+```
+
+Shipping label creation represents the final fulfillment step in the e-commerce workflow. The compensation action ensures that cancelled orders don't generate shipping costs or create confusion in the fulfillment process. This step demonstrates how compensation patterns extend beyond data consistency to include external service interactions.
+
+```python
             state.step_results[step_name] = result
             state.executed_steps.append(step_name)
             
@@ -1200,7 +1435,11 @@ class CompensationWorkflowHandler:
             logger.error(f"Failed to execute {step_name}: {e}")
         
         return state
-    
+```
+
+Shipping label compensation prevents unnecessary shipping costs and logistics confusion when transactions fail. The label cancellation ensures clean rollback of the entire fulfillment process, maintaining operational efficiency.
+
+```python
     def _check_step_status(self, state: CompensationWorkflowState) -> str:
         """Check status of last executed step."""
         if state.failed_steps:
@@ -1212,7 +1451,11 @@ class CompensationWorkflowHandler:
                 return "compensate"
         
         return "continue"
-    
+```
+
+The status checking logic implements a circuit breaker pattern, determining whether to retry failed operations or trigger compensation. This decision logic balances system resilience with performance, avoiding infinite retry loops while providing reasonable recovery opportunities for transient failures.
+
+```python
     async def _handle_recovery(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Handle recovery attempts."""
         state.recovery_attempts += 1
@@ -1228,7 +1471,11 @@ class CompensationWorkflowHandler:
             await asyncio.sleep(1.0)
         
         return state
-    
+```
+
+The recovery handler implements exponential backoff and retry logic, providing transient failure resilience while avoiding system overload. The delay between retries helps systems recover from temporary resource constraints.
+
+```python
     def _check_recovery_status(self, state: CompensationWorkflowState) -> str:
         """Determine recovery action."""
         if state.failed_steps:
@@ -1241,7 +1488,11 @@ class CompensationWorkflowHandler:
             return f"retry_{failed_step}"
         
         return "abort"
-    
+```
+
+Recovery status checking enables intelligent retry routing, directing workflow execution back to the specific failed step rather than restarting the entire process. This optimization saves processing time and resources while maintaining transaction integrity.
+
+```python
     async def _execute_compensation(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Execute compensation actions for failed transaction."""
         state.final_status = TransactionStatus.FAILED
@@ -1262,7 +1513,11 @@ class CompensationWorkflowHandler:
         
         state.final_status = TransactionStatus.COMPENSATED
         return state
-    
+```
+
+Compensation execution implements the Saga pattern's rollback mechanism, executing undo operations in reverse order of the original execution. This ensures that dependencies between operations are properly handled during rollback, maintaining system consistency even during failure scenarios.
+
+```python
     async def _execute_single_compensation(self, compensation: CompensationAction):
         """Execute a single compensation action."""
         func_name = compensation.compensation_function
@@ -1272,7 +1527,11 @@ class CompensationWorkflowHandler:
             await compensation_func(compensation.compensation_args)
         else:
             logger.warning(f"No compensation function found for {func_name}")
-    
+```
+
+Single compensation execution demonstrates the registry pattern, using the compensation map to dynamically invoke the appropriate undo function. This design enables flexible, maintainable compensation logic that can easily accommodate new workflow steps.
+
+```python
     async def _finalize_transaction(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Finalize successful transaction."""
         state.final_status = TransactionStatus.COMPLETED
@@ -1281,7 +1540,11 @@ class CompensationWorkflowHandler:
         logger.info(f"Executed steps: {state.executed_steps}")
         
         return state
-    
+```
+
+Transaction finalization marks the successful completion of the entire workflow. The comprehensive logging provides audit trails and debugging information, essential for enterprise transaction systems that require detailed tracking and compliance reporting.
+
+```python
     # Compensation functions
     async def _compensate_create_user(self, args: Dict[str, Any]):
         """Compensate user account creation."""
@@ -1291,7 +1554,11 @@ class CompensationWorkflowHandler:
                 "table": "users",
                 "id": args["user_id"]
             })
-    
+```
+
+User account compensation performs the exact inverse of the original operation, deleting the created user account to maintain data consistency. This ensures that failed transactions don't leave orphaned user accounts in the system, preventing data pollution and security concerns.
+
+```python
     async def _compensate_payment(self, args: Dict[str, Any]):
         """Compensate payment charge."""
         # Simulate refund processing
@@ -1301,7 +1568,11 @@ class CompensationWorkflowHandler:
         """Compensate notification sending."""
         # Send cancellation notification
         logger.info(f"Sending cancellation notification to {args['recipient']}")
-    
+```
+
+Payment and notification compensation functions demonstrate different types of undo operations. Payment compensation involves actual refund processing through payment gateways, while notification compensation sends corrective communications. These examples show how compensation adapts to the nature of each operation type.
+
+```python
     async def _compensate_inventory(self, args: Dict[str, Any]):
         """Compensate inventory update."""
         adapter = await self.mcp_manager.get_adapter("database")
@@ -1315,7 +1586,11 @@ class CompensationWorkflowHandler:
         """Compensate shipping label creation."""
         # Cancel shipping label
         logger.info(f"Cancelling shipping label {args['label_id']}")
-    
+```
+
+Inventory and shipping compensation complete the rollback of physical fulfillment operations. These functions ensure that failed transactions don't result in inventory discrepancies or unnecessary shipping costs, maintaining operational accuracy across the entire business process.
+
+```python
     async def run_compensation_workflow(self, query: str) -> Dict[str, Any]:
         """Execute workflow with compensation handling."""
         if not self.workflow:
@@ -1326,7 +1601,11 @@ class CompensationWorkflowHandler:
             messages=[HumanMessage(content=query)],
             transaction_id=""
         )
-        
+```
+
+The workflow execution method provides the entry point for running compensation-enabled transactions. The initial state setup creates a clean transaction context, while the workflow compilation ensures all routing logic is properly configured before execution begins.
+
+```python
         try:
             final_state = await self.workflow.ainvoke(initial_state)
             
