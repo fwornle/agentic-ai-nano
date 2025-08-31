@@ -5,10 +5,10 @@
     "total_files": 1,
     "code_block_score": 100.0,
     "formatting_score": 60.0,
-    "explanation_score": 41.30434782608695,
-    "overall_score": 68.52173913043478,
+    "explanation_score": 59.57446808510638,
+    "overall_score": 75.82978723404256,
     "critical_issues": 0,
-    "total_issues": 29
+    "total_issues": 21
   },
   "detailed_results": {
     "detect_large_code_blocks": {
@@ -22,7 +22,7 @@
         "files": [
           {
             "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
-            "total_code_blocks": 46,
+            "total_code_blocks": 47,
             "large_blocks_count": 0,
             "code_blocks": [
               {
@@ -122,8 +122,8 @@
                 "line_count": 8
               },
               {
-                "start_line": 116,
-                "end_line": 125,
+                "start_line": 118,
+                "end_line": 127,
                 "language": "python",
                 "content": [
                   "        # 3. Data Protection",
@@ -138,8 +138,8 @@
                 "line_count": 8
               },
               {
-                "start_line": 127,
-                "end_line": 142,
+                "start_line": 131,
+                "end_line": 146,
                 "language": "python",
                 "content": [
                   "        # 4. Threat Detection",
@@ -160,8 +160,8 @@
                 "line_count": 14
               },
               {
-                "start_line": 146,
-                "end_line": 157,
+                "start_line": 152,
+                "end_line": 163,
                 "language": "python",
                 "content": [
                   "class DynamicAccessController:",
@@ -178,8 +178,8 @@
                 "line_count": 10
               },
               {
-                "start_line": 159,
-                "end_line": 175,
+                "start_line": 165,
+                "end_line": 181,
                 "language": "python",
                 "content": [
                   "        # Access decision components",
@@ -201,8 +201,8 @@
                 "line_count": 15
               },
               {
-                "start_line": 177,
-                "end_line": 187,
+                "start_line": 183,
+                "end_line": 193,
                 "language": "python",
                 "content": [
                   "        # Perform risk analysis",
@@ -218,8 +218,8 @@
                 "line_count": 9
               },
               {
-                "start_line": 189,
-                "end_line": 198,
+                "start_line": 195,
+                "end_line": 204,
                 "language": "python",
                 "content": [
                   "        # Analyze current context",
@@ -234,8 +234,8 @@
                 "line_count": 8
               },
               {
-                "start_line": 200,
-                "end_line": 210,
+                "start_line": 206,
+                "end_line": 216,
                 "language": "python",
                 "content": [
                   "        # Make access decision",
@@ -251,8 +251,8 @@
                 "line_count": 9
               },
               {
-                "start_line": 226,
-                "end_line": 234,
+                "start_line": 232,
+                "end_line": 240,
                 "language": "",
                 "content": [
                   "",
@@ -266,19 +266,30 @@
                 "line_count": 7
               },
               {
-                "start_line": 245,
-                "end_line": 249,
+                "start_line": 251,
+                "end_line": 255,
                 "language": "",
                 "content": [
                   "",
-                  "The data governance framework initializes with components for comprehensive data management. Data cataloging provides visibility, lineage tracking enables impact analysis, and quality monitoring ensures data integrity throughout the RAG pipeline.",
+                  "Enterprise data governance addresses the critical challenges of managing data across complex RAG systems at enterprise scale while meeting regulatory and operational requirements. The DataCatalog serves as the central registry that creates a comprehensive, searchable inventory of all data sources including their schemas, metadata, business context, and usage patterns, enabling efficient data discovery and detailed impact analysis for system changes. DataLineageTracker maintains detailed maps of how data flows and transforms through RAG pipelines from source systems through embeddings to final responses, which is essential for regulatory compliance (proving data provenance), debugging performance issues, and understanding the impact of upstream data changes. DataQualityMonitor implements continuous validation of data integrity, completeness, accuracy, and freshness using automated checks and thresholds, which is critical for maintaining RAG system accuracy and preventing degraded user experiences from poor-quality data. This comprehensive governance foundation prevents organizational data silos, ensures regulatory compliance across multiple frameworks, and maintains consistent data quality standards throughout the entire enterprise RAG ecosystem.",
                   ""
                 ],
                 "line_count": 3
               },
               {
-                "start_line": 278,
-                "end_line": 282,
+                "start_line": 263,
+                "end_line": 267,
+                "language": "",
+                "content": [
+                  "",
+                  "The classification and protection layer implements intelligent data security controls that automatically adapt to the sensitivity and regulatory requirements of different data types. AutomatedDataClassifier uses machine learning and rule-based techniques to automatically identify and categorize data by sensitivity levels (PII, PHI, financial, proprietary) and regulatory requirements, enabling consistent application of appropriate protection measures without manual intervention. DataProtectionEngine applies security controls based on classification results, including encryption, access restrictions, data masking, and retention policies. The governance enforcement components ensure organizational policies are consistently applied across all RAG operations. GovernancePolicyEnforcer translates high-level organizational policies into executable technical controls that are automatically applied and monitored across distributed RAG components. ComplianceMonitor continuously verifies that data governance policies are being followed and provides alerts for any violations or compliance gaps requiring attention.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 288,
+                "end_line": 292,
                 "language": "",
                 "content": [
                   "",
@@ -288,8 +299,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 290,
-                "end_line": 296,
+                "start_line": 300,
+                "end_line": 306,
                 "language": "",
                 "content": [
                   "",
@@ -301,8 +312,8 @@
                 "line_count": 5
               },
               {
-                "start_line": 304,
-                "end_line": 308,
+                "start_line": 314,
+                "end_line": 318,
                 "language": "",
                 "content": [
                   "",
@@ -312,8 +323,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 316,
-                "end_line": 320,
+                "start_line": 326,
+                "end_line": 330,
                 "language": "",
                 "content": [
                   "",
@@ -323,8 +334,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 346,
-                "end_line": 356,
+                "start_line": 356,
+                "end_line": 366,
                 "language": "",
                 "content": [
                   "",
@@ -340,8 +351,8 @@
                 "line_count": 9
               },
               {
-                "start_line": 368,
-                "end_line": 372,
+                "start_line": 378,
+                "end_line": 382,
                 "language": "",
                 "content": [
                   "",
@@ -351,8 +362,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 406,
-                "end_line": 410,
+                "start_line": 416,
+                "end_line": 420,
                 "language": "",
                 "content": [
                   "",
@@ -362,8 +373,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 421,
-                "end_line": 425,
+                "start_line": 431,
+                "end_line": 435,
                 "language": "",
                 "content": [
                   "",
@@ -373,8 +384,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 434,
-                "end_line": 438,
+                "start_line": 444,
+                "end_line": 448,
                 "language": "",
                 "content": [
                   "",
@@ -384,8 +395,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 523,
-                "end_line": 531,
+                "start_line": 533,
+                "end_line": 541,
                 "language": "",
                 "content": [
                   "",
@@ -399,8 +410,8 @@
                 "line_count": 7
               },
               {
-                "start_line": 543,
-                "end_line": 547,
+                "start_line": 553,
+                "end_line": 557,
                 "language": "",
                 "content": [
                   "",
@@ -410,8 +421,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 552,
-                "end_line": 556,
+                "start_line": 562,
+                "end_line": 566,
                 "language": "",
                 "content": [
                   "",
@@ -421,8 +432,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 565,
-                "end_line": 569,
+                "start_line": 575,
+                "end_line": 579,
                 "language": "",
                 "content": [
                   "",
@@ -432,8 +443,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 581,
-                "end_line": 585,
+                "start_line": 591,
+                "end_line": 595,
                 "language": "",
                 "content": [
                   "",
@@ -443,8 +454,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 597,
-                "end_line": 601,
+                "start_line": 607,
+                "end_line": 611,
                 "language": "",
                 "content": [
                   "",
@@ -454,8 +465,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 624,
-                "end_line": 628,
+                "start_line": 634,
+                "end_line": 638,
                 "language": "",
                 "content": [
                   "",
@@ -465,8 +476,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 638,
-                "end_line": 642,
+                "start_line": 648,
+                "end_line": 652,
                 "language": "",
                 "content": [
                   "",
@@ -476,8 +487,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 650,
-                "end_line": 654,
+                "start_line": 660,
+                "end_line": 664,
                 "language": "",
                 "content": [
                   "",
@@ -487,8 +498,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 664,
-                "end_line": 668,
+                "start_line": 674,
+                "end_line": 678,
                 "language": "",
                 "content": [
                   "",
@@ -498,8 +509,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 685,
-                "end_line": 689,
+                "start_line": 695,
+                "end_line": 699,
                 "language": "",
                 "content": [
                   "",
@@ -509,8 +520,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 707,
-                "end_line": 713,
+                "start_line": 717,
+                "end_line": 723,
                 "language": "",
                 "content": [
                   "",
@@ -522,8 +533,8 @@
                 "line_count": 5
               },
               {
-                "start_line": 733,
-                "end_line": 743,
+                "start_line": 743,
+                "end_line": 753,
                 "language": "",
                 "content": [
                   "",
@@ -539,8 +550,8 @@
                 "line_count": 9
               },
               {
-                "start_line": 759,
-                "end_line": 763,
+                "start_line": 769,
+                "end_line": 773,
                 "language": "",
                 "content": [
                   "",
@@ -550,8 +561,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 772,
-                "end_line": 776,
+                "start_line": 782,
+                "end_line": 786,
                 "language": "",
                 "content": [
                   "",
@@ -561,8 +572,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 787,
-                "end_line": 791,
+                "start_line": 797,
+                "end_line": 801,
                 "language": "",
                 "content": [
                   "",
@@ -572,8 +583,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 799,
-                "end_line": 803,
+                "start_line": 809,
+                "end_line": 813,
                 "language": "",
                 "content": [
                   "",
@@ -583,8 +594,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 811,
-                "end_line": 815,
+                "start_line": 821,
+                "end_line": 825,
                 "language": "",
                 "content": [
                   "",
@@ -594,8 +605,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 822,
-                "end_line": 826,
+                "start_line": 832,
+                "end_line": 836,
                 "language": "",
                 "content": [
                   "",
@@ -605,8 +616,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 833,
-                "end_line": 837,
+                "start_line": 843,
+                "end_line": 847,
                 "language": "",
                 "content": [
                   "",
@@ -616,8 +627,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 846,
-                "end_line": 850,
+                "start_line": 856,
+                "end_line": 860,
                 "language": "",
                 "content": [
                   "",
@@ -627,8 +638,8 @@
                 "line_count": 3
               },
               {
-                "start_line": 856,
-                "end_line": 860,
+                "start_line": 866,
+                "end_line": 870,
                 "language": "",
                 "content": [
                   "",
@@ -660,14 +671,14 @@
             "issues": [
               {
                 "type": "missing_language_specifier",
-                "line": 543,
-                "message": "Code block at line 543 appears to be Python but lacks language specifier",
+                "line": 553,
+                "message": "Code block at line 553 appears to be Python but lacks language specifier",
                 "suggestion": "Change \"```\" to \"```python\""
               },
               {
                 "type": "unclosed_code_block",
-                "line": 872,
-                "message": "Code block starting at line 872 is never closed",
+                "line": 882,
+                "message": "Code block starting at line 882 is never closed",
                 "suggestion": "Add closing ``` marker"
               }
             ],
@@ -683,13 +694,13 @@
         "summary": {
           "total_files": 1,
           "files_needing_improvement": 1,
-          "total_issues": 27,
-          "average_quality_score": 41.30434782608695
+          "total_issues": 19,
+          "average_quality_score": 59.57446808510638
         },
         "files": [
           {
-            "total_code_blocks": 46,
-            "total_issues": 27,
+            "total_code_blocks": 47,
+            "total_issues": 19,
             "issues": [
               {
                 "type": "insufficient_explanation",
@@ -711,155 +722,104 @@
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 115,
+                "line": 164,
                 "code_block_size": 8,
                 "word_count": 1,
-                "message": "Code block (8 lines) at line 105 has insufficient explanation (1 words)",
+                "message": "Code block (8 lines) at line 152 has insufficient explanation (1 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 115,
+                "line": 164,
                 "code_block_size": 8,
-                "message": "Code block at line 105 explanation lacks educational context",
+                "message": "Code block at line 152 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 126,
-                "code_block_size": 8,
-                "word_count": 1,
-                "message": "Code block (8 lines) at line 116 has insufficient explanation (1 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 126,
-                "code_block_size": 8,
-                "message": "Code block at line 116 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 143,
-                "code_block_size": 13,
-                "word_count": 7,
-                "message": "Code block (13 lines) at line 127 has insufficient explanation (7 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 143,
-                "code_block_size": 13,
-                "message": "Code block at line 127 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 158,
-                "code_block_size": 8,
-                "word_count": 1,
-                "message": "Code block (8 lines) at line 146 has insufficient explanation (1 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 158,
-                "code_block_size": 8,
-                "message": "Code block at line 146 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 176,
+                "line": 182,
                 "code_block_size": 13,
                 "word_count": 1,
-                "message": "Code block (13 lines) at line 159 has insufficient explanation (1 words)",
+                "message": "Code block (13 lines) at line 165 has insufficient explanation (1 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 176,
+                "line": 182,
                 "code_block_size": 13,
-                "message": "Code block at line 159 explanation lacks educational context",
+                "message": "Code block at line 165 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 188,
+                "line": 194,
                 "code_block_size": 9,
                 "word_count": 1,
-                "message": "Code block (9 lines) at line 177 has insufficient explanation (1 words)",
+                "message": "Code block (9 lines) at line 183 has insufficient explanation (1 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 188,
+                "line": 194,
                 "code_block_size": 9,
-                "message": "Code block at line 177 explanation lacks educational context",
+                "message": "Code block at line 183 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 199,
+                "line": 205,
                 "code_block_size": 7,
                 "word_count": 1,
-                "message": "Code block (7 lines) at line 189 has insufficient explanation (1 words)",
+                "message": "Code block (7 lines) at line 195 has insufficient explanation (1 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 199,
+                "line": 205,
                 "code_block_size": 7,
-                "message": "Code block at line 189 explanation lacks educational context",
+                "message": "Code block at line 195 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 211,
+                "line": 217,
                 "code_block_size": 9,
                 "word_count": 7,
-                "message": "Code block (9 lines) at line 200 has insufficient explanation (7 words)",
+                "message": "Code block (9 lines) at line 206 has insufficient explanation (7 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 532,
+                "line": 542,
                 "code_block_size": 3,
                 "word_count": 6,
-                "message": "Code block (3 lines) at line 523 has insufficient explanation (6 words)",
+                "message": "Code block (3 lines) at line 533 has insufficient explanation (6 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 744,
+                "line": 754,
                 "code_block_size": 4,
                 "word_count": 5,
-                "message": "Code block (4 lines) at line 733 has insufficient explanation (5 words)",
+                "message": "Code block (4 lines) at line 743 has insufficient explanation (5 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 744,
+                "line": 754,
                 "code_block_size": 4,
-                "message": "Code block at line 733 explanation lacks educational context",
+                "message": "Code block at line 743 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
@@ -872,48 +832,34 @@
               {
                 "type": "consecutive_code_blocks",
                 "severity": "medium",
-                "line": 114,
-                "message": "Consecutive code blocks at lines 105 and 116 without intermediate explanation",
+                "line": 163,
+                "message": "Consecutive code blocks at lines 152 and 165 without intermediate explanation",
                 "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               },
               {
                 "type": "consecutive_code_blocks",
                 "severity": "medium",
-                "line": 125,
-                "message": "Consecutive code blocks at lines 116 and 127 without intermediate explanation",
+                "line": 181,
+                "message": "Consecutive code blocks at lines 165 and 183 without intermediate explanation",
                 "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               },
               {
                 "type": "consecutive_code_blocks",
                 "severity": "medium",
-                "line": 157,
-                "message": "Consecutive code blocks at lines 146 and 159 without intermediate explanation",
+                "line": 193,
+                "message": "Consecutive code blocks at lines 183 and 195 without intermediate explanation",
                 "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               },
               {
                 "type": "consecutive_code_blocks",
                 "severity": "medium",
-                "line": 175,
-                "message": "Consecutive code blocks at lines 159 and 177 without intermediate explanation",
-                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
-              },
-              {
-                "type": "consecutive_code_blocks",
-                "severity": "medium",
-                "line": 187,
-                "message": "Consecutive code blocks at lines 177 and 189 without intermediate explanation",
-                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
-              },
-              {
-                "type": "consecutive_code_blocks",
-                "severity": "medium",
-                "line": 198,
-                "message": "Consecutive code blocks at lines 189 and 200 without intermediate explanation",
+                "line": 204,
+                "message": "Consecutive code blocks at lines 195 and 206 without intermediate explanation",
                 "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               }
             ],
             "needs_improvement": true,
-            "quality_score": 41.30434782608695,
+            "quality_score": 59.57446808510638,
             "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md"
           }
         ]
@@ -925,9 +871,9 @@
     {
       "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
       "file_name": "Session9_ModuleB_Enterprise_Architecture.md",
-      "priority_score": 11.73913043478261,
+      "priority_score": 8.085106382978724,
       "issues": [
-        "41.3% explanation quality"
+        "59.6% explanation quality"
       ]
     }
   ]
