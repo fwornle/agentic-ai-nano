@@ -18,11 +18,16 @@ The key insight is that document complexity isn't just about length – it's abo
 Our complexity framework evaluates documents across multiple dimensions to select optimal processing strategies:
 
 ```python
+# Core imports for enterprise document analysis
 import numpy as np
 from typing import Dict, List, Any, Tuple
 from dataclasses import dataclass
 import re
+```
 
+We start with essential imports for our document analytics framework. NumPy provides efficient numerical operations for scoring calculations, while the typing module ensures type safety in our enterprise-grade system. The `dataclasses` decorator simplifies our data structure definitions, and `re` handles the complex pattern matching that powers domain-specific document analysis.
+
+```python
 @dataclass
 class DocumentComplexityScore:
     """Comprehensive document complexity assessment."""
@@ -32,7 +37,11 @@ class DocumentComplexityScore:
     overall_score: float
     recommendations: List[str]
     confidence_level: float
+```
 
+Our `DocumentComplexityScore` data class encapsulates the multi-dimensional complexity assessment results. Unlike simple difficulty measures, this separates structural complexity (document layout and organization), semantic complexity (terminology and concept density), and processing difficulty (computational requirements). The confidence level indicates how reliable our assessment is based on available patterns and document size.
+
+```python
 class EnterpriseComplexityAnalyzer:
     """Production-grade document complexity analysis."""
     
@@ -44,6 +53,11 @@ class EnterpriseComplexityAnalyzer:
                 "structural_markers": [r"section\s+\d+", r"clause\s+\d+", r"paragraph\s+\([a-z]\)"],
                 "citation_density": [r"\d+\s+U\.S\.C\.", r"\d+\s+F\.\d+d", r"Fed\.\s*R\.\s*Civ\.\s*P\."]
             },
+```
+
+The `EnterpriseComplexityAnalyzer` class initializes with domain-specific pattern recognition capabilities. Legal domain patterns capture formal legal language ("whereas", "heretofore"), statutory structure markers ("section 1", "clause A"), and legal citations (U.S.C., Federal Reporter formats). These patterns enable automatic detection of legal document complexity based on linguistic and structural indicators that legal professionals instinctively recognize.
+
+```python
             "technical": {
                 "code_blocks": [r"```[\s\S]*?```", r"(?:^|\n)    .*", r"`[^`]+`"],
                 "api_references": [r"[A-Z][a-zA-Z]+\.[a-zA-Z]+\(\)", r"HTTP[S]?://"],
@@ -55,7 +69,14 @@ class EnterpriseComplexityAnalyzer:
                 "procedure_codes": [r"CPT\s*\d+", r"ICD-\d+"]
             }
         }
-        
+```
+
+Technical and medical domain patterns complete our complexity detection framework. Technical patterns identify code blocks (fenced and indented), API references (ClassName.method() patterns), and version strings. Medical patterns recognize dosage information (mg, ml, units), medical terminology suffixes (-itis, -osis, -emia), and procedure codes (CPT, ICD formats). This comprehensive pattern library enables domain-aware complexity assessment that adapts to document type automatically.
+```
+
+The complexity patterns dictionary is the heart of our domain-aware analysis. Each domain has specific linguistic and structural markers that indicate complexity. Legal documents use archaic terminology like "whereas" and formal section references. Technical documents contain code blocks and API references. Medical documents include dosage information and standardized terminology patterns. These regex patterns allow us to automatically detect domain-specific complexity indicators that human reviewers would recognize instinctively.
+
+```python
         # Structural complexity weights
         self.structure_weights = {
             "table_density": 3.0,
@@ -64,7 +85,11 @@ class EnterpriseComplexityAnalyzer:
             "code_block_density": 2.5,
             "citation_density": 2.0
         }
+```
 
+These weights reflect the relative processing difficulty of different structural elements. Tables are weighted highest (3.0) because they require specialized parsing and maintain relationships between cells. Code blocks (2.5) need syntax preservation and special handling. The weights are calibrated based on real-world processing experience - a document with many tables will require more sophisticated chunking than one with simple lists.
+
+```python
     def analyze_enterprise_complexity(self, document_text: str, 
                                     domain: str = "general") -> DocumentComplexityScore:
         """Comprehensive enterprise document complexity analysis."""
@@ -253,6 +278,8 @@ class EnterpriseComplexityAnalyzer:
         return size_confidence + pattern_confidence
 ```
 
+Confidence calculation helps you trust the complexity assessment. Size confidence increases with document length up to 1000 characters - very short documents might not contain enough patterns for reliable analysis. Pattern match confidence increases as we find more domain-specific indicators, capping at 5 matches to prevent over-confidence from pattern-heavy documents. Together, these measures give you a 0-1 confidence score indicating how reliable the complexity assessment is.
+
 ### Enterprise Implementation Example
 
 The complexity analysis becomes powerful when integrated into automated processing pipelines. Instead of applying one-size-fits-all processing, you can dynamically adapt your approach based on document characteristics:
@@ -296,6 +323,8 @@ class ProductionComplexityPipeline:
             "confidence": complexity_score.confidence_level
         }
 ```
+
+The return structure provides complete transparency into the adaptive processing decision. You get the full complexity analysis, the selected strategy with configuration parameters, specific processing recommendations, and confidence levels. This enables both automated processing and human oversight - operators can see why a particular strategy was chosen and adjust thresholds based on domain-specific requirements.
 
 ---
 
@@ -475,6 +504,8 @@ class EnterpriseQualityFramework:
         }
 ```
 
+Metadata richness evaluates whether the processing pipeline successfully extracted expected metadata fields like topics, entities, keywords, and difficulty levels. Rich metadata enables better filtering, routing, and context understanding during retrieval. The richness score averages metadata completeness across all chunks, helping identify documents where metadata extraction failed or performed poorly.
+
 ---
 
 ## Advanced Pattern 3: Real-Time Quality Monitoring - Continuous Intelligence
@@ -574,6 +605,8 @@ class ProductionQualityMonitor:
             "recommendations": self._generate_system_recommendations(recent_records)
         }
 ```
+
+Quality analytics provide operational intelligence for production RAG systems. The 24-hour default lookback period captures recent performance without overwhelming operators with historical data. Trend analysis identifies whether quality is improving, stable, or degrading over time, while alert summaries highlight recurring problems that need systematic fixes rather than individual document attention. System recommendations translate analytics into actionable configuration changes or process improvements.
 
 ---
 
