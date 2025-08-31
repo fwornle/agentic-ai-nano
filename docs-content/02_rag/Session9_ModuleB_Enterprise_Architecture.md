@@ -264,7 +264,7 @@ Enterprise data governance addresses the critical challenges of managing data ac
 
 The classification and protection layer implements intelligent data security controls that automatically adapt to the sensitivity and regulatory requirements of different data types. AutomatedDataClassifier uses machine learning and rule-based techniques to automatically identify and categorize data by sensitivity levels (PII, PHI, financial, proprietary) and regulatory requirements, enabling consistent application of appropriate protection measures without manual intervention. DataProtectionEngine applies security controls based on classification results, including encryption, access restrictions, data masking, and retention policies. The governance enforcement components ensure organizational policies are consistently applied across all RAG operations. GovernancePolicyEnforcer translates high-level organizational policies into executable technical controls that are automatically applied and monitored across distributed RAG components. ComplianceMonitor continuously verifies that data governance policies are being followed and provides alerts for any violations or compliance gaps requiring attention.
 
-```python        
+```python
     async def implement_data_governance(self, data_sources: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Implement comprehensive data governance across all RAG data sources."""
         
