@@ -3642,11 +3642,6 @@ Session 8 expands agentic intelligence to handle multiple modalities - text, ima
 
 **Previous:** [Session 6 - Graph-Based RAG (GraphRAG)](Session6_Graph_Based_RAG.md)
 
-## Optional Deep Dive Modules
-
-- 🔬 **[Module A: Advanced Agent Reasoning](Session7_ModuleA_Advanced_Reasoning.md)** - Deep dive into sophisticated reasoning algorithms and cognitive architectures
-- 🏭 **[Module B: Production Agent Deployment](Session7_ModuleB_Production_Agents.md)** - Enterprise-scale agent deployment patterns and monitoring systems
-
 [**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
 
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)
