@@ -872,7 +872,6 @@ Scale-up evaluation uses OR logic - any single threshold breach triggers scaling
 ```
 
 Scale-up execution respects maximum instance limits to prevent resource exhaustion. The system scales incrementally (adding one instance at a time) for controlled capacity increases while including triggering metrics for monitoring and debugging purposes.
-```
 
 #### Step 9: Scale-Down Decision Logic
 
@@ -928,7 +927,6 @@ Stability tracking maintains a sliding window of performance measurements to ens
 ```
 
 Scale-down execution only occurs after sustained stability across the entire monitoring window, protecting against oscillation. The system reduces instances incrementally and respects minimum instance limits, ensuring RAG service availability during scale-down operations.
-```
 
 ---
 
@@ -939,7 +937,6 @@ Scale-down execution only occurs after sustained stability across the entire mon
 The enterprise integration framework connects advanced RAG capabilities to business systems:
 
 ```python
-
 # Enterprise integration framework
 
 class EnterpriseRAGIntegrator:
@@ -1084,6 +1081,7 @@ SharePoint connection initialization uses OAuth 2.0 client credentials flow for 
 
 Connection testing immediately validates authentication and network connectivity by retrieving basic site information. The returned metadata helps with debugging connection issues and provides confirmation of successful enterprise system integration. Error handling ensures graceful failure reporting for operations teams.
 
+```python
     async def retrieve_documents(self, folder_path: str = None,
                                modified_since: datetime = None) -> List[Dict[str, Any]]:
         """Retrieve documents from SharePoint with optional filtering."""
@@ -1151,8 +1149,6 @@ Document metadata collection captures essential information for RAG processing i
 
 Error handling ensures partial failures don't break the entire retrieval process, returning available documents while logging issues for operations teams. This resilient approach maintains RAG system availability during enterprise system connectivity issues.
 
-```
-
 #### Step 3: Secure Authentication and Authorization
 
 ```python
@@ -1185,6 +1181,7 @@ Multiple authentication provider support enables integration with diverse enterp
 
 Role-based access control integration provides granular permission management for RAG system resources. The RBAC manager handles user role assignments, resource permissions, and access policy enforcement, enabling fine-grained security controls appropriate for enterprise data governance requirements.
 
+```python
     async def authenticate_user(self, credentials: Dict[str, Any]) -> Dict[str, Any]:
         """Authenticate user using configured providers."""
 
