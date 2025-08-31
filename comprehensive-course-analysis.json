@@ -1,14 +1,14 @@
 {
   "analysis_timestamp": "1756565301.7451673",
-  "target": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_Production_RAG_Enterprise_Integration.md",
+  "target": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
   "overall_metrics": {
     "total_files": 1,
     "code_block_score": 100.0,
-    "formatting_score": 80.0,
-    "explanation_score": 24.545454545454547,
-    "overall_score": 65.81818181818181,
+    "formatting_score": 60.0,
+    "explanation_score": 41.30434782608695,
+    "overall_score": 68.52173913043478,
     "critical_issues": 0,
-    "total_issues": 84
+    "total_issues": 29
   },
   "detailed_results": {
     "detect_large_code_blocks": {
@@ -21,1806 +21,621 @@
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_Production_RAG_Enterprise_Integration.md",
-            "total_code_blocks": 110,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
+            "total_code_blocks": 46,
             "large_blocks_count": 0,
             "code_blocks": [
               {
-                "start_line": 53,
-                "end_line": 64,
-                "language": "python",
+                "start_line": 28,
+                "end_line": 38,
+                "language": "bash",
                 "content": [
+                  "# Test enterprise integration patterns",
+                  "cd src/session9",
+                  "python enterprise_integration.py",
                   "",
-                  "# Production-ready containerized RAG system",
+                  "# Test privacy and compliance systems",
+                  "python -c \"from privacy_compliance import PrivacyCompliance; print('Enterprise architecture ready!')\"",
                   "",
-                  "from typing import Dict, List, Any, Optional",
-                  "import asyncio",
-                  "from dataclasses import dataclass",
-                  "from enum import Enum",
-                  "import logging",
-                  "import time",
-                  "from datetime import datetime"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 68,
-                "end_line": 83,
-                "language": "python",
-                "content": [
-                  "class ServiceStatus(Enum):",
-                  "    HEALTHY = \"healthy\"",
-                  "    DEGRADED = \"degraded\"",
-                  "    UNHEALTHY = \"unhealthy\"",
-                  "",
-                  "@dataclass",
-                  "class ServiceHealth:",
-                  "    \"\"\"Health check result for RAG services.\"\"\"",
-                  "    service_name: str",
-                  "    status: ServiceStatus",
-                  "    response_time_ms: float",
-                  "    error_count: int",
-                  "    last_check: datetime",
-                  "    details: Dict[str, Any]"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 89,
-                "end_line": 97,
-                "language": "python",
-                "content": [
-                  "class RAGServiceOrchestrator:",
-                  "    \"\"\"Production orchestrator for RAG microservices.\"\"\"",
-                  "",
-                  "    def __init__(self, service_config: Dict[str, Any]):",
-                  "        self.service_config = service_config",
-                  "        self.services = {}",
-                  "        self.health_monitors = {}"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 101,
-                "end_line": 111,
-                "language": "python",
-                "content": [
-                  "        # Service registry maps service names to their implementation classes",
-                  "        self.service_registry = {",
-                  "            'document_processor': DocumentProcessingService,",
-                  "            'embeddings_service': EmbeddingService,",
-                  "            'vector_store': VectorStoreService,",
-                  "            'retrieval_service': RetrievalService,",
-                  "            'generation_service': GenerationService,",
-                  "            'orchestration_api': OrchestrationAPIService",
-                  "        }"
+                  "# Test production orchestrator",
+                  "python -c \"from production_rag_orchestrator import ProductionRAGOrchestrator; ProductionRAGOrchestrator().test_system()\""
                 ],
                 "line_count": 9
               },
               {
-                "start_line": 115,
-                "end_line": 120,
+                "start_line": 56,
+                "end_line": 67,
                 "language": "python",
                 "content": [
-                  "        # Initialize critical production components",
-                  "        self.load_balancer = RAGLoadBalancer()",
-                  "        self.health_checker = ServiceHealthChecker()",
-                  "        self.logger = logging.getLogger(__name__)"
+                  "class ZeroTrustRAGSecurity:",
+                  "    \"\"\"Zero-trust security framework for enterprise RAG systems.\"\"\"",
+                  "    ",
+                  "    def __init__(self, security_config: Dict[str, Any]):",
+                  "        self.config = security_config",
+                  "        ",
+                  "        # Core zero-trust components",
+                  "        self.identity_provider = EnterpriseIdentityProvider()",
+                  "        self.policy_engine = SecurityPolicyEngine()",
+                  "        self.threat_detector = ThreatDetectionEngine()"
+                ],
+                "line_count": 10
+              },
+              {
+                "start_line": 69,
+                "end_line": 74,
+                "language": "python",
+                "content": [
+                  "        # Network security components",
+                  "        self.network_segmenter = NetworkSegmentation()",
+                  "        self.traffic_inspector = NetworkTrafficInspector()",
+                  "        self.encryption_manager = EncryptionManager()"
                 ],
                 "line_count": 4
               },
               {
-                "start_line": 126,
-                "end_line": 138,
+                "start_line": 78,
+                "end_line": 83,
                 "language": "python",
                 "content": [
-                  "    async def start_services(self) -> Dict[str, Any]:",
-                  "        \"\"\"Start all RAG services with health monitoring.\"\"\"",
-                  "",
-                  "        startup_results = {}",
-                  "",
-                  "        # Define startup order based on service dependencies",
-                  "        # Vector store must start first, followed by embeddings, then higher-level services",
-                  "        service_start_order = [",
-                  "            'vector_store', 'embeddings_service', 'document_processor',",
-                  "            'retrieval_service', 'generation_service', 'orchestration_api'",
-                  "        ]"
+                  "        # Data protection components",
+                  "        self.data_classifier = DataSecurityClassifier()",
+                  "        self.access_controller = DynamicAccessController()",
+                  "        self.audit_engine = SecurityAuditEngine()"
                 ],
-                "line_count": 11
+                "line_count": 4
               },
               {
-                "start_line": 142,
-                "end_line": 162,
+                "start_line": 87,
+                "end_line": 101,
                 "language": "python",
                 "content": [
-                  "        for service_name in service_start_order:",
-                  "            if service_name in self.service_config:",
-                  "                try:",
-                  "                    # Start individual service",
-                  "                    service_instance = await self._start_service(service_name)",
-                  "                    self.services[service_name] = service_instance",
-                  "",
-                  "                    # Enable health monitoring for the service",
-                  "                    health_monitor = await self._start_health_monitoring(",
-                  "                        service_name, service_instance",
-                  "                    )",
-                  "                    self.health_monitors[service_name] = health_monitor",
-                  "",
-                  "                    startup_results[service_name] = {'status': 'started', 'healthy': True}",
-                  "                    self.logger.info(f\"Successfully started service: {service_name}\")",
-                  "",
-                  "                except Exception as e:",
-                  "                    startup_results[service_name] = {'status': 'failed', 'error': str(e)}",
-                  "                    self.logger.error(f\"Failed to start service {service_name}: {e}\")"
+                  "    async def implement_zero_trust_architecture(self) -> Dict[str, Any]:",
+                  "        \"\"\"Implement comprehensive zero-trust security for RAG system.\"\"\"",
+                  "        ",
+                  "        implementation_results = {}",
+                  "        ",
+                  "        # 1. Network Segmentation Implementation",
+                  "        network_setup = await self.network_segmenter.create_security_zones({",
+                  "            'dmz': {'components': ['api_gateway', 'load_balancer']},",
+                  "            'application': {'components': ['rag_services', 'orchestrator']},",
+                  "            'data': {'components': ['vector_store', 'knowledge_graph']},",
+                  "            'management': {'components': ['monitoring', 'logging']}",
+                  "        })",
+                  "        implementation_results['network_segmentation'] = network_setup"
                 ],
-                "line_count": 19
+                "line_count": 13
               },
               {
-                "start_line": 166,
-                "end_line": 177,
+                "start_line": 105,
+                "end_line": 114,
                 "language": "python",
                 "content": [
-                  "        # Configure load balancer with all successfully started services",
-                  "        await self.load_balancer.configure_services(self.services)",
-                  "",
+                  "        # 2. Identity and Access Management",
+                  "        iam_setup = await self.identity_provider.configure_zero_trust_iam({",
+                  "            'multi_factor_authentication': True,",
+                  "            'continuous_verification': True,",
+                  "            'risk_based_authentication': True,",
+                  "            'privileged_access_management': True",
+                  "        })",
+                  "        implementation_results['identity_management'] = iam_setup"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 116,
+                "end_line": 125,
+                "language": "python",
+                "content": [
+                  "        # 3. Data Protection",
+                  "        data_protection = await self.data_classifier.implement_data_protection({",
+                  "            'classification_levels': ['public', 'internal', 'confidential', 'restricted'],",
+                  "            'encryption_at_rest': True,",
+                  "            'encryption_in_transit': True,",
+                  "            'data_loss_prevention': True",
+                  "        })",
+                  "        implementation_results['data_protection'] = data_protection"
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 127,
+                "end_line": 142,
+                "language": "python",
+                "content": [
+                  "        # 4. Threat Detection",
+                  "        threat_detection = await self.threat_detector.deploy_detection_systems({",
+                  "            'behavioral_analytics': True,",
+                  "            'anomaly_detection': True,",
+                  "            'threat_intelligence_integration': True,",
+                  "            'real_time_monitoring': True",
+                  "        })",
+                  "        implementation_results['threat_detection'] = threat_detection",
+                  "        ",
                   "        return {",
-                  "            'startup_results': startup_results,",
-                  "            'services_started': len([r for r in startup_results.values() ",
-                  "                                   if r['status'] == 'started']),",
-                  "            'load_balancer_configured': True,",
-                  "            'health_monitoring_active': True",
+                  "            'zero_trust_implementation': implementation_results,",
+                  "            'security_posture': await self._assess_security_posture(),",
+                  "            'compliance_status': await self._check_compliance_status()",
                   "        }"
+                ],
+                "line_count": 14
+              },
+              {
+                "start_line": 146,
+                "end_line": 157,
+                "language": "python",
+                "content": [
+                  "class DynamicAccessController:",
+                  "    \"\"\"Dynamic access control with real-time risk assessment.\"\"\"",
+                  "    ",
+                  "    def __init__(self, config: Dict[str, Any]):",
+                  "        self.config = config",
+                  "        ",
+                  "        # Risk assessment components",
+                  "        self.risk_analyzer = RiskAnalyzer()",
+                  "        self.context_analyzer = ContextAnalyzer()",
+                  "        self.behavior_analyzer = BehaviorAnalyzer()"
                 ],
                 "line_count": 10
               },
               {
-                "start_line": 181,
-                "end_line": 195,
+                "start_line": 159,
+                "end_line": 175,
                 "language": "python",
                 "content": [
-                  "    async def _start_service(self, service_name: str) -> Any:",
-                  "        \"\"\"Start individual RAG service with proper initialization.\"\"\"",
-                  "",
-                  "        service_class = self.service_registry[service_name]",
-                  "        service_config = self.service_config[service_name]",
-                  "",
-                  "        # Create service instance with configuration",
-                  "        service_instance = service_class(service_config)",
-                  "",
-                  "        # Initialize service (async setup, connections, etc.)",
-                  "        await service_instance.initialize()",
-                  "",
-                  "        return service_instance"
+                  "        # Access decision components",
+                  "        self.policy_evaluator = PolicyEvaluator()",
+                  "        self.access_decision_engine = AccessDecisionEngine()",
+                  "        ",
+                  "    async def evaluate_access_request(self, request: Dict[str, Any]) -> Dict[str, Any]:",
+                  "        \"\"\"Evaluate access request with dynamic risk assessment.\"\"\"",
+                  "        ",
+                  "        # Extract request context",
+                  "        user_context = {",
+                  "            'user_id': request['user_id'],",
+                  "            'location': request.get('location'),",
+                  "            'device': request.get('device_info'),",
+                  "            'time': request['timestamp'],",
+                  "            'ip_address': request.get('ip_address')",
+                  "        }"
                 ],
-                "line_count": 13
+                "line_count": 15
               },
               {
-                "start_line": 205,
-                "end_line": 215,
+                "start_line": 177,
+                "end_line": 187,
                 "language": "python",
                 "content": [
-                  "class DocumentProcessingService:",
-                  "    \"\"\"Scalable document processing microservice with worker pool architecture.\"\"\"",
-                  "",
-                  "    def __init__(self, config: Dict[str, Any]):",
-                  "        self.config = config",
-                  "        # Create bounded queue to prevent memory overflow",
-                  "        self.processing_queue = asyncio.Queue(maxsize=config.get('max_queue_size', 1000))",
-                  "        self.worker_pool_size = config.get('workers', 4)",
-                  "        self.workers = []"
+                  "        # Perform risk analysis",
+                  "        risk_assessment = await self.risk_analyzer.assess_risk({",
+                  "            'user_context': user_context,",
+                  "            'requested_resource': request['resource'],",
+                  "            'requested_action': request['action'],",
+                  "            'historical_behavior': await self.behavior_analyzer.get_user_behavior_profile(",
+                  "                request['user_id']",
+                  "            )",
+                  "        })"
                 ],
                 "line_count": 9
               },
               {
-                "start_line": 219,
-                "end_line": 227,
+                "start_line": 189,
+                "end_line": 198,
                 "language": "python",
                 "content": [
-                  "        # Track processing statistics for monitoring",
-                  "        self.stats = {",
-                  "            'documents_processed': 0,",
-                  "            'processing_errors': 0,",
-                  "            'average_processing_time': 0.0,",
-                  "            'queue_size': 0",
-                  "        }"
+                  "        # Analyze current context",
+                  "        context_analysis = await self.context_analyzer.analyze_context({",
+                  "            'device_trust_level': await self._assess_device_trust(user_context['device']),",
+                  "            'network_trust_level': await self._assess_network_trust(user_context['ip_address']),",
+                  "            'time_anomaly': await self._check_time_anomaly(user_context),",
+                  "            'location_anomaly': await self._check_location_anomaly(user_context)",
+                  "        })",
+                  ""
+                ],
+                "line_count": 8
+              },
+              {
+                "start_line": 200,
+                "end_line": 210,
+                "language": "python",
+                "content": [
+                  "        # Make access decision",
+                  "        access_decision = await self.access_decision_engine.make_decision({",
+                  "            'risk_score': risk_assessment['risk_score'],",
+                  "            'context_score': context_analysis['context_score'],",
+                  "            'policy_requirements': await self.policy_evaluator.get_applicable_policies(",
+                  "                request['resource'], request['action']",
+                  "            ),",
+                  "            'trust_level': risk_assessment['trust_level']",
+                  "        })"
+                ],
+                "line_count": 9
+              },
+              {
+                "start_line": 226,
+                "end_line": 234,
+                "language": "",
+                "content": [
+                  "",
+                  "#### **Data Governance and Classification**",
+                  "",
+                  "Implement comprehensive data governance for enterprise RAG systems:",
+                  "",
+                  "### Step 3: Enterprise Data Governance Framework",
+                  ""
                 ],
                 "line_count": 7
               },
               {
-                "start_line": 233,
-                "end_line": 247,
-                "language": "python",
+                "start_line": 245,
+                "end_line": 249,
+                "language": "",
                 "content": [
-                  "    async def initialize(self):",
-                  "        \"\"\"Initialize the document processing service with worker pool.\"\"\"",
                   "",
-                  "        # Start worker processes for parallel document processing",
-                  "        for i in range(self.worker_pool_size):",
-                  "            worker = asyncio.create_task(self._document_processing_worker(f\"worker_{i}\"))",
-                  "            self.workers.append(worker)",
-                  "",
-                  "        # Start background queue monitoring for metrics",
-                  "        asyncio.create_task(self._monitor_processing_queue())",
-                  "",
-                  "        self.logger = logging.getLogger(f\"{__name__}.DocumentProcessingService\")",
-                  "        self.logger.info(f\"Document processing service initialized with {self.worker_pool_size} workers\")"
+                  "The data governance framework initializes with components for comprehensive data management. Data cataloging provides visibility, lineage tracking enables impact analysis, and quality monitoring ensures data integrity throughout the RAG pipeline.",
+                  ""
                 ],
-                "line_count": 13
+                "line_count": 3
               },
               {
-                "start_line": 253,
-                "end_line": 271,
-                "language": "python",
+                "start_line": 278,
+                "end_line": 282,
+                "language": "",
                 "content": [
-                  "    async def process_documents(self, documents: List[Dict[str, Any]]) -> Dict[str, Any]:",
-                  "        \"\"\"Process multiple documents asynchronously with job tracking.\"\"\"",
                   "",
-                  "        processing_tasks = []",
-                  "        for doc in documents:",
-                  "            # Create unique processing ID for tracking",
-                  "            processing_id = f\"proc_{int(time.time() * 1000)}_{len(processing_tasks)}\"",
-                  "            processing_task = {",
-                  "                'id': processing_id,",
-                  "                'document': doc,",
-                  "                'timestamp': time.time(),",
-                  "                'status': 'queued'",
-                  "            }",
-                  "",
-                  "            # Add to processing queue",
-                  "            await self.processing_queue.put(processing_task)",
-                  "            processing_tasks.append(processing_id)"
+                  "Data discovery performs comprehensive analysis of each source to enable intelligent governance and retrieval optimization. Deep scanning analyzes database schemas, file structures, and API endpoints to understand data organization and relationships. Schema analysis identifies data models and structural patterns that affect RAG retrieval accuracy - for example, understanding that employee records link to department hierarchies enables better contextual retrieval. Sample analysis examines actual data content to understand value distributions, quality issues, and usage patterns, helping RAG systems optimize chunking strategies and embedding models. Sensitivity detection automatically identifies personally identifiable information (PII), protected health information (PHI), and other regulated data types, ensuring appropriate security controls are applied before data enters RAG pipelines.",
+                  ""
                 ],
-                "line_count": 17
-              },
-              {
-                "start_line": 275,
-                "end_line": 284,
-                "language": "python",
-                "content": [
-                  "        # Return job information for client tracking",
-                  "        return {",
-                  "            'processing_job_id': f\"batch_{int(time.time())}\",",
-                  "            'documents_queued': len(documents),",
-                  "            'processing_task_ids': processing_tasks,",
-                  "            'estimated_completion_time': self._estimate_completion_time(len(documents)),",
-                  "            'current_queue_size': self.processing_queue.qsize()",
-                  "        }"
-                ],
-                "line_count": 8
+                "line_count": 3
               },
               {
                 "start_line": 290,
-                "end_line": 304,
-                "language": "python",
+                "end_line": 296,
+                "language": "",
                 "content": [
-                  "    async def _document_processing_worker(self, worker_id: str):",
-                  "        \"\"\"Background worker for processing documents from the queue.\"\"\"",
                   "",
-                  "        while True:",
-                  "            try:",
-                  "                # Get next task from queue (blocks if empty)",
-                  "                processing_task = await self.processing_queue.get()",
-                  "                start_time = time.time()",
+                  "Automated data classification uses machine learning and rule-based techniques to categorize enterprise data according to security, compliance, and business requirements. The classification_frameworks array specifies regulatory and business categories that drive downstream security controls: PII classification supports GDPR compliance by identifying data subjects and processing requirements, PHI classification ensures HIPAA adherence for healthcare data, financial classification addresses SOX and PCI requirements for financial records, and proprietary classification protects intellectual property and trade secrets. The 0.85 confidence_threshold ensures high accuracy while preventing false positives that could disrupt business operations. This classification automatically triggers security policies - PII data might require encryption and access logging, financial data needs additional audit trails, and proprietary data may be restricted to specific user groups.",
                   "",
-                  "                # Process the document through the pipeline",
-                  "                processing_result = await self._process_single_document(",
-                  "                    processing_task['document']",
-                  "                )"
+                  "Next, we establish data lineage tracking to map data flow and transformations:",
+                  ""
                 ],
-                "line_count": 13
+                "line_count": 5
               },
               {
-                "start_line": 308,
-                "end_line": 321,
-                "language": "python",
+                "start_line": 304,
+                "end_line": 308,
+                "language": "",
                 "content": [
-                  "                # Update performance statistics",
-                  "                processing_time = time.time() - start_time",
-                  "                self._update_processing_stats(processing_time, success=True)",
                   "",
-                  "                # Mark task as completed",
-                  "                self.processing_queue.task_done()",
-                  "                self.logger.debug(f\"Worker {worker_id} processed document in {processing_time:.2f}s\")",
-                  "",
-                  "            except Exception as e:",
-                  "                self.logger.error(f\"Worker {worker_id} processing error: {e}\")",
-                  "                self._update_processing_stats(0, success=False)",
-                  "                self.processing_queue.task_done()"
+                  "Data lineage tracking creates a comprehensive map of how information flows and transforms through RAG systems, essential for enterprise governance and troubleshooting. The tracking follows data from original sources through extraction, chunking, embedding generation, vector storage, and finally to RAG responses. Transformation_tracking records how data changes at each step - for example, when documents are split into chunks or when embeddings are updated with new models. Usage_tracking monitors which data sources contribute to specific RAG responses, enabling traceability for compliance audits. This lineage information is critical for impact analysis: when a data source changes, lineage tracking identifies all downstream systems and applications that need updates, preventing data inconsistencies and enabling coordinated deployments across complex enterprise environments.",
+                  ""
                 ],
-                "line_count": 12
+                "line_count": 3
               },
               {
-                "start_line": 327,
-                "end_line": 343,
-                "language": "python",
+                "start_line": 316,
+                "end_line": 320,
+                "language": "",
                 "content": [
-                  "    async def _process_single_document(self, document: Dict[str, Any]) -> Dict[str, Any]:",
-                  "        \"\"\"Process individual document through the complete pipeline.\"\"\"",
                   "",
-                  "        try:",
-                  "            # Step 1: Parse document (extract text from PDF, Word, etc.)",
-                  "            parsed_content = await self._parse_document(document)",
-                  "",
-                  "            # Step 2: Clean and normalize content",
-                  "            extracted_content = await self._extract_and_clean_content(parsed_content)",
-                  "",
-                  "            # Step 3: Enrich with metadata (author, creation date, tags)",
-                  "            enriched_metadata = await self._enrich_metadata(document, extracted_content)",
-                  "",
-                  "            # Step 4: Create chunks for vector storage",
-                  "            chunks = await self._create_document_chunks(extracted_content, enriched_metadata)"
+                  "Data quality monitoring ensures RAG systems maintain high accuracy and reliability by tracking four critical dimensions that directly impact retrieval and generation performance. Completeness monitoring detects missing or null values that could create gaps in knowledge coverage. Accuracy monitoring validates data correctness by comparing against trusted sources and detecting inconsistencies. Consistency monitoring ensures data formats and values remain uniform across sources, preventing retrieval errors caused by conflicting information. Timeliness monitoring tracks data freshness and identifies stale information that could lead to outdated responses. Real-time monitoring enables immediate detection and alerting when quality degrades, allowing proactive remediation before users encounter poor RAG performance. The configurable alert_thresholds allow organizations to set appropriate quality standards for different data sources based on their criticality and usage patterns.",
+                  ""
                 ],
-                "line_count": 15
+                "line_count": 3
               },
               {
-                "start_line": 347,
-                "end_line": 362,
-                "language": "python",
+                "start_line": 346,
+                "end_line": 356,
+                "language": "",
                 "content": [
-                  "            return {",
-                  "                'success': True,",
-                  "                'processed_content': extracted_content,",
-                  "                'metadata': enriched_metadata,",
-                  "                'chunks': chunks,",
-                  "                'chunk_count': len(chunks)",
-                  "            }",
                   "",
-                  "        except Exception as e:",
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': str(e),",
-                  "                'document_id': document.get('id', 'unknown')",
-                  "            }"
+                  "### CI/CD and DevOps for RAG Systems",
+                  "",
+                  "#### **Advanced CI/CD Pipeline for RAG**",
+                  "",
+                  "Implement sophisticated CI/CD pipeline specifically designed for RAG systems:",
+                  "",
+                  "### Step 1: RAG-Specific CI/CD Pipeline",
+                  ""
                 ],
-                "line_count": 14
+                "line_count": 9
               },
               {
                 "start_line": 368,
-                "end_line": 380,
-                "language": "python",
+                "end_line": 372,
+                "language": "",
                 "content": [
-                  "class EmbeddingService:",
-                  "    \"\"\"Production embedding service with caching and batching.\"\"\"",
                   "",
-                  "    def __init__(self, config: Dict[str, Any]):",
-                  "        self.config = config",
-                  "        self.model_name = config.get('model_name', 'text-embedding-ada-002')",
-                  "        self.batch_size = config.get('batch_size', 100)",
-                  "        self.cache_enabled = config.get('cache_enabled', True)",
-                  "",
-                  "        # Initialize embedding model",
-                  "        self.embedding_model = self._initialize_embedding_model()"
+                  "RAG-specific CI/CD pipelines address unique challenges that traditional software deployment pipelines cannot handle effectively. The CodeValidator checks not just syntax and style but RAG-specific patterns like embedding dimension compatibility, vector operation efficiency, and prompt injection vulnerability prevention. ModelValidator ensures machine learning model consistency across deployments, validates performance benchmarks for retrieval accuracy and generation quality, and performs bias detection to prevent discriminatory outputs. DataValidator verifies data schema compatibility with existing systems, enforces data quality thresholds to prevent degraded RAG performance, and ensures privacy compliance before new data enters production systems. IntegrationTester validates the complete end-to-end RAG workflow from data ingestion through retrieval to generation, ensuring all components work together seamlessly and meet performance requirements under realistic load conditions.",
+                  ""
                 ],
-                "line_count": 11
+                "line_count": 3
               },
               {
-                "start_line": 384,
-                "end_line": 392,
-                "language": "python",
+                "start_line": 406,
+                "end_line": 410,
+                "language": "",
                 "content": [
-                  "        # Caching system",
-                  "        if self.cache_enabled:",
-                  "            self.embedding_cache = EmbeddingCache(config.get('cache_config', {}))",
                   "",
-                  "        # Batching queue",
-                  "        self.embedding_queue = asyncio.Queue()",
-                  "        self.batch_processor = asyncio.create_task(self._batch_embedding_processor())"
+                  "Code validation for RAG systems extends far beyond traditional quality checks to address the unique requirements of retrieval-augmented generation architectures. Standard validations include code_quality for maintainability and readability, security_scan for vulnerabilities and attack surfaces, and dependency_check for supply chain security and version compatibility. RAG-specific validation includes critical patterns like embedding dimension consistency (ensuring new models match existing vector store dimensions), retrieval algorithm performance characteristics (validating that changes don't degrade search relevance), prompt injection protection in generation components (preventing malicious prompt manipulation), and resource utilization patterns (ensuring embedding and generation operations stay within memory and compute budgets). Documentation_coverage validation ensures RAG components have adequate explanations of their algorithms, parameters, and expected behaviors. The fail-fast approach prevents any problematic changes from advancing through the pipeline, maintaining system reliability and enterprise security standards.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 421,
+                "end_line": 425,
+                "language": "",
+                "content": [
+                  "",
+                  "Model validation addresses the unique challenges of deploying machine learning components in enterprise RAG systems. Embedding_consistency testing ensures that model updates don't break vector similarity calculations by validating that existing embeddings remain compatible with new model versions. Generation_quality validation runs test queries against benchmark datasets to ensure response accuracy and relevance don't degrade with new model deployments. Performance_benchmarks validate that models meet enterprise SLA requirements for response time, throughput, and resource utilization under expected load conditions. Bias_detection runs fairness tests to identify discriminatory patterns in model outputs that could create legal or ethical risks in enterprise deployments. This comprehensive model validation prevents deployment of changes that could degrade user experience or create regulatory compliance issues.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 434,
+                "end_line": 438,
+                "language": "",
+                "content": [
+                  "",
+                  "Data validation ensures that data changes don't break downstream RAG system functionality or compromise enterprise requirements. Schema_compatibility testing validates that new or changed data sources maintain consistent field types, naming conventions, and structural relationships that RAG components depend on for accurate retrieval. Data_quality validation enforces completeness, accuracy, consistency, and timeliness thresholds to prevent degraded RAG performance from poor-quality data. Privacy_compliance checking scans for unauthorized exposure of PII, PHI, or other sensitive data types, ensuring regulatory requirements are met before data enters production systems. Lineage_integrity validation ensures that data transformation and movement operations preserve traceability required for audit trails and impact analysis. This multi-layered data validation prevents data-related failures that could impact RAG accuracy, security, or compliance.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 523,
+                "end_line": 531,
+                "language": "",
+                "content": [
+                  "",
+                  "#### **Infrastructure as Code for RAG**",
+                  "",
+                  "Implement infrastructure as code specifically for RAG deployments:",
+                  "",
+                  "### Step 2: RAG Infrastructure as Code",
+                  ""
                 ],
                 "line_count": 7
               },
               {
-                "start_line": 396,
-                "end_line": 404,
-                "language": "python",
-                "content": [
-                  "    async def embed_texts(self, texts: List[str],",
-                  "                         cache_key_prefix: str = \"\") -> Dict[str, Any]:",
-                  "        \"\"\"Embed multiple texts with caching and batching optimization.\"\"\"",
-                  "",
-                  "        embedding_results = {}",
-                  "        cache_hits = 0",
-                  "        cache_misses = 0"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 408,
-                "end_line": 423,
-                "language": "python",
-                "content": [
-                  "        # Check cache for existing embeddings",
-                  "        texts_to_embed = []",
-                  "        for i, text in enumerate(texts):",
-                  "            cache_key = f\"{cache_key_prefix}:{hash(text)}\"",
-                  "",
-                  "            if self.cache_enabled:",
-                  "                cached_embedding = await self.embedding_cache.get(cache_key)",
-                  "                if cached_embedding is not None:",
-                  "                    embedding_results[i] = cached_embedding",
-                  "                    cache_hits += 1",
-                  "                    continue",
-                  "",
-                  "            texts_to_embed.append((i, text, cache_key))",
-                  "            cache_misses += 1"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 427,
-                "end_line": 440,
-                "language": "python",
-                "content": [
-                  "        # Generate embeddings for uncached texts",
-                  "        if texts_to_embed:",
-                  "            new_embeddings = await self._generate_embeddings_batch([",
-                  "                text for _, text, _ in texts_to_embed",
-                  "            ])",
-                  "",
-                  "            # Store results and cache new embeddings",
-                  "            for (original_idx, text, cache_key), embedding in zip(texts_to_embed, new_embeddings):",
-                  "                embedding_results[original_idx] = embedding",
-                  "",
-                  "                if self.cache_enabled:",
-                  "                    await self.embedding_cache.set(cache_key, embedding)"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 444,
-                "end_line": 458,
-                "language": "python",
-                "content": [
-                  "        # Return embeddings in original order",
-                  "        ordered_embeddings = [embedding_results[i] for i in range(len(texts))]",
-                  "",
-                  "        return {",
-                  "            'embeddings': ordered_embeddings,",
-                  "            'cache_stats': {",
-                  "                'cache_hits': cache_hits,",
-                  "                'cache_misses': cache_misses,",
-                  "                'cache_hit_rate': cache_hits / len(texts) if texts else 0",
-                  "            },",
-                  "            'model_used': self.model_name,",
-                  "            'batch_size_used': min(self.batch_size, len(texts_to_embed))",
-                  "        }"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 462,
-                "end_line": 475,
-                "language": "python",
-                "content": [
-                  "    async def _generate_embeddings_batch(self, texts: List[str]) -> List[List[float]]:",
-                  "        \"\"\"Generate embeddings in optimized batches.\"\"\"",
-                  "",
-                  "        all_embeddings = []",
-                  "",
-                  "        # Process in batches",
-                  "        for i in range(0, len(texts), self.batch_size):",
-                  "            batch = texts[i:i + self.batch_size]",
-                  "",
-                  "            try:",
-                  "                batch_embeddings = self.embedding_model.embed_documents(batch)",
-                  "                all_embeddings.extend(batch_embeddings)"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 479,
-                "end_line": 493,
-                "language": "python",
-                "content": [
-                  "            except Exception as e:",
-                  "                self.logger.error(f\"Batch embedding error: {e}\")",
-                  "                # Fallback to individual processing",
-                  "                for text in batch:",
-                  "                    try:",
-                  "                        individual_embedding = self.embedding_model.embed_query(text)",
-                  "                        all_embeddings.append(individual_embedding)",
-                  "                    except Exception as individual_error:",
-                  "                        self.logger.error(f\"Individual embedding error: {individual_error}\")",
-                  "                        # Use zero vector as fallback",
-                  "                        all_embeddings.append([0.0] * 1536)  # Adjust dimension as needed",
-                  "",
-                  "        return all_embeddings"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 497,
-                "end_line": 510,
-                "language": "python",
-                "content": [
-                  "class EmbeddingCache:",
-                  "    \"\"\"High-performance embedding cache with TTL and LRU eviction.\"\"\"",
-                  "",
-                  "    def __init__(self, config: Dict[str, Any]):",
-                  "        self.config = config",
-                  "        self.max_size = config.get('max_size', 10000)",
-                  "        self.ttl_seconds = config.get('ttl_seconds', 86400)  # 24 hours",
-                  "",
-                  "        # In-memory cache with metadata",
-                  "        self.cache = {}",
-                  "        self.access_times = {}",
-                  "        self.creation_times = {}"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 514,
-                "end_line": 530,
-                "language": "python",
-                "content": [
-                  "    async def get(self, key: str) -> Optional[List[float]]:",
-                  "        \"\"\"Get embedding from cache.\"\"\"",
-                  "",
-                  "        if key not in self.cache:",
-                  "            return None",
-                  "",
-                  "        # Check TTL",
-                  "        if time.time() - self.creation_times[key] > self.ttl_seconds:",
-                  "            await self._evict_key(key)",
-                  "            return None",
-                  "",
-                  "        # Update access time for LRU",
-                  "        self.access_times[key] = time.time()",
-                  "",
-                  "        return self.cache[key]"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 534,
+                "start_line": 543,
                 "end_line": 547,
-                "language": "python",
+                "language": "",
                 "content": [
-                  "    async def set(self, key: str, embedding: List[float]):",
-                  "        \"\"\"Set embedding in cache with eviction if needed.\"\"\"",
                   "",
-                  "        # Evict if at capacity",
-                  "        if len(self.cache) >= self.max_size and key not in self.cache:",
-                  "            await self._evict_lru()",
-                  "",
-                  "        # Store embedding",
-                  "        current_time = time.time()",
-                  "        self.cache[key] = embedding",
-                  "        self.access_times[key] = current_time",
-                  "        self.creation_times[key] = current_time"
+                  "The RAGInfrastructureAsCode class implements Infrastructure as Code (IaC) principles specifically tailored for enterprise RAG deployments, ensuring consistent, repeatable, and auditable infrastructure provisioning. The three-layer architecture addresses different aspects of modern cloud deployments: TerraformManager provisions cloud infrastructure resources like virtual networks, storage accounts, compute clusters, and security policies using declarative configuration. KubernetesManager handles container orchestration, creating pods, services, deployments, and other Kubernetes resources needed for RAG workloads. HelmManager manages application packages, deploying complete RAG applications with their dependencies, configurations, and integrations. This layered approach enables independent evolution of infrastructure, platform, and application components while maintaining clear separation of concerns and enabling specialized teams to manage their respective layers.",
+                  ""
                 ],
-                "line_count": 12
+                "line_count": 3
               },
               {
-                "start_line": 559,
-                "end_line": 573,
-                "language": "python",
+                "start_line": 552,
+                "end_line": 556,
+                "language": "",
                 "content": [
                   "",
-                  "# Production load balancing and auto-scaling",
-                  "",
-                  "class RAGLoadBalancer:",
-                  "    \"\"\"Intelligent load balancer for RAG services.\"\"\"",
-                  "",
-                  "    def __init__(self, config: Dict[str, Any] = None):",
-                  "        self.config = config or {}",
-                  "        ",
-                  "        # Initialize service tracking",
-                  "        self.service_instances = {}  # Track available service instances",
-                  "        self.health_status = {}     # Monitor instance health",
-                  "        self.load_metrics = {}      # Track performance metrics"
+                  "Environment management components address the operational complexity of managing enterprise RAG systems across multiple deployment environments. The EnvironmentManager ensures configuration consistency across development, staging, and production environments while allowing for environment-specific customizations like resource scaling, performance tuning, and integration endpoints. This prevents the common \"works in dev but fails in production\" problems. SecretManager integrates with enterprise-grade secret management systems like HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault to securely handle sensitive data including API keys, database connection strings, certificate private keys, and encryption keys. ConfigurationManager maintains environment-specific settings that control RAG system behavior, such as retrieval model parameters, embedding dimensions, similarity thresholds, and cache configurations. This comprehensive configuration management enables reliable deployments while maintaining security and operational excellence across all environments.",
+                  ""
                 ],
-                "line_count": 13
+                "line_count": 3
               },
               {
-                "start_line": 577,
-                "end_line": 587,
-                "language": "python",
+                "start_line": 565,
+                "end_line": 569,
+                "language": "",
                 "content": [
-                  "        # Configure available load balancing strategies",
-                  "        self.strategies = {",
-                  "            'round_robin': self._round_robin_selection,",
-                  "            'least_connections': self._least_connections_selection,",
-                  "            'response_time': self._response_time_selection,",
-                  "            'resource_usage': self._resource_usage_selection",
-                  "        }",
                   "",
-                  "        self.current_strategy = self.config.get('strategy', 'response_time')"
+                  "The deployment orchestration method establishes comprehensive tracking and monitoring of complex multi-stage infrastructure deployments. The deployment_id uses a timestamp-based naming convention to ensure global uniqueness across all environments and enable precise identification for rollback operations, audit trails, and troubleshooting. The components dictionary serves as a centralized result collector that aggregates outcomes from each deployment stage including success/failure status, resource identifiers, timing information, and error details. This structured approach provides complete visibility into the infrastructure provisioning process, enabling operations teams to quickly identify failures, track deployment progress, and maintain audit trails required for enterprise governance and compliance requirements.",
+                  ""
                 ],
-                "line_count": 9
+                "line_count": 3
               },
               {
-                "start_line": 593,
-                "end_line": 604,
-                "language": "python",
+                "start_line": 581,
+                "end_line": 585,
+                "language": "",
                 "content": [
-                  "    async def configure_services(self, services: Dict[str, Any]):",
-                  "        \"\"\"Configure services for load balancing.\"\"\"",
                   "",
-                  "        for service_name, service_instances in services.items():",
-                  "            # Ensure service_instances is a list",
-                  "            if not isinstance(service_instances, list):",
-                  "                service_instances = [service_instances]",
-                  "",
-                  "            # Register service instances",
-                  "            self.service_instances[service_name] = service_instances"
+                  "Cloud infrastructure provisioning creates the foundational layer of cloud resources required for enterprise RAG deployments using a modular, composable architecture. The networking module establishes virtual private clouds (VPCs), subnets, routing tables, and network security policies that isolate RAG workloads and control traffic flow. Security_groups module defines fine-grained firewall rules that implement zero-trust network access, ensuring only authorized traffic reaches RAG components. Load_balancers module creates application and network load balancers that distribute traffic across RAG service instances while providing health checking and automatic failover capabilities. Storage module provisions persistent volumes, object storage buckets, and database instances with appropriate performance characteristics, encryption, and backup policies for RAG data requirements. Monitoring module deploys logging, metrics, and alerting infrastructure specifically tuned for RAG system observability. This modular approach enables independent lifecycle management of infrastructure components, allows for selective updates without affecting unrelated systems, and supports infrastructure reuse across different RAG deployments and environments.",
+                  ""
                 ],
-                "line_count": 10
+                "line_count": 3
               },
               {
-                "start_line": 608,
-                "end_line": 614,
-                "language": "python",
+                "start_line": 597,
+                "end_line": 601,
+                "language": "",
                 "content": [
-                  "            # Initialize health status for all instances",
-                  "            self.health_status[service_name] = {",
-                  "                instance: ServiceStatus.HEALTHY",
-                  "                for instance in service_instances",
-                  "            }"
+                  "",
+                  "Kubernetes resource deployment creates the container orchestration layer with proper namespace isolation. The three namespaces separate concerns: rag-system contains core RAG components, rag-monitoring isolates observability tools, and rag-data handles data processing components. The apply_order ensures dependencies are created first - namespaces before everything else, secrets and configmaps before applications that need them, and services before deployments that expose them.",
+                  ""
                 ],
-                "line_count": 5
+                "line_count": 3
               },
               {
-                "start_line": 618,
-                "end_line": 630,
-                "language": "python",
+                "start_line": 624,
+                "end_line": 628,
+                "language": "",
                 "content": [
-                  "            # Initialize performance metrics tracking",
-                  "            self.load_metrics[service_name] = {",
-                  "                instance: {",
-                  "                    'active_connections': 0,",
-                  "                    'avg_response_time': 0.0,",
-                  "                    'cpu_usage': 0.0,",
-                  "                    'memory_usage': 0.0,",
-                  "                    'error_rate': 0.0",
-                  "                }",
-                  "                for instance in service_instances",
-                  "            }"
+                  "",
+                  "Helm chart deployment handles the application layer with sophisticated package management. Each chart represents a complete RAG subsystem: rag-core contains the main retrieval and generation services, vector-store manages embeddings and similarity search, and monitoring provides observability. Helm's templating system allows the same charts to be deployed across different environments with environment-specific values, ensuring consistency while supporting customization.",
+                  ""
                 ],
-                "line_count": 11
+                "line_count": 3
               },
               {
                 "start_line": 638,
-                "end_line": 644,
-                "language": "python",
-                "content": [
-                  "    async def get_service_instance(self, service_name: str) -> Optional[Any]:",
-                  "        \"\"\"Get optimal service instance based on current strategy.\"\"\"",
-                  "",
-                  "        if service_name not in self.service_instances:",
-                  "            return None"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 648,
-                "end_line": 658,
-                "language": "python",
-                "content": [
-                  "        # Filter to only healthy instances",
-                  "        healthy_instances = [",
-                  "            instance for instance in self.service_instances[service_name]",
-                  "            if self.health_status[service_name][instance] == ServiceStatus.HEALTHY",
-                  "        ]",
-                  "",
-                  "        if not healthy_instances:",
-                  "            self.logger.warning(f\"No healthy instances available for {service_name}\")",
-                  "            return None"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 662,
-                "end_line": 673,
-                "language": "python",
-                "content": [
-                  "        # Apply the configured load balancing strategy",
-                  "        selected_instance = await self.strategies[self.current_strategy](",
-                  "            service_name, healthy_instances",
-                  "        )",
-                  "",
-                  "        # Track the connection for load metrics",
-                  "        if selected_instance:",
-                  "            self.load_metrics[service_name][selected_instance]['active_connections'] += 1",
-                  "",
-                  "        return selected_instance"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 681,
-                "end_line": 688,
-                "language": "python",
-                "content": [
-                  "    async def _response_time_selection(self, service_name: str,",
-                  "                                     healthy_instances: List[Any]) -> Any:",
-                  "        \"\"\"Select instance with best average response time.\"\"\"",
-                  "",
-                  "        best_instance = None",
-                  "        best_response_time = float('inf')"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 692,
-                "end_line": 700,
-                "language": "python",
-                "content": [
-                  "        for instance in healthy_instances:",
-                  "            metrics = self.load_metrics[service_name][instance]",
-                  "            avg_response_time = metrics['avg_response_time']",
-                  "",
-                  "            # Adjust response time based on current load",
-                  "            # Higher active connections increase the adjusted time",
-                  "            adjusted_time = avg_response_time * (1 + metrics['active_connections'] * 0.1)"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 704,
-                "end_line": 710,
-                "language": "python",
-                "content": [
-                  "            if adjusted_time < best_response_time:",
-                  "                best_response_time = adjusted_time",
-                  "                best_instance = instance",
-                  "",
-                  "        return best_instance"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 718,
-                "end_line": 726,
-                "language": "python",
-                "content": [
-                  "class RAGAutoScaler:",
-                  "    \"\"\"Auto-scaling system for RAG services based on load and performance metrics.\"\"\"",
-                  "",
-                  "    def __init__(self, config: Dict[str, Any]):",
-                  "        self.config = config",
-                  "        self.scaling_policies = {}  # Per-service scaling configurations",
-                  "        self.monitoring_interval = config.get('monitoring_interval', 30)  # seconds"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 730,
-                "end_line": 739,
-                "language": "python",
-                "content": [
-                  "        # Define scale-up thresholds",
-                  "        self.scale_up_thresholds = config.get('scale_up', {",
-                  "            'cpu_threshold': 70.0,          # CPU usage percentage",
-                  "            'memory_threshold': 80.0,       # Memory usage percentage",
-                  "            'response_time_threshold': 2.0, # Response time in seconds",
-                  "            'queue_size_threshold': 100,    # Queue backlog size",
-                  "            'error_rate_threshold': 5.0     # Error rate percentage",
-                  "        })"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 743,
-                "end_line": 755,
-                "language": "python",
-                "content": [
-                  "        # Define scale-down thresholds (more conservative)",
-                  "        self.scale_down_thresholds = config.get('scale_down', {",
-                  "            'cpu_threshold': 30.0,",
-                  "            'memory_threshold': 40.0,",
-                  "            'response_time_threshold': 0.5,",
-                  "            'queue_size_threshold': 10,",
-                  "            'stable_duration': 300  # Require 5 minutes of stability",
-                  "        })",
-                  "",
-                  "        # Start continuous monitoring",
-                  "        self.monitoring_task = asyncio.create_task(self._continuous_monitoring())"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 763,
-                "end_line": 772,
-                "language": "python",
-                "content": [
-                  "    async def register_service_for_scaling(self, service_name: str,",
-                  "                                         scaling_config: Dict[str, Any]):",
-                  "        \"\"\"Register service for auto-scaling with specific configuration.\"\"\"",
-                  "",
-                  "        self.scaling_policies[service_name] = {",
-                  "            'min_instances': scaling_config.get('min_instances', 1),",
-                  "            'max_instances': scaling_config.get('max_instances', 10),",
-                  "            'current_instances': scaling_config.get('current_instances', 1),"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 776,
-                "end_line": 782,
-                "language": "python",
-                "content": [
-                  "            'scaling_cooldown': scaling_config.get('cooldown', 300),  # Prevent rapid scaling",
-                  "            'last_scaling_action': 0,                                 # Track last action time",
-                  "            'stability_window': [],                                   # Track stability for scale-down",
-                  "            'custom_thresholds': scaling_config.get('thresholds', {}) # Service-specific thresholds",
-                  "        }"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 790,
-                "end_line": 800,
-                "language": "python",
-                "content": [
-                  "    async def _continuous_monitoring(self):",
-                  "        \"\"\"Continuously monitor services and trigger scaling decisions.\"\"\"",
-                  "",
-                  "        while True:",
-                  "            try:",
-                  "                # Check each registered service",
-                  "                for service_name in self.scaling_policies.keys():",
-                  "                    # Collect current performance metrics",
-                  "                    current_metrics = await self._collect_service_metrics(service_name)"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 804,
-                "end_line": 813,
-                "language": "python",
-                "content": [
-                  "                    # Evaluate if scaling action is needed",
-                  "                    scaling_decision = await self._evaluate_scaling_decision(",
-                  "                        service_name, current_metrics",
-                  "                    )",
-                  "",
-                  "                    # Execute scaling action if required",
-                  "                    if scaling_decision['action'] != 'none':",
-                  "                        await self._execute_scaling_action(service_name, scaling_decision)"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 817,
-                "end_line": 824,
-                "language": "python",
-                "content": [
-                  "                # Wait before next monitoring cycle",
-                  "                await asyncio.sleep(self.monitoring_interval)",
-                  "",
-                  "            except Exception as e:",
-                  "                self.logger.error(f\"Auto-scaling monitoring error: {e}\")",
-                  "                await asyncio.sleep(self.monitoring_interval)"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 832,
-                "end_line": 843,
-                "language": "python",
-                "content": [
-                  "    async def _evaluate_scaling_decision(self, service_name: str,",
-                  "                                       metrics: Dict[str, Any]) -> Dict[str, Any]:",
-                  "        \"\"\"Evaluate whether scaling action is needed.\"\"\"",
-                  "",
-                  "        policy = self.scaling_policies[service_name]",
-                  "        current_time = time.time()",
-                  "",
-                  "        # Respect cooldown period to prevent rapid scaling",
-                  "        if current_time - policy['last_scaling_action'] < policy['scaling_cooldown']:",
-                  "            return {'action': 'none', 'reason': 'cooldown_active'}"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 847,
-                "end_line": 856,
-                "language": "python",
-                "content": [
-                  "        # Check if any scale-up condition is met",
-                  "        scale_up_triggered = (",
-                  "            metrics['cpu_usage'] > self.scale_up_thresholds['cpu_threshold'] or",
-                  "            metrics['memory_usage'] > self.scale_up_thresholds['memory_threshold'] or",
-                  "            metrics['avg_response_time'] > self.scale_up_thresholds['response_time_threshold'] or",
-                  "            metrics['queue_size'] > self.scale_up_thresholds['queue_size_threshold'] or",
-                  "            metrics['error_rate'] > self.scale_up_thresholds['error_rate_threshold']",
-                  "        )"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 860,
-                "end_line": 872,
-                "language": "python",
-                "content": [
-                  "        # Scale up if conditions are met and within limits",
-                  "        if scale_up_triggered and policy['current_instances'] < policy['max_instances']:",
-                  "            return {",
-                  "                'action': 'scale_up',",
-                  "                'target_instances': min(",
-                  "                    policy['current_instances'] + 1,",
-                  "                    policy['max_instances']",
-                  "                ),",
-                  "                'reason': 'high_load_detected',",
-                  "                'metrics': metrics",
-                  "            }"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 875,
-                "end_line": 881,
+                "end_line": 642,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 9: Scale-Down Decision Logic",
+                  "Environment configuration management ensures that all RAG components receive the correct settings for their target environment. The three configuration sources follow Kubernetes best practices: environment variables for simple settings, ConfigMaps for complex configuration files, and Secrets for sensitive data. Validation ensures that required configuration is present and properly formatted before applications start.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 650,
+                "end_line": 654,
+                "language": "",
+                "content": [
                   "",
-                  "Implement conservative scale-down with stability requirements:",
+                  "The final deployment stages establish enterprise-grade monitoring and validate the entire system. Monitoring setup deploys metrics collection, logging aggregation, distributed tracing, and alerting systems specifically tuned for RAG workloads. Deployment validation runs comprehensive health checks to ensure all components are functioning correctly before marking the deployment as successful.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 664,
+                "end_line": 668,
+                "language": "",
+                "content": [
+                  "",
+                  "Error handling and result reporting provide critical visibility into deployment outcomes. Successful deployments record completion time for performance tracking and audit trails. Failed deployments capture detailed error information and failure timestamps to support rapid troubleshooting and rollback procedures.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 685,
+                "end_line": 689,
+                "language": "",
+                "content": [
+                  "",
+                  "The Kubernetes resource generation method creates deployment definitions programmatically. The RAG orchestrator deployment uses a three-replica default for high availability, with environment-specific overrides possible. The selector establishes the connection between the Deployment and its managed Pods using label matching.",
+                  ""
+                ],
+                "line_count": 3
+              },
+              {
+                "start_line": 707,
+                "end_line": 713,
+                "language": "",
+                "content": [
+                  "",
+                  "The container specification defines resource requirements and runtime configuration for the RAG orchestrator. Resource requests guarantee minimum CPU and memory allocation, while limits prevent any single container from consuming excessive resources. The resource allocation (500m CPU, 1Gi memory requests with 2 CPU, 4Gi limits) provides room for RAG workloads to scale while protecting cluster stability. Environment variables pass deployment context to the application.",
+                  "",
+                  "Next, we define the orchestrator service for internal communication:",
                   ""
                 ],
                 "line_count": 5
               },
               {
-                "start_line": 889,
-                "end_line": 893,
+                "start_line": 733,
+                "end_line": 743,
                 "language": "",
                 "content": [
                   "",
-                  "Scale-down evaluation requires ALL conditions to be met simultaneously, implementing a conservative approach that prevents premature resource reduction. This comprehensive check ensures RAG services maintain performance margins and can handle sudden load increases without degradation.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 906,
-                "end_line": 910,
-                "language": "",
-                "content": [
+                  "### Enterprise Governance and Compliance",
                   "",
-                  "Stability tracking maintains a sliding window of performance measurements to ensure consistent low usage before scaling down. The window automatically purges old measurements, keeping memory usage bounded while maintaining sufficient historical data for reliable scaling decisions.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 928,
-                "end_line": 931,
-                "language": "",
-                "content": [
+                  "#### **Advanced Compliance Automation**",
                   "",
-                  "Scale-down execution only occurs after sustained stability across the entire monitoring window, protecting against oscillation. The system reduces instances incrementally and respects minimum instance limits, ensuring RAG service availability during scale-down operations."
-                ],
-                "line_count": 2
-              },
-              {
-                "start_line": 941,
-                "end_line": 950,
-                "language": "python",
-                "content": [
+                  "Implement comprehensive compliance automation for enterprise RAG systems:",
                   "",
-                  "# Enterprise integration framework",
-                  "",
-                  "class EnterpriseRAGIntegrator:",
-                  "    \"\"\"Integration framework for enterprise data systems and workflows.\"\"\"",
-                  "",
-                  "    def __init__(self, integration_config: Dict[str, Any]):",
-                  "        self.config = integration_config"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 954,
-                "end_line": 964,
-                "language": "python",
-                "content": [
-                  "        # Data source connectors",
-                  "        self.data_connectors = {",
-                  "            'sharepoint': SharePointConnector(integration_config.get('sharepoint', {})),",
-                  "            'confluence': ConfluenceConnector(integration_config.get('confluence', {})),",
-                  "            'database': DatabaseConnector(integration_config.get('database', {})),",
-                  "            'file_system': FileSystemConnector(integration_config.get('file_system', {})),",
-                  "            'api_endpoints': APIConnector(integration_config.get('api', {})),",
-                  "            's3': S3Connector(integration_config.get('s3', {}))",
-                  "        }"
-                ],
-                "line_count": 9
-              },
-              {
-                "start_line": 968,
-                "end_line": 977,
-                "language": "python",
-                "content": [
-                  "        # Authentication and authorization",
-                  "        self.auth_manager = EnterpriseAuthManager(integration_config.get('auth', {}))",
-                  "",
-                  "        # Data transformation pipeline",
-                  "        self.data_transformer = DataTransformationPipeline()",
-                  "",
-                  "        # Change detection and incremental updates",
-                  "        self.change_detector = ChangeDetectionSystem(integration_config.get('change_detection', {}))"
-                ],
-                "line_count": 8
-              },
-              {
-                "start_line": 981,
-                "end_line": 996,
-                "language": "python",
-                "content": [
-                  "    async def setup_enterprise_integration(self, data_sources: List[str]) -> Dict[str, Any]:",
-                  "        \"\"\"Set up integration with specified enterprise data sources.\"\"\"",
-                  "",
-                  "        integration_results = {}",
-                  "",
-                  "        for source_name in data_sources:",
-                  "            if source_name in self.data_connectors:",
-                  "                try:",
-                  "                    # Initialize connector",
-                  "                    connector = self.data_connectors[source_name]",
-                  "                    connection_result = await connector.initialize_connection()",
-                  "",
-                  "                    # Test connectivity and permissions",
-                  "                    test_result = await connector.test_connection()"
-                ],
-                "line_count": 14
-              },
-              {
-                "start_line": 1000,
-                "end_line": 1021,
-                "language": "python",
-                "content": [
-                  "                    # Set up change monitoring",
-                  "                    if self.config.get('enable_change_detection', True):",
-                  "                        change_monitoring = await self.change_detector.setup_monitoring(",
-                  "                            source_name, connector",
-                  "                        )",
-                  "                    else:",
-                  "                        change_monitoring = {'enabled': False}",
-                  "",
-                  "                    integration_results[source_name] = {",
-                  "                        'status': 'connected',",
-                  "                        'connection_result': connection_result,",
-                  "                        'test_result': test_result,",
-                  "                        'change_monitoring': change_monitoring",
-                  "                    }",
-                  "",
-                  "                except Exception as e:",
-                  "                    integration_results[source_name] = {",
-                  "                        'status': 'failed',",
-                  "                        'error': str(e)",
-                  "                    }"
-                ],
-                "line_count": 20
-              },
-              {
-                "start_line": 1025,
-                "end_line": 1033,
-                "language": "python",
-                "content": [
-                  "        return {",
-                  "            'integration_results': integration_results,",
-                  "            'successful_connections': len([r for r in integration_results.values()",
-                  "                                         if r['status'] == 'connected']),",
-                  "            'total_sources': len(data_sources),",
-                  "            'change_detection_enabled': self.config.get('enable_change_detection', True)",
-                  "        }"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 1037,
-                "end_line": 1050,
-                "language": "python",
-                "content": [
-                  "class SharePointConnector:",
-                  "    \"\"\"Enterprise SharePoint integration for document retrieval.\"\"\"",
-                  "",
-                  "    def __init__(self, config: Dict[str, Any]):",
-                  "        self.config = config",
-                  "        self.site_url = config.get('site_url')",
-                  "        self.client_id = config.get('client_id')",
-                  "        self.client_secret = config.get('client_secret')",
-                  "        self.tenant_id = config.get('tenant_id')",
-                  "",
-                  "        # SharePoint client",
-                  "        self.sp_client = None"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 1052,
-                "end_line": 1063,
-                "language": "python",
-                "content": [
-                  "    async def initialize_connection(self) -> Dict[str, Any]:",
-                  "        \"\"\"Initialize SharePoint connection with authentication.\"\"\"",
-                  "",
-                  "        try:",
-                  "            # Initialize SharePoint client with OAuth",
-                  "            from office365.sharepoint.client_context import ClientContext",
-                  "            from office365.runtime.auth.client_credential import ClientCredential",
-                  "",
-                  "            credentials = ClientCredential(self.client_id, self.client_secret)",
-                  "            self.sp_client = ClientContext(self.site_url).with_credentials(credentials)"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 1067,
-                "end_line": 1083,
-                "language": "python",
-                "content": [
-                  "            # Test connection",
-                  "            web = self.sp_client.web.get().execute_query()",
-                  "",
-                  "            return {",
-                  "                'success': True,",
-                  "                'site_title': web.title,",
-                  "                'site_url': web.url,",
-                  "                'connection_time': time.time()",
-                  "            }",
-                  "",
-                  "        except Exception as e:",
-                  "            return {",
-                  "                'success': False,",
-                  "                'error': str(e)",
-                  "            }"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 1095,
-                "end_line": 1099,
-                "language": "",
-                "content": [
-                  "",
-                  "Document retrieval supports both full library scanning and targeted folder access. The modified_since parameter enables incremental updates, crucial for RAG systems managing large enterprise document repositories. Early validation prevents operations on uninitialized connections.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1109,
-                "end_line": 1113,
-                "language": "",
-                "content": [
-                  "",
-                  "Folder selection provides flexible access patterns - specific folders for targeted updates or the entire library for comprehensive indexing. The execute_query() method batches SharePoint API calls for optimal performance, reducing network round trips in enterprise network environments.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1121,
-                "end_line": 1125,
-                "language": "",
-                "content": [
-                  "",
-                  "Date-based filtering enables efficient incremental processing by skipping unmodified documents. Content downloading retrieves the full file binary data, supporting various document formats (PDF, Word, PowerPoint) commonly found in enterprise SharePoint environments.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1140,
-                "end_line": 1144,
-                "language": "",
-                "content": [
-                  "",
-                  "Document metadata collection captures essential information for RAG processing including authorship, versioning, and content type. This metadata enables document source attribution in RAG responses and supports content-type-specific processing pipelines.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1150,
-                "end_line": 1154,
-                "language": "",
-                "content": [
-                  "",
-                  "Error handling ensures partial failures don't break the entire retrieval process, returning available documents while logging issues for operations teams. This resilient approach maintains RAG system availability during enterprise system connectivity issues.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1158,
-                "end_line": 1165,
-                "language": "python",
-                "content": [
-                  "class EnterpriseAuthManager:",
-                  "    \"\"\"Enterprise authentication and authorization manager.\"\"\"",
-                  "",
-                  "    def __init__(self, auth_config: Dict[str, Any]):",
-                  "        self.config = auth_config",
-                  "        self.auth_providers = {}"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 1169,
-                "end_line": 1177,
-                "language": "python",
-                "content": [
-                  "        # Initialize authentication providers",
-                  "        if 'active_directory' in auth_config:",
-                  "            self.auth_providers['ad'] = ActiveDirectoryAuth(auth_config['active_directory'])",
-                  "        if 'oauth2' in auth_config:",
-                  "            self.auth_providers['oauth2'] = OAuth2Auth(auth_config['oauth2'])",
-                  "        if 'saml' in auth_config:",
-                  "            self.auth_providers['saml'] = SAMLAuth(auth_config['saml'])"
-                ],
-                "line_count": 7
-              },
-              {
-                "start_line": 1181,
-                "end_line": 1184,
-                "language": "python",
-                "content": [
-                  "        # Role-based access control",
-                  "        self.rbac_manager = RBACManager(auth_config.get('rbac', {}))"
-                ],
-                "line_count": 2
-              },
-              {
-                "start_line": 1198,
-                "end_line": 1202,
-                "language": "",
-                "content": [
-                  "",
-                  "User authentication begins by selecting the appropriate authentication method based on client credentials. OAuth2 serves as the default for modern applications, while other methods accommodate legacy systems. Provider validation ensures only configured authentication methods are accepted, preventing security vulnerabilities.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1213,
-                "end_line": 1217,
-                "language": "",
-                "content": [
-                  "",
-                  "Successful authentication triggers immediate permission retrieval, creating a complete user context for authorization decisions. This approach minimizes subsequent permission lookups and provides comprehensive access control information for RAG system components.",
-                  ""
-                ],
-                "line_count": 3
-              },
-              {
-                "start_line": 1229,
-                "end_line": 1245,
-                "language": "",
-                "content": [
-                  "",
-                  "Session token creation enables stateless authentication across RAG services. Tokens typically include user identity, permissions, and expiration information, supporting distributed service architectures. Error handling provides secure failure reporting without exposing sensitive authentication details.",
-                  "",
-                  "    async def authorize_request(self, session_token: str,",
-                  "                              resource: str, action: str) -> Dict[str, Any]:",
-                  "        \"\"\"Authorize user request for specific resource and action.\"\"\"",
-                  "",
-                  "        try:",
-                  "            # Validate session token",
-                  "            user_info = self._validate_session_token(session_token)",
-                  "            if not user_info:",
-                  "                return {",
-                  "                    'authorized': False,",
-                  "                    'error': 'Invalid or expired session token'",
-                  "                }"
-                ],
-                "line_count": 15
-              },
-              {
-                "start_line": 1249,
-                "end_line": 1260,
-                "language": "python",
-                "content": [
-                  "            # Check permissions",
-                  "            authorized = await self.rbac_manager.check_permission(",
-                  "                user_info, resource, action",
-                  "            )",
-                  "",
-                  "            return {",
-                  "                'authorized': authorized,",
-                  "                'user_id': user_info['user_id'],",
-                  "                'permissions_checked': f'{resource}:{action}'",
-                  "            }"
-                ],
-                "line_count": 10
-              },
-              {
-                "start_line": 1264,
-                "end_line": 1270,
-                "language": "python",
-                "content": [
-                  "        except Exception as e:",
-                  "            return {",
-                  "                'authorized': False,",
-                  "                'error': f'Authorization failed: {str(e)}'",
-                  "            }"
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1274,
-                "end_line": 1288,
-                "language": "python",
-                "content": [
-                  "class RBACManager:",
-                  "    \"\"\"Role-Based Access Control manager for RAG systems.\"\"\"",
-                  "",
-                  "    def __init__(self, rbac_config: Dict[str, Any]):",
-                  "        self.config = rbac_config",
-                  "",
-                  "        # Define roles and permissions",
-                  "        self.roles = rbac_config.get('roles', {",
-                  "            'admin': ['*'],  # Full access",
-                  "            'power_user': ['rag:query', 'rag:upload', 'rag:view_sources'],",
-                  "            'user': ['rag:query'],",
-                  "            'readonly': ['rag:query:readonly']",
-                  "        })"
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 1292,
-                "end_line": 1299,
-                "language": "python",
-                "content": [
-                  "        # Resource-based permissions",
-                  "        self.resources = rbac_config.get('resources', {",
-                  "            'documents': ['read', 'write', 'delete'],",
-                  "            'queries': ['execute', 'view_history'],",
-                  "            'system': ['configure', 'monitor', 'admin']",
-                  "        })"
-                ],
-                "line_count": 6
-              },
-              {
-                "start_line": 1315,
-                "end_line": 1328,
-                "language": "",
-                "content": [
-                  "",
-                  "Permission aggregation combines all permissions from a user's assigned roles, using set operations to avoid duplicates. This approach supports users with multiple roles while maintaining efficient permission lookups. The system returns a deduplicated list of all permissions available to the user across their various roles.",
-                  "",
-                  "    async def check_permission(self, user_info: Dict[str, Any],",
-                  "                             resource: str, action: str) -> bool:",
-                  "        \"\"\"Check if user has permission for specific resource and action.\"\"\"",
-                  "",
-                  "        user_permissions = await self.get_user_permissions(user_info)",
-                  "",
-                  "        # Check for wildcard permission",
-                  "        if '*' in user_permissions:",
-                  "            return True"
-                ],
-                "line_count": 12
-              },
-              {
-                "start_line": 1332,
-                "end_line": 1344,
-                "language": "python",
-                "content": [
-                  "        # Check specific permission",
-                  "        required_permission = f\"{resource}:{action}\"",
-                  "        if required_permission in user_permissions:",
-                  "            return True",
-                  "",
-                  "        # Check resource-level permission",
-                  "        resource_permission = f\"{resource}:*\"",
-                  "        if resource_permission in user_permissions:",
-                  "            return True",
-                  "",
-                  "        return False"
-                ],
-                "line_count": 11
-              },
-              {
-                "start_line": 1347,
-                "end_line": 1357,
-                "language": "",
-                "content": [
-                  "",
-                  "### **Data Privacy and Compliance**",
-                  "",
-                  "Implement comprehensive privacy and compliance frameworks to ensure your RAG system meets regulatory requirements across different jurisdictions and industries.",
-                  "",
-                  "#### Step 1: Initialize Privacy Compliance Manager",
-                  "",
-                  "Set up the comprehensive compliance framework:",
+                  "### Step 3: Compliance Automation Framework",
                   ""
                 ],
                 "line_count": 9
               },
               {
-                "start_line": 1382,
-                "end_line": 1388,
+                "start_line": 759,
+                "end_line": 763,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 2: Data Processing with Compliance Checks",
-                  "",
-                  "Process data through comprehensive compliance validation:",
+                  "The EnterpriseComplianceFramework addresses the complex reality that enterprise RAG systems must simultaneously comply with multiple overlapping regulatory requirements across different jurisdictions and industries. Each specialized compliance engine implements the specific controls, monitoring, and reporting requirements for its regulatory domain: SOXComplianceEngine ensures financial reporting controls including data integrity, change management, and audit trails for Sarbanes-Oxley compliance; GDPRComplianceEngine implements data subject rights, consent management, and privacy-by-design principles for European data protection; HIPAAComplianceEngine enforces protected health information safeguards including access controls, audit logging, and breach notification procedures; PCIDSSComplianceEngine secures payment card data through network security, vulnerability management, and secure coding practices; ISO27001ComplianceEngine establishes information security management systems including risk assessment, incident response, and continuous improvement processes. This multi-engine architecture prevents compliance framework conflicts, reduces implementation overhead, and enables organizations to adopt only the regulatory frameworks relevant to their operations.",
                   ""
                 ],
-                "line_count": 5
+                "line_count": 3
               },
               {
-                "start_line": 1408,
-                "end_line": 1414,
+                "start_line": 772,
+                "end_line": 776,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 3: Apply Compliance Framework Checks",
-                  "",
-                  "Run data through each required compliance framework:",
+                  "The compliance automation components transform manual, error-prone compliance processes into systematic, auditable operations that reduce risk and operational overhead. CompliancePolicyEngine translates complex regulatory text into executable policies by parsing legal requirements, mapping them to technical controls, and generating automated enforcement rules that can be applied consistently across RAG systems. AuditAutomation manages continuous compliance verification through scheduled assessments, real-time monitoring, and automated evidence collection, replacing manual compliance checks that are often inconsistent and resource-intensive. RiskAssessment continuously evaluates compliance posture by analyzing control effectiveness, identifying compliance gaps, and quantifying regulatory risk exposure to enable proactive remediation. ComplianceReporter generates comprehensive documentation including compliance status dashboards, regulatory filing reports, and audit evidence packages that meet examiner expectations and reduce the burden of compliance reporting. EvidenceCollector automatically captures and preserves compliance artifacts including system logs, configuration snapshots, and control execution records, ensuring that audit trails are complete, tamper-evident, and readily accessible for regulatory examinations.",
                   ""
                 ],
-                "line_count": 5
+                "line_count": 3
               },
               {
-                "start_line": 1447,
-                "end_line": 1453,
+                "start_line": 787,
+                "end_line": 791,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 4: GDPR Compliance Handler",
-                  "",
-                  "Implement specific GDPR requirements for European data protection:",
+                  "The modular compliance implementation approach enables organizations to implement precisely the regulatory frameworks required for their specific industry, geography, and business model without unnecessary overhead or complexity. Processing frameworks independently prevents conflicts between different regulatory requirements while ensuring each framework receives dedicated attention to its unique controls and reporting requirements. For example, a healthcare organization might implement GDPR and HIPAA engines simultaneously, while a financial services company might combine SOX, PCI DSS, and ISO 27001 engines. Each framework's dedicated engine instance handles regulation-specific nuances such as GDPR's consent management requirements, HIPAA's minimum necessary standards, or SOX's segregation of duties controls. This selective implementation approach reduces system complexity, minimizes performance impact, and allows organizations to add or remove compliance frameworks as business requirements evolve.",
                   ""
                 ],
-                "line_count": 5
+                "line_count": 3
               },
               {
-                "start_line": 1461,
-                "end_line": 1467,
+                "start_line": 799,
+                "end_line": 803,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 5: GDPR Data Processing Checks",
-                  "",
-                  "Implement comprehensive GDPR compliance validation:",
+                  "Compliance control implementation begins with comprehensive system analysis. The RAG architecture analysis identifies all components and their compliance implications, data flow mapping traces information through the system for privacy and security controls, and security control inventory ensures all protective measures are documented and functional. Automated enforcement ensures controls are actively maintained rather than just documented.",
                   ""
                 ],
-                "line_count": 5
+                "line_count": 3
               },
               {
-                "start_line": 1515,
-                "end_line": 1521,
+                "start_line": 811,
+                "end_line": 815,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 6: GDPR Data Subject Rights",
-                  "",
-                  "Handle individual rights requests under GDPR:",
+                  "Continuous monitoring establishes real-time compliance verification across the entire RAG system. Comprehensive scope ensures no compliance-relevant activities escape monitoring, real-time alerts enable immediate response to compliance violations, dashboards provide visibility for compliance teams, and automated remediation handles routine compliance issues without human intervention.",
                   ""
                 ],
-                "line_count": 5
+                "line_count": 3
               },
               {
-                "start_line": 1537,
-                "end_line": 1551,
+                "start_line": 822,
+                "end_line": 826,
                 "language": "",
                 "content": [
                   "",
-                  "This privacy and compliance framework ensures your RAG system handles sensitive data according to regulatory requirements, protecting both your organization and your users' privacy rights.",
-                  "",
-                  "---",
-                  "",
-                  "## Part 3: Real-Time Indexing and Incremental Updates",
-                  "",
-                  "### Change Detection and Incremental Processing",
-                  "",
-                  "#### Step 1: Initialize Incremental Indexing System",
-                  "",
-                  "First, let's set up the core infrastructure for real-time indexing:",
+                  "Compliance documentation generation creates the comprehensive records required for regulatory audits. The documentation includes not just policy statements but actual evidence of compliance implementation and ongoing adherence. Automated updates ensure documentation stays current with system changes, critical for maintaining audit readiness.",
                   ""
                 ],
-                "line_count": 13
+                "line_count": 3
               },
               {
-                "start_line": 1576,
-                "end_line": 1582,
+                "start_line": 833,
+                "end_line": 837,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 2: Configure Processing Queues and Background Processors",
-                  "",
-                  "Set up asynchronous queues and background processors for handling updates:",
+                  "Audit automation handles the ongoing verification of compliance controls. Quarterly frequency provides regular verification while balancing operational overhead, though this can be customized per framework. Automated evidence collection ensures audit readiness without manual effort, while audit trail integrity protects the evidence from tampering or accidental modification.",
                   ""
                 ],
-                "line_count": 5
+                "line_count": 3
               },
               {
-                "start_line": 1592,
-                "end_line": 1598,
+                "start_line": 846,
+                "end_line": 850,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 3: Set Up Change Detection for Data Sources",
-                  "",
-                  "Configure monitoring for multiple data sources:",
+                  "Framework results aggregation collects all compliance activities for each regulatory framework. This structured result format enables cross-framework analysis and provides clear visibility into the compliance status of each framework. The compliance status assessment provides a real-time evaluation of adherence levels.",
                   ""
                 ],
-                "line_count": 5
+                "line_count": 3
               },
               {
-                "start_line": 1639,
-                "end_line": 1645,
+                "start_line": 856,
+                "end_line": 860,
                 "language": "",
                 "content": [
                   "",
-                  "#### Step 4: Handle Change Events",
-                  "",
-                  "Route different types of changes to appropriate processing queues:",
+                  "Overall compliance analysis synthesizes complex regulatory data into actionable enterprise intelligence that enables effective compliance decision-making at all organizational levels. The comprehensive dashboard aggregates compliance status across all implemented frameworks, providing executives with unified visibility into regulatory risk exposure, compliance trends, and remediation priorities. This executive-level reporting enables informed decisions about compliance investments, risk tolerance, and regulatory strategy. The risk assessment performs sophisticated analysis of combined compliance requirements to identify areas where multiple regulatory frameworks create compounding risk exposure - for example, where GDPR data processing requirements intersect with HIPAA security controls or where SOX change management overlaps with ISO 27001 configuration management. This cross-framework risk analysis prevents compliance blind spots and enables more efficient allocation of compliance resources.",
                   ""
                 ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1656,
-                "end_line": 1662,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 5: Background Update Processor",
-                  "",
-                  "Implement the background processor that handles queued updates:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1686,
-                "end_line": 1692,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 6: Process Individual Updates",
-                  "",
-                  "Handle the processing of individual document changes:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1745,
-                "end_line": 1751,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 7: File System Change Detection",
-                  "",
-                  "Implement file system monitoring using OS-level change detection:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1758,
-                "end_line": 1764,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 8: Set Up File System Monitoring",
-                  "",
-                  "Configure file system watchers for specified directories:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1814,
-                "end_line": 1820,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 9: Handle File System Changes",
-                  "",
-                  "Process detected file system changes and create change events:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1853,
-                "end_line": 1867,
-                "language": "",
-                "content": [
-                  "",
-                  "This incremental indexing system enables real-time updates to your RAG knowledge base, ensuring your system stays current with changing data sources.",
-                  "",
-                  "---",
-                  "",
-                  "## Part 4: Monitoring, Observability, and Analytics",
-                  "",
-                  "### Comprehensive Monitoring and Alerting",
-                  "",
-                  "#### Step 1: Initialize Monitoring System",
-                  "",
-                  "First, let's set up the basic monitoring infrastructure with Prometheus metrics and structured logging:",
-                  ""
-                ],
-                "line_count": 13
-              },
-              {
-                "start_line": 1890,
-                "end_line": 1896,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 2: Set Up Prometheus Metrics",
-                  "",
-                  "Now let's configure the metrics that will track our RAG system's performance:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1912,
-                "end_line": 1918,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 3: Configure System and Quality Metrics",
-                  "",
-                  "Add metrics for system health and response quality monitoring:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1955,
-                "end_line": 1961,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 4: Request Tracking and Monitoring",
-                  "",
-                  "Implement comprehensive request tracking with success/error monitoring:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 1997,
-                "end_line": 2003,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 5: Error Handling and Alerting",
-                  "",
-                  "Handle request failures with comprehensive error tracking:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2030,
-                "end_line": 2036,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 6: Analytics System for Performance Analysis",
-                  "",
-                  "Create an analytics system to analyze system performance patterns:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2048,
-                "end_line": 2054,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 7: Performance Analysis Engine",
-                  "",
-                  "Implement comprehensive system performance analysis:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2086,
-                "end_line": 2092,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 8: Request Volume Analysis",
-                  "",
-                  "Analyze request patterns and volume trends:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2128,
-                "end_line": 2134,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 9: Performance Recommendations Generator",
-                  "",
-                  "Generate actionable recommendations based on performance analysis:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2160,
-                "end_line": 2166,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 10: Resource and Error Rate Recommendations",
-                  "",
-                  "Add recommendations for resource usage and error handling:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2188,
-                "end_line": 2194,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 11: Health Checking System",
-                  "",
-                  "Implement comprehensive health monitoring for all system components:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2209,
-                "end_line": 2215,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 12: Comprehensive Health Check Execution",
-                  "",
-                  "Run health checks across all system components:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2253,
-                "end_line": 2259,
-                "language": "",
-                "content": [
-                  "",
-                  "#### Step 13: Vector Store Health Check Implementation",
-                  "",
-                  "Implement specific health checks for critical components:",
-                  ""
-                ],
-                "line_count": 5
-              },
-              {
-                "start_line": 2290,
-                "end_line": 2310,
-                "language": "",
-                "content": [
-                  "",
-                  "This comprehensive monitoring system provides complete observability for your production RAG deployment. The modular design allows you to track performance, identify issues, and maintain high service quality across all components.",
-                  "",
-                  "---",
-                  "",
-                  "## Hands-On Exercise: Deploy Production RAG System",
-                  "",
-                  "Build and deploy a complete production-ready RAG system with enterprise integration, security, monitoring, and auto-scaling.",
-                  "",
-                  "**Requirements:**",
-                  "",
-                  "1. Containerized architecture with Kubernetes orchestration",
-                  "2. Enterprise integration with at least one data source",
-                  "3. Security implementation with authentication and authorization",
-                  "4. Real-time updates with incremental indexing",
-                  "5. Comprehensive monitoring with metrics and alerting",
-                  "",
-                  "**Production Deployment Architecture:**",
-                  ""
-                ],
-                "line_count": 19
+                "line_count": 3
               }
             ],
             "large_blocks": [],
@@ -1836,17 +651,23 @@
         "summary": {
           "total_files": 1,
           "files_with_issues": 1,
-          "total_issues": 1
+          "total_issues": 2
         },
         "files": [
           {
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_Production_RAG_Enterprise_Integration.md",
-            "total_issues": 1,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
+            "total_issues": 2,
             "issues": [
               {
+                "type": "missing_language_specifier",
+                "line": 543,
+                "message": "Code block at line 543 appears to be Python but lacks language specifier",
+                "suggestion": "Change \"```\" to \"```python\""
+              },
+              {
                 "type": "unclosed_code_block",
-                "line": 2401,
-                "message": "Code block starting at line 2401 is never closed",
+                "line": 872,
+                "message": "Code block starting at line 872 is never closed",
                 "suggestion": "Add closing ``` marker"
               }
             ],
@@ -1862,720 +683,238 @@
         "summary": {
           "total_files": 1,
           "files_needing_improvement": 1,
-          "total_issues": 83,
-          "average_quality_score": 24.545454545454547
+          "total_issues": 27,
+          "average_quality_score": 41.30434782608695
         },
         "files": [
           {
-            "total_code_blocks": 110,
-            "total_issues": 83,
+            "total_code_blocks": 46,
+            "total_issues": 27,
             "issues": [
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 65,
+                "line": 68,
                 "code_block_size": 8,
-                "word_count": 17,
-                "message": "Code block (8 lines) at line 53 has insufficient explanation (17 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 65,
-                "code_block_size": 8,
-                "message": "Code block at line 53 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 84,
-                "code_block_size": 13,
-                "word_count": 6,
-                "message": "Code block (13 lines) at line 68 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 84,
-                "code_block_size": 13,
-                "message": "Code block at line 68 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 112,
-                "code_block_size": 9,
-                "word_count": 9,
-                "message": "Code block (9 lines) at line 101 has insufficient explanation (9 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 121,
-                "code_block_size": 4,
-                "word_count": 9,
-                "message": "Code block (4 lines) at line 115 has insufficient explanation (9 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 121,
-                "code_block_size": 4,
-                "message": "Code block at line 115 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 139,
-                "code_block_size": 9,
-                "word_count": 16,
-                "message": "Code block (9 lines) at line 126 has insufficient explanation (16 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 139,
-                "code_block_size": 9,
-                "message": "Code block at line 126 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 163,
-                "code_block_size": 16,
-                "word_count": 16,
-                "message": "Code block (16 lines) at line 142 has insufficient explanation (16 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 163,
-                "code_block_size": 16,
-                "message": "Code block at line 142 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 178,
-                "code_block_size": 9,
-                "word_count": 6,
-                "message": "Code block (9 lines) at line 166 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 178,
-                "code_block_size": 9,
-                "message": "Code block at line 166 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 196,
-                "code_block_size": 9,
-                "word_count": 7,
-                "message": "Code block (9 lines) at line 181 has insufficient explanation (7 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 196,
-                "code_block_size": 9,
-                "message": "Code block at line 181 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 216,
-                "code_block_size": 8,
-                "word_count": 11,
-                "message": "Code block (8 lines) at line 205 has insufficient explanation (11 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 216,
-                "code_block_size": 8,
-                "message": "Code block at line 205 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 228,
-                "code_block_size": 7,
-                "word_count": 8,
-                "message": "Code block (7 lines) at line 219 has insufficient explanation (8 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 228,
-                "code_block_size": 7,
-                "message": "Code block at line 219 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 248,
-                "code_block_size": 10,
-                "word_count": 6,
-                "message": "Code block (10 lines) at line 233 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 248,
-                "code_block_size": 10,
-                "message": "Code block at line 233 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 272,
-                "code_block_size": 15,
-                "word_count": 11,
-                "message": "Code block (15 lines) at line 253 has insufficient explanation (11 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 272,
-                "code_block_size": 15,
-                "message": "Code block at line 253 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 285,
-                "code_block_size": 8,
-                "word_count": 6,
-                "message": "Code block (8 lines) at line 275 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 285,
-                "code_block_size": 8,
-                "message": "Code block at line 275 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 305,
-                "code_block_size": 11,
-                "word_count": 12,
-                "message": "Code block (11 lines) at line 290 has insufficient explanation (12 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 305,
-                "code_block_size": 11,
-                "message": "Code block at line 290 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 322,
-                "code_block_size": 10,
-                "word_count": 6,
-                "message": "Code block (10 lines) at line 308 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 322,
-                "code_block_size": 10,
-                "message": "Code block at line 308 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 344,
-                "code_block_size": 11,
-                "word_count": 11,
-                "message": "Code block (11 lines) at line 327 has insufficient explanation (11 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 363,
-                "code_block_size": 13,
-                "word_count": 7,
-                "message": "Code block (13 lines) at line 347 has insufficient explanation (7 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 363,
-                "code_block_size": 13,
-                "message": "Code block at line 347 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 381,
-                "code_block_size": 9,
-                "word_count": 12,
-                "message": "Code block (9 lines) at line 368 has insufficient explanation (12 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 393,
-                "code_block_size": 6,
-                "word_count": 10,
-                "message": "Code block (6 lines) at line 384 has insufficient explanation (10 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 393,
-                "code_block_size": 6,
-                "message": "Code block at line 384 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 405,
-                "code_block_size": 6,
-                "word_count": 13,
-                "message": "Code block (6 lines) at line 396 has insufficient explanation (13 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 405,
-                "code_block_size": 6,
-                "message": "Code block at line 396 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 424,
-                "code_block_size": 12,
-                "word_count": 13,
-                "message": "Code block (12 lines) at line 408 has insufficient explanation (13 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 424,
-                "code_block_size": 12,
-                "message": "Code block at line 408 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 441,
-                "code_block_size": 10,
-                "word_count": 13,
-                "message": "Code block (10 lines) at line 427 has insufficient explanation (13 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 441,
-                "code_block_size": 10,
-                "message": "Code block at line 427 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 459,
-                "code_block_size": 12,
-                "word_count": 12,
-                "message": "Code block (12 lines) at line 444 has insufficient explanation (12 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 459,
-                "code_block_size": 12,
-                "message": "Code block at line 444 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 476,
-                "code_block_size": 9,
-                "word_count": 15,
-                "message": "Code block (9 lines) at line 462 has insufficient explanation (15 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 476,
-                "code_block_size": 9,
-                "message": "Code block at line 462 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 494,
-                "code_block_size": 12,
-                "word_count": 13,
-                "message": "Code block (12 lines) at line 479 has insufficient explanation (13 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 511,
-                "code_block_size": 10,
-                "word_count": 12,
-                "message": "Code block (10 lines) at line 497 has insufficient explanation (12 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 511,
-                "code_block_size": 10,
-                "message": "Code block at line 497 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 531,
-                "code_block_size": 11,
-                "word_count": 10,
-                "message": "Code block (11 lines) at line 514 has insufficient explanation (10 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 531,
-                "code_block_size": 11,
-                "message": "Code block at line 514 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 548,
-                "code_block_size": 10,
-                "word_count": 5,
-                "message": "Code block (10 lines) at line 534 has insufficient explanation (5 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 548,
-                "code_block_size": 10,
-                "message": "Code block at line 534 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 574,
-                "code_block_size": 9,
-                "word_count": 12,
-                "message": "Code block (9 lines) at line 559 has insufficient explanation (12 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 574,
-                "code_block_size": 9,
-                "message": "Code block at line 559 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 588,
-                "code_block_size": 8,
-                "word_count": 6,
-                "message": "Code block (8 lines) at line 577 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 588,
-                "code_block_size": 8,
-                "message": "Code block at line 577 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "generic_explanation",
-                "severity": "medium",
-                "line": 711,
-                "code_block_size": 4,
-                "message": "Code block at line 704 has generic/lazy explanation",
-                "suggestion": "Replace generic phrases with specific, educational explanations"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 951,
-                "code_block_size": 5,
-                "word_count": 12,
-                "message": "Code block (5 lines) at line 941 has insufficient explanation (12 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 951,
-                "code_block_size": 5,
-                "message": "Code block at line 941 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 965,
-                "code_block_size": 9,
-                "word_count": 11,
-                "message": "Code block (9 lines) at line 954 has insufficient explanation (11 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 965,
-                "code_block_size": 9,
-                "message": "Code block at line 954 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 978,
-                "code_block_size": 6,
-                "word_count": 13,
-                "message": "Code block (6 lines) at line 968 has insufficient explanation (13 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 978,
-                "code_block_size": 6,
-                "message": "Code block at line 968 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 997,
-                "code_block_size": 11,
-                "word_count": 12,
-                "message": "Code block (11 lines) at line 981 has insufficient explanation (12 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 997,
-                "code_block_size": 11,
-                "message": "Code block at line 981 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 1022,
-                "code_block_size": 18,
-                "word_count": 9,
-                "message": "Code block (18 lines) at line 1000 has insufficient explanation (9 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1022,
-                "code_block_size": 18,
-                "message": "Code block at line 1000 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 1034,
-                "code_block_size": 7,
-                "word_count": 11,
-                "message": "Code block (7 lines) at line 1025 has insufficient explanation (11 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 1051,
-                "code_block_size": 10,
                 "word_count": 1,
-                "message": "Code block (10 lines) at line 1037 has insufficient explanation (1 words)",
+                "message": "Code block (8 lines) at line 56 has insufficient explanation (1 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 1051,
-                "code_block_size": 10,
-                "message": "Code block at line 1037 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1246,
-                "code_block_size": 12,
-                "message": "Code block at line 1229 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1261,
-                "code_block_size": 9,
-                "message": "Code block at line 1249 explanation lacks educational context",
+                "line": 68,
+                "code_block_size": 8,
+                "message": "Code block at line 56 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "insufficient_explanation",
                 "severity": "high",
-                "line": 1358,
+                "line": 115,
+                "code_block_size": 8,
+                "word_count": 1,
+                "message": "Code block (8 lines) at line 105 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 115,
+                "code_block_size": 8,
+                "message": "Code block at line 105 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 126,
+                "code_block_size": 8,
+                "word_count": 1,
+                "message": "Code block (8 lines) at line 116 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 126,
+                "code_block_size": 8,
+                "message": "Code block at line 116 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 143,
+                "code_block_size": 13,
+                "word_count": 7,
+                "message": "Code block (13 lines) at line 127 has insufficient explanation (7 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 143,
+                "code_block_size": 13,
+                "message": "Code block at line 127 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 158,
+                "code_block_size": 8,
+                "word_count": 1,
+                "message": "Code block (8 lines) at line 146 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 158,
+                "code_block_size": 8,
+                "message": "Code block at line 146 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 176,
+                "code_block_size": 13,
+                "word_count": 1,
+                "message": "Code block (13 lines) at line 159 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 176,
+                "code_block_size": 13,
+                "message": "Code block at line 159 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 188,
+                "code_block_size": 9,
+                "word_count": 1,
+                "message": "Code block (9 lines) at line 177 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 188,
+                "code_block_size": 9,
+                "message": "Code block at line 177 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 199,
+                "code_block_size": 7,
+                "word_count": 1,
+                "message": "Code block (7 lines) at line 189 has insufficient explanation (1 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "lacks_educational_context",
+                "severity": "medium",
+                "line": 199,
+                "code_block_size": 7,
+                "message": "Code block at line 189 explanation lacks educational context",
+                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 211,
+                "code_block_size": 9,
+                "word_count": 7,
+                "message": "Code block (9 lines) at line 200 has insufficient explanation (7 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 532,
+                "code_block_size": 3,
+                "word_count": 6,
+                "message": "Code block (3 lines) at line 523 has insufficient explanation (6 words)",
+                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
+              },
+              {
+                "type": "insufficient_explanation",
+                "severity": "high",
+                "line": 744,
                 "code_block_size": 4,
                 "word_count": 5,
-                "message": "Code block (4 lines) at line 1347 has insufficient explanation (5 words)",
+                "message": "Code block (4 lines) at line 733 has insufficient explanation (5 words)",
                 "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
               },
               {
                 "type": "lacks_educational_context",
                 "severity": "medium",
-                "line": 1358,
+                "line": 744,
                 "code_block_size": 4,
-                "message": "Code block at line 1347 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 1552,
-                "code_block_size": 6,
-                "word_count": 7,
-                "message": "Code block (6 lines) at line 1537 has insufficient explanation (7 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1552,
-                "code_block_size": 6,
-                "message": "Code block at line 1537 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 1868,
-                "code_block_size": 6,
-                "word_count": 7,
-                "message": "Code block (6 lines) at line 1853 has insufficient explanation (7 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 1868,
-                "code_block_size": 6,
-                "message": "Code block at line 1853 explanation lacks educational context",
-                "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
-              },
-              {
-                "type": "insufficient_explanation",
-                "severity": "high",
-                "line": 2311,
-                "code_block_size": 11,
-                "word_count": 6,
-                "message": "Code block (11 lines) at line 2290 has insufficient explanation (6 words)",
-                "suggestion": "Expand explanation to at least 30-50 words covering functionality, purpose, and educational insights"
-              },
-              {
-                "type": "lacks_educational_context",
-                "severity": "medium",
-                "line": 2311,
-                "code_block_size": 11,
-                "message": "Code block at line 2290 explanation lacks educational context",
+                "message": "Code block at line 733 explanation lacks educational context",
                 "suggestion": "Add context explaining WHY this approach is used and HOW it benefits the student"
               },
               {
                 "type": "consecutive_code_blocks",
                 "severity": "medium",
-                "line": 872,
-                "message": "Consecutive code blocks at lines 860 and 875 without intermediate explanation",
+                "line": 67,
+                "message": "Consecutive code blocks at lines 56 and 69 without intermediate explanation",
                 "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               },
               {
                 "type": "consecutive_code_blocks",
                 "severity": "medium",
-                "line": 1050,
-                "message": "Consecutive code blocks at lines 1037 and 1052 without intermediate explanation",
+                "line": 114,
+                "message": "Consecutive code blocks at lines 105 and 116 without intermediate explanation",
                 "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               },
               {
                 "type": "consecutive_code_blocks",
                 "severity": "medium",
-                "line": 1344,
-                "message": "Consecutive code blocks at lines 1332 and 1347 without intermediate explanation",
+                "line": 125,
+                "message": "Consecutive code blocks at lines 116 and 127 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 157,
+                "message": "Consecutive code blocks at lines 146 and 159 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 175,
+                "message": "Consecutive code blocks at lines 159 and 177 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 187,
+                "message": "Consecutive code blocks at lines 177 and 189 without intermediate explanation",
+                "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
+              },
+              {
+                "type": "consecutive_code_blocks",
+                "severity": "medium",
+                "line": 198,
+                "message": "Consecutive code blocks at lines 189 and 200 without intermediate explanation",
                 "suggestion": "Add transitional explanation between code blocks to maintain narrative flow"
               }
             ],
             "needs_improvement": true,
-            "quality_score": 24.545454545454547,
-            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_Production_RAG_Enterprise_Integration.md"
+            "quality_score": 41.30434782608695,
+            "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md"
           }
         ]
       },
@@ -2584,11 +923,11 @@
   },
   "priority_files": [
     {
-      "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_Production_RAG_Enterprise_Integration.md",
-      "file_name": "Session9_Production_RAG_Enterprise_Integration.md",
-      "priority_score": 15.09090909090909,
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
+      "file_name": "Session9_ModuleB_Enterprise_Architecture.md",
+      "priority_score": 11.73913043478261,
       "issues": [
-        "24.5% explanation quality"
+        "41.3% explanation quality"
       ]
     }
   ]
