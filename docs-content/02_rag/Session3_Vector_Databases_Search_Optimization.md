@@ -121,6 +121,11 @@ The client initialization includes critical production settings. Setting `allow_
             collection = self.client.get_collection(self.collection_name)
             print(f"Loaded existing collection: {self.collection_name}")
         except ValueError:
+```
+
+The collection initialization follows a robust pattern: try to load existing collections first, then create new ones if needed. This approach prevents data loss during application restarts while enabling new deployments to bootstrap automatically. The ValueError exception specifically indicates a missing collection in ChromaDB's API.
+
+```python
             # Create new collection with HNSW optimization
             collection = self.client.create_collection(
                 name=self.collection_name,
@@ -146,7 +151,11 @@ The collection initialization demonstrates proper HNSW parameter tuning for prod
                            batch_size: int = 1000):
         """Add documents in optimized batches."""
         total_docs = len(documents)
-        
+```
+
+The batch insertion method signature demonstrates best practices for vector database operations. All four data components (documents, embeddings, metadata, ids) must have matching lengths and be processed together. The 1000-document default batch size balances memory efficiency with insertion speed based on empirical testing across different hardware configurations.
+
+```python
         for i in range(0, total_docs, batch_size):
             batch_end = min(i + batch_size, total_docs)
             
@@ -174,7 +183,11 @@ Batch insertion is critical for performance - inserting documents one-by-one can
         )
         
         return self._format_results(results)
-    
+```
+
+The similarity search method demonstrates ChromaDB's query interface, which requires queries as text arrays even for single queries. The optional filters parameter enables metadata-based filtering, allowing queries like "find similar documents from the engineering team" or "search only recent documents." This filtering happens at the database level, improving performance over post-query filtering.
+
+```python
     def _format_results(self, raw_results):
         """Format ChromaDB results for consistent interface."""
         formatted = []
@@ -1197,7 +1210,11 @@ The benchmarking framework simulates realistic production load through controlle
         tasks = [bounded_search(query) for query in test_queries]
         results = await asyncio.gather(*tasks, return_exceptions=True)
         total_time = time.time() - start_time
-        
+```
+
+The concurrent execution pattern uses asyncio.gather() to run all queries simultaneously within the semaphore limits. The return_exceptions=True parameter ensures that individual query failures don't crash the entire benchmark, enabling realistic testing under adverse conditions. This approach provides accurate throughput measurement under controlled load.
+
+```python
         # Analyze results
         successful_searches = [r for r in results if not isinstance(r, Exception)]
         failed_searches = [r for r in results if isinstance(r, Exception)]
