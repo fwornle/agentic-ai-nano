@@ -840,7 +840,11 @@ Determine when and how to scale services:
         # Respect cooldown period to prevent rapid scaling
         if current_time - policy['last_scaling_action'] < policy['scaling_cooldown']:
             return {'action': 'none', 'reason': 'cooldown_active'}
+```
 
+Scaling decision evaluation starts with cooldown period enforcement to prevent scaling oscillation. The cooldown mechanism protects RAG systems from rapid scale up/down cycles that could destabilize service performance and waste computational resources.
+
+```python
         # Check if any scale-up condition is met
         scale_up_triggered = (
             metrics['cpu_usage'] > self.scale_up_thresholds['cpu_threshold'] or
@@ -849,7 +853,11 @@ Determine when and how to scale services:
             metrics['queue_size'] > self.scale_up_thresholds['queue_size_threshold'] or
             metrics['error_rate'] > self.scale_up_thresholds['error_rate_threshold']
         )
+```
 
+Scale-up evaluation uses OR logic - any single threshold breach triggers scaling action. This aggressive approach ensures RAG system responsiveness by scaling at the first sign of performance degradation, whether from CPU load, memory pressure, slow queries, queue buildup, or error rates.
+
+```python
         # Scale up if conditions are met and within limits
         if scale_up_triggered and policy['current_instances'] < policy['max_instances']:
             return {
@@ -861,6 +869,9 @@ Determine when and how to scale services:
                 'reason': 'high_load_detected',
                 'metrics': metrics
             }
+```
+
+Scale-up execution respects maximum instance limits to prevent resource exhaustion. The system scales incrementally (adding one instance at a time) for controlled capacity increases while including triggering metrics for monitoring and debugging purposes.
 ```
 
 #### Step 9: Scale-Down Decision Logic
@@ -1081,7 +1092,11 @@ Connection testing immediately validates authentication and network connectivity
             raise RuntimeError("SharePoint client not initialized")
 
         documents = []
+```
 
+Document retrieval supports both full library scanning and targeted folder access. The modified_since parameter enables incremental updates, crucial for RAG systems managing large enterprise document repositories. Early validation prevents operations on uninitialized connections.
+
+```python
         try:
             # Get document library
             if folder_path:
@@ -1091,7 +1106,11 @@ Connection testing immediately validates authentication and network connectivity
 
             # Get files
             files = folder.files.get().execute_query()
+```
 
+Folder selection provides flexible access patterns - specific folders for targeted updates or the entire library for comprehensive indexing. The execute_query() method batches SharePoint API calls for optimal performance, reducing network round trips in enterprise network environments.
+
+```python
             for file in files:
                 # Filter by modification date if specified
                 if modified_since and file.time_last_modified < modified_since:
@@ -1099,7 +1118,11 @@ Connection testing immediately validates authentication and network connectivity
 
                 # Download file content
                 file_content = file.get_content().execute_query()
+```
 
+Date-based filtering enables efficient incremental processing by skipping unmodified documents. Content downloading retrieves the full file binary data, supporting various document formats (PDF, Word, PowerPoint) commonly found in enterprise SharePoint environments.
+
+```python
                 documents.append({
                     'id': file.unique_id,
                     'name': file.name,
@@ -1114,12 +1137,19 @@ Connection testing immediately validates authentication and network connectivity
                         'version': file.ui_version_label
                     }
                 })
+```
 
+Document metadata collection captures essential information for RAG processing including authorship, versioning, and content type. This metadata enables document source attribution in RAG responses and supports content-type-specific processing pipelines.
+
+```python
             return documents
 
         except Exception as e:
             self.logger.error(f"SharePoint document retrieval error: {e}")
             return []
+```
+
+Error handling ensures partial failures don't break the entire retrieval process, returning available documents while logging issues for operations teams. This resilient approach maintains RAG system availability during enterprise system connectivity issues.
 
 ```
 
