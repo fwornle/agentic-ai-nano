@@ -819,8 +819,6 @@ The enrichment stage constructs reasoning pathways that enable logically coheren
         }
 ```
 
-```
-
 #### Step 2: Personalized PageRank for Semantic Traversal
 
 Graph-centric optimization applies final structural improvements and creates the complete NodeRAG system ready for deployment. The enrichment stage produces reasoning pathways that enable sophisticated multi-hop queries while maintaining computational efficiency.
