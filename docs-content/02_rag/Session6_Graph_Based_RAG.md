@@ -2432,7 +2432,7 @@ class HybridGraphVectorRAG:
             'fusion_time': [],
             'total_query_time': []
         }
-```python
+```
 
 **Production-ready performance monitoring** tracks key metrics across the hybrid pipeline. This enables performance optimization, bottleneck identification, and SLA monitoring in enterprise deployments. Tracking each component's latency separately helps identify whether performance issues stem from vector search, graph traversal, or fusion logic.
 
