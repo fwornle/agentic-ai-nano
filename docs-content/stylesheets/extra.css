@@ -255,50 +255,6 @@
     color: #81c784;
 }
 
-/* Collapsible navigation enhancements */
-.md-nav__item--nested > .md-nav__link {
-    position: relative;
-    cursor: pointer;
-}
-
-/* Add expand/collapse indicator */
-.md-nav__item--nested > .md-nav__link::after {
-    content: '▾';
-    position: absolute;
-    right: 0.6rem;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: transform 0.25s ease;
-    opacity: 0.5;
-    font-size: 0.8em;
-}
-
-/* Rotate indicator when collapsed */
-.md-nav__item--nested:not(.md-nav__item--active) > .md-nav__link::after,
-.md-nav__item--nested .md-nav__toggle:not(:checked) ~ .md-nav__link::after {
-    transform: translateY(-50%) rotate(-90deg);
-}
-
-/* Smooth transition for collapsing */
-.md-nav__item--nested .md-nav {
-    transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-/* Visual feedback for active but collapsed sections */
-.md-nav__item--active.md-nav--collapsed > .md-nav__link {
-    background-color: var(--md-default-bg-color--light);
-    border-left: 3px solid var(--md-primary-fg-color);
-}
-
-/* Ensure proper spacing for nested items */
-.md-nav__item--nested {
-    margin-bottom: 0.2rem;
-}
-
-/* Hover effect for collapsible sections */
-.md-nav__item--nested > .md-nav__link:hover {
-    background-color: var(--md-default-bg-color--light);
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -313,10 +269,5 @@
     .learning-path {
         display: block;
         margin: 0.25rem 0;
-    }
-    
-    /* Mobile navigation adjustments */
-    .md-nav__item--nested > .md-nav__link::after {
-        right: 1rem;
     }
 }
