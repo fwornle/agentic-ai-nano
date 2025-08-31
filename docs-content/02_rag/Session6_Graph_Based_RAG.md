@@ -1240,8 +1240,6 @@ class Neo4jGraphManager:
 
 **Performance monitoring and metrics collection** provides essential feedback for production optimization. These metrics enable database administrators to monitor storage performance, identify bottlenecks, and optimize batch sizes for maximum throughput. The entities-per-second metric is particularly valuable for capacity planning in enterprise deployments.
 
-```
-
 #### Step 4: Batch Entity Storage
 
 ```python
@@ -2329,13 +2327,13 @@ For queries requiring connection discovery, graph search is unmatched.
 
 Hybrid search combines both approaches strategically to overcome individual limitations:
 
-**Stage 1: Vector Search**
+##### Stage 1: Vector Search**
 
 - Identifies semantically relevant content using embedding similarity
 - Captures documents and entities matching query's semantic intent
 - Provides comprehensive coverage of directly relevant information
 
-**Stage 2: Graph Traversal**
+##### Stage 2: Graph Traversal**
 
 - Discovers related information through relationships
 - Follows logical pathways to find connected knowledge
@@ -2343,13 +2341,13 @@ Hybrid search combines both approaches strategically to overcome individual limi
 
 #### Intelligent Integration and Results
 
-**Stage 3: Intelligent Fusion**
+##### Stage 3: Intelligent Fusion**
 
 - Combines results based on query characteristics
 - Balances vector similarity scores with graph centrality
 - Uses relationship confidence for optimal result ranking
 
-**Stage 4: Adaptive Weighting**
+##### Stage 4: Adaptive Weighting**
 
 - Vector search emphasis: For semantic queries
 - Graph traversal emphasis: For relationship queries

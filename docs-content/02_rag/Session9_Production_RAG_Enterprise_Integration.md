@@ -875,7 +875,11 @@ Implement conservative scale-down with stability requirements:
             metrics['avg_response_time'] < self.scale_down_thresholds['response_time_threshold'] and
             metrics['queue_size'] < self.scale_down_thresholds['queue_size_threshold']
         )
+```
 
+Scale-down evaluation requires ALL conditions to be met simultaneously, implementing a conservative approach that prevents premature resource reduction. This comprehensive check ensures RAG services maintain performance margins and can handle sudden load increases without degradation.
+
+```python
         # Track stability over time
         policy['stability_window'].append({
             'timestamp': current_time,
@@ -888,7 +892,11 @@ Implement conservative scale-down with stability requirements:
             measurement for measurement in policy['stability_window']
             if current_time - measurement['timestamp'] <= stable_duration
         ]
+```
 
+Stability tracking maintains a sliding window of performance measurements to ensure consistent low usage before scaling down. The window automatically purges old measurements, keeping memory usage bounded while maintaining sufficient historical data for reliable scaling decisions.
+
+```python
         # Scale down only if consistently stable
         if (len(policy['stability_window']) > 0 and
             all(m['stable'] for m in policy['stability_window']) and
@@ -906,6 +914,9 @@ Implement conservative scale-down with stability requirements:
             }
 
         return {'action': 'none', 'reason': 'no_scaling_needed'}
+```
+
+Scale-down execution only occurs after sustained stability across the entire monitoring window, protecting against oscillation. The system reduces instances incrementally and respects minimum instance limits, ensuring RAG service availability during scale-down operations.
 ```
 
 ---
@@ -1038,7 +1049,11 @@ class SharePointConnector:
 
             credentials = ClientCredential(self.client_id, self.client_secret)
             self.sp_client = ClientContext(self.site_url).with_credentials(credentials)
+```
 
+SharePoint connection initialization uses OAuth 2.0 client credentials flow for secure enterprise authentication. The ClientContext provides the foundation for all SharePoint operations, while ClientCredential handles the OAuth token exchange automatically. This approach is preferred for production systems as it avoids storing user passwords and provides proper enterprise security.
+
+```python
             # Test connection
             web = self.sp_client.web.get().execute_query()
 
@@ -1054,6 +1069,9 @@ class SharePointConnector:
                 'success': False,
                 'error': str(e)
             }
+```
+
+Connection testing immediately validates authentication and network connectivity by retrieving basic site information. The returned metadata helps with debugging connection issues and provides confirmation of successful enterprise system integration. Error handling ensures graceful failure reporting for operations teams.
 
     async def retrieve_documents(self, folder_path: str = None,
                                modified_since: datetime = None) -> List[Dict[str, Any]]:
@@ -1114,7 +1132,11 @@ class EnterpriseAuthManager:
     def __init__(self, auth_config: Dict[str, Any]):
         self.config = auth_config
         self.auth_providers = {}
+```
 
+The Enterprise Authentication Manager provides centralized authentication for RAG systems in enterprise environments. It initializes with a configuration dictionary that defines available authentication methods and policies, enabling flexible authentication strategy deployment.
+
+```python
         # Initialize authentication providers
         if 'active_directory' in auth_config:
             self.auth_providers['ad'] = ActiveDirectoryAuth(auth_config['active_directory'])
@@ -1122,9 +1144,16 @@ class EnterpriseAuthManager:
             self.auth_providers['oauth2'] = OAuth2Auth(auth_config['oauth2'])
         if 'saml' in auth_config:
             self.auth_providers['saml'] = SAMLAuth(auth_config['saml'])
+```
 
+Multiple authentication provider support enables integration with diverse enterprise identity systems. Active Directory handles Windows-based authentication, OAuth2 supports modern API-based flows, and SAML enables single sign-on with identity federation services. This flexibility accommodates various organizational authentication requirements.
+
+```python
         # Role-based access control
         self.rbac_manager = RBACManager(auth_config.get('rbac', {}))
+```
+
+Role-based access control integration provides granular permission management for RAG system resources. The RBAC manager handles user role assignments, resource permissions, and access policy enforcement, enabling fine-grained security controls appropriate for enterprise data governance requirements.
 
     async def authenticate_user(self, credentials: Dict[str, Any]) -> Dict[str, Any]:
         """Authenticate user using configured providers."""
@@ -1136,7 +1165,11 @@ class EnterpriseAuthManager:
                 'authenticated': False,
                 'error': f'Authentication method {auth_method} not supported'
             }
+```
 
+User authentication begins by selecting the appropriate authentication method based on client credentials. OAuth2 serves as the default for modern applications, while other methods accommodate legacy systems. Provider validation ensures only configured authentication methods are accepted, preventing security vulnerabilities.
+
+```python
         try:
             auth_result = await self.auth_providers[auth_method].authenticate(credentials)
 
@@ -1147,7 +1180,11 @@ class EnterpriseAuthManager:
                 )
 
                 auth_result['permissions'] = user_permissions
+```
 
+Successful authentication triggers immediate permission retrieval, creating a complete user context for authorization decisions. This approach minimizes subsequent permission lookups and provides comprehensive access control information for RAG system components.
+
+```python
                 # Create session token
                 session_token = self._create_session_token(auth_result['user_info'])
                 auth_result['session_token'] = session_token
@@ -1159,6 +1196,9 @@ class EnterpriseAuthManager:
                 'authenticated': False,
                 'error': f'Authentication failed: {str(e)}'
             }
+```
+
+Session token creation enables stateless authentication across RAG services. Tokens typically include user identity, permissions, and expiration information, supporting distributed service architectures. Error handling provides secure failure reporting without exposing sensitive authentication details.
 
     async def authorize_request(self, session_token: str,
                               resource: str, action: str) -> Dict[str, Any]:
@@ -1172,7 +1212,11 @@ class EnterpriseAuthManager:
                     'authorized': False,
                     'error': 'Invalid or expired session token'
                 }
+```
 
+Request authorization validates session tokens before checking resource permissions. Token validation confirms user identity, token expiration, and integrity, providing the foundation for subsequent permission checks. Invalid or expired tokens result in immediate authorization denial.
+
+```python
             # Check permissions
             authorized = await self.rbac_manager.check_permission(
                 user_info, resource, action
@@ -1183,12 +1227,19 @@ class EnterpriseAuthManager:
                 'user_id': user_info['user_id'],
                 'permissions_checked': f'{resource}:{action}'
             }
+```
 
+Permission checking evaluates user roles against requested resource actions using the RBAC manager. The system returns detailed authorization results including user identification and the specific permission evaluated, supporting audit trails and debugging.
+
+```python
         except Exception as e:
             return {
                 'authorized': False,
                 'error': f'Authorization failed: {str(e)}'
             }
+```
+
+Error handling ensures authorization failures default to denial, maintaining security in edge cases. Exception details are logged for debugging while avoiding exposure of sensitive authorization logic to clients.
 
 class RBACManager:
     """Role-Based Access Control manager for RAG systems."""
