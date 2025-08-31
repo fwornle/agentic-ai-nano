@@ -73,7 +73,7 @@ class ZeroTrustRAGSecurity:
         self.encryption_manager = EncryptionManager()
 ```
 
-The network security layer provides the foundation for zero-trust architecture. NetworkSegmentation creates isolated security zones for different RAG components, NetworkTrafficInspector monitors all traffic patterns for anomalies and threats, and EncryptionManager ensures all data is encrypted both at rest and in transit. This three-component approach secures the network infrastructure that RAG systems depend on.
+The network security layer provides the foundation for zero-trust architecture implementation in enterprise RAG systems. NetworkSegmentation creates isolated security zones for different RAG components, preventing lateral movement and limiting blast radius in case of compromise. NetworkTrafficInspector continuously monitors all network traffic patterns to detect anomalies, suspicious behaviors, and potential security threats before they impact system integrity. EncryptionManager ensures comprehensive data protection by enforcing encryption both at rest (stored data) and in transit (data movement between components). This layered network security approach creates defense-in-depth protection that is essential for RAG systems handling sensitive enterprise data across distributed architectures.
 
 ```python
         # Data protection components
@@ -82,7 +82,7 @@ The network security layer provides the foundation for zero-trust architecture. 
         self.audit_engine = SecurityAuditEngine()
 ```
 
-The data protection layer focuses on securing the information that flows through RAG systems. DataSecurityClassifier automatically categorizes data sensitivity levels, DynamicAccessController enforces real-time access decisions based on user risk profiles, and SecurityAuditEngine logs all security-relevant events for compliance and threat analysis. These components ensure that sensitive data in RAG systems receives appropriate protection.
+The data protection layer implements sophisticated information security controls tailored for RAG system requirements. DataSecurityClassifier employs machine learning and rule-based techniques to automatically categorize data by sensitivity levels (public, internal, confidential, restricted), enabling appropriate protection measures to be applied automatically. DynamicAccessController moves beyond static role-based access control to make real-time authorization decisions based on contextual factors like user behavior, device trust level, and access patterns. SecurityAuditEngine maintains comprehensive audit logs of all security-relevant events including access attempts, data movements, and policy violations, providing the evidence trail required for compliance frameworks and security investigations. This integrated approach ensures that every piece of data in RAG systems receives protection appropriate to its sensitivity level.
 
 ```python
     async def implement_zero_trust_architecture(self) -> Dict[str, Any]:
@@ -113,6 +113,8 @@ Zero-trust implementation begins with network segmentation that creates four dis
         implementation_results['identity_management'] = iam_setup
 ```
 
+The Identity and Access Management configuration implements enterprise-grade authentication and authorization controls essential for zero-trust RAG systems. Multi-factor authentication (MFA) requires users to provide multiple forms of verification, significantly reducing the risk of compromised credentials. Continuous verification goes beyond initial login to repeatedly validate user identity throughout the session, detecting anomalous behavior that could indicate account compromise. Risk-based authentication adapts security requirements based on real-time risk assessment - high-risk scenarios might require additional verification or restrict access entirely. Privileged access management (PAM) provides enhanced controls for administrative users who have elevated permissions, including just-in-time access provisioning and enhanced monitoring. This comprehensive IAM approach ensures that only verified, authorized users can access RAG system resources.
+
 ```python
         # 3. Data Protection
         data_protection = await self.data_classifier.implement_data_protection({
@@ -123,6 +125,8 @@ Zero-trust implementation begins with network segmentation that creates four dis
         })
         implementation_results['data_protection'] = data_protection
 ```
+
+Data protection implementation establishes comprehensive safeguards for information security across all RAG system data flows. The four-tier classification system (public, internal, confidential, restricted) enables graduated protection measures appropriate to data sensitivity levels. Encryption_at_rest protects stored data including vector databases, knowledge graphs, and cached responses using enterprise-grade encryption algorithms. Encryption_in_transit secures all data movement between RAG components using protocols like TLS 1.3, preventing interception and tampering. Data_loss_prevention (DLP) systems monitor for unauthorized data exfiltration attempts, blocking potential data breaches before sensitive information leaves the enterprise environment. This layered protection approach ensures that enterprise data maintains appropriate security throughout its entire lifecycle within RAG systems.
 
 ```python
         # 4. Threat Detection
@@ -140,6 +144,8 @@ Zero-trust implementation begins with network segmentation that creates four dis
             'compliance_status': await self._check_compliance_status()
         }
 ```
+
+The comprehensive threat detection system completes the zero-trust architecture by providing continuous security monitoring and intelligent threat response capabilities tailored for RAG system threats. Behavioral_analytics employs machine learning algorithms to establish baseline patterns of normal RAG system operation and user behavior, then detects deviations that could indicate security threats, compromised accounts, or malicious activity. Anomaly_detection identifies unusual system behaviors including unexpected data access patterns, abnormal query volumes, or performance characteristics that deviate from established norms, potentially signaling attacks or system compromise. Threat_intelligence_integration connects to external security feeds and threat databases to identify known attack patterns, malicious IP addresses, and emerging threats specifically relevant to AI/ML systems and RAG architectures. Real_time_monitoring provides immediate visibility and alerting for security events, enabling rapid incident response before threats can impact system integrity, data confidentiality, or service availability. This multi-layered detection approach ensures comprehensive security coverage across all RAG components while minimizing false positives that could disrupt legitimate operations.
 
 ### Step 2: Dynamic Access Control System
 
@@ -244,7 +250,7 @@ class EnterpriseDataGovernance:
         self.quality_monitor = DataQualityMonitor()
 ```
 
-The data governance framework initializes with components for comprehensive data management. Data cataloging provides visibility, lineage tracking enables impact analysis, and quality monitoring ensures data integrity throughout the RAG pipeline.
+Enterprise data governance addresses the critical challenges of managing data across complex RAG systems at enterprise scale while meeting regulatory and operational requirements. The DataCatalog serves as the central registry that creates a comprehensive, searchable inventory of all data sources including their schemas, metadata, business context, and usage patterns, enabling efficient data discovery and detailed impact analysis for system changes. DataLineageTracker maintains detailed maps of how data flows and transforms through RAG pipelines from source systems through embeddings to final responses, which is essential for regulatory compliance (proving data provenance), debugging performance issues, and understanding the impact of upstream data changes. DataQualityMonitor implements continuous validation of data integrity, completeness, accuracy, and freshness using automated checks and thresholds, which is critical for maintaining RAG system accuracy and preventing degraded user experiences from poor-quality data. This comprehensive governance foundation prevents organizational data silos, ensures regulatory compliance across multiple frameworks, and maintains consistent data quality standards throughout the entire enterprise RAG ecosystem.
 
 ```python
         # Classification and protection
@@ -254,7 +260,11 @@ The data governance framework initializes with components for comprehensive data
         # Governance enforcement
         self.policy_enforcer = GovernancePolicyEnforcer()
         self.compliance_monitor = ComplianceMonitor()
-        
+```
+
+The classification and protection layer implements intelligent data security controls that automatically adapt to the sensitivity and regulatory requirements of different data types. AutomatedDataClassifier uses machine learning and rule-based techniques to automatically identify and categorize data by sensitivity levels (PII, PHI, financial, proprietary) and regulatory requirements, enabling consistent application of appropriate protection measures without manual intervention. DataProtectionEngine applies security controls based on classification results, including encryption, access restrictions, data masking, and retention policies. The governance enforcement components ensure organizational policies are consistently applied across all RAG operations. GovernancePolicyEnforcer translates high-level organizational policies into executable technical controls that are automatically applied and monitored across distributed RAG components. ComplianceMonitor continuously verifies that data governance policies are being followed and provides alerts for any violations or compliance gaps requiring attention.
+
+```python        
     async def implement_data_governance(self, data_sources: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Implement comprehensive data governance across all RAG data sources."""
         

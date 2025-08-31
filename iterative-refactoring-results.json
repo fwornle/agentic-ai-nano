@@ -1,16 +1,16 @@
 {
   "summary": {
     "total_files": 1,
-    "successful_files": 0,
+    "successful_files": 1,
     "total_formatting_fixes": 0
   },
   "files": [
     {
-      "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_Production_RAG_Enterprise_Integration.md",
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/02_rag/Session9_ModuleB_Enterprise_Architecture.md",
       "iterations": 1,
       "large_blocks_eliminated": 0,
       "formatting_issues_fixed": 0,
-      "success": false
+      "success": true
     }
   ]
 }

@@ -42,29 +42,23 @@ NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pa
 
 ### NodeRAG's Six Specialized Node Types
 
-**1. Semantic Unit Nodes** - Abstract concepts and themes
+1. **Semantic Unit Nodes** - Abstract concepts and themes
+   - Example: "Supply Chain Management" connecting related methodologies
 
-- Example: "Supply Chain Management" connecting related methodologies
+2. **Entity Nodes** - Concrete entities with rich metadata
+   - Example: "Apple Inc." with subsidiaries and partnerships
 
-**2. Entity Nodes** - Concrete entities with rich metadata
+3. **Relationship Nodes** - Explicit connections with evidence
+   - Example: "Partnership" linking Apple and Foxconn with details
 
-- Example: "Apple Inc." with subsidiaries and partnerships
+4. **Attribute Nodes** - Properties and characteristics
+   - Example: "Revenue: $394.3B" with temporal information
 
-**3. Relationship Nodes** - Explicit connections with evidence
+5. **Document Nodes** - Original source segments
+   - Example: SEC filing containing partnership disclosures
 
-- Example: "Partnership" linking Apple and Foxconn with details
-
-**4. Attribute Nodes** - Properties and characteristics
-
-- Example: "Revenue: $394.3B" with temporal information
-
-**5. Document Nodes** - Original source segments
-
-- Example: SEC filing containing partnership disclosures
-
-**6. Summary Nodes** - Cross-document synthesis
-
-- Example: "Apple Automotive Strategy" synthesizing multiple sources
+6. **Summary Nodes** - Cross-document synthesis
+   - Example: "Apple Automotive Strategy" synthesizing multiple sources
 
 ### The Three-Stage NodeRAG Processing Pipeline
 
@@ -2767,7 +2761,11 @@ This section demonstrates **relationship-aware scoring**, a key advancement in g
         # Calculate fusion statistics
         vector_selected = sum(1 for ctx in selected_contexts if ctx['type'] == 'vector_similarity')
         graph_selected = sum(1 for ctx in selected_contexts if ctx['type'] == 'graph_path')
+```
 
+**Fusion statistics calculation** tracks the balance between vector and graph retrieval in the final selection. This measurement is crucial for understanding whether the adaptive fusion is working correctly - vector similarity should dominate for factual queries while graph paths should lead for relational queries. These statistics enable continuous optimization of the fusion strategy.
+
+```python
         return {
             'contexts': selected_contexts,
             'fusion_weights': fusion_weights,
@@ -2779,19 +2777,31 @@ This section demonstrates **relationship-aware scoring**, a key advancement in g
                 'selection_ratio': f"{vector_selected}/{graph_selected}" if graph_selected > 0 else f"{vector_selected}/0"
             }
         }
+```
 
+**Comprehensive fusion results** provide complete transparency into the hybrid retrieval process. The selection statistics show exactly how the system balanced vector similarity with graph traversal, enabling both debugging and performance analysis. The selection ratio is particularly valuable for understanding query-specific fusion patterns.
+
+```python
     def _analyze_query_characteristics(self, query: str) -> Dict[str, Any]:
         """Analyze query to determine optimal retrieval strategy.
 
         This analysis is crucial for adaptive fusion - different query types
         benefit from different combinations of vector and graph search:
+```
 
+**Query characteristic analysis** is the intelligent core of adaptive GraphRAG fusion. Rather than using static rules, this method employs LLM-powered analysis to understand query semantics and automatically adjust the balance between vector similarity and graph traversal. This approach handles the complexity of natural language queries that don't fit simple pattern matching.
+
+```python
         **Query Type Analysis:**
         - **Factual**: Direct lookup queries ("What is X?") → Vector-heavy
         - **Analytical**: Cause-effect relationships ("How does X impact Y?") → Balanced
         - **Relational**: Connection queries ("How is X related to Y?") → Graph-heavy
         - **Comparative**: Multi-entity analysis ("Compare X and Y") → Balanced
+```
 
+**Query type classification** drives the fusion strategy by recognizing distinct patterns in user queries. Factual queries benefit from vector similarity's precision, while relational queries require graph traversal to discover connections. Analytical and comparative queries need balanced approaches to combine similarity matching with relationship reasoning.
+
+```python
         **Complexity Assessment:**
         - **Simple**: Single-hop, direct answer
         - **Complex**: Multi-step reasoning, synthesis required
@@ -2802,7 +2812,11 @@ This section demonstrates **relationship-aware scoring**, a key advancement in g
 
         The LLM analysis enables dynamic strategy selection rather than static rules.
         """
+```
 
+**Multi-dimensional query analysis** evaluates complexity and scope to fine-tune retrieval strategies. Simple, narrow queries can rely heavily on vector similarity, while complex, broad queries need extensive graph traversal and multi-hop reasoning. The LLM-powered analysis automatically handles edge cases and query variations that rule-based systems miss.
+
+```python
         analysis_prompt = f"""
         As an expert query analyst, analyze this search query to determine the optimal retrieval strategy.
 
@@ -2821,6 +2835,8 @@ This section demonstrates **relationship-aware scoring**, a key advancement in g
             "explanation": "Brief explanation of the classification"
         }}
 ```
+
+**Structured LLM analysis prompt** ensures consistent, machine-readable query classification. The JSON format enables programmatic processing while the specific dimensions (complexity, scope, type) provide the exact information needed for fusion weight calculation. The benefit scores (0.0-1.0) directly translate to fusion weights, making the system both interpretable and tunable.
 
 **LLM-powered query analysis** represents a paradigm shift from rule-based query classification to intelligent, context-aware analysis. Traditional RAG systems use brittle pattern matching, while this approach leverages large language models to understand query intent, complexity, and optimal retrieval strategy. The structured JSON output ensures consistent classification across diverse query types.
 
