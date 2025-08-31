@@ -64,7 +64,11 @@ from enum import Enum
 import uuid
 import logging
 from contextlib import asynccontextmanager
+```
 
+The standard library imports establish the foundation for enterprise-grade asynchronous workflow processing. **asyncio** enables concurrent agent execution, **typing** provides static analysis support for large codebases, **dataclasses** simplifies complex state management, and **datetime** with timezone support ensures proper temporal coordination across distributed systems. The **uuid** and **logging** modules provide enterprise traceability.
+
+```python
 # Enterprise workflow dependencies
 
 from langgraph import StateGraph, START, END
@@ -73,12 +77,18 @@ from workflows.execution_context import ExecutionContext, WorkflowState
 from workflows.step_executor import StepExecutor
 from workflows.monitors import WorkflowMonitor, MetricsCollector
 from workflows.fault_tolerance import CircuitBreaker, RetryPolicy
+```
 
+The enterprise workflow dependencies bring together specialized components for production-grade orchestration. **LangGraph** provides the state machine foundation for complex conditional workflows, while our custom modules handle execution context management, step processing, monitoring, and fault tolerance. This modular architecture enables testing, maintenance, and evolution of individual components.
+
+```python
 # Structured logging for enterprise observability
 
 import structlog
 logger = structlog.get_logger()
 ```
+
+Structured logging using **structlog** transforms debugging and monitoring from an afterthought into a first-class capability. Unlike simple print statements, structured logs enable automated analysis, alerting, and troubleshooting. This investment in observability infrastructure pays dividends when troubleshooting complex multi-agent interactions in production environments.
 
 ### The Arsenal of Enterprise Tools
 
@@ -102,7 +112,11 @@ class WorkflowStatus(Enum):
     FAILED = "failed"
     CANCELLED = "cancelled"
     ROLLBACK = "rollback"  # Error recovery
+```
 
+The workflow status enumeration captures the complete enterprise lifecycle of complex agent orchestrations. Beyond basic running and completed states, we include `WAITING_APPROVAL` for regulatory compliance scenarios, `PAUSED` for controlled suspension, and `ROLLBACK` for sophisticated error recovery. These states enable enterprise workflows that must integrate with human oversight and regulatory requirements.
+
+```python
 class StepType(Enum):
     """Advanced workflow step types for enterprise patterns."""
     SEQUENTIAL = "sequential"       # Linear execution
@@ -115,7 +129,11 @@ class StepType(Enum):
     WORKER = "worker"              # Specialized execution
     WEBHOOK = "webhook"            # External integration
     ROLLBACK = "rollback"          # Error recovery
+```
 
+The step types represent the vocabulary of enterprise agent coordination. Each type corresponds to a different orchestration pattern: `REACT` enables agents that reason about problems before acting, `HUMAN_APPROVAL` creates compliance checkpoints, and `WEBHOOK` enables integration with external systems. This comprehensive taxonomy supports complex real-world workflow requirements.
+
+```python
 @dataclass
 class EnterpriseWorkflowState:
     """Comprehensive workflow state for enterprise orchestration."""
@@ -130,7 +148,11 @@ class EnterpriseWorkflowState:
     current_step: str = None
     completed_steps: List[str] = field(default_factory=list)
     failed_steps: List[str] = field(default_factory=list)
-    
+```
+
+The workflow identification and execution state form the foundation of enterprise orchestration. Versioning enables workflow evolution while maintaining compatibility, while the step tracking provides real-time visibility into complex multi-step processes. This detailed state management is essential for debugging, monitoring, and resuming interrupted workflows.
+
+```python
     # Data flow
     context: Dict[str, Any] = field(default_factory=dict)
     intermediate_results: Dict[str, Any] = field(default_factory=dict)
@@ -141,7 +163,11 @@ class EnterpriseWorkflowState:
     end_time: datetime = None
     step_timings: Dict[str, float] = field(default_factory=dict)
     resource_usage: Dict[str, Any] = field(default_factory=dict)
-    
+```
+
+The data flow and monitoring sections capture both the functional and operational aspects of workflow execution. The context and intermediate results enable complex data transformations between steps, while the performance monitoring provides the analytics needed for continuous optimization. This dual focus on business logic and operational excellence is crucial for production systems.
+
+```python
     # Error handling and recovery
     error_count: int = 0
     last_error: str = None
@@ -152,13 +178,19 @@ class EnterpriseWorkflowState:
     approval_requests: List[Dict[str, Any]] = field(default_factory=list)
     audit_trail: List[Dict[str, Any]] = field(default_factory=list)
     compliance_flags: List[str] = field(default_factory=list)
-    
+```
+
+The enterprise features section reflects the reality of deploying AI systems in regulated industries. The audit trail provides complete traceability of decisions, approval requests enable human oversight integration, and compliance flags ensure regulatory requirements are met. These features transform experimental AI into production-ready enterprise solutions.
+
+```python
     def __post_init__(self):
         if not self.start_time:
             self.start_time = datetime.now(timezone.utc)
         if not self.workflow_id:
             self.workflow_id = str(uuid.uuid4())
 ```
+
+The post-initialization method ensures consistent state setup with proper timezone-aware timestamps and universally unique identifiers. This attention to detail in initialization prevents subtle bugs and ensures workflows can be tracked across distributed systems and time zones.
 
 This comprehensive state management gives us:
 
@@ -186,14 +218,22 @@ class EnterpriseWorkflowOrchestrator:
             max_attempts=config.get('max_retries', 3),
             backoff_strategy='exponential'
         )
-        
+```
+
+The orchestrator initialization establishes the foundational components for enterprise-grade workflow management. The **MetricsCollector** provides real-time performance analytics, the **CircuitBreaker** prevents cascade failures in distributed agent systems, and the **RetryPolicy** implements sophisticated failure recovery. These components work together like a professional orchestra's support systems—sound engineering, stage management, and backup protocols.
+
+```python
         # Initialize LangGraph state machine
         self.workflow_graph = self._create_workflow_graph()
         
     def _create_workflow_graph(self) -> StateGraph:
         """Create LangGraph workflow with enterprise patterns."""
         workflow = StateGraph(EnterpriseWorkflowState)
-        
+```
+
+The LangGraph integration provides the state machine foundation for complex agent workflows. Unlike simple sequential execution, this state graph enables sophisticated control flow with conditional branching, parallel execution, and recovery mechanisms. The EnterpriseWorkflowState serves as the shared memory that flows through all orchestration decisions.
+
+```python
         # Add orchestration nodes
         workflow.add_node("orchestrator", self._orchestrate_task)
         workflow.add_node("parallel_executor", self._execute_parallel)
@@ -201,7 +241,11 @@ class EnterpriseWorkflowOrchestrator:
         workflow.add_node("react_agent", self._react_reasoning)
         workflow.add_node("human_approval", self._request_approval)
         workflow.add_node("error_recovery", self._recover_from_error)
-        
+```
+
+Each workflow node represents a specialized orchestration capability. The **orchestrator** analyzes tasks and determines optimal execution strategies, **parallel_executor** coordinates concurrent operations, **conditional_router** implements dynamic decision-making, and **react_agent** enables reasoning-action loops. The **human_approval** and **error_recovery** nodes handle the enterprise requirements that distinguish production systems from prototypes.
+
+```python
         # Define workflow edges with conditional logic
         workflow.add_edge(START, "orchestrator")
         workflow.add_conditional_edges(
@@ -220,6 +264,8 @@ class EnterpriseWorkflowOrchestrator:
         return workflow.compile()
 ```
 
+The edge definitions create the decision tree that routes workflows through the optimal execution path. The **conditional edges** implement intelligent routing based on task analysis—simple tasks might go directly to completion, complex tasks might require parallel processing, and sensitive operations might require human approval. The compiled graph becomes a dynamic execution engine that adapts to each workflow's unique requirements.
+
 The orchestrator's brain—the central coordination function that analyzes each task and determines the optimal execution strategy:
 
 ```python
@@ -234,7 +280,11 @@ The orchestrator's brain—the central coordination function that analyzes each 
         try:
             # Analyze task complexity and requirements
             task_analysis = await self._analyze_task_complexity(state.context)
-            
+```
+
+The orchestration process begins with comprehensive task analysis—like a conductor studying a new piece of music before the first rehearsal. This analysis examines the task's complexity, required capabilities, data dependencies, and potential performance characteristics. The asynchronous nature enables deep analysis without blocking other workflow operations.
+
+```python
             # Determine optimal execution strategy
             execution_strategy = self._select_execution_strategy(
                 task_analysis, 
@@ -247,7 +297,11 @@ The orchestrator's brain—the central coordination function that analyzes each 
                 'execution_strategy': execution_strategy,
                 'orchestrator_timestamp': datetime.now(timezone.utc).isoformat()
             })
-            
+```
+
+The strategy selection process is where artificial intelligence meets workflow management. Based on the task analysis and current context, the orchestrator chooses the optimal execution pattern—parallel processing for independent subtasks, sequential execution for dependent operations, or conditional routing for context-sensitive processing. The state updates ensure all downstream components have access to orchestration decisions.
+
+```python
             # Track orchestration metrics
             self.metrics.record_orchestration_decision(
                 workflow_id=state.workflow_id,
@@ -256,7 +310,11 @@ The orchestrator's brain—the central coordination function that analyzes each 
             )
             
             return {'next_action': execution_strategy}
-            
+```
+
+Metrics collection at the orchestration level enables machine learning optimization over time. By tracking which strategies work best for different complexity levels and contexts, the system can improve its decision-making automatically. This creates a self-optimizing orchestra that gets better with every performance.
+
+```python
         except Exception as e:
             logger.error(
                 "Orchestration failed", 
@@ -267,6 +325,8 @@ The orchestrator's brain—the central coordination function that analyzes each 
             state.error_count += 1
             return {'next_action': 'error'}
 ```
+
+Orchestration-level error handling is critical because these failures represent fundamental problems in workflow coordination. Like a conductor who must make split-second decisions when a performance goes off-track, the error handling preserves the workflow state and routes to recovery mechanisms while maintaining detailed audit trails for debugging.
 
 ### The Language of Workflow Steps
 
@@ -282,7 +342,11 @@ class StepStatus(Enum):
     SKIPPED = "skipped"      # Conditionally bypassed
     WAITING = "waiting"      # Waiting for dependencies
     RETRYING = "retrying"    # Attempting retry after failure
+```
 
+The step status enumeration defines the complete lifecycle of workflow operations. Like tracking a musician's readiness throughout a performance—from waiting in the wings (`PENDING`), to actively performing (`RUNNING`), to successful completion (`COMPLETED`)—these states enable fine-grained workflow monitoring and control. The `SKIPPED` status supports conditional workflows, while `RETRYING` enables sophisticated failure recovery.
+
+```python
 @dataclass
 class WorkflowStep:
     """Enhanced workflow step with advanced capabilities."""
@@ -296,7 +360,11 @@ class WorkflowStep:
     action: Optional[str] = None           # Action to execute
     agent_capability: Optional[str] = None # Required agent capability
     timeout: int = 300                     # Step timeout in seconds
-    
+```
+
+The step identification and execution configuration establish the fundamental properties of each workflow operation. The `agent_capability` field enables intelligent agent routing—ensuring steps that require specific expertise (like data analysis or image processing) are routed to appropriately equipped agents. The timeout prevents runaway operations from consuming resources indefinitely.
+
+```python
     # Input/Output configuration
     input_mapping: Dict[str, str] = field(default_factory=dict)
     output_mapping: Dict[str, str] = field(default_factory=dict)
@@ -307,7 +375,11 @@ class WorkflowStep:
     conditions: List[Dict[str, Any]] = field(default_factory=list)
     next_steps: List[str] = field(default_factory=list)
     error_handlers: List[str] = field(default_factory=list)
-    
+```
+
+The input/output mapping system enables sophisticated data transformation between workflow steps. Like a sound engineer ensuring the violin section's output becomes properly formatted input for the brass section, these mappings maintain data flow integrity across complex agent interactions. The validation ensures data quality, while control flow configuration enables complex branching and error handling logic.
+
+```python
     # Retry and error handling
     retry_policy: Dict[str, Any] = field(default_factory=dict)
     rollback_actions: List[str] = field(default_factory=list)
@@ -316,7 +388,11 @@ class WorkflowStep:
     parallel_steps: List['WorkflowStep'] = field(default_factory=list)
     loop_condition: Optional[str] = None
     loop_max_iterations: int = 100
-    
+```
+
+The retry and parallel configuration enable enterprise-grade resilience and performance. Retry policies can implement exponential backoff, circuit breaking, and conditional retry logic. The parallel steps configuration allows complex operations to be decomposed into concurrent sub-operations, while loop controls enable iterative processing with safeguards against infinite loops.
+
+```python
     # Monitoring and observability
     metrics_enabled: bool = True
     custom_metrics: List[str] = field(default_factory=list)
@@ -329,6 +405,8 @@ class WorkflowStep:
     error_info: Optional[Dict[str, Any]] = None
     retry_count: int = 0
 ```
+
+The monitoring and runtime state tracking provides comprehensive observability into workflow execution. This detailed instrumentation enables performance optimization, debugging, and compliance reporting. The execution data preservation supports both real-time monitoring and post-execution analysis, crucial for continuous improvement in enterprise workflows.
 
 This sophisticated step definition enables:
 
@@ -351,7 +429,11 @@ class AdvancedWorkflow:
     name: str              # Human-readable workflow name
     description: str       # Detailed workflow description
     version: str = "1.0"   # Version for workflow evolution
-    
+```
+
+The AdvancedWorkflow definition serves as the master blueprint for complex multi-agent orchestrations. Like a symphonic score that can be performed by different orchestras, the workflow definition separates the composition (what should happen) from the execution (how it happens). The versioning system enables evolutionary development where workflows can be refined and updated while maintaining backward compatibility.
+
+```python
     # Workflow structure
     steps: List[WorkflowStep] = field(default_factory=list)
     global_variables: Dict[str, Any] = field(default_factory=dict)
@@ -360,7 +442,11 @@ class AdvancedWorkflow:
     timeout: int = 3600                                    # Total workflow timeout
     max_parallel_steps: int = 10                          # Concurrency limit
     retry_policy: Dict[str, Any] = field(default_factory=dict)  # Global retry settings
-    
+```
+
+The workflow structure and configuration establish both the functional composition and operational parameters. Global variables enable shared state across all workflow steps, while the configuration parameters define resource limits and failure handling policies. The one-hour default timeout and ten-step parallelism limit provide sensible defaults for enterprise workflows while allowing customization for specific requirements.
+
+```python
     # Monitoring and optimization
     sla_targets: Dict[str, Any] = field(default_factory=dict)
     optimization_enabled: bool = True
@@ -371,6 +457,8 @@ class AdvancedWorkflow:
     created_by: Optional[str] = None
     tags: List[str] = field(default_factory=list)
 ```
+
+The monitoring and metadata sections enable enterprise governance and continuous improvement. SLA targets provide measurable performance goals, while optimization and adaptive routing enable the system to self-improve over time. The comprehensive metadata supports workflow lifecycle management, enabling organizations to track who created workflows, when they were deployed, and how they're categorized for management purposes.
 
 ### The Performance Theater: Workflow Execution Engine
 
@@ -393,7 +481,11 @@ class AdvancedWorkflowEngine:
         self.max_concurrent_workflows = 100
         self.resource_manager = ResourceManager()
         self.optimizer = WorkflowOptimizer()
+```
 
+The AdvancedWorkflowEngine is the conductor of our digital orchestra, responsible for coordinating complex multi-agent workflows. During initialization, we establish three critical capabilities: **step execution** (the individual instrument players), **monitoring** (our audio engineering system), and **state management** (the score tracking system). The resource manager prevents our orchestra from overwhelming the venue, while the optimizer continuously improves our performance.
+
+```python
     async def execute_workflow(self, workflow: AdvancedWorkflow, 
                              input_data: Dict[str, Any] = None,
                              execution_options: Dict[str, Any] = None) -> Dict[str, Any]:
@@ -403,7 +495,11 @@ class AdvancedWorkflowEngine:
         execution_id = str(uuid.uuid4())
         input_data = input_data or {}
         execution_options = execution_options or {}
-        
+```
+
+The workflow execution begins like preparing for a concert—we assign a unique performance ID and gather all the input materials. This UUID-based tracking enables us to monitor multiple concurrent workflows without confusion, essential for enterprise environments where dozens of complex agent orchestrations might run simultaneously.
+
+```python
         # Create execution context
         context = ExecutionContext(
             execution_id=execution_id,
@@ -413,7 +509,11 @@ class AdvancedWorkflowEngine:
         )
         
         self.active_workflows[execution_id] = context
-        
+```
+
+Creating the execution context is like setting up the concert hall before the performance begins. This context becomes the shared memory space where all agents can access the current state, exchange data, and coordinate their actions. By registering it in our active workflows registry, we enable real-time monitoring and intervention capabilities.
+
+```python
         try:
             # Start monitoring
             await self.monitor.start_workflow_monitoring(context)
@@ -421,7 +521,11 @@ class AdvancedWorkflowEngine:
             # Initialize workflow state
             context.state = WorkflowState.RUNNING
             context.start_time = datetime.now()
-            
+```
+
+Before the first note plays, we activate our comprehensive monitoring system. This provides real-time visibility into performance metrics, resource usage, and potential issues. Setting the state to RUNNING and recording the start time enables SLA tracking and performance optimization—critical capabilities for production enterprise systems.
+
+```python
             # Execute workflow with timeout
             result = await asyncio.wait_for(
                 self._execute_workflow_internal(context),
@@ -434,7 +538,11 @@ class AdvancedWorkflowEngine:
             context.result = result
             
             return self._create_execution_result(context, "completed", result)
-            
+```
+
+The core execution happens within a timeout wrapper, ensuring runaway workflows can't consume resources indefinitely. This is like having a concert manager who ensures performances don't exceed their scheduled time slots. Upon successful completion, we capture the end time and preserve the results for analysis and auditing.
+
+```python
         except asyncio.TimeoutError:
             context.state = WorkflowState.TIMEOUT
             logger.error(f"Workflow {execution_id} timed out")
@@ -450,12 +558,18 @@ class AdvancedWorkflowEngine:
             await self._execute_rollback(context)
             
             return self._create_execution_result(context, "failed", None)
-            
+```
+
+Enterprise-grade error handling distinguishes between different failure modes. Timeout errors indicate resource or performance issues, while general exceptions suggest logic or data problems. The rollback mechanism is crucial—like having understudies ready to step in when a key performer can't continue, ensuring data consistency and system stability.
+
+```python
         finally:
             # Cleanup
             await self.monitor.stop_workflow_monitoring(execution_id)
             self.active_workflows.pop(execution_id, None)
 ```
+
+The cleanup phase runs regardless of success or failure, preventing resource leaks that could cripple long-running systems. This is like the stage crew cleaning up after every performance, ensuring the venue is ready for the next show. Proper cleanup is often the difference between systems that run reliably for years versus those that require frequent restarts.
 
 ### The Heart of Orchestration: Internal Execution Logic
 
@@ -473,7 +587,11 @@ The internal execution logic is where the magic happens—dependency resolution,
         # Execute steps based on dependencies and patterns
         completed_steps = set()
         failed_steps = set()
-        
+```
+
+The internal execution engine operates like a master conductor reading a complex musical score. We first build an **execution graph** that maps all the dependencies between workflow steps—this is like understanding which musical sections must complete before others can begin. The completed and failed step tracking prevents us from executing steps prematurely and helps us detect orchestration problems.
+
+```python
         while len(completed_steps) < len(workflow.steps):
             # Find ready steps (all dependencies satisfied)
             ready_steps = self._find_ready_steps(
@@ -486,7 +604,11 @@ The internal execution logic is where the magic happens—dependency resolution,
                 if remaining_steps:
                     logger.warning(f"Potential deadlock detected. Remaining steps: {remaining_steps}")
                 break
-            
+```
+
+This is the heart of dependency resolution—we continuously look for workflow steps whose prerequisites have been satisfied, like musicians waiting for their cue to enter. The deadlock detection is crucial for enterprise stability; it identifies circular dependencies or missing prerequisites that would cause the workflow to hang indefinitely, a common failure mode in complex multi-agent systems.
+
+```python
             # Execute ready steps with appropriate pattern
             execution_tasks = []
             
@@ -499,6 +621,11 @@ The internal execution logic is where the magic happens—dependency resolution,
                     task = asyncio.create_task(
                         self._execute_loop_step(step, context)
                     )
+```
+
+The step execution dispatch system demonstrates the power of type-based orchestration. For each ready step, we examine its execution pattern and route it to the appropriate specialized handler. **Parallel steps** coordinate multiple concurrent operations, while **loop steps** handle iterative processing with built-in safeguards against infinite loops.
+
+```python
                 elif step.step_type == StepType.CONDITIONAL:
                     task = asyncio.create_task(
                         self._execute_conditional_step(step, context)
@@ -509,7 +636,13 @@ The internal execution logic is where the magic happens—dependency resolution,
                     )
                 
                 execution_tasks.append((step, task))
-            
+```
+
+**Conditional steps** enable dynamic workflow routing based on real-time data and context, while the default case handles standard **single-step execution**. The task creation pattern enables all step types to execute concurrently while maintaining their individual execution semantics. This design allows complex workflows to mix different execution patterns seamlessly.
+
+The step type dispatch system is like a conductor's ability to coordinate different musical techniques—solos, harmonies, crescendos, and complex polyphonic sections. Each step type requires a different execution strategy: parallel steps coordinate multiple concurrent actions, loops handle iterative processing, conditionals enable adaptive behavior, and single steps handle straightforward sequential execution.
+
+```python
             # Wait for tasks to complete
             for step, task in execution_tasks:
                 try:
@@ -520,6 +653,11 @@ The internal execution logic is where the magic happens—dependency resolution,
                         
                         # Apply output mapping
                         self._apply_output_mapping(step, result, context.data)
+```
+
+Successful step completion involves more than just marking it done. The **output mapping** is critical—it takes the results from one agent's work and transforms them into the input format expected by downstream steps. This is like how a jazz pianist's improvisation becomes the foundation for the saxophone solo that follows.
+
+```python
                     else:
                         failed_steps.add(step.step_id)
                         step.status = StepStatus.FAILED
@@ -528,7 +666,11 @@ The internal execution logic is where the magic happens—dependency resolution,
                         # Check if failure should stop workflow
                         if not step.retry_policy.get("continue_on_failure", False):
                             raise Exception(f"Step {step.step_id} failed: {result.get('error')}")
-                            
+```
+
+Failure handling includes sophisticated policies that determine whether the entire workflow should stop or continue with remaining steps. Some failures are critical (like a lead vocalist losing their voice), while others are recoverable (like a backup singer missing a harmony). The `continue_on_failure` flag enables resilient workflows that can deliver partial results even when some components fail.
+
+```python
                 except Exception as e:
                     failed_steps.add(step.step_id)
                     step.status = StepStatus.FAILED
@@ -541,6 +683,8 @@ The internal execution logic is where the magic happens—dependency resolution,
         
         return context.data
 ```
+
+The error recovery system represents the most sophisticated aspect of enterprise workflow management. Like an orchestra that can adapt when an instrument malfunctions, our recovery system attempts to salvage failed executions through retries, alternative paths, or graceful degradation. Only when recovery fails completely do we terminate the entire workflow, preserving the context data for debugging and audit purposes.
 
 ### The Art of Parallel Execution
 
@@ -556,7 +700,11 @@ Parallel execution is like having multiple virtuoso performers playing simultane
         
         # Limit concurrent execution
         semaphore = asyncio.Semaphore(context.workflow.max_parallel_steps)
-        
+```
+
+Parallel execution begins with resource management—the semaphore acts like a venue capacity limit, ensuring we don't overwhelm the system with too many concurrent operations. This is essential for enterprise environments where hundreds of workflows might be running simultaneously. Without this throttling, resource exhaustion could crash the entire system.
+
+```python
         async def execute_with_semaphore(parallel_step):
             async with semaphore:
                 return await self._execute_single_step(parallel_step, context)
@@ -566,13 +714,21 @@ Parallel execution is like having multiple virtuoso performers playing simultane
             asyncio.create_task(execute_with_semaphore(parallel_step))
             for parallel_step in step.parallel_steps
         ]
-        
+```
+
+The semaphore wrapper ensures each parallel step acquires a resource token before executing. This pattern is like having a coat check at a concert—you can only have so many performances happening at once. The task creation with list comprehension launches all parallel operations simultaneously while respecting the concurrency limits.
+
+```python
         results = await asyncio.gather(*tasks, return_exceptions=True)
         
         # Analyze results
         successful_results = []
         failed_results = []
-        
+```
+
+The `gather()` call with `return_exceptions=True` is crucial for robust parallel processing. Instead of the entire operation failing if one task raises an exception, we collect all results—both successful and failed—for comprehensive analysis. This pattern enables partial success scenarios common in distributed systems.
+
+```python
         for i, result in enumerate(results):
             if isinstance(result, Exception):
                 failed_results.append({
@@ -586,7 +742,11 @@ Parallel execution is like having multiple virtuoso performers playing simultane
                     "step_id": step.parallel_steps[i].step_id,
                     "error": result.get("error", "Unknown error")
                 })
-        
+```
+
+The result classification handles three distinct outcomes: exceptions (catastrophic failures), successful results (clean execution), and soft failures (returned error states). This granular failure analysis enables sophisticated retry policies and helps identify which specific parallel components are problematic.
+
+```python
         # Determine overall success
         total_steps = len(step.parallel_steps)
         successful_steps = len(successful_results)
@@ -607,6 +767,8 @@ Parallel execution is like having multiple virtuoso performers playing simultane
         }
 ```
 
+The success determination uses a **failure threshold** strategy rather than requiring perfect success. Like an orchestra that can still deliver a beautiful performance even if a few musicians make minor mistakes, our parallel execution succeeds when the majority of steps complete successfully. The comprehensive result structure provides detailed analytics for optimization and debugging.
+
 ---
 
 ## Part 3: The Art of Optimization - Making Our Orchestra Perfect
@@ -625,12 +787,20 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 import statistics
 import logging
+```
 
+The optimizer module imports focus on performance analysis and statistical computation. **asyncio** enables non-blocking performance monitoring during workflow execution, **statistics** provides mathematical functions for bottleneck detection, and **datetime** supports temporal analysis of performance trends. These imports establish the foundation for intelligent, data-driven workflow optimization.
+
+```python
 from workflows.advanced_engine import AdvancedWorkflow, WorkflowStep
 from workflows.execution_context import ExecutionContext
 
 logger = logging.getLogger(__name__)
+```
 
+The workflow-specific imports connect the optimizer to the execution engine and context management systems. This tight integration enables the optimizer to analyze real execution data, understand workflow structure, and provide actionable recommendations. The dedicated logger ensures optimization decisions are tracked for debugging and improvement.
+
+```python
 @dataclass
 class PerformanceMetrics:
     """Performance metrics for workflow optimization."""
@@ -643,6 +813,8 @@ class PerformanceMetrics:
     bottlenecks: List[str]                            # Identified performance bottlenecks
     optimization_score: float                          # Overall optimization opportunity score
 ```
+
+The PerformanceMetrics structure captures the complete performance profile of workflow executions. Like a conductor's performance notes, it tracks timing, reliability, resource consumption, and specific problem areas. The **step_performance** provides granular analysis for targeted optimization, while the **optimization_score** provides a single metric for prioritizing improvement efforts. This comprehensive analysis enables both human and automated optimization decisions.
 
 The performance metrics structure captures everything we need to understand how our digital orchestra is performing:
 
@@ -667,7 +839,11 @@ class OptimizationRecommendation:
     implementation_effort: str              # low, medium, high
     risk_level: str                        # low, medium, high
     specific_changes: List[Dict[str, Any]] # Detailed implementation steps
+```
 
+The OptimizationRecommendation data structure captures actionable insights from performance analysis. Like a conductor's notes after reviewing a performance recording, it provides specific guidance for improvement. The `expected_improvement` quantifies the potential benefit, while `implementation_effort` and `risk_level` help prioritize which optimizations to tackle first. The `specific_changes` field provides implementation details that automated systems can execute.
+
+```python
 class WorkflowOptimizer:
     """Intelligent workflow optimizer using performance data."""
     
@@ -677,7 +853,11 @@ class WorkflowOptimizer:
         self.learning_enabled = True
         
         self._initialize_optimization_rules()
-    
+```
+
+The WorkflowOptimizer represents the evolution from reactive to predictive system management. By maintaining performance history, it builds machine learning models that can predict optimal configurations before problems occur. The learning capability enables the system to continuously improve its optimization recommendations based on real-world deployment results.
+
+```python
     def _initialize_optimization_rules(self):
         """Initialize built-in optimization rules."""
         
@@ -688,6 +868,11 @@ class WorkflowOptimizer:
                 "recommendation": self._create_parallelization_recommendation,
                 "priority": 9
             },
+```
+
+The optimization rules initialization establishes the intelligent decision-making system for workflow improvement. The **parallel_optimization** rule has the highest priority (9) because parallelization typically offers the most significant performance gains. The lambda condition functions enable dynamic evaluation of optimization opportunities based on real-time performance metrics.
+
+```python
             {
                 "name": "caching_optimization", 
                 "condition": lambda metrics: self._detect_caching_opportunity(metrics),
@@ -702,6 +887,10 @@ class WorkflowOptimizer:
             }
         ]
 ```
+
+The remaining optimization rules target specific performance patterns: **caching** addresses repeated computation overhead (priority 8), while **resource optimization** focuses on efficient infrastructure utilization (priority 7). This priority-based approach ensures the most impactful optimizations are considered first, maximizing the return on optimization investment in enterprise environments.
+
+The optimization rules system implements a sophisticated pattern-matching engine for performance improvement. Each rule combines a **condition** function that detects specific optimization opportunities, a **recommendation** generator that creates actionable advice, and a **priority** that determines the order of application. This rule-based approach enables the system to systematically apply decades of performance optimization knowledge to new workflow patterns automatically.
 
 ### The Intelligence Behind Optimization
 
@@ -723,13 +912,21 @@ The optimizer's analysis engine examines workflow performance with the eye of a 
         ]
         
         avg_execution_time = statistics.mean(execution_times) if execution_times else 0
-        
+```
+
+Performance analysis begins with temporal analysis—understanding how long workflows actually take in production. Like analyzing a conductor's timing across multiple performances, we examine execution patterns to identify baseline performance characteristics. The careful null checking ensures we can analyze workflows even when some executions lack complete timing data.
+
+```python
         # Calculate success/error rates
         successful_executions = len([ctx for ctx in execution_history if ctx.state.value == "completed"])
         total_executions = len(execution_history)
         success_rate = successful_executions / total_executions if total_executions > 0 else 0
         error_rate = 1 - success_rate
-        
+```
+
+Success rate analysis reveals the reliability of our digital orchestrations. In enterprise environments, a 95% success rate might seem good, but when processing thousands of workflows daily, that 5% failure rate represents significant business impact. These metrics drive decisions about retry policies, circuit breaker thresholds, and SLA definitions.
+
+```python
         # Analyze step performance
         step_performance = self._analyze_step_performance(workflow, execution_history)
         
@@ -738,7 +935,11 @@ The optimizer's analysis engine examines workflow performance with the eye of a 
         
         # Calculate resource usage
         resource_usage = self._calculate_resource_usage(execution_history)
-        
+```
+
+The three-layer analysis approach mirrors professional performance tuning methodology. **Step performance** reveals which individual components are slow, **bottleneck identification** uses statistical analysis to find the critical path constraints, and **resource usage** tracking helps optimize infrastructure costs and prevent resource exhaustion.
+
+```python
         # Calculate optimization score
         optimization_score = self._calculate_optimization_score(
             avg_execution_time, success_rate, step_performance, resource_usage
@@ -753,12 +954,18 @@ The optimizer's analysis engine examines workflow performance with the eye of a 
             bottlenecks=bottlenecks,
             optimization_score=optimization_score
         )
-        
+```
+
+The optimization score synthesizes multiple performance dimensions into a single actionable metric. This holistic scoring approach helps prioritize optimization efforts—workflows with low scores get attention first. The comprehensive metrics structure enables both automated optimization and human analysis.
+
+```python
         # Store metrics for learning
         self._store_performance_metrics(workflow.workflow_id, metrics)
         
         return metrics
 ```
+
+Storing metrics for learning enables the system to build performance baselines over time. This historical data powers machine learning algorithms that can predict optimal configurations, detect performance degradation early, and suggest proactive optimizations. The learning capability transforms reactive performance management into predictive optimization.
 
 ### The Art of Bottleneck Detection
 
@@ -777,7 +984,11 @@ Like identifying which instrument is slightly out of tune in a full orchestra, o
         avg_times = [metrics["avg_execution_time"] for metrics in step_performance.values()]
         if avg_times:
             time_threshold = statistics.mean(avg_times) + statistics.stdev(avg_times)
-            
+```
+
+The bottleneck detection algorithm uses statistical analysis to identify performance outliers. By calculating the mean plus one standard deviation as the threshold, we identify steps that take significantly longer than typical. This approach automatically adapts to different workflow types—a data processing workflow will have different performance characteristics than a user interface workflow.
+
+```python
             for step_id, metrics in step_performance.items():
                 if metrics["avg_execution_time"] > time_threshold:
                     bottlenecks.append(step_id)
@@ -790,6 +1001,8 @@ Like identifying which instrument is slightly out of tune in a full orchestra, o
         
         return bottlenecks
 ```
+
+The dual detection approach identifies both **consistently slow steps** (high average execution time) and **inconsistently performing steps** (high variance). Slow steps indicate fundamental performance issues that might benefit from optimization or parallelization. High-variance steps suggest operations that might benefit from caching, retry policies, or resource allocation improvements. This comprehensive analysis enables targeted optimization strategies.
 
 This sophisticated detection system identifies two types of problems:
 

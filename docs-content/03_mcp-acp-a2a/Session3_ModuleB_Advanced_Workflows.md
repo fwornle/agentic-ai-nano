@@ -1631,46 +1631,46 @@ The workflow execution method provides the entry point for running compensation-
 ## Module Assessment
 
 **Question 1:** What is the primary advantage of parallel processing in workflows?  
-A) Simplified code structure
-B) Reduced resource usage
-C) Faster overall execution time
-D) Better error handling
+A) Simplified code structure  
+B) Reduced resource usage  
+C) Faster overall execution time  
+D) Better error handling  
 
 **Question 2:** In conditional workflow routing, what determines the execution path?  
-A) Random selection
-B) Runtime conditions and content analysis
-C) User preferences
-D) System load
+A) Random selection  
+B) Runtime conditions and content analysis  
+C) User preferences  
+D) System load  
 
 **Question 3:** What is the purpose of compensation actions in workflow patterns?  
-A) Improve performance
-B) Undo completed steps when later steps fail
-C) Reduce memory usage
-D) Simplify configuration
+A) Improve performance  
+B) Undo completed steps when later steps fail  
+C) Reduce memory usage  
+D) Simplify configuration  
 
 **Question 4:** How does the parallel workflow handle partial failures?  
-A) Stops all processing immediately
-B) Continues with successful results and reports failures
-C) Retries all operations
-D) Ignores failed operations
+A) Stops all processing immediately  
+B) Continues with successful results and reports failures  
+C) Retries all operations  
+D) Ignores failed operations  
 
 **Question 5:** What triggers escalation in the conditional workflow router?  
-A) High system load
-B) Customer tier, priority level, or escalation keywords
-C) Time of day
-D) Random intervals
+A) High system load  
+B) Customer tier, priority level, or escalation keywords  
+C) Time of day  
+D) Random intervals  
 
 **Question 6:** In the compensation pattern, in what order are compensation actions executed?  
-A) Random order
-B) Same order as original execution
-C) Reverse order of original execution
-D) Priority-based order
+A) Random order  
+B) Same order as original execution  
+C) Reverse order of original execution  
+D) Priority-based order  
 
 **Question 7:** What is the benefit of checkpoint data in advanced workflows?  
-A) Performance optimization
-B) State recovery and resumption after failures
-C) User experience improvement
-D) Reduced memory usage
+A) Performance optimization  
+B) State recovery and resumption after failures  
+C) User experience improvement  
+D) Reduced memory usage  
 
 [**View Module B Test Solutions →**](Session3_ModuleB_Test_Solutions.md)
 
