@@ -446,11 +446,19 @@ The compliance engine initializes handlers for major regulatory frameworks. Each
         self.data_classifier = AutomatedDataClassifier()
         self.access_monitor = AccessPatternMonitor()
         self.audit_engine = AutomatedAuditEngine()
-        
+```
+
+These automated monitoring components form the core of enterprise compliance enforcement. The AutomatedDataClassifier continuously scans RAG system data flows to identify sensitive information (PII, PHI, financial data) and applies appropriate protection levels. AccessPatternMonitor tracks user interaction patterns to detect anomalous behavior or unauthorized access attempts. The AutomatedAuditEngine maintains comprehensive logs required for regulatory compliance audits.
+
+```python
         # Alert and remediation systems
         self.compliance_alerter = ComplianceAlerter()
         self.auto_remediation = AutoRemediationEngine()
-    
+```
+
+Alert and remediation systems provide real-time response to compliance violations. ComplianceAlerter integrates with enterprise notification systems (SIEM, Slack, email) to ensure immediate visibility into regulatory violations. AutoRemediationEngine can automatically block suspicious queries, redact sensitive responses, or temporarily disable non-compliant data sources - crucial for maintaining enterprise regulatory posture.
+
+```python
     async def continuous_compliance_monitoring(self) -> Dict[str, Any]:
         """Continuous monitoring of compliance across all RAG operations."""
         

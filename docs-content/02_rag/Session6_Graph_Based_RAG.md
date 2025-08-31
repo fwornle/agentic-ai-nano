@@ -298,14 +298,23 @@ class NodeRAGHNSW:
     def build_hnsw_graph_integration(self, heterogeneous_graph, embedding_model):
         """Build HNSW similarity edges within the existing graph structure"""
 
-        # Extract embeddings for all nodes by type
+        # Initialize embedding storage for all graph nodes
         node_embeddings = {}
         node_types = {}
+```
 
+The NodeRAGHNSW class integrates HNSW (Hierarchical Navigable Small World) similarity edges directly into our heterogeneous graph structure. This creates a hybrid system where traditional graph relationships coexist with vector similarity connections. The initialization sets up storage for node embeddings and types, preparing for type-aware embedding generation.
+
+```python
+        # Extract and process each node with type-aware embedding generation
         for node_id, node_data in heterogeneous_graph.nodes(data=True):
             node_type = node_data.get('node_type')
             node_content = self.get_node_content_for_embedding(node_data, node_type)
+```
 
+We iterate through every node in our heterogeneous graph, extracting both the node type and content. The `get_node_content_for_embedding` method creates specialized content representations based on node type - entities might use name+description, while document nodes use their text content.
+
+```python
             # Generate specialized embeddings based on node type
             embedding = self.generate_typed_embedding(
                 content=node_content,
@@ -687,7 +696,12 @@ The method returns a comprehensive NodeRAG system with all components integrated
             'relationship_nodes': [],
             'hierarchical_structures': {}
         }
+```
 
+The decomposition stage is the first phase of NodeRAG's three-stage processing pipeline. It performs multi-granularity analysis, breaking documents into specialized node types. Each node type captures different aspects of knowledge: entities (concrete objects), concepts (abstract ideas), documents (text segments), and relationships (connections between elements).
+
+```python
+        # Process each document with type-specific extraction
         for doc_idx, document in enumerate(documents):
             print(f"Decomposing document {doc_idx + 1}/{len(documents)}")
 
@@ -695,7 +709,11 @@ The method returns a comprehensive NodeRAG system with all components integrated
             if 'entity' in config['node_types']:
                 entity_nodes = self._extract_entity_nodes(document, doc_idx)
                 decomposition_results['entity_nodes'].extend(entity_nodes)
+```
 
+The document processing loop applies type-specific extraction methods based on the configuration. Entity extraction identifies concrete objects, people, places, and organizations using NLP techniques like named entity recognition enhanced with contextual metadata.
+
+```python
             # Extract concept nodes for abstract concepts and topics
             if 'concept' in config['node_types']:
                 concept_nodes = self._extract_concept_nodes(document, doc_idx)
@@ -705,12 +723,20 @@ The method returns a comprehensive NodeRAG system with all components integrated
             if 'document' in config['node_types']:
                 document_nodes = self._extract_document_nodes(document, doc_idx)
                 decomposition_results['document_nodes'].extend(document_nodes)
+```
 
+Concept extraction identifies abstract ideas, themes, and topics within documents - these represent higher-level semantic understanding beyond concrete entities. Document nodes preserve the original text structure, creating retrievable text segments that maintain source context and readability.
+
+```python
             # Extract explicit relationship nodes
             if 'relationship' in config['node_types']:
                 relationship_nodes = self._extract_relationship_nodes(document, doc_idx)
                 decomposition_results['relationship_nodes'].extend(relationship_nodes)
+```
 
+Relationship extraction creates explicit connection nodes that capture semantic relationships between entities and concepts. This goes beyond simple graph edges by creating rich relationship nodes with types, confidence scores, and contextual information.
+
+```python
         # Build hierarchical structures at multiple abstraction levels
         decomposition_results['hierarchical_structures'] = self._build_hierarchical_structures(
             decomposition_results
@@ -718,7 +744,11 @@ The method returns a comprehensive NodeRAG system with all components integrated
 
         print(f"Decomposition complete: {sum(len(nodes) for nodes in decomposition_results.values() if isinstance(nodes, list))} nodes created")
         return decomposition_results
+```
 
+The final step builds hierarchical structures that organize nodes into abstraction levels, creating parent-child relationships that enable efficient multi-level traversal and reasoning.
+
+```python
     def _augmentation_stage(self, decomposition_result: Dict, config: Dict) -> Dict[str, Any]:
         """Stage 2: Cross-reference integration and HNSW similarity edge construction."""
 
@@ -726,14 +756,22 @@ The method returns a comprehensive NodeRAG system with all components integrated
 
         # Cross-link related nodes across different types
         cross_references = self._build_cross_references(decomposition_result)
+```
 
+The augmentation stage performs cross-reference integration, building connections between nodes of different types. This creates a rich interconnected web where entities link to concepts, documents connect to relationships, and semantic bridges form between all knowledge components.
+
+```python
         # Build HNSW similarity edges for high-performance retrieval
         if config.get('enable_hnsw_similarity', True):
             print("Constructing HNSW similarity edges...")
             similarity_edges = self._build_hnsw_similarity_edges(decomposition_result)
         else:
             similarity_edges = {}
+```
 
+HNSW similarity edge construction creates high-performance vector similarity connections between nodes. This hybrid approach combines graph structure with vector space similarity, enabling both semantic search and graph traversal in a single system.
+
+```python
         # Semantic enrichment with contextual metadata
         enriched_nodes = self._apply_semantic_enrichment(decomposition_result)
 
@@ -747,7 +785,11 @@ The method returns a comprehensive NodeRAG system with all components integrated
                 'enrichment_applied': True
             }
         }
+```
 
+Semantic enrichment applies contextual metadata to all nodes, enhancing them with relationship types, confidence scores, and contextual relevance measures. The augmentation stage returns a comprehensive connected knowledge structure ready for reasoning pathway construction.
+
+```python
     def _enrichment_stage(self, augmentation_result: Dict, config: Dict) -> Dict[str, Any]:
         """Stage 3: Personalized PageRank and reasoning pathway construction."""
 
@@ -759,7 +801,11 @@ The method returns a comprehensive NodeRAG system with all components integrated
             reasoning_pathways = self._construct_reasoning_pathways_stage3(
                 augmentation_result, config
             )
+```
 
+The enrichment stage constructs reasoning pathways that enable logically coherent multi-hop traversal through the knowledge graph. These pathways represent semantic chains of inference, connecting related concepts through logical reasoning steps.
+
+```python
         # Apply graph-centric optimization
         optimized_structure = self._apply_graph_optimization(
             augmentation_result, reasoning_pathways
@@ -773,7 +819,11 @@ The method returns a comprehensive NodeRAG system with all components integrated
         }
 ```
 
+```
+
 #### Step 2: Personalized PageRank for Semantic Traversal
+
+Graph-centric optimization applies final structural improvements and creates the complete NodeRAG system ready for deployment. The enrichment stage produces reasoning pathways that enable sophisticated multi-hop queries while maintaining computational efficiency.
 
 ```python
 class PersonalizedPageRankProcessor:
@@ -782,7 +832,11 @@ class PersonalizedPageRankProcessor:
     def __init__(self, damping_factor: float = 0.85):
         self.damping_factor = damping_factor
         self.pagerank_cache = {}
+```
 
+The PersonalizedPageRankProcessor implements semantic traversal guidance using PageRank algorithm. The damping factor of 0.85 represents the probability of following graph edges versus random jumps, creating more focused traversal patterns. The cache stores computed scores for reuse across queries.
+
+```python
     def compute_pagerank(self, graph: nx.MultiDiGraph, node_registry: Dict) -> Dict[str, float]:
         """Compute personalized PageRank scores for semantic traversal."""
 
@@ -791,8 +845,12 @@ class PersonalizedPageRankProcessor:
 
         # Create personalization vector based on node types and importance
         personalization = self._create_personalization_vector(graph, node_registry)
+```
 
-        # Compute Personalized PageRank
+PageRank computation begins with creating a personalization vector that emphasizes semantically important nodes based on their types and connections. This guides the algorithm to prioritize entities and concepts over structural nodes during traversal.
+
+```python
+        # Compute Personalized PageRank with optimized parameters
         try:
             pagerank_scores = nx.pagerank(
                 graph,
@@ -801,7 +859,11 @@ class PersonalizedPageRankProcessor:
                 max_iter=100,
                 tol=1e-6
             )
+```
 
+The PageRank computation uses NetworkX's implementation with carefully tuned parameters. max_iter=100 ensures convergence for most graphs, while tol=1e-6 provides sufficient precision for semantic ranking without over-computation.
+
+```python
             # Normalize scores by node type for better semantic traversal
             normalized_scores = self._normalize_scores_by_type(
                 pagerank_scores, node_registry
@@ -812,7 +874,11 @@ class PersonalizedPageRankProcessor:
         except Exception as e:
             print(f"PageRank computation error: {e}")
             return {}
+```
 
+Score normalization by type ensures fair comparison across different node categories. This prevents highly connected structural nodes from dominating semantically important but lower-degree concept nodes.
+
+```python
     def _create_personalization_vector(self, graph: nx.MultiDiGraph,
                                      node_registry: Dict) -> Dict[str, float]:
         """Create personalization vector emphasizing important node types."""
@@ -828,7 +894,12 @@ class PersonalizedPageRankProcessor:
             NodeType.DOCUMENT: 0.15,   # Medium weight for documents
             NodeType.CLUSTER: 0.1      # Lower weight for clusters
         }
+```
 
+The personalization vector assigns different base weights to node types based on their semantic importance. Entities get the highest weight (0.3) as they represent concrete knowledge, followed by concepts (0.25) for abstract understanding. This type-based weighting guides PageRank to emphasize semantically rich nodes.
+
+```python
+        # Calculate personalized weights for each node
         for node_id in graph.nodes():
             if node_id in node_registry:
                 node_type = node_registry[node_id].node_type
@@ -842,15 +913,23 @@ class PersonalizedPageRankProcessor:
                 personalization[node_id] = final_weight
             else:
                 personalization[node_id] = 0.1  # Default weight
+```
 
-        # Normalize to sum to 1.0
+Each node's final weight combines its base type weight with dynamic boosts based on confidence scores and connection count. High-confidence nodes and well-connected hubs receive additional weight, creating a personalization vector that reflects both semantic importance and graph centrality.
+
+```python
+        # Normalize to sum to 1.0 for valid probability distribution
         total_weight = sum(personalization.values())
         if total_weight > 0:
             for node_id in personalization:
                 personalization[node_id] /= total_weight
 
         return personalization
+```
 
+Normalization creates a valid probability distribution where all weights sum to 1.0. This ensures the personalization vector meets PageRank algorithm requirements while maintaining the relative importance relationships between different node types.
+
+```python
     def get_semantic_pathway(self, graph: nx.MultiDiGraph, start_node: str,
                            target_concepts: List[str], max_depth: int = 5) -> List[str]:
         """Find semantic pathway using PageRank-guided traversal."""
@@ -858,20 +937,29 @@ class PersonalizedPageRankProcessor:
         if start_node not in graph:
             return []
 
-        # Use PageRank scores to guide pathway exploration
+        # Use cached PageRank scores to guide pathway exploration
         pagerank_scores = self.pagerank_cache.get(id(graph))
         if not pagerank_scores:
             return []
+```
 
+The semantic pathway method implements intelligent graph traversal using precomputed PageRank scores. It starts from a given node and explores the graph following high-ranking connections toward target concepts. The cache lookup avoids recomputing PageRank scores for the same graph.
+
+```python
+        # Initialize traversal state
         visited = set()
         pathway = [start_node]
         current_node = start_node
         depth = 0
+```
 
+Traversal initialization sets up the search state with visited node tracking, pathway recording, and depth limiting. This prevents infinite loops and ensures bounded exploration while building the semantic reasoning chain.
+
+```python
+        # Perform guided traversal using PageRank scores
         while depth < max_depth and current_node:
             visited.add(current_node)
 
-            # Find best next node based on PageRank scores and target concepts
             next_node = self._find_best_next_node(
                 graph, current_node, target_concepts, pagerank_scores, visited
             )
@@ -899,46 +987,60 @@ class PersonalizedPageRankProcessor:
 
         # Load embedding model for similarity computation
         embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-
         entity_names = list(entities.keys())
+        
         if len(entity_names) < 2:
             return entities
+```
 
-        # Generate embeddings for entity canonical forms
+Entity merging is a crucial deduplication step in GraphRAG systems. It identifies and consolidates different mentions of the same entity (like "Apple Inc.", "Apple", and "Apple Corporation") using semantic similarity. The process uses the all-MiniLM-L6-v2 model for high-quality embeddings with reasonable computational overhead.
+
+```python
+        # Generate embeddings and similarity matrix for all entities
         entity_embeddings = embedding_model.encode(entity_names)
-
-        # Calculate similarity matrix
         similarity_matrix = cosine_similarity(entity_embeddings)
 
-        # Find similar entity pairs
+        # Initialize clustering structures
         merged_entities = {}
-        entity_clusters = []
         processed_entities = set()
+```
 
+The similarity computation creates embeddings for all entity names, then calculates a cosine similarity matrix. This matrix contains similarity scores between every pair of entities, enabling efficient identification of semantic duplicates using the 0.85 threshold.
+
+```python
+        # Cluster similar entities using greedy approach
         for i, entity1 in enumerate(entity_names):
             if entity1 in processed_entities:
                 continue
 
-            # Find similar entities
+            # Find all entities similar to current entity
             cluster = [entity1]
             for j, entity2 in enumerate(entity_names):
                 if i != j and entity2 not in processed_entities:
                     if similarity_matrix[i][j] > similarity_threshold:
                         cluster.append(entity2)
+```
 
-            # Create merged entity
+The clustering algorithm uses a greedy approach to group similar entities. For each unprocessed entity, it finds all other entities exceeding the similarity threshold and groups them into a cluster. This creates entity equivalence groups that will be merged.
+
+```python
+            # Merge clustered entities or preserve individual entities
             if len(cluster) > 1:
                 # Choose canonical form (highest confidence entity)
                 canonical_entity = max(
-                    cluster,
-                    key=lambda x: entities[x].get('confidence', 0.5)
+                    cluster, key=lambda x: entities[x].get('confidence', 0.5)
                 )
 
-                # Merge information
+                # Create merged entity with consolidated information
                 merged_entity = entities[canonical_entity].copy()
                 merged_entity['text_variants'] = []
                 merged_entity['merged_from'] = cluster
+```
 
+When multiple entities are clustered together, the system selects the highest-confidence entity as the canonical form. This preserves the most reliable information while creating a comprehensive merged entity that tracks all variants and source entities.
+
+```python
+                # Consolidate text variants from all cluster members
                 for entity_name in cluster:
                     entity_data = entities[entity_name]
                     merged_entity['text_variants'].extend(
@@ -946,12 +1048,10 @@ class PersonalizedPageRankProcessor:
                     )
                     processed_entities.add(entity_name)
 
-                # Remove duplicates in text variants
                 merged_entity['text_variants'] = list(set(merged_entity['text_variants']))
                 merged_entities[canonical_entity] = merged_entity
-
             else:
-                # Single entity, no merging needed
+                # Preserve individual entities with no similar matches
                 merged_entities[entity1] = entities[entity1]
                 processed_entities.add(entity1)
 
@@ -1598,39 +1698,95 @@ This is where GraphRAG truly shines compared to vector search. Traditional RAG w
 Apple → partners_with → Company X → operates_in → Automotive → uses_technology → Technology Y
 ```
 
-This multi-hop traversal discovers information that no single document contains, synthesizing knowledge from the relationship structure itself. The graph becomes a reasoning engine, not just a retrieval system.
+This multi-hop traversal discovers information that no single document contains, synthesizing knowledge from the relationship structure itself. **The graph becomes a reasoning engine, not just a retrieval system.**
 
 ### Graph Traversal Strategies for Different Query Types
 
 Different queries require different traversal approaches, each optimized for specific reasoning patterns:
 
-**Direct Relationship Queries** use **Breadth-First Traversal** to find immediate connections ("Who works with Apple?"). This strategy explores all first-hop neighbors before moving to second-hop, ensuring comprehensive coverage of direct relationships.
+#### Direct and Connection Discovery Queries
 
-**Connection Discovery Queries** use **Depth-First Traversal** to explore deep relationship chains ("What's the connection between Apple and Tesla?"). This strategy follows paths to their conclusion, ideal for finding indirect connections through multiple intermediaries.
+**Direct Relationship Queries:**
+- Use **Breadth-First Traversal** to find immediate connections
+- Example: "Who works with Apple?"
+- Strategy: Explores all first-hop neighbors before moving to second-hop
+- Benefit: Ensures comprehensive coverage of direct relationships
 
-**Semantic Reasoning Queries** use **Semantic-Guided Traversal** that follows paths most relevant to query semantics, filtering relationships based on their relevance to the question context. This enables focused exploration of semantically coherent pathways.
+**Connection Discovery Queries:**
+- Use **Depth-First Traversal** to explore deep relationship chains
+- Example: "What's the connection between Apple and Tesla?"
+- Strategy: Follows paths to their conclusion
+- Benefit: Ideal for finding indirect connections through multiple intermediaries
+
+#### Semantic Reasoning Approaches
+
+**Semantic Reasoning Queries:**
+- Use **Semantic-Guided Traversal**
+- Method: Follows paths most relevant to query semantics
+- Filtering: Based on relationship relevance to question context
+- Result: Focused exploration of semantically coherent pathways
 
 ### Advanced Traversal Strategies
 
-**Relevance-Ranked Traversal** prioritizes high-confidence, important relationships using PageRank scores and relationship confidence levels. This strategy ensures that the most reliable knowledge pathways are explored first, improving answer quality.
+#### Relevance and Community-Based Traversal
 
-**Community-Focused Traversal** explores dense clusters of related entities, useful for questions about industry sectors or technology ecosystems. This approach leverages graph community structure to find comprehensive related information.
+**Relevance-Ranked Traversal:**
+- Prioritizes high-confidence, important relationships
+- Uses PageRank scores and relationship confidence levels
+- Ensures most reliable knowledge pathways are explored first
+- Improves answer quality through reliability focus
 
+**Community-Focused Traversal:**
+- Explores dense clusters of related entities
+- Useful for questions about industry sectors or technology ecosystems
+- Leverages graph community structure
+- Finds comprehensive related information within domains
+
+**Adaptive Strategy Selection:**
 Our traversal engine adaptively selects strategies based on query characteristics, ensuring optimal exploration for each use case.
 
 ### Performance vs Completeness Trade-offs
 
-Graph traversal faces the "explosion problem" - the number of possible paths grows exponentially with hop count. Our engine implements sophisticated pruning strategies to manage this complexity:
+#### Managing the Path Explosion Problem
 
-**Semantic Filtering** ensures only paths semantically related to the query are explored, dramatically reducing the search space while maintaining relevance. **Confidence Thresholding** ignores low-quality relationships, focusing computational resources on reliable knowledge connections.
+Graph traversal faces the **"explosion problem"** - the number of possible paths grows exponentially with hop count. 
 
-**Path Length Limits** prevent infinite traversal while enabling meaningful multi-hop reasoning. **Relevance Scoring** ranks paths by likely usefulness, ensuring the most promising reasoning pathways are explored first.
+**Our engine implements sophisticated pruning strategies:**
 
+1. **Semantic Filtering:**
+   - Ensures only paths semantically related to the query are explored
+   - Dramatically reduces search space while maintaining relevance
+
+2. **Confidence Thresholding:**
+   - Ignores low-quality relationships
+   - Focuses computational resources on reliable knowledge connections
+
+#### Optimization Strategies
+
+**Performance Optimizations:**
+
+1. **Path Length Limits:**
+   - Prevent infinite traversal
+   - Enable meaningful multi-hop reasoning within bounds
+
+2. **Relevance Scoring:**
+   - Ranks paths by likely usefulness
+   - Ensures most promising reasoning pathways are explored first
+
+**Real-Time Practicality:**
 This multi-layered approach ensures comprehensive coverage while maintaining reasonable response times, making GraphRAG practical for real-time applications.
 
 ### Advanced Graph Traversal Engine
 
-The heart of GraphRAG's multi-hop reasoning capability lies in intelligent traversal algorithms that can navigate complex knowledge graphs to answer sophisticated queries. Our traversal engine combines multiple strategies and implements sophisticated pruning to balance comprehensiveness with performance.
+#### Intelligent Multi-Hop Reasoning
+
+The heart of GraphRAG's multi-hop reasoning capability lies in intelligent traversal algorithms that navigate complex knowledge graphs to answer sophisticated queries.
+
+**Key Engine Features:**
+- Combines multiple traversal strategies
+- Implements sophisticated pruning algorithms
+- Balances comprehensiveness with performance
+- Adapts to query complexity and requirements
 
 ```python
 # Advanced graph traversal for GraphRAG
@@ -1989,35 +2145,75 @@ class GraphTraversalEngine:
 
 Neither graph-only nor vector-only search is optimal for all scenarios. Each approach has distinct strengths and limitations that make hybrid systems significantly more powerful than either approach alone.
 
-### Vector Search: Semantic Similarity Powerhouse
+#### Vector Search: Semantic Similarity Powerhouse
 
-**Vector search excels at semantic understanding:** It provides excellent semantic similarity matching, naturally handles synonyms and paraphrasing, enables fast retrieval for well-defined concepts, and works effectively with isolated facts. For queries like "What is machine learning?", vector search quickly finds relevant content based on semantic similarity.
+**Vector Search Strengths:**
+- Excellent semantic similarity matching
+- Naturally handles synonyms and paraphrasing  
+- Enables fast retrieval for well-defined concepts
+- Works effectively with isolated facts
 
-**However, vector search has critical limitations:** It cannot traverse relationships between concepts, misses connections requiring multi-step reasoning, struggles with queries requiring synthesis across sources, and has limited understanding of entity relationships. Vector search treats knowledge as isolated fragments rather than connected information.
+**Example Use Case:**
+For queries like "What is machine learning?", vector search quickly finds relevant content based on semantic similarity.
 
-### Graph Search: Relationship and Reasoning Excellence
+**Vector Search Limitations:**
+- Cannot traverse relationships between concepts
+- Misses connections requiring multi-step reasoning
+- Struggles with queries requiring synthesis across sources
+- Has limited understanding of entity relationships
 
-**Graph search enables sophisticated reasoning:** It discovers implicit connections through relationships, enables multi-hop reasoning and inference, understands structural importance and centrality, and reveals information not contained in any single document. For queries requiring connection discovery, graph search is unmatched.
+#### Graph Search: Relationship and Reasoning Excellence
 
-**But graph search also has limitations:** It depends heavily on explicit relationship extraction quality, may miss semantically similar but unconnected information, can be computationally expensive for large traversals, and requires comprehensive entity recognition. Graph search can miss obvious semantic connections if relationships weren't explicitly extracted.
+**Graph Search Strengths:**
+- Discovers implicit connections through relationships
+- Enables multi-hop reasoning and inference
+- Understands structural importance and centrality
+- Reveals information not contained in any single document
+
+**When Graph Search Excels:**
+For queries requiring connection discovery, graph search is unmatched.
+
+**Graph Search Limitations:**
+- Depends heavily on explicit relationship extraction quality
+- May miss semantically similar but unconnected information
+- Can be computationally expensive for large traversals
+- Requires comprehensive entity recognition
 
 ### The Hybrid Advantage: Best of Both Worlds
 
+#### Four-Stage Hybrid Processing
+
 Hybrid search combines both approaches strategically to overcome individual limitations:
 
-**Stage 1: Vector Search** identifies semantically relevant content using embedding similarity, capturing documents and entities that match the query's semantic intent. This provides comprehensive coverage of directly relevant information.
+**Stage 1: Vector Search**
+- Identifies semantically relevant content using embedding similarity
+- Captures documents and entities matching query's semantic intent
+- Provides comprehensive coverage of directly relevant information
 
-**Stage 2: Graph Traversal** discovers related information through relationships, following logical pathways to find connected knowledge that vector search might miss. This adds multi-hop reasoning capabilities.
+**Stage 2: Graph Traversal**
+- Discovers related information through relationships
+- Follows logical pathways to find connected knowledge
+- Adds multi-hop reasoning capabilities vector search might miss
 
-**Stage 3: Intelligent Fusion** combines results based on query characteristics, balancing vector similarity scores with graph centrality and relationship confidence. The fusion process ensures optimal result ranking.
+#### Intelligent Integration and Results
 
-**Stage 4: Adaptive Weighting** emphasizes the most effective approach for each query type - vector search for semantic queries, graph traversal for relationship queries, balanced weighting for complex analytical queries.
+**Stage 3: Intelligent Fusion**
+- Combines results based on query characteristics
+- Balances vector similarity scores with graph centrality
+- Uses relationship confidence for optimal result ranking
 
-This results in 30-40% improvement in answer quality over pure approaches, especially for complex queries requiring both semantic understanding and relational reasoning.
+**Stage 4: Adaptive Weighting**
+- Vector search emphasis: For semantic queries
+- Graph traversal emphasis: For relationship queries
+- Balanced weighting: For complex analytical queries
+
+**Performance Improvement:**
+This results in **30-40% improvement in answer quality** over pure approaches, especially for complex queries requiring both semantic understanding and relational reasoning.
 
 ### Hybrid Graph-Vector RAG Architecture
 
-The state-of-the-art approach combines the complementary strengths of graph and vector search into a unified system that adaptively leverages both methods based on query characteristics and content structure.
+**State-of-the-Art Design:**
+The architecture combines complementary strengths of graph and vector search into a unified system that adaptively leverages both methods based on query characteristics and content structure.
 
 ```python
 # Hybrid graph-vector search system
@@ -2245,25 +2441,49 @@ class HybridGraphVectorRAG:
         }
 ```
 
-**Comprehensive result structure** provides complete transparency into the hybrid search process. This rich metadata enables downstream systems to understand how the answer was generated, which sources contributed most significantly, and what performance characteristics were observed. This level of detail is essential for production systems requiring explainability and audit trails.
+#### Step 8: Comprehensive Result Structure
+
+**Transparency and Metadata:**
+The comprehensive result structure provides complete transparency into the hybrid search process. This rich metadata enables downstream systems to understand:
+
+- How the answer was generated
+- Which sources contributed most significantly  
+- What performance characteristics were observed
 
 #### Step 9: Adaptive Fusion Strategy
 
 ### Understanding Adaptive Selection
 
-This sophisticated fusion strategy implements query-aware combination of results. Different queries benefit from different retrieval emphasis:
+This sophisticated fusion strategy implements **query-aware combination of results**. Different queries benefit from different retrieval emphasis.
+
+#### Query Type Classification
+
+**Query Types and Weighting Strategy:**
 
 - **Factual queries** ("What is X?") → Higher vector weight  
 - **Analytical queries** ("How does X affect Y?") → Balanced combination
 - **Relational queries** ("What connects X to Y?") → Higher graph weight
 - **Complex synthesis** ("Analyze X's impact on Y through Z") → Dynamic weighting
 
-The fusion process implements key innovations:
+#### Fusion Process Innovations
 
-1. **Query Analysis**: LLM-based understanding of query intent and complexity
-2. **Dynamic Weighting**: Adaptive weights based on query characteristics  
-3. **Diversity Selection**: Ensures varied perspectives in final context
-4. **Quality Assurance**: Validates context relevance and coherence
+**The fusion process implements four key innovations:**
+
+1. **Query Analysis:**
+   - LLM-based understanding of query intent and complexity
+   - Automatic categorization of query types
+
+2. **Dynamic Weighting:**
+   - Adaptive weights based on query characteristics
+   - Real-time adjustment of vector vs graph emphasis
+
+3. **Diversity Selection:**
+   - Ensures varied perspectives in final context
+   - Prevents information redundancy
+
+4. **Quality Assurance:**
+   - Validates context relevance and coherence
+   - Filters low-quality or irrelevant results
 
 ### Core Adaptive Selection Method
 
@@ -2721,103 +2941,293 @@ class ProductionGraphRAG:
 
 ### What You've Built: Complete GraphRAG System
 
-**Advanced Graph Architectures:**
-- ✅ **NodeRAG Architecture**: Heterogeneous graph system with specialized node types and three-stage processing
-- ✅ **Structured Brain Architecture**: Six specialized node types mimicking human knowledge organization
-- ✅ **Advanced Graph Algorithms**: Personalized PageRank and HNSW similarity integration
+#### Advanced Graph Architectures
 
-**Graph Construction Systems:**
-- ✅ **Traditional GraphRAG**: Knowledge graph construction from unstructured documents with LLM-enhanced extraction
-- ✅ **Code GraphRAG**: AST parsing and call graph analysis for software repositories
-- ✅ **Production Neo4j Integration**: Optimized batch operations and performance-critical indexing
+**Modern Graph Systems You've Implemented:**
 
-**Intelligent Retrieval Systems:**
-- ✅ **Multi-hop Graph Traversal**: Semantic guidance, path ranking, and coherent reasoning pathways
-- ✅ **Hybrid Graph-Vector Search**: Adaptive fusion strategies combining graph reasoning with vector similarity
+- ✅ **NodeRAG Architecture**
+  - Heterogeneous graph system with specialized node types
+  - Three-stage processing pipeline
+  - Optimized for different knowledge structures
+
+- ✅ **Structured Brain Architecture**
+  - Six specialized node types mimicking human knowledge organization
+  - Concept nodes, entity nodes, relationship nodes, and more
+  - Natural knowledge representation patterns
+
+- ✅ **Advanced Graph Algorithms**
+  - Personalized PageRank implementation
+  - HNSW similarity integration
+  - Semantic pathway construction
+
+#### Graph Construction Systems
+
+**Knowledge Construction Methods You've Mastered:**
+
+- ✅ **Traditional GraphRAG**
+  - Knowledge graph construction from unstructured documents
+  - LLM-enhanced entity and relationship extraction
+  - Automated graph building workflows
+
+- ✅ **Code GraphRAG**
+  - AST parsing for code structure analysis
+  - Call graph analysis for software repositories
+  - Dependency tracking and relationship mapping
+
+- ✅ **Production Neo4j Integration**
+  - Optimized batch operations for large-scale data
+  - Performance-critical indexing strategies
+  - Enterprise-grade graph database deployment
+
+#### Intelligent Retrieval Systems
+
+**Retrieval Technologies You've Built:**
+
+- ✅ **Multi-hop Graph Traversal**
+  - Semantic guidance for intelligent path selection
+  - Path ranking and quality assessment
+  - Coherent reasoning pathway construction
+
+- ✅ **Hybrid Graph-Vector Search**
+  - Adaptive fusion strategies
+  - Graph reasoning combined with vector similarity
+  - Query-aware result combination
 
 ### Key Technical Skills Learned
 
-**Graph Architecture & Algorithms:**
-1. **NodeRAG Architecture**: Heterogeneous graph design, specialized node processing, three-stage pipeline implementation
-2. **Advanced Graph Algorithms**: Personalized PageRank implementation, HNSW integration, semantic pathway construction
-3. **Graph Traversal**: Multi-hop reasoning, semantic-guided exploration, coherent path synthesis
+#### Graph Architecture & Algorithms
 
-**Knowledge Engineering & Analysis:**
-4. **Knowledge Graph Engineering**: Traditional entity extraction, relationship mapping, graph construction
-5. **Code Analysis**: AST parsing, dependency analysis, call graph construction
-6. **Graph Databases**: Neo4j schema design, performance optimization, batch operations
+**Core Architecture Skills:**
 
-**Hybrid Retrieval Systems:**
-7. **Hybrid Retrieval**: Graph-vector fusion, adaptive weighting, comprehensive response generation
+1. **NodeRAG Architecture Design**
+   - Heterogeneous graph design principles
+   - Specialized node processing strategies
+   - Three-stage pipeline implementation
+
+2. **Advanced Graph Algorithm Implementation**
+   - Personalized PageRank for semantic ranking
+   - HNSW integration for similarity search
+   - Semantic pathway construction algorithms
+
+3. **Graph Traversal Mastery**
+   - Multi-hop reasoning implementation
+   - Semantic-guided exploration strategies
+   - Coherent path synthesis techniques
+
+#### Knowledge Engineering & Analysis
+
+**Knowledge Processing Skills:**
+
+4. **Knowledge Graph Engineering**
+   - Traditional entity extraction methods
+   - Relationship mapping and validation
+   - Automated graph construction workflows
+
+5. **Code Analysis Expertise**
+   - AST parsing for structural analysis
+   - Dependency analysis and tracking
+   - Call graph construction for software systems
+
+6. **Graph Database Mastery**
+   - Neo4j schema design and optimization
+   - Performance optimization strategies
+   - Batch operation implementation for scale
+
+#### Hybrid Retrieval Systems
+
+**Advanced Retrieval Skills:**
+
+7. **Hybrid System Design**
+   - Graph-vector fusion architecture
+   - Adaptive weighting algorithms
+   - Comprehensive response generation
 
 ### Performance Characteristics
 
-- **NodeRAG Processing**: 3-stage pipeline processes 10K+ documents with 85-95% pathway coherence
-- **Personalized PageRank**: Sub-100ms semantic pathway computation on 100K+ heterogeneous graphs
-- **HNSW Graph Integration**: 200-500ms similarity edge construction with 80-90% type compatibility
-- **Traditional Entity Extraction**: 80-90% precision with LLM-enhanced methods
-- **Graph Traversal**: Sub-second multi-hop queries on graphs with 100K+ entities
-- **Hybrid Search**: 30-40% improvement in complex query answering over pure vector search
-- **Code Analysis**: Comprehensive repository analysis with relationship extraction
+#### System Performance Metrics
+
+**Processing Performance:**
+
+- **NodeRAG Processing Pipeline**
+  - Handles 10K+ documents efficiently
+  - Achieves 85-95% pathway coherence
+  - Three-stage processing maintains quality at scale
+
+- **Personalized PageRank Computation**
+  - Sub-100ms semantic pathway computation
+  - Scales to 100K+ heterogeneous graph nodes
+  - Real-time ranking for production systems
+
+- **HNSW Graph Integration**
+  - 200-500ms similarity edge construction
+  - 80-90% type compatibility achieved
+  - Efficient nearest neighbor search integration
+
+#### Retrieval Performance
+
+**Query and Extraction Performance:**
+
+- **Traditional Entity Extraction**
+  - 80-90% precision with LLM-enhanced methods
+  - Automated relationship discovery
+  - High-quality knowledge graph construction
+
+- **Graph Traversal Speed**
+  - Sub-second multi-hop queries
+  - Scales to graphs with 100K+ entities
+  - Efficient path exploration algorithms
+
+- **Hybrid Search Advantage**
+  - **30-40% improvement** in complex query answering
+  - Outperforms pure vector search significantly
+  - Best-in-class results for analytical queries
+
+- **Code Analysis Capability**
+  - Comprehensive repository analysis
+  - Complete relationship extraction
+  - Scalable to large codebases
 
 ### When to Choose NodeRAG, GraphRAG, or Vector RAG
 
-### Use NodeRAG when
+#### Use NodeRAG When:
 
-- **Complex reasoning** requires understanding different knowledge types (concepts, entities, relationships)
+**Ideal for Complex Knowledge Processing:**
+
+- **Complex reasoning** requires understanding different knowledge types
+  - Concepts, entities, and relationships need specialized handling
+  - Multi-faceted knowledge domains
+
 - **Coherent narratives** needed from fragmented information sources
-- **Educational applications** where understanding knowledge structure is important
-- **Multi-domain knowledge** needs specialized processing (technical + business + regulatory)
-- **Advanced query types** requiring synthesis across different knowledge structures
+  - Educational content generation
+  - Research synthesis from multiple documents
 
-### Use Traditional GraphRAG when
+- **Educational applications** where knowledge structure understanding is critical
+  - Learning pathway construction
+  - Concept dependency mapping
 
-- **Multi-hop reasoning** is required ("What technologies do Apple's partners' suppliers use?")
-- **Relationship discovery** is key ("How are these companies connected?")
-- **Comprehensive exploration** needed ("Find all related information")
-- **Complex analytical queries** ("Analyze the supply chain impact of X on Y")
-- **Domain has rich entity relationships** (business networks, scientific literature, code repositories)
+- **Multi-domain knowledge** needs specialized processing
+  - Technical + business + regulatory information
+  - Cross-domain expertise synthesis
 
-### Use Vector RAG when
+- **Advanced query types** requiring synthesis across knowledge structures
+  - Complex analytical questions
+  - Multi-perspective analysis requirements
 
-- **Direct factual lookup** ("What is quantum computing?")
-- **Semantic similarity** is primary concern ("Find similar concepts")
-- **Simple Q&A** scenarios ("When was X founded?")
+#### Use Traditional GraphRAG When:
+
+**Perfect for Relationship-Driven Queries:**
+
+- **Multi-hop reasoning** is required
+  - Example: "What technologies do Apple's partners' suppliers use?"
+  - Deep relationship chain exploration
+
+- **Relationship discovery** is key
+  - Example: "How are these companies connected?"
+  - Network analysis and connection mapping
+
+- **Comprehensive exploration** needed
+  - Example: "Find all related information"
+  - Exhaustive relationship traversal
+
+- **Complex analytical queries**
+  - Example: "Analyze the supply chain impact of X on Y"
+  - Multi-step reasoning through relationships
+
+- **Domain has rich entity relationships**
+  - Business networks and partnerships
+  - Scientific literature with citation networks
+  - Code repositories with dependency graphs
+
+#### Use Vector RAG When:
+
+**Optimal for Semantic Similarity Tasks:**
+
+- **Direct factual lookup** queries
+  - Example: "What is quantum computing?"
+  - Straightforward information retrieval
+
+- **Semantic similarity** is primary concern
+  - Example: "Find similar concepts"
+  - Content recommendation systems
+
+- **Simple Q&A** scenarios
+  - Example: "When was X founded?"
+  - Direct fact-based questions
+
 - **Limited relationship structure** in domain
+  - Document collections without explicit connections
+  - Knowledge domains with weak entity relationships
+
 - **Fast response time** is critical
+  - Real-time applications
+  - High-throughput query scenarios
 
-### Use Hybrid GraphRAG when
+#### Use Hybrid GraphRAG When:
 
-- **Query types vary** (production systems with diverse users)
-- **Maximum coverage** is needed (research and analysis scenarios)
+**Best Choice for Production Systems:**
+
+- **Query types vary** significantly
+  - Production systems with diverse users
+  - Multiple use cases in single application
+
+- **Maximum coverage** is needed
+  - Research and analysis scenarios
+  - Comprehensive knowledge exploration
+
 - **Both factual accuracy and insight discovery** are important
-- **You want the best of both worlds** (most real-world applications)
+  - Business intelligence applications
+  - Research and development environments
+
+- **You want the best of both worlds**
+  - Most real-world applications
+  - When unsure which approach is optimal
 
 ### GraphRAG vs Vector RAG: Concrete Examples
 
-**Example Query**: "What are the environmental impacts of technologies used by Apple's automotive partners?"
+#### Example Query Analysis
 
-### Vector RAG Approach
+**Complex Query Example:**
+"What are the environmental impacts of technologies used by Apple's automotive partners?"
 
+#### Vector RAG Approach
+
+**Process:**
 1. Search for "environmental impacts technologies"
 2. Search for "Apple automotive partners"
 3. Try to connect results manually
-4. **Result**: Finds documents about each topic separately, but struggles to connect them
+4. Struggle with multi-step reasoning
 
-### GraphRAG Approach
+**Result:**
+- Finds documents about each topic separately
+- **Limitation:** Struggles to connect disparate information
+- **Issue:** Missing relationship-based insights
 
+#### GraphRAG Approach
+
+**Process:**
 1. Find Apple entity in knowledge graph
-2. Traverse: Apple → partners_with → [Automotive Companies]
-3. Traverse: [Automotive Companies] → uses_technology → [Technologies]
-4. Traverse: [Technologies] → has_environmental_impact → [Impacts]
-5. **Result**: Discovers specific impact chains that no single document contains
+2. **First Hop:** Apple → partners_with → [Automotive Companies]
+3. **Second Hop:** [Automotive Companies] → uses_technology → [Technologies]
+4. **Third Hop:** [Technologies] → has_environmental_impact → [Impacts]
 
-### Hybrid Approach
+**Result:**
+- Discovers specific impact chains through relationships
+- **Advantage:** Finds information no single document contains
+- **Strength:** Multi-hop reasoning reveals hidden connections
 
-1. Uses vector search to understand "environmental impacts" semantically
-2. Uses graph traversal to follow the relationship chain
-3. Combines both to provide comprehensive, accurate answers
-4. **Result**: Best coverage with highest accuracy
+#### Hybrid Approach: Best of Both Worlds
+
+**Process:**
+1. **Vector Component:** Understands "environmental impacts" semantically
+2. **Graph Component:** Follows the relationship chain systematically
+3. **Fusion:** Combines semantic understanding with relationship reasoning
+4. **Validation:** Cross-references findings from both methods
+
+**Result:**
+- **Coverage:** Best comprehensive coverage of the topic
+- **Accuracy:** Highest accuracy through dual validation
+- **Insight:** Both factual information and relationship insights
+- **Quality:** Superior answer quality for complex queries
 
 ---
 
