@@ -1,95 +1,71 @@
-# RAG Architecture Module
+# Module 2: RAG Architecture
 
-Welcome to the **RAG Architecture** module of the Agentic AI Nano-Degree! This comprehensive 10-session program takes you from RAG fundamentals to production-ready enterprise implementations.
+## 🎯📝⚙️ Learning Path Overview
 
-## Module Overview
+This module offers three distinct learning paths for mastering Retrieval-Augmented Generation (RAG) systems:  
 
-This module provides complete coverage of Retrieval-Augmented Generation (RAG) systems, from basic concepts to advanced multi-modal and agentic implementations.
+### 🎯 Observer Path - Essential Concepts (2-3 hours total)  
+**Outcome**: Understand core RAG principles and when to use different approaches  
+**Best for**: Managers, architects, and anyone needing conceptual understanding  
 
-**Duration**: 10 Sessions  
-**Time Investment**: 50-140 minutes per session (depending on chosen path)  
-**Prerequisites**: Basic ML concepts, Python experience, understanding of vector spaces  
+### 📝 Participant Path - Practical Implementation (8-12 hours total)  
+**Outcome**: Build working RAG systems for production use  
+**Best for**: Developers, data scientists, and hands-on practitioners  
 
-## Learning Journey
+### ⚙️ Implementer Path - Complete Mastery (20-25 hours total)  
+**Outcome**: Deep expertise in advanced RAG architectures and optimization  
+**Best for**: Senior developers, ML engineers, and RAG specialists    
 
-### Foundation (Sessions 0-2)
+## Session-by-Session Guide
 
-Establish your understanding of RAG fundamentals and core implementation patterns.
+### 🎯📝⚙️ Session 1: RAG Fundamentals & Vector Databases
+**🎯 Observer**: Core concepts, when to use RAG, vector similarity basics (45 min)  
+**📝 Participant**: Build complete vector RAG system with Chroma/Pinecone (2 hours)  
+**⚙️ Implementer**: Advanced embedding strategies, custom vector operations (+ 2 hours)  
 
-### Session 0: Introduction to RAG Architecture
+[**Start Session 1 →**](Session1_RAG_Fundamentals_Vector_Databases.md)
 
-- RAG evolution from 2017 to 2025
-- Fundamental architecture components
-- Problem-solving approaches and alternatives
-- Real-world use cases and applications
+### 🎯📝⚙️ Session 2: Advanced Chunking & Query Processing  
+**🎯 Observer**: Why chunking matters, different chunking strategies (30 min)  
+**📝 Participant**: Implement semantic chunking, hierarchical structures (2 hours)  
+**⚙️ Implementer**: Custom chunking algorithms, performance optimization (+ 2 hours)  
 
-### Session 1: Basic RAG Implementation
+[**Start Session 2 →**](Session2_Advanced_Chunking_Query_Processing.md)
 
-- Core RAG pipeline development
-- Document indexing and retrieval
-- Generation and response synthesis
-- End-to-end system integration
+### 🎯📝⚙️ Session 3: Search Enhancement & Query Expansion
+**🎯 Observer**: Query expansion concepts, reranking benefits (30 min)  
+**📝 Participant**: Build query expansion, implement reranking systems (2.5 hours)  
+**⚙️ Implementer**: Advanced retrieval algorithms, custom ranking models (+ 2 hours)  
 
-### Session 2: Advanced Chunking & Preprocessing
+[**Start Session 3 →**](Session3_RAG_Search_Enhancement_Query_Expansion.md)
 
-- Intelligent document segmentation
-- Structure-aware chunking strategies
-- Metadata extraction and enrichment
-- Quality assessment and optimization
+### 🎯📝⚙️ Session 4: Advanced Context & RAG Routing
+**🎯 Observer**: Context engineering principles, routing strategies (30 min)  
+**📝 Participant**: Implement context routing, advanced prompting (2 hours)  
+**⚙️ Implementer**: Sophisticated routing algorithms, context optimization (+ 2 hours)  
 
-### Search & Enhancement (Sessions 3-4)
+[**Start Session 4 →**](Session4_Advanced_Context_RAG_Routing.md)
 
-Master sophisticated retrieval and query optimization techniques.
+### 🎯📝⚙️ Session 5: RAG Evaluation & Quality Assessment
+**🎯 Observer**: Evaluation metrics, quality assessment approaches (30 min)  
+**📝 Participant**: Build comprehensive evaluation systems (2 hours)  
+**⚙️ Implementer**: Advanced metrics, automated evaluation pipelines (+ 2 hours)  
 
-### Session 3: Vector Databases & Search Optimization
+[**Start Session 5 →**](Session5_RAG_Evaluation_Quality_Assessment.md)
 
-- Vector database selection and configuration
-- Hybrid search implementations
-- Index optimization strategies
-- Performance tuning and scaling
+### 🎯📝⚙️ Session 6: Graph-Based RAG (GraphRAG)
+**🎯 Observer**: GraphRAG concepts, when to use knowledge graphs (30 min)  
+**📝 Participant**: Build traditional and code GraphRAG systems (3 hours)  
+**⚙️ Implementer**: Advanced graph algorithms, production optimization (+ 8 hours)  
 
-### Session 4: Query Enhancement & Context Augmentation
+[**Start Session 6 →**](Session6_Graph_Based_RAG.md)
 
-- Query understanding and expansion
-- Context-aware retrieval strategies
-- Multi-step reasoning approaches
-- Intent classification and routing
-
-### Evaluation & Quality (Session 5)
-
-Learn to measure, monitor, and improve RAG system performance.
-
-### Session 5: RAG Evaluation & Quality Assessment
-
-- Comprehensive evaluation frameworks
-- Automated quality metrics
-- Human evaluation strategies
-- Continuous improvement processes
-
-### Advanced Architectures (Sessions 6-8)
-
-Explore cutting-edge RAG implementations and specialized approaches.
-
-### Session 6: Graph-Based RAG
-
-- Knowledge graph integration
-- Entity relationship modeling
-- Graph traversal algorithms
-- Multi-hop reasoning systems
-
-### Session 7: Agentic RAG Systems
-
-- Agent-driven retrieval strategies
-- Self-improving RAG systems
-- Multi-agent RAG coordination
-- Autonomous quality control
-
-### Session 8: Multi-Modal Advanced RAG
-
-- Text, image, and audio integration
-- Cross-modal retrieval strategies
-- Multi-modal embedding techniques
-- Complex media processing
+#### ⚙️ Implementer Advanced Modules:
+- ⚙️ [NodeRAG Technical Implementation](Session6_NodeRAG_Technical_Implementation.md) (3 hours)  
+- ⚙️ [Code GraphRAG Advanced](Session6_Code_GraphRAG_Advanced.md) (2.5 hours)  
+- ⚙️ [Graph Traversal Advanced](Session6_Graph_Traversal_Advanced.md) (2.5 hours)  
+- ⚙️ [Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md) (4 hours)  
+- ⚙️ [Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md) (4 hours)  
 
 ### Production & Enterprise (Session 9)
 
@@ -102,51 +78,32 @@ Deploy and maintain enterprise-grade RAG systems.
 - Monitoring and observability
 - Enterprise workflow integration
 
-## Learning Paths
+## Quick Navigation by Use Case
 
-Select your engagement level for optimal learning:
+### Building Your First RAG System
+**Path**: 🎯 Observer → 📝 Participant (Sessions 1-2)  
+**Time**: 4-5 hours  
+**Outcome**: Working RAG system for document Q&A  
 
-=== "👀 Observer (35-80 min)"
+### Production RAG System
+**Path**: 📝 Participant (All Sessions)  
+**Time**: 8-12 hours  
+**Outcome**: Production-ready RAG with evaluation  
 
-    **Perfect for:**
-    - Understanding RAG concepts quickly
-    - Decision makers and product managers
-    - Getting architectural overview
-    - Time-efficient learning
+### Advanced RAG Architectures  
+**Path**: ⚙️ Implementer (All Sessions + Advanced Modules)  
+**Time**: 20-25 hours  
+**Outcome**: Expertise in cutting-edge RAG techniques  
 
-    **Activities:**
-    - Read concepts and examine patterns
-    - Review architectural diagrams
-    - Understand design decisions
-    - Explore use case scenarios
+### Code Analysis RAG
+**Path**: 📝 Participant (Sessions 1-2) + ⚙️ Code GraphRAG  
+**Time**: 6-7 hours  
+**Outcome**: RAG system for codebase analysis  
 
-=== "🙋‍♂️ Participant (50-110 min)"
-
-    **Perfect for:**
-    - Active hands-on learning
-    - Developers and ML engineers
-    - Building practical understanding
-    - Following guided implementations
-
-    **Activities:**
-    - Follow demonstration workflows
-    - Analyze implementation examples
-    - Run provided code samples
-    - Complete guided exercises
-
-=== "🛠️ Implementer (140-260 min)"
-
-    **Perfect for:**
-    - Deep technical expertise
-    - System architects and senior engineers
-    - Custom implementation needs
-    - Production-focused learning
-
-    **Activities:**
-    - Build complete RAG systems
-    - Implement custom components
-    - Explore advanced optimization
-    - Create production-ready solutions
+### Enterprise Knowledge RAG
+**Path**: 📝 Participant (All Sessions) + ⚙️ Production Modules  
+**Time**: 15-18 hours  
+**Outcome**: Enterprise-scale knowledge management RAG  
 
 ## Technical Stack
 
