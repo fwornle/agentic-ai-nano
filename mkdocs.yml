@@ -202,34 +202,65 @@ nav:
 
   - RAG Architecture:
     - 02_rag/index.md
-    - Session 0 - RAG Introduction: 02_rag/Session0_Introduction_to_RAG_Architecture.md
-    - Session 1 - Basic RAG: 02_rag/Session1_Basic_RAG_Implementation.md
+    - "🎯📝⚙️ Session 0 - RAG Introduction Hub": 02_rag/Session0_Introduction_to_RAG_Architecture.md
+    - Session 0 Learning Paths:
+      - "🎯 RAG Architecture Fundamentals": 02_rag/Session0_RAG_Architecture_Fundamentals.md
+      - "🎯 RAG Evolution Overview": 02_rag/Session0_RAG_Evolution_Overview.md  
+      - "📝 RAG Implementation Practice": 02_rag/Session0_RAG_Implementation_Practice.md
+      - "📝 RAG Problem Solving": 02_rag/Session0_RAG_Problem_Solving.md
+      - "⚙️ Advanced RAG Patterns": 02_rag/Session0_Advanced_RAG_Patterns.md
+      - "⚙️ Legal RAG Case Study": 02_rag/Session0_Legal_RAG_Case_Study.md
+    - Session 1 - Basic RAG Implementation:
+      - "Session 1 Hub": 02_rag/Session1_Basic_RAG_Implementation.md
+      - "🎯 RAG Essentials": 02_rag/Session1_RAG_Essentials.md
+      - "📝 Implementation Practice": 02_rag/Session1_RAG_Implementation_Practice.md
+      - "⚙️ Advanced Architecture": 02_rag/Session1_Advanced_RAG_Architecture.md
+      - "⚙️ Production Deployment": 02_rag/Session1_Production_Deployment.md
     - Session 1 Advanced Modules:
       - Production Patterns: 02_rag/Session1_ModuleA_Production_Patterns.md
       - Enterprise Deployment: 02_rag/Session1_ModuleB_Enterprise_Deployment.md
     - Session 2 - Advanced Chunking: 02_rag/Session2_Advanced_Chunking_Preprocessing.md
     - Session 2 Advanced Modules:
       - Document Analytics: 02_rag/Session2_ModuleA_Document_Analytics.md
-    - Session 3 - Vector Databases: 02_rag/Session3_Vector_Databases_Search_Optimization.md
-    - Session 3 Advanced Modules:
+    - Session 3 - Vector Databases & Search Optimization:
+      - "🎯 Vector Database Fundamentals": 02_rag/Session3_Vector_Databases_Search_Optimization.md
+      - "📝 Production Implementation Guide": 02_rag/Session3_Production_Implementation.md
+      - "📝 Performance Optimization": 02_rag/Session3_Performance_Optimization.md
+      - "⚙️ Advanced HNSW Tuning": 02_rag/Session3_Advanced_HNSW_Tuning.md
+      - "⚙️ Advanced Hybrid Search": 02_rag/Session3_Advanced_Hybrid_Search.md
+    - Session 3 Legacy Modules:
       - Index Algorithms: 02_rag/Session3_ModuleA_Index_Algorithms.md
-    - Session 4 - Query Enhancement: 02_rag/Session4_Query_Enhancement_Context_Augmentation.md
+    - Session 4 - Query Enhancement:
+      - "🎯 Query Enhancement Hub": 02_rag/Session4_Query_Enhancement_Context_Augmentation.md
+      - "📝 HyDE Implementation": 02_rag/Session4_HyDE_Implementation.md
+      - "📝 Query Expansion Practice": 02_rag/Session4_Query_Expansion_Practice.md
+      - "📝 Context Optimization": 02_rag/Session4_Context_Optimization.md
+      - "⚙️ Advanced Prompt Engineering": 02_rag/Session4_Advanced_Prompt_Engineering.md
+      - "⚙️ Complete Enhancement Pipeline": 02_rag/Session4_Complete_Enhancement_Pipeline.md
     - Session 4 Advanced Modules:
       - Query Understanding: 02_rag/Session4_ModuleA_Query_Understanding.md
     - Session 5 - RAG Evaluation: 02_rag/Session5_RAG_Evaluation_Quality_Assessment.md
     - Session 5 Advanced Modules:
       - Advanced Metrics: 02_rag/Session5_ModuleA_Advanced_Metrics.md
       - Enterprise Monitoring: 02_rag/Session5_ModuleB_Enterprise_Monitoring.md
-    - Session 6 - Graph-Based RAG: 02_rag/Session6_Graph_Based_RAG.md
+    - "🎯📝⚙️ Session 6 - Graph-Based RAG": 02_rag/Session6_Graph_Based_RAG.md
     - Session 6 Advanced Modules:
-      - Advanced Algorithms: 02_rag/Session6_ModuleA_Advanced_Algorithms.md
-      - Production Systems: 02_rag/Session6_ModuleB_Production_Systems.md
-    - Session 7 - Agentic RAG: 02_rag/Session7_Agentic_RAG_Systems.md
+      - "⚙️ NodeRAG Technical Implementation": 02_rag/Session6_NodeRAG_Technical_Implementation.md
+      - "⚙️ Code GraphRAG Advanced": 02_rag/Session6_Code_GraphRAG_Advanced.md
+      - "⚙️ Graph Traversal Advanced": 02_rag/Session6_Graph_Traversal_Advanced.md
+      - "⚙️ Hybrid GraphRAG Advanced": 02_rag/Session6_Hybrid_GraphRAG_Advanced.md
+      - "⚙️ Advanced Graph Algorithms": 02_rag/Session6_ModuleA_Advanced_Algorithms.md
+      - "⚙️ Production GraphRAG Systems": 02_rag/Session6_ModuleB_Production_Systems.md
+    - "🎯📝 Session 7 - Agentic RAG": 02_rag/Session7_Agentic_RAG_Systems.md
+    - Session 7 Advanced Modules:
+      - "⚙️ Advanced Agent Reasoning": 02_rag/Session7_Advanced_Agent_Reasoning.md
+      - "⚙️ Production Agent Systems": 02_rag/Session7_Production_Agent_Systems.md
+      - "⚙️ Multi-Agent Orchestration": 02_rag/Session7_Multi_Agent_Orchestration.md
     - Session 8 - MultiModal RAG: 02_rag/Session8_MultiModal_Advanced_RAG.md
-    - Session 9 - Production RAG: 02_rag/Session9_Production_RAG_Enterprise_Integration.md
+    - "🎯📝⚙️ Session 9 - Production RAG": 02_rag/Session9_Production_RAG_Enterprise_Integration.md
     - Session 9 Advanced Modules:
-      - Advanced Production: 02_rag/Session9_ModuleA_Advanced_Production.md
-      - Enterprise Architecture: 02_rag/Session9_ModuleB_Enterprise_Architecture.md
+      - "⚙️ Advanced Production Patterns": 02_rag/Session9_Advanced_Production.md
+      - "⚙️ Enterprise Architecture": 02_rag/Session9_Enterprise_Architecture.md
 
   - MCP, ACP & A2A Communication:
     - 03_mcp-acp-a2a/index.md

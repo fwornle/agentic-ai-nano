@@ -17,7 +17,11 @@
       "Read(/tmp/**)",
       "Read(/tmp/**)",
       "Read(/tmp/**)",
-      "Read(/private/tmp/**)"
+      "Read(/private/tmp/**)",
+      "Read(/tmp/**)",
+      "Read(/tmp/**)",
+      "Read(/tmp/**)",
+      "Read(/tmp/**)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",

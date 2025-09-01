@@ -9,35 +9,29 @@ This session transforms your RAG system from passive responder to active reasone
 This session offers three distinct learning paths:  
 
 ### 🎯 Observer Path - Essential Concepts  
-
 **Time Investment**: 45-60 minutes  
 **Outcome**: Understand core agentic RAG principles and cognitive architecture  
 
 Key concepts to master:  
-
 - Cognitive leap from retrieval to reasoning  
 - Three pillars of reasoning-RAG integration  
 - Basic agentic architecture patterns  
 
 ### 📝 Participant Path - Practical Implementation  
-
 **Time Investment**: 3-4 hours  
 **Outcome**: Build functional agentic RAG systems with reasoning capabilities  
 
 Additional concepts and implementations:  
-
 - Complete Observer Path content above  
 - Hands-on reasoning agent implementation  
 - Self-correction system development  
 - Tool integration patterns  
 
 ### ⚙️ Implementer Path - Complete Mastery  
-
 **Time Investment**: 8-12 hours  
 **Outcome**: Deep expertise in production agentic RAG systems  
 
 Complete implementation coverage:  
-
 - All Observer and Participant content  
 - ⚙️ [Advanced Agent Reasoning](Session7_Advanced_Agent_Reasoning.md)  
 - ⚙️ [Production Agent Deployment](Session7_Production_Agent_Systems.md)  
@@ -62,13 +56,11 @@ Consider the difference: when asked "Should we acquire Company X?", traditional 
 ### Traditional RAG vs Reasoning-Augmented RAG
 
 **Traditional RAG Workflow:**  
-
 ```
 Query → Retrieve Documents → Generate Response
 ```
 
 **Reasoning-Augmented RAG Workflow:**  
-
 ```
 Query → Analyze Reasoning Requirements → Plan Cognitive Strategy →
 Reasoning-Guided Retrieval → Chain-of-Thought Synthesis →
@@ -82,7 +74,6 @@ The fundamental shift is from reactive to proactive intelligence. Traditional RA
 ### The Three Pillars of Reasoning-RAG Integration
 
 #### 1. Reasoning-Augmented Retrieval (RAR)
-
 **Core Principle**: "Let reasoning guide what information to find and how to connect it"  
 
 Instead of simple similarity search, this approach analyzes what type of reasoning is needed and uses that to guide information gathering.  
@@ -113,7 +104,6 @@ This system uses different reasoning strategies to intelligently guide informati
 Each reasoning type requires different information gathering approaches. Deductive reasoning needs premises and logical rules, while causal reasoning requires temporal sequences and cause-effect relationships.  
 
 #### 2. Retrieval-Augmented Reasoning (RAR)
-
 **Core Principle**: "Let external knowledge fill logical reasoning gaps"  
 
 This approach identifies gaps in reasoning chains and uses targeted retrieval to fill missing information.  
@@ -139,7 +129,6 @@ The system detects when reasoning chains have missing information and strategica
 ```
 
 #### 3. Chain-of-Thought RAG Integration
-
 **Core Principle**: "Structured reasoning paths that guide both retrieval and synthesis"  
 
 This combines structured reasoning with retrieval at each step of the thought process.  
@@ -238,13 +227,7 @@ The planning phase creates a structured approach to complex queries. Slightly hi
         
         Original Query: "{original_query}"
         Response: "{response}"
-        """
-```
-
-This validation method starts by constructing a comprehensive evaluation prompt that includes the original query for context and the response to be assessed.  
-
-```python
-        validation_prompt += """
+        
         Check for:
         1. Logical consistency
         2. Evidence support
@@ -332,7 +315,6 @@ Try implementing a reasoning agent that can:
 Build an agent that can answer: "What are the potential risks and benefits of implementing AI in healthcare, and what regulatory considerations should be addressed?"  
 
 This query requires:  
-
 - Multi-perspective analysis (risks and benefits)  
 - Domain expertise (healthcare AI)  
 - Regulatory knowledge  
@@ -344,7 +326,7 @@ This query requires:
 
 The complete agentic RAG implementation requires additional advanced components:  
 
-### ⚙️ Advanced Components (Implementer Path Only)
+### ⚙️ Advanced Components (Implementer Path Only):
 
 - **Production-Grade Reasoning Systems**: Enterprise deployment patterns  
 - **Multi-Agent Orchestration**: Collaborative agent architectures  
@@ -352,7 +334,6 @@ The complete agentic RAG implementation requires additional advanced components:
 - **Performance Optimization**: Scaling agentic systems  
 
 *Complete coverage available in:*  
-
 - ⚙️ [Advanced Agent Reasoning](Session7_Advanced_Agent_Reasoning.md)  
 - ⚙️ [Production Agent Systems](Session7_Production_Agent_Systems.md)  
 - ⚙️ [Multi-Agent Orchestration](Session7_Multi_Agent_Orchestration.md)  
@@ -364,13 +345,11 @@ The complete agentic RAG implementation requires additional advanced components:
 ### What You've Built
 
 **🎯 Observer Path Completed:**  
-
 - Understanding of cognitive leap from retrieval to reasoning  
 - Knowledge of three pillars of reasoning-RAG integration  
 - Conceptual grasp of agentic architecture principles  
 
 **📝 Participant Path Completed:**  
-
 - Functional reasoning agent implementation  
 - Self-correction and validation systems  
 - Basic tool integration patterns  
@@ -379,7 +358,6 @@ The complete agentic RAG implementation requires additional advanced components:
 ### Key Skills Learned
 
 **🎯 Observer Level:**  
-
 1. **Cognitive Architecture Understanding**: Reasoning-augmented vs traditional RAG  
 2. **Strategic Framework Knowledge**: Three pillars of integration  
 
@@ -451,7 +429,6 @@ D) Token usage
 You've built the foundation of agentic RAG systems that combine autonomous reasoning with retrieval-augmented generation. These systems can plan queries, self-correct responses, and integrate external tools.  
 
 **For complete mastery, explore the Implementer Path modules:**  
-
 - ⚙️ [Advanced Agent Reasoning](Session7_Advanced_Agent_Reasoning.md)  
 - ⚙️ [Production Agent Systems](Session7_Production_Agent_Systems.md)  
 - ⚙️ [Multi-Agent Orchestration](Session7_Multi_Agent_Orchestration.md)  
