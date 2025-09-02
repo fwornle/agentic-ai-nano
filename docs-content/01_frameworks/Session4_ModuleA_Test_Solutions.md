@@ -2,7 +2,7 @@
 
 ## Advanced CrewAI Flows - Answer Key
 
-**Question 1:** Correct Answer: b) Project ID, phases, tasks, team assignments, resources, performance metrics, and checkpoints
+**Question 1:** Correct Answer: b) Project ID, phases, tasks, team assignments, resources, performance metrics, and checkpoints  
 
 **Explanation**: The FlowState class implements comprehensive state tracking:
 ```python

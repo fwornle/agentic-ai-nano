@@ -151,31 +151,31 @@ The attribution calculation uses a leave-one-out approach: by removing each docu
 
 ## Multiple Choice Test - Module A
 
-**Question 1:** What is the main advantage of BERTScore over traditional BLEU scores?
+**Question 1:** What is the main advantage of BERTScore over traditional BLEU scores?  
 A) Faster computation
 B) Better semantic similarity assessment using contextual embeddings
 C) Simpler implementation
 D) Lower memory requirements
 
-**Question 2:** Why are domain-specific evaluation metrics important for specialized RAG systems?
+**Question 2:** Why are domain-specific evaluation metrics important for specialized RAG systems?  
 A) They reduce computational costs
 B) They provide more accurate assessment of domain-relevant quality factors
 C) They are easier to implement
 D) They require less training data
 
-**Question 3:** What do attribution scores in explainability evaluation measure?
+**Question 3:** What do attribution scores in explainability evaluation measure?  
 A) The speed of document retrieval
 B) The contribution of each retrieved document to the final response
 C) The storage efficiency of the system
 D) The user satisfaction ratings
 
-**Question 4:** What is the key benefit of neural evaluation metrics?
+**Question 4:** What is the key benefit of neural evaluation metrics?  
 A) Lower computational requirements
 B) Ability to capture nuanced semantic relationships that traditional metrics miss
 C) Simpler implementation process
 D) Better compatibility with older systems
 
-**Question 5:** In medical RAG evaluation, what is the most critical safety metric?
+**Question 5:** In medical RAG evaluation, what is the most critical safety metric?  
 A) Response speed
 B) Contraindication detection and safety assessment
 C) Text length optimization

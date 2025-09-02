@@ -396,31 +396,31 @@ You've now mastered enterprise-grade state management for LangGraph workflows op
 
 Test your understanding of enterprise state management for data processing:
 
-**Question 1:** Which persistence backend is configured for production environments in the EnterpriseDataProcessingStateManager?
+**Question 1:** Which persistence backend is configured for production environments in the EnterpriseDataProcessingStateManager?  
 A) MemorySaver for faster access
 B) RedisSaver with cluster mode
 C) PostgresSaver with primary and backup clusters
 D) File-based persistence for reliability
 
-**Question 2:** What triggers automatic recovery actions in the data processing state health monitor?
+**Question 2:** What triggers automatic recovery actions in the data processing state health monitor?  
 A) Only state corruption detection
 B) Error rate > 30%, integrity issues, or execution > 30 minutes
 C) Memory usage exceeding limits
 D) Worker failures only
 
-**Question 3:** In the high-throughput path scoring for data processing, what are the weight distributions?
+**Question 3:** In the high-throughput path scoring for data processing, what are the weight distributions?  
 A) Equal weights for all factors
 B) Data quality (40%) + Processing performance (30%) + Error resistance (20%) + Resource efficiency (10%)
 C) Performance (50%) + Quality (30%) + Resources (20%)
 D) Quality (60%) + Performance (40%)
 
-**Question 4:** How do critical priority tasks affect data processing routing decision scores?
+**Question 4:** How do critical priority tasks affect data processing routing decision scores?  
 A) No impact on scoring
 B) High-throughput path +30%, escalation +20%, fallback -50%
 C) Only escalation path is boosted
 D) All paths receive equal boost
 
-**Question 5:** Which factors contribute to the composite data quality score calculation?
+**Question 5:** Which factors contribute to the composite data quality score calculation?  
 A) Only keyword presence and completeness
 B) Completeness (25%) + Keywords (35%) + Structure (25%) + Complexity (15%)
 C) Structure and complexity only

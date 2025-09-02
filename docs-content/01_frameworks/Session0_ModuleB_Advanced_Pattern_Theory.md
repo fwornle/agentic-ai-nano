@@ -677,31 +677,31 @@ Consensus building synthesizes the refined solutions into a final solution that 
 
 Test your understanding of advanced pattern theory and implementation strategies:
 
-**Question 1:** What is the key advantage of LangChain's framework approach over bare metal Python for reflection patterns?
+**Question 1:** What is the key advantage of LangChain's framework approach over bare metal Python for reflection patterns?  
 A) Faster execution speed
 B) Structured prompt templating and reduced boilerplate code
 C) Lower memory usage
 D) Built-in GPU acceleration
 
-**Question 2:** In advanced tool agents, what determines which tool is selected for a given task?
+**Question 2:** In advanced tool agents, what determines which tool is selected for a given task?  
 A) Random selection from available tools
 B) Task analysis combined with historical performance data
 C) Alphabetical ordering of tool names
 D) The tool with the most recent update
 
-**Question 3:** What are the three phases of ReAct + Reflection combination pattern?
+**Question 3:** What are the three phases of ReAct + Reflection combination pattern?  
 A) Planning, execution, evaluation
 B) ReAct problem solving, reflection on solution quality, iterative improvement
 C) Analysis, synthesis, deployment
 D) Input processing, model inference, output generation
 
-**Question 4:** Which emerging pattern enables agents to debug and fix their own reasoning errors?
+**Question 4:** Which emerging pattern enables agents to debug and fix their own reasoning errors?  
 A) Constitutional AI Pattern
 B) Meta-Learning Pattern
 C) Self-Debugging Pattern
 D) Swarm Intelligence Pattern
 
-**Question 5:** What is the primary benefit of combining Planning with Multi-Agent Coordination?
+**Question 5:** What is the primary benefit of combining Planning with Multi-Agent Coordination?  
 A) Reduced computational costs
 B) Simplified code architecture
 C) Strategic planning with coordinated execution across specialized agents

@@ -1,33 +1,36 @@
 # Session 7: First ADK Agent - Enterprise Data Processing Mastery
 
-## 🎯📝⚙️ Three-Path Learning System Overview
+## 🎯📝⚙️ Learning Path Overview
 
 When your data processing workloads scale from gigabytes to petabytes, and your streaming pipelines serve millions of concurrent users, traditional agent frameworks crumble under the complexity. That's where ADK (Agent Development Kit) transforms enterprise data processing - purpose-built for the massive scale, sophisticated orchestration, and production-grade reliability that define modern data infrastructure.
 
-This session offers three distinct learning paths designed to meet different learning goals and time investments:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts
-**Time Investment**: 30-45 minutes
-**Perfect for**: Quick understanding of ADK fundamentals
-**Outcome**: Grasp core concepts and enterprise advantages
+=== "🎯 Observer (30-45 min)"
 
-**Start here**: [🎯 ADK Essentials](Session7_ADK_Essentials.md)
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core ADK fundamentals and enterprise advantages
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Application
-**Time Investment**: 2-3 hours
-**Perfect for**: Hands-on implementation experience
-**Outcome**: Build production-grade ADK data processing agents
+=== "📝 Participant (2-3 hours)"
 
-**Prerequisites**: Complete 🎯 Observer Path
-**Start here**: [📝 ADK Implementation](Session7_ADK_Implementation.md)
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build production-grade ADK data processing agents
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery
-**Time Investment**: 3-4 hours
-**Perfect for**: Enterprise deployment and advanced patterns
-**Outcome**: Master orchestration, monitoring, and deployment at scale
+=== "⚙️ Implementer (3-4 hours)"
 
-**Prerequisites**: Complete 🎯 Observer and 📝 Participant Paths
-**Start here**: [⚙️ Advanced ADK Systems](Session7_Advanced_ADK_Systems.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Master orchestration, monitoring, and deployment at scale
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+---
 
 ---
 
@@ -262,31 +265,31 @@ Centralized MCP connection management with enterprise-grade pooling and monitori
 
 Test your understanding of ADK enterprise agent development for data processing systems.
 
-**Question 1:** What makes ADK agents suitable for enterprise data processing environments?
+**Question 1:** What makes ADK agents suitable for enterprise data processing environments?  
 A) Simple development interface
 B) Built-in multi-tenant isolation, enterprise monitoring, and production deployment patterns for data processing
 C) Lightweight resource usage
 D) Basic agent functionality
 
-**Question 2:** How does ADK handle MCP integration for data processing systems?
+**Question 2:** How does ADK handle MCP integration for data processing systems?  
 A) Simple API calls
 B) Enterprise-grade connectivity with connection pooling, failover handling, and monitoring for data sources
 C) Direct database connections
 D) File-based data exchange
 
-**Question 3:** What monitoring capabilities does ADK provide for data processing agents?
+**Question 3:** What monitoring capabilities does ADK provide for data processing agents?  
 A) Basic logging only
 B) Real-time metrics, alerting, dashboard generation, and performance analytics for data processing operations
 C) Error reporting only
 D) Manual monitoring
 
-**Question 4:** How does ADK support production deployment for data processing systems?
+**Question 4:** How does ADK support production deployment for data processing systems?  
 A) Manual deployment scripts
 B) Kubernetes integration with auto-scaling, monitoring setup, and enterprise deployment patterns for data processing
 C) Single server deployment
 D) Development environment only
 
-**Question 5:** What security features does ADK provide for enterprise data processing?
+**Question 5:** What security features does ADK provide for enterprise data processing?  
 A) Basic authentication
 B) Comprehensive security including data encryption, audit logging, and enterprise security contexts for data processing
 C) No security features

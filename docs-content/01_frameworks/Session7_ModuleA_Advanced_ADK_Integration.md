@@ -1298,31 +1298,31 @@ Advanced ADK integration patterns covered:
 
 Test your understanding of advanced ADK integration and enterprise patterns:
 
-**Question 1:** What advanced features does the enhanced Gemini agent implement?
+**Question 1:** What advanced features does the enhanced Gemini agent implement?  
 A) Basic text generation only
 B) Streaming responses with function calling and model configuration flexibility
 C) Static responses only
 D) Image processing only
 
-**Question 2:** How does the MCP service orchestrator determine which service to use?
+**Question 2:** How does the MCP service orchestrator determine which service to use?  
 A) Random selection
 B) Gemini AI-driven analysis of query content and service capabilities
 C) First available service
 D) Manual configuration only
 
-**Question 3:** What memory types does the advanced memory system support?
+**Question 3:** What memory types does the advanced memory system support?  
 A) Short-term memory only
 B) Multiple memory types including conversation, factual, emotional, and preference memory
 C) File-based storage only
 D) No memory persistence
 
-**Question 4:** How does the enterprise context manager determine response relevance?
+**Question 4:** How does the enterprise context manager determine response relevance?  
 A) Random scoring
 B) Keyword counting only
 C) Semantic similarity analysis with configurable relevance thresholds
 D) Manual relevance assignment
 
-**Question 5:** What production features does the advanced ADK integration provide?
+**Question 5:** What production features does the advanced ADK integration provide?  
 A) Basic functionality only
 B) Persistent memory, context management, error handling, and streaming capabilities
 C) Development features only

@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the primary advantage of LangGraph over sequential LangChain agents?
+**Question 1:** What is the primary advantage of LangGraph over sequential LangChain agents?  
 
 A) Better performance
 B) Lower cost
@@ -13,7 +13,7 @@ D) Simpler implementation
 
 ---
 
-**Question 2:** In LangGraph, what component defines the data that flows between nodes?
+**Question 2:** In LangGraph, what component defines the data that flows between nodes?  
 
 A) State (TypedDict) ✅
 B) Edges
@@ -24,7 +24,7 @@ D) Tools
 
 ---
 
-**Question 3:** What determines the flow between nodes in a LangGraph workflow?
+**Question 3:** What determines the flow between nodes in a LangGraph workflow?  
 
 A) Random selection
 B) User input
@@ -35,7 +35,7 @@ D) Conditional edges and decision functions ✅
 
 ---
 
-**Question 4:** How does LangGraph handle parallel agent execution?
+**Question 4:** How does LangGraph handle parallel agent execution?  
 
 A) Through parallel nodes with state merging ✅
 B) It doesn't support parallel execution
@@ -46,7 +46,7 @@ D) Using threading only
 
 ---
 
-**Question 5:** What happens when a LangGraph node updates state?
+**Question 5:** What happens when a LangGraph node updates state?  
 
 A) State is reset to default
 B) The entire state is replaced
@@ -57,7 +57,7 @@ D) Only specified fields are updated/merged ✅
 
 ---
 
-**Question 6:** In the debate pattern, what determines when the debate ends?
+**Question 6:** In the debate pattern, what determines when the debate ends?  
 
 A) Fixed number of rounds
 B) User intervention
@@ -68,7 +68,7 @@ D) Random timing
 
 ---
 
-**Question 7:** What is the purpose of a decision function in conditional edges?
+**Question 7:** What is the purpose of a decision function in conditional edges?  
 
 A) To manage memory
 B) To handle errors
@@ -79,7 +79,7 @@ D) To examine state and determine next node ✅
 
 ---
 
-**Question 8:** How does the hierarchical team pattern coordinate work?
+**Question 8:** How does the hierarchical team pattern coordinate work?  
 
 A) Random task assignment
 B) All agents work independently
@@ -90,7 +90,7 @@ D) A supervisor routes tasks to specialized workers ✅
 
 ---
 
-**Question 9:** What is the circuit breaker pattern used for?
+**Question 9:** What is the circuit breaker pattern used for?  
 
 A) Stopping workflows manually
 B) Optimizing performance
@@ -101,7 +101,7 @@ D) Preventing cascade failures from unreliable services ✅
 
 ---
 
-**Question 10:** In parallel execution, when should branches be synchronized?
+**Question 10:** In parallel execution, when should branches be synchronized?  
 
 A) Only at the end of the workflow
 B) Never - they should be independent

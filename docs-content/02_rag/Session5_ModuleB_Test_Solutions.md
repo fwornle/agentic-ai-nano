@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What metrics should have the highest priority in SLA monitoring for RAG systems?
+**Question 1:** What metrics should have the highest priority in SLA monitoring for RAG systems?  
 
 A) CPU and memory utilization
 B) Network bandwidth and throughput
@@ -13,7 +13,7 @@ D) Storage usage and log file size
 
 ---
 
-**Question 2:** What is the primary purpose of compliance monitoring in enterprise RAG systems?
+**Question 2:** What is the primary purpose of compliance monitoring in enterprise RAG systems?  
 
 A) Improving system performance and reducing costs
 B) Ensuring regulatory requirements are met and audit trails are maintained ✅
@@ -24,7 +24,7 @@ D) Enhancing user experience and interface design
 
 ---
 
-**Question 3:** What should executive dashboards for RAG systems primarily display?
+**Question 3:** What should executive dashboards for RAG systems primarily display?  
 
 A) Business impact metrics like user satisfaction and cost efficiency ✅
 B) Server hardware status and network topology
@@ -35,7 +35,7 @@ D) Technical performance metrics and system logs
 
 ---
 
-**Question 4:** What is the main benefit of ensemble anomaly detection approaches?
+**Question 4:** What is the main benefit of ensemble anomaly detection approaches?  
 
 A) They require less computational resources
 B) They are faster than single-algorithm approaches
@@ -46,7 +46,7 @@ D) They are easier to configure and maintain
 
 ---
 
-**Question 5:** What must be included in regulatory audit trails for RAG systems?
+**Question 5:** What must be included in regulatory audit trails for RAG systems?  
 
 A) Only error logs and performance metrics
 B) Just configuration changes and system updates

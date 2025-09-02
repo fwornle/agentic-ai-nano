@@ -4,7 +4,7 @@
 
 ---
 
-**Question 1:** Multi-Layer Caching Architecture
+**Question 1:** Multi-Layer Caching Architecture  
 
 **Explanation**: The multi-layer caching system combines L1 memory cache for ultra-fast millisecond access with L2 Redis for distributed caching across multiple instances. L1 provides the fastest possible access for frequently used data, while L2 Redis enables sharing cached data across multiple agent instances and survives application restarts. This architecture maximizes both performance and scalability.
 
@@ -18,7 +18,7 @@ self._backends = {
 
 ---
 
-**Question 2:** Cache Eviction Algorithm
+**Question 2:** Cache Eviction Algorithm  
 
 **Explanation**: The intelligent eviction algorithm uses a combined scoring approach that considers both temporal (recency) and usage (frequency) factors. The recency score measures time since last access, while the frequency score is inversely related to access count. The combined score (`recency_score * frequency_score`) prioritizes removing entries that are both stale and infrequently used.
 
@@ -31,7 +31,7 @@ combined_score = recency_score * frequency_score
 
 ---
 
-**Question 3:** Budget-Based Cost Optimization
+**Question 3:** Budget-Based Cost Optimization  
 
 **Explanation**: At 95% budget utilization, the system triggers `auto_scale_down_threshold` which implements automatic scaling down of non-critical services. This is a protective measure that occurs before the emergency shutdown at 100%. It allows the system to continue operating while aggressively reducing costs to stay within budget.
 
@@ -43,7 +43,7 @@ emergency_shutdown_threshold: float = 1.0  # Emergency stop at 100%
 
 ---
 
-**Question 4:** Model Selection Algorithm Weights
+**Question 4:** Model Selection Algorithm Weights  
 
 **Explanation**: The intelligent model selection algorithm uses a balanced approach with cost efficiency and quality being equally important (40% each), while speed has lower priority (20%). This weighting reflects the business priority of optimizing costs while maintaining quality, with performance being important but secondary.
 
@@ -54,7 +54,7 @@ combined_score = (cost_score * 0.4 + quality_score * 0.4 + speed_score * 0.2)
 
 ---
 
-**Question 5:** Connection Pooling Purpose
+**Question 5:** Connection Pooling Purpose  
 
 **Explanation**: Connection pooling dramatically reduces latency by maintaining persistent HTTP connections that can be reused across multiple requests. This eliminates the overhead of establishing new TCP connections, SSL handshakes, and DNS resolution for each request. The pooling configuration includes keepalive timeouts and connection limits to optimize performance while managing resources.
 

@@ -2,37 +2,31 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand core LangChain-MCP integration principles
+=== "🎯 Observer (45-60 min)"
 
-Key sections to focus on:
-- The Foundation: Why This Integration Changes Everything
-- Understanding LangChain MCP Integration
-- Setting Up Your Integration Laboratory
-- Your First Multi-Tool Agent (Basic Concepts)
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core LangChain-MCP integration principles, multi-tool agent concepts
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Application
-**Time Investment**: 3-4 hours
-**Outcome**: Implement LangChain-MCP integration in real projects
+=== "📝 Participant (3-4 hours)"
 
-Key sections to focus on:
-- All 🎯 Observer content above
-- Building Your First Multi-Tool Agent (Complete Implementation)
-- Advanced Multi-Tool Coordination (Practical Examples)
-- Practical Exercise: Your Integration Mastery Challenge
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Implement LangChain-MCP integration, build multi-tool agents
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery
-**Time Investment**: 8-10 hours
-**Outcome**: Deep expertise in production-ready LangChain-MCP systems
+=== "⚙️ Implementer (8-10 hours)"
 
-Key sections to focus on:
-- All 🎯 Observer and 📝 Participant content above
-- ⚙️ [Advanced Workflow Orchestration](Session3_Advanced_Workflows.md)
-- ⚙️ [Enterprise Agent Patterns](Session3_Enterprise_Patterns.md)
-- ⚙️ [Production Deployment Strategies](Session3_Production_Deployment.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced workflow orchestration, enterprise patterns, production deployment
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -458,31 +452,31 @@ all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_
 
 Test your understanding of LangChain MCP Integration mastery:
 
-**Question 1:** What is the primary advantage of using LangChain MCP adapters?
+**Question 1:** What is the primary advantage of using LangChain MCP adapters?  
 A) Better performance
 B) Automatic tool discovery and integration
 C) Reduced memory usage
 D) Simplified configuration
 
-**Question 2:** In the ReAct pattern, what does the agent do after each Action?
+**Question 2:** In the ReAct pattern, what does the agent do after each Action?  
 A) Plan the next action
 B) Wait for user input
 C) Observe the result
 D) Generate a final answer
 
-**Question 3:** What is the purpose of health monitoring in MCPServerManager?
+**Question 3:** What is the purpose of health monitoring in MCPServerManager?  
 A) Improve performance
 B) Automatically restart failed servers
 C) Monitor memory usage
 D) Log user interactions
 
-**Question 4:** What advantage does LangGraph provide over simple ReAct agents?
+**Question 4:** What advantage does LangGraph provide over simple ReAct agents?  
 A) Faster execution
 B) Complex stateful workflows
 C) Better error handling
 D) Simpler configuration
 
-**Question 5:** How does our multi-tool agent decide which tools to use?
+**Question 5:** How does our multi-tool agent decide which tools to use?  
 A) Random selection
 B) Pre-configured rules
 C) LLM reasoning about tool descriptions

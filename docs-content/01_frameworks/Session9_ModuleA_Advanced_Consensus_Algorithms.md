@@ -1525,43 +1525,43 @@ You've now mastered advanced consensus algorithms for distributed data systems:
 
 Test your understanding of advanced consensus algorithms for distributed data systems:
 
-**Question 1:** In Raft consensus, what triggers a leader election for data processing nodes?
+**Question 1:** In Raft consensus, what triggers a leader election for data processing nodes?  
 A) Regular scheduled elections
 B) Election timeout when no heartbeats are received from the current leader
 C) Manual administrator intervention
 D) High CPU usage
 
-**Question 2:** What is the minimum number of nodes required for Byzantine fault tolerance with f Byzantine faults?
+**Question 2:** What is the minimum number of nodes required for Byzantine fault tolerance with f Byzantine faults?  
 A) f + 1 nodes
 B) 2f + 1 nodes
 C) 3f + 1 nodes
 D) 4f + 1 nodes
 
-**Question 3:** In PBFT, what are the three main phases after pre-prepare?
+**Question 3:** In PBFT, what are the three main phases after pre-prepare?  
 A) Prepare, Commit, Execute
 B) Vote, Prepare, Commit
 C) Prepare, Commit, Reply
 D) Validate, Prepare, Execute
 
-**Question 4:** What is the key difference between Crash Fault Tolerance (CFT) and Byzantine Fault Tolerance (BFT)?
+**Question 4:** What is the key difference between Crash Fault Tolerance (CFT) and Byzantine Fault Tolerance (BFT)?  
 A) BFT handles more nodes
 B) CFT is faster
 C) BFT handles malicious/arbitrary faults, CFT only handles crash faults
 D) No difference
 
-**Question 5:** In Raft, what happens when a candidate receives a majority of votes during leader election?
+**Question 5:** In Raft, what happens when a candidate receives a majority of votes during leader election?  
 A) It becomes a follower
 B) It becomes the new leader and starts sending heartbeats
 C) It starts a new election
 D) It waits for more votes
 
-**Question 6:** What is the purpose of the commit index in Raft consensus for data operations?
+**Question 6:** What is the purpose of the commit index in Raft consensus for data operations?  
 A) Track network latency
 B) Track the highest log entry known to be committed and replicated on majority of servers
 C) Count total operations
 D) Measure CPU usage
 
-**Question 7:** How does Byzantine consensus handle message authentication in enterprise environments?
+**Question 7:** How does Byzantine consensus handle message authentication in enterprise environments?  
 A) Simple passwords
 B) Digital signatures with cryptographic verification
 C) IP address validation

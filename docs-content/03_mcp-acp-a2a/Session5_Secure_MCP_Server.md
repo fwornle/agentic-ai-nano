@@ -10,6 +10,34 @@ This nightmare scenario is exactly why security isn't just an afterthought in MC
 
 ![MCP Security Architecture](images/mcp-security-architecture.png)
 
+## 🎯📝⚙️ Learning Path Overview
+
+This session offers three distinct learning paths designed to match your goals and time investment:
+
+=== "🎯 Observer (30-60 min)"
+
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Essential security threats, authentication concepts, rate limiting principles
+    
+    **Ideal for**: Decision makers, architects, overview learners
+
+=== "📝 Participant (3-5 hours)"
+
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build secure MCP servers, implement authentication, deploy security measures
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (6-8 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Enterprise security patterns, advanced threat mitigation, compliance frameworks
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
 ---
 
 ## 🎯 Observer Path: Essential Security Concepts

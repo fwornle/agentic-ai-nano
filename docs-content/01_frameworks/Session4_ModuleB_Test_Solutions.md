@@ -2,7 +2,7 @@
 
 ## Enterprise Team Patterns - Answer Key
 
-**Question 1:** Correct Answer: b) Knowledge base (1.2 weight) and databases (1.3 weight)
+**Question 1:** Correct Answer: b) Knowledge base (1.2 weight) and databases (1.3 weight)  
 
 **Explanation**: The source weighting system prioritizes trusted enterprise data sources:
 ```python
@@ -16,7 +16,7 @@ source_weights = {
 
 This weighting ensures that internal documentation and database content receive priority over external web sources, maintaining enterprise data quality standards.
 
-**Question 2:** Correct Answer: d) ENTERPRISE_LEAD
+**Question 2:** Correct Answer: d) ENTERPRISE_LEAD  
 
 **Explanation**: The delegation rules define strategic planning as an enterprise-level responsibility:
 ```python

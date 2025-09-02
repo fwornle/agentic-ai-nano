@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What was the primary limitation of early AI systems that drove the development of agentic architectures?
+**Question 1:** What was the primary limitation of early AI systems that drove the development of agentic architectures?  
 A) Expensive API costs
 B) Limited computational power
 C) Stateless, single-turn interaction model ✅
@@ -12,7 +12,7 @@ D) Lack of training data
 
 ---
 
-**Question 2:** Which research paper introduced the concept of interleaving thought and action in AI agents?
+**Question 2:** Which research paper introduced the concept of interleaving thought and action in AI agents?  
 A) Constitutional AI (2022)
 B) Reflexion (2023)
 C) ReAct (2022) ✅
@@ -22,7 +22,7 @@ D) Toolformer (2023)
 
 ---
 
-**Question 3:** What are the three types of memory in modern agent semantic memory systems?
+**Question 3:** What are the three types of memory in modern agent semantic memory systems?  
 A) Short-term, long-term, cache
 B) Local, distributed, cloud
 C) Input, output, processing
@@ -32,7 +32,7 @@ D) Episodic, semantic, working ✅
 
 ---
 
-**Question 4:** When did OpenAI launch ChatGPT Plugins, marking the first mainstream tool-augmented conversational AI?
+**Question 4:** When did OpenAI launch ChatGPT Plugins, marking the first mainstream tool-augmented conversational AI?  
 A) January 2023
 B) June 2023
 C) March 2023 ✅
@@ -42,7 +42,7 @@ D) December 2022
 
 ---
 
-**Question 5:** According to current industry adoption patterns, what percentage of enterprise customer service uses agentic systems?
+**Question 5:** According to current industry adoption patterns, what percentage of enterprise customer service uses agentic systems?  
 A) 50%
 B) 40% ✅
 C) 30%

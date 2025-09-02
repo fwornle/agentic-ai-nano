@@ -4,7 +4,7 @@
 
 ---
 
-**Question 1:** What is the key mechanism that prevents infinite loops in reflection agents?
+**Question 1:** What is the key mechanism that prevents infinite loops in reflection agents?  
 
 ### Answer: B) Maximum iteration limits with satisfactory conditions
 
@@ -12,7 +12,7 @@
 
 ---
 
-**Question 2:** In multi-step planning, what is the primary purpose of dependency management?
+**Question 2:** In multi-step planning, what is the primary purpose of dependency management?  
 
 ### Answer: B) Ensuring steps execute in the correct order
 
@@ -20,7 +20,7 @@
 
 ---
 
-**Question 3:** What does the planning agent's `_parse_plan_text` method accomplish?
+**Question 3:** What does the planning agent's `_parse_plan_text` method accomplish?  
 
 ### Answer: B) Converts LLM-generated text into structured PlanStep objects
 
@@ -28,7 +28,7 @@
 
 ---
 
-**Question 4:** In multi-agent orchestration, what information is stored in communication patterns?
+**Question 4:** In multi-agent orchestration, what information is stored in communication patterns?  
 
 ### Answer: B) Summarized message data with sender, recipient, and timestamp
 
@@ -36,7 +36,7 @@
 
 ---
 
-**Question 5:** What is the three-phase approach used in collaborative task management?
+**Question 5:** What is the three-phase approach used in collaborative task management?  
 
 ### Answer: C) Task analysis, delegation plan creation, plan execution
 

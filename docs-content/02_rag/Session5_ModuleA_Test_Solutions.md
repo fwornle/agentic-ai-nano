@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the primary advantage of BERTScore over BLEU for RAG evaluation?
+**Question 1:** What is the primary advantage of BERTScore over BLEU for RAG evaluation?  
 
 A) Better semantic similarity assessment using contextual embeddings ✅
 B) Lower memory requirements
@@ -13,7 +13,7 @@ D) Faster computation speed
 
 ---
 
-**Question 2:** Why are domain-specific evaluation metrics important for RAG systems?
+**Question 2:** Why are domain-specific evaluation metrics important for RAG systems?  
 
 A) They provide more accurate assessment of domain-relevant quality factors ✅
 B) They eliminate the need for human evaluation
@@ -24,7 +24,7 @@ D) They reduce computational costs
 
 ---
 
-**Question 3:** What do attribution scores measure in RAG systems?
+**Question 3:** What do attribution scores measure in RAG systems?  
 
 A) The accuracy of individual retrieved documents
 B) The relevance ranking of search results
@@ -35,7 +35,7 @@ D) The computational cost of document processing
 
 ---
 
-**Question 4:** What is the key benefit of neural evaluation metrics over traditional metrics?
+**Question 4:** What is the key benefit of neural evaluation metrics over traditional metrics?  
 
 A) Simpler configuration
 B) Ability to capture nuanced semantic relationships that traditional metrics miss ✅
@@ -46,7 +46,7 @@ D) Faster processing speed
 
 ---
 
-**Question 5:** In medical RAG systems, what should be the highest priority safety metric?
+**Question 5:** In medical RAG systems, what should be the highest priority safety metric?  
 
 A) Contraindication detection and safety assessment ✅
 B) Response generation speed

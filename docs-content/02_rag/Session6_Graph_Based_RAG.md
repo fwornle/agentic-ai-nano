@@ -2,19 +2,31 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths for mastering graph-based RAG systems:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts (30-45 minutes)
-**Outcome**: Understand core GraphRAG principles and when to use them
-**Key sections**: Introduction, NodeRAG Architecture, Bridge to Session 7
+=== "🎯 Observer (30-45 min)"
 
-### 📝 Participant Path - Practical Implementation (2-3 hours)
-**Outcome**: Build working GraphRAG systems with traditional and code-based approaches
-**Key sections**: All Observer content plus Traditional GraphRAG Implementation, Code GraphRAG, Hands-on Exercise
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core GraphRAG principles, NodeRAG architecture, knowledge reasoning concepts
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### ⚙️ Implementer Path - Complete Mastery (6-8 hours)
-**Outcome**: Deep expertise in advanced graph algorithms, production systems, and optimization
-**Key sections**: All Participant content plus advanced technical modules
+=== "📝 Participant (2-3 hours)"
+
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build working GraphRAG systems, traditional and code-based approaches
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (6-8 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced graph algorithms, production systems, optimization techniques
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -409,49 +421,49 @@ Session 7 will show you how to build agentic RAG systems that actively reason th
 
 Test your understanding of graph-based RAG systems and GraphRAG implementations.
 
-**Question 1:** What is the primary advantage of GraphRAG over traditional vector-based RAG?
+**Question 1:** What is the primary advantage of GraphRAG over traditional vector-based RAG?  
 A) Faster query processing
 B) Lower computational requirements
 C) Multi-hop reasoning through explicit relationship modeling
 D) Simpler system architecture
 
-**Question 2:** In knowledge graph construction, what is the purpose of entity standardization?
+**Question 2:** In knowledge graph construction, what is the purpose of entity standardization?  
 A) To reduce memory usage
 B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")
 C) To improve query speed
 D) To compress graph storage
 
-**Question 3:** Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?
+**Question 3:** Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?  
 A) Depth-First Search (DFS)
 B) Breadth-First Search (BFS)
 C) Dijkstra's algorithm
 D) A* search
 
-**Question 4:** In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?
+**Question 4:** In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?  
 A) Only function definitions
 B) Function calls, imports, class hierarchies, and variable dependencies
 C) Only variable names
 D) Just file names and sizes
 
-**Question 5:** What is the key benefit of hybrid graph-vector search?
+**Question 5:** What is the key benefit of hybrid graph-vector search?  
 A) Reduced computational cost
 B) Combining structural relationships with semantic similarity
 C) Simpler implementation
 D) Faster indexing
 
-**Question 6:** When should you choose Neo4j over a simple graph data structure for GraphRAG?
+**Question 6:** When should you choose Neo4j over a simple graph data structure for GraphRAG?  
 A) Always, regardless of scale
 B) When you need persistent storage and complex queries at scale
 C) Only for small datasets
 D) Never, simple structures are always better
 
-**Question 7:** What is the primary challenge in multi-hop graph traversal for RAG?
+**Question 7:** What is the primary challenge in multi-hop graph traversal for RAG?  
 A) Memory limitations
 B) Balancing comprehensiveness with relevance and avoiding information explosion
 C) Slow database queries
 D) Complex code implementation
 
-**Question 8:** In production GraphRAG systems, what is the most important consideration for incremental updates?
+**Question 8:** In production GraphRAG systems, what is the most important consideration for incremental updates?  
 A) Minimizing downtime while maintaining graph consistency
 B) Reducing storage costs
 C) Maximizing query speed

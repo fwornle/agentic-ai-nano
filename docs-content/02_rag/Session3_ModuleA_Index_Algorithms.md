@@ -12,31 +12,31 @@ This module teaches you to implement custom indexing algorithms that understand 
 
 Test your understanding of advanced index algorithms:
 
-**Question 1:** What is the key advantage of custom HNSW implementation for RAG?
+**Question 1:** What is the key advantage of custom HNSW implementation for RAG?  
 A) Reduced memory usage
 B) RAG-specific optimizations like semantic clustering and keyword integration
 C) Faster build times
 D) Simpler configuration
 
-**Question 2:** Why is dynamic index optimization important?
+**Question 2:** Why is dynamic index optimization important?  
 A) It reduces storage costs
 B) It adapts index parameters based on actual query patterns for better performance
 C) It simplifies maintenance
 D) It reduces memory usage
 
-**Question 3:** How does semantic clustering improve RAG performance?
+**Question 3:** How does semantic clustering improve RAG performance?  
 A) It reduces index size
 B) It groups similar content for more efficient search within relevant topics
 C) It speeds up indexing
 D) It reduces computational requirements
 
-**Question 4:** What is the benefit of hybrid indexing (vector + keyword + temporal)?
+**Question 4:** What is the benefit of hybrid indexing (vector + keyword + temporal)?  
 A) Reduces complexity
 B) Enables multi-dimensional optimization for semantic, exact match, and recency needs
 C) Reduces memory usage
 D) Simplifies implementation
 
-**Question 5:** Why is RAG-optimized search different from general vector search?
+**Question 5:** Why is RAG-optimized search different from general vector search?  
 A) It's always faster
 B) It combines semantic similarity with domain-specific factors like keywords and recency
 C) It uses less memory
