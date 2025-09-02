@@ -151,37 +151,61 @@ nav:
     - Session 0 Advanced Modules:
       - Historical Context: 01_frameworks/Session0_ModuleA_Historical_Context_Evolution.md
       - Pattern Theory: 01_frameworks/Session0_ModuleB_Advanced_Pattern_Theory.md
-    - Session 1 - Bare Metal Agents: 01_frameworks/Session1_Bare_Metal_Agents.md
+    - "🎯📝⚙️ Session 1 - Bare Metal Agents Hub": 01_frameworks/Session1_Bare_Metal_Agents.md
     - Session 1 Advanced Modules:
       - Agent Patterns: 01_frameworks/Session1_ModuleA_Advanced_Agent_Patterns.md
       - Performance: 01_frameworks/Session1_ModuleB_Performance_Optimization.md
       - State Management: 01_frameworks/Session1_ModuleC_Complex_State_Management.md
       - Case Study: 01_frameworks/Session1_ModuleD_Coding_Assistant_Case_Study.md
-    - Session 2 - LangChain Foundations: 01_frameworks/Session2_LangChain_Foundations.md
-    - Session 2 Advanced Modules:
+    - "🎯📝⚙️ Session 2 - LangChain Foundations Hub": 01_frameworks/Session2_LangChain_Foundations.md
+    - Session 2 Learning Paths:
+      - "📝 Practical Implementation": 01_frameworks/Session2_Practical_Implementation.md
+      - "⚙️ Advanced Agent Architecture": 01_frameworks/Session2_Advanced_Agent_Architecture.md
+      - "⚙️ Production Memory Systems": 01_frameworks/Session2_Production_Memory_Systems.md
+      - "⚙️ Enterprise Tool Development": 01_frameworks/Session2_Enterprise_Tool_Development.md
+    - Session 2 Legacy Modules:
       - LangChain Patterns: 01_frameworks/Session2_ModuleA_Advanced_LangChain_Patterns.md
       - Deployment: 01_frameworks/Session2_ModuleB_Production_Deployment_Strategies.md
       - Tool Development: 01_frameworks/Session2_ModuleC_Custom_Tool_Development.md
       - Monitoring: 01_frameworks/Session2_ModuleD_Performance_Monitoring.md
-    - Session 3 - LangGraph Workflows: 01_frameworks/Session3_LangGraph_Multi_Agent_Workflows.md
+    - "🎯📝⚙️ Session 3 - LangGraph Workflows Hub": 01_frameworks/Session3_LangGraph_Multi_Agent_Workflows.md
+    - Session 3 Learning Paths:
+      - "📝 Multi-Agent Implementation": 01_frameworks/Session3_Multi_Agent_Implementation.md
     - Session 3 Advanced Modules:
-      - Orchestration: 01_frameworks/Session3_ModuleA_Advanced_Orchestration_Patterns.md
-      - State Management: 01_frameworks/Session3_ModuleB_Enterprise_State_Management.md
-    - Session 4 - CrewAI Orchestration: 01_frameworks/Session4_CrewAI_Team_Orchestration.md
+      - "⚙️ Advanced Orchestration Patterns": 01_frameworks/Session3_ModuleA_Advanced_Orchestration_Patterns.md
+      - "⚙️ Enterprise State Management": 01_frameworks/Session3_ModuleB_Enterprise_State_Management.md
+    - "🎯📝⚙️ Session 4 - CrewAI Orchestration Hub": 01_frameworks/Session4_CrewAI_Team_Orchestration.md
+    - Session 4 Learning Paths:
+      - "🎯 CrewAI Fundamentals": 01_frameworks/Session4_CrewAI_Fundamentals.md
+      - "📝 Team Building Practice": 01_frameworks/Session4_Team_Building_Practice.md
+      - "⚙️ Advanced Orchestration": 01_frameworks/Session4_Advanced_Orchestration.md
     - Session 4 Advanced Modules:
-      - CrewAI Flows: 01_frameworks/Session4_ModuleA_Advanced_CrewAI_Flows.md
-      - Team Patterns: 01_frameworks/Session4_ModuleB_Enterprise_Team_Patterns.md
-    - Session 5 - PydanticAI Type Safety: 01_frameworks/Session5_PydanticAI_Type_Safe_Agents.md
+      - "⚙️ CrewAI Flows": 01_frameworks/Session4_ModuleA_Advanced_CrewAI_Flows.md
+      - "⚙️ Team Patterns": 01_frameworks/Session4_ModuleB_Enterprise_Team_Patterns.md
+    - "🎯📝⚙️ Session 5 - PydanticAI Type Safety Hub": 01_frameworks/Session5_PydanticAI_Type_Safe_Agents.md
+    - Session 5 Learning Paths:
+      - "📝 Practical Implementation": 01_frameworks/Session5_Practical_Implementation.md
+      - "📝 Production Deployment": 01_frameworks/Session5_Production_Deployment.md
     - Session 5 Advanced Modules:
-      - Type Systems: 01_frameworks/Session5_ModuleA_Advanced_Type_Systems.md
-      - Enterprise PydanticAI: 01_frameworks/Session5_ModuleB_Enterprise_PydanticAI.md
-      - Validation Systems: 01_frameworks/Session5_ModuleC_Custom_Validation_Systems.md
-      - Testing & Benchmarks: 01_frameworks/Session5_ModuleD_Testing_Benchmarking.md
-    - Session 6 - Atomic Agents: 01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md
+      - "⚙️ Advanced Type Systems": 01_frameworks/Session5_ModuleA_Advanced_Type_Systems.md
+      - "⚙️ Enterprise PydanticAI": 01_frameworks/Session5_ModuleB_Enterprise_PydanticAI.md
+      - "⚙️ Custom Validation Systems": 01_frameworks/Session5_ModuleC_Custom_Validation_Systems.md
+      - "⚙️ Testing & Benchmarks": 01_frameworks/Session5_ModuleD_Testing_Benchmarking.md
+    - "🎯📝⚙️ Session 6 - Atomic Agents Hub": 01_frameworks/Session6_Atomic_Agents_Modular_Architecture.md
+    - Session 6 Learning Paths:
+      - "🎯 Atomic Architecture Essentials": 01_frameworks/Session6_Atomic_Architecture_Essentials.md
+      - "📝 Building Atomic Components": 01_frameworks/Session6_Building_Atomic_Components.md
+      - "📝 System Assembly Practice": 01_frameworks/Session6_System_Assembly_Practice.md
+      - "⚙️ Advanced Orchestration": 01_frameworks/Session6_Advanced_Orchestration.md
+      - "⚙️ Production Deployment": 01_frameworks/Session6_Production_Deployment.md
     - Session 6 Advanced Modules:
-      - Composition Patterns: 01_frameworks/Session6_ModuleA_Advanced_Composition_Patterns.md
-      - Modular Systems: 01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md
-    - Session 7 - First ADK Agent: 01_frameworks/Session7_First_ADK_Agent.md
+      - "⚙️ Advanced Composition Patterns": 01_frameworks/Session6_ModuleA_Advanced_Composition_Patterns.md
+      - "⚙️ Enterprise Modular Systems": 01_frameworks/Session6_ModuleB_Enterprise_Modular_Systems.md
+    - "🎯📝⚙️ Session 7 - First ADK Agent Hub": 01_frameworks/Session7_First_ADK_Agent.md
+    - Session 7 Learning Paths:
+      - "🎯 ADK Essentials": 01_frameworks/Session7_ADK_Essentials.md
+      - "📝 ADK Implementation": 01_frameworks/Session7_ADK_Implementation.md
+      - "⚙️ Advanced ADK Systems": 01_frameworks/Session7_Advanced_ADK_Systems.md
     - Session 7 Advanced Modules:
       - ADK Integration: 01_frameworks/Session7_ModuleA_Advanced_ADK_Integration.md
       - Agent Systems: 01_frameworks/Session7_ModuleB_Enterprise_Agent_Systems.md
@@ -191,8 +215,15 @@ nav:
       - Scaling Architecture: 01_frameworks/Session8_ModuleB_Enterprise_Scaling_Architecture.md
       - Performance Optimization: 01_frameworks/Session8_ModuleC_Performance_Optimization.md
       - Security & Compliance: 01_frameworks/Session8_ModuleD_Security_Compliance.md
-    - Session 9 - Multi-Agent Patterns: 01_frameworks/Session9_Multi_Agent_Patterns.md
-    - Session 9 Advanced Modules:
+    - "🎯📝⚙️ Session 9 - Multi-Agent Patterns Hub": 01_frameworks/Session9_Multi_Agent_Patterns.md
+    - Session 9 Learning Paths:
+      - "📝 Practical Coordination": 01_frameworks/Session9_Practical_Coordination.md
+      - "📝 Implementation Guide": 01_frameworks/Session9_Implementation_Guide.md
+      - "⚙️ Advanced ReAct": 01_frameworks/Session9_Advanced_ReAct.md
+      - "⚙️ Advanced Coordination": 01_frameworks/Session9_Advanced_Coordination.md
+      - "⚙️ Advanced Planning": 01_frameworks/Session9_Advanced_Planning.md
+      - "⚙️ Production Systems": 01_frameworks/Session9_Production_Systems.md
+    - Session 9 Legacy Modules:
       - Consensus Algorithms: 01_frameworks/Session9_ModuleA_Advanced_Consensus_Algorithms.md
       - Multi-Agent Systems: 01_frameworks/Session9_ModuleB_Production_Multi_Agent_Systems.md
     - Session 10 - Enterprise Integration: 01_frameworks/Session10_Enterprise_Integration_Production_Deployment.md

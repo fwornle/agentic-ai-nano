@@ -101,14 +101,29 @@ Development velocity matters in competitive environments. The Agent Development 
 - Integration with existing systems
 - Development workflow optimization
 
-### Session 8: Agno Production-Ready Agents
+### 🎯📝⚙️ Session 8: Agno Production-Ready Agents
 
 Moving from prototype to production involves solving challenges around monitoring, scaling, and reliability that development frameworks don't address. Agno provides the operational foundation for enterprise agent deployments.
 
-- Production deployment strategies
-- Monitoring and observability
-- Performance optimization
-- Scaling and reliability patterns
+**🎯 Observer Path (45-60 min):** Essential production concepts  
+- Production-first philosophy and architecture  
+- Core monitoring and error handling patterns  
+- Basic deployment with Docker  
+
+**📝 Participant Path (3-4 hours):** Hands-on implementation  
+- Complete production patterns: monitoring, error handling, resource management  
+- Performance optimization with caching  
+- FastAPI server with health checks  
+- Docker deployment and scaling  
+
+**⚙️ Implementer Path (8-10 hours):** Advanced production mastery  
+- **[Module A: Advanced Monitoring & Observability](Session8_ModuleA_Advanced_Monitoring_Observability.md)** - Enterprise scaling, health monitoring, distributed tracing  
+- **[Module B: Enterprise Architecture & Security](Session8_ModuleB_Enterprise_Architecture_Security.md)** - Authentication systems, security patterns, Kubernetes deployment  
+- **[Module C: Performance & Production Validation](Session8_ModuleC_Performance_Production_Validation.md)** - Cost optimization, load testing, comprehensive assessment frameworks  
+
+**Key Files:**  
+- **[🎯 Main Session](Session8_Agno_Production_Ready_Agents.md)** - Complete Observer & Participant paths  
+- **[Assessment & Solutions](Session8_Test_Solutions.md)** - Practice exercises and validation  
 
 ### Advanced Patterns (Sessions 9-10)
 

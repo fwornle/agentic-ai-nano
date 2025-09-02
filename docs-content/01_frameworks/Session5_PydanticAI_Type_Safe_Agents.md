@@ -1,33 +1,61 @@
-# Session 5: PydanticAI Type-Safe Agents - Building Reliable Data Processing Systems
+# 🎯📝⚙️ Session 5: PydanticAI Type-Safe Agents Hub
 
-Imagine your ML training pipeline silently consuming corrupted data because an AI agent returned malformed feature vectors. Or discovering that your real-time recommendation system has been serving inconsistent user profiles for weeks, causing a 15% drop in click-through rates. These are the silent killers of data engineering systems - unpredictable AI responses that cascade through your entire data processing infrastructure.
+## 🎯📝⚙️ Learning Path Overview
 
-PydanticAI eliminates these risks entirely by bringing production-grade type safety and validation to data processing agent development. Unlike traditional frameworks that work with unpredictable text responses, PydanticAI guarantees your agents return exactly the data schemas you define, with automatic validation and clear error messages - or they fail fast with detailed diagnostics.
+This session offers three distinct learning paths for mastering PydanticAI type-safe agent development:  
 
-In this session, you'll learn to build AI agents that are as reliable and predictable as the rest of your distributed data processing infrastructure, ensuring data quality and consistency across petabyte-scale systems.
+### 🎯 Observer Path - Essential Concepts  
+**Time Investment**: 1-2 hours  
+**Outcome**: Understand core type safety principles and basic PydanticAI usage  
 
-## Overview
+Read this main file for fundamental concepts and basic implementations.  
 
-PydanticAI brings production-grade type safety and validation to AI agent development, solving one of the biggest challenges in deploying AI systems within data processing pipelines. Unlike traditional frameworks that work with unstructured text, PydanticAI guarantees your agents return exactly the data structures you define, with automatic validation and clear error messages.
+### 📝 Participant Path - Practical Application  
+**Time Investment**: 3-4 hours  
+**Outcome**: Build production-ready type-safe agents with tools and validation  
 
-### Key Benefits for Data Engineers
+Complete Observer path, then continue with:  
+- 📝 [Practical Implementation](Session5_Practical_Implementation.md)  
+- 📝 [Production Deployment](Session5_Production_Deployment.md)  
 
-- **Schema Enforcement**: Guaranteed response structure prevents downstream data corruption - catch schema violations during development, not in production ETL pipelines
-- **Data Validation**: Automatic field validation with detailed error messages for data quality assurance - know exactly what went wrong and where in your data flow
-- **Type Safety**: Leverages familiar Python patterns and type hints - integrate seamlessly with existing data processing frameworks like Pandas, Spark, and Kafka
-- **Infrastructure Agnostic**: Works with OpenAI, Anthropic, Gemini, and other providers - not locked into any single vendor for your data processing needs
+### ⚙️ Implementer Path - Complete Mastery  
+**Time Investment**: 8-10 hours  
+**Outcome**: Deep expertise in advanced type systems and enterprise patterns  
 
-You'll build type-safe agents with structured data outputs, validated tools with guaranteed schemas for data pipeline integration, production-ready error handling for distributed systems, and deployable FastAPI applications for microservice architectures.
+Complete Observer and Participant paths, then master:  
+- ⚙️ [Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)  
+- ⚙️ [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)  
+- ⚙️ [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)  
+- ⚙️ [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)  
 
 ---
 
-## Type Safety Architecture - The Foundation of Reliable Data Processing
+# 🎯 Observer Path: Essential Type Safety Concepts
 
-PydanticAI brings compile-time type safety to AI development through structured data models and automatic validation, solving the fundamental problem of unpredictable AI responses that can corrupt data processing workflows across distributed systems.
+Imagine your ML training pipeline silently consuming corrupted data because an AI agent returned malformed feature vectors. PydanticAI eliminates these risks by bringing production-grade type safety to AI agent development.
+
+## What is PydanticAI?
+
+PydanticAI brings production-grade type safety and validation to AI agent development. Unlike traditional frameworks that work with unpredictable text responses, PydanticAI guarantees your agents return exactly the data schemas you define.  
+
+### Key Benefits
+
+- **Schema Enforcement**: Guaranteed response structure prevents data corruption  
+- **Data Validation**: Automatic field validation with clear error messages  
+- **Type Safety**: Leverages familiar Python patterns and type hints  
+- **Infrastructure Agnostic**: Works with OpenAI, Anthropic, Gemini, and other providers  
+
+This Observer path covers essential concepts for understanding type-safe agent development fundamentals.
+
+---
+
+## Type Safety Architecture Fundamentals
+
+PydanticAI brings compile-time type safety to AI development through structured data models and automatic validation.  
 
 ![PydanticAI](images/pydantic-ai.png)
 
-Let's start with the essential imports - the building blocks for type-safe data processing systems:
+Essential imports for type-safe agents:  
 
 ```python
 from pydantic_ai import Agent, RunContext
@@ -36,19 +64,19 @@ from typing import Optional, List
 from enum import Enum
 ```
 
-### Three Pillars of Data Pipeline Safety
+### Three Core Principles
 
-These principles transform chaotic AI responses into reliable, predictable data outputs that maintain integrity across distributed processing systems:
+These principles transform unpredictable AI responses into reliable data:  
 
-1. **Structured Schema Models**: Define exact data shapes - like database schemas that enforce consistency across petabyte-scale processing
-2. **Field-Level Validation**: Ensure data integrity at the field level - catch data quality issues before they propagate through your data pipelines
-3. **Type Contracts**: Compile-time error prevention - fail fast during development, not when your streaming pipeline is processing millions of events
+1. **Structured Schema Models**: Define exact data shapes  
+2. **Field-Level Validation**: Ensure data integrity at field level  
+3. **Type Contracts**: Prevent errors during development  
 
-### Data Schema Definition
+### Basic Schema Definition
 
-Pydantic models act as data contracts that specify exactly what your data should look like. This prevents bugs from schema mismatches, wrong types, or invalid values - the kinds of subtle errors that cause production outages in distributed data systems.
+Pydantic models act as data contracts that specify exactly what your data should look like.  
 
-First, we define enums for controlled values - eliminating the possibility of invalid categorical data:
+First, define enums for controlled values:  
 
 ```python
 class DataQuality(str, Enum):
@@ -57,7 +85,7 @@ class DataQuality(str, Enum):
     LOW = "low"
 ```
 
-Next, we create structured models with validation - defining exactly what valid data looks like for ML feature processing:
+Then create structured models with validation:  
 
 ```python
 class FeatureExtractionRequest(BaseModel):
@@ -67,63 +95,59 @@ class FeatureExtractionRequest(BaseModel):
     completion_date: Optional[str] = Field(None, regex=r'\d{4}-\d{2}-\d{2}')
 ```
 
-Now we can create validated instances - data that's guaranteed to be correct or the system fails fast:
+Create validated instances:  
 
 ```python
-feature_request = FeatureExtractionRequest(
-    dataset_id="user_behavior_events_2024",
-    feature_description="Extract click-through features for recommendation model",
+request = FeatureExtractionRequest(
+    dataset_id="user_behavior_2024",
+    feature_description="Extract features for ML model",
     quality_threshold=DataQuality.HIGH,
     completion_date="2025-01-01"
 )
 ```
 
-### Validation Benefits in Data Processing
+### Validation Benefits
 
-Type safety prevents common data corruption issues by catching schema violations early - the difference between debugging during development versus firefighting production data pipeline failures. Compare these approaches:
+Type safety prevents common data issues by catching schema violations early.  
 
-Without validation - prone to silent data corruption and runtime errors:
+Without validation - prone to errors:  
 
 ```python
-def process_features_unsafe(data):
-    if data.get('quality_threshold') == 'critical':  # Typo! Should be 'high'
-        apply_strict_validation(data)
+def process_unsafe(data):
+    if data.get('quality_threshold') == 'critical':  # Typo!
+        apply_validation(data)
     return data
 ```
 
-With type safety - prevents schema violations and guarantees data structure:
+With type safety - prevents violations:  
 
 ```python
-def process_features_safe(request: FeatureExtractionRequest):
-    if request.quality_threshold == DataQuality.HIGH:  # Type-safe, no schema violations possible
-        apply_strict_validation(request)
+def process_safe(request: FeatureExtractionRequest):
+    if request.quality_threshold == DataQuality.HIGH:
+        apply_validation(request)
     return request
 ```
 
-Validation catches data quality issues immediately - no more mysterious pipeline failures:
+Validation catches issues immediately:  
 
 ```python
 try:
     bad_request = FeatureExtractionRequest(
-        dataset_id="",  # Empty dataset ID
-        feature_description="Short",  # Too short
-        quality_threshold="critical"  # Invalid enum value
+        dataset_id="",  # Too short
+        feature_description="Short",  # Too short  
+        quality_threshold="invalid"  # Invalid enum
     )
 except ValidationError as e:
-    print(f"Schema validation failed: {e}")
+    print(f"Validation failed: {e}")
 ```
 
 ---
 
-## Agent Creation & Structure - Guaranteed Data Outputs Every Time
+## Basic Agent Creation
 
-Moving from unpredictable text responses to structured, validated data outputs that integrate seamlessly with your existing data processing infrastructure and ML pipelines.
+PydanticAI agents guarantee response structure, eliminating unpredictable text responses.  
 
-### Basic Agent Setup for Data Processing
-
-PydanticAI agents guarantee response structure, solving the fundamental challenge of AI unpredictability in data engineering workflows. When you specify a `result_type`, the agent always returns data in that exact format or raises a validation error - no more parsing inconsistent responses in your data pipelines.
-
-First, define the response structure - your data contract for ML feature engineering results:
+Define the response structure:  
 
 ```python
 class FeatureExtractionResponse(BaseModel):
@@ -133,90 +157,94 @@ class FeatureExtractionResponse(BaseModel):
     feature_pipeline_steps: List[str]
 ```
 
-Create the type-safe agent - guaranteed to return structured data or fail with clear diagnostics:
+Create the type-safe agent:  
 
 ```python
-feature_extraction_agent = Agent(
+feature_agent = Agent(
     'openai:gpt-4',
     result_type=FeatureExtractionResponse,
-    system_prompt='You are a data pipeline feature extraction assistant.'
+    system_prompt='You are a feature extraction assistant.'
 )
 ```
 
-Use the agent with guaranteed structure - no more parsing text or handling malformed responses in your ETL jobs:
+Use the agent with guaranteed structure:  
 
 ```python
-async def plan_feature_extraction(description: str) -> FeatureExtractionResponse:
-    result = await feature_extraction_agent.run(f"Plan this feature extraction task: {description}")
-    # Result is guaranteed to be FeatureExtractionResponse type
+async def plan_extraction(description: str) -> FeatureExtractionResponse:
+    result = await feature_agent.run(
+        f"Plan extraction task: {description}"
+    )
+    # Result is guaranteed to be FeatureExtractionResponse
     return result
 ```
 
-### Agent with Data Service Dependencies
+### Agents with Dependencies
 
-Real data processing applications need access to data warehouses, cloud storage, streaming systems, and ML feature stores. PydanticAI provides dependency injection for clean, testable architecture that scales to production data processing needs.
+Real applications need external services. PydanticAI provides dependency injection for clean architecture.  
 
-Define your data service dependencies - encapsulating external data infrastructure access:
+Define service dependencies:  
 
 ```python
 class DataWarehouseDep:
     def __init__(self, warehouse_url: str):
         self.warehouse_url = warehouse_url
     
-    def save_feature_job(self, job_data: dict) -> str:
-        # Integration with Snowflake, BigQuery, Redshift, etc.
+    def save_job(self, job_data: dict) -> str:
+        # Integration with data warehouses
         return f"job_{hash(str(job_data)) % 100000}"
 ```
 
-Create agent with dependency injection - clean separation of concerns for data processing:
+Create agent with dependencies:  
 
 ```python
-data_agent_with_warehouse = Agent(
+data_agent = Agent(
     'openai:gpt-4',
     result_type=FeatureExtractionResponse,
     deps_type=DataWarehouseDep
 )
 
-@data_agent_with_warehouse.system_prompt
+@data_agent.system_prompt  
 def system_prompt(ctx: RunContext[DataWarehouseDep]) -> str:
-    return f"You are a data processing assistant. Warehouse: {ctx.deps.warehouse_url}"
+    return f"Data assistant. Warehouse: {ctx.deps.warehouse_url}"
 ```
 
-Use with dependencies - accessing data services cleanly and testably:
+Use with dependencies:  
 
 ```python
-warehouse = DataWarehouseDep("snowflake://data-warehouse.company.com")
-result = await data_agent_with_warehouse.run(
-    "Create an ETL pipeline for customer segmentation features",
+warehouse = DataWarehouseDep("snowflake://company.com")
+result = await data_agent.run(
+    "Create ETL pipeline for customer features",
     deps=warehouse
 )
 ```
 
-### Custom Data Validation
+### Custom Validation
 
-Beyond basic types, you can add data processing validation - ensuring outputs meet your specific data quality requirements. Pydantic validators implement complex rules that reflect real-world data constraints and ML pipeline requirements.
+Add custom validation rules for specific data quality requirements.  
+
+First, import validators and define the base model:  
 
 ```python
 from pydantic import validator, root_validator
 
-class ValidatedFeatureExtractionResponse(BaseModel):
+class ValidatedResponse(BaseModel):
     extraction_id: str
     status: str = Field(..., regex=r'^(queued|processing|completed|failed)$')
-    estimated_hours: int = Field(..., ge=1, le=168)  # 1 hour to 1 week
+    estimated_hours: int = Field(..., ge=1, le=168)
     complexity: str = Field(..., regex=r'^(simple|moderate|complex)$')
 ```
 
-Add custom validation logic - data processing rules that ensure data quality:
+Add field-level validation for extraction IDs:  
 
 ```python
     @validator('extraction_id')
-    def validate_extraction_id(cls, v):
+    def validate_id(cls, v):
         if not v.startswith('feat_'):
-            raise ValueError('Feature extraction ID must start with "feat_"')
+            raise ValueError('ID must start with "feat_"')
         return v
 ```
 
-Add cross-field validation - ensuring relationships between fields make data processing sense:
+Add cross-field validation to ensure logical consistency:  
 
 ```python
     @root_validator
@@ -225,44 +253,50 @@ Add cross-field validation - ensuring relationships between fields make data pro
         hours = values.get('estimated_hours')
         
         if complexity == 'simple' and hours > 24:
-            raise ValueError('Simple feature extraction should not exceed 24 hours')
+            raise ValueError('Simple tasks should not exceed 24 hours')
         elif complexity == 'complex' and hours < 48:
-            raise ValueError('Complex feature extraction should require at least 48 hours')
+            raise ValueError('Complex tasks need at least 48 hours')
         
         return values
 ```
 
-Create agent with enhanced validation - data processing logic baked into the data structures:
+Use enhanced validation:  
 
 ```python
-validated_feature_agent = Agent(
+validated_agent = Agent(
     'openai:gpt-4',
-    result_type=ValidatedFeatureExtractionResponse
+    result_type=ValidatedResponse
 )
 ```
 
-### Error Handling Patterns for Data Pipelines
+### Error Handling
 
-Production data systems need robust error handling that distinguishes between validation failures and system errors - essential for debugging and monitoring distributed data processing.
+Handle validation errors gracefully in production systems.  
+
+Start with imports and basic structure:  
 
 ```python
 from pydantic import ValidationError
 
-async def safe_data_agent_execution(agent, query: str):
-    """Execute data agent with comprehensive error handling"""
+async def safe_agent_execution(agent, query: str):
+    """Execute agent with error handling"""
     try:
         result = await agent.run(query)
         return {"success": True, "data": result}
-    
+```
+
+Handle specific validation errors with detailed information:  
+
+```python
     except ValidationError as e:
         return {
             "success": False,
-            "error": "data_validation_failed",
+            "error": "validation_failed",
             "details": e.errors()
         }
 ```
 
-Handle other error types - comprehensive error classification for better monitoring:
+Handle general errors with fallback response:  
 
 ```python
     except Exception as e:
@@ -273,32 +307,28 @@ Handle other error types - comprehensive error classification for better monitor
         }
 ```
 
-Use with proper error checking - reliable error handling that enables debugging:
+Use with error checking:  
 
 ```python
-result = await safe_data_agent_execution(
-    validated_feature_agent, 
-    "Plan a complex real-time streaming feature pipeline"
+result = await safe_agent_execution(
+    validated_agent, 
+    "Plan a complex feature pipeline"
 )
 
 if result["success"]:
     job_data = result["data"]
-    print(f"Feature extraction job created: {job_data.extraction_id}")
+    print(f"Job created: {job_data.extraction_id}")
 else:
     print(f"Error: {result['error']}")
 ```
 
 ---
 
-## Tool Integration & Validation - Reliable Data System Interactions
+## Basic Tool Integration
 
-Moving beyond unreliable tool calls to guaranteed, validated interactions with external data systems, cloud services, and ML platforms.
+Type-safe tools define exact input and output schemas for reliable system interactions.  
 
-### Type-Safe Tool Creation for Data Services
-
-Type-safe tools define exact input and output schemas, eliminating bugs from malformed data and enabling reliable integrations with data processing systems.
-
-Define tool schemas - contracts for data system interactions:
+Define tool schemas:  
 
 ```python
 from pydantic_ai import Tool
@@ -315,57 +345,59 @@ class DataQueryOutput(BaseModel):
     result_preview: str
 ```
 
-Create the type-safe tool - guaranteed input validation and output structure:
+Create the type-safe tool with proper structure:  
 
 ```python
-def create_data_query_tool() -> Tool:
+def create_query_tool() -> Tool:
     async def execute_query(input_data: DataQueryInput) -> DataQueryOutput:
-        try:
-            # Integration with data warehouse (Snowflake, BigQuery, Redshift)
-            import time
-            start_time = time.time()
-            
-            # Mock execution - in production, use actual database drivers
-            time.sleep(0.1)  # Simulate query execution time
-            execution_time = time.time() - start_time
-            
-            return DataQueryOutput(
-                row_count=1000000,  # Typical data scale
-                columns=["user_id", "event_type", "timestamp", "feature_value"],
-                execution_time=execution_time,
-                result_preview="user_id,event_type,timestamp,feature_value\n123,click,2024-01-01,0.85"
-            )
-        except Exception as e:
-            raise ValueError(f"Data warehouse query failed: {e}")
+        import time
+        start_time = time.time()
+        
+        # Mock execution - use actual drivers in production
+        time.sleep(0.1)  
+        execution_time = time.time() - start_time
+```
+
+This creates the basic tool structure and timing measurement.  
+
+```python
+        return DataQueryOutput(
+            row_count=1000000,
+            columns=["user_id", "event_type", "timestamp"],
+            execution_time=execution_time,
+            result_preview="user_id,event_type,timestamp\n123,click,2024-01-01"
+        )
     
     return Tool(execute_query, takes=DataQueryInput, returns=DataQueryOutput)
 ```
 
-Register with agent - type-safe tool integration:
+The return statement creates the validated output with proper schema compliance.
+
+Register with agent:  
 
 ```python
-query_tool = create_data_query_tool()
-data_analyst_agent = Agent(
+query_tool = create_query_tool()
+analyst_agent = Agent(
     'openai:gpt-4',
     tools=[query_tool]
 )
 ```
 
-### Data Pipeline Integration Tools
+### API Integration Tools
 
-Type-safe tools validate both API inputs and responses, catching mismatches immediately and preventing silent failures in production data systems.
+Type-safe tools validate API inputs and responses, preventing silent failures.  
 
-Define API tool schemas - contracts for external data service integration:
+Define API tool schemas:  
 
 ```python
 import httpx
 from typing import Optional
 
-class DataPipelineStatusInput(BaseModel):
+class PipelineStatusInput(BaseModel):
     pipeline_id: str = Field(..., min_length=1)
     include_metrics: bool = Field(default=True)
 
-class DataPipelineStatusOutput(BaseModel):
+class PipelineStatusOutput(BaseModel):
     pipeline_id: str
     status: str
     records_processed: int
@@ -373,82 +405,81 @@ class DataPipelineStatusOutput(BaseModel):
     error_rate: Optional[float] = None
 ```
 
-Create the pipeline status API tool - validated external service interaction:
+Create the API tool:  
 
 ```python
-async def create_pipeline_status_tool() -> Tool:
-    async def get_pipeline_status(input_data: DataPipelineStatusInput) -> DataPipelineStatusOutput:
-        async with httpx.AsyncClient() as client:
-            # Integration with Kafka, Argo Workflows, or similar data orchestration systems
-            return DataPipelineStatusOutput(
-                pipeline_id=input_data.pipeline_id,
-                status="running",
-                records_processed=15000000,  # Typical data volume
-                throughput_per_second=2500.5,
-                error_rate=0.001
-            )
+async def create_status_tool() -> Tool:
+    async def get_status(input_data: PipelineStatusInput) -> PipelineStatusOutput:
+        # Mock API call - use actual API clients in production
+        return PipelineStatusOutput(
+            pipeline_id=input_data.pipeline_id,
+            status="running",
+            records_processed=15000000,
+            throughput_per_second=2500.5,
+            error_rate=0.001
+        )
     
-    return Tool(get_pipeline_status, takes=DataPipelineStatusInput, returns=DataPipelineStatusOutput)
+    return Tool(get_status, takes=PipelineStatusInput, returns=PipelineStatusOutput)
 ```
 
-Use in an agent - reliable external data service integration:
+Use in agent:  
 
 ```python
-pipeline_tool = await create_pipeline_status_tool()
+status_tool = await create_status_tool()
 pipeline_agent = Agent(
     'openai:gpt-4', 
-    tools=[pipeline_tool],
+    tools=[status_tool],
     result_type=str
 )
 
-result = await pipeline_agent.run("What's the status of pipeline customer-events-etl?")
+result = await pipeline_agent.run("Status of pipeline customer-events?")
 ```
 
-### Tool Composition for Data Analysis
+### Multi-Tool Composition
 
-Combine multiple tools for complex data queries with structured responses - building sophisticated data processing capabilities from validated components.
+Combine multiple tools for complex queries with structured responses.  
 
-Define multi-tool response - comprehensive output structure for data analysis:
+Define multi-tool response:  
 
 ```python
-class DataAnalysisResponse(BaseModel):
+class AnalysisResponse(BaseModel):
     summary: str
     queries_executed: List[str] = Field(default_factory=list)
-    pipeline_status: Optional[DataPipelineStatusOutput] = None
+    pipeline_status: Optional[PipelineStatusOutput] = None
     confidence_score: float = Field(..., ge=0.0, le=1.0)
     data_quality_score: float = Field(..., ge=0.0, le=1.0)
 ```
 
-Create multi-tool agent - coordinated tool usage with structured outputs:
+Create multi-tool agent:  
 
 ```python
-data_analysis_agent = Agent(
+analysis_agent = Agent(
     'openai:gpt-4',
-    tools=[query_tool, pipeline_tool],
-    result_type=DataAnalysisResponse,
+    tools=[query_tool, status_tool],
+    result_type=AnalysisResponse,
     system_prompt="""
-    You are a data analysis assistant with query execution and pipeline monitoring tools.
-    Structure responses with required fields and confidence levels based on data quality.
+    Data analysis assistant with query and monitoring tools.
+    Structure responses with confidence levels.
     """
 )
 ```
 
-Use multiple tools - complex data analysis with validated results:
+Use multiple tools:  
 
 ```python
-result = await data_analysis_agent.run(
-    "Analyze customer behavior trends and check the ETL pipeline status."
+result = await analysis_agent.run(
+    "Analyze customer trends and check ETL status."
 )
 ```
 
-### Tool Error Recovery for Data Systems
+### Tool Error Recovery
 
-Production data tools need graceful failure handling with retry logic and structured error responses - essential for reliable system operation in distributed data environments.
+Production tools need graceful failure handling with retry logic.  
 
 ```python
 import asyncio
 
-class RobustDataTool:
+class RobustTool:
     def __init__(self, tool_func, max_retries=3):
         self.tool_func = tool_func
         self.max_retries = max_retries
@@ -460,54 +491,40 @@ class RobustDataTool:
             if retry_count < self.max_retries:
                 await asyncio.sleep(2 ** retry_count)  # Exponential backoff
                 return await self.execute(input_data, retry_count + 1)
-```
-
-Handle final failure gracefully - structured error responses for data processing:
-
-```python
             else:
                 return {
                     "error": True,
-                    "message": f"Data tool failed after {self.max_retries} retries: {e}",
-                    "fallback_available": True,
-                    "data_source": "cache"
+                    "message": f"Tool failed after {self.max_retries} retries: {e}",
+                    "fallback_available": True
                 }
 ```
 
-Wrap tools for reliability - production-ready error handling:
+Wrap tools for reliability:  
 
 ```python
-robust_query_tool = RobustDataTool(query_tool)
+robust_tool = RobustTool(query_tool)
 ```
 
 ---
 
-## Testing & Deployment - Production-Ready Data Processing Systems
+## Testing Type-Safe Agents
 
-Moving from prototype to production with comprehensive testing and deployment strategies that ensure reliability at scale for data processing environments.
+Type-safe agents are easier to test because inputs and outputs are predictable.  
 
-### Testing Patterns for Data Agents
-
-Type-safe agents are easier to test because inputs and outputs are predictable - enabling comprehensive test coverage that catches regressions in data processing logic.
-
-Test model validation - ensuring data contracts work correctly:
+Test model validation:  
 
 ```python
 import pytest
 from unittest.mock import AsyncMock
 
-def test_feature_extraction_request_validation():
+def test_request_validation():
     valid_request = FeatureExtractionRequest(
-        dataset_id="user_behavior_analytics",
-        feature_description="Process user click events for ML feature engineering",
+        dataset_id="user_behavior",
+        feature_description="Process user events for ML",
         quality_threshold=DataQuality.HIGH
     )
-    assert valid_request.dataset_id == "user_behavior_analytics"
-```
+    assert valid_request.dataset_id == "user_behavior"
 
-Test validation failures - ensuring error handling works correctly:
-
-```python
     with pytest.raises(ValidationError):
         FeatureExtractionRequest(
             dataset_id="",  # Too short
@@ -515,101 +532,100 @@ Test validation failures - ensuring error handling works correctly:
         )
 ```
 
-Test agent behavior with mocks - reliable testing without external data dependencies:
+Test agent behavior with mocks:  
 
 ```python
 @pytest.mark.asyncio
-async def test_data_agent_response():
+async def test_agent_response():
     mock_agent = AsyncMock()
     mock_agent.run.return_value = FeatureExtractionResponse(
         extraction_id="feat_123",
-        status="queued",
+        status="queued", 
         estimated_completion="4 hours",
-        feature_pipeline_steps=["Ingestion", "Transformation", "Validation"]
+        feature_pipeline_steps=["Ingestion", "Transformation"]
     )
     
     result = await mock_agent.run("Test query")
     assert result.extraction_id == "feat_123"
-    assert len(result.feature_pipeline_steps) == 3
+    assert len(result.feature_pipeline_steps) == 2
 ```
 
-### Configuration Management for Data Environments
+## Configuration Management
 
-Pydantic's BaseSettings manages different environments with automatic environment variable loading - essential for production deployment of data processing systems.
+Pydantic's BaseSettings manages environments with automatic variable loading.  
 
 ```python
 from pydantic import BaseSettings
 
-class DataAgentConfig(BaseSettings):
+class AgentConfig(BaseSettings):
     model_name: str = "openai:gpt-4"
     max_tokens: int = 2000
-    temperature: float = 0.3  # Lower temperature for data processing consistency
+    temperature: float = 0.3
     api_key: Optional[str] = None
-    data_warehouse_url: str = "snowflake://localhost"
+    warehouse_url: str = "snowflake://localhost"
     
     class Config:
-        env_prefix = "DATA_AGENT_"
+        env_prefix = "AGENT_"
         env_file = ".env"
-```
 
-Load configuration - environment-aware settings:
+config = AgentConfig()
 
-```python
-config = DataAgentConfig()
-```
-
-Create agent with config - production-ready configuration management:
-
-```python
-production_data_agent = Agent(
+production_agent = Agent(
     config.model_name,
     result_type=FeatureExtractionResponse,
-    system_prompt="Production data processing assistant"
+    system_prompt="Production assistant"
 )
 ```
 
-### Deployment with FastAPI for Data Services
+## FastAPI Deployment
 
-FastAPI automatically handles request/response validation using Pydantic models - seamless integration that eliminates boilerplate and ensures consistency for data processing APIs.
+FastAPI automatically handles validation using Pydantic models.  
+
+Start with FastAPI setup and imports:  
 
 ```python
 from fastapi import FastAPI, HTTPException
 from pydantic import ValidationError
 
 app = FastAPI()
+```
 
+Create the main feature extraction endpoint:  
+
+```python
 @app.post("/extract-features", response_model=FeatureExtractionResponse)
 async def extract_features(request: FeatureExtractionRequest):
     try:
-        result = await feature_extraction_agent.run(
-            f"Extract features from dataset: {request.dataset_id} - {request.feature_description}"
+        result = await feature_agent.run(
+            f"Extract from: {request.dataset_id} - {request.feature_description}"
         )
         return result
 ```
 
-Handle errors with proper HTTP status codes - production-ready error handling:
+Handle errors with appropriate HTTP status codes:  
 
 ```python
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=e.errors())
-    
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 ```
 
-Add health check - monitoring and observability for data systems:
+Add health check endpoint:  
 
 ```python
 @app.get("/health")
-async def health_check():
-    return {"status": "healthy", "version": "1.0.0", "data_services": "connected"}
+async def health():
+    return {"status": "healthy", "version": "1.0.0"}
 ```
 
 ---
 
-## Quick Implementation Exercise
+## 🎯 Observer Path Practice
 
-Build a data quality assessment agent to verify your understanding - applying all the concepts you've learned:
+Build a simple data quality agent to verify your understanding:  
+
+Define the data quality models:  
 
 ```python
 class DataQualityRequest(BaseModel):
@@ -623,87 +639,88 @@ class DataQualityReport(BaseModel):
     duplicate_rows_pct: float
     quality_score: float
     recommendations: List[str]
-
-def create_data_quality_agent():
-    # 1. Define your models (done above)
-    # 2. Create agent with result_type
-    # 3. Add system prompt for data quality analysis
-    # 4. Test with data quality query
-    pass
 ```
 
-Test your implementation - ensuring everything works correctly:
+Create the quality assessment agent:  
 
 ```python
-agent = create_data_quality_agent()
-result = await agent.run("Assess quality of customer_events dataset with 5M rows")
+def create_quality_agent():
+    return Agent(
+        'openai:gpt-4',
+        result_type=DataQualityReport,
+        system_prompt="You are a data quality assistant."
+    )
 ```
 
-### Self-Assessment
+Test the implementation:  
 
-- [ ] I understand PydanticAI's type safety benefits for data processing
-- [ ] I can create structured models with validation for data schemas
-- [ ] I can build type-safe agents with data processing tools
-- [ ] I understand testing and deployment basics for data systems
+```python
+agent = create_quality_agent()
+result = await agent.run("Assess customer_events dataset with 5M rows")
+```
+
+### 🎯 Observer Path Self-Assessment
+
+- [ ] I understand PydanticAI's type safety benefits
+- [ ] I can create structured models with validation
+- [ ] I can build basic type-safe agents
+- [ ] I understand error handling basics
 
 ---
 
-## Optional Deep Dive Modules
+## 📝 Continue Your Learning Journey
 
-- **[Module A: Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)** - Complex validation & streaming data
-- **[Module B: Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)** - Production deployment & monitoring  
-- **[Module C: Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)** - Specialized validators & data quality middleware
-- **[Module D: Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)** - Comprehensive testing strategies for data systems
+### 📝 Next: Participant Path - Practical Application  
+Ready for hands-on implementation? Continue with:  
+- 📝 [Practical Implementation](Session5_Practical_Implementation.md)  
+- 📝 [Production Deployment](Session5_Production_Deployment.md)  
+
+### ⚙️ Advanced: Implementer Path - Complete Mastery  
+For deep expertise, explore:  
+- ⚙️ [Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)  
+- ⚙️ [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)  
+- ⚙️ [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)  
+- ⚙️ [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)  
 
 ---
 
 ## 📝 Multiple Choice Test - Session 5
 
-Test your understanding of PydanticAI type-safe agent development:
+**Question 1:** What is the primary advantage of PydanticAI?  
+A) Faster execution  
+B) Lower cost  
+C) Better UI  
+D) Automatic validation and structured outputs  
 
-**Question 1:** What is the primary advantage of PydanticAI over traditional agent frameworks?  
-A) Faster execution speed  
-B) Lower computational cost  
-C) Better user interface  
-D) Automatic validation and structured outputs with compile-time type checking  
-
-**Question 2:** Which validation constraint ensures a field value falls within a specific numeric range?  
+**Question 2:** Which constraint ensures numeric range validation?  
 A) Field(range=(0, 100))  
 B) Field(between=0:100)  
 C) Field(min=0, max=100)  
 D) Field(ge=0, le=100)  
 
-**Question 3:** What happens when PydanticAI model validation fails?  
-A) Application crashes immediately  
-B) Silent failure with default values  
-C) Warning message is logged  
-D) ValidationError is raised with detailed field information  
+**Question 3:** What happens when validation fails?  
+A) Application crashes  
+B) Silent failure  
+C) Warning logged  
+D) ValidationError raised  
 
-**Question 4:** How do you define a tool function for a PydanticAI agent?  
-A) Using @tool decorator  
-B) Using def tool() syntax  
-C) Using @function decorator  
-D) Using Tool class with takes and returns parameters  
+**Question 4:** How do you define tools?  
+A) @tool decorator  
+B) def tool() syntax  
+C) @function decorator  
+D) Tool class with takes/returns  
 
-**Question 5:** What is the purpose of RunContext in PydanticAI?  
-A) Handles error messages  
-B) Provides runtime configuration and dependencies  
-C) Manages conversation history  
-D) Controls execution speed  
+**Question 5:** What is RunContext for?  
+A) Error handling  
+B) Runtime configuration and dependencies  
+C) Conversation history  
+D) Speed control  
 
 [**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
 
 ## 🧭 Navigation
 
-**Previous:** [Session 4 - CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)
-
-**Optional Deep Dive Modules:**
-
-- 🔬 **[Module A: Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)** - Complex validation & streaming data
-- 🏭 **[Module B: Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)** - Production deployment & monitoring
-- 🔧 **[Module C: Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)** - Specialized validators & data quality middleware
-- 🧪 **[Module D: Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)** - Comprehensive testing strategies for data systems
-
-**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+**Previous:** [Session 4 - CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)  
+**Next:** [Session 6 - Atomic Agents →](Session6_Atomic_Agents_Modular_Architecture.md)
 
 ---
