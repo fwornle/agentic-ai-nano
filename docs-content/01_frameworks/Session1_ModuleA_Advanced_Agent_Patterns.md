@@ -607,31 +607,31 @@ The analysis provides context about available specialized data processing agents
 
 Test your understanding of advanced agent patterns:
 
-**Question 1:** What is the key mechanism that prevents infinite loops in data processing reflection agents?
+**Question 1:** What is the key mechanism that prevents infinite loops in data processing reflection agents?  
 A) Memory limitations
 B) Maximum iteration limits with satisfactory conditions
 C) Network timeouts
 D) User intervention
 
-**Question 2:** In multi-step data pipeline planning, what is the primary purpose of dependency management?
+**Question 2:** In multi-step data pipeline planning, what is the primary purpose of dependency management?  
 A) Reducing memory usage
 B) Ensuring pipeline steps execute in the correct order with proper data flow
 C) Speeding up execution
 D) Simplifying code structure
 
-**Question 3:** What does the planning agent's `_parse_data_pipeline_plan` method accomplish?
+**Question 3:** What does the planning agent's `_parse_data_pipeline_plan` method accomplish?  
 A) Generates new plans from scratch
 B) Converts LLM-generated text into structured DataPipelineStep objects
 C) Executes individual pipeline steps
 D) Validates plan correctness
 
-**Question 4:** In multi-agent data processing orchestration, what information is stored in communication patterns?
+**Question 4:** In multi-agent data processing orchestration, what information is stored in communication patterns?  
 A) Complete message history with full content
 B) Summarized message data with data processing context, sender, recipient, and timestamp
 C) Only error messages
 D) Agent performance metrics
 
-**Question 5:** What is the three-phase approach used in collaborative data processing task management?
+**Question 5:** What is the three-phase approach used in collaborative data processing task management?  
 A) Planning, execution, validation
 B) Analysis, delegation, integration
 C) Data task analysis, delegation plan creation, coordinated execution

@@ -2,7 +2,7 @@
 
 ## Enterprise State Management - Answer Key
 
-**Question 1:** Correct Answer: c) PostgresSaver with primary and backup clusters
+**Question 1:** Correct Answer: c) PostgresSaver with primary and backup clusters  
 
 **Explanation**: The production environment configuration uses PostgreSQL with cluster redundancy:
 ```python
@@ -20,7 +20,7 @@ if self.environment == "production":
 
 PostgreSQL provides ACID compliance, enterprise-grade reliability, and backup cluster support for high availability production deployments.
 
-**Question 2:** Correct Answer: b) Error rate > 30%, integrity issues, or execution > 30 minutes
+**Question 2:** Correct Answer: b) Error rate > 30%, integrity issues, or execution > 30 minutes  
 
 **Explanation**: The automatic recovery system triggers on multiple conditions:
 ```python

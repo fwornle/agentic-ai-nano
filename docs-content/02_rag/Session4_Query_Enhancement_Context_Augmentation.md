@@ -2,30 +2,31 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session transforms your RAG system from simple similarity search to intelligent query understanding. Choose your path based on your learning goals:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Core Concepts (30-45 minutes)
-**Understand the essential query enhancement principles**
+=== "🎯 Observer (30-45 min)"
 
-- Read this main session through "The Semantic Gap Challenge"
-- Understand HyDE concepts and why query-document gaps exist
-- Learn about multi-query strategies and context optimization basics
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Query enhancement principles, semantic gap challenges, HyDE concepts
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Implementation (2-3 hours)
-**Build working query enhancement systems**
+=== "📝 Participant (2-3 hours)"
 
-- Complete all 🎯 Observer content above
-- Work through: [📝 HyDE Implementation Guide](Session4_HyDE_Implementation.md)
-- Practice: [📝 Query Expansion Techniques](Session4_Query_Expansion_Practice.md)
-- Apply: [📝 Context Optimization Methods](Session4_Context_Optimization.md)
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build working query enhancement systems, implement HyDE and expansion techniques
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery (6-8 hours)
-**Master advanced query enhancement systems**
+=== "⚙️ Implementer (6-8 hours)"
 
-- Complete all 🎯 Observer and 📝 Participant content above
-- Deep dive: [⚙️ Advanced Prompt Engineering](Session4_Advanced_Prompt_Engineering.md)
-- Implement: [⚙️ Multi-Query Generation Systems](Session4_Multi_Query_Systems.md)
-- Build: [⚙️ Complete Enhancement Pipeline](Session4_Complete_Enhancement_Pipeline.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced prompt engineering, multi-query systems, complete enhancement pipelines
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 

@@ -2,27 +2,31 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts (This Document)
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand vector database fundamentals and search optimization principles
+=== "🎯 Observer (45-60 min)"
 
-### 📝 Participant Path - Practical Implementation
-**Time Investment**: 3-4 hours
-**Outcome**: Build production-ready vector search systems
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Vector database fundamentals and search optimization principles
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-Complete Observer path, then continue with:
-- 📝 [Production Implementation Guide](Session3_Production_Implementation.md)
-- 📝 [Performance Optimization](Session3_Performance_Optimization.md)
+=== "📝 Participant (3-4 hours)"
 
-### ⚙️ Implementer Path - Advanced Mastery
-**Time Investment**: 8-10 hours
-**Outcome**: Deep expertise in vector search optimization
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build production-ready vector search systems
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-Complete Observer and Participant paths, then explore:
-- ⚙️ [Advanced HNSW Tuning](Session3_Advanced_HNSW_Tuning.md)
-- ⚙️ [Advanced Hybrid Search](Session3_Advanced_Hybrid_Search.md)
+=== "⚙️ Implementer (8-10 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced HNSW tuning, advanced hybrid search optimization
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -381,49 +385,49 @@ Explore deep technical topics:
 
 Test your understanding of vector databases and search optimization:
 
-**Question 1:** Which similarity metric is most suitable for RAG applications using text embeddings?
+**Question 1:** Which similarity metric is most suitable for RAG applications using text embeddings?  
 A) Euclidean distance
 B) Manhattan distance
 C) Cosine similarity
 D) Hamming distance
 
-**Question 2:** What is the primary advantage of HNSW indexing over IVF indexing?
+**Question 2:** What is the primary advantage of HNSW indexing over IVF indexing?  
 A) Lower memory usage
 B) Better compression ratios
 C) Faster query performance with high recall
 D) Simpler configuration
 
-**Question 3:** In Reciprocal Rank Fusion (RRF), what does the 'k' parameter control?
+**Question 3:** In Reciprocal Rank Fusion (RRF), what does the 'k' parameter control?  
 A) Number of results to return
 B) Weight balance between semantic and lexical scores
 C) The smoothing factor in rank combination
 D) Maximum number of query variants
 
-**Question 4:** What is the key benefit of cross-encoder reranking compared to bi-encoder similarity?
+**Question 4:** What is the key benefit of cross-encoder reranking compared to bi-encoder similarity?  
 A) Faster inference speed
 B) Lower computational requirements
 C) Joint processing of query-document pairs for better accuracy
 D) Simpler model architecture
 
-**Question 5:** When should you choose IVF indexing over HNSW for vector search?
+**Question 5:** When should you choose IVF indexing over HNSW for vector search?  
 A) When you need the fastest possible queries
 B) When you have limited memory and large datasets
 C) When accuracy is more important than speed
 D) When you need real-time updates
 
-**Question 6:** What is the purpose of the 'ef_construction' parameter in HNSW?
+**Question 6:** What is the purpose of the 'ef_construction' parameter in HNSW?  
 A) Controls memory usage during search
 B) Determines the number of connections per node
 C) Sets the dynamic candidate list size during index building
 D) Defines the maximum number of layers
 
-**Question 7:** In hybrid search, what does BM25 provide that semantic search lacks?
+**Question 7:** In hybrid search, what does BM25 provide that semantic search lacks?  
 A) Better understanding of context
 B) Exact term matching and frequency analysis
 C) Handling of synonyms and related concepts
 D) Multi-language support
 
-**Question 8:** Why is query caching particularly effective in RAG systems?
+**Question 8:** Why is query caching particularly effective in RAG systems?  
 A) Vector embeddings are expensive to compute
 B) Users often ask similar or repeated questions
 C) Database queries are the main bottleneck

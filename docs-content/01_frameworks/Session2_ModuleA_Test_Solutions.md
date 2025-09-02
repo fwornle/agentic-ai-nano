@@ -4,7 +4,7 @@
 
 ---
 
-**Question 1:** What components are defined in the `AgentRole` dataclass for agent specialization?
+**Question 1:** What components are defined in the `AgentRole` dataclass for agent specialization?  
 
 ### Answer: B) Name, description, tools, specialization, and expertise_areas
 
@@ -12,7 +12,7 @@
 
 ---
 
-**Question 2:** What is the primary purpose of the `MultiAgentOrchestrator` class?
+**Question 2:** What is the primary purpose of the `MultiAgentOrchestrator` class?  
 
 ### Answer: B) Coordinate complex workflows across multiple specialized agents
 
@@ -20,7 +20,7 @@
 
 ---
 
-**Question 3:** How does the workflow coordination engine track execution progress?
+**Question 3:** How does the workflow coordination engine track execution progress?  
 
 ### Answer: B) Uses workflow_context with phases, intermediate_results, and agent_interactions
 
@@ -28,7 +28,7 @@
 
 ---
 
-**Question 4:** What differentiates a research agent from an analysis agent in the multi-agent system?
+**Question 4:** What differentiates a research agent from an analysis agent in the multi-agent system?  
 
 ### Answer: B) Specialized tools and system messages focused on their domain
 
@@ -36,7 +36,7 @@
 
 ---
 
-**Question 5:** What happens in the synthesis phase of the complex workflow?
+**Question 5:** What happens in the synthesis phase of the complex workflow?  
 
 ### Answer: C) Combines research and analysis results into comprehensive output
 

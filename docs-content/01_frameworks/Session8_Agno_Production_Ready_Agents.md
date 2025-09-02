@@ -2,21 +2,31 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths for mastering production-ready AI agents:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Production Concepts
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand core production agent principles and Agno framework benefits
+=== "🎯 Observer (45-60 min)"
 
-### 📝 Participant Path - Hands-On Implementation
-**Time Investment**: 3-4 hours
-**Outcome**: Build production-grade agents with monitoring, error handling, and Docker deployment
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core production agent principles and Agno framework benefits
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### ⚙️ Implementer Path - Advanced Production Systems
-**Time Investment**: 8-10 hours
-**Outcome**: Master enterprise-scale architectures, security patterns, and performance optimization
+=== "📝 Participant (3-4 hours)"
 
-*Advanced modules available at the end of this session for deep-dive topics.*
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build production-grade agents with monitoring, error handling, and Docker deployment
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (8-10 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Enterprise-scale architectures, security patterns, and performance optimization
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -510,19 +520,19 @@ These modules contain the complete advanced content from the original file, rest
 
 ### Assessment Questions
 
-**Question 1:** What is Agno's primary advantage for data processing systems?
+**Question 1:** What is Agno's primary advantage for data processing systems?  
 A) Simplest learning curve
 B) Performance optimization and production focus for data workloads
 C) Best documentation
 D) Largest community
 
-**Question 2:** How should you handle API rate limits in production data processing agent systems?
+**Question 2:** How should you handle API rate limits in production data processing agent systems?  
 A) Ignore them
 B) Exponential backoff and jitter strategies for high-throughput data
 C) Faster requests
 D) Multiple API keys
 
-**Question 3:** What makes a health check endpoint effective for data processing systems?
+**Question 3:** What makes a health check endpoint effective for data processing systems?  
 A) Fast response time only
 B) Comprehensive dependency and resource checks including data quality metrics
 C) Simple HTTP 200 response

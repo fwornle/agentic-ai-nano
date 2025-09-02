@@ -12,37 +12,33 @@ But unlike rocket launches that happen once, our digital deployment is more like
 
 ![Production Deployment Architecture](images/production-deployment-architecture.png)
 
-## Learning Path Overview
+## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning experiences:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Production Concepts
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand core production deployment principles and architecture patterns
+=== "🎯 Observer (45-60 min)"
 
-Focus areas covered in this document:
-- Essential enterprise requirements for production AI systems
-- Core Kubernetes deployment architecture
-- Basic monitoring and health checking concepts
-- Production readiness fundamentals
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Production deployment principles, Kubernetes architecture, monitoring basics
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Deployment
-**Time Investment**: 3-4 hours
-**Outcome**: Deploy production-ready agent systems with proper configurations
+=== "📝 Participant (3-4 hours)"
 
-Focus areas covered in this document:
-- Complete Kubernetes deployment configurations
-- Service mesh setup with Istio
-- Basic monitoring implementation
-- Essential security configurations
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Deploy production-ready agent systems, service mesh setup, security configurations
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Production Mastery
-**Time Investment**: 8-12 hours
-**Outcome**: Master enterprise-scale agent deployment with advanced patterns
+=== "⚙️ Implementer (8-12 hours)"
 
-Additional advanced modules:
-- ⚙️ [Advanced Infrastructure & Configuration](Session9_Advanced_Infrastructure.md)
-- ⚙️ [Advanced Monitoring & Observability](Session9_Advanced_Monitoring.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Enterprise-scale deployment, advanced infrastructure, monitoring systems
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 

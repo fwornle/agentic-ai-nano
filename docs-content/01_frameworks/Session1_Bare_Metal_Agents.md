@@ -8,26 +8,31 @@ Understanding bare metal implementation becomes your competitive advantage when 
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths to master bare metal agent implementation:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts (45-60 min)
-**Perfect for**: Quick understanding, decision makers, architecture overview
-**Content**: Core agent patterns, basic implementation concepts, architectural foundations
-**Files**: This main session covers all Observer Path content
+=== "🎯 Observer (45-60 min)"
 
-### 📝 Participant Path - Practical Implementation (3-4 hours)
-**Perfect for**: Hands-on developers, practical application, production readiness
-**Content**: Complete implementations, production considerations, real-world patterns
-**Files**: All 🎯 Observer content PLUS the practical exercises and production examples in this session
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core agent patterns, basic implementation concepts, architectural foundations
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### ⚙️ Implementer Path - Advanced Architecture Mastery (8-10 hours)
-**Perfect for**: Senior developers, architects, enterprise-scale systems
-**Content**: All Observer and Participant content PLUS advanced patterns and specialized modules
-**Files**: Complete the above paths, then explore:
-- [⚙️ Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)
-- [⚙️ Performance Optimization](Session1_ModuleB_Performance_Optimization.md)
-- [⚙️ Complex State Management](Session1_ModuleC_Complex_State_Management.md)
-- [⚙️ Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md)
+=== "📝 Participant (3-4 hours)"
+
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Complete implementations, production considerations, real-world patterns
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (8-10 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced patterns, specialized modules, enterprise-scale systems
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -610,31 +615,31 @@ For comprehensive advanced coverage, explore the specialized modules:
 
 Test your understanding of bare metal agents in cloud data processing:
 
-**Question 1:** Why is bare metal agent implementation critical for data pipeline systems?
+**Question 1:** Why is bare metal agent implementation critical for data pipeline systems?  
 A) It's required by Kubernetes
 B) It provides full control over resource usage and API costs for petabyte-scale processing
 C) It's easier to deploy
 D) It uses less storage
 
-**Question 2:** What is the primary purpose of the reflection pattern in data processing agents?
+**Question 2:** What is the primary purpose of the reflection pattern in data processing agents?  
 A) To generate better LLM responses
 B) To analyze performance and optimize data pipeline efficiency
 C) To reduce memory usage
 D) To improve security
 
-**Question 3:** How do agents manage cloud processing costs in data applications?
+**Question 3:** How do agents manage cloud processing costs in data applications?  
 A) By using only free services
 B) Through intelligent model selection based on data complexity and budget tracking
 C) By caching everything
 D) Through compression only
 
-**Question 4:** What is the key consideration for memory management in Kubernetes-deployed data agents?
+**Question 4:** What is the key consideration for memory management in Kubernetes-deployed data agents?  
 A) Unlimited memory allocation
 B) Respecting pod memory limits while efficiently caching data processing context
 C) Using only disk storage
 D) Memory is not a concern
 
-**Question 5:** Why is tool registration important for data processing agents?
+**Question 5:** Why is tool registration important for data processing agents?  
 A) It looks professional
 B) To integrate with specialized cloud services like S3 for data storage, Kafka for streaming, and Argo Workflows for workflows
 C) It's required by Python

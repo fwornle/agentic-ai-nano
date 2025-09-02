@@ -569,31 +569,31 @@ You've now mastered advanced type systems in PydanticAI for data engineering, in
 
 Test your understanding of advanced type systems and validation patterns:
 
-**Question 1:** What validation approach does the DataProcessingProfile use for feature vector quality?
+**Question 1:** What validation approach does the DataProcessingProfile use for feature vector quality?  
 A) Simple field-by-field validation only
 B) Cross-field validation with NaN detection, infinite value checking, and reasonable bounds validation
 C) Basic type checking without data quality logic
 D) External API validation calls
 
-**Question 2:** In the streaming event validation system, what happens when time drift exceeds 1 hour?
+**Question 2:** In the streaming event validation system, what happens when time drift exceeds 1 hour?  
 A) Event is automatically corrected
 B) Validation error is raised with drift detection details
 C) Event timestamp is automatically updated
 D) Event proceeds without additional validation
 
-**Question 3:** How does the DataValidationErrorHandler categorize data processing errors?
+**Question 3:** How does the DataValidationErrorHandler categorize data processing errors?  
 A) Only by field name
 B) By error type, data impact assessment, field context, and data quality metrics
 C) Simple true/false validation
 D) Error code numbers only
 
-**Question 4:** What performance optimization does the DataProcessingValidationMiddleware implement?
+**Question 4:** What performance optimization does the DataProcessingValidationMiddleware implement?  
 A) Database connection pooling
 B) Validation result caching with hash-based keys and performance metrics tracking
 C) Parallel processing only
 D) Memory compression
 
-**Question 5:** When a validation fails in the middleware, what information is included in the error report?
+**Question 5:** When a validation fails in the middleware, what information is included in the error report?  
 A) Just the error message
 B) Error type and field only
 C) Complete error report with data quality impact, suggestions, and performance metrics

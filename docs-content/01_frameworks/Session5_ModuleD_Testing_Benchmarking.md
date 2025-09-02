@@ -1183,31 +1183,31 @@ You've now mastered testing and benchmarking for PydanticAI data processing syst
 
 Test your understanding of testing and benchmarking systems for data processing:
 
-**Question 1:** What does the comprehensive data processing integration test framework validate?
+**Question 1:** What does the comprehensive data processing integration test framework validate?  
 A) Only basic functionality
 B) Valid inputs, error scenarios, edge cases, performance under load, and data quality metrics
 C) Simple unit tests only
 D) Manual testing procedures
 
-**Question 2:** How does the DataProcessingMetricsCollector track agent performance data?
+**Question 2:** How does the DataProcessingMetricsCollector track agent performance data?  
 A) Simple counters only
 B) Comprehensive metrics with request counts, response times, error rates, data quality scores, and throughput
 C) Binary success/failure tracking
 D) Manual logging only
 
-**Question 3:** What eviction strategy does the IntelligentDataProcessingCache use when memory limits are reached?
+**Question 3:** What eviction strategy does the IntelligentDataProcessingCache use when memory limits are reached?  
 A) Random removal
 B) Priority-based eviction with data quality, processing cost, and access pattern consideration
 C) First-in-first-out only
 D) Manual cache clearing
 
-**Question 4:** What information does the data processing performance decorator capture for monitoring?
+**Question 4:** What information does the data processing performance decorator capture for monitoring?  
 A) Just execution time
 B) Request metrics, performance data, error tracking, data quality scores, and processing costs
 C) Function names only
 D) Memory usage only
 
-**Question 5:** How does the load testing framework simulate realistic data processing usage patterns?
+**Question 5:** How does the load testing framework simulate realistic data processing usage patterns?  
 A) Single threaded execution
 B) Concurrent user simulation with configurable load patterns, data processing scenarios, and throughput analysis
 C) Random API calls

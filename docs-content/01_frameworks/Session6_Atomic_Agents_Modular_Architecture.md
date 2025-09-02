@@ -4,34 +4,33 @@ Imagine if you could build data processing pipelines the way you architect distr
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This module offers three distinct learning paths designed to match your learning goals and time investment:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand atomic agent architecture principles and component-based design
+=== "🎯 Observer (45-60 min)"
 
-Key files to read:
-- 🎯 [Atomic Architecture Essentials](Session6_Atomic_Architecture_Essentials.md)
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Atomic agent architecture principles and component-based design
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Application
-**Time Investment**: 3-4 hours
-**Outcome**: Build and assemble atomic components for data processing systems
+=== "📝 Participant (3-4 hours)"
 
-Key files to read:
-- All 🎯 Observer files above
-- 📝 [Building Atomic Components](Session6_Building_Atomic_Components.md)
-- 📝 [System Assembly Practice](Session6_System_Assembly_Practice.md)
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build and assemble atomic components for data processing systems
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery
-**Time Investment**: 8-10 hours
-**Outcome**: Master advanced orchestration and production deployment strategies
+=== "⚙️ Implementer (8-10 hours)"
 
-Key files to read:
-- All 🎯 Observer and 📝 Participant files above
-- ⚙️ [Advanced Orchestration](Session6_Advanced_Orchestration.md)
-- ⚙️ [Production Deployment](Session6_Production_Deployment.md)
-- ⚙️ [Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)
-- ⚙️ [Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced orchestration, production deployment, enterprise modular systems
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+---
 
 ## Module Architecture
 

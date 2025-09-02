@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the core principle of zero-trust security for RAG systems?
+**Question 1:** What is the core principle of zero-trust security for RAG systems?  
 
 A) Never trust, always verify every component and user ✅
 B) Use simple password authentication
@@ -13,7 +13,7 @@ D) Focus only on external threats
 
 ---
 
-**Question 2:** Why is dynamic access control superior to static RBAC for enterprise RAG?
+**Question 2:** Why is dynamic access control superior to static RBAC for enterprise RAG?  
 
 A) It's compatible with legacy systems
 B) It requires fewer resources
@@ -24,7 +24,7 @@ D) It adapts security measures based on real-time risk assessment ✅
 
 ---
 
-**Question 3:** What is the most critical component of enterprise data governance for RAG?
+**Question 3:** What is the most critical component of enterprise data governance for RAG?  
 
 A) Automated classification and lineage tracking ✅
 B) Network bandwidth management
@@ -35,7 +35,7 @@ D) User interface design
 
 ---
 
-**Question 4:** Which testing stage is most unique to RAG CI/CD pipelines?
+**Question 4:** Which testing stage is most unique to RAG CI/CD pipelines?  
 
 A) Integration testing
 B) Unit testing
@@ -46,7 +46,7 @@ D) Model validation and embedding consistency testing ✅
 
 ---
 
-**Question 5:** What is the primary benefit of Infrastructure as Code for RAG deployments?
+**Question 5:** What is the primary benefit of Infrastructure as Code for RAG deployments?  
 
 A) Consistent, repeatable, and version-controlled deployments ✅
 B) Lower infrastructure costs
@@ -57,7 +57,7 @@ D) Simpler debugging
 
 ---
 
-**Question 6:** Which approach is most effective for enterprise compliance in RAG systems?
+**Question 6:** Which approach is most effective for enterprise compliance in RAG systems?  
 
 A) Documentation-only compliance
 B) Manual compliance checks
@@ -68,7 +68,7 @@ D) Continuous automated monitoring with real-time remediation ✅
 
 ---
 
-**Question 7:** What is the most challenging aspect of enterprise RAG integration?
+**Question 7:** What is the most challenging aspect of enterprise RAG integration?  
 
 A) User training requirements
 B) Balancing security, compliance, and performance requirements ✅

@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the primary advantage of using metadata tracking in document loading?
+**Question 1:** What is the primary advantage of using metadata tracking in document loading?  
 
 A) Improves embedding quality
 B) Speeds up chunking operations
@@ -13,7 +13,7 @@ D) Enables source attribution and filtering capabilities ✅
 
 ---
 
-**Question 2:** Which chunking approach is most likely to preserve semantic coherence in documents?
+**Question 2:** Which chunking approach is most likely to preserve semantic coherence in documents?  
 
 A) Random boundary splitting
 B) Token-count only splitting
@@ -24,7 +24,7 @@ D) Semantic paragraph-based splitting ✅
 
 ---
 
-**Question 3:** In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?
+**Question 3:** In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?  
 
 A) Speeds up similarity searches
 B) Enables persistent storage between sessions ✅
@@ -35,7 +35,7 @@ D) Reduces memory consumption
 
 ---
 
-**Question 4:** What is the primary benefit of including confidence scores in RAG responses?
+**Question 4:** What is the primary benefit of including confidence scores in RAG responses?  
 
 A) Reduces retrieval time
 B) Improves LLM generation quality
@@ -46,7 +46,7 @@ D) Enables faster document indexing
 
 ---
 
-**Question 5:** Why does the RAG system separate retrieval and generation into distinct phases?
+**Question 5:** Why does the RAG system separate retrieval and generation into distinct phases?  
 
 A) To reduce computational costs
 B) To support multiple languages
@@ -57,7 +57,7 @@ D) To prevent embedding conflicts
 
 ---
 
-**Question 6:** What is the main advantage of the structured response format (answer, sources, confidence, num_sources)?
+**Question 6:** What is the main advantage of the structured response format (answer, sources, confidence, num_sources)?  
 
 A) Enables comprehensive result evaluation and transparency ✅
 B) Improves embedding quality
@@ -68,7 +68,7 @@ D) Speeds up query processing
 
 ---
 
-**Question 7:** Why is using tiktoken for token counting important in RAG systems?
+**Question 7:** Why is using tiktoken for token counting important in RAG systems?  
 
 A) It speeds up embedding generation
 B) It improves semantic understanding
@@ -79,7 +79,7 @@ D) It reduces storage requirements
 
 ---
 
-**Question 8:** What is the best practice for handling failed document loads in a production RAG system?
+**Question 8:** What is the best practice for handling failed document loads in a production RAG system?  
 
 A) Retry indefinitely until success
 B) Skip failed documents and continue with others ✅
