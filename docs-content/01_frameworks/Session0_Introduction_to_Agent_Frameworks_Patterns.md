@@ -2,12 +2,12 @@
 
 ## Learning Outcomes
 
-By completing this session, you will:  
+By completing this session, you will:
 
-- Understand the evolution from simple prompts to sophisticated agent systems  
-- Master the five core agentic patterns that power production systems  
-- Compare modern agent frameworks and select appropriate tools for different use cases  
-- Prepare for hands-on agent development in subsequent sessions  
+- Understand the evolution from simple prompts to sophisticated agent systems
+- Master the five core agentic patterns that power production systems
+- Compare modern agent frameworks and select appropriate tools for different use cases
+- Prepare for hands-on agent development in subsequent sessions
 
 ## 🎯 Observer Path: Essential Concepts
 
@@ -25,7 +25,7 @@ Modern AI development has evolved from simple prompt-response interactions to so
 
 ### The Evolution of AI Interaction
 
-The journey from simple prompt-response to sophisticated agent systems mirrors the evolution of data engineering itself - from manual ETL scripts to orchestrated, self-healing data pipelines:  
+The journey from simple prompt-response to sophisticated agent systems mirrors the evolution of data engineering itself - from manual ETL scripts to orchestrated, self-healing data pipelines:
 
 ![Agent Evolution Overview](images/agent-evolution-overview.png)
 
@@ -50,16 +50,16 @@ The agent approach transforms this limitation into capability. The agent can che
 
 ### What Makes an Agent "Agentic"?
 
-Four key characteristics define agentic systems - the same traits that separate a junior data engineer who needs constant supervision from a senior architect who proactively designs resilient systems:  
+Four key characteristics define agentic systems - the same traits that separate a junior data engineer who needs constant supervision from a senior architect who proactively designs resilient systems:
 
-1. **Autonomy**: Makes decisions without constant human input - like a trusted pipeline orchestrator that knows when to scale resources independently  
-2. **Reactivity**: Responds to environmental changes - adapts when data volume spikes or service dependencies fail  
-3. **Proactivity**: Takes initiative toward goals - doesn't wait for alerts to optimize performance or prevent issues  
-4. **Social Ability**: Interacts with other agents/humans - collaborates effectively across distributed data teams and systems  
+1. **Autonomy**: Makes decisions without constant human input - like a trusted pipeline orchestrator that knows when to scale resources independently
+2. **Reactivity**: Responds to environmental changes - adapts when data volume spikes or service dependencies fail
+3. **Proactivity**: Takes initiative toward goals - doesn't wait for alerts to optimize performance or prevent issues
+4. **Social Ability**: Interacts with other agents/humans - collaborates effectively across distributed data teams and systems
 
 ### The Five Core Agentic Patterns
 
-Every agent framework implements these fundamental patterns - they're like the fundamental forces in data engineering that govern how intelligent systems process, validate, and optimize information flow:  
+Every agent framework implements these fundamental patterns - they're like the fundamental forces in data engineering that govern how intelligent systems process, validate, and optimize information flow:
 
 ![Overview of LLM Patterns](images/agentic-5-patterns.png)
 
@@ -71,12 +71,12 @@ Picture a data pipeline that pushes transformations to production without valida
 
 The Reflection pattern addresses a fundamental challenge: LLMs often produce outputs that "sound good" but may have subtle errors or miss important aspects. By implementing a self-review cycle, agents can catch and correct their own mistakes before finalizing responses.
 
-**How it works - like having an internal data quality control department:**  
+**How it works - like having an internal data quality control department:**
 
-- Generate initial response - the first draft  
-- Critically evaluate the output ("Was that complete? Anything missing?") - internal review  
-- Revise and improve based on self-critique - second draft incorporating feedback  
-- No additional models needed - just structured prompting that creates an internal dialogue  
+- Generate initial response - the first draft
+- Critically evaluate the output ("Was that complete? Anything missing?") - internal review
+- Revise and improve based on self-critique - second draft incorporating feedback
+- No additional models needed - just structured prompting that creates an internal dialogue
 
 ```python
 # Reflection pattern - basic flow
@@ -90,7 +90,7 @@ This shows the three-step reflection cycle: generate, reflect, improve. The agen
 ```python
 # Real-world reflection implementation
 initial = agent.answer("Explain database indexing")
-critique = agent.evaluate(initial, 
+critique = agent.evaluate(initial,
     prompts=["Is this technically accurate?",
              "Are all key concepts covered?",
              "Would a beginner understand this?"])
@@ -112,7 +112,7 @@ This systematic self-evaluation prevents the superficial improvements you'd get 
 
 ## 📝 Participant Path: Practical Application
 
-*Prerequisites: Complete Observer Path sections above*  
+*Prerequisites: Complete Observer Path sections above*
 
 Now that you understand the essential concepts, let's explore practical implementation details and real-world applications of these patterns.
 
@@ -126,13 +126,13 @@ LLMs have knowledge cutoffs and can't access your databases, files, or real-time
 
 **Key insight:** Your LLM doesn't need to know everything - it just needs to know how to fetch what it needs, like a smart data engineer who knows which monitoring dashboard to check for each type of issue.
 
-**Common tool integrations - the agent's utility belt:**  
+**Common tool integrations - the agent's utility belt:**
 
-- Vector databases for semantic search - finding relevant knowledge  
-- APIs (Stripe, WolframAlpha, internal endpoints) - accessing live services  
-- Code execution environments (REPL, sandboxes) - running actual computations  
-- Data lakes and processing databases - reading real sensor data streams  
-- Web search and scraping tools - getting current information  
+- Vector databases for semantic search - finding relevant knowledge
+- APIs (Stripe, WolframAlpha, internal endpoints) - accessing live services
+- Code execution environments (REPL, sandboxes) - running actual computations
+- Data lakes and processing databases - reading real sensor data streams
+- Web search and scraping tools - getting current information
 
 ```python
 # Tool use pattern - basic setup
@@ -194,7 +194,7 @@ ReAct combines Reflection and Tool Use into a powerful loop where the agent thin
 # ReAct pattern - basic loop structure
 while not task_complete:
     thought = agent.think(current_state)
-    action = agent.decide_action(thought)  
+    action = agent.decide_action(thought)
     observation = agent.execute(action)
     current_state = agent.update_state(observation)
 ```
@@ -206,7 +206,7 @@ This core loop shows how ReAct agents think and act iteratively rather than gene
 class ReActAgent:
     def solve(self, task):
         context = {"task": task, "history": []}
-        
+
         while not self.is_complete(context):
             thought = self.reason(context)  # "Need user data from DB"
             action = self.select_tool(thought)  # Choose query_database
@@ -224,11 +224,11 @@ In practice, each cycle builds on previous knowledge. The context accumulates bo
 
 The key insight is adaptability - when actions fail, the agent doesn't repeat the same mistake. It reasons about the failure and tries different approaches, making it resilient to errors and changing conditions.
 
-**Requirements for ReAct:**  
+**Requirements for ReAct:**
 
-- Tools for taking action - hands to work with  
-- Memory for keeping context - brain to remember  
-- Reasoning loop to track progress - consciousness to guide  
+- Tools for taking action - hands to work with
+- Memory for keeping context - brain to remember
+- Reasoning loop to track progress - consciousness to guide
 
 **Why it matters:** ReAct makes agents flexible. Instead of rigid scripts, they think through each step, adapt in real-time, and course-correct when new information arrives - like the difference between a hardcoded ETL script and an intelligent data processing orchestrator.
 
@@ -244,24 +244,24 @@ LLMs excel at quick answers but struggle with multi-step tasks. The Planning pat
 
 **Key insight:** Intelligence isn't just about answers - it's about how those answers are formed. The process matters as much as the outcome, especially in data engineering where order of operations can make or break a migration.
 
-**How Planning works - like a seasoned data architect:**  
+**How Planning works - like a seasoned data architect:**
 
-1. Analyze the complex goal - understand the data requirements and constraints  
-2. Decompose into logical sub-tasks - break it down by data domains and dependencies  
-3. Sequence steps appropriately - respect data flow and dependency order  
-4. Execute each step methodically - systematic progress with validation gates  
-5. Track progress and adjust as needed - stay flexible as requirements evolve  
+1. Analyze the complex goal - understand the data requirements and constraints
+2. Decompose into logical sub-tasks - break it down by data domains and dependencies
+3. Sequence steps appropriately - respect data flow and dependency order
+4. Execute each step methodically - systematic progress with validation gates
+5. Track progress and adjust as needed - stay flexible as requirements evolve
 
-**Real-world example - data warehouse migration:**  
+**Real-world example - data warehouse migration:**
 
-- Request: "Migrate our data warehouse to the cloud"  
-- Agent creates plan:  
-  1. Audit current data sources and volumes - baseline assessment  
-  2. Design target schema and partitioning strategy - architecture foundation  
-  3. Set up data pipeline infrastructure - build the pipes  
-  4. Implement incremental data synchronization - minimize downtime  
-  5. Validate data quality and performance - ensure reliability  
-- Then tackles each part systematically with clear progress tracking  
+- Request: "Migrate our data warehouse to the cloud"
+- Agent creates plan:
+  1. Audit current data sources and volumes - baseline assessment
+  2. Design target schema and partitioning strategy - architecture foundation
+  3. Set up data pipeline infrastructure - build the pipes
+  4. Implement incremental data synchronization - minimize downtime
+  5. Validate data quality and performance - ensure reliability
+- Then tackles each part systematically with clear progress tracking
 
 ```python
 # Planning pattern - basic decomposition
@@ -296,18 +296,18 @@ This is crucial for enterprise systems where tasks may span hours or days and ne
             # Dynamically adjust plan based on results
             if result.requires_replanning:
                 plan = self.revise_plan(plan, result)
-        
+
         return self.summarize_results()
 ```
 
 The key insight is dynamic replanning - when execution reveals that the original plan won't work, the agent revises the remaining steps rather than failing. This creates robust systems that adapt to changing conditions while maintaining progress toward the goal.
 
-**Implementation approaches:**  
+**Implementation approaches:**
 
-- Embed planning in prompts ("First, break this task into steps...") - simple but effective  
-- Let the model generate its own plans dynamically - more flexible  
-- Store plans for persistence and resumability - production-ready  
-- Use hierarchical planning for complex data processing workflows - distributed scale  
+- Embed planning in prompts ("First, break this task into steps...") - simple but effective
+- Let the model generate its own plans dynamically - more flexible
+- Store plans for persistence and resumability - production-ready
+- Use hierarchical planning for complex data processing workflows - distributed scale
 
 **Result:** Agents move from reactive to proactive, handling workflows and multi-step tasks with systematic precision - the difference between ad-hoc data fixes and strategic data architecture evolution.
 
@@ -323,20 +323,20 @@ Why rely on one generalist agent when you can have a team of specialists? The Mu
 
 **Key insight:** The magic happens when agents disagree - that's when you get sharper insights and deeper thinking. It's creative tension that produces excellence, like when a data engineer and architect debate the trade-offs between processing speed and data consistency.
 
-**Typical multi-agent roles - your data engineering dream team:**  
+**Typical multi-agent roles - your data engineering dream team:**
 
-- **Data Engineer**: Optimizes pipelines and processing workflows - the infrastructure specialist  
-- **Data Architect**: Designs schemas and data models - the strategic thinker  
-- **Quality Engineer**: Validates data integrity and performance - the reliability guardian  
-- **Analytics Engineer**: Transforms data for business insights - the bridge to value  
-- **Platform Engineer**: Manages infrastructure and deployment - the scalability expert  
+- **Data Engineer**: Optimizes pipelines and processing workflows - the infrastructure specialist
+- **Data Architect**: Designs schemas and data models - the strategic thinker
+- **Quality Engineer**: Validates data integrity and performance - the reliability guardian
+- **Analytics Engineer**: Transforms data for business insights - the bridge to value
+- **Platform Engineer**: Manages infrastructure and deployment - the scalability expert
 
-**Collaboration dynamics - how great data teams work:**  
+**Collaboration dynamics - how great data teams work:**
 
-- Agents communicate through a controller or message bus - structured communication  
-- Each agent has a specific role and expertise area - clear responsibilities  
-- They can critique each other's work - peer review  
-- Iterative refinement through discussion - continuous improvement  
+- Agents communicate through a controller or message bus - structured communication
+- Each agent has a specific role and expertise area - clear responsibilities
+- They can critique each other's work - peer review
+- Iterative refinement through discussion - continuous improvement
 
 ```python
 # Multi-agent pattern - basic collaboration
@@ -391,7 +391,7 @@ This creates efficient workflows that maximize both speed and quality.
 ```python
         # Agents review and critique each other's work
         review = self.agents["reviewer"].evaluate(implementation)
-        
+
         if review.has_issues:
             self.refine_with_feedback(review.feedback)
 ```
@@ -404,18 +404,18 @@ The peer review and iteration cycles ensure quality improvement through collabor
 
 When issues are found, the system doesn't just flag them - it actively works to resolve them through coordinated agent effort, creating a self-improving development process.
 
-**Implementation approaches:**  
+**Implementation approaches:**
 
-- Simple: Give each agent a name and job description - role playing  
-- Intermediate: Let agents message each other through a controller - structured communication  
-- Advanced: Implement voting, consensus mechanisms, and conflict resolution - sophisticated coordination  
+- Simple: Give each agent a name and job description - role playing
+- Intermediate: Let agents message each other through a controller - structured communication
+- Advanced: Implement voting, consensus mechanisms, and conflict resolution - sophisticated coordination
 
-**Benefits:**  
+**Benefits:**
 
-- Specialized expertise in each domain - depth over breadth  
-- Parallel processing of complex tasks - speed through parallelization  
-- Higher quality through peer review - multiple perspectives  
-- Emergent problem-solving through collaboration - the whole exceeds the parts  
+- Specialized expertise in each domain - depth over breadth
+- Parallel processing of complex tasks - speed through parallelization
+- Higher quality through peer review - multiple perspectives
+- Emergent problem-solving through collaboration - the whole exceeds the parts
 
 ![Multi-Agent Pattern](images/multi-agent-pattern.png)
 
@@ -423,9 +423,9 @@ When issues are found, the system doesn't just flag them - it actively works to 
 
 ## ⚙️ Implementer Path: Advanced Topics
 
-*Prerequisites: Complete Observer and Participant paths*  
+*Prerequisites: Complete Observer and Participant paths*
 
-For comprehensive mastery of agent frameworks and enterprise deployment:  
+For comprehensive mastery of agent frameworks and enterprise deployment:
 
 - ⚙️ **[Advanced Framework Analysis](Session0_Advanced_Framework_Analysis.md)** - Deep dive into enterprise framework selection, production deployment considerations, security patterns, and performance optimization strategies
 
@@ -435,14 +435,14 @@ For comprehensive mastery of agent frameworks and enterprise deployment:
 
 ### Your Learning Journey
 
-This module follows a progressive skill-building path designed to take you from curiosity to competence in building production-ready data agents:  
+This module follows a progressive skill-building path designed to take you from curiosity to competence in building production-ready data agents:
 
 ```text
 Week 1: Foundation & Core Patterns
-Session 1: Bare Metal → Session 2: LangChain → Session 3: LangGraph 
+Session 1: Bare Metal → Session 2: LangChain → Session 3: LangGraph
 Session 4: CrewAI → Session 5: PydanticAI → Session 6: Atomic Agents
 
-Week 2: Production & Enterprise  
+Week 2: Production & Enterprise
 Session 7: Google ADK → Session 8: Agno → Session 9: Multi-Agent Patterns
 Session 10: Enterprise Integration
 
@@ -453,49 +453,46 @@ Capstone: Multi-Framework Agent Ecosystem
 
 ### Key Takeaways
 
-1. **Agent Evolution**: Modern AI has evolved from simple prompt-response to sophisticated autonomous systems with four key characteristics: autonomy, reactivity, proactivity, and social ability  
+1. **Agent Evolution**: Modern AI has evolved from simple prompt-response to sophisticated autonomous systems with four key characteristics: autonomy, reactivity, proactivity, and social ability
 
-2. **Five Core Patterns**: All production agent systems implement these fundamental patterns:  
-   - **Reflection**: Self-improvement through self-evaluation  
-   - **Tool Use**: Extending capabilities through external tools  
-   - **ReAct**: Iterative reasoning and action cycles  
-   - **Planning**: Breaking complex tasks into manageable steps  
-   - **Multi-Agent Collaboration**: Specialized agents working together  
+2. **Five Core Patterns**: All production agent systems implement these fundamental patterns:
+   - **Reflection**: Self-improvement through self-evaluation
+   - **Tool Use**: Extending capabilities through external tools
+   - **ReAct**: Iterative reasoning and action cycles
+   - **Planning**: Breaking complex tasks into manageable steps
+   - **Multi-Agent Collaboration**: Specialized agents working together
 
-3. **Framework Selection**: Choose frameworks based on your use case:  
-   - **Learning/Prototyping**: LangChain, CrewAI  
-   - **Enterprise Production**: PydanticAI, Google ADK  
-   - **Complex Workflows**: LangGraph  
-   - **Microservices**: Atomic Agents  
+3. **Framework Selection**: Choose frameworks based on your use case:
+   - **Learning/Prototyping**: LangChain, CrewAI
+   - **Enterprise Production**: PydanticAI, Google ADK
+   - **Complex Workflows**: LangGraph
+   - **Microservices**: Atomic Agents
 
 ### Self-Assessment Checklist
 
-- [ ] I understand the evolution from prompts to agents  
-- [ ] I can identify the 5 core agentic patterns in practice  
-- [ ] I can compare frameworks and their production strengths  
-- [ ] I'm ready to start building agents in Session 1  
+- [ ] I understand the evolution from prompts to agents
+- [ ] I can identify the 5 core agentic patterns in practice
+- [ ] I can compare frameworks and their production strengths
+- [ ] I'm ready to start building agents in Session 1
 
 ### Optional Deep-Dive Modules
 
-**⚠️ OPTIONAL CONTENT - Choose based on your goals:**  
+**⚠️ OPTIONAL CONTENT - Choose based on your goals:**
 
-- **[Advanced Framework Analysis](Session0_Advanced_Framework_Analysis.md)** - Enterprise framework selection and production deployment  
-- **[Module A: Historical Context & Evolution](Session0_ModuleA_Historical_Context_Evolution.md)** - Evolution from rule-based systems to modern agents  
-- **[Module B: Advanced Pattern Theory](Session0_ModuleB_Advanced_Pattern_Theory.md)** - Mathematical foundations of agent behavior  
+- **[Advanced Framework Analysis](Session0_Advanced_Framework_Analysis.md)** - Enterprise framework selection and production deployment
+- **[Module A: Historical Context & Evolution](Session0_ModuleA_Historical_Context_Evolution.md)** - Evolution from rule-based systems to modern agents
+- **[Module B: Advanced Pattern Theory](Session0_ModuleB_Advanced_Pattern_Theory.md)** - Mathematical foundations of agent behavior
 
 ---
 
 ## 📝 Practice Assessment
 
-Ready to test your understanding? Take the practice test to validate your knowledge of agent frameworks and patterns:  
+Ready to test your understanding? Take the practice test to validate your knowledge of agent frameworks and patterns:
 
 [**📝 Session 0 Practice Test →**](Session0_Practice_Test.md)
-
 ---
 
 ## 🧭 Navigation
 
-**Previous:** [Module 1: Agent Frameworks](index.md) (Introduction)  
 **Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
-
---
+---

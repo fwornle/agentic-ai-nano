@@ -2,31 +2,31 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths for mastering PydanticAI type-safe agent development:  
+This session offers three distinct learning paths for mastering PydanticAI type-safe agent development:
 
-### 🎯 Observer Path - Essential Concepts  
-**Time Investment**: 1-2 hours  
-**Outcome**: Understand core type safety principles and basic PydanticAI usage  
+### 🎯 Observer Path - Essential Concepts
+**Time Investment**: 1-2 hours
+**Outcome**: Understand core type safety principles and basic PydanticAI usage
 
-Read this main file for fundamental concepts and basic implementations.  
+Read this main file for fundamental concepts and basic implementations.
 
-### 📝 Participant Path - Practical Application  
-**Time Investment**: 3-4 hours  
-**Outcome**: Build production-ready type-safe agents with tools and validation  
+### 📝 Participant Path - Practical Application
+**Time Investment**: 3-4 hours
+**Outcome**: Build production-ready type-safe agents with tools and validation
 
-Complete Observer path, then continue with:  
-- 📝 [Practical Implementation](Session5_Practical_Implementation.md)  
-- 📝 [Production Deployment](Session5_Production_Deployment.md)  
+Complete Observer path, then continue with:
+- 📝 [Practical Implementation](Session5_Practical_Implementation.md)
+- 📝 [Production Deployment](Session5_Production_Deployment.md)
 
-### ⚙️ Implementer Path - Complete Mastery  
-**Time Investment**: 8-10 hours  
-**Outcome**: Deep expertise in advanced type systems and enterprise patterns  
+### ⚙️ Implementer Path - Complete Mastery
+**Time Investment**: 8-10 hours
+**Outcome**: Deep expertise in advanced type systems and enterprise patterns
 
-Complete Observer and Participant paths, then master:  
-- ⚙️ [Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)  
-- ⚙️ [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)  
-- ⚙️ [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)  
-- ⚙️ [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)  
+Complete Observer and Participant paths, then master:
+- ⚙️ [Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)
+- ⚙️ [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)
+- ⚙️ [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)
+- ⚙️ [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)
 
 ---
 
@@ -36,14 +36,14 @@ Imagine your ML training pipeline silently consuming corrupted data because an A
 
 ## What is PydanticAI?
 
-PydanticAI brings production-grade type safety and validation to AI agent development. Unlike traditional frameworks that work with unpredictable text responses, PydanticAI guarantees your agents return exactly the data schemas you define.  
+PydanticAI brings production-grade type safety and validation to AI agent development. Unlike traditional frameworks that work with unpredictable text responses, PydanticAI guarantees your agents return exactly the data schemas you define.
 
 ### Key Benefits
 
-- **Schema Enforcement**: Guaranteed response structure prevents data corruption  
-- **Data Validation**: Automatic field validation with clear error messages  
-- **Type Safety**: Leverages familiar Python patterns and type hints  
-- **Infrastructure Agnostic**: Works with OpenAI, Anthropic, Gemini, and other providers  
+- **Schema Enforcement**: Guaranteed response structure prevents data corruption
+- **Data Validation**: Automatic field validation with clear error messages
+- **Type Safety**: Leverages familiar Python patterns and type hints
+- **Infrastructure Agnostic**: Works with OpenAI, Anthropic, Gemini, and other providers
 
 This Observer path covers essential concepts for understanding type-safe agent development fundamentals.
 
@@ -51,11 +51,11 @@ This Observer path covers essential concepts for understanding type-safe agent d
 
 ## Type Safety Architecture Fundamentals
 
-PydanticAI brings compile-time type safety to AI development through structured data models and automatic validation.  
+PydanticAI brings compile-time type safety to AI development through structured data models and automatic validation.
 
 ![PydanticAI](images/pydantic-ai.png)
 
-Essential imports for type-safe agents:  
+Essential imports for type-safe agents:
 
 ```python
 from pydantic_ai import Agent, RunContext
@@ -66,26 +66,26 @@ from enum import Enum
 
 ### Three Core Principles
 
-These principles transform unpredictable AI responses into reliable data:  
+These principles transform unpredictable AI responses into reliable data:
 
-1. **Structured Schema Models**: Define exact data shapes  
-2. **Field-Level Validation**: Ensure data integrity at field level  
-3. **Type Contracts**: Prevent errors during development  
+1. **Structured Schema Models**: Define exact data shapes
+2. **Field-Level Validation**: Ensure data integrity at field level
+3. **Type Contracts**: Prevent errors during development
 
 ### Basic Schema Definition
 
-Pydantic models act as data contracts that specify exactly what your data should look like.  
+Pydantic models act as data contracts that specify exactly what your data should look like.
 
-First, define enums for controlled values:  
+First, define enums for controlled values:
 
 ```python
 class DataQuality(str, Enum):
     HIGH = "high"
-    MEDIUM = "medium" 
+    MEDIUM = "medium"
     LOW = "low"
 ```
 
-Then create structured models with validation:  
+Then create structured models with validation:
 
 ```python
 class FeatureExtractionRequest(BaseModel):
@@ -95,7 +95,7 @@ class FeatureExtractionRequest(BaseModel):
     completion_date: Optional[str] = Field(None, regex=r'\d{4}-\d{2}-\d{2}')
 ```
 
-Create validated instances:  
+Create validated instances:
 
 ```python
 request = FeatureExtractionRequest(
@@ -108,9 +108,9 @@ request = FeatureExtractionRequest(
 
 ### Validation Benefits
 
-Type safety prevents common data issues by catching schema violations early.  
+Type safety prevents common data issues by catching schema violations early.
 
-Without validation - prone to errors:  
+Without validation - prone to errors:
 
 ```python
 def process_unsafe(data):
@@ -119,7 +119,7 @@ def process_unsafe(data):
     return data
 ```
 
-With type safety - prevents violations:  
+With type safety - prevents violations:
 
 ```python
 def process_safe(request: FeatureExtractionRequest):
@@ -128,13 +128,13 @@ def process_safe(request: FeatureExtractionRequest):
     return request
 ```
 
-Validation catches issues immediately:  
+Validation catches issues immediately:
 
 ```python
 try:
     bad_request = FeatureExtractionRequest(
         dataset_id="",  # Too short
-        feature_description="Short",  # Too short  
+        feature_description="Short",  # Too short
         quality_threshold="invalid"  # Invalid enum
     )
 except ValidationError as e:
@@ -145,9 +145,9 @@ except ValidationError as e:
 
 ## Basic Agent Creation
 
-PydanticAI agents guarantee response structure, eliminating unpredictable text responses.  
+PydanticAI agents guarantee response structure, eliminating unpredictable text responses.
 
-Define the response structure:  
+Define the response structure:
 
 ```python
 class FeatureExtractionResponse(BaseModel):
@@ -157,7 +157,7 @@ class FeatureExtractionResponse(BaseModel):
     feature_pipeline_steps: List[str]
 ```
 
-Create the type-safe agent:  
+Create the type-safe agent:
 
 ```python
 feature_agent = Agent(
@@ -167,7 +167,7 @@ feature_agent = Agent(
 )
 ```
 
-Use the agent with guaranteed structure:  
+Use the agent with guaranteed structure:
 
 ```python
 async def plan_extraction(description: str) -> FeatureExtractionResponse:
@@ -180,21 +180,21 @@ async def plan_extraction(description: str) -> FeatureExtractionResponse:
 
 ### Agents with Dependencies
 
-Real applications need external services. PydanticAI provides dependency injection for clean architecture.  
+Real applications need external services. PydanticAI provides dependency injection for clean architecture.
 
-Define service dependencies:  
+Define service dependencies:
 
 ```python
 class DataWarehouseDep:
     def __init__(self, warehouse_url: str):
         self.warehouse_url = warehouse_url
-    
+
     def save_job(self, job_data: dict) -> str:
         # Integration with data warehouses
         return f"job_{hash(str(job_data)) % 100000}"
 ```
 
-Create agent with dependencies:  
+Create agent with dependencies:
 
 ```python
 data_agent = Agent(
@@ -203,12 +203,12 @@ data_agent = Agent(
     deps_type=DataWarehouseDep
 )
 
-@data_agent.system_prompt  
+@data_agent.system_prompt
 def system_prompt(ctx: RunContext[DataWarehouseDep]) -> str:
     return f"Data assistant. Warehouse: {ctx.deps.warehouse_url}"
 ```
 
-Use with dependencies:  
+Use with dependencies:
 
 ```python
 warehouse = DataWarehouseDep("snowflake://company.com")
@@ -220,9 +220,9 @@ result = await data_agent.run(
 
 ### Custom Validation
 
-Add custom validation rules for specific data quality requirements.  
+Add custom validation rules for specific data quality requirements.
 
-First, import validators and define the base model:  
+First, import validators and define the base model:
 
 ```python
 from pydantic import validator, root_validator
@@ -234,7 +234,7 @@ class ValidatedResponse(BaseModel):
     complexity: str = Field(..., regex=r'^(simple|moderate|complex)$')
 ```
 
-Add field-level validation for extraction IDs:  
+Add field-level validation for extraction IDs:
 
 ```python
     @validator('extraction_id')
@@ -244,23 +244,23 @@ Add field-level validation for extraction IDs:
         return v
 ```
 
-Add cross-field validation to ensure logical consistency:  
+Add cross-field validation to ensure logical consistency:
 
 ```python
     @root_validator
     def validate_complexity_hours(cls, values):
         complexity = values.get('complexity')
         hours = values.get('estimated_hours')
-        
+
         if complexity == 'simple' and hours > 24:
             raise ValueError('Simple tasks should not exceed 24 hours')
         elif complexity == 'complex' and hours < 48:
             raise ValueError('Complex tasks need at least 48 hours')
-        
+
         return values
 ```
 
-Use enhanced validation:  
+Use enhanced validation:
 
 ```python
 validated_agent = Agent(
@@ -271,9 +271,9 @@ validated_agent = Agent(
 
 ### Error Handling
 
-Handle validation errors gracefully in production systems.  
+Handle validation errors gracefully in production systems.
 
-Start with imports and basic structure:  
+Start with imports and basic structure:
 
 ```python
 from pydantic import ValidationError
@@ -285,7 +285,7 @@ async def safe_agent_execution(agent, query: str):
         return {"success": True, "data": result}
 ```
 
-Handle specific validation errors with detailed information:  
+Handle specific validation errors with detailed information:
 
 ```python
     except ValidationError as e:
@@ -296,22 +296,22 @@ Handle specific validation errors with detailed information:
         }
 ```
 
-Handle general errors with fallback response:  
+Handle general errors with fallback response:
 
 ```python
     except Exception as e:
         return {
             "success": False,
-            "error": "execution_failed", 
+            "error": "execution_failed",
             "details": str(e)
         }
 ```
 
-Use with error checking:  
+Use with error checking:
 
 ```python
 result = await safe_agent_execution(
-    validated_agent, 
+    validated_agent,
     "Plan a complex feature pipeline"
 )
 
@@ -326,9 +326,9 @@ else:
 
 ## Basic Tool Integration
 
-Type-safe tools define exact input and output schemas for reliable system interactions.  
+Type-safe tools define exact input and output schemas for reliable system interactions.
 
-Define tool schemas:  
+Define tool schemas:
 
 ```python
 from pydantic_ai import Tool
@@ -345,20 +345,20 @@ class DataQueryOutput(BaseModel):
     result_preview: str
 ```
 
-Create the type-safe tool with proper structure:  
+Create the type-safe tool with proper structure:
 
 ```python
 def create_query_tool() -> Tool:
     async def execute_query(input_data: DataQueryInput) -> DataQueryOutput:
         import time
         start_time = time.time()
-        
+
         # Mock execution - use actual drivers in production
-        time.sleep(0.1)  
+        time.sleep(0.1)
         execution_time = time.time() - start_time
 ```
 
-This creates the basic tool structure and timing measurement.  
+This creates the basic tool structure and timing measurement.
 
 ```python
         return DataQueryOutput(
@@ -367,13 +367,13 @@ This creates the basic tool structure and timing measurement.
             execution_time=execution_time,
             result_preview="user_id,event_type,timestamp\n123,click,2024-01-01"
         )
-    
+
     return Tool(execute_query, takes=DataQueryInput, returns=DataQueryOutput)
 ```
 
 The return statement creates the validated output with proper schema compliance.
 
-Register with agent:  
+Register with agent:
 
 ```python
 query_tool = create_query_tool()
@@ -385,9 +385,9 @@ analyst_agent = Agent(
 
 ### API Integration Tools
 
-Type-safe tools validate API inputs and responses, preventing silent failures.  
+Type-safe tools validate API inputs and responses, preventing silent failures.
 
-Define API tool schemas:  
+Define API tool schemas:
 
 ```python
 import httpx
@@ -405,7 +405,7 @@ class PipelineStatusOutput(BaseModel):
     error_rate: Optional[float] = None
 ```
 
-Create the API tool:  
+Create the API tool:
 
 ```python
 async def create_status_tool() -> Tool:
@@ -418,16 +418,16 @@ async def create_status_tool() -> Tool:
             throughput_per_second=2500.5,
             error_rate=0.001
         )
-    
+
     return Tool(get_status, takes=PipelineStatusInput, returns=PipelineStatusOutput)
 ```
 
-Use in agent:  
+Use in agent:
 
 ```python
 status_tool = await create_status_tool()
 pipeline_agent = Agent(
-    'openai:gpt-4', 
+    'openai:gpt-4',
     tools=[status_tool],
     result_type=str
 )
@@ -437,9 +437,9 @@ result = await pipeline_agent.run("Status of pipeline customer-events?")
 
 ### Multi-Tool Composition
 
-Combine multiple tools for complex queries with structured responses.  
+Combine multiple tools for complex queries with structured responses.
 
-Define multi-tool response:  
+Define multi-tool response:
 
 ```python
 class AnalysisResponse(BaseModel):
@@ -450,7 +450,7 @@ class AnalysisResponse(BaseModel):
     data_quality_score: float = Field(..., ge=0.0, le=1.0)
 ```
 
-Create multi-tool agent:  
+Create multi-tool agent:
 
 ```python
 analysis_agent = Agent(
@@ -464,7 +464,7 @@ analysis_agent = Agent(
 )
 ```
 
-Use multiple tools:  
+Use multiple tools:
 
 ```python
 result = await analysis_agent.run(
@@ -474,7 +474,7 @@ result = await analysis_agent.run(
 
 ### Tool Error Recovery
 
-Production tools need graceful failure handling with retry logic.  
+Production tools need graceful failure handling with retry logic.
 
 ```python
 import asyncio
@@ -483,7 +483,7 @@ class RobustTool:
     def __init__(self, tool_func, max_retries=3):
         self.tool_func = tool_func
         self.max_retries = max_retries
-    
+
     async def execute(self, input_data, retry_count=0):
         try:
             return await self.tool_func(input_data)
@@ -499,7 +499,7 @@ class RobustTool:
                 }
 ```
 
-Wrap tools for reliability:  
+Wrap tools for reliability:
 
 ```python
 robust_tool = RobustTool(query_tool)
@@ -509,9 +509,9 @@ robust_tool = RobustTool(query_tool)
 
 ## Testing Type-Safe Agents
 
-Type-safe agents are easier to test because inputs and outputs are predictable.  
+Type-safe agents are easier to test because inputs and outputs are predictable.
 
-Test model validation:  
+Test model validation:
 
 ```python
 import pytest
@@ -532,7 +532,7 @@ def test_request_validation():
         )
 ```
 
-Test agent behavior with mocks:  
+Test agent behavior with mocks:
 
 ```python
 @pytest.mark.asyncio
@@ -540,11 +540,11 @@ async def test_agent_response():
     mock_agent = AsyncMock()
     mock_agent.run.return_value = FeatureExtractionResponse(
         extraction_id="feat_123",
-        status="queued", 
+        status="queued",
         estimated_completion="4 hours",
         feature_pipeline_steps=["Ingestion", "Transformation"]
     )
-    
+
     result = await mock_agent.run("Test query")
     assert result.extraction_id == "feat_123"
     assert len(result.feature_pipeline_steps) == 2
@@ -552,7 +552,7 @@ async def test_agent_response():
 
 ## Configuration Management
 
-Pydantic's BaseSettings manages environments with automatic variable loading.  
+Pydantic's BaseSettings manages environments with automatic variable loading.
 
 ```python
 from pydantic import BaseSettings
@@ -563,7 +563,7 @@ class AgentConfig(BaseSettings):
     temperature: float = 0.3
     api_key: Optional[str] = None
     warehouse_url: str = "snowflake://localhost"
-    
+
     class Config:
         env_prefix = "AGENT_"
         env_file = ".env"
@@ -579,9 +579,9 @@ production_agent = Agent(
 
 ## FastAPI Deployment
 
-FastAPI automatically handles validation using Pydantic models.  
+FastAPI automatically handles validation using Pydantic models.
 
-Start with FastAPI setup and imports:  
+Start with FastAPI setup and imports:
 
 ```python
 from fastapi import FastAPI, HTTPException
@@ -590,7 +590,7 @@ from pydantic import ValidationError
 app = FastAPI()
 ```
 
-Create the main feature extraction endpoint:  
+Create the main feature extraction endpoint:
 
 ```python
 @app.post("/extract-features", response_model=FeatureExtractionResponse)
@@ -602,7 +602,7 @@ async def extract_features(request: FeatureExtractionRequest):
         return result
 ```
 
-Handle errors with appropriate HTTP status codes:  
+Handle errors with appropriate HTTP status codes:
 
 ```python
     except ValidationError as e:
@@ -611,7 +611,7 @@ Handle errors with appropriate HTTP status codes:
         raise HTTPException(status_code=500, detail=str(e))
 ```
 
-Add health check endpoint:  
+Add health check endpoint:
 
 ```python
 @app.get("/health")
@@ -623,15 +623,15 @@ async def health():
 
 ## 🎯 Observer Path Practice
 
-Build a simple data quality agent to verify your understanding:  
+Build a simple data quality agent to verify your understanding:
 
-Define the data quality models:  
+Define the data quality models:
 
 ```python
 class DataQualityRequest(BaseModel):
     dataset_name: str
     max_rows: int = Field(..., ge=1000, le=10000000)
-    
+
 class DataQualityReport(BaseModel):
     dataset_name: str
     total_rows: int
@@ -641,7 +641,7 @@ class DataQualityReport(BaseModel):
     recommendations: List[str]
 ```
 
-Create the quality assessment agent:  
+Create the quality assessment agent:
 
 ```python
 def create_quality_agent():
@@ -652,7 +652,7 @@ def create_quality_agent():
     )
 ```
 
-Test the implementation:  
+Test the implementation:
 
 ```python
 agent = create_quality_agent()
@@ -670,57 +670,57 @@ result = await agent.run("Assess customer_events dataset with 5M rows")
 
 ## 📝 Continue Your Learning Journey
 
-### 📝 Next: Participant Path - Practical Application  
-Ready for hands-on implementation? Continue with:  
-- 📝 [Practical Implementation](Session5_Practical_Implementation.md)  
-- 📝 [Production Deployment](Session5_Production_Deployment.md)  
+### 📝 Next: Participant Path - Practical Application
+Ready for hands-on implementation? Continue with:
+- 📝 [Practical Implementation](Session5_Practical_Implementation.md)
+- 📝 [Production Deployment](Session5_Production_Deployment.md)
 
-### ⚙️ Advanced: Implementer Path - Complete Mastery  
-For deep expertise, explore:  
-- ⚙️ [Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)  
-- ⚙️ [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)  
-- ⚙️ [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)  
-- ⚙️ [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)  
+### ⚙️ Advanced: Implementer Path - Complete Mastery
+For deep expertise, explore:
+- ⚙️ [Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)
+- ⚙️ [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)
+- ⚙️ [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)
+- ⚙️ [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)
 
 ---
 
 ## 📝 Multiple Choice Test - Session 5
 
-**Question 1:** What is the primary advantage of PydanticAI?  
-A) Faster execution  
-B) Lower cost  
-C) Better UI  
-D) Automatic validation and structured outputs  
+**Question 1:** What is the primary advantage of PydanticAI?
+A) Faster execution
+B) Lower cost
+C) Better UI
+D) Automatic validation and structured outputs
 
-**Question 2:** Which constraint ensures numeric range validation?  
-A) Field(range=(0, 100))  
-B) Field(between=0:100)  
-C) Field(min=0, max=100)  
-D) Field(ge=0, le=100)  
+**Question 2:** Which constraint ensures numeric range validation?
+A) Field(range=(0, 100))
+B) Field(between=0:100)
+C) Field(min=0, max=100)
+D) Field(ge=0, le=100)
 
-**Question 3:** What happens when validation fails?  
-A) Application crashes  
-B) Silent failure  
-C) Warning logged  
-D) ValidationError raised  
+**Question 3:** What happens when validation fails?
+A) Application crashes
+B) Silent failure
+C) Warning logged
+D) ValidationError raised
 
-**Question 4:** How do you define tools?  
-A) @tool decorator  
-B) def tool() syntax  
-C) @function decorator  
-D) Tool class with takes/returns  
+**Question 4:** How do you define tools?
+A) @tool decorator
+B) def tool() syntax
+C) @function decorator
+D) Tool class with takes/returns
 
-**Question 5:** What is RunContext for?  
-A) Error handling  
-B) Runtime configuration and dependencies  
-C) Conversation history  
-D) Speed control  
+**Question 5:** What is RunContext for?
+A) Error handling
+B) Runtime configuration and dependencies
+C) Conversation history
+D) Speed control
 
 [**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
+---
 
 ## 🧭 Navigation
 
-**Previous:** [Session 4 - CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)  
-**Next:** [Session 6 - Atomic Agents →](Session6_Atomic_Agents_Modular_Architecture.md)
-
+**Previous:** [Session 4 - CrewAI Team Orchestration ←](Session4_CrewAI_Team_Orchestration.md)
+**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
 ---

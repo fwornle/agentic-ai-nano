@@ -29,7 +29,7 @@ llm -m "claude-sonnet-4" "How many r's in blueberry?"
 ### Available Models
 
 - **Claude Sonnet 4**: High-quality reasoning and analysis
-- **GPT-4 variants**: OpenAI's latest models  
+- **GPT-4 variants**: OpenAI's latest models
 - **Other enterprise-approved models**: Additional models as available
 
 ### Using in Code
@@ -107,7 +107,7 @@ print(response.choices[0].message.content)
 For development without API costs:
 
 - **Ollama**: Run models locally (`ollama pull llama2`)
-- **LM Studio**: User-friendly local LLM interface  
+- **LM Studio**: User-friendly local LLM interface
 - **GPT4All**: Open-source local models
 
 </div>

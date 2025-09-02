@@ -6,9 +6,9 @@ Welcome to the **Agent Frameworks** module of the Agentic AI Nano-Degree! In the
 
 The modern software engineering landscape is experiencing a paradigm shift. Traditional applications are becoming intelligent, and data pipelines are evolving into autonomous systems capable of reasoning, planning, and executing complex tasks. This module covers the complete landscape of modern AI agent development, focusing on practical frameworks, patterns, and production deployment strategies that data engineers and system architects need to build reliable, scalable agent-driven solutions.
 
-**Duration**: 10 Sessions  
-**Time Investment**: 60-180 minutes per session (depending on chosen path)  
-**Prerequisites**: Intermediate Python, basic ML concepts  
+**Duration**: 10 Sessions
+**Time Investment**: 60-180 minutes per session (depending on chosen path)
+**Prerequisites**: Intermediate Python, basic ML concepts
 
 ## Learning Journey
 
@@ -105,25 +105,25 @@ Development velocity matters in competitive environments. The Agent Development 
 
 Moving from prototype to production involves solving challenges around monitoring, scaling, and reliability that development frameworks don't address. Agno provides the operational foundation for enterprise agent deployments.
 
-**🎯 Observer Path (45-60 min):** Essential production concepts  
-- Production-first philosophy and architecture  
-- Core monitoring and error handling patterns  
-- Basic deployment with Docker  
+**🎯 Observer Path (45-60 min):** Essential production concepts
+- Production-first philosophy and architecture
+- Core monitoring and error handling patterns
+- Basic deployment with Docker
 
-**📝 Participant Path (3-4 hours):** Hands-on implementation  
-- Complete production patterns: monitoring, error handling, resource management  
-- Performance optimization with caching  
-- FastAPI server with health checks  
-- Docker deployment and scaling  
+**📝 Participant Path (3-4 hours):** Hands-on implementation
+- Complete production patterns: monitoring, error handling, resource management
+- Performance optimization with caching
+- FastAPI server with health checks
+- Docker deployment and scaling
 
-**⚙️ Implementer Path (8-10 hours):** Advanced production mastery  
-- **[Module A: Advanced Monitoring & Observability](Session8_ModuleA_Advanced_Monitoring_Observability.md)** - Enterprise scaling, health monitoring, distributed tracing  
-- **[Module B: Enterprise Architecture & Security](Session8_ModuleB_Enterprise_Architecture_Security.md)** - Authentication systems, security patterns, Kubernetes deployment  
-- **[Module C: Performance & Production Validation](Session8_ModuleC_Performance_Production_Validation.md)** - Cost optimization, load testing, comprehensive assessment frameworks  
+**⚙️ Implementer Path (8-10 hours):** Advanced production mastery
+- **[Module A: Advanced Monitoring & Observability](Session8_ModuleA_Advanced_Monitoring_Observability.md)** - Enterprise scaling, health monitoring, distributed tracing
+- **[Module B: Enterprise Architecture & Security](Session8_ModuleB_Enterprise_Architecture_Security.md)** - Authentication systems, security patterns, Kubernetes deployment
+- **[Module C: Performance & Production Validation](Session8_ModuleC_Performance_Production_Validation.md)** - Cost optimization, load testing, comprehensive assessment frameworks
 
-**Key Files:**  
-- **[🎯 Main Session](Session8_Agno_Production_Ready_Agents.md)** - Complete Observer & Participant paths  
-- **[Assessment & Solutions](Session8_Test_Solutions.md)** - Practice exercises and validation  
+**Key Files:**
+- **[🎯 Main Session](Session8_Agno_Production_Ready_Agents.md)** - Complete Observer & Participant paths
+- **[Assessment & Solutions](Session8_Test_Solutions.md)** - Practice exercises and validation
 
 ### Advanced Patterns (Sessions 9-10)
 
@@ -154,44 +154,44 @@ Choose your engagement level for each session based on your current needs and av
 === "👀 Observer (40-60 min)"
 
     **Perfect for:**
-    - Quick understanding of concepts  
-    - Decision makers and managers  
-    - Time-constrained learners  
-    - Getting overview before deep dive  
+    - Quick understanding of concepts
+    - Decision makers and managers
+    - Time-constrained learners
+    - Getting overview before deep dive
 
     **Activities:**
-    - Read core concepts and patterns  
-    - Examine architectural diagrams  
-    - Review code examples  
-    - Understand framework comparisons  
+    - Read core concepts and patterns
+    - Examine architectural diagrams
+    - Review code examples
+    - Understand framework comparisons
 
 === "🙋‍♂️ Participant (60-90 min)"
 
     **Perfect for:**
-    - Active learning approach  
-    - Developers and technical leads  
-    - Hands-on understanding  
-    - Building practical knowledge  
+    - Active learning approach
+    - Developers and technical leads
+    - Hands-on understanding
+    - Building practical knowledge
 
     **Activities:**
-    - Follow guided implementations  
-    - Run provided examples  
-    - Analyze code patterns  
-    - Complete exercises  
+    - Follow guided implementations
+    - Run provided examples
+    - Analyze code patterns
+    - Complete exercises
 
 === "🛠️ Implementer (120-180 min)"
 
     **Perfect for:**
-    - Deep technical expertise  
-    - Engineers and architects  
-    - Custom implementations  
-    - Production considerations  
+    - Deep technical expertise
+    - Engineers and architects
+    - Custom implementations
+    - Production considerations
 
     **Activities:**
-    - Build custom agent systems  
-    - Explore advanced patterns  
-    - Implement production features  
-    - Create original solutions  
+    - Build custom agent systems
+    - Explore advanced patterns
+    - Implement production features
+    - Create original solutions
 
 ## Technical Stack
 
@@ -219,7 +219,7 @@ Choose your engagement level for each session based on your current needs and av
 Each session follows a consistent, learner-friendly structure designed to optimize knowledge retention and practical application:
 
 1. **Learning Outcomes** - Clear objectives and skills you'll develop
-2. **Core Content** - Essential concepts with practical implementations  
+2. **Core Content** - Essential concepts with practical implementations
 3. **Optional Modules** - Advanced topics and production considerations
 4. **📝 Assessment** - Multiple choice tests to validate understanding
 5. **🧭 Navigation** - Clear progression paths and next steps
@@ -311,3 +311,10 @@ By completing this module, you will possess the comprehensive skill set needed t
 **Ready to master agent frameworks?** The future of software engineering is intelligent, autonomous systems that can reason, plan, and execute complex tasks. Start your transformation from traditional developer to agent architect today!
 
 [Begin Session 0 →](Session0_Introduction_to_Agent_Frameworks_Patterns.md){ .md-button .md-button--primary }
+---
+
+## 🧭 Navigation
+
+**Next:** [Session 0 - Introduction to Agent Frameworks & Patterns →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+
+---

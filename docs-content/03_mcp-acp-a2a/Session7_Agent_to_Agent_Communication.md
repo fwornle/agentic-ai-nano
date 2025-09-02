@@ -2,9 +2,9 @@
 
 ## The Grand Alliance: When Digital Minds Must Unite
 
-Picture this: You're witnessing the formation of the United Nations, but instead of human diplomats around a conference table, you're watching AI agents from different organizations, platforms, and purposes coming together for the first time. Each agent speaks its own technical dialect, operates under different protocols, and serves different masters—yet they must find a way to collaborate on challenges too complex for any single mind to solve.  
+Picture this: You're witnessing the formation of the United Nations, but instead of human diplomats around a conference table, you're watching AI agents from different organizations, platforms, and purposes coming together for the first time. Each agent speaks its own technical dialect, operates under different protocols, and serves different masters—yet they must find a way to collaborate on challenges too complex for any single mind to solve.
 
-This is the reality of modern AI systems. Your weather prediction agent in the cloud needs to coordinate with a logistics agent on a factory floor. Your data analysis agent running in a hospital must collaborate with research agents in laboratories across the world. Your financial trading agent has to work with risk assessment agents, market data agents, and compliance agents in real-time harmony.  
+This is the reality of modern AI systems. Your weather prediction agent in the cloud needs to coordinate with a logistics agent on a factory floor. Your data analysis agent running in a hospital must collaborate with research agents in laboratories across the world. Your financial trading agent has to work with risk assessment agents, market data agents, and compliance agents in real-time harmony.
 
 *Welcome to Agent-to-Agent (A2A) Communication—where artificial minds learn the art of diplomacy, cooperation, and collective intelligence.*
 
@@ -12,31 +12,31 @@ This is the reality of modern AI systems. Your weather prediction agent in the c
 
 ## 🎯📝⚙️ Learning Path Guide
 
-### 🎯 Observer Path - Essential A2A Concepts  
-**Time Investment**: 45-60 minutes  
-**Outcome**: Understand core A2A communication principles and architecture  
+### 🎯 Observer Path - Essential A2A Concepts
+**Time Investment**: 45-60 minutes
+**Outcome**: Understand core A2A communication principles and architecture
 
-Focus on these sections:  
-- Part 1: Universal Language of Digital Diplomacy  
-- Part 2: The Embassy System basics  
-- Test Questions 1-5  
+Focus on these sections:
+- Part 1: Universal Language of Digital Diplomacy
+- Part 2: The Embassy System basics
+- Test Questions 1-5
 
-### 📝 Participant Path - Practical A2A Implementation  
-**Time Investment**: 2-3 hours  
-**Outcome**: Implement basic A2A systems in real projects  
+### 📝 Participant Path - Practical A2A Implementation
+**Time Investment**: 2-3 hours
+**Outcome**: Implement basic A2A systems in real projects
 
-Includes Observer content PLUS:  
-- Part 2: Complete Embassy System implementation  
-- Part 3: Message Routing Network  
-- All practice exercises and test questions  
+Includes Observer content PLUS:
+- Part 2: Complete Embassy System implementation
+- Part 3: Message Routing Network
+- All practice exercises and test questions
 
-### ⚙️ Implementer Path - Complete A2A Mastery  
-**Time Investment**: 8-10 hours  
-**Outcome**: Deep expertise in enterprise A2A systems  
+### ⚙️ Implementer Path - Complete A2A Mastery
+**Time Investment**: 8-10 hours
+**Outcome**: Deep expertise in enterprise A2A systems
 
-Includes Observer and Participant content PLUS:  
-- [⚙️ Advanced Orchestration Patterns](Session7_Advanced_Orchestration.md)  
-- [⚙️ Advanced Choreography Systems](Session7_Advanced_Choreography.md)  
+Includes Observer and Participant content PLUS:
+- [⚙️ Advanced Orchestration Patterns](Session7_Advanced_Orchestration.md)
+- [⚙️ Advanced Choreography Systems](Session7_Advanced_Choreography.md)
 - All advanced implementations and enterprise patterns
 
 ---
@@ -47,19 +47,19 @@ Before agents can collaborate, they need to establish diplomatic protocols—a u
 
 ### The Five Pillars of A2A Civilization
 
-Think of A2A as the constitution for a society of digital minds:  
+Think of A2A as the constitution for a society of digital minds:
 
-1. **Agent Cards**: Like diplomatic credentials, these JSON documents announce what each agent can do, where to find them, and how to work with them  
-2. **Task Management**: A formal lifecycle that tracks every collaboration from initial request to final resolution  
-3. **Message Exchange**: JSON-RPC 2.0 over HTTP(S)—the diplomatic language that any agent can speak and understand  
-4. **Authentication**: Enterprise-grade security that ensures only authorized agents can participate in sensitive collaborations  
-5. **Distributed Coordination**: The ability to track complex, multi-step collaborations across organizational boundaries  
+1. **Agent Cards**: Like diplomatic credentials, these JSON documents announce what each agent can do, where to find them, and how to work with them
+2. **Task Management**: A formal lifecycle that tracks every collaboration from initial request to final resolution
+3. **Message Exchange**: JSON-RPC 2.0 over HTTP(S)—the diplomatic language that any agent can speak and understand
+4. **Authentication**: Enterprise-grade security that ensures only authorized agents can participate in sensitive collaborations
+5. **Distributed Coordination**: The ability to track complex, multi-step collaborations across organizational boundaries
 
 ### The DNA of Agent Diplomacy: Message Structure
 
 Every conversation between agents follows a carefully designed diplomatic protocol. Like formal diplomatic correspondence, each message contains essential metadata for proper routing, processing, and response.
 
-The A2A protocol defines essential data structures for agent communication:  
+The A2A protocol defines essential data structures for agent communication:
 
 ```python
 # Core A2A imports and enums
@@ -70,20 +70,20 @@ from enum import Enum
 import uuid
 ```
 
-These imports establish the foundation for type-safe A2A communication with proper data validation.  
+These imports establish the foundation for type-safe A2A communication with proper data validation.
 
 ```python
 # Task lifecycle states
 class TaskState(Enum):
     SUBMITTED = "submitted"
-    PENDING = "pending" 
+    PENDING = "pending"
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
     FAILED = "failed"
     CANCELLED = "cancelled"
 ```
 
-Task states provide clear lifecycle management for complex multi-agent workflows.  
+Task states provide clear lifecycle management for complex multi-agent workflows.
 
 ```python
 # Message priority levels
@@ -94,7 +94,7 @@ class MessagePriority(Enum):
     URGENT = "urgent"
 ```
 
-Priority levels enable proper message scheduling and resource allocation in busy agent networks.  
+Priority levels enable proper message scheduling and resource allocation in busy agent networks.
 
 ```python
 # A2A Task data structure
@@ -104,7 +104,7 @@ class A2ATask:
     task_id: str
     session_id: str = None
     correlation_id: str = None
-    
+
     # Lifecycle management
     state: TaskState = TaskState.SUBMITTED
     created_at: datetime = None
@@ -117,7 +117,7 @@ The task structure provides comprehensive tracking and correlation capabilities 
 
 Each agent in the A2A ecosystem carries a digital passport—an Agent Card that serves as both identification and capability advertisement.
 
-Agent Cards serve as digital passports in the A2A ecosystem:  
+Agent Cards serve as digital passports in the A2A ecosystem:
 
 ```python
 # Agent Card structure - Part 1: Identity
@@ -130,7 +130,7 @@ class AgentCard:
     description: str
 ```
 
-The identity section provides essential information for agent discovery and selection.  
+The identity section provides essential information for agent discovery and selection.
 
 ```python
     # Capability advertisement
@@ -139,7 +139,7 @@ The identity section provides essential information for agent discovery and sele
     supported_protocols: List[str] = None
 ```
 
-Capability information enables intelligent agent matching for complex tasks.  
+Capability information enables intelligent agent matching for complex tasks.
 
 ```python
     # Security and operational limits
@@ -150,12 +150,12 @@ Capability information enables intelligent agent matching for complex tasks.
     max_concurrent_tasks: int = 10
 ```
 
-Operational metadata ensures reliable service level agreements between collaborating agents.  
+Operational metadata ensures reliable service level agreements between collaborating agents.
 
 ```python
     def to_json(self) -> str:
         """Export Agent Card as JSON."""
-        return json.dumps(asdict(self), 
+        return json.dumps(asdict(self),
                          indent=2, default=str)
 ```
 
@@ -173,7 +173,7 @@ Imagine a world where every embassy maintains a comprehensive directory of all d
 
 ### The Heart of Digital Diplomacy
 
-The registry foundation requires several key components:  
+The registry foundation requires several key components:
 
 ```python
 # Registry foundation imports
@@ -185,7 +185,7 @@ import redis
 import logging
 ```
 
-These imports provide the infrastructure for distributed agent registration and discovery.  
+These imports provide the infrastructure for distributed agent registration and discovery.
 
 ```python
 # Core registry configuration
@@ -211,12 +211,12 @@ async def register_agent(self, profile: AgentProfile) -> bool:
         # Store agent profile with expiration
         profile_key = f"{self.registry_prefix}{profile.agent_id}"
         profile_data = json.dumps(profile.to_dict())
-        
+
         self.redis_client.set(profile_key, profile_data)
         self.redis_client.expire(profile_key, self.heartbeat_timeout)
 ```
 
-Registration stores the complete agent profile with automatic expiration to prevent stale entries.  
+Registration stores the complete agent profile with automatic expiration to prevent stale entries.
 
 ```python
         # Index capabilities for fast lookup
@@ -224,7 +224,7 @@ Registration stores the complete agent profile with automatic expiration to prev
             cap_key = f"{self.capability_index}{capability.name}"
             self.redis_client.sadd(cap_key, profile.agent_id)
             self.redis_client.expire(cap_key, self.heartbeat_timeout)
-        
+
         return True
     except Exception as e:
         logger.error(f"Failed to register {profile.agent_id}: {e}")
@@ -243,7 +243,7 @@ async def unregister_agent(self, agent_id: str) -> bool:
     try:
         # Get agent profile first
         profile = await self.get_agent_profile(agent_id)
-        
+
         if profile:
             # Remove from capability indices
             for capability in profile.capabilities:
@@ -264,15 +264,15 @@ async def update_heartbeat(self, agent_id: str, load: float = None) -> bool:
         profile = await self.get_agent_profile(agent_id)
         if not profile:
             return False
-        
+
         # Update profile with current status
         profile.last_heartbeat = datetime.now().isoformat()
         if load is not None:
             profile.load = load
-        
+
         # Store updated profile
         profile_key = f"{self.registry_prefix}{agent_id}"
-        self.redis_client.set(profile_key, 
+        self.redis_client.set(profile_key,
                              json.dumps(profile.to_dict()))
         return True
     except Exception as e:
@@ -293,13 +293,13 @@ async def discover_agents(self, required_capabilities: List[str] = None,
     """Discover agents matching criteria."""
     try:
         candidate_agents = set()
-        
+
         if required_capabilities:
             # Find agents with required capabilities
             for capability in required_capabilities:
                 cap_key = f"{self.capability_index}{capability}"
                 agents_with_cap = self.redis_client.smembers(cap_key)
-                
+
                 if not candidate_agents:
                     candidate_agents = set(agents_with_cap)
                 else:
@@ -307,20 +307,20 @@ async def discover_agents(self, required_capabilities: List[str] = None,
                     candidate_agents = candidate_agents.intersection(agents_with_cap)
 ```
 
-Discovery uses set operations to efficiently find agents that meet all specified criteria.  
+Discovery uses set operations to efficiently find agents that meet all specified criteria.
 
 ```python
         # Filter by status and load
         matching_agents = []
         for agent_id in candidate_agents:
             profile = await self.get_agent_profile(agent_id)
-            
-            if (profile and 
-                profile.status == status_filter and 
+
+            if (profile and
+                profile.status == status_filter and
                 profile.load <= max_load and
                 self._is_agent_alive(profile)):
                 matching_agents.append(profile)
-        
+
         # Sort by load (prefer less loaded agents)
         matching_agents.sort(key=lambda x: x.load)
         return matching_agents
@@ -351,7 +351,7 @@ import logging
 from datetime import datetime, timedelta
 ```
 
-These imports provide asynchronous HTTP communication capabilities for reliable message delivery.  
+These imports provide asynchronous HTTP communication capabilities for reliable message delivery.
 
 ```python
 # Message router core structure
@@ -371,24 +371,24 @@ The router maintains critical data structures for agent discovery, message handl
 Sending a message in the A2A world is like sending a diplomatic cable—it must be properly formatted, routed through the correct channels, and tracked until completion:
 
 ```python
-async def send_message(self, message: A2AMessage, 
+async def send_message(self, message: A2AMessage,
                      wait_for_response: bool = None) -> Optional[A2AMessage]:
     """Send a message to another agent."""
-    
+
     if wait_for_response is None:
         wait_for_response = message.requires_response
-    
+
     try:
         # Add to message queue for processing
         await self.message_queue.put(message)
-        
+
         # If response is required, wait for it
         if wait_for_response:
             future = asyncio.Future()
             self.pending_requests[message.message_id] = future
 ```
 
-Message queuing with response tracking ensures reliable delivery and proper timeout handling.  
+Message queuing with response tracking ensures reliable delivery and proper timeout handling.
 
 ```python
             try:
@@ -411,15 +411,15 @@ Proper timeout handling and cleanup prevent resource leaks in high-volume enviro
 Sometimes, an agent needs to communicate with multiple agents simultaneously—like a UN secretary-general addressing all member nations:
 
 ```python
-async def broadcast_message(self, message: A2AMessage, 
+async def broadcast_message(self, message: A2AMessage,
                           capability_filter: List[str] = None) -> int:
     """Broadcast a message to multiple agents."""
-    
+
     # Discover target agents
     agents = await self.registry.discover_agents(
         required_capabilities=capability_filter
     )
-    
+
     sent_count = 0
     for agent in agents:
         try:
@@ -432,14 +432,14 @@ async def broadcast_message(self, message: A2AMessage,
             )
 ```
 
-The broadcast function first discovers eligible agents and then creates individual messages for each target agent.  
+The broadcast function first discovers eligible agents and then creates individual messages for each target agent.
 
 ```python
             await self._route_message(agent_message)
             sent_count += 1
         except Exception as e:
             logger.error(f"Failed to send to {agent.agent_id}: {e}")
-    
+
     return sent_count
 ```
 
@@ -452,7 +452,7 @@ Behind the scenes, a dedicated task continuously processes the message queue, en
 ```python
 async def _route_message(self, message: A2AMessage):
     """Route a message to its destination."""
-    
+
     if message.recipient_id:
         # Direct message to specific agent
         await self._send_to_agent(message, message.recipient_id)
@@ -461,7 +461,7 @@ async def _route_message(self, message: A2AMessage):
         agents = await self.registry.discover_agents(
             required_capabilities=message.capabilities_required
         )
-        
+
         if agents:
             # Send to best available agent (lowest load)
             await self._send_to_agent(message, agents[0].agent_id)
@@ -488,10 +488,10 @@ Build a discovery system that finds agents based on required capabilities and lo
 
 ## Advanced A2A Patterns
 
-For comprehensive coverage of advanced A2A coordination patterns:  
+For comprehensive coverage of advanced A2A coordination patterns:
 
-- [⚙️ Advanced Orchestration Patterns](Session7_Advanced_Orchestration.md) - Centralized workflow management  
-- [⚙️ Advanced Choreography Systems](Session7_Advanced_Choreography.md) - Distributed event-driven coordination  
+- [⚙️ Advanced Orchestration Patterns](Session7_Advanced_Orchestration.md) - Centralized workflow management
+- [⚙️ Advanced Choreography Systems](Session7_Advanced_Choreography.md) - Distributed event-driven coordination
 
 These advanced modules cover enterprise-scale orchestration and choreography patterns for complex multi-agent systems.
 
@@ -499,74 +499,73 @@ These advanced modules cover enterprise-scale orchestration and choreography pat
 
 ## Test Your Diplomatic Skills
 
-Before we venture into advanced workflows, let's ensure you've mastered the art of agent diplomacy:  
+Before we venture into advanced workflows, let's ensure you've mastered the art of agent diplomacy:
 
-**Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?  
-A) To reduce computational costs  
-B) To improve individual agent performance  
-C) To enable multiple agents to collaborate and coordinate actions  
-D) To replace human operators  
+**Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?
+A) To reduce computational costs
+B) To improve individual agent performance
+C) To enable multiple agents to collaborate and coordinate actions
+D) To replace human operators
 
-**Question 2:** Which component serves as a "digital passport" in A2A systems?  
-A) Message Router  
-B) Agent Card  
-C) Task State  
-D) Priority Queue  
+**Question 2:** Which component serves as a "digital passport" in A2A systems?
+A) Message Router
+B) Agent Card
+C) Task State
+D) Priority Queue
 
-**Question 3:** What information is essential for proper A2A message routing?  
-A) Just the timestamp  
-B) Only the priority level  
-C) Only the message content  
-D) Sender ID, recipient ID, and message type  
+**Question 3:** What information is essential for proper A2A message routing?
+A) Just the timestamp
+B) Only the priority level
+C) Only the message content
+D) Sender ID, recipient ID, and message type
 
-**Question 4:** How do agents announce their capabilities in an A2A system?  
-A) Through manual configuration  
-B) Via external databases only  
-C) Through Agent Cards with capability metadata  
-D) Through file-based configurations  
+**Question 4:** How do agents announce their capabilities in an A2A system?
+A) Through manual configuration
+B) Via external databases only
+C) Through Agent Cards with capability metadata
+D) Through file-based configurations
 
-**Question 5:** What mechanism ensures A2A communication reliability when agents become unavailable?  
-A) Faster processing  
-B) Increased memory allocation  
-C) Message queuing with retry logic and timeouts  
-D) Multiple network interfaces  
+**Question 5:** What mechanism ensures A2A communication reliability when agents become unavailable?
+A) Faster processing
+B) Increased memory allocation
+C) Message queuing with retry logic and timeouts
+D) Multiple network interfaces
 
-**Question 6:** What is the purpose of capability negotiation in A2A systems?  
-A) To improve performance  
-B) To match agent capabilities with task requirements  
-C) To simplify configuration  
-D) To reduce costs  
+**Question 6:** What is the purpose of capability negotiation in A2A systems?
+A) To improve performance
+B) To match agent capabilities with task requirements
+C) To simplify configuration
+D) To reduce costs
 
-**Question 7:** When should URGENT priority be used for A2A messages?  
-A) For time-critical operations requiring immediate attention  
-B) For data backup operations  
-C) For routine status updates  
-D) For all important messages  
+**Question 7:** When should URGENT priority be used for A2A messages?
+A) For time-critical operations requiring immediate attention
+B) For data backup operations
+C) For routine status updates
+D) For all important messages
 
-**Question 8:** What is the purpose of correlation IDs in A2A messaging?  
-A) To validate message integrity  
-B) To encrypt messages  
-C) To compress message content  
-D) To link related messages in multi-step workflows  
+**Question 8:** What is the purpose of correlation IDs in A2A messaging?
+A) To validate message integrity
+B) To encrypt messages
+C) To compress message content
+D) To link related messages in multi-step workflows
 
-**Question 9:** What is a key benefit of collaborative agent teams in A2A systems?  
-A) Diverse expertise and parallel problem-solving capabilities  
-B) Lower computational requirements  
-C) Reduced network traffic  
-D) Simpler implementation  
+**Question 9:** What is a key benefit of collaborative agent teams in A2A systems?
+A) Diverse expertise and parallel problem-solving capabilities
+B) Lower computational requirements
+C) Reduced network traffic
+D) Simpler implementation
 
-**Question 10:** How does the Agent Registry maintain data consistency?  
-A) Through manual updates  
-B) Via heartbeat monitoring and automatic cleanup  
-C) Using external synchronization services  
-D) Through periodic full rebuilds  
+**Question 10:** How does the Agent Registry maintain data consistency?
+A) Through manual updates
+B) Via heartbeat monitoring and automatic cleanup
+C) Using external synchronization services
+D) Through periodic full rebuilds
 
 [**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
-
 ---
 
 ## 🧭 Navigation
 
-**Previous:** [Session 6 - ACP Fundamentals](Session6_ACP_Fundamentals.md)  
-**Next:** [Session 8 - Advanced Agent Workflows](Session8_Advanced_Agent_Workflows.md)  
-**Module Overview:** [MCP, ACP & A2A Index](index.md)
+**Previous:** [Session 6 - ACP Fundamentals ←](Session6_ACP_Fundamentals.md)
+**Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)
+---

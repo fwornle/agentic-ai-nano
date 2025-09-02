@@ -1,26 +1,26 @@
 # 📝 Session 5 Participant Path: Practical Implementation
 
-> **📝 PARTICIPANT PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer Path in [Session5_PydanticAI_Type_Safe_Agents.md](Session5_PydanticAI_Type_Safe_Agents.md)  
-> Time Investment: 2-3 hours  
-> Outcome: Build production-ready type-safe agents with advanced tools  
+> **📝 PARTICIPANT PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer Path in [Session5_PydanticAI_Type_Safe_Agents.md](Session5_PydanticAI_Type_Safe_Agents.md)
+> Time Investment: 2-3 hours
+> Outcome: Build production-ready type-safe agents with advanced tools
 
 ## Learning Outcomes
 
-After completing this practical implementation guide, you will:  
+After completing this practical implementation guide, you will:
 
-- Build complex agents with dependency injection patterns  
-- Create sophisticated tool chains for data processing workflows  
-- Implement comprehensive error recovery systems  
-- Deploy type-safe agents with monitoring and observability  
+- Build complex agents with dependency injection patterns
+- Create sophisticated tool chains for data processing workflows
+- Implement comprehensive error recovery systems
+- Deploy type-safe agents with monitoring and observability
 
 ## Advanced Agent Architecture Patterns
 
 ### Dependency Injection for Production Systems
 
-Real data processing applications require clean separation of concerns and testable architecture. Here's how to implement advanced dependency injection patterns:  
+Real data processing applications require clean separation of concerns and testable architecture. Here's how to implement advanced dependency injection patterns:
 
-First, create comprehensive service dependencies:  
+First, create comprehensive service dependencies:
 
 ```python
 from typing import Protocol
@@ -40,15 +40,15 @@ class ProductionDataService:
             timeout=httpx.Timeout(30.0),
             headers={"Authorization": f"Bearer {api_key}"}
         )
-    
+
     async def save_job(self, job_data: dict) -> str:
         # Real implementation would save to data warehouse
         response = await self.client.post(
-            f"{self.warehouse_url}/jobs", 
+            f"{self.warehouse_url}/jobs",
             json=job_data
         )
         return response.json()["job_id"]
-    
+
     async def get_pipeline_status(self, pipeline_id: str) -> dict:
         response = await self.client.get(
             f"{self.warehouse_url}/pipelines/{pipeline_id}/status"
@@ -56,7 +56,7 @@ class ProductionDataService:
         return response.json()
 ```
 
-Create agents with sophisticated dependency management:  
+Create agents with sophisticated dependency management:
 
 ```python
 from pydantic_ai import Agent, RunContext
@@ -83,17 +83,17 @@ def enhanced_system_prompt(ctx: RunContext[ProductionDataService]) -> str:
     - Data warehouse at {ctx.deps.warehouse_url}
     - Pipeline monitoring capabilities
     - Job scheduling and tracking
-    
+
     Always include realistic pipeline steps, job URLs, and status information.
     Estimate completion times based on data processing complexity.
     """
 ```
 
-### Advanced Tool Integration Patterns  
+### Advanced Tool Integration Patterns
 
-Complex data processing requires sophisticated tool orchestration. Here's how to build advanced tool systems:  
+Complex data processing requires sophisticated tool orchestration. Here's how to build advanced tool systems:
 
-Create comprehensive tool schemas:  
+Create comprehensive tool schemas:
 
 ```python
 class AdvancedQueryInput(BaseModel):
@@ -114,7 +114,7 @@ class AdvancedQueryOutput(BaseModel):
     performance_metrics: dict = Field(default_factory=dict)
 ```
 
-Implement advanced tool logic with error handling:  
+Implement advanced tool logic with error handling:
 
 ```python
 def create_advanced_query_tool() -> Tool:
@@ -123,13 +123,13 @@ def create_advanced_query_tool() -> Tool:
             import time
             import random
             import hashlib
-            
+
             start_time = time.time()
-            
+
             # Simulate caching logic
             query_hash = hashlib.md5(input_data.sql_query.encode()).hexdigest()[:8]
             cache_hit = random.choice([True, False])
-            
+
             # Simulate different execution times based on cache
             if cache_hit:
                 await asyncio.sleep(0.01)  # Cache hit - fast response
@@ -137,9 +137,9 @@ def create_advanced_query_tool() -> Tool:
                 # Simulate query complexity-based execution time
                 complexity_factor = len(input_data.sql_query) / 1000.0
                 await asyncio.sleep(min(complexity_factor, 2.0))
-            
+
             execution_time = time.time() - start_time
-            
+
             # Generate realistic performance metrics
             performance_metrics = {
                 "cpu_usage_percent": random.uniform(20, 80),
@@ -147,7 +147,7 @@ def create_advanced_query_tool() -> Tool:
                 "disk_io_mb": random.randint(10, 500),
                 "network_io_mb": random.randint(5, 100)
             }
-            
+
             return AdvancedQueryOutput(
                 query_id=f"query_{query_hash}",
                 row_count=random.randint(1000, 10000000),
@@ -158,10 +158,10 @@ def create_advanced_query_tool() -> Tool:
                 cost_estimate=random.uniform(0.01, 10.0),
                 performance_metrics=performance_metrics
             )
-            
+
         except Exception as e:
             raise ValueError(f"Advanced query execution failed: {e}")
-    
+
     return Tool(execute_advanced_query, takes=AdvancedQueryInput, returns=AdvancedQueryOutput)
 ```
 
@@ -169,7 +169,7 @@ def create_advanced_query_tool() -> Tool:
 
 ### Comprehensive Error Classification
 
-Production systems need sophisticated error handling that provides actionable diagnostics:  
+Production systems need sophisticated error handling that provides actionable diagnostics:
 
 ```python
 from enum import Enum
@@ -179,7 +179,7 @@ import traceback
 
 class ErrorSeverity(str, Enum):
     LOW = "low"
-    MEDIUM = "medium" 
+    MEDIUM = "medium"
     HIGH = "high"
     CRITICAL = "critical"
 
@@ -207,31 +207,31 @@ class DetailedErrorResponse(BaseModel):
     support_reference: Optional[str] = None
 ```
 
-Implement comprehensive error handling:  
+Implement comprehensive error handling:
 
 ```python
 import uuid
 from datetime import datetime
 
 async def execute_with_comprehensive_error_handling(
-    agent: Agent, 
-    query: str, 
+    agent: Agent,
+    query: str,
     deps: Any = None,
     request_id: str = None
 ) -> Union[Any, DetailedErrorResponse]:
     """Execute agent with comprehensive error handling and classification"""
-    
+
     if request_id is None:
         request_id = str(uuid.uuid4())
-    
+
     try:
         if deps:
             result = await agent.run(query, deps=deps)
         else:
             result = await agent.run(query)
-            
+
         return {"success": True, "data": result, "request_id": request_id}
-        
+
     except ValidationError as e:
         return DetailedErrorResponse(
             error_category=ErrorCategory.VALIDATION,
@@ -243,19 +243,19 @@ async def execute_with_comprehensive_error_handling(
             fallback_available=True,
             support_reference=f"REF_{request_id[:8]}"
         )
-        
+
     except httpx.TimeoutException as e:
         return DetailedErrorResponse(
             error_category=ErrorCategory.TIMEOUT,
             error_severity=ErrorSeverity.HIGH,
             error_message="Request timed out - external service not responding",
-            error_code="TIMEOUT_001", 
+            error_code="TIMEOUT_001",
             request_id=request_id,
             retry_after_seconds=30,
             fallback_available=True,
             support_reference=f"REF_{request_id[:8]}"
         )
-        
+
     except httpx.HTTPStatusError as e:
         if e.response.status_code == 429:
             return DetailedErrorResponse(
@@ -279,11 +279,11 @@ async def execute_with_comprehensive_error_handling(
                 fallback_available=True,
                 support_reference=f"REF_{request_id[:8]}"
             )
-            
+
     except Exception as e:
         # Log unexpected errors for debugging
         logging.error(f"Unexpected error in request {request_id}: {traceback.format_exc()}")
-        
+
         return DetailedErrorResponse(
             error_category=ErrorCategory.UNKNOWN,
             error_severity=ErrorSeverity.CRITICAL,
@@ -298,7 +298,7 @@ async def execute_with_comprehensive_error_handling(
 
 ### Advanced Retry and Circuit Breaker Patterns
 
-Implement sophisticated resilience patterns:  
+Implement sophisticated resilience patterns:
 
 ```python
 import asyncio
@@ -313,55 +313,55 @@ class CircuitBreakerState(str, Enum):
     HALF_OPEN = "half_open"  # Testing if service recovered
 
 class CircuitBreaker(Generic[T]):
-    def __init__(self, 
+    def __init__(self,
                  failure_threshold: int = 5,
                  recovery_timeout: int = 60,
                  expected_exception: type = Exception):
         self.failure_threshold = failure_threshold
         self.recovery_timeout = recovery_timeout
         self.expected_exception = expected_exception
-        
+
         self.failure_count = 0
         self.last_failure_time = None
         self.state = CircuitBreakerState.CLOSED
-    
+
     async def __call__(self, func: Callable[[], T]) -> T:
         """Execute function with circuit breaker protection"""
-        
+
         if self.state == CircuitBreakerState.OPEN:
             if self._should_attempt_reset():
                 self.state = CircuitBreakerState.HALF_OPEN
             else:
                 raise Exception("Circuit breaker OPEN - service unavailable")
-        
+
         try:
             result = await func()
             self._on_success()
             return result
-            
+
         except self.expected_exception as e:
             self._on_failure()
             raise e
-    
+
     def _should_attempt_reset(self) -> bool:
         return (
-            self.last_failure_time and 
+            self.last_failure_time and
             datetime.now() - self.last_failure_time > timedelta(seconds=self.recovery_timeout)
         )
-    
+
     def _on_success(self):
         self.failure_count = 0
         self.state = CircuitBreakerState.CLOSED
-    
+
     def _on_failure(self):
         self.failure_count += 1
         self.last_failure_time = datetime.now()
-        
+
         if self.failure_count >= self.failure_threshold:
             self.state = CircuitBreakerState.OPEN
 
 class AdvancedRetryHandler:
-    def __init__(self, 
+    def __init__(self,
                  max_retries: int = 3,
                  base_delay: float = 1.0,
                  max_delay: float = 60.0,
@@ -373,39 +373,39 @@ class AdvancedRetryHandler:
         self.exponential_base = exponential_base
         self.jitter = jitter
         self.circuit_breaker = CircuitBreaker()
-    
+
     async def execute_with_retry(self, func: Callable, *args, **kwargs) -> Any:
         """Execute function with advanced retry logic and circuit breaker"""
-        
+
         last_exception = None
-        
+
         for attempt in range(self.max_retries + 1):
             try:
                 # Use circuit breaker to protect against cascading failures
                 return await self.circuit_breaker(lambda: func(*args, **kwargs))
-                
+
             except Exception as e:
                 last_exception = e
-                
+
                 if attempt == self.max_retries:
                     break
-                
+
                 # Calculate exponential backoff delay
                 delay = min(
                     self.base_delay * (self.exponential_base ** attempt),
                     self.max_delay
                 )
-                
+
                 # Add jitter to prevent thundering herd
                 if self.jitter:
                     delay *= random.uniform(0.5, 1.5)
-                
+
                 logging.warning(
                     f"Attempt {attempt + 1} failed: {e}. Retrying in {delay:.2f}s"
                 )
-                
+
                 await asyncio.sleep(delay)
-        
+
         raise last_exception
 ```
 
@@ -413,7 +413,7 @@ class AdvancedRetryHandler:
 
 ### Building a Complete Data Processing Agent
 
-Here's a comprehensive example that combines all concepts:  
+Here's a comprehensive example that combines all concepts:
 
 ```python
 class ProductionDataProcessingAgent:
@@ -428,10 +428,10 @@ class ProductionDataProcessingAgent:
             base_delay=1.0,
             max_delay=30.0
         )
-        
+
         # Create tools
         self.query_tool = create_advanced_query_tool()
-        
+
         # Create main agent
         self.agent = Agent(
             config["model_name"],
@@ -439,12 +439,12 @@ class ProductionDataProcessingAgent:
             deps_type=ProductionDataService,
             tools=[self.query_tool]
         )
-    
+
     async def process_feature_request(self, request: FeatureExtractionRequest) -> dict:
         """Main entry point for feature processing requests"""
-        
+
         request_id = str(uuid.uuid4())
-        
+
         try:
             # Use retry handler for resilience
             result = await self.retry_handler.execute_with_retry(
@@ -452,14 +452,14 @@ class ProductionDataProcessingAgent:
                 request,
                 request_id
             )
-            
+
             return {
                 "success": True,
                 "data": result,
                 "request_id": request_id,
                 "processing_time": result.get("processing_time", 0)
             }
-            
+
         except Exception as e:
             # Comprehensive error handling
             error_response = await execute_with_comprehensive_error_handling(
@@ -468,19 +468,19 @@ class ProductionDataProcessingAgent:
                 self.data_service,
                 request_id
             )
-            
+
             return error_response
-    
+
     async def _execute_feature_extraction(self, request: FeatureExtractionRequest, request_id: str):
         """Internal feature extraction logic"""
-        
+
         query = self._build_query(request)
-        
+
         result = await self.agent.run(
             query,
             deps=self.data_service
         )
-        
+
         # Save job to data warehouse
         job_data = {
             "request_id": request_id,
@@ -490,19 +490,19 @@ class ProductionDataProcessingAgent:
             "extraction_id": result.extraction_id,
             "created_at": datetime.utcnow().isoformat()
         }
-        
+
         await self.data_service.save_job(job_data)
-        
+
         return result
-    
+
     def _build_query(self, request: FeatureExtractionRequest) -> str:
         return f"""
         Plan a comprehensive feature extraction pipeline for:
         - Dataset: {request.dataset_id}
-        - Description: {request.feature_description} 
+        - Description: {request.feature_description}
         - Quality Threshold: {request.quality_threshold.value}
         - Completion Date: {request.completion_date or 'Not specified'}
-        
+
         Include realistic pipeline steps, job scheduling, and monitoring setup.
         Provide accurate time estimates based on data complexity.
         """
@@ -547,32 +547,33 @@ else:
 
 ## 📝 Participant Path Practice Exercise
 
-Build your own production-ready data processing agent:  
+Build your own production-ready data processing agent:
 
-1. **Create Enhanced Models**: Define comprehensive request/response models with validation  
-2. **Implement Service Layer**: Build dependency injection with real service integration  
-3. **Add Error Handling**: Implement comprehensive error classification and recovery  
-4. **Create Tool Chain**: Build multiple interconnected tools with validation  
-5. **Test Resilience**: Verify retry logic, circuit breaker, and error scenarios  
+1. **Create Enhanced Models**: Define comprehensive request/response models with validation
+2. **Implement Service Layer**: Build dependency injection with real service integration
+3. **Add Error Handling**: Implement comprehensive error classification and recovery
+4. **Create Tool Chain**: Build multiple interconnected tools with validation
+5. **Test Resilience**: Verify retry logic, circuit breaker, and error scenarios
 
 ### Validation Checklist
 
-- [ ] Agent handles complex dependencies correctly  
-- [ ] Error handling provides actionable diagnostics  
-- [ ] Tools integrate seamlessly with validation  
-- [ ] Retry logic works with exponential backoff  
-- [ ] Circuit breaker prevents cascading failures  
-- [ ] All code follows production quality standards  
+- [ ] Agent handles complex dependencies correctly
+- [ ] Error handling provides actionable diagnostics
+- [ ] Tools integrate seamlessly with validation
+- [ ] Retry logic works with exponential backoff
+- [ ] Circuit breaker prevents cascading failures
+- [ ] All code follows production quality standards
 
 ---
 
 ## Next Steps: Production Deployment
 
-Ready to deploy your type-safe agents? Continue with:  
-📝 [Production Deployment Guide](Session5_Production_Deployment.md)  
-
+Ready to deploy your type-safe agents? Continue with:
+📝 [Production Deployment Guide](Session5_Production_Deployment.md)
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Observer Path](Session5_PydanticAI_Type_Safe_Agents.md) | [Next: Production Deployment →](Session5_Production_Deployment.md)
+**Previous:** [Session 4 - CrewAI Team Orchestration ←](Session4_CrewAI_Team_Orchestration.md)
+**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+---

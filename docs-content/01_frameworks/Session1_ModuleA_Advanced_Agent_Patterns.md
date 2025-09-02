@@ -1,6 +1,6 @@
 # Session 1 - Module A: Advanced Agent Patterns
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 1 core content first.
 
 In 2023, a Fortune 500 financial services company discovered their AI data processing assistant had developed an unexpected capability: it could critique its own data transformation recommendations, identify flaws in its ETL logic, and systematically improve its approach over multiple iterations. What started as a simple rule-based data validation system had evolved into something resembling expert data engineering judgment - the ability to step back, analyze pipeline performance, and consciously optimize processing strategies.
@@ -42,7 +42,7 @@ from typing import Dict
 
 class ReflectionAgent(BaseAgent):
     """Agent that reflects on and improves its own data processing outputs"""
-    
+
     def __init__(self, name: str, llm_client, max_iterations: int = 3):
         super().__init__(name, "Agent with data processing reflection capabilities", llm_client)
         self.max_iterations = max_iterations  # Prevent infinite optimization loops
@@ -62,11 +62,11 @@ The core reflection loop orchestrates the iterative data processing improvement 
 async def _generate_response(self, message: str, context: Dict = None) -> str:
     """Generate data processing response with reflection and optimization"""
     current_response = await self._initial_data_processing(message, context)
-    
+
     for iteration in range(self.max_iterations):
         # Step 1: Reflect on current data processing approach
         critique = await self._reflect_on_processing(message, current_response)
-        
+
         # Step 2: If processing approach is optimal, return it
         if self._is_processing_satisfactory(critique):
             self.logger.info(f"Data processing optimal after {iteration + 1} iterations")
@@ -80,12 +80,12 @@ The core reflection loop orchestrates iterative improvement. Each iteration eval
         improved_response = await self._improve_processing(
             message, current_response, critique
         )
-        
+
         # Step 4: Track the optimization process for pipeline metrics
         self._track_reflection(iteration, current_response, critique, improved_response)
-        
+
         current_response = improved_response
-    
+
     return current_response
 ```
 
@@ -104,7 +104,7 @@ async def _initial_data_processing(self, message: str, context: Dict = None) -> 
     Focus on throughput, data quality, and cost efficiency for large-scale systems.
     Consider partitioning strategies, batch sizing, and resource utilization.
     """
-    
+
     prompt = f"{system_prompt}\n\nProcessing requirements: {message}"
     response = await self._call_llm(prompt)
     return response
@@ -121,10 +121,10 @@ async def _reflect_on_processing(self, original_message: str, response: str) -> 
     """Generate critique of the current data processing approach"""
     critique_prompt = f"""
     Analyze this data processing approach and provide constructive criticism.
-    
+
     Processing requirements: {original_message}
     Proposed approach: {response}
-    
+
     Evaluate from a data engineering perspective:
     1. Scalability: Can this handle petabyte-scale datasets?
     2. Performance: Are batch sizes and parallelization optimal?
@@ -140,7 +140,7 @@ The reflection method analyzes the processing approach using six critical data e
     Provide specific suggestions for improvement based on production data engineering best practices.
     If the approach is already optimal for enterprise scale, say "SATISFACTORY".
     """
-    
+
     critique = await self._call_llm(critique_prompt)
     return critique
 ```
@@ -158,18 +158,18 @@ async def _improve_processing(self, message: str, current_response: str, critiqu
     """Improve data processing approach based on critique"""
     improvement_prompt = f"""
     Optimize the following data processing approach based on the critique provided.
-    
+
     Original requirements: {message}
     Current processing approach: {current_response}
     Critique focusing on data engineering concerns: {critique}
-    
+
     Generate an improved approach that addresses the critique while maintaining:
     - High throughput for large datasets
     - Cost optimization for cloud deployment
     - Robust error handling and data quality validation
     - Scalable architecture for petabyte-scale processing
     """
-    
+
     improved = await self._call_llm(improvement_prompt)
     return improved
 ```
@@ -193,7 +193,7 @@ from enum import Enum
 
 class DataProcessingStatus(Enum):
     PENDING = "pending"
-    IN_PROGRESS = "in_progress" 
+    IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
     FAILED = "failed"
 ```
@@ -219,7 +219,7 @@ The `DataPipelineStep` dataclass captures all essential information for data pip
 ```python
 class DataPipelinePlanningAgent(BaseAgent):
     """Agent that breaks down complex data processing tasks into executable pipeline steps"""
-    
+
     def __init__(self, name: str, llm_client):
         super().__init__(name, "Multi-step data pipeline planning agent", llm_client)
         self.current_plan: Optional[List[DataPipelineStep]] = None
@@ -236,25 +236,25 @@ The planning system breaks complex data processing workflows into manageable, ex
 ```python
 async def create_data_pipeline_plan(self, complex_data_task: str) -> List[DataPipelineStep]:
     """Break down complex data processing task into executable pipeline steps"""
-    
+
     planning_prompt = f"""
     Break down this complex data processing task into specific, executable pipeline steps:
     Task: {complex_data_task}
-    
+
     For each step, provide:
     1. Clear description of data processing operation
     2. Dependencies (which steps must complete first for data availability)
     3. Estimated time in minutes for large-scale processing
     4. Resource requirements (CPU, memory, storage for cloud deployment)
     5. Data quality checkpoints and validation requirements
-    
+
     Consider:
     - Optimal batch sizing for throughput
     - Parallelization opportunities
     - Data partitioning strategies
     - Error handling and recovery mechanisms
     - Cost optimization through efficient resource usage
-    
+
     Format as a numbered list with dependencies and resource requirements noted.
     Be specific about data volumes, formats, and processing requirements.
     """
@@ -264,11 +264,11 @@ The planning prompt guides the LLM to consider essential data engineering factor
 
 ```python
     plan_text = await self._call_llm(planning_prompt)
-    
+
     # Parse the plan into DataPipelineStep objects
     steps = self._parse_data_pipeline_plan(plan_text)
     self.current_plan = steps
-    
+
     return steps
 ```
 
@@ -281,7 +281,7 @@ def _parse_data_pipeline_plan(self, plan_text: str) -> List[DataPipelineStep]:
     """Parse LLM-generated data pipeline plan into structured steps"""
     steps = []
     lines = plan_text.strip().split('\n')
-    
+
     for i, line in enumerate(lines):
         if line.strip() and any(line.startswith(str(j)) for j in range(1, 20)):
             # Extract data processing step information
@@ -295,7 +295,7 @@ The parser identifies numbered steps from the LLM output and extracts meaningful
             # Extract data processing dependencies and resource requirements
             dependencies = self._extract_data_dependencies(description)
             resource_reqs = self._extract_resource_requirements(description)
-            
+
             steps.append(DataPipelineStep(
                 id=step_id,
                 description=description,
@@ -303,7 +303,7 @@ The parser identifies numbered steps from the LLM output and extracts meaningful
                 estimated_time=15,  # Default for data processing operations
                 resource_requirements=resource_reqs
             ))
-    
+
     return steps
 ```
 
@@ -320,15 +320,15 @@ async def execute_data_pipeline(self) -> Dict[str, any]:
     """Execute the current data pipeline with dependency and resource management"""
     if not self.current_plan:
         return {"error": "No data pipeline to execute"}
-    
+
     execution_log = []
     completed_steps = set()
     resource_usage = {"total_cost": 0, "peak_memory": 0, "total_compute_hours": 0}
-    
+
     while len(completed_steps) < len(self.current_plan):
         # Find next executable step (dependencies satisfied, resources available)
         next_step = self._find_next_executable_data_step(completed_steps)
-        
+
         if not next_step:
             return {"error": "No executable steps found - check dependencies or resource constraints"}
 ```
@@ -339,12 +339,12 @@ The execution engine orchestrates pipeline steps while respecting both logical d
         # Allocate resources and execute the data processing step
         self.logger.info(f"Executing data processing step: {next_step.description}")
         next_step.status = DataProcessingStatus.IN_PROGRESS
-        
+
         # Track resource allocation for cost monitoring
         allocated_resources = await self.resource_tracker.allocate_resources(
             next_step.resource_requirements
         )
-        
+
         try:
             result = await self._execute_data_step(next_step, allocated_resources)
             next_step.result = result
@@ -359,7 +359,7 @@ Resource allocation and execution tracking provide comprehensive visibility into
             resource_usage = self.resource_tracker.update_usage(
                 allocated_resources, result.get('metrics', {})
             )
-            
+
             execution_log.append({
                 "step": next_step.description,
                 "result": result,
@@ -386,7 +386,7 @@ Comprehensive logging captures both functional results and operational metrics, 
         finally:
             # Always release resources after step completion
             await self.resource_tracker.release_resources(allocated_resources)
-    
+
     return {
         "execution_log": execution_log,
         "completed_steps": len(completed_steps),
@@ -407,19 +407,19 @@ async def _execute_data_step(self, step: DataPipelineStep, resources: Dict) -> s
     execution_prompt = f"""
     Execute this specific data processing task:
     {step.description}
-    
+
     Allocated resources: {resources}
-    
+
     Provide a detailed result including:
     1. What data processing operations were completed
     2. Data volume processed and throughput achieved
     3. Quality metrics and validation results
     4. Performance metrics (processing time, resource utilization)
     5. Any data quality issues or anomalies detected
-    
+
     Be specific about data formats, processing efficiency, and outcomes.
     """
-    
+
     result = await self._call_llm(execution_prompt)
     return result
 ```
@@ -445,7 +445,7 @@ from datetime import datetime
 
 class DataProcessingCoordinator:
     """Coordinates multiple specialized data processing agents in a distributed system"""
-    
+
     def __init__(self):
         self.agents: Dict[str, BaseAgent] = {}  # Specialized data processing agents
         self.message_history = []               # All inter-agent data processing messages
@@ -475,7 +475,7 @@ async def route_data_message(self, message: str, to_agent: str, from_agent: str 
     """Route data processing message to specific agent and track communication"""
     if to_agent not in self.agents:
         return f"Error: Data processing agent '{to_agent}' not found"
-    
+
     # Log data processing communication pattern
     self.communication_patterns[to_agent].append({
         "from": from_agent,
@@ -491,7 +491,7 @@ Message routing includes comprehensive communication tracking that captures send
     # Process message with target data processing agent
     agent = self.agents[to_agent]
     response = await agent.process_message(message)
-    
+
     # Store complete data processing conversation
     self.message_history.append({
         "from": from_agent,
@@ -501,7 +501,7 @@ Message routing includes comprehensive communication tracking that captures send
         "processing_metrics": self._extract_processing_metrics(response),
         "timestamp": datetime.now()
     )
-    
+
     return response
 ```
 
@@ -516,13 +516,13 @@ Complex data processing workflows are broken down and delegated to the most appr
 ```python
 async def delegate_data_processing_task(self, task: str) -> Dict[str, Any]:
     """Delegate complex data processing task to appropriate specialized agents"""
-    
+
     # Step 1: Analyze data processing requirements to determine which agents are needed
     task_analysis = await self._analyze_data_task_requirements(task)
-    
+
     # Step 2: Create delegation plan based on data processing capabilities
     delegation_plan = self._create_data_delegation_plan(task_analysis)
-    
+
     # Step 3: Execute delegation plan with resource coordination
 ```
 
@@ -536,7 +536,7 @@ The three-phase delegation approach ensures systematic task decomposition and ag
             start_time = datetime.now()
             result = await self.route_data_message(subtask, agent_name, "coordinator")
             end_time = datetime.now()
-            
+
             results[agent_name] = result
             processing_metrics[agent_name] = {
                 "processing_time": (end_time - start_time).total_seconds(),
@@ -550,7 +550,7 @@ Execution tracking captures both functional results and operational metrics for 
 ```python
     # Step 4: Integrate data processing results
     final_result = await self._integrate_data_results(task, results)
-    
+
     return {
         "original_task": task,
         "delegation_plan": delegation_plan,
@@ -574,25 +574,25 @@ async def _analyze_data_task_requirements(self, task: str) -> Dict[str, Any]:
     analysis_prompt = f"""
     Analyze this data processing task and determine what types of specialized agents would be needed:
     Task: {task}
-    
+
     Available specialized data processing agents: {list(self.agents.keys())}
-    
+
     Consider the data processing pipeline requirements:
     1. Data ingestion and validation needs
-    2. Transformation and enrichment requirements  
+    2. Transformation and enrichment requirements
     3. Quality assurance and anomaly detection needs
     4. Storage optimization and partitioning requirements
     5. Analytics and reporting capabilities needed
-    
+
     For each needed agent type, specify:
     1. What specific data processing subtask they should handle
     2. Why this specialized agent is appropriate for this data operation
     3. Expected data volume and processing requirements
     4. Dependencies on other agents' outputs
-    
+
     Return analysis focusing on data engineering optimization and scalability.
     """
-    
+
     # This would use an LLM to analyze - simplified for example
     return {"required_agents": list(self.agents.keys())[:2]}  # Simplified
 ```
@@ -607,34 +607,34 @@ The analysis provides context about available specialized data processing agents
 
 Test your understanding of advanced agent patterns:
 
-**Question 1:** What is the key mechanism that prevents infinite loops in data processing reflection agents?  
-A) Memory limitations  
-B) Maximum iteration limits with satisfactory conditions  
-C) Network timeouts  
-D) User intervention  
+**Question 1:** What is the key mechanism that prevents infinite loops in data processing reflection agents?
+A) Memory limitations
+B) Maximum iteration limits with satisfactory conditions
+C) Network timeouts
+D) User intervention
 
-**Question 2:** In multi-step data pipeline planning, what is the primary purpose of dependency management?  
-A) Reducing memory usage  
-B) Ensuring pipeline steps execute in the correct order with proper data flow  
-C) Speeding up execution  
-D) Simplifying code structure  
+**Question 2:** In multi-step data pipeline planning, what is the primary purpose of dependency management?
+A) Reducing memory usage
+B) Ensuring pipeline steps execute in the correct order with proper data flow
+C) Speeding up execution
+D) Simplifying code structure
 
-**Question 3:** What does the planning agent's `_parse_data_pipeline_plan` method accomplish?  
-A) Generates new plans from scratch  
-B) Converts LLM-generated text into structured DataPipelineStep objects  
-C) Executes individual pipeline steps  
-D) Validates plan correctness  
+**Question 3:** What does the planning agent's `_parse_data_pipeline_plan` method accomplish?
+A) Generates new plans from scratch
+B) Converts LLM-generated text into structured DataPipelineStep objects
+C) Executes individual pipeline steps
+D) Validates plan correctness
 
-**Question 4:** In multi-agent data processing orchestration, what information is stored in communication patterns?  
-A) Complete message history with full content  
-B) Summarized message data with data processing context, sender, recipient, and timestamp  
-C) Only error messages  
-D) Agent performance metrics  
+**Question 4:** In multi-agent data processing orchestration, what information is stored in communication patterns?
+A) Complete message history with full content
+B) Summarized message data with data processing context, sender, recipient, and timestamp
+C) Only error messages
+D) Agent performance metrics
 
-**Question 5:** What is the three-phase approach used in collaborative data processing task management?  
-A) Planning, execution, validation  
-B) Analysis, delegation, integration  
-C) Data task analysis, delegation plan creation, coordinated execution  
+**Question 5:** What is the three-phase approach used in collaborative data processing task management?
+A) Planning, execution, validation
+B) Analysis, delegation, integration
+C) Data task analysis, delegation plan creation, coordinated execution
 D) Registration, routing, completion
 
 [**🗂️ View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
@@ -645,27 +645,14 @@ D) Registration, routing, completion
 
 You've now mastered advanced agent patterns for data engineering including:
 
-✅ **Reflection Agents**: Implemented self-improvement through iterative critique and refinement of data processing strategies  
-✅ **Multi-Step Planning**: Built systems that decompose complex data workflows into executable pipeline plans  
-✅ **Multi-Agent Orchestration**: Created coordination systems for specialized data processing agent collaboration  
+✅ **Reflection Agents**: Implemented self-improvement through iterative critique and refinement of data processing strategies
+✅ **Multi-Step Planning**: Built systems that decompose complex data workflows into executable pipeline plans
+✅ **Multi-Agent Orchestration**: Created coordination systems for specialized data processing agent collaboration
 ✅ **Self-Improvement Mechanisms**: Designed agents that enhance their data processing performance over time
-
 ---
 
-## 🧭 Navigation & Quick Start
+## 🧭 Navigation
 
-### Related Modules:
-
-- **Core Session:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
-- **Module B:** [Performance Optimization](Session1_ModuleB_Performance_Optimization.md)
-- **Module C:** [Complex State Management](Session1_ModuleC_Complex_State_Management.md)
-
-**🗂️ Code Files:** All examples use files in `src/session1/`
-
-- `reflection_agent.py` - Self-improving data processing reflection agents
-- `react_agent.py` - Multi-step data pipeline planning implementation
-- `multi_agent_system.py` - Multi-agent data processing coordination system
-
-**🚀 Quick Start:** Run `cd src/session1 && python demo_runner.py` to see implementations
-
-**Next:** [Session 2 - LangChain Foundations](Session2_LangChain_Foundations.md) →
+**Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns ←](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+**Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
+---

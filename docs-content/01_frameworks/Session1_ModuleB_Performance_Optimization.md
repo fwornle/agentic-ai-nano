@@ -1,6 +1,6 @@
 # Session 1 - Module B: Performance Optimization
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 1 core content first.
 
 At 3:47 AM, Netflix's AI-powered data processing infrastructure agent detected an anomalous data ingestion spike that could have cascaded into a $2.3 million streaming outage. Within 127 milliseconds, it had analyzed 15,000 pipeline metrics across their petabyte-scale data lake, executed corrective actions across 200 data processing nodes, and prevented what would have been a catastrophic recommendation engine failure. The difference between success and failure? Performance optimization patterns that most data engineers never learn.
@@ -41,7 +41,7 @@ The `DataProcessingMemoryEntry` dataclass tracks not just content but also metad
 ```python
 class MemoryOptimizedDataAgent(BaseAgent):
     """Agent with intelligent memory management for long-running data processing operations"""
-    
+
     def __init__(self, name: str, llm_client, max_memory_mb: float = 50.0):
         super().__init__(name, "Memory optimized data processing agent", llm_client)
         self.max_memory_bytes = max_memory_mb * 1024 * 1024  # Higher limit for data processing
@@ -64,13 +64,13 @@ The additional configuration parameters are tuned for data processing: higher im
 The memory addition process includes proactive cleanup optimized for data processing workflows:
 
 ```python
-def add_to_processing_memory(self, content: str, importance_score: float = 0.6, 
+def add_to_processing_memory(self, content: str, importance_score: float = 0.6,
                            data_volume_gb: float = 0.0, stage: str = "unknown"):
     """Add data processing content to memory with intelligent sizing and cleanup"""
-    
+
     # Calculate memory footprint for data processing context
     content_size = sys.getsizeof(content)
-    
+
     # Create data processing memory entry
     entry = DataProcessingMemoryEntry(
         content=content,
@@ -90,7 +90,7 @@ Next, the method implements proactive memory management optimized for data proce
     # Check if cleanup is needed based on data processing frequency
     self.processing_count += 1
     self.data_volume_processed += data_volume_gb
-    
+
     if self.processing_count % self.cleanup_interval == 0:
         self._cleanup_data_processing_memory()
 ```
@@ -102,7 +102,7 @@ Finally, the method adds the entry and handles emergency cleanup situations:
 ```python
     # Add entry
     self.memory_entries.append(entry)
-    
+
     # Force cleanup if memory limit exceeded during high-volume processing
     if self._get_total_memory_usage() > self.max_memory_bytes:
         self._aggressive_data_cleanup()
@@ -117,10 +117,10 @@ The cleanup method implements a sophisticated algorithm that balances importance
 ```python
 def _cleanup_data_processing_memory(self):
     """Intelligent memory cleanup based on importance, age, and data processing priorities"""
-    
+
     if not self.memory_entries:
         return
-    
+
     # Convert to list for easier manipulation
     entries_list = list(self.memory_entries)
 ```
@@ -138,13 +138,13 @@ Next, the algorithm sorts entries using a composite key that considers importanc
         "ingestion": 0.5,     # Medium priority - data intake
         "storage": 0.3        # Lower priority - archival operations
     }
-    
+
     entries_list.sort(key=lambda x: (
-        x.importance_score * 0.4 + 
+        x.importance_score * 0.4 +
         stage_priorities.get(x.processing_stage, 0.2) * 0.4 +
         self._data_recency_score(x) * 0.2
     ))
-    
+
     # Keep top 60% of entries (more aggressive for data processing)
     keep_count = int(len(entries_list) * 0.6)
     entries_to_keep = entries_list[-keep_count:]
@@ -159,7 +159,7 @@ Finally, the method updates the memory structure and logs the cleanup operation 
     self.memory_entries.clear()
     for entry in entries_to_keep:
         self.memory_entries.append(entry)
-    
+
     self.logger.info(f"Data processing memory cleanup: kept {len(entries_to_keep)} entries, "
                     f"total data volume tracked: {self.data_volume_processed:.2f} GB")
 
@@ -179,12 +179,12 @@ def get_data_processing_memory_stats(self) -> Dict[str, Any]:
     """Get comprehensive memory usage statistics for data processing operations"""
     total_entries = len(self.memory_entries)
     total_bytes = self._get_total_memory_usage()
-    
+
     if total_entries > 0:
         avg_importance = sum(e.importance_score for e in self.memory_entries) / total_entries
         oldest_entry = min(self.memory_entries, key=lambda x: x.timestamp)
         newest_entry = max(self.memory_entries, key=lambda x: x.timestamp)
-        
+
         # Calculate data processing specific metrics
         stage_distribution = {}
         for entry in self.memory_entries:
@@ -208,7 +208,7 @@ Next, it calculates comprehensive utilization and temporal metrics optimized for
             "processing_stage_distribution": stage_distribution,
             "avg_data_volume_per_entry": sum(e.data_volume_gb for e in self.memory_entries) / total_entries
         }
-    
+
     return {"total_entries": 0, "total_memory_mb": 0, "total_data_volume_gb": 0}
 ```
 
@@ -221,17 +221,17 @@ Context compression ensures optimal LLM performance by providing relevant data p
 ```python
 def get_compressed_data_context(self, max_context_size: int = 4000) -> str:
     """Get compressed data processing context for LLM calls"""
-    
+
     # Sort entries by importance, processing stage priority, and recency
     stage_priorities = {
         "validation": 0.9, "error": 0.8, "transformation": 0.7,
         "ingestion": 0.5, "storage": 0.3
     }
-    
+
     sorted_entries = sorted(
         self.memory_entries,
         key=lambda x: (
-            x.importance_score * 0.5 + 
+            x.importance_score * 0.5 +
             stage_priorities.get(x.processing_stage, 0.2) * 0.3 +
             self._data_recency_score(x) * 0.2
         ),
@@ -247,16 +247,16 @@ Next, the method builds the context string using a greedy packing approach optim
     # Build context within size limit, prioritizing data processing insights
     context_parts = []
     current_size = 0
-    
+
     for entry in sorted_entries:
         # Create enhanced context with data processing metadata
         enhanced_content = f"[{entry.processing_stage.upper()}] " \
                           f"({entry.data_volume_gb:.2f}GB processed) " \
                           f"{entry.content}"
-        
+
         if current_size + len(enhanced_content) > max_context_size:
             break
-        
+
         context_parts.append(enhanced_content)
         current_size += len(enhanced_content)
 ```
@@ -273,7 +273,7 @@ Finally, the method handles truncation gracefully by informing the LLM about omi
         summary = f"\n[... {truncated_count} earlier data processing entries truncated " \
                  f"({truncated_volume:.2f}GB additional data context omitted) ...]"
         context_parts.append(summary)
-    
+
     return "\n".join(context_parts)
 ```
 
@@ -284,14 +284,14 @@ def _data_recency_score(self, entry: DataProcessingMemoryEntry) -> float:
     """Calculate recency score optimized for data processing timeline (1.0 = most recent, 0.0 = oldest)"""
     if not self.memory_entries:
         return 1.0
-    
+
     oldest = min(self.memory_entries, key=lambda x: x.timestamp)
     newest = max(self.memory_entries, key=lambda x: x.timestamp)
-    
+
     total_span = (newest.timestamp - oldest.timestamp).total_seconds()
     if total_span == 0:
         return 1.0
-    
+
     entry_age = (newest.timestamp - entry.timestamp).total_seconds()
     return 1.0 - (entry_age / total_span)
 ```
@@ -318,7 +318,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class OptimizedDataProcessingToolAgent(BaseAgent):
     """Agent with high-performance tool execution for data processing operations"""
-    
+
     def __init__(self, name: str, llm_client, tools: List[Tool]):
         super().__init__(name, "Optimized data processing tool agent", llm_client)
         self.tools = {tool.name: tool for tool in tools}
@@ -335,7 +335,7 @@ The agent maintains separate caches and statistics for each tool, while the thre
         """Generate cache key for data processing tool execution"""
         # Create deterministic hash of tool name and parameters
         # Exclude timestamp-sensitive params for data processing
-        cacheable_params = {k: v for k, v in params.items() 
+        cacheable_params = {k: v for k, v in params.items()
                            if k not in ['timestamp', 'execution_id', 'session_id']}
         param_str = str(sorted(cacheable_params.items()))
         cache_input = f"{tool_name}:{param_str}"
@@ -349,7 +349,7 @@ Caching uses deterministic hashing of tool names and parameters, excluding times
         """Determine if data processing tool results should be cached"""
         # Don't cache tools that have side effects or time-dependent results
         non_cacheable = {
-            "real_time_data_stream", "current_timestamp", "random_data_generator", 
+            "real_time_data_stream", "current_timestamp", "random_data_generator",
             "write_to_data_lake", "trigger_pipeline", "send_alert",
             "live_database_query", "streaming_analytics"
         }
@@ -365,9 +365,9 @@ The caching system balances performance gains with result freshness for data pro
 ```python
 async def execute_data_tool_cached(self, tool_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
     """Execute data processing tool with intelligent caching"""
-    
+
     start_time = time.time()
-    
+
     # Check cache first for data processing operations
     if self._is_cacheable(tool_name):
         cache_key = self._cache_key(tool_name, params)
@@ -395,14 +395,14 @@ When cache misses occur, the system executes the tool and stores results for fut
     # Execute data processing tool
     if tool_name not in self.tools:
         raise ValueError(f"Data processing tool {tool_name} not available")
-    
+
     tool = self.tools[tool_name]
     result = await tool.execute(params)
-    
+
     # Track data processing metrics
     if isinstance(result, dict) and 'data_volume_gb' in result:
         self._track_data_processing_metrics(tool_name, result)
-    
+
     # Cache result if appropriate for data processing
     if self._is_cacheable(tool_name):
         self.tool_cache[cache_key] = {
@@ -419,7 +419,7 @@ Finally, performance statistics are updated regardless of cache hit or miss:
     # Update performance stats
     execution_time = time.time() - start_time
     self._update_data_processing_stats(tool_name, execution_time, False)
-    
+
     return result
 
 def _update_data_processing_stats(self, tool_name: str, execution_time: float, cache_hit: bool):
@@ -432,12 +432,12 @@ def _update_data_processing_stats(self, tool_name: str, execution_time: float, c
             "avg_time": 0.0,
             "total_data_processed_gb": 0.0
         }
-    
+
     stats = self.execution_stats[tool_name]
     stats["total_calls"] += 1
     stats["total_time"] += execution_time
     stats["avg_time"] = stats["total_time"] / stats["total_calls"]
-    
+
     if cache_hit:
         stats["cache_hits"] += 1
 ```
@@ -451,7 +451,7 @@ Parallel execution maximizes throughput when multiple data processing tools can 
 ```python
 async def execute_data_tools_parallel(self, tool_requests: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """Execute multiple data processing tools in parallel for better performance"""
-    
+
     async def execute_single_data_tool(request):
         tool_name = request["tool"]
         params = request.get("params", {})
@@ -488,7 +488,7 @@ Finally, the method processes results and handles any exceptions that occurred:
             })
         else:
             processed_results.append(result)
-    
+
     return processed_results
 ```
 
@@ -502,9 +502,9 @@ def get_data_processing_performance_stats(self) -> Dict[str, Any]:
     total_calls = sum(stats["total_calls"] for stats in self.execution_stats.values())
     total_cache_hits = sum(stats["cache_hits"] for stats in self.execution_stats.values())
     total_data_processed = sum(stats.get("total_data_processed_gb", 0) for stats in self.execution_stats.values())
-    
+
     cache_hit_rate = (total_cache_hits / total_calls * 100) if total_calls > 0 else 0
-    
+
     return {
         "total_tool_calls": total_calls,
         "total_cache_hits": total_cache_hits,
@@ -532,7 +532,7 @@ import time
 
 class FastDataProcessingResponseAgent(BaseAgent):
     """Agent optimized for minimal response latency in data processing operations"""
-    
+
     def __init__(self, name: str, llm_client):
         super().__init__(name, "Fast data processing response agent", llm_client)
         self.response_cache = {}
@@ -552,7 +552,7 @@ The core processing method implements multiple optimization strategies tailored 
     async def process_data_message_fast(self, message: str) -> Dict[str, Any]:
         """Process data processing message with speed optimizations"""
         start_time = time.time()
-        
+
         # Check for exact match in data processing cache
         if message in self.response_cache:
             response = self.response_cache[message]
@@ -597,13 +597,13 @@ For new messages, the system uses timeout controls to ensure timely responses:
             )
         except asyncio.TimeoutError:
             response = self._get_data_processing_fallback_response(message)
-        
+
         # Cache the response
         self.response_cache[message] = response
-        
+
         response_time = time.time() - start_time
         self.response_times.append(response_time)
-        
+
         return {
             "response": response,
             "response_time": response_time,
@@ -622,16 +622,16 @@ The similarity detection system uses enhanced matching for data processing termi
     def _find_similar_data_processing_response(self, message: str) -> Optional[str]:
         """Find cached response for similar data processing message using semantic matching"""
         message_words = set(message.lower().split())
-        
+
         # Extract data processing keywords for enhanced matching
         data_keywords = {
-            'etl', 'pipeline', 'transform', 'schema', 'query', 'database', 
+            'etl', 'pipeline', 'transform', 'schema', 'query', 'database',
             'warehouse', 'lake', 'stream', 'batch', 'partition', 'join',
             'aggregate', 'filter', 'sort', 'group', 'index', 'optimize'
         }
-        
+
         message_data_keywords = message_words & data_keywords
-        
+
         best_match = None
         best_similarity = 0.0
 ```
@@ -644,18 +644,18 @@ Next, it iterates through all cached messages to find the best semantic match:
         for cached_message, cached_response in self.response_cache.items():
             cached_words = set(cached_message.lower().split())
             cached_data_keywords = cached_words & data_keywords
-            
+
             # Calculate enhanced similarity for data processing context
             word_similarity = len(message_words & cached_words) / len(message_words | cached_words) if message_words | cached_words else 0
             keyword_similarity = len(message_data_keywords & cached_data_keywords) / len(message_data_keywords | cached_data_keywords) if message_data_keywords | cached_data_keywords else 0
-            
+
             # Weighted similarity (60% keywords, 40% general words)
             combined_similarity = (keyword_similarity * 0.6 + word_similarity * 0.4)
-            
+
             if combined_similarity > 0.65 and combined_similarity > best_similarity:
                 best_similarity = combined_similarity
                 best_match = cached_response
-        
+
         return best_match
 ```
 
@@ -669,7 +669,7 @@ The enhanced similarity algorithm weights data processing keywords higher (60%) 
             "I understand you're asking about data processing. Let me provide initial guidance while I gather detailed pipeline recommendations.",
             "That's an interesting data engineering question. Here's what I can tell you immediately about this approach..."
         ]
-        
+
         # Select fallback based on data processing message characteristics
         if any(keyword in message.lower() for keyword in ['pipeline', 'etl', 'transform']):
             return fallback_responses[0]
@@ -688,7 +688,7 @@ def get_data_processing_response_time_stats(self) -> Dict[str, Any]:
     """Get detailed response time analytics for data processing operations"""
     if not self.response_times:
         return {"no_data": True}
-    
+
     sorted_times = sorted(self.response_times)
     n = len(sorted_times)
 ```
@@ -723,10 +723,10 @@ The system automatically adjusts its behavior based on data processing performan
 async def optimize_data_processing_performance(self):
     """Automatically optimize agent performance based on data processing metrics"""
     stats = self.get_data_processing_response_time_stats()
-    
+
     if stats.get("no_data"):
         return
-    
+
     # Adjust target response time based on data processing performance
     if stats["target_achievement_rate"] > 95:
         # Performing well, can be more aggressive for data processing
@@ -746,7 +746,7 @@ Finally, the system manages cache size to prevent memory issues during data proc
         # Keep only most recent 1000 entries
         items = list(self.response_cache.items())
         self.response_cache = dict(items[-1000:])
-    
+
     self.logger.info(f"Data processing performance optimization: "
                     f"target time {self.target_response_time:.2f}s, "
                     f"cache size {len(self.response_cache)}")
@@ -758,35 +758,35 @@ Finally, the system manages cache size to prevent memory issues during data proc
 
 Test your understanding of performance optimization concepts:
 
-**Question 1:** What information does the `DataProcessingMemoryEntry` dataclass track to enable intelligent memory management?  
-A) Only content and timestamp  
-B) Content, timestamp, importance_score, size_bytes, data_volume_gb, and processing_stage  
-C) Just the memory size and creation time  
-D) Content and importance score only  
+**Question 1:** What information does the `DataProcessingMemoryEntry` dataclass track to enable intelligent memory management?
+A) Only content and timestamp
+B) Content, timestamp, importance_score, size_bytes, data_volume_gb, and processing_stage
+C) Just the memory size and creation time
+D) Content and importance score only
 
-**Question 2:** How does the data processing memory cleanup algorithm prioritize which entries to keep?  
-A) Random selection  
-B) First-in-first-out (FIFO)  
-C) Sorts by importance (40%), processing stage priority (40%), and recency (20%)  
-D) Only keeps the most recent entries  
+**Question 2:** How does the data processing memory cleanup algorithm prioritize which entries to keep?
+A) Random selection
+B) First-in-first-out (FIFO)
+C) Sorts by importance (40%), processing stage priority (40%), and recency (20%)
+D) Only keeps the most recent entries
 
-**Question 3:** Why are certain data processing tools marked as non-cacheable in the optimization system?  
-A) They consume too much memory  
-B) They have side effects, time-dependent results, or modify data state  
-C) They execute too slowly  
-D) They require special permissions  
+**Question 3:** Why are certain data processing tools marked as non-cacheable in the optimization system?
+A) They consume too much memory
+B) They have side effects, time-dependent results, or modify data state
+C) They execute too slowly
+D) They require special permissions
 
-**Question 4:** What technique does the data processing context compression use to fit within size limits?  
-A) Truncates all messages to the same length  
-B) Removes all older messages completely  
-C) Weights importance (50%) highest, then processing stage priority (30%), then recency (20%)  
-D) Compresses text using algorithms  
+**Question 4:** What technique does the data processing context compression use to fit within size limits?
+A) Truncates all messages to the same length
+B) Removes all older messages completely
+C) Weights importance (50%) highest, then processing stage priority (30%), then recency (20%)
+D) Compresses text using algorithms
 
-**Question 5:** What does the data processing performance monitoring system track to optimize agent responses?  
-A) Only response times  
-B) Memory usage exclusively  
-C) Response times, percentiles, cache hit rates, target achievement, and data volumes processed  
-D) Just error rates and failures  
+**Question 5:** What does the data processing performance monitoring system track to optimize agent responses?
+A) Only response times
+B) Memory usage exclusively
+C) Response times, percentiles, cache hit rates, target achievement, and data volumes processed
+D) Just error rates and failures
 
 [**🗂️ View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
 
@@ -796,23 +796,14 @@ D) Just error rates and failures
 
 You've now mastered performance optimization for bare metal data processing agents:
 
-✅ **Memory Management**: Implemented efficient memory usage and data processing history optimization  
-✅ **Tool Execution Speed**: Built caching and parallel execution systems for faster data processing tool usage  
-✅ **Response Time Optimization**: Created strategies for faster agent responses with data processing-specific fallback mechanisms  
+✅ **Memory Management**: Implemented efficient memory usage and data processing history optimization
+✅ **Tool Execution Speed**: Built caching and parallel execution systems for faster data processing tool usage
+✅ **Response Time Optimization**: Created strategies for faster agent responses with data processing-specific fallback mechanisms
 ✅ **Performance Monitoring**: Designed analytics systems for continuous performance improvement in data processing contexts
+---
 
 ## 🧭 Navigation
 
-### Related Modules:
-- **Core Session:** [Session 1 - Bare Metal Agents](Session1_Bare_Metal_Agents.md)
-- **Module A:** [Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md)
-- **Module C:** [Complex State Management](Session1_ModuleC_Complex_State_Management.md)
-
-**🗂️ Code Files:** All examples use files in `src/session1/`
-- `memory_optimized_agent.py` - Memory-efficient data processing agent implementations
-- `optimized_tools.py` - High-performance data processing tool execution
-- `fast_response_agent.py` - Speed-optimized data processing response generation
-
-**🚀 Quick Start:** Run `cd src/session1 && python demo_runner.py` to see performance optimization examples
-
+**Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns ←](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+**Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
 ---

@@ -1,24 +1,24 @@
 # ⚙️ Session 8 Module A: Advanced Monitoring & Observability
 
-> **⚙️ IMPLEMENTER PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer and 📝 Participant paths in [Session 8](Session8_Agno_Production_Ready_Agents.md)  
-> Time Investment: 3-4 hours  
-> Outcome: Master enterprise-scale monitoring, health checks, and observability systems for data pipelines  
+> **⚙️ IMPLEMENTER PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer and 📝 Participant paths in [Session 8](Session8_Agno_Production_Ready_Agents.md)
+> Time Investment: 3-4 hours
+> Outcome: Master enterprise-scale monitoring, health checks, and observability systems for data pipelines
 
 ## Advanced Learning Outcomes
 
-After completing this module, you will master:  
+After completing this module, you will master:
 
-- Enterprise-scale monitoring systems for production data pipelines  
-- Advanced health checking with comprehensive dependency validation  
-- Scaling patterns with Docker Compose and load balancing  
-- Production observability with distributed tracing and alerting  
+- Enterprise-scale monitoring systems for production data pipelines
+- Advanced health checking with comprehensive dependency validation
+- Scaling patterns with Docker Compose and load balancing
+- Production observability with distributed tracing and alerting
 
 ## Basic Scaling - When Data Success Becomes Your Biggest Challenge
 
 The irony of successful data applications: the better they work, the more data they attract, and the more likely they are to collapse under their own data processing success. Twitter's data pipeline struggles during viral events. Instagram's analytics during global campaigns. Even Google has faced scaling challenges with their data processing systems.
 
-Scaling data systems isn't just about handling more data - it's about handling data volume growth gracefully while maintaining data quality:  
+Scaling data systems isn't just about handling more data - it's about handling data volume growth gracefully while maintaining data quality:
 
 Here's the basic Docker Compose configuration structure:
 
@@ -65,7 +65,7 @@ Add Redis caching service for performance optimization:
 ```yaml
   redis:
     image: redis:alpine
-    
+
   nginx:
     image: nginx:alpine
     ports:
@@ -85,7 +85,7 @@ This configuration provides basic horizontal scaling for your Agno data processi
 
 A mission-critical data pipeline requires monitors tracking every data ingestion rate, every processing latency, every quality metric. The moment data freshness degrades or throughput drops, alerts fire and data engineers rush to prevent downstream impact.
 
-Your production data systems deserve this level of observability. Health monitoring isn't paranoia for data pipelines - it's professional responsibility to data consumers:  
+Your production data systems deserve this level of observability. Health monitoring isn't paranoia for data pipelines - it's professional responsibility to data consumers:
 
 ```python
 from agno.monitoring import HealthChecker
@@ -117,7 +117,7 @@ Test agent responsiveness and database connectivity:
             # Test agent responsiveness with data processing query
             response = await self.agent.arun("health check for data processing", timeout=5)
             checks["agent_responsive"] = bool(response.content)
-            
+
             # Test database connection for metadata storage
             if hasattr(self.agent.storage, 'test_connection'):
                 checks["database_connected"] = await self.agent.storage.test_connection()
@@ -129,15 +129,15 @@ Verify cache availability and system resources for data processing:
             # Test cache availability for data pattern caching
             if hasattr(self.agent, 'cache'):
                 checks["cache_available"] = await self.agent.cache.ping()
-            
+
             # Check memory usage for data processing capacity
             import psutil
             memory = psutil.virtual_memory()
             checks["data_processing_capacity"] = f"{memory.percent}% memory used"
-            
+
         except Exception as e:
             checks["error"] = str(e)
-        
+
         return checks
 ```
 
@@ -155,7 +155,7 @@ async def detailed_data_health():
 
 ### Distributed Tracing for Data Processing
 
-When dealing with complex data processing pipelines, understanding the flow of data through different components becomes crucial. Distributed tracing helps track data processing requests across multiple services:  
+When dealing with complex data processing pipelines, understanding the flow of data through different components becomes crucial. Distributed tracing helps track data processing requests across multiple services:
 
 ```python
 from agno.tracing import DistributedTracer
@@ -175,13 +175,13 @@ Implement tracing for data processing operations:
         with self.tracer.start_span("data_processing_request") as span:
             span.set_tag("query_length", len(query))
             span.set_tag("trace_id", trace_id)
-            
+
             try:
                 # Process with the agent
                 response = await self.agent.arun(query)
                 span.set_tag("response_length", len(response.content))
                 span.set_tag("status", "success")
-                
+
                 return response.content
 ```
 
@@ -199,7 +199,7 @@ Handle errors and span completion:
 
 ### Metrics Collection and Alerting
 
-Enterprise data processing systems need comprehensive metrics collection with alerting capabilities:  
+Enterprise data processing systems need comprehensive metrics collection with alerting capabilities:
 
 ```python
 from prometheus_client import Counter, Histogram, Gauge
@@ -224,7 +224,7 @@ Define latency and capacity metrics:
             'Data processing request duration',
             ['query_type']
         )
-        
+
         # Gauges for current system state
         self.active_sessions = Gauge(
             'agno_active_sessions',
@@ -249,7 +249,7 @@ class MetricsCollectingAgent:
     def __init__(self, agent: Agent):
         self.agent = agent
         self.metrics = DataProcessingMetrics()
-        
+
     async def process_with_metrics(self, query: str, query_type: str = "general"):
         start_time = time.time()
         try:
@@ -265,7 +265,7 @@ class MetricsCollectingAgent:
 
 ### Log Aggregation and Analysis
 
-Production data processing systems generate massive amounts of log data. Proper log aggregation and analysis are essential for troubleshooting and optimization:  
+Production data processing systems generate massive amounts of log data. Proper log aggregation and analysis are essential for troubleshooting and optimization:
 
 ```python
 import structlog
@@ -283,7 +283,7 @@ class DataProcessingLogger:
             logger_factory=structlog.stdlib.LoggerFactory(),
             cache_logger_on_first_use=True,
         )
-        
+
         self.logger = structlog.get_logger("agno.data.processing")
 ```
 
@@ -297,7 +297,7 @@ Log data processing events with structured data:
             timestamp=time.time(),
             **kwargs
         )
-    
+
     def log_data_quality_check(self, quality_score: float, data_size: int, issues: list):
         """Log data quality assessment results."""
         self.logger.info(
@@ -317,23 +317,23 @@ class LoggingDataAgent:
     def __init__(self, agent: Agent):
         self.agent = agent
         self.logger = DataProcessingLogger()
-        
+
     async def process_with_logging(self, query: str, session_id: str):
         self.logger.log_processing_event(
             "processing_started",
             query_length=len(query),
             session_id=session_id
         )
-        
+
         try:
             response = await self.agent.arun(query, session_id=session_id)
-            
+
             self.logger.log_processing_event(
                 "processing_completed",
                 response_length=len(response.content),
                 session_id=session_id
             )
-            
+
             return response.content
         except Exception as e:
             self.logger.log_processing_event(
@@ -348,7 +348,7 @@ class LoggingDataAgent:
 
 ### Container Health and Resource Monitoring
 
-When deploying Agno agents in containerized environments, monitoring container health and resource usage becomes critical:  
+When deploying Agno agents in containerized environments, monitoring container health and resource usage becomes critical:
 
 ```python
 import docker
@@ -357,17 +357,17 @@ import psutil
 class ContainerMonitor:
     def __init__(self):
         self.docker_client = docker.from_env()
-        
+
     async def get_container_stats(self, container_name: str):
         """Get comprehensive container statistics."""
         try:
             container = self.docker_client.containers.get(container_name)
             stats = container.stats(stream=False)
-            
+
             # Calculate CPU usage percentage
             cpu_stats = stats['cpu_stats']
             precpu_stats = stats['precpu_stats']
-            
+
             cpu_usage = self._calculate_cpu_percent(cpu_stats, precpu_stats)
 ```
 
@@ -379,12 +379,12 @@ Calculate memory usage and network statistics:
             memory_usage = memory_stats.get('usage', 0)
             memory_limit = memory_stats.get('limit', 0)
             memory_percent = (memory_usage / memory_limit) * 100 if memory_limit else 0
-            
+
             # Network I/O
             networks = stats.get('networks', {})
             rx_bytes = sum(net.get('rx_bytes', 0) for net in networks.values())
             tx_bytes = sum(net.get('tx_bytes', 0) for net in networks.values())
-            
+
             return {
                 "cpu_percent": cpu_usage,
                 "memory_percent": memory_percent,
@@ -404,7 +404,7 @@ Helper method for CPU calculation:
         """Calculate CPU usage percentage."""
         cpu_delta = cpu_stats['cpu_usage']['total_usage'] - precpu_stats['cpu_usage']['total_usage']
         system_delta = cpu_stats['system_cpu_usage'] - precpu_stats['system_cpu_usage']
-        
+
         if system_delta > 0 and cpu_delta > 0:
             return (cpu_delta / system_delta) * len(cpu_stats['cpu_usage']['percpu_usage']) * 100
         return 0.0
@@ -412,7 +412,7 @@ Helper method for CPU calculation:
 
 ### Application Performance Monitoring (APM)
 
-Integrate with APM solutions for comprehensive application monitoring:  
+Integrate with APM solutions for comprehensive application monitoring:
 
 ```python
 from agno.apm import APMIntegration
@@ -432,14 +432,14 @@ Instrument data processing methods for APM tracking:
         """Data processing with APM monitoring."""
         # Custom metrics for New Relic
         newrelic.agent.add_custom_attribute('query_length', len(query))
-        
+
         try:
             response = await self.agent.arun(query)
-            
+
             # Record success metrics
             newrelic.agent.add_custom_attribute('response_length', len(response.content))
             newrelic.agent.add_custom_attribute('processing_status', 'success')
-            
+
             return response.content
         except Exception as e:
             # Record error metrics
@@ -463,7 +463,7 @@ Custom business metrics for data processing:
 
 ### Dependency Health Verification
 
-Production systems depend on multiple external services. Comprehensive health checks must verify all dependencies:  
+Production systems depend on multiple external services. Comprehensive health checks must verify all dependencies:
 
 ```python
 import aiohttp
@@ -510,7 +510,7 @@ Check Redis and external API health:
             return {"status": "healthy"}
         except Exception as e:
             return {"status": "unhealthy", "error": str(e)}
-    
+
     async def _check_external_api(self):
         """Check external API availability."""
         try:
@@ -533,30 +533,30 @@ File system and comprehensive health check:
             import shutil
             total, used, free = shutil.disk_usage("/")
             free_percent = (free / total) * 100
-            
+
             if free_percent < 10:
                 return {"status": "warning", "free_percent": free_percent}
             else:
                 return {"status": "healthy", "free_percent": free_percent}
         except Exception as e:
             return {"status": "unhealthy", "error": str(e)}
-    
+
     async def check_all_dependencies(self):
         """Check all dependencies and return comprehensive status."""
         results = {}
         for name, check_func in self.dependencies.items():
             results[name] = await check_func()
-        
+
         # Determine overall health
         unhealthy = [name for name, status in results.items() if status.get("status") == "unhealthy"]
         warning = [name for name, status in results.items() if status.get("status") == "warning"]
-        
+
         overall_status = "healthy"
         if unhealthy:
             overall_status = "unhealthy"
         elif warning:
             overall_status = "degraded"
-        
+
         return {
             "overall_status": overall_status,
             "dependencies": results,
@@ -564,9 +564,10 @@ File system and comprehensive health check:
             "warning_count": len(warning)
         }
 ```
+---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Main Session](Session8_Agno_Production_Ready_Agents.md) | [Next Module B: Enterprise Architecture →](Session8_ModuleB_Enterprise_Architecture_Security.md)
-
+**Previous:** [Session 7 - First ADK Agent ←](Session7_First_ADK_Agent.md)
+**Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
 ---

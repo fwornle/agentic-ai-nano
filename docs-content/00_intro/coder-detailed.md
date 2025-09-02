@@ -200,7 +200,7 @@ For public access, you'll need to set up your local development environment. Whi
 Before beginning the course modules, ensure you have:
 
 1. **Python 3.11+** installed with pip and virtual environment support
-2. **Git** for version control and cloning repositories  
+2. **Git** for version control and cloning repositories
 3. **Code editor** (VS Code recommended with Python extension)
 4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
 

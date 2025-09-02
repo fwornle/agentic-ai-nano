@@ -1,6 +1,6 @@
 # Session 3 - Module A: Enterprise Agent Patterns
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 3 core content first.
 
 Enterprise MCP agent deployments require sophisticated patterns for production reliability, including circuit breakers, connection pooling, security controls, and comprehensive monitoring.
@@ -48,7 +48,7 @@ Configuration parameters balance **fault detection speed** with **stability**. T
 ```python
 class CircuitBreaker:
     """Circuit breaker for MCP server calls with enterprise reliability."""
-    
+
     def __init__(self, name: str, config: CircuitBreakerConfig):
         self.name = name
         self.config = config
@@ -75,7 +75,7 @@ Comprehensive metrics enable **operational visibility** into circuit breaker beh
     async def call(self, func: Callable, *args, **kwargs) -> Any:
         """Execute function with circuit breaker protection."""
         self.metrics["total_requests"] += 1
-        
+
         if self.state == CircuitState.OPEN:
             if time.time() - self.last_failure_time > self.config.recovery_timeout:
                 self.state = CircuitState.HALF_OPEN
@@ -94,10 +94,10 @@ The call method implements the **core circuit breaker logic**. Request counting 
                 func(*args, **kwargs),
                 timeout=self.config.timeout
             )
-            
+
             await self._on_success()
             return result
-            
+
         except Exception as e:
             await self._on_failure()
             raise e
@@ -109,7 +109,7 @@ Operation execution includes **timeout protection** to prevent hanging on unresp
     async def _on_success(self):
         """Handle successful operation."""
         self.metrics["successful_requests"] += 1
-        
+
         if self.state == CircuitState.HALF_OPEN:
             self.success_count += 1
             if self.success_count >= self.config.success_threshold:
@@ -128,13 +128,13 @@ Success handling implements **recovery verification**. In HALF_OPEN state, conse
         self.metrics["failed_requests"] += 1
         self.failure_count += 1
         self.last_failure_time = time.time()
-        
-        if (self.state == CircuitState.CLOSED and 
+
+        if (self.state == CircuitState.CLOSED and
             self.failure_count >= self.config.failure_threshold):
             self.state = CircuitState.OPEN
             self.metrics["circuit_opens"] += 1
             logger.error(f"Circuit breaker {self.name} OPENED - service failing")
-        
+
         elif self.state == CircuitState.HALF_OPEN:
             self.state = CircuitState.OPEN
             logger.warning(f"Circuit breaker {self.name} back to OPEN - service still failing")
@@ -172,7 +172,7 @@ This import section establishes the foundation for enterprise MCP management. Th
 ```python
 class ConnectionPool:
     """Manages a pool of MCP adapter connections for high concurrency."""
-    
+
     def __init__(self, server_config: MCPServerConfig, pool_size: int = 5):
         self.server_config = server_config
         self.pool_size = pool_size
@@ -188,7 +188,7 @@ The ConnectionPool class implements the **object pool pattern** - a fundamental 
             "connections_reused": 0,
             "pool_exhausted_count": 0
         }
-    
+
     async def initialize(self):
         """Pre-populate connection pool."""
         for _ in range(self.pool_size):
@@ -241,7 +241,7 @@ The context manager pattern ensures **resource safety** - connections are automa
 
 ```python
             yield adapter
-            
+
         finally:
             # Return connection to pool if still valid
             if adapter:
@@ -258,7 +258,7 @@ The `finally` block implements the **cleanup guarantee** - connections are alway
 ```python
 class EnterpriseMCPManager:
     """Production-grade MCP server manager with advanced patterns."""
-    
+
     def __init__(self, server_configs: List[MCPServerConfig]):
         self.server_configs = {config.name: config for config in server_configs}
         self.connection_pools: Dict[str, ConnectionPool] = {}
@@ -301,7 +301,7 @@ Initialization follows the **fail-fast principle** - all critical resources are 
                 timeout=config.timeout
             )
             self.circuit_breakers[name] = CircuitBreaker(name, cb_config)
-            
+
             self.health_status[name] = True
             logger.info(f"Initialized enterprise MCP manager for {name}")
 ```
@@ -311,12 +311,12 @@ Circuit breaker configuration balances **fault tolerance** with **recovery speed
 ```python
         # Start monitoring task
         self._monitoring_task = asyncio.create_task(self._monitoring_loop())
-    
+
     async def call_tool(self, server_name: str, tool_name: str, args: Dict[str, Any]) -> Any:
         """Call tool with enterprise patterns: pooling, circuit breaker, metrics."""
         start_time = time.time()
         self.metrics["total_requests"] += 1
-        
+
         if server_name not in self.connection_pools:
             raise ValueError(f"Server {server_name} not configured")
 ```
@@ -326,12 +326,12 @@ The monitoring loop provides **active health checking** - continuously verifying
 ```python
         pool = self.connection_pools[server_name]
         circuit_breaker = self.circuit_breakers[server_name]
-        
+
         try:
             async def _call_with_pool():
                 async with pool.get_connection() as adapter:
                     return await adapter.call_tool(tool_name, args)
-            
+
             # Execute with circuit breaker protection
             result = await circuit_breaker.call(_call_with_pool)
 ```
@@ -343,9 +343,9 @@ This demonstrates **pattern composition** - the circuit breaker wraps the connec
             response_time = time.time() - start_time
             self.metrics["successful_requests"] += 1
             self._update_average_response_time(response_time)
-            
+
             return result
-            
+
         except Exception as e:
             self.metrics["failed_requests"] += 1
             self.health_status[server_name] = False
@@ -360,7 +360,7 @@ Metrics are updated in both success and failure paths to ensure complete observa
         """Update rolling average response time."""
         current_avg = self.metrics["average_response_time"]
         total_requests = self.metrics["successful_requests"]
-        
+
         # Calculate rolling average
         self.metrics["average_response_time"] = (
             (current_avg * (total_requests - 1) + response_time) / total_requests
@@ -394,9 +394,9 @@ The monitoring loop implements **proactive health checking** with graceful error
             pool = self.connection_pools[server_name]
             async with pool.get_connection() as adapter:
                 await adapter.list_tools()
-            
+
             self.health_status[server_name] = True
-            
+
         except Exception as e:
             self.health_status[server_name] = False
             logger.warning(f"Health check failed for {server_name}: {e}")
@@ -415,7 +415,7 @@ Health checks use a lightweight operation (`list_tools`) that exercises the comp
                 "connection_pool_metrics": self.connection_pools[name].metrics,
                 "health_status": self.health_status[name]
             }
-        
+
         return {
             "global_metrics": self.metrics,
             "server_metrics": server_metrics
@@ -433,7 +433,7 @@ The metrics endpoint provides **hierarchical observability** - global system met
                 await self._monitoring_task
             except asyncio.CancelledError:
                 pass
-        
+
         # Close all connections
         for pool in self.connection_pools.values():
             while pool.total_connections > 0:
@@ -493,7 +493,7 @@ UserContext encapsulates all security-relevant user information in a single immu
 ```python
 class EnterpriseAuthenticator:
     """Enterprise authentication and authorization for MCP agents."""
-    
+
     def __init__(self, jwt_secret: str, default_permissions: Dict[str, List[Permission]]):
         self.jwt_secret = jwt_secret
         self.default_permissions = default_permissions
@@ -508,7 +508,7 @@ The authenticator maintains role-based access control (RBAC) through `default_pe
         """Authenticate JWT token and return user context."""
         try:
             payload = jwt.decode(token, self.jwt_secret, algorithms=["HS256"])
-            
+
             user_id = payload.get("user_id")
             roles = set(payload.get("roles", []))
             session_id = payload.get("session_id")
@@ -522,7 +522,7 @@ JWT token validation uses HMAC-SHA256 algorithm providing cryptographic integrit
             if time.time() > expires_at:
                 self._audit("TOKEN_EXPIRED", {"user_id": user_id})
                 return None
-            
+
             # Calculate permissions from roles
             permissions = set()
             for role in roles:
@@ -540,10 +540,10 @@ Expiration checking prevents **replay attacks** using old credentials. All secur
                 expires_at=expires_at,
                 organization_id=organization_id
             )
-            
+
             self.active_sessions[session_id] = user_context
             self._audit("USER_AUTHENTICATED", {"user_id": user_id, "roles": list(roles)})
-            
+
             return user_context
 ```
 
@@ -561,7 +561,7 @@ Invalid token handling implements **security-first design** - any JWT validation
     def authorize_tool_access(self, user_context: UserContext, server_name: str, tool_name: str) -> bool:
         """Check if user has permission to access specific tool."""
         required_permission = self._get_required_permission(server_name, tool_name)
-        
+
         if required_permission in user_context.permissions:
             self._audit("TOOL_ACCESS_GRANTED", {
                 "user_id": user_context.user_id,
@@ -598,7 +598,7 @@ Access denial auditing captures both the attempt and the required permission, en
             ("database", "insert"): Permission.MODIFY_DATABASE,
             ("database", "update"): Permission.MODIFY_DATABASE,
         }
-        
+
         return permission_map.get((server_name, tool_name), Permission.ADMIN_TOOLS)
 ```
 
@@ -612,10 +612,10 @@ Permission mapping implements **declarative security policy** - clearly defining
             "action": action,
             "details": details
         }
-        
+
         self.audit_log.append(audit_entry)
         logger.info(f"SECURITY_AUDIT: {action} - {details}")
-        
+
         # Keep only last 1000 entries in memory
         if len(self.audit_log) > 1000:
             self.audit_log = self.audit_log[-1000:]
@@ -628,12 +628,12 @@ Comprehensive audit logging captures all security events with timestamps and con
         """Retrieve audit log entries."""
         if user_id:
             filtered_log = [
-                entry for entry in self.audit_log 
+                entry for entry in self.audit_log
                 if entry["details"].get("user_id") == user_id
             ]
         else:
             filtered_log = self.audit_log
-        
+
         return filtered_log[-limit:]
 ```
 
@@ -675,7 +675,7 @@ The PerformanceMetrics dataclass captures the essential dimensions for enterpris
 ```python
 class PerformanceTracker:
     """Enterprise-grade performance monitoring for MCP agents."""
-    
+
     def __init__(self, retention_hours: int = 24):
         self.retention_hours = retention_hours
         self.metrics: deque = deque(maxlen=10000)  # Keep last 10k metrics
@@ -703,10 +703,10 @@ Metric recording triggers immediate alert evaluation - implementing **real-time 
         """Get comprehensive statistics for a server."""
         cutoff_time = time.time() - (hours * 3600)
         server_metrics = [
-            m for m in self.metrics 
+            m for m in self.metrics
             if m.server_name == server_name and m.timestamp >= cutoff_time
         ]
-        
+
         if not server_metrics:
             return {"error": "No metrics found for server"}
 ```
@@ -716,9 +716,9 @@ Time-based filtering provides **sliding window analysis** - essential for unders
 ```python
         successful_metrics = [m for m in server_metrics if m.success]
         failed_metrics = [m for m in server_metrics if not m.success]
-        
+
         response_times = [m.response_time for m in successful_metrics]
-        
+
         stats = {
             "total_requests": len(server_metrics),
             "successful_requests": len(successful_metrics),
@@ -750,7 +750,7 @@ Comprehensive response time statistics provide different operational insights: *
         for metric in failed_metrics:
             error_counts[metric.error_type or "unknown"] += 1
         stats["error_breakdown"] = dict(error_counts)
-        
+
         return stats
 ```
 
@@ -761,10 +761,10 @@ Error categorization enables **root cause analysis** - distinguishing between ti
         """Get statistics for a specific tool across all servers."""
         cutoff_time = time.time() - (hours * 3600)
         tool_metrics = [
-            m for m in self.metrics 
+            m for m in self.metrics
             if m.tool_name == tool_name and m.timestamp >= cutoff_time
         ]
-        
+
         if not tool_metrics:
             return {"error": "No metrics found for tool"}
 ```
@@ -776,13 +776,13 @@ Tool-centric analysis supports **feature-level monitoring** - understanding how 
         server_stats = defaultdict(list)
         for metric in tool_metrics:
             server_stats[metric.server_name].append(metric)
-        
+
         result = {
             "total_requests": len(tool_metrics),
             "servers_used": list(server_stats.keys()),
             "per_server_stats": {}
         }
-        
+
         for server, metrics in server_stats.items():
             successful = [m for m in metrics if m.success]
             result["per_server_stats"][server] = {
@@ -812,7 +812,7 @@ Custom percentile calculation provides precise control over statistical analysis
         # Only check alerts every 100 metrics to avoid overhead
         if len(self.metrics) % 100 != 0:
             return
-        
+
         # Check last hour of data
         recent_stats = self.get_server_stats("all", hours=1)
         if "error" in recent_stats:
@@ -828,7 +828,7 @@ Throttled alert checking implements **computational efficiency** - running expen
                 "p95_response_time": recent_stats["p95_response_time"],
                 "threshold": self.alert_thresholds["response_time_p95"]
             })
-        
+
         # Check error rate
         if recent_stats.get("error_rate", 0) > self.alert_thresholds["error_rate"]:
             self._trigger_alert("HIGH_ERROR_RATE", {
@@ -859,10 +859,10 @@ Availability monitoring detects systemic failures that might not trigger individ
             "details": details,
             "resolved": False
         }
-        
+
         self.alerts.append(alert)
         logger.warning(f"ALERT: {alert_type} - {details}")
-        
+
         # Keep only last 100 alerts
         if len(self.alerts) > 100:
             self.alerts = self.alerts[-100:]
@@ -875,13 +875,13 @@ Alert structures capture essential metadata for incident management: timestamp f
         """Get overall system health status."""
         recent_time = time.time() - 300  # Last 5 minutes
         recent_metrics = [m for m in self.metrics if m.timestamp >= recent_time]
-        
+
         if not recent_metrics:
             return {"status": "UNKNOWN", "reason": "No recent metrics"}
-        
+
         error_rate = len([m for m in recent_metrics if not m.success]) / len(recent_metrics)
         avg_response_time = statistics.mean([m.response_time for m in recent_metrics if m.success])
-        
+
         if error_rate > 0.1:  # 10% error rate
             return {"status": "CRITICAL", "reason": "High error rate", "error_rate": error_rate}
         elif error_rate > 0.05:  # 5% error rate
@@ -896,50 +896,55 @@ The health status endpoint provides **traffic light monitoring** - a simple red/
 
 ## Module Assessment
 
-**Question 1:** What is the primary purpose of the circuit breaker pattern in enterprise MCP deployments?  
-A) Improve performance  
-B) Prevent cascading failures  
-C) Reduce memory usage  
-D) Simplify configuration  
+**Question 1:** What is the primary purpose of the circuit breaker pattern in enterprise MCP deployments?
+A) Improve performance
+B) Prevent cascading failures
+C) Reduce memory usage
+D) Simplify configuration
 
-**Question 2:** In the connection pooling pattern, what happens when the pool is exhausted?  
-A) Requests are rejected  
-B) New connections are created temporarily  
-C) The system waits indefinitely  
-D) Connections are shared unsafely  
+**Question 2:** In the connection pooling pattern, what happens when the pool is exhausted?
+A) Requests are rejected
+B) New connections are created temporarily
+C) The system waits indefinitely
+D) Connections are shared unsafely
 
-**Question 3:** Which authentication standard does the enterprise security pattern implement?  
-A) Basic authentication  
-B) OAuth 2.0  
-C) JWT tokens  
-D) API keys  
+**Question 3:** Which authentication standard does the enterprise security pattern implement?
+A) Basic authentication
+B) OAuth 2.0
+C) JWT tokens
+D) API keys
 
-**Question 4:** What triggers performance alerts in the monitoring system?  
-A) Manual configuration only  
-B) Threshold violations for response time, error rate, or availability  
-C) User complaints  
-D) Server restart events  
+**Question 4:** What triggers performance alerts in the monitoring system?
+A) Manual configuration only
+B) Threshold violations for response time, error rate, or availability
+C) User complaints
+D) Server restart events
 
-**Question 5:** How does the enterprise MCP manager handle server failures?  
-A) Immediate shutdown  
-B) Circuit breaker protection with automatic recovery testing  
-C) Manual intervention required  
-D) Load balancing to other servers  
+**Question 5:** How does the enterprise MCP manager handle server failures?
+A) Immediate shutdown
+B) Circuit breaker protection with automatic recovery testing
+C) Manual intervention required
+D) Load balancing to other servers
 
-**Question 6:** What is the benefit of audit logging in enterprise deployments?  
-A) Performance optimization  
-B) Compliance and security forensics  
-C) Debugging code issues  
-D) User experience improvement  
+**Question 6:** What is the benefit of audit logging in enterprise deployments?
+A) Performance optimization
+B) Compliance and security forensics
+C) Debugging code issues
+D) User experience improvement
 
-**Question 7:** In the performance tracking system, what does P95 response time represent?  
-A) Average response time  
-B) 95% of requests complete within this time  
-C) Maximum response time  
-D) 95% availability percentage  
+**Question 7:** In the performance tracking system, what does P95 response time represent?
+A) Average response time
+B) 95% of requests complete within this time
+C) Maximum response time
+D) 95% availability percentage
 
 [**View Module A Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
 
 ---
+---
 
-[← Back to Session 3](Session3_LangChain_MCP_Integration.md) | [Next: Module B →](Session3_ModuleB_Advanced_Workflows.md)
+## 🧭 Navigation
+
+**Previous:** [Session 2 - FileSystem MCP Server ←](Session2_FileSystem_MCP_Server.md)
+**Next:** [Session 4 - Production MCP Deployment →](Session4_Production_MCP_Deployment.md)
+---

@@ -1,18 +1,18 @@
 # ⚙️ Session 6 Advanced: NodeRAG Technical Implementation
 
-> **⚙️ IMPLEMENTER PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer and 📝 Participant paths  
-> Time Investment: 3-4 hours  
-> Outcome: Deep mastery of NodeRAG algorithms and optimization  
+> **⚙️ IMPLEMENTER PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer and 📝 Participant paths
+> Time Investment: 3-4 hours
+> Outcome: Deep mastery of NodeRAG algorithms and optimization
 
 ## Advanced Learning Outcomes
 
-After completing this module, you will master:  
+After completing this module, you will master:
 
-- NodeRAG's three-stage processing pipeline implementation  
-- Personalized PageRank for heterogeneous graphs  
-- HNSW integration for hybrid similarity-structure search  
-- Advanced graph optimization techniques  
+- NodeRAG's three-stage processing pipeline implementation
+- Personalized PageRank for heterogeneous graphs
+- HNSW integration for hybrid similarity-structure search
+- Advanced graph optimization techniques
 
 ## The Three-Stage NodeRAG Processing Pipeline
 
@@ -23,7 +23,7 @@ NodeRAG performs multi-granularity decomposition that creates specialized node t
 ```python
 def noderag_decomposition(document):
     """NodeRAG Stage 1: Multi-granularity knowledge decomposition"""
-    
+
     # Initialize parallel extraction systems
     semantic_extractor = SemanticConceptExtractor()
     entity_extractor = CanonicalEntityExtractor()
@@ -34,7 +34,7 @@ This initialization sets up specialized extractors for different knowledge types
 
 ```python
     # Parallel specialized extraction
-    semantic_units = semantic_extractor.extract(document)  
+    semantic_units = semantic_extractor.extract(document)
     entities = entity_extractor.extract(document)
     relationships = relationship_extractor.extract(document)
     attributes = extract_entity_properties(document)
@@ -60,7 +60,7 @@ This stage builds the heterogeneous graph structure by creating specialized conn
 ```python
 def noderag_augmentation(decomposition_result):
     """NodeRAG Stage 2: Heterogeneous graph construction"""
-    
+
     # Create typed connections between specialized nodes
     semantic_entity_links = link_concepts_to_entities(
         decomposition_result['semantic_units'],
@@ -151,10 +151,10 @@ Reasoning pathways represent coherent chains of logical connections that enable 
 Traditional PageRank assumes uniform node types, but NodeRAG requires type-aware importance calculation:
 
 ```python
-def personalized_pagerank(graph, node_type_weights, 
+def personalized_pagerank(graph, node_type_weights,
                          damping=0.85, max_iterations=100):
     """Personalized PageRank for heterogeneous graphs"""
-    
+
     # Initialize scores with type-aware priors
     node_scores = {}
     for node, data in graph.nodes(data=True):
@@ -169,7 +169,7 @@ Type-aware initialization ensures different node types start with appropriate im
     # Iterative score propagation with type awareness
     for iteration in range(max_iterations):
         prev_scores = node_scores.copy()
-        
+
         for node in graph.nodes():
             # Calculate incoming score from neighbors
             incoming_score = 0.0
@@ -179,10 +179,10 @@ Type-aware initialization ensures different node types start with appropriate im
                     source_type=neighbor_type,
                     target_type=graph.nodes[node].get('type')
                 )
-                
+
                 neighbor_outgoing = len(list(graph.successors(neighbor)))
                 if neighbor_outgoing > 0:
-                    incoming_score += (prev_scores[neighbor] * 
+                    incoming_score += (prev_scores[neighbor] *
                                      type_transfer_rate / neighbor_outgoing)
 ```
 
@@ -192,9 +192,9 @@ The type transfer rate modulates how importance flows between different node typ
             # Apply damping with personalized restart
             node_type = graph.nodes[node].get('type', 'unknown')
             personalization_weight = node_type_weights.get(node_type, 0.1)
-            
+
             node_scores[node] = (
-                (1 - damping) * personalization_weight + 
+                (1 - damping) * personalization_weight +
                 damping * incoming_score
             )
 ```
@@ -210,7 +210,7 @@ HNSW provides efficient similarity search, but NodeRAG integrates it directly in
 ```python
 def build_hnsw_graph_edges(all_nodes, similarity_threshold=0.75):
     """Build HNSW similarity edges for graph integration"""
-    
+
     # Extract embeddings from all node types
     node_embeddings = {}
     for node_type, nodes in all_nodes.items():
@@ -228,11 +228,11 @@ Embedding extraction preserves both the vector representation and the semantic t
 ```python
     # Build HNSW index with type-aware similarity
     import hnswlib
-    
+
     dim = len(next(iter(node_embeddings.values()))['embedding'])
     hnsw_index = hnswlib.Index(space='cosine', dim=dim)
     hnsw_index.init_index(max_elements=len(node_embeddings))
-    
+
     # Add embeddings with node type metadata
     node_ids = list(node_embeddings.keys())
     embeddings = [node_embeddings[nid]['embedding'] for nid in node_ids]
@@ -244,25 +244,25 @@ The HNSW index maintains node ID mapping to preserve the connection between simi
 ```python
     # Generate similarity edges with type compatibility
     similarity_edges = []
-    
+
     for node_id in node_ids:
         # Query for similar nodes
         similar_ids, distances = hnsw_index.knn_query(
-            node_embeddings[node_id]['embedding'], 
+            node_embeddings[node_id]['embedding'],
             k=10  # Top 10 similar nodes
         )
-        
+
         source_type = node_embeddings[node_id]['type']
-        
+
         for sim_id, distance in zip(similar_ids[0], distances[0]):
             if sim_id != node_id:  # Skip self-similarity
                 similarity_score = 1.0 - distance
                 target_type = node_embeddings[sim_id]['type']
-                
+
                 # Check type compatibility for similarity connections
-                if (similarity_score >= similarity_threshold and 
+                if (similarity_score >= similarity_threshold and
                     types_compatible_for_similarity(source_type, target_type)):
-                    
+
                     similarity_edges.append({
                         'source': node_id,
                         'target': sim_id,
@@ -271,7 +271,7 @@ The HNSW index maintains node ID mapping to preserve the connection between simi
                         'source_type': source_type,
                         'target_type': target_type
                     })
-    
+
     return similarity_edges
 ```
 
@@ -282,7 +282,7 @@ Not all node types should be connected through similarity - the compatibility ma
 ```python
 def types_compatible_for_similarity(type1, type2):
     """Determine if two node types should have similarity connections"""
-    
+
     # Define compatibility matrix for similarity connections
     compatibility_matrix = {
         'semantic_unit': ['semantic_unit', 'entity', 'summary'],
@@ -307,13 +307,13 @@ NodeRAG analyzes query patterns to optimize graph structure for common access pa
 ```python
 def optimize_for_reasoning(graph, pathways, access_patterns):
     """Optimize graph structure based on reasoning patterns"""
-    
+
     # Analyze frequent pathway patterns
     frequent_patterns = analyze_pathway_frequency(pathways)
-    
+
     # Identify bottleneck nodes that appear in many pathways
     bottleneck_nodes = identify_bottlenecks(
-        pathways, 
+        pathways,
         threshold=0.8  # Nodes appearing in >80% of pathways
     )
 ```
@@ -327,7 +327,7 @@ Bottleneck identification helps prioritize which nodes should have optimized acc
         if len(pattern) >= 3:  # Multi-hop patterns only
             source_node = pattern[0]
             target_node = pattern[-1]
-            
+
             # Create direct edge with aggregated evidence
             shortcut_weight = calculate_pathway_strength(pattern)
             shortcut_edges.append({
@@ -350,7 +350,7 @@ Large-scale NodeRAG systems require careful memory management:
 ```python
 class OptimizedNodeRAGGraph:
     """Memory-efficient NodeRAG graph implementation"""
-    
+
     def __init__(self, compression_level='medium'):
         self.compression_level = compression_level
         self.node_store = {}
@@ -363,24 +363,27 @@ The LRU cache ensures frequently accessed embeddings remain in memory while less
 ```python
     def add_node_with_compression(self, node_id, node_data):
         """Add node with appropriate compression based on type"""
-        
+
         node_type = node_data.get('type')
-        
+
         if node_type in ['document', 'summary']:
             # Compress text content for large nodes
             compressed_content = self.compress_text(node_data['content'])
             node_data['content'] = compressed_content
             node_data['compressed'] = True
-            
+
         elif node_type == 'entity':
             # Keep entity data uncompressed for fast access
             pass
-            
+
         self.node_store[node_id] = node_data
 ```
 
 Selective compression balances memory usage with access performance based on node type characteristics and access patterns.
+---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Main Session](Session6_Graph_Based_RAG.md) | [Next Advanced →](Session6_ModuleA_Advanced_Algorithms.md)
+**Previous:** [Session 5 - RAG Evaluation & Quality Assessment ←](Session5_RAG_Evaluation_Quality_Assessment.md)
+**Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+---

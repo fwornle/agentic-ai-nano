@@ -2,111 +2,111 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?  
+**Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?
 
-A) To reduce computational costs  
-B) To improve individual agent performance  
-C) To enable multiple agents to collaborate and coordinate actions ✅  
-D) To replace human operators  
+A) To reduce computational costs
+B) To improve individual agent performance
+C) To enable multiple agents to collaborate and coordinate actions ✅
+D) To replace human operators
 
 **Explanation:** A2A communication enables multiple AI agents to collaborate, share information, and coordinate actions to solve complex problems requiring diverse expertise and coordination.
 
 ---
 
-**Question 2:** Which message type is used for finding agents with specific capabilities?  
+**Question 2:** Which message type is used for finding agents with specific capabilities?
 
-A) RESPONSE  
-B) HEARTBEAT  
-C) DISCOVERY ✅  
-D) REQUEST  
+A) RESPONSE
+B) HEARTBEAT
+C) DISCOVERY ✅
+D) REQUEST
 
 **Explanation:** DISCOVERY messages are specifically designed for agent discovery requests, allowing agents to find other agents with required capabilities in the network.
 
 ---
 
-**Question 3:** What information is essential for proper A2A message routing?  
+**Question 3:** What information is essential for proper A2A message routing?
 
-A) Just the timestamp  
-B) Only the priority level  
-C) Only the message content  
-D) Sender ID, recipient ID, and message type ✅  
+A) Just the timestamp
+B) Only the priority level
+C) Only the message content
+D) Sender ID, recipient ID, and message type ✅
 
 **Explanation:** Proper message routing requires sender identification, recipient targeting, and message type classification to ensure messages reach the correct destination with appropriate handling.
 
 ---
 
-**Question 4:** What is the difference between orchestration and choreography in multi-agent systems?  
+**Question 4:** What is the difference between orchestration and choreography in multi-agent systems?
 
-A) Orchestration uses centralized control, choreography uses distributed coordination ✅  
-B) Choreography requires more memory  
-C) There is no difference  
-D) Orchestration is faster than choreography  
+A) Orchestration uses centralized control, choreography uses distributed coordination ✅
+B) Choreography requires more memory
+C) There is no difference
+D) Orchestration is faster than choreography
 
 **Explanation:** Orchestration involves centralized control where a coordinator directs workflow execution, while choreography involves distributed coordination where agents follow predefined interaction patterns.
 
 ---
 
-**Question 5:** How do agents announce their capabilities in an A2A system?  
+**Question 5:** How do agents announce their capabilities in an A2A system?
 
-A) Using ANNOUNCEMENT messages with capability metadata ✅  
-B) Through manual configuration  
-C) Via external databases only  
-D) Through file-based configurations  
+A) Using ANNOUNCEMENT messages with capability metadata ✅
+B) Through manual configuration
+C) Via external databases only
+D) Through file-based configurations
 
 **Explanation:** Agents use ANNOUNCEMENT messages containing detailed capability metadata to inform other agents about their available services and expertise areas.
 
 ---
 
-**Question 6:** What mechanism ensures A2A communication reliability when agents become unavailable?  
+**Question 6:** What mechanism ensures A2A communication reliability when agents become unavailable?
 
-A) Faster processing  
-B) Increased memory allocation  
-C) Message queuing with retry logic and timeouts ✅  
-D) Multiple network interfaces  
+A) Faster processing
+B) Increased memory allocation
+C) Message queuing with retry logic and timeouts ✅
+D) Multiple network interfaces
 
 **Explanation:** Message queuing with retry logic and timeout mechanisms ensures communication reliability by handling temporary agent unavailability and network issues.
 
 ---
 
-**Question 7:** What is the purpose of capability negotiation in A2A systems?  
+**Question 7:** What is the purpose of capability negotiation in A2A systems?
 
-A) To improve performance  
-B) To match agent capabilities with task requirements ✅  
-C) To simplify configuration  
-D) To reduce costs  
+A) To improve performance
+B) To match agent capabilities with task requirements ✅
+C) To simplify configuration
+D) To reduce costs
 
 **Explanation:** Capability negotiation matches available agent capabilities with specific task requirements, ensuring that tasks are assigned to agents with appropriate skills and resources.
 
 ---
 
-**Question 8:** When should URGENT priority be used for A2A messages?  
+**Question 8:** When should URGENT priority be used for A2A messages?
 
-A) For time-critical operations requiring immediate attention ✅  
-B) For data backup operations  
-C) For routine status updates  
-D) For all important messages  
+A) For time-critical operations requiring immediate attention ✅
+B) For data backup operations
+C) For routine status updates
+D) For all important messages
 
 **Explanation:** URGENT priority should be reserved for time-critical operations that require immediate attention, such as emergency shutdowns or critical error conditions.
 
 ---
 
-**Question 9:** What is the purpose of correlation IDs in A2A messaging?  
+**Question 9:** What is the purpose of correlation IDs in A2A messaging?
 
-A) To validate message integrity  
-B) To encrypt messages  
-C) To compress message content  
-D) To link related messages in multi-step workflows ✅  
+A) To validate message integrity
+B) To encrypt messages
+C) To compress message content
+D) To link related messages in multi-step workflows ✅
 
 **Explanation:** Correlation IDs link related messages across multi-step workflows, enabling proper tracking and coordination of complex interactions between agents.
 
 ---
 
-**Question 10:** What is a key benefit of collaborative agent teams in A2A systems?  
+**Question 10:** What is a key benefit of collaborative agent teams in A2A systems?
 
-A) Diverse expertise and parallel problem-solving capabilities ✅  
-B) Lower computational requirements  
-C) Reduced network traffic  
-D) Simpler implementation  
+A) Diverse expertise and parallel problem-solving capabilities ✅
+B) Lower computational requirements
+C) Reduced network traffic
+D) Simpler implementation
 
 **Explanation:** Collaborative agent teams leverage diverse expertise and enable parallel problem-solving, allowing complex tasks to be broken down and solved more efficiently than single-agent approaches.
 
@@ -114,19 +114,19 @@ D) Simpler implementation
 
 ## Scoring Guide
 
-- **10 correct**: Expert level - Ready for complex multi-agent system design  
-- **8-9 correct**: Proficient - Strong understanding of A2A communication patterns  
-- **6-7 correct**: Competent - Good grasp of agent coordination concepts  
-- **4-5 correct**: Developing - Review message protocols and coordination patterns  
-- **Below 4**: Beginner - Revisit A2A fundamentals and communication principles  
+- **10 correct**: Expert level - Ready for complex multi-agent system design
+- **8-9 correct**: Proficient - Strong understanding of A2A communication patterns
+- **6-7 correct**: Competent - Good grasp of agent coordination concepts
+- **4-5 correct**: Developing - Review message protocols and coordination patterns
+- **Below 4**: Beginner - Revisit A2A fundamentals and communication principles
 
 ## Key Concepts Summary
 
-1. **A2A Protocol**: Structured communication enabling agent collaboration  
-2. **Message Types**: DISCOVERY, REQUEST, RESPONSE, ANNOUNCEMENT for different purposes  
-3. **Service Discovery**: Dynamic discovery of agents and their capabilities  
-4. **Coordination Patterns**: Orchestration (centralized) vs choreography (distributed)  
-5. **Fault Tolerance**: Message queuing and retry mechanisms for reliability  
+1. **A2A Protocol**: Structured communication enabling agent collaboration
+2. **Message Types**: DISCOVERY, REQUEST, RESPONSE, ANNOUNCEMENT for different purposes
+3. **Service Discovery**: Dynamic discovery of agents and their capabilities
+4. **Coordination Patterns**: Orchestration (centralized) vs choreography (distributed)
+5. **Fault Tolerance**: Message queuing and retry mechanisms for reliability
 
 ---
 
@@ -150,18 +150,18 @@ logger = logging.getLogger(__name__)
 
 class CustomerServiceChoreography:
     """Multi-agent customer service system with A2A coordination."""
-    
+
     def __init__(self, choreography_engine: ChoreographyEngine):
         self.engine = choreography_engine
         self.ticket_database = {}  # In production, use real database
         self.escalation_queue = []
-        
+
         self._setup_patterns()
         self._setup_event_handlers()
-    
+
     def _setup_patterns(self):
         """Set up choreography patterns for customer service."""
-        
+
         patterns = [
             # Initial inquiry routing
             EventPattern(
@@ -199,7 +199,7 @@ class CustomerServiceChoreography:
                 target_capability="general_customer_support",
                 priority=1
             ),
-            
+
             # Issue analysis and escalation
             EventPattern(
                 event_type="issue_analyzed",
@@ -222,7 +222,7 @@ class CustomerServiceChoreography:
                 target_capability="security_incident_response",
                 priority=10
             ),
-            
+
             # Resolution and follow-up
             EventPattern(
                 event_type="solution_proposed",
@@ -252,7 +252,7 @@ class CustomerServiceChoreography:
                 target_capability="escalation_management",
                 priority=8
             ),
-            
+
             # Customer feedback and satisfaction
             EventPattern(
                 event_type="customer_feedback",
@@ -268,7 +268,7 @@ class CustomerServiceChoreography:
                 target_capability="performance_tracking",
                 priority=3
             ),
-            
+
             # Escalation patterns
             EventPattern(
                 event_type="escalation_requested",
@@ -292,18 +292,18 @@ class CustomerServiceChoreography:
                 priority=10
             )
         ]
-        
+
         for pattern in patterns:
             self.engine.register_event_pattern(pattern)
-        
+
         logger.info(f"Registered {len(patterns)} customer service choreography patterns")
-    
+
     async def handle_customer_inquiry(self, inquiry_data: Dict[str, Any]) -> str:
         """Handle a new customer inquiry and start the choreographed process."""
-        
+
         # Create ticket
         ticket_id = f"ticket_{int(datetime.now().timestamp())}"
-        
+
         ticket = {
             "ticket_id": ticket_id,
             "customer_id": inquiry_data.get("customer_id"),
@@ -318,9 +318,9 @@ class CustomerServiceChoreography:
             "resolution_attempts": [],
             "escalation_history": []
         }
-        
+
         self.ticket_database[ticket_id] = ticket
-        
+
         # Publish customer inquiry event to trigger choreography
         await self.engine.publish_event(
             event_type="customer_inquiry",
@@ -331,7 +331,7 @@ class CustomerServiceChoreography:
                 "correlation_id": f"inquiry_{ticket_id}"
             }
         )
-        
+
         logger.info(f"Customer inquiry processed: {ticket_id}")
         return ticket_id
 ```
@@ -349,3 +349,10 @@ This A2A customer service system demonstrates distributed coordination where age
 ---
 
 [Return to Session 7](Session7_Agent_to_Agent_Communication.md)
+---
+
+## 🧭 Navigation
+
+**Previous:** [Session 6 - ACP Fundamentals ←](Session6_ACP_Fundamentals.md)
+**Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)
+---

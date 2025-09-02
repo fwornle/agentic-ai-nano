@@ -9,26 +9,26 @@ This session covers building a production-grade file system MCP server with comp
 
 ### Understanding File System Security Fundamentals
 
-File system access represents one of the highest-risk attack vectors in AI agent systems. Common threats include:  
+File system access represents one of the highest-risk attack vectors in AI agent systems. Common threats include:
 
-- **Path Traversal**: Malicious inputs like `../../../etc/passwd` accessing sensitive system files  
-- **System File Access**: Reading critical files like `/etc/passwd`, `C:\Windows\System32\config\SAM`  
-- **Arbitrary Write Operations**: Creating malicious files in system directories  
-- **Denial of Service**: Large file operations that exhaust system resources  
+- **Path Traversal**: Malicious inputs like `../../../etc/passwd` accessing sensitive system files
+- **System File Access**: Reading critical files like `/etc/passwd`, `C:\Windows\System32\config\SAM`
+- **Arbitrary Write Operations**: Creating malicious files in system directories
+- **Denial of Service**: Large file operations that exhaust system resources
 
 ### Defense-in-Depth Strategy Overview
 
-Our server implements multiple security layers:  
+Our server implements multiple security layers:
 
-1. **Sandboxing**: Physical isolation to designated directories  
-2. **Path Validation**: Mathematical verification of file paths  
-3. **Input Sanitization**: Content filtering and validation  
-4. **Audit Logging**: Complete operation tracking  
-5. **Resource Limits**: Prevention of resource exhaustion  
+1. **Sandboxing**: Physical isolation to designated directories
+2. **Path Validation**: Mathematical verification of file paths
+3. **Input Sanitization**: Content filtering and validation
+4. **Audit Logging**: Complete operation tracking
+5. **Resource Limits**: Prevention of resource exhaustion
 
 ### Project Setup Essentials
 
-Create a modular file system server with security-first architecture:  
+Create a modular file system server with security-first architecture:
 
 ```bash
 # Create project with full security stack
@@ -39,7 +39,7 @@ python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 ```
 
-Install the essential production dependencies:  
+Install the essential production dependencies:
 
 ```bash
 # Install production dependencies
@@ -47,17 +47,17 @@ pip install fastmcp aiofiles watchdog
 pip install python-magic-bin cryptography
 ```
 
-**Security-focused dependencies explained**:  
+**Security-focused dependencies explained**:
 
-- `fastmcp`: MCP protocol framework with built-in security features  
-- `aiofiles`: Async I/O prevents blocking operations that could cause DoS  
-- `python-magic-bin`: Content-based file type detection (more secure than extensions)  
-- `watchdog`: Real-time file system monitoring for security events  
-- `cryptography`: File integrity verification and encryption support  
+- `fastmcp`: MCP protocol framework with built-in security features
+- `aiofiles`: Async I/O prevents blocking operations that could cause DoS
+- `python-magic-bin`: Content-based file type detection (more secure than extensions)
+- `watchdog`: Real-time file system monitoring for security events
+- `cryptography`: File integrity verification and encryption support
 
 ### Security Directory Structure
 
-Create a modular architecture that separates security concerns:  
+Create a modular architecture that separates security concerns:
 
 ```text
 mcp-filesystem-server/
@@ -86,7 +86,7 @@ The core security principle: Using `resolve()` eliminates relative path componen
 
 ### Mathematical Path Validation
 
-The critical security check that provides absolute containment uses string prefix checking after path resolution:  
+The critical security check that provides absolute containment uses string prefix checking after path resolution:
 
 ```python
 # CRITICAL SECURITY CHECK: Mathematical path containment
@@ -100,11 +100,11 @@ if not str(resolved_path).startswith(str(self.base_path)):
 
 ## 📝 Participant Path: Practical Implementation
 
-*Prerequisites: Complete Observer Path sections above*  
+*Prerequisites: Complete Observer Path sections above*
 
 ### Security Configuration Implementation
 
-The configuration module is the security control center where all security settings are defined:  
+The configuration module is the security control center where all security settings are defined:
 
 ```python
 # config.py - Security-first configuration
@@ -113,7 +113,7 @@ import os
 
 class FileSystemConfig:
     """Centralized security configuration for MCP file system server."""
-    
+
     def __init__(self, base_path: str = None):
         # Create isolated sandbox - AI agents can ONLY access this directory
         self.base_path = Path(base_path or os.getcwd()) / "sandbox"
@@ -122,17 +122,17 @@ class FileSystemConfig:
 
 **Security Principle**: The sandbox path is the critical security boundary - everything outside this directory is inaccessible to AI agents.
 
-Add file size protection to prevent memory exhaustion attacks:  
+Add file size protection to prevent memory exhaustion attacks:
 
 ```python
         # File size protection (prevents memory exhaustion attacks)
         self.max_file_size = 10 * 1024 * 1024  # 10MB industry-standard limit
-        
+
         # Extension whitelist (based on 2024 security best practices)
         self.allowed_extensions = {
             # Documentation formats
             '.txt', '.md', '.rst', '.adoc',
-            # Data formats  
+            # Data formats
             '.json', '.yaml', '.yml', '.toml', '.csv',
             # Code formats
             '.py', '.js', '.ts', '.java', '.go', '.rs'
@@ -143,7 +143,7 @@ This uses a whitelist approach for security (OWASP recommended), prevents DoS at
 
 ### Path Traversal Defense Implementation
 
-Define patterns that indicate potential security threats:  
+Define patterns that indicate potential security threats:
 
 ```python
         # Path traversal attack patterns (based on CISA threat intelligence)
@@ -152,14 +152,14 @@ Define patterns that indicate potential security threats:
             '..', '../', '..\\',
             # Unix system directories
             '/etc/', '/usr/', '/var/', '/root/', '/boot/',
-            # Windows system directories 
+            # Windows system directories
             'C:\\Windows', 'C:\\Program Files', 'C:\\ProgramData'
         ]
 ```
 
 These patterns defend against real attack vectors documented by security organizations.
 
-Add performance and DoS protection:  
+Add performance and DoS protection:
 
 ```python
         # Performance limits (DoS prevention)
@@ -171,7 +171,7 @@ Add performance and DoS protection:
 
 ### Sandbox Security Implementation
 
-Create the core security boundary enforcement:  
+Create the core security boundary enforcement:
 
 ```python
 # utils/sandbox.py - Core security boundary
@@ -183,7 +183,7 @@ class SandboxError(Exception):
 
 class FileSystemSandbox:
     """Mathematically enforces file access boundaries."""
-    
+
     def __init__(self, base_path: Path):
         # Convert to absolute path - prevents relative path tricks
         self.base_path = base_path.resolve()
@@ -191,35 +191,35 @@ class FileSystemSandbox:
 
 **Key Security Principle**: Using `resolve()` eliminates relative path components and symlink tricks that attackers use to escape sandboxes.
 
-Implement the cryptographically secure path validation:  
+Implement the cryptographically secure path validation:
 
 ```python
     def validate_path(self, path: str) -> Path:
         """
         Cryptographically secure path validation.
-        
+
         Uses mathematical path resolution to prevent ALL known
         directory traversal attack vectors.
         """
         try:
             # Step 1: Construct path within sandbox
             candidate_path = self.base_path / path
-            
+
             # Step 2: Resolve ALL relative components and symlinks
             resolved_path = candidate_path.resolve()
 ```
 
 **Technical Detail**: The `resolve()` method performs canonical path resolution, eliminating `..`, `.`, and symlink components that could be used to escape the sandbox.
 
-Complete the validation with the mathematical boundary verification:  
+Complete the validation with the mathematical boundary verification:
 
 ```python
             # CRITICAL SECURITY CHECK: Mathematical path containment
             if not str(resolved_path).startswith(str(self.base_path)):
                 raise SandboxError(f"Security violation: '{path}' escapes sandbox")
-            
+
             return resolved_path
-            
+
         except (OSError, ValueError, PermissionError):
             # ANY path resolution failure is treated as a security threat
             raise SandboxError(f"Path access denied: {path}")
@@ -232,7 +232,7 @@ Complete the validation with the mathematical boundary verification:
 
 ### Building the MCP Server Foundation
 
-Import all necessary modules and security components:  
+Import all necessary modules and security components:
 
 ```python
 # filesystem_server.py
@@ -246,14 +246,14 @@ import base64
 import logging
 ```
 
-Import our custom security modules:  
+Import our custom security modules:
 
 ```python
 from config import FileSystemConfig
 from utils.sandbox import FileSystemSandbox, SandboxError
 ```
 
-Set up comprehensive logging for security monitoring:  
+Set up comprehensive logging for security monitoring:
 
 ```python
 # Set up logging for security auditing
@@ -273,14 +273,14 @@ logger.info(f"File System MCP Server initialized with sandbox at: {config.base_p
 
 ### Core File Operations Implementation
 
-Define the directory listing tool with proper security validation:  
+Define the directory listing tool with proper security validation:
 
 ```python
 @mcp.tool()
 async def list_directory(path: str = ".", pattern: str = "*") -> Dict:
     """
     List files and directories safely within the sandbox.
-    
+
     Args:
         path: Directory path relative to sandbox root
         pattern: Glob pattern for filtering (e.g., "*.txt", "test_*")
@@ -288,14 +288,14 @@ async def list_directory(path: str = ".", pattern: str = "*") -> Dict:
     try:
         # First, validate the path is safe
         safe_path = sandbox.validate_path(path)
-        
+
         if not safe_path.is_dir():
             return {"error": f"'{path}' is not a directory"}
 ```
 
 Path validation and directory check ensure we're working with safe, valid directories.
 
-Gather information about each file and directory:  
+Gather information about each file and directory:
 
 ```python
         items = []
@@ -303,7 +303,7 @@ Gather information about each file and directory:
         for item in safe_path.glob(pattern):
             # Calculate relative path for display
             relative_path = item.relative_to(config.base_path)
-            
+
             # Gather metadata about each item
             stat = item.stat()
             items.append({
@@ -315,21 +315,21 @@ Gather information about each file and directory:
             })
 ```
 
-Sort results and create the response:  
+Sort results and create the response:
 
 ```python
         # Sort for consistent output: directories first, then files
         items.sort(key=lambda x: (x["type"] != "directory", x["name"]))
-        
+
         # Log the operation for security auditing
         logger.info(f"Listed directory: {path} (found {len(items)} items)")
-        
+
         return {
             "path": str(safe_path.relative_to(config.base_path)),
             "total_items": len(items),
             "items": items
         }
-        
+
     except SandboxError as e:
         logger.warning(f"Sandbox violation attempt: {e}")
         return {"error": str(e)}
@@ -340,11 +340,11 @@ Sort results and create the response:
 
 ### Secure File Reading Implementation
 
-Implement file reading that handles both text and binary files:  
+Implement file reading that handles both text and binary files:
 
 ```python
 @mcp.tool()
-async def read_file(path: str, encoding: str = "utf-8", 
+async def read_file(path: str, encoding: str = "utf-8",
                    start_line: Optional[int] = None,
                    end_line: Optional[int] = None) -> Dict:
     """
@@ -352,27 +352,27 @@ async def read_file(path: str, encoding: str = "utf-8",
     """
     try:
         safe_path = sandbox.validate_path(path)
-        
+
         if not safe_path.is_file():
             return {"error": f"'{path}' is not a file"}
-        
+
         # Check file size to prevent memory exhaustion
         stat = safe_path.stat()
         if stat.st_size > config.max_file_size:
             return {"error": f"File too large (max {config.max_file_size} bytes)"}
 ```
 
-Detect file type and handle accordingly:  
+Detect file type and handle accordingly:
 
 ```python
         # Detect if this is a binary file
         is_binary = safe_path.suffix.lower() not in {'.txt', '.md', '.json', '.py', '.js'}
-        
+
         # Handle binary files by encoding to base64
         if is_binary:
             async with aiofiles.open(safe_path, 'rb') as f:
                 content = await f.read()
-                
+
             return {
                 "path": str(safe_path.relative_to(config.base_path)),
                 "content": base64.b64encode(content).decode('ascii'),
@@ -380,7 +380,7 @@ Detect file type and handle accordingly:
             }
 ```
 
-Handle text files with optional line selection:  
+Handle text files with optional line selection:
 
 ```python
         # Handle text files with optional line selection
@@ -398,7 +398,7 @@ Handle text files with optional line selection:
 
 This implementation allows reading partial file content for better performance with large files.
 
-Generate the response with metadata:  
+Generate the response with metadata:
 
 ```python
         return {
@@ -409,9 +409,9 @@ Generate the response with metadata:
         }
 ```
 
-Handle any security violations or errors:  
+Handle any security violations or errors:
 
-```python        
+```python
     except SandboxError as e:
         logger.warning(f"Sandbox violation attempt: {e}")
         return {"error": str(e)}
@@ -422,27 +422,27 @@ Handle any security violations or errors:
 
 ### Server Launch Implementation
 
-Add the server startup code:  
+Add the server startup code:
 
 ```python
 if __name__ == "__main__":
     # Create example files in sandbox for testing
     example_dir = config.base_path / "examples"
     example_dir.mkdir(exist_ok=True)
-    
+
     # Create a sample text file
     (example_dir / "hello.txt").write_text("Hello from the secure file system server!")
-    
+
     # Create a sample JSON file
     (example_dir / "data.json").write_text(json.dumps({
         "message": "This is sample data",
         "timestamp": datetime.now().isoformat()
     }, indent=2))
-    
+
     print(f"🔒 Secure File System MCP Server")
     print(f"📁 Sandbox directory: {config.base_path}")
     print(f"Server ready for connections!")
-    
+
     # Run the server
     mcp.run()
 ```
@@ -451,13 +451,13 @@ if __name__ == "__main__":
 
 ## ⚙️ Implementer Path: Complete Advanced Features
 
-*Prerequisites: Complete Observer and Participant paths above*  
+*Prerequisites: Complete Observer and Participant paths above*
 
-For comprehensive coverage of advanced file system server topics, continue with these specialized modules:  
+For comprehensive coverage of advanced file system server topics, continue with these specialized modules:
 
-- ⚙️ [Advanced Security Patterns](Session2_Advanced_Security_Patterns.md) - Enterprise-grade security implementations  
-- ⚙️ [Production Implementation Guide](Session2_Production_Implementation.md) - Complete server with all advanced features  
-- ⚙️ [Enterprise File Operations](Session2_Enterprise_File_Operations.md) - Advanced file manipulation and monitoring  
+- ⚙️ [Advanced Security Patterns](Session2_Advanced_Security_Patterns.md) - Enterprise-grade security implementations
+- ⚙️ [Production Implementation Guide](Session2_Production_Implementation.md) - Complete server with all advanced features
+- ⚙️ [Enterprise File Operations](Session2_Enterprise_File_Operations.md) - Advanced file manipulation and monitoring
 
 ---
 
@@ -473,35 +473,31 @@ For comprehensive coverage of advanced file system server topics, continue with 
 
 ## 📝 Quick Assessment
 
-Test your understanding of the key concepts:  
+Test your understanding of the key concepts:
 
-**Question 1**: What is the primary security mechanism that prevents directory traversal attacks?  
-A) File extension validation  
-B) Mathematical path resolution with `resolve()`  
-C) File size limits  
-D) Content type checking  
+**Question 1**: What is the primary security mechanism that prevents directory traversal attacks?
+A) File extension validation
+B) Mathematical path resolution with `resolve()`
+C) File size limits
+D) Content type checking
 
-**Question 2**: Why do we use a whitelist approach for file extensions?  
-A) It's faster than blacklists  
-B) It's more secure than blacklists  
-C) It uses less memory  
-D) It's easier to maintain  
+**Question 2**: Why do we use a whitelist approach for file extensions?
+A) It's faster than blacklists
+B) It's more secure than blacklists
+C) It uses less memory
+D) It's easier to maintain
 
-**Question 3**: What happens when a path tries to escape the sandbox?  
-A) The server crashes  
-B) A `SandboxError` is raised  
-C) The path is automatically corrected  
-D) A warning is logged  
+**Question 3**: What happens when a path tries to escape the sandbox?
+A) The server crashes
+B) A `SandboxError` is raised
+C) The path is automatically corrected
+D) A warning is logged
 
 [View complete assessment in Production Implementation Guide →](Session2_Production_Implementation.md)
-
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Previous: Session 1 - Basic MCP Server](Session1_Basic_MCP_Server.md) | [Module Overview](index.md) | [Next: Session 3 - LangChain Integration →](Session3_LangChain_MCP_Integration.md)
-
-**Advanced Learning Paths**:  
-- ⚙️ [Advanced Security Patterns](Session2_Advanced_Security_Patterns.md)  
-- ⚙️ [Production Implementation Guide](Session2_Production_Implementation.md)  
-- ⚙️ [Enterprise File Operations](Session2_Enterprise_File_Operations.md)  
+**Previous:** [Session 1 - Basic MCP Server ←](Session1_Basic_MCP_Server.md)
+**Next:** [Session 3 - LangChain MCP Integration →](Session3_LangChain_MCP_Integration.md)
+---
