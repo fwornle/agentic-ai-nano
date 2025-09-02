@@ -295,18 +295,37 @@ nav:
 
   - MCP, ACP & A2A Communication:
     - 03_mcp-acp-a2a/index.md
-    - Session 0 - Protocol Introduction: 03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md
-    - Session 1 - Basic MCP Server: 03_mcp-acp-a2a/Session1_Basic_MCP_Server.md
-    - Session 2 - FileSystem MCP: 03_mcp-acp-a2a/Session2_FileSystem_MCP_Server.md
+    - "🎯 Session 0 - Protocol Introduction": 03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md
+    - "🎯 Session 1 - Basic MCP Server": 03_mcp-acp-a2a/Session1_Basic_MCP_Server.md
+    - "🎯📝 Session 2 - FileSystem MCP Hub": 03_mcp-acp-a2a/Session2_FileSystem_MCP_Server.md
+    - Session 2 Advanced Modules:
+      - "⚙️ Advanced Security Patterns": 03_mcp-acp-a2a/Session2_Advanced_Security_Patterns.md
+      - "⚙️ Production Implementation": 03_mcp-acp-a2a/Session2_Production_Implementation.md
     - Session 3 - LangChain Integration: 03_mcp-acp-a2a/Session3_LangChain_MCP_Integration.md
     - Session 3 Advanced Modules:
       - Enterprise Patterns: 03_mcp-acp-a2a/Session3_ModuleA_Enterprise_Patterns.md
       - Advanced Workflows: 03_mcp-acp-a2a/Session3_ModuleB_Advanced_Workflows.md
-    - Session 4 - Production MCP: 03_mcp-acp-a2a/Session4_Production_MCP_Deployment.md
-    - Session 5 - Secure MCP: 03_mcp-acp-a2a/Session5_Secure_MCP_Server.md
-    - Session 6 - ACP Fundamentals: 03_mcp-acp-a2a/Session6_ACP_Fundamentals.md
-    - Session 7 - A2A Communication: 03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication.md
-    - Session 8 - Advanced Workflows: 03_mcp-acp-a2a/Session8_Advanced_Agent_Workflows.md
+    - "🎯📝 Session 4 - Production MCP": 03_mcp-acp-a2a/Session4_Production_MCP_Deployment.md
+    - Session 4 Advanced Modules:
+      - "⚙️ Advanced Server Architecture": 03_mcp-acp-a2a/Session4_Advanced_Server_Architecture.md
+      - "⚙️ Cloud Deployment Strategies": 03_mcp-acp-a2a/Session4_Cloud_Deployment_Strategies.md
+      - "⚙️ Production Monitoring Systems": 03_mcp-acp-a2a/Session4_Production_Monitoring_Systems.md
+      - "⚙️ Enterprise Resilience Patterns": 03_mcp-acp-a2a/Session4_Enterprise_Resilience_Patterns.md
+    - "🎯📝 Session 5 - Secure MCP Hub": 03_mcp-acp-a2a/Session5_Secure_MCP_Server.md
+    - Session 5 Advanced Modules:
+      - "⚙️ Advanced OAuth 2.1 Implementation": 03_mcp-acp-a2a/Session5_Advanced_OAuth.md
+      - "⚙️ Enterprise API Key Management": 03_mcp-acp-a2a/Session5_Enterprise_API_Keys.md
+      - "⚙️ Production Rate Limiting Systems": 03_mcp-acp-a2a/Session5_Production_Rate_Limiting.md
+      - "⚙️ Security Monitoring & Audit Systems": 03_mcp-acp-a2a/Session5_Security_Monitoring.md
+    - "🎯📝⚙️ Session 6 - ACP Fundamentals Hub": 03_mcp-acp-a2a/Session6_ACP_Fundamentals.md
+    - "🎯📝⚙️ Session 7 - A2A Communication Hub": 03_mcp-acp-a2a/Session7_Agent_to_Agent_Communication.md
+    - Session 7 Advanced Modules:
+      - "⚙️ Advanced Orchestration Patterns": 03_mcp-acp-a2a/Session7_Advanced_Orchestration.md
+      - "⚙️ Advanced Choreography Systems": 03_mcp-acp-a2a/Session7_Advanced_Choreography.md
+    - Session 8 - Advanced Workflows:
+      - "🎯📝 Advanced Agent Workflows": 03_mcp-acp-a2a/Session8_Advanced_Agent_Workflows.md
+      - "⚙️ Enterprise Workflow Engine": 03_mcp-acp-a2a/Session8_Advanced_Enterprise_Engine.md
+      - "⚙️ Advanced Optimization Systems": 03_mcp-acp-a2a/Session8_Advanced_Optimization.md
     - Session 9 - Production Deployment: 03_mcp-acp-a2a/Session9_Production_Agent_Deployment.md
 
 # Extra
