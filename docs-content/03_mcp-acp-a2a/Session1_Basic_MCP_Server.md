@@ -359,61 +359,61 @@ Implement this tool to reinforce MCP patterns while building advanced functional
 
 ## 📝 Multiple Choice Test - Session 1
 
-**Question 1:** What are the three core capabilities that MCP servers can expose?
+**Question 1:** What are the three core capabilities that MCP servers can expose?  
 A) APIs, Databases, and Services  
 B) Functions, Classes, and Modules  
 C) Tools, Resources, and Prompts  
 D) Inputs, Outputs, and Errors  
 
-**Question 2:** Which decorator is used to expose a function as an MCP tool?
+**Question 2:** Which decorator is used to expose a function as an MCP tool?  
 A) `@tool()`  
 B) `@mcp.tool()`  
 C) `@server.tool()`  
 D) `@expose_tool()`  
 
-**Question 3:** What is the primary purpose of MCP Inspector?
+**Question 3:** What is the primary purpose of MCP Inspector?  
 A) To deploy MCP servers to production  
 B) To test, debug, and validate MCP servers  
 C) To monitor server performance  
 D) To manage server configurations  
 
-**Question 4:** Which transport mechanism is commonly used for local MCP server testing?
+**Question 4:** Which transport mechanism is commonly used for local MCP server testing?  
 A) HTTP  
 B) WebSocket  
 C) stdio (standard input/output)  
 D) TCP  
 
-**Question 5:** Why are type hints important in MCP server functions?
+**Question 5:** Why are type hints important in MCP server functions?  
 A) They improve code readability only  
 B) They enable automatic schema generation for AI clients  
 C) They are required by Python  
 D) They reduce memory usage  
 
-**Question 6:** What should MCP tools return when encountering invalid input?
+**Question 6:** What should MCP tools return when encountering invalid input?  
 A) Raise an exception  
 B) Return None  
 C) Return structured error messages with helpful information  
 D) Log the error silently  
 
-**Question 7:** How do MCP resources differ from tools?
+**Question 7:** How do MCP resources differ from tools?  
 A) Resources are executable functions, tools are data sources  
 B) Resources provide read-only data access, tools are executable functions  
 C) Resources are faster than tools  
 D) Resources require authentication, tools do not  
 
-**Question 8:** What command is used to launch MCP Inspector?
+**Question 8:** What command is used to launch MCP Inspector?  
 A) `mcp-inspector`  
 B) `npm start inspector`  
 C) `npx @modelcontextprotocol/inspector`  
 D) `python -m mcp.inspector`  
 
-**Question 9:** What is the main benefit of MCP servers over custom API integrations?
+**Question 9:** What is the main benefit of MCP servers over custom API integrations?  
 A) Lower development cost  
 B) Better runtime performance  
 C) Standardized protocol with automatic validation  
 D) Easier deployment process  
 
-**Question 10:** What file extension is required for MCP server implementations?
+**Question 10:** What file extension is required for MCP server implementations?  
 A) `.mcp`  
 B) `.py` (Python files)  
 C) `.json`  
