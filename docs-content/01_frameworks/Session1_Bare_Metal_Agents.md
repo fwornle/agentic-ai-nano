@@ -616,34 +616,34 @@ For comprehensive advanced coverage, explore the specialized modules:
 Test your understanding of bare metal agents in cloud data processing:
 
 **Question 1:** Why is bare metal agent implementation critical for data pipeline systems?  
-A) It's required by Kubernetes
-B) It provides full control over resource usage and API costs for petabyte-scale processing
-C) It's easier to deploy
-D) It uses less storage
+A) It's required by Kubernetes  
+B) It provides full control over resource usage and API costs for petabyte-scale processing  
+C) It's easier to deploy  
+D) It uses less storage  
 
 **Question 2:** What is the primary purpose of the reflection pattern in data processing agents?  
-A) To generate better LLM responses
-B) To analyze performance and optimize data pipeline efficiency
-C) To reduce memory usage
-D) To improve security
+A) To generate better LLM responses  
+B) To analyze performance and optimize data pipeline efficiency  
+C) To reduce memory usage  
+D) To improve security  
 
 **Question 3:** How do agents manage cloud processing costs in data applications?  
-A) By using only free services
-B) Through intelligent model selection based on data complexity and budget tracking
-C) By caching everything
-D) Through compression only
+A) By using only free services  
+B) Through intelligent model selection based on data complexity and budget tracking  
+C) By caching everything  
+D) Through compression only  
 
 **Question 4:** What is the key consideration for memory management in Kubernetes-deployed data agents?  
-A) Unlimited memory allocation
-B) Respecting pod memory limits while efficiently caching data processing context
-C) Using only disk storage
-D) Memory is not a concern
+A) Unlimited memory allocation  
+B) Respecting pod memory limits while efficiently caching data processing context  
+C) Using only disk storage  
+D) Memory is not a concern  
 
 **Question 5:** Why is tool registration important for data processing agents?  
-A) It looks professional
-B) To integrate with specialized cloud services like S3 for data storage, Kafka for streaming, and Argo Workflows for workflows
-C) It's required by Python
-D) To reduce code size
+A) It looks professional  
+B) To integrate with specialized cloud services like S3 for data storage, Kafka for streaming, and Argo Workflows for workflows  
+C) It's required by Python  
+D) To reduce code size  
 
 ## Solutions
 

@@ -803,34 +803,34 @@ You've now mastered enterprise PydanticAI patterns for data processing systems, 
 Test your understanding of enterprise PydanticAI patterns and production data processing systems:
 
 **Question 1:** What design pattern does the data service dependency injection system use for service management?  
-A) Singleton pattern with global state
-B) Protocol-based interfaces with container-managed lifecycles and health checking
-C) Static factory methods only
-D) Direct class instantiation
+A) Singleton pattern with global state  
+B) Protocol-based interfaces with container-managed lifecycles and health checking  
+C) Static factory methods only  
+D) Direct class instantiation  
 
 **Question 2:** How does the ProductionDataAgent handle concurrent data processing requests?  
-A) Sequential processing only
-B) Semaphore-controlled concurrency with higher limits for data workloads and throughput tracking
-C) Unlimited concurrent execution
-D) Single-threaded execution with queuing
+A) Sequential processing only  
+B) Semaphore-controlled concurrency with higher limits for data workloads and throughput tracking  
+C) Unlimited concurrent execution  
+D) Single-threaded execution with queuing  
 
 **Question 3:** What security measures does the DataAuthenticationService implement for data processing?  
-A) Simple password checking
-B) JWT token validation, role-based authorization with data-specific permissions, and audit logging
-C) Basic username verification
-D) No authentication required
+A) Simple password checking  
+B) JWT token validation, role-based authorization with data-specific permissions, and audit logging  
+C) Basic username verification  
+D) No authentication required  
 
 **Question 4:** What information does the comprehensive audit logging system capture for data processing?  
-A) Only request timestamps
-B) Complete data processing tracking with dataset IDs, sensitivity levels, compliance flags, and performance metrics
-C) Simple success/failure flags
-D) Database query logs only
+A) Only request timestamps  
+B) Complete data processing tracking with dataset IDs, sensitivity levels, compliance flags, and performance metrics  
+C) Simple success/failure flags  
+D) Database query logs only  
 
 **Question 5:** How does the health monitoring system track data processing dependencies?  
-A) Manual status checks only
-B) Automated dependency health checks with data quality monitoring and throughput metrics
-C) Simple ping tests
-D) Log file analysis only
+A) Manual status checks only  
+B) Automated dependency health checks with data quality monitoring and throughput metrics  
+C) Simple ping tests  
+D) Log file analysis only  
 
 [**🗂️ View Test Solutions →**](Session5_ModuleB_Test_Solutions.md)
 

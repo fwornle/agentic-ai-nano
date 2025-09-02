@@ -384,52 +384,52 @@ The complete agentic RAG implementation requires additional advanced components:
 Test your understanding of agentic RAG systems and intelligent automation techniques.
 
 **Question 1:** What is the primary advantage of query planning in agentic RAG systems?  
-A) Faster response times
-B) Strategic analysis of queries to determine optimal retrieval and generation approaches
-C) Reduced computational costs
-D) Simpler system architecture
+A) Faster response times  
+B) Strategic analysis of queries to determine optimal retrieval and generation approaches  
+C) Reduced computational costs  
+D) Simpler system architecture  
 
 **Question 2:** In self-correcting RAG systems, what is the most effective approach for error detection?  
-A) Random response sampling
-B) LLM-as-a-judge evaluation with factual consistency checking
-C) Simple keyword matching
-D) Response length validation
+A) Random response sampling  
+B) LLM-as-a-judge evaluation with factual consistency checking  
+C) Simple keyword matching  
+D) Response length validation  
 
 **Question 3:** When should agentic RAG systems use external tools rather than just document retrieval?  
-A) Always, for every query
-B) Never, document retrieval is always sufficient
-C) When queries require real-time data, calculations, or specialized functionality
-D) Only for simple questions
+A) Always, for every query  
+B) Never, document retrieval is always sufficient  
+C) When queries require real-time data, calculations, or specialized functionality  
+D) Only for simple questions  
 
 **Question 4:** What is the key benefit of multi-agent collaboration in RAG systems?  
-A) Faster processing through parallel execution
-B) Specialized expertise and comprehensive analysis through role-based collaboration
-C) Reduced memory usage
-D) Simpler error handling
+A) Faster processing through parallel execution  
+B) Specialized expertise and comprehensive analysis through role-based collaboration  
+C) Reduced memory usage  
+D) Simpler error handling  
 
 **Question 5:** In iterative self-correction, what criterion should determine when to stop refinement?  
-A) Fixed number of iterations regardless of quality
-B) Quality threshold achievement or diminishing improvement returns
-C) Time limits only
-D) User interruption
+A) Fixed number of iterations regardless of quality  
+B) Quality threshold achievement or diminishing improvement returns  
+C) Time limits only  
+D) User interruption  
 
 **Question 6:** Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?  
-A) Researcher agent
-B) Synthesizer agent
-C) Validator agent
-D) Coordinator agent
+A) Researcher agent  
+B) Synthesizer agent  
+C) Validator agent  
+D) Coordinator agent  
 
 **Question 7:** What is the primary challenge in production deployment of agentic RAG systems?  
-A) High computational costs
-B) Balancing system complexity with reliability and performance
-C) Lack of suitable frameworks
-D) Limited use cases
+A) High computational costs  
+B) Balancing system complexity with reliability and performance  
+C) Lack of suitable frameworks  
+D) Limited use cases  
 
 **Question 8:** When designing agentic RAG validation, what aspect is most important to assess?  
-A) Response length
-B) Processing speed
-C) Factual accuracy and logical consistency
-D) Token usage
+A) Response length  
+B) Processing speed  
+C) Factual accuracy and logical consistency  
+D) Token usage  
 
 [**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
 

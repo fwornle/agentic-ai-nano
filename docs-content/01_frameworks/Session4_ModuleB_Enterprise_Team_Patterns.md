@@ -74,34 +74,34 @@ class DataProcessingToolExecutionContext(BaseModel):
 ### Test your understanding of enterprise team patterns and delegation systems for data processing:
 
 **Question 1:** What data sources receive the highest weighting in the data discovery result aggregation?  
-A) Data lake sources (1.2 weight)
-B) Data warehouse (1.4 weight) and streaming sources (1.3 weight)
-C) API endpoints only (1.0 weight)
-D) All data sources receive equal weighting
+A) Data lake sources (1.2 weight)  
+B) Data warehouse (1.4 weight) and streaming sources (1.3 weight)  
+C) API endpoints only (1.0 weight)  
+D) All data sources receive equal weighting  
 
 **Question 2:** Which authority level can delegate data architecture design tasks in data processing workflows?  
-A) PIPELINE_COLLABORATOR
-B) STAGE_COORDINATOR
-C) PIPELINE_MANAGER
-D) DATA_ARCHITECT
+A) PIPELINE_COLLABORATOR  
+B) STAGE_COORDINATOR  
+C) PIPELINE_MANAGER  
+D) DATA_ARCHITECT  
 
 **Question 3:** What happens when a data processing agent's workload capacity is exceeded during delegation?  
-A) Data processing task is automatically rejected
-B) Alternative data processing agents are suggested without escalation required
-C) Immediate escalation to data architecture level
-D) Data processing task is queued for later execution
+A) Data processing task is automatically rejected  
+B) Alternative data processing agents are suggested without escalation required  
+C) Immediate escalation to data architecture level  
+D) Data processing task is queued for later execution  
 
 **Question 4:** What triggers escalation when data processing resource limits are exceeded?  
-A) CPU constraints only
-B) Memory limits only
-C) Any data processing resource limit violation according to delegation rules
-D) Storage constraints only
+A) CPU constraints only  
+B) Memory limits only  
+C) Any data processing resource limit violation according to delegation rules  
+D) Storage constraints only  
 
 **Question 5:** How frequently does the background data quality monitor check for issues in data processing workflows?  
-A) Every minute
-B) Every 5 minutes with 1-minute retry on errors
-C) Every 10 minutes
-D) Only when data quality alerts are triggered
+A) Every minute  
+B) Every 5 minutes with 1-minute retry on errors  
+C) Every 10 minutes  
+D) Only when data quality alerts are triggered  
 
 [**🗂️ View Test Solutions →**](Session4_ModuleB_Test_Solutions.md)
 

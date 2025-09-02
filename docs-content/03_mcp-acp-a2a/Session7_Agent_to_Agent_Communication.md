@@ -501,64 +501,64 @@ These advanced modules cover enterprise-scale orchestration and choreography pat
 Before we venture into advanced workflows, let's ensure you've mastered the art of agent diplomacy:
 
 **Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?  
-A) To reduce computational costs
-B) To improve individual agent performance
-C) To enable multiple agents to collaborate and coordinate actions
-D) To replace human operators
+A) To reduce computational costs  
+B) To improve individual agent performance  
+C) To enable multiple agents to collaborate and coordinate actions  
+D) To replace human operators  
 
 **Question 2:** Which component serves as a "digital passport" in A2A systems?  
-A) Message Router
-B) Agent Card
-C) Task State
-D) Priority Queue
+A) Message Router  
+B) Agent Card  
+C) Task State  
+D) Priority Queue  
 
 **Question 3:** What information is essential for proper A2A message routing?  
-A) Just the timestamp
-B) Only the priority level
-C) Only the message content
-D) Sender ID, recipient ID, and message type
+A) Just the timestamp  
+B) Only the priority level  
+C) Only the message content  
+D) Sender ID, recipient ID, and message type  
 
 **Question 4:** How do agents announce their capabilities in an A2A system?  
-A) Through manual configuration
-B) Via external databases only
-C) Through Agent Cards with capability metadata
-D) Through file-based configurations
+A) Through manual configuration  
+B) Via external databases only  
+C) Through Agent Cards with capability metadata  
+D) Through file-based configurations  
 
 **Question 5:** What mechanism ensures A2A communication reliability when agents become unavailable?  
-A) Faster processing
-B) Increased memory allocation
-C) Message queuing with retry logic and timeouts
-D) Multiple network interfaces
+A) Faster processing  
+B) Increased memory allocation  
+C) Message queuing with retry logic and timeouts  
+D) Multiple network interfaces  
 
 **Question 6:** What is the purpose of capability negotiation in A2A systems?  
-A) To improve performance
-B) To match agent capabilities with task requirements
-C) To simplify configuration
-D) To reduce costs
+A) To improve performance  
+B) To match agent capabilities with task requirements  
+C) To simplify configuration  
+D) To reduce costs  
 
 **Question 7:** When should URGENT priority be used for A2A messages?  
-A) For time-critical operations requiring immediate attention
-B) For data backup operations
-C) For routine status updates
-D) For all important messages
+A) For time-critical operations requiring immediate attention  
+B) For data backup operations  
+C) For routine status updates  
+D) For all important messages  
 
 **Question 8:** What is the purpose of correlation IDs in A2A messaging?  
-A) To validate message integrity
-B) To encrypt messages
-C) To compress message content
-D) To link related messages in multi-step workflows
+A) To validate message integrity  
+B) To encrypt messages  
+C) To compress message content  
+D) To link related messages in multi-step workflows  
 
 **Question 9:** What is a key benefit of collaborative agent teams in A2A systems?  
-A) Diverse expertise and parallel problem-solving capabilities
-B) Lower computational requirements
-C) Reduced network traffic
-D) Simpler implementation
+A) Diverse expertise and parallel problem-solving capabilities  
+B) Lower computational requirements  
+C) Reduced network traffic  
+D) Simpler implementation  
 
 **Question 10:** How does the Agent Registry maintain data consistency?  
-A) Through manual updates
-B) Via heartbeat monitoring and automatic cleanup
-C) Using external synchronization services
-D) Through periodic full rebuilds
+A) Through manual updates  
+B) Via heartbeat monitoring and automatic cleanup  
+C) Using external synchronization services  
+D) Through periodic full rebuilds  
 
 [**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
 ---

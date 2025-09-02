@@ -1254,34 +1254,34 @@ You've now mastered advanced orchestration patterns for LangGraph workflows opti
 Test your understanding of advanced orchestration patterns for data processing:
 
 **Question 1:** What factors determine whether a data processing workflow should use "parallel", "sequential", or "adaptive" execution mode?  
-A) Only data batch complexity scores
-B) Only available cluster CPU resources
-C) Data complexity, cluster resource availability, and data dependency scores
-D) User preferences and system defaults
+A) Only data batch complexity scores  
+B) Only available cluster CPU resources  
+C) Data complexity, cluster resource availability, and data dependency scores  
+D) User preferences and system defaults  
 
 **Question 2:** In the advanced workflow orchestration, what happens when sync progress reaches 75% completion?  
-A) Immediate progression to data merge phase
-B) Conditional proceed with timeout protection for data freshness
-C) Continue waiting indefinitely
-D) Trigger critical failure handling
+A) Immediate progression to data merge phase  
+B) Conditional proceed with timeout protection for data freshness  
+C) Continue waiting indefinitely  
+D) Trigger critical failure handling  
 
 **Question 3:** Which factors contribute to the composite score when selecting optimal data processing agent types?  
-A) Capability match (40%) + Performance score (40%) + Resource efficiency (20%)
-B) Only capability matching
-C) Resource requirements and availability
-D) User configuration preferences
+A) Capability match (40%) + Performance score (40%) + Resource efficiency (20%)  
+B) Only capability matching  
+C) Resource requirements and availability  
+D) User configuration preferences  
 
 **Question 4:** How does intelligent data ingestion merging weight different branch results?  
-A) Equal weighting for all branches
-B) Quality score (70%) + Time factor (30%)
-C) Only by execution time
-D) Random distribution
+A) Equal weighting for all branches  
+B) Quality score (70%) + Time factor (30%)  
+C) Only by execution time  
+D) Random distribution  
 
 **Question 5:** What configuration parameters are specific to data_ingestion_specialist agents?  
-A) Validation rules and quality thresholds
-B) Transformation type and schema mapping
-C) Ingestion source, batch size, data format, and schema validation
-D) Quality threshold and response time target
+A) Validation rules and quality thresholds  
+B) Transformation type and schema mapping  
+C) Ingestion source, batch size, data format, and schema validation  
+D) Quality threshold and response time target  
 
 [**🗂️ View Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
 

@@ -453,34 +453,34 @@ all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_
 Test your understanding of LangChain MCP Integration mastery:
 
 **Question 1:** What is the primary advantage of using LangChain MCP adapters?  
-A) Better performance
-B) Automatic tool discovery and integration
-C) Reduced memory usage
-D) Simplified configuration
+A) Better performance  
+B) Automatic tool discovery and integration  
+C) Reduced memory usage  
+D) Simplified configuration  
 
 **Question 2:** In the ReAct pattern, what does the agent do after each Action?  
-A) Plan the next action
-B) Wait for user input
-C) Observe the result
-D) Generate a final answer
+A) Plan the next action  
+B) Wait for user input  
+C) Observe the result  
+D) Generate a final answer  
 
 **Question 3:** What is the purpose of health monitoring in MCPServerManager?  
-A) Improve performance
-B) Automatically restart failed servers
-C) Monitor memory usage
-D) Log user interactions
+A) Improve performance  
+B) Automatically restart failed servers  
+C) Monitor memory usage  
+D) Log user interactions  
 
 **Question 4:** What advantage does LangGraph provide over simple ReAct agents?  
-A) Faster execution
-B) Complex stateful workflows
-C) Better error handling
-D) Simpler configuration
+A) Faster execution  
+B) Complex stateful workflows  
+C) Better error handling  
+D) Simpler configuration  
 
 **Question 5:** How does our multi-tool agent decide which tools to use?  
-A) Random selection
-B) Pre-configured rules
-C) LLM reasoning about tool descriptions
-D) User specification
+A) Random selection  
+B) Pre-configured rules  
+C) LLM reasoning about tool descriptions  
+D) User specification  
 
 **Answers:** 1-B, 2-C, 3-B, 4-B, 5-C
 

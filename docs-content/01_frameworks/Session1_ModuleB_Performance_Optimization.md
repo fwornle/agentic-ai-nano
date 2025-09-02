@@ -759,34 +759,34 @@ Finally, the system manages cache size to prevent memory issues during data proc
 Test your understanding of performance optimization concepts:
 
 **Question 1:** What information does the `DataProcessingMemoryEntry` dataclass track to enable intelligent memory management?  
-A) Only content and timestamp
-B) Content, timestamp, importance_score, size_bytes, data_volume_gb, and processing_stage
-C) Just the memory size and creation time
-D) Content and importance score only
+A) Only content and timestamp  
+B) Content, timestamp, importance_score, size_bytes, data_volume_gb, and processing_stage  
+C) Just the memory size and creation time  
+D) Content and importance score only  
 
 **Question 2:** How does the data processing memory cleanup algorithm prioritize which entries to keep?  
-A) Random selection
-B) First-in-first-out (FIFO)
-C) Sorts by importance (40%), processing stage priority (40%), and recency (20%)
-D) Only keeps the most recent entries
+A) Random selection  
+B) First-in-first-out (FIFO)  
+C) Sorts by importance (40%), processing stage priority (40%), and recency (20%)  
+D) Only keeps the most recent entries  
 
 **Question 3:** Why are certain data processing tools marked as non-cacheable in the optimization system?  
-A) They consume too much memory
-B) They have side effects, time-dependent results, or modify data state
-C) They execute too slowly
-D) They require special permissions
+A) They consume too much memory  
+B) They have side effects, time-dependent results, or modify data state  
+C) They execute too slowly  
+D) They require special permissions  
 
 **Question 4:** What technique does the data processing context compression use to fit within size limits?  
-A) Truncates all messages to the same length
-B) Removes all older messages completely
-C) Weights importance (50%) highest, then processing stage priority (30%), then recency (20%)
-D) Compresses text using algorithms
+A) Truncates all messages to the same length  
+B) Removes all older messages completely  
+C) Weights importance (50%) highest, then processing stage priority (30%), then recency (20%)  
+D) Compresses text using algorithms  
 
 **Question 5:** What does the data processing performance monitoring system track to optimize agent responses?  
-A) Only response times
-B) Memory usage exclusively
-C) Response times, percentiles, cache hit rates, target achievement, and data volumes processed
-D) Just error rates and failures
+A) Only response times  
+B) Memory usage exclusively  
+C) Response times, percentiles, cache hit rates, target achievement, and data volumes processed  
+D) Just error rates and failures  
 
 [**🗂️ View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
 

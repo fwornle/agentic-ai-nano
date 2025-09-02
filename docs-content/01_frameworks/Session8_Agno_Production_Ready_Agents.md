@@ -521,22 +521,22 @@ These modules contain the complete advanced content from the original file, rest
 ### Assessment Questions
 
 **Question 1:** What is Agno's primary advantage for data processing systems?  
-A) Simplest learning curve
-B) Performance optimization and production focus for data workloads
-C) Best documentation
-D) Largest community
+A) Simplest learning curve  
+B) Performance optimization and production focus for data workloads  
+C) Best documentation  
+D) Largest community  
 
 **Question 2:** How should you handle API rate limits in production data processing agent systems?  
-A) Ignore them
-B) Exponential backoff and jitter strategies for high-throughput data
-C) Faster requests
-D) Multiple API keys
+A) Ignore them  
+B) Exponential backoff and jitter strategies for high-throughput data  
+C) Faster requests  
+D) Multiple API keys  
 
 **Question 3:** What makes a health check endpoint effective for data processing systems?  
-A) Fast response time only
-B) Comprehensive dependency and resource checks including data quality metrics
-C) Simple HTTP 200 response
-D) Authentication requirements
+A) Fast response time only  
+B) Comprehensive dependency and resource checks including data quality metrics  
+C) Simple HTTP 200 response  
+D) Authentication requirements  
 
 *Additional assessment questions available in the advanced modules.*
 

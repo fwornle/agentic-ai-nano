@@ -266,34 +266,34 @@ Centralized MCP connection management with enterprise-grade pooling and monitori
 Test your understanding of ADK enterprise agent development for data processing systems.
 
 **Question 1:** What makes ADK agents suitable for enterprise data processing environments?  
-A) Simple development interface
-B) Built-in multi-tenant isolation, enterprise monitoring, and production deployment patterns for data processing
-C) Lightweight resource usage
-D) Basic agent functionality
+A) Simple development interface  
+B) Built-in multi-tenant isolation, enterprise monitoring, and production deployment patterns for data processing  
+C) Lightweight resource usage  
+D) Basic agent functionality  
 
 **Question 2:** How does ADK handle MCP integration for data processing systems?  
-A) Simple API calls
-B) Enterprise-grade connectivity with connection pooling, failover handling, and monitoring for data sources
-C) Direct database connections
-D) File-based data exchange
+A) Simple API calls  
+B) Enterprise-grade connectivity with connection pooling, failover handling, and monitoring for data sources  
+C) Direct database connections  
+D) File-based data exchange  
 
 **Question 3:** What monitoring capabilities does ADK provide for data processing agents?  
-A) Basic logging only
-B) Real-time metrics, alerting, dashboard generation, and performance analytics for data processing operations
-C) Error reporting only
-D) Manual monitoring
+A) Basic logging only  
+B) Real-time metrics, alerting, dashboard generation, and performance analytics for data processing operations  
+C) Error reporting only  
+D) Manual monitoring  
 
 **Question 4:** How does ADK support production deployment for data processing systems?  
-A) Manual deployment scripts
-B) Kubernetes integration with auto-scaling, monitoring setup, and enterprise deployment patterns for data processing
-C) Single server deployment
-D) Development environment only
+A) Manual deployment scripts  
+B) Kubernetes integration with auto-scaling, monitoring setup, and enterprise deployment patterns for data processing  
+C) Single server deployment  
+D) Development environment only  
 
 **Question 5:** What security features does ADK provide for enterprise data processing?  
-A) Basic authentication
-B) Comprehensive security including data encryption, audit logging, and enterprise security contexts for data processing
-C) No security features
-D) Simple password protection
+A) Basic authentication  
+B) Comprehensive security including data encryption, audit logging, and enterprise security contexts for data processing  
+C) No security features  
+D) Simple password protection  
 
 ---
 

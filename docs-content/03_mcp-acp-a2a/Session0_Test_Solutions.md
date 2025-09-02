@@ -4,10 +4,10 @@
 
 **Question 1:** What is the primary purpose of the Model Context Protocol (MCP)?  
 
-A) To enable direct communication between AI agents
-B) To manage agent discovery across organizations
-C) To standardize how LLMs interact with external data sources and tools ✅
-D) To provide a framework for building AI agents
+A) To enable direct communication between AI agents  
+B) To manage agent discovery across organizations  
+C) To standardize how LLMs interact with external data sources and tools ✅  
+D) To provide a framework for building AI agents  
 
 **Explanation:** MCP is designed to be the universal translator that makes enterprise APIs tool-agnostic and LLM-friendly. It standardizes the way Large Language Models access and interact with external data sources, databases, and tools, solving the problem of complex API integration.
 
@@ -15,10 +15,10 @@ D) To provide a framework for building AI agents
 
 **Question 2:** Which protocol is designed for local-first agent coordination with minimal overhead?  
 
-A) A2A (Agent-to-Agent)
-B) MCP (Model Context Protocol)
-C) ADK (Agent Development Kit)
-D) ACP (Agent Communication Protocol) ✅
+A) A2A (Agent-to-Agent)  
+B) MCP (Model Context Protocol)  
+C) ADK (Agent Development Kit)  
+D) ACP (Agent Communication Protocol) ✅  
 
 **Explanation:** ACP is specifically designed for local-first agent coordination, enabling agents to discover and communicate within the same runtime, edge device, or local network—even without internet connectivity.
 
@@ -26,10 +26,10 @@ D) ACP (Agent Communication Protocol) ✅
 
 **Question 3:** How do agents discover each other in the A2A protocol?  
 
-A) Through manual configuration files
-B) Using centralized agent registries only
-C) Via `.well-known/agent.json` files and discovery services ✅
-D) Through direct IP address connections
+A) Through manual configuration files  
+B) Using centralized agent registries only  
+C) Via `.well-known/agent.json` files and discovery services ✅  
+D) Through direct IP address connections  
 
 **Explanation:** A2A uses a standardized discovery mechanism where agents advertise their capabilities through `.well-known/agent.json` files and register with discovery services to enable other agents to find and connect with them.
 
@@ -37,10 +37,10 @@ D) Through direct IP address connections
 
 **Question 4:** What is the primary function of MCP Inspector?  
 
-A) To deploy MCP servers to production
-B) To test, debug, and validate MCP servers ✅
-C) To create new MCP protocols
-D) To monitor agent-to-agent communication
+A) To deploy MCP servers to production  
+B) To test, debug, and validate MCP servers ✅  
+C) To create new MCP protocols  
+D) To monitor agent-to-agent communication  
 
 **Explanation:** MCP Inspector is a developer tool (like Postman for MCP) that provides an interactive interface to explore MCP server capabilities, test tools, debug issues, and validate that servers follow the protocol correctly.
 
@@ -48,10 +48,10 @@ D) To monitor agent-to-agent communication
 
 **Question 5:** When should you use A2A protocol instead of MCP?  
 
-A) When you need to access local databases
-B) When you need agents to communicate across organizational boundaries ✅
-C) When you need to expose tools to LLMs
-D) When you need to manage prompt templates
+A) When you need to access local databases  
+B) When you need agents to communicate across organizational boundaries ✅  
+C) When you need to expose tools to LLMs  
+D) When you need to manage prompt templates  
 
 **Explanation:** A2A is specifically designed for agent-to-agent communication across organizational and technical boundaries. MCP is for LLM-to-external-system communication, while A2A enables agents to discover and collaborate with each other.
 
@@ -59,10 +59,10 @@ D) When you need to manage prompt templates
 
 **Question 6:** What transport mechanism does MCP typically use for communication?  
 
-A) HTTP REST only
-B) WebSocket only
-C) stdio (standard input/output) and other transports ✅
-D) gRPC only
+A) HTTP REST only  
+B) WebSocket only  
+C) stdio (standard input/output) and other transports ✅  
+D) gRPC only  
 
 **Explanation:** MCP supports multiple transport mechanisms including stdio (standard input/output), HTTP, WebSocket, and others. The stdio transport is commonly used for local MCP server communication.
 
@@ -70,10 +70,10 @@ D) gRPC only
 
 **Question 7:** In ACP, how do agents discover each other in offline environments?  
 
-A) Through cloud-based registries only
-B) Using local runtime discovery and embedded metadata ✅
-C) They cannot discover each other offline
-D) Through manual configuration files
+A) Through cloud-based registries only  
+B) Using local runtime discovery and embedded metadata ✅  
+C) They cannot discover each other offline  
+D) Through manual configuration files  
 
 **Explanation:** ACP enables agents to discover each other using local runtime discovery mechanisms and embedded metadata, allowing them to coordinate even in offline environments without cloud dependencies.
 
@@ -81,10 +81,10 @@ D) Through manual configuration files
 
 **Question 8:** Which of the following is NOT a key problem that A2A solves?  
 
-A) Model training optimization ✅
-B) Cross-organization collaboration
-C) Agent discovery
-D) Communication standards
+A) Model training optimization ✅  
+B) Cross-organization collaboration  
+C) Agent discovery  
+D) Communication standards  
 
 **Explanation:** A2A focuses on agent communication and interoperability problems: agent discovery, communication standards, and cross-organization collaboration. Model training optimization is not within A2A's scope—it's about agent communication, not model optimization.
 
@@ -92,10 +92,10 @@ D) Communication standards
 
 **Question 9:** What is the recommended development path for mastering these protocols?  
 
-A) Learn all three simultaneously
-B) Start with ACP, then MCP, then A2A
-C) Start with MCP, then ACP, then A2A ✅
-D) Start with A2A, then ACP, then MCP
+A) Learn all three simultaneously  
+B) Start with ACP, then MCP, then A2A  
+C) Start with MCP, then ACP, then A2A ✅  
+D) Start with A2A, then ACP, then MCP  
 
 **Explanation:** The curriculum is structured to start with MCP (Sessions 1-5) to understand how agents interact with external systems, then ACP for local agent coordination, and finally A2A (Sessions 7-9) for multi-agent communication—building from foundational concepts to complex multi-agent systems.
 
@@ -103,10 +103,10 @@ D) Start with A2A, then ACP, then MCP
 
 **Question 10:** Which major companies adopted MCP in 2024-2025?  
 
-A) Only Anthropic and small startups
-B) Microsoft, Google, OpenAI, and major tech leaders ✅
-C) Primarily academic institutions
-D) Only cloud service providers
+A) Only Anthropic and small startups  
+B) Microsoft, Google, OpenAI, and major tech leaders ✅  
+C) Primarily academic institutions  
+D) Only cloud service providers  
 
 **Explanation:** MCP has seen widespread adoption by major technology companies including Microsoft, Google, OpenAI, and other industry leaders, establishing it as the de facto standard for LLM-to-external-system communication in enterprise environments.
 

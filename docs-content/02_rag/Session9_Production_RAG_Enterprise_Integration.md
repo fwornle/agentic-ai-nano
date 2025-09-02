@@ -342,28 +342,28 @@ For comprehensive enterprise-grade RAG mastery, continue to the Implementer path
 Test your understanding of production RAG deployment:
 
 **Question 1:** What is the primary advantage of microservices architecture for production RAG systems?  
-A) Simpler deployment process
-B) Lower development costs
-C) Independent scaling and fault isolation of components
-D) Reduced system complexity
+A) Simpler deployment process  
+B) Lower development costs  
+C) Independent scaling and fault isolation of components  
+D) Reduced system complexity  
 
 **Question 2:** When should you choose response-time-based load balancing over round-robin?  
-A) When all service instances have identical performance
-B) When service instances have varying performance characteristics
-C) When implementing simple systems only
-D) When minimizing configuration complexity
+A) When all service instances have identical performance  
+B) When service instances have varying performance characteristics  
+C) When implementing simple systems only  
+D) When minimizing configuration complexity  
 
 **Question 3:** What is the key benefit of Role-Based Access Control (RBAC) in enterprise RAG systems?  
-A) Faster authentication speed
-B) Reduced server load
-C) Granular permission management and security policy enforcement
-D) Simpler user interface design
+A) Faster authentication speed  
+B) Reduced server load  
+C) Granular permission management and security policy enforcement  
+D) Simpler user interface design  
 
 **Question 4:** What is the primary challenge in real-time incremental indexing for RAG systems?  
-A) Storage capacity limitations
-B) Managing change detection and maintaining index consistency during updates
-C) Network bandwidth constraints
-D) User interface complexity
+A) Storage capacity limitations  
+B) Managing change detection and maintaining index consistency during updates  
+C) Network bandwidth constraints  
+D) User interface complexity  
 
 **Solutions:** 1-C, 2-B, 3-C, 4-B
 

@@ -3,34 +3,34 @@
 Test your understanding of agent frameworks and patterns:
 
 **Question 1:** Which agentic pattern involves an agent evaluating and improving its own outputs?  
-A) Multi-Agent
-B) Planning
-C) Tool Use
-D) Reflection
+A) Multi-Agent  
+B) Planning  
+C) Tool Use  
+D) Reflection  
 
 **Question 2:** The ReAct pattern combines which two key capabilities?  
-A) Reflecting and Acting
-B) Reading and Acting
-C) Retrieving and Acting
-D) Reasoning and Acting
+A) Reflecting and Acting  
+B) Reading and Acting  
+C) Retrieving and Acting  
+D) Reasoning and Acting  
 
 **Question 3:** Which framework is best suited for high-performance applications with minimal resource usage?  
-A) PydanticAI
-B) LangChain
-C) Agno
-D) CrewAI
+A) PydanticAI  
+B) LangChain  
+C) Agno  
+D) CrewAI  
 
 **Question 4:** What is the primary advantage of the Multi-Agent pattern?  
-A) Lower resource usage
-B) Reduced complexity
-C) Specialized expertise collaboration
-D) Faster execution
+A) Lower resource usage  
+B) Reduced complexity  
+C) Specialized expertise collaboration  
+D) Faster execution  
 
 **Question 5:** Which framework emphasizes type safety through schema validation?  
-A) PydanticAI
-B) CrewAI
-C) LangChain
-D) Agno
+A) PydanticAI  
+B) CrewAI  
+C) LangChain  
+D) Agno  
 
 ## Test Solutions
 

@@ -424,34 +424,34 @@ These foundations prepare you for advanced production patterns including cloud d
 Test your understanding of production MCP deployment fundamentals:
 
 **Question 1:** What is the fundamental difference between development and production MCP servers?  
-A) Production servers use different programming languages
-B) Production servers are slower to ensure stability
-C) Production servers require observability, scalability, security, and reliability features
-D) Production servers only work with enterprise LLM models
+A) Production servers use different programming languages  
+B) Production servers are slower to ensure stability  
+C) Production servers require observability, scalability, security, and reliability features  
+D) Production servers only work with enterprise LLM models  
 
 **Question 2:** Which logging format is most appropriate for production systems?  
-A) Plain text logs for human readability
-B) CSV format for easy spreadsheet import
-C) JSON-structured logs for automated analysis
-D) XML format for enterprise compatibility
+A) Plain text logs for human readability  
+B) CSV format for easy spreadsheet import  
+C) JSON-structured logs for automated analysis  
+D) XML format for enterprise compatibility  
 
 **Question 3:** What is the primary purpose of health check endpoints in production systems?  
-A) To test network connectivity only
-B) To provide load balancers with service readiness information
-C) To monitor CPU usage exclusively
-D) To check database connection strings
+A) To test network connectivity only  
+B) To provide load balancers with service readiness information  
+C) To monitor CPU usage exclusively  
+D) To check database connection strings  
 
 **Question 4:** Which metric type is most appropriate for tracking response time distributions?  
-A) Counter - for counting events over time
-B) Gauge - for current state values
-C) Histogram - for timing and size distributions
-D) Summary - for client-side percentile calculations
+A) Counter - for counting events over time  
+B) Gauge - for current state values  
+C) Histogram - for timing and size distributions  
+D) Summary - for client-side percentile calculations  
 
 **Question 5:** What security practice is essential for production container deployment?  
-A) Running all containers as root for maximum functionality
-B) Using non-root users, resource limits, and minimal base images
-C) Disabling all logging to prevent information leakage
-D) Allowing unlimited resource consumption for performance
+A) Running all containers as root for maximum functionality  
+B) Using non-root users, resource limits, and minimal base images  
+C) Disabling all logging to prevent information leakage  
+D) Allowing unlimited resource consumption for performance  
 
 [**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
 ---

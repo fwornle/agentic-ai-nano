@@ -1082,34 +1082,34 @@ Tool execution within DAG workflow includes comprehensive error handling, result
 Test your understanding of custom tool development for data engineering systems:
 
 **Question 1:** What components are included in the `DataToolContext` class for comprehensive execution metadata?  
-A) Only execution_id and timestamp
-B) execution_id, user_id, session_id, request_timestamp, dataset_metadata, processing_options, quality_requirements, and performance_targets
-C) Just user context and session data
-D) Only dataset metadata and processing options
+A) Only execution_id and timestamp  
+B) execution_id, user_id, session_id, request_timestamp, dataset_metadata, processing_options, quality_requirements, and performance_targets  
+C) Just user context and session data  
+D) Only dataset metadata and processing options  
 
 **Question 2:** What is the primary purpose of the `DataProcessingResult` class?  
-A) Store only successful results
-B) Provide structured result container with errors, warnings, performance metrics, and quality metrics
-C) Handle database connections
-D) Manage tool registration
+A) Store only successful results  
+B) Provide structured result container with errors, warnings, performance metrics, and quality metrics  
+C) Handle database connections  
+D) Manage tool registration  
 
 **Question 3:** Which execution modes are supported by the `ToolExecutionMode` enum for workflow orchestration?  
-A) Only SEQUENTIAL and PARALLEL
-B) SEQUENTIAL, PARALLEL, CONDITIONAL, PIPELINE, and DAG
-C) Just DAG and PIPELINE
-D) Only CONDITIONAL execution
+A) Only SEQUENTIAL and PARALLEL  
+B) SEQUENTIAL, PARALLEL, CONDITIONAL, PIPELINE, and DAG  
+C) Just DAG and PIPELINE  
+D) Only CONDITIONAL execution  
 
 **Question 4:** What does the DAG-based workflow execution provide for data processing workflows?  
-A) Simple sequential execution
-B) Complex dependency management with topological sorting and dependency resolution
-C) Only parallel processing
-D) Basic error handling
+A) Simple sequential execution  
+B) Complex dependency management with topological sorting and dependency resolution  
+C) Only parallel processing  
+D) Basic error handling  
 
 **Question 5:** What features does the `EnterpriseDataWarehouseTool` provide for data warehouse operations?  
-A) Only basic SQL execution
-B) Connection pooling, query optimization, result caching, and security validation
-C) Just connection management
-D) Only result formatting
+A) Only basic SQL execution  
+B) Connection pooling, query optimization, result caching, and security validation  
+C) Just connection management  
+D) Only result formatting  
 
 [**View Test Solutions →**](Session2_ModuleC_Test_Solutions.md)
 

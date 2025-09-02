@@ -38,34 +38,34 @@ This session offers three distinct learning paths designed to match your goals a
 Test your understanding of RAG implementation principles:
 
 **Question 1:** What is the primary advantage of token-aware chunking over character-based splitting?  
-A) Faster processing speed
-B) Ensures chunks fit within LLM context limits
-C) Reduces memory usage
-D) Simplifies implementation
+A) Faster processing speed  
+B) Ensures chunks fit within LLM context limits  
+C) Reduces memory usage  
+D) Simplifies implementation  
 
 **Question 2:** Why does production RAG use batch processing for document indexing?  
-A) To improve embedding quality
-B) To reduce API costs
-C) To prevent memory overflow and enable error isolation
-D) To simplify code structure
+A) To improve embedding quality  
+B) To reduce API costs  
+C) To prevent memory overflow and enable error isolation  
+D) To simplify code structure  
 
 **Question 3:** What characterizes a production-grade RAG prompt template?  
-A) Complex technical language
-B) Clear instructions, error handling, and source attribution guidance
-C) Minimal context requirements
-D) Maximum token utilization
+A) Complex technical language  
+B) Clear instructions, error handling, and source attribution guidance  
+C) Minimal context requirements  
+D) Maximum token utilization  
 
 **Question 4:** According to 2024 best practices, what is the optimal chunk size range?  
-A) 100-300 tokens
-B) 500-1500 tokens
-C) 2000-3000 tokens
-D) 4000+ tokens
+A) 100-300 tokens  
+B) 500-1500 tokens  
+C) 2000-3000 tokens  
+D) 4000+ tokens  
 
 **Question 5:** What is the key advantage of separating RAG into modular components?  
-A) Faster development time
-B) Lower memory usage
-C) Independent optimization and component swapping
-D) Reduced code complexity
+A) Faster development time  
+B) Lower memory usage  
+C) Independent optimization and component swapping  
+D) Reduced code complexity  
 
 *Additional questions available in path-specific modules*
 

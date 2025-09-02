@@ -486,34 +486,34 @@ When compliance scores fall below the threshold (default 90%), automated remedia
 Test your understanding of advanced production patterns:
 
 **Question 1:** What is the primary benefit of deploying RAG across multiple Kubernetes clusters?  
-A) Reduced deployment complexity
-B) Lower operational costs
-C) Geographic distribution and disaster recovery
-D) Simplified monitoring
+A) Reduced deployment complexity  
+B) Lower operational costs  
+C) Geographic distribution and disaster recovery  
+D) Simplified monitoring  
 
 **Question 2:** Why is machine learning-based scaling superior to threshold-based scaling?  
-A) It requires less configuration
-B) It predicts future load patterns and scales proactively
-C) It uses fewer computational resources
-D) It's easier to debug
+A) It requires less configuration  
+B) It predicts future load patterns and scales proactively  
+C) It uses fewer computational resources  
+D) It's easier to debug  
 
 **Question 3:** What is the key advantage of distributed tracing in RAG systems?  
-A) Reduced system complexity
-B) Lower storage requirements
-C) End-to-end visibility across all pipeline components
-D) Faster query processing
+A) Reduced system complexity  
+B) Lower storage requirements  
+C) End-to-end visibility across all pipeline components  
+D) Faster query processing  
 
 **Question 4:** Which metric combination is most important for RAG system optimization?  
-A) CPU usage only
-B) Memory consumption and network traffic
-C) Query efficiency, retrieval quality, response quality, and resource efficiency
-D) Disk space and bandwidth
+A) CPU usage only  
+B) Memory consumption and network traffic  
+C) Query efficiency, retrieval quality, response quality, and resource efficiency  
+D) Disk space and bandwidth  
 
 **Question 5:** What is the primary advantage of automated compliance monitoring?  
-A) Reduced compliance costs
-B) Simplified audit processes
-C) Continuous adherence without manual oversight
-D) Faster system performance
+A) Reduced compliance costs  
+B) Simplified audit processes  
+C) Continuous adherence without manual oversight  
+D) Faster system performance  
 
 [**🗂️ View Test Solutions →**](Session9_ModuleA_Test_Solutions.md)
 ---
