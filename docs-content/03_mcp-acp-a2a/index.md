@@ -16,7 +16,7 @@ In this module, you'll master three revolutionary protocols that are reshaping h
 
 Choose your path based on your learning goals and time availability:
 
-=== "👀 Observer (30-50 min)"
+=== "🎯 Observer (30-50 min)"
 
     **Focus**: Understanding concepts and architecture
     
@@ -24,7 +24,7 @@ Choose your path based on your learning goals and time availability:
     
     **Ideal for**: Decision makers, architects, overview learners
 
-=== "🙋‍♂️ Participant (60-90 min)"
+=== "📝 Participant (60-90 min)"
 
     **Focus**: Guided implementation and analysis
     
@@ -32,7 +32,7 @@ Choose your path based on your learning goals and time availability:
     
     **Ideal for**: Developers, technical leads, hands-on learners
 
-=== "🛠️ Implementer (120-180 min)"
+=== "⚙️ Implementer (120-180 min)"
 
     **Focus**: Complete implementation and customization
     
