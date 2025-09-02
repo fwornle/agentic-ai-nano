@@ -714,34 +714,34 @@ You've now mastered custom validation systems and resilient error handling for d
 Test your understanding of custom validation systems and error handling for data processing:
 
 **Question 1:** How does the DataProcessingErrorClassifier categorize different types of data processing errors?  
-A) By timestamp only
-B) By error type, severity level, data processing context, and pipeline impact tracking
-C) Simple binary classification
-D) Random categorization
+A) By timestamp only  
+B) By error type, severity level, data processing context, and pipeline impact tracking  
+C) Simple binary classification  
+D) Random categorization  
 
 **Question 2:** What retry strategy does the DataProcessingRetryStrategy implement for data processing workloads?  
-A) Fixed 1-second intervals
-B) Linear increase only
-C) Exponential backoff with category-specific delays and data quality impact consideration
-D) Random retry intervals
+A) Fixed 1-second intervals  
+B) Linear increase only  
+C) Exponential backoff with category-specific delays and data quality impact consideration  
+D) Random retry intervals  
 
 **Question 3:** When does the DataProcessingCircuitBreaker transition from CLOSED to OPEN state?  
-A) After any single failure
-B) When failure count exceeds threshold with faster recovery optimized for data processing
-C) At random intervals
-D) Only when manually triggered
+A) After any single failure  
+B) When failure count exceeds threshold with faster recovery optimized for data processing  
+C) At random intervals  
+D) Only when manually triggered  
 
 **Question 4:** What information does the data processing error context include for comprehensive tracking?  
-A) Just the error message
-B) Full context with dataset ID, pipeline stage, data quality impact, and processing metrics
-C) Only error codes
-D) Simple boolean flags
+A) Just the error message  
+B) Full context with dataset ID, pipeline stage, data quality impact, and processing metrics  
+C) Only error codes  
+D) Simple boolean flags  
 
 **Question 5:** How does the circuit breaker handle data service recovery testing?  
-A) 10 seconds
-B) Until 2 consecutive test requests succeed with 30-second recovery timeout optimized for data services
-C) Indefinitely
-D) 1 minute exactly
+A) 10 seconds  
+B) Until 2 consecutive test requests succeed with 30-second recovery timeout optimized for data services  
+C) Indefinitely  
+D) 1 minute exactly  
 
 [**🗂️ View Test Solutions →**](Session5_ModuleC_Test_Solutions.md)
 

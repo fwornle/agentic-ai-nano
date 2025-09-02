@@ -415,34 +415,38 @@ For comprehensive deep-dive into enterprise patterns and advanced architectures:
 Test your understanding of LangChain foundations and agent patterns for data engineering:
 
 **Question 1:** What is the primary benefit of LangChain's unified LLM interface for data systems?  
-A) Lower computational cost
-B) Consistent API across different LLM providers for data analysis
-C) Faster data processing times
-D) Better data storage performance
+
+A) Lower computational cost  
+B) Consistent API across different LLM providers for data analysis  
+C) Faster data processing times  
+D) Better data storage performance  
 
 **Question 2:** Which LangChain component is responsible for managing data analysis conversation context?  
-A) Chains
-B) Tools
-C) Memory
-D) Agents
+
+A) Chains  
+B) Tools  
+C) Memory  
+D) Agents  
 
 **Question 3:** How many ways can you create tools in LangChain for data processing?  
-A) Four - including custom data implementations
-B) Two - BaseTool and @tool decorator
-C) Three - BaseTool, @tool decorator, and StructuredTool
-D) One - inheriting from BaseTool
+
+A) Four - including custom data implementations  
+B) Two - BaseTool and @tool decorator  
+C) Three - BaseTool, @tool decorator, and StructuredTool  
+D) One - inheriting from BaseTool  
 
 **Question 4:** What is the primary purpose of Sequential Chains in data processing workflows?  
-A) To run multiple data agents simultaneously
-B) To connect multiple processing steps where each step's output feeds the next
-C) To handle data errors in parallel
-D) To reduce computational costs
+
+A) To run multiple data agents simultaneously  
+B) To connect multiple processing steps where each step's output feeds the next  
+C) To handle data errors in parallel  
+D) To reduce computational costs  
 
 **Question 5:** Which memory type would be best for a long data analysis conversation where you need context but not all details?  
-A) ConversationBufferMemory
-B) ConversationSummaryMemory
-C) ConversationBufferWindowMemory
-D) ConversationEntityMemory
+A) ConversationBufferMemory  
+B) ConversationSummaryMemory  
+C) ConversationBufferWindowMemory  
+D) ConversationEntityMemory  
 
 [**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
 ---

@@ -407,64 +407,64 @@ This isn't just about making existing processes faster—it's about enabling ent
 Before we move to production deployment, let's ensure you've mastered these advanced concepts:
 
 **Question 1:** Which workflow pattern enables multiple tasks to execute simultaneously?  
-A) Loop workflows
-B) Parallel workflows
-C) Sequential workflows
-D) Conditional workflows
+A) Loop workflows  
+B) Parallel workflows  
+C) Sequential workflows  
+D) Conditional workflows  
 
 **Question 2:** What triggers dynamic branching in conditional workflows?  
-A) Random selection
-B) Agent availability
-C) Time-based schedules
-D) Data values and context evaluation
+A) Random selection  
+B) Agent availability  
+C) Time-based schedules  
+D) Data values and context evaluation  
 
 **Question 3:** What is the most comprehensive approach to workflow fault recovery?  
-A) Restarting the entire workflow
-B) Simple retry mechanisms
-C) Ignoring errors and continuing
-D) Rollback and retry with compensation actions
+A) Restarting the entire workflow  
+B) Simple retry mechanisms  
+C) Ignoring errors and continuing  
+D) Rollback and retry with compensation actions  
 
 **Question 4:** How do adaptive workflows improve their performance over time?  
-A) By running more frequently
-B) By reducing the number of steps
-C) By analyzing performance metrics and adjusting execution strategies
-D) By using faster hardware
+A) By running more frequently  
+B) By reducing the number of steps  
+C) By analyzing performance metrics and adjusting execution strategies  
+D) By using faster hardware  
 
 **Question 5:** What information does the workflow execution context typically maintain?  
-A) Only the current step
-B) Just error messages
-C) State data, execution history, and resource allocations
-D) Only timing information
+A) Only the current step  
+B) Just error messages  
+C) State data, execution history, and resource allocations  
+D) Only timing information  
 
 **Question 6:** How are dependencies between workflow steps managed?  
-A) Using dependency graphs and prerequisite checking
-B) By alphabetical ordering
-C) Through timing delays only
-D) Through random execution
+A) Using dependency graphs and prerequisite checking  
+B) By alphabetical ordering  
+C) Through timing delays only  
+D) Through random execution  
 
 **Question 7:** What is the purpose of resource allocation in advanced workflows?  
-A) To reduce costs
-B) To improve security
-C) To simplify configuration
-D) To prevent resource contention and ensure optimal performance
+A) To reduce costs  
+B) To improve security  
+C) To simplify configuration  
+D) To prevent resource contention and ensure optimal performance  
 
 **Question 8:** What metrics are most important for workflow observability?  
-A) Only network traffic
-B) Only execution time
-C) Execution time, success rates, resource utilization, and error patterns
-D) Just memory usage
+A) Only network traffic  
+B) Only execution time  
+C) Execution time, success rates, resource utilization, and error patterns  
+D) Just memory usage  
 
 **Question 9:** What mechanisms prevent infinite loops in workflow systems?  
-A) Time-based termination only
-B) Manual intervention
-C) Maximum iteration limits and conditional exit criteria
-D) Random termination
+A) Time-based termination only  
+B) Manual intervention  
+C) Maximum iteration limits and conditional exit criteria  
+D) Random termination  
 
 **Question 10:** What advantage do hybrid workflows provide over simple workflow patterns?  
-A) Lower resource usage
-B) Faster execution
-C) Easier implementation
-D) Flexibility to combine multiple execution patterns for complex scenarios
+A) Lower resource usage  
+B) Faster execution  
+C) Easier implementation  
+D) Flexibility to combine multiple execution patterns for complex scenarios  
 
 [**🗂️ View Test Solutions →**](Session8_Test_Solutions.md)
 ---
