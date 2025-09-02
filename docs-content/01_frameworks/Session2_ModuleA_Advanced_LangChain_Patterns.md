@@ -1115,34 +1115,34 @@ Individual quality check implementations provide specific data validation result
 Test your understanding of advanced LangChain patterns for data engineering:
 
 **Question 1:** What components are defined in the `DataAgentRole` dataclass for data agent specialization?  
-A) Only name and description
-B) Name, description, tools, specialization, and expertise_areas
-C) Just tools and memory configuration
-D) Only specialization and tools
+A) Only name and description  
+B) Name, description, tools, specialization, and expertise_areas  
+C) Just tools and memory configuration  
+D) Only specialization and tools  
 
 **Question 2:** What is the primary purpose of the `DataProcessingOrchestrator` class?  
-A) Create individual data agents
-B) Coordinate complex data workflows across multiple specialized agents
-C) Store conversation memory
-D) Execute single-agent tasks
+A) Create individual data agents  
+B) Coordinate complex data workflows across multiple specialized agents  
+C) Store conversation memory  
+D) Execute single-agent tasks  
 
 **Question 3:** How does the data workflow coordination engine track execution progress?  
-A) Only stores final results
-B) Uses workflow_context with phases, intermediate_results, and agent_interactions
-C) Relies on agent memory alone
-D) Tracks only error states
+A) Only stores final results  
+B) Uses workflow_context with phases, intermediate_results, and agent_interactions  
+C) Relies on agent memory alone  
+D) Tracks only error states  
 
 **Question 4:** What differentiates a data ingestion agent from an analytics agent in the multi-agent system?  
-A) Different LLM models
-B) Specialized tools and system messages focused on their data domain
-C) Memory configuration only
-D) Agent type parameter
+A) Different LLM models  
+B) Specialized tools and system messages focused on their data domain  
+C) Memory configuration only  
+D) Agent type parameter  
 
 **Question 5:** What happens in the ML pipeline phase of the complex data workflow?  
-A) Initial data gathering
-B) Pattern recognition only
-C) Combines ingestion and analytics results into comprehensive ML workflows
-D) Error handling and recovery
+A) Initial data gathering  
+B) Pattern recognition only  
+C) Combines ingestion and analytics results into comprehensive ML workflows  
+D) Error handling and recovery  
 
 [**View Test Solutions →**](Session2_ModuleA_Test_Solutions.md)
 

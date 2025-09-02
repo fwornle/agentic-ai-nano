@@ -145,34 +145,34 @@ Session 4: CrewAI Team Orchestration Hub
 Test your understanding of CrewAI team orchestration:
 
 **Question 1:** What is CrewAI's primary strength for data engineering teams compared to other agent frameworks?  
-A) Fastest data processing speed
-B) Team-based collaboration with specialized data processing roles
-C) Lowest resource usage for large datasets
-D) Easiest deployment to cloud data platforms
+A) Fastest data processing speed  
+B) Team-based collaboration with specialized data processing roles  
+C) Lowest resource usage for large datasets  
+D) Easiest deployment to cloud data platforms  
 
 **Question 2:** In CrewAI for data processing, what defines an agent's behavior and capabilities?  
-A) Data processing tools only
-B) Role, goal, and domain-specific backstory
-C) Memory capacity for data schemas
-D) Processing speed for large datasets
+A) Data processing tools only  
+B) Role, goal, and domain-specific backstory  
+C) Memory capacity for data schemas  
+D) Processing speed for large datasets  
 
 **Question 3:** What is the purpose of the `expected_output` parameter in CrewAI data processing tasks?  
-A) To validate data quality in agent responses
-B) To guide task execution and set clear data processing expectations
-C) To measure processing performance
-D) To handle data pipeline errors
+A) To validate data quality in agent responses  
+B) To guide task execution and set clear data processing expectations  
+C) To measure processing performance  
+D) To handle data pipeline errors  
 
 **Question 4:** Which CrewAI process type offers the most control over data processing task execution order?  
-A) Sequential (like ETL pipeline stages)
-B) Hierarchical (with data engineering manager oversight)
-C) Parallel (for independent data processing)
-D) Random (for experimental data exploration)
+A) Sequential (like ETL pipeline stages)  
+B) Hierarchical (with data engineering manager oversight)  
+C) Parallel (for independent data processing)  
+D) Random (for experimental data exploration)  
 
 **Question 5:** What makes CrewAI Flows different from regular CrewAI execution in data processing contexts?  
-A) They use different data processing agents
-B) They provide structured workflow control with conditional logic for complex data pipelines
-C) They process data faster
-D) They require fewer computational resources
+A) They use different data processing agents  
+B) They provide structured workflow control with conditional logic for complex data pipelines  
+C) They process data faster  
+D) They require fewer computational resources  
 
 [**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
 

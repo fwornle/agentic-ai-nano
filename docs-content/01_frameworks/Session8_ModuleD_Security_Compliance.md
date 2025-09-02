@@ -1357,34 +1357,34 @@ You've now mastered security and compliance systems that prevent billion-dollar 
 Test your understanding of Security & Compliance for enterprise agent systems:
 
 **Question 1:** What is the core principle of zero-trust security architecture?  
-A) Trust all internal network traffic by default
-B) Never trust, always verify every request regardless of source
-C) Only authenticate users once per session
-D) Allow unrestricted access within the enterprise network
+A) Trust all internal network traffic by default  
+B) Never trust, always verify every request regardless of source  
+C) Only authenticate users once per session  
+D) Allow unrestricted access within the enterprise network  
 
 **Question 2:** Which GDPR article governs the "Right to Erasure" (right to be forgotten)?  
-A) Article 15 - Right of Access
-B) Article 16 - Right to Rectification
-C) Article 17 - Right to Erasure
-D) Article 20 - Right to Data Portability
+A) Article 15 - Right of Access  
+B) Article 16 - Right to Rectification  
+C) Article 17 - Right to Erasure  
+D) Article 20 - Right to Data Portability  
 
 **Question 3:** What does differential privacy add to query results to protect individual privacy?  
-A) Encryption with rotating keys
-B) Calibrated mathematical noise using Laplace mechanism
-C) Complete data anonymization
-D) Access control restrictions
+A) Encryption with rotating keys  
+B) Calibrated mathematical noise using Laplace mechanism  
+C) Complete data anonymization  
+D) Access control restrictions  
 
 **Question 4:** In the threat detection system, what response action is recommended for "high_risk" threats?  
-A) log_event, monitor_closely
-B) rate_limit, require_additional_auth
-C) block_temporarily, alert_security_team
-D) block_permanently, emergency_response
+A) log_event, monitor_closely  
+B) rate_limit, require_additional_auth  
+C) block_temporarily, alert_security_team  
+D) block_permanently, emergency_response  
 
 **Question 5:** What privacy-preserving technique ensures k-anonymity in datasets?  
-A) Differential privacy with epsilon budget
-B) Homomorphic encryption of sensitive fields
-C) Generalization and suppression of quasi-identifiers
-D) JWT token-based authentication
+A) Differential privacy with epsilon budget  
+B) Homomorphic encryption of sensitive fields  
+C) Generalization and suppression of quasi-identifiers  
+D) JWT token-based authentication  
 
 [**🗂️ View Test Solutions →**](Session8_ModuleD_Test_Solutions.md)
 

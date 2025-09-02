@@ -613,34 +613,34 @@ Quality analytics provide operational intelligence for production RAG systems. T
 ## Multiple Choice Test - Module A
 
 **Question 1:** What is the primary benefit of document complexity scoring in enterprise RAG systems?  
-A) Reduces processing time for all documents
-B) Enables optimal processing strategy selection based on document characteristics
-C) Eliminates the need for human document review
-D) Automatically fixes document formatting issues
+A) Reduces processing time for all documents  
+B) Enables optimal processing strategy selection based on document characteristics  
+C) Eliminates the need for human document review  
+D) Automatically fixes document formatting issues  
 
 **Question 2:** Which approach provides the most comprehensive chunk quality assessment?  
-A) Word count and character length only
-B) Balance of coherence, information density, and completeness
-C) Processing speed and memory usage
-D) File size and format compatibility
+A) Word count and character length only  
+B) Balance of coherence, information density, and completeness  
+C) Processing speed and memory usage  
+D) File size and format compatibility  
 
 **Question 3:** Why is domain-specific document processing crucial for enterprise applications?  
-A) It reduces computational requirements
-B) It preserves domain-specific structure and terminology for better retrieval
-C) It standardizes all documents to a common format
-D) It eliminates the need for manual preprocessing
+A) It reduces computational requirements  
+B) It preserves domain-specific structure and terminology for better retrieval  
+C) It standardizes all documents to a common format  
+D) It eliminates the need for manual preprocessing  
 
 **Question 4:** How should information density be measured in enterprise quality frameworks?  
-A) Total word count divided by paragraph count
-B) Ratio of unique words to total words
-C) Number of technical terms per sentence
-D) Average sentence length in characters
+A) Total word count divided by paragraph count  
+B) Ratio of unique words to total words  
+C) Number of technical terms per sentence  
+D) Average sentence length in characters  
 
 **Question 5:** What is the most effective method for measuring semantic coherence between chunks?  
-A) Word overlap and shared vocabulary analysis
-B) Semantic similarity and topic consistency evaluation
-C) File format and structure comparison
-D) Processing time and resource utilization
+A) Word overlap and shared vocabulary analysis  
+B) Semantic similarity and topic consistency evaluation  
+C) File format and structure comparison  
+D) Processing time and resource utilization  
 
 [**🗂️ View Test Solutions →**](Session2_ModuleA_Test_Solutions.md)
 

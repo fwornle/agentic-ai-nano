@@ -689,34 +689,34 @@ For deep expertise, explore:
 ## 📝 Multiple Choice Test - Session 5
 
 **Question 1:** What is the primary advantage of PydanticAI?  
-A) Faster execution
-B) Lower cost
-C) Better UI
-D) Automatic validation and structured outputs
+A) Faster execution  
+B) Lower cost  
+C) Better UI  
+D) Automatic validation and structured outputs  
 
 **Question 2:** Which constraint ensures numeric range validation?  
-A) Field(range=(0, 100))
-B) Field(between=0:100)
-C) Field(min=0, max=100)
-D) Field(ge=0, le=100)
+A) Field(range=(0, 100))  
+B) Field(between=0:100)  
+C) Field(min=0, max=100)  
+D) Field(ge=0, le=100)  
 
 **Question 3:** What happens when validation fails?  
-A) Application crashes
-B) Silent failure
-C) Warning logged
-D) ValidationError raised
+A) Application crashes  
+B) Silent failure  
+C) Warning logged  
+D) ValidationError raised  
 
 **Question 4:** How do you define tools?  
-A) @tool decorator
-B) def tool() syntax
-C) @function decorator
-D) Tool class with takes/returns
+A) @tool decorator  
+B) def tool() syntax  
+C) @function decorator  
+D) Tool class with takes/returns  
 
 **Question 5:** What is RunContext for?  
-A) Error handling
-B) Runtime configuration and dependencies
-C) Conversation history
-D) Speed control
+A) Error handling  
+B) Runtime configuration and dependencies  
+C) Conversation history  
+D) Speed control  
 
 [**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
 ---

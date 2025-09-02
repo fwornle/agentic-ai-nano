@@ -1741,46 +1741,46 @@ You've now mastered production multi-agent data processing systems:
 Test your understanding of production multi-agent data processing systems:
 
 **Question 1:** What is the primary benefit of containerizing data processing agents for production deployment?  
-A) Easier development
-B) Isolation, scalability, and resource management for data workloads
-C) Lower storage costs
-D) Simpler user interface
+A) Easier development  
+B) Isolation, scalability, and resource management for data workloads  
+C) Lower storage costs  
+D) Simpler user interface  
 
 **Question 2:** Which metrics are most critical for auto-scaling data processing agents?  
-A) Only CPU utilization
-B) Data throughput, processing latency, queue depth, and resource utilization
-C) Network bandwidth only
-D) Memory usage only
+A) Only CPU utilization  
+B) Data throughput, processing latency, queue depth, and resource utilization  
+C) Network bandwidth only  
+D) Memory usage only  
 
 **Question 3:** What triggers should initiate scale-up for data processing workloads?  
-A) Manual intervention only
-B) High data throughput, processing latency, queue depth, or resource utilization
-C) Time-based schedules
-D) Random intervals
+A) Manual intervention only  
+B) High data throughput, processing latency, queue depth, or resource utilization  
+C) Time-based schedules  
+D) Random intervals  
 
 **Question 4:** How should production data processing systems handle scaling cooldown periods?  
-A) No cooldown needed
-B) Prevent rapid scaling oscillations while allowing critical scaling events
-C) Fixed 1-hour cooldown
-D) Scale immediately always
+A) No cooldown needed  
+B) Prevent rapid scaling oscillations while allowing critical scaling events  
+C) Fixed 1-hour cooldown  
+D) Scale immediately always  
 
 **Question 5:** What are essential components of data processing system monitoring?  
-A) CPU metrics only
-B) Throughput, latency, error rates, data quality, and resource utilization metrics
-C) Storage metrics only
-D) Network metrics only
+A) CPU metrics only  
+B) Throughput, latency, error rates, data quality, and resource utilization metrics  
+C) Storage metrics only  
+D) Network metrics only  
 
 **Question 6:** How should alert severity be determined for data processing systems?  
-A) All alerts are critical
-B) Based on business impact: data quality, processing latency, and system availability
-C) Random assignment
-D) User preference
+A) All alerts are critical  
+B) Based on business impact: data quality, processing latency, and system availability  
+C) Random assignment  
+D) User preference  
 
 **Question 7:** What is the purpose of health checks in containerized data processing agents?  
-A) Monitor application logs
-B) Verify agent readiness and liveness for data processing workloads
-C) Check network connectivity only
-D) Measure CPU temperature
+A) Monitor application logs  
+B) Verify agent readiness and liveness for data processing workloads  
+C) Check network connectivity only  
+D) Measure CPU temperature  
 
 [**🗂️ View Test Solutions →**](Session9B_Test_Solutions.md)
 ---

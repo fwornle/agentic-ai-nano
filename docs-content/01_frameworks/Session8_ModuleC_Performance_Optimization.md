@@ -102,34 +102,34 @@ class CacheEntry:
 Test your understanding of Performance Optimization:
 
 **Question 1:** What is the primary advantage of implementing multi-layer caching with L1 memory and L2 Redis?  
-A) It reduces development complexity
-B) It provides both ultra-fast access and distributed caching capabilities
-C) It eliminates the need for TTL management
-D) It automatically handles all cache invalidation
+A) It reduces development complexity  
+B) It provides both ultra-fast access and distributed caching capabilities  
+C) It eliminates the need for TTL management  
+D) It automatically handles all cache invalidation  
 
 **Question 2:** In the intelligent cache eviction algorithm, what factors are used to calculate the eviction score?  
-A) Only time since last access
-B) Only access frequency
-C) Both recency score and frequency score combined
-D) Random selection for fairness
+A) Only time since last access  
+B) Only access frequency  
+C) Both recency score and frequency score combined  
+D) Random selection for fairness  
 
 **Question 3:** What is the cost optimization strategy when daily budget utilization reaches 95%?  
-A) Continue normal operations
-B) Send alerts but maintain current scaling
-C) Trigger automatic scaling down of non-critical services
-D) Completely shut down all agent services
+A) Continue normal operations  
+B) Send alerts but maintain current scaling  
+C) Trigger automatic scaling down of non-critical services  
+D) Completely shut down all agent services  
 
 **Question 4:** How does the intelligent model selection algorithm balance different requirements?  
-A) It only considers cost (100% weight)
-B) It uses equal weights for all factors
-C) It weights cost and quality at 40% each, speed at 20%
-D) It prioritizes speed above all other factors
+A) It only considers cost (100% weight)  
+B) It uses equal weights for all factors  
+C) It weights cost and quality at 40% each, speed at 20%  
+D) It prioritizes speed above all other factors  
 
 **Question 5:** What is the purpose of connection pooling in the latency optimization system?  
-A) To increase security through connection encryption
-B) To reduce latency by reusing HTTP connections across requests
-C) To automatically retry failed requests
-D) To load balance requests across multiple servers
+A) To increase security through connection encryption  
+B) To reduce latency by reusing HTTP connections across requests  
+C) To automatically retry failed requests  
+D) To load balance requests across multiple servers  
 
 [**🗂️ View Test Solutions →**](Session8_ModuleC_Test_Solutions.md)
 

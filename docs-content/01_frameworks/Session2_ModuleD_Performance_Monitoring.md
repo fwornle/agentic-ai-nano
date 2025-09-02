@@ -1481,34 +1481,34 @@ Query optimization recommendations focus on reducing per-query costs through cac
 Test your understanding of performance monitoring and optimization for data engineering systems:
 
 **Question 1:** What categories of metrics are tracked in the `DataProcessingMetrics` dataclass?  
-A) Only response times
-B) Response time, data throughput, resource usage, data-specific processing, data quality, error, and business impact metrics
-C) Just error rates and memory usage
-D) Only query latency measurements
+A) Only response times  
+B) Response time, data throughput, resource usage, data-specific processing, data quality, error, and business impact metrics  
+C) Just error rates and memory usage  
+D) Only query latency measurements  
 
 **Question 2:** What does the benchmark suite initialization include for data processing?  
-A) Only basic configuration
-B) Data agent factory, configuration, performance history, logger, and memory tracing
-C) Just test scenarios
-D) Only result storage
+A) Only basic configuration  
+B) Data agent factory, configuration, performance history, logger, and memory tracing  
+C) Just test scenarios  
+D) Only result storage  
 
 **Question 3:** How are benchmark results organized for analysis in data processing systems?  
-A) Single flat structure
-B) By scenario with unique benchmark IDs, timestamps, and optimization recommendations
-C) Only by execution time
-D) Just error logs
+A) Single flat structure  
+B) By scenario with unique benchmark IDs, timestamps, and optimization recommendations  
+C) Only by execution time  
+D) Just error logs  
 
 **Question 4:** What metrics are particularly important for data processing cost optimization?  
-A) Only response times
-B) Data transfer rates, query processing costs, and resource consumption
-C) Just error rates
-D) Only cache hit rates
+A) Only response times  
+B) Data transfer rates, query processing costs, and resource consumption  
+C) Just error rates  
+D) Only cache hit rates  
 
 **Question 5:** What is the purpose of tracking percentile metrics (p50, p90) rather than just averages in data processing?  
-A) Reduce storage requirements
-B) Understand data processing performance under different analytical workloads and identify query outliers
-C) Simplify calculations
-D) Improve execution speed
+A) Reduce storage requirements  
+B) Understand data processing performance under different analytical workloads and identify query outliers  
+C) Simplify calculations  
+D) Improve execution speed  
 
 [**View Test Solutions →**](Session2_ModuleD_Test_Solutions.md)
 
