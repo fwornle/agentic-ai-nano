@@ -1,6 +1,6 @@
 # Session 4 - Module A: Query Understanding
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 4 core content first.
 
 You've implemented HyDE, query expansion, and context optimization in Session 4. But when you deploy to real users in conversational interfaces, you discover new challenges: users say "it" without referencing what they mean, attach images expecting visual understanding, and express the same need in dramatically different ways depending on their expertise level.
@@ -74,7 +74,7 @@ Now let's implement the main analyzer class that orchestrates comprehensive quer
 ```python
 class AdvancedQueryAnalyzer:
     """Advanced query understanding with intent detection and routing."""
-    
+
     def __init__(self, llm_model):
         self.llm_model = llm_model
         self.intent_patterns = self._initialize_intent_patterns()
@@ -88,19 +88,19 @@ Let's implement the comprehensive analysis method that coordinates all aspects o
 ```python
     def analyze_query_comprehensively(self, query: str) -> QueryAnalysis:
         """Perform comprehensive query analysis for optimal processing."""
-        
+
         # Intent classification
         intent = self._classify_intent(query)
-        
+
         # Complexity assessment
         complexity = self._assess_complexity(query)
-        
+
         # Domain detection
         domain = self._detect_domain(query)
-        
+
         # Entity extraction
         entities = self._extract_entities(query)
-        
+
         # Temporal reference detection
         temporal_refs = self._detect_temporal_references(query)
 ```
@@ -112,10 +112,10 @@ Next, we calculate confidence and recommend processing strategy:
 ```python
         # Confidence scoring
         confidence = self._calculate_confidence(query, intent, domain)
-        
+
         # Processing strategy recommendation
         strategy = self._recommend_processing_strategy(intent, complexity, domain)
-        
+
         return QueryAnalysis(
             intent=intent,
             complexity_level=complexity,
@@ -134,7 +134,7 @@ Now let's examine the intent classification method that combines pattern matchin
 ```python
     def _classify_intent(self, query: str) -> QueryIntent:
         """Classify query intent using pattern matching and ML."""
-        
+
         # Pattern-based classification
         for intent, patterns in self.intent_patterns.items():
             for pattern in patterns:
@@ -157,9 +157,9 @@ For more complex queries, we fallback to LLM-powered analysis:
         - creative: Open-ended or creative requests
         - troubleshooting: Problem-solving or debugging
         - definitional: Asking for definitions or explanations
-        
+
         Query: {query}
-        
+
         Return only the category name:
         """
 ```
@@ -187,7 +187,7 @@ Context-aware enhancement transforms incomplete, reference-heavy queries into co
 ```python
 class ContextAwareQueryEnhancer:
     """Enhance queries based on user context and conversation history."""
-    
+
     def __init__(self, llm_model):
         self.llm_model = llm_model
         self.conversation_history = {}
@@ -199,19 +199,19 @@ The context-aware enhancer maintains conversation history and user profiles to p
 Let's implement the main enhancement method that coordinates context integration:
 
 ```python
-    def enhance_with_context(self, query: str, user_id: str, 
+    def enhance_with_context(self, query: str, user_id: str,
                            session_id: str) -> Dict[str, Any]:
         """Enhance query using conversation context and user profile."""
-        
+
         # Retrieve conversation context
         context = self._get_conversation_context(user_id, session_id)
-        
+
         # Get user profile
         profile = self._get_user_profile(user_id)
-        
+
         # Resolve pronouns and references
         resolved_query = self._resolve_references(query, context)
-        
+
         # Add implicit context
         enriched_query = self._add_implicit_context(resolved_query, profile, context)
 ```
@@ -223,7 +223,7 @@ Finally, we generate query variants and compile the complete enhancement result:
 ```python
         # Generate query variants
         variants = self._generate_contextual_variants(enriched_query, context)
-        
+
         return {
             "original_query": query,
             "resolved_query": resolved_query,
@@ -241,18 +241,18 @@ Now let's examine the reference resolution process that handles pronouns and imp
 ```python
     def _resolve_references(self, query: str, context: Dict) -> str:
         """Resolve pronouns and references using conversation context."""
-        
+
         if not context.get("recent_entities"):
             return query
-            
+
         reference_prompt = f"""
         Given this conversation context and current query, resolve any pronouns or references:
-        
+
         Recent entities mentioned: {context.get("recent_entities", [])}
         Previous topics: {context.get("recent_topics", [])}
-        
+
         Current query: {query}
-        
+
         Return the query with references resolved:
         """
 ```
@@ -277,7 +277,7 @@ Multi-modal query processing analyzes images, documents, and other media to extr
 ```python
 class MultiModalQueryProcessor:
     """Process queries that may reference images, documents, or other media."""
-    
+
     def __init__(self, vision_model, llm_model):
         self.vision_model = vision_model
         self.llm_model = llm_model
@@ -290,9 +290,9 @@ Let's implement the main processing method that handles various attachment types
 ```python
     def process_multimodal_query(self, query: str, attachments: List[Dict]) -> Dict[str, Any]:
         """Process query with image, document, or other attachments."""
-        
+
         processed_attachments = []
-        
+
         for attachment in attachments:
             if attachment["type"] == "image":
                 description = self._analyze_image(attachment["data"])
@@ -317,7 +317,7 @@ Next, we integrate the attachment context with the original query:
 ```python
         # Enhance query with attachment context
         enhanced_query = self._integrate_attachment_context(query, processed_attachments)
-        
+
         return {
             "enhanced_query": enhanced_query,
             "processed_attachments": processed_attachments,
@@ -335,13 +335,13 @@ Now let's examine the image analysis and context integration methods:
         # Implement vision model analysis
         description = self.vision_model.describe_image(image_data)
         return description
-    
+
     def _integrate_attachment_context(self, query: str, attachments: List[Dict]) -> str:
         """Integrate attachment descriptions into query."""
-        
+
         if not attachments:
             return query
-            
+
         context_parts = []
         for attachment in attachments:
             if attachment["type"] == "image":
@@ -365,47 +365,41 @@ Multi-modal query processing enables RAG systems to handle rich user interaction
 
 ## Multiple Choice Test - Module A
 
-**Question 1:** What is the primary benefit of intent classification in query processing?  
-A) Reduces processing time  
-B) Enables specialized processing strategies tailored to query types  
-C) Reduces memory usage  
-D) Simplifies implementation  
+**Question 1:** What is the primary benefit of intent classification in query processing?
+A) Reduces processing time
+B) Enables specialized processing strategies tailored to query types
+C) Reduces memory usage
+D) Simplifies implementation
 
-**Question 2:** Why is context-aware query enhancement important?  
-A) It reduces computational costs  
-B) It resolves ambiguities and adds implicit context from conversation history  
-C) It speeds up retrieval  
-D) It reduces storage requirements  
+**Question 2:** Why is context-aware query enhancement important?
+A) It reduces computational costs
+B) It resolves ambiguities and adds implicit context from conversation history
+C) It speeds up retrieval
+D) It reduces storage requirements
 
-**Question 3:** How does multi-modal query processing improve RAG systems?  
-A) It reduces complexity  
-B) It enables processing of queries with images, documents, and other media types  
-C) It reduces memory usage  
-D) It simplifies deployment  
+**Question 3:** How does multi-modal query processing improve RAG systems?
+A) It reduces complexity
+B) It enables processing of queries with images, documents, and other media types
+C) It reduces memory usage
+D) It simplifies deployment
 
-**Question 4:** What is the value of reference resolution in conversational RAG?  
-A) It improves speed  
-B) It resolves pronouns and references using conversation context for clarity  
-C) It reduces costs  
-D) It simplifies architecture  
+**Question 4:** What is the value of reference resolution in conversational RAG?
+A) It improves speed
+B) It resolves pronouns and references using conversation context for clarity
+C) It reduces costs
+D) It simplifies architecture
 
-**Question 5:** Why should query complexity assessment guide processing strategy?  
-A) It reduces infrastructure costs  
-B) It allows allocation of appropriate computational resources and techniques  
-C) It speeds up all queries  
-D) It reduces memory usage  
+**Question 5:** Why should query complexity assessment guide processing strategy?
+A) It reduces infrastructure costs
+B) It allows allocation of appropriate computational resources and techniques
+C) It speeds up all queries
+D) It reduces memory usage
 
 [**🗂️ View Test Solutions →**](Session4_ModuleA_Test_Solutions.md)
+---
 
 ## 🧭 Navigation
 
-**Previous:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
-
-### Related Modules
-
-- **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
-- **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)
-
-**Next:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
-
+**Previous:** [Session 3 - Vector Databases & Search Optimization ←](Session3_Vector_Databases_Search_Optimization.md)
+**Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
 ---

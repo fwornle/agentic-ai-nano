@@ -1,24 +1,24 @@
 # 📝 Session 4: Query Expansion Practice
 
-> **📝 PARTICIPANT PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer path and [📝 HyDE Implementation](Session4_HyDE_Implementation.md)  
-> Time Investment: 45-60 minutes  
-> Outcome: Multi-strategy query expansion system  
+> **📝 PARTICIPANT PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer path and [📝 HyDE Implementation](Session4_HyDE_Implementation.md)
+> Time Investment: 45-60 minutes
+> Outcome: Multi-strategy query expansion system
 
 ## Learning Outcomes
 
-After completing this practice guide, you will:  
+After completing this practice guide, you will:
 
-- Build intelligent query expansion systems  
-- Implement multiple expansion strategies (semantic, contextual, domain-specific)  
-- Create multi-query generation from different perspectives  
-- Develop query decomposition for complex questions  
+- Build intelligent query expansion systems
+- Implement multiple expansion strategies (semantic, contextual, domain-specific)
+- Create multi-query generation from different perspectives
+- Develop query decomposition for complex questions
 
 ## Complete Query Expansion System
 
 ### Step 1: Intelligent Query Expander Setup
 
-Build a comprehensive query expansion system with multiple strategies:  
+Build a comprehensive query expansion system with multiple strategies:
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -45,7 +45,7 @@ class IntelligentQueryExpander:
             'contextual': self._contextual_expansion,
             'domain_specific': self._domain_specific_expansion
         }
-        
+
         # Domain-specific TF-IDF if corpus provided
         if domain_corpus:
             self.domain_tfidf = TfidfVectorizer(
@@ -60,7 +60,7 @@ class IntelligentQueryExpander:
 
 ### Step 2: Core Expansion Workflow
 
-Implement the main query expansion coordination system:  
+Implement the main query expansion coordination system:
 
 ```python
 def expand_query(self, query: str,
@@ -100,7 +100,7 @@ def expand_query(self, query: str,
 
 ### Step 3: Semantic Expansion Using LLM
 
-Generate semantically related terms using LLM understanding:  
+Generate semantically related terms using LLM understanding:
 
 ```python
 def _semantic_expansion(self, query: str, max_expansions: int) -> List[str]:
@@ -132,7 +132,7 @@ def _semantic_expansion(self, query: str, max_expansions: int) -> List[str]:
             if term.strip() and not term.strip().startswith(('-', '*', '•'))
         ]
         return expansions[:max_expansions]
-        
+
     except Exception as e:
         print(f"Semantic expansion error: {e}")
         return []
@@ -142,7 +142,7 @@ def _semantic_expansion(self, query: str, max_expansions: int) -> List[str]:
 
 ### Step 4: Contextual Query Reformulation
 
-Create multiple ways to express the same information need:  
+Create multiple ways to express the same information need:
 
 ```python
 def _contextual_expansion(self, query: str, max_expansions: int) -> List[str]:
@@ -174,7 +174,7 @@ def _contextual_expansion(self, query: str, max_expansions: int) -> List[str]:
             if reform.strip() and ('?' in reform or len(reform.split()) > 3)
         ]
         return reformulations[:max_expansions]
-        
+
     except Exception as e:
         print(f"Contextual expansion error: {e}")
         return []
@@ -184,22 +184,22 @@ def _contextual_expansion(self, query: str, max_expansions: int) -> List[str]:
 
 ### Step 5: Domain-Specific Expansion
 
-Use domain knowledge to enhance queries with specialized terminology:  
+Use domain knowledge to enhance queries with specialized terminology:
 
 ```python
 def _domain_specific_expansion(self, query: str, max_expansions: int) -> List[str]:
     """Generate domain-specific expansions using corpus knowledge."""
-    
+
     if not hasattr(self, 'domain_tfidf'):
         return []
-        
+
     # Transform query to TF-IDF vector
     query_vector = self.domain_tfidf.transform([query])
-    
+
     # Get feature names and scores
     feature_names = self.domain_tfidf.get_feature_names_out()
     tfidf_scores = query_vector.toarray()[0]
-    
+
     # Find highly relevant terms
     term_scores = list(zip(feature_names, tfidf_scores))
     term_scores.sort(key=lambda x: x[1], reverse=True)
@@ -211,19 +211,19 @@ def _domain_specific_expansion(self, query: str, max_expansions: int) -> List[st
     # Extract top domain terms not in original query
     query_terms = set(query.lower().split())
     domain_expansions = []
-    
+
     for term, score in term_scores[:max_expansions * 3]:
         if score > 0 and term not in query_terms:
             domain_expansions.append(term)
             if len(domain_expansions) >= max_expansions:
                 break
-                
+
     return domain_expansions
 ```
 
 ### Step 6: Multi-Query Generation System
 
-Generate comprehensive query sets from multiple perspectives:  
+Generate comprehensive query sets from multiple perspectives:
 
 ```python
 class MultiQueryGenerator:
@@ -231,7 +231,7 @@ class MultiQueryGenerator:
 
     def __init__(self, llm_model):
         self.llm_model = llm_model
-        
+
         self.query_perspectives = {
             'decomposition': self._decompose_complex_query,
             'specificity_levels': self._generate_specificity_variants,
@@ -270,7 +270,7 @@ class MultiQueryGenerator:
 
             generated = self.query_perspectives[perspective](query, num_queries)
             all_queries[perspective] = generated
-            
+
             generation_metadata[perspective] = {
                 'count': len(generated),
                 'method': perspective
@@ -290,7 +290,7 @@ class MultiQueryGenerator:
 
 ### Step 7: Complex Query Decomposition
 
-Break complex questions into manageable sub-questions:  
+Break complex questions into manageable sub-questions:
 
 ```python
 def _decompose_complex_query(self, query: str, num_queries: int) -> List[str]:
@@ -321,15 +321,15 @@ def _decompose_complex_query(self, query: str, num_queries: int) -> List[str]:
             for q in response.strip().split('\n')
             if q.strip() and ('?' in q or len(q.split()) > 3)
         ]
-        
+
         # Ensure proper question formatting
         sub_questions = [
             q if q.endswith('?') else q + '?'
             for q in sub_questions
         ]
-        
+
         return sub_questions[:num_queries]
-        
+
     except Exception as e:
         print(f"Decomposition error: {e}")
         return []
@@ -337,7 +337,7 @@ def _decompose_complex_query(self, query: str, num_queries: int) -> List[str]:
 
 ### Step 8: Specificity Level Variants
 
-Generate queries at different levels of granularity:  
+Generate queries at different levels of granularity:
 
 ```python
 def _generate_specificity_variants(self, query: str, num_queries: int) -> List[str]:
@@ -367,9 +367,9 @@ def _generate_specificity_variants(self, query: str, num_queries: int) -> List[s
             for variant in response.strip().split('\n')
             if variant.strip() and len(variant.split()) > 2
         ]
-        
+
         return variants[:num_queries]
-        
+
     except Exception as e:
         print(f"Specificity variant error: {e}")
         return []
@@ -377,30 +377,30 @@ def _generate_specificity_variants(self, query: str, num_queries: int) -> List[s
 
 ### Step 9: Enhanced Query Assembly
 
-Create final expanded queries that combine all enhancement techniques:  
+Create final expanded queries that combine all enhancement techniques:
 
 ```python
-def _create_expanded_query(self, original_query: str, 
+def _create_expanded_query(self, original_query: str,
                           expansions: List[str]) -> str:
     """Create final expanded query combining original and expansions."""
-    
+
     # Remove duplicates and very similar terms
     filtered_expansions = self._filter_similar_terms(
         original_query, expansions
     )
-    
+
     # Limit expansion count to prevent query bloat
     max_expansions = 8
     if len(filtered_expansions) > max_expansions:
         filtered_expansions = filtered_expansions[:max_expansions]
-    
+
     # Create expanded query with OR logic
     if filtered_expansions:
         expansion_text = ' OR '.join(f'"{term}"' for term in filtered_expansions)
         expanded_query = f"{original_query} OR ({expansion_text})"
     else:
         expanded_query = original_query
-        
+
     return expanded_query
 ```
 
@@ -408,24 +408,24 @@ def _create_expanded_query(self, original_query: str,
 
 ### Step 10: Similarity Filtering
 
-Remove redundant or overly similar expansion terms:  
+Remove redundant or overly similar expansion terms:
 
 ```python
-def _filter_similar_terms(self, original_query: str, 
+def _filter_similar_terms(self, original_query: str,
                          expansions: List[str]) -> List[str]:
     """Filter out terms too similar to original query or each other."""
-    
+
     original_words = set(original_query.lower().split())
     filtered_expansions = []
-    
+
     for expansion in expansions:
         expansion_words = set(expansion.lower().split())
-        
+
         # Skip if too much overlap with original
         overlap_ratio = len(expansion_words & original_words) / len(expansion_words)
         if overlap_ratio > 0.7:
             continue
-            
+
         # Skip if too similar to already selected expansions
         is_too_similar = False
         for selected in filtered_expansions:
@@ -434,10 +434,10 @@ def _filter_similar_terms(self, original_query: str,
             if similarity > 0.6:
                 is_too_similar = True
                 break
-        
+
         if not is_too_similar:
             filtered_expansions.append(expansion)
-    
+
     return filtered_expansions
 ```
 
@@ -445,7 +445,7 @@ def _filter_similar_terms(self, original_query: str,
 
 ## Testing Your Query Expansion System
 
-Test the complete expansion system with various query types:  
+Test the complete expansion system with various query types:
 
 ```python
 # Initialize the expansion system
@@ -477,34 +477,34 @@ print("Query variants:", multi_result['query_variants'][:3])
 
 ## Integration with Search Systems
 
-Connect your expansion system to vector search:  
+Connect your expansion system to vector search:
 
 ```python
-def search_with_expansion(self, query: str, vector_store, 
+def search_with_expansion(self, query: str, vector_store,
                          expansion_strategies: List[str] = ['semantic'],
                          top_k: int = 10):
     """Perform enhanced search using query expansion."""
-    
+
     # Generate expanded query
     expansion_result = self.expander.expand_query(
         query, strategies=expansion_strategies
     )
-    
+
     # Search with both original and expanded queries
     original_results = vector_store.similarity_search(query, k=top_k)
     expanded_results = vector_store.similarity_search(
         expansion_result['expanded_query'], k=top_k
     )
-    
+
     # Generate multiple query variants
     multi_results = self.multi_gen.generate_multi_query_set(query)
     variant_results = []
-    
+
     for variant in multi_results['query_variants'][:3]:
         variant_results.extend(
             vector_store.similarity_search(variant, k=top_k//3)
         )
-    
+
     return {
         'original_results': original_results,
         'expanded_results': expanded_results,
@@ -520,13 +520,14 @@ def search_with_expansion(self, query: str, vector_store,
 
 ## Practice Exercises
 
-1. **Custom Strategies**: Implement domain-specific expansion strategies  
-2. **Performance Comparison**: Compare expansion results with baseline search  
-3. **Query Complexity**: Test with increasingly complex multi-part questions  
-4. **Expansion Quality**: Develop metrics to assess expansion effectiveness  
-
+1. **Custom Strategies**: Implement domain-specific expansion strategies
+2. **Performance Comparison**: Compare expansion results with baseline search
+3. **Query Complexity**: Test with increasingly complex multi-part questions
+4. **Expansion Quality**: Develop metrics to assess expansion effectiveness
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to HyDE Implementation](Session4_HyDE_Implementation.md) | [Next: Context Optimization →](Session4_Context_Optimization.md)
+**Previous:** [Session 3 - Vector Databases & Search Optimization ←](Session3_Vector_Databases_Search_Optimization.md)
+**Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+---

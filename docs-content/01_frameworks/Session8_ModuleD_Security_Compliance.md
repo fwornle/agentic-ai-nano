@@ -1,6 +1,6 @@
 # Session 8 - Module D: Security & Compliance
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 8 core content first.
 
 ## JPMorgan Zero-Trust Security
@@ -97,7 +97,7 @@ The ZeroTrustSecurityManager implements the security architecture following the 
 ```python
 class ZeroTrustSecurityManager:
     """Zero-trust security manager for agent systems"""
-    
+
     def __init__(self, encryption_key: bytes = None):
         self.encryption_key = encryption_key or Fernet.generate_key()
         self.cipher_suite = Fernet(self.encryption_key)
@@ -105,7 +105,7 @@ class ZeroTrustSecurityManager:
         self.active_sessions = {}
         self.audit_logger = logging.getLogger("security_audit")
         self.threat_detection = ThreatDetectionSystem()
-        
+
 ```
 
 Security policy configuration establishes enterprise-grade security controls across all domains:
@@ -113,7 +113,7 @@ Security policy configuration establishes enterprise-grade security controls acr
 ```python
     def setup_security_policies(self) -> Dict[str, Any]:
         """Configure comprehensive security policies"""
-        
+
         # Authentication policies enforce strong identity verification:
         authentication_config = {
             "session_timeout_minutes": 60,
@@ -153,7 +153,7 @@ Encryption policies protect data both at rest and in transit using industry-stan
                 "key_rotation_days": 90,
                 "encrypted_fields": [
                     "conversation_content",
-                    "user_data", 
+                    "user_data",
                     "agent_responses",
                     "tool_parameters"
                 ]
@@ -200,7 +200,7 @@ Threat detection configuration enables proactive security monitoring:
             "real_time_alerts": True,
             "threat_intelligence": True
         }
-        
+
         # Combine all security configurations
         security_config = {
             "authentication": authentication_config,
@@ -209,10 +209,10 @@ Threat detection configuration enables proactive security monitoring:
             "audit_logging": audit_config,
             "threat_detection": threat_detection_config
         }
-        
+
         self.security_policies = security_config
         return security_config
-    
+
 ```
 
 The authenticate_request method implements zero-trust authentication - every request must be verified regardless of source:
@@ -220,12 +220,12 @@ The authenticate_request method implements zero-trust authentication - every req
 ```python
     async def authenticate_request(self, request_data: Dict[str, Any]) -> SecurityContext:
         """Authenticate and authorize agent requests with zero-trust principles"""
-        
+
         # Extract authentication credentials from multiple sources
         auth_header = request_data.get("authorization")
         api_key = request_data.get("api_key")
         client_cert = request_data.get("client_certificate")
-        
+
         if not auth_header and not api_key and not client_cert:
             raise SecurityException("No authentication credentials provided")
 ```
@@ -236,7 +236,7 @@ After credential extraction, authenticate identity using the appropriate method:
         # Determine and execute authentication method
         auth_method = self._determine_auth_method(request_data)
         user_identity = await self._authenticate_identity(request_data, auth_method)
-        
+
         # Create comprehensive security context
         security_context = SecurityContext(
             user_id=user_identity["user_id"],
@@ -253,27 +253,27 @@ Finally, we authorize the request and create an audit trail:
 ```python
         # Verify authorization and log security events
         await self._authorize_request(security_context, request_data)
-        
+
         await self._log_security_event("authentication_success", {
             "user_id": security_context.user_id,
             "auth_method": auth_method.value,
             "source_ip": request_data.get("source_ip"),
             "user_agent": request_data.get("user_agent")
         })
-        
+
         # Store active session for future validation
         self.active_sessions[security_context.session_id] = security_context
         return security_context
-    
+
 ```
 
 The identity authentication dispatcher routes to specific authentication handlers:
 
 ```python
-    async def _authenticate_identity(self, request_data: Dict[str, Any], 
+    async def _authenticate_identity(self, request_data: Dict[str, Any],
                                    auth_method: AuthenticationMethod) -> Dict[str, Any]:
         """Authenticate user identity based on method"""
-        
+
         if auth_method == AuthenticationMethod.JWT_TOKEN:
             return await self._authenticate_jwt(request_data.get("authorization"))
         elif auth_method == AuthenticationMethod.API_KEY:
@@ -282,7 +282,7 @@ The identity authentication dispatcher routes to specific authentication handler
             return await self._authenticate_mtls(request_data.get("client_certificate"))
         else:
             raise SecurityException(f"Unsupported authentication method: {auth_method}")
-    
+
 ```
 
 JWT authentication provides stateless token validation with comprehensive security checks:
@@ -290,13 +290,13 @@ JWT authentication provides stateless token validation with comprehensive securi
 ```python
     async def _authenticate_jwt(self, auth_header: str) -> Dict[str, Any]:
         """Authenticate JWT token"""
-        
+
         try:
             # Extract token from Bearer format and decode
             token = auth_header.split(" ")[1] if auth_header.startswith("Bearer ") else auth_header
-            
+
             decoded_token = jwt.decode(
-                token, 
+                token,
                 self._get_jwt_secret(),
                 algorithms=["HS256"],
                 options={"verify_exp": True}
@@ -309,35 +309,35 @@ We perform additional validation beyond standard JWT verification:
             # Comprehensive token validation
             if not decoded_token.get("user_id"):
                 raise SecurityException("Invalid token: missing user_id")
-            
+
             if datetime.now() > datetime.fromtimestamp(decoded_token.get("exp", 0)):
                 raise SecurityException("Token expired")
-            
+
             return {
                 "user_id": decoded_token["user_id"],
                 "permissions": decoded_token.get("permissions", []),
                 "security_level": decoded_token.get("security_level", "internal"),
                 "data_classification": decoded_token.get("data_classification", "internal")
             }
-            
+
         except jwt.InvalidTokenError as e:
             raise SecurityException(f"JWT authentication failed: {str(e)}")
-    
+
 ```
 
 The authorization method implements fine-grained access control with multiple validation layers:
 
 ```python
-    async def _authorize_request(self, security_context: SecurityContext, 
+    async def _authorize_request(self, security_context: SecurityContext,
                                request_data: Dict[str, Any]):
         """Authorize request based on security context and policies"""
-        
+
         requested_action = request_data.get("action", "unknown")
         requested_resource = request_data.get("resource", "unknown")
-        
+
         # Permission-based authorization check
         required_permission = f"{requested_action}:{requested_resource}"
-        
+
         if required_permission not in security_context.permissions and "admin:*" not in security_context.permissions:
             await self._log_security_event("authorization_denied", {
                 "user_id": security_context.user_id,
@@ -354,22 +354,22 @@ Security clearance validation ensures users can only access appropriately classi
         resource_security_level = self._get_resource_security_level(requested_resource)
         if security_context.security_level.value < resource_security_level.value:
             raise SecurityException(f"Access denied: insufficient security clearance")
-        
+
         # Additional contextual authorization checks
         await self._perform_contextual_authorization(security_context, request_data)
-    
+
 ```
 
 Data encryption follows classification policies to protect sensitive information:
 
 ```python
-    async def encrypt_sensitive_data(self, data: Any, 
+    async def encrypt_sensitive_data(self, data: Any,
                                    security_context: SecurityContext) -> Dict[str, Any]:
         """Encrypt sensitive data based on classification"""
-        
+
         if not security_context.encryption_required:
             return {"encrypted": False, "data": data}
-        
+
         # Prepare data for encryption
         data_string = json.dumps(data) if not isinstance(data, str) else data
         encrypted_data = self.cipher_suite.encrypt(data_string.encode())
@@ -386,13 +386,13 @@ Encryption metadata provides audit trail and key management information:
             "key_version": "v1",
             "data_classification": security_context.data_classification
         }
-        
+
         return {
             "encrypted": True,
             "data": base64.b64encode(encrypted_data).decode(),
             "metadata": encryption_metadata
         }
-    
+
 ```
 
 Decryption includes authorization checks to ensure users can access the decrypted data:
@@ -401,14 +401,14 @@ Decryption includes authorization checks to ensure users can access the decrypte
     async def decrypt_sensitive_data(self, encrypted_package: Dict[str, Any],
                                    security_context: SecurityContext) -> Any:
         """Decrypt sensitive data with authorization checks"""
-        
+
         if not encrypted_package.get("encrypted"):
             return encrypted_package.get("data")
-        
+
         # Authorization check based on data classification
         metadata = encrypted_package.get("metadata", {})
         data_classification = metadata.get("data_classification", "internal")
-        
+
         if not self._can_access_classification(security_context, data_classification):
             raise SecurityException("Access denied: insufficient clearance for data classification")
 ```
@@ -420,16 +420,16 @@ Decryption process with error handling and data parsing:
         try:
             encrypted_data = base64.b64decode(encrypted_package["data"].encode())
             decrypted_data = self.cipher_suite.decrypt(encrypted_data)
-            
+
             # Intelligent data parsing
             try:
                 return json.loads(decrypted_data.decode())
             except json.JSONDecodeError:
                 return decrypted_data.decode()
-                
+
         except Exception as e:
             raise SecurityException(f"Decryption failed: {str(e)}")
-    
+
 ```
 
 Utility methods for session management and security infrastructure:
@@ -439,7 +439,7 @@ Utility methods for session management and security infrastructure:
         """Generate secure session ID"""
         import secrets
         return secrets.token_urlsafe(32)
-    
+
     def _get_jwt_secret(self) -> str:
         """Get JWT signing secret (in production, use secure key management)"""
         return "your-super-secret-jwt-key-change-this-in-production"
@@ -455,7 +455,7 @@ The ThreatDetectionSystem provides advanced security monitoring and response cap
 ```python
 class ThreatDetectionSystem:
     """Advanced threat detection for agent systems"""
-    
+
     def __init__(self):
         self.threat_patterns = {}
         self.anomaly_baseline = {}
@@ -468,7 +468,7 @@ Threat detection configuration defines patterns and response strategies:
 ```python
     def setup_threat_detection(self) -> Dict[str, Any]:
         """Configure threat detection patterns"""
-        
+
         # Define threat detection patterns
         patterns_config = {
             "brute_force": {
@@ -504,15 +504,15 @@ Response actions are tiered based on threat severity:
             "high_risk": ["block_temporarily", "alert_security_team"],
             "critical": ["block_permanently", "emergency_response"]
         }
-        
+
         threat_config = {
             "patterns": patterns_config,
             "response_actions": response_actions
         }
-        
+
         self.threat_patterns = threat_config
         return threat_config
-    
+
 ```
 
 The threat analysis engine evaluates requests against multiple threat vectors:
@@ -521,7 +521,7 @@ The threat analysis engine evaluates requests against multiple threat vectors:
     async def analyze_request_for_threats(self, request_data: Dict[str, Any],
                                         security_context: SecurityContext) -> Dict[str, Any]:
         """Analyze request for potential security threats"""
-        
+
         # Initialize threat analysis structure
         threat_analysis = {
             "timestamp": datetime.now().isoformat(),
@@ -541,12 +541,12 @@ We check for multiple threat patterns using specialized detection methods:
         if brute_force_risk["detected"]:
             threat_analysis["threats_detected"].append("brute_force_attempt")
             threat_analysis["risk_level"] = "high"
-        
+
         prompt_injection_risk = await self._detect_prompt_injection(request_data.get("prompt", ""))
         if prompt_injection_risk["detected"]:
             threat_analysis["threats_detected"].append("prompt_injection")
             threat_analysis["risk_level"] = max(threat_analysis["risk_level"], "medium")
-        
+
         behavioral_risk = await self._detect_behavioral_anomalies(request_data, security_context)
         if behavioral_risk["detected"]:
             threat_analysis["threats_detected"].append("behavioral_anomaly")
@@ -561,9 +561,9 @@ Finally, we determine appropriate response actions based on the threat level:
             threat_analysis["recommended_actions"] = self.threat_patterns["response_actions"].get(
                 threat_analysis["risk_level"], ["log_event"]
             )
-        
+
         return threat_analysis
-    
+
 ```
 
 Prompt injection detection identifies attempts to manipulate agent behavior:
@@ -571,11 +571,11 @@ Prompt injection detection identifies attempts to manipulate agent behavior:
 ```python
     async def _detect_prompt_injection(self, prompt: str) -> Dict[str, Any]:
         """Detect potential prompt injection attacks"""
-        
+
         # Common prompt injection patterns
         injection_patterns = [
             "ignore previous instructions",
-            "forget your role", 
+            "forget your role",
             "you are now",
             "system:",
             "assistant:",
@@ -586,20 +586,20 @@ Prompt injection detection identifies attempts to manipulate agent behavior:
             "rm -rf",
             "DROP TABLE"
         ]
-        
+
         prompt_lower = prompt.lower()
         detected_patterns = []
-        
+
         for pattern in injection_patterns:
             if pattern.lower() in prompt_lower:
                 detected_patterns.append(pattern)
-        
+
         return {
             "detected": len(detected_patterns) > 0,
             "patterns": detected_patterns,
             "confidence": min(len(detected_patterns) * 0.3, 1.0)
         }
-    
+
 ```
 
 Behavioral anomaly detection identifies unusual patterns that may indicate compromise:
@@ -608,26 +608,26 @@ Behavioral anomaly detection identifies unusual patterns that may indicate compr
     async def _detect_behavioral_anomalies(self, request_data: Dict[str, Any],
                                          security_context: SecurityContext) -> Dict[str, Any]:
         """Detect anomalous user behavior patterns"""
-        
+
         user_id = security_context.user_id
         current_time = datetime.now()
         request_rate = self._calculate_recent_request_rate(user_id)
-        
+
         anomalies = []
-        
+
         # Request rate anomaly detection
         if request_rate > 100:  # More than 100 requests per minute
             anomalies.append("high_request_rate")
-        
+
         # Temporal anomaly detection
         if current_time.hour < 6 or current_time.hour > 22:  # Outside normal hours
             anomalies.append("unusual_access_time")
-        
+
         # Geographic anomaly detection
         user_ip = request_data.get("source_ip", "")
         if self._is_unusual_geographic_location(user_id, user_ip):
             anomalies.append("geographic_anomaly")
-        
+
         return {
             "detected": len(anomalies) > 0,
             "anomalies": anomalies,
@@ -691,14 +691,14 @@ The ComplianceManager orchestrates all compliance activities across frameworks:
 ```python
 class ComplianceManager:
     """Comprehensive compliance management system"""
-    
+
     def __init__(self):
         self.compliance_policies = {}
         self.audit_trail = []
         self.data_subjects = {}
         self.retention_policies = {}
         self.logger = logging.getLogger("compliance")
-        
+
 ```
 
 The setup_compliance_frameworks method configures policies for multiple regulatory standards. First, let's establish GDPR compliance:
@@ -706,7 +706,7 @@ The setup_compliance_frameworks method configures policies for multiple regulato
 ```python
     def setup_compliance_frameworks(self) -> Dict[str, Any]:
         """Configure multiple compliance frameworks"""
-        
+
         # GDPR configuration for EU data protection
         gdpr_config = {
             "enabled": True,
@@ -715,7 +715,7 @@ The setup_compliance_frameworks method configures policies for multiple regulato
             "lawful_basis": "consent",
             "retention_period_months": 24,
             "rights_supported": [
-                "access", "rectification", "erasure", 
+                "access", "rectification", "erasure",
                 "portability", "restrict_processing", "object"
             ],
             "consent_management": {
@@ -777,30 +777,30 @@ SOC2 configuration establishes trust service criteria for operational security:
                 "third_party_audit": True
             }
         }
-        
+
         # Combine all compliance configurations
         compliance_config = {
             "gdpr": gdpr_config,
             "hipaa": hipaa_config,
             "soc2": soc2_config
         }
-        
+
         self.compliance_policies = compliance_config
         return compliance_config
-    
+
 ```
 
 Data subject request processing implements GDPR rights with comprehensive logging:
 
 ```python
-    async def process_data_subject_request(self, request_type: str, 
+    async def process_data_subject_request(self, request_type: str,
                                          subject_id: str,
                                          request_details: Dict[str, Any]) -> Dict[str, Any]:
         """Process data subject rights requests (GDPR Article 12-22)"""
-        
+
         # Generate unique request identifier
         request_id = f"DSR_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{subject_id}"
-        
+
         # Create audit trail for compliance
         await self._log_compliance_event("data_subject_request", {
             "request_id": request_id,
@@ -828,7 +828,7 @@ Request routing directs to appropriate handlers based on GDPR articles:
                 "status": "unsupported",
                 "message": f"Request type {request_type} not supported"
             }
-    
+
 ```
 
 The access request handler implements GDPR Article 15 requirements comprehensively:
@@ -836,10 +836,10 @@ The access request handler implements GDPR Article 15 requirements comprehensive
 ```python
     async def _process_access_request(self, subject_id: str, request_id: str) -> Dict[str, Any]:
         """Process GDPR Article 15 - Right of Access"""
-        
+
         # Collect all personal data for the subject
         personal_data = await self._collect_personal_data(subject_id)
-        
+
         # Prepare GDPR-compliant structured response
         access_response = {
             "request_id": request_id,
@@ -861,13 +861,13 @@ The access request handler implements GDPR Article 15 requirements comprehensive
             "response_format": "structured_json",
             "generated_at": datetime.now().isoformat()
         }
-        
+
         # Ensure GDPR timeline compliance (1 month)
         response_deadline = datetime.now() + timedelta(days=30)
         access_response["response_deadline"] = response_deadline.isoformat()
-        
+
         return access_response
-    
+
 ```
 
 Erasure request processing implements the "right to be forgotten" with legal safeguards:
@@ -875,10 +875,10 @@ Erasure request processing implements the "right to be forgotten" with legal saf
 ```python
     async def _process_erasure_request(self, subject_id: str, request_id: str) -> Dict[str, Any]:
         """Process GDPR Article 17 - Right to Erasure"""
-        
+
         # Assess legal feasibility of erasure
         erasure_assessment = await self._assess_erasure_feasibility(subject_id)
-        
+
         if not erasure_assessment["can_erase"]:
             return {
                 "request_id": request_id,
@@ -893,11 +893,11 @@ When erasure is legally permissible, we execute comprehensive data removal:
 ```python
         # Execute erasure with comprehensive tracking
         erasure_results = await self._perform_data_erasure(subject_id)
-        
+
         # Handle third-party notification requirements
         if erasure_results["third_party_notification_required"]:
             await self._notify_third_parties_of_erasure(subject_id, erasure_results["shared_with"])
-        
+
         return {
             "request_id": request_id,
             "status": "completed",
@@ -906,7 +906,7 @@ When erasure is legally permissible, we execute comprehensive data removal:
             "systems_affected": erasure_results["systems"],
             "third_parties_notified": erasure_results.get("third_parties_notified", [])
         }
-    
+
 ```
 
 Data retention policy implementation ensures automated compliance with regulatory timelines:
@@ -914,29 +914,29 @@ Data retention policy implementation ensures automated compliance with regulator
 ```python
     async def implement_data_retention_policies(self) -> Dict[str, Any]:
         """Implement automated data retention and disposal"""
-        
+
         retention_results = {
             "processed_at": datetime.now().isoformat(),
             "policies_applied": [],
             "data_disposed": [],
             "errors": []
         }
-        
+
         # Apply retention policies for each enabled framework
         for framework, config in self.compliance_policies.items():
             if not config.get("enabled"):
                 continue
-                
+
             if framework == "gdpr":
                 gdpr_results = await self._apply_gdpr_retention_policy(config)
                 retention_results["policies_applied"].append(gdpr_results)
-                
+
             elif framework == "hipaa":
                 hipaa_results = await self._apply_hipaa_retention_policy(config)
                 retention_results["policies_applied"].append(hipaa_results)
-        
+
         return retention_results
-    
+
 ```
 
 GDPR retention policy implementation includes automated data lifecycle management:
@@ -944,13 +944,13 @@ GDPR retention policy implementation includes automated data lifecycle managemen
 ```python
     async def _apply_gdpr_retention_policy(self, gdpr_config: Dict[str, Any]) -> Dict[str, Any]:
         """Apply GDPR-specific retention policies"""
-        
+
         retention_period = gdpr_config.get("retention_period_months", 24)
         cutoff_date = datetime.now() - timedelta(days=retention_period * 30)
-        
+
         # Identify data eligible for deletion
         eligible_data = await self._find_data_older_than(cutoff_date)
-        
+
         deletion_results = {
             "framework": "gdpr",
             "retention_period_months": retention_period,
@@ -970,19 +970,19 @@ Each data record is evaluated for legal retention requirements before deletion:
                 # Legal basis assessment for retention
                 if await self._has_legal_basis_to_retain(data_record):
                     continue
-                
+
                 # Execute secure deletion
                 await self._delete_data_record(data_record)
                 deletion_results["records_deleted"] += 1
-                
+
             except Exception as e:
                 deletion_results["errors"].append({
                     "record_id": data_record.get("id"),
                     "error": str(e)
                 })
-        
+
         return deletion_results
-    
+
 ```
 
 Compliance reporting generates comprehensive assessments for regulatory audits:
@@ -991,10 +991,10 @@ Compliance reporting generates comprehensive assessments for regulatory audits:
     async def generate_compliance_report(self, framework: ComplianceFramework,
                                        report_period_days: int = 30) -> Dict[str, Any]:
         """Generate comprehensive compliance reports"""
-        
+
         end_date = datetime.now()
         start_date = end_date - timedelta(days=report_period_days)
-        
+
         # Initialize comprehensive report structure
         report = {
             "framework": framework.value,
@@ -1021,18 +1021,18 @@ Framework-specific report generation handles unique compliance requirements:
             report.update(await self._generate_hipaa_report(start_date, end_date))
         elif framework == ComplianceFramework.SOC2:
             report.update(await self._generate_soc2_report(start_date, end_date))
-        
+
         return report
-    
+
 ```
 
 GDPR-specific compliance reporting tracks key performance indicators:
 
 ```python
-    async def _generate_gdpr_report(self, start_date: datetime, 
+    async def _generate_gdpr_report(self, start_date: datetime,
                                   end_date: datetime) -> Dict[str, Any]:
         """Generate GDPR-specific compliance report"""
-        
+
         # Collect comprehensive GDPR metrics
         gdpr_metrics = {
             "data_subject_requests": await self._count_dsr_by_type(start_date, end_date),
@@ -1048,17 +1048,17 @@ Violation assessment identifies compliance gaps requiring immediate attention:
 ```python
         # Comprehensive compliance violation assessment
         violations = []
-        
+
         # Data Subject Request timeline compliance
         overdue_dsrs = await self._find_overdue_dsrs()
         if overdue_dsrs:
             violations.append({
                 "type": "dsr_response_time",
-                "severity": "high", 
+                "severity": "high",
                 "description": f"{len(overdue_dsrs)} data subject requests overdue",
                 "remediation": "Process overdue requests immediately"
             })
-        
+
         # Consent management compliance
         invalid_consents = await self._find_invalid_consents()
         if invalid_consents:
@@ -1068,7 +1068,7 @@ Violation assessment identifies compliance gaps requiring immediate attention:
                 "description": f"{len(invalid_consents)} invalid consent records found",
                 "remediation": "Update consent records and re-obtain consent where necessary"
             })
-        
+
         return {
             "gdpr_metrics": gdpr_metrics,
             "violations": violations,
@@ -1082,7 +1082,7 @@ The AuditTrailManager ensures tamper-evident logging for compliance and forensic
 ```python
 class AuditTrailManager:
     """Comprehensive audit trail management"""
-    
+
     def __init__(self):
         self.audit_events = []
         self.integrity_hashes = {}
@@ -1092,11 +1092,11 @@ class AuditTrailManager:
 Audit event logging creates immutable records with integrity protection:
 
 ```python
-    async def log_audit_event(self, event_type: str, 
+    async def log_audit_event(self, event_type: str,
                             event_data: Dict[str, Any],
                             security_context: Optional[Dict[str, Any]] = None):
         """Log auditable events with integrity protection"""
-        
+
         # Create comprehensive audit entry
         audit_entry = {
             "event_id": self._generate_event_id(),
@@ -1117,11 +1117,11 @@ Integrity protection prevents audit log tampering:
 ```python
         # Add tamper-evident integrity protection
         audit_entry["integrity_hash"] = self._calculate_integrity_hash(audit_entry)
-        
+
         # Store and transmit audit entry
         self.audit_events.append(audit_entry)
         await self._send_to_audit_system(audit_entry)
-    
+
 ```
 
 Utility methods support audit infrastructure with unique identifiers and integrity verification:
@@ -1131,14 +1131,14 @@ Utility methods support audit infrastructure with unique identifiers and integri
         """Generate unique audit event ID"""
         import uuid
         return str(uuid.uuid4())
-    
+
     def _calculate_integrity_hash(self, audit_entry: Dict[str, Any]) -> str:
         """Calculate integrity hash for audit entry"""
-        
+
         # Remove the hash field itself from calculation
         entry_copy = {k: v for k, v in audit_entry.items() if k != "integrity_hash"}
         entry_json = json.dumps(entry_copy, sort_keys=True)
-        
+
         import hashlib
         return hashlib.sha256(entry_json.encode()).hexdigest()
 ```
@@ -1165,12 +1165,12 @@ The PrivacyPreservingAgentSystem coordinates multiple privacy-preserving techniq
 ```python
 class PrivacyPreservingAgentSystem:
     """Privacy-preserving techniques for agent operations"""
-    
+
     def __init__(self):
         self.anonymization_techniques = {}
         self.pseudonymization_keys = {}
         self.differential_privacy_params = {}
-        
+
 ```
 
 Privacy technique configuration establishes multiple protection mechanisms:
@@ -1178,7 +1178,7 @@ Privacy technique configuration establishes multiple protection mechanisms:
 ```python
     def setup_privacy_techniques(self) -> Dict[str, Any]:
         """Configure privacy-preserving techniques"""
-        
+
         # Data anonymization configuration using proven techniques
         anonymization_config = {
             "enabled": True,
@@ -1211,38 +1211,38 @@ Pseudonymization and encryption techniques protect individual identities:
             "deterministic": False,  # Use random pseudonyms
             "format_preserving": True
         }
-        
+
         # Homomorphic encryption for computation on encrypted data
         homomorphic_config = {
             "enabled": False,  # Computationally expensive
             "scheme": "ckks",  # For approximate computations
             "key_size": 4096
         }
-        
+
         privacy_config = {
             "data_anonymization": anonymization_config,
             "differential_privacy": differential_privacy_config,
             "pseudonymization": pseudonymization_config,
             "homomorphic_encryption": homomorphic_config
         }
-        
+
         return privacy_config
-    
+
 ```
 
 Dataset anonymization applies formal privacy models to protect individual records:
 
 ```python
-    def anonymize_dataset(self, dataset: List[Dict[str, Any]], 
+    def anonymize_dataset(self, dataset: List[Dict[str, Any]],
                          sensitive_attributes: List[str]) -> Dict[str, Any]:
         """Apply k-anonymity and l-diversity to dataset"""
-        
+
         # Multi-step anonymization process:
         # 1. Identify quasi-identifiers
         # 2. Apply generalization and suppression
         # 3. Ensure k-anonymity constraint
         # 4. Apply l-diversity for sensitive attributes
-        
+
         anonymized_data = []
         for record in dataset:
             anonymized_record = self._anonymize_record(record, sensitive_attributes)
@@ -1262,37 +1262,37 @@ The anonymization result includes privacy metrics for verification:
                 "l_diversity": self._calculate_l_diversity(anonymized_data, sensitive_attributes)
             }
         }
-    
+
 ```
 
 Differential privacy implementation adds calibrated noise to protect individual privacy:
 
 ```python
-    def apply_differential_privacy(self, query_result: float, 
+    def apply_differential_privacy(self, query_result: float,
                                  sensitivity: float = 1.0,
                                  epsilon: float = 1.0) -> float:
         """Apply differential privacy to query results"""
-        
+
         import random
         import math
-        
+
         # Laplace mechanism for (ε,0)-differential privacy
         scale = sensitivity / epsilon
         noise = random.laplace(0, scale)
-        
+
         return query_result + noise
-    
+
 ```
 
 Record-level anonymization applies generalization and suppression techniques:
 
 ```python
-    def _anonymize_record(self, record: Dict[str, Any], 
+    def _anonymize_record(self, record: Dict[str, Any],
                          sensitive_attrs: List[str]) -> Dict[str, Any]:
         """Anonymize individual record"""
-        
+
         anonymized = record.copy()
-        
+
         # Age generalization to reduce identifiability
         if "age" in record:
             age = record["age"]
@@ -1315,7 +1315,7 @@ Geographic and identifier anonymization protects location privacy:
             zip_code = str(record["zip_code"])
             anonymized["region"] = zip_code[:3] + "**"
             del anonymized["zip_code"]
-        
+
         # Direct identifier handling with pseudonymization
         identifiers = ["name", "email", "phone", "ssn"]
         for identifier in identifiers:
@@ -1324,7 +1324,7 @@ Geographic and identifier anonymization protects location privacy:
                     anonymized[identifier] = self._pseudonymize_value(anonymized[identifier])
                 else:
                     del anonymized[identifier]
-        
+
         return anonymized
 ```
 
@@ -1336,10 +1336,10 @@ Geographic and identifier anonymization protects location privacy:
 
 You've now mastered security and compliance systems that prevent billion-dollar breaches and ensure regulatory excellence:
 
-✅ **Zero-Trust Architecture Mastery**: Implemented comprehensive authentication, authorization, and threat detection that prevented JPMorgan Chase's $2.8B cyber attack and neutralized 47,000 attack vectors  
-✅ **Military-Grade Data Encryption**: Built end-to-end encryption with key management and secure data handling protecting Microsoft's 847M users from nation-state attacks  
-✅ **Regulatory Compliance Excellence**: Created GDPR, HIPAA, and SOC2 compliance systems that achieved Johnson & Johnson's 100% audit success across 23 international agencies  
-✅ **Privacy Protection Supremacy**: Implemented advanced privacy-preserving techniques including anonymization and differential privacy ensuring compliance across 27 countries  
+✅ **Zero-Trust Architecture Mastery**: Implemented comprehensive authentication, authorization, and threat detection that prevented JPMorgan Chase's $2.8B cyber attack and neutralized 47,000 attack vectors
+✅ **Military-Grade Data Encryption**: Built end-to-end encryption with key management and secure data handling protecting Microsoft's 847M users from nation-state attacks
+✅ **Regulatory Compliance Excellence**: Created GDPR, HIPAA, and SOC2 compliance systems that achieved Johnson & Johnson's 100% audit success across 23 international agencies
+✅ **Privacy Protection Supremacy**: Implemented advanced privacy-preserving techniques including anonymization and differential privacy ensuring compliance across 27 countries
 ✅ **Audit Trail Dominance**: Designed comprehensive audit logging with integrity protection meeting SOC2 requirements and preventing $5.4B in potential breach costs
 
 **Your security fortress is now impenetrable:** While others struggle with vulnerable systems and compliance gaps, you architect security platforms that prevent cyber attacks, ensure regulatory compliance, and protect billions in digital assets through zero-trust excellence.
@@ -1357,34 +1357,34 @@ You've now mastered security and compliance systems that prevent billion-dollar 
 Test your understanding of Security & Compliance for enterprise agent systems:
 
 **Question 1:** What is the core principle of zero-trust security architecture?
-A) Trust all internal network traffic by default  
-B) Never trust, always verify every request regardless of source  
-C) Only authenticate users once per session  
-D) Allow unrestricted access within the enterprise network  
+A) Trust all internal network traffic by default
+B) Never trust, always verify every request regardless of source
+C) Only authenticate users once per session
+D) Allow unrestricted access within the enterprise network
 
 **Question 2:** Which GDPR article governs the "Right to Erasure" (right to be forgotten)?
-A) Article 15 - Right of Access  
-B) Article 16 - Right to Rectification  
-C) Article 17 - Right to Erasure  
-D) Article 20 - Right to Data Portability  
+A) Article 15 - Right of Access
+B) Article 16 - Right to Rectification
+C) Article 17 - Right to Erasure
+D) Article 20 - Right to Data Portability
 
 **Question 3:** What does differential privacy add to query results to protect individual privacy?
-A) Encryption with rotating keys  
-B) Calibrated mathematical noise using Laplace mechanism  
-C) Complete data anonymization  
-D) Access control restrictions  
+A) Encryption with rotating keys
+B) Calibrated mathematical noise using Laplace mechanism
+C) Complete data anonymization
+D) Access control restrictions
 
 **Question 4:** In the threat detection system, what response action is recommended for "high_risk" threats?
-A) log_event, monitor_closely  
-B) rate_limit, require_additional_auth  
-C) block_temporarily, alert_security_team  
-D) block_permanently, emergency_response  
+A) log_event, monitor_closely
+B) rate_limit, require_additional_auth
+C) block_temporarily, alert_security_team
+D) block_permanently, emergency_response
 
 **Question 5:** What privacy-preserving technique ensures k-anonymity in datasets?
-A) Differential privacy with epsilon budget  
-B) Homomorphic encryption of sensitive fields  
-C) Generalization and suppression of quasi-identifiers  
-D) JWT token-based authentication  
+A) Differential privacy with epsilon budget
+B) Homomorphic encryption of sensitive fields
+C) Generalization and suppression of quasi-identifiers
+D) JWT token-based authentication
 
 [**🗂️ View Test Solutions →**](Session8_ModuleD_Test_Solutions.md)
 
@@ -1395,3 +1395,10 @@ D) JWT token-based authentication
 - `src/session8/security_architecture.py` - Zero-trust security implementation
 - `src/session8/compliance_framework.py` - Regulatory compliance management
 - `src/session8/privacy_protection.py` - Privacy-preserving techniques
+---
+
+## 🧭 Navigation
+
+**Previous:** [Session 7 - First ADK Agent ←](Session7_First_ADK_Agent.md)
+**Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+---

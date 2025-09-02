@@ -1,6 +1,6 @@
 # Session 7 - Module A: Advanced ADK Integration
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 7 core content first.
 
 ## OpenAI Gemini Integration Success
@@ -50,8 +50,8 @@ from enum import Enum
 
 import vertexai
 from vertexai.generative_models import (
-    GenerativeModel, 
-    Tool, 
+    GenerativeModel,
+    Tool,
     FunctionDeclaration,
     Part,
     Content,
@@ -91,12 +91,12 @@ class ModelConfiguration:
     max_output_tokens: int = 2048
     top_p: float = 0.8
     top_k: int = 40
-    
+
     # Advanced features
     enable_function_calling: bool = True
     enable_streaming: bool = False
     enable_safety_settings: bool = True
-    
+
     # Performance tuning
     request_timeout: int = 60
     retry_count: int = 3
@@ -113,7 +113,7 @@ Now let's create the main agent class that orchestrates all these capabilities. 
 ```python
 class AdvancedGeminiAgent:
     """Production-ready Gemini agent with advanced capabilities"""
-    
+
     def __init__(self, config: ModelConfiguration, project_id: str, location: str):
         # Store core configuration
         self.config = config
@@ -156,7 +156,7 @@ Finally, let's add comprehensive performance tracking:
             "average_response_time": 0.0,
             "function_calls": 0
         }
-        
+
         self._initialize_model()
 ```
 
@@ -169,7 +169,7 @@ Let's build the sophisticated model initialization system step by step. We'll st
 ```python
     def _initialize_model(self):
         """Initialize Gemini model with advanced configuration"""
-        
+
         try:
 ```
 
@@ -236,9 +236,9 @@ Finally, let's establish the chat session and add proper logging:
 ```python
             # Initialize chat session
             self.chat_session = self.model.start_chat()
-            
+
             self.logger.info(f"Initialized Gemini model: {self.config.model_name}")
-            
+
         except Exception as e:
             self.logger.error(f"Failed to initialize Gemini model: {e}")
             raise
@@ -251,25 +251,25 @@ The chat session enables persistent conversation context, while the logging prov
 Next, let's implement the function registration system that allows our agent to call external tools:
 
 ```python
-    
-    def register_function(self, name: str, description: str, 
-                         parameters: Dict[str, Any], 
+
+    def register_function(self, name: str, description: str,
+                         parameters: Dict[str, Any],
                          function: Callable):
         """Register a function for Gemini function calling"""
-        
+
         # Create function declaration
         function_declaration = FunctionDeclaration(
             name=name,
             description=description,
             parameters=parameters
         )
-        
+
         self.tool_declarations.append(function_declaration)
         self.function_registry[name] = function
-        
+
         # Reinitialize model with new tools
         self._initialize_model()
-        
+
         self.logger.info(f"Registered function: {name}")
 ```
 
@@ -280,14 +280,14 @@ This function registration system enables dynamic tool loading - you can add new
 Now let's build the sophisticated response generation system that handles both streaming and standard responses. We'll start with the method signature and initial setup:
 
 ```python
-    async def generate_response(self, prompt: str, 
+    async def generate_response(self, prompt: str,
                               context: Dict[str, Any] = None,
                               use_streaming: bool = None) -> str:
         """Generate response with advanced features"""
-        
+
         if use_streaming is None:
             use_streaming = self.config.enable_streaming
-        
+
         start_time = datetime.now()
 ```
 
@@ -298,7 +298,7 @@ Now let's add the request tracking and context enhancement:
 ```python
         try:
             self.request_metrics["total_requests"] += 1
-            
+
             # Prepare context-enhanced prompt
             enhanced_prompt = self._enhance_prompt_with_context(prompt, context or {})
 ```
@@ -322,9 +322,9 @@ Finally, let's add comprehensive metrics tracking and error handling:
             # Update metrics
             response_time = (datetime.now() - start_time).total_seconds()
             self._update_metrics(response_time, success=True)
-            
+
             return response
-            
+
         except Exception as e:
             self.logger.error(f"Response generation failed: {e}")
             self._update_metrics(0, success=False)
@@ -338,22 +338,22 @@ This completion section tracks response times for successful requests and proper
 Let's implement the standard response generation with function calling support:
 
 ```python
-    
+
     async def _generate_standard_response(self, prompt: str) -> str:
         """Generate standard response with function calling support"""
-        
+
         response = await self.chat_session.send_message_async(prompt)
-        
+
         # Check if function calling is required
         if response.candidates[0].function_calls:
             # Handle function calls
             function_responses = await self._handle_function_calls(
                 response.candidates[0].function_calls
             )
-            
+
             # Send function responses back to model
             response = await self.chat_session.send_message_async(function_responses)
-        
+
         return response.text
 ```
 
@@ -364,18 +364,18 @@ This method demonstrates the two-step process of function calling: first, Gemini
 Now let's add streaming support for real-time applications:
 
 ```python
-    
+
     async def _generate_streaming_response(self, prompt: str) -> str:
         """Generate streaming response for real-time applications"""
-        
+
         response_chunks = []
-        
+
         async for chunk in self.chat_session.send_message_async(prompt, stream=True):
             if chunk.text:
                 response_chunks.append(chunk.text)
                 # Yield partial response for real-time display
                 yield chunk.text
-        
+
         return "".join(response_chunks)
 ```
 
@@ -388,7 +388,7 @@ Let's build the sophisticated function call execution system step by step. We'll
 ```python
     async def _handle_function_calls(self, function_calls: List[Any]) -> List[Part]:
         """Handle function calls from Gemini model"""
-        
+
         function_responses = []
 ```
 
@@ -400,7 +400,7 @@ Now let's iterate through each function call and extract the details:
         for function_call in function_calls:
             function_name = function_call.name
             function_args = function_call.args
-            
+
             self.request_metrics["function_calls"] += 1
 ```
 
@@ -413,7 +413,7 @@ Let's implement the function execution with robust error handling:
                 try:
                     # Execute registered function
                     function_impl = self.function_registry[function_name]
-                    
+
                     if asyncio.iscoroutinefunction(function_impl):
                         result = await function_impl(**function_args)
                     else:
@@ -447,7 +447,7 @@ Finally, let's handle errors and unknown functions:
                     function_responses.append(error_response)
             else:
                 self.logger.warning(f"Unknown function called: {function_name}")
-        
+
         return function_responses
 ```
 
@@ -460,10 +460,10 @@ Now let's implement the context enhancement system that makes responses more rel
 ```python
     def _enhance_prompt_with_context(self, prompt: str, context: Dict[str, Any]) -> str:
         """Enhance prompt with contextual information"""
-        
+
         if not context:
             return prompt
-        
+
         context_parts = []
 ```
 
@@ -502,7 +502,7 @@ Let's add business-specific context:
         if "business_context" in context:
             business_ctx = context["business_context"]
             context_parts.append(f"Business context: {business_ctx}")
-        
+
         # Add temporal context
         context_parts.append(f"Current time: {datetime.now().isoformat()}")
 ```
@@ -518,7 +518,7 @@ Finally, let's format the enhanced prompt:
 
 User request: {prompt}"""
             return enhanced_prompt
-        
+
         return prompt
 ```
 
@@ -529,15 +529,15 @@ This formatting creates a clear structure that helps Gemini understand both the 
 Let's add the metrics tracking system for production monitoring:
 
 ```python
-    
+
     def _update_metrics(self, response_time: float, success: bool):
         """Update performance metrics"""
-        
+
         if success:
             self.request_metrics["successful_requests"] += 1
         else:
             self.request_metrics["failed_requests"] += 1
-        
+
         # Update average response time
         total_successful = self.request_metrics["successful_requests"]
         if total_successful > 0:
@@ -556,7 +556,7 @@ Now let's create the MCP orchestrator that enables multi-service coordination:
 
 class MCPGeminiOrchestrator:
     """Orchestrates multiple MCP services with Gemini intelligence"""
-    
+
     def __init__(self, gemini_agent: AdvancedGeminiAgent):
         self.gemini_agent = gemini_agent
         self.mcp_services: Dict[str, Any] = {}
@@ -571,15 +571,15 @@ This orchestrator class enables our Gemini agent to intelligently coordinate mul
 Let's build the service registration system that allows dynamic service discovery:
 
 ```python
-        
-    def register_mcp_service(self, service_name: str, 
-                           service_client: Any, 
+
+    def register_mcp_service(self, service_name: str,
+                           service_client: Any,
                            capabilities: List[str]):
         """Register MCP service with its capabilities"""
-        
+
         self.mcp_services[service_name] = service_client
         self.service_capabilities[service_name] = capabilities
-        
+
         # Register service functions with Gemini
         self._register_service_functions(service_name, capabilities)
 ```
@@ -593,7 +593,7 @@ Now let's implement the automatic function registration for MCP services. We'll 
 ```python
     def _register_service_functions(self, service_name: str, capabilities: List[str]):
         """Register MCP service functions with Gemini"""
-        
+
         for capability in capabilities:
             function_name = f"{service_name}_{capability}"
 ```
@@ -650,12 +650,12 @@ This registration makes each service capability available to Gemini as a callabl
 Let's implement the robust service call handler with comprehensive error handling. We'll start with the method signature and service validation:
 
 ```python
-    async def _call_mcp_service(self, service_name: str, 
-                               capability: str, 
-                               query: str, 
+    async def _call_mcp_service(self, service_name: str,
+                               capability: str,
+                               query: str,
                                parameters: Dict[str, Any]) -> Dict[str, Any]:
         """Call MCP service with error handling and logging"""
-        
+
         service_client = self.mcp_services.get(service_name)
         if not service_client:
             return {"error": f"Service {service_name} not available"}
@@ -696,7 +696,7 @@ Now let's handle successful execution:
 ```python
             orchestration_record["result"] = result
             orchestration_record["status"] = "success"
-            
+
             self.orchestration_history.append(orchestration_record)
             return result
 ```
@@ -710,7 +710,7 @@ Finally, let's add robust error handling:
             error_result = {"error": str(e)}
             orchestration_record["result"] = error_result
             orchestration_record["status"] = "error"
-            
+
             self.orchestration_history.append(orchestration_record)
             return error_result
 ```
@@ -724,15 +724,15 @@ Now let's build the intelligent service selection system that uses Gemini to cho
 ```python
     async def intelligent_service_selection(self, user_query: str) -> Dict[str, Any]:
         """Use Gemini to intelligently select and orchestrate MCP services"""
-        
+
         # Analyze query to determine required services
         analysis_prompt = f"""
         Analyze this user query and determine which services would be most helpful:
         Query: "{user_query}"
-        
+
         Available services and their capabilities:
         {self._format_service_capabilities()}
-        
+
         Respond with a JSON object indicating:
         1. Which services to use
         2. What specific capabilities to invoke
@@ -771,7 +771,7 @@ Let's implement the step-by-step execution:
                 capability = step.get("capability")
                 query = step.get("query", user_query)
                 parameters = step.get("parameters", {})
-                
+
                 result = await self._call_mcp_service(
                     service_name, capability, query, parameters
                 )
@@ -791,7 +791,7 @@ Finally, let's return comprehensive results with fallback handling:
                 "execution_results": execution_results,
                 "status": "completed"
             }
-            
+
         except json.JSONDecodeError:
             # Fallback to direct service calls
             return await self._fallback_service_execution(user_query)
@@ -804,15 +804,15 @@ The response includes both the original plan and execution results, while the fa
 Finally, let's implement the service capability formatting for AI analysis:
 
 ```python
-    
+
     def _format_service_capabilities(self) -> str:
         """Format service capabilities for Gemini analysis"""
-        
+
         formatted = []
         for service_name, capabilities in self.service_capabilities.items():
             caps_str = ", ".join(capabilities)
             formatted.append(f"- {service_name}: {caps_str}")
-        
+
         return "\n".join(formatted)
 ```
 
@@ -928,13 +928,13 @@ class AdvancedConversationMemory:
             memory_type: [] for memory_type in MemoryType
         }
         self.memory_lock = threading.Lock()
-        
+
         # Configuration
         self.max_short_term_memories = 50
         self.max_working_memories = 20
         self.importance_threshold = 0.3
         self.retention_days = 90
-        
+
         # Initialize database
         self._initialize_database()
         self._load_memories()
@@ -947,10 +947,10 @@ This memory manager provides user-specific memory isolation, configurable limits
 Let's implement the SQLite database initialization for persistent memory storage:
 
 ```python
-    
+
     def _initialize_database(self):
         """Initialize SQLite database for memory persistence"""
-        
+
         with sqlite3.connect(self.db_path) as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS memories (
@@ -966,9 +966,9 @@ Let's implement the SQLite database initialization for persistent memory storage
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
-            
+
             conn.execute("""
-                CREATE INDEX IF NOT EXISTS idx_user_type_time 
+                CREATE INDEX IF NOT EXISTS idx_user_type_time
                 ON memories(user_id, memory_type, timestamp)
             """)
 ```
@@ -980,21 +980,21 @@ This database schema provides efficient storage with proper indexing for fast re
 Now let's implement the memory loading system:
 
 ```python
-    
+
     def _load_memories(self):
         """Load memories from database"""
-        
+
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute("""
                 SELECT content, memory_type, timestamp, importance, context, tags, embedding
-                FROM memories 
+                FROM memories
                 WHERE user_id = ? AND timestamp > ?
                 ORDER BY timestamp DESC
             """, (self.user_id, (datetime.now() - timedelta(days=self.retention_days)).isoformat()))
-            
+
             for row in cursor.fetchall():
                 content, memory_type, timestamp, importance, context, tags, embedding = row
-                
+
                 memory_entry = MemoryEntry(
                     content=content,
                     memory_type=MemoryType(memory_type),
@@ -1004,7 +1004,7 @@ Now let's implement the memory loading system:
                     tags=json.loads(tags or "[]"),
                     embedding=json.loads(embedding) if embedding else None
                 )
-                
+
                 self.memories[memory_entry.memory_type].append(memory_entry)
 ```
 
@@ -1015,12 +1015,12 @@ This loading system efficiently retrieves memories within the retention period, 
 Let's create the system for adding new memories with automatic management:
 
 ```python
-    
-    def add_memory(self, content: str, memory_type: MemoryType, 
+
+    def add_memory(self, content: str, memory_type: MemoryType,
                    importance: float = 0.5, context: Dict[str, Any] = None,
                    tags: List[str] = None):
         """Add new memory entry with automatic management"""
-        
+
         memory_entry = MemoryEntry(
             content=content,
             memory_type=memory_type,
@@ -1029,14 +1029,14 @@ Let's create the system for adding new memories with automatic management:
             context=context or {},
             tags=tags or []
         )
-        
+
         with self.memory_lock:
             # Add to in-memory storage
             self.memories[memory_type].append(memory_entry)
-            
+
             # Manage memory limits
             self._manage_memory_limits(memory_type)
-            
+
             # Persist to database
             self._persist_memory(memory_entry)
 ```
@@ -1048,30 +1048,30 @@ This add_memory method provides thread-safe memory addition with automatic limit
 Now let's implement intelligent memory limit management:
 
 ```python
-    
+
     def _manage_memory_limits(self, memory_type: MemoryType):
         """Manage memory limits and cleanup old entries"""
-        
+
         memories = self.memories[memory_type]
-        
+
         if memory_type == MemoryType.SHORT_TERM:
             if len(memories) > self.max_short_term_memories:
                 # Keep most recent and most important
                 memories.sort(key=lambda m: (m.importance, m.timestamp), reverse=True)
                 self.memories[memory_type] = memories[:self.max_short_term_memories]
-        
+
         elif memory_type == MemoryType.WORKING:
             if len(memories) > self.max_working_memories:
                 # Keep most recent working memories
                 memories.sort(key=lambda m: m.timestamp, reverse=True)
                 self.memories[memory_type] = memories[:self.max_working_memories]
-        
+
         # For long-term memories, use importance-based retention
         elif memory_type == MemoryType.LONG_TERM:
             # Remove low-importance old memories
             cutoff_date = datetime.now() - timedelta(days=30)
             self.memories[memory_type] = [
-                m for m in memories 
+                m for m in memories
                 if m.importance >= self.importance_threshold or m.timestamp > cutoff_date
             ]
 ```
@@ -1083,13 +1083,13 @@ This management system uses different strategies for different memory types: imp
 Let's add the database persistence functionality:
 
 ```python
-    
+
     def _persist_memory(self, memory_entry: MemoryEntry):
         """Persist memory entry to database"""
-        
+
         with sqlite3.connect(self.db_path) as conn:
             conn.execute("""
-                INSERT INTO memories (user_id, content, memory_type, timestamp, 
+                INSERT INTO memories (user_id, content, memory_type, timestamp,
                                     importance, context, tags, embedding)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """, (
@@ -1111,26 +1111,26 @@ This persistence method ensures all memory entries are immediately saved to the 
 Now let's implement the intelligent memory retrieval system:
 
 ```python
-    
-    def retrieve_relevant_memories(self, query: str, 
+
+    def retrieve_relevant_memories(self, query: str,
                                  memory_types: List[MemoryType] = None,
                                  max_memories: int = 10) -> List[MemoryEntry]:
         """Retrieve memories relevant to a query"""
-        
+
         if memory_types is None:
             memory_types = list(MemoryType)
-        
+
         relevant_memories = []
-        
+
         with self.memory_lock:
             for memory_type in memory_types:
                 for memory in self.memories[memory_type]:
                     # Simple relevance scoring (could be enhanced with embeddings)
                     relevance_score = self._calculate_relevance(query, memory)
-                    
+
                     if relevance_score > 0.1:  # Minimum relevance threshold
                         relevant_memories.append((memory, relevance_score))
-        
+
         # Sort by relevance and return top memories
         relevant_memories.sort(key=lambda x: x[1], reverse=True)
         return [memory for memory, _ in relevant_memories[:max_memories]]
@@ -1145,14 +1145,14 @@ Let's build the relevance scoring algorithm step by step. We'll start with the b
 ```python
     def _calculate_relevance(self, query: str, memory: MemoryEntry) -> float:
         """Calculate relevance score between query and memory"""
-        
+
         query_lower = query.lower()
         content_lower = memory.content.lower()
-        
+
         # Simple keyword matching (could be enhanced with semantic similarity)
         query_words = set(query_lower.split())
         content_words = set(content_lower.split())
-        
+
         if not query_words:
             return 0.0
 ```
@@ -1203,19 +1203,19 @@ This final calculation combines keyword relevance with importance and recency bo
 Let's implement the conversation context retrieval for prompt enhancement:
 
 ```python
-    
+
     def get_conversation_context(self, max_turns: int = 10) -> List[Dict[str, Any]]:
         """Get recent conversation context for prompt enhancement"""
-        
+
         short_term_memories = self.memories[MemoryType.SHORT_TERM]
-        
+
         # Sort by timestamp and get recent memories
         recent_memories = sorted(
             short_term_memories,
             key=lambda m: m.timestamp,
             reverse=True
         )[:max_turns]
-        
+
         # Convert to conversation format
         context = []
         for memory in reversed(recent_memories):  # Chronological order
@@ -1225,7 +1225,7 @@ Let's implement the conversation context retrieval for prompt enhancement:
                 "importance": memory.importance,
                 "tags": memory.tags
             })
-        
+
         return context
 ```
 
@@ -1236,21 +1236,21 @@ This context system provides structured conversation history that can be used to
 Finally, let's add the memory consolidation system that promotes important memories:
 
 ```python
-    
+
     def consolidate_memories(self):
         """Consolidate and organize memories for better retrieval"""
-        
+
         with self.memory_lock:
             # Promote important short-term memories to long-term
             short_term_memories = self.memories[MemoryType.SHORT_TERM]
-            
+
             for memory in short_term_memories[:]:
                 if memory.importance >= 0.8:  # High importance threshold
                     # Move to long-term memory
                     memory.memory_type = MemoryType.LONG_TERM
                     self.memories[MemoryType.LONG_TERM].append(memory)
                     self.memories[MemoryType.SHORT_TERM].remove(memory)
-                    
+
                     # Update in database
                     self._update_memory_type(memory)
 ```
@@ -1262,14 +1262,14 @@ This consolidation system automatically promotes important short-term memories t
 Let's complete the memory system with database update capability:
 
 ```python
-    
+
     def _update_memory_type(self, memory: MemoryEntry):
         """Update memory type in database"""
-        
+
         with sqlite3.connect(self.db_path) as conn:
             conn.execute("""
-                UPDATE memories 
-                SET memory_type = ? 
+                UPDATE memories
+                SET memory_type = ?
                 WHERE user_id = ? AND content = ? AND timestamp = ?
             """, (
                 memory.memory_type.value,
@@ -1287,9 +1287,9 @@ This completes our advanced memory system with 32 comprehensive steps that provi
 
 Advanced ADK integration patterns covered:
 
-- **Advanced Gemini Integration**: Sophisticated model configuration with function calling and streaming  
-- **MCP Service Orchestration**: Intelligent multi-service coordination with Gemini-driven selection  
-- **Production Memory Systems**: Persistent conversation memory with multiple memory types  
+- **Advanced Gemini Integration**: Sophisticated model configuration with function calling and streaming
+- **MCP Service Orchestration**: Intelligent multi-service coordination with Gemini-driven selection
+- **Production Memory Systems**: Persistent conversation memory with multiple memory types
 - **Enterprise Context Management**: Context-aware response generation with relevance scoring
 
 ---
@@ -1299,34 +1299,34 @@ Advanced ADK integration patterns covered:
 Test your understanding of advanced ADK integration and enterprise patterns:
 
 **Question 1:** What advanced features does the enhanced Gemini agent implement?
-A) Basic text generation only  
-B) Streaming responses with function calling and model configuration flexibility  
-C) Static responses only  
-D) Image processing only  
+A) Basic text generation only
+B) Streaming responses with function calling and model configuration flexibility
+C) Static responses only
+D) Image processing only
 
 **Question 2:** How does the MCP service orchestrator determine which service to use?
-A) Random selection  
-B) Gemini AI-driven analysis of query content and service capabilities  
-C) First available service  
-D) Manual configuration only  
+A) Random selection
+B) Gemini AI-driven analysis of query content and service capabilities
+C) First available service
+D) Manual configuration only
 
 **Question 3:** What memory types does the advanced memory system support?
-A) Short-term memory only  
-B) Multiple memory types including conversation, factual, emotional, and preference memory  
-C) File-based storage only  
-D) No memory persistence  
+A) Short-term memory only
+B) Multiple memory types including conversation, factual, emotional, and preference memory
+C) File-based storage only
+D) No memory persistence
 
 **Question 4:** How does the enterprise context manager determine response relevance?
-A) Random scoring  
-B) Keyword counting only  
-C) Semantic similarity analysis with configurable relevance thresholds  
-D) Manual relevance assignment  
+A) Random scoring
+B) Keyword counting only
+C) Semantic similarity analysis with configurable relevance thresholds
+D) Manual relevance assignment
 
 **Question 5:** What production features does the advanced ADK integration provide?
-A) Basic functionality only  
-B) Persistent memory, context management, error handling, and streaming capabilities  
-C) Development features only  
-D) Single-user support  
+A) Basic functionality only
+B) Persistent memory, context management, error handling, and streaming capabilities
+C) Development features only
+D) Single-user support
 
 [**🗂️ View Test Solutions →**](Session7_ModuleA_Test_Solutions.md)
 
@@ -1343,3 +1343,10 @@ D) Single-user support
 - `src/session7/advanced_gemini.py` - Sophisticated Gemini model integration
 - `src/session7/advanced_memory.py` - Production memory systems
 - `src/session7/mcp_orchestration.py` - Multi-service coordination patterns
+---
+
+## 🧭 Navigation
+
+**Previous:** [Session 6 - Atomic Agents Modular Architecture ←](Session6_Atomic_Agents_Modular_Architecture.md)
+**Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
+---

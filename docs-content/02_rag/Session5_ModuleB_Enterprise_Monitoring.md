@@ -1,6 +1,6 @@
 # Session 5 - Module B: Enterprise Monitoring
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 5 core content first.
 
 You've implemented comprehensive RAG evaluation and production monitoring in Session 5. But when you deploy to enterprise environments with SLA commitments, regulatory compliance requirements, and executive reporting needs, you discover that basic monitoring isn't sufficient for mission-critical operations.
@@ -275,53 +275,41 @@ Ensemble scoring reduces false positives by requiring consensus from multiple de
 
 ## Multiple Choice Test - Module B
 
-**Question 1:** In enterprise RAG monitoring, which SLA metric should have the highest priority for alerts?  
-A) Storage usage  
-B) Availability and response time impacting user access  
-C) Log file size  
-D) Network bandwidth  
+**Question 1:** In enterprise RAG monitoring, which SLA metric should have the highest priority for alerts?
+A) Storage usage
+B) Availability and response time impacting user access
+C) Log file size
+D) Network bandwidth
 
-**Question 2:** What is the primary purpose of compliance monitoring in enterprise RAG systems?  
-A) Improving performance  
-B) Ensuring regulatory requirements are met and audit trails are maintained  
-C) Reducing costs  
-D) Simplifying architecture  
+**Question 2:** What is the primary purpose of compliance monitoring in enterprise RAG systems?
+A) Improving performance
+B) Ensuring regulatory requirements are met and audit trails are maintained
+C) Reducing costs
+D) Simplifying architecture
 
-**Question 3:** What type of metrics should executive dashboards focus on for RAG systems?  
-A) Technical implementation details  
-B) Business impact metrics like user satisfaction and cost efficiency  
-C) Code quality metrics  
-D) Developer productivity only  
+**Question 3:** What type of metrics should executive dashboards focus on for RAG systems?
+A) Technical implementation details
+B) Business impact metrics like user satisfaction and cost efficiency
+C) Code quality metrics
+D) Developer productivity only
 
-**Question 4:** Why is ensemble anomaly detection better than single-method detection?  
-A) It's faster to compute  
-B) It reduces false positives by combining multiple detection approaches  
-C) It uses less memory  
-D) It's easier to implement  
+**Question 4:** Why is ensemble anomaly detection better than single-method detection?
+A) It's faster to compute
+B) It reduces false positives by combining multiple detection approaches
+C) It uses less memory
+D) It's easier to implement
 
-**Question 5:** In regulated industries, what must be included in RAG system audit trails?  
-A) Only error logs  
-B) Data processing events, compliance checks, and user access records  
-C) Performance metrics only  
-D) Configuration changes only  
+**Question 5:** In regulated industries, what must be included in RAG system audit trails?
+A) Only error logs
+B) Data processing events, compliance checks, and user access records
+C) Performance metrics only
+D) Configuration changes only
 
 [**🗂️ View Test Solutions →**](Session5_ModuleB_Test_Solutions.md)
-
 ---
 
 ## 🧭 Navigation
 
-### Related Modules
-
-- **Core Session:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
-- **Related Module:** [Module A - Advanced Metrics](Session5_ModuleA_Advanced_Metrics.md)
-
-**Code Files:** All examples use files in `src/session5/`
-
-- `production_monitor.py` - Real-time monitoring system
-- `alerting_system.py` - Enterprise alerting and escalation
-- `ab_testing.py` - Performance comparison tools
-
-**Quick Start:** Run `cd src/session5 && python production_monitor.py` to see enterprise monitoring in action
-
+**Previous:** [Session 4 - Query Enhancement & Context Augmentation ←](Session4_Query_Enhancement_Context_Augmentation.md)
+**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
 ---

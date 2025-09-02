@@ -1,38 +1,38 @@
 # ⚙️ Session 4 Advanced: Cloud Deployment Strategies - Multi-Platform Production
 
-> **⚙️ IMPLEMENTER PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer and 📝 Participant paths  
-> Time Investment: 3-4 hours  
-> Outcome: Master Google Cloud Run and AWS Lambda deployments with Infrastructure as Code  
+> **⚙️ IMPLEMENTER PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer and 📝 Participant paths
+> Time Investment: 3-4 hours
+> Outcome: Master Google Cloud Run and AWS Lambda deployments with Infrastructure as Code
 
 ## Advanced Learning Outcomes
 
-After completing this module, you will master:  
+After completing this module, you will master:
 
-- Google Cloud Run deployment with FastAPI HTTP adapters  
-- AWS Lambda deployment with event-driven architecture  
-- Infrastructure as Code with Terraform and SAM templates  
-- Multi-cloud deployment strategies and considerations  
+- Google Cloud Run deployment with FastAPI HTTP adapters
+- AWS Lambda deployment with event-driven architecture
+- Infrastructure as Code with Terraform and SAM templates
+- Multi-cloud deployment strategies and considerations
 
 ## Google Cloud Run Deployment
 
 ### The Serverless Revolution
 
-Google Cloud Run represents a fundamental shift in how we think about production deployment. Instead of managing servers, you manage services. Instead of scaling infrastructure, you scale functions. This is containerized serverless computing at its finest.  
+Google Cloud Run represents a fundamental shift in how we think about production deployment. Instead of managing servers, you manage services. Instead of scaling infrastructure, you scale functions. This is containerized serverless computing at its finest.
 
-**Cloud Run Benefits:**  
+**Cloud Run Benefits:**
 
-- **Serverless container deployment**: You provide the container, Google manages everything else  
-- **Automatic scaling**: From zero to thousands of instances based on demand  
-- **Pay-per-use billing**: Only pay for the compute time you actually use  
-- **Managed infrastructure**: Google handles load balancing, SSL, monitoring, and more  
-- **Global distribution**: Deploy to multiple regions with a single command  
+- **Serverless container deployment**: You provide the container, Google manages everything else
+- **Automatic scaling**: From zero to thousands of instances based on demand
+- **Pay-per-use billing**: Only pay for the compute time you actually use
+- **Managed infrastructure**: Google handles load balancing, SSL, monitoring, and more
+- **Global distribution**: Deploy to multiple regions with a single command
 
 ### Building the Cloud Run HTTP Adapter
 
-Cloud Run expects HTTP traffic, but your MCP server speaks JSON-RPC. Here's how to bridge that gap elegantly.  
+Cloud Run expects HTTP traffic, but your MCP server speaks JSON-RPC. Here's how to bridge that gap elegantly.
 
-We start with the essential imports and Cloud Run optimized logging configuration:  
+We start with the essential imports and Cloud Run optimized logging configuration:
 
 ```python
 # src/cloud_run_adapter.py - Bridging MCP and HTTP
@@ -45,7 +45,7 @@ import os
 import logging
 ```
 
-Initialize the production components:  
+Initialize the production components:
 
 ```python
 from src.production_mcp_server import ProductionMCPServer
@@ -55,7 +55,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 ```
 
-Next, we create the FastAPI application with production-grade metadata and initialize our MCP server:  
+Next, we create the FastAPI application with production-grade metadata and initialize our MCP server:
 
 ```python
 app = FastAPI(
@@ -68,20 +68,20 @@ app = FastAPI(
 server = ProductionMCPServer()
 ```
 
-**Cloud Run Architecture Pattern:** The FastAPI application acts as an HTTP gateway that translates incoming HTTP requests into MCP JSON-RPC calls and returns the responses in HTTP format. This adapter pattern is essential for serverless deployments.  
+**Cloud Run Architecture Pattern:** The FastAPI application acts as an HTTP gateway that translates incoming HTTP requests into MCP JSON-RPC calls and returns the responses in HTTP format. This adapter pattern is essential for serverless deployments.
 
 ### Application Lifecycle Management
 
-Cloud Run containers have a specific lifecycle. Here's how to manage it properly.  
+Cloud Run containers have a specific lifecycle. Here's how to manage it properly.
 
-The startup event handler initializes all resources and dependencies when the container starts:  
+The startup event handler initializes all resources and dependencies when the container starts:
 
 ```python
 @app.on_event("startup")
 async def startup_event():
     """
     Cloud Run Startup: Preparing for Production Traffic
-    
+
     Cloud Run containers start fresh for each deployment,
     so we initialize all resources and dependencies here.
     """
@@ -90,14 +90,14 @@ async def startup_event():
     logger.info("MCP server ready to handle production traffic")
 ```
 
-The shutdown event handler ensures graceful resource cleanup during container termination:  
+The shutdown event handler ensures graceful resource cleanup during container termination:
 
 ```python
 @app.on_event("shutdown")
 async def shutdown_event():
     """
     Graceful Shutdown: Cleaning Up Resources
-    
+
     Proper cleanup ensures graceful shutdown when Cloud Run
     terminates containers during scaling or deployment.
     """
@@ -106,33 +106,33 @@ async def shutdown_event():
         await server.redis_client.close()
 ```
 
-**Production Pattern:** These lifecycle events are critical for serverless environments where containers can be terminated at any time. Proper initialization and cleanup prevent resource leaks and ensure consistent behavior.  
+**Production Pattern:** These lifecycle events are critical for serverless environments where containers can be terminated at any time. Proper initialization and cleanup prevent resource leaks and ensure consistent behavior.
 
 ### The HTTP-to-MCP Request Handler
 
-This is where the magic happens - converting HTTP requests into MCP JSON-RPC calls.  
+This is where the magic happens - converting HTTP requests into MCP JSON-RPC calls.
 
-We start with the endpoint definition and request parsing logic:  
+We start with the endpoint definition and request parsing logic:
 
 ```python
 @app.post("/mcp")
 async def handle_mcp_request(request: Request):
     """
     The Protocol Bridge: HTTP ↔ MCP JSON-RPC
-    
+
     This endpoint converts HTTP requests to MCP JSON-RPC format
     and routes them to appropriate MCP tools.
     """
     try:
         body = await request.json()
         logger.info(f"Processing MCP request: {body.get('method', 'unknown')}")
-        
+
         # Route based on MCP method
         method = body.get("method", "")
         params = body.get("params", {})
 ```
 
-The tool discovery method handles requests for available MCP tools:  
+The tool discovery method handles requests for available MCP tools:
 
 ```python
         if method == "tools/list":
@@ -145,14 +145,14 @@ The tool discovery method handles requests for available MCP tools:
             })
 ```
 
-Tool execution requires parameter validation and error handling:  
+Tool execution requires parameter validation and error handling:
 
 ```python
         elif method.startswith("tools/call"):
             # Tool execution
             tool_name = params.get("name")
             tool_params = params.get("arguments", {})
-            
+
             tool = server.mcp.get_tool(tool_name)
             if tool:
                 result = await tool(**tool_params)
@@ -163,7 +163,7 @@ Tool execution requires parameter validation and error handling:
                 })
 ```
 
-When tools aren't found, we return proper JSON-RPC error responses:  
+When tools aren't found, we return proper JSON-RPC error responses:
 
 ```python
             else:
@@ -177,7 +177,7 @@ When tools aren't found, we return proper JSON-RPC error responses:
                 )
 ```
 
-Comprehensive error handling ensures the system degrades gracefully under all failure conditions:  
+Comprehensive error handling ensures the system degrades gracefully under all failure conditions:
 
 ```python
     except json.JSONDecodeError:
@@ -203,7 +203,7 @@ Comprehensive error handling ensures the system degrades gracefully under all fa
 
 ### Health Checks and Metrics for Cloud Run
 
-Cloud Run needs to know your service is healthy. Here's how to provide that information:  
+Cloud Run needs to know your service is healthy. Here's how to provide that information:
 
 ```python
 @app.get("/health")
@@ -211,12 +211,12 @@ async def health_check():
     """Cloud Run Health Check: Service Readiness Validation"""
     try:
         health = await server.mcp.get_tool("health_check")()
-        
+
         if health.get("status") == "healthy":
             return health
         else:
             return JSONResponse(content=health, status_code=503)
-            
+
     except Exception as e:
         return JSONResponse(
             content={"status": "unhealthy", "error": str(e)},
@@ -232,9 +232,9 @@ async def metrics():
 
 ### Automated Cloud Build Configuration
 
-Here's how to automate your deployment with Google Cloud Build using a comprehensive CI/CD pipeline.  
+Here's how to automate your deployment with Google Cloud Build using a comprehensive CI/CD pipeline.
 
-We start with the container image build steps that create tagged versions for deployment tracking:  
+We start with the container image build steps that create tagged versions for deployment tracking:
 
 ```yaml
 # deployments/cloudbuild.yaml - Automated deployment pipeline
@@ -250,18 +250,18 @@ steps:
     ]
 ```
 
-Next, we push the built images to Google Container Registry for deployment:  
+Next, we push the built images to Google Container Registry for deployment:
 
 ```yaml
   # Push to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/mcp-server:$COMMIT_SHA']
-  
+
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/mcp-server:latest']
 ```
 
-The deployment step configures Cloud Run with production-ready settings:  
+The deployment step configures Cloud Run with production-ready settings:
 
 ```yaml
   # Deploy to Cloud Run with production configuration
@@ -291,24 +291,24 @@ substitutions:
 
 ### Understanding the Lambda Paradigm
 
-AWS Lambda represents a fundamentally different approach to production deployment. Instead of running persistent servers, you run functions that execute on-demand.  
+AWS Lambda represents a fundamentally different approach to production deployment. Instead of running persistent servers, you run functions that execute on-demand.
 
-**Lambda Advantages:**  
+**Lambda Advantages:**
 
-- **Function-based execution**: Pay only for actual compute time, down to the millisecond  
-- **Event-driven responses**: Integrate with AWS services for trigger-based execution  
-- **Zero server management**: AWS handles all infrastructure concerns  
-- **Automatic scaling**: From zero to thousands of concurrent executions instantly  
+- **Function-based execution**: Pay only for actual compute time, down to the millisecond
+- **Event-driven responses**: Integrate with AWS services for trigger-based execution
+- **Zero server management**: AWS handles all infrastructure concerns
+- **Automatic scaling**: From zero to thousands of concurrent executions instantly
 
-**Lambda Considerations:**  
+**Lambda Considerations:**
 
-- **Cold start latency**: First invocation after idle time includes initialization overhead  
-- **15-minute execution limit**: Long-running processes need different architectural approaches  
-- **Stateless execution**: Each invocation starts fresh - no persistent state between calls  
+- **Cold start latency**: First invocation after idle time includes initialization overhead
+- **15-minute execution limit**: Long-running processes need different architectural approaches
+- **Stateless execution**: Each invocation starts fresh - no persistent state between calls
 
 ### Building the Lambda Handler
 
-Here's how to adapt your MCP server for the Lambda execution environment:  
+Here's how to adapt your MCP server for the Lambda execution environment:
 
 ```python
 # src/lambda_handler.py - MCP Server in Serverless Function Form
@@ -332,13 +332,13 @@ handler = Mangum(app, lifespan="off")
 
 ### Direct Lambda Handler for Maximum Performance
 
-For scenarios where you need maximum performance and minimum cold start time, here's a direct handler approach:  
+For scenarios where you need maximum performance and minimum cold start time, here's a direct handler approach:
 
 ```python
 def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     """
     Direct Lambda Handler: Maximum Performance, Minimum Overhead
-    
+
     This approach provides:
     - Minimal cold start time
     - Direct control over execution flow
@@ -347,16 +347,16 @@ def lambda_handler_direct(event: Dict[str, Any], context: Any) -> Dict[str, Any]
     """
     try:
         # Request logging for debugging and monitoring
-        logger.info(f"Lambda invoked", 
-                   request_id=context.aws_request_id, 
+        logger.info(f"Lambda invoked",
+                   request_id=context.aws_request_id,
                    remaining_time=context.get_remaining_time_in_millis())
-        
+
         # Parse HTTP request body to extract MCP JSON-RPC data
         body = json.loads(event.get('body', '{}'))
         method = body.get('method', '')
 ```
 
-Handle the MCP tools discovery request:  
+Handle the MCP tools discovery request:
 
 ```python
         # Handle MCP protocol methods - Tools discovery
@@ -369,7 +369,7 @@ Handle the MCP tools discovery request:
                         "type": "object",
                         "properties": {
                             "data": {"type": "object"},
-                            "operation": {"type": "string", 
+                            "operation": {"type": "string",
                                         "enum": ["transform", "validate", "analyze"]}
                         }
                     }
@@ -380,7 +380,7 @@ Handle the MCP tools discovery request:
                     "inputSchema": {"type": "object"}
                 }
             ]
-            
+
             return {
                 'statusCode': 200,
                 'headers': {
@@ -395,7 +395,7 @@ Handle the MCP tools discovery request:
             }
 ```
 
-Handle tool execution with Lambda context awareness:  
+Handle tool execution with Lambda context awareness:
 
 ```python
         elif method.startswith('tools/call'):
@@ -413,7 +413,7 @@ Handle tool execution with Lambda context awareness:
 
 ### Lambda Tool Execution Implementation
 
-Here's how to implement tool execution within the Lambda environment constraints:  
+Here's how to implement tool execution within the Lambda environment constraints:
 
 ```python
 async def execute_tool(body: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -421,12 +421,12 @@ async def execute_tool(body: Dict[str, Any], context: Any) -> Dict[str, Any]:
     params = body.get('params', {})
     tool_name = params.get('name')
     tool_args = params.get('arguments', {})
-    
+
     try:
         if tool_name == 'process_data':
             data = tool_args.get('data', {})
             operation = tool_args.get('operation', 'transform')
-            
+
             result = {
                 "operation": operation,
                 "processed_at": datetime.now().isoformat(),
@@ -439,7 +439,7 @@ async def execute_tool(body: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 },
                 "result": data  # Process data here
             }
-            
+
         elif tool_name == 'health_check':
             result = {
                 "status": "healthy",
@@ -449,19 +449,19 @@ async def execute_tool(body: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 "cold_start": not hasattr(context, '_warm'),
                 "execution_env": os.environ.get('AWS_EXECUTION_ENV')
             }
-            
+
             # Mark as warm for subsequent invocations
             context._warm = True
-            
+
         else:
             raise ValueError(f"Unknown tool: {tool_name}")
-        
+
         return {
             'jsonrpc': '2.0',
             'result': result,
             'id': body.get('id')
         }
-        
+
     except Exception as e:
         return {
             'jsonrpc': '2.0',
@@ -472,7 +472,7 @@ async def execute_tool(body: Dict[str, Any], context: Any) -> Dict[str, Any]:
 
 ### SAM Template for Complete Infrastructure
 
-AWS SAM (Serverless Application Model) provides comprehensive Lambda infrastructure management:  
+AWS SAM (Serverless Application Model) provides comprehensive Lambda infrastructure management:
 
 ```yaml
 # deployments/template.yaml - Complete Lambda Infrastructure
@@ -480,7 +480,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
   Production MCP Server on AWS Lambda
-  
+
   Serverless MCP server with API Gateway, monitoring,
   alerting, and comprehensive observability.
 
@@ -516,7 +516,7 @@ Resources:
           REDIS_URL: !Sub '{{resolve:secretsmanager:redis-url:SecretString}}'
 ```
 
-Add API Gateway integration:  
+Add API Gateway integration:
 
 ```yaml
       # API Gateway event triggers
@@ -535,7 +535,7 @@ Add API Gateway integration:
             RestApiId: !Ref MCPApi
 ```
 
-Configure IAM permissions and monitoring:  
+Configure IAM permissions and monitoring:
 
 ```yaml
       # IAM permissions with least-privilege access
@@ -570,7 +570,7 @@ Configure IAM permissions and monitoring:
 
 ## Infrastructure as Code with Terraform
 
-For enterprise deployments, infrastructure should be code. Here's your complete Terraform configuration for multi-cloud deployment:  
+For enterprise deployments, infrastructure should be code. Here's your complete Terraform configuration for multi-cloud deployment:
 
 ```terraform
 # deployments/terraform/main.tf - Infrastructure as Code
@@ -616,7 +616,7 @@ variable "gcp_region" {
 }
 ```
 
-Cloud Run service configuration:  
+Cloud Run service configuration:
 
 ```terraform
 # Google Cloud Run Service
@@ -628,7 +628,7 @@ resource "google_cloud_run_service" "mcp_server" {
     spec {
       containers {
         image = "gcr.io/${var.gcp_project_id}/mcp-server:latest"
-        
+
         resources {
           limits = {
             cpu    = "2"
@@ -640,12 +640,12 @@ resource "google_cloud_run_service" "mcp_server" {
           name  = "ENVIRONMENT"
           value = "production"
         }
-        
+
         ports {
           container_port = 8080
         }
       }
-      
+
       service_account_name = google_service_account.mcp_server.email
     }
 
@@ -665,20 +665,20 @@ resource "google_cloud_run_service" "mcp_server" {
 }
 ```
 
-AWS Lambda function configuration:  
+AWS Lambda function configuration:
 
 ```terraform
 # AWS Lambda Function
 resource "aws_lambda_function" "mcp_server" {
   function_name = "mcp-server"
   role         = aws_iam_role.lambda_role.arn
-  
+
   package_type  = "Image"
   image_uri     = "${aws_ecr_repository.mcp_server.repository_url}:latest"
-  
+
   memory_size = 1024
   timeout     = 300
-  
+
   environment {
     variables = {
       ENVIRONMENT = "production"
@@ -694,7 +694,7 @@ resource "aws_api_gateway_rest_api" "mcp_api" {
 
 resource "aws_api_gateway_deployment" "mcp_api" {
   depends_on = [aws_api_gateway_integration.mcp_lambda]
-  
+
   rest_api_id = aws_api_gateway_rest_api.mcp_api.id
   stage_name  = "prod"
 }
@@ -702,11 +702,11 @@ resource "aws_api_gateway_deployment" "mcp_api" {
 
 ## Multi-Cloud Deployment Strategy
 
-For enterprise resilience, consider a multi-cloud deployment strategy:  
+For enterprise resilience, consider a multi-cloud deployment strategy:
 
 ### Primary-Secondary Architecture
 
-Deploy your primary MCP server on Google Cloud Run for cost-effectiveness and automatic scaling, with a secondary deployment on AWS Lambda for failover scenarios:  
+Deploy your primary MCP server on Google Cloud Run for cost-effectiveness and automatic scaling, with a secondary deployment on AWS Lambda for failover scenarios:
 
 ```terraform
 # Output URLs for load balancer configuration
@@ -723,7 +723,7 @@ output "aws_service_url" {
 
 ### DNS-Based Failover
 
-Use Route 53 health checks for automatic failover:  
+Use Route 53 health checks for automatic failover:
 
 ```terraform
 resource "aws_route53_health_check" "gcp_primary" {
@@ -739,15 +739,15 @@ resource "aws_route53_record" "mcp_service" {
   zone_id = var.zone_id
   name    = "mcp-api"
   type    = "A"
-  
+
   set_identifier = "primary"
-  
+
   failover_routing_policy {
     type = "PRIMARY"
   }
-  
+
   health_check_id = aws_route53_health_check.gcp_primary.id
-  
+
   alias {
     name                   = google_cloud_run_service.mcp_server.status[0].url
     zone_id                = "Z1DFBZ6L5L5XFP"  # Cloud Run zone
@@ -760,7 +760,7 @@ resource "aws_route53_record" "mcp_service" {
 
 ### 1. Environment Parity
 
-Ensure your development, staging, and production environments use identical configurations:  
+Ensure your development, staging, and production environments use identical configurations:
 
 ```bash
 # Environment-specific deployment
@@ -774,7 +774,7 @@ terraform apply -var-file="staging.tfvars"
 
 ### 2. Blue-Green Deployment
 
-Implement zero-downtime deployments:  
+Implement zero-downtime deployments:
 
 ```yaml
 # Cloud Run traffic splitting
@@ -797,14 +797,14 @@ traffic {
 
 ### 3. Monitoring and Observability
 
-Deploy comprehensive monitoring across all platforms:  
+Deploy comprehensive monitoring across all platforms:
 
 ```terraform
 # GCP Monitoring
 resource "google_monitoring_alert_policy" "high_error_rate" {
   display_name = "MCP Server High Error Rate"
   combiner     = "OR"
-  
+
   conditions {
     display_name = "Error rate > 5%"
     condition_threshold {
@@ -829,10 +829,11 @@ resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
 }
 ```
 
-This comprehensive cloud deployment strategy provides enterprise-grade reliability, automatic scaling, and multi-cloud resilience for your production MCP servers.  
-
+This comprehensive cloud deployment strategy provides enterprise-grade reliability, automatic scaling, and multi-cloud resilience for your production MCP servers.
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Main Session](Session4_Production_MCP_Deployment.md) | [Next Advanced →](Session4_Production_Monitoring_Systems.md)
+**Previous:** [Session 3 - LangChain MCP Integration ←](Session3_LangChain_MCP_Integration.md)
+**Next:** [Session 5 - Secure MCP Server →](Session5_Secure_MCP_Server.md)
+---

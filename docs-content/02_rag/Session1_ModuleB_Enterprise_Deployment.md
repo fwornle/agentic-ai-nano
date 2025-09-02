@@ -1,6 +1,6 @@
 # Session 1 - Module B: Enterprise Deployment
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 1 core content first.
 
 Your RAG system works beautifully on your development machine. But enterprise deployment is a different challenge entirely: handling thousands of concurrent users, integrating with existing enterprise infrastructure, meeting security and compliance requirements, and maintaining performance under real-world load.
@@ -70,7 +70,7 @@ The service interface establishes a common contract for all RAG microservices. T
 ```python
 class RAGServiceInterface(ABC):
     """Interface for RAG microservices."""
-    
+
     @abstractmethod
     async def process_query(self, request: RAGRequest) -> RAGResponse:
         pass
@@ -81,7 +81,7 @@ The Document Ingestion Service handles the heavy lifting of document processing.
 ```python
 class DocumentIngestionService(RAGServiceInterface):
     """Microservice responsible for document processing and indexing."""
-    
+
     def __init__(self, vector_store_url: str, processing_queue_url: str):
         self.vector_store_url = vector_store_url
         self.processing_queue_url = processing_queue_url
@@ -111,7 +111,7 @@ The core processing loop implements fault tolerance by isolating each document's
                 results["processed"] += 1
             except Exception as e:
                 results["failed"] += 1
-                
+
         return results
 ```
 
@@ -120,7 +120,7 @@ The Retrieval Service implements federated search across multiple vector stores.
 ```python
 class RetrievalService(RAGServiceInterface):
     """Microservice for document retrieval and ranking."""
-    
+
     def __init__(self, vector_stores: List[str], reranker_endpoint: str):
         self.vector_stores = vector_stores
         self.reranker_endpoint = reranker_endpoint
@@ -156,7 +156,7 @@ The Generation Service implements load balancing with automatic failover. This e
 ```python
 class GenerationService(RAGServiceInterface):
     """Microservice for answer generation."""
-    
+
     def __init__(self, llm_endpoints: List[str], load_balancer: str):
         self.llm_endpoints = llm_endpoints
         self.load_balancer = load_balancer
@@ -174,7 +174,7 @@ The generation method implements graceful failover by attempting each endpoint i
                 return response
             except Exception as e:
                 continue  # Try next endpoint
-                
+
         raise Exception("All LLM endpoints unavailable")
 ```
 
@@ -196,7 +196,7 @@ The EnterpriseSecurity class initialization sets up cryptographic components. Th
 ```python
 class EnterpriseSecurity:
     """Enterprise-grade security for RAG systems."""
-    
+
     def __init__(self, secret_key: str, encryption_key: bytes):
         self.secret_key = secret_key
         self.cipher = Fernet(encryption_key)
@@ -217,9 +217,9 @@ Time-based validation prevents replay attacks and ensures tokens have limited li
             # Check token expiration
             if payload.get("exp", 0) < time.time():
                 return None
-                
+
             return payload
-            
+
         except jwt.InvalidTokenError:
             return None
 ```
@@ -231,7 +231,7 @@ Role-based access control (RBAC) enables fine-grained permissions. This approach
         """Check user authorization for specific resource and action."""
         user_permissions = user_payload.get("permissions", [])
         required_permission = f"{resource}:{action}"
-        
+
         return required_permission in user_permissions or "admin:*" in user_permissions
 ```
 
@@ -241,7 +241,7 @@ Data encryption ensures sensitive information is protected at rest and in transi
     def encrypt_sensitive_data(self, data: str) -> str:
         """Encrypt sensitive data for storage."""
         return self.cipher.encrypt(data.encode()).decode()
-    
+
     def decrypt_sensitive_data(self, encrypted_data: str) -> str:
         """Decrypt sensitive data for processing."""
         return self.cipher.decrypt(encrypted_data.encode()).decode()
@@ -307,7 +307,7 @@ The HighAvailabilityRAG class initialization sets up primary and backup endpoint
 ```python
 class HighAvailabilityRAG:
     """High availability RAG system with failover capabilities."""
-    
+
     def __init__(self, primary_endpoints: Dict[str, str], backup_endpoints: Dict[str, str]):
         self.primary_endpoints = primary_endpoints
         self.backup_endpoints = backup_endpoints
@@ -329,7 +329,7 @@ We create concurrent health check tasks for all services to minimize overall mon
         for service_name, endpoint in self.primary_endpoints.items():
             task = self._check_service_health(service_name, endpoint)
             tasks.append(task)
-            
+
         health_results = await asyncio.gather(*tasks, return_exceptions=True)
 ```
 
@@ -353,7 +353,7 @@ Successful health checks are stored directly, providing current service status f
 ```python
             else:
                 self.health_status[service_name] = health_results[i]
-                
+
         return self.health_status
 ```
 
@@ -362,7 +362,7 @@ The failover mechanism implements graceful degradation with automatic fallback. 
 ```python
     async def execute_with_failover(self, service_name: str, operation: callable) -> Any:
         """Execute operation with automatic failover to backup services."""
-        
+
         # Try primary endpoint
         if self._is_service_healthy(service_name):
             try:
@@ -380,7 +380,7 @@ If the primary service fails, we automatically attempt the backup service to mai
                 return await operation(self.backup_endpoints[service_name])
             except Exception as e:
                 raise Exception(f"Both primary and backup services failed for {service_name}")
-        
+
         raise Exception(f"No healthy endpoints available for {service_name}")
 ```
 
@@ -423,7 +423,7 @@ The EnterpriseMonitoring class initialization sets up the monitoring infrastruct
 ```python
 class EnterpriseMonitoring:
     """Enterprise monitoring and alerting for RAG systems."""
-    
+
     def __init__(self):
         self.metrics = {}
         self.alert_rules = {}
@@ -433,7 +433,7 @@ class EnterpriseMonitoring:
 Alert rule registration enables flexible threshold management. This dynamic configuration allows operators to adjust monitoring without code changes:
 
 ```python
-    def register_alert_rule(self, metric_name: str, threshold: float, 
+    def register_alert_rule(self, metric_name: str, threshold: float,
                           severity: AlertSeverity, comparison: str = "greater"):
         """Register an alerting rule for a specific metric."""
         self.alert_rules[metric_name] = {
@@ -449,7 +449,7 @@ Metric recording with automatic alert checking provides real-time monitoring. Th
     def record_metric(self, service: str, metric_name: str, value: float):
         """Record a metric value and check for alerts."""
         key = f"{service}.{metric_name}"
-        
+
         if key not in self.metrics:
             self.metrics[key] = []
 ```
@@ -461,7 +461,7 @@ Each metric value is timestamped and stored, building a historical record for tr
             "value": value,
             "timestamp": time.time()
         })
-        
+
         # Check for alerts
         self._check_alerts(service, metric_name, value)
 ```
@@ -524,42 +524,41 @@ Alert triggering with handler resilience ensures notifications reach operations 
 
 Test your understanding of enterprise RAG deployment:
 
-**Question 1:** What is the primary benefit of microservices architecture for enterprise RAG systems?  
-A) Reduces development time  
-B) Enables independent scaling and deployment of components  
-C) Simplifies codebase  
-D) Reduces infrastructure costs  
+**Question 1:** What is the primary benefit of microservices architecture for enterprise RAG systems?
+A) Reduces development time
+B) Enables independent scaling and deployment of components
+C) Simplifies codebase
+D) Reduces infrastructure costs
 
-**Question 2:** Why is JWT authentication important for enterprise RAG systems?  
-A) It improves query performance  
-B) It provides stateless, secure authentication with role-based access  
-C) It reduces memory usage  
-D) It enables caching  
+**Question 2:** Why is JWT authentication important for enterprise RAG systems?
+A) It improves query performance
+B) It provides stateless, secure authentication with role-based access
+C) It reduces memory usage
+D) It enables caching
 
-**Question 3:** What is the purpose of circuit breaker pattern in high availability systems?  
-A) To reduce costs  
-B) To prevent cascading failures by temporarily disabling failing services  
-C) To improve accuracy  
-D) To enable load balancing  
+**Question 3:** What is the purpose of circuit breaker pattern in high availability systems?
+A) To reduce costs
+B) To prevent cascading failures by temporarily disabling failing services
+C) To improve accuracy
+D) To enable load balancing
 
-**Question 4:** How should enterprise RAG systems handle sensitive data?  
-A) Store in plain text for performance  
-B) Encrypt at rest and in transit, with audit logging  
-C) Use only public data  
-D) Store in separate databases only  
+**Question 4:** How should enterprise RAG systems handle sensitive data?
+A) Store in plain text for performance
+B) Encrypt at rest and in transit, with audit logging
+C) Use only public data
+D) Store in separate databases only
 
-**Question 5:** What metrics are most important for enterprise RAG monitoring?  
-A) Only response time  
-B) Response time, error rates, throughput, and business KPIs  
-C) Only error counts  
-D) Only resource utilization  
+**Question 5:** What metrics are most important for enterprise RAG monitoring?
+A) Only response time
+B) Response time, error rates, throughput, and business KPIs
+C) Only error counts
+D) Only resource utilization
 
 [**🗂️ View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
+---
 
 ## 🧭 Navigation
 
-- [Session 1 - Basic RAG Implementation](Session1_Basic_RAG_Implementation.md)
-- [Module A - Production Patterns](Session1_ModuleA_Production_Patterns.md)
-- [Session 2 - Advanced Chunking & Preprocessing](Session2_Advanced_Chunking_Preprocessing.md)
-
+**Previous:** [Session 0 - Introduction to RAG Architecture ←](Session0_Introduction_to_RAG_Architecture.md)
+**Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
 ---

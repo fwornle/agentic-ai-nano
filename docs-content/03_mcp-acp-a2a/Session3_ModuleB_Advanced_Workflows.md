@@ -1,6 +1,6 @@
 # Session 3 - Module B: Advanced Workflow Orchestration
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 3 core content first.
 
 Advanced workflow orchestration patterns enable parallel processing, conditional routing, state management, and error recovery for complex enterprise agent systems.
@@ -32,7 +32,7 @@ class ParallelWorkflowState:
     """State for parallel processing workflow."""
     query: str
     messages: List[Any]
-    
+
     # Parallel processing results
     weather_result: Optional[Dict] = None
     file_result: Optional[Dict] = None
@@ -46,7 +46,7 @@ The `ParallelWorkflowState` captures results from three independent data sources
     completed_tasks: Set[str] = field(default_factory=set)
     failed_tasks: Set[str] = field(default_factory=set)
     start_time: Optional[float] = None
-    
+
     # Final aggregated result
     aggregated_result: Optional[Dict] = None
     processing_time: Optional[float] = None
@@ -57,7 +57,7 @@ Status tracking enables sophisticated parallel coordination. The `completed_task
 ```python
 class ParallelWorkflowOrchestrator:
     """Advanced parallel workflow with intelligent task coordination."""
-    
+
     def __init__(self, mcp_manager):
         self.mcp_manager = mcp_manager
         self.workflow = None
@@ -69,7 +69,7 @@ The orchestrator manages the entire parallel workflow lifecycle. The MCP manager
     async def build_workflow(self) -> StateGraph:
         """Build parallel processing workflow graph."""
         workflow = StateGraph(ParallelWorkflowState)
-        
+
         # Add processing nodes
         workflow.add_node("initializer", self._initialize_processing)
         workflow.add_node("weather_processor", self._process_weather)
@@ -84,10 +84,10 @@ The workflow architecture separates initialization, parallel processing, result 
 ```python
         # Define parallel execution flow
         workflow.set_entry_point("initializer")
-        
+
         # Fan out to parallel processors
         workflow.add_edge("initializer", "weather_processor")
-        workflow.add_edge("initializer", "file_processor")  
+        workflow.add_edge("initializer", "file_processor")
         workflow.add_edge("initializer", "database_processor")
 ```
 
@@ -104,7 +104,7 @@ The fan-out pattern creates three parallel execution paths from the initializer.
                 "error": "error_handler"
             }
         )
-        
+
         workflow.add_conditional_edges(
             "file_processor",
             self._check_completion_status,
@@ -114,12 +114,12 @@ The fan-out pattern creates three parallel execution paths from the initializer.
                 "error": "error_handler"
             }
         )
-        
+
         workflow.add_conditional_edges(
             "database_processor",
             self._check_completion_status,
             {
-                "aggregate": "aggregator", 
+                "aggregate": "aggregator",
                 "wait": END,
                 "error": "error_handler"
             }
@@ -131,7 +131,7 @@ Conditional aggregation implements intelligent coordination logic. Each processo
 ```python
         workflow.add_edge("aggregator", END)
         workflow.add_edge("error_handler", END)
-        
+
         self.workflow = workflow.compile()
         return self.workflow
 ```
@@ -159,10 +159,10 @@ Initialization establishes the coordination infrastructure needed for parallel p
                 if adapter:
                     cities = self._extract_cities(state.query)
                     weather_data = {}
-                    
+
                     # Process multiple cities in parallel
                     tasks = [
-                        self._get_weather_for_city(adapter, city) 
+                        self._get_weather_for_city(adapter, city)
                         for city in cities
                     ]
                     results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -174,13 +174,13 @@ The weather processor demonstrates nested parallelization - processing multiple 
                     for city, result in zip(cities, results):
                         if not isinstance(result, Exception):
                             weather_data[city] = result
-                    
+
                     state.weather_result = weather_data
                 else:
                     state.weather_result = {"error": "Weather service unavailable"}
             else:
                 state.weather_result = {"skipped": "No weather query detected"}
-            
+
             state.completed_tasks.add("weather")
             logger.info("Weather processing completed")
 ```
@@ -192,7 +192,7 @@ Result aggregation and status tracking ensure that successful city weather data 
             state.failed_tasks.add("weather")
             state.weather_result = {"error": str(e)}
             logger.error(f"Weather processing failed: {e}")
-        
+
         return state
 ```
 
@@ -221,13 +221,13 @@ Timeout handling prevents slow weather API calls from blocking the entire parall
             adapter = await self.mcp_manager.get_adapter("filesystem")
             if adapter:
                 search_terms = self._extract_search_terms(state.query)
-                
+
                 # Search for multiple terms in parallel
                 search_tasks = [
                     self._search_files_for_term(adapter, term)
                     for term in search_terms
                 ]
-                
+
                 results = await asyncio.gather(*search_tasks, return_exceptions=True)
 ```
 
@@ -238,11 +238,11 @@ File processing demonstrates another level of parallelization - searching for mu
                 for term, result in zip(search_terms, results):
                     if not isinstance(result, Exception):
                         file_data[f"files_for_{term}"] = result
-                
+
                 state.file_result = file_data
             else:
                 state.file_result = {"error": "File service unavailable"}
-            
+
             state.completed_tasks.add("files")
             logger.info("File processing completed")
 ```
@@ -254,7 +254,7 @@ Result organization creates structured output where each search term's results a
             state.failed_tasks.add("files")
             state.file_result = {"error": str(e)}
             logger.error(f"File processing failed: {e}")
-        
+
         return state
 ```
 
@@ -291,7 +291,7 @@ File search timeout handling uses a longer 10-second limit to account for filesy
                     self._execute_database_query(adapter, "historical_data", state.query),
                     self._execute_database_query(adapter, "metadata", state.query)
                 ]
-                
+
                 results = await asyncio.gather(*query_tasks, return_exceptions=True)
 ```
 
@@ -303,11 +303,11 @@ Database processing executes multiple queries in parallel across different data 
                 for query_type, result in zip(query_types, results):
                     if not isinstance(result, Exception):
                         database_data[query_type] = result
-                
+
                 state.database_result = database_data
             else:
                 state.database_result = {"error": "Database service unavailable"}
-            
+
             state.completed_tasks.add("database")
             logger.info("Database processing completed")
 ```
@@ -319,7 +319,7 @@ Database result organization maintains clear relationships between query types a
             state.failed_tasks.add("database")
             state.database_result = {"error": str(e)}
             logger.error(f"Database processing failed: {e}")
-        
+
         return state
 ```
 
@@ -349,13 +349,13 @@ Database query timeout uses a longer 15-second limit to accommodate complex anal
         """Check if all parallel tasks are complete."""
         expected_tasks = {"weather", "files", "database"}
         all_tasks = state.completed_tasks | state.failed_tasks
-        
+
         if all_tasks >= expected_tasks:
             if state.failed_tasks:
                 return "error"
             else:
                 return "aggregate"
-        
+
         return "wait"
 ```
 
@@ -366,7 +366,7 @@ Completion status checking implements the coordination logic that determines whe
         """Aggregate results from all parallel processors."""
         processing_time = time.time() - state.start_time if state.start_time else 0
         state.processing_time = processing_time
-        
+
         # Aggregate all results
         aggregated = {
             "query": state.query,
@@ -382,10 +382,10 @@ Result aggregation combines outcomes from all parallel processing streams into a
 ```python
         if state.weather_result:
             aggregated["results"]["weather"] = state.weather_result
-        
+
         if state.file_result:
             aggregated["results"]["files"] = state.file_result
-        
+
         if state.database_result:
             aggregated["results"]["database"] = state.database_result
 ```
@@ -397,20 +397,20 @@ Selective result inclusion ensures that only available results are included in t
         summary_parts = []
         if state.weather_result and "error" not in state.weather_result:
             summary_parts.append("Weather data retrieved successfully")
-        
+
         if state.file_result and "error" not in state.file_result:
             summary_parts.append("File search completed")
-        
+
         if state.database_result and "error" not in state.database_result:
             summary_parts.append("Database queries executed")
-        
+
         aggregated["summary"] = "; ".join(summary_parts) if summary_parts else "Partial results available"
-        
+
         state.aggregated_result = aggregated
-        
+
         logger.info(f"Parallel processing completed in {processing_time:.2f} seconds")
         logger.info(f"Completed: {state.completed_tasks}, Failed: {state.failed_tasks}")
-        
+
         return state
 ```
 
@@ -420,7 +420,7 @@ Summary generation provides human-readable insights into parallel processing out
     async def _handle_errors(self, state: ParallelWorkflowState) -> ParallelWorkflowState:
         """Handle errors in parallel processing."""
         processing_time = time.time() - state.start_time if state.start_time else 0
-        
+
         error_summary = {
             "query": state.query,
             "processing_time_seconds": processing_time,
@@ -440,23 +440,23 @@ Error handling creates structured output that separates successful partial resul
                 error_summary["errors"]["weather"] = state.weather_result["error"]
             else:
                 error_summary["partial_results"]["weather"] = state.weather_result
-        
+
         if state.file_result:
             if "error" in state.file_result:
                 error_summary["errors"]["files"] = state.file_result["error"]
             else:
                 error_summary["partial_results"]["files"] = state.file_result
-        
+
         if state.database_result:
             if "error" in state.database_result:
                 error_summary["errors"]["database"] = state.database_result["error"]
             else:
                 error_summary["partial_results"]["database"] = state.database_result
-        
+
         state.aggregated_result = error_summary
-        
+
         logger.warning(f"Parallel processing completed with errors after {processing_time:.2f} seconds")
-        
+
         return state
 ```
 
@@ -468,7 +468,7 @@ Error categorization enables intelligent handling of partial success scenarios. 
         cities = ["London", "New York", "Tokyo", "Sydney", "Paris"]
         found = [city for city in cities if city.lower() in query.lower()]
         return found or ["London"]
-    
+
     def _extract_search_terms(self, query: str) -> List[str]:
         """Extract search terms from query."""
         stop_words = {"the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for"}
@@ -483,12 +483,12 @@ Helper methods demonstrate intelligent query parsing that extracts meaningful pa
         """Execute parallel workflow."""
         if not self.workflow:
             await self.build_workflow()
-        
+
         initial_state = ParallelWorkflowState(
             query=query,
             messages=[HumanMessage(content=query)]
         )
-        
+
         try:
             final_state = await self.workflow.ainvoke(initial_state)
             return {
@@ -550,7 +550,7 @@ class ConditionalWorkflowState:
     """State for conditional workflow routing."""
     query: str
     messages: List[Any]
-    
+
     # Classification results
     workflow_type: Optional[WorkflowType] = None
     priority: Optional[Priority] = None
@@ -564,7 +564,7 @@ The workflow state captures comprehensive classification metadata extracted from
     # Processing results
     primary_result: Optional[Dict] = None
     escalation_result: Optional[Dict] = None
-    
+
     # Routing decisions
     routing_path: List[str] = None
     escalated: bool = False
@@ -575,11 +575,11 @@ The state design separates classification results from processing outcomes, enab
 ```python
 class ConditionalWorkflowRouter:
     """Intelligent workflow routing based on content analysis."""
-    
+
     def __init__(self, mcp_manager):
         self.mcp_manager = mcp_manager
         self.workflow = None
-        
+
         # Define routing rules
         self.workflow_patterns = {
             WorkflowType.CUSTOMER_SERVICE: [
@@ -636,7 +636,7 @@ Escalation triggers detect emotionally charged language and explicit escalation 
     async def build_workflow(self) -> StateGraph:
         """Build conditional routing workflow."""
         workflow = StateGraph(ConditionalWorkflowState)
-        
+
         # Add processing nodes
         workflow.add_node("classifier", self._classify_query)
         workflow.add_node("customer_service_handler", self._handle_customer_service)
@@ -664,7 +664,7 @@ The classifier serves as the single entry point, ensuring all queries undergo co
             self._route_workflow,
             {
                 "customer_service": "customer_service_handler",
-                "technical_support": "technical_support_handler", 
+                "technical_support": "technical_support_handler",
                 "sales_inquiry": "sales_handler",
                 "data_analysis": "data_analysis_handler",
                 "general_query": "general_handler",
@@ -696,9 +696,9 @@ Priority processing creates a common post-processing stage where priority-specif
                 "complete": END
             }
         )
-        
+
         workflow.add_edge("escalation_handler", END)
-        
+
         self.workflow = workflow.compile()
         return self.workflow
 ```
@@ -709,7 +709,7 @@ Escalation handling provides a safety net for high-priority or sensitive queries
     async def _classify_query(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Classify query type and extract metadata."""
         query_lower = state.query.lower()
-        
+
         # Classify workflow type
         workflow_scores = {}
         for workflow_type, patterns in self.workflow_patterns.items():
@@ -739,7 +739,7 @@ The scoring mechanism handles edge cases gracefully, defaulting to general query
             if re.search(pattern, query_lower):
                 if priority.value > state.priority.value:
                     state.priority = priority
-        
+
         # Extract urgency keywords
         state.urgency_keywords = []
         for pattern, _ in self.urgency_patterns:
@@ -754,12 +754,12 @@ Priority determination uses hierarchical matching, selecting the highest priorit
             if re.search(pattern, query_lower):
                 state.escalated = True
                 break
-        
+
         # Routing path tracking
         state.routing_path = ["classifier"]
-        
+
         logger.info(f"Classified query as {state.workflow_type.value} with priority {state.priority.value}")
-        
+
         return state
 ```
 
@@ -770,7 +770,7 @@ Escalation trigger detection and routing path tracking complete the classificati
         """Route workflow based on classification."""
         if state.escalated:
             return "escalation"
-        
+
         return state.workflow_type.value
 ```
 
@@ -780,7 +780,7 @@ The routing decision prioritizes escalation over normal workflow routing, ensuri
     async def _handle_customer_service(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle customer service workflow."""
         state.routing_path.append("customer_service")
-        
+
         try:
             # Simulate customer service processing
             adapter = await self.mcp_manager.get_adapter("database")
@@ -790,7 +790,7 @@ The routing decision prioritizes escalation over normal workflow routing, ensuri
                     "table": "customers",
                     "query": state.query
                 })
-                
+
                 # Check account status
                 if customer_data:
                     state.customer_tier = self._determine_customer_tier(customer_data)
@@ -805,14 +805,14 @@ Customer service handling demonstrates personalized processing based on customer
                 "customer_tier": state.customer_tier,
                 "recommendations": self._get_customer_service_recommendations(state)
             }
-            
+
         except Exception as e:
             state.primary_result = {
                 "type": "customer_service",
                 "error": str(e),
                 "fallback": "Standard customer service response"
             }
-        
+
         return state
 ```
 
@@ -822,7 +822,7 @@ Customer service processing includes comprehensive error handling with fallback 
     async def _handle_technical_support(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle technical support workflow."""
         state.routing_path.append("technical_support")
-        
+
         try:
             # Check system status and logs
             adapter = await self.mcp_manager.get_adapter("filesystem")
@@ -842,14 +842,14 @@ Technical support handling integrates with system monitoring capabilities, autom
                 "severity": self._assess_technical_severity(state),
                 "next_steps": self._get_technical_recommendations(state)
             }
-            
+
         except Exception as e:
             state.primary_result = {
                 "type": "technical_support",
                 "error": str(e),
                 "fallback": "Standard technical support response"
             }
-        
+
         return state
 ```
 
@@ -859,7 +859,7 @@ Technical support combines automated analysis with severity assessment, enabling
     async def _handle_sales_inquiry(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle sales inquiry workflow."""
         state.routing_path.append("sales")
-        
+
         try:
             # Get pricing and product information
             adapter = await self.mcp_manager.get_adapter("database")
@@ -879,14 +879,14 @@ Sales inquiry handling integrates with product databases to provide accurate, up
                 "lead_quality": self._assess_lead_quality(state),
                 "recommendations": self._get_sales_recommendations(state)
             }
-            
+
         except Exception as e:
             state.primary_result = {
-                "type": "sales_inquiry", 
+                "type": "sales_inquiry",
                 "error": str(e),
                 "fallback": "Standard sales response"
             }
-        
+
         return state
 ```
 
@@ -896,7 +896,7 @@ Sales processing includes lead quality assessment, enabling prioritization of hi
     async def _handle_data_analysis(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle data analysis workflow."""
         state.routing_path.append("data_analysis")
-        
+
         try:
             # Perform data analysis
             adapter = await self.mcp_manager.get_adapter("database")
@@ -916,14 +916,14 @@ Data analysis handling connects to analytical databases and systems to provide d
                 "insights": self._generate_insights(state),
                 "visualizations": "Charts and graphs generated"
             }
-            
+
         except Exception as e:
             state.primary_result = {
                 "type": "data_analysis",
                 "error": str(e),
                 "fallback": "Standard analytics response"
             }
-        
+
         return state
 ```
 
@@ -933,13 +933,13 @@ Data analysis processing generates actionable insights and visualizations, trans
     async def _handle_general_query(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle general query workflow."""
         state.routing_path.append("general")
-        
+
         state.primary_result = {
             "type": "general_query",
             "action": "General information provided",
             "response": "Comprehensive general response based on available data"
         }
-        
+
         return state
 ```
 
@@ -949,7 +949,7 @@ General query handling provides a catch-all processor for queries that don't fit
     async def _process_priority(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Process based on priority level."""
         state.routing_path.append("priority_processor")
-        
+
         if state.priority in [Priority.HIGH, Priority.CRITICAL]:
             # Add priority flags to result
             if state.primary_result:
@@ -958,7 +958,7 @@ General query handling provides a catch-all processor for queries that don't fit
                     "expedited": True,
                     "sla": "4 hours" if state.priority == Priority.HIGH else "1 hour"
                 }
-        
+
         return state
 ```
 
@@ -967,11 +967,11 @@ Priority processing applies consistent SLA management across all query types, en
 ```python
     def _check_escalation_needed(self, state: ConditionalWorkflowState) -> str:
         """Check if escalation is needed."""
-        if (state.escalated or 
-            state.priority == Priority.CRITICAL or 
+        if (state.escalated or
+            state.priority == Priority.CRITICAL or
             (state.customer_tier == "premium" and state.priority == Priority.HIGH)):
             return "escalate"
-        
+
         return "complete"
 ```
 
@@ -981,7 +981,7 @@ Escalation logic combines multiple factors including explicit escalation flags, 
     async def _handle_escalation(self, state: ConditionalWorkflowState) -> ConditionalWorkflowState:
         """Handle escalation workflow."""
         state.routing_path.append("escalation")
-        
+
         state.escalation_result = {
             "escalated": True,
             "reason": "Priority level or customer tier requires escalation",
@@ -989,9 +989,9 @@ Escalation logic combines multiple factors including explicit escalation flags, 
             "escalation_time": time.time(),
             "original_result": state.primary_result
         }
-        
+
         logger.warning(f"Query escalated: {state.query[:50]}...")
-        
+
         return state
 ```
 
@@ -1003,7 +1003,7 @@ Escalation handling preserves the original processing results while adding escal
         """Determine customer tier from data."""
         # Simplified tier determination
         return customer_data.get("tier", "standard")
-    
+
     def _assess_technical_severity(self, state: ConditionalWorkflowState) -> str:
         """Assess technical issue severity."""
         if state.priority == Priority.CRITICAL:
@@ -1037,7 +1037,7 @@ Lead quality assessment provides automated sales qualification, helping prioriti
             "Check recent transaction history",
             "Provide relevant documentation"
         ]
-    
+
     def _get_technical_recommendations(self, state: ConditionalWorkflowState) -> List[str]:
         """Get technical support recommendations."""
         return [
@@ -1057,7 +1057,7 @@ Domain-specific recommendations provide actionable next steps tailored to each w
             "Schedule demo if interested",
             "Send pricing information"
         ]
-    
+
     def _generate_insights(self, state: ConditionalWorkflowState) -> List[str]:
         """Generate data insights."""
         return [
@@ -1074,7 +1074,7 @@ Sales and analytics recommendations provide specific, actionable guidance tailor
         """Execute conditional workflow."""
         if not self.workflow:
             await self.build_workflow()
-        
+
         initial_state = ConditionalWorkflowState(
             query=query,
             messages=[HumanMessage(content=query)]
@@ -1086,7 +1086,7 @@ The workflow execution method provides the primary interface for conditional rou
 ```python
         try:
             final_state = await self.workflow.ainvoke(initial_state)
-            
+
             result = {
                 "success": True,
                 "workflow_type": final_state.workflow_type.value,
@@ -1094,12 +1094,12 @@ The workflow execution method provides the primary interface for conditional rou
                 "routing_path": final_state.routing_path,
                 "primary_result": final_state.primary_result
             }
-            
+
             if final_state.escalation_result:
                 result["escalation"] = final_state.escalation_result
-            
+
             return result
-            
+
         except Exception as e:
             return {
                 "success": False,
@@ -1156,7 +1156,7 @@ class CompensationWorkflowState:
     """State for workflow with compensation handling."""
     query: str
     messages: List[Any]
-    
+
     # Transaction tracking
     transaction_id: str
     executed_steps: List[str] = field(default_factory=list)
@@ -1170,7 +1170,7 @@ The workflow state tracks the complete transaction lifecycle. `executed_steps` a
     # Results tracking
     step_results: Dict[str, Any] = field(default_factory=dict)
     final_status: TransactionStatus = TransactionStatus.PENDING
-    
+
     # Recovery information
     checkpoint_data: Dict[str, Any] = field(default_factory=dict)
     recovery_attempts: int = 0
@@ -1182,11 +1182,11 @@ The results tracking captures outcomes from each workflow step, enabling partial
 ```python
 class CompensationWorkflowHandler:
     """Workflow handler with advanced compensation and recovery patterns."""
-    
+
     def __init__(self, mcp_manager):
         self.mcp_manager = mcp_manager
         self.workflow = None
-        
+
         # Define compensation mappings
         self.compensation_map = {
             "create_user_account": self._compensate_create_user,
@@ -1205,7 +1205,7 @@ This establishes the core compensation workflow infrastructure. Let's examine ho
     async def build_workflow(self) -> StateGraph:
         """Build workflow with compensation handling."""
         workflow = StateGraph(CompensationWorkflowState)
-        
+
         # Add processing nodes with compensation
         workflow.add_node("initialize_transaction", self._initialize_transaction)
         workflow.add_node("step_1_user_account", self._create_user_account)
@@ -1239,13 +1239,13 @@ The execution flow starts with transaction initialization and proceeds through e
                 "compensate": "compensation_handler"
             }
         )
-        
+
         workflow.add_conditional_edges(
             "step_2_payment",
             self._check_step_status,
             {
                 "continue": "step_3_notification",
-                "retry": "recovery_handler", 
+                "retry": "recovery_handler",
                 "compensate": "compensation_handler"
             }
         )
@@ -1263,7 +1263,7 @@ These conditional edges implement sophisticated error handling at each workflow 
                 "compensate": "compensation_handler"
             }
         )
-        
+
         workflow.add_conditional_edges(
             "step_4_inventory",
             self._check_step_status,
@@ -1273,7 +1273,7 @@ These conditional edges implement sophisticated error handling at each workflow 
                 "compensate": "compensation_handler"
             }
         )
-        
+
         workflow.add_conditional_edges(
             "step_5_shipping",
             self._check_step_status,
@@ -1309,7 +1309,7 @@ The recovery handler implements intelligent retry routing, directing flow back t
 ```python
         workflow.add_edge("compensation_handler", END)
         workflow.add_edge("finalize_transaction", END)
-        
+
         self.workflow = workflow.compile()
         return self.workflow
 ```
@@ -1325,7 +1325,7 @@ These final edges complete the workflow graph by defining termination points and
         state.compensation_actions = []
         state.step_results = {}
         state.checkpoint_data = {"initialized": True, "start_time": time.time()}
-        
+
         logger.info(f"Initialized transaction {state.transaction_id}")
         return state
 ```
@@ -1336,11 +1336,11 @@ Transaction initialization establishes the tracking infrastructure needed for co
     async def _create_user_account(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 1: Create user account with compensation tracking."""
         step_name = "create_user_account"
-        
+
         try:
             # Save checkpoint before execution
             state.checkpoint_data[step_name] = {"status": "executing", "timestamp": time.time()}
-            
+
             # Simulate user account creation
             adapter = await self.mcp_manager.get_adapter("database")
             if adapter:
@@ -1355,7 +1355,7 @@ The user account creation step demonstrates the compensation pattern's core prin
 ```python
                 state.step_results[step_name] = result
                 state.executed_steps.append(step_name)
-                
+
                 # Register compensation action
                 compensation = CompensationAction(
                     step_name=step_name,
@@ -1363,16 +1363,16 @@ The user account creation step demonstrates the compensation pattern's core prin
                     compensation_args={"user_id": result.get("user_id"), "transaction_id": state.transaction_id}
                 )
                 state.compensation_actions.append(compensation)
-                
+
                 logger.info(f"Successfully executed {step_name}")
             else:
                 raise Exception("Database adapter not available")
-            
+
         except Exception as e:
             state.failed_steps.append(step_name)
             state.step_results[step_name] = {"error": str(e)}
             logger.error(f"Failed to execute {step_name}: {e}")
-        
+
         return state
 ```
 
@@ -1382,10 +1382,10 @@ Each successful step registers its corresponding compensation action, building a
     async def _charge_payment(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 2: Charge payment with compensation tracking."""
         step_name = "charge_payment"
-        
+
         try:
             state.checkpoint_data[step_name] = {"status": "executing", "timestamp": time.time()}
-            
+
             # Simulate payment processing
             # In real implementation, this would call payment processor
             result = {
@@ -1401,7 +1401,7 @@ Payment processing represents the most critical step in e-commerce workflows. Th
 ```python
             state.step_results[step_name] = result
             state.executed_steps.append(step_name)
-            
+
             # Register compensation action
             compensation = CompensationAction(
                 step_name=step_name,
@@ -1409,14 +1409,14 @@ Payment processing represents the most critical step in e-commerce workflows. Th
                 compensation_args={"payment_id": result["payment_id"], "amount": result["amount"]}
             )
             state.compensation_actions.append(compensation)
-            
+
             logger.info(f"Successfully executed {step_name}")
-            
+
         except Exception as e:
             state.failed_steps.append(step_name)
             state.step_results[step_name] = {"error": str(e)}
             logger.error(f"Failed to execute {step_name}: {e}")
-        
+
         return state
 ```
 
@@ -1426,10 +1426,10 @@ Payment processing exemplifies the critical nature of compensation patterns. The
     async def _send_notification(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 3: Send notification with compensation tracking."""
         step_name = "send_notification"
-        
+
         try:
             state.checkpoint_data[step_name] = {"status": "executing", "timestamp": time.time()}
-            
+
             # Simulate notification sending
             result = {
                 "notification_id": f"notif_{int(time.time())}",
@@ -1444,7 +1444,7 @@ Notification sending demonstrates compensation for communication operations. Whi
 ```python
             state.step_results[step_name] = result
             state.executed_steps.append(step_name)
-            
+
             # Register compensation action
             compensation = CompensationAction(
                 step_name=step_name,
@@ -1452,14 +1452,14 @@ Notification sending demonstrates compensation for communication operations. Whi
                 compensation_args={"notification_id": result["notification_id"], "recipient": result["recipient"]}
             )
             state.compensation_actions.append(compensation)
-            
+
             logger.info(f"Successfully executed {step_name}")
-            
+
         except Exception as e:
             state.failed_steps.append(step_name)
             state.step_results[step_name] = {"error": str(e)}
             logger.error(f"Failed to execute {step_name}: {e}")
-        
+
         return state
 ```
 
@@ -1469,10 +1469,10 @@ Notification compensation ensures customers receive appropriate communication ab
     async def _update_inventory(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 4: Update inventory with compensation tracking."""
         step_name = "update_inventory"
-        
+
         try:
             state.checkpoint_data[step_name] = {"status": "executing", "timestamp": time.time()}
-            
+
             # Simulate inventory update
             adapter = await self.mcp_manager.get_adapter("database")
             if adapter:
@@ -1487,7 +1487,7 @@ Inventory management requires precise compensation to prevent overselling and st
 ```python
                 state.step_results[step_name] = result
                 state.executed_steps.append(step_name)
-                
+
                 # Register compensation action
                 compensation = CompensationAction(
                     step_name=step_name,
@@ -1495,16 +1495,16 @@ Inventory management requires precise compensation to prevent overselling and st
                     compensation_args={"item_id": "item_123", "quantity": 1}
                 )
                 state.compensation_actions.append(compensation)
-                
+
                 logger.info(f"Successfully executed {step_name}")
             else:
                 raise Exception("Database adapter not available")
-            
+
         except Exception as e:
             state.failed_steps.append(step_name)
             state.step_results[step_name] = {"error": str(e)}
             logger.error(f"Failed to execute {step_name}: {e}")
-        
+
         return state
 ```
 
@@ -1514,10 +1514,10 @@ Inventory compensation demonstrates the importance of exact reversal operations.
     async def _create_shipping_label(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Step 5: Create shipping label with compensation tracking."""
         step_name = "create_shipping_label"
-        
+
         try:
             state.checkpoint_data[step_name] = {"status": "executing", "timestamp": time.time()}
-            
+
             # Simulate shipping label creation
             result = {
                 "label_id": f"label_{int(time.time())}",
@@ -1532,7 +1532,7 @@ Shipping label creation represents the final fulfillment step in the e-commerce 
 ```python
             state.step_results[step_name] = result
             state.executed_steps.append(step_name)
-            
+
             # Register compensation action
             compensation = CompensationAction(
                 step_name=step_name,
@@ -1540,14 +1540,14 @@ Shipping label creation represents the final fulfillment step in the e-commerce 
                 compensation_args={"label_id": result["label_id"], "tracking_number": result["tracking_number"]}
             )
             state.compensation_actions.append(compensation)
-            
+
             logger.info(f"Successfully executed {step_name}")
-            
+
         except Exception as e:
             state.failed_steps.append(step_name)
             state.step_results[step_name] = {"error": str(e)}
             logger.error(f"Failed to execute {step_name}: {e}")
-        
+
         return state
 ```
 
@@ -1558,12 +1558,12 @@ Shipping label compensation prevents unnecessary shipping costs and logistics co
         """Check status of last executed step."""
         if state.failed_steps:
             last_failed = state.failed_steps[-1]
-            
+
             if state.recovery_attempts < state.max_recovery_attempts:
                 return "retry"
             else:
                 return "compensate"
-        
+
         return "continue"
 ```
 
@@ -1573,17 +1573,17 @@ The status checking logic implements a circuit breaker pattern, determining whet
     async def _handle_recovery(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Handle recovery attempts."""
         state.recovery_attempts += 1
-        
+
         if state.failed_steps:
             failed_step = state.failed_steps[-1]
             logger.info(f"Attempting recovery for {failed_step} (attempt {state.recovery_attempts})")
-            
+
             # Clear the failed step to retry
             state.failed_steps.remove(failed_step)
-            
+
             # Add some delay before retry
             await asyncio.sleep(1.0)
-        
+
         return state
 ```
 
@@ -1594,13 +1594,13 @@ The recovery handler implements exponential backoff and retry logic, providing t
         """Determine recovery action."""
         if state.failed_steps:
             failed_step = state.failed_steps[-1]
-            
+
             if state.recovery_attempts >= state.max_recovery_attempts:
                 return "compensate"
-            
+
             # Route to specific retry based on failed step
             return f"retry_{failed_step}"
-        
+
         return "abort"
 ```
 
@@ -1610,9 +1610,9 @@ Recovery status checking enables intelligent retry routing, directing workflow e
     async def _execute_compensation(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Execute compensation actions for failed transaction."""
         state.final_status = TransactionStatus.FAILED
-        
+
         logger.warning(f"Executing compensation for transaction {state.transaction_id}")
-        
+
         # Execute compensation actions in reverse order
         for compensation in reversed(state.compensation_actions):
             if not compensation.executed:
@@ -1621,10 +1621,10 @@ Recovery status checking enables intelligent retry routing, directing workflow e
                     compensation.executed = True
                     compensation.execution_time = time.time()
                     logger.info(f"Executed compensation: {compensation.compensation_function}")
-                    
+
                 except Exception as e:
                     logger.error(f"Compensation failed: {compensation.compensation_function} - {e}")
-        
+
         state.final_status = TransactionStatus.COMPENSATED
         return state
 ```
@@ -1635,7 +1635,7 @@ Compensation execution implements the Saga pattern's rollback mechanism, executi
     async def _execute_single_compensation(self, compensation: CompensationAction):
         """Execute a single compensation action."""
         func_name = compensation.compensation_function
-        
+
         if func_name in self.compensation_map:
             compensation_func = self.compensation_map[func_name]
             await compensation_func(compensation.compensation_args)
@@ -1649,10 +1649,10 @@ Single compensation execution demonstrates the registry pattern, using the compe
     async def _finalize_transaction(self, state: CompensationWorkflowState) -> CompensationWorkflowState:
         """Finalize successful transaction."""
         state.final_status = TransactionStatus.COMPLETED
-        
+
         logger.info(f"Transaction {state.transaction_id} completed successfully")
         logger.info(f"Executed steps: {state.executed_steps}")
-        
+
         return state
 ```
 
@@ -1677,7 +1677,7 @@ User account compensation performs the exact inverse of the original operation, 
         """Compensate payment charge."""
         # Simulate refund processing
         logger.info(f"Refunding payment {args['payment_id']} amount {args['amount']}")
-    
+
     async def _compensate_notification(self, args: Dict[str, Any]):
         """Compensate notification sending."""
         # Send cancellation notification
@@ -1695,7 +1695,7 @@ Payment and notification compensation functions demonstrate different types of u
                 "table": "inventory",
                 "data": {"quantity": args["quantity"]}
             })
-    
+
     async def _compensate_shipping(self, args: Dict[str, Any]):
         """Compensate shipping label creation."""
         # Cancel shipping label
@@ -1709,7 +1709,7 @@ Inventory and shipping compensation complete the rollback of physical fulfillmen
         """Execute workflow with compensation handling."""
         if not self.workflow:
             await self.build_workflow()
-        
+
         initial_state = CompensationWorkflowState(
             query=query,
             messages=[HumanMessage(content=query)],
@@ -1722,7 +1722,7 @@ The workflow execution method provides the entry point for running compensation-
 ```python
         try:
             final_state = await self.workflow.ainvoke(initial_state)
-            
+
             return {
                 "success": final_state.final_status == TransactionStatus.COMPLETED,
                 "transaction_id": final_state.transaction_id,
@@ -1733,7 +1733,7 @@ The workflow execution method provides the entry point for running compensation-
                 "compensation_actions": len([c for c in final_state.compensation_actions if c.executed]),
                 "step_results": final_state.step_results
             }
-            
+
         except Exception as e:
             return {
                 "success": False,
@@ -1744,50 +1744,55 @@ The workflow execution method provides the entry point for running compensation-
 
 ## Module Assessment
 
-**Question 1:** What is the primary advantage of parallel processing in workflows?  
-A) Simplified code structure  
-B) Reduced resource usage  
-C) Faster overall execution time  
-D) Better error handling  
+**Question 1:** What is the primary advantage of parallel processing in workflows?
+A) Simplified code structure
+B) Reduced resource usage
+C) Faster overall execution time
+D) Better error handling
 
-**Question 2:** In conditional workflow routing, what determines the execution path?  
-A) Random selection  
-B) Runtime conditions and content analysis  
-C) User preferences  
-D) System load  
+**Question 2:** In conditional workflow routing, what determines the execution path?
+A) Random selection
+B) Runtime conditions and content analysis
+C) User preferences
+D) System load
 
-**Question 3:** What is the purpose of compensation actions in workflow patterns?  
-A) Improve performance  
-B) Undo completed steps when later steps fail  
-C) Reduce memory usage  
-D) Simplify configuration  
+**Question 3:** What is the purpose of compensation actions in workflow patterns?
+A) Improve performance
+B) Undo completed steps when later steps fail
+C) Reduce memory usage
+D) Simplify configuration
 
-**Question 4:** How does the parallel workflow handle partial failures?  
-A) Stops all processing immediately  
-B) Continues with successful results and reports failures  
-C) Retries all operations  
-D) Ignores failed operations  
+**Question 4:** How does the parallel workflow handle partial failures?
+A) Stops all processing immediately
+B) Continues with successful results and reports failures
+C) Retries all operations
+D) Ignores failed operations
 
-**Question 5:** What triggers escalation in the conditional workflow router?  
-A) High system load  
-B) Customer tier, priority level, or escalation keywords  
-C) Time of day  
-D) Random intervals  
+**Question 5:** What triggers escalation in the conditional workflow router?
+A) High system load
+B) Customer tier, priority level, or escalation keywords
+C) Time of day
+D) Random intervals
 
-**Question 6:** In the compensation pattern, in what order are compensation actions executed?  
-A) Random order  
-B) Same order as original execution  
-C) Reverse order of original execution  
-D) Priority-based order  
+**Question 6:** In the compensation pattern, in what order are compensation actions executed?
+A) Random order
+B) Same order as original execution
+C) Reverse order of original execution
+D) Priority-based order
 
-**Question 7:** What is the benefit of checkpoint data in advanced workflows?  
-A) Performance optimization  
-B) State recovery and resumption after failures  
-C) User experience improvement  
-D) Reduced memory usage  
+**Question 7:** What is the benefit of checkpoint data in advanced workflows?
+A) Performance optimization
+B) State recovery and resumption after failures
+C) User experience improvement
+D) Reduced memory usage
 
 [**View Module B Test Solutions →**](Session3_ModuleB_Test_Solutions.md)
 
 ---
+---
 
-[← Back to Session 3](Session3_LangChain_MCP_Integration.md) | [Previous: Module A](Session3_ModuleA_Enterprise_Patterns.md)
+## 🧭 Navigation
+
+**Previous:** [Session 2 - FileSystem MCP Server ←](Session2_FileSystem_MCP_Server.md)
+**Next:** [Session 4 - Production MCP Deployment →](Session4_Production_MCP_Deployment.md)
+---

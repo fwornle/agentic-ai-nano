@@ -1,18 +1,18 @@
 # 📝 Session 9: Implementation Guide - Planning & Production Systems
 
-> **📝 PARTICIPANT PATH CONTENT**  
-> Prerequisites: Complete 🎯 [Observer Path](Session9_Multi_Agent_Patterns_Observer.md) and 📝 [Practical Coordination](Session9_Practical_Coordination.md)  
-> Time Investment: 1.5-2 hours  
-> Outcome: Implement planning systems and production-ready multi-agent deployments  
+> **📝 PARTICIPANT PATH CONTENT**
+> Prerequisites: Complete 🎯 [Observer Path](Session9_Multi_Agent_Patterns_Observer.md) and 📝 [Practical Coordination](Session9_Practical_Coordination.md)
+> Time Investment: 1.5-2 hours
+> Outcome: Implement planning systems and production-ready multi-agent deployments
 
 ## Learning Outcomes
 
-After completing this module, you will:  
+After completing this module, you will:
 
-- Build hierarchical task network planning systems for complex data workflows  
-- Implement dynamic replanning capabilities for adaptive multi-agent systems  
-- Deploy production-ready multi-agent systems with monitoring and health checks  
-- Create basic monitoring and observability systems for multi-agent coordination  
+- Build hierarchical task network planning systems for complex data workflows
+- Implement dynamic replanning capabilities for adaptive multi-agent systems
+- Deploy production-ready multi-agent systems with monitoring and health checks
+- Create basic monitoring and observability systems for multi-agent coordination
 
 ---
 
@@ -41,7 +41,7 @@ Task decomposition structures enable sophisticated multi-agent coordination stra
 ```python
 class DataHTNPlanner:
     """Hierarchical Task Network planner for data processing"""
-    
+
     def __init__(self, agent, data_domain_knowledge: Dict[str, Any]):
         self.agent = agent
         self.data_domain = data_domain_knowledge
@@ -52,25 +52,25 @@ class DataHTNPlanner:
         self, data_goal: str, initial_data_state: Dict[str, Any]
     ) -> Dict[str, Any]:
         """Create hierarchical data processing plan using HTN methodology"""
-        
+
         # Phase 1: Data goal analysis and task creation
         root_task = await self._create_root_data_task(data_goal, initial_data_state)
-        
+
         # Phase 2: Hierarchical data processing decomposition
         decomposition_result = await self._decompose_data_task_hierarchy(
             root_task, initial_data_state
         )
-        
+
         # Phase 3: Data pipeline optimization
         optimized_plan = await self._optimize_data_plan(
             decomposition_result['plan'], initial_data_state
         )
-        
+
         # Phase 4: Data quality and consistency risk assessment
         risk_analysis = await self._analyze_data_plan_risks(
             optimized_plan, initial_data_state
         )
-        
+
         return {
             'data_plan': optimized_plan,
             'risk_analysis': risk_analysis,
@@ -90,23 +90,23 @@ async def _decompose_data_task_hierarchy(
     self, root_task: DataTask, data_state: Dict[str, Any]
 ) -> Dict[str, Any]:
     """Decompose data processing task using hierarchical method"""
-    
+
     decomposition_queue = [root_task]
     final_plan = []
     confidence_scores = []
-    
+
     while decomposition_queue:
         current_task = decomposition_queue.pop(0)
-        
+
         if current_task.task_type == DataTaskType.PRIMITIVE:
             # Task can be executed directly
             final_plan.append(current_task)
             confidence_scores.append(0.9)
-            
+
         elif current_task.task_type == DataTaskType.COMPOUND:
             # Task needs decomposition
             decomposition = await self._find_task_decomposition(current_task, data_state)
-            
+
             if decomposition:
                 # Add subtasks to processing queue
                 decomposition_queue.extend(decomposition.subtasks)
@@ -115,14 +115,14 @@ async def _decompose_data_task_hierarchy(
                 # Fallback: treat as primitive if no decomposition found
                 final_plan.append(current_task)
                 confidence_scores.append(0.5)
-                
+
         elif current_task.task_type == DataTaskType.ABSTRACT:
             # High-level goal needs compound decomposition
             compound_tasks = await self._abstract_to_compound_decomposition(
                 current_task, data_state
             )
             decomposition_queue.extend(compound_tasks)
-    
+
     return {
         'plan': final_plan,
         'confidence': sum(confidence_scores) / len(confidence_scores) if confidence_scores else 0.5
@@ -144,7 +144,7 @@ Building adaptive systems that adjust to changing conditions during execution:
 ```python
 class DynamicDataReplanner:
     """Handles dynamic replanning during data pipeline execution"""
-    
+
     def __init__(self, htn_planner: DataHTNPlanner):
         self.data_planner = htn_planner
         self.monitoring_active = False
@@ -154,29 +154,29 @@ class DynamicDataReplanner:
         self, data_plan: List[DataTask], initial_data_state: Dict[str, Any]
     ) -> Dict[str, Any]:
         """Execute data plan with continuous monitoring and replanning"""
-        
+
         current_data_state = initial_data_state.copy()
         remaining_tasks = data_plan.copy()
         completed_tasks = []
         execution_trace = []
-        
+
         self.monitoring_active = True
-        
+
         while remaining_tasks and self.monitoring_active:
             current_task = remaining_tasks[0]
-            
+
             # Pre-execution data validation
             validation_result = await self._validate_data_task_execution(
                 current_task, current_data_state
             )
-            
+
             if not validation_result['can_execute']:
                 # Trigger data processing replanning
                 replanning_result = await self._trigger_data_replanning(
                     current_task, remaining_tasks, current_data_state,
                     validation_result['reason']
                 )
-                
+
                 if replanning_result['success']:
                     remaining_tasks = replanning_result['new_data_plan']
                     execution_trace.append(('data_replan', replanning_result))
@@ -184,14 +184,14 @@ class DynamicDataReplanner:
                 else:
                     execution_trace.append(('data_failure', replanning_result))
                     break
-            
+
             # Execute data processing task
             execution_result = await self._execute_monitored_data_task(
                 current_task, current_data_state
             )
-            
+
             execution_trace.append(('data_execute', execution_result))
-            
+
             if execution_result['success']:
                 # Update data state and continue
                 current_data_state = self._apply_data_task_effects(
@@ -204,20 +204,20 @@ class DynamicDataReplanner:
                 failure_analysis = await self._analyze_data_execution_failure(
                     current_task, execution_result
                 )
-                
+
                 if failure_analysis['should_replan']:
                     replanning_result = await self._trigger_data_replanning(
                         current_task, remaining_tasks, current_data_state,
                         execution_result['error']
                     )
-                    
+
                     if replanning_result['success']:
                         remaining_tasks = replanning_result['new_data_plan']
                         continue
-                
+
                 execution_trace.append(('data_abort', failure_analysis))
                 break
-        
+
         return {
             'completed_data_tasks': completed_tasks,
             'remaining_data_tasks': remaining_tasks,
@@ -236,9 +236,9 @@ async def _analyze_data_execution_failure(
     self, failed_task: DataTask, execution_result: Dict[str, Any]
 ) -> Dict[str, Any]:
     """Analyze data processing failure to determine recovery strategy"""
-    
+
     failure_type = self._classify_failure_type(execution_result['error'])
-    
+
     recovery_strategies = {
         'transient_network': {'should_replan': False, 'retry_count': 3},
         'resource_exhaustion': {'should_replan': True, 'strategy': 'scale_down'},
@@ -246,9 +246,9 @@ async def _analyze_data_execution_failure(
         'schema_mismatch': {'should_replan': True, 'strategy': 'schema_adaptation'},
         'dependency_missing': {'should_replan': True, 'strategy': 'dependency_resolution'}
     }
-    
+
     strategy = recovery_strategies.get(failure_type, {'should_replan': True, 'strategy': 'fallback'})
-    
+
     return {
         'failure_type': failure_type,
         'should_replan': strategy['should_replan'],
@@ -268,7 +268,7 @@ async def _trigger_data_replanning(
     current_state: Dict[str, Any], failure_reason: str
 ) -> Dict[str, Any]:
     """Trigger replanning process for data processing failure recovery"""
-    
+
     # Create new planning context including failure information
     replanning_context = {
         'failed_task': failed_task,
@@ -277,13 +277,13 @@ async def _trigger_data_replanning(
         'remaining_objectives': [task.name for task in remaining_tasks],
         'execution_constraints': await self._analyze_execution_constraints(current_state)
     }
-    
+
     # Generate alternative plan using HTN planner
     alternative_plan_result = await self.data_planner.create_hierarchical_data_plan(
         f"Recovery from {failure_reason}: {failed_task.name}",
         replanning_context
     )
-    
+
     if alternative_plan_result['confidence'] > 0.6:
         # Record replanning event
         self.data_replanning_history.append({
@@ -292,7 +292,7 @@ async def _trigger_data_replanning(
             'new_plan_confidence': alternative_plan_result['confidence'],
             'timestamp': datetime.now()
         })
-        
+
         return {
             'success': True,
             'new_data_plan': alternative_plan_result['data_plan'],
@@ -341,24 +341,24 @@ Advanced configuration adds enterprise features like failure thresholds, automat
 ```python
 class AdvancedDataProductionSystem(BasicDataProductionSystem):
     """Advanced production multi-agent data processing system"""
-    
+
     def __init__(self, config: AdvancedDataProductionConfig):
         super().__init__(config)
         self.config = config
         self.monitoring_active = False
         self.performance_metrics = AdvancedDataSystemMonitor(self)
-        
+
     async def start_production_monitoring(self):
         """Start comprehensive monitoring for production deployment"""
         self.monitoring_active = True
-        
+
         # Start health check monitoring
         asyncio.create_task(self._continuous_health_monitoring())
-        
+
         # Start performance metrics collection
         if self.config.enable_performance_metrics:
             asyncio.create_task(self._performance_metrics_collection())
-        
+
         # Start automatic recovery system
         if self.config.automatic_recovery:
             asyncio.create_task(self._automatic_recovery_monitoring())
@@ -378,20 +378,20 @@ async def _continuous_health_monitoring(self):
             for agent_id, agent in self.data_agents.items():
                 health = await self._comprehensive_data_health_check(agent)
                 health_results.append((agent_id, health))
-                
+
                 # Track unhealthy agents for recovery
                 if not health['healthy']:
                     await self._handle_unhealthy_agent(agent_id, agent, health)
-            
+
             # Log system-wide health summary
             healthy_count = sum(1 for _, h in health_results if h['healthy'])
             total_count = len(health_results)
-            
+
             logging.info(f"[DATA] System health check: {healthy_count}/{total_count} agents healthy")
-            
+
             # Wait for next health check interval
             await asyncio.sleep(self.config.data_health_check_interval.total_seconds())
-            
+
         except Exception as e:
             logging.error(f"[DATA] Health monitoring error: {e}")
             await asyncio.sleep(5)  # Brief pause before retry
@@ -409,7 +409,7 @@ async def _comprehensive_data_health_check(self, agent: 'BaseDataAgent') -> Dict
         'checks': {},
         'timestamp': datetime.now()
     }
-    
+
     try:
         # Basic connectivity test
         start_time = time.time()
@@ -418,27 +418,27 @@ async def _comprehensive_data_health_check(self, agent: 'BaseDataAgent') -> Dict
             timeout=10.0
         )
         response_time = time.time() - start_time
-        
+
         health_result['checks']['connectivity'] = {
             'passed': bool(basic_response),
             'response_time_ms': response_time * 1000
         }
-        
+
         # Resource utilization check
         resource_check = await self._check_agent_resource_usage(agent)
         health_result['checks']['resources'] = resource_check
-        
+
         # Message queue health
         queue_health = await self._check_agent_message_queue(agent)
         health_result['checks']['message_queue'] = queue_health
-        
+
         # Overall health determination
         health_result['healthy'] = all(
             check.get('passed', True) for check in health_result['checks'].values()
         )
-        
+
         return health_result
-        
+
     except asyncio.TimeoutError:
         health_result['healthy'] = False
         health_result['checks']['timeout'] = {'passed': False, 'reason': 'Agent response timeout'}
@@ -462,7 +462,7 @@ Building observability systems for production multi-agent deployments:
 ```python
 class AdvancedDataSystemMonitor(BasicDataSystemMonitor):
     """Advanced monitoring for production multi-agent data processing systems"""
-    
+
     def __init__(self, system: AdvancedDataProductionSystem):
         super().__init__(system)
         self.system = system
@@ -473,27 +473,27 @@ class AdvancedDataSystemMonitor(BasicDataSystemMonitor):
             'coordination_efficiency': [],
             'resource_utilization': []
         }
-    
+
     async def collect_advanced_metrics(self) -> Dict[str, Any]:
         """Collect comprehensive system performance metrics"""
-        
+
         timestamp = datetime.now()
-        
+
         # Collect throughput metrics across all agents
         throughput_data = await self._collect_throughput_metrics()
-        
+
         # Measure coordination efficiency
         coordination_metrics = await self._measure_coordination_efficiency()
-        
+
         # Assess resource utilization
         resource_metrics = await self._assess_system_resource_usage()
-        
+
         # Calculate latency percentiles
         latency_metrics = await self._calculate_latency_percentiles()
-        
+
         # Error rate analysis
         error_metrics = await self._analyze_error_rates()
-        
+
         comprehensive_metrics = {
             'timestamp': timestamp,
             'throughput': throughput_data,
@@ -503,10 +503,10 @@ class AdvancedDataSystemMonitor(BasicDataSystemMonitor):
             'error_rates': error_metrics,
             'system_health_score': self._calculate_overall_system_health()
         }
-        
+
         # Store for trend analysis
         self._store_metrics_for_trends(comprehensive_metrics)
-        
+
         return comprehensive_metrics
 ```
 
@@ -517,9 +517,9 @@ Advanced metrics collection provides comprehensive visibility into system perfor
 ```python
 async def generate_production_status_report(self) -> str:
     """Generate comprehensive production status report"""
-    
+
     metrics = await self.collect_advanced_metrics()
-    
+
     return f"""
 Production Multi-Agent Data Processing System Report
 ==================================================
@@ -570,7 +570,7 @@ Automated reporting transforms raw metrics into actionable insights for operatio
 
 ### Exercise 1: HTN Planning Implementation
 
-Build a complete HTN planner for data pipeline orchestration:  
+Build a complete HTN planner for data pipeline orchestration:
 
 ```python
 # Your task: Implement HTN planning for ETL workflows
@@ -590,7 +590,7 @@ class ETLHTNPlanner(DataHTNPlanner):
 
 ### Exercise 2: Dynamic Replanning System
 
-Implement adaptive replanning for data quality failures:  
+Implement adaptive replanning for data quality failures:
 
 ```python
 # Your task: Build adaptive replanning for data quality issues
@@ -610,7 +610,7 @@ class DataQualityReplanner(DynamicDataReplanner):
 
 ### Exercise 3: Production Monitoring Dashboard
 
-Create a monitoring system with alerting capabilities:  
+Create a monitoring system with alerting capabilities:
 
 ```python
 # Your task: Implement production monitoring with alerts
@@ -627,13 +627,10 @@ class ProductionMonitoringDashboard(AdvancedDataSystemMonitor):
         # 5. Create dashboard for real-time visibility
         pass
 ```
-
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Practical Coordination](Session9_Practical_Coordination.md) | [Advanced Topics →](Session9_Advanced_ReAct.md)
-
-**Next Steps**:  
-- **For advanced mastery**: Explore ⚙️ [Session9_Advanced_ReAct.md](Session9_Advanced_ReAct.md) - Deep-dive content  
-- **Ready for next session**: [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)  
+**Previous:** [Session 8 - Agno Production-Ready Agents ←](Session8_Agno_Production_Ready_Agents.md)
+**Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)
+---

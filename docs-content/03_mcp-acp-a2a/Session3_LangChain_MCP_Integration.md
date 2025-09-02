@@ -2,37 +2,37 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths:  
+This session offers three distinct learning paths:
 
-### 🎯 Observer Path - Essential Concepts  
-**Time Investment**: 45-60 minutes  
-**Outcome**: Understand core LangChain-MCP integration principles  
+### 🎯 Observer Path - Essential Concepts
+**Time Investment**: 45-60 minutes
+**Outcome**: Understand core LangChain-MCP integration principles
 
-Key sections to focus on:  
-- The Foundation: Why This Integration Changes Everything  
-- Understanding LangChain MCP Integration  
-- Setting Up Your Integration Laboratory  
-- Your First Multi-Tool Agent (Basic Concepts)  
+Key sections to focus on:
+- The Foundation: Why This Integration Changes Everything
+- Understanding LangChain MCP Integration
+- Setting Up Your Integration Laboratory
+- Your First Multi-Tool Agent (Basic Concepts)
 
-### 📝 Participant Path - Practical Application  
-**Time Investment**: 3-4 hours  
-**Outcome**: Implement LangChain-MCP integration in real projects  
+### 📝 Participant Path - Practical Application
+**Time Investment**: 3-4 hours
+**Outcome**: Implement LangChain-MCP integration in real projects
 
-Key sections to focus on:  
-- All 🎯 Observer content above  
-- Building Your First Multi-Tool Agent (Complete Implementation)  
-- Advanced Multi-Tool Coordination (Practical Examples)  
-- Practical Exercise: Your Integration Mastery Challenge  
+Key sections to focus on:
+- All 🎯 Observer content above
+- Building Your First Multi-Tool Agent (Complete Implementation)
+- Advanced Multi-Tool Coordination (Practical Examples)
+- Practical Exercise: Your Integration Mastery Challenge
 
-### ⚙️ Implementer Path - Complete Mastery  
-**Time Investment**: 8-10 hours  
-**Outcome**: Deep expertise in production-ready LangChain-MCP systems  
+### ⚙️ Implementer Path - Complete Mastery
+**Time Investment**: 8-10 hours
+**Outcome**: Deep expertise in production-ready LangChain-MCP systems
 
-Key sections to focus on:  
-- All 🎯 Observer and 📝 Participant content above  
-- ⚙️ [Advanced Workflow Orchestration](Session3_Advanced_Workflows.md)  
-- ⚙️ [Enterprise Agent Patterns](Session3_Enterprise_Patterns.md)  
-- ⚙️ [Production Deployment Strategies](Session3_Production_Deployment.md)  
+Key sections to focus on:
+- All 🎯 Observer and 📝 Participant content above
+- ⚙️ [Advanced Workflow Orchestration](Session3_Advanced_Workflows.md)
+- ⚙️ [Enterprise Agent Patterns](Session3_Enterprise_Patterns.md)
+- ⚙️ [Production Deployment Strategies](Session3_Production_Deployment.md)
 
 ---
 
@@ -50,13 +50,13 @@ By the end of this session, you'll have built something remarkable: an AI agent 
 
 Before we dive into the technical details, let's understand what we're really building here. Imagine if your smartphone could only run apps, but couldn't connect to the internet, access your contacts, or interact with other devices. That's essentially what an AI agent is without proper tool integration - incredibly smart, but isolated from the digital ecosystem it needs to be truly useful.
 
-The LangChain-MCP integration solves this fundamental limitation. It creates a standardized bridge that allows your AI agents to:  
+The LangChain-MCP integration solves this fundamental limitation. It creates a standardized bridge that allows your AI agents to:
 
-- **Securely connect** to any MCP-compatible system  
-- **Dynamically discover** available tools and capabilities  
-- **Seamlessly switch** between different tools based on context  
-- **Maintain consistency** across different integrations  
-- **Scale effortlessly** as new MCP servers become available  
+- **Securely connect** to any MCP-compatible system
+- **Dynamically discover** available tools and capabilities
+- **Seamlessly switch** between different tools based on context
+- **Maintain consistency** across different integrations
+- **Scale effortlessly** as new MCP servers become available
 
 This isn't just about technical convenience - it's about unleashing the full potential of AI agents in real-world scenarios.
 
@@ -64,9 +64,9 @@ This isn't just about technical convenience - it's about unleashing the full pot
 
 When we talk about integrating LangChain with MCP, we're essentially creating a sophisticated communication system. Think of it like building a universal translator that allows a brilliant strategist (LangChain agent) to communicate with any specialist consultant (MCP server) they might need.
 
-**LangChain provides**: The strategic mind - high-level orchestration, workflow management, conversation memory, and sophisticated agent reasoning patterns  
+**LangChain provides**: The strategic mind - high-level orchestration, workflow management, conversation memory, and sophisticated agent reasoning patterns
 
-**MCP standardizes**: The communication protocol - tool discovery, secure communication, and universal access protocols across different systems  
+**MCP standardizes**: The communication protocol - tool discovery, secure communication, and universal access protocols across different systems
 
 This integration enables AI workflows that seamlessly integrate with any MCP-compatible tool while leveraging LangChain's advanced features like memory, callbacks, and chain composition.
 
@@ -109,14 +109,14 @@ Tool discovery happens automatically - the agent learns about available capabili
 
 ### The Magic Behind the LangChain-MCP Integration
 
-What makes this simple code so powerful for enterprise AI development? Let's break down the key concepts that transform individual technologies into an integrated powerhouse:  
+What makes this simple code so powerful for enterprise AI development? Let's break down the key concepts that transform individual technologies into an integrated powerhouse:
 
-- **Multi-server connection**: One client manages multiple MCP servers - imagine having all your enterprise consultants on speed dial  
-- **Automatic tool discovery**: Tools are dynamically loaded from servers - no hardcoding, just pure adaptability as your MCP ecosystem grows  
-- **ReAct pattern**: Agent reasons about which tools to use - intelligence meets action through transparent decision-making  
-- **Unified interface**: LangChain treats all MCP tools equally - consistency at scale across different server implementations  
-- **Dynamic capability expansion**: Adding new MCP servers instantly expands agent capabilities - future-proof architecture  
-- **Protocol abstraction**: Agents work with tools without knowing MCP implementation details - clean separation of concerns  
+- **Multi-server connection**: One client manages multiple MCP servers - imagine having all your enterprise consultants on speed dial
+- **Automatic tool discovery**: Tools are dynamically loaded from servers - no hardcoding, just pure adaptability as your MCP ecosystem grows
+- **ReAct pattern**: Agent reasons about which tools to use - intelligence meets action through transparent decision-making
+- **Unified interface**: LangChain treats all MCP tools equally - consistency at scale across different server implementations
+- **Dynamic capability expansion**: Adding new MCP servers instantly expands agent capabilities - future-proof architecture
+- **Protocol abstraction**: Agents work with tools without knowing MCP implementation details - clean separation of concerns
 
 ### Setting Up Your Integration Laboratory
 
@@ -140,18 +140,18 @@ pip install langchain-mcp-adapters langgraph langchain-openai \
             langchain-anthropic python-dotenv colorama rich
 ```
 
-Each dependency serves a crucial purpose in your integration ecosystem:  
+Each dependency serves a crucial purpose in your integration ecosystem:
 
-- `langchain-mcp-adapters`: The official bridge - LangChain's integration library for MCP servers  
-- `langgraph`: The orchestration engine - Advanced workflow and graph-based agent execution  
-- `langchain-openai/anthropic`: The intelligence providers - LLM providers for your agents  
-- `rich`: The clarity enhancer - Enhanced console output for better debugging  
+- `langchain-mcp-adapters`: The official bridge - LangChain's integration library for MCP servers
+- `langgraph`: The orchestration engine - Advanced workflow and graph-based agent execution
+- `langchain-openai/anthropic`: The intelligence providers - LLM providers for your agents
+- `rich`: The clarity enhancer - Enhanced console output for better debugging
 
 ---
 
 ## 📝 Participant Path: Building Your First Multi-Tool Agent
 
-*Prerequisites: Complete 🎯 Observer Path sections above*  
+*Prerequisites: Complete 🎯 Observer Path sections above*
 
 ### The Customer Service Scenario: Real-World Complexity
 
@@ -170,12 +170,12 @@ This seemingly simple question reveals the sophisticated coordination required:
 # 4. Combine information into helpful response
 ```
 
-This requires an agent that can:  
+This requires an agent that can:
 
-- **Reason about tool selection**: Which tools are relevant to this specific query?  
-- **Handle tool failures**: What if the weather service is temporarily down?  
-- **Maintain context**: Remember previous conversation details and customer information  
-- **Coordinate execution**: Use tools in a logical sequence that builds understanding  
+- **Reason about tool selection**: Which tools are relevant to this specific query?
+- **Handle tool failures**: What if the weather service is temporarily down?
+- **Maintain context**: Remember previous conversation details and customer information
+- **Coordinate execution**: Use tools in a logical sequence that builds understanding
 
 ### Configuration: The Foundation of Reliability
 
@@ -209,7 +209,7 @@ class MCPServerConfig:
 The `MCPServerConfig` dataclass defines how to connect to and configure each MCP server in your ecosystem. The required fields (`name`, `command`, `args`) specify server identity and launch parameters, while optional fields provide production features like timeouts and retry logic. This structure makes adding new MCP servers as simple as creating a new configuration object.
 
 ```python
-@dataclass 
+@dataclass
 class LLMConfig:
     """Configuration for language models - Your intelligence settings."""
     provider: str = "openai"
@@ -237,18 +237,18 @@ logger = logging.getLogger(__name__)
 
 class MCPServerManager:
     """The nerve center that manages multiple MCP servers with health monitoring."""
-    
+
     def __init__(self, server_configs: List[MCPServerConfig]):
         self.server_configs = {config.name: config for config in server_configs}
         self.adapters: Dict[str, MCPAdapter] = {}
         self.health_status: Dict[str, bool] = {}
 ```
 
-This design embodies several key architectural decisions:  
+This design embodies several key architectural decisions:
 
-- **Dictionary lookups**: Fast O(1) server access by name - performance at scale  
-- **Health tracking**: Know which servers are operational in real-time - operational awareness  
-- **Separation of concerns**: Configuration vs. runtime state - clean architecture  
+- **Dictionary lookups**: Fast O(1) server access by name - performance at scale
+- **Health tracking**: Know which servers are operational in real-time - operational awareness
+- **Separation of concerns**: Configuration vs. runtime state - clean architecture
 
 ### Your First MCP Server: The Weather Intelligence System
 
@@ -282,14 +282,14 @@ def get_current_weather(city: str, units: str = "celsius") -> Dict:
     """Get current weather for a city - Your meteorological intelligence."""
     if city not in WEATHER_DATA:
         return {"error": f"Weather data not available for {city}"}
-    
+
     data = WEATHER_DATA[city].copy()
     if units == "fahrenheit":
         data["temp"] = (data["temp"] * 9/5) + 32
         data["units"] = "°F"
     else:
         data["units"] = "°C"
-    
+
     data["city"] = city
     data["timestamp"] = datetime.now().isoformat()
     return data
@@ -360,7 +360,7 @@ This import section establishes the foundation for MCP-LangChain integration. Th
 ```python
 class BasicMCPAgent:
     """A focused ReAct agent using a single MCP server - Your integration foundation."""
-    
+
     def __init__(self, server_name: str, mcp_manager: MCPServerManager):
         self.server_name = server_name
         self.mcp_manager = mcp_manager
@@ -384,15 +384,15 @@ This agent design focuses on single-server integration first. By mastering the c
 
 The intelligence layer initialization creates our LLM interface. Notice how we use configuration-driven parameters - this allows easy switching between different models (GPT-4, Claude, local models) without code changes. The temperature setting controls creativity vs consistency in tool selection.
 
-```python            
+```python
             # Tool layer - Get MCP adapter and tools
             adapter = await self.mcp_manager.get_adapter(self.server_name)
             if not adapter:
                 logger.error(f"Failed to get adapter: {self.server_name}")
                 return False
-            
+
             return True
-            
+
         except Exception as e:
             logger.error(f"Failed to initialize agent: {e}")
             return False
@@ -404,13 +404,13 @@ The final initialization phase connects to the specific MCP server and validates
 
 ## ⚙️ Implementer Path: Advanced Topics
 
-*Prerequisites: Complete 🎯 Observer and 📝 Participant paths*  
+*Prerequisites: Complete 🎯 Observer and 📝 Participant paths*
 
-For comprehensive coverage of advanced topics, continue to these specialized modules:  
+For comprehensive coverage of advanced topics, continue to these specialized modules:
 
-- ⚙️ **[Advanced Workflow Orchestration](Session3_Advanced_Workflows.md)** - Complex stateful workflows using LangGraph  
-- ⚙️ **[Enterprise Agent Patterns](Session3_Enterprise_Patterns.md)** - Production deployment and advanced error handling  
-- ⚙️ **[Production Deployment Strategies](Session3_Production_Deployment.md)** - Scaling and monitoring enterprise systems  
+- ⚙️ **[Advanced Workflow Orchestration](Session3_Advanced_Workflows.md)** - Complex stateful workflows using LangGraph
+- ⚙️ **[Enterprise Agent Patterns](Session3_Enterprise_Patterns.md)** - Production deployment and advanced error handling
+- ⚙️ **[Production Deployment Strategies](Session3_Production_Deployment.md)** - Scaling and monitoring enterprise systems
 
 ---
 
@@ -422,10 +422,10 @@ Build an intelligent travel planning agent that showcases everything you've lear
 
 ### Requirements
 
-1. **Weather Integration**: Get current weather for destination cities - meteorological intelligence  
-2. **File Search**: Search existing travel documents and preferences - historical context  
-3. **Preference Storage**: Store user travel preferences (budget, activities, etc.) - personalization  
-4. **Report Generation**: Create a comprehensive travel report - synthesis and presentation  
+1. **Weather Integration**: Get current weather for destination cities - meteorological intelligence
+2. **File Search**: Search existing travel documents and preferences - historical context
+3. **Preference Storage**: Store user travel preferences (budget, activities, etc.) - personalization
+4. **Report Generation**: Create a comprehensive travel report - synthesis and presentation
 
 ### Implementation Guidelines
 
@@ -436,7 +436,7 @@ from langchain.llm import OpenAI
 
 # Your multi-server agent setup - Building your digital travel consultant
 weather_toolkit = MCPToolkit.from_server("weather-server")
-file_toolkit = MCPToolkit.from_server("filesystem-server") 
+file_toolkit = MCPToolkit.from_server("filesystem-server")
 preference_toolkit = MCPToolkit.from_server("preference-server")
 
 # Integration mastery - Combine toolkits and create agent
@@ -445,10 +445,10 @@ all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_
 
 ### Expected Functionality
 
-- Query weather for multiple destinations - comprehensive meteorological analysis  
-- Search for previous travel experiences in files - experiential learning  
-- Store new preferences based on user input - adaptive personalization  
-- Generate a structured travel recommendation - intelligent synthesis  
+- Query weather for multiple destinations - comprehensive meteorological analysis
+- Search for previous travel experiences in files - experiential learning
+- Store new preferences based on user input - adaptive personalization
+- Generate a structured travel recommendation - intelligent synthesis
 
 **Success Criteria:** Your agent should demonstrate intelligent tool coordination, graceful error handling, and comprehensive reporting that synthesizes information from all integrated systems.
 
@@ -458,35 +458,35 @@ all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_
 
 Test your understanding of LangChain MCP Integration mastery:
 
-**Question 1:** What is the primary advantage of using LangChain MCP adapters?  
-A) Better performance  
-B) Automatic tool discovery and integration  
-C) Reduced memory usage  
-D) Simplified configuration  
+**Question 1:** What is the primary advantage of using LangChain MCP adapters?
+A) Better performance
+B) Automatic tool discovery and integration
+C) Reduced memory usage
+D) Simplified configuration
 
-**Question 2:** In the ReAct pattern, what does the agent do after each Action?  
-A) Plan the next action  
-B) Wait for user input  
-C) Observe the result  
-D) Generate a final answer  
+**Question 2:** In the ReAct pattern, what does the agent do after each Action?
+A) Plan the next action
+B) Wait for user input
+C) Observe the result
+D) Generate a final answer
 
-**Question 3:** What is the purpose of health monitoring in MCPServerManager?  
-A) Improve performance  
-B) Automatically restart failed servers  
-C) Monitor memory usage  
-D) Log user interactions  
+**Question 3:** What is the purpose of health monitoring in MCPServerManager?
+A) Improve performance
+B) Automatically restart failed servers
+C) Monitor memory usage
+D) Log user interactions
 
-**Question 4:** What advantage does LangGraph provide over simple ReAct agents?  
-A) Faster execution  
-B) Complex stateful workflows  
-C) Better error handling  
-D) Simpler configuration  
+**Question 4:** What advantage does LangGraph provide over simple ReAct agents?
+A) Faster execution
+B) Complex stateful workflows
+C) Better error handling
+D) Simpler configuration
 
-**Question 5:** How does our multi-tool agent decide which tools to use?  
-A) Random selection  
-B) Pre-configured rules  
-C) LLM reasoning about tool descriptions  
-D) User specification  
+**Question 5:** How does our multi-tool agent decide which tools to use?
+A) Random selection
+B) Pre-configured rules
+C) LLM reasoning about tool descriptions
+D) User specification
 
 **Answers:** 1-B, 2-C, 3-B, 4-B, 5-C
 
@@ -500,39 +500,40 @@ Congratulations! You've just built something remarkable - a production-ready int
 
 ### Key Concepts You've Mastered
 
-1. **MCP-LangChain Integration**: Connected multiple MCP servers with LangChain agents - universal tool access  
-2. **ReAct Agent Patterns**: Built intelligent agents that reason about tool selection and execution - transparent intelligence  
-3. **Multi-Tool Coordination**: Created agents that coordinate multiple external systems intelligently - ecosystem orchestration  
-4. **Production Architecture**: Designed systems with health monitoring and error recovery - operational excellence  
+1. **MCP-LangChain Integration**: Connected multiple MCP servers with LangChain agents - universal tool access
+2. **ReAct Agent Patterns**: Built intelligent agents that reason about tool selection and execution - transparent intelligence
+3. **Multi-Tool Coordination**: Created agents that coordinate multiple external systems intelligently - ecosystem orchestration
+4. **Production Architecture**: Designed systems with health monitoring and error recovery - operational excellence
 
 ### Agent Capabilities You've Unleashed
 
-- **Multi-tool reasoning**: Intelligently select and coordinate multiple tools - strategic intelligence  
-- **Context preservation**: Maintain conversation memory across tool interactions - persistent awareness  
-- **Graceful failure handling**: Automatic recovery when tools fail - resilient operations  
-- **Production readiness**: Robust error handling and monitoring - enterprise reliability  
+- **Multi-tool reasoning**: Intelligently select and coordinate multiple tools - strategic intelligence
+- **Context preservation**: Maintain conversation memory across tool interactions - persistent awareness
+- **Graceful failure handling**: Automatic recovery when tools fail - resilient operations
+- **Production readiness**: Robust error handling and monitoring - enterprise reliability
 
 ### The Power You've Unleashed
 
 This integration represents more than just connecting two technologies - it's a blueprint for the future of AI development. Your agents can now:
 
-- **Universal Tool Access**: Securely connect to any MCP-compatible system  
-- **Dynamic Capabilities**: Discover and integrate tools automatically  
-- **Production Resilience**: Handle real-world challenges gracefully  
-- **High Performance**: Scale to demanding applications  
-- **Full Observability**: Complete visibility into agent operations  
+- **Universal Tool Access**: Securely connect to any MCP-compatible system
+- **Dynamic Capabilities**: Discover and integrate tools automatically
+- **Production Resilience**: Handle real-world challenges gracefully
+- **High Performance**: Scale to demanding applications
+- **Full Observability**: Complete visibility into agent operations
 
 ---
 
 ## Additional Resources
 
-- [LangChain MCP Adapters GitHub](https://github.com/langchain-ai/langchain-mcp-adapters) - Official integration library  
-- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Workflow orchestration guide  
-- [Model Context Protocol](https://modelcontextprotocol.io/) - Official MCP specification  
-- [ReAct Paper](https://arxiv.org/abs/2210.03629) - Original research on reasoning and acting patterns  
-
+- [LangChain MCP Adapters GitHub](https://github.com/langchain-ai/langchain-mcp-adapters) - Official integration library
+- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Workflow orchestration guide
+- [Model Context Protocol](https://modelcontextprotocol.io/) - Official MCP specification
+- [ReAct Paper](https://arxiv.org/abs/2210.03629) - Original research on reasoning and acting patterns
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Previous: Session 2](Session2_FileSystem_MCP_Server.md) | [Module Overview](index.md) | [Next: Session 4 →](Session4_Production_MCP_Deployment.md)
+**Previous:** [Session 2 - FileSystem MCP Server ←](Session2_FileSystem_MCP_Server.md)
+**Next:** [Session 4 - Production MCP Deployment →](Session4_Production_MCP_Deployment.md)
+---

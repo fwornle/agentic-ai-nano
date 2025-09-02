@@ -1,18 +1,18 @@
 # 📝 Session 4: Context Optimization Methods
 
-> **📝 PARTICIPANT PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer path and previous 📝 Participant files  
-> Time Investment: 45-60 minutes  
-> Outcome: Context window optimization system  
+> **📝 PARTICIPANT PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer path and previous 📝 Participant files
+> Time Investment: 45-60 minutes
+> Outcome: Context window optimization system
 
 ## Learning Outcomes
 
-After completing this optimization guide, you will:  
+After completing this optimization guide, you will:
 
-- Build context window optimization systems  
-- Implement relevance-based content selection  
-- Create hierarchical summarization strategies  
-- Develop semantic compression techniques  
+- Build context window optimization systems
+- Implement relevance-based content selection
+- Create hierarchical summarization strategies
+- Develop semantic compression techniques
 
 ## Context Window Optimization Framework
 
@@ -22,7 +22,7 @@ LLMs have finite context windows, and production systems need to maximize inform
 
 ### Step 1: Context Window Optimizer Setup
 
-Build the foundation for intelligent context assembly:  
+Build the foundation for intelligent context assembly:
 
 ```python
 class ContextWindowOptimizer:
@@ -31,7 +31,7 @@ class ContextWindowOptimizer:
     def __init__(self, llm_tokenizer, max_context_tokens: int = 4000):
         self.tokenizer = llm_tokenizer
         self.max_context_tokens = max_context_tokens
-        
+
         # Context optimization strategies
         self.optimization_strategies = {
             'relevance_ranking': self._relevance_based_selection,
@@ -52,7 +52,7 @@ class ContextWindowOptimizer:
         # Calculate available token budget
         query_tokens = len(self.tokenizer.encode(query))
         available_tokens = self.max_context_tokens - query_tokens - 200  # Buffer
-        
+
         # Apply optimization strategy
         optimized_context = self.optimization_strategies[strategy](
             query, retrieved_chunks, available_tokens
@@ -72,7 +72,7 @@ class ContextWindowOptimizer:
 
 ### Step 2: Relevance-Based Context Selection
 
-Implement the core relevance-based selection strategy:  
+Implement the core relevance-based selection strategy:
 
 ```python
 def _relevance_based_selection(self, query: str, chunks: List[Dict],
@@ -142,20 +142,20 @@ def _relevance_based_selection(self, query: str, chunks: List[Dict],
 
 ### Step 3: Diversity-Based Selection
 
-Implement selection that balances relevance with information diversity:  
+Implement selection that balances relevance with information diversity:
 
 ```python
 def _diversity_based_selection(self, query: str, chunks: List[Dict],
                               token_budget: int) -> Dict[str, Any]:
     """Select chunks balancing relevance and diversity."""
-    
+
     # Get embeddings for all chunks
     chunk_texts = [chunk['document'].page_content for chunk in chunks]
     chunk_embeddings = self.embedding_model.encode(chunk_texts)
-    
+
     # Calculate diversity scores using clustering
     diversity_scores = self._calculate_diversity_scores(chunk_embeddings)
-    
+
     selected_chunks = []
     total_tokens = 0
     used_indices = set()
@@ -167,35 +167,35 @@ def _diversity_based_selection(self, query: str, chunks: List[Dict],
     while total_tokens < token_budget and len(used_indices) < len(chunks):
         best_score = -1
         best_idx = -1
-        
+
         for i, chunk in enumerate(chunks):
             if i in used_indices:
                 continue
-                
+
             content = chunk['document'].page_content
             tokens = len(self.tokenizer.encode(content))
-            
+
             if total_tokens + tokens > token_budget:
                 continue
-                
+
             relevance = 1 - chunk.get('similarity_score', 0.5)
             diversity = diversity_scores[i]
-            
+
             # Combined score balancing relevance and diversity
             combined_score = 0.7 * relevance + 0.3 * diversity
-            
+
             if combined_score > best_score:
                 best_score = combined_score
                 best_idx = i
-        
+
         if best_idx == -1:
             break
-            
+
         # Add selected chunk
         selected_chunk = chunks[best_idx]
         content = selected_chunk['document'].page_content
         tokens = len(self.tokenizer.encode(content))
-        
+
         selected_chunks.append({
             'content': content,
             'tokens': tokens,
@@ -203,7 +203,7 @@ def _diversity_based_selection(self, query: str, chunks: List[Dict],
             'diversity': diversity_scores[best_idx],
             'metadata': selected_chunk.get('metadata', {})
         })
-        
+
         total_tokens += tokens
         used_indices.add(best_idx)
 ```
@@ -212,7 +212,7 @@ def _diversity_based_selection(self, query: str, chunks: List[Dict],
 
 ### Step 4: Hierarchical Summarization
 
-Implement intelligent summarization when content exceeds budget:  
+Implement intelligent summarization when content exceeds budget:
 
 ```python
 def _hierarchical_summarization(self, query: str, chunks: List[Dict],
@@ -279,16 +279,16 @@ def _hierarchical_summarization(self, query: str, chunks: List[Dict],
 
 ### Step 5: Chunk Group Summarization
 
-Implement intelligent group summarization:  
+Implement intelligent group summarization:
 
 ```python
 def _summarize_chunk_group(self, query: str, group_chunks: List[Dict]) -> str:
     """Summarize a group of related chunks."""
-    
+
     group_content = '\n---\n'.join([
         chunk['document'].page_content for chunk in group_chunks
     ])
-    
+
     summarization_prompt = f"""
     Summarize the following related content sections in the context of this query: {query}
 
@@ -319,18 +319,18 @@ def _summarize_chunk_group(self, query: str, group_chunks: List[Dict]) -> str:
 
 ### Step 6: Source-Based Chunk Grouping
 
-Group related chunks for coherent summarization:  
+Group related chunks for coherent summarization:
 
 ```python
 def _group_chunks_by_source(self, chunks: List[Dict]) -> Dict[str, List[Dict]]:
     """Group chunks by source for coherent processing."""
-    
+
     groups = defaultdict(list)
-    
+
     for chunk in chunks:
         # Extract source identifier
         source = chunk.get('metadata', {}).get('source', 'unknown')
-        
+
         # Create semantic groups if no source available
         if source == 'unknown':
             # Use first few words as grouping key
@@ -339,7 +339,7 @@ def _group_chunks_by_source(self, chunks: List[Dict]) -> Dict[str, List[Dict]]:
             groups[group_key].append(chunk)
         else:
             groups[source].append(chunk)
-    
+
     return dict(groups)
 ```
 
@@ -347,20 +347,20 @@ def _group_chunks_by_source(self, chunks: List[Dict]) -> Dict[str, List[Dict]]:
 
 ### Step 7: Semantic Compression
 
-Implement advanced semantic compression techniques:  
+Implement advanced semantic compression techniques:
 
 ```python
 def _semantic_compression(self, query: str, chunks: List[Dict],
                          token_budget: int) -> Dict[str, Any]:
     """Apply semantic compression to maximize information density."""
-    
+
     compressed_chunks = []
     total_tokens = 0
-    
+
     for chunk in chunks:
         content = chunk['document'].page_content
         original_tokens = len(self.tokenizer.encode(content))
-        
+
         # Skip if chunk is already efficient
         if original_tokens <= 100:
             if total_tokens + original_tokens <= token_budget:
@@ -380,10 +380,10 @@ def _semantic_compression(self, query: str, chunks: List[Dict],
         # Compress larger chunks
         compressed_content = self._compress_chunk_content(content, query)
         compressed_tokens = len(self.tokenizer.encode(compressed_content))
-        
+
         if total_tokens + compressed_tokens <= token_budget:
             compression_ratio = original_tokens / compressed_tokens
-            
+
             compressed_chunks.append({
                 'content': compressed_content,
                 'tokens': compressed_tokens,
@@ -397,12 +397,12 @@ def _semantic_compression(self, query: str, chunks: List[Dict],
 
 ### Step 8: Content Compression Implementation
 
-Create the core content compression method:  
+Create the core content compression method:
 
 ```python
 def _compress_chunk_content(self, content: str, query: str) -> str:
     """Compress content while preserving query-relevant information."""
-    
+
     compression_prompt = f"""
     Compress the following content while preserving information relevant to: {query}
 
@@ -438,19 +438,19 @@ def _compress_chunk_content(self, content: str, query: str) -> str:
 
 ### Step 9: Optimization Strategy Selection
 
-Implement intelligent strategy selection based on content characteristics:  
+Implement intelligent strategy selection based on content characteristics:
 
 ```python
 def select_optimization_strategy(self, query: str, chunks: List[Dict]) -> str:
     """Select optimal strategy based on content characteristics."""
-    
+
     total_chunks = len(chunks)
-    total_tokens = sum(len(self.tokenizer.encode(chunk['document'].page_content)) 
+    total_tokens = sum(len(self.tokenizer.encode(chunk['document'].page_content))
                       for chunk in chunks)
     avg_chunk_size = total_tokens / total_chunks if total_chunks > 0 else 0
-    
+
     # Calculate content diversity
-    chunk_sources = set(chunk.get('metadata', {}).get('source', 'unknown') 
+    chunk_sources = set(chunk.get('metadata', {}).get('source', 'unknown')
                        for chunk in chunks)
     source_diversity = len(chunk_sources) / total_chunks if total_chunks > 0 else 0
 ```
@@ -461,13 +461,13 @@ def select_optimization_strategy(self, query: str, chunks: List[Dict]) -> str:
     # Strategy selection logic
     if total_tokens <= self.max_context_tokens * 0.8:
         return 'relevance_ranking'  # Simple case, use relevance
-    
+
     elif source_diversity > 0.5:
         return 'hierarchical_summary'  # High diversity, use summarization
-    
+
     elif avg_chunk_size > 500:
         return 'semantic_compression'  # Large chunks, compress
-    
+
     else:
         return 'diversity_clustering'  # Complex case, balance diversity
 ```
@@ -476,7 +476,7 @@ def select_optimization_strategy(self, query: str, chunks: List[Dict]) -> str:
 
 ## Testing Your Context Optimization System
 
-Test the complete optimization system with different scenarios:  
+Test the complete optimization system with different scenarios:
 
 ```python
 # Test the context optimization system
@@ -506,40 +506,40 @@ print(f"Efficiency scores: {relevance_result['efficiency_score']:.3f}, {summary_
 
 ## Integration with RAG Pipeline
 
-Connect your optimization system to the complete RAG pipeline:  
+Connect your optimization system to the complete RAG pipeline:
 
 ```python
 def enhanced_rag_pipeline(self, query: str, vector_store):
     """Complete RAG pipeline with query enhancement and context optimization."""
-    
+
     # Step 1: Enhanced query generation
     hyde_result = self.hyde_enhancer.enhance_query_with_hyde(query)
     expansion_result = self.query_expander.expand_query(query)
-    
+
     # Step 2: Multi-strategy retrieval
     hyde_results = vector_store.similarity_search_by_vector(
         hyde_result['enhanced_embedding'], k=20
     )
-    
+
     expanded_results = vector_store.similarity_search(
         expansion_result['expanded_query'], k=20
     )
-    
+
     # Combine and deduplicate results
     all_results = self._combine_and_rank_results(
         hyde_results, expanded_results, query
     )
-    
+
     # Step 3: Context optimization
     optimized_context = self.context_optimizer.optimize_context_window(
         query, all_results
     )
-    
+
     # Step 4: Generate response with optimized context
     response = self._generate_response(
         query, optimized_context['optimized_context']
     )
-    
+
     return {
         'response': response,
         'context_tokens': optimized_context['context_tokens'],
@@ -555,13 +555,14 @@ def enhanced_rag_pipeline(self, query: str, vector_store):
 
 ## Practice Exercises
 
-1. **Strategy Comparison**: Compare different optimization strategies on the same content  
-2. **Token Efficiency**: Measure information retention vs. token reduction ratios  
-3. **Quality Assessment**: Evaluate response quality with different optimization approaches  
-4. **Performance Testing**: Benchmark optimization speed and memory usage  
-
+1. **Strategy Comparison**: Compare different optimization strategies on the same content
+2. **Token Efficiency**: Measure information retention vs. token reduction ratios
+3. **Quality Assessment**: Evaluate response quality with different optimization approaches
+4. **Performance Testing**: Benchmark optimization speed and memory usage
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Query Expansion](Session4_Query_Expansion_Practice.md) | [Next: Advanced Prompt Engineering →](Session4_Advanced_Prompt_Engineering.md)
+**Previous:** [Session 3 - Vector Databases & Search Optimization ←](Session3_Vector_Databases_Search_Optimization.md)
+**Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+---
