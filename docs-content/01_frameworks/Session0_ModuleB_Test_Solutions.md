@@ -4,7 +4,7 @@
 
 ---
 
-**Question 1:** What is the key advantage of LangChain's framework approach over bare metal Python for reflection patterns?
+**Question 1:** What is the key advantage of LangChain's framework approach over bare metal Python for reflection patterns?  
 A) Structured prompt templating and reduced boilerplate code ✅
 B) Faster execution speed
 C) Lower memory usage
@@ -14,7 +14,7 @@ D) Built-in GPU acceleration
 
 ---
 
-**Question 2:** In advanced tool agents, what determines which tool is selected for a given task?
+**Question 2:** In advanced tool agents, what determines which tool is selected for a given task?  
 A) Task analysis combined with historical performance data ✅
 B) Alphabetical ordering of tool names
 C) The tool with the most recent update
@@ -24,7 +24,7 @@ D) Random selection from available tools
 
 ---
 
-**Question 3:** What are the three phases of ReAct + Reflection combination pattern?
+**Question 3:** What are the three phases of ReAct + Reflection combination pattern?  
 A) Analysis, synthesis, deployment
 B) Input processing, model inference, output generation
 C) ReAct problem solving, reflection on solution quality, iterative improvement ✅
@@ -34,7 +34,7 @@ D) Planning, execution, evaluation
 
 ---
 
-**Question 4:** Which emerging pattern enables agents to debug and fix their own reasoning errors?
+**Question 4:** Which emerging pattern enables agents to debug and fix their own reasoning errors?  
 A) Meta-Learning Pattern
 B) Self-Debugging Pattern ✅
 C) Constitutional AI Pattern
@@ -44,7 +44,7 @@ D) Swarm Intelligence Pattern
 
 ---
 
-**Question 5:** What is the primary benefit of combining Planning with Multi-Agent Coordination?
+**Question 5:** What is the primary benefit of combining Planning with Multi-Agent Coordination?  
 A) Strategic planning with coordinated execution across specialized agents ✅
 B) Faster individual agent performance
 C) Simplified code architecture

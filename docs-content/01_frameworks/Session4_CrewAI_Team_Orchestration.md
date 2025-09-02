@@ -8,33 +8,33 @@ In this session, you'll learn to orchestrate AI agents that don't just execute d
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This module offers three distinct learning paths based on your goals and time investment:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand core CrewAI orchestration principles and team dynamics
+=== "🎯 Observer (45-60 min)"
 
-Key files to read:
-- 🎯 [CrewAI Fundamentals](Session4_CrewAI_Fundamentals.md) - Core concepts and basic setup
-- This hub file for integration overview
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core CrewAI orchestration principles and team dynamics
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Application
-**Time Investment**: 2-3 hours
-**Outcome**: Build and orchestrate your own CrewAI teams for data processing
+=== "📝 Participant (2-3 hours)"
 
-Key files to read:
-- All 🎯 Observer files above
-- 📝 [Team Building Practice](Session4_Team_Building_Practice.md) - Hands-on crew creation and task orchestration
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build and orchestrate CrewAI teams for data processing
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery
-**Time Investment**: 6-8 hours
-**Outcome**: Deep expertise in advanced orchestration, performance optimization, and production deployment
+=== "⚙️ Implementer (6-8 hours)"
 
-Key files to read:
-- All 🎯 Observer and 📝 Participant files above
-- ⚙️ [Advanced Orchestration](Session4_Advanced_Orchestration.md) - Complex coordination patterns, performance optimization, and monitoring
-- ⚙️ [Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md) - Sophisticated workflow patterns
-- ⚙️ [Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md) - Production team architectures
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced orchestration, performance optimization, production deployment
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+---
 
 ## Learning Outcomes
 
@@ -144,31 +144,31 @@ Session 4: CrewAI Team Orchestration Hub
 
 Test your understanding of CrewAI team orchestration:
 
-**Question 1:** What is CrewAI's primary strength for data engineering teams compared to other agent frameworks?
+**Question 1:** What is CrewAI's primary strength for data engineering teams compared to other agent frameworks?  
 A) Fastest data processing speed
 B) Team-based collaboration with specialized data processing roles
 C) Lowest resource usage for large datasets
 D) Easiest deployment to cloud data platforms
 
-**Question 2:** In CrewAI for data processing, what defines an agent's behavior and capabilities?
+**Question 2:** In CrewAI for data processing, what defines an agent's behavior and capabilities?  
 A) Data processing tools only
 B) Role, goal, and domain-specific backstory
 C) Memory capacity for data schemas
 D) Processing speed for large datasets
 
-**Question 3:** What is the purpose of the `expected_output` parameter in CrewAI data processing tasks?
+**Question 3:** What is the purpose of the `expected_output` parameter in CrewAI data processing tasks?  
 A) To validate data quality in agent responses
 B) To guide task execution and set clear data processing expectations
 C) To measure processing performance
 D) To handle data pipeline errors
 
-**Question 4:** Which CrewAI process type offers the most control over data processing task execution order?
+**Question 4:** Which CrewAI process type offers the most control over data processing task execution order?  
 A) Sequential (like ETL pipeline stages)
 B) Hierarchical (with data engineering manager oversight)
 C) Parallel (for independent data processing)
 D) Random (for experimental data exploration)
 
-**Question 5:** What makes CrewAI Flows different from regular CrewAI execution in data processing contexts?
+**Question 5:** What makes CrewAI Flows different from regular CrewAI execution in data processing contexts?  
 A) They use different data processing agents
 B) They provide structured workflow control with conditional logic for complex data pipelines
 C) They process data faster

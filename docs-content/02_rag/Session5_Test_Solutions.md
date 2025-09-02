@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** Which metric is most important for evaluating retrieval quality in RAG systems?
+**Question 1:** Which metric is most important for evaluating retrieval quality in RAG systems?  
 A) Response time
 B) Recall@K (how many relevant documents are in top-K results) ✅
 C) Token count
@@ -12,7 +12,7 @@ D) Database size
 
 ---
 
-**Question 2:** What does the RAGAS faithfulness metric measure?
+**Question 2:** What does the RAGAS faithfulness metric measure?  
 A) How fast the system responds
 B) How well retrieved documents match the query
 C) How factually accurate the generated response is relative to retrieved context ✅
@@ -22,7 +22,7 @@ D) How many sources are cited
 
 ---
 
-**Question 3:** In A/B testing for RAG systems, what is the most reliable success metric?
+**Question 3:** In A/B testing for RAG systems, what is the most reliable success metric?  
 A) System latency
 B) Cost per query
 C) User satisfaction and task completion rates ✅
@@ -32,7 +32,7 @@ D) Number of retrieved documents
 
 ---
 
-**Question 4:** When should you use automated LLM-as-a-judge evaluation over human evaluation?
+**Question 4:** When should you use automated LLM-as-a-judge evaluation over human evaluation?  
 A) When you need perfect accuracy
 B) When you need to evaluate at scale with consistent criteria ✅
 C) When the stakes are very high
@@ -42,7 +42,7 @@ D) Never, human evaluation is always better
 
 ---
 
-**Question 5:** What is the primary purpose of regression testing in RAG evaluation?
+**Question 5:** What is the primary purpose of regression testing in RAG evaluation?  
 A) To test system speed
 B) To ensure new changes don't decrease quality on established benchmarks ✅
 C) To measure user satisfaction
@@ -52,7 +52,7 @@ D) To optimize costs
 
 ---
 
-**Question 6:** Which RAG component failure mode is hardest to detect with automated metrics?
+**Question 6:** Which RAG component failure mode is hardest to detect with automated metrics?  
 A) Slow retrieval speed
 B) Empty results from vector search
 C) Subtle hallucinations in generated responses ✅
@@ -62,7 +62,7 @@ D) Database connection errors
 
 ---
 
-**Question 7:** What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?
+**Question 7:** What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?  
 A) Faster evaluation
 B) Lower computational cost
 C) Captures different failure modes that single metrics might miss ✅
@@ -72,7 +72,7 @@ D) Easier to implement
 
 ---
 
-**Question 8:** In production RAG monitoring, what threshold approach is most effective for quality alerts?
+**Question 8:** In production RAG monitoring, what threshold approach is most effective for quality alerts?  
 A) Fixed absolute thresholds for all metrics
 B) Adaptive thresholds based on historical performance patterns ✅
 C) No thresholds, manual monitoring only

@@ -4,28 +4,29 @@
 
 This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts (45-60 minutes)
-**Outcome**: Understand why advanced chunking matters and core concepts
+=== "🎯 Observer (45-60 min)"
 
-Key files to read:
-- 🎯 [Chunking Fundamentals](Session2_Chunking_Fundamentals.md)
-- 🎯 [Document Structure Basics](Session2_Document_Structure_Basics.md)
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Advanced chunking principles, document structure analysis
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Implementation (3-4 hours)
-**Outcome**: Implement structure-aware chunking in real projects
+=== "📝 Participant (3-4 hours)"
 
-Key files to read:
-- All 🎯 Observer files above
-- 📝 [Hierarchical Chunking Practice](Session2_Hierarchical_Chunking_Practice.md)
-- 📝 [Metadata Extraction Implementation](Session2_Metadata_Extraction_Implementation.md)
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Implement structure-aware chunking, metadata extraction systems
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery (8-10 hours)
-**Outcome**: Master enterprise-grade preprocessing systems
+=== "⚙️ Implementer (8-10 hours)"
 
-Key files to read:
-- All 🎯 Observer and 📝 Participant files above
-- ⚙️ [Advanced Processing Pipeline](Session2_Advanced_Processing_Pipeline.md)
-- ⚙️ [Quality Assessment Systems](Session2_Quality_Assessment_Systems.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Enterprise-grade preprocessing systems, quality assessment frameworks
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -307,49 +308,49 @@ for i, chunk in enumerate(chunks):
 
 Test your understanding of advanced chunking and preprocessing concepts:
 
-**Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?
+**Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?  
 A) Reduces processing time
 B) Enables structure-aware chunking that preserves meaning
 C) Reduces storage requirements
 D) Improves embedding quality
 
-**Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?
+**Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?  
 A) To reduce memory usage
 B) To simplify the codebase
 C) To improve processing speed
 D) To preserve document structure and create meaningful chunk boundaries
 
-**Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?
+**Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?  
 A) Reduces chunk size
 B) Enables more precise retrieval through enriched context
 C) Simplifies the chunking process
 D) Improves computational efficiency
 
-**Question 4:** Why do tables require specialized processing in RAG systems?
+**Question 4:** Why do tables require specialized processing in RAG systems?  
 A) Tables use different encoding formats
 B) Tables contain more text than paragraphs
 C) Tables are always larger than the chunk size
 D) Tables have structured relationships that are lost in naive chunking
 
-**Question 5:** When processing documents with images, what is the best practice for RAG systems?
+**Question 5:** When processing documents with images, what is the best practice for RAG systems?  
 A) Store images as binary data in chunks
 B) Create separate chunks for each image
 C) Replace image references with descriptive text
 D) Ignore images completely
 
-**Question 6:** Which metric is most important for measuring chunk coherence in hierarchical chunking?
+**Question 6:** Which metric is most important for measuring chunk coherence in hierarchical chunking?  
 A) Topic consistency between related chunks
 B) Number of chunks created
 C) Average chunk size
 D) Processing speed
 
-**Question 7:** What is the optimal overlap ratio for hierarchical chunks?
+**Question 7:** What is the optimal overlap ratio for hierarchical chunks?  
 A) 100% - complete duplication
 B) 0% - no overlap needed
 C) 10-20% - balanced context and efficiency
 D) 50% - maximum context preservation
 
-**Question 8:** Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?
+**Question 8:** Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?  
 A) To select the most appropriate processing approach for the content type
 B) To set the embedding model parameters
 C) To reduce computational costs

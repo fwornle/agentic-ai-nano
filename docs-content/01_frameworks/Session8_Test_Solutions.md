@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is Agno's primary design philosophy?
+**Question 1:** What is Agno's primary design philosophy?  
 
 A) Framework-agnostic with maximum flexibility
 B) Development-focused with simple prototyping
@@ -13,7 +13,7 @@ D) Model-specific optimization
 
 ---
 
-**Question 2:** Which observability feature is built into Agno by default?
+**Question 2:** Which observability feature is built into Agno by default?  
 
 A) Simple console output
 B) Custom logging framework
@@ -24,7 +24,7 @@ D) OpenTelemetry with distributed tracing ✅
 
 ---
 
-**Question 3:** How does Agno handle agent failures in production?
+**Question 3:** How does Agno handle agent failures in production?  
 
 A) Immediate failure without retry
 B) Manual intervention required
@@ -35,7 +35,7 @@ D) Simple retry with fixed delays
 
 ---
 
-**Question 4:** What format does Agno use for configuration management?
+**Question 4:** What format does Agno use for configuration management?  
 
 A) INI files with sections
 B) YAML with environment variable interpolation ✅
@@ -46,7 +46,7 @@ D) JSON with schema validation
 
 ---
 
-**Question 5:** Which deployment model does Agno NOT support?
+**Question 5:** Which deployment model does Agno NOT support?  
 
 A) Kubernetes clusters
 B) Cloud functions
@@ -57,7 +57,7 @@ D) Client-side browser deployment ✅
 
 ---
 
-**Question 6:** What is the purpose of Agno's WorkflowOrchestrator?
+**Question 6:** What is the purpose of Agno's WorkflowOrchestrator?  
 
 A) Simple sequential task execution
 B) Basic job queuing
@@ -68,7 +68,7 @@ D) Parallel processing only
 
 ---
 
-**Question 7:** How does Agno implement distributed tracing?
+**Question 7:** How does Agno implement distributed tracing?  
 
 A) Custom tracing solution
 B) Simple request IDs
@@ -79,7 +79,7 @@ D) OpenTelemetry with W3C trace context ✅
 
 ---
 
-**Question 8:** What retry strategy does Agno use for transient failures?
+**Question 8:** What retry strategy does Agno use for transient failures?  
 
 A) Fixed interval retries
 B) Random retry intervals
@@ -90,7 +90,7 @@ D) Linear increase delays
 
 ---
 
-**Question 9:** Which caching strategy is recommended for Agno agents?
+**Question 9:** Which caching strategy is recommended for Agno agents?  
 
 A) File-based caching
 B) In-memory caching only
@@ -101,7 +101,7 @@ D) Database caching only
 
 ---
 
-**Question 10:** How does Agno handle concurrent request limiting?
+**Question 10:** How does Agno handle concurrent request limiting?  
 
 A) Semaphores with configurable pools ✅
 B) Database locks
@@ -112,7 +112,7 @@ D) Process-based limiting
 
 ---
 
-**Question 11:** What metrics does Agno's PrometheusMetrics collect by default?
+**Question 11:** What metrics does Agno's PrometheusMetrics collect by default?  
 
 A) Request rates, latencies, error rates, and agent performance ✅
 B) CPU utilization only
@@ -123,7 +123,7 @@ D) Memory usage only
 
 ---
 
-**Question 12:** How does Agno implement structured logging?
+**Question 12:** How does Agno implement structured logging?  
 
 A) JSON format with trace correlation ✅
 B) CSV format
@@ -134,7 +134,7 @@ D) Plain text logging
 
 ---
 
-**Question 13:** What alerting capabilities does Agno provide?
+**Question 13:** What alerting capabilities does Agno provide?  
 
 A) SMS notifications only
 B) Console warnings only
@@ -145,7 +145,7 @@ D) Multi-channel alerts with severity levels ✅
 
 ---
 
-**Question 14:** How does Agno handle performance monitoring?
+**Question 14:** How does Agno handle performance monitoring?  
 
 A) Manual performance testing
 B) External monitoring tools only
@@ -156,7 +156,7 @@ D) Comprehensive profiling with bottleneck detection ✅
 
 ---
 
-**Question 15:** What security monitoring features does Agno include?
+**Question 15:** What security monitoring features does Agno include?  
 
 A) Request validation, rate limiting, and security event tracking ✅
 B) File system monitoring only
@@ -167,7 +167,7 @@ D) Basic authentication logs
 
 ---
 
-**Question 16:** How does Agno integrate with existing enterprise authentication systems?
+**Question 16:** How does Agno integrate with existing enterprise authentication systems?  
 
 A) No authentication support
 B) Only supports API keys
@@ -178,7 +178,7 @@ D) OAuth 2.0, SAML, and LDAP integration ✅
 
 ---
 
-**Question 17:** What cost management features does Agno provide?
+**Question 17:** What cost management features does Agno provide?  
 
 A) Manual cost calculation
 B) Basic usage counting
@@ -189,7 +189,7 @@ D) Budget tracking, cost alerts, and optimization recommendations ✅
 
 ---
 
-**Question 18:** How does Agno handle data privacy and compliance?
+**Question 18:** How does Agno handle data privacy and compliance?  
 
 A) User responsibility only
 B) No privacy features
@@ -200,7 +200,7 @@ D) Basic data encryption
 
 ---
 
-**Question 19:** What scalability patterns does Agno support?
+**Question 19:** What scalability patterns does Agno support?  
 
 A) Horizontal scaling with load balancing and auto-scaling ✅
 B) Single instance only
@@ -211,7 +211,7 @@ D) Vertical scaling only
 
 ---
 
-**Question 20:** How does Agno manage deployment environments?
+**Question 20:** How does Agno manage deployment environments?  
 
 A) Multi-environment configuration with promotion pipelines ✅
 B) Development environment only

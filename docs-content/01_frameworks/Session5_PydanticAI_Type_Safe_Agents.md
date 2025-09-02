@@ -2,31 +2,33 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths for mastering PydanticAI type-safe agent development:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts
-**Time Investment**: 1-2 hours
-**Outcome**: Understand core type safety principles and basic PydanticAI usage
+=== "🎯 Observer (1-2 hours)"
 
-Read this main file for fundamental concepts and basic implementations.
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core type safety principles and basic PydanticAI usage
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Application
-**Time Investment**: 3-4 hours
-**Outcome**: Build production-ready type-safe agents with tools and validation
+=== "📝 Participant (3-4 hours)"
 
-Complete Observer path, then continue with:
-- 📝 [Practical Implementation](Session5_Practical_Implementation.md)
-- 📝 [Production Deployment](Session5_Production_Deployment.md)
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build production-ready type-safe agents with tools and validation
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery
-**Time Investment**: 8-10 hours
-**Outcome**: Deep expertise in advanced type systems and enterprise patterns
+=== "⚙️ Implementer (8-10 hours)"
 
-Complete Observer and Participant paths, then master:
-- ⚙️ [Advanced Type Systems](Session5_ModuleA_Advanced_Type_Systems.md)
-- ⚙️ [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md)
-- ⚙️ [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md)
-- ⚙️ [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced type systems, enterprise patterns, custom validation systems
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+---
 
 ---
 
@@ -686,31 +688,31 @@ For deep expertise, explore:
 
 ## 📝 Multiple Choice Test - Session 5
 
-**Question 1:** What is the primary advantage of PydanticAI?
+**Question 1:** What is the primary advantage of PydanticAI?  
 A) Faster execution
 B) Lower cost
 C) Better UI
 D) Automatic validation and structured outputs
 
-**Question 2:** Which constraint ensures numeric range validation?
+**Question 2:** Which constraint ensures numeric range validation?  
 A) Field(range=(0, 100))
 B) Field(between=0:100)
 C) Field(min=0, max=100)
 D) Field(ge=0, le=100)
 
-**Question 3:** What happens when validation fails?
+**Question 3:** What happens when validation fails?  
 A) Application crashes
 B) Silent failure
 C) Warning logged
 D) ValidationError raised
 
-**Question 4:** How do you define tools?
+**Question 4:** How do you define tools?  
 A) @tool decorator
 B) def tool() syntax
 C) @function decorator
 D) Tool class with takes/returns
 
-**Question 5:** What is RunContext for?
+**Question 5:** What is RunContext for?  
 A) Error handling
 B) Runtime configuration and dependencies
 C) Conversation history

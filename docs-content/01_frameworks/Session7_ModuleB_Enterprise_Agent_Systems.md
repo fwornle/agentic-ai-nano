@@ -1404,31 +1404,31 @@ Enterprise-scale ADK agent deployment patterns covered:
 
 Test your understanding of enterprise agent systems and production deployment:
 
-**Question 1:** What deployment strategy does the enterprise system use for zero-downtime updates?
+**Question 1:** What deployment strategy does the enterprise system use for zero-downtime updates?  
 A) Blue-green deployments with traffic switching
 B) Manual server restart
 C) Rolling updates with Kubernetes orchestration and canary deployment capability
 D) Single instance deployment
 
-**Question 2:** How does the load balancer determine traffic routing?
+**Question 2:** How does the load balancer determine traffic routing?  
 A) Random distribution
 B) Health-based routing with weighted distribution and canary traffic management
 C) First-available agent
 D) Round-robin only
 
-**Question 3:** What security controls does the SecurityManager implement?
+**Question 3:** What security controls does the SecurityManager implement?  
 A) Basic authentication only
 B) Role-based access control, audit logging, and compliance policy enforcement
 C) No security controls
 D) Manual authorization
 
-**Question 4:** What observability features does the enterprise system provide?
+**Question 4:** What observability features does the enterprise system provide?  
 A) Basic logging only
 B) Distributed tracing, structured logging, metrics collection, and SLO management
 C) Manual monitoring
 D) Error logs only
 
-**Question 5:** How does the auto-scaling system respond to load changes?
+**Question 5:** How does the auto-scaling system respond to load changes?  
 A) Manual scaling only
 B) CPU and memory-based horizontal pod autoscaling with custom metrics
 C) Fixed instance count

@@ -6,42 +6,31 @@ This session transforms your RAG system from passive responder to active reasone
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts
+=== "🎯 Observer (45-60 min)"
 
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand core agentic RAG principles and cognitive architecture
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core agentic RAG principles, cognitive architecture, reasoning patterns
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-Key concepts to master:
+=== "📝 Participant (3-4 hours)"
 
-- Cognitive leap from retrieval to reasoning
-- Three pillars of reasoning-RAG integration
-- Basic agentic architecture patterns
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build functional agentic RAG systems, reasoning agent implementation, tool integration
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### 📝 Participant Path - Practical Implementation
+=== "⚙️ Implementer (8-12 hours)"
 
-**Time Investment**: 3-4 hours
-**Outcome**: Build functional agentic RAG systems with reasoning capabilities
-
-Additional concepts and implementations:
-
-- Complete Observer Path content above
-- Hands-on reasoning agent implementation
-- Self-correction system development
-- Tool integration patterns
-
-### ⚙️ Implementer Path - Complete Mastery
-
-**Time Investment**: 8-12 hours
-**Outcome**: Deep expertise in production agentic RAG systems
-
-Complete implementation coverage:
-
-- All Observer and Participant content
-- ⚙️ [Advanced Agent Reasoning](Session7_Advanced_Agent_Reasoning.md)
-- ⚙️ [Production Agent Deployment](Session7_Production_Agent_Systems.md)
-- ⚙️ [Multi-Agent Orchestration](Session7_Multi_Agent_Orchestration.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Production agentic RAG systems, advanced agent reasoning, multi-agent orchestration
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -394,49 +383,49 @@ The complete agentic RAG implementation requires additional advanced components:
 
 Test your understanding of agentic RAG systems and intelligent automation techniques.
 
-**Question 1:** What is the primary advantage of query planning in agentic RAG systems?
+**Question 1:** What is the primary advantage of query planning in agentic RAG systems?  
 A) Faster response times
 B) Strategic analysis of queries to determine optimal retrieval and generation approaches
 C) Reduced computational costs
 D) Simpler system architecture
 
-**Question 2:** In self-correcting RAG systems, what is the most effective approach for error detection?
+**Question 2:** In self-correcting RAG systems, what is the most effective approach for error detection?  
 A) Random response sampling
 B) LLM-as-a-judge evaluation with factual consistency checking
 C) Simple keyword matching
 D) Response length validation
 
-**Question 3:** When should agentic RAG systems use external tools rather than just document retrieval?
+**Question 3:** When should agentic RAG systems use external tools rather than just document retrieval?  
 A) Always, for every query
 B) Never, document retrieval is always sufficient
 C) When queries require real-time data, calculations, or specialized functionality
 D) Only for simple questions
 
-**Question 4:** What is the key benefit of multi-agent collaboration in RAG systems?
+**Question 4:** What is the key benefit of multi-agent collaboration in RAG systems?  
 A) Faster processing through parallel execution
 B) Specialized expertise and comprehensive analysis through role-based collaboration
 C) Reduced memory usage
 D) Simpler error handling
 
-**Question 5:** In iterative self-correction, what criterion should determine when to stop refinement?
+**Question 5:** In iterative self-correction, what criterion should determine when to stop refinement?  
 A) Fixed number of iterations regardless of quality
 B) Quality threshold achievement or diminishing improvement returns
 C) Time limits only
 D) User interruption
 
-**Question 6:** Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?
+**Question 6:** Which agent role is most critical for ensuring factual accuracy in multi-agent RAG systems?  
 A) Researcher agent
 B) Synthesizer agent
 C) Validator agent
 D) Coordinator agent
 
-**Question 7:** What is the primary challenge in production deployment of agentic RAG systems?
+**Question 7:** What is the primary challenge in production deployment of agentic RAG systems?  
 A) High computational costs
 B) Balancing system complexity with reliability and performance
 C) Lack of suitable frameworks
 D) Limited use cases
 
-**Question 8:** When designing agentic RAG validation, what aspect is most important to assess?
+**Question 8:** When designing agentic RAG validation, what aspect is most important to assess?  
 A) Response length
 B) Processing speed
 C) Factual accuracy and logical consistency

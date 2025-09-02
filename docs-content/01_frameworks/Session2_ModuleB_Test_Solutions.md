@@ -4,7 +4,7 @@
 
 ---
 
-**Question 1:** What components are included in the complete Kubernetes manifest package?
+**Question 1:** What components are included in the complete Kubernetes manifest package?  
 
 ### Answer: B) Deployment, service, configmap, ingress, HPA, and PDB
 
@@ -12,7 +12,7 @@
 
 ---
 
-**Question 2:** What is the systematic approach followed in the deployment process?
+**Question 2:** What is the systematic approach followed in the deployment process?  
 
 ### Answer: B) Manifest generation, cloud provisioning, Kubernetes deployment, monitoring, auto-scaling
 
@@ -20,7 +20,7 @@
 
 ---
 
-**Question 3:** What happens when a deployment fails according to the error handling strategy?
+**Question 3:** What happens when a deployment fails according to the error handling strategy?  
 
 ### Answer: B) Automatic rollback is initiated to maintain system stability
 
@@ -28,7 +28,7 @@
 
 ---
 
-**Question 4:** What information is returned upon successful deployment?
+**Question 4:** What information is returned upon successful deployment?  
 
 ### Answer: B) Deployment ID, status, cloud resources, endpoints, and health check URLs
 
@@ -36,7 +36,7 @@
 
 ---
 
-**Question 5:** What is the purpose of Pod Disruption Budgets (PDB) in the deployment architecture?
+**Question 5:** What is the purpose of Pod Disruption Budgets (PDB) in the deployment architecture?  
 
 ### Answer: B) Ensure production resilience during maintenance operations
 

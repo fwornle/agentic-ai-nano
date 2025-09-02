@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test Solutions
 
-**Question 1:** RAG System Architecture
+**Question 1:** RAG System Architecture  
 **What are the three main stages of a RAG system?**
 A) Store, Find, Answer
 B) Index, Retrieve, Generate ✅
@@ -13,7 +13,7 @@ D) Chunk, Embed, Query
 
 ---
 
-**Question 2:** Industry Applications
+**Question 2:** Industry Applications  
 **Which industry benefits from RAG-powered clinical decision support?**
 A) Legal services
 B) Healthcare ✅
@@ -24,7 +24,7 @@ D) Financial services
 
 ---
 
-**Question 3:** HyDE Technology
+**Question 3:** HyDE Technology  
 **What is the primary advantage of HyDE (Hypothetical Document Embeddings)?**
 A) Reduces computational cost
 B) Improves query-document semantic alignment ✅
@@ -35,7 +35,7 @@ D) Simplifies system architecture
 
 ---
 
-**Question 4:** RAG Evolution Timeline
+**Question 4:** RAG Evolution Timeline  
 **Which RAG evolution phase introduced self-correcting mechanisms?**
 A) 2020 - RAG Foundation
 B) 2021-2022 - Enhanced Fusion
@@ -46,7 +46,7 @@ D) 2024-2025 - Graph-Based and Agentic
 
 ---
 
-**Question 5:** RAG vs Fine-tuning Decision
+**Question 5:** RAG vs Fine-tuning Decision  
 **When should you choose RAG over fine-tuning?**
 A) When the domain knowledge is static
 B) When you need frequent knowledge updates ✅
@@ -57,7 +57,7 @@ D) When source attribution is not needed
 
 ---
 
-**Question 6:** Structure-Aware Chunking
+**Question 6:** Structure-Aware Chunking  
 **What is structure-aware chunking designed to solve?**
 A) Reducing computational costs
 B) Preserving document meaning and context boundaries ✅
@@ -68,7 +68,7 @@ D) Eliminating metadata requirements
 
 ---
 
-**Question 7:** Semantic Gap Solutions
+**Question 7:** Semantic Gap Solutions  
 **Which technique bridges the semantic gap between user queries and documents?**
 A) Reciprocal Rank Fusion
 B) Query expansion with synonyms
@@ -79,7 +79,7 @@ D) Metadata filtering
 
 ---
 
-**Question 8:** Agentic RAG Systems
+**Question 8:** Agentic RAG Systems  
 **What is the key benefit of Agentic RAG systems?**
 A) Simpler system architecture
 B) Multi-agent coordination for complex reasoning ✅
@@ -90,7 +90,7 @@ D) Faster retrieval speed
 
 ---
 
-**Question 9:** System Limitations
+**Question 9:** System Limitations  
 **What is a critical limitation of RAG systems?**
 A) They completely eliminate hallucinations
 B) They can introduce new types of errors while solving others ✅
@@ -101,7 +101,7 @@ D) They require constant human supervision
 
 ---
 
-**Question 10:** Current Evolution Phase
+**Question 10:** Current Evolution Phase  
 **What characterizes the "Graph-Based and Agentic" RAG phase?**
 A) Simple two-stage pipelines
 B) LLM integration with existing models

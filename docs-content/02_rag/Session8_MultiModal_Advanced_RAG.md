@@ -2,32 +2,33 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths for mastering multimodal RAG systems:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts (45-60 minutes)
-**Outcome**: Understand multimodal RAG evolution and core principles
+=== "🎯 Observer (45-60 min)"
 
-Focus on sections marked with 🎯 below for conceptual understanding of:
-- MRAG evolution from 1.0 to 3.0
-- Information loss problems in pseudo-multimodal systems
-- True multimodal processing advantages
-- Basic multimodal architecture patterns
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Multimodal RAG evolution, core principles, architecture patterns
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Implementation (3-4 hours)
-**Outcome**: Implement multimodal RAG systems in practice
+=== "📝 Participant (3-4 hours)"
 
-Complete 🎯 Observer sections above, then focus on 📝 sections:
-- Hands-on multimodal processing implementation
-- Advanced fusion strategies
-- Domain-specific optimizations
-- Integration with existing RAG systems
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Implement multimodal RAG systems, fusion strategies, domain optimizations
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery (8-12 hours)
-**Outcome**: Expert-level multimodal RAG system development
+=== "⚙️ Implementer (8-12 hours)"
 
-Complete all 🎯 Observer and 📝 Participant content, then explore advanced modules:
-- ⚙️ [MRAG Evolution Deep Dive](Session8_MRAG_Evolution.md)
-- ⚙️ [Advanced Techniques & Domain Specialization](Session8_Advanced_Techniques.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Expert-level multimodal systems, advanced techniques, domain specialization
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+---
 - ⚙️ [Cutting-Edge Research Implementation](Session8_Cutting_Edge_Research.md)
 - ⚙️ [Complete Implementation Practice](Session8_Implementation_Practice.md)
 

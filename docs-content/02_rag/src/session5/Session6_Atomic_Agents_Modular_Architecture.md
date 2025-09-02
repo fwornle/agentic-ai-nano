@@ -999,7 +999,7 @@ class AtomicLoadBalancer:
 
 Test your understanding of atomic agent architecture and implementation patterns:
 
-**Question 1:** What are the four core principles of atomic agent design?
+**Question 1:** What are the four core principles of atomic agent design?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1013,7 +1013,7 @@ The four core principles are:
 These principles ensure atomic agents are predictable, testable, maintainable, and scalable from simple tasks to enterprise systems.
 </details>
 
-**Question 2:** How does the AtomicContext class improve system observability and debugging?
+**Question 2:** How does the AtomicContext class improve system observability and debugging?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1028,7 +1028,7 @@ AtomicContext provides:
 This context threading enables comprehensive logging, monitoring, and debugging across atomic components in production systems.
 </details>
 
-**Question 3:** What makes the AtomicAgent generic type system superior to traditional agent frameworks?
+**Question 3:** What makes the AtomicAgent generic type system superior to traditional agent frameworks?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1043,7 +1043,7 @@ The generic type system (`AtomicAgent[T_Input, T_Output]`) provides:
 This approach catches errors during development rather than production and makes agent composition predictable and reliable.
 </details>
 
-**Question 4:** How does the AtomicPipeline pattern differ from traditional sequential processing?
+**Question 4:** How does the AtomicPipeline pattern differ from traditional sequential processing?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1058,7 +1058,7 @@ AtomicPipeline provides:
 Unlike traditional pipelines, atomic pipelines provide comprehensive observability, error handling, and type safety throughout the execution flow.
 </details>
 
-**Question 5:** What are the benefits of the context provider pattern in atomic agent systems?
+**Question 5:** What are the benefits of the context provider pattern in atomic agent systems?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1073,7 +1073,7 @@ Context providers enable:
 This pattern makes atomic agents environment-agnostic and easier to test, deploy, and maintain across different contexts.
 </details>
 
-**Question 6:** How does the AtomicOrchestrator support production deployment requirements?
+**Question 6:** How does the AtomicOrchestrator support production deployment requirements?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1088,7 +1088,7 @@ The orchestrator provides:
 This infrastructure supports enterprise-grade deployments with high availability, monitoring, and scalability requirements.
 </details>
 
-**Question 7:** Why is the parallel execution pattern important for atomic agent performance?
+**Question 7:** Why is the parallel execution pattern important for atomic agent performance?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1103,7 +1103,7 @@ Parallel execution provides:
 For atomic systems processing independent operations, parallel execution can dramatically improve performance while maintaining error isolation and resource management.
 </details>
 
-**Question 8:** How does the CLI integration pattern enhance atomic agent usability?
+**Question 8:** How does the CLI integration pattern enhance atomic agent usability?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1118,7 +1118,7 @@ CLI integration provides:
 This makes atomic agents accessible to developers, DevOps teams, and automated systems without requiring custom integration code.
 </details>
 
-**Question 9:** What production concerns does the atomic agent architecture address?
+**Question 9:** What production concerns does the atomic agent architecture address?  
 
 <details>
 <summary>Show Answer</summary>
@@ -1134,7 +1134,7 @@ The architecture addresses:
 These patterns ensure atomic agent systems meet enterprise production requirements for reliability, scale, and maintainability.
 </details>
 
-**Question 10:** How do atomic agents compare to previous frameworks covered in this module?
+**Question 10:** How do atomic agents compare to previous frameworks covered in this module?  
 
 <details>
 <summary>Show Answer</summary>

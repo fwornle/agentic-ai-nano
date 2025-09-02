@@ -4,7 +4,7 @@
 
 ---
 
-**Question 1:** What categories of metrics are tracked in the `PerformanceMetrics` dataclass?
+**Question 1:** What categories of metrics are tracked in the `PerformanceMetrics` dataclass?  
 
 ### Answer: B) Response time, resource usage, LLM-specific, tool usage, error, quality, and operational metrics
 
@@ -12,7 +12,7 @@
 
 ---
 
-**Question 2:** What does the benchmark suite initialization include?
+**Question 2:** What does the benchmark suite initialization include?  
 
 ### Answer: B) Agent factory, configuration, performance history, logger, and memory tracing
 
@@ -20,7 +20,7 @@
 
 ---
 
-**Question 3:** How are benchmark results organized for analysis?
+**Question 3:** How are benchmark results organized for analysis?  
 
 ### Answer: B) By scenario with unique benchmark IDs, timestamps, and recommendations
 
@@ -28,7 +28,7 @@
 
 ---
 
-**Question 4:** What metrics are particularly important for cost optimization?
+**Question 4:** What metrics are particularly important for cost optimization?  
 
 ### Answer: B) Token processing rates, API latency, and resource consumption
 
@@ -36,7 +36,7 @@
 
 ---
 
-**Question 5:** What is the purpose of tracking percentile metrics (p50, p90) rather than just averages?
+**Question 5:** What is the purpose of tracking percentile metrics (p50, p90) rather than just averages?  
 
 ### Answer: B) Understand user experience under different load conditions and identify outliers
 

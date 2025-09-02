@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the primary benefit of distributed GraphRAG architectures?
+**Question 1:** What is the primary benefit of distributed GraphRAG architectures?  
 
 A) Reduced implementation complexity
 B) Lower operational costs
@@ -13,7 +13,7 @@ D) Horizontal scalability for large knowledge graphs and high query loads ✅
 
 ---
 
-**Question 2:** What is the main challenge in implementing real-time updates for knowledge graphs?
+**Question 2:** What is the main challenge in implementing real-time updates for knowledge graphs?  
 
 A) Maintaining consistency while providing low-latency access ✅
 B) User interface complexity
@@ -24,7 +24,7 @@ D) Network bandwidth constraints
 
 ---
 
-**Question 3:** What is the most effective sharding strategy for distributed GraphRAG systems?
+**Question 3:** What is the most effective sharding strategy for distributed GraphRAG systems?  
 
 A) Random distribution across shards
 B) Size-based partitioning by entity count
@@ -35,7 +35,7 @@ D) Geographic distribution by data source
 
 ---
 
-**Question 4:** Which metrics should be used for effective GraphRAG auto-scaling?
+**Question 4:** Which metrics should be used for effective GraphRAG auto-scaling?  
 
 A) Network throughput and disk I/O
 B) User count and session duration
@@ -46,7 +46,7 @@ D) Storage size only
 
 ---
 
-**Question 5:** What should trigger the highest priority alerts in production GraphRAG monitoring?
+**Question 5:** What should trigger the highest priority alerts in production GraphRAG monitoring?  
 
 A) CPU usage above 70%
 B) Network latency spikes

@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?
+**Question 1:** What is the primary benefit of detecting content types (headings, tables, code) during document analysis?  
 
 A) Reduces processing time
 B) Enables structure-aware chunking that preserves meaning ✅
@@ -13,7 +13,7 @@ D) Improves embedding quality
 
 ---
 
-**Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?
+**Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?  
 
 A) To reduce memory usage
 B) To simplify the codebase
@@ -24,7 +24,7 @@ D) To preserve document structure and create meaningful chunk boundaries ✅
 
 ---
 
-**Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?
+**Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?  
 
 A) Reduces chunk size
 B) Enables more precise retrieval through enriched context ✅
@@ -35,7 +35,7 @@ D) Improves computational efficiency
 
 ---
 
-**Question 4:** Why do tables require specialized processing in RAG systems?
+**Question 4:** Why do tables require specialized processing in RAG systems?  
 
 A) Tables use different encoding formats
 B) Tables contain more text than paragraphs
@@ -46,7 +46,7 @@ D) Tables have structured relationships that are lost in naive chunking ✅
 
 ---
 
-**Question 5:** When processing documents with images, what is the best practice for RAG systems?
+**Question 5:** When processing documents with images, what is the best practice for RAG systems?  
 
 A) Store images as binary data in chunks
 B) Create separate chunks for each image
@@ -57,7 +57,7 @@ D) Ignore images completely
 
 ---
 
-**Question 6:** Which metric is most important for measuring chunk coherence in hierarchical chunking?
+**Question 6:** Which metric is most important for measuring chunk coherence in hierarchical chunking?  
 
 A) Topic consistency between related chunks ✅
 B) Number of chunks created
@@ -68,7 +68,7 @@ D) Processing speed
 
 ---
 
-**Question 7:** What is the optimal overlap ratio for hierarchical chunks?
+**Question 7:** What is the optimal overlap ratio for hierarchical chunks?  
 
 A) 100% - complete duplication
 B) 0% - no overlap needed
@@ -79,7 +79,7 @@ D) 50% - maximum context preservation
 
 ---
 
-**Question 8:** Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?
+**Question 8:** Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?  
 
 A) To select the most appropriate processing approach for the content type ✅
 B) To set the embedding model parameters

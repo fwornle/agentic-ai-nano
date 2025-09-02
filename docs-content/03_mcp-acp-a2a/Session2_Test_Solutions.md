@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test - Answer Key
 
-**Question 1:** What is the primary purpose of the sandbox in our file system server?
+**Question 1:** What is the primary purpose of the sandbox in our file system server?  
 
 A) To improve performance
 B) To prevent unauthorized file access ✅
@@ -13,7 +13,7 @@ D) To cache file contents
 
 ---
 
-**Question 2:** Which method is used to safely resolve file paths and prevent directory traversal attacks?
+**Question 2:** Which method is used to safely resolve file paths and prevent directory traversal attacks?  
 
 A) `os.path.join()`
 B) `Path.resolve()` ✅
@@ -24,7 +24,7 @@ D) `Path.absolute()`
 
 ---
 
-**Question 3:** How are binary files handled in the read_file tool?
+**Question 3:** How are binary files handled in the read_file tool?  
 
 A) Rejected with an error
 B) Converted to hexadecimal
@@ -35,7 +35,7 @@ D) Read as UTF-8
 
 ---
 
-**Question 4:** What type of validation is performed on file types for security?
+**Question 4:** What type of validation is performed on file types for security?  
 
 A) Extension only
 B) MIME type only
@@ -46,7 +46,7 @@ D) File size only
 
 ---
 
-**Question 5:** Which logging level is used for security violations in the file system server?
+**Question 5:** Which logging level is used for security violations in the file system server?  
 
 A) DEBUG
 B) INFO
@@ -57,7 +57,7 @@ D) ERROR
 
 ---
 
-**Question 6:** What happens when a file path attempts to escape the sandbox?
+**Question 6:** What happens when a file path attempts to escape the sandbox?  
 
 A) The server crashes
 B) A SandboxError is raised ✅
@@ -68,7 +68,7 @@ D) Access is granted with a warning
 
 ---
 
-**Question 7:** Why does the server implement file size limits?
+**Question 7:** Why does the server implement file size limits?  
 
 A) To save disk space
 B) To prevent denial of service attacks ✅
@@ -79,7 +79,7 @@ D) To maintain file quality
 
 ---
 
-**Question 8:** What approach does the server use for file type restrictions?
+**Question 8:** What approach does the server use for file type restrictions?  
 
 A) Blacklist dangerous extensions
 B) Whitelist safe extensions ✅
@@ -90,7 +90,7 @@ D) Check file signatures only
 
 ---
 
-**Question 9:** How does the search_files tool prevent performance issues?
+**Question 9:** How does the search_files tool prevent performance issues?  
 
 A) By caching all file content
 B) By limiting maximum results returned ✅
@@ -101,7 +101,7 @@ D) By compressing search results
 
 ---
 
-**Question 10:** What is the primary benefit of using `aiofiles` for file operations?
+**Question 10:** What is the primary benefit of using `aiofiles` for file operations?  
 
 A) Non-blocking file I/O operations ✅
 B) Better error handling

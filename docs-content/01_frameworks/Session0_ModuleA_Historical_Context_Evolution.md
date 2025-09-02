@@ -291,31 +291,31 @@ This enterprise wrapper ensures every agent interaction is authenticated, logged
 
 Test your understanding of AI agent historical context and evolution:
 
-**Question 1:** What was the primary limitation of early AI systems that drove the development of agentic architectures?
+**Question 1:** What was the primary limitation of early AI systems that drove the development of agentic architectures?  
 A) Limited computational power
 B) Stateless, single-turn interaction model
 C) Expensive API costs
 D) Lack of training data
 
-**Question 2:** Which research paper introduced the concept of interleaving thought and action in AI agents?
+**Question 2:** Which research paper introduced the concept of interleaving thought and action in AI agents?  
 A) Toolformer (2023)
 B) Reflexion (2023)
 C) ReAct (2022)
 D) Constitutional AI (2022)
 
-**Question 3:** What are the three types of memory in modern agent semantic memory systems?
+**Question 3:** What are the three types of memory in modern agent semantic memory systems?  
 A) Short-term, long-term, cache
 B) Episodic, semantic, working
 C) Local, distributed, cloud
 D) Input, output, processing
 
-**Question 4:** When did OpenAI launch ChatGPT Plugins, marking the first mainstream tool-augmented conversational AI?
+**Question 4:** When did OpenAI launch ChatGPT Plugins, marking the first mainstream tool-augmented conversational AI?  
 A) January 2023
 B) March 2023
 C) June 2023
 D) December 2022
 
-**Question 5:** According to current industry adoption patterns, what percentage of enterprise customer service uses agentic systems?
+**Question 5:** According to current industry adoption patterns, what percentage of enterprise customer service uses agentic systems?  
 A) 20%
 B) 30%
 C) 40%

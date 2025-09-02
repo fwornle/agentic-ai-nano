@@ -5,6 +5,36 @@ This session covers building a production-grade file system MCP server with comp
 ![File System Security Architecture](images/filesystem-security-architecture.png)
 *Multi-layered security architecture showing path validation, sandboxing, permission checks, and audit logging*
 
+## 🎯📝⚙️ Learning Path Overview
+
+This session offers three distinct learning paths designed to match your goals and time investment:
+
+=== "🎯 Observer (30-45 min)"
+
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: File system security fundamentals, defense-in-depth strategies, security threats
+    
+    **Ideal for**: Decision makers, architects, overview learners
+
+=== "📝 Participant (3-4 hours)"
+
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build secure file system MCP server, implement sandboxing and validation
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (6-8 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced security patterns, production deployment, enterprise hardening
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+---
+
 ## 🎯 Observer Path: Essential Security Concepts
 
 ### Understanding File System Security Fundamentals

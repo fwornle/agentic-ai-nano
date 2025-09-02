@@ -4,7 +4,7 @@
 
 ---
 
-**Question 1:** What benefits do Pydantic models provide for LangChain tool development?
+**Question 1:** What benefits do Pydantic models provide for LangChain tool development?  
 
 ### Answer: B) Type safety, automatic validation, and documentation generation
 
@@ -12,7 +12,7 @@
 
 ---
 
-**Question 2:** What configuration options are set in the `AdvancedToolInput` Config class?
+**Question 2:** What configuration options are set in the `AdvancedToolInput` Config class?  
 
 ### Answer: B) Extra fields forbidden, validate on assignment, use enum values
 
@@ -20,7 +20,7 @@
 
 ---
 
-**Question 3:** What does the `@validator('filters')` decorator ensure?
+**Question 3:** What does the `@validator('filters')` decorator ensure?  
 
 ### Answer: B) Filters contain JSON-serializable values
 
@@ -28,7 +28,7 @@
 
 ---
 
-**Question 4:** What performance metrics are tracked in the `AdvancedDataAnalysisTool`?
+**Question 4:** What performance metrics are tracked in the `AdvancedDataAnalysisTool`?  
 
 ### Answer: B) Total analyses, average execution time, success rate, and cache hit rate
 
@@ -36,7 +36,7 @@
 
 ---
 
-**Question 5:** What is the purpose of the `args_schema` attribute in the tool class?
+**Question 5:** What is the purpose of the `args_schema` attribute in the tool class?  
 
 ### Answer: B) Enable automatic validation and documentation generation
 

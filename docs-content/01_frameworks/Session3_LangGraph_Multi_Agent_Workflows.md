@@ -6,24 +6,31 @@ LangGraph transforms your data processing agents from sequential bottlenecks int
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths to master LangGraph multi-agent workflows:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Graph Fundamentals (45-60 min)
-**Perfect for**: Understanding graph-based workflow concepts, decision makers
-**Content**: Core LangGraph architecture, basic workflows, state management concepts
-**Files**: This main session covers all Observer Path content
+=== "🎯 Observer (45-60 min)"
 
-### 📝 Participant Path - Multi-Agent Implementation (2-3 hours)
-**Perfect for**: Building working multi-agent systems, practical developers
-**Content**: Complete team coordination, error handling, production patterns
-**Files**: All 🎯 Observer content (this session) PLUS [📝 Multi-Agent Implementation Guide](Session3_Multi_Agent_Implementation.md)
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core LangGraph architecture, basic workflows, state management concepts
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### ⚙️ Implementer Path - Advanced Orchestration (4-6 hours)
-**Perfect for**: Enterprise architects, complex workflow designers
-**Content**: All Observer and Participant content PLUS advanced patterns
-**Files**: Complete the above content, then explore:
-- [⚙️ Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)
-- [⚙️ Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md)
+=== "📝 Participant (2-3 hours)"
+
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Complete team coordination, error handling, production patterns
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (4-6 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced orchestration patterns, enterprise state management
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -205,31 +212,31 @@ Ready to build complete multi-agent systems with proper coordination? The Partic
 
 Test your understanding of LangGraph workflows and multi-agent coordination:
 
-**Question 1:** What is the primary advantage of LangGraph over sequential data pipeline agents?
+**Question 1:** What is the primary advantage of LangGraph over sequential data pipeline agents?  
 A) Better performance
 B) Lower cost
 C) Graph-based workflows with conditional routing and parallel execution
 D) Simpler implementation
 
-**Question 2:** In LangGraph, what component defines the data that flows between nodes?
+**Question 2:** In LangGraph, what component defines the data that flows between nodes?  
 A) State (TypedDict)
 B) Edges
 C) Memory
 D) Tools
 
-**Question 3:** What determines the flow between nodes in a LangGraph workflow?
+**Question 3:** What determines the flow between nodes in a LangGraph workflow?  
 A) Random selection
 B) User input
 C) Sequential execution only
 D) Conditional edges and decision functions
 
-**Question 4:** How does LangGraph handle parallel agent execution?
+**Question 4:** How does LangGraph handle parallel agent execution?  
 A) Through parallel nodes with state merging
 B) It doesn't support parallel execution
 C) Through external orchestration
 D) Using threading only
 
-**Question 5:** What happens when a LangGraph node updates state?
+**Question 5:** What happens when a LangGraph node updates state?  
 A) State is reset to default
 B) The entire state is replaced
 C) Previous state is archived

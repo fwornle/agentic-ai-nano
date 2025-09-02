@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the primary benefit of LangChain's unified LLM interface?
+**Question 1:** What is the primary benefit of LangChain's unified LLM interface?  
 A) Lower cost
 B) Consistent API across different LLM providers ✅
 C) Faster response times
@@ -12,7 +12,7 @@ D) Better performance
 
 ---
 
-**Question 2:** Which LangChain component is responsible for managing conversation context?
+**Question 2:** Which LangChain component is responsible for managing conversation context?  
 A) Chains
 B) Tools
 C) Memory ✅
@@ -22,7 +22,7 @@ D) Agents
 
 ---
 
-**Question 3:** How many ways can you create tools in LangChain?
+**Question 3:** How many ways can you create tools in LangChain?  
 A) Four - including custom implementations
 B) Two - BaseTool and @tool decorator
 C) Three - BaseTool, @tool decorator, and StructuredTool ✅
@@ -32,7 +32,7 @@ D) One - inheriting from BaseTool
 
 ---
 
-**Question 4:** What is the primary purpose of Sequential Chains in LangChain?
+**Question 4:** What is the primary purpose of Sequential Chains in LangChain?  
 A) To run multiple agents simultaneously
 B) To connect multiple processing steps where each step's output feeds the next ✅
 C) To handle errors in parallel
@@ -42,7 +42,7 @@ D) To reduce computational costs
 
 ---
 
-**Question 5:** Which memory type would be best for a long conversation where you need context but not all details?
+**Question 5:** Which memory type would be best for a long conversation where you need context but not all details?  
 A) ConversationBufferMemory
 B) ConversationSummaryMemory ✅
 C) ConversationBufferWindowMemory

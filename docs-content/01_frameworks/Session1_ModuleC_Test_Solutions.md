@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What four pieces of information does the `ConversationMemory` dataclass track for intelligent memory management?
+**Question 1:** What four pieces of information does the `ConversationMemory` dataclass track for intelligent memory management?  
 A) Content, priority, embedding, and context_tags
 B) Content, timestamp, tags, and size
 C) ID, content, timestamp, and priority
@@ -12,7 +12,7 @@ D) All of the above plus embedding and other metadata ✅
 
 ---
 
-**Question 2:** How does the semantic memory retrieval system determine relevance?
+**Question 2:** How does the semantic memory retrieval system determine relevance?  
 A) Keyword matching only
 B) Alphabetical ordering of content
 C) Cosine similarity between query and memory embeddings ✅
@@ -22,7 +22,7 @@ D) Random selection from recent memories
 
 ---
 
-**Question 3:** What is the purpose of the dual storage approach with working memory and long-term storage?
+**Question 3:** What is the purpose of the dual storage approach with working memory and long-term storage?  
 A) Balance performance with long-term retention ✅
 B) To save disk space
 C) Reduce memory usage only
@@ -32,7 +32,7 @@ D) Simplify the codebase
 
 ---
 
-**Question 4:** In the state persistence system, what triggers automatic state saving?
+**Question 4:** In the state persistence system, what triggers automatic state saving?  
 A) Critical state changes and periodic intervals ✅
 B) Fixed time intervals exclusively
 C) Only manual user commands
@@ -42,7 +42,7 @@ D) When the application shuts down
 
 ---
 
-**Question 5:** What determines which context layers are activated in dynamic context management?
+**Question 5:** What determines which context layers are activated in dynamic context management?  
 A) Layer scope, message content, context hints, and activation conditions ✅
 B) Random selection
 C) Only the most recent layer

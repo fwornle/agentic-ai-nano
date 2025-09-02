@@ -10,34 +10,33 @@ This is the reality of modern AI systems. Your weather prediction agent in the c
 
 ![A2A Communication Architecture](images/a2a-communication-architecture.png)
 
-## 🎯📝⚙️ Learning Path Guide
+## 🎯📝⚙️ Learning Path Overview
 
-### 🎯 Observer Path - Essential A2A Concepts
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand core A2A communication principles and architecture
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-Focus on these sections:
-- Part 1: Universal Language of Digital Diplomacy
-- Part 2: The Embassy System basics
-- Test Questions 1-5
+=== "🎯 Observer (45-60 min)"
 
-### 📝 Participant Path - Practical A2A Implementation
-**Time Investment**: 2-3 hours
-**Outcome**: Implement basic A2A systems in real projects
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core A2A communication principles, digital diplomacy, embassy system basics
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-Includes Observer content PLUS:
-- Part 2: Complete Embassy System implementation
-- Part 3: Message Routing Network
-- All practice exercises and test questions
+=== "📝 Participant (2-3 hours)"
 
-### ⚙️ Implementer Path - Complete A2A Mastery
-**Time Investment**: 8-10 hours
-**Outcome**: Deep expertise in enterprise A2A systems
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Implement basic A2A systems, embassy networks, message routing
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-Includes Observer and Participant content PLUS:
-- [⚙️ Advanced Orchestration Patterns](Session7_Advanced_Orchestration.md)
-- [⚙️ Advanced Choreography Systems](Session7_Advanced_Choreography.md)
-- All advanced implementations and enterprise patterns
+=== "⚙️ Implementer (8-10 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Enterprise A2A systems, advanced orchestration, choreography patterns
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -501,61 +500,61 @@ These advanced modules cover enterprise-scale orchestration and choreography pat
 
 Before we venture into advanced workflows, let's ensure you've mastered the art of agent diplomacy:
 
-**Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?
+**Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?  
 A) To reduce computational costs
 B) To improve individual agent performance
 C) To enable multiple agents to collaborate and coordinate actions
 D) To replace human operators
 
-**Question 2:** Which component serves as a "digital passport" in A2A systems?
+**Question 2:** Which component serves as a "digital passport" in A2A systems?  
 A) Message Router
 B) Agent Card
 C) Task State
 D) Priority Queue
 
-**Question 3:** What information is essential for proper A2A message routing?
+**Question 3:** What information is essential for proper A2A message routing?  
 A) Just the timestamp
 B) Only the priority level
 C) Only the message content
 D) Sender ID, recipient ID, and message type
 
-**Question 4:** How do agents announce their capabilities in an A2A system?
+**Question 4:** How do agents announce their capabilities in an A2A system?  
 A) Through manual configuration
 B) Via external databases only
 C) Through Agent Cards with capability metadata
 D) Through file-based configurations
 
-**Question 5:** What mechanism ensures A2A communication reliability when agents become unavailable?
+**Question 5:** What mechanism ensures A2A communication reliability when agents become unavailable?  
 A) Faster processing
 B) Increased memory allocation
 C) Message queuing with retry logic and timeouts
 D) Multiple network interfaces
 
-**Question 6:** What is the purpose of capability negotiation in A2A systems?
+**Question 6:** What is the purpose of capability negotiation in A2A systems?  
 A) To improve performance
 B) To match agent capabilities with task requirements
 C) To simplify configuration
 D) To reduce costs
 
-**Question 7:** When should URGENT priority be used for A2A messages?
+**Question 7:** When should URGENT priority be used for A2A messages?  
 A) For time-critical operations requiring immediate attention
 B) For data backup operations
 C) For routine status updates
 D) For all important messages
 
-**Question 8:** What is the purpose of correlation IDs in A2A messaging?
+**Question 8:** What is the purpose of correlation IDs in A2A messaging?  
 A) To validate message integrity
 B) To encrypt messages
 C) To compress message content
 D) To link related messages in multi-step workflows
 
-**Question 9:** What is a key benefit of collaborative agent teams in A2A systems?
+**Question 9:** What is a key benefit of collaborative agent teams in A2A systems?  
 A) Diverse expertise and parallel problem-solving capabilities
 B) Lower computational requirements
 C) Reduced network traffic
 D) Simpler implementation
 
-**Question 10:** How does the Agent Registry maintain data consistency?
+**Question 10:** How does the Agent Registry maintain data consistency?  
 A) Through manual updates
 B) Via heartbeat monitoring and automatic cleanup
 C) Using external synchronization services

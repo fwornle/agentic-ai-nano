@@ -4,25 +4,31 @@ Imagine you're architecting a massive data processing system where intelligent a
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths to master LangChain foundations:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts (40-60 min)
-**Perfect for**: Quick understanding, decision makers, overview before deep dive
-**Content**: Core LangChain architecture, basic chains, simple agents, memory concepts
-**Files**: This main session covers all Observer Path content
+=== "🎯 Observer (40-60 min)"
 
-### 📝 Participant Path - Practical Implementation (2-3 hours)
-**Perfect for**: Hands-on learning, developers, practical application
-**Content**: Complete implementations, error handling, production patterns
-**Files**: All 🎯 Observer content PLUS [📝 Practical Implementation](Session2_Practical_Implementation.md)
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core LangChain architecture, basic chains, simple agents, memory concepts
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### ⚙️ Implementer Path - Deep Architecture Mastery (6-8 hours)
-**Perfect for**: Advanced developers, architects, production systems
-**Content**: All Observer and Participant content PLUS advanced patterns
-**Files**: Complete the above paths, then explore:
-- [⚙️ Advanced Agent Architecture](Session2_Advanced_Agent_Architecture.md)
-- [⚙️ Production Memory Systems](Session2_Production_Memory_Systems.md)
-- [⚙️ Enterprise Tool Development](Session2_Enterprise_Tool_Development.md)
+=== "📝 Participant (2-3 hours)"
+
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Complete implementations, error handling, production patterns
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (6-8 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Advanced agent architecture, production memory systems, enterprise tool development
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -408,31 +414,31 @@ For comprehensive deep-dive into enterprise patterns and advanced architectures:
 
 Test your understanding of LangChain foundations and agent patterns for data engineering:
 
-**Question 1:** What is the primary benefit of LangChain's unified LLM interface for data systems?
+**Question 1:** What is the primary benefit of LangChain's unified LLM interface for data systems?  
 A) Lower computational cost
 B) Consistent API across different LLM providers for data analysis
 C) Faster data processing times
 D) Better data storage performance
 
-**Question 2:** Which LangChain component is responsible for managing data analysis conversation context?
+**Question 2:** Which LangChain component is responsible for managing data analysis conversation context?  
 A) Chains
 B) Tools
 C) Memory
 D) Agents
 
-**Question 3:** How many ways can you create tools in LangChain for data processing?
+**Question 3:** How many ways can you create tools in LangChain for data processing?  
 A) Four - including custom data implementations
 B) Two - BaseTool and @tool decorator
 C) Three - BaseTool, @tool decorator, and StructuredTool
 D) One - inheriting from BaseTool
 
-**Question 4:** What is the primary purpose of Sequential Chains in data processing workflows?
+**Question 4:** What is the primary purpose of Sequential Chains in data processing workflows?  
 A) To run multiple data agents simultaneously
 B) To connect multiple processing steps where each step's output feeds the next
 C) To handle data errors in parallel
 D) To reduce computational costs
 
-**Question 5:** Which memory type would be best for a long data analysis conversation where you need context but not all details?
+**Question 5:** Which memory type would be best for a long data analysis conversation where you need context but not all details?  
 A) ConversationBufferMemory
 B) ConversationSummaryMemory
 C) ConversationBufferWindowMemory

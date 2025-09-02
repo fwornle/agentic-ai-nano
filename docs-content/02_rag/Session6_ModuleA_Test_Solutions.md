@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the main advantage of Temporal PageRank over traditional PageRank?
+**Question 1:** What is the main advantage of Temporal PageRank over traditional PageRank?  
 
 A) Simpler implementation
 B) Considers information freshness and time-based relationships ✅
@@ -13,7 +13,7 @@ D) Faster computation speed
 
 ---
 
-**Question 2:** What do the parameters p and q control in Node2Vec?
+**Question 2:** What do the parameters p and q control in Node2Vec?  
 
 A) Return probability and in-out bias for walk exploration ✅
 B) Embedding dimensions and epochs
@@ -24,7 +24,7 @@ D) Learning rate and batch size
 
 ---
 
-**Question 3:** Why is community detection crucial for large-scale GraphRAG systems?
+**Question 3:** Why is community detection crucial for large-scale GraphRAG systems?  
 
 A) It organizes knowledge into coherent clusters for better retrieval ✅
 B) It simplifies graph visualization
@@ -35,7 +35,7 @@ D) It eliminates the need for embeddings
 
 ---
 
-**Question 4:** What is the key advantage of Graph Attention Networks (GATs)?
+**Question 4:** What is the key advantage of Graph Attention Networks (GATs)?  
 
 A) Learn adaptive importance weights for different relationships and neighbors ✅
 B) They have faster inference times
@@ -46,7 +46,7 @@ D) They require less training data
 
 ---
 
-**Question 5:** When should you use biased random walks instead of uniform random walks?
+**Question 5:** When should you use biased random walks instead of uniform random walks?  
 
 A) When you want to reduce memory usage
 B) When the graph is very small

@@ -63,31 +63,31 @@ class K8sDataProcessingAgentCluster:
 
 Test your understanding of Enterprise Scaling & Architecture for Data Processing:
 
-**Question 1:** What is the primary advantage of using Custom Resource Definitions (CRDs) in Kubernetes for data processing agent management?
+**Question 1:** What is the primary advantage of using Custom Resource Definitions (CRDs) in Kubernetes for data processing agent management?  
 A) They reduce CPU usage
 B) They extend the Kubernetes API to support data processing agent-specific configurations
 C) They automatically scale pods
 D) They provide built-in monitoring
 
-**Question 2:** In the multi-tenant data processing architecture, what is the purpose of ResourceQuota objects?
+**Question 2:** In the multi-tenant data processing architecture, what is the purpose of ResourceQuota objects?  
 A) To improve network performance
 B) To prevent any single tenant from consuming excessive cluster resources for data processing
 C) To enable automatic scaling
 D) To provide load balancing
 
-**Question 3:** What traffic distribution does the canary deployment configuration implement by default for data processing?
+**Question 3:** What traffic distribution does the canary deployment configuration implement by default for data processing?  
 A) 50% stable, 50% canary
 B) 80% stable, 20% canary
 C) 90% stable, 10% canary
 D) 95% stable, 5% canary
 
-**Question 4:** In the disaster recovery plan for data processing, what are the RPO and RTO targets?
+**Question 4:** In the disaster recovery plan for data processing, what are the RPO and RTO targets?  
 A) RPO: 15m, RTO: 30m
 B) RPO: 30m, RTO: 15m
 C) RPO: 1h, RTO: 30m
 D) RPO: 30m, RTO: 1h
 
-**Question 5:** What happens when the cost budget remaining drops to 30% or below in the cost-aware scaling policy for data processing?
+**Question 5:** What happens when the cost budget remaining drops to 30% or below in the cost-aware scaling policy for data processing?  
 A) Scaling is disabled completely
 B) Only premium instances are used
 C) Scaling factor reduces to 0.6 with 90% spot instances but maintains data processing continuity

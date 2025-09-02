@@ -2,30 +2,33 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session transforms RAG development from intuition-driven to evidence-driven through comprehensive evaluation frameworks. Choose your learning path:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts (1-2 hours)
-**Outcome**: Understand core RAG evaluation principles and when evaluation is critical
+=== "🎯 Observer (1-2 hours)"
 
-Key files to read:
-- 🎯 [RAG Evaluation Essentials](Session5_RAG_Evaluation_Essentials.md)
-- 🎯 [Quality Assessment Basics](Session5_Quality_Assessment_Basics.md)
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core RAG evaluation principles, quality assessment fundamentals
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Application (4-6 hours)
-**Outcome**: Implement RAGAS evaluation and A/B testing for RAG optimization
+=== "📝 Participant (4-6 hours)"
 
-Key files to read:
-- All 🎯 Observer files above
-- 📝 [RAGAS Implementation Practice](Session5_RAGAS_Implementation_Practice.md)
-- 📝 [Automated Testing Practice](Session5_Automated_Testing_Practice.md)
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Implement RAGAS evaluation, A/B testing for RAG optimization
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery (8-12 hours)
-**Outcome**: Build enterprise-grade evaluation and monitoring systems
+=== "⚙️ Implementer (8-12 hours)"
 
-Key files to read:
-- All 🎯 Observer and 📝 Participant files above
-- ⚙️ [Advanced Custom Metrics](Session5_Advanced_Custom_Metrics.md)
-- ⚙️ [Enterprise Monitoring Systems](Session5_Enterprise_Monitoring_Systems.md)
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Enterprise-grade evaluation, monitoring systems, custom metrics
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+---
 
 ### Optional Deep Dive Modules
 
@@ -298,49 +301,49 @@ For production systems, implement sampling-based evaluation to balance performan
 
 Test your comprehensive understanding of RAG evaluation across all learning paths:
 
-**Question 1:** Which metric is most important for evaluating retrieval quality in RAG systems?
+**Question 1:** Which metric is most important for evaluating retrieval quality in RAG systems?  
 A) Response time
 B) Recall@K (how many relevant documents are in top-K results)
 C) Token count
 D) Database size
 
-**Question 2:** What does the RAGAS faithfulness metric measure?
+**Question 2:** What does the RAGAS faithfulness metric measure?  
 A) How fast the system responds
 B) How well retrieved documents match the query
 C) How factually accurate the generated response is relative to retrieved context
 D) How many sources are cited
 
-**Question 3:** In A/B testing for RAG systems, what is the most reliable success metric?
+**Question 3:** In A/B testing for RAG systems, what is the most reliable success metric?  
 A) System latency
 B) Cost per query
 C) User satisfaction and task completion rates
 D) Number of retrieved documents
 
-**Question 4:** When should you use automated LLM-as-a-judge evaluation over human evaluation?
+**Question 4:** When should you use automated LLM-as-a-judge evaluation over human evaluation?  
 A) When you need perfect accuracy
 B) When you need to evaluate at scale with consistent criteria
 C) When the stakes are very high
 D) Never, human evaluation is always better
 
-**Question 5:** What is the primary purpose of regression testing in RAG evaluation?
+**Question 5:** What is the primary purpose of regression testing in RAG evaluation?  
 A) To test system speed
 B) To ensure new changes don't decrease quality on established benchmarks
 C) To measure user satisfaction
 D) To optimize costs
 
-**Question 6:** Which RAG component failure mode is hardest to detect with automated metrics?
+**Question 6:** Which RAG component failure mode is hardest to detect with automated metrics?  
 A) Slow retrieval speed
 B) Empty results from vector search
 C) Subtle hallucinations in generated responses
 D) Database connection errors
 
-**Question 7:** What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?
+**Question 7:** What is the key advantage of multi-dimensional RAG evaluation over single-metric assessment?  
 A) Faster evaluation
 B) Lower computational cost
 C) Captures different failure modes that single metrics might miss
 D) Easier to implement
 
-**Question 8:** In production RAG monitoring, what threshold approach is most effective for quality alerts?
+**Question 8:** In production RAG monitoring, what threshold approach is most effective for quality alerts?  
 A) Fixed absolute thresholds for all metrics
 B) Adaptive thresholds based on historical performance patterns
 C) No thresholds, manual monitoring only

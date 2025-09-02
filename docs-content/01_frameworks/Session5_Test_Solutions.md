@@ -2,7 +2,7 @@
 
 ## 📝 Multiple Choice Test
 
-**Question 1:** What is the primary advantage of PydanticAI over traditional agent frameworks?
+**Question 1:** What is the primary advantage of PydanticAI over traditional agent frameworks?  
 
 A) Faster execution speed
 B) Lower computational cost
@@ -13,7 +13,7 @@ D) Automatic validation and structured outputs with compile-time type checking �
 
 ---
 
-**Question 2:** Which validation constraint ensures a field value falls within a specific numeric range?
+**Question 2:** Which validation constraint ensures a field value falls within a specific numeric range?  
 
 A) Field(range=(0, 100))
 B) Field(between=0:100)
@@ -24,7 +24,7 @@ D) Field(ge=0, le=100) ✅
 
 ---
 
-**Question 3:** What happens when PydanticAI model validation fails?
+**Question 3:** What happens when PydanticAI model validation fails?  
 
 A) Application crashes immediately
 B) Silent failure with default values
@@ -35,7 +35,7 @@ D) ValidationError is raised with detailed field information ✅
 
 ---
 
-**Question 4:** How do you define a tool function for a PydanticAI agent?
+**Question 4:** How do you define a tool function for a PydanticAI agent?  
 
 A) Using @tool decorator
 B) Using def tool() syntax
@@ -46,7 +46,7 @@ D) Using @agent.tool decorator ✅
 
 ---
 
-**Question 5:** What is the purpose of RunContext in PydanticAI?
+**Question 5:** What is the purpose of RunContext in PydanticAI?  
 
 A) Handles error messages
 B) Provides runtime configuration and dependencies ✅
@@ -57,7 +57,7 @@ D) Controls execution speed
 
 ---
 
-**Question 6:** Which decorator enables cross-field validation in Pydantic models?
+**Question 6:** Which decorator enables cross-field validation in Pydantic models?  
 
 A) @cross_validator
 B) @model_validator
@@ -68,7 +68,7 @@ D) @field_validator
 
 ---
 
-**Question 7:** How do you implement custom validation logic for complex business rules?
+**Question 7:** How do you implement custom validation logic for complex business rules?  
 
 A) Custom @validator decorator with logic ✅
 B) External validation services
@@ -79,7 +79,7 @@ D) Database constraints
 
 ---
 
-**Question 8:** What's the best practice for handling validation errors in production?
+**Question 8:** What's the best practice for handling validation errors in production?  
 
 A) Return generic error messages
 B) Log errors and continue silently
@@ -90,7 +90,7 @@ D) Crash and restart
 
 ---
 
-**Question 9:** How do you implement conditional validation based on another field's value?
+**Question 9:** How do you implement conditional validation based on another field's value?  
 
 A) Database triggers
 B) External validation functions
@@ -101,7 +101,7 @@ D) @root_validator accessing all field values ✅
 
 ---
 
-**Question 10:** What's the recommended approach for validating enum-like fields?
+**Question 10:** What's the recommended approach for validating enum-like fields?  
 
 A) String validation with allowed values
 B) Custom validation functions
@@ -112,7 +112,7 @@ D) Use Python Enum with automatic validation ✅
 
 ---
 
-**Question 11:** Which pattern prevents cascading failures in agent systems?
+**Question 11:** Which pattern prevents cascading failures in agent systems?  
 
 A) Caching strategies
 B) Circuit breaker with fallback mechanisms ✅
@@ -123,7 +123,7 @@ D) Load balancing only
 
 ---
 
-**Question 12:** How should you handle timeouts in PydanticAI agent execution?
+**Question 12:** How should you handle timeouts in PydanticAI agent execution?  
 
 A) Simple sleep() calls
 B) Manual timeout tracking
@@ -134,7 +134,7 @@ D) Infinite waiting
 
 ---
 
-**Question 13:** What's the best approach for rate limiting agent requests?
+**Question 13:** What's the best approach for rate limiting agent requests?  
 
 A) Semaphores with configurable limits ✅
 B) Random throttling
@@ -145,7 +145,7 @@ D) Fixed delays
 
 ---
 
-**Question 14:** Which metrics are most important for monitoring PydanticAI agents?
+**Question 14:** Which metrics are most important for monitoring PydanticAI agents?  
 
 A) CPU usage only
 B) Memory usage only
@@ -156,7 +156,7 @@ D) Network throughput only
 
 ---
 
-**Question 15:** How should you manage configuration in production PydanticAI applications?
+**Question 15:** How should you manage configuration in production PydanticAI applications?  
 
 A) Environment variables with Pydantic Settings ✅
 B) Hard-coded values
@@ -167,7 +167,7 @@ D) Database storage
 
 ---
 
-**Question 16:** What's the most robust retry strategy for failed agent operations?
+**Question 16:** What's the most robust retry strategy for failed agent operations?  
 
 A) Exponential backoff with circuit breaker ✅
 B) Fixed interval retries
@@ -178,7 +178,7 @@ D) Random intervals
 
 ---
 
-**Question 17:** How do you handle partial failures in multi-step agent workflows?
+**Question 17:** How do you handle partial failures in multi-step agent workflows?  
 
 A) Manual intervention only
 B) Circuit breaker with fallback strategies ✅
@@ -189,7 +189,7 @@ D) Ignore failures
 
 ---
 
-**Question 18:** Which logging strategy provides the best observability?
+**Question 18:** Which logging strategy provides the best observability?  
 
 A) Simple text logs
 B) Debug statements only
@@ -200,7 +200,7 @@ D) Structured logging with correlation IDs ✅
 
 ---
 
-**Question 19:** How should you integrate PydanticAI with existing systems?
+**Question 19:** How should you integrate PydanticAI with existing systems?  
 
 A) Direct database access
 B) File-based integration
@@ -211,7 +211,7 @@ D) Manual data transformation
 
 ---
 
-**Question 20:** What's the best practice for handling transient errors?
+**Question 20:** What's the best practice for handling transient errors?  
 
 A) Exponential backoff with jitter and max retries ✅
 B) Immediate failure
@@ -222,7 +222,7 @@ D) Fixed retries
 
 ---
 
-**Question 21:** Which caching strategy works best for PydanticAI agents?
+**Question 21:** Which caching strategy works best for PydanticAI agents?  
 
 A) No caching
 B) Infinite caching
@@ -233,7 +233,7 @@ D) LRU cache with TTL for frequently accessed data ✅
 
 ---
 
-**Question 22:** What is the benefit of batch processing in PydanticAI applications?
+**Question 22:** What is the benefit of batch processing in PydanticAI applications?  
 
 A) Simpler code structure
 B) Easier debugging
@@ -244,7 +244,7 @@ D) Improved throughput and resource utilization ✅
 
 ---
 
-**Question 23:** How should you optimize PydanticAI model validation performance?
+**Question 23:** How should you optimize PydanticAI model validation performance?  
 
 A) Use field-level caching and validation shortcuts ✅
 B) Disable all validation
@@ -255,7 +255,7 @@ D) Use external validation services
 
 ---
 
-**Question 24:** Which approach minimizes memory usage in large-scale PydanticAI deployments?
+**Question 24:** Which approach minimizes memory usage in large-scale PydanticAI deployments?  
 
 A) Cache all data permanently
 B) Load everything in memory
@@ -266,7 +266,7 @@ D) Use only global variables
 
 ---
 
-**Question 25:** What is the most effective way to monitor PydanticAI agent performance?
+**Question 25:** What is the most effective way to monitor PydanticAI agent performance?  
 
 A) Automated metrics collection with alerts and dashboards ✅
 B) Manual log review

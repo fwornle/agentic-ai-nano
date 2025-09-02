@@ -8,35 +8,33 @@ Welcome to the future of data engineering: where individual processing becomes c
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Multi-Agent Concepts
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand core multi-agent coordination principles
+=== "🎯 Observer (45-60 min)"
 
-Key concepts covered in this document:
-- ReAct Pattern fundamentals
-- Basic multi-agent communication
-- Essential coordination patterns
-- Production readiness basics
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: Core multi-agent coordination principles, ReAct pattern fundamentals
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### 📝 Participant Path - Practical Implementation
-**Time Investment**: 3-4 hours
-**Outcome**: Implement multi-agent systems in real projects
+=== "📝 Participant (3-4 hours)"
 
-Additional files for practical application:
-- 📝 [Session9_Practical_Coordination.md](Session9_Practical_Coordination.md) - ReAct implementation + Communication patterns
-- 📝 [Session9_Implementation_Guide.md](Session9_Implementation_Guide.md) - Planning systems + Production setup
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Implement multi-agent systems, practical coordination patterns
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
 
-### ⚙️ Implementer Path - Complete Mastery
-**Time Investment**: 8-12 hours
-**Outcome**: Deep expertise in enterprise multi-agent systems
+=== "⚙️ Implementer (8-12 hours)"
 
-Advanced files for complete understanding:
-- ⚙️ [Session9_Advanced_ReAct.md](Session9_Advanced_ReAct.md) - Advanced reasoning patterns
-- ⚙️ [Session9_Advanced_Coordination.md](Session9_Advanced_Coordination.md) - Complex coordination algorithms
-- ⚙️ [Session9_Advanced_Planning.md](Session9_Advanced_Planning.md) - HTN planning + Dynamic systems
-- ⚙️ [Session9_Production_Systems.md](Session9_Production_Systems.md) - Enterprise deployment patterns
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Enterprise multi-agent systems, advanced coordination algorithms
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+---
 
 **Code Files**: All examples use files in [`src/session9/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session9)
 **Quick Start**: Run `cd src/session9 && python react_agent.py` to see multi-agent data processing coordination
@@ -324,31 +322,31 @@ python planning_systems.py               # HTN planning for data processing
 
 Test your understanding of multi-agent patterns and coordination strategies for data processing.
 
-**Question 1:** What does "ReAct" stand for in the ReAct pattern for data processing?
+**Question 1:** What does "ReAct" stand for in the ReAct pattern for data processing?  
 A) Read and Act
 B) Reasoning and Acting
 C) Reflect and Act
 D) Retrieve and Act
 
-**Question 2:** What is the primary benefit of the ReAct pattern over direct data processing?
+**Question 2:** What is the primary benefit of the ReAct pattern over direct data processing?  
 A) Faster execution
 B) Transparent reasoning with step-by-step data processing thought processes
 C) Lower computational cost
 D) Simpler implementation
 
-**Question 3:** In multi-agent data systems, what is the purpose of a Data Communication Hub?
+**Question 3:** In multi-agent data systems, what is the purpose of a Data Communication Hub?  
 A) Store processed data
 B) Coordinate message passing between data processing agents
 C) Execute data transformation logic
 D) Manage user interface
 
-**Question 4:** What is the main advantage of hierarchical coordination patterns in data processing?
+**Question 4:** What is the main advantage of hierarchical coordination patterns in data processing?  
 A) Faster execution
 B) Clear command structure with specialized data processing delegation
 C) Lower resource usage
 D) Simpler implementation
 
-**Question 5:** What is essential for production multi-agent systems?
+**Question 5:** What is essential for production multi-agent systems?  
 A) Complex algorithms only
 B) Health checking, monitoring, and configuration management
 C) Single-threaded processing

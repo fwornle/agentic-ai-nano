@@ -1,20 +1,32 @@
 # 🎯📝⚙️ Session 6: Agent Communication Protocol (ACP) - Local-First Multi-Agent Networks
 
-## Learning Path Overview
+## 🎯📝⚙️ Learning Path Overview
 
-This session offers comprehensive coverage of Agent Communication Protocol (ACP) through three distinct learning paths:
+This session offers three distinct learning paths designed to match your goals and time investment:
 
-### 🎯 Observer Path - Essential Concepts
-**Time Investment**: 45-60 minutes
-**Outcome**: Understand ACP fundamentals and local-first principles
+=== "🎯 Observer (45-60 min)"
 
-### 📝 Participant Path - Practical Implementation
-**Time Investment**: 2-3 hours
-**Outcome**: Build and deploy ACP agent networks
+    **Focus**: Understanding concepts and architecture
+    
+    **Activities**: ACP fundamentals, local-first principles, multi-agent communication
+    
+    **Ideal for**: Decision makers, architects, overview learners
 
-### ⚙️ Implementer Path - Advanced Mastery
-**Time Investment**: 4-5 hours
-**Outcome**: Master complex agent orchestration and production patterns
+=== "📝 Participant (2-3 hours)"
+
+    **Focus**: Guided implementation and analysis
+    
+    **Activities**: Build and deploy ACP agent networks, implement communication protocols
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (4-5 hours)"
+
+    **Focus**: Complete implementation and customization
+    
+    **Activities**: Complex agent orchestration, production patterns, advanced networking
+    
+    **Ideal for**: Senior engineers, architects, specialists
 
 ---
 
@@ -786,61 +798,61 @@ But that's a story for another session. For now, take pride in what you've built
 
 Before we venture into the wider world of agent collaboration, let's ensure you've mastered the fundamentals:
 
-**Question 1:** What is the primary purpose of the Agent Communication Protocol (ACP)?
+**Question 1:** What is the primary purpose of the Agent Communication Protocol (ACP)?  
 A) To provide internet-dependent agent communication
 B) To replace REST APIs entirely
 C) To facilitate local-first agent coordination with minimal overhead
 D) To enable cloud-based agent coordination
 
-**Question 2:** What is the main advantage of ACP over traditional cloud-dependent agent protocols?
+**Question 2:** What is the main advantage of ACP over traditional cloud-dependent agent protocols?  
 A) Higher performance
 B) Easier implementation
 C) Better security
 D) Offline capability and low latency
 
-**Question 3:** What information must an ACP agent capability declaration include?
+**Question 3:** What information must an ACP agent capability declaration include?  
 A) Only the agent ID
 B) Only the capability name
 C) Just the input parameters
 D) Name, description, input schema, and output schema
 
-**Question 4:** How do ACP agents discover each other's capabilities?
+**Question 4:** How do ACP agents discover each other's capabilities?  
 A) Via embedded metadata and local REST endpoints
 B) Through a centralized cloud registry
 C) Through manual configuration files
 D) Using UDP broadcasts only
 
-**Question 5:** What communication protocol does ACP use for agent interactions?
+**Question 5:** What communication protocol does ACP use for agent interactions?  
 A) WebSocket
 B) gRPC
 C) Custom binary protocol
 D) Standard HTTP/REST
 
-**Question 6:** What role does the coordinator agent play in ACP architectures?
+**Question 6:** What role does the coordinator agent play in ACP architectures?  
 A) Provides security authentication
 B) Orchestrates multi-agent workflows and manages task distribution
 C) Stores all data permanently
 D) Acts as a backup for other agents
 
-**Question 7:** Why are specialized agents (like data agents and text agents) beneficial in ACP systems?
+**Question 7:** Why are specialized agents (like data agents and text agents) beneficial in ACP systems?  
 A) They cost less to deploy
 B) They require less memory
 C) They provide focused expertise and better task delegation
 D) They are faster than general-purpose agents
 
-**Question 8:** How do agents register their services in an ACP system?
+**Question 8:** How do agents register their services in an ACP system?  
 A) Through manual configuration
 B) Using external service registries only
 C) Through database entries
 D) By exposing standardized metadata endpoints
 
-**Question 9:** What is the purpose of the local registry in ACP systems?
+**Question 9:** What is the purpose of the local registry in ACP systems?  
 A) To store all agent data
 B) To provide internet connectivity
 C) To facilitate agent discovery and capability lookup
 D) To handle authentication
 
-**Question 10:** Why is ACP designed to be framework-agnostic?
+**Question 10:** Why is ACP designed to be framework-agnostic?  
 A) To improve performance
 B) To simplify testing
 C) To enable integration with any agent implementation
