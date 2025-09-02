@@ -1,17 +1,17 @@
 # 🎯 Session 5: RAG Evaluation Essentials
 
-> **🎯 OBSERVER PATH - Essential Concepts**  
-> Time Investment: 30-45 minutes  
-> Outcome: Understand core RAG evaluation principles  
+> **🎯 OBSERVER PATH - Essential Concepts**
+> Time Investment: 30-45 minutes
+> Outcome: Understand core RAG evaluation principles
 
 ## Learning Outcomes
 
-By completing this section, you will:  
+By completing this section, you will:
 
-- Understand why RAG evaluation is critical for system success  
-- Master the three essential evaluation dimensions  
-- Learn fundamental metrics for measuring RAG performance  
-- Recognize when evaluation frameworks are necessary  
+- Understand why RAG evaluation is critical for system success
+- Master the three essential evaluation dimensions
+- Learn fundamental metrics for measuring RAG performance
+- Recognize when evaluation frameworks are necessary
 
 ## The RAG Evaluation Challenge
 
@@ -27,11 +27,11 @@ The complexity multiplies in production where edge cases, domain shifts, and use
 
 ### The Three Essential Dimensions
 
-The key insight is that RAG systems fail in interconnected ways that single metrics can't capture. You need evaluation frameworks that assess multiple dimensions simultaneously:  
+The key insight is that RAG systems fail in interconnected ways that single metrics can't capture. You need evaluation frameworks that assess multiple dimensions simultaneously:
 
-1. **Retrieval Quality**: Are your Session 3 indexing optimizations actually finding better documents?  
-2. **Generation Quality**: Do your Session 4 query enhancements lead to more accurate responses?  
-3. **End-to-End Utility**: Does the complete system deliver better user experiences?  
+1. **Retrieval Quality**: Are your Session 3 indexing optimizations actually finding better documents?
+2. **Generation Quality**: Do your Session 4 query enhancements lead to more accurate responses?
+3. **End-to-End Utility**: Does the complete system deliver better user experiences?
 
 This multi-dimensional approach reveals hidden trade-offs and guides optimization priorities.
 
@@ -58,31 +58,31 @@ This data structure captures all the essential information needed for comprehens
 
 ### Core Metrics Categories
 
-**Retrieval Metrics:**  
-- **Precision@K**: How many of the top-K retrieved documents are relevant?  
-- **Recall@K**: What percentage of all relevant documents are in top-K results?  
-- **MRR (Mean Reciprocal Rank)**: How quickly do relevant results appear?  
+**Retrieval Metrics:**
+- **Precision@K**: How many of the top-K retrieved documents are relevant?
+- **Recall@K**: What percentage of all relevant documents are in top-K results?
+- **MRR (Mean Reciprocal Rank)**: How quickly do relevant results appear?
 
-**Generation Metrics:**  
-- **Faithfulness**: Is the response factually consistent with retrieved contexts?  
-- **Relevance**: Does the response directly address the query?  
-- **Completeness**: Does the response fully answer all aspects of the question?  
+**Generation Metrics:**
+- **Faithfulness**: Is the response factually consistent with retrieved contexts?
+- **Relevance**: Does the response directly address the query?
+- **Completeness**: Does the response fully answer all aspects of the question?
 
-**End-to-End Metrics:**  
-- **Answer Correctness**: How accurate is the final response compared to ground truth?  
-- **User Satisfaction**: Would users find this response helpful?  
-- **Task Completion**: Can users accomplish their goals with this response?  
+**End-to-End Metrics:**
+- **Answer Correctness**: How accurate is the final response compared to ground truth?
+- **User Satisfaction**: Would users find this response helpful?
+- **Task Completion**: Can users accomplish their goals with this response?
 
 ## 🎯 RAGAS Framework Basics
 
-RAGAS (RAG Assessment) provides standardized evaluation metrics for RAG systems. The framework focuses on four core dimensions:  
+RAGAS (RAG Assessment) provides standardized evaluation metrics for RAG systems. The framework focuses on four core dimensions:
 
 ### Essential RAGAS Metrics
 
 ```python
 from ragas.metrics import (
     faithfulness,        # Factual consistency
-    answer_relevancy,    # Answer relevance to question  
+    answer_relevancy,    # Answer relevance to question
     context_precision,   # Precision of retrieved context
     context_recall       # Recall of retrieved context
 )
@@ -114,43 +114,43 @@ RAGAS requires your evaluation data in this specific structure, making it easy t
 
 ### Development Phase Evaluation
 
-Use evaluation frameworks when:  
+Use evaluation frameworks when:
 
-- **Comparing Enhancement Strategies**: Which Session 4 techniques actually improve performance?  
-- **Component Optimization**: Does better chunking from Session 2 improve end-to-end results?  
-- **Architecture Decisions**: Should you use dense retrieval, hybrid search, or knowledge graphs?  
+- **Comparing Enhancement Strategies**: Which Session 4 techniques actually improve performance?
+- **Component Optimization**: Does better chunking from Session 2 improve end-to-end results?
+- **Architecture Decisions**: Should you use dense retrieval, hybrid search, or knowledge graphs?
 
 ### Production Monitoring Needs
 
-Continuous evaluation becomes essential for:  
+Continuous evaluation becomes essential for:
 
-- **Quality Assurance**: Maintain consistent response quality at scale  
-- **Drift Detection**: Identify when performance degrades over time  
-- **User Experience**: Ensure your system meets real-world user needs  
+- **Quality Assurance**: Maintain consistent response quality at scale
+- **Drift Detection**: Identify when performance degrades over time
+- **User Experience**: Ensure your system meets real-world user needs
 
 ## 🎯 Quick Evaluation Setup
 
-For immediate RAG evaluation, follow this essential pattern:  
+For immediate RAG evaluation, follow this essential pattern:
 
 ```python
 class SimpleRAGEvaluator:
     """Minimal RAG evaluation for quick assessments."""
-    
+
     def __init__(self, embedding_model):
         self.embedding_model = embedding_model
-    
+
     def evaluate_retrieval(self, query, retrieved_docs):
         """Quick retrieval quality check."""
         query_embedding = self.embedding_model.encode([query])[0]
         similarities = []
-        
+
         for doc in retrieved_docs:
             doc_embedding = self.embedding_model.encode([doc])[0]
             similarity = self.calculate_cosine_similarity(
                 query_embedding, doc_embedding
             )
             similarities.append(similarity)
-        
+
         return {
             'avg_similarity': sum(similarities) / len(similarities),
             'max_similarity': max(similarities),
@@ -164,33 +164,34 @@ This simple evaluator gives you immediate feedback on whether your retrieval sys
 
 ### Red Flags in RAG Performance
 
-Watch for these critical warning signs:  
+Watch for these critical warning signs:
 
-- **Low Semantic Similarity**: Query and retrieved documents have little semantic overlap  
-- **Response Contradictions**: Generated answers contradict information in contexts  
-- **Empty or Generic Responses**: System fails to utilize retrieved information  
-- **Inconsistent Performance**: Quality varies dramatically across similar queries  
+- **Low Semantic Similarity**: Query and retrieved documents have little semantic overlap
+- **Response Contradictions**: Generated answers contradict information in contexts
+- **Empty or Generic Responses**: System fails to utilize retrieved information
+- **Inconsistent Performance**: Quality varies dramatically across similar queries
 
 ### Success Indicators
 
-Your evaluation should show:  
+Your evaluation should show:
 
-- **High Context Utilization**: Responses effectively use retrieved information  
-- **Factual Consistency**: Generated content aligns with source documents  
-- **Query Relevance**: Responses directly address what users asked  
-- **Appropriate Detail Level**: Neither too brief nor excessively verbose  
+- **High Context Utilization**: Responses effectively use retrieved information
+- **Factual Consistency**: Generated content aligns with source documents
+- **Query Relevance**: Responses directly address what users asked
+- **Appropriate Detail Level**: Neither too brief nor excessively verbose
 
 ## Learning Path Summary
 
 **🎯 Observer Path Complete**: You now understand why RAG evaluation is critical, the three essential evaluation dimensions, and fundamental metrics for measuring performance. You can recognize when evaluation frameworks are necessary and understand the basic structure of quality assessment.
 
-**Next Steps for Deeper Learning:**  
+**Next Steps for Deeper Learning:**
 
-- **📝 Participant Path**: [RAG Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Hands-on RAGAS setup and usage  
-- **⚙️ Implementer Path**: [Advanced Custom Metrics →](Session5_Advanced_Custom_Metrics.md) - Build sophisticated domain-specific evaluators  
-
+- **📝 Participant Path**: [RAG Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Hands-on RAGAS setup and usage
+- **⚙️ Implementer Path**: [Advanced Custom Metrics →](Session5_Advanced_Custom_Metrics.md) - Build sophisticated domain-specific evaluators
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Previous: Session 4 - Query Enhancement](Session4_Query_Enhancement_Context_Augmentation.md) | [Module Overview](Session5_RAG_Evaluation_Quality_Assessment.md) | [Next: RAGAS Practice →](Session5_RAGAS_Implementation_Practice.md)
+**Previous:** [Session 4 - Query Enhancement & Context Augmentation ←](Session4_Query_Enhancement_Context_Augmentation.md)
+**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+---

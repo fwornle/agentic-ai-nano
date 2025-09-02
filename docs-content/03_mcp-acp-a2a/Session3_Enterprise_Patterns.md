@@ -1,18 +1,18 @@
 # ⚙️ Session 3 Advanced: Enterprise Agent Patterns
 
-> **⚙️ IMPLEMENTER PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer and 📝 Participant paths  
-> Time Investment: 2-3 hours  
-> Outcome: Master production deployment and advanced error handling patterns  
+> **⚙️ IMPLEMENTER PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer and 📝 Participant paths
+> Time Investment: 2-3 hours
+> Outcome: Master production deployment and advanced error handling patterns
 
 ## Advanced Learning Outcomes
 
-After completing this module, you will master:  
+After completing this module, you will master:
 
-- Implementing production-ready error handling and recovery mechanisms  
-- Building scalable multi-tool coordination patterns for enterprise environments  
-- Designing health monitoring and observability systems for MCP integrations  
-- Creating advanced agent architectures for high-throughput applications  
+- Implementing production-ready error handling and recovery mechanisms
+- Building scalable multi-tool coordination patterns for enterprise environments
+- Designing health monitoring and observability systems for MCP integrations
+- Creating advanced agent architectures for high-throughput applications
 
 ## Advanced Multi-Tool Coordination
 
@@ -26,21 +26,21 @@ Here's how sophisticated agents analyze and plan their tool usage:
 
 #### 1. Query Analysis: Understanding Intent
 
-- **Parse user intent**: What is the user trying to accomplish?  
-- **Extract key entities**: Cities, dates, specific requests  
-- **Identify complexity level**: Simple lookup or multi-step process?  
+- **Parse user intent**: What is the user trying to accomplish?
+- **Extract key entities**: Cities, dates, specific requests
+- **Identify complexity level**: Simple lookup or multi-step process?
 
 #### 2. Tool Capability Mapping
 
-- **Identify relevant tools**: Which tools can help with this specific task?  
-- **Assess tool dependencies**: Do any tools require input from others?  
-- **Plan execution sequence**: What order makes logical sense?  
+- **Identify relevant tools**: Which tools can help with this specific task?
+- **Assess tool dependencies**: Do any tools require input from others?
+- **Plan execution sequence**: What order makes logical sense?
 
 #### 3. Execution Strategy
 
-- **Handle failures gracefully**: What if a tool doesn't work as expected?  
-- **Optimize for efficiency**: Can any operations run in parallel?  
-- **Maintain context**: How do we preserve information between tool calls?  
+- **Handle failures gracefully**: What if a tool doesn't work as expected?
+- **Optimize for efficiency**: Can any operations run in parallel?
+- **Maintain context**: How do we preserve information between tool calls?
 
 ### Real-World Decision Tree Example
 
@@ -49,7 +49,7 @@ User: "What's the weather in London and do I have any files about UK shipping?"
 
 Agent reasoning process:
 ├── Weather query detected → Use weather tool
-├── File search detected → Use filesystem tool  
+├── File search detected → Use filesystem tool
 └── Coordination needed → Use both tools, then synthesize results
 ```
 
@@ -59,11 +59,11 @@ Agent reasoning process:
 async def start_all_servers(self) -> Dict[str, bool]:
     """The startup orchestration - Bringing your digital workforce online."""
     results = {}
-    
+
     for name, config in self.server_configs.items():
         result = await self._start_single_server(name, config)
         results[name] = result
-    
+
     return results
 ```
 
@@ -79,18 +79,18 @@ async def _start_single_server(self, name: str, config: MCPServerConfig) -> bool
             args=config.args,
             timeout=config.timeout
         )
-        
+
         # The critical handshake - Test connection and discover tools
         await adapter.start()
         tools = await adapter.list_tools()
-        
+
         # Success - Store adapter and update status
         self.adapters[name] = adapter
         self.health_status[name] = True
-        
+
         logger.info(f"Server '{name}' started with {len(tools)} tools")
         return True
-        
+
     except Exception as e:
         logger.error(f"Failed to start server '{name}': {e}")
         self.health_status[name] = False
@@ -107,12 +107,12 @@ async def get_adapter(self, server_name: str) -> Optional[MCPAdapter]:
     if server_name not in self.adapters:
         logger.warning(f"Server '{server_name}' not found")
         return None
-    
+
     if not self.health_status.get(server_name, False):
         logger.warning(f"Server '{server_name}' is unhealthy")
         # The resilience factor - Attempt automatic restart
         await self._restart_server(server_name)
-    
+
     return self.adapters.get(server_name)
 
 async def _restart_server(self, name: str):
@@ -122,21 +122,21 @@ async def _restart_server(self, name: str):
         await self._start_single_server(name, config)
 ```
 
-This server management system includes features that make the difference in production LangChain-MCP environments:  
+This server management system includes features that make the difference in production LangChain-MCP environments:
 
-- **Health monitoring**: Continuous checks with automatic restart - reliability through automation for 24/7 operations  
-- **Error recovery**: Graceful handling of server failures - resilience by design for enterprise reliability  
-- **Resource management**: Proper cleanup prevents memory leaks - operational sustainability in long-running deployments  
-- **Observability**: Comprehensive logging for debugging - transparency for troubleshooting complex integration issues  
-- **Startup validation**: Comprehensive server testing before marking as ready - prevents runtime tool failures  
-- **Resilient orchestration**: Continue starting other servers when individual servers fail - maximize available capabilities  
+- **Health monitoring**: Continuous checks with automatic restart - reliability through automation for 24/7 operations
+- **Error recovery**: Graceful handling of server failures - resilience by design for enterprise reliability
+- **Resource management**: Proper cleanup prevents memory leaks - operational sustainability in long-running deployments
+- **Observability**: Comprehensive logging for debugging - transparency for troubleshooting complex integration issues
+- **Startup validation**: Comprehensive server testing before marking as ready - prevents runtime tool failures
+- **Resilient orchestration**: Continue starting other servers when individual servers fail - maximize available capabilities
 
 ### Building Production-Ready Multi-Tool Agents
 
 ```python
 class MultiToolMCPAgent:
     """Advanced ReAct agent using multiple MCP servers - Your coordination engine."""
-    
+
     def __init__(self, mcp_manager: MCPServerManager):
         self.mcp_manager = mcp_manager
         self.llm = None
@@ -153,30 +153,30 @@ class MultiToolMCPAgent:
                 temperature=Config.LLM.temperature,
                 api_key=Config.OPENAI_API_KEY
             )
-            
+
             # Memory system - Initialize conversation memory
             self.memory = ConversationBufferWindowMemory(
                 k=10,  # Remember last 10 exchanges
                 memory_key="chat_history",
                 return_messages=True
             )
-            
+
             # Tool ecosystem - Collect tools from all available servers
             langchain_tools = await self._collect_all_tools()
-            
+
             if not langchain_tools:
                 logger.error("No tools available from MCP servers")
                 return False
-            
+
             # Agent creation - Create enhanced agent executor
             self.agent_executor = self._create_enhanced_agent(langchain_tools)
-            
+
             tool_count = len(langchain_tools)
             server_count = len(self.available_tools)
             logger.info(f"Multi-tool agent: {tool_count} tools from {server_count} servers")
-            
+
             return True
-            
+
         except Exception as e:
             logger.error(f"Failed to initialize multi-tool agent: {e}")
             return False
@@ -190,7 +190,7 @@ This class design embodies the separation of concerns principle. The agent doesn
 async def _collect_all_tools(self) -> List[Tool]:
     """The tool aggregator - Collect tools from all available MCP servers."""
     all_tools = []
-    
+
     # Discover all available servers
     for server_name in self.mcp_manager.server_configs.keys():
         try:
@@ -198,25 +198,25 @@ async def _collect_all_tools(self) -> List[Tool]:
             if not adapter:
                 logger.warning(f"Skipping unavailable server: {server_name}")
                 continue
-            
+
             # Get tools from this server
             mcp_tools = await adapter.list_tools()
             server_tools = self._create_langchain_tools(mcp_tools, adapter, server_name)
-            
+
             # Track tools per server for management
             self.available_tools[server_name] = {
                 "tool_count": len(server_tools),
                 "tool_names": [tool.name for tool in server_tools],
                 "adapter": adapter
             }
-            
+
             all_tools.extend(server_tools)
             logger.info(f"Collected {len(server_tools)} tools from {server_name}")
-            
+
         except Exception as e:
             logger.error(f"Failed to collect tools from {server_name}: {e}")
             continue
-    
+
     return all_tools
 ```
 
@@ -228,22 +228,22 @@ This tool collection method demonstrates resilient integration patterns. It atte
 def _create_langchain_tools(self, mcp_tools, adapter, server_name):
     """The enhanced translation layer - Converting MCP tools with comprehensive error handling."""
     langchain_tools = []
-    
+
     for mcp_tool in mcp_tools:
         # Enhanced wrapper with server context
         async def tool_wrapper(tool_input: str, tool_name=mcp_tool.name, srv_name=server_name):
             """Enhanced wrapper with retry logic and error context."""
             max_retries = 3
-            
+
             for attempt in range(max_retries):
                 try:
                     # Health check before tool call
                     if not self.mcp_manager.health_status.get(srv_name, False):
                         await self.mcp_manager._restart_server(srv_name)
-                    
+
                     result = await adapter.call_tool(tool_name, {"input": tool_input})
                     return f"[{srv_name}] {str(result)}"
-                    
+
                 except Exception as e:
                     if attempt < max_retries - 1:
                         logger.warning(f"Tool call failed (attempt {attempt + 1}), retrying: {e}")
@@ -253,7 +253,7 @@ def _create_langchain_tools(self, mcp_tools, adapter, server_name):
                         error_msg = f"Tool {tool_name} from {srv_name} failed after {max_retries} attempts: {str(e)}"
                         logger.error(error_msg)
                         return error_msg
-        
+
         # Enhanced LangChain tool with server context
         langchain_tool = Tool(
             name=f"{server_name}_{mcp_tool.name}",
@@ -261,17 +261,17 @@ def _create_langchain_tools(self, mcp_tools, adapter, server_name):
             func=lambda x, tn=mcp_tool.name, sn=server_name: asyncio.create_task(tool_wrapper(x, tn, sn))
         )
         langchain_tools.append(langchain_tool)
-    
+
     return langchain_tools
 ```
 
-This enhanced tool wrapper provides several production-ready features:  
+This enhanced tool wrapper provides several production-ready features:
 
-- **Server context**: Tools are prefixed with server names for clarity  
-- **Retry logic**: Failed tool calls are automatically retried up to 3 times  
-- **Health checking**: Server health is verified before tool calls  
-- **Comprehensive logging**: All failures are logged with context  
-- **Graceful degradation**: Tools return error messages instead of crashing  
+- **Server context**: Tools are prefixed with server names for clarity
+- **Retry logic**: Failed tool calls are automatically retried up to 3 times
+- **Health checking**: Server health is verified before tool calls
+- **Comprehensive logging**: All failures are logged with context
+- **Graceful degradation**: Tools return error messages instead of crashing
 
 ### Enhanced Agent Creation with Sophisticated Prompting
 
@@ -314,19 +314,19 @@ Conversation history: {chat_history}
 Question: {input}
 {agent_scratchpad}
 """)
-    
+
     # Generate server summary for prompt
     tool_servers = []
     for server_name, info in self.available_tools.items():
         tool_servers.append(f"- {server_name}: {info['tool_count']} tools ({', '.join(info['tool_names'])})")
-    
+
     # Create enhanced agent
     agent = create_react_agent(
         llm=self.llm,
         tools=langchain_tools,
         prompt=react_prompt.partial(tool_servers="\n".join(tool_servers))
     )
-    
+
     return AgentExecutor(
         agent=agent,
         tools=langchain_tools,
@@ -339,13 +339,13 @@ Question: {input}
     )
 ```
 
-This enhanced prompting system provides several critical advantages:  
+This enhanced prompting system provides several critical advantages:
 
-- **Server awareness**: The agent understands which servers provide which tools  
-- **Failure recovery**: Clear instructions for handling tool failures and trying alternatives  
-- **Cross-validation**: Encouragement to use multiple tools for verification  
-- **Context synthesis**: Guidelines for combining information from multiple sources  
-- **Timeout protection**: Maximum execution time prevents hanging agents  
+- **Server awareness**: The agent understands which servers provide which tools
+- **Failure recovery**: Clear instructions for handling tool failures and trying alternatives
+- **Cross-validation**: Encouragement to use multiple tools for verification
+- **Context synthesis**: Guidelines for combining information from multiple sources
+- **Timeout protection**: Maximum execution time prevents hanging agents
 
 ### Advanced Agent Runtime Features
 
@@ -358,23 +358,23 @@ async def run(self, query: str, context: Dict[str, Any] = None) -> Dict[str, Any
             "error": "Agent not initialized. Call initialize() first.",
             "query": query
         }
-    
+
     start_time = asyncio.get_event_loop().time()
-    
+
     try:
         # Prepare enhanced input with context
         enhanced_input = {"input": query}
         if context:
             enhanced_input.update(context)
-        
+
         # Execute with timeout and monitoring
         result = await asyncio.wait_for(
             self.agent_executor.ainvoke(enhanced_input),
             timeout=Config.AGENT_CONFIG.get("timeout", 300)
         )
-        
+
         execution_time = asyncio.get_event_loop().time() - start_time
-        
+
         return {
             "success": True,
             "query": query,
@@ -383,7 +383,7 @@ async def run(self, query: str, context: Dict[str, Any] = None) -> Dict[str, Any
             "steps": len(result.get("intermediate_steps", [])),
             "tools_used": self._extract_tools_used(result.get("intermediate_steps", []))
         }
-        
+
     except asyncio.TimeoutError:
         execution_time = asyncio.get_event_loop().time() - start_time
         return {
@@ -392,7 +392,7 @@ async def run(self, query: str, context: Dict[str, Any] = None) -> Dict[str, Any
             "error": f"Agent execution timed out after {execution_time:.2f} seconds",
             "execution_time": execution_time
         }
-        
+
     except Exception as e:
         execution_time = asyncio.get_event_loop().time() - start_time
         logger.error(f"Agent execution failed: {e}")
@@ -412,29 +412,30 @@ def _extract_tools_used(self, intermediate_steps) -> List[str]:
     return list(set(tools_used))  # Remove duplicates
 ```
 
-This enhanced execution method provides comprehensive monitoring and error handling essential for production environments:  
+This enhanced execution method provides comprehensive monitoring and error handling essential for production environments:
 
-- **Timeout protection**: Prevents agents from hanging indefinitely  
-- **Performance monitoring**: Tracks execution time and step count  
-- **Tool usage tracking**: Records which tools were used for analytics  
-- **Context injection**: Allows additional context to be passed to agents  
-- **Structured responses**: Consistent response format for integration  
+- **Timeout protection**: Prevents agents from hanging indefinitely
+- **Performance monitoring**: Tracks execution time and step count
+- **Tool usage tracking**: Records which tools were used for analytics
+- **Context injection**: Allows additional context to be passed to agents
+- **Structured responses**: Consistent response format for integration
 
 ### Key Advances Over Basic Agents
 
-This enterprise-ready multi-tool agent represents a significant evolution from basic patterns:  
+This enterprise-ready multi-tool agent represents a significant evolution from basic patterns:
 
-- **Multi-server resilience**: Continues operating when individual servers fail - operational continuity  
-- **Enhanced error handling**: Comprehensive retry logic and error context - production reliability  
-- **Performance monitoring**: Detailed execution metrics and tool usage tracking - operational observability  
-- **Context awareness**: Conversation memory and context injection - intelligent interaction patterns  
-- **Server-aware prompting**: Agent understands its tool ecosystem - intelligent tool selection  
-- **Health integration**: Automatic server health checking and recovery - self-healing architecture  
+- **Multi-server resilience**: Continues operating when individual servers fail - operational continuity
+- **Enhanced error handling**: Comprehensive retry logic and error context - production reliability
+- **Performance monitoring**: Detailed execution metrics and tool usage tracking - operational observability
+- **Context awareness**: Conversation memory and context injection - intelligent interaction patterns
+- **Server-aware prompting**: Agent understands its tool ecosystem - intelligent tool selection
+- **Health integration**: Automatic server health checking and recovery - self-healing architecture
 
 These patterns form the foundation for enterprise-grade LangChain-MCP integrations that can handle real-world complexity and operational demands.
-
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Advanced Workflows](Session3_Advanced_Workflows.md) | [Next Advanced: Production Deployment →](Session3_Production_Deployment.md)
+**Previous:** [Session 2 - FileSystem MCP Server ←](Session2_FileSystem_MCP_Server.md)
+**Next:** [Session 4 - Production MCP Deployment →](Session4_Production_MCP_Deployment.md)
+---

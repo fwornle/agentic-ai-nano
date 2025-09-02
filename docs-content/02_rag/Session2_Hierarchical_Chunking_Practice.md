@@ -1,18 +1,18 @@
 # 📝 Session 2: Hierarchical Chunking Practice
 
-> **📝 PARTICIPANT PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer path concepts  
-> Time Investment: 2-3 hours  
-> Outcome: Build structure-aware chunking systems  
+> **📝 PARTICIPANT PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer path concepts
+> Time Investment: 2-3 hours
+> Outcome: Build structure-aware chunking systems
 
 ## Learning Outcomes
 
-After completing this implementation guide, you will:  
+After completing this implementation guide, you will:
 
-- Build hierarchical chunkers that respect document structure  
-- Implement intelligent overlap management for context preservation  
-- Create section-aware grouping algorithms  
-- Handle edge cases in document structure analysis  
+- Build hierarchical chunkers that respect document structure
+- Implement intelligent overlap management for context preservation
+- Create section-aware grouping algorithms
+- Handle edge cases in document structure analysis
 
 ---
 
@@ -47,16 +47,16 @@ This prevents context loss at chunk boundaries, which is crucial for maintaining
         """Create chunks that preserve document hierarchy."""
         # Step 1: Analyze document structure
         elements = self.analyzer.analyze_structure(document.page_content)
-        
+
         # Step 2: Group elements into logical sections
         sections = self._group_elements_by_hierarchy(elements)
-        
+
         # Step 3: Create chunks from sections
         chunks = []
         for section in sections:
             section_chunks = self._chunk_section(section, document.metadata)
             chunks.extend(section_chunks)
-        
+
         return chunks
 ```
 
@@ -81,7 +81,7 @@ The heart of hierarchical chunking is understanding document structure:
             # Start new section on same or higher level heading
             if (element.element_type == ContentType.HEADING and
                 element.level <= current_level and current_section):
-                
+
                 sections.append(current_section)
                 current_section = [element]
                 current_level = element.level
@@ -118,13 +118,13 @@ Once sections are identified, we chunk them with size management and overlap:
 ### Section Chunking with Size Management
 
 ```python
-    def _chunk_section(self, section: List[DocumentElement], 
+    def _chunk_section(self, section: List[DocumentElement],
                       base_metadata: Dict) -> List[Document]:
         """Create chunks from a document section with intelligent overlap."""
         chunks = []
         current_chunk_elements = []
         current_size = 0
-        
+
         section_title = self._extract_section_title(section)
 
         for element in section:
@@ -249,15 +249,15 @@ Section title extraction identifies the main heading within a section to provide
         """Get elements for chunk overlap."""
         if not elements:
             return []
-        
+
         # Calculate overlap size
         total_size = sum(len(e.content) for e in elements)
         overlap_size = int(total_size * self.overlap_ratio)
-        
+
         # Select last elements that fit in overlap
         overlap_elements = []
         current_size = 0
-        
+
         for element in reversed(elements):
             element_size = len(element.content)
             if current_size + element_size <= overlap_size:
@@ -265,7 +265,7 @@ Section title extraction identifies the main heading within a section to provide
                 current_size += element_size
             else:
                 break
-                
+
         return overlap_elements
 ```
 
@@ -335,10 +335,10 @@ overlap_ratios = [0.0, 0.1, 0.2, 0.3]
 for ratio in overlap_ratios:
     chunker = HierarchicalChunker(max_chunk_size=200, overlap_ratio=ratio)
     chunks = chunker.create_hierarchical_chunks(Document(page_content=sample_doc))
-    
+
     print(f"\nOverlap ratio: {ratio}")
     print(f"Number of chunks: {len(chunks)}")
-    
+
     # Analyze overlap between adjacent chunks
     for i in range(len(chunks) - 1):
         chunk1_words = set(chunks[i].page_content.split())
@@ -402,14 +402,14 @@ for element in elements:
 
 ### Issue 1: Chunks Too Small
 
-**Problem**: Chunks contain only single elements or very little content.  
+**Problem**: Chunks contain only single elements or very little content.
 **Solution**: Adjust `max_chunk_size` or modify section grouping logic:
 
 ```python
 # Add minimum chunk size constraint
 def _chunk_section(self, section, base_metadata, min_chunk_size=150):
     # ... existing code ...
-    
+
     # Only create chunk if minimum size is met
     if current_size >= min_chunk_size or not chunks:
         chunk = self._create_chunk_from_elements(...)
@@ -418,40 +418,40 @@ def _chunk_section(self, section, base_metadata, min_chunk_size=150):
 
 ### Issue 2: Overlap Too Large
 
-**Problem**: Overlap creates excessive duplication between chunks.  
+**Problem**: Overlap creates excessive duplication between chunks.
 **Solution**: Implement smart overlap that prioritizes important content:
 
 ```python
 def _get_smart_overlap_elements(self, elements):
     """Get overlap elements prioritizing headings and key content."""
     overlap_elements = []
-    
+
     # Always include section heading if present
     for element in elements:
         if element.element_type == ContentType.HEADING:
             overlap_elements.append(element)
             break
-    
+
     # Add last few sentences up to overlap limit
     # ... implementation details ...
-    
+
     return overlap_elements
 ```
 
 ### Issue 3: Metadata Inconsistency
 
-**Problem**: Chunk metadata varies inconsistently across similar content.  
+**Problem**: Chunk metadata varies inconsistently across similar content.
 **Solution**: Standardize metadata extraction with validation:
 
 ```python
 def _validate_chunk_metadata(self, metadata):
     """Ensure metadata consistency."""
     required_fields = ["section_title", "content_types", "chunk_type"]
-    
+
     for field in required_fields:
         if field not in metadata:
             metadata[field] = self._get_default_value(field)
-    
+
     return metadata
 ```
 
@@ -467,17 +467,17 @@ Adapt chunk size based on content complexity:
 def _calculate_adaptive_chunk_size(self, section):
     """Calculate optimal chunk size for section."""
     base_size = self.max_chunk_size
-    
+
     # Increase size for code-heavy sections
     code_elements = sum(1 for e in section if e.element_type == ContentType.CODE)
     if code_elements > 2:
         return base_size * 1.3
-    
+
     # Decrease size for list-heavy sections
     list_elements = sum(1 for e in section if e.element_type == ContentType.LIST)
     if list_elements > 5:
         return base_size * 0.8
-    
+
     return base_size
 ```
 
@@ -490,20 +490,20 @@ def _validate_chunk_quality(self, chunk):
     """Validate chunk meets quality standards."""
     content = chunk.page_content
     words = content.split()
-    
+
     # Check minimum information content
     if len(words) < 20:
         return False, "Chunk too short"
-    
+
     # Check for incomplete sentences
     if not content.strip().endswith(('.', '!', '?', ':')):
         return False, "Chunk ends mid-sentence"
-    
+
     # Check for balanced content types
     metadata = chunk.metadata
     if len(metadata.get('content_types', [])) == 0:
         return False, "No content type detected"
-    
+
     return True, "Quality check passed"
 ```
 
@@ -513,27 +513,28 @@ def _validate_chunk_quality(self, chunk):
 
 ### Best Practices
 
-1. **Size Management**: Balance structure preservation with practical limits  
-2. **Overlap Strategy**: Use 10-15% overlap for optimal context preservation  
-3. **Metadata Richness**: Include comprehensive metadata for retrieval enhancement  
-4. **Edge Case Handling**: Test with various document structures and formats  
+1. **Size Management**: Balance structure preservation with practical limits
+2. **Overlap Strategy**: Use 10-15% overlap for optimal context preservation
+3. **Metadata Richness**: Include comprehensive metadata for retrieval enhancement
+4. **Edge Case Handling**: Test with various document structures and formats
 
 ### Performance Optimization
 
-1. **Lazy Loading**: Process elements on-demand for large documents  
-2. **Caching**: Cache structure analysis results for repeated processing  
-3. **Parallel Processing**: Process independent sections concurrently  
-4. **Memory Management**: Clear intermediate data structures regularly  
+1. **Lazy Loading**: Process elements on-demand for large documents
+2. **Caching**: Cache structure analysis results for repeated processing
+3. **Parallel Processing**: Process independent sections concurrently
+4. **Memory Management**: Clear intermediate data structures regularly
 
 ### Testing Strategy
 
-1. **Unit Tests**: Test individual methods with controlled inputs  
-2. **Integration Tests**: Test full pipeline with realistic documents  
-3. **Edge Case Tests**: Handle malformed documents and unusual structures  
-4. **Performance Tests**: Measure processing time and memory usage  
-
+1. **Unit Tests**: Test individual methods with controlled inputs
+2. **Integration Tests**: Test full pipeline with realistic documents
+3. **Edge Case Tests**: Handle malformed documents and unusual structures
+4. **Performance Tests**: Measure processing time and memory usage
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Session 2 Main](Session2_Advanced_Chunking_Preprocessing.md) | [Next: Metadata Extraction →](Session2_Metadata_Extraction_Implementation.md)
+**Previous:** [Session 1 - Basic RAG Implementation ←](Session1_Basic_RAG_Implementation.md)
+**Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
+---

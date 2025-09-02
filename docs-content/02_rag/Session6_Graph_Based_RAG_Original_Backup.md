@@ -2,128 +2,128 @@
 
 ## 🎯📝⚙️ Learning Path Overview
 
-This session offers three distinct learning paths for mastering graph-based RAG systems:  
+This session offers three distinct learning paths for mastering graph-based RAG systems:
 
-### 🎯 Observer Path - Essential Concepts (30-45 minutes)  
-**Outcome**: Understand core GraphRAG principles and when to use them  
-**Key sections**: Introduction, NodeRAG Architecture, Bridge to Session 7  
+### 🎯 Observer Path - Essential Concepts (30-45 minutes)
+**Outcome**: Understand core GraphRAG principles and when to use them
+**Key sections**: Introduction, NodeRAG Architecture, Bridge to Session 7
 
-### 📝 Participant Path - Practical Implementation (2-3 hours)  
-**Outcome**: Build working GraphRAG systems with traditional and code-based approaches  
-**Key sections**: All Observer content plus Traditional GraphRAG Implementation, Code GraphRAG, Hands-on Exercise  
+### 📝 Participant Path - Practical Implementation (2-3 hours)
+**Outcome**: Build working GraphRAG systems with traditional and code-based approaches
+**Key sections**: All Observer content plus Traditional GraphRAG Implementation, Code GraphRAG, Hands-on Exercise
 
-### ⚙️ Implementer Path - Complete Mastery (6-8 hours)  
-**Outcome**: Deep expertise in advanced graph algorithms, production systems, and optimization  
-**Key sections**: All Participant content plus advanced technical modules  
+### ⚙️ Implementer Path - Complete Mastery (6-8 hours)
+**Outcome**: Deep expertise in advanced graph algorithms, production systems, and optimization
+**Key sections**: All Participant content plus advanced technical modules
 
 ---
 
 ## 🎯 Observer Path: Core GraphRAG Concepts
 
-In Sessions 1-5, you built sophisticated vector-based RAG systems with intelligent chunking, optimized search, query enhancement, and comprehensive evaluation. But when users ask complex questions like "What technologies do companies that partner with Apple use in automotive manufacturing?", you discover vector RAG's fundamental limitation: it finds similar content, but can't reason about relationships between entities.  
+In Sessions 1-5, you built sophisticated vector-based RAG systems with intelligent chunking, optimized search, query enhancement, and comprehensive evaluation. But when users ask complex questions like "What technologies do companies that partner with Apple use in automotive manufacturing?", you discover vector RAG's fundamental limitation: it finds similar content, but can't reason about relationships between entities.
 
-This session transforms your RAG system from similarity matching to knowledge reasoning. You'll build graph-based architectures that capture entities, relationships, and hierarchical knowledge structures, enabling multi-hop reasoning that connects disparate information through logical pathways. The goal is moving from "find similar documents" to "understand and traverse knowledge relationships."  
+This session transforms your RAG system from similarity matching to knowledge reasoning. You'll build graph-based architectures that capture entities, relationships, and hierarchical knowledge structures, enabling multi-hop reasoning that connects disparate information through logical pathways. The goal is moving from "find similar documents" to "understand and traverse knowledge relationships."
 
 ![RAG Architecture Overview](images/RAG-overview.png)
 
-### The Core GraphRAG Insight  
+### The Core GraphRAG Insight
 
-Knowledge isn't just about content similarity – it's about the relationships between concepts, entities, and facts. A question about Apple's automotive partnerships requires understanding:  
+Knowledge isn't just about content similarity – it's about the relationships between concepts, entities, and facts. A question about Apple's automotive partnerships requires understanding:
 
-1. Who Apple partners with  
-2. Which of those partners work in automotive  
-3. What technologies those automotive partners use  
+1. Who Apple partners with
+2. Which of those partners work in automotive
+3. What technologies those automotive partners use
 
-Vector RAG can find documents about each piece, but can't connect them logically. GraphRAG solves this by representing knowledge as a graph where nodes are entities/concepts and edges are relationships, enabling traversal through logical reasoning pathways.  
+Vector RAG can find documents about each piece, but can't connect them logically. GraphRAG solves this by representing knowledge as a graph where nodes are entities/concepts and edges are relationships, enabling traversal through logical reasoning pathways.
 
-### NodeRAG: Structured Knowledge Architecture  
+### NodeRAG: Structured Knowledge Architecture
 
-The challenge with vector RAG is that it treats all content uniformly – a company name gets the same representation type as a concept or relationship. But knowledge has inherent structure: entities have attributes, relationships have directionality, and concepts have hierarchies.  
+The challenge with vector RAG is that it treats all content uniformly – a company name gets the same representation type as a concept or relationship. But knowledge has inherent structure: entities have attributes, relationships have directionality, and concepts have hierarchies.
 
-NodeRAG addresses this by creating specialized node types that preserve the semantic structure of different knowledge components. This enables reasoning capabilities that are impossible with flat vector representations.  
+NodeRAG addresses this by creating specialized node types that preserve the semantic structure of different knowledge components. This enables reasoning capabilities that are impossible with flat vector representations.
 
 ```
 Traditional RAG: Document → Chunks → Uniform Embeddings → Similarity Search
 NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pathways
 ```
 
-#### NodeRAG's Core Innovation: Six Specialized Node Types  
+#### NodeRAG's Core Innovation: Six Specialized Node Types
 
-Instead of treating all content uniformly, NodeRAG creates different node types for different knowledge structures:  
+Instead of treating all content uniformly, NodeRAG creates different node types for different knowledge structures:
 
-1. **Semantic Unit Nodes** - Abstract concepts and themes  
-   - Example: "Supply Chain Management" connecting related methodologies  
+1. **Semantic Unit Nodes** - Abstract concepts and themes
+   - Example: "Supply Chain Management" connecting related methodologies
 
-2. **Entity Nodes** - Concrete entities with rich metadata  
-   - Example: "Apple Inc." with subsidiaries and partnerships  
+2. **Entity Nodes** - Concrete entities with rich metadata
+   - Example: "Apple Inc." with subsidiaries and partnerships
 
-3. **Relationship Nodes** - Explicit connections with evidence  
-   - Example: "Partnership" linking Apple and Foxconn with details  
+3. **Relationship Nodes** - Explicit connections with evidence
+   - Example: "Partnership" linking Apple and Foxconn with details
 
-4. **Attribute Nodes** - Properties and characteristics  
-   - Example: "Revenue: $394.3B" with temporal information  
+4. **Attribute Nodes** - Properties and characteristics
+   - Example: "Revenue: $394.3B" with temporal information
 
-5. **Document Nodes** - Original source segments  
-   - Example: SEC filing containing partnership disclosures  
+5. **Document Nodes** - Original source segments
+   - Example: SEC filing containing partnership disclosures
 
-6. **Summary Nodes** - Cross-document synthesis  
-   - Example: "Apple Automotive Strategy" synthesizing multiple sources  
+6. **Summary Nodes** - Cross-document synthesis
+   - Example: "Apple Automotive Strategy" synthesizing multiple sources
 
-#### Three-Stage Processing Pipeline  
+#### Three-Stage Processing Pipeline
 
-NodeRAG transforms documents through three key stages:  
+NodeRAG transforms documents through three key stages:
 
-1. **Decomposition**: Extract specialized node types from documents  
-2. **Augmentation**: Build connections between different node types  
-3. **Enrichment**: Add similarity edges and reasoning pathways  
+1. **Decomposition**: Extract specialized node types from documents
+2. **Augmentation**: Build connections between different node types
+3. **Enrichment**: Add similarity edges and reasoning pathways
 
-For detailed technical implementation, see: ⚙️ [Session6_NodeRAG_Technical_Implementation.md](Session6_NodeRAG_Technical_Implementation.md)  
+For detailed technical implementation, see: ⚙️ [Session6_NodeRAG_Technical_Implementation.md](Session6_NodeRAG_Technical_Implementation.md)
 
-### 🎯 Observer Path Complete: Key Takeaways  
+### 🎯 Observer Path Complete: Key Takeaways
 
-You now understand the core GraphRAG concepts:  
+You now understand the core GraphRAG concepts:
 
-- **Problem**: Vector RAG can't reason about relationships between entities  
-- **Solution**: Graph-based knowledge representation with specialized node types  
-- **Innovation**: NodeRAG's six node types preserve semantic structure  
-- **Capability**: Multi-hop reasoning through logical pathways  
+- **Problem**: Vector RAG can't reason about relationships between entities
+- **Solution**: Graph-based knowledge representation with specialized node types
+- **Innovation**: NodeRAG's six node types preserve semantic structure
+- **Capability**: Multi-hop reasoning through logical pathways
 
-For hands-on implementation, continue to the Participant Path below.  
+For hands-on implementation, continue to the Participant Path below.
 
-## 📝 Participant Path: Practical GraphRAG Implementation  
+## 📝 Participant Path: Practical GraphRAG Implementation
 
-*Prerequisites: Complete Observer Path sections above*  
+*Prerequisites: Complete Observer Path sections above*
 
-Now that you understand core GraphRAG concepts, let's build working implementations. This path covers traditional GraphRAG, code-based GraphRAG, and hybrid approaches.  
+Now that you understand core GraphRAG concepts, let's build working implementations. This path covers traditional GraphRAG, code-based GraphRAG, and hybrid approaches.
 
-### Understanding the GraphRAG Spectrum  
+### Understanding the GraphRAG Spectrum
 
-Before diving into implementation, it's important to understand the different approaches available:  
+Before diving into implementation, it's important to understand the different approaches available:
 
-- **Traditional GraphRAG**: Entity-relationship extraction with standard graph traversal  
-- **Code GraphRAG**: Specialized for analyzing software codebases and dependencies  
-- **Hybrid GraphRAG**: Combines graph reasoning with vector similarity for comprehensive search  
+- **Traditional GraphRAG**: Entity-relationship extraction with standard graph traversal
+- **Code GraphRAG**: Specialized for analyzing software codebases and dependencies
+- **Hybrid GraphRAG**: Combines graph reasoning with vector similarity for comprehensive search
 
-Each approach serves different use cases and complexity requirements.  
+Each approach serves different use cases and complexity requirements.
 
-*For complete technical implementation details of NodeRAG's advanced algorithms, see:*  
-⚙️ **[Session6_NodeRAG_Technical_Implementation.md](Session6_NodeRAG_Technical_Implementation.md)** - Advanced algorithms, Personalized PageRank, and HNSW integration  
+*For complete technical implementation details of NodeRAG's advanced algorithms, see:*
+⚙️ **[Session6_NodeRAG_Technical_Implementation.md](Session6_NodeRAG_Technical_Implementation.md)** - Advanced algorithms, Personalized PageRank, and HNSW integration
 
-### Bridge to Session 7: Agentic Reasoning  
+### Bridge to Session 7: Agentic Reasoning
 
-NodeRAG's heterogeneous graph architecture provides the structured foundation for advanced reasoning capabilities. Session 7 will show how to build agents that actively reason through these graph structures.  
+NodeRAG's heterogeneous graph architecture provides the structured foundation for advanced reasoning capabilities. Session 7 will show how to build agents that actively reason through these graph structures.
 
 ---
 
-## 📝 Participant Path: Practical GraphRAG Implementation  
+## 📝 Participant Path: Practical GraphRAG Implementation
 
-*Prerequisites: Complete Observer Path sections above*  
+*Prerequisites: Complete Observer Path sections above*
 
-Now let's dive into hands-on GraphRAG implementation. This path covers three essential approaches:  
+Now let's dive into hands-on GraphRAG implementation. This path covers three essential approaches:
 
-1. **Traditional GraphRAG**: Entity-relationship extraction and graph traversal  
-2. **Code GraphRAG**: Specialized analysis for software codebases  
-3. **Hybrid GraphRAG**: Combining graph reasoning with vector similarity  
+1. **Traditional GraphRAG**: Entity-relationship extraction and graph traversal
+2. **Code GraphRAG**: Specialized analysis for software codebases
+3. **Hybrid GraphRAG**: Combining graph reasoning with vector similarity
 
 ### Traditional GraphRAG Implementation - Building the Foundation
 
@@ -695,7 +695,7 @@ Traversal initialization sets up the search state with visited node tracking, pa
         # Load embedding model for similarity computation
         embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         entity_names = list(entities.keys())
-        
+
         if len(entity_names) < 2:
             return entities
 ```
@@ -1136,7 +1136,7 @@ class CodeGraphRAG:
 
     def __init__(self, supported_languages: List[str] = ['python', 'javascript']):
         self.supported_languages = supported_languages
-        
+
         # Initialize Tree-sitter parsers for multi-language support
         self.parsers = self._setup_tree_sitter_parsers()
 ```
@@ -1149,7 +1149,7 @@ The `CodeGraphRAG` class initialization sets up multi-language parsing capabilit
             'function', 'class', 'method', 'variable', 'module',
             'interface', 'enum', 'constant', 'type', 'namespace'
         }
-        
+
         # Define code-specific relationship types
         self.code_relation_types = {
             'calls', 'inherits', 'implements', 'imports', 'uses',
@@ -1173,7 +1173,7 @@ The system maintains multiple specialized graphs simultaneously. The call graph 
     def analyze_repository(self, repo_path: str,
                           analysis_config: Dict = None) -> Dict[str, Any]:
         """Analyze entire repository and build code knowledge graph."""
-        
+
         # Configuration with production-ready defaults
         config = analysis_config or {
             'max_files': 1000,
@@ -1189,7 +1189,7 @@ The repository analysis configuration balances comprehensiveness with performanc
 
 ```python
         print(f"Analyzing repository: {repo_path}")
-        
+
         # Discover source files matching our criteria
         source_files = self._discover_source_files(repo_path, config)
         print(f"Found {len(source_files)} source files")
@@ -1201,15 +1201,15 @@ File discovery applies the configured patterns to identify relevant source files
         # Analyze each discovered source file
         all_entities = {}
         all_relationships = []
-        
+
         for file_path in source_files[:config.get('max_files', 1000)]:
             try:
                 file_analysis = self._analyze_source_file(file_path, config)
-                
+
                 if file_analysis:
                     all_entities.update(file_analysis['entities'])
                     all_relationships.extend(file_analysis['relationships'])
-                    
+
             except Exception as e:
                 print(f"Error analyzing {file_path}: {e}")
                 continue
@@ -1221,7 +1221,7 @@ The file analysis loop implements robust error handling essential for production
         # Build specialized graph views from collected data
         if config.get('build_call_graph', True):
             self.call_graph = self._build_call_graph(all_entities, all_relationships)
-            
+
         if config.get('analyze_dependencies', True):
             self.dependency_graph = self._build_dependency_graph(all_entities, all_relationships)
 ```
@@ -1231,7 +1231,7 @@ After collecting raw entities and relationships, the system builds specialized g
 ```python
         return {
             'entities': all_entities,
-            'relationships': all_relationships, 
+            'relationships': all_relationships,
             'call_graph': self.call_graph,
             'dependency_graph': self.dependency_graph,
             'analysis_stats': {
@@ -1250,12 +1250,12 @@ The comprehensive return structure provides both detailed analysis data and high
 ```python
     def _analyze_python_file(self, file_path: str, config: Dict) -> Dict[str, Any]:
         """Analyze Python file using AST parsing."""
-        
+
         try:
             # Read source code with UTF-8 encoding for international compatibility
             with open(file_path, 'r', encoding='utf-8') as f:
                 source_code = f.read()
-                
+
             # Parse into Abstract Syntax Tree
             tree = ast.parse(source_code, filename=file_path)
 ```
@@ -1266,7 +1266,7 @@ Python AST analysis begins with safe file reading and syntax tree parsing. The U
             # Initialize collections for extracted data
             entities = {}
             relationships = []
-            
+
             # Traverse the entire AST systematically
             for node in ast.walk(tree):
 ```
@@ -1278,7 +1278,7 @@ The `ast.walk()` function performs a depth-first traversal of the entire syntax 
                 if isinstance(node, ast.FunctionDef):
                     func_entity = self._extract_function_entity(node, file_path, source_code)
                     entities[func_entity['canonical']] = func_entity
-                    
+
                     # Extract function relationships (calls, uses)
                     func_relationships = self._extract_function_relationships(
                         node, func_entity['canonical'], source_code
@@ -1289,11 +1289,11 @@ The `ast.walk()` function performs a depth-first traversal of the entire syntax 
 Function analysis captures both the function itself as an entity and its relationships to other code. The canonical name creates a unique identifier combining file path and function name, preventing name collisions across modules. The relationship extraction analyzes the function body to identify calls to other functions, variable usage, and dependencies.
 
 ```python
-                # Process class definitions  
+                # Process class definitions
                 elif isinstance(node, ast.ClassDef):
                     class_entity = self._extract_class_entity(node, file_path, source_code)
                     entities[class_entity['canonical']] = class_entity
-                    
+
                     # Extract class relationships (inheritance, methods)
                     class_relationships = self._extract_class_relationships(
                         node, class_entity['canonical'], source_code
@@ -1320,12 +1320,12 @@ Import analysis captures module dependencies that form the backbone of software 
                 'relationships': relationships,
                 'file_metadata': {
                     'path': file_path,
-                    'language': 'python', 
+                    'language': 'python',
                     'lines_of_code': len(source_code.splitlines()),
                     'ast_nodes': len(list(ast.walk(tree)))
                 }
             }
-            
+
         except Exception as e:
             print(f"Python AST analysis error for {file_path}: {e}")
             return None
@@ -1337,7 +1337,7 @@ The analysis result includes both extracted graph data and metadata about the an
     def _extract_function_entity(self, node: ast.FunctionDef,
                                file_path: str, source_code: str) -> Dict[str, Any]:
         """Extract function entity with comprehensive metadata."""
-        
+
         # Extract function signature and documentation
         signature = self._get_function_signature(node)
         docstring = ast.get_docstring(node) or ""
@@ -1382,9 +1382,9 @@ The comprehensive function entity includes location information (file path, line
     def _build_call_graph(self, entities: Dict[str, Any],
                          relationships: List[Dict]) -> nx.DiGraph:
         """Build call graph from extracted entities and relationships."""
-        
+
         call_graph = nx.DiGraph()
-        
+
         # Add function nodes with metadata
         for entity_id, entity in entities.items():
             if entity['type'] == 'FUNCTION':
@@ -1405,7 +1405,7 @@ Call graph construction transforms extracted function entities into a NetworkX d
             if relationship['predicate'] == 'calls':
                 caller = relationship['subject']
                 callee = relationship['object']
-                
+
                 if caller in call_graph.nodes and callee in call_graph.nodes:
                     call_graph.add_edge(caller, callee, **{
                         'confidence': relationship.get('confidence', 0.8),
@@ -1419,7 +1419,7 @@ Edge creation establishes the actual call relationships between functions. The d
 ```python
         # Enrich graph with architectural metrics
         self._calculate_call_graph_metrics(call_graph)
-        
+
         return call_graph
 ```
 
@@ -1428,15 +1428,15 @@ The completed call graph becomes a queryable representation of software architec
 ```python
     def _calculate_call_graph_metrics(self, call_graph: nx.DiGraph):
         """Calculate and store call graph metrics."""
-        
+
         # Basic structural metrics
         num_nodes = call_graph.number_of_nodes()
         num_edges = call_graph.number_of_edges()
-        
+
         if num_nodes > 0:
             # Calculate architectural importance metrics
             in_degree_centrality = nx.in_degree_centrality(call_graph)
-            out_degree_centrality = nx.out_degree_centrality(call_graph) 
+            out_degree_centrality = nx.out_degree_centrality(call_graph)
             betweenness_centrality = nx.betweenness_centrality(call_graph)
 ```
 
@@ -1462,7 +1462,7 @@ Centrality score integration transforms the call graph into a rich architectural
                               call_graph.nodes[x]['betweenness_centrality']),
                 reverse=True
             )[:10]
-            
+
             # Store comprehensive graph metadata
             call_graph.graph.update({
                 'num_functions': num_nodes,
@@ -1749,16 +1749,16 @@ class GraphTraversalEngine:
     def _semantic_guided_traversal(self, start_entity: str, query: str,
                                   config: Dict) -> List[List[str]]:
         """Traverse graph guided by semantic similarity to query.
-        
+
         This is the most sophisticated traversal strategy, implementing semantic
         filtering at the path level rather than just relationship level.
-        
+
         The approach solves a key GraphRAG challenge: how to explore the graph
         systematically without being overwhelmed by irrelevant paths.
         """
-        
+
         import numpy as np
-        
+
         # Initialize semantic comparison infrastructure
         query_embedding = self.embedding_model.encode([query])[0]
         semantic_threshold = config.get('semantic_threshold', 0.7)
@@ -1769,7 +1769,7 @@ Semantic-guided traversal represents the most advanced graph exploration strateg
 
 ```python
         print(f"Semantic-guided traversal from {start_entity} with threshold {semantic_threshold}")
-        
+
         with self.neo4j.driver.session() as session:
             # Optimized Cypher for multi-hop path discovery
             cypher_query = """
@@ -1792,20 +1792,20 @@ The Cypher query implements sophisticated path discovery with built-in quality f
             result = session.run(cypher_query,
                                start_entity=start_entity,
                                max_hops=max_hops)
-            
+
             semantic_paths = []
             processed_paths = 0
-            
+
             for record in result:
                 processed_paths += 1
-                
+
                 # Extract path components from Neo4j result
                 entity_path = record['entity_path']
                 relation_path = record['relation_path']
                 confidence_path = record['confidence_path']
                 path_length = record['path_length']
                 entity_types = record['entity_types']
-                
+
                 # Convert graph path to natural language representation
                 path_text = self._construct_path_text(entity_path, relation_path)
 ```
@@ -1815,7 +1815,7 @@ Path processing begins by extracting the structural components returned by Cyphe
 ```python
                 # Calculate semantic relevance using cosine similarity
                 path_embedding = self.embedding_model.encode([path_text])[0]
-                
+
                 semantic_similarity = np.dot(query_embedding, path_embedding) / (
                     np.linalg.norm(query_embedding) * np.linalg.norm(path_embedding)
                 )
@@ -1828,7 +1828,7 @@ Semantic similarity calculation uses cosine similarity between query and path em
                 if semantic_similarity > semantic_threshold:
                     avg_confidence = sum(confidence_path) / len(confidence_path) if confidence_path else 0.5
                     path_diversity = len(set(entity_types)) / len(entity_types) if entity_types else 0
-                    
+
                     semantic_paths.append({
                         'entity_path': entity_path,
                         'relation_path': relation_path,
@@ -1850,10 +1850,10 @@ Quality-gated path selection combines semantic relevance with additional quality
                 key=lambda x: (x['semantic_similarity'], x['avg_confidence']),
                 reverse=True
             )
-            
+
             print(f"Semantic filtering: {processed_paths} paths → {len(semantic_paths)} relevant paths")
             print(f"Filtering efficiency: {(1 - len(semantic_paths)/processed_paths)*100:.1f}% paths pruned")
-            
+
             return semantic_paths
 ```
 
@@ -1864,9 +1864,9 @@ Final path ranking and efficiency reporting complete the semantic-guided travers
 ```python
     def _extract_path_contexts(self, paths: List[Dict], query: str) -> List[Dict]:
         """Extract rich context from graph paths."""
-        
+
         path_contexts = []
-        
+
         with self.neo4j.driver.session() as session:
             for path in paths:
                 try:
@@ -1883,7 +1883,7 @@ Path context extraction transforms raw graph paths into rich, narrative descript
                     narrative = self._construct_path_narrative(
                         path, entity_details
                     )
-                    
+
                     # Assess narrative relevance to original query
                     relevance_score = self._calculate_context_relevance(
                         narrative, query
@@ -1900,7 +1900,7 @@ Narrative construction converts the structured graph path into flowing natural l
                         'relevance_score': relevance_score,
                         'context_length': len(narrative.split())
                     })
-                    
+
                 except Exception as e:
                     print(f"Error extracting path context: {e}")
                     continue
@@ -1911,7 +1911,7 @@ The comprehensive context structure preserves both the original graph path data 
 ```python
         # Rank contexts by query relevance
         path_contexts.sort(key=lambda x: x['relevance_score'], reverse=True)
-        
+
         return path_contexts
 ```
 
@@ -1920,13 +1920,13 @@ Final relevance-based sorting ensures that the most query-relevant path contexts
 ```python
     def _construct_path_narrative(self, path: Dict, entity_details: List[Dict]) -> str:
         """Construct coherent narrative from graph path."""
-        
+
         entity_path = path['entity_path']
         relation_path = path['relation_path']
-        
+
         if not entity_path or len(entity_path) < 2:
             return ""
-        
+
         narrative_parts = []
 ```
 
@@ -1937,11 +1937,11 @@ Narrative construction begins with basic path validation and initialization. The
             subject = entity_details[i]
             object_entity = entity_details[i + 1]
             relation = relation_path[i] if i < len(relation_path) else 'related_to'
-            
+
             # Create natural language descriptions for each entity
             subject_desc = self._get_entity_description(subject)
             object_desc = self._get_entity_description(object_entity)
-            
+
             narrative_part = f"{subject_desc} {self._humanize_relation(relation)} {object_desc}"
             narrative_parts.append(narrative_part)
 ```
@@ -1951,7 +1951,7 @@ Each step in the path becomes a natural language statement connecting two entiti
 ```python
         # Join individual statements into coherent narrative
         narrative = self._join_with_connectors(narrative_parts)
-        
+
         return narrative
 ```
 
@@ -1960,10 +1960,10 @@ The final narrative assembly uses contextual connectors to create flowing, reada
 ```python
     def _humanize_relation(self, relation_type: str) -> str:
         """Convert technical relation types to human-readable form."""
-        
+
         relation_map = {
             'calls': 'calls',
-            'inherits': 'inherits from', 
+            'inherits': 'inherits from',
             'uses': 'uses',
             'contains': 'contains',
             'implements': 'implements',
@@ -1974,7 +1974,7 @@ The final narrative assembly uses contextual connectors to create flowing, reada
             'causes': 'causes',
             'leads_to': 'leads to'
         }
-        
+
         return relation_map.get(relation_type, f'is related to via {relation_type}')
 ```
 
@@ -1995,7 +1995,7 @@ Neither graph-only nor vector-only search is optimal for all scenarios. Each app
 **Vector Search Strengths:**
 
 - Excellent semantic similarity matching
-- Naturally handles synonyms and paraphrasing  
+- Naturally handles synonyms and paraphrasing
 - Enables fast retrieval for well-defined concepts
 - Works effectively with isolated facts
 
@@ -2300,7 +2300,7 @@ class HybridGraphVectorRAG:
 The comprehensive result structure provides complete transparency into the hybrid search process. This rich metadata enables downstream systems to understand:
 
 - How the answer was generated
-- Which sources contributed most significantly  
+- Which sources contributed most significantly
 - What performance characteristics were observed
 
 #### Step 9: Adaptive Fusion Strategy
@@ -2313,7 +2313,7 @@ This sophisticated fusion strategy implements **query-aware combination of resul
 
 **Query Types and Weighting Strategy:**
 
-- **Factual queries** ("What is X?") → Higher vector weight  
+- **Factual queries** ("What is X?") → Higher vector weight
 - **Analytical queries** ("How does X affect Y?") → Balanced combination
 - **Relational queries** ("What connects X to Y?") → Higher graph weight
 - **Complex synthesis** ("Analyze X's impact on Y through Z") → Dynamic weighting
@@ -2344,7 +2344,7 @@ This sophisticated fusion strategy implements **query-aware combination of resul
     def _adaptive_selection(self, query: str, vector_results: Dict,
                           graph_results: Dict, config: Dict) -> Dict[str, Any]:
         """Adaptively select and combine results based on query characteristics.
-        
+
         This approach typically improves answer quality by 25-40% over static weighting
         by intelligently weighing vector vs graph results based on query type.
         """
@@ -2399,7 +2399,7 @@ Now apply adaptive weights and query-specific boosts to all contexts:
         # Process vector contexts with adaptive weights and boosts
         for ctx in vector_contexts:
             vector_score = ctx.get('similarity_score', 0.5)
-            
+
             # Apply adaptive weight based on query analysis
             adapted_score = vector_score * fusion_weights['vector_weight']
 ```
@@ -2429,7 +2429,7 @@ Process graph contexts with relationship-aware scoring:
         # Process graph contexts with relationship-aware adaptive scoring
         for ctx in graph_contexts:
             graph_score = ctx['score']
-            
+
             # Apply adaptive weight based on query analysis
             adapted_score = graph_score * fusion_weights['graph_weight']
 ```
@@ -2665,12 +2665,12 @@ This section demonstrates **relationship-aware scoring**, a key advancement in g
     def _generate_hybrid_response(self, query: str, fused_results: Dict,
                                  config: Dict) -> Dict[str, Any]:
         """Generate comprehensive response using hybrid context."""
-        
+
         contexts = fused_results.get('contexts', [])
-        
+
         if not contexts:
             return {'response': "I couldn't find relevant information to answer your question."}
-        
+
         # Separate contexts by retrieval type for specialized processing
         vector_contexts = [ctx for ctx in contexts if ctx['type'] == 'vector_similarity']
         graph_contexts = [ctx for ctx in contexts if ctx['type'] == 'graph_path']
@@ -2681,14 +2681,14 @@ Hybrid response generation combines information from both vector similarity and 
 ```python
         # Construct dual-context prompt for comprehensive reasoning
         response_prompt = f"""
-        You are an expert analyst with access to both direct factual 
+        You are an expert analyst with access to both direct factual
         information and relationship knowledge.
-        
+
         Question: {query}
-        
+
         DIRECT FACTUAL INFORMATION:
         {self._format_vector_contexts(vector_contexts)}
-        
+
         RELATIONSHIP KNOWLEDGE:
         {self._format_graph_contexts(graph_contexts)}
         """
@@ -2701,12 +2701,12 @@ The hybrid prompt template provides structured input that clearly separates fact
         reasoning_instructions = """
         Instructions:
         1. Provide comprehensive answer using both types of information
-        2. Explain relationship connections clearly  
+        2. Explain relationship connections clearly
         3. Distinguish between direct facts and inferred relationships
         4. Highlight additional insights from graph relationships
         5. Maintain accuracy and avoid unsupported claims
         """
-        
+
         final_prompt = response_prompt + reasoning_instructions
 ```
 
@@ -2718,10 +2718,10 @@ The hybrid prompt template explicitly distinguishes between factual information 
         try:
             # Generate response with controlled temperature for consistency
             response = self.llm_model.predict(response_prompt, temperature=0.3)
-            
+
             # Extract source attributions for transparency
             source_attributions = self._extract_source_attributions(contexts)
-            
+
             # Calculate response confidence based on context quality
             response_confidence = self._calculate_response_confidence(contexts)
 ```
@@ -2740,7 +2740,7 @@ Response generation uses a low temperature (0.3) to ensure consistent, reliable 
                 },
                 'reasoning_type': 'hybrid_graph_vector'
             }
-            
+
         except Exception as e:
             print(f"Response generation error: {e}")
             return {'response': "I encountered an error generating the response."}
@@ -2770,7 +2770,7 @@ Create a production-ready GraphRAG system that combines document analysis with c
 # Production-ready GraphRAG system integration
 class ProductionGraphRAG:
     """Production-ready GraphRAG system."""
-    
+
     def __init__(self, config: Dict):
         # Initialize core knowledge extraction components
         self.kg_extractor = KnowledgeGraphExtractor(
@@ -2796,7 +2796,7 @@ The ProductionGraphRAG class integrates all the GraphRAG components we've built 
             embedding_model=config['embedding_model'],
             llm_model=config['llm_model']
         )
-        
+
         # Performance monitoring infrastructure
         self.performance_metrics = {}
 ```
@@ -2806,16 +2806,16 @@ The graph storage and search infrastructure completes the system architecture. T
 ```python
     def ingest_documents(self, documents: List[str]) -> Dict[str, Any]:
         """Ingest documents and build knowledge graph."""
-        
+
         # Extract structured knowledge from document collection
         kg_result = self.kg_extractor.extract_knowledge_graph(documents)
-        
+
         # Persist extracted graph to Neo4j database
         storage_result = self.neo4j_manager.store_knowledge_graph(
             kg_result['entities'],
             kg_result['relationships']
         )
-        
+
         return {
             'extraction_result': kg_result,
             'storage_result': storage_result
@@ -2827,16 +2827,16 @@ Document ingestion implements the complete pipeline from raw text to queryable k
 ```python
     def analyze_repository(self, repo_path: str) -> Dict[str, Any]:
         """Analyze code repository and build code graph."""
-        
+
         # Extract architectural knowledge from source code
         code_analysis = self.code_analyzer.analyze_repository(repo_path)
-        
+
         # Persist code entities and relationships to graph database
         code_storage = self.neo4j_manager.store_knowledge_graph(
             code_analysis['entities'],
             code_analysis['relationships']
         )
-        
+
         return {
             'code_analysis': code_analysis,
             'storage_result': code_storage
@@ -2848,7 +2848,7 @@ Repository analysis extends the GraphRAG system to understand software architect
 ```python
     def search(self, query: str, search_type: str = 'hybrid') -> Dict[str, Any]:
         """Perform intelligent GraphRAG search."""
-        
+
         if search_type == 'hybrid':
             return self.hybrid_rag.hybrid_search(query)
         else:
@@ -3163,69 +3163,59 @@ The unified search interface provides access to the full power of GraphRAG throu
 
 Test your understanding of graph-based RAG systems and GraphRAG implementations.
 
-**Question 1:** What is the primary advantage of GraphRAG over traditional vector-based RAG?  
-A) Faster query processing  
-B) Lower computational requirements  
-C) Multi-hop reasoning through explicit relationship modeling  
-D) Simpler system architecture  
+**Question 1:** What is the primary advantage of GraphRAG over traditional vector-based RAG?
+A) Faster query processing
+B) Lower computational requirements
+C) Multi-hop reasoning through explicit relationship modeling
+D) Simpler system architecture
 
-**Question 2:** In knowledge graph construction, what is the purpose of entity standardization?  
-A) To reduce memory usage  
-B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")  
-C) To improve query speed  
-D) To compress graph storage  
+**Question 2:** In knowledge graph construction, what is the purpose of entity standardization?
+A) To reduce memory usage
+B) To merge different mentions of the same entity (e.g., "Apple Inc." and "Apple")
+C) To improve query speed
+D) To compress graph storage
 
-**Question 3:** Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?  
-A) Depth-First Search (DFS)  
-B) Breadth-First Search (BFS)  
-C) Dijkstra's algorithm  
-D) A* search  
+**Question 3:** Which graph traversal algorithm is most suitable for finding related entities within a limited number of hops?
+A) Depth-First Search (DFS)
+B) Breadth-First Search (BFS)
+C) Dijkstra's algorithm
+D) A* search
 
-**Question 4:** In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?  
-A) Only function definitions  
-B) Function calls, imports, class hierarchies, and variable dependencies  
-C) Only variable names  
-D) Just file names and sizes  
+**Question 4:** In Code GraphRAG, what information is typically extracted from Abstract Syntax Trees (ASTs)?
+A) Only function definitions
+B) Function calls, imports, class hierarchies, and variable dependencies
+C) Only variable names
+D) Just file names and sizes
 
-**Question 5:** What is the key benefit of hybrid graph-vector search?  
-A) Reduced computational cost  
-B) Combining structural relationships with semantic similarity  
-C) Simpler implementation  
-D) Faster indexing  
+**Question 5:** What is the key benefit of hybrid graph-vector search?
+A) Reduced computational cost
+B) Combining structural relationships with semantic similarity
+C) Simpler implementation
+D) Faster indexing
 
-**Question 6:** When should you choose Neo4j over a simple graph data structure for GraphRAG?  
-A) Always, regardless of scale  
-B) When you need persistent storage and complex queries at scale  
-C) Only for small datasets  
-D) Never, simple structures are always better  
+**Question 6:** When should you choose Neo4j over a simple graph data structure for GraphRAG?
+A) Always, regardless of scale
+B) When you need persistent storage and complex queries at scale
+C) Only for small datasets
+D) Never, simple structures are always better
 
-**Question 7:** What is the primary challenge in multi-hop graph traversal for RAG?  
-A) Memory limitations  
-B) Balancing comprehensiveness with relevance and avoiding information explosion  
-C) Slow database queries  
-D) Complex code implementation  
+**Question 7:** What is the primary challenge in multi-hop graph traversal for RAG?
+A) Memory limitations
+B) Balancing comprehensiveness with relevance and avoiding information explosion
+C) Slow database queries
+D) Complex code implementation
 
-**Question 8:** In production GraphRAG systems, what is the most important consideration for incremental updates?  
-A) Minimizing downtime while maintaining graph consistency  
-B) Reducing storage costs  
-C) Maximizing query speed  
-D) Simplifying the codebase  
+**Question 8:** In production GraphRAG systems, what is the most important consideration for incremental updates?
+A) Minimizing downtime while maintaining graph consistency
+B) Reducing storage costs
+C) Maximizing query speed
+D) Simplifying the codebase
 
 [**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
-
 ---
 
 ## 🧭 Navigation
 
-**Previous:** [Session 5 - RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)
-
-## Optional Deep Dive Modules
-
-- 🔬 **[Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Complex graph traversal and reasoning patterns
-- 🏭 **[Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md)** - Enterprise graph database deployment
-
+**Previous:** [Session 5 - RAG Evaluation & Quality Assessment ←](Session5_RAG_Evaluation_Quality_Assessment.md)
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
-
-```
-
-```
+---

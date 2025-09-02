@@ -1,18 +1,18 @@
 # ⚙️ Session 5 Advanced: OAuth 2.1 Implementation
 
-> **⚙️ IMPLEMENTER PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer and 📝 Participant paths  
-> Time Investment: 3-4 hours  
-> Outcome: Master advanced OAuth 2.1 with PKCE and Resource Indicators  
+> **⚙️ IMPLEMENTER PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer and 📝 Participant paths
+> Time Investment: 3-4 hours
+> Outcome: Master advanced OAuth 2.1 with PKCE and Resource Indicators
 
 ## Advanced Learning Outcomes
 
-After completing this module, you will master:  
+After completing this module, you will master:
 
-- Complete OAuth 2.1 authorization server implementation  
-- Advanced Resource Indicators (RFC 8707) for token scoping  
-- Production-grade security with Redis-backed token management  
-- Advanced JWT features including blacklisting and rotation  
+- Complete OAuth 2.1 authorization server implementation
+- Advanced Resource Indicators (RFC 8707) for token scoping
+- Production-grade security with Redis-backed token management
+- Advanced JWT features including blacklisting and rotation
 
 ## Complete OAuth 2.1 Authorization Server
 
@@ -38,12 +38,12 @@ import redis
 import structlog
 ```
 
-This arsenal provides everything needed for enterprise-grade OAuth security:  
+This arsenal provides everything needed for enterprise-grade OAuth security:
 
-- `authlib`: Your OAuth 2.1 Swiss Army knife with PKCE support  
-- `cryptography`: FIPS-compliant crypto operations  
-- `rfc7636`: PKCE implementation that makes authorization codes useless to eavesdroppers  
-- `rfc8707`: Resource Indicators that create token-specific access boundaries  
+- `authlib`: Your OAuth 2.1 Swiss Army knife with PKCE support
+- `cryptography`: FIPS-compliant crypto operations
+- `rfc7636`: PKCE implementation that makes authorization codes useless to eavesdroppers
+- `rfc8707`: Resource Indicators that create token-specific access boundaries
 
 ### Advanced Resource Indicator System
 
@@ -52,7 +52,7 @@ Resource Indicators (RFC 8707) are like having magical keys that can only open s
 ```python
 class ResourceIndicatorManager:
     """RFC 8707 Resource Indicators for MCP token scoping."""
-    
+
     def __init__(self, redis_client):
         self.redis = redis_client
         self.valid_resources = {
@@ -61,7 +61,7 @@ class ResourceIndicatorManager:
                 'scopes': ['read', 'write', 'list']
             },
             'mcp://database-server': {
-                'description': 'Database operations', 
+                'description': 'Database operations',
                 'scopes': ['select', 'insert', 'update']
             },
             'mcp://api-server': {
@@ -79,24 +79,24 @@ Now we implement comprehensive resource validation:
     def validate_resource_request(self, resource: str, scopes: List[str]) -> bool:
         """
         Validate resource indicator and requested scopes.
-        
+
         Prevents tokens from being used on unintended resources.
         """
         if resource not in self.valid_resources:
             logger.warning("Invalid resource requested", resource=resource)
             return False
-            
+
         valid_scopes = self.valid_resources[resource]['scopes']
         invalid_scopes = set(scopes) - set(valid_scopes)
-        
+
         if invalid_scopes:
             logger.warning(
-                "Invalid scopes requested", 
-                resource=resource, 
+                "Invalid scopes requested",
+                resource=resource,
                 invalid_scopes=list(invalid_scopes)
             )
             return False
-            
+
         return True
 ```
 
@@ -105,16 +105,16 @@ The validation uses set operations to efficiently check for invalid scopes, prev
 Creating RFC 8707 compliant tokens with proper audience restrictions:
 
 ```python
-    def create_scoped_token(self, resource: str, scopes: List[str], 
+    def create_scoped_token(self, resource: str, scopes: List[str],
                            user_context: Dict[str, Any]) -> str:
         """
         Create JWT token scoped to specific resource and permissions.
-        
+
         Token can ONLY be used for the specified resource.
         """
         if not self.validate_resource_request(resource, scopes):
             raise ValueError(f"Invalid resource or scopes: {resource}")
-            
+
         payload = {
             'aud': resource,  # RFC 8707 audience claim
             'scope': ' '.join(scopes),
@@ -124,7 +124,7 @@ Creating RFC 8707 compliant tokens with proper audience restrictions:
             'resource_indicator': resource,
             'context': user_context
         }
-        
+
         token = jwt.encode(payload, os.getenv('JWT_SECRET'), algorithm='HS256')
         logger.info(
             "Created scoped token",
@@ -132,7 +132,7 @@ Creating RFC 8707 compliant tokens with proper audience restrictions:
             scopes=scopes,
             user_id=user_context['user_id']
         )
-        
+
         return token
 ```
 
@@ -145,7 +145,7 @@ Your production JWT manager handles the complete token lifecycle with sophistica
 ```python
 class AdvancedJWTManager:
     """Enterprise JWT management with Redis-based blacklisting and rotation."""
-    
+
     def __init__(self, secret_key: str = None, redis_client = None):
         # Initialize core JWT settings
         self.secret_key = secret_key or os.getenv('JWT_SECRET_KEY', self._generate_secret())
@@ -153,18 +153,18 @@ class AdvancedJWTManager:
         self.access_token_expire_minutes = 30
         self.refresh_token_expire_days = 7
         self.redis_client = redis_client
-        
+
         # Validate secret key security
         self._validate_secret_key()
-        
+
     def _validate_secret_key(self):
         """Validate that secret key meets security requirements."""
         if len(self.secret_key) < 32:
             raise ValueError("JWT secret key must be at least 32 characters")
-        
+
         if self.secret_key in ['secret', 'password', 'key']:
             raise ValueError("JWT secret key cannot be a common word")
-            
+
         logger.info("JWT Manager initialized with secure secret key")
 ```
 
@@ -178,7 +178,7 @@ When creating tokens, we craft them like carefully designed identification cards
     def create_tokens(self, user_data: Dict[str, Any]) -> Dict[str, str]:
         """Create access and refresh tokens with comprehensive security claims."""
         now = datetime.now(timezone.utc)
-        
+
         # Access token with comprehensive user permissions
         access_payload = {
             "sub": user_data["user_id"],           # Subject (user ID)
@@ -190,7 +190,7 @@ When creating tokens, we craft them like carefully designed identification cards
             "type": "access",                      # Token type for validation
             "jti": str(uuid.uuid4())              # Unique token identifier
         }
-        
+
         # Refresh token (minimal claims for security)
         refresh_payload = {
             "sub": user_data["user_id"],          # Only user ID needed
@@ -199,11 +199,11 @@ When creating tokens, we craft them like carefully designed identification cards
             "type": "refresh",                    # Clearly mark as refresh token
             "jti": str(uuid.uuid4())             # Unique identifier for blacklisting
         }
-        
+
         # Generate JWT tokens using secure algorithm
         access_token = jwt.encode(access_payload, self.secret_key, algorithm=self.algorithm)
         refresh_token = jwt.encode(refresh_payload, self.secret_key, algorithm=self.algorithm)
-        
+
         # Return tokens in standard OAuth 2.0 format
         return {
             "access_token": access_token,
@@ -226,20 +226,20 @@ Token verification implements comprehensive security checks:
             # Step 1: Check blacklist for revoked tokens
             if self._is_token_blacklisted(token):
                 raise HTTPException(status_code=401, detail="Token has been revoked")
-            
+
             # Step 2: Cryptographically verify and decode
             payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm])
-            
+
             # Step 3: Validate token type to prevent confusion attacks
             if payload.get("type") != "access":
                 raise HTTPException(status_code=401, detail="Invalid token type")
-            
+
             # Step 4: Additional security validations
             if not payload.get("jti"):
                 raise HTTPException(status_code=401, detail="Invalid token format")
-            
+
             return payload
-            
+
         except jwt.ExpiredSignatureError:
             raise HTTPException(status_code=401, detail="Token has expired")
         except jwt.InvalidTokenError:
@@ -260,53 +260,53 @@ The blacklist system provides instant token revocation across distributed deploy
         """Check if token has been revoked via blacklist."""
         if not self.redis_client:
             return False  # No Redis = no blacklisting capability
-        
+
         try:
             # Extract JTI from token for blacklist lookup
             payload = jwt.decode(
-                token, self.secret_key, 
-                algorithms=[self.algorithm], 
+                token, self.secret_key,
+                algorithms=[self.algorithm],
                 options={"verify_exp": False}
             )
-            
+
             jti = payload.get("jti")
             if not jti:
                 return False  # Can't blacklist tokens without JTI
-            
+
             return self.redis_client.exists(f"blacklist:{jti}")
-            
+
         except Exception:
             # Fail securely - log warning but allow verification to continue
             logger.warning("Could not check token blacklist")
             return False
-    
+
     def blacklist_token(self, token: str, ttl_seconds: int = None):
         """Add token to blacklist for secure revocation."""
         if not self.redis_client:
             logger.warning("Cannot blacklist token: Redis not available")
             return
-        
+
         try:
             # Extract JTI and expiry for efficient blacklisting
             payload = jwt.decode(
-                token, self.secret_key, 
-                algorithms=[self.algorithm], 
+                token, self.secret_key,
+                algorithms=[self.algorithm],
                 options={"verify_exp": False}
             )
-            
+
             jti = payload.get("jti")
             if not jti:
                 logger.warning("Cannot blacklist token without JTI")
                 return
-            
+
             # Auto-calculate TTL from token expiry if not provided
             if not ttl_seconds:
                 ttl_seconds = self._calculate_token_ttl(payload)
-            
+
             # Store JTI in blacklist with expiration
             self.redis_client.setex(f"blacklist:{jti}", ttl_seconds, "revoked")
             logger.info(f"Token successfully blacklisted for {ttl_seconds} seconds")
-            
+
         except Exception as e:
             logger.error(f"Failed to blacklist token: {e}")
 ```
@@ -320,29 +320,29 @@ Now we implement the complete authorization flow with PKCE and Resource Indicato
 ```python
 class OAuth21AuthorizationServer:
     """Complete OAuth 2.1 authorization server with PKCE and Resource Indicators."""
-    
-    def __init__(self, jwt_manager: AdvancedJWTManager, 
+
+    def __init__(self, jwt_manager: AdvancedJWTManager,
                  resource_manager: ResourceIndicatorManager):
         self.jwt_manager = jwt_manager
         self.resource_manager = resource_manager
         self.pkce_generator = PKCEGenerator()
         self.auth_codes = {}  # In production: use Redis
-        
-    def create_authorization_url(self, client_id: str, redirect_uri: str, 
+
+    def create_authorization_url(self, client_id: str, redirect_uri: str,
                                 scope: str, resource: str = None) -> Dict[str, str]:
         """
         Create authorization URL with PKCE challenge.
-        
+
         Returns URL and code verifier for client storage.
         """
         # Generate PKCE components
         code_verifier = self.pkce_generator.generate_code_verifier()
         code_challenge, challenge_method = self.pkce_generator.generate_code_challenge(code_verifier)
-        
+
         # Generate authorization code
         auth_code = secrets.token_urlsafe(32)
         state = secrets.token_urlsafe(16)
-        
+
         # Store authorization request details
         self.auth_codes[auth_code] = {
             "client_id": client_id,
@@ -354,7 +354,7 @@ class OAuth21AuthorizationServer:
             "expires_at": datetime.now() + timedelta(minutes=10),  # Short-lived auth codes
             "state": state
         }
-        
+
         # Build authorization URL
         params = {
             "response_type": "code",
@@ -365,13 +365,13 @@ class OAuth21AuthorizationServer:
             "code_challenge": code_challenge,
             "code_challenge_method": challenge_method
         }
-        
+
         if resource:
             params["resource"] = resource
-            
+
         query_string = "&".join([f"{k}={v}" for k, v in params.items()])
         auth_url = f"/oauth/authorize?{query_string}"
-        
+
         return {
             "authorization_url": auth_url,
             "code_verifier": code_verifier,  # Client must store this securely
@@ -390,36 +390,36 @@ The token exchange implements full PKCE verification:
                                 client_id: str, redirect_uri: str) -> Dict[str, str]:
         """
         Exchange authorization code for tokens with PKCE verification.
-        
+
         Implements complete OAuth 2.1 with PKCE validation.
         """
         # Step 1: Validate authorization code exists and not expired
         auth_request = self.auth_codes.get(auth_code)
         if not auth_request:
             raise HTTPException(status_code=400, detail="Invalid authorization code")
-        
+
         if datetime.now() > auth_request["expires_at"]:
             del self.auth_codes[auth_code]  # Clean up expired code
             raise HTTPException(status_code=400, detail="Authorization code expired")
-        
+
         # Step 2: Validate client and redirect URI
         if auth_request["client_id"] != client_id:
             raise HTTPException(status_code=400, detail="Invalid client")
-        
+
         if auth_request["redirect_uri"] != redirect_uri:
             raise HTTPException(status_code=400, detail="Invalid redirect URI")
-        
+
         # Step 3: PKCE verification - critical security check
         stored_challenge = auth_request["code_challenge"]
         challenge_method = auth_request["challenge_method"]
-        
+
         # Generate challenge from provided verifier
         calculated_challenge, _ = self.pkce_generator.generate_code_challenge(code_verifier)
-        
+
         if calculated_challenge != stored_challenge:
             logger.warning(f"PKCE verification failed for client {client_id}")
             raise HTTPException(status_code=400, detail="Invalid code verifier")
-        
+
         # Step 4: Create tokens with proper scoping
         user_data = {
             "user_id": f"user_{secrets.token_hex(8)}",  # In production: get from user session
@@ -427,7 +427,7 @@ The token exchange implements full PKCE verification:
             "roles": ["user"],
             "permissions": auth_request["scope"].split()
         }
-        
+
         # Use Resource Indicators if specified
         if auth_request.get("resource"):
             tokens = self.resource_manager.create_scoped_token(
@@ -437,10 +437,10 @@ The token exchange implements full PKCE verification:
             )
         else:
             tokens = self.jwt_manager.create_tokens(user_data)
-        
+
         # Clean up used authorization code
         del self.auth_codes[auth_code]
-        
+
         logger.info(f"Successfully exchanged code for tokens: client {client_id}")
         return tokens
 ```
@@ -457,19 +457,19 @@ Implement automatic token rotation for enhanced security:
     def rotate_refresh_token(self, refresh_token: str) -> Dict[str, str]:
         """
         Rotate refresh token for enhanced security.
-        
+
         Old refresh token becomes invalid, new tokens issued.
         """
         try:
             # Verify current refresh token
             payload = jwt.decode(refresh_token, self.jwt_manager.secret_key, algorithms=["HS256"])
-            
+
             if payload.get("type") != "refresh":
                 raise HTTPException(status_code=401, detail="Invalid token type")
-            
+
             # Blacklist old refresh token
             self.jwt_manager.blacklist_token(refresh_token)
-            
+
             # Create new token pair
             user_data = {
                 "user_id": payload["sub"],
@@ -477,12 +477,12 @@ Implement automatic token rotation for enhanced security:
                 "roles": ["user"],
                 "permissions": ["read", "write"]
             }
-            
+
             new_tokens = self.jwt_manager.create_tokens(user_data)
             logger.info(f"Refresh token rotated for user {payload['sub']}")
-            
+
             return new_tokens
-            
+
         except jwt.ExpiredSignatureError:
             raise HTTPException(status_code=401, detail="Refresh token expired")
         except jwt.InvalidTokenError:
@@ -504,12 +504,12 @@ Add comprehensive security monitoring:
             timestamp=datetime.utcnow().isoformat(),
             **details
         )
-        
+
         # In production: send to SIEM, security dashboard, etc.
         if event_type in ["failed_login", "pkce_failure", "token_misuse"]:
             # Alert on critical security events
             self._send_security_alert(event_type, details)
-    
+
     def _send_security_alert(self, event_type: str, details: Dict[str, Any]):
         """Send real-time security alerts for critical events."""
         # Implementation would integrate with your alerting system
@@ -517,9 +517,10 @@ Add comprehensive security monitoring:
 ```
 
 Security monitoring provides visibility into potential attacks and system health.
-
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Main Session](Session5_Secure_MCP_Server.md) | [Next: Enterprise API Key Management →](Session5_Enterprise_API_Keys.md)
+**Previous:** [Session 4 - Production MCP Deployment ←](Session4_Production_MCP_Deployment.md)
+**Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
+---

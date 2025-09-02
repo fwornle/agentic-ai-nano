@@ -1,6 +1,6 @@
 # Session 5 - Module D: Testing & Benchmarking
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 5 core content first.
 
 ## Palantir Data Engineering Excellence
@@ -55,7 +55,7 @@ Now we'll define the main testing suite class that coordinates all integration t
 ```python
 class DataProcessingIntegrationTestSuite:
     """Comprehensive integration testing for PydanticAI data processing agents."""
-    
+
     def __init__(self):
         self.test_results: List[Dict[str, Any]] = []
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -72,7 +72,7 @@ Next, we implement the core validation testing method that tests data processing
 ```python
     async def test_data_processing_agent_validation(self, agent: ProductionDataAgentBase) -> Dict[str, Any]:
         """Test data processing agent validation capabilities with comprehensive scenarios."""
-        
+
         # Define comprehensive test cases covering valid inputs and edge cases for data processing
         test_cases = [
             # Valid data processing inputs
@@ -83,7 +83,7 @@ Next, we implement the core validation testing method that tests data processing
                 'expected_rows': 100000
             },
             {
-                'name': 'valid_streaming_data_request', 
+                'name': 'valid_streaming_data_request',
                 'input': 'Process real-time user events from Kafka topic user-interactions',
                 'should_pass': True,
                 'expected_rows': 50000
@@ -140,7 +140,7 @@ Now we execute each test case and collect detailed results for data processing a
 
 ```python
         results = []
-        
+
         for test_case in test_cases:
             try:
                 start_time = time.time()
@@ -161,7 +161,7 @@ Test execution begins with precise timing measurement to capture performance met
                     'result': result,
                     'status': 'pass' if (result.get('success', False) == test_case['should_pass']) else 'fail'
                 }
-                
+
             except Exception as e:
 ```
 
@@ -175,7 +175,7 @@ Comprehensive test result structure captures both functional correctness and per
                     'error': str(e),
                     'status': 'pass' if not test_case['should_pass'] else 'fail'
                 }
-            
+
             results.append(test_result)
             self.data_quality_metrics['schema_validation_tests'] += 1
 ```
@@ -201,7 +201,7 @@ Comprehensive error scenario testing validates that data processing agents handl
 ```python
     async def test_data_processing_error_handling(self, agent: ProductionDataAgentBase) -> Dict[str, Any]:
         """Test data processing agent error handling capabilities."""
-        
+
         # Define timeout and connection failure scenarios for data processing
         error_scenarios = [
             {
@@ -241,7 +241,7 @@ Now we execute each error scenario and verify proper error handling for data pro
 
 ```python
         results = []
-        
+
         # Execute each error scenario with controlled testing environment
         for scenario in error_scenarios:
             try:
@@ -314,7 +314,7 @@ These helper methods simulate different types of errors for comprehensive data p
                 severity=DataProcessingErrorSeverity.HIGH
             )
         )
-    
+
     def _simulate_schema_validation_error(self) -> Exception:
         """Simulate a schema validation error for testing."""
         return SchemaValidationError(
@@ -334,7 +334,7 @@ Error simulation methods create realistic failure scenarios that mirror producti
             dataset_id="customer_events_2024",
             quality_score=0.3
         )
-        
+
     def _simulate_streaming_lag_error(self) -> Exception:
         """Simulate a streaming lag error for testing."""
         return StreamingLagError(
@@ -366,13 +366,13 @@ Load testing validates data processing agent performance under concurrent usage 
 
 ```python
     async def test_data_processing_concurrent_load(
-        self, 
-        agent: ProductionDataAgentBase, 
+        self,
+        agent: ProductionDataAgentBase,
         concurrent_requests: int = 20,
         total_requests: int = 200
     ) -> Dict[str, Any]:
         """Test data processing agent performance under concurrent load."""
-        
+
         async def single_data_processing_request(request_id: int) -> Dict[str, Any]:
             """Execute a single data processing test request with timing and error handling."""
             start_time = time.time()
@@ -392,7 +392,7 @@ Load testing simulation creates realistic data processing scenarios that represe
 ```python
                 request_text = random.choice(request_types)
                 result = await agent.process_data_request(f"{request_text} - Request {request_id}")
-                
+
                 return {
                     'request_id': request_id,
                     'success': True,
@@ -424,7 +424,7 @@ Next, we set up concurrent execution using semaphores to control data processing
         # Execute concurrent batches with controlled concurrency for data processing
         results = []
         semaphore = asyncio.Semaphore(concurrent_requests)
-        
+
         async def execute_with_semaphore(request_id: int):
             async with semaphore:
                 return await single_data_processing_request(request_id)
@@ -549,13 +549,13 @@ Data processing specific metrics extend standard agent monitoring with domain-sp
 
     # Response time percentiles
     response_times: List[float] = field(default_factory=list)
-    
+
     # Error breakdown by data processing category
     error_types: Dict[str, int] = field(default_factory=dict)
-    
+
     # Success rate over time
     success_rate_history: List[Dict[str, Any]] = field(default_factory=list)
-    
+
     # Data processing throughput metrics
     throughput_history: List[Dict[str, Any]] = field(default_factory=list)
 ```
@@ -566,11 +566,11 @@ Next, we implement intelligent response time tracking with memory management for
     def update_response_time(self, response_time: float) -> None:
         """Update response time metrics with memory management for data processing."""
         self.response_times.append(response_time)
-        
+
         # Keep only last 10000 response times for data processing memory management
         if len(self.response_times) > 10000:
             self.response_times = self.response_times[-10000:]
-        
+
         # Update aggregate metrics
         self.avg_response_time = sum(self.response_times) / len(self.response_times)
         self.min_response_time = min(self.min_response_time, response_time)
@@ -584,7 +584,7 @@ Response time tracking implements intelligent memory management to prevent unbou
         """Update data processing specific metrics."""
         self.datasets_processed += 1
         self.total_rows_processed += rows_processed
-        
+
         # Update running average of data quality score
         current_datasets = max(self.datasets_processed, 1)
         self.data_quality_score = ((self.data_quality_score * (current_datasets - 1)) + data_quality) / current_datasets
@@ -597,10 +597,10 @@ Finally, we add percentile calculation for detailed data processing performance 
         """Get response time percentiles for data processing performance analysis."""
         if not self.response_times:
             return {}
-        
+
         sorted_times = sorted(self.response_times)
         n = len(sorted_times)
-        
+
         return {
             'p50': sorted_times[int(n * 0.5)],
             'p75': sorted_times[int(n * 0.75)],
@@ -608,14 +608,14 @@ Finally, we add percentile calculation for detailed data processing performance 
             'p95': sorted_times[int(n * 0.95)],
             'p99': sorted_times[int(n * 0.99)]
         }
-    
+
     def get_throughput_metrics(self) -> Dict[str, float]:
         """Get data processing throughput metrics."""
         if not self.throughput_history:
             return {'current_rows_per_second': 0.0, 'peak_rows_per_second': 0.0}
-        
+
         recent_throughput = [t['rows_per_second'] for t in self.throughput_history[-10:]]  # Last 10 measurements
-        
+
         return {
             'current_rows_per_second': recent_throughput[-1] if recent_throughput else 0.0,
             'average_rows_per_second': sum(recent_throughput) / len(recent_throughput) if recent_throughput else 0.0,
@@ -630,7 +630,7 @@ The metrics collector provides comprehensive tracking and reporting capabilities
 ```python
 class EnterpriseDataProcessingMetricsCollector:
     """Enterprise-grade metrics collection and reporting for data processing systems."""
-    
+
     def __init__(self, export_interval: int = 60, retention_hours: int = 24):
         self.export_interval = export_interval
         self.retention_hours = retention_hours
@@ -646,7 +646,7 @@ The enterprise metrics collector provides centralized monitoring for multiple da
         self.prometheus_enabled = False
         self.datadog_enabled = False
         self.custom_exporters: List[Callable] = []
-        
+
         # Structured logging for data processing
         self.logger = structlog.get_logger("pydantic_ai.data_processing.metrics")
 ```
@@ -655,9 +655,9 @@ Now we implement the core method for recording data processing agent request met
 
 ```python
     def record_data_processing_request(
-        self, 
-        agent_id: str, 
-        success: bool, 
+        self,
+        agent_id: str,
+        success: bool,
         response_time: float,
         rows_processed: int = 0,
         data_quality_score: float = 1.0,
@@ -676,7 +676,7 @@ The comprehensive request recording method captures all essential metrics for da
         # Ensure agent is registered
         if agent_id not in self.agent_metrics:
             self.agent_metrics[agent_id] = DataProcessingAgentMetrics(agent_id)
-        
+
         agent_metrics = self.agent_metrics[agent_id]
         agent_metrics.request_count += 1
         self.global_metrics.request_count += 1
@@ -691,7 +691,7 @@ Next, we record success or error metrics and update global statistics:
             agent_metrics.success_count += 1
             agent_metrics.update_response_time(response_time)
             agent_metrics.update_data_processing_metrics(rows_processed, data_quality_score)
-            
+
             self.global_metrics.success_count += 1
             self.global_metrics.update_response_time(response_time)
             self.global_metrics.update_data_processing_metrics(rows_processed, data_quality_score)
@@ -719,7 +719,7 @@ Throughput tracking provides real-time performance visibility with memory manage
         else:
             agent_metrics.error_count += 1
             self.global_metrics.error_count += 1
-            
+
             # Track data processing specific error types
             if error_type:
                 agent_metrics.error_types[error_type] = agent_metrics.error_types.get(error_type, 0) + 1
@@ -779,9 +779,9 @@ Integration with Prometheus provides industry-standard metrics collection and al
         """Export data processing metrics in Prometheus format for monitoring systems."""
         if not self.prometheus_enabled:
             return ""
-        
+
         metrics_output = []
-        
+
         # Global data processing metrics with standard Prometheus format
         global_summary = self.get_global_summary()
         metrics_output.extend([
@@ -790,7 +790,7 @@ Integration with Prometheus provides industry-standard metrics collection and al
             f"pydantic_ai_data_requests_total {global_summary['total_requests']}",
             f"",
             f"# HELP pydantic_ai_data_success_rate Current data processing success rate",
-            f"# TYPE pydantic_ai_data_success_rate gauge", 
+            f"# TYPE pydantic_ai_data_success_rate gauge",
             f"pydantic_ai_data_success_rate {global_summary['global_success_rate']}"
 
 Prometheus metrics export provides industry-standard monitoring integration with proper metric types and labeling. Counter metrics track cumulative request counts and row processing totals, while gauge metrics provide current state indicators like success rates and data quality scores essential for real-time monitoring and alerting.
@@ -829,7 +829,7 @@ Per-agent metrics enable detailed performance analysis and capacity planning by 
                     f"pydantic_ai_data_agent_rows_processed{{agent=\"{agent_id}\"}} {summary['total_rows_processed']}",
                     f"pydantic_ai_data_agent_quality_score{{agent=\"{agent_id}\"}} {summary['data_quality_score']}"
                 ])
-        
+
         return "\n".join(metrics_output)
 ```
 
@@ -874,26 +874,26 @@ class DataProcessingCacheEntry(Generic[V]):
     access_count: int
     ttl_seconds: Optional[float]
     size_bytes: int
-    
+
     # Data processing specific metadata
     dataset_id: Optional[str] = None
     data_quality_score: float = 1.0
     processing_cost: float = 0.0  # Cost to regenerate this data
     rows_count: int = 0
-    
+
     def is_expired(self) -> bool:
         """Check if cache entry has expired."""
         if not self.ttl_seconds:
             return False
-        
+
         age = datetime.now(timezone.utc) - self.created_at
         return age.total_seconds() > self.ttl_seconds
-    
+
     def update_access(self) -> None:
         """Update access statistics for LRU management in data processing."""
         self.last_accessed = datetime.now(timezone.utc)
         self.access_count += 1
-    
+
     def get_priority_score(self) -> float:
         """Calculate priority score for intelligent eviction in data processing."""
         # Higher score = higher priority to keep
@@ -901,7 +901,7 @@ class DataProcessingCacheEntry(Generic[V]):
         frequency_score = self.access_count / 10.0
         quality_score = self.data_quality_score
         cost_score = self.processing_cost / 100.0  # Normalize cost
-        
+
         return recency_score + frequency_score + quality_score + cost_score
 ```
 
@@ -912,9 +912,9 @@ The intelligent cache provides high-performance caching with automatic eviction,
 ```python
 class IntelligentDataProcessingCache(Generic[K, V]):
     """High-performance cache with intelligent eviction strategies for data processing."""
-    
+
     def __init__(
-        self, 
+        self,
         max_size: int = 10000,  # Higher default for data processing
         default_ttl_seconds: float = 7200,  # 2 hours default for data
         max_memory_mb: float = 1000  # 1GB for data processing
@@ -922,7 +922,7 @@ class IntelligentDataProcessingCache(Generic[K, V]):
         self.max_size = max_size
         self.default_ttl_seconds = default_ttl_seconds
         self.max_memory_bytes = max_memory_mb * 1024 * 1024
-        
+
         self._cache: OrderedDict[K, DataProcessingCacheEntry[V]] = OrderedDict()
         self._lock = threading.RLock()
         self._total_size_bytes = 0
@@ -945,7 +945,7 @@ Now we implement the intelligent cache retrieval method with data processing acc
             # Periodic cleanup for data processing efficiency
             if len(self._cache) > 1000 and len(self._cache) % 100 == 0:
                 self._cleanup_expired()
-            
+
             entry = self._cache.get(key)
             if not entry:
                 self._stats['misses'] += 1
@@ -961,7 +961,7 @@ Cache retrieval begins with intelligent cleanup management to maintain performan
                 self._stats['misses'] += 1
                 self._stats['expired_cleanups'] += 1
                 return None
-            
+
             # Update access statistics and move to end (most recently used)
             entry.update_access()
             self._cache.move_to_end(key)
@@ -974,23 +974,23 @@ Expiration handling ensures cache consistency by removing stale data while maint
             # Track data processing specific metrics
             if entry.data_quality_score > 0.8:
                 self._stats['data_quality_hits'] += 1
-            
+
             self._stats['cost_savings'] += entry.processing_cost
-            
+
             return entry.value
 ```
 
 Next, we implement the cache storage method with intelligent eviction for data processing:
 
 ```python
-    def set(self, key: K, value: V, ttl_seconds: float = None, 
+    def set(self, key: K, value: V, ttl_seconds: float = None,
             dataset_id: str = None, data_quality_score: float = 1.0,
             processing_cost: float = 0.0, rows_count: int = 0) -> None:
         """Set value in cache with intelligent eviction for data processing."""
         with self._lock:
             ttl = ttl_seconds or self.default_ttl_seconds
             size_bytes = self._calculate_size(value)
-            
+
             # Remove existing entry if present
             if key in self._cache:
                 old_entry = self._cache.pop(key)
@@ -1018,10 +1018,10 @@ Cache entry creation initializes comprehensive metadata for intelligent cache ma
                 processing_cost=processing_cost,
                 rows_count=rows_count
             )
-            
+
             # Evict if necessary before adding
             self._evict_intelligently()
-            
+
             # Add new entry
             self._cache[key] = entry
             self._total_size_bytes += size_bytes
@@ -1042,14 +1042,14 @@ Finally, we add helper methods for size calculation, intelligent eviction, and d
             except:
                 # Final fallback estimation
                 return len(str(obj)) * 2  # Rough estimate for Unicode
-    
+
     def _evict_intelligently(self) -> None:
         """Evict entries using intelligent priority scoring for data processing."""
-        while (len(self._cache) >= self.max_size or 
+        while (len(self._cache) >= self.max_size or
                self._total_size_bytes >= self.max_memory_bytes):
             if not self._cache:
                 break
-            
+
             # Find entry with lowest priority score
             lowest_priority_key = None
             lowest_priority_score = float('inf')
@@ -1061,7 +1061,7 @@ Intelligent eviction algorithm scans all cache entries to find the lowest priori
                 if priority_score < lowest_priority_score:
                     lowest_priority_score = priority_score
                     lowest_priority_key = key
-            
+
             if lowest_priority_key:
                 entry = self._cache.pop(lowest_priority_key)
                 self._total_size_bytes -= entry.size_bytes
@@ -1076,11 +1076,11 @@ Finally, we provide comprehensive cache performance statistics for data processi
         with self._lock:
             total_requests = self._stats['hits'] + self._stats['misses']
             hit_rate = (self._stats['hits'] / total_requests * 100) if total_requests > 0 else 0
-            
+
             # Calculate data processing specific metrics
             total_rows = sum(entry.rows_count for entry in self._cache.values())
             avg_quality_score = (
-                sum(entry.data_quality_score for entry in self._cache.values()) / 
+                sum(entry.data_quality_score for entry in self._cache.values()) /
                 len(self._cache) if self._cache else 0.0
             )
 ```
@@ -1136,7 +1136,7 @@ Now we handle cache lookup and function execution for data processing:
             cached_result = cache.get(cache_key)
             if cached_result is not None:
                 return cached_result
-            
+
             # Execute function and cache result with data processing metadata
             result = await func(*args, **kwargs)
 ```
@@ -1149,19 +1149,19 @@ Cache-first lookup strategy maximizes performance by avoiding expensive data pro
             rows_count = getattr(result, 'rows_processed', 0)
             data_quality_score = getattr(result, 'data_quality_score', 1.0) if include_quality_score else 1.0
             processing_cost = processing_cost_estimator(result) if processing_cost_estimator else 1.0
-            
+
             cache.set(
-                cache_key, 
-                result, 
-                ttl_seconds, 
+                cache_key,
+                result,
+                ttl_seconds,
                 dataset_id=dataset_id,
                 data_quality_score=data_quality_score,
                 processing_cost=processing_cost,
                 rows_count=rows_count
             )
-            
+
             return result
-        
+
         return wrapper
     return decorator
 ```
@@ -1172,9 +1172,9 @@ Cache-first lookup strategy maximizes performance by avoiding expensive data pro
 
 You've now mastered testing and benchmarking for PydanticAI data processing systems, including:
 
-✅ **Comprehensive Data Processing Testing**: Built integration tests, error scenario testing, and load testing frameworks for data systems  
-✅ **Data Processing Performance Monitoring**: Implemented enterprise metrics collection with Prometheus integration optimized for data workloads  
-✅ **Intelligent Data Processing Caching**: Created high-performance caching with priority-based eviction and data quality tracking  
+✅ **Comprehensive Data Processing Testing**: Built integration tests, error scenario testing, and load testing frameworks for data systems
+✅ **Data Processing Performance Monitoring**: Implemented enterprise metrics collection with Prometheus integration optimized for data workloads
+✅ **Intelligent Data Processing Caching**: Created high-performance caching with priority-based eviction and data quality tracking
 ✅ **Production Data Processing Monitoring**: Built observability with distributed tracing and structured logging for data systems
 
 ---
@@ -1184,34 +1184,34 @@ You've now mastered testing and benchmarking for PydanticAI data processing syst
 Test your understanding of testing and benchmarking systems for data processing:
 
 **Question 1:** What does the comprehensive data processing integration test framework validate?
-A) Only basic functionality  
-B) Valid inputs, error scenarios, edge cases, performance under load, and data quality metrics  
-C) Simple unit tests only  
-D) Manual testing procedures  
+A) Only basic functionality
+B) Valid inputs, error scenarios, edge cases, performance under load, and data quality metrics
+C) Simple unit tests only
+D) Manual testing procedures
 
 **Question 2:** How does the DataProcessingMetricsCollector track agent performance data?
-A) Simple counters only  
-B) Comprehensive metrics with request counts, response times, error rates, data quality scores, and throughput  
-C) Binary success/failure tracking  
-D) Manual logging only  
+A) Simple counters only
+B) Comprehensive metrics with request counts, response times, error rates, data quality scores, and throughput
+C) Binary success/failure tracking
+D) Manual logging only
 
 **Question 3:** What eviction strategy does the IntelligentDataProcessingCache use when memory limits are reached?
-A) Random removal  
-B) Priority-based eviction with data quality, processing cost, and access pattern consideration  
-C) First-in-first-out only  
-D) Manual cache clearing  
+A) Random removal
+B) Priority-based eviction with data quality, processing cost, and access pattern consideration
+C) First-in-first-out only
+D) Manual cache clearing
 
 **Question 4:** What information does the data processing performance decorator capture for monitoring?
-A) Just execution time  
-B) Request metrics, performance data, error tracking, data quality scores, and processing costs  
-C) Function names only  
-D) Memory usage only  
+A) Just execution time
+B) Request metrics, performance data, error tracking, data quality scores, and processing costs
+C) Function names only
+D) Memory usage only
 
 **Question 5:** How does the load testing framework simulate realistic data processing usage patterns?
-A) Single threaded execution  
-B) Concurrent user simulation with configurable load patterns, data processing scenarios, and throughput analysis  
-C) Random API calls  
-D) Simple sequential testing  
+A) Single threaded execution
+B) Concurrent user simulation with configurable load patterns, data processing scenarios, and throughput analysis
+C) Random API calls
+D) Simple sequential testing
 
 [**🗂️ View Test Solutions →**](Session5_ModuleD_Test_Solutions.md)
 
@@ -1234,3 +1234,10 @@ You've completed the comprehensive PydanticAI learning journey optimized for dat
 - `src/session5/testing_framework.py` - Complete testing infrastructure for data processing systems
 - `src/session5/monitoring.py` - Enterprise monitoring systems for data processing
 - `src/session5/caching.py` - Intelligent caching implementations for data processing workloads
+---
+
+## 🧭 Navigation
+
+**Previous:** [Session 4 - CrewAI Team Orchestration ←](Session4_CrewAI_Team_Orchestration.md)
+**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+---

@@ -1,18 +1,18 @@
 # ⚙️ Session 4: Advanced Prompt Engineering
 
-> **⚙️ IMPLEMENTER PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer and 📝 Participant paths  
-> Time Investment: 90-120 minutes  
-> Outcome: Production-ready RAG prompt engineering system  
+> **⚙️ IMPLEMENTER PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer and 📝 Participant paths
+> Time Investment: 90-120 minutes
+> Outcome: Production-ready RAG prompt engineering system
 
 ## Learning Outcomes
 
-After completing this advanced guide, you will:  
+After completing this advanced guide, you will:
 
-- Master advanced RAG-specific prompt engineering techniques  
-- Build dynamic prompt adaptation systems  
-- Implement chain-of-thought reasoning for RAG  
-- Create confidence calibration and assessment frameworks  
+- Master advanced RAG-specific prompt engineering techniques
+- Build dynamic prompt adaptation systems
+- Implement chain-of-thought reasoning for RAG
+- Create confidence calibration and assessment frameworks
 
 ## Advanced RAG Prompt Engineering Framework
 
@@ -22,7 +22,7 @@ You have enhanced queries, optimized retrieval, and efficiently packed context. 
 
 ### Step 1: Advanced RAG Prompt Engineer Setup
 
-Build the foundation for sophisticated prompt engineering:  
+Build the foundation for sophisticated prompt engineering:
 
 ```python
 class RAGPromptEngineer:
@@ -30,7 +30,7 @@ class RAGPromptEngineer:
 
     def __init__(self, llm_model):
         self.llm_model = llm_model
-        
+
         # Domain-specific prompt templates
         self.prompt_templates = {
             'factual_qa': self._factual_qa_template,
@@ -60,7 +60,7 @@ class RAGPromptEngineer:
 
 ### Step 2: Core Prompt Engineering Workflow
 
-Implement the main prompt engineering coordination system:  
+Implement the main prompt engineering coordination system:
 
 ```python
 def engineer_rag_prompt(self, query: str, context: str,
@@ -70,7 +70,7 @@ def engineer_rag_prompt(self, query: str, context: str,
 
     # Start with base template
     base_prompt = self.prompt_templates[query_type](query, context)
-    
+
     # Apply optimization techniques
     optimized_prompt = base_prompt
     optimization_metadata = {}
@@ -100,7 +100,7 @@ def engineer_rag_prompt(self, query: str, context: str,
 
 ### Step 3: Advanced Template Systems
 
-Create sophisticated templates for different query types:  
+Create sophisticated templates for different query types:
 
 #### Factual QA Template with Source Attribution
 
@@ -139,7 +139,7 @@ ANSWER:"""
 ```python
 def _analytical_template(self, query: str, context: str) -> str:
     """Template for analytical queries requiring synthesis."""
-    
+
     return f"""You are an expert analyst. Analyze the provided context to answer the analytical question comprehensively.
 
 CONTEXT FOR ANALYSIS:
@@ -171,7 +171,7 @@ ANALYSIS:"""
 ```python
 def _technical_template(self, query: str, context: str) -> str:
     """Template for technical implementation questions."""
-    
+
     return f"""You are a technical expert. Provide accurate technical guidance based on the provided documentation and context.
 
 TECHNICAL CONTEXT:
@@ -201,7 +201,7 @@ TECHNICAL RESPONSE:"""
 
 ### Step 4: Chain-of-Thought Enhancement
 
-Implement sophisticated reasoning structures for complex queries:  
+Implement sophisticated reasoning structures for complex queries:
 
 ```python
 def _add_chain_of_thought(self, base_prompt: str, query: str,
@@ -269,16 +269,16 @@ FINAL ANSWER:
 
 ### Step 5: Advanced Confidence Calibration
 
-Implement sophisticated confidence assessment frameworks:  
+Implement sophisticated confidence assessment frameworks:
 
 ```python
 def _add_confidence_calibration(self, base_prompt: str, query: str,
                               context: str) -> Dict[str, Any]:
     """Add advanced confidence calibration framework."""
-    
+
     confidence_framework = self._build_advanced_confidence_framework()
     enhanced_prompt = base_prompt + confidence_framework
-    
+
     return {
         'prompt': enhanced_prompt,
         'metadata': {
@@ -295,7 +295,7 @@ def _add_confidence_calibration(self, base_prompt: str, query: str,
 ```python
 def _build_advanced_confidence_framework(self) -> str:
     """Build comprehensive confidence assessment framework."""
-    
+
     return """
 
 CONFIDENCE ASSESSMENT FRAMEWORK:
@@ -305,7 +305,7 @@ Provide a detailed confidence assessment for your response:
    - Strong: Multiple reliable, consistent sources with detailed information
    - Medium: Some sources with mostly consistent information, minor gaps
    - Weak: Limited sources, significant gaps, or inconsistent information
-   
+
 2. COMPLETENESS (Complete/Substantial/Partial/Limited):
    - Complete: Context fully addresses all aspects of the question
    - Substantial: Context addresses most important aspects with minor gaps
@@ -346,13 +346,13 @@ RELIABILITY INDICATORS:
 
 ### Step 6: Context Analysis Enhancement
 
-Add sophisticated context quality analysis:  
+Add sophisticated context quality analysis:
 
 ```python
 def _add_context_analysis(self, base_prompt: str, query: str,
                          context: str) -> Dict[str, Any]:
     """Add context quality analysis to improve response accuracy."""
-    
+
     context_analysis_enhancement = """
 
 CONTEXT QUALITY ANALYSIS:
@@ -391,13 +391,13 @@ CONTEXT ANALYSIS SUMMARY:
 
 ### Step 7: Multi-Step Reasoning Enhancement
 
-Implement complex reasoning structures for sophisticated queries:  
+Implement complex reasoning structures for sophisticated queries:
 
 ```python
 def _add_multi_step_reasoning(self, base_prompt: str, query: str,
                             context: str) -> Dict[str, Any]:
     """Add multi-step reasoning for complex analytical queries."""
-    
+
     multi_step_enhancement = """
 
 MULTI-STEP REASONING PROCESS:
@@ -409,7 +409,7 @@ STEP 1 - QUESTION DECOMPOSITION:
 - Determine the logical relationships between different components
 
 STEP 2 - INFORMATION MAPPING:
-- Map relevant context sections to each question component  
+- Map relevant context sections to each question component
 - Identify which sources address which aspects of the question
 - Note any information gaps or conflicts between sources
 
@@ -453,7 +453,7 @@ INTEGRATED FINAL ANSWER:
 
 ### Step 8: Dynamic Prompt Adaptation
 
-Implement adaptive prompting based on query and context characteristics:  
+Implement adaptive prompting based on query and context characteristics:
 
 ```python
 class DynamicPromptAdapter:
@@ -466,21 +466,21 @@ class DynamicPromptAdapter:
     def adapt_prompt_dynamically(self, query: str, context: str,
                                 retrieval_metadata: Dict) -> Dict[str, Any]:
         """Dynamically adapt prompt based on context and query analysis."""
-        
+
         # Step 1: Analyze input characteristics
         context_analysis = self._analyze_context_quality(context, query)
         query_analysis = self._analyze_query_characteristics(query)
-        
+
         # Step 2: Select optimal strategy
         prompt_strategy = self._select_prompt_strategy(
             context_analysis, query_analysis, retrieval_metadata
         )
-        
+
         # Step 3: Generate adapted prompt
         adapted_prompt = self._generate_adapted_prompt(
             query, context, prompt_strategy
         )
-        
+
         return {
             'adapted_prompt': adapted_prompt,
             'context_analysis': context_analysis,
@@ -494,29 +494,29 @@ class DynamicPromptAdapter:
 
 ### Step 9: Context Quality Assessment
 
-Implement sophisticated context analysis for adaptive prompting:  
+Implement sophisticated context analysis for adaptive prompting:
 
 ```python
 def _analyze_context_quality(self, context: str, query: str) -> Dict[str, Any]:
     """Analyze the quality and characteristics of retrieved context."""
-    
+
     # Basic metrics
     word_count = len(context.split())
     source_count = context.count('[Source:')
-    
+
     # Quality assessment using LLM
     quality_prompt = f"""
     Analyze the quality of this context for answering the given query:
-    
+
     Query: {query}
     Context: {context[:1000]}...
-    
+
     Assess:
     1. Relevance (0-10): How well does context address the query?
     2. Completeness (0-10): How comprehensive is the information?
     3. Clarity (0-10): How clear and well-organized is the information?
     4. Reliability (0-10): How credible and authoritative are the sources?
-    
+
     Provide scores and brief explanations:
     """
 ```
@@ -525,26 +525,26 @@ def _analyze_context_quality(self, context: str, query: str) -> Dict[str, Any]:
 
 ### Step 10: Query Complexity Analysis
 
-Analyze query characteristics to guide prompt selection:  
+Analyze query characteristics to guide prompt selection:
 
 ```python
 def _analyze_query_characteristics(self, query: str) -> Dict[str, Any]:
     """Analyze query characteristics for prompt adaptation."""
-    
+
     analysis_prompt = f"""
     Analyze this query's characteristics:
-    
+
     Query: {query}
-    
+
     Classify:
     1. Complexity (simple/moderate/complex): Based on number of concepts and relationships
     2. Type (factual/analytical/procedural/creative): Primary question type
     3. Scope (narrow/broad): How focused or wide-ranging is the question
     4. Reasoning Required (low/medium/high): Level of synthesis needed
-    
+
     Return structured analysis:
     """
-    
+
     try:
         response = self.llm_model.predict(analysis_prompt)
         return self._parse_query_analysis(response)
@@ -559,45 +559,45 @@ def _analyze_query_characteristics(self, query: str) -> Dict[str, Any]:
 
 ### Step 11: Adaptive Strategy Selection
 
-Select optimal prompt strategies based on analysis results:  
+Select optimal prompt strategies based on analysis results:
 
 ```python
-def _select_prompt_strategy(self, context_analysis: Dict, 
+def _select_prompt_strategy(self, context_analysis: Dict,
                            query_analysis: Dict,
                            retrieval_metadata: Dict) -> Dict[str, Any]:
     """Select optimal prompt strategy based on analysis."""
-    
+
     strategy = {
         'base_template': 'factual_qa',
         'optimizations': [],
         'reasoning_depth': 'basic'
     }
-    
+
     # Adapt based on query complexity
     if query_analysis.get('complexity') == 'complex':
         strategy['optimizations'].append('multi_step_reasoning')
         strategy['reasoning_depth'] = 'advanced'
-    
+
     # Adapt based on context quality
     context_quality = context_analysis.get('overall_quality', 0.5)
     if context_quality < 0.6:
         strategy['optimizations'].extend(['context_analysis', 'uncertainty_handling'])
-    
+
     # Always add confidence calibration for RAG
     if 'confidence_calibration' not in strategy['optimizations']:
         strategy['optimizations'].append('confidence_calibration')
-    
+
     # Adapt template based on query type
     query_type = query_analysis.get('type', 'factual')
     if query_type in ['analytical', 'procedural', 'technical']:
         strategy['base_template'] = query_type
-    
+
     return strategy
 ```
 
 ## Testing Your Advanced Prompt Engineering System
 
-Test the complete system with various scenarios:  
+Test the complete system with various scenarios:
 
 ```python
 # Test the advanced prompt engineering system
@@ -631,44 +631,44 @@ print(f"Optimizations applied: {factual_result['optimizations_applied']}")
 
 ## Production Integration
 
-Integrate your advanced prompt engineering into production RAG systems:  
+Integrate your advanced prompt engineering into production RAG systems:
 
 ```python
 class ProductionRAGSystem:
     """Production RAG system with advanced prompt engineering."""
-    
+
     def __init__(self, llm_model, vector_store, tokenizer):
         self.hyde_enhancer = HyDEQueryEnhancer(llm_model, embedding_model)
         self.context_optimizer = ContextWindowOptimizer(tokenizer)
         self.prompt_adapter = DynamicPromptAdapter(llm_model)
         self.vector_store = vector_store
         self.llm_model = llm_model
-    
+
     def query(self, user_query: str) -> Dict[str, Any]:
         """Complete RAG pipeline with advanced prompt engineering."""
-        
+
         # Enhanced query processing
         hyde_result = self.hyde_enhancer.enhance_query_with_hyde(user_query)
-        
+
         # Retrieval with enhanced query
         retrieved_chunks = self.vector_store.similarity_search_by_vector(
             hyde_result['enhanced_embedding'], k=20
         )
-        
+
         # Context optimization
         optimized_context = self.context_optimizer.optimize_context_window(
             user_query, retrieved_chunks
         )
-        
+
         # Adaptive prompt engineering
         prompt_result = self.prompt_adapter.adapt_prompt_dynamically(
-            user_query, optimized_context['optimized_context'], 
+            user_query, optimized_context['optimized_context'],
             {'retrieval_quality': len(retrieved_chunks)}
         )
-        
+
         # Generate response
         response = self.llm_model.predict(prompt_result['adapted_prompt'])
-        
+
         return {
             'response': response,
             'confidence_indicators': self._extract_confidence_indicators(response),
@@ -684,13 +684,14 @@ class ProductionRAGSystem:
 
 ## Advanced Practice Exercises
 
-1. **Custom Templates**: Create domain-specific prompt templates for specialized use cases  
-2. **Confidence Validation**: Implement confidence score validation against human assessments  
-3. **Adaptation Optimization**: Fine-tune adaptive strategy selection rules  
-4. **Performance Measurement**: Build comprehensive evaluation metrics for prompt effectiveness  
-
+1. **Custom Templates**: Create domain-specific prompt templates for specialized use cases
+2. **Confidence Validation**: Implement confidence score validation against human assessments
+3. **Adaptation Optimization**: Fine-tune adaptive strategy selection rules
+4. **Performance Measurement**: Build comprehensive evaluation metrics for prompt effectiveness
 ---
 
-## Navigation
+## 🧭 Navigation
 
-[← Back to Context Optimization](Session4_Context_Optimization.md) | [Next: Complete Enhancement Pipeline →](Session4_Complete_Enhancement_Pipeline.md)
+**Previous:** [Session 3 - Vector Databases & Search Optimization ←](Session3_Vector_Databases_Search_Optimization.md)
+**Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+---

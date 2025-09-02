@@ -30,7 +30,7 @@ All tools, dependencies, and BMW Gaia LLM API access are pre-configured and read
 ### Why Cloud Development?
 
 - **Zero Installation**: No local setup required
-- **Consistent Environment**: Identical setup for all participants  
+- **Consistent Environment**: Identical setup for all participants
 - **Corporate Integration**: Seamless access to BMW resources
 - **Scalable Resources**: Cloud computing power for AI workloads
 - **Pre-configured APIs**: BMW Gaia LLM API ready to use
@@ -67,7 +67,7 @@ For public access, you'll need to set up your local development environment. Whi
 Before beginning the course modules, ensure you have:
 
 1. **Python 3.11+** installed with pip and virtual environment support
-2. **Git** for version control and cloning repositories  
+2. **Git** for version control and cloning repositories
 3. **Code editor** (VS Code recommended with Python extension)
 4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
 

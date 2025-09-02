@@ -1,18 +1,18 @@
 # ⚙️ Session 7 Advanced: Choreography Systems
 
-> **⚙️ IMPLEMENTER PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer and 📝 Participant paths in main session  
-> Time Investment: 3-4 hours  
-> Outcome: Deep mastery of distributed A2A choreography patterns  
+> **⚙️ IMPLEMENTER PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer and 📝 Participant paths in main session
+> Time Investment: 3-4 hours
+> Outcome: Deep mastery of distributed A2A choreography patterns
 
 ## Advanced Learning Outcomes
 
-After completing this module, you will master:  
+After completing this module, you will master:
 
-- Event-driven choreography patterns for distributed agent coordination  
-- Complex event pattern recognition and response systems  
-- Distributed state management for choreographed workflows  
-- Production-grade event sourcing and replay capabilities  
+- Event-driven choreography patterns for distributed agent coordination
+- Complex event pattern recognition and response systems
+- Distributed state management for choreographed workflows
+- Production-grade event sourcing and replay capabilities
 
 ## The Dance of Autonomy - Choreography Patterns
 
@@ -31,7 +31,7 @@ from datetime import datetime
 import logging
 ```
 
-These imports provide the foundation for sophisticated event-driven coordination systems.  
+These imports provide the foundation for sophisticated event-driven coordination systems.
 
 ```python
 # Choreography framework imports
@@ -58,13 +58,13 @@ class EventPattern:
     priority: int = 1           # Pattern priority (higher = more important)
     correlation_keys: List[str] = None  # Keys for event correlation
     timeout_seconds: int = 300  # Pattern timeout for complex sequences
-    
+
     def __post_init__(self):
         if self.correlation_keys is None:
             self.correlation_keys = []
 ```
 
-Event patterns define sophisticated triggering conditions with correlation and timeout management.  
+Event patterns define sophisticated triggering conditions with correlation and timeout management.
 
 ```python
 @dataclass
@@ -86,7 +86,7 @@ The choreography engine watches for events and triggers appropriate responses, l
 ```python
 class ChoreographyEngine:
     """Event-driven choreography engine for agent coordination."""
-    
+
     def __init__(self, router: MessageRouter):
         self.router = router
         self.event_patterns: List[EventPattern] = []
@@ -94,11 +94,11 @@ class ChoreographyEngine:
         self.event_history: List[Dict] = []
         self.sequence_states: Dict[str, Dict] = {}  # Track sequence progress
         self.max_history = 1000
-        
+
         # Advanced event processing
         self.event_correlations: Dict[str, List[Dict]] = {}
         self.pattern_metrics: Dict[str, Dict] = {}
-        
+
         # Register message handler
         self.router.register_handler("choreography_event", self._handle_choreography_event)
 ```
@@ -110,10 +110,10 @@ The enhanced choreography engine provides sophisticated event correlation, seque
 When something significant happens, agents can publish events that may trigger coordinated responses from other agents:
 
 ```python
-    async def publish_event(self, event_type: str, event_data: Dict[str, Any], 
+    async def publish_event(self, event_type: str, event_data: Dict[str, Any],
                           source_agent: str = None, correlation_id: str = None):
         """Publish an event that may trigger choreographed actions."""
-        
+
         event = {
             "event_id": f"evt_{int(datetime.now().timestamp() * 1000)}",
             "event_type": event_type,
@@ -122,20 +122,20 @@ When something significant happens, agents can publish events that may trigger c
             "correlation_id": correlation_id or f"corr_{event_type}_{datetime.now().timestamp()}",
             "data": event_data
         }
-        
+
         # Add to event history with rotation
         self.event_history.append(event)
         if len(self.event_history) > self.max_history:
             self.event_history.pop(0)
-        
+
         # Update correlation tracking
         if correlation_id:
             if correlation_id not in self.event_correlations:
                 self.event_correlations[correlation_id] = []
             self.event_correlations[correlation_id].append(event)
-        
+
         logger.info(f"Published event: {event_type} from {source_agent}")
-        
+
         # Process event patterns and sequences
         await self._process_event_patterns(event)
         await self._process_event_sequences(event)
@@ -150,10 +150,10 @@ The engine evaluates complex conditions to determine when patterns should trigge
 ```python
     def _evaluate_condition(self, condition: str, event: Dict[str, Any]) -> bool:
         """Evaluate a condition expression against event data."""
-        
+
         if not condition or condition == "true":
             return True
-        
+
         try:
             # Create comprehensive evaluation context
             context = {
@@ -162,14 +162,14 @@ The engine evaluates complex conditions to determine when patterns should trigge
                 "source": event.get("source_agent"),
                 "timestamp": event.get("timestamp"),
                 "correlation_id": event.get("correlation_id"),
-                
+
                 # Advanced context
                 "recent_events": self.event_history[-10:],
                 "correlated_events": self._get_correlated_events(event),
                 "event_count": len(self.event_history),
                 "source_event_count": self._count_events_from_source(event.get("source_agent"))
             }
-            
+
             # Enhanced safety: restricted eval environment
             safe_dict = {
                 '__builtins__': {},
@@ -182,10 +182,10 @@ The engine evaluates complex conditions to determine when patterns should trigge
                 'min': min,
                 'max': max
             }
-            
+
             result = eval(condition, safe_dict, context)
             return bool(result)
-            
+
         except Exception as e:
             logger.warning(f"Failed to evaluate condition '{condition}': {e}")
             return False
@@ -203,27 +203,27 @@ The choreography engine provides sophisticated event correlation capabilities:
         correlation_id = event.get("correlation_id")
         if not correlation_id:
             return []
-        
+
         return self.event_correlations.get(correlation_id, [])
-    
+
     def _analyze_event_patterns(self, correlation_id: str) -> Dict[str, Any]:
         """Analyze patterns in correlated events."""
         events = self.event_correlations.get(correlation_id, [])
         if not events:
             return {}
-        
+
         # Time-based analysis
         timestamps = [datetime.fromisoformat(e["timestamp"]) for e in events]
         duration = (max(timestamps) - min(timestamps)).total_seconds()
-        
+
         # Frequency analysis
         event_types = [e["event_type"] for e in events]
         type_counts = {et: event_types.count(et) for et in set(event_types)}
-        
+
         # Source analysis
         sources = [e.get("source_agent") for e in events if e.get("source_agent")]
         unique_sources = len(set(sources))
-        
+
         return {
             "event_count": len(events),
             "duration_seconds": duration,
@@ -242,18 +242,18 @@ Complex choreography often requires recognition of event sequences:
 ```python
     async def _process_event_sequences(self, event: Dict[str, Any]):
         """Process event against defined sequences."""
-        
+
         for sequence in self.event_sequences:
             await self._check_sequence_progress(sequence, event)
-    
+
     async def _check_sequence_progress(self, sequence: EventSequence, event: Dict[str, Any]):
         """Check if event advances a sequence."""
-        
+
         if event["event_type"] not in sequence.events:
             return
-        
+
         sequence_key = f"{sequence.sequence_id}_{event.get('correlation_id', 'default')}"
-        
+
         # Initialize sequence state if needed
         if sequence_key not in self.sequence_states:
             self.sequence_states[sequence_key] = {
@@ -262,14 +262,14 @@ Complex choreography often requires recognition of event sequences:
                 "started_at": datetime.now(),
                 "last_event_at": None
             }
-        
+
         state = self.sequence_states[sequence_key]
-        
+
         # Check if this is the next expected event
         expected_index = len(state["progress"])
-        if (expected_index < len(sequence.events) and 
+        if (expected_index < len(sequence.events) and
             sequence.events[expected_index] == event["event_type"]):
-            
+
             # Check timing constraint
             if state["last_event_at"]:
                 interval = (datetime.now() - state["last_event_at"]).total_seconds()
@@ -278,11 +278,11 @@ Complex choreography often requires recognition of event sequences:
                     logger.warning(f"Sequence {sequence.sequence_id} timed out")
                     del self.sequence_states[sequence_key]
                     return
-            
+
             # Advance sequence
             state["progress"].append(event)
             state["last_event_at"] = datetime.now()
-            
+
             # Check if sequence is complete
             if len(state["progress"]) == len(sequence.events):
                 await self._trigger_sequence_action(sequence, state)
@@ -298,39 +298,39 @@ Real-world choreography often involves sophisticated patterns:
 ```python
     async def register_complex_pattern(self, pattern_config: Dict[str, Any]):
         """Register a complex choreography pattern."""
-        
+
         if pattern_config["type"] == "temporal_sequence":
             # Events must occur within time windows
             pattern = EventPattern(
                 event_type=pattern_config["trigger_event"],
                 condition=f"""
-                    len([e for e in recent_events 
-                         if e['event_type'] in {pattern_config['required_events']} 
-                         and (datetime.fromisoformat(event['timestamp']) - 
-                              datetime.fromisoformat(e['timestamp'])).total_seconds() 
+                    len([e for e in recent_events
+                         if e['event_type'] in {pattern_config['required_events']}
+                         and (datetime.fromisoformat(event['timestamp']) -
+                              datetime.fromisoformat(e['timestamp'])).total_seconds()
                          <= {pattern_config['time_window']}]) >= {len(pattern_config['required_events'])}
                 """,
                 action=pattern_config["action"],
                 target_capability=pattern_config["capability"],
                 priority=pattern_config.get("priority", 1)
             )
-            
+
         elif pattern_config["type"] == "threshold_pattern":
             # Trigger when event count reaches threshold
             pattern = EventPattern(
                 event_type=pattern_config["event_type"],
                 condition=f"""
-                    len([e for e in recent_events 
+                    len([e for e in recent_events
                          if e['event_type'] == '{pattern_config['event_type']}'
-                         and (datetime.fromisoformat(event['timestamp']) - 
-                              datetime.fromisoformat(e['timestamp'])).total_seconds() 
+                         and (datetime.fromisoformat(event['timestamp']) -
+                              datetime.fromisoformat(e['timestamp'])).total_seconds()
                          <= {pattern_config['time_window']}]) >= {pattern_config['threshold']}
                 """,
                 action=pattern_config["action"],
                 target_capability=pattern_config["capability"],
                 priority=pattern_config.get("priority", 1)
             )
-            
+
         elif pattern_config["type"] == "state_transition":
             # Complex state-based transitions
             pattern = EventPattern(
@@ -340,7 +340,7 @@ Real-world choreography often involves sophisticated patterns:
                 target_capability=pattern_config["capability"],
                 priority=pattern_config.get("priority", 1)
             )
-        
+
         self.event_patterns.append(pattern)
         logger.info(f"Registered complex pattern: {pattern_config['type']}")
 ```
@@ -354,7 +354,7 @@ Here's how choreography works in a complex e-commerce order processing system:
 ```python
 def create_ecommerce_choreography() -> List[EventPattern]:
     """Create choreography patterns for e-commerce order processing."""
-    
+
     return [
         # Order received - trigger inventory check
         EventPattern(
@@ -364,16 +364,16 @@ def create_ecommerce_choreography() -> List[EventPattern]:
             target_capability="inventory_management",
             priority=8
         ),
-        
+
         # Inventory confirmed - trigger payment processing
         EventPattern(
             event_type="inventory_confirmed",
             condition="data.get('items_available') == True",
             action="process_payment",
-            target_capability="payment_processing", 
+            target_capability="payment_processing",
             priority=7
         ),
-        
+
         # Payment successful - trigger fulfillment
         EventPattern(
             event_type="payment_successful",
@@ -382,7 +382,7 @@ def create_ecommerce_choreography() -> List[EventPattern]:
             target_capability="order_fulfillment",
             priority=6
         ),
-        
+
         # High-value order special handling
         EventPattern(
             event_type="order_received",
@@ -391,7 +391,7 @@ def create_ecommerce_choreography() -> List[EventPattern]:
             target_capability="fraud_detection",
             priority=9
         ),
-        
+
         # Inventory shortage - trigger supplier notification
         EventPattern(
             event_type="inventory_shortage",
@@ -400,7 +400,7 @@ def create_ecommerce_choreography() -> List[EventPattern]:
             target_capability="supplier_management",
             priority=5
         ),
-        
+
         # Payment failed - trigger retry or cancellation
         EventPattern(
             event_type="payment_failed",
@@ -409,7 +409,7 @@ def create_ecommerce_choreography() -> List[EventPattern]:
             target_capability="payment_processing",
             priority=7
         ),
-        
+
         # Multiple payment failures - cancel order
         EventPattern(
             event_type="payment_failed",
@@ -418,7 +418,7 @@ def create_ecommerce_choreography() -> List[EventPattern]:
             target_capability="order_management",
             priority=8
         ),
-        
+
         # Fulfillment complete - trigger shipping
         EventPattern(
             event_type="fulfillment_complete",
@@ -427,7 +427,7 @@ def create_ecommerce_choreography() -> List[EventPattern]:
             target_capability="shipping_management",
             priority=5
         ),
-        
+
         # Shipping complete - trigger customer notification
         EventPattern(
             event_type="shipping_complete",
@@ -436,7 +436,7 @@ def create_ecommerce_choreography() -> List[EventPattern]:
             target_capability="customer_communication",
             priority=4
         ),
-        
+
         # Delivery confirmed - trigger review request
         EventPattern(
             event_type="delivery_confirmed",
@@ -457,17 +457,17 @@ Production choreography systems need event sourcing capabilities:
 ```python
 class EventStore:
     """Event store for choreography event sourcing and replay."""
-    
+
     def __init__(self, storage_backend):
         self.storage = storage_backend
         self.event_streams: Dict[str, List[Dict]] = {}
-    
+
     async def append_event(self, stream_id: str, event: Dict[str, Any]):
         """Append event to a stream."""
-        
+
         if stream_id not in self.event_streams:
             self.event_streams[stream_id] = []
-        
+
         # Add stream metadata
         event_with_metadata = {
             **event,
@@ -475,14 +475,14 @@ class EventStore:
             "stream_position": len(self.event_streams[stream_id]),
             "global_position": await self._get_next_global_position()
         }
-        
+
         self.event_streams[stream_id].append(event_with_metadata)
         await self.storage.persist_event(event_with_metadata)
-    
+
     async def replay_events(self, choreography_engine: ChoreographyEngine,
                           stream_id: str = None, from_position: int = 0):
         """Replay events to reconstruct choreography state."""
-        
+
         if stream_id:
             events = self.event_streams.get(stream_id, [])[from_position:]
         else:
@@ -492,9 +492,9 @@ class EventStore:
                 events.extend(stream)
             events.sort(key=lambda x: x["global_position"])
             events = events[from_position:]
-        
+
         logger.info(f"Replaying {len(events)} events")
-        
+
         for event in events:
             await choreography_engine.publish_event(
                 event["event_type"],
@@ -513,13 +513,13 @@ Production choreography requires sophisticated monitoring:
 ```python
     async def generate_choreography_metrics(self) -> Dict[str, Any]:
         """Generate comprehensive choreography performance metrics."""
-        
+
         # Event volume metrics
-        recent_events = [e for e in self.event_history 
+        recent_events = [e for e in self.event_history
                         if (datetime.now() - datetime.fromisoformat(e["timestamp"])).total_seconds() <= 3600]
-        
+
         event_rate = len(recent_events) / 3600  # Events per second
-        
+
         # Pattern performance metrics
         pattern_stats = {}
         for pattern in self.event_patterns:
@@ -530,20 +530,20 @@ Production choreography requires sophisticated monitoring:
                 "failure_count": self.pattern_metrics.get(pattern_id, {}).get("failures", 0),
                 "average_response_time": self.pattern_metrics.get(pattern_id, {}).get("avg_response_time", 0)
             }
-        
+
         # Correlation efficiency
         correlation_stats = {
             "active_correlations": len(self.event_correlations),
             "average_events_per_correlation": sum(len(events) for events in self.event_correlations.values()) / max(1, len(self.event_correlations)),
             "longest_correlation": max((len(events) for events in self.event_correlations.values()), default=0)
         }
-        
+
         # Sequence completion rates
         sequence_stats = {
             "active_sequences": len(self.sequence_states),
             "completed_sequences": sum(1 for seq in self.event_sequences for state in self.sequence_states.values() if state["sequence"].sequence_id == seq.sequence_id and len(state["progress"]) == len(seq.events))
         }
-        
+
         return {
             "timestamp": datetime.now().isoformat(),
             "event_rate_per_hour": event_rate * 3600,
@@ -567,35 +567,34 @@ Comprehensive metrics enable optimization and troubleshooting of production chor
 
 ### Scalability Patterns
 
-Enterprise choreography must handle massive event volumes:  
+Enterprise choreography must handle massive event volumes:
 
-- **Event partitioning**: Distributing events across multiple engine instances  
-- **Stream processing**: Using event streams for high-throughput scenarios  
-- **Caching strategies**: Optimizing pattern matching performance  
-- **Load balancing**: Distributing choreography processing load  
+- **Event partitioning**: Distributing events across multiple engine instances
+- **Stream processing**: Using event streams for high-throughput scenarios
+- **Caching strategies**: Optimizing pattern matching performance
+- **Load balancing**: Distributing choreography processing load
 
 ### Reliability Patterns
 
-Production choreography requires bulletproof reliability:  
+Production choreography requires bulletproof reliability:
 
-- **Event deduplication**: Handling duplicate events gracefully  
-- **Circuit breakers**: Preventing cascade failures in event processing  
-- **Dead letter queues**: Managing failed event processing  
-- **Eventual consistency**: Handling distributed state synchronization  
+- **Event deduplication**: Handling duplicate events gracefully
+- **Circuit breakers**: Preventing cascade failures in event processing
+- **Dead letter queues**: Managing failed event processing
+- **Eventual consistency**: Handling distributed state synchronization
 
 ### Security Considerations
 
-Enterprise choreography needs comprehensive security:  
+Enterprise choreography needs comprehensive security:
 
-- **Event authentication**: Verifying event sources and integrity  
-- **Pattern authorization**: Controlling which agents can register patterns  
-- **Data privacy**: Ensuring sensitive data in events is protected  
-- **Audit trails**: Maintaining complete event processing logs  
-
+- **Event authentication**: Verifying event sources and integrity
+- **Pattern authorization**: Controlling which agents can register patterns
+- **Data privacy**: Ensuring sensitive data in events is protected
+- **Audit trails**: Maintaining complete event processing logs
 ---
 
 ## 🧭 Navigation
 
-**Main Session:** [Session 7 - Agent-to-Agent Communication](Session7_Agent_to_Agent_Communication.md)  
-**Previous Advanced:** [⚙️ Advanced Orchestration Patterns](Session7_Advanced_Orchestration.md)  
-**Module Overview:** [MCP, ACP & A2A Index](index.md)
+**Previous:** [Session 6 - ACP Fundamentals ←](Session6_ACP_Fundamentals.md)
+**Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)
+---

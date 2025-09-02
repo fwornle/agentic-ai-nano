@@ -102,7 +102,7 @@ nano-degree/
 │   ├── Session1_Bare_Metal/
 │   ├── ...
 │   └── src/                # Source code examples
-├── 02_rag/                 # RAG Architecture Module  
+├── 02_rag/                 # RAG Architecture Module
 │   ├── Session0_Introduction/
 │   ├── Session1_Basic_RAG/
 │   ├── ...
@@ -140,7 +140,7 @@ nano-degree/
 #### Intensive (2-3 weeks)
 
 - 1 session every 2 days (👀 Observer path)
-- 1 session per day (🙋‍♂️ Participant path)  
+- 1 session per day (🙋‍♂️ Participant path)
 - 2 sessions per day (🛠️ Implementer path)
 
 #### Regular (4-6 weeks)
@@ -225,7 +225,7 @@ pip install mkdocs mkdocs-material
 ### Session Completion
 
 - [ ] Read all core content
-- [ ] Run code examples successfully  
+- [ ] Run code examples successfully
 - [ ] Complete exercises/assignments
 - [ ] Pass assessment quizzes
 - [ ] Understand key concepts
@@ -233,7 +233,7 @@ pip install mkdocs mkdocs-material
 ### Module Milestones
 
 - [ ] **Session 0-2**: Foundations established
-- [ ] **Session 3-5**: Intermediate concepts mastered  
+- [ ] **Session 3-5**: Intermediate concepts mastered
 - [ ] **Session 6-8**: Advanced patterns implemented
 - [ ] **Session 9**: Production deployment ready
 

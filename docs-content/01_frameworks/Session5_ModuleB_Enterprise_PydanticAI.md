@@ -1,6 +1,6 @@
 # Session 5 - Module B: Enterprise PydanticAI
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 5 core content first.
 
 ## Snowflake Data Platform Success
@@ -65,7 +65,7 @@ class DataWarehouseService(Protocol):
     async def save_dataset(self, dataset_name: str, data: Dict[str, Any]) -> str: ...
     async def health_check(self) -> bool: ...
 
-@runtime_checkable  
+@runtime_checkable
 class StreamingService(Protocol):
     """Protocol for streaming data service integrations."""
     async def publish_event(self, topic: str, event_data: Dict[str, Any]) -> str: ...
@@ -94,12 +94,12 @@ Production services provide real connectivity with proper error handling, connec
 # Production data warehouse implementation with connection pooling
 class ProductionDataWarehouseService:
     """Production data warehouse service with connection pool management for Snowflake/BigQuery."""
-    
+
     def __init__(self, connection_string: str, pool_size: int = 20):
         self.connection_string = connection_string
         self.pool_size = pool_size
         self._connection_pool = None
-    
+
     async def initialize(self):
         """Initialize data warehouse connection pool for production use."""
         # In real implementation, this would create actual connection pool to Snowflake/BigQuery
@@ -115,7 +115,7 @@ Now we implement the core data warehouse operations with proper error handling:
         # In production, this would use proper database drivers like snowflake-connector-python
         query_id = str(uuid.uuid4())
         logging.info(f"Executing query {query_id}: {query[:100]}...")
-        
+
         # Simulate query execution with realistic data warehouse response
         return {
             "query_id": query_id,
@@ -134,7 +134,7 @@ Query execution provides the core interface for data warehouse operations with c
         dataset_id = f"ds_{hash(dataset_name) % 100000}"
         logging.info(f"Saved dataset {dataset_name} as {dataset_id}")
         return dataset_id
-    
+
     async def health_check(self) -> bool:
         """Monitor data warehouse connection health for production systems."""
         return self._connection_pool is not None
@@ -150,12 +150,12 @@ Test implementations provide predictable behavior and call tracking for comprehe
 # Test data warehouse service with in-memory storage and call tracking
 class TestDataWarehouseService:
     """Test data warehouse service with in-memory storage and comprehensive logging."""
-    
+
     def __init__(self):
         self.query_store = {}     # In-memory query results storage
-        self.dataset_store = {}   # In-memory dataset storage  
+        self.dataset_store = {}   # In-memory dataset storage
         self.call_log = []        # Track all method calls for verification
-    
+
     async def initialize(self):
         """Initialize test data warehouse - always succeeds for testing."""
         logging.info("Test data warehouse service initialized")
@@ -190,11 +190,11 @@ Now we add dataset storage and health check methods with call tracking:
         self.dataset_store[dataset_id] = {"name": dataset_name, "data": data}
         self.call_log.append(("save_dataset", dataset_name, dataset_id))
         return dataset_id
-    
+
     async def health_check(self) -> bool:
         """Test data warehouse is always healthy for consistent testing."""
         return True
-    
+
     def get_call_log(self) -> List[tuple]:
         """Get complete log of service calls for test verification."""
         return self.call_log.copy()
@@ -208,7 +208,7 @@ The dependency container manages service lifecycles, registration, and resolutio
 # Advanced dependency injection container for data services
 class DataServiceContainer:
     """Enterprise-grade dependency injection container for data processing services."""
-    
+
     def __init__(self):
         self.services = {}                  # Active service instances
         self.factories = {}                 # Service factory functions
@@ -222,16 +222,16 @@ The dependency injection container provides comprehensive service lifecycle mana
 
 ```python
     def register_data_service(
-        self, 
-        interface: Type, 
-        implementation: Type, 
-        *args, 
+        self,
+        interface: Type,
+        implementation: Type,
+        *args,
         **kwargs
     ) -> None:
         """Register a data service as singleton for container lifetime."""
         self.factories[interface] = lambda: implementation(*args, **kwargs)
         self.initialization_order.append(interface)
-        
+
         # Register health check if service supports it
         if hasattr(implementation, 'health_check'):
             self.health_checks[interface] = implementation.health_check
@@ -244,11 +244,11 @@ Now we implement the service resolution with proper lifecycle management:
 ```python
     async def get_service(self, interface: Type, scope: str = "default") -> Any:
         """Resolve service instance with proper initialization and lifecycle management."""
-        
+
         # Check existing singletons first for performance
         if interface in self.singletons:
             return self.singletons[interface]
-        
+
         # Create and cache singleton instances
         if interface in self.factories:
             instance = self.factories[interface]()
@@ -257,7 +257,7 @@ Now we implement the service resolution with proper lifecycle management:
             self.singletons[interface] = instance
             logging.info(f"Initialized data service: {interface.__name__}")
             return instance
-        
+
         raise ValueError(f"No registration found for data service: {interface}")
 ```
 
@@ -276,7 +276,7 @@ Service resolution implements lazy initialization with singleton caching for opt
             except Exception as e:
                 health_status[interface.__name__] = False
                 logging.error(f"Health check failed for {interface.__name__}: {e}")
-        
+
         return health_status
 ```
 
@@ -319,7 +319,7 @@ Comprehensive metrics tracking enables monitoring and optimization of agent perf
 ```python
 class DataProcessingMetrics(BaseModel):
     """Comprehensive data processing agent metrics for monitoring."""
-    
+
     total_requests: int = 0
     successful_requests: int = 0
     failed_requests: int = 0
@@ -330,13 +330,13 @@ class DataProcessingMetrics(BaseModel):
     last_request_timestamp: Optional[datetime] = None
     uptime_seconds: float = 0.0
     memory_usage_mb: float = 0.0
-    
+
     # Data processing specific metrics
     datasets_processed: int = 0
     total_rows_processed: int = 0
     average_throughput_rows_per_second: float = 0.0
     data_quality_score: float = 1.0
-    
+
     @property
     def success_rate_percent(self) -> float:
         """Calculate success rate percentage."""
@@ -352,7 +352,7 @@ The production agent base class provides all necessary infrastructure for enterp
 ```python
 class ProductionDataAgentBase(ABC):
     """Abstract base class for production-ready data processing agents."""
-    
+
     def __init__(self, name: str, config: Dict[str, Any] = None):
         self.name = name
         self.config = config or {}
@@ -383,24 +383,24 @@ Request processing includes comprehensive monitoring, error handling, and perfor
         """Process data request with full monitoring and error handling."""
         start_time = time.time()
         self.metrics.total_requests += 1
-        
+
         try:
             # Update metrics
             self.metrics.last_request_timestamp = datetime.now(timezone.utc)
-            
+
             # Process the data request
             result = await self._process_core_request(request)
-            
+
             # Track success and data processing metrics
             self.metrics.successful_requests += 1
             self.metrics.datasets_processed += 1
-            
+
             # Estimate processed rows (can be overridden by subclasses)
             estimated_rows = getattr(request, 'estimated_rows', 1000)
             self.metrics.total_rows_processed += estimated_rows
-            
+
             self._health_status = "healthy"
-            
+
             return result
 ```
 
@@ -411,20 +411,20 @@ Now we handle errors and track performance metrics in the exception handler:
             # Track failure with data processing context
             self.metrics.failed_requests += 1
             self._health_status = "degraded"
-            
+
             # Log data processing specific error details
             if hasattr(request, 'dataset_id'):
                 self.logger.error(f"Data processing failed for dataset {request.dataset_id}: {e}")
             else:
                 self.logger.error(f"Data processing request failed: {e}")
-            
+
             # Track data quality issues
             if "data quality" in str(e).lower() or "validation" in str(e).lower():
                 self._data_quality_issues.append(f"{datetime.now()}: {str(e)}")
                 self.metrics.data_quality_score = max(0.0, self.metrics.data_quality_score - 0.01)
-            
+
             raise
-            
+
         finally:
             # Track timing and throughput
             request_time = (time.time() - start_time) * 1000
@@ -439,35 +439,35 @@ Production data agents support concurrent request processing with proper resourc
 ```python
     async def process_data_batch(self, requests: List[BaseModel]) -> List[BaseModel]:
         """Process multiple data requests concurrently with resource management."""
-        
+
         # Higher concurrent limits for data processing workloads
         max_concurrent = self.config.get('max_concurrent_requests', 20)
         semaphore = asyncio.Semaphore(max_concurrent)
-        
+
         async def process_with_semaphore(request):
             async with semaphore:
                 return await self.process_data_request(request)
-        
+
         # Execute all requests concurrently
         tasks = [process_with_semaphore(req) for req in requests]
         results = await asyncio.gather(*tasks, return_exceptions=True)
-        
+
         # Separate successful results from exceptions
         successful_results = []
         failed_count = 0
-        
+
         for result in results:
             if isinstance(result, Exception):
                 failed_count += 1
                 self.logger.error(f"Batch processing error: {result}")
             else:
                 successful_results.append(result)
-        
+
         # Update batch processing metrics
         batch_success_rate = len(successful_results) / len(requests) if requests else 1.0
         if batch_success_rate < 0.9:  # Less than 90% success rate
             self.logger.warning(f"Low batch success rate: {batch_success_rate:.2%}")
-        
+
         return successful_results
 ```
 
@@ -480,17 +480,17 @@ Health monitoring and circuit breaker patterns prevent cascading failures in pro
         """Comprehensive health check for data processing monitoring systems."""
         uptime = (datetime.now(timezone.utc) - self.start_time).total_seconds()
         self.metrics.uptime_seconds = uptime
-        
+
         # Check memory usage
         import psutil
         process = psutil.Process()
         memory_mb = process.memory_info().rss / 1024 / 1024
         self.metrics.memory_usage_mb = memory_mb
-        
+
         # Calculate throughput metrics
         if uptime > 0:
             self.metrics.average_throughput_rows_per_second = self.metrics.total_rows_processed / uptime
-        
+
         return {
             "status": self._health_status,
             "uptime_seconds": uptime,
@@ -533,7 +533,7 @@ Now we define the security configuration model for enterprise data processing de
 ```python
 class DataSecurityConfig(BaseModel):
     """Security configuration for enterprise data processing deployments."""
-    
+
     jwt_secret_key: str = Field(..., min_length=32)
     jwt_expiration_hours: int = Field(default=8, ge=1, le=24)  # Shorter for data processing
     api_rate_limit_per_minute: int = Field(default=1000, ge=1)  # Higher for data workloads
@@ -559,7 +559,7 @@ class DataUserRole(str, Enum):
 
 class DataAuthenticationService:
     """Enterprise authentication service for data processing systems with JWT tokens."""
-    
+
     def __init__(self, config: DataSecurityConfig):
         self.config = config
         self.logger = logging.getLogger(__name__)
@@ -586,11 +586,11 @@ Next, we implement JWT token creation with proper security and expiration for da
             "exp": now + timedelta(hours=self.config.jwt_expiration_hours),
             "iss": "pydantic-ai-data-platform"
         }
-        
+
         token = jwt.encode(payload, self.config.jwt_secret_key, algorithm="HS256")
         self.logger.info(f"Created access token for data user {user_id} with roles {[r.value for r in roles]}")
         return token
-    
+
     def _get_permissions_for_roles(self, roles: List[DataUserRole]) -> List[str]:
         """Get combined permissions for multiple roles."""
         permissions = set()
@@ -606,8 +606,8 @@ Finally, we add secure token verification with proper error handling:
         """Verify JWT token and return user information with data processing context."""
         try:
             payload = jwt.decode(
-                token, 
-                self.config.jwt_secret_key, 
+                token,
+                self.config.jwt_secret_key,
                 algorithms=["HS256"],
                 options={"verify_exp": True}
             )
@@ -618,7 +618,7 @@ Finally, we add secure token verification with proper error handling:
         except jwt.InvalidTokenError:
             self.logger.warning("Token verification failed: invalid")
             return None
-    
+
     def check_permission(self, token_payload: Dict[str, Any], required_permission: str) -> bool:
         """Check if user has required permission for data operation."""
         user_permissions = token_payload.get("permissions", [])
@@ -632,7 +632,7 @@ Data privacy patterns ensure compliance with regulations like GDPR, HIPAA, and o
 ```python
 class DataPrivacyService:
     """Data privacy and compliance service for sensitive data processing systems."""
-    
+
     def __init__(self, encryption_key: str):
         self.encryption_key = encryption_key.encode()
         self.logger = logging.getLogger(__name__)
@@ -641,18 +641,18 @@ class DataPrivacyService:
             r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b',  # Email
             r'\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}\b',  # Credit card
         ]
-    
+
     def anonymize_dataset(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Anonymize sensitive data in datasets while preserving utility for data processing."""
         anonymized = data.copy()
-        
+
         # Hash personally identifiable information
         if 'user_id' in anonymized:
             anonymized['user_id_hash'] = self._hash_pii(anonymized.pop('user_id'))
-        
+
         if 'customer_id' in anonymized:
             anonymized['customer_id_hash'] = self._hash_pii(anonymized.pop('customer_id'))
-        
+
         # Handle feature vectors - anonymize but preserve structure
         if 'features' in anonymized and isinstance(anonymized['features'], dict):
             anonymized['features'] = self._anonymize_features(anonymized['features'])
@@ -670,27 +670,27 @@ Now we remove sensitive fields and provide PII detection for data processing:
                     anonymized[f'{field}_masked'] = self._partial_mask(anonymized.pop(field))
                 else:
                     del anonymized[field]
-        
+
         return anonymized
-    
+
     def _hash_pii(self, data: str) -> str:
         """Hash personally identifiable information for data processing anonymization."""
         # Use salt for additional security in data processing
         salt = b"data_processing_salt"
         return hashlib.sha256(salt + data.encode()).hexdigest()[:16]
-    
+
     def detect_pii_in_dataset(self, data: Dict[str, Any]) -> List[str]:
         """Detect potential PII in datasets for compliance monitoring."""
         import re
         pii_detected = []
-        
+
         for field, value in data.items():
             if isinstance(value, str):
                 for pattern in self.pii_patterns:
                     if re.search(pattern, value):
                         pii_detected.append(field)
                         break
-        
+
         return pii_detected
 ```
 
@@ -701,11 +701,11 @@ Comprehensive audit logging tracks all data processing agent operations for comp
 ```python
 class DataProcessingAuditLogger:
     """Enterprise audit logging for data processing compliance and security monitoring."""
-    
+
     def __init__(self, config: DataSecurityConfig):
         self.config = config
         self.audit_logger = logging.getLogger("data_processing_audit")
-        
+
         # Configure audit-specific handler for data processing
         audit_handler = logging.FileHandler("data_processing_audit.log")
         audit_formatter = logging.Formatter(
@@ -720,9 +720,9 @@ Now we implement the core audit logging functionality for data processing:
 
 ```python
     def log_data_processing_request(
-        self, 
-        user_id: str, 
-        agent_name: str, 
+        self,
+        user_id: str,
+        agent_name: str,
         dataset_id: str,
         processing_type: str,
         request_data: Dict[str, Any],
@@ -756,7 +756,7 @@ The audit entry structure captures temporal, identity, and operational context e
             "error_message": error,
             "compliance_flags": self._assess_compliance_flags(request_data)
         }
-        
+
         self.audit_logger.info(f"DATA_PROCESSING: {audit_entry}")
 ```
 
@@ -766,7 +766,7 @@ Data size tracking monitors processing volume for capacity planning and cost att
     def _assess_compliance_flags(self, data: Dict[str, Any]) -> List[str]:
         """Assess compliance flags for data processing requests."""
         flags = []
-        
+
         # Check for potential PII
         privacy_service = DataPrivacyService("dummy_key")  # Would use real key
         if privacy_service.detect_pii_in_dataset(data):
@@ -779,7 +779,7 @@ Compliance assessment begins with PII detection using specialized privacy servic
         # Check for large data processing
         if len(str(data)) > 1000000:  # 1MB threshold
             flags.append("large_dataset")
-        
+
         return flags
 ```
 
@@ -791,9 +791,9 @@ Large dataset detection identifies processing requests exceeding size thresholds
 
 You've now mastered enterprise PydanticAI patterns for data processing systems, including:
 
-✅ **Data Service Dependency Injection**: Built clean, testable architecture with data service protocols  
-✅ **Production Data Processing Scalability**: Implemented monitoring, metrics, and concurrent processing optimized for data workloads  
-✅ **Enterprise Data Security**: Created authentication, authorization, and compliance systems for data processing  
+✅ **Data Service Dependency Injection**: Built clean, testable architecture with data service protocols
+✅ **Production Data Processing Scalability**: Implemented monitoring, metrics, and concurrent processing optimized for data workloads
+✅ **Enterprise Data Security**: Created authentication, authorization, and compliance systems for data processing
 ✅ **Data Processing Audit & Monitoring**: Built comprehensive logging and health monitoring for data systems
 
 ---
@@ -803,34 +803,34 @@ You've now mastered enterprise PydanticAI patterns for data processing systems, 
 Test your understanding of enterprise PydanticAI patterns and production data processing systems:
 
 **Question 1:** What design pattern does the data service dependency injection system use for service management?
-A) Singleton pattern with global state  
-B) Protocol-based interfaces with container-managed lifecycles and health checking  
-C) Static factory methods only  
-D) Direct class instantiation  
+A) Singleton pattern with global state
+B) Protocol-based interfaces with container-managed lifecycles and health checking
+C) Static factory methods only
+D) Direct class instantiation
 
 **Question 2:** How does the ProductionDataAgent handle concurrent data processing requests?
-A) Sequential processing only  
-B) Semaphore-controlled concurrency with higher limits for data workloads and throughput tracking  
-C) Unlimited concurrent execution  
-D) Single-threaded execution with queuing  
+A) Sequential processing only
+B) Semaphore-controlled concurrency with higher limits for data workloads and throughput tracking
+C) Unlimited concurrent execution
+D) Single-threaded execution with queuing
 
 **Question 3:** What security measures does the DataAuthenticationService implement for data processing?
-A) Simple password checking  
-B) JWT token validation, role-based authorization with data-specific permissions, and audit logging  
-C) Basic username verification  
-D) No authentication required  
+A) Simple password checking
+B) JWT token validation, role-based authorization with data-specific permissions, and audit logging
+C) Basic username verification
+D) No authentication required
 
 **Question 4:** What information does the comprehensive audit logging system capture for data processing?
-A) Only request timestamps  
-B) Complete data processing tracking with dataset IDs, sensitivity levels, compliance flags, and performance metrics  
-C) Simple success/failure flags  
-D) Database query logs only  
+A) Only request timestamps
+B) Complete data processing tracking with dataset IDs, sensitivity levels, compliance flags, and performance metrics
+C) Simple success/failure flags
+D) Database query logs only
 
 **Question 5:** How does the health monitoring system track data processing dependencies?
-A) Manual status checks only  
-B) Automated dependency health checks with data quality monitoring and throughput metrics  
-C) Simple ping tests  
-D) Log file analysis only  
+A) Manual status checks only
+B) Automated dependency health checks with data quality monitoring and throughput metrics
+C) Simple ping tests
+D) Log file analysis only
 
 [**🗂️ View Test Solutions →**](Session5_ModuleB_Test_Solutions.md)
 
@@ -846,5 +846,12 @@ D) Log file analysis only
 **🗂️ Source Files for Module B:**
 
 - `src/session5/dependency_injection.py` - Complete data service DI system
-- `src/session5/production_agents.py` - Scalable agent patterns for data processing  
+- `src/session5/production_agents.py` - Scalable agent patterns for data processing
 - `src/session5/security.py` - Enterprise security implementations for data systems
+---
+
+## 🧭 Navigation
+
+**Previous:** [Session 4 - CrewAI Team Orchestration ←](Session4_CrewAI_Team_Orchestration.md)
+**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+---

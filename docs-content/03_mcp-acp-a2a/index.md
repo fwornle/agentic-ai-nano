@@ -19,25 +19,25 @@ Choose your path based on your learning goals and time availability:
 === "🎯 Observer (30-50 min)"
 
     **Focus**: Understanding concepts and architecture
-    
+
     **Activities**: Read core concepts, examine examples
-    
+
     **Ideal for**: Decision makers, architects, overview learners
 
 === "📝 Participant (60-90 min)"
 
     **Focus**: Guided implementation and analysis
-    
+
     **Activities**: Follow tutorials, analyze code examples
-    
+
     **Ideal for**: Developers, technical leads, hands-on learners
 
 === "⚙️ Implementer (120-180 min)"
 
     **Focus**: Complete implementation and customization
-    
+
     **Activities**: Build systems, extend examples, create solutions
-    
+
     **Ideal for**: Senior engineers, architects, specialists
 
 ## Prerequisites
@@ -143,7 +143,7 @@ Each session includes:
 
 4. **🔬 Optional Deep Dive Modules**
    - Advanced enterprise patterns
-   - Production considerations  
+   - Production considerations
    - Workflow orchestration features
 
 ## Development Environment
@@ -201,3 +201,10 @@ After completing this module, you'll have mastered the complete stack of modern 
 
 [Begin Session 0 →](Session0_Introduction_to_MCP_ACP_A2A.md){ .md-button .md-button--primary }
 [View Module Curriculum →](MCP_ACP_A2A_Nanodegree_Curriculum.md){ .md-button }
+---
+
+## 🧭 Navigation
+
+**Next:** [Session 0 - Introduction to Agent Frameworks & Patterns →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+
+---

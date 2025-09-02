@@ -1,43 +1,12 @@
 # Session 9 - Module B: Enterprise Architecture
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 9 core content first.
 
 You've implemented production RAG systems with containerization, security, and basic enterprise integration in Session 9. But when your RAG system needs to integrate with existing enterprise identity providers, meet strict regulatory compliance requirements, or operate within zero-trust security architectures, standard integration patterns fall short of the comprehensive governance and security frameworks that large organizations require.
 
 This module teaches you to build RAG systems that integrate seamlessly into complex enterprise environments. You'll implement zero-trust security architectures, comprehensive data governance frameworks, and CI/CD patterns that maintain the sophisticated intelligence you built while meeting the strictest enterprise standards. The goal is RAG systems that enterprises can confidently deploy at scale with full organizational approval.
 
----
-
-## 🧭 Navigation & Quick Start
-
-### Related Modules
-
-- **[🔧 Module A: Advanced Production →](Session9_ModuleA_Advanced_Production.md)** - Advanced production patterns and scaling techniques
-- **[📄 Session 9 Core: Production RAG & Enterprise Integration →](Session9_Production_RAG_Enterprise_Integration.md)** - Foundation production concepts
-
-### Code Files
-
-- **Enterprise Integration**: [`src/session9/enterprise_integration.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/enterprise_integration.py) - Enterprise system integration patterns
-- **Privacy & Compliance**: [`src/session9/privacy_compliance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/privacy_compliance.py) - Data privacy and regulatory compliance
-- **Production Orchestrator**: [`src/session9/production_rag_orchestrator.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/production_rag_orchestrator.py) - Enterprise RAG orchestration
-- **Monitoring Analytics**: [`src/session9/monitoring_analytics.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session9/monitoring_analytics.py) - Enterprise monitoring and governance
-
-### Quick Start
-
-```bash
-# Test enterprise integration patterns
-cd src/session9
-python enterprise_integration.py
-
-# Test privacy and compliance systems
-python -c "from privacy_compliance import PrivacyCompliance; print('Enterprise architecture ready!')"
-
-# Test production orchestrator
-python -c "from production_rag_orchestrator import ProductionRAGOrchestrator; ProductionRAGOrchestrator().test_system()"
-```
-
-These commands validate that enterprise RAG architecture components are properly installed and configured. The first command tests integration patterns with existing enterprise systems like identity providers, data warehouses, and monitoring tools. The privacy compliance test ensures regulatory frameworks are properly initialized and ready to enforce data protection requirements. The production orchestrator test validates that all enterprise RAG components can communicate and coordinate effectively. Running these tests before deployment ensures enterprise-grade functionality is available and reduces the risk of production failures or compliance violations.
 
 ---
 
@@ -56,10 +25,10 @@ For RAG systems, this means every document access, query processing step, and re
 ```python
 class ZeroTrustRAGSecurity:
     """Zero-trust security framework for enterprise RAG systems."""
-    
+
     def __init__(self, security_config: Dict[str, Any]):
         self.config = security_config
-        
+
         # Core zero-trust components
         self.identity_provider = EnterpriseIdentityProvider()
         self.policy_engine = SecurityPolicyEngine()
@@ -87,9 +56,9 @@ The data protection layer implements sophisticated information security controls
 ```python
     async def implement_zero_trust_architecture(self) -> Dict[str, Any]:
         """Implement comprehensive zero-trust security for RAG system."""
-        
+
         implementation_results = {}
-        
+
         # 1. Network Segmentation Implementation
         network_setup = await self.network_segmenter.create_security_zones({
             'dmz': {'components': ['api_gateway', 'load_balancer']},
@@ -137,7 +106,7 @@ Data protection implementation establishes comprehensive safeguards for informat
             'real_time_monitoring': True
         })
         implementation_results['threat_detection'] = threat_detection
-        
+
         return {
             'zero_trust_implementation': implementation_results,
             'security_posture': await self._assess_security_posture(),
@@ -152,10 +121,10 @@ The comprehensive threat detection system completes the zero-trust architecture 
 ```python
 class DynamicAccessController:
     """Dynamic access control with real-time risk assessment."""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
-        
+
         # Risk assessment components
         self.risk_analyzer = RiskAnalyzer()
         self.context_analyzer = ContextAnalyzer()
@@ -166,10 +135,10 @@ class DynamicAccessController:
         # Access decision components
         self.policy_evaluator = PolicyEvaluator()
         self.access_decision_engine = AccessDecisionEngine()
-        
+
     async def evaluate_access_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
         """Evaluate access request with dynamic risk assessment."""
-        
+
         # Extract request context
         user_context = {
             'user_id': request['user_id'],
@@ -219,7 +188,7 @@ class DynamicAccessController:
         security_measures = await self._determine_security_measures(
             access_decision, risk_assessment, context_analysis
         )
-        
+
         return {
             'access_granted': access_decision['allowed'],
             'risk_assessment': risk_assessment,
@@ -240,10 +209,10 @@ Implement comprehensive data governance for enterprise RAG systems:
 ```python
 class EnterpriseDataGovernance:
     """Comprehensive data governance framework for RAG systems."""
-    
+
     def __init__(self, governance_config: Dict[str, Any]):
         self.config = governance_config
-        
+
         # Data governance components
         self.data_catalog = DataCatalog()
         self.lineage_tracker = DataLineageTracker()
@@ -256,7 +225,7 @@ Enterprise data governance addresses the critical challenges of managing data ac
         # Classification and protection
         self.auto_classifier = AutomatedDataClassifier()
         self.protection_engine = DataProtectionEngine()
-        
+
         # Governance enforcement
         self.policy_enforcer = GovernancePolicyEnforcer()
         self.compliance_monitor = ComplianceMonitor()
@@ -267,12 +236,12 @@ The classification and protection layer implements intelligent data security con
 ```python
     async def implement_data_governance(self, data_sources: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Implement comprehensive data governance across all RAG data sources."""
-        
+
         governance_results = {}
-        
+
         for source in data_sources:
             source_id = source['id']
-            
+
             # 1. Data Discovery and Cataloging
             catalog_result = await self.data_catalog.catalog_data_source({
                 'source_id': source_id,
@@ -335,7 +304,7 @@ Data quality monitoring ensures RAG systems maintain high accuracy and reliabili
                 'policies': self.config.get('governance_policies', []),
                 'enforcement_level': 'strict'
             })
-            
+
             governance_results[source_id] = {
                 'cataloging': catalog_result,
                 'classification': classification_result,
@@ -343,10 +312,10 @@ Data quality monitoring ensures RAG systems maintain high accuracy and reliabili
                 'quality_monitoring': quality_monitoring,
                 'policy_enforcement': policy_enforcement
             }
-        
+
         # Generate governance dashboard
         governance_dashboard = await self._generate_governance_dashboard(governance_results)
-        
+
         return {
             'source_governance': governance_results,
             'overall_compliance_score': await self._calculate_compliance_score(governance_results),
@@ -366,10 +335,10 @@ Implement sophisticated CI/CD pipeline specifically designed for RAG systems:
 ```python
 class RAGCICDPipeline:
     """Advanced CI/CD pipeline specifically designed for RAG systems."""
-    
+
     def __init__(self, pipeline_config: Dict[str, Any]):
         self.config = pipeline_config
-        
+
         # Pipeline stages
         self.code_validator = CodeValidator()
         self.model_validator = ModelValidator()
@@ -384,21 +353,21 @@ RAG-specific CI/CD pipelines address unique challenges that traditional software
         self.deployment_manager = DeploymentManager()
         self.canary_deployer = CanaryDeployer()
         self.rollback_manager = RollbackManager()
-        
+
         # Quality assurance
         self.quality_gate = QualityGate()
         self.performance_tester = PerformanceTester()
         self.security_scanner = SecurityScanner()
-        
+
     async def execute_rag_pipeline(self, pipeline_trigger: Dict[str, Any]) -> Dict[str, Any]:
         """Execute comprehensive RAG CI/CD pipeline."""
-        
+
         pipeline_results = {
             'pipeline_id': f"rag_pipeline_{int(time.time())}",
             'trigger': pipeline_trigger,
             'stages': {}
         }
-        
+
         try:
             # Stage 1: Code Validation
             code_validation = await self.code_validator.validate_code_changes({
@@ -410,7 +379,7 @@ RAG-specific CI/CD pipelines address unique challenges that traditional software
                 ]
             })
             pipeline_results['stages']['code_validation'] = code_validation
-            
+
             if not code_validation['passed']:
                 raise PipelineFailedException("Code validation failed")
 ```
@@ -456,7 +425,7 @@ Data validation ensures that data changes don't break downstream RAG system func
                 'test_data': self.config.get('test_datasets', [])
             })
             pipeline_results['stages']['integration_testing'] = integration_testing
-            
+
             # Stage 4: Quality Gate Evaluation
             quality_evaluation = await self.quality_gate.evaluate_quality({
                 'code_metrics': code_validation['metrics'],
@@ -465,10 +434,10 @@ Data validation ensures that data changes don't break downstream RAG system func
                 'quality_thresholds': self.config.get('quality_thresholds', {})
             })
             pipeline_results['stages']['quality_gate'] = quality_evaluation
-            
+
             if not quality_evaluation['passed']:
                 raise PipelineFailedException("Quality gate failed")
-            
+
             # Stage 5: Security and Performance Testing
             security_scan = await self.security_scanner.comprehensive_security_scan({
                 'scan_targets': ['code', 'dependencies', 'infrastructure', 'data_flow'],
@@ -476,7 +445,7 @@ Data validation ensures that data changes don't break downstream RAG system func
                 'compliance_frameworks': ['owasp', 'nist', 'gdpr']
             })
             pipeline_results['stages']['security_scan'] = security_scan
-            
+
             performance_test = await self.performance_tester.run_performance_tests({
                 'test_scenarios': [
                     'load_testing', 'stress_testing', 'scalability_testing',
@@ -485,7 +454,7 @@ Data validation ensures that data changes don't break downstream RAG system func
                 'performance_targets': self.config.get('performance_targets', {})
             })
             pipeline_results['stages']['performance_testing'] = performance_test
-            
+
             # Stage 6: Canary Deployment
             if all([
                 code_validation['passed'], quality_evaluation['passed'],
@@ -498,13 +467,13 @@ Data validation ensures that data changes don't break downstream RAG system func
                     'success_criteria': self.config.get('canary_success_criteria', {})
                 })
                 pipeline_results['stages']['canary_deployment'] = canary_deployment
-                
+
                 # Monitor canary deployment
                 canary_monitoring = await self._monitor_canary_deployment(
                     canary_deployment['deployment_id']
                 )
                 pipeline_results['stages']['canary_monitoring'] = canary_monitoring
-                
+
                 # Full deployment if canary succeeds
                 if canary_monitoring['success']:
                     full_deployment = await self.deployment_manager.deploy_full({
@@ -519,15 +488,15 @@ Data validation ensures that data changes don't break downstream RAG system func
                         canary_deployment['deployment_id']
                     )
                     pipeline_results['stages']['canary_rollback'] = rollback_result
-            
+
             pipeline_results['status'] = 'success'
             pipeline_results['completion_time'] = time.time()
-            
+
         except PipelineFailedException as e:
             pipeline_results['status'] = 'failed'
             pipeline_results['error'] = str(e)
             pipeline_results['failure_time'] = time.time()
-        
+
         return pipeline_results
 
 ```
@@ -542,10 +511,10 @@ Implement infrastructure as code specifically for RAG deployments:
 # Infrastructure as Code class initialization
 class RAGInfrastructureAsCode:
     """Infrastructure as Code manager for RAG systems."""
-    
+
     def __init__(self, iac_config: Dict[str, Any]):
         self.config = iac_config
-        
+
         # Infrastructure provisioning managers
         self.terraform_manager = TerraformManager()
         self.kubernetes_manager = KubernetesManager()
@@ -566,7 +535,7 @@ Environment management components address the operational complexity of managing
 ```python
     async def deploy_rag_infrastructure(self, environment: str) -> Dict[str, Any]:
         """Deploy complete RAG infrastructure using Infrastructure as Code."""
-        
+
         deployment_result = {
             'environment': environment,
             'deployment_id': f"rag_infra_{environment}_{int(time.time())}",
@@ -653,7 +622,7 @@ Environment configuration management ensures that all RAG components receive the
             # 5. Monitoring and Observability Setup
             monitoring_setup = await self._setup_monitoring_stack(environment)
             deployment_result['components']['monitoring'] = monitoring_setup
-            
+
             # 6. Deployment Validation
             validation_result = await self._validate_deployment(environment)
             deployment_result['validation'] = validation_result
@@ -664,12 +633,12 @@ The final deployment stages establish enterprise-grade monitoring and validate t
 ```python
             deployment_result['status'] = 'success'
             deployment_result['deployment_time'] = time.time()
-            
+
         except Exception as e:
             deployment_result['status'] = 'failed'
             deployment_result['error'] = str(e)
             deployment_result['failure_time'] = time.time()
-        
+
         return deployment_result
 ```
 
@@ -678,7 +647,7 @@ Error handling and result reporting provide critical visibility into deployment 
 ```python
     def _get_kubernetes_resources(self, environment: str) -> Dict[str, List[Dict]]:
         """Generate Kubernetes resource definitions for RAG system."""
-        
+
         # RAG Orchestrator Deployment Configuration
         orchestrator_deployment = {
             'apiVersion': 'apps/v1',
@@ -735,7 +704,7 @@ Next, we define the orchestrator service for internal communication:
                 'type': 'ClusterIP'
             }
         }
-        
+
         return {
             'deployments': [orchestrator_deployment],
             'services': [orchestrator_service]
@@ -754,10 +723,10 @@ Implement comprehensive compliance automation for enterprise RAG systems:
 # Enterprise Compliance Framework Initialization
 class EnterpriseComplianceFramework:
     """Comprehensive enterprise compliance framework for RAG systems."""
-    
+
     def __init__(self, compliance_config: Dict[str, Any]):
         self.config = compliance_config
-        
+
         # Multi-framework compliance engines
         self.compliance_engines = {
             'sox': SOXComplianceEngine(),
@@ -775,7 +744,7 @@ The EnterpriseComplianceFramework addresses the complex reality that enterprise 
         self.policy_engine = CompliancePolicyEngine()
         self.audit_automation = AuditAutomation()
         self.risk_assessor = RiskAssessment()
-        
+
         # Documentation and evidence management
         self.compliance_reporter = ComplianceReporter()
         self.evidence_collector = EvidenceCollector()
@@ -784,12 +753,12 @@ The EnterpriseComplianceFramework addresses the complex reality that enterprise 
 The compliance automation components transform manual, error-prone compliance processes into systematic, auditable operations that reduce risk and operational overhead. CompliancePolicyEngine translates complex regulatory text into executable policies by parsing legal requirements, mapping them to technical controls, and generating automated enforcement rules that can be applied consistently across RAG systems. AuditAutomation manages continuous compliance verification through scheduled assessments, real-time monitoring, and automated evidence collection, replacing manual compliance checks that are often inconsistent and resource-intensive. RiskAssessment continuously evaluates compliance posture by analyzing control effectiveness, identifying compliance gaps, and quantifying regulatory risk exposure to enable proactive remediation. ComplianceReporter generates comprehensive documentation including compliance status dashboards, regulatory filing reports, and audit evidence packages that meet examiner expectations and reduce the burden of compliance reporting. EvidenceCollector automatically captures and preserves compliance artifacts including system logs, configuration snapshots, and control execution records, ensuring that audit trails are complete, tamper-evident, and readily accessible for regulatory examinations.
 
 ```python
-    async def implement_compliance_automation(self, 
+    async def implement_compliance_automation(self,
                                             frameworks: List[str]) -> Dict[str, Any]:
         """Implement automated compliance for specified frameworks."""
-        
+
         compliance_results = {}
-        
+
         # Process each requested compliance framework
         for framework in frameworks:
             if framework in self.compliance_engines:
@@ -860,7 +829,7 @@ Framework results aggregation collects all compliance activities for each regula
 ```python
         # Generate comprehensive compliance dashboard
         compliance_dashboard = await self._generate_compliance_dashboard(compliance_results)
-        
+
         # Assess overall compliance risk
         risk_assessment = await self.risk_assessor.assess_compliance_risk(compliance_results)
 ```
@@ -887,53 +856,40 @@ The comprehensive compliance result structure delivers a complete compliance man
 
 Test your understanding of enterprise integration architectures:
 
-**Question 1:** What is the core principle of zero-trust security for RAG systems?  
-A) Trust internal network components by default  
-B) Never trust, always verify every component and user  
-C) Use simple password authentication  
-D) Focus only on external threats  
+**Question 1:** What is the core principle of zero-trust security for RAG systems?
+A) Trust internal network components by default
+B) Never trust, always verify every component and user
+C) Use simple password authentication
+D) Focus only on external threats
 
-**Question 2:** Why is dynamic access control superior to static RBAC for enterprise RAG?  
-A) It's easier to configure  
-B) It adapts security measures based on real-time risk assessment  
-C) It requires fewer resources  
-D) It's compatible with legacy systems  
+**Question 2:** Why is dynamic access control superior to static RBAC for enterprise RAG?
+A) It's easier to configure
+B) It adapts security measures based on real-time risk assessment
+C) It requires fewer resources
+D) It's compatible with legacy systems
 
-**Question 3:** What is the most critical component of enterprise data governance for RAG?  
-A) Data storage optimization  
-B) Automated classification and lineage tracking  
-C) User interface design  
-D) Network bandwidth management  
+**Question 3:** What is the most critical component of enterprise data governance for RAG?
+A) Data storage optimization
+B) Automated classification and lineage tracking
+C) User interface design
+D) Network bandwidth management
 
-**Question 4:** Which testing stage is most unique to RAG CI/CD pipelines?  
-A) Unit testing  
-B) Integration testing  
-C) Model validation and embedding consistency testing  
-D) Load testing  
+**Question 4:** Which testing stage is most unique to RAG CI/CD pipelines?
+A) Unit testing
+B) Integration testing
+C) Model validation and embedding consistency testing
+D) Load testing
 
-**Question 5:** What is the primary benefit of Infrastructure as Code for RAG deployments?  
-A) Faster deployment speed  
-B) Consistent, repeatable, and version-controlled deployments  
-C) Lower infrastructure costs  
-D) Simpler debugging  
+**Question 5:** What is the primary benefit of Infrastructure as Code for RAG deployments?
+A) Faster deployment speed
+B) Consistent, repeatable, and version-controlled deployments
+C) Lower infrastructure costs
+D) Simpler debugging
 
 [**🗂️ View Test Solutions →**](Session9_ModuleB_Test_Solutions.md)
-
 ---
 
 ## 🧭 Navigation
 
-### Related Modules
-
-- **Core Session:** [Session 9 - Production RAG & Enterprise Integration](Session9_Production_RAG_Enterprise_Integration.md)
-- **Related Module:** [Module A - Advanced Production](Session9_ModuleA_Advanced_Production.md)
-
-**🗂️ Code Files:** All examples use files in `src/session9/`
-
-- `enterprise_integration.py` - Enterprise system integration patterns
-- `privacy_compliance.py` - Data privacy and regulatory compliance
-- `production_rag_orchestrator.py` - Enterprise RAG orchestration
-
-**🚀 Quick Start:** Run `cd src/session9 && python enterprise_integration.py` to see enterprise integration patterns in action
-
+**Previous:** [Session 8 - MultiModal Advanced RAG ←](Session8_MultiModal_Advanced_RAG.md)
 ---

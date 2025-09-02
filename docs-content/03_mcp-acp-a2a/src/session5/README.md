@@ -52,7 +52,7 @@ session5/
 The `SecurityConfig` class provides comprehensive configuration options:
 
 - **JWT Settings**: Token expiry times and secret key management
-- **Redis Configuration**: Connection settings for rate limiting and caching  
+- **Redis Configuration**: Connection settings for rate limiting and caching
 - **Rate Limiting**: Capacity and refill rates for different user types
 - **File Security**: Size limits and allowed extensions
 - **Audit System**: Event retention and logging preferences
@@ -70,7 +70,7 @@ The `SecurityConfig` class provides comprehensive configuration options:
 
 The audit system tracks:
 - Login attempts (success/failure)
-- Permission violations  
+- Permission violations
 - Rate limit exceeded events
 - Suspicious activity patterns
 - API key usage
@@ -94,7 +94,7 @@ from session5 import SecureMCPServer, SecurityConfig
 config = SecurityConfig()
 config.validate()
 
-# Initialize secure server  
+# Initialize secure server
 server = SecureMCPServer(config)
 
 # Your secure MCP tools are now protected!

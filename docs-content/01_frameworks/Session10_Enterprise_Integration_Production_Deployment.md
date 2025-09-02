@@ -11,7 +11,7 @@ The difference between a promising demo and production success isn't just scale 
 - **[Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)** - GDPR, RBAC, encryption
 - **[Module B: Production Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)** - Auto-scaling, performance optimization
 
-**Code Files**: All examples use files in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)  
+**Code Files**: All examples use files in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
 **Quick Start**: Run `cd src/session10 && python production_architecture.py` to see production integration
 
 ---
@@ -38,7 +38,7 @@ from datetime import datetime, timedelta
 class IntegrationPattern(Enum):
     """Common production integration patterns."""
     REQUEST_REPLY = "request_reply"
-    PUBLISH_SUBSCRIBE = "publish_subscribe" 
+    PUBLISH_SUBSCRIBE = "publish_subscribe"
     MESSAGE_QUEUE = "message_queue"
     API_GATEWAY = "api_gateway"
     SERVICE_MESH = "service_mesh"
@@ -59,20 +59,20 @@ class SystemConnection:
 
 class ProductionSystemAdapter(Protocol):
     """Protocol for production system adapters."""
-    
+
     async def connect(self) -> bool:
         """Establish connection to production system."""
         ...
-    
+
     async def authenticate(self, credentials: Dict[str, Any]) -> bool:
         """Authenticate with production system."""
         ...
-    
-    async def execute_operation(self, operation: str, 
+
+    async def execute_operation(self, operation: str,
                                params: Dict[str, Any]) -> Any:
         """Execute operation on production system."""
         ...
-    
+
     async def health_check(self) -> bool:
         """Check system health and connectivity."""
         ...
@@ -96,7 +96,7 @@ One mistake, one timeout, one authentication failure could impact data processin
 ```python
 class DataSystemIntegrationAdapter:
     """Adapter for distributed data system integration."""
-    
+
     def __init__(self, base_url: str, credentials: Dict[str, Any]):
         self.base_url = base_url.rstrip('/')
         self.credentials = credentials
@@ -132,7 +132,7 @@ class DataSystemIntegrationAdapter:
     async def authenticate(self, credentials: Dict[str, Any]) -> bool:
         """Authenticate with data system using OAuth 2.0."""
         auth_url = f"{self.base_url}/oauth/token"
-        
+
         # Prepare OAuth 2.0 client credentials grant
         auth_data = {
             "grant_type": "client_credentials",
@@ -148,7 +148,7 @@ class DataSystemIntegrationAdapter:
                     self.auth_token = token_data["access_token"]
                     expires_in = token_data.get("expires_in", 3600)
                     self.token_expires = datetime.now() + timedelta(seconds=expires_in)
-                    
+
                     # Update session headers with bearer token
                     self.session.headers.update({
                         "Authorization": f"Bearer {self.auth_token}"
@@ -165,7 +165,7 @@ class DataSystemIntegrationAdapter:
         """Retrieve dataset from data system."""
         if not dataset_id:
             raise ValueError("dataset_id is required")
-        
+
         # Ensure we have valid authentication
         if not await self._ensure_authenticated():
             raise Exception("Authentication failed")
@@ -192,14 +192,14 @@ class DataSystemIntegrationAdapter:
         """Ensure we have a valid authentication token."""
         if not self.auth_token:
             return await self.authenticate(self.credentials)
-        
+
         # Check if token is about to expire (refresh 5 minutes early)
         if self.token_expires:
             time_until_expiry = self.token_expires - datetime.now()
             if time_until_expiry.total_seconds() < 300:  # 5 minutes
                 self.logger.info("Token expiring soon, refreshing...")
                 return await self.authenticate(self.credentials)
-        
+
         return True
 ```
 
@@ -217,12 +217,12 @@ from sqlalchemy.orm import sessionmaker
 
 class EnterpriseDatabase:
     """Enterprise database connection manager."""
-    
+
     def __init__(self, database_configs: Dict[str, Dict[str, Any]]):
         self.configs = database_configs
         self.engines = {}
         self.session_factories = {}
-        
+
     async def initialize_connections(self):
         """Initialize all configured database connections."""
         for db_name, config in self.configs.items():
@@ -457,7 +457,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
@@ -482,20 +482,20 @@ jobs:
           --health-retries 5
         ports:
         - 5432:5432
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
         pip install -r requirements-test.txt
-    
+
     - name: Run tests
       run: pytest tests/ -v
 
@@ -504,24 +504,24 @@ jobs:
     needs: [security-scan, test]
     environment: production
     if: startsWith(github.ref, 'refs/tags/v')
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
-    
+
     - name: Deploy to EKS
       run: |
         aws eks update-kubeconfig --region us-west-2 --name production-cluster
         kubectl set image deployment/enterprise-agent \
           agent=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
         kubectl rollout status deployment/enterprise-agent --timeout=600s
-    
+
     - name: Validate deployment
       run: |
         kubectl wait --for=condition=available \
@@ -573,7 +573,7 @@ class UserContext:
 
 class EnterpriseAuthManager:
     """Comprehensive authentication and authorization manager."""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.active_sessions: Dict[str, UserContext] = {}
@@ -584,7 +584,7 @@ class EnterpriseAuthManager:
         """Authenticate user with multiple factor support."""
         auth_method = credentials.get("method", "basic")
         username = credentials.get("username")
-        
+
         # Check for account lockout
         if self._is_account_locked(username):
             raise AuthenticationError("Account locked due to failed attempts")
@@ -627,13 +627,13 @@ class Permission(Enum):
     AGENT_UPDATE = "agent:update"
     AGENT_DELETE = "agent:delete"
     AGENT_EXECUTE = "agent:execute"
-    
+
     # Data access by classification
     DATA_READ_PUBLIC = "data:read:public"
     DATA_READ_INTERNAL = "data:read:internal"
     DATA_READ_CONFIDENTIAL = "data:read:confidential"
     DATA_READ_SECRET = "data:read:secret"
-    
+
     # System administration
     SYSTEM_CONFIG = "system:config"
     SYSTEM_MONITOR = "system:monitor"
@@ -649,7 +649,7 @@ class Role:
 
 class RBACManager:
     """Role-Based Access Control manager."""
-    
+
     def __init__(self):
         self.roles: Dict[str, Role] = {}
         self.user_roles: Dict[str, Set[str]] = {}
@@ -702,7 +702,7 @@ import json
 
 class EnterpriseEncryption:
     """Enterprise-grade encryption service."""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.symmetric_keys = self._initialize_symmetric_keys()
@@ -711,7 +711,7 @@ class EnterpriseEncryption:
     def _initialize_symmetric_keys(self) -> MultiFernet:
         """Initialize symmetric encryption with key rotation support."""
         keys = []
-        
+
         # Primary key (current)
         primary_key = os.environ.get("ENCRYPTION_KEY_PRIMARY")
         if primary_key:
@@ -719,19 +719,19 @@ class EnterpriseEncryption:
         else:
             # Generate new key if none provided
             keys.append(Fernet(Fernet.generate_key()))
-        
+
         # Secondary key (for rotation)
         secondary_key = os.environ.get("ENCRYPTION_KEY_SECONDARY")
         if secondary_key:
             keys.append(Fernet(secondary_key.encode()))
-            
+
         return MultiFernet(keys)
 
-    async def encrypt_sensitive_data(self, data: Dict[str, Any], 
+    async def encrypt_sensitive_data(self, data: Dict[str, Any],
                                    classification: str = "internal") -> Dict[str, Any]:
         """Encrypt data based on classification level."""
         encrypted_data = {}
-        
+
         for key, value in data.items():
             field_classification = self._get_field_classification(key, classification)
 
@@ -760,7 +760,7 @@ class EnterpriseEncryption:
                     "encrypted": False,
                     "classification": field_classification
                 }
-        
+
         return encrypted_data
 ```
 
@@ -801,7 +801,7 @@ class Metric:
 
 class BasicMonitoring:
     """Basic monitoring system for production agents."""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.metrics_store: Dict[str, List[Metric]] = {}
@@ -815,7 +815,7 @@ class BasicMonitoring:
             "health": await self._collect_health_metrics(agent_id),
             "errors": await self._collect_error_metrics(agent_id)
         }
-        
+
         return metrics
 
     async def _collect_performance_metrics(self, agent_id: str) -> Dict[str, Any]:
@@ -836,10 +836,10 @@ Production health monitoring:
 ```python
 class HealthChecker:
     """Production health monitoring system."""
-    
+
     def __init__(self, system_components: Dict[str, Any]):
         self.components = system_components
-        
+
     async def comprehensive_health_check(self) -> Dict[str, Any]:
         """Perform comprehensive system health check."""
         health_status = {
@@ -847,27 +847,27 @@ class HealthChecker:
             "timestamp": datetime.now().isoformat(),
             "components": {}
         }
-        
+
         all_healthy = True
-        
+
         # Check database connectivity
         db_health = await self._check_database_health()
         health_status["components"]["database"] = db_health
         if not db_health["healthy"]:
             all_healthy = False
-        
+
         # Check external API connectivity
         api_health = await self._check_api_health()
         health_status["components"]["external_apis"] = api_health
         if not api_health["healthy"]:
             all_healthy = False
-        
+
         # Check system resources
         resource_health = await self._check_system_resources()
         health_status["components"]["resources"] = resource_health
         if not resource_health["healthy"]:
             all_healthy = False
-        
+
         health_status["overall_status"] = "healthy" if all_healthy else "unhealthy"
         return health_status
 
@@ -906,7 +906,7 @@ class Alert:
 
 class BasicAlertManager:
     """Basic alert management system."""
-    
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.active_alerts: Dict[str, Alert] = {}
@@ -920,7 +920,7 @@ class BasicAlertManager:
     async def evaluate_alerts(self, metrics: Dict[str, Any]):
         """Evaluate metrics against alert thresholds."""
         performance = metrics.get("performance", {})
-        
+
         # Check CPU usage
         cpu_usage = performance.get("cpu_usage_percent", 0)
         if cpu_usage > self.alert_thresholds["cpu_usage"]:
@@ -930,11 +930,11 @@ class BasicAlertManager:
                 AlertSeverity.WARNING
             )
 
-    async def _create_alert(self, alert_name: str, description: str, 
+    async def _create_alert(self, alert_name: str, description: str,
                            severity: AlertSeverity):
         """Create and store alert."""
         alert_id = f"{alert_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        
+
         alert = Alert(
             alert_id=alert_id,
             name=alert_name,
@@ -942,7 +942,7 @@ class BasicAlertManager:
             severity=severity,
             triggered_at=datetime.now()
         )
-        
+
         self.active_alerts[alert_id] = alert
         await self._send_notification(alert)
 
@@ -1015,81 +1015,74 @@ Intelligent auto-scaling with multi-factor decision making, Redis caching strate
 
 Test your understanding of enterprise integration and production deployment.
 
-**Question 1:** What is the primary challenge in enterprise agent integration?  
-A) Code complexity  
-B) Connecting with legacy systems and ensuring security  
-C) Performance optimization  
-D) User interface design  
+**Question 1:** What is the primary challenge in enterprise agent integration?
+A) Code complexity
+B) Connecting with legacy systems and ensuring security
+C) Performance optimization
+D) User interface design
 
-**Question 2:** Which pattern is most effective for ERP system integration?  
-A) Direct database access  
-B) Adapter pattern with OAuth 2.0 authentication  
-C) File-based integration  
-D) Screen scraping  
+**Question 2:** Which pattern is most effective for ERP system integration?
+A) Direct database access
+B) Adapter pattern with OAuth 2.0 authentication
+C) File-based integration
+D) Screen scraping
 
-**Question 3:** What is the main benefit of multi-stage Docker builds for agent deployment?  
-A) Faster builds  
-B) Reduced image size and improved security  
-C) Better documentation  
-D) Easier debugging  
+**Question 3:** What is the main benefit of multi-stage Docker builds for agent deployment?
+A) Faster builds
+B) Reduced image size and improved security
+C) Better documentation
+D) Easier debugging
 
-**Question 4:** How should you handle secrets and credentials in production deployments?  
-A) Environment variables  
-B) Encrypted secret management systems with rotation  
-C) Configuration files  
-D) Code comments  
+**Question 4:** How should you handle secrets and credentials in production deployments?
+A) Environment variables
+B) Encrypted secret management systems with rotation
+C) Configuration files
+D) Code comments
 
-**Question 5:** What is the purpose of health checks in production agent systems?  
-A) Performance monitoring only  
-B) Comprehensive system and dependency validation  
-C) User authentication  
-D) Cost optimization  
+**Question 5:** What is the purpose of health checks in production agent systems?
+A) Performance monitoring only
+B) Comprehensive system and dependency validation
+C) User authentication
+D) Cost optimization
 
-**Question 6:** Which deployment strategy minimizes downtime during updates?  
-A) All-at-once deployment  
-B) Rolling updates with health checks  
-C) Maintenance windows  
-D) Manual deployment  
+**Question 6:** Which deployment strategy minimizes downtime during updates?
+A) All-at-once deployment
+B) Rolling updates with health checks
+C) Maintenance windows
+D) Manual deployment
 
-**Question 7:** What is the most important aspect of enterprise security for agents?  
-A) Password complexity  
-B) Zero-trust architecture with encryption and audit logging  
-C) VPN access  
-D) Firewall rules  
+**Question 7:** What is the most important aspect of enterprise security for agents?
+A) Password complexity
+B) Zero-trust architecture with encryption and audit logging
+C) VPN access
+D) Firewall rules
 
-**Question 8:** How should you approach monitoring in enterprise agent systems?  
-A) Log files only  
-B) Comprehensive observability with metrics, traces, and alerts  
-C) Manual monitoring  
-D) Error counting  
+**Question 8:** How should you approach monitoring in enterprise agent systems?
+A) Log files only
+B) Comprehensive observability with metrics, traces, and alerts
+C) Manual monitoring
+D) Error counting
 
-**Question 9:** What makes Kubernetes suitable for enterprise agent deployment?  
-A) Simple configuration  
-B) Auto-scaling, self-healing, and enterprise orchestration  
-C) Low cost  
-D) Better performance  
+**Question 9:** What makes Kubernetes suitable for enterprise agent deployment?
+A) Simple configuration
+B) Auto-scaling, self-healing, and enterprise orchestration
+C) Low cost
+D) Better performance
 
-**Question 10:** Which approach is best for handling enterprise agent failures?  
-A) Immediate restart  
-B) Circuit breakers, graceful degradation, and compensation patterns  
-C) Manual intervention  
-D) System shutdown  
+**Question 10:** Which approach is best for handling enterprise agent failures?
+A) Immediate restart
+B) Circuit breakers, graceful degradation, and compensation patterns
+C) Manual intervention
+D) System shutdown
 
 ---
 
 [**🗂️ View Test Solutions →**](Session10_Test_Solutions.md)
 
-## 🧭 Navigation
-
-**Previous:** [Session 9 - Multi-Agent Patterns](Session9_Multi_Agent_Patterns.md)
-
-### Optional Deep Dive Modules
-
-- 🔒 **[Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)** - Enterprise security patterns
-- 🏭 **[Module B: Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)** - Production operations
-
-**Next:** [Module 2 - RAG Architecture →](../02_rag/index.md)
-
+**🏆 Frameworks Module Complete!** You've successfully completed the Agent Frameworks Module and are now ready to build production-ready, enterprise-grade agent systems!
 ---
 
-**🏆 Frameworks Module Complete!** You've successfully completed the Agent Frameworks Module and are now ready to build production-ready, enterprise-grade agent systems!
+## 🧭 Navigation
+
+**Previous:** [Session 9 - Multi-Agent Patterns ←](Session9_Multi_Agent_Patterns.md)
+---

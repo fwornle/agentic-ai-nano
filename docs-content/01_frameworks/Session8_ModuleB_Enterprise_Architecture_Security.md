@@ -1,24 +1,24 @@
 # ⚙️ Session 8 Module B: Enterprise Architecture & Security
 
-> **⚙️ IMPLEMENTER PATH CONTENT**  
-> Prerequisites: Complete 🎯 Observer and 📝 Participant paths in [Session 8](Session8_Agno_Production_Ready_Agents.md)  
-> Time Investment: 2-3 hours  
-> Outcome: Master enterprise security patterns, authentication systems, and advanced deployment architectures  
+> **⚙️ IMPLEMENTER PATH CONTENT**
+> Prerequisites: Complete 🎯 Observer and 📝 Participant paths in [Session 8](Session8_Agno_Production_Ready_Agents.md)
+> Time Investment: 2-3 hours
+> Outcome: Master enterprise security patterns, authentication systems, and advanced deployment architectures
 
 ## Advanced Learning Outcomes
 
-After completing this module, you will master:  
+After completing this module, you will master:
 
-- Enterprise security patterns for production data processing agents  
-- Advanced authentication and authorization systems  
-- JWT token management and API security best practices  
-- Kubernetes deployment patterns for agent systems  
+- Enterprise security patterns for production data processing agents
+- Advanced authentication and authorization systems
+- JWT token management and API security best practices
+- Kubernetes deployment patterns for agent systems
 
 ## Security Essentials - Your Data Pipeline's Digital Fortress
 
 Every day, data breaches cost businesses $4.45 million on average globally. Every 11 seconds, there's a new ransomware attack targeting data systems somewhere on the web. Your data processing agent isn't just analyzing patterns - it's guarding against an army of malicious actors seeking access to sensitive data.
 
-Security isn't a feature you add to data systems later; it's the foundation everything else stands on when handling enterprise data:  
+Security isn't a feature you add to data systems later; it's the foundation everything else stands on when handling enterprise data:
 
 ```python
 from fastapi import FastAPI, HTTPException, Depends
@@ -36,7 +36,7 @@ def verify_data_token(credentials: HTTPAuthorizationCredentials = Depends(securi
     """Verify JWT token for data processing API access."""
     try:
         payload = jwt.decode(
-            credentials.credentials, 
+            credentials.credentials,
             "your-secret-key",
             algorithms=["HS256"]
         )
@@ -52,15 +52,15 @@ Create secure endpoints with authentication and logging for data processing:
 ```python
 @app.post("/secure-data-process")
 async def secure_data_process(
-    request: DataQueryRequest, 
+    request: DataQueryRequest,
     user_info = Depends(verify_data_token)
 ):
     # Log data access for audit trails
     logging.info(f"User {user_info.get('user_id')} processed data query")
-    
+
     # Rate limiting for data processing (simplified)
     # In production, use Redis-based rate limiting for data workloads
-    
+
     response = await data_production_agent.arun(request.data_query)
     return {"analysis_result": response.content, "user": user_info["user_id"]}
 ```
@@ -69,7 +69,7 @@ async def secure_data_process(
 
 ### OAuth 2.0 Integration for Enterprise Systems
 
-Enterprise data processing systems often need to integrate with existing OAuth 2.0 providers for user authentication:  
+Enterprise data processing systems often need to integrate with existing OAuth 2.0 providers for user authentication:
 
 ```python
 from authlib.integrations.fastapi_oauth2 import OAuth2Token
@@ -89,14 +89,14 @@ Implement token validation and user info retrieval:
     async def validate_access_token(self, access_token: str):
         """Validate OAuth 2.0 access token with authorization server."""
         headers = {"Authorization": f"Bearer {access_token}"}
-        
+
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{self.authorization_url}/userinfo",
                 headers=headers,
                 timeout=10.0
             )
-            
+
             if response.status_code == 200:
                 user_info = response.json()
                 return {
@@ -123,20 +123,20 @@ async def verify_oauth_token(authorization: str = Header(...)):
         client_secret=os.getenv("OAUTH_CLIENT_SECRET"),
         authorization_url=os.getenv("OAUTH_AUTH_URL")
     )
-    
+
     # Extract token from Authorization header
     token = authorization.replace("Bearer ", "")
     user_info = await oauth_handler.validate_access_token(token)
-    
+
     if not user_info["valid"]:
         raise HTTPException(status_code=401, detail="Invalid OAuth token")
-    
+
     return user_info
 ```
 
 ### API Key Management and Rate Limiting
 
-For service-to-service communication, API keys provide a simpler authentication method:  
+For service-to-service communication, API keys provide a simpler authentication method:
 
 ```python
 import redis.asyncio as redis
@@ -159,21 +159,21 @@ Implement API key validation with rate limiting:
             "key_123": {"service": "analytics_service", "rate_limit": 5000},
             "key_456": {"service": "reporting_service", "rate_limit": 1000},
         }
-        
+
         if api_key not in valid_keys:
             return {"valid": False, "error": "Invalid API key"}
-        
+
         key_info = valid_keys[api_key]
-        
+
         # Check rate limit
         rate_limit_key = f"rate_limit:{api_key}"
         current_count = await self.redis_client.get(rate_limit_key)
-        
+
         if current_count is None:
             # First request in this window
             await self.redis_client.setex(
-                rate_limit_key, 
-                self.rate_limit_window, 
+                rate_limit_key,
+                self.rate_limit_window,
                 1
             )
             remaining_requests = key_info["rate_limit"] - 1
@@ -181,15 +181,15 @@ Implement API key validation with rate limiting:
             current_count = int(current_count)
             if current_count >= key_info["rate_limit"]:
                 return {
-                    "valid": False, 
+                    "valid": False,
                     "error": "Rate limit exceeded",
                     "reset_time": self.rate_limit_window
                 }
-            
+
             # Increment counter
             await self.redis_client.incr(rate_limit_key)
             remaining_requests = key_info["rate_limit"] - current_count - 1
-        
+
         return {
             "valid": True,
             "service": key_info["service"],
@@ -204,14 +204,14 @@ async def verify_api_key(x_api_key: str = Header(..., alias="X-API-Key")):
     """FastAPI dependency for API key validation."""
     api_manager = APIKeyManager()
     result = await api_manager.validate_api_key(x_api_key)
-    
+
     if not result["valid"]:
         raise HTTPException(
             status_code=401 if "Invalid" in result["error"] else 429,
             detail=result["error"],
             headers={"X-RateLimit-Remaining": "0"} if "Rate limit" in result["error"] else {}
         )
-    
+
     return result
 
 # Usage in endpoints
@@ -222,7 +222,7 @@ async def api_data_process(
 ):
     # Log service access
     logging.info(f"Service {api_info['service']} processed data query")
-    
+
     response = await data_production_agent.arun(request.data_query)
     return {
         "analysis_result": response.content,
@@ -235,7 +235,7 @@ async def api_data_process(
 
 ### Encryption at Rest and in Transit
 
-Production data processing systems must encrypt sensitive data both at rest and in transit:  
+Production data processing systems must encrypt sensitive data both at rest and in transit:
 
 ```python
 from cryptography.fernet import Fernet
@@ -265,12 +265,12 @@ Implement encryption and decryption methods:
         )
         key = base64.urlsafe_b64encode(kdf.derive(password.encode()))
         return key
-    
+
     def encrypt_sensitive_data(self, data: str) -> str:
         """Encrypt sensitive data for storage."""
         encrypted_data = self.cipher_suite.encrypt(data.encode())
         return base64.urlsafe_b64encode(encrypted_data).decode()
-    
+
     def decrypt_sensitive_data(self, encrypted_data: str) -> str:
         """Decrypt sensitive data from storage."""
         encrypted_bytes = base64.urlsafe_b64decode(encrypted_data.encode())
@@ -285,7 +285,7 @@ class SecureDataAgent:
     def __init__(self, agent: Agent):
         self.agent = agent
         self.encryption_manager = DataEncryptionManager()
-        
+
     async def process_sensitive_query(self, query: str, session_id: str):
         """Process query with sensitive data encryption."""
         # Encrypt sensitive parts before processing
@@ -293,17 +293,17 @@ class SecureDataAgent:
         if "personal" in query.lower() or "private" in query.lower():
             encrypted_query = self.encryption_manager.encrypt_sensitive_data(query)
             logging.info(f"Processing encrypted query for session {session_id}")
-            
+
             # Process with agent
             response = await self.agent.arun(encrypted_query, session_id=session_id)
-            
+
             # Decrypt response if needed
             if response.content.startswith("encrypted:"):
                 decrypted_response = self.encryption_manager.decrypt_sensitive_data(
                     response.content.replace("encrypted:", "")
                 )
                 return decrypted_response
-            
+
             return response.content
         else:
             # Process normally for non-sensitive queries
@@ -313,7 +313,7 @@ class SecureDataAgent:
 
 ### Secure Configuration Management
 
-Production systems need secure configuration management to protect secrets and credentials:  
+Production systems need secure configuration management to protect secrets and credentials:
 
 ```python
 from azure.keyvault.secrets import SecretClient
@@ -324,7 +324,7 @@ class SecureConfigManager:
     def __init__(self):
         # Support multiple secret backends
         self.backend = os.getenv("SECRET_BACKEND", "environment")
-        
+
         if self.backend == "azure_keyvault":
             credential = DefaultAzureCredential()
             vault_url = os.getenv("AZURE_KEYVAULT_URL")
@@ -354,7 +354,7 @@ Implement secret retrieval with fallback mechanisms:
         except Exception as e:
             logging.error(f"Failed to retrieve secret {secret_name}: {e}")
             return default_value
-    
+
     async def get_database_config(self):
         """Get database configuration from secure storage."""
         return {
@@ -372,14 +372,14 @@ Usage in production agent initialization:
 async def create_secure_production_agent():
     """Create production agent with secure configuration."""
     config_manager = SecureConfigManager()
-    
+
     # Get secure database configuration
     db_config = await config_manager.get_database_config()
     database_url = f"postgresql://{db_config['username']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}"
-    
+
     # Get API keys securely
     openai_api_key = await config_manager.get_secret("OPENAI_API_KEY")
-    
+
     # Create agent with secure configuration
     agent = Agent(
         name="SecureDataProcessingAgent",
@@ -388,7 +388,7 @@ async def create_secure_production_agent():
         storage=PostgresStorage(database_url),
         monitoring=True
     )
-    
+
     return agent
 ```
 
@@ -396,7 +396,7 @@ async def create_secure_production_agent():
 
 ### Basic Kubernetes Deployment for Agno Agents
 
-Enterprise production systems often run on Kubernetes for scalability and reliability:  
+Enterprise production systems often run on Kubernetes for scalability and reliability:
 
 ```yaml
 # deployment.yaml for Agno data processing agents
@@ -516,7 +516,7 @@ spec:
 
 ### Advanced Kubernetes Security Patterns
 
-Production Kubernetes deployments require additional security measures:  
+Production Kubernetes deployments require additional security measures:
 
 ```yaml
 # security-policy.yaml
@@ -629,7 +629,7 @@ spec:
 
 ### Comprehensive Production Validation
 
-Before a data engineer deploys a pipeline that will process petabytes of customer data daily, they go through a rigorous pre-production checklist. Every data source, every processing stage, every quality check must be verified:  
+Before a data engineer deploys a pipeline that will process petabytes of customer data daily, they go through a rigorous pre-production checklist. Every data source, every processing stage, every quality check must be verified:
 
 ```python
 class DataProductionReadinessChecker:
@@ -670,7 +670,7 @@ Add reliability and security validation checks for data systems:
                 "rate_limiting": self._check_rate_limits()
             }
         }
-        
+
         return checklist
 ```
 
@@ -682,7 +682,7 @@ Implement helper methods for validation tailored to data processing:
         required_vars = ["DATABASE_URL", "API_KEY", "SECRET_KEY", "DATA_PROCESSING_MODE"]
         import os
         return all(os.getenv(var) for var in required_vars)
-    
+
     async def _check_response_time(self) -> str:
         """Measure average response time for data processing queries."""
         import time
@@ -690,13 +690,13 @@ Implement helper methods for validation tailored to data processing:
         await self.agent.arun("test data processing query")
         duration = time.time() - start
         return f"{duration:.2f}s"
-    
+
     def _check_security_headers(self) -> bool:
         """Check if security headers are properly configured."""
         # In a real implementation, this would test actual HTTP responses
         required_headers = [
             "X-Content-Type-Options",
-            "X-Frame-Options", 
+            "X-Frame-Options",
             "X-XSS-Protection",
             "Strict-Transport-Security"
         ]
@@ -711,7 +711,7 @@ Quick validation usage example for data processing systems:
 async def run_production_readiness_check():
     checker = DataProductionReadinessChecker(data_production_agent)
     readiness = await checker.validate_data_production_readiness()
-    
+
     # Display results
     for category, checks in readiness.items():
         print(f"\n{category}")
@@ -719,9 +719,10 @@ async def run_production_readiness_check():
             status = "✅" if result else "❌"
             print(f"  {status} {check_name}: {result}")
 ```
+---
 
-## Navigation
+## 🧭 Navigation
 
-[← Previous Module A: Advanced Monitoring](Session8_ModuleA_Advanced_Monitoring_Observability.md) | [Next Module C: Performance & Validation →](Session8_ModuleC_Performance_Production_Validation.md)
-
+**Previous:** [Session 7 - First ADK Agent ←](Session7_First_ADK_Agent.md)
+**Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
 ---

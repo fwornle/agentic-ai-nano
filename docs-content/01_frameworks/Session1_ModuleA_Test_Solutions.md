@@ -45,4 +45,10 @@
 ---
 
 ### Return to Module
-[← Back to Module A](Session1_ModuleA_Advanced_Agent_Patterns.md)
+---
+
+## 🧭 Navigation
+
+**Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns ←](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+**Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
+---

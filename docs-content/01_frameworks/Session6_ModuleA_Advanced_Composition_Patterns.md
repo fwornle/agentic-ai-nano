@@ -1,6 +1,6 @@
 # Session 6 - Module A: Advanced Composition Patterns
 
-> **⚠️ ADVANCED OPTIONAL MODULE**  
+> **⚠️ ADVANCED OPTIONAL MODULE**
 > Prerequisites: Complete Session 6 core content first.
 
 ## The Netflix Data Processing Transformation
@@ -96,7 +96,7 @@ class DataStageConfiguration:
     retry_count: int = 3
     timeout_seconds: int = 120  # Longer timeout for data processing operations
     error_policy: DataErrorPolicy = DataErrorPolicy.RETRY
-    
+
     def __post_init__(self):
         if self.retry_count < 0:
             raise ValueError("retry_count must be non-negative")
@@ -119,7 +119,7 @@ class DataPipelineStage:
     stage_name: str
     description: str
     config: DataStageConfiguration = field(default_factory=DataStageConfiguration)
-    
+
     def __post_init__(self):
         if not self.stage_id:
             raise ValueError("stage_id cannot be empty")
@@ -143,7 +143,7 @@ class DataPipelineContext:
     data_metadata: Dict[str, Any] = field(default_factory=dict)
     error_log: List[Dict[str, Any]] = field(default_factory=list)
     status: DataPipelineStatus = DataPipelineStatus.PENDING
-    
+
     def add_data_processing_error(self, error: str, stage_id: Optional[str] = None):
         """Add data processing error to error log with timestamp"""
         self.error_log.append({
@@ -163,7 +163,7 @@ We need proper exception handling for data processing operations:
 ```python
 class DataPipelineExecutionException(Exception):
     """Exception raised during data pipeline execution"""
-    def __init__(self, message: str, stage_id: Optional[str] = None, 
+    def __init__(self, message: str, stage_id: Optional[str] = None,
                  original_error: Optional[Exception] = None):
         super().__init__(message)
         self.stage_id = stage_id
@@ -179,19 +179,19 @@ Next, we define the protocols that make our data pipeline extensible:
 ```python
 class DataMiddlewareProtocol(Protocol):
     """Protocol for data pipeline middleware"""
-    async def __call__(self, data: Any, stage: DataPipelineStage, 
+    async def __call__(self, data: Any, stage: DataPipelineStage,
                       context: DataPipelineContext) -> Any:
         """Process data through middleware"""
         ...
 
 class DataMetricsCollector(ABC):
     """Abstract base class for data processing metrics collection"""
-    
+
     @abstractmethod
     async def record_data_stage_execution(self, stage_id: str, duration: float, status: str):
         """Record data processing stage execution metrics"""
         pass
-    
+
     @abstractmethod
     async def record_data_pipeline_execution(self, pipeline_id: str, duration: float, status: str):
         """Record data pipeline execution metrics"""
@@ -207,11 +207,11 @@ We provide a comprehensive metrics collector for data processing operations:
 ```python
 class DefaultDataMetricsCollector(DataMetricsCollector):
     """Default implementation of data processing metrics collector"""
-    
+
     def __init__(self):
         self.data_metrics = {}
         self.logger = logging.getLogger(__name__)
-    
+
     async def record_data_stage_execution(self, stage_id: str, duration: float, status: str):
         """Record data processing stage execution metrics"""
         if stage_id not in self.data_metrics:
@@ -223,7 +223,7 @@ class DefaultDataMetricsCollector(DataMetricsCollector):
             "processing_type": "data_transformation"
         })
         self.logger.info(f"Data processing stage {stage_id} completed in {duration:.2f}s with status {status}")
-    
+
     async def record_data_pipeline_execution(self, pipeline_id: str, duration: float, status: str):
         """Record data pipeline execution metrics"""
         self.logger.info(f"Data pipeline {pipeline_id} completed in {duration:.2f}s with status {status}")
@@ -238,11 +238,11 @@ Now we build the main data pipeline orchestrator, starting with its constructor 
 ```python
 class AdvancedAtomicDataPipeline:
     """Sophisticated data pipeline orchestration with distributed processing principles adherence"""
-    
+
     def __init__(self, pipeline_id: str, metrics_collector: Optional[DataMetricsCollector] = None):
         if not pipeline_id:
             raise ValueError("pipeline_id cannot be empty")
-            
+
         self.pipeline_id = pipeline_id
         self._stages: List[DataPipelineStage] = []
         self._middleware_functions: List[DataMiddlewareProtocol] = []
@@ -263,12 +263,12 @@ Next, we add methods for building data pipelines with a fluent interface:
             raise TypeError("stage must be an instance of DataPipelineStage")
         self._stages.append(stage)
         return self  # Enable fluent interface
-    
+
     def add_data_middleware(self, middleware_func: DataMiddlewareProtocol) -> 'AdvancedAtomicDataPipeline':
         """Add middleware function for cross-cutting data processing concerns"""
         self._middleware_functions.append(middleware_func)
         return self
-    
+
     @property
     def data_stages(self) -> List[DataPipelineStage]:
         """Get read-only access to data processing stages"""
@@ -282,17 +282,17 @@ The fluent interface allows you to chain method calls for building complex data 
 The heart of our data processing pipeline is the execute method:
 
 ```python
-    async def execute_data_pipeline(self, initial_data_input: Any, 
+    async def execute_data_pipeline(self, initial_data_input: Any,
                                    context: Optional[DataPipelineContext] = None) -> Dict[str, Any]:
         """Execute the complete data processing pipeline with comprehensive monitoring"""
-        
+
         # Set up execution context for data processing
         if context is None:
             context = DataPipelineContext(
                 pipeline_id=self.pipeline_id,
                 execution_start=datetime.now()
             )
-        
+
         context.status = DataPipelineStatus.RUNNING
         pipeline_start_time = datetime.now()
 ```
@@ -307,10 +307,10 @@ Next comes the core execution loop setup and validation:
         try:
             current_data = initial_data_input
             execution_results = []
-            
+
             if not self._stages:
                 raise DataPipelineExecutionException("Data pipeline has no stages to execute")
-            
+
             # Execute each data processing stage in sequence
             for stage_index, stage in enumerate(self._stages):
                 try:
@@ -337,7 +337,7 @@ For each stage result, we handle success and error cases according to configured
                         await self._metrics_collector.record_data_stage_execution(
                             stage.stage_id, stage_result["execution_time"], "error"
                         )
-                        
+
                         if not await self._handle_data_stage_error(stage, stage_result, context):
                             # Error handling determined we should stop data processing
                             context.status = DataPipelineStatus.FAILED
@@ -356,17 +356,17 @@ Finally, we handle data pipeline completion and record comprehensive metrics:
                     if stage.config.error_policy != DataErrorPolicy.SKIP:
                         context.status = DataPipelineStatus.FAILED
                         break
-                        
+
             # Determine final status for data processing pipeline
             if context.status == DataPipelineStatus.RUNNING:
                 context.status = DataPipelineStatus.SUCCESS
-                
+
             # Record data pipeline metrics
             total_execution_time = (datetime.now() - pipeline_start_time).total_seconds()
             await self._metrics_collector.record_data_pipeline_execution(
                 self.pipeline_id, total_execution_time, context.status.value
             )
-            
+
             return self._build_data_execution_result(
                 current_data, execution_results, context, total_execution_time
             )
@@ -435,7 +435,7 @@ The registry acts as a smart catalog of available data processing agents with so
 ```python
 class DynamicDataAgentRegistry:
     """Registry for dynamic data agent discovery and instantiation"""
-    
+
     def __init__(self):
         self.registered_data_agents: Dict[str, DataAgentDefinition] = {}
         self.capability_index: Dict[DataAgentCapability, List[str]] = {}
@@ -451,20 +451,20 @@ Agent registration builds multiple indices for efficient discovery in data proce
 ```python
     def register_data_agent(self, agent_id: str, definition: DataAgentDefinition):
         """Register a data agent definition for dynamic instantiation"""
-        
+
         self.registered_data_agents[agent_id] = definition
-        
+
         # Build capability-based index for fast data processing lookup
         for capability in definition.capabilities:
             if capability not in self.capability_index:
                 self.capability_index[capability] = []
             self.capability_index[capability].append(agent_id)
-        
+
         # Build data schema compatibility index
         output_schema = definition.output_schema
         if output_schema not in self.data_schema_compatibility:
             self.data_schema_compatibility[output_schema] = []
-        
+
         # Find data agents that can consume this agent's output
         for other_id, other_def in self.registered_data_agents.items():
             if other_def.input_schema == output_schema:
@@ -481,7 +481,7 @@ The registry provides multiple ways to find data processing agents based on diff
     def find_data_agents_by_capability(self, capability: DataAgentCapability) -> List[str]:
         """Find all data agents with specified processing capability"""
         return self.capability_index.get(capability, [])
-    
+
     def find_compatible_data_agents(self, output_schema: str) -> List[str]:
         """Find data agents compatible with given output schema"""
         return self.data_schema_compatibility.get(output_schema, [])
@@ -494,24 +494,24 @@ These methods enable capability-driven and schema-driven data agent discovery, e
 The registry can instantiate data processing agents at runtime with custom configuration:
 
 ```python
-    async def instantiate_data_agent(self, agent_id: str, 
+    async def instantiate_data_agent(self, agent_id: str,
                                     configuration_overrides: Dict[str, Any] = None) -> Any:
         """Dynamically instantiate a data agent from its definition"""
-        
+
         if agent_id not in self.registered_data_agents:
             raise ValueError(f"Data agent {agent_id} not registered")
-        
+
         definition = self.registered_data_agents[agent_id]
-        
+
         # Load data agent class dynamically using Python's import system
         module = importlib.import_module(definition.module_path)
         agent_class = getattr(module, definition.agent_class)
-        
+
         # Merge default config with runtime overrides for data processing
         config = definition.configuration.copy()
         if configuration_overrides:
             config.update(configuration_overrides)
-        
+
         # Create and return the data processing agent instance
         return agent_class(**config)
 ```
@@ -523,20 +523,20 @@ This method demonstrates the power of Python's reflection capabilities for data 
 The registry can automatically suggest data pipeline configurations based on desired processing capabilities:
 
 ```python
-    def suggest_data_pipeline(self, start_capability: DataAgentCapability, 
+    def suggest_data_pipeline(self, start_capability: DataAgentCapability,
                              end_capability: DataAgentCapability) -> List[List[str]]:
         """Suggest data agent pipeline from start to end capability"""
-        
+
         start_agents = self.find_data_agents_by_capability(start_capability)
         end_agents = self.find_data_agents_by_capability(end_capability)
-        
+
         pipeline_suggestions = []
-        
+
         # Try direct two-agent data pipelines first
         for start_agent_id in start_agents:
             start_def = self.registered_data_agents[start_agent_id]
             compatible_agents = self.find_compatible_data_agents(start_def.output_schema)
-            
+
             for middle_agent_id in compatible_agents:
                 middle_def = self.registered_data_agents[middle_agent_id]
                 if end_capability in middle_def.capabilities:
@@ -548,7 +548,7 @@ The registry can automatically suggest data pipeline configurations based on des
                         end_def = self.registered_data_agents[end_agent_id]
                         if end_capability in end_def.capabilities:
                             pipeline_suggestions.append([start_agent_id, middle_agent_id, end_agent_id])
-        
+
         return pipeline_suggestions
 ```
 
@@ -561,7 +561,7 @@ Now let's build the CLI system that makes dynamic assembly accessible to data en
 ```python
 class AtomicDataCLI:
     """Advanced CLI for atomic data agent management and data engineering DevOps integration"""
-    
+
     def __init__(self, config_path: str = "atomic_data_config.json"):
         self.config_path = Path(config_path)
         self.config = self._load_data_config()
@@ -578,7 +578,7 @@ The CLI uses a sophisticated configuration system with defaults optimized for da
 ```python
     def _load_data_config(self) -> Dict[str, Any]:
         """Load atomic data agent configuration with schema validation"""
-        
+
         # Define comprehensive default configuration for data processing
         default_data_config = {
             "data_agents": {},                           # Registered data agent definitions
@@ -606,7 +606,7 @@ The CLI comes with pre-configured agents for common data processing use cases:
 ```python
     def register_builtin_data_agents(self):
         """Register common atomic data processing agent types"""
-        
+
         # Stream Processing Agent - Real-time data stream processing
         self.data_agent_registry.register_data_agent("stream_processor", DataAgentDefinition(
             agent_class="StreamProcessorAgent",
@@ -617,7 +617,7 @@ The CLI comes with pre-configured agents for common data processing use cases:
             configuration={"model": "gpt-4o-mini", "temperature": 0.1},
             resource_requirements={"memory_mb": 1024, "cpu_cores": 2}
         ))
-        
+
         # Batch Processing Agent - Large-scale batch data operations
         self.data_agent_registry.register_data_agent("batch_processor", DataAgentDefinition(
             agent_class="BatchProcessorAgent",
@@ -628,7 +628,7 @@ The CLI comes with pre-configured agents for common data processing use cases:
             configuration={"model": "gpt-4o", "temperature": 0.0},
             resource_requirements={"memory_mb": 2048, "cpu_cores": 4}
         ))
-        
+
         # Data Transformation Agent - Schema and format transformation
         self.data_agent_registry.register_data_agent("data_transformer", DataAgentDefinition(
             agent_class="DataTransformationAgent",
@@ -650,28 +650,28 @@ The most powerful feature - creating data processing pipelines automatically fro
 ```python
     async def create_dynamic_data_pipeline(self, capability_sequence: List[DataAgentCapability]) -> AdvancedAtomicDataPipeline:
         """Create data pipeline dynamically based on processing capability requirements"""
-        
+
         if len(capability_sequence) < 2:
             raise ValueError("Data pipeline requires at least 2 processing capabilities")
-        
+
         pipeline = AdvancedAtomicDataPipeline(f"dynamic_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
-        
+
         # Step 1: Find compatible data agents for each capability
         selected_agents = []
         for i, capability in enumerate(capability_sequence):
             candidates = self.data_agent_registry.find_data_agents_by_capability(capability)
-            
+
             if not candidates:
                 raise ValueError(f"No data agents found for capability: {capability}")
-            
+
             # Select best data agent (could use more sophisticated selection logic)
             selected_agent_id = candidates[0]  # Simple: pick first
-            
+
             # Step 2: Validate data schema compatibility with previous agent
             if i > 0:
                 prev_agent_def = self.data_agent_registry.registered_data_agents[selected_agents[-1]]
                 current_agent_def = self.data_agent_registry.registered_data_agents[selected_agent_id]
-                
+
                 if prev_agent_def.output_schema != current_agent_def.input_schema:
                     # Try to find compatible data agent
                     compatible_agents = self.data_agent_registry.find_compatible_data_agents(prev_agent_def.output_schema)
@@ -679,18 +679,18 @@ The most powerful feature - creating data processing pipelines automatically fro
                         agent_id for agent_id in compatible_agents
                         if capability in self.data_agent_registry.registered_data_agents[agent_id].capabilities
                     ]
-                    
+
                     if capability_compatible:
                         selected_agent_id = capability_compatible[0]
                     else:
                         raise ValueError(f"No data schema-compatible agents found for {capability}")
-            
+
             selected_agents.append(selected_agent_id)
-        
+
         # Step 3: Instantiate data agents and build pipeline
         for i, agent_id in enumerate(selected_agents):
             agent_instance = await self.data_agent_registry.instantiate_data_agent(agent_id)
-            
+
             stage = DataPipelineStage(
                 stage_id=f"data_stage_{i}_{agent_id}",
                 data_agent=agent_instance,
@@ -698,9 +698,9 @@ The most powerful feature - creating data processing pipelines automatically fro
                 description=f"Process using {agent_id} data agent",
                 config=DataStageConfiguration(error_policy=DataErrorPolicy.RETRY, retry_count=2)
             )
-            
+
             pipeline.add_data_stage(stage)
-        
+
         return pipeline
 ```
 
@@ -712,9 +712,9 @@ This method demonstrates the full power of dynamic composition for data processi
 
 You've now mastered advanced atomic agent composition patterns for data processing:
 
-✅ **Data Pipeline Orchestration**: Built sophisticated sequential processing with error handling and monitoring optimized for streaming data  
-✅ **Parallel Data Processing**: Implemented load-balanced parallel execution with fault tolerance for distributed data systems  
-✅ **Dynamic Assembly**: Created runtime agent composition systems with capability-based selection for data processing workflows  
+✅ **Data Pipeline Orchestration**: Built sophisticated sequential processing with error handling and monitoring optimized for streaming data
+✅ **Parallel Data Processing**: Implemented load-balanced parallel execution with fault tolerance for distributed data systems
+✅ **Dynamic Assembly**: Created runtime agent composition systems with capability-based selection for data processing workflows
 ✅ **CLI Integration**: Designed data engineering-friendly command-line tools for atomic agent management
 
 ---
@@ -724,34 +724,34 @@ You've now mastered advanced atomic agent composition patterns for data processi
 Test your understanding of advanced atomic agent composition patterns for data processing:
 
 **Question 1:** What method does the DataPipelineOrchestrator use to handle errors during data processing stage execution?
-A) Stop pipeline execution immediately  
-B) Skip failed stages and continue  
-C) Retry with exponential backoff and circuit breaker protection for data processing operations  
-D) Log errors but ignore them  
+A) Stop pipeline execution immediately
+B) Skip failed stages and continue
+C) Retry with exponential backoff and circuit breaker protection for data processing operations
+D) Log errors but ignore them
 
 **Question 2:** How does the ParallelDataProcessor determine agent assignment for balanced load distribution?
-A) Random assignment only  
-B) Round-robin assignment based on data agent IDs  
-C) Workload calculation considering active data processing tasks and agent capacity  
-D) First-available agent selection  
+A) Random assignment only
+B) Round-robin assignment based on data agent IDs
+C) Workload calculation considering active data processing tasks and agent capacity
+D) First-available agent selection
 
 **Question 3:** What factors does the DynamicDataAssembly system consider when selecting agents for data processing capability matching?
-A) Agent name only  
-B) Capability scores, performance metrics, and availability status for data operations  
-C) Creation timestamp  
-D) Memory usage only  
+A) Agent name only
+B) Capability scores, performance metrics, and availability status for data operations
+C) Creation timestamp
+D) Memory usage only
 
 **Question 4:** What information does the AtomicDataCLI provide when displaying data pipeline status?
-A) Just success/failure status  
-B) Comprehensive execution details including stage status, timing, and error information for data processing  
-C) Agent names only  
-D) Memory consumption  
+A) Just success/failure status
+B) Comprehensive execution details including stage status, timing, and error information for data processing
+C) Agent names only
+D) Memory consumption
 
 **Question 5:** How does the error handling in advanced composition patterns ensure data pipeline reliability?
-A) Single retry attempt  
-B) Circuit breaker integration with configurable retry policies and failure tracking for data processing operations  
-C) Manual intervention required  
-D) No error handling  
+A) Single retry attempt
+B) Circuit breaker integration with configurable retry policies and failure tracking for data processing operations
+C) Manual intervention required
+D) No error handling
 
 [**🗂️ View Test Solutions →**](Session6_ModuleA_Test_Solutions.md)
 
@@ -768,3 +768,10 @@ D) No error handling
 - `src/session6/advanced_data_composition.py` - Sophisticated data pipeline patterns
 - `src/session6/dynamic_data_assembly.py` - Runtime composition systems for data processing
 - `src/session6/atomic_data_cli.py` - Data engineering DevOps CLI integration
+---
+
+## 🧭 Navigation
+
+**Previous:** [Session 5 - PydanticAI Type-Safe Agents ←](Session5_PydanticAI_Type_Safe_Agents.md)
+**Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
+---

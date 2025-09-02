@@ -101,17 +101,17 @@ from text_processor_agent import TextInput, TextProcessorAgent
 async def example():
     # Create context
     context = AtomicContext(user_id="demo-user")
-    
+
     # Create input
     text_input = TextInput(
         content="This is example text for processing.",
         operation="summarize"
     )
-    
+
     # Execute agent
     agent = TextProcessorAgent()
     result = await agent.execute(text_input, context)
-    
+
     print(f"Result: {result.result}")
     print(f"Confidence: {result.confidence}")
     print(f"Processing time: {result.processing_time_ms}ms")
@@ -165,13 +165,13 @@ class MyOutput(BaseModel):
 class MyAgent(AtomicAgent[MyInput, MyOutput]):
     def __init__(self):
         super().__init__("MyAgent", "1.0.0")
-    
+
     def get_input_schema(self) -> type[MyInput]:
         return MyInput
-    
+
     def get_output_schema(self) -> type[MyOutput]:
         return MyOutput
-    
+
     async def execute(self, input_data: MyInput, context: AtomicContext) -> MyOutput:
         # Your processing logic here
         return MyOutput(
@@ -264,14 +264,14 @@ from text_processor_agent import TextInput, TextProcessorAgent
 async def test_text_processor():
     agent = TextProcessorAgent()
     context = AtomicContext(user_id="test")
-    
+
     text_input = TextInput(
         content="Test content for processing",
         operation="summarize"
     )
-    
+
     result = await agent.execute(text_input, context)
-    
+
     assert result.result is not None
     assert result.confidence > 0
     assert result.processing_time_ms >= 0
