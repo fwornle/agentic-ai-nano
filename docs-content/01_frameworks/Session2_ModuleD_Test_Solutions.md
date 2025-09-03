@@ -1,6 +1,5 @@
 # Session 2 - Module D: Test Solutions
 
-
 ---
 
 **Question 1:** What categories of metrics are tracked in the `PerformanceMetrics` dataclass?  

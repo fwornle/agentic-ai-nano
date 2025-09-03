@@ -52,8 +52,6 @@ D) By semantic similarity and topic consistency ✅
 
 ---
 
----
-
 **Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
 
 ---

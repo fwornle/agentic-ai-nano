@@ -131,8 +131,6 @@ D) Compatibility with legacy systems
 
 ---
 
----
-
 **Next:** [Session 9 - Production RAG & Enterprise Integration →](Session9_Production_RAG_Enterprise_Integration.md)
 
 ---

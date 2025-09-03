@@ -134,9 +134,7 @@ D) Manual intervention is required
 
 ---
 
-
 **Challenge:** Create a travel planning agent that gets weather, searches files, stores preferences, and creates a report.
-
 
 ```python
 # agents/travel_planning_agent.py
@@ -287,8 +285,6 @@ if __name__ == "__main__":
 3. **Memory Management**: Conversation memory maintains context across the planning session  
 4. **Error Handling**: Graceful degradation when servers are unavailable  
 5. **Professional Prompting**: Specialized prompts optimized for travel planning workflows  
-
----
 
 ---
 

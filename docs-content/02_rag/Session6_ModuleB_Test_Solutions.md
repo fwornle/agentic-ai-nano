@@ -88,8 +88,6 @@ D) Query failures or response time degradation affecting user experience ✅
 
 ---
 
----
-
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
 
 ---

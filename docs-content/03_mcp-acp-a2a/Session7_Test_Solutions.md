@@ -130,7 +130,6 @@ D) Simpler implementation
 
 ---
 
-
 **Challenge:** Create a multi-agent customer service system with A2A coordination.
 
 ### Complete A2A Customer Service System:

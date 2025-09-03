@@ -134,7 +134,6 @@ D) To reduce development costs
 
 This section contains the complete, working implementation of all ACP (Agent Communication Protocol) examples from Session 6.
 
-
 ```
 ACP Agent Network
 ├── coordinator_agent.py (Port 8000) - Orchestrates workflows
@@ -898,7 +897,6 @@ aiohttp==3.9.1
 pandas==2.1.3
 pydantic==2.5.0
 ```
-
 
 ### 1. Setup Environment
 

@@ -52,8 +52,6 @@ D) 20%
 
 ---
 
----
-
 **Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
 
 ---

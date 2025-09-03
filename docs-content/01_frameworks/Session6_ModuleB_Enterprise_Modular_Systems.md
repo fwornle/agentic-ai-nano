@@ -1064,6 +1064,8 @@ D) Basic logging only
 
 [View Solutions →](Session6_ModuleB_Test_Solutions.md)
 
+---
+
 ### Next Steps
 
 - **Return to Core**: [Session 6 Main](Session6_Atomic_Agents_Modular_Architecture.md)  

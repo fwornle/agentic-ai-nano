@@ -349,7 +349,9 @@ B) Adaptive thresholds based on historical performance patterns
 C) No thresholds, manual monitoring only  
 D) Random threshold selection  
 
-**[View Solutions →](Session5_Test_Solutions.md)**
+**[View Solutions →](Session5_Test_Solutions.md)
+
+---**
 
 ---
 

@@ -155,8 +155,6 @@ D) When downstream nodes need data from multiple branches ✅
 
 ---
 
----
-
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
 
 ---

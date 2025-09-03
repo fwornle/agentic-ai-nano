@@ -131,8 +131,6 @@ D) All of the above ✅
 
 ---
 
----
-
 **Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
 
 ---

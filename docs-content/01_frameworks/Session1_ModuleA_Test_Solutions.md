@@ -1,6 +1,5 @@
 # Session 1 - Module A: Test Solutions
 
-
 ---
 
 **Question 1:** What is the key mechanism that prevents infinite loops in reflection agents?  

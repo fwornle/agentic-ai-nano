@@ -141,8 +141,6 @@ D) To determine the number of chunks to create
 
 ---
 
----
-
 **Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
 
 ---
