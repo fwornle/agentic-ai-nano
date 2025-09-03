@@ -1434,7 +1434,7 @@ B) CPU and memory-based horizontal pod autoscaling with custom metrics
 C) Fixed instance count  
 D) Manual load balancing  
 
-[**🗂️ View Test Solutions →**](Session7_ModuleB_Test_Solutions.md)
+[View Solutions →](Session7_ModuleB_Test_Solutions.md)
 
 ### Next Steps
 

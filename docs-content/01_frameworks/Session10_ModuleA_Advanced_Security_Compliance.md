@@ -2055,7 +2055,7 @@ B) Granular protection allowing different encryption policies per field
 C) Smaller storage requirements  
 D) Simplified key management  
 
-[**🗂️ View Test Solutions →**](Session10A_Test_Solutions.md)
+[View Solutions →](Session10A_Test_Solutions.md)
 ---
 
 **Previous:** [Session 9 - Multi-Agent Patterns ←](Session9_Multi_Agent_Patterns.md)

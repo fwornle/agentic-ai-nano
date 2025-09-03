@@ -236,7 +236,7 @@ Centralized MCP connection management with enterprise-grade pooling and monitori
 - **[Module B: Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md)** - Production-scale deployment & containerization  
 
 **Test Your Knowledge**:  
-- **[📝 Comprehensive Assessment](Session7_Test_Solutions.md)** - Multiple choice quiz with solutions  
+[View Solutions →](Session7_Test_Solutions.md)
 
 ---
 
@@ -295,7 +295,7 @@ D) Simple password protection
 
 ---
 
-[**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
+[View Solutions →](Session7_Test_Solutions.md)
 
 ---
 

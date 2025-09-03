@@ -134,11 +134,9 @@ D) Manual intervention is required
 
 ---
 
-## Practical Exercise Solution
 
 **Challenge:** Create a travel planning agent that gets weather, searches files, stores preferences, and creates a report.
 
-### Complete Solution:
 
 ```python
 # agents/travel_planning_agent.py

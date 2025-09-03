@@ -1144,7 +1144,7 @@ B) Pattern recognition only
 C) Combines ingestion and analytics results into comprehensive ML workflows  
 D) Error handling and recovery  
 
-[**View Test Solutions →**](Session2_ModuleA_Test_Solutions.md)
+[View Solutions →](Session2_ModuleA_Test_Solutions.md)
 
 ---
 

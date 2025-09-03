@@ -599,7 +599,7 @@ B) Error type and field only
 C) Complete error report with data quality impact, suggestions, and performance metrics  
 D) HTTP status code only  
 
-[**🗂️ View Test Solutions →**](Session5_ModuleA_Test_Solutions.md)
+[View Solutions →](Session5_ModuleA_Test_Solutions.md)
 
 ### Next Steps  
 - **Continue to Module B**: [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md) for production deployment patterns  

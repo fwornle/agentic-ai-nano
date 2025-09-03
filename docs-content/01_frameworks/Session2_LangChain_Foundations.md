@@ -448,7 +448,7 @@ B) ConversationSummaryMemory
 C) ConversationBufferWindowMemory  
 D) ConversationEntityMemory  
 
-[**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
+[View Solutions →](Session2_Test_Solutions.md)
 ---
 
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)

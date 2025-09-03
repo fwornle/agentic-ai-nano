@@ -753,7 +753,7 @@ B) Circuit breaker integration with configurable retry policies and failure trac
 C) Manual intervention required  
 D) No error handling  
 
-[**🗂️ View Test Solutions →**](Session6_ModuleA_Test_Solutions.md)
+[View Solutions →](Session6_ModuleA_Test_Solutions.md)
 
 ### Next Steps
 

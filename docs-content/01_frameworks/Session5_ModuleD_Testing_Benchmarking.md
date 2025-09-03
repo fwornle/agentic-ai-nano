@@ -1213,7 +1213,7 @@ B) Concurrent user simulation with configurable load patterns, data processing s
 C) Random API calls  
 D) Simple sequential testing  
 
-[**🗂️ View Test Solutions →**](Session5_ModuleD_Test_Solutions.md)
+[View Solutions →](Session5_ModuleD_Test_Solutions.md)
 
 ### Next Steps
 

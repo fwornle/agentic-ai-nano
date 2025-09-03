@@ -1062,7 +1062,7 @@ B) Only internal policies
 C) Comprehensive support for SOC 2, GDPR, HIPAA, and PCI-DSS with configurable requirements for data processing operations  
 D) Basic logging only  
 
-[**🗂️ View Test Solutions →**](Session6_ModuleB_Test_Solutions.md)
+[View Solutions →](Session6_ModuleB_Test_Solutions.md)
 
 ### Next Steps
 
