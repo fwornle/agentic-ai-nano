@@ -11,8 +11,6 @@ D) Enables source attribution and filtering capabilities ✅
 
 **Explanation:** Metadata tracking stores information like source path, document type, and other attributes with each document chunk. This enables source attribution (showing users where information came from), filtering by document type or source, and better debugging of retrieval issues.
 
----
-
 **Question 2:** Which chunking approach is most likely to preserve semantic coherence in documents?  
 
 A) Random boundary splitting  
@@ -21,8 +19,6 @@ C) Fixed character-length splitting
 D) Semantic paragraph-based splitting ✅  
 
 **Explanation:** Semantic paragraph-based splitting uses natural language boundaries (like paragraph breaks) to create chunks, preserving the logical flow and context of information. This approach maintains semantic coherence better than arbitrary character or token-based splits.
-
----
 
 **Question 3:** In ChromaDB vector store initialization, what is the purpose of the `persist_directory` parameter?  
 
@@ -33,8 +29,6 @@ D) Reduces memory consumption
 
 **Explanation:** The `persist_directory` parameter specifies where ChromaDB should store the vector database on disk. This allows the indexed documents to persist between application restarts, avoiding the need to re-index documents every time the system starts.
 
----
-
 **Question 4:** What is the primary benefit of including confidence scores in RAG responses?  
 
 A) Reduces retrieval time  
@@ -43,8 +37,6 @@ C) Provides transparency about answer reliability ✅
 D) Enables faster document indexing  
 
 **Explanation:** Confidence scores help users understand how reliable the RAG system's answer is based on the quality of retrieved documents. Low confidence scores can indicate that the system found limited relevant information, helping users interpret answers appropriately.
-
----
 
 **Question 5:** Why does the RAG system separate retrieval and generation into distinct phases?  
 
@@ -55,8 +47,6 @@ D) To prevent embedding conflicts
 
 **Explanation:** Separating retrieval and generation phases allows independent optimization of each component. You can experiment with different retrieval strategies, embedding models, or generation prompts without affecting the other components, making the system more maintainable and debuggable.
 
----
-
 **Question 6:** What is the main advantage of the structured response format (answer, sources, confidence, num_sources)?  
 
 A) Enables comprehensive result evaluation and transparency ✅  
@@ -65,8 +55,6 @@ C) Reduces token usage
 D) Speeds up query processing  
 
 **Explanation:** The structured response format provides complete transparency about the RAG process, including what sources were used, how confident the system is, and how many documents contributed to the answer. This enables users to evaluate answer quality and developers to debug system performance.
-
----
 
 **Question 7:** Why is using tiktoken for token counting important in RAG systems?  
 
@@ -77,8 +65,6 @@ D) It reduces storage requirements
 
 **Explanation:** tiktoken provides accurate token counts for specific LLM models, ensuring that chunks don't exceed the model's context window limits. This prevents truncation issues and ensures all retrieved content can be processed by the generation model.
 
----
-
 **Question 8:** What is the best practice for handling failed document loads in a production RAG system?  
 
 A) Retry indefinitely until success  
@@ -88,8 +74,6 @@ D) Use placeholder content for failed loads
 
 **Explanation:** Robust RAG systems should skip failed document loads (with appropriate logging) and continue processing other documents. This ensures that the system remains functional even when some sources are temporarily unavailable or corrupted.
 
----
-
 ## Performance Scoring
 
 - **8/8 Correct**: Excellent mastery of RAG implementation concepts  
@@ -97,8 +81,6 @@ D) Use placeholder content for failed loads
 - **6/8 Correct**: Good grasp of core concepts, review chunking strategies  
 - **5/8 Correct**: Adequate knowledge, focus on architecture design  
 - **4/8 or below**: Recommend reviewing session materials and hands-on practice  
-
----
 
 ## Key Implementation Concepts
 
@@ -123,10 +105,11 @@ D) Use placeholder content for failed loads
 - **Chunk Size**: Balance between context and specificity (500-1500 tokens)  
 - **Overlap Strategy**: 10-20% overlap for continuity  
 - **Top-K Selection**: Start with 3-5 documents, adjust based on needs  
-- **Embedding Models**: Choose appropriate models for domain/language  
-
+- **Embedding Models**: Choose appropriate models for domain/language
 ---
 
-**Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
+## Navigation
+
+**Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
 
 ---

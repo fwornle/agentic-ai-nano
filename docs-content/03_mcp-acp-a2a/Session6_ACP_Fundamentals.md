@@ -28,8 +28,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## 🎯 The Great Disconnection: When Agents Need to Work Without the Cloud
 
 Imagine you're building an AI system for a hospital's emergency room. Suddenly, the internet goes down. Your cloud-dependent agents stop talking to each other just when doctors need them most. Patients are arriving, data needs processing, and decisions must be made—but your agents are silent because they can't reach their cloud coordinator.
@@ -39,8 +37,6 @@ This scenario isn't just hypothetical. It happens every day in factories, remote
 *Welcome to the Agent Communication Protocol (ACP)—where local-first isn't just a design philosophy, it's a digital lifeline.*
 
 ![ACP Architecture](images/acp-architecture-overview.png)
-
----
 
 ## 🎯 Part 1: The Revolution of Local-First Thinking
 
@@ -91,8 +87,6 @@ The benefits extend far beyond technical elegance:
 - **Event-Driven Architecture**: Real-time coordination with the responsiveness of local networks  
 - **Autonomous Operation**: Full functionality even when the internet disappears  
 - **Sub-Millisecond Latency**: Local communication that's faster than human perception  
-
----
 
 ## 📝 Part 2: Building Your First ACP Agent Society
 
@@ -230,8 +224,6 @@ async def get_status():
 ```
 
 This standardized interface ensures any system can participate in the ACP network using familiar HTTP protocols.
-
----
 
 ## 📝 Part 3: Creating a Specialized Agent Ecosystem
 
@@ -402,8 +394,6 @@ Processing and returning results:
 
 This implementation provides practical text summarization while maintaining metrics for quality assessment.
 
----
-
 ## ⚙️ The Master Orchestrator: Coordination Agent
 
 *Prerequisites: Complete 🎯 Observer Path and 📝 Participant sections above*
@@ -497,8 +487,6 @@ Effective coordination requires adherence to key principles:
 
 These principles ensure reliable, scalable agent orchestration in production environments.
 
----
-
 ## 📝 Part 4: The Social Network of Agents
 
 *Prerequisites: Complete 🎯 Observer Path and previous 📝 Participant sections*
@@ -560,8 +548,6 @@ all_agents = await self.discover_agents()
 It's as simple as asking: "Does anyone here know how to handle spreadsheets?" or "Who's around to help with a project?"
 
 This capability-based discovery enables dynamic workflow composition based on available resources.
-
----
 
 ## 📝 Part 5: Launching Your Agent Metropolis
 
@@ -648,8 +634,6 @@ This test client acts like a quality inspector, verifying that all the social in
    ✅ Workflow completed successfully
    🤝 Agents coordinated: ['DataProcessor', 'TextProcessor']
 ```
-
----
 
 ## ⚙️ Part 6: The Language of Digital Collaboration
 
@@ -764,8 +748,6 @@ This discovery request demonstrates how coordinators locate required capabilitie
 
 This conversation demonstrates how ACP enables sophisticated collaboration with simple, standardized messages.
 
----
-
 ## The Philosophy of Local-First Intelligence
 
 As we wrap up this journey into ACP fundamentals, let's reflect on what we've accomplished and why it matters:
@@ -789,8 +771,6 @@ This isn't just about technology—it's about creating AI systems that are relia
 In our next adventure, you'll discover how these local ACP agents can extend their reach beyond their immediate neighborhood. We'll explore the **Agent-to-Agent (A2A) Protocol** that enables enterprise-scale collaboration across organizational boundaries—imagine your local agent society forming alliances and partnerships with agent societies around the world.
 
 But that's a story for another session. For now, take pride in what you've built: a foundation for truly autonomous, collaborative AI that works regardless of the connectivity chaos around it.
-
----
 
 ## ⚙️ Test Your ACP Mastery
 
@@ -857,9 +837,11 @@ C) To enable integration with any agent implementation
 D) To reduce development costs  
 
 [View Solutions →](Session6_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 7 - Agent-to-Agent Communication →](Session7_Agent_to_Agent_Communication.md)
+## Navigation
+
+**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_*.md)
 
 ---

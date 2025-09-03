@@ -7,8 +7,6 @@ You've implemented GraphRAG systems with entity extraction, relationship mapping
 
 This module teaches you advanced graph algorithms optimized for large-scale GraphRAG systems. You'll implement specialized PageRank variants for different knowledge domains, optimization techniques that maintain performance at massive scale, and algorithmic enhancements that enable complex reasoning patterns impossible with basic traversal. The goal is graph intelligence that scales with your knowledge complexity.
 
----
-
 ## Advanced Algorithms Content
 
 ### PageRank Variants for Knowledge Graphs - Beyond Basic Node Ranking
@@ -421,8 +419,6 @@ Finally, we initialize the model with the appropriate dimensions and return the 
 
 The trained GAT model produces enhanced node embeddings that incorporate learned attention patterns. The attention weights provide interpretability by showing which neighbors influenced each node's representation, helping users understand the reasoning behind GraphRAG retrieval decisions.
 
----
-
 ## 📝 Multiple Choice Test - Module A
 
 Test your understanding of advanced graph algorithms:
@@ -458,9 +454,11 @@ C) When the graph is very small
 D) When memory is limited  
 
 [View Solutions →](Session6_ModuleA_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+## Navigation
+
+**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_*.md)
 
 ---

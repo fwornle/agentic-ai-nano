@@ -32,8 +32,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## 🎯 Observer Path: LangGraph Architecture Foundations
 
 **Code Repository**: [`src/session3/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session3)
@@ -64,8 +62,6 @@ Think of it as the difference between traditional ETL pipelines and modern strea
 - Sometimes data quality validation needs direct input from schema inference  
 - Sometimes ML feature engineering requires simultaneous input from multiple data sources  
 - Sometimes you need to route back to data ingestion when quality thresholds aren't met  
-
----
 
 ## Part 1: Graph Architecture Overview
 
@@ -179,8 +175,6 @@ result = app.invoke({
 })
 ```
 
----
-
 ## 📝 Participant Path: Multi-Agent Implementation
 
 *Prerequisites: Complete the 🎯 Observer Path content above*
@@ -195,8 +189,6 @@ Ready to build complete multi-agent systems with proper coordination? The Partic
 - Error handling and workflow validation  
 - Complete testing and integration patterns  
 
----
-
 ## ⚙️ Implementer Path: Advanced Orchestration
 
 *Prerequisites: Complete 🎯 Observer and 📝 Participant paths above*
@@ -205,8 +197,6 @@ Ready to build complete multi-agent systems with proper coordination? The Partic
 
 - [⚙️ Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md) - Complex workflow coordination & dynamic agent generation for large-scale data processing  
 - [⚙️ Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md) - Production state handling & sophisticated routing for enterprise data pipelines  
-
----
 
 ## 📝 Multiple Choice Test - Session 3
 
@@ -243,9 +233,11 @@ C) Previous state is archived
 D) Only specified fields are updated/merged  
 
 [View Solutions →](Session3_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+## Navigation
+
+**Previous:** [Session 2 - Implementation →](Session2_*.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
 
 ---

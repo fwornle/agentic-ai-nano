@@ -517,10 +517,11 @@ This implementation foundation prepares you for:
 - Advanced chunking strategies in Session 2  
 - Vector database optimization in Session 3  
 - Query enhancement techniques in Session 4  
-- Production evaluation in Session 5  
-
+- Production evaluation in Session 5
 ---
 
-**Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+## Navigation
+
+**Next:** [Session 1 - Foundations →](Session1_*.md)
 
 ---

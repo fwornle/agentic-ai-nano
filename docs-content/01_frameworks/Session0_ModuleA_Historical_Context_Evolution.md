@@ -9,8 +9,6 @@ In 1966, ELIZA convinced people they were talking to a therapist by simply refle
 
 What happened in between? This is the story of humanity's greatest breakthrough - not just building machines that think, but machines that act, remember, learn, and evolve. From the primitive chatbots of the 1960s to the agentic systems revolutionizing entire industries today, this is the epic journey of digital intelligence coming alive.
 
----
-
 ## Part 1: Pre-Agent Era Limitations - The Dark Ages of AI
 
 ### The Prompt-Response Bottleneck - Digital Amnesia
@@ -76,8 +74,6 @@ The response mechanism maintains a sliding window of the last 5 conversation exc
 After generating each response, both the user message and AI response are stored in conversation history. This creates a continuous memory that grows with each interaction, enabling the AI to reference earlier parts of the conversation and maintain context across multiple turns.
 
 This approach maintains a rolling window of the last few exchanges, providing them as context for each new generation. While primitive compared to modern systems, this was revolutionary—suddenly AI could remember what you talked about earlier in the conversation.
-
----
 
 ## Part 2: Agent Research Breakthroughs - The Renaissance Begins
 
@@ -196,8 +192,6 @@ The structured message format ensures reliable communication by including all es
 
 The structured message format ensures all agents understand who sent what information when, enabling reliable coordination even in complex multi-agent scenarios.
 
----
-
 ## Part 3: Industry Adoption Timeline - From Labs to Boardrooms
 
 ### Early Adoption (2022-2023) - The Great Awakening
@@ -285,8 +279,6 @@ This enterprise wrapper ensures every agent interaction is authenticated, logged
 3. **Agent-to-System Integration**: Agents directly managing infrastructure through APIs and orchestration tools  
 4. **Regulatory Frameworks**: Government oversight of autonomous data processing decisions and privacy compliance  
 
----
-
 ## 📝 Multiple Choice Test - Module A
 
 Test your understanding of AI agent historical context and evolution:
@@ -323,8 +315,6 @@ D) 50%
 
 [View Solutions →](Session0_ModuleA_Test_Solutions.md)
 
----
-
 ## Module Summary
 
 You've now explored the historical context that led to modern agent frameworks:
@@ -338,10 +328,12 @@ You've now explored the historical context that led to modern agent frameworks:
 
 - ReAct Paper: "Synergizing Reasoning and Acting in Language Models"  
 - Toolformer Paper: "Language Models Can Teach Themselves to Use Tools"  
-- Reflexion Paper: "Language Agents with Verbal Reinforcement Learning"  
-
+- Reflexion Paper: "Language Agents with Verbal Reinforcement Learning"
 ---
 
-**Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
+## Navigation
+
+**Previous:** [Session None -  →](SessionNone_*.md)  
+**Next:** [Session 1 - Foundations →](Session1_*.md)
 
 ---

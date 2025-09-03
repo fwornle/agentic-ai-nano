@@ -20,8 +20,6 @@ cd src/session6
 python production_graphrag.py
 ```
 
----
-
 ## Production Systems Content
 
 ### Distributed Graph Processing - Scaling Beyond Single Machines
@@ -606,8 +604,6 @@ Scaling logic requires multiple scale-up conditions (≥2) to prevent unnecessar
 
 Scaling logic requires multiple scale-up conditions (≥2) to prevent unnecessary expansion, while scale-down requires all conditions to ensure conservative downsizing. The 1.5x scale-up factor provides substantial capacity increase, while 0.7x scale-down offers moderate cost reduction with safety margins.
 
----
-
 ## 📝 Multiple Choice Test - Module B
 
 Test your understanding of production GraphRAG systems:
@@ -643,9 +639,11 @@ C) High CPU usage
 D) Network latency  
 
 [View Solutions →](Session6_ModuleB_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+## Navigation
+
+**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_*.md)
 
 ---

@@ -11,8 +11,6 @@ D) Improves embedding quality
 
 **Explanation:** Detecting content types allows the chunker to make intelligent decisions about where to split content. For example, it can keep table rows together, preserve code blocks, and maintain hierarchical relationships between headings and their content.
 
----
-
 **Question 2:** In hierarchical chunking, why is it important to track element hierarchy levels?  
 
 A) To reduce memory usage  
@@ -21,8 +19,6 @@ C) To improve processing speed
 D) To preserve document structure and create meaningful chunk boundaries ✅  
 
 **Explanation:** Hierarchy levels help maintain the logical structure of documents. By tracking levels (0=top, 1=section, 2=subsection), the chunker can avoid breaking related content across chunks and preserve the document's organizational structure.
-
----
 
 **Question 3:** What is the main advantage of extracting entities, keywords, and topics during preprocessing?  
 
@@ -33,8 +29,6 @@ D) Improves computational efficiency
 
 **Explanation:** Extracted metadata creates additional searchable context that improves retrieval precision. When users search for concepts, the system can match not just the original text but also extracted entities, keywords, and inferred topics.
 
----
-
 **Question 4:** Why do tables require specialized processing in RAG systems?  
 
 A) Tables use different encoding formats  
@@ -43,8 +37,6 @@ C) Tables are always larger than the chunk size
 D) Tables have structured relationships that are lost in naive chunking ✅  
 
 **Explanation:** Tables contain structured information where the relationship between columns and rows is crucial for understanding. Naive chunking might split a table across multiple chunks, losing the structural relationships that give the data meaning.
-
----
 
 **Question 5:** When processing documents with images, what is the best practice for RAG systems?  
 
@@ -55,8 +47,6 @@ D) Ignore images completely
 
 **Explanation:** Since most RAG systems work with text-based LLMs, the best approach is to replace images with descriptive text that captures their content and context. This makes the visual information searchable and usable by the generation model.
 
----
-
 **Question 6:** Which metric is most important for measuring chunk coherence in hierarchical chunking?  
 
 A) Topic consistency between related chunks ✅  
@@ -65,8 +55,6 @@ C) Average chunk size
 D) Processing speed  
 
 **Explanation:** Topic consistency measures whether related chunks share similar topics, indicating that the chunking preserved semantic relationships. High topic overlap between adjacent chunks suggests successful coherence preservation.
-
----
 
 **Question 7:** What is the optimal overlap ratio for hierarchical chunks?  
 
@@ -77,8 +65,6 @@ D) 50% - maximum context preservation
 
 **Explanation:** A 10-20% overlap provides sufficient context continuity between chunks without excessive redundancy. This balance ensures that important information near chunk boundaries isn't lost while maintaining processing efficiency.
 
----
-
 **Question 8:** Why should the advanced processing pipeline analyze document complexity before choosing a processing strategy?  
 
 A) To select the most appropriate processing approach for the content type ✅  
@@ -88,8 +74,6 @@ D) To determine the number of chunks to create
 
 **Explanation:** Different document types (simple text vs. complex technical documents with tables and code) benefit from different processing strategies. Analyzing complexity allows the system to choose the most effective approach for each document type.
 
----
-
 ## Performance Scoring
 
 - **8/8 Correct**: Excellent mastery of advanced preprocessing concepts  
@@ -97,8 +81,6 @@ D) To determine the number of chunks to create
 - **6/8 Correct**: Good grasp of core concepts, review metadata extraction  
 - **5/8 Correct**: Adequate knowledge, focus on hierarchical chunking strategies  
 - **4/8 or below**: Recommend hands-on practice with complex documents  
-
----
 
 ## Key Advanced Concepts
 
@@ -137,10 +119,11 @@ D) To determine the number of chunks to create
 2. **Information Density**: Unique vs. total word ratios  
 3. **Metadata Richness**: Feature presence evaluation  
 4. **Size Consistency**: Chunk size distribution analysis  
-5. **Overlap Efficiency**: Context preservation effectiveness  
-
+5. **Overlap Efficiency**: Context preservation effectiveness
 ---
 
-**Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
+## Navigation
+
+**Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
 
 ---

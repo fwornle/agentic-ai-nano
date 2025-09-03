@@ -32,8 +32,6 @@ You're about to master the same advanced composition patterns that transformed N
 - CLI tools for atomic agent management and data engineering DevOps integration  
 - Context-aware agent orchestration systems for complex data transformation workflows  
 
----
-
 ## Part 1: Data Pipeline Agent Orchestration
 
 ### Sequential Processing Pipelines for Data Streams
@@ -374,8 +372,6 @@ Finally, we handle data pipeline completion and record comprehensive metrics:
 
 Notice how we ensure data processing metrics are recorded even when exceptions occur, providing complete observability into data pipeline behavior.
 
----
-
 ## Part 2: Dynamic Agent Assembly and CLI Integration for Data Processing
 
 ### Runtime Agent Composition for Data Processing
@@ -706,8 +702,6 @@ The most powerful feature - creating data processing pipelines automatically fro
 
 This method demonstrates the full power of dynamic composition for data processing - from capability requirements to a fully functional data pipeline, all generated automatically with schema validation and error handling.
 
----
-
 ## Module Summary
 
 You've now mastered advanced atomic agent composition patterns for data processing:
@@ -716,8 +710,6 @@ You've now mastered advanced atomic agent composition patterns for data processi
 ✅ **Parallel Data Processing**: Implemented load-balanced parallel execution with fault tolerance for distributed data systems
 ✅ **Dynamic Assembly**: Created runtime agent composition systems with capability-based selection for data processing workflows
 ✅ **CLI Integration**: Designed data engineering-friendly command-line tools for atomic agent management
-
----
 
 ## 📝 Multiple Choice Test - Module A
 
@@ -755,24 +747,22 @@ D) No error handling
 
 [View Solutions →](Session6_ModuleA_Test_Solutions.md)
 
----
-
 ### Next Steps
 
 - **Continue to Module B**: [Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md) for production-scale data processing architectures  
 - **Return to Core**: [Session 6 Main](Session6_Atomic_Agents_Modular_Architecture.md)  
 - **Advance to Session 7**: [First ADK Agent](Session7_First_ADK_Agent.md)  
 
----
-
 **🗂️ Source Files for Module A:**
 
 - `src/session6/advanced_data_composition.py` - Sophisticated data pipeline patterns
 - `src/session6/dynamic_data_assembly.py` - Runtime composition systems for data processing
 - `src/session6/atomic_data_cli.py` - Data engineering DevOps CLI integration
-
 ---
 
-**Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
+## Navigation
+
+**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_*.md)
 
 ---

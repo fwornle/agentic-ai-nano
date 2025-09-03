@@ -11,8 +11,6 @@ D) Network security only
 
 **Explanation:** Defense-in-depth provides multiple security layers including authentication, authorization, network security, and application security to protect against various attack vectors.
 
----
-
 **Question 2:** What is the minimum recommended length for JWT secret keys?  
 
 A) 16 characters  
@@ -21,8 +19,6 @@ C) 32 characters ✅
 D) 24 characters  
 
 **Explanation:** JWT secret keys should be at least 32 characters to provide adequate cryptographic security. Shorter keys are vulnerable to brute force attacks.
-
----
 
 **Question 3:** How should refresh tokens be handled for maximum security?  
 
@@ -33,8 +29,6 @@ D) Use Redis with automatic expiration and blacklisting ✅
 
 **Explanation:** Redis provides secure server-side storage with automatic expiration and blacklisting capabilities, preventing token replay attacks and ensuring proper lifecycle management.
 
----
-
 **Question 4:** Which rate limiting algorithm provides the best balance of fairness and burst handling?  
 
 A) Fixed window  
@@ -43,8 +37,6 @@ C) Leaky bucket
 D) Token bucket ✅  
 
 **Explanation:** Token bucket algorithm allows controlled bursts while maintaining overall rate limits, providing better user experience than strict fixed-window approaches.
-
----
 
 **Question 5:** What is the advantage of role-based permissions over user-specific permissions?  
 
@@ -55,8 +47,6 @@ D) Simpler implementation
 
 **Explanation:** Role-based access control (RBAC) provides easier management and better scalability by grouping permissions into roles that can be assigned to multiple users, reducing administrative overhead.
 
----
-
 **Question 6:** What is the recommended approach for validating MCP tool inputs?  
 
 A) Server-side validation using Pydantic models ✅  
@@ -65,8 +55,6 @@ C) Client-side validation only
 D) No validation needed  
 
 **Explanation:** Server-side validation using Pydantic models provides comprehensive type checking, data sanitization, and protection against injection attacks while maintaining data integrity.
-
----
 
 **Question 7:** What TLS version should be the minimum requirement for production MCP servers?  
 
@@ -77,8 +65,6 @@ D) TLS 1.2 ✅
 
 **Explanation:** TLS 1.2 is the minimum recommended version for production systems as earlier versions have known security vulnerabilities and are deprecated.
 
----
-
 **Question 8:** How should API keys be rotated securely in production?  
 
 A) Rotate only when compromised  
@@ -87,8 +73,6 @@ C) Never rotate keys
 D) Manual rotation monthly  
 
 **Explanation:** Automatic API key rotation with overlap periods ensures continuous service availability while maintaining security through regular key refresh cycles.
-
----
 
 **Question 9:** What information is most critical to include in security audit logs?  
 
@@ -99,8 +83,6 @@ D) Authentication events and permission changes ✅
 
 **Explanation:** Security audit logs should capture authentication events, authorization decisions, and permission changes to enable security monitoring and compliance reporting.
 
----
-
 **Question 10:** Which technique is most effective for protecting MCP servers from DDoS attacks?  
 
 A) Blocking all international traffic  
@@ -109,8 +91,6 @@ C) Implementing multiple rate limiting layers ✅
 D) Increasing server capacity  
 
 **Explanation:** Multiple rate limiting layers (per-IP, per-user, per-endpoint) provide comprehensive DDoS protection by preventing various attack patterns while maintaining legitimate user access.
-
----
 
 ## Scoring Guide
 
@@ -127,8 +107,6 @@ D) Increasing server capacity
 3. **RBAC**: Role-based permissions for scalable access control  
 4. **Input Validation**: Server-side Pydantic models prevent injection attacks  
 5. **Rate Limiting**: Token bucket algorithm with multiple layers for DDoS protection  
-
----
 
 **Challenge:** Implement a security audit system that tracks suspicious activity.
 
@@ -518,12 +496,11 @@ async def get_security_audit(time_range: str = "24h") -> Dict:
 
 This security audit system provides comprehensive monitoring and analysis capabilities for MCP server security.
 
----
-
 [Return to Session 5](Session5_Secure_MCP_Server.md)
-
 ---
 
-**Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
+## Navigation
+
+**Back to Test:** [Session 5 Test Questions →](Session5_*.md#multiple-choice-test)
 
 ---

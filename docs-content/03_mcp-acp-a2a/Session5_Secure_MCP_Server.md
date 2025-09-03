@@ -38,8 +38,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## 🎯 Observer Path: Essential Security Concepts
 
 ### Learning Outcomes
@@ -92,8 +90,6 @@ Rate limiting is like having a sophisticated bouncer who ensures fair access:
 - **Token Bucket Algorithm**: Nature's perfect approach to resource distribution  
 - **Role-Based Limits**: Different users get different levels of service  
 - **Distributed Protection**: Works across multiple server instances  
-
----
 
 ## 📝 Participant Path: Practical Security Implementation
 
@@ -369,8 +365,6 @@ class SecureMCPServer:
 
 Each MCP tool becomes a secured endpoint with appropriate permission checks and input validation.
 
----
-
 ## ⚙️ Implementer Path: Advanced Security Architecture
 
 *Prerequisites: Complete Observer and Participant paths*
@@ -381,8 +375,6 @@ For comprehensive deep-dive coverage of advanced security topics, continue with:
 - ⚙️ [Enterprise API Key Management](Session5_Enterprise_API_Keys.md)  
 - ⚙️ [Production Rate Limiting Systems](Session5_Production_Rate_Limiting.md)  
 - ⚙️ [Security Monitoring & Audit Systems](Session5_Security_Monitoring.md)  
-
----
 
 ## 📝 Practice Exercises
 
@@ -408,8 +400,6 @@ For comprehensive deep-dive coverage of advanced security topics, continue with:
    - Rate limiting middleware  
    - Security audit logging  
 
----
-
 ## Security Knowledge Check
 
 Test your understanding of MCP server security:
@@ -434,8 +424,6 @@ Test your understanding of MCP server security:
 
 **Answer Key**: 1-B, 2-B, 3-C
 
----
-
 ## 📋 Summary
 
 You've now built a comprehensive security foundation for MCP servers that includes:
@@ -454,9 +442,11 @@ You've now built a comprehensive security foundation for MCP servers that includ
 - Comprehensive audit logging  
 
 Your MCP server is now protected against the most common attack vectors while maintaining usability and performance.
-
 ---
 
-**Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

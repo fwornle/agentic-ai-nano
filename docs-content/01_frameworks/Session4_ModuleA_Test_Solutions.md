@@ -11,9 +11,10 @@ class FlowState(BaseModel):
     project_id: str
     current_phase: str
     completed_phases: List
-
 ---
 
-**Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+## Navigation
+
+**Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
 
 ---

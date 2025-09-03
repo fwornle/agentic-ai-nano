@@ -249,10 +249,12 @@ A 5% improvement in quality scores might be statistically significant but not pr
 **Next Steps for Practical Application:**
 
 - **📝 Participant Path**: [RAGAS Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Set up and use RAGAS evaluation framework  
-- **📝 Participant Path**: [Automated Testing Practice →](Session5_Automated_Testing_Practice.md) - Implement A/B testing for RAG optimization  
-
+- **📝 Participant Path**: [Automated Testing Practice →](Session5_Automated_Testing_Practice.md) - Implement A/B testing for RAG optimization
 ---
 
-**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

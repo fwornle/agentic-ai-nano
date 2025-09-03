@@ -28,8 +28,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## Session Introduction
 
 In Session 1, you implemented a working RAG system that splits documents into manageable chunks. But that's where many RAG implementations stop – and where they start to fail in production. When your chunker encounters a table and splits it down the middle, or breaks apart a code block that loses meaning without its function definition, you've hit the fundamental limitation of naive text splitting.
@@ -38,8 +36,6 @@ This session transforms your RAG system from simple text splitters into intellig
 
 ![RAG Problems Overview](images/RAG-overview-problems.png)
 *Figure 1: Common problems with naive chunking approaches that advanced preprocessing solves.*
-
----
 
 ## 🎯 Observer Path: Core Concepts Overview
 
@@ -65,8 +61,6 @@ Intelligent document preprocessing follows four key stages:
 
 For detailed implementation, continue to the 📝 Participant path below.
 
----
-
 ## 📝 Participant Path: Implementation Overview
 
 *Prerequisites: Complete 🎯 Observer path sections above*
@@ -75,8 +69,6 @@ For hands-on implementation of structure-aware chunking:
 
 - 📝 **[Hierarchical Chunking Practice](Session2_Hierarchical_Chunking_Practice.md)**: Build structure-aware chunkers  
 - 📝 **[Metadata Extraction Implementation](Session2_Metadata_Extraction_Implementation.md)**: Extract rich context from content  
-
----
 
 ## ⚙️ Implementer Path: Advanced Systems
 
@@ -167,8 +159,6 @@ This structure captures content, type, hierarchy level, and metadata for each do
 
 The hierarchy context method provides human-readable descriptions of element levels in the document structure.
 
----
-
 ## 📝 Participant Path: Implementation Guide
 
 *Prerequisites: Complete 🎯 Observer path sections above*
@@ -236,8 +226,6 @@ Size management ensures chunks remain manageable while preferring structural bou
 - **Complete sections**: Keeps related content together  
 - **Size management**: Balances structure with practical limits  
 
----
-
 ## 📝 Practice Exercises
 
 ### Exercise 1: Content Type Detection
@@ -274,8 +262,6 @@ for i, chunk in enumerate(chunks):
     print(f"Chunk {i+1}: {chunk.metadata}")
 ```
 
----
-
 ## Key Takeaways
 
 ### 🎯 Observer Path Summary
@@ -301,8 +287,6 @@ for i, chunk in enumerate(chunks):
 - Implemented comprehensive quality control systems  
 - Created domain-specific analysis capabilities  
 - Built automated optimization feedback loops  
-
----
 
 ## 📝 Multiple Choice Test - Session 2
 
@@ -357,9 +341,11 @@ C) To reduce computational costs
 D) To determine the number of chunks to create  
 
 [View Solutions →](Session2_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
+## Navigation
+
+**Previous:** [Session 1 - Foundations →](Session1_*.md)  
+**Next:** [Session 3 - Advanced Patterns →](Session3_*.md)
 
 ---

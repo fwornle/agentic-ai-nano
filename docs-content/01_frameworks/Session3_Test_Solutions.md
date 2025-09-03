@@ -11,8 +11,6 @@ D) Simpler implementation
 
 **Explanation:** LangGraph's graph-based architecture enables sophisticated workflows with conditional routing, parallel execution, and dynamic flow control, far beyond the sequential limitations of traditional agent chains.
 
----
-
 **Question 2:** In LangGraph, what component defines the data that flows between nodes?  
 
 A) State (TypedDict) ✅  
@@ -21,8 +19,6 @@ C) Memory
 D) Tools  
 
 **Explanation:** State in LangGraph is defined using TypedDict, providing a structured, type-safe way to define what data flows between nodes and how it's updated throughout the workflow.
-
----
 
 **Question 3:** What determines the flow between nodes in a LangGraph workflow?  
 
@@ -33,8 +29,6 @@ D) Conditional edges and decision functions ✅
 
 **Explanation:** LangGraph uses conditional edges with decision functions that examine the current state and determine which node to execute next, enabling dynamic and intelligent workflow routing.
 
----
-
 **Question 4:** How does LangGraph handle parallel agent execution?  
 
 A) Through parallel nodes with state merging ✅  
@@ -43,8 +37,6 @@ C) Through external orchestration
 D) Using threading only  
 
 **Explanation:** LangGraph supports parallel execution through parallel nodes that can run simultaneously, with their outputs automatically merged into the shared state for downstream processing.
-
----
 
 **Question 5:** What happens when a LangGraph node updates state?  
 
@@ -55,8 +47,6 @@ D) Only specified fields are updated/merged ✅
 
 **Explanation:** LangGraph uses state merging where nodes only update the specific fields they return, preserving other state data and enabling incremental workflow progress.
 
----
-
 **Question 6:** In the debate pattern, what determines when the debate ends?  
 
 A) Fixed number of rounds  
@@ -65,8 +55,6 @@ C) Consensus score and maximum iterations ✅
 D) Random timing  
 
 **Explanation:** The debate pattern uses a consensus scoring mechanism combined with maximum iteration limits to determine when agents have reached sufficient agreement or when the debate should terminate.
-
----
 
 **Question 7:** What is the purpose of a decision function in conditional edges?  
 
@@ -77,8 +65,6 @@ D) To examine state and determine next node ✅
 
 **Explanation:** Decision functions in conditional edges examine the current workflow state and use that information to intelligently determine which node should be executed next in the graph.
 
----
-
 **Question 8:** How does the hierarchical team pattern coordinate work?  
 
 A) Random task assignment  
@@ -87,8 +73,6 @@ C) Workers communicate directly
 D) A supervisor routes tasks to specialized workers ✅  
 
 **Explanation:** The hierarchical team pattern uses a supervisor agent that analyzes tasks, routes them to appropriate specialized worker agents, and coordinates their collaboration.
-
----
 
 **Question 9:** What is the circuit breaker pattern used for?  
 
@@ -99,8 +83,6 @@ D) Preventing cascade failures from unreliable services ✅
 
 **Explanation:** The circuit breaker pattern prevents cascade failures by monitoring service reliability and temporarily disabling calls to failing services, allowing workflows to degrade gracefully.
 
----
-
 **Question 10:** In parallel execution, when should branches be synchronized?  
 
 A) Only at the end of the workflow  
@@ -110,8 +92,6 @@ D) When downstream nodes need data from multiple branches ✅
 
 **Explanation:** Parallel branches should be synchronized when downstream processing requires data from multiple branches, ensuring all necessary information is available before proceeding.
 
----
-
 ## Performance Scoring
 
 - **10/10 Correct**: Excellent mastery of LangGraph workflows and multi-agent patterns  
@@ -119,8 +99,6 @@ D) When downstream nodes need data from multiple branches ✅
 - **6-7 Correct**: Adequate grasp, review specific patterns and state management  
 - **4-5 Correct**: Needs focused study of graph-based workflows  
 - **0-3 Correct**: Recommend hands-on practice with LangGraph implementations  
-
----
 
 ## Key Concepts Review
 
@@ -148,13 +126,12 @@ D) When downstream nodes need data from multiple branches ✅
 - **Monitoring**: State inspection and workflow observability  
 - **Performance**: Optimized state merging and conditional routing  
 
----
-
 ## Answer Summary  
-1. B  2. B  3. B  4. B  5. B  6. B  7. B  8. B  9. B  10. B  
-
+1. B  2. B  3. B  4. B  5. B  6. B  7. B  8. B  9. B  10. B
 ---
 
-**Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+## Navigation
+
+**Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
 
 ---

@@ -11,8 +11,6 @@ D) To replace human operators
 
 **Explanation:** A2A communication enables multiple AI agents to collaborate, share information, and coordinate actions to solve complex problems requiring diverse expertise and coordination.
 
----
-
 **Question 2:** Which message type is used for finding agents with specific capabilities?  
 
 A) RESPONSE  
@@ -21,8 +19,6 @@ C) DISCOVERY ✅
 D) REQUEST  
 
 **Explanation:** DISCOVERY messages are specifically designed for agent discovery requests, allowing agents to find other agents with required capabilities in the network.
-
----
 
 **Question 3:** What information is essential for proper A2A message routing?  
 
@@ -33,8 +29,6 @@ D) Sender ID, recipient ID, and message type ✅
 
 **Explanation:** Proper message routing requires sender identification, recipient targeting, and message type classification to ensure messages reach the correct destination with appropriate handling.
 
----
-
 **Question 4:** What is the difference between orchestration and choreography in multi-agent systems?  
 
 A) Orchestration uses centralized control, choreography uses distributed coordination ✅  
@@ -43,8 +37,6 @@ C) There is no difference
 D) Orchestration is faster than choreography  
 
 **Explanation:** Orchestration involves centralized control where a coordinator directs workflow execution, while choreography involves distributed coordination where agents follow predefined interaction patterns.
-
----
 
 **Question 5:** How do agents announce their capabilities in an A2A system?  
 
@@ -55,8 +47,6 @@ D) Through file-based configurations
 
 **Explanation:** Agents use ANNOUNCEMENT messages containing detailed capability metadata to inform other agents about their available services and expertise areas.
 
----
-
 **Question 6:** What mechanism ensures A2A communication reliability when agents become unavailable?  
 
 A) Faster processing  
@@ -65,8 +55,6 @@ C) Message queuing with retry logic and timeouts ✅
 D) Multiple network interfaces  
 
 **Explanation:** Message queuing with retry logic and timeout mechanisms ensures communication reliability by handling temporary agent unavailability and network issues.
-
----
 
 **Question 7:** What is the purpose of capability negotiation in A2A systems?  
 
@@ -77,8 +65,6 @@ D) To reduce costs
 
 **Explanation:** Capability negotiation matches available agent capabilities with specific task requirements, ensuring that tasks are assigned to agents with appropriate skills and resources.
 
----
-
 **Question 8:** When should URGENT priority be used for A2A messages?  
 
 A) For time-critical operations requiring immediate attention ✅  
@@ -87,8 +73,6 @@ C) For routine status updates
 D) For all important messages  
 
 **Explanation:** URGENT priority should be reserved for time-critical operations that require immediate attention, such as emergency shutdowns or critical error conditions.
-
----
 
 **Question 9:** What is the purpose of correlation IDs in A2A messaging?  
 
@@ -99,8 +83,6 @@ D) To link related messages in multi-step workflows ✅
 
 **Explanation:** Correlation IDs link related messages across multi-step workflows, enabling proper tracking and coordination of complex interactions between agents.
 
----
-
 **Question 10:** What is a key benefit of collaborative agent teams in A2A systems?  
 
 A) Diverse expertise and parallel problem-solving capabilities ✅  
@@ -109,8 +91,6 @@ C) Reduced network traffic
 D) Simpler implementation  
 
 **Explanation:** Collaborative agent teams leverage diverse expertise and enable parallel problem-solving, allowing complex tasks to be broken down and solved more efficiently than single-agent approaches.
-
----
 
 ## Scoring Guide
 
@@ -127,8 +107,6 @@ D) Simpler implementation
 3. **Service Discovery**: Dynamic discovery of agents and their capabilities  
 4. **Coordination Patterns**: Orchestration (centralized) vs choreography (distributed)  
 5. **Fault Tolerance**: Message queuing and retry mechanisms for reliability  
-
----
 
 **Challenge:** Create a multi-agent customer service system with A2A coordination.
 
@@ -344,12 +322,11 @@ class CustomerServiceChoreography:
 
 This A2A customer service system demonstrates distributed coordination where agents respond to events and coordinate their actions without centralized control.
 
----
-
 [Return to Session 7](Session7_Agent_to_Agent_Communication.md)
-
 ---
 
-**Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)
+## Navigation
+
+**Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
 
 ---

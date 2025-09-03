@@ -15,8 +15,6 @@ After completing this production systems module, you will master:
 - Advanced error handling and recovery  
 - Performance optimization techniques  
 
----
-
 ## Multi-Tool RAG Agent Architecture
 
 The true power of agentic RAG emerges when agents can access external tools that extend their cognitive capabilities beyond just text retrieval and generation. A sophisticated agentic RAG system might need to perform calculations, access real-time data, execute code, or interact with specialized APIs.
@@ -469,8 +467,6 @@ Response caching significantly improves performance for repeated queries while m
 
 Intelligent cache validation considers both query similarity and tool dependencies - responses with real-time data have shorter cache lifetimes than document-based responses.
 
----
-
 ## Enterprise Integration Patterns
 
 Production agentic RAG systems require integration with existing enterprise infrastructure for authentication, logging, compliance, and monitoring.
@@ -510,9 +506,11 @@ The security manager enforces enterprise policies around data access, query logg
 Multi-layered authorization ensures only authorized users can access appropriate information while maintaining audit trails for compliance reporting.
 
 This comprehensive production system provides the foundation for enterprise-grade agentic RAG deployment with appropriate security, monitoring, and scalability features.
-
 ---
 
-**Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)
+## Navigation
+
+**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
+**Next:** [Session 8 - Production Ready →](Session8_*.md)
 
 ---

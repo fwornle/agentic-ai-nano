@@ -358,17 +358,17 @@ def search_with_hyde(self, query: str, vector_store, top_k: int = 10):
 
 **Enhanced Search Integration**: Combining HyDE enhancement with your existing vector search infrastructure provides improved retrieval while maintaining compatibility.
 
----
-
 ## Practice Exercises
 
 1. **Template Optimization**: Create custom templates for domain-specific queries  
 2. **Quality Metrics**: Implement advanced quality assessment methods  
 3. **Performance Testing**: Compare HyDE results with traditional search  
-4. **Error Handling**: Add comprehensive error handling and fallback mechanisms  
-
+4. **Error Handling**: Add comprehensive error handling and fallback mechanisms
 ---
 
-**Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+## Navigation
+
+**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
 
 ---

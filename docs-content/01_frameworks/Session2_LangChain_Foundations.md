@@ -30,8 +30,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## 🎯 Observer Path: LangChain Architecture Foundations
 
 **Code Repository**: [`src/session2/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session2)
@@ -110,8 +108,6 @@ Data Input → Agent → Tool Selection → LLM Analysis → Output
 ```
 
 This flow mirrors how data engineering teams solve complex problems - they ingest data, remember processing context, choose appropriate tools and methods, apply analytical reasoning, and generate actionable insights for downstream systems.
-
----
 
 ## Chain Patterns: Building Data Processing Pipelines
 
@@ -198,8 +194,6 @@ Execute the complete pipeline - watch as your raw processing reports transform i
 ```python
 results = analysis_pipeline.run({"data_report": "Detailed data processing logs and metrics..."})
 ```
-
----
 
 ## Agent Creation & Tool Integration: Giving Data AI Hands to Work
 
@@ -312,8 +306,6 @@ agent = initialize_agent(
 
 The agent now has reasoning (LLM), capabilities (data tools), and context (memory) - everything needed for intelligent data analysis and processing.
 
----
-
 ## Memory & State Management: Building Persistent Data Intelligence
 
 Memory transforms stateless interactions into coherent, context-aware data analysis conversations. Just as data engineers maintain working knowledge during complex data investigations, agents need memory systems to provide intelligent, contextual responses about ongoing data analysis workflows.
@@ -381,8 +373,6 @@ recent_memory = ConversationBufferWindowMemory(
 )
 ```
 
----
-
 ## 📝 Next Steps: Participant Path Implementation
 
 **Ready for hands-on practice?** The Participant Path provides complete implementations with error handling and production patterns.
@@ -390,8 +380,6 @@ recent_memory = ConversationBufferWindowMemory(
 **Continue to:** [📝 Session 2 - Practical Implementation](Session2_Practical_Implementation.md)
 **Time Investment:** 2-3 hours of focused implementation practice
 **What you'll build:** Complete data intelligence agents with tool integration and error handling
-
----
 
 ## ⚙️ Advanced Architecture Options
 
@@ -407,8 +395,6 @@ For comprehensive deep-dive into enterprise patterns and advanced architectures:
 - [Production Deployment](Session2_ModuleB_Production_Deployment_Strategies.md) - Enterprise deployment & monitoring  
 - [Tool Development](Session2_ModuleC_Custom_Tool_Development.md) - Specialized data processing tools  
 - [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) - System optimization & observability  
-
----
 
 ## 📝 Multiple Choice Test - Session 2
 
@@ -449,9 +435,11 @@ C) ConversationBufferWindowMemory
 D) ConversationEntityMemory  
 
 [View Solutions →](Session2_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+## Navigation
+
+**Previous:** [Session 1 - Foundations →](Session1_*.md)  
+**Next:** [Session 3 - Advanced Patterns →](Session3_*.md)
 
 ---

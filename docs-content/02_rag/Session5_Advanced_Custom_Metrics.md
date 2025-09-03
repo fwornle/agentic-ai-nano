@@ -802,10 +802,12 @@ This integration pattern enables seamless deployment of custom metrics in produc
 
 **Next Advanced Topic:**
 
-- **⚙️ Implementer Path**: [Enterprise Monitoring Systems →](Session5_Enterprise_Monitoring_Systems.md) - Production-scale monitoring and alerting infrastructure  
-
+- **⚙️ Implementer Path**: [Enterprise Monitoring Systems →](Session5_Enterprise_Monitoring_Systems.md) - Production-scale monitoring and alerting infrastructure
 ---
 
-**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

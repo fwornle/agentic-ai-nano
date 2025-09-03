@@ -92,14 +92,13 @@ D) On-premises only
 
 **Explanation:** ADK is specifically designed and optimized for Google Cloud Platform with native integration of GCP services.
 
----
-
 ## Answer Summary
 
-1. B  2. D  3. A  4. B  5. B  6. B  7. B  8. B  9. B  10. B  
-
+1. B  2. D  3. A  4. B  5. B  6. B  7. B  8. B  9. B  10. B
 ---
 
-**Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
+## Navigation
+
+**Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
 
 ---

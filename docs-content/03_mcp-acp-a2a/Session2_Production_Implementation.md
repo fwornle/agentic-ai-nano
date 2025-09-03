@@ -502,10 +502,12 @@ D) Automatic file compression
 7. **B** - To prevent denial of service attacks  
 8. **B** - Whitelist safe extensions  
 9. **B** - By limiting maximum results returned  
-10. **C** - Non-blocking operations  
-
+10. **C** - Non-blocking operations
 ---
 
-**Next:** [Session 3 - LangChain MCP Integration →](Session3_LangChain_MCP_Integration.md)
+## Navigation
+
+**Previous:** [Session 1 - Foundations →](Session1_*.md)  
+**Next:** [Session 3 - Advanced Patterns →](Session3_*.md)
 
 ---

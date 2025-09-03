@@ -34,8 +34,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## 🎯 Observer Path: Bare Metal Agent Fundamentals
 
 **Quick Start**: [`src/session1/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session1)
@@ -212,8 +210,6 @@ Dynamic model selection balances cost and capability - routine data validation t
 ```
 
 Compliance validation ensures all processing decisions align with data governance policies, privacy regulations, and industry standards. When violations are detected, the system automatically generates compliant alternatives rather than failing the entire processing pipeline.
-
----
 
 ## Part 2: The Five Fundamental Agentic Patterns
 
@@ -451,8 +447,6 @@ Transformation strategy adapts based on data quality scores. High-quality data p
 
 The analytics agent performs computational analysis on the processed data, while the storage optimization agent manages long-term retention policies, compression, and archival strategies. This coordinated approach ensures efficient processing and cost-effective storage across the entire data lifecycle.
 
----
-
 ## 📝 Participant Path: Production Implementation
 
 *Prerequisites: Complete 🎯 Observer Path sections above*
@@ -541,8 +535,6 @@ Implement comprehensive monitoring tailored for data processing requirements:
 
 Comprehensive monitoring tracks the key performance indicators essential for data processing operations: throughput measures processing speed, latency tracks responsiveness, error rates monitor quality, cost per GB tracks financial efficiency, and compliance scores ensure regulatory adherence. These metrics enable proactive optimization and issue detection.
 
----
-
 ### 📝 Practical Exercise: Building a Data Quality Agent
 
 *This practical exercise demonstrates real-world application of bare metal agent patterns in production data environments.*
@@ -596,8 +588,6 @@ The analysis process combines multiple quality assessment techniques: completene
 
 The quality assessment produces actionable insights including numerical quality scores, detailed issue identification, processing recommendations, readiness flags for downstream analytics, cost impact estimates for any required reprocessing, and compliance status verification for regulatory requirements.
 
----
-
 ## ⚙️ Implementer Path: Advanced Patterns
 
 *Prerequisites: Complete 🎯 Observer and 📝 Participant paths*
@@ -608,8 +598,6 @@ For comprehensive advanced coverage, explore the specialized modules:
 - [⚙️ Performance Optimization](Session1_ModuleB_Performance_Optimization.md) - Petabyte-scale processing techniques  
 - [⚙️ Complex State Management](Session1_ModuleC_Complex_State_Management.md) - Distributed state handling  
 - [⚙️ Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md) - Real-world implementation example  
-
----
 
 ## 📝 Knowledge Check - Session 1
 
@@ -647,8 +635,6 @@ D) To reduce code size
 
 [View Solutions →](Session1_Test_Solutions.md)
 
----
-
 ## ⚙️ Advanced Modules
 
 Advanced patterns for specialized data processing applications:
@@ -656,10 +642,12 @@ Advanced patterns for specialized data processing applications:
 - [⚙️ Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md) - Hierarchical agents for complex data pipeline orchestration  
 - [⚙️ Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md) - Techniques for petabyte-scale data throughput  
 - [⚙️ Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md) - Managing state across distributed data processing systems  
-- [⚙️ Module D: Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md) - Building ML pipeline development tools for data engineering  
-
+- [⚙️ Module D: Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md) - Building ML pipeline development tools for data engineering
 ---
 
-**Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
+## Navigation
+
+**Previous:** [Session 0 - Introduction →](Session0_*.md)  
+**Next:** [Session 2 - Implementation →](Session2_*.md)
 
 ---

@@ -92,14 +92,13 @@ D) Centralized control of agent interactions and workflow orchestration ✅
 
 **Explanation:** The Coordinator Agent pattern provides centralized control and orchestration while maintaining the modular benefits of atomic agents.
 
----
-
 ## Answer Summary
 
-1. B  2. B  3. C  4. B  5. B  6. B  7. B  8. B  9. B  10. A  
-
+1. B  2. B  3. C  4. B  5. B  6. B  7. B  8. B  9. B  10. A
 ---
 
-**Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
+## Navigation
+
+**Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 
 ---

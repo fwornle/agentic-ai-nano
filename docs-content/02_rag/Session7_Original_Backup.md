@@ -37,8 +37,6 @@ Complete implementation coverage:
 - ⚙️ [Production Agent Deployment](Session7_Production_Agent_Systems.md)  
 - ⚙️ [Multi-Agent Orchestration](Session7_Multi_Agent_Orchestration.md)  
 
----
-
 ![Agentic RAG](images/AgenticRAG.png)
 
 ![RAG Reasoning](images/RAG-Reasoning.webp)
@@ -144,8 +142,6 @@ class ChainOfThoughtRAG:
 ```
 
 Each step in the reasoning chain can trigger retrieval to gather supporting information before proceeding to the next logical step.
-
----
 
 ## 📝 Participant Path: Practical Implementation
 
@@ -320,8 +316,6 @@ This query requires:
 - Regulatory knowledge  
 - Balanced reasoning  
 
----
-
 ## Advanced Topics for Implementer Path
 
 The complete agentic RAG implementation requires additional advanced components:
@@ -337,8 +331,6 @@ The complete agentic RAG implementation requires additional advanced components:
 - ⚙️ [Advanced Agent Reasoning](Session7_Advanced_Agent_Reasoning.md)  
 - ⚙️ [Production Agent Systems](Session7_Production_Agent_Systems.md)  
 - ⚙️ [Multi-Agent Orchestration](Session7_Multi_Agent_Orchestration.md)  
-
----
 
 ## Chapter Summary
 
@@ -365,8 +357,6 @@ The complete agentic RAG implementation requires additional advanced components:
 3. **Reasoning Agent Development**: Planning and execution capabilities  
 4. **Self-Correction Implementation**: Validation and improvement systems  
 5. **Tool Integration**: External capability integration patterns  
-
----
 
 ## 📝 Multiple Choice Test - Session 7
 
@@ -422,8 +412,6 @@ D) Token usage
 
 [View Solutions →](Session7_Test_Solutions.md)
 
----
-
 ## Session 7 Complete
 
 You've built the foundation of agentic RAG systems that combine autonomous reasoning with retrieval-augmented generation. These systems can plan queries, self-correct responses, and integrate external tools.
@@ -433,12 +421,13 @@ You've built the foundation of agentic RAG systems that combine autonomous reaso
 - ⚙️ [Production Agent Systems](Session7_Production_Agent_Systems.md)  
 - ⚙️ [Multi-Agent Orchestration](Session7_Multi_Agent_Orchestration.md)  
 
-## Next: Session 8 Multi-Modal RAG
-
+## 
 Session 8 expands agentic intelligence to handle multiple modalities - text, images, audio, and video - for comprehensive knowledge processing.
-
 ---
 
-**Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)
+## Navigation
+
+**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
+**Next:** [Session 8 - Production Ready →](Session8_*.md)
 
 ---

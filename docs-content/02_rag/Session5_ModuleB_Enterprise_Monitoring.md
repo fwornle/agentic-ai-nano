@@ -26,8 +26,6 @@ python -c "from alerting_system import AlertingSystem; AlertingSystem().test_ale
 python -c "from ab_testing import ABTestingFramework; print('Enterprise monitoring ready!')"
 ```
 
----
-
 ## Enterprise Monitoring Content
 
 ### Enterprise Alerting Systems - Beyond Basic Notifications
@@ -271,8 +269,6 @@ The ensemble approach combines three complementary detection methods. Isolation 
 
 Ensemble scoring reduces false positives by requiring consensus from multiple detectors. Anomaly classification helps identify the root cause (performance, security, data quality), while recommended actions provide automated or semi-automated response suggestions for operations teams.
 
----
-
 ## Multiple Choice Test - Module B
 
 **Question 1:** In enterprise RAG monitoring, which SLA metric should have the highest priority for alerts?  
@@ -306,9 +302,11 @@ C) Performance metrics only
 D) Configuration changes only  
 
 [View Solutions →](Session5_ModuleB_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

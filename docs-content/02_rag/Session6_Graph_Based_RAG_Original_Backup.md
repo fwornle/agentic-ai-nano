@@ -16,8 +16,6 @@ This session offers three distinct learning paths for mastering graph-based RAG 
 **Outcome**: Deep expertise in advanced graph algorithms, production systems, and optimization
 **Key sections**: All Participant content plus advanced technical modules
 
----
-
 ## 🎯 Observer Path: Core GraphRAG Concepts
 
 In Sessions 1-5, you built sophisticated vector-based RAG systems with intelligent chunking, optimized search, query enhancement, and comprehensive evaluation. But when users ask complex questions like "What technologies do companies that partner with Apple use in automotive manufacturing?", you discover vector RAG's fundamental limitation: it finds similar content, but can't reason about relationships between entities.
@@ -112,8 +110,6 @@ Each approach serves different use cases and complexity requirements.
 ### Bridge to Session 7: Agentic Reasoning
 
 NodeRAG's heterogeneous graph architecture provides the structured foundation for advanced reasoning capabilities. Session 7 will show how to build agents that actively reason through these graph structures.
-
----
 
 ## 📝 Participant Path: Practical GraphRAG Implementation
 
@@ -1108,8 +1104,6 @@ class Neo4jGraphManager:
 
 **Robust error handling with partial failure recovery** ensures that one failed batch doesn't stop the entire ingestion process. This resilience is critical for enterprise deployments where large knowledge graphs may contain some malformed data. The system continues processing valid batches while logging failures for later investigation.
 
----
-
 ## Part 3: Code GraphRAG Implementation - Understanding Software Knowledge
 
 ### AST-Based Code Analysis
@@ -1473,8 +1467,6 @@ Centrality score integration transforms the call graph into a rich architectural
 ```
 
 The key functions identification combines multiple centrality measures to rank functions by overall architectural importance. This ranking helps focus code quality efforts on functions whose changes would have the highest system-wide impact. The graph metadata provides a snapshot of analysis results that can be tracked over time to monitor architectural evolution and code quality trends.
-
----
 
 ## Part 4: Graph Traversal and Multi-Hop Reasoning - Connecting the Dots
 
@@ -1979,8 +1971,6 @@ The final narrative assembly uses contextual connectors to create flowing, reada
 ```
 
 Relation humanization transforms technical graph relationship types into natural language phrases that create readable narratives. The mapping covers common relationship types across different domains - from software engineering ("calls", "inherits") to business relationships ("works for", "founded") to general associations. Unknown relationship types receive a generic but informative fallback phrase that preserves the technical relationship name for clarity.
-
----
 
 ## Part 5: Hybrid Graph-Vector Search
 
@@ -2748,8 +2738,6 @@ Response generation uses a low temperature (0.3) to ensure consistent, reliable 
 
 The comprehensive return structure provides complete transparency into the hybrid reasoning process. Context breakdown statistics reveal the relative contributions of vector and graph retrieval, while the reasoning type tag enables downstream systems to understand how the answer was constructed. Robust error handling ensures graceful degradation when response generation fails.
 
----
-
 ## Hands-On Exercise: Build Production GraphRAG System
 
 ### Your Mission
@@ -2856,8 +2844,6 @@ Repository analysis extends the GraphRAG system to understand software architect
 ```
 
 The unified search interface provides access to the full power of GraphRAG through a simple API. The hybrid search combines graph traversal's multi-hop reasoning with vector search's semantic similarity, automatically selecting the optimal approach based on query characteristics. This abstraction allows applications to benefit from sophisticated retrieval without complexity.
-
----
 
 ## Chapter Summary
 
@@ -3157,8 +3143,6 @@ The unified search interface provides access to the full power of GraphRAG throu
 - **Insight:** Both factual information and relationship insights  
 - **Quality:** Superior answer quality for complex queries  
 
----
-
 ## 📝 Multiple Choice Test - Session 6
 
 Test your understanding of graph-based RAG systems and GraphRAG implementations.
@@ -3212,9 +3196,11 @@ C) Maximizing query speed
 D) Simplifying the codebase  
 
 [View Solutions →](Session6_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+## Navigation
+
+**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_*.md)
 
 ---

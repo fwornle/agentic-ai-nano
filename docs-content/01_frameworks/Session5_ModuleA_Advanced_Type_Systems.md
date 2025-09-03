@@ -5,8 +5,6 @@
 
 ## Stripe Data Engineering Success
 
----
-
 ## The Stripe Data Processing Transformation Story
 
 When Stripe faced a critical $3.8 billion risk exposure due to data validation failures across their payment processing systems, their Chief Technology Officer knew that traditional validation approaches were inadequate for the scale and complexity of modern financial data operations.
@@ -28,8 +26,6 @@ But the transformation went deeper. The advanced type system enabled Stripe's da
 ## Module Overview
 
 You're about to master the same advanced validation patterns that transformed Stripe's operations. This module reveals enterprise-grade validation systems with cross-field dependencies, custom validators, middleware optimization, and comprehensive error handling that Fortune 500 companies use to maintain competitive advantage through data excellence in cloud-scale processing environments.
-
----
 
 ## Part 1: Complex Validation Patterns for Data Schemas
 
@@ -211,8 +207,6 @@ Root validators examine the entire model after all field validators have run. Th
         return values
 ```
 
----
-
 ## Part 2: Enterprise Streaming Data Validation
 
 ### Complex Streaming Event Definition with Comprehensive Validation
@@ -319,8 +313,6 @@ Timestamp validation includes sophisticated cross-field validation with drift de
 
         return v
 ```
-
----
 
 ## Part 3: Advanced Error Handling & Middleware for Data Systems
 
@@ -552,8 +544,6 @@ Finally, we handle validation failures with detailed error reporting:
             }
 ```
 
----
-
 ## Module Summary
 
 You've now mastered advanced type systems in PydanticAI for data engineering, including:
@@ -562,8 +552,6 @@ You've now mastered advanced type systems in PydanticAI for data engineering, in
 ✅ **Enterprise Streaming Data Management**: Implemented real-world validation for streaming events and data pipelines
 ✅ **Advanced Error Handling**: Created intelligent error reporting with data quality suggestions and analytics
 ✅ **Data Processing Middleware**: Built performance-optimized validation systems with caching for distributed data systems
-
----
 
 ## 📝 Multiple Choice Test - Module A
 
@@ -601,22 +589,20 @@ D) HTTP status code only
 
 [View Solutions →](Session5_ModuleA_Test_Solutions.md)
 
----
-
 ### Next Steps  
 - **Continue to Module B**: [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md) for production deployment patterns  
 - **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  
 - **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)  
 
----
-
 **🗂️ Source Files for Module A:**  
 - `src/session5/advanced_validation.py` - Complex validation patterns for data processing
 - `src/session5/enterprise_validation.py` - Enterprise streaming data validation
 - `src/session5/error_handling.py` - Advanced error handling systems for data quality
-
 ---
 
-**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

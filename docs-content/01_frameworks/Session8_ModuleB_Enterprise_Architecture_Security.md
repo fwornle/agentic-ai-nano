@@ -475,7 +475,6 @@ Create service and ingress configurations:
 
 ```yaml
 
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -489,7 +488,6 @@ spec:
     targetPort: 8000
   type: ClusterIP
 
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -528,7 +526,6 @@ metadata:
   namespace: production
 automountServiceAccountToken: false
 
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -542,7 +539,6 @@ rules:
   resources: ["configmaps"]
   verbs: ["get", "list"]
 
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -562,7 +558,6 @@ Network policies for traffic isolation:
 
 ```yaml
 
----
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -601,7 +596,6 @@ Pod security standards configuration:
 
 ```yaml
 
----
 apiVersion: v1
 kind: Pod
 metadata:
@@ -722,9 +716,11 @@ async def run_production_readiness_check():
             status = "✅" if result else "❌"
             print(f"  {status} {check_name}: {result}")
 ```
-
 ---
 
-**Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+## Navigation
+
+**Previous:** [Session 7 - Agent Systems →](Session7_*.md)  
+**Next:** [Session 9 - Multi-Agent Coordination →](Session9_*.md)
 
 ---

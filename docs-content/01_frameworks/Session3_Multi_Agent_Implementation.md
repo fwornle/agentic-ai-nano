@@ -166,8 +166,6 @@ def safe_node_execution(node_func):
 workflow.add_node("profiling", safe_node_execution(profiling_agent.profiling_node))
 ```
 
----
-
 ## Part 3: State Management & Flow Control - The Intelligence Behind Data Pipeline Orchestration
 
 Moving beyond simple data handoffs to sophisticated coordination patterns that adapt to real-time data characteristics and handle complex decision trees in streaming environments.
@@ -302,8 +300,6 @@ Graceful failure handling with maximum retry limits - preventing infinite loops 
         }
 ```
 
----
-
 ## Part 4: Integration & Testing - Validating Your Intelligent Data Processing Team
 
 Now we verify that our multi-agent data processing systems work correctly in the real world, with comprehensive testing that ensures reliability under various data conditions.
@@ -353,8 +349,6 @@ python hierarchical_team.py
 python -m pytest test_workflows.py
 ```
 
----
-
 ## Validation
 
 ### Quick Implementation Exercise
@@ -373,9 +367,11 @@ cd src/session3
 python simple_workflow.py          # Basic data workflow
 python hierarchical_team.py        # Multi-agent data coordination
 ```
-
 ---
 
-**Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+## Navigation
+
+**Previous:** [Session 2 - Implementation →](Session2_*.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
 
 ---

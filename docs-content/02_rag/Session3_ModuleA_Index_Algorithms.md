@@ -42,13 +42,11 @@ C) It uses less memory
 D) It's simpler to implement  
 
 [View Solutions →](Session3_ModuleA_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
+## Navigation
 
----
-
-**Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+**Previous:** [Session 2 - Implementation →](Session2_*.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
 
 ---

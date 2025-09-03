@@ -11,8 +11,6 @@ D) Inputs, Outputs, and Errors
 
 **Explanation:** MCP servers expose three types of capabilities: Tools (executable functions that can be called), Resources (data sources that can be queried), and Prompts (reusable templates for common tasks).
 
----
-
 **Question 2:** Which decorator is used to expose a function as an MCP tool?  
 
 A) `@tool()`  
@@ -21,8 +19,6 @@ C) `@server.tool()`
 D) `@expose_tool()`  
 
 **Explanation:** The `@mcp.tool()` decorator is the FastMCP framework's way to register a function as an MCP tool that can be called by AI agents.
-
----
 
 **Question 3:** What is the primary purpose of MCP Inspector?  
 
@@ -33,8 +29,6 @@ D) To manage server configurations
 
 **Explanation:** MCP Inspector is a developer tool (like Postman for MCP) that provides an interactive interface to explore MCP server capabilities, test tools, debug issues, and validate that servers follow the protocol correctly.
 
----
-
 **Question 4:** Which transport mechanism is commonly used for local MCP server testing?  
 
 A) HTTP  
@@ -43,8 +37,6 @@ C) stdio (standard input/output) ✅
 D) TCP  
 
 **Explanation:** MCP servers communicate over stdio (standard input/output) by default for local development, which allows them to work as subprocess-based tools.
-
----
 
 **Question 5:** Why are type hints important in MCP server functions?  
 
@@ -55,8 +47,6 @@ D) They reduce memory usage
 
 **Explanation:** Type hints are used by the MCP framework to automatically generate JSON schemas that describe the tool's parameters and return values to AI clients, enabling proper validation and usage.
 
----
-
 **Question 6:** What should MCP tools return when encountering invalid input?  
 
 A) Raise an exception  
@@ -65,8 +55,6 @@ C) Return structured error messages with helpful information ✅
 D) Log the error silently  
 
 **Explanation:** MCP tools should return structured error messages with helpful information rather than raising exceptions, which provides better error handling for clients.
-
----
 
 **Question 7:** How do MCP resources differ from tools?  
 
@@ -77,8 +65,6 @@ D) Resources require authentication, tools do not
 
 **Explanation:** Resources are read-only data endpoints that provide information (like file contents or database records), while tools are executable functions that can perform actions or computations.
 
----
-
 **Question 8:** What command is used to launch MCP Inspector?  
 
 A) `mcp-inspector`  
@@ -87,8 +73,6 @@ C) `npx @modelcontextprotocol/inspector` ✅
 D) `python -m mcp.inspector`  
 
 **Explanation:** MCP Inspector can be launched using the `npx @modelcontextprotocol/inspector` command, which runs the inspector without requiring a global installation.
-
----
 
 **Question 9:** Which company reported 60% faster AI integration development using MCP?  
 
@@ -99,8 +83,6 @@ D) OpenAI
 
 **Explanation:** Block Inc. reported significant development speed improvements when using MCP for their AI integrations, demonstrating the protocol's real-world benefits in enterprise environments.
 
----
-
 **Question 10:** What is the main advantage of MCP over custom API integrations?  
 
 A) Better performance  
@@ -109,8 +91,6 @@ C) Lower cost
 D) Easier to learn  
 
 **Explanation:** MCP provides a standardized protocol that includes automatic schema validation, discovery mechanisms, and consistent error handling, reducing the complexity of custom integrations.
-
----
 
 **Challenge:** Create a tool that finds the warmest city from a list.
 
@@ -199,8 +179,6 @@ result = find_warmest_city(["Atlantis", "Wakanda"])
 result = find_warmest_city(["London", "Atlantis", "Tokyo"])
 ```
 
----
-
 ## Extension Challenges
 
 Once you've mastered the basic solution, try these additional challenges:
@@ -214,8 +192,6 @@ Once you've mastered the basic solution, try these additional challenges:
 4. **Condition Filtering:** Add the ability to filter cities by weather condition (e.g., only consider cities with "Sunny" weather).  
 
 5. **Advanced Comparison:** Include additional factors like humidity or precipitation chance in the comparison logic.  
-
----
 
 ## Scoring Guide
 
@@ -248,12 +224,11 @@ If you missed questions in these areas, review the corresponding sections:
 - Study real-world adoption cases  
 - Focus on enterprise benefits  
 
----
-
 [← Return to Session 1](Session1_Basic_MCP_Server.md)
-
 ---
 
-**Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)
+## Navigation
+
+**Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
 
 ---

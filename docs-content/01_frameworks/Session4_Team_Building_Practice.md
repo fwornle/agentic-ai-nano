@@ -152,9 +152,11 @@ Build a hierarchical crew with a manager coordinating specialized agents.
 ### Exercise 3: Advanced Task Dependencies
 
 Create workflows where tasks build upon each other's results with context sharing.
-
 ---
 
-**Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+## Navigation
+
+**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
 
 ---

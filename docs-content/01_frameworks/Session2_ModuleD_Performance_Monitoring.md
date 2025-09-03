@@ -9,8 +9,6 @@ This is the invisible war being fought by every enterprise data system: the batt
 
 The brutal truth of production data engineering: you can't optimize what you can't observe, and you can't compete with what you can't control. Master the art of comprehensive performance monitoring and cost optimization, and you'll build data systems that don't just survive at enterprise scale - they dominate through operational excellence that competitors can't match.
 
----
-
 ## Part 1: Performance Benchmarking & Optimization for Data Systems
 
 ### Comprehensive Data Processing Performance Measurement
@@ -576,8 +574,6 @@ CPU usage analysis identifies compute bottlenecks. High CPU usage suggests horiz
 
 Default recommendation ensures actionable feedback even for well-performing systems. Continued monitoring recommendation maintains performance awareness.
 
----
-
 ## Part 2: Continuous Monitoring Systems for Data Processing
 
 ### Production Performance Monitoring
@@ -826,8 +822,6 @@ Recent metrics filtering provides relevant performance data for current system s
 ```
 
 Comprehensive metrics calculation provides statistical summary of recent performance. Average, max, min response times, query counts, and success rates give complete operational visibility.
-
----
 
 ## Part 3: Advanced Monitoring & Observability for Data Systems
 
@@ -1158,8 +1152,6 @@ Performance alert logging enables proactive monitoring by capturing threshold vi
 
 Performance alert logging includes threshold comparisons and dataset context. Exceeded amounts and context enable targeted performance optimization.
 
----
-
 ## Part 4: Cost Optimization & Resource Management for Data Processing
 
 ### Intelligent Cost Management for Data Systems
@@ -1474,8 +1466,6 @@ Data transfer optimization addresses network costs through locality strategies a
 
 Query optimization recommendations focus on reducing per-query costs through caching and scanning optimization. High query costs trigger efficiency improvement suggestions.
 
----
-
 ## 📝 Multiple Choice Test - Module D
 
 Test your understanding of performance monitoring and optimization for data engineering systems:
@@ -1512,8 +1502,6 @@ D) Improve execution speed
 
 [View Solutions →](Session2_ModuleD_Test_Solutions.md)
 
----
-
 ## Module Summary
 
 You've now mastered performance optimization and monitoring for production data processing systems:
@@ -1528,15 +1516,15 @@ You've now mastered performance optimization and monitoring for production data 
 - **Advance to Session 3**: [LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)
 - **Review Production**: [Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)
 
----
-
 **🗂️ Source Files for Module D:**
 - `src/session2/performance_benchmarking.py` - Performance measurement and optimization for data processing
 - `src/session2/monitoring_observability.py` - Comprehensive monitoring systems for data processing
 - `src/session2/cost_optimization.py` - Cost tracking and optimization strategies for data systems
-
 ---
 
-**Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+## Navigation
+
+**Previous:** [Session 1 - Foundations →](Session1_*.md)  
+**Next:** [Session 3 - Advanced Patterns →](Session3_*.md)
 
 ---
