@@ -367,13 +367,13 @@ Test your understanding with these complete working examples:
 - [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Test your understanding
 
 ```bash
-
 # Try the examples:
 
 cd src/session3
 python simple_workflow.py          # Basic data workflow
 python hierarchical_team.py        # Multi-agent data coordination
 ```
+
 ---
 
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
