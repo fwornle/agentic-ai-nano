@@ -321,7 +321,7 @@ B) 30%
 C) 40%  
 D) 50%  
 
-[**🗂️ View Test Solutions →**](Session0_ModuleA_Test_Solutions.md)
+[View Solutions →](Session0_ModuleA_Test_Solutions.md)
 
 ---
 

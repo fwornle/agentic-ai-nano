@@ -1,6 +1,5 @@
 # Session 3 - Module A: Enterprise Patterns - Test Solutions
 
-## Module Assessment Solutions
 
 **Question 1:** What is the primary purpose of the circuit breaker pattern in enterprise MCP deployments?  
 

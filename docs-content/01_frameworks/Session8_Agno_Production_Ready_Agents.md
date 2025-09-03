@@ -540,7 +540,7 @@ D) Authentication requirements
 
 *Additional assessment questions available in the advanced modules.*
 
-[**🗂️ View Complete Test & Solutions →**](Session8_Test_Solutions.md)
+[View Solutions →](Session8_Test_Solutions.md)
 ---
 
 **Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)

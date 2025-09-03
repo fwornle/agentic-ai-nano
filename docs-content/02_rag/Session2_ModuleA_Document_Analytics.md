@@ -642,7 +642,7 @@ B) Semantic similarity and topic consistency evaluation
 C) File format and structure comparison  
 D) Processing time and resource utilization  
 
-[**🗂️ View Test Solutions →**](Session2_ModuleA_Test_Solutions.md)
+[View Solutions →](Session2_ModuleA_Test_Solutions.md)
 
 ---
 

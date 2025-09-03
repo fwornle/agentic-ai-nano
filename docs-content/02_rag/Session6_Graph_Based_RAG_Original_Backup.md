@@ -3211,7 +3211,7 @@ B) Reducing storage costs
 C) Maximizing query speed  
 D) Simplifying the codebase  
 
-[**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
+[View Solutions →](Session6_Test_Solutions.md)
 ---
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)

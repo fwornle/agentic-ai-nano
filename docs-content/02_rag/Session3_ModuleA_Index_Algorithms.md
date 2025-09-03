@@ -41,7 +41,7 @@ B) It combines semantic similarity with domain-specific factors like keywords an
 C) It uses less memory  
 D) It's simpler to implement  
 
-[**🗂️ View Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
+[View Solutions →](Session3_ModuleA_Test_Solutions.md)
 
 ---
 

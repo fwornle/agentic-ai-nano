@@ -305,7 +305,7 @@ B) Data processing events, compliance checks, and user access records
 C) Performance metrics only  
 D) Configuration changes only  
 
-[**🗂️ View Test Solutions →**](Session5_ModuleB_Test_Solutions.md)
+[View Solutions →](Session5_ModuleB_Test_Solutions.md)
 ---
 
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)

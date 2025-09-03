@@ -1386,7 +1386,7 @@ B) Homomorphic encryption of sensitive fields
 C) Generalization and suppression of quasi-identifiers  
 D) JWT token-based authentication  
 
-[**🗂️ View Test Solutions →**](Session8_ModuleD_Test_Solutions.md)
+[View Solutions →](Session8_ModuleD_Test_Solutions.md)
 
 ---
 

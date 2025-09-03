@@ -832,7 +832,7 @@ B) Automated dependency health checks with data quality monitoring and throughpu
 C) Simple ping tests  
 D) Log file analysis only  
 
-[**🗂️ View Test Solutions →**](Session5_ModuleB_Test_Solutions.md)
+[View Solutions →](Session5_ModuleB_Test_Solutions.md)
 
 ### Next Steps
 

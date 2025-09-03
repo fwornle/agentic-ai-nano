@@ -356,7 +356,7 @@ B) To set the embedding model parameters
 C) To reduce computational costs  
 D) To determine the number of chunks to create  
 
-[**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
+[View Solutions →](Session2_Test_Solutions.md)
 ---
 
 **Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)

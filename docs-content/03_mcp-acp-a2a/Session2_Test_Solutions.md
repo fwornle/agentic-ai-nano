@@ -112,11 +112,9 @@ D) Automatic file compression
 
 ---
 
-## Practical Exercise Solution
 
 **Challenge:** Extend the server with a tool that safely moves/renames files.
 
-### Complete Solution:
 
 ```python
 @mcp.tool()

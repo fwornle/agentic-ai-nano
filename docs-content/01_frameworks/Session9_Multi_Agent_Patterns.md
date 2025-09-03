@@ -354,7 +354,7 @@ D) Manual deployment only
 
 ---
 
-[**🗂️ View Test Solutions →**](Session9_Test_Solutions.md)
+[View Solutions →](Session9_Test_Solutions.md)
 
 ---
 
@@ -365,7 +365,6 @@ D) Manual deployment only
 **Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)
 
 ---
-### Test Solutions
-[🗂️ **View Test Solutions →**](Session9B_Test_Solutions.md)
+[View Solutions →](Session9B_Test_Solutions.md)
 
 ---

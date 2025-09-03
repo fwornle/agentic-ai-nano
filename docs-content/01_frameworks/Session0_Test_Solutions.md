@@ -1,6 +1,5 @@
 # Session 0: Introduction to Agent Frameworks & Patterns - Test Solutions
 
-## 📝 Multiple Choice Test Solutions
 
 **Question 1:** Which agentic pattern involves an agent evaluating and improving its own outputs?  
 A) Multi-Agent  

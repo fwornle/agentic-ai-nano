@@ -431,7 +431,7 @@ B) Processing speed
 C) Factual accuracy and logical consistency  
 D) Token usage  
 
-[**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
+[View Solutions →](Session7_Test_Solutions.md)
 
 ---
 

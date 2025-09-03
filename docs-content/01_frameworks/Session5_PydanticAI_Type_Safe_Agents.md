@@ -716,7 +716,7 @@ B) Runtime configuration and dependencies
 C) Conversation history  
 D) Speed control  
 
-[**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
+[View Solutions →](Session5_Test_Solutions.md)
 ---
 
 **Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
