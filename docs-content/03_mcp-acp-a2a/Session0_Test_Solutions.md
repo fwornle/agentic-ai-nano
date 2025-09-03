@@ -147,7 +147,6 @@ If you missed questions in these areas, review the corresponding sections:
 [← Return to Session 0](Session0_Introduction_to_MCP_ACP_A2A.md)
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic MCP Server →](Session1_Basic_MCP_Server.md)
+
 ---

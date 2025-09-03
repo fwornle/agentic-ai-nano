@@ -272,8 +272,6 @@ Latest RAG techniques including graph-based approaches, agentic systems, and mul
 [Begin Session 0 →](Session0_Introduction_to_RAG_Architecture.md){ .md-button .md-button--primary }
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 0 - Introduction to Agent Frameworks & Patterns →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 
 ---

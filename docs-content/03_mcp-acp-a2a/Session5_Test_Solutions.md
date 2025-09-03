@@ -525,8 +525,6 @@ This security audit system provides comprehensive monitoring and analysis capabi
 [Return to Session 5](Session5_Secure_MCP_Server.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Production MCP Deployment ←](Session4_Production_MCP_Deployment.md)
 **Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
+
 ---

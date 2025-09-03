@@ -456,8 +456,6 @@ D) Allowing unlimited resource consumption for performance
 [**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangChain MCP Integration ←](Session3_LangChain_MCP_Integration.md)
 **Next:** [Session 5 - Secure MCP Server →](Session5_Secure_MCP_Server.md)
+
 ---

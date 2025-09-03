@@ -760,8 +760,6 @@ D) 1 minute exactly
 - `src/session5/circuit_breaker.py` - Circuit breaker for data service resilience
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - CrewAI Team Orchestration ←](Session4_CrewAI_Team_Orchestration.md)
 **Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+
 ---

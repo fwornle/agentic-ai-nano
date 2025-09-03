@@ -252,8 +252,6 @@ A 5% improvement in quality scores might be statistically significant but not pr
 - **📝 Participant Path**: [Automated Testing Practice →](Session5_Automated_Testing_Practice.md) - Implement A/B testing for RAG optimization  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Query Enhancement & Context Augmentation ←](Session4_Query_Enhancement_Context_Augmentation.md)
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+
 ---

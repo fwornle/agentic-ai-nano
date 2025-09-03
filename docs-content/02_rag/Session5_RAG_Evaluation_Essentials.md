@@ -190,8 +190,6 @@ Your evaluation should show:
 - **⚙️ Implementer Path**: [Advanced Custom Metrics →](Session5_Advanced_Custom_Metrics.md) - Build sophisticated domain-specific evaluators  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Query Enhancement & Context Augmentation ←](Session4_Query_Enhancement_Context_Augmentation.md)
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+
 ---

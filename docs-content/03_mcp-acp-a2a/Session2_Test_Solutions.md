@@ -271,8 +271,6 @@ If you missed questions in these areas, review the corresponding sections:
 [← Return to Session 2](Session2_FileSystem_MCP_Server.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Basic MCP Server ←](Session1_Basic_MCP_Server.md)
 **Next:** [Session 3 - LangChain MCP Integration →](Session3_LangChain_MCP_Integration.md)
+
 ---

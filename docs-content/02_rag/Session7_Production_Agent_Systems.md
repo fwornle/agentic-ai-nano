@@ -512,8 +512,6 @@ Multi-layered authorization ensures only authorized users can access appropriate
 This comprehensive production system provides the foundation for enterprise-grade agentic RAG deployment with appropriate security, monitoring, and scalability features.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - Graph-Based RAG ←](Session6_Graph_Based_RAG.md)
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)
+
 ---

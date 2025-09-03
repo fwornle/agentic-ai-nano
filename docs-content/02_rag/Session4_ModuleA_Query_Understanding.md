@@ -398,8 +398,6 @@ D) It reduces memory usage
 [**🗂️ View Test Solutions →**](Session4_ModuleA_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - Vector Databases & Search Optimization ←](Session3_Vector_Databases_Search_Optimization.md)
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+
 ---

@@ -934,8 +934,6 @@ If you've mastered performance optimization, explore advanced implementer topics
 - [Advanced Hybrid Search](Session3_Advanced_Hybrid_Search.md)  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 2 - Advanced Chunking & Preprocessing ←](Session2_Advanced_Chunking_Preprocessing.md)
 **Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
+
 ---

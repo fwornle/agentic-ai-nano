@@ -257,8 +257,6 @@ If you missed questions in these areas, review the corresponding sections:
 [← Return to Session 1](Session1_Basic_MCP_Server.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 0 - Introduction to MCP, ACP & A2A ←](Session0_Introduction_to_MCP_ACP_A2A.md)
 **Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)
+
 ---

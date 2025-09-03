@@ -356,20 +356,15 @@ D) Manual deployment only
 
 [**🗂️ View Test Solutions →**](Session9_Test_Solutions.md)
 
-## 🧭 Navigation
-
-**Previous:** [Session 8 - Agno Production-Ready Agents ←](Session8_Agno_Production_Ready_Agents.md)
-**Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 8 - Agno Production-Ready Agents ←](Session8_Agno_Production_Ready_Agents.md)
 **Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)
 
-**Previous:** [Session 8 - Agno Production-Ready Agents ←](Session8_Agno_Production_Ready_Agents.md)
+---
+
 **Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)
 
+---
 ### Test Solutions
 [🗂️ **View Test Solutions →**](Session9B_Test_Solutions.md)
 

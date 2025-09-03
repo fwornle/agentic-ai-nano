@@ -593,8 +593,6 @@ Enterprise choreography needs comprehensive security:
 - **Audit trails**: Maintaining complete event processing logs  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - ACP Fundamentals ←](Session6_ACP_Fundamentals.md)
 **Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)
+
 ---

@@ -583,7 +583,6 @@ D) Planning (for multi-step workflows)
 
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
+
 ---

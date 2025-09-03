@@ -43,15 +43,12 @@ D) It's simpler to implement
 
 [**🗂️ View Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
 
-## 🧭 Navigation
-
-**Previous:** [Session 2 - Advanced Chunking & Preprocessing ←](Session2_Advanced_Chunking_Preprocessing.md)
-**Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
 ---
 
-## 🧭 Navigation
+**Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
 
-**Previous:** [Session 2 - LangChain Foundations ←](Session2_LangChain_Foundations.md)
+---
+
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
 
 ---

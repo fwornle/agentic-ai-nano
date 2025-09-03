@@ -761,7 +761,6 @@ You now understand the full spectrum of RAG architectures, from basic three-stag
 - Session 9: Production RAG - Enterprise deployment and scaling  
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
 ---

@@ -134,10 +134,9 @@ D) Token usage
 4. **Maintenance**: Updating and improving agentic components  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - Graph-Based RAG ←](Session6_Graph_Based_RAG.md)
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)
+
 ---

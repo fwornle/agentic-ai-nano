@@ -1070,8 +1070,6 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination 
 - [`src/session4/delegation_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/delegation_patterns.py) - Sophisticated delegation strategies for data processing workflows
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangGraph Multi-Agent Workflows ←](Session3_LangGraph_Multi_Agent_Workflows.md)
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+
 ---

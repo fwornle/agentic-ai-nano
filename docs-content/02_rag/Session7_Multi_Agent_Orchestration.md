@@ -540,8 +540,6 @@ The communication protocol enables agents to exchange information, request assis
 This multi-agent orchestration system represents the pinnacle of collaborative intelligence in RAG systems, providing sophisticated coordination capabilities for complex information challenges.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - Graph-Based RAG ←](Session6_Graph_Based_RAG.md)
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)
+
 ---

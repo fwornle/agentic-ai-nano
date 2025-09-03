@@ -654,8 +654,6 @@ This advanced workflow demonstrates sophisticated coordination patterns while ma
 [Return to Session 8](Session8_Advanced_Agent_Workflows.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 7 - Agent-to-Agent Communication ←](Session7_Agent_to_Agent_Communication.md)
 **Next:** [Session 9 - Production Agent Deployment →](Session9_Production_Agent_Deployment.md)
+
 ---

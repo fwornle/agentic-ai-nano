@@ -792,8 +792,6 @@ But that's a story for another session. For now, take pride in what you've built
 
 ---
 
----
-
 ## ⚙️ Test Your ACP Mastery
 
 Before we venture into the wider world of agent collaboration, let's ensure you've mastered the fundamentals:
@@ -861,8 +859,6 @@ D) To reduce development costs
 [**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 5 - Secure MCP Server ←](Session5_Secure_MCP_Server.md)
 **Next:** [Session 7 - Agent-to-Agent Communication →](Session7_Agent_to_Agent_Communication.md)
+
 ---

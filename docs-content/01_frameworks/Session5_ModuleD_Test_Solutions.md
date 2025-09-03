@@ -82,8 +82,6 @@ D) Simple sequential testing
 - **Operational metrics** support capacity planning and performance optimization  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - CrewAI Team Orchestration ←](Session4_CrewAI_Team_Orchestration.md)
 **Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+
 ---

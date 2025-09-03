@@ -341,7 +341,6 @@ You've now explored the historical context that led to modern agent frameworks:
 - Reflexion Paper: "Language Agents with Verbal Reinforcement Learning"  
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
+
 ---

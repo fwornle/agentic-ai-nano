@@ -361,8 +361,6 @@ To successfully complete this nanodegree module:
 The landscape of software engineering is shifting toward intelligent, autonomous systems. Traditional applications are evolving into adaptive platforms that can reason, plan, and execute complex tasks without constant human oversight. This module provides comprehensive, self-paced instruction on 2025 state-of-the-art agent frameworks and the five core agentic patterns. You'll gain practical experience building intelligent agents that can reflect, use tools, reason, plan, and collaborate effectively in production environments using cutting-edge performance optimizations, modern protocol standards, and enterprise-grade deployment strategies. Master the latest technological advances including CrewAI's 5.76x performance improvements, advanced observability systems, and modern protocol integration (MCP, A2A, ACP, ANP) for enterprise-ready agent systems.
 ---
 
-## 🧭 Navigation
-
 **Back to:** [Module Index ←](index.md)
 
 ---

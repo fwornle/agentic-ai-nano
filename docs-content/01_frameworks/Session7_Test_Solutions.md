@@ -99,10 +99,9 @@ D) On-premises only
 1. B  2. D  3. A  4. B  5. B  6. B  7. B  8. B  9. B  10. B  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - Atomic Agents Modular Architecture ←](Session6_Atomic_Agents_Modular_Architecture.md)
 **Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
+
 ---

@@ -533,8 +533,6 @@ def _validate_chunk_quality(self, chunk):
 4. **Performance Tests**: Measure processing time and memory usage  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Basic RAG Implementation ←](Session1_Basic_RAG_Implementation.md)
 **Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
+
 ---
