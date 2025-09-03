@@ -1035,6 +1035,7 @@ This solution demonstrates a complete, working ACP agent network that can operat
 ---
 
 [Return to Session 6](Session6_ACP_Fundamentals.md)
+
 ---
 
 **Next:** [Session 7 - Agent-to-Agent Communication →](Session7_Agent_to_Agent_Communication.md)

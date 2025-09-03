@@ -132,6 +132,7 @@ D) Reduced code complexity
 ### Questions or Need Guidance?
 
 Refer to the learning path overview above to select the approach that best matches your goals, timeline, and current expertise level. Each path builds comprehensively on core RAG implementation principles while optimizing for different learning outcomes.
+
 ---
 
 **Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)

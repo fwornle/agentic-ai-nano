@@ -232,6 +232,7 @@ python hierarchical_crew.py          # Advanced delegation patterns
 python performance_optimization.py   # Production optimization examples
 python enterprise_coordination.py    # Multi-crew orchestration patterns
 ```
+
 ---
 
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)

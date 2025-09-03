@@ -524,6 +524,7 @@ def search_with_expansion(self, query: str, vector_store,
 2. **Performance Comparison**: Compare expansion results with baseline search  
 3. **Query Complexity**: Test with increasingly complex multi-part questions  
 4. **Expansion Quality**: Develop metrics to assess expansion effectiveness  
+
 ---
 
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)

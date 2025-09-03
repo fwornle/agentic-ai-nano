@@ -347,6 +347,7 @@ This A2A customer service system demonstrates distributed coordination where age
 ---
 
 [Return to Session 7](Session7_Agent_to_Agent_Communication.md)
+
 ---
 
 **Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)

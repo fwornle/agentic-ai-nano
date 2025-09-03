@@ -45,6 +45,7 @@ metadata:
 This advanced namespace configuration establishes comprehensive governance boundaries for production AI workloads. The `data-classification: confidential` label triggers enhanced security policies, while `backup-policy: daily-retain-30` ensures automated data protection. The compliance annotation enables automated audit trail generation for regulatory requirements.
 
 ```yaml
+
 ---
 # Advanced Resource Quota with GPU management
 apiVersion: v1
@@ -82,6 +83,7 @@ spec:
 Advanced resource quota management provides comprehensive control over both infrastructure and Kubernetes API object consumption. GPU allocation at 20 units reflects careful capacity planning for AI workloads, while storage quotas prevent unbounded data growth. Object count limits prevent namespace resource explosion while maintaining operational flexibility.
 
 ```yaml
+
 ---
 # Network Policy for micro-segmentation
 apiVersion: networking.k8s.io/v1
@@ -262,6 +264,7 @@ Advanced secrets management integrates with HashiCorp Vault for automated secret
 Database and cache credentials follow enterprise security patterns with comprehensive TLS configuration. The cluster credentials enable secure Redis clustering, while PostgreSQL SSL mode enforcement ensures encrypted database connections throughout the agent infrastructure.
 
 ```yaml
+
 ---
 # Sealed Secrets for GitOps security
 apiVersion: bitnami.com/v1alpha1
@@ -485,6 +488,7 @@ Production traffic configuration implements progressive deployment with 90/10 tr
       attempts: 3
       perTryTimeout: 10s
       retryOn: 5xx,reset,connect-failure,refused-stream
+
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
@@ -641,7 +645,9 @@ spec:
 Pod Security Policy implementation enforces comprehensive security constraints that prevent privilege escalation and ensure containers run with minimal privileges. This defense-in-depth approach protects against container breakout scenarios and limits blast radius during security incidents.
 
 *Advanced infrastructure configuration requires balancing complexity with maintainability while ensuring security and cost-effectiveness remain paramount concerns.*
+
 ---
 
 **Previous:** [Session 8 - Advanced Agent Workflows ←](Session8_Advanced_Agent_Workflows.md)
+
 ---

@@ -503,6 +503,7 @@ D) Automatic file compression
 8. **B** - Whitelist safe extensions  
 9. **B** - By limiting maximum results returned  
 10. **C** - Non-blocking operations  
+
 ---
 
 **Next:** [Session 3 - LangChain MCP Integration →](Session3_LangChain_MCP_Integration.md)

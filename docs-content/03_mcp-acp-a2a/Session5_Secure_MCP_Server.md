@@ -454,6 +454,7 @@ You've now built a comprehensive security foundation for MCP servers that includ
 - Comprehensive audit logging  
 
 Your MCP server is now protected against the most common attack vectors while maintaining usability and performance.
+
 ---
 
 **Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
