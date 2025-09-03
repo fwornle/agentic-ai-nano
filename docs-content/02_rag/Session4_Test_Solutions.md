@@ -86,9 +86,10 @@ D) Keyword-heavy prompts
 2. **Confidence Calibration**: Uncertainty quantification in responses  
 3. **Multi-Dimensional Evaluation**: Coverage, accuracy, coherence metrics  
 4. **Continuous Improvement**: Feedback loop for enhancement optimization
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
 

@@ -380,9 +380,10 @@ The LRU cache ensures frequently accessed embeddings remain in memory while less
 ```
 
 Selective compression balances memory usage with access performance based on node type characteristics and access patterns.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
 **Next:** [Session 7 - Agent Systems →](Session7_*.md)

@@ -81,9 +81,10 @@ D) Reduced memory usage
 
 ## Answer Summary  
 1. C  2. B  3. B  4. B  5. B  6. C  7. B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
 

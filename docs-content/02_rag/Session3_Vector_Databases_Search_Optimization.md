@@ -422,9 +422,10 @@ C) Database queries are the main bottleneck
 D) All of the above  
 
 [View Solutions →](Session3_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - Implementation →](Session2_*.md)  
 **Next:** [Session 4 - Team Orchestration →](Session4_*.md)

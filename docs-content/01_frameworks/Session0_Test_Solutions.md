@@ -160,9 +160,10 @@ D) Planning (for multi-step workflows)
 ## Answer Summary
 
 1. D  2. D  3. C  4. C  5. A  6. D  7. C  8. C  9. A  10. A  11. D  12. D  13. B  14. C  15. C
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 0 Test Questions →](Session0_*.md#multiple-choice-test)
 

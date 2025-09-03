@@ -41,9 +41,10 @@ C) Improves query performance
 D) Reduces memory usage  
 
 **Explanation:** Structured logging formats log entries as searchable, parseable data (typically JSON), enabling automated analysis, alerting, and debugging. This is essential for production systems where manual log analysis becomes impractical at scale.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
 

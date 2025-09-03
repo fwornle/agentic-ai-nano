@@ -454,9 +454,10 @@ C) When the graph is very small
 D) When memory is limited  
 
 [View Solutions →](Session6_ModuleA_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
 **Next:** [Session 7 - Agent Systems →](Session7_*.md)

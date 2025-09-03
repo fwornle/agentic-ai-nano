@@ -49,9 +49,10 @@ The `DataProcessingMemory` structure forms the core unit of the memory system, d
 ```python
     priority: DataProcessingMemoryPriority
     context_tags: List
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 0 - Introduction →](Session0_*.md)  
 **Next:** [Session 2 - Implementation →](Session2_*.md)

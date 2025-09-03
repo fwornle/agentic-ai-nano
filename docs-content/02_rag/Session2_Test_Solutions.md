@@ -120,9 +120,10 @@ D) To determine the number of chunks to create
 3. **Metadata Richness**: Feature presence evaluation  
 4. **Size Consistency**: Chunk size distribution analysis  
 5. **Overlap Efficiency**: Context preservation effectiveness
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
 

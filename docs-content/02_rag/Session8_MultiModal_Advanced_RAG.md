@@ -406,9 +406,10 @@ C) More storage space
 D) Faster processing speed
 
 **Answers**: 1-B, 2-B, 3-B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 7 - Agent Systems →](Session7_*.md)  
 **Next:** [Session 9 - Multi-Agent Coordination →](Session9_*.md)

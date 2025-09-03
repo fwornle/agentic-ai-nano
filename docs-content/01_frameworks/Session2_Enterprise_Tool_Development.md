@@ -1228,9 +1228,10 @@ Complete your advanced LangChain mastery:
 - [Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md) - Specialized tool creation patterns  
 - [Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md) - Enterprise deployment & monitoring  
 - [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) - System optimization & observability
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 1 - Foundations →](Session1_*.md)  
 **Next:** [Session 3 - Advanced Patterns →](Session3_*.md)

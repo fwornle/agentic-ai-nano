@@ -31,9 +31,10 @@
 **Explanation:** The `args_schema` attribute specifies the Pydantic model for input validation (in this case, `DataAnalysisInput`). This enables LangChain to automatically validate tool inputs and generate documentation about expected parameters and their types.
 
 ### Return to Module
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
 

@@ -54,9 +54,10 @@ D) Manual load balancing
 - **Distributed tracing** provides end-to-end request visibility across microservices  
 - **SLO management** maintains service quality through objective measurement  
 - **Structured logging** enables efficient troubleshooting and analysis
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
 

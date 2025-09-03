@@ -675,9 +675,10 @@ After implementing this production system, continue with:
 If you've mastered the production implementation, explore advanced topics:  
 - [Advanced HNSW Tuning](Session3_Advanced_HNSW_Tuning.md)  
 - [Advanced Hybrid Search](Session3_Advanced_Hybrid_Search.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - Implementation →](Session2_*.md)  
 **Next:** [Session 4 - Team Orchestration →](Session4_*.md)

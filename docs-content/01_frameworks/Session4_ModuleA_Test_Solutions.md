@@ -11,9 +11,10 @@ class FlowState(BaseModel):
     project_id: str
     current_phase: str
     completed_phases: List
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
 

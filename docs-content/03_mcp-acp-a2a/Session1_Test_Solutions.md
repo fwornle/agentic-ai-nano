@@ -225,9 +225,10 @@ If you missed questions in these areas, review the corresponding sections:
 - Focus on enterprise benefits  
 
 [← Return to Session 1](Session1_Basic_MCP_Server.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
 

@@ -59,9 +59,10 @@ D) 1 minute exactly
 - **Configurable thresholds** allow tuning based on specific service characteristics  
 - **Time-based analysis** distinguishes between temporary and persistent failures  
 - **Observability integration** provides metrics and alerts for operational monitoring
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 5 Test Questions →](Session5_*.md#multiple-choice-test)
 

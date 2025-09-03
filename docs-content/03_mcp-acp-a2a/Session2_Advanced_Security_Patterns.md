@@ -496,9 +496,10 @@ Implement homograph attack detection:
         # Suspicious if mixing Latin with other scripts
         return len(scripts) > 2 and 'LATIN' in scripts
 ```
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 1 - Foundations →](Session1_*.md)  
 **Next:** [Session 3 - Advanced Patterns →](Session3_*.md)

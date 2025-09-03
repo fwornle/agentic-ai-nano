@@ -1058,9 +1058,10 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination 
 - [`src/session4/advanced_flows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/advanced_flows.py) - CrewAI Flow implementations for data processing
 - [`src/session4/dynamic_teams.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/dynamic_teams.py) - Dynamic team formation systems for data engineering
 - [`src/session4/delegation_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/delegation_patterns.py) - Sophisticated delegation strategies for data processing workflows
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
 **Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
