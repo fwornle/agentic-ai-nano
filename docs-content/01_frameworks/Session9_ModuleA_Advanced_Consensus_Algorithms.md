@@ -1567,7 +1567,7 @@ B) Digital signatures with cryptographic verification
 C) IP address validation  
 D) No authentication needed  
 
-[**🗂️ View Test Solutions →**](Session9A_Test_Solutions.md)
+[View Solutions →](Session9A_Test_Solutions.md)
 ---
 
 **Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)

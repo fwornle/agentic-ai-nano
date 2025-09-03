@@ -743,7 +743,7 @@ B) Until 2 consecutive test requests succeed with 30-second recovery timeout opt
 C) Indefinitely  
 D) 1 minute exactly  
 
-[**🗂️ View Test Solutions →**](Session5_ModuleC_Test_Solutions.md)
+[View Solutions →](Session5_ModuleC_Test_Solutions.md)
 
 ### Next Steps
 

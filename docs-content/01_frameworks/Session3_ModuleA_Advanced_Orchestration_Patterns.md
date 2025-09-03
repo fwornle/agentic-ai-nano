@@ -1283,7 +1283,7 @@ B) Transformation type and schema mapping
 C) Ingestion source, batch size, data format, and schema validation  
 D) Quality threshold and response time target  
 
-[**🗂️ View Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
+[View Solutions →](Session3_ModuleA_Test_Solutions.md)
 
 ---
 

@@ -1510,7 +1510,7 @@ B) Understand data processing performance under different analytical workloads a
 C) Simplify calculations  
 D) Improve execution speed  
 
-[**View Test Solutions →**](Session2_ModuleD_Test_Solutions.md)
+[View Solutions →](Session2_ModuleD_Test_Solutions.md)
 
 ---
 

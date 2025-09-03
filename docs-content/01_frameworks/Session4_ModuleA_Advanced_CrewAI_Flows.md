@@ -1060,7 +1060,7 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination 
    c) All data processing skills are treated equally
    d) Skill levels are ignored for data processing team formation
 
-[**🗂️ View Test Solutions →**](Session4_ModuleA_Test_Solutions.md)
+[View Solutions →](Session4_ModuleA_Test_Solutions.md)
 
 ---
 

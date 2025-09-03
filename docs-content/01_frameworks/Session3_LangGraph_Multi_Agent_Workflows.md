@@ -242,7 +242,7 @@ B) The entire state is replaced
 C) Previous state is archived  
 D) Only specified fields are updated/merged  
 
-[**🗂️ View Test Solutions →**](Session3_Test_Solutions.md)
+[View Solutions →](Session3_Test_Solutions.md)
 ---
 
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)

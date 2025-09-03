@@ -134,7 +134,6 @@ D) To reduce development costs
 
 This section contains the complete, working implementation of all ACP (Agent Communication Protocol) examples from Session 6.
 
-## Solution Architecture
 
 ```
 ACP Agent Network
@@ -900,7 +899,6 @@ pandas==2.1.3
 pydantic==2.5.0
 ```
 
-## Running the Complete Solution
 
 ### 1. Setup Environment
 

@@ -453,7 +453,7 @@ B) Using non-root users, resource limits, and minimal base images
 C) Disabling all logging to prevent information leakage  
 D) Allowing unlimited resource consumption for performance  
 
-[**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
+[View Solutions →](Session4_Test_Solutions.md)
 ---
 
 **Next:** [Session 5 - Secure MCP Server →](Session5_Secure_MCP_Server.md)

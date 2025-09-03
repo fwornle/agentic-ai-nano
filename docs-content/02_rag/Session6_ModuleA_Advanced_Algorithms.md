@@ -457,7 +457,7 @@ B) When you need to explore specific regions or relationship types more thorough
 C) When the graph is very small  
 D) When memory is limited  
 
-[**🗂️ View Test Solutions →**](Session6_ModuleA_Test_Solutions.md)
+[View Solutions →](Session6_ModuleA_Test_Solutions.md)
 ---
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)

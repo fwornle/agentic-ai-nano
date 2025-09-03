@@ -395,7 +395,7 @@ B) Microsoft, Google, OpenAI, and major tech leaders
 C) Primarily academic institutions  
 D) Only cloud service providers  
 
-[**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
+[View Solutions →](Session0_Test_Solutions.md)
 ---
 
 **Next:** [Session 1 - Basic MCP Server →](Session1_Basic_MCP_Server.md)

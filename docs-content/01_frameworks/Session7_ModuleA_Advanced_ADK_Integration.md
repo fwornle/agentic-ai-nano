@@ -1328,7 +1328,7 @@ B) Persistent memory, context management, error handling, and streaming capabili
 C) Development features only  
 D) Single-user support  
 
-[**🗂️ View Test Solutions →**](Session7_ModuleA_Test_Solutions.md)
+[View Solutions →](Session7_ModuleA_Test_Solutions.md)
 
 ### Next Steps
 

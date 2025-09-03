@@ -15,7 +15,6 @@ By completing this session, you will:
 - Build query enhancement systems that bridge semantic gaps  
 - Create hierarchical indexing with effective metadata strategies  
 
-## Common RAG Problems & Engineering Solutions
 
 Even well-implemented RAG systems face predictable challenges. Understanding these problems and their engineering solutions is crucial for building production-ready systems.
 
@@ -38,7 +37,6 @@ Poor chunking strategies undermine the entire RAG pipeline by destroying documen
 - Context boundaries broken across chunks  
 - No metadata preservation for filtering and ranking  
 
-### The Engineering Solution: Structure-Aware Chunking
 
 Instead of arbitrary splitting, preserve logical document structure and add metadata that helps retrieval understand context.
 
@@ -190,7 +188,6 @@ Users and document authors express the same concepts differently, creating a sem
 
 **Real Example**: User asks "How do I fix my car?" but document says "Automobile repair procedures" - traditional embedding similarity may miss this connection.
 
-### The Engineering Solution: Multi-Strategy Query Enhancement
 
 Transform user queries into forms more likely to match document content using multiple enhancement strategies.
 
@@ -307,7 +304,6 @@ Users often ask vague questions that could have multiple valid interpretations, 
 
 **Example**: "How do I set this up?" (Set up what? In what context? For what purpose?)
 
-### The Engineering Solution: Intelligent Query Clarification
 
 Analyze query clarity and proactively request clarification or add context before attempting retrieval.
 
@@ -425,7 +421,6 @@ Flat, unorganized indexes make retrieval inefficient and fail to leverage docume
 - Inefficient search that can't leverage document structure  
 - No hierarchy for different types of content  
 
-### The Engineering Solution: Hierarchical Indexing with Rich Metadata
 
 Build sophisticated index organization that enables efficient filtering and ranking.
 
@@ -538,7 +533,6 @@ Vector similarity doesn't guarantee relevance or completeness. Retrieved chunks 
 
 **Root Causes**: Retrieved chunks are often irrelevant, redundant, contain incomplete information, or provide context that leads to misinterpretation.
 
-### The Engineering Solution: Multi-Stage Context Optimization
 
 Implement comprehensive context quality management that validates and improves retrieved content.
 
@@ -770,7 +764,6 @@ You now have comprehensive solutions for the most common RAG problems. Ready for
 - [⚙️ Advanced RAG Patterns](Session0_Advanced_RAG_Patterns.md) - Enterprise architectures and patterns  
 - [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md) - Specialized domain implementation  
 
-### Apply These Solutions:  
 - Session 2: Advanced chunking strategies build on Problem 1 solutions  
 - Session 3: Vector database optimization extends Problem 4 solutions  
 - Session 4: Query enhancement advances Problem 2 and 3 solutions  

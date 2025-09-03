@@ -174,7 +174,7 @@ B) They provide structured workflow control with conditional logic for complex d
 C) They process data faster  
 D) They require fewer computational resources  
 
-[**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
+[View Solutions →](Session4_Test_Solutions.md)
 
 ---
 

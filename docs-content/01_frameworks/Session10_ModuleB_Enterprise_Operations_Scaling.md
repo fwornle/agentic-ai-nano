@@ -1828,7 +1828,7 @@ B) Real-time visibility into service reliability and error budget consumption
 C) Faster development cycles  
 D) Reduced storage costs  
 
-[**🗂️ View Test Solutions →**](Session10B_Test_Solutions.md)
+[View Solutions →](Session10B_Test_Solutions.md)
 
 **🗂️ Source Files for Module B:**
 

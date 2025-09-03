@@ -637,7 +637,7 @@ B) Analysis, delegation, integration
 C) Data task analysis, delegation plan creation, coordinated execution  
 D) Registration, routing, completion  
 
-[**🗂️ View Test Solutions →**](Session1_ModuleA_Test_Solutions.md)
+[View Solutions →](Session1_ModuleA_Test_Solutions.md)
 
 ---
 

@@ -788,7 +788,7 @@ B) Memory usage exclusively
 C) Response times, percentiles, cache hit rates, target achievement, and data volumes processed  
 D) Just error rates and failures  
 
-[**🗂️ View Test Solutions →**](Session1_ModuleB_Test_Solutions.md)
+[View Solutions →](Session1_ModuleB_Test_Solutions.md)
 
 ---
 

@@ -1,6 +1,5 @@
 # Session 2 - Module B: Test Solutions
 
-### Multiple Choice Test - Module B Solutions
 
 ---
 

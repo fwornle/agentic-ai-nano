@@ -103,7 +103,7 @@ B) Every 5 minutes with 1-minute retry on errors
 C) Every 10 minutes  
 D) Only when data quality alerts are triggered  
 
-[**🗂️ View Test Solutions →**](Session4_ModuleB_Test_Solutions.md)
+[View Solutions →](Session4_ModuleB_Test_Solutions.md)
 
 ---
 

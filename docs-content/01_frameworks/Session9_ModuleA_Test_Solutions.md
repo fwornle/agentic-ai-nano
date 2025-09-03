@@ -1,6 +1,5 @@
 # Session 9 - Module A: Test Solutions
 
-### Advanced Consensus Algorithms and Game Theory Solutions
 
 ---
 

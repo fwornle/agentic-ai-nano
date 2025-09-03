@@ -560,7 +560,7 @@ B) Via heartbeat monitoring and automatic cleanup
 C) Using external synchronization services  
 D) Through periodic full rebuilds  
 
-[**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
+[View Solutions →](Session7_Test_Solutions.md)
 ---
 
 **Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)

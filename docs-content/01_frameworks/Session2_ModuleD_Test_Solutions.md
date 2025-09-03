@@ -1,6 +1,5 @@
 # Session 2 - Module D: Test Solutions
 
-### Multiple Choice Test - Module D Solutions
 
 ---
 

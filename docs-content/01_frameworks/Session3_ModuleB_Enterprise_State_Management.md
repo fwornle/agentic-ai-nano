@@ -426,7 +426,7 @@ B) Completeness (25%) + Keywords (35%) + Structure (25%) + Complexity (15%)
 C) Structure and complexity only  
 D) Completeness (50%) + Keywords (50%)  
 
-[**🗂️ View Test Solutions →**](Session3_ModuleB_Test_Solutions.md)
+[View Solutions →](Session3_ModuleB_Test_Solutions.md)
 
 ---
 

@@ -1,6 +1,5 @@
 # Session 10 Module B: Enterprise Operations & Scaling - Test Solutions
 
-## 📝 Multiple Choice Test Solutions
 
 **Question 1:** Predictive vs Reactive Scaling  
 

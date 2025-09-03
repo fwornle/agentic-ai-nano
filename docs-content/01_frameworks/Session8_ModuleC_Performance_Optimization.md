@@ -129,7 +129,7 @@ B) To reduce latency by reusing HTTP connections across requests
 C) To automatically retry failed requests  
 D) To load balance requests across multiple servers  
 
-[**🗂️ View Test Solutions →**](Session8_ModuleC_Test_Solutions.md)
+[View Solutions →](Session8_ModuleC_Test_Solutions.md)
 
 ---
 

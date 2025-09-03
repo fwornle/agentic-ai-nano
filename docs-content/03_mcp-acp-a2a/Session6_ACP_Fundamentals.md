@@ -856,7 +856,7 @@ B) To simplify testing
 C) To enable integration with any agent implementation  
 D) To reduce development costs  
 
-[**🗂️ View Test Solutions →**](Session6_Test_Solutions.md)
+[View Solutions →](Session6_Test_Solutions.md)
 ---
 
 **Next:** [Session 7 - Agent-to-Agent Communication →](Session7_Agent_to_Agent_Communication.md)

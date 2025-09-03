@@ -130,7 +130,6 @@ D) Increasing server capacity
 
 ---
 
-## Practical Exercise Solution
 
 **Challenge:** Implement a security audit system that tracks suspicious activity.
 

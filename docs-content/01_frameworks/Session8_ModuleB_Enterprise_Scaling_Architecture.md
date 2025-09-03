@@ -91,7 +91,7 @@ B) Only premium instances are used
 C) Scaling factor reduces to 0.6 with 90% spot instances but maintains data processing continuity  
 D) The system sends alerts but continues normal scaling  
 
-[**🗂️ View Test Solutions →**](Session8_ModuleB_Test_Solutions.md)
+[View Solutions →](Session8_ModuleB_Test_Solutions.md)
 
 ---
 

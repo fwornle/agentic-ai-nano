@@ -466,7 +466,7 @@ B) Faster execution
 C) Easier implementation  
 D) Flexibility to combine multiple execution patterns for complex scenarios  
 
-[**🗂️ View Test Solutions →**](Session8_Test_Solutions.md)
+[View Solutions →](Session8_Test_Solutions.md)
 ---
 
 **Next:** [Session 9 - Production Agent Deployment →](Session9_Production_Agent_Deployment.md)

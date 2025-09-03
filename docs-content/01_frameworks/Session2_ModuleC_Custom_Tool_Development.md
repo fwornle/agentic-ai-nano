@@ -1111,7 +1111,7 @@ B) Connection pooling, query optimization, result caching, and security validati
 C) Just connection management  
 D) Only result formatting  
 
-[**View Test Solutions →**](Session2_ModuleC_Test_Solutions.md)
+[View Solutions →](Session2_ModuleC_Test_Solutions.md)
 
 ---
 

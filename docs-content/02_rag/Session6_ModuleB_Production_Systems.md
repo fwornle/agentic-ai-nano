@@ -642,7 +642,7 @@ B) Query failures or response time degradation affecting user experience
 C) High CPU usage  
 D) Network latency  
 
-[**🗂️ View Test Solutions →**](Session6_ModuleB_Test_Solutions.md)
+[View Solutions →](Session6_ModuleB_Test_Solutions.md)
 ---
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
