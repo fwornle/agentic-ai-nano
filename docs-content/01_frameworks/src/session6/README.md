@@ -8,10 +8,10 @@ Atomic agents follow the principle that complex systems should be built from sim
 
 ### Core Principles
 
-1. **Single Responsibility**: Each agent handles one concern perfectly
-2. **Type Safety**: Schemas and validation ensure reliable data flow
-3. **Composition**: Complex behaviors emerge from simple component interactions
-4. **Observability**: Built-in monitoring and debugging capabilities
+1. **Single Responsibility**: Each agent handles one concern perfectly  
+2. **Type Safety**: Schemas and validation ensure reliable data flow  
+3. **Composition**: Complex behaviors emerge from simple component interactions  
+4. **Observability**: Built-in monitoring and debugging capabilities  
 
 ## File Structure
 
@@ -42,10 +42,10 @@ Contains the base classes and infrastructure:
 
 Example implementation demonstrating:
 
-- Input/output schema definition with Pydantic
-- Type-safe execution with comprehensive error handling
-- Multiple operations (summarize, extract keywords, sentiment analysis)
-- Performance monitoring and execution metrics
+- Input/output schema definition with Pydantic  
+- Type-safe execution with comprehensive error handling  
+- Multiple operations (summarize, extract keywords, sentiment analysis)  
+- Performance monitoring and execution metrics  
 
 ### 3. Context Providers (`context_providers.py`)
 
@@ -53,7 +53,7 @@ Dependency injection pattern for external resources:
 
 - `ContextProvider`: Abstract base for all providers
 - `DatabaseContextProvider`: Example database connection provider
-- Mock implementations for testing and development
+- Mock implementations for testing and development  
 
 ### 4. Composition Engine (`composition_engine.py`)
 
@@ -61,17 +61,17 @@ Pipeline and parallel execution patterns:
 
 - `AtomicPipeline`: Chain multiple agents with type-safe data flow
 - `AtomicParallelExecutor`: Execute independent operations concurrently
-- Context enrichment and execution tracing
-- Comprehensive error handling and rollback
+- Context enrichment and execution tracing  
+- Comprehensive error handling and rollback  
 
 ### 5. CLI Integration (`atomic_cli.py`)
 
 Command-line interface for:
 
 - Single agent execution (`process-text`)
-- Pipeline execution from configuration files
-- JSON input/output with structured results
-- Integration with CI/CD and automation workflows
+- Pipeline execution from configuration files  
+- JSON input/output with structured results  
+- Integration with CI/CD and automation workflows  
 
 ### 6. Production Orchestrator (`production_orchestrator.py`)
 
@@ -80,7 +80,7 @@ Enterprise deployment features:
 - `AtomicOrchestrator`: Service discovery and health monitoring
 - `MetricsCollector`: Performance and reliability metrics
 - `AtomicLoadBalancer`: Request routing with failover
-- Graceful shutdown and lifecycle management
+- Graceful shutdown and lifecycle management  
 
 ## Getting Started
 
@@ -282,31 +282,31 @@ async def test_text_processor():
 
 The atomic agent architecture includes comprehensive monitoring:
 
-- **Request tracing** through AtomicContext
-- **Performance metrics** with execution timing
-- **Health monitoring** for production services
-- **Error tracking** with structured exceptions
-- **Pipeline tracing** for complex workflows
+- **Request tracing** through AtomicContext  
+- **Performance metrics** with execution timing  
+- **Health monitoring** for production services  
+- **Error tracking** with structured exceptions  
+- **Pipeline tracing** for complex workflows  
 
 ## Best Practices
 
-1. **Keep agents atomic**: Each agent should have a single, well-defined responsibility
-2. **Use type hints**: Leverage Pydantic schemas for robust input/output validation
-3. **Handle errors gracefully**: Use structured exceptions with detailed context
-4. **Monitor performance**: Track execution times and success rates
-5. **Test thoroughly**: Write comprehensive tests for individual agents and pipelines
-6. **Document schemas**: Clear documentation of input/output contracts
-7. **Version your agents**: Use semantic versioning for agent implementations
+1. **Keep agents atomic**: Each agent should have a single, well-defined responsibility  
+2. **Use type hints**: Leverage Pydantic schemas for robust input/output validation  
+3. **Handle errors gracefully**: Use structured exceptions with detailed context  
+4. **Monitor performance**: Track execution times and success rates  
+5. **Test thoroughly**: Write comprehensive tests for individual agents and pipelines  
+6. **Document schemas**: Clear documentation of input/output contracts  
+7. **Version your agents**: Use semantic versioning for agent implementations  
 
 ## Integration with Other Frameworks
 
 This atomic agent architecture can be integrated with:
 
-- **FastAPI**: For HTTP API endpoints
-- **Celery**: For distributed task execution
-- **Docker**: For containerized deployments
-- **Kubernetes**: For orchestration and scaling
-- **Prometheus**: For metrics collection
-- **Grafana**: For monitoring dashboards
+- **FastAPI**: For HTTP API endpoints  
+- **Celery**: For distributed task execution  
+- **Docker**: For containerized deployments  
+- **Kubernetes**: For orchestration and scaling  
+- **Prometheus**: For metrics collection  
+- **Grafana**: For monitoring dashboards  
 
 The modular design ensures compatibility with existing infrastructure and deployment patterns.

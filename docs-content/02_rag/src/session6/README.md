@@ -12,11 +12,11 @@ This directory contains the complete implementation of advanced Graph-based Retr
 
 The revolutionary NodeRAG system that addresses traditional GraphRAG limitations through specialized node types:
 
-- **Specialized Node Types**: Entity, Concept, Document, Relationship, Cluster nodes
-- **Three-Stage Processing**: Decomposition → Augmentation → Enrichment
-- **Personalized PageRank**: Semantic traversal for query-relevant pathways
-- **HNSW Similarity Edges**: High-performance similarity connections
-- **Reasoning Pathways**: Coherent knowledge pathway construction
+- **Specialized Node Types**: Entity, Concept, Document, Relationship, Cluster nodes  
+- **Three-Stage Processing**: Decomposition → Augmentation → Enrichment  
+- **Personalized PageRank**: Semantic traversal for query-relevant pathways  
+- **HNSW Similarity Edges**: High-performance similarity connections  
+- **Reasoning Pathways**: Coherent knowledge pathway construction  
 
 ### 2. Traditional GraphRAG
 
@@ -24,10 +24,10 @@ The revolutionary NodeRAG system that addresses traditional GraphRAG limitations
 
 Production-grade traditional GraphRAG implementation:
 
-- **Entity Extraction**: NER + LLM enhancement for high-precision entity identification
-- **Relationship Mapping**: Pattern-based and LLM-enhanced relationship extraction
-- **Entity Canonicalization**: Smart merging of entity variants
-- **Graph Construction**: NetworkX-based knowledge graph building
+- **Entity Extraction**: NER + LLM enhancement for high-precision entity identification  
+- **Relationship Mapping**: Pattern-based and LLM-enhanced relationship extraction  
+- **Entity Canonicalization**: Smart merging of entity variants  
+- **Graph Construction**: NetworkX-based knowledge graph building  
 
 ### 3. Code GraphRAG
 
@@ -35,10 +35,10 @@ Production-grade traditional GraphRAG implementation:
 
 Specialized GraphRAG for software repositories:
 
-- **AST Analysis**: Python code parsing using Abstract Syntax Trees
-- **Call Graph Construction**: Function call relationship mapping
-- **Dependency Analysis**: Import and module dependency tracking
-- **Code Entity Extraction**: Functions, classes, methods, variables
+- **AST Analysis**: Python code parsing using Abstract Syntax Trees  
+- **Call Graph Construction**: Function call relationship mapping  
+- **Dependency Analysis**: Import and module dependency tracking  
+- **Code Entity Extraction**: Functions, classes, methods, variables  
 
 ### 4. Neo4j Production Integration
 
@@ -46,10 +46,10 @@ Specialized GraphRAG for software repositories:
 
 Enterprise-grade graph database integration:
 
-- **Batch Operations**: Optimized bulk insertions (10K+ entities/second)
-- **Strategic Indexing**: Performance-critical indices for fast lookups
-- **Production Patterns**: Connection pooling, error recovery, monitoring
-- **Query Optimization**: Cypher queries optimized for GraphRAG patterns
+- **Batch Operations**: Optimized bulk insertions (10K+ entities/second)  
+- **Strategic Indexing**: Performance-critical indices for fast lookups  
+- **Production Patterns**: Connection pooling, error recovery, monitoring  
+- **Query Optimization**: Cypher queries optimized for GraphRAG patterns  
 
 ### 5. Graph Traversal Engine
 
@@ -57,10 +57,10 @@ Enterprise-grade graph database integration:
 
 Advanced multi-hop reasoning engine:
 
-- **Multiple Strategies**: Breadth-first, depth-first, semantic-guided traversal
-- **Semantic Filtering**: Query-relevant path pruning (80-90% reduction)
-- **Path Ranking**: Multi-criteria path quality evaluation
-- **Context Synthesis**: Natural language narrative generation
+- **Multiple Strategies**: Breadth-first, depth-first, semantic-guided traversal  
+- **Semantic Filtering**: Query-relevant path pruning (80-90% reduction)  
+- **Path Ranking**: Multi-criteria path quality evaluation  
+- **Context Synthesis**: Natural language narrative generation  
 
 ### 6. Hybrid Graph-Vector Search
 
@@ -68,10 +68,10 @@ Advanced multi-hop reasoning engine:
 
 State-of-the-art fusion system:
 
-- **Adaptive Fusion**: Query-aware combination of graph and vector results
-- **LLM Query Analysis**: Intelligent strategy selection
-- **Complementary Strengths**: Vector similarity + graph reasoning
-- **Performance Optimization**: 30-40% improvement over single methods
+- **Adaptive Fusion**: Query-aware combination of graph and vector results  
+- **LLM Query Analysis**: Intelligent strategy selection  
+- **Complementary Strengths**: Vector similarity + graph reasoning  
+- **Performance Optimization**: 30-40% improvement over single methods  
 
 ### 7. Production Orchestration
 
@@ -79,10 +79,10 @@ State-of-the-art fusion system:
 
 Complete system integration:
 
-- **Component Management**: Orchestrates all GraphRAG components
-- **Flexible Configuration**: Support for different deployment scenarios
-- **Performance Monitoring**: Comprehensive metrics and health tracking
-- **Scalable Architecture**: Production-ready with monitoring and recovery
+- **Component Management**: Orchestrates all GraphRAG components  
+- **Flexible Configuration**: Support for different deployment scenarios  
+- **Performance Monitoring**: Comprehensive metrics and health tracking  
+- **Scalable Architecture**: Production-ready with monitoring and recovery  
 
 ## Quick Start
 
@@ -164,29 +164,29 @@ relationships = analysis['relationships']
 
 ### NodeRAG Performance
 
-- **Processing**: 3-stage pipeline handles 10K+ documents
-- **Pathway Coherence**: 85-95% coherent reasoning pathways
-- **PageRank**: Sub-100ms semantic traversal on 100K+ node graphs
-- **HNSW Integration**: 200-500ms similarity edge construction
+- **Processing**: 3-stage pipeline handles 10K+ documents  
+- **Pathway Coherence**: 85-95% coherent reasoning pathways  
+- **PageRank**: Sub-100ms semantic traversal on 100K+ node graphs  
+- **HNSW Integration**: 200-500ms similarity edge construction  
 
 ### Traditional GraphRAG Performance
 
-- **Entity Extraction**: 80-90% precision with LLM enhancement
-- **Graph Construction**: NetworkX optimized for 100K+ entities
-- **Relationship Mapping**: Pattern + LLM hybrid approach
+- **Entity Extraction**: 80-90% precision with LLM enhancement  
+- **Graph Construction**: NetworkX optimized for 100K+ entities  
+- **Relationship Mapping**: Pattern + LLM hybrid approach  
 
 ### Neo4j Integration Performance
 
-- **Batch Storage**: 10,000+ entities/second
-- **Query Response**: <100ms for 3-hop traversals
-- **Relationship Storage**: 5,000+ relationships/second
-- **Index Optimization**: O(1) entity lookups
+- **Batch Storage**: 10,000+ entities/second  
+- **Query Response**: <100ms for 3-hop traversals  
+- **Relationship Storage**: 5,000+ relationships/second  
+- **Index Optimization**: O(1) entity lookups  
 
 ### Hybrid Search Performance
 
-- **Response Time**: 200-800ms for complex queries
-- **Coverage Improvement**: 30-40% over pure vector/graph approaches
-- **Accuracy Gain**: 25-35% for multi-hop reasoning queries
+- **Response Time**: 200-800ms for complex queries  
+- **Coverage Improvement**: 30-40% over pure vector/graph approaches  
+- **Accuracy Gain**: 25-35% for multi-hop reasoning queries  
 
 ## Configuration
 
@@ -237,47 +237,47 @@ config = GraphRAGConfig(
 
 ### NodeRAG Innovations
 
-- **Heterogeneous Nodes**: 6 specialized node types for different knowledge structures
-- **Three-Stage Pipeline**: Systematic knowledge pathway construction
-- **Reasoning Integration**: Proactive reasoning through graph structure
-- **Coherent Narratives**: Transform fragments into logical knowledge chains
+- **Heterogeneous Nodes**: 6 specialized node types for different knowledge structures  
+- **Three-Stage Pipeline**: Systematic knowledge pathway construction  
+- **Reasoning Integration**: Proactive reasoning through graph structure  
+- **Coherent Narratives**: Transform fragments into logical knowledge chains  
 
 ### Advanced Capabilities
 
-- **Multi-Hop Reasoning**: Follow relationship chains across multiple entities
-- **Semantic Traversal**: Query-relevant path exploration with PageRank
-- **Adaptive Fusion**: Dynamic strategy selection based on query analysis
-- **Production Scale**: Handles 100K+ entities with sub-second response times
+- **Multi-Hop Reasoning**: Follow relationship chains across multiple entities  
+- **Semantic Traversal**: Query-relevant path exploration with PageRank  
+- **Adaptive Fusion**: Dynamic strategy selection based on query analysis  
+- **Production Scale**: Handles 100K+ entities with sub-second response times  
 
 ### Production Features
 
-- **Component Orchestration**: Unified system managing all GraphRAG types
-- **Performance Monitoring**: Comprehensive metrics and health tracking
-- **Flexible Deployment**: Support for various infrastructure configurations
-- **Error Recovery**: Robust handling of failures and partial results
+- **Component Orchestration**: Unified system managing all GraphRAG types  
+- **Performance Monitoring**: Comprehensive metrics and health tracking  
+- **Flexible Deployment**: Support for various infrastructure configurations  
+- **Error Recovery**: Robust handling of failures and partial results  
 
 ## Use Cases
 
 ### When to Use NodeRAG
 
-- **Complex Reasoning**: Multi-step analytical queries requiring synthesis
-- **Educational Applications**: Understanding knowledge structure is important
-- **Multi-Domain Knowledge**: Specialized processing for different knowledge types
-- **Coherent Narratives**: Need logically connected information chains
+- **Complex Reasoning**: Multi-step analytical queries requiring synthesis  
+- **Educational Applications**: Understanding knowledge structure is important  
+- **Multi-Domain Knowledge**: Specialized processing for different knowledge types  
+- **Coherent Narratives**: Need logically connected information chains  
 
 ### When to Use Traditional GraphRAG
 
-- **Multi-Hop Queries**: "What technologies do Apple's partners use?"
-- **Relationship Discovery**: "How are these companies connected?"
-- **Comprehensive Exploration**: "Find all related information"
-- **Rich Entity Networks**: Business, scientific, or social network domains
+- **Multi-Hop Queries**: "What technologies do Apple's partners use?"  
+- **Relationship Discovery**: "How are these companies connected?"  
+- **Comprehensive Exploration**: "Find all related information"  
+- **Rich Entity Networks**: Business, scientific, or social network domains  
 
 ### When to Use Hybrid Search
 
-- **Production Systems**: Diverse query types requiring maximum coverage
-- **Research Applications**: Both factual accuracy and insight discovery
-- **Complex Domains**: Queries spanning multiple information types
-- **Best of Both Worlds**: Most real-world applications benefit from hybrid
+- **Production Systems**: Diverse query types requiring maximum coverage  
+- **Research Applications**: Both factual accuracy and insight discovery  
+- **Complex Domains**: Queries spanning multiple information types  
+- **Best of Both Worlds**: Most real-world applications benefit from hybrid  
 
 ## Demo and Testing
 
@@ -288,13 +288,13 @@ cd /path/to/session6
 python demo_session6.py
 ```
 
-The demo showcases:
-- NodeRAG heterogeneous graph construction
-- Traditional GraphRAG entity-relationship extraction
-- Code repository analysis
-- Graph metrics and performance analysis
-- Production system orchestration
-- Sample multi-hop reasoning queries
+The demo showcases:  
+- NodeRAG heterogeneous graph construction  
+- Traditional GraphRAG entity-relationship extraction  
+- Code repository analysis  
+- Graph metrics and performance analysis  
+- Production system orchestration  
+- Sample multi-hop reasoning queries  
 
 ## Dependencies
 

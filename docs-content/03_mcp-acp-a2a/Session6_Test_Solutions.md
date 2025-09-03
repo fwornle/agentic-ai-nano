@@ -114,19 +114,19 @@ D) To reduce development costs
 
 ## Scoring Guide
 
-- **10 correct**: Expert level - Ready for advanced ACP implementations
-- **8-9 correct**: Proficient - Strong understanding of local agent coordination
-- **6-7 correct**: Competent - Good grasp of ACP fundamentals
-- **4-5 correct**: Developing - Review agent discovery and coordination patterns
-- **Below 4**: Beginner - Revisit ACP principles and local-first concepts
+- **10 correct**: Expert level - Ready for advanced ACP implementations  
+- **8-9 correct**: Proficient - Strong understanding of local agent coordination  
+- **6-7 correct**: Competent - Good grasp of ACP fundamentals  
+- **4-5 correct**: Developing - Review agent discovery and coordination patterns  
+- **Below 4**: Beginner - Revisit ACP principles and local-first concepts  
 
 ## Key Concepts Summary
 
-1. **Local-First Design**: ACP enables offline-capable agent coordination
-2. **REST-Native**: Standard HTTP endpoints for framework-agnostic integration
-3. **Capability Declaration**: Complete schemas for automatic service discovery
-4. **Coordinator Pattern**: Centralized orchestration for complex workflows
-5. **Agent Specialization**: Focused expertise through division of labor
+1. **Local-First Design**: ACP enables offline-capable agent coordination  
+2. **REST-Native**: Standard HTTP endpoints for framework-agnostic integration  
+3. **Capability Declaration**: Complete schemas for automatic service discovery  
+4. **Coordinator Pattern**: Centralized orchestration for complex workflows  
+5. **Agent Specialization**: Focused expertise through division of labor  
 
 ---
 
@@ -1018,21 +1018,21 @@ When running the test client, you should see:
 
 ## Quiz Answers
 
-1. **B** - Local-first operation without internet dependency
-2. **C** - Standard REST/HTTP
-3. **B** - Using embedded metadata and local registries
-4. **B** - Edge computing and IoT devices
-5. **D** - Cloud dependency required (this is NOT a core principle)
+1. **B** - Local-first operation without internet dependency  
+2. **C** - Standard REST/HTTP  
+3. **B** - Using embedded metadata and local registries  
+4. **B** - Edge computing and IoT devices  
+5. **D** - Cloud dependency required (this is NOT a core principle)  
 
 ## Key Implementation Notes
 
-1. **Error Handling**: All agents include proper error handling and graceful failures
-2. **Type Safety**: Uses Pydantic models for request/response validation
-3. **Async Communication**: Full async/await support for non-blocking operations
-4. **Discovery**: Implements both capability-based and general agent discovery
-5. **Standard Endpoints**: All agents expose consistent ACP endpoints
-6. **Local Registry**: In-memory registry for discovered peers
-7. **Cross-Registration**: Agents automatically register with each other
+1. **Error Handling**: All agents include proper error handling and graceful failures  
+2. **Type Safety**: Uses Pydantic models for request/response validation  
+3. **Async Communication**: Full async/await support for non-blocking operations  
+4. **Discovery**: Implements both capability-based and general agent discovery  
+5. **Standard Endpoints**: All agents expose consistent ACP endpoints  
+6. **Local Registry**: In-memory registry for discovered peers  
+7. **Cross-Registration**: Agents automatically register with each other  
 
 This solution demonstrates a complete, working ACP agent network that can operate offline with local discovery and coordination.
 

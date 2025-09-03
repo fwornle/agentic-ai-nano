@@ -9,10 +9,10 @@
 
 By completing this session, you will:
 
-- Understand the five major phases of RAG evolution (2017-2025)
-- Recognize key innovations that shaped modern RAG systems
-- Appreciate why current architectures exist and where they're heading
-- Identify which RAG generation fits different use cases
+- Understand the five major phases of RAG evolution (2017-2025)  
+- Recognize key innovations that shaped modern RAG systems  
+- Appreciate why current architectures exist and where they're heading  
+- Identify which RAG generation fits different use cases  
 
 ## RAG Evolution Timeline (2017-2025)
 
@@ -28,10 +28,10 @@ The foundational shift from keyword matching to semantic understanding using den
 ### The Problem with Keyword Search
 Traditional search systems relied on exact word matches, missing semantically similar content. Searching for "automobile repair" wouldn't find documents about "car maintenance" despite covering the same topic.
 
-### Key Breakthroughs:
-- **DrQA (2017)**: Exposed limitations of keyword-based search
-- **ORQA (2019)**: Proved dense retrieval outperformed traditional methods
-- **FAISS**: Made large-scale vector search practical
+### Key Breakthroughs:  
+- **DrQA (2017)**: Exposed limitations of keyword-based search  
+- **ORQA (2019)**: Proved dense retrieval outperformed traditional methods  
+- **FAISS**: Made large-scale vector search practical  
 
 ### Technical Foundation:
 ```python
@@ -51,21 +51,21 @@ class EarlyDenseRetrieval:
 
 **Why This Mattered**: Dense embeddings solved the vocabulary mismatch problem, understanding that "car" and "automobile" refer to the same concept. This laid the foundation for all modern RAG systems.
 
-### Limitations Addressed in Later Phases:
-- Limited semantic understanding
-- Poor handling of complex queries
-- No integration with generation models
-- Insufficient context handling
+### Limitations Addressed in Later Phases:  
+- Limited semantic understanding  
+- Poor handling of complex queries  
+- No integration with generation models  
+- Insufficient context handling  
 
 ## Phase 2: RAG Foundation (2020)
 
 2020 established RAG as the standard architecture for knowledge-grounded generation, moving from research prototype to practical implementation.
 
-### Revolutionary Papers:
-- **DPR (Dense Passage Retrieval)**: Created the dual-encoder framework still used today
-- **RAG Paper**: Formalized the three-stage architecture (Index→Retrieve→Generate)
-- **REALM**: Integrated retrieval during model training
-- **FiD (Fusion-in-Decoder)**: Combined information from multiple sources effectively
+### Revolutionary Papers:  
+- **DPR (Dense Passage Retrieval)**: Created the dual-encoder framework still used today  
+- **RAG Paper**: Formalized the three-stage architecture (Index→Retrieve→Generate)  
+- **REALM**: Integrated retrieval during model training  
+- **FiD (Fusion-in-Decoder)**: Combined information from multiple sources effectively  
 
 ### Architectural Innovation:
 ```python
@@ -85,21 +85,21 @@ class FoundationalRAG:
 
 **Key Achievement**: The separation of retrieval and generation components allowed independent optimization of each stage, setting the architectural pattern still used in modern systems.
 
-### What Changed:
-- Systematic three-stage pipeline became standard
-- Multi-passage retrieval improved coverage
-- Information fusion reduced single-document dependency
-- Integration with powerful language models
+### What Changed:  
+- Systematic three-stage pipeline became standard  
+- Multi-passage retrieval improved coverage  
+- Information fusion reduced single-document dependency  
+- Integration with powerful language models  
 
 ## Phase 3: Enhanced Fusion (2021-2022)
 
 RAG transitioned from research to production with the widespread availability of powerful LLMs like GPT-3.5 and GPT-4.
 
-### Key Innovations:
-- **RAG-Fusion**: Generated multiple query variations to improve recall
-- **HyDE (Hypothetical Document Embeddings)**: Created hypothetical answers to bridge query-document gaps
-- **Reciprocal Rank Fusion**: Combined results from multiple search strategies
-- **Hallucination Reduction**: Achieved 30-50% reduction in factual errors
+### Key Innovations:  
+- **RAG-Fusion**: Generated multiple query variations to improve recall  
+- **HyDE (Hypothetical Document Embeddings)**: Created hypothetical answers to bridge query-document gaps  
+- **Reciprocal Rank Fusion**: Combined results from multiple search strategies  
+- **Hallucination Reduction**: Achieved 30-50% reduction in factual errors  
 
 ### Enhanced Query Processing:
 ```python
@@ -131,21 +131,21 @@ class EnhancedRAG:
 
 **Why Multi-Query Works**: This approach dramatically improved retrieval coverage by addressing the inherent ambiguity in how users phrase questions versus how information is written in documents.
 
-### Production Readiness:
-- Integration with commercial LLM APIs
-- Scalable vector database solutions
-- Reduced setup complexity
-- Improved accuracy metrics
+### Production Readiness:  
+- Integration with commercial LLM APIs  
+- Scalable vector database solutions  
+- Reduced setup complexity  
+- Improved accuracy metrics  
 
 ## Phase 4: Adaptive Systems (2023)
 
 RAG systems gained self-evaluation capabilities, moving from static pipelines to adaptive systems that could assess and improve their own performance.
 
-### Self-Improving Capabilities:
-- **Self-RAG**: Systems that critique their own outputs
-- **Corrective RAG (CRAG)**: Quality assessment before using retrieved information
-- **Adaptive Retrieval**: Intelligent decisions about when retrieval is needed
-- **Critique Tokens**: Confidence and relevance indicators
+### Self-Improving Capabilities:  
+- **Self-RAG**: Systems that critique their own outputs  
+- **Corrective RAG (CRAG)**: Quality assessment before using retrieved information  
+- **Adaptive Retrieval**: Intelligent decisions about when retrieval is needed  
+- **Critique Tokens**: Confidence and relevance indicators  
 
 ### Smart Decision Making:
 ```python
@@ -175,21 +175,21 @@ class AdaptiveRAG:
 
 **Paradigm Shift**: From "always retrieve" to "intelligently decide when and how to retrieve based on query characteristics and confidence levels".
 
-### Key Advances:
-- Quality assessment before generation
-- Dynamic retrieval decisions
-- Self-correction mechanisms
-- Confidence scoring
+### Key Advances:  
+- Quality assessment before generation  
+- Dynamic retrieval decisions  
+- Self-correction mechanisms  
+- Confidence scoring  
 
 ## Phase 5: Graph-Based and Agentic (2024-2025)
 
 Current state-of-the-art systems orchestrate multiple specialized AI agents with knowledge graphs to handle complex, multi-step reasoning tasks.
 
-### Cutting-Edge Capabilities:
-- **Agent Orchestration**: Specialized agents for planning, retrieval, reasoning, synthesis
-- **Knowledge Graph Integration**: Relationship-aware retrieval following entity connections
-- **Multi-Hop Reasoning**: Connect information across multiple logical steps
-- **Parallel Processing**: Multiple agents working simultaneously on different aspects
+### Cutting-Edge Capabilities:  
+- **Agent Orchestration**: Specialized agents for planning, retrieval, reasoning, synthesis  
+- **Knowledge Graph Integration**: Relationship-aware retrieval following entity connections  
+- **Multi-Hop Reasoning**: Connect information across multiple logical steps  
+- **Parallel Processing**: Multiple agents working simultaneously on different aspects  
 
 ### Multi-Agent Coordination:
 ```python
@@ -231,11 +231,11 @@ class AgenticRAG:
 
 **Current Frontier**: These systems handle complex queries requiring understanding relationships between entities, temporal reasoning, and multi-step logical inference.
 
-### Modern Examples:
-- Microsoft's GraphRAG for complex document analysis
-- Multi-agent research assistants
-- Knowledge graph-powered question answering
-- Autonomous information synthesis systems
+### Modern Examples:  
+- Microsoft's GraphRAG for complex document analysis  
+- Multi-agent research assistants  
+- Knowledge graph-powered question answering  
+- Autonomous information synthesis systems  
 
 ## Evolution Summary: What Each Phase Contributed
 
@@ -277,26 +277,26 @@ Different use cases benefit from different generations of RAG technology:
 
 ## Future Directions
 
-The evolution continues toward:
-- More sophisticated agent coordination
-- Better integration with knowledge graphs
-- Improved multi-modal capabilities
-- Enhanced reasoning and planning
-- Greater autonomy in quality management
+The evolution continues toward:  
+- More sophisticated agent coordination  
+- Better integration with knowledge graphs  
+- Improved multi-modal capabilities  
+- Enhanced reasoning and planning  
+- Greater autonomy in quality management  
 
 Understanding this evolution helps you choose the right level of sophistication for your use case while preparing for future developments.
 
 ## Next Steps in Your RAG Journey
 
 ### 📝 Practical Implementation
-Ready to build modern RAG systems? Continue with:
-- [📝 RAG Implementation Practice](Session0_RAG_Implementation_Practice.md)
-- [📝 RAG Problem Solving](Session0_RAG_Problem_Solving.md)
+Ready to build modern RAG systems? Continue with:  
+- [📝 RAG Implementation Practice](Session0_RAG_Implementation_Practice.md)  
+- [📝 RAG Problem Solving](Session0_RAG_Problem_Solving.md)  
 
 ### ⚙️ Advanced Mastery
-Need cutting-edge implementations? Explore:
-- [⚙️ Advanced RAG Patterns](Session0_Advanced_RAG_Patterns.md)
-- [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md)
+Need cutting-edge implementations? Explore:  
+- [⚙️ Advanced RAG Patterns](Session0_Advanced_RAG_Patterns.md)  
+- [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md)  
 ---
 
 ## 🧭 Navigation

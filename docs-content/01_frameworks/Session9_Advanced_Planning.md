@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Sophisticated Hierarchical Task Network algorithms with constraint satisfaction
-- Advanced dynamic replanning with predictive failure modeling
-- Complex reflection and learning systems that adapt strategy based on experience
-- Enterprise-scale planning systems with distributed coordination and fault tolerance
+- Sophisticated Hierarchical Task Network algorithms with constraint satisfaction  
+- Advanced dynamic replanning with predictive failure modeling  
+- Complex reflection and learning systems that adapt strategy based on experience  
+- Enterprise-scale planning systems with distributed coordination and fault tolerance  
 
 ---
 

@@ -88,11 +88,11 @@ D) Token usage
 
 ## Performance Scoring
 
-- **8/8 Correct**: Excellent mastery of agentic RAG concepts and architecture
-- **7/8 Correct**: Strong understanding with minor gaps
-- **6/8 Correct**: Good grasp of concepts, review multi-agent systems
-- **5/8 Correct**: Adequate knowledge, focus on self-correction mechanisms
-- **4/8 or below**: Recommend hands-on practice with agentic frameworks
+- **8/8 Correct**: Excellent mastery of agentic RAG concepts and architecture  
+- **7/8 Correct**: Strong understanding with minor gaps  
+- **6/8 Correct**: Good grasp of concepts, review multi-agent systems  
+- **5/8 Correct**: Adequate knowledge, focus on self-correction mechanisms  
+- **4/8 or below**: Recommend hands-on practice with agentic frameworks  
 
 ---
 
@@ -100,38 +100,38 @@ D) Token usage
 
 ### Query Planning and Execution
 
-1. **Complexity Analysis**: Query classification and strategy selection
-2. **Adaptive Execution**: Dynamic approach selection based on query characteristics
-3. **Resource Optimization**: Efficient use of computational resources
-4. **Strategy Validation**: Ensuring chosen approaches match query requirements
+1. **Complexity Analysis**: Query classification and strategy selection  
+2. **Adaptive Execution**: Dynamic approach selection based on query characteristics  
+3. **Resource Optimization**: Efficient use of computational resources  
+4. **Strategy Validation**: Ensuring chosen approaches match query requirements  
 
 ### Self-Correction Mechanisms
 
-1. **Error Detection**: LLM-as-a-judge and consistency checking
-2. **Iterative Improvement**: Multi-round refinement processes
-3. **Quality Thresholds**: Establishing when responses are sufficient
-4. **Correction Strategies**: Targeted fixes for specific error types
+1. **Error Detection**: LLM-as-a-judge and consistency checking  
+2. **Iterative Improvement**: Multi-round refinement processes  
+3. **Quality Thresholds**: Establishing when responses are sufficient  
+4. **Correction Strategies**: Targeted fixes for specific error types  
 
 ### Tool Integration
 
-1. **Tool Selection**: Choosing appropriate external tools for query needs
-2. **Parallel Execution**: Efficient tool usage and result combination
-3. **Result Synthesis**: Combining document retrieval with tool outputs
-4. **Error Handling**: Managing tool failures and unreliable data
+1. **Tool Selection**: Choosing appropriate external tools for query needs  
+2. **Parallel Execution**: Efficient tool usage and result combination  
+3. **Result Synthesis**: Combining document retrieval with tool outputs  
+4. **Error Handling**: Managing tool failures and unreliable data  
 
 ### Multi-Agent Orchestration
 
-1. **Role Specialization**: Researcher, analyzer, synthesizer, validator roles
-2. **Collaboration Patterns**: Sequential, parallel, and iterative workflows
-3. **Consensus Building**: Combining insights from multiple agents
-4. **Quality Assurance**: Multi-agent validation and cross-checking
+1. **Role Specialization**: Researcher, analyzer, synthesizer, validator roles  
+2. **Collaboration Patterns**: Sequential, parallel, and iterative workflows  
+3. **Consensus Building**: Combining insights from multiple agents  
+4. **Quality Assurance**: Multi-agent validation and cross-checking  
 
 ### Production Considerations
 
-1. **System Reliability**: Handling failures gracefully in complex systems
-2. **Performance Monitoring**: Tracking agentic system effectiveness
-3. **Scalability**: Managing computational overhead of agentic processes
-4. **Maintenance**: Updating and improving agentic components
+1. **System Reliability**: Handling failures gracefully in complex systems  
+2. **Performance Monitoring**: Tracking agentic system effectiveness  
+3. **Scalability**: Managing computational overhead of agentic processes  
+4. **Maintenance**: Updating and improving agentic components  
 
 ---
 ---

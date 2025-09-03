@@ -36,7 +36,7 @@ This is the semantic gap – the mismatch between how users express their needs 
 
 ## Optional Deep Dive Modules
 
-- **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Intent classification, multi-modal queries, context awareness
+- **[Module A: Advanced Query Understanding](Session4_ModuleA_Query_Understanding.md)** - Intent classification, multi-modal queries, context awareness  
 
 ![Agentic RAG](images/AgenticRAG.png)
 
@@ -44,17 +44,17 @@ This is the semantic gap – the mismatch between how users express their needs 
 
 The root problem isn't with your search technology – it's with human communication patterns:
 
-- **Semantic Mismatch**: Users say "My app crashes" while documentation says "Application termination errors"
-- **Incomplete Context**: Users ask "How to deploy?" without specifying platform, environment, or stack
-- **Domain Translation**: Users know business problems, documents contain technical solutions
-- **Question vs. Answer Language**: Queries use problem language, documents use solution language
+- **Semantic Mismatch**: Users say "My app crashes" while documentation says "Application termination errors"  
+- **Incomplete Context**: Users ask "How to deploy?" without specifying platform, environment, or stack  
+- **Domain Translation**: Users know business problems, documents contain technical solutions  
+- **Question vs. Answer Language**: Queries use problem language, documents use solution language  
 
 ## Enhancement Solutions Strategy
 
-- **HyDE**: Bridge the gap by generating hypothetical answers, then searching in answer-space
-- **Query Expansion**: Enrich user questions with domain terminology and related concepts
-- **Multi-Query Generation**: Attack the same information need from multiple angles
-- **Context Optimization**: Maximize information density while preserving coherence
+- **HyDE**: Bridge the gap by generating hypothetical answers, then searching in answer-space  
+- **Query Expansion**: Enrich user questions with domain terminology and related concepts  
+- **Multi-Query Generation**: Attack the same information need from multiple angles  
+- **Context Optimization**: Maximize information density while preserving coherence  
 
 ## 🎯 Part 1: HyDE - Hypothetical Document Embeddings
 
@@ -112,10 +112,10 @@ Remember from Session 3 how your optimized HNSW indexing and hybrid search creat
 
 ### The HyDE Process
 
-1. **Query Analysis**: Understand the semantic intent of the user question
-2. **Hypothetical Generation**: Create documents that would naturally contain the answer
-3. **Vector Integration**: Embed these hypothetical documents using your embedding models
-4. **Enhanced Retrieval**: Search your vector database using these improved representations
+1. **Query Analysis**: Understand the semantic intent of the user question  
+2. **Hypothetical Generation**: Create documents that would naturally contain the answer  
+3. **Vector Integration**: Embed these hypothetical documents using your embedding models  
+4. **Enhanced Retrieval**: Search your vector database using these improved representations  
 
 HyDE transforms semantic gaps into vector space advantages.
 
@@ -193,9 +193,9 @@ def enhance_query_with_hyde(self, query: str,
 
 This implementation demonstrates query enhancement working in harmony with your vector infrastructure from Session 3. Notice how:
 
-- **Enhanced embeddings** leverage your optimized embedding models
-- **Confidence scoring** helps evaluate query improvement quality
-- **Query classification** enables template-based document generation
+- **Enhanced embeddings** leverage your optimized embedding models  
+- **Confidence scoring** helps evaluate query improvement quality  
+- **Query classification** enables template-based document generation  
 
 The result bridges the semantic gap between user intent and document content, dramatically improving retrieval success in your hybrid search systems.
 
@@ -220,9 +220,9 @@ The two approaches are complementary: HyDE bridges semantic gaps, while expansio
 
 ### The Expansion Strategy
 
-- **HyDE (Part 1)**: Generate hypothetical documents → embed → search
-- **Query Expansion (Part 2)**: Enrich original query → search with expanded terms
-- **Combined Power**: Use both approaches for maximum retrieval success
+- **HyDE (Part 1)**: Generate hypothetical documents → embed → search  
+- **Query Expansion (Part 2)**: Enrich original query → search with expanded terms  
+- **Combined Power**: Use both approaches for maximum retrieval success  
 
 This multi-layered approach ensures your optimized vector search from Session 3 captures content through multiple semantic pathways.
 
@@ -365,10 +365,10 @@ def generate_multi_query_set(self, query: str,
 
 For detailed implementation of all query expansion components including:
 
-- **Complex Query Decomposition**: Breaking multi-part questions into searchable sub-questions
-- **Specificity Level Variants**: Creating queries at different granularity levels
-- **Domain-Specific Expansion**: Using corpus knowledge for specialized terminology
-- **Multi-Strategy Coordination**: Combining all expansion approaches
+- **Complex Query Decomposition**: Breaking multi-part questions into searchable sub-questions  
+- **Specificity Level Variants**: Creating queries at different granularity levels  
+- **Domain-Specific Expansion**: Using corpus knowledge for specialized terminology  
+- **Multi-Strategy Coordination**: Combining all expansion approaches  
 
 **📝 Participant Path**: [Query Expansion Practice](Session4_Query_Expansion_Practice.md) - Hands-on implementation guide
 **⚙️ Implementer Path**: [Multi-Query Systems](Session4_Multi_Query_Systems.md) - Production-ready multi-query generation
@@ -487,10 +487,10 @@ def _relevance_based_selection(self, query: str, chunks: List[Dict],
 
 For detailed implementation of all context optimization techniques including:
 
-- **Hierarchical Summarization**: Intelligent grouping and summarization strategies
-- **Semantic Compression**: Content compression while preserving meaning
-- **Diversity-Based Selection**: Balancing relevance with information coverage
-- **Strategy Selection Logic**: Choosing optimal approaches based on content characteristics
+- **Hierarchical Summarization**: Intelligent grouping and summarization strategies  
+- **Semantic Compression**: Content compression while preserving meaning  
+- **Diversity-Based Selection**: Balancing relevance with information coverage  
+- **Strategy Selection Logic**: Choosing optimal approaches based on content characteristics  
 
 **📝 Participant Path**: [Context Optimization Methods](Session4_Context_Optimization.md) - Practical optimization techniques
 **⚙️ Implementer Path**: [Advanced Context Systems](Session4_Advanced_Context_Systems.md) - Production-ready optimization
@@ -657,10 +657,10 @@ Include at end:
 
 For sophisticated prompt engineering including:
 
-- **Dynamic Prompt Adaptation**: Intelligent strategy selection based on context quality and query characteristics
-- **Multi-Step Reasoning**: Complex analytical reasoning frameworks
-- **Advanced Confidence Calibration**: Comprehensive reliability assessment systems
-- **Context Quality Analysis**: Sophisticated context evaluation and adaptation
+- **Dynamic Prompt Adaptation**: Intelligent strategy selection based on context quality and query characteristics  
+- **Multi-Step Reasoning**: Complex analytical reasoning frameworks  
+- **Advanced Confidence Calibration**: Comprehensive reliability assessment systems  
+- **Context Quality Analysis**: Sophisticated context evaluation and adaptation  
 
 **⚙️ Implementer Path**: [Advanced Prompt Engineering](Session4_Advanced_Prompt_Engineering.md) - Production-ready prompt systems
 
@@ -671,10 +671,10 @@ For sophisticated prompt engineering including:
 
 You've learned the four essential components of query enhancement:
 
-1. **🎯 HyDE**: Bridge semantic gaps by generating hypothetical documents
-2. **🎯 Query Expansion**: Enrich queries with related terms and reformulations
-3. **🎯 Context Optimization**: Maximize information density within token budgets
-4. **🎯 Prompt Engineering**: Extract maximum value from enhanced context
+1. **🎯 HyDE**: Bridge semantic gaps by generating hypothetical documents  
+2. **🎯 Query Expansion**: Enrich queries with related terms and reformulations  
+3. **🎯 Context Optimization**: Maximize information density within token budgets  
+4. **🎯 Prompt Engineering**: Extract maximum value from enhanced context  
 
 ### 🎯 Integration Overview
 
@@ -733,10 +733,10 @@ def enhance_query_pipeline(self, query: str, vector_store) -> Dict[str, Any]:
 
 For the complete, production-ready enhancement pipeline including:
 
-- **Comprehensive Integration**: All enhancement techniques working together
-- **Configuration Management**: Flexible enhancement strategy selection
-- **Performance Optimization**: Efficient pipeline execution
-- **Error Handling**: Robust fallback mechanisms
+- **Comprehensive Integration**: All enhancement techniques working together  
+- **Configuration Management**: Flexible enhancement strategy selection  
+- **Performance Optimization**: Efficient pipeline execution  
+- **Error Handling**: Robust fallback mechanisms  
 
 **⚙️ Implementer Path**: [Complete Enhancement Pipeline](Session4_Complete_Enhancement_Pipeline.md) - Full production implementation
 
@@ -746,10 +746,10 @@ For the complete, production-ready enhancement pipeline including:
 
 You've learned the essential components of query enhancement including:
 
-- **HyDE system** for semantic gap bridging between questions and documents
-- **Multi-strategy query expansion** using semantic, contextual, and domain techniques
-- **Context window optimization** with relevance ranking and intelligent selection
-- **Advanced prompt engineering** with confidence calibration and structured reasoning
+- **HyDE system** for semantic gap bridging between questions and documents  
+- **Multi-strategy query expansion** using semantic, contextual, and domain techniques  
+- **Context window optimization** with relevance ranking and intelligent selection  
+- **Advanced prompt engineering** with confidence calibration and structured reasoning  
 
 These techniques transform your RAG system from simple similarity search to intelligent query understanding that bridges the semantic gap between user intent and document content.
 

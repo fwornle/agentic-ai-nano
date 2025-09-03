@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Advanced graph traversal algorithms for complex reasoning
-- Multi-hop reasoning with relevance preservation
-- Context aggregation and coherent response synthesis
-- Performance optimization for large-scale graph traversal
+- Advanced graph traversal algorithms for complex reasoning  
+- Multi-hop reasoning with relevance preservation  
+- Context aggregation and coherent response synthesis  
+- Performance optimization for large-scale graph traversal  
 
 ## Advanced Graph Traversal Algorithms
 

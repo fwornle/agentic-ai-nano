@@ -6,11 +6,11 @@ This directory contains the implementation of advanced query enhancement techniq
 
 Session 4 builds upon the vector search optimization from Session 3 by adding intelligent query understanding and context optimization. The implementation includes:
 
-- **HyDE (Hypothetical Document Embeddings)** - Generate hypothetical documents to bridge semantic gaps
-- **Query Expansion & Reformulation** - Multi-strategy query enhancement using LLMs
-- **Multi-Query Generation** - Create query variants from different perspectives
-- **Context Window Optimization** - Smart context assembly for maximum information density
-- **Advanced Prompt Engineering** - Dynamic prompt adaptation based on context quality
+- **HyDE (Hypothetical Document Embeddings)** - Generate hypothetical documents to bridge semantic gaps  
+- **Query Expansion & Reformulation** - Multi-strategy query enhancement using LLMs  
+- **Multi-Query Generation** - Create query variants from different perspectives  
+- **Context Window Optimization** - Smart context assembly for maximum information density  
+- **Advanced Prompt Engineering** - Dynamic prompt adaptation based on context quality  
 
 ## 📁 File Structure
 
@@ -81,10 +81,10 @@ python demo_query_enhancement.py
 
 Analyzes and measures semantic gaps between queries and documents.
 
-**Key Features:**
-- Embedding-based similarity calculation
-- Gap size and consistency metrics
-- Problematic document identification
+**Key Features:**  
+- Embedding-based similarity calculation  
+- Gap size and consistency metrics  
+- Problematic document identification  
 
 ```python
 from session4 import SemanticGapAnalyzer
@@ -97,10 +97,10 @@ gap_analysis = analyzer.analyze_query_document_gap(query, documents)
 
 Implements Hypothetical Document Embeddings for semantic gap bridging.
 
-**Key Features:**
-- Multiple query type templates (factual, procedural, analytical, creative)
-- Quality-weighted hypothetical document generation
-- Enhanced embedding creation with confidence scoring
+**Key Features:**  
+- Multiple query type templates (factual, procedural, analytical, creative)  
+- Quality-weighted hypothetical document generation  
+- Enhanced embedding creation with confidence scoring  
 
 ```python
 from session4 import HyDEQueryEnhancer
@@ -117,11 +117,11 @@ enhancement = hyde_enhancer.enhance_query_with_hyde(
 
 Multi-strategy query expansion using semantic, contextual, and domain-specific techniques.
 
-**Key Features:**
-- Semantic expansion via LLM understanding
-- Contextual reformulation with different phrasings
-- Synonym expansion using WordNet
-- Domain-specific expansion with TF-IDF analysis
+**Key Features:**  
+- Semantic expansion via LLM understanding  
+- Contextual reformulation with different phrasings  
+- Synonym expansion using WordNet  
+- Domain-specific expansion with TF-IDF analysis  
 
 ```python
 from session4 import IntelligentQueryExpander
@@ -138,11 +138,11 @@ expansion = expander.expand_query(
 
 Generates multiple query perspectives for comprehensive retrieval coverage.
 
-**Key Features:**
-- Query decomposition for complex questions
-- Specificity level variants (broad to specific)
-- Perspective shifts (technical, beginner, business, academic)
-- Temporal variants (historical, current, future)
+**Key Features:**  
+- Query decomposition for complex questions  
+- Specificity level variants (broad to specific)  
+- Perspective shifts (technical, beginner, business, academic)  
+- Temporal variants (historical, current, future)  
 
 ```python
 from session4 import MultiQueryGenerator
@@ -159,11 +159,11 @@ query_set = multi_gen.generate_multi_query_set(
 
 Optimizes context window assembly for maximum information density.
 
-**Key Features:**
-- Relevance-based chunk selection with token efficiency
-- Hierarchical summarization for large contexts
-- Diversity-based selection (clustering approach)
-- Token budget management with smart truncation
+**Key Features:**  
+- Relevance-based chunk selection with token efficiency  
+- Hierarchical summarization for large contexts  
+- Diversity-based selection (clustering approach)  
+- Token budget management with smart truncation  
 
 ```python
 from session4 import ContextWindowOptimizer
@@ -180,11 +180,11 @@ optimized = optimizer.optimize_context_window(
 
 Advanced prompt engineering with dynamic adaptation based on context quality.
 
-**Key Features:**
-- Domain-specific prompt templates (factual, analytical, procedural, etc.)
-- Chain-of-thought reasoning enhancement
-- Confidence calibration for reliability
-- Dynamic adaptation based on context analysis
+**Key Features:**  
+- Domain-specific prompt templates (factual, analytical, procedural, etc.)  
+- Chain-of-thought reasoning enhancement  
+- Confidence calibration for reliability  
+- Dynamic adaptation based on context analysis  
 
 ```python
 from session4 import RAGPromptEngineer, DynamicPromptAdapter
@@ -207,11 +207,11 @@ adapted = adapter.adapt_prompt_dynamically(query, context, metadata)
 
 Unified pipeline integrating all enhancement techniques.
 
-**Key Features:**
-- Configurable enhancement pipeline
-- Multi-strategy retrieval coordination
-- Result deduplication and ranking
-- End-to-end query enhancement workflow
+**Key Features:**  
+- Configurable enhancement pipeline  
+- Multi-strategy retrieval coordination  
+- Result deduplication and ranking  
+- End-to-end query enhancement workflow  
 
 ## Configuration
 
@@ -288,28 +288,28 @@ results = benchmark.run_enhancement_comparison(test_queries)
 
 Based on the implementation, you can expect:
 
-- **Retrieval Relevance**: 25-35% improvement with HyDE and query expansion
-- **Context Utilization**: 40-50% better information density in optimized contexts
-- **Answer Quality**: 20-30% improvement with engineered prompts and confidence calibration
-- **User Satisfaction**: Significant improvement in handling ambiguous and complex queries
+- **Retrieval Relevance**: 25-35% improvement with HyDE and query expansion  
+- **Context Utilization**: 40-50% better information density in optimized contexts  
+- **Answer Quality**: 20-30% improvement with engineered prompts and confidence calibration  
+- **User Satisfaction**: Significant improvement in handling ambiguous and complex queries  
 
 ## 🔗 Next Steps - Session 5 Integration
 
 This implementation prepares for Session 5 (RAG Evaluation & Quality Assessment) by providing:
 
-- **Baseline Metrics**: Gap analysis and enhancement confidence scores
-- **A/B Testing Framework**: Original vs. enhanced query comparison capabilities
-- **Quality Indicators**: Confidence calibration and context quality assessment
-- **Performance Tracking**: Enhancement pipeline metadata for evaluation
+- **Baseline Metrics**: Gap analysis and enhancement confidence scores  
+- **A/B Testing Framework**: Original vs. enhanced query comparison capabilities  
+- **Quality Indicators**: Confidence calibration and context quality assessment  
+- **Performance Tracking**: Enhancement pipeline metadata for evaluation  
 
 ## 🤝 Contributing
 
 To extend this implementation:
 
-1. **Add New Enhancement Strategies**: Extend the base classes with new techniques
-2. **Improve LLM Integration**: Replace MockLLMModel with production LLM clients
-3. **Optimize Performance**: Add caching and batch processing capabilities
-4. **Add Evaluation Metrics**: Implement comprehensive quality assessment
+1. **Add New Enhancement Strategies**: Extend the base classes with new techniques  
+2. **Improve LLM Integration**: Replace MockLLMModel with production LLM clients  
+3. **Optimize Performance**: Add caching and batch processing capabilities  
+4. **Add Evaluation Metrics**: Implement comprehensive quality assessment  
 
 ## 📝 License
 

@@ -28,10 +28,10 @@ The cloud room runs an AWS Elastic Kubernetes Service (EKS) to deploy workloads.
 
 The nano-degree infrastructure provides:
 
-- **Elastic Scaling**: Resources adjust to demand
-- **GPU Availability**: For training and inference workloads
-- **Persistent Storage**: Your work is saved between sessions
-- **Network Isolation**: Secure, private development spaces
+- **Elastic Scaling**: Resources adjust to demand  
+- **GPU Availability**: For training and inference workloads  
+- **Persistent Storage**: Your work is saved between sessions  
+- **Network Isolation**: Secure, private development spaces  
 
 ## Why Cloud Development?
 
@@ -39,21 +39,21 @@ The nano-degree infrastructure provides:
 
 Corporate developers and learners typically face:
 
-- **Tool Installation Restrictions**: IT policies blocking software installations
-- **Network Limitations**: Firewalls preventing package downloads
-- **Version Conflicts**: Incompatible Python versions, library dependencies
-- **Platform Inconsistencies**: Windows vs Mac vs Linux differences
-- **Resource Constraints**: Limited local computing power for AI workloads
+- **Tool Installation Restrictions**: IT policies blocking software installations  
+- **Network Limitations**: Firewalls preventing package downloads  
+- **Version Conflicts**: Incompatible Python versions, library dependencies  
+- **Platform Inconsistencies**: Windows vs Mac vs Linux differences  
+- **Resource Constraints**: Limited local computing power for AI workloads  
 
 ### The Cloud Development Solution
 
 Cloud development environments solve these challenges by:
 
-- **Pre-configured Environments**: All tools, dependencies, and configurations ready-to-use
-- **Browser-Based Access**: Work from any device within the VPN
-- **Consistent Experience**: Identical environment for all participants
-- **Scalable Resources**: Cloud computing power for intensive AI/ML workloads
-- **Zero Local Installation**: No conflicts with corporate IT policies
+- **Pre-configured Environments**: All tools, dependencies, and configurations ready-to-use  
+- **Browser-Based Access**: Work from any device within the VPN  
+- **Consistent Experience**: Identical environment for all participants  
+- **Scalable Resources**: Cloud computing power for intensive AI/ML workloads  
+- **Zero Local Installation**: No conflicts with corporate IT policies  
 
 ## How to Work with Coder
 
@@ -69,10 +69,10 @@ Once logged-in, you get to your workspace from which you can launch into a previ
 
 Coder provides self-hosted development environments that can be:
 
-1. **Deployed** on your infrastructure (cloud, on-premises, or air-gapped)
-2. **Configured** using Terraform templates for consistency
-3. **Provisioned** instantly by developers or AI coding agents
-4. **Accessed** through browsers, VS Code, or other IDEs
+1. **Deployed** on your infrastructure (cloud, on-premises, or air-gapped)  
+2. **Configured** using Terraform templates for consistency  
+3. **Provisioned** instantly by developers or AI coding agents  
+4. **Accessed** through browsers, VS Code, or other IDEs  
 
 ### Workspace Lifecycle
 
@@ -83,10 +83,10 @@ For this course, a template has been configured: **Agentic AI Nanodegree (m6i.xl
 
 If, at some stage, you need a larger machine, with GPUs or more RAM, you can easily clone and re-configure one of the existing templates - or create a new template from scratch:
 
-1. **Select Template**: Choose from pre-configured nano-degree environments
-2. **Configure Resources**: Adjust CPU, memory, and GPU as needed
-3. **Launch Workspace**: Environment provisions in seconds
-4. **Start Developing**: All tools and dependencies ready immediately
+1. **Select Template**: Choose from pre-configured nano-degree environments  
+2. **Configure Resources**: Adjust CPU, memory, and GPU as needed  
+3. **Launch Workspace**: Environment provisions in seconds  
+4. **Start Developing**: All tools and dependencies ready immediately  
 
 ![Coder Workspace Configuration](images/coder-new-workspace-config.png)
 *Figure 7: Workspace configuration options for resource allocation*
@@ -102,18 +102,18 @@ Click on VSCode (either desktop or browser-based) to start a new instance of you
 
 Dev containers provide:
 
-- **Containerized Environments**: Isolated, reproducible development spaces
-- **Full IDE Integration**: Complete IntelliSense, debugging, and extensions
+- **Containerized Environments**: Isolated, reproducible development spaces  
+- **Full IDE Integration**: Complete IntelliSense, debugging, and extensions  
 - **Configuration as Code**: `devcontainer.json` defines entire environment
-- **Portable Settings**: Personal preferences follow you across workspaces
+- **Portable Settings**: Personal preferences follow you across workspaces  
 
 ### Key Benefits for Nano-Degree Participants
 
-1. **Instant Setup**: No installation required - start coding immediately
-2. **Consistent Environment**: Everyone uses identical configurations
-3. **Pre-installed Tools**: Python, frameworks, libraries all ready
-4. **GPU Access**: Cloud GPUs for AI model training and inference
-5. **Collaboration Ready**: Share workspaces for pair programming or assistance
+1. **Instant Setup**: No installation required - start coding immediately  
+2. **Consistent Environment**: Everyone uses identical configurations  
+3. **Pre-installed Tools**: Python, frameworks, libraries all ready  
+4. **GPU Access**: Cloud GPUs for AI model training and inference  
+5. **Collaboration Ready**: Share workspaces for pair programming or assistance  
 
 ## Nano-Degree Specific Setup
 
@@ -126,10 +126,10 @@ Once your configured workspace has successfully been launched, you should be pre
 
 You can connect to your workspace using various ways. Options include:
 
-- **Browser-based VS Code**: No installation needed
-- **Local VS Code**: Connect via Remote-SSH extension
-- **JetBrains IDEs**: Full support via Gateway
-- **Terminal Access**: SSH for command-line users
+- **Browser-based VS Code**: No installation needed  
+- **Local VS Code**: Connect via Remote-SSH extension  
+- **JetBrains IDEs**: Full support via Gateway  
+- **Terminal Access**: SSH for command-line users  
 
 ### Pre-configured Environments
 
@@ -137,33 +137,33 @@ Within the context of the nano-degree, each module comes with specialized worksp
 
 #### Module 1 - Agent Frameworks
 
-- Python 3.11+
-- LangChain, CrewAI, PydanticAI pre-installed
-- API keys securely managed
-- Sample data and examples loaded
+- Python 3.11+  
+- LangChain, CrewAI, PydanticAI pre-installed  
+- API keys securely managed  
+- Sample data and examples loaded  
 
 #### Module 2 - RAG Architecture
 
-- Vector databases (Chroma, Pinecone clients)
-- Embedding models cached
-- Document processing tools
-- Performance monitoring dashboards
+- Vector databases (Chroma, Pinecone clients)  
+- Embedding models cached  
+- Document processing tools  
+- Performance monitoring dashboards  
 
 #### Module 3 - MCP/ACP/A2A
 
-- Protocol servers configured
-- Network tools for testing
-- Security certificates installed
-- Multi-agent simulation environments
+- Protocol servers configured  
+- Network tools for testing  
+- Security certificates installed  
+- Multi-agent simulation environments  
 
 ### Working with AI Assistants
 
 As a product, Coder workspaces integrate with:
 
-- **Claude**: Anthropic's AI assistant
-- **GitHub Copilot**: Code completion and generation
-- **OpenAI GPT**: Custom agent development
-- **Local LLMs**: Private, secure AI assistance
+- **Claude**: Anthropic's AI assistant  
+- **GitHub Copilot**: Code completion and generation  
+- **OpenAI GPT**: Custom agent development  
+- **Local LLMs**: Private, secure AI assistance  
 
 Inside our corporate network, you have access to **GitHub Copilot** as well as [Coding-Assistant](https://github.com/msc94/coding_assistant?tab=readme-ov-file#readme), a CLI-based open-source coding assistant developed by our very own Marcel Schneider who kindly made his hobby an open-source project. This coding agent can be used from the command line using the preinstalled command *coding-assistant*:
 
@@ -199,10 +199,10 @@ For public access, you'll need to set up your local development environment. Whi
 
 Before beginning the course modules, ensure you have:
 
-1. **Python 3.11+** installed with pip and virtual environment support
-2. **Git** for version control and cloning repositories
-3. **Code editor** (VS Code recommended with Python extension)
-4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
+1. **Python 3.11+** installed with pip and virtual environment support  
+2. **Git** for version control and cloning repositories  
+3. **Code editor** (VS Code recommended with Python extension)  
+4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)  
 
 ### Setup Steps
 

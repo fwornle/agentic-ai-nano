@@ -9,18 +9,18 @@
 
 After completing this module, you will master:
 
-- AST-based code analysis for graph construction
-- Software dependency modeling with GraphRAG
-- Code pattern recognition through graph traversal
-- Integration with development workflow tools
+- AST-based code analysis for graph construction  
+- Software dependency modeling with GraphRAG  
+- Code pattern recognition through graph traversal  
+- Integration with development workflow tools  
 
 ## Understanding Software Knowledge Graphs
 
 Code GraphRAG transforms software repositories into queryable knowledge graphs where:
 
-- **Nodes** represent functions, classes, modules, and dependencies
-- **Edges** represent calls, imports, inheritance, and data flow
-- **Attributes** capture metrics, documentation, and metadata
+- **Nodes** represent functions, classes, modules, and dependencies  
+- **Edges** represent calls, imports, inheritance, and data flow  
+- **Attributes** capture metrics, documentation, and metadata  
 
 This enables complex queries like "Find all functions that use deprecated APIs" or "Trace data flow from input validation to database operations."
 

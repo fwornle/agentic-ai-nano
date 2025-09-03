@@ -325,11 +325,11 @@ We create a structured analytics prompt that focuses on different analytical dim
     Analyze the following data ingestion findings:
     {ingestion_data['data_findings']}
 
-    Perform:
-    1. Pattern identification and trend analysis across data sources
-    2. Statistical analysis of data quality and completeness metrics
-    3. Correlation analysis between different data streams and sources
-    4. Identification of optimization opportunities and performance improvements
+    Perform:  
+    1. Pattern identification and trend analysis across data sources  
+    2. Statistical analysis of data quality and completeness metrics  
+    3. Correlation analysis between different data streams and sources  
+    4. Identification of optimization opportunities and performance improvements  
 
     Provide structured analysis with actionable insights and recommendations.
     """

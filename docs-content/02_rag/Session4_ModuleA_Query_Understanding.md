@@ -11,8 +11,8 @@ This module teaches you to build query understanding systems that read between t
 
 ### Related Modules
 
-- **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)
-- **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)
+- **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)  
+- **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)  
 
 ### Code Files: `src/session4/`
 

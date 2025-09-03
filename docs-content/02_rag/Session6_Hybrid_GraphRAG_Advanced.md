@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Hybrid search architecture design and implementation
-- Fusion algorithms for combining graph and vector results
-- Adaptive scoring and context processing
-- Performance optimization for hybrid systems
+- Hybrid search architecture design and implementation  
+- Fusion algorithms for combining graph and vector results  
+- Adaptive scoring and context processing  
+- Performance optimization for hybrid systems  
 
 ## Understanding Hybrid Graph-Vector Architecture
 
@@ -20,9 +20,9 @@ Traditional approaches force a choice between graph reasoning and vector similar
 
 The key insight is that different query types benefit from different retrieval approaches:
 
-- **Factual queries** benefit from precise graph traversal
-- **Semantic queries** benefit from vector similarity
-- **Complex queries** require both approaches working together
+- **Factual queries** benefit from precise graph traversal  
+- **Semantic queries** benefit from vector similarity  
+- **Complex queries** require both approaches working together  
 
 ## Advanced Hybrid Search System
 

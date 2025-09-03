@@ -3,12 +3,12 @@
 
 ### **Learning Outcomes**
 
-By the end of this session, you will be able to:
-- **Master atomic agent design principles** using modular, composable architecture patterns
-- **Implement type-safe agent components** with schema validation and context providers
-- **Build production-ready atomic systems** with monitoring, error handling, and scaling
-- **Apply LEGO-like composition patterns** for building complex agent workflows from simple components
-- **Deploy enterprise atomic architectures** with service discovery and orchestration
+By the end of this session, you will be able to:  
+- **Master atomic agent design principles** using modular, composable architecture patterns  
+- **Implement type-safe agent components** with schema validation and context providers  
+- **Build production-ready atomic systems** with monitoring, error handling, and scaling  
+- **Apply LEGO-like composition patterns** for building complex agent workflows from simple components  
+- **Deploy enterprise atomic architectures** with service discovery and orchestration  
 
 ### **Chapter Overview**
 
@@ -18,11 +18,11 @@ This session introduces a paradigm shift from monolithic agent frameworks to ato
 
 ![Atomic Agents Architecture](images/atomic-agents.png)
 
-The atomic approach transforms traditional agent development by emphasizing:
-- **Single Responsibility**: Each agent handles one concern perfectly
-- **Type Safety**: Schemas and validation ensure reliable data flow
-- **Composition**: Complex behaviors emerge from simple component interactions
-- **Observability**: Built-in monitoring and debugging capabilities
+The atomic approach transforms traditional agent development by emphasizing:  
+- **Single Responsibility**: Each agent handles one concern perfectly  
+- **Type Safety**: Schemas and validation ensure reliable data flow  
+- **Composition**: Complex behaviors emerge from simple component interactions  
+- **Observability**: Built-in monitoring and debugging capabilities  
 
 ---
 
@@ -34,11 +34,11 @@ Traditional agent frameworks often create monolithic systems where functionality
 
 ### The LEGO Metaphor
 
-Think of atomic agents like LEGO blocks:
-- Each block has a specific shape and purpose (single responsibility)
-- Blocks connect through standardized interfaces (type-safe schemas)
-- Complex structures emerge from simple combinations (compositional architecture)
-- Blocks are reusable across different projects (modularity)
+Think of atomic agents like LEGO blocks:  
+- Each block has a specific shape and purpose (single responsibility)  
+- Blocks connect through standardized interfaces (type-safe schemas)  
+- Complex structures emerge from simple combinations (compositional architecture)  
+- Blocks are reusable across different projects (modularity)  
 
 ### **Step 1.1: Core Atomic Agent Structure**
 
@@ -229,11 +229,11 @@ class TextProcessorAgent(AtomicAgent[TextInput, TextOutput]):
             )
 ```
 
-This implementation demonstrates key atomic agent principles:
-- **Type safety** through schema validation
-- **Comprehensive error handling** with structured exceptions
-- **Performance monitoring** with execution metrics
-- **State tracking** with execution counts
+This implementation demonstrates key atomic agent principles:  
+- **Type safety** through schema validation  
+- **Comprehensive error handling** with structured exceptions  
+- **Performance monitoring** with execution metrics  
+- **State tracking** with execution counts  
 
 ### **Step 2.2: Core Processing Logic**
 
@@ -496,10 +496,10 @@ class AtomicParallelExecutor:
             )
 ```
 
-**Key Benefits:**
-- **Concurrency control** with semaphores prevents resource exhaustion
-- **Error isolation** allows partial success in parallel operations
-- **Performance optimization** through concurrent execution of independent tasks
+**Key Benefits:**  
+- **Concurrency control** with semaphores prevents resource exhaustion  
+- **Error isolation** allows partial success in parallel operations  
+- **Performance optimization** through concurrent execution of independent tasks  
 
 ### **Step 3.3: CLI Integration Pattern**
 
@@ -1004,11 +1004,11 @@ Test your understanding of atomic agent architecture and implementation patterns
 <details>
 <summary>Show Answer</summary>
 
-The four core principles are:
-1. **Single Responsibility** - Each agent handles one specific concern perfectly
-2. **Type Safety** - Schemas and validation ensure reliable data flow between components
-3. **Composition** - Complex behaviors emerge from combining simple, interoperable components
-4. **Observability** - Built-in monitoring, logging, and debugging capabilities throughout the system
+The four core principles are:  
+1. **Single Responsibility** - Each agent handles one specific concern perfectly  
+2. **Type Safety** - Schemas and validation ensure reliable data flow between components  
+3. **Composition** - Complex behaviors emerge from combining simple, interoperable components  
+4. **Observability** - Built-in monitoring, logging, and debugging capabilities throughout the system  
 
 These principles ensure atomic agents are predictable, testable, maintainable, and scalable from simple tasks to enterprise systems.
 </details>
@@ -1018,12 +1018,12 @@ These principles ensure atomic agents are predictable, testable, maintainable, a
 <details>
 <summary>Show Answer</summary>
 
-AtomicContext provides:
-- **Request tracking** with unique request IDs for distributed tracing
-- **User session management** linking operations to specific users and sessions
-- **Timestamp tracking** for performance monitoring and debugging
-- **Metadata propagation** for additional context throughout the pipeline
-- **Error correlation** enabling detailed error analysis across composed agents
+AtomicContext provides:  
+- **Request tracking** with unique request IDs for distributed tracing  
+- **User session management** linking operations to specific users and sessions  
+- **Timestamp tracking** for performance monitoring and debugging  
+- **Metadata propagation** for additional context throughout the pipeline  
+- **Error correlation** enabling detailed error analysis across composed agents  
 
 This context threading enables comprehensive logging, monitoring, and debugging across atomic components in production systems.
 </details>
@@ -1034,11 +1034,11 @@ This context threading enables comprehensive logging, monitoring, and debugging 
 <summary>Show Answer</summary>
 
 The generic type system (`AtomicAgent[T_Input, T_Output]`) provides:
-- **Compile-time type checking** preventing runtime schema mismatches
-- **IDE support** with autocomplete and type hints for faster development
-- **Self-documenting interfaces** through explicit input/output schemas
-- **Validation guarantees** ensuring data integrity at component boundaries
-- **Testability** through clear contracts and mocking capabilities
+- **Compile-time type checking** preventing runtime schema mismatches  
+- **IDE support** with autocomplete and type hints for faster development  
+- **Self-documenting interfaces** through explicit input/output schemas  
+- **Validation guarantees** ensuring data integrity at component boundaries  
+- **Testability** through clear contracts and mocking capabilities  
 
 This approach catches errors during development rather than production and makes agent composition predictable and reliable.
 </details>
@@ -1048,12 +1048,12 @@ This approach catches errors during development rather than production and makes
 <details>
 <summary>Show Answer</summary>
 
-AtomicPipeline provides:
-- **Type-safe data flow** with validation at each step
-- **Execution tracing** recording performance and success/failure of each step
-- **Error isolation** preventing cascading failures and providing detailed error context
-- **Context enrichment** through dependency injection of external resources
-- **Rollback capabilities** through structured error handling and state management
+AtomicPipeline provides:  
+- **Type-safe data flow** with validation at each step  
+- **Execution tracing** recording performance and success/failure of each step  
+- **Error isolation** preventing cascading failures and providing detailed error context  
+- **Context enrichment** through dependency injection of external resources  
+- **Rollback capabilities** through structured error handling and state management  
 
 Unlike traditional pipelines, atomic pipelines provide comprehensive observability, error handling, and type safety throughout the execution flow.
 </details>
@@ -1063,12 +1063,12 @@ Unlike traditional pipelines, atomic pipelines provide comprehensive observabili
 <details>
 <summary>Show Answer</summary>
 
-Context providers enable:
-- **Dependency injection** decoupling agents from external resources
-- **Environment-specific configuration** (development, staging, production)
-- **Resource pooling** sharing expensive resources like database connections
-- **Security isolation** managing credentials and access permissions centrally
-- **Testing simplification** through mock providers and test fixtures
+Context providers enable:  
+- **Dependency injection** decoupling agents from external resources  
+- **Environment-specific configuration** (development, staging, production)  
+- **Resource pooling** sharing expensive resources like database connections  
+- **Security isolation** managing credentials and access permissions centrally  
+- **Testing simplification** through mock providers and test fixtures  
 
 This pattern makes atomic agents environment-agnostic and easier to test, deploy, and maintain across different contexts.
 </details>
@@ -1078,12 +1078,12 @@ This pattern makes atomic agents environment-agnostic and easier to test, deploy
 <details>
 <summary>Show Answer</summary>
 
-The orchestrator provides:
-- **Service discovery** enabling dynamic service registration and discovery
-- **Health monitoring** with automatic health checks and failure detection
-- **Load balancing** distributing requests across available service instances
-- **Metrics collection** tracking performance, errors, and system health
-- **Graceful shutdown** handling service lifecycle management properly
+The orchestrator provides:  
+- **Service discovery** enabling dynamic service registration and discovery  
+- **Health monitoring** with automatic health checks and failure detection  
+- **Load balancing** distributing requests across available service instances  
+- **Metrics collection** tracking performance, errors, and system health  
+- **Graceful shutdown** handling service lifecycle management properly  
 
 This infrastructure supports enterprise-grade deployments with high availability, monitoring, and scalability requirements.
 </details>
@@ -1093,12 +1093,12 @@ This infrastructure supports enterprise-grade deployments with high availability
 <details>
 <summary>Show Answer</summary>
 
-Parallel execution provides:
-- **Concurrency control** preventing resource exhaustion through semaphores
-- **Performance optimization** executing independent operations simultaneously
-- **Error isolation** allowing partial success when some operations fail
-- **Resource efficiency** maximizing utilization of available compute resources
-- **Scalability** supporting high-throughput scenarios with multiple concurrent requests
+Parallel execution provides:  
+- **Concurrency control** preventing resource exhaustion through semaphores  
+- **Performance optimization** executing independent operations simultaneously  
+- **Error isolation** allowing partial success when some operations fail  
+- **Resource efficiency** maximizing utilization of available compute resources  
+- **Scalability** supporting high-throughput scenarios with multiple concurrent requests  
 
 For atomic systems processing independent operations, parallel execution can dramatically improve performance while maintaining error isolation and resource management.
 </details>
@@ -1108,12 +1108,12 @@ For atomic systems processing independent operations, parallel execution can dra
 <details>
 <summary>Show Answer</summary>
 
-CLI integration provides:
-- **Developer productivity** through command-line automation and testing
-- **CI/CD integration** enabling automated pipelines and deployments
-- **Configuration management** through file-based pipeline definitions
-- **Debugging capabilities** with detailed output and error reporting
-- **Scripting support** for complex workflows and batch operations
+CLI integration provides:  
+- **Developer productivity** through command-line automation and testing  
+- **CI/CD integration** enabling automated pipelines and deployments  
+- **Configuration management** through file-based pipeline definitions  
+- **Debugging capabilities** with detailed output and error reporting  
+- **Scripting support** for complex workflows and batch operations  
 
 This makes atomic agents accessible to developers, DevOps teams, and automated systems without requiring custom integration code.
 </details>
@@ -1123,13 +1123,13 @@ This makes atomic agents accessible to developers, DevOps teams, and automated s
 <details>
 <summary>Show Answer</summary>
 
-The architecture addresses:
-- **Reliability** through structured error handling and failover mechanisms
-- **Scalability** via service discovery, load balancing, and horizontal scaling
-- **Observability** with comprehensive metrics, logging, and tracing
-- **Maintainability** through clear interfaces, single responsibility, and composability
-- **Security** via context providers and centralized credential management
-- **Performance** through parallel execution, connection pooling, and monitoring
+The architecture addresses:  
+- **Reliability** through structured error handling and failover mechanisms  
+- **Scalability** via service discovery, load balancing, and horizontal scaling  
+- **Observability** with comprehensive metrics, logging, and tracing  
+- **Maintainability** through clear interfaces, single responsibility, and composability  
+- **Security** via context providers and centralized credential management  
+- **Performance** through parallel execution, connection pooling, and monitoring  
 
 These patterns ensure atomic agent systems meet enterprise production requirements for reliability, scale, and maintainability.
 </details>
@@ -1141,20 +1141,20 @@ These patterns ensure atomic agent systems meet enterprise production requiremen
 
 Compared to previous frameworks:
 
-**vs. Bare Metal (Session 1):**
-- Atomic agents provide structured composition vs. custom implementations
-- Built-in type safety and validation vs. manual error handling
-- Production-ready patterns vs. educational foundations
+**vs. Bare Metal (Session 1):**  
+- Atomic agents provide structured composition vs. custom implementations  
+- Built-in type safety and validation vs. manual error handling  
+- Production-ready patterns vs. educational foundations  
 
-**vs. LangChain (Session 2):**
-- Explicit schemas vs. flexible but less predictable interfaces
-- Atomic composition vs. chain-based workflows
-- Type safety vs. runtime validation
+**vs. LangChain (Session 2):**  
+- Explicit schemas vs. flexible but less predictable interfaces  
+- Atomic composition vs. chain-based workflows  
+- Type safety vs. runtime validation  
 
-**vs. PydanticAI (Session 5):**
-- Microservice architecture vs. monolithic agents
-- Service discovery and orchestration vs. single-agent deployments
-- Horizontal scaling vs. vertical optimization
+**vs. PydanticAI (Session 5):**  
+- Microservice architecture vs. monolithic agents  
+- Service discovery and orchestration vs. single-agent deployments  
+- Horizontal scaling vs. vertical optimization  
 
 Atomic agents excel at building distributed, scalable systems from simple, composable components with enterprise-grade reliability and observability.
 </details>
@@ -1165,22 +1165,22 @@ Atomic agents excel at building distributed, scalable systems from simple, compo
 
 This session introduced atomic agent architecture as the next evolution in agent system design. You learned to build composable, type-safe systems that scale from simple tasks to enterprise deployments.
 
-**Key Achievements:**
-- **Atomic Design Principles**: Single responsibility, type safety, composition, and observability
-- **Type-Safe Composition**: Building complex workflows from simple, validated components
-- **Production Patterns**: Orchestration, service discovery, health monitoring, and load balancing
-- **Enterprise Features**: Context providers, parallel execution, CLI integration, and metrics collection
+**Key Achievements:**  
+- **Atomic Design Principles**: Single responsibility, type safety, composition, and observability  
+- **Type-Safe Composition**: Building complex workflows from simple, validated components  
+- **Production Patterns**: Orchestration, service discovery, health monitoring, and load balancing  
+- **Enterprise Features**: Context providers, parallel execution, CLI integration, and metrics collection  
 
-**Production Benefits:**
-- **Reliability**: Structured error handling and failover mechanisms
-- **Scalability**: Horizontal scaling through service orchestration
-- **Maintainability**: Clear interfaces and atomic component isolation
-- **Observability**: Comprehensive monitoring and debugging capabilities
+**Production Benefits:**  
+- **Reliability**: Structured error handling and failover mechanisms  
+- **Scalability**: Horizontal scaling through service orchestration  
+- **Maintainability**: Clear interfaces and atomic component isolation  
+- **Observability**: Comprehensive monitoring and debugging capabilities  
 
-**Next Steps:**
-- Practice building atomic agent pipelines for specific use cases
-- Implement custom context providers for your infrastructure
-- Deploy atomic systems with monitoring and alerting
-- Explore advanced composition patterns for complex workflows
+**Next Steps:**  
+- Practice building atomic agent pipelines for specific use cases  
+- Implement custom context providers for your infrastructure  
+- Deploy atomic systems with monitoring and alerting  
+- Explore advanced composition patterns for complex workflows  
 
 Atomic agents represent a paradigm shift toward modular, composable agent architecture that maintains simplicity while enabling enterprise-scale complexity. The patterns learned here form the foundation for building robust, maintainable agent systems that grow with your requirements.

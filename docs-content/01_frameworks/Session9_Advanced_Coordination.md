@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Advanced consensus algorithms for distributed multi-agent decision making
-- Sophisticated auction mechanisms with quality-based bidding strategies
-- Complex hierarchical coordination patterns for enterprise-scale systems
-- Advanced communication protocols with guaranteed delivery and ordering
+- Advanced consensus algorithms for distributed multi-agent decision making  
+- Sophisticated auction mechanisms with quality-based bidding strategies  
+- Complex hierarchical coordination patterns for enterprise-scale systems  
+- Advanced communication protocols with guaranteed delivery and ordering  
 
 ---
 

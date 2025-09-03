@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Google Cloud Run deployment with FastAPI HTTP adapters
-- AWS Lambda deployment with event-driven architecture
-- Infrastructure as Code with Terraform and SAM templates
-- Multi-cloud deployment strategies and considerations
+- Google Cloud Run deployment with FastAPI HTTP adapters  
+- AWS Lambda deployment with event-driven architecture  
+- Infrastructure as Code with Terraform and SAM templates  
+- Multi-cloud deployment strategies and considerations  
 
 ## Google Cloud Run Deployment
 
@@ -22,11 +22,11 @@ Google Cloud Run represents a fundamental shift in how we think about production
 
 **Cloud Run Benefits:**
 
-- **Serverless container deployment**: You provide the container, Google manages everything else
-- **Automatic scaling**: From zero to thousands of instances based on demand
-- **Pay-per-use billing**: Only pay for the compute time you actually use
-- **Managed infrastructure**: Google handles load balancing, SSL, monitoring, and more
-- **Global distribution**: Deploy to multiple regions with a single command
+- **Serverless container deployment**: You provide the container, Google manages everything else  
+- **Automatic scaling**: From zero to thousands of instances based on demand  
+- **Pay-per-use billing**: Only pay for the compute time you actually use  
+- **Managed infrastructure**: Google handles load balancing, SSL, monitoring, and more  
+- **Global distribution**: Deploy to multiple regions with a single command  
 
 ### Building the Cloud Run HTTP Adapter
 
@@ -295,16 +295,16 @@ AWS Lambda represents a fundamentally different approach to production deploymen
 
 **Lambda Advantages:**
 
-- **Function-based execution**: Pay only for actual compute time, down to the millisecond
-- **Event-driven responses**: Integrate with AWS services for trigger-based execution
-- **Zero server management**: AWS handles all infrastructure concerns
-- **Automatic scaling**: From zero to thousands of concurrent executions instantly
+- **Function-based execution**: Pay only for actual compute time, down to the millisecond  
+- **Event-driven responses**: Integrate with AWS services for trigger-based execution  
+- **Zero server management**: AWS handles all infrastructure concerns  
+- **Automatic scaling**: From zero to thousands of concurrent executions instantly  
 
 **Lambda Considerations:**
 
-- **Cold start latency**: First invocation after idle time includes initialization overhead
-- **15-minute execution limit**: Long-running processes need different architectural approaches
-- **Stateless execution**: Each invocation starts fresh - no persistent state between calls
+- **Cold start latency**: First invocation after idle time includes initialization overhead  
+- **15-minute execution limit**: Long-running processes need different architectural approaches  
+- **Stateless execution**: Each invocation starts fresh - no persistent state between calls  
 
 ### Building the Lambda Handler
 

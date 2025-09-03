@@ -78,19 +78,19 @@ Now your agents talk directly to each other, like colleagues in the same office.
 
 ACP defines three core layers based on the IBM BeeAI standard, each solving a specific coordination challenge:
 
-1. **Discovery Layer**: Like having a receptionist who knows everyone's capabilities—agents broadcast what they can do through local networks without needing external directories
-2. **Communication Layer**: Pure RESTful interfaces that any system can understand, creating universal compatibility
-3. **Coordination Layer**: Event-driven patterns that orchestrate complex workflows faster than human thought
+1. **Discovery Layer**: Like having a receptionist who knows everyone's capabilities—agents broadcast what they can do through local networks without needing external directories  
+2. **Communication Layer**: Pure RESTful interfaces that any system can understand, creating universal compatibility  
+3. **Coordination Layer**: Event-driven patterns that orchestrate complex workflows faster than human thought  
 
 ### Why This Matters in the Real World
 
 The benefits extend far beyond technical elegance:
 
-- **Decentralized Discovery**: Agents find each other naturally, like neighbors introducing themselves
-- **RESTful Communication**: No proprietary protocols—if it speaks HTTP, it can join the conversation
-- **Event-Driven Architecture**: Real-time coordination with the responsiveness of local networks
-- **Autonomous Operation**: Full functionality even when the internet disappears
-- **Sub-Millisecond Latency**: Local communication that's faster than human perception
+- **Decentralized Discovery**: Agents find each other naturally, like neighbors introducing themselves  
+- **RESTful Communication**: No proprietary protocols—if it speaks HTTP, it can join the conversation  
+- **Event-Driven Architecture**: Real-time coordination with the responsiveness of local networks  
+- **Autonomous Operation**: Full functionality even when the internet disappears  
+- **Sub-Millisecond Latency**: Local communication that's faster than human perception  
 
 ---
 
@@ -538,11 +538,11 @@ This peer registration mechanism enables automatic network formation without cen
 Imagine agents as new neighbors moving into a digital neighborhood:
 
 ```
-1. Agent A (the newcomer) starts up
-2. Agent A introduces itself to known neighbors (ports 8001, 8002)
-3. Neighbors remember Agent A's capabilities in their local address books
-4. When Agent A needs help, neighbors can recommend the right specialist
-5. Agent A can now collaborate with the entire neighborhood
+1. Agent A (the newcomer) starts up  
+2. Agent A introduces itself to known neighbors (ports 8001, 8002)  
+3. Neighbors remember Agent A's capabilities in their local address books  
+4. When Agent A needs help, neighbors can recommend the right specialist  
+5. Agent A can now collaborate with the entire neighborhood  
 ```
 
 This decentralized approach eliminates single points of failure while maintaining network coherence.
@@ -634,9 +634,9 @@ This test client acts like a quality inspector, verifying that all the social in
 ```
 🧪 ACP Agent Network Test Suite
 🔍 Testing Agent Discovery...
-✅ Found 2 agents:
-  - DataProcessor (capabilities: ['process_csv', 'analyze_data'])
-  - TextProcessor (capabilities: ['summarize_text', 'extract_keywords'])
+✅ Found 2 agents:  
+  - DataProcessor (capabilities: ['process_csv', 'analyze_data'])  
+  - TextProcessor (capabilities: ['summarize_text', 'extract_keywords'])  
 
 📊 Testing Data Processing Agent...
    ✅ Data processing successful

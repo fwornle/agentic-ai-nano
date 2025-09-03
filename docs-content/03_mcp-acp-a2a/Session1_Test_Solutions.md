@@ -181,11 +181,11 @@ def find_warmest_city(cities: List[str]) -> Dict:
 
 ### Key Learning Points:
 
-1. **Input Validation:** Always check for empty lists and invalid input types
-2. **Error Handling:** Gracefully handle cases where weather data isn't available
-3. **Data Structure:** Return consistent, structured responses
-4. **Metadata:** Include useful information about the comparison process
-5. **Type Safety:** Use proper type hints and validate input types
+1. **Input Validation:** Always check for empty lists and invalid input types  
+2. **Error Handling:** Gracefully handle cases where weather data isn't available  
+3. **Data Structure:** Return consistent, structured responses  
+4. **Metadata:** Include useful information about the comparison process  
+5. **Type Safety:** Use proper type hints and validate input types  
 
 ### Test Cases You Should Consider:
 
@@ -213,44 +213,44 @@ Once you've mastered the basic solution, try these additional challenges:
 
 2. **Find Coldest City:** Create a companion function `find_coldest_city()` that finds the city with the lowest temperature.
 
-3. **Weather Ranking:** Create a function that returns all cities sorted by temperature from warmest to coldest.
+3. **Weather Ranking:** Create a function that returns all cities sorted by temperature from warmest to coldest.  
 
-4. **Condition Filtering:** Add the ability to filter cities by weather condition (e.g., only consider cities with "Sunny" weather).
+4. **Condition Filtering:** Add the ability to filter cities by weather condition (e.g., only consider cities with "Sunny" weather).  
 
-5. **Advanced Comparison:** Include additional factors like humidity or precipitation chance in the comparison logic.
+5. **Advanced Comparison:** Include additional factors like humidity or precipitation chance in the comparison logic.  
 
 ---
 
 ## Scoring Guide
 
-- **9-10 correct**: Excellent understanding of MCP server fundamentals
-- **7-8 correct**: Good grasp of the core concepts, review specific areas where questions were missed
-- **5-6 correct**: Basic understanding present, recommend reviewing the session content before proceeding
-- **Below 5**: Recommend thoroughly reviewing Session 1 content and hands-on exercises
+- **9-10 correct**: Excellent understanding of MCP server fundamentals  
+- **7-8 correct**: Good grasp of the core concepts, review specific areas where questions were missed  
+- **5-6 correct**: Basic understanding present, recommend reviewing the session content before proceeding  
+- **Below 5**: Recommend thoroughly reviewing Session 1 content and hands-on exercises  
 
 ## Key Concepts Review
 
 If you missed questions in these areas, review the corresponding sections:
 
-### MCP Architecture (Questions 1, 7, 10):
-- Review "MCP Server Capabilities" section
-- Focus on the difference between tools, resources, and prompts
-- Study the advantages of standardized protocols
+### MCP Architecture (Questions 1, 7, 10):  
+- Review "MCP Server Capabilities" section  
+- Focus on the difference between tools, resources, and prompts  
+- Study the advantages of standardized protocols  
 
-### Implementation Details (Questions 2, 5, 6):
-- Review the FastMCP framework syntax
-- Focus on type hints and their importance
-- Study error handling best practices
+### Implementation Details (Questions 2, 5, 6):  
+- Review the FastMCP framework syntax  
+- Focus on type hints and their importance  
+- Study error handling best practices  
 
-### Development Tools (Questions 3, 8):
-- Review the MCP Inspector section
-- Practice using the inspector tool
-- Study debugging and validation workflows
+### Development Tools (Questions 3, 8):  
+- Review the MCP Inspector section  
+- Practice using the inspector tool  
+- Study debugging and validation workflows  
 
-### Industry Context (Questions 4, 9):
-- Review transport mechanisms
-- Study real-world adoption cases
-- Focus on enterprise benefits
+### Industry Context (Questions 4, 9):  
+- Review transport mechanisms  
+- Study real-world adoption cases  
+- Focus on enterprise benefits  
 
 ---
 

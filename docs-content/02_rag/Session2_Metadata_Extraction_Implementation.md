@@ -9,10 +9,10 @@
 
 After completing this implementation guide, you will:
 
-- Extract entities, keywords, and topics from document content
-- Build domain-specific pattern recognition systems
-- Implement difficulty assessment algorithms
-- Create metadata-enhanced chunking pipelines
+- Extract entities, keywords, and topics from document content  
+- Build domain-specific pattern recognition systems  
+- Implement difficulty assessment algorithms  
+- Create metadata-enhanced chunking pipelines  
 
 ---
 
@@ -676,24 +676,24 @@ def _assess_difficulty_standardized(self, text: str) -> str:
 
 ### Best Practices
 
-1. **Pattern Testing**: Validate patterns against representative content samples
-2. **Domain Adaptation**: Customize extractors for specific content domains
-3. **Quality Validation**: Implement quality checks for extracted metadata
-4. **Performance Monitoring**: Track extraction accuracy and processing time
+1. **Pattern Testing**: Validate patterns against representative content samples  
+2. **Domain Adaptation**: Customize extractors for specific content domains  
+3. **Quality Validation**: Implement quality checks for extracted metadata  
+4. **Performance Monitoring**: Track extraction accuracy and processing time  
 
 ### Performance Optimization
 
-1. **Pattern Compilation**: Pre-compile regex patterns for repeated use
-2. **Batch Processing**: Process multiple documents together efficiently
-3. **Caching**: Cache extraction results for repeated content
-4. **Lazy Loading**: Extract metadata on-demand rather than upfront
+1. **Pattern Compilation**: Pre-compile regex patterns for repeated use  
+2. **Batch Processing**: Process multiple documents together efficiently  
+3. **Caching**: Cache extraction results for repeated content  
+4. **Lazy Loading**: Extract metadata on-demand rather than upfront  
 
 ### Quality Assurance
 
-1. **Validation Rules**: Implement checks for extracted metadata quality
-2. **Human Review**: Sample and review extraction results regularly
-3. **Feedback Integration**: Use retrieval performance to improve extraction
-4. **Domain Testing**: Test across different content types and domains
+1. **Validation Rules**: Implement checks for extracted metadata quality  
+2. **Human Review**: Sample and review extraction results regularly  
+3. **Feedback Integration**: Use retrieval performance to improve extraction  
+4. **Domain Testing**: Test across different content types and domains  
 ---
 
 ## 🧭 Navigation

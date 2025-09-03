@@ -114,19 +114,19 @@ D) Flexibility to combine multiple execution patterns for complex scenarios ✅
 
 ## Scoring Guide
 
-- **10 correct**: Expert level - Ready for enterprise workflow orchestration
-- **8-9 correct**: Proficient - Strong understanding of advanced workflow patterns
-- **6-7 correct**: Competent - Good grasp of workflow optimization concepts
-- **4-5 correct**: Developing - Review parallel processing and fault recovery sections
-- **Below 4**: Beginner - Revisit workflow fundamentals and execution patterns
+- **10 correct**: Expert level - Ready for enterprise workflow orchestration  
+- **8-9 correct**: Proficient - Strong understanding of advanced workflow patterns  
+- **6-7 correct**: Competent - Good grasp of workflow optimization concepts  
+- **4-5 correct**: Developing - Review parallel processing and fault recovery sections  
+- **Below 4**: Beginner - Revisit workflow fundamentals and execution patterns  
 
 ## Key Concepts Summary
 
-1. **Workflow Patterns**: Sequential, parallel, conditional, and hybrid execution models
-2. **Fault Recovery**: Comprehensive error handling with rollback and compensation
-3. **Adaptive Optimization**: Performance-driven workflow improvement over time
-4. **Resource Management**: Preventing contention through proper allocation
-5. **Observability**: Multi-metric monitoring for system health and optimization
+1. **Workflow Patterns**: Sequential, parallel, conditional, and hybrid execution models  
+2. **Fault Recovery**: Comprehensive error handling with rollback and compensation  
+3. **Adaptive Optimization**: Performance-driven workflow improvement over time  
+4. **Resource Management**: Preventing contention through proper allocation  
+5. **Observability**: Multi-metric monitoring for system health and optimization  
 
 ---
 
@@ -641,11 +641,11 @@ if __name__ == "__main__":
 
 ### Key Features Implemented:
 
-1. **Parallel Processing**: Simultaneous extraction of text, images, tables, and metadata
-2. **Conditional Routing**: Dynamic decision-making based on quality scores and priorities
-3. **Human Review Integration**: Automatic escalation for low-quality extractions
-4. **Fault Recovery**: Comprehensive error handling with rollback capabilities
-5. **Adaptive Optimization**: Performance metrics collection for continuous improvement
+1. **Parallel Processing**: Simultaneous extraction of text, images, tables, and metadata  
+2. **Conditional Routing**: Dynamic decision-making based on quality scores and priorities  
+3. **Human Review Integration**: Automatic escalation for low-quality extractions  
+4. **Fault Recovery**: Comprehensive error handling with rollback capabilities  
+5. **Adaptive Optimization**: Performance metrics collection for continuous improvement  
 
 This advanced workflow demonstrates sophisticated coordination patterns while maintaining fault tolerance and quality assurance.
 

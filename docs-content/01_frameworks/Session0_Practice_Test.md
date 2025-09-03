@@ -32,22 +32,71 @@ B) CrewAI
 C) LangChain  
 D) Agno  
 
-## Test Solutions
+**Question 6:** The Planning pattern is most useful for:  
+A) Simple query-response interactions  
+B) Real-time data processing  
+C) Static content generation  
+D) Complex multi-step workflows  
 
-**Answer 1:** D) Reflection
-The Reflection pattern specifically involves agents evaluating and improving their own outputs through self-critique and revision cycles.
+**Question 7:** In the Tool Use pattern, what determines which tool an agent selects?  
+A) Random selection  
+B) Execution speed  
+C) Task requirements and tool descriptions  
+D) Tool availability  
 
-**Answer 2:** D) Reasoning and Acting
-ReAct combines reasoning (thinking through problems step-by-step) with acting (using tools and taking actions based on that reasoning).
+**Question 8:** Which framework uses a graph-based architecture for precise control flow?  
+A) PydanticAI  
+B) CrewAI  
+C) LangGraph  
+D) Agno  
 
-**Answer 3:** A) PydanticAI
-PydanticAI is designed for high-performance applications with type safety and minimal resource overhead, making it ideal for production systems.
+**Question 9:** The primary benefit of using agent frameworks over bare metal implementation is:  
+A) Pre-built components and patterns  
+B) Simpler deployment  
+C) Lower costs  
+D) Better performance  
 
-**Answer 4:** C) Specialized expertise collaboration
-The Multi-Agent pattern's primary advantage is enabling specialized agents to collaborate, each bringing domain expertise to complex problems.
+**Question 10:** Which collaboration pattern involves agents working on different aspects simultaneously?  
+A) Parallel Processing  
+B) Hierarchical Teams  
+C) Debate and Consensus  
+D) Sequential Processing  
 
-**Answer 5:** A) PydanticAI
-PydanticAI emphasizes type safety through schema validation, similar to how Pydantic provides type validation for Python applications.
+**Question 11:** When would you choose bare metal Python implementation over frameworks?  
+A) Enterprise integration  
+B) Production applications  
+C) Team collaboration projects  
+D) Learning fundamentals and custom research  
+
+**Question 12:** The reflection pattern typically involves how many phases?  
+A) 2 phases: Generate and Reflect  
+B) 4 phases: Generate, Reflect, Refine, Validate  
+C) 5 phases: Generate, Reflect, Refine, Test, Deploy  
+D) 3 phases: Generate, Reflect, Refine  
+
+**Question 13:** What makes ADK particularly suitable for enterprise applications?  
+A) Fastest execution speed  
+B) Built-in security, monitoring, and Google Cloud integration  
+C) Open source licensing  
+D) Simplest learning curve  
+
+**Question 14:** In multi-agent systems, what is the role of a "Manager Agent"?  
+A) Store data and state  
+B) Provide user interface  
+C) Coordinate worker agents and manage interactions  
+D) Execute all tasks directly  
+
+**Question 15:** Which pattern would be most appropriate for a task requiring real-time stock price analysis?  
+A) Multi-Agent (for collaboration)  
+B) Reflection (for self-improvement)  
+C) Tool Use (for accessing live data APIs)  
+D) Planning (for multi-step workflows)  
+
+---
+
+## 🔗 Solutions
+
+Check your answers: [**📝 Session 0 Test Solutions →**](Session0_Test_Solutions.md)
 ---
 
 ## 🧭 Navigation
