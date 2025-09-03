@@ -71,9 +71,10 @@ D) Query failures or response time degradation affecting user experience ✅
 
 ## Answer Summary  
 1. C  2. B  3. C  4. B  5. B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 

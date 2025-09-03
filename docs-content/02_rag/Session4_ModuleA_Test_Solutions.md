@@ -41,9 +41,10 @@ C) It speeds up all queries
 D) It reduces memory usage  
 
 **Explanation:** Query complexity assessment enables dynamic resource allocation and technique selection. Simple queries can use lightweight processing, while complex analytical queries may require more sophisticated reasoning, multiple retrieval rounds, or specialized processing pipelines to generate accurate responses.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
 

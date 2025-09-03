@@ -759,9 +759,10 @@ You now understand the full spectrum of RAG architectures, from basic three-stag
 - Session 6: Graph-Based RAG - Deep dive into knowledge graph integration  
 - Session 7: Agentic RAG Systems - Advanced multi-agent orchestration  
 - Session 9: Production RAG - Enterprise deployment and scaling
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Next:** [Session 1 - Foundations →](Session1_*.md)
 

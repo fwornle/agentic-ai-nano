@@ -23,9 +23,10 @@ This isn't just another tutorial. By understanding the Data Processing Assistant
 You're not just learning theory - you're examining a system that handles the same orchestration challenges as professional data engineering environments.
 
 **Repository**:
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 0 - Introduction →](Session0_*.md)  
 **Next:** [Session 2 - Implementation →](Session2_*.md)

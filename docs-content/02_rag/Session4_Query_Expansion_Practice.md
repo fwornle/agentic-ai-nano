@@ -522,9 +522,10 @@ def search_with_expansion(self, query: str, vector_store,
 2. **Performance Comparison**: Compare expansion results with baseline search  
 3. **Query Complexity**: Test with increasingly complex multi-part questions  
 4. **Expansion Quality**: Develop metrics to assess expansion effectiveness
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
 **Next:** [Session 5 - Type-Safe Development →](Session5_*.md)

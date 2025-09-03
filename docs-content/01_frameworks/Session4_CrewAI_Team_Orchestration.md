@@ -173,9 +173,10 @@ C) They process data faster
 D) They require fewer computational resources  
 
 [View Solutions →](Session4_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
 **Next:** [Session 5 - Type-Safe Development →](Session5_*.md)

@@ -174,9 +174,10 @@ This comprehensive RAG expertise positions you for roles in:
 - **Data Engineering**: Implementing knowledge management solutions  
 - **DevOps/MLOps**: Deploying and operating AI systems in production  
 - **Technical Leadership**: Leading AI transformation initiatives
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 9 Test Questions →](Session9_*.md#multiple-choice-test)
 

@@ -51,9 +51,10 @@ class ProcessingResult:
     success_count: int
     failure_count: int
     failed_documents: List
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 0 - Introduction →](Session0_*.md)  
 **Next:** [Session 2 - Implementation →](Session2_*.md)

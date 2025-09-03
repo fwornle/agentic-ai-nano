@@ -178,9 +178,10 @@ C) Text length optimization
 D) User interface quality  
 
 [View Solutions →](Session5_ModuleA_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
 **Next:** [Session 6 - Modular Architecture →](Session6_*.md)

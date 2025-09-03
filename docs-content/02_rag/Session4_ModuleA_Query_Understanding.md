@@ -390,9 +390,10 @@ C) It speeds up all queries
 D) It reduces memory usage  
 
 [View Solutions →](Session4_ModuleA_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
 **Next:** [Session 5 - Type-Safe Development →](Session5_*.md)

@@ -549,9 +549,10 @@ C) Only error counts
 D) Only resource utilization  
 
 [View Solutions →](Session1_ModuleB_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 0 - Introduction →](Session0_*.md)  
 **Next:** [Session 2 - Implementation →](Session2_*.md)

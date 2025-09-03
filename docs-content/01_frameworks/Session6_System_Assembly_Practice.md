@@ -483,9 +483,10 @@ Or dive into specialized advanced modules:
 
 - ⚙️ [Module A: Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)  
 - ⚙️ [Module B: Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
 **Next:** [Session 7 - Agent Systems →](Session7_*.md)

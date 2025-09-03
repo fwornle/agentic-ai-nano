@@ -71,9 +71,10 @@ D) When you want faster traversal
 
 ## Answer Summary  
 1. B  2. C  3. B  4. B  5. B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 

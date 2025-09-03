@@ -635,9 +635,10 @@ C) File format and structure comparison
 D) Processing time and resource utilization  
 
 [View Solutions →](Session2_ModuleA_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 1 - Foundations →](Session1_*.md)  
 **Next:** [Session 3 - Advanced Patterns →](Session3_*.md)

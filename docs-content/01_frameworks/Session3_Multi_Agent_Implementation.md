@@ -370,7 +370,7 @@ python hierarchical_team.py        # Multi-agent data coordination
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - Implementation →](Session2_*.md)  
 **Next:** [Session 4 - Team Orchestration →](Session4_*.md)

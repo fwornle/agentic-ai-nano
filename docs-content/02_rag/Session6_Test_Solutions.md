@@ -110,9 +110,10 @@ D) Simplifying the codebase
 2. **Adaptive Weighting**: Dynamically balancing graph and vector results  
 3. **Query Planning**: Deciding when to use graph vs. vector search  
 4. **Performance Optimization**: Caching, indexing, and query optimization
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 

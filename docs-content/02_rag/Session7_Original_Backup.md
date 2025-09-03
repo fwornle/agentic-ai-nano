@@ -423,9 +423,10 @@ You've built the foundation of agentic RAG systems that combine autonomous reaso
 
 ## 
 Session 8 expands agentic intelligence to handle multiple modalities - text, images, audio, and video - for comprehensive knowledge processing.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
 **Next:** [Session 8 - Production Ready →](Session8_*.md)

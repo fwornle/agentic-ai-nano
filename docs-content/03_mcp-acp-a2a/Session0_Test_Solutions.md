@@ -123,9 +123,10 @@ If you missed questions in these areas, review the corresponding sections:
 - Understand the logical progression from MCP to ACP to A2A  
 
 [← Return to Session 0](Session0_Introduction_to_MCP_ACP_A2A.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 0 Test Questions →](Session0_*.md#multiple-choice-test)
 

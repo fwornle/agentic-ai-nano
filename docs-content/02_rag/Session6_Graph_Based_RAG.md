@@ -460,9 +460,10 @@ C) Maximizing query speed
 D) Simplifying the codebase  
 
 [View Solutions →](Session6_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
 **Next:** [Session 7 - Agent Systems →](Session7_*.md)

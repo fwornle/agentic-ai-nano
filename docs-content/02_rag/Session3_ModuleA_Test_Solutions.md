@@ -41,9 +41,10 @@ C) It uses less memory
 D) It's simpler to implement  
 
 **Explanation:** RAG-optimized search is designed specifically for retrieval-augmented generation workflows, where the goal isn't just finding similar content but finding the most useful content for answering questions. It combines semantic similarity with keyword boosting for precision, recency weighting for fresh information, and content diversity considerations for comprehensive context. This multi-signal fusion creates retrieval results optimized for generation quality rather than just similarity scoring.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
 

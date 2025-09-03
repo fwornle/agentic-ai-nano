@@ -1773,9 +1773,10 @@ C) Check network connectivity only
 D) Measure CPU temperature  
 
 [View Solutions →](Session9B_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 8 - Production Ready →](Session8_*.md)  
 **Next:** [Session 10 - Enterprise Integration →](Session10_*.md)

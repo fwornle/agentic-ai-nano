@@ -1282,9 +1282,10 @@ D) Quality threshold and response time target
 - [`src/session3/parallel_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/parallel_workflow.py) - Advanced parallel execution patterns
 - [`src/session3/dynamic_agent_generation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/dynamic_agent_generation.py) - Runtime agent creation systems
 - [`src/session3/orchestration_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/orchestration_patterns.py) - Sophisticated coordination strategies
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - Implementation →](Session2_*.md)  
 **Next:** [Session 4 - Team Orchestration →](Session4_*.md)

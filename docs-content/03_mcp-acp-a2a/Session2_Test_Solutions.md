@@ -241,9 +241,10 @@ If you missed questions in these areas, review the corresponding sections:
 - Study scalability considerations  
 
 [← Return to Session 2](Session2_FileSystem_MCP_Server.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
 

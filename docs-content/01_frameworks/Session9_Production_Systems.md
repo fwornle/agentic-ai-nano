@@ -683,9 +683,10 @@ class EnterpriseOperationsFramework:
 ```
 
 Enterprise operations frameworks provide the processes and procedures necessary for running multi-agent systems in regulated environments with strict availability and compliance requirements.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 8 - Production Ready →](Session8_*.md)  
 **Next:** [Session 10 - Enterprise Integration →](Session10_*.md)
