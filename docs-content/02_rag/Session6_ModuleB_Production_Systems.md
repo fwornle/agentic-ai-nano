@@ -643,6 +643,7 @@ C) High CPU usage
 D) Network latency  
 
 [View Solutions →](Session6_ModuleB_Test_Solutions.md)
+
 ---
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
