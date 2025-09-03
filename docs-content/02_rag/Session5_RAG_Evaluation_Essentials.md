@@ -8,10 +8,10 @@
 
 By completing this section, you will:
 
-- Understand why RAG evaluation is critical for system success
-- Master the three essential evaluation dimensions
-- Learn fundamental metrics for measuring RAG performance
-- Recognize when evaluation frameworks are necessary
+- Understand why RAG evaluation is critical for system success  
+- Master the three essential evaluation dimensions  
+- Learn fundamental metrics for measuring RAG performance  
+- Recognize when evaluation frameworks are necessary  
 
 ## The RAG Evaluation Challenge
 
@@ -29,9 +29,9 @@ The complexity multiplies in production where edge cases, domain shifts, and use
 
 The key insight is that RAG systems fail in interconnected ways that single metrics can't capture. You need evaluation frameworks that assess multiple dimensions simultaneously:
 
-1. **Retrieval Quality**: Are your Session 3 indexing optimizations actually finding better documents?
-2. **Generation Quality**: Do your Session 4 query enhancements lead to more accurate responses?
-3. **End-to-End Utility**: Does the complete system deliver better user experiences?
+1. **Retrieval Quality**: Are your Session 3 indexing optimizations actually finding better documents?  
+2. **Generation Quality**: Do your Session 4 query enhancements lead to more accurate responses?  
+3. **End-to-End Utility**: Does the complete system deliver better user experiences?  
 
 This multi-dimensional approach reveals hidden trade-offs and guides optimization priorities.
 
@@ -58,20 +58,20 @@ This data structure captures all the essential information needed for comprehens
 
 ### Core Metrics Categories
 
-**Retrieval Metrics:**
-- **Precision@K**: How many of the top-K retrieved documents are relevant?
-- **Recall@K**: What percentage of all relevant documents are in top-K results?
-- **MRR (Mean Reciprocal Rank)**: How quickly do relevant results appear?
+**Retrieval Metrics:**  
+- **Precision@K**: How many of the top-K retrieved documents are relevant?  
+- **Recall@K**: What percentage of all relevant documents are in top-K results?  
+- **MRR (Mean Reciprocal Rank)**: How quickly do relevant results appear?  
 
-**Generation Metrics:**
-- **Faithfulness**: Is the response factually consistent with retrieved contexts?
-- **Relevance**: Does the response directly address the query?
-- **Completeness**: Does the response fully answer all aspects of the question?
+**Generation Metrics:**  
+- **Faithfulness**: Is the response factually consistent with retrieved contexts?  
+- **Relevance**: Does the response directly address the query?  
+- **Completeness**: Does the response fully answer all aspects of the question?  
 
-**End-to-End Metrics:**
-- **Answer Correctness**: How accurate is the final response compared to ground truth?
-- **User Satisfaction**: Would users find this response helpful?
-- **Task Completion**: Can users accomplish their goals with this response?
+**End-to-End Metrics:**  
+- **Answer Correctness**: How accurate is the final response compared to ground truth?  
+- **User Satisfaction**: Would users find this response helpful?  
+- **Task Completion**: Can users accomplish their goals with this response?  
 
 ## 🎯 RAGAS Framework Basics
 
@@ -116,17 +116,17 @@ RAGAS requires your evaluation data in this specific structure, making it easy t
 
 Use evaluation frameworks when:
 
-- **Comparing Enhancement Strategies**: Which Session 4 techniques actually improve performance?
-- **Component Optimization**: Does better chunking from Session 2 improve end-to-end results?
-- **Architecture Decisions**: Should you use dense retrieval, hybrid search, or knowledge graphs?
+- **Comparing Enhancement Strategies**: Which Session 4 techniques actually improve performance?  
+- **Component Optimization**: Does better chunking from Session 2 improve end-to-end results?  
+- **Architecture Decisions**: Should you use dense retrieval, hybrid search, or knowledge graphs?  
 
 ### Production Monitoring Needs
 
 Continuous evaluation becomes essential for:
 
-- **Quality Assurance**: Maintain consistent response quality at scale
-- **Drift Detection**: Identify when performance degrades over time
-- **User Experience**: Ensure your system meets real-world user needs
+- **Quality Assurance**: Maintain consistent response quality at scale  
+- **Drift Detection**: Identify when performance degrades over time  
+- **User Experience**: Ensure your system meets real-world user needs  
 
 ## 🎯 Quick Evaluation Setup
 
@@ -166,19 +166,19 @@ This simple evaluator gives you immediate feedback on whether your retrieval sys
 
 Watch for these critical warning signs:
 
-- **Low Semantic Similarity**: Query and retrieved documents have little semantic overlap
-- **Response Contradictions**: Generated answers contradict information in contexts
-- **Empty or Generic Responses**: System fails to utilize retrieved information
-- **Inconsistent Performance**: Quality varies dramatically across similar queries
+- **Low Semantic Similarity**: Query and retrieved documents have little semantic overlap  
+- **Response Contradictions**: Generated answers contradict information in contexts  
+- **Empty or Generic Responses**: System fails to utilize retrieved information  
+- **Inconsistent Performance**: Quality varies dramatically across similar queries  
 
 ### Success Indicators
 
 Your evaluation should show:
 
-- **High Context Utilization**: Responses effectively use retrieved information
-- **Factual Consistency**: Generated content aligns with source documents
-- **Query Relevance**: Responses directly address what users asked
-- **Appropriate Detail Level**: Neither too brief nor excessively verbose
+- **High Context Utilization**: Responses effectively use retrieved information  
+- **Factual Consistency**: Generated content aligns with source documents  
+- **Query Relevance**: Responses directly address what users asked  
+- **Appropriate Detail Level**: Neither too brief nor excessively verbose  
 
 ## Learning Path Summary
 
@@ -186,8 +186,8 @@ Your evaluation should show:
 
 **Next Steps for Deeper Learning:**
 
-- **📝 Participant Path**: [RAG Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Hands-on RAGAS setup and usage
-- **⚙️ Implementer Path**: [Advanced Custom Metrics →](Session5_Advanced_Custom_Metrics.md) - Build sophisticated domain-specific evaluators
+- **📝 Participant Path**: [RAG Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Hands-on RAGAS setup and usage  
+- **⚙️ Implementer Path**: [Advanced Custom Metrics →](Session5_Advanced_Custom_Metrics.md) - Build sophisticated domain-specific evaluators  
 ---
 
 ## 🧭 Navigation

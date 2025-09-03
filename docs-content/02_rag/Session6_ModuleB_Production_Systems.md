@@ -9,8 +9,8 @@ This module teaches you to build production-ready GraphRAG systems that meet ent
 
 ### Related Modules
 
-- **[Module A: Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques
-- **[Session 6 Core: Graph-Based RAG](Session6_Graph_Based_RAG.md)** - Foundation graph concepts
+- **[Module A: Advanced Algorithms](Session6_ModuleA_Advanced_Algorithms.md)** - Advanced graph algorithms and traversal techniques  
+- **[Session 6 Core: Graph-Based RAG](Session6_Graph_Based_RAG.md)** - Foundation graph concepts  
 
 ### Quick Start
 

@@ -1507,9 +1507,9 @@ You've now mastered advanced consensus algorithms for distributed data systems:
 
 ### Next Steps
 
-- **Continue to Module B**: [Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md) for deployment patterns
-- **Return to Core**: [Session 9 Main](Session9_Multi_Agent_Patterns.md)
-- **Portfolio Project**: Build a distributed data processing system with Byzantine fault tolerance
+- **Continue to Module B**: [Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md) for deployment patterns  
+- **Return to Core**: [Session 9 Main](Session9_Multi_Agent_Patterns.md)  
+- **Portfolio Project**: Build a distributed data processing system with Byzantine fault tolerance  
 
 ---
 

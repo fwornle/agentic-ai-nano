@@ -215,56 +215,56 @@ async def move_file(source: str, destination: str, overwrite: bool = False) -> D
 
 ### Key Learning Points:
 
-1. **Comprehensive Path Validation:** Both source and destination paths must be validated against the sandbox
-2. **File Type Security:** Destination file extensions are validated against the allowed list
-3. **Existence Checks:** Verify source exists and handle destination conflicts appropriately
-4. **Error Recovery:** Verify the operation completed successfully before returning success
-5. **Detailed Logging:** Log all operations for security monitoring and debugging
-6. **Graceful Error Handling:** Different exception types are handled with appropriate responses
+1. **Comprehensive Path Validation:** Both source and destination paths must be validated against the sandbox  
+2. **File Type Security:** Destination file extensions are validated against the allowed list  
+3. **Existence Checks:** Verify source exists and handle destination conflicts appropriately  
+4. **Error Recovery:** Verify the operation completed successfully before returning success  
+5. **Detailed Logging:** Log all operations for security monitoring and debugging  
+6. **Graceful Error Handling:** Different exception types are handled with appropriate responses  
 
 ### Security Considerations:
 
-- **Sandbox Enforcement:** All paths are validated to prevent directory traversal
-- **Overwrite Protection:** Explicit permission required to overwrite existing files
-- **File Type Validation:** Destination files must have allowed extensions
-- **Operation Verification:** Success is verified by checking file system state
-- **Audit Trail:** All operations are logged for security monitoring
+- **Sandbox Enforcement:** All paths are validated to prevent directory traversal  
+- **Overwrite Protection:** Explicit permission required to overwrite existing files  
+- **File Type Validation:** Destination files must have allowed extensions  
+- **Operation Verification:** Success is verified by checking file system state  
+- **Audit Trail:** All operations are logged for security monitoring  
 
 ### Extension Ideas:
 
-1. **Atomic Operations:** Implement temporary files to ensure operation atomicity
-2. **Batch Operations:** Support moving multiple files in a single operation
-3. **Copy Operations:** Add similar functionality for file copying
-4. **Directory Support:** Extend to support moving entire directories
-5. **Backup on Overwrite:** Create backups when overwriting files
+1. **Atomic Operations:** Implement temporary files to ensure operation atomicity  
+2. **Batch Operations:** Support moving multiple files in a single operation  
+3. **Copy Operations:** Add similar functionality for file copying  
+4. **Directory Support:** Extend to support moving entire directories  
+5. **Backup on Overwrite:** Create backups when overwriting files  
 
 ---
 
 ## Scoring Guide
 
-- **9-10 correct**: Excellent understanding of secure file system implementation
-- **7-8 correct**: Good grasp of security concepts, review specific areas where questions were missed
-- **5-6 correct**: Basic understanding present, recommend reviewing security sections
-- **Below 5**: Recommend thoroughly reviewing Session 2 content and security best practices
+- **9-10 correct**: Excellent understanding of secure file system implementation  
+- **7-8 correct**: Good grasp of security concepts, review specific areas where questions were missed  
+- **5-6 correct**: Basic understanding present, recommend reviewing security sections  
+- **Below 5**: Recommend thoroughly reviewing Session 2 content and security best practices  
 
 ## Key Concepts Review
 
 If you missed questions in these areas, review the corresponding sections:
 
-### Security Fundamentals (Questions 1, 2, 5, 6):
-- Review sandbox implementation and path validation
-- Focus on security logging and violation handling
-- Study directory traversal prevention techniques
+### Security Fundamentals (Questions 1, 2, 5, 6):  
+- Review sandbox implementation and path validation  
+- Focus on security logging and violation handling  
+- Study directory traversal prevention techniques  
 
-### File Handling (Questions 3, 4, 7, 8):
-- Review binary file encoding strategies
-- Focus on file type validation approaches
-- Study whitelist vs blacklist security models
+### File Handling (Questions 3, 4, 7, 8):  
+- Review binary file encoding strategies  
+- Focus on file type validation approaches  
+- Study whitelist vs blacklist security models  
 
-### Performance & Architecture (Questions 9, 10):
-- Review async programming benefits
-- Focus on performance optimization techniques
-- Study scalability considerations
+### Performance & Architecture (Questions 9, 10):  
+- Review async programming benefits  
+- Focus on performance optimization techniques  
+- Study scalability considerations  
 
 ---
 

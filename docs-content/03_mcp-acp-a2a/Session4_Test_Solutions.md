@@ -114,19 +114,19 @@ D) Improved security
 
 ## Scoring Guide
 
-- **10 correct**: Expert level - Ready for enterprise production deployments
-- **8-9 correct**: Proficient - Strong understanding of production operations
-- **6-7 correct**: Competent - Good grasp of deployment concepts
-- **4-5 correct**: Developing - Review monitoring and scaling sections
-- **Below 4**: Beginner - Revisit production fundamentals and containerization
+- **10 correct**: Expert level - Ready for enterprise production deployments  
+- **8-9 correct**: Proficient - Strong understanding of production operations  
+- **6-7 correct**: Competent - Good grasp of deployment concepts  
+- **4-5 correct**: Developing - Review monitoring and scaling sections  
+- **Below 4**: Beginner - Revisit production fundamentals and containerization  
 
 ## Key Concepts Summary
 
-1. **Production Requirements**: Observability, scalability, and reliability are essential
-2. **Containerization**: Docker provides consistent environments and simplified deployment
-3. **Monitoring Stack**: Comprehensive observability requires metrics, logs, and tracing
-4. **Auto-scaling**: Request rate and response time guide scaling decisions
-5. **Deployment Strategy**: Blue-green deployments with health checks ensure reliability
+1. **Production Requirements**: Observability, scalability, and reliability are essential  
+2. **Containerization**: Docker provides consistent environments and simplified deployment  
+3. **Monitoring Stack**: Comprehensive observability requires metrics, logs, and tracing  
+4. **Auto-scaling**: Request rate and response time guide scaling decisions  
+5. **Deployment Strategy**: Blue-green deployments with health checks ensure reliability  
 
 ---
 
@@ -298,11 +298,11 @@ class CircuitBreaker:
 
 ### Key Features Implemented:
 
-1. **State Management**: Properly manages CLOSED, OPEN, and HALF_OPEN states
-2. **Configurable Thresholds**: Customizable failure thresholds and recovery timeouts
-3. **Timeout Handling**: Includes request timeouts as circuit breaker triggers
-4. **Fallback Strategies**: Multiple levels of fallback (cache, static data, queuing)
-5. **Monitoring Integration**: Exposes circuit breaker statistics as MCP resources
+1. **State Management**: Properly manages CLOSED, OPEN, and HALF_OPEN states  
+2. **Configurable Thresholds**: Customizable failure thresholds and recovery timeouts  
+3. **Timeout Handling**: Includes request timeouts as circuit breaker triggers  
+4. **Fallback Strategies**: Multiple levels of fallback (cache, static data, queuing)  
+5. **Monitoring Integration**: Exposes circuit breaker statistics as MCP resources  
 
 This circuit breaker implementation provides robust failure handling and enables graceful degradation in production MCP deployments.
 

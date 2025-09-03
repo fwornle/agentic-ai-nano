@@ -6,11 +6,11 @@ This module implements production-ready vector database architectures with hybri
 
 The module provides a comprehensive vector search infrastructure with:
 
-- **Multiple Vector Database Support**: ChromaDB, Pinecone, Qdrant implementations
-- **Hybrid Search**: Combines semantic similarity with BM25 lexical search
-- **Advanced Indexing**: HNSW and IVF optimization strategies
-- **Multi-Stage Retrieval**: Query enhancement, parallel search, and reranking
-- **Production Optimization**: Caching, batching, and performance monitoring
+- **Multiple Vector Database Support**: ChromaDB, Pinecone, Qdrant implementations  
+- **Hybrid Search**: Combines semantic similarity with BM25 lexical search  
+- **Advanced Indexing**: HNSW and IVF optimization strategies  
+- **Multi-Stage Retrieval**: Query enhancement, parallel search, and reranking  
+- **Production Optimization**: Caching, batching, and performance monitoring  
 
 ## 📁 File Structure
 
@@ -137,10 +137,10 @@ results = await search_system.production_search(
 )
 ```
 
-**Key Features:**
-- BM25 lexical scoring with tunable k1/b parameters
-- Reciprocal Rank Fusion (RRF) for score combination
-- Cross-encoder reranking for accuracy improvement
+**Key Features:**  
+- BM25 lexical scoring with tunable k1/b parameters  
+- Reciprocal Rank Fusion (RRF) for score combination  
+- Cross-encoder reranking for accuracy improvement  
 
 ### 2. Multi-Stage Retrieval
 
@@ -154,11 +154,11 @@ results = await search_system.production_search(
 )
 ```
 
-**Pipeline Stages:**
-1. Query variant generation (original, expanded, HyDE, sub-queries)
-2. Parallel retrieval across variants
-3. Result deduplication and merging
-4. Progressive filtering and reranking
+**Pipeline Stages:**  
+1. Query variant generation (original, expanded, HyDE, sub-queries)  
+2. Parallel retrieval across variants  
+3. Result deduplication and merging  
+4. Progressive filtering and reranking  
 
 ### 3. Optimized Search
 
@@ -204,9 +204,9 @@ ivf_config = {
 
 The system implements multi-level caching:
 
-1. **Query Embedding Cache**: Reuse embeddings for identical queries
-2. **Result Cache**: Store complete search results
-3. **Index Cache**: Persist built indices across sessions
+1. **Query Embedding Cache**: Reuse embeddings for identical queries  
+2. **Result Cache**: Store complete search results  
+3. **Index Cache**: Persist built indices across sessions  
 
 ### Batch Operations
 
@@ -284,49 +284,49 @@ def evaluate_search_quality(search_system, test_queries):
 
 ### Common Issues
 
-**ChromaDB Collection Errors:**
-- Ensure persistent directory exists and is writable
-- Check HNSW parameter compatibility with your data
+**ChromaDB Collection Errors:**  
+- Ensure persistent directory exists and is writable  
+- Check HNSW parameter compatibility with your data  
 
-**Pinecone Rate Limits:**
-- Implement exponential backoff in batch operations
-- Monitor pod utilization and scale as needed
+**Pinecone Rate Limits:**  
+- Implement exponential backoff in batch operations  
+- Monitor pod utilization and scale as needed  
 
-**Qdrant Memory Issues:**
+**Qdrant Memory Issues:**  
 - Enable `on_disk=True` for large collections
 - Tune `memmap_threshold` based on available RAM
 
-**Poor Search Quality:**
-- Adjust hybrid search weights (semantic vs lexical)
-- Fine-tune BM25 parameters (k1, b) for your domain
-- Implement domain-specific preprocessing
+**Poor Search Quality:**  
+- Adjust hybrid search weights (semantic vs lexical)  
+- Fine-tune BM25 parameters (k1, b) for your domain  
+- Implement domain-specific preprocessing  
 
 ### Performance Tuning
 
-**Slow Query Performance:**
+**Slow Query Performance:**  
 - Reduce `ef_search` for HNSW indices
-- Increase batch sizes for bulk operations
-- Enable result caching for repeated queries
+- Increase batch sizes for bulk operations  
+- Enable result caching for repeated queries  
 
-**High Memory Usage:**
-- Use IVF+PQ compression for large datasets
-- Enable disk storage in Qdrant configuration
-- Implement query result pagination
+**High Memory Usage:**  
+- Use IVF+PQ compression for large datasets  
+- Enable disk storage in Qdrant configuration  
+- Implement query result pagination  
 
 ## Key References
 
-- **HNSW Algorithm**: [Efficient and robust approximate nearest neighbor search](https://arxiv.org/abs/1603.09320)
-- **BM25 Scoring**: [The Probabilistic Relevance Framework: BM25 and Beyond](https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf)
-- **Hybrid Search**: [Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906)
-- **Vector Database Comparison**: [Vector Database Benchmarks](https://benchmark.vectorview.ai/)
+- **HNSW Algorithm**: [Efficient and robust approximate nearest neighbor search](https://arxiv.org/abs/1603.09320)  
+- **BM25 Scoring**: [The Probabilistic Relevance Framework: BM25 and Beyond](https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf)  
+- **Hybrid Search**: [Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906)  
+- **Vector Database Comparison**: [Vector Database Benchmarks](https://benchmark.vectorview.ai/)  
 
 ## Next Steps
 
 This vector search infrastructure enables:
 
-- **Session 4**: Query Enhancement & Context Augmentation
-- **Session 5**: RAG Evaluation & Quality Assessment
-- **Session 6**: Graph-Enhanced Retrieval
-- **Session 9**: Production Deployment & Scaling
+- **Session 4**: Query Enhancement & Context Augmentation  
+- **Session 5**: RAG Evaluation & Quality Assessment  
+- **Session 6**: Graph-Enhanced Retrieval  
+- **Session 9**: Production Deployment & Scaling  
 
 The optimized search foundation you've built here will support increasingly sophisticated RAG capabilities throughout the remaining sessions.

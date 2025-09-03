@@ -114,19 +114,19 @@ D) Simpler implementation
 
 ## Scoring Guide
 
-- **10 correct**: Expert level - Ready for complex multi-agent system design
-- **8-9 correct**: Proficient - Strong understanding of A2A communication patterns
-- **6-7 correct**: Competent - Good grasp of agent coordination concepts
-- **4-5 correct**: Developing - Review message protocols and coordination patterns
-- **Below 4**: Beginner - Revisit A2A fundamentals and communication principles
+- **10 correct**: Expert level - Ready for complex multi-agent system design  
+- **8-9 correct**: Proficient - Strong understanding of A2A communication patterns  
+- **6-7 correct**: Competent - Good grasp of agent coordination concepts  
+- **4-5 correct**: Developing - Review message protocols and coordination patterns  
+- **Below 4**: Beginner - Revisit A2A fundamentals and communication principles  
 
 ## Key Concepts Summary
 
-1. **A2A Protocol**: Structured communication enabling agent collaboration
-2. **Message Types**: DISCOVERY, REQUEST, RESPONSE, ANNOUNCEMENT for different purposes
-3. **Service Discovery**: Dynamic discovery of agents and their capabilities
-4. **Coordination Patterns**: Orchestration (centralized) vs choreography (distributed)
-5. **Fault Tolerance**: Message queuing and retry mechanisms for reliability
+1. **A2A Protocol**: Structured communication enabling agent collaboration  
+2. **Message Types**: DISCOVERY, REQUEST, RESPONSE, ANNOUNCEMENT for different purposes  
+3. **Service Discovery**: Dynamic discovery of agents and their capabilities  
+4. **Coordination Patterns**: Orchestration (centralized) vs choreography (distributed)  
+5. **Fault Tolerance**: Message queuing and retry mechanisms for reliability  
 
 ---
 
@@ -338,11 +338,11 @@ class CustomerServiceChoreography:
 
 ### Key Features Implemented:
 
-1. **Event-Driven Coordination**: Uses choreography patterns for distributed agent coordination
-2. **Intelligent Routing**: Routes inquiries based on priority, category, and customer tier
-3. **Escalation Management**: Automatic escalation based on complexity and timing
-4. **Quality Assurance**: Peer review for uncertain solutions and customer feedback tracking
-5. **Multi-Level Support**: Different agent capabilities for various support levels
+1. **Event-Driven Coordination**: Uses choreography patterns for distributed agent coordination  
+2. **Intelligent Routing**: Routes inquiries based on priority, category, and customer tier  
+3. **Escalation Management**: Automatic escalation based on complexity and timing  
+4. **Quality Assurance**: Peer review for uncertain solutions and customer feedback tracking  
+5. **Multi-Level Support**: Different agent capabilities for various support levels  
 
 This A2A customer service system demonstrates distributed coordination where agents respond to events and coordinate their actions without centralized control.
 

@@ -7,30 +7,30 @@ This session transforms RAG development from intuition-driven to evidence-driven
 ### 🎯 Observer Path - Essential Concepts (1-2 hours)
 **Outcome**: Understand core RAG evaluation principles and when evaluation is critical
 
-Key files to read:
-- 🎯 [RAG Evaluation Essentials](Session5_RAG_Evaluation_Essentials.md)
-- 🎯 [Quality Assessment Basics](Session5_Quality_Assessment_Basics.md)
+Key files to read:  
+- 🎯 [RAG Evaluation Essentials](Session5_RAG_Evaluation_Essentials.md)  
+- 🎯 [Quality Assessment Basics](Session5_Quality_Assessment_Basics.md)  
 
 ### 📝 Participant Path - Practical Application (4-6 hours)
 **Outcome**: Implement RAGAS evaluation and A/B testing for RAG optimization
 
-Key files to read:
-- All 🎯 Observer files above
-- 📝 [RAGAS Implementation Practice](Session5_RAGAS_Implementation_Practice.md)
-- 📝 [Automated Testing Practice](Session5_Automated_Testing_Practice.md)
+Key files to read:  
+- All 🎯 Observer files above  
+- 📝 [RAGAS Implementation Practice](Session5_RAGAS_Implementation_Practice.md)  
+- 📝 [Automated Testing Practice](Session5_Automated_Testing_Practice.md)  
 
 ### ⚙️ Implementer Path - Complete Mastery (8-12 hours)
 **Outcome**: Build enterprise-grade evaluation and monitoring systems
 
-Key files to read:
-- All 🎯 Observer and 📝 Participant files above
-- ⚙️ [Advanced Custom Metrics](Session5_Advanced_Custom_Metrics.md)
-- ⚙️ [Enterprise Monitoring Systems](Session5_Enterprise_Monitoring_Systems.md)
+Key files to read:  
+- All 🎯 Observer and 📝 Participant files above  
+- ⚙️ [Advanced Custom Metrics](Session5_Advanced_Custom_Metrics.md)  
+- ⚙️ [Enterprise Monitoring Systems](Session5_Enterprise_Monitoring_Systems.md)  
 
 ### Optional Deep Dive Modules
 
-- **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Custom metrics and domain-specific evaluation
-- **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production-scale monitoring and alerting
+- **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Custom metrics and domain-specific evaluation  
+- **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production-scale monitoring and alerting  
 
 ## The Evaluation Challenge
 
@@ -40,10 +40,10 @@ In Sessions 1-4, you built sophisticated RAG systems with intelligent chunking, 
 
 RAG systems present unique evaluation challenges because failures cascade through multiple stages. A poorly performing retrieval component can mask an excellent generation model, while perfect retrieval with poor generation creates misleading metrics. The key challenges include:
 
-- **Multi-Stage Complexity**: Traditional ML evaluation assumes single-stage models – RAG requires holistic assessment
-- **Cascading Failures**: Poor retrieval can mask excellent generation, and vice versa
-- **Production Variability**: Edge cases, domain shifts, and user behavior changes affect performance unpredictably
-- **Enhancement Attribution**: Which specific improvements actually drive quality gains?
+- **Multi-Stage Complexity**: Traditional ML evaluation assumes single-stage models – RAG requires holistic assessment  
+- **Cascading Failures**: Poor retrieval can mask excellent generation, and vice versa  
+- **Production Variability**: Edge cases, domain shifts, and user behavior changes affect performance unpredictably  
+- **Enhancement Attribution**: Which specific improvements actually drive quality gains?  
 
 This session transforms your approach from "it seems better" to "it performs 23% better on factual accuracy with 95% confidence."
 
@@ -55,10 +55,10 @@ This session transforms your approach from "it seems better" to "it performs 23%
 
 The key insight is that RAG systems fail in interconnected ways that single metrics can't capture. You need evaluation frameworks that assess multiple dimensions simultaneously:
 
-1. **Retrieval Quality**: Are your Session 3 indexing optimizations actually finding better documents?
-2. **Generation Quality**: Do your Session 4 query enhancements lead to more accurate responses?
-3. **End-to-End Utility**: Does the complete system deliver better user experiences?
-4. **Enhancement Attribution**: Which specific improvements from Sessions 1-4 drive the biggest quality gains?
+1. **Retrieval Quality**: Are your Session 3 indexing optimizations actually finding better documents?  
+2. **Generation Quality**: Do your Session 4 query enhancements lead to more accurate responses?  
+3. **End-to-End Utility**: Does the complete system deliver better user experiences?  
+4. **Enhancement Attribution**: Which specific improvements from Sessions 1-4 drive the biggest quality gains?  
 
 This multi-dimensional approach reveals hidden trade-offs and guides optimization priorities.
 
@@ -103,9 +103,9 @@ class SimpleRAGEvaluator:
 
 Essential metrics for RAG evaluation include:
 
-- **Retrieval Metrics**: Precision@K, Recall@K, MRR, NDCG
-- **Generation Metrics**: Faithfulness, Answer Relevance, Context Precision
-- **End-to-End Metrics**: Overall Accuracy, User Satisfaction
+- **Retrieval Metrics**: Precision@K, Recall@K, MRR, NDCG  
+- **Generation Metrics**: Faithfulness, Answer Relevance, Context Precision  
+- **End-to-End Metrics**: Overall Accuracy, User Satisfaction  
 
 The evaluation process follows this pattern:
 
@@ -137,23 +137,23 @@ This approach provides systematic evaluation across your test dataset, enabling 
 Before diving into implementation details, understand these fundamental evaluation approaches:
 
 ### 1. RAGAS Framework
-Standardized metrics for RAG assessment:
-- **Faithfulness**: Factual consistency with retrieved context
-- **Answer Relevancy**: Response relevance to the original query
-- **Context Precision**: Quality of retrieved context ranking
-- **Context Recall**: Completeness of context retrieval
+Standardized metrics for RAG assessment:  
+- **Faithfulness**: Factual consistency with retrieved context  
+- **Answer Relevancy**: Response relevance to the original query  
+- **Context Precision**: Quality of retrieved context ranking  
+- **Context Recall**: Completeness of context retrieval  
 
 ### 2. LLM-as-a-Judge
-Automated quality assessment using language models:
-- **Scalable**: Evaluate thousands of responses automatically
-- **Consistent**: Apply uniform evaluation criteria
-- **Flexible**: Customize evaluation prompts for specific needs
+Automated quality assessment using language models:  
+- **Scalable**: Evaluate thousands of responses automatically  
+- **Consistent**: Apply uniform evaluation criteria  
+- **Flexible**: Customize evaluation prompts for specific needs  
 
 ### 3. A/B Testing
-Scientific comparison of different RAG configurations:
-- **Statistical Rigor**: Determine if improvements are significant
-- **Real-World Validation**: Test with actual user scenarios
-- **Enhancement Attribution**: Identify which changes actually help
+Scientific comparison of different RAG configurations:  
+- **Statistical Rigor**: Determine if improvements are significant  
+- **Real-World Validation**: Test with actual user scenarios  
+- **Enhancement Attribution**: Identify which changes actually help  
 
 ## 📝 Production Implementation Guide
 
@@ -231,19 +231,19 @@ For enterprise-scale monitoring and alerting:
 
 Before implementing comprehensive evaluation, ensure you have:
 
-### Essential Components
-- [ ] Test dataset with query-response pairs
-- [ ] Ground truth answers (if available)
-- [ ] RAG system that can process test queries
-- [ ] Evaluation metrics selection (start with RAGAS)
-- [ ] Success criteria definition
+### Essential Components  
+- [ ] Test dataset with query-response pairs  
+- [ ] Ground truth answers (if available)  
+- [ ] RAG system that can process test queries  
+- [ ] Evaluation metrics selection (start with RAGAS)  
+- [ ] Success criteria definition  
 
-### Evaluation Process
-1. **Choose Learning Path**: Start with 🎯 Observer for concepts, 📝 Participant for implementation
-2. **Setup RAGAS**: Follow the implementation guide for standardized metrics
-3. **Run Baseline**: Evaluate current system performance
-4. **Identify Issues**: Use evaluation results to find improvement areas
-5. **Test Enhancements**: Use A/B testing to validate improvements
+### Evaluation Process  
+1. **Choose Learning Path**: Start with 🎯 Observer for concepts, 📝 Participant for implementation  
+2. **Setup RAGAS**: Follow the implementation guide for standardized metrics  
+3. **Run Baseline**: Evaluate current system performance  
+4. **Identify Issues**: Use evaluation results to find improvement areas  
+5. **Test Enhancements**: Use A/B testing to validate improvements  
 
 ### When to Use Each Approach
 
@@ -257,23 +257,23 @@ Before implementing comprehensive evaluation, ensure you have:
 
 After completing the appropriate learning path for your needs, you will have achieved:
 
-### 🎯 Observer Path Outcomes
-- Understanding of why RAG evaluation is critical
-- Knowledge of the three essential evaluation dimensions
-- Ability to recognize when evaluation frameworks are needed
-- Foundation for making informed evaluation decisions
+### 🎯 Observer Path Outcomes  
+- Understanding of why RAG evaluation is critical  
+- Knowledge of the three essential evaluation dimensions  
+- Ability to recognize when evaluation frameworks are needed  
+- Foundation for making informed evaluation decisions  
 
-### 📝 Participant Path Outcomes
-- Working RAGAS evaluation implementation
-- A/B testing framework for enhancement validation
-- Automated benchmarking pipelines
-- Production-ready monitoring dashboards
+### 📝 Participant Path Outcomes  
+- Working RAGAS evaluation implementation  
+- A/B testing framework for enhancement validation  
+- Automated benchmarking pipelines  
+- Production-ready monitoring dashboards  
 
-### ⚙️ Implementer Path Outcomes
-- Custom evaluation metrics for specialized domains
-- Enterprise-scale monitoring and alerting systems
-- Advanced anomaly detection for quality degradation
-- Multi-perspective LLM-as-a-Judge evaluation systems
+### ⚙️ Implementer Path Outcomes  
+- Custom evaluation metrics for specialized domains  
+- Enterprise-scale monitoring and alerting systems  
+- Advanced anomaly detection for quality degradation  
+- Multi-perspective LLM-as-a-Judge evaluation systems  
 
 ## Integration with Existing Systems
 

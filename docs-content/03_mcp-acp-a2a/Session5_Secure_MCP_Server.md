@@ -46,10 +46,10 @@ This session offers three distinct learning paths designed to match your goals a
 
 By completing this Observer path, you will understand:
 
-- The six critical security threats to MCP servers
-- Modern security standards and their purposes
-- Basic authentication and authorization concepts
-- How rate limiting protects system resources
+- The six critical security threats to MCP servers  
+- Modern security standards and their purposes  
+- Basic authentication and authorization concepts  
+- How rate limiting protects system resources  
 
 ### The Six Critical Security Threats
 
@@ -57,41 +57,41 @@ Before we build our defenses, we need to understand our enemies. In the world of
 
 Imagine your MCP server as a medieval castle. These are the siege engines that attackers will use to breach your walls:
 
-1. **Token Misuse Across Resources**: Like a master key falling into the wrong hands, a stolen token can unlock doors you never intended to open. One compromised token suddenly grants access to your entire digital kingdom.
+1. **Token Misuse Across Resources**: Like a master key falling into the wrong hands, a stolen token can unlock doors you never intended to open. One compromised token suddenly grants access to your entire digital kingdom.  
 
-2. **Authorization Code Interception**: Picture a messenger carrying secret scrolls being ambushed on the road. Without PKCE protection, attackers can intercept authorization codes and masquerade as legitimate users.
+2. **Authorization Code Interception**: Picture a messenger carrying secret scrolls being ambushed on the road. Without PKCE protection, attackers can intercept authorization codes and masquerade as legitimate users.  
 
-3. **Unintended LLM Actions**: Your AI agent receives what looks like an innocent request: "Delete some old files." But those "old files" happen to be your entire database backup. The AI, trusting by nature, complies without question.
+3. **Unintended LLM Actions**: Your AI agent receives what looks like an innocent request: "Delete some old files." But those "old files" happen to be your entire database backup. The AI, trusting by nature, complies without question.  
 
-4. **Privilege Escalation**: A humble user account somehow gains administrator privileges, like a janitor mysteriously acquiring master keys to every room in a building. Small permissions snowball into system-wide control.
+4. **Privilege Escalation**: A humble user account somehow gains administrator privileges, like a janitor mysteriously acquiring master keys to every room in a building. Small permissions snowball into system-wide control.  
 
-5. **Distributed Rate Limit Bypass**: Attackers coordinate like a swarm of locusts, each request appearing innocent, but together overwhelming your defenses faster than you can count.
+5. **Distributed Rate Limit Bypass**: Attackers coordinate like a swarm of locusts, each request appearing innocent, but together overwhelming your defenses faster than you can count.  
 
-6. **Data Exfiltration**: Through carefully crafted queries that look perfectly legitimate, attackers slowly siphon your most sensitive data, one seemingly innocent API call at a time.
+6. **Data Exfiltration**: Through carefully crafted queries that look perfectly legitimate, attackers slowly siphon your most sensitive data, one seemingly innocent API call at a time.  
 
 ### Modern Security Standards
 
 Our fortress needs more than just thick walls—it needs a comprehensive defense system:
 
-1. **OAuth 2.1 with PKCE**: The modern standard that treats every authorization request like a secret handshake with cryptographic verification
-2. **Resource Indicators (RFC 8707)**: Tokens that can only unlock specific doors, preventing the skeleton key problem
-3. **Sandbox Isolation**: Running your MCP servers in protected bubbles, where even a breach can't spread beyond its boundaries
+1. **OAuth 2.1 with PKCE**: The modern standard that treats every authorization request like a secret handshake with cryptographic verification  
+2. **Resource Indicators (RFC 8707)**: Tokens that can only unlock specific doors, preventing the skeleton key problem  
+3. **Sandbox Isolation**: Running your MCP servers in protected bubbles, where even a breach can't spread beyond its boundaries  
 
 ### Basic Token Concepts
 
 Think of tokens as digital ID cards with sophisticated security features:
 
-- **Access Tokens**: Short-lived credentials (30 minutes) for immediate use
-- **Refresh Tokens**: Long-lived credentials (7 days) for renewing access tokens
-- **Token Blacklisting**: A master "do not admit" list for revoked credentials
+- **Access Tokens**: Short-lived credentials (30 minutes) for immediate use  
+- **Refresh Tokens**: Long-lived credentials (7 days) for renewing access tokens  
+- **Token Blacklisting**: A master "do not admit" list for revoked credentials  
 
 ### Rate Limiting Fundamentals
 
 Rate limiting is like having a sophisticated bouncer who ensures fair access:
 
-- **Token Bucket Algorithm**: Nature's perfect approach to resource distribution
-- **Role-Based Limits**: Different users get different levels of service
-- **Distributed Protection**: Works across multiple server instances
+- **Token Bucket Algorithm**: Nature's perfect approach to resource distribution  
+- **Role-Based Limits**: Different users get different levels of service  
+- **Distributed Protection**: Works across multiple server instances  
 
 ---
 
@@ -103,10 +103,10 @@ Rate limiting is like having a sophisticated bouncer who ensures fair access:
 
 By completing this Participant path, you will be able to:
 
-- Implement PKCE authentication flow
-- Create secure JWT token management
-- Build role-based access control systems
-- Deploy rate limiting middleware
+- Implement PKCE authentication flow  
+- Create secure JWT token management  
+- Build role-based access control systems  
+- Deploy rate limiting middleware  
 
 ### PKCE Implementation Basics
 
@@ -377,10 +377,10 @@ Each MCP tool becomes a secured endpoint with appropriate permission checks and 
 
 For comprehensive deep-dive coverage of advanced security topics, continue with:
 
-- ⚙️ [Advanced OAuth 2.1 Implementation](Session5_Advanced_OAuth.md)
-- ⚙️ [Enterprise API Key Management](Session5_Enterprise_API_Keys.md)
-- ⚙️ [Production Rate Limiting Systems](Session5_Production_Rate_Limiting.md)
-- ⚙️ [Security Monitoring & Audit Systems](Session5_Security_Monitoring.md)
+- ⚙️ [Advanced OAuth 2.1 Implementation](Session5_Advanced_OAuth.md)  
+- ⚙️ [Enterprise API Key Management](Session5_Enterprise_API_Keys.md)  
+- ⚙️ [Production Rate Limiting Systems](Session5_Production_Rate_Limiting.md)  
+- ⚙️ [Security Monitoring & Audit Systems](Session5_Security_Monitoring.md)  
 
 ---
 
@@ -388,25 +388,25 @@ For comprehensive deep-dive coverage of advanced security topics, continue with:
 
 ### Observer Level Exercises
 
-1. **Threat Assessment**: Identify which of the six security threats would be most concerning for a file management MCP server and explain why.
+1. **Threat Assessment**: Identify which of the six security threats would be most concerning for a file management MCP server and explain why.  
 
-2. **Security Standard Selection**: Compare OAuth 2.1 with PKCE versus basic API key authentication for different use cases.
+2. **Security Standard Selection**: Compare OAuth 2.1 with PKCE versus basic API key authentication for different use cases.  
 
 ### Participant Level Exercises
 
-3. **PKCE Flow Implementation**: Implement the complete PKCE authorization flow including code challenge generation and verification.
+3. **PKCE Flow Implementation**: Implement the complete PKCE authorization flow including code challenge generation and verification.  
 
-4. **Role Design**: Design a role hierarchy for an e-commerce MCP server with appropriate permissions for different user types.
+4. **Role Design**: Design a role hierarchy for an e-commerce MCP server with appropriate permissions for different user types.  
 
-5. **Rate Limiting Configuration**: Configure rate limits for a multi-tenant MCP server where different customers need different service levels.
+5. **Rate Limiting Configuration**: Configure rate limits for a multi-tenant MCP server where different customers need different service levels.  
 
 ### Advanced Integration Exercise
 
-6. **Secure MCP Server**: Build a complete secure MCP server that includes:
-   - OAuth 2.1 with PKCE authentication
-   - Role-based access control
-   - Rate limiting middleware
-   - Security audit logging
+6. **Secure MCP Server**: Build a complete secure MCP server that includes:  
+   - OAuth 2.1 with PKCE authentication  
+   - Role-based access control  
+   - Rate limiting middleware  
+   - Security audit logging  
 
 ---
 
@@ -414,19 +414,19 @@ For comprehensive deep-dive coverage of advanced security topics, continue with:
 
 Test your understanding of MCP server security:
 
-1. **Why use short-lived access tokens (30 minutes)?**
+1. **Why use short-lived access tokens (30 minutes)?**  
    A) Faster authentication
    B) Limit exposure if compromised
    C) Reduce server load
    D) Easier implementation
 
-2. **What's the purpose of token blacklisting?**
+2. **What's the purpose of token blacklisting?**  
    A) Improve performance
    B) Enable secure logout and token revocation
    C) Reduce memory usage
    D) Simplify token validation
 
-3. **How does the token bucket algorithm work?**
+3. **How does the token bucket algorithm work?**  
    A) Stores tokens in a database
    B) Uses fixed time windows
    C) Allows bursts but limits average rate
@@ -440,18 +440,18 @@ Test your understanding of MCP server security:
 
 You've now built a comprehensive security foundation for MCP servers that includes:
 
-**Essential Security Components:**
-- OAuth 2.1 with PKCE authentication
-- JWT token system with proper lifecycle management
-- Role-based access control with fine-grained permissions
-- Rate limiting using token bucket algorithm
-- Input validation and secure error handling
+**Essential Security Components:**  
+- OAuth 2.1 with PKCE authentication  
+- JWT token system with proper lifecycle management  
+- Role-based access control with fine-grained permissions  
+- Rate limiting using token bucket algorithm  
+- Input validation and secure error handling  
 
-**Security Best Practices Applied:**
-- Defense in depth with multiple security layers
-- Fail-secure design principles
-- Principle of least privilege
-- Comprehensive audit logging
+**Security Best Practices Applied:**  
+- Defense in depth with multiple security layers  
+- Fail-secure design principles  
+- Principle of least privilege  
+- Comprehensive audit logging  
 
 Your MCP server is now protected against the most common attack vectors while maintaining usability and performance.
 ---

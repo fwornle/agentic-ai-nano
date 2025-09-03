@@ -114,33 +114,33 @@ D) Only cloud service providers
 
 ## Scoring Guide
 
-- **9-10 correct**: Excellent understanding of MCP, ACP, and A2A concepts
-- **7-8 correct**: Good grasp of the fundamentals, review specific areas where questions were missed
-- **5-6 correct**: Basic understanding present, recommend reviewing the session content before proceeding
-- **Below 5**: Recommend thoroughly reviewing Session 0 content before continuing to Session 1
+- **9-10 correct**: Excellent understanding of MCP, ACP, and A2A concepts  
+- **7-8 correct**: Good grasp of the fundamentals, review specific areas where questions were missed  
+- **5-6 correct**: Basic understanding present, recommend reviewing the session content before proceeding  
+- **Below 5**: Recommend thoroughly reviewing Session 0 content before continuing to Session 1  
 
 ## Key Concepts Review
 
 If you missed questions in these areas, review the corresponding sections:
 
-### MCP Concepts (Questions 1, 4, 6, 10):
-- Review "What is MCP?" section
-- Focus on MCP architecture components
-- Study the MCP Inspector section
+### MCP Concepts (Questions 1, 4, 6, 10):  
+- Review "What is MCP?" section  
+- Focus on MCP architecture components  
+- Study the MCP Inspector section  
 
-### ACP Concepts (Questions 2, 7):
-- Review "What is ACP?" section
-- Focus on local-first architecture
-- Study offline coordination capabilities
+### ACP Concepts (Questions 2, 7):  
+- Review "What is ACP?" section  
+- Focus on local-first architecture  
+- Study offline coordination capabilities  
 
-### A2A Concepts (Questions 3, 5, 8):
-- Review "What is A2A?" section
-- Focus on agent discovery mechanisms
-- Study cross-organizational communication patterns
+### A2A Concepts (Questions 3, 5, 8):  
+- Review "What is A2A?" section  
+- Focus on agent discovery mechanisms  
+- Study cross-organizational communication patterns  
 
-### Integration and Development Path (Question 9):
-- Review "Getting Started: Your Development Path" section
-- Understand the logical progression from MCP to ACP to A2A
+### Integration and Development Path (Question 9):  
+- Review "Getting Started: Your Development Path" section  
+- Understand the logical progression from MCP to ACP to A2A  
 
 ---
 

@@ -9,10 +9,10 @@
 
 After completing this practice guide, you will:
 
-- Build intelligent query expansion systems
-- Implement multiple expansion strategies (semantic, contextual, domain-specific)
-- Create multi-query generation from different perspectives
-- Develop query decomposition for complex questions
+- Build intelligent query expansion systems  
+- Implement multiple expansion strategies (semantic, contextual, domain-specific)  
+- Create multi-query generation from different perspectives  
+- Develop query decomposition for complex questions  
 
 ## Complete Query Expansion System
 
@@ -520,10 +520,10 @@ def search_with_expansion(self, query: str, vector_store,
 
 ## Practice Exercises
 
-1. **Custom Strategies**: Implement domain-specific expansion strategies
-2. **Performance Comparison**: Compare expansion results with baseline search
-3. **Query Complexity**: Test with increasingly complex multi-part questions
-4. **Expansion Quality**: Develop metrics to assess expansion effectiveness
+1. **Custom Strategies**: Implement domain-specific expansion strategies  
+2. **Performance Comparison**: Compare expansion results with baseline search  
+3. **Query Complexity**: Test with increasingly complex multi-part questions  
+4. **Expansion Quality**: Develop metrics to assess expansion effectiveness  
 ---
 
 ## 🧭 Navigation

@@ -30,9 +30,9 @@ This session transforms your RAG system from similarity matching to knowledge re
 
 Knowledge isn't just about content similarity – it's about the relationships between concepts, entities, and facts. A question about Apple's automotive partnerships requires understanding:
 
-1. Who Apple partners with
-2. Which of those partners work in automotive
-3. What technologies those automotive partners use
+1. Who Apple partners with  
+2. Which of those partners work in automotive  
+3. What technologies those automotive partners use  
 
 Vector RAG can find documents about each piece, but can't connect them logically. GraphRAG solves this by representing knowledge as a graph where nodes are entities/concepts and edges are relationships, enabling traversal through logical reasoning pathways.
 
@@ -51,31 +51,31 @@ NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pa
 
 Instead of treating all content uniformly, NodeRAG creates different node types for different knowledge structures:
 
-1. **Semantic Unit Nodes** - Abstract concepts and themes
-   - Example: "Supply Chain Management" connecting related methodologies
+1. **Semantic Unit Nodes** - Abstract concepts and themes  
+   - Example: "Supply Chain Management" connecting related methodologies  
 
-2. **Entity Nodes** - Concrete entities with rich metadata
-   - Example: "Apple Inc." with subsidiaries and partnerships
+2. **Entity Nodes** - Concrete entities with rich metadata  
+   - Example: "Apple Inc." with subsidiaries and partnerships  
 
-3. **Relationship Nodes** - Explicit connections with evidence
-   - Example: "Partnership" linking Apple and Foxconn with details
+3. **Relationship Nodes** - Explicit connections with evidence  
+   - Example: "Partnership" linking Apple and Foxconn with details  
 
-4. **Attribute Nodes** - Properties and characteristics
-   - Example: "Revenue: $394.3B" with temporal information
+4. **Attribute Nodes** - Properties and characteristics  
+   - Example: "Revenue: $394.3B" with temporal information  
 
-5. **Document Nodes** - Original source segments
-   - Example: SEC filing containing partnership disclosures
+5. **Document Nodes** - Original source segments  
+   - Example: SEC filing containing partnership disclosures  
 
-6. **Summary Nodes** - Cross-document synthesis
-   - Example: "Apple Automotive Strategy" synthesizing multiple sources
+6. **Summary Nodes** - Cross-document synthesis  
+   - Example: "Apple Automotive Strategy" synthesizing multiple sources  
 
 #### Three-Stage Processing Pipeline
 
 NodeRAG transforms documents through three key stages:
 
-1. **Decomposition**: Extract specialized node types from documents
-2. **Augmentation**: Build connections between different node types
-3. **Enrichment**: Add similarity edges and reasoning pathways
+1. **Decomposition**: Extract specialized node types from documents  
+2. **Augmentation**: Build connections between different node types  
+3. **Enrichment**: Add similarity edges and reasoning pathways  
 
 For detailed technical implementation, see: ⚙️ [Session6_NodeRAG_Technical_Implementation.md](Session6_NodeRAG_Technical_Implementation.md)
 
@@ -83,10 +83,10 @@ For detailed technical implementation, see: ⚙️ [Session6_NodeRAG_Technical_I
 
 You now understand the core GraphRAG concepts:
 
-- **Problem**: Vector RAG can't reason about relationships between entities
-- **Solution**: Graph-based knowledge representation with specialized node types
-- **Innovation**: NodeRAG's six node types preserve semantic structure
-- **Capability**: Multi-hop reasoning through logical pathways
+- **Problem**: Vector RAG can't reason about relationships between entities  
+- **Solution**: Graph-based knowledge representation with specialized node types  
+- **Innovation**: NodeRAG's six node types preserve semantic structure  
+- **Capability**: Multi-hop reasoning through logical pathways  
 
 For hands-on implementation, continue to the Participant Path below.
 
@@ -100,9 +100,9 @@ Now that you understand core GraphRAG concepts, let's build working implementati
 
 Before diving into implementation, it's important to understand the different approaches available:
 
-- **Traditional GraphRAG**: Entity-relationship extraction with standard graph traversal
-- **Code GraphRAG**: Specialized for analyzing software codebases and dependencies
-- **Hybrid GraphRAG**: Combines graph reasoning with vector similarity for comprehensive search
+- **Traditional GraphRAG**: Entity-relationship extraction with standard graph traversal  
+- **Code GraphRAG**: Specialized for analyzing software codebases and dependencies  
+- **Hybrid GraphRAG**: Combines graph reasoning with vector similarity for comprehensive search  
 
 Each approach serves different use cases and complexity requirements.
 
@@ -121,9 +121,9 @@ NodeRAG's heterogeneous graph architecture provides the structured foundation fo
 
 Now let's dive into hands-on GraphRAG implementation. This path covers three essential approaches:
 
-1. **Traditional GraphRAG**: Entity-relationship extraction and graph traversal
-2. **Code GraphRAG**: Specialized analysis for software codebases
-3. **Hybrid GraphRAG**: Combining graph reasoning with vector similarity
+1. **Traditional GraphRAG**: Entity-relationship extraction and graph traversal  
+2. **Code GraphRAG**: Specialized analysis for software codebases  
+3. **Hybrid GraphRAG**: Combining graph reasoning with vector similarity  
 
 ### Traditional GraphRAG Implementation - Building the Foundation
 
@@ -137,17 +137,17 @@ Understanding both approaches gives you the flexibility to choose the right leve
 
 While NodeRAG provides advanced heterogeneous architectures, traditional GraphRAG remains valuable for:
 
-- **Simpler Use Cases**: When specialized node types aren't needed
-- **Resource Constraints**: Lower computational requirements
-- **Rapid Prototyping**: Faster implementation and iteration
-- **Legacy Integration**: Working with existing graph systems
+- **Simpler Use Cases**: When specialized node types aren't needed  
+- **Resource Constraints**: Lower computational requirements  
+- **Rapid Prototyping**: Faster implementation and iteration  
+- **Legacy Integration**: Working with existing graph systems  
 
 ### Core Traditional GraphRAG Components
 
-1. **Entity Extraction**: Identify people, organizations, locations, concepts
-2. **Relationship Mapping**: Connect entities through typed relationships
-3. **Graph Construction**: Build searchable knowledge graph
-4. **Query Processing**: Traverse graph for multi-hop reasoning
+1. **Entity Extraction**: Identify people, organizations, locations, concepts  
+2. **Relationship Mapping**: Connect entities through typed relationships  
+3. **Graph Construction**: Build searchable knowledge graph  
+4. **Query Processing**: Traverse graph for multi-hop reasoning  
 
 ```python
 
@@ -772,11 +772,11 @@ When multiple entities are clustered together, the system selects the highest-co
 
 While NetworkX is excellent for analysis, production GraphRAG systems require persistent, scalable storage that can handle:
 
-- **Concurrent Access**: Multiple users querying the graph simultaneously
-- **ACID Transactions**: Ensuring data consistency during updates
-- **Optimized Queries**: Cypher query language optimized for graph traversal
-- **Index Performance**: Fast entity lookup and relationship traversal
-- **Scalability**: Handling millions of entities and relationships
+- **Concurrent Access**: Multiple users querying the graph simultaneously  
+- **ACID Transactions**: Ensuring data consistency during updates  
+- **Optimized Queries**: Cypher query language optimized for graph traversal  
+- **Index Performance**: Fast entity lookup and relationship traversal  
+- **Scalability**: Handling millions of entities and relationships  
 
 The transition from in-memory NetworkX graphs to persistent Neo4j storage marks a crucial evolution in GraphRAG systems. NetworkX serves us well during development and prototyping, but production systems demand the reliability, performance, and concurrent access capabilities that only enterprise graph databases can provide.
 
@@ -784,10 +784,10 @@ The transition from in-memory NetworkX graphs to persistent Neo4j storage marks 
 
 The key to high-performance GraphRAG lies in thoughtful database design:
 
-1. **Strategic Indexing**: Indices on entity canonical names and types for fast lookup
-2. **Batch Operations**: Bulk inserts minimize transaction overhead
-3. **Query Optimization**: Cypher patterns that leverage graph structure
-4. **Memory Management**: Proper configuration for large graph traversals
+1. **Strategic Indexing**: Indices on entity canonical names and types for fast lookup  
+2. **Batch Operations**: Bulk inserts minimize transaction overhead  
+3. **Query Optimization**: Cypher patterns that leverage graph structure  
+4. **Memory Management**: Proper configuration for large graph traversals  
 
 These considerations become critical when your knowledge graph grows beyond thousands of entities. A well-indexed Neo4j instance can handle complex graph traversals across millions of nodes in milliseconds, while a poorly designed schema might struggle with simple lookups. The difference lies in understanding how graph databases optimize query execution.
 
@@ -1504,26 +1504,26 @@ Different queries require different traversal approaches, each optimized for spe
 
 **Direct Relationship Queries:**
 
-- Use **Breadth-First Traversal** to find immediate connections
-- Example: "Who works with Apple?"
-- Strategy: Explores all first-hop neighbors before moving to second-hop
-- Benefit: Ensures comprehensive coverage of direct relationships
+- Use **Breadth-First Traversal** to find immediate connections  
+- Example: "Who works with Apple?"  
+- Strategy: Explores all first-hop neighbors before moving to second-hop  
+- Benefit: Ensures comprehensive coverage of direct relationships  
 
 **Connection Discovery Queries:**
 
-- Use **Depth-First Traversal** to explore deep relationship chains
-- Example: "What's the connection between Apple and Tesla?"
-- Strategy: Follows paths to their conclusion
-- Benefit: Ideal for finding indirect connections through multiple intermediaries
+- Use **Depth-First Traversal** to explore deep relationship chains  
+- Example: "What's the connection between Apple and Tesla?"  
+- Strategy: Follows paths to their conclusion  
+- Benefit: Ideal for finding indirect connections through multiple intermediaries  
 
 #### Semantic Reasoning Approaches
 
 **Semantic Reasoning Queries:**
 
-- Use **Semantic-Guided Traversal**
-- Method: Follows paths most relevant to query semantics
-- Filtering: Based on relationship relevance to question context
-- Result: Focused exploration of semantically coherent pathways
+- Use **Semantic-Guided Traversal**  
+- Method: Follows paths most relevant to query semantics  
+- Filtering: Based on relationship relevance to question context  
+- Result: Focused exploration of semantically coherent pathways  
 
 ### Advanced Traversal Strategies
 
@@ -1531,17 +1531,17 @@ Different queries require different traversal approaches, each optimized for spe
 
 **Relevance-Ranked Traversal:**
 
-- Prioritizes high-confidence, important relationships
-- Uses PageRank scores and relationship confidence levels
-- Ensures most reliable knowledge pathways are explored first
-- Improves answer quality through reliability focus
+- Prioritizes high-confidence, important relationships  
+- Uses PageRank scores and relationship confidence levels  
+- Ensures most reliable knowledge pathways are explored first  
+- Improves answer quality through reliability focus  
 
 **Community-Focused Traversal:**
 
-- Explores dense clusters of related entities
-- Useful for questions about industry sectors or technology ecosystems
-- Leverages graph community structure
-- Finds comprehensive related information within domains
+- Explores dense clusters of related entities  
+- Useful for questions about industry sectors or technology ecosystems  
+- Leverages graph community structure  
+- Finds comprehensive related information within domains  
 
 **Adaptive Strategy Selection:**
 Our traversal engine adaptively selects strategies based on query characteristics, ensuring optimal exploration for each use case.
@@ -1554,25 +1554,25 @@ Graph traversal faces the **"explosion problem"** - the number of possible paths
 
 **Our engine implements sophisticated pruning strategies:**
 
-1. **Semantic Filtering:**
-   - Ensures only paths semantically related to the query are explored
-   - Dramatically reduces search space while maintaining relevance
+1. **Semantic Filtering:**  
+   - Ensures only paths semantically related to the query are explored  
+   - Dramatically reduces search space while maintaining relevance  
 
-2. **Confidence Thresholding:**
-   - Ignores low-quality relationships
-   - Focuses computational resources on reliable knowledge connections
+2. **Confidence Thresholding:**  
+   - Ignores low-quality relationships  
+   - Focuses computational resources on reliable knowledge connections  
 
 #### Optimization Strategies
 
 **Performance Optimizations:**
 
-1. **Path Length Limits:**
-   - Prevent infinite traversal
-   - Enable meaningful multi-hop reasoning within bounds
+1. **Path Length Limits:**  
+   - Prevent infinite traversal  
+   - Enable meaningful multi-hop reasoning within bounds  
 
-2. **Relevance Scoring:**
-   - Ranks paths by likely usefulness
-   - Ensures most promising reasoning pathways are explored first
+2. **Relevance Scoring:**  
+   - Ranks paths by likely usefulness  
+   - Ensures most promising reasoning pathways are explored first  
 
 **Real-Time Practicality:**
 This multi-layered approach ensures comprehensive coverage while maintaining reasonable response times, making GraphRAG practical for real-time applications.
@@ -1585,10 +1585,10 @@ The heart of GraphRAG's multi-hop reasoning capability lies in intelligent trave
 
 **Key Engine Features:**
 
-- Combines multiple traversal strategies
-- Implements sophisticated pruning algorithms
-- Balances comprehensiveness with performance
-- Adapts to query complexity and requirements
+- Combines multiple traversal strategies  
+- Implements sophisticated pruning algorithms  
+- Balances comprehensiveness with performance  
+- Adapts to query complexity and requirements  
 
 ```python
 # Advanced graph traversal for GraphRAG
@@ -1994,39 +1994,39 @@ Neither graph-only nor vector-only search is optimal for all scenarios. Each app
 
 **Vector Search Strengths:**
 
-- Excellent semantic similarity matching
-- Naturally handles synonyms and paraphrasing
-- Enables fast retrieval for well-defined concepts
-- Works effectively with isolated facts
+- Excellent semantic similarity matching  
+- Naturally handles synonyms and paraphrasing  
+- Enables fast retrieval for well-defined concepts  
+- Works effectively with isolated facts  
 
 **Example Use Case:**
 For queries like "What is machine learning?", vector search quickly finds relevant content based on semantic similarity.
 
 **Vector Search Limitations:**
 
-- Cannot traverse relationships between concepts
-- Misses connections requiring multi-step reasoning
-- Struggles with queries requiring synthesis across sources
-- Has limited understanding of entity relationships
+- Cannot traverse relationships between concepts  
+- Misses connections requiring multi-step reasoning  
+- Struggles with queries requiring synthesis across sources  
+- Has limited understanding of entity relationships  
 
 #### Graph Search: Relationship and Reasoning Excellence
 
 **Graph Search Strengths:**
 
-- Discovers implicit connections through relationships
-- Enables multi-hop reasoning and inference
-- Understands structural importance and centrality
-- Reveals information not contained in any single document
+- Discovers implicit connections through relationships  
+- Enables multi-hop reasoning and inference  
+- Understands structural importance and centrality  
+- Reveals information not contained in any single document  
 
 **When Graph Search Excels:**
 For queries requiring connection discovery, graph search is unmatched.
 
 **Graph Search Limitations:**
 
-- Depends heavily on explicit relationship extraction quality
-- May miss semantically similar but unconnected information
-- Can be computationally expensive for large traversals
-- Requires comprehensive entity recognition
+- Depends heavily on explicit relationship extraction quality  
+- May miss semantically similar but unconnected information  
+- Can be computationally expensive for large traversals  
+- Requires comprehensive entity recognition  
 
 ### The Hybrid Advantage: Best of Both Worlds
 
@@ -2036,29 +2036,29 @@ Hybrid search combines both approaches strategically to overcome individual limi
 
 ##### Stage 1: Vector Search**
 
-- Identifies semantically relevant content using embedding similarity
-- Captures documents and entities matching query's semantic intent
-- Provides comprehensive coverage of directly relevant information
+- Identifies semantically relevant content using embedding similarity  
+- Captures documents and entities matching query's semantic intent  
+- Provides comprehensive coverage of directly relevant information  
 
 ##### Stage 2: Graph Traversal**
 
-- Discovers related information through relationships
-- Follows logical pathways to find connected knowledge
-- Adds multi-hop reasoning capabilities vector search might miss
+- Discovers related information through relationships  
+- Follows logical pathways to find connected knowledge  
+- Adds multi-hop reasoning capabilities vector search might miss  
 
 #### Intelligent Integration and Results
 
 ##### Stage 3: Intelligent Fusion**
 
-- Combines results based on query characteristics
-- Balances vector similarity scores with graph centrality
-- Uses relationship confidence for optimal result ranking
+- Combines results based on query characteristics  
+- Balances vector similarity scores with graph centrality  
+- Uses relationship confidence for optimal result ranking  
 
 ##### Stage 4: Adaptive Weighting**
 
-- Vector search emphasis: For semantic queries
-- Graph traversal emphasis: For relationship queries
-- Balanced weighting: For complex analytical queries
+- Vector search emphasis: For semantic queries  
+- Graph traversal emphasis: For relationship queries  
+- Balanced weighting: For complex analytical queries  
 
 **Performance Improvement:**
 This results in **30-40% improvement in answer quality** over pure approaches, especially for complex queries requiring both semantic understanding and relational reasoning.
@@ -2299,9 +2299,9 @@ class HybridGraphVectorRAG:
 **Transparency and Metadata:**
 The comprehensive result structure provides complete transparency into the hybrid search process. This rich metadata enables downstream systems to understand:
 
-- How the answer was generated
-- Which sources contributed most significantly
-- What performance characteristics were observed
+- How the answer was generated  
+- Which sources contributed most significantly  
+- What performance characteristics were observed  
 
 #### Step 9: Adaptive Fusion Strategy
 
@@ -2313,30 +2313,30 @@ This sophisticated fusion strategy implements **query-aware combination of resul
 
 **Query Types and Weighting Strategy:**
 
-- **Factual queries** ("What is X?") → Higher vector weight
-- **Analytical queries** ("How does X affect Y?") → Balanced combination
-- **Relational queries** ("What connects X to Y?") → Higher graph weight
-- **Complex synthesis** ("Analyze X's impact on Y through Z") → Dynamic weighting
+- **Factual queries** ("What is X?") → Higher vector weight  
+- **Analytical queries** ("How does X affect Y?") → Balanced combination  
+- **Relational queries** ("What connects X to Y?") → Higher graph weight  
+- **Complex synthesis** ("Analyze X's impact on Y through Z") → Dynamic weighting  
 
 #### Fusion Process Innovations
 
 **The fusion process implements four key innovations:**
 
-1. **Query Analysis:**
-   - LLM-based understanding of query intent and complexity
-   - Automatic categorization of query types
+1. **Query Analysis:**  
+   - LLM-based understanding of query intent and complexity  
+   - Automatic categorization of query types  
 
-2. **Dynamic Weighting:**
-   - Adaptive weights based on query characteristics
-   - Real-time adjustment of vector vs graph emphasis
+2. **Dynamic Weighting:**  
+   - Adaptive weights based on query characteristics  
+   - Real-time adjustment of vector vs graph emphasis  
 
-3. **Diversity Selection:**
-   - Ensures varied perspectives in final context
-   - Prevents information redundancy
+3. **Diversity Selection:**  
+   - Ensures varied perspectives in final context  
+   - Prevents information redundancy  
 
-4. **Quality Assurance:**
-   - Validates context relevance and coherence
-   - Filters low-quality or irrelevant results
+4. **Quality Assurance:**  
+   - Validates context relevance and coherence  
+   - Filters low-quality or irrelevant results  
 
 ### Core Adaptive Selection Method
 
@@ -2758,11 +2758,11 @@ Create a production-ready GraphRAG system that combines document analysis with c
 
 ### Requirements
 
-1. **Knowledge Graph Construction**: Build KG from documents with entity/relationship extraction
-2. **Code Analysis**: Implement AST-based analysis for software repositories
-3. **Graph Storage**: Deploy Neo4j with optimized schema and indices
-4. **Multi-Hop Retrieval**: Implement semantic-guided graph traversal
-5. **Hybrid Search**: Combine graph and vector search with adaptive fusion
+1. **Knowledge Graph Construction**: Build KG from documents with entity/relationship extraction  
+2. **Code Analysis**: Implement AST-based analysis for software repositories  
+3. **Graph Storage**: Deploy Neo4j with optimized schema and indices  
+4. **Multi-Hop Retrieval**: Implement semantic-guided graph traversal  
+5. **Hybrid Search**: Combine graph and vector search with adaptive fusion  
 
 ### Implementation Architecture
 
@@ -2867,53 +2867,53 @@ The unified search interface provides access to the full power of GraphRAG throu
 
 **Modern Graph Systems You've Implemented:**
 
-- ✅ **NodeRAG Architecture**
-  - Heterogeneous graph system with specialized node types
-  - Three-stage processing pipeline
-  - Optimized for different knowledge structures
+- ✅ **NodeRAG Architecture**  
+  - Heterogeneous graph system with specialized node types  
+  - Three-stage processing pipeline  
+  - Optimized for different knowledge structures  
 
-- ✅ **Structured Brain Architecture**
-  - Six specialized node types mimicking human knowledge organization
-  - Concept nodes, entity nodes, relationship nodes, and more
-  - Natural knowledge representation patterns
+- ✅ **Structured Brain Architecture**  
+  - Six specialized node types mimicking human knowledge organization  
+  - Concept nodes, entity nodes, relationship nodes, and more  
+  - Natural knowledge representation patterns  
 
-- ✅ **Advanced Graph Algorithms**
-  - Personalized PageRank implementation
-  - HNSW similarity integration
-  - Semantic pathway construction
+- ✅ **Advanced Graph Algorithms**  
+  - Personalized PageRank implementation  
+  - HNSW similarity integration  
+  - Semantic pathway construction  
 
 #### Graph Construction Systems
 
 **Knowledge Construction Methods You've Mastered:**
 
-- ✅ **Traditional GraphRAG**
-  - Knowledge graph construction from unstructured documents
-  - LLM-enhanced entity and relationship extraction
-  - Automated graph building workflows
+- ✅ **Traditional GraphRAG**  
+  - Knowledge graph construction from unstructured documents  
+  - LLM-enhanced entity and relationship extraction  
+  - Automated graph building workflows  
 
-- ✅ **Code GraphRAG**
-  - AST parsing for code structure analysis
-  - Call graph analysis for software repositories
-  - Dependency tracking and relationship mapping
+- ✅ **Code GraphRAG**  
+  - AST parsing for code structure analysis  
+  - Call graph analysis for software repositories  
+  - Dependency tracking and relationship mapping  
 
-- ✅ **Production Neo4j Integration**
-  - Optimized batch operations for large-scale data
-  - Performance-critical indexing strategies
-  - Enterprise-grade graph database deployment
+- ✅ **Production Neo4j Integration**  
+  - Optimized batch operations for large-scale data  
+  - Performance-critical indexing strategies  
+  - Enterprise-grade graph database deployment  
 
 #### Intelligent Retrieval Systems
 
 **Retrieval Technologies You've Built:**
 
-- ✅ **Multi-hop Graph Traversal**
-  - Semantic guidance for intelligent path selection
-  - Path ranking and quality assessment
-  - Coherent reasoning pathway construction
+- ✅ **Multi-hop Graph Traversal**  
+  - Semantic guidance for intelligent path selection  
+  - Path ranking and quality assessment  
+  - Coherent reasoning pathway construction  
 
-- ✅ **Hybrid Graph-Vector Search**
-  - Adaptive fusion strategies
-  - Graph reasoning combined with vector similarity
-  - Query-aware result combination
+- ✅ **Hybrid Graph-Vector Search**  
+  - Adaptive fusion strategies  
+  - Graph reasoning combined with vector similarity  
+  - Query-aware result combination  
 
 ### Key Technical Skills Learned
 
@@ -2921,48 +2921,48 @@ The unified search interface provides access to the full power of GraphRAG throu
 
 **Core Architecture Skills:**
 
-1. **NodeRAG Architecture Design**
-   - Heterogeneous graph design principles
-   - Specialized node processing strategies
-   - Three-stage pipeline implementation
+1. **NodeRAG Architecture Design**  
+   - Heterogeneous graph design principles  
+   - Specialized node processing strategies  
+   - Three-stage pipeline implementation  
 
-2. **Advanced Graph Algorithm Implementation**
-   - Personalized PageRank for semantic ranking
-   - HNSW integration for similarity search
-   - Semantic pathway construction algorithms
+2. **Advanced Graph Algorithm Implementation**  
+   - Personalized PageRank for semantic ranking  
+   - HNSW integration for similarity search  
+   - Semantic pathway construction algorithms  
 
-3. **Graph Traversal Mastery**
-   - Multi-hop reasoning implementation
-   - Semantic-guided exploration strategies
-   - Coherent path synthesis techniques
+3. **Graph Traversal Mastery**  
+   - Multi-hop reasoning implementation  
+   - Semantic-guided exploration strategies  
+   - Coherent path synthesis techniques  
 
 #### Knowledge Engineering & Analysis
 
 **Knowledge Processing Skills:**
 
-4. **Knowledge Graph Engineering**
-   - Traditional entity extraction methods
-   - Relationship mapping and validation
-   - Automated graph construction workflows
+4. **Knowledge Graph Engineering**  
+   - Traditional entity extraction methods  
+   - Relationship mapping and validation  
+   - Automated graph construction workflows  
 
-5. **Code Analysis Expertise**
-   - AST parsing for structural analysis
-   - Dependency analysis and tracking
-   - Call graph construction for software systems
+5. **Code Analysis Expertise**  
+   - AST parsing for structural analysis  
+   - Dependency analysis and tracking  
+   - Call graph construction for software systems  
 
-6. **Graph Database Mastery**
-   - Neo4j schema design and optimization
-   - Performance optimization strategies
-   - Batch operation implementation for scale
+6. **Graph Database Mastery**  
+   - Neo4j schema design and optimization  
+   - Performance optimization strategies  
+   - Batch operation implementation for scale  
 
 #### Hybrid Retrieval Systems
 
 **Advanced Retrieval Skills:**
 
-7. **Hybrid System Design**
-   - Graph-vector fusion architecture
-   - Adaptive weighting algorithms
-   - Comprehensive response generation
+7. **Hybrid System Design**  
+   - Graph-vector fusion architecture  
+   - Adaptive weighting algorithms  
+   - Comprehensive response generation  
 
 ### Performance Characteristics
 
@@ -2970,44 +2970,44 @@ The unified search interface provides access to the full power of GraphRAG throu
 
 **Processing Performance:**
 
-- **NodeRAG Processing Pipeline**
-  - Handles 10K+ documents efficiently
-  - Achieves 85-95% pathway coherence
-  - Three-stage processing maintains quality at scale
+- **NodeRAG Processing Pipeline**  
+  - Handles 10K+ documents efficiently  
+  - Achieves 85-95% pathway coherence  
+  - Three-stage processing maintains quality at scale  
 
-- **Personalized PageRank Computation**
-  - Sub-100ms semantic pathway computation
-  - Scales to 100K+ heterogeneous graph nodes
-  - Real-time ranking for production systems
+- **Personalized PageRank Computation**  
+  - Sub-100ms semantic pathway computation  
+  - Scales to 100K+ heterogeneous graph nodes  
+  - Real-time ranking for production systems  
 
-- **HNSW Graph Integration**
-  - 200-500ms similarity edge construction
-  - 80-90% type compatibility achieved
-  - Efficient nearest neighbor search integration
+- **HNSW Graph Integration**  
+  - 200-500ms similarity edge construction  
+  - 80-90% type compatibility achieved  
+  - Efficient nearest neighbor search integration  
 
 #### Retrieval Performance
 
 **Query and Extraction Performance:**
 
-- **Traditional Entity Extraction**
-  - 80-90% precision with LLM-enhanced methods
-  - Automated relationship discovery
-  - High-quality knowledge graph construction
+- **Traditional Entity Extraction**  
+  - 80-90% precision with LLM-enhanced methods  
+  - Automated relationship discovery  
+  - High-quality knowledge graph construction  
 
-- **Graph Traversal Speed**
-  - Sub-second multi-hop queries
-  - Scales to graphs with 100K+ entities
-  - Efficient path exploration algorithms
+- **Graph Traversal Speed**  
+  - Sub-second multi-hop queries  
+  - Scales to graphs with 100K+ entities  
+  - Efficient path exploration algorithms  
 
-- **Hybrid Search Advantage**
-  - **30-40% improvement** in complex query answering
-  - Outperforms pure vector search significantly
-  - Best-in-class results for analytical queries
+- **Hybrid Search Advantage**  
+  - **30-40% improvement** in complex query answering  
+  - Outperforms pure vector search significantly  
+  - Best-in-class results for analytical queries  
 
-- **Code Analysis Capability**
-  - Comprehensive repository analysis
-  - Complete relationship extraction
-  - Scalable to large codebases
+- **Code Analysis Capability**  
+  - Comprehensive repository analysis  
+  - Complete relationship extraction  
+  - Scalable to large codebases  
 
 ### When to Choose NodeRAG, GraphRAG, or Vector RAG
 
@@ -3015,94 +3015,94 @@ The unified search interface provides access to the full power of GraphRAG throu
 
 **Ideal for Complex Knowledge Processing:**
 
-- **Complex reasoning** requires understanding different knowledge types
-  - Concepts, entities, and relationships need specialized handling
-  - Multi-faceted knowledge domains
+- **Complex reasoning** requires understanding different knowledge types  
+  - Concepts, entities, and relationships need specialized handling  
+  - Multi-faceted knowledge domains  
 
-- **Coherent narratives** needed from fragmented information sources
-  - Educational content generation
-  - Research synthesis from multiple documents
+- **Coherent narratives** needed from fragmented information sources  
+  - Educational content generation  
+  - Research synthesis from multiple documents  
 
-- **Educational applications** where knowledge structure understanding is critical
-  - Learning pathway construction
-  - Concept dependency mapping
+- **Educational applications** where knowledge structure understanding is critical  
+  - Learning pathway construction  
+  - Concept dependency mapping  
 
-- **Multi-domain knowledge** needs specialized processing
-  - Technical + business + regulatory information
-  - Cross-domain expertise synthesis
+- **Multi-domain knowledge** needs specialized processing  
+  - Technical + business + regulatory information  
+  - Cross-domain expertise synthesis  
 
-- **Advanced query types** requiring synthesis across knowledge structures
-  - Complex analytical questions
-  - Multi-perspective analysis requirements
+- **Advanced query types** requiring synthesis across knowledge structures  
+  - Complex analytical questions  
+  - Multi-perspective analysis requirements  
 
 #### Use Traditional GraphRAG When
 
 **Perfect for Relationship-Driven Queries:**
 
-- **Multi-hop reasoning** is required
-  - Example: "What technologies do Apple's partners' suppliers use?"
-  - Deep relationship chain exploration
+- **Multi-hop reasoning** is required  
+  - Example: "What technologies do Apple's partners' suppliers use?"  
+  - Deep relationship chain exploration  
 
-- **Relationship discovery** is key
-  - Example: "How are these companies connected?"
-  - Network analysis and connection mapping
+- **Relationship discovery** is key  
+  - Example: "How are these companies connected?"  
+  - Network analysis and connection mapping  
 
-- **Comprehensive exploration** needed
-  - Example: "Find all related information"
-  - Exhaustive relationship traversal
+- **Comprehensive exploration** needed  
+  - Example: "Find all related information"  
+  - Exhaustive relationship traversal  
 
-- **Complex analytical queries**
-  - Example: "Analyze the supply chain impact of X on Y"
-  - Multi-step reasoning through relationships
+- **Complex analytical queries**  
+  - Example: "Analyze the supply chain impact of X on Y"  
+  - Multi-step reasoning through relationships  
 
-- **Domain has rich entity relationships**
-  - Business networks and partnerships
-  - Scientific literature with citation networks
-  - Code repositories with dependency graphs
+- **Domain has rich entity relationships**  
+  - Business networks and partnerships  
+  - Scientific literature with citation networks  
+  - Code repositories with dependency graphs  
 
 #### Use Vector RAG When
 
 **Optimal for Semantic Similarity Tasks:**
 
-- **Direct factual lookup** queries
-  - Example: "What is quantum computing?"
-  - Straightforward information retrieval
+- **Direct factual lookup** queries  
+  - Example: "What is quantum computing?"  
+  - Straightforward information retrieval  
 
-- **Semantic similarity** is primary concern
-  - Example: "Find similar concepts"
-  - Content recommendation systems
+- **Semantic similarity** is primary concern  
+  - Example: "Find similar concepts"  
+  - Content recommendation systems  
 
-- **Simple Q&A** scenarios
-  - Example: "When was X founded?"
-  - Direct fact-based questions
+- **Simple Q&A** scenarios  
+  - Example: "When was X founded?"  
+  - Direct fact-based questions  
 
-- **Limited relationship structure** in domain
-  - Document collections without explicit connections
-  - Knowledge domains with weak entity relationships
+- **Limited relationship structure** in domain  
+  - Document collections without explicit connections  
+  - Knowledge domains with weak entity relationships  
 
-- **Fast response time** is critical
-  - Real-time applications
-  - High-throughput query scenarios
+- **Fast response time** is critical  
+  - Real-time applications  
+  - High-throughput query scenarios  
 
 #### Use Hybrid GraphRAG When
 
 **Best Choice for Production Systems:**
 
-- **Query types vary** significantly
-  - Production systems with diverse users
-  - Multiple use cases in single application
+- **Query types vary** significantly  
+  - Production systems with diverse users  
+  - Multiple use cases in single application  
 
-- **Maximum coverage** is needed
-  - Research and analysis scenarios
-  - Comprehensive knowledge exploration
+- **Maximum coverage** is needed  
+  - Research and analysis scenarios  
+  - Comprehensive knowledge exploration  
 
-- **Both factual accuracy and insight discovery** are important
-  - Business intelligence applications
-  - Research and development environments
+- **Both factual accuracy and insight discovery** are important  
+  - Business intelligence applications  
+  - Research and development environments  
 
-- **You want the best of both worlds**
-  - Most real-world applications
-  - When unsure which approach is optimal
+- **You want the best of both worlds**  
+  - Most real-world applications  
+  - When unsure which approach is optimal  
 
 ### GraphRAG vs Vector RAG: Concrete Examples
 
@@ -3115,47 +3115,47 @@ The unified search interface provides access to the full power of GraphRAG throu
 
 **Process:**
 
-1. Search for "environmental impacts technologies"
-2. Search for "Apple automotive partners"
-3. Try to connect results manually
-4. Struggle with multi-step reasoning
+1. Search for "environmental impacts technologies"  
+2. Search for "Apple automotive partners"  
+3. Try to connect results manually  
+4. Struggle with multi-step reasoning  
 
 **Result:**
 
-- Finds documents about each topic separately
-- **Limitation:** Struggles to connect disparate information
-- **Issue:** Missing relationship-based insights
+- Finds documents about each topic separately  
+- **Limitation:** Struggles to connect disparate information  
+- **Issue:** Missing relationship-based insights  
 
 #### GraphRAG Approach
 
 **Process:**
 
-1. Find Apple entity in knowledge graph
-2. **First Hop:** Apple → partners_with → [Automotive Companies]
-3. **Second Hop:** [Automotive Companies] → uses_technology → [Technologies]
-4. **Third Hop:** [Technologies] → has_environmental_impact → [Impacts]
+1. Find Apple entity in knowledge graph  
+2. **First Hop:** Apple → partners_with → [Automotive Companies]  
+3. **Second Hop:** [Automotive Companies] → uses_technology → [Technologies]  
+4. **Third Hop:** [Technologies] → has_environmental_impact → [Impacts]  
 
 **Result:**
 
-- Discovers specific impact chains through relationships
-- **Advantage:** Finds information no single document contains
-- **Strength:** Multi-hop reasoning reveals hidden connections
+- Discovers specific impact chains through relationships  
+- **Advantage:** Finds information no single document contains  
+- **Strength:** Multi-hop reasoning reveals hidden connections  
 
 #### Hybrid Approach: Best of Both Worlds
 
 **Process:**
 
-1. **Vector Component:** Understands "environmental impacts" semantically
-2. **Graph Component:** Follows the relationship chain systematically
-3. **Fusion:** Combines semantic understanding with relationship reasoning
-4. **Validation:** Cross-references findings from both methods
+1. **Vector Component:** Understands "environmental impacts" semantically  
+2. **Graph Component:** Follows the relationship chain systematically  
+3. **Fusion:** Combines semantic understanding with relationship reasoning  
+4. **Validation:** Cross-references findings from both methods  
 
 **Result:**
 
-- **Coverage:** Best comprehensive coverage of the topic
-- **Accuracy:** Highest accuracy through dual validation
-- **Insight:** Both factual information and relationship insights
-- **Quality:** Superior answer quality for complex queries
+- **Coverage:** Best comprehensive coverage of the topic  
+- **Accuracy:** Highest accuracy through dual validation  
+- **Insight:** Both factual information and relationship insights  
+- **Quality:** Superior answer quality for complex queries  
 
 ---
 

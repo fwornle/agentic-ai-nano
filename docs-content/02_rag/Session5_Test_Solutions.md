@@ -84,11 +84,11 @@ D) Random threshold selection
 
 ## Performance Scoring
 
-- **8/8 Correct**: Excellent mastery of RAG evaluation methodologies
-- **7/8 Correct**: Strong understanding with minor gaps
-- **6/8 Correct**: Good grasp of concepts, review automated evaluation techniques
-- **5/8 Correct**: Adequate knowledge, focus on multi-dimensional evaluation
-- **4/8 or below**: Recommend hands-on practice with evaluation frameworks
+- **8/8 Correct**: Excellent mastery of RAG evaluation methodologies  
+- **7/8 Correct**: Strong understanding with minor gaps  
+- **6/8 Correct**: Good grasp of concepts, review automated evaluation techniques  
+- **5/8 Correct**: Adequate knowledge, focus on multi-dimensional evaluation  
+- **4/8 or below**: Recommend hands-on practice with evaluation frameworks  
 
 ---
 
@@ -96,38 +96,38 @@ D) Random threshold selection
 
 ### Evaluation Framework Design
 
-1. **Multi-Dimensional Assessment**: Retrieval, generation, and end-to-end quality
-2. **Metric Selection**: Choosing appropriate metrics for different evaluation goals
-3. **Automation vs. Human Judgment**: When to use each approach
-4. **Scalability Considerations**: Designing evaluation that grows with your system
+1. **Multi-Dimensional Assessment**: Retrieval, generation, and end-to-end quality  
+2. **Metric Selection**: Choosing appropriate metrics for different evaluation goals  
+3. **Automation vs. Human Judgment**: When to use each approach  
+4. **Scalability Considerations**: Designing evaluation that grows with your system  
 
 ### RAGAS Integration
 
-1. **Faithfulness**: Factual accuracy relative to retrieved context
-2. **Answer Relevance**: How well the response addresses the query
-3. **Context Precision**: Quality of retrieved information
-4. **Context Recall**: Completeness of information retrieval
+1. **Faithfulness**: Factual accuracy relative to retrieved context  
+2. **Answer Relevance**: How well the response addresses the query  
+3. **Context Precision**: Quality of retrieved information  
+4. **Context Recall**: Completeness of information retrieval  
 
 ### A/B Testing for RAG
 
-1. **Experimental Design**: Proper control and treatment group setup
-2. **Success Metrics**: User-focused vs. technical performance measures
-3. **Statistical Significance**: Ensuring meaningful differences
-4. **Multi-Armed Bandits**: Optimizing multiple system variants
+1. **Experimental Design**: Proper control and treatment group setup  
+2. **Success Metrics**: User-focused vs. technical performance measures  
+3. **Statistical Significance**: Ensuring meaningful differences  
+4. **Multi-Armed Bandits**: Optimizing multiple system variants  
 
 ### Production Monitoring
 
-1. **Real-Time Quality Assessment**: Continuous evaluation of system outputs
-2. **Alerting Systems**: Automated detection of quality degradation
-3. **Performance Tracking**: Historical trend analysis and regression detection
-4. **Incident Response**: Rapid identification and remediation of issues
+1. **Real-Time Quality Assessment**: Continuous evaluation of system outputs  
+2. **Alerting Systems**: Automated detection of quality degradation  
+3. **Performance Tracking**: Historical trend analysis and regression detection  
+4. **Incident Response**: Rapid identification and remediation of issues  
 
 ### Quality Assurance Strategies
 
-1. **Benchmark Creation**: Establishing standard evaluation datasets
-2. **Regression Testing**: Ensuring improvements don't harm existing performance
-3. **Continuous Improvement**: Using evaluation insights for system enhancement
-4. **Human-in-the-Loop**: Combining automated and human evaluation effectively
+1. **Benchmark Creation**: Establishing standard evaluation datasets  
+2. **Regression Testing**: Ensuring improvements don't harm existing performance  
+3. **Continuous Improvement**: Using evaluation insights for system enhancement  
+4. **Human-in-the-Loop**: Combining automated and human evaluation effectively  
 
 ---
 ---

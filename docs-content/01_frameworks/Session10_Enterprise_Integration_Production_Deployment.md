@@ -8,8 +8,8 @@ The difference between a promising demo and production success isn't just scale 
 
 ### Optional Deep Dive Modules
 
-- **[Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)** - GDPR, RBAC, encryption
-- **[Module B: Production Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)** - Auto-scaling, performance optimization
+- **[Module A: Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)** - GDPR, RBAC, encryption  
+- **[Module B: Production Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)** - Auto-scaling, performance optimization  
 
 **Code Files**: All examples use files in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
 **Quick Start**: Run `cd src/session10 && python production_architecture.py` to see production integration
@@ -80,10 +80,10 @@ class ProductionSystemAdapter(Protocol):
 
 ### Production Survival Skills
 
-1. **Protocol Management**: Navigate data stream protocols like a seasoned engineer
-2. **Bulletproof Connections**: Build systems that survive network storms and server crashes
-3. **Universal Translation**: Speak the language of every legacy system ever built
-4. **Corporate Vital Signs**: Monitor enterprise health like a digital doctor
+1. **Protocol Management**: Navigate data stream protocols like a seasoned engineer  
+2. **Bulletproof Connections**: Build systems that survive network storms and server crashes  
+3. **Universal Translation**: Speak the language of every legacy system ever built  
+4. **Corporate Vital Signs**: Monitor enterprise health like a digital doctor  
 
 ### Data System Integration - Connecting to the Processing Infrastructure
 
@@ -981,11 +981,11 @@ kubectl get pods -l app=enterprise-agent
 
 ### Self-Assessment Checklist
 
-- [ ] I understand enterprise integration patterns and challenges
-- [ ] I can create production-ready Docker containers with security
-- [ ] I can implement basic authentication and authorization
-- [ ] I understand monitoring and health check requirements
-- [ ] I'm ready for advanced modules or production deployment
+- [ ] I understand enterprise integration patterns and challenges  
+- [ ] I can create production-ready Docker containers with security  
+- [ ] I can implement basic authentication and authorization  
+- [ ] I understand monitoring and health check requirements  
+- [ ] I'm ready for advanced modules or production deployment  
 
 ---
 

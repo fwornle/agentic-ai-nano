@@ -6,13 +6,13 @@ A comprehensive framework for evaluating, testing, and monitoring RAG (Retrieval
 
 This package provides enterprise-grade tools for:
 
-- **Multi-dimensional RAG evaluation** (retrieval, generation, end-to-end)
-- **RAGAS integration** for standardized metrics
-- **Custom evaluation metrics** for specialized use cases
-- **Automated benchmark testing** with regression detection
-- **A/B testing framework** for component optimization
-- **Production monitoring** with real-time quality assessment
-- **Alerting system** for quality degradation and anomalies
+- **Multi-dimensional RAG evaluation** (retrieval, generation, end-to-end)  
+- **RAGAS integration** for standardized metrics  
+- **Custom evaluation metrics** for specialized use cases  
+- **Automated benchmark testing** with regression detection  
+- **A/B testing framework** for component optimization  
+- **Production monitoring** with real-time quality assessment  
+- **Alerting system** for quality degradation and anomalies  
 
 ## 📁 Package Structure
 
@@ -39,13 +39,13 @@ session5/
 
 ### Installation
 
-1. Install dependencies:
+1. Install dependencies:  
 ```bash
 cd session5
 pip install -r requirements.txt
 ```
 
-2. Set up environment variables (optional):
+2. Set up environment variables (optional):  
 ```bash
 export ENVIRONMENT=development  # or staging, production
 export LLM_JUDGE_MODEL=gpt-4
@@ -99,60 +99,60 @@ results = quick_evaluate(
 
 #### 1. Evaluation Framework
 
-- Multi-dimensional assessment (retrieval, generation, end-to-end)
-- Pluggable evaluator architecture
-- Comprehensive metric registry
+- Multi-dimensional assessment (retrieval, generation, end-to-end)  
+- Pluggable evaluator architecture  
+- Comprehensive metric registry  
 
 #### 2. RAGAS Integration
 
-- Standardized evaluation metrics
-- Faithfulness, relevancy, precision, recall
-- Ground truth comparison
+- Standardized evaluation metrics  
+- Faithfulness, relevancy, precision, recall  
+- Ground truth comparison  
 
 #### 3. Custom Metrics
 
-- Answer completeness assessment
-- Citation quality evaluation
-- Domain-specific accuracy
-- Coherence and depth analysis
+- Answer completeness assessment  
+- Citation quality evaluation  
+- Domain-specific accuracy  
+- Coherence and depth analysis  
 
 #### 4. A/B Testing
 
-- Component variant comparison
-- Statistical significance testing
-- Multi-armed bandit optimization
+- Component variant comparison  
+- Statistical significance testing  
+- Multi-armed bandit optimization  
 
 #### 5. Production Monitoring
 
-- Real-time quality assessment
-- Performance tracking
-- Anomaly detection
-- Alert management
+- Real-time quality assessment  
+- Performance tracking  
+- Anomaly detection  
+- Alert management  
 
 ## Evaluation Metrics
 
 ### Retrieval Quality
 
-- **Semantic Relevance**: Context-query similarity
-- **Context Diversity**: Information variety
-- **Precision@K**: Relevant documents in top-K
-- **Recall@K**: Coverage of relevant documents
-- **NDCG**: Normalized discounted cumulative gain
+- **Semantic Relevance**: Context-query similarity  
+- **Context Diversity**: Information variety  
+- **Precision@K**: Relevant documents in top-K  
+- **Recall@K**: Coverage of relevant documents  
+- **NDCG**: Normalized discounted cumulative gain  
 
 ### Generation Quality
 
-- **Faithfulness**: Factual consistency with context
-- **Answer Relevancy**: Response relevance to query
-- **Completeness**: Comprehensive answer coverage
-- **Coherence**: Logical flow and structure
-- **Citation Quality**: Source attribution accuracy
+- **Faithfulness**: Factual consistency with context  
+- **Answer Relevancy**: Response relevance to query  
+- **Completeness**: Comprehensive answer coverage  
+- **Coherence**: Logical flow and structure  
+- **Citation Quality**: Source attribution accuracy  
 
 ### End-to-End Performance
 
-- **Overall Quality**: Weighted combination score
-- **User Satisfaction**: Task completion rate
-- **Response Time**: System latency
-- **Throughput**: Requests per second
+- **Overall Quality**: Weighted combination score  
+- **User Satisfaction**: Task completion rate  
+- **Response Time**: System latency  
+- **Throughput**: Requests per second  
 
 ## Testing and Benchmarking
 
@@ -289,12 +289,12 @@ cd session5
 python demo_evaluation_system.py
 ```
 
-The demo includes:
-1. **Basic Evaluation**: Core framework demonstration
-2. **RAGAS Integration**: Standardized metrics showcase
-3. **A/B Testing**: Component comparison testing
-4. **Production Monitoring**: Real-time quality assessment
-5. **Comprehensive Ecosystem**: Full system integration
+The demo includes:  
+1. **Basic Evaluation**: Core framework demonstration  
+2. **RAGAS Integration**: Standardized metrics showcase  
+3. **A/B Testing**: Component comparison testing  
+4. **Production Monitoring**: Real-time quality assessment  
+5. **Comprehensive Ecosystem**: Full system integration  
 
 ## API Reference
 
@@ -367,11 +367,11 @@ framework.metrics_registry['my_metric'] = my_custom_metric
 
 ### Best Practices
 
-1. **Environment Separation**: Use different configs for dev/staging/production
-2. **Alert Tuning**: Start with conservative thresholds and adjust based on data
-3. **Monitoring Gradual Rollout**: Begin with sampling, increase coverage gradually
-4. **Baseline Establishment**: Collect baseline metrics before making changes
-5. **Regular Review**: Periodically review and update evaluation criteria
+1. **Environment Separation**: Use different configs for dev/staging/production  
+2. **Alert Tuning**: Start with conservative thresholds and adjust based on data  
+3. **Monitoring Gradual Rollout**: Begin with sampling, increase coverage gradually  
+4. **Baseline Establishment**: Collect baseline metrics before making changes  
+5. **Regular Review**: Periodically review and update evaluation criteria  
 
 ### Monitoring Setup
 
@@ -403,19 +403,19 @@ def enhanced_rag_query(query):
 
 ## Additional Resources
 
-- **Session 5 Documentation**: Detailed evaluation methodology
-- **RAGAS Documentation**: https://github.com/explodinggradients/ragas
-- **Best Practices Guide**: RAG evaluation in production
-- **Troubleshooting Guide**: Common issues and solutions
+- **Session 5 Documentation**: Detailed evaluation methodology  
+- **RAGAS Documentation**: https://github.com/explodinggradients/ragas  
+- **Best Practices Guide**: RAG evaluation in production  
+- **Troubleshooting Guide**: Common issues and solutions  
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please:
 
-1. Follow the existing code structure
-2. Add comprehensive tests for new features
-3. Update documentation for changes
-4. Ensure backward compatibility
+1. Follow the existing code structure  
+2. Add comprehensive tests for new features  
+3. Update documentation for changes  
+4. Ensure backward compatibility  
 
 ## 📄 License
 

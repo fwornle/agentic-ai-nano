@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Implementing production-ready error handling and recovery mechanisms
-- Building scalable multi-tool coordination patterns for enterprise environments
-- Designing health monitoring and observability systems for MCP integrations
-- Creating advanced agent architectures for high-throughput applications
+- Implementing production-ready error handling and recovery mechanisms  
+- Building scalable multi-tool coordination patterns for enterprise environments  
+- Designing health monitoring and observability systems for MCP integrations  
+- Creating advanced agent architectures for high-throughput applications  
 
 ## Advanced Multi-Tool Coordination
 
@@ -26,21 +26,21 @@ Here's how sophisticated agents analyze and plan their tool usage:
 
 #### 1. Query Analysis: Understanding Intent
 
-- **Parse user intent**: What is the user trying to accomplish?
-- **Extract key entities**: Cities, dates, specific requests
-- **Identify complexity level**: Simple lookup or multi-step process?
+- **Parse user intent**: What is the user trying to accomplish?  
+- **Extract key entities**: Cities, dates, specific requests  
+- **Identify complexity level**: Simple lookup or multi-step process?  
 
 #### 2. Tool Capability Mapping
 
-- **Identify relevant tools**: Which tools can help with this specific task?
-- **Assess tool dependencies**: Do any tools require input from others?
-- **Plan execution sequence**: What order makes logical sense?
+- **Identify relevant tools**: Which tools can help with this specific task?  
+- **Assess tool dependencies**: Do any tools require input from others?  
+- **Plan execution sequence**: What order makes logical sense?  
 
 #### 3. Execution Strategy
 
-- **Handle failures gracefully**: What if a tool doesn't work as expected?
-- **Optimize for efficiency**: Can any operations run in parallel?
-- **Maintain context**: How do we preserve information between tool calls?
+- **Handle failures gracefully**: What if a tool doesn't work as expected?  
+- **Optimize for efficiency**: Can any operations run in parallel?  
+- **Maintain context**: How do we preserve information between tool calls?  
 
 ### Real-World Decision Tree Example
 
@@ -124,12 +124,12 @@ async def _restart_server(self, name: str):
 
 This server management system includes features that make the difference in production LangChain-MCP environments:
 
-- **Health monitoring**: Continuous checks with automatic restart - reliability through automation for 24/7 operations
-- **Error recovery**: Graceful handling of server failures - resilience by design for enterprise reliability
-- **Resource management**: Proper cleanup prevents memory leaks - operational sustainability in long-running deployments
-- **Observability**: Comprehensive logging for debugging - transparency for troubleshooting complex integration issues
-- **Startup validation**: Comprehensive server testing before marking as ready - prevents runtime tool failures
-- **Resilient orchestration**: Continue starting other servers when individual servers fail - maximize available capabilities
+- **Health monitoring**: Continuous checks with automatic restart - reliability through automation for 24/7 operations  
+- **Error recovery**: Graceful handling of server failures - resilience by design for enterprise reliability  
+- **Resource management**: Proper cleanup prevents memory leaks - operational sustainability in long-running deployments  
+- **Observability**: Comprehensive logging for debugging - transparency for troubleshooting complex integration issues  
+- **Startup validation**: Comprehensive server testing before marking as ready - prevents runtime tool failures  
+- **Resilient orchestration**: Continue starting other servers when individual servers fail - maximize available capabilities  
 
 ### Building Production-Ready Multi-Tool Agents
 
@@ -267,11 +267,11 @@ def _create_langchain_tools(self, mcp_tools, adapter, server_name):
 
 This enhanced tool wrapper provides several production-ready features:
 
-- **Server context**: Tools are prefixed with server names for clarity
-- **Retry logic**: Failed tool calls are automatically retried up to 3 times
-- **Health checking**: Server health is verified before tool calls
-- **Comprehensive logging**: All failures are logged with context
-- **Graceful degradation**: Tools return error messages instead of crashing
+- **Server context**: Tools are prefixed with server names for clarity  
+- **Retry logic**: Failed tool calls are automatically retried up to 3 times  
+- **Health checking**: Server health is verified before tool calls  
+- **Comprehensive logging**: All failures are logged with context  
+- **Graceful degradation**: Tools return error messages instead of crashing  
 
 ### Enhanced Agent Creation with Sophisticated Prompting
 
@@ -341,11 +341,11 @@ Question: {input}
 
 This enhanced prompting system provides several critical advantages:
 
-- **Server awareness**: The agent understands which servers provide which tools
-- **Failure recovery**: Clear instructions for handling tool failures and trying alternatives
-- **Cross-validation**: Encouragement to use multiple tools for verification
-- **Context synthesis**: Guidelines for combining information from multiple sources
-- **Timeout protection**: Maximum execution time prevents hanging agents
+- **Server awareness**: The agent understands which servers provide which tools  
+- **Failure recovery**: Clear instructions for handling tool failures and trying alternatives  
+- **Cross-validation**: Encouragement to use multiple tools for verification  
+- **Context synthesis**: Guidelines for combining information from multiple sources  
+- **Timeout protection**: Maximum execution time prevents hanging agents  
 
 ### Advanced Agent Runtime Features
 
@@ -414,22 +414,22 @@ def _extract_tools_used(self, intermediate_steps) -> List[str]:
 
 This enhanced execution method provides comprehensive monitoring and error handling essential for production environments:
 
-- **Timeout protection**: Prevents agents from hanging indefinitely
-- **Performance monitoring**: Tracks execution time and step count
-- **Tool usage tracking**: Records which tools were used for analytics
-- **Context injection**: Allows additional context to be passed to agents
-- **Structured responses**: Consistent response format for integration
+- **Timeout protection**: Prevents agents from hanging indefinitely  
+- **Performance monitoring**: Tracks execution time and step count  
+- **Tool usage tracking**: Records which tools were used for analytics  
+- **Context injection**: Allows additional context to be passed to agents  
+- **Structured responses**: Consistent response format for integration  
 
 ### Key Advances Over Basic Agents
 
 This enterprise-ready multi-tool agent represents a significant evolution from basic patterns:
 
-- **Multi-server resilience**: Continues operating when individual servers fail - operational continuity
-- **Enhanced error handling**: Comprehensive retry logic and error context - production reliability
-- **Performance monitoring**: Detailed execution metrics and tool usage tracking - operational observability
-- **Context awareness**: Conversation memory and context injection - intelligent interaction patterns
-- **Server-aware prompting**: Agent understands its tool ecosystem - intelligent tool selection
-- **Health integration**: Automatic server health checking and recovery - self-healing architecture
+- **Multi-server resilience**: Continues operating when individual servers fail - operational continuity  
+- **Enhanced error handling**: Comprehensive retry logic and error context - production reliability  
+- **Performance monitoring**: Detailed execution metrics and tool usage tracking - operational observability  
+- **Context awareness**: Conversation memory and context injection - intelligent interaction patterns  
+- **Server-aware prompting**: Agent understands its tool ecosystem - intelligent tool selection  
+- **Health integration**: Automatic server health checking and recovery - self-healing architecture  
 
 These patterns form the foundation for enterprise-grade LangChain-MCP integrations that can handle real-world complexity and operational demands.
 ---

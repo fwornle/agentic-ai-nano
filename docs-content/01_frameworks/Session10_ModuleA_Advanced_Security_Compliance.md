@@ -1995,9 +1995,9 @@ You've now mastered advanced security and compliance for enterprise agent system
 
 ### Next Steps
 
-- **Continue to Module B**: [Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md) for operational excellence
-- **Return to Core**: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)
-- **Portfolio Project**: Build a complete enterprise-grade secure agent system
+- **Continue to Module B**: [Enterprise Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md) for operational excellence  
+- **Return to Core**: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)  
+- **Portfolio Project**: Build a complete enterprise-grade secure agent system  
 
 ---
 

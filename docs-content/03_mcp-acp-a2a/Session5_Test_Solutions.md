@@ -124,19 +124,19 @@ D) Increasing server capacity
 
 ## Scoring Guide
 
-- **10 correct**: Expert level - Ready for enterprise security implementations
-- **8-9 correct**: Proficient - Strong understanding of MCP security principles
-- **6-7 correct**: Competent - Good grasp of authentication and authorization
-- **4-5 correct**: Developing - Review JWT and RBAC sections
-- **Below 4**: Beginner - Revisit security fundamentals and best practices
+- **10 correct**: Expert level - Ready for enterprise security implementations  
+- **8-9 correct**: Proficient - Strong understanding of MCP security principles  
+- **6-7 correct**: Competent - Good grasp of authentication and authorization  
+- **4-5 correct**: Developing - Review JWT and RBAC sections  
+- **Below 4**: Beginner - Revisit security fundamentals and best practices  
 
 ## Key Concepts Summary
 
-1. **Defense-in-Depth**: Multiple security layers provide comprehensive protection
-2. **JWT Security**: Minimum 32-character keys with proper lifecycle management
-3. **RBAC**: Role-based permissions for scalable access control
-4. **Input Validation**: Server-side Pydantic models prevent injection attacks
-5. **Rate Limiting**: Token bucket algorithm with multiple layers for DDoS protection
+1. **Defense-in-Depth**: Multiple security layers provide comprehensive protection  
+2. **JWT Security**: Minimum 32-character keys with proper lifecycle management  
+3. **RBAC**: Role-based permissions for scalable access control  
+4. **Input Validation**: Server-side Pydantic models prevent injection attacks  
+5. **Rate Limiting**: Token bucket algorithm with multiple layers for DDoS protection  
 
 ---
 
@@ -522,11 +522,11 @@ async def get_security_audit(time_range: str = "24h") -> Dict:
 
 ### Key Features Implemented
 
-1. **Comprehensive Logging**: Tracks all security events with detailed metadata
-2. **Threat Detection**: Identifies suspicious patterns in real-time
-3. **Automated Alerting**: Triggers alerts for potential security incidents
-4. **Audit Reporting**: Generates detailed security reports
-5. **Risk Analysis**: Evaluates threat levels and provides recommendations
+1. **Comprehensive Logging**: Tracks all security events with detailed metadata  
+2. **Threat Detection**: Identifies suspicious patterns in real-time  
+3. **Automated Alerting**: Triggers alerts for potential security incidents  
+4. **Audit Reporting**: Generates detailed security reports  
+5. **Risk Analysis**: Evaluates threat levels and provides recommendations  
 
 This security audit system provides comprehensive monitoring and analysis capabilities for MCP server security.
 

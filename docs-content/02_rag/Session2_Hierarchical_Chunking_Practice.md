@@ -9,10 +9,10 @@
 
 After completing this implementation guide, you will:
 
-- Build hierarchical chunkers that respect document structure
-- Implement intelligent overlap management for context preservation
-- Create section-aware grouping algorithms
-- Handle edge cases in document structure analysis
+- Build hierarchical chunkers that respect document structure  
+- Implement intelligent overlap management for context preservation  
+- Create section-aware grouping algorithms  
+- Handle edge cases in document structure analysis  
 
 ---
 
@@ -513,24 +513,24 @@ def _validate_chunk_quality(self, chunk):
 
 ### Best Practices
 
-1. **Size Management**: Balance structure preservation with practical limits
-2. **Overlap Strategy**: Use 10-15% overlap for optimal context preservation
-3. **Metadata Richness**: Include comprehensive metadata for retrieval enhancement
-4. **Edge Case Handling**: Test with various document structures and formats
+1. **Size Management**: Balance structure preservation with practical limits  
+2. **Overlap Strategy**: Use 10-15% overlap for optimal context preservation  
+3. **Metadata Richness**: Include comprehensive metadata for retrieval enhancement  
+4. **Edge Case Handling**: Test with various document structures and formats  
 
 ### Performance Optimization
 
-1. **Lazy Loading**: Process elements on-demand for large documents
-2. **Caching**: Cache structure analysis results for repeated processing
-3. **Parallel Processing**: Process independent sections concurrently
-4. **Memory Management**: Clear intermediate data structures regularly
+1. **Lazy Loading**: Process elements on-demand for large documents  
+2. **Caching**: Cache structure analysis results for repeated processing  
+3. **Parallel Processing**: Process independent sections concurrently  
+4. **Memory Management**: Clear intermediate data structures regularly  
 
 ### Testing Strategy
 
-1. **Unit Tests**: Test individual methods with controlled inputs
-2. **Integration Tests**: Test full pipeline with realistic documents
-3. **Edge Case Tests**: Handle malformed documents and unusual structures
-4. **Performance Tests**: Measure processing time and memory usage
+1. **Unit Tests**: Test individual methods with controlled inputs  
+2. **Integration Tests**: Test full pipeline with realistic documents  
+3. **Edge Case Tests**: Handle malformed documents and unusual structures  
+4. **Performance Tests**: Measure processing time and memory usage  
 ---
 
 ## 🧭 Navigation

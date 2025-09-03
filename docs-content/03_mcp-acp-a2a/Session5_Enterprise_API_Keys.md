@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Cryptographically secure API key generation and storage
-- Enterprise key management with automatic rotation
-- Advanced usage tracking and analytics
-- Multi-tenant key isolation and rate limiting
+- Cryptographically secure API key generation and storage  
+- Enterprise key management with automatic rotation  
+- Advanced usage tracking and analytics  
+- Multi-tenant key isolation and rate limiting  
 
 ## The Enterprise API Key Vault
 

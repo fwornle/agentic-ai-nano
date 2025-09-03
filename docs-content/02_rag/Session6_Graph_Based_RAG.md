@@ -42,9 +42,9 @@ This session transforms your RAG system from similarity matching to knowledge re
 
 Knowledge isn't just about content similarity – it's about the relationships between concepts, entities, and facts. A question about Apple's automotive partnerships requires understanding:
 
-1. Who Apple partners with
-2. Which of those partners work in automotive
-3. What technologies those automotive partners use
+1. Who Apple partners with  
+2. Which of those partners work in automotive  
+3. What technologies those automotive partners use  
 
 Vector RAG can find documents about each piece, but can't connect them logically. GraphRAG solves this by representing knowledge as a graph where nodes are entities/concepts and edges are relationships, enabling traversal through logical reasoning pathways.
 
@@ -63,31 +63,31 @@ NodeRAG: Document → Specialized Nodes → Heterogeneous Graph → Reasoning Pa
 
 Instead of treating all content uniformly, NodeRAG creates different node types for different knowledge structures:
 
-1. **Semantic Unit Nodes** - Abstract concepts and themes
-   - Example: "Supply Chain Management" connecting related methodologies
+1. **Semantic Unit Nodes** - Abstract concepts and themes  
+   - Example: "Supply Chain Management" connecting related methodologies  
 
-2. **Entity Nodes** - Concrete entities with rich metadata
-   - Example: "Apple Inc." with subsidiaries and partnerships
+2. **Entity Nodes** - Concrete entities with rich metadata  
+   - Example: "Apple Inc." with subsidiaries and partnerships  
 
-3. **Relationship Nodes** - Explicit connections with evidence
-   - Example: "Partnership" linking Apple and Foxconn with details
+3. **Relationship Nodes** - Explicit connections with evidence  
+   - Example: "Partnership" linking Apple and Foxconn with details  
 
-4. **Attribute Nodes** - Properties and characteristics
-   - Example: "Revenue: $394.3B" with temporal information
+4. **Attribute Nodes** - Properties and characteristics  
+   - Example: "Revenue: $394.3B" with temporal information  
 
-5. **Document Nodes** - Original source segments
-   - Example: SEC filing containing partnership disclosures
+5. **Document Nodes** - Original source segments  
+   - Example: SEC filing containing partnership disclosures  
 
-6. **Summary Nodes** - Cross-document synthesis
-   - Example: "Apple Automotive Strategy" synthesizing multiple sources
+6. **Summary Nodes** - Cross-document synthesis  
+   - Example: "Apple Automotive Strategy" synthesizing multiple sources  
 
 #### Three-Stage Processing Pipeline
 
 NodeRAG transforms documents through three key stages:
 
-1. **Decomposition**: Extract specialized node types from documents
-2. **Augmentation**: Build connections between different node types
-3. **Enrichment**: Add similarity edges and reasoning pathways
+1. **Decomposition**: Extract specialized node types from documents  
+2. **Augmentation**: Build connections between different node types  
+3. **Enrichment**: Add similarity edges and reasoning pathways  
 
 For detailed technical implementation, see: ⚙️ [Session6_NodeRAG_Technical_Implementation.md](Session6_NodeRAG_Technical_Implementation.md)
 
@@ -107,9 +107,9 @@ Now that you understand core GraphRAG concepts, let's build working implementati
 
 Before diving into implementation, it's important to understand the different approaches available:
 
-- **Traditional GraphRAG**: Entity-relationship extraction with standard graph traversal
-- **Code GraphRAG**: Specialized for analyzing software codebases and dependencies
-- **Hybrid GraphRAG**: Combines graph reasoning with vector similarity for comprehensive search
+- **Traditional GraphRAG**: Entity-relationship extraction with standard graph traversal  
+- **Code GraphRAG**: Specialized for analyzing software codebases and dependencies  
+- **Hybrid GraphRAG**: Combines graph reasoning with vector similarity for comprehensive search  
 
 Each approach serves different use cases and complexity requirements.
 
@@ -121,17 +121,17 @@ Before implementing advanced NodeRAG architectures, it's essential to understand
 
 Traditional GraphRAG remains valuable for:
 
-- **Simpler Use Cases**: When specialized node types aren't needed
-- **Resource Constraints**: Lower computational requirements
-- **Rapid Prototyping**: Faster implementation and iteration
-- **Legacy Integration**: Working with existing graph systems
+- **Simpler Use Cases**: When specialized node types aren't needed  
+- **Resource Constraints**: Lower computational requirements  
+- **Rapid Prototyping**: Faster implementation and iteration  
+- **Legacy Integration**: Working with existing graph systems  
 
 #### Core Traditional GraphRAG Components
 
-1. **Entity Extraction**: Identify people, organizations, locations, concepts
-2. **Relationship Mapping**: Connect entities through typed relationships
-3. **Graph Construction**: Build searchable knowledge graph
-4. **Query Processing**: Traverse graph for multi-hop reasoning
+1. **Entity Extraction**: Identify people, organizations, locations, concepts  
+2. **Relationship Mapping**: Connect entities through typed relationships  
+3. **Graph Construction**: Build searchable knowledge graph  
+4. **Query Processing**: Traverse graph for multi-hop reasoning  
 
 #### Basic Entity and Relationship Extraction
 
@@ -269,10 +269,10 @@ Code GraphRAG specializes in analyzing software repositories and codebases to en
 
 #### Core Code GraphRAG Components
 
-1. **AST Analysis**: Parse code structure into graph nodes
-2. **Dependency Mapping**: Track imports, calls, and data flow
-3. **Semantic Extraction**: Understand code functionality and purpose
-4. **Query Processing**: Enable natural language queries about code
+1. **AST Analysis**: Parse code structure into graph nodes  
+2. **Dependency Mapping**: Track imports, calls, and data flow  
+3. **Semantic Extraction**: Understand code functionality and purpose  
+4. **Query Processing**: Enable natural language queries about code  
 
 For complete technical implementation, see: ⚙️ [Session6_Code_GraphRAG_Advanced.md](Session6_Code_GraphRAG_Advanced.md)
 
@@ -351,10 +351,10 @@ Let's build a complete GraphRAG system that combines traditional entity-relation
 
 You'll create a hybrid system that:
 
-1. Extracts entities and relationships from documents
-2. Builds a queryable knowledge graph
-3. Integrates vector similarity for semantic search
-4. Provides natural language query interface
+1. Extracts entities and relationships from documents  
+2. Builds a queryable knowledge graph  
+3. Integrates vector similarity for semantic search  
+4. Provides natural language query interface  
 
 ### Implementation Steps
 
@@ -388,28 +388,28 @@ In this session, you've learned how GraphRAG transforms information retrieval fr
 
 ### 🎯 Observer Path Key Concepts
 
-- **Core Problem**: Vector RAG can't reason about entity relationships
-- **GraphRAG Solution**: Represent knowledge as graphs with nodes and edges
-- **NodeRAG Innovation**: Six specialized node types for different knowledge structures
-- **Processing Pipeline**: Decomposition → Augmentation → Enrichment
+- **Core Problem**: Vector RAG can't reason about entity relationships  
+- **GraphRAG Solution**: Represent knowledge as graphs with nodes and edges  
+- **NodeRAG Innovation**: Six specialized node types for different knowledge structures  
+- **Processing Pipeline**: Decomposition → Augmentation → Enrichment  
 
 ### 📝 Participant Path Key Skills
 
-- **Traditional GraphRAG**: Entity-relationship extraction and graph construction
-- **Code GraphRAG**: AST analysis and software dependency modeling
-- **Hybrid Approaches**: Combining graph reasoning with vector similarity
-- **Query Processing**: Multi-hop reasoning through graph traversal
+- **Traditional GraphRAG**: Entity-relationship extraction and graph construction  
+- **Code GraphRAG**: AST analysis and software dependency modeling  
+- **Hybrid Approaches**: Combining graph reasoning with vector similarity  
+- **Query Processing**: Multi-hop reasoning through graph traversal  
 
 ### ⚙️ Implementer Path Advanced Topics
 
 For deep technical mastery, explore these advanced modules:
 
-- ⚙️ [NodeRAG Technical Implementation](Session6_NodeRAG_Technical_Implementation.md) - Advanced algorithms and optimization
-- ⚙️ [Code GraphRAG Advanced](Session6_Code_GraphRAG_Advanced.md) - Software analysis and pattern recognition
-- ⚙️ [Graph Traversal Advanced](Session6_Graph_Traversal_Advanced.md) - Multi-hop reasoning algorithms
-- ⚙️ [Hybrid GraphRAG Advanced](Session6_Hybrid_GraphRAG_Advanced.md) - Fusion algorithms and performance optimization
-- ⚙️ [Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md) - Complex graph algorithms
-- ⚙️ [Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md) - Enterprise deployment patterns
+- ⚙️ [NodeRAG Technical Implementation](Session6_NodeRAG_Technical_Implementation.md) - Advanced algorithms and optimization  
+- ⚙️ [Code GraphRAG Advanced](Session6_Code_GraphRAG_Advanced.md) - Software analysis and pattern recognition  
+- ⚙️ [Graph Traversal Advanced](Session6_Graph_Traversal_Advanced.md) - Multi-hop reasoning algorithms  
+- ⚙️ [Hybrid GraphRAG Advanced](Session6_Hybrid_GraphRAG_Advanced.md) - Fusion algorithms and performance optimization  
+- ⚙️ [Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md) - Complex graph algorithms  
+- ⚙️ [Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md) - Enterprise deployment patterns  
 
 ### Next Steps
 

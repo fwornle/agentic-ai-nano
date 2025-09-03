@@ -43,18 +43,18 @@ File system access represents one of the highest-risk attack vectors in AI agent
 
 - **Path Traversal**: Malicious inputs like `../../../etc/passwd` accessing sensitive system files
 - **System File Access**: Reading critical files like `/etc/passwd`, `C:\Windows\System32\config\SAM`
-- **Arbitrary Write Operations**: Creating malicious files in system directories
-- **Denial of Service**: Large file operations that exhaust system resources
+- **Arbitrary Write Operations**: Creating malicious files in system directories  
+- **Denial of Service**: Large file operations that exhaust system resources  
 
 ### Defense-in-Depth Strategy Overview
 
 Our server implements multiple security layers:
 
-1. **Sandboxing**: Physical isolation to designated directories
-2. **Path Validation**: Mathematical verification of file paths
-3. **Input Sanitization**: Content filtering and validation
-4. **Audit Logging**: Complete operation tracking
-5. **Resource Limits**: Prevention of resource exhaustion
+1. **Sandboxing**: Physical isolation to designated directories  
+2. **Path Validation**: Mathematical verification of file paths  
+3. **Input Sanitization**: Content filtering and validation  
+4. **Audit Logging**: Complete operation tracking  
+5. **Resource Limits**: Prevention of resource exhaustion  
 
 ### Project Setup Essentials
 
@@ -485,9 +485,9 @@ if __name__ == "__main__":
 
 For comprehensive coverage of advanced file system server topics, continue with these specialized modules:
 
-- ⚙️ [Advanced Security Patterns](Session2_Advanced_Security_Patterns.md) - Enterprise-grade security implementations
-- ⚙️ [Production Implementation Guide](Session2_Production_Implementation.md) - Complete server with all advanced features
-- ⚙️ [Enterprise File Operations](Session2_Enterprise_File_Operations.md) - Advanced file manipulation and monitoring
+- ⚙️ [Advanced Security Patterns](Session2_Advanced_Security_Patterns.md) - Enterprise-grade security implementations  
+- ⚙️ [Production Implementation Guide](Session2_Production_Implementation.md) - Complete server with all advanced features  
+- ⚙️ [Enterprise File Operations](Session2_Enterprise_File_Operations.md) - Advanced file manipulation and monitoring  
 
 ---
 

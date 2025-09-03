@@ -36,11 +36,11 @@ In Sessions 1-2, you built a RAG system that chunks documents intelligently and 
 
 Simple similarity search over large collections becomes painfully slow, and your system starts timing out under load. This session transforms your RAG system from basic vector matching into a high-performance search engine.
 
-**What You'll Learn:**
-- Production-grade indexing strategies
-- Hybrid search combining semantic and lexical matching
-- Optimization techniques for sub-100ms response times
-- Systems that scale with your data, not against it
+**What You'll Learn:**  
+- Production-grade indexing strategies  
+- Hybrid search combining semantic and lexical matching  
+- Optimization techniques for sub-100ms response times  
+- Systems that scale with your data, not against it  
 
 ![RAG Architecture Overview](images/RAG-overview.png)
 *Figure 1: Vector databases serve as the central search engine in RAG architectures, handling both semantic similarity and hybrid search patterns.*
@@ -57,9 +57,9 @@ The challenge is finding the nearest neighbors efficiently in spaces with hundre
 
 Consider searching through 1 million documents for "machine learning techniques." A naive approach would:
 
-1. Calculate similarity between your query vector and each document vector
-2. Sort all 1 million results by similarity score
-3. Return the top matches
+1. Calculate similarity between your query vector and each document vector  
+2. Sort all 1 million results by similarity score  
+3. Return the top matches  
 
 This approach requires 1 million similarity calculations per query - far too slow for production use.
 
@@ -79,9 +79,9 @@ class VectorDatabaseInterface:
         self.metric = metric       # cosine, euclidean, or dot_product
 ```
 
-The interface constructor defines two critical configuration parameters:
-- **Dimension** must match your embedding model exactly
-- **Metric choice** significantly impacts search quality
+The interface constructor defines two critical configuration parameters:  
+- **Dimension** must match your embedding model exactly  
+- **Metric choice** significantly impacts search quality  
 
 OpenAI's text-embedding-ada-002 produces 1536-dimensional vectors, while sentence-transformers models vary from 384 to 768 dimensions.
 
@@ -112,9 +112,9 @@ Vector updates are essential for production systems where document content chang
 
 **Key Design Decisions:**
 
-- **Cosine similarity**: Best for text embeddings, handles document length naturally
-- **Metadata storage**: Enables filtering by document type, date, or user permissions
-- **Batch operations**: Essential for efficient data loading and updates
+- **Cosine similarity**: Best for text embeddings, handles document length naturally  
+- **Metadata storage**: Enables filtering by document type, date, or user permissions  
+- **Batch operations**: Essential for efficient data loading and updates  
 
 ## Vector Database Selection Criteria
 
@@ -122,10 +122,10 @@ Moving from development to production requires careful consideration of index al
 
 The key factors in vector database selection:
 
-- **Scale**: How many vectors will you store and search?
-- **Performance**: What are your latency and throughput requirements?
-- **Features**: Do you need filtering, updates, or multi-tenancy?
-- **Deployment**: Self-hosted vs. managed service preferences?
+- **Scale**: How many vectors will you store and search?  
+- **Performance**: What are your latency and throughput requirements?  
+- **Features**: Do you need filtering, updates, or multi-tenancy?  
+- **Deployment**: Self-hosted vs. managed service preferences?  
 
 ### Popular Vector Database Options
 
@@ -139,11 +139,11 @@ The key factors in vector database selection:
 
 **Selection Guidelines:**
 
-- **<50K vectors**: Use exact search or simple ChromaDB
-- **50K-1M vectors**: ChromaDB or Qdrant with HNSW indexing
-- **>1M vectors**: Pinecone for managed, FAISS for custom solutions
-- **Complex filtering needs**: Qdrant or Weaviate
-- **Budget constraints**: Self-hosted ChromaDB or Qdrant
+- **<50K vectors**: Use exact search or simple ChromaDB  
+- **50K-1M vectors**: ChromaDB or Qdrant with HNSW indexing  
+- **>1M vectors**: Pinecone for managed, FAISS for custom solutions  
+- **Complex filtering needs**: Qdrant or Weaviate  
+- **Budget constraints**: Self-hosted ChromaDB or Qdrant  
 
 📝 **For Production Implementation:** See [Production Implementation Guide](Session3_Production_Implementation.md)
 
@@ -161,19 +161,19 @@ Each algorithm embodies a different philosophy for organizing high-dimensional s
 
 **Philosophy**: Navigate through similarity space like a GPS system
 
-- **Performance**: 3x faster than IVF with better accuracy
-- **Memory**: Higher usage but consistent performance
-- **Best for**: Real-time applications requiring <100ms latency
-- **Scalability**: Excellent up to 10M vectors
+- **Performance**: 3x faster than IVF with better accuracy  
+- **Memory**: Higher usage but consistent performance  
+- **Best for**: Real-time applications requiring <100ms latency  
+- **Scalability**: Excellent up to 10M vectors  
 
 ### IVF (Inverted File)
 
 **Philosophy**: Divide and conquer through intelligent clustering
 
-- **Performance**: Good balance of speed and memory efficiency
-- **Memory**: Lower usage, better for resource-constrained environments
-- **Best for**: Large datasets where memory is a constraint
-- **Scalability**: Better for 10M+ vectors with limited memory
+- **Performance**: Good balance of speed and memory efficiency  
+- **Memory**: Lower usage, better for resource-constrained environments  
+- **Best for**: Large datasets where memory is a constraint  
+- **Scalability**: Better for 10M+ vectors with limited memory  
 
 ## Performance Comparison
 
@@ -208,10 +208,10 @@ def recommend_index(dataset_size, memory_limit_gb, latency_requirement_ms):
         return "HNSW"  # Default for balanced requirements
 ```
 
-This decision tree demonstrates practical index selection:
-- **Ultra-low latency** (<100ms) with sufficient memory → HNSW
-- **Large datasets** (>10M vectors) or limited memory → IVF
-- **Balanced requirements** → HNSW (most common choice)
+This decision tree demonstrates practical index selection:  
+- **Ultra-low latency** (<100ms) with sufficient memory → HNSW  
+- **Large datasets** (>10M vectors) or limited memory → IVF  
+- **Balanced requirements** → HNSW (most common choice)  
 
 ⚙️ **For Advanced Tuning:** See [Advanced HNSW Tuning](Session3_Advanced_HNSW_Tuning.md)
 
@@ -223,23 +223,23 @@ This decision tree demonstrates practical index selection:
 
 Pure semantic search has a blind spot: it can miss exact terminology matches in favor of conceptually similar but contextually different content.
 
-Consider this example:
-- **User Query**: "What's the company's policy on remote work?"
-- **Document Text**: "Employees may work from home up to 3 days per week..."
+Consider this example:  
+- **User Query**: "What's the company's policy on remote work?"  
+- **Document Text**: "Employees may work from home up to 3 days per week..."  
 
 Pure semantic search might miss this match because "remote work" and "work from home" are semantically similar but lexically different. Hybrid search catches both patterns.
 
 ## The Two Components of Hybrid Search
 
-### 1. Semantic Search (Vector Similarity)
-- **Strengths**: Understands concepts, handles synonyms, captures context
-- **Weaknesses**: May miss exact terminology, can be too broad
-- **Example**: "ML algorithms" matches "machine learning techniques"
+### 1. Semantic Search (Vector Similarity)  
+- **Strengths**: Understands concepts, handles synonyms, captures context  
+- **Weaknesses**: May miss exact terminology, can be too broad  
+- **Example**: "ML algorithms" matches "machine learning techniques"  
 
-### 2. Lexical Search (Keyword Matching)
-- **Strengths**: Exact term matching, handles technical terminology, fast
-- **Weaknesses**: No concept understanding, misses synonyms
-- **Example**: "API endpoint" only matches documents containing "API" and "endpoint"
+### 2. Lexical Search (Keyword Matching)  
+- **Strengths**: Exact term matching, handles technical terminology, fast  
+- **Weaknesses**: No concept understanding, misses synonyms  
+- **Example**: "API endpoint" only matches documents containing "API" and "endpoint"  
 
 ## Fusion Strategies
 
@@ -251,10 +251,10 @@ The key to effective hybrid search is combining results from both approaches:
 combined_score = (semantic_score + keyword_score) / 2
 ```
 
-**Problems:**
-- Semantic and keyword scores use different scales
-- May unfairly weight one approach over the other
-- Doesn't handle missing results well
+**Problems:**  
+- Semantic and keyword scores use different scales  
+- May unfairly weight one approach over the other  
+- Doesn't handle missing results well  
 
 ### Reciprocal Rank Fusion (RRF) - Recommended
 ```python
@@ -265,18 +265,18 @@ def rrf_score(rank, k=60):
 final_score = semantic_rrf + keyword_rrf
 ```
 
-**Advantages:**
-- Works with rankings instead of raw scores
-- No normalization needed
-- Robust to outliers and scale differences
-- Mathematically principled
+**Advantages:**  
+- Works with rankings instead of raw scores  
+- No normalization needed  
+- Robust to outliers and scale differences  
+- Mathematically principled  
 
 ## Performance Impact
 
-Hybrid search typically provides:
-- **15-25% better precision** than pure semantic search
-- **Better user satisfaction** through exact terminology matching
-- **Improved handling** of technical domains and proper nouns
+Hybrid search typically provides:  
+- **15-25% better precision** than pure semantic search  
+- **Better user satisfaction** through exact terminology matching  
+- **Improved handling** of technical domains and proper nouns  
 
 📝 **For Implementation:** See [Advanced Hybrid Search](Session3_Advanced_Hybrid_Search.md)
 
@@ -307,24 +307,24 @@ Users often ask similar or repeated questions in RAG systems, making caching hig
 ### 2. Batch Processing
 **Impact**: 3-5x improvement for bulk operations
 
-- Process multiple queries simultaneously
-- Batch vector insertions (1000+ at a time)
-- Amortize database connection overhead
+- Process multiple queries simultaneously  
+- Batch vector insertions (1000+ at a time)  
+- Amortize database connection overhead  
 
 ### 3. Index Parameter Tuning
 **Impact**: 2-3x speed improvements possible
 
-**HNSW Key Parameters:**
-- **M**: Controls connectivity (higher = more accurate, more memory)
-- **ef_construction**: Build quality (higher = better graph, slower build)
-- **ef_search**: Runtime speed/accuracy trade-off
+**HNSW Key Parameters:**  
+- **M**: Controls connectivity (higher = more accurate, more memory)  
+- **ef_construction**: Build quality (higher = better graph, slower build)  
+- **ef_search**: Runtime speed/accuracy trade-off  
 
 ### 4. Performance Monitoring
-**Critical Metrics:**
-- **P50, P95, P99 latencies**: Not just averages
-- **Cache hit rates**: Should be 60-80% for good performance
-- **Error rates**: Monitor system health
-- **Throughput**: Queries per second capacity
+**Critical Metrics:**  
+- **P50, P95, P99 latencies**: Not just averages  
+- **Cache hit rates**: Should be 60-80% for good performance  
+- **Error rates**: Monitor system health  
+- **Throughput**: Queries per second capacity  
 
 ## Adaptive Optimization
 
@@ -347,37 +347,37 @@ if cache_hit_rate < 60%:
 
 ## Essential Concepts Mastered
 
-**Vector Database Fundamentals:**
-- Vector databases transform semantic search into a geometry problem
-- Cosine similarity is best for text embeddings
-- Batch operations are 10-50x faster than single insertions
+**Vector Database Fundamentals:**  
+- Vector databases transform semantic search into a geometry problem  
+- Cosine similarity is best for text embeddings  
+- Batch operations are 10-50x faster than single insertions  
 
-**Index Algorithm Selection:**
-- HNSW: Best for speed and accuracy with sufficient memory
-- IVF: Better for large datasets with memory constraints
-- Choose based on dataset size, memory limits, and latency requirements
+**Index Algorithm Selection:**  
+- HNSW: Best for speed and accuracy with sufficient memory  
+- IVF: Better for large datasets with memory constraints  
+- Choose based on dataset size, memory limits, and latency requirements  
 
-**Hybrid Search Benefits:**
-- Combines semantic understanding with exact terminology matching
-- 15-25% better precision than pure semantic search
-- Reciprocal Rank Fusion (RRF) is superior to simple score averaging
+**Hybrid Search Benefits:**  
+- Combines semantic understanding with exact terminology matching  
+- 15-25% better precision than pure semantic search  
+- Reciprocal Rank Fusion (RRF) is superior to simple score averaging  
 
-**Performance Optimization:**
-- Query caching provides 95% latency reduction for repeated queries
-- Monitor P95/P99 latencies, not just averages
-- Adaptive tuning enables automatic parameter optimization
+**Performance Optimization:**  
+- Query caching provides 95% latency reduction for repeated queries  
+- Monitor P95/P99 latencies, not just averages  
+- Adaptive tuning enables automatic parameter optimization  
 
 ## Next Steps for Each Learning Path
 
 ### 📝 Participant Path - Ready for Implementation
-Continue with practical guides:
-- [Production Implementation Guide](Session3_Production_Implementation.md)
-- [Performance Optimization](Session3_Performance_Optimization.md)
+Continue with practical guides:  
+- [Production Implementation Guide](Session3_Production_Implementation.md)  
+- [Performance Optimization](Session3_Performance_Optimization.md)  
 
 ### ⚙️ Implementer Path - Advanced Mastery
-Explore deep technical topics:
-- [Advanced HNSW Tuning](Session3_Advanced_HNSW_Tuning.md)
-- [Advanced Hybrid Search](Session3_Advanced_Hybrid_Search.md)
+Explore deep technical topics:  
+- [Advanced HNSW Tuning](Session3_Advanced_HNSW_Tuning.md)  
+- [Advanced Hybrid Search](Session3_Advanced_Hybrid_Search.md)  
 
 ---
 

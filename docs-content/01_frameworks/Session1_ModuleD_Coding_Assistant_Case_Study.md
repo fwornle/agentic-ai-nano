@@ -15,10 +15,10 @@ This isn't just another case study. By understanding the Data Processing Assista
 
 This isn't just another tutorial. By understanding the Data Processing Assistant's architecture, you'll see how:
 
-- **Real dependency injection** works at scale (like swapping data processing engines in production)
-- **Professional agents** handle data engineering complexity beyond simple examples
-- **Production patterns** solve problems like context management, error recovery, and pipeline orchestration
-- **Modern tooling** (LiteLLM, MCP) makes bare metal development viable for data processing tools
+- **Real dependency injection** works at scale (like swapping data processing engines in production)  
+- **Professional agents** handle data engineering complexity beyond simple examples  
+- **Production patterns** solve problems like context management, error recovery, and pipeline orchestration  
+- **Modern tooling** (LiteLLM, MCP) makes bare metal development viable for data processing tools  
 
 You're not just learning theory - you're examining a system that handles the same orchestration challenges as professional data engineering environments.
 

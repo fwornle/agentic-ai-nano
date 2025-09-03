@@ -59,32 +59,32 @@ D) User interface quality
 
 ## Performance Scoring
 
-- **5/5 Correct**: Excellent mastery of advanced RAG evaluation metrics
-- **4/5 Correct**: Good understanding with minor conceptual gaps
-- **3/5 Correct**: Adequate grasp, review neural metrics and domain-specific evaluation
-- **2/5 Correct**: Needs focused study of evaluation methodologies
-- **0-1 Correct**: Recommend hands-on practice with RAG evaluation tools
+- **5/5 Correct**: Excellent mastery of advanced RAG evaluation metrics  
+- **4/5 Correct**: Good understanding with minor conceptual gaps  
+- **3/5 Correct**: Adequate grasp, review neural metrics and domain-specific evaluation  
+- **2/5 Correct**: Needs focused study of evaluation methodologies  
+- **0-1 Correct**: Recommend hands-on practice with RAG evaluation tools  
 
 ---
 
 ## Key Concepts Review
 
-### Advanced Evaluation Metrics
-1. **BERTScore**: Contextual embedding-based semantic similarity measurement
-2. **Attribution Scores**: Document contribution analysis using leave-one-out methodology
-3. **Neural Metrics**: Deep learning-based evaluation capturing semantic relationships
-4. **Domain-Specific Metrics**: Specialized evaluation for field-specific requirements
+### Advanced Evaluation Metrics  
+1. **BERTScore**: Contextual embedding-based semantic similarity measurement  
+2. **Attribution Scores**: Document contribution analysis using leave-one-out methodology  
+3. **Neural Metrics**: Deep learning-based evaluation capturing semantic relationships  
+4. **Domain-Specific Metrics**: Specialized evaluation for field-specific requirements  
 
-### Evaluation Strategies
-- **Semantic Assessment**: Beyond lexical matching to meaning understanding
-- **Safety Validation**: Critical importance in high-stakes domains like medicine
-- **Explainability**: Understanding which sources contribute to responses
-- **Comprehensive Evaluation**: Combining multiple metrics for robust assessment
+### Evaluation Strategies  
+- **Semantic Assessment**: Beyond lexical matching to meaning understanding  
+- **Safety Validation**: Critical importance in high-stakes domains like medicine  
+- **Explainability**: Understanding which sources contribute to responses  
+- **Comprehensive Evaluation**: Combining multiple metrics for robust assessment  
 
 ---
 
-## Answer Summary
-1. B  2. B  3. B  4. B  5. B
+## Answer Summary  
+1. B  2. B  3. B  4. B  5. B  
 
 ---
 ---

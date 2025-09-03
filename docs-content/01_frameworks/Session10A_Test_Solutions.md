@@ -82,11 +82,11 @@ for field_name, key_id in field_encryption_map.items():
 
 ---
 
-### Performance Benchmarks:
-- 7/7 correct: Expert-level understanding of enterprise security
-- 5-6 correct: Advanced comprehension with minor gaps
-- 3-4 correct: Intermediate understanding, review recommended
-- Below 3: Fundamental concepts need reinforcement
+### Performance Benchmarks:  
+- 7/7 correct: Expert-level understanding of enterprise security  
+- 5-6 correct: Advanced comprehension with minor gaps  
+- 3-4 correct: Intermediate understanding, review recommended  
+- Below 3: Fundamental concepts need reinforcement  
 
 [**← Return to Module A**](Session10_ModuleA_Advanced_Security_Compliance.md)
 ---

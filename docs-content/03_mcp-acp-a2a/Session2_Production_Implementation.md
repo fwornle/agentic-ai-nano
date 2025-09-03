@@ -403,31 +403,31 @@ Your complete production file system server now includes:
 
 ### Security Features
 
-- **Sandboxing**: Restricts operations to designated directory
-- **Path Validation**: Prevents directory traversal attacks
-- **Content-Based File Type Detection**: Checks extensions AND MIME types
-- **Size Limits**: Prevents memory exhaustion
-- **Input Sanitization**: Validates filenames and paths
-- **Audit Logging**: Tracks all operations for compliance
+- **Sandboxing**: Restricts operations to designated directory  
+- **Path Validation**: Prevents directory traversal attacks  
+- **Content-Based File Type Detection**: Checks extensions AND MIME types  
+- **Size Limits**: Prevents memory exhaustion  
+- **Input Sanitization**: Validates filenames and paths  
+- **Audit Logging**: Tracks all operations for compliance  
 
 ### Core Capabilities
 
-- **Directory Browsing**: With metadata and filtering
-- **File Reading**: Text and binary support with partial reads
-- **File Writing**: With safety checks and directory creation
-- **Content Search**: Across multiple files with context
-- **File Information**: Including checksums and metadata
-- **Resources**: Configuration and statistics exposure
-- **Prompts**: For common file system analysis tasks
+- **Directory Browsing**: With metadata and filtering  
+- **File Reading**: Text and binary support with partial reads  
+- **File Writing**: With safety checks and directory creation  
+- **Content Search**: Across multiple files with context  
+- **File Information**: Including checksums and metadata  
+- **Resources**: Configuration and statistics exposure  
+- **Prompts**: For common file system analysis tasks  
 
 ### Production Features
 
-- **Async I/O**: Non-blocking operations
-- **Result Limits**: On search results and file sizes
-- **Comprehensive Logging**: For monitoring and debugging
-- **Modular Design**: Easy to extend and maintain
-- **Error Handling**: Graceful failure modes
-- **Resource Management**: Efficient memory and CPU usage
+- **Async I/O**: Non-blocking operations  
+- **Result Limits**: On search results and file sizes  
+- **Comprehensive Logging**: For monitoring and debugging  
+- **Modular Design**: Easy to extend and maintain  
+- **Error Handling**: Graceful failure modes  
+- **Resource Management**: Efficient memory and CPU usage  
 
 ## Complete Assessment
 
@@ -495,16 +495,16 @@ D) Automatic file compression
 
 ### Solutions
 
-1. **B** - To prevent unauthorized file access
+1. **B** - To prevent unauthorized file access  
 2. **B** - `Path.resolve()`
-3. **C** - Encoded as base64
-4. **C** - Both extension and MIME type
-5. **C** - WARNING
-6. **B** - A SandboxError is raised
-7. **B** - To prevent denial of service attacks
-8. **B** - Whitelist safe extensions
-9. **B** - By limiting maximum results returned
-10. **C** - Non-blocking operations
+3. **C** - Encoded as base64  
+4. **C** - Both extension and MIME type  
+5. **C** - WARNING  
+6. **B** - A SandboxError is raised  
+7. **B** - To prevent denial of service attacks  
+8. **B** - Whitelist safe extensions  
+9. **B** - By limiting maximum results returned  
+10. **C** - Non-blocking operations  
 ---
 
 ## 🧭 Navigation

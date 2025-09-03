@@ -13,9 +13,9 @@ Imagine a world where every AI agent speaks the same language. Where your Claude
 
 **Welcome to the era of standardized AI communication.** Three revolutionary protocols are transforming how AI systems communicate:
 
-- **MCP (Model Context Protocol)**: AI-to-tool standardization
-- **ACP (Agent Communication Protocol)**: Local agent coordination
-- **A2A (Agent-to-Agent)**: Cross-organizational collaboration
+- **MCP (Model Context Protocol)**: AI-to-tool standardization  
+- **ACP (Agent Communication Protocol)**: Local agent coordination  
+- **A2A (Agent-to-Agent)**: Cross-organizational collaboration  
 
 These protocols eliminate the integration nightmare that has plagued AI development, forming the foundation of truly scalable AI ecosystems.
 
@@ -93,9 +93,9 @@ Agents register capabilities without external dependencies using standard HTTP. 
 
 **ACP Characteristics**:
 
-- **vs MCP**: Agent coordination instead of tool integration
-- **vs A2A**: Local-first instead of cross-organization
-- **vs Custom**: Standardized REST interface
+- **vs MCP**: Agent coordination instead of tool integration  
+- **vs A2A**: Local-first instead of cross-organization  
+- **vs Custom**: Standardized REST interface  
 
 **Key Use Cases**: Factory automation, edge AI on IoT devices, emergency systems requiring offline operation.
 
@@ -206,19 +206,19 @@ stdio://python weather_server.py
 
 **Interactive Testing Features**:
 
-- Browse available tools, resources, and prompts
-- Execute tools with auto-generated forms
-- View real-time responses with syntax highlighting
+- Browse available tools, resources, and prompts  
+- Execute tools with auto-generated forms  
+- View real-time responses with syntax highlighting  
 
 ![MCP Inspector Interface](images/mcp-inspector-interface.png)
 *Figure 5: MCP Inspector provides interactive testing with auto-generated forms and real-time feedback*
 
 **Production Development Pattern**:
 
-1. **Develop**: Write MCP server tools
-2. **Test**: Use Inspector to validate functionality
-3. **Debug**: Inspector shows detailed error messages
-4. **Deploy**: Export configuration for production
+1. **Develop**: Write MCP server tools  
+2. **Test**: Use Inspector to validate functionality  
+3. **Debug**: Inspector shows detailed error messages  
+4. **Deploy**: Export configuration for production  
 
 **Team Features**: Schema validation, performance monitoring, configuration export to Claude Desktop/Cursor IDE, and complete JSON-RPC message logging.
 
@@ -230,9 +230,9 @@ stdio://python weather_server.py
 
 For comprehensive coverage of advanced protocol implementations, enterprise patterns, and production deployments:
 
-- ⚙️ [Advanced MCP Patterns](Session4_Advanced_Server_Architecture.md)
-- ⚙️ [Enterprise Security](Session5_Advanced_OAuth.md)
-- ⚙️ [Production Monitoring](Session4_Production_Monitoring_Systems.md)
+- ⚙️ [Advanced MCP Patterns](Session4_Advanced_Server_Architecture.md)  
+- ⚙️ [Enterprise Security](Session5_Advanced_OAuth.md)  
+- ⚙️ [Production Monitoring](Session4_Production_Monitoring_Systems.md)  
 
 ---
 
@@ -242,58 +242,58 @@ For comprehensive coverage of advanced protocol implementations, enterprise patt
 
 **Phase 1: Master MCP (Sessions 1-5)**:
 
-- Build your first MCP server with practical tools
-- Integrate with file systems and databases securely
-- Deploy production-ready MCP servers with monitoring
-- Connect MCP servers to LangChain agents for complex workflows
+- Build your first MCP server with practical tools  
+- Integrate with file systems and databases securely  
+- Deploy production-ready MCP servers with monitoring  
+- Connect MCP servers to LangChain agents for complex workflows  
 
 **Phase 2: Agent Communication (Sessions 6-7)**:
 
-- Implement ACP for local agent coordination patterns
-- Build A2A-enabled agents for cross-organizational collaboration
-- Create multi-agent orchestration systems
+- Implement ACP for local agent coordination patterns  
+- Build A2A-enabled agents for cross-organizational collaboration  
+- Create multi-agent orchestration systems  
 
 **Phase 3: Enterprise Deployment (Sessions 8-9)**:
 
-- Advanced agent workflows with error handling and resilience
-- Production deployment with monitoring and scaling
-- End-to-end enterprise agent ecosystems
+- Advanced agent workflows with error handling and resilience  
+- Production deployment with monitoring and scaling  
+- End-to-end enterprise agent ecosystems  
 
 ### Development Environment Setup
 
 **Before Session 1**:
 
-1. Install Node.js and Python 3.8+
-2. Set up development environment with VSCode
+1. Install Node.js and Python 3.8+  
+2. Set up development environment with VSCode  
 3. Install MCP Inspector: `npx @modelcontextprotocol/inspector`
 
 ### Enterprise Planning Checklist
 
 **Architecture Considerations**:
 
-- Which systems need MCP server integration?
-- Where will agent coordination benefit from ACP?
-- What external partnerships could leverage A2A?
+- Which systems need MCP server integration?  
+- Where will agent coordination benefit from ACP?  
+- What external partnerships could leverage A2A?  
 
 **Security Planning**:
 
-- Authentication and authorization strategies
-- Network security and API access controls
-- Data privacy and compliance requirements
+- Authentication and authorization strategies  
+- Network security and API access controls  
+- Data privacy and compliance requirements  
 
 **Deployment Strategy**:
 
-- Development and testing environments
-- Production monitoring and alerting
-- Scaling and performance optimization
+- Development and testing environments  
+- Production monitoring and alerting  
+- Scaling and performance optimization  
 
 ## Key Takeaways
 
 **Technical Foundation**:
 
-- **MCP**: Standardizes AI-to-tool communication, eliminating N×M integration complexity
-- **ACP**: Enables efficient local agent coordination for edge environments
-- **A2A**: Facilitates cross-organizational agent collaboration and the "agent economy"
+- **MCP**: Standardizes AI-to-tool communication, eliminating N×M integration complexity  
+- **ACP**: Enables efficient local agent coordination for edge environments  
+- **A2A**: Facilitates cross-organizational agent collaboration and the "agent economy"  
 
 **Integration Power**: Combined protocols create comprehensive enterprise AI ecosystems where systems communicate naturally and efficiently.
 
@@ -303,11 +303,11 @@ For comprehensive coverage of advanced protocol implementations, enterprise patt
 
 ## Additional Resources
 
-- [Model Context Protocol Official Site](https://modelcontextprotocol.io/) - Complete MCP specification and examples
-- [Agent Communication Protocol](https://agentcommunicationprotocol.dev/) - ACP documentation and tutorials
-- [A2A Protocol GitHub](https://github.com/a2a-protocol) - Agent-to-Agent protocol implementations
-- [MCP Inspector](https://github.com/modelcontextprotocol/inspector) - Essential tool for MCP development
-- [Enterprise AI Integration Patterns](https://enterprise-ai-patterns.org/) - Best practices for production deployments
+- [Model Context Protocol Official Site](https://modelcontextprotocol.io/) - Complete MCP specification and examples  
+- [Agent Communication Protocol](https://agentcommunicationprotocol.dev/) - ACP documentation and tutorials  
+- [A2A Protocol GitHub](https://github.com/a2a-protocol) - Agent-to-Agent protocol implementations  
+- [MCP Inspector](https://github.com/modelcontextprotocol/inspector) - Essential tool for MCP development  
+- [Enterprise AI Integration Patterns](https://enterprise-ai-patterns.org/) - Best practices for production deployments  
 
 ---
 
@@ -317,17 +317,17 @@ For comprehensive coverage of advanced protocol implementations, enterprise patt
 
 ### Tasks
 
-1. **Install MCP Inspector** and connect to a sample MCP server
-2. **Explore protocol differences** by comparing MCP, ACP, and A2A use cases
-3. **Plan your integration** by identifying which protocols your projects need
-4. **Set up development tools** including VSCode, Python, and Node.js
+1. **Install MCP Inspector** and connect to a sample MCP server  
+2. **Explore protocol differences** by comparing MCP, ACP, and A2A use cases  
+3. **Plan your integration** by identifying which protocols your projects need  
+4. **Set up development tools** including VSCode, Python, and Node.js  
 
 ### Expected Outcomes
 
-- Working MCP Inspector installation
-- Understanding of when to use each protocol
-- Development environment ready for hands-on sessions
-- Clear plan for your learning journey through the nanodegree
+- Working MCP Inspector installation  
+- Understanding of when to use each protocol  
+- Development environment ready for hands-on sessions  
+- Clear plan for your learning journey through the nanodegree  
 
 **Hint:** Start with MCP Inspector to see the protocols in action before diving into implementation.
 

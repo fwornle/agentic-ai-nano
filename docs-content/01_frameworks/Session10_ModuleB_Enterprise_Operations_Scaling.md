@@ -1780,9 +1780,9 @@ You've now mastered enterprise operations and scaling for production agent syste
 
 ### Next Steps
 
-- **Return to Core**: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)
-- **Continue to Module A**: [Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)
-- **Portfolio Project**: Build a complete enterprise-grade agent platform with full operations
+- **Return to Core**: [Session 10 Main](Session10_Enterprise_Integration_Production_Deployment.md)  
+- **Continue to Module A**: [Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)  
+- **Portfolio Project**: Build a complete enterprise-grade agent platform with full operations  
 
 ---
 

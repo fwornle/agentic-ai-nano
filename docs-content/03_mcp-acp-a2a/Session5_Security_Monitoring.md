@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Real-time security event detection and alerting
-- Comprehensive audit logging with tamper-proof storage
-- Advanced threat detection using machine learning
-- Compliance monitoring and automated reporting
+- Real-time security event detection and alerting  
+- Comprehensive audit logging with tamper-proof storage  
+- Advanced threat detection using machine learning  
+- Compliance monitoring and automated reporting  
 
 ## Enterprise Security Monitoring Architecture
 

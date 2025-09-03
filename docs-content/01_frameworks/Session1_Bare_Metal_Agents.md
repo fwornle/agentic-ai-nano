@@ -44,11 +44,11 @@ This session offers three distinct learning paths designed to match your goals a
 
 By the end of this path, you will understand:
 
-- Core agent architecture patterns using Python and LLM APIs
-- The five fundamental agentic patterns and their applications
-- Model-application layer separation for production systems
-- Integration strategies with cloud data services
-- Cost optimization approaches for enterprise-scale processing
+- Core agent architecture patterns using Python and LLM APIs  
+- The five fundamental agentic patterns and their applications  
+- Model-application layer separation for production systems  
+- Integration strategies with cloud data services  
+- Cost optimization approaches for enterprise-scale processing  
 
 ## The Bare Metal Approach: Essential for Data Pipeline Control
 
@@ -74,10 +74,10 @@ The model-application layer separation becomes critical when managing costs acro
 
 Engineering teams leverage bare metal agents for:
 
-- **Pipeline Orchestration**: Agents that analyze incoming data characteristics and route processing through optimal transformation workflows
-- **Quality Assurance**: Systems that detect data anomalies in streaming pipelines and trigger automated data cleansing workflows
-- **Cost Optimization**: Agents that monitor processing patterns and dynamically adjust resource allocation to meet budget constraints
-- **Compliance Monitoring**: Systems ensuring all data handling adheres to GDPR requirements and industry data governance standards
+- **Pipeline Orchestration**: Agents that analyze incoming data characteristics and route processing through optimal transformation workflows  
+- **Quality Assurance**: Systems that detect data anomalies in streaming pipelines and trigger automated data cleansing workflows  
+- **Cost Optimization**: Agents that monitor processing patterns and dynamically adjust resource allocation to meet budget constraints  
+- **Compliance Monitoring**: Systems ensuring all data handling adheres to GDPR requirements and industry data governance standards  
 
 ## Core Implementation: Building Intelligence from First Principles
 
@@ -149,9 +149,9 @@ API call tracking with model tags enables detailed cost analysis across differen
 
 These concepts form the foundation of reliable data processing:
 
-1. **Model Interface**: Sophisticated LLM API management with rate limiting and cost tracking across petabyte-scale operations
-2. **Memory Management**: Efficient context caching within pod memory constraints while maintaining processing history
-3. **Tool Registry**: Standardized integration framework for cloud services and data stores
+1. **Model Interface**: Sophisticated LLM API management with rate limiting and cost tracking across petabyte-scale operations  
+2. **Memory Management**: Efficient context caching within pod memory constraints while maintaining processing history  
+3. **Tool Registry**: Standardized integration framework for cloud services and data stores  
 
 #### Input/Output Handling
 
@@ -223,11 +223,11 @@ These five patterns form the intelligence foundation for data processing systems
 
 ![Agentic Patterns](images/5-agent-patterns.png)
 
-1. **Reflection**: Self-monitoring and optimization for pipeline performance
-2. **Tool Use**: Integration with cloud data infrastructure and processing services
-3. **Planning**: Workflow orchestration and resource allocation for data pipelines
-4. **ReAct**: Dynamic response to data anomalies and processing failures
-5. **Multi-Agent**: Coordination across distributed data processing nodes
+1. **Reflection**: Self-monitoring and optimization for pipeline performance  
+2. **Tool Use**: Integration with cloud data infrastructure and processing services  
+3. **Planning**: Workflow orchestration and resource allocation for data pipelines  
+4. **ReAct**: Dynamic response to data anomalies and processing failures  
+5. **Multi-Agent**: Coordination across distributed data processing nodes  
 
 ### Pattern 1: Reflection - Pipeline Performance Optimization
 
@@ -604,10 +604,10 @@ The quality assessment produces actionable insights including numerical quality 
 
 For comprehensive advanced coverage, explore the specialized modules:
 
-- [⚙️ Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md) - Hierarchical agents and complex orchestration
-- [⚙️ Performance Optimization](Session1_ModuleB_Performance_Optimization.md) - Petabyte-scale processing techniques
-- [⚙️ Complex State Management](Session1_ModuleC_Complex_State_Management.md) - Distributed state handling
-- [⚙️ Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md) - Real-world implementation example
+- [⚙️ Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md) - Hierarchical agents and complex orchestration  
+- [⚙️ Performance Optimization](Session1_ModuleB_Performance_Optimization.md) - Petabyte-scale processing techniques  
+- [⚙️ Complex State Management](Session1_ModuleC_Complex_State_Management.md) - Distributed state handling  
+- [⚙️ Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md) - Real-world implementation example  
 
 ---
 
@@ -655,10 +655,10 @@ D) To reduce code size
 
 Advanced patterns for specialized data processing applications:
 
-- [⚙️ Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md) - Hierarchical agents for complex data pipeline orchestration
-- [⚙️ Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md) - Techniques for petabyte-scale data throughput
-- [⚙️ Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md) - Managing state across distributed data processing systems
-- [⚙️ Module D: Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md) - Building ML pipeline development tools for data engineering
+- [⚙️ Module A: Advanced Agent Patterns](Session1_ModuleA_Advanced_Agent_Patterns.md) - Hierarchical agents for complex data pipeline orchestration  
+- [⚙️ Module B: Performance Optimization](Session1_ModuleB_Performance_Optimization.md) - Techniques for petabyte-scale data throughput  
+- [⚙️ Module C: Complex State Management](Session1_ModuleC_Complex_State_Management.md) - Managing state across distributed data processing systems  
+- [⚙️ Module D: Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md) - Building ML pipeline development tools for data engineering  
 ---
 
 ## 🧭 Navigation

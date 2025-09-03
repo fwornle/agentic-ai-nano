@@ -40,11 +40,11 @@ This session offers three distinct learning paths designed to match your goals a
 
 By completing your chosen learning path, you will:
 
-- Design role-based multi-agent teams with defined responsibilities for data processing workflows
-- Implement CrewAI workflows using sequential and hierarchical patterns for ETL orchestration
-- Build agents with specialized capabilities and collaborative behaviors for data quality and analysis
-- Orchestrate complex processes using task delegation and coordination across distributed data systems
-- Optimize crew performance with caching and monitoring for production data pipeline environments
+- Design role-based multi-agent teams with defined responsibilities for data processing workflows  
+- Implement CrewAI workflows using sequential and hierarchical patterns for ETL orchestration  
+- Build agents with specialized capabilities and collaborative behaviors for data quality and analysis  
+- Orchestrate complex processes using task delegation and coordination across distributed data systems  
+- Optimize crew performance with caching and monitoring for production data pipeline environments  
 
 ## The Team Revolution: From Individual Processors to Collaborative Intelligence
 
@@ -56,11 +56,11 @@ Think of it as the difference between having one monolithic data processor tryin
 
 The principles that make successful data engineering teams effective:
 
-- **Role specialization with clear responsibilities** - like having dedicated data quality experts, pipeline architects, and ML specialists rather than generalists
-- **Sequential and hierarchical workflow patterns** - structured collaboration that scales from terabytes to petabytes
-- **Task delegation and result aggregation** - intelligent work distribution across data processing stages
-- **Memory sharing and communication between agents** - persistent team knowledge about data schemas, quality rules, and processing patterns
-- **Performance optimization through caching and rate limiting** - production-ready efficiency for enterprise data workflows
+- **Role specialization with clear responsibilities** - like having dedicated data quality experts, pipeline architects, and ML specialists rather than generalists  
+- **Sequential and hierarchical workflow patterns** - structured collaboration that scales from terabytes to petabytes  
+- **Task delegation and result aggregation** - intelligent work distribution across data processing stages  
+- **Memory sharing and communication between agents** - persistent team knowledge about data schemas, quality rules, and processing patterns  
+- **Performance optimization through caching and rate limiting** - production-ready efficiency for enterprise data workflows  
 
 ## Quick Start Example
 

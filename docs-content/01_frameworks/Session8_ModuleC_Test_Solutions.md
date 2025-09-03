@@ -72,30 +72,30 @@ connector = aiohttp.TCPConnector(
 
 ## Key Performance Optimization Concepts
 
-### Caching Strategies
-- **L1 Memory Cache**: Provides millisecond access for hot data
-- **L2 Redis Cache**: Enables distributed caching with persistence
-- **Intelligent Eviction**: Uses recency and frequency for optimal cache management
-- **Cache Promotion**: Automatically moves popular data to faster cache levels
+### Caching Strategies  
+- **L1 Memory Cache**: Provides millisecond access for hot data  
+- **L2 Redis Cache**: Enables distributed caching with persistence  
+- **Intelligent Eviction**: Uses recency and frequency for optimal cache management  
+- **Cache Promotion**: Automatically moves popular data to faster cache levels  
 
-### Cost Management
-- **Multi-tier Budgeting**: Daily, weekly, and monthly budget tracking
-- **Automated Protection**: Automatic scaling controls at budget thresholds
-- **Model Right-sizing**: Intelligent selection based on requirements and costs
-- **Emergency Controls**: Graceful degradation when budget limits are reached
+### Cost Management  
+- **Multi-tier Budgeting**: Daily, weekly, and monthly budget tracking  
+- **Automated Protection**: Automatic scaling controls at budget thresholds  
+- **Model Right-sizing**: Intelligent selection based on requirements and costs  
+- **Emergency Controls**: Graceful degradation when budget limits are reached  
 
-### Performance Optimization
-- **Connection Pooling**: Reuses HTTP connections for reduced latency
-- **Request Batching**: Groups requests for improved throughput
-- **Context Management**: Intelligent pruning of conversation history
-- **Memory Optimization**: Efficient resource usage with garbage collection control
+### Performance Optimization  
+- **Connection Pooling**: Reuses HTTP connections for reduced latency  
+- **Request Batching**: Groups requests for improved throughput  
+- **Context Management**: Intelligent pruning of conversation history  
+- **Memory Optimization**: Efficient resource usage with garbage collection control  
 
 ### Business Value
-These optimization techniques deliver:
-- **Cost Savings**: Up to 90% cost reduction through intelligent model selection
-- **Performance Gains**: Millisecond cache access and reduced connection overhead
-- **Scalability**: Distributed caching and connection pooling support high concurrency
-- **Reliability**: Budget protection prevents service disruption from cost overruns
+These optimization techniques deliver:  
+- **Cost Savings**: Up to 90% cost reduction through intelligent model selection  
+- **Performance Gains**: Millisecond cache access and reduced connection overhead  
+- **Scalability**: Distributed caching and connection pooling support high concurrency  
+- **Reliability**: Budget protection prevents service disruption from cost overruns  
 
 ---
 ---

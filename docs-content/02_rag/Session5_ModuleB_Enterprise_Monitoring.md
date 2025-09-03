@@ -9,8 +9,8 @@ This module teaches you to build enterprise-grade monitoring systems that meet o
 
 ### Related Modules
 
-- **[Module A: Advanced Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Advanced evaluation metrics and neural scoring
-- **[Session 5 Core: RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts
+- **[Module A: Advanced Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Advanced evaluation metrics and neural scoring  
+- **[Session 5 Core: RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts  
 
 ### Quick Start
 

@@ -48,11 +48,11 @@ Before agents can collaborate, they need to establish diplomatic protocols—a u
 
 Think of A2A as the constitution for a society of digital minds:
 
-1. **Agent Cards**: Like diplomatic credentials, these JSON documents announce what each agent can do, where to find them, and how to work with them
-2. **Task Management**: A formal lifecycle that tracks every collaboration from initial request to final resolution
-3. **Message Exchange**: JSON-RPC 2.0 over HTTP(S)—the diplomatic language that any agent can speak and understand
-4. **Authentication**: Enterprise-grade security that ensures only authorized agents can participate in sensitive collaborations
-5. **Distributed Coordination**: The ability to track complex, multi-step collaborations across organizational boundaries
+1. **Agent Cards**: Like diplomatic credentials, these JSON documents announce what each agent can do, where to find them, and how to work with them  
+2. **Task Management**: A formal lifecycle that tracks every collaboration from initial request to final resolution  
+3. **Message Exchange**: JSON-RPC 2.0 over HTTP(S)—the diplomatic language that any agent can speak and understand  
+4. **Authentication**: Enterprise-grade security that ensures only authorized agents can participate in sensitive collaborations  
+5. **Distributed Coordination**: The ability to track complex, multi-step collaborations across organizational boundaries  
 
 ### The DNA of Agent Diplomacy: Message Structure
 
@@ -489,8 +489,8 @@ Build a discovery system that finds agents based on required capabilities and lo
 
 For comprehensive coverage of advanced A2A coordination patterns:
 
-- [⚙️ Advanced Orchestration Patterns](Session7_Advanced_Orchestration.md) - Centralized workflow management
-- [⚙️ Advanced Choreography Systems](Session7_Advanced_Choreography.md) - Distributed event-driven coordination
+- [⚙️ Advanced Orchestration Patterns](Session7_Advanced_Orchestration.md) - Centralized workflow management  
+- [⚙️ Advanced Choreography Systems](Session7_Advanced_Choreography.md) - Distributed event-driven coordination  
 
 These advanced modules cover enterprise-scale orchestration and choreography patterns for complex multi-agent systems.
 

@@ -29,19 +29,19 @@ def early_ai_system(prompt: str) -> str:
 
 This function demonstrates the core limitation: every call is independent. The problems this created were:
 
-- **No conversation memory**: Each interaction started from scratch
-- **No ability to use tools**: Couldn't search web or run calculations
-- **No multi-step reasoning**: Single-pass generation only
-- **No error correction**: No way to iterate or improve responses
+- **No conversation memory**: Each interaction started from scratch  
+- **No ability to use tools**: Couldn't search web or run calculations  
+- **No multi-step reasoning**: Single-pass generation only  
+- **No error correction**: No way to iterate or improve responses  
 
 This simplistic approach meant every interaction started from scratch. The AI couldn't remember what you asked five minutes ago, couldn't search the web or run calculations, and couldn't correct mistakes once made.
 
 ### Key Limitations of Early Systems
 
-1. **Stateless Interactions**: Each query was independent, no conversation context - like having a data consultant with complete amnesia
-2. **Tool Isolation**: Could not interact with external systems or data sources - no access to databases, monitoring systems, or processing tools
-3. **Limited Reasoning**: Single-pass generation without reflection or iteration - no ability to debug or optimize solutions
-4. **Static Responses**: No ability to adapt or improve based on feedback - couldn't learn from pipeline failures or system behavior
+1. **Stateless Interactions**: Each query was independent, no conversation context - like having a data consultant with complete amnesia  
+2. **Tool Isolation**: Could not interact with external systems or data sources - no access to databases, monitoring systems, or processing tools  
+3. **Limited Reasoning**: Single-pass generation without reflection or iteration - no ability to debug or optimize solutions  
+4. **Static Responses**: No ability to adapt or improve based on feedback - couldn't learn from pipeline failures or system behavior  
 
 ### The Search for Better Architectures
 
@@ -210,23 +210,23 @@ March 2023 changed everything for data professionals. Suddenly, millions of user
 
 ### Microsoft Copilot Integration (2023)
 
-- Showed enterprise adoption of agentic patterns in data workflows
-- Integrated with existing Microsoft data ecosystem (Power BI, Azure Data Factory)
-- Demonstrated productivity gains from agent assistance in data analysis
+- Showed enterprise adoption of agentic patterns in data workflows  
+- Integrated with existing Microsoft data ecosystem (Power BI, Azure Data Factory)  
+- Demonstrated productivity gains from agent assistance in data analysis  
 
 ### Framework Development (2023-2024)
 
 ### LangChain Explosion (2023)
 
-- Open-sourced component-based agent development for data engineering use cases
-- Created ecosystem of tools and integrations for data processing workflows
-- Lowered barrier to entry for data teams wanting to build custom agents
+- Open-sourced component-based agent development for data engineering use cases  
+- Created ecosystem of tools and integrations for data processing workflows  
+- Lowered barrier to entry for data teams wanting to build custom agents  
 
 ### Anthropic Claude Tool Use (2024)
 
-- Advanced function calling capabilities for complex data operations
-- Improved reliability of tool-augmented interactions with data infrastructure
-- Set new standards for agent reasoning transparency in data processing decisions
+- Advanced function calling capabilities for complex data operations  
+- Improved reliability of tool-augmented interactions with data infrastructure  
+- Set new standards for agent reasoning transparency in data processing decisions  
 
 ### Enterprise Adoption (2024-Present)
 
@@ -271,19 +271,19 @@ This enterprise wrapper ensures every agent interaction is authenticated, logged
 
 ### Current Industry Status (2024-2025)
 
-- **Data Operations**: 40% of enterprise data teams now use agentic systems for pipeline monitoring
-- **Analytics Automation**: Business intelligence agents becoming standard in Fortune 500 data platforms
-- **Infrastructure Management**: Cloud resource optimization agents managing multi-petabyte data workloads
-- **Quality Assurance**: Data validation agents preventing quality issues before they reach production
+- **Data Operations**: 40% of enterprise data teams now use agentic systems for pipeline monitoring  
+- **Analytics Automation**: Business intelligence agents becoming standard in Fortune 500 data platforms  
+- **Infrastructure Management**: Cloud resource optimization agents managing multi-petabyte data workloads  
+- **Quality Assurance**: Data validation agents preventing quality issues before they reach production  
 
 ### Future Trajectory
 
 ### Emerging Trends
 
-1. **Autonomous Data Platforms**: Agents managing entire data engineering workflows end-to-end
-2. **Multi-Modal Data Agents**: Integration of structured data, logs, metrics, and operational context
-3. **Agent-to-System Integration**: Agents directly managing infrastructure through APIs and orchestration tools
-4. **Regulatory Frameworks**: Government oversight of autonomous data processing decisions and privacy compliance
+1. **Autonomous Data Platforms**: Agents managing entire data engineering workflows end-to-end  
+2. **Multi-Modal Data Agents**: Integration of structured data, logs, metrics, and operational context  
+3. **Agent-to-System Integration**: Agents directly managing infrastructure through APIs and orchestration tools  
+4. **Regulatory Frameworks**: Government oversight of autonomous data processing decisions and privacy compliance  
 
 ---
 
@@ -336,9 +336,9 @@ You've now explored the historical context that led to modern agent frameworks:
 
 **📚 Recommended Further Reading:**
 
-- ReAct Paper: "Synergizing Reasoning and Acting in Language Models"
-- Toolformer Paper: "Language Models Can Teach Themselves to Use Tools"
-- Reflexion Paper: "Language Agents with Verbal Reinforcement Learning"
+- ReAct Paper: "Synergizing Reasoning and Acting in Language Models"  
+- Toolformer Paper: "Language Models Can Teach Themselves to Use Tools"  
+- Reflexion Paper: "Language Agents with Verbal Reinforcement Learning"  
 ---
 
 ## 🧭 Navigation

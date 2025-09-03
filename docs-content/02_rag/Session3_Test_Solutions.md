@@ -84,11 +84,11 @@ D) All of the above ✅
 
 ## Performance Scoring
 
-- **8/8 Correct**: Excellent mastery of vector database optimization
-- **7/8 Correct**: Strong understanding with minor technical gaps
-- **6/8 Correct**: Good grasp of concepts, review indexing algorithms
-- **5/8 Correct**: Adequate knowledge, focus on hybrid search techniques
-- **4/8 or below**: Recommend hands-on practice with different vector databases
+- **8/8 Correct**: Excellent mastery of vector database optimization  
+- **7/8 Correct**: Strong understanding with minor technical gaps  
+- **6/8 Correct**: Good grasp of concepts, review indexing algorithms  
+- **5/8 Correct**: Adequate knowledge, focus on hybrid search techniques  
+- **4/8 or below**: Recommend hands-on practice with different vector databases  
 
 ---
 
@@ -96,38 +96,38 @@ D) All of the above ✅
 
 ### Vector Database Architecture
 
-1. **Similarity Metrics**: Cosine, Euclidean, dot product trade-offs
-2. **Index Types**: HNSW for speed, IVF for memory efficiency
-3. **Configuration Parameters**: Balancing accuracy, speed, and resources
-4. **Production Considerations**: Persistence, scaling, monitoring
+1. **Similarity Metrics**: Cosine, Euclidean, dot product trade-offs  
+2. **Index Types**: HNSW for speed, IVF for memory efficiency  
+3. **Configuration Parameters**: Balancing accuracy, speed, and resources  
+4. **Production Considerations**: Persistence, scaling, monitoring  
 
 ### Indexing Strategies
 
-1. **HNSW Parameters**: M (connections), ef_construction, ef_search
-2. **IVF Configuration**: Centroids, quantization, search probes
-3. **Memory vs Speed**: Trade-offs and optimization strategies
-4. **Batch Operations**: Efficient data ingestion techniques
+1. **HNSW Parameters**: M (connections), ef_construction, ef_search  
+2. **IVF Configuration**: Centroids, quantization, search probes  
+3. **Memory vs Speed**: Trade-offs and optimization strategies  
+4. **Batch Operations**: Efficient data ingestion techniques  
 
 ### Hybrid Search Implementation
 
-1. **Score Fusion**: RRF, weighted combination, rank-based merging
-2. **BM25 Integration**: Lexical search for exact term matching
-3. **Multi-Stage Retrieval**: Progressive filtering and reranking
-4. **Query Enhancement**: Expansion, reformulation, variant generation
+1. **Score Fusion**: RRF, weighted combination, rank-based merging  
+2. **BM25 Integration**: Lexical search for exact term matching  
+3. **Multi-Stage Retrieval**: Progressive filtering and reranking  
+4. **Query Enhancement**: Expansion, reformulation, variant generation  
 
 ### Performance Optimization
 
-1. **Caching Strategies**: Query results, embeddings, metadata
-2. **Parallel Processing**: Concurrent searches, batch operations
-3. **Resource Management**: Memory usage, disk I/O, CPU utilization
-4. **Monitoring**: Latency tracking, hit rates, error handling
+1. **Caching Strategies**: Query results, embeddings, metadata  
+2. **Parallel Processing**: Concurrent searches, batch operations  
+3. **Resource Management**: Memory usage, disk I/O, CPU utilization  
+4. **Monitoring**: Latency tracking, hit rates, error handling  
 
 ### Production Deployment
 
-1. **Database Selection**: ChromaDB vs Pinecone vs Qdrant trade-offs
-2. **Scaling Strategies**: Horizontal scaling, load balancing
-3. **Reliability Features**: Replication, backup, failure recovery
-4. **Cost Optimization**: Resource usage, query efficiency
+1. **Database Selection**: ChromaDB vs Pinecone vs Qdrant trade-offs  
+2. **Scaling Strategies**: Horizontal scaling, load balancing  
+3. **Reliability Features**: Replication, backup, failure recovery  
+4. **Cost Optimization**: Resource usage, query efficiency  
 
 ---
 ---

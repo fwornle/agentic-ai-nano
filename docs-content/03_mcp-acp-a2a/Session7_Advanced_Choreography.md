@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Event-driven choreography patterns for distributed agent coordination
-- Complex event pattern recognition and response systems
-- Distributed state management for choreographed workflows
-- Production-grade event sourcing and replay capabilities
+- Event-driven choreography patterns for distributed agent coordination  
+- Complex event pattern recognition and response systems  
+- Distributed state management for choreographed workflows  
+- Production-grade event sourcing and replay capabilities  
 
 ## The Dance of Autonomy - Choreography Patterns
 
@@ -569,28 +569,28 @@ Comprehensive metrics enable optimization and troubleshooting of production chor
 
 Enterprise choreography must handle massive event volumes:
 
-- **Event partitioning**: Distributing events across multiple engine instances
-- **Stream processing**: Using event streams for high-throughput scenarios
-- **Caching strategies**: Optimizing pattern matching performance
-- **Load balancing**: Distributing choreography processing load
+- **Event partitioning**: Distributing events across multiple engine instances  
+- **Stream processing**: Using event streams for high-throughput scenarios  
+- **Caching strategies**: Optimizing pattern matching performance  
+- **Load balancing**: Distributing choreography processing load  
 
 ### Reliability Patterns
 
 Production choreography requires bulletproof reliability:
 
-- **Event deduplication**: Handling duplicate events gracefully
-- **Circuit breakers**: Preventing cascade failures in event processing
-- **Dead letter queues**: Managing failed event processing
-- **Eventual consistency**: Handling distributed state synchronization
+- **Event deduplication**: Handling duplicate events gracefully  
+- **Circuit breakers**: Preventing cascade failures in event processing  
+- **Dead letter queues**: Managing failed event processing  
+- **Eventual consistency**: Handling distributed state synchronization  
 
 ### Security Considerations
 
 Enterprise choreography needs comprehensive security:
 
-- **Event authentication**: Verifying event sources and integrity
-- **Pattern authorization**: Controlling which agents can register patterns
-- **Data privacy**: Ensuring sensitive data in events is protected
-- **Audit trails**: Maintaining complete event processing logs
+- **Event authentication**: Verifying event sources and integrity  
+- **Pattern authorization**: Controlling which agents can register patterns  
+- **Data privacy**: Ensuring sensitive data in events is protected  
+- **Audit trails**: Maintaining complete event processing logs  
 ---
 
 ## 🧭 Navigation

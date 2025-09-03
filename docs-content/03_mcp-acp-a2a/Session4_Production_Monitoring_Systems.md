@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Complete monitoring command center implementation
-- Intelligent health checking with trend analysis
-- Production-grade Grafana dashboard configuration
-- Advanced alerting and notification systems
+- Complete monitoring command center implementation  
+- Intelligent health checking with trend analysis  
+- Production-grade Grafana dashboard configuration  
+- Advanced alerting and notification systems  
 
 ## Building Your Monitoring Command Center
 
@@ -20,9 +20,9 @@ After completing this module, you will master:
 
 In production, you need three types of observability to survive and thrive:
 
-1. **Metrics**: The vital signs of your system - response times, error rates, throughput
-2. **Logs**: The detailed event record - what happened, when, and why
-3. **Traces**: The request journey - how requests flow through your distributed system
+1. **Metrics**: The vital signs of your system - response times, error rates, throughput  
+2. **Logs**: The detailed event record - what happened, when, and why  
+3. **Traces**: The request journey - how requests flow through your distributed system  
 
 Without all three pillars, you're flying blind in production. Here's how to build a comprehensive monitoring system:
 

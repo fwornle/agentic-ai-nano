@@ -26,49 +26,49 @@ session2/
 
 ### 1. Document Structure Analysis
 
-- **Content Type Detection**: Automatically identifies headings, paragraphs, tables, code blocks, lists, and quotes
-- **Hierarchy Extraction**: Preserves document structure and organizational relationships
-- **Metadata Preservation**: Captures positional and structural information
+- **Content Type Detection**: Automatically identifies headings, paragraphs, tables, code blocks, lists, and quotes  
+- **Hierarchy Extraction**: Preserves document structure and organizational relationships  
+- **Metadata Preservation**: Captures positional and structural information  
 
 ### 2. Hierarchical Chunking
 
-- **Structure-Aware Splitting**: Uses document hierarchy as natural chunk boundaries
-- **Content Type Preservation**: Keeps related content together (tables, code blocks, lists)
-- **Intelligent Overlap**: Creates semantic continuity between chunks
-- **Rich Metadata**: Adds hierarchical context to each chunk
+- **Structure-Aware Splitting**: Uses document hierarchy as natural chunk boundaries  
+- **Content Type Preservation**: Keeps related content together (tables, code blocks, lists)  
+- **Intelligent Overlap**: Creates semantic continuity between chunks  
+- **Rich Metadata**: Adds hierarchical context to each chunk  
 
 ### 3. Specialized Processing
 
-- **Table-Aware Chunking**: Preserves table integrity and structure
-- **Multi-Modal Processing**: Handles images, structured data (CSV, JSON)
-- **Code Block Preservation**: Maintains code integrity and context
-- **List Grouping**: Keeps related list items together
+- **Table-Aware Chunking**: Preserves table integrity and structure  
+- **Multi-Modal Processing**: Handles images, structured data (CSV, JSON)  
+- **Code Block Preservation**: Maintains code integrity and context  
+- **List Grouping**: Keeps related list items together  
 
 ### 4. Metadata Extraction
 
-- **Entity Recognition**: Extracts names, organizations, and key terms
-- **Keyword Identification**: Finds important terms and concepts
-- **Topic Classification**: Automatically categorizes content by domain
-- **Technical Term Detection**: Identifies technical vocabulary and acronyms
-- **Difficulty Assessment**: Evaluates content complexity level
+- **Entity Recognition**: Extracts names, organizations, and key terms  
+- **Keyword Identification**: Finds important terms and concepts  
+- **Topic Classification**: Automatically categorizes content by domain  
+- **Technical Term Detection**: Identifies technical vocabulary and acronyms  
+- **Difficulty Assessment**: Evaluates content complexity level  
 
 ### 5. Quality Assessment
 
-- **Coherence Scoring**: Measures topic consistency between chunks
-- **Information Density**: Evaluates unique information per chunk
-- **Metadata Richness**: Assesses completeness of extracted metadata
-- **Size Consistency**: Measures chunk size uniformity
-- **Overlap Efficiency**: Evaluates optimal context preservation
+- **Coherence Scoring**: Measures topic consistency between chunks  
+- **Information Density**: Evaluates unique information per chunk  
+- **Metadata Richness**: Assesses completeness of extracted metadata  
+- **Size Consistency**: Measures chunk size uniformity  
+- **Overlap Efficiency**: Evaluates optimal context preservation  
 
 ## 🛠 Installation
 
-1. **Install dependencies:**
+1. **Install dependencies:**  
 ```bash
 cd /Users/q284340/Agentic/nano-degree/02_rag/src/session2
 pip install -r requirements.txt
 ```
 
-2. **Optional advanced dependencies** (uncomment in requirements.txt if needed):
+2. **Optional advanced dependencies** (uncomment in requirements.txt if needed):  
 ```bash
 pip install spacy nltk scikit-learn beautifulsoup4 python-docx PyPDF2 openpyxl
 ```
@@ -150,60 +150,60 @@ Execute the comprehensive demonstration:
 python demo_advanced_chunking.py
 ```
 
-This will demonstrate:
-- Document structure analysis
-- Hierarchical chunking
-- Metadata-enhanced processing
-- Advanced pipeline usage
-- Quality assessment
+This will demonstrate:  
+- Document structure analysis  
+- Hierarchical chunking  
+- Metadata-enhanced processing  
+- Advanced pipeline usage  
+- Quality assessment  
 
 ## 🏗 Architecture Overview
 
 ### Processing Pipeline Flow
 
-1. **Document Analysis**
-   - Content type detection
-   - Structure analysis
-   - Complexity assessment
+1. **Document Analysis**  
+   - Content type detection  
+   - Structure analysis  
+   - Complexity assessment  
 
-2. **Strategy Selection**
-   - Table-aware for structured content
-   - Hierarchical for well-structured documents
-   - Standard for simple text
+2. **Strategy Selection**  
+   - Table-aware for structured content  
+   - Hierarchical for well-structured documents  
+   - Standard for simple text  
 
-3. **Chunking Process**
-   - Boundary detection
-   - Content preservation
-   - Overlap management
+3. **Chunking Process**  
+   - Boundary detection  
+   - Content preservation  
+   - Overlap management  
 
-4. **Metadata Extraction**
-   - Entity recognition
-   - Topic classification
-   - Technical term detection
+4. **Metadata Extraction**  
+   - Entity recognition  
+   - Topic classification  
+   - Technical term detection  
 
-5. **Quality Assessment**
-   - Multiple quality metrics
-   - Performance scoring
-   - Improvement recommendations
+5. **Quality Assessment**  
+   - Multiple quality metrics  
+   - Performance scoring  
+   - Improvement recommendations  
 
 ### Key Components
 
-- **DocumentStructureAnalyzer**: Analyzes document structure and identifies content types
-- **HierarchicalChunker**: Creates structure-aware chunks respecting document hierarchy
-- **MetadataExtractor**: Extracts rich metadata including entities, topics, and keywords
-- **TableAwareChunker**: Specialized processing for documents with tables
-- **MultiModalProcessor**: Handles mixed content types including images and structured data
-- **ChunkQualityAssessor**: Evaluates and scores chunk quality across multiple dimensions
+- **DocumentStructureAnalyzer**: Analyzes document structure and identifies content types  
+- **HierarchicalChunker**: Creates structure-aware chunks respecting document hierarchy  
+- **MetadataExtractor**: Extracts rich metadata including entities, topics, and keywords  
+- **TableAwareChunker**: Specialized processing for documents with tables  
+- **MultiModalProcessor**: Handles mixed content types including images and structured data  
+- **ChunkQualityAssessor**: Evaluates and scores chunk quality across multiple dimensions  
 
 ## Performance Benefits
 
 Compared to naive chunking approaches, this advanced system provides:
 
-- **50-70% better context preservation** through structure awareness
-- **30-40% improvement in retrieval relevance** via metadata enrichment
-- **Reduced information fragmentation** through intelligent boundary detection
-- **Enhanced search capabilities** through metadata integration
-- **Quality measurement and optimization** through comprehensive assessment
+- **50-70% better context preservation** through structure awareness  
+- **30-40% improvement in retrieval relevance** via metadata enrichment  
+- **Reduced information fragmentation** through intelligent boundary detection  
+- **Enhanced search capabilities** through metadata integration  
+- **Quality measurement and optimization** through comprehensive assessment  
 
 ## Customization
 
@@ -243,25 +243,25 @@ class CustomQualityAssessor(ChunkQualityAssessor):
 
 ## Production Considerations
 
-- **Performance**: Advanced processing requires more computational resources
-- **Configuration**: Many parameters need tuning for optimal performance
-- **Monitoring**: Implement continuous quality assessment
-- **Scalability**: Consider batch processing for large document collections
-- **Caching**: Cache analysis results for frequently processed documents
+- **Performance**: Advanced processing requires more computational resources  
+- **Configuration**: Many parameters need tuning for optimal performance  
+- **Monitoring**: Implement continuous quality assessment  
+- **Scalability**: Consider batch processing for large document collections  
+- **Caching**: Cache analysis results for frequently processed documents  
 
 ## 📝 Next Steps
 
-This advanced chunking foundation prepares you for:
-- **Session 3**: Vector database optimization for storing and retrieving enhanced chunks
-- **Session 4**: Query enhancement techniques that leverage rich metadata
-- **Session 5**: Evaluation frameworks for measuring preprocessing quality
-- **Session 6**: Graph RAG implementations using extracted entities and relationships
+This advanced chunking foundation prepares you for:  
+- **Session 3**: Vector database optimization for storing and retrieving enhanced chunks  
+- **Session 4**: Query enhancement techniques that leverage rich metadata  
+- **Session 5**: Evaluation frameworks for measuring preprocessing quality  
+- **Session 6**: Graph RAG implementations using extracted entities and relationships  
 
 ## 🤝 Contributing
 
-When extending this system:
-1. Follow the existing code structure and patterns
-2. Add appropriate type hints and docstrings
-3. Include unit tests for new functionality
-4. Update configuration options as needed
-5. Document new features in this README
+When extending this system:  
+1. Follow the existing code structure and patterns  
+2. Add appropriate type hints and docstrings  
+3. Include unit tests for new functionality  
+4. Update configuration options as needed  
+5. Document new features in this README  

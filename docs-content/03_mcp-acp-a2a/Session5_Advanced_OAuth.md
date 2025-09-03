@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Complete OAuth 2.1 authorization server implementation
-- Advanced Resource Indicators (RFC 8707) for token scoping
-- Production-grade security with Redis-backed token management
-- Advanced JWT features including blacklisting and rotation
+- Complete OAuth 2.1 authorization server implementation  
+- Advanced Resource Indicators (RFC 8707) for token scoping  
+- Production-grade security with Redis-backed token management  
+- Advanced JWT features including blacklisting and rotation  
 
 ## Complete OAuth 2.1 Authorization Server
 

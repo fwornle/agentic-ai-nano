@@ -1243,9 +1243,9 @@ You've now mastered advanced orchestration patterns for LangGraph workflows opti
 
 ### Next Steps
 
-- **Continue to Module B**: [Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md) for production data pipeline state handling
-- **Return to Core**: [Session 3 Main](Session3_LangGraph_Multi_Agent_Workflows.md)
-- **Advance to Session 4**: [CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)
+- **Continue to Module B**: [Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md) for production data pipeline state handling  
+- **Return to Core**: [Session 3 Main](Session3_LangGraph_Multi_Agent_Workflows.md)  
+- **Advance to Session 4**: [CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)  
 
 ---
 

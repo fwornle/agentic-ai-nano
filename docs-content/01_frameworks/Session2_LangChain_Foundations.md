@@ -47,10 +47,10 @@ LangChain has four essential building blocks that work together like specialized
 
 ![LangChain Overview](images/langchain-overview.svg)
 
-1. **LLMs**: These are your intelligent data analysts that provide insights and generate responses about data patterns, quality issues, and optimization strategies
-2. **Tools**: External data processing functions that extend agent capabilities beyond text generation - like giving your AI direct access to data warehouses, streaming platforms, and ML pipelines
-3. **Memory**: Context storage for processing continuity - the agent's ability to remember previous data insights, processing decisions, and optimization patterns
-4. **Agents**: Orchestration layer that coordinates data workflows - the intelligent dispatcher that decides which data processing actions to take when
+1. **LLMs**: These are your intelligent data analysts that provide insights and generate responses about data patterns, quality issues, and optimization strategies  
+2. **Tools**: External data processing functions that extend agent capabilities beyond text generation - like giving your AI direct access to data warehouses, streaming platforms, and ML pipelines  
+3. **Memory**: Context storage for processing continuity - the agent's ability to remember previous data insights, processing decisions, and optimization patterns  
+4. **Agents**: Orchestration layer that coordinates data workflows - the intelligent dispatcher that decides which data processing actions to take when  
 
 ### Installation and Setup
 
@@ -209,10 +209,10 @@ Moving beyond text generation, we now give our agents the ability to take action
 
 Tools extend agent capabilities beyond text generation, like giving a brilliant data scientist the ability to directly interact with your data infrastructure:
 
-- Data Warehouse: SQL queries and analytics across petabyte-scale datasets
-- Streaming Platforms: Real-time data processing and monitoring capabilities
-- ML Pipeline: Model training, deployment, and performance monitoring
-- Data Quality: Schema validation, anomaly detection, and quality scoring
+- Data Warehouse: SQL queries and analytics across petabyte-scale datasets  
+- Streaming Platforms: Real-time data processing and monitoring capabilities  
+- ML Pipeline: Model training, deployment, and performance monitoring  
+- Data Quality: Schema validation, anomaly detection, and quality scoring  
 
 ### Basic Tool Creation
 
@@ -266,11 +266,11 @@ def check_data_quality(dataset_path: str) -> str:
 
 Agents follow the **ReAct pattern** (Reasoning + Acting) - a cycle that mirrors how data engineers approach complex data problems:
 
-1. **Think**: Analyze the data request and understand what processing is needed
-2. **Act**: Use appropriate data tools to gather information or process data
-3. **Think**: Process the results and determine if additional data operations are needed
-4. **Act**: Use more data tools if the analysis isn't complete
-5. **Think**: Formulate final insights based on all gathered data evidence
+1. **Think**: Analyze the data request and understand what processing is needed  
+2. **Act**: Use appropriate data tools to gather information or process data  
+3. **Think**: Process the results and determine if additional data operations are needed  
+4. **Act**: Use more data tools if the analysis isn't complete  
+5. **Think**: Formulate final insights based on all gathered data evidence  
 
 ### Setting Up Memory
 
@@ -322,17 +322,17 @@ Memory transforms stateless interactions into coherent, context-aware data analy
 
 LangChain offers three main memory types, each optimized for different data analysis scenarios like different types of analytical context:
 
-- **Buffer Memory**: Stores complete analysis history (like detailed audit logs of data processing decisions)
-- **Summary Memory**: Summarizes older conversations (like executive briefings that capture key data insights)
-- **Window Memory**: Keeps only recent messages (like short-term focus on immediate data processing context)
+- **Buffer Memory**: Stores complete analysis history (like detailed audit logs of data processing decisions)  
+- **Summary Memory**: Summarizes older conversations (like executive briefings that capture key data insights)  
+- **Window Memory**: Keeps only recent messages (like short-term focus on immediate data processing context)  
 
 ### When to Use Each Type
 
 Choose memory types based on your data application's needs and constraints:
 
-- **Buffer**: Complex data investigations requiring exact history - perfect for compliance auditing or detailed data quality analysis
-- **Summary**: Long data analysis sessions where context matters but details don't - ideal for ongoing data monitoring or trend analysis
-- **Window**: Fixed memory size, focus on recent context - best for real-time data processing systems with resource constraints
+- **Buffer**: Complex data investigations requiring exact history - perfect for compliance auditing or detailed data quality analysis  
+- **Summary**: Long data analysis sessions where context matters but details don't - ideal for ongoing data monitoring or trend analysis  
+- **Window**: Fixed memory size, focus on recent context - best for real-time data processing systems with resource constraints  
 
 ### Memory Configuration
 
@@ -397,16 +397,16 @@ recent_memory = ConversationBufferWindowMemory(
 
 For comprehensive deep-dive into enterprise patterns and advanced architectures:
 
-**Advanced Learning Paths:**
-- [⚙️ Advanced Agent Architecture](Session2_Advanced_Agent_Architecture.md) - Sophisticated orchestration patterns
-- [⚙️ Production Memory Systems](Session2_Production_Memory_Systems.md) - State persistence and enterprise context
-- [⚙️ Enterprise Tool Development](Session2_Enterprise_Tool_Development.md) - Custom tools and integrations
+**Advanced Learning Paths:**  
+- [⚙️ Advanced Agent Architecture](Session2_Advanced_Agent_Architecture.md) - Sophisticated orchestration patterns  
+- [⚙️ Production Memory Systems](Session2_Production_Memory_Systems.md) - State persistence and enterprise context  
+- [⚙️ Enterprise Tool Development](Session2_Enterprise_Tool_Development.md) - Custom tools and integrations  
 
-**Legacy Advanced Modules:**
-- [LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md) - Complex workflows & optimization
-- [Production Deployment](Session2_ModuleB_Production_Deployment_Strategies.md) - Enterprise deployment & monitoring
-- [Tool Development](Session2_ModuleC_Custom_Tool_Development.md) - Specialized data processing tools
-- [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) - System optimization & observability
+**Legacy Advanced Modules:**  
+- [LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md) - Complex workflows & optimization  
+- [Production Deployment](Session2_ModuleB_Production_Deployment_Strategies.md) - Enterprise deployment & monitoring  
+- [Tool Development](Session2_ModuleC_Custom_Tool_Development.md) - Specialized data processing tools  
+- [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) - System optimization & observability  
 
 ---
 

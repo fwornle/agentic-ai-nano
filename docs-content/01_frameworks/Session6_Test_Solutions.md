@@ -104,7 +104,7 @@ D) Centralized control of agent interactions and workflow orchestration ✅
 
 ## Answer Summary
 
-1. B  2. B  3. C  4. B  5. B  6. B  7. B  8. B  9. B  10. A
+1. B  2. B  3. C  4. B  5. B  6. B  7. B  8. B  9. B  10. A  
 
 ---
 ---

@@ -9,10 +9,10 @@
 
 After completing this optimization guide, you will:
 
-- Build context window optimization systems
-- Implement relevance-based content selection
-- Create hierarchical summarization strategies
-- Develop semantic compression techniques
+- Build context window optimization systems  
+- Implement relevance-based content selection  
+- Create hierarchical summarization strategies  
+- Develop semantic compression techniques  
 
 ## Context Window Optimization Framework
 
@@ -555,10 +555,10 @@ def enhanced_rag_pipeline(self, query: str, vector_store):
 
 ## Practice Exercises
 
-1. **Strategy Comparison**: Compare different optimization strategies on the same content
-2. **Token Efficiency**: Measure information retention vs. token reduction ratios
-3. **Quality Assessment**: Evaluate response quality with different optimization approaches
-4. **Performance Testing**: Benchmark optimization speed and memory usage
+1. **Strategy Comparison**: Compare different optimization strategies on the same content  
+2. **Token Efficiency**: Measure information retention vs. token reduction ratios  
+3. **Quality Assessment**: Evaluate response quality with different optimization approaches  
+4. **Performance Testing**: Benchmark optimization speed and memory usage  
 ---
 
 ## 🧭 Navigation

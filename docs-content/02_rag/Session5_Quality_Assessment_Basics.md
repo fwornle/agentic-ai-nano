@@ -8,10 +8,10 @@
 
 By completing this section, you will:
 
-- Understand automated quality assessment principles
-- Master LLM-as-a-Judge evaluation basics
-- Learn essential production monitoring concepts
-- Recognize quality degradation warning signs
+- Understand automated quality assessment principles  
+- Master LLM-as-a-Judge evaluation basics  
+- Learn essential production monitoring concepts  
+- Recognize quality degradation warning signs  
 
 ## 🎯 Automated Quality Assessment Fundamentals
 
@@ -152,21 +152,21 @@ This monitoring approach provides immediate feedback on response quality without
 
 Establish clear thresholds for different quality aspects:
 
-**Response Quality Thresholds:**
-- Excellent: Overall score > 4.0
-- Good: Overall score 3.0-4.0
-- Needs Improvement: Overall score 2.0-3.0
-- Poor: Overall score < 2.0
+**Response Quality Thresholds:**  
+- Excellent: Overall score > 4.0  
+- Good: Overall score 3.0-4.0  
+- Needs Improvement: Overall score 2.0-3.0  
+- Poor: Overall score < 2.0  
 
-**Performance Thresholds:**
-- Fast Response: < 2 seconds
-- Acceptable Response: 2-5 seconds
-- Slow Response: > 5 seconds
+**Performance Thresholds:**  
+- Fast Response: < 2 seconds  
+- Acceptable Response: 2-5 seconds  
+- Slow Response: > 5 seconds  
 
-**Context Utilization Thresholds:**
-- High Usage: > 70% of context information referenced
-- Moderate Usage: 30-70% of context information referenced
-- Low Usage: < 30% of context information referenced
+**Context Utilization Thresholds:**  
+- High Usage: > 70% of context information referenced  
+- Moderate Usage: 30-70% of context information referenced  
+- Low Usage: < 30% of context information referenced  
 
 ## 🎯 Quality Issue Detection
 
@@ -182,37 +182,37 @@ Establish clear thresholds for different quality aspects:
 
 Monitor these patterns that often predict quality degradation:
 
-- **Increasing Response Time**: System struggling with query complexity
-- **Decreasing Context Similarity**: Retrieval quality declining
-- **User Feedback Patterns**: More clarification requests or negative feedback
-- **Response Length Changes**: Sudden shifts toward very short or very long responses
+- **Increasing Response Time**: System struggling with query complexity  
+- **Decreasing Context Similarity**: Retrieval quality declining  
+- **User Feedback Patterns**: More clarification requests or negative feedback  
+- **Response Length Changes**: Sudden shifts toward very short or very long responses  
 
 ## 🎯 Basic Improvement Strategies
 
 ### When Quality Issues Arise
 
-**For Retrieval Problems:**
-- Check embedding model performance on recent queries
-- Verify index freshness and document coverage
-- Review query preprocessing and enhancement steps
+**For Retrieval Problems:**  
+- Check embedding model performance on recent queries  
+- Verify index freshness and document coverage  
+- Review query preprocessing and enhancement steps  
 
-**For Generation Problems:**
-- Evaluate prompt template effectiveness
-- Check context length and relevance
-- Review LLM temperature and sampling settings
+**For Generation Problems:**  
+- Evaluate prompt template effectiveness  
+- Check context length and relevance  
+- Review LLM temperature and sampling settings  
 
-**For Performance Problems:**
-- Monitor system resource utilization
-- Check database query performance
-- Review caching and optimization strategies
+**For Performance Problems:**  
+- Monitor system resource utilization  
+- Check database query performance  
+- Review caching and optimization strategies  
 
 ### Continuous Improvement Process
 
-1. **Monitor**: Track quality metrics continuously
-2. **Detect**: Identify patterns indicating quality degradation
-3. **Diagnose**: Determine root cause of quality issues
-4. **Fix**: Implement targeted improvements
-5. **Validate**: Confirm improvements restore quality
+1. **Monitor**: Track quality metrics continuously  
+2. **Detect**: Identify patterns indicating quality degradation  
+3. **Diagnose**: Determine root cause of quality issues  
+4. **Fix**: Implement targeted improvements  
+5. **Validate**: Confirm improvements restore quality  
 
 This cycle ensures your RAG system maintains high quality over time as data, usage patterns, and requirements evolve.
 
@@ -222,17 +222,17 @@ This cycle ensures your RAG system maintains high quality over time as data, usa
 
 A/B testing provides scientific validation for RAG improvements by comparing different system configurations under controlled conditions.
 
-**Basic A/B Test Structure:**
-- **Control Group**: Current RAG system configuration
-- **Treatment Group**: Modified RAG system with improvements
-- **Success Metrics**: Quality scores, user satisfaction, task completion
-- **Statistical Analysis**: Determine if differences are significant
+**Basic A/B Test Structure:**  
+- **Control Group**: Current RAG system configuration  
+- **Treatment Group**: Modified RAG system with improvements  
+- **Success Metrics**: Quality scores, user satisfaction, task completion  
+- **Statistical Analysis**: Determine if differences are significant  
 
-**Key Success Metrics:**
-- Response quality scores (relevance, accuracy, completeness)
-- User satisfaction ratings
-- Task completion rates
-- Response time performance
+**Key Success Metrics:**  
+- Response quality scores (relevance, accuracy, completeness)  
+- User satisfaction ratings  
+- Task completion rates  
+- Response time performance  
 
 ### Test Result Interpretation
 
@@ -248,8 +248,8 @@ A 5% improvement in quality scores might be statistically significant but not pr
 
 **Next Steps for Practical Application:**
 
-- **📝 Participant Path**: [RAGAS Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Set up and use RAGAS evaluation framework
-- **📝 Participant Path**: [Automated Testing Practice →](Session5_Automated_Testing_Practice.md) - Implement A/B testing for RAG optimization
+- **📝 Participant Path**: [RAGAS Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Set up and use RAGAS evaluation framework  
+- **📝 Participant Path**: [Automated Testing Practice →](Session5_Automated_Testing_Practice.md) - Implement A/B testing for RAG optimization  
 ---
 
 ## 🧭 Navigation

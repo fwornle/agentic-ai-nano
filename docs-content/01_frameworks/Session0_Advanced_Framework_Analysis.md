@@ -9,10 +9,10 @@
 
 After completing this advanced module, you will master:
 
-- Enterprise framework selection criteria for production systems
-- Production deployment considerations and hidden challenges
-- Framework architecture comparison for different use cases
-- Vendor risk assessment and migration strategy planning
+- Enterprise framework selection criteria for production systems  
+- Production deployment considerations and hidden challenges  
+- Framework architecture comparison for different use cases  
+- Vendor risk assessment and migration strategy planning  
 
 ## Framework Landscape Overview - Choosing Your Weapons
 
@@ -89,10 +89,10 @@ For complex workflows, LangGraph excels at managing intricate state transitions 
 
 The hidden realities that only emerge when you scale from demo to production - lessons learned from data engineers who've deployed agents in enterprise environments:
 
-- **Hidden Costs**: LangChain's modularity can create configuration complexity in production - flexibility has a price
-- **Type Safety**: PydanticAI reduces runtime errors through schema validation - catch bugs at compile time, not in production data pipelines
-- **Monitoring**: Agno and ADK provide built-in observability for production systems - visibility is critical when agents process terabytes
-- **Vendor Lock-in**: Consider framework dependencies before committing to production deployment - migration strategies matter for data infrastructure
+- **Hidden Costs**: LangChain's modularity can create configuration complexity in production - flexibility has a price  
+- **Type Safety**: PydanticAI reduces runtime errors through schema validation - catch bugs at compile time, not in production data pipelines  
+- **Monitoring**: Agno and ADK provide built-in observability for production systems - visibility is critical when agents process terabytes  
+- **Vendor Lock-in**: Consider framework dependencies before committing to production deployment - migration strategies matter for data infrastructure  
 
 ### Enterprise Architecture Patterns
 
@@ -173,10 +173,10 @@ Permission-based execution ensures agents can only perform authorized operations
 
 Enterprise agent deployments must handle:
 
-- **GDPR Compliance**: Data processing transparency and user consent management
-- **SOC 2 Requirements**: Security controls and audit trail maintenance
-- **Industry Regulations**: HIPAA, PCI-DSS, or other sector-specific compliance
-- **Data Residency**: Geographic restrictions on data processing and storage
+- **GDPR Compliance**: Data processing transparency and user consent management  
+- **SOC 2 Requirements**: Security controls and audit trail maintenance  
+- **Industry Regulations**: HIPAA, PCI-DSS, or other sector-specific compliance  
+- **Data Residency**: Geographic restrictions on data processing and storage  
 
 ### Performance Optimization Strategies
 

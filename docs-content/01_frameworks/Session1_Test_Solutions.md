@@ -1,5 +1,12 @@
 # Session 1: Bare Metal Agents - Test Solutions
 
+## 🔗 Practice Questions
+
+Review the questions first: [**📝 Session1 Questions →**](Session1_Bare_Metal_Agents.md)
+
+---
+
+
 ## 📝 Multiple Choice Test
 
 **Question 1:** What is the primary benefit of implementing agents from scratch before using frameworks?  
@@ -54,11 +61,11 @@ D) Observer Pattern
 
 ## Performance Scoring
 
-- **5/5 Correct**: Excellent mastery of bare metal agent implementation
-- **4 Correct**: Good understanding with minor gaps
-- **3 Correct**: Adequate grasp, review specific patterns
-- **2 Correct**: Needs focused review of agent architecture
-- **0-1 Correct**: Recommend hands-on practice with the implementation code
+- **5/5 Correct**: Excellent mastery of bare metal agent implementation  
+- **4 Correct**: Good understanding with minor gaps  
+- **3 Correct**: Adequate grasp, review specific patterns  
+- **2 Correct**: Needs focused review of agent architecture  
+- **0-1 Correct**: Recommend hands-on practice with the implementation code  
 
 ---
 
@@ -66,30 +73,30 @@ D) Observer Pattern
 
 ### Core Agent Architecture
 
-1. **BaseAgent**: Template method pattern with abstract _generate_response()
-2. **Conversation History**: Context maintenance across interactions
-3. **Tool Interface**: Consistent execute() and _get_parameters() methods
-4. **Error Handling**: Graceful failure recovery with informative feedback
+1. **BaseAgent**: Template method pattern with abstract _generate_response()  
+2. **Conversation History**: Context maintenance across interactions  
+3. **Tool Interface**: Consistent execute() and _get_parameters() methods  
+4. **Error Handling**: Graceful failure recovery with informative feedback  
 
 ### Agent Pattern Implementation
 
-- **Basic Structure**: Foundation classes and interfaces
-- **Tool Integration**: Consistent tool execution patterns
-- **Design Patterns**: Template method for extensible architectures
-- **Testing**: Unit testing approaches for agent functionality
+- **Basic Structure**: Foundation classes and interfaces  
+- **Tool Integration**: Consistent tool execution patterns  
+- **Design Patterns**: Template method for extensible architectures  
+- **Testing**: Unit testing approaches for agent functionality  
 
 ### Design Principles
 
-- **Abstraction**: Clear separation between interface and implementation
-- **Extensibility**: Easy addition of new tools and agent types
-- **Transparency**: Complete reasoning and execution history tracking
-- **Reliability**: Robust error handling and state management
+- **Abstraction**: Clear separation between interface and implementation  
+- **Extensibility**: Easy addition of new tools and agent types  
+- **Transparency**: Complete reasoning and execution history tracking  
+- **Reliability**: Robust error handling and state management  
 
 ---
 
 ## Answer Summary
 
-1. B  2. C  3. C  4. B  5. C
+1. B  2. C  3. C  4. B  5. C  
 
 ---
 ---

@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Circuit breaker patterns for cascade failure prevention
-- Chaos engineering principles for proactive resilience testing
-- Blue-green deployment strategies for zero-downtime updates
-- Production load testing frameworks for capacity validation
+- Circuit breaker patterns for cascade failure prevention  
+- Chaos engineering principles for proactive resilience testing  
+- Blue-green deployment strategies for zero-downtime updates  
+- Production load testing frameworks for capacity validation  
 
 ## Circuit Breaker Pattern Implementation
 
