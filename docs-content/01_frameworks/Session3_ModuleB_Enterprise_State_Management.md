@@ -437,8 +437,6 @@ D) Completeness (50%) + Keywords (50%)
 - [`src/session3/contextual_processing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/contextual_processing.py) - Adaptive workflow patterns
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 2 - LangChain Foundations ←](Session2_LangChain_Foundations.md)
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+
 ---

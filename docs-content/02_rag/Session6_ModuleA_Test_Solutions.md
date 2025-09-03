@@ -87,10 +87,9 @@ D) When you want faster traversal
 1. B  2. C  3. B  4. B  5. B  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 5 - RAG Evaluation & Quality Assessment ←](Session5_RAG_Evaluation_Quality_Assessment.md)
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+
 ---

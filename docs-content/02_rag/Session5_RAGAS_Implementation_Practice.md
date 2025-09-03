@@ -520,8 +520,6 @@ This integration pattern allows you to add comprehensive evaluation to existing 
 - **⚙️ Implementer Path**: [Enterprise Monitoring →](Session5_Enterprise_Monitoring_Systems.md) - Production-scale monitoring and alerting  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Query Enhancement & Context Augmentation ←](Session4_Query_Enhancement_Context_Augmentation.md)
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+
 ---

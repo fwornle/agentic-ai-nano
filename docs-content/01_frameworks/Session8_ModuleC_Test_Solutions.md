@@ -98,10 +98,9 @@ These optimization techniques deliver:
 - **Reliability**: Budget protection prevents service disruption from cost overruns  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 7 - First ADK Agent ←](Session7_First_ADK_Agent.md)
 **Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+
 ---

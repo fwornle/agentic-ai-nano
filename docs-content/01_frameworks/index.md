@@ -313,8 +313,6 @@ By completing this module, you will possess the comprehensive skill set needed t
 [Begin Session 0 →](Session0_Introduction_to_Agent_Frameworks_Patterns.md){ .md-button .md-button--primary }
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 0 - Introduction to Agent Frameworks & Patterns →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 
 ---

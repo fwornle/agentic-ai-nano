@@ -299,7 +299,6 @@ Need cutting-edge implementations? Explore:
 - [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md)  
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
 ---

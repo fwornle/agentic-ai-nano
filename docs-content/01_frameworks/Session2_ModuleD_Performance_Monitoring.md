@@ -1536,8 +1536,6 @@ You've now mastered performance optimization and monitoring for production data 
 - `src/session2/cost_optimization.py` - Cost tracking and optimization strategies for data systems
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Bare Metal Agents ←](Session1_Bare_Metal_Agents.md)
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+
 ---

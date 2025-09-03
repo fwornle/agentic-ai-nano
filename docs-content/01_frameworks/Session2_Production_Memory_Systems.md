@@ -1408,8 +1408,6 @@ Explore complementary advanced topics:
 - [Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md) - Enterprise deployment & monitoring  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Bare Metal Agents ←](Session1_Bare_Metal_Agents.md)
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+
 ---

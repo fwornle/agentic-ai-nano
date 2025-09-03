@@ -154,10 +154,9 @@ D) When downstream nodes need data from multiple branches ✅
 1. B  2. B  3. B  4. B  5. B  6. B  7. B  8. B  9. B  10. B  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 2 - LangChain Foundations ←](Session2_LangChain_Foundations.md)
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+
 ---

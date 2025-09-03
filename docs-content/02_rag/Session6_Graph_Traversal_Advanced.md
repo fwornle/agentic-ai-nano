@@ -600,8 +600,6 @@ Complex graph traversal must handle various failure modes gracefully:
 Robust error handling ensures the system provides useful responses even when optimal graph traversal fails.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 5 - RAG Evaluation & Quality Assessment ←](Session5_RAG_Evaluation_Quality_Assessment.md)
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+
 ---

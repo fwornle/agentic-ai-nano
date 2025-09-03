@@ -560,8 +560,6 @@ class RateLimitCircuitBreaker:
 Circuit breaker integration provides additional protection against cascading failures.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Production MCP Deployment ←](Session4_Production_MCP_Deployment.md)
 **Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
+
 ---

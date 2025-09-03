@@ -52,8 +52,6 @@
 - **Privacy-by-design** implementation with comprehensive data lifecycle management  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 7 - First ADK Agent ←](Session7_First_ADK_Agent.md)
 **Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+
 ---

@@ -60,8 +60,6 @@ The `DataProcessingMemory` structure forms the core unit of the memory system, d
 - [→ Next: Session 1 Module D - Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns ←](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 **Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
+
 ---

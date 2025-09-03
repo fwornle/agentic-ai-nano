@@ -1079,8 +1079,6 @@ D) Basic logging only
 - `src/session6/data_container_orchestration.py` - Container orchestration for data processing systems
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 5 - PydanticAI Type-Safe Agents ←](Session5_PydanticAI_Type_Safe_Agents.md)
 **Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
+
 ---

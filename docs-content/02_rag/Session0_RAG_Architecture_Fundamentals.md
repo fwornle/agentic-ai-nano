@@ -258,7 +258,6 @@ Need complete production expertise? Explore:
 Understanding these fundamentals positions you to build sophisticated RAG systems that combine the reasoning power of LLMs with reliable, up-to-date information retrieval.
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
 ---

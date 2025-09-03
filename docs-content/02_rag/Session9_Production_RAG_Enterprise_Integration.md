@@ -396,7 +396,5 @@ D) User interface complexity
 You now possess the knowledge to build and deploy sophisticated RAG systems that transform how organizations access, understand, and utilize their knowledge at enterprise scale.
 ---
 
-## 🧭 Navigation
-
 **Previous:** [Session 8 - MultiModal Advanced RAG ←](Session8_MultiModal_Advanced_RAG.md)
 ---

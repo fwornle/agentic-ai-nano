@@ -210,8 +210,6 @@ For detailed implementation of all HyDE components including query type template
 
 ---
 
----
-
 ## 🎯 Part 2: Query Expansion and Reformulation - Casting a Wider Net
 
 Building on HyDE's solution-space approach, query expansion tackles the problem from the query side. While HyDE generates hypothetical answers, expansion enriches the original question with related terms, synonyms, and domain-specific language that increase the likelihood of matching relevant documents.
@@ -768,8 +766,6 @@ Test your understanding of query enhancement and context augmentation:
 [📝 Session 4 Quiz →](Session4_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - Vector Databases & Search Optimization ←](Session3_Vector_Databases_Search_Optimization.md)
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+
 ---

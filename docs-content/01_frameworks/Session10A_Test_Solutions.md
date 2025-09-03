@@ -91,7 +91,5 @@ for field_name, key_id in field_encryption_map.items():
 [**← Return to Module A**](Session10_ModuleA_Advanced_Security_Compliance.md)
 ---
 
-## 🧭 Navigation
-
 **Previous:** [Session 9 - Multi-Agent Patterns ←](Session9_Multi_Agent_Patterns.md)
 ---
