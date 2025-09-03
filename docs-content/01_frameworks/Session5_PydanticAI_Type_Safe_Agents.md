@@ -30,8 +30,6 @@ This session offers three distinct learning paths designed to match your goals a
 
 ---
 
----
-
 # 🎯 Observer Path: Essential Type Safety Concepts
 
 Imagine your ML training pipeline silently consuming corrupted data because an AI agent returned malformed feature vectors. PydanticAI eliminates these risks by bringing production-grade type safety to AI agent development.
@@ -721,8 +719,6 @@ D) Speed control
 [**🗂️ View Test Solutions →**](Session5_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - CrewAI Team Orchestration ←](Session4_CrewAI_Team_Orchestration.md)
 **Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+
 ---

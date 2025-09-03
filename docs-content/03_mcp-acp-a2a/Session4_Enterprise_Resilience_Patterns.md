@@ -1283,8 +1283,6 @@ async def mcp_request_generator():
 This comprehensive enterprise resilience framework provides production-ready patterns for building bulletproof MCP servers that can withstand real-world failures and scale to meet enterprise demands. The combination of circuit breakers, chaos engineering, blue-green deployments, and comprehensive load testing ensures your production systems are truly resilient.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangChain MCP Integration ←](Session3_LangChain_MCP_Integration.md)
 **Next:** [Session 5 - Secure MCP Server →](Session5_Secure_MCP_Server.md)
+
 ---

@@ -51,10 +51,9 @@ D) Only resource utilization
 **Explanation:** Enterprise monitoring requires multiple metric categories: response time for user experience, error rates for reliability, throughput for capacity planning, and business KPIs for value delivery. Monitoring only technical metrics misses the business impact, while monitoring only business metrics misses operational issues.
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 0 - Introduction to RAG Architecture ←](Session0_Introduction_to_RAG_Architecture.md)
 **Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
+
 ---

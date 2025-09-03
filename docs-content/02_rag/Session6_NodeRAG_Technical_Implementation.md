@@ -382,8 +382,6 @@ The LRU cache ensures frequently accessed embeddings remain in memory while less
 Selective compression balances memory usage with access performance based on node type characteristics and access patterns.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 5 - RAG Evaluation & Quality Assessment ←](Session5_RAG_Evaluation_Quality_Assessment.md)
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+
 ---

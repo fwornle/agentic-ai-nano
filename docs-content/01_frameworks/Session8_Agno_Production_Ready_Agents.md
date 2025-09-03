@@ -543,8 +543,6 @@ D) Authentication requirements
 [**🗂️ View Complete Test & Solutions →**](Session8_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 7 - First ADK Agent ←](Session7_First_ADK_Agent.md)
 **Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+
 ---

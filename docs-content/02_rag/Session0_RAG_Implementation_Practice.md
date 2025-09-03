@@ -520,7 +520,6 @@ This implementation foundation prepares you for:
 - Production evaluation in Session 5  
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
 ---

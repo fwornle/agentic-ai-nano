@@ -63,8 +63,6 @@ D) 1 minute exactly
 - **Observability integration** provides metrics and alerts for operational monitoring  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - CrewAI Team Orchestration ←](Session4_CrewAI_Team_Orchestration.md)
 **Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+
 ---

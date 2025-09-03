@@ -561,8 +561,6 @@ def enhanced_rag_pipeline(self, query: str, vector_store):
 4. **Performance Testing**: Benchmark optimization speed and memory usage  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - Vector Databases & Search Optimization ←](Session3_Vector_Databases_Search_Optimization.md)
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+
 ---

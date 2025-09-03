@@ -154,8 +154,6 @@ Build a hierarchical crew with a manager coordinating specialized agents.
 Create workflows where tasks build upon each other's results with context sharing.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangGraph Multi-Agent Workflows ←](Session3_LangGraph_Multi_Agent_Workflows.md)
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+
 ---

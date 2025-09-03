@@ -452,8 +452,6 @@ D) `.server`
 [**🗂️ View Test Solutions →**](Session1_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 0 - Introduction to MCP, ACP & A2A ←](Session0_Introduction_to_MCP_ACP_A2A.md)
 **Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)
+
 ---

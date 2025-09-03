@@ -221,8 +221,6 @@ If you can confidently answer these questions, you're ready to progress to more 
 **📋 Quick Reference**: [ADK Fundamentals Cheat Sheet](../references/adk-fundamentals.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - Atomic Agents Modular Architecture ←](Session6_Atomic_Agents_Modular_Architecture.md)
 **Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
+
 ---

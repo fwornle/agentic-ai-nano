@@ -526,8 +526,6 @@ D) A warning is logged
 [View complete assessment in Production Implementation Guide →](Session2_Production_Implementation.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Basic MCP Server ←](Session1_Basic_MCP_Server.md)
 **Next:** [Session 3 - LangChain MCP Integration →](Session3_LangChain_MCP_Integration.md)
+
 ---

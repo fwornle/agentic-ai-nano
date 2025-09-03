@@ -51,10 +51,9 @@ D) Just error rates and failures
 **Explanation:** The performance monitoring system tracks comprehensive metrics including average/min/max response times, percentiles (p50, p90, p95), cache entries count, target achievement rates, and the number of responses under the target time. This comprehensive data enables informed optimization decisions and automatic performance tuning.
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns ←](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 **Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
+
 ---

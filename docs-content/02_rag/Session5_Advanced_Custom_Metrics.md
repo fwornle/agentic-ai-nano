@@ -805,8 +805,6 @@ This integration pattern enables seamless deployment of custom metrics in produc
 - **⚙️ Implementer Path**: [Enterprise Monitoring Systems →](Session5_Enterprise_Monitoring_Systems.md) - Production-scale monitoring and alerting infrastructure  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Query Enhancement & Context Augmentation ←](Session4_Query_Enhancement_Context_Augmentation.md)
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+
 ---

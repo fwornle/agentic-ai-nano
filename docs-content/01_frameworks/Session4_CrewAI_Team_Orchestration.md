@@ -176,18 +176,12 @@ D) They require fewer computational resources
 
 [**🗂️ View Test Solutions →**](Session4_Test_Solutions.md)
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangGraph Multi-Agent Workflows ←](Session3_LangGraph_Multi_Agent_Workflows.md)
-**Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangGraph Multi-Agent Workflows ←](Session3_LangGraph_Multi_Agent_Workflows.md)
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
 
-**Previous:** [Session 3 - LangGraph Multi-Agent Workflows ←](Session3_LangGraph_Multi_Agent_Workflows.md)
+---
+
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
 
 ---

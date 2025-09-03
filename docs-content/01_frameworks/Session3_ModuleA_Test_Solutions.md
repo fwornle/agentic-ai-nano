@@ -73,8 +73,6 @@ These parameters optimize research agents for specific investigation tasks and q
 - **Fault tolerance** maintains workflow integrity despite individual agent failures  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 2 - LangChain Foundations ←](Session2_LangChain_Foundations.md)
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+
 ---

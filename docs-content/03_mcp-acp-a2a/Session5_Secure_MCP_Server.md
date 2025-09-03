@@ -456,8 +456,6 @@ You've now built a comprehensive security foundation for MCP servers that includ
 Your MCP server is now protected against the most common attack vectors while maintaining usability and performance.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Production MCP Deployment ←](Session4_Production_MCP_Deployment.md)
 **Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
+
 ---

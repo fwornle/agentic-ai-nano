@@ -645,8 +645,6 @@ D) Network latency
 [**🗂️ View Test Solutions →**](Session6_ModuleB_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 5 - RAG Evaluation & Quality Assessment ←](Session5_RAG_Evaluation_Quality_Assessment.md)
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+
 ---

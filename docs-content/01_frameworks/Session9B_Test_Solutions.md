@@ -59,10 +59,9 @@ if memory_metrics:
 ```
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 8 - Agno Production-Ready Agents ←](Session8_Agno_Production_Ready_Agents.md)
 **Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)
+
 ---

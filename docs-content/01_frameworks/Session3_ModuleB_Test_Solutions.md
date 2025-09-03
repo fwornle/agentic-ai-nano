@@ -27,8 +27,6 @@ PostgreSQL provides ACID compliance, enterprise-grade reliability, and backup cl
 recovery_actions =
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 2 - LangChain Foundations ←](Session2_LangChain_Foundations.md)
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)
+
 ---

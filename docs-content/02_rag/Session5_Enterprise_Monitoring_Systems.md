@@ -744,8 +744,6 @@ This dashboard provides comprehensive real-time visibility into RAG system healt
 **Session 5 Complete**: You now have comprehensive RAG evaluation capabilities from basic metrics to enterprise-scale monitoring systems.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Query Enhancement & Context Augmentation ←](Session4_Query_Enhancement_Context_Augmentation.md)
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+
 ---

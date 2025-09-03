@@ -1173,8 +1173,6 @@ You've now mastered advanced LangChain patterns for production data systems:
 - `src/session2/advanced_tools.py` - Production-ready data tool patterns
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Bare Metal Agents ←](Session1_Bare_Metal_Agents.md)
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+
 ---

@@ -1041,8 +1041,6 @@ This solution demonstrates a complete, working ACP agent network that can operat
 [Return to Session 6](Session6_ACP_Fundamentals.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 5 - Secure MCP Server ←](Session5_Secure_MCP_Server.md)
 **Next:** [Session 7 - Agent-to-Agent Communication →](Session7_Agent_to_Agent_Communication.md)
+
 ---

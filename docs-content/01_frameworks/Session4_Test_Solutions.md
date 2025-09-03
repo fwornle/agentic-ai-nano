@@ -99,10 +99,9 @@ D) Cloud integration
 1. B  2. B  3. B  4. B  5. B  6. B  7. B  8. B  9. B  10. B  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangGraph Multi-Agent Workflows ←](Session3_LangGraph_Multi_Agent_Workflows.md)
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+
 ---

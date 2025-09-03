@@ -506,8 +506,6 @@ Implement organizational hierarchy for key governance:
 Bulk operations enable efficient management of large numbers of API keys.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Production MCP Deployment ←](Session4_Production_MCP_Deployment.md)
 **Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
+
 ---

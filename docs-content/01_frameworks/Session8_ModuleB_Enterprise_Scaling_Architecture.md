@@ -57,8 +57,6 @@ class K8sDataProcessingAgentCluster:
     node_pools: List
 ---
 
----
-
 ## 📝 Multiple Choice Test - Module B
 
 Test your understanding of Enterprise Scaling & Architecture for Data Processing:
@@ -104,8 +102,6 @@ D) The system sends alerts but continues normal scaling
 - `src/session8/advanced_scaling.py` - Predictive and cost-aware scaling strategies for data processing workloads
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 7 - First ADK Agent ←](Session7_First_ADK_Agent.md)
 **Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+
 ---

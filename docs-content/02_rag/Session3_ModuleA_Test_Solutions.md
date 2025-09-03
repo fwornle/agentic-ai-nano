@@ -51,12 +51,8 @@ D) It's simpler to implement
 **Explanation:** RAG-optimized search is designed specifically for retrieval-augmented generation workflows, where the goal isn't just finding similar content but finding the most useful content for answering questions. It combines semantic similarity with keyword boosting for precision, recency weighting for fresh information, and content diversity considerations for comprehensive context. This multi-signal fusion creates retrieval results optimized for generation quality rather than just similarity scoring.
 
 ---
-
----
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 2 - Advanced Chunking & Preprocessing ←](Session2_Advanced_Chunking_Preprocessing.md)
 **Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
+
 ---

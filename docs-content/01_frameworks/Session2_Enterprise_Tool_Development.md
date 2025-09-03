@@ -1230,8 +1230,6 @@ Complete your advanced LangChain mastery:
 - [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) - System optimization & observability  
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Bare Metal Agents ←](Session1_Bare_Metal_Agents.md)
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+
 ---

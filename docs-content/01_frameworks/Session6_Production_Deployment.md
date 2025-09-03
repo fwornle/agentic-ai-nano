@@ -759,8 +759,6 @@ You've now mastered the complete spectrum of atomic agent architecture:
 This comprehensive understanding enables you to build, deploy, and operate enterprise-grade atomic agent systems for data processing at scale.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 5 - PydanticAI Type-Safe Agents ←](Session5_PydanticAI_Type_Safe_Agents.md)
 **Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
+
 ---

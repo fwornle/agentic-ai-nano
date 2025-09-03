@@ -164,7 +164,6 @@ You have mastered the full spectrum of RAG architectures and can implement sophi
 **Choose your path and begin your RAG mastery journey!**
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
 ---

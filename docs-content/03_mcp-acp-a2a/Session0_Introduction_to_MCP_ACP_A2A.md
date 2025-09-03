@@ -398,7 +398,6 @@ D) Only cloud service providers
 [**🗂️ View Test Solutions →**](Session0_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic MCP Server →](Session1_Basic_MCP_Server.md)
+
 ---

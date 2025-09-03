@@ -1397,8 +1397,6 @@ D) JWT token-based authentication
 - `src/session8/privacy_protection.py` - Privacy-preserving techniques
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 7 - First ADK Agent ←](Session7_First_ADK_Agent.md)
 **Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+
 ---

@@ -51,10 +51,9 @@ D) ConversationEntityMemory
 **Explanation:** ConversationSummaryMemory is ideal for long conversations because it intelligently summarizes older parts of the conversation while preserving important context. This provides the benefits of context retention without the memory bloat of storing every single message, making it perfect for extended interactions where you need context but not verbatim details.
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Bare Metal Agents ←](Session1_Bare_Metal_Agents.md)
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+
 ---

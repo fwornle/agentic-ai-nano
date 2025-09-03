@@ -92,10 +92,9 @@ D) Observer Pattern
 1. B  2. C  3. C  4. B  5. C  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 0 - Introduction to Agent Frameworks & Patterns ←](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
 **Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
+
 ---

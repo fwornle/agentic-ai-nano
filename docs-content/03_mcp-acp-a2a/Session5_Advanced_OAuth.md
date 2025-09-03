@@ -519,8 +519,6 @@ Add comprehensive security monitoring:
 Security monitoring provides visibility into potential attacks and system health.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Production MCP Deployment ←](Session4_Production_MCP_Deployment.md)
 **Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
+
 ---

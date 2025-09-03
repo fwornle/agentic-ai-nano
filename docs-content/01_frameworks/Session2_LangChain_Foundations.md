@@ -451,8 +451,6 @@ D) ConversationEntityMemory
 [**🗂️ View Test Solutions →**](Session2_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Bare Metal Agents ←](Session1_Bare_Metal_Agents.md)
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
+
 ---

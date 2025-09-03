@@ -517,7 +517,5 @@ D) Faster system performance
 [**🗂️ View Test Solutions →**](Session9_ModuleA_Test_Solutions.md)
 ---
 
-## 🧭 Navigation
-
 **Previous:** [Session 8 - MultiModal Advanced RAG ←](Session8_MultiModal_Advanced_RAG.md)
 ---

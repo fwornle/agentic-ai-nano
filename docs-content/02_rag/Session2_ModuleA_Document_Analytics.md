@@ -644,15 +644,12 @@ D) Processing time and resource utilization
 
 [**🗂️ View Test Solutions →**](Session2_ModuleA_Test_Solutions.md)
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Basic RAG Implementation ←](Session1_Basic_RAG_Implementation.md)
-**Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
 ---
 
-## 🧭 Navigation
+**Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
 
-**Previous:** [Session 1 - Bare Metal Agents ←](Session1_Bare_Metal_Agents.md)
+---
+
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
 
 ---

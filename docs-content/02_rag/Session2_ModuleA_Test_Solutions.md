@@ -51,10 +51,9 @@ D) By semantic similarity and topic consistency ✅
 **Explanation:** Coherence between chunks should be measured using semantic similarity algorithms that evaluate topic consistency and conceptual relationships. This ensures that adjacent chunks maintain logical flow and contextual continuity for both retrieval systems and end users.
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Basic RAG Implementation ←](Session1_Basic_RAG_Implementation.md)
 **Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
+
 ---

@@ -311,8 +311,6 @@ This circuit breaker implementation provides robust failure handling and enables
 [Return to Session 4](Session4_Production_MCP_Deployment.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangChain MCP Integration ←](Session3_LangChain_MCP_Integration.md)
 **Next:** [Session 5 - Secure MCP Server →](Session5_Secure_MCP_Server.md)
+
 ---

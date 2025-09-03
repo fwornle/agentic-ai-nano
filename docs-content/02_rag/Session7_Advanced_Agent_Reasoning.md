@@ -445,8 +445,6 @@ The analytics framework provides insights into reasoning agent performance, enab
 This comprehensive analytics system enables continuous improvement of reasoning agent performance in production environments.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - Graph-Based RAG ←](Session6_Graph_Based_RAG.md)
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)
+
 ---

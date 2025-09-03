@@ -140,10 +140,9 @@ D) To determine the number of chunks to create
 5. **Overlap Efficiency**: Context preservation effectiveness  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 1 - Basic RAG Implementation ←](Session1_Basic_RAG_Implementation.md)
 **Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
+
 ---

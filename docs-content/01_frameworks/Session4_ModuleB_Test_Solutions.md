@@ -26,8 +26,6 @@ DelegationRule(
     task_types=
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - LangGraph Multi-Agent Workflows ←](Session3_LangGraph_Multi_Agent_Workflows.md)
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+
 ---

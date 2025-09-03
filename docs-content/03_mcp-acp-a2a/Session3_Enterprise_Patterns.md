@@ -434,8 +434,6 @@ This enterprise-ready multi-tool agent represents a significant evolution from b
 These patterns form the foundation for enterprise-grade LangChain-MCP integrations that can handle real-world complexity and operational demands.
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 2 - FileSystem MCP Server ←](Session2_FileSystem_MCP_Server.md)
 **Next:** [Session 4 - Production MCP Deployment →](Session4_Production_MCP_Deployment.md)
+
 ---

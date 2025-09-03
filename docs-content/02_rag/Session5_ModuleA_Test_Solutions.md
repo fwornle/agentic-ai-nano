@@ -87,10 +87,9 @@ D) User interface quality
 1. B  2. B  3. B  4. B  5. B  
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 4 - Query Enhancement & Context Augmentation ←](Session4_Query_Enhancement_Context_Augmentation.md)
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+
 ---

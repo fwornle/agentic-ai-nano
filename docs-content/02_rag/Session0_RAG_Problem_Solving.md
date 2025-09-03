@@ -777,7 +777,6 @@ You now have comprehensive solutions for the most common RAG problems. Ready for
 - Session 5: Quality assessment implements Problem 5 solutions  
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
 ---

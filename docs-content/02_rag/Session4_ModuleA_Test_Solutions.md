@@ -51,10 +51,9 @@ D) It reduces memory usage
 **Explanation:** Query complexity assessment enables dynamic resource allocation and technique selection. Simple queries can use lightweight processing, while complex analytical queries may require more sophisticated reasoning, multiple retrieval rounds, or specialized processing pipelines to generate accurate responses.
 
 ---
+
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 3 - Vector Databases & Search Optimization ←](Session3_Vector_Databases_Search_Optimization.md)
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+
 ---

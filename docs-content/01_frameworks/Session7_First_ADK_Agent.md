@@ -32,8 +32,6 @@ This session offers three distinct learning paths designed to match your goals a
 
 ---
 
----
-
 ## What Makes ADK Special for Enterprise Data Processing
 
 ADK bridges the gap between prototype-friendly frameworks and enterprise data processing reality. While PydanticAI and Atomic Agents excel in development environments, ADK was architected from day one for petabyte-scale data processing with built-in enterprise features:
@@ -299,18 +297,12 @@ D) Simple password protection
 
 [**🗂️ View Test Solutions →**](Session7_Test_Solutions.md)
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - Atomic Agents Modular Architecture ←](Session6_Atomic_Agents_Modular_Architecture.md)
-**Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
 ---
 
-## 🧭 Navigation
-
-**Previous:** [Session 6 - Atomic Agents Modular Architecture ←](Session6_Atomic_Agents_Modular_Architecture.md)
 **Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
 
-**Previous:** [Session 6 - Atomic Agents Modular Architecture ←](Session6_Atomic_Agents_Modular_Architecture.md)
+---
+
 **Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
 
 ---

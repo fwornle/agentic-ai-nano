@@ -795,7 +795,6 @@ This expertise in specialized RAG implementation positions you to tackle any dom
 - Session 9: Production RAG - Enterprise deployment and scaling  
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
 ---

@@ -142,7 +142,6 @@ D) Basic similarity matching with cosine distance
 - **2024-2025**: Graph-Based and Agentic RAG  
 ---
 
-## 🧭 Navigation
-
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+
 ---
