@@ -493,7 +493,6 @@ B) Better error handling
 C) Non-blocking operations
 D) Automatic file compression
 
-
 1. **B** - To prevent unauthorized file access  
 2. **B** - `Path.resolve()`
 3. **C** - Encoded as base64  

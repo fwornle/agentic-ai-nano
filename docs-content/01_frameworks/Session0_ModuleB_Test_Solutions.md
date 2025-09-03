@@ -1,6 +1,5 @@
 # Session 0 - Module B: Test Solutions
 
-
 ---
 
 **Question 1:** What is the key advantage of LangChain's framework approach over bare metal Python for reflection patterns?  

@@ -100,8 +100,6 @@ D) Centralized control of agent interactions and workflow orchestration ✅
 
 ---
 
----
-
 **Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
 
 ---

@@ -130,7 +130,6 @@ D) Increasing server capacity
 
 ---
 
-
 **Challenge:** Implement a security audit system that tracks suspicious activity.
 
 ### Complete Security Audit System

@@ -1,6 +1,5 @@
 # Session 0: Introduction to RAG Architecture - Test Solutions
 
-
 **Question 1:** RAG System Architecture  
 **What are the three main stages of a RAG system?**
 A) Store, Find, Answer  

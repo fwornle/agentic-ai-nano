@@ -88,8 +88,6 @@ D) User interface quality
 
 ---
 
----
-
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
 
 ---

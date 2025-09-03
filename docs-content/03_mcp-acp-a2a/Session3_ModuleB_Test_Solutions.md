@@ -1,6 +1,5 @@
 # Session 3 - Module B: Advanced Workflows - Test Solutions
 
-
 **Question 1:** What is the primary advantage of parallel processing in workflows?  
 
 A) Simplified code structure  

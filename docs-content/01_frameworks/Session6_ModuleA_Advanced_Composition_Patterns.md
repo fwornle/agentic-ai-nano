@@ -755,6 +755,8 @@ D) No error handling
 
 [View Solutions →](Session6_ModuleA_Test_Solutions.md)
 
+---
+
 ### Next Steps
 
 - **Continue to Module B**: [Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md) for production-scale data processing architectures  

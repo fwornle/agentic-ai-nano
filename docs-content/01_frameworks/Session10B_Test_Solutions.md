@@ -1,6 +1,5 @@
 # Session 10 Module B: Enterprise Operations & Scaling - Test Solutions
 
-
 **Question 1:** Predictive vs Reactive Scaling  
 
 **Explanation**: Predictive scaling uses machine learning and historical patterns to anticipate resource needs before they become critical. This proactive approach prevents performance degradation and ensures optimal user experience by scaling resources in advance of demand spikes, rather than reacting after performance issues have already occurred.
@@ -34,8 +33,6 @@
 ## Answer Summary
 
 1. C  2. B  3. B  4. B  5. B  6. B  7. B  
-
----
 
 ---
 

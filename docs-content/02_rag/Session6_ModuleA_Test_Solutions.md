@@ -88,8 +88,6 @@ D) When you want faster traversal
 
 ---
 
----
-
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
 
 ---

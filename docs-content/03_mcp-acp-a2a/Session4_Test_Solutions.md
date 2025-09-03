@@ -130,7 +130,6 @@ D) Improved security
 
 ---
 
-
 **Challenge:** Implement a circuit breaker pattern for MCP server resilience.
 
 ### Complete Circuit Breaker Implementation:

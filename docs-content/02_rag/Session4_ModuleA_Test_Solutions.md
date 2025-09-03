@@ -52,8 +52,6 @@ D) It reduces memory usage
 
 ---
 
----
-
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
 
 ---
