@@ -367,6 +367,7 @@ cd src/session3
 python simple_workflow.py          # Basic data workflow
 python hierarchical_team.py        # Multi-agent data coordination
 ```
+
 ---
 
 ## Navigation

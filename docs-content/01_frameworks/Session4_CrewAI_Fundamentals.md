@@ -275,6 +275,7 @@ Once you understand these fundamentals, you're ready to move to the next level:
 
 - **📝 [Team Building Practice](Session4_Team_Building_Practice.md)** - Hands-on crew creation and task orchestration  
 - **⚙️ [Advanced Orchestration](Session4_Advanced_Orchestration.md)** - Complex coordination patterns and performance optimization
+
 ---
 
 ## Navigation
