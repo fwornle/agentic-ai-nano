@@ -226,7 +226,6 @@ For enterprise-scale monitoring and alerting:
 
 ⚙️ **[Enterprise Monitoring Systems](Session5_Enterprise_Monitoring_Systems.md)** - Production monitoring architecture
 
-
 ## Quick Start Evaluation Checklist
 
 Before implementing comprehensive evaluation, ensure you have:
@@ -294,12 +293,6 @@ class RAGSystemWithEvaluation:
 
 ### Production Monitoring
 For production systems, implement sampling-based evaluation to balance performance with quality monitoring. See the enterprise monitoring guide for scalable approaches.
-
-
-
-
-
-
 
 ## 📚 Complete Multiple Choice Test
 

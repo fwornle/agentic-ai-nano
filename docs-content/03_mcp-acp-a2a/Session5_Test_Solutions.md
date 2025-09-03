@@ -9,7 +9,6 @@ B) Single-layer authentication only
 C) Defense-in-depth with multiple security layers ✅  
 D) Network security only  
 
-
 **Explanation:** Defense-in-depth provides multiple security layers including authentication, authorization, network security, and application security to protect against various attack vectors.
 
 ---
@@ -20,7 +19,6 @@ A) 16 characters
 B) 64 characters  
 C) 32 characters ✅  
 D) 24 characters  
-
 
 **Explanation:** JWT secret keys should be at least 32 characters to provide adequate cryptographic security. Shorter keys are vulnerable to brute force attacks.
 
@@ -33,7 +31,6 @@ B) Store them in localStorage
 C) Store them in browser cookies only  
 D) Use Redis with automatic expiration and blacklisting ✅  
 
-
 **Explanation:** Redis provides secure server-side storage with automatic expiration and blacklisting capabilities, preventing token replay attacks and ensuring proper lifecycle management.
 
 ---
@@ -44,7 +41,6 @@ A) Fixed window
 B) Sliding window  
 C) Leaky bucket  
 D) Token bucket ✅  
-
 
 **Explanation:** Token bucket algorithm allows controlled bursts while maintaining overall rate limits, providing better user experience than strict fixed-window approaches.
 
@@ -57,7 +53,6 @@ B) Better performance
 C) Easier management and scalability ✅  
 D) Simpler implementation  
 
-
 **Explanation:** Role-based access control (RBAC) provides easier management and better scalability by grouping permissions into roles that can be assigned to multiple users, reducing administrative overhead.
 
 ---
@@ -68,7 +63,6 @@ A) Server-side validation using Pydantic models ✅
 B) Database constraints only  
 C) Client-side validation only  
 D) No validation needed  
-
 
 **Explanation:** Server-side validation using Pydantic models provides comprehensive type checking, data sanitization, and protection against injection attacks while maintaining data integrity.
 
@@ -81,7 +75,6 @@ B) TLS 1.1
 C) TLS 1.0  
 D) TLS 1.2 ✅  
 
-
 **Explanation:** TLS 1.2 is the minimum recommended version for production systems as earlier versions have known security vulnerabilities and are deprecated.
 
 ---
@@ -92,7 +85,6 @@ A) Rotate only when compromised
 B) Automatic rotation with overlap periods ✅  
 C) Never rotate keys  
 D) Manual rotation monthly  
-
 
 **Explanation:** Automatic API key rotation with overlap periods ensures continuous service availability while maintaining security through regular key refresh cycles.
 
@@ -105,7 +97,6 @@ B) Only successful operations
 C) Debug information only  
 D) Authentication events and permission changes ✅  
 
-
 **Explanation:** Security audit logs should capture authentication events, authorization decisions, and permission changes to enable security monitoring and compliance reporting.
 
 ---
@@ -116,7 +107,6 @@ A) Blocking all international traffic
 B) Using only strong authentication  
 C) Implementing multiple rate limiting layers ✅  
 D) Increasing server capacity  
-
 
 **Explanation:** Multiple rate limiting layers (per-IP, per-user, per-endpoint) provide comprehensive DDoS protection by preventing various attack patterns while maintaining legitimate user access.
 

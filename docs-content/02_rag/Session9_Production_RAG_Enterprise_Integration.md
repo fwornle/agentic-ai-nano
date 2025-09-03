@@ -36,7 +36,6 @@ Focus on:
 - ⚙️ **[Advanced Production Patterns](Session9_Advanced_Production.md)** - Complete microservices architecture  
 - ⚙️ **[Enterprise Architecture](Session9_Enterprise_Architecture.md)** - Security, compliance, governance  
 
-
 ![RAG Overview Problems](images/RAG-overview-problems.png)
 
 ## 🎯 Observer Path: Production Architecture Fundamentals

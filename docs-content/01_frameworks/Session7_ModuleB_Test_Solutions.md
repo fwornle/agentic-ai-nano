@@ -8,7 +8,6 @@ B) Single instance deployment
 C) Manual server restart  
 D) Blue-green deployments with traffic switching  
 
-
 **Explanation**: The enterprise system uses rolling updates with Kubernetes orchestration for zero-downtime deployments, combined with canary deployment capabilities that allow gradual traffic shifting and risk mitigation during updates.
 
 **Question 2:** Load Balancer Traffic Routing  

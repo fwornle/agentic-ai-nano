@@ -7,7 +7,6 @@ You've implemented production RAG systems with containerization, security, and b
 
 This module teaches you to build RAG systems that integrate seamlessly into complex enterprise environments. You'll implement zero-trust security architectures, comprehensive data governance frameworks, and CI/CD patterns that maintain the sophisticated intelligence you built while meeting the strictest enterprise standards. The goal is RAG systems that enterprises can confidently deploy at scale with full organizational approval.
 
-
 ---
 
 ## Advanced Content

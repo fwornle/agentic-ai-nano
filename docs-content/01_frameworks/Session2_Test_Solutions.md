@@ -1,12 +1,5 @@
 # Session 2: LangChain Foundations - Test Solutions
 
-## 🔗 Practice Questions
-
-Review the questions first: [**📝 Session2 Questions →**](Session2_LangChain_Foundations.md)
-
----
-
-
 ## 📝 Multiple Choice Test
 
 **Question 1:** What is the primary benefit of LangChain's unified LLM interface?  

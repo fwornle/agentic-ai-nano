@@ -1,12 +1,5 @@
 # Session 3: LangGraph Multi-Agent Workflows - Test Solutions
 
-## 🔗 Practice Questions
-
-Review the questions first: [**📝 Session3 Questions →**](Session3_LangGraph_Multi_Agent_Workflows.md)
-
----
-
-
 ## 📝 Multiple Choice Test
 
 **Question 1:** What is the primary advantage of LangGraph over sequential LangChain agents?  
