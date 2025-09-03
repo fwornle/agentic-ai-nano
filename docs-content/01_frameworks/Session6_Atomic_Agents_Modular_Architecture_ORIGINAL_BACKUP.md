@@ -18,6 +18,7 @@ Atomic Agents provides a component-based architecture for building modular data 
 ### Advanced Modules
 
 - **  
+
 ---
 
 **Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)

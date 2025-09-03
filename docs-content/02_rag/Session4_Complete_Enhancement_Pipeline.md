@@ -1005,6 +1005,7 @@ if __name__ == "__main__":
 - **Strategy Selection**: Pre-defined strategies for different use cases  
 - **Dynamic Configuration**: Runtime configuration updates for optimization  
 - **Environment Adaptation**: Different settings for development, staging, and production  
+
 ---
 
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)

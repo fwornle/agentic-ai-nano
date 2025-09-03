@@ -55,6 +55,7 @@ D) Development environment only
 - **Multiple deployment strategies** support different risk and availability requirements  
 - **Automated rollback** protects against failed deployments  
 - **Resource management** optimizes utilization while maintaining performance  
+
 ---
 
 **Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)

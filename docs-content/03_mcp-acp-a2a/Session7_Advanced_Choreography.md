@@ -591,6 +591,7 @@ Enterprise choreography needs comprehensive security:
 - **Pattern authorization**: Controlling which agents can register patterns  
 - **Data privacy**: Ensuring sensitive data in events is protected  
 - **Audit trails**: Maintaining complete event processing logs  
+
 ---
 
 **Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)

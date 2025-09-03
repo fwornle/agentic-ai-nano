@@ -138,6 +138,7 @@ D) Basic similarity matching with cosine distance
 - **2021-2022**: Enhanced Fusion (RAG-Fusion, LLM Integration)  
 - **2023**: Adaptive Systems (Self-RAG, CRAG)  
 - **2024-2025**: Graph-Based and Agentic RAG  
+
 ---
 
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)

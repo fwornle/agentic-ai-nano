@@ -25,6 +25,7 @@ PostgreSQL provides ACID compliance, enterprise-grade reliability, and backup cl
 **Explanation**: The automatic recovery system triggers on multiple conditions:
 ```python
 recovery_actions =
+
 ---
 
 **Next:** [Session 4 - CrewAI Team Orchestration →](Session4_CrewAI_Team_Orchestration.md)

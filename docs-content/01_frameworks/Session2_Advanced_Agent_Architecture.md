@@ -1048,6 +1048,7 @@ Explore related advanced architecture topics:
 **Legacy Advanced Modules:**  
 - [Advanced LangChain Patterns](Session2_ModuleA_Advanced_LangChain_Patterns.md) - Complex workflows & optimization  
 - [Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md) - Enterprise deployment & monitoring  
+
 ---
 
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)

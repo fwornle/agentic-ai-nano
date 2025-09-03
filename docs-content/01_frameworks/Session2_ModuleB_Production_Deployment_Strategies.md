@@ -37,6 +37,7 @@ class ContainerConfig:
     name: str
     image: str
     environment: Dict
+
 ---
 
 ## Module Summary
@@ -60,6 +61,7 @@ You've now mastered production deployment strategies for data engineering system
 - `src/session2/docker_deployment.py` - Container orchestration and deployment automation
 - `src/session2/load_balancing.py` - Advanced load balancing and traffic management
 - `src/session2/monitoring_deployment.py` - Production monitoring and observability systems
+
 ---
 
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)

@@ -491,6 +491,7 @@ Production systems require bulletproof reliability:
 - **Bulkhead isolation**: Isolating failures to prevent system-wide impact  
 - **Saga patterns**: Managing distributed transactions across agents  
 - **Compensation actions**: Rolling back partially completed workflows  
+
 ---
 
 **Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)

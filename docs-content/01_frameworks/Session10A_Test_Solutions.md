@@ -89,7 +89,9 @@ for field_name, key_id in field_encryption_map.items():
 - Below 3: Fundamental concepts need reinforcement  
 
 [**← Return to Module A**](Session10_ModuleA_Advanced_Security_Compliance.md)
+
 ---
 
 **Previous:** [Session 9 - Multi-Agent Patterns ←](Session9_Multi_Agent_Patterns.md)
+
 ---

@@ -538,6 +538,7 @@ class AgentCommunicationProtocol:
 The communication protocol enables agents to exchange information, request assistance, and coordinate complex workflows beyond simple task-result patterns.
 
 This multi-agent orchestration system represents the pinnacle of collaborative intelligence in RAG systems, providing sophisticated coordination capabilities for complex information challenges.
+
 ---
 
 **Next:** [Session 8 - MultiModal Advanced RAG →](Session8_MultiModal_Advanced_RAG.md)

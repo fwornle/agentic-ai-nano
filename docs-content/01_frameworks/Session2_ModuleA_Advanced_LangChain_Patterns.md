@@ -1171,6 +1171,7 @@ You've now mastered advanced LangChain patterns for production data systems:
 - `src/session2/multi_agent_workflows.py` - Complex data agent coordination systems
 - `src/session2/custom_chains.py` - Custom chain implementations for data processing
 - `src/session2/advanced_tools.py` - Production-ready data tool patterns
+
 ---
 
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)

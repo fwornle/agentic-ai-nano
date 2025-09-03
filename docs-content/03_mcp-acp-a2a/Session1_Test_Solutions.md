@@ -251,6 +251,7 @@ If you missed questions in these areas, review the corresponding sections:
 ---
 
 [← Return to Session 1](Session1_Basic_MCP_Server.md)
+
 ---
 
 **Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)

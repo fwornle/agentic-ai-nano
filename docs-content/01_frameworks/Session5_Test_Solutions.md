@@ -296,6 +296,7 @@ D) User feedback only
 ---
 
 [Return to Session 5](Session5_PydanticAI_Type_Safe_Agents.md)
+
 ---
 
 **Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)

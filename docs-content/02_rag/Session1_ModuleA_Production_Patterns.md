@@ -55,6 +55,7 @@ class ProcessingResult:
     success_count: int
     failure_count: int
     failed_documents: List
+
 ---
 
 **Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)

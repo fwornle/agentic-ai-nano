@@ -858,6 +858,7 @@ With complete RAG mastery, you can advance to:
 - **Enterprise Architecture**: Large-scale RAG system architecture and strategy  
 - **Specialized Consulting**: Domain-specific RAG implementation consulting  
 - **Technology Leadership**: Leading organizational RAG adoption initiatives  
+
 ---
 
 **Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)

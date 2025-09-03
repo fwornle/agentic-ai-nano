@@ -1079,6 +1079,7 @@ D) Basic logging only
 - `src/session6/enterprise_data_systems.py` - Production modular architectures for data processing
 - `src/session6/enterprise_data_security.py` - Enterprise security patterns for data processing
 - `src/session6/data_container_orchestration.py` - Container orchestration for data processing systems
+
 ---
 
 **Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)

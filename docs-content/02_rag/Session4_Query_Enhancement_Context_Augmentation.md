@@ -762,6 +762,7 @@ These techniques transform your RAG system from simple similarity search to inte
 
 Test your understanding of query enhancement and context augmentation:
 [📝 Session 4 Quiz →](Session4_Test_Solutions.md)
+
 ---
 
 **Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)

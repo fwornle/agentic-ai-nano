@@ -144,6 +144,7 @@ metadata:
 This namespace configuration establishes governance boundaries for production AI workloads. The compliance label triggers automated policy enforcement for regulatory requirements, while cost-center attribution enables accurate cloud spending allocation.
 
 ```yaml
+
 ---
 # Resource Quota for enterprise resource management
 apiVersion: v1
@@ -518,7 +519,9 @@ Your digital empire awaits. What will you create?
 ---
 
 *Production excellence requires balancing performance, reliability, security, and maintainability. You now have the foundation to achieve all four.*
+
 ---
 
 **Previous:** [Session 8 - Advanced Agent Workflows ←](Session8_Advanced_Agent_Workflows.md)
+
 ---

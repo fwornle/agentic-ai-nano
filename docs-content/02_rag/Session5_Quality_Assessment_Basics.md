@@ -250,6 +250,7 @@ A 5% improvement in quality scores might be statistically significant but not pr
 
 - **📝 Participant Path**: [RAGAS Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Set up and use RAGAS evaluation framework  
 - **📝 Participant Path**: [Automated Testing Practice →](Session5_Automated_Testing_Practice.md) - Implement A/B testing for RAG optimization  
+
 ---
 
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)

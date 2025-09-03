@@ -24,6 +24,7 @@ DelegationRule(
     from_authority=DelegationAuthority.ENTERPRISE_LEAD,
     to_authority=DelegationAuthority.DEPARTMENT_MANAGE,
     task_types=
+
 ---
 
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)

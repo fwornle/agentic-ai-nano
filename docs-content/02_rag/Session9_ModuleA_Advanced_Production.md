@@ -519,4 +519,5 @@ D) Faster system performance
 ---
 
 **Previous:** [Session 8 - MultiModal Advanced RAG ←](Session8_MultiModal_Advanced_RAG.md)
+
 ---

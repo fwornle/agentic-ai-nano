@@ -24,6 +24,7 @@ You're not just learning theory - you're examining a system that handles the sam
 
 **Repository**: 
 **Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
+
 ---
 
 **Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)

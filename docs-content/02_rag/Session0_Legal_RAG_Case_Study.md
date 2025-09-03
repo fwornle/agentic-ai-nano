@@ -793,6 +793,7 @@ This expertise in specialized RAG implementation positions you to tackle any dom
 - Session 7: Agentic RAG Systems - Multi-agent orchestration  
 - Session 8: MultiModal RAG - Beyond text-only systems  
 - Session 9: Production RAG - Enterprise deployment and scaling  
+
 ---
 
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)

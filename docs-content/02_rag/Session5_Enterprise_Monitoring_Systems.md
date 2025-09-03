@@ -742,6 +742,7 @@ This dashboard provides comprehensive real-time visibility into RAG system healt
 - Advanced performance tracking and capacity planning  
 
 **Session 5 Complete**: You now have comprehensive RAG evaluation capabilities from basic metrics to enterprise-scale monitoring systems.
+
 ---
 
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)

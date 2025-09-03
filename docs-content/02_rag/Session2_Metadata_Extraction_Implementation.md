@@ -694,6 +694,7 @@ def _assess_difficulty_standardized(self, text: str) -> str:
 2. **Human Review**: Sample and review extraction results regularly  
 3. **Feedback Integration**: Use retrieval performance to improve extraction  
 4. **Domain Testing**: Test across different content types and domains  
+
 ---
 
 **Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)

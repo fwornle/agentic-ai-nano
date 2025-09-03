@@ -496,6 +496,7 @@ Implement homograph attack detection:
         # Suspicious if mixing Latin with other scripts
         return len(scripts) > 2 and 'LATIN' in scripts
 ```
+
 ---
 
 **Next:** [Session 3 - LangChain MCP Integration →](Session3_LangChain_MCP_Integration.md)

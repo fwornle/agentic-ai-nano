@@ -408,6 +408,7 @@ Multi-faceted monitoring ensures the system maintains high performance and quali
         # Check for performance anomalies
         self.performance_tracker.check_performance_thresholds(monitoring_data)
 ```
+
 ---
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)

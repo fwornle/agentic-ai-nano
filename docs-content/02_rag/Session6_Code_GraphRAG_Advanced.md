@@ -606,6 +606,7 @@ Incremental updates maintain performance for large codebases by only reprocessin
 ```
 
 The incremental update process minimizes computational overhead while maintaining graph consistency and correctness.
+
 ---
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)

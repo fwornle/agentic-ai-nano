@@ -257,7 +257,9 @@ Scale-up evaluation uses OR logic for responsiveness - any threshold breach trig
 ```
 
 Scale-down requires ALL conditions to be met over a sustained period. This conservative approach prevents oscillation while ensuring adequate capacity during unpredictable load patterns common in enterprise environments.
+
 ---
 
 **Previous:** [Session 8 - MultiModal Advanced RAG ←](Session8_MultiModal_Advanced_RAG.md)
+
 ---

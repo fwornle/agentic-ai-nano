@@ -423,6 +423,7 @@ C) More storage space
 D) Faster processing speed
 
 **Answers**: 1-B, 2-B, 3-B
+
 ---
 
 **Next:** [Session 9 - Production RAG & Enterprise Integration →](Session9_Production_RAG_Enterprise_Integration.md)

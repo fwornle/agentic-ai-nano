@@ -377,6 +377,7 @@ Traditional vector RAG finds documents similar to queries. GraphRAG enables mult
 2. Design relationship-aware test cases requiring multi-hop reasoning  
 3. Plan hybrid evaluation (pure vector vs. pure graph vs. hybrid approaches)  
 4. Document current performance for entity/relationship queries  
+
 ---
 
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)

@@ -1534,6 +1534,7 @@ You've now mastered performance optimization and monitoring for production data 
 - `src/session2/performance_benchmarking.py` - Performance measurement and optimization for data processing
 - `src/session2/monitoring_observability.py` - Comprehensive monitoring systems for data processing
 - `src/session2/cost_optimization.py` - Cost tracking and optimization strategies for data systems
+
 ---
 
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
