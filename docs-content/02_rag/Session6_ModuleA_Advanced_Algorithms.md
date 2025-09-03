@@ -7,7 +7,6 @@ You've implemented GraphRAG systems with entity extraction, relationship mapping
 
 This module teaches you advanced graph algorithms optimized for large-scale GraphRAG systems. You'll implement specialized PageRank variants for different knowledge domains, optimization techniques that maintain performance at massive scale, and algorithmic enhancements that enable complex reasoning patterns impossible with basic traversal. The goal is graph intelligence that scales with your knowledge complexity.
 
-
 ---
 
 ## Advanced Algorithms Content

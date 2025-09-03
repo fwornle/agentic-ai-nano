@@ -1,12 +1,5 @@
 # Session 1: Bare Metal Agents - Test Solutions
 
-## 🔗 Practice Questions
-
-Review the questions first: [**📝 Session1 Questions →**](Session1_Bare_Metal_Agents.md)
-
----
-
-
 ## 📝 Multiple Choice Test
 
 **Question 1:** What is the primary benefit of implementing agents from scratch before using frameworks?  
