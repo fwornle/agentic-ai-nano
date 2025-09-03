@@ -434,6 +434,7 @@ C) Database queries are the main bottleneck
 D) All of the above  
 
 [View Solutions →](Session3_Test_Solutions.md)
+
 ---
 
 **Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)

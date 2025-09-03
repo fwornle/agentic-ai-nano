@@ -886,6 +886,7 @@ C) Lower infrastructure costs
 D) Simpler debugging  
 
 [View Solutions →](Session9_ModuleB_Test_Solutions.md)
+
 ---
 
 **Previous:** [Session 8 - MultiModal Advanced RAG ←](Session8_MultiModal_Advanced_RAG.md)

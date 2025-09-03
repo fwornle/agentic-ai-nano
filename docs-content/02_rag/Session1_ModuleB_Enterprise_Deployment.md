@@ -555,6 +555,7 @@ C) Only error counts
 D) Only resource utilization  
 
 [View Solutions →](Session1_ModuleB_Test_Solutions.md)
+
 ---
 
 **Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)

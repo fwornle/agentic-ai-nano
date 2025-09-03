@@ -448,6 +448,7 @@ C) `.json`
 D) `.server`  
 
 [View Solutions →](Session1_Test_Solutions.md)
+
 ---
 
 **Next:** [Session 2 - FileSystem MCP Server →](Session2_FileSystem_MCP_Server.md)
