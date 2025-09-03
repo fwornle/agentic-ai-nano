@@ -210,8 +210,6 @@ Before moving to the next path, ensure you can answer:
 
 If you can confidently answer these questions, you're ready to progress to more advanced content!
 
----
-
 ## 📝 Navigation
 
 **🏠 Module Home**: [Session 7 Overview](Session7_First_ADK_Agent.md)
@@ -219,9 +217,11 @@ If you can confidently answer these questions, you're ready to progress to more 
 **➡️ Next Path**: [📝 ADK Implementation](Session7_ADK_Implementation.md) or [⚙️ Advanced Systems](Session7_Advanced_ADK_Systems.md)
 
 **📋 Quick Reference**: [ADK Fundamentals Cheat Sheet](../references/adk-fundamentals.md)
-
 ---
 
-**Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
+## Navigation
+
+**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
+**Next:** [Session 8 - Production Ready →](Session8_*.md)
 
 ---

@@ -7,8 +7,6 @@ You've built a working RAG system in the main session. Now you'll learn what hap
 
 This module teaches you the engineering patterns that transform your RAG implementation from "works in development" to "runs reliably in production" - the resilience patterns, monitoring strategies, and operational practices that production systems demand.
 
----
-
 ## Quick Start
 
 ```bash
@@ -28,8 +26,6 @@ python interactive_rag.py
 - `src/session1/rag_system.py` - Production RAG implementation
 - `src/session1/test_rag_performance.py` - Performance testing tools
 - `src/session1/interactive_rag.py` - Interactive RAG exploration
-
----
 
 ## Advanced Production Patterns
 
@@ -55,9 +51,11 @@ class ProcessingResult:
     success_count: int
     failure_count: int
     failed_documents: List
-
 ---
 
-**Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
+## Navigation
+
+**Previous:** [Session 0 - Introduction →](Session0_*.md)  
+**Next:** [Session 2 - Implementation →](Session2_*.md)
 
 ---

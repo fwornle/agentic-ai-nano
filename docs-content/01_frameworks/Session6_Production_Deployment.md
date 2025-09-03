@@ -757,9 +757,11 @@ You've now mastered the complete spectrum of atomic agent architecture:
 - **⚙️ Implementer Path**: Advanced orchestration and production deployment  
 
 This comprehensive understanding enables you to build, deploy, and operate enterprise-grade atomic agent systems for data processing at scale.
-
 ---
 
-**Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
+## Navigation
+
+**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_*.md)
 
 ---

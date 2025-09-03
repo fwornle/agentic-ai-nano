@@ -561,8 +561,6 @@ Production choreography requires sophisticated monitoring:
 
 Comprehensive metrics enable optimization and troubleshooting of production choreography systems.
 
----
-
 ## Production Considerations
 
 ### Scalability Patterns
@@ -590,10 +588,12 @@ Enterprise choreography needs comprehensive security:
 - **Event authentication**: Verifying event sources and integrity  
 - **Pattern authorization**: Controlling which agents can register patterns  
 - **Data privacy**: Ensuring sensitive data in events is protected  
-- **Audit trails**: Maintaining complete event processing logs  
-
+- **Audit trails**: Maintaining complete event processing logs
 ---
 
-**Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)
+## Navigation
+
+**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
+**Next:** [Session 8 - Production Ready →](Session8_*.md)
 
 ---

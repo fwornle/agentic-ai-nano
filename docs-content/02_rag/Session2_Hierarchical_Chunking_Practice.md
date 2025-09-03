@@ -14,8 +14,6 @@ After completing this implementation guide, you will:
 - Create section-aware grouping algorithms  
 - Handle edge cases in document structure analysis  
 
----
-
 ## Advanced Hierarchical Chunker Implementation
 
 The simple approach demonstrates the concept, but production systems need more sophisticated handling of edge cases, overlap management, and metadata preservation. Our advanced chunker addresses these requirements.
@@ -271,8 +269,6 @@ Section title extraction identifies the main heading within a section to provide
 
 Overlap element selection ensures the next chunk begins with some context from the previous chunk, maintaining semantic continuity while respecting the configured overlap ratio.
 
----
-
 ## 📝 Practice Exercises
 
 ### Exercise 1: Basic Hierarchical Chunker
@@ -396,8 +392,6 @@ for element in elements:
         print(f"{indent}Level {element.level}: {element.content}")
 ```
 
----
-
 ## Troubleshooting Common Issues
 
 ### Issue 1: Chunks Too Small
@@ -455,8 +449,6 @@ def _validate_chunk_metadata(self, metadata):
     return metadata
 ```
 
----
-
 ## Advanced Optimization Techniques
 
 ### Dynamic Chunk Sizing
@@ -507,8 +499,6 @@ def _validate_chunk_quality(self, chunk):
     return True, "Quality check passed"
 ```
 
----
-
 ## Key Implementation Tips
 
 ### Best Practices
@@ -530,10 +520,12 @@ def _validate_chunk_quality(self, chunk):
 1. **Unit Tests**: Test individual methods with controlled inputs  
 2. **Integration Tests**: Test full pipeline with realistic documents  
 3. **Edge Case Tests**: Handle malformed documents and unusual structures  
-4. **Performance Tests**: Measure processing time and memory usage  
-
+4. **Performance Tests**: Measure processing time and memory usage
 ---
 
-**Next:** [Session 3 - Vector Databases & Search Optimization →](Session3_Vector_Databases_Search_Optimization.md)
+## Navigation
+
+**Previous:** [Session 1 - Foundations →](Session1_*.md)  
+**Next:** [Session 3 - Advanced Patterns →](Session3_*.md)
 
 ---

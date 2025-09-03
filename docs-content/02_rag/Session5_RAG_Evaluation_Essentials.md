@@ -187,10 +187,12 @@ Your evaluation should show:
 **Next Steps for Deeper Learning:**
 
 - **📝 Participant Path**: [RAG Implementation Practice →](Session5_RAGAS_Implementation_Practice.md) - Hands-on RAGAS setup and usage  
-- **⚙️ Implementer Path**: [Advanced Custom Metrics →](Session5_Advanced_Custom_Metrics.md) - Build sophisticated domain-specific evaluators  
-
+- **⚙️ Implementer Path**: [Advanced Custom Metrics →](Session5_Advanced_Custom_Metrics.md) - Build sophisticated domain-specific evaluators
 ---
 
-**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

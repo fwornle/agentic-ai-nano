@@ -10,8 +10,6 @@ Complete these guides before starting:
 
 This guide covers advanced hybrid search techniques, query enhancement strategies, and enterprise-grade fusion methods.
 
----
-
 ## Part 1: Advanced Query Enhancement
 
 ### Multi-Modal Query Processing
@@ -449,8 +447,6 @@ class ContextualQueryExpander:
 
 Contextual expansion leverages domain knowledge, conversation history, and temporal awareness to create more targeted search queries.
 
----
-
 ## Part 2: Advanced Fusion Algorithms
 
 ### Weighted Reciprocal Rank Fusion
@@ -737,8 +733,6 @@ class AdvancedFusionEngine:
 
 Advanced fusion algorithms provide sophisticated result combination strategies that adapt to query characteristics and result quality.
 
----
-
 ## Part 3: Cross-Encoder Reranking Integration
 
 ### Production Cross-Encoder Pipeline
@@ -938,8 +932,6 @@ class ProductionCrossEncoderReranker:
 ```
 
 The production cross-encoder pipeline provides sophisticated reranking with batch processing, confidence calibration, and comprehensive performance monitoring.
-
----
 
 ## Part 4: Multi-Stage Search Architecture
 
@@ -1183,8 +1175,6 @@ class EnterpriseSearchPipeline:
 
 The enterprise pipeline orchestrates all advanced search components into a cohesive, production-ready system with comprehensive monitoring and optimization.
 
----
-
 ## Key Advanced Hybrid Search Principles
 
 ### Master-Level Insights
@@ -1218,9 +1208,11 @@ The enterprise pipeline orchestrates all advanced search components into a cohes
 5. **Scalability**: Design for concurrent query processing and horizontal scaling  
 
 The advanced hybrid search techniques in this guide enable state-of-the-art retrieval performance while maintaining production-grade reliability and efficiency.
-
 ---
 
-**Next:** [Session 4 - Query Enhancement & Context Augmentation →](Session4_Query_Enhancement_Context_Augmentation.md)
+## Navigation
+
+**Previous:** [Session 2 - Implementation →](Session2_*.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
 
 ---

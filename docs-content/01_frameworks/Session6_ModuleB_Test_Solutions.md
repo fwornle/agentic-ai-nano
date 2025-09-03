@@ -37,8 +37,6 @@ C) Blue-green deployments, canary releases, and rolling updates with health chec
 D) Development environment only  
 **Explanation**: The enterprise system supports multiple deployment strategies including blue-green deployments for zero-downtime updates, canary releases for gradual rollouts with risk mitigation, and rolling updates with comprehensive health checks for production safety.
 
----
-
 ## Key Concepts Summary
 
 ### Enterprise Architecture  
@@ -54,10 +52,11 @@ D) Development environment only
 ### Deployment Excellence  
 - **Multiple deployment strategies** support different risk and availability requirements  
 - **Automated rollback** protects against failed deployments  
-- **Resource management** optimizes utilization while maintaining performance  
-
+- **Resource management** optimizes utilization while maintaining performance
 ---
 
-**Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
+## Navigation
+
+**Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 
 ---

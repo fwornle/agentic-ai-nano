@@ -32,8 +32,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 **Start Here**: 
 Test your understanding of RAG implementation principles:
 
@@ -114,8 +112,6 @@ D) Reduced code complexity
 - Technical consulting and thought leadership  
 - Research and development in RAG technologies  
 
----
-
 ## Begin Your RAG Implementation Journey
 
 ### Start Your Chosen Path Now
@@ -132,9 +128,11 @@ D) Reduced code complexity
 ### Questions or Need Guidance?
 
 Refer to the learning path overview above to select the approach that best matches your goals, timeline, and current expertise level. Each path builds comprehensively on core RAG implementation principles while optimizing for different learning outcomes.
-
 ---
 
-**Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
+## Navigation
+
+**Previous:** [Session 0 - Introduction →](Session0_*.md)  
+**Next:** [Session 2 - Implementation →](Session2_*.md)
 
 ---

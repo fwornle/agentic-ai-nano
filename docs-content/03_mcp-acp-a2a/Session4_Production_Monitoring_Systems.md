@@ -741,9 +741,11 @@ volumes:
 ```
 
 This comprehensive monitoring system provides enterprise-grade observability for your production MCP servers, with intelligent alerting, trend analysis, and comprehensive dashboards that enable proactive operations and rapid incident response.
-
 ---
 
-**Next:** [Session 5 - Secure MCP Server →](Session5_Secure_MCP_Server.md)
+## Navigation
+
+**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
 
 ---

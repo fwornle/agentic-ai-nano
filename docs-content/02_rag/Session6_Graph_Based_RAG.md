@@ -28,8 +28,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## 🎯 Observer Path: Core GraphRAG Concepts
 
 In Sessions 1-5, you built sophisticated vector-based RAG systems with intelligent chunking, optimized search, query enhancement, and comprehensive evaluation. But when users ask complex questions like "What technologies do companies that partner with Apple use in automotive manufacturing?", you discover vector RAG's fundamental limitation: it finds similar content, but can't reason about relationships between entities.
@@ -94,8 +92,6 @@ For detailed technical implementation, see: ⚙️ [Session6_NodeRAG_Technical_I
 ### Bridge to Session 7: Agentic Reasoning
 
 NodeRAG's heterogeneous graph architecture provides the structured foundation for advanced reasoning capabilities. Session 7 will show how to build agents that actively reason through these graph structures.
-
----
 
 ## 📝 Participant Path: Practical GraphRAG Implementation
 
@@ -341,8 +337,6 @@ Multi-hop reasoning enables complex queries that require connecting information 
 
 For complete technical implementation, see: ⚙️ [Session6_Graph_Traversal_Advanced.md](Session6_Graph_Traversal_Advanced.md)
 
----
-
 ## Hands-On Exercise: Build Production GraphRAG System
 
 Let's build a complete GraphRAG system that combines traditional entity-relationship extraction with modern vector similarity search.
@@ -380,8 +374,6 @@ print(result)
 
 For complete exercise implementation, see the advanced modules linked above.
 
----
-
 ## Chapter Summary
 
 In this session, you've learned how GraphRAG transforms information retrieval from similarity matching to knowledge reasoning:
@@ -414,8 +406,6 @@ For deep technical mastery, explore these advanced modules:
 ### Next Steps
 
 Session 7 will show you how to build agentic RAG systems that actively reason through graph structures, making autonomous decisions about information retrieval and synthesis strategies.
-
----
 
 ## 📝 Multiple Choice Test - Session 6
 
@@ -470,9 +460,11 @@ C) Maximizing query speed
 D) Simplifying the codebase  
 
 [View Solutions →](Session6_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)
+## Navigation
+
+**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_*.md)
 
 ---

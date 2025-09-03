@@ -11,8 +11,6 @@ D) Production servers require observability, scalability, and reliability ✅
 
 **Explanation:** Production environments require comprehensive observability (metrics, logs, traces), scalability to handle varying loads, and reliability through error handling and fault tolerance.
 
----
-
 **Question 2:** What is the main advantage of containerizing MCP servers with Docker?  
 
 A) Improved performance  
@@ -21,8 +19,6 @@ C) Automatic scaling capabilities
 D) Consistent environments across development and production ✅  
 
 **Explanation:** Docker containerization ensures consistent environments across development, staging, and production, eliminating "works on my machine" problems and simplifying deployment.
-
----
 
 **Question 3:** Which Prometheus metric type is best suited for tracking response times?  
 
@@ -33,8 +29,6 @@ D) Summary
 
 **Explanation:** Histogram metrics are ideal for tracking response times as they measure distributions and provide percentiles, helping identify performance patterns and outliers.
 
----
-
 **Question 4:** What information should a comprehensive health check endpoint provide?  
 
 A) Database connectivity and dependent services status ✅  
@@ -43,8 +37,6 @@ C) Server uptime only
 D) Current server load only  
 
 **Explanation:** Health checks should verify all critical dependencies including database connectivity, external service availability, and resource utilization to provide comprehensive system status.
-
----
 
 **Question 5:** What metric is most important for auto-scaling MCP servers?  
 
@@ -55,8 +47,6 @@ D) Memory usage only
 
 **Explanation:** Request rate combined with response time provides the best indicator of actual user demand and system performance, enabling more accurate scaling decisions than resource metrics alone.
 
----
-
 **Question 6:** What type of caching is most effective for MCP server responses?  
 
 A) File-based caching  
@@ -65,8 +55,6 @@ C) Redis distributed caching with TTL expiration ✅
 D) Database-level caching only  
 
 **Explanation:** Redis distributed caching with TTL expiration provides fast access, data persistence, and automatic cleanup while supporting multiple server instances in production environments.
-
----
 
 **Question 7:** When should a circuit breaker transition to the "open" state?  
 
@@ -77,8 +65,6 @@ D) When error rates exceed the configured threshold ✅
 
 **Explanation:** Circuit breakers open when error rates exceed configured thresholds, preventing cascade failures by temporarily stopping requests to failing services until they recover.
 
----
-
 **Question 8:** What is the recommended approach for deploying MCP servers through CI/CD?  
 
 A) Direct deployment to production  
@@ -87,8 +73,6 @@ C) Manual deployment verification
 D) Rolling updates without testing  
 
 **Explanation:** Blue-green deployment with health checks ensures zero-downtime deployments by maintaining two identical environments and switching traffic only after verifying the new version's health.
-
----
 
 **Question 9:** Which monitoring approach provides the most comprehensive observability?  
 
@@ -99,8 +83,6 @@ D) Health checks only
 
 **Explanation:** The three pillars of observability (metrics, logs, and distributed tracing) provide comprehensive system visibility, enabling effective troubleshooting and performance optimization.
 
----
-
 **Question 10:** What is the primary benefit of using Terraform for MCP server infrastructure?  
 
 A) Lower costs  
@@ -109,8 +91,6 @@ C) Reproducible and version-controlled infrastructure ✅
 D) Improved security  
 
 **Explanation:** Infrastructure as Code with Terraform ensures reproducible, version-controlled infrastructure that can be reviewed, tested, and deployed consistently across environments.
-
----
 
 ## Scoring Guide
 
@@ -127,8 +107,6 @@ D) Improved security
 3. **Monitoring Stack**: Comprehensive observability requires metrics, logs, and tracing  
 4. **Auto-scaling**: Request rate and response time guide scaling decisions  
 5. **Deployment Strategy**: Blue-green deployments with health checks ensure reliability  
-
----
 
 **Challenge:** Implement a circuit breaker pattern for MCP server resilience.
 
@@ -304,12 +282,11 @@ class CircuitBreaker:
 
 This circuit breaker implementation provides robust failure handling and enables graceful degradation in production MCP deployments.
 
----
-
 [Return to Session 4](Session4_Production_MCP_Deployment.md)
-
 ---
 
-**Next:** [Session 5 - Secure MCP Server →](Session5_Secure_MCP_Server.md)
+## Navigation
+
+**Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
 
 ---

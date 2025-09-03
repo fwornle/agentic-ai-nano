@@ -30,8 +30,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## Module Architecture
 
 Atomic Agents provides a component-based architecture for building modular data processing systems that scale like distributed stream processors but compose like building blocks. Built on Instructor and Pydantic foundations, the framework enables rapid data pipeline assembly through schema alignment and lightweight processing components.
@@ -196,8 +194,6 @@ python -m pytest data_test_client.py  # Validate understanding
 
 **If you completed ⚙️ Implementer Path**: You have comprehensive mastery and are ready for any advanced enterprise scenarios.
 
----
-
 ## **Choose Your Next Path:**
 
 ### Learning Path Files  
@@ -265,9 +261,11 @@ This architecture enables building everything from simple ETL workflows to compl
 **Composition over Coupling**: Build pipelines by combining components rather than creating tightly coupled processors
 **Distributed Processing Ready**: Designed for horizontal scaling across multiple nodes
 **Production Ready**: Enterprise deployment patterns with monitoring, security, and compliance
-
 ---
 
-**Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)
+## Navigation
+
+**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_*.md)
 
 ---

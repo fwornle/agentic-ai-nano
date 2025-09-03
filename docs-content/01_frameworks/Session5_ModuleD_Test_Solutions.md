@@ -47,8 +47,6 @@ C) Random API calls
 D) Simple sequential testing  
 **Explanation**: The load testing framework simulates realistic usage with multiple users operating simultaneously, configurable patterns for different request types and behaviors, performance analysis measuring response times and throughput under load, and realistic scenarios that mimic actual user behavior.
 
----
-
 ## Key Concepts Summary
 
 ### Testing Infrastructure
@@ -79,10 +77,11 @@ D) Simple sequential testing
 
 - **Distributed tracing** enables end-to-end request tracking across services  
 - **Error correlation** links performance issues with specific failure modes  
-- **Operational metrics** support capacity planning and performance optimization  
-
+- **Operational metrics** support capacity planning and performance optimization
 ---
 
-**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+## Navigation
+
+**Back to Test:** [Session 5 Test Questions →](Session5_*.md#multiple-choice-test)
 
 ---

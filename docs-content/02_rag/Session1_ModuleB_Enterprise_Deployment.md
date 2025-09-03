@@ -7,8 +7,6 @@ Your RAG system works beautifully on your development machine. But enterprise de
 
 This module bridges the gap between working prototype and enterprise-grade deployment, teaching you the architectural patterns, security considerations, and scaling strategies that enterprise RAG systems demand.
 
----
-
 ## Quick Start
 
 ```bash
@@ -22,8 +20,6 @@ python main.py
 - `src/session1/rag_system.py` - Main RAG implementation
 - `src/session1/config.py` - Deployment configuration management
 - `src/session1/test_rag_performance.py` - Load testing tools
-
----
 
 ## Enterprise Deployment Architecture
 
@@ -518,8 +514,6 @@ Alert triggering with handler resilience ensures notifications reach operations 
                 print(f"Alert handler failed: {e}")
 ```
 
----
-
 ## 📝 Multiple Choice Test - Module B
 
 Test your understanding of enterprise RAG deployment:
@@ -555,9 +549,11 @@ C) Only error counts
 D) Only resource utilization  
 
 [View Solutions →](Session1_ModuleB_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
+## Navigation
+
+**Previous:** [Session 0 - Introduction →](Session0_*.md)  
+**Next:** [Session 2 - Implementation →](Session2_*.md)
 
 ---
