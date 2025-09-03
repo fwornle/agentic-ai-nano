@@ -3212,6 +3212,7 @@ C) Maximizing query speed
 D) Simplifying the codebase  
 
 [View Solutions →](Session6_Test_Solutions.md)
+
 ---
 
 **Next:** [Session 7 - Agentic RAG Systems →](Session7_Agentic_RAG_Systems.md)

@@ -182,6 +182,7 @@ C) Text length optimization
 D) User interface quality  
 
 [View Solutions →](Session5_ModuleA_Test_Solutions.md)
+
 ---
 
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
