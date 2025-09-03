@@ -140,8 +140,6 @@ Standard JSON format for agent capability advertisement, published at `.well-kno
 
 **Supply Chain**: Manufacturing agents coordinate with suppliers, inventory systems communicate across boundaries, and real-time demand signals flow between partners.
 
----
-
 ## 📝 Participant Path: Practical Applications
 
 *Prerequisites: Complete Observer Path sections above*
@@ -222,8 +220,6 @@ stdio://python weather_server.py
 
 **Team Features**: Schema validation, performance monitoring, configuration export to Claude Desktop/Cursor IDE, and complete JSON-RPC message logging.
 
----
-
 ## ⚙️ Implementer Path: Advanced Topics
 
 *Prerequisites: Complete Observer and Participant paths*
@@ -233,8 +229,6 @@ For comprehensive coverage of advanced protocol implementations, enterprise patt
 - ⚙️ [Advanced MCP Patterns](Session4_Advanced_Server_Architecture.md)  
 - ⚙️ [Enterprise Security](Session5_Advanced_OAuth.md)  
 - ⚙️ [Production Monitoring](Session4_Production_Monitoring_Systems.md)  
-
----
 
 ## Getting Started and Next Steps
 
@@ -299,8 +293,6 @@ For comprehensive coverage of advanced protocol implementations, enterprise patt
 
 **Next Steps**: Build these protocols from the ground up, starting with your first MCP server and progressing to complex multi-protocol applications.
 
----
-
 ## Additional Resources
 
 - [Model Context Protocol Official Site](https://modelcontextprotocol.io/) - Complete MCP specification and examples  
@@ -308,8 +300,6 @@ For comprehensive coverage of advanced protocol implementations, enterprise patt
 - [A2A Protocol GitHub](https://github.com/a2a-protocol) - Agent-to-Agent protocol implementations  
 - [MCP Inspector](https://github.com/modelcontextprotocol/inspector) - Essential tool for MCP development  
 - [Enterprise AI Integration Patterns](https://enterprise-ai-patterns.org/) - Best practices for production deployments  
-
----
 
 ## Practical Exercise
 
@@ -330,8 +320,6 @@ For comprehensive coverage of advanced protocol implementations, enterprise patt
 - Clear plan for your learning journey through the nanodegree  
 
 **Hint:** Start with MCP Inspector to see the protocols in action before diving into implementation.
-
----
 
 ## 📝 Multiple Choice Test - Session 0
 
@@ -396,9 +384,10 @@ C) Primarily academic institutions
 D) Only cloud service providers  
 
 [View Solutions →](Session0_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 1 - Basic MCP Server →](Session1_Basic_MCP_Server.md)
+## Navigation
+
+**Next:** [Session 1 - Foundations →](Session1_*.md)
 
 ---

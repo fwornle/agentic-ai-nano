@@ -25,9 +25,10 @@
 
 ```yaml
 "route":
-
 ---
 
-**Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)
+## Navigation
+
+**Back to Test:** [Session 8 Test Questions →](Session8_*.md#multiple-choice-test)
 
 ---

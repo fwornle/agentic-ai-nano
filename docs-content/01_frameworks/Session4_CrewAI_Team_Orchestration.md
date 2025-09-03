@@ -34,8 +34,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## Learning Outcomes
 
 By completing your chosen learning path, you will:
@@ -175,13 +173,11 @@ C) They process data faster
 D) They require fewer computational resources  
 
 [View Solutions →](Session4_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+## Navigation
 
----
-
-**Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
 
 ---

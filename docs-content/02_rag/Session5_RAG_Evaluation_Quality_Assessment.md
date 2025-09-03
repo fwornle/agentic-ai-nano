@@ -28,8 +28,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ### Optional Deep Dive Modules
 
 - **[Module A: Advanced Evaluation Metrics](Session5_ModuleA_Advanced_Metrics.md)** - Custom metrics and domain-specific evaluation  
@@ -49,8 +47,6 @@ RAG systems present unique evaluation challenges because failures cascade throug
 - **Enhancement Attribution**: Which specific improvements actually drive quality gains?  
 
 This session transforms your approach from "it seems better" to "it performs 23% better on factual accuracy with 95% confidence."
-
----
 
 ## Session Structure and Learning Paths
 
@@ -353,8 +349,6 @@ D) Random threshold selection
 
 ---**
 
----
-
 ## Session 5 Mastery Summary
 
 **What You've Built:**
@@ -376,10 +370,12 @@ Traditional vector RAG finds documents similar to queries. GraphRAG enables mult
 1. Establish GraphRAG baselines using your evaluation framework  
 2. Design relationship-aware test cases requiring multi-hop reasoning  
 3. Plan hybrid evaluation (pure vector vs. pure graph vs. hybrid approaches)  
-4. Document current performance for entity/relationship queries  
-
+4. Document current performance for entity/relationship queries
 ---
 
-**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

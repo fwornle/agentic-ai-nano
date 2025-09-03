@@ -5,8 +5,6 @@
 
 ## Snowflake Data Platform Success
 
----
-
 ## The Snowflake Data Cloud Revolution
 
 When Snowflake faced declining profit margins due to inefficient data service deployments costing **$4.2 billion annually** in unnecessary cloud infrastructure, their engineering leadership recognized that architectural excellence would determine their competitive position in the data-first economy.
@@ -28,8 +26,6 @@ The architectural revolution enabled Snowflake to launch real-time streaming ana
 ## Module Overview
 
 You're about to master the same enterprise PydanticAI patterns that transformed Snowflake's global data infrastructure. This module reveals production-grade deployment strategies, dependency injection systems, scalable architectures, and monitoring solutions that billion-dollar data companies use to dominate competitive markets through operational excellence in cloud-scale data processing.
-
----
 
 ## Part 1: Dependency Injection & Architecture for Data Systems
 
@@ -282,8 +278,6 @@ Service resolution implements lazy initialization with singleton caching for opt
 
 Comprehensive health monitoring provides operational visibility across all registered services in the data processing system. The exception handling ensures health check failures don't crash the monitoring system, while detailed logging enables troubleshooting of specific service issues that could impact data pipeline operations.
 
----
-
 ## Part 2: Scalability & Performance for Data Processing
 
 ### Production Agent Architecture for Data Workloads
@@ -505,8 +499,6 @@ Health monitoring and circuit breaker patterns prevent cascading failures in pro
             "recent_data_quality_issues": self._data_quality_issues[-5:]  # Last 5 issues
         }
 ```
-
----
 
 ## Part 3: Security & Compliance for Data Systems
 
@@ -785,8 +777,6 @@ Compliance assessment begins with PII detection using specialized privacy servic
 
 Large dataset detection identifies processing requests exceeding size thresholds that may require special handling, resource allocation, or approval workflows. The 1MB threshold represents a configurable boundary for automated versus supervised data processing operations.
 
----
-
 ## Module Summary
 
 You've now mastered enterprise PydanticAI patterns for data processing systems, including:
@@ -795,8 +785,6 @@ You've now mastered enterprise PydanticAI patterns for data processing systems, 
 ✅ **Production Data Processing Scalability**: Implemented monitoring, metrics, and concurrent processing optimized for data workloads
 ✅ **Enterprise Data Security**: Created authentication, authorization, and compliance systems for data processing
 ✅ **Data Processing Audit & Monitoring**: Built comprehensive logging and health monitoring for data systems
-
----
 
 ## 📝 Multiple Choice Test - Module B
 
@@ -834,8 +822,6 @@ D) Log file analysis only
 
 [View Solutions →](Session5_ModuleB_Test_Solutions.md)
 
----
-
 ### Next Steps
 
 - **Continue to Module C**: [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md) for specialized validation patterns  
@@ -843,16 +829,16 @@ D) Log file analysis only
 - **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  
 - **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)  
 
----
-
 **🗂️ Source Files for Module B:**
 
 - `src/session5/dependency_injection.py` - Complete data service DI system
 - `src/session5/production_agents.py` - Scalable agent patterns for data processing
 - `src/session5/security.py` - Enterprise security implementations for data systems
-
 ---
 
-**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

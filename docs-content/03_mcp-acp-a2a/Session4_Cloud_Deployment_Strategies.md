@@ -830,9 +830,11 @@ resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
 ```
 
 This comprehensive cloud deployment strategy provides enterprise-grade reliability, automatic scaling, and multi-cloud resilience for your production MCP servers.
-
 ---
 
-**Next:** [Session 5 - Secure MCP Server →](Session5_Secure_MCP_Server.md)
+## Navigation
+
+**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
 
 ---

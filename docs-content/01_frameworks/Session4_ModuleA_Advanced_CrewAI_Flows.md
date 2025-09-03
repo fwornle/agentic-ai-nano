@@ -9,8 +9,6 @@ This is the evolution beyond adaptive intelligence: deterministic orchestration 
 
 The companies building tomorrow's data-driven systems understand a fundamental truth: while adaptive AI is powerful for exploration, deterministic flows are essential for production data pipelines. Master these patterns, and you'll architect systems that don't just process data intelligently - they guarantee intelligent data outcomes with the consistency and reliability that enterprise data operations demand.
 
----
-
 ## Part 1: CrewAI Flows - Production Data Orchestration
 
 ### Deterministic Data Processing Workflow Patterns
@@ -666,8 +664,6 @@ Processing result generation includes comprehensive data quality metrics, proces
 
 Pipeline checkpoint management preserves execution state for recovery and monitoring while managing memory usage through historical data rotation.
 
----
-
 ## Part 2: Dynamic Data Processing Team Formation and Delegation
 
 ### Adaptive Data Engineering Team Assembly
@@ -1008,8 +1004,6 @@ Data processing team effectiveness evaluation combines multiple assessment dimen
 
 Weighted scoring prioritizes factors most critical for data processing success, with skill coverage and performance history receiving highest weights.
 
----
-
 ## Module Summary
 
 You've now mastered advanced CrewAI flow patterns and dynamic team coordination specifically for data processing environments:
@@ -1023,8 +1017,6 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination 
 - **Continue to Module B**: [Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md) for production data engineering architectures  
 - **Return to Core**: [Session 4 Main](Session4_CrewAI_Team_Orchestration.md)  
 - **Advance to Session 6**: [Agent Communication Protocols](Session6_Agent_Communication_Protocols.md)  
-
----
 
 ## Module A Knowledge Check
 
@@ -1062,15 +1054,15 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination 
 
 [View Solutions →](Session4_ModuleA_Test_Solutions.md)
 
----
-
 **🗂️ Source Files for Module A:**  
 - [`src/session4/advanced_flows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/advanced_flows.py) - CrewAI Flow implementations for data processing
 - [`src/session4/dynamic_teams.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/dynamic_teams.py) - Dynamic team formation systems for data engineering
 - [`src/session4/delegation_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/delegation_patterns.py) - Sophisticated delegation strategies for data processing workflows
-
 ---
 
-**Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
+## Navigation
+
+**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
 
 ---

@@ -758,10 +758,11 @@ You now understand the full spectrum of RAG architectures, from basic three-stag
 - [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md) - Apply these patterns to specialized domains  
 - Session 6: Graph-Based RAG - Deep dive into knowledge graph integration  
 - Session 7: Agentic RAG Systems - Advanced multi-agent orchestration  
-- Session 9: Production RAG - Enterprise deployment and scaling  
-
+- Session 9: Production RAG - Enterprise deployment and scaling
 ---
 
-**Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)
+## Navigation
+
+**Next:** [Session 1 - Foundations →](Session1_*.md)
 
 ---

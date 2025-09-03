@@ -7,8 +7,6 @@ You've implemented production RAG systems with containerization, security, and b
 
 This module teaches you to build RAG systems that integrate seamlessly into complex enterprise environments. You'll implement zero-trust security architectures, comprehensive data governance frameworks, and CI/CD patterns that maintain the sophisticated intelligence you built while meeting the strictest enterprise standards. The goal is RAG systems that enterprises can confidently deploy at scale with full organizational approval.
 
----
-
 ## Advanced Content
 
 ### Enterprise Security Architecture - Trust Nothing, Verify Everything
@@ -886,9 +884,11 @@ C) Lower infrastructure costs
 D) Simpler debugging  
 
 [View Solutions →](Session9_ModuleB_Test_Solutions.md)
-
 ---
 
-**Previous:** [Session 8 - MultiModal Advanced RAG ←](Session8_MultiModal_Advanced_RAG.md)
+## Navigation
+
+**Previous:** [Session 8 - Production Ready →](Session8_*.md)  
+**Next:** [Session 10 - Enterprise Integration →](Session10_*.md)
 
 ---

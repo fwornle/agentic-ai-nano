@@ -7,8 +7,6 @@ You've implemented HyDE, query expansion, and context optimization in Session 4.
 
 This module teaches you to build query understanding systems that read between the lines of user intent. You'll implement intent classification that routes queries to specialized processing strategies, context-aware enhancement that maintains conversational memory, and multi-modal processing that handles images and documents alongside text. The goal is transforming ambiguous, incomplete user input into precise, complete information requests.
 
----
-
 ### Related Modules
 
 - **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)  
@@ -22,8 +20,6 @@ This module teaches you to build query understanding systems that read between t
 - `demo_query_enhancement.py` - Query understanding showcase
 
 **Quick Start:** `cd src/session4 && python demo_query_enhancement.py`
-
----
 
 ## Advanced Query Understanding Patterns
 
@@ -361,8 +357,6 @@ Finally, we combine the original query with the attachment context:
 
 Multi-modal query processing enables RAG systems to handle rich user interactions that include visual content, documents, and other media types. By extracting descriptive information from these attachments and integrating it with the text query, the system can provide more comprehensive and relevant responses.
 
----
-
 ## Multiple Choice Test - Module A
 
 **Question 1:** What is the primary benefit of intent classification in query processing?  
@@ -396,9 +390,11 @@ C) It speeds up all queries
 D) It reduces memory usage  
 
 [View Solutions →](Session4_ModuleA_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 5 - RAG Evaluation & Quality Assessment →](Session5_RAG_Evaluation_Quality_Assessment.md)
+## Navigation
+
+**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
 
 ---

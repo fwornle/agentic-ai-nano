@@ -939,9 +939,11 @@ C) Maximum response time
 D) 95% availability percentage  
 
 [**View Module A Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 4 - Production MCP Deployment →](Session4_Production_MCP_Deployment.md)
+## Navigation
+
+**Previous:** [Session 2 - Implementation →](Session2_*.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
 
 ---

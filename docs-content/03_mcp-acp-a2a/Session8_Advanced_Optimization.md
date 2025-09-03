@@ -531,9 +531,11 @@ Real-time analytics enable continuous monitoring and optimization:
 Real-time analytics provide the operational intelligence needed for continuous optimization. The dashboard data includes system health indicators, performance rankings, trend analysis, and workflow-specific metrics, enabling both proactive optimization and reactive problem resolution.
 
 This comprehensive optimization system transforms reactive performance management into predictive, intelligent optimization that continuously improves workflow efficiency and business outcomes.
-
 ---
 
-**Next:** [Session 9 - Production Agent Deployment →](Session9_Production_Agent_Deployment.md)
+## Navigation
+
+**Previous:** [Session 7 - Agent Systems →](Session7_*.md)  
+**Next:** [Session 9 - Multi-Agent Coordination →](Session9_*.md)
 
 ---

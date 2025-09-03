@@ -21,8 +21,6 @@ Modern AI development has evolved from simple prompt-response interactions to so
 
 ![Agent Evolution Overview](images/overview-llm-patterns.png)
 
----
-
 ### The Evolution of AI Interaction
 
 The journey from simple prompt-response to sophisticated agent systems mirrors the evolution of data engineering itself - from manual ETL scripts to orchestrated, self-healing data pipelines:
@@ -107,8 +105,6 @@ This systematic self-evaluation prevents the superficial improvements you'd get 
 **Benefits:** Dramatically reduces errors in code generation, summaries, and detail-heavy tasks. Gives the model a "pause button and mirror" to double-check its work - the difference between a rushed data migration and a carefully validated schema change.
 
 ![Reflection Pattern](images/reflection-pattern.png)
-
----
 
 ## 📝 Participant Path: Practical Application
 
@@ -419,8 +415,6 @@ When issues are found, the system doesn't just flag them - it actively works to 
 
 ![Multi-Agent Pattern](images/multi-agent-pattern.png)
 
----
-
 ## ⚙️ Implementer Path: Advanced Topics
 
 *Prerequisites: Complete Observer and Participant paths*
@@ -428,8 +422,6 @@ When issues are found, the system doesn't just flag them - it actively works to 
 For comprehensive mastery of agent frameworks and enterprise deployment:
 
 - ⚙️ **[Advanced Framework Analysis](Session0_Advanced_Framework_Analysis.md)** - Deep dive into enterprise framework selection, production deployment considerations, security patterns, and performance optimization strategies  
-
----
 
 ## Next Steps - Your Journey to Mastery
 
@@ -482,8 +474,6 @@ Capstone: Multi-Framework Agent Ecosystem
 - **[Advanced Framework Analysis](Session0_Advanced_Framework_Analysis.md)** - Enterprise framework selection and production deployment  
 - **[Module A: Historical Context & Evolution](Session0_ModuleA_Historical_Context_Evolution.md)** - Evolution from rule-based systems to modern agents  
 - **[Module B: Advanced Pattern Theory](Session0_ModuleB_Advanced_Pattern_Theory.md)** - Mathematical foundations of agent behavior  
-
----
 
 ## 📝 Practice Assessment
 
@@ -580,9 +570,10 @@ C) Tool Use (for accessing live data APIs)
 D) Planning (for multi-step workflows)  
 
 [View Solutions →](Session0_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
+## Navigation
+
+**Next:** [Session 1 - Foundations →](Session1_*.md)
 
 ---

@@ -38,8 +38,6 @@ This session offers three distinct learning paths designed to match your goals a
     
     **Ideal for**: Senior engineers, architects, specialists
 
----
-
 ## 🎯 Part 1: The Universal Language of Digital Diplomacy
 
 Before agents can collaborate, they need to establish diplomatic protocols—a universal language that transcends the boundaries of individual platforms, organizations, and technical implementations.
@@ -161,8 +159,6 @@ Operational metadata ensures reliable service level agreements between collabora
 JSON serialization enables cross-platform agent card exchange in distributed systems.
 
 This Agent Card is like a business card, resume, and service contract all rolled into one. Other agents can examine it to understand not just what this agent can do, but how to work with it professionally.
-
----
 
 ## 📝 Part 2: The Embassy System: Agent Registry and Discovery
 
@@ -330,8 +326,6 @@ Discovery uses set operations to efficiently find agents that meet all specified
 
 Intelligent sorting ensures optimal agent selection based on current load and availability.
 
----
-
 ## 📝 Part 3: The Message Routing Network: Digital Post Office
 
 *Prerequisites: Complete 🎯 Observer and 📝 Participant Registry sections above*
@@ -470,8 +464,6 @@ async def _route_message(self, message: A2AMessage):
 
 Intelligent routing supports both direct addressing and capability-based agent selection.
 
----
-
 ## 🎯📝 Practice Exercises
 
 ### Exercise 1: Basic Agent Registration
@@ -483,8 +475,6 @@ Implement a basic request-response pattern between two agents using the A2A mess
 ### Exercise 3: Capability Discovery
 Build a discovery system that finds agents based on required capabilities and load constraints.
 
----
-
 ## Advanced A2A Patterns
 
 For comprehensive coverage of advanced A2A coordination patterns:
@@ -493,8 +483,6 @@ For comprehensive coverage of advanced A2A coordination patterns:
 - [⚙️ Advanced Choreography Systems](Session7_Advanced_Choreography.md) - Distributed event-driven coordination  
 
 These advanced modules cover enterprise-scale orchestration and choreography patterns for complex multi-agent systems.
-
----
 
 ## Test Your Diplomatic Skills
 
@@ -561,9 +549,11 @@ C) Using external synchronization services
 D) Through periodic full rebuilds  
 
 [View Solutions →](Session7_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 8 - Advanced Agent Workflows →](Session8_Advanced_Agent_Workflows.md)
+## Navigation
+
+**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
+**Next:** [Session 8 - Production Ready →](Session8_*.md)
 
 ---

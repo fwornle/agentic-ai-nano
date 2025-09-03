@@ -450,8 +450,6 @@ Before moving forward, try implementing:
 3. **Multi-Stream Processing**: Handle multiple data streams concurrently  
 4. **Performance Optimization**: Tune your agents for specific workload patterns  
 
----
-
 ## 📝 Navigation
 
 **🏠 Module Home**: [Session 7 Overview](Session7_First_ADK_Agent.md)
@@ -459,9 +457,11 @@ Before moving forward, try implementing:
 **➡️ Next**: [⚙️ Advanced ADK Systems](Session7_Advanced_ADK_Systems.md) or [Session 8](Session8_Agno_Production_Ready_Agents.md)
 
 **📋 Learning Path Summary**: 🎯 Essentials ✅ → 📝 Implementation ✅ → ⚙️ Advanced Systems
-
 ---
 
-**Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)
+## Navigation
+
+**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
+**Next:** [Session 8 - Production Ready →](Session8_*.md)
 
 ---

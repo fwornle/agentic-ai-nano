@@ -11,8 +11,6 @@ D) To provide a framework for building AI agents
 
 **Explanation:** MCP is designed to be the universal translator that makes enterprise APIs tool-agnostic and LLM-friendly. It standardizes the way Large Language Models access and interact with external data sources, databases, and tools, solving the problem of complex API integration.
 
----
-
 **Question 2:** Which protocol is designed for local-first agent coordination with minimal overhead?  
 
 A) A2A (Agent-to-Agent)  
@@ -21,8 +19,6 @@ C) ADK (Agent Development Kit)
 D) ACP (Agent Communication Protocol) ✅  
 
 **Explanation:** ACP is specifically designed for local-first agent coordination, enabling agents to discover and communicate within the same runtime, edge device, or local network—even without internet connectivity.
-
----
 
 **Question 3:** How do agents discover each other in the A2A protocol?  
 
@@ -33,8 +29,6 @@ D) Through direct IP address connections
 
 **Explanation:** A2A uses a standardized discovery mechanism where agents advertise their capabilities through `.well-known/agent.json` files and register with discovery services to enable other agents to find and connect with them.
 
----
-
 **Question 4:** What is the primary function of MCP Inspector?  
 
 A) To deploy MCP servers to production  
@@ -43,8 +37,6 @@ C) To create new MCP protocols
 D) To monitor agent-to-agent communication  
 
 **Explanation:** MCP Inspector is a developer tool (like Postman for MCP) that provides an interactive interface to explore MCP server capabilities, test tools, debug issues, and validate that servers follow the protocol correctly.
-
----
 
 **Question 5:** When should you use A2A protocol instead of MCP?  
 
@@ -55,8 +47,6 @@ D) When you need to manage prompt templates
 
 **Explanation:** A2A is specifically designed for agent-to-agent communication across organizational and technical boundaries. MCP is for LLM-to-external-system communication, while A2A enables agents to discover and collaborate with each other.
 
----
-
 **Question 6:** What transport mechanism does MCP typically use for communication?  
 
 A) HTTP REST only  
@@ -65,8 +55,6 @@ C) stdio (standard input/output) and other transports ✅
 D) gRPC only  
 
 **Explanation:** MCP supports multiple transport mechanisms including stdio (standard input/output), HTTP, WebSocket, and others. The stdio transport is commonly used for local MCP server communication.
-
----
 
 **Question 7:** In ACP, how do agents discover each other in offline environments?  
 
@@ -77,8 +65,6 @@ D) Through manual configuration files
 
 **Explanation:** ACP enables agents to discover each other using local runtime discovery mechanisms and embedded metadata, allowing them to coordinate even in offline environments without cloud dependencies.
 
----
-
 **Question 8:** Which of the following is NOT a key problem that A2A solves?  
 
 A) Model training optimization ✅  
@@ -87,8 +73,6 @@ C) Agent discovery
 D) Communication standards  
 
 **Explanation:** A2A focuses on agent communication and interoperability problems: agent discovery, communication standards, and cross-organization collaboration. Model training optimization is not within A2A's scope—it's about agent communication, not model optimization.
-
----
 
 **Question 9:** What is the recommended development path for mastering these protocols?  
 
@@ -99,8 +83,6 @@ D) Start with A2A, then ACP, then MCP
 
 **Explanation:** The curriculum is structured to start with MCP (Sessions 1-5) to understand how agents interact with external systems, then ACP for local agent coordination, and finally A2A (Sessions 7-9) for multi-agent communication—building from foundational concepts to complex multi-agent systems.
 
----
-
 **Question 10:** Which major companies adopted MCP in 2024-2025?  
 
 A) Only Anthropic and small startups  
@@ -109,8 +91,6 @@ C) Primarily academic institutions
 D) Only cloud service providers  
 
 **Explanation:** MCP has seen widespread adoption by major technology companies including Microsoft, Google, OpenAI, and other industry leaders, establishing it as the de facto standard for LLM-to-external-system communication in enterprise environments.
-
----
 
 ## Scoring Guide
 
@@ -142,12 +122,11 @@ If you missed questions in these areas, review the corresponding sections:
 - Review "Getting Started: Your Development Path" section  
 - Understand the logical progression from MCP to ACP to A2A  
 
----
-
 [← Return to Session 0](Session0_Introduction_to_MCP_ACP_A2A.md)
-
 ---
 
-**Next:** [Session 1 - Basic MCP Server →](Session1_Basic_MCP_Server.md)
+## Navigation
+
+**Back to Test:** [Session 0 Test Questions →](Session0_*.md#multiple-choice-test)
 
 ---

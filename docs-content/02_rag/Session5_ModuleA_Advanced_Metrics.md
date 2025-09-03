@@ -26,8 +26,6 @@ python -c "from custom_metrics import CustomMetrics; CustomMetrics().run_benchma
 python -c "from evaluation_framework import EvaluationFramework; print('Advanced metrics ready!')"
 ```
 
----
-
 ## Advanced Metrics Content
 
 ### Neural Evaluation Metrics - Understanding Semantic Nuance
@@ -147,8 +145,6 @@ Explainability evaluation helps understand which retrieved documents most influe
 
 The attribution calculation uses a leave-one-out approach: by removing each document and measuring the quality impact, we can quantify each document's contribution. Higher attribution scores indicate documents that were more essential to generating a high-quality response, providing transparency into the RAG decision process.
 
----
-
 ## Multiple Choice Test - Module A
 
 **Question 1:** What is the main advantage of BERTScore over traditional BLEU scores?  
@@ -182,9 +178,11 @@ C) Text length optimization
 D) User interface quality  
 
 [View Solutions →](Session5_ModuleA_Test_Solutions.md)
-
 ---
 
-**Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---

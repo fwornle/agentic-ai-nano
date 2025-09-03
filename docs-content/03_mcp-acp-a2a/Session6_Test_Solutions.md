@@ -11,8 +11,6 @@ D) To enable cloud-based agent coordination
 
 **Explanation:** ACP is specifically designed for local-first agent coordination that works within the same runtime, edge device, or local network without requiring internet connectivity.
 
----
-
 **Question 2:** What is the main advantage of ACP over traditional cloud-dependent agent protocols?  
 
 A) Higher performance  
@@ -21,8 +19,6 @@ C) Better security
 D) Offline capability and low latency ✅  
 
 **Explanation:** ACP's offline capability and low latency make it ideal for edge computing and local environments where internet connectivity may be unreliable or unavailable.
-
----
 
 **Question 3:** What information must an ACP agent capability declaration include?  
 
@@ -33,8 +29,6 @@ D) Name, description, input schema, and output schema ✅
 
 **Explanation:** Complete capability declarations include name, human-readable description, input schema for parameters, and output schema for return values to enable proper agent discovery and interaction.
 
----
-
 **Question 4:** How do ACP agents discover each other's capabilities?  
 
 A) Via embedded metadata and local REST endpoints ✅  
@@ -43,8 +37,6 @@ C) Through manual configuration files
 D) Using UDP broadcasts only  
 
 **Explanation:** ACP agents use embedded metadata exposed through standard REST endpoints, enabling automatic discovery without external dependencies.
-
----
 
 **Question 5:** What communication protocol does ACP use for agent interactions?  
 
@@ -55,8 +47,6 @@ D) Standard HTTP/REST ✅
 
 **Explanation:** ACP uses standard HTTP/REST endpoints, making it framework-agnostic and easy to implement with existing web technologies.
 
----
-
 **Question 6:** What role does the coordinator agent play in ACP architectures?  
 
 A) Provides security authentication  
@@ -65,8 +55,6 @@ C) Stores all data permanently
 D) Acts as a backup for other agents  
 
 **Explanation:** The coordinator agent orchestrates multi-agent workflows by discovering available agents, distributing tasks, and managing the overall workflow execution.
-
----
 
 **Question 7:** Why are specialized agents (like data agents and text agents) beneficial in ACP systems?  
 
@@ -77,8 +65,6 @@ D) They are faster than general-purpose agents
 
 **Explanation:** Specialized agents provide focused expertise in specific domains, enabling better task delegation and more efficient problem-solving through division of labor.
 
----
-
 **Question 8:** How do agents register their services in an ACP system?  
 
 A) Through manual configuration  
@@ -87,8 +73,6 @@ C) Through database entries
 D) By exposing standardized metadata endpoints ✅  
 
 **Explanation:** Agents register services by exposing standardized metadata endpoints that describe their capabilities, allowing for automatic service discovery.
-
----
 
 **Question 9:** What is the purpose of the local registry in ACP systems?  
 
@@ -99,8 +83,6 @@ D) To handle authentication
 
 **Explanation:** The local registry serves as a central point for agent discovery and capability lookup, maintaining a directory of available agents and their services.
 
----
-
 **Question 10:** Why is ACP designed to be framework-agnostic?  
 
 A) To improve performance  
@@ -109,8 +91,6 @@ C) To enable integration with any agent implementation ✅
 D) To reduce development costs  
 
 **Explanation:** Framework-agnostic design allows ACP to work with any agent implementation, providing flexibility and enabling integration across different agent frameworks and technologies.
-
----
 
 ## Scoring Guide
 
@@ -127,8 +107,6 @@ D) To reduce development costs
 3. **Capability Declaration**: Complete schemas for automatic service discovery  
 4. **Coordinator Pattern**: Centralized orchestration for complex workflows  
 5. **Agent Specialization**: Focused expertise through division of labor  
-
----
 
 # Session 6: ACP Fundamentals - Complete Implementation Solution
 
@@ -1032,12 +1010,11 @@ When running the test client, you should see:
 
 This solution demonstrates a complete, working ACP agent network that can operate offline with local discovery and coordination.
 
----
-
 [Return to Session 6](Session6_ACP_Fundamentals.md)
-
 ---
 
-**Next:** [Session 7 - Agent-to-Agent Communication →](Session7_Agent_to_Agent_Communication.md)
+## Navigation
+
+**Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 
 ---

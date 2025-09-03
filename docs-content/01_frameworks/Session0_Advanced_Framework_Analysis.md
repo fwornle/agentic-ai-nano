@@ -271,9 +271,10 @@ class AgentErrorHandler:
 ```
 
 Proactive error handling and alerting enable rapid response to system issues before they impact users.
-
 ---
 
-**Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)
+## Navigation
+
+**Next:** [Session 1 - Foundations →](Session1_*.md)
 
 ---

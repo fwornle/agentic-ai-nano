@@ -564,15 +564,15 @@ Build your own production-ready data processing agent:
 - [ ] Circuit breaker prevents cascading failures  
 - [ ] All code follows production quality standards  
 
----
-
 ## Next Steps: Production Deployment
 
 Ready to deploy your type-safe agents? Continue with:
 📝 [Production Deployment Guide](Session5_Production_Deployment.md)
-
 ---
 
-**Next:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)
+## Navigation
+
+**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
 
 ---
