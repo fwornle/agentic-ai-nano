@@ -1,12 +1,5 @@
 # Session 4: CrewAI Team Orchestration - Test Solutions
 
-## 🔗 Practice Questions
-
-Review the questions first: [**📝 Session4 Questions →**](Session4_CrewAI_Team_Orchestration.md)
-
----
-
-
 ## 📝 Multiple Choice Test
 
 **Question 1:** What is CrewAI's primary strength compared to other agent frameworks?  

@@ -1,11 +1,5 @@
 # Session 0: Introduction to Agent Frameworks & Patterns - Test Solutions
 
-## 🔗 Practice Test
-
-Take the practice test first: [**📝 Session 0 Practice Test →**](Session0_Practice_Test.md)
-
----
-
 ## 📝 Multiple Choice Test Solutions
 
 **Question 1:** Which agentic pattern involves an agent evaluating and improving its own outputs?  

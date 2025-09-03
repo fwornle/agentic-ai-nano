@@ -15,7 +15,6 @@ B) Random retry intervals
 C) Fixed 1-second intervals  
 D) Linear increase only  
 
-
 **Explanation**: The RetryHandler uses sophisticated retry logic with exponential backoff that increases delay exponentially to reduce load on failing services, jitter to prevent thundering herd problems, and maximum limits to cap both delay time and retry attempts.
 
 **Question 3:** Circuit Breaker State Transitions  

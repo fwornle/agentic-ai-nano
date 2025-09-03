@@ -50,7 +50,6 @@ D) Keyword-heavy prompts
 
 **Explanation:** Chain-of-thought reasoning guides the model through logical steps while properly integrating retrieved context. This technique helps the model understand relationships between the query, context, and required reasoning, leading to more accurate and well-structured responses.
 
-
 ---
 
 ## Performance Scoring
