@@ -106,9 +106,10 @@ D) Use placeholder content for failed loads
 - **Overlap Strategy**: 10-20% overlap for continuity  
 - **Top-K Selection**: Start with 3-5 documents, adjust based on needs  
 - **Embedding Models**: Choose appropriate models for domain/language
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
 

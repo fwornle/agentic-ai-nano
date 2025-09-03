@@ -152,9 +152,10 @@ Build a hierarchical crew with a manager coordinating specialized agents.
 ### Exercise 3: Advanced Task Dependencies
 
 Create workflows where tasks build upon each other's results with context sharing.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
 **Next:** [Session 5 - Type-Safe Development →](Session5_*.md)

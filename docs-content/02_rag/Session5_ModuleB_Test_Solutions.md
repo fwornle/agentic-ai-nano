@@ -71,9 +71,10 @@ D) Only user queries and response times
 
 ## Answer Summary  
 1. B  2. B  3. B  4. B  5. B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 5 Test Questions →](Session5_*.md#multiple-choice-test)
 

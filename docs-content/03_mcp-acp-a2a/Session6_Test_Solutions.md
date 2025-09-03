@@ -1011,9 +1011,10 @@ When running the test client, you should see:
 This solution demonstrates a complete, working ACP agent network that can operate offline with local discovery and coordination.
 
 [Return to Session 6](Session6_ACP_Fundamentals.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 

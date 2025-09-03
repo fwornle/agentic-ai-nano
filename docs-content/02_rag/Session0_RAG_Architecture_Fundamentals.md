@@ -256,9 +256,10 @@ Need complete production expertise? Explore:
 
 ### Foundation Complete
 Understanding these fundamentals positions you to build sophisticated RAG systems that combine the reasoning power of LLMs with reliable, up-to-date information retrieval.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Next:** [Session 1 - Foundations →](Session1_*.md)
 

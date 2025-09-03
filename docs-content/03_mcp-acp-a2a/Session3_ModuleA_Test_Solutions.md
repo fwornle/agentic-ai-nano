@@ -81,9 +81,10 @@ D) 95% availability percentage
 
 ## Answer Summary  
 1. B  2. B  3. C  4. B  5. B  6. B  7. B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
 

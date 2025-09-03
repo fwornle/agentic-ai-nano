@@ -114,9 +114,10 @@ D) Token usage
 2. **Performance Monitoring**: Tracking agentic system effectiveness  
 3. **Scalability**: Managing computational overhead of agentic processes  
 4. **Maintenance**: Updating and improving agentic components
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
 

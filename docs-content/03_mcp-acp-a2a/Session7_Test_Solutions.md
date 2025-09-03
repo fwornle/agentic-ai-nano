@@ -323,9 +323,10 @@ class CustomerServiceChoreography:
 This A2A customer service system demonstrates distributed coordination where agents respond to events and coordinate their actions without centralized control.
 
 [Return to Session 7](Session7_Agent_to_Agent_Communication.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
 

@@ -435,9 +435,10 @@ C) ConversationBufferWindowMemory
 D) ConversationEntityMemory  
 
 [View Solutions →](Session2_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 1 - Foundations →](Session1_*.md)  
 **Next:** [Session 3 - Advanced Patterns →](Session3_*.md)

@@ -25,9 +25,10 @@
 
 ```yaml
 "route":
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 8 Test Questions →](Session8_*.md#multiple-choice-test)
 

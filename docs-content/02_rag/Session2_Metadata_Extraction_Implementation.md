@@ -682,9 +682,10 @@ def _assess_difficulty_standardized(self, text: str) -> str:
 2. **Human Review**: Sample and review extraction results regularly  
 3. **Feedback Integration**: Use retrieval performance to improve extraction  
 4. **Domain Testing**: Test across different content types and domains
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 1 - Foundations →](Session1_*.md)  
 **Next:** [Session 3 - Advanced Patterns →](Session3_*.md)

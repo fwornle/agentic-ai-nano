@@ -128,9 +128,10 @@ D) When downstream nodes need data from multiple branches ✅
 
 ## Answer Summary  
 1. B  2. B  3. B  4. B  5. B  6. B  7. B  8. B  9. B  10. B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
 

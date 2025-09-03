@@ -43,9 +43,10 @@ D) User-specified preferences only
 **Explanation:** The `_should_activate_layer` method evaluates multiple factors: the layer's ContextScope (immediate, session, historical, domain), whether the message content matches activation conditions, provided context hints, domain keywords, and session attributes. This multi-factor approach ensures relevant context is activated dynamically based on current conversational needs.
 
 **🧭 Navigation:**
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
 

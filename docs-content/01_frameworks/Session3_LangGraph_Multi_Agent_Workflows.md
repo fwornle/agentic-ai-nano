@@ -233,9 +233,10 @@ C) Previous state is archived
 D) Only specified fields are updated/merged  
 
 [View Solutions →](Session3_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - Implementation →](Session2_*.md)  
 **Next:** [Session 4 - Team Orchestration →](Session4_*.md)

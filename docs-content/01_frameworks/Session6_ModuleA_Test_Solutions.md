@@ -38,9 +38,10 @@
 - **Comprehensive monitoring** provides visibility into pipeline execution and performance  
 - **CLI integration** enables DevOps workflows and automated deployment patterns  
 - **Load balancing** optimizes resource utilization across agent pools
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 

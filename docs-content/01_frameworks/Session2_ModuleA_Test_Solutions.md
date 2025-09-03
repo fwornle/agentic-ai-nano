@@ -31,9 +31,10 @@
 **Explanation:** The synthesis phase is the final step that takes results from both the research phase and analysis phase, combining them into a comprehensive output. It leverages accumulated knowledge to create actionable recommendations and structured reports.
 
 ### Return to Module
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
 

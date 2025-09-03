@@ -497,9 +497,10 @@ async def get_security_audit(time_range: str = "24h") -> Dict:
 This security audit system provides comprehensive monitoring and analysis capabilities for MCP server security.
 
 [Return to Session 5](Session5_Secure_MCP_Server.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 5 Test Questions →](Session5_*.md#multiple-choice-test)
 

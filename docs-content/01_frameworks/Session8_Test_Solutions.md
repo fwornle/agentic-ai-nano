@@ -202,9 +202,10 @@ D) Single environment support
 8. **Scalability**: Horizontal scaling with auto-scaling and load balancing  
 
 [Return to Session 8](Session8_Agno_Production_Ready_Agents.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 8 Test Questions →](Session8_*.md#multiple-choice-test)
 

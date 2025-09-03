@@ -41,9 +41,10 @@ C) By reading level and complexity scores
 D) By semantic similarity and topic consistency ✅  
 
 **Explanation:** Coherence between chunks should be measured using semantic similarity algorithms that evaluate topic consistency and conceptual relationships. This ensures that adjacent chunks maintain logical flow and contextual continuity for both retrieval systems and end users.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
 

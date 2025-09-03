@@ -31,9 +31,10 @@
 **Explanation:** Pod Disruption Budgets (PDB) are a Kubernetes feature that ensures a minimum number of pods remain available during voluntary disruptions like cluster maintenance, node upgrades, or scaling operations. This maintains service availability and production resilience.
 
 ### Return to Module
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
 

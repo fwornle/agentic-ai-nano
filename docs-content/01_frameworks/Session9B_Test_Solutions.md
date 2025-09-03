@@ -41,9 +41,10 @@ if memory_metrics:
     elif avg_memory > 70:
         health_score -= 10  # High memory usage
 ```
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 9 Test Questions →](Session9_*.md#multiple-choice-test)
 

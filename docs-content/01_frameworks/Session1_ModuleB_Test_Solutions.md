@@ -41,9 +41,10 @@ C) Response times, percentiles, cache hit rates, and target achievement ✅
 D) Just error rates and failures  
 
 **Explanation:** The performance monitoring system tracks comprehensive metrics including average/min/max response times, percentiles (p50, p90, p95), cache entries count, target achievement rates, and the number of responses under the target time. This comprehensive data enables informed optimization decisions and automatic performance tuning.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
 

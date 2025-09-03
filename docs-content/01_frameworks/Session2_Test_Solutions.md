@@ -41,9 +41,10 @@ C) ConversationBufferWindowMemory
 D) ConversationEntityMemory  
 
 **Explanation:** ConversationSummaryMemory is ideal for long conversations because it intelligently summarizes older parts of the conversation while preserving important context. This provides the benefits of context retention without the memory bloat of storing every single message, making it perfect for extended interactions where you need context but not verbatim details.
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
 

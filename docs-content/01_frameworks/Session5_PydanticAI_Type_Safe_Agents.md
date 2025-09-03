@@ -700,9 +700,10 @@ C) Conversation history
 D) Speed control  
 
 [View Solutions →](Session5_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
 **Next:** [Session 6 - Modular Architecture →](Session6_*.md)

@@ -203,9 +203,10 @@ After completing Session 9:
 - [Module B: Production Multi-Agent Systems](Session9_ModuleB_Production_Multi_Agent_Systems.md)  
 
 **Join the Community**: Share your implementations and learn from others working with multi-agent systems
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 8 - Production Ready →](Session8_*.md)  
 **Next:** [Session 10 - Enterprise Integration →](Session10_*.md)

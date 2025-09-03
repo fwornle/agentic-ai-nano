@@ -639,9 +639,10 @@ C) High CPU usage
 D) Network latency  
 
 [View Solutions →](Session6_ModuleB_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
 **Next:** [Session 7 - Agent Systems →](Session7_*.md)

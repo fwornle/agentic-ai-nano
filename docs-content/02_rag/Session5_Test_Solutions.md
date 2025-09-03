@@ -110,9 +110,10 @@ D) Random threshold selection
 2. **Regression Testing**: Ensuring improvements don't harm existing performance  
 3. **Continuous Improvement**: Using evaluation insights for system enhancement  
 4. **Human-in-the-Loop**: Combining automated and human evaluation effectively
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 5 Test Questions →](Session5_*.md#multiple-choice-test)
 

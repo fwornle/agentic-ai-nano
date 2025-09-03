@@ -384,9 +384,10 @@ C) Primarily academic institutions
 D) Only cloud service providers  
 
 [View Solutions →](Session0_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Next:** [Session 1 - Foundations →](Session1_*.md)
 

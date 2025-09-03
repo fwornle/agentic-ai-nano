@@ -53,9 +53,10 @@ D) Development environment only
 - **Multiple deployment strategies** support different risk and availability requirements  
 - **Automated rollback** protects against failed deployments  
 - **Resource management** optimizes utilization while maintaining performance
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
 

@@ -110,9 +110,10 @@ D) All of the above ✅
 2. **Scaling Strategies**: Horizontal scaling, load balancing  
 3. **Reliability Features**: Replication, backup, failure recovery  
 4. **Cost Optimization**: Resource usage, query efficiency
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
 

@@ -570,9 +570,10 @@ C) Tool Use (for accessing live data APIs)
 D) Planning (for multi-step workflows)  
 
 [View Solutions →](Session0_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Next:** [Session 1 - Foundations →](Session1_*.md)
 

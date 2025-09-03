@@ -42,9 +42,10 @@ C) It uses less memory
 D) It's simpler to implement  
 
 [View Solutions →](Session3_ModuleA_Test_Solutions.md)
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Previous:** [Session 2 - Implementation →](Session2_*.md)  
 **Next:** [Session 4 - Team Orchestration →](Session4_*.md)

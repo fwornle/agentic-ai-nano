@@ -95,9 +95,10 @@ D) Immediate restart
 ## Answer Summary
 
 1. B  2. B  3. B  4. B  5. B  6. B  7. B  8. B  9. B  10. B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 10 Test Questions →](Session10_*.md#multiple-choice-test)
 

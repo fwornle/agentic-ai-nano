@@ -24,9 +24,10 @@ DelegationRule(
     from_authority=DelegationAuthority.ENTERPRISE_LEAD,
     to_authority=DelegationAuthority.DEPARTMENT_MANAGE,
     task_types=
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
 

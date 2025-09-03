@@ -144,9 +144,10 @@ You have mastered the full spectrum of RAG architectures and can implement sophi
 **Focus**: Specialized domain applications and compliance
 
 **Choose your path and begin your RAG mastery journey!**
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Next:** [Session 1 - Foundations →](Session1_*.md)
 

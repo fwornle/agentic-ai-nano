@@ -31,9 +31,10 @@
 ## Answer Summary
 
 1. C  2. B  3. B  4. B  5. B  6. B  7. B
+
 ---
 
-## Navigation
+## 🧭 Navigation
 
 **Back to Test:** [Session 10 Test Questions →](Session10_*.md#multiple-choice-test)
 
