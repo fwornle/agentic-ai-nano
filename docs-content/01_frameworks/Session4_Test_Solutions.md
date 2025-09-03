@@ -100,8 +100,6 @@ D) Cloud integration
 
 ---
 
----
-
 **Next:** [Session 5 - PydanticAI Type-Safe Agents →](Session5_PydanticAI_Type_Safe_Agents.md)
 
 ---

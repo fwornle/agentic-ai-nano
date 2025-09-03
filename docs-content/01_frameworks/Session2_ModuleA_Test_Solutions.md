@@ -1,6 +1,5 @@
 # Session 2 - Module A: Test Solutions
 
-
 ---
 
 **Question 1:** What components are defined in the `AgentRole` dataclass for agent specialization?  

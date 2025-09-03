@@ -1330,6 +1330,8 @@ D) Single-user support
 
 [View Solutions →](Session7_ModuleA_Test_Solutions.md)
 
+---
+
 ### Next Steps
 
 - **Continue to Module B**: [Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md) for production deployment patterns  

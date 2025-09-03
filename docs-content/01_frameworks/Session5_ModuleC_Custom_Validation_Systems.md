@@ -745,6 +745,8 @@ D) 1 minute exactly
 
 [View Solutions →](Session5_ModuleC_Test_Solutions.md)
 
+---
+
 ### Next Steps
 
 - **Continue to Module D**: [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md) for comprehensive testing strategies for data processing systems  

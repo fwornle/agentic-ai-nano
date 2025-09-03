@@ -1,6 +1,5 @@
 # Session 2 - Module C: Test Solutions
 
-
 ---
 
 **Question 1:** What benefits do Pydantic models provide for LangChain tool development?  

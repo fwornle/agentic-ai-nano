@@ -127,8 +127,6 @@ D) Use placeholder content for failed loads
 
 ---
 
----
-
 **Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
 
 ---

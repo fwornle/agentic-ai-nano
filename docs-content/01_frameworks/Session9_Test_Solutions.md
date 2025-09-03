@@ -100,8 +100,6 @@ D) Lower costs
 
 ---
 
----
-
 **Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)
 
 ---

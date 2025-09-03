@@ -1830,6 +1830,8 @@ D) Reduced storage costs
 
 [View Solutions →](Session10B_Test_Solutions.md)
 
+---
+
 **🗂️ Source Files for Module B:**
 
 - `src/session10/scaling/auto_scaling.py` - Intelligent auto-scaling and predictive scaling

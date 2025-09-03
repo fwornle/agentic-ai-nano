@@ -1215,6 +1215,8 @@ D) Simple sequential testing
 
 [View Solutions →](Session5_ModuleD_Test_Solutions.md)
 
+---
+
 ### Next Steps
 
 - **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  

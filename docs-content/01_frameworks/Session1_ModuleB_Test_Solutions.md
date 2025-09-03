@@ -52,8 +52,6 @@ D) Just error rates and failures
 
 ---
 
----
-
 **Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)
 
 ---

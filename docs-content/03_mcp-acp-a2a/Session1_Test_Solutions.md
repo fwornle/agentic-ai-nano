@@ -112,9 +112,7 @@ D) Easier to learn
 
 ---
 
-
 **Challenge:** Create a tool that finds the warmest city from a list.
-
 
 ```python
 @mcp.tool()

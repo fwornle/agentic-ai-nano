@@ -88,8 +88,6 @@ D) Only user queries and response times
 
 ---
 
----
-
 **Next:** [Session 6 - Graph-Based RAG →](Session6_Graph_Based_RAG.md)
 
 ---

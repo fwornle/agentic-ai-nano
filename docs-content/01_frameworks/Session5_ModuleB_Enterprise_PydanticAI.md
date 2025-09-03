@@ -834,6 +834,8 @@ D) Log file analysis only
 
 [View Solutions →](Session5_ModuleB_Test_Solutions.md)
 
+---
+
 ### Next Steps
 
 - **Continue to Module C**: [Custom Validation Systems](Session5_ModuleC_Custom_Validation_Systems.md) for specialized validation patterns  

@@ -49,7 +49,6 @@ The root problem isn't with your search technology – it's with human communica
 - **Domain Translation**: Users know business problems, documents contain technical solutions  
 - **Question vs. Answer Language**: Queries use problem language, documents use solution language  
 
-
 - **HyDE**: Bridge the gap by generating hypothetical answers, then searching in answer-space  
 - **Query Expansion**: Enrich user questions with domain terminology and related concepts  
 - **Multi-Query Generation**: Attack the same information need from multiple angles  

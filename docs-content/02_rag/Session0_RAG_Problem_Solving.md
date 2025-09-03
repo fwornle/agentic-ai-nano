@@ -15,7 +15,6 @@ By completing this session, you will:
 - Build query enhancement systems that bridge semantic gaps  
 - Create hierarchical indexing with effective metadata strategies  
 
-
 Even well-implemented RAG systems face predictable challenges. Understanding these problems and their engineering solutions is crucial for building production-ready systems.
 
 ![RAG Problems Overview](images/RAG-overview-problems.png)
@@ -36,7 +35,6 @@ Poor chunking strategies undermine the entire RAG pipeline by destroying documen
 - Loss of document structure (headers, tables, lists)  
 - Context boundaries broken across chunks  
 - No metadata preservation for filtering and ranking  
-
 
 Instead of arbitrary splitting, preserve logical document structure and add metadata that helps retrieval understand context.
 
@@ -188,7 +186,6 @@ Users and document authors express the same concepts differently, creating a sem
 
 **Real Example**: User asks "How do I fix my car?" but document says "Automobile repair procedures" - traditional embedding similarity may miss this connection.
 
-
 Transform user queries into forms more likely to match document content using multiple enhancement strategies.
 
 ```python
@@ -303,7 +300,6 @@ Users often ask vague questions that could have multiple valid interpretations, 
 **Symptom**: System returns generic or irrelevant responses to user questions that seem reasonable.
 
 **Example**: "How do I set this up?" (Set up what? In what context? For what purpose?)
-
 
 Analyze query clarity and proactively request clarification or add context before attempting retrieval.
 
@@ -421,7 +417,6 @@ Flat, unorganized indexes make retrieval inefficient and fail to leverage docume
 - Inefficient search that can't leverage document structure  
 - No hierarchy for different types of content  
 
-
 Build sophisticated index organization that enables efficient filtering and ranking.
 
 ```python
@@ -532,7 +527,6 @@ Vector similarity doesn't guarantee relevance or completeness. Retrieved chunks 
 **Symptom**: LLM generates responses that seem plausible but don't actually answer the user's question, or responses that are based on tangentially related information.
 
 **Root Causes**: Retrieved chunks are often irrelevant, redundant, contain incomplete information, or provide context that leads to misinterpretation.
-
 
 Implement comprehensive context quality management that validates and improves retrieved content.
 

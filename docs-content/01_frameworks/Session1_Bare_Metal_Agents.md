@@ -645,7 +645,6 @@ B) To integrate with specialized cloud services like S3 for data storage, Kafka 
 C) It's required by Python  
 D) To reduce code size  
 
-
 [View Solutions →](Session1_Test_Solutions.md)
 
 ---

@@ -52,8 +52,6 @@ D) Only resource utilization
 
 ---
 
----
-
 **Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)
 
 ---

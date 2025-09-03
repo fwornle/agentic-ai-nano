@@ -1436,6 +1436,8 @@ D) Manual load balancing
 
 [View Solutions →](Session7_ModuleB_Test_Solutions.md)
 
+---
+
 ### Next Steps
 
 - **Return to Core**: [Session 7 Main](Session7_First_ADK_Agent.md)  

@@ -1,6 +1,5 @@
 # Session 2 - Module B: Test Solutions
 
-
 ---
 
 **Question 1:** What components are included in the complete Kubernetes manifest package?  

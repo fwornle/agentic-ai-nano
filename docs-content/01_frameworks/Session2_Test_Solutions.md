@@ -52,8 +52,6 @@ D) ConversationEntityMemory
 
 ---
 
----
-
 **Next:** [Session 3 - LangGraph Multi-Agent Workflows →](Session3_LangGraph_Multi_Agent_Workflows.md)
 
 ---
