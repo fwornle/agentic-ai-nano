@@ -72,10 +72,10 @@ class CacheLevel(Enum):
 
 Cache level strategy:
 
-- **L1 (Memory)**: Millisecond access, limited capacity, frequently accessed data
-- **L2 (Redis)**: Sub-second access, shared across instances, session data
-- **L3 (Persistent)**: Second-level access, permanent storage, expensive computations
-- **L4 (CDN)**: Global distribution, massive capacity, static resources
+- **L1 (Memory)**: Millisecond access, limited capacity, frequently accessed data  
+- **L2 (Redis)**: Sub-second access, shared across instances, session data  
+- **L3 (Persistent)**: Second-level access, permanent storage, expensive computations  
+- **L4 (CDN)**: Global distribution, massive capacity, static resources  
 
 ### Cache Entry Data Structure
 

@@ -9,11 +9,11 @@
 
 After completing this module, you will understand:
 
-- The fundamental differences between individual agents and team-based systems
-- Core CrewAI components: Agents, Tasks, and Crews
-- Basic collaboration patterns: Sequential and Hierarchical processing
-- Role specialization principles for data processing teams
-- Essential configuration patterns for production readiness
+- The fundamental differences between individual agents and team-based systems  
+- Core CrewAI components: Agents, Tasks, and Crews  
+- Basic collaboration patterns: Sequential and Hierarchical processing  
+- Role specialization principles for data processing teams  
+- Essential configuration patterns for production readiness  
 
 ## Team Architecture Foundations
 
@@ -75,11 +75,11 @@ quality_engineer = Agent(
 
 These principles mirror what makes successful data engineering teams effective:
 
-1. **Role Specialization**: Each agent has specific expertise and responsibilities - like having dedicated data quality engineers, pipeline architects, and ML specialists rather than trying to make everyone handle every aspect of data processing
+1. **Role Specialization**: Each agent has specific expertise and responsibilities - like having dedicated data quality engineers, pipeline architects, and ML specialists rather than trying to make everyone handle every aspect of data processing  
 
-2. **Goal-Oriented Design**: Agents work toward clear, defined objectives - ensuring everyone understands their contribution to overall data pipeline success and business value
+2. **Goal-Oriented Design**: Agents work toward clear, defined objectives - ensuring everyone understands their contribution to overall data pipeline success and business value  
 
-3. **Collaborative Workflow**: Agents hand off work in structured sequences - creating smooth, efficient collaboration patterns that mirror successful data engineering team structures
+3. **Collaborative Workflow**: Agents hand off work in structured sequences - creating smooth, efficient collaboration patterns that mirror successful data engineering team structures  
 
 ### Agent Role Definitions
 
@@ -103,12 +103,12 @@ data_analyst = Agent(
 
 Key agent configuration options:
 
-- **role**: Defines the agent's professional identity and specialization
-- **goal**: Clear objective that guides decision-making
-- **backstory**: Rich context that shapes agent behavior and expertise
-- **tools**: Specific capabilities and integrations available to the agent
-- **allow_delegation**: Enables hierarchical task distribution
-- **memory**: Maintains context across interactions for better collaboration
+- **role**: Defines the agent's professional identity and specialization  
+- **goal**: Clear objective that guides decision-making  
+- **backstory**: Rich context that shapes agent behavior and expertise  
+- **tools**: Specific capabilities and integrations available to the agent  
+- **allow_delegation**: Enables hierarchical task distribution  
+- **memory**: Maintains context across interactions for better collaboration  
 
 ### Collaboration Patterns
 
@@ -129,11 +129,11 @@ def create_data_processing_team():
     )
 ```
 
-In sequential processing:
-- Each agent completes their work before the next agent begins
-- Results flow naturally from one specialist to the next
-- Context and knowledge accumulate through the processing chain
-- Works well for linear workflows with clear dependencies
+In sequential processing:  
+- Each agent completes their work before the next agent begins  
+- Results flow naturally from one specialist to the next  
+- Context and knowledge accumulate through the processing chain  
+- Works well for linear workflows with clear dependencies  
 
 #### Hierarchical Pattern
 
@@ -157,11 +157,11 @@ def create_hierarchical_data_team():
     )
 ```
 
-In hierarchical processing:
-- A manager agent coordinates and delegates tasks
-- Specialized agents focus on their domain expertise
-- Clear authority structure for complex decision-making
-- Better suited for dynamic task allocation and oversight
+In hierarchical processing:  
+- A manager agent coordinates and delegates tasks  
+- Specialized agents focus on their domain expertise  
+- Clear authority structure for complex decision-making  
+- Better suited for dynamic task allocation and oversight  
 
 ### Task Creation Fundamentals
 
@@ -190,10 +190,10 @@ def create_basic_data_task(topic: str):
 
 Essential task components:
 
-- **description**: Clear, detailed instructions with specific requirements
-- **agent**: The specialized agent responsible for execution
-- **expected_output**: Precise specification of deliverable format and content
-- **context**: References to previous tasks or shared information (when needed)
+- **description**: Clear, detailed instructions with specific requirements  
+- **agent**: The specialized agent responsible for execution  
+- **expected_output**: Precise specification of deliverable format and content  
+- **context**: References to previous tasks or shared information (when needed)  
 
 ### Basic Crew Assembly
 
@@ -222,11 +222,11 @@ def assemble_basic_crew(data_topic: str):
 
 Essential crew configuration:
 
-- **agents**: List of specialized team members
-- **tasks**: Ordered list of work to be completed
-- **process**: Coordination pattern (sequential or hierarchical)
-- **memory**: Enables context sharing across agents
-- **cache**: Improves performance by storing intermediate results
+- **agents**: List of specialized team members  
+- **tasks**: Ordered list of work to be completed  
+- **process**: Coordination pattern (sequential or hierarchical)  
+- **memory**: Enables context sharing across agents  
+- **cache**: Improves performance by storing intermediate results  
 
 ### Quick Start Usage
 
@@ -248,33 +248,33 @@ This creates a functioning data processing team that can tackle complex analytic
 
 The fundamental concepts that make CrewAI effective for data processing:
 
-1. **Specialization Over Generalization**: Create agents with deep domain expertise rather than trying to build universal processors
+1. **Specialization Over Generalization**: Create agents with deep domain expertise rather than trying to build universal processors  
 
-2. **Clear Role Definition**: Each agent should have a distinct professional identity with specific goals and capabilities
+2. **Clear Role Definition**: Each agent should have a distinct professional identity with specific goals and capabilities  
 
-3. **Structured Collaboration**: Use sequential or hierarchical patterns to create predictable, efficient workflows
+3. **Structured Collaboration**: Use sequential or hierarchical patterns to create predictable, efficient workflows  
 
-4. **Context Preservation**: Enable memory and caching to maintain knowledge across team interactions
+4. **Context Preservation**: Enable memory and caching to maintain knowledge across team interactions  
 
-5. **Production Readiness**: Configure crews with appropriate timeouts, error handling, and monitoring capabilities
+5. **Production Readiness**: Configure crews with appropriate timeouts, error handling, and monitoring capabilities  
 
 ## Getting Started Checklist
 
 Before building your first CrewAI team:
 
-- [ ] Define clear roles for each team member with specific expertise
-- [ ] Identify the collaboration pattern that fits your workflow
-- [ ] Create detailed task descriptions with measurable outcomes
-- [ ] Configure appropriate tools and capabilities for each agent
-- [ ] Enable memory and caching for optimal performance
-- [ ] Plan for monitoring and error handling in production environments
+- [ ] Define clear roles for each team member with specific expertise  
+- [ ] Identify the collaboration pattern that fits your workflow  
+- [ ] Create detailed task descriptions with measurable outcomes  
+- [ ] Configure appropriate tools and capabilities for each agent  
+- [ ] Enable memory and caching for optimal performance  
+- [ ] Plan for monitoring and error handling in production environments  
 
 ## Next Steps
 
 Once you understand these fundamentals, you're ready to move to the next level:
 
-- **📝 [Team Building Practice](Session4_Team_Building_Practice.md)** - Hands-on crew creation and task orchestration
-- **⚙️ [Advanced Orchestration](Session4_Advanced_Orchestration.md)** - Complex coordination patterns and performance optimization
+- **📝 [Team Building Practice](Session4_Team_Building_Practice.md)** - Hands-on crew creation and task orchestration  
+- **⚙️ [Advanced Orchestration](Session4_Advanced_Orchestration.md)** - Complex coordination patterns and performance optimization  
 ---
 
 ## 🧭 Navigation

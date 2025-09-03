@@ -10,14 +10,14 @@ Atomic Agents provides a component-based architecture for building modular data 
 
 ### What You'll Learn
 
-- Component-based agent design for modular data pipeline composition patterns
-- Atomic architecture principles for distributed data processing system scalability
-- Schema matching and component alignment for seamless data transformation chaining
-- Production deployment strategies for atomic agent data processing systems
+- Component-based agent design for modular data pipeline composition patterns  
+- Atomic architecture principles for distributed data processing system scalability  
+- Schema matching and component alignment for seamless data transformation chaining  
+- Production deployment strategies for atomic agent data processing systems  
 
 ### Advanced Modules
 
-- **
+- **  
 ---
 
 ## 🧭 Navigation

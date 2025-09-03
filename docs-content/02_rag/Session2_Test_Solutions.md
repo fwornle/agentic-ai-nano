@@ -92,11 +92,11 @@ D) To determine the number of chunks to create
 
 ## Performance Scoring
 
-- **8/8 Correct**: Excellent mastery of advanced preprocessing concepts
-- **7/8 Correct**: Strong understanding with minor gaps
-- **6/8 Correct**: Good grasp of core concepts, review metadata extraction
-- **5/8 Correct**: Adequate knowledge, focus on hierarchical chunking strategies
-- **4/8 or below**: Recommend hands-on practice with complex documents
+- **8/8 Correct**: Excellent mastery of advanced preprocessing concepts  
+- **7/8 Correct**: Strong understanding with minor gaps  
+- **6/8 Correct**: Good grasp of core concepts, review metadata extraction  
+- **5/8 Correct**: Adequate knowledge, focus on hierarchical chunking strategies  
+- **4/8 or below**: Recommend hands-on practice with complex documents  
 
 ---
 
@@ -104,40 +104,40 @@ D) To determine the number of chunks to create
 
 ### Document Analysis Framework
 
-1. **Content Type Detection**: Headings, paragraphs, lists, tables, code, quotes
-2. **Hierarchy Tracking**: Multi-level document structure preservation
-3. **Element Grouping**: Logical association of related content
-4. **Metadata Enrichment**: Position, size, and structural information
+1. **Content Type Detection**: Headings, paragraphs, lists, tables, code, quotes  
+2. **Hierarchy Tracking**: Multi-level document structure preservation  
+3. **Element Grouping**: Logical association of related content  
+4. **Metadata Enrichment**: Position, size, and structural information  
 
 ### Intelligent Chunking Strategies
 
-1. **Structure-Aware Boundaries**: Respects document hierarchy
-2. **Semantic Preservation**: Keeps related content together
-3. **Overlap Management**: Maintains context continuity
-4. **Size Optimization**: Balances chunk size with coherence
+1. **Structure-Aware Boundaries**: Respects document hierarchy  
+2. **Semantic Preservation**: Keeps related content together  
+3. **Overlap Management**: Maintains context continuity  
+4. **Size Optimization**: Balances chunk size with coherence  
 
 ### Metadata Extraction Techniques
 
-1. **Entity Recognition**: People, places, organizations, technical terms
-2. **Keyword Extraction**: Important concepts and topics
-3. **Topic Inference**: Domain and subject area identification
-4. **Difficulty Assessment**: Content complexity evaluation
-5. **Content Summarization**: Brief descriptions for context
+1. **Entity Recognition**: People, places, organizations, technical terms  
+2. **Keyword Extraction**: Important concepts and topics  
+3. **Topic Inference**: Domain and subject area identification  
+4. **Difficulty Assessment**: Content complexity evaluation  
+5. **Content Summarization**: Brief descriptions for context  
 
 ### Multi-Modal Processing
 
-1. **Image Handling**: Descriptive text replacement
-2. **Table Processing**: Structure-aware segmentation
-3. **Code Block Management**: Syntax-aware chunking
-4. **Mixed Content**: Coordinated multi-type processing
+1. **Image Handling**: Descriptive text replacement  
+2. **Table Processing**: Structure-aware segmentation  
+3. **Code Block Management**: Syntax-aware chunking  
+4. **Mixed Content**: Coordinated multi-type processing  
 
 ### Quality Assessment Metrics
 
-1. **Coherence Scoring**: Topic consistency measurement
-2. **Information Density**: Unique vs. total word ratios
-3. **Metadata Richness**: Feature presence evaluation
-4. **Size Consistency**: Chunk size distribution analysis
-5. **Overlap Efficiency**: Context preservation effectiveness
+1. **Coherence Scoring**: Topic consistency measurement  
+2. **Information Density**: Unique vs. total word ratios  
+3. **Metadata Richness**: Feature presence evaluation  
+4. **Size Consistency**: Chunk size distribution analysis  
+5. **Overlap Efficiency**: Context preservation effectiveness  
 
 ---
 ---

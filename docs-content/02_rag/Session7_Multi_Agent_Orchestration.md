@@ -9,11 +9,11 @@
 
 After completing this multi-agent orchestration module, you will master:
 
-- Collaborative multi-agent RAG architectures
-- Specialized agent role implementations
-- Agent coordination and communication patterns
-- Advanced task distribution strategies
-- Comprehensive multi-agent validation systems
+- Collaborative multi-agent RAG architectures  
+- Specialized agent role implementations  
+- Agent coordination and communication patterns  
+- Advanced task distribution strategies  
+- Comprehensive multi-agent validation systems  
 
 ---
 

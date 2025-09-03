@@ -9,8 +9,8 @@ This module teaches you to develop domain-specific evaluation metrics that captu
 
 ### Related Modules
 
-- **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production monitoring and alerting systems
-- **[Session 5 Core: RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts
+- **[Module B: Enterprise Monitoring](Session5_ModuleB_Enterprise_Monitoring.md)** - Production monitoring and alerting systems  
+- **[Session 5 Core: RAG Evaluation & Quality Assessment](Session5_RAG_Evaluation_Quality_Assessment.md)** - Foundation evaluation concepts  
 
 ### Quick Start
 

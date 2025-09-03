@@ -14,10 +14,10 @@ The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment 
 
 ### Quick Setup
 
-1. **Access your workspace**: [http://10.21.202.14/workspaces](http://10.21.202.14/workspaces)
-2. **Log in** with your BMW credentials
-3. **Select** the "Agentic AI Nanodegree" template
-4. **Launch** your pre-configured development environment
+1. **Access your workspace**: [http://10.21.202.14/workspaces](http://10.21.202.14/workspaces)  
+2. **Log in** with your BMW credentials  
+3. **Select** the "Agentic AI Nanodegree" template  
+4. **Launch** your pre-configured development environment  
 
 ![Coder Login](images/coder-login.png)
 *Coder login screen*
@@ -29,11 +29,11 @@ All tools, dependencies, and BMW Gaia LLM API access are pre-configured and read
 
 ### Why Cloud Development?
 
-- **Zero Installation**: No local setup required
-- **Consistent Environment**: Identical setup for all participants
-- **Corporate Integration**: Seamless access to BMW resources
-- **Scalable Resources**: Cloud computing power for AI workloads
-- **Pre-configured APIs**: BMW Gaia LLM API ready to use
+- **Zero Installation**: No local setup required  
+- **Consistent Environment**: Identical setup for all participants  
+- **Corporate Integration**: Seamless access to BMW resources  
+- **Scalable Resources**: Cloud computing power for AI workloads  
+- **Pre-configured APIs**: BMW Gaia LLM API ready to use  
 
 ![VS Code Dev Container](images/vscode-dev-container.png)
 *VS Code seamlessly connecting to a dev container environment*
@@ -42,9 +42,9 @@ All tools, dependencies, and BMW Gaia LLM API access are pre-configured and read
 
 Inside the corporate network, you have access to:
 
-- **GitHub Copilot**: Code completion and generation
-- **BMW Gaia LLM API**: Enterprise-approved AI models
-- **Coding-Assistant**: Open-source CLI coding assistant
+- **GitHub Copilot**: Code completion and generation  
+- **BMW Gaia LLM API**: Enterprise-approved AI models  
+- **Coding-Assistant**: Open-source CLI coding assistant  
 
 ![Coding Assistant](images/coder-llm-coding-assistant.png)
 *Pre-installed coding agent "coding-assistant"*
@@ -66,10 +66,10 @@ For public access, you'll need to set up your local development environment. Whi
 
 Before beginning the course modules, ensure you have:
 
-1. **Python 3.11+** installed with pip and virtual environment support
-2. **Git** for version control and cloning repositories
-3. **Code editor** (VS Code recommended with Python extension)
-4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)
+1. **Python 3.11+** installed with pip and virtual environment support  
+2. **Git** for version control and cloning repositories  
+3. **Code editor** (VS Code recommended with Python extension)  
+4. **LLM API access** (OpenAI, Anthropic Claude, or local models like Ollama)  
 
 ### Setup Steps
 

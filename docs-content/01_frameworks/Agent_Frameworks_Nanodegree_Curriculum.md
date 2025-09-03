@@ -10,11 +10,11 @@ In an era where software systems must be intelligent, adaptive, and capable of a
 
 ### **Prerequisites**
 
-- Python programming experience (intermediate level)
-- Basic understanding of LLMs and API interactions
-- Familiarity with JSON/REST APIs and HTTP protocols
-- Experience with virtual environments and package management
-- Understanding of software design patterns and object-oriented programming
+- Python programming experience (intermediate level)  
+- Basic understanding of LLMs and API interactions  
+- Familiarity with JSON/REST APIs and HTTP protocols  
+- Experience with virtual environments and package management  
+- Understanding of software design patterns and object-oriented programming  
 
 ---
 
@@ -124,25 +124,25 @@ The capstone project integrates everything you've learned into a comprehensive d
 
 ### Requirements
 
-- Implement Reflection pattern for self-improvement with production observability
-- Create Tool Use agents with external API integration and MCP protocol support
-- Build ReAct agents for complex reasoning chains with performance optimization
-- Develop Planning agents for multi-step task execution using orchestrator-worker patterns
-- Deploy Multi-Agent systems with hierarchical coordination and A2A/ACP protocols
-- Design atomic agent components using modular architecture patterns
-- Implement composable tool systems with plug-and-play component integration
-- Integrate with production systems using modern monitoring and protocol standards
-- Demonstrate performance improvements (measure against CrewAI's 5.76x benchmark)
-- Implement streaming validation and multi-provider support
+- Implement Reflection pattern for self-improvement with production observability  
+- Create Tool Use agents with external API integration and MCP protocol support  
+- Build ReAct agents for complex reasoning chains with performance optimization  
+- Develop Planning agents for multi-step task execution using orchestrator-worker patterns  
+- Deploy Multi-Agent systems with hierarchical coordination and A2A/ACP protocols  
+- Design atomic agent components using modular architecture patterns  
+- Implement composable tool systems with plug-and-play component integration  
+- Integrate with production systems using modern monitoring and protocol standards  
+- Demonstrate performance improvements (measure against CrewAI's 5.76x benchmark)  
+- Implement streaming validation and multi-provider support  
 
 ### Deliverables
 
-- Complete source code with comprehensive documentation and 2025 best practices
-- Working deployment with advanced monitoring, observability, and protocol integration
-- Architecture documentation and 2025 framework comparison analysis
-- Performance benchmarks demonstrating 2025 optimizations and improvements
-- Production integration patterns with modern protocol implementations
-- Production-ready deployment with container orchestration and scaling strategies
+- Complete source code with comprehensive documentation and 2025 best practices  
+- Working deployment with advanced monitoring, observability, and protocol integration  
+- Architecture documentation and 2025 framework comparison analysis  
+- Performance benchmarks demonstrating 2025 optimizations and improvements  
+- Production integration patterns with modern protocol implementations  
+- Production-ready deployment with container orchestration and scaling strategies  
 
 ---
 
@@ -152,17 +152,17 @@ Understanding the current landscape of agent technologies is crucial for making 
 
 ### **Modern Protocol Standards**
 
-- **Model Context Protocol (MCP)**: Standardized LLM-application integration
-- **Agent-to-Agent (A2A)**: Direct inter-agent communication protocols
-- **Agent Communication Protocol (ACP)**: Production agent coordination
-- **Agent Network Protocol (ANP)**: Multi-system agent federation
+- **Model Context Protocol (MCP)**: Standardized LLM-application integration  
+- **Agent-to-Agent (A2A)**: Direct inter-agent communication protocols  
+- **Agent Communication Protocol (ACP)**: Production agent coordination  
+- **Agent Network Protocol (ANP)**: Multi-system agent federation  
 
 ### **Performance Breakthroughs**
 
-- **CrewAI Performance**: 5.76x faster execution with new flow architecture
-- **LangGraph Optimizations**: Enhanced state management and parallel processing
-- **PydanticAI Streaming**: Real-time validation with multi-provider support
-- **Production Observability**: Advanced monitoring with OpenTelemetry integration
+- **CrewAI Performance**: 5.76x faster execution with new flow architecture  
+- **LangGraph Optimizations**: Enhanced state management and parallel processing  
+- **PydanticAI Streaming**: Real-time validation with multi-provider support  
+- **Production Observability**: Advanced monitoring with OpenTelemetry integration  
 
 ### **2025 Framework Comparison Matrix**
 
@@ -178,12 +178,12 @@ Understanding the current landscape of agent technologies is crucial for making 
 
 ### **Production Integration Technologies**
 
-- **Container Orchestration**: Kubernetes with Helm charts
-- **Monitoring Stack**: Prometheus, Grafana, OpenTelemetry, Jaeger
-- **Message Queues**: Redis Streams, Apache Kafka for agent communication
-- **Database Integration**: PostgreSQL, MongoDB with connection pooling
-- **API Gateways**: Kong, Ambassador for agent service mesh
-- **Security**: OAuth 2.0, JWT tokens, rate limiting, audit logging
+- **Container Orchestration**: Kubernetes with Helm charts  
+- **Monitoring Stack**: Prometheus, Grafana, OpenTelemetry, Jaeger  
+- **Message Queues**: Redis Streams, Apache Kafka for agent communication  
+- **Database Integration**: PostgreSQL, MongoDB with connection pooling  
+- **API Gateways**: Kong, Ambassador for agent service mesh  
+- **Security**: OAuth 2.0, JWT tokens, rate limiting, audit logging  
 
 ---
 
@@ -191,38 +191,38 @@ Understanding the current landscape of agent technologies is crucial for making 
 
 ### **Core Documentation**
 
-- [LangChain Agent Documentation](https://python.langchain.com/docs/modules/agents/)
-- [LangGraph Tutorial](https://langchain-ai.github.io/langgraph/)
-- [CrewAI Official Guide](https://docs.crewai.com/)
-- [PydanticAI Documentation](https://ai.pydantic.dev/)
-- [Google ADK Repository](https://github.com/google/adk-python)
+- [LangChain Agent Documentation](https://python.langchain.com/docs/modules/agents/)  
+- [LangGraph Tutorial](https://langchain-ai.github.io/langgraph/)  
+- [CrewAI Official Guide](https://docs.crewai.com/)  
+- [PydanticAI Documentation](https://ai.pydantic.dev/)  
+- [Google ADK Repository](https://github.com/google/adk-python)  
 
 ### **Video Tutorials**
 
-- [Building AI Agents with LangChain](https://www.youtube.com/results?search_query=langchain+agents+tutorial)
-- [Multi-Agent Systems with LangGraph](https://www.youtube.com/results?search_query=langgraph+tutorial)
-- [CrewAI Team Building Tutorial](https://www.youtube.com/results?search_query=crewai+tutorial)
+- [Building AI Agents with LangChain](https://www.youtube.com/results?search_query=langchain+agents+tutorial)  
+- [Multi-Agent Systems with LangGraph](https://www.youtube.com/results?search_query=langgraph+tutorial)  
+- [CrewAI Team Building Tutorial](https://www.youtube.com/results?search_query=crewai+tutorial)  
 
 ### **Hands-on Tutorials**
 
-- [LangChain Agent Quickstart](https://python.langchain.com/docs/tutorials/agents/)
-- [Building Your First CrewAI Team](https://docs.crewai.com/quickstart)
-- [PydanticAI Getting Started](https://ai.pydantic.dev/getting-started/)
-- [ADK Currency Agent Codelab](https://codelabs.developers.google.com/codelabs/currency-agent#0)
+- [LangChain Agent Quickstart](https://python.langchain.com/docs/tutorials/agents/)  
+- [Building Your First CrewAI Team](https://docs.crewai.com/quickstart)  
+- [PydanticAI Getting Started](https://ai.pydantic.dev/getting-started/)  
+- [ADK Currency Agent Codelab](https://codelabs.developers.google.com/codelabs/currency-agent#0)  
 
 ### **Advanced Reading**
 
-- [Agent Architecture Patterns](https://arxiv.org/html/2406.02716v1)
-- [Multi-Agent System Design](https://arxiv.org/html/2310.02238v2)
-- [ReAct: Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
-- [Tool-Using AI Agents](https://arxiv.org/html/2410.03739v1)
+- [Agent Architecture Patterns](https://arxiv.org/html/2406.02716v1)  
+- [Multi-Agent System Design](https://arxiv.org/html/2310.02238v2)  
+- [ReAct: Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)  
+- [Tool-Using AI Agents](https://arxiv.org/html/2410.03739v1)  
 
 ### **Code Repositories**
 
-- [LangChain Examples](https://github.com/langchain-ai/langchain/tree/master/templates)
-- [LangGraph Templates](https://github.com/langchain-ai/langgraph/tree/main/examples)
-- [CrewAI Examples](https://github.com/joaomdmoura/crewAI-examples)
-- [PydanticAI Examples](https://github.com/pydantic/pydantic-ai/tree/main/examples)
+- [LangChain Examples](https://github.com/langchain-ai/langchain/tree/master/templates)  
+- [LangGraph Templates](https://github.com/langchain-ai/langgraph/tree/main/examples)  
+- [CrewAI Examples](https://github.com/joaomdmoura/crewAI-examples)  
+- [PydanticAI Examples](https://github.com/pydantic/pydantic-ai/tree/main/examples)  
 
 ---
 
@@ -232,32 +232,32 @@ By completion, you will have transformed from understanding basic agent concepts
 
 ### **Technical Skills**
 
-1. **Implement all five agentic patterns** (Reflection, Tool Use, ReAct, Planning, Multi-Agent) with 2025 best practices
-2. **Build agents using multiple frameworks** with performance optimization and appropriate framework selection
-3. **Design multi-agent systems** with orchestrator-worker patterns and enterprise communication protocols
-4. **Deploy production-ready agents** with advanced monitoring, observability, and streaming capabilities
-5. **Integrate agents with enterprise systems** using modern protocols (MCP, A2A, ACP, ANP) and external APIs
-6. **Optimize agent performance** through benchmarking, profiling, and 2025 performance enhancements
-7. **Implement multi-provider support** for enterprise flexibility and vendor independence
-8. **Apply performance breakthroughs** including CrewAI's 5.76x execution improvements
+1. **Implement all five agentic patterns** (Reflection, Tool Use, ReAct, Planning, Multi-Agent) with 2025 best practices  
+2. **Build agents using multiple frameworks** with performance optimization and appropriate framework selection  
+3. **Design multi-agent systems** with orchestrator-worker patterns and enterprise communication protocols  
+4. **Deploy production-ready agents** with advanced monitoring, observability, and streaming capabilities  
+5. **Integrate agents with enterprise systems** using modern protocols (MCP, A2A, ACP, ANP) and external APIs  
+6. **Optimize agent performance** through benchmarking, profiling, and 2025 performance enhancements  
+7. **Implement multi-provider support** for enterprise flexibility and vendor independence  
+8. **Apply performance breakthroughs** including CrewAI's 5.76x execution improvements  
 
 ### **Architectural Understanding**
 
-1. **Compare 2025 framework trade-offs** including performance characteristics and enterprise readiness
-2. **Design scalable agent architectures** for production environments with modern protocol support
-3. **Implement proper separation of concerns** between agents, tools, orchestration, and enterprise integration layers
-4. **Plan for fault tolerance and recovery** in multi-agent systems with advanced observability
-5. **Apply enterprise integration patterns** for production-grade system architecture
-6. **Understand protocol standardization** and its impact on agent system design
+1. **Compare 2025 framework trade-offs** including performance characteristics and enterprise readiness  
+2. **Design scalable agent architectures** for production environments with modern protocol support  
+3. **Implement proper separation of concerns** between agents, tools, orchestration, and enterprise integration layers  
+4. **Plan for fault tolerance and recovery** in multi-agent systems with advanced observability  
+5. **Apply enterprise integration patterns** for production-grade system architecture  
+6. **Understand protocol standardization** and its impact on agent system design  
 
 ### **Industry Readiness**
 
-1. **Follow 2025 framework best practices** and cutting-edge design patterns
-2. **Debug complex agent interactions** using advanced observability and monitoring tools
-3. **Monitor and maintain** production agent systems with enterprise-grade tooling
-4. **Evaluate and select** appropriate frameworks based on 2025 performance benchmarks and enterprise requirements
-5. **Deploy enterprise-grade solutions** with proper scaling, monitoring, and protocol integration
-6. **Apply performance optimization** techniques and modern architectural patterns
+1. **Follow 2025 framework best practices** and cutting-edge design patterns  
+2. **Debug complex agent interactions** using advanced observability and monitoring tools  
+3. **Monitor and maintain** production agent systems with enterprise-grade tooling  
+4. **Evaluate and select** appropriate frameworks based on 2025 performance benchmarks and enterprise requirements  
+5. **Deploy enterprise-grade solutions** with proper scaling, monitoring, and protocol integration  
+6. **Apply performance optimization** techniques and modern architectural patterns  
 
 ---
 
@@ -267,22 +267,22 @@ By completion, you will have transformed from understanding basic agent concepts
 
 Each session includes multiple choice quizzes designed to verify not just memorization, but deep understanding of key concepts and their practical implications:
 
-- **Session 0**: 15 questions covering agentic patterns and framework fundamentals
-- **Sessions 1-10**: 10-12 questions per session covering specific implementation topics
-- **Capstone Project**: Self-evaluation checklist for project completeness
+- **Session 0**: 15 questions covering agentic patterns and framework fundamentals  
+- **Sessions 1-10**: 10-12 questions per session covering specific implementation topics  
+- **Capstone Project**: Self-evaluation checklist for project completeness  
 
 ### **Practical Validation**
 
-- **Code Examples**: Each session provides working code examples with solutions
-- **Progressive Complexity**: Build upon previous sessions for comprehensive learning
-- **Framework Comparison**: Compare implementations across different frameworks
-- **Self-Check Activities**: Verify implementations work as expected
+- **Code Examples**: Each session provides working code examples with solutions  
+- **Progressive Complexity**: Build upon previous sessions for comprehensive learning  
+- **Framework Comparison**: Compare implementations across different frameworks  
+- **Self-Check Activities**: Verify implementations work as expected  
 
 ### **Progress Tracking**
 
-- Complete all session materials and quizzes to demonstrate mastery
-- Successfully implement and test all code examples
-- Build and deploy the capstone project following provided specifications
+- Complete all session materials and quizzes to demonstrate mastery  
+- Successfully implement and test all code examples  
+- Build and deploy the capstone project following provided specifications  
 
 ---
 
@@ -316,17 +316,17 @@ pip install kubernetes  # Container orchestration
 
 ### **Recommended Tools**
 
-- **IDE**: VS Code with Python extension and Jupyter support
-- **API Testing**: Postman or curl for testing agent endpoints
-- **Monitoring**: Prometheus + Grafana for production monitoring
-- **Version Control**: Git with proper branching strategy
-- **Containers**: Docker for deployment and isolation
+- **IDE**: VS Code with Python extension and Jupyter support  
+- **API Testing**: Postman or curl for testing agent endpoints  
+- **Monitoring**: Prometheus + Grafana for production monitoring  
+- **Version Control**: Git with proper branching strategy  
+- **Containers**: Docker for deployment and isolation  
 
 ### **Development Workflow**
 
-1. **Local Development**: Use file-based persistence for rapid iteration
-2. **Integration Testing**: Test agent interactions in isolated environments
-3. **Production Deployment**: Container-based deployment with proper monitoring
+1. **Local Development**: Use file-based persistence for rapid iteration  
+2. **Integration Testing**: Test agent interactions in isolated environments  
+3. **Production Deployment**: Container-based deployment with proper monitoring  
 
 ---
 
@@ -334,10 +334,10 @@ pip install kubernetes  # Container orchestration
 
 To successfully complete this nanodegree module:
 
-1. Study all session materials (Sessions 0-10)
-2. Complete all multiple choice quizzes with satisfactory scores
-3. Successfully implement all code examples and framework integrations
-4. Build and deploy the capstone project demonstrating mastery of all five agentic patterns
+1. Study all session materials (Sessions 0-10)  
+2. Complete all multiple choice quizzes with satisfactory scores  
+3. Successfully implement all code examples and framework integrations  
+4. Build and deploy the capstone project demonstrating mastery of all five agentic patterns  
 
 **Completion Recognition:** "Agent Frameworks & Patterns Nanodegree Module Certificate"
 
@@ -347,16 +347,16 @@ To successfully complete this nanodegree module:
 
 ### **Available Resources**
 
-- **Comprehensive Documentation**: Each session includes detailed explanations and examples
-- **Solution Code**: Complete implementations provided for all exercises
-- **Framework Comparisons**: Side-by-side analysis of different approaches
-- **Community Resources**: Links to official documentation and developer communities
+- **Comprehensive Documentation**: Each session includes detailed explanations and examples  
+- **Solution Code**: Complete implementations provided for all exercises  
+- **Framework Comparisons**: Side-by-side analysis of different approaches  
+- **Community Resources**: Links to official documentation and developer communities  
 
 ### **Learning Path**
 
-1. **Week 1**: Master core patterns through framework-specific implementations including atomic/modular approaches
-2. **Week 2**: Explore production frameworks and enterprise integration
-3. **Capstone**: Integrate all patterns in a comprehensive multi-framework system with atomic components
+1. **Week 1**: Master core patterns through framework-specific implementations including atomic/modular approaches  
+2. **Week 2**: Explore production frameworks and enterprise integration  
+3. **Capstone**: Integrate all patterns in a comprehensive multi-framework system with atomic components  
 
 The landscape of software engineering is shifting toward intelligent, autonomous systems. Traditional applications are evolving into adaptive platforms that can reason, plan, and execute complex tasks without constant human oversight. This module provides comprehensive, self-paced instruction on 2025 state-of-the-art agent frameworks and the five core agentic patterns. You'll gain practical experience building intelligent agents that can reflect, use tools, reason, plan, and collaborate effectively in production environments using cutting-edge performance optimizations, modern protocol standards, and enterprise-grade deployment strategies. Master the latest technological advances including CrewAI's 5.76x performance improvements, advanced observability systems, and modern protocol integration (MCP, A2A, ACP, ANP) for enterprise-ready agent systems.
 ---

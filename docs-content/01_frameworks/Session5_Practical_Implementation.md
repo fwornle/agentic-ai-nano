@@ -9,10 +9,10 @@
 
 After completing this practical implementation guide, you will:
 
-- Build complex agents with dependency injection patterns
-- Create sophisticated tool chains for data processing workflows
-- Implement comprehensive error recovery systems
-- Deploy type-safe agents with monitoring and observability
+- Build complex agents with dependency injection patterns  
+- Create sophisticated tool chains for data processing workflows  
+- Implement comprehensive error recovery systems  
+- Deploy type-safe agents with monitoring and observability  
 
 ## Advanced Agent Architecture Patterns
 
@@ -549,20 +549,20 @@ else:
 
 Build your own production-ready data processing agent:
 
-1. **Create Enhanced Models**: Define comprehensive request/response models with validation
-2. **Implement Service Layer**: Build dependency injection with real service integration
-3. **Add Error Handling**: Implement comprehensive error classification and recovery
-4. **Create Tool Chain**: Build multiple interconnected tools with validation
-5. **Test Resilience**: Verify retry logic, circuit breaker, and error scenarios
+1. **Create Enhanced Models**: Define comprehensive request/response models with validation  
+2. **Implement Service Layer**: Build dependency injection with real service integration  
+3. **Add Error Handling**: Implement comprehensive error classification and recovery  
+4. **Create Tool Chain**: Build multiple interconnected tools with validation  
+5. **Test Resilience**: Verify retry logic, circuit breaker, and error scenarios  
 
 ### Validation Checklist
 
-- [ ] Agent handles complex dependencies correctly
-- [ ] Error handling provides actionable diagnostics
-- [ ] Tools integrate seamlessly with validation
-- [ ] Retry logic works with exponential backoff
-- [ ] Circuit breaker prevents cascading failures
-- [ ] All code follows production quality standards
+- [ ] Agent handles complex dependencies correctly  
+- [ ] Error handling provides actionable diagnostics  
+- [ ] Tools integrate seamlessly with validation  
+- [ ] Retry logic works with exponential backoff  
+- [ ] Circuit breaker prevents cascading failures  
+- [ ] All code follows production quality standards  
 
 ---
 

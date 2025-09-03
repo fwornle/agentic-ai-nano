@@ -9,10 +9,10 @@
 
 After completing this implementation guide, you will:
 
-- Build complete HyDE query enhancement systems
-- Implement query type classification and templates
-- Create hypothetical document generation workflows
-- Develop enhanced embedding creation methods
+- Build complete HyDE query enhancement systems  
+- Implement query type classification and templates  
+- Create hypothetical document generation workflows  
+- Develop enhanced embedding creation methods  
 
 ## Complete HyDE System Implementation
 
@@ -362,10 +362,10 @@ def search_with_hyde(self, query: str, vector_store, top_k: int = 10):
 
 ## Practice Exercises
 
-1. **Template Optimization**: Create custom templates for domain-specific queries
-2. **Quality Metrics**: Implement advanced quality assessment methods
-3. **Performance Testing**: Compare HyDE results with traditional search
-4. **Error Handling**: Add comprehensive error handling and fallback mechanisms
+1. **Template Optimization**: Create custom templates for domain-specific queries  
+2. **Quality Metrics**: Implement advanced quality assessment methods  
+3. **Performance Testing**: Compare HyDE results with traditional search  
+4. **Error Handling**: Add comprehensive error handling and fallback mechanisms  
 ---
 
 ## 🧭 Navigation

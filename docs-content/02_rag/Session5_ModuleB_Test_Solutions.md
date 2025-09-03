@@ -59,32 +59,32 @@ D) Only user queries and response times
 
 ## Performance Scoring
 
-- **5/5 Correct**: Excellent mastery of enterprise monitoring and compliance
-- **4/5 Correct**: Good understanding with minor gaps in monitoring strategies
-- **3/5 Correct**: Adequate grasp, review compliance and alerting frameworks
-- **2/5 Correct**: Needs focused study of enterprise monitoring best practices
-- **0-1 Correct**: Recommend hands-on practice with monitoring tools
+- **5/5 Correct**: Excellent mastery of enterprise monitoring and compliance  
+- **4/5 Correct**: Good understanding with minor gaps in monitoring strategies  
+- **3/5 Correct**: Adequate grasp, review compliance and alerting frameworks  
+- **2/5 Correct**: Needs focused study of enterprise monitoring best practices  
+- **0-1 Correct**: Recommend hands-on practice with monitoring tools  
 
 ---
 
 ## Key Concepts Review
 
-### Enterprise Monitoring Framework
-1. **SLA Metrics**: Availability, response time, and user experience indicators
-2. **Compliance Monitoring**: Regulatory adherence and audit trail management
-3. **Business Metrics**: Cost efficiency, user satisfaction, and productivity impact
-4. **Anomaly Detection**: Ensemble approaches for reliable issue identification
+### Enterprise Monitoring Framework  
+1. **SLA Metrics**: Availability, response time, and user experience indicators  
+2. **Compliance Monitoring**: Regulatory adherence and audit trail management  
+3. **Business Metrics**: Cost efficiency, user satisfaction, and productivity impact  
+4. **Anomaly Detection**: Ensemble approaches for reliable issue identification  
 
-### Monitoring Strategies
-- **Multi-layered Alerting**: Technical, business, and compliance alert levels
-- **Executive Reporting**: Business impact translation of technical metrics
-- **Audit Compliance**: Comprehensive activity logging for regulatory requirements
-- **Proactive Detection**: Predictive monitoring to prevent issues before impact
+### Monitoring Strategies  
+- **Multi-layered Alerting**: Technical, business, and compliance alert levels  
+- **Executive Reporting**: Business impact translation of technical metrics  
+- **Audit Compliance**: Comprehensive activity logging for regulatory requirements  
+- **Proactive Detection**: Predictive monitoring to prevent issues before impact  
 
 ---
 
-## Answer Summary
-1. B  2. B  3. B  4. B  5. B
+## Answer Summary  
+1. B  2. B  3. B  4. B  5. B  
 
 ---
 ---

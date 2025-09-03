@@ -60,12 +60,12 @@ This module offers three distinct learning paths for mastering Retrieval-Augment
 
 [**Start Session 6 →**](Session6_Graph_Based_RAG.md)
 
-#### ⚙️ Implementer Advanced Modules:
-- ⚙️ [NodeRAG Technical Implementation](Session6_NodeRAG_Technical_Implementation.md) (3 hours)
-- ⚙️ [Code GraphRAG Advanced](Session6_Code_GraphRAG_Advanced.md) (2.5 hours)
-- ⚙️ [Graph Traversal Advanced](Session6_Graph_Traversal_Advanced.md) (2.5 hours)
-- ⚙️ [Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md) (4 hours)
-- ⚙️ [Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md) (4 hours)
+#### ⚙️ Implementer Advanced Modules:  
+- ⚙️ [NodeRAG Technical Implementation](Session6_NodeRAG_Technical_Implementation.md) (3 hours)  
+- ⚙️ [Code GraphRAG Advanced](Session6_Code_GraphRAG_Advanced.md) (2.5 hours)  
+- ⚙️ [Graph Traversal Advanced](Session6_Graph_Traversal_Advanced.md) (2.5 hours)  
+- ⚙️ [Module A: Advanced Graph Algorithms](Session6_ModuleA_Advanced_Algorithms.md) (4 hours)  
+- ⚙️ [Module B: Production GraphRAG](Session6_ModuleB_Production_Systems.md) (4 hours)  
 
 ### Production & Enterprise (Session 9)
 
@@ -73,10 +73,10 @@ Deploy and maintain enterprise-grade RAG systems.
 
 ### Session 9: Production RAG & Enterprise Integration
 
-- Scalable deployment architectures
-- Security and compliance frameworks
-- Monitoring and observability
-- Enterprise workflow integration
+- Scalable deployment architectures  
+- Security and compliance frameworks  
+- Monitoring and observability  
+- Enterprise workflow integration  
 
 ## Quick Navigation by Use Case
 
@@ -109,77 +109,77 @@ Deploy and maintain enterprise-grade RAG systems.
 
 ### Core Technologies
 
-- **Vector Databases**: Chroma, Pinecone, Weaviate, Qdrant
-- **Embedding Models**: OpenAI, Sentence Transformers, Cohere
-- **LLMs**: GPT-4, Claude, Llama, Gemini
-- **Search Engines**: Elasticsearch, OpenSearch
-- **Graph Databases**: Neo4j, Amazon Neptune
+- **Vector Databases**: Chroma, Pinecone, Weaviate, Qdrant  
+- **Embedding Models**: OpenAI, Sentence Transformers, Cohere  
+- **LLMs**: GPT-4, Claude, Llama, Gemini  
+- **Search Engines**: Elasticsearch, OpenSearch  
+- **Graph Databases**: Neo4j, Amazon Neptune  
 
 ### RAG Frameworks
 
-- **LangChain**: RAG pipeline orchestration
-- **LlamaIndex**: Advanced indexing and retrieval
-- **Haystack**: Production RAG systems
-- **ChromaDB**: Vector storage and retrieval
-- **FAISS**: High-performance similarity search
+- **LangChain**: RAG pipeline orchestration  
+- **LlamaIndex**: Advanced indexing and retrieval  
+- **Haystack**: Production RAG systems  
+- **ChromaDB**: Vector storage and retrieval  
+- **FAISS**: High-performance similarity search  
 
 ### Infrastructure
 
-- **Docker & Kubernetes**: Containerization and orchestration
-- **Apache Kafka**: Real-time data streaming
-- **Redis**: Caching and session management
-- **PostgreSQL**: Metadata and configuration storage
-- **Prometheus/Grafana**: System monitoring
+- **Docker & Kubernetes**: Containerization and orchestration  
+- **Apache Kafka**: Real-time data streaming  
+- **Redis**: Caching and session management  
+- **PostgreSQL**: Metadata and configuration storage  
+- **Prometheus/Grafana**: System monitoring  
 
 ## Session Structure
 
 Each session follows a learner-optimized structure:
 
-1. **🎯 Learning Navigation Hub**
-   - Path selection and time estimates
-   - Skill prerequisites and outcomes
-   - Quick start guidance
+1. **🎯 Learning Navigation Hub**  
+   - Path selection and time estimates  
+   - Skill prerequisites and outcomes  
+   - Quick start guidance  
 
-2. **📋 Session Overview Dashboard**
-   - Core learning track breakdown
-   - Optional module previews
-   - Time and complexity indicators
+2. **📋 Session Overview Dashboard**  
+   - Core learning track breakdown  
+   - Optional module previews  
+   - Time and complexity indicators  
 
-3. **🧭 Core Section (Required)**
-   - Essential RAG concepts
-   - Progressive implementation
-   - Practical code examples
+3. **🧭 Core Section (Required)**  
+   - Essential RAG concepts  
+   - Progressive implementation  
+   - Practical code examples  
 
-4. **🔬 Optional Deep Dive Modules**
-   - Advanced techniques and optimizations
-   - Enterprise-specific considerations
-   - Research-level implementations
+4. **🔬 Optional Deep Dive Modules**  
+   - Advanced techniques and optimizations  
+   - Enterprise-specific considerations  
+   - Research-level implementations  
 
-5. **📝 Knowledge Assessment**
-   - Comprehensive multiple choice tests
-   - Practical implementation challenges
-   - Concept validation exercises
+5. **📝 Knowledge Assessment**  
+   - Comprehensive multiple choice tests  
+   - Practical implementation challenges  
+   - Concept validation exercises  
 
-6. **🧭 Navigation & Progression**
-   - Clear next steps and prerequisites
-   - Related resource connections
-   - Learning path continuity
+6. **🧭 Navigation & Progression**  
+   - Clear next steps and prerequisites  
+   - Related resource connections  
+   - Learning path continuity  
 
 ## Success Strategies
 
 ### For Maximum Learning Impact
 
-1. **Progressive Mastery**: Build on each session's concepts sequentially
-2. **Practical Implementation**: Deploy examples in your own environment
-3. **Path Consistency**: Maintain chosen learning depth for coherent experience
-4. **Iterative Refinement**: Revisit complex concepts with fresh perspective
-5. **Real-World Application**: Apply concepts to actual business problems
+1. **Progressive Mastery**: Build on each session's concepts sequentially  
+2. **Practical Implementation**: Deploy examples in your own environment  
+3. **Path Consistency**: Maintain chosen learning depth for coherent experience  
+4. **Iterative Refinement**: Revisit complex concepts with fresh perspective  
+5. **Real-World Application**: Apply concepts to actual business problems  
 
-### Recommended Schedule
-- **👀 Observer Path**: 2-3 sessions per week
-- **🙋‍♂️ Participant Path**: 1-2 sessions per week
-- **🛠️ Implementer Path**: 1 session per week with practice time
-- **Hybrid Approach**: Adjust based on session complexity and available time
+### Recommended Schedule  
+- **👀 Observer Path**: 2-3 sessions per week  
+- **🙋‍♂️ Participant Path**: 1-2 sessions per week  
+- **🛠️ Implementer Path**: 1 session per week with practice time  
+- **Hybrid Approach**: Adjust based on session complexity and available time  
 
 ## Learning Outcomes
 
@@ -187,33 +187,33 @@ Upon completion of this module, you will master:
 
 ### RAG System Design
 
-- Architect comprehensive RAG systems from requirements to deployment
-- Select optimal components for specific use cases and constraints
-- Design scalable, maintainable RAG architectures
+- Architect comprehensive RAG systems from requirements to deployment  
+- Select optimal components for specific use cases and constraints  
+- Design scalable, maintainable RAG architectures  
 
 ### Advanced Implementation
 
-- Implement sophisticated retrieval strategies and query optimization
-- Build multi-modal RAG systems handling diverse content types
-- Create agentic RAG systems with self-improvement capabilities
+- Implement sophisticated retrieval strategies and query optimization  
+- Build multi-modal RAG systems handling diverse content types  
+- Create agentic RAG systems with self-improvement capabilities  
 
 ### Production Excellence
 
-- Deploy enterprise-grade RAG systems with proper security and compliance
-- Implement comprehensive monitoring, evaluation, and optimization workflows
-- Integrate RAG systems into existing enterprise infrastructure
+- Deploy enterprise-grade RAG systems with proper security and compliance  
+- Implement comprehensive monitoring, evaluation, and optimization workflows  
+- Integrate RAG systems into existing enterprise infrastructure  
 
 ### Quality & Evaluation
 
-- Design and implement robust evaluation frameworks
-- Monitor and improve system performance continuously
-- Balance accuracy, latency, and cost considerations
+- Design and implement robust evaluation frameworks  
+- Monitor and improve system performance continuously  
+- Balance accuracy, latency, and cost considerations  
 
 ## 🔗 Quick Navigation
 
 <div class="grid cards" markdown>
 
-- :material-rocket-launch:{ .lg .middle } **Start Learning**
+- :material-rocket-launch:{ .lg .middle } **Start Learning**  
 
     ---
 
@@ -221,7 +221,7 @@ Upon completion of this module, you will master:
 
     [:octicons-arrow-right-24: Session 0 - RAG Introduction](Session0_Introduction_to_RAG_Architecture.md)
 
-- :material-file-document:{ .lg .middle } **Course Curriculum**
+- :material-file-document:{ .lg .middle } **Course Curriculum**  
 
     ---
 
@@ -229,7 +229,7 @@ Upon completion of this module, you will master:
 
     [:octicons-arrow-right-24: View Curriculum](RAG_Nanodegree_Curriculum.md)
 
-- :material-code-braces:{ .lg .middle } **Source Code**
+- :material-code-braces:{ .lg .middle } **Source Code**  
 
     ---
 
@@ -237,7 +237,7 @@ Upon completion of this module, you will master:
 
     [:octicons-arrow-right-24: Browse Code](src/)
 
-- :material-compass:{ .lg .middle } **Getting Started**
+- :material-compass:{ .lg .middle } **Getting Started**  
 
     ---
 

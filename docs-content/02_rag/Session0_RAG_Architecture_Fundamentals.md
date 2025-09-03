@@ -9,10 +9,10 @@
 
 By completing this session, you will:
 
-- Understand the fundamental three-stage RAG architecture
-- Recognize when RAG is the optimal solution over alternatives
-- Grasp the engineering principles behind each stage
-- Identify the core problems RAG solves in AI systems
+- Understand the fundamental three-stage RAG architecture  
+- Recognize when RAG is the optimal solution over alternatives  
+- Grasp the engineering principles behind each stage  
+- Identify the core problems RAG solves in AI systems  
 
 ## The Core Problem RAG Solves
 
@@ -31,11 +31,11 @@ Every RAG system follows a consistent three-stage architecture that transforms s
 
 The indexing stage determines the quality ceiling of your entire RAG system. Poor indexing creates problems that no amount of sophisticated retrieval can fix.
 
-#### Core Operations:
-- **Document Parsing**: Extract text from PDFs, HTML, Word docs
-- **Text Chunking**: Split into retrievable segments while preserving context
-- **Vector Embedding**: Transform text into dense numerical representations
-- **Database Storage**: Index vectors for efficient similarity search
+#### Core Operations:  
+- **Document Parsing**: Extract text from PDFs, HTML, Word docs  
+- **Text Chunking**: Split into retrievable segments while preserving context  
+- **Vector Embedding**: Transform text into dense numerical representations  
+- **Database Storage**: Index vectors for efficient similarity search  
 
 ```python
 # Basic RAG Indexer Implementation
@@ -57,21 +57,21 @@ class RAGIndexer:
 
 **Key Insight**: The embedding model choice determines semantic understanding quality. Models trained on domain-specific data perform significantly better than general-purpose embeddings.
 
-#### Why This Stage Matters:
-- Chunk quality directly impacts retrieval relevance
-- Embedding model selection affects semantic understanding
-- Storage organization influences search efficiency
-- Metadata preservation enables sophisticated filtering
+#### Why This Stage Matters:  
+- Chunk quality directly impacts retrieval relevance  
+- Embedding model selection affects semantic understanding  
+- Storage organization influences search efficiency  
+- Metadata preservation enables sophisticated filtering  
 
 ### Stage 2: Retrieval (Real-time Query Processing)
 
 The retrieval stage must balance speed and accuracy, returning relevant context quickly enough for real-time applications.
 
-#### Core Operations:
-- **Query Embedding**: Transform user questions into searchable vectors
-- **Similarity Search**: Find semantically related content using cosine similarity
-- **Relevance Ranking**: Order results by relevance scores
-- **Quality Filtering**: Remove low-quality or off-topic chunks
+#### Core Operations:  
+- **Query Embedding**: Transform user questions into searchable vectors  
+- **Similarity Search**: Find semantically related content using cosine similarity  
+- **Relevance Ranking**: Order results by relevance scores  
+- **Quality Filtering**: Remove low-quality or off-topic chunks  
 
 ```python
 # Basic RAG Retriever Implementation
@@ -95,21 +95,21 @@ class RAGRetriever:
 
 **Critical Design Decision**: Using the same embedding model for both indexing and retrieval ensures vector compatibility. Different models create incompatible vector spaces, leading to poor retrieval performance.
 
-#### Why This Stage Matters:
-- Speed directly impacts user experience
-- Relevance determines response quality
-- Ranking algorithms affect information priority
-- Filtering prevents irrelevant context from polluting responses
+#### Why This Stage Matters:  
+- Speed directly impacts user experience  
+- Relevance determines response quality  
+- Ranking algorithms affect information priority  
+- Filtering prevents irrelevant context from polluting responses  
 
 ### Stage 3: Generation (Response Synthesis)
 
 The generation stage requires careful prompt engineering to ensure LLMs stay grounded in retrieved context rather than relying on potentially outdated training data.
 
-#### Core Operations:
-- **Context Grounding**: LLM must base answers on retrieved information
-- **Prompt Engineering**: Well-designed prompts ensure focus on provided context
-- **Response Validation**: Check that outputs are grounded in retrieved content
-- **Source Attribution**: Include references to original documents when possible
+#### Core Operations:  
+- **Context Grounding**: LLM must base answers on retrieved information  
+- **Prompt Engineering**: Well-designed prompts ensure focus on provided context  
+- **Response Validation**: Check that outputs are grounded in retrieved content  
+- **Source Attribution**: Include references to original documents when possible  
 
 ```python
 # Basic RAG Generator Implementation
@@ -134,11 +134,11 @@ class RAGGenerator:
 
 **Key Principle**: The prompt structure explicitly instructs the LLM to base answers on provided context, preventing it from hallucinating information from training data that may be incorrect or outdated.
 
-#### Why This Stage Matters:
-- Context grounding reduces hallucinations significantly
-- Prompt design determines response reliability
-- Validation ensures factual accuracy
-- Source attribution enables verification
+#### Why This Stage Matters:  
+- Context grounding reduces hallucinations significantly  
+- Prompt design determines response reliability  
+- Validation ensures factual accuracy  
+- Source attribution enables verification  
 
 ## Complete RAG System Integration
 
@@ -171,19 +171,19 @@ This architecture ensures consistent embedding models across indexing and retrie
 
 Understanding when RAG excels helps engineers make informed architectural decisions.
 
-### RAG Excels When:
-- Information changes frequently (daily/weekly updates needed)
-- Source attribution and transparency are requirements
-- Working with large, diverse knowledge bases
-- Budget constraints prevent frequent model retraining
-- Accuracy and hallucination reduction are critical priorities
-- Need to maintain separation between model and knowledge
+### RAG Excels When:  
+- Information changes frequently (daily/weekly updates needed)  
+- Source attribution and transparency are requirements  
+- Working with large, diverse knowledge bases  
+- Budget constraints prevent frequent model retraining  
+- Accuracy and hallucination reduction are critical priorities  
+- Need to maintain separation between model and knowledge  
 
-### RAG Success Examples:
-- Healthcare clinical decision support requiring up-to-date research
-- Legal case law retrieval needing precise citations
-- Customer support with evolving product documentation
-- Enterprise document intelligence for internal knowledge bases
+### RAG Success Examples:  
+- Healthcare clinical decision support requiring up-to-date research  
+- Legal case law retrieval needing precise citations  
+- Customer support with evolving product documentation  
+- Enterprise document intelligence for internal knowledge bases  
 
 ```python
 # RAG Decision Framework
@@ -215,11 +215,11 @@ This scoring framework helps systematize the decision between RAG and alternativ
 ## Key Engineering Principles
 
 ### 1. Quality-First Indexing
-The indexing stage sets the quality ceiling for the entire system. Invest in:
-- Structure-aware chunking that preserves document meaning
-- Domain-specific embedding models when available
-- Rich metadata that enables sophisticated filtering
-- Scalable storage solutions for large knowledge bases
+The indexing stage sets the quality ceiling for the entire system. Invest in:  
+- Structure-aware chunking that preserves document meaning  
+- Domain-specific embedding models when available  
+- Rich metadata that enables sophisticated filtering  
+- Scalable storage solutions for large knowledge bases  
 
 ### 2. Consistent Vector Spaces
 Always use the same embedding model for indexing and retrieval to ensure vector compatibility. Model mismatches create incompatible vector spaces that drastically reduce retrieval performance.
@@ -234,25 +234,25 @@ Implement evaluation metrics that assess both retrieval quality (relevance, cove
 
 For production RAG systems:
 
-1. **Quality-First Indexing**: Structure-aware processing with metadata preservation
-2. **Enhanced Retrieval**: Query techniques that bridge semantic gaps
-3. **Context Optimization**: Multi-stage filtering and quality validation
-4. **Continuous Monitoring**: Real-world evaluation and performance tracking
-5. **Hybrid Architecture**: Combine RAG with other techniques based on requirements
+1. **Quality-First Indexing**: Structure-aware processing with metadata preservation  
+2. **Enhanced Retrieval**: Query techniques that bridge semantic gaps  
+3. **Context Optimization**: Multi-stage filtering and quality validation  
+4. **Continuous Monitoring**: Real-world evaluation and performance tracking  
+5. **Hybrid Architecture**: Combine RAG with other techniques based on requirements  
 
 ## Next Steps in Your RAG Journey
 
 This foundation prepares you for more advanced RAG implementations:
 
 ### 📝 Participant Path - Practical Implementation
-Ready to build working RAG systems? Continue with:
-- [📝 RAG Implementation Practice](Session0_RAG_Implementation_Practice.md)
-- [📝 RAG Problem Solving](Session0_RAG_Problem_Solving.md)
+Ready to build working RAG systems? Continue with:  
+- [📝 RAG Implementation Practice](Session0_RAG_Implementation_Practice.md)  
+- [📝 RAG Problem Solving](Session0_RAG_Problem_Solving.md)  
 
 ### ⚙️ Implementer Path - Enterprise Mastery
-Need complete production expertise? Explore:
-- [⚙️ Advanced RAG Patterns](Session0_Advanced_RAG_Patterns.md)
-- [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md)
+Need complete production expertise? Explore:  
+- [⚙️ Advanced RAG Patterns](Session0_Advanced_RAG_Patterns.md)  
+- [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md)  
 
 ### Foundation Complete
 Understanding these fundamentals positions you to build sophisticated RAG systems that combine the reasoning power of LLMs with reliable, up-to-date information retrieval.

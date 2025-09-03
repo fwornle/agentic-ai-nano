@@ -28,9 +28,9 @@ llm -m "claude-sonnet-4" "How many r's in blueberry?"
 
 ### Available Models
 
-- **Claude Sonnet 4**: High-quality reasoning and analysis
-- **GPT-4 variants**: OpenAI's latest models
-- **Other enterprise-approved models**: Additional models as available
+- **Claude Sonnet 4**: High-quality reasoning and analysis  
+- **GPT-4 variants**: OpenAI's latest models  
+- **Other enterprise-approved models**: Additional models as available  
 
 ### Using in Code
 
@@ -71,8 +71,8 @@ For public access, you'll need to configure your own LLM API keys.
 
 ### OpenAI Setup
 
-1. Sign up at [OpenAI](https://platform.openai.com/)
-2. Create an API key in your dashboard
+1. Sign up at [OpenAI](https://platform.openai.com/)  
+2. Create an API key in your dashboard  
 3. Add to your `.env` file:
 
 ```bash
@@ -81,8 +81,8 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ### Anthropic Claude Setup
 
-1. Sign up at [Anthropic](https://console.anthropic.com/)
-2. Create an API key in your console
+1. Sign up at [Anthropic](https://console.anthropic.com/)  
+2. Create an API key in your console  
 3. Add to your `.env` file:
 
 ```bash
@@ -107,7 +107,7 @@ print(response.choices[0].message.content)
 For development without API costs:
 
 - **Ollama**: Run models locally (`ollama pull llama2`)
-- **LM Studio**: User-friendly local LLM interface
-- **GPT4All**: Open-source local models
+- **LM Studio**: User-friendly local LLM interface  
+- **GPT4All**: Open-source local models  
 
 </div>

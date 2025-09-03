@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- Distributed rate limiting with Redis clustering
-- Advanced token bucket algorithms with multiple buckets
-- Dynamic rate limiting based on user behavior
-- Rate limiting analytics and capacity planning
+- Distributed rate limiting with Redis clustering  
+- Advanced token bucket algorithms with multiple buckets  
+- Dynamic rate limiting based on user behavior  
+- Rate limiting analytics and capacity planning  
 
 ## Enterprise Distributed Rate Limiting
 

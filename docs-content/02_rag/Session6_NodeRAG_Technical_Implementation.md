@@ -9,10 +9,10 @@
 
 After completing this module, you will master:
 
-- NodeRAG's three-stage processing pipeline implementation
-- Personalized PageRank for heterogeneous graphs
-- HNSW integration for hybrid similarity-structure search
-- Advanced graph optimization techniques
+- NodeRAG's three-stage processing pipeline implementation  
+- Personalized PageRank for heterogeneous graphs  
+- HNSW integration for hybrid similarity-structure search  
+- Advanced graph optimization techniques  
 
 ## The Three-Stage NodeRAG Processing Pipeline
 

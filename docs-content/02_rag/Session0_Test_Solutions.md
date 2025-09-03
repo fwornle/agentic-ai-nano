@@ -114,32 +114,32 @@ D) Basic similarity matching with cosine distance
 
 ## Performance Scoring
 
-- **8-10 Correct**: Excellent mastery - You have a solid understanding of RAG architecture fundamentals
-- **6-7 Correct**: Good understanding - Minor concepts to review, overall strong foundation
-- **4-5 Correct**: Adequate grasp - Review evolution timeline and technical components
-- **0-3 Correct**: Review recommended - Revisit core concepts before proceeding to implementation
+- **8-10 Correct**: Excellent mastery - You have a solid understanding of RAG architecture fundamentals  
+- **6-7 Correct**: Good understanding - Minor concepts to review, overall strong foundation  
+- **4-5 Correct**: Adequate grasp - Review evolution timeline and technical components  
+- **0-3 Correct**: Review recommended - Revisit core concepts before proceeding to implementation  
 
 ## Key Concepts Review
 
-### Essential RAG Architecture Concepts:
-1. **Three-Stage Pipeline**: Index → Retrieve → Generate
-2. **Evolution Phases**: From simple QA (2017) to Agentic systems (2025)
-3. **Core Problems**: Chunking, semantic gaps, context optimization
-4. **Enhancement Techniques**: HyDE, query expansion, intelligent processing
-5. **Specialization**: Domain-specific adaptations for different use cases
+### Essential RAG Architecture Concepts:  
+1. **Three-Stage Pipeline**: Index → Retrieve → Generate  
+2. **Evolution Phases**: From simple QA (2017) to Agentic systems (2025)  
+3. **Core Problems**: Chunking, semantic gaps, context optimization  
+4. **Enhancement Techniques**: HyDE, query expansion, intelligent processing  
+5. **Specialization**: Domain-specific adaptations for different use cases  
 
-### Critical Success Factors:
-- Quality indexing with intelligent chunking
-- Effective retrieval with semantic enhancement
-- Coherent generation with proper context integration
-- Continuous evaluation and optimization
+### Critical Success Factors:  
+- Quality indexing with intelligent chunking  
+- Effective retrieval with semantic enhancement  
+- Coherent generation with proper context integration  
+- Continuous evaluation and optimization  
 
-### Technology Evolution Timeline:
-- **2017-2019**: Early Dense Retrieval (DrQA, ORQA)
-- **2020**: RAG Foundation (DPR, RAG Paper, REALM, FiD)
-- **2021-2022**: Enhanced Fusion (RAG-Fusion, LLM Integration)
-- **2023**: Adaptive Systems (Self-RAG, CRAG)
-- **2024-2025**: Graph-Based and Agentic RAG
+### Technology Evolution Timeline:  
+- **2017-2019**: Early Dense Retrieval (DrQA, ORQA)  
+- **2020**: RAG Foundation (DPR, RAG Paper, REALM, FiD)  
+- **2021-2022**: Enhanced Fusion (RAG-Fusion, LLM Integration)  
+- **2023**: Adaptive Systems (Self-RAG, CRAG)  
+- **2024-2025**: Graph-Based and Agentic RAG  
 ---
 
 ## 🧭 Navigation
