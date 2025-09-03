@@ -297,6 +297,7 @@ Ready to build modern RAG systems? Continue with:
 Need cutting-edge implementations? Explore:  
 - [⚙️ Advanced RAG Patterns](Session0_Advanced_RAG_Patterns.md)  
 - [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md)  
+
 ---
 
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)

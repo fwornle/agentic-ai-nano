@@ -51,6 +51,7 @@ The `DataProcessingMemory` structure forms the core unit of the memory system, d
 ```python
     priority: DataProcessingMemoryPriority
     context_tags: List
+
 ---
 
 ## Navigation
@@ -58,6 +59,7 @@ The `DataProcessingMemory` structure forms the core unit of the memory system, d
 - [← Previous: Session 1 Module B - Performance Optimization](Session1_ModuleB_Performance_Optimization.md)
 - [↑ Return to Session 1: Bare Metal Agents](Session1_Bare_Metal_Agents.md)
 - [→ Next: Session 1 Module D - Coding Assistant Case Study](Session1_ModuleD_Coding_Assistant_Case_Study.md)
+
 ---
 
 **Next:** [Session 2 - LangChain Foundations →](Session2_LangChain_Foundations.md)

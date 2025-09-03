@@ -183,6 +183,7 @@ For those ready to dive deep into advanced topics:
 
 - ⚙️ [Advanced Orchestration](Session6_Advanced_Orchestration.md) - Complex pipeline patterns  
 - ⚙️ [Production Deployment](Session6_Production_Deployment.md) - Enterprise deployment strategies  
+
 ---
 
 **Next:** [Session 7 - First ADK Agent →](Session7_First_ADK_Agent.md)

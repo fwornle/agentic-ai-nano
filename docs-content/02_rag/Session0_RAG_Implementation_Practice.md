@@ -518,6 +518,7 @@ This implementation foundation prepares you for:
 - Vector database optimization in Session 3  
 - Query enhancement techniques in Session 4  
 - Production evaluation in Session 5  
+
 ---
 
 **Next:** [Session 1 - Basic RAG Implementation →](Session1_Basic_RAG_Implementation.md)

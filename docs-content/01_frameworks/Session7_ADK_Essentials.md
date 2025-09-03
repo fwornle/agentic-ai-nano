@@ -219,6 +219,7 @@ If you can confidently answer these questions, you're ready to progress to more 
 **➡️ Next Path**: [📝 ADK Implementation](Session7_ADK_Implementation.md) or [⚙️ Advanced Systems](Session7_Advanced_ADK_Systems.md)
 
 **📋 Quick Reference**: [ADK Fundamentals Cheat Sheet](../references/adk-fundamentals.md)
+
 ---
 
 **Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)

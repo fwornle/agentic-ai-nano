@@ -339,6 +339,7 @@ You've now explored the historical context that led to modern agent frameworks:
 - ReAct Paper: "Synergizing Reasoning and Acting in Language Models"  
 - Toolformer Paper: "Language Models Can Teach Themselves to Use Tools"  
 - Reflexion Paper: "Language Agents with Verbal Reinforcement Learning"  
+
 ---
 
 **Next:** [Session 1 - Bare Metal Agents →](Session1_Bare_Metal_Agents.md)

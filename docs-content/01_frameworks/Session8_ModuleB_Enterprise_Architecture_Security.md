@@ -474,6 +474,7 @@ Add health checks and security context:
 Create service and ingress configurations:
 
 ```yaml
+
 ---
 apiVersion: v1
 kind: Service
@@ -560,6 +561,7 @@ roleRef:
 Network policies for traffic isolation:
 
 ```yaml
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -598,6 +600,7 @@ spec:
 Pod security standards configuration:
 
 ```yaml
+
 ---
 apiVersion: v1
 kind: Pod
@@ -719,6 +722,7 @@ async def run_production_readiness_check():
             status = "✅" if result else "❌"
             print(f"  {status} {check_name}: {result}")
 ```
+
 ---
 
 **Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)

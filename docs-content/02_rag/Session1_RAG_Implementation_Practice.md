@@ -745,6 +745,7 @@ You now have hands-on experience with:
 - Complete RAG system integration with comprehensive quality assurance  
 
 These practical skills enable you to build and deploy RAG systems that handle real-world complexity and scale.
+
 ---
 
 **Next:** [Session 2 - Advanced Chunking & Preprocessing →](Session2_Advanced_Chunking_Preprocessing.md)

@@ -55,6 +55,7 @@ class K8sDataProcessingAgentCluster:
     cluster_name: str
     namespace: str = "agno-data-agents"
     node_pools: List
+
 ---
 
 ## 📝 Multiple Choice Test - Module B
@@ -100,6 +101,7 @@ D) The system sends alerts but continues normal scaling
 - `src/session8/k8s_native_architecture.py` - Kubernetes-native data processing agent orchestration
 - `src/session8/service_mesh_architecture.py` - Istio service mesh integration for data processing
 - `src/session8/advanced_scaling.py` - Predictive and cost-aware scaling strategies for data processing workloads
+
 ---
 
 **Next:** [Session 9 - Multi-Agent Patterns →](Session9_Multi_Agent_Patterns.md)

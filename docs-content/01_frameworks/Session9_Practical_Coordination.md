@@ -470,6 +470,7 @@ class ETLHierarchicalCoordinator(HierarchicalDataCoordinator):
         # 3. Monitor execution and aggregate results
         pass
 ```
+
 ---
 
 **Next:** [Session 10 - Enterprise Integration & Production Deployment →](Session10_Enterprise_Integration_Production_Deployment.md)

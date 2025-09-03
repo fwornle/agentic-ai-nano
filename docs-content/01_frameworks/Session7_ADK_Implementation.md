@@ -459,6 +459,7 @@ Before moving forward, try implementing:
 **➡️ Next**: [⚙️ Advanced ADK Systems](Session7_Advanced_ADK_Systems.md) or [Session 8](Session8_Agno_Production_Ready_Agents.md)
 
 **📋 Learning Path Summary**: 🎯 Essentials ✅ → 📝 Implementation ✅ → ⚙️ Advanced Systems
+
 ---
 
 **Next:** [Session 8 - Agno Production-Ready Agents →](Session8_Agno_Production_Ready_Agents.md)

@@ -581,6 +581,7 @@ class ComplianceMonitor:
 ```
 
 Automated compliance monitoring ensures continuous adherence to security frameworks.
+
 ---
 
 **Next:** [Session 6 - ACP Fundamentals →](Session6_ACP_Fundamentals.md)
