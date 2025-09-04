@@ -841,7 +841,7 @@ D) Log file analysis only
 
 ## 🧭 Navigation
 
-**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
-**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
+**Previous:** [Session 4 - Team Orchestration →](Session4_CrewAI_Fundamentals.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_System_Assembly_Practice.md)
 
 ---

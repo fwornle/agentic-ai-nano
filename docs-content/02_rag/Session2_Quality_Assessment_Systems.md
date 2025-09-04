@@ -888,7 +888,7 @@ class QualityDashboard:
 
 ## 🧭 Navigation
 
-**Previous:** [Session 1 - Foundations →](Session1_*.md)  
-**Next:** [Session 3 - Advanced Patterns →](Session3_*.md)
+**Previous:** [Session 1 - Foundations →](Session1_RAG_Essentials.md)  
+**Next:** [Session 3 - Advanced Patterns →](Session3_Performance_Optimization.md)
 
 ---

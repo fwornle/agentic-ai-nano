@@ -765,7 +765,7 @@ D) No error handling
 
 ## 🧭 Navigation
 
-**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
-**Next:** [Session 7 - Agent Systems →](Session7_*.md)
+**Previous:** [Session 5 - Type-Safe Development →](Session5_PydanticAI_Type_Safe_Agents.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_ADK_Essentials.md)
 
 ---

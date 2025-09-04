@@ -1786,13 +1786,13 @@ B) State recovery and resumption after failures
 C) User experience improvement  
 D) Reduced memory usage  
 
-[**View Module B Test Solutions →**](Session3_ModuleB_Test_Solutions.md)
+[**View Module B Test Solutions →**](Session3_Test_Solutions.md)
 
 ---
 
 ## 🧭 Navigation
 
-**Previous:** [Session 2 - Implementation →](Session2_*.md)  
-**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
+**Previous:** [Session 2 - Implementation →](Session2_Production_Implementation.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_Production_MCP_Deployment.md)
 
 ---

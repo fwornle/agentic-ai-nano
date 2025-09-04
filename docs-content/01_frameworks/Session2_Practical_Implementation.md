@@ -711,7 +711,7 @@ Ready for enterprise-grade patterns and sophisticated architectures?
 
 ## 🧭 Navigation
 
-**Previous:** [Session 1 - Foundations →](Session1_*.md)  
-**Next:** [Session 3 - Advanced Patterns →](Session3_*.md)
+**Previous:** [Session 1 - Foundations →](Session1_Bare_Metal_Agents.md)  
+**Next:** [Session 3 - Advanced Patterns →](Session3_Multi_Agent_Implementation.md)
 
 ---

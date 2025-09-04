@@ -575,6 +575,6 @@ D) Planning (for multi-step workflows)
 
 ## 🧭 Navigation
 
-**Next:** [Session 1 - Foundations →](Session1_*.md)
+**Next:** [Session 1 - Foundations →](Session1_Bare_Metal_Agents.md)
 
 ---

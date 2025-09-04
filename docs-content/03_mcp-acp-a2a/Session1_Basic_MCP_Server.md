@@ -441,7 +441,7 @@ D) `.server`
 
 ## 🧭 Navigation
 
-**Previous:** [Session 0 - Introduction →](Session0_*.md)  
-**Next:** [Session 2 - Implementation →](Session2_*.md)
+**Previous:** [Session 0 - Introduction →](Session0_Introduction_to_MCP_ACP_A2A.md)  
+**Next:** [Session 2 - Implementation →](Session2_Production_Implementation.md)
 
 ---

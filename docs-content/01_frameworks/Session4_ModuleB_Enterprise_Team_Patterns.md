@@ -99,7 +99,7 @@ B) Every 5 minutes with 1-minute retry on errors
 C) Every 10 minutes  
 D) Only when data quality alerts are triggered  
 
-[View Solutions →](Session4_ModuleB_Test_Solutions.md)
+[View Solutions →](Session4_Test_Solutions.md)
 
 **🗂️ Source Files for Module B:**
 - `src/session4/enterprise_data_tools.py` - Production data processing tool implementations
@@ -110,7 +110,7 @@ D) Only when data quality alerts are triggered
 
 ## 🧭 Navigation
 
-**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
-**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
+**Previous:** [Session 3 - Advanced Patterns →](Session3_Multi_Agent_Implementation.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_PydanticAI_Type_Safe_Agents.md)
 
 ---

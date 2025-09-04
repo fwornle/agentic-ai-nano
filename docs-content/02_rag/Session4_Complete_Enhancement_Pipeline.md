@@ -1008,7 +1008,7 @@ if __name__ == "__main__":
 
 ## 🧭 Navigation
 
-**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
-**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
+**Previous:** [Session 3 - Advanced Patterns →](Session3_Performance_Optimization.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_RAG_Evaluation_Quality_Assessment.md)
 
 ---

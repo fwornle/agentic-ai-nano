@@ -180,7 +180,7 @@ D) They require fewer computational resources
 
 ## 🧭 Navigation
 
-**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
-**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
+**Previous:** [Session 3 - Advanced Patterns →](Session3_Multi_Agent_Implementation.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_PydanticAI_Type_Safe_Agents.md)
 
 ---

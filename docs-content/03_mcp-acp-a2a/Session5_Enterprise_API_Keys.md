@@ -509,7 +509,7 @@ Bulk operations enable efficient management of large numbers of API keys.
 
 ## 🧭 Navigation
 
-**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
-**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
+**Previous:** [Session 4 - Team Orchestration →](Session4_Production_MCP_Deployment.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_ACP_Fundamentals.md)
 
 ---

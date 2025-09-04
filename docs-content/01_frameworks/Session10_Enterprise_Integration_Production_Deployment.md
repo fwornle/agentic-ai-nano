@@ -1070,6 +1070,6 @@ D) System shutdown
 
 ## 🧭 Navigation
 
-**Previous:** [Session 9 - Multi-Agent Coordination →](Session9_*.md)
+**Previous:** [Session 9 - Multi-Agent Coordination →](Session9_Practical_Coordination.md)
 
 ---
