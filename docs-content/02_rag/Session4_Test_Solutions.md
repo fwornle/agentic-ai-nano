@@ -46,6 +46,6 @@ D) Keyword-heavy prompts
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 4 Test Questions →](Session4_Complete_Enhancement_Pipeline.md#multiple-choice-test-session-4)
+**Back to Test:** [Session 4 Test Questions →](Session4_ModuleA_Query_Understanding.md#multiple-choice-test-session-4)
 
 ---

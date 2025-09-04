@@ -120,9 +120,6 @@ You have mastered the full spectrum of RAG architectures and can implement sophi
 - **Need enterprise solutions?** → Explore [⚙️ Advanced RAG Patterns](Session0_Advanced_RAG_Patterns.md)  
 - **Specialized domain work?** → Study [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md)  
 
-#
-
-
 ## 💡 Learning Path Recommendations
 
 ### For Software Engineers:

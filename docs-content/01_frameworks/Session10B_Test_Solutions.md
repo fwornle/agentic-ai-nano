@@ -32,6 +32,6 @@
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 10 Test Questions →](Session10_Enterprise_Integration_Production_Deployment.md#multiple-choice-test-session-10)
+**Back to Test:** [Session 10 Test Questions →](Session10_ModuleB_Enterprise_Operations_Scaling.md#multiple-choice-test-session-10)
 
 ---

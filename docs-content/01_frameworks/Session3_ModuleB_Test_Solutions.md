@@ -30,6 +30,6 @@ recovery_actions =
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 3 Test Questions →](Session3_Multi_Agent_Implementation.md#multiple-choice-test-session-3)
+**Back to Test:** [Session 3 Test Questions →](Session3_ModuleA_Advanced_Orchestration_Patterns.md#multiple-choice-test-session-3)
 
 ---

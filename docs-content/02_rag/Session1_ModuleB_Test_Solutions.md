@@ -46,6 +46,6 @@ D) Only resource utilization
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 1 Test Questions →](Session1_Basic_RAG_Implementation.md#multiple-choice-test-session-1)
+**Back to Test:** [Session 1 Test Questions →](Session1_ModuleB_Enterprise_Deployment.md#multiple-choice-test-session-1)
 
 ---
