@@ -138,7 +138,11 @@ Session 4: CrewAI Team Orchestration Hub
 └── ⚙️ Session4_ModuleB_Enterprise_Team_Patterns.md
 ```
 
-## 📝 Multiple Choice Test
+
+---
+
+
+## 📝 Multiple Choice Test - Session 4
 
 Test your understanding of CrewAI team orchestration:
 

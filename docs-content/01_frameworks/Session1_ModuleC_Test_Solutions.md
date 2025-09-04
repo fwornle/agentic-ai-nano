@@ -1,6 +1,7 @@
 # Session 1: Module C - Complex State Management - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What four pieces of information does the `ConversationMemory` dataclass track for intelligent memory management?  
 A) Content, priority, embedding, and context_tags  
@@ -43,6 +44,11 @@ D) User-specified preferences only
 **Explanation:** The `_should_activate_layer` method evaluates multiple factors: the layer's ContextScope (immediate, session, historical, domain), whether the message content matches activation conditions, provided context hints, domain keywords, and session attributes. This multi-factor approach ensures relevant context is activated dynamically based on current conversational needs.
 
 **🧭 Navigation:**
+
+---
+
+
+[View Solutions →](Session1_Test_Solutions.md)
 
 ---
 

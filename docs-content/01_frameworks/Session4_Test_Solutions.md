@@ -1,6 +1,7 @@
 # Session 4: CrewAI Team Orchestration - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 4
 
 **Question 1:** What is CrewAI's primary strength compared to other agent frameworks?  
 
@@ -98,8 +99,13 @@ D) Cloud integration
 
 ---
 
+
+[View Solutions →](Session4_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
+**Back to Test:** [Session 4 Test Questions →](Session4_Team_Building_Practice.md#multiple-choice-test)
 
 ---

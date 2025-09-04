@@ -1,6 +1,7 @@
 # Session 0: Module A Historical Context & Evolution - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 0
 
 **Question 1:** What was the primary limitation of early AI systems that drove the development of agentic architectures?  
 A) Expensive API costs  
@@ -41,6 +42,11 @@ C) 30%
 D) 20%  
 
 **Explanation:** As of 2024-2025, approximately 40% of enterprise customer service operations have adopted agentic systems, representing significant industry adoption of agent technologies. This adoption rate reflects the proven value of agents in handling complex customer interactions and reducing operational costs.
+
+---
+
+
+[View Solutions →](Session0_Test_Solutions.md)
 
 ---
 

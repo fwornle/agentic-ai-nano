@@ -1,6 +1,7 @@
 # Session 7: Agent to Agent Communication - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 7
 
 **Question 1:** What is the primary purpose of Agent-to-Agent (A2A) communication?  
 
@@ -326,8 +327,13 @@ This A2A customer service system demonstrates distributed coordination where age
 
 ---
 
+
+[View Solutions →](Session7_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
+**Back to Test:** [Session 7 Test Questions →](Session7_Advanced_Choreography.md#multiple-choice-test)
 
 ---

@@ -269,7 +269,11 @@ The ensemble approach combines three complementary detection methods. Isolation 
 
 Ensemble scoring reduces false positives by requiring consensus from multiple detectors. Anomaly classification helps identify the root cause (performance, security, data quality), while recommended actions provide automated or semi-automated response suggestions for operations teams.
 
-## Multiple Choice Test - Module B
+
+---
+
+
+## 📝 Multiple Choice Test - Session 5
 
 **Question 1:** In enterprise RAG monitoring, which SLA metric should have the highest priority for alerts?  
 A) Storage usage  
@@ -301,7 +305,7 @@ B) Data processing events, compliance checks, and user access records
 C) Performance metrics only  
 D) Configuration changes only  
 
-[View Solutions →](Session5_ModuleB_Test_Solutions.md)
+[View Solutions →](Session5_Test_Solutions.md)
 
 ---
 

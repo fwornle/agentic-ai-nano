@@ -1,6 +1,7 @@
 # Session 0: Introduction to MCP, ACP, and A2A - Test Solutions
 
-## 📝 Multiple Choice Test - Answer Key
+
+## 📝 Multiple Choice Test - Session 0
 
 **Question 1:** What is the primary purpose of the Model Context Protocol (MCP)?  
 
@@ -126,8 +127,13 @@ If you missed questions in these areas, review the corresponding sections:
 
 ---
 
+
+[View Solutions →](Session0_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 0 Test Questions →](Session0_*.md#multiple-choice-test)
+**Back to Test:** [Session 0 Test Questions →](Session0_Introduction_to_MCP_ACP_A2A.md#multiple-choice-test)
 
 ---

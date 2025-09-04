@@ -1,6 +1,7 @@
 # Session 3: Advanced Index Algorithms - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 3
 
 **Question 1:** What is the key advantage of custom HNSW implementation for RAG?  
 A) Reduced memory usage  
@@ -41,6 +42,11 @@ C) It uses less memory
 D) It's simpler to implement  
 
 **Explanation:** RAG-optimized search is designed specifically for retrieval-augmented generation workflows, where the goal isn't just finding similar content but finding the most useful content for answering questions. It combines semantic similarity with keyword boosting for precision, recency weighting for fresh information, and content diversity considerations for comprehensive context. This multi-signal fusion creates retrieval results optimized for generation quality rather than just similarity scoring.
+
+---
+
+
+[View Solutions →](Session3_Test_Solutions.md)
 
 ---
 

@@ -1,6 +1,7 @@
 # Session 2: Building a Secure File System MCP Server - Test Solutions
 
-## 📝 Multiple Choice Test - Answer Key
+
+## 📝 Multiple Choice Test - Session 2
 
 **Question 1:** What is the primary purpose of the sandbox in our file system server?  
 
@@ -244,8 +245,13 @@ If you missed questions in these areas, review the corresponding sections:
 
 ---
 
+
+[View Solutions →](Session2_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
+**Back to Test:** [Session 2 Test Questions →](Session2_Production_Implementation.md#multiple-choice-test)
 
 ---

@@ -1,6 +1,7 @@
 # Session 6: Production GraphRAG Systems - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 6
 
 **Question 1:** What is the primary benefit of distributed GraphRAG architectures?  
 
@@ -71,6 +72,11 @@ D) Query failures or response time degradation affecting user experience ✅
 
 ## Answer Summary  
 1. C  2. B  3. C  4. B  5. B
+
+---
+
+
+[View Solutions →](Session6_Test_Solutions.md)
 
 ---
 

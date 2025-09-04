@@ -1,6 +1,7 @@
 # Session 10: Enterprise Integration & Production Deployment - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 10
 
 **Question 1:** What is the primary challenge in enterprise agent integration?  
 
@@ -98,8 +99,13 @@ D) Immediate restart
 
 ---
 
+
+[View Solutions →](Session10_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 10 Test Questions →](Session10_*.md#multiple-choice-test)
+**Back to Test:** [Session 10 Test Questions →](Session10_Enterprise_Integration_Production_Deployment.md#multiple-choice-test)
 
 ---

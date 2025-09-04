@@ -1,6 +1,7 @@
 # Session 3: LangChain MCP Integration - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 3
 
 **Question 1:** What is the primary advantage of using LangChain MCP adapters?  
 
@@ -266,8 +267,13 @@ if __name__ == "__main__":
 
 ---
 
+
+[View Solutions →](Session3_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
+**Back to Test:** [Session 3 Test Questions →](Session3_LangChain_MCP_Integration.md#multiple-choice-test)
 
 ---

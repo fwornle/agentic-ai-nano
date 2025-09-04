@@ -553,7 +553,21 @@ You've now mastered advanced type systems in PydanticAI for data engineering, in
 ✅ **Advanced Error Handling**: Created intelligent error reporting with data quality suggestions and analytics
 ✅ **Data Processing Middleware**: Built performance-optimized validation systems with caching for distributed data systems
 
-## 📝 Multiple Choice Test - Module A
+
+### Next Steps  
+- **Continue to Module B**: [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md) for production deployment patterns  
+- **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  
+- **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)  
+
+**🗂️ Source Files for Module A:**  
+- `src/session5/advanced_validation.py` - Complex validation patterns for data processing
+- `src/session5/enterprise_validation.py` - Enterprise streaming data validation
+- `src/session5/error_handling.py` - Advanced error handling systems for data quality
+
+---
+
+
+## 📝 Multiple Choice Test - Session 5
 
 Test your understanding of advanced type systems and validation patterns:
 
@@ -587,17 +601,7 @@ B) Error type and field only
 C) Complete error report with data quality impact, suggestions, and performance metrics  
 D) HTTP status code only  
 
-[View Solutions →](Session5_ModuleA_Test_Solutions.md)
-
-### Next Steps  
-- **Continue to Module B**: [Enterprise PydanticAI](Session5_ModuleB_Enterprise_PydanticAI.md) for production deployment patterns  
-- **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  
-- **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)  
-
-**🗂️ Source Files for Module A:**  
-- `src/session5/advanced_validation.py` - Complex validation patterns for data processing
-- `src/session5/enterprise_validation.py` - Enterprise streaming data validation
-- `src/session5/error_handling.py` - Advanced error handling systems for data quality
+[View Solutions →](Session5_Test_Solutions.md)
 
 ---
 

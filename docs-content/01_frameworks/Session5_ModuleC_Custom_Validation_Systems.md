@@ -697,7 +697,23 @@ You've now mastered custom validation systems and resilient error handling for d
 ✅ **Circuit Breaker Patterns**: Created resilient data service protection with automatic recovery optimized for data pipelines
 ✅ **Data Service Integration**: Built robust integration patterns with comprehensive error handling for data processing environments
 
-## 📝 Multiple Choice Test - Module C
+
+### Next Steps
+
+- **Continue to Module D**: [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md) for comprehensive testing strategies for data processing systems  
+- **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  
+- **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)  
+
+**🗂️ Source Files for Module C:**
+
+- `src/session5/error_management.py` - Complete error handling system for data processing
+- `src/session5/retry_strategies.py` - Intelligent retry implementations for data systems
+- `src/session5/circuit_breaker.py` - Circuit breaker for data service resilience
+
+---
+
+
+## 📝 Multiple Choice Test - Session 5
 
 Test your understanding of custom validation systems and error handling for data processing:
 
@@ -731,19 +747,7 @@ B) Until 2 consecutive test requests succeed with 30-second recovery timeout opt
 C) Indefinitely  
 D) 1 minute exactly  
 
-[View Solutions →](Session5_ModuleC_Test_Solutions.md)
-
-### Next Steps
-
-- **Continue to Module D**: [Testing & Benchmarking](Session5_ModuleD_Testing_Benchmarking.md) for comprehensive testing strategies for data processing systems  
-- **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  
-- **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)  
-
-**🗂️ Source Files for Module C:**
-
-- `src/session5/error_management.py` - Complete error handling system for data processing
-- `src/session5/retry_strategies.py` - Intelligent retry implementations for data systems
-- `src/session5/circuit_breaker.py` - Circuit breaker for data service resilience
+[View Solutions →](Session5_Test_Solutions.md)
 
 ---
 

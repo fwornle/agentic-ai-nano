@@ -1102,7 +1102,33 @@ Overall quality scoring aggregates individual check results for comprehensive as
 
 Individual quality check implementations provide specific data validation results. Completeness checks assess missing values while accuracy checks evaluate format compliance and range validation with actionable recommendations.
 
-## 📝 Multiple Choice Test - Module A
+
+## Module Summary
+
+You've now mastered advanced LangChain patterns for production data systems:
+
+✅ **Complex Multi-Agent Data Workflows**: Built sophisticated orchestration systems with specialized data agents
+✅ **Custom Data Processing Chain Development**: Created reusable chain components with advanced logic and validation
+✅ **Advanced Data Tool Patterns**: Implemented production-ready tools with state management and error recovery
+✅ **Enterprise Data Architecture**: Designed scalable patterns for complex data processing applications
+
+### Next Steps
+
+- **Continue to Module B**: [Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md) for enterprise data system deployment
+- **Continue to Module C**: [Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md) for specialized data processing tools
+- **Return to Core**: [Session 2 Main](Session2_LangChain_Foundations.md)
+- **Advance to Session 3**: [LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)
+
+**🗂️ Source Files for Module A:**
+
+- `src/session2/multi_agent_workflows.py` - Complex data agent coordination systems
+- `src/session2/custom_chains.py` - Custom chain implementations for data processing
+- `src/session2/advanced_tools.py` - Production-ready data tool patterns
+
+---
+
+
+## 📝 Multiple Choice Test - Session 2
 
 Test your understanding of advanced LangChain patterns for data engineering:
 
@@ -1136,29 +1162,7 @@ B) Pattern recognition only
 C) Combines ingestion and analytics results into comprehensive ML workflows  
 D) Error handling and recovery  
 
-[View Solutions →](Session2_ModuleA_Test_Solutions.md)
-
-## Module Summary
-
-You've now mastered advanced LangChain patterns for production data systems:
-
-✅ **Complex Multi-Agent Data Workflows**: Built sophisticated orchestration systems with specialized data agents
-✅ **Custom Data Processing Chain Development**: Created reusable chain components with advanced logic and validation
-✅ **Advanced Data Tool Patterns**: Implemented production-ready tools with state management and error recovery
-✅ **Enterprise Data Architecture**: Designed scalable patterns for complex data processing applications
-
-### Next Steps
-
-- **Continue to Module B**: [Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md) for enterprise data system deployment
-- **Continue to Module C**: [Custom Tool Development](Session2_ModuleC_Custom_Tool_Development.md) for specialized data processing tools
-- **Return to Core**: [Session 2 Main](Session2_LangChain_Foundations.md)
-- **Advance to Session 3**: [LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)
-
-**🗂️ Source Files for Module A:**
-
-- `src/session2/multi_agent_workflows.py` - Complex data agent coordination systems
-- `src/session2/custom_chains.py` - Custom chain implementations for data processing
-- `src/session2/advanced_tools.py` - Production-ready data tool patterns
+[View Solutions →](Session2_Test_Solutions.md)
 
 ---
 

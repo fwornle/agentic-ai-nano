@@ -1726,7 +1726,11 @@ You've now mastered production multi-agent data processing systems:
 - `src/session9/production/autoscaling_system.py` - Intelligent auto-scaling for data processing workloads
 - `src/session9/production/monitoring_system.py` - Comprehensive monitoring and observability stack
 
-## 📝 Multiple Choice Test - Module B
+
+---
+
+
+## 📝 Multiple Choice Test - Session 9
 
 Test your understanding of production multi-agent data processing systems:
 
@@ -1772,7 +1776,7 @@ B) Verify agent readiness and liveness for data processing workloads
 C) Check network connectivity only  
 D) Measure CPU temperature  
 
-[View Solutions →](Session9B_Test_Solutions.md)
+[View Solutions →](Session9_Test_Solutions.md)
 
 ---
 

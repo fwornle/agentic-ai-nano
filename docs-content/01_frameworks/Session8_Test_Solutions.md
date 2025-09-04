@@ -1,6 +1,7 @@
 # Session 8: Agno Production-Ready Agents - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 8
 
 **Question 1:** What is Agno's primary design philosophy?  
 
@@ -205,8 +206,13 @@ D) Single environment support
 
 ---
 
+
+[View Solutions →](Session8_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 8 Test Questions →](Session8_*.md#multiple-choice-test)
+**Back to Test:** [Session 8 Test Questions →](Session8_Agno_Production_Ready_Agents.md#multiple-choice-test)
 
 ---

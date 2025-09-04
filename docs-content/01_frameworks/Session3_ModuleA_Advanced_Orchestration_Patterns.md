@@ -1241,7 +1241,17 @@ You've now mastered advanced orchestration patterns for LangGraph workflows opti
 - **Return to Core**: [Session 3 Main](Session3_LangGraph_Multi_Agent_Workflows.md)  
 - **Advance to Session 4**: [CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)  
 
-## 📝 Multiple Choice Test - Module A
+
+**🗂️ Source Files for Module A:**
+
+- [`src/session3/parallel_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/parallel_workflow.py) - Advanced parallel execution patterns
+- [`src/session3/dynamic_agent_generation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/dynamic_agent_generation.py) - Runtime agent creation systems
+- [`src/session3/orchestration_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/orchestration_patterns.py) - Sophisticated coordination strategies
+
+---
+
+
+## 📝 Multiple Choice Test - Session 3
 
 Test your understanding of advanced orchestration patterns for data processing:
 
@@ -1275,13 +1285,7 @@ B) Transformation type and schema mapping
 C) Ingestion source, batch size, data format, and schema validation  
 D) Quality threshold and response time target  
 
-[View Solutions →](Session3_ModuleA_Test_Solutions.md)
-
-**🗂️ Source Files for Module A:**
-
-- [`src/session3/parallel_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/parallel_workflow.py) - Advanced parallel execution patterns
-- [`src/session3/dynamic_agent_generation.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/dynamic_agent_generation.py) - Runtime agent creation systems
-- [`src/session3/orchestration_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/orchestration_patterns.py) - Sophisticated coordination strategies
+[View Solutions →](Session3_Test_Solutions.md)
 
 ---
 

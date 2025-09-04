@@ -369,6 +369,10 @@ Implement this tool to reinforce MCP patterns while building advanced functional
 - [JSON Schema Guide](https://json-schema.org/learn/) - Understanding schema validation for MCP tools  
 - [Python Type Hints](https://docs.python.org/3/library/typing.html) - Essential for automatic schema generation  
 
+
+---
+
+
 ## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What are the three core capabilities that MCP servers can expose?  

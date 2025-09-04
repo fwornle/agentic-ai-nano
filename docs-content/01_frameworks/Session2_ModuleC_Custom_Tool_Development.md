@@ -1069,7 +1069,32 @@ Exception handling ensures comprehensive error tracking with detailed failure in
 
 Tool execution within DAG workflow includes comprehensive error handling, result tracking, and context management. Success/failure tracking and conditional stopping enable robust workflow execution.
 
-## 📝 Multiple Choice Test - Module C
+
+## Module Summary
+
+You've now mastered custom tool development for enterprise data processing systems:
+
+✅ **Advanced Tool Architecture**: Built sophisticated tool foundations with comprehensive execution context and result management
+✅ **Specialized Data Processing Tools**: Developed enterprise-grade tools for data warehouses, streaming data, and ML pipelines
+✅ **Tool Integration & Orchestration**: Created advanced workflow orchestration with DAG-based execution and dependency management
+✅ **Production-Ready Patterns**: Implemented robust error handling, caching, retry logic, and performance monitoring
+
+### Next Steps  
+- **Continue to Module D**: [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) for data system optimization and observability  
+- **Return to Core**: [Session 2 Main](Session2_LangChain_Foundations.md)  
+- **Advance to Session 3**: [LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)  
+
+**🗂️ Source Files for Module C:**  
+- `src/session2/tool_foundations.py` - Core tool development patterns and architecture
+- `src/session2/data_warehouse_tools.py` - Enterprise data warehouse integration tools
+- `src/session2/streaming_data_tools.py` - Real-time streaming data processing tools
+- `src/session2/ml_pipeline_tools.py` - Machine learning pipeline integration tools
+- `src/session2/tool_orchestration.py` - Advanced tool workflow orchestration systems
+
+---
+
+
+## 📝 Multiple Choice Test - Session 2
 
 Test your understanding of custom tool development for data engineering systems:
 
@@ -1103,28 +1128,7 @@ B) Connection pooling, query optimization, result caching, and security validati
 C) Just connection management  
 D) Only result formatting  
 
-[View Solutions →](Session2_ModuleC_Test_Solutions.md)
-
-## Module Summary
-
-You've now mastered custom tool development for enterprise data processing systems:
-
-✅ **Advanced Tool Architecture**: Built sophisticated tool foundations with comprehensive execution context and result management
-✅ **Specialized Data Processing Tools**: Developed enterprise-grade tools for data warehouses, streaming data, and ML pipelines
-✅ **Tool Integration & Orchestration**: Created advanced workflow orchestration with DAG-based execution and dependency management
-✅ **Production-Ready Patterns**: Implemented robust error handling, caching, retry logic, and performance monitoring
-
-### Next Steps  
-- **Continue to Module D**: [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) for data system optimization and observability  
-- **Return to Core**: [Session 2 Main](Session2_LangChain_Foundations.md)  
-- **Advance to Session 3**: [LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)  
-
-**🗂️ Source Files for Module C:**  
-- `src/session2/tool_foundations.py` - Core tool development patterns and architecture
-- `src/session2/data_warehouse_tools.py` - Enterprise data warehouse integration tools
-- `src/session2/streaming_data_tools.py` - Real-time streaming data processing tools
-- `src/session2/ml_pipeline_tools.py` - Machine learning pipeline integration tools
-- `src/session2/tool_orchestration.py` - Advanced tool workflow orchestration systems
+[View Solutions →](Session2_Test_Solutions.md)
 
 ---
 

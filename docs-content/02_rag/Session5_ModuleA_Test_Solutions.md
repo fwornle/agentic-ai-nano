@@ -1,6 +1,7 @@
 # Session 5: Advanced Evaluation Metrics - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 5
 
 **Question 1:** What is the primary advantage of BERTScore over BLEU for RAG evaluation?  
 
@@ -71,6 +72,11 @@ D) User interface quality
 
 ## Answer Summary  
 1. B  2. B  3. B  4. B  5. B
+
+---
+
+
+[View Solutions →](Session5_Test_Solutions.md)
 
 ---
 

@@ -1,6 +1,7 @@
 # Session 7: ADK Enterprise Agent Development - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 7
 
 **Question 1:** What is the primary advantage of Google's ADK over other agent frameworks?  
 
@@ -98,8 +99,13 @@ D) On-premises only
 
 ---
 
+
+[View Solutions →](Session7_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
+**Back to Test:** [Session 7 Test Questions →](Session7_First_ADK_Agent.md#multiple-choice-test)
 
 ---

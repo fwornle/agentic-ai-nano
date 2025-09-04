@@ -7,7 +7,11 @@ You've implemented production-grade vector search with HNSW indexing and hybrid 
 
 This module teaches you to implement custom indexing algorithms that understand RAG-specific needs: semantic clustering for topic-focused retrieval, dynamic parameter optimization that adapts to query patterns, and multi-signal ranking that combines semantic similarity with keyword matching and recency weighting. These aren't just performance optimizations – they're intelligence upgrades that make your system fundamentally better at finding the right information for generation.
 
-## 📝 Multiple Choice Test - Module A
+
+---
+
+
+## 📝 Multiple Choice Test - Session 3
 
 Test your understanding of advanced index algorithms:
 
@@ -41,7 +45,7 @@ B) It combines semantic similarity with domain-specific factors like keywords an
 C) It uses less memory  
 D) It's simpler to implement  
 
-[View Solutions →](Session3_ModuleA_Test_Solutions.md)
+[View Solutions →](Session3_Test_Solutions.md)
 
 ---
 
