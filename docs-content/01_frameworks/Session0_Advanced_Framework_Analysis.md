@@ -276,6 +276,6 @@ Proactive error handling and alerting enable rapid response to system issues bef
 
 ## 🧭 Navigation
 
-**Next:** [Session 1 - Foundations →](Session1_*.md)
+**Next:** [Session 1 - Foundations →](Session1_Bare_Metal_Agents.md)
 
 ---

@@ -416,7 +416,7 @@ This workflow system provides several crucial benefits over simple agent approac
 
 ## 🧭 Navigation
 
-**Previous:** [Session 2 - Implementation →](Session2_*.md)  
-**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
+**Previous:** [Session 2 - Implementation →](Session2_Production_Implementation.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_Production_MCP_Deployment.md)
 
 ---

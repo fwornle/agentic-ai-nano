@@ -523,6 +523,6 @@ This implementation foundation prepares you for:
 
 ## 🧭 Navigation
 
-**Next:** [Session 1 - Foundations →](Session1_*.md)
+**Next:** [Session 1 - Foundations →](Session1_RAG_Essentials.md)
 
 ---

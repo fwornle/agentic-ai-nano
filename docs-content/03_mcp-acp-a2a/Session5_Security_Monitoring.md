@@ -586,7 +586,7 @@ Automated compliance monitoring ensures continuous adherence to security framewo
 
 ## 🧭 Navigation
 
-**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
-**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
+**Previous:** [Session 4 - Team Orchestration →](Session4_Production_MCP_Deployment.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_ACP_Fundamentals.md)
 
 ---

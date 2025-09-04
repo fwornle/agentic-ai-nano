@@ -213,7 +213,7 @@ If you can confidently answer these questions, you're ready to progress to more 
 ## 🧭 Navigation
 
 **Previous:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)  
-**Next:** [Session 8 - Production Ready →](Session8_*.md)
+**Next:** [Session 8 - Production Ready →](Session8_Agno_Production_Ready_Agents.md)
 
 **Module Home**: [Session 7 Overview →](Session7_First_ADK_Agent.md)  
 **Next Paths**: [📝 ADK Implementation →](Session7_ADK_Implementation.md) | [⚙️ Advanced Systems →](Session7_Advanced_ADK_Systems.md)

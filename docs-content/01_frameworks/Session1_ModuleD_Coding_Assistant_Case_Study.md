@@ -28,7 +28,7 @@ You're not just learning theory - you're examining a system that handles the sam
 
 ## 🧭 Navigation
 
-**Previous:** [Session 0 - Introduction →](Session0_*.md)  
-**Next:** [Session 2 - Implementation →](Session2_*.md)
+**Previous:** [Session 0 - Introduction →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)  
+**Next:** [Session 2 - Implementation →](Session2_LangChain_Foundations.md)
 
 ---

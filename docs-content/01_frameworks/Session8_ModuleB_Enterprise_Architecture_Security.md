@@ -721,7 +721,7 @@ async def run_production_readiness_check():
 
 ## 🧭 Navigation
 
-**Previous:** [Session 7 - Agent Systems →](Session7_*.md)  
-**Next:** [Session 9 - Multi-Agent Coordination →](Session9_*.md)
+**Previous:** [Session 7 - Agent Systems →](Session7_ADK_Essentials.md)  
+**Next:** [Session 9 - Multi-Agent Coordination →](Session9_Practical_Coordination.md)
 
 ---

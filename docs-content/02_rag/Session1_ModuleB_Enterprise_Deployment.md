@@ -556,7 +556,7 @@ D) Only resource utilization
 
 ## 🧭 Navigation
 
-**Previous:** [Session 0 - Introduction →](Session0_*.md)  
-**Next:** [Session 2 - Implementation →](Session2_*.md)
+**Previous:** [Session 0 - Introduction →](Session0_RAG_Architecture_Fundamentals.md)  
+**Next:** [Session 2 - Implementation →](Session2_Advanced_Chunking_Preprocessing.md)
 
 ---

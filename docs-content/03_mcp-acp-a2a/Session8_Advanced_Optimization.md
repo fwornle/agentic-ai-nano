@@ -536,7 +536,7 @@ This comprehensive optimization system transforms reactive performance managemen
 
 ## 🧭 Navigation
 
-**Previous:** [Session 7 - Agent Systems →](Session7_*.md)  
-**Next:** [Session 9 - Multi-Agent Coordination →](Session9_*.md)
+**Previous:** [Session 7 - Agent Systems →](Session7_Advanced_Choreography.md)  
+**Next:** [Session 9 - Multi-Agent Coordination →](Session9_Production_Agent_Deployment.md)
 
 ---
