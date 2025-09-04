@@ -62,7 +62,7 @@ class DataProcessingToolExecutionContext(BaseModel):
     task_id: str
     execution_timestamp: datetime
     resource_limits: Dict
-- **Advance to Session 6**: [Agent Communication Protocols](Session6_Agent_Communication_Protocols.md)
+- **Advance to Session 6**: [Atomic Agents & Modular Architecture](Session6_Atomic_Agents_Modular_Architecture.md)
 - **Compare with Module A**: [Advanced CrewAI Flows](Session4_ModuleA_Advanced_CrewAI_Flows.md)
 
 ## Module B Knowledge Check

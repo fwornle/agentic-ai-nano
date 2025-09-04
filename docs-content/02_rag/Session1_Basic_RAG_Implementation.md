@@ -129,6 +129,10 @@ D) Reduced code complexity
 
 Refer to the learning path overview above to select the approach that best matches your goals, timeline, and current expertise level. Each path builds comprehensively on core RAG implementation principles while optimizing for different learning outcomes.
 
+
+
+[View Solutions →](Session1_Basic_RAG_Implementation_Test_Solutions.md)
+
 ---
 
 ## 🧭 Navigation

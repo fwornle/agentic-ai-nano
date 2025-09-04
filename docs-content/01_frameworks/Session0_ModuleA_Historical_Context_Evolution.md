@@ -336,7 +336,7 @@ D) 50%
 
 ## 🧭 Navigation
 
-**Previous:** [Session None -  →](../index.md)  
+**Previous:** [Course Home →](../index.md)  
 **Next:** [Session 1 - Foundations →](Session1_Bare_Metal_Agents.md)
 
 ---

@@ -940,6 +940,10 @@ D) 95% availability percentage
 
 [**View Module A Test Solutions →**](Session3_Test_Solutions.md)
 
+
+
+[View Solutions →](Session3_ModuleA_Enterprise_Patterns_Test_Solutions.md)
+
 ---
 
 ## 🧭 Navigation
