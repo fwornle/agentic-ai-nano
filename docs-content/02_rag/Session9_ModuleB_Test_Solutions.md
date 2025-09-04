@@ -69,6 +69,6 @@ D) Software licensing costs
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 9 Test Questions →](Session9_*.md#multiple-choice-test)
+**Back to Test:** [Session 9 Test Questions →](Session9_Advanced_Production.md#multiple-choice-test-session-9)
 
 ---

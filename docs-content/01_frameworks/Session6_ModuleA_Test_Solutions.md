@@ -41,6 +41,6 @@
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
+**Back to Test:** [Session 6 Test Questions →](Session6_System_Assembly_Practice.md#multiple-choice-test-session-6)
 
 ---

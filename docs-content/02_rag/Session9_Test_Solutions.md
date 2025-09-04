@@ -75,6 +75,6 @@ D) Authentication, permissions, and change detection for real-time updates ✅
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 9 Test Questions →](Session9_Advanced_Production.md#multiple-choice-test)
+**Back to Test:** [Session 9 Test Questions →](Session9_Advanced_Production.md#multiple-choice-test-session-9)
 
 ---

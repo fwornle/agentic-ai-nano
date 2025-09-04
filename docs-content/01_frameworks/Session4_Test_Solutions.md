@@ -96,6 +96,6 @@ D) Cloud integration
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 4 Test Questions →](Session4_Team_Building_Practice.md#multiple-choice-test)
+**Back to Test:** [Session 4 Test Questions →](Session4_Team_Building_Practice.md#multiple-choice-test-session-4)
 
 ---

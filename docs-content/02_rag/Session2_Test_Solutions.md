@@ -78,6 +78,6 @@ D) To determine the number of chunks to create
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 2 Test Questions →](Session2_Advanced_Chunking_Preprocessing.md#multiple-choice-test)
+**Back to Test:** [Session 2 Test Questions →](Session2_Advanced_Chunking_Preprocessing.md#multiple-choice-test-session-2)
 
 ---

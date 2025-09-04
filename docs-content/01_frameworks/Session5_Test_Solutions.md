@@ -231,6 +231,6 @@ D) User feedback only
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 5 Test Questions →](Session5_PydanticAI_Type_Safe_Agents.md#multiple-choice-test)
+**Back to Test:** [Session 5 Test Questions →](Session5_PydanticAI_Type_Safe_Agents.md#multiple-choice-test-session-5)
 
 ---

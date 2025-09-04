@@ -46,6 +46,6 @@ D) Reduces memory usage
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
+**Back to Test:** [Session 1 Test Questions →](Session1_Basic_RAG_Implementation.md#multiple-choice-test-session-1)
 
 ---
