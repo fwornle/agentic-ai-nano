@@ -1,7 +1,7 @@
 # 📝 Session 9: Implementation Guide - Planning & Production Systems
 
 > **📝 PARTICIPANT PATH CONTENT**
-> Prerequisites: Complete 🎯 [Observer Path](Session9_Multi_Agent_Patterns_Observer.md) and 📝 [Practical Coordination](Session9_Practical_Coordination.md)
+> Prerequisites: Complete 🎯 [Multi-Agent Patterns](Session9_Multi_Agent_Patterns.md) and 📝 [Practical Coordination](Session9_Practical_Coordination.md)
 > Time Investment: 1.5-2 hours
 > Outcome: Implement planning systems and production-ready multi-agent deployments
 

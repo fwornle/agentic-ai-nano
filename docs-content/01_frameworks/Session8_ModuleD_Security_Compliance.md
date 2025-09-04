@@ -1340,7 +1340,7 @@ You've now mastered security and compliance systems that prevent billion-dollar 
 
 - **Return to Core**: [Session 8 Main](Session8_Agno_Production_Ready_Agents.md)  
 - **Review Other Modules**: [Advanced Monitoring](Session8_ModuleA_Advanced_Monitoring_Observability.md), [Enterprise Scaling](Session8_ModuleB_Enterprise_Scaling_Architecture.md), [Performance Optimization](Session8_ModuleC_Performance_Optimization.md)  
-- **Advance to Session 9**: [Session 9 - Advanced Framework Patterns](Session9_Advanced_Framework_Patterns.md)  
+- **Advance to Session 9**: [Session 9 - Advanced Coordination](Session9_Advanced_Coordination.md)  
 
 **🗂️ Source Files for Module D:**
 

@@ -407,6 +407,10 @@ D) Faster processing speed
 
 **Answers**: 1-B, 2-B, 3-B
 
+
+
+[View Solutions →](Session8_MultiModal_Advanced_RAG_Test_Solutions.md)
+
 ---
 
 ## 🧭 Navigation
