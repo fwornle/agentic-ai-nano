@@ -54,7 +54,6 @@ class K8sDataProcessingAgentCluster:
     namespace: str = "agno-data-agents"
     node_pools: List
 
-
 **🗂️ Source Files for Module B:**
 
 - `src/session8/k8s_native_architecture.py` - Kubernetes-native data processing agent orchestration
@@ -62,7 +61,6 @@ class K8sDataProcessingAgentCluster:
 - `src/session8/advanced_scaling.py` - Predictive and cost-aware scaling strategies for data processing workloads
 
 ---
-
 
 ## 📝 Multiple Choice Test - Session 8
 

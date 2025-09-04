@@ -1,6 +1,5 @@
 # Session 1: Enterprise Deployment - Test Solutions
 
-
 ## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What is the primary benefit of microservices architecture for enterprise RAG systems?  
@@ -42,11 +41,6 @@ C) Only error counts
 D) Only resource utilization  
 
 **Explanation:** Enterprise monitoring requires multiple metric categories: response time for user experience, error rates for reliability, throughput for capacity planning, and business KPIs for value delivery. Monitoring only technical metrics misses the business impact, while monitoring only business metrics misses operational issues.
-
----
-
-
-[View Solutions →](Session1_Test_Solutions.md)
 
 ---
 

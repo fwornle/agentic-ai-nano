@@ -1,6 +1,5 @@
 # Session 2: LangChain Foundations - Test Solutions
 
-
 ## 📝 Multiple Choice Test - Session 2
 
 **Question 1:** What is the primary benefit of LangChain's unified LLM interface?  
@@ -42,11 +41,6 @@ C) ConversationBufferWindowMemory
 D) ConversationEntityMemory  
 
 **Explanation:** ConversationSummaryMemory is ideal for long conversations because it intelligently summarizes older parts of the conversation while preserving important context. This provides the benefits of context retention without the memory bloat of storing every single message, making it perfect for extended interactions where you need context but not verbatim details.
-
----
-
-
-[View Solutions →](Session2_Test_Solutions.md)
 
 ---
 

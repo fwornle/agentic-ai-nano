@@ -30,8 +30,6 @@
 
 **Explanation:** Percentile metrics (p50 = median, p90 = 90th percentile) reveal how the system performs for different user groups. While averages can hide outliers, percentiles show if most users have good experience (p50) and identify worst-case scenarios (p90), essential for understanding user experience under varying load conditions.
 
-### Return to Module
-
 ---
 
 ## 🧭 Navigation

@@ -1511,9 +1511,7 @@ You've now mastered advanced consensus algorithms for distributed data systems:
 - `src/session9/advanced/byzantine_consensus.py` - Byzantine fault-tolerant data consensus
 - `src/session9/advanced/pbft_enterprise.py` - Enterprise-grade PBFT for mission-critical data
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 9
 

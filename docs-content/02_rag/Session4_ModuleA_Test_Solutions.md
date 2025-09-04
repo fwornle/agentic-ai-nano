@@ -1,6 +1,5 @@
 # Session 4: Advanced Query Understanding - Test Solutions
 
-
 ## 📝 Multiple Choice Test - Session 4
 
 **Question 1:** What is the primary benefit of intent classification in query processing?  
@@ -42,11 +41,6 @@ C) It speeds up all queries
 D) It reduces memory usage  
 
 **Explanation:** Query complexity assessment enables dynamic resource allocation and technique selection. Simple queries can use lightweight processing, while complex analytical queries may require more sophisticated reasoning, multiple retrieval rounds, or specialized processing pipelines to generate accurate responses.
-
----
-
-
-[View Solutions →](Session4_Test_Solutions.md)
 
 ---
 

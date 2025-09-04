@@ -514,9 +514,7 @@ Alert triggering with handler resilience ensures notifications reach operations 
                 print(f"Alert handler failed: {e}")
 ```
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 1
 
