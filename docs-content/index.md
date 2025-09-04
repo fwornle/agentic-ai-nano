@@ -221,7 +221,7 @@ Ready to begin your journey? Select the module that best fits your learning goal
 - Take breaks between intensive sessions  
 
 ### Time Management  
-- 👀 Observer Path: 1-2 sessions per day  
+- 👀 Observer Path: 2-3 sessions per day  
 - 🙋‍♂️ Participant Path: 1 session per day  
 - 🛠️ Implementer Path: 1 session every 2-3 days  
 
