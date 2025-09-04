@@ -783,6 +783,9 @@ async def run_production_assessment():
 
 ---
 
+
+[View Solutions →](Session*_Test_Solutions.md)
+
 ## 🧭 Navigation
 
 **Previous:** [Session 7 - Agent Systems →](Session7_*.md)  
