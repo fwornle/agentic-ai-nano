@@ -267,7 +267,9 @@ You now understand the core principles that make RAG systems effective:
 
 These fundamentals provide the foundation for either deeper technical implementation or broader architectural understanding of RAG systems.
 
-## Key Takeaways
+## Discussion
+
+### Key Takeaways
 
 - **RAG Success Depends on Quality at Every Stage**: From document ingestion through response generation  
 - **Token-Aware Processing is Essential**: Character-based approaches fail in production  

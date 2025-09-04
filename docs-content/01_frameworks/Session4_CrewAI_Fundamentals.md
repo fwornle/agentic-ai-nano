@@ -258,7 +258,9 @@ The fundamental concepts that make CrewAI effective for data processing:
 
 5. **Production Readiness**: Configure crews with appropriate timeouts, error handling, and monitoring capabilities  
 
-## Getting Started Checklist
+## Discussion
+
+### Getting Started Checklist
 
 Before building your first CrewAI team:
 
@@ -269,7 +271,7 @@ Before building your first CrewAI team:
 - [ ] Enable memory and caching for optimal performance  
 - [ ] Plan for monitoring and error handling in production environments  
 
-## Next Steps
+### Next Steps
 
 Once you understand these fundamentals, you're ready to move to the next level:
 
