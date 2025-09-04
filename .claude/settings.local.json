@@ -21,11 +21,31 @@
       "Read(/tmp/**)",
       "Read(/tmp/**)",
       "Read(/tmp/**)",
-      "Read(/tmp/**)"
+      "Read(/tmp/**)",
+      "Bash(claude doctor)",
+      "Bash(test:*)",
+      "Bash(node:*)",
+      "mcp__mcp-git-ingest__git_directory_structure",
+      "mcp__mcp-git-ingest__git_read_important_files",
+      "Bash(./coding --help)",
+      "Bash(timeout:*)",
+      "Bash(coding --verbose --help)",
+      "Read(/private/tmp/**)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/combined-status-line.js)",
+      "Bash(CODING_REPO=/Users/q284340/Agentic/coding node /Users/q284340/Agentic/coding/scripts/combined-status-line.js)",
+      "Bash(source:*)",
+      "Bash(ensure_statusline_config \"/Users/q284340/Agentic/nano-degree\" \"/Users/q284340/Agentic/coding\")",
+      "Bash(DEBUG_STATUS=1 CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/combined-status-line.js)",
+      "Bash(kill:*)",
+      "Bash(pkill:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
       "/Users/q284340"
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "CODING_REPO=/Users/q284340/Agentic/coding node /Users/q284340/Agentic/coding/scripts/combined-status-line.js"
   }
 }
