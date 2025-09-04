@@ -321,9 +321,7 @@ For comprehensive coverage of advanced protocol implementations, enterprise patt
 
 **Hint:** Start with MCP Inspector to see the protocols in action before diving into implementation.
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 0
 

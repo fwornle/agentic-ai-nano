@@ -1,6 +1,5 @@
 # Session 1 - Module B: Performance Optimization - Test Solutions
 
-
 ## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What information does the `MemoryEntry` dataclass track to enable intelligent memory management?  
@@ -42,11 +41,6 @@ C) Response times, percentiles, cache hit rates, and target achievement ✅
 D) Just error rates and failures  
 
 **Explanation:** The performance monitoring system tracks comprehensive metrics including average/min/max response times, percentiles (p50, p90, p95), cache entries count, target achievement rates, and the number of responses under the target time. This comprehensive data enables informed optimization decisions and automatic performance tuning.
-
----
-
-
-[View Solutions →](Session1_Test_Solutions.md)
 
 ---
 

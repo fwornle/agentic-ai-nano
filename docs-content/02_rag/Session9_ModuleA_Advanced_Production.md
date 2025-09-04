@@ -478,9 +478,7 @@ When compliance scores fall below the threshold (default 90%), automated remedia
         }
 ```
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 9
 

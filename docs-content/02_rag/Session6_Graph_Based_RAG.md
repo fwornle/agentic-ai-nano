@@ -407,9 +407,7 @@ For deep technical mastery, explore these advanced modules:
 
 Session 7 will show you how to build agentic RAG systems that actively reason through graph structures, making autonomous decisions about information retrieval and synthesis strategies.
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 6
 

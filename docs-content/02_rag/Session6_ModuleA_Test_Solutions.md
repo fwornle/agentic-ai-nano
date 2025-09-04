@@ -1,6 +1,5 @@
 # Session 6: Advanced Graph Algorithms - Test Solutions
 
-
 ## 📝 Multiple Choice Test - Session 6
 
 **Question 1:** What is the main advantage of Temporal PageRank over traditional PageRank?  
@@ -47,36 +46,6 @@ C) When you need to explore specific regions or relationship types more thorough
 D) When you want faster traversal  
 
 **Explanation:** Biased random walks are preferred over uniform walks when you need to systematically explore certain parts of the graph or relationship types more thoroughly. The p and q parameters in Node2Vec allow fine-tuning exploration strategies: emphasizing local neighborhoods for structural roles, or promoting broader exploration for bridging relationships. This targeted exploration is particularly valuable in heterogeneous knowledge graphs where different relationship types require different traversal strategies.
-
-## Performance Scoring
-
-- **5/5 Correct**: Excellent mastery of advanced graph algorithms for RAG  
-- **4/5 Correct**: Good understanding with minor gaps in algorithm details  
-- **3/5 Correct**: Adequate grasp, review community detection and attention mechanisms  
-- **2/5 Correct**: Needs focused study of graph neural networks and embeddings  
-- **0-1 Correct**: Recommend hands-on practice with graph algorithm implementations  
-
-## Key Concepts Review
-
-### Advanced Graph Algorithms  
-1. **Temporal PageRank**: Time-aware ranking with decay for information freshness  
-2. **Node2Vec**: Biased random walks with p/q parameters for structural learning  
-3. **Community Detection**: Clustering for organized knowledge retrieval  
-4. **Graph Attention Networks**: Adaptive weighting for relationship importance  
-
-### Algorithm Applications  
-- **Temporal Ranking**: Prioritizing recent information in dynamic domains  
-- **Embedding Generation**: Capturing both local and global graph structures  
-- **Knowledge Organization**: Hierarchical clustering for efficient retrieval  
-- **Adaptive Learning**: Context-aware relationship weighting for better reasoning  
-
-## Answer Summary  
-1. B  2. C  3. B  4. B  5. B
-
----
-
-
-[View Solutions →](Session6_Test_Solutions.md)
 
 ---
 
