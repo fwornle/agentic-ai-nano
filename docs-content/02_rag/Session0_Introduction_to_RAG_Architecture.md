@@ -122,11 +122,7 @@ You have mastered the full spectrum of RAG architectures and can implement sophi
 
 #
 
-## 📝 Multiple Choice Test - Session 0 and Testing:  
-- **[📝 Session 0 Test](Session0_Test_Solutions.md)** - Validate your understanding  
 
-### Continue Your Journey:  
-- - 
 ## 💡 Learning Path Recommendations
 
 ### For Software Engineers:
@@ -146,6 +142,74 @@ You have mastered the full spectrum of RAG architectures and can implement sophi
 **Focus**: Specialized domain applications and compliance
 
 **Choose your path and begin your RAG mastery journey!**
+
+## 📝 Multiple Choice Test - Session 0
+
+Test your understanding of RAG architecture fundamentals.
+
+**Question 1:** What does "RAG" stand for in AI systems?  
+A) Rapid Application Generation  
+B) Retrieval Augmented Generation  
+C) Random Access Generation  
+D) Recursive Algorithm Generation  
+
+**Question 2:** What is the primary benefit of RAG over traditional LLM approaches?  
+A) Faster processing speed  
+B) Lower computational cost  
+C) Access to up-to-date and domain-specific information  
+D) Simpler implementation  
+
+**Question 3:** Which component is responsible for finding relevant information in a RAG system?  
+A) Generator  
+B) Retriever  
+C) Encoder  
+D) Decoder  
+
+**Question 4:** What type of database is commonly used for vector storage in RAG systems?  
+A) Relational database  
+B) Graph database  
+C) Vector database  
+D) Time-series database  
+
+**Question 5:** What is the purpose of embedding models in RAG architecture?  
+A) Generate text responses  
+B) Store documents  
+C) Convert text to numerical vectors  
+D) Manage user sessions  
+
+**Question 6:** Which technique helps improve retrieval quality by expanding queries?  
+A) Query compression  
+B) Query enhancement  
+C) Query reduction  
+D) Query elimination  
+
+**Question 7:** What challenge does chunking address in RAG systems?  
+A) Processing speed  
+B) Memory usage  
+C) Document size limitations and context boundaries  
+D) User interface design  
+
+**Question 8:** What is HyDE in the context of RAG systems?  
+A) Hidden Dynamic Embedding  
+B) Hypothetical Document Embeddings  
+C) Hybrid Data Extraction  
+D) Hierarchical Document Elements  
+
+**Question 9:** Which metric is commonly used to evaluate RAG system performance?  
+A) Processing speed only  
+B) Memory usage only  
+C) Retrieval accuracy and generation quality  
+D) Code complexity  
+
+**Question 10:** What is the main challenge with semantic gaps in RAG systems?  
+A) Hardware limitations  
+B) Mismatch between user language and document vocabulary  
+C) Database connectivity  
+D) User interface design  
+
+[View Solutions →](Session0_Test_Solutions.md)
+
+---
 
 ---
 

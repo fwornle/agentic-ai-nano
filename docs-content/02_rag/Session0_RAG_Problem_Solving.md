@@ -754,14 +754,43 @@ When deploying these problem-solving solutions:
 
 You now have comprehensive solutions for the most common RAG problems. Ready for enterprise-grade implementations?
 
-### Continue Your Journey:  
-- [⚙️ Advanced RAG Patterns](Session0_Advanced_RAG_Patterns.md) - Enterprise architectures and patterns  
-- [⚙️ Legal RAG Case Study](Session0_Legal_RAG_Case_Study.md) - Specialized domain implementation  
+## 📝 Multiple Choice Test - Session 0
 
-- Session 2: Advanced chunking strategies build on Problem 1 solutions  
-- Session 3: Vector database optimization extends Problem 4 solutions  
-- Session 4: Query enhancement advances Problem 2 and 3 solutions  
-- Session 5: Quality assessment implements Problem 5 solutions
+Test your understanding of RAG problem-solving strategies.
+
+**Question 1:** What is the primary challenge with poor chunking in RAG systems?  
+A) High processing cost  
+B) Loss of context and meaning across chunk boundaries  
+C) Slow retrieval speed  
+D) Complex implementation  
+
+**Question 2:** How does HyDE improve retrieval quality?  
+A) By compressing documents  
+B) By generating hypothetical documents that match better  
+C) By filtering out irrelevant content  
+D) By improving processing speed  
+
+**Question 3:** What is the main benefit of query clarification in RAG systems?  
+A) Faster processing  
+B) Lower resource usage  
+C) Better understanding of ambiguous user intent  
+D) Simpler implementation  
+
+**Question 4:** How does hierarchical indexing improve RAG performance?  
+A) Reduces storage requirements  
+B) Enables efficient filtering and multi-level search  
+C) Simplifies code complexity  
+D) Improves security  
+
+**Question 5:** What is the purpose of context quality management?  
+A) Reduce processing time  
+B) Ensure retrieved content is relevant and complete  
+C) Minimize storage costs  
+D) Improve user interface  
+
+[View Solutions →](Session0_Test_Solutions.md)
+
+---
 
 ---
 
