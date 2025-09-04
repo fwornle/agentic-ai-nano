@@ -70,6 +70,6 @@ D) Random threshold selection
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 5 Test Questions →](Session5_RAG_Evaluation_Quality_Assessment.md#multiple-choice-test)
+**Back to Test:** [Session 5 Test Questions →](Session5_RAG_Evaluation_Quality_Assessment.md#multiple-choice-test-session-5)
 
 ---

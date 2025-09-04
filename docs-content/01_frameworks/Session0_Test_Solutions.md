@@ -124,6 +124,6 @@ D) Planning (for multi-step workflows)
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 0 Test Questions →](Session0_Introduction_to_Agent_Frameworks_Patterns.md#multiple-choice-test)
+**Back to Test:** [Session 0 Test Questions →](Session0_Introduction_to_Agent_Frameworks_Patterns.md#multiple-choice-test-session-0)
 
 ---

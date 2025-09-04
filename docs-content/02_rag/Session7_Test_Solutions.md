@@ -74,6 +74,6 @@ D) Token usage
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 7 Test Questions →](Session7_Advanced_Agent_Reasoning.md#multiple-choice-test)
+**Back to Test:** [Session 7 Test Questions →](Session7_Advanced_Agent_Reasoning.md#multiple-choice-test-session-7)
 
 ---

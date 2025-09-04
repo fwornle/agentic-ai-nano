@@ -96,6 +96,6 @@ D) Improved security
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 4 Test Questions →](Session4_Production_MCP_Deployment.md#multiple-choice-test)
+**Back to Test:** [Session 4 Test Questions →](Session4_Production_MCP_Deployment.md#multiple-choice-test-session-4)
 
 ---

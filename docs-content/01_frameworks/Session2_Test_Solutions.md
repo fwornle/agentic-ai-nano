@@ -46,6 +46,6 @@ D) ConversationEntityMemory
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 2 Test Questions →](Session2_Enterprise_Tool_Development.md#multiple-choice-test)
+**Back to Test:** [Session 2 Test Questions →](Session2_Enterprise_Tool_Development.md#multiple-choice-test-session-2)
 
 ---

@@ -78,6 +78,6 @@ D) Use placeholder content for failed loads
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 1 Test Questions →](Session1_Basic_RAG_Implementation.md#multiple-choice-test)
+**Back to Test:** [Session 1 Test Questions →](Session1_Basic_RAG_Implementation.md#multiple-choice-test-session-1)
 
 ---

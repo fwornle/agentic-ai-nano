@@ -46,6 +46,6 @@ D) It's simpler to implement
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
+**Back to Test:** [Session 3 Test Questions →](Session3_Advanced_HNSW_Tuning.md#multiple-choice-test-session-3)
 
 ---

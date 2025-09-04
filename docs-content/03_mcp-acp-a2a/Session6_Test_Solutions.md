@@ -96,6 +96,6 @@ D) To reduce development costs
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 6 Test Questions →](Session6_ACP_Fundamentals.md#multiple-choice-test)
+**Back to Test:** [Session 6 Test Questions →](Session6_ACP_Fundamentals.md#multiple-choice-test-session-6)
 
 ---
