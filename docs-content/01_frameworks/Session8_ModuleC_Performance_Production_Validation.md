@@ -779,8 +779,6 @@ async def run_production_assessment():
 
 ## 📝 Multiple Choice Test - Session 8
 
-#
-
 ---
 
 ---

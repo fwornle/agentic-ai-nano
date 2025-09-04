@@ -96,6 +96,6 @@ D) Centralized control of agent interactions and workflow orchestration ✅
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 6 Test Questions →](Session6_System_Assembly_Practice.md#multiple-choice-test-session-6)
+**Back to Test:** [Session 6 Test Questions →](Session6_Atomic_Agents_Modular_Architecture.md#multiple-choice-test-session-6)
 
 ---

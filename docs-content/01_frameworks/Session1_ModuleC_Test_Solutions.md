@@ -46,6 +46,6 @@ D) User-specified preferences only
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 1 Test Questions →](Session1_Bare_Metal_Agents.md#multiple-choice-test-session-1)
+**Back to Test:** [Session 1 Test Questions →](Session1_ModuleA_Advanced_Agent_Patterns.md#multiple-choice-test-session-1)
 
 ---

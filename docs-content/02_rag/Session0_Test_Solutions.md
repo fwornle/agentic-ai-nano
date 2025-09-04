@@ -94,6 +94,6 @@ D) Basic similarity matching with cosine distance
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 0 Test Questions →](Session0_RAG_Architecture_Fundamentals.md#multiple-choice-test-session-0)
+**Back to Test:** [Session 0 Test Questions →](Session0_Introduction_to_RAG_Architecture.md#multiple-choice-test-session-0)
 
 ---
