@@ -1,125 +1,91 @@
 #!/usr/bin/env python3
 """
-Final verification of all test-solution consistency and links.
+Final comprehensive verification of all test formatting across the course.
 """
 
 import os
 import re
 import glob
-from pathlib import Path
 
-def verify_all_test_solution_pairs():
-    """Verify all test-solution pairs for consistency."""
-    print("=== Final Test-Solution Verification ===\n")
-    
-    solution_files = glob.glob('/Users/q284340/Agentic/nano-degree/docs-content/**/*_Test_Solutions.md', recursive=True)
-    
-    verified_pairs = 0
-    issues = []
-    perfect_pairs = []
-    
-    for solution_file in solution_files:
-        solution_path = Path(solution_file)
-        base_name = solution_path.stem.replace('_Test_Solutions', '')
+def analyze_file_structure(file_path):
+    """Analyze a single file's structure"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
         
-        print(f"Checking {base_name}...")
+        sections = re.findall(r'## ([^#\n]+)', content)
+        issues = []
         
-        # Read solution file
-        with open(solution_file, 'r', encoding='utf-8') as f:
-            solution_content = f.read()
+        # Check for issues
+        if 'Continue Your Journey' in content:
+            issues.append('Contains "Continue Your Journey"')
+        if re.search(r'## 📝 Multiple Choice Test.*and Testing:', content):
+            issues.append('Improper test title format')
+        if re.search(r'\[.*Session.*Test.*\]\([^)]*\.md\)', content):
+            issues.append('Contains link to test instead of embedded test')
         
-        # Count questions in solution
-        solution_questions = len(re.findall(r'\*\*Question \d+:', solution_content))
+        has_test = any('Multiple Choice Test' in section for section in sections)
+        has_navigation = any('Navigation' in section for section in sections)
         
-        # Look for corresponding test files
-        possible_test_files = [
-            solution_path.parent / f"{base_name}_Practice_Test.md",
-            solution_path.parent / f"{base_name}.md"
-        ]
+        if has_test and len(sections) >= 2:
+            test_index = nav_index = -1
+            for i, section in enumerate(sections):
+                if 'Multiple Choice Test' in section:
+                    test_index = i
+                if 'Navigation' in section:
+                    nav_index = i
+            
+            if nav_index != -1 and test_index != nav_index - 1:
+                issues.append(f'Test not in second-to-last position')
         
-        test_file_found = None
-        test_questions = 0
+        if has_test and not re.search(r'\[View Solutions →\]', content):
+            issues.append('Missing solution link')
         
-        for test_file in possible_test_files:
-            if test_file.exists():
-                with open(test_file, 'r', encoding='utf-8') as f:
-                    test_content = f.read()
-                
-                test_q_count = len(re.findall(r'\*\*Question \d+:', test_content))
-                if test_q_count > 0:
-                    test_file_found = str(test_file)
-                    test_questions = test_q_count
-                    break
+        return {
+            'file': file_path,
+            'sections': sections,
+            'has_test': has_test,
+            'issues': issues,
+            'last_two_sections': sections[-2:] if len(sections) >= 2 else sections
+        }
         
-        if test_file_found:
-            verified_pairs += 1
-            
-            # Check for bidirectional links
-            test_filename = os.path.basename(test_file_found)
-            solution_filename = os.path.basename(solution_file)
-            
-            with open(test_file_found, 'r', encoding='utf-8') as f:
-                test_content = f.read()
-            
-            has_test_to_solution = solution_filename in test_content
-            has_solution_to_test = test_filename in solution_content
-            
-            # Report status
-            status_parts = []
-            if test_questions == solution_questions:
-                status_parts.append("✅ Q-match")
-            else:
-                status_parts.append(f"❌ Q-mismatch ({test_questions}≠{solution_questions})")
-                issues.append(f"{base_name}: {test_questions} test questions ≠ {solution_questions} solution questions")
-            
-            if has_test_to_solution:
-                status_parts.append("✅ T→S link")
-            else:
-                status_parts.append("❌ T→S link")
-                issues.append(f"{base_name}: Missing test→solution link")
-            
-            if has_solution_to_test:
-                status_parts.append("✅ S→T link")
-            else:
-                status_parts.append("❌ S→T link")
-                issues.append(f"{base_name}: Missing solution→test link")
-            
-            status = " | ".join(status_parts)
-            print(f"  {status}")
-            
-            if "❌" not in status:
-                perfect_pairs.append(base_name)
-            
-        else:
-            print(f"  ❌ No corresponding test file found")
-            issues.append(f"{base_name}: No test file found")
-    
-    # Summary
-    print(f"\n=== FINAL SUMMARY ===")
-    print(f"✅ Verified {verified_pairs} test-solution pairs")
-    print(f"✅ Perfect pairs: {len(perfect_pairs)}")
-    print(f"{'❌' if issues else '✅'} Issues found: {len(issues)}")
-    
-    if perfect_pairs:
-        print(f"\n🎉 Perfect Test-Solution Pairs:")
-        for pair in perfect_pairs:
-            print(f"  • {pair}")
-    
-    if issues:
-        print(f"\n❌ Remaining Issues:")
-        for issue in issues:
-            print(f"  • {issue}")
-    
-    return len(issues) == 0
+    except Exception as e:
+        return {'file': file_path, 'error': str(e), 'issues': [f'Error: {e}']}
 
 def main():
-    """Main verification function."""
-    all_good = verify_all_test_solution_pairs()
+    print("=== Final Test Structure Verification ===\n")
     
-    if all_good:
-        print(f"\n🎉 ALL TEST-SOLUTION PAIRS ARE PERFECT! 🎉")
-    else:
-        print(f"\n⚠️  Some issues remain - see details above")
+    md_files = glob.glob('/Users/q284340/Agentic/nano-degree/docs-content/**/*.md', recursive=True)
+    md_files = [f for f in md_files if '_Test_Solutions.md' not in f and 'history' not in f and 'index.md' not in f]
+    
+    files_with_issues = 0
+    test_files = []
+    
+    for file_path in sorted(md_files):
+        analysis = analyze_file_structure(file_path)
+        
+        if analysis.get('issues'):
+            files_with_issues += 1
+            print(f"❌ {os.path.basename(file_path)}")
+            for issue in analysis['issues']:
+                print(f"   - {issue}")
+            print()
+        elif analysis.get('has_test'):
+            test_files.append(file_path)
+    
+    print(f"=== RESULTS ===")
+    print(f"Total files: {len(md_files)}")
+    print(f"Files with tests: {len(test_files)}")
+    print(f"Files with issues: {files_with_issues}")
+    
+    if files_with_issues == 0:
+        print("\n✅ ALL FILES PROPERLY STRUCTURED!")
+    
+    print(f"\n=== SAMPLE CORRECT FILES ===")
+    for file_path in test_files[:3]:
+        analysis = analyze_file_structure(file_path)
+        if not analysis.get('issues'):
+            print(f"✅ {os.path.basename(file_path)}: {analysis['last_two_sections']}")
 
 if __name__ == "__main__":
     main()
