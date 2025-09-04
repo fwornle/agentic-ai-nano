@@ -131,20 +131,22 @@ Use this checklist to track your progress across learning paths:
 - [ ] I can deploy atomic systems to production  
 - [ ] I can scale and monitor enterprise systems  
 
-## Practical Exercises & Validation
+## Discussion
+
+### Practical Exercises & Validation
 
 Testing your understanding at each level:
 
-### 🎯 Observer Quick Check
+#### 🎯 Observer Quick Check
 Can you explain why atomic agents use single responsibility principle? What makes them "lightweight"? How does composition differ from monolithic approaches?
 
-### 📝 Participant Hands-On
+#### 📝 Participant Hands-On
 Build a custom atomic component for your specific use case. Create a simple system that coordinates two different processing agents.
 
-### ⚙️ Implementer Challenge
+#### ⚙️ Implementer Challenge
 Design a fault-tolerant system that can handle component failures gracefully. Implement dynamic scaling based on workload metrics.
 
-## Deployment Patterns
+### Deployment Patterns
 
 The system supports multiple deployment patterns:
 
@@ -166,7 +168,7 @@ data_system = deploy_atomic_data_processing_system()
 - Load balancing: Distribute requests efficiently  
 - Caching: Optimize frequent operations  
 
-## Quick Implementation Exercise
+### Quick Implementation Exercise
 
 🗂️ **Exercise Files**:
 
@@ -181,12 +183,12 @@ python data_bootstrap.py          # Deploy atomic system
 python -m pytest data_test_client.py  # Validate understanding
 ```
 
-## Completion & Next Steps
+### Completion & Next Steps
 
 **Next Session Prerequisites**: Complete your chosen learning path
 **Ready for**: Session 7: ADK Enterprise Agent Development
 
-### Recommended Path Progression
+#### Recommended Path Progression
 
 **If you completed 🎯 Observer Path**: You understand the concepts and can proceed to Session 7, or dive deeper with 📝 Participant path.
 
@@ -194,16 +196,16 @@ python -m pytest data_test_client.py  # Validate understanding
 
 **If you completed ⚙️ Implementer Path**: You have comprehensive mastery and are ready for any advanced enterprise scenarios.
 
-## **Choose Your Next Path:**
+#### **Choose Your Next Path:**
 
-### Learning Path Files  
+##### Learning Path Files  
 - **🎯 [Atomic Architecture Essentials →](Session6_Atomic_Architecture_Essentials.md)** - Essential concepts (45-60 min)  
 - **📝 [Building Atomic Components →](Session6_Building_Atomic_Components.md)** - Hands-on component creation  
 - **📝 [System Assembly Practice →](Session6_System_Assembly_Practice.md)** - Putting components together  
 - **⚙️ [Advanced Orchestration →](Session6_Advanced_Orchestration.md)** - Complex workflow patterns  
 - **⚙️ [Production Deployment →](Session6_Production_Deployment.md)** - Enterprise deployment strategies  
 
-### Advanced Specialized Modules  
+##### Advanced Specialized Modules  
 - **⚙️ [Module A: Advanced Composition Patterns →](Session6_ModuleA_Advanced_Composition_Patterns.md)** - Sophisticated pipeline orchestration  
 - **⚙️ [Module B: Enterprise Modular Systems →](Session6_ModuleB_Enterprise_Modular_Systems.md)** - Production-scale atomic systems  
 
@@ -219,7 +221,7 @@ Atomic Agents provides a complete framework for building modular, scalable data 
 
 This architecture enables building everything from simple ETL workflows to complex multi-stage analytics engines with the reliability and scalability of distributed systems.
 
-## Key Benefits
+### Key Benefits
 
 **Microservices Architecture**: Each agent operates like a microservice with single responsibility and minimal dependencies
 **Composition over Coupling**: Build pipelines by combining components rather than creating tightly coupled processors

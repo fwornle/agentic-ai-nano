@@ -466,18 +466,14 @@ This integration represents more than just connecting two technologies - it's a 
 - **High Performance**: Scale to demanding applications  
 - **Full Observability**: Complete visibility into agent operations  
 
-## Additional Resources
+## Discussion
+
+### Additional Resources
 
 - [LangChain MCP Adapters GitHub](https://github.com/langchain-ai/langchain-mcp-adapters) - Official integration library  
 - [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Workflow orchestration guide  
 - [Model Context Protocol](https://modelcontextprotocol.io/) - Official MCP specification  
 - [ReAct Paper](https://arxiv.org/abs/2210.03629) - Original research on reasoning and acting patterns
-
----
-
-[View Solutions →](Session3_Test_Solutions.md)
-
----
 
 ## 📝 Multiple Choice Test - Session 3
 
@@ -513,9 +509,7 @@ B) Pre-configured rules
 C) LLM reasoning about tool descriptions  
 D) User specification  
 
-**Answers:** 1-B, 2-C, 3-B, 4-B, 5-C
-
----
+[View Solutions →](Session3_Test_Solutions.md)
 
 ---
 

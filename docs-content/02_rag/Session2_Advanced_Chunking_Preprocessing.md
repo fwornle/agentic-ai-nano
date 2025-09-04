@@ -262,9 +262,11 @@ for i, chunk in enumerate(chunks):
     print(f"Chunk {i+1}: {chunk.metadata}")
 ```
 
-## Key Takeaways
+## Discussion
 
-### 🎯 Observer Path Summary
+### Key Takeaways
+
+#### 🎯 Observer Path Summary
 
 **Core Concepts Mastered:**  
 - Document structure matters more than naive text splitting  
@@ -272,7 +274,7 @@ for i, chunk in enumerate(chunks):
 - Hierarchical organization preserves meaning and relationships  
 - Quality assessment enables optimization and monitoring  
 
-### 📝 Participant Path Summary
+#### 📝 Participant Path Summary
 
 **Implementation Skills Gained:**  
 - Built structure-aware chunking systems  
@@ -280,7 +282,7 @@ for i, chunk in enumerate(chunks):
 - Created quality assessment metrics  
 - Balanced structure preservation with size constraints  
 
-### ⚙️ Implementer Path Summary
+#### ⚙️ Implementer Path Summary
 
 **Enterprise Capabilities Achieved:**  
 - Deployed production-grade preprocessing pipelines  

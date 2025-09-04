@@ -313,7 +313,9 @@ Now it's your turn to build custom atomic components. Consider these component t
 - **Report Generator**: Create summary reports and metrics  
 - **Alert Manager**: Handle data quality alerts and notifications  
 
-## Practical Exercise
+## Discussion
+
+### Practical Exercise
 
 Build your own atomic component using this template:
 
