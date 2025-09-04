@@ -198,6 +198,10 @@ Ready to build complete multi-agent systems with proper coordination? The Partic
 - [⚙️ Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md) - Complex workflow coordination & dynamic agent generation for large-scale data processing  
 - [⚙️ Enterprise State Management](Session3_ModuleB_Enterprise_State_Management.md) - Production state handling & sophisticated routing for enterprise data pipelines  
 
+
+---
+
+
 ## 📝 Multiple Choice Test - Session 3
 
 Test your understanding of LangGraph workflows and multi-agent coordination:

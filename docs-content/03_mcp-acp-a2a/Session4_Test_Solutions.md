@@ -1,6 +1,7 @@
 # Session 4: Production MCP Deployment - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 4
 
 **Question 1:** What is the primary difference between development and production MCP servers?  
 
@@ -286,8 +287,13 @@ This circuit breaker implementation provides robust failure handling and enables
 
 ---
 
+
+[View Solutions →](Session4_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
+**Back to Test:** [Session 4 Test Questions →](Session4_Production_MCP_Deployment.md#multiple-choice-test)
 
 ---

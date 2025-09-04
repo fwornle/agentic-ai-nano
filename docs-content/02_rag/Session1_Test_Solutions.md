@@ -1,6 +1,7 @@
 # Session 1: Basic RAG Implementation - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What is the primary advantage of using metadata tracking in document loading?  
 
@@ -109,8 +110,13 @@ D) Use placeholder content for failed loads
 
 ---
 
+
+[View Solutions →](Session1_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
+**Back to Test:** [Session 1 Test Questions →](Session1_Basic_RAG_Implementation.md#multiple-choice-test)
 
 ---

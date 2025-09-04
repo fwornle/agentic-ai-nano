@@ -54,7 +54,17 @@ class K8sDataProcessingAgentCluster:
     namespace: str = "agno-data-agents"
     node_pools: List
 
-## 📝 Multiple Choice Test - Module B
+
+**🗂️ Source Files for Module B:**
+
+- `src/session8/k8s_native_architecture.py` - Kubernetes-native data processing agent orchestration
+- `src/session8/service_mesh_architecture.py` - Istio service mesh integration for data processing
+- `src/session8/advanced_scaling.py` - Predictive and cost-aware scaling strategies for data processing workloads
+
+---
+
+
+## 📝 Multiple Choice Test - Session 8
 
 Test your understanding of Enterprise Scaling & Architecture for Data Processing:
 
@@ -88,13 +98,7 @@ B) Only premium instances are used
 C) Scaling factor reduces to 0.6 with 90% spot instances but maintains data processing continuity  
 D) The system sends alerts but continues normal scaling  
 
-[View Solutions →](Session8_ModuleB_Test_Solutions.md)
-
-**🗂️ Source Files for Module B:**
-
-- `src/session8/k8s_native_architecture.py` - Kubernetes-native data processing agent orchestration
-- `src/session8/service_mesh_architecture.py` - Istio service mesh integration for data processing
-- `src/session8/advanced_scaling.py` - Predictive and cost-aware scaling strategies for data processing workloads
+[View Solutions →](Session8_Test_Solutions.md)
 
 ---
 

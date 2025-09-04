@@ -1,6 +1,7 @@
 # Session 1: Bare Metal Agents - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What is the primary benefit of implementing agents from scratch before using frameworks?  
 A) Lower resource usage  
@@ -79,8 +80,13 @@ D) Observer Pattern
 
 ---
 
+
+[View Solutions →](Session1_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
+**Back to Test:** [Session 1 Test Questions →](Session1_Bare_Metal_Agents.md#multiple-choice-test)
 
 ---

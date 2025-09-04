@@ -1,6 +1,7 @@
 # Session 3: LangGraph Multi-Agent Workflows - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 3
 
 **Question 1:** What is the primary advantage of LangGraph over sequential LangChain agents?  
 
@@ -131,8 +132,13 @@ D) When downstream nodes need data from multiple branches ✅
 
 ---
 
+
+[View Solutions →](Session3_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
+**Back to Test:** [Session 3 Test Questions →](Session3_Multi_Agent_Implementation.md#multiple-choice-test)
 
 ---

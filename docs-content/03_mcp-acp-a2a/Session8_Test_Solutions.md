@@ -1,6 +1,7 @@
 # Session 8: Advanced Agent Workflows - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 8
 
 **Question 1:** Which workflow pattern enables multiple tasks to execute simultaneously?  
 
@@ -629,8 +630,13 @@ This advanced workflow demonstrates sophisticated coordination patterns while ma
 
 ---
 
+
+[View Solutions →](Session8_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 8 Test Questions →](Session8_*.md#multiple-choice-test)
+**Back to Test:** [Session 8 Test Questions →](Session8_Advanced_Agent_Workflows.md#multiple-choice-test)
 
 ---

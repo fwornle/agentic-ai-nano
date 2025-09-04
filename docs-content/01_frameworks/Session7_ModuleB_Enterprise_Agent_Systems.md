@@ -1390,7 +1390,23 @@ Enterprise-scale ADK agent deployment patterns covered:
 - **Security Framework**: Comprehensive security policies with compliance controls  
 - **Observability Stack**: Distributed tracing, structured logging, and SLO management systems  
 
-## 📝 Multiple Choice Test - Module B
+
+### Next Steps
+
+- **Return to Core**: [Session 7 Main](Session7_First_ADK_Agent.md)  
+- **Advance to Session 8**: [Agno Production Ready Agents](Session8_Agno_Production_Ready_Agents.md)  
+- **Compare with Module A**: [Advanced ADK Integration](Session7_ModuleA_Advanced_ADK_Integration.md)  
+
+**🗂️ Source Files for Module B:**
+
+- `src/session7/enterprise_deployment.py` - Production deployment systems
+- `src/session7/observability_stack.py` - Comprehensive monitoring
+- `src/session7/security_manager.py` - Enterprise security controls
+
+---
+
+
+## 📝 Multiple Choice Test - Session 7
 
 Test your understanding of enterprise agent systems and production deployment:
 
@@ -1424,19 +1440,7 @@ B) CPU and memory-based horizontal pod autoscaling with custom metrics
 C) Fixed instance count  
 D) Manual load balancing  
 
-[View Solutions →](Session7_ModuleB_Test_Solutions.md)
-
-### Next Steps
-
-- **Return to Core**: [Session 7 Main](Session7_First_ADK_Agent.md)  
-- **Advance to Session 8**: [Agno Production Ready Agents](Session8_Agno_Production_Ready_Agents.md)  
-- **Compare with Module A**: [Advanced ADK Integration](Session7_ModuleA_Advanced_ADK_Integration.md)  
-
-**🗂️ Source Files for Module B:**
-
-- `src/session7/enterprise_deployment.py` - Production deployment systems
-- `src/session7/observability_stack.py` - Comprehensive monitoring
-- `src/session7/security_manager.py` - Enterprise security controls
+[View Solutions →](Session7_Test_Solutions.md)
 
 ---
 

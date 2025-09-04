@@ -604,7 +604,11 @@ Scaling logic requires multiple scale-up conditions (≥2) to prevent unnecessar
 
 Scaling logic requires multiple scale-up conditions (≥2) to prevent unnecessary expansion, while scale-down requires all conditions to ensure conservative downsizing. The 1.5x scale-up factor provides substantial capacity increase, while 0.7x scale-down offers moderate cost reduction with safety margins.
 
-## 📝 Multiple Choice Test - Module B
+
+---
+
+
+## 📝 Multiple Choice Test - Session 6
 
 Test your understanding of production GraphRAG systems:
 
@@ -638,7 +642,7 @@ B) Query failures or response time degradation affecting user experience
 C) High CPU usage  
 D) Network latency  
 
-[View Solutions →](Session6_ModuleB_Test_Solutions.md)
+[View Solutions →](Session6_Test_Solutions.md)
 
 ---
 

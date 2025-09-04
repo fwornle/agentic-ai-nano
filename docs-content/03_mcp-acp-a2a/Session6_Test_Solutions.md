@@ -1,6 +1,7 @@
 # Session 6: ACP Fundamentals - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 6
 
 **Question 1:** What is the primary purpose of the Agent Communication Protocol (ACP)?  
 
@@ -1014,8 +1015,11 @@ This solution demonstrates a complete, working ACP agent network that can operat
 
 ---
 
+
+[View Solutions →](Session6_Test_Solutions.md)
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
+**Back to Test:** [Session 6 Test Questions →](Session6_ACP_Fundamentals.md#multiple-choice-test)
 
 ---

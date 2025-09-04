@@ -1284,7 +1284,23 @@ Advanced ADK integration patterns covered:
 - **Production Memory Systems**: Persistent conversation memory with multiple memory types  
 - **Enterprise Context Management**: Context-aware response generation with relevance scoring  
 
-## 📝 Multiple Choice Test - Module A
+
+### Next Steps
+
+- **Continue to Module B**: [Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md) for production deployment patterns  
+- **Return to Core**: [Session 7 Main](Session7_First_ADK_Agent.md)  
+- **Advance to Session 8**: [Agno Production Ready Agents](Session8_Agno_Production_Ready_Agents.md)  
+
+**🗂️ Source Files for Module A:**
+
+- `src/session7/advanced_gemini.py` - Sophisticated Gemini model integration
+- `src/session7/advanced_memory.py` - Production memory systems
+- `src/session7/mcp_orchestration.py` - Multi-service coordination patterns
+
+---
+
+
+## 📝 Multiple Choice Test - Session 7
 
 Test your understanding of advanced ADK integration and enterprise patterns:
 
@@ -1318,19 +1334,7 @@ B) Persistent memory, context management, error handling, and streaming capabili
 C) Development features only  
 D) Single-user support  
 
-[View Solutions →](Session7_ModuleA_Test_Solutions.md)
-
-### Next Steps
-
-- **Continue to Module B**: [Enterprise Agent Systems](Session7_ModuleB_Enterprise_Agent_Systems.md) for production deployment patterns  
-- **Return to Core**: [Session 7 Main](Session7_First_ADK_Agent.md)  
-- **Advance to Session 8**: [Agno Production Ready Agents](Session8_Agno_Production_Ready_Agents.md)  
-
-**🗂️ Source Files for Module A:**
-
-- `src/session7/advanced_gemini.py` - Sophisticated Gemini model integration
-- `src/session7/advanced_memory.py` - Production memory systems
-- `src/session7/mcp_orchestration.py` - Multi-service coordination patterns
+[View Solutions →](Session7_Test_Solutions.md)
 
 ---
 

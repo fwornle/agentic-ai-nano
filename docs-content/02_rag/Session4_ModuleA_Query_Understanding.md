@@ -357,7 +357,11 @@ Finally, we combine the original query with the attachment context:
 
 Multi-modal query processing enables RAG systems to handle rich user interactions that include visual content, documents, and other media types. By extracting descriptive information from these attachments and integrating it with the text query, the system can provide more comprehensive and relevant responses.
 
-## Multiple Choice Test - Module A
+
+---
+
+
+## 📝 Multiple Choice Test - Session 4
 
 **Question 1:** What is the primary benefit of intent classification in query processing?  
 A) Reduces processing time  
@@ -389,7 +393,7 @@ B) It allows allocation of appropriate computational resources and techniques
 C) It speeds up all queries  
 D) It reduces memory usage  
 
-[View Solutions →](Session4_ModuleA_Test_Solutions.md)
+[View Solutions →](Session4_Test_Solutions.md)
 
 ---
 
