@@ -293,7 +293,32 @@ class RAGSystemWithEvaluation:
 ### Production Monitoring
 For production systems, implement sampling-based evaluation to balance performance with quality monitoring. See the enterprise monitoring guide for scalable approaches.
 
-## 📚 Complete Multiple Choice Test
+## Session 5 Mastery Summary
+
+**What You've Built:**
+
+You've transformed RAG evaluation from guesswork to science:
+
+- Multi-dimensional assessment with comprehensive quality measurement  
+- Enhancement validation through scientific comparison  
+- Production monitoring with real-time quality tracking  
+- A/B testing frameworks for rigorous optimization  
+- Domain-specific benchmarks tailored to your use case  
+
+**Stepping Beyond Traditional RAG:**
+
+Traditional vector RAG finds documents similar to queries. GraphRAG enables multi-hop reasoning, entity understanding, and complex relationship traversal. The evaluation frameworks you've mastered will prove whether graph-based enhancements improve upon your optimized vector system.
+
+**Preparation for Graph Intelligence:**
+
+1. Establish GraphRAG baselines using your evaluation framework  
+2. Design relationship-aware test cases requiring multi-hop reasoning  
+3. Plan hybrid evaluation (pure vector vs. pure graph vs. hybrid approaches)  
+4. Document current performance for entity/relationship queries
+
+---
+
+## 📝 Multiple Choice Test - Session 5
 
 Test your comprehensive understanding of RAG evaluation across all learning paths:
 
@@ -345,32 +370,7 @@ B) Adaptive thresholds based on historical performance patterns
 C) No thresholds, manual monitoring only  
 D) Random threshold selection  
 
-**[View Solutions →](Session5_Test_Solutions.md)
-
----**
-
-## Session 5 Mastery Summary
-
-**What You've Built:**
-
-You've transformed RAG evaluation from guesswork to science:
-
-- Multi-dimensional assessment with comprehensive quality measurement  
-- Enhancement validation through scientific comparison  
-- Production monitoring with real-time quality tracking  
-- A/B testing frameworks for rigorous optimization  
-- Domain-specific benchmarks tailored to your use case  
-
-**Stepping Beyond Traditional RAG:**
-
-Traditional vector RAG finds documents similar to queries. GraphRAG enables multi-hop reasoning, entity understanding, and complex relationship traversal. The evaluation frameworks you've mastered will prove whether graph-based enhancements improve upon your optimized vector system.
-
-**Preparation for Graph Intelligence:**
-
-1. Establish GraphRAG baselines using your evaluation framework  
-2. Design relationship-aware test cases requiring multi-hop reasoning  
-3. Plan hybrid evaluation (pure vector vs. pure graph vs. hybrid approaches)  
-4. Document current performance for entity/relationship queries
+[View Solutions →](Session5_Test_Solutions.md)
 
 ---
 
