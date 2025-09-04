@@ -206,7 +206,3 @@ After completing this module, you'll have mastered the complete stack of modern 
 **Curriculum:** [View Module Curriculum →](MCP_ACP_A2A_Nanodegree_Curriculum.md)
 
 ---
-
-**Next:** [Session 0 - Introduction to Agent Frameworks & Patterns →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
-
----
