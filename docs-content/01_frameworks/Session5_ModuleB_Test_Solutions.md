@@ -37,8 +37,6 @@ C) Simple ping tests
 D) Log file analysis only  
 **Explanation**: The health monitoring system provides comprehensive service oversight with continuous automated monitoring, circuit breaker integration to protect against cascading failures, proactive alert generation, and comprehensive visibility into service relationships.
 
-## Key Concepts Summary
-
 ### Enterprise Architecture Patterns  
 - **Dependency injection** enables modular, testable, and maintainable systems  
 - **Protocol-based design** provides flexible contracts and interface segregation  

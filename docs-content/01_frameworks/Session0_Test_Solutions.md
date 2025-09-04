@@ -120,47 +120,6 @@ D) Planning (for multi-step workflows)
 
 **Explanation:** Real-time stock analysis requires accessing external APIs for current market data, making Tool Use the most appropriate pattern for this scenario.
 
-## Performance Scoring
-
-- **15/15 Correct**: Excellent understanding of agent frameworks and patterns  
-- **12-14 Correct**: Good grasp with minor knowledge gaps  
-- **9-11 Correct**: Adequate understanding, review specific patterns and frameworks  
-- **6-8 Correct**: Needs review of core concepts and framework differences  
-- **0-5 Correct**: Recommend re-reading session materials and practicing with examples  
-
-## Key Concepts Review
-
-### Five Core Agentic Patterns
-
-1. **Reflection**: Self-evaluation and iterative improvement  
-2. **Tool Use**: Dynamic tool selection and external capability extension  
-3. **ReAct**: Reasoning and Acting in interactive loops  
-4. **Planning**: Multi-step workflow decomposition and execution  
-5. **Multi-Agent**: Specialized collaboration and expertise sharing  
-
-### Framework Comparison Matrix
-
-- **LangChain**: Comprehensive ecosystem with extensive tool integration  
-- **LangGraph**: Graph-based workflows with precise control flow  
-- **CrewAI**: Team-oriented collaboration and role-based agents  
-- **PydanticAI**: Type-safe agents with schema validation  
-- **Atomic Agents**: Modular, composable agent components  
-- **ADK**: Enterprise-grade with security and monitoring  
-- **Agno**: Performance-optimized for high-throughput applications  
-
-### Pattern Selection Guidelines
-
-- **Simple Tasks**: Direct prompting or basic Tool Use  
-- **Quality-Critical Work**: Reflection pattern for iterative improvement  
-- **External Data Needs**: Tool Use for API and database access  
-- **Complex Workflows**: Planning pattern for step-by-step execution  
-- **Specialized Collaboration**: Multi-Agent for expert coordination  
-- **Real-time Processing**: ReAct for dynamic response handling  
-
-## Answer Summary
-
-1. D  2. D  3. C  4. C  5. A  6. D  7. C  8. C  9. A  10. A  11. D  12. D  13. B  14. C  15. C
-
 ---
 
 ## 🧭 Navigation

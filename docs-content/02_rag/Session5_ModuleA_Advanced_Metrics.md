@@ -145,9 +145,7 @@ Explainability evaluation helps understand which retrieved documents most influe
 
 The attribution calculation uses a leave-one-out approach: by removing each document and measuring the quality impact, we can quantify each document's contribution. Higher attribution scores indicate documents that were more essential to generating a high-quality response, providing transparency into the RAG decision process.
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 5
 

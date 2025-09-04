@@ -1241,7 +1241,6 @@ You've now mastered advanced orchestration patterns for LangGraph workflows opti
 - **Return to Core**: [Session 3 Main](Session3_LangGraph_Multi_Agent_Workflows.md)  
 - **Advance to Session 4**: [CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)  
 
-
 **🗂️ Source Files for Module A:**
 
 - [`src/session3/parallel_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/parallel_workflow.py) - Advanced parallel execution patterns
@@ -1249,7 +1248,6 @@ You've now mastered advanced orchestration patterns for LangGraph workflows opti
 - [`src/session3/orchestration_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/orchestration_patterns.py) - Sophisticated coordination strategies
 
 ---
-
 
 ## 📝 Multiple Choice Test - Session 3
 

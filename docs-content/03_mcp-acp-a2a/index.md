@@ -131,7 +131,7 @@ By completing this module, you will be able to:
 1. **Follow protocol specifications** and industry best practices  
 2. **Debug multi-agent communication** issues effectively  
 3. **Monitor and maintain** production agent systems  
-4. **Evaluate architectural trade-offs** for different use cases  
+4. **Evaluate architectural trade-offs** for different use cases
 
 ## 📝 Multiple Choice Test - Session None
 

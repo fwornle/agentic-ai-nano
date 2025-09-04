@@ -369,9 +369,7 @@ Explore deep technical topics:
 - [Advanced HNSW Tuning](Session3_Advanced_HNSW_Tuning.md)  
 - [Advanced Hybrid Search](Session3_Advanced_Hybrid_Search.md)  
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 3
 

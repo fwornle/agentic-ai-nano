@@ -1,6 +1,5 @@
 # Session 4: CrewAI Team Orchestration - Test Solutions
 
-
 ## 📝 Multiple Choice Test - Session 4
 
 **Question 1:** What is CrewAI's primary strength compared to other agent frameworks?  
@@ -92,15 +91,6 @@ C) Role-based specialization mimicking human team structures ✅
 D) Cloud integration  
 
 **Explanation:** CrewAI's role-based approach mirrors how human teams work, making it naturally suitable for business workflows and organizational structures.
-
-## Answer Summary
-
-1. B  2. B  3. B  4. B  5. B  6. B  7. B  8. B  9. B  10. B
-
----
-
-
-[View Solutions →](Session4_Test_Solutions.md)
 
 ---
 

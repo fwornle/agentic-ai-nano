@@ -1,6 +1,5 @@
 # Session 7: ADK Enterprise Agent Development - Test Solutions
 
-
 ## 📝 Multiple Choice Test - Session 7
 
 **Question 1:** What is the primary advantage of Google's ADK over other agent frameworks?  
@@ -92,15 +91,6 @@ C) Any cloud platform
 D) On-premises only  
 
 **Explanation:** ADK is specifically designed and optimized for Google Cloud Platform with native integration of GCP services.
-
-## Answer Summary
-
-1. B  2. D  3. A  4. B  5. B  6. B  7. B  8. B  9. B  10. B
-
----
-
-
-[View Solutions →](Session7_Test_Solutions.md)
 
 ---
 

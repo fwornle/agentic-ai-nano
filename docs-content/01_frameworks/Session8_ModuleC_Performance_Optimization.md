@@ -91,7 +91,6 @@ class CacheEntry:
     ttl_seconds: Optional
 - **Review Module A**: [Advanced Monitoring & Observability](Session8_ModuleA_Advanced_Monitoring_Observability.md)
 
-
 **🗂️ Source Files for Module C:**
 
 - `src/session8/intelligent_caching.py` - Multi-layer caching and deduplication systems
@@ -99,7 +98,6 @@ class CacheEntry:
 - `src/session8/performance_optimization.py` - Memory and latency optimization techniques
 
 ---
-
 
 ## 📝 Multiple Choice Test - Session 8
 

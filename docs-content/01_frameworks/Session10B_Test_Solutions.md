@@ -28,10 +28,6 @@
 
 **Explanation**: Comprehensive SRE dashboards provide real-time visibility into service health, SLO compliance, error budget consumption, and incident metrics. This visibility enables proactive decision-making, early problem detection, and informed trade-offs between feature velocity and reliability.
 
-## Answer Summary
-
-1. C  2. B  3. B  4. B  5. B  6. B  7. B
-
 ---
 
 ## 🧭 Navigation

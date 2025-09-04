@@ -269,9 +269,7 @@ The ensemble approach combines three complementary detection methods. Isolation 
 
 Ensemble scoring reduces false positives by requiring consensus from multiple detectors. Anomaly classification helps identify the root cause (performance, security, data quality), while recommended actions provide automated or semi-automated response suggestions for operations teams.
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 5
 

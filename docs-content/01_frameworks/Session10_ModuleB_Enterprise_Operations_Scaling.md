@@ -1774,14 +1774,12 @@ You've now mastered enterprise operations and scaling for production agent syste
 - **Continue to Module A**: [Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)  
 - **Portfolio Project**: Build a complete enterprise-grade agent platform with full operations  
 
-
 **🗂️ Source Files for Module B:**
 
 - `src/session10/scaling/auto_scaling.py` - Intelligent auto-scaling and predictive scaling
 - `src/session10/performance/optimization.py` - SRE principles and operational excellence
 
 ---
-
 
 ## 📝 Multiple Choice Test - Session 10
 

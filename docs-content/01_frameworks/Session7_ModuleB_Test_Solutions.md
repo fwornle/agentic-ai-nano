@@ -38,8 +38,6 @@ C) CPU and memory-based horizontal pod autoscaling with custom metrics ✅
 D) Manual load balancing  
 **Explanation**: The auto-scaling system responds to load changes through horizontal pod autoscaling based on CPU and memory utilization, enhanced with custom metrics for application-specific scaling decisions and optimal resource utilization.
 
-## Key Concepts Summary
-
 ### Enterprise Deployment  
 - **Kubernetes orchestration** provides robust container management and scaling capabilities  
 - **Rolling updates** ensure zero-downtime deployments with gradual traffic shifting  

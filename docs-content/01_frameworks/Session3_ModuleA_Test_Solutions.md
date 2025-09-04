@@ -53,8 +53,6 @@ This approach prioritizes result quality while rewarding efficient execution, cr
 
 These parameters optimize research agents for specific investigation tasks and quality standards.
 
-## Key Concepts Summary
-
 ### Orchestration Patterns  
 - **Multi-factor decision making** balances complexity, resources, and dependencies  
 - **Adaptive synchronization** provides flexibility while maintaining coordination  

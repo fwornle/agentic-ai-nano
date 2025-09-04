@@ -602,9 +602,7 @@ class ProductionQualityMonitor:
 
 Quality analytics provide operational intelligence for production RAG systems. The 24-hour default lookback period captures recent performance without overwhelming operators with historical data. Trend analysis identifies whether quality is improving, stable, or degrading over time, while alert summaries highlight recurring problems that need systematic fixes rather than individual document attention. System recommendations translate analytics into actionable configuration changes or process improvements.
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 2
 

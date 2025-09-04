@@ -1,6 +1,5 @@
 # Session 6: Graph-Based RAG (GraphRAG) - Test Solutions
 
-
 ## 📝 Multiple Choice Test - Session 6
 
 **Question 1:** What is the primary advantage of GraphRAG over traditional vector-based RAG?  
@@ -66,56 +65,6 @@ C) Maximizing query speed
 D) Simplifying the codebase  
 
 **Explanation:** In production systems, maintaining graph consistency while minimizing downtime is crucial. Updates must ensure that new entities and relationships are properly integrated without breaking existing connections, and the system should remain available for queries during updates. Inconsistent graphs can lead to incorrect reasoning and poor RAG quality.
-
-## Performance Scoring
-
-- **8/8 Correct**: Excellent mastery of GraphRAG concepts and implementation  
-- **7/8 Correct**: Strong understanding with minor technical gaps  
-- **6/8 Correct**: Good grasp of concepts, review graph traversal algorithms  
-- **5/8 Correct**: Adequate knowledge, focus on hybrid search strategies  
-- **4/8 or below**: Recommend hands-on practice with graph database systems  
-
-## Key GraphRAG Concepts
-
-### Knowledge Graph Construction
-
-1. **Entity Extraction**: Identifying and standardizing entities from text  
-2. **Relationship Mapping**: Connecting entities through meaningful relationships  
-3. **Graph Schema Design**: Structuring nodes and edges for optimal querying  
-4. **Quality Assurance**: Validation and deduplication of graph elements  
-
-### Graph Database Integration
-
-1. **Neo4j Operations**: Cypher queries, batch operations, performance optimization  
-2. **Schema Design**: Node types, relationship types, indexing strategies  
-3. **Scalability**: Handling large graphs with efficient storage and retrieval  
-4. **Maintenance**: Incremental updates, consistency management, backup strategies  
-
-### Multi-Hop Reasoning
-
-1. **Traversal Algorithms**: BFS for hop-limited exploration, path finding  
-2. **Semantic Guidance**: Using embeddings to guide graph exploration  
-3. **Result Synthesis**: Combining information from multiple graph paths  
-4. **Relevance Filtering**: Pruning irrelevant paths and ranking results  
-
-### Code GraphRAG Specialization
-
-1. **AST Parsing**: Extracting structural information from source code  
-2. **Dependency Analysis**: Call graphs, import relationships, data flow  
-3. **Repository Analysis**: Cross-file relationships, module dependencies  
-4. **Integration**: Combining code structure with documentation and comments  
-
-### Hybrid Search Architecture
-
-1. **Graph-Vector Fusion**: Combining structural and semantic search  
-2. **Adaptive Weighting**: Dynamically balancing graph and vector results  
-3. **Query Planning**: Deciding when to use graph vs. vector search  
-4. **Performance Optimization**: Caching, indexing, and query optimization
-
----
-
-
-[View Solutions →](Session6_Test_Solutions.md)
 
 ---
 

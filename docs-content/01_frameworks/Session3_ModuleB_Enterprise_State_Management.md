@@ -386,7 +386,6 @@ You've now mastered enterprise-grade state management for LangGraph workflows op
 - **Advance to Session 4**: [CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)
 - **Compare with Module A**: [Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)
 
-
 **🗂️ Source Files for Module B:**
 
 - [`src/session3/enterprise_state_management.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/enterprise_state_management.py) - Production state systems
@@ -394,7 +393,6 @@ You've now mastered enterprise-grade state management for LangGraph workflows op
 - [`src/session3/contextual_processing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/contextual_processing.py) - Adaptive workflow patterns
 
 ---
-
 
 ## 📝 Multiple Choice Test - Session 3
 

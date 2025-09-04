@@ -38,8 +38,6 @@ C) Until 3 consecutive test requests succeed or fail ✅
 D) 1 minute exactly  
 **Explanation**: The HALF_OPEN state performs controlled testing by evaluating exactly 3 requests to determine system health, requiring all 3 requests to succeed to close the circuit, with any failure immediately reopening the circuit for controlled recovery.
 
-## Key Concepts Summary
-
 ### Error Management Systems  
 - **Comprehensive classification** enables systematic error handling and analysis  
 - **Context preservation** provides detailed information for debugging and monitoring  

@@ -419,9 +419,7 @@ Finally, we initialize the model with the appropriate dimensions and return the 
 
 The trained GAT model produces enhanced node embeddings that incorporate learned attention patterns. The attention weights provide interpretability by showing which neighbors influenced each node's representation, helping users understand the reasoning behind GraphRAG retrieval decisions.
 
-
 ---
-
 
 ## 📝 Multiple Choice Test - Session 6
 

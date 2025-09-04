@@ -427,8 +427,7 @@ Your complete production file system server now includes:
 - **Comprehensive Logging**: For monitoring and debugging  
 - **Modular Design**: Easy to extend and maintain  
 - **Error Handling**: Graceful failure modes  
-- **Resource Management**: Efficient memory and CPU usage  
-
+- **Resource Management**: Efficient memory and CPU usage
 
 ## 📝 Multiple Choice Test - Session 2
 
