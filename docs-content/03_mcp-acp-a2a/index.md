@@ -202,7 +202,7 @@ After completing this module, you'll have mastered the complete stack of modern 
 
 **Ready to master agent communication protocols?** Choose your learning path and begin your journey into the future of AI agent systems!
 
-**Begin:** [Session 0 - Introduction to MCP ACP & A2A →](Session0_Introduction_to_MCP_ACP_A2A.md)
-**Curriculum:** [View Module Curriculum →](MCP_ACP_A2A_Nanodegree_Curriculum.md)
+**Begin:** [Session 0 - Introduction to MCP ACP & A2A →](Session0_Introduction_to_MCP_ACP_A2A.md)  
+**Curriculum:** [View Module Curriculum →](MCP_ACP_A2A_Nanodegree_Curriculum.md)  
 
 ---
