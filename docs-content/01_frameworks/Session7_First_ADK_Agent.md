@@ -289,6 +289,8 @@ B) Comprehensive security including data encryption, audit logging, and enterpri
 C) No security features  
 D) Simple password protection  
 
+[View Solutions →](Session7_Test_Solutions.md)
+
 ---
 
 ## 🧭 Navigation

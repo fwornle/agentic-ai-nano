@@ -361,7 +361,9 @@ def find_warmest_city(cities: List[str]) -> Dict:
 
 Implement this tool to reinforce MCP patterns while building advanced functionality.
 
-## Additional Resources
+## Discussion
+
+### Additional Resources
 
 - [FastMCP Documentation](https://fastmcp.readthedocs.io/) - Complete framework reference and advanced patterns  
 - [MCP Specification](https://modelcontextprotocol.io/specification/) - Official protocol specification and JSON-RPC details  

@@ -441,7 +441,7 @@ Session 10: Enterprise Integration
 Capstone: Multi-Framework Agent Ecosystem
 ```
 
-## Chapter Summary
+## Discussion
 
 ### Key Takeaways
 
