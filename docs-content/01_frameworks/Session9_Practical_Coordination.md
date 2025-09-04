@@ -1,7 +1,7 @@
 # 📝 Session 9: Practical Coordination - ReAct Implementation & Communication
 
 > **📝 PARTICIPANT PATH CONTENT**
-> Prerequisites: Complete 🎯 [Session9_Multi_Agent_Patterns_Observer.md](Session9_Multi_Agent_Patterns_Observer.md)
+> Prerequisites: Complete 🎯 [Multi-Agent Patterns](Session9_Multi_Agent_Patterns.md)
 > Time Investment: 1.5-2 hours
 > Outcome: Practical implementation of ReAct patterns and multi-agent communication
 

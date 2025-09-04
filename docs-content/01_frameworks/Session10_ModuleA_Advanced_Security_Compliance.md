@@ -2052,6 +2052,6 @@ D) Simplified key management
 ## 🧭 Navigation
 
 **Previous:** [Session 9 - Multi-Agent Coordination →](Session9_Practical_Coordination.md)  
-**Next:** [Session None -  →](../index.md)
+**Next:** [Course Home →](../index.md)
 
 ---

@@ -52,7 +52,7 @@ While other agent frameworks create monolithic processors that try to handle all
 
 In the world of petabyte-scale data processing, this modular approach mirrors the architectural patterns data engineers know from distributed streaming platforms like Kafka, Apache Beam, and distributed computing frameworks. Each atomic agent operates like a microservice in your data mesh, with single responsibility for data operations and minimal dependencies.
 
-## Learning Path Navigation
+## Learning Paths
 
 ### Quick Start Paths
 

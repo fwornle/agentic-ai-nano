@@ -1016,7 +1016,7 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination 
 ### Next Steps  
 - **Continue to Module B**: [Enterprise Team Patterns](Session4_ModuleB_Enterprise_Team_Patterns.md) for production data engineering architectures  
 - **Return to Core**: [Session 4 Main](Session4_CrewAI_Team_Orchestration.md)  
-- **Advance to Session 6**: [Agent Communication Protocols](Session6_Agent_Communication_Protocols.md)  
+- **Advance to Session 6**: [Atomic Agents & Modular Architecture](Session6_Atomic_Agents_Modular_Architecture.md)  
 
 ## Module A Knowledge Check
 

@@ -23,28 +23,28 @@ This module offers three distinct learning paths for mastering Retrieval-Augment
 **📝 Participant**: Build complete vector RAG system with Chroma/Pinecone (2 hours)
 **⚙️ Implementer**: Advanced embedding strategies, custom vector operations (+ 2 hours)
 
-[**Start Session 1 →**](Session1_RAG_Fundamentals_Vector_Databases.md)
+[**Start Session 1 →**](Session1_Basic_RAG_Implementation.md)
 
 ### 🎯📝⚙️ Session 2: Advanced Chunking & Query Processing
 **🎯 Observer**: Why chunking matters, different chunking strategies (30 min)
 **📝 Participant**: Implement semantic chunking, hierarchical structures (2 hours)
 **⚙️ Implementer**: Custom chunking algorithms, performance optimization (+ 2 hours)
 
-[**Start Session 2 →**](Session2_Advanced_Chunking_Query_Processing.md)
+[**Start Session 2 →**](Session2_Advanced_Chunking_Preprocessing.md)
 
 ### 🎯📝⚙️ Session 3: Search Enhancement & Query Expansion
 **🎯 Observer**: Query expansion concepts, reranking benefits (30 min)
 **📝 Participant**: Build query expansion, implement reranking systems (2.5 hours)
 **⚙️ Implementer**: Advanced retrieval algorithms, custom ranking models (+ 2 hours)
 
-[**Start Session 3 →**](Session3_RAG_Search_Enhancement_Query_Expansion.md)
+[**Start Session 3 →**](Session3_Vector_Databases_Search_Optimization.md)
 
 ### 🎯📝⚙️ Session 4: Advanced Context & RAG Routing
 **🎯 Observer**: Context engineering principles, routing strategies (30 min)
 **📝 Participant**: Implement context routing, advanced prompting (2 hours)
 **⚙️ Implementer**: Sophisticated routing algorithms, context optimization (+ 2 hours)
 
-[**Start Session 4 →**](Session4_Advanced_Context_RAG_Routing.md)
+[**Start Session 4 →**](Session4_Query_Enhancement_Context_Augmentation.md)
 
 ### 🎯📝⚙️ Session 5: RAG Evaluation & Quality Assessment
 **🎯 Observer**: Evaluation metrics, quality assessment approaches (30 min)
@@ -78,7 +78,7 @@ Deploy and maintain enterprise-grade RAG systems.
 - Monitoring and observability  
 - Enterprise workflow integration  
 
-## Quick Navigation by Use Case
+## Learning Paths by Use Case
 
 ### Building Your First RAG System
 **Path**: 🎯 Observer → 📝 Participant (Sessions 1-2)

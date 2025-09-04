@@ -1788,6 +1788,10 @@ D) Reduced memory usage
 
 [**View Module B Test Solutions →**](Session3_Test_Solutions.md)
 
+
+
+[View Solutions →](Session3_ModuleB_Advanced_Workflows_Test_Solutions.md)
+
 ---
 
 ## 🧭 Navigation
