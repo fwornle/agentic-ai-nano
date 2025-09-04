@@ -51,6 +51,6 @@
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 8 Test Questions →](Session8_*.md#multiple-choice-test)
+**Back to Test:** [Session 8 Test Questions →](Session8_Agno_Production_Ready_Agents.md#multiple-choice-test-session-8)
 
 ---

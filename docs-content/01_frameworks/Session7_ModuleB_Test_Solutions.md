@@ -57,6 +57,6 @@ D) Manual load balancing
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
+**Back to Test:** [Session 7 Test Questions →](Session7_First_ADK_Agent.md#multiple-choice-test-session-7)
 
 ---

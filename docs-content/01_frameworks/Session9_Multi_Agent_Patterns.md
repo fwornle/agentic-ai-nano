@@ -340,8 +340,6 @@ D) Manual deployment only
 
 [View Solutions →](Session9_Test_Solutions.md)
 
-[View Solutions →](Session9B_Test_Solutions.md)
-
 ---
 
 ## 🧭 Navigation

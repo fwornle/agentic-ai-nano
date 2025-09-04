@@ -96,6 +96,6 @@ D) Automatic file compression
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 2 Test Questions →](Session2_Production_Implementation.md#multiple-choice-test)
+**Back to Test:** [Session 2 Test Questions →](Session2_Production_Implementation.md#multiple-choice-test-session-2)
 
 ---

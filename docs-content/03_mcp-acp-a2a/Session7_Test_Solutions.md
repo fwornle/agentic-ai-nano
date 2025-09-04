@@ -96,6 +96,6 @@ D) Simpler implementation
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 7 Test Questions →](Session7_Advanced_Choreography.md#multiple-choice-test)
+**Back to Test:** [Session 7 Test Questions →](Session7_Advanced_Choreography.md#multiple-choice-test-session-7)
 
 ---

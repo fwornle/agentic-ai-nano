@@ -51,6 +51,6 @@ D) When you want faster traversal
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
+**Back to Test:** [Session 6 Test Questions →](Session6_Hybrid_GraphRAG_Advanced.md#multiple-choice-test-session-6)
 
 ---

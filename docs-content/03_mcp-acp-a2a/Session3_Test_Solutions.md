@@ -96,6 +96,6 @@ D) Manual intervention is required
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 3 Test Questions →](Session3_LangChain_MCP_Integration.md#multiple-choice-test)
+**Back to Test:** [Session 3 Test Questions →](Session3_LangChain_MCP_Integration.md#multiple-choice-test-session-3)
 
 ---

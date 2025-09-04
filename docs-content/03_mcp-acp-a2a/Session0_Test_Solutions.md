@@ -96,6 +96,6 @@ D) Only cloud service providers
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 0 Test Questions →](Session0_Introduction_to_MCP_ACP_A2A.md#multiple-choice-test)
+**Back to Test:** [Session 0 Test Questions →](Session0_Introduction_to_MCP_ACP_A2A.md#multiple-choice-test-session-0)
 
 ---

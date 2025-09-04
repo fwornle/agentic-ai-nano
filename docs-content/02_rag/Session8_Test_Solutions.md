@@ -70,6 +70,6 @@ D) Compatibility with legacy systems
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 8 Test Questions →](Session8_MRAG_Evolution.md#multiple-choice-test)
+**Back to Test:** [Session 8 Test Questions →](Session8_MRAG_Evolution.md#multiple-choice-test-session-8)
 
 ---

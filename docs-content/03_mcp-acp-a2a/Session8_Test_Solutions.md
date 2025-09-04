@@ -96,6 +96,6 @@ D) Flexibility to combine multiple execution patterns for complex scenarios ✅
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 8 Test Questions →](Session8_Advanced_Agent_Workflows.md#multiple-choice-test)
+**Back to Test:** [Session 8 Test Questions →](Session8_Advanced_Agent_Workflows.md#multiple-choice-test-session-8)
 
 ---

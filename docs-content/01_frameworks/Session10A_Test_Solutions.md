@@ -92,6 +92,6 @@ for field_name, key_id in field_encryption_map.items():
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 10 Test Questions →](Session10_*.md#multiple-choice-test)
+**Back to Test:** [Session 10 Test Questions →](Session10_Enterprise_Integration_Production_Deployment.md#multiple-choice-test-session-10)
 
 ---

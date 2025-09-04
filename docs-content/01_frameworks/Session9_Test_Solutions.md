@@ -96,6 +96,6 @@ D) Lower costs
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 9 Test Questions →](Session9_Multi_Agent_Patterns.md#multiple-choice-test)
+**Back to Test:** [Session 9 Test Questions →](Session9_Multi_Agent_Patterns.md#multiple-choice-test-session-9)
 
 ---

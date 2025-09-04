@@ -46,6 +46,6 @@ D) It reduces memory usage
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
+**Back to Test:** [Session 4 Test Questions →](Session4_Complete_Enhancement_Pipeline.md#multiple-choice-test-session-4)
 
 ---
