@@ -210,19 +210,12 @@ Before moving to the next path, ensure you can answer:
 
 If you can confidently answer these questions, you're ready to progress to more advanced content!
 
-## 📝 Navigation
-
-**🏠 Module Home**: [Session 7 Overview](Session7_First_ADK_Agent.md)
-**⬅️ Previous**: [Session 6 - Atomic Agents Modular Architecture](Session6_Atomic_Agents_Modular_Architecture.md)
-**➡️ Next Path**: [📝 ADK Implementation](Session7_ADK_Implementation.md) or [⚙️ Advanced Systems](Session7_Advanced_ADK_Systems.md)
-
-**📋 Quick Reference**: [ADK Fundamentals Cheat Sheet](../references/adk-fundamentals.md)
-
----
-
 ## 🧭 Navigation
 
-**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
+**Previous:** [Session 6 - Atomic Agents Modular Architecture →](Session6_Atomic_Agents_Modular_Architecture.md)  
 **Next:** [Session 8 - Production Ready →](Session8_*.md)
+
+**Module Home**: [Session 7 Overview →](Session7_First_ADK_Agent.md)  
+**Next Paths**: [📝 ADK Implementation →](Session7_ADK_Implementation.md) | [⚙️ Advanced Systems →](Session7_Advanced_ADK_Systems.md)
 
 ---

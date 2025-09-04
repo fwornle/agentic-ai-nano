@@ -146,6 +146,9 @@ Each session includes:
    - Production considerations  
    - Workflow orchestration features  
 
+
+[View Solutions →](Session*_Test_Solutions.md)
+
 ## Development Environment
 
 ### Required Software
@@ -185,7 +188,7 @@ Track your progress through the module:
 - [ ] **Session 8**: Advanced Workflows ⏱️ *Time: varies by path*  
 - [ ] **Session 9**: Production Deployment ⏱️ *Time: varies by path*  
 
-## 🔗 Navigation
+## 🧭 Navigation
 
 ### Previous Module
 

@@ -112,7 +112,7 @@ You have mastered the full spectrum of RAG architectures and can implement sophi
 - ✅ **Better code examples**: Max 20 lines per block with explanations  
 - ✅ **Improved navigation**: Path-specific progression and cross-references  
 
-## 🧭 Quick Navigation
+## Discussion
 
 ### Ready to Start Learning?  
 - **New to RAG?** → Start with [🎯 RAG Architecture Fundamentals](Session0_RAG_Architecture_Fundamentals.md)  

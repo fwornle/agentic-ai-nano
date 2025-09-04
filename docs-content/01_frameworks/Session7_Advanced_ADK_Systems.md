@@ -525,19 +525,12 @@ Advanced performance optimization requires:
 3. **Capacity Planning**: Use historical data for predictive scaling and resource allocation
 4. **Cost Optimization**: Implement resource scheduling and spot instance integration
 
-## 📝 Navigation
-
-**🏠 Module Home**: [Session 7 Overview](Session7_First_ADK_Agent.md)
-**⬅️ Previous**: [📝 ADK Implementation](Session7_ADK_Implementation.md)
-**➡️ Next**: [Session 8 - Production Agent Deployment](Session8_Agno_Production_Ready_Agents.md)
-
-**📋 Complete Learning Path**: 🎯 Essentials ✅ → 📝 Implementation ✅ → ⚙️ Advanced Systems ✅
-
----
-
 ## 🧭 Navigation
 
-**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
+**Previous:** [📝 ADK Implementation →](Session7_ADK_Implementation.md)  
 **Next:** [Session 8 - Production Ready →](Session8_*.md)
+
+**Module Home**: [Session 7 Overview →](Session7_First_ADK_Agent.md)  
+**Learning Path**: 🎯 Essentials ✅ → 📝 Implementation ✅ → ⚙️ Advanced Systems ✅
 
 ---
