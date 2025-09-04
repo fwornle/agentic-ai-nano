@@ -1,6 +1,7 @@
 # Session 2: LangChain Foundations - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 2
 
 **Question 1:** What is the primary benefit of LangChain's unified LLM interface?  
 A) Lower cost  
@@ -44,8 +45,13 @@ D) ConversationEntityMemory
 
 ---
 
+
+[View Solutions →](Session2_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 2 Test Questions →](Session2_*.md#multiple-choice-test)
+**Back to Test:** [Session 2 Test Questions →](Session2_Enterprise_Tool_Development.md#multiple-choice-test)
 
 ---

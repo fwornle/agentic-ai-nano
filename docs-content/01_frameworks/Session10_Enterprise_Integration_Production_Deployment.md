@@ -996,7 +996,13 @@ Intelligent auto-scaling with multi-factor decision making, Redis caching strate
 
 **🗂️ All Code Examples**: Available in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10) - Complete enterprise implementation!
 
-## Multiple Choice Test - Session 10 (15 minutes)
+
+**🏆 Frameworks Module Complete!** You've successfully completed the Agent Frameworks Module and are now ready to build production-ready, enterprise-grade agent systems!
+
+---
+
+
+## 📝 Multiple Choice Test - Session 10
 
 Test your understanding of enterprise integration and production deployment.
 
@@ -1061,8 +1067,6 @@ C) Manual intervention
 D) System shutdown  
 
 [View Solutions →](Session10_Test_Solutions.md)
-
-**🏆 Frameworks Module Complete!** You've successfully completed the Agent Frameworks Module and are now ready to build production-ready, enterprise-grade agent systems!
 
 ---
 

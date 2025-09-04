@@ -1466,7 +1466,30 @@ Data transfer optimization addresses network costs through locality strategies a
 
 Query optimization recommendations focus on reducing per-query costs through caching and scanning optimization. High query costs trigger efficiency improvement suggestions.
 
-## 📝 Multiple Choice Test - Module D
+
+## Module Summary
+
+You've now mastered performance optimization and monitoring for production data processing systems:
+
+✅ **Performance Benchmarking & Optimization**: Implemented comprehensive performance measurement and optimization strategies for data processing
+✅ **Advanced Monitoring & Observability**: Set up Prometheus metrics, structured logging, and distributed tracing for data systems
+✅ **Cost Optimization & Resource Management**: Created intelligent cost tracking and optimization systems for data processing workloads
+✅ **Real-time Dashboards**: Built monitoring dashboards with alerting and performance analytics tailored for data engineering
+
+### Next Steps
+- **Return to Core**: [Session 2 Main](Session2_LangChain_Foundations.md)
+- **Advance to Session 3**: [LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)
+- **Review Production**: [Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)
+
+**🗂️ Source Files for Module D:**
+- `src/session2/performance_benchmarking.py` - Performance measurement and optimization for data processing
+- `src/session2/monitoring_observability.py` - Comprehensive monitoring systems for data processing
+- `src/session2/cost_optimization.py` - Cost tracking and optimization strategies for data systems
+
+---
+
+
+## 📝 Multiple Choice Test - Session 2
 
 Test your understanding of performance monitoring and optimization for data engineering systems:
 
@@ -1500,26 +1523,7 @@ B) Understand data processing performance under different analytical workloads a
 C) Simplify calculations  
 D) Improve execution speed  
 
-[View Solutions →](Session2_ModuleD_Test_Solutions.md)
-
-## Module Summary
-
-You've now mastered performance optimization and monitoring for production data processing systems:
-
-✅ **Performance Benchmarking & Optimization**: Implemented comprehensive performance measurement and optimization strategies for data processing
-✅ **Advanced Monitoring & Observability**: Set up Prometheus metrics, structured logging, and distributed tracing for data systems
-✅ **Cost Optimization & Resource Management**: Created intelligent cost tracking and optimization systems for data processing workloads
-✅ **Real-time Dashboards**: Built monitoring dashboards with alerting and performance analytics tailored for data engineering
-
-### Next Steps
-- **Return to Core**: [Session 2 Main](Session2_LangChain_Foundations.md)
-- **Advance to Session 3**: [LangGraph Multi-Agent Workflows](Session3_LangGraph_Multi_Agent_Workflows.md)
-- **Review Production**: [Module B: Production Deployment Strategies](Session2_ModuleB_Production_Deployment_Strategies.md)
-
-**🗂️ Source Files for Module D:**
-- `src/session2/performance_benchmarking.py` - Performance measurement and optimization for data processing
-- `src/session2/monitoring_observability.py` - Comprehensive monitoring systems for data processing
-- `src/session2/cost_optimization.py` - Cost tracking and optimization strategies for data systems
+[View Solutions →](Session2_Test_Solutions.md)
 
 ---
 

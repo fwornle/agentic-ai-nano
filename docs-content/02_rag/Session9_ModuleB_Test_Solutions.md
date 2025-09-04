@@ -1,6 +1,7 @@
 # Session 9: Enterprise Integration Architectures - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 9
 
 **Question 1:** What is the core principle of zero-trust security for RAG systems?  
 
@@ -116,6 +117,11 @@ D) Software licensing costs
 2. **API Management**: Enterprise-grade API gateways and rate limiting  
 3. **Monitoring Integration**: Connection with enterprise monitoring platforms  
 4. **Disaster Recovery**: Cross-region failover and data replication
+
+---
+
+
+[View Solutions →](Session9_Test_Solutions.md)
 
 ---
 

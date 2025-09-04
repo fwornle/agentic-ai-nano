@@ -1,6 +1,7 @@
 # Session 2: Advanced Document Analytics - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 2
 
 **Question 1:** What is the primary benefit of document complexity scoring in RAG systems?  
 A) It reduces processing time for all documents  
@@ -41,6 +42,11 @@ C) By reading level and complexity scores
 D) By semantic similarity and topic consistency ✅  
 
 **Explanation:** Coherence between chunks should be measured using semantic similarity algorithms that evaluate topic consistency and conceptual relationships. This ensures that adjacent chunks maintain logical flow and contextual continuity for both retrieval systems and end users.
+
+---
+
+
+[View Solutions →](Session2_Test_Solutions.md)
 
 ---
 

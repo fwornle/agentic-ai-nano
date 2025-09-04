@@ -386,7 +386,17 @@ You've now mastered enterprise-grade state management for LangGraph workflows op
 - **Advance to Session 4**: [CrewAI Team Orchestration](Session4_CrewAI_Team_Orchestration.md)
 - **Compare with Module A**: [Advanced Orchestration Patterns](Session3_ModuleA_Advanced_Orchestration_Patterns.md)
 
-## 📝 Multiple Choice Test - Module B
+
+**🗂️ Source Files for Module B:**
+
+- [`src/session3/enterprise_state_management.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/enterprise_state_management.py) - Production state systems
+- [`src/session3/advanced_routing_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing_patterns.py) - Complex decision engines
+- [`src/session3/contextual_processing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/contextual_processing.py) - Adaptive workflow patterns
+
+---
+
+
+## 📝 Multiple Choice Test - Session 3
 
 Test your understanding of enterprise state management for data processing:
 
@@ -420,13 +430,7 @@ B) Completeness (25%) + Keywords (35%) + Structure (25%) + Complexity (15%)
 C) Structure and complexity only  
 D) Completeness (50%) + Keywords (50%)  
 
-[View Solutions →](Session3_ModuleB_Test_Solutions.md)
-
-**🗂️ Source Files for Module B:**
-
-- [`src/session3/enterprise_state_management.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/enterprise_state_management.py) - Production state systems
-- [`src/session3/advanced_routing_patterns.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing_patterns.py) - Complex decision engines
-- [`src/session3/contextual_processing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/contextual_processing.py) - Adaptive workflow patterns
+[View Solutions →](Session3_Test_Solutions.md)
 
 ---
 

@@ -123,6 +123,6 @@ D) Basic similarity matching with cosine distance
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 0 Test Questions →](Session0_*.md#multiple-choice-test)
+**Back to Test:** [Session 0 Test Questions →](Session0_RAG_Architecture_Fundamentals.md#multiple-choice-test)
 
 ---

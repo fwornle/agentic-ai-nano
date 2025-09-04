@@ -1,6 +1,7 @@
 # Session 5: PydanticAI Type-Safe Agents - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 5
 
 **Question 1:** What is the primary advantage of PydanticAI over traditional agent frameworks?  
 
@@ -247,8 +248,13 @@ D) User feedback only
 
 ---
 
+
+[View Solutions →](Session5_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 5 Test Questions →](Session5_*.md#multiple-choice-test)
+**Back to Test:** [Session 5 Test Questions →](Session5_PydanticAI_Type_Safe_Agents.md#multiple-choice-test)
 
 ---

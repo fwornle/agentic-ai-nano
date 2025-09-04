@@ -1997,7 +1997,11 @@ You've now mastered advanced security and compliance for enterprise agent system
 - `src/session10/security/enterprise_auth.py` - Advanced RBAC and zero-trust security
 - `src/session10/security/encryption_framework.py` - Enterprise encryption and key management
 
-## 📝 Multiple Choice Test - Module A
+
+---
+
+
+## 📝 Multiple Choice Test - Session 10
 
 Test your understanding of advanced security and compliance for enterprise agent systems:
 
@@ -2043,7 +2047,7 @@ B) Granular protection allowing different encryption policies per field
 C) Smaller storage requirements  
 D) Simplified key management  
 
-[View Solutions →](Session10A_Test_Solutions.md)
+[View Solutions →](Session10_Test_Solutions.md)
 
 ---
 

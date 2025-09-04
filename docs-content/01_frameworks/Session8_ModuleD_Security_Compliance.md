@@ -1342,7 +1342,17 @@ You've now mastered security and compliance systems that prevent billion-dollar 
 - **Review Other Modules**: [Advanced Monitoring](Session8_ModuleA_Advanced_Monitoring_Observability.md), [Enterprise Scaling](Session8_ModuleB_Enterprise_Scaling_Architecture.md), [Performance Optimization](Session8_ModuleC_Performance_Optimization.md)  
 - **Advance to Session 9**: [Session 9 - Advanced Framework Patterns](Session9_Advanced_Framework_Patterns.md)  
 
-## 📝 Multiple Choice Test - Module D
+
+**🗂️ Source Files for Module D:**
+
+- `src/session8/security_architecture.py` - Zero-trust security implementation
+- `src/session8/compliance_framework.py` - Regulatory compliance management
+- `src/session8/privacy_protection.py` - Privacy-preserving techniques
+
+---
+
+
+## 📝 Multiple Choice Test - Session 8
 
 Test your understanding of Security & Compliance for enterprise agent systems:
 
@@ -1376,13 +1386,7 @@ B) Homomorphic encryption of sensitive fields
 C) Generalization and suppression of quasi-identifiers  
 D) JWT token-based authentication  
 
-[View Solutions →](Session8_ModuleD_Test_Solutions.md)
-
-**🗂️ Source Files for Module D:**
-
-- `src/session8/security_architecture.py` - Zero-trust security implementation
-- `src/session8/compliance_framework.py` - Regulatory compliance management
-- `src/session8/privacy_protection.py` - Privacy-preserving techniques
+[View Solutions →](Session8_Test_Solutions.md)
 
 ---
 

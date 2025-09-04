@@ -91,7 +91,17 @@ class CacheEntry:
     ttl_seconds: Optional
 - **Review Module A**: [Advanced Monitoring & Observability](Session8_ModuleA_Advanced_Monitoring_Observability.md)
 
-## 📝 Multiple Choice Test - Module C
+
+**🗂️ Source Files for Module C:**
+
+- `src/session8/intelligent_caching.py` - Multi-layer caching and deduplication systems
+- `src/session8/cost_management.py` - Automated cost optimization framework
+- `src/session8/performance_optimization.py` - Memory and latency optimization techniques
+
+---
+
+
+## 📝 Multiple Choice Test - Session 8
 
 Test your understanding of Performance Optimization:
 
@@ -125,13 +135,7 @@ B) To reduce latency by reusing HTTP connections across requests
 C) To automatically retry failed requests  
 D) To load balance requests across multiple servers  
 
-[View Solutions →](Session8_ModuleC_Test_Solutions.md)
-
-**🗂️ Source Files for Module C:**
-
-- `src/session8/intelligent_caching.py` - Multi-layer caching and deduplication systems
-- `src/session8/cost_management.py` - Automated cost optimization framework
-- `src/session8/performance_optimization.py` - Memory and latency optimization techniques
+[View Solutions →](Session8_Test_Solutions.md)
 
 ---
 

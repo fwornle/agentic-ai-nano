@@ -436,6 +436,7 @@ all_tools = weather_toolkit.get_tools() + file_toolkit.get_tools() + preference_
 
 **Success Criteria:** Your agent should demonstrate intelligent tool coordination, graceful error handling, and comprehensive reporting that synthesizes information from all integrated systems.
 
+
 ## 📝 Multiple Choice Test - Session 3
 
 Test your understanding of LangChain MCP Integration mastery:
@@ -508,6 +509,11 @@ This integration represents more than just connecting two technologies - it's a 
 - [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Workflow orchestration guide  
 - [Model Context Protocol](https://modelcontextprotocol.io/) - Official MCP specification  
 - [ReAct Paper](https://arxiv.org/abs/2210.03629) - Original research on reasoning and acting patterns
+
+---
+
+
+[View Solutions →](Session3_Test_Solutions.md)
 
 ---
 

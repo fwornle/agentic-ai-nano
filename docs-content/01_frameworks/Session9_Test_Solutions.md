@@ -1,6 +1,7 @@
 # Session 9: Multi-Agent Patterns & Coordination - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 9
 
 **Question 1:** What does "ReAct" stand for in the ReAct pattern?  
 
@@ -98,8 +99,13 @@ D) Lower costs
 
 ---
 
+
+[View Solutions →](Session9_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 9 Test Questions →](Session9_*.md#multiple-choice-test)
+**Back to Test:** [Session 9 Test Questions →](Session9_Multi_Agent_Patterns.md#multiple-choice-test)
 
 ---

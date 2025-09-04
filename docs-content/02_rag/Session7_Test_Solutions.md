@@ -1,6 +1,7 @@
 # Session 7: Agentic RAG Systems - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 7
 
 **Question 1:** What is the primary advantage of query planning in agentic RAG systems?  
 A) Faster response times  
@@ -117,8 +118,13 @@ D) Token usage
 
 ---
 
+
+[View Solutions →](Session7_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 7 Test Questions →](Session7_*.md#multiple-choice-test)
+**Back to Test:** [Session 7 Test Questions →](Session7_Advanced_Agent_Reasoning.md#multiple-choice-test)
 
 ---

@@ -133,7 +133,7 @@ By completing this module, you will be able to:
 3. **Monitor and maintain** production agent systems  
 4. **Evaluate architectural trade-offs** for different use cases  
 
-## Assessment Structure
+## 📝 Multiple Choice Test - Session None
 
 Each session includes:
 

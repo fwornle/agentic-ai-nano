@@ -1018,7 +1018,23 @@ You've now mastered enterprise modular systems for data processing:
 ✅ **Container Orchestration**: Designed production Kubernetes deployments with auto-scaling and monitoring for data processing workloads
 ✅ **Component Versioning**: Created comprehensive versioning and lifecycle management for data processing components
 
-## 📝 Multiple Choice Test - Module B
+
+### Next Steps
+
+- **Return to Core**: [Session 6 Main](Session6_Atomic_Agents_Modular_Architecture.md)  
+- **Advance to Session 7**: [First ADK Agent](Session7_First_ADK_Agent.md)  
+- **Review Module A**: [Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)  
+
+**🗂️ Source Files for Module B:**
+
+- `src/session6/enterprise_data_systems.py` - Production modular architectures for data processing
+- `src/session6/enterprise_data_security.py` - Enterprise security patterns for data processing
+- `src/session6/data_container_orchestration.py` - Container orchestration for data processing systems
+
+---
+
+
+## 📝 Multiple Choice Test - Session 6
 
 Test your understanding of enterprise modular systems for data processing:
 
@@ -1052,19 +1068,7 @@ B) Only internal policies
 C) Comprehensive support for SOC 2, GDPR, HIPAA, and PCI-DSS with configurable requirements for data processing operations  
 D) Basic logging only  
 
-[View Solutions →](Session6_ModuleB_Test_Solutions.md)
-
-### Next Steps
-
-- **Return to Core**: [Session 6 Main](Session6_Atomic_Agents_Modular_Architecture.md)  
-- **Advance to Session 7**: [First ADK Agent](Session7_First_ADK_Agent.md)  
-- **Review Module A**: [Advanced Composition Patterns](Session6_ModuleA_Advanced_Composition_Patterns.md)  
-
-**🗂️ Source Files for Module B:**
-
-- `src/session6/enterprise_data_systems.py` - Production modular architectures for data processing
-- `src/session6/enterprise_data_security.py` - Enterprise security patterns for data processing
-- `src/session6/data_container_orchestration.py` - Container orchestration for data processing systems
+[View Solutions →](Session6_Test_Solutions.md)
 
 ---
 

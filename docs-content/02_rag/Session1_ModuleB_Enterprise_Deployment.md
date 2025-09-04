@@ -514,7 +514,11 @@ Alert triggering with handler resilience ensures notifications reach operations 
                 print(f"Alert handler failed: {e}")
 ```
 
-## 📝 Multiple Choice Test - Module B
+
+---
+
+
+## 📝 Multiple Choice Test - Session 1
 
 Test your understanding of enterprise RAG deployment:
 
@@ -548,7 +552,7 @@ B) Response time, error rates, throughput, and business KPIs
 C) Only error counts  
 D) Only resource utilization  
 
-[View Solutions →](Session1_ModuleB_Test_Solutions.md)
+[View Solutions →](Session1_Test_Solutions.md)
 
 ---
 

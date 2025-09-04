@@ -1,6 +1,7 @@
 # Session 6: Advanced Graph Algorithms - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 6
 
 **Question 1:** What is the main advantage of Temporal PageRank over traditional PageRank?  
 
@@ -71,6 +72,11 @@ D) When you want faster traversal
 
 ## Answer Summary  
 1. B  2. C  3. B  4. B  5. B
+
+---
+
+
+[View Solutions →](Session6_Test_Solutions.md)
 
 ---
 

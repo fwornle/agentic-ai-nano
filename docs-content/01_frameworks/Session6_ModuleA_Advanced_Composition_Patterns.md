@@ -711,7 +711,23 @@ You've now mastered advanced atomic agent composition patterns for data processi
 ✅ **Dynamic Assembly**: Created runtime agent composition systems with capability-based selection for data processing workflows
 ✅ **CLI Integration**: Designed data engineering-friendly command-line tools for atomic agent management
 
-## 📝 Multiple Choice Test - Module A
+
+### Next Steps
+
+- **Continue to Module B**: [Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md) for production-scale data processing architectures  
+- **Return to Core**: [Session 6 Main](Session6_Atomic_Agents_Modular_Architecture.md)  
+- **Advance to Session 7**: [First ADK Agent](Session7_First_ADK_Agent.md)  
+
+**🗂️ Source Files for Module A:**
+
+- `src/session6/advanced_data_composition.py` - Sophisticated data pipeline patterns
+- `src/session6/dynamic_data_assembly.py` - Runtime composition systems for data processing
+- `src/session6/atomic_data_cli.py` - Data engineering DevOps CLI integration
+
+---
+
+
+## 📝 Multiple Choice Test - Session 6
 
 Test your understanding of advanced atomic agent composition patterns for data processing:
 
@@ -745,19 +761,7 @@ B) Circuit breaker integration with configurable retry policies and failure trac
 C) Manual intervention required  
 D) No error handling  
 
-[View Solutions →](Session6_ModuleA_Test_Solutions.md)
-
-### Next Steps
-
-- **Continue to Module B**: [Enterprise Modular Systems](Session6_ModuleB_Enterprise_Modular_Systems.md) for production-scale data processing architectures  
-- **Return to Core**: [Session 6 Main](Session6_Atomic_Agents_Modular_Architecture.md)  
-- **Advance to Session 7**: [First ADK Agent](Session7_First_ADK_Agent.md)  
-
-**🗂️ Source Files for Module A:**
-
-- `src/session6/advanced_data_composition.py` - Sophisticated data pipeline patterns
-- `src/session6/dynamic_data_assembly.py` - Runtime composition systems for data processing
-- `src/session6/atomic_data_cli.py` - Data engineering DevOps CLI integration
+[View Solutions →](Session6_Test_Solutions.md)
 
 ---
 

@@ -396,6 +396,10 @@ For comprehensive deep-dive into enterprise patterns and advanced architectures:
 - [Tool Development](Session2_ModuleC_Custom_Tool_Development.md) - Specialized data processing tools  
 - [Performance Monitoring](Session2_ModuleD_Performance_Monitoring.md) - System optimization & observability  
 
+
+---
+
+
 ## 📝 Multiple Choice Test - Session 2
 
 Test your understanding of LangChain foundations and agent patterns for data engineering:

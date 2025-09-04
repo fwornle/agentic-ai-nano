@@ -1,6 +1,7 @@
 # Session 9: Advanced Production Patterns - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 9
 
 **Question 1:** What is the primary benefit of deploying RAG across multiple Kubernetes clusters?  
 
@@ -86,6 +87,11 @@ D) Faster system performance
 2. **Reliability**: 99.9%+ uptime with automated recovery  
 3. **Scalability**: Handle 100x traffic increases automatically  
 4. **Security**: Zero-trust architecture with continuous threat detection
+
+---
+
+
+[View Solutions →](Session9_Test_Solutions.md)
 
 ---
 

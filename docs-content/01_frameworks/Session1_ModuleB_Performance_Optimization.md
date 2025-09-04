@@ -746,7 +746,20 @@ Finally, the system manages cache size to prevent memory issues during data proc
                     f"cache size {len(self.response_cache)}")
 ```
 
-## 📝 Multiple Choice Test - Module B
+
+## Module Summary
+
+You've now mastered performance optimization for bare metal data processing agents:
+
+✅ **Memory Management**: Implemented efficient memory usage and data processing history optimization
+✅ **Tool Execution Speed**: Built caching and parallel execution systems for faster data processing tool usage
+✅ **Response Time Optimization**: Created strategies for faster agent responses with data processing-specific fallback mechanisms
+✅ **Performance Monitoring**: Designed analytics systems for continuous performance improvement in data processing contexts
+
+---
+
+
+## 📝 Multiple Choice Test - Session 1
 
 Test your understanding of performance optimization concepts:
 
@@ -780,16 +793,7 @@ B) Memory usage exclusively
 C) Response times, percentiles, cache hit rates, target achievement, and data volumes processed  
 D) Just error rates and failures  
 
-[View Solutions →](Session1_ModuleB_Test_Solutions.md)
-
-## Module Summary
-
-You've now mastered performance optimization for bare metal data processing agents:
-
-✅ **Memory Management**: Implemented efficient memory usage and data processing history optimization
-✅ **Tool Execution Speed**: Built caching and parallel execution systems for faster data processing tool usage
-✅ **Response Time Optimization**: Created strategies for faster agent responses with data processing-specific fallback mechanisms
-✅ **Performance Monitoring**: Designed analytics systems for continuous performance improvement in data processing contexts
+[View Solutions →](Session1_Test_Solutions.md)
 
 ---
 

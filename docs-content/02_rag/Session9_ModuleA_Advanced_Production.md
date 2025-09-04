@@ -478,7 +478,11 @@ When compliance scores fall below the threshold (default 90%), automated remedia
         }
 ```
 
-## 📝 Multiple Choice Test - Module A
+
+---
+
+
+## 📝 Multiple Choice Test - Session 9
 
 Test your understanding of advanced production patterns:
 
@@ -512,7 +516,7 @@ B) Simplified audit processes
 C) Continuous adherence without manual oversight  
 D) Faster system performance  
 
-[View Solutions →](Session9_ModuleA_Test_Solutions.md)
+[View Solutions →](Session9_Test_Solutions.md)
 
 ---
 

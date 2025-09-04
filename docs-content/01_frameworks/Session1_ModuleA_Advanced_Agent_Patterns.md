@@ -595,7 +595,20 @@ Task analysis uses structured evaluation criteria to identify the specialized ca
 
 The analysis provides context about available specialized data processing agents and requests specific justifications for agent selection, ensuring intelligent task distribution optimized for data engineering workflows rather than random assignment.
 
-## 📝 Multiple Choice Test - Module A
+
+## Module Summary
+
+You've now mastered advanced agent patterns for data engineering including:
+
+✅ **Reflection Agents**: Implemented self-improvement through iterative critique and refinement of data processing strategies
+✅ **Multi-Step Planning**: Built systems that decompose complex data workflows into executable pipeline plans
+✅ **Multi-Agent Orchestration**: Created coordination systems for specialized data processing agent collaboration
+✅ **Self-Improvement Mechanisms**: Designed agents that enhance their data processing performance over time
+
+---
+
+
+## 📝 Multiple Choice Test - Session 1
 
 Test your understanding of advanced agent patterns:
 
@@ -629,16 +642,7 @@ B) Analysis, delegation, integration
 C) Data task analysis, delegation plan creation, coordinated execution  
 D) Registration, routing, completion  
 
-[View Solutions →](Session1_ModuleA_Test_Solutions.md)
-
-## Module Summary
-
-You've now mastered advanced agent patterns for data engineering including:
-
-✅ **Reflection Agents**: Implemented self-improvement through iterative critique and refinement of data processing strategies
-✅ **Multi-Step Planning**: Built systems that decompose complex data workflows into executable pipeline plans
-✅ **Multi-Agent Orchestration**: Created coordination systems for specialized data processing agent collaboration
-✅ **Self-Improvement Mechanisms**: Designed agents that enhance their data processing performance over time
+[View Solutions →](Session1_Test_Solutions.md)
 
 ---
 

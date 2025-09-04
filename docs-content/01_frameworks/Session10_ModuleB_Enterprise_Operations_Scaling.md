@@ -1774,7 +1774,16 @@ You've now mastered enterprise operations and scaling for production agent syste
 - **Continue to Module A**: [Advanced Security & Compliance](Session10_ModuleA_Advanced_Security_Compliance.md)  
 - **Portfolio Project**: Build a complete enterprise-grade agent platform with full operations  
 
-## 📝 Multiple Choice Test - Module B
+
+**🗂️ Source Files for Module B:**
+
+- `src/session10/scaling/auto_scaling.py` - Intelligent auto-scaling and predictive scaling
+- `src/session10/performance/optimization.py` - SRE principles and operational excellence
+
+---
+
+
+## 📝 Multiple Choice Test - Session 10
 
 Test your understanding of enterprise operations and scaling:
 
@@ -1820,12 +1829,7 @@ B) Real-time visibility into service reliability and error budget consumption
 C) Faster development cycles  
 D) Reduced storage costs  
 
-[View Solutions →](Session10B_Test_Solutions.md)
-
-**🗂️ Source Files for Module B:**
-
-- `src/session10/scaling/auto_scaling.py` - Intelligent auto-scaling and predictive scaling
-- `src/session10/performance/optimization.py` - SRE principles and operational excellence
+[View Solutions →](Session10_Test_Solutions.md)
 
 ---
 

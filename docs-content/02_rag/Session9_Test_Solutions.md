@@ -1,6 +1,7 @@
 # Session 9: Production RAG & Enterprise Integration - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 9
 
 **Question 1:** What is the primary advantage of microservices architecture for production RAG systems?  
 A) Simpler deployment process  
@@ -177,8 +178,13 @@ This comprehensive RAG expertise positions you for roles in:
 
 ---
 
+
+[View Solutions →](Session9_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 9 Test Questions →](Session9_*.md#multiple-choice-test)
+**Back to Test:** [Session 9 Test Questions →](Session9_Advanced_Production.md#multiple-choice-test)
 
 ---

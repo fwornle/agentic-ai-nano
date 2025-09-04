@@ -253,7 +253,11 @@ Centralized MCP connection management with enterprise-grade pooling and monitori
 **Time**: 3-4 hours (after previous paths)
 **Start here**: [⚙️ Advanced ADK Systems →](Session7_Advanced_ADK_Systems.md)
 
-## Multiple Choice Test - Session 7
+
+---
+
+
+## 📝 Multiple Choice Test - Session 7
 
 Test your understanding of ADK enterprise agent development for data processing systems.
 

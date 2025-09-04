@@ -510,7 +510,9 @@ These modules contain the complete advanced content from the original file, rest
 
 **Exercise 6:** Dockerize your Agno agent for production deployment.
 
-### Assessment Questions
+#---
+
+## 📝 Multiple Choice Test - Session 8 Questions
 
 **Question 1:** What is Agno's primary advantage for data processing systems?  
 A) Simplest learning curve  

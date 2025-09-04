@@ -1511,7 +1511,11 @@ You've now mastered advanced consensus algorithms for distributed data systems:
 - `src/session9/advanced/byzantine_consensus.py` - Byzantine fault-tolerant data consensus
 - `src/session9/advanced/pbft_enterprise.py` - Enterprise-grade PBFT for mission-critical data
 
-## 📝 Multiple Choice Test - Module A
+
+---
+
+
+## 📝 Multiple Choice Test - Session 9
 
 Test your understanding of advanced consensus algorithms for distributed data systems:
 
@@ -1557,7 +1561,7 @@ B) Digital signatures with cryptographic verification
 C) IP address validation  
 D) No authentication needed  
 
-[View Solutions →](Session9A_Test_Solutions.md)
+[View Solutions →](Session9_Test_Solutions.md)
 
 ---
 

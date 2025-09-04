@@ -1167,7 +1167,29 @@ You've now mastered testing and benchmarking for PydanticAI data processing syst
 ✅ **Intelligent Data Processing Caching**: Created high-performance caching with priority-based eviction and data quality tracking
 ✅ **Production Data Processing Monitoring**: Built observability with distributed tracing and structured logging for data systems
 
-## 📝 Multiple Choice Test - Module D
+
+### Next Steps
+
+- **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  
+- **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)  
+- **Review Previous Modules**: [Module A](Session5_ModuleA_Advanced_Type_Systems.md), [Module B](Session5_ModuleB_Enterprise_PydanticAI.md), [Module C](Session5_ModuleC_Custom_Validation_Systems.md)  
+
+### Complete Session 5 Learning Path for Data Engineering
+
+🎯 **Core Section** → 🔬 **Module A** → 🏭 **Module B** → 🔧 **Module C** → 🧪 **Module D**
+
+You've completed the comprehensive PydanticAI learning journey optimized for data engineering and processing systems!
+
+**🗂️ Source Files for Module D:**
+
+- `src/session5/testing_framework.py` - Complete testing infrastructure for data processing systems
+- `src/session5/monitoring.py` - Enterprise monitoring systems for data processing
+- `src/session5/caching.py` - Intelligent caching implementations for data processing workloads
+
+---
+
+
+## 📝 Multiple Choice Test - Session 5
 
 Test your understanding of testing and benchmarking systems for data processing:
 
@@ -1201,25 +1223,7 @@ B) Concurrent user simulation with configurable load patterns, data processing s
 C) Random API calls  
 D) Simple sequential testing  
 
-[View Solutions →](Session5_ModuleD_Test_Solutions.md)
-
-### Next Steps
-
-- **Return to Core**: [Session 5 Main](Session5_PydanticAI_Type_Safe_Agents.md)  
-- **Advance to Session 6**: [Atomic Agents](Session6_Atomic_Agents_Modular_Architecture.md)  
-- **Review Previous Modules**: [Module A](Session5_ModuleA_Advanced_Type_Systems.md), [Module B](Session5_ModuleB_Enterprise_PydanticAI.md), [Module C](Session5_ModuleC_Custom_Validation_Systems.md)  
-
-### Complete Session 5 Learning Path for Data Engineering
-
-🎯 **Core Section** → 🔬 **Module A** → 🏭 **Module B** → 🔧 **Module C** → 🧪 **Module D**
-
-You've completed the comprehensive PydanticAI learning journey optimized for data engineering and processing systems!
-
-**🗂️ Source Files for Module D:**
-
-- `src/session5/testing_framework.py` - Complete testing infrastructure for data processing systems
-- `src/session5/monitoring.py` - Enterprise monitoring systems for data processing
-- `src/session5/caching.py` - Intelligent caching implementations for data processing workloads
+[View Solutions →](Session5_Test_Solutions.md)
 
 ---
 

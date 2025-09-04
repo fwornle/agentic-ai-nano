@@ -1,6 +1,7 @@
 # Session 1: Building Your First MCP Server - Test Solutions
 
-## 📝 Multiple Choice Test - Answer Key
+
+## 📝 Multiple Choice Test - Session 1
 
 **Question 1:** What are the three core capabilities that MCP servers can expose?  
 
@@ -228,8 +229,13 @@ If you missed questions in these areas, review the corresponding sections:
 
 ---
 
+
+[View Solutions →](Session1_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 1 Test Questions →](Session1_*.md#multiple-choice-test)
+**Back to Test:** [Session 1 Test Questions →](Session1_Basic_MCP_Server.md#multiple-choice-test)
 
 ---

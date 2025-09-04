@@ -3143,6 +3143,10 @@ The unified search interface provides access to the full power of GraphRAG throu
 - **Insight:** Both factual information and relationship insights  
 - **Quality:** Superior answer quality for complex queries  
 
+
+---
+
+
 ## 📝 Multiple Choice Test - Session 6
 
 Test your understanding of graph-based RAG systems and GraphRAG implementations.

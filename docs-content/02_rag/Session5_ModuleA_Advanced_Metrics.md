@@ -145,7 +145,11 @@ Explainability evaluation helps understand which retrieved documents most influe
 
 The attribution calculation uses a leave-one-out approach: by removing each document and measuring the quality impact, we can quantify each document's contribution. Higher attribution scores indicate documents that were more essential to generating a high-quality response, providing transparency into the RAG decision process.
 
-## Multiple Choice Test - Module A
+
+---
+
+
+## 📝 Multiple Choice Test - Session 5
 
 **Question 1:** What is the main advantage of BERTScore over traditional BLEU scores?  
 A) Faster computation  
@@ -177,7 +181,7 @@ B) Contraindication detection and safety assessment
 C) Text length optimization  
 D) User interface quality  
 
-[View Solutions →](Session5_ModuleA_Test_Solutions.md)
+[View Solutions →](Session5_Test_Solutions.md)
 
 ---
 

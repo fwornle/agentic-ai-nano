@@ -1,6 +1,7 @@
 # Session 8: Multi-Modal & Advanced RAG Variants - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 8
 
 **Question 1:** What is the fundamental difference between MRAG 1.0 and MRAG 2.0 systems?  
 A) MRAG 2.0 processes data faster than MRAG 1.0  
@@ -113,8 +114,13 @@ D) Compatibility with legacy systems
 
 ---
 
+
+[View Solutions →](Session8_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 8 Test Questions →](Session8_*.md#multiple-choice-test)
+**Back to Test:** [Session 8 Test Questions →](Session8_MRAG_Evolution.md#multiple-choice-test)
 
 ---

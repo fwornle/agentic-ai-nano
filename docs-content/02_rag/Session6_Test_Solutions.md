@@ -1,6 +1,7 @@
 # Session 6: Graph-Based RAG (GraphRAG) - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 6
 
 **Question 1:** What is the primary advantage of GraphRAG over traditional vector-based RAG?  
 A) Faster query processing  
@@ -113,8 +114,13 @@ D) Simplifying the codebase
 
 ---
 
+
+[View Solutions →](Session6_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
+**Back to Test:** [Session 6 Test Questions →](Session6_Hybrid_GraphRAG_Advanced.md#multiple-choice-test)
 
 ---

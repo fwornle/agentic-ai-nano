@@ -1,6 +1,7 @@
 # Session 3: Vector Databases & Search Optimization - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 3
 
 **Question 1:** Which vector database metric is most suitable for RAG applications using cosine similarity?  
 A) Euclidean distance  
@@ -113,8 +114,13 @@ D) All of the above ✅
 
 ---
 
+
+[View Solutions →](Session3_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 3 Test Questions →](Session3_*.md#multiple-choice-test)
+**Back to Test:** [Session 3 Test Questions →](Session3_Advanced_HNSW_Tuning.md#multiple-choice-test)
 
 ---

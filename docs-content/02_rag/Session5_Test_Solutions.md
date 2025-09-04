@@ -1,6 +1,7 @@
 # Session 5: RAG Evaluation & Quality Assessment - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 5
 
 **Question 1:** Which metric is most important for evaluating retrieval quality in RAG systems?  
 A) Response time  
@@ -113,8 +114,13 @@ D) Random threshold selection
 
 ---
 
+
+[View Solutions →](Session5_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 5 Test Questions →](Session5_*.md#multiple-choice-test)
+**Back to Test:** [Session 5 Test Questions →](Session5_RAG_Evaluation_Quality_Assessment.md#multiple-choice-test)
 
 ---

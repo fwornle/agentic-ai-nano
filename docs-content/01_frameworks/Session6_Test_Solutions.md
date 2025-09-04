@@ -1,6 +1,7 @@
 # Session 6: Atomic Agents Modular Architecture - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 6
 
 **Question 1:** What is the core principle behind Atomic Agents architecture?  
 
@@ -98,8 +99,13 @@ D) Centralized control of agent interactions and workflow orchestration ✅
 
 ---
 
+
+[View Solutions →](Session6_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 6 Test Questions →](Session6_*.md#multiple-choice-test)
+**Back to Test:** [Session 6 Test Questions →](Session6_System_Assembly_Practice.md#multiple-choice-test)
 
 ---

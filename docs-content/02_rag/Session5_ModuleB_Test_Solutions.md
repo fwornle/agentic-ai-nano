@@ -1,6 +1,7 @@
 # Session 5: Enterprise Monitoring & Alerting - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 5
 
 **Question 1:** What metrics should have the highest priority in SLA monitoring for RAG systems?  
 
@@ -71,6 +72,11 @@ D) Only user queries and response times
 
 ## Answer Summary  
 1. B  2. B  3. B  4. B  5. B
+
+---
+
+
+[View Solutions →](Session5_Test_Solutions.md)
 
 ---
 

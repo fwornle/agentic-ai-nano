@@ -429,7 +429,8 @@ Your complete production file system server now includes:
 - **Error Handling**: Graceful failure modes  
 - **Resource Management**: Efficient memory and CPU usage  
 
-## Complete Assessment
+
+## 📝 Multiple Choice Test - Session 2
 
 Test your understanding of the complete implementation:
 
@@ -503,6 +504,11 @@ D) Automatic file compression
 8. **B** - Whitelist safe extensions  
 9. **B** - By limiting maximum results returned  
 10. **C** - Non-blocking operations
+
+---
+
+
+[View Solutions →](Session2_Test_Solutions.md)
 
 ---
 

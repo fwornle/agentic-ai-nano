@@ -1,6 +1,7 @@
 # Session 4: Query Enhancement & Context Augmentation - Test Solutions
 
-## 📝 Multiple Choice Test
+
+## 📝 Multiple Choice Test - Session 4
 
 **Question 1:** What is the primary purpose of HyDE (Hypothetical Document Embeddings)?  
 A) To generate multiple query variations  
@@ -89,8 +90,13 @@ D) Keyword-heavy prompts
 
 ---
 
+
+[View Solutions →](Session4_Test_Solutions.md)
+
+---
+
 ## 🧭 Navigation
 
-**Back to Test:** [Session 4 Test Questions →](Session4_*.md#multiple-choice-test)
+**Back to Test:** [Session 4 Test Questions →](Session4_Complete_Enhancement_Pipeline.md#multiple-choice-test)
 
 ---
