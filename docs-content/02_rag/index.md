@@ -270,9 +270,6 @@ Latest RAG techniques including graph-based approaches, agentic systems, and mul
 **Ready to master RAG architecture?** Start with the fundamentals and build towards production-ready implementations!
 
 **Begin:** [Session 0 - Introduction to RAG Architecture →](Session0_Introduction_to_RAG_Architecture.md)
-
----
-
-**Next:** [Session 0 - Introduction to Agent Frameworks & Patterns →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+**Curriculum:** [View Module Curriculum →](RAG_Nanodegree_Curriculum.md)
 
 ---

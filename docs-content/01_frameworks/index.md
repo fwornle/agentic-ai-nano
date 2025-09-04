@@ -311,9 +311,6 @@ By completing this module, you will possess the comprehensive skill set needed t
 **Ready to master agent frameworks?** The future of software engineering is intelligent, autonomous systems that can reason, plan, and execute complex tasks. Start your transformation from traditional developer to agent architect today!
 
 **Begin:** [Session 0 - Introduction to Agent Frameworks & Patterns →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
-
----
-
-**Next:** [Session 0 - Introduction to Agent Frameworks & Patterns →](Session0_Introduction_to_Agent_Frameworks_Patterns.md)
+**Curriculum:** [View Module Curriculum →](Agent_Frameworks_Nanodegree_Curriculum.md)
 
 ---
