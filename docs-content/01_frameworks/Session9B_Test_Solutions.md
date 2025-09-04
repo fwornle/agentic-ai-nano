@@ -46,6 +46,6 @@ if memory_metrics:
 
 ## 🧭 Navigation
 
-**Back to Test:** [Session 9 Test Questions →](Session9_Multi_Agent_Patterns.md#multiple-choice-test-session-9)
+**Back to Test:** [Session 9 Test Questions →](Session9_ModuleA_Advanced_Consensus_Algorithms.md#multiple-choice-test-session-9)
 
 ---
