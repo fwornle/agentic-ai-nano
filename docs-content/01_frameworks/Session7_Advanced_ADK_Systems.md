@@ -528,7 +528,7 @@ Advanced performance optimization requires:
 ## 🧭 Navigation
 
 **Previous:** [📝 ADK Implementation →](Session7_ADK_Implementation.md)  
-**Next:** [Session 8 - Production Ready →](Session8_*.md)
+**Next:** [Session 8 - Production Ready →](Session8_Agno_Production_Ready_Agents.md)
 
 **Module Home**: [Session 7 Overview →](Session7_First_ADK_Agent.md)  
 **Learning Path**: 🎯 Essentials ✅ → 📝 Implementation ✅ → ⚙️ Advanced Systems ✅

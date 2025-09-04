@@ -302,6 +302,6 @@ Need cutting-edge implementations? Explore:
 
 ## 🧭 Navigation
 
-**Next:** [Session 1 - Foundations →](Session1_*.md)
+**Next:** [Session 1 - Foundations →](Session1_RAG_Essentials.md)
 
 ---

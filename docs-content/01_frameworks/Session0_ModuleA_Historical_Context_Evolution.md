@@ -330,13 +330,13 @@ B) 30%
 C) 40%  
 D) 50%  
 
-[View Solutions →](Session0_ModuleA_Test_Solutions.md)
+[View Solutions →](Session0_Test_Solutions.md)
 
 ---
 
 ## 🧭 Navigation
 
-**Previous:** [Session None -  →](SessionNone_*.md)  
-**Next:** [Session 1 - Foundations →](Session1_*.md)
+**Previous:** [Session None -  →](../index.md)  
+**Next:** [Session 1 - Foundations →](Session1_Bare_Metal_Agents.md)
 
 ---

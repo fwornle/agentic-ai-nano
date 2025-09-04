@@ -835,7 +835,7 @@ This comprehensive cloud deployment strategy provides enterprise-grade reliabili
 
 ## 🧭 Navigation
 
-**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
-**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
+**Previous:** [Session 3 - Advanced Patterns →](Session3_LangChain_MCP_Integration.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_Security_Monitoring.md)
 
 ---

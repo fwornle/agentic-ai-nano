@@ -467,7 +467,7 @@ D) Simplifying the codebase
 
 ## 🧭 Navigation
 
-**Previous:** [Session 5 - Type-Safe Development →](Session5_*.md)  
-**Next:** [Session 7 - Agent Systems →](Session7_*.md)
+**Previous:** [Session 5 - Type-Safe Development →](Session5_RAG_Evaluation_Quality_Assessment.md)  
+**Next:** [Session 7 - Agent Systems →](Session7_Original_Backup.md)
 
 ---

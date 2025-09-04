@@ -1052,7 +1052,7 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination 
    c) All data processing skills are treated equally
    d) Skill levels are ignored for data processing team formation
 
-[View Solutions →](Session4_ModuleA_Test_Solutions.md)
+[View Solutions →](Session4_Test_Solutions.md)
 
 **🗂️ Source Files for Module A:**  
 - [`src/session4/advanced_flows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session4/advanced_flows.py) - CrewAI Flow implementations for data processing
@@ -1063,7 +1063,7 @@ You've now mastered advanced CrewAI flow patterns and dynamic team coordination 
 
 ## 🧭 Navigation
 
-**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
-**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
+**Previous:** [Session 3 - Advanced Patterns →](Session3_Multi_Agent_Implementation.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_PydanticAI_Type_Safe_Agents.md)
 
 ---

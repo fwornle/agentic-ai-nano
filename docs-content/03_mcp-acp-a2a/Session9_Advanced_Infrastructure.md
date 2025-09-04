@@ -642,7 +642,7 @@ Pod Security Policy implementation enforces comprehensive security constraints t
 
 ## 🧭 Navigation
 
-**Previous:** [Session 8 - Production Ready →](Session8_*.md)  
-**Next:** [Session 10 - Enterprise Integration →](Session10_*.md)
+**Previous:** [Session 8 - Production Ready →](Session8_Advanced_Agent_Workflows.md)  
+**Next:** [Session 10 - Enterprise Integration →](Session10_Enterprise_Integration_Production_Deployment.md)
 
 ---

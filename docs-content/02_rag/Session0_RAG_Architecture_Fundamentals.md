@@ -261,6 +261,6 @@ Understanding these fundamentals positions you to build sophisticated RAG system
 
 ## 🧭 Navigation
 
-**Next:** [Session 1 - Foundations →](Session1_*.md)
+**Next:** [Session 1 - Foundations →](Session1_RAG_Essentials.md)
 
 ---

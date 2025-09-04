@@ -747,7 +747,7 @@ This dashboard provides comprehensive real-time visibility into RAG system healt
 
 ## 🧭 Navigation
 
-**Previous:** [Session 4 - Team Orchestration →](Session4_*.md)  
-**Next:** [Session 6 - Modular Architecture →](Session6_*.md)
+**Previous:** [Session 4 - Team Orchestration →](Session4_Context_Optimization.md)  
+**Next:** [Session 6 - Modular Architecture →](Session6_Hybrid_GraphRAG_Advanced.md)
 
 ---

@@ -342,7 +342,7 @@ The architecture provides enterprise-grade reliability while maintaining the sim
 
 ## 🧭 Navigation
 
-**Previous:** [Session 3 - Advanced Patterns →](Session3_*.md)  
-**Next:** [Session 5 - Type-Safe Development →](Session5_*.md)
+**Previous:** [Session 3 - Advanced Patterns →](Session3_LangChain_MCP_Integration.md)  
+**Next:** [Session 5 - Type-Safe Development →](Session5_Security_Monitoring.md)
 
 ---

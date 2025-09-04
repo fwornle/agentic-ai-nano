@@ -393,6 +393,6 @@ D) Only cloud service providers
 
 ## 🧭 Navigation
 
-**Next:** [Session 1 - Foundations →](Session1_*.md)
+**Next:** [Session 1 - Foundations →](Session1_Basic_MCP_Server.md)
 
 ---

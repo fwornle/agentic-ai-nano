@@ -784,11 +784,11 @@ async def run_production_assessment():
 ---
 
 
-[View Solutions →](Session*_Test_Solutions.md)
+[View Solutions →](Session8_Test_Solutions.md)
 
 ## 🧭 Navigation
 
-**Previous:** [Session 7 - Agent Systems →](Session7_*.md)  
-**Next:** [Session 9 - Multi-Agent Coordination →](Session9_*.md)
+**Previous:** [Session 7 - Agent Systems →](Session7_ADK_Essentials.md)  
+**Next:** [Session 9 - Multi-Agent Coordination →](Session9_Practical_Coordination.md)
 
 ---

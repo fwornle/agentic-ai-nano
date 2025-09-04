@@ -796,6 +796,6 @@ D) Improve user interface
 
 ## 🧭 Navigation
 
-**Next:** [Session 1 - Foundations →](Session1_*.md)
+**Next:** [Session 1 - Foundations →](Session1_RAG_Essentials.md)
 
 ---

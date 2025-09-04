@@ -240,7 +240,7 @@ D) Only specified fields are updated/merged
 
 ## 🧭 Navigation
 
-**Previous:** [Session 2 - Implementation →](Session2_*.md)  
-**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
+**Previous:** [Session 2 - Implementation →](Session2_LangChain_Foundations.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_CrewAI_Fundamentals.md)
 
 ---

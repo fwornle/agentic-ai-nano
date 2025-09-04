@@ -938,13 +938,13 @@ B) 95% of requests complete within this time
 C) Maximum response time  
 D) 95% availability percentage  
 
-[**View Module A Test Solutions →**](Session3_ModuleA_Test_Solutions.md)
+[**View Module A Test Solutions →**](Session3_Test_Solutions.md)
 
 ---
 
 ## 🧭 Navigation
 
-**Previous:** [Session 2 - Implementation →](Session2_*.md)  
-**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
+**Previous:** [Session 2 - Implementation →](Session2_Production_Implementation.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_Production_MCP_Deployment.md)
 
 ---

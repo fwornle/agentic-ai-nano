@@ -539,7 +539,7 @@ This multi-agent orchestration system represents the pinnacle of collaborative i
 
 ## 🧭 Navigation
 
-**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
-**Next:** [Session 8 - Production Ready →](Session8_*.md)
+**Previous:** [Session 6 - Modular Architecture →](Session6_Hybrid_GraphRAG_Advanced.md)  
+**Next:** [Session 8 - Production Ready →](Session8_MRAG_Evolution.md)
 
 ---

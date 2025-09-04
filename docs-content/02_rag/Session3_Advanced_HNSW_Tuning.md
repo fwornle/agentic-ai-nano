@@ -1028,7 +1028,7 @@ The dynamic optimizer continuously adapts HNSW parameters based on real-time per
 
 ## 🧭 Navigation
 
-**Previous:** [Session 2 - Implementation →](Session2_*.md)  
-**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
+**Previous:** [Session 2 - Implementation →](Session2_Advanced_Chunking_Preprocessing.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_Context_Optimization.md)
 
 ---

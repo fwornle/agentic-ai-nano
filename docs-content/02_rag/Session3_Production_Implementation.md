@@ -680,7 +680,7 @@ If you've mastered the production implementation, explore advanced topics:
 
 ## 🧭 Navigation
 
-**Previous:** [Session 2 - Implementation →](Session2_*.md)  
-**Next:** [Session 4 - Team Orchestration →](Session4_*.md)
+**Previous:** [Session 2 - Implementation →](Session2_Advanced_Chunking_Preprocessing.md)  
+**Next:** [Session 4 - Team Orchestration →](Session4_Context_Optimization.md)
 
 ---

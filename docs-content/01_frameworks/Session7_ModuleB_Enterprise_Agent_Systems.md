@@ -1444,7 +1444,7 @@ D) Manual load balancing
 
 ## 🧭 Navigation
 
-**Previous:** [Session 6 - Modular Architecture →](Session6_*.md)  
-**Next:** [Session 8 - Production Ready →](Session8_*.md)
+**Previous:** [Session 6 - Modular Architecture →](Session6_System_Assembly_Practice.md)  
+**Next:** [Session 8 - Production Ready →](Session8_Agno_Production_Ready_Agents.md)
 
 ---
