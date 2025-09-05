@@ -44,7 +44,21 @@
       "Bash(TRANSCRIPT_DEBUG=true node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --test)",
       "mcp__semantic-analysis__analyze_repository",
       "mcp__semantic-analysis__analyze_code",
-      "mcp__semantic-analysis__determine_insights"
+      "mcp__semantic-analysis__determine_insights",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=coding)",
+      "Bash(plantuml:*)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/combined-status-line.js)",
+      "Bash(do echo \"Fixing $file\")",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node scripts/trajectory-keyword-extractor.js)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node scripts/trajectory-keyword-extractor.cjs)",
+      "Bash(curl:*)",
+      "Bash(TRANSCRIPT_DEBUG=true node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js)",
+      "Bash(cat:*)",
+      "mcp__constraint-monitor__update_constraints",
+      "mcp__constraint-monitor__get_constraint_status",
+      "mcp__constraint-monitor__get_violation_history",
+      "mcp__constraint-monitor__check_constraints",
+      "Bash(CODING_TARGET_PROJECT=/Users/q284340/Agentic/coding timeout 10s node scripts/constraint-monitor-integration.js scan)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
