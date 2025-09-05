@@ -37,7 +37,10 @@
       "Bash(ensure_statusline_config \"/Users/q284340/Agentic/nano-degree\" \"/Users/q284340/Agentic/coding\")",
       "Bash(DEBUG_STATUS=1 CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/combined-status-line.js)",
       "Bash(kill:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(pwdx:*)",
+      "Bash(ps:*)",
+      "Bash(lsof:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
