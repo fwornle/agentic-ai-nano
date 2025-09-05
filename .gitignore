@@ -86,6 +86,7 @@ plantuml/
 # Session and history files
 session_*.md
 .claude_code_sessions/
+.redirect-status
 
 # Temporary files
 tmp/
