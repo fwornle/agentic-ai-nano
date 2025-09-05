@@ -43,7 +43,8 @@
       "Bash(lsof:*)",
       "Bash(TRANSCRIPT_DEBUG=true node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --test)",
       "mcp__semantic-analysis__analyze_repository",
-      "mcp__semantic-analysis__analyze_code"
+      "mcp__semantic-analysis__analyze_code",
+      "mcp__semantic-analysis__determine_insights"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
