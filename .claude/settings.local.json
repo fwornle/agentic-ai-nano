@@ -69,7 +69,11 @@
       "Bash(echo:*)",
       "Bash(fi)",
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" DEBUG_STATUS=1 node /Users/q284340/Agentic/coding/scripts/combined-status-line.js)",
-      "mcp__semantic-analysis__execute_workflow"
+      "mcp__semantic-analysis__execute_workflow",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" node scripts/generate-proper-lsl-from-transcripts.js --project=coding)",
+      "Bash(git rm:*)",
+      "Bash(git add:*)",
+      "Bash(git mv:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
