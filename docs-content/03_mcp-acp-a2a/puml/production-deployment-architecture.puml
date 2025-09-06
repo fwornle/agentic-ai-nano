@@ -1,0 +1,115 @@
+@startuml production-deployment-architecture
+!include ../../../config/_standard-style.puml
+
+title Production MCP Deployment Architecture
+
+package "Development Environment" {
+  [Docker Compose] <<local>> as compose
+  [MCP Server Container] <<container>> as dev_container
+  [Redis] <<storage>> as dev_redis
+  [Prometheus] <<monitoring>> as dev_prometheus
+  [Grafana] <<visualization>> as dev_grafana
+}
+
+package "CI/CD Pipeline" {
+  [GitHub Actions] <<automation>> as github
+  [Cloud Build] <<automation>> as cloudbuild
+  [AWS CodePipeline] <<automation>> as codepipeline
+  [Docker Registry] <<storage>> as registry
+}
+
+package "Google Cloud Platform" {
+  [Cloud Run] <<serverless>> as cloudrun
+  [Load Balancer] <<network>> as gcp_lb
+  [Cloud SQL] <<storage>> as cloudsql
+  [Secret Manager] <<security>> as gcp_secrets
+  [Cloud Monitoring] <<monitoring>> as gcp_monitoring
+}
+
+package "AWS Platform" {
+  [Lambda] <<serverless>> as lambda
+  [API Gateway] <<api>> as apigateway
+  [ElastiCache] <<storage>> as elasticache
+  [Secrets Manager] <<security>> as aws_secrets
+  [CloudWatch] <<monitoring>> as cloudwatch
+}
+
+package "Monitoring Stack" {
+  [Prometheus Server] <<monitoring>> as prom_server
+  [Grafana Dashboard] <<visualization>> as grafana_prod
+  [AlertManager] <<notification>> as alertmanager
+  [PagerDuty] <<external>> as pagerduty
+}
+
+package "External Services" {
+  [DNS Provider] <<network>> as dns
+  [CDN] <<network>> as cdn
+  [Certificate Authority] <<security>> as ca
+}
+
+' Development flow
+compose --> dev_container : Manages
+dev_container --> dev_redis : Caches
+dev_container --> dev_prometheus : Metrics
+dev_prometheus --> dev_grafana : Visualizes
+
+' CI/CD flow
+github --> cloudbuild : Triggers Build
+github --> codepipeline : Triggers Build
+cloudbuild --> registry : Pushes Images
+codepipeline --> registry : Pushes Images
+
+' GCP deployment
+registry --> cloudrun : Deploys
+gcp_lb --> cloudrun : Routes Traffic
+cloudrun --> cloudsql : Queries
+cloudrun --> gcp_secrets : Fetches Config
+cloudrun --> gcp_monitoring : Reports Metrics
+
+' AWS deployment
+registry --> lambda : Deploys
+apigateway --> lambda : Routes Requests
+lambda --> elasticache : Caches Data
+lambda --> aws_secrets : Fetches Config
+lambda --> cloudwatch : Reports Metrics
+
+' Monitoring integration
+cloudrun --> prom_server : Exports Metrics
+lambda --> prom_server : Exports Metrics
+prom_server --> grafana_prod : Data Source
+prom_server --> alertmanager : Triggers Alerts
+alertmanager --> pagerduty : Notifications
+
+' External services
+dns --> gcp_lb : Resolves
+dns --> apigateway : Resolves
+cdn ..> gcp_lb : Caches
+cdn ..> apigateway : Caches
+ca --> gcp_lb : SSL Certificates
+ca --> apigateway : SSL Certificates
+
+note right of cloudrun
+  Google Cloud Run:
+  - Auto-scaling 0-50 instances
+  - Pay-per-use pricing
+  - Managed TLS termination
+  - Global load balancing
+end note
+
+note right of lambda
+  AWS Lambda:
+  - Event-driven execution
+  - 15-minute timeout limit
+  - Automatic scaling
+  - Pay-per-invocation
+end note
+
+note bottom of prom_server
+  Production Monitoring:
+  - Multi-cloud metrics collection
+  - Custom alerting rules
+  - Historical data retention
+  - High availability setup
+end note
+
+@enduml

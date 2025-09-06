@@ -1,0 +1,51 @@
+@startuml mcp-solution
+!include ../../../config/_standard-style.puml
+
+title MCP Solution - M+N Integration Pattern
+
+rectangle "AI Applications (M=5)" #E5FFE5 {
+  component "Claude" <<agent>> as AI1
+  component "ChatGPT" <<agent>> as AI2
+  component "Gemini" <<agent>> as AI3
+  component "GitHub Copilot" <<agent>> as AI4
+  component "Custom Agent" <<agent>> as AI5
+}
+
+rectangle "Model Context Protocol" <<core>> {
+  component "MCP Bridge\n(Universal Protocol)" as MCP
+  note right of MCP : Standardized protocol\nfor all AI-to-data\ncommunications
+}
+
+rectangle "Data Sources (N=10)" #E5F5FF {
+  database "PostgreSQL" as DS1
+  database "Salesforce" as DS2
+  database "GitHub" as DS3
+  database "Google Drive" as DS4
+  database "Slack" as DS5
+  database "Jira" as DS6
+  database "MongoDB" as DS7
+  database "Redis" as DS8
+  database "S3" as DS9
+  database "Elasticsearch" as DS10
+}
+
+AI1 --> MCP : MCP Client
+AI2 --> MCP : MCP Client
+AI3 --> MCP : MCP Client
+AI4 --> MCP : MCP Client
+AI5 --> MCP : MCP Client
+
+MCP --> DS1 : MCP Server
+MCP --> DS2 : MCP Server
+MCP --> DS3 : MCP Server
+MCP --> DS4 : MCP Server
+MCP --> DS5 : MCP Server
+MCP --> DS6 : MCP Server
+MCP --> DS7 : MCP Server
+MCP --> DS8 : MCP Server
+MCP --> DS9 : MCP Server
+MCP --> DS10 : MCP Server
+
+note bottom : M + N = 5 + 10 = 15 total integrations\nReduced from 50 to 15 (70% reduction)!
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml tool-use-pattern
+!include ../../../config/_standard-style.puml
+
+title Tool Use Pattern: Extending Agent Capabilities
+
+actor "User" as user
+participant "Agent" as agent
+participant "Tool Registry" as registry
+participant "Weather API" as weather
+participant "Calendar API" as calendar
+participant "Email Service" as email
+
+user -> agent : "Schedule outdoor meeting for tomorrow if weather is good"
+
+activate agent
+
+agent -> registry : Query available tools
+registry -> agent : [Weather API, Calendar API, Email Service, ...]
+
+note over agent : Tool Selection Logic:\nAnalyze task requirements\nMatch with tool capabilities
+
+agent -> weather : get_weather(location="Seattle", date="tomorrow")
+activate weather
+weather -> agent : {"temp": 22, "condition": "sunny", "precipitation": 0}
+deactivate weather
+
+note over agent : Reasoning:\nWeather looks good (sunny, 22°C)\nProceed with meeting scheduling
+
+agent -> calendar : find_available_slots(date="tomorrow", duration=60)
+activate calendar
+calendar -> agent : ["10:00-11:00", "14:00-15:00", "16:00-17:00"]
+deactivate calendar
+
+agent -> calendar : create_meeting(time="14:00", title="Outdoor Strategy Meeting", location="City Park")
+activate calendar
+calendar -> agent : Meeting created successfully
+deactivate calendar
+
+agent -> email : send_invitation(recipients=["team@company.com"], meeting_details={...})
+activate email
+email -> agent : Invitations sent
+deactivate email
+
+agent -> user : "Perfect! Tomorrow's weather is sunny (22°C).\nI've scheduled your outdoor meeting for 2:00 PM\nat City Park and sent invitations to your team."
+
+deactivate agent
+
+note right of agent : Tool Categories:\n• Information Retrieval (Weather, Web)\n• Data Storage (Database, Files)\n• Communication (Email, Slack)\n• Computation (Calculator, Analysis)\n• External Services (Calendar, Payment)
+
+@enduml

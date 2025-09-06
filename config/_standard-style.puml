@@ -1,0 +1,54 @@
+@startuml
+' Standard PlantUML Style Configuration for Nano-Degree Project
+' This file provides consistent styling across all diagrams
+
+' Color scheme
+!define PRIMARY_COLOR #2E86AB
+!define SECONDARY_COLOR #A23B72
+!define ACCENT_COLOR #F18F01
+!define NEUTRAL_COLOR #C73E1D
+
+' Component styles
+!define CORE_COLOR #4A90E2
+!define API_COLOR #50C878
+!define UTIL_COLOR #FFB347
+!define CONFIG_COLOR #DDA0DD
+
+' Skin parameters for consistent appearance
+skinparam backgroundColor #FFFFFF
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam handwritten false
+skinparam monochrome false
+
+' Default font settings
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+
+' Component styling
+skinparam component {
+    BackgroundColor #F8F9FA
+    BorderColor #6C757D
+    BorderThickness 1
+}
+
+' Rectangle styling
+skinparam rectangle {
+    BackgroundColor #F8F9FA
+    BorderColor #6C757D
+    BorderThickness 1
+}
+
+' Arrow styling
+skinparam arrow {
+    Color #495057
+    Thickness 2
+}
+
+' Title styling
+skinparam title {
+    FontSize 16
+    FontColor #212529
+}
+
+@enduml

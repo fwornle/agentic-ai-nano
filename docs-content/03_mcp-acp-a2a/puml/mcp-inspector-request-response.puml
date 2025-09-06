@@ -1,0 +1,177 @@
+@startuml mcp-inspector-request-response
+!include ../../../config/_standard-style.puml
+
+title MCP Inspector Request/Response Flow
+
+participant "Inspector UI" as ui
+participant "Inspector Backend" as backend
+participant "JSON-RPC Client" as rpc_client
+participant "MCP Server" as server
+participant "Tool Implementation" as tool
+participant "External API" as api
+
+== Tool Execution Request ==
+
+ui -> backend : POST /execute-tool
+note right
+  **HTTP Request:**
+  {
+    "tool": "get_weather",
+    "arguments": {
+      "location": "San Francisco"
+    }
+  }
+end note
+
+backend -> rpc_client : Build JSON-RPC Request
+note right
+  **JSON-RPC Request:**
+  {
+    "jsonrpc": "2.0",
+    "id": "req-123",
+    "method": "tools/call",
+    "params": {
+      "name": "get_weather",
+      "arguments": {
+        "location": "San Francisco"
+      }
+    }
+  }
+end note
+
+rpc_client -> server : Send via Transport\n(stdio/HTTP/WebSocket)
+server -> tool : Dispatch to Tool Handler
+tool -> api : Execute External Call
+
+== Successful Response ==
+
+api -> tool : Return Data
+note left
+  **API Response:**
+  {
+    "current": {
+      "temperature_c": 22,
+      "condition": "Sunny",
+      "humidity": 60
+    }
+  }
+end note
+
+tool -> server : Format Tool Result
+note right
+  **Tool Output:**
+  {
+    "content": [
+      {
+        "type": "text",
+        "text": "Temperature: 22°C, Sunny, 60% humidity"
+      }
+    ]
+  }
+end note
+
+server -> rpc_client : JSON-RPC Response
+note left
+  **JSON-RPC Response:**
+  {
+    "jsonrpc": "2.0",
+    "id": "req-123",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Temperature: 22°C, Sunny, 60% humidity"
+        }
+      ]
+    }
+  }
+end note
+
+rpc_client -> backend : Parse Response
+backend -> ui : Format for Display
+note right
+  **UI Display:**
+  ✅ Tool Executed Successfully
+  
+  Response:
+  Temperature: 22°C
+  Condition: Sunny  
+  Humidity: 60%
+  
+  Execution Time: 1.2s
+end note
+
+== Error Response ==
+
+ui -> backend : POST /execute-tool\n(invalid location)
+backend -> rpc_client : Build JSON-RPC Request
+rpc_client -> server : Send Request
+server -> tool : Dispatch Tool
+tool -> api : Execute Call
+api -> tool : HTTP 404 Error
+tool -> server : Tool Error
+
+note over server
+  **Error Processing:**
+  Tool execution failed
+  External API returned 404
+  Location "InvalidCity" not found
+end note
+
+server -> rpc_client : JSON-RPC Error Response
+note left
+  **JSON-RPC Error:**
+  {
+    "jsonrpc": "2.0",
+    "id": "req-123", 
+    "error": {
+      "code": -32603,
+      "message": "Tool execution failed",
+      "data": {
+        "tool": "get_weather",
+        "error": "Location not found",
+        "details": "API returned 404"
+      }
+    }
+  }
+end note
+
+rpc_client -> backend : Parse Error
+backend -> ui : Format Error Display
+note right
+  **Error UI:**
+  ❌ Tool Execution Failed
+  
+  Error: Location not found
+  Tool: get_weather
+  Input: {"location": "InvalidCity"}
+  
+  💡 Try: Use valid city name
+  Debug: API returned 404
+end note
+
+== Inspector Features ==
+
+note over ui, api
+  **MCP Inspector Capabilities:**
+  
+  🔧 **Testing Features:**
+  • Auto-generated parameter forms
+  • Real-time parameter validation  
+  • Syntax-highlighted responses
+  • Request/response history
+  
+  🐛 **Debugging Features:**
+  • Detailed error messages
+  • Request timing information
+  • Connection status monitoring
+  • JSON-RPC message logging
+  
+  📊 **Analysis Features:**
+  • Performance metrics
+  • Success/failure rates
+  • Tool usage statistics
+  • Export configurations
+end note
+
+@enduml
