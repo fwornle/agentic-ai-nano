@@ -58,7 +58,16 @@
       "mcp__constraint-monitor__get_constraint_status",
       "mcp__constraint-monitor__get_violation_history",
       "mcp__constraint-monitor__check_constraints",
-      "Bash(CODING_TARGET_PROJECT=/Users/q284340/Agentic/coding timeout 10s node scripts/constraint-monitor-integration.js scan)"
+      "Bash(CODING_TARGET_PROJECT=/Users/q284340/Agentic/coding timeout 10s node scripts/constraint-monitor-integration.js scan)",
+      "Bash(mv:*)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=coding)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js)",
+      "Bash(if [[ -f \"$base_file\" ]])",
+      "Bash(then)",
+      "Bash(echo:*)",
+      "Bash(fi)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
