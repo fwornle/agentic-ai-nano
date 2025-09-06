@@ -1,0 +1,57 @@
+@startuml mxn-problem
+!include ../../../config/_standard-style.puml
+
+title M×N Integration Problem - Without MCP
+
+rectangle "AI Applications (M=5)" #FFE5E5 {
+  component "Claude" <<agent>> as A1
+  component "ChatGPT" <<agent>> as A2
+  component "Gemini" <<agent>> as A3
+  component "GitHub Copilot" <<agent>> as A4
+  component "Custom Agent" <<agent>> as A5
+}
+
+rectangle "Data Sources (N=10)" #E5F5FF {
+  database "PostgreSQL" as D1
+  database "Salesforce" as D2
+  database "GitHub" as D3
+  database "Google Drive" as D4
+  database "Slack" as D5
+  database "Jira" as D6
+  database "MongoDB" as D7
+  database "Redis" as D8
+  database "S3" as D9
+  database "Elasticsearch" as D10
+}
+
+note right of A1 : Each AI app needs\ncustom integration\nfor each data source
+
+A1 ..> D1 : custom
+A1 ..> D2 : custom
+A1 ..> D3 : custom
+A1 ..> D4 : custom
+A1 ..> D5 : custom
+
+A2 ..> D1 : custom
+A2 ..> D2 : custom
+A2 ..> D3 : custom
+A2 ..> D4 : custom
+A2 ..> D5 : custom
+
+A3 ..> D1 : custom
+A3 ..> D2 : custom
+A3 ..> D3 : custom
+A3 ..> D6 : custom
+A3 ..> D7 : custom
+
+A4 ..> D1 : custom
+A4 ..> D2 : custom
+A4 ..> D8 : custom
+A4 ..> D9 : custom
+
+A5 ..> D1 : custom
+A5 ..> D10 : custom
+
+note bottom : M × N = 5 × 10 = 50 custom integrations needed!\nEach with different APIs, auth methods, and data formats
+
+@enduml

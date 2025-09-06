@@ -1,0 +1,192 @@
+@startuml a2a-communication-architecture
+!include ../../../config/_standard-style.puml
+
+title Agent-to-Agent Communication Architecture
+
+!define RECTANGLE class
+
+package "A2A Communication System" {
+    
+    package "Protocol Layer" {
+        RECTANGLE A2AMessage {
+            + message_id: string
+            + message_type: MessageType
+            + sender_id: string
+            + recipient_id: string
+            + action: string
+            + payload: Dict
+            --
+            + to_json()
+            + from_json()
+        }
+        
+        RECTANGLE AgentProfile {
+            + agent_id: string
+            + capabilities: List[Capability]
+            + endpoint: string
+            + status: string
+            + load: float
+            --
+            + to_dict()
+        }
+        
+        RECTANGLE AgentCapability {
+            + name: string
+            + description: string
+            + input_schema: Dict
+            + output_schema: Dict
+            --
+            + matches_requirement()
+        }
+    }
+    
+    package "Discovery & Registry" {
+        RECTANGLE AgentRegistry {
+            + agents: Dict[string, Profile]
+            + capability_index: Dict
+            --
+            + register_agent()
+            + discover_agents()
+            + update_heartbeat()
+            + cleanup_dead_agents()
+        }
+        
+        RECTANGLE "Redis Store" as Redis {
+            + agent_profiles
+            + capability_indices  
+            + heartbeat_data
+            --
+            + set()
+            + get()
+            + expire()
+        }
+    }
+    
+    package "Message Routing" {
+        RECTANGLE MessageRouter {
+            + message_handlers: Dict
+            + pending_requests: Dict
+            + message_queue: Queue
+            --
+            + send_message()
+            + broadcast_message()
+            + route_message()
+        }
+        
+        RECTANGLE "HTTP Transport" as HTTP {
+            + aiohttp.ClientSession
+            --
+            + post()
+            + handle_request()
+        }
+    }
+    
+    package "Coordination Patterns" {
+        RECTANGLE WorkflowOrchestrator {
+            + active_workflows: Dict
+            --
+            + execute_workflow()
+            + execute_step()
+            + handle_dependencies()
+        }
+        
+        RECTANGLE ChoreographyEngine {
+            + event_patterns: List
+            + event_handlers: Dict
+            + event_history: List
+            --
+            + publish_event()
+            + process_patterns()
+            + execute_action()
+        }
+        
+        RECTANGLE Workflow {
+            + workflow_id: string
+            + steps: List[WorkflowStep]
+            + initial_data: Dict
+        }
+        
+        RECTANGLE WorkflowStep {
+            + step_id: string
+            + action: string
+            + agent_capability: string
+            + dependencies: List[string]
+            + input_mapping: Dict
+            + output_mapping: Dict
+        }
+        
+        RECTANGLE EventPattern {
+            + event_type: string
+            + condition: string
+            + action: string
+            + target_capability: string
+            + priority: int
+        }
+    }
+}
+
+package "Distributed Agents" {
+    RECTANGLE "Weather Agent" as WeatherAgent {
+        + get_forecast()
+        + analyze_patterns()
+        --
+        + handle_a2a_message()
+    }
+    
+    RECTANGLE "Planning Agent" as PlanningAgent {
+        + create_plan()
+        + optimize_schedule()
+        --
+        + handle_a2a_message()
+    }
+    
+    RECTANGLE "Data Agent" as DataAgent {
+        + process_data()
+        + generate_insights()
+        --
+        + handle_a2a_message()
+    }
+    
+    RECTANGLE "Notification Agent" as NotificationAgent {
+        + send_email()
+        + send_sms()
+        --
+        + handle_a2a_message()
+    }
+}
+
+' Relationships
+A2AMessage ||--|| AgentProfile : identifies
+AgentProfile ||--o{ AgentCapability : contains
+
+AgentRegistry --> Redis : stores_in
+MessageRouter --> HTTP : uses
+MessageRouter --> AgentRegistry : queries
+
+WorkflowOrchestrator --> MessageRouter : sends_via
+ChoreographyEngine --> MessageRouter : publishes_via
+
+Workflow ||--o{ WorkflowStep : contains
+ChoreographyEngine ||--o{ EventPattern : processes
+
+MessageRouter --> WeatherAgent : routes_to
+MessageRouter --> PlanningAgent : routes_to  
+MessageRouter --> DataAgent : routes_to
+MessageRouter --> NotificationAgent : routes_to
+
+WeatherAgent --> AgentRegistry : registers_with
+PlanningAgent --> AgentRegistry : registers_with
+DataAgent --> AgentRegistry : registers_with
+NotificationAgent --> AgentRegistry : registers_with
+
+note top of A2AMessage : Standardized message format\nfor inter-agent communication\nwith routing and response handling
+
+note right of AgentRegistry : Centralized discovery service\nwith capability indexing\nand health monitoring
+
+note bottom of MessageRouter : Routes messages to appropriate\nagents based on capabilities\nand availability
+
+note left of WorkflowOrchestrator : Centralized orchestration\nwith dependency management\nand error handling
+
+note bottom of ChoreographyEngine : Event-driven coordination\nwith pattern matching\nand reactive behaviors
+
+@enduml

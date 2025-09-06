@@ -183,6 +183,9 @@ A2A communicates with external partner agents for specialized services.
 
 **MCP Inspector** is the essential debugging and testing tool for MCP servers—think "Postman for MCP". It provides interactive testing, schema validation, and real-time debugging capabilities.
 
+![MCP Inspector](puml/mcp-inspector.png)
+*Figure 4: MCP Inspector overview showing the comprehensive testing and debugging interface*
+
 **Development Impact**: Enables test-driven development, reduces debugging time by 40%, and ensures protocol compliance before deployment.
 
 ### Inspector Workflow
@@ -195,6 +198,9 @@ npx @modelcontextprotocol/inspector
 # Launches on http://localhost:6274
 ```
 
+![MCP Inspector Workflow](puml/mcp-inspector-workflow.png)
+*Figure 5: Complete MCP Inspector workflow from server connection through testing and validation*
+
 **Server Connection**:
 
 ```bash
@@ -202,14 +208,22 @@ npx @modelcontextprotocol/inspector
 stdio://python weather_server.py
 ```
 
+![MCP Inspector Connection](puml/mcp-inspector-connection.png)
+*Figure 6: MCP Inspector connection interface showing transport configuration and connection management*
+
 **Interactive Testing Features**:
 
 - Browse available tools, resources, and prompts  
 - Execute tools with auto-generated forms  
 - View real-time responses with syntax highlighting  
 
-![MCP Inspector Interface](images/mcp-inspector-interface.png)
-*Figure 5: MCP Inspector provides interactive testing with auto-generated forms and real-time feedback*
+![MCP Inspector Interface](puml/mcp-inspector-interface.png)
+*Figure 7: MCP Inspector provides interactive testing with auto-generated forms and real-time feedback*
+
+**Request/Response Flow**:
+
+![MCP Inspector Request/Response](puml/mcp-inspector-request-response.png)
+*Figure 8: MCP Inspector request/response flow showing JSON-RPC communication and debugging capabilities*
 
 **Production Development Pattern**:
 

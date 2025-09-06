@@ -1,0 +1,32 @@
+@startuml framework-comparison-matrix
+!include ../../../config/_standard-style.puml
+
+title Agent Framework Comparison Matrix
+
+package "Performance vs Control Spectrum" {
+  
+  component [Bare Metal Python] as bare #FFE6E6
+  component [Agno] as agno #E6F3FF
+  component [PydanticAI] as pydantic #E6FFE6
+  component [LangGraph] as langgraph #FFFACD
+  component [LangChain] as langchain #E6E6FA
+  component [CrewAI] as crewai #FFF0E6
+  component [ADK] as adk #F0E6FF
+  
+}
+
+note bottom of bare : **High Control, High Performance**\nEducation, Research, Custom Implementation
+note bottom of agno : **Performance Optimized**\nProduction Scale, 50x Memory Efficiency
+note bottom of pydantic : **Type Safety Focus**\nEnterprise, Schema Validation
+note bottom of langgraph : **Graph-Based Control**\nComplex Workflows, Precise Flow Control
+note bottom of langchain : **Component Ecosystem**\nRapid Prototyping, Extensive Tools
+note bottom of crewai : **Team Collaboration**\nRole-based, Natural Abstractions
+note bottom of adk : **Enterprise Integration**\nGoogle Cloud, Built-in Monitoring
+
+bare -right-> agno : "Add Performance Focus"
+agno -right-> pydantic : "Add Type Safety"
+pydantic -down-> langgraph : "Add Control Flow"
+langgraph -left-> langchain : "Simplify with Components"
+langchain -left-> crewai : "Abstract to Roles"
+
+@enduml
