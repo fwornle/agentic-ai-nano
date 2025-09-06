@@ -1,0 +1,68 @@
+@startuml filesystem-security-architecture
+!include ../../../config/_standard-style.puml
+
+title File System MCP Server Security Architecture
+
+package "MCP Client" {
+  [AI Agent] <<agent>> as agent
+}
+
+package "File System MCP Server" {
+  component "Request Handler" <<core>> as handler
+  component "Security Layer" <<util>> as security {
+    [Path Validation] <<util>> as pathval
+    [Permission Check] <<util>> as permcheck
+    [Sandboxing] <<core>> as sandbox
+  }
+  component "File Operations" <<api>> as fileops {
+    [Read File] <<api>> as read
+    [Write File] <<api>> as write
+    [List Directory] <<api>> as list
+    [Search Files] <<api>> as search
+  }
+  database "Audit Log" <<storage>> as audit
+}
+
+package "File System" {
+  folder "Allowed Directory" <<storage>> as allowed {
+    file "file1.txt" as f1
+    file "file2.py" as f2
+    folder "subdir" as sub
+  }
+  folder "Restricted Areas" as restricted #ffcccc {
+    folder "/etc" as etc
+    folder "/system" as sys
+    folder "../.." as parent
+  }
+}
+
+agent --> handler : File Request
+handler --> pathval : Validate Path
+pathval --> sandbox : Check Boundaries
+sandbox --> permcheck : Verify Permissions
+
+permcheck --> fileops : Allowed ✓
+permcheck --> agent : Denied ✗
+
+fileops --> allowed : Access
+fileops ..> restricted : Block
+
+fileops --> audit : Log Operation
+
+note right of security
+  Security Checks:
+  1. Path traversal prevention
+  2. Sandbox boundaries
+  3. Permission validation
+  4. Input sanitization
+end note
+
+note bottom of restricted
+  Blocked paths:
+  - System directories
+  - Parent directories (..)
+  - Absolute paths outside sandbox
+  - Symbolic links
+end note
+
+@enduml

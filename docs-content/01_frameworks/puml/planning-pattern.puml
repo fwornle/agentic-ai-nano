@@ -1,0 +1,35 @@
+@startuml planning-pattern
+!include ../../../config/_standard-style.puml
+
+title Planning Pattern: Multi-Step Task Decomposition
+
+actor "User" as user
+participant "Planning Agent" as agent
+
+user -> agent : "Help me launch a new product - an AI-powered task management app"
+
+activate agent
+
+note over agent : **Phase 1: Goal Analysis**
+agent -> agent : Analyze requirements:\n• Product: AI task management app\n• Goal: Successful launch\n• Constraints: Need comprehensive plan
+
+note over agent : **Phase 2: Task Decomposition**
+
+agent -> agent : **Create Master Plan:**\n\n**1. Market Research & Validation**\n   1.1 Analyze competitor landscape\n   1.2 Survey potential users\n   1.3 Define unique value proposition\n\n**2. Product Development**\n   2.1 Create technical specifications\n   2.2 Design user interface/UX\n   2.3 Develop MVP features\n   2.4 Implement AI capabilities\n   2.5 Beta testing program\n\n**3. Marketing Strategy**\n   3.1 Develop brand identity\n   3.2 Create marketing materials\n   3.3 Build landing page\n   3.4 Set up analytics tracking\n\n**4. Launch Preparation**\n   4.1 Prepare press releases\n   4.2 Set up customer support\n   4.3 Configure payment systems\n   4.4 Plan launch sequence\n\n**5. Post-Launch**\n   5.1 Monitor user feedback\n   5.2 Track key metrics\n   5.3 Plan feature iterations
+
+note over agent : **Phase 3: Resource Assessment**
+agent -> agent : Required resources:\n• Development team (3-4 people)\n• Marketing budget ($10k-15k)\n• Tools: Design software, development stack\n• Timeline: 12-16 weeks\n• External services: Payment, hosting, analytics
+
+note over agent : **Phase 4: Sequencing & Dependencies**
+agent -> agent : **Execution Order:**\n• Market research BEFORE development\n• UI/UX design BEFORE coding\n• MVP BEFORE advanced AI features\n• Beta testing BEFORE public launch\n• Support systems BEFORE launch day
+
+note over agent : **Phase 5: Risk Assessment**
+agent -> agent : **Potential Risks:**\n• Competitor launches similar product\n• Technical challenges with AI integration\n• Low user adoption\n• Budget overruns\n\n**Mitigation Strategies:**\n• Regular competitor monitoring\n• Phased development approach\n• Strong MVP validation\n• Budget contingency (20%)
+
+agent -> user : **Comprehensive Product Launch Plan**\n\n**📊 Executive Summary:**\n12-16 week plan to launch AI-powered task management app\n\n**🎯 Phase 1: Market Research (Weeks 1-2)**\n• Competitor analysis\n• User surveys and interviews\n• Value proposition definition\n\n**💻 Phase 2: Product Development (Weeks 3-10)**\n• Technical specifications\n• UI/UX design\n• MVP development\n• AI feature implementation\n• Beta testing\n\n**📢 Phase 3: Marketing (Weeks 8-12)**\n• Brand identity creation\n• Marketing material development\n• Landing page and analytics setup\n• Content marketing strategy\n\n**🚀 Phase 4: Launch (Weeks 13-14)**\n• Press release distribution\n• Customer support activation\n• Payment system go-live\n• Coordinated launch sequence\n\n**📈 Phase 5: Post-Launch (Weeks 15+)**\n• User feedback monitoring\n• Metrics tracking and analysis\n• Feature iteration planning\n\n**📋 Success Metrics:**\n• 1,000+ beta sign-ups\n• 500+ paying customers in first month\n• 4.0+ app store rating\n• 30% monthly user retention\n\n**💰 Budget Estimate: $12,000-18,000**\n**👥 Team Required: 3-4 people**\n\n**Next Step:** Would you like me to detail any specific phase\nor help you begin with market research?
+
+deactivate agent
+
+note right of agent : **Planning Benefits:**\n• Breaks complex goals into manageable tasks\n• Identifies dependencies and risks\n• Provides clear milestones\n• Enables progress tracking\n• Facilitates team coordination
+
+@enduml

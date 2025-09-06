@@ -80,8 +80,6 @@ mcp-cache/
 semantic-analysis/
 ukb-entities/
 plantuml/
-*.puml
-*.plantuml
 
 # Session and history files
 session_*.md

@@ -1,0 +1,132 @@
+@startuml mcp-inspector-interface
+!include ../../../config/_standard-style.puml
+
+title MCP Inspector Main Interface - Connected State
+
+rectangle "MCP Inspector Dashboard" as dashboard {
+  rectangle "Header Bar" as header {
+    [Connection Status: ✅ Connected] <<core>> as status
+    [Server: weather_server.py] <<api>> as server_name
+    [Disconnect Button] <<util>> as disconnect
+  }
+  
+  rectangle "Navigation Tabs" as tabs {
+    [Tools Tab] <<core>> as tools_tab
+    [Resources Tab] <<storage>> as resources_tab
+    [Prompts Tab] <<util>> as prompts_tab
+    [Sampling Tab] <<api>> as sampling_tab
+    [Roots Tab] <<infra>> as roots_tab
+  }
+  
+  rectangle "Tools Panel" as tools_panel {
+    rectangle "Tool List" as tool_list {
+      [🌤️ get_weather] <<api>> as get_weather
+      [📊 get_forecast] <<api>> as get_forecast  
+      [📈 analyze_data] <<api>> as analyze_data
+    }
+    
+    rectangle "Tool Execution Area" as exec_area {
+      rectangle "Parameter Form" as params {
+        [location: Input Field] <<util>> as location_input
+        [days: Number Field] <<util>> as days_input
+        [format: Dropdown] <<util>> as format_input
+      }
+      [Execute Button] <<core>> as execute_btn
+      
+      rectangle "Response Area" as response {
+        [JSON Response Display] <<storage>> as json_display
+        [Error Messages] <<util>> as error_display
+        [Request/Response Log] <<infra>> as request_log
+      }
+    }
+  }
+  
+  rectangle "Resources Panel" as resources_panel {
+    rectangle "Resource List" as resource_list {
+      [📄 file://weather_data.json] <<storage>> as file_resource
+      [🌐 https://api.weather.com/stations] <<external>> as web_resource
+    }
+    
+    rectangle "Resource Actions" as resource_actions {
+      [📖 Read Button] <<core>> as read_btn
+      [🔄 Subscribe Button] <<core>> as subscribe_btn
+      [Resource Content Viewer] <<storage>> as content_viewer
+    }
+  }
+  
+  rectangle "Prompts Panel" as prompts_panel {
+    rectangle "Prompt Templates" as prompt_list {
+      [📋 weather_analysis] <<util>> as weather_prompt
+      [📝 forecast_summary] <<util>> as forecast_prompt
+    }
+    
+    rectangle "Prompt Testing" as prompt_testing {
+      rectangle "Template Variables" as template_vars {
+        [location: Input] <<util>> as prompt_location
+        [days: Input] <<util>> as prompt_days
+        [format: Input] <<util>> as prompt_format
+      }
+      [Preview Button] <<core>> as preview_btn
+      [Generated Prompt Display] <<storage>> as prompt_display
+    }
+  }
+}
+
+rectangle "Communication Layer" as comm {
+  [JSON-RPC Protocol] <<infra>> as jsonrpc
+  [Request Queue] <<util>> as queue
+  [Response Handler] <<core>> as handler
+}
+
+' Tab switching flow
+tools_tab --> tools_panel : Show Tools
+resources_tab --> resources_panel : Show Resources
+prompts_tab --> prompts_panel : Show Prompts
+
+' Tool execution flow
+get_weather --> params : Configure Parameters
+params --> execute_btn : Ready to Execute
+execute_btn --> comm : Send Request
+comm --> response : Display Response
+
+' Resource interaction
+file_resource --> read_btn : Read Resource
+web_resource --> subscribe_btn : Subscribe to Updates
+read_btn --> content_viewer : Display Content
+
+' Prompt testing flow
+weather_prompt --> template_vars : Fill Variables
+template_vars --> preview_btn : Generate Preview
+preview_btn --> prompt_display : Show Result
+
+' Communication layer
+jsonrpc --> queue : Queue Requests
+queue --> handler : Process Responses
+
+note right of tools_panel
+  **Tool Interface Features:**
+  • Auto-generated forms from schema
+  • Real-time parameter validation
+  • Syntax-highlighted JSON responses
+  • Request/response history
+  • Error handling and debugging
+end note
+
+note left of resources_panel
+  **Resource Features:**
+  • File system resources
+  • HTTP/HTTPS endpoints
+  • Real-time subscriptions
+  • Content preview
+  • MIME type detection
+end note
+
+note bottom of prompts_panel
+  **Prompt Features:**
+  • Template variable substitution
+  • Live preview generation
+  • Copy to clipboard
+  • Template validation
+end note
+
+@enduml
