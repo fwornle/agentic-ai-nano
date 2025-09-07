@@ -73,7 +73,13 @@
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" node scripts/generate-proper-lsl-from-transcripts.js --project=coding)",
       "Bash(git rm:*)",
       "Bash(git add:*)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(/Users/q284340/Agentic/coding/scripts/combined-status-line.js)",
+      "Bash(git log:*)",
+      "Bash(git -C /Users/q284340/Agentic/nano-degree status --porcelain .specstory/comprehensive-project-trajectory.md)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/update-comprehensive-trajectory.js)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/repository-trajectory-generator.js)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/repository-trajectory-generator.js)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
