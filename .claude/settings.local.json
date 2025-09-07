@@ -81,7 +81,8 @@
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/repository-trajectory-generator.js)",
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/repository-trajectory-generator.js)",
       "Bash(crontab:*)",
-      "Bash(DEBUG_STATUS=1 CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node scripts/combined-status-line.js)"
+      "Bash(DEBUG_STATUS=1 CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node scripts/combined-status-line.js)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node scripts/combined-status-line.js)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
