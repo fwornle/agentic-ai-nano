@@ -18,6 +18,10 @@ The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment 
 2. **Log in** with your BMW credentials  
 3. **Select** the "Agentic AI Nanodegree" template  
 4. **Launch** your pre-configured development environment  
+5. **Add your Coder SSH Key** to Codecraft Github:  
+     http://10.21.202.14/settings/ssh-keys  
+     https://cc-github.bmwgroup.net/settings/keys  
+
 
 ![Coder Login](images/coder-login.png)
 *Coder login screen*
