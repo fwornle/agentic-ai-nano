@@ -1,0 +1,163 @@
+{
+  "demo_start_time": "2025-09-08T14:01:44.931485",
+  "scenarios": [
+    {
+      "name": "Basic Type Validation",
+      "description": "Demonstrates field validation, constraints, and error handling",
+      "status": "success",
+      "execution_time": 0.000125,
+      "details": {
+        "valid_request": {
+          "created": true,
+          "dataset_name": "customer_behavior_analytics",
+          "fields_validated": 5
+        },
+        "validation_errors": {
+          "caught_errors": true,
+          "error_count": 3,
+          "errors": [
+            {
+              "field": "dataset_name",
+              "error": "String too short, minimum 1 characters",
+              "input": ""
+            },
+            {
+              "field": "sample_size",
+              "error": "Value must be >= 100",
+              "input": -1000
+            },
+            {
+              "field": "quality_threshold",
+              "error": "Value must be <= 1.0",
+              "input": 1.5
+            }
+          ]
+        },
+        "custom_validation": {
+          "validated": true
+        },
+        "status": "success",
+        "execution_time": 0.000125
+      }
+    },
+    {
+      "name": "Agent Type Validation",
+      "description": "Shows type-safe agent responses with guaranteed structure",
+      "status": "success",
+      "execution_time": 0.202601,
+      "details": {
+        "quality_agent": {
+          "executed": true,
+          "type_safe": true,
+          "quality_score": 0.85,
+          "status": "queued"
+        },
+        "performance": {
+          "total_executions": 2,
+          "successful_executions": 1,
+          "failed_executions": 1,
+          "success_rate": 50.0,
+          "average_execution_time_ms": 101.20899999999999,
+          "agents_used": [
+            "feature_extraction",
+            "data_quality"
+          ],
+          "error_types": [
+            "ValidationError"
+          ]
+        },
+        "status": "success",
+        "execution_time": 0.202601
+      }
+    },
+    {
+      "name": "Advanced Validation Patterns",
+      "description": "Shows complex validation with business rules and cross-field validation",
+      "status": "failed",
+      "execution_time": 0.000634,
+      "details": {
+        "status": "failed",
+        "error": "Validation failed: [{'field': 'created_date', 'error': 'Field is required', 'input': None}]",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/src/session5/demo_runner_course.py\", line 61, in run\n    await self.execute()\n  File \"/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/src/session5/demo_runner_course.py\", line 271, in execute\n    schema = DataSchema(\n             ^^^^^^^^^^^\n  File \"/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/src/session5/pydantic_agents_course.py\", line 52, in __init__\n    self._validate_and_set(data)\n  File \"/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/src/session5/pydantic_agents_course.py\", line 89, in _validate_and_set\n    raise ValidationError(errors)\npydantic_agents_course.ValidationError: Validation failed: [{'field': 'created_date', 'error': 'Field is required', 'input': None}]\n",
+        "execution_time": 0.000634
+      }
+    },
+    {
+      "name": "Error Handling & Recovery",
+      "description": "Shows robust error handling, validation failures, and recovery patterns",
+      "status": "success",
+      "execution_time": 0.100286,
+      "details": {
+        "validation_scenarios": [
+          {
+            "scenario": "Invalid Schema Name",
+            "status": "error_caught",
+            "error_caught": false,
+            "error_count": 2
+          },
+          {
+            "scenario": "Invalid Version Format",
+            "status": "error_caught",
+            "error_caught": true,
+            "error_count": 3
+          },
+          {
+            "scenario": "Empty Fields List",
+            "status": "error_caught",
+            "error_caught": false,
+            "error_count": 2
+          },
+          {
+            "scenario": "Invalid Field Type",
+            "status": "error_caught",
+            "error_caught": false,
+            "error_count": 2
+          }
+        ],
+        "recovery_tests": [
+          {
+            "test": "Non-existent Agent",
+            "success": false,
+            "error_type": "execution_failed"
+          },
+          {
+            "test": "Valid Agent Execution",
+            "success": true,
+            "error_type": "none"
+          }
+        ],
+        "graceful_degradation": {
+          "partial_data_handled": true,
+          "defaults_applied": true
+        },
+        "status": "success",
+        "execution_time": 0.100286
+      }
+    },
+    {
+      "name": "Production Readiness",
+      "description": "Shows monitoring, logging, and enterprise-grade patterns",
+      "status": "failed",
+      "execution_time": 0.507302,
+      "details": {
+        "performance_monitoring": {
+          "operations_executed": 5,
+          "success_rate": 60.0,
+          "average_execution_time": 101.194,
+          "agent_types": 3
+        },
+        "status": "failed",
+        "error": "Validation failed: [{'field': 'created_date', 'error': 'Field is required', 'input': None}, {'field': 'valid_from', 'error': 'Field is required', 'input': None}]",
+        "traceback": "Traceback (most recent call last):\n  File \"/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/src/session5/demo_runner_course.py\", line 61, in run\n    await self.execute()\n  File \"/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/src/session5/demo_runner_course.py\", line 669, in execute\n    input_schema=DataSchema(\n                 ^^^^^^^^^^^\n  File \"/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/src/session5/pydantic_agents_course.py\", line 52, in __init__\n    self._validate_and_set(data)\n  File \"/Users/q284340/Agentic/nano-degree/docs-content/01_frameworks/src/session5/pydantic_agents_course.py\", line 89, in _validate_and_set\n    raise ValidationError(errors)\npydantic_agents_course.ValidationError: Validation failed: [{'field': 'created_date', 'error': 'Field is required', 'input': None}, {'field': 'valid_from', 'error': 'Field is required', 'input': None}]\n",
+        "execution_time": 0.507302
+      }
+    }
+  ],
+  "overall_stats": {
+    "total_scenarios": 5,
+    "successful_scenarios": 3,
+    "success_rate": 60.0,
+    "total_execution_time": 0.810948,
+    "demo_end_time": "2025-09-08T14:01:45.742696"
+  }
+}

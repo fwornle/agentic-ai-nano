@@ -34,7 +34,7 @@ This session offers three distinct learning paths designed to match your goals a
 
 ## 🎯 Observer Path: LangGraph Architecture Foundations
 
-**Code Repository**: [`src/session3/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session3)
+**Code Repository**: [`src/session3/`](src/session3/)
 **Quick Start**: `cd src/session3 && python langgraph_basics_course.py`
 **Complete Demo**: `cd src/session3 && python demo_runner_course.py`
 
@@ -70,7 +70,7 @@ Think of it as the difference between traditional ETL pipelines and modern strea
 
 Building on our LangChain foundations, LangGraph transforms multi-agent data systems from linear pipelines into sophisticated graph structures that mirror real-world distributed data processing:
 
-**File**: [`src/session3/langgraph_basics_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/langgraph_basics_course.py) - Core workflow setup
+**File**: [`src/session3/langgraph_basics_course.py`](src/session3/langgraph_basics_course.py) - Core workflow setup
 
 ### Production-Grade State Management
 
@@ -114,7 +114,7 @@ Understanding these principles is like grasping the fundamental laws that govern
 
 Building blocks of LangGraph workflows - the data processing agents (nodes) and their coordination patterns (edges):
 
-**File**: [`src/session3/workflow_nodes_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/workflow_nodes_course.py) - Node implementations
+**File**: [`src/session3/workflow_nodes_course.py`](src/session3/workflow_nodes_course.py) - Node implementations
 
 ```python
 def data_validation_node(state: WorkflowState):

@@ -1,0 +1,91 @@
+{
+  "demo_start_time": "2025-09-08T14:12:56.143689",
+  "scenarios": [
+    {
+      "name": "Atomic Architecture Principles",
+      "description": "Single responsibility, composability, and modular design",
+      "status": "success",
+      "execution_time": 0.201984,
+      "details": {
+        "agents_demonstrated": 2,
+        "single_responsibility": true,
+        "composability_demonstrated": true,
+        "pipeline_executed": true,
+        "metrics_collected": true,
+        "status": "success",
+        "execution_time": 0.201984
+      }
+    },
+    {
+      "name": "Advanced Composition Patterns",
+      "description": "Sequential, parallel, conditional, and adaptive composition",
+      "status": "success",
+      "execution_time": 0.405987,
+      "details": {
+        "composition_patterns": 3,
+        "patterns_successful": 3,
+        "analytics": {
+          "strategies_used": [
+            "sequential",
+            "parallel"
+          ],
+          "total_executions": 3,
+          "strategy_performance": {
+            "sequential": {
+              "executions": 1,
+              "average_time_ms": 101.08733177185059,
+              "min_time_ms": 101.08733177185059,
+              "max_time_ms": 101.08733177185059,
+              "total_time_ms": 101.08733177185059
+            },
+            "parallel": {
+              "executions": 2,
+              "average_time_ms": 101.58812999725342,
+              "min_time_ms": 101.56536102294922,
+              "max_time_ms": 101.61089897155762,
+              "total_time_ms": 203.17625999450684
+            }
+          }
+        },
+        "status": "success",
+        "execution_time": 0.405987
+      }
+    },
+    {
+      "name": "Dynamic System Assembly",
+      "description": "Blueprint-driven system composition and runtime assembly",
+      "status": "success",
+      "execution_time": 0.102475,
+      "details": {
+        "blueprints_created": 2,
+        "systems_assembled": 2,
+        "executions_successful": 0,
+        "total_executions": 2,
+        "status": "success",
+        "execution_time": 0.102475
+      }
+    },
+    {
+      "name": "Performance Optimization",
+      "description": "Metrics collection, performance analysis, and optimization strategies",
+      "status": "success",
+      "execution_time": 8.296634,
+      "details": {
+        "baseline_operations": 40,
+        "parallel_success_rate": 1.0,
+        "pipeline_executions": 10,
+        "registry_creations": 50,
+        "avg_creation_time_ms": 0.08518,
+        "status": "success",
+        "execution_time": 8.296634
+      }
+    }
+  ],
+  "overall_stats": {
+    "total_scenarios": 4,
+    "successful_scenarios": 4,
+    "success_rate": 100.0,
+    "total_execution_time": 9.007079999999998,
+    "demo_end_time": "2025-09-08T14:13:05.151884"
+  }
+}
