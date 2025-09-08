@@ -36,7 +36,7 @@ This session offers three distinct learning paths designed to match your goals a
 
 ## 🎯 Observer Path: Bare Metal Agent Fundamentals
 
-**Code Repository**: [`src/session1/`](src/session1/)
+**Code Repository**: [`src/session1/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session1)
 **Quick Start**: `cd src/session1 && python base_agent_course.py`
 **Complete Demo**: `cd src/session1 && python demo_runner_course.py`
 
@@ -89,9 +89,9 @@ Every data processing agent requires these core components, engineered for cloud
 
 ![Agent Pattern Control](images/agent-core-components.png)
 
-**File**: [`src/session1/base_agent_course.py`](src/session1/base_agent_course.py)
+**File**: [`src/session1/base_agent_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent_course.py)
 
-> **📁 Course Implementation**: The complete implementation matching this course content is available in [`base_agent_course.py`](src/session1/base_agent_course.py). The original [`base_agent.py`](src/session1/base_agent.py) contains a different implementation focusing on general agent architecture patterns.
+> **📁 Course Implementation**: The complete implementation matching this course content is available in [`base_agent_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent_course.py). The original [`base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py) contains a different implementation focusing on general agent architecture patterns.
 
 This foundation class defines essential capabilities while operating within cloud resource constraints. The memory management system respects Kubernetes pod limits while maintaining processing context, and the tool registry provides seamless integration with your existing cloud infrastructure including S3 data lakes, RDS metadata stores, and Kafka message streams.
 
@@ -231,7 +231,7 @@ These five patterns form the intelligence foundation for data processing systems
 
 ### Pattern 1: Reflection - Pipeline Performance Optimization
 
-**Implementation File**: [`src/session1/reflection_agent_course.py`](src/session1/reflection_agent_course.py)
+**Implementation File**: [`src/session1/reflection_agent_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/reflection_agent_course.py)
 
 #### Concept
 
@@ -288,7 +288,7 @@ The optimization analysis focuses on the four critical areas that impact data pr
 
 ### Pattern 2: Tool Use - Cloud Service Integration
 
-**Implementation File**: [`src/session1/tool_use_agent_course.py`](src/session1/tool_use_agent_course.py)
+**Implementation File**: [`src/session1/tool_use_agent_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/tool_use_agent_course.py)
 
 #### Concept
 
@@ -326,7 +326,7 @@ The tool registry connects agents with essential cloud data services. Each tool 
 
 ### Pattern 3: Planning - Workflow Orchestration
 
-**Implementation File**: [`src/session1/planning_agent_course.py`](src/session1/planning_agent_course.py)
+**Implementation File**: [`src/session1/planning_agent_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/planning_agent_course.py)
 
 #### Concept
 
@@ -367,7 +367,7 @@ Infrastructure awareness ensures plans are realistic and executable. The agent c
 
 ### Pattern 4: ReAct - Adaptive Data Processing
 
-**Implementation File**: [`src/session1/react_agent_course.py`](src/session1/react_agent_course.py)
+**Implementation File**: [`src/session1/react_agent_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/react_agent_course.py)
 
 #### Concept
 
@@ -401,7 +401,7 @@ Success evaluation determines whether processing objectives have been met. When 
 
 ### Pattern 5: Multi-Agent - Distributed Processing Coordination
 
-**Implementation File**: [`src/session1/multi_agent_system_course.py`](src/session1/multi_agent_system_course.py)
+**Implementation File**: [`src/session1/multi_agent_system_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/multi_agent_system_course.py)
 
 #### Concept
 
@@ -604,7 +604,7 @@ The quality assessment produces actionable insights including numerical quality 
 
 ### 📝 Running the Complete Demo
 
-**Demo File**: [`src/session1/demo_runner_course.py`](src/session1/demo_runner_course.py)
+**Demo File**: [`src/session1/demo_runner_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/demo_runner_course.py)
 
 Experience all five agentic patterns in action with our comprehensive demonstration:
 

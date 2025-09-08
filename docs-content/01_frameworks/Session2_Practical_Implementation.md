@@ -22,8 +22,8 @@ Now we move from concepts to practice, creating agents that solve actual data en
 
 Practice with these implementation examples that demonstrate LangChain patterns in action for data systems:
 
-- [`src/session2/langchain_basics_course.py`](src/session2/langchain_basics_course.py) - Foundation patterns and core concepts
-- [`src/session2/langchain_agents_course.py`](src/session2/langchain_agents_course.py) - Complete agent implementation with data tools
+- [`src/session2/langchain_basics_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_basics_course.py) - Foundation patterns and core concepts
+- [`src/session2/langchain_agents_course.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session2/langchain_agents_course.py) - Complete agent implementation with data tools
 
 ### Validation Commands
 

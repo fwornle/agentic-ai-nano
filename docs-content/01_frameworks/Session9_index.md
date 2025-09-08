@@ -113,15 +113,14 @@ All session code examples are available in the [`src/session9/`](https://github.
 ### Core Implementation Files:  
 - `react_agent.py` - ReAct pattern implementation
 - `multi_agent_coordination.py` - Communication and consensus systems
-- `planning_systems.py` - HTN planning algorithms
-- `dynamic_planning.py` - Adaptive replanning systems
+- `planning_systems.py` - HTN planning algorithms and adaptive replanning
 - `production_deployment.py` - Production deployment patterns
 
 ### Advanced Implementation Files:  
-- `reasoning_engine.py` - Advanced reasoning patterns
 - `consensus_algorithms.py` - Sophisticated consensus mechanisms
 - `auction_mechanisms.py` - Multi-criteria auction systems
-- `reflection_engine.py` - Learning and adaptation systems
+- `reflection_engine.py` - Advanced reflection and learning patterns
+- `conflict_resolution.py` - Conflict resolution strategies
 
 ### Quick Start Commands:
 ```bash

@@ -12,7 +12,7 @@ The difference between a promising demo and production success isn't just scale 
 - **[Module B: Production Operations & Scaling](Session10_ModuleB_Enterprise_Operations_Scaling.md)** - Auto-scaling, performance optimization  
 
 **Code Files**: All examples use files in [`src/session10/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session10)
-**Quick Start**: Run `cd src/session10 && python production_architecture.py` to see production integration
+**Quick Start**: Run `cd src/session10 && python enterprise_architecture.py` to see production integration
 
 ## Part 1: Production Integration Fundamentals - Navigating the Data Infrastructure
 
@@ -22,7 +22,7 @@ Picture the most complex data processing machine ever built: not a spaceship or 
 
 Your AI agent isn't just joining this ecosystem - it's becoming part of the critical infrastructure that keeps enterprise data processing pipelines running:
 
-**File**: [`src/session10/production_architecture.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/production_architecture.py) - Production integration patterns
+**File**: [`src/session10/enterprise_architecture.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/enterprise_architecture.py) - Production integration patterns
 
 ```python
 from typing import Dict, Any, List, Protocol
@@ -89,7 +89,7 @@ Distributed data systems process 77% of the world's enterprise streaming data. T
 
 One mistake, one timeout, one authentication failure could impact data processing operations that measure success in milliseconds and losses in processing capacity:
 
-**File**: [`src/session10/data_integration.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/data_integration.py) - Data system integration patterns
+**Example**: Data system integration patterns (demonstrated in code below)
 
 ```python
 class DataSystemIntegrationAdapter:
@@ -345,7 +345,7 @@ Running one container is like having one violin. Running thousands of containers
 
 This is enterprise Kubernetes - where your AI agent becomes part of a symphony that never stops playing:
 
-**File**: [`src/session10/deployment/k8s-deployment.yaml`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/deployment/k8s-deployment.yaml) - Kubernetes deployment
+**Example**: Kubernetes deployment configuration
 
 ```yaml
 
@@ -431,7 +431,7 @@ spec:
 
 Automated deployment with security scanning ensures code quality, vulnerability detection, and reliable deployments. This GitHub Actions pipeline demonstrates comprehensive CI/CD with security scanning, testing, and staged deployment:
 
-**File**: [`src/session10/deployment/.github/workflows/deploy.yml`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/deployment/.github/workflows/deploy.yml) - CI/CD pipeline
+**Example**: CI/CD pipeline configuration
 
 ```yaml
 
@@ -685,7 +685,7 @@ class RBACManager:
 
 Classification-based data protection:
 
-**File**: [`src/session10/security/data_protection.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session10/security/data_protection.py) - Encryption systems
+**Example**: Data protection and encryption systems
 
 ```python
 from cryptography.fernet import Fernet, MultiFernet
@@ -964,7 +964,7 @@ docker run -p 8000:8000 enterprise-agent
 
 # Deploy to Kubernetes (if available)
 
-kubectl apply -f k8s-deployment.yaml
+# kubectl apply -f your-deployment.yaml
 kubectl get pods -l app=enterprise-agent
 ```
 

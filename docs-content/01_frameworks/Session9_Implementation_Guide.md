@@ -133,7 +133,7 @@ The decomposition algorithm processes tasks based on their complexity type. PRIM
 
 Building adaptive systems that adjust to changing conditions during execution:
 
-**File**: [`src/session9/dynamic_planning.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/dynamic_planning.py) - Adaptive data processing replanning systems
+**File**: [`src/session9/planning_systems.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/planning_systems.py) - Adaptive data processing replanning systems (DynamicReplanner class)
 
 ### Adaptive Execution Engine
 
