@@ -21,7 +21,8 @@ After completing this module, you will understand:
 
 CrewAI revolutionizes AI automation by modeling agent systems like proven data engineering organizational structures, solving the fundamental challenge of how to coordinate multiple AI capabilities effectively across complex data processing pipelines.
 
-![CrewAI Overview](images/crewai-overview.png)
+![CrewAI Overview](images/crewai-overview.png)  
+*CrewAI framework architecture showing agents with LLMs working collaboratively on tasks, with shared memory and tools leading to final outcomes*
 
 First, we import the necessary CrewAI components - the building blocks for intelligent team coordination in data processing environments:
 

@@ -32,6 +32,9 @@ This session offers three distinct learning paths designed to match your goals a
 
 ## Module Architecture
 
+![Atomic Agents](images/atomic-agents.png)  
+*Atomic Agents framework logo featuring an atomic symbol with robotic hand, emphasizing modular and composable AI agent architecture*
+
 Atomic Agents provides a component-based architecture for building modular data processing systems that scale like distributed stream processors but compose like building blocks. Built on Instructor and Pydantic foundations, the framework enables rapid data pipeline assembly through schema alignment and lightweight processing components.
 
 ### Core Learning Concepts

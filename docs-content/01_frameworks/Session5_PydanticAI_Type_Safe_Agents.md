@@ -49,7 +49,8 @@ This Observer path covers essential concepts for understanding type-safe agent d
 
 PydanticAI brings compile-time type safety to AI development through structured data models and automatic validation.
 
-![PydanticAI](images/pydantic-ai.png)
+![PydanticAI](images/pydantic-ai.png)  
+*PydanticAI framework logo with distinctive purple geometric symbol and black text branding*
 
 Essential imports for type-safe agents:
 
