@@ -69,8 +69,8 @@ When Netflix processes 2 billion hours of video analytics daily, when Uber analy
 
 That's the Agno philosophy: production-grade data processing by design, not by accident.
 
-![Agno Agent Architecture](images/agno-agent.png)
-*This diagram reveals Agno's secret weapon for data workloads: every component is designed assuming data volume spikes and partition failures.*
+![Agno Agent Architecture](images/agno-agent.png)  
+*Agno agent architecture interface showing model selection (OpenAI highlighted), memory system with chat history, knowledge base with document access, and tools including payments, web search, API calls, and SQL queries*
 
 Here's a basic production agent setup:
 

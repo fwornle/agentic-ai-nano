@@ -83,7 +83,9 @@
       "Bash(crontab:*)",
       "Bash(DEBUG_STATUS=1 CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node scripts/combined-status-line.js)",
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node scripts/combined-status-line.js)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Read(//tmp/**)",
+      "WebSearch"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
