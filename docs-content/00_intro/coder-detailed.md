@@ -154,6 +154,12 @@ Within the context of the nano-degree, each module comes with specialized worksp
 - Security certificates installed  
 - Multi-agent simulation environments  
 
+The course modules include code-along sessions for which you can find the source code in folder **src/sessionX**. For example, Session 1 is associated the following source files, which can be run using file **demo_runner_course.py**. Files not ending on *_course* are additional examples which may be useful as reference.
+
+![Coding Assistant](images/coder-mod-01-session-1-demo.png)
+*Figure 10: Session 1, source files and "demo_runner_course.py"*
+
+
 ### Working with AI Assistants
 
 As a product, Coder workspaces integrate with:
@@ -166,19 +172,19 @@ As a product, Coder workspaces integrate with:
 Inside our corporate network, you have access to **GitHub Copilot** as well as [Coding-Assistant](https://github.com/msc94/coding_assistant?tab=readme-ov-file#readme), a CLI-based open-source coding assistant developed by our very own Marcel Schneider who kindly made his hobby an open-source project. This coding agent can be used from the command line using the preinstalled command *coding-assistant*:
 
 ![Coding Assistant](images/coder-llm-coding-assistant.png)
-*Figure 10: Pre-installed coding agent "coding-assistant"*
+*Figure 11: Pre-installed coding agent "coding-assistant"*
 
 In addition, to facilitate your agentic developments, the [Gaia LLM API has been pre-configured](llmapi.md) by setting the environment variables OPENAI_BASE_URL and OPENAI_API_KEY, as well as the provision of command *llm*. You can try using this from the command line as follows:
 
 ![Coder LLM Integration](images/coder-llm.png)
-*Figure 11: Coder environments support AI coding assistants*
+*Figure 12: Coder environments support AI coding assistants*
 
 ### When you are done
 
 **Stop workspaces** when not in use to conserve resources:
 
 ![Coder Stopped](images/coder-stopped.png)
-*Figure 12: Workspaces can be stopped to save resources when not in use*
+*Figure 13: Workspaces can be stopped to save resources when not in use*
 
 ---
 
