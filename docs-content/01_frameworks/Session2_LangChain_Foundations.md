@@ -32,7 +32,7 @@ This session offers three distinct learning paths designed to match your goals a
 
 ## 🎯 Observer Path: LangChain Architecture Foundations
 
-**Code Repository**: [`src/session2/`](src/session2/)
+**Code Repository**: [`src/session2/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session2)
 **Quick Start**: `cd src/session2 && python langchain_basics_course.py`
 **Complete Demo**: `cd src/session2 && python demo_runner_course.py`
 
