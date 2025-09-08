@@ -12,7 +12,7 @@ This module teaches you to build query understanding systems that read between t
 - **Core Session:** [Session 4 - Query Enhancement & Context Augmentation](Session4_Query_Enhancement_Context_Augmentation.md)  
 - **Related Module:** [Session 3 Module A - Index Algorithms](Session3_ModuleA_Index_Algorithms.md)  
 
-### Code Files: `src/session4/`
+### Code Files: [`src/session4/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/02_rag/src/session4)
 
 - `comprehensive_enhancer.py` - Complete query processing pipeline
 - `semantic_gap_analyzer.py` - Query intent detection

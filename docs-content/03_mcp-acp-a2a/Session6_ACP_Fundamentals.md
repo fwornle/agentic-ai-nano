@@ -99,7 +99,7 @@ Let's start building a society of agents that can work together seamlessly. We'l
 Every intelligent agent needs to declare what it can do. Think of this as creating a digital resume that other agents can read and understand:
 
 ```python
-# From src/session6/acp_agent.py
+# From [src/session6/acp_agent.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/acp_agent.py)
 class AgentCapability(BaseModel):
     """Defines what an agent can do"""
     name: str                    # e.g., "process_data"
@@ -148,7 +148,7 @@ This isn't just documentation—it's a contract that enables other agents to und
 Each agent needs a complete identity that makes it discoverable and trustworthy:
 
 ```python
-# From src/session6/acp_agent.py
+# From [src/session6/acp_agent.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/acp_agent.py)
 class AgentMetadata(BaseModel):
     """Complete agent information for discovery"""
     id: str                      # Unique identifier
@@ -197,7 +197,7 @@ This self-describing approach allows agents to join the network dynamically with
 Every ACP agent speaks the same language through four standard REST endpoints. Think of these as universal verbs that any agent can understand:
 
 ```python
-# From src/session6/acp_agent.py - Core endpoints
+# From [src/session6/acp_agent.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/acp_agent.py) - Core endpoints
 @app.get("/metadata")
 async def get_metadata():
     """Return this agent's information"""
@@ -238,7 +238,7 @@ Our first specialist is a master of data analysis, capable of turning raw CSV fi
 ### Declaring Its Expertise
 
 ```python
-# From src/session6/data_agent.py
+# From [src/session6/data_agent.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/data_agent.py)
 capabilities = [
     AgentCapability(
         name="process_csv",
@@ -332,7 +332,7 @@ Our second specialist excels at understanding and manipulating human language:
 ### Its Natural Language Arsenal
 
 ```python
-# From src/session6/text_agent.py
+# From [src/session6/text_agent.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/text_agent.py)
 capabilities = [
     AgentCapability(
         name="summarize_text",
@@ -407,7 +407,7 @@ ACP coordination follows a carefully choreographed dance. Let's break down each 
 ### Movement 1: The Great Discovery
 
 ```python
-# From src/session6/coordinator_agent.py - Discovery phase
+# From [src/session6/coordinator_agent.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/coordinator_agent.py) - Discovery phase
 async def _execute_data_analysis_workflow(self, input_data: dict) -> dict:
     agents_used = []
 
@@ -496,7 +496,7 @@ These principles ensure reliable, scalable agent orchestration in production env
 In the ACP world, agents don't rely on phone books or yellow pages. They use a **local registry pattern** where agents introduce themselves to their neighbors:
 
 ```python
-# From src/session6/coordinator_agent.py
+# From [src/session6/coordinator_agent.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/coordinator_agent.py)
 async def register_with_peers(self, peer_ports: list):
     """Register with known peer agents"""
 
@@ -558,7 +558,7 @@ This capability-based discovery enables dynamic workflow composition based on av
 Managing multiple agents manually would be like trying to coordinate a city by running around to each building individually. Instead, we've created a bootstrap script that acts like a city planner:
 
 ```python
-# From src/session6/bootstrap.py - simplified
+# From [src/session6/bootstrap.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/bootstrap.py) - simplified
 agents = [
     {"script": "data_agent.py", "port": 8001, "name": "DataProcessor"},
     {"script": "text_agent.py", "port": 8002, "name": "TextProcessor"},
@@ -644,7 +644,7 @@ This test client acts like a quality inspector, verifying that all the social in
 Every conversation between agents follows a standardized format—think of it as diplomatic protocol for digital minds:
 
 ```python
-# From src/session6/acp_agent.py
+# From [src/session6/acp_agent.py](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/03_mcp-acp-a2a/src/session6/acp_agent.py)
 class ACPMessage(BaseModel):
     id: str                    # Unique message ID
     from_agent: str           # Who sent it
