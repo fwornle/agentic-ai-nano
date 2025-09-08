@@ -29,7 +29,7 @@ The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment 
 ![Coder Workspaces](images/coder-workspaces.png)
 *Coder workspace dashboard showing available development environments*
 
-All tools, dependencies, and BMW Gaia LLM API access are pre-configured and ready to use.
+All tools, dependencies, and BMW Gaia LLM API access are pre-configured and ready to use. Use the template **Agentic AI Nanodegree** for this course.
 
 ### Why Cloud Development?
 
