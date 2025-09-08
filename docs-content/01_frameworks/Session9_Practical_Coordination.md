@@ -18,7 +18,7 @@ After completing this module, you will:
 
 Building on the essential concepts, let's implement a complete ReAct system with monitoring and quality assessment:
 
-**File**: [`src/session9/reasoning_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reasoning_engine.py) - Advanced data processing reasoning patterns
+**File**: [`src/session9/reflection_engine.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session9/reflection_engine.py) - Advanced data processing reasoning patterns
 
 ### Complete ReAct Execution Flow
 
