@@ -1,0 +1,206 @@
+{
+  "summary": {
+    "total_files": 1,
+    "files_needing_refactoring": 0,
+    "total_large_blocks": 0
+  },
+  "files": [
+    {
+      "file": "/Users/q284340/Agentic/nano-degree/docs-content/03_mcp-acp-a2a/Session1_Basic_MCP_Server.md",
+      "total_code_blocks": 13,
+      "large_blocks_count": 0,
+      "code_blocks": [
+        {
+          "start_line": 58,
+          "end_line": 72,
+          "language": "python",
+          "content": [
+            "from mcp.server.fastmcp import FastMCP",
+            "",
+            "# Initialize server with descriptive name",
+            "mcp = FastMCP(\"Weather Information Server\")",
+            "",
+            "@mcp.tool()",
+            "def get_weather(city: str) -> dict:",
+            "    \"\"\"Get weather for a city.\"\"\"",
+            "    return {",
+            "        \"city\": city,",
+            "        \"temperature\": \"22\u00b0C\",",
+            "        \"condition\": \"Sunny\"",
+            "    }"
+          ],
+          "line_count": 13
+        },
+        {
+          "start_line": 98,
+          "end_line": 102,
+          "language": "bash",
+          "content": [
+            "mkdir mcp-weather-server && cd mcp-weather-server",
+            "python -m venv venv && source venv/bin/activate",
+            "pip install fastmcp requests python-dotenv"
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 108,
+          "end_line": 113,
+          "language": "",
+          "content": [
+            "mcp-weather-server/",
+            "\u251c\u2500\u2500 weather_server.py      # Core server implementation",
+            "\u251c\u2500\u2500 requirements.txt       # Dependency manifest",
+            "\u2514\u2500\u2500 .env                  # Configuration and secrets"
+          ],
+          "line_count": 4
+        },
+        {
+          "start_line": 135,
+          "end_line": 142,
+          "language": "python",
+          "content": [
+            "from mcp.server.fastmcp import FastMCP",
+            "from datetime import datetime",
+            "from typing import Dict, List",
+            "",
+            "# Initialize server with descriptive name",
+            "mcp = FastMCP(\"Weather Information Server\")"
+          ],
+          "line_count": 6
+        },
+        {
+          "start_line": 155,
+          "end_line": 163,
+          "language": "python",
+          "content": [
+            "# Simulated weather data for demonstration",
+            "weather_data = {",
+            "    \"London\": {\"temp\": 15, \"condition\": \"Cloudy\", \"humidity\": 75},",
+            "    \"New York\": {\"temp\": 22, \"condition\": \"Sunny\", \"humidity\": 60},",
+            "    \"Tokyo\": {\"temp\": 18, \"condition\": \"Rainy\", \"humidity\": 85},",
+            "    \"Sydney\": {\"temp\": 25, \"condition\": \"Clear\", \"humidity\": 55}",
+            "}"
+          ],
+          "line_count": 7
+        },
+        {
+          "start_line": 175,
+          "end_line": 184,
+          "language": "python",
+          "content": [
+            "@mcp.tool()",
+            "def get_current_weather(city: str, units: str = \"celsius\") -> Dict:",
+            "    \"\"\"Get current weather for a city.\"\"\"",
+            "    if city not in weather_data:",
+            "        return {",
+            "            \"error\": f\"Weather data not available for {city}\",",
+            "            \"available_cities\": list(weather_data.keys())",
+            "        }"
+          ],
+          "line_count": 8
+        },
+        {
+          "start_line": 188,
+          "end_line": 201,
+          "language": "python",
+          "content": [
+            "    data = weather_data[city].copy()",
+            "    data[\"city\"] = city",
+            "    data[\"timestamp\"] = datetime.now().isoformat()",
+            "",
+            "    # Unit conversion for flexibility",
+            "    if units == \"fahrenheit\":",
+            "        data[\"temp\"] = (data[\"temp\"] * 9/5) + 32",
+            "        data[\"units\"] = \"\u00b0F\"",
+            "    else:",
+            "        data[\"units\"] = \"\u00b0C\"",
+            "",
+            "    return data"
+          ],
+          "line_count": 12
+        },
+        {
+          "start_line": 207,
+          "end_line": 213,
+          "language": "python",
+          "content": [
+            "@mcp.resource(\"weather://cities\")",
+            "def list_available_cities() -> str:",
+            "    \"\"\"List all cities with available weather data.\"\"\"",
+            "    cities = list(weather_data.keys())",
+            "    return f\"Available cities: {', '.join(cities)}\""
+          ],
+          "line_count": 5
+        },
+        {
+          "start_line": 223,
+          "end_line": 228,
+          "language": "python",
+          "content": [
+            "@mcp.prompt()",
+            "def weather_report_prompt(city: str) -> str:",
+            "    \"\"\"Generate a comprehensive weather report prompt.\"\"\"",
+            "    return f\"Please provide a detailed weather analysis for {city}, including current conditions and any recommendations for outdoor activities.\""
+          ],
+          "line_count": 4
+        },
+        {
+          "start_line": 240,
+          "end_line": 245,
+          "language": "python",
+          "content": [
+            "# Complete server startup",
+            "if __name__ == \"__main__\":",
+            "    # Run the server via stdio transport",
+            "    mcp.run_stdio()"
+          ],
+          "line_count": 4
+        },
+        {
+          "start_line": 281,
+          "end_line": 284,
+          "language": "bash",
+          "content": [
+            "# Save and run your server",
+            "python weather_server.py"
+          ],
+          "line_count": 2
+        },
+        {
+          "start_line": 288,
+          "end_line": 292,
+          "language": "bash",
+          "content": [
+            "# Launch MCP Inspector",
+            "npx @modelcontextprotocol/inspector",
+            "# Connect with: stdio://python weather_server.py"
+          ],
+          "line_count": 3
+        },
+        {
+          "start_line": 346,
+          "end_line": 360,
+          "language": "python",
+          "content": [
+            "@mcp.tool()",
+            "def find_warmest_city(cities: List[str]) -> Dict:",
+            "    \"\"\"",
+            "    Find the warmest city from a list.",
+            "",
+            "    Args:",
+            "        cities: List of city names to compare",
+            "",
+            "    Returns:",
+            "        Dictionary with warmest city and temperature,",
+            "        or error information if operation fails",
+            "    \"\"\"",
+            "    pass  # Your implementation here"
+          ],
+          "line_count": 13
+        }
+      ],
+      "large_blocks": [],
+      "needs_refactoring": false
+    }
+  ]
+}
