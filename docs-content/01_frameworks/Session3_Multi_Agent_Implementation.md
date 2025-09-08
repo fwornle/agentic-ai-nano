@@ -13,7 +13,7 @@ Moving from simple workflows to sophisticated data processing teams, we now crea
 
 Creating specialized agent nodes that encapsulate specific data processing capabilities and domain expertise:
 
-**File**: [`src/session3/hierarchical_team.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/hierarchical_team.py) - Multi-agent team setup
+**File**: [`src/session3/hierarchical_team.py`](src/session3/hierarchical_team.py) - Multi-agent team setup
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -65,7 +65,7 @@ class DataQualityAgent:
 
 Communication between data agents - enabling sophisticated coordination patterns that mirror how high-performing data engineering teams share processing state and results:
 
-**File**: [`src/session3/state_merging.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/state_merging.py) - State management patterns
+**File**: [`src/session3/state_merging.py`](src/session3/state_merging.py) - State management patterns
 
 ```python
 def pipeline_coordinator_node(state: WorkflowState):
@@ -99,7 +99,7 @@ workflow.add_edge("coordinator", END)
 
 Common orchestration patterns that solve real-world data processing collaboration challenges:
 
-**File**: [`src/session3/simple_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/simple_workflow.py) - Complete workflow example
+**File**: [`src/session3/simple_workflow.py`](src/session3/simple_workflow.py) - Complete workflow example
 
 ```python
 def create_data_processing_workflow():
@@ -174,7 +174,7 @@ Moving beyond simple data handoffs to sophisticated coordination patterns that a
 
 Defining and managing workflow state with the sophistication needed for production data processing applications:
 
-**File**: [`src/session3/advanced_routing.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/advanced_routing.py) - State management examples
+**File**: [`src/session3/advanced_routing.py`](src/session3/advanced_routing.py) - State management examples
 
 ```python
 from typing import TypedDict, Optional, List, Dict, Any
@@ -221,7 +221,7 @@ def update_state_metadata(state: AdvancedWorkflowState) -> AdvancedWorkflowState
 
 Dynamic workflow decisions that mirror how data engineering teams adapt their processing approach based on intermediate data characteristics and quality metrics:
 
-**File**: [`src/session3/decision_logic.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/decision_logic.py) - Decision-making logic
+**File**: [`src/session3/decision_logic.py`](src/session3/decision_logic.py) - Decision-making logic
 
 ```python
 def route_after_profiling(state: AdvancedWorkflowState) -> str:
@@ -306,7 +306,7 @@ Now we verify that our multi-agent data processing systems work correctly in the
 
 ### Workflow Validation
 
-**File**: [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Complete test suite
+**File**: [`src/session3/test_workflows.py`](src/session3/test_workflows.py) - Complete test suite
 
 ```python
 def test_simple_data_workflow():
@@ -357,8 +357,8 @@ Test your understanding with these complete working examples:
 
 🗂️ **Exercise Files**:
 
-- [`src/session3/simple_workflow.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/simple_workflow.py) - Complete working example
-- [`src/session3/test_workflows.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session3/test_workflows.py) - Test your understanding
+- [`src/session3/simple_workflow.py`](src/session3/simple_workflow.py) - Complete working example
+- [`src/session3/test_workflows.py`](src/session3/test_workflows.py) - Test your understanding
 
 ```bash
 # Try the examples:

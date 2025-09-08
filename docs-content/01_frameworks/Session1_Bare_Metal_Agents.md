@@ -36,7 +36,7 @@ This session offers three distinct learning paths designed to match your goals a
 
 ## 🎯 Observer Path: Bare Metal Agent Fundamentals
 
-**Code Repository**: [`src/session1/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session1)
+**Code Repository**: [`src/session1/`](src/session1/)
 **Quick Start**: `cd src/session1 && python base_agent_course.py`
 **Complete Demo**: `cd src/session1 && python demo_runner_course.py`
 
