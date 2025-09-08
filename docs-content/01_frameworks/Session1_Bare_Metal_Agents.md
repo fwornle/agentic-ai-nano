@@ -36,7 +36,7 @@ This session offers three distinct learning paths designed to match your goals a
 
 ## 🎯 Observer Path: Bare Metal Agent Fundamentals
 
-**Quick Start**: [`src/session1/`](https://github.com/fwornle/agentic-ai-nano/tree/main/docs-content/01_frameworks/src/session1)
+**Quick Start**: [`src/session1/`](src/session1/)
 
 ### Learning Outcomes
 
@@ -87,7 +87,9 @@ Every data processing agent requires these core components, engineered for cloud
 
 ![Agent Pattern Control](images/agent-core-components.png)
 
-**File**: [`src/session1/base_agent.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/01_frameworks/src/session1/base_agent.py)
+**File**: [`src/session1/base_agent_course.py`](src/session1/base_agent_course.py)
+
+> **📁 Course Implementation**: The complete implementation matching this course content is available in [`base_agent_course.py`](src/session1/base_agent_course.py). The original [`base_agent.py`](src/session1/base_agent.py) contains a different implementation focusing on general agent architecture patterns.
 
 This foundation class defines essential capabilities while operating within cloud resource constraints. The memory management system respects Kubernetes pod limits while maintaining processing context, and the tool registry provides seamless integration with your existing cloud infrastructure including S3 data lakes, RDS metadata stores, and Kafka message streams.
 
@@ -227,6 +229,8 @@ These five patterns form the intelligence foundation for data processing systems
 
 ### Pattern 1: Reflection - Pipeline Performance Optimization
 
+**Implementation File**: [`src/session1/reflection_agent_course.py`](src/session1/reflection_agent_course.py)
+
 #### Concept
 
 In data processing, reflection enables agents to continuously analyze their performance and optimize pipeline efficiency based on real processing metrics:
@@ -282,6 +286,8 @@ The optimization analysis focuses on the four critical areas that impact data pr
 
 ### Pattern 2: Tool Use - Cloud Service Integration
 
+**Implementation File**: [`src/session1/tool_use_agent_course.py`](src/session1/tool_use_agent_course.py)
+
 #### Concept
 
 Tool use in data processing enables seamless integration with the specialized cloud infrastructure required for modern data platforms:
@@ -317,6 +323,8 @@ Register tools optimized for data operations and pipeline workflows:
 The tool registry connects agents with essential cloud data services. Each tool provides a specific capability: S3 for data lake queries, PostgreSQL for analytics, Airflow for workflow orchestration, Kafka for streaming, Elasticsearch for data discovery, and Grafana for monitoring. This comprehensive integration enables agents to orchestrate complex data processing workflows across distributed cloud infrastructure.
 
 ### Pattern 3: Planning - Workflow Orchestration
+
+**Implementation File**: [`src/session1/planning_agent_course.py`](src/session1/planning_agent_course.py)
 
 #### Concept
 
@@ -357,6 +365,8 @@ Infrastructure awareness ensures plans are realistic and executable. The agent c
 
 ### Pattern 4: ReAct - Adaptive Data Processing
 
+**Implementation File**: [`src/session1/react_agent_course.py`](src/session1/react_agent_course.py)
+
 #### Concept
 
 ReAct pattern enables dynamic adaptation to the challenges common in data processing systems:
@@ -388,6 +398,8 @@ The ReAct pattern enables adaptive data processing by combining reasoning with a
 Success evaluation determines whether processing objectives have been met. When issues are detected, the agent adapts its strategy by adjusting processing parameters based on observed failures, creating resilient data processing workflows that can handle unexpected challenges and data anomalies.
 
 ### Pattern 5: Multi-Agent - Distributed Processing Coordination
+
+**Implementation File**: [`src/session1/multi_agent_system_course.py`](src/session1/multi_agent_system_course.py)
 
 #### Concept
 
@@ -587,6 +599,31 @@ The analysis process combines multiple quality assessment techniques: completene
 ```
 
 The quality assessment produces actionable insights including numerical quality scores, detailed issue identification, processing recommendations, readiness flags for downstream analytics, cost impact estimates for any required reprocessing, and compliance status verification for regulatory requirements.
+
+### 📝 Running the Complete Demo
+
+**Demo File**: [`src/session1/demo_runner_course.py`](src/session1/demo_runner_course.py)
+
+Experience all five agentic patterns in action with our comprehensive demonstration:
+
+```bash
+# Run complete demonstration
+python src/session1/demo_runner_course.py
+
+# Run quick demo (faster execution)
+python src/session1/demo_runner_course.py --quick
+```
+
+The demo showcases:
+
+1. **BaseAgent Foundation**: Core processing capabilities with different data types
+2. **Reflection Pattern**: Performance analysis and self-optimization 
+3. **Tool Use Pattern**: Cloud service integration and workflow orchestration
+4. **Planning Pattern**: Resource allocation and workflow planning
+5. **ReAct Pattern**: Adaptive processing with reasoning transparency
+6. **Multi-Agent System**: Coordinated distributed processing pipeline
+
+**Expected Output**: The demo will show each pattern in action, displaying metrics, decision-making processes, and coordination between agents. You'll see real-time cost tracking, performance optimization, and intelligent resource allocation working together.
 
 ## ⚙️ Implementer Path: Advanced Patterns
 
