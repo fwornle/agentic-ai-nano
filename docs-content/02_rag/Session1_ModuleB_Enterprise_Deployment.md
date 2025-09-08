@@ -17,9 +17,9 @@ python main.py
 
 ### Related Files
 
-- `src/session1/rag_system.py` - Main RAG implementation
-- `src/session1/config.py` - Deployment configuration management
-- `src/session1/test_rag_performance.py` - Load testing tools
+- [`src/session1/rag_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/rag_system.py) - Main RAG implementation
+- [`src/session1/config.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/config.py) - Deployment configuration management
+- [`src/session1/test_rag_performance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/test_rag_performance.py) - Load testing tools
 
 ## Enterprise Deployment Architecture
 

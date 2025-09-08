@@ -23,9 +23,9 @@ python interactive_rag.py
 
 ### Related Files
 
-- `src/session1/rag_system.py` - Production RAG implementation
-- `src/session1/test_rag_performance.py` - Performance testing tools
-- `src/session1/interactive_rag.py` - Interactive RAG exploration
+- [`src/session1/rag_system.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/rag_system.py) - Production RAG implementation
+- [`src/session1/test_rag_performance.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/test_rag_performance.py) - Performance testing tools
+- [`src/session1/interactive_rag.py`](https://github.com/fwornle/agentic-ai-nano/blob/main/docs-content/02_rag/src/session1/interactive_rag.py) - Interactive RAG exploration
 
 ## Advanced Production Patterns
 

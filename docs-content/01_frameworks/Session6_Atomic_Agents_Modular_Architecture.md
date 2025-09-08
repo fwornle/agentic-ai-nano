@@ -68,6 +68,9 @@ Follow the complete Participant path through component building and system assem
 **⚙️ Building Production Systems?**
 Complete the full Implementer path including advanced orchestration and deployment strategies.
 
+**📖 Detailed Implementation Guide:**
+For comprehensive step-by-step implementation with code examples, see [Atomic Agents Detailed Implementation](src/session6/Session6_Atomic_Agents_Modular_Architecture.md)
+
 ## Core Demonstration
 
 Here's a glimpse of atomic agent simplicity:
