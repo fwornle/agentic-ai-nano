@@ -379,10 +379,10 @@ extra:
 
 extra_css:
   - stylesheets/extra.css
-  - stylesheets/podcast.css
+  - stylesheets/professional-podcast.css
 
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/network-detection.js
-  - javascripts/podcast-tts.js
+  - javascripts/podcast-tts-v2.js
