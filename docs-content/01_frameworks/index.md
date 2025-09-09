@@ -2,6 +2,9 @@
 
 Welcome to the **Agent Frameworks** module of the Agentic AI Nano-Degree! In the rapidly evolving landscape of AI-powered systems, the ability to architect, deploy, and scale intelligent agents has become a critical competitive advantage. This comprehensive 10-session journey transforms you from understanding basic agent concepts to building production-ready distributed systems that can handle real-world complexity and scale.
 
+![Agentic AI](images/agentic-ai.png)
+*Agents use LLMs to process natural language - this makes them integrate well with complex and human centric workflows*
+
 ## Module Overview
 
 The modern software engineering landscape is experiencing a paradigm shift. Traditional applications are becoming intelligent, and data pipelines are evolving into autonomous systems capable of reasoning, planning, and executing complex tasks. This module covers the complete landscape of modern AI agent development, focusing on practical frameworks, patterns, and production deployment strategies that data engineers and system architects need to build reliable, scalable agent-driven solutions.
