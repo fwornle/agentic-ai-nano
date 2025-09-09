@@ -1,6 +1,7 @@
 /**
  * Network Detection and Conditional Content Display
  * Shows BMW-specific content only when accessed from corporate network
+ * Updated: Removed all manual corporate mode switching capabilities
  */
 
 (function() {
@@ -64,13 +65,7 @@
         // Try multiple detection methods
         let detectionComplete = false;
         
-        // Method 1: Check if user manually wants to enable corporate mode (for testing)
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('corporate') === 'true') {
-            console.log('🔧 Corporate mode forced via URL parameter');
-            showCorporateContent();
-            return;
-        }
+        // Method 1: URL parameter override REMOVED to prevent manual corporate mode switching
         
         // Method 2: Check external IP first, then try internal service
         console.log('🔍 Checking BMW network access');
@@ -160,7 +155,6 @@
         setTimeout(() => {
             if (!detectionComplete) {
                 console.log('⏱️ BMW ContentHub check timed out after 2s - defaulting to public content');
-                console.log('💡 If you are on BMW network, try manual override by clicking the status indicator');
                 hideCorporateContent();
                 detectionComplete = true;
             }
@@ -168,6 +162,14 @@
     }
 
     function showCorporateContent() {
+        // Safety check: Only allow corporate content on actual corporate networks
+        const hostname = window.location.hostname;
+        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
+            console.log('🛡️ Corporate content blocked - not on corporate network');
+            hideCorporateContent();
+            return;
+        }
+        
         console.log('🏢 Showing BMW corporate content');
         
         // Set global flag to prevent MutationObserver from re-hiding content
