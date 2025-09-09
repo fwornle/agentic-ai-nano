@@ -40,50 +40,149 @@ class ProfessionalPodcastTTS {
     setupBetterVoices() {
         const voices = this.synth.getVoices();
         
-        // Curated list of high-quality voices only
-        const qualityVoices = [
-            // English - Premium/Natural voices
-            'Google US English', 'Google UK English Female', 'Google UK English Male',
-            'Microsoft Zira Desktop - English (United States)',
-            'Microsoft David Desktop - English (United States)',
-            'Microsoft Hazel Desktop - English (Great Britain)',
-            'Microsoft George Desktop - English (Great Britain)',
-            'Alex', 'Samantha', 'Victoria', 'Daniel',
-            
-            // International English accents for entertainment
-            'Google Australian English Female', 'Google Indian English Female',
-            'Microsoft Catherine Desktop - English (Australia)',
-            'Microsoft James Desktop - English (Australia)',
-            
-            // Non-native English speakers for entertainment
-            'Google Deutsch', 'Google español', 'Google français'
-        ];
+        // Enhanced voice detection with proper labeling
+        const voiceMap = new Map();
         
-        // Filter to only quality voices that are available
-        this.availableVoices = voices.filter(voice => {
-            return qualityVoices.some(quality => 
-                voice.name.includes(quality) || 
-                (voice.lang.startsWith('en') && voice.name.toLowerCase().includes('neural'))
-            );
+        voices.forEach(voice => {
+            const name = voice.name.toLowerCase();
+            const lang = voice.lang.toLowerCase();
+            
+            // Skip low-quality voices
+            if (name.includes('compact') || name.includes('monotone')) return;
+            
+            // Create descriptive labels
+            let label = '';
+            let category = 'other';
+            
+            // Google voices
+            if (name.includes('google')) {
+                if (lang.includes('en-us')) label = 'Google US English';
+                else if (lang.includes('en-gb') || name.includes('uk english')) {
+                    label = name.includes('male') ? 'Google UK English (Male)' : 'Google UK English (Female)';
+                }
+                else if (lang.includes('en-au')) label = 'Google Australian English';
+                else if (lang.includes('en-in')) label = 'Google Indian English';
+                else if (lang.includes('de')) label = 'Google German Accent';
+                else if (lang.includes('es')) label = 'Google Spanish Accent';
+                else if (lang.includes('fr')) label = 'Google French Accent';
+                else if (lang.includes('zh')) label = 'Google Chinese Accent';
+                else if (lang.includes('hi')) label = 'Google Hindi Accent';
+                else label = `Google ${voice.name.replace(/Google\s*/i, '')}`;
+                
+                category = lang.includes('en') ? 'google-en' : 'google-accent';
+            }
+            // Microsoft voices
+            else if (name.includes('microsoft') || name.includes('zira') || name.includes('david') || name.includes('hazel')) {
+                if (name.includes('zira')) label = 'Microsoft Zira (US Female)';
+                else if (name.includes('david')) label = 'Microsoft David (US Male)';
+                else if (name.includes('hazel')) label = 'Microsoft Hazel (UK Female)';
+                else if (name.includes('george')) label = 'Microsoft George (UK Male)';
+                else if (name.includes('catherine')) label = 'Microsoft Catherine (Australian)';
+                else if (name.includes('james')) label = 'Microsoft James (Australian Male)';
+                else label = voice.name.replace(/Microsoft\s*|Desktop\s*-?\s*/gi, '');
+                
+                category = 'microsoft';
+            }
+            // macOS/iOS voices
+            else if (['alex', 'samantha', 'victoria', 'daniel', 'karen', 'moira', 'tessa'].includes(name)) {
+                const voiceNames = {
+                    alex: 'Alex (US Male)',
+                    samantha: 'Samantha (US Female)',  
+                    victoria: 'Victoria (US Female)',
+                    daniel: 'Daniel (UK Male)',
+                    karen: 'Karen (Australian Female)',
+                    moira: 'Moira (Irish Female)',
+                    tessa: 'Tessa (South African Female)'
+                };
+                label = voiceNames[name] || `${voice.name} (Premium)`;
+                category = 'premium';
+            }
+            else if (lang.includes('en')) {
+                label = voice.name;
+                category = 'english';
+            }
+            
+            if (label && !voiceMap.has(label)) {
+                voiceMap.set(label, { voice, label, category });
+            }
         });
         
-        // If no quality voices found, fall back to best English voices
+        // Convert to array and organize by category
+        this.availableVoices = [];
+        const categories = ['premium', 'microsoft', 'google-en', 'google-accent', 'english'];
+        
+        categories.forEach(cat => {
+            const voicesInCategory = Array.from(voiceMap.values())
+                .filter(v => v.category === cat)
+                .sort((a, b) => a.label.localeCompare(b.label));
+            this.availableVoices.push(...voicesInCategory.map(v => ({...v.voice, displayName: v.label})));
+        });
+        
+        // Fallback if no voices found - especially important on mobile
         if (this.availableVoices.length === 0) {
-            this.availableVoices = voices.filter(v => 
-                v.lang.startsWith('en') && !v.name.toLowerCase().includes('compact')
-            ).slice(0, 10);
+            const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+            
+            // Remove duplicates by creating a Map keyed by voice characteristics
+            const uniqueVoices = new Map();
+            englishVoices.forEach(voice => {
+                const key = `${voice.name}_${voice.lang}_${voice.gender || 'unknown'}`;
+                if (!uniqueVoices.has(key)) {
+                    uniqueVoices.set(key, {
+                        ...voice, 
+                        displayName: this.createFallbackDisplayName(voice)
+                    });
+                }
+            });
+            
+            this.availableVoices = Array.from(uniqueVoices.values()).slice(0, 12);
         }
         
-        // Set default to best available voice
+        // Final deduplication by display name to avoid mobile duplicate issues
+        const finalVoices = new Map();
+        this.availableVoices.forEach(voice => {
+            const displayName = voice.displayName || voice.name;
+            if (!finalVoices.has(displayName)) {
+                finalVoices.set(displayName, voice);
+            }
+        });
+        this.availableVoices = Array.from(finalVoices.values());
+        
+        // Set default voice
         if (!this.voice) {
             this.voice = this.availableVoices.find(v => 
-                v.name.includes('Google UK English Female') || 
-                v.name.includes('Samantha') ||
-                v.name.includes('Microsoft Zira')
+                v.displayName.includes('Samantha') || 
+                v.displayName.includes('UK English (Female)') ||
+                v.displayName.includes('Zira')
             ) || this.availableVoices[0];
         }
         
-        console.log(`Podcast: Using ${this.availableVoices.length} quality voices`);
+        console.log(`Podcast: Found ${this.availableVoices.length} quality voices:`, 
+            this.availableVoices.map(v => v.displayName));
+    }
+
+    createFallbackDisplayName(voice) {
+        const name = voice.name.toLowerCase();
+        const lang = voice.lang.toLowerCase();
+        
+        // Try to create meaningful display names for mobile voices
+        if (name.includes('daniel') || name === 'daniel') return 'Daniel (UK Male)';
+        if (name.includes('synthia') || name === 'synthia') return 'Synthia (Female)';
+        if (name.includes('karen') || name === 'karen') return 'Karen (Female)';
+        if (name.includes('samantha') || name === 'samantha') return 'Samantha (US Female)';
+        if (name.includes('alex') || name === 'alex') return 'Alex (US Male)';
+        
+        // For other voices, try to extract meaningful info
+        if (lang.includes('gb') || lang.includes('uk')) {
+            return `${voice.name} (UK)`;
+        } else if (lang.includes('au')) {
+            return `${voice.name} (Australian)`;
+        } else if (lang.includes('us')) {
+            return `${voice.name} (US)`;
+        } else if (lang.includes('en')) {
+            return `${voice.name} (English)`;
+        }
+        
+        return voice.name;
     }
 
     createFloatingPlayer() {
@@ -298,7 +397,7 @@ class ProfessionalPodcastTTS {
             femaleVoices.forEach(voice => {
                 const option = document.createElement('option');
                 option.value = voice.name;
-                option.textContent = this.getVoiceDisplayName(voice);
+                option.textContent = voice.displayName || this.getVoiceDisplayName(voice);
                 group.appendChild(option);
             });
             select.appendChild(group);
@@ -310,7 +409,7 @@ class ProfessionalPodcastTTS {
             maleVoices.forEach(voice => {
                 const option = document.createElement('option');
                 option.value = voice.name;
-                option.textContent = this.getVoiceDisplayName(voice);
+                option.textContent = voice.displayName || this.getVoiceDisplayName(voice);
                 group.appendChild(option);
             });
             select.appendChild(group);
@@ -322,7 +421,7 @@ class ProfessionalPodcastTTS {
             accentVoices.forEach(voice => {
                 const option = document.createElement('option');
                 option.value = voice.name;
-                option.textContent = this.getVoiceDisplayName(voice);
+                option.textContent = voice.displayName || this.getVoiceDisplayName(voice);
                 group.appendChild(option);
             });
             select.appendChild(group);
@@ -385,9 +484,9 @@ class ProfessionalPodcastTTS {
         this.volume = volume;
         document.getElementById('volume-text').textContent = Math.round(volume * 100) + '%';
         
-        // Apply immediately if playing
-        if (this.utterance) {
-            this.utterance.volume = volume;
+        // Apply immediately if playing - restart utterance with new volume
+        if (this.isPlaying && this.utterance) {
+            this.applyLiveChanges();
         }
         
         this.saveSettings();
@@ -423,8 +522,15 @@ class ProfessionalPodcastTTS {
         this.textChunks = this.processTextChunks(content);
         this.currentChunkIndex = 0;
         
+        console.log(`Podcast: Prepared ${this.textChunks.length} content chunks`);
+        
         this.updateProgressDisplay();
         this.updateNavigationButtons();
+        
+        // Ensure navigation is enabled when content is available
+        if (this.textChunks.length > 1) {
+            document.getElementById('next-btn')?.removeAttribute('disabled');
+        }
     }
 
     extractPageContent() {
@@ -715,8 +821,14 @@ class ProfessionalPodcastTTS {
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         
-        if (prevBtn) prevBtn.disabled = this.currentChunkIndex <= 0;
-        if (nextBtn) nextBtn.disabled = this.currentChunkIndex >= this.textChunks.length - 1;
+        if (prevBtn) {
+            prevBtn.disabled = this.currentChunkIndex <= 0 || this.textChunks.length <= 1;
+        }
+        if (nextBtn) {
+            nextBtn.disabled = this.currentChunkIndex >= this.textChunks.length - 1 || this.textChunks.length <= 1;
+        }
+        
+        console.log(`Navigation: chunk ${this.currentChunkIndex + 1}/${this.textChunks.length}, prev disabled: ${prevBtn?.disabled}, next disabled: ${nextBtn?.disabled}`);
     }
 
     updateCurrentContent(chunk) {
