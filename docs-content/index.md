@@ -27,6 +27,14 @@ Ready to begin your learning journey? Choose your path based on your setup and l
 
     [:octicons-arrow-right-24: Getting Started Guide](getting-started.md)
 
+- :material-headphones:{ .lg .middle } **🎧 Podcast Mode**  
+
+    ---
+
+    Learn while commuting! Convert any course content to high-quality speech
+
+    [:octicons-arrow-right-24: Enable Podcast Mode](../PODCAST_FEATURE.md)
+
 </div>
 
 ## Program Overview
