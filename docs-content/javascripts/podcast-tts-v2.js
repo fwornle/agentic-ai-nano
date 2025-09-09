@@ -476,9 +476,14 @@ class ProfessionalPodcastTTS {
             select.appendChild(option);
         });
         
-        // Set current voice
+        // Set current voice or select first available voice if none selected
         if (this.voice) {
             select.value = this.voice.name;
+        } else if (this.availableVoices.length > 0) {
+            // Auto-select first quality voice as default
+            this.voice = this.availableVoices[0];
+            select.value = this.voice.name;
+            console.log('🎯 Auto-selected default voice:', this.voice.name);
         }
     }
 
