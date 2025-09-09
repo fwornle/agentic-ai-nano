@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if page.meta.get("template") == "home.html" %}
+    {% include "partials/home.html" %}
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    // Podcast TTS initialization and keyboard shortcuts
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add global keyboard shortcuts info
+      const shortcutsInfo = document.createElement('div');
+      shortcutsInfo.innerHTML = `
+        <style>
+          .keyboard-shortcuts {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 1001;
+            display: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          .keyboard-shortcuts.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+          }
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .shortcuts-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #4facfe;
+          }
+          .shortcut-item {
+            margin-bottom: 4px;
+          }
+          .shortcut-key {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 11px;
+          }
+        </style>
+        <div class="keyboard-shortcuts" id="keyboard-shortcuts">
+          <div class="shortcuts-title">🎧 Podcast Shortcuts</div>
+          <div class="shortcut-item"><span class="shortcut-key">Ctrl+Space</span> Play/Pause</div>
+          <div class="shortcut-item"><span class="shortcut-key">Ctrl+Shift+→</span> Next Section</div>
+          <div class="shortcut-item"><span class="shortcut-key">Ctrl+Shift+←</span> Previous Section</div>
+          <div class="shortcut-item"><span class="shortcut-key">?</span> Show/Hide Shortcuts</div>
+        </div>
+      `;
+      document.body.appendChild(shortcutsInfo);
+      
+      // Toggle shortcuts help
+      document.addEventListener('keydown', function(e) {
+        if (e.key === '?' && !e.ctrlKey && !e.altKey && !e.shiftKey) {
+          // Only if not typing in input/textarea
+          if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            const shortcuts = document.getElementById('keyboard-shortcuts');
+            shortcuts.classList.toggle('show');
+            
+            // Hide after 5 seconds
+            if (shortcuts.classList.contains('show')) {
+              setTimeout(() => {
+                shortcuts.classList.remove('show');
+              }, 5000);
+            }
+          }
+        }
+      });
+      
+      // Initialize podcast TTS if not already done
+      if (!window.podcastTTS && window.PodcastTTS) {
+        window.podcastTTS = new PodcastTTS();
+      }
+      
+      // Console welcome message with podcast info
+      if (console && console.log) {
+        console.log(`
+🎧 Agentic AI Nano-Degree - Podcast Mode Enabled!
+
+Perfect for listening while:
+• Commuting to work
+• Driving long distances  
+• Walking or exercising
+• Multitasking
+
+Keyboard Shortcuts:
+• Ctrl+Space: Play/Pause
+• Ctrl+Shift+→/←: Next/Previous Section  
+• ?: Show shortcuts help
+
+The podcast player will appear at the top of each page.
+Click the + button to expand the full controls.
+
+Happy learning! 🚗📚
+        `);
+      }
+    });
+    
+    // Service Worker registration for offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          console.log('SW registered: ', registration);
+        }).catch(function(registrationError) {
+          console.log('SW registration failed: ', registrationError);
+        });
+      });
+    }
+  </script>
+{% endblock %}

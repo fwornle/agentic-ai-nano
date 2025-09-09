@@ -1,0 +1,473 @@
+/**
+ * Podcast TTS Styles for Agentic AI Nano-Degree
+ * Modern, accessible podcast player interface
+ */
+
+/* Main Podcast Player Container */
+.podcast-player {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin: 0 0 2rem 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode support */
+[data-md-color-scheme="slate"] .podcast-player {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Header Section */
+.podcast-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.podcast-icon {
+    color: rgba(255, 255, 255, 0.9);
+    margin-right: 12px;
+}
+
+.podcast-title {
+    flex: 1;
+    color: white;
+}
+
+.podcast-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.podcast-subtitle {
+    display: block;
+    font-size: 12px;
+    opacity: 0.8;
+    font-weight: 400;
+}
+
+.podcast-toggle button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.podcast-toggle button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Player Content */
+.podcast-player-content {
+    padding: 20px;
+    display: none; /* Initially collapsed */
+}
+
+.podcast-player-content[style*="block"] {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Progress Bar */
+.podcast-progress {
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+.progress-handle {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border: 2px solid #4facfe;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.progress-bar:hover .progress-handle {
+    opacity: 1;
+}
+
+.progress-time {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Main Controls */
+.podcast-main-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.podcast-main-controls button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.podcast-main-controls button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.podcast-main-controls button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.podcast-main-controls button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+#podcast-prev, #podcast-next {
+    width: 44px;
+    height: 44px;
+}
+
+.play-pause-btn {
+    width: 56px !important;
+    height: 56px !important;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 16px rgba(79, 172, 254, 0.3);
+}
+
+.play-pause-btn:hover {
+    transform: scale(1.05) translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4) !important;
+}
+
+/* Settings */
+.podcast-settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.setting-group label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.setting-group select,
+.setting-group input[type="range"] {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    padding: 6px 8px;
+    font-size: 12px;
+}
+
+.setting-group select {
+    cursor: pointer;
+}
+
+.setting-group select:focus,
+.setting-group input:focus {
+    outline: none;
+    border-color: #4facfe;
+    box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
+}
+
+.setting-group select option {
+    background: #1e293b;
+    color: white;
+}
+
+#volume-display {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    font-family: 'Roboto Mono', monospace;
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* Content Info */
+.podcast-content-info {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.current-section {
+    color: white;
+    font-weight: 500;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    border-left: 3px solid #4facfe;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.content-filter {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.content-filter label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.content-filter label:hover {
+    color: white;
+}
+
+.content-filter input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #4facfe;
+    cursor: pointer;
+}
+
+/* Current Section Highlighting */
+.podcast-current-section {
+    background: linear-gradient(90deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%) !important;
+    border-left: 4px solid #4facfe !important;
+    padding-left: 16px !important;
+    margin-left: -20px !important;
+    border-radius: 0 8px 8px 0 !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Dark mode adjustments */
+[data-md-color-scheme="slate"] .podcast-current-section {
+    background: linear-gradient(90deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .podcast-player {
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .podcast-header {
+        padding: 10px 16px;
+        border-radius: 0;
+    }
+    
+    .podcast-player-content {
+        padding: 16px;
+    }
+    
+    .podcast-settings {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .content-filter {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .podcast-main-controls {
+        gap: 12px;
+    }
+    
+    #podcast-prev, #podcast-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .play-pause-btn {
+        width: 52px !important;
+        height: 52px !important;
+    }
+    
+    .current-section {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .podcast-header {
+        padding: 8px 12px;
+    }
+    
+    .podcast-label {
+        font-size: 14px;
+    }
+    
+    .podcast-subtitle {
+        font-size: 11px;
+    }
+    
+    .podcast-player-content {
+        padding: 12px;
+    }
+    
+    .podcast-main-controls {
+        gap: 10px;
+    }
+    
+    #podcast-prev, #podcast-next {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .play-pause-btn {
+        width: 48px !important;
+        height: 48px !important;
+    }
+}
+
+/* Loading and Animation States */
+.podcast-player.loading {
+    opacity: 0.8;
+}
+
+.podcast-player.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    .podcast-player,
+    .podcast-player-content,
+    .progress-fill,
+    .progress-handle,
+    .podcast-main-controls button,
+    .podcast-current-section {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .podcast-player {
+        background: #000;
+        border: 2px solid #fff;
+    }
+    
+    .podcast-header {
+        background: #333;
+        border-bottom: 1px solid #fff;
+    }
+    
+    .podcast-main-controls button {
+        background: #000;
+        border: 2px solid #fff;
+    }
+    
+    .play-pause-btn {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}
+
+/* Focus indicators for keyboard navigation */
+.podcast-player *:focus {
+    outline: 2px solid #4facfe;
+    outline-offset: 2px;
+}
+
+.podcast-player button:focus {
+    outline: 2px solid #4facfe;
+    outline-offset: -2px;
+}
