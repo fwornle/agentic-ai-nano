@@ -42,6 +42,17 @@ class ProfessionalPodcastTTS {
                     this.populateVoiceSelect();
                 }
             }, 1000);
+            // Even more aggressive fallback
+            setTimeout(() => {
+                if (this.availableVoices.length === 0) {
+                    console.log('🔄 Final fallback: Using all available voices');
+                    const allVoices = this.synth.getVoices();
+                    this.availableVoices = allVoices.length > 0 ? 
+                        allVoices.slice(0, 10).map(v => ({...v, displayName: v.name})) :
+                        [{name: 'Default', displayName: 'Default Voice', lang: 'en-US'}];
+                    this.populateVoiceSelect();
+                }
+            }, 3000);
         } else {
             this.populateVoiceSelect();
         }
@@ -50,6 +61,10 @@ class ProfessionalPodcastTTS {
     setupBetterVoices() {
         const voices = this.synth.getVoices();
         console.log(`🎙️ Raw voices available: ${voices.length}`);
+        if (voices.length === 0) {
+            console.warn('🚨 No voices available from speechSynthesis.getVoices()');
+            return;
+        }
         
         // Enhanced voice detection with proper labeling
         const voiceMap = new Map();
