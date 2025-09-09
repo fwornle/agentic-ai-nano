@@ -19,6 +19,14 @@ class PodcastTTS {
         this.voice = null;
         this.volume = 0.8;
         
+        // Voice recording properties
+        this.mediaRecorder = null;
+        this.audioChunks = [];
+        this.customVoiceData = null;
+        this.isRecording = false;
+        this.recordingStartTime = null;
+        this.recordingTimer = null;
+        
         this.init();
     }
 
@@ -70,10 +78,10 @@ class PodcastTTS {
 
     createPodcastPlayer() {
         const player = document.createElement('div');
-        player.className = 'podcast-player';
+        player.className = 'podcast-player collapsed';
         player.innerHTML = `
             <div class="podcast-controls">
-                <div class="podcast-header">
+                <div class="podcast-header" id="podcast-header">
                     <div class="podcast-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.5 14.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zM12 17.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zm0-2c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zm0-2c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zm2.5 1.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5z"/>
@@ -86,13 +94,13 @@ class PodcastTTS {
                     <div class="podcast-toggle">
                         <button id="podcast-toggle-btn" title="Toggle Podcast Player">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                <path d="M7 14l5-5 5 5z"/>
                             </svg>
                         </button>
                     </div>
                 </div>
                 
-                <div class="podcast-player-content" id="podcast-player-content">
+                <div class="podcast-player-content" id="podcast-player-content" style="display: block;">
                     <div class="podcast-progress">
                         <div class="progress-bar">
                             <div class="progress-fill" id="progress-fill"></div>
@@ -165,22 +173,46 @@ class PodcastTTS {
                             </label>
                         </div>
                     </div>
+                    
+                    <div class="voice-recording-section">
+                        <button id="record-voice-btn" class="record-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+                            </svg>
+                            <span>Record Custom Voice</span>
+                        </button>
+                        <div id="recording-status" class="recording-status" style="display: none;">
+                            <span class="recording-indicator"></span>
+                            <span class="recording-text">Recording...</span>
+                            <span class="recording-time" id="recording-time">0:00</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
 
-        // Insert at the top of the content area
-        const contentArea = document.querySelector('.md-main__inner') || document.body;
-        contentArea.insertBefore(player, contentArea.firstChild);
-
+        // Insert into body as fixed element
+        document.body.appendChild(player);
         this.playerElement = player;
     }
 
     setupEventListeners() {
-        // Toggle player visibility
-        document.getElementById('podcast-toggle-btn').addEventListener('click', () => {
-            this.togglePlayerVisibility();
-        });
+        // Toggle player visibility on header click
+        const header = document.getElementById('podcast-header');
+        if (header) {
+            header.addEventListener('click', () => {
+                this.togglePlayerVisibility();
+            });
+        }
+        
+        // Also handle toggle button
+        const toggleBtn = document.getElementById('podcast-toggle-btn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.togglePlayerVisibility();
+            });
+        }
 
         // Play/Pause button
         document.getElementById('podcast-play-pause').addEventListener('click', () => {
@@ -196,43 +228,99 @@ class PodcastTTS {
             this.nextSection();
         });
 
-        // Voice selection
+        // Voice selection with proper handling
         const voiceSelect = document.getElementById('voice-select');
-        this.populateVoiceSelect();
-        voiceSelect.addEventListener('change', (e) => {
-            const voices = this.synth.getVoices();
-            this.voice = voices.find(v => v.name === e.target.value);
-            this.saveSettings();
-        });
+        if (voiceSelect) {
+            // Populate voices after a delay to ensure they're loaded
+            setTimeout(() => this.populateVoiceSelect(), 100);
+            
+            voiceSelect.addEventListener('change', (e) => {
+                if (e.target.value === 'custom') {
+                    // Use custom voice
+                    this.voice = 'custom';
+                } else {
+                    // Use system voice
+                    const voices = this.synth.getVoices();
+                    this.voice = voices.find(v => v.name === e.target.value);
+                }
+                
+                // If currently playing, restart with new voice
+                if (this.isPlaying) {
+                    const currentChunk = this.currentChunkIndex;
+                    this.stop();
+                    this.currentChunkIndex = currentChunk;
+                    this.play();
+                }
+                
+                this.saveSettings();
+            });
+        }
 
-        // Speed control
-        document.getElementById('speed-control').addEventListener('change', (e) => {
-            this.playbackRate = parseFloat(e.target.value);
-            if (this.utterance) {
-                this.utterance.rate = this.playbackRate;
-            }
-            this.saveSettings();
-        });
+        // Speed control with immediate effect
+        const speedControl = document.getElementById('speed-control');
+        if (speedControl) {
+            speedControl.addEventListener('change', (e) => {
+                this.playbackRate = parseFloat(e.target.value);
+                
+                // If currently playing, restart with new speed
+                if (this.isPlaying) {
+                    const currentChunk = this.currentChunkIndex;
+                    this.stop();
+                    this.currentChunkIndex = currentChunk;
+                    this.play();
+                }
+                
+                this.saveSettings();
+            });
+        }
 
-        // Volume control
+        // Volume control with immediate feedback
         const volumeControl = document.getElementById('volume-control');
-        volumeControl.addEventListener('input', (e) => {
-            this.volume = parseFloat(e.target.value);
-            document.getElementById('volume-display').textContent = Math.round(this.volume * 100) + '%';
-            if (this.utterance) {
-                this.utterance.volume = this.volume;
-            }
-            this.saveSettings();
-        });
+        if (volumeControl) {
+            volumeControl.addEventListener('input', (e) => {
+                this.volume = parseFloat(e.target.value);
+                const volumeDisplay = document.getElementById('volume-display');
+                if (volumeDisplay) {
+                    volumeDisplay.textContent = Math.round(this.volume * 100) + '%';
+                }
+                
+                // Apply to current utterance if playing
+                if (this.utterance) {
+                    this.utterance.volume = this.volume;
+                }
+                
+                this.saveSettings();
+            });
+        }
 
         // Content filter checkboxes
-        document.getElementById('skip-code').addEventListener('change', () => {
-            this.saveSettings();
-        });
+        const skipCode = document.getElementById('skip-code');
+        if (skipCode) {
+            skipCode.addEventListener('change', () => {
+                this.saveSettings();
+                if (this.textChunks.length > 0) {
+                    this.prepareContent();
+                }
+            });
+        }
 
-        document.getElementById('include-headings').addEventListener('change', () => {
-            this.saveSettings();
-        });
+        const includeHeadings = document.getElementById('include-headings');
+        if (includeHeadings) {
+            includeHeadings.addEventListener('change', () => {
+                this.saveSettings();
+                if (this.textChunks.length > 0) {
+                    this.prepareContent();
+                }
+            });
+        }
+        
+        // Voice recording button
+        const recordBtn = document.getElementById('record-voice-btn');
+        if (recordBtn) {
+            recordBtn.addEventListener('click', () => {
+                this.toggleVoiceRecording();
+            });
+        }
 
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
@@ -279,64 +367,132 @@ class PodcastTTS {
 
     populateVoiceSelect() {
         const voiceSelect = document.getElementById('voice-select');
+        if (!voiceSelect) return;
+        
         const voices = this.synth.getVoices();
         
         voiceSelect.innerHTML = '';
         
-        // Group voices by language
-        const englishVoices = voices.filter(v => v.lang.startsWith('en'));
-        const otherVoices = voices.filter(v => !v.lang.startsWith('en'));
+        // Group voices by language for better organization
+        const voicesByLang = {};
         
-        // Add English voices first
-        if (englishVoices.length > 0) {
+        voices.forEach(voice => {
+            const lang = voice.lang.substring(0, 2);
+            if (!voicesByLang[lang]) {
+                voicesByLang[lang] = [];
+            }
+            voicesByLang[lang].push(voice);
+        });
+        
+        // Add English voices first (including British, Australian, etc.)
+        if (voicesByLang['en']) {
             const englishGroup = document.createElement('optgroup');
             englishGroup.label = 'English Voices';
+            
+            // Sort to prioritize certain accents
+            const englishVoices = voicesByLang['en'].sort((a, b) => {
+                // Prioritize certain accents/regions
+                const priorities = ['GB', 'UK', 'AU', 'US', 'IE', 'IN'];
+                const aPriority = priorities.findIndex(p => a.lang.includes(p));
+                const bPriority = priorities.findIndex(p => b.lang.includes(p));
+                
+                if (aPriority !== -1 && bPriority !== -1) {
+                    return aPriority - bPriority;
+                }
+                return a.name.localeCompare(b.name);
+            });
+            
             englishVoices.forEach(voice => {
                 const option = document.createElement('option');
                 option.value = voice.name;
-                option.textContent = `${voice.name} (${voice.lang})`;
+                
+                // Better voice description
+                let description = voice.name;
+                if (voice.lang.includes('GB') || voice.lang.includes('UK')) {
+                    description += ' (British)';
+                } else if (voice.lang.includes('AU')) {
+                    description += ' (Australian)';
+                } else if (voice.lang.includes('US')) {
+                    description += ' (American)';
+                } else if (voice.lang.includes('IE')) {
+                    description += ' (Irish)';
+                } else if (voice.lang.includes('IN')) {
+                    description += ' (Indian)';
+                } else {
+                    description += ` (${voice.lang})`;
+                }
+                
+                option.textContent = description;
                 option.selected = voice.name === this.voice?.name;
                 englishGroup.appendChild(option);
             });
             voiceSelect.appendChild(englishGroup);
         }
         
-        // Add other voices
-        if (otherVoices.length > 0) {
-            const otherGroup = document.createElement('optgroup');
-            otherGroup.label = 'Other Languages';
-            otherVoices.forEach(voice => {
+        // Add German voices (for Bavarian preference)
+        if (voicesByLang['de']) {
+            const germanGroup = document.createElement('optgroup');
+            germanGroup.label = 'German Voices';
+            voicesByLang['de'].forEach(voice => {
                 const option = document.createElement('option');
                 option.value = voice.name;
-                option.textContent = `${voice.name} (${voice.lang})`;
-                englishGroup.appendChild(option);
+                option.textContent = `${voice.name} (German)`;
+                germanGroup.appendChild(option);
             });
-            voiceSelect.appendChild(otherGroup);
+            voiceSelect.appendChild(germanGroup);
+        }
+        
+        // Add other languages
+        Object.keys(voicesByLang).forEach(lang => {
+            if (lang !== 'en' && lang !== 'de') {
+                const group = document.createElement('optgroup');
+                group.label = `Other (${lang.toUpperCase()})`;
+                voicesByLang[lang].forEach(voice => {
+                    const option = document.createElement('option');
+                    option.value = voice.name;
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    group.appendChild(option);
+                });
+                voiceSelect.appendChild(group);
+            }
+        });
+        
+        // Add custom voice option if available
+        if (this.customVoiceData) {
+            const customGroup = document.createElement('optgroup');
+            customGroup.label = 'Custom Voice';
+            const option = document.createElement('option');
+            option.value = 'custom';
+            option.textContent = 'Your Recorded Voice';
+            customGroup.appendChild(option);
+            voiceSelect.insertBefore(customGroup, voiceSelect.firstChild);
         }
     }
 
     togglePlayerVisibility() {
-        const content = document.getElementById('podcast-player-content');
+        const player = this.playerElement;
         const toggleBtn = document.getElementById('podcast-toggle-btn');
-        const isVisible = content.style.display !== 'none';
+        const isCollapsed = player.classList.contains('collapsed');
         
-        if (isVisible) {
-            content.style.display = 'none';
+        if (isCollapsed) {
+            // Expand player
+            player.classList.remove('collapsed');
             toggleBtn.innerHTML = `
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    <path d="M7 10l5 5 5-5z"/>
                 </svg>
             `;
-            toggleBtn.title = 'Show Podcast Player';
-        } else {
-            content.style.display = 'block';
-            toggleBtn.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 13H5v-2h14v2z"/>
-                </svg>
-            `;
-            toggleBtn.title = 'Hide Podcast Player';
+            toggleBtn.title = 'Collapse Podcast Player';
             this.prepareContent();
+        } else {
+            // Collapse player
+            player.classList.add('collapsed');
+            toggleBtn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 14l5-5 5 5z"/>
+                </svg>
+            `;
+            toggleBtn.title = 'Expand Podcast Player';
         }
     }
 
@@ -518,6 +674,12 @@ class PodcastTTS {
         
         const chunk = this.textChunks[this.currentChunkIndex];
         
+        // Check if using custom voice
+        if (this.voice === 'custom' && this.customVoiceData) {
+            this.playWithCustomVoice(chunk.text);
+            return;
+        }
+        
         // Cancel any existing speech
         this.synth.cancel();
         
@@ -655,12 +817,15 @@ class PodcastTTS {
     }
 
     saveSettings() {
+        const skipCode = document.getElementById('skip-code');
+        const includeHeadings = document.getElementById('include-headings');
+        
         const settings = {
-            voice: this.voice?.name,
+            voice: this.voice === 'custom' ? 'custom' : this.voice?.name,
             playbackRate: this.playbackRate,
             volume: this.volume,
-            skipCode: document.getElementById('skip-code').checked,
-            includeHeadings: document.getElementById('include-headings').checked
+            skipCode: skipCode ? skipCode.checked : true,
+            includeHeadings: includeHeadings ? includeHeadings.checked : true
         };
         localStorage.setItem('podcastTTSSettings', JSON.stringify(settings));
     }
@@ -670,33 +835,208 @@ class PodcastTTS {
             const settings = JSON.parse(localStorage.getItem('podcastTTSSettings') || '{}');
             
             if (settings.voice) {
-                const voices = this.synth.getVoices();
-                const savedVoice = voices.find(v => v.name === settings.voice);
-                if (savedVoice) this.voice = savedVoice;
+                if (settings.voice === 'custom' && this.customVoiceData) {
+                    this.voice = 'custom';
+                } else {
+                    const voices = this.synth.getVoices();
+                    const savedVoice = voices.find(v => v.name === settings.voice);
+                    if (savedVoice) this.voice = savedVoice;
+                }
             }
             
             if (settings.playbackRate) {
                 this.playbackRate = settings.playbackRate;
-                document.getElementById('speed-control').value = settings.playbackRate;
+                const speedControl = document.getElementById('speed-control');
+                if (speedControl) speedControl.value = settings.playbackRate;
             }
             
             if (settings.volume !== undefined) {
                 this.volume = settings.volume;
-                document.getElementById('volume-control').value = settings.volume;
-                document.getElementById('volume-display').textContent = Math.round(settings.volume * 100) + '%';
+                const volumeControl = document.getElementById('volume-control');
+                const volumeDisplay = document.getElementById('volume-display');
+                if (volumeControl) volumeControl.value = settings.volume;
+                if (volumeDisplay) volumeDisplay.textContent = Math.round(settings.volume * 100) + '%';
             }
             
             if (settings.skipCode !== undefined) {
-                document.getElementById('skip-code').checked = settings.skipCode;
+                const skipCode = document.getElementById('skip-code');
+                if (skipCode) skipCode.checked = settings.skipCode;
             }
             
             if (settings.includeHeadings !== undefined) {
-                document.getElementById('include-headings').checked = settings.includeHeadings;
+                const includeHeadings = document.getElementById('include-headings');
+                if (includeHeadings) includeHeadings.checked = settings.includeHeadings;
+            }
+            
+            // Load custom voice if available
+            const customVoice = localStorage.getItem('podcastCustomVoice');
+            if (customVoice) {
+                this.customVoiceData = customVoice;
+                this.populateVoiceSelect();
             }
             
         } catch (error) {
             console.log('Could not load TTS settings:', error);
         }
+    }
+    
+    // Voice Recording Methods
+    async toggleVoiceRecording() {
+        if (!this.isRecording) {
+            await this.startRecording();
+        } else {
+            this.stopRecording();
+        }
+    }
+    
+    async startRecording() {
+        try {
+            // Request microphone permission
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            
+            // Create MediaRecorder
+            this.mediaRecorder = new MediaRecorder(stream, {
+                mimeType: 'audio/webm'
+            });
+            
+            this.audioChunks = [];
+            
+            this.mediaRecorder.addEventListener('dataavailable', event => {
+                this.audioChunks.push(event.data);
+            });
+            
+            this.mediaRecorder.addEventListener('stop', () => {
+                const audioBlob = new Blob(this.audioChunks, { type: 'audio/webm' });
+                this.processRecordedAudio(audioBlob);
+            });
+            
+            // Start recording
+            this.mediaRecorder.start();
+            this.isRecording = true;
+            this.recordingStartTime = Date.now();
+            
+            // Update UI
+            const recordBtn = document.getElementById('record-voice-btn');
+            const recordingStatus = document.getElementById('recording-status');
+            
+            if (recordBtn) {
+                recordBtn.classList.add('recording');
+                recordBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="9" y="9" width="6" height="6" rx="1"/>
+                    </svg>
+                    <span>Stop Recording</span>
+                `;
+            }
+            
+            if (recordingStatus) {
+                recordingStatus.style.display = 'flex';
+            }
+            
+            // Start timer
+            this.recordingTimer = setInterval(() => {
+                const elapsed = Date.now() - this.recordingStartTime;
+                const minutes = Math.floor(elapsed / 60000);
+                const seconds = Math.floor((elapsed % 60000) / 1000);
+                const timeDisplay = document.getElementById('recording-time');
+                if (timeDisplay) {
+                    timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 100);
+            
+        } catch (error) {
+            console.error('Failed to start recording:', error);
+            alert('Could not access microphone. Please check permissions.');
+        }
+    }
+    
+    stopRecording() {
+        if (this.mediaRecorder && this.isRecording) {
+            this.mediaRecorder.stop();
+            this.isRecording = false;
+            
+            // Stop all tracks
+            this.mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            
+            // Clear timer
+            if (this.recordingTimer) {
+                clearInterval(this.recordingTimer);
+                this.recordingTimer = null;
+            }
+            
+            // Update UI
+            const recordBtn = document.getElementById('record-voice-btn');
+            const recordingStatus = document.getElementById('recording-status');
+            
+            if (recordBtn) {
+                recordBtn.classList.remove('recording');
+                recordBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+                    </svg>
+                    <span>Record Custom Voice</span>
+                `;
+            }
+            
+            if (recordingStatus) {
+                recordingStatus.style.display = 'none';
+            }
+        }
+    }
+    
+    async processRecordedAudio(audioBlob) {
+        // Convert to base64 for storage
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            this.customVoiceData = reader.result;
+            
+            // Save to localStorage
+            localStorage.setItem('podcastCustomVoice', this.customVoiceData);
+            
+            // Update voice selector
+            this.populateVoiceSelect();
+            
+            // Select custom voice
+            const voiceSelect = document.getElementById('voice-select');
+            if (voiceSelect) {
+                voiceSelect.value = 'custom';
+                this.voice = 'custom';
+            }
+            
+            alert('Custom voice recorded successfully! It will now be used for playback.');
+        };
+        reader.readAsDataURL(audioBlob);
+    }
+    
+    playWithCustomVoice(text) {
+        if (!this.customVoiceData) {
+            // Fallback to regular TTS
+            return this.playWithSynthesis(text);
+        }
+        
+        // Play custom voice audio
+        const audio = new Audio(this.customVoiceData);
+        audio.playbackRate = this.playbackRate;
+        audio.volume = this.volume;
+        
+        audio.onended = () => {
+            this.currentChunkIndex++;
+            if (this.currentChunkIndex < this.textChunks.length) {
+                setTimeout(() => this.playCurrentChunk(), 100);
+            } else {
+                this.stop();
+            }
+        };
+        
+        audio.play();
+        
+        this.isPlaying = true;
+        this.isPaused = false;
+        this.updatePlayButton(true);
+        
+        const chunk = this.textChunks[this.currentChunkIndex];
+        this.updateCurrentSection(chunk.title);
+        this.highlightCurrentSection(chunk);
     }
 }
 
