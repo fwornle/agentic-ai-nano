@@ -402,9 +402,23 @@ class ProfessionalPodcastTTS {
 
     populateVoiceSelect() {
         const select = document.getElementById('voice-selector');
-        if (!select) return;
+        if (!select) {
+            console.warn('🚨 Voice selector element not found');
+            return;
+        }
 
+        console.log(`🎤 Populating voice select with ${this.availableVoices.length} voices`);
         select.innerHTML = '';
+        
+        // Emergency check
+        if (this.availableVoices.length === 0) {
+            console.warn('🚨 No voices available to populate');
+            const option = document.createElement('option');
+            option.value = 'none';
+            option.textContent = 'No voices available - Loading...';
+            select.appendChild(option);
+            return;
+        }
         
         // Group voices by type
         const maleVoices = [];

@@ -294,7 +294,7 @@
         indicator.style.cssText = `
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 20px;
             background: ${networkType === 'corporate' ? '#0066cc' : '#28a745'};
             color: white;
             padding: 8px 12px;
