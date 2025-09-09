@@ -85,7 +85,8 @@
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node scripts/combined-status-line.js)",
       "WebFetch(domain:github.com)",
       "Read(//tmp/**)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(mkdocs:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",

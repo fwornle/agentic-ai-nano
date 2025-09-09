@@ -20,6 +20,15 @@ class ProfessionalPodcastTTS {
     }
 
     init() {
+        console.log('🎙️ Initializing ProfessionalPodcastPlayer...');
+        
+        // Test Speech Synthesis availability
+        if (!window.speechSynthesis) {
+            console.error('❌ Speech Synthesis not supported');
+            return;
+        }
+        console.log('✅ Speech Synthesis available');
+        
         // Initialize immediately without waiting for voices
         this.setupBetterVoices();
         this.createFloatingPlayer();
@@ -181,13 +190,17 @@ class ProfessionalPodcastTTS {
                 .map(v => ({...v, displayName: v.name}));
         }
         
-        // Set default voice
-        if (!this.voice) {
-            this.voice = this.availableVoices.find(v => 
-                v.displayName.includes('Samantha') || 
-                v.displayName.includes('UK English (Female)') ||
-                v.displayName.includes('Zira')
-            ) || this.availableVoices[0];
+        // Set default voice only if we have voices available
+        if (!this.voice && this.availableVoices.length > 0) {
+            // Always use the first available voice as default
+            this.voice = this.availableVoices[0];
+            console.log('🎯 Default voice set:', this.voice.name);
+            
+            // Update the dropdown to show selected voice
+            const select = document.getElementById('voice-selector');
+            if (select) {
+                select.value = this.voice.name;
+            }
         }
         
         console.log(`Podcast: Found ${this.availableVoices.length} quality voices:`, 
@@ -220,6 +233,19 @@ class ProfessionalPodcastTTS {
     }
 
     createFloatingPlayer() {
+        console.log('🏗️ Creating floating player...');
+        
+        // Check if CSS is loaded
+        const testDiv = document.createElement('div');
+        testDiv.className = 'pro-podcast-player';
+        testDiv.style.position = 'absolute';
+        testDiv.style.left = '-9999px';
+        document.body.appendChild(testDiv);
+        const computedStyle = window.getComputedStyle(testDiv);
+        const cssLoaded = computedStyle.position === 'fixed';
+        testDiv.remove();
+        console.log('🎨 CSS loaded correctly:', cssLoaded);
+        
         // Remove any existing player
         const existing = document.getElementById('professional-podcast-player');
         if (existing) existing.remove();
@@ -323,7 +349,11 @@ class ProfessionalPodcastTTS {
         });
 
         // Main controls
-        document.getElementById('play-pause-btn')?.addEventListener('click', () => {
+        const playBtn = document.getElementById('play-pause-btn');
+        console.log('🎛️ Setting up play button listener. Button found:', !!playBtn);
+        
+        playBtn?.addEventListener('click', () => {
+            console.log('🎯 Play button clicked!');
             this.togglePlayback();
         });
 
@@ -369,6 +399,14 @@ class ProfessionalPodcastTTS {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
             
             switch (e.code) {
+                case 'Escape':
+                    e.preventDefault();
+                    if (this.playerElement.classList.contains('minimized')) {
+                        this.resetPlayer();
+                    } else {
+                        this.minimizePlayer();
+                    }
+                    break;
                 case 'Space':
                     if (e.ctrlKey) {
                         e.preventDefault();
@@ -397,7 +435,15 @@ class ProfessionalPodcastTTS {
     }
 
     minimizePlayer() {
+        console.log('🔽 Minimizing player');
         this.playerElement.classList.add('minimized');
+    }
+
+    resetPlayer() {
+        console.log('🔄 Resetting player UI');
+        this.playerElement.classList.remove('expanded');
+        this.playerElement.classList.add('minimized');
+        this.stop();
     }
 
     populateVoiceSelect() {
@@ -462,6 +508,7 @@ class ProfessionalPodcastTTS {
         const voice = this.availableVoices.find(v => v.name === voiceName);
         if (voice) {
             this.voice = voice;
+            console.log('✅ Voice changed to:', voice.name);
             
             // Apply immediately if playing
             if (this.isPlaying) {
@@ -469,6 +516,8 @@ class ProfessionalPodcastTTS {
             }
             
             this.saveSettings();
+        } else {
+            console.error('❌ Voice not found:', voiceName);
         }
     }
 
@@ -522,6 +571,7 @@ class ProfessionalPodcastTTS {
 
     prepareContent() {
         const content = this.extractPageContent();
+        console.log('📄 Extracted content length:', content.length);
         this.textChunks = this.processTextChunks(content);
         this.currentChunkIndex = 0;
         
@@ -711,8 +761,24 @@ class ProfessionalPodcastTTS {
     }
 
     play() {
+        // Ensure we have a voice before playing
+        if (!this.voice) {
+            this.setupBetterVoices();
+            if (this.availableVoices.length > 0) {
+                this.voice = this.availableVoices[0];
+                console.log('🔧 Voice set on demand:', this.voice.name);
+            } else {
+                alert('No voices available. Please try again.');
+                return;
+            }
+        }
+        
+        console.log('🎬 Play pressed. Voice:', this.voice ? this.voice.name : 'NO VOICE');
+        
         if (this.textChunks.length === 0) {
+            console.log('📝 Preparing content...');
             this.prepareContent();
+            console.log('📝 Content prepared. Chunks:', this.textChunks.length);
             if (this.textChunks.length === 0) {
                 alert('No content available to read. Please navigate to a page with text content.');
                 return;
@@ -730,11 +796,27 @@ class ProfessionalPodcastTTS {
         
         const chunk = this.textChunks[this.currentChunkIndex];
         
+        console.log('🎵 Playing chunk with voice:', this.voice ? this.voice.name : 'NO VOICE');
+        
         // Cancel any existing speech
         this.synth.cancel();
         
         // Create new utterance
         this.utterance = new SpeechSynthesisUtterance(chunk.text);
+        
+        // Ensure we have a valid voice - force reload if needed
+        if (!this.voice || this.voice === undefined) {
+            this.setupBetterVoices();
+            this.populateVoiceSelect();
+            if (this.availableVoices.length > 0) {
+                this.voice = this.availableVoices[0];
+                console.log('🔧 Emergency voice fallback:', this.voice.name);
+            } else {
+                console.error('❌ No voices available at all!');
+                return;
+            }
+        }
+        
         this.utterance.voice = this.voice;
         this.utterance.rate = this.playbackRate;
         this.utterance.volume = this.volume;
@@ -759,12 +841,28 @@ class ProfessionalPodcastTTS {
         };
         
         this.utterance.onerror = (event) => {
-            console.error('Speech synthesis error:', event);
+            console.error('🚨 Speech synthesis error:', event.error, event.message);
             this.stop();
         };
         
         // Start speaking
+        console.log('🎙️ About to call synth.speak()', {
+            text: chunk.text.substring(0, 50) + '...',
+            voice: this.utterance.voice ? this.utterance.voice.name : 'NO VOICE ON UTTERANCE',
+            synthReady: !!this.synth,
+            synthSpeaking: this.synth.speaking,
+            synthPending: this.synth.pending
+        });
+        
         this.synth.speak(this.utterance);
+        
+        setTimeout(() => {
+            console.log('📢 Speech state after speak():', {
+                speaking: this.synth.speaking,
+                pending: this.synth.pending,
+                paused: this.synth.paused
+            });
+        }, 100);
         this.updateNavigationButtons();
         this.updateProgressDisplay();
     }
