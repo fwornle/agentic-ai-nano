@@ -57,7 +57,10 @@ class ProfessionalPodcastTTS {
                     console.log('🔄 Final fallback: Using all available voices');
                     const allVoices = this.synth.getVoices();
                     this.availableVoices = allVoices.length > 0 ? 
-                        allVoices.slice(0, 10).map(v => ({...v, displayName: v.name})) :
+                        allVoices.slice(0, 10).map(v => {
+                            v.displayName = v.name;
+                            return v;
+                        }) :
                         [{name: 'Default', displayName: 'Default Voice', lang: 'en-US'}];
                     this.populateVoiceSelect();
                 }
@@ -150,7 +153,11 @@ class ProfessionalPodcastTTS {
             const voicesInCategory = Array.from(voiceMap.values())
                 .filter(v => v.category === cat)
                 .sort((a, b) => a.label.localeCompare(b.label));
-            this.availableVoices.push(...voicesInCategory.map(v => ({...v.voice, displayName: v.label})));
+            this.availableVoices.push(...voicesInCategory.map(v => {
+                const voice = v.voice;
+                voice.displayName = v.label;
+                return voice;
+            }));
         });
         
         // Fallback if no voices found - especially important on mobile
@@ -162,10 +169,8 @@ class ProfessionalPodcastTTS {
             englishVoices.forEach(voice => {
                 const key = `${voice.name}_${voice.lang}_${voice.gender || 'unknown'}`;
                 if (!uniqueVoices.has(key)) {
-                    uniqueVoices.set(key, {
-                        ...voice, 
-                        displayName: this.createFallbackDisplayName(voice)
-                    });
+                    voice.displayName = this.createFallbackDisplayName(voice);
+                    uniqueVoices.set(key, voice);
                 }
             });
             
@@ -187,7 +192,10 @@ class ProfessionalPodcastTTS {
             console.warn('No voices found after processing, using raw voices');
             const allVoices = this.synth.getVoices();
             this.availableVoices = allVoices.filter(v => v.lang.startsWith('en')).slice(0, 10)
-                .map(v => ({...v, displayName: v.name}));
+                .map(v => {
+                    v.displayName = v.name;
+                    return v;
+                });
         }
         
         // Set default voice only if we have voices available
