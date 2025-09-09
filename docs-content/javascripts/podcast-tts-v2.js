@@ -28,10 +28,20 @@ class ProfessionalPodcastTTS {
         
         // Ensure voices are loaded
         if (this.synth.getVoices().length === 0) {
+            console.log('⏳ Waiting for voices to load...');
             this.synth.addEventListener('voiceschanged', () => {
+                console.log('🔄 Voices loaded, setting up...');
                 this.setupBetterVoices();
                 this.populateVoiceSelect();
             });
+            // Also try after a short delay as fallback
+            setTimeout(() => {
+                if (this.availableVoices.length === 0) {
+                    console.log('⚡ Fallback: Force loading voices');
+                    this.setupBetterVoices();
+                    this.populateVoiceSelect();
+                }
+            }, 1000);
         } else {
             this.populateVoiceSelect();
         }
@@ -39,6 +49,7 @@ class ProfessionalPodcastTTS {
 
     setupBetterVoices() {
         const voices = this.synth.getVoices();
+        console.log(`🎙️ Raw voices available: ${voices.length}`);
         
         // Enhanced voice detection with proper labeling
         const voiceMap = new Map();
@@ -146,6 +157,14 @@ class ProfessionalPodcastTTS {
             }
         });
         this.availableVoices = Array.from(finalVoices.values());
+        
+        // Emergency fallback if no voices found after processing
+        if (this.availableVoices.length === 0) {
+            console.warn('No voices found after processing, using raw voices');
+            const allVoices = this.synth.getVoices();
+            this.availableVoices = allVoices.filter(v => v.lang.startsWith('en')).slice(0, 10)
+                .map(v => ({...v, displayName: v.name}));
+        }
         
         // Set default voice
         if (!this.voice) {
