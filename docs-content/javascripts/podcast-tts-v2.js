@@ -420,60 +420,15 @@ class ProfessionalPodcastTTS {
             return;
         }
         
-        // Group voices by type
-        const maleVoices = [];
-        const femaleVoices = [];
-        const accentVoices = [];
+        // Simple approach - just add all voices with their display names
+        console.log('Adding voices to select:', this.availableVoices.map(v => v.displayName || v.name));
         
         this.availableVoices.forEach(voice => {
-            const name = voice.name.toLowerCase();
-            if (name.includes('male') && !name.includes('female')) {
-                maleVoices.push(voice);
-            } else if (name.includes('female') || name.includes('samantha') || name.includes('zira') || name.includes('catherine')) {
-                femaleVoices.push(voice);
-            } else if (voice.lang.startsWith('en') && (name.includes('australian') || name.includes('indian') || name.includes('irish'))) {
-                accentVoices.push(voice);
-            } else {
-                femaleVoices.push(voice); // Default to female group
-            }
+            const option = document.createElement('option');
+            option.value = voice.name;
+            option.textContent = voice.displayName || voice.name;
+            select.appendChild(option);
         });
-        
-        // Add grouped options
-        if (femaleVoices.length > 0) {
-            const group = document.createElement('optgroup');
-            group.label = '🎙️ Female Voices';
-            femaleVoices.forEach(voice => {
-                const option = document.createElement('option');
-                option.value = voice.name;
-                option.textContent = voice.displayName || this.getVoiceDisplayName(voice);
-                group.appendChild(option);
-            });
-            select.appendChild(group);
-        }
-        
-        if (maleVoices.length > 0) {
-            const group = document.createElement('optgroup');
-            group.label = '🎙️ Male Voices';
-            maleVoices.forEach(voice => {
-                const option = document.createElement('option');
-                option.value = voice.name;
-                option.textContent = voice.displayName || this.getVoiceDisplayName(voice);
-                group.appendChild(option);
-            });
-            select.appendChild(group);
-        }
-        
-        if (accentVoices.length > 0) {
-            const group = document.createElement('optgroup');
-            group.label = '🌍 International Accents';
-            accentVoices.forEach(voice => {
-                const option = document.createElement('option');
-                option.value = voice.name;
-                option.textContent = voice.displayName || this.getVoiceDisplayName(voice);
-                group.appendChild(option);
-            });
-            select.appendChild(group);
-        }
         
         // Set current voice
         if (this.voice) {

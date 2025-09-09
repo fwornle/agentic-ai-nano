@@ -294,7 +294,7 @@
         indicator.style.cssText = `
             position: fixed;
             bottom: 20px;
-            left: 20px;
+            right: 20px;
             background: ${networkType === 'corporate' ? '#0066cc' : '#28a745'};
             color: white;
             padding: 8px 12px;
@@ -339,13 +339,18 @@
 
         document.body.appendChild(indicator);
 
-        // Auto-hide after 10 seconds
+        // Auto-hide after 5 seconds
         setTimeout(() => {
             if (indicator && indicator.parentNode) {
-                indicator.style.opacity = '0.7';
-                indicator.style.transition = 'opacity 0.3s ease';
+                indicator.style.transition = 'opacity 0.5s ease';
+                indicator.style.opacity = '0';
+                setTimeout(() => {
+                    if (indicator && indicator.parentNode) {
+                        indicator.remove();
+                    }
+                }, 500);
             }
-        }, 10000);
+        }, 5000);
     }
 
     function initializeNetworkDetection() {
