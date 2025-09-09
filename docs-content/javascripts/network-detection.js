@@ -328,17 +328,12 @@
             `;
         }
 
-        // Make indicator clickable for manual override
-        if (networkType === 'public') {
-            indicator.style.cursor = 'pointer';
-            indicator.title = 'Click to manually enable corporate mode for testing';
-            indicator.addEventListener('click', () => {
-                if (confirm('Enable BMW corporate mode? This will show internal BMW content.')) {
-                    console.log('🔧 Manual override: Enabling corporate mode');
-                    showCorporateContent();
-                }
-            });
-        }
+        // Remove manual override clickability to prevent switching to corporate network
+        // This was causing unwanted CN switching when viewing publicly
+        indicator.style.cursor = 'default';
+        indicator.title = networkType === 'corporate' ? 
+            'BMW Corporate Network - Cloud Development Environment Available' : 
+            'Public Network - Local Setup Required';
 
         document.body.appendChild(indicator);
 
