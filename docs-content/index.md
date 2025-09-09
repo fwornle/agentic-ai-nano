@@ -121,6 +121,9 @@ Each session offers **three distinct learning paths** to accommodate different l
 
 ## Learning Outcomes
 
+![Agentic Value](00_intro/images/agentic-what-is-it.png)
+*Is it agentic?*
+
 Upon completion of this nano-degree, you will be able to:
 
 ### Agent Development
