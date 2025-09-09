@@ -259,6 +259,9 @@ class AgenticRAG:
 **Contribution**: Multi-agent orchestration with knowledge graphs
 **Use Case**: Complex reasoning and research tasks
 
+![Agentic RAG](images/agentic-rag.png)
+*Agentic RAG*
+
 ## Choosing the Right RAG Generation
 
 Different use cases benefit from different generations of RAG technology:
