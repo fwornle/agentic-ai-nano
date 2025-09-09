@@ -4,7 +4,7 @@
 
 A comprehensive 6-week self-paced nanodegree covering the complete spectrum of modern AI agent development, from foundational patterns through cutting-edge protocols and production deployment strategies.
 
-**[View Complete Documentation Site](http://127.0.0.1:8001)** | **[Live Demo](https://fwornle.github.io/agentic-ai-nano)**
+**[View Complete Documentation Site](http://127.0.0.1:8001)** | **[Live Demo](https://fwornle.github.io/agentic-ai-nano)** | **🎧 [Podcast Mode Available!](PODCAST_FEATURE.md)**
 
 ![Agentic AI Architecture](docs-content/01_frameworks/images/agent-evolution-overview.png)
 
@@ -18,12 +18,14 @@ Before diving into the course content, participants should first:
 1. **Access the cloud development environment** via [Coder](docs-content/00_intro/coder.md) - your pre-configured workspace
 2. **Review the LLM API setup** in [LLM API Configuration](docs-content/00_intro/llmapi.md)
 3. **Understand the infrastructure** that eliminates traditional setup friction
+4. **🎧 Enable Podcast Mode** for learning while commuting - see [Podcast Feature Guide](PODCAST_FEATURE.md)
 
 The cloud environment provides:
 - Pre-installed frameworks and dependencies
 - GPU access for AI workloads
 - Integrated AI coding assistants (GitHub Copilot, Coding-Assistant)
 - Zero local installation requirements
+- **🎧 Built-in text-to-speech for hands-free learning while driving**
 
 ## Course Structure
 

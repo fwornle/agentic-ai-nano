@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast TTS Feature Test</title>
+    <link rel="stylesheet" href="docs-content/stylesheets/podcast.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        h1 { color: #333; }
+        h2 { color: #666; margin-top: 30px; }
+        p { margin-bottom: 15px; }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .highlight {
+            background: yellow;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .test-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>🎧 Podcast TTS Feature Test Page</h1>
+        <p>This page tests the text-to-speech podcast functionality for the Agentic AI Nano-Degree course.</p>
+    </div>
+
+    <div class="test-content">
+        <h1>Introduction to Agent Frameworks</h1>
+        
+        <p>Welcome to this comprehensive introduction to AI agent frameworks. In this session, we'll explore the fundamental concepts that underpin modern agentic AI systems.</p>
+        
+        <h2>What Are AI Agents?</h2>
+        
+        <p>AI agents are autonomous software entities capable of perceiving their environment, making decisions, and taking actions to achieve specific goals. Unlike traditional software programs that follow predetermined scripts, AI agents can adapt their behavior based on changing circumstances and learned experiences.</p>
+        
+        <p>The key characteristics of effective AI agents include:</p>
+        
+        <ul>
+            <li>Autonomy: The ability to operate independently without constant human intervention</li>
+            <li>Reactivity: Quick response to environmental changes and new information</li>
+            <li>Pro-activeness: Taking initiative to achieve goals rather than merely responding</li>
+            <li>Social ability: Interacting and communicating with other agents and humans</li>
+        </ul>
+        
+        <h2>Core Agent Patterns</h2>
+        
+        <p>Modern AI agents are built using several foundational patterns that have emerged as best practices in the field. These patterns provide structured approaches to common challenges in agent development.</p>
+        
+        <h3>The ReAct Pattern</h3>
+        
+        <p>The ReAct (Reasoning and Acting) pattern combines reasoning and action execution in an iterative loop. This pattern allows agents to think through problems step-by-step while taking concrete actions based on their reasoning.</p>
+        
+        <div class="code-block">
+            <strong>Example ReAct Loop:</strong><br>
+            1. Observe current state<br>
+            2. Reason about next action<br>
+            3. Execute chosen action<br>
+            4. Observe results<br>
+            5. Repeat until goal achieved
+        </div>
+        
+        <h3>Tool Usage Patterns</h3>
+        
+        <p>Modern agents excel at using external tools to expand their capabilities. This includes everything from API calls to database queries, file operations, and integration with specialized software systems.</p>
+        
+        <p class="highlight">Key insight: The power of AI agents comes not just from their reasoning capabilities, but from their ability to seamlessly integrate with existing software ecosystems.</p>
+        
+        <h2>Framework Landscape</h2>
+        
+        <p>The AI agent framework ecosystem has evolved rapidly, with several key players emerging as industry standards:</p>
+        
+        <ul>
+            <li><strong>LangChain:</strong> Comprehensive framework for building applications with large language models</li>
+            <li><strong>CrewAI:</strong> Specialized framework for multi-agent collaboration and team-based problem solving</li>
+            <li><strong>PydanticAI:</strong> Type-safe agent development with strong validation and error handling</li>
+            <li><strong>Atomic Agents:</strong> Modular architecture for building composable agent systems</li>
+        </ul>
+        
+        <h2>Production Considerations</h2>
+        
+        <p>Building production-ready AI agents requires careful consideration of several factors beyond basic functionality. These include performance optimization, error handling, monitoring, and scalability concerns.</p>
+        
+        <p>Security is also paramount when deploying agent systems in real-world environments. Agents must be designed with appropriate safeguards to prevent malicious exploitation and ensure reliable operation.</p>
+        
+        <h2>Looking Ahead</h2>
+        
+        <p>As we progress through this course, you'll gain hands-on experience with each of these frameworks and patterns. By the end, you'll have the knowledge and skills needed to build sophisticated, production-ready AI agent systems.</p>
+        
+        <p>The future of AI is agentic, and this course will prepare you to be part of that transformation.</p>
+    </div>
+    
+    <div class="test-controls">
+        <strong>Test Controls:</strong><br>
+        • Ctrl+Space: Play/Pause<br>
+        • Ctrl+Shift+→/←: Navigate<br>
+        • ?: Show shortcuts<br>
+        <br>
+        <small>Check browser console for debug info</small>
+    </div>
+
+    <script src="docs-content/javascripts/podcast-tts.js"></script>
+    
+    <script>
+        // Test initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎧 Podcast TTS Test Page Loaded');
+            console.log('Speech Synthesis Support:', 'speechSynthesis' in window);
+            console.log('Available Voices:', speechSynthesis.getVoices().length);
+            
+            // Show test status
+            if ('speechSynthesis' in window) {
+                console.log('✅ Web Speech API is supported');
+            } else {
+                console.log('❌ Web Speech API is NOT supported in this browser');
+                alert('Web Speech API is not supported in this browser. Please try Chrome, Firefox, Safari, or Edge.');
+            }
+            
+            // Test voice loading
+            setTimeout(() => {
+                const voices = speechSynthesis.getVoices();
+                console.log(`📢 Found ${voices.length} available voices:`, voices.map(v => `${v.name} (${v.lang})`));
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
