@@ -2,6 +2,9 @@
 
 Welcome to the comprehensive **Agentic AI Nano-Degree** program! This intensive curriculum covers the complete landscape of modern AI agent development and Retrieval-Augmented Generation (RAG) systems.
 
+![Agents Everywhere](00_intro/images/agents-everywhere.png)
+*Nano-Degree in Agentic AI*
+
 ## 🚀 Getting Started
 
 Ready to begin your learning journey? Choose your path based on your setup and learning preferences:
