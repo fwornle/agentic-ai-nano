@@ -579,24 +579,32 @@ class ProfessionalPodcastTTS {
     }
 
     changeSpeed(speed) {
+        console.log('⚡ Speed change requested:', speed);
         this.playbackRate = speed;
         
-        // Speed changes will apply to next chunk automatically - no interruption needed
-        if (this.isPlaying) {
-            console.log('⚡ Speed changed - will apply to next chunk');
+        // Apply speed immediately if currently playing and utterance exists
+        if (this.isPlaying && this.utterance) {
+            this.utterance.rate = speed;
+            console.log('⚡ Speed applied immediately to current utterance:', speed);
+        } else {
+            console.log('⚡ Speed will apply to next chunk');
         }
         
         this.saveSettings();
     }
 
     changeVolume(volume) {
+        console.log('🔊 Volume change requested:', volume);
         this.volume = volume;
-        document.getElementById('volume-text').textContent = Math.round(volume * 100) + '%';
+        const volumeText = document.getElementById('volume-text');
+        if (volumeText) volumeText.textContent = Math.round(volume * 100) + '%';
         
         // Apply volume immediately to current utterance if playing
         if (this.isPlaying && this.utterance) {
             this.utterance.volume = volume;
-            console.log('🔊 Volume changed to:', Math.round(volume * 100) + '%');
+            console.log('🔊 Volume applied immediately to current utterance:', Math.round(volume * 100) + '%');
+        } else {
+            console.log('🔊 Volume will apply to next chunk:', Math.round(volume * 100) + '%');
         }
         
         this.saveSettings();
@@ -928,19 +936,24 @@ class ProfessionalPodcastTTS {
         this.utterance.voice = this.voice;
         this.utterance.volume = this.volume;
         
-        // Add natural inflection and pitch variation
-        // Slightly randomize pitch for more natural sound (0.9 to 1.1)
-        this.utterance.pitch = 0.95 + (Math.random() * 0.15);
-        
-        // For headings, use slightly higher pitch and slower rate
+        // Set rate and pitch based on content type
         const hasHeading = chunk.nodes && chunk.nodes.some(n => n.type === 'heading');
         if (hasHeading) {
             this.utterance.pitch = 1.05;
             this.utterance.rate = this.playbackRate * 0.9; // Slightly slower for emphasis
+            console.log('📝 Heading detected - using slower rate:', this.utterance.rate);
         } else {
-            // Normal rate for non-headings
+            this.utterance.pitch = 0.95 + (Math.random() * 0.15);
             this.utterance.rate = this.playbackRate;
+            console.log('📄 Normal content - using standard rate:', this.utterance.rate);
         }
+        
+        console.log('🎛️ Utterance settings applied:', {
+            voice: this.utterance.voice ? this.utterance.voice.name : 'NO VOICE',
+            volume: this.utterance.volume,
+            rate: this.utterance.rate,
+            pitch: this.utterance.pitch
+        });
         
         // Event handlers
         this.utterance.onstart = () => {
