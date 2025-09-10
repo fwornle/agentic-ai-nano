@@ -86,8 +86,8 @@ class ProfessionalPodcastTTS {
             const name = voice.name.toLowerCase();
             const lang = voice.lang.toLowerCase();
             
-            // Skip low-quality voices
-            if (name.includes('compact') || name.includes('monotone')) return;
+            // Skip only the really low-quality voices
+            if (name.includes('compact')) return;
             
             // Create descriptive labels
             let label = '';
@@ -141,6 +141,19 @@ class ProfessionalPodcastTTS {
                 label = voiceNames[name] || `${voice.name} (Premium)`;
                 category = 'premium';
             }
+            // Fun novelty voices (case-insensitive check)
+            else if (name.includes('cellos') || name.includes('bells') || name.includes('bad news') || 
+                     name.includes('good news') || name.includes('organ') || name.includes('boing') ||
+                     name.includes('bubbles') || name.includes('trinoids') || name.includes('whisper') ||
+                     name.includes('wobble') || name.includes('zarvox') || name.includes('bahh') ||
+                     name.includes('jester') || name.includes('superstar') || name.includes('albert') ||
+                     name.includes('fred') || name.includes('ralph') || name.includes('junior') ||
+                     name.includes('hysterical') || name.includes('deranged')) {
+                // Capitalize first letter
+                const displayName = voice.name.charAt(0).toUpperCase() + voice.name.slice(1);
+                label = `🎭 ${displayName}`;
+                category = 'novelty';
+            }
             else if (lang.includes('en')) {
                 label = voice.name;
                 category = 'english';
@@ -151,9 +164,9 @@ class ProfessionalPodcastTTS {
             }
         });
         
-        // Convert to array and organize by category (quality first)
+        // Convert to array and organize by category (quality first, then fun)
         this.availableVoices = [];
-        const categories = ['premium', 'native-en', 'non-native-accent', 'microsoft', 'english'];
+        const categories = ['premium', 'native-en', 'non-native-accent', 'novelty', 'microsoft', 'english'];
         
         categories.forEach(cat => {
             const voicesInCategory = Array.from(voiceMap.values())
@@ -166,10 +179,10 @@ class ProfessionalPodcastTTS {
             }));
         });
         
-        // Limit to quality voices only (max 15 total)
-        if (this.availableVoices.length > 15) {
-            console.log(`🎯 Limiting from ${this.availableVoices.length} to 15 quality voices`);
-            this.availableVoices = this.availableVoices.slice(0, 15);
+        // Limit to quality voices only (max 25 total to include novelty)
+        if (this.availableVoices.length > 25) {
+            console.log(`🎯 Limiting from ${this.availableVoices.length} to 25 quality voices`);
+            this.availableVoices = this.availableVoices.slice(0, 25);
         }
         
         // Fallback if no voices found - especially important on mobile
@@ -633,6 +646,8 @@ class ProfessionalPodcastTTS {
     extractPageContent() {
         const skipCode = document.getElementById('skip-code')?.checked;
         const skipEmojis = document.getElementById('skip-emojis')?.checked;
+        // Update muteChapters from checkbox state
+        this.muteChapters = document.getElementById('mute-chapters')?.checked || false;
         
         // Get main content area - compatible with GitHub Pages
         const contentSelectors = [
@@ -819,8 +834,17 @@ class ProfessionalPodcastTTS {
     }
 
     createChunk(nodes) {
-        const text = nodes.map(n => n.text).filter(t => t.trim()).join(' '); // Filter out empty text
+        let text = nodes.map(n => n.text).filter(t => t.trim()).join(' '); // Filter out empty text
         const heading = nodes.find(n => n.type === 'heading' || n.type === 'heading-muted');
+        
+        // Add natural pauses for better speech rhythm
+        // Add slight pause after periods and longer pause after paragraphs
+        text = text
+            .replace(/\. /g, '. ') // Keep periods as-is (speech synthesis handles them)
+            .replace(/\? /g, '? ') // Questions get natural inflection
+            .replace(/! /g, '! ') // Exclamations get emphasis
+            .replace(/: /g, ': ') // Pause after colons
+            .replace(/; /g, '; '); // Pause after semicolons
         
         return {
             nodes: nodes,
@@ -899,7 +923,17 @@ class ProfessionalPodcastTTS {
         this.utterance.voice = this.voice;
         this.utterance.rate = this.playbackRate;
         this.utterance.volume = this.volume;
-        this.utterance.pitch = 1.0;
+        
+        // Add natural inflection and pitch variation
+        // Slightly randomize pitch for more natural sound (0.9 to 1.1)
+        this.utterance.pitch = 0.95 + (Math.random() * 0.15);
+        
+        // For headings, use slightly higher pitch and slower rate
+        const hasHeading = chunk.nodes && chunk.nodes.some(n => n.type === 'heading');
+        if (hasHeading) {
+            this.utterance.pitch = 1.05;
+            this.utterance.rate = this.playbackRate * 0.9; // Slightly slower for emphasis
+        }
         
         // Event handlers
         this.utterance.onstart = () => {
@@ -976,6 +1010,13 @@ class ProfessionalPodcastTTS {
 
     previousSection() {
         if (this.currentChunkIndex > 0) {
+            const wasPlaying = this.isPlaying;
+            
+            // Cancel current speech
+            if (this.isPlaying) {
+                this.synth.cancel();
+            }
+            
             this.currentChunkIndex--;
             this.updateProgressDisplay();
             this.updateNavigationButtons();
@@ -987,16 +1028,25 @@ class ProfessionalPodcastTTS {
                 this.highlightCurrentSection(chunk);
             }
             
-            // Restart playback from new position if currently playing
-            if (this.isPlaying) {
-                this.synth.cancel();
-                this.playCurrentChunk();
+            // Continue playback if it was playing
+            if (wasPlaying) {
+                // Small delay to ensure cancel completes
+                setTimeout(() => {
+                    this.playCurrentChunk();
+                }, 100);
             }
         }
     }
 
     nextSection() {
         if (this.currentChunkIndex < this.textChunks.length - 1) {
+            const wasPlaying = this.isPlaying;
+            
+            // Cancel current speech
+            if (this.isPlaying) {
+                this.synth.cancel();
+            }
+            
             this.currentChunkIndex++;
             this.updateProgressDisplay();
             this.updateNavigationButtons();
@@ -1008,10 +1058,12 @@ class ProfessionalPodcastTTS {
                 this.highlightCurrentSection(chunk);
             }
             
-            // Restart playback from new position if currently playing
-            if (this.isPlaying) {
-                this.synth.cancel();
-                this.playCurrentChunk();
+            // Continue playback if it was playing
+            if (wasPlaying) {
+                // Small delay to ensure cancel completes
+                setTimeout(() => {
+                    this.playCurrentChunk();
+                }, 100);
             }
         }
     }

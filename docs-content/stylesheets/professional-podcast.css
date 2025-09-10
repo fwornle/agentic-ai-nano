@@ -385,7 +385,7 @@
 /* Word-level highlighting with fade effect */
 .podcast-word-highlight {
     position: relative;
-    display: inline-block;
+    /* Don't change display to avoid text jumping */
 }
 
 .podcast-word-highlight::before {
