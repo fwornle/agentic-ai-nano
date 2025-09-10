@@ -74,6 +74,10 @@ class ProfessionalPodcastTTS {
     setupBetterVoices() {
         const voices = this.synth.getVoices();
         console.log(`🎙️ Raw voices available: ${voices.length}`);
+        
+        // Debug: Log all voice names to see what's actually available
+        console.log('📋 All available voice names:', voices.map(v => v.name));
+        
         if (voices.length === 0) {
             console.warn('🚨 No voices available from speechSynthesis.getVoices()');
             return;
@@ -153,6 +157,7 @@ class ProfessionalPodcastTTS {
                 const displayName = voice.name.charAt(0).toUpperCase() + voice.name.slice(1);
                 label = `🎭 ${displayName}`;
                 category = 'novelty';
+                console.log('🎭 Found novelty voice:', voice.name);
             }
             else if (lang.includes('en')) {
                 label = voice.name;
@@ -921,7 +926,6 @@ class ProfessionalPodcastTTS {
         }
         
         this.utterance.voice = this.voice;
-        this.utterance.rate = this.playbackRate;
         this.utterance.volume = this.volume;
         
         // Add natural inflection and pitch variation
@@ -933,6 +937,9 @@ class ProfessionalPodcastTTS {
         if (hasHeading) {
             this.utterance.pitch = 1.05;
             this.utterance.rate = this.playbackRate * 0.9; // Slightly slower for emphasis
+        } else {
+            // Normal rate for non-headings
+            this.utterance.rate = this.playbackRate;
         }
         
         // Event handlers
@@ -947,7 +954,9 @@ class ProfessionalPodcastTTS {
         this.utterance.onend = () => {
             this.currentChunkIndex++;
             if (this.currentChunkIndex < this.textChunks.length) {
-                setTimeout(() => this.playCurrentChunk(), 200);
+                // Add consistent pause between chunks (300ms for better separation)
+                // This ensures pauses even when headings are skipped
+                setTimeout(() => this.playCurrentChunk(), 300);
             } else {
                 this.stop();
             }
