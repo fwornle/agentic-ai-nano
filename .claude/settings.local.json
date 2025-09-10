@@ -86,7 +86,8 @@
       "WebFetch(domain:github.com)",
       "Read(//tmp/**)",
       "WebSearch",
-      "Bash(mkdocs:*)"
+      "Bash(mkdocs:*)",
+      "Bash(jobs:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",

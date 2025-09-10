@@ -47,12 +47,12 @@
 
 /* Player Container - Light mode (default) */
 .player-container {
-    background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95));
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     overflow: hidden;
     height: 100%;
-    color: white;
+    color: #333;
 }
 
 /* Dark mode */
@@ -110,7 +110,7 @@
 
 .player-title .title {
     display: block;
-    color: white;
+    color: #333;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.2;
@@ -118,9 +118,18 @@
 
 .player-title .subtitle {
     display: block;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(51, 51, 51, 0.7);
     font-size: 12px;
     margin-top: 2px;
+}
+
+/* Dark mode text colors */
+[data-md-color-scheme="slate"] .player-title .title {
+    color: white;
+}
+
+[data-md-color-scheme="slate"] .player-title .subtitle {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .minimize-btn {
@@ -153,7 +162,7 @@
 }
 
 .content-title {
-    color: white;
+    color: #333;
     font-weight: 500;
     font-size: 13px;
     line-height: 1.3;
@@ -161,9 +170,18 @@
 }
 
 .content-progress {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(51, 51, 51, 0.7);
     font-size: 11px;
     font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+}
+
+/* Dark mode content colors */
+[data-md-color-scheme="slate"] .content-title {
+    color: white;
+}
+
+[data-md-color-scheme="slate"] .content-progress {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Main Controls */
@@ -176,10 +194,10 @@
 }
 
 .control-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 50%;
-    color: white;
+    color: #333;
     width: 44px;
     height: 44px;
     display: flex;
@@ -190,9 +208,21 @@
     transition: all 0.2s ease;
 }
 
+/* Dark mode control buttons */
+[data-md-color-scheme="slate"] .control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
 .control-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.2);
     transform: translateY(-1px);
+}
+
+/* Dark mode hover */
+[data-md-color-scheme="slate"] .control-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .control-btn:disabled {
@@ -224,7 +254,7 @@
 
 .control-group label {
     display: block;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(51, 51, 51, 0.9);
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
@@ -232,16 +262,29 @@
     margin-bottom: 6px;
 }
 
+/* Dark mode labels */
+[data-md-color-scheme="slate"] .control-group label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 .voice-select,
 #speed-selector {
     width: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 6px;
-    color: white;
+    color: #333;
     padding: 8px 12px;
     font-size: 12px;
     cursor: pointer;
+}
+
+/* Dark mode selectors */
+[data-md-color-scheme="slate"] .voice-select,
+[data-md-color-scheme="slate"] #speed-selector {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
 }
 
 .voice-select:focus,
