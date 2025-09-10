@@ -15,6 +15,7 @@ class ProfessionalPodcastTTS {
         this.voice = null;
         this.volume = 0.8;
         this.contentFilter = 'all'; // 'observer', 'participant', 'implementer', 'all'
+        this.muteChapters = false; // Option to skip reading chapter headings
         
         this.init();
     }
@@ -92,22 +93,27 @@ class ProfessionalPodcastTTS {
             let label = '';
             let category = 'other';
             
-            // Google voices
+            // Google voices - prioritize non-native speakers for accent variety
             if (name.includes('google')) {
-                if (lang.includes('en-us')) label = 'Google US English';
+                if (lang.includes('en-us')) label = 'Native: US English';
                 else if (lang.includes('en-gb') || name.includes('uk english')) {
-                    label = name.includes('male') ? 'Google UK English (Male)' : 'Google UK English (Female)';
+                    label = name.includes('male') ? 'Native: UK English (Male)' : 'Native: UK English (Female)';
                 }
-                else if (lang.includes('en-au')) label = 'Google Australian English';
-                else if (lang.includes('en-in')) label = 'Google Indian English';
-                else if (lang.includes('de')) label = 'Google German Accent';
-                else if (lang.includes('es')) label = 'Google Spanish Accent';
-                else if (lang.includes('fr')) label = 'Google French Accent';
-                else if (lang.includes('zh')) label = 'Google Chinese Accent';
-                else if (lang.includes('hi')) label = 'Google Hindi Accent';
+                else if (lang.includes('en-au')) label = 'Native: Australian English';
+                else if (lang.includes('de')) label = 'Non-native: German Accent';
+                else if (lang.includes('es')) label = 'Non-native: Spanish Accent';
+                else if (lang.includes('fr')) label = 'Non-native: French Accent';
+                else if (lang.includes('zh')) label = 'Non-native: Chinese Accent';
+                else if (lang.includes('hi')) label = 'Non-native: Hindi/Indian Accent';
+                else if (lang.includes('ar')) label = 'Non-native: Arabic Accent';
+                else if (lang.includes('it')) label = 'Non-native: Italian Accent';
+                else if (lang.includes('pt')) label = 'Non-native: Portuguese Accent';
+                else if (lang.includes('ru')) label = 'Non-native: Russian Accent';
+                else if (lang.includes('ko')) label = 'Non-native: Korean Accent';
+                else if (lang.includes('ja')) label = 'Non-native: Japanese Accent';
                 else label = `Google ${voice.name.replace(/Google\s*/i, '')}`;
                 
-                category = lang.includes('en') ? 'google-en' : 'google-accent';
+                category = lang.includes('en') ? 'native-en' : 'non-native-accent';
             }
             // Microsoft voices
             else if (name.includes('microsoft') || name.includes('zira') || name.includes('david') || name.includes('hazel')) {
@@ -145,9 +151,9 @@ class ProfessionalPodcastTTS {
             }
         });
         
-        // Convert to array and organize by category
+        // Convert to array and organize by category (quality first)
         this.availableVoices = [];
-        const categories = ['premium', 'microsoft', 'google-en', 'google-accent', 'english'];
+        const categories = ['premium', 'native-en', 'non-native-accent', 'microsoft', 'english'];
         
         categories.forEach(cat => {
             const voicesInCategory = Array.from(voiceMap.values())
@@ -159,6 +165,12 @@ class ProfessionalPodcastTTS {
                 return voice;
             }));
         });
+        
+        // Limit to quality voices only (max 15 total)
+        if (this.availableVoices.length > 15) {
+            console.log(`🎯 Limiting from ${this.availableVoices.length} to 15 quality voices`);
+            this.availableVoices = this.availableVoices.slice(0, 15);
+        }
         
         // Fallback if no voices found - especially important on mobile
         if (this.availableVoices.length === 0) {
@@ -337,6 +349,9 @@ class ProfessionalPodcastTTS {
                         <label>
                             <input type="checkbox" id="skip-code" checked> Skip code blocks
                         </label>
+                        <label>
+                            <input type="checkbox" id="mute-chapters"> Mute chapter headings
+                        </label>
                     </div>
                 </div>
             </div>
@@ -402,6 +417,11 @@ class ProfessionalPodcastTTS {
             this.prepareContent();
         });
 
+        document.getElementById('mute-chapters')?.addEventListener('change', (e) => {
+            this.muteChapters = e.target.checked;
+            this.prepareContent();
+        });
+
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -445,6 +465,8 @@ class ProfessionalPodcastTTS {
     minimizePlayer() {
         console.log('🔽 Minimizing player');
         this.playerElement.classList.add('minimized');
+        // Remove highlighting when minimizing (optional - user might want to keep it)
+        // this.removeHighlight();
     }
 
     resetPlayer() {
@@ -523,9 +545,13 @@ class ProfessionalPodcastTTS {
             this.voice = voice;
             console.log('✅ Voice changed to:', voice.name);
             
-            // Apply immediately if playing
+            // Voice changes require restart (unfortunately unavoidable)
             if (this.isPlaying) {
-                this.applyLiveChanges();
+                console.log('🔄 Restarting current chunk due to voice change...');
+                this.synth.cancel();
+                setTimeout(() => {
+                    this.playCurrentChunk();
+                }, 100);
             }
             
             this.saveSettings();
@@ -537,9 +563,9 @@ class ProfessionalPodcastTTS {
     changeSpeed(speed) {
         this.playbackRate = speed;
         
-        // Apply immediately if playing
+        // Speed changes will apply to next chunk automatically - no interruption needed
         if (this.isPlaying) {
-            this.applyLiveChanges();
+            console.log('⚡ Speed changed - will apply to next chunk');
         }
         
         this.saveSettings();
@@ -549,9 +575,9 @@ class ProfessionalPodcastTTS {
         this.volume = volume;
         document.getElementById('volume-text').textContent = Math.round(volume * 100) + '%';
         
-        // Apply immediately if playing - restart utterance with new volume
-        if (this.isPlaying && this.utterance) {
-            this.applyLiveChanges();
+        // Volume changes will apply to next chunk automatically - no interruption needed
+        if (this.isPlaying) {
+            console.log('🔊 Volume changed - will apply to next chunk');
         }
         
         this.saveSettings();
@@ -560,13 +586,17 @@ class ProfessionalPodcastTTS {
     applyLiveChanges() {
         if (!this.isPlaying || !this.utterance) return;
         
-        // Cancel current speech
-        this.synth.cancel();
+        console.log('🔧 Applying live changes without interrupting...');
         
-        // Restart current chunk with new settings
-        setTimeout(() => {
-            this.playCurrentChunk();
-        }, 100);
+        // For volume changes, we can apply immediately without restarting
+        if (this.utterance && this.synth.speaking) {
+            // Update the utterance properties for the next chunk
+            // Current utterance will finish with old settings, next chunk will use new ones
+            console.log('🎵 Settings will apply to next chunk to avoid interruption');
+        }
+        
+        // Only restart if voice changed (which requires restart)
+        // Volume and speed changes will apply to the next chunk automatically
     }
 
     setContentFilter(filter) {
@@ -678,12 +708,24 @@ class ProfessionalPodcastTTS {
                     headingText = this.removeEmojis(headingText);
                 }
                 
-                if (headingText) {
+                if (headingText && !this.muteChapters) {
+                    // Add "Chapter:" prefix to headings for audio
+                    const chapterText = `Chapter: ${headingText}`;
                     textNodes.push({
-                        text: headingText,
+                        text: chapterText,
                         type: 'heading',
                         level: currentNode.tagName.toLowerCase(),
-                        element: currentNode
+                        element: currentNode,
+                        originalText: headingText // Keep original for display
+                    });
+                } else if (headingText && this.muteChapters) {
+                    // Still add heading node for structure, but mark as muted
+                    textNodes.push({
+                        text: '', // Empty text means it won't be spoken
+                        type: 'heading-muted',
+                        level: currentNode.tagName.toLowerCase(),
+                        element: currentNode,
+                        originalText: headingText
                     });
                 }
             } else if (currentNode.matches('p, li, td, th, blockquote, .admonition-content')) {
@@ -753,13 +795,13 @@ class ProfessionalPodcastTTS {
     }
 
     createChunk(nodes) {
-        const text = nodes.map(n => n.text).join(' ');
-        const heading = nodes.find(n => n.type === 'heading');
+        const text = nodes.map(n => n.text).filter(t => t.trim()).join(' '); // Filter out empty text
+        const heading = nodes.find(n => n.type === 'heading' || n.type === 'heading-muted');
         
         return {
             nodes: nodes,
             text: text,
-            title: heading ? heading.text.substring(0, 50) : text.substring(0, 50) + '...'
+            title: heading ? (heading.originalText || heading.text).substring(0, 50) : text.substring(0, 50) + '...'
         };
     }
 
@@ -994,7 +1036,8 @@ class ProfessionalPodcastTTS {
             volume: this.volume,
             contentFilter: this.contentFilter,
             skipEmojis: document.getElementById('skip-emojis')?.checked ?? true,
-            skipCode: document.getElementById('skip-code')?.checked ?? true
+            skipCode: document.getElementById('skip-code')?.checked ?? true,
+            muteChapters: this.muteChapters
         };
         localStorage.setItem('professionalPodcastSettings', JSON.stringify(settings));
     }
@@ -1039,6 +1082,12 @@ class ProfessionalPodcastTTS {
             if (settings.skipCode !== undefined) {
                 const checkbox = document.getElementById('skip-code');
                 if (checkbox) checkbox.checked = settings.skipCode;
+            }
+            
+            if (settings.muteChapters !== undefined) {
+                this.muteChapters = settings.muteChapters;
+                const checkbox = document.getElementById('mute-chapters');
+                if (checkbox) checkbox.checked = settings.muteChapters;
             }
             
         } catch (error) {

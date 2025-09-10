@@ -45,19 +45,21 @@
     display: block;
 }
 
-/* Player Container */
+/* Player Container - Light mode (default) */
 .player-container {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95));
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     overflow: hidden;
     height: 100%;
+    color: white;
 }
 
 /* Dark mode */
 [data-md-color-scheme="slate"] .player-container {
     background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95));
     border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 /* Minimized Controls */
