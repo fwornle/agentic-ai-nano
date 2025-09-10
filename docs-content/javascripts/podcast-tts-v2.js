@@ -483,8 +483,8 @@ class ProfessionalPodcastTTS {
     minimizePlayer() {
         console.log('🔽 Minimizing player');
         this.playerElement.classList.add('minimized');
-        // Remove highlighting when minimizing (optional - user might want to keep it)
-        // this.removeHighlight();
+        // Remove highlighting when minimizing
+        this.removeHighlight();
     }
 
     resetPlayer() {
@@ -1039,7 +1039,17 @@ class ProfessionalPodcastTTS {
                 this.synth.cancel();
             }
             
-            this.currentChunkIndex--;
+            // Find previous chapter start
+            let targetIndex = this.currentChunkIndex - 1;
+            for (let i = this.currentChunkIndex - 1; i >= 0; i--) {
+                const chunk = this.textChunks[i];
+                if (chunk && chunk.text && chunk.text.startsWith('Chapter:')) {
+                    targetIndex = i;
+                    break;
+                }
+            }
+            
+            this.currentChunkIndex = targetIndex;
             this.updateProgressDisplay();
             this.updateNavigationButtons();
             
@@ -1069,7 +1079,17 @@ class ProfessionalPodcastTTS {
                 this.synth.cancel();
             }
             
-            this.currentChunkIndex++;
+            // Find next chapter start
+            let targetIndex = this.currentChunkIndex + 1;
+            for (let i = this.currentChunkIndex + 1; i < this.textChunks.length; i++) {
+                const chunk = this.textChunks[i];
+                if (chunk && chunk.text && chunk.text.startsWith('Chapter:')) {
+                    targetIndex = i;
+                    break;
+                }
+            }
+            
+            this.currentChunkIndex = targetIndex;
             this.updateProgressDisplay();
             this.updateNavigationButtons();
             
@@ -1197,11 +1217,12 @@ class ProfessionalPodcastTTS {
             muteChapters: this.muteChapters
         };
         localStorage.setItem('professionalPodcastSettings', JSON.stringify(settings));
+        sessionStorage.setItem('professionalPodcastSettings', JSON.stringify(settings));
     }
 
     loadSettings() {
         try {
-            const settings = JSON.parse(localStorage.getItem('professionalPodcastSettings') || '{}');
+            const settings = JSON.parse(sessionStorage.getItem('professionalPodcastSettings') || localStorage.getItem('professionalPodcastSettings') || '{}');
             
             if (settings.voice) {
                 const voice = this.availableVoices.find(v => v.name === settings.voice);
