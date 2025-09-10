@@ -123,6 +123,15 @@
     margin-top: 2px;
 }
 
+/* Light mode text colors */
+.player-title .title {
+    color: #1a1a1a;
+}
+
+.player-title .subtitle {
+    color: rgba(26, 26, 26, 0.7);
+}
+
 /* Dark mode text colors */
 [data-md-color-scheme="slate"] .player-title .title {
     color: white;
@@ -133,10 +142,10 @@
 }
 
 .minimize-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(26, 26, 26, 0.1);
+    border: 1px solid rgba(26, 26, 26, 0.3);
     border-radius: 6px;
-    color: white;
+    color: #1a1a1a;
     width: 28px;
     height: 28px;
     display: flex;
@@ -148,7 +157,19 @@
     transition: all 0.2s ease;
 }
 
+/* Dark mode minimize button */
+[data-md-color-scheme="slate"] .minimize-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
 .minimize-btn:hover {
+    background: rgba(26, 26, 26, 0.2);
+}
+
+/* Dark mode minimize button hover */
+[data-md-color-scheme="slate"] .minimize-btn:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
@@ -173,6 +194,16 @@
     color: rgba(51, 51, 51, 0.7);
     font-size: 11px;
     font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+}
+
+/* Light mode content colors */
+.content-title {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.content-progress {
+    color: rgba(26, 26, 26, 0.8);
 }
 
 /* Dark mode content colors */
@@ -262,6 +293,12 @@
     margin-bottom: 6px;
 }
 
+/* Light mode labels */
+.control-group label {
+    color: rgba(26, 26, 26, 0.9);
+    font-weight: 600;
+}
+
 /* Dark mode labels */
 [data-md-color-scheme="slate"] .control-group label {
     color: rgba(255, 255, 255, 0.9);
@@ -270,13 +307,14 @@
 .voice-select,
 #speed-selector {
     width: 100%;
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(26, 26, 26, 0.3);
     border-radius: 6px;
-    color: #333;
+    color: #1a1a1a;
     padding: 8px 12px;
     font-size: 12px;
     cursor: pointer;
+    font-weight: 500;
 }
 
 /* Dark mode selectors */
