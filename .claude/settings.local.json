@@ -87,7 +87,8 @@
       "Read(//tmp/**)",
       "WebSearch",
       "Bash(mkdocs:*)",
-      "Bash(jobs:*)"
+      "Bash(jobs:*)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --reprocess)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
