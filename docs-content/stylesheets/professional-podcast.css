@@ -382,6 +382,48 @@
     transition: all 0.3s ease !important;
 }
 
+/* Word-level highlighting with fade effect */
+.podcast-word-highlight {
+    position: relative;
+    display: inline-block;
+}
+
+.podcast-word-highlight::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: -2px;
+    bottom: -2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(102, 126, 234, 0.3) 20%,
+        rgba(102, 126, 234, 0.4) 50%,
+        rgba(102, 126, 234, 0.3) 80%,
+        transparent 100%);
+    border-radius: 4px;
+    z-index: -1;
+    animation: wordHighlightMove 2s linear;
+    pointer-events: none;
+}
+
+@keyframes wordHighlightMove {
+    from {
+        opacity: 0;
+        transform: translateX(-5px);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(5px);
+    }
+}
+
 /* Dark mode adjustments */
 [data-md-color-scheme="slate"] .podcast-highlight {
     background: linear-gradient(90deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%) !important;

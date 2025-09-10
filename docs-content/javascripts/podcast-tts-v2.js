@@ -350,7 +350,7 @@ class ProfessionalPodcastTTS {
                             <input type="checkbox" id="skip-code" checked> Skip code blocks
                         </label>
                         <label>
-                            <input type="checkbox" id="mute-chapters"> Mute chapter headings
+                            <input type="checkbox" id="mute-chapters"> Mute headings & captions
                         </label>
                     </div>
                 </div>
@@ -575,9 +575,10 @@ class ProfessionalPodcastTTS {
         this.volume = volume;
         document.getElementById('volume-text').textContent = Math.round(volume * 100) + '%';
         
-        // Volume changes will apply to next chunk automatically - no interruption needed
-        if (this.isPlaying) {
-            console.log('🔊 Volume changed - will apply to next chunk');
+        // Apply volume immediately to current utterance if playing
+        if (this.isPlaying && this.utterance) {
+            this.utterance.volume = volume;
+            console.log('🔊 Volume changed to:', Math.round(volume * 100) + '%');
         }
         
         this.saveSettings();
@@ -726,6 +727,29 @@ class ProfessionalPodcastTTS {
                         level: currentNode.tagName.toLowerCase(),
                         element: currentNode,
                         originalText: headingText
+                    });
+                }
+            } else if (currentNode.matches('figcaption, caption, .caption')) {
+                // Handle captions
+                let captionText = currentNode.textContent.trim();
+                
+                if (skipEmojis) {
+                    captionText = this.removeEmojis(captionText);
+                }
+                
+                if (captionText && !this.muteChapters) {
+                    // Add "Caption:" prefix for audio
+                    textNodes.push({
+                        text: `Caption: ${captionText}`,
+                        type: 'caption',
+                        element: currentNode
+                    });
+                } else if (captionText && this.muteChapters) {
+                    // Skip captions when muted
+                    textNodes.push({
+                        text: '',
+                        type: 'caption-muted',
+                        element: currentNode
                     });
                 }
             } else if (currentNode.matches('p, li, td, th, blockquote, .admonition-content')) {
@@ -900,6 +924,13 @@ class ProfessionalPodcastTTS {
             this.stop();
         };
         
+        // Add boundary event for word-level highlighting (if supported)
+        this.utterance.onboundary = (event) => {
+            if (event.name === 'word') {
+                this.highlightWord(chunk, event.charIndex, event.charLength);
+            }
+        };
+        
         // Start speaking
         console.log('🎙️ About to call synth.speak()', {
             text: chunk.text.substring(0, 50) + '...',
@@ -946,22 +977,42 @@ class ProfessionalPodcastTTS {
     previousSection() {
         if (this.currentChunkIndex > 0) {
             this.currentChunkIndex--;
-            if (this.isPlaying) {
-                this.playCurrentChunk();
-            }
             this.updateProgressDisplay();
             this.updateNavigationButtons();
+            
+            // Update highlighting and content display
+            const chunk = this.textChunks[this.currentChunkIndex];
+            if (chunk) {
+                this.updateCurrentContent(chunk);
+                this.highlightCurrentSection(chunk);
+            }
+            
+            // Restart playback from new position if currently playing
+            if (this.isPlaying) {
+                this.synth.cancel();
+                this.playCurrentChunk();
+            }
         }
     }
 
     nextSection() {
         if (this.currentChunkIndex < this.textChunks.length - 1) {
             this.currentChunkIndex++;
-            if (this.isPlaying) {
-                this.playCurrentChunk();
-            }
             this.updateProgressDisplay();
             this.updateNavigationButtons();
+            
+            // Update highlighting and content display
+            const chunk = this.textChunks[this.currentChunkIndex];
+            if (chunk) {
+                this.updateCurrentContent(chunk);
+                this.highlightCurrentSection(chunk);
+            }
+            
+            // Restart playback from new position if currently playing
+            if (this.isPlaying) {
+                this.synth.cancel();
+                this.playCurrentChunk();
+            }
         }
     }
 
@@ -1026,6 +1077,38 @@ class ProfessionalPodcastTTS {
     removeHighlight() {
         document.querySelectorAll('.podcast-highlight').forEach(el => {
             el.classList.remove('podcast-highlight');
+        });
+        document.querySelectorAll('.podcast-word-highlight').forEach(el => {
+            el.classList.remove('podcast-word-highlight');
+        });
+    }
+    
+    highlightWord(chunk, charIndex, charLength) {
+        // Word-level highlighting with fade effect
+        // Note: This is a simplified implementation - full word-level highlighting
+        // would require more complex text node manipulation
+        if (!chunk.nodes || chunk.nodes.length === 0) return;
+        
+        // Clear previous word highlights
+        document.querySelectorAll('.podcast-word-highlight').forEach(el => {
+            el.classList.remove('podcast-word-highlight');
+        });
+        
+        // Find the word in the current text and highlight it
+        const word = chunk.text.substr(charIndex, charLength || 20);
+        
+        // Apply word highlight to the first matching element
+        // This is a basic implementation - could be enhanced
+        chunk.nodes.forEach(node => {
+            if (node.element && node.element.textContent.includes(word)) {
+                // Temporarily add word highlight class
+                node.element.classList.add('podcast-word-highlight');
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    node.element.classList.remove('podcast-word-highlight');
+                }, 2000);
+            }
         });
     }
 
