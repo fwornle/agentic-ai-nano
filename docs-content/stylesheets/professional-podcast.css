@@ -393,12 +393,36 @@
 
 .content-filters label {
     display: block;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(26, 26, 26, 0.9);
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
+}
+
+/* Dark mode content filter labels */
+[data-md-color-scheme="slate"] .content-filters label {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Light mode advanced options styling */
+.advanced-options {
+    border-top-color: rgba(26, 26, 26, 0.1);
+}
+
+.advanced-options label {
+    color: rgba(26, 26, 26, 0.8);
+}
+
+/* Dark mode advanced options overrides */
+[data-md-color-scheme="slate"] .advanced-options {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="slate"] .advanced-options label {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .filter-buttons {
@@ -408,10 +432,10 @@
 }
 
 .filter-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(26, 26, 26, 0.1);
+    border: 1px solid rgba(26, 26, 26, 0.2);
     border-radius: 6px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(26, 26, 26, 0.8);
     padding: 8px 10px;
     font-size: 10px;
     font-weight: 500;
@@ -421,6 +445,17 @@
 }
 
 .filter-btn:hover {
+    background: rgba(26, 26, 26, 0.15);
+}
+
+/* Dark mode filter buttons */
+[data-md-color-scheme="slate"] .filter-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+[data-md-color-scheme="slate"] .filter-btn:hover {
     background: rgba(255, 255, 255, 0.15);
 }
 
