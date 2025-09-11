@@ -88,7 +88,11 @@
       "WebSearch",
       "Bash(mkdocs:*)",
       "Bash(jobs:*)",
-      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --reprocess)"
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --reprocess)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js)",
+      "Bash(/Users/q284340/Agentic/coding/bin/coding --help)",
+      "Bash(DEBUG_SESSION=true node scripts/post-session-logger.js /Users/q284340/Agentic/nano-degree /Users/q284340/Agentic/coding test-session)",
+      "Bash(head:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
