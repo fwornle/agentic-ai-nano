@@ -105,7 +105,13 @@
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts-optimized.js)",
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" timeout 60s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" timeout 20s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
-      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" timeout 20s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=coding)"
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" timeout 20s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=coding)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree --file=\"/Users/q284340/.claude/projects/-Users-q284340-Agentic-nano-degree/2ff594df-0389-47af-8941-6aabe6fe68fe.jsonl\")",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --file=/Users/q284340/.claude/projects/-Users-q284340-Agentic-nano-degree/2ff594df-0389-47af-8941-6aabe6fe68fe.jsonl)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/fast-parallel-lsl-processor.js)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/fast-parallel-lsl-processor.js)",
+      "Bash(awk:*)",
+      "Bash(xargs kill:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
