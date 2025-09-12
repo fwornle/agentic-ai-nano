@@ -1,54 +1,88 @@
-@startuml
-' Standard PlantUML Style Configuration for Nano-Degree Project
-' This file provides consistent styling across all diagrams
-
-' Color scheme
-!define PRIMARY_COLOR #2E86AB
-!define SECONDARY_COLOR #A23B72
-!define ACCENT_COLOR #F18F01
-!define NEUTRAL_COLOR #C73E1D
-
-' Component styles
-!define CORE_COLOR #4A90E2
-!define API_COLOR #50C878
-!define UTIL_COLOR #FFB347
-!define CONFIG_COLOR #DDA0DD
-
-' Skin parameters for consistent appearance
-skinparam backgroundColor #FFFFFF
-skinparam componentStyle rectangle
-skinparam shadowing false
-skinparam handwritten false
-skinparam monochrome false
-
-' Default font settings
-skinparam defaultFontName "Arial"
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Arial
 skinparam defaultFontSize 12
 
-' Component styling
+' Component styling with professional colors
 skinparam component {
-    BackgroundColor #F8F9FA
-    BorderColor #6C757D
-    BorderThickness 1
+  BackgroundColor<<api>> #E8F4FD
+  BackgroundColor<<core>> #E8F5E8
+  BackgroundColor<<storage>> #FFF9E6
+  BackgroundColor<<cli>> #FFE8F4
+  BackgroundColor<<util>> #F0F0F0
+  BackgroundColor<<agent>> #E6F3FF
+  BackgroundColor<<infra>> #FFF2E6
+  BackgroundColor<<external>> #F5F5F5
+  FontSize 12
+  FontColor #000000
 }
 
-' Rectangle styling
-skinparam rectangle {
-    BackgroundColor #F8F9FA
-    BorderColor #6C757D
-    BorderThickness 1
+' Package styling
+skinparam package {
+  BackgroundColor #FAFAFA
+  BorderColor #CCCCCC
+  FontSize 14
+  FontColor #333333
+  FontStyle bold
 }
 
-' Arrow styling
+' Note styling
+skinparam note {
+  BackgroundColor #FFFACD
+  BorderColor #DDD
+  FontSize 10
+  FontColor #333333
+}
+
+' Arrow styling with distinct colors
 skinparam arrow {
-    Color #495057
-    Thickness 2
+  FontSize 10
+  FontColor #666666
+  Color #4A90E2
 }
 
-' Title styling
-skinparam title {
-    FontSize 16
-    FontColor #212529
+' Database styling
+skinparam database {
+  BackgroundColor #E1F5FE
+  BorderColor #0277BD
 }
 
-@enduml
+' Cloud styling
+skinparam cloud {
+  BackgroundColor #F3E5F5
+  BorderColor #7B1FA2
+}
+
+' Actor styling
+skinparam actor {
+  BackgroundColor #C8E6C9
+  BorderColor #388E3C
+}
+
+' Interface styling
+skinparam interface {
+  BackgroundColor #FFF3E0
+  BorderColor #F57C00
+}
+
+' Rectangle styling for grouping
+skinparam rectangle {
+  BackgroundColor #F9F9F9
+  BorderColor #BDBDBD
+}
+
+' Sequence diagram styling
+skinparam sequence {
+  ArrowColor #4A90E2
+  ActorBorderColor #333333
+  LifeLineBorderColor #666666
+  ParticipantBorderColor #333333
+  ParticipantBackgroundColor #F5F5F5
+}
+
+' Line styles for different connection types
+!define SYNC_LINE -[#E53935,thickness=2]->
+!define ASYNC_LINE -[#43A047,thickness=2,dashed]->
+!define DATA_LINE -[#FF9800,thickness=2]->
+!define CONTROL_LINE -[#9C27B0,thickness=2]->
+!define OPTIONAL_LINE -[#757575,thickness=1,dotted]->
