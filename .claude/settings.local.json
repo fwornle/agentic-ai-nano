@@ -92,7 +92,20 @@
       "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js)",
       "Bash(/Users/q284340/Agentic/coding/bin/coding --help)",
       "Bash(DEBUG_SESSION=true node scripts/post-session-logger.js /Users/q284340/Agentic/nano-degree /Users/q284340/Agentic/coding test-session)",
-      "Bash(head:*)"
+      "Bash(head:*)",
+      "Bash(rm:*)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" timeout 30s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" timeout 30s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=coding)",
+      "Bash(TZ=Europe/Berlin date)",
+      "Bash(TZ=UTC date)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" timeout 10s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" timeout 5s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" timeout 3s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts-optimized.js)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts-optimized.js)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" timeout 60s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/nano-degree\" timeout 20s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=nano-degree)",
+      "Bash(CODING_TARGET_PROJECT=\"/Users/q284340/Agentic/coding\" timeout 20s node /Users/q284340/Agentic/coding/scripts/generate-proper-lsl-from-transcripts.js --project=coding)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
