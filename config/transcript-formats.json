@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-09-16T08:09:00.955Z",
+  "formats": {
+    "claude-code-v2": {
+      "id": "claude-code-v2",
+      "name": "Claude Code V2 Format",
+      "description": "New format with human_turn_start/claude_turn_start",
+      "version": "2.0",
+      "patterns": {
+        "userTurnStart": {
+          "type": "human_turn_start",
+          "required": [
+            "uuid",
+            "timestamp"
+          ]
+        },
+        "userTurnEnd": {
+          "type": "human_turn_end",
+          "required": [
+            "content"
+          ]
+        },
+        "assistantTurnStart": {
+          "type": "claude_turn_start",
+          "required": []
+        },
+        "assistantTurnEnd": {
+          "type": "claude_turn_end",
+          "required": [
+            "content"
+          ]
+        },
+        "toolUse": {
+          "type": "tool_use",
+          "required": [
+            "tool_use_id",
+            "tool_name",
+            "input_json"
+          ]
+        },
+        "toolResult": {
+          "type": "tool_result",
+          "required": [
+            "tool_use_id",
+            "output_json"
+          ]
+        }
+      },
+      "confidence": 1,
+      "firstSeen": "2025-09-15T00:00:00.000Z",
+      "lastSeen": "2025-09-16T08:09:00.955Z",
+      "sampleCount": 0
+    },
+    "claude-legacy-v1": {
+      "id": "claude-legacy-v1",
+      "name": "Claude Legacy V1 Format",
+      "description": "Legacy format with user/assistant message types",
+      "version": "1.0",
+      "patterns": {
+        "userMessage": {
+          "type": "user",
+          "required": [
+            "uuid",
+            "timestamp",
+            "message"
+          ],
+          "messageStructure": {
+            "role": "user",
+            "content": "string|array"
+          }
+        },
+        "assistantMessage": {
+          "type": "assistant",
+          "required": [
+            "uuid",
+            "timestamp",
+            "message"
+          ],
+          "messageStructure": {
+            "role": "assistant",
+            "content": "string|array"
+          }
+        }
+      },
+      "confidence": 1,
+      "firstSeen": "2025-09-13T00:00:00.000Z",
+      "lastSeen": "2025-09-14T00:00:00.000Z",
+      "sampleCount": 0
+    }
+  }
+}
