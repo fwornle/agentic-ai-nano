@@ -189,6 +189,7 @@
                 let processedContent = await this.replaceImagesWithBase64(markdownContent);
                 
                 // Simple markdown to HTML conversion for key elements
+                // IMPORTANT: Process images BEFORE links to avoid conflicts
                 let htmlContent = processedContent
                     .replace(/^# (.+)$/gm, '<h1>$1</h1>')
                     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
@@ -197,8 +198,8 @@
                     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
                     .replace(/\*(.+?)\*/g, '<em>$1</em>')
                     .replace(/`(.+?)`/g, '<code>$1</code>')
-                    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
-                    .replace(/!\[(.+?)\]\((.+?)\)/g, '<img src="$2" alt="$1">')
+                    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')  // Images first
+                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')       // Then links
                     .replace(/^- (.+)$/gm, '<li>$1</li>')
                     .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
                     .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>')
@@ -245,8 +246,17 @@
                     processedContent = processedContent.replace(fullMatch, `![${altText}](${dataUrl})`);
                     console.log(`✅ Replaced image ${normalizedPath} with base64 data URL`);
                 } else {
-                    console.warn(`❌ Image not found in encrypted content: ${normalizedPath}`);
-                    console.log('Available images:', Object.keys(this.loadedContent).filter(key => key.match(/\.(png|jpg|jpeg|gif|svg)$/i)));
+                    // If not in encrypted content, it might be a shared image
+                    // Keep the original path but adjust for correct web path
+                    if (imagePath.includes('../../00_intro/images/')) {
+                        // Shared images - adjust path for web access
+                        const webPath = imagePath.replace('../../', '/agentic-ai-nano/');
+                        processedContent = processedContent.replace(fullMatch, `![${altText}](${webPath})`);
+                        console.log(`📷 Using shared image with web path: ${webPath}`);
+                    } else {
+                        console.warn(`❌ Image not found in encrypted content: ${normalizedPath}`);
+                        console.log('Available encrypted images:', Object.keys(this.loadedContent).filter(key => key.match(/\.(png|jpg|jpeg|gif|svg)$/i)));
+                    }
                 }
             }
             
@@ -258,18 +268,21 @@
          */
         normalizeImagePath(imagePath) {
             // Remove leading ../ or ./ and normalize path separators
-            let normalized = imagePath.replace(/^\.\.?\//g, '').replace(/\\/g, '/');
+            let normalized = imagePath.replace(/\\/g, '/');
             
             // Handle different path patterns in corporate content
-            if (normalized.startsWith('../../corporate-only/')) {
+            if (imagePath.includes('../../corporate-only/')) {
                 // Path like ../../corporate-only/images/file.png -> images/file.png
-                normalized = normalized.replace('../../corporate-only/', '');
-            } else if (normalized.startsWith('../images/')) {
-                // Path like ../images/file.png -> images/file.png  
-                normalized = normalized.replace('../', '');
-            } else if (normalized.startsWith('../../00_intro/images/')) {
-                // Path like ../../00_intro/images/file.png -> 00_intro/images/file.png
-                normalized = normalized.replace('../../', '');
+                normalized = imagePath.replace('../../corporate-only/', '');
+            } else if (imagePath.startsWith('../images/')) {
+                // Path like ../images/file.png -> images/file.png (corporate-only images)
+                normalized = imagePath.replace('../images/', 'images/');
+            } else if (imagePath.includes('../../00_intro/images/')) {
+                // Path like ../../00_intro/images/file.png -> 00_intro/images/file.png (shared images)
+                normalized = imagePath.replace('../../', '');
+            } else if (imagePath.startsWith('images/')) {
+                // Already normalized
+                normalized = imagePath;
             }
             
             console.log(`📁 Normalized image path: ${imagePath} -> ${normalized}`);

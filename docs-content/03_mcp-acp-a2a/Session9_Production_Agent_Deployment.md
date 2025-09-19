@@ -512,6 +512,8 @@ Your digital empire awaits. What will you create?
 ## 🧭 Navigation
 
 **Previous:** [Session 8 - Production Ready →](Session8_Advanced_Agent_Workflows.md)  
-**Next:** [Session 10 - Enterprise Integration →](Session10_Enterprise_Integration_Production_Deployment.md)
+<div class="bmw-corporate-only" style="display: none;">
+<strong>Next:</strong> <a href="Session10_Enterprise_Integration_Production_Deployment.md">Session 10 - Enterprise Integration →</a>
+</div>
 
 ---
