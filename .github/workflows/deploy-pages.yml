@@ -58,6 +58,8 @@ jobs:
           pip install mkdocs-material
           pip install mkdocs-awesome-pages-plugin
           pip install mkdocs-mermaid2-plugin
+          pip install mkdocs-minify-plugin
+          pip install mkdocs-git-revision-date-localized-plugin
 
       - name: Build with MkDocs
         run: mkdocs build
