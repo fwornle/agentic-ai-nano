@@ -35,9 +35,11 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.CORPORATE_DEPLOY_KEY }}
       
-      - name: Checkout corporate submodule
+      - name: Clone corporate submodule via SSH
         run: |
+          echo "Cloning corporate repository via SSH..."
           git clone git@github.com:fwornle/agentic-ai-nano-corporate.git docs-content/corporate-only
+          echo "Clone completed successfully"
 
       - name: Verify corporate content
         run: |
