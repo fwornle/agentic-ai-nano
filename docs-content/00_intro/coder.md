@@ -1,72 +1,23 @@
 # Development Environment Setup
 
-<!-- BMW Corporate Network Content -->
-<div class="bmw-corporate-only" markdown="1">
+<script>
+// Corporate network redirect
+if (window.location.hostname.includes('fwornle.github.io') && 
+    window.CorporateContentLoader && 
+    window.networkDetection && 
+    window.networkDetection.isCorporateNetwork) {
+    // Redirect to corporate version
+    window.location.href = '../corporate-only/00_intro/coder-detailed/';
+}
+</script>
 
-## BMW Cloud Development Environment with Coder
-
-The Agentic AI Nano-Degree leverages **Coder**, a cloud development environment platform deployed within the BMW corporate network, to provide instant, consistent, and secure development workspaces.
-
-> **Want more details?** See the [detailed Coder setup guide](coder-detailed.md) for comprehensive information about cloud development environments, infrastructure architecture, and advanced configuration options.
-
-![Coder Architecture](images/coder-architecture.png)
-*Coder's architecture enables secure, scalable cloud development environments accessible from any browser or IDE*
-
-### Quick Setup
-
-1. **Access your workspace**: [http://10.21.202.14/workspaces](http://10.21.202.14/workspaces)  
-2. **Log in** with your BMW credentials  
-3. **Select** the "Agentic AI Nanodegree" template  
-4. **Launch** your pre-configured development environment  
-5. **Add your Coder SSH Key** to Codecraft Github:  
-     http://10.21.202.14/settings/ssh-keys  
-     https://cc-github.bmwgroup.net/settings/keys  
-
-
-![Coder Login](images/coder-login.png)
-*Coder login screen*
-
-![Coder Workspaces](images/coder-workspaces.png)
-*Coder workspace dashboard showing available development environments*
-
-All tools, dependencies, and BMW Gaia LLM API access are pre-configured and ready to use. Use the template **Agentic AI Nanodegree** for this course.
-
-### Why Cloud Development?
-
-- **Zero Installation**: No local setup required  
-- **Consistent Environment**: Identical setup for all participants  
-- **Corporate Integration**: Seamless access to BMW resources  
-- **Scalable Resources**: Cloud computing power for AI workloads  
-- **Pre-configured APIs**: BMW Gaia LLM API ready to use  
-
-![VS Code Dev Container](images/vscode-dev-container.png)
-*VS Code seamlessly connecting to a dev container environment*
-
-### AI Assistant Integration
-
-Inside the corporate network, you have access to:
-
-- **GitHub Copilot**: Code completion and generation  
-- **BMW Gaia LLM API**: Enterprise-approved AI models  
-- **Coding-Assistant**: Open-source CLI coding assistant  
-
-![Coding Assistant](images/coder-llm-coding-assistant.png)
-*Pre-installed coding agent "coding-assistant"*
-
----
-
-**Ready to start?** Access your [cloud development environment](http://10.21.202.14/workspaces) and begin your journey into Agentic AI development with zero friction and maximum productivity!
-
-</div>
-
-<!-- Public Network Alternative Content -->
-<div class="bmw-public-alternative" markdown="1">
+This guide helps you set up your development environment for the Agentic AI Nano-Degree course modules. Corporate users have access to pre-configured cloud environments, while public users can set up their own local development environment.
 
 ## Local Development Environment Setup
 
 For public access, you'll need to set up your local development environment. While this requires more initial setup than a cloud environment, it provides full control over your development setup.
 
-### Local Setup Requirements
+### Requirements
 
 Before beginning the course modules, ensure you have:
 
@@ -102,4 +53,45 @@ OPENAI_API_KEY=your_openai_api_key_here
 ANTHROPIC_API_KEY=your_anthropic_key_here
 ```
 
-</div>
+### IDE Setup
+
+**VS Code (Recommended)**:
+1. Install the Python extension
+2. Install the Jupyter extension for notebook support
+3. Open the project folder
+4. Select your virtual environment as the Python interpreter
+
+### Testing Your Setup
+
+```python
+# Test your API configuration
+from openai import OpenAI
+
+client = OpenAI()
+response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "Hello! Test message."}]
+)
+print(response.choices[0].message.content)
+```
+
+### Local LLM Options
+
+For development without API costs:
+
+- **Ollama**: Run models locally (`ollama pull llama2`)  
+- **LM Studio**: User-friendly local LLM interface  
+- **GPT4All**: Open-source local models  
+
+### Course Module Structure
+
+Each module includes:
+
+- **Jupyter notebooks** for interactive learning  
+- **Python scripts** for standalone examples  
+- **Requirements files** for module-specific dependencies  
+- **README files** with module-specific setup instructions  
+
+---
+
+**Ready to start?** With your local environment configured, you can begin working through the course modules and exercises!
