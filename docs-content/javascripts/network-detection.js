@@ -519,7 +519,7 @@
         const session9Link = document.querySelector('a[href*="Session9_Production_Agent_Deployment"]');
         if (session9Link) {
             const session9Item = session9Link.closest('.md-nav__item');
-            if (session9Item && !document.querySelector('a[href*="Session10_Enterprise_Integration"]')) {
+            if (session9Item && !document.querySelector('.bmw-corporate-nav-item')) {
                 console.log('🔧 Adding Session 10 to corporate navigation');
                 
                 // Create Session 10 navigation item
@@ -598,6 +598,11 @@
             }
         } else {
             console.error('❌ Corporate content loader not available');
+            console.log('Debug info:', {
+                'CorporateContentLoader exists': !!window.CorporateContentLoader,
+                'loadedContent exists': !!(window.CorporateContentLoader && window.CorporateContentLoader.loadedContent),
+                'Content keys': window.CorporateContentLoader && window.CorporateContentLoader.loadedContent ? Object.keys(window.CorporateContentLoader.loadedContent) : 'None'
+            });
         }
     }
 
