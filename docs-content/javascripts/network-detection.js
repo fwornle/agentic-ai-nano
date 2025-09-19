@@ -41,10 +41,10 @@
             return false;
         }
 
-        // For localhost/127.0.0.1 - default to corporate for testing
+        // For localhost/127.0.0.1 - let the CN detection determine access
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
-            console.log('Localhost detected - defaulting to corporate content for testing');
-            return true;
+            console.log('Localhost detected - running CN detection to determine access');
+            return false; // Let checkInternalService() determine corporate access
         }
 
         // Check user agent or other indicators that might suggest corporate network
@@ -161,14 +161,9 @@
         }, 2000);
     }
 
-    function showCorporateContent() {
-        // Safety check: Only allow corporate content on actual corporate networks
-        const hostname = window.location.hostname;
-        if (hostname.includes('github.io') || hostname.includes('fwornle')) {
-            console.log('🛡️ Corporate content blocked - not on corporate network');
-            hideCorporateContent();
-            return;
-        }
+    async function showCorporateContent() {
+        // Corporate content is only shown when CN detection succeeds
+        // No hostname restrictions - let the CN detection determine access
         
         console.log('🏢 Showing BMW corporate content');
         
@@ -196,6 +191,16 @@
 
         console.log('🏢 Corporate mode: BMW content enabled');
         
+        // Load encrypted corporate content if available
+        if (window.CorporateContentLoader) {
+            console.log('🔐 Loading encrypted corporate content...');
+            try {
+                await window.CorporateContentLoader.load();
+                console.log('✅ Corporate content decrypted and loaded');
+            } catch (error) {
+                console.error('❌ Failed to load encrypted content:', error);
+            }
+        }
 
         // Update any dynamic text content
         updateNetworkSpecificContent(true);
@@ -227,6 +232,7 @@
         // Hide corporate navigation items and show public ones  
         hideCorporateNavigationItems();
         showPublicNavigationItems();
+        removeSession10Navigation();
 
         console.log('📋 Public mode: public content visible');
         
@@ -390,23 +396,18 @@
         `;
         document.head.appendChild(style);
 
-        // Default to public content but allow corporate override
-        if (isPublicSite) {
-            console.log('GitHub Pages detected - checking for corporate access');
-            // Don't immediately hide corporate content, let the service check determine it
-            // Try the internal service check on GitHub Pages
-            // in case someone is accessing from corporate network
-            checkInternalService();
-            return;
-        }
-
-        // Initial network check
+        // Always run CN detection regardless of hostname
+        console.log('Running corporate network detection...');
+        
+        // Initial quick check, then run full detection
         if (isCorporateNetwork()) {
             console.log('Corporate network detected initially');
             showCorporateContent();
         } else {
-            console.log('Public network assumed initially');
+            console.log('Public network assumed initially, running full CN detection');
             hideCorporateContent();
+            // Always run the comprehensive check for CN access
+            checkInternalService();
         }
     }
 
@@ -508,6 +509,96 @@
                 }
             }
         });
+        
+        // Add Session 10 to Module 03 navigation when in corporate mode
+        addSession10Navigation();
+    }
+
+    function addSession10Navigation() {
+        // Find Session 9 in Module 03 navigation and add Session 10 after it
+        const session9Link = document.querySelector('a[href*="Session9_Production_Agent_Deployment"]');
+        if (session9Link) {
+            const session9Item = session9Link.closest('.md-nav__item');
+            if (session9Item && !document.querySelector('a[href*="Session10_Enterprise_Integration"]')) {
+                console.log('🔧 Adding Session 10 to corporate navigation');
+                
+                // Create Session 10 navigation item
+                const session10Item = document.createElement('li');
+                session10Item.className = 'md-nav__item bmw-corporate-nav-item';
+                
+                const session10Link = document.createElement('a');
+                session10Link.href = '#session10-corporate-only';
+                session10Link.className = 'md-nav__link bmw-corporate-link';
+                session10Link.textContent = 'Session 10 - Enterprise Integration';
+                
+                // Add click handler to load corporate content
+                session10Link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loadCorporateSession10();
+                });
+                
+                session10Item.appendChild(session10Link);
+                
+                // Insert after Session 9
+                session9Item.parentNode.insertBefore(session10Item, session9Item.nextSibling);
+                
+                console.log('✅ Session 10 added to corporate navigation');
+            }
+        }
+        
+        // Also update the "Next" link on Session 9 to point to Session 10
+        updateSession9NextLink();
+    }
+
+    function updateSession9NextLink() {
+        // Find "Next" navigation links and update Session 9 to point to Session 10
+        const nextLinks = document.querySelectorAll('.md-footer__link--next');
+        nextLinks.forEach(link => {
+            if (window.location.pathname.includes('Session9_Production_Agent_Deployment')) {
+                const titleDiv = link.querySelector('.md-ellipsis');
+                if (titleDiv) {
+                    titleDiv.textContent = 'Session 10 - Enterprise Integration';
+                    link.href = '#session10-corporate-only';
+                    
+                    // Add click handler for corporate Session 10
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        loadCorporateSession10();
+                    });
+                    
+                    console.log('🔧 Updated Session 9 next link to point to Session 10');
+                }
+            }
+        });
+    }
+
+    function loadCorporateSession10() {
+        console.log('🔐 Loading corporate Session 10 content...');
+        
+        if (window.CorporateContentLoader && window.CorporateContentLoader.loadedContent) {
+            const session10Content = window.CorporateContentLoader.loadedContent['03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'];
+            if (session10Content) {
+                console.log('📄 Found Session 10 content, replacing page...');
+                
+                // Update page title
+                document.title = 'Session 10: Enterprise Integration & Production Deployment | Agentic AI Nano-Degree';
+                
+                // Update URL without causing page reload
+                if (history.pushState) {
+                    const newUrl = window.location.pathname.replace(/[^/]*$/, 'Session10_Enterprise_Integration_Production_Deployment/');
+                    history.pushState({page: 'session10'}, '', newUrl);
+                }
+                
+                // Replace page content
+                window.CorporateContentLoader.replacePageContent(session10Content);
+                
+                console.log('✅ Session 10 corporate content loaded successfully');
+            } else {
+                console.error('❌ Session 10 content not found in encrypted data');
+            }
+        } else {
+            console.error('❌ Corporate content loader not available');
+        }
     }
 
     function hidePublicNavigationItems() {
@@ -527,6 +618,31 @@
                 if (listItem) {
                     console.log('Hiding public nav item:', linkText);
                     listItem.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    function removeSession10Navigation() {
+        // Remove Session 10 from navigation when in public mode
+        const session10Links = document.querySelectorAll('a[href*="Session10_Enterprise_Integration"]');
+        session10Links.forEach(link => {
+            const listItem = link.closest('.md-nav__item');
+            if (listItem && listItem.classList.contains('bmw-corporate-nav-item')) {
+                console.log('🗑️ Removing Session 10 from public navigation');
+                listItem.remove();
+            }
+        });
+        
+        // Update Session 9 next link to not point to Session 10
+        const nextLinks = document.querySelectorAll('.md-footer__link--next');
+        nextLinks.forEach(link => {
+            if (window.location.pathname.includes('Session9_Production_Agent_Deployment')) {
+                // Remove the next link entirely for Session 9 in public mode
+                const titleDiv = link.querySelector('.md-ellipsis');
+                if (titleDiv && titleDiv.textContent.includes('Session 10')) {
+                    console.log('🗑️ Removing Session 9 next link to Session 10 in public mode');
+                    link.style.display = 'none';
                 }
             }
         });

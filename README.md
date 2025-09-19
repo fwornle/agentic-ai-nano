@@ -104,6 +104,86 @@ mkdocs serve  # View documentation locally
 - **[Architecture Diagrams](docs-content/01_frameworks/puml/)** - PlantUML system diagrams
 - **[Podcast Feature Guide](docs/podcast-feature.md)** - Hands-free learning setup
 
+## Corporate Content Management
+
+This repository implements a sophisticated content management system that supports both public and corporate-specific content:
+
+### Architecture Overview
+
+**Dual Content System:**
+- **Public Content**: Generic course materials available to all users
+- **Corporate Content**: BMW-specific content accessible only from corporate network
+
+**Key Components:**
+- **Private Submodule**: Corporate content stored in private repository (`docs-content/corporate-only/`)
+- **Network Detection**: Automatic BMW corporate network detection (`docs-content/javascripts/network-detection.js`)
+- **Content Encryption**: Corporate content encrypted for secure public deployment (`scripts/encrypt-corporate-content.js`)
+- **Dynamic Decryption**: Client-side decryption when accessed from corporate network (`docs-content/javascripts/corporate-content-loader.js`)
+
+### Content Structure
+
+```
+nano-degree/
+├── docs-content/
+│   ├── corporate-only/              # Private submodule
+│   │   ├── 00_intro/coder-detailed.md    # BMW cloud environment details
+│   │   ├── 03_mcp-acp-a2a/Session10*    # BMW enterprise deployment
+│   │   ├── images/bmw-*.png             # BMW-specific diagrams
+│   │   ├── puml/bmw-*.puml              # BMW architecture diagrams
+│   │   ├── content.encrypted.json       # Encrypted content manifest
+│   │   └── test.encrypted.json          # Decryption test file
+│   ├── 00_intro/coder.md            # Conditional content (BMW/public)
+│   └── javascripts/
+│       ├── network-detection.js      # Corporate network detection
+│       └── corporate-content-loader.js # Content decryption system
+└── scripts/encrypt-corporate-content.js # Encryption utility
+```
+
+### Content Publishing Workflow
+
+**For Public Deployment:**
+1. Corporate content encrypted using AES-256-GCM
+2. Encrypted manifest included in public repository
+3. Network detection determines content visibility
+4. Corporate content decrypted client-side on BMW network
+
+**For Corporate Environment:**
+- Direct access to unencrypted corporate content
+- BMW cloud development environment at `10.21.202.14`
+- Pre-configured templates and BMW-specific integrations
+
+### Development Workflow
+
+**Managing Corporate Content:**
+```bash
+# Update corporate content
+cd docs-content/corporate-only
+# Make changes to corporate files
+git add . && git commit -m "Update corporate content"
+git push origin main
+
+# Encrypt for public deployment
+node scripts/encrypt-corporate-content.js
+
+# Test decryption (corporate network only)
+# Access from BMW network - decryption tested automatically
+```
+
+**Content Guidelines:**
+- Use conditional divs: `<div class="bmw-corporate-only">` and `<div class="bmw-public-alternative">`
+- Corporate images: Store in `corporate-only/images/` with relative paths
+- Reference corporate content: Use `../corporate-only/` paths from public content
+
+### Security Features
+
+- **Network-based Access Control**: Content visibility based on BMW corporate network detection
+- **Encryption at Rest**: Corporate content encrypted when included in public repository
+- **Client-side Decryption**: Secure decryption only available from corporate network
+- **IP Range Validation**: Multiple BMW IP range patterns for network detection
+- **Automatic Content Switching**: Seamless transition between corporate and public content
+
+This system ensures corporate-specific content remains secure while allowing flexible deployment across both internal and public environments.
+
 ## Certification
 
 **Module Completion**: Complete all sessions, achieve 80%+ on assessments, implement practical exercises  

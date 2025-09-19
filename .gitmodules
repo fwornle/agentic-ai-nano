@@ -1,0 +1,3 @@
+[submodule "docs-content/corporate-only"]
+	path = docs-content/corporate-only
+	url = git@github.com:fwornle/agentic-ai-nano-corporate.git

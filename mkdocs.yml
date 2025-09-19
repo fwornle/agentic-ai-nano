@@ -384,5 +384,6 @@ extra_css:
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/corporate-content-loader.js
   - javascripts/network-detection.js
   - javascripts/podcast-tts-v2.js
