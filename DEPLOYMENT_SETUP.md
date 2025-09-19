@@ -1,51 +1,43 @@
 # GitHub Actions Deployment Setup
 
-## Setting up SSH Deploy Key for Private Submodule
+## Using Personal Access Token for Private Repository Access
 
-The GitHub Actions workflow needs access to the private corporate repository. Follow these steps:
+The GitHub Actions workflow needs access to the private corporate repository. We'll use a Personal Access Token (PAT) which is more reliable than SSH deploy keys.
 
-### Step 1: Generate SSH Key Pair
+### Step 1: Create a Classic Personal Access Token
 
-Run this command locally (no passphrase):
+1. Go to: https://github.com/settings/tokens
+2. Click: **Generate new token** → **Generate new token (classic)**
+3. Note: `GitHub Actions Corporate Repository Access`
+4. Expiration: Choose appropriate duration (recommend 1 year)
+5. Select scopes:
+   - ✅ **repo** (Full control of private repositories)
+6. Click: **Generate token**
+7. **Copy the token immediately** (you won't see it again!)
 
-```bash
-ssh-keygen -t ed25519 -C "github-actions-deploy" -f ~/.ssh/github-deploy-key -N ""
-```
-
-This creates two files:
-- `~/.ssh/github-deploy-key` (private key)
-- `~/.ssh/github-deploy-key.pub` (public key)
-
-### Step 2: Add Deploy Key to Corporate Repository
-
-1. Go to the **corporate repository**: https://github.com/fwornle/agentic-ai-nano-corporate
-2. Navigate to: Settings → Deploy keys → Add deploy key
-3. Title: `GitHub Actions Deployment`
-4. Key: Paste contents of `~/.ssh/github-deploy-key.pub`
-5. Check: ✅ **Allow write access** (important!)
-6. Click: Add key
-
-### Step 3: Add Private Key to Public Repository Secrets
+### Step 2: Add Token as Repository Secret
 
 1. Go to the **public repository**: https://github.com/fwornle/agentic-ai-nano
 2. Navigate to: Settings → Secrets and variables → Actions
-3. Delete old secret: `CORPORATE_ACCESS_TOKEN` (if exists)
-4. Click: New repository secret
-5. Name: `CORPORATE_DEPLOY_KEY`
-6. Secret: Paste contents of `~/.ssh/github-deploy-key` (the private key)
-7. Click: Add secret
+3. Delete old secrets if they exist:
+   - `CORPORATE_ACCESS_TOKEN`
+   - `CORPORATE_DEPLOY_KEY`
+4. Click: **New repository secret**
+5. Name: `CORPORATE_PAT`
+6. Secret: Paste the Personal Access Token from Step 1
+7. Click: **Add secret**
 
-### Step 4: Push Updated Workflow
+### Step 3: Push Updated Workflow
 
-The workflow has been updated to use SSH authentication. Push the changes:
+The workflow uses token authentication. Push the changes:
 
 ```bash
-git add .github/workflows/deploy-pages.yml
-git commit -m "fix: use SSH deploy key for private repository access"
+git add .github/workflows/deploy-pages.yml DEPLOYMENT_SETUP.md
+git commit -m "fix: switch to Personal Access Token for repository access"
 git push origin-public main
 ```
 
-## Alternative: Using Personal Access Token (if SSH doesn't work)
+## Alternative: SSH Deploy Key Method (if preferred)
 
 If you prefer to use a Personal Access Token instead:
 
