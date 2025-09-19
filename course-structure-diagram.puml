@@ -1,0 +1,261 @@
+@startuml
+!theme plain
+skinparam defaultFontSize 8
+skinparam minClassWidth 60
+skinparam backgroundColor white
+skinparam wrapWidth 150
+skinparam maxMessageSize 40
+skinparam nodesep 15
+skinparam ranksep 25
+
+' Vertical layout
+!define LAYOUT_TOP_DOWN
+
+' Entry Point
+rectangle "**📖 Course Entry**" #E1F5FE {
+  [index.md\n(Homepage)] as IDX
+}
+
+rectangle "**🔧 Setup**" #E8F5E8 {
+  [coder.md\n(Environment)] as CODER
+  [getting-started.md\n(ORPHANED ❌)] as START
+}
+
+' Module 01 Vertical Layout
+rectangle "**🤖 MODULE 01: AGENT FRAMEWORKS**" #F3E5F5 {
+  [01_frameworks/\nindex.md] as F_IDX
+  
+  rectangle "**Session 0**" #E8F5E8 {
+    [S0_Intro🎯] as F_S0
+    [S0_Advanced⚙️] as F_S0_ADV
+  }
+  
+  rectangle "**Session 1**" #E8F5E8 {
+    [S1_Bare_Metal🎯] as F_S1
+  }
+  
+  rectangle "**Session 2 Hub**" #FFF3E0 {
+    [S2_LangChain🎯📝⚙️] as F_S2_MAIN
+    [S2_Practical📝] as F_S2_PRAC
+    [S2_Advanced⚙️] as F_S2_ADV
+    [S2_Enterprise⚙️] as F_S2_ENT
+    [S2_Memory⚙️] as F_S2_MEM
+  }
+  
+  rectangle "**Session 3**" #E8F5E8 {
+    [S3_LangGraph🎯] as F_S3_LANG
+    [S3_Multi📝] as F_S3_MULTI
+  }
+  
+  rectangle "**Session 4**" #E8F5E8 {
+    [S4_CrewAI🎯] as F_S4
+  }
+  
+  rectangle "**Session 5**" #E8F5E8 {
+    [S5_PydanticAI🎯] as F_S5
+  }
+  
+  rectangle "**Session 6 Hub**" #FFF3E0 {
+    [S6_Atomic🎯] as F_S6
+    [S6_Essentials🎯] as F_S6_ESS
+    [S6_Building📝] as F_S6_BUILD
+    [S6_Assembly📝] as F_S6_ASSEM
+    [S6_Advanced⚙️] as F_S6_ADV
+    [S6_Production⚙️] as F_S6_PROD
+  }
+  
+  rectangle "**Session 7 Hub**" #FFF3E0 {
+    [S7_First] as F_S7_FIRST
+    [S7_ADK🎯] as F_S7
+    [S7_Impl📝] as F_S7_IMPL
+    [S7_AdvSys⚙️] as F_S7_ADVSYS
+  }
+  
+  rectangle "**Session 8**" #E8F5E8 {
+    [S8_Agno🎯] as F_S8
+  }
+  
+  rectangle "**Session 9 Hub**" #FFF3E0 {
+    [S9_Multi🎯] as F_S9
+    [S9_Practical📝] as F_S9_PRAC
+  }
+  
+  rectangle "**Session 10**" #E8F5E8 {
+    [S10_Enterprise] as F_S10
+  }
+  
+  rectangle "**SessionX Modules** (⚙️ Implementer)" #FFF8E1 {
+    [S0_ModA] as F_S0_MA
+    [S0_ModB] as F_S0_MB
+    [S1_ModA-D] as F_S1_MODS
+    [S2_ModA-D] as F_S2_MODS
+    [S3_ModA-B] as F_S3_MODS
+    [S4_ModA-B] as F_S4_MODS
+    [S5_ModA-D] as F_S5_MODS
+    [S6_ModA-B] as F_S6_MODS
+    [S7_ModA-B] as F_S7_MODS
+    [S8_ModA-D] as F_S8_MODS
+    [S9_ModA-B] as F_S9_MODS
+    [S10_ModA-B] as F_S10_MODS
+  }
+}
+
+' Module 02 Vertical Layout
+rectangle "**🔍 MODULE 02: RAG**" #F3E5F5 {
+  [02_rag/\nindex.md] as R_IDX
+  
+  rectangle "**RAG Sessions**" #E8F5E8 {
+    [R0_Architecture] as R_S0
+    [R1_Essentials] as R_S1
+    [R2_Chunking] as R_S2
+    [R3_Vector_DB] as R_S3
+    [R4_Query] as R_S4
+    [R5_Evaluation] as R_S5
+    [R6_Graph] as R_S6
+    [R7_Agentic] as R_S7
+    [R8_MultiModal] as R_S8
+    [R9_Production] as R_S9
+  }
+  
+  rectangle "**RAG Modules** (⚙️ Implementer)" #FFF8E1 {
+    [R1_ModA-B] as R_MODS1
+    [R2_ModA] as R_MODS2
+    [R3_ModA] as R_MODS3
+    [R4_ModA] as R_MODS4
+    [R5_ModA-B] as R_MODS5
+    [R6_ModA-B] as R_MODS6
+    [R9_ModA-B] as R_MODS9
+  }
+}
+
+' Module 03 Vertical Layout  
+rectangle "**🌐 MODULE 03: MCP-ACP-A2A**" #F3E5F5 {
+  [03_mcp/\nindex.md] as M_IDX
+  
+  rectangle "**MCP Sessions**" #E8F5E8 {
+    [M0_MCP_Intro] as M_S0
+    [M1_Basic] as M_S1
+    [M2_FileSystem] as M_S2
+    [M4_Production] as M_S4
+    [M5_Secure] as M_S5
+    [M6_ACP] as M_S6
+    [M7_A2A] as M_S7
+    [M9_Production] as M_S9
+  }
+  
+  rectangle "**MCP Modules** (⚙️ Implementer)" #FFF8E1 {
+    [M3_ModA-B] as M_MODS
+  }
+}
+
+rectangle "**🚨 Navigation Issues**" #FFEBEE {
+  [getting-started.md\nORPHANED] as ORPHAN1
+  [No direct links from\ncoder.md to modules] as ORPHAN2
+}
+
+' Main Navigation Flow (Vertical)
+IDX --> CODER : "Environment\nSetup"
+IDX -.-> START : "BROKEN\nLINK ❌"
+IDX --> F_IDX : "Begin\nModule 1"
+IDX --> R_IDX : "Begin\nModule 2"
+IDX --> M_IDX : "Begin\nModule 3"
+
+' NAVIGATION GAP: Setup doesn't link to modules
+CODER -.-> IDX : "Must return to\nindex.md ⚠️"
+
+' Framework Sessions Sequential Flow
+F_IDX --> F_S0 : "Start"
+F_S0 --> F_S1 : "Next"
+F_S1 --> F_S2_MAIN : "Next"
+F_S2_MAIN --> F_S3_LANG : "Next"
+F_S3_LANG --> F_S4 : "Next"
+F_S4 --> F_S5 : "Next"
+F_S5 --> F_S6 : "Next"
+F_S6 --> F_S7 : "Next"
+F_S7 --> F_S8 : "Next"
+F_S8 --> F_S9 : "Next"
+F_S9 --> F_S10 : "Next"
+
+' Multi-Path Hubs
+F_S0 --> F_S0_ADV : "⚙️"
+F_S0 --> F_S0_MA : "⚙️"
+F_S0_ADV --> F_S0_MB : "⚙️"
+
+F_S2_MAIN --> F_S2_PRAC : "📝"
+F_S2_PRAC --> F_S2_ADV : "⚙️"
+F_S2_PRAC --> F_S2_ENT : "⚙️"
+F_S2_PRAC --> F_S2_MEM : "⚙️"
+F_S2_MAIN --> F_S2_MODS : "⚙️"
+
+F_S3_LANG --> F_S3_MULTI : "📝"
+F_S3_LANG --> F_S3_MODS : "⚙️"
+
+F_S6 --> F_S6_ESS : "🎯"
+F_S6_ESS --> F_S6_BUILD : "📝"
+F_S6_BUILD --> F_S6_ASSEM : "📝"
+F_S6_ASSEM --> F_S6_ADV : "⚙️"
+F_S6_ADV --> F_S6_PROD : "⚙️"
+F_S6 --> F_S6_MODS : "⚙️"
+
+F_S7_FIRST --> F_S7 : "🎯"
+F_S7 --> F_S7_IMPL : "📝"
+F_S7_IMPL --> F_S7_ADVSYS : "⚙️"
+F_S7 --> F_S7_MODS : "⚙️"
+
+F_S9 --> F_S9_PRAC : "📝"
+F_S9 --> F_S9_MODS : "⚙️"
+
+' Other Sessions to Modules
+F_S1 --> F_S1_MODS : "⚙️"
+F_S4 --> F_S4_MODS : "⚙️"
+F_S5 --> F_S5_MODS : "⚙️"
+F_S8 --> F_S8_MODS : "⚙️"
+F_S10 --> F_S10_MODS : "⚙️"
+
+' RAG Sequential Flow
+R_IDX --> R_S0 : "Start"
+R_S0 --> R_S1 : "Next"
+R_S1 --> R_S2 : "Next"
+R_S2 --> R_S3 : "Next"
+R_S3 --> R_S4 : "Next"
+R_S4 --> R_S5 : "Next"
+R_S5 --> R_S6 : "Next"
+R_S6 --> R_S7 : "Next"
+R_S7 --> R_S8 : "Next"
+R_S8 --> R_S9 : "Next"
+
+' RAG Modules
+R_S1 --> R_MODS1 : "⚙️"
+R_S2 --> R_MODS2 : "⚙️"
+R_S3 --> R_MODS3 : "⚙️"
+R_S4 --> R_MODS4 : "⚙️"
+R_S5 --> R_MODS5 : "⚙️"
+R_S6 --> R_MODS6 : "⚙️"
+R_S9 --> R_MODS9 : "⚙️"
+
+' MCP Sequential Flow
+M_IDX --> M_S0 : "Start"
+M_S0 --> M_S1 : "Next"
+M_S1 --> M_S2 : "Next"
+M_S2 --> M_S4 : "Next"
+M_S4 --> M_S5 : "Next"
+M_S5 --> M_S6 : "Next"
+M_S6 --> M_S7 : "Next"
+M_S7 --> M_S9 : "Next"
+
+M_MODS --> M_S4 : "Prerequisites"
+
+' Cross-Module Integration
+F_S9 ..> R_S9 : "Enterprise\nIntegration"
+
+' Legend
+note bottom 
+  **🎯 Observer (40-60 min)** | **📝 Participant (2-3 hours)** | **⚙️ Implementer (6-8 hours)**
+  
+  **⚠️ Navigation Issues:**
+  • getting-started.md is ORPHANED (referenced but doesn't exist)
+  • No direct navigation from setup (coder.md) to modules
+  • Users must return to index.md after setup
+end note
+
+@enduml

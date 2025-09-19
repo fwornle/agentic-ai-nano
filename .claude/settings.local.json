@@ -230,7 +230,10 @@
       "mcp__serena__replace_symbol_body",
       "Bash(DEBUG=true TRANSCRIPT_SOURCE_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" timeout 60s node /Users/q284340/Agentic/coding/scripts/generate-lsl-from-transcripts.js --mode=all --file=/Users/q284340/.claude/projects/-Users-q284340-Agentic-nano-degree/53c1fb9a-13dc-4b99-aa67-7eaa8c5e7cd1.jsonl)",
       "Bash(TRANSCRIPT_DEBUG=true TRANSCRIPT_SOURCE_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" timeout 10s node /Users/q284340/Agentic/coding/scripts/generate-lsl-from-transcripts.js --mode=foreign --file=/Users/q284340/.claude/projects/-Users-q284340-Agentic-nano-degree/e093980f-ac28-4a92-8677-687d7091930f.jsonl)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git submodule add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
