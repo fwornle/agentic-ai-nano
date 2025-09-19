@@ -30,12 +30,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout corporate submodule
-        uses: actions/checkout@v4
+      - name: Setup SSH for private repository
+        uses: webfactory/ssh-agent@v0.8.0
         with:
-          repository: fwornle/agentic-ai-nano-corporate
-          token: ${{ secrets.CORPORATE_ACCESS_TOKEN }}
-          path: docs-content/corporate-only
+          ssh-private-key: ${{ secrets.CORPORATE_DEPLOY_KEY }}
+      
+      - name: Checkout corporate submodule
+        run: |
+          git clone git@github.com:fwornle/agentic-ai-nano-corporate.git docs-content/corporate-only
 
       - name: Verify corporate content
         run: |
