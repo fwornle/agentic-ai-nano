@@ -30,31 +30,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup and Clone Corporate Repository
+      - name: Clone Corporate Repository
         run: |
-          # Setup SSH
-          mkdir -p ~/.ssh
-          echo "${{ secrets.CORPORATE_DEPLOY_KEY }}" | tr -d '\r' > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          
-          # Add GitHub to known hosts
-          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-          
-          # Configure git to use the deploy key for this specific repo
-          cat > ~/.ssh/config <<EOF
-          Host github.com-corporate
-            HostName github.com
-            User git
-            IdentityFile ~/.ssh/deploy_key
-            IdentitiesOnly yes
-          EOF
-          
-          # Clone using the custom host
-          echo "Cloning corporate repository..."
-          git clone git@github.com-corporate:fwornle/agentic-ai-nano-corporate.git docs-content/corporate-only
+          echo "Cloning corporate repository using token..."
+          git clone https://${{ secrets.CORPORATE_PAT }}@github.com/fwornle/agentic-ai-nano-corporate.git docs-content/corporate-only
           
           # Verify clone worked
+          echo "Corporate content structure:"
           ls -la docs-content/corporate-only/
+          echo "Checking for encrypted content:"
+          ls -la docs-content/corporate-only/content.encrypted.json
 
       - name: Verify corporate content
         run: |
