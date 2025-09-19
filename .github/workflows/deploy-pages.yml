@@ -31,14 +31,16 @@ jobs:
           fetch-depth: 0
 
       - name: Setup SSH for private repository
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.CORPORATE_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.CORPORATE_DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
       
       - name: Clone corporate submodule via SSH
         run: |
           echo "Cloning corporate repository via SSH..."
-          git clone git@github.com:fwornle/agentic-ai-nano-corporate.git docs-content/corporate-only
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" git clone git@github.com:fwornle/agentic-ai-nano-corporate.git docs-content/corporate-only
           echo "Clone completed successfully"
 
       - name: Verify corporate content
