@@ -64,6 +64,15 @@ jobs:
       - name: Build with MkDocs
         run: mkdocs build
 
+      - name: Copy corporate content to built site
+        run: |
+          echo "Copying corporate-only directory to built site..."
+          cp -r docs-content/corporate-only site/
+          echo "Verifying corporate content was copied:"
+          ls -la site/corporate-only/
+          echo "Checking for encrypted content in built site:"
+          ls -la site/corporate-only/content.encrypted.json
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
