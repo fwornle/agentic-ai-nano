@@ -79,13 +79,35 @@ Access your pre-configured workspace - no local installation needed!
 4. **Choose your learning path** and start with Module 01
 
 ### Local Setup (Alternative)
+
+#### Public Users (Standard Clone)
 ```bash
-git clone <repository-url>
-cd nano-degree
+git clone https://github.com/fwornle/agentic-ai-nano.git
+cd agentic-ai-nano
 python -m venv venv
 source venv/bin/activate
 pip install -r docs-content/01_frameworks/src/session1/requirements.txt
 mkdocs serve  # View documentation locally
+```
+
+#### Corporate Users (With Corporate Content)
+```bash
+# Clone with corporate content submodule
+git clone --recurse-submodules https://github.com/fwornle/agentic-ai-nano.git
+cd agentic-ai-nano
+python -m venv venv
+source venv/bin/activate
+pip install -r docs-content/01_frameworks/src/session1/requirements.txt
+mkdocs serve  # View documentation with corporate content
+```
+
+**Alternative for Corporate Users** (if submodules weren't cloned initially):
+```bash
+git clone https://github.com/fwornle/agentic-ai-nano.git
+cd agentic-ai-nano
+git submodule init
+git submodule update  # Fetch corporate content
+# Continue with setup...
 ```
 
 ## Navigation
@@ -108,15 +130,27 @@ mkdocs serve  # View documentation locally
 
 This repository implements a sophisticated content management system that supports both public and corporate-specific content:
 
+### Repository Access Models
+
+**Public Access (Standard Clone):**
+- Public users clone the repository without corporate content
+- Receives generic course materials suitable for general audiences
+- No access to corporate-specific content or proprietary configurations
+
+**Corporate Access (Submodule Clone):**
+- Corporate users clone with `--recurse-submodules` to access additional content
+- Includes corporate-specific examples, configurations, and deployment guides
+- Corporate content stored in a separate private repository as a git submodule
+
 ### Architecture Overview
 
 **Dual Content System:**
 - **Public Content**: Generic course materials available to all users
-- **Corporate Content**: BMW-specific content accessible only from corporate network
+- **Corporate Content**: Organization-specific content accessible only to authorized users
 
 **Key Components:**
 - **Private Submodule**: Corporate content stored in private repository (`docs-content/corporate-only/`)
-- **Network Detection**: Automatic BMW corporate network detection (`docs-content/javascripts/network-detection.js`)
+- **Network Detection**: Automatic corporate network detection (`docs-content/javascripts/network-detection.js`)
 - **Content Encryption**: Corporate content encrypted for secure public deployment (`scripts/encrypt-corporate-content.js`)
 - **Dynamic Decryption**: Client-side decryption when accessed from corporate network (`docs-content/javascripts/corporate-content-loader.js`)
 
@@ -125,14 +159,14 @@ This repository implements a sophisticated content management system that suppor
 ```
 nano-degree/
 ├── docs-content/
-│   ├── corporate-only/              # Private submodule
-│   │   ├── 00_intro/coder-detailed.md    # BMW cloud environment details
-│   │   ├── 03_mcp-acp-a2a/Session10*    # BMW enterprise deployment
-│   │   ├── images/bmw-*.png             # BMW-specific diagrams
-│   │   ├── puml/bmw-*.puml              # BMW architecture diagrams
+│   ├── corporate-only/              # Private submodule (corporate users only)
+│   │   ├── 00_intro/coder-detailed.md    # Corporate environment details
+│   │   ├── 03_mcp-acp-a2a/Session10*    # Corporate enterprise deployment
+│   │   ├── images/corp-*.png            # Corporate-specific diagrams
+│   │   ├── puml/corp-*.puml             # Corporate architecture diagrams
 │   │   ├── content.encrypted.json       # Encrypted content manifest
 │   │   └── test.encrypted.json          # Decryption test file
-│   ├── 00_intro/coder.md            # Conditional content (BMW/public)
+│   ├── 00_intro/coder.md            # Conditional content (corporate/public)
 │   └── javascripts/
 │       ├── network-detection.js      # Corporate network detection
 │       └── corporate-content-loader.js # Content decryption system
@@ -145,12 +179,12 @@ nano-degree/
 1. Corporate content encrypted using AES-256-GCM
 2. Encrypted manifest included in public repository
 3. Network detection determines content visibility
-4. Corporate content decrypted client-side on BMW network
+4. Corporate content decrypted client-side on corporate network
 
 **For Corporate Environment:**
 - Direct access to unencrypted corporate content
-- BMW cloud development environment at `10.21.202.14`
-- Pre-configured templates and BMW-specific integrations
+- Corporate cloud development environment
+- Pre-configured templates and organization-specific integrations
 
 ### Development Workflow
 
@@ -166,20 +200,20 @@ git push origin main
 node scripts/encrypt-corporate-content.js
 
 # Test decryption (corporate network only)
-# Access from BMW network - decryption tested automatically
+# Access from corporate network - decryption tested automatically
 ```
 
 **Content Guidelines:**
-- Use conditional divs: `<div class="bmw-corporate-only">` and `<div class="bmw-public-alternative">`
+- Use conditional divs: `<div class="corp-corporate-only">` and `<div class="corp-public-alternative">`
 - Corporate images: Store in `corporate-only/images/` with relative paths
 - Reference corporate content: Use `../corporate-only/` paths from public content
 
 ### Security Features
 
-- **Network-based Access Control**: Content visibility based on BMW corporate network detection
+- **Network-based Access Control**: Content visibility based on corporate network detection
 - **Encryption at Rest**: Corporate content encrypted when included in public repository
 - **Client-side Decryption**: Secure decryption only available from corporate network
-- **IP Range Validation**: Multiple BMW IP range patterns for network detection
+- **IP Range Validation**: Multiple corporate IP range patterns for network detection
 - **Automatic Content Switching**: Seamless transition between corporate and public content
 
 This system ensures corporate-specific content remains secure while allowing flexible deployment across both internal and public environments.
