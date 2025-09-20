@@ -73,6 +73,13 @@ jobs:
           echo "Checking for encrypted content in built site:"
           ls -la site/corporate-only/content.encrypted.json
 
+      - name: Create .nojekyll file for GitHub Pages
+        run: |
+          echo "Creating .nojekyll file to bypass Jekyll processing..."
+          touch site/.nojekyll
+          echo "Verifying .nojekyll file was created:"
+          ls -la site/.nojekyll
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
