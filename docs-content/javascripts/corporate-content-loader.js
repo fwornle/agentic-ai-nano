@@ -217,25 +217,91 @@
                 // First, replace image references with base64 data URLs
                 let processedContent = await this.replaceImagesWithBase64(markdownContent);
                 
-                // Simple markdown to HTML conversion for key elements
+                // Enhanced markdown to HTML conversion with better structure handling
                 // IMPORTANT: Process images BEFORE links to avoid conflicts
-                let htmlContent = processedContent
+                let htmlContent = processedContent;
+                
+                // First handle code blocks to protect them from other processing
+                const codeBlocks = [];
+                htmlContent = htmlContent.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+                    const index = codeBlocks.length;
+                    codeBlocks.push(`<pre><code class="language-${lang || ''}">${code.trim()}</code></pre>`);
+                    return `__CODE_BLOCK_${index}__`;
+                });
+                
+                // Handle headings
+                htmlContent = htmlContent
                     .replace(/^# (.+)$/gm, '<h1>$1</h1>')
                     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
                     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
                     .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+                    .replace(/^##### (.+)$/gm, '<h5>$1</h5>');
+                
+                // Handle text formatting
+                htmlContent = htmlContent
                     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-                    .replace(/`(.+?)`/g, '<code>$1</code>')
-                    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')  // Images first
-                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')       // Then links
-                    .replace(/^- (.+)$/gm, '<li>$1</li>')
-                    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-                    .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>')
-                    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>')
-                    .replace(/\n\n/g, '</p><p>')
-                    .replace(/^(?!<[h1-6]|<ul|<ol|<pre|<script)(.+)$/gm, '<p>$1</p>')
-                    .replace(/<p><\/p>/g, '');
+                    .replace(/\*([^*]+?)\*/g, '<em>$1</em>')
+                    .replace(/`([^`]+?)`/g, '<code>$1</code>');
+                
+                // Handle images and links (images first to avoid conflicts)
+                htmlContent = htmlContent
+                    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;">')
+                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+                
+                // Handle lists - improved handling
+                htmlContent = htmlContent.replace(/^(\s*)-\s+(.+)$/gm, (match, indent, content) => {
+                    const level = Math.floor(indent.length / 2);
+                    return `<li data-level="${level}">${content}</li>`;
+                });
+                
+                // Wrap consecutive list items in ul tags
+                htmlContent = htmlContent.replace(/(<li[^>]*>.*?<\/li>\s*)+/gs, (match) => {
+                    return `<ul>${match}</ul>`;
+                });
+                
+                // Handle numbered lists
+                htmlContent = htmlContent.replace(/^(\s*)\d+\.\s+(.+)$/gm, (match, indent, content) => {
+                    const level = Math.floor(indent.length / 2);
+                    return `<li data-level="${level}">${content}</li>`;
+                });
+                
+                // Convert paragraphs - be more careful about existing HTML
+                const lines = htmlContent.split('\n');
+                let inList = false;
+                let result = [];
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    
+                    if (!line) {
+                        result.push('');
+                        continue;
+                    }
+                    
+                    // Check if line is already HTML
+                    if (line.startsWith('<') || line.includes('__CODE_BLOCK_')) {
+                        result.push(line);
+                        inList = line.includes('<li') || line.includes('<ul') || line.includes('<ol');
+                    } else if (!inList) {
+                        // Only wrap in paragraph if not already HTML and not in a list
+                        result.push(`<p>${line}</p>`);
+                    } else {
+                        result.push(line);
+                    }
+                }
+                
+                htmlContent = result.join('\n');
+                
+                // Restore code blocks
+                codeBlocks.forEach((block, index) => {
+                    htmlContent = htmlContent.replace(`__CODE_BLOCK_${index}__`, block);
+                });
+                
+                // Clean up empty paragraphs and fix common issues
+                htmlContent = htmlContent
+                    .replace(/<p><\/p>/g, '')
+                    .replace(/<p>(<[^>]+>)/g, '$1')  // Remove p tags around block elements
+                    .replace(/(<\/[^>]+>)<\/p>/g, '$1');  // Remove closing p tags after block elements
                 
                 // Replace the content
                 contentArea.innerHTML = htmlContent;
