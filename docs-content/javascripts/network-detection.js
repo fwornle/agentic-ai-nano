@@ -414,6 +414,20 @@
         }
     }
 
+    function cleanupNavigationState() {
+        // Clean up any corporate content markers and listeners that might interfere
+        if (!isCorporateContentPage()) {
+            document.body.classList.remove('corporate-content-active');
+            
+            // Remove corporate scroll listener if it exists
+            if (window.corporateScrollListener) {
+                window.removeEventListener('scroll', window.corporateScrollListener);
+                window.corporateScrollListener = null;
+                console.log('🧹 Cleaned up corporate scroll listener');
+            }
+        }
+    }
+
     // Initialize when DOM is ready and on every page load
     function runDetection() {
         // Prevent multiple simultaneous detections
@@ -433,6 +447,9 @@
             
             detectionInProgress = true;
             console.log('🔄 Starting fresh network detection...');
+            
+            // Clean up navigation state first
+            cleanupNavigationState();
             
             try {
                 initializeNetworkDetection();
@@ -721,6 +738,12 @@
     async function updateMkDocsNavigationForCorporateContent(contentMarkdown) {
         console.log('🔧 Updating MkDocs navigation for corporate content...');
         
+        // Guard: Only proceed if we're actually on a corporate content page
+        if (!isCorporateContentPage()) {
+            console.log('⚠️ Not on corporate content page, skipping navigation update');
+            return;
+        }
+        
         try {
             // Extract metadata from the content itself
             const contentMetadata = extractContentMetadata(contentMarkdown);
@@ -853,6 +876,13 @@
         return metadata;
     }
 
+    function isCorporateContentPage() {
+        return window.location.hash.includes('session10') || 
+               window.location.pathname.includes('/00_intro/coder/') ||
+               window.location.pathname.includes('/00_intro/llmapi/') ||
+               document.querySelector('main[data-corporate-content="true"]') !== null;
+    }
+
     function createCorporateContentSubNavigation(navItem, contentMetadata) {
         console.log(`🔧 Creating sub-navigation for ${contentMetadata.title || 'corporate content'}...`);
         
@@ -919,12 +949,17 @@
             
             console.log(`✅ Sub-navigation created with ${contentMetadata.sections.length} sections`);
             
-            // Set up scroll spy for corporate content
-            setupCorporateContentScrollSpy(subNavList, contentMetadata.sections);
+            // Only set up scroll spy for corporate content when explicitly confirmed
+            if (isCorporateContentPage()) {
+                setupCorporateContentScrollSpy(subNavList, contentMetadata.sections);
+            }
         }
         
         // Mark as corporate content for scroll spy detection
-        document.body.classList.add('corporate-content-active');
+        if (isCorporateContentPage()) {
+            document.body.classList.add('corporate-content-active');
+            console.log('🔧 Marked page as corporate content');
+        }
         
         // Expand the navigation and ensure visibility
         navItem.classList.add('md-nav__item--nested', 'md-nav__item--active', 'corporate-nav-item');
@@ -1041,8 +1076,10 @@
         }
         
         function onScroll() {
-            // Only process scroll events for corporate content
-            if (!isCorporateContentActive()) return;
+            // Double-check: Only process scroll events for corporate content
+            if (!isCorporateContentActive() || !isCorporateContentPage()) {
+                return;
+            }
             
             if (!ticking) {
                 requestAnimationFrame(updateActiveNavigation);
@@ -1055,11 +1092,15 @@
             window.removeEventListener('scroll', window.corporateScrollListener);
         }
         
-        // Store reference for cleanup
-        window.corporateScrollListener = onScroll;
-        
-        // Set up scroll listener only for corporate content
-        window.addEventListener('scroll', onScroll, { passive: true });
+        // Only set up scroll listener if we're definitely on corporate content
+        if (isCorporateContentPage()) {
+            // Store reference for cleanup
+            window.corporateScrollListener = onScroll;
+            window.addEventListener('scroll', onScroll, { passive: true });
+            console.log('✅ Corporate scroll listener activated');
+        } else {
+            console.log('⚠️ Skipping corporate scroll listener - not on corporate page');
+        }
         
         // Initial check
         updateActiveNavigation();
