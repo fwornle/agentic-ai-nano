@@ -172,20 +172,33 @@
             const currentPath = window.location.pathname;
             console.log('🔍 Current path:', currentPath);
             
+            // Corporate content mapping - only exact matches to prevent mismatches
+            const contentMapping = {
+                '/00_intro/coder/': '00_intro/coder-detailed.md',
+                '/00_intro/llmapi/': '00_intro/llmapi-detailed.md'
+            };
+            
             let targetFile = null;
-            if (currentPath.includes('/00_intro/coder/')) {
-                targetFile = '00_intro/coder-detailed.md';
-                console.log('📄 Matched coder page - will load corporate content');
-            } else if (currentPath.includes('/00_intro/llmapi/')) {
-                targetFile = '00_intro/llmapi-detailed.md';
-                console.log('📄 Matched llmapi page - will load corporate content');
-            } else if (currentPath.includes('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/') || 
-                       currentPath.includes('session10-corporate-only') ||
-                       currentPath.includes('Session9_Production_Agent_Deployment/Session10') ||
-                       window.location.hash.includes('session10')) {
+            
+            // Check for exact path matches first
+            for (const [path, file] of Object.entries(contentMapping)) {
+                if (currentPath.includes(path)) {
+                    targetFile = file;
+                    console.log(`📄 Matched ${path} - will load corporate content: ${file}`);
+                    break;
+                }
+            }
+            
+            // Special handling for Session 10 - create virtual page navigation
+            if (!targetFile && window.location.hash.includes('session10')) {
                 targetFile = '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md';
-                console.log('📄 Matched Session10 page - will load corporate content');
-            } else {
+                console.log('📄 Virtual Session 10 page requested via hash - will load corporate content');
+                // Navigate to proper Session 10 URL to maintain consistency
+                this.navigateToVirtualPage('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/', targetFile);
+                return; // Exit early, navigation will trigger reload
+            }
+            
+            if (!targetFile) {
                 console.log('📄 No corporate content mapping for path:', currentPath);
             }
             
@@ -208,19 +221,40 @@
         }
 
         /**
-         * Replaces the main page content with corporate markdown content
+         * Creates a virtual page navigation for Session 10
+         */
+        navigateToVirtualPage(virtualPath, contentFile) {
+            try {
+                console.log('🔄 Navigating to virtual page:', virtualPath);
+                
+                // Update browser URL without reload
+                const newUrl = `${window.location.origin}${virtualPath}`;
+                history.pushState({corporateContent: contentFile}, '', newUrl);
+                
+                // Replace content immediately
+                if (this.loadedContent[contentFile]) {
+                    this.replacePageContent(this.loadedContent[contentFile]);
+                    // Update navigation to match the new content
+                    this.updateNavigationState(contentFile);
+                }
+                
+                console.log('✅ Virtual navigation completed');
+            } catch (error) {
+                console.error('❌ Failed to navigate to virtual page:', error);
+            }
+        }
+
+        /**
+         * Replaces only the article content, preserving MkDocs navigation structure
          */
         async replacePageContent(markdownContent) {
             try {
-                // Use robust, generic selector hierarchy - try most specific first, fallback to more general
+                // Target only the actual article content, not the entire content area
                 const selectors = [
-                    '.md-content__inner .md-typeset',           // Primary MkDocs content area
-                    '.md-content__inner article',               // Article wrapper
-                    '.md-content__inner',                       // Content container
-                    '.md-content .md-typeset',                  // Alternative content area
-                    'article.md-typeset',                       // Direct article
-                    'main .md-typeset',                         // Main content typeset
-                    '[role="main"] .md-typeset'                 // ARIA main with typeset
+                    'article.md-typeset',                       // Direct article with content
+                    '.md-content__inner article',               // Article within content
+                    '.md-typeset > *',                          // Direct children of typeset
+                    '.md-content__inner .md-typeset'            // Fallback to typeset area
                 ];
                 
                 let contentArea = null;
@@ -233,14 +267,11 @@
                 }
                 
                 if (!contentArea) {
-                    console.error('❌ Could not find any content area to replace. Available elements:');
-                    console.log('Available .md-content elements:', document.querySelectorAll('.md-content'));
-                    console.log('Available .md-typeset elements:', document.querySelectorAll('.md-typeset'));
-                    console.log('Available article elements:', document.querySelectorAll('article'));
+                    console.error('❌ Could not find any content area to replace');
                     return;
                 }
                 
-                console.log('🔄 Replacing content area:', contentArea.className || contentArea.tagName);
+                console.log('🔄 Replacing minimal content area:', contentArea.tagName);
                 
                 // First, replace image references with base64 data URLs
                 let processedContent = await this.replaceImagesWithBase64(markdownContent);
@@ -360,8 +391,9 @@
                 // Update page title based on content
                 this.updatePageTitle(markdownContent);
                 
-                // Trigger MkDocs navigation highlighting update for all corporate content
-                this.triggerNavigationUpdate();
+                // Update navigation state to match corporate content
+                const contentFile = this.getCurrentContentFile();
+                this.updateNavigationState(contentFile);
                 
                 console.log('✅ Corporate content successfully injected with preserved structure');
                 
@@ -373,121 +405,119 @@
         /**
          * Triggers MkDocs navigation update for scroll highlighting
          */
-        triggerNavigationUpdate() {
+        updateNavigationState(contentFile) {
             try {
-                console.log('🔄 Triggering comprehensive MkDocs navigation update');
+                console.log('🔄 Updating navigation state for:', contentFile);
                 
-                // Force MkDocs to reprocess the page for navigation highlighting
-                if (window.document$) {
-                    // MkDocs Material uses observables - trigger update
-                    setTimeout(() => {
-                        const event = new Event('DOMContentLoaded', { bubbles: true });
-                        document.dispatchEvent(event);
-                    }, 100);
-                }
+                // Update sidebar highlighting based on content
+                this.updateSidebarForContent(contentFile);
                 
-                // Reinitialize table of contents for scroll highlighting
+                // Simple scroll highlighting re-initialization without breaking MkDocs
                 setTimeout(() => {
-                    this.initializeTableOfContents();
-                }, 150);
+                    // Just trigger a scroll event to activate any existing highlighting
+                    window.dispatchEvent(new Event('scroll', { bubbles: true }));
+                }, 100);
                 
-                // Trigger scroll event to activate highlighting
-                setTimeout(() => {
-                    window.dispatchEvent(new Event('scroll'));
-                    window.dispatchEvent(new Event('resize')); // Trigger layout recalculation
-                }, 300);
-                
-                // Force refresh of navigation state
-                setTimeout(() => {
-                    if (window.location$ && window.location$.next) {
-                        window.location$.next(window.location);
-                    }
-                }, 400);
-                
-                console.log('✅ MkDocs navigation update triggered with enhanced reinitialization');
+                console.log('✅ Navigation state updated');
             } catch (error) {
-                console.warn('⚠️ Could not trigger navigation update:', error);
+                console.warn('⚠️ Could not update navigation state:', error);
             }
         }
 
         /**
-         * Initializes table of contents for scroll highlighting
+         * Updates sidebar highlighting based on corporate content
          */
-        initializeTableOfContents() {
+        updateSidebarForContent(contentFile) {
             try {
-                // Find all headings in the content
-                const headings = document.querySelectorAll('.md-content__inner h1, .md-content__inner h2, .md-content__inner h3, .md-content__inner h4');
-                
-                if (headings.length === 0) {
-                    console.log('ℹ️ No headings found for table of contents');
-                    return;
-                }
-                
-                // Ensure headings have proper IDs for scroll highlighting
-                headings.forEach((heading, index) => {
-                    if (!heading.id) {
-                        const id = this.generateHeadingId(heading.textContent);
-                        heading.id = id;
-                        console.log(`📌 Added ID "${id}" to heading:`, heading.textContent.substring(0, 50));
-                    }
+                // Remove any existing active states
+                document.querySelectorAll('.md-nav__link--active, .md-nav__item--active').forEach(el => {
+                    el.classList.remove('md-nav__link--active', 'md-nav__item--active');
                 });
                 
-                // Find or create table of contents in sidebar
-                this.updateTableOfContents(headings);
+                // Determine which sidebar item should be highlighted
+                let targetText = '';
+                if (contentFile.includes('coder-detailed.md')) {
+                    targetText = 'Development Environment';
+                } else if (contentFile.includes('Session10_Enterprise_Integration_Production_Deployment.md')) {
+                    targetText = 'Enterprise Integration';
+                    // For Session 10, also create/update the navigation item
+                    this.ensureSession10Navigation();
+                }
                 
-                console.log('✅ Table of contents initialized with', headings.length, 'headings');
+                // Find and highlight the appropriate navigation item
+                if (targetText) {
+                    const navLinks = document.querySelectorAll('.md-nav__link');
+                    navLinks.forEach(link => {
+                        if (link.textContent.includes(targetText)) {
+                            link.classList.add('md-nav__link--active');
+                            const item = link.closest('.md-nav__item');
+                            if (item) {
+                                item.classList.add('md-nav__item--active');
+                            }
+                        }
+                    });
+                }
+                
+                console.log('✅ Sidebar highlighting updated for:', targetText);
             } catch (error) {
-                console.warn('⚠️ Could not initialize table of contents:', error);
+                console.warn('⚠️ Could not update sidebar highlighting:', error);
             }
         }
 
         /**
-         * Updates or creates table of contents in sidebar
+         * Ensures Session 10 appears in navigation when showing Session 10 content
          */
-        updateTableOfContents(headings) {
+        ensureSession10Navigation() {
             try {
-                // Look for existing TOC in sidebar
-                let tocContainer = document.querySelector('.md-sidebar--secondary .md-nav--secondary');
+                // Check if Session 10 nav item already exists
+                const existingSession10 = Array.from(document.querySelectorAll('.md-nav__link')).find(link => 
+                    link.textContent.includes('Session 10') || link.textContent.includes('Enterprise Integration')
+                );
                 
-                if (!tocContainer) {
-                    // Create TOC container if it doesn't exist
-                    const secondarySidebar = document.querySelector('.md-sidebar--secondary .md-sidebar__scrollwrap .md-sidebar__inner');
-                    if (secondarySidebar) {
-                        tocContainer = document.createElement('nav');
-                        tocContainer.className = 'md-nav md-nav--secondary';
-                        tocContainer.setAttribute('aria-label', 'Table of contents');
-                        secondarySidebar.appendChild(tocContainer);
+                if (!existingSession10) {
+                    // Find the Module 03 navigation area
+                    const module03Section = document.querySelector('[data-md-level="1"]:has(.md-nav__link[href*="mcp-acp-a2a"])');
+                    if (module03Section) {
+                        // Create Session 10 navigation item
+                        const session10Item = document.createElement('li');
+                        session10Item.className = 'md-nav__item md-nav__item--active';
+                        session10Item.innerHTML = `
+                            <a href="#" class="md-nav__link md-nav__link--active">
+                                <span class="md-ellipsis">Session 10 - Enterprise Integration</span>
+                            </a>
+                        `;
+                        
+                        // Add after other sessions
+                        const sessionItems = module03Section.querySelectorAll('.md-nav__item');
+                        if (sessionItems.length > 0) {
+                            sessionItems[sessionItems.length - 1].insertAdjacentElement('afterend', session10Item);
+                        }
+                        
+                        console.log('✅ Added Session 10 to navigation');
                     }
                 }
-                
-                if (tocContainer) {
-                    // Build TOC HTML
-                    let tocHTML = '<label class="md-nav__title" for="__toc">Table of contents</label><ul class="md-nav__list" data-md-scrollfix>';
-                    
-                    headings.forEach(heading => {
-                        const level = parseInt(heading.tagName.charAt(1));
-                        const text = heading.textContent.trim();
-                        const id = heading.id || this.generateHeadingId(text);
-                        const indent = level > 1 ? ' style="margin-left: ' + ((level - 1) * 12) + 'px;"' : '';
-                        
-                        tocHTML += `
-                            <li class="md-nav__item"${indent}>
-                                <a href="#${id}" class="md-nav__link">
-                                    <span class="md-ellipsis">${text}</span>
-                                </a>
-                            </li>`;
-                    });
-                    
-                    tocHTML += '</ul>';
-                    tocContainer.innerHTML = tocHTML;
-                    
-                    console.log('✅ Table of contents updated in sidebar');
-                } else {
-                    console.warn('⚠️ Could not find or create TOC container');
-                }
             } catch (error) {
-                console.warn('⚠️ Could not update table of contents:', error);
+                console.warn('⚠️ Could not ensure Session 10 navigation:', error);
             }
+        }
+
+
+        /**
+         * Gets the current content file being displayed
+         */
+        getCurrentContentFile() {
+            const currentPath = window.location.pathname;
+            
+            if (currentPath.includes('/00_intro/coder/')) {
+                return '00_intro/coder-detailed.md';
+            } else if (currentPath.includes('/00_intro/llmapi/')) {
+                return '00_intro/llmapi-detailed.md';
+            } else if (currentPath.includes('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/') || 
+                       window.location.hash.includes('session10')) {
+                return '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md';
+            }
+            
+            return null;
         }
 
         /**
