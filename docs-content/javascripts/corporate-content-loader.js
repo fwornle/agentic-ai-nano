@@ -169,7 +169,9 @@
                 targetFile = '00_intro/llmapi-detailed.md';
                 console.log('📄 Matched llmapi page - will load corporate content');
             } else if (currentPath.includes('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/') || 
-                       currentPath.includes('session10-corporate-only')) {
+                       currentPath.includes('session10-corporate-only') ||
+                       currentPath.includes('Session9_Production_Agent_Deployment/Session10') ||
+                       window.location.hash.includes('session10')) {
                 targetFile = '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md';
                 console.log('📄 Matched Session10 page - will load corporate content');
             } else {
