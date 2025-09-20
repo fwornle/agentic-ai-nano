@@ -212,21 +212,32 @@
          */
         async replacePageContent(markdownContent) {
             try {
-                // Find the most specific content area to preserve navigation and scroll highlighting
-                // Target only the inner content, not the entire article structure
-                const contentArea = document.querySelector('.md-content__inner .md-typeset') || 
-                                   document.querySelector('.md-content__inner article .md-typeset') ||
-                                   document.querySelector('.md-content__inner article') || 
-                                   document.querySelector('.md-content__inner') || 
-                                   document.querySelector('article') ||
-                                   document.querySelector('main');
+                // Determine the content type for proper navigation handling
+                const currentPath = window.location.pathname;
+                const isSession10 = currentPath.includes('/03_mcp-acp-a2a/Session9_Production_Agent_Deployment/') || 
+                                   window.location.hash.includes('session10');
+                const isCoderPage = currentPath.includes('/00_intro/coder/');
+                
+                // Find the most specific content area while preserving navigation structure
+                let contentArea;
+                if (isCoderPage) {
+                    // For coder page, be more conservative to preserve sidebar
+                    contentArea = document.querySelector('.md-content__inner article .md-typeset') ||
+                                 document.querySelector('.md-content__inner .md-typeset');
+                } else {
+                    // For Session 10, target the content more broadly
+                    contentArea = document.querySelector('.md-content__inner .md-typeset') || 
+                                 document.querySelector('.md-content__inner article .md-typeset') ||
+                                 document.querySelector('.md-content__inner article') || 
+                                 document.querySelector('.md-content__inner');
+                }
                 
                 if (!contentArea) {
                     console.error('Could not find main content area to replace');
                     return;
                 }
                 
-                console.log('🔄 Replacing content area while preserving MkDocs structure:', contentArea.className);
+                console.log('🔄 Replacing content area (Session10:', isSession10, 'Coder:', isCoderPage, '):', contentArea.className);
                 
                 // First, replace image references with base64 data URLs
                 let processedContent = await this.replaceImagesWithBase64(markdownContent);
@@ -343,6 +354,13 @@
                 // Fix navigation links within the injected content
                 this.fixNavigationLinks(contentArea);
                 
+                // Update navigation state for corporate content
+                if (isSession10) {
+                    this.updateNavigationForSession10();
+                } else if (isCoderPage) {
+                    this.updateNavigationForCoder();
+                }
+                
                 // Trigger MkDocs navigation highlighting update if available
                 this.triggerNavigationUpdate();
                 
@@ -358,6 +376,8 @@
          */
         triggerNavigationUpdate() {
             try {
+                console.log('🔄 Triggering comprehensive MkDocs navigation update');
+                
                 // Force MkDocs to reprocess the page for navigation highlighting
                 if (window.document$) {
                     // MkDocs Material uses observables - trigger update
@@ -367,14 +387,243 @@
                     }, 100);
                 }
                 
-                // Also trigger a scroll event to initialize highlighting
+                // Reinitialize table of contents for scroll highlighting
+                setTimeout(() => {
+                    this.initializeTableOfContents();
+                }, 150);
+                
+                // Trigger scroll event to activate highlighting
                 setTimeout(() => {
                     window.dispatchEvent(new Event('scroll'));
-                }, 200);
+                    window.dispatchEvent(new Event('resize')); // Trigger layout recalculation
+                }, 300);
                 
-                console.log('🔄 Triggered MkDocs navigation update for scroll highlighting');
+                // Force refresh of navigation state
+                setTimeout(() => {
+                    if (window.location$ && window.location$.next) {
+                        window.location$.next(window.location);
+                    }
+                }, 400);
+                
+                console.log('✅ MkDocs navigation update triggered with enhanced reinitialization');
             } catch (error) {
                 console.warn('⚠️ Could not trigger navigation update:', error);
+            }
+        }
+
+        /**
+         * Initializes table of contents for scroll highlighting
+         */
+        initializeTableOfContents() {
+            try {
+                // Find all headings in the content
+                const headings = document.querySelectorAll('.md-content__inner h1, .md-content__inner h2, .md-content__inner h3, .md-content__inner h4');
+                
+                if (headings.length === 0) {
+                    console.log('ℹ️ No headings found for table of contents');
+                    return;
+                }
+                
+                // Ensure headings have proper IDs for scroll highlighting
+                headings.forEach((heading, index) => {
+                    if (!heading.id) {
+                        const id = this.generateHeadingId(heading.textContent);
+                        heading.id = id;
+                        console.log(`📌 Added ID "${id}" to heading:`, heading.textContent.substring(0, 50));
+                    }
+                });
+                
+                // Find or create table of contents in sidebar
+                this.updateTableOfContents(headings);
+                
+                console.log('✅ Table of contents initialized with', headings.length, 'headings');
+            } catch (error) {
+                console.warn('⚠️ Could not initialize table of contents:', error);
+            }
+        }
+
+        /**
+         * Updates or creates table of contents in sidebar
+         */
+        updateTableOfContents(headings) {
+            try {
+                // Look for existing TOC in sidebar
+                let tocContainer = document.querySelector('.md-sidebar--secondary .md-nav--secondary');
+                
+                if (!tocContainer) {
+                    // Create TOC container if it doesn't exist
+                    const secondarySidebar = document.querySelector('.md-sidebar--secondary .md-sidebar__scrollwrap .md-sidebar__inner');
+                    if (secondarySidebar) {
+                        tocContainer = document.createElement('nav');
+                        tocContainer.className = 'md-nav md-nav--secondary';
+                        tocContainer.setAttribute('aria-label', 'Table of contents');
+                        secondarySidebar.appendChild(tocContainer);
+                    }
+                }
+                
+                if (tocContainer) {
+                    // Build TOC HTML
+                    let tocHTML = '<label class="md-nav__title" for="__toc">Table of contents</label><ul class="md-nav__list" data-md-scrollfix>';
+                    
+                    headings.forEach(heading => {
+                        const level = parseInt(heading.tagName.charAt(1));
+                        const text = heading.textContent.trim();
+                        const id = heading.id || this.generateHeadingId(text);
+                        const indent = level > 1 ? ' style="margin-left: ' + ((level - 1) * 12) + 'px;"' : '';
+                        
+                        tocHTML += `
+                            <li class="md-nav__item"${indent}>
+                                <a href="#${id}" class="md-nav__link">
+                                    <span class="md-ellipsis">${text}</span>
+                                </a>
+                            </li>`;
+                    });
+                    
+                    tocHTML += '</ul>';
+                    tocContainer.innerHTML = tocHTML;
+                    
+                    console.log('✅ Table of contents updated in sidebar');
+                } else {
+                    console.warn('⚠️ Could not find or create TOC container');
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not update table of contents:', error);
+            }
+        }
+
+        /**
+         * Updates navigation state for Session 10 corporate content
+         */
+        updateNavigationForSession10() {
+            try {
+                console.log('🔄 Updating navigation for Session 10 corporate content');
+                
+                // Update page title
+                document.title = 'Session 10: Enterprise Integration & Production Deployment - Agentic AI Nano-Degree';
+                
+                // Update header title if available
+                const headerTopic = document.querySelector('.md-header__topic[data-md-component="header-topic"] .md-ellipsis');
+                if (headerTopic) {
+                    headerTopic.textContent = 'Session 10: Enterprise Integration & Production Deployment';
+                }
+                
+                // Update navigation highlighting - remove active from Session 9 and add to Session 10
+                this.updateSidebarHighlighting('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/', 'Session 10');
+                
+                // Add Session 10 to navigation if not present
+                this.ensureSession10InNavigation();
+                
+                console.log('✅ Navigation state updated for Session 10');
+            } catch (error) {
+                console.warn('⚠️ Could not update Session 10 navigation:', error);
+            }
+        }
+
+        /**
+         * Updates navigation state for Coder corporate content
+         */
+        updateNavigationForCoder() {
+            try {
+                console.log('🔄 Updating navigation for Coder corporate content');
+                
+                // Update page title to reflect corporate environment
+                document.title = 'BMW Cloud Development Environment with Coder - Agentic AI Nano-Degree';
+                
+                // Update header title if available
+                const headerTopic = document.querySelector('.md-header__topic[data-md-component="header-topic"] .md-ellipsis');
+                if (headerTopic) {
+                    headerTopic.textContent = 'BMW Cloud Development Environment';
+                }
+                
+                // Ensure coder page is highlighted in sidebar
+                this.updateSidebarHighlighting('/00_intro/coder/', 'Development Environment');
+                
+                console.log('✅ Navigation state updated for Coder page');
+            } catch (error) {
+                console.warn('⚠️ Could not update Coder navigation:', error);
+            }
+        }
+
+        /**
+         * Updates sidebar highlighting for corporate content
+         */
+        updateSidebarHighlighting(targetPath, targetText) {
+            try {
+                // Remove active state from all navigation items
+                const allNavLinks = document.querySelectorAll('.md-nav__link');
+                allNavLinks.forEach(link => {
+                    link.classList.remove('md-nav__link--active');
+                    const item = link.closest('.md-nav__item');
+                    if (item) {
+                        item.classList.remove('md-nav__item--active');
+                    }
+                });
+
+                // Find and activate the target navigation item
+                let targetLink = null;
+                allNavLinks.forEach(link => {
+                    if (link.href && link.href.includes(targetPath)) {
+                        targetLink = link;
+                    } else if (link.textContent.trim().includes(targetText)) {
+                        targetLink = link;
+                    }
+                });
+
+                if (targetLink) {
+                    targetLink.classList.add('md-nav__link--active');
+                    const item = targetLink.closest('.md-nav__item');
+                    if (item) {
+                        item.classList.add('md-nav__item--active');
+                    }
+                    console.log('✅ Updated sidebar highlighting for:', targetText);
+                } else {
+                    console.warn('⚠️ Could not find navigation item for:', targetText);
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not update sidebar highlighting:', error);
+            }
+        }
+
+        /**
+         * Ensures Session 10 appears in Module 03 navigation
+         */
+        ensureSession10InNavigation() {
+            try {
+                // Look for Module 03 navigation section
+                const module03Nav = document.querySelector('.md-nav__item--nested');
+                if (!module03Nav) return;
+
+                // Check if Session 10 already exists
+                const existingSession10 = Array.from(document.querySelectorAll('.md-nav__link')).find(link => 
+                    link.textContent.includes('Session 10') || link.textContent.includes('Enterprise Integration')
+                );
+
+                if (!existingSession10) {
+                    // Find Session 9 to insert Session 10 after it
+                    const session9Link = Array.from(document.querySelectorAll('.md-nav__link')).find(link => 
+                        link.textContent.includes('Session 9') && link.href.includes('Session9_Production_Agent_Deployment')
+                    );
+
+                    if (session9Link) {
+                        const session9Item = session9Link.closest('.md-nav__item');
+                        if (session9Item) {
+                            // Create Session 10 navigation item
+                            const session10Item = document.createElement('li');
+                            session10Item.className = 'md-nav__item md-nav__item--active';
+                            session10Item.innerHTML = `
+                                <a href="#" class="md-nav__link md-nav__link--active">
+                                    <span class="md-ellipsis">Session 10 - Enterprise Integration</span>
+                                </a>
+                            `;
+
+                            // Insert after Session 9
+                            session9Item.parentNode.insertBefore(session10Item, session9Item.nextSibling);
+                            console.log('✅ Added Session 10 to navigation');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not ensure Session 10 in navigation:', error);
             }
         }
 
