@@ -572,7 +572,7 @@
         });
     }
 
-    function loadCorporateSession10() {
+    window.loadCorporateSession10 = function() {
         console.log('🔐 Loading corporate Session 10 content...');
         
         if (window.CorporateContentLoader && window.CorporateContentLoader.loadedContent) {
