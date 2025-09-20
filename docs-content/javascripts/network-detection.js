@@ -621,62 +621,305 @@
         // Prevent multiple loads of Session 10 content
         if (session10Loaded) {
             console.log('📄 Session 10 already loaded, skipping...');
-            return;
+            return true;
         }
         
-        // Check if corporate content loader exists
-        if (!window.CorporateContentLoader) {
-            console.error('❌ Corporate content loader not available');
-            return;
-        }
+        // Retry mechanism for improved reliability
+        const maxRetries = 3;
+        let retryCount = 0;
         
-        // If content is not loaded yet, try to load it first
-        if (!window.CorporateContentLoader.loadedContent) {
-            console.log('📥 Corporate content not loaded yet, loading now...');
+        while (retryCount < maxRetries) {
             try {
-                const loaded = await window.CorporateContentLoader.load();
-                if (!loaded) {
-                    console.error('❌ Failed to load corporate content');
-                    return;
+                console.log(`🔄 Attempt ${retryCount + 1}/${maxRetries} to load Session 10...`);
+                
+                // Check if corporate content loader exists
+                if (!window.CorporateContentLoader) {
+                    console.warn('⚠️ Corporate content loader not available, waiting...');
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    retryCount++;
+                    continue;
                 }
-                console.log('✅ Corporate content loaded successfully');
+                
+                // If content is not loaded yet, try to load it first
+                if (!window.CorporateContentLoader.loadedContent) {
+                    console.log('📥 Corporate content not loaded yet, loading now...');
+                    const loaded = await window.CorporateContentLoader.load();
+                    if (!loaded) {
+                        console.warn('⚠️ Failed to load corporate content, retrying...');
+                        retryCount++;
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        continue;
+                    }
+                    console.log('✅ Corporate content loaded successfully');
+                }
+                
+                // Now check for Session 10 content
+                const session10Content = window.CorporateContentLoader.loadedContent['03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'];
+                if (session10Content) {
+                    console.log('📄 Found Session 10 content, replacing page...');
+                    session10Loaded = true;
+                    
+                    // Update page title
+                    document.title = 'Session 10: Enterprise Integration & Production Deployment | Agentic AI Nano-Degree';
+                    
+                    // Update URL without causing page reload - use hash instead of path to avoid 404s
+                    if (history.pushState) {
+                        // Use hash-based navigation to avoid creating non-existent paths
+                        const baseUrl = window.location.pathname.replace(/#.*$/, '');
+                        const newUrl = baseUrl + '#session10-corporate-content';
+                        history.pushState({page: 'session10'}, '', newUrl);
+                    }
+                    
+                    // Replace page content
+                    await window.CorporateContentLoader.replacePageContent(session10Content);
+                    
+                    // Wait a bit for content to be injected, then update navigation
+                    setTimeout(() => {
+                        updateMkDocsNavigationForCorporateContent(session10Content);
+                    }, 100);
+                    
+                    // Instantly jump to top of the page after content is loaded
+                    setTimeout(() => {
+                        window.scrollTo(0, 0);
+                        console.log('📍 Jumped to top of Session 10 content');
+                    }, 200);
+                    
+                    console.log('✅ Session 10 corporate content loaded successfully');
+                    return true;
+                    
+                } else {
+                    console.warn('⚠️ Session 10 content not found in encrypted data, retrying...');
+                    console.log('Available content keys:', Object.keys(window.CorporateContentLoader.loadedContent || {}));
+                    retryCount++;
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    continue;
+                }
+                
             } catch (error) {
-                console.error('❌ Error loading corporate content:', error);
-                return;
+                console.warn(`⚠️ Error loading Session 10 (attempt ${retryCount + 1}):`, error);
+                retryCount++;
+                if (retryCount < maxRetries) {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
             }
         }
         
-        // Now check for Session 10 content
-        const session10Content = window.CorporateContentLoader.loadedContent['03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'];
-        if (session10Content) {
-            console.log('📄 Found Session 10 content, replacing page...');
-            session10Loaded = true;
+        console.error('❌ Failed to load Session 10 after all retries');
+        return false;
+    }
+
+    function updateMkDocsNavigationForCorporateContent(contentMarkdown) {
+        console.log('🔧 Updating MkDocs navigation for corporate content...');
+        
+        try {
+            // Extract metadata from the content itself
+            const contentMetadata = extractContentMetadata(contentMarkdown);
+            console.log('📄 Detected content metadata:', contentMetadata);
             
-            // Update page title
-            document.title = 'Session 10: Enterprise Integration & Production Deployment | Agentic AI Nano-Degree';
+            // Find any corporate content navigation item
+            const corporateNavItem = document.querySelector('a.bmw-corporate-link, a[href*="corporate"]')?.closest('.md-nav__item');
             
-            // Update URL without causing page reload - use hash instead of path to avoid 404s
-            if (history.pushState) {
-                // Use hash-based navigation to avoid creating non-existent paths
-                const baseUrl = window.location.pathname.replace(/#.*$/, '');
-                const newUrl = baseUrl + '#session10-corporate-content';
-                history.pushState({page: 'session10'}, '', newUrl);
+            if (corporateNavItem) {
+                // Remove active state from all navigation items
+                document.querySelectorAll('.md-nav__item').forEach(item => {
+                    item.classList.remove('md-nav__item--active');
+                    const link = item.querySelector('.md-nav__link');
+                    if (link) {
+                        link.classList.remove('md-nav__link--active');
+                    }
+                });
+                
+                // Activate corporate content navigation item
+                corporateNavItem.classList.add('md-nav__item--active');
+                const corporateLink = corporateNavItem.querySelector('.md-nav__link');
+                if (corporateLink) {
+                    corporateLink.classList.add('md-nav__link--active');
+                    // Update the link text to match current content
+                    if (contentMetadata.title) {
+                        corporateLink.textContent = contentMetadata.title;
+                    }
+                }
+                
+                // Create corporate content sub-navigation based on content structure
+                createCorporateContentSubNavigation(corporateNavItem, contentMetadata);
+                
+                // Scroll corporate content item into view in sidebar
+                corporateNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                console.log(`✅ MkDocs navigation updated for ${contentMetadata.title || 'corporate content'}`);
+            } else {
+                console.warn('⚠️ Corporate content navigation item not found');
             }
             
-            // Replace page content
-            window.CorporateContentLoader.replacePageContent(session10Content);
+            // Fix potential sidebar styling conflicts
+            fixSidebarStylingConflicts();
             
-            // Instantly jump to top of the page after content is loaded
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-                console.log('📍 Jumped to top of Session 10 content');
-            }, 100);
-            
-            console.log('✅ Session 10 corporate content loaded successfully');
-        } else {
-            console.error('❌ Session 10 content not found in encrypted data');
-            console.log('Available content keys:', Object.keys(window.CorporateContentLoader.loadedContent || {}));
+        } catch (error) {
+            console.error('❌ Failed to update MkDocs navigation for corporate content:', error);
         }
+    }
+
+    function extractContentMetadata(markdownContent) {
+        const metadata = {
+            title: null,
+            sections: [],
+            type: 'corporate-content'
+        };
+        
+        if (!markdownContent) return metadata;
+        
+        // Extract title from first H1
+        const titleMatch = markdownContent.match(/^#\s+(.+)$/m);
+        if (titleMatch) {
+            metadata.title = titleMatch[1].trim();
+        }
+        
+        // Extract sections from H2 and H3 headings
+        const headingMatches = markdownContent.match(/^#{2,3}\s+(.+)$/gm);
+        if (headingMatches) {
+            metadata.sections = headingMatches.map(heading => {
+                const level = (heading.match(/#/g) || []).length;
+                const title = heading.replace(/^#+\s+/, '').trim();
+                const id = title.toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .replace(/^-|-$/g, '');
+                
+                return {
+                    level,
+                    title,
+                    id: id || title.toLowerCase().replace(/\s+/g, '-'),
+                    href: `#${id || title.toLowerCase().replace(/\s+/g, '-')}`
+                };
+            });
+        }
+        
+        // Detect content type from title or content
+        if (metadata.title) {
+            if (metadata.title.includes('Session')) {
+                metadata.type = 'session';
+                // Extract session number if present
+                const sessionMatch = metadata.title.match(/Session\s*(\d+)/i);
+                if (sessionMatch) {
+                    metadata.sessionNumber = parseInt(sessionMatch[1]);
+                }
+            } else if (metadata.title.includes('Enterprise') || metadata.title.includes('Production')) {
+                metadata.type = 'enterprise-content';
+            }
+        }
+        
+        return metadata;
+    }
+
+    function createCorporateContentSubNavigation(navItem, contentMetadata) {
+        console.log(`🔧 Creating sub-navigation for ${contentMetadata.title || 'corporate content'}...`);
+        
+        // Remove any existing sub-navigation to rebuild with current content
+        const existingSubNav = navItem.querySelector('.md-nav');
+        if (existingSubNav) {
+            existingSubNav.remove();
+        }
+        
+        // Only create sub-navigation if we have sections
+        if (contentMetadata.sections && contentMetadata.sections.length > 0) {
+            // Create sub-navigation structure
+            const subNav = document.createElement('nav');
+            subNav.className = 'md-nav md-nav--secondary';
+            subNav.setAttribute('aria-label', `${contentMetadata.title || 'Corporate Content'} Navigation`);
+            
+            const subNavList = document.createElement('ul');
+            subNavList.className = 'md-nav__list';
+            
+            // Create navigation items from content sections
+            contentMetadata.sections.forEach(section => {
+                const listItem = document.createElement('li');
+                listItem.className = 'md-nav__item';
+                
+                const link = document.createElement('a');
+                link.href = section.href;
+                link.className = 'md-nav__link';
+                link.textContent = section.title;
+                
+                // Add appropriate nesting class for H3 items
+                if (section.level === 3) {
+                    listItem.classList.add('md-nav__item--nested');
+                }
+                
+                // Add smooth scroll behavior for anchor links
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = section.id;
+                    const targetElement = document.getElementById(targetId) || 
+                                         document.querySelector(`h${section.level}[id="${targetId}"]`) ||
+                                         findHeadingByText(section.title);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                        // Update URL hash
+                        history.pushState(null, '', section.href);
+                        
+                        // Update active state in sub-navigation
+                        subNavList.querySelectorAll('.md-nav__link').forEach(l => l.classList.remove('md-nav__link--active'));
+                        link.classList.add('md-nav__link--active');
+                    }
+                });
+                
+                listItem.appendChild(link);
+                subNavList.appendChild(listItem);
+            });
+            
+            subNav.appendChild(subNavList);
+            navItem.appendChild(subNav);
+            
+            console.log(`✅ Sub-navigation created with ${contentMetadata.sections.length} sections`);
+        }
+        
+        // Expand the navigation
+        navItem.classList.add('md-nav__item--nested', 'md-nav__item--active');
+    }
+
+    function findHeadingByText(text) {
+        // Helper function to find headings by text content
+        const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        for (const heading of headings) {
+            if (heading.textContent.trim().toLowerCase().includes(text.toLowerCase())) {
+                return heading;
+            }
+        }
+        return null;
+    }
+
+    function fixSidebarStylingConflicts() {
+        console.log('🔧 Fixing sidebar styling conflicts...');
+        
+        // Ensure sidebar scrolling works properly
+        const sidebar = document.querySelector('.md-sidebar--primary .md-sidebar__scrollwrap');
+        if (sidebar) {
+            sidebar.style.overflowY = 'auto';
+            sidebar.style.height = 'calc(100vh - 2.4rem)';
+        }
+        
+        // Fix potential z-index conflicts
+        const sidebarContainer = document.querySelector('.md-sidebar--primary');
+        if (sidebarContainer) {
+            sidebarContainer.style.zIndex = '3';
+        }
+        
+        // Ensure bottom navigation doesn't overlap
+        const bottomNav = document.querySelector('.md-footer');
+        if (bottomNav) {
+            bottomNav.style.position = 'relative';
+            bottomNav.style.zIndex = '1';
+        }
+        
+        // Fix any content overflow issues
+        const contentArea = document.querySelector('.md-content');
+        if (contentArea) {
+            contentArea.style.overflow = 'visible';
+        }
+        
+        console.log('✅ Sidebar styling conflicts fixed');
     }
 
     function hidePublicNavigationItems() {
