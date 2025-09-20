@@ -240,7 +240,8 @@
       "Bash(ssh:*)",
       "Bash(GH_HOST=github.com gh run list --limit 5)",
       "Bash(GH_HOST=github.com gh run view 17876889067)",
-      "Bash(GH_HOST=github.com gh run view --job=50839464664)"
+      "Bash(GH_HOST=github.com gh run view --job=50839464664)",
+      "Bash(GH_HOST=github.com gh run view --log --job=50855511166)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",

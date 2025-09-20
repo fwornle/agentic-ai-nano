@@ -9,11 +9,11 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-20T20:03:00Z - Updated path to premium-content
+    // Cache buster: 2025-09-20T20:18:00Z - Fixed: content.encrypted.json now in site root
     class CorporateContentLoader {
         constructor() {
-            // Use absolute path for GitHub Pages deployment
-            this.encryptedContentPath = '/agentic-ai-nano/premium-content/content.encrypted.json';
+            // Use absolute path for GitHub Pages deployment - content in site root
+            this.encryptedContentPath = '/agentic-ai-nano/content.encrypted.json';
             console.log('🔍 Corporate content path configured:', this.encryptedContentPath);
             console.log('🔍 Current pathname:', window.location.pathname);
             console.log('🔍 Current hostname:', window.location.hostname);
