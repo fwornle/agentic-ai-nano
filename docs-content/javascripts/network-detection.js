@@ -468,6 +468,16 @@
                 session10Loaded = false;
             }
             
+            // Clean up corporate content marker when navigating away from corporate pages
+            const isCorporatePage = url.includes('session10') || 
+                                  url.includes('/00_intro/coder/') || 
+                                  url.includes('corporate-only');
+            
+            if (!isCorporatePage) {
+                document.body.classList.remove('corporate-content-active');
+                console.log('🔧 Cleaned up corporate content marker');
+            }
+            
             setTimeout(runDetection, 100);
         }
     });
@@ -913,8 +923,11 @@
             setupCorporateContentScrollSpy(subNavList, contentMetadata.sections);
         }
         
+        // Mark as corporate content for scroll spy detection
+        document.body.classList.add('corporate-content-active');
+        
         // Expand the navigation and ensure visibility
-        navItem.classList.add('md-nav__item--nested', 'md-nav__item--active');
+        navItem.classList.add('md-nav__item--nested', 'md-nav__item--active', 'corporate-nav-item');
         
         // Make sure the navigation item is visible and expanded
         const navInput = navItem.querySelector('input[type="checkbox"]');
@@ -922,15 +935,38 @@
             navInput.checked = true;
         }
         
-        // Add explicit CSS to ensure visibility
-        navItem.style.display = '';
+        // Add explicit CSS to ensure visibility and prevent removal
+        navItem.style.display = 'block !important';
+        navItem.setAttribute('data-corporate-nav', 'true');
         const subNav = navItem.querySelector('.md-nav');
         if (subNav) {
-            subNav.style.display = '';
+            subNav.style.display = 'block !important';
             subNav.style.visibility = 'visible';
+            subNav.setAttribute('data-corporate-subnav', 'true');
         }
         
-        console.log('🔧 Navigation item expanded and made visible');
+        // Prevent navigation from being hidden by other scripts
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.hasAttribute('data-corporate-nav') || target.hasAttribute('data-corporate-subnav')) {
+                        if (target.style.display === 'none' || target.style.visibility === 'hidden') {
+                            console.log('🔧 Preventing corporate navigation from being hidden');
+                            target.style.display = 'block';
+                            target.style.visibility = 'visible';
+                        }
+                    }
+                }
+            });
+        });
+        
+        observer.observe(navItem, { attributes: true, subtree: true });
+        if (subNav) {
+            observer.observe(subNav, { attributes: true, subtree: true });
+        }
+        
+        console.log('🔧 Navigation item expanded and protected from hiding');
     }
 
     function findHeadingByText(text) {
@@ -949,14 +985,21 @@
         
         let ticking = false;
         let lastActiveSection = null;
+        let scrollSpyActive = false;
+        
+        function isCorporateContentActive() {
+            // Only activate scroll spy when we're viewing corporate content
+            return window.location.hash.includes('session10') || 
+                   window.location.pathname.includes('/00_intro/coder/') ||
+                   document.querySelector('.corporate-content-active') !== null;
+        }
         
         function updateActiveNavigation() {
-            if (!navList || !sections) return;
+            if (!navList || !sections || !isCorporateContentActive()) return;
             
             // Find which section is currently visible
             let activeSection = null;
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const windowHeight = window.innerHeight;
             
             // Check each section to find the currently visible one
             for (let i = sections.length - 1; i >= 0; i--) {
@@ -979,7 +1022,7 @@
             
             // Update navigation highlighting if section changed
             if (activeSection && activeSection.id !== lastActiveSection) {
-                // Remove active state from all nav links
+                // ONLY remove active state from corporate sub-navigation links, not main nav
                 navList.querySelectorAll('.md-nav__link').forEach(link => {
                     link.classList.remove('md-nav__link--active');
                 });
@@ -988,7 +1031,7 @@
                 const activeLink = navList.querySelector(`a[href="#${activeSection.id}"]`);
                 if (activeLink) {
                     activeLink.classList.add('md-nav__link--active');
-                    console.log(`🔍 Active section: ${activeSection.title}`);
+                    console.log(`🔍 Corporate active section: ${activeSection.title}`);
                 }
                 
                 lastActiveSection = activeSection.id;
@@ -998,19 +1041,30 @@
         }
         
         function onScroll() {
+            // Only process scroll events for corporate content
+            if (!isCorporateContentActive()) return;
+            
             if (!ticking) {
                 requestAnimationFrame(updateActiveNavigation);
                 ticking = true;
             }
         }
         
-        // Set up scroll listener
+        // Clean up any existing scroll listeners for corporate content
+        if (window.corporateScrollListener) {
+            window.removeEventListener('scroll', window.corporateScrollListener);
+        }
+        
+        // Store reference for cleanup
+        window.corporateScrollListener = onScroll;
+        
+        // Set up scroll listener only for corporate content
         window.addEventListener('scroll', onScroll, { passive: true });
         
         // Initial check
         updateActiveNavigation();
         
-        console.log('✅ Scroll spy setup complete for corporate content');
+        console.log('✅ Corporate content scroll spy setup complete');
     }
 
     function fixSidebarStylingConflicts() {
