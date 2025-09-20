@@ -236,7 +236,11 @@
       "Bash(git push:*)",
       "Bash(TRANSCRIPT_DEBUG=true TRANSCRIPT_SOURCE_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" timeout 30s node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --debug --timeframe=\"2025-09-18_0700-0900\" --search=\"_shared-styles.puml\")",
       "Bash(TRANSCRIPT_SOURCE_PROJECT=\"/Users/q284340/Agentic/nano-degree\" CODING_TOOLS_PATH=\"/Users/q284340/Agentic/coding\" timeout 60s node /Users/q284340/Agentic/coding/scripts/enhanced-transcript-monitor.js --debug --timeframe=\"2025-09-18_0800-0900\" --search=\"@startuml\")",
-      "Bash(git submodule:*)"
+      "Bash(git submodule:*)",
+      "Bash(ssh:*)",
+      "Bash(GH_HOST=github.com gh run list --limit 5)",
+      "Bash(GH_HOST=github.com gh run view 17876889067)",
+      "Bash(GH_HOST=github.com gh run view --job=50839464664)"
     ],
     "additionalDirectories": [
       "/Users/q284340/.claude-code",
