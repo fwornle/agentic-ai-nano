@@ -743,6 +743,11 @@
                 
                 attempts++;
                 console.log(`🔍 Navigation search attempt ${attempts}/${maxAttempts}, found:`, corporateNavItem);
+                
+                if (corporateNavItem) {
+                    console.log('🔍 Found nav item HTML:', corporateNavItem.outerHTML);
+                    console.log('🔍 Nav item classes:', corporateNavItem.className);
+                }
             }
             
             if (corporateNavItem) {
@@ -847,6 +852,10 @@
             existingSubNav.remove();
         }
         
+        // Debug content metadata
+        console.log('🔍 Content metadata for sub-navigation:', contentMetadata);
+        console.log('🔍 Available sections:', contentMetadata.sections);
+        
         // Only create sub-navigation if we have sections
         if (contentMetadata.sections && contentMetadata.sections.length > 0) {
             // Create sub-navigation structure
@@ -899,10 +908,29 @@
             navItem.appendChild(subNav);
             
             console.log(`✅ Sub-navigation created with ${contentMetadata.sections.length} sections`);
+            
+            // Set up scroll spy for corporate content
+            setupCorporateContentScrollSpy(subNavList, contentMetadata.sections);
         }
         
-        // Expand the navigation
+        // Expand the navigation and ensure visibility
         navItem.classList.add('md-nav__item--nested', 'md-nav__item--active');
+        
+        // Make sure the navigation item is visible and expanded
+        const navInput = navItem.querySelector('input[type="checkbox"]');
+        if (navInput) {
+            navInput.checked = true;
+        }
+        
+        // Add explicit CSS to ensure visibility
+        navItem.style.display = '';
+        const subNav = navItem.querySelector('.md-nav');
+        if (subNav) {
+            subNav.style.display = '';
+            subNav.style.visibility = 'visible';
+        }
+        
+        console.log('🔧 Navigation item expanded and made visible');
     }
 
     function findHeadingByText(text) {
@@ -914,6 +942,75 @@
             }
         }
         return null;
+    }
+
+    function setupCorporateContentScrollSpy(navList, sections) {
+        console.log('🔍 Setting up scroll spy for corporate content navigation...');
+        
+        let ticking = false;
+        let lastActiveSection = null;
+        
+        function updateActiveNavigation() {
+            if (!navList || !sections) return;
+            
+            // Find which section is currently visible
+            let activeSection = null;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            
+            // Check each section to find the currently visible one
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                const targetElement = document.getElementById(section.id) || 
+                                   document.querySelector(`h${section.level}[id="${section.id}"]`) ||
+                                   findHeadingByText(section.title);
+                
+                if (targetElement) {
+                    const rect = targetElement.getBoundingClientRect();
+                    const elementTop = rect.top + scrollTop;
+                    
+                    // Consider element active if it's within the viewport or just passed
+                    if (elementTop <= scrollTop + 100) {
+                        activeSection = section;
+                        break;
+                    }
+                }
+            }
+            
+            // Update navigation highlighting if section changed
+            if (activeSection && activeSection.id !== lastActiveSection) {
+                // Remove active state from all nav links
+                navList.querySelectorAll('.md-nav__link').forEach(link => {
+                    link.classList.remove('md-nav__link--active');
+                });
+                
+                // Add active state to current section's nav link
+                const activeLink = navList.querySelector(`a[href="#${activeSection.id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('md-nav__link--active');
+                    console.log(`🔍 Active section: ${activeSection.title}`);
+                }
+                
+                lastActiveSection = activeSection.id;
+            }
+            
+            ticking = false;
+        }
+        
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(updateActiveNavigation);
+                ticking = true;
+            }
+        }
+        
+        // Set up scroll listener
+        window.addEventListener('scroll', onScroll, { passive: true });
+        
+        // Initial check
+        updateActiveNavigation();
+        
+        console.log('✅ Scroll spy setup complete for corporate content');
     }
 
     function fixSidebarStylingConflicts() {
