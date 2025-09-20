@@ -645,6 +645,12 @@
                 // Replace page content
                 window.CorporateContentLoader.replacePageContent(session10Content);
                 
+                // Scroll to top of the page after content is loaded
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    console.log('📍 Scrolled to top of Session 10 content');
+                }, 100);
+                
                 console.log('✅ Session 10 corporate content loaded successfully');
             } else {
                 console.error('❌ Session 10 content not found in encrypted data');
