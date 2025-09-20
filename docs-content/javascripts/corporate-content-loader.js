@@ -12,7 +12,7 @@
     class CorporateContentLoader {
         constructor() {
             // Use absolute path for GitHub Pages deployment
-            this.encryptedContentPath = '/agentic-ai-nano/corporate-only/content.encrypted.json';
+            this.encryptedContentPath = '/agentic-ai-nano/business-content/content.encrypted.json';
             console.log('🔍 Corporate content path configured:', this.encryptedContentPath);
             console.log('🔍 Current pathname:', window.location.pathname);
             console.log('🔍 Current hostname:', window.location.hostname);
