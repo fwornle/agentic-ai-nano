@@ -212,8 +212,11 @@
          */
         async replacePageContent(markdownContent) {
             try {
-                // Find the main content area - be more specific to preserve sidebar
-                const contentArea = document.querySelector('.md-content__inner article') || 
+                // Find the most specific content area to preserve navigation and scroll highlighting
+                // Target only the inner content, not the entire article structure
+                const contentArea = document.querySelector('.md-content__inner .md-typeset') || 
+                                   document.querySelector('.md-content__inner article .md-typeset') ||
+                                   document.querySelector('.md-content__inner article') || 
                                    document.querySelector('.md-content__inner') || 
                                    document.querySelector('article') ||
                                    document.querySelector('main');
@@ -223,7 +226,7 @@
                     return;
                 }
                 
-                console.log('🔄 Replacing main content area with corporate content');
+                console.log('🔄 Replacing content area while preserving MkDocs structure:', contentArea.className);
                 
                 // First, replace image references with base64 data URLs
                 let processedContent = await this.replaceImagesWithBase64(markdownContent);
@@ -240,7 +243,7 @@
                     return `__CODE_BLOCK_${index}__`;
                 });
                 
-                // Handle headings with automatic ID generation for navigation
+                // Handle headings with automatic ID generation for navigation and scroll highlighting
                 htmlContent = htmlContent
                     .replace(/^# (.+)$/gm, (match, title) => {
                         const id = this.generateHeadingId(title);
@@ -329,16 +332,49 @@
                     .replace(/<p>(<[^>]+>)/g, '$1')  // Remove p tags around block elements
                     .replace(/(<\/[^>]+>)<\/p>/g, '$1');  // Remove closing p tags after block elements
                 
-                // Replace the content
+                // Replace the content while preserving essential structure
                 contentArea.innerHTML = htmlContent;
+                
+                // Ensure content has proper MkDocs classes for scroll highlighting
+                if (!contentArea.classList.contains('md-typeset')) {
+                    contentArea.classList.add('md-typeset');
+                }
                 
                 // Fix navigation links within the injected content
                 this.fixNavigationLinks(contentArea);
                 
-                console.log('✅ Corporate content successfully injected into page');
+                // Trigger MkDocs navigation highlighting update if available
+                this.triggerNavigationUpdate();
+                
+                console.log('✅ Corporate content successfully injected with preserved structure');
                 
             } catch (error) {
                 console.error('❌ Failed to replace page content:', error);
+            }
+        }
+
+        /**
+         * Triggers MkDocs navigation update for scroll highlighting
+         */
+        triggerNavigationUpdate() {
+            try {
+                // Force MkDocs to reprocess the page for navigation highlighting
+                if (window.document$) {
+                    // MkDocs Material uses observables - trigger update
+                    setTimeout(() => {
+                        const event = new Event('DOMContentLoaded', { bubbles: true });
+                        document.dispatchEvent(event);
+                    }, 100);
+                }
+                
+                // Also trigger a scroll event to initialize highlighting
+                setTimeout(() => {
+                    window.dispatchEvent(new Event('scroll'));
+                }, 200);
+                
+                console.log('🔄 Triggered MkDocs navigation update for scroll highlighting');
+            } catch (error) {
+                console.warn('⚠️ Could not trigger navigation update:', error);
             }
         }
 
