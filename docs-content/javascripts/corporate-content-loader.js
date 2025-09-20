@@ -18,6 +18,7 @@
             console.log('🔍 Current hostname:', window.location.hostname);
             this.corporateKey = 'bmw-corporate-network-2024-secure'; // Same as encryption script
             this.loadedContent = null;
+            this._isReplacingContent = false; // Flag to prevent duplicate content replacement
         }
 
         /**
@@ -249,6 +250,13 @@
          */
         async replacePageContent(markdownContent) {
             try {
+                // Prevent duplicate content replacement
+                if (this._isReplacingContent) {
+                    console.log('🔄 Content replacement already in progress, skipping duplicate call');
+                    return;
+                }
+                this._isReplacingContent = true;
+                
                 // Target only the actual article content, not the entire content area
                 const selectors = [
                     'article.md-typeset',                       // Direct article with content
@@ -399,6 +407,9 @@
                 
             } catch (error) {
                 console.error('❌ Failed to replace page content:', error);
+            } finally {
+                // Always reset the flag to allow future content replacements
+                this._isReplacingContent = false;
             }
         }
 
@@ -474,30 +485,71 @@
          */
         ensureSidebarVisible() {
             try {
-                // Check if sidebar exists and is hidden
+                // Log current sidebar state for debugging
                 const sidebar = document.querySelector('.md-sidebar.md-sidebar--primary');
                 if (sidebar) {
-                    // Remove any hidden states
-                    sidebar.style.display = '';
-                    sidebar.style.visibility = '';
+                    console.log('🔍 Current sidebar state:', {
+                        display: sidebar.style.display || 'default',
+                        visibility: sidebar.style.visibility || 'default',
+                        classes: sidebar.className,
+                        offsetWidth: sidebar.offsetWidth,
+                        offsetHeight: sidebar.offsetHeight
+                    });
+                    
+                    // Force visibility with multiple approaches
+                    sidebar.style.display = 'block';
+                    sidebar.style.visibility = 'visible';
+                    sidebar.style.opacity = '1';
+                    sidebar.style.transform = '';
+                    sidebar.style.left = '';
+                    sidebar.style.marginLeft = '';
                     sidebar.classList.remove('md-sidebar--hidden');
                     
-                    // Ensure the drawer checkbox is checked (for mobile view)
+                    // Apply force CSS with !important
+                    const forceStyle = 'display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; left: 0 !important;';
+                    sidebar.setAttribute('style', forceStyle);
+                    
+                    // Ensure drawer toggle is properly set
                     const drawerToggle = document.querySelector('[data-md-toggle="drawer"]');
                     if (drawerToggle && drawerToggle.type === 'checkbox') {
-                        drawerToggle.checked = false; // Unchecked means visible in desktop view
+                        console.log('🔍 Drawer toggle state:', drawerToggle.checked);
+                        drawerToggle.checked = false; // Unchecked shows sidebar
+                        drawerToggle.dispatchEvent(new Event('change', { bubbles: true }));
                     }
                     
-                    console.log('✅ Sidebar visibility ensured');
+                    // Force layout recalculation
+                    sidebar.offsetHeight; // Trigger reflow
+                    
+                    console.log('✅ Sidebar visibility forced - checking dimensions:', {
+                        offsetWidth: sidebar.offsetWidth,
+                        offsetHeight: sidebar.offsetHeight,
+                        computed: window.getComputedStyle(sidebar).display
+                    });
+                } else {
+                    console.warn('⚠️ Primary sidebar not found in DOM');
                 }
                 
-                // Also check secondary sidebar (TOC)
+                // Force show secondary sidebar (TOC)
                 const secondarySidebar = document.querySelector('.md-sidebar.md-sidebar--secondary');
                 if (secondarySidebar) {
-                    secondarySidebar.style.display = '';
-                    secondarySidebar.style.visibility = '';
-                    secondarySidebar.classList.remove('md-sidebar--hidden');
+                    const forceSecondaryStyle = 'display: block !important; visibility: visible !important; opacity: 1 !important;';
+                    secondarySidebar.setAttribute('style', forceSecondaryStyle);
                 }
+                
+                // Try to reinitialize Material theme if possible
+                setTimeout(() => {
+                    try {
+                        if (window.app && window.app.drawer) {
+                            window.app.drawer.reset();
+                        }
+                        // Force body class update to ensure proper layout
+                        document.body.classList.remove('md-sidebar--hidden');
+                        document.documentElement.classList.remove('md-sidebar--hidden');
+                    } catch (e) {
+                        console.log('Could not reinitialize Material theme:', e);
+                    }
+                }, 100);
+                
             } catch (error) {
                 console.warn('⚠️ Could not ensure sidebar visibility:', error);
             }
