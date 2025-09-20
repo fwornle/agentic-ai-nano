@@ -61,15 +61,23 @@ jobs:
           pip install mkdocs-minify-plugin
           pip install mkdocs-git-revision-date-localized-plugin
 
+      - name: Prepare corporate content for MkDocs build
+        run: |
+          echo "Preparing corporate content for inclusion in MkDocs build..."
+          # Remove git-related files from corporate content to avoid GitHub Pages exclusion
+          rm -rf docs-content/corporate-only/.git
+          rm -f docs-content/corporate-only/.gitmodules
+          echo "Corporate content prepared:"
+          ls -la docs-content/corporate-only/
+          echo "Checking for encrypted content:"
+          ls -la docs-content/corporate-only/content.encrypted.json
+
       - name: Build with MkDocs
         run: mkdocs build
 
       - name: Copy corporate content to built site
         run: |
           echo "Copying corporate-only directory to built site..."
-          # Remove git-related files from corporate content to avoid GitHub Pages exclusion
-          rm -rf docs-content/corporate-only/.git
-          rm -f docs-content/corporate-only/.gitmodules
           cp -r docs-content/corporate-only site/
           echo "Verifying corporate content was copied:"
           ls -la site/corporate-only/
@@ -82,6 +90,17 @@ jobs:
           touch site/.nojekyll
           echo "Verifying .nojekyll file was created:"
           ls -la site/.nojekyll
+
+      - name: Final verification before upload
+        run: |
+          echo "Final site structure before upload:"
+          ls -la site/
+          echo "Checking corporate content exists in final site:"
+          ls -la site/corporate-only/ || echo "WARNING: corporate-only directory not found"
+          echo "Checking encrypted content in final site:"
+          ls -la site/corporate-only/content.encrypted.json || echo "WARNING: content.encrypted.json not found"
+          echo "Verifying .nojekyll exists:"
+          ls -la site/.nojekyll || echo "WARNING: .nojekyll not found"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
