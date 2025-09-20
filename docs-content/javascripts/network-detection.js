@@ -9,6 +9,10 @@
     
     // Global variable to track corporate network status
     let isCorporateNetworkDetected = false;
+    
+    // Debounce mechanism to prevent multiple simultaneous detection cycles
+    let detectionInProgress = false;
+    let detectionTimeout = null;
 
     // BMW corporate network detection
     function isCorporateNetwork() {
@@ -413,9 +417,33 @@
 
     // Initialize when DOM is ready and on every page load
     function runDetection() {
-        // Reset detection state for fresh detection on each page
-        console.log('🔄 Starting fresh network detection...');
-        initializeNetworkDetection();
+        // Prevent multiple simultaneous detections
+        if (detectionInProgress) {
+            console.log('🔄 Detection already in progress, skipping...');
+            return;
+        }
+        
+        // Clear any pending detection
+        if (detectionTimeout) {
+            clearTimeout(detectionTimeout);
+        }
+        
+        // Debounce detection to prevent rapid successive calls
+        detectionTimeout = setTimeout(() => {
+            if (detectionInProgress) return;
+            
+            detectionInProgress = true;
+            console.log('🔄 Starting fresh network detection...');
+            
+            try {
+                initializeNetworkDetection();
+            } finally {
+                // Reset detection flag after a delay to allow for async operations
+                setTimeout(() => {
+                    detectionInProgress = false;
+                }, 2000);
+            }
+        }, 100);
     }
     
     // Initial run
@@ -435,6 +463,12 @@
         if (url !== lastUrl) {
             lastUrl = url;
             console.log('📍 URL changed to:', url);
+            
+            // Reset Session 10 loaded flag when navigating to different pages
+            if (!url.includes('session10-corporate') && !url.includes('Session10_Enterprise_Integration')) {
+                session10Loaded = false;
+            }
+            
             setTimeout(runDetection, 100);
         }
     });
@@ -461,6 +495,13 @@
     // Also listen for popstate
     window.addEventListener('popstate', () => {
         console.log('⬅️ Browser navigation detected');
+        
+        // Reset Session 10 loaded flag when navigating back/forward
+        const url = location.href;
+        if (!url.includes('session10-corporate') && !url.includes('Session10_Enterprise_Integration')) {
+            session10Loaded = false;
+        }
+        
         runDetection();
     });
 
@@ -572,20 +613,32 @@
         });
     }
 
+    // Track if Session 10 content is currently loaded to prevent multiple loads
+    let session10Loaded = false;
+    
     window.loadCorporateSession10 = function() {
         console.log('🔐 Loading corporate Session 10 content...');
+        
+        // Prevent multiple loads of Session 10 content
+        if (session10Loaded) {
+            console.log('📄 Session 10 already loaded, skipping...');
+            return;
+        }
         
         if (window.CorporateContentLoader && window.CorporateContentLoader.loadedContent) {
             const session10Content = window.CorporateContentLoader.loadedContent['03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'];
             if (session10Content) {
                 console.log('📄 Found Session 10 content, replacing page...');
+                session10Loaded = true;
                 
                 // Update page title
                 document.title = 'Session 10: Enterprise Integration & Production Deployment | Agentic AI Nano-Degree';
                 
-                // Update URL without causing page reload
+                // Update URL without causing page reload - use hash instead of path to avoid 404s
                 if (history.pushState) {
-                    const newUrl = window.location.pathname.replace(/[^/]*$/, 'Session10_Enterprise_Integration_Production_Deployment/');
+                    // Use hash-based navigation to avoid creating non-existent paths
+                    const baseUrl = window.location.pathname.replace(/#.*$/, '');
+                    const newUrl = baseUrl + '#session10-corporate-content';
                     history.pushState({page: 'session10'}, '', newUrl);
                 }
                 
@@ -638,6 +691,9 @@
                 listItem.remove();
             }
         });
+        
+        // Reset Session 10 loaded flag when switching to public mode
+        session10Loaded = false;
         
         // Update Session 9 next link to not point to Session 10
         const nextLinks = document.querySelectorAll('.md-footer__link--next');
