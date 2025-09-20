@@ -7,6 +7,56 @@
 (function() {
     'use strict';
     
+    // CONFIGURATION: Define which pages get corporate content treatment
+    const CORPORATE_CONTENT_PAGES = {
+        // Session 10 page
+        '/03_mcp-acp-a2a/Session9_Production_Agent_Deployment/': {
+            enabled: true,
+            hashTriggers: ['session10-corporate-only', 'session10-corporate-content'],
+            contentFile: '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'
+        },
+        // Coder setup page  
+        '/00_intro/coder/': {
+            enabled: true,
+            hashTriggers: [],
+            contentFile: '00_intro/coder-detailed.md'
+        }
+    };
+    
+    // Check if current page is configured for corporate content
+    function isPageConfiguredForCorporateContent() {
+        const currentPath = window.location.pathname;
+        const currentHash = window.location.hash;
+        
+        for (const [path, config] of Object.entries(CORPORATE_CONTENT_PAGES)) {
+            if (!config.enabled) continue;
+            
+            // Check if current path matches
+            if (currentPath.includes(path)) {
+                return true;
+            }
+            
+            // Check if hash triggers match
+            if (config.hashTriggers && config.hashTriggers.length > 0) {
+                for (const trigger of config.hashTriggers) {
+                    if (currentHash.includes(trigger)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    // Early exit if not on a corporate content page - ZERO interference
+    if (!isPageConfiguredForCorporateContent()) {
+        console.log('✅ Regular page detected - corporate content system disabled');
+        return; // Exit completely - no event listeners, no functions, nothing
+    }
+    
+    console.log('🏢 Corporate content page detected - initializing enhanced navigation');
+    
     // Global variable to track corporate network status
     let isCorporateNetworkDetected = false;
     
@@ -415,16 +465,12 @@
     }
 
     function cleanupNavigationState() {
-        // Clean up any corporate content markers and listeners that might interfere
-        if (!isCorporateContentPage()) {
-            document.body.classList.remove('corporate-content-active');
-            
-            // Remove corporate scroll listener if it exists
-            if (window.corporateScrollListener) {
-                window.removeEventListener('scroll', window.corporateScrollListener);
-                window.corporateScrollListener = null;
-                console.log('🧹 Cleaned up corporate scroll listener');
-            }
+        // Clean up any previous navigation state
+        // We're on a corporate page, so just reset for fresh setup
+        if (window.corporateScrollListener) {
+            window.removeEventListener('scroll', window.corporateScrollListener);
+            window.corporateScrollListener = null;
+            console.log('🧹 Cleaned up previous corporate scroll listener');
         }
     }
 
@@ -485,15 +531,8 @@
                 session10Loaded = false;
             }
             
-            // Clean up corporate content marker when navigating away from corporate pages
-            const isCorporatePage = url.includes('session10') || 
-                                  url.includes('/00_intro/coder/') || 
-                                  url.includes('corporate-only');
-            
-            if (!isCorporatePage) {
-                document.body.classList.remove('corporate-content-active');
-                console.log('🔧 Cleaned up corporate content marker');
-            }
+            // No cleanup needed - if we navigate away, the page will reload
+            // and our early exit will prevent this code from running
             
             setTimeout(runDetection, 100);
         }
@@ -738,11 +777,7 @@
     async function updateMkDocsNavigationForCorporateContent(contentMarkdown) {
         console.log('🔧 Updating MkDocs navigation for corporate content...');
         
-        // Guard: Only proceed if we're actually on a corporate content page
-        if (!isCorporateContentPage()) {
-            console.log('⚠️ Not on corporate content page, skipping navigation update');
-            return;
-        }
+        // No guard needed - we're already on a corporate content page if this runs
         
         try {
             // Extract metadata from the content itself
@@ -876,12 +911,6 @@
         return metadata;
     }
 
-    function isCorporateContentPage() {
-        return window.location.hash.includes('session10') || 
-               window.location.pathname.includes('/00_intro/coder/') ||
-               window.location.pathname.includes('/00_intro/llmapi/') ||
-               document.querySelector('main[data-corporate-content="true"]') !== null;
-    }
 
     function createCorporateContentSubNavigation(navItem, contentMetadata) {
         console.log(`🔧 Creating sub-navigation for ${contentMetadata.title || 'corporate content'}...`);
@@ -949,17 +978,13 @@
             
             console.log(`✅ Sub-navigation created with ${contentMetadata.sections.length} sections`);
             
-            // Only set up scroll spy for corporate content when explicitly confirmed
-            if (isCorporateContentPage()) {
-                setupCorporateContentScrollSpy(subNavList, contentMetadata.sections);
-            }
+            // Set up scroll spy for corporate content - we're already on a corporate page
+            setupCorporateContentScrollSpy(subNavList, contentMetadata.sections);
         }
         
         // Mark as corporate content for scroll spy detection
-        if (isCorporateContentPage()) {
-            document.body.classList.add('corporate-content-active');
-            console.log('🔧 Marked page as corporate content');
-        }
+        document.body.classList.add('corporate-content-active');
+        console.log('🔧 Marked page as corporate content');
         
         // Expand the navigation and ensure visibility
         navItem.classList.add('md-nav__item--nested', 'md-nav__item--active', 'corporate-nav-item');
@@ -1022,15 +1047,8 @@
         let lastActiveSection = null;
         let scrollSpyActive = false;
         
-        function isCorporateContentActive() {
-            // Only activate scroll spy when we're viewing corporate content
-            return window.location.hash.includes('session10') || 
-                   window.location.pathname.includes('/00_intro/coder/') ||
-                   document.querySelector('.corporate-content-active') !== null;
-        }
-        
         function updateActiveNavigation() {
-            if (!navList || !sections || !isCorporateContentActive()) return;
+            if (!navList || !sections) return;
             
             // Find which section is currently visible
             let activeSection = null;
@@ -1076,11 +1094,6 @@
         }
         
         function onScroll() {
-            // Double-check: Only process scroll events for corporate content
-            if (!isCorporateContentActive() || !isCorporateContentPage()) {
-                return;
-            }
-            
             if (!ticking) {
                 requestAnimationFrame(updateActiveNavigation);
                 ticking = true;
@@ -1092,15 +1105,10 @@
             window.removeEventListener('scroll', window.corporateScrollListener);
         }
         
-        // Only set up scroll listener if we're definitely on corporate content
-        if (isCorporateContentPage()) {
-            // Store reference for cleanup
-            window.corporateScrollListener = onScroll;
-            window.addEventListener('scroll', onScroll, { passive: true });
-            console.log('✅ Corporate scroll listener activated');
-        } else {
-            console.log('⚠️ Skipping corporate scroll listener - not on corporate page');
-        }
+        // Set up scroll listener for corporate content
+        window.corporateScrollListener = onScroll;
+        window.addEventListener('scroll', onScroll, { passive: true });
+        console.log('✅ Corporate scroll listener activated');
         
         // Initial check
         updateActiveNavigation();
