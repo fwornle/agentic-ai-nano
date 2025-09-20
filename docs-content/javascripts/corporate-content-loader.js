@@ -212,32 +212,35 @@
          */
         async replacePageContent(markdownContent) {
             try {
-                // Determine the content type for proper navigation handling
-                const currentPath = window.location.pathname;
-                const isSession10 = currentPath.includes('/03_mcp-acp-a2a/Session9_Production_Agent_Deployment/') || 
-                                   window.location.hash.includes('session10');
-                const isCoderPage = currentPath.includes('/00_intro/coder/');
+                // Use robust, generic selector hierarchy - try most specific first, fallback to more general
+                const selectors = [
+                    '.md-content__inner .md-typeset',           // Primary MkDocs content area
+                    '.md-content__inner article',               // Article wrapper
+                    '.md-content__inner',                       // Content container
+                    '.md-content .md-typeset',                  // Alternative content area
+                    'article.md-typeset',                       // Direct article
+                    'main .md-typeset',                         // Main content typeset
+                    '[role="main"] .md-typeset'                 // ARIA main with typeset
+                ];
                 
-                // Find the most specific content area while preserving navigation structure
-                let contentArea;
-                if (isCoderPage) {
-                    // For coder page, be more conservative to preserve sidebar
-                    contentArea = document.querySelector('.md-content__inner article .md-typeset') ||
-                                 document.querySelector('.md-content__inner .md-typeset');
-                } else {
-                    // For Session 10, target the content more broadly
-                    contentArea = document.querySelector('.md-content__inner .md-typeset') || 
-                                 document.querySelector('.md-content__inner article .md-typeset') ||
-                                 document.querySelector('.md-content__inner article') || 
-                                 document.querySelector('.md-content__inner');
+                let contentArea = null;
+                for (const selector of selectors) {
+                    contentArea = document.querySelector(selector);
+                    if (contentArea) {
+                        console.log('✅ Found content area using selector:', selector);
+                        break;
+                    }
                 }
                 
                 if (!contentArea) {
-                    console.error('Could not find main content area to replace');
+                    console.error('❌ Could not find any content area to replace. Available elements:');
+                    console.log('Available .md-content elements:', document.querySelectorAll('.md-content'));
+                    console.log('Available .md-typeset elements:', document.querySelectorAll('.md-typeset'));
+                    console.log('Available article elements:', document.querySelectorAll('article'));
                     return;
                 }
                 
-                console.log('🔄 Replacing content area (Session10:', isSession10, 'Coder:', isCoderPage, '):', contentArea.className);
+                console.log('🔄 Replacing content area:', contentArea.className || contentArea.tagName);
                 
                 // First, replace image references with base64 data URLs
                 let processedContent = await this.replaceImagesWithBase64(markdownContent);
@@ -354,14 +357,10 @@
                 // Fix navigation links within the injected content
                 this.fixNavigationLinks(contentArea);
                 
-                // Update navigation state for corporate content
-                if (isSession10) {
-                    this.updateNavigationForSession10();
-                } else if (isCoderPage) {
-                    this.updateNavigationForCoder();
-                }
+                // Update page title based on content
+                this.updatePageTitle(markdownContent);
                 
-                // Trigger MkDocs navigation highlighting update if available
+                // Trigger MkDocs navigation highlighting update for all corporate content
                 this.triggerNavigationUpdate();
                 
                 console.log('✅ Corporate content successfully injected with preserved structure');
@@ -492,140 +491,29 @@
         }
 
         /**
-         * Updates navigation state for Session 10 corporate content
+         * Updates page title and header based on content
          */
-        updateNavigationForSession10() {
+        updatePageTitle(content) {
             try {
-                console.log('🔄 Updating navigation for Session 10 corporate content');
-                
-                // Update page title
-                document.title = 'Session 10: Enterprise Integration & Production Deployment - Agentic AI Nano-Degree';
-                
-                // Update header title if available
-                const headerTopic = document.querySelector('.md-header__topic[data-md-component="header-topic"] .md-ellipsis');
-                if (headerTopic) {
-                    headerTopic.textContent = 'Session 10: Enterprise Integration & Production Deployment';
+                // Extract first H1 heading from content for dynamic title
+                const h1Match = content.match(/^#\s+(.+)$/m);
+                if (h1Match) {
+                    const pageTitle = h1Match[1].trim();
+                    document.title = `${pageTitle} - Agentic AI Nano-Degree`;
+                    
+                    // Update header title if available
+                    const headerTopic = document.querySelector('.md-header__topic[data-md-component="header-topic"] .md-ellipsis');
+                    if (headerTopic) {
+                        headerTopic.textContent = pageTitle;
+                    }
+                    
+                    console.log('✅ Page title updated:', pageTitle);
                 }
-                
-                // Update navigation highlighting - remove active from Session 9 and add to Session 10
-                this.updateSidebarHighlighting('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/', 'Session 10');
-                
-                // Add Session 10 to navigation if not present
-                this.ensureSession10InNavigation();
-                
-                console.log('✅ Navigation state updated for Session 10');
             } catch (error) {
-                console.warn('⚠️ Could not update Session 10 navigation:', error);
+                console.warn('⚠️ Could not update page title:', error);
             }
         }
 
-        /**
-         * Updates navigation state for Coder corporate content
-         */
-        updateNavigationForCoder() {
-            try {
-                console.log('🔄 Updating navigation for Coder corporate content');
-                
-                // Update page title to reflect corporate environment
-                document.title = 'BMW Cloud Development Environment with Coder - Agentic AI Nano-Degree';
-                
-                // Update header title if available
-                const headerTopic = document.querySelector('.md-header__topic[data-md-component="header-topic"] .md-ellipsis');
-                if (headerTopic) {
-                    headerTopic.textContent = 'BMW Cloud Development Environment';
-                }
-                
-                // Ensure coder page is highlighted in sidebar
-                this.updateSidebarHighlighting('/00_intro/coder/', 'Development Environment');
-                
-                console.log('✅ Navigation state updated for Coder page');
-            } catch (error) {
-                console.warn('⚠️ Could not update Coder navigation:', error);
-            }
-        }
-
-        /**
-         * Updates sidebar highlighting for corporate content
-         */
-        updateSidebarHighlighting(targetPath, targetText) {
-            try {
-                // Remove active state from all navigation items
-                const allNavLinks = document.querySelectorAll('.md-nav__link');
-                allNavLinks.forEach(link => {
-                    link.classList.remove('md-nav__link--active');
-                    const item = link.closest('.md-nav__item');
-                    if (item) {
-                        item.classList.remove('md-nav__item--active');
-                    }
-                });
-
-                // Find and activate the target navigation item
-                let targetLink = null;
-                allNavLinks.forEach(link => {
-                    if (link.href && link.href.includes(targetPath)) {
-                        targetLink = link;
-                    } else if (link.textContent.trim().includes(targetText)) {
-                        targetLink = link;
-                    }
-                });
-
-                if (targetLink) {
-                    targetLink.classList.add('md-nav__link--active');
-                    const item = targetLink.closest('.md-nav__item');
-                    if (item) {
-                        item.classList.add('md-nav__item--active');
-                    }
-                    console.log('✅ Updated sidebar highlighting for:', targetText);
-                } else {
-                    console.warn('⚠️ Could not find navigation item for:', targetText);
-                }
-            } catch (error) {
-                console.warn('⚠️ Could not update sidebar highlighting:', error);
-            }
-        }
-
-        /**
-         * Ensures Session 10 appears in Module 03 navigation
-         */
-        ensureSession10InNavigation() {
-            try {
-                // Look for Module 03 navigation section
-                const module03Nav = document.querySelector('.md-nav__item--nested');
-                if (!module03Nav) return;
-
-                // Check if Session 10 already exists
-                const existingSession10 = Array.from(document.querySelectorAll('.md-nav__link')).find(link => 
-                    link.textContent.includes('Session 10') || link.textContent.includes('Enterprise Integration')
-                );
-
-                if (!existingSession10) {
-                    // Find Session 9 to insert Session 10 after it
-                    const session9Link = Array.from(document.querySelectorAll('.md-nav__link')).find(link => 
-                        link.textContent.includes('Session 9') && link.href.includes('Session9_Production_Agent_Deployment')
-                    );
-
-                    if (session9Link) {
-                        const session9Item = session9Link.closest('.md-nav__item');
-                        if (session9Item) {
-                            // Create Session 10 navigation item
-                            const session10Item = document.createElement('li');
-                            session10Item.className = 'md-nav__item md-nav__item--active';
-                            session10Item.innerHTML = `
-                                <a href="#" class="md-nav__link md-nav__link--active">
-                                    <span class="md-ellipsis">Session 10 - Enterprise Integration</span>
-                                </a>
-                            `;
-
-                            // Insert after Session 9
-                            session9Item.parentNode.insertBefore(session10Item, session9Item.nextSibling);
-                            console.log('✅ Added Session 10 to navigation');
-                        }
-                    }
-                }
-            } catch (error) {
-                console.warn('⚠️ Could not ensure Session 10 in navigation:', error);
-            }
-        }
 
         /**
          * Replaces image references in markdown with base64 data URLs from encrypted content
