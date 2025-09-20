@@ -176,16 +176,14 @@
         
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         console.log(`Found ${corporateElements.length} corporate elements to show`);
-        corporateElements.forEach((element, index) => {
-            console.log(`Corporate element ${index}:`, element.tagName, element.className);
+        corporateElements.forEach((element) => {
             element.classList.add('show-corporate');
             element.classList.add('corporate-network-detected');
         });
 
         const publicElements = document.querySelectorAll('.bmw-public-alternative');
         console.log(`Found ${publicElements.length} public elements to hide`);
-        publicElements.forEach((element, index) => {
-            console.log(`Public element ${index}:`, element.tagName, element.className);
+        publicElements.forEach((element) => {
             element.classList.add('hide-public');
         });
 
@@ -195,14 +193,15 @@
 
         console.log('🏢 Corporate mode: BMW content enabled');
         
-        // Load encrypted corporate content if available
+        // Load encrypted corporate content if available and needed
         if (window.CorporateContentLoader) {
-            console.log('🔐 Loading encrypted corporate content...');
             try {
-                await window.CorporateContentLoader.load();
-                console.log('✅ Corporate content decrypted and loaded');
+                const loaded = await window.CorporateContentLoader.load();
+                if (loaded) {
+                    console.log('✅ Corporate content decrypted and loaded');
+                }
             } catch (error) {
-                console.error('❌ Failed to load encrypted content:', error);
+                console.warn('⚠️ Corporate content not available:', error.message);
             }
         }
 
@@ -645,10 +644,10 @@
                 // Replace page content
                 window.CorporateContentLoader.replacePageContent(session10Content);
                 
-                // Scroll to top of the page after content is loaded
+                // Instantly jump to top of the page after content is loaded
                 setTimeout(() => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    console.log('📍 Scrolled to top of Session 10 content');
+                    window.scrollTo(0, 0);
+                    console.log('📍 Jumped to top of Session 10 content');
                 }, 100);
                 
                 console.log('✅ Session 10 corporate content loaded successfully');
