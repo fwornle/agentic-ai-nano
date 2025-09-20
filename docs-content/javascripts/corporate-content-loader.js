@@ -15,6 +15,8 @@
             const basePath = window.location.pathname.includes('/agentic-ai-nano/') ? 
                 '/agentic-ai-nano/corporate-only/' : '../corporate-only/';
             this.encryptedContentPath = basePath + 'content.encrypted.json';
+            console.log('🔍 Corporate content path:', this.encryptedContentPath);
+            console.log('🔍 Current pathname:', window.location.pathname);
             this.corporateKey = 'bmw-corporate-network-2024-secure'; // Same as encryption script
             this.loadedContent = null;
         }
@@ -85,10 +87,35 @@
             try {
                 console.log('🔐 Loading encrypted corporate content...');
                 
-                // Fetch encrypted content manifest
-                const response = await fetch(this.encryptedContentPath);
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch encrypted content: ${response.status}`);
+                // Try multiple potential paths for encrypted content
+                const potentialPaths = [
+                    this.encryptedContentPath,
+                    '/agentic-ai-nano/corporate-only/content.encrypted.json',
+                    'corporate-only/content.encrypted.json',
+                    '../corporate-only/content.encrypted.json'
+                ];
+                
+                let response = null;
+                let workingPath = null;
+                
+                for (const path of potentialPaths) {
+                    try {
+                        console.log(`🔍 Trying path: ${path}`);
+                        response = await fetch(path);
+                        if (response.ok) {
+                            workingPath = path;
+                            console.log(`✅ Found content at: ${path}`);
+                            break;
+                        } else {
+                            console.log(`❌ Failed ${path}: ${response.status}`);
+                        }
+                    } catch (e) {
+                        console.log(`❌ Error ${path}:`, e.message);
+                    }
+                }
+                
+                if (!response || !response.ok) {
+                    throw new Error(`Failed to fetch encrypted content from any path. Tried: ${potentialPaths.join(', ')}`);
                 }
 
                 const manifest = await response.json();
