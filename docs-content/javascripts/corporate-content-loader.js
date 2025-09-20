@@ -429,6 +429,9 @@
          */
         updateSidebarForContent(contentFile) {
             try {
+                // First, ensure sidebar is visible (especially important for coder page)
+                this.ensureSidebarVisible();
+                
                 // Remove any existing active states
                 document.querySelectorAll('.md-nav__link--active, .md-nav__item--active').forEach(el => {
                     el.classList.remove('md-nav__link--active', 'md-nav__item--active');
@@ -438,6 +441,8 @@
                 let targetText = '';
                 if (contentFile.includes('coder-detailed.md')) {
                     targetText = 'Development Environment';
+                    // For the coder page, ensure we're in the correct navigation context
+                    this.ensureCoderPageNavigation();
                 } else if (contentFile.includes('Session10_Enterprise_Integration_Production_Deployment.md')) {
                     targetText = 'Enterprise Integration';
                     // For Session 10, also create/update the navigation item
@@ -461,6 +466,68 @@
                 console.log('✅ Sidebar highlighting updated for:', targetText);
             } catch (error) {
                 console.warn('⚠️ Could not update sidebar highlighting:', error);
+            }
+        }
+        
+        /**
+         * Ensures the sidebar is visible and properly displayed
+         */
+        ensureSidebarVisible() {
+            try {
+                // Check if sidebar exists and is hidden
+                const sidebar = document.querySelector('.md-sidebar.md-sidebar--primary');
+                if (sidebar) {
+                    // Remove any hidden states
+                    sidebar.style.display = '';
+                    sidebar.style.visibility = '';
+                    sidebar.classList.remove('md-sidebar--hidden');
+                    
+                    // Ensure the drawer checkbox is checked (for mobile view)
+                    const drawerToggle = document.querySelector('[data-md-toggle="drawer"]');
+                    if (drawerToggle && drawerToggle.type === 'checkbox') {
+                        drawerToggle.checked = false; // Unchecked means visible in desktop view
+                    }
+                    
+                    console.log('✅ Sidebar visibility ensured');
+                }
+                
+                // Also check secondary sidebar (TOC)
+                const secondarySidebar = document.querySelector('.md-sidebar.md-sidebar--secondary');
+                if (secondarySidebar) {
+                    secondarySidebar.style.display = '';
+                    secondarySidebar.style.visibility = '';
+                    secondarySidebar.classList.remove('md-sidebar--hidden');
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not ensure sidebar visibility:', error);
+            }
+        }
+        
+        /**
+         * Ensures proper navigation context for the coder page
+         */
+        ensureCoderPageNavigation() {
+            try {
+                // Find the "Setup & Environment" section in navigation
+                const setupSection = Array.from(document.querySelectorAll('.md-nav__link')).find(link =>
+                    link.textContent.includes('Setup & Environment') || 
+                    link.textContent.includes('Getting Started')
+                );
+                
+                if (setupSection) {
+                    // Expand the parent section if needed
+                    const parentItem = setupSection.closest('.md-nav__item');
+                    if (parentItem) {
+                        const toggle = parentItem.querySelector('[data-md-toggle]');
+                        if (toggle && toggle.type === 'checkbox') {
+                            toggle.checked = true; // Expand the section
+                        }
+                    }
+                }
+                
+                console.log('✅ Coder page navigation context set');
+            } catch (error) {
+                console.warn('⚠️ Could not set coder page navigation:', error);
             }
         }
 
@@ -704,11 +771,17 @@
                     } else if (href.startsWith('http://') || href.startsWith('https://')) {
                         // External links - keep as is
                         console.log(`  External link - keeping as is: ${href}`);
-                    } else if (href.includes('Session9_Production_Agent_Deployment')) {
+                    } else if (href.includes('Session9_Production_Agent_Deployment') || href.includes('Session9')) {
                         // Session 9 navigation - fix to work with current structure
-                        const session9Url = '/agentic-ai-nano/03_mcp-acp-a2a/Session9_Production_Agent_Deployment/Session9_Production_Agent_Deployment.md';
+                        // Use the correct HTML path
+                        const session9Url = '/agentic-ai-nano/03_mcp-acp-a2a/Session9_Production_Agent_Deployment/';
                         link.setAttribute('href', session9Url);
                         console.log(`  Fixed Session 9 link: ${href} -> ${session9Url}`);
+                    } else if (href.includes('Session8')) {
+                        // Session 8 navigation - ensure correct path
+                        const session8Url = '/agentic-ai-nano/03_mcp-acp-a2a/Session8_Advanced_Agent_Workflows/';
+                        link.setAttribute('href', session8Url);
+                        console.log(`  Fixed Session 8 link: ${href} -> ${session8Url}`);
                     } else if (href.startsWith('../') || href.startsWith('./')) {
                         // Relative links - convert to absolute based on site structure
                         let absoluteHref = href;
