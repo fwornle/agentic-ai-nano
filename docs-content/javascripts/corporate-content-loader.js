@@ -239,13 +239,28 @@
                     return `__CODE_BLOCK_${index}__`;
                 });
                 
-                // Handle headings
+                // Handle headings with automatic ID generation for navigation
                 htmlContent = htmlContent
-                    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-                    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-                    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-                    .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
-                    .replace(/^##### (.+)$/gm, '<h5>$1</h5>');
+                    .replace(/^# (.+)$/gm, (match, title) => {
+                        const id = this.generateHeadingId(title);
+                        return `<h1 id="${id}">${title}</h1>`;
+                    })
+                    .replace(/^## (.+)$/gm, (match, title) => {
+                        const id = this.generateHeadingId(title);
+                        return `<h2 id="${id}">${title}</h2>`;
+                    })
+                    .replace(/^### (.+)$/gm, (match, title) => {
+                        const id = this.generateHeadingId(title);
+                        return `<h3 id="${id}">${title}</h3>`;
+                    })
+                    .replace(/^#### (.+)$/gm, (match, title) => {
+                        const id = this.generateHeadingId(title);
+                        return `<h4 id="${id}">${title}</h4>`;
+                    })
+                    .replace(/^##### (.+)$/gm, (match, title) => {
+                        const id = this.generateHeadingId(title);
+                        return `<h5 id="${id}">${title}</h5>`;
+                    });
                 
                 // Handle text formatting
                 htmlContent = htmlContent
@@ -436,6 +451,17 @@
                     console.error(`Failed to inject image ${filePath}:`, error);
                 }
             });
+        }
+
+        /**
+         * Generates consistent heading IDs for navigation
+         */
+        generateHeadingId(title) {
+            return title.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
         }
 
         /**
