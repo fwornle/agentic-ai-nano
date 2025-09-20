@@ -101,9 +101,10 @@
          */
         async load() {
             try {
-                // Don't load if already loaded to reduce redundant requests
+                // If content is already loaded, check if current page needs content replacement
                 if (this.loadedContent) {
-                    console.log('🔐 Corporate content already loaded, using cached version');
+                    console.log('🔐 Corporate content already loaded, checking if page needs replacement...');
+                    await this.injectDecryptedContent();
                     return true;
                 }
                 

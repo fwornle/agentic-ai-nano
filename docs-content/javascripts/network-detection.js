@@ -674,8 +674,8 @@
                     await window.CorporateContentLoader.replacePageContent(session10Content);
                     
                     // Wait a bit for content to be injected, then update navigation
-                    setTimeout(() => {
-                        updateMkDocsNavigationForCorporateContent(session10Content);
+                    setTimeout(async () => {
+                        await updateMkDocsNavigationForCorporateContent(session10Content);
                     }, 100);
                     
                     // Instantly jump to top of the page after content is loaded
@@ -708,7 +708,7 @@
         return false;
     }
 
-    function updateMkDocsNavigationForCorporateContent(contentMarkdown) {
+    async function updateMkDocsNavigationForCorporateContent(contentMarkdown) {
         console.log('🔧 Updating MkDocs navigation for corporate content...');
         
         try {
@@ -716,8 +716,34 @@
             const contentMetadata = extractContentMetadata(contentMarkdown);
             console.log('📄 Detected content metadata:', contentMetadata);
             
-            // Find any corporate content navigation item
-            const corporateNavItem = document.querySelector('a.bmw-corporate-link, a[href*="corporate"]')?.closest('.md-nav__item');
+            // Wait for MkDocs navigation to be ready (retry mechanism)
+            let attempts = 0;
+            const maxAttempts = 5;
+            let corporateNavItem = null;
+            
+            while (!corporateNavItem && attempts < maxAttempts) {
+                if (attempts > 0) {
+                    await new Promise(resolve => setTimeout(resolve, 200 * attempts)); // Progressive delay
+                }
+                
+                // Find any corporate content navigation item - comprehensive search
+                corporateNavItem = document.querySelector([
+                    'a.bmw-corporate-link',
+                    'a[href*="corporate"]',
+                    'a[href*="session10"]',
+                    'a[href*="#session10"]',
+                    'a[href*="Session10"]',
+                    'a[href*="enterprise"]',
+                    'a[href*="production"]',
+                    'a[href*="deployment"]',
+                    // Look for current page (Session9) that should be replaced with Session10
+                    'a[href*="Session9"]',
+                    '.md-nav__link--active'
+                ].join(', '))?.closest('.md-nav__item');
+                
+                attempts++;
+                console.log(`🔍 Navigation search attempt ${attempts}/${maxAttempts}, found:`, corporateNavItem);
+            }
             
             if (corporateNavItem) {
                 // Remove active state from all navigation items
