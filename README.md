@@ -126,33 +126,91 @@ git submodule update  # Fetch corporate content
 - **[Architecture Diagrams](docs-content/01_frameworks/puml/)** - PlantUML system diagrams
 - **[Podcast Feature Guide](docs/podcast-feature.md)** - Hands-free learning setup
 
-## Corporate Content Management
+## Corporate Content Availability
 
-This repository implements a sophisticated content management system that supports both public and corporate-specific content:
+This nanodegree features **automatic corporate network (CN) detection** that unlocks additional content when accessed from BMW corporate networks. No manual configuration required - the system automatically detects your network environment and serves appropriate content.
+
+### How Content Access Works
+
+**🌐 Public Network Access:**
+- Generic course materials suitable for all audiences
+- Local development environment setup guides
+- Public LLM API configuration (OpenAI, Anthropic, etc.)
+- Standard 9-session course structure per module
+
+**🏢 BMW Corporate Network Access:**
+- **Automatic Detection**: System detects corporate network via IP ranges and internal service accessibility
+- **Enhanced Content**: Corporate-specific examples, configurations, and deployment guides
+- **Additional Sessions**: Access to Session 10 "Enterprise Integration & Production Deployment"
+- **Cloud Development Environment**: Pre-configured BMW Coder workspace access
+- **BMW Gaia LLM API**: Internal LLM service integration
+- **Corporate Infrastructure**: BMW-specific architecture diagrams and integration patterns
+
+### Network Detection Indicators
+
+When you access the course, you'll see visual indicators of your network status:
+
+- **🏢 BMW Corporate Network**: Blue indicator shows cloud development environment is available
+- **🌐 Public Network**: Green indicator shows local setup is required
+- **🔍 Detecting Network...**: Orange indicator during network detection process
 
 ### Repository Access Models
 
-**Public Access (Standard Clone):**
-- Public users clone the repository without corporate content
-- Receives generic course materials suitable for general audiences
-- No access to corporate-specific content or proprietary configurations
+**Public Users (Standard Access):**
+```bash
+git clone https://github.com/fwornle/agentic-ai-nano.git
+# No additional setup needed - corporate content loads automatically if on BMW network
+```
 
-**Corporate Access (Submodule Clone):**
-- Corporate users clone with `--recurse-submodules` to access additional content
-- Includes corporate-specific examples, configurations, and deployment guides
-- Corporate content stored in a separate private repository as a git submodule
+**Corporate Users (Local Development):**
+```bash
+# Option 1: Clone with corporate submodule for local development
+git clone --recurse-submodules https://github.com/fwornle/agentic-ai-nano.git
+
+# Option 2: Add corporate submodule to existing clone
+git clone https://github.com/fwornle/agentic-ai-nano.git
+cd agentic-ai-nano
+git submodule init && git submodule update
+```
+
+### Corporate Content Detection Details
+
+**Network Detection Process:**
+1. **Hostname Detection**: Checks for `*.bmw.com`, `*.bmwgroup.com`, and internal IP ranges
+2. **External IP Verification**: Validates against BMW IP ranges (160.46.*, 194.114.*, etc.)
+3. **Internal Service Test**: Tests accessibility to `contenthub.bmwgroup.net`
+4. **Automatic Fallback**: Gracefully falls back to public content if detection fails
+
+**What Corporate Users Get:**
+
+**Enhanced Module Content:**
+- **Module 01**: BMW Coder cloud environment setup and integration
+- **Module 02**: Corporate-specific RAG examples with internal data sources
+- **Module 03**: Session 10 "Enterprise Integration & Production Deployment"
+  - BMW-specific infrastructure patterns
+  - Corporate deployment strategies
+  - Enterprise security considerations
+  - Production monitoring and scaling
+
+**Corporate-Specific Features:**
+- **Pre-configured Development Environment**: `http://10.21.202.14/workspaces`
+- **BMW Gaia LLM API Access**: Internal model endpoints and authentication
+- **Corporate Architecture Diagrams**: BMW-specific system integration patterns
+- **Enterprise Security Examples**: Corporate authentication and authorization patterns
 
 ### Architecture Overview
 
-**Dual Content System:**
-- **Public Content**: Generic course materials available to all users
-- **Corporate Content**: Organization-specific content accessible only to authorized users
+**Intelligent Content System:**
+- **Automatic Detection**: No manual switches or configuration required
+- **Secure Content Delivery**: Corporate content encrypted and decrypted client-side
+- **Seamless Experience**: Users see appropriate content based on their network automatically
+- **Graceful Degradation**: Always falls back to public content to ensure accessibility
 
-**Key Components:**
-- **Private Submodule**: Corporate content stored in private repository (`docs-content/corporate-only/`)
-- **Network Detection**: Automatic corporate network detection (`docs-content/javascripts/network-detection.js`)
-- **Content Encryption**: Corporate content encrypted for secure public deployment (`scripts/encrypt-corporate-content.js`)
-- **Dynamic Decryption**: Client-side decryption when accessed from corporate network (`docs-content/javascripts/corporate-content-loader.js`)
+**Technical Components:**
+- **Network Detection Engine**: Multi-layer corporate network detection
+- **Content Encryption System**: AES-GCM encrypted corporate content for secure public deployment
+- **Dynamic Content Loader**: Client-side decryption and content injection
+- **Navigation Intelligence**: Automatic addition/removal of corporate navigation items
 
 ### Content Structure
 

@@ -11,10 +11,11 @@
     // Corporate content loader class
     class CorporateContentLoader {
         constructor() {
-            // Use correct path based on site structure - deployed at /agentic-ai-nano/
-            this.encryptedContentPath = 'corporate-only/content.encrypted.json';
-            console.log('🔍 Corporate content path:', this.encryptedContentPath);
+            // Use absolute path for GitHub Pages deployment
+            this.encryptedContentPath = '/agentic-ai-nano/corporate-only/content.encrypted.json';
+            console.log('🔍 Corporate content path configured:', this.encryptedContentPath);
             console.log('🔍 Current pathname:', window.location.pathname);
+            console.log('🔍 Current hostname:', window.location.hostname);
             this.corporateKey = 'bmw-corporate-network-2024-secure'; // Same as encryption script
             this.loadedContent = null;
         }
@@ -87,6 +88,7 @@
                 currentPath.includes('/00_intro/coder/') ||
                 currentPath.includes('/00_intro/llmapi/') ||
                 currentPath.includes('/03_mcp-acp-a2a/Session10') ||
+                currentPath.includes('/03_mcp-acp-a2a/') ||  // Module index where Session 10 nav gets added
                 currentPath.includes('session10') ||
                 window.location.hash.includes('session10');
             
@@ -112,9 +114,13 @@
                 }
                 
                 console.log('🔐 Loading encrypted corporate content...');
+                console.log('🔍 Fetching from path:', this.encryptedContentPath);
                 
-                // Use the correct path for GitHub Pages deployment
-                const response = await fetch(this.encryptedContentPath);
+                // Use the correct path for GitHub Pages deployment with cache busting
+                const cacheBuster = `?v=${Date.now()}`;
+                const fullPath = this.encryptedContentPath + cacheBuster;
+                console.log('🔍 Full URL with cache buster:', fullPath);
+                const response = await fetch(fullPath);
                 
                 if (!response.ok) {
                     throw new Error(`Failed to fetch encrypted content: ${response.status} ${response.statusText}`);

@@ -615,7 +615,7 @@
     // Track if Session 10 content is currently loaded to prevent multiple loads
     let session10Loaded = false;
     
-    window.loadCorporateSession10 = function() {
+    window.loadCorporateSession10 = async function() {
         console.log('🔐 Loading corporate Session 10 content...');
         
         // Prevent multiple loads of Session 10 content
@@ -624,43 +624,58 @@
             return;
         }
         
-        if (window.CorporateContentLoader && window.CorporateContentLoader.loadedContent) {
-            const session10Content = window.CorporateContentLoader.loadedContent['03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'];
-            if (session10Content) {
-                console.log('📄 Found Session 10 content, replacing page...');
-                session10Loaded = true;
-                
-                // Update page title
-                document.title = 'Session 10: Enterprise Integration & Production Deployment | Agentic AI Nano-Degree';
-                
-                // Update URL without causing page reload - use hash instead of path to avoid 404s
-                if (history.pushState) {
-                    // Use hash-based navigation to avoid creating non-existent paths
-                    const baseUrl = window.location.pathname.replace(/#.*$/, '');
-                    const newUrl = baseUrl + '#session10-corporate-content';
-                    history.pushState({page: 'session10'}, '', newUrl);
-                }
-                
-                // Replace page content
-                window.CorporateContentLoader.replacePageContent(session10Content);
-                
-                // Instantly jump to top of the page after content is loaded
-                setTimeout(() => {
-                    window.scrollTo(0, 0);
-                    console.log('📍 Jumped to top of Session 10 content');
-                }, 100);
-                
-                console.log('✅ Session 10 corporate content loaded successfully');
-            } else {
-                console.error('❌ Session 10 content not found in encrypted data');
-            }
-        } else {
+        // Check if corporate content loader exists
+        if (!window.CorporateContentLoader) {
             console.error('❌ Corporate content loader not available');
-            console.log('Debug info:', {
-                'CorporateContentLoader exists': !!window.CorporateContentLoader,
-                'loadedContent exists': !!(window.CorporateContentLoader && window.CorporateContentLoader.loadedContent),
-                'Content keys': window.CorporateContentLoader && window.CorporateContentLoader.loadedContent ? Object.keys(window.CorporateContentLoader.loadedContent) : 'None'
-            });
+            return;
+        }
+        
+        // If content is not loaded yet, try to load it first
+        if (!window.CorporateContentLoader.loadedContent) {
+            console.log('📥 Corporate content not loaded yet, loading now...');
+            try {
+                const loaded = await window.CorporateContentLoader.load();
+                if (!loaded) {
+                    console.error('❌ Failed to load corporate content');
+                    return;
+                }
+                console.log('✅ Corporate content loaded successfully');
+            } catch (error) {
+                console.error('❌ Error loading corporate content:', error);
+                return;
+            }
+        }
+        
+        // Now check for Session 10 content
+        const session10Content = window.CorporateContentLoader.loadedContent['03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'];
+        if (session10Content) {
+            console.log('📄 Found Session 10 content, replacing page...');
+            session10Loaded = true;
+            
+            // Update page title
+            document.title = 'Session 10: Enterprise Integration & Production Deployment | Agentic AI Nano-Degree';
+            
+            // Update URL without causing page reload - use hash instead of path to avoid 404s
+            if (history.pushState) {
+                // Use hash-based navigation to avoid creating non-existent paths
+                const baseUrl = window.location.pathname.replace(/#.*$/, '');
+                const newUrl = baseUrl + '#session10-corporate-content';
+                history.pushState({page: 'session10'}, '', newUrl);
+            }
+            
+            // Replace page content
+            window.CorporateContentLoader.replacePageContent(session10Content);
+            
+            // Instantly jump to top of the page after content is loaded
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+                console.log('📍 Jumped to top of Session 10 content');
+            }, 100);
+            
+            console.log('✅ Session 10 corporate content loaded successfully');
+        } else {
+            console.error('❌ Session 10 content not found in encrypted data');
+            console.log('Available content keys:', Object.keys(window.CorporateContentLoader.loadedContent || {}));
         }
     }
 
