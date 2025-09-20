@@ -11,10 +11,8 @@
     // Corporate content loader class
     class CorporateContentLoader {
         constructor() {
-            // Adjust path based on site structure
-            const basePath = window.location.pathname.includes('/agentic-ai-nano/') ? 
-                '/agentic-ai-nano/corporate-only/' : '../corporate-only/';
-            this.encryptedContentPath = basePath + 'content.encrypted.json';
+            // Use correct path based on site structure - deployed at /agentic-ai-nano/
+            this.encryptedContentPath = 'corporate-only/content.encrypted.json';
             console.log('🔍 Corporate content path:', this.encryptedContentPath);
             console.log('🔍 Current pathname:', window.location.pathname);
             this.corporateKey = 'bmw-corporate-network-2024-secure'; // Same as encryption script
@@ -81,42 +79,48 @@
         }
 
         /**
+         * Checks if corporate content is needed for the current page
+         */
+        isCorporateContentNeeded() {
+            const currentPath = window.location.pathname;
+            const needsCorporateContent = 
+                currentPath.includes('/00_intro/coder/') ||
+                currentPath.includes('/00_intro/llmapi/') ||
+                currentPath.includes('/03_mcp-acp-a2a/Session10') ||
+                currentPath.includes('session10') ||
+                window.location.hash.includes('session10');
+            
+            console.log(`🔍 Corporate content needed for ${currentPath}: ${needsCorporateContent}`);
+            return needsCorporateContent;
+        }
+
+        /**
          * Loads and decrypts corporate content
          */
         async load() {
             try {
+                // Don't load if already loaded to reduce redundant requests
+                if (this.loadedContent) {
+                    console.log('🔐 Corporate content already loaded, using cached version');
+                    return true;
+                }
+                
+                // Check if corporate content is actually needed for this page
+                if (!this.isCorporateContentNeeded()) {
+                    console.log('🔐 Corporate content not needed for current page, skipping...');
+                    return false;
+                }
+                
                 console.log('🔐 Loading encrypted corporate content...');
                 
-                // Try multiple potential paths for encrypted content
-                const potentialPaths = [
-                    this.encryptedContentPath,
-                    '/agentic-ai-nano/corporate-only/content.encrypted.json',
-                    'corporate-only/content.encrypted.json',
-                    '../corporate-only/content.encrypted.json'
-                ];
+                // Use the correct path for GitHub Pages deployment
+                const response = await fetch(this.encryptedContentPath);
                 
-                let response = null;
-                let workingPath = null;
-                
-                for (const path of potentialPaths) {
-                    try {
-                        console.log(`🔍 Trying path: ${path}`);
-                        response = await fetch(path);
-                        if (response.ok) {
-                            workingPath = path;
-                            console.log(`✅ Found content at: ${path}`);
-                            break;
-                        } else {
-                            console.log(`❌ Failed ${path}: ${response.status}`);
-                        }
-                    } catch (e) {
-                        console.log(`❌ Error ${path}:`, e.message);
-                    }
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch encrypted content: ${response.status} ${response.statusText}`);
                 }
                 
-                if (!response || !response.ok) {
-                    throw new Error(`Failed to fetch encrypted content from any path. Tried: ${potentialPaths.join(', ')}`);
-                }
+                console.log(`✅ Found content at: ${this.encryptedContentPath}`);
 
                 const manifest = await response.json();
                 console.log(`📦 Found ${manifest.files.length} encrypted files`);
@@ -306,6 +310,9 @@
                 // Replace the content
                 contentArea.innerHTML = htmlContent;
                 
+                // Fix navigation links within the injected content
+                this.fixNavigationLinks(contentArea);
+                
                 console.log('✅ Corporate content successfully injected into page');
                 
             } catch (error) {
@@ -437,6 +444,62 @@
                 'svg': 'image/svg+xml'
             };
             return mimeTypes[extension] || 'image/png';
+        }
+
+        /**
+         * Fixes navigation links within injected corporate content
+         */
+        fixNavigationLinks(contentArea) {
+            try {
+                console.log('🔧 Fixing navigation links in corporate content...');
+                
+                // Find all links in the injected content
+                const links = contentArea.querySelectorAll('a[href]');
+                console.log(`Found ${links.length} links to process`);
+                
+                links.forEach((link, index) => {
+                    const href = link.getAttribute('href');
+                    console.log(`Processing link ${index}: ${href}`);
+                    
+                    // Handle different types of links
+                    if (href.startsWith('#')) {
+                        // Hash links - keep as is
+                        console.log(`  Hash link - keeping as is: ${href}`);
+                    } else if (href.startsWith('http://') || href.startsWith('https://')) {
+                        // External links - keep as is
+                        console.log(`  External link - keeping as is: ${href}`);
+                    } else if (href.includes('Session9_Production_Agent_Deployment')) {
+                        // Session 9 navigation - fix to work with current structure
+                        const session9Url = '/agentic-ai-nano/03_mcp-acp-a2a/Session9_Production_Agent_Deployment/Session9_Production_Agent_Deployment.md';
+                        link.setAttribute('href', session9Url);
+                        console.log(`  Fixed Session 9 link: ${href} -> ${session9Url}`);
+                    } else if (href.startsWith('../') || href.startsWith('./')) {
+                        // Relative links - convert to absolute based on site structure
+                        let absoluteHref = href;
+                        
+                        if (href.startsWith('../')) {
+                            // Go up from current module (03_mcp-acp-a2a)
+                            absoluteHref = href.replace(/^\.\.\//, '/agentic-ai-nano/');
+                        } else if (href.startsWith('./')) {
+                            // Stay in current module
+                            absoluteHref = href.replace(/^\.\//, '/agentic-ai-nano/03_mcp-acp-a2a/');
+                        }
+                        
+                        link.setAttribute('href', absoluteHref);
+                        console.log(`  Fixed relative link: ${href} -> ${absoluteHref}`);
+                    } else if (!href.startsWith('/')) {
+                        // Relative links without ./ prefix - assume current module
+                        const absoluteHref = `/agentic-ai-nano/03_mcp-acp-a2a/${href}`;
+                        link.setAttribute('href', absoluteHref);
+                        console.log(`  Fixed unqualified link: ${href} -> ${absoluteHref}`);
+                    }
+                });
+                
+                console.log('✅ Navigation links fixed');
+                
+            } catch (error) {
+                console.error('❌ Failed to fix navigation links:', error);
+            }
         }
 
         /**
