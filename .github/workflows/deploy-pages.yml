@@ -67,6 +67,9 @@ jobs:
       - name: Copy corporate content to built site
         run: |
           echo "Copying corporate-only directory to built site..."
+          # Remove git-related files from corporate content to avoid GitHub Pages exclusion
+          rm -rf docs-content/corporate-only/.git
+          rm -f docs-content/corporate-only/.gitmodules
           cp -r docs-content/corporate-only site/
           echo "Verifying corporate content was copied:"
           ls -la site/corporate-only/
