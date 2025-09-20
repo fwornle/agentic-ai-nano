@@ -33,20 +33,20 @@ jobs:
       - name: Clone Corporate Repository
         run: |
           echo "Cloning corporate repository using token..."
-          git clone https://${{ secrets.CORPORATE_PAT }}@github.com/fwornle/agentic-ai-nano-corporate.git docs-content/corporate-only
+          git clone https://${{ secrets.CORPORATE_PAT }}@github.com/fwornle/agentic-ai-nano-corporate.git docs-content/business-content
           
           # Verify clone worked
           echo "Corporate content structure:"
-          ls -la docs-content/corporate-only/
+          ls -la docs-content/business-content/
           echo "Checking for encrypted content:"
-          ls -la docs-content/corporate-only/content.encrypted.json
+          ls -la docs-content/business-content/content.encrypted.json
 
       - name: Verify corporate content
         run: |
           echo "Corporate content structure:"
-          ls -la docs-content/corporate-only/
+          ls -la docs-content/business-content/
           echo "Encrypted content exists:"
-          ls -la docs-content/corporate-only/content.encrypted.json || echo "content.encrypted.json not found"
+          ls -la docs-content/business-content/content.encrypted.json || echo "content.encrypted.json not found"
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -65,24 +65,24 @@ jobs:
         run: |
           echo "Preparing corporate content for inclusion in MkDocs build..."
           # Remove git-related files from corporate content to avoid GitHub Pages exclusion
-          rm -rf docs-content/corporate-only/.git
-          rm -f docs-content/corporate-only/.gitmodules
+          rm -rf docs-content/business-content/.git
+          rm -f docs-content/business-content/.gitmodules
           echo "Corporate content prepared:"
-          ls -la docs-content/corporate-only/
+          ls -la docs-content/business-content/
           echo "Checking for encrypted content:"
-          ls -la docs-content/corporate-only/content.encrypted.json
+          ls -la docs-content/business-content/content.encrypted.json
 
       - name: Build with MkDocs
         run: mkdocs build
 
       - name: Copy corporate content to built site
         run: |
-          echo "Copying corporate-only directory to built site..."
-          cp -r docs-content/corporate-only site/
+          echo "Copying business-content directory to built site..."
+          cp -r docs-content/business-content site/
           echo "Verifying corporate content was copied:"
-          ls -la site/corporate-only/
+          ls -la site/business-content/
           echo "Checking for encrypted content in built site:"
-          ls -la site/corporate-only/content.encrypted.json
+          ls -la site/business-content/content.encrypted.json
 
       - name: Create .nojekyll file for GitHub Pages
         run: |
@@ -96,9 +96,9 @@ jobs:
           echo "Final site structure before upload:"
           ls -la site/
           echo "Checking corporate content exists in final site:"
-          ls -la site/corporate-only/ || echo "WARNING: corporate-only directory not found"
+          ls -la site/business-content/ || echo "WARNING: business-content directory not found"
           echo "Checking encrypted content in final site:"
-          ls -la site/corporate-only/content.encrypted.json || echo "WARNING: content.encrypted.json not found"
+          ls -la site/business-content/content.encrypted.json || echo "WARNING: content.encrypted.json not found"
           echo "Verifying .nojekyll exists:"
           ls -la site/.nojekyll || echo "WARNING: .nojekyll not found"
 
