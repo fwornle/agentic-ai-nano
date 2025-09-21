@@ -9,7 +9,7 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-21T04:55:00Z - Moved to assets directory to bypass GitHub Pages filtering
+    // Cache buster: 2025-09-21T05:05:00Z - Simplified to static page approach, removed virtual navigation
     class CorporateContentLoader {
         constructor() {
             // Use assets directory path to bypass GitHub Pages filtering
@@ -89,10 +89,7 @@
             const needsCorporateContent = 
                 currentPath.includes('/00_intro/coder/') ||
                 currentPath.includes('/00_intro/llmapi/') ||
-                currentPath.includes('/03_mcp-acp-a2a/Session10') ||
-                currentPath.includes('/03_mcp-acp-a2a/') ||  // Module index where Session 10 nav gets added
-                currentPath.includes('session10') ||
-                window.location.hash.includes('session10');
+                currentPath.includes('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/');
             
             console.log(`🔍 Corporate content needed for ${currentPath}: ${needsCorporateContent}`);
             return needsCorporateContent;
@@ -191,15 +188,6 @@
                 }
             }
             
-            // Special handling for Session 10 - create virtual page navigation
-            if (!targetFile && window.location.hash.includes('session10')) {
-                targetFile = '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md';
-                console.log('📄 Virtual Session 10 page requested via hash - will load corporate content');
-                // Navigate to proper Session 10 URL to maintain consistency
-                this.navigateToVirtualPage('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/', targetFile);
-                return; // Exit early, navigation will trigger reload
-            }
-            
             if (!targetFile) {
                 console.log('📄 No corporate content mapping for path:', currentPath);
             }
@@ -225,26 +213,6 @@
         /**
          * Creates a virtual page navigation for Session 10
          */
-        navigateToVirtualPage(virtualPath, contentFile) {
-            try {
-                console.log('🔄 Navigating to virtual page:', virtualPath);
-                
-                // Update browser URL without reload
-                const newUrl = `${window.location.origin}${virtualPath}`;
-                history.pushState({corporateContent: contentFile}, '', newUrl);
-                
-                // Replace content immediately
-                if (this.loadedContent[contentFile]) {
-                    this.replacePageContent(this.loadedContent[contentFile]);
-                    // Update navigation to match the new content
-                    this.updateNavigationState(contentFile);
-                }
-                
-                console.log('✅ Virtual navigation completed');
-            } catch (error) {
-                console.error('❌ Failed to navigate to virtual page:', error);
-            }
-        }
 
         /**
          * Replaces only the article content, preserving MkDocs navigation structure
@@ -457,8 +425,6 @@
                     this.ensureCoderPageNavigation();
                 } else if (contentFile.includes('Session10_Enterprise_Integration_Production_Deployment.md')) {
                     targetText = 'Enterprise Integration';
-                    // For Session 10, also create/update the navigation item
-                    this.ensureSession10Navigation();
                 }
                 
                 // Find and highlight the appropriate navigation item
@@ -512,10 +478,10 @@
                         sidebar.style.removeProperty('position');
                         sidebar.style.removeProperty('left');
                     } else {
-                        // On wide screens: sidebar should be visible
+                        // On wide screens: sidebar should be visible (no !important overrides)
                         sidebar.classList.remove('md-sidebar--hidden');
                         
-                        // Ensure sidebar is visible on desktop
+                        // Use gentle CSS resets without !important
                         sidebar.style.display = '';  // Use empty string to revert to CSS default
                         sidebar.style.visibility = 'visible';
                         sidebar.style.opacity = '1';
@@ -591,39 +557,6 @@
         /**
          * Ensures Session 10 appears in navigation when showing Session 10 content
          */
-        ensureSession10Navigation() {
-            try {
-                // Check if Session 10 nav item already exists
-                const existingSession10 = Array.from(document.querySelectorAll('.md-nav__link')).find(link => 
-                    link.textContent.includes('Session 10') || link.textContent.includes('Enterprise Integration')
-                );
-                
-                if (!existingSession10) {
-                    // Find the Module 03 navigation area
-                    const module03Section = document.querySelector('[data-md-level="1"]:has(.md-nav__link[href*="mcp-acp-a2a"])');
-                    if (module03Section) {
-                        // Create Session 10 navigation item
-                        const session10Item = document.createElement('li');
-                        session10Item.className = 'md-nav__item md-nav__item--active';
-                        session10Item.innerHTML = `
-                            <a href="#" class="md-nav__link md-nav__link--active">
-                                <span class="md-ellipsis">Session 10 - Enterprise Integration</span>
-                            </a>
-                        `;
-                        
-                        // Add after other sessions
-                        const sessionItems = module03Section.querySelectorAll('.md-nav__item');
-                        if (sessionItems.length > 0) {
-                            sessionItems[sessionItems.length - 1].insertAdjacentElement('afterend', session10Item);
-                        }
-                        
-                        console.log('✅ Added Session 10 to navigation');
-                    }
-                }
-            } catch (error) {
-                console.warn('⚠️ Could not ensure Session 10 navigation:', error);
-            }
-        }
 
 
         /**
@@ -636,8 +569,7 @@
                 return '00_intro/coder-detailed.md';
             } else if (currentPath.includes('/00_intro/llmapi/')) {
                 return '00_intro/llmapi-detailed.md';
-            } else if (currentPath.includes('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/') || 
-                       window.location.hash.includes('session10')) {
+            } else if (currentPath.includes('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/')) {
                 return '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md';
             }
             

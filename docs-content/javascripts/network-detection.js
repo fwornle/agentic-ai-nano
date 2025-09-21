@@ -794,27 +794,55 @@
                     await new Promise(resolve => setTimeout(resolve, 200 * attempts)); // Progressive delay
                 }
                 
-                // Find any corporate content navigation item - comprehensive search
-                corporateNavItem = document.querySelector([
-                    'a.bmw-corporate-link',
-                    'a[href*="corporate"]',
-                    'a[href*="session10"]',
-                    'a[href*="#session10"]',
-                    'a[href*="Session10"]',
-                    'a[href*="enterprise"]',
-                    'a[href*="production"]',
-                    'a[href*="deployment"]',
-                    // Look for current page (Session9) that should be replaced with Session10
-                    'a[href*="Session9"]',
-                    '.md-nav__link--active'
-                ].join(', '))?.closest('.md-nav__item');
+                // Debug: List all navigation links on first attempt
+                if (attempts === 0) {
+                    const allNavLinks = document.querySelectorAll('.md-nav__link');
+                    console.log('🔍 Debug - All navigation links found:', allNavLinks.length);
+                    console.log('🔍 Navigation structure:', Array.from(allNavLinks).slice(0, 10).map(link => ({
+                        href: link.getAttribute('href'),
+                        text: link.textContent.trim(),
+                        active: link.classList.contains('md-nav__link--active')
+                    })));
+                }
+                
+                // First try to find current active navigation item
+                corporateNavItem = document.querySelector('.md-nav__link--active')?.closest('.md-nav__item');
+                
+                if (!corporateNavItem) {
+                    // Try specific Session 9 patterns
+                    const session9Selectors = [
+                        'a[href*="Session9_Production_Agent_Deployment"]',
+                        'a[href*="Session9"]',
+                        'a[href*="Production_Agent_Deployment"]'
+                    ];
+                    
+                    for (const selector of session9Selectors) {
+                        corporateNavItem = document.querySelector(selector)?.closest('.md-nav__item');
+                        if (corporateNavItem) {
+                            console.log(`🎯 Found via selector: ${selector}`);
+                            break;
+                        }
+                    }
+                }
+                
+                if (!corporateNavItem) {
+                    // Fallback: try any MCP/ACP section navigation item
+                    corporateNavItem = document.querySelector([
+                        'a[href*="03_mcp-acp-a2a"]',
+                        'a[href*="mcp-acp-a2a"]'
+                    ].join(', '))?.closest('.md-nav__item');
+                }
                 
                 attempts++;
-                console.log(`🔍 Navigation search attempt ${attempts}/${maxAttempts}, found:`, corporateNavItem);
+                console.log(`🔍 Navigation search attempt ${attempts}/${maxAttempts}, found:`, !!corporateNavItem);
                 
                 if (corporateNavItem) {
-                    console.log('🔍 Found nav item HTML:', corporateNavItem.outerHTML);
-                    console.log('🔍 Nav item classes:', corporateNavItem.className);
+                    const navLink = corporateNavItem.querySelector('.md-nav__link');
+                    console.log('🔍 Found navigation item:', {
+                        href: navLink?.getAttribute('href'),
+                        text: navLink?.textContent?.trim(),
+                        outerHTML: corporateNavItem.outerHTML.substring(0, 200) + '...'
+                    });
                 }
             }
             
