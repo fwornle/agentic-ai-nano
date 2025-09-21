@@ -9,11 +9,11 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-20T20:45:00Z - Fixed: sidebar responsive behavior and navigation
+    // Cache buster: 2025-09-21T04:55:00Z - Moved to assets directory to bypass GitHub Pages filtering
     class CorporateContentLoader {
         constructor() {
-            // Use absolute path for GitHub Pages deployment - content in site root
-            this.encryptedContentPath = '/agentic-ai-nano/content.encrypted.json';
+            // Use assets directory path to bypass GitHub Pages filtering
+            this.encryptedContentPath = '/agentic-ai-nano/assets/data/corporate-content.js';
             console.log('🔍 Corporate content path configured:', this.encryptedContentPath);
             console.log('🔍 Current pathname:', window.location.pathname);
             console.log('🔍 Current hostname:', window.location.hostname);
