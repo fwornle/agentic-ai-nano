@@ -685,7 +685,7 @@ class OrderService:
 
 See the architecture diagram below:
 
-![Architecture Diagram](images/microservices-arch.png)
+![Architecture Diagram](../03_mcp-acp-a2a/images/production-deployment-architecture.png)
 
 The diagram shows the complete service interaction flow.
 """

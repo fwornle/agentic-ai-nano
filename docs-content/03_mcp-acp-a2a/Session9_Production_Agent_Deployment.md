@@ -511,7 +511,7 @@ Your digital empire awaits. What will you create?
 
 ## 🧭 Navigation
 
-**Previous:** [← Session 8 - Advanced Agent Workflows](Session8_Advanced_Agent_Workflows/)  
+**Previous:** [← Session 8 - Advanced Agent Workflows](Session8_Advanced_Agent_Workflows.md)  
 **Next:** [Session 10 - Enterprise Integration →](Session10_Enterprise_Integration_Production_Deployment.md)
 
 ---
