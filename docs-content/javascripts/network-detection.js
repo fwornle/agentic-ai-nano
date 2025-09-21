@@ -301,7 +301,7 @@
         // Hide corporate navigation items and show public ones  
         hideCorporateNavigationItems();
         showPublicNavigationItems();
-        removeSession10Navigation();
+        // Session 10 should ALWAYS be visible - it's a static navigation item
 
         console.log('📋 Public mode: public content visible');
         
@@ -637,8 +637,7 @@
             }
         });
         
-        // Add Session 10 to Module 03 navigation when in corporate mode
-        addSession10Navigation();
+        // Session 10 should already be in static navigation from mkdocs.yml
     }
 
     function addSession10Navigation() {
