@@ -72,16 +72,25 @@ jobs:
           echo "Checking for encrypted content:"
           ls -la docs-content/extended-content/content.encrypted.json
 
-      - name: Build with MkDocs
-        run: mkdocs build
-
-      - name: Copy corporate content to built site
+      - name: Build with MkDocs and inject corporate content
         run: |
-          echo "Copying encrypted content file to assets directory..."
-          mkdir -p site/assets/data
-          cp docs-content/extended-content/content.encrypted.json site/assets/data/corporate-content.js
-          echo "Verifying encrypted content was copied to assets:"
-          ls -la site/assets/data/corporate-content.js
+          echo "Building site with MkDocs and injecting encrypted corporate content..."
+          # Copy corporate content to expected location for build script
+          mkdir -p docs-content/corporate-only
+          cp docs-content/extended-content/content.encrypted.json docs-content/corporate-only/content.encrypted.json
+          
+          # Install Node.js for build script
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm install node
+          
+          # Run enhanced build script that injects encrypted content into HTML comments
+          chmod +x scripts/build-with-corporate-content.sh
+          bash scripts/build-with-corporate-content.sh
+          
+          echo "Verifying encrypted content was injected:"
+          grep -c "ENCRYPTED_CORPORATE_CONTENT_START" site/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/index.html || echo "No encrypted content markers found"
 
       - name: Create .nojekyll file for GitHub Pages
         run: |
