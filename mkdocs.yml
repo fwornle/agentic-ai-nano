@@ -385,6 +385,6 @@ extra_css:
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - javascripts/corporate-content-loader.js
-  - javascripts/network-detection.js?v=2025-09-21-fix2
+  - javascripts/corporate-content-loader.js?v=2025-09-21-sidebar-fix
+  - javascripts/network-detection.js?v=2025-09-21-fix3
   - javascripts/podcast-tts-v2.js

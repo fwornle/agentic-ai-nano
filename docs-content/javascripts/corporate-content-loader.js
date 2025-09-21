@@ -277,12 +277,15 @@
                 }
                 this._isReplacingContent = true;
                 
-                // Target only the actual article content, not the entire content area
+                // CRITICAL: Ensure sidebar visibility BEFORE content replacement
+                console.log('🔧 Ensuring sidebar visibility before content replacement');
+                this.ensureSidebarVisible();
+                
+                // Use more specific selectors that won't interfere with sidebar elements
                 const selectors = [
                     'article.md-typeset',                       // Direct article with content
                     '.md-content__inner article',               // Article within content
-                    '.md-typeset > *',                          // Direct children of typeset
-                    '.md-content__inner .md-typeset'            // Fallback to typeset area
+                    '.md-content__inner .md-typeset'            // Specific typeset area within content
                 ];
                 
                 let contentArea = null;
@@ -299,7 +302,7 @@
                     return;
                 }
                 
-                console.log('🔄 Replacing minimal content area:', contentArea.tagName);
+                console.log('🔄 Replacing content area:', contentArea.tagName);
                 
                 // First, replace image references with base64 data URLs
                 let processedContent = await this.replaceImagesWithBase64(markdownContent);
@@ -413,6 +416,10 @@
                     contentArea.classList.add('md-typeset');
                 }
                 
+                // CRITICAL: Ensure sidebar remains visible after content replacement
+                console.log('🔧 Re-ensuring sidebar visibility after content replacement');
+                this.ensureSidebarVisible();
+                
                 // Fix navigation links within the injected content
                 this.fixNavigationLinks(contentArea);
                 
@@ -513,6 +520,14 @@
                         offsetWidth: sidebar.offsetWidth,
                         offsetHeight: sidebar.offsetHeight
                     });
+                    
+                    // CRITICAL: Remove any display:none or visibility:hidden that might have been applied
+                    sidebar.style.removeProperty('display');
+                    sidebar.style.removeProperty('visibility');
+                    sidebar.style.removeProperty('opacity');
+                    
+                    // Ensure sidebar is not marked as hidden
+                    sidebar.classList.remove('md-sidebar--hidden');
                     
                     // Check screen size first
                     const isNarrowScreen = window.matchMedia('(max-width: 76.1875em)').matches;
