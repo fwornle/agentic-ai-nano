@@ -9,7 +9,13 @@
     
     // CONFIGURATION: Define which pages get corporate content treatment
     const CORPORATE_CONTENT_PAGES = {
-        // Session 10 page
+        // Session 10 page - FIXED: Correct path!
+        '/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/': {
+            enabled: true,
+            hashTriggers: ['session10-corporate-only', 'session10-corporate-content'],
+            contentFile: '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'
+        },
+        // Session 9 page - for navigation triggers
         '/03_mcp-acp-a2a/Session9_Production_Agent_Deployment/': {
             enabled: true,
             hashTriggers: ['session10-corporate-only', 'session10-corporate-content'],
@@ -21,7 +27,7 @@
             hashTriggers: [],
             contentFile: '00_intro/coder-detailed.md'
         },
-        // LLM API setup page - CRITICAL: This was missing!
+        // LLM API setup page
         '/00_intro/llmapi/': {
             enabled: true,
             hashTriggers: [],
