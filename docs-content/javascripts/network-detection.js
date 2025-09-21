@@ -69,8 +69,8 @@
     
     console.log('🏢 Corporate content page detected - initializing enhanced navigation');
     
-    // Global variable to track corporate network status
-    let isCorporateNetworkDetected = false;
+    // Global variable to track corporate network status - MUST be on window object
+    window.isCorporateNetworkDetected = false;
     
     // Debounce mechanism to prevent multiple simultaneous detection cycles
     let detectionInProgress = false;
@@ -234,7 +234,7 @@
         console.log('🏢 Showing BMW corporate content');
         
         // Set global flag to prevent MutationObserver from re-hiding content
-        isCorporateNetworkDetected = true;
+        window.isCorporateNetworkDetected = true;
         
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         console.log(`Found ${corporateElements.length} corporate elements to show`);
@@ -282,7 +282,7 @@
         console.log('🌐 Showing public content');
         
         // Clear global flag to allow MutationObserver to hide BMW content
-        isCorporateNetworkDetected = false;
+        window.isCorporateNetworkDetected = false;
         
         const corporateElements = document.querySelectorAll('.bmw-corporate-only');
         console.log(`Found ${corporateElements.length} corporate elements to hide`);

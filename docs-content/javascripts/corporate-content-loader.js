@@ -925,40 +925,11 @@
     // Make CorporateContentLoader available globally
     window.CorporateContentLoader = new CorporateContentLoader();
 
-    // Auto-load corporate content when needed and authorized
+    // Auto-initialization disabled - network-detection.js will handle loading
+    // This prevents race conditions and duplicate loading attempts
     document.addEventListener('DOMContentLoaded', async () => {
-        console.log('🔐 Corporate content loader initialized');
-        
-        // Check if current page needs corporate content
-        if (window.CorporateContentLoader.isCorporateContentNeeded()) {
-            console.log('🔐 Page needs corporate content, checking network authorization...');
-            
-            // Wait a bit for network detection to complete
-            setTimeout(async () => {
-                // Check if network detection has authorized corporate content access
-                // This checks the global variable set by network-detection.js
-                const isAuthorized = window.isCorporateNetworkDetected || 
-                                   (typeof isCorporateNetworkDetected !== 'undefined' && isCorporateNetworkDetected);
-                
-                if (isAuthorized) {
-                    console.log('✅ Corporate network detected - loading corporate content');
-                    try {
-                        const loaded = await window.CorporateContentLoader.load();
-                        if (loaded) {
-                            console.log('✅ Corporate content loaded successfully');
-                        } else {
-                            console.log('❌ Corporate content loading failed or content not available');
-                        }
-                    } catch (error) {
-                        console.error('❌ Error loading corporate content:', error);
-                    }
-                } else {
-                    console.log('🌐 Public network detected - skipping corporate content');
-                }
-            }, 2000); // Wait 2 seconds for network detection to complete
-        } else {
-            console.log('🔐 Page does not need corporate content');
-        }
+        console.log('🔐 Corporate content loader initialized and ready');
+        console.log('🔐 Waiting for network-detection.js to trigger content loading...');
         
         // Also test decryption on corporate networks for debugging
         const hostname = window.location.hostname;
