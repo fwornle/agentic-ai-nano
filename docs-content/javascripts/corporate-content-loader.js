@@ -224,7 +224,8 @@
             // Corporate content mapping - only exact matches to prevent mismatches
             const contentMapping = {
                 '/00_intro/coder/': '00_intro/coder-detailed.md',
-                '/00_intro/llmapi/': '00_intro/llmapi-detailed.md'
+                '/00_intro/llmapi/': '00_intro/llmapi-detailed.md',
+                '/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/': '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'
             };
             
             let targetFile = null;
