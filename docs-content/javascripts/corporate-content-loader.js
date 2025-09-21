@@ -9,7 +9,7 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-20T20:18:00Z - Fixed: content.encrypted.json now in site root
+    // Cache buster: 2025-09-20T20:31:00Z - Fixed: restored responsive sidebar behavior
     class CorporateContentLoader {
         constructor() {
             // Use absolute path for GitHub Pages deployment - content in site root
@@ -497,44 +497,47 @@
                         offsetHeight: sidebar.offsetHeight
                     });
                     
-                    // Force visibility with multiple approaches
-                    sidebar.style.display = 'block';
-                    sidebar.style.visibility = 'visible';
-                    sidebar.style.opacity = '1';
-                    sidebar.style.transform = '';
-                    sidebar.style.left = '';
-                    sidebar.style.marginLeft = '';
+                    // Remove hidden classes but don't force styles that break responsiveness
                     sidebar.classList.remove('md-sidebar--hidden');
                     
-                    // Apply force CSS with !important
-                    const forceStyle = 'display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; left: 0 !important;';
-                    sidebar.setAttribute('style', forceStyle);
+                    // Clear any previously forced inline styles to restore responsive behavior
+                    sidebar.style.removeProperty('display');
+                    sidebar.style.removeProperty('visibility');
+                    sidebar.style.removeProperty('opacity');
+                    sidebar.style.removeProperty('position');
+                    sidebar.style.removeProperty('left');
+                    sidebar.style.removeProperty('transform');
+                    sidebar.style.removeProperty('margin-left');
                     
-                    // Ensure drawer toggle is properly set
+                    // On narrow screens, check if drawer should be closed
+                    const isNarrowScreen = window.matchMedia('(max-width: 76.1875em)').matches;
                     const drawerToggle = document.querySelector('[data-md-toggle="drawer"]');
+                    
                     if (drawerToggle && drawerToggle.type === 'checkbox') {
-                        console.log('🔍 Drawer toggle state:', drawerToggle.checked);
-                        drawerToggle.checked = false; // Unchecked shows sidebar
-                        drawerToggle.dispatchEvent(new Event('change', { bubbles: true }));
+                        if (isNarrowScreen) {
+                            // On narrow screens, ensure drawer is closed by default
+                            drawerToggle.checked = true; // Checked = drawer closed on mobile
+                            console.log('📱 Narrow screen detected - drawer closed');
+                        } else {
+                            // On wide screens, sidebar should be visible
+                            drawerToggle.checked = false;
+                            console.log('🖥️ Wide screen detected - sidebar visible');
+                        }
                     }
                     
-                    // Force layout recalculation
-                    sidebar.offsetHeight; // Trigger reflow
-                    
-                    console.log('✅ Sidebar visibility forced - checking dimensions:', {
-                        offsetWidth: sidebar.offsetWidth,
-                        offsetHeight: sidebar.offsetHeight,
-                        computed: window.getComputedStyle(sidebar).display
-                    });
+                    console.log('✅ Sidebar responsive behavior restored');
                 } else {
                     console.warn('⚠️ Primary sidebar not found in DOM');
                 }
                 
-                // Force show secondary sidebar (TOC)
+                // Clear any forced styles on secondary sidebar (TOC) too
                 const secondarySidebar = document.querySelector('.md-sidebar.md-sidebar--secondary');
                 if (secondarySidebar) {
-                    const forceSecondaryStyle = 'display: block !important; visibility: visible !important; opacity: 1 !important;';
-                    secondarySidebar.setAttribute('style', forceSecondaryStyle);
+                    secondarySidebar.style.removeProperty('display');
+                    secondarySidebar.style.removeProperty('visibility');
+                    secondarySidebar.style.removeProperty('opacity');
+                    secondarySidebar.style.removeProperty('position');
+                    console.log('✅ Secondary sidebar responsive behavior restored');
                 }
                 
                 // Try to reinitialize Material theme if possible
