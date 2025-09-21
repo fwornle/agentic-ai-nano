@@ -243,16 +243,20 @@
 
         console.log('🏢 Corporate mode: BMW content enabled');
         
-        // Load encrypted corporate content if available and needed
-        if (window.CorporateContentLoader) {
+        // Only load encrypted corporate content if the current page actually needs it
+        if (window.CorporateContentLoader && window.CorporateContentLoader.isCorporateContentNeeded()) {
             try {
                 const loaded = await window.CorporateContentLoader.load();
                 if (loaded) {
                     console.log('✅ Corporate content decrypted and loaded');
+                } else {
+                    console.log('📋 Corporate content not needed for current page');
                 }
             } catch (error) {
                 console.warn('⚠️ Corporate content not available:', error.message);
             }
+        } else {
+            console.log('📋 Corporate content not needed for current page');
         }
 
         // Update any dynamic text content
@@ -487,9 +491,13 @@
             clearTimeout(detectionTimeout);
         }
         
-        // More aggressive debounce detection to prevent rapid successive calls
+        // Aggressive debounce to prevent rapid successive calls from different event sources
         detectionTimeout = setTimeout(() => {
-            if (detectionInProgress) return;
+            // Double-check as detection might have been triggered by another source
+            if (detectionInProgress) {
+                console.log('🔄 Detection started by another trigger, skipping...');
+                return;
+            }
             
             detectionInProgress = true;
             console.log('🔄 Starting fresh network detection...');

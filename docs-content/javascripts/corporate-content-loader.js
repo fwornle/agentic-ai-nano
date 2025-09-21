@@ -9,7 +9,7 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-21T13:52:00Z - Added missing corporate content images
+    // Cache buster: 2025-09-21T14:12:00Z - Fixed coder-workspaces.png 404 error
     class CorporateContentLoader {
         constructor() {
             // Use assets directory path to bypass GitHub Pages filtering
@@ -100,17 +100,17 @@
          */
         async load() {
             try {
+                // Check if corporate content is actually needed for this page FIRST
+                if (!this.isCorporateContentNeeded()) {
+                    console.log('🔐 Corporate content not needed for current page, skipping...');
+                    return false;
+                }
+                
                 // If content is already loaded, check if current page needs content replacement
                 if (this.loadedContent) {
                     console.log('🔐 Corporate content already loaded, checking if page needs replacement...');
                     await this.injectDecryptedContent();
                     return true;
-                }
-                
-                // Check if corporate content is actually needed for this page
-                if (!this.isCorporateContentNeeded()) {
-                    console.log('🔐 Corporate content not needed for current page, skipping...');
-                    return false;
                 }
                 
                 console.log('🔐 Loading encrypted corporate content from inline HTML comments...');
@@ -712,6 +712,11 @@
                         const webPath = imagePath.replace('../../', '/agentic-ai-nano/');
                         processedContent = processedContent.replace(fullMatch, `![${altText}](${webPath})`);
                         console.log(`📷 Using shared image with web path: ${webPath}`);
+                    } else if (normalizedPath === 'images/coder-workspaces.png') {
+                        // Special case: coder-workspaces.png should use the shared public image
+                        const webPath = '/agentic-ai-nano/00_intro/images/coder-workspaces.png';
+                        processedContent = processedContent.replace(fullMatch, `![${altText}](${webPath})`);
+                        console.log(`📷 Using shared coder-workspaces image with web path: ${webPath}`);
                     } else {
                         console.warn(`❌ Image not found in encrypted content: ${normalizedPath}`);
                         console.log('Available encrypted images:', Object.keys(this.loadedContent).filter(key => key.match(/\.(png|jpg|jpeg|gif|svg)$/i)));
