@@ -9,7 +9,7 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-21T08:45:00Z - Fixed auto-loading to respect network detection
+    // Cache buster: 2025-09-21T13:52:00Z - Added missing corporate content images
     class CorporateContentLoader {
         constructor() {
             // Use assets directory path to bypass GitHub Pages filtering
@@ -567,10 +567,35 @@
                         // Force body class update to ensure proper layout
                         document.body.classList.remove('md-sidebar--hidden');
                         document.documentElement.classList.remove('md-sidebar--hidden');
+                        
+                        // Additional verification that sidebar is actually visible
+                        const sidebarCheck = document.querySelector('.md-sidebar.md-sidebar--primary');
+                        if (sidebarCheck && sidebarCheck.offsetWidth === 0) {
+                            console.warn('⚠️ Sidebar still not visible after all fixes, applying fallback');
+                            // Apply fallback styles more aggressively
+                            sidebarCheck.style.display = 'block';
+                            sidebarCheck.style.width = '';
+                            sidebarCheck.style.minWidth = '';
+                            // Trigger layout recalculation
+                            sidebarCheck.offsetHeight;
+                        }
                     } catch (e) {
                         console.log('Could not reinitialize Material theme:', e);
                     }
                 }, 100);
+                
+                // Additional delayed check to ensure sidebar remains visible
+                setTimeout(() => {
+                    const finalCheck = document.querySelector('.md-sidebar.md-sidebar--primary');
+                    if (finalCheck) {
+                        console.log('🔍 Final sidebar check:', {
+                            offsetWidth: finalCheck.offsetWidth,
+                            offsetHeight: finalCheck.offsetHeight,
+                            display: finalCheck.style.display || 'default',
+                            visibility: finalCheck.style.visibility || 'default'
+                        });
+                    }
+                }, 500);
                 
             } catch (error) {
                 console.warn('⚠️ Could not ensure sidebar visibility:', error);
