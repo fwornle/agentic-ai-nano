@@ -9,7 +9,7 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-21T05:05:00Z - Simplified to static page approach, removed virtual navigation
+    // Cache buster: 2025-09-21T08:20:00Z - Fixed corporate content injection and Session 10 rendering
     class CorporateContentLoader {
         constructor() {
             // Use assets directory path to bypass GitHub Pages filtering
