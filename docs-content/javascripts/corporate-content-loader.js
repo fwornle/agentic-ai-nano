@@ -936,8 +936,7 @@
             // Wait a bit for network detection to complete
             setTimeout(async () => {
                 // Check if network detection has authorized corporate content access
-                const isAuthorized = window.isCorporateNetworkDetected || 
-                                   (typeof isCorporateNetworkDetected !== 'undefined' && isCorporateNetworkDetected);
+                const isAuthorized = window.isCorporateNetworkDetected || false;
                 
                 console.log('🔍 Network authorization check:', isAuthorized);
                 
