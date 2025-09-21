@@ -9,7 +9,7 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-20T20:31:00Z - Fixed: restored responsive sidebar behavior
+    // Cache buster: 2025-09-20T20:45:00Z - Fixed: sidebar responsive behavior and navigation
     class CorporateContentLoader {
         constructor() {
             // Use absolute path for GitHub Pages deployment - content in site root
@@ -497,31 +497,32 @@
                         offsetHeight: sidebar.offsetHeight
                     });
                     
-                    // Remove hidden classes but don't force styles that break responsiveness
-                    sidebar.classList.remove('md-sidebar--hidden');
-                    
-                    // Clear any previously forced inline styles to restore responsive behavior
-                    sidebar.style.removeProperty('display');
-                    sidebar.style.removeProperty('visibility');
-                    sidebar.style.removeProperty('opacity');
-                    sidebar.style.removeProperty('position');
-                    sidebar.style.removeProperty('left');
-                    sidebar.style.removeProperty('transform');
-                    sidebar.style.removeProperty('margin-left');
-                    
-                    // On narrow screens, check if drawer should be closed
+                    // Check screen size first
                     const isNarrowScreen = window.matchMedia('(max-width: 76.1875em)').matches;
                     const drawerToggle = document.querySelector('[data-md-toggle="drawer"]');
                     
-                    if (drawerToggle && drawerToggle.type === 'checkbox') {
-                        if (isNarrowScreen) {
-                            // On narrow screens, ensure drawer is closed by default
-                            drawerToggle.checked = true; // Checked = drawer closed on mobile
-                            console.log('📱 Narrow screen detected - drawer closed');
-                        } else {
-                            // On wide screens, sidebar should be visible
-                            drawerToggle.checked = false;
-                            console.log('🖥️ Wide screen detected - sidebar visible');
+                    if (isNarrowScreen) {
+                        // On narrow screens: drawer should be closed (checked = true)
+                        if (drawerToggle && drawerToggle.type === 'checkbox') {
+                            drawerToggle.checked = true; // Closed by default on mobile
+                            console.log('📱 Narrow screen - drawer closed');
+                        }
+                        // Clear any forced styles for mobile
+                        sidebar.style.removeProperty('display');
+                        sidebar.style.removeProperty('position');
+                        sidebar.style.removeProperty('left');
+                    } else {
+                        // On wide screens: sidebar should be visible
+                        sidebar.classList.remove('md-sidebar--hidden');
+                        
+                        // Ensure sidebar is visible on desktop
+                        sidebar.style.display = '';  // Use empty string to revert to CSS default
+                        sidebar.style.visibility = 'visible';
+                        sidebar.style.opacity = '1';
+                        
+                        if (drawerToggle && drawerToggle.type === 'checkbox') {
+                            drawerToggle.checked = false; // Unchecked = visible on desktop
+                            console.log('🖥️ Wide screen - sidebar visible');
                         }
                     }
                     
