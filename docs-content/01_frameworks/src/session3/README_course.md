@@ -295,4 +295,4 @@ After completing Session 3, you'll be ready for:
 
 ---
 
-**Next Step**: Proceed to [Session 4: CrewAI Team Orchestration](../Session4_CrewAI_Team_Orchestration.md) to explore role-based multi-agent coordination patterns.
+**Next Step**: Proceed to [Session 4: CrewAI Team Orchestration](../../Session4_CrewAI_Team_Orchestration.md) to explore role-based multi-agent coordination patterns.

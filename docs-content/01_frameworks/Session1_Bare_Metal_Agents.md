@@ -221,7 +221,7 @@ Compliance validation ensures all processing decisions align with data governanc
 
 These five patterns form the intelligence foundation for data processing systems:
 
-![Agentic Patterns](images/5-agent-patterns.png)
+![Agentic Patterns](images/agentic-5-patterns.png)
 
 1. **Reflection**: Self-monitoring and optimization for pipeline performance  
 2. **Tool Use**: Integration with cloud data infrastructure and processing services  

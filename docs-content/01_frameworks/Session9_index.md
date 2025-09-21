@@ -4,7 +4,7 @@
 
 This session covers the sophisticated world of multi-agent patterns and coordination through three distinct learning paths, each designed for different learning objectives and time investments.
 
-![Multi-Agent Coordination Overview](images/session9-overview.png)
+![Multi-Agent Coordination Overview](images/multi-agent-pattern.png)
 *Overview of multi-agent coordination patterns covered in this session*
 
 ## 🎯 Observer Path - Essential Concepts (45-60 minutes)
