@@ -96,7 +96,7 @@
         }
 
         /**
-         * Loads and decrypts corporate content
+         * Loads and decrypts corporate content from inline HTML comments
          */
         async load() {
             try {
@@ -113,36 +113,86 @@
                     return false;
                 }
                 
-                console.log('🔐 Loading encrypted corporate content...');
-                console.log('🔍 Fetching from path:', this.encryptedContentPath);
+                console.log('🔐 Loading encrypted corporate content from inline HTML comments...');
                 
-                // Use the correct path for GitHub Pages deployment with cache busting
-                const cacheBuster = `?v=${Date.now()}`;
-                const fullPath = this.encryptedContentPath + cacheBuster;
-                console.log('🔍 Full URL with cache buster:', fullPath);
-                const response = await fetch(fullPath);
+                // Get the current page's HTML content
+                const htmlContent = document.documentElement.outerHTML;
                 
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch encrypted content: ${response.status} ${response.statusText}`);
+                // Extract encrypted content from HTML comments
+                const encryptedContentMatch = htmlContent.match(/ENCRYPTED_CORPORATE_CONTENT_START\s*([\s\S]*?)\s*ENCRYPTED_CORPORATE_CONTENT_END/);
+                
+                if (!encryptedContentMatch) {
+                    console.log('❌ No encrypted content found in HTML comments');
+                    return false;
                 }
                 
-                console.log(`✅ Found content at: ${this.encryptedContentPath}`);
+                const encryptedContentText = encryptedContentMatch[1].trim();
+                console.log('🔍 Found encrypted content in HTML comments:', encryptedContentText.substring(0, 100) + '...');
+                
+                // Skip if placeholder content
+                if (encryptedContentText.includes('This will be populated with actual encrypted content')) {
+                    console.log('📝 Placeholder content detected, skipping decryption');
+                    return false;
+                }
+                
+                let manifest;
+                try {
+                    // Try to parse as JSON
+                    manifest = JSON.parse(encryptedContentText);
+                    console.log('✅ Successfully parsed encrypted content JSON');
+                } catch (parseError) {
+                    console.error('❌ Failed to parse encrypted content JSON:', parseError);
+                    return false;
+                }
 
-                const manifest = await response.json();
-                console.log(`📦 Found ${manifest.files.length} encrypted files`);
+                // Handle both single encrypted object and manifest format
+                let decryptedContent = {};
+                
+                if (manifest.files && manifest.content) {
+                    // Manifest format with multiple files
+                    console.log(`📦 Found manifest with ${manifest.files.length} encrypted files`);
+                    
+                    // Derive decryption key
+                    const key = await this.deriveKey(this.corporateKey);
 
-                // Derive decryption key
-                const key = await this.deriveKey(this.corporateKey);
-
-                // Decrypt all content
-                const decryptedContent = {};
-                for (const [filePath, encryptedData] of Object.entries(manifest.content)) {
-                    try {
-                        console.log(`🔓 Decrypting: ${filePath}`);
-                        decryptedContent[filePath] = await this.decryptContent(encryptedData, key);
-                    } catch (error) {
-                        console.error(`Failed to decrypt ${filePath}:`, error);
+                    // Decrypt all content
+                    for (const [filePath, encryptedData] of Object.entries(manifest.content)) {
+                        try {
+                            console.log(`🔓 Decrypting: ${filePath}`);
+                            decryptedContent[filePath] = await this.decryptContent(encryptedData, key);
+                        } catch (error) {
+                            console.error(`Failed to decrypt ${filePath}:`, error);
+                        }
                     }
+                } else if (manifest.encrypted && manifest.iv && manifest.authTag) {
+                    // Single encrypted object format - assume it's for current page
+                    console.log('📦 Found single encrypted object');
+                    
+                    // Derive decryption key
+                    const key = await this.deriveKey(this.corporateKey);
+                    
+                    try {
+                        // Determine target file based on current page
+                        const currentPath = window.location.pathname;
+                        let targetFile = 'session10-corporate.md'; // default
+                        
+                        if (currentPath.includes('/00_intro/coder/')) {
+                            targetFile = '00_intro/coder-detailed.md';
+                        } else if (currentPath.includes('/00_intro/llmapi/')) {
+                            targetFile = '00_intro/llmapi-detailed.md';
+                        } else if (currentPath.includes('/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/')) {
+                            targetFile = '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md';
+                        }
+                        
+                        console.log(`🔓 Decrypting single object for: ${targetFile}`);
+                        decryptedContent[targetFile] = await this.decryptContent(manifest, key);
+                    } catch (error) {
+                        console.error('Failed to decrypt single object:', error);
+                        return false;
+                    }
+                } else {
+                    console.error('❌ Unknown encrypted content format');
+                    return false;
                 }
 
                 this.loadedContent = decryptedContent;
@@ -150,7 +200,7 @@
                 // Inject decrypted content into DOM
                 await this.injectDecryptedContent();
 
-                console.log('✅ Corporate content decrypted and loaded successfully');
+                console.log('✅ Corporate content decrypted and loaded successfully from inline HTML');
                 return true;
             } catch (error) {
                 console.error('❌ Failed to load corporate content:', error);

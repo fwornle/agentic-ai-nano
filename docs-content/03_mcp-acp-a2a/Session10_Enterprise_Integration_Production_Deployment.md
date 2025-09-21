@@ -1,5 +1,11 @@
 # 🏭 Session 10: Enterprise Integration & Production Deployment
 
+<!-- 
+ENCRYPTED_CORPORATE_CONTENT_START
+{"encrypted": "ZBqMeyrTMk40/aBNTQOBa8GzOwZlS6PFbAA4nlpHrjhLiRFWLAKProHosO/hx7wz/ao0nwizQytdGCZtiEEcnsvc1pJxAbFjzMUcz41x/4kcWN7Pxn4q0ndFix1YxU7oqX9zhVIwJJU=", "iv": "DWEEa2LaKFLROmM2VQDyew==", "authTag": "lWLiYQ7zAfka6h/daofDvg=="}
+ENCRYPTED_CORPORATE_CONTENT_END 
+-->
+
 <div class="corporate-only">
 
 ## BMW Corporate Content
