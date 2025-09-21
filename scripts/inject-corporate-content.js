@@ -53,20 +53,12 @@ ENCRYPTED_CORPORATE_CONTENT_END -->`;
     }
 }
 
-// Recursively find and process HTML files
-function processDirectory(dirPath) {
-    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-    
-    for (const entry of entries) {
-        const fullPath = path.join(dirPath, entry.name);
-        
-        if (entry.isDirectory()) {
-            processDirectory(fullPath);
-        } else if (entry.isFile() && entry.name.endsWith('.html')) {
-            injectContentIntoHtml(fullPath);
-        }
-    }
-}
+// Define which HTML files need corporate content injection
+const CORPORATE_PAGES = [
+    '00_intro/coder/index.html',
+    '00_intro/llmapi/index.html',
+    '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/index.html'
+];
 
 // Start processing
 if (!fs.existsSync(SITE_DIR)) {
@@ -75,7 +67,17 @@ if (!fs.existsSync(SITE_DIR)) {
     process.exit(1);
 }
 
-console.log('🔍 Processing HTML files in:', SITE_DIR);
-processDirectory(SITE_DIR);
+console.log('🔍 Processing corporate-specific HTML files in:', SITE_DIR);
+
+// Only process the specific files that need corporate content
+for (const relativePath of CORPORATE_PAGES) {
+    const fullPath = path.join(SITE_DIR, relativePath);
+    
+    if (fs.existsSync(fullPath)) {
+        injectContentIntoHtml(fullPath);
+    } else {
+        console.log('⚠️  Corporate page not found:', relativePath);
+    }
+}
 
 console.log('🎉 Corporate content injection complete!');

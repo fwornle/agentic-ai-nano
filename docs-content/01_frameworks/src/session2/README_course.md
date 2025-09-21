@@ -224,4 +224,4 @@ After completing Session 2, you'll be ready for:
 
 ---
 
-**Next Step**: Proceed to [Session 3: LangGraph Multi-Agent Workflows](../Session3_LangGraph_Multi_Agent_Workflows.md) to explore advanced agent orchestration patterns.
+**Next Step**: Proceed to [Session 3: LangGraph Multi-Agent Workflows](../../Session3_LangGraph_Multi_Agent_Workflows.md) to explore advanced agent orchestration patterns.

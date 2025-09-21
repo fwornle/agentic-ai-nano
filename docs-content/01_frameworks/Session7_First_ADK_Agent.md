@@ -49,7 +49,7 @@ ADK provides enterprise-ready agent development with sophisticated orchestration
 
 ### Quick Architecture Overview
 
-![ADK Enterprise Architecture](images/adk-enterprise.png)
+![ADK Enterprise Architecture](images/adk-architecture-overview.png)
 *The ADK Enterprise Architecture demonstrates sophisticated agent orchestration optimized for data processing workloads with built-in multi-tenant isolation, comprehensive monitoring, and production-grade deployment patterns.*
 
 ### Essential ADK Agent Pattern
@@ -167,7 +167,7 @@ Comprehensive audit trails, encryption, and access controls for data processing 
 
 ADK's MCP integration provides enterprise-grade connectivity to data processing systems with built-in connection pooling, failover handling, and comprehensive monitoring.
 
-![ADK MCP Integration](images/adk-mcp-integration.png)
+![ADK MCP Integration](images/adk-mcp.png)
 *Enterprise data processing system connectivity with monitoring and reliability features*
 
 ### Key MCP Features
