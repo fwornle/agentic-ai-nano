@@ -77,10 +77,11 @@ jobs:
 
       - name: Copy corporate content to built site
         run: |
-          echo "Copying encrypted content file directly to site root..."
-          cp docs-content/extended-content/content.encrypted.json site/
-          echo "Verifying encrypted content was copied to site root:"
-          ls -la site/content.encrypted.json
+          echo "Copying encrypted content file to assets directory..."
+          mkdir -p site/assets/data
+          cp docs-content/extended-content/content.encrypted.json site/assets/data/corporate-content.js
+          echo "Verifying encrypted content was copied to assets:"
+          ls -la site/assets/data/corporate-content.js
 
       - name: Create .nojekyll file for GitHub Pages
         run: |
@@ -93,8 +94,8 @@ jobs:
         run: |
           echo "Final site structure before upload:"
           ls -la site/
-          echo "Checking encrypted content in site root:"
-          ls -la site/content.encrypted.json || echo "WARNING: content.encrypted.json not found"
+          echo "Checking encrypted content in assets:"
+          ls -la site/assets/data/corporate-content.js || echo "WARNING: corporate-content.js not found"
           echo "Verifying .nojekyll exists:"
           ls -la site/.nojekyll || echo "WARNING: .nojekyll not found"
 
