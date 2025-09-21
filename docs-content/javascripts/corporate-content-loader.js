@@ -9,7 +9,7 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-21T08:20:00Z - Fixed corporate content injection and Session 10 rendering
+    // Cache buster: 2025-09-21T08:25:00Z - Fixed auto-loading of corporate content on page load
     class CorporateContentLoader {
         constructor() {
             // Use assets directory path to bypass GitHub Pages filtering
@@ -880,9 +880,29 @@
     // Make CorporateContentLoader available globally
     window.CorporateContentLoader = new CorporateContentLoader();
 
-    // Auto-test decryption when loaded
+    // Auto-load corporate content when needed
     document.addEventListener('DOMContentLoaded', async () => {
-        // Only test on corporate networks
+        console.log('🔐 Corporate content loader initialized');
+        
+        // Check if current page needs corporate content
+        if (window.CorporateContentLoader.isCorporateContentNeeded()) {
+            console.log('🔐 Page needs corporate content, attempting to load...');
+            
+            try {
+                const loaded = await window.CorporateContentLoader.load();
+                if (loaded) {
+                    console.log('✅ Corporate content loaded successfully');
+                } else {
+                    console.log('❌ Corporate content loading failed or content not available');
+                }
+            } catch (error) {
+                console.error('❌ Error loading corporate content:', error);
+            }
+        } else {
+            console.log('🔐 Page does not need corporate content');
+        }
+        
+        // Also test decryption on corporate networks for debugging
         const hostname = window.location.hostname;
         if (!hostname.includes('github.io') && !hostname.includes('fwornle')) {
             console.log('🧪 Testing corporate content decryption...');
