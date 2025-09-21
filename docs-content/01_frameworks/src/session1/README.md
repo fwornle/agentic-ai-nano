@@ -235,4 +235,4 @@ This ensures you can run and experiment with the code immediately without comple
 
 ---
 
-**Next Step**: Proceed to [Session 2: LangChain Foundations](../Session2_LangChain_Foundations.md) to see how these patterns translate to framework-based implementations.
+**Next Step**: Proceed to [Session 2: LangChain Foundations](../../Session2_LangChain_Foundations.md) to see how these patterns translate to framework-based implementations.

@@ -33,7 +33,7 @@ Ready to begin your learning journey? Choose your path based on your setup and l
 
     Learn while commuting! Convert any course content to high-quality speech
 
-    [:octicons-arrow-right-24: Enable Podcast Mode](../PODCAST_FEATURE.md)
+    [:octicons-arrow-right-24: Learn About Podcast Mode](getting-started.md#podcast-mode)
 
 </div>
 

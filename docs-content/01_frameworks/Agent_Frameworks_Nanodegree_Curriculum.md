@@ -6,7 +6,7 @@
 
 In an era where software systems must be intelligent, adaptive, and capable of autonomous decision-making, traditional programming approaches are reaching their limits. Data pipelines now need to handle ambiguous requirements, APIs must reason about context, and systems must adapt to changing conditions without constant human intervention. This self-paced 2-week module provides comprehensive instruction on building production-ready AI agents using 2025 state-of-the-art frameworks and implementing the five core agentic patterns: Reflection, Tool Use, ReAct, Planning, and Multi-Agent Collaboration. Through hands-on tutorials and progressive implementation, you'll master cutting-edge agent development with performance breakthroughs (CrewAI 5.76x faster execution), distributed system production capabilities, and modern protocol standardization (MCP, A2A, ACP, ANP). You'll develop skills to create intelligent, adaptable agents using both bare-metal approaches and established frameworks optimized for 2025 production environments.
 
-![Agent Frameworks Architecture](images/agent-frameworks-overview.png)
+![Agent Frameworks Architecture](images/framework-comparison-matrix.png)
 
 ### **Prerequisites**
 
