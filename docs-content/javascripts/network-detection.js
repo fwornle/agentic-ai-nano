@@ -40,11 +40,18 @@
         const currentPath = window.location.pathname;
         const currentHash = window.location.hash;
         
+        console.log('🔍 Checking if page is configured for corporate content');
+        console.log('🔍 Current path:', currentPath);
+        console.log('🔍 Current hash:', currentHash);
+        
         for (const [path, config] of Object.entries(CORPORATE_CONTENT_PAGES)) {
             if (!config.enabled) continue;
             
+            console.log(`🔍 Checking against configured path: ${path}`);
+            
             // Check if current path matches
             if (currentPath.includes(path)) {
+                console.log(`✅ Path match found: ${path}`);
                 return true;
             }
             
@@ -52,12 +59,14 @@
             if (config.hashTriggers && config.hashTriggers.length > 0) {
                 for (const trigger of config.hashTriggers) {
                     if (currentHash.includes(trigger)) {
+                        console.log(`✅ Hash trigger match found: ${trigger}`);
                         return true;
                     }
                 }
             }
         }
         
+        console.log('❌ No corporate content configuration found for current page');
         return false;
     }
     
