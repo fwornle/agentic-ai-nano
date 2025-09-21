@@ -34,7 +34,35 @@ This session contains BMW-specific implementation details and is only available 
 
 This advanced session covers enterprise integration patterns and production deployment strategies for agent systems in large organizations.
 
-### What You'll Learn
+## 🎯📝⚙️ Learning Path Overview
+
+This session offers three distinct learning paths designed to match your goals and time investment:
+
+=== "🎯 Observer (45-60 min)"
+
+    **Focus**: Understanding enterprise concepts and architecture patterns
+    
+    **Activities**: Enterprise integration principles, architecture patterns, security frameworks
+    
+    **Ideal for**: Decision makers, architects, overview learners
+
+=== "📝 Participant (3-4 hours)"
+
+    **Focus**: Guided implementation and integration planning
+    
+    **Activities**: Design enterprise architectures, plan integrations, security implementation
+    
+    **Ideal for**: Developers, technical leads, hands-on learners
+
+=== "⚙️ Implementer (8-12 hours)"
+
+    **Focus**: Complete enterprise implementation and customization
+    
+    **Activities**: Full enterprise deployment, advanced integrations, comprehensive monitoring
+    
+    **Ideal for**: Senior engineers, architects, specialists
+
+## What You'll Learn
 
 - Enterprise-grade deployment architectures
 - Integration patterns with existing systems
@@ -42,18 +70,11 @@ This advanced session covers enterprise integration patterns and production depl
 - Monitoring and observability strategies
 - Production operations and maintenance
 
-### Prerequisites
+## Prerequisites
 
 - Completion of Sessions 1-9
 - Understanding of containerization and orchestration
 - Basic knowledge of enterprise security practices
-
-### Format
-
-This session includes:
-- Conceptual framework (45 min)
-- Implementation examples (60 min) 
-- Production deployment workshop (90 min)
 
 ---
 
@@ -61,8 +82,6 @@ This session includes:
 
 </div>
 
-## Next Steps
-
-Continue with the final project and certification requirements, or explore the additional resources section.
+## 🧭 Navigation
 
 **Previous**: [← Session 9: Production Agent Deployment](Session9_Production_Agent_Deployment.md)
