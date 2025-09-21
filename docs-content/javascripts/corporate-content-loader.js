@@ -9,7 +9,7 @@
     'use strict';
 
     // Corporate content loader class
-    // Cache buster: 2025-09-21T08:25:00Z - Fixed auto-loading of corporate content on page load
+    // Cache buster: 2025-09-21T08:45:00Z - Fixed auto-loading to respect network detection
     class CorporateContentLoader {
         constructor() {
             // Use assets directory path to bypass GitHub Pages filtering
@@ -880,24 +880,37 @@
     // Make CorporateContentLoader available globally
     window.CorporateContentLoader = new CorporateContentLoader();
 
-    // Auto-load corporate content when needed
+    // Auto-load corporate content when needed and authorized
     document.addEventListener('DOMContentLoaded', async () => {
         console.log('🔐 Corporate content loader initialized');
         
         // Check if current page needs corporate content
         if (window.CorporateContentLoader.isCorporateContentNeeded()) {
-            console.log('🔐 Page needs corporate content, attempting to load...');
+            console.log('🔐 Page needs corporate content, checking network authorization...');
             
-            try {
-                const loaded = await window.CorporateContentLoader.load();
-                if (loaded) {
-                    console.log('✅ Corporate content loaded successfully');
+            // Wait a bit for network detection to complete
+            setTimeout(async () => {
+                // Check if network detection has authorized corporate content access
+                // This checks the global variable set by network-detection.js
+                const isAuthorized = window.isCorporateNetworkDetected || 
+                                   (typeof isCorporateNetworkDetected !== 'undefined' && isCorporateNetworkDetected);
+                
+                if (isAuthorized) {
+                    console.log('✅ Corporate network detected - loading corporate content');
+                    try {
+                        const loaded = await window.CorporateContentLoader.load();
+                        if (loaded) {
+                            console.log('✅ Corporate content loaded successfully');
+                        } else {
+                            console.log('❌ Corporate content loading failed or content not available');
+                        }
+                    } catch (error) {
+                        console.error('❌ Error loading corporate content:', error);
+                    }
                 } else {
-                    console.log('❌ Corporate content loading failed or content not available');
+                    console.log('🌐 Public network detected - skipping corporate content');
                 }
-            } catch (error) {
-                console.error('❌ Error loading corporate content:', error);
-            }
+            }, 2000); // Wait 2 seconds for network detection to complete
         } else {
             console.log('🔐 Page does not need corporate content');
         }
