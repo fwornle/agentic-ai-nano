@@ -487,7 +487,7 @@
             clearTimeout(detectionTimeout);
         }
         
-        // Debounce detection to prevent rapid successive calls
+        // More aggressive debounce detection to prevent rapid successive calls
         detectionTimeout = setTimeout(() => {
             if (detectionInProgress) return;
             
@@ -500,12 +500,13 @@
             try {
                 initializeNetworkDetection();
             } finally {
-                // Reset detection flag after a delay to allow for async operations
+                // Reset detection flag after longer delay to prevent rapid re-runs
                 setTimeout(() => {
                     detectionInProgress = false;
-                }, 2000);
+                    console.log('✅ Network detection cycle complete, ready for next run');
+                }, 5000); // Increased from 2000 to 5000ms
             }
-        }, 100);
+        }, 300); // Increased from 100 to 300ms debounce delay
     }
     
     // Initial run
@@ -625,7 +626,11 @@
         const session9Link = document.querySelector('a[href*="Session9_Production_Agent_Deployment"]');
         if (session9Link) {
             const session9Item = session9Link.closest('.md-nav__item');
-            if (session9Item && !document.querySelector('.bmw-corporate-nav-item')) {
+            
+            // Check for ANY existing Session 10 navigation items - not just corporate ones
+            const existingSession10 = document.querySelector('a[href*="session10"], a[href*="Session10"], .bmw-corporate-nav-item, a[href*="Enterprise_Integration"]');
+            
+            if (session9Item && !existingSession10) {
                 console.log('🔧 Adding Session 10 to corporate navigation');
                 
                 // Create Session 10 navigation item
@@ -649,6 +654,8 @@
                 session9Item.parentNode.insertBefore(session10Item, session9Item.nextSibling);
                 
                 console.log('✅ Session 10 added to corporate navigation');
+            } else if (existingSession10) {
+                console.log('📄 Session 10 navigation already exists, skipping creation');
             }
         }
         
@@ -1199,14 +1206,25 @@
     }
 
     function removeSession10Navigation() {
-        // Remove Session 10 from navigation when in public mode
-        const session10Links = document.querySelectorAll('a[href*="Session10_Enterprise_Integration"]');
-        session10Links.forEach(link => {
-            const listItem = link.closest('.md-nav__item');
-            if (listItem && listItem.classList.contains('bmw-corporate-nav-item')) {
-                console.log('🗑️ Removing Session 10 from public navigation');
-                listItem.remove();
-            }
+        // Remove ALL Session 10 navigation items when in public mode
+        const session10Selectors = [
+            'a[href*="Session10_Enterprise_Integration"]',
+            'a[href*="session10-corporate"]',
+            'a[href*="Enterprise_Integration"]',
+            '.bmw-corporate-nav-item',
+            'a[href*="session10"]',
+            'a[href*="Session10"]'
+        ];
+        
+        session10Selectors.forEach(selector => {
+            const session10Links = document.querySelectorAll(selector);
+            session10Links.forEach(element => {
+                const listItem = element.closest('.md-nav__item');
+                if (listItem) {
+                    console.log('🗑️ Removing Session 10 navigation item:', element.textContent?.trim() || selector);
+                    listItem.remove();
+                }
+            });
         });
         
         // Reset Session 10 loaded flag when switching to public mode
