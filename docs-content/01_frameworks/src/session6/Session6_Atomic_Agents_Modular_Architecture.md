@@ -16,7 +16,7 @@ Atomic Agents represent the next evolution in agent architecture, embracing the 
 
 This session introduces a paradigm shift from monolithic agent frameworks to atomic, modular architectures that scale from simple tasks to enterprise systems. We'll build agents that are predictable, testable, and maintainable.
 
-![Atomic Agents Architecture](images/atomic-agents.png)
+![Atomic Agents Architecture](../../images/atomic-agents.png)
 
 The atomic approach transforms traditional agent development by emphasizing:  
 - **Single Responsibility**: Each agent handles one concern perfectly  

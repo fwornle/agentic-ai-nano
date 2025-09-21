@@ -390,6 +390,6 @@ You now possess the knowledge to build and deploy sophisticated RAG systems that
 ## 🧭 Navigation
 
 **Previous:** [Session 8 - Production Ready →](Session8_MRAG_Evolution.md)  
-**Next:** [Session 10 - Enterprise Integration →](Session10_Enterprise_Integration_Production_Deployment.md)
+**Next:** [Session 10 - Enterprise Integration →](../03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md)
 
 ---

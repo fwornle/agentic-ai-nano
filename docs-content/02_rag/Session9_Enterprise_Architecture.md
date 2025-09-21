@@ -1140,6 +1140,6 @@ Complete production deployment orchestrates all enterprise components with compr
 ## 🧭 Navigation
 
 **Previous:** [Session 8 - Production Ready →](Session8_MRAG_Evolution.md)  
-**Next:** [Session 10 - Enterprise Integration →](Session10_Enterprise_Integration_Production_Deployment.md)
+**Next:** [Session 10 - Enterprise Integration →](../03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md)
 
 ---

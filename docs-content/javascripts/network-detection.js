@@ -20,6 +20,12 @@
             enabled: true,
             hashTriggers: [],
             contentFile: '00_intro/coder-detailed.md'
+        },
+        // LLM API setup page - CRITICAL: This was missing!
+        '/00_intro/llmapi/': {
+            enabled: true,
+            hashTriggers: [],
+            contentFile: '00_intro/llmapi-detailed.md'
         }
     };
     
