@@ -553,7 +553,7 @@
             }
             
             console.log(`📄 Injecting corporate content: ${targetContent}`);
-            await this.replacePageContent(contentToInject);
+            await this.replacePageContent(contentToInject, decryptedContent);
             
             // Set up detailed content switching for coder page if needed
             if (config.detailedContent && decryptedContent[config.detailedContent]) {
@@ -591,10 +591,12 @@
             console.log(`🔗 Setting up detailed content switching for #${config.detailHash}`);
             
             // Set up hash change listener
-            const handleHashChange = () => {
+            const handleHashChange = async () => {
                 if (window.location.hash === `#${config.detailHash}`) {
                     console.log('📄 Loading detailed content...');
-                    detailedDiv.innerHTML = this.convertMarkdownToHtml(decryptedContent[config.detailedContent]);
+                    const processedContent = await this.replaceImagesWithBase64(decryptedContent[config.detailedContent], decryptedContent);
+                    const htmlContent = this.convertMarkdownToHtml(processedContent, decryptedContent);
+                    detailedDiv.innerHTML = htmlContent;
                     detailedDiv.style.display = 'block';
                     detailedDiv.scrollIntoView({ behavior: 'smooth' });
                 } else {
@@ -606,54 +608,201 @@
             handleHashChange(); // Check current hash
         }
         
-        convertMarkdownToHtml(markdown) {
-            if (!markdown) return '';
+        async replaceImagesWithBase64(markdownContent, decryptedContent) {
+            let processedContent = markdownContent;
             
-            // Enhanced markdown conversion with better formatting
-            let html = markdown;
+            // Find all image references in markdown: ![alt](path)
+            const imagePattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
+            const matches = [...markdownContent.matchAll(imagePattern)];
             
-            // Headers
-            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
-            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-            
-            // Code blocks
-            html = html.replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>');
-            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-            
-            // Bold and italic
-            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            
-            // Links with better handling
-            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-            
-            // Images
-            html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;">');
-            
-            // Lists
-            html = html.replace(/^\* (.+)$/gm, '<li>$1</li>');
-            html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-            html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
-            
-            // Checkboxes
-            html = html.replace(/- \[x\] (.+)/g, '<li style="list-style: none;"><input type="checkbox" checked disabled> $1</li>');
-            html = html.replace(/- \[ \] (.+)/g, '<li style="list-style: none;"><input type="checkbox" disabled> $1</li>');
-            
-            // Paragraphs
-            html = html.replace(/\n\n/g, '</p><p>');
-            html = html.replace(/\n/g, '<br>');
-            
-            // Wrap in paragraph if not already wrapped
-            if (!html.startsWith('<')) {
-                html = `<p>${html}</p>`;
+            for (const match of matches) {
+                const [fullMatch, altText, imagePath] = match;
+                console.log(`🖼️ Processing image: ${imagePath}`);
+                
+                // Normalize the image path to match encrypted content keys
+                let normalizedPath = this.normalizeImagePath(imagePath);
+                
+                // Look for the image in encrypted content
+                if (decryptedContent[normalizedPath]) {
+                    const base64Content = decryptedContent[normalizedPath];
+                    const extension = normalizedPath.split('.').pop().toLowerCase();
+                    const mimeType = this.getMimeType(extension);
+                    const dataUrl = `data:${mimeType};base64,${base64Content}`;
+                    
+                    // Replace the image reference with base64 data URL
+                    processedContent = processedContent.replace(fullMatch, `![${altText}](${dataUrl})`);
+                    console.log(`✅ Replaced image ${normalizedPath} with base64 data URL`);
+                } else {
+                    // If not in encrypted content, it might be a shared image
+                    // Keep the original path but adjust for correct web path
+                    if (imagePath.includes('../../00_intro/images/')) {
+                        // Shared images - adjust path for web access
+                        const webPath = imagePath.replace('../../', '/agentic-ai-nano/');
+                        processedContent = processedContent.replace(fullMatch, `![${altText}](${webPath})`);
+                        console.log(`📷 Using shared image with web path: ${webPath}`);
+                    } else if (normalizedPath === 'images/coder-workspaces.png') {
+                        // Special case: coder-workspaces.png should use the shared public image
+                        const webPath = '/agentic-ai-nano/00_intro/images/coder-workspaces.png';
+                        processedContent = processedContent.replace(fullMatch, `![${altText}](${webPath})`);
+                        console.log(`📷 Using shared coder-workspaces image with web path: ${webPath}`);
+                    } else {
+                        console.warn(`❌ Image not found in encrypted content: ${normalizedPath}`);
+                        console.log('Available encrypted images:', Object.keys(decryptedContent).filter(key => key.match(/\.(png|jpg|jpeg|gif|svg)$/i)));
+                    }
+                }
             }
             
-            return html;
+            return processedContent;
+        }
+
+        normalizeImagePath(imagePath) {
+            // Remove leading ../ or ./ and normalize path separators
+            let normalized = imagePath.replace(/\\/g, '/');
+            
+            // Handle different path patterns in corporate content
+            if (imagePath.includes('../../corporate-only/')) {
+                // Path like ../../corporate-only/images/file.png -> images/file.png
+                normalized = imagePath.replace('../../corporate-only/', '');
+            } else if (imagePath.startsWith('../images/')) {
+                // Path like ../images/file.png -> images/file.png (corporate-only images)
+                normalized = imagePath.replace('../images/', 'images/');
+            } else if (imagePath.includes('../../00_intro/images/')) {
+                // Path like ../../00_intro/images/file.png -> 00_intro/images/file.png (shared images)
+                normalized = imagePath.replace('../../', '');
+            } else if (imagePath.startsWith('images/')) {
+                // Already normalized
+                normalized = imagePath;
+            }
+            
+            console.log(`📁 Normalized image path: ${imagePath} -> ${normalized}`);
+            return normalized;
+        }
+
+        getMimeType(extension) {
+            const mimeTypes = {
+                'png': 'image/png',
+                'jpg': 'image/jpeg',
+                'jpeg': 'image/jpeg',
+                'gif': 'image/gif',
+                'svg': 'image/svg+xml'
+            };
+            return mimeTypes[extension] || 'image/png';
+        }
+
+        generateHeadingId(title) {
+            return title.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+        }
+
+        convertMarkdownToHtml(markdown, decryptedContent = null) {
+            if (!markdown) return '';
+            
+            let htmlContent = markdown;
+            
+            // First handle code blocks to protect them from other processing
+            const codeBlocks = [];
+            htmlContent = htmlContent.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+                const index = codeBlocks.length;
+                codeBlocks.push(`<pre><code class="language-${lang || ''}">${code.trim()}</code></pre>`);
+                return `__CODE_BLOCK_${index}__`;
+            });
+            
+            // Handle headings with automatic ID generation for navigation and scroll highlighting
+            htmlContent = htmlContent
+                .replace(/^# (.+)$/gm, (match, title) => {
+                    const id = this.generateHeadingId(title);
+                    return `<h1 id="${id}">${title}</h1>`;
+                })
+                .replace(/^## (.+)$/gm, (match, title) => {
+                    const id = this.generateHeadingId(title);
+                    return `<h2 id="${id}">${title}</h2>`;
+                })
+                .replace(/^### (.+)$/gm, (match, title) => {
+                    const id = this.generateHeadingId(title);
+                    return `<h3 id="${id}">${title}</h3>`;
+                })
+                .replace(/^#### (.+)$/gm, (match, title) => {
+                    const id = this.generateHeadingId(title);
+                    return `<h4 id="${id}">${title}</h4>`;
+                })
+                .replace(/^##### (.+)$/gm, (match, title) => {
+                    const id = this.generateHeadingId(title);
+                    return `<h5 id="${id}">${title}</h5>`;
+                });
+            
+            // Handle text formatting
+            htmlContent = htmlContent
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+?)\*/g, '<em>$1</em>')
+                .replace(/`([^`]+?)`/g, '<code>$1</code>');
+            
+            // Handle images and links (images first to avoid conflicts)
+            htmlContent = htmlContent
+                .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;">')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+            
+            // Handle lists - improved handling
+            htmlContent = htmlContent.replace(/^(\s*)-\s+(.+)$/gm, (match, indent, content) => {
+                const level = Math.floor(indent.length / 2);
+                return `<li data-level="${level}">${content}</li>`;
+            });
+            
+            // Wrap consecutive list items in ul tags
+            htmlContent = htmlContent.replace(/(<li[^>]*>.*?<\/li>\s*)+/gs, (match) => {
+                return `<ul>${match}</ul>`;
+            });
+            
+            // Handle numbered lists
+            htmlContent = htmlContent.replace(/^(\s*)\d+\.\s+(.+)$/gm, (match, indent, content) => {
+                const level = Math.floor(indent.length / 2);
+                return `<li data-level="${level}">${content}</li>`;
+            });
+            
+            // Convert paragraphs - be more careful about existing HTML
+            const lines = htmlContent.split('\n');
+            let inList = false;
+            let result = [];
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                
+                if (!line) {
+                    result.push('');
+                    continue;
+                }
+                
+                // Check if line is already HTML
+                if (line.startsWith('<') || line.includes('__CODE_BLOCK_')) {
+                    result.push(line);
+                    inList = line.includes('<li') || line.includes('<ul') || line.includes('<ol');
+                } else if (!inList) {
+                    // Only wrap in paragraph if not already HTML and not in a list
+                    result.push(`<p>${line}</p>`);
+                } else {
+                    result.push(line);
+                }
+            }
+            
+            htmlContent = result.join('\n');
+            
+            // Restore code blocks
+            codeBlocks.forEach((block, index) => {
+                htmlContent = htmlContent.replace(`__CODE_BLOCK_${index}__`, block);
+            });
+            
+            // Clean up empty paragraphs and fix common issues
+            htmlContent = htmlContent
+                .replace(/<p><\/p>/g, '')
+                .replace(/<p>(<[^>]+>)/g, '$1')  // Remove p tags around block elements
+                .replace(/(<\/[^>]+>)<\/p>/g, '$1');  // Remove closing p tags after block elements
+            
+            return htmlContent;
         }
         
-        async replacePageContent(markdownContent) {
+        async replacePageContent(markdownContent, decryptedContent) {
             // Find the main content area
             const contentSelectors = [
                 'article.md-typeset',
@@ -673,31 +822,22 @@
             }
             
             console.log('🔄 Replacing page content with decrypted corporate content...');
-            const htmlContent = this.convertMarkdownToHtml(markdownContent);
+            
+            // Step 1: Process images first to convert to base64 data URLs
+            const processedContent = await this.replaceImagesWithBase64(markdownContent, decryptedContent);
+            
+            // Step 2: Convert markdown to HTML with sophisticated processing
+            const htmlContent = this.convertMarkdownToHtml(processedContent, decryptedContent);
+            
+            // Step 3: Replace content area
             contentArea.innerHTML = htmlContent;
             
-            // Process images to ensure they load correctly
-            this.processImages(contentArea);
-        }
-        
-        processImages(contentArea) {
-            const images = contentArea.querySelectorAll('img');
-            images.forEach(img => {
-                // Fix relative image paths
-                if (img.src.startsWith('../')) {
-                    const basePath = window.location.pathname.includes('/agentic-ai-nano/') ? 
-                        '/agentic-ai-nano/' : '/';
-                    img.src = basePath + img.src.replace('../', '');
-                }
-                
-                // Add error handling
-                img.onerror = function() {
-                    console.warn(`⚠️ Failed to load image: ${this.src}`);
-                    this.style.display = 'none';
-                };
-                
-                console.log(`🖼️ Processing image: ${img.src}`);
-            });
+            // Ensure content has proper MkDocs classes for scroll highlighting
+            if (!contentArea.classList.contains('md-typeset')) {
+                contentArea.classList.add('md-typeset');
+            }
+            
+            console.log('✅ Corporate content successfully injected with proper image processing');
         }
         
         
