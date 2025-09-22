@@ -61,6 +61,9 @@
             this.detectionPromise = null;
             this.contentLoader = null;
             
+            // Initialize backward compatibility flag for old corporate-content-loader.js
+            window.isCorporateNetworkDetected = false;
+            
             console.log('🏢 Corporate Network Manager initialized');
         }
         
@@ -229,7 +232,11 @@
             this.state.detectionMethod = method;
             this.state.lastDetection = new Date();
             
+            // Set backward compatibility flag for old corporate-content-loader.js
+            window.isCorporateNetworkDetected = isCorporate;
+            
             console.log(`🎯 Detection complete: ${isCorporate ? 'CORPORATE' : 'PUBLIC'} (${method})`);
+            console.log(`🔄 Set window.isCorporateNetworkDetected = ${isCorporate} for backward compatibility`);
             
             // Emit events
             this.emit('detection:completed', {
@@ -450,10 +457,9 @@
             try {
                 const manifest = JSON.parse(encryptedMatch[1].trim());
                 
-                // Use the existing corporate content loader's decryption logic
+                // Use the existing corporate content loader instance
                 if (window.CorporateContentLoader) {
-                    const loader = new window.CorporateContentLoader();
-                    return await this.decryptManifest(manifest, loader);
+                    return await this.decryptManifest(manifest, window.CorporateContentLoader);
                 } else {
                     console.error('❌ Corporate content loader not available');
                     return null;
