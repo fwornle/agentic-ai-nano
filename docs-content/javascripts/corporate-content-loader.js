@@ -221,20 +221,40 @@
             const currentPath = window.location.pathname;
             console.log('🔍 Current path:', currentPath);
             
-            // Corporate content mapping - only exact matches to prevent mismatches
+            // Corporate content mapping with fallback support
             const contentMapping = {
-                '/00_intro/coder/': '00_intro/coder-concise.md',
-                '/00_intro/llmapi/': '00_intro/llmapi-detailed.md',
-                '/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/': '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'
+                '/00_intro/coder/': {
+                    primary: '00_intro/coder-concise.md',
+                    fallback: '00_intro/coder-detailed.md'
+                },
+                '/00_intro/llmapi/': {
+                    primary: '00_intro/llmapi-detailed.md',
+                    fallback: null
+                },
+                '/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/': {
+                    primary: '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md',
+                    fallback: null
+                }
             };
             
             let targetFile = null;
+            let usedFallback = false;
             
             // Check for exact path matches first
-            for (const [path, file] of Object.entries(contentMapping)) {
+            for (const [path, config] of Object.entries(contentMapping)) {
                 if (currentPath.includes(path)) {
-                    targetFile = file;
-                    console.log(`📄 Matched ${path} - will load corporate content: ${file}`);
+                    // Try primary file first
+                    if (this.loadedContent[config.primary]) {
+                        targetFile = config.primary;
+                        console.log(`📄 Matched ${path} - will load primary corporate content: ${config.primary}`);
+                    } else if (config.fallback && this.loadedContent[config.fallback]) {
+                        targetFile = config.fallback;
+                        usedFallback = true;
+                        console.log(`📄 Matched ${path} - primary file not found, using fallback: ${config.fallback}`);
+                    } else {
+                        console.log(`❌ Neither primary (${config.primary}) nor fallback (${config.fallback}) found for ${path}`);
+                        console.log('Available files:', Object.keys(this.loadedContent));
+                    }
                     break;
                 }
             }
@@ -244,13 +264,8 @@
             }
             
             if (targetFile) {
-                if (this.loadedContent[targetFile]) {
-                    console.log(`🔄 Replacing page content with corporate version: ${targetFile}`);
-                    await this.replacePageContent(this.loadedContent[targetFile]);
-                } else {
-                    console.log(`❌ Target file ${targetFile} not found in loaded content`);
-                    console.log('Available files:', Object.keys(this.loadedContent));
-                }
+                console.log(`🔄 Replacing page content with corporate version: ${targetFile}${usedFallback ? ' (fallback)' : ''}`);
+                await this.replacePageContent(this.loadedContent[targetFile]);
             }
 
             // Handle image content
