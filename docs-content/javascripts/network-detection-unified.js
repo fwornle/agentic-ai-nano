@@ -426,27 +426,259 @@
             this.isProcessingContent = true;
             
             try {
-                // Use the existing corporate content loader for processing
-                // It has sophisticated markdown processing and image handling
-                if (window.CorporateContentLoader) {
-                    console.log('📄 Triggering corporate content loader for content processing...');
-                    const loaded = await window.CorporateContentLoader.load();
-                    if (loaded) {
-                        console.log('✅ Corporate content loaded and processed by existing loader');
-                        this.networkManager.state.contentLoaded = true;
-                        this.networkManager.emit('content:loaded', { source: 'corporate-content-loader' });
-                    } else {
-                        console.log('❌ Corporate content loader failed to load content');
-                    }
-                } else {
-                    console.error('❌ Corporate content loader not available');
+                console.log('📄 Starting independent content decryption and injection...');
+                
+                // Step 1: Load and decrypt content independently
+                const decryptedContent = await this.loadAndDecryptContent();
+                if (!decryptedContent) {
+                    console.error('❌ Failed to decrypt content');
+                    return;
                 }
                 
+                // Step 2: Inject content for current page independently
+                await this.injectContentForCurrentPage(pageConfig, decryptedContent);
+                
+                this.networkManager.state.contentLoaded = true;
+                this.networkManager.emit('content:loaded', { source: 'unified-system' });
+                console.log('✅ Corporate content loaded and injected successfully');
+                
             } catch (error) {
-                console.error('❌ Failed to trigger corporate content loading:', error);
+                console.error('❌ Failed to load and inject content:', error);
             } finally {
                 this.isProcessingContent = false;
             }
+        }
+        
+        async loadAndDecryptContent() {
+            console.log('🔓 Loading and decrypting corporate content...');
+            
+            // Get encrypted content from HTML comments
+            const htmlContent = document.documentElement.outerHTML;
+            const encryptedMatch = htmlContent.match(/ENCRYPTED_CORPORATE_CONTENT_START\s*([\s\S]*?)\s*ENCRYPTED_CORPORATE_CONTENT_END/);
+            
+            if (!encryptedMatch) {
+                console.log('❌ No encrypted content found in HTML');
+                return null;
+            }
+            
+            try {
+                const manifest = JSON.parse(encryptedMatch[1].trim());
+                console.log('✅ Parsed encrypted manifest with', Object.keys(manifest.content || {}).length, 'files');
+                
+                // Decrypt all content
+                const decryptedContent = {};
+                const corporateKey = 'bmw-corporate-network-2024-secure';
+                const key = await this.deriveKey(corporateKey);
+                
+                if (manifest.files && manifest.content) {
+                    for (const [filePath, encryptedData] of Object.entries(manifest.content)) {
+                        try {
+                            decryptedContent[filePath] = await this.decryptContent(encryptedData, key);
+                            console.log(`🔓 Decrypted: ${filePath}`);
+                        } catch (error) {
+                            console.error(`❌ Failed to decrypt ${filePath}:`, error);
+                        }
+                    }
+                }
+                
+                return decryptedContent;
+                
+            } catch (error) {
+                console.error('❌ Failed to parse or decrypt content:', error);
+                return null;
+            }
+        }
+        
+        async deriveKey(passphrase) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(passphrase);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            return await crypto.subtle.importKey(
+                'raw',
+                hashBuffer,
+                { name: 'AES-GCM' },
+                false,
+                ['decrypt']
+            );
+        }
+        
+        async decryptContent(encryptedData, key) {
+            const iv = this.base64ToArrayBuffer(encryptedData.iv);
+            const authTag = this.base64ToArrayBuffer(encryptedData.authTag);
+            const encrypted = this.base64ToArrayBuffer(encryptedData.encrypted);
+            
+            // Combine encrypted data with auth tag for AES-GCM
+            const combinedBuffer = new Uint8Array(encrypted.byteLength + authTag.byteLength);
+            combinedBuffer.set(new Uint8Array(encrypted), 0);
+            combinedBuffer.set(new Uint8Array(authTag), encrypted.byteLength);
+            
+            const decrypted = await crypto.subtle.decrypt(
+                {
+                    name: 'AES-GCM',
+                    iv: iv
+                },
+                key,
+                combinedBuffer
+            );
+            
+            return new TextDecoder().decode(decrypted);
+        }
+        
+        base64ToArrayBuffer(base64) {
+            const binaryString = atob(base64);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+        
+        async injectContentForCurrentPage(pageConfig, decryptedContent) {
+            const { config } = pageConfig;
+            console.log(`📄 Injecting content for page:`, config);
+            
+            // Determine which content to use (primary first, fallback if needed)
+            let targetContent = config.primaryContent;
+            let contentToInject = decryptedContent[targetContent];
+            
+            if (!contentToInject && config.fallbackContent) {
+                console.log(`⚠️ Primary content ${targetContent} not found, trying fallback...`);
+                targetContent = config.fallbackContent;
+                contentToInject = decryptedContent[targetContent];
+            }
+            
+            if (!contentToInject) {
+                console.error(`❌ No content found for ${targetContent}`);
+                console.log('Available content files:', Object.keys(decryptedContent));
+                return;
+            }
+            
+            console.log(`📄 Injecting corporate content: ${targetContent}`);
+            await this.replacePageContent(contentToInject);
+            
+            // Set up detailed content switching for coder page if needed
+            if (config.detailedContent && decryptedContent[config.detailedContent]) {
+                this.setupDetailedContentSwitching(config, decryptedContent);
+            }
+        }
+        
+        setupDetailedContentSwitching(config, decryptedContent) {
+            const detailedDiv = document.getElementById(config.detailHash);
+            if (!detailedDiv) {
+                console.log(`⚠️ Detailed content div #${config.detailHash} not found`);
+                return;
+            }
+            
+            console.log(`🔗 Setting up detailed content switching for #${config.detailHash}`);
+            
+            // Set up hash change listener
+            const handleHashChange = () => {
+                if (window.location.hash === `#${config.detailHash}`) {
+                    console.log('📄 Loading detailed content...');
+                    detailedDiv.innerHTML = this.convertMarkdownToHtml(decryptedContent[config.detailedContent]);
+                    detailedDiv.style.display = 'block';
+                    detailedDiv.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    detailedDiv.style.display = 'none';
+                }
+            };
+            
+            window.addEventListener('hashchange', handleHashChange);
+            handleHashChange(); // Check current hash
+        }
+        
+        convertMarkdownToHtml(markdown) {
+            if (!markdown) return '';
+            
+            // Enhanced markdown conversion with better formatting
+            let html = markdown;
+            
+            // Headers
+            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Code blocks
+            html = html.replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Bold and italic
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            // Links with better handling
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+            
+            // Images
+            html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;">');
+            
+            // Lists
+            html = html.replace(/^\* (.+)$/gm, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+            
+            // Checkboxes
+            html = html.replace(/- \[x\] (.+)/g, '<li style="list-style: none;"><input type="checkbox" checked disabled> $1</li>');
+            html = html.replace(/- \[ \] (.+)/g, '<li style="list-style: none;"><input type="checkbox" disabled> $1</li>');
+            
+            // Paragraphs
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = html.replace(/\n/g, '<br>');
+            
+            // Wrap in paragraph if not already wrapped
+            if (!html.startsWith('<')) {
+                html = `<p>${html}</p>`;
+            }
+            
+            return html;
+        }
+        
+        async replacePageContent(markdownContent) {
+            // Find the main content area
+            const contentSelectors = [
+                'article.md-typeset',
+                '.md-content__inner article',
+                '.md-content__inner .md-typeset'
+            ];
+            
+            let contentArea = null;
+            for (const selector of contentSelectors) {
+                contentArea = document.querySelector(selector);
+                if (contentArea) break;
+            }
+            
+            if (!contentArea) {
+                console.error('❌ Could not find content area to replace');
+                return;
+            }
+            
+            console.log('🔄 Replacing page content with decrypted corporate content...');
+            const htmlContent = this.convertMarkdownToHtml(markdownContent);
+            contentArea.innerHTML = htmlContent;
+            
+            // Process images to ensure they load correctly
+            this.processImages(contentArea);
+        }
+        
+        processImages(contentArea) {
+            const images = contentArea.querySelectorAll('img');
+            images.forEach(img => {
+                // Fix relative image paths
+                if (img.src.startsWith('../')) {
+                    const basePath = window.location.pathname.includes('/agentic-ai-nano/') ? 
+                        '/agentic-ai-nano/' : '/';
+                    img.src = basePath + img.src.replace('../', '');
+                }
+                
+                // Add error handling
+                img.onerror = function() {
+                    console.warn(`⚠️ Failed to load image: ${this.src}`);
+                    this.style.display = 'none';
+                };
+                
+                console.log(`🖼️ Processing image: ${img.src}`);
+            });
         }
         
         
@@ -480,13 +712,32 @@
         }
         
         disableOldContentLoader() {
-            // Prevent the old loader from auto-triggering but keep its load functionality available
+            // Completely disable the old corporate content loader to prevent any conflicts
+            // We now handle everything independently
+            
+            // Prevent the old loader from auto-initializing
             if (window.CorporateContentLoader) {
-                // Disable auto-detection but preserve the load method for explicit calls
+                console.log('🔧 Completely disabling old corporate content loader');
+                
+                // Override all methods to prevent execution
+                const noop = () => {
+                    console.log('🔄 Old corporate content loader disabled - using unified system');
+                    return Promise.resolve(false);
+                };
+                
+                window.CorporateContentLoader.load = noop;
+                window.CorporateContentLoader.init = noop;
                 window.CorporateContentLoader.autoDetectionDisabled = true;
-                console.log('🔧 Disabled old corporate content loader auto-detection to prevent conflicts');
-                console.log('📋 Corporate content loader load() method preserved for explicit calls');
             }
+            
+            // Also prevent the auto-initialization script from running
+            const scripts = document.querySelectorAll('script[src*="corporate-content-loader"]');
+            scripts.forEach(script => {
+                script.disabled = true;
+                console.log('🔧 Disabled corporate content loader script');
+            });
+            
+            console.log('✅ Old corporate content loader completely disabled');
         }
         
         async initialize() {
