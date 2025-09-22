@@ -184,11 +184,71 @@ class ProfessionalPodcastTTS {
             }));
         });
         
-        // Limit to quality voices only (max 25 total to include novelty)
-        if (this.availableVoices.length > 25) {
-            console.log(`🎯 Limiting from ${this.availableVoices.length} to 25 quality voices`);
-            this.availableVoices = this.availableVoices.slice(0, 25);
+        // IMPROVED: Ensure fair representation from all categories
+        // Get voices by category first  
+        const voicesByCategory = {};
+        categories.forEach(cat => {
+            voicesByCategory[cat] = Array.from(voiceMap.values())
+                .filter(v => v.category === cat)
+                .sort((a, b) => a.label.localeCompare(b.label));
+        });
+        
+        console.log('🎯 Voices found by category:', Object.fromEntries(
+            Object.entries(voicesByCategory).map(([cat, voices]) => [cat, voices.length])
+        ));
+        
+        // FIXED: Smart distribution to ensure key categories are always represented
+        // Clear existing array and rebuild with fair distribution
+        this.availableVoices = [];
+        
+        // Priority 1: Ensure we have at least 2-3 voices from key categories
+        const guaranteedCategories = {
+            'premium': 3,        // High quality voices
+            'native-en': 3,      // Standard English voices  
+            'non-native-accent': 3, // Foreign accent voices (user specifically wants these)
+            'novelty': 3         // Fun voices (user specifically wants these)
+        };
+        
+        // Add guaranteed voices first
+        Object.entries(guaranteedCategories).forEach(([category, maxCount]) => {
+            const categoryVoices = voicesByCategory[category] || [];
+            const voicesToAdd = categoryVoices.slice(0, maxCount);
+            voicesToAdd.forEach(v => {
+                const voice = v.voice;
+                voice.displayName = v.label;
+                this.availableVoices.push(voice);
+            });
+            console.log(`✅ Added ${voicesToAdd.length} ${category} voices`);
+        });
+        
+        // Add remaining voices from other categories to fill up to reasonable total (30 instead of 25)
+        const remainingSlots = 30 - this.availableVoices.length;
+        if (remainingSlots > 0) {
+            const otherCategories = ['microsoft', 'english'];
+            otherCategories.forEach(cat => {
+                const categoryVoices = voicesByCategory[cat] || [];
+                const remainingInCategory = categoryVoices.slice(guaranteedCategories[cat] || 0);
+                const slotsForCategory = Math.min(remainingInCategory.length, Math.floor(remainingSlots / otherCategories.length));
+                
+                remainingInCategory.slice(0, slotsForCategory).forEach(v => {
+                    const voice = v.voice;
+                    voice.displayName = v.label;
+                    this.availableVoices.push(voice);
+                });
+            });
         }
+        
+        console.log(`🎯 Final voice distribution: ${this.availableVoices.length} total voices`);
+        
+        // Log the final voice categories for debugging
+        const finalDistribution = {};
+        this.availableVoices.forEach(voice => {
+            const voiceData = Array.from(voiceMap.values()).find(v => v.voice === voice);
+            if (voiceData) {
+                finalDistribution[voiceData.category] = (finalDistribution[voiceData.category] || 0) + 1;
+            }
+        });
+        console.log('📊 Final voice category distribution:', finalDistribution);
         
         // Fallback if no voices found - especially important on mobile
         if (this.availableVoices.length === 0) {
@@ -582,12 +642,16 @@ class ProfessionalPodcastTTS {
         console.log('⚡ Speed change requested:', speed);
         this.playbackRate = speed;
         
-        // Apply speed immediately if currently playing and utterance exists
+        // Speed changes require restart to take effect immediately
         if (this.isPlaying && this.utterance) {
-            this.utterance.rate = speed;
-            console.log('⚡ Speed applied immediately to current utterance:', speed);
+            console.log('🔄 Restarting current chunk to apply speed immediately...');
+            this.synth.cancel();
+            // Small delay to ensure cancel completes, then restart current chunk
+            setTimeout(() => {
+                this.playCurrentChunk();
+            }, 50);
         } else {
-            console.log('⚡ Speed will apply to next chunk');
+            console.log('⚡ Speed will apply when playback starts');
         }
         
         this.saveSettings();
@@ -599,12 +663,21 @@ class ProfessionalPodcastTTS {
         const volumeText = document.getElementById('volume-text');
         if (volumeText) volumeText.textContent = Math.round(volume * 100) + '%';
         
-        // Apply volume immediately to current utterance if playing
+        // Try to apply volume immediately, but restart if needed for immediate effect
         if (this.isPlaying && this.utterance) {
+            // First try direct property change (works on some browsers)
             this.utterance.volume = volume;
-            console.log('🔊 Volume applied immediately to current utterance:', Math.round(volume * 100) + '%');
+            console.log('🔊 Volume applied to current utterance:', Math.round(volume * 100) + '%');
+            
+            // For browsers where direct volume change doesn't work, restart the chunk
+            // This ensures immediate effect across all browsers
+            console.log('🔄 Restarting current chunk to ensure volume change takes effect...');
+            this.synth.cancel();
+            setTimeout(() => {
+                this.playCurrentChunk();
+            }, 50);
         } else {
-            console.log('🔊 Volume will apply to next chunk:', Math.round(volume * 100) + '%');
+            console.log('🔊 Volume will apply when playback starts:', Math.round(volume * 100) + '%');
         }
         
         this.saveSettings();
