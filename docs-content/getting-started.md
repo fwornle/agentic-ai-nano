@@ -89,6 +89,48 @@ Master the Model Context Protocol, Agent Communication Protocol, and sophisticat
 
 **Setup**: Full environment plus additional tools (Docker, cloud access)
 
+## 🎧 Podcast Mode {#podcast-mode}
+
+Learn while commuting or multitasking! The nano-degree content can be converted to high-quality speech for audio learning.
+
+### Benefits of Podcast Mode
+
+- **Flexible Learning**: Study during commutes, workouts, or daily activities  
+- **Reinforcement**: Audio learning complements visual reading  
+- **Accessibility**: Support for learners with visual impairments  
+- **Review**: Perfect for reviewing concepts while doing other activities  
+
+### How to Use Podcast Mode
+
+1. **Text-to-Speech Tools**: Use built-in OS features or dedicated apps  
+2. **Browser Extensions**: Install read-aloud extensions for web content  
+3. **Mobile Apps**: Use screen readers or text-to-speech apps  
+4. **AI Assistants**: Ask Claude, ChatGPT, or other AI to read content aloud  
+
+### Recommended Tools
+
+#### Desktop
+- **macOS**: Built-in VoiceOver or System Speech  
+- **Windows**: Narrator or NVDA screen reader  
+- **Linux**: eSpeak or Festival speech synthesis  
+
+#### Browser Extensions
+- **Natural Reader**: Chrome/Firefox extension with high-quality voices  
+- **Read Aloud**: Free text-to-speech for web pages  
+- **SpeakIt**: Simple and effective reading extension  
+
+#### Mobile Apps
+- **Voice Dream Reader**: Premium iOS/Android text-to-speech  
+- **NaturalReader**: Mobile app with offline capabilities  
+- **Google TalkBack**: Built-in Android accessibility feature  
+
+### Tips for Audio Learning
+
+- **Slow Down**: Reduce speech speed for complex technical content  
+- **Take Breaks**: Pause frequently to process information  
+- **Follow Along**: Keep the text visible when possible  
+- **Review**: Re-listen to challenging sections multiple times  
+
 ## Project Structure
 
 ```text
@@ -187,7 +229,7 @@ pip install pytest pytest-cov
 pip install mkdocs mkdocs-material
 ```
 
-## 🆘 Support & Community
+## 🆘 Support & Community {#support}
 
 ### Getting Help
 

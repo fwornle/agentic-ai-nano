@@ -1180,7 +1180,7 @@ Atomic agents represent a paradigm shift toward modular, composable agent archit
 
 ## 🧭 Navigation
 
-**Previous:** [Session 5 - Type-Safe Development →](Session5_Security_Monitoring.md)  
-**Next:** [Session 7 - Agent Systems →](Session7_ADK_Essentials.md)
+**Previous:** [Session 5 - Type-Safe Development →](../../Session5_PydanticAI_Type_Safe_Agents.md)  
+**Next:** [Session 7 - Agent Systems →](../../Session7_ADK_Essentials.md)
 
 ---

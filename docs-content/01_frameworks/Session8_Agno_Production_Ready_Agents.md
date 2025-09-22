@@ -512,7 +512,7 @@ These modules contain the complete advanced content from the original file, rest
 
 #---
 
-## 📝 Multiple Choice Test - Session 8 Questions
+## 📝 Multiple Choice Test - Session 8 Questions {#multiple-choice-test-session-8}
 
 **Question 1:** What is Agno's primary advantage for data processing systems?  
 A) Simplest learning curve  
