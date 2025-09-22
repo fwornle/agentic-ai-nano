@@ -537,19 +537,18 @@
             const { config } = pageConfig;
             console.log(`📄 Injecting content for page:`, config);
             
-            // Determine which content to use (primary first, fallback if needed)
-            let targetContent = config.primaryContent;
-            let contentToInject = decryptedContent[targetContent];
-            
-            if (!contentToInject && config.fallbackContent) {
-                console.log(`⚠️ Primary content ${targetContent} not found, trying fallback...`);
-                targetContent = config.fallbackContent;
-                contentToInject = decryptedContent[targetContent];
-            }
+            // Strict content matching - no fallbacks, clear error messages
+            const targetContent = config.primaryContent;
+            const contentToInject = decryptedContent[targetContent];
             
             if (!contentToInject) {
-                console.error(`❌ No content found for ${targetContent}`);
-                console.log('Available content files:', Object.keys(decryptedContent));
+                console.error(`❌ CONTENT MISSING: Required file '${targetContent}' not found in encrypted content`);
+                console.error('📋 Page configuration:', config);
+                console.error('📋 Available encrypted files:', Object.keys(decryptedContent));
+                console.error('💡 Solution: Re-run encryption script to include missing file');
+                
+                // Show error in the UI as well
+                this.showContentError(targetContent, Object.keys(decryptedContent));
                 return;
             }
             
@@ -559,6 +558,26 @@
             // Set up detailed content switching for coder page if needed
             if (config.detailedContent && decryptedContent[config.detailedContent]) {
                 this.setupDetailedContentSwitching(config, decryptedContent);
+            }
+        }
+        
+        showContentError(missingFile, availableFiles) {
+            const contentArea = document.querySelector('article.md-typeset') || 
+                              document.querySelector('.md-content__inner article') || 
+                              document.querySelector('.md-content__inner .md-typeset');
+            
+            if (contentArea) {
+                contentArea.innerHTML = `
+                    <div style="background: #ff4444; color: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <h2>🚫 Corporate Content Error</h2>
+                        <p><strong>Missing file:</strong> <code>${missingFile}</code></p>
+                        <p><strong>Available files:</strong></p>
+                        <ul style="margin: 10px 0;">
+                            ${availableFiles.map(file => `<li><code>${file}</code></li>`).join('')}
+                        </ul>
+                        <p><strong>Solution:</strong> Re-run the encryption script to include the missing file.</p>
+                    </div>
+                `;
             }
         }
         
