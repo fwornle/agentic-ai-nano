@@ -387,4 +387,4 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/corporate-content-loader.js?v=2025-09-21-debug-fix
   - javascripts/network-detection-unified.js?v=2025-09-22-unified-system
-  - javascripts/podcast-tts-v2.js?v=2025-09-22-real-time-fix-mobile-voices
+  - javascripts/podcast-tts-v2.js?v=2025-09-22-seamless-speed-mobile-voices
