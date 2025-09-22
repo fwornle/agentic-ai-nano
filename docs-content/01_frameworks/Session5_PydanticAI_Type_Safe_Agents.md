@@ -702,6 +702,126 @@ B) Runtime configuration and dependencies
 C) Conversation history  
 D) Speed control  
 
+**Question 6:** Which decorator enables cross-field validation in Pydantic models?  
+A) @cross_validator  
+B) @model_validator  
+C) @root_validator  
+D) @field_validator  
+
+**Question 7:** How do you implement custom validation logic for complex business rules?  
+A) Custom @validator decorator with logic  
+B) External validation services  
+C) Built-in validators only  
+D) Database constraints  
+
+**Question 8:** What's the best practice for handling validation errors in production?  
+A) Return generic error messages  
+B) Log errors and continue silently  
+C) Structured error responses with user-friendly messages  
+D) Crash and restart  
+
+**Question 9:** How do you implement conditional validation based on another field's value?  
+A) Database triggers  
+B) External validation functions  
+C) @field_validator with conditions  
+D) @root_validator accessing all field values  
+
+**Question 10:** What's the recommended approach for validating enum-like fields?  
+A) String validation with allowed values  
+B) Custom validation functions  
+C) Database foreign keys  
+D) Use Python Enum with automatic validation  
+
+**Question 11:** Which pattern prevents cascading failures in agent systems?  
+A) Caching strategies  
+B) Circuit breaker with fallback mechanisms  
+C) Retry with exponential backoff  
+D) Load balancing only  
+
+**Question 12:** How should you handle timeouts in PydanticAI agent execution?  
+A) Simple sleep() calls  
+B) Manual timeout tracking  
+C) asyncio.wait_for() with proper exception handling  
+D) Infinite waiting  
+
+**Question 13:** What's the best approach for rate limiting agent requests?  
+A) Semaphores with configurable limits  
+B) Random throttling  
+C) Simple counters  
+D) Fixed delays  
+
+**Question 14:** Which metrics are most important for monitoring PydanticAI agents?  
+A) CPU usage only  
+B) Memory usage only  
+C) Success rate, response time, and validation failures  
+D) Network throughput only  
+
+**Question 15:** How should you manage configuration in production PydanticAI applications?  
+A) Environment variables with Pydantic Settings  
+B) Hard-coded values  
+C) JSON files only  
+D) Database storage  
+
+**Question 16:** What's the most robust retry strategy for failed agent operations?  
+A) Exponential backoff with circuit breaker  
+B) Fixed interval retries  
+C) Linear backoff  
+D) Random intervals  
+
+**Question 17:** How do you handle partial failures in multi-step agent workflows?  
+A) Manual intervention only  
+B) Circuit breaker with fallback strategies  
+C) Fail entire workflow  
+D) Ignore failures  
+
+**Question 18:** Which logging strategy provides the best observability?  
+A) Simple text logs  
+B) Debug statements only  
+C) Error logs only  
+D) Structured logging with correlation IDs  
+
+**Question 19:** How should you integrate PydanticAI with existing systems?  
+A) Direct database access  
+B) File-based integration  
+C) Adapter pattern with Pydantic models  
+D) Manual data transformation  
+
+**Question 20:** What's the best practice for handling transient errors?  
+A) Exponential backoff with jitter and max retries  
+B) Immediate failure  
+C) Manual recovery only  
+D) Fixed retries  
+
+**Question 21:** Which caching strategy works best for PydanticAI agents?  
+A) No caching  
+B) Infinite caching  
+C) Random cache eviction  
+D) LRU cache with TTL for frequently accessed data  
+
+**Question 22:** What is the benefit of batch processing in PydanticAI applications?  
+A) Simpler code structure  
+B) Easier debugging  
+C) Better error messages  
+D) Improved throughput and resource utilization  
+
+**Question 23:** How should you optimize PydanticAI model validation performance?  
+A) Use field-level caching and validation shortcuts  
+B) Disable all validation  
+C) Validate only critical fields  
+D) Use external validation services  
+
+**Question 24:** Which approach minimizes memory usage in large-scale PydanticAI deployments?  
+A) Cache all data permanently  
+B) Load everything in memory  
+C) Implement lazy loading with weak references and cleanup  
+D) Use only global variables  
+
+**Question 25:** What is the most effective way to monitor PydanticAI agent performance?  
+A) Automated metrics collection with alerts and dashboards  
+B) Manual log review  
+C) Periodic manual testing  
+D) User feedback only  
+
 [View Solutions →](Session5_Test_Solutions.md)
 
 ---
