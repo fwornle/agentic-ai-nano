@@ -79,8 +79,22 @@ class ProfessionalPodcastTTS {
         const voices = this.synth.getVoices();
         console.log(`🎙️ Raw voices available: ${voices.length}`);
         
+        // Device-specific logging for voice consistency debugging
+        const userAgent = navigator.userAgent;
+        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+        const isChrome = /Chrome/.test(userAgent);
+        const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+        
+        console.log('🖥️ Device Info:', {
+            isMobile,
+            isChrome,
+            isSafari,
+            userAgent: userAgent.substring(0, 100) + '...'
+        });
+        
         // Debug: Log all voice names to see what's actually available
         console.log('📋 All available voice names:', voices.map(v => v.name));
+        console.log('🌍 Voice languages available:', [...new Set(voices.map(v => v.lang))].sort());
         
         if (voices.length === 0) {
             console.warn('🚨 No voices available from speechSynthesis.getVoices()');
@@ -265,8 +279,43 @@ class ProfessionalPodcastTTS {
         });
         console.log('📊 Final voice category distribution:', finalDistribution);
         
+        // Enhanced mobile voice detection - mobile Chrome often needs special handling
+        if (isMobile && this.availableVoices.length < 15) {
+            console.log('📱 Mobile device detected with limited voices, enhancing selection...');
+            
+            // On mobile, be more liberal about including voices
+            voices.forEach(voice => {
+                const name = voice.name.toLowerCase();
+                const lang = voice.lang.toLowerCase();
+                
+                // Include more voices on mobile to match desktop experience
+                let mobileLabel = '';
+                let mobileCategory = 'mobile-extra';
+                
+                if (lang.includes('en') && !voiceMap.has(voice.name)) {
+                    // Check for any voice that might provide accent variety
+                    if (name.includes('male') || name.includes('female')) {
+                        mobileLabel = `Mobile: ${voice.name}`;
+                    } else if (lang !== 'en-us') {
+                        mobileLabel = `Mobile: ${voice.name} (${lang})`;
+                    } else {
+                        mobileLabel = `Mobile: ${voice.name}`;
+                    }
+                    
+                    // Add to available voices if we have space
+                    if (mobileLabel && this.availableVoices.length < 25) {
+                        const mobileVoice = { voice, label: mobileLabel, category: mobileCategory };
+                        voice.displayName = mobileLabel;
+                        this.availableVoices.push(voice);
+                        console.log('📱 Added mobile voice:', mobileLabel);
+                    }
+                }
+            });
+        }
+        
         // Fallback if no voices found - especially important on mobile
         if (this.availableVoices.length === 0) {
+            console.warn('🚨 No categorized voices found, using fallback detection...');
             const englishVoices = voices.filter(v => v.lang.startsWith('en'));
             
             // Remove duplicates by creating a Map keyed by voice characteristics
@@ -280,6 +329,7 @@ class ProfessionalPodcastTTS {
             });
             
             this.availableVoices = Array.from(uniqueVoices.values()).slice(0, 12);
+            console.log('🔄 Fallback voices loaded:', this.availableVoices.length);
         }
         
         // Final deduplication by display name to avoid mobile duplicate issues
@@ -681,26 +731,27 @@ class ProfessionalPodcastTTS {
                 const actualRate = this.utterance.rate;
                 console.log('📊 Speed change result: requested =', speed, 'actual =', actualRate, 'original =', originalRate);
                 
-                // Check if the change worked by comparing to what we requested
-                const changeWorked = Math.abs(actualRate - speed) <= 0.01;
+                // More tolerant detection: check if change worked or if it's close enough
+                // Some browsers might apply the change with slight floating point differences
+                const changeWorked = Math.abs(actualRate - speed) <= 0.05; // More tolerant threshold
+                const actuallyChanged = Math.abs(actualRate - originalRate) > 0.01; // Did something change?
                 
-                if (!changeWorked) {
-                    // Direct change didn't work - remember this for future calls
-                    this.liveSpeedSupported = false;
-                    console.log('🔄 Live speed change not supported, restarting with new rate...');
+                if (!changeWorked && !actuallyChanged) {
+                    // Direct change didn't work at all - remember this for future calls IN THIS UTTERANCE ONLY
+                    console.log('🔄 Live speed change not supported for this utterance, restarting...');
                     this.synth.cancel();
                     setTimeout(() => {
                         this.playCurrentChunk();
                     }, 50);
                 } else {
-                    // It worked! Remember this for future optimizations
-                    if (this.liveSpeedSupported === null) {
-                        this.liveSpeedSupported = true;
-                        console.log('✅ Live speed changes confirmed working on this browser');
+                    // It worked or partially worked! 
+                    if (changeWorked) {
+                        console.log('⚡ Speed changed successfully without restart!');
+                    } else {
+                        console.log('⚡ Speed changed partially - close enough, not restarting');
                     }
-                    console.log('⚡ Speed changed successfully without restart!');
                 }
-            }, 30); // Even longer timeout for more reliable detection
+            }, 50); // Longer timeout for more reliable detection
         } else {
             console.log('⚡ Speed will apply when playback starts');
         }
@@ -738,26 +789,26 @@ class ProfessionalPodcastTTS {
                 const actualVolume = this.utterance.volume;
                 console.log('📊 Volume change result: requested =', volume, 'actual =', actualVolume, 'original =', originalVolume);
                 
-                // Check if the change worked by comparing to what we requested
-                const changeWorked = Math.abs(actualVolume - volume) <= 0.05;
+                // More tolerant detection: check if change worked or if it's close enough
+                const changeWorked = Math.abs(actualVolume - volume) <= 0.1; // More tolerant threshold for volume
+                const actuallyChanged = Math.abs(actualVolume - originalVolume) > 0.05; // Did something change?
                 
-                if (!changeWorked) {
-                    // Direct change didn't work - remember this for future calls
-                    this.liveVolumeSupported = false;
-                    console.log('🔄 Live volume change not supported, restarting with new volume...');
+                if (!changeWorked && !actuallyChanged) {
+                    // Direct change didn't work at all - restart for this utterance only
+                    console.log('🔄 Live volume change not supported for this utterance, restarting...');
                     this.synth.cancel();
                     setTimeout(() => {
                         this.playCurrentChunk();
                     }, 50);
                 } else {
-                    // It worked! Remember this for future optimizations
-                    if (this.liveVolumeSupported === null) {
-                        this.liveVolumeSupported = true;
-                        console.log('✅ Live volume changes confirmed working on this browser');
+                    // It worked or partially worked!
+                    if (changeWorked) {
+                        console.log('🔊 Volume changed successfully without restart!');
+                    } else {
+                        console.log('🔊 Volume changed partially - close enough, not restarting');
                     }
-                    console.log('🔊 Volume changed successfully without restart!');
                 }
-            }, 30); // Even longer timeout for more reliable detection
+            }, 50); // Longer timeout for more reliable detection
         } else {
             console.log('🔊 Volume will apply when playback starts:', Math.round(volume * 100) + '%');
         }
@@ -1109,6 +1160,12 @@ class ProfessionalPodcastTTS {
             rate: this.utterance.rate,
             pitch: this.utterance.pitch
         });
+        
+        // Reset live change capability detection for new utterance
+        // This ensures speed/volume controls work for each new paragraph
+        this.liveVolumeSupported = null;
+        this.liveSpeedSupported = null;
+        console.log('🔄 Reset live control capability detection for new utterance');
         
         // Event handlers
         this.utterance.onstart = () => {
