@@ -280,37 +280,82 @@ class ProfessionalPodcastTTS {
         console.log('📊 Final voice category distribution:', finalDistribution);
         
         // Enhanced mobile voice detection - mobile Chrome often needs special handling
-        if (isMobile && this.availableVoices.length < 15) {
-            console.log('📱 Mobile device detected with limited voices, enhancing selection...');
+        if (isMobile) {
+            console.log('📱 Mobile device detected, scanning for additional voices...');
             
-            // On mobile, be more liberal about including voices
+            // On mobile, aggressively scan for ALL available voices to match desktop
             voices.forEach(voice => {
                 const name = voice.name.toLowerCase();
                 const lang = voice.lang.toLowerCase();
                 
-                // Include more voices on mobile to match desktop experience
+                // Skip if already categorized
+                if (Array.from(voiceMap.values()).some(v => v.voice.name === voice.name)) {
+                    return;
+                }
+                
                 let mobileLabel = '';
                 let mobileCategory = 'mobile-extra';
                 
-                if (lang.includes('en') && !voiceMap.has(voice.name)) {
-                    // Check for any voice that might provide accent variety
-                    if (name.includes('male') || name.includes('female')) {
-                        mobileLabel = `Mobile: ${voice.name}`;
-                    } else if (lang !== 'en-us') {
-                        mobileLabel = `Mobile: ${voice.name} (${lang})`;
-                    } else {
-                        mobileLabel = `Mobile: ${voice.name}`;
-                    }
-                    
-                    // Add to available voices if we have space
-                    if (mobileLabel && this.availableVoices.length < 25) {
-                        const mobileVoice = { voice, label: mobileLabel, category: mobileCategory };
-                        voice.displayName = mobileLabel;
-                        this.availableVoices.push(voice);
-                        console.log('📱 Added mobile voice:', mobileLabel);
-                    }
+                // Check for musical/novelty voices that mobile might have
+                if (name.includes('cellos') || name.includes('cello') || 
+                    name.includes('bells') || name.includes('organ') || 
+                    name.includes('pipe') || name.includes('whisper') ||
+                    name.includes('bubbles') || name.includes('albert') ||
+                    name.includes('bad news') || name.includes('good news') ||
+                    name.includes('hysterical') || name.includes('deranged') ||
+                    name.includes('robot') || name.includes('trinoids')) {
+                    mobileLabel = `🎭 ${voice.name}`;
+                    mobileCategory = 'novelty';
+                    console.log('🎭 Found mobile novelty voice:', voice.name);
+                }
+                // Check for non-native English speakers on mobile
+                else if (lang.includes('en') && lang !== 'en-us') {
+                    if (lang.includes('en-gb')) mobileLabel = `Mobile: UK English (${voice.name})`;
+                    else if (lang.includes('en-au')) mobileLabel = `Mobile: Australian (${voice.name})`;
+                    else if (lang.includes('en-za')) mobileLabel = `Mobile: South African (${voice.name})`;
+                    else if (lang.includes('en-in')) mobileLabel = `Mobile: Indian English (${voice.name})`;
+                    else if (lang.includes('en-ie')) mobileLabel = `Mobile: Irish English (${voice.name})`;
+                    else mobileLabel = `Mobile: ${lang.toUpperCase()} English (${voice.name})`;
+                    mobileCategory = 'non-native-accent';
+                }
+                // Check for ANY non-English voices that might speak English
+                else if (!lang.includes('en')) {
+                    // Some mobile systems have multilingual voices that can speak English with accents
+                    if (lang.includes('de')) mobileLabel = `Non-native: German Accent (${voice.name})`;
+                    else if (lang.includes('es')) mobileLabel = `Non-native: Spanish Accent (${voice.name})`;
+                    else if (lang.includes('fr')) mobileLabel = `Non-native: French Accent (${voice.name})`;
+                    else if (lang.includes('it')) mobileLabel = `Non-native: Italian Accent (${voice.name})`;
+                    else if (lang.includes('pt')) mobileLabel = `Non-native: Portuguese Accent (${voice.name})`;
+                    else if (lang.includes('ru')) mobileLabel = `Non-native: Russian Accent (${voice.name})`;
+                    else if (lang.includes('zh')) mobileLabel = `Non-native: Chinese Accent (${voice.name})`;
+                    else if (lang.includes('ja')) mobileLabel = `Non-native: Japanese Accent (${voice.name})`;
+                    else if (lang.includes('ko')) mobileLabel = `Non-native: Korean Accent (${voice.name})`;
+                    else if (lang.includes('hi')) mobileLabel = `Non-native: Hindi Accent (${voice.name})`;
+                    else if (lang.includes('ar')) mobileLabel = `Non-native: Arabic Accent (${voice.name})`;
+                    else if (lang.includes('sv')) mobileLabel = `Non-native: Swedish Accent (${voice.name})`;
+                    else if (lang.includes('no')) mobileLabel = `Non-native: Norwegian Accent (${voice.name})`;
+                    else if (lang.includes('da')) mobileLabel = `Non-native: Danish Accent (${voice.name})`;
+                    else if (lang.includes('nl')) mobileLabel = `Non-native: Dutch Accent (${voice.name})`;
+                    else if (lang.includes('pl')) mobileLabel = `Non-native: Polish Accent (${voice.name})`;
+                    else if (lang.includes('th')) mobileLabel = `Non-native: Thai Accent (${voice.name})`;
+                    else if (lang.includes('vi')) mobileLabel = `Non-native: Vietnamese Accent (${voice.name})`;
+                    mobileCategory = 'non-native-accent';
+                }
+                // Include any other English voices
+                else if (lang.includes('en')) {
+                    mobileLabel = `Mobile: ${voice.name}`;
+                    mobileCategory = 'mobile-extra';
+                }
+                
+                // Add to available voices if we found a label and have space
+                if (mobileLabel && this.availableVoices.length < 35) {
+                    voice.displayName = mobileLabel;
+                    this.availableVoices.push(voice);
+                    console.log('📱 Added mobile voice:', mobileLabel);
                 }
             });
+            
+            console.log(`📱 Mobile voice enhancement complete: ${this.availableVoices.length} total voices`);
         }
         
         // Fallback if no voices found - especially important on mobile
@@ -705,53 +750,23 @@ class ProfessionalPodcastTTS {
 
     changeSpeed(speed) {
         console.log('⚡ Speed change requested:', speed, 'current:', this.playbackRate);
+        const oldSpeed = this.playbackRate;
         this.playbackRate = speed;
         
-        // Try to apply speed change with minimal disruption
+        // Always restart with the new speed for consistent behavior
+        // The Speech Synthesis API doesn't reliably support live speed changes
         if (this.isPlaying && this.utterance) {
-            // If we know live changes don't work, skip directly to restart
-            if (this.liveSpeedSupported === false) {
-                console.log('🔄 Live speed changes not supported on this browser, restarting...');
-                this.synth.cancel();
-                setTimeout(() => {
-                    this.playCurrentChunk();
-                }, 50);
-                this.saveSettings();
-                return;
-            }
+            console.log('🔄 Applying speed change with seamless restart...');
             
-            console.log('🎛️ Attempting live speed change from', this.utterance.rate, 'to', speed);
+            // Store current position estimate (rough, but better than nothing)
+            const currentText = this.textChunks[this.currentChunkIndex].text;
+            const estimatedProgress = 0.3; // Assume we're 30% through (can't get exact position)
             
-            // Store original rate for comparison
-            const originalRate = this.utterance.rate;
-            this.utterance.rate = speed;
-            
-            // Give browser a moment to apply the change, then check if it worked
+            // Cancel and restart immediately with minimal delay for seamless experience
+            this.synth.cancel();
             setTimeout(() => {
-                const actualRate = this.utterance.rate;
-                console.log('📊 Speed change result: requested =', speed, 'actual =', actualRate, 'original =', originalRate);
-                
-                // More tolerant detection: check if change worked or if it's close enough
-                // Some browsers might apply the change with slight floating point differences
-                const changeWorked = Math.abs(actualRate - speed) <= 0.05; // More tolerant threshold
-                const actuallyChanged = Math.abs(actualRate - originalRate) > 0.01; // Did something change?
-                
-                if (!changeWorked && !actuallyChanged) {
-                    // Direct change didn't work at all - remember this for future calls IN THIS UTTERANCE ONLY
-                    console.log('🔄 Live speed change not supported for this utterance, restarting...');
-                    this.synth.cancel();
-                    setTimeout(() => {
-                        this.playCurrentChunk();
-                    }, 50);
-                } else {
-                    // It worked or partially worked! 
-                    if (changeWorked) {
-                        console.log('⚡ Speed changed successfully without restart!');
-                    } else {
-                        console.log('⚡ Speed changed partially - close enough, not restarting');
-                    }
-                }
-            }, 50); // Longer timeout for more reliable detection
+                this.playCurrentChunk();
+            }, 30); // Very fast restart for seamless blending
         } else {
             console.log('⚡ Speed will apply when playback starts');
         }
