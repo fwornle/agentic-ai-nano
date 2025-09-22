@@ -223,7 +223,7 @@
             
             // Corporate content mapping - only exact matches to prevent mismatches
             const contentMapping = {
-                '/00_intro/coder/': '00_intro/coder-detailed.md',
+                '/00_intro/coder/': '00_intro/coder-concise.md',
                 '/00_intro/llmapi/': '00_intro/llmapi-detailed.md',
                 '/03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment/': '03_mcp-acp-a2a/Session10_Enterprise_Integration_Production_Deployment.md'
             };
@@ -258,6 +258,72 @@
                 if (filePath.match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
                     await this.injectImageContent(filePath, content);
                 }
+            }
+            
+            // Handle hash-based detailed content loading
+            this.setupHashBasedContentSwitching();
+        }
+
+        /**
+         * Sets up hash-based content switching for detailed views
+         */
+        setupHashBasedContentSwitching() {
+            const currentPath = window.location.pathname;
+            
+            // Check if we're on the coder page and handle detailed content
+            if (currentPath.includes('/00_intro/coder/')) {
+                this.setupCoderDetailedContent();
+            }
+            
+            // Listen for hash changes
+            window.addEventListener('hashchange', () => {
+                if (currentPath.includes('/00_intro/coder/')) {
+                    this.setupCoderDetailedContent();
+                }
+            });
+        }
+        
+        /**
+         * Handles detailed content loading for coder setup page
+         */
+        setupCoderDetailedContent() {
+            const hash = window.location.hash;
+            const detailedDiv = document.getElementById('detailed-setup-guide');
+            
+            if (hash === '#detailed-setup-guide' && detailedDiv && this.loadedContent) {
+                // Load detailed content
+                const detailedContent = this.loadedContent['00_intro/coder-detailed.md'];
+                if (detailedContent) {
+                    console.log('🔄 Loading detailed coder setup content');
+                    this.injectDetailedContent(detailedDiv, detailedContent);
+                    detailedDiv.style.display = 'block';
+                    detailedDiv.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (detailedDiv) {
+                detailedDiv.style.display = 'none';
+            }
+        }
+        
+        /**
+         * Injects detailed content into a specific div
+         */
+        async injectDetailedContent(targetDiv, markdownContent) {
+            try {
+                // Convert markdown to HTML (simplified version)
+                let htmlContent = markdownContent;
+                
+                // Basic markdown conversions
+                htmlContent = htmlContent.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+                htmlContent = htmlContent.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+                htmlContent = htmlContent.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+                htmlContent = htmlContent.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
+                htmlContent = htmlContent.replace(/\*(.*)\*/gim, '<em>$1</em>');
+                htmlContent = htmlContent.replace(/\n/gim, '<br>');
+                
+                targetDiv.innerHTML = htmlContent;
+                console.log('✅ Detailed content injected successfully');
+            } catch (error) {
+                console.error('❌ Failed to inject detailed content:', error);
             }
         }
 

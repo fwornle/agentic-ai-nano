@@ -73,6 +73,7 @@ Choose your path based on your learning goals and time availability:
 - **Session 7**: Agent-to-Agent Communication (A2A)  
 - **Session 8**: Advanced Agent Workflows  
 - **Session 9**: Production Agent Deployment  
+- **Session 10**: Enterprise Integration & Production Deployment *(Corporate Network Only)*  
 
 ## Quick Start
 
@@ -187,6 +188,7 @@ Track your progress through the module:
 - [ ] **Session 7**: A2A Communication ⏱️ *Time: varies by path*  
 - [ ] **Session 8**: Advanced Workflows ⏱️ *Time: varies by path*  
 - [ ] **Session 9**: Production Deployment ⏱️ *Time: varies by path*  
+- [ ] **Session 10**: Enterprise Integration ⏱️ *Time: varies by path* *(Corporate Network Only)*  
 
 ## 🧭 Navigation
 

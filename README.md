@@ -34,7 +34,7 @@
 **[Start Module 03 →](docs-content/03_mcp-acp-a2a/Session0_Introduction_to_MCP_ACP_A2A.md)**
 
 - **Week 1**: MCP server basics, filesystem integration, LangChain integration, production deployment
-- **Week 2**: Security, ACP fundamentals, A2A communication, advanced workflows
+- **Week 2**: Security, ACP fundamentals, A2A communication, advanced workflows, enterprise integration
 
 ## Learning Paths
 
