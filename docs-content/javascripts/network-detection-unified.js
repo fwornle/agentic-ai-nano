@@ -619,7 +619,22 @@
             
             this.isInitialized = false;
             
+            // Disable the old corporate content loader to prevent conflicts
+            this.disableOldContentLoader();
+            
             console.log('🚀 Unified Corporate Network Controller initialized');
+        }
+        
+        disableOldContentLoader() {
+            // Override the old auto-loader to prevent conflicts
+            if (window.CorporateContentLoader) {
+                const originalLoad = window.CorporateContentLoader.load;
+                window.CorporateContentLoader.load = function() {
+                    console.log('🔄 Old corporate content loader disabled - using unified system');
+                    return Promise.resolve(false);
+                };
+                console.log('🔧 Disabled old corporate content loader to prevent conflicts');
+            }
         }
         
         async initialize() {
@@ -660,16 +675,30 @@
     
     // ===== GLOBAL INITIALIZATION =====
     
+    // Disable old corporate content loader IMMEDIATELY to prevent conflicts
+    document.addEventListener('DOMContentLoaded', () => {
+        // Override the old auto-loading behavior completely
+        if (window.CorporateContentLoader && window.CorporateContentLoader.isCorporateContentNeeded) {
+            window.CorporateContentLoader.isCorporateContentNeeded = () => false;
+            console.log('🔧 Disabled old corporate content auto-loading');
+        }
+    });
+    
     // Create global instance
     window.CorporateNetworkController = new UnifiedCorporateNetworkController();
     
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-            window.CorporateNetworkController.initialize();
+            // Delay initialization slightly to ensure old loader is disabled
+            setTimeout(() => {
+                window.CorporateNetworkController.initialize();
+            }, 100);
         });
     } else {
-        window.CorporateNetworkController.initialize();
+        setTimeout(() => {
+            window.CorporateNetworkController.initialize();
+        }, 100);
     }
     
     // Handle navigation
