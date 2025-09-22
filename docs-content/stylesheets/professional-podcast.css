@@ -333,8 +333,16 @@
     box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
 }
 
+/* Light mode dropdown options */
 .voice-select option,
 #speed-selector option {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1a1a1a;
+}
+
+/* Dark mode dropdown options */
+[data-md-color-scheme="slate"] .voice-select option,
+[data-md-color-scheme="slate"] #speed-selector option {
     background: #1a202c;
     color: white;
 }
@@ -356,6 +364,7 @@
     appearance: none;
 }
 
+/* Light mode webkit slider thumb */
 .volume-control::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -364,18 +373,29 @@
     border-radius: 50%;
     background: #667eea;
     cursor: pointer;
-    border: 2px solid white;
+    border: 2px solid rgba(26, 26, 26, 0.8);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Dark mode webkit slider thumb */
+[data-md-color-scheme="slate"] .volume-control::-webkit-slider-thumb {
+    border: 2px solid white;
+}
+
+/* Light mode firefox slider thumb */
 .volume-control::-moz-range-thumb {
     width: 16px;
     height: 16px;
     border-radius: 50%;
     background: #667eea;
     cursor: pointer;
-    border: 2px solid white;
+    border: 2px solid rgba(26, 26, 26, 0.8);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode firefox slider thumb */
+[data-md-color-scheme="slate"] .volume-control::-moz-range-thumb {
+    border: 2px solid white;
 }
 
 #volume-text {
@@ -460,7 +480,15 @@
     background: rgba(255, 255, 255, 0.15);
 }
 
+/* Light mode active filter button */
 .filter-btn.active {
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+/* Dark mode active filter button - same styling but explicit */
+[data-md-color-scheme="slate"] .filter-btn.active {
     background: linear-gradient(145deg, #667eea, #764ba2);
     border-color: rgba(255, 255, 255, 0.3);
     color: white;
@@ -555,6 +583,16 @@
     
     .pro-podcast-player:not(.minimized) {
         width: 300px;
+        /* FIXED: Prevent overlap with top app bar */
+        max-height: calc(100vh - 80px); /* Leave 80px for top app bar */
+        top: auto; /* Ensure it stays bottom-anchored */
+    }
+    
+    /* Make expanded controls scrollable if content overflows */
+    .pro-podcast-player:not(.minimized) .expanded-controls {
+        max-height: calc(100vh - 140px); /* Leave space for container padding */
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     
     .expanded-controls {
@@ -590,9 +628,12 @@
 @media (max-width: 480px) {
     .pro-podcast-player:not(.minimized) {
         width: 280px;
+        /* FIXED: Even more conservative spacing on small screens */
+        max-height: calc(100vh - 70px); /* Slightly less top margin for small screens */
     }
     
-    .expanded-controls {
+    .pro-podcast-player:not(.minimized) .expanded-controls {
+        max-height: calc(100vh - 120px); /* Adjust for smaller screens */
         padding: 12px;
     }
     
