@@ -17,6 +17,10 @@ class ProfessionalPodcastTTS {
         this.contentFilter = 'all'; // 'observer', 'participant', 'implementer', 'all'
         this.muteChapters = false; // Option to skip reading chapter headings
         
+        // Track live change support for better fallback behavior
+        this.liveVolumeSupported = null; // null = unknown, true/false = tested
+        this.liveSpeedSupported = null;   // null = unknown, true/false = tested
+        
         this.init();
     }
 
@@ -104,17 +108,25 @@ class ProfessionalPodcastTTS {
                     label = name.includes('male') ? 'Native: UK English (Male)' : 'Native: UK English (Female)';
                 }
                 else if (lang.includes('en-au')) label = 'Native: Australian English';
-                else if (lang.includes('de')) label = 'Non-native: German Accent';
-                else if (lang.includes('es')) label = 'Non-native: Spanish Accent';
-                else if (lang.includes('fr')) label = 'Non-native: French Accent';
-                else if (lang.includes('zh')) label = 'Non-native: Chinese Accent';
-                else if (lang.includes('hi')) label = 'Non-native: Hindi/Indian Accent';
-                else if (lang.includes('ar')) label = 'Non-native: Arabic Accent';
-                else if (lang.includes('it')) label = 'Non-native: Italian Accent';
-                else if (lang.includes('pt')) label = 'Non-native: Portuguese Accent';
-                else if (lang.includes('ru')) label = 'Non-native: Russian Accent';
-                else if (lang.includes('ko')) label = 'Non-native: Korean Accent';
-                else if (lang.includes('ja')) label = 'Non-native: Japanese Accent';
+                else if (lang.includes('de') || name.includes('german')) label = 'Non-native: German Accent';
+                else if (lang.includes('es') || name.includes('spanish')) label = 'Non-native: Spanish Accent';
+                else if (lang.includes('fr') || name.includes('french')) label = 'Non-native: French Accent';
+                else if (lang.includes('zh') || name.includes('chinese') || name.includes('mandarin') || name.includes('cantonese')) label = 'Non-native: Chinese Accent';
+                else if (lang.includes('hi') || name.includes('hindi') || name.includes('indian')) label = 'Non-native: Hindi/Indian Accent';
+                else if (lang.includes('ar') || name.includes('arabic')) label = 'Non-native: Arabic Accent';
+                else if (lang.includes('it') || name.includes('italian')) label = 'Non-native: Italian Accent';
+                else if (lang.includes('pt') || name.includes('portuguese') || name.includes('brazilian')) label = 'Non-native: Portuguese/Brazilian Accent';
+                else if (lang.includes('ru') || name.includes('russian')) label = 'Non-native: Russian Accent';
+                else if (lang.includes('ko') || name.includes('korean')) label = 'Non-native: Korean Accent';
+                else if (lang.includes('ja') || name.includes('japanese')) label = 'Non-native: Japanese Accent';
+                else if (lang.includes('sv') || name.includes('swedish')) label = 'Non-native: Swedish Accent';
+                else if (lang.includes('no') || name.includes('norwegian')) label = 'Non-native: Norwegian Accent';
+                else if (lang.includes('da') || name.includes('danish')) label = 'Non-native: Danish Accent';
+                else if (lang.includes('nl') || name.includes('dutch')) label = 'Non-native: Dutch Accent';
+                else if (lang.includes('pl') || name.includes('polish')) label = 'Non-native: Polish Accent';
+                else if (lang.includes('th') || name.includes('thai')) label = 'Non-native: Thai Accent';
+                else if (lang.includes('vi') || name.includes('vietnamese')) label = 'Non-native: Vietnamese Accent';
+                else if (lang.includes('af') || name.includes('afrikaans') || name.includes('african')) label = 'Non-native: African Accent';
                 else label = `Google ${voice.name.replace(/Google\s*/i, '')}`;
                 
                 category = lang.includes('en') ? 'native-en' : 'non-native-accent';
@@ -145,14 +157,17 @@ class ProfessionalPodcastTTS {
                 label = voiceNames[name] || `${voice.name} (Premium)`;
                 category = 'premium';
             }
-            // Fun novelty voices (case-insensitive check)
-            else if (name.includes('cellos') || name.includes('bells') || name.includes('bad news') || 
-                     name.includes('good news') || name.includes('organ') || name.includes('boing') ||
-                     name.includes('bubbles') || name.includes('trinoids') || name.includes('whisper') ||
-                     name.includes('wobble') || name.includes('zarvox') || name.includes('bahh') ||
-                     name.includes('jester') || name.includes('superstar') || name.includes('albert') ||
-                     name.includes('fred') || name.includes('ralph') || name.includes('junior') ||
-                     name.includes('hysterical') || name.includes('deranged')) {
+            // Fun novelty voices (case-insensitive check) - expanded patterns
+            else if (name.includes('cello') || name.includes('cellos') || name.includes('bells') || 
+                     name.includes('bad news') || name.includes('good news') || name.includes('organ') || 
+                     name.includes('boing') || name.includes('bubbles') || name.includes('trinoids') || 
+                     name.includes('whisper') || name.includes('wobble') || name.includes('zarvox') || 
+                     name.includes('bahh') || name.includes('jester') || name.includes('superstar') || 
+                     name.includes('albert') || name.includes('fred') || name.includes('ralph') || 
+                     name.includes('junior') || name.includes('hysterical') || name.includes('deranged') ||
+                     name.includes('pipe') || name.includes('robot') || name.includes('alien') ||
+                     name.includes('echo') || name.includes('reverb') || name.includes('metallic') ||
+                     name.includes('distorted') || name.includes('chipmunk') || name.includes('monster')) {
                 // Capitalize first letter
                 const displayName = voice.name.charAt(0).toUpperCase() + voice.name.slice(1);
                 label = `🎭 ${displayName}`;
@@ -201,12 +216,12 @@ class ProfessionalPodcastTTS {
         // Clear existing array and rebuild with fair distribution
         this.availableVoices = [];
         
-        // Priority 1: Ensure we have at least 2-3 voices from key categories
+        // Priority 1: Ensure we have plenty of voices from key categories (especially funny ones)
         const guaranteedCategories = {
-            'premium': 3,        // High quality voices
-            'native-en': 3,      // Standard English voices  
-            'non-native-accent': 3, // Foreign accent voices (user specifically wants these)
-            'novelty': 3         // Fun voices (user specifically wants these)
+            'premium': 4,           // High quality voices
+            'native-en': 3,         // Standard English voices  
+            'non-native-accent': 8, // Foreign accent voices (user specifically wants MORE of these)
+            'novelty': 6            // Fun/musical voices (user specifically wants MORE including Cello)
         };
         
         // Add guaranteed voices first
@@ -639,28 +654,53 @@ class ProfessionalPodcastTTS {
     }
 
     changeSpeed(speed) {
-        console.log('⚡ Speed change requested:', speed);
+        console.log('⚡ Speed change requested:', speed, 'current:', this.playbackRate);
         this.playbackRate = speed;
         
         // Try to apply speed change with minimal disruption
         if (this.isPlaying && this.utterance) {
-            // First attempt: Try direct property change (works on some browsers)
-            const oldRate = this.utterance.rate;
+            // If we know live changes don't work, skip directly to restart
+            if (this.liveSpeedSupported === false) {
+                console.log('🔄 Live speed changes not supported on this browser, restarting...');
+                this.synth.cancel();
+                setTimeout(() => {
+                    this.playCurrentChunk();
+                }, 50);
+                this.saveSettings();
+                return;
+            }
+            
+            console.log('🎛️ Attempting live speed change from', this.utterance.rate, 'to', speed);
+            
+            // Store original rate for comparison
+            const originalRate = this.utterance.rate;
             this.utterance.rate = speed;
             
-            // Test if the change took effect by checking if the property changed
+            // Give browser a moment to apply the change, then check if it worked
             setTimeout(() => {
-                if (Math.abs(this.utterance.rate - speed) > 0.01) {
-                    // Direct change didn't work, need to restart
-                    console.log('🔄 Direct speed change failed, restarting chunk...');
+                const actualRate = this.utterance.rate;
+                console.log('📊 Speed change result: requested =', speed, 'actual =', actualRate, 'original =', originalRate);
+                
+                // Check if the change worked by comparing to what we requested
+                const changeWorked = Math.abs(actualRate - speed) <= 0.01;
+                
+                if (!changeWorked) {
+                    // Direct change didn't work - remember this for future calls
+                    this.liveSpeedSupported = false;
+                    console.log('🔄 Live speed change not supported, restarting with new rate...');
                     this.synth.cancel();
                     setTimeout(() => {
                         this.playCurrentChunk();
-                    }, 30); // Faster restart for less disruption
+                    }, 50);
                 } else {
-                    console.log('⚡ Speed changed directly without restart');
+                    // It worked! Remember this for future optimizations
+                    if (this.liveSpeedSupported === null) {
+                        this.liveSpeedSupported = true;
+                        console.log('✅ Live speed changes confirmed working on this browser');
+                    }
+                    console.log('⚡ Speed changed successfully without restart!');
                 }
-            }, 10);
+            }, 30); // Even longer timeout for more reliable detection
         } else {
             console.log('⚡ Speed will apply when playback starts');
         }
@@ -669,31 +709,55 @@ class ProfessionalPodcastTTS {
     }
 
     changeVolume(volume) {
-        console.log('🔊 Volume change requested:', volume);
+        console.log('🔊 Volume change requested:', volume, 'current:', this.volume);
         this.volume = volume;
         const volumeText = document.getElementById('volume-text');
         if (volumeText) volumeText.textContent = Math.round(volume * 100) + '%';
         
         // Try to apply volume change with minimal disruption
         if (this.isPlaying && this.utterance) {
-            // First attempt: Try direct property change (works on some browsers)
-            const oldVolume = this.utterance.volume;
-            this.utterance.volume = volume;
-            console.log('🔊 Attempting direct volume change to:', Math.round(volume * 100) + '%');
+            // If we know live changes don't work, skip directly to restart
+            if (this.liveVolumeSupported === false) {
+                console.log('🔄 Live volume changes not supported on this browser, restarting...');
+                this.synth.cancel();
+                setTimeout(() => {
+                    this.playCurrentChunk();
+                }, 50);
+                this.saveSettings();
+                return;
+            }
             
-            // Test if the change took effect by checking if the property changed
+            console.log('🎛️ Attempting live volume change from', this.utterance.volume, 'to', volume);
+            
+            // Store original volume for comparison
+            const originalVolume = this.utterance.volume;
+            this.utterance.volume = volume;
+            
+            // Give browser a moment to apply the change, then check if it worked
             setTimeout(() => {
-                if (Math.abs(this.utterance.volume - volume) > 0.05) {
-                    // Direct change didn't work, need to restart
-                    console.log('🔄 Direct volume change failed, restarting chunk...');
+                const actualVolume = this.utterance.volume;
+                console.log('📊 Volume change result: requested =', volume, 'actual =', actualVolume, 'original =', originalVolume);
+                
+                // Check if the change worked by comparing to what we requested
+                const changeWorked = Math.abs(actualVolume - volume) <= 0.05;
+                
+                if (!changeWorked) {
+                    // Direct change didn't work - remember this for future calls
+                    this.liveVolumeSupported = false;
+                    console.log('🔄 Live volume change not supported, restarting with new volume...');
                     this.synth.cancel();
                     setTimeout(() => {
                         this.playCurrentChunk();
-                    }, 30); // Faster restart for less disruption
+                    }, 50);
                 } else {
-                    console.log('🔊 Volume changed directly without restart');
+                    // It worked! Remember this for future optimizations
+                    if (this.liveVolumeSupported === null) {
+                        this.liveVolumeSupported = true;
+                        console.log('✅ Live volume changes confirmed working on this browser');
+                    }
+                    console.log('🔊 Volume changed successfully without restart!');
                 }
-            }, 10);
+            }, 30); // Even longer timeout for more reliable detection
         } else {
             console.log('🔊 Volume will apply when playback starts:', Math.round(volume * 100) + '%');
         }
